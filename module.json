@@ -1,0 +1,54 @@
+{
+  "id": "jjk5e",
+  "title": "Jujutsu Kaisen 5e (V.6) — Compendium",
+  "description": "Unofficial, non-commercial fan conversion of the Jujutsu Kaisen 5e homebrew (V.6) by I watch Anime for the D&D 5e system: 7 classes with level advancement, 79 Innate Techniques, races, feats, backgrounds, mindsets, equipment, cursed tools and the full rules journal. Includes Cursed Energy pool automation. Also includes feats and options from Creeps and Curses V.3.1 (Special Grade Boons, Special Traits, Heavenly Pacts, new techniques). Licensed CC BY-NC-SA 4.0.",
+  "version": "1.6.1",
+  "authors": [
+    {
+      "name": "I watch Anime",
+      "flags": {
+        "role": "Original JJK 5e system author"
+      }
+    }
+  ],
+  "compatibility": {
+    "minimum": "12",
+    "verified": "14"
+  },
+  "relationships": {
+    "systems": [
+      {
+        "id": "dnd5e",
+        "type": "system",
+        "compatibility": {
+          "minimum": "4.0.0"
+        }
+      }
+    ]
+  },
+  "esmodules": [
+    "scripts/jjk5e.js"
+  ],
+  "license": "LICENSE.txt",
+  "readme": "README.md",
+  "flags": {},
+  "styles": [
+    "styles/jjk5e.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    },
+    {
+      "lang": "es",
+      "name": "Español",
+      "path": "lang/es.json"
+    }
+  ],
+  "socket": true,
+  "url": "https://github.com/crislobos14-art/jjk5e",
+  "manifest": "https://github.com/crislobos14-art/jjk5e/releases/latest/download/module.json",
+  "download": "https://github.com/crislobos14-art/jjk5e/releases/download/v1.6.1/module.zip"
+}
