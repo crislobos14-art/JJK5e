@@ -2,7 +2,7 @@
   "id": "jjk5e",
   "title": "Jujutsu Kaisen 5e (V.6) — Compendium",
   "description": "Unofficial, non-commercial fan conversion of the Jujutsu Kaisen 5e homebrew (V.6) by I watch Anime for the D&D 5e system: 7 classes with level advancement, 79 Innate Techniques, races, feats, backgrounds, mindsets, equipment, cursed tools and the full rules journal. Includes Cursed Energy pool automation. Also includes feats and options from Creeps and Curses V.3.1 (Special Grade Boons, Special Traits, Heavenly Pacts, new techniques). Licensed CC BY-NC-SA 4.0.",
-  "version": "1.6.1",
+  "version": "1.7.0",
   "authors": [
     {
       "name": "I watch Anime",
@@ -12,8 +12,8 @@
     }
   ],
   "compatibility": {
-    "minimum": "12",
-    "verified": "14"
+    "minimum": "13",
+    "verified": "14.370"
   },
   "relationships": {
     "systems": [
@@ -21,8 +21,31 @@
         "id": "dnd5e",
         "type": "system",
         "compatibility": {
-          "minimum": "4.0.0"
+          "minimum": "5.3.0",
+          "verified": "6.1.1"
         }
+      }
+    ],
+    "recommends": [
+      {
+        "id": "sequencer",
+        "type": "module",
+        "reason": "Plays the JJK 5e attack, technique and domain animations."
+      },
+      {
+        "id": "JB2A_DnD5e",
+        "type": "module",
+        "reason": "Free animation library used by the JJK 5e animations."
+      },
+      {
+        "id": "autoanimations",
+        "type": "module",
+        "reason": "Animates official D&D 5e items; JJK items you configure there keep that animation."
+      },
+      {
+        "id": "dice-so-nice",
+        "type": "module",
+        "reason": "3D dice for Black Flash checks and attack rolls."
       }
     ]
   },
