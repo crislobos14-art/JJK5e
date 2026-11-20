@@ -19,7 +19,7 @@
    "PGfjGscigHI5RyTB": {
     "_id": "PGfjGscigHI5RyTB",
     "type": "utility",
-    "name": "Reaction",
+    "name": "Activate/deactivate Inverse (reaction)",
     "sort": 0,
     "activation": {
      "type": "reaction",
@@ -45,7 +45,13 @@
      "units": "inst",
      "override": true
     },
-    "useConditionText": "false"
+    "useConditionText": "reaction === \"isDamaged\"",
+    "effects": [
+     {
+      "_id": "uK7JmEeNtqaylttc",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -85,9 +91,36 @@
   "jjk5e": {
    "technique": "Inverse",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceCosts": {
+    "PGfjGscigHI5RyTB": 2
+   },
+   "automationNotes": "Extra Inverse-only reactions: ½ prof (prof at 18th).",
+   "automation": "automated"
   }
  },
  "folder": "bh2ZyC5GSVoaToIo",
- "_key": "!items!nBS99egazwd4cDfZ"
+ "_key": "!items!nBS99egazwd4cDfZ",
+ "effects": [
+  {
+   "_id": "uK7JmEeNtqaylttc",
+   "name": "Inverse (quick)",
+   "img": "modules/jjk5e/icons/techniques/inverse.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Inverse"
+    }
+   },
+   "_key": "!items.effects!nBS99egazwd4cDfZ.uK7JmEeNtqaylttc"
+  }
+ ]
 }

@@ -38,19 +38,31 @@
      }
     },
     "range": {
-     "units": "self"
+     "units": "self",
+     "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
     "duration": {
      "value": "2",
      "units": "minute",
      "concentration": false
-    }
+    },
+    "effects": [
+     {
+      "_id": "xJkEdSbxojT6uydi",
+      "onSave": false
+     }
+    ]
    },
    "qIib3E8DkVWEhv4W": {
     "_id": "qIib3E8DkVWEhv4W",
     "type": "utility",
-    "name": "Action (2 CE)",
+    "name": "Extend 2 minutes (2 CE)",
     "sort": 100000,
     "activation": {
      "type": "action",
@@ -93,10 +105,33 @@
       "Inverse"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!lLUMGCpVd6ITfNHy"
+ "_key": "!items!lLUMGCpVd6ITfNHy",
+ "effects": [
+  {
+   "_id": "xJkEdSbxojT6uydi",
+   "name": "Power Inversion",
+   "img": "modules/jjk5e/icons/techniques/inverse.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Your damage: above threshold → damage − threshold; below → + (limit − damage). Apply by hand.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 20
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Inverse"
+    }
+   },
+   "_key": "!items.effects!lLUMGCpVd6ITfNHy.xJkEdSbxojT6uydi"
+  }
+ ]
 }

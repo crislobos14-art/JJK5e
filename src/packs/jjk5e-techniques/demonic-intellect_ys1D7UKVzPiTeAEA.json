@@ -39,6 +39,9 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
@@ -46,7 +49,49 @@
      "units": "minute",
      "concentration": false,
      "override": true
-    }
+    },
+    "effects": [
+     {
+      "_id": "akNd4Yey7LQCb4b6",
+      "onSave": false
+     }
+    ]
+   },
+   "N3pi3RIALBo5knuc": {
+    "_id": "N3pi3RIALBo5knuc",
+    "type": "utility",
+    "name": "Action as a reaction (2 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
    }
   },
   "uses": {
@@ -86,37 +131,55 @@
  "flags": {
   "jjk5e": {
    "ceCosts": {
-    "d6TJzaH1XAfXpiJ0": 1
+    "d6TJzaH1XAfXpiJ0": 1,
+    "N3pi3RIALBo5knuc": 2
    },
    "technique": "Laplace’s Demon",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "uhouPoPESjs6aBsz",
  "effects": [
   {
-   "_id": "aawCcIgVjHchOkj0",
-   "name": "Demonic Intellect (toggle)",
+   "_id": "akNd4Yey7LQCb4b6",
+   "name": "Overclocked",
    "img": "modules/jjk5e/icons/techniques/laplace-s-demon.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Advantage on INT checks, +INT to AC and DEX saves; 2 CE: take an action as a reaction.</p>",
    "changes": [
     {
-     "key": "system.abilities.int.check.roll.mode",
-     "mode": 2,
+     "key": "flags.midi-qol.advantage.ability.check.int",
+     "mode": 0,
      "value": "1",
-     "priority": null
+     "priority": 20
+    },
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+ @abilities.int.mod",
+     "priority": 20
+    },
+    {
+     "key": "system.abilities.dex.bonuses.save",
+     "mode": 2,
+     "value": "+ @abilities.int.mod",
+     "priority": 20
     }
    ],
-   "transfer": true,
-   "disabled": true,
-   "duration": {},
-   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "duration": {
+    "rounds": 10
+   },
    "flags": {
     "jjk5e": {
-     "auto": "toggle"
+     "technique": "Laplace’s Demon"
     }
    },
-   "_key": "!items.effects!ys1D7UKVzPiTeAEA.aawCcIgVjHchOkj0"
+   "_key": "!items.effects!ys1D7UKVzPiTeAEA.akNd4Yey7LQCb4b6"
   }
  ],
  "_key": "!items!ys1D7UKVzPiTeAEA"

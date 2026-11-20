@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.48.0 — Técnica por técnica: Heart Catch → Limitless (7)
+- **Heart Catch**: Love Hands (golpe con alcance 15/30 pies, agarre con ventaja), restricción de Handy, Hand Shield (+5 CA), Cutie Honey al impactar, dominio (apresado + encantado), Fine Line.
+- **Ice Formation**: cono de hielo (1d10→6d10) con apresado y salvación de FUE cada turno; Extreme Cold (agotamiento/velocidad); Frost Calm; Ice Fall (ataque + púas DES 6d8+6d8, tú derribado); White Abyss; Heat Dissociation con agotamiento. Eliminada una actividad suelta con veneno.
+- **Idle Transfiguration**: Transfiguration (1d10→5d10) y +1d6 al tocar; 5 autoalteraciones (2 CE); Soul Multiplicity (Body Repel escalable, Isomer); dominio 10d10; Object Transfiguration y Soul Splitting Weapon.
+- **Illusive Mirage**: Cursed Illusion con rastreo y confusión; Phase Fist, Blurring y Disguise; Object Distortion; Illusive Terrain; House of Mirrors (redirección); Materialization.
+- **Inverse**: activar/extender (cálculo de umbral y límite a mano), reacción rápida, Synesthesia (d4 de sentido), Power Inversion.
+- **Laplace’s Demon**: Demonic Intellect (+INT a CA y DES), tiradas de presagio con usos, Overload, Imaginary Demon Brain, Laplace Threshold (−2 acumulable), Butterfly Effect, Chaos Theory.
+- **Limitless**: Infinity con tirada d6 por reacción; Lapse Blue escalable con agarre; Teleportation; Offensive Infinity (repulsión y aplastamiento); Unlimited Void (INT/SAB/CAR = 1, inconsciente); Reversal Red escalable.
+- Herramienta: limpia costes de CE de actividades borradas.
+- Automatizados a mano: 184/360. Sin probar en Foundry real.
+
 ## 1.47.0 — Técnica por técnica: Explosive Flesh → Hair Manipulation (7)
 - **Explosive Flesh**: 4 tamaños de parte del cuerpo con coste de CE + PG automático, radio, dado y derribo; explosión instantánea por reacción; ensordecido/cegado con OverTime; Living Bomb; dominio.
 - **Fa Jin**: cargas de Jin como usos del objeto (máx. comp. + nivel), gastar cargas para +2 ataque o +1 dado; movimiento instantáneo; Explosive Power cono/línea escalable; Negative Jin (−3d6 al siguiente daño); Absorbing Power; dominio.

@@ -35,12 +35,13 @@
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "value": "60",
+     "units": "ft",
      "override": true
     },
     "target": {
      "template": {
-      "type": "sphere",
+      "type": "radius",
       "size": "30",
       "units": "ft",
       "count": "1",
@@ -146,7 +147,8 @@
    },
    "technique": "Ice Formation",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "effects": [
@@ -157,10 +159,19 @@
    "statuses": [
     "restrained"
    ],
-   "changes": [],
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "priority": 20,
+     "value": "turn=start, saveAbility=str, saveDC=JJKORIGINDC, label=Ice layer"
+    }
+   ],
    "transfer": false,
    "disabled": false,
-   "duration": {},
+   "duration": {
+    "rounds": 600
+   },
    "description": "",
    "flags": {
     "jjk5e": {

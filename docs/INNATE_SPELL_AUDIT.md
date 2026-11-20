@@ -3,13 +3,13 @@
 > Generado desde el compendio y las fuentes. **No certifica ejecución en Foundry ni fidelidad semántica a cada regla**.
 
 - Spells examinados: **360**; técnicas agrupadas: **81**.
-- Utilidad sin efecto configurado: revisar lógica: **68**.
-- Utilidad con efecto: comprobar activación: **11**.
-- Dominio genérico: resolver propiedades particulares: **32**.
-- Salvación sin daño/efecto automático: **21**.
+- Utilidad sin efecto configurado: revisar lógica: **59**.
+- Utilidad con efecto: comprobar activación: **8**.
+- Dominio genérico: resolver propiedades particulares: **27**.
+- Salvación sin daño/efecto automático: **20**.
 - Ataque sin daño propio: comprobar intención: **10**.
-- Mecánica configurada; falta prueba Foundry: **64**.
-- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **154**.
+- Mecánica configurada; falta prueba Foundry: **52**.
+- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **184**.
 
 ## Interpretación
 
@@ -376,67 +376,67 @@
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Hands of Love | 1 | utility:Bonus Action (1 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/hands-of-love_hhllCgATbWx58n7P.json) |
-| Handy | 3 | utility:Special | Utilidad con efecto: comprobar activación | [JSON](../src/packs/jjk5e-techniques/handy_3jjmhmnaeXtHfWJw.json) |
-| Cutie Honey | 11 | save:Action (5 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/cutie-honey_DKJPQD3LXXPc2tHm.json) |
-| Domain Expansion: Lover’s Grasp | 18 | utility:Special; utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-lover-s-grasp_ZAqh5epfSwH68e8V.json) |
+| Hands of Love | 1 | utility:Create Love Hands (1 CE); attack:Love Hand strike (replaces an attack); utility:Grapple/shove with a hand (advantage) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/hands-of-love_hhllCgATbWx58n7P.json) |
+| Handy | 3 | utility:Grappled by a hand: restrained | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/handy_3jjmhmnaeXtHfWJw.json) |
+| Cutie Honey | 11 | save:Cutie Honey (on melee hit, 5 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/cutie-honey_DKJPQD3LXXPc2tHm.json) |
+| Domain Expansion: Lover’s Grasp | 18 | utility:Initiative 20: all restrained + charmed; utility:Expand Domain (20 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-lover-s-grasp_ZAqh5epfSwH68e8V.json) |
 
 ### Ice Formation (4 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Ice Creation | 1 | save:Action (1 CE); damage:Special | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/ice-creation_6d05GBnkO9d2vAY9.json) |
-| Frost Calm | 6 | save:Action (4 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/frost-calm_Jcsw1LCj12wtxbiG.json) |
-| Ice Fall | 11 | save:Action (8 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/ice-fall_wkzTg4f1GGLksKAv.json) |
-| Domain Expansion: White Abyss | 18 | damage:Special; utility:Expand Domain (20 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-white-abyss_dKwXApTwzsxj95yd.json) |
+| Ice Creation | 1 | save:Ice cone (1 CE): 10 ft | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/ice-creation_6d05GBnkO9d2vAY9.json) |
+| Frost Calm | 6 | save:Action (4 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/frost-calm_Jcsw1LCj12wtxbiG.json) |
+| Ice Fall | 11 | attack:Ice Fall (8 CE): shard at each chosen creature; save:Falling spikes (DEX, hit or miss); utility:You lie prone until your next turn | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/ice-fall_wkzTg4f1GGLksKAv.json) |
+| Domain Expansion: White Abyss | 18 | damage:End of each turn: 10d8 cold + restrained; utility:Expand Domain (20 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-white-abyss_dKwXApTwzsxj95yd.json) |
 
 ### Idle Transfiguration (5 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Transfiguration | 1 | save:Action (1 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/transfiguration_D6lKzdMZxIzyGlg6.json) |
-| Alteration | 3 | utility:Action (2 CE) | Utilidad con efecto: comprobar activación | [JSON](../src/packs/jjk5e-techniques/alteration_VAvGtxSod2JL2DbT.json) |
-| Body Clone | 6 | utility:Action (6 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/body-clone_LyLbkXAvBNfW1loQ.json) |
-| Soul Multiplicity | 11 | attack:Action (5 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/soul-multiplicity_ksjHxv60hPYhyyuJ.json) |
-| Domain Expansion: Self Embodiment of Perfection | 18 | utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-self-embodiment-of-perf_B6X39yIsShm1Q2km.json) |
+| Transfiguration | 1 | save:Transfigure (1 CE): CON save; damage:Soul touch (+1d6 necrotic on unarmed/natural hit) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/transfiguration_D6lKzdMZxIzyGlg6.json) |
+| Alteration | 3 | utility:Self-Alteration: Sword Arms (2 CE); utility:Self-Alteration: Spike Hands (2 CE); utility:Self-Alteration: Arm Shields (2 CE); utility:Self-Alteration: Long Arms (2 CE); utility:Self-Alteration: Wings (2 CE); utility:Ally Alteration (rest) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/alteration_VAvGtxSod2JL2DbT.json) |
+| Body Clone | 6 | utility:Action (6 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/body-clone_LyLbkXAvBNfW1loQ.json) |
+| Soul Multiplicity | 11 | attack:Body Repel (5 CE, 2+ transfigured); utility:Polymorphic Soul Isomer (5 CE, 1 minute) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/soul-multiplicity_ksjHxv60hPYhyyuJ.json) |
+| Domain Expansion: Self Embodiment of Perfection | 18 | utility:Expand Domain (20 CE); save:Initiative 20: double Transfiguration | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-self-embodiment-of-perf_B6X39yIsShm1Q2km.json) |
 
 ### Illusive Mirage (5 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Cursed Illusion | 1 | save:Action (2 CE) | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/cursed-illusion_wFUB8DfdT2QqwFQg.json) |
-| Self Distortion | 3 | attack:Action (3 CE) | Ataque sin daño propio: comprobar intención | [JSON](../src/packs/jjk5e-techniques/self-distortion_7vtgeOWGHfDsoDM5.json) |
-| Object Distortion | 6 | damage:Action; utility:Extra (3 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/object-distortion_nj6asjw6WgTG2Vst.json) |
-| Illusive Terrain | 11 | utility:Action (10 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/illusive-terrain_HlWRvtMxlN8OCQD9.json) |
-| Domain Expansion: House of Mirrors | 18 | utility:Reaction; utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-house-of-mirrors_TDn8CRNZOzsQlu56.json) |
+| Cursed Illusion | 1 | save:Action (2 CE); save:First distorted face: INT or confused | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/cursed-illusion_wFUB8DfdT2QqwFQg.json) |
+| Self Distortion | 3 | attack:Phase Fist (3 CE): phantom attack at disadvantage; utility:Blurring (3 CE); utility:Distorting Disguise (3 CE) | Ataque sin daño propio: comprobar intención | [JSON](../src/packs/jjk5e-techniques/self-distortion_7vtgeOWGHfDsoDM5.json) |
+| Object Distortion | 6 | damage:Bump into invisible object: 1d6, lose reaction; utility:Make it invisible (+3 CE); utility:Distort object (1–10 CE by size) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/object-distortion_nj6asjw6WgTG2Vst.json) |
+| Illusive Terrain | 11 | utility:Action (10 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/illusive-terrain_HlWRvtMxlN8OCQD9.json) |
+| Domain Expansion: House of Mirrors | 18 | utility:Redirect an attack (roll for new target); utility:Expand Domain (20 CE); save:Initiative 20: illusion on everyone (CHA) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-house-of-mirrors_TDn8CRNZOzsQlu56.json) |
 
 ### Inverse (3 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Inversion | 1 | utility:Bonus Action (2 CE); utility:Action (1 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/inversion_M48Lb0FJgSB7lVfk.json) |
-| Quick Inversion | 11 | utility:Reaction | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/quick-inversion_nBS99egazwd4cDfZ.json) |
-| Domain Expansion: Synesthesia | 18 | utility:Special; utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-synesthesia_DrswMpqH5qloWUqP.json) |
+| Inversion | 1 | utility:Activate Inverse (2 CE, 1 minute); utility:Extend 1 minute (1 CE); utility:Show threshold and limit | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/inversion_M48Lb0FJgSB7lVfk.json) |
+| Quick Inversion | 11 | utility:Activate/deactivate Inverse (reaction) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/quick-inversion_nBS99egazwd4cDfZ.json) |
+| Domain Expansion: Synesthesia | 18 | utility:Initiative 20: invert a sense (d4); utility:Expand Domain (20 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-synesthesia_DrswMpqH5qloWUqP.json) |
 
 ### Laplace’s Demon (5 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Demonic Intellect | 1 | utility:Bonus Action (1 CE) | Utilidad con efecto: comprobar activación | [JSON](../src/packs/jjk5e-techniques/demonic-intellect_ys1D7UKVzPiTeAEA.json) |
-| Future and Past | 3 | utility:Reaction (1 CE); utility:Action (1 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/future-and-past_2oseicP8E0w28WjF.json) |
-| Overload | 6 | save:Action (4 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/overload_8nsX5YC7QP3jFS6b.json) |
-| Imaginary Demon Brain | 11 | utility:Action (8 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/imaginary-demon-brain_hETxArHfIr95Mghx.json) |
-| Domain Expansion: Laplace Threshold | 18 | utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-laplace-threshold_GgpqwrzwFIiCXpfm.json) |
+| Demonic Intellect | 1 | utility:Bonus Action (1 CE); utility:Action as a reaction (2 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/demonic-intellect_ys1D7UKVzPiTeAEA.json) |
+| Future and Past | 3 | utility:Replace a roll with a foretelling (1 CE); utility:Short rest: gain a foretelling roll (1 CE); utility:Long rest: roll two foretelling d20s | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/future-and-past_2oseicP8E0w28WjF.json) |
+| Overload | 6 | save:Action (4 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/overload_8nsX5YC7QP3jFS6b.json) |
+| Imaginary Demon Brain | 11 | utility:Action (8 CE); utility:Add INT to a roll (reaction, 15 ft) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/imaginary-demon-brain_hETxArHfIr95Mghx.json) |
+| Domain Expansion: Laplace Threshold | 18 | utility:Expand Domain (20 CE); utility:Initiative 20: −2 to all rolls vs you (stacks) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-laplace-threshold_GgpqwrzwFIiCXpfm.json) |
 
 ### Limitless (5 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Infinity | 1 | utility:Bonus Action (1 CE); utility:Action (1 CE); utility:Reaction (2 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/infinity_Z8th34Qso5xXJcFA.json) |
-| Lapse Blue | 3 | save:Action (1+ CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/lapse-blue_kKlEBs83oZmc1GgC.json) |
-| Teleportation | 6 | utility:Action (5 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/teleportation_Udk2fPMDLwKx7fER.json) |
-| Offensive Infinity | 11 | save:Action (1+ CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/offensive-infinity_EMDjz5QEQDEucr5I.json) |
-| Domain Expansion: Unlimited Void | 18 | save:Special; utility:Expand Domain (20 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-unlimited-void_pKNgqGZiGhI1CjxQ.json) |
+| Infinity | 1 | utility:Activate Infinity (1 CE, +1 CE per turn); utility:Upkeep / auto-6 (1 CE); utility:Auto-6 for the round / reactive Infinity (2 CE, 11th); utility:Infinity roll (d6) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/infinity_Z8th34Qso5xXJcFA.json) |
+| Lapse Blue | 3 | save:Lapse Blue (1+ CE): 5-ft pull radius per CE; utility:Maximum Output: move the sphere 30 ft | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/lapse-blue_kKlEBs83oZmc1GgC.json) |
+| Teleportation | 6 | utility:Teleport (10 ft per CE; ×2 for another creature); utility:Teleport to a prepared circle (5 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/teleportation_Udk2fPMDLwKx7fER.json) |
+| Offensive Infinity | 11 | save:Repel (CE up to mod): 10-ft burst, 2d8 per CE; save:Crush against a wall (CE up to mod): 3d8 per CE | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/offensive-infinity_EMDjz5QEQDEucr5I.json) |
+| Domain Expansion: Unlimited Void | 18 | save:Initiative 20: Unlimited Void (INT); utility:Expand Domain (20 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-unlimited-void_pKNgqGZiGhI1CjxQ.json) |
 
 ### Love Rendezvous (3 spells)
 

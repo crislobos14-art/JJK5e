@@ -16,13 +16,14 @@
    "rules": "2014"
   },
   "activities": {
-   "6TqvvlFnyfAODuCW": {
-    "_id": "6TqvvlFnyfAODuCW",
+   "pdlYQWMLX20RmSbf": {
+    "_id": "pdlYQWMLX20RmSbf",
     "type": "utility",
-    "name": "Action (2 CE)",
+    "name": "Self-Alteration: Sword Arms (2 CE)",
     "sort": 0,
+    "img": null,
     "activation": {
-     "type": "action",
+     "type": "bonus",
      "value": 1,
      "condition": "",
      "override": true
@@ -30,21 +31,234 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
      "units": "self",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
+    },
+    "effects": [
+     {
+      "_id": "1K3HwhLv8yhXv94g",
+      "onSave": false
+     }
+    ]
+   },
+   "umaLfsVFRKb6ge7w": {
+    "_id": "umaLfsVFRKb6ge7w",
+    "type": "utility",
+    "name": "Self-Alteration: Spike Hands (2 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
     },
     "duration": {
      "units": "inst",
      "override": true
-    }
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "73JDsjL5UaIYtIMf",
+      "onSave": false
+     }
+    ]
+   },
+   "j0n5aMyKuYwqkrex": {
+    "_id": "j0n5aMyKuYwqkrex",
+    "type": "utility",
+    "name": "Self-Alteration: Arm Shields (2 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "GDElztLMB2Ogpykb",
+      "onSave": false
+     }
+    ]
+   },
+   "tZHKagI9omzBbIGV": {
+    "_id": "tZHKagI9omzBbIGV",
+    "type": "utility",
+    "name": "Self-Alteration: Long Arms (2 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "Gh79cTXIIPEKHaVd",
+      "onSave": false
+     }
+    ]
+   },
+   "D62ba08tj9lXTXNW": {
+    "_id": "D62ba08tj9lXTXNW",
+    "type": "utility",
+    "name": "Self-Alteration: Wings (2 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "xOueQF38LSoHmu8d",
+      "onSave": false
+     }
+    ]
+   },
+   "V261YUqIxwMbjWdt": {
+    "_id": "V261YUqIxwMbjWdt",
+    "type": "utility",
+    "name": "Ally Alteration (rest)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": []
    }
   },
   "uses": {
@@ -83,49 +297,141 @@
  "flags": {
   "jjk5e": {
    "ceCosts": {
-    "6TqvvlFnyfAODuCW": 2
+    "pdlYQWMLX20RmSbf": 2,
+    "umaLfsVFRKb6ge7w": 2,
+    "j0n5aMyKuYwqkrex": 2,
+    "tZHKagI9omzBbIGV": 2,
+    "D62ba08tj9lXTXNW": 2
    },
    "technique": "Idle Transfiguration",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Wings' exact benefit: check the table (fly speed assumed = walking). Ally alterations: up to prof per creature.",
+   "automation": "automated"
   }
  },
  "folder": "sz7xFTLSgxx5bxtq",
  "effects": [
   {
-   "_id": "AyyxRu9CmSsHVXWO",
-   "name": "Alteration (toggle)",
+   "_id": "1K3HwhLv8yhXv94g",
+   "name": "Sword Arms",
    "img": "modules/jjk5e/icons/techniques/idle-transfiguration.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Sword Arms (see the table for restrictions).</p>",
+   "changes": [],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Idle Transfiguration"
+    }
+   },
+   "_key": "!items.effects!VAvGtxSod2JL2DbT.1K3HwhLv8yhXv94g"
+  },
+  {
+   "_id": "73JDsjL5UaIYtIMf",
+   "name": "Spike Hands",
+   "img": "modules/jjk5e/icons/techniques/idle-transfiguration.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Spike Hands (see the table for restrictions).</p>",
+   "changes": [
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ @prof",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Idle Transfiguration"
+    }
+   },
+   "_key": "!items.effects!VAvGtxSod2JL2DbT.73JDsjL5UaIYtIMf"
+  },
+  {
+   "_id": "GDElztLMB2Ogpykb",
+   "name": "Arm Shields",
+   "img": "modules/jjk5e/icons/techniques/idle-transfiguration.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Arm Shields (see the table for restrictions).</p>",
    "changes": [
     {
      "key": "system.attributes.ac.bonus",
      "mode": 2,
      "value": "+2",
-     "priority": null
-    },
-    {
-     "key": "system.abilities.str.check.roll.mode",
-     "mode": 2,
-     "value": "1",
-     "priority": null
-    },
-    {
-     "key": "system.abilities.dex.check.roll.mode",
-     "mode": 2,
-     "value": "1",
-     "priority": null
+     "priority": 20
     }
    ],
-   "transfer": true,
-   "disabled": true,
-   "duration": {},
-   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "duration": {
+    "rounds": null
+   },
    "flags": {
     "jjk5e": {
-     "auto": "toggle"
+     "technique": "Idle Transfiguration"
     }
    },
-   "_key": "!items.effects!VAvGtxSod2JL2DbT.AyyxRu9CmSsHVXWO"
+   "_key": "!items.effects!VAvGtxSod2JL2DbT.GDElztLMB2Ogpykb"
+  },
+  {
+   "_id": "Gh79cTXIIPEKHaVd",
+   "name": "Long Arms",
+   "img": "modules/jjk5e/icons/techniques/idle-transfiguration.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Long Arms (see the table for restrictions).</p>",
+   "changes": [],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Idle Transfiguration"
+    }
+   },
+   "_key": "!items.effects!VAvGtxSod2JL2DbT.Gh79cTXIIPEKHaVd"
+  },
+  {
+   "_id": "xOueQF38LSoHmu8d",
+   "name": "Wings",
+   "img": "modules/jjk5e/icons/techniques/idle-transfiguration.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Wings (see the table for restrictions).</p>",
+   "changes": [
+    {
+     "key": "system.attributes.movement.fly",
+     "mode": 4,
+     "value": "@attributes.movement.walk",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Idle Transfiguration"
+    }
+   },
+   "_key": "!items.effects!VAvGtxSod2JL2DbT.xOueQF38LSoHmu8d"
   }
  ],
  "_key": "!items!VAvGtxSod2JL2DbT"

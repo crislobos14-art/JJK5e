@@ -19,7 +19,7 @@
    "baNd4KsTqloG3jFL": {
     "_id": "baNd4KsTqloG3jFL",
     "type": "damage",
-    "name": "Special",
+    "name": "End of each turn: 10d8 cold + restrained",
     "sort": 0,
     "activation": {
      "type": "special",
@@ -39,6 +39,10 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "enemy",
+      "choice": false
+     },
      "override": true
     },
     "duration": {
@@ -171,7 +175,8 @@
     "H8FzRN86DGtRmyYU": 20
    },
    "domainActivity": "H8FzRN86DGtRmyYU",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "effects": [
@@ -182,10 +187,19 @@
    "statuses": [
     "restrained"
    ],
-   "changes": [],
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "priority": 20,
+     "value": "turn=start, saveAbility=str, saveDC=JJKORIGINDC, label=White Abyss (Athletics)"
+    }
+   ],
    "transfer": false,
    "disabled": false,
-   "duration": {},
+   "duration": {
+    "rounds": 1
+   },
    "description": "",
    "flags": {
     "jjk5e": {

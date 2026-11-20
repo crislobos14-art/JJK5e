@@ -19,7 +19,7 @@
    "0XCLedJf9yzGwtvr": {
     "_id": "0XCLedJf9yzGwtvr",
     "type": "save",
-    "name": "Action (1+ CE)",
+    "name": "Lapse Blue (1+ CE): 5-ft pull radius per CE",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -31,7 +31,7 @@
      "targets": [],
      "scaling": {
       "allowed": true,
-      "max": "max(1, max(@abilities.wis.mod, @abilities.cha.mod))"
+      "max": "max(@abilities.wis.mod, @abilities.cha.mod)"
      },
      "spellSlot": false
     },
@@ -42,7 +42,7 @@
     },
     "target": {
      "template": {
-      "type": "sphere",
+      "type": "radius",
       "size": "5",
       "units": "ft",
       "count": "1",
@@ -71,7 +71,20 @@
      "onSave": "half",
      "parts": [
       {
-       "number": 3,
+       "number": 2,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "force"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      },
+      {
+       "number": 1,
        "denomination": 8,
        "bonus": "",
        "types": [
@@ -93,6 +106,42 @@
       "onSave": false
      }
     ]
+   },
+   "7ViH07o10Fb0QsyT": {
+    "_id": "7ViH07o10Fb0QsyT",
+    "type": "utility",
+    "name": "Maximum Output: move the sphere 30 ft",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
    }
   },
   "uses": {
@@ -151,16 +200,18 @@
    },
    "ceSteps": {
     "0XCLedJf9yzGwtvr": 1
-   }
+   },
+   "automationNotes": "5+ CE: Maximum Output (concentration, 1 minute; save at turn start inside). At 11th: fail by 5+ = max damage and restrained.",
+   "automation": "automated"
   }
  },
  "effects": [
   {
    "_id": "YaBVmd9NLkY17soF",
-   "name": "Restrained (Lapse Blue)",
+   "name": "Grappled (Lapse Blue)",
    "img": "modules/jjk5e/icons/techniques/limitless.svg",
    "statuses": [
-    "restrained"
+    "grappled"
    ],
    "changes": [
     {

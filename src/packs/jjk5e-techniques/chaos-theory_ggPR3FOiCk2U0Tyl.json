@@ -38,15 +38,69 @@
      }
     },
     "range": {
-     "units": "self"
+     "units": "self",
+     "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
     "duration": {
      "value": "2",
      "units": "minute",
      "concentration": false
     },
-    "useConditionText": "false"
+    "useConditionText": "false",
+    "effects": [
+     {
+      "_id": "iQVhTH8zp9z1VduA",
+      "onSave": false
+     }
+    ]
+   },
+   "wCTj6DPZZBoFhRXc": {
+    "_id": "wCTj6DPZZBoFhRXc",
+    "type": "utility",
+    "name": "Start of turn: chaos d4",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "roll": {
+     "formula": "1d4",
+     "name": "1 Hide · 2 Disengage · 3 Dash · 4 one melee attack",
+     "prompt": false,
+     "visible": true
+    }
    }
   }
  },
@@ -69,10 +123,58 @@
       "Laplace’s Demon"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!ggPR3FOiCk2U0Tyl"
+ "_key": "!items!ggPR3FOiCk2U0Tyl",
+ "effects": [
+  {
+   "_id": "iQVhTH8zp9z1VduA",
+   "name": "Chaos Theory",
+   "img": "modules/jjk5e/icons/techniques/laplace-s-demon.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Targets' AC −INT (as +INT to hit); advantage after a miss vs that creature; d4 forced bonus action each turn.</p>",
+   "changes": [
+    {
+     "key": "system.bonuses.mwak.attack",
+     "mode": 2,
+     "value": "+ @abilities.int.mod",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.rwak.attack",
+     "mode": 2,
+     "value": "+ @abilities.int.mod",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.msak.attack",
+     "mode": 2,
+     "value": "+ @abilities.int.mod",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.rsak.attack",
+     "mode": 2,
+     "value": "+ @abilities.int.mod",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 20
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Laplace’s Demon"
+    }
+   },
+   "_key": "!items.effects!ggPR3FOiCk2U0Tyl.iQVhTH8zp9z1VduA"
+  }
+ ]
 }

@@ -19,7 +19,7 @@
    "AOT9zvgsSauWbLgR": {
     "_id": "AOT9zvgsSauWbLgR",
     "type": "utility",
-    "name": "Special",
+    "name": "Initiative 20: all restrained + charmed",
     "sort": 0,
     "activation": {
      "type": "special",
@@ -39,6 +39,10 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "enemy",
+      "choice": false
+     },
      "override": true
     },
     "duration": {
@@ -48,6 +52,10 @@
     "effects": [
      {
       "_id": "I7GR0j7PzujJayoL",
+      "onSave": false
+     },
+     {
+      "_id": "YsAvXSADPun3bE75",
       "onSave": false
      }
     ]
@@ -152,7 +160,9 @@
     "au7KB8W4Pw0yrasU": 20
    },
    "domainActivity": "au7KB8W4Pw0yrasU",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Love Hands auto-hit; creatures auto-fail grapple/shove contests and saves forced by the hands.",
+   "automation": "automated"
   }
  },
  "effects": [
@@ -173,9 +183,41 @@
    "flags": {
     "jjk5e": {
      "condition": "restrained"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnEnd"
+     ]
     }
    },
    "_key": "!items.effects!ZAqh5epfSwH68e8V.I7GR0j7PzujJayoL"
+  },
+  {
+   "_id": "YsAvXSADPun3bE75",
+   "name": "Charmed (Lover's Grasp)",
+   "img": "modules/jjk5e/icons/techniques/heart-catch-domain.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [
+    "charmed"
+   ],
+   "description": "",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Heart Catch"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnEnd"
+     ]
+    }
+   },
+   "_key": "!items.effects!ZAqh5epfSwH68e8V.YsAvXSADPun3bE75"
   }
  ],
  "folder": "AAtWazy4xXecJci4",

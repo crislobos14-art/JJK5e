@@ -58,6 +58,48 @@
      "concentration": false,
      "override": true
     }
+   },
+   "YN9bDVaRuubRXnyP": {
+    "_id": "YN9bDVaRuubRXnyP",
+    "type": "utility",
+    "name": "Initiative 20: −2 to all rolls vs you (stacks)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "enemy",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "lfIigyJns9niV6ou",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -116,9 +158,70 @@
     "pkJEvTo0GLRulitE": 20
    },
    "domainActivity": "pkJEvTo0GLRulitE",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "You know HP, CE, effects and defences of everyone inside; invisibility and hiding give no advantage against you.",
+   "automation": "automated"
   }
  },
  "folder": "uhouPoPESjs6aBsz",
- "_key": "!items!GgpqwrzwFIiCXpfm"
+ "_key": "!items!GgpqwrzwFIiCXpfm",
+ "effects": [
+  {
+   "_id": "lfIigyJns9niV6ou",
+   "name": "Laplace Threshold −2",
+   "img": "modules/jjk5e/icons/techniques/laplace-s-demon-domain.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>−2 per application (stacks each initiative 20). Applies to all its rolls here — the RAW limits it to rolls against you.</p>",
+   "changes": [
+    {
+     "key": "system.bonuses.mwak.attack",
+     "mode": 2,
+     "value": "-2",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.rwak.attack",
+     "mode": 2,
+     "value": "-2",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.msak.attack",
+     "mode": 2,
+     "value": "-2",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.rsak.attack",
+     "mode": 2,
+     "value": "-2",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.abilities.save",
+     "mode": 2,
+     "value": "-2",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.abilities.check",
+     "mode": 2,
+     "value": "-2",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Laplace’s Demon"
+    }
+   },
+   "_key": "!items.effects!GgpqwrzwFIiCXpfm.lfIigyJns9niV6ou"
+  }
+ ]
 }

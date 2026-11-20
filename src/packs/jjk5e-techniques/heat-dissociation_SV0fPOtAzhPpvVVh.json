@@ -39,13 +39,16 @@
     },
     "range": {
      "value": "30",
-     "units": "ft"
+     "units": "ft",
+     "override": true
     },
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
-     }
+      "count": "max(@abilities.wis.mod, @abilities.cha.mod)",
+      "choice": true
+     },
+     "override": true
     },
     "duration": {
      "units": "inst"
@@ -78,7 +81,13 @@
        }
       }
      ]
-    }
+    },
+    "effects": [
+     {
+      "_id": "nLGrf3qzY8ggVLKl",
+      "onSave": false
+     }
+    ]
    }
   }
  },
@@ -101,10 +110,57 @@
       "Ice Formation"
      ]
     ]
-   }
+   },
+   "dmgScale": {
+    "SzjOEAamhOfqhc6z": [
+     [
+      1,
+      "8d10"
+     ],
+     [
+      18,
+      "10d10"
+     ],
+     [
+      20,
+      "16d10"
+     ]
+    ]
+   },
+   "automationNotes": "Damage also lowers max HP until a long rest (apply as HP max reduction).",
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!SV0fPOtAzhPpvVVh"
+ "_key": "!items!SV0fPOtAzhPpvVVh",
+ "effects": [
+  {
+   "_id": "nLGrf3qzY8ggVLKl",
+   "name": "Boiled (exhaustion)",
+   "img": "modules/jjk5e/icons/techniques/ice-formation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.attributes.exhaustion",
+     "mode": 2,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Ice Formation"
+    }
+   },
+   "_key": "!items.effects!SV0fPOtAzhPpvVVh.nLGrf3qzY8ggVLKl"
+  }
+ ]
 }

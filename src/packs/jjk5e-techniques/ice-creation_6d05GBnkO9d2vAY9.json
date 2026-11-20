@@ -19,7 +19,7 @@
    "5gL47zMatNoMr4T3": {
     "_id": "5gL47zMatNoMr4T3",
     "type": "save",
-    "name": "Action (1 CE)",
+    "name": "Ice cone (1 CE): 10 ft",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -91,61 +91,6 @@
       "onSave": false
      }
     ]
-   },
-   "I8RJht3EZwSVUxVC": {
-    "_id": "I8RJht3EZwSVUxVC",
-    "type": "damage",
-    "name": "Special",
-    "sort": 100000,
-    "activation": {
-     "type": "special",
-     "value": null,
-     "condition": "",
-     "override": true
-    },
-    "consumption": {
-     "targets": [],
-     "scaling": {
-      "allowed": false
-     },
-     "spellSlot": false
-    },
-    "range": {
-     "units": "spec",
-     "override": true
-    },
-    "target": {
-     "override": true
-    },
-    "duration": {
-     "units": "inst",
-     "override": true
-    },
-    "damage": {
-     "parts": [
-      {
-       "number": 6,
-       "denomination": 10,
-       "bonus": "",
-       "types": [
-        "cold"
-       ],
-       "custom": {
-        "enabled": false,
-        "formula": ""
-       },
-       "scaling": {
-        "number": 1
-       }
-      }
-     ]
-    },
-    "effects": [
-     {
-      "_id": "pbtcDbH76bTmZjnj",
-      "onSave": false
-     }
-    ]
    }
   },
   "uses": {
@@ -201,7 +146,37 @@
    },
    "technique": "Ice Formation",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "dmgScale": {
+    "5gL47zMatNoMr4T3": [
+     [
+      1,
+      "1d10"
+     ],
+     [
+      3,
+      "2d10"
+     ],
+     [
+      6,
+      "3d10"
+     ],
+     [
+      10,
+      "4d10"
+     ],
+     [
+      14,
+      "5d10"
+     ],
+     [
+      20,
+      "6d10"
+     ]
+    ]
+   },
+   "automationNotes": "Ice lasts until you end it, it's broken, or you are poisoned/incapacitated/unconscious.",
+   "automation": "automated"
   }
  },
  "effects": [
@@ -212,10 +187,19 @@
    "statuses": [
     "restrained"
    ],
-   "changes": [],
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "priority": 20,
+     "value": "turn=start, saveAbility=str, saveDC=JJKORIGINDC, label=Ice (break free)"
+    }
+   ],
    "transfer": false,
    "disabled": false,
-   "duration": {},
+   "duration": {
+    "rounds": 600
+   },
    "description": "",
    "flags": {
     "jjk5e": {
@@ -223,25 +207,6 @@
     }
    },
    "_key": "!items.effects!6d05GBnkO9d2vAY9.9dgt9hnF33yz3Uyu"
-  },
-  {
-   "_id": "pbtcDbH76bTmZjnj",
-   "name": "Poisoned (Ice Creation)",
-   "img": "modules/jjk5e/icons/techniques/ice-formation.svg",
-   "statuses": [
-    "poisoned"
-   ],
-   "changes": [],
-   "transfer": false,
-   "disabled": false,
-   "duration": {},
-   "description": "",
-   "flags": {
-    "jjk5e": {
-     "condition": "poisoned"
-    }
-   },
-   "_key": "!items.effects!6d05GBnkO9d2vAY9.pbtcDbH76bTmZjnj"
   }
  ],
  "folder": "w9n29Anzntr6P6uo",

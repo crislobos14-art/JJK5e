@@ -24,7 +24,9 @@
  "flags": {
   "jjk5e": {
    "technique": "Inverse",
-   "level": 3
+   "level": 3,
+   "automationNotes": "Below threshold: vulnerable; above: resistant (even vs bypass). Resolve while Inverse is active.",
+   "automation": "automated"
   }
  },
  "folder": "bh2ZyC5GSVoaToIo",

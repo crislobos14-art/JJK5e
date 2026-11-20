@@ -58,6 +58,70 @@
      "concentration": false,
      "override": true
     }
+   },
+   "PRbgcOX4Kds4GyeQ": {
+    "_id": "PRbgcOX4Kds4GyeQ",
+    "type": "save",
+    "name": "Initiative 20: double Transfiguration",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "enemy",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 10,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
    }
   },
   "uses": {
@@ -116,7 +180,9 @@
     "ksMmOYA2qiyoGhaa": 20
    },
    "domainActivity": "ksMmOYA2qiyoGhaa",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "10d10 = twice the 18th-level touch (5d10).",
+   "automation": "automated"
   }
  },
  "folder": "sz7xFTLSgxx5bxtq",

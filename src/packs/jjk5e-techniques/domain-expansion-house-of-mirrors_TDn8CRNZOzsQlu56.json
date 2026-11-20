@@ -19,7 +19,7 @@
    "YViYoxBURaJd434p": {
     "_id": "YViYoxBURaJd434p",
     "type": "utility",
-    "name": "Reaction",
+    "name": "Redirect an attack (roll for new target)",
     "sort": 0,
     "activation": {
      "type": "reaction",
@@ -45,7 +45,13 @@
      "units": "inst",
      "override": true
     },
-    "useConditionText": "reaction === \"isAttacked\""
+    "useConditionText": "reaction === \"isAttacked\"",
+    "roll": {
+     "formula": "1d(max(2, @scaling))",
+     "name": "Redirect (1 = still you)",
+     "prompt": true,
+     "visible": true
+    }
    },
    "vapuxwdT9LjXjndx": {
     "_id": "vapuxwdT9LjXjndx",
@@ -88,6 +94,61 @@
      "units": "minute",
      "concentration": false,
      "override": true
+    }
+   },
+   "DtpI4rJEtkgYRdbH": {
+    "_id": "DtpI4rJEtkgYRdbH",
+    "type": "save",
+    "name": "Initiative 20: illusion on everyone (CHA)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "enemy",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "6mGBD2YKpZrGOq0y",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "cha"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
     }
    }
   },
@@ -147,9 +208,32 @@
     "vapuxwdT9LjXjndx": 20
    },
    "domainActivity": "vapuxwdT9LjXjndx",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "8b1T5CIAvTiipny3",
- "_key": "!items!TDn8CRNZOzsQlu56"
+ "_key": "!items!TDn8CRNZOzsQlu56",
+ "effects": [
+  {
+   "_id": "6mGBD2YKpZrGOq0y",
+   "name": "House of Mirrors illusion",
+   "img": "modules/jjk5e/icons/techniques/illusive-mirage-domain.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Under an illusion of the caster's choice.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Illusive Mirage"
+    }
+   },
+   "_key": "!items.effects!TDn8CRNZOzsQlu56.6mGBD2YKpZrGOq0y"
+  }
+ ]
 }

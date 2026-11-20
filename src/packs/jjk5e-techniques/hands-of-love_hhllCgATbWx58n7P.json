@@ -19,7 +19,7 @@
    "CN6TTssteOaassfF": {
     "_id": "CN6TTssteOaassfF",
     "type": "utility",
-    "name": "Bonus Action (1 CE)",
+    "name": "Create Love Hands (1 CE)",
     "sort": 0,
     "activation": {
      "type": "bonus",
@@ -35,20 +35,137 @@
      "spellSlot": false
     },
     "range": {
-     "value": "15",
-     "units": "ft",
+     "units": "self",
      "override": true
     },
     "target": {
      "affects": {
-      "type": "creature",
-      "count": "1"
+      "type": "self"
      },
      "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
+    },
+    "effects": [
+     {
+      "_id": "CCHhZLE5fSdUT1Qm",
+      "onSave": false
+     }
+    ]
+   },
+   "ssu5l7lhT2ECtBRs": {
+    "_id": "ssu5l7lhT2ECtBRs",
+    "type": "attack",
+    "name": "Love Hand strike (replaces an attack)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "15 + 15 * floor(min(@details.level, 3) / 3)",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "attack": {
+     "ability": "str",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "melee",
+      "classification": "unarmed"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 4,
+       "bonus": "@mod + floor(min(@details.level, 3) / 3) * max(@abilities.wis.mod, @abilities.cha.mod)",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
+   },
+   "LAGWVrYpr18ncZqd": {
+    "_id": "LAGWVrYpr18ncZqd",
+    "type": "utility",
+    "name": "Grapple/shove with a hand (advantage)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "roll": {
+     "formula": "2d20kh + @skills.ath.total",
+     "name": "Athletics (advantage)",
+     "prompt": false,
+     "visible": true
     }
    }
   },
@@ -99,9 +216,33 @@
    },
    "technique": "Heart Catch",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Hand damage uses 1d4 + STR; replace with your unarmed/martial die. At 3rd: +CE mod damage, grappled = restrained.",
+   "automation": "automated"
   }
  },
  "folder": "AAtWazy4xXecJci4",
- "_key": "!items!hhllCgATbWx58n7P"
+ "_key": "!items!hhllCgATbWx58n7P",
+ "effects": [
+  {
+   "_id": "CCHhZLE5fSdUT1Qm",
+   "name": "Love Hands",
+   "img": "modules/jjk5e/icons/techniques/heart-catch.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Two hands within 15 ft (30 ft at 3rd): AC = CE DC (+prof at 3rd), HP = 2/3/4 × CE score; you take 1/10 of their damage.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Heart Catch"
+    }
+   },
+   "_key": "!items.effects!hhllCgATbWx58n7P.CCHhZLE5fSdUT1Qm"
+  }
+ ]
 }

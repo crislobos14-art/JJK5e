@@ -19,10 +19,10 @@
    "KvPOGDenY3iIN2OO": {
     "_id": "KvPOGDenY3iIN2OO",
     "type": "damage",
-    "name": "Action",
+    "name": "Bump into invisible object: 1d6, lose reaction",
     "sort": 0,
     "activation": {
-     "type": "action",
+     "type": "special",
      "value": 1,
      "condition": "",
      "override": true
@@ -39,6 +39,11 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -68,7 +73,7 @@
    "VjvgH7c9gYQjon71": {
     "_id": "VjvgH7c9gYQjon71",
     "type": "utility",
-    "name": "Extra (3 CE)",
+    "name": "Make it invisible (+3 CE)",
     "sort": 900000,
     "activation": {
      "type": "special",
@@ -83,6 +88,43 @@
      },
      "spellSlot": false
     }
+   },
+   "gFS3FTelaA2euILe": {
+    "_id": "gFS3FTelaA2euILe",
+    "type": "utility",
+    "name": "Distort object (1–10 CE by size)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "10"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
    }
   },
   "uses": {
@@ -121,11 +163,17 @@
  "flags": {
   "jjk5e": {
    "ceCosts": {
-    "VjvgH7c9gYQjon71": 3
+    "VjvgH7c9gYQjon71": 3,
+    "gFS3FTelaA2euILe": 1
    },
    "technique": "Illusive Mirage",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceSteps": {
+    "gFS3FTelaA2euILe": 1
+   },
+   "automationNotes": "Tiny 1, Small 2, Medium 3, Large 4, Huge 6, Gargantuan 10 CE. Investigation vs your DC to discern.",
+   "automation": "automated"
   }
  },
  "folder": "8b1T5CIAvTiipny3",

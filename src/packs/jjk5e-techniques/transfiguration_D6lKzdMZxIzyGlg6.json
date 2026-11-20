@@ -19,7 +19,7 @@
    "PDD97g8ETyVvBxYc": {
     "_id": "PDD97g8ETyVvBxYc",
     "type": "save",
-    "name": "Action (1 CE)",
+    "name": "Transfigure (1 CE): CON save",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -35,10 +35,16 @@
      "spellSlot": false
     },
     "range": {
-     "units": "spec",
+     "value": "5",
+     "units": "ft",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -74,6 +80,62 @@
       }
      ]
     }
+   },
+   "lfxJYOOPOUDoNbaD": {
+    "_id": "lfxJYOOPOUDoNbaD",
+    "type": "damage",
+    "name": "Soul touch (+1d6 necrotic on unarmed/natural hit)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "damage": {
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    },
+    "useConditionText": "reaction === \"isHit\""
    }
   },
   "uses": {
@@ -116,7 +178,33 @@
    },
    "technique": "Idle Transfiguration",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "dmgScale": {
+    "PDD97g8ETyVvBxYc": [
+     [
+      1,
+      "1d10"
+     ],
+     [
+      3,
+      "2d10"
+     ],
+     [
+      6,
+      "3d10"
+     ],
+     [
+      11,
+      "4d10"
+     ],
+     [
+      18,
+      "5d10"
+     ]
+    ]
+   },
+   "automationNotes": "Necrotic from this technique lowers max HP until a long rest; at 0 HP the creature becomes a Transfigured Creature (not constructs).",
+   "automation": "automated"
   }
  },
  "folder": "sz7xFTLSgxx5bxtq",

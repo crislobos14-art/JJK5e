@@ -19,7 +19,7 @@
    "080Ss5xCYIYFDac7": {
     "_id": "080Ss5xCYIYFDac7",
     "type": "save",
-    "name": "Action (1+ CE)",
+    "name": "Repel (CE up to mod): 10-ft burst, 2d8 per CE",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -31,19 +31,25 @@
      "targets": [],
      "scaling": {
       "allowed": true,
-      "max": "max(1, max(@abilities.wis.mod, @abilities.cha.mod))"
+      "max": "max(@abilities.wis.mod, @abilities.cha.mod)"
      },
      "spellSlot": false
     },
     "range": {
-     "value": "10",
-     "units": "ft",
+     "units": "self",
      "override": true
     },
     "target": {
+     "template": {
+      "type": "radius",
+      "size": "10",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
      "affects": {
-      "type": "creature",
-      "count": "1"
+      "type": "enemy",
+      "choice": false
      },
      "override": true
     },
@@ -75,18 +81,85 @@
         "formula": ""
        },
        "scaling": {
-        "mode": "whole",
         "number": 2
        }
       }
      ]
+    },
+    "effects": []
+   },
+   "hmDEOeOosWC6PZ1p": {
+    "_id": "hmDEOeOosWC6PZ1p",
+    "type": "save",
+    "name": "Crush against a wall (CE up to mod): 3d8 per CE",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "max(@abilities.wis.mod, @abilities.cha.mod)"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
     },
     "effects": [
      {
       "_id": "5qH2Hjd2KG8siwpn",
       "onSave": false
      }
-    ]
+    ],
+    "save": {
+     "ability": [
+      "str"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 3,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "force"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 3
+       }
+      }
+     ]
+    }
    }
   },
   "uses": {
@@ -132,14 +205,17 @@
  "flags": {
   "jjk5e": {
    "ceSteps": {
-    "080Ss5xCYIYFDac7": 1
+    "080Ss5xCYIYFDac7": 1,
+    "hmDEOeOosWC6PZ1p": 1
    },
    "ceCosts": {
-    "080Ss5xCYIYFDac7": 1
+    "080Ss5xCYIYFDac7": 1,
+    "hmDEOeOosWC6PZ1p": 1
    },
    "technique": "Limitless",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "effects": [
@@ -150,14 +226,7 @@
    "statuses": [
     "restrained"
    ],
-   "changes": [
-    {
-     "key": "flags.midi-qol.OverTime",
-     "mode": 0,
-     "value": "turn=end, saveAbility=str, saveDC=JJKORIGINDC, saveCount=1-, label=\"Restrained (Offensive Infinity)\"",
-     "priority": 20
-    }
-   ],
+   "changes": [],
    "transfer": false,
    "disabled": false,
    "duration": {
@@ -167,6 +236,11 @@
    "flags": {
     "jjk5e": {
      "condition": "restrained"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStartSource"
+     ]
     }
    },
    "_key": "!items.effects!EMDjz5QEQDEucr5I.5qH2Hjd2KG8siwpn"

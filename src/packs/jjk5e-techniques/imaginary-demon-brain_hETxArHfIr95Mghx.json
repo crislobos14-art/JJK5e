@@ -39,6 +39,9 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
@@ -46,6 +49,57 @@
      "units": "hour",
      "concentration": false,
      "override": true
+    },
+    "effects": [
+     {
+      "_id": "ct7rE11ZrdSYI4aH",
+      "onSave": false
+     }
+    ]
+   },
+   "xQU9k3CG7lF6BEpj": {
+    "_id": "xQU9k3CG7lF6BEpj",
+    "type": "utility",
+    "name": "Add INT to a roll (reaction, 15 ft)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "15",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "roll": {
+     "formula": "@abilities.int.mod",
+     "name": "Add to the roll",
+     "prompt": false,
+     "visible": true
     }
    }
   },
@@ -90,9 +144,45 @@
    },
    "technique": "Laplace’s Demon",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "uhouPoPESjs6aBsz",
- "_key": "!items!hETxArHfIr95Mghx"
+ "_key": "!items!hETxArHfIr95Mghx",
+ "effects": [
+  {
+   "_id": "ct7rE11ZrdSYI4aH",
+   "name": "Imaginary Demon Brain",
+   "img": "modules/jjk5e/icons/techniques/laplace-s-demon.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>All your rolls at advantage, rolls against you at disadvantage (attacks automated).</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.advantage.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.grants.disadvantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 600
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Laplace’s Demon"
+    }
+   },
+   "_key": "!items.effects!hETxArHfIr95Mghx.ct7rE11ZrdSYI4aH"
+  }
+ ]
 }

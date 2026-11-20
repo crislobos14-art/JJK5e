@@ -35,10 +35,16 @@
      "spellSlot": false
     },
     "range": {
-     "units": "spec",
+     "value": "5",
+     "units": "ft",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -122,7 +128,8 @@
    },
    "technique": "Laplace’s Demon",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "effects": [
@@ -143,6 +150,11 @@
    "flags": {
     "jjk5e": {
      "condition": "stunned"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnEnd"
+     ]
     }
    },
    "_key": "!items.effects!8nsX5YC7QP3jFS6b.N3FOtjwNCSdvcau5"

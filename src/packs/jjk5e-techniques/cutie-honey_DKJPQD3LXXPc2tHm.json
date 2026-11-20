@@ -19,10 +19,10 @@
    "OW8P8BPdrsaflpEH": {
     "_id": "OW8P8BPdrsaflpEH",
     "type": "save",
-    "name": "Action (5 CE)",
+    "name": "Cutie Honey (on melee hit, 5 CE)",
     "sort": 0,
     "activation": {
-     "type": "action",
+     "type": "special",
      "value": 1,
      "condition": "",
      "override": true
@@ -39,6 +39,11 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -65,7 +70,8 @@
       "_id": "7wvMBfX5EbXrTJI2",
       "onSave": false
      }
-    ]
+    ],
+    "useConditionText": "reaction === \"isHit\""
    }
   },
   "uses": {
@@ -109,7 +115,8 @@
    },
    "technique": "Heart Catch",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "effects": [
@@ -120,11 +127,17 @@
    "statuses": [
     "charmed"
    ],
-   "changes": [],
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "priority": 20,
+     "value": "turn=start, saveAbility=wis, saveDC=JJKORIGINDC, label=Cutie Honey"
+    }
+   ],
    "transfer": false,
    "disabled": false,
    "duration": {
-    "seconds": 60,
     "rounds": 10
    },
    "description": "",

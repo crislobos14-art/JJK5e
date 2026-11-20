@@ -35,16 +35,17 @@
      "targets": [],
      "scaling": {
       "allowed": true,
-      "max": "2 * max(1, max(@abilities.wis.mod, @abilities.cha.mod))"
+      "max": "2 * max(@abilities.wis.mod, @abilities.cha.mod)"
      }
     },
     "range": {
-     "units": "self"
+     "units": "self",
+     "override": true
     },
     "target": {
      "template": {
       "type": "cone",
-      "size": "15",
+      "size": "15 + 15 * floor(min(@details.level, 11) / 11)",
       "units": "ft",
       "count": "1",
       "contiguous": false
@@ -52,7 +53,8 @@
      "affects": {
       "type": "creature",
       "choice": false
-     }
+     },
+     "override": true
     },
     "duration": {
      "units": "inst"
@@ -80,9 +82,21 @@
         "enabled": false,
         "formula": ""
        },
+       "scaling": {}
+      },
+      {
+       "number": 2,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "force"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
        "scaling": {
-        "mode": "whole",
-        "number": 4
+        "number": 2
        }
       }
      ]
@@ -97,7 +111,7 @@
    "ZiuBeW7MdsFDONgb": {
     "_id": "ZiuBeW7MdsFDONgb",
     "type": "utility",
-    "name": "Extra (2 CE)",
+    "name": "Impact: remaining launch distance as falling damage + prone",
     "sort": 900000,
     "activation": {
      "type": "special",
@@ -136,7 +150,9 @@
       "Limitless"
      ]
     ]
-   }
+   },
+   "automationNotes": "Launched 20 ft per 2 CE (half on save).",
+   "automation": "automated"
   }
  },
  "effects": [

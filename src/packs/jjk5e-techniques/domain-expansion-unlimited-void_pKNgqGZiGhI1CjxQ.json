@@ -19,7 +19,7 @@
    "YFTe31UdxKjUNspy": {
     "_id": "YFTe31UdxKjUNspy",
     "type": "save",
-    "name": "Special",
+    "name": "Initiative 20: Unlimited Void (INT)",
     "sort": 0,
     "activation": {
      "type": "special",
@@ -39,6 +39,10 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "enemy",
+      "choice": false
+     },
      "override": true
     },
     "duration": {
@@ -183,7 +187,9 @@
     "NZiRylxnq6mO5VYi": 20
    },
    "domainActivity": "NZiRylxnq6mO5VYi",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Repeat the save every minute; Greater Restoration or Wish ends it. Creatures touching you are excluded.",
+   "automation": "automated"
   }
  },
  "effects": [
@@ -194,11 +200,29 @@
    "statuses": [
     "unconscious"
    ],
-   "changes": [],
+   "changes": [
+    {
+     "key": "system.abilities.int.value",
+     "mode": 5,
+     "value": "1",
+     "priority": 30
+    },
+    {
+     "key": "system.abilities.wis.value",
+     "mode": 5,
+     "value": "1",
+     "priority": 30
+    },
+    {
+     "key": "system.abilities.cha.value",
+     "mode": 5,
+     "value": "1",
+     "priority": 30
+    }
+   ],
    "transfer": false,
    "disabled": false,
    "duration": {
-    "seconds": 60,
     "rounds": 10
    },
    "description": "",

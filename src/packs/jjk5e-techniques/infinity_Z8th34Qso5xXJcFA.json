@@ -19,7 +19,7 @@
    "57UvuIahfVf5dojK": {
     "_id": "57UvuIahfVf5dojK",
     "type": "utility",
-    "name": "Bonus Action (1 CE)",
+    "name": "Activate Infinity (1 CE, +1 CE per turn)",
     "sort": 0,
     "activation": {
      "type": "bonus",
@@ -39,20 +39,29 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
-    }
+    },
+    "effects": [
+     {
+      "_id": "OAwVcDggZso6u7GY",
+      "onSave": false
+     }
+    ]
    },
    "5U2nqwCaRX6vM4sS": {
     "_id": "5U2nqwCaRX6vM4sS",
     "type": "utility",
-    "name": "Action (1 CE)",
+    "name": "Upkeep / auto-6 (1 CE)",
     "sort": 100000,
     "activation": {
-     "type": "action",
+     "type": "special",
      "value": 1,
      "condition": "",
      "override": true
@@ -79,7 +88,7 @@
    "bnixF7T8xqXctZ5h": {
     "_id": "bnixF7T8xqXctZ5h",
     "type": "utility",
-    "name": "Reaction (2 CE)",
+    "name": "Auto-6 for the round / reactive Infinity (2 CE, 11th)",
     "sort": 200000,
     "activation": {
      "type": "reaction",
@@ -106,6 +115,49 @@
      "override": true
     },
     "useConditionText": "reaction === \"isAttacked\""
+   },
+   "nh6GR34DTNeMkjI8": {
+    "_id": "nh6GR34DTNeMkjI8",
+    "type": "utility",
+    "name": "Infinity roll (d6)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "roll": {
+     "formula": "1d6",
+     "name": "Infinity (≥ 4 / 3 / 2 negates)",
+     "prompt": false,
+     "visible": true
+    },
+    "useConditionText": "reaction === \"isAttacked\" || reaction === \"isSave\""
    }
   },
   "uses": {
@@ -150,9 +202,33 @@
    },
    "technique": "Limitless",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Dodge with Infinity: advantage on the d6 and share it within reach. No effect vs poison or unseen attacks before 6th.",
+   "automation": "automated"
   }
  },
  "folder": "9dzjvEM8kgWba7oJ",
- "_key": "!items!Z8th34Qso5xXJcFA"
+ "_key": "!items!Z8th34Qso5xXJcFA",
+ "effects": [
+  {
+   "_id": "OAwVcDggZso6u7GY",
+   "name": "Infinity",
+   "img": "modules/jjk5e/icons/techniques/limitless.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Each attack/spell/save from outside: d6 roll (4+ / 3+ at 6th / 2+ at 11th) to negate.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Limitless"
+    }
+   },
+   "_key": "!items.effects!Z8th34Qso5xXJcFA.OAwVcDggZso6u7GY"
+  }
+ ]
 }

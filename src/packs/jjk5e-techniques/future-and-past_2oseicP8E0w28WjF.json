@@ -19,7 +19,7 @@
    "hSZWONcn4CVabFLO": {
     "_id": "hSZWONcn4CVabFLO",
     "type": "utility",
-    "name": "Reaction (1 CE)",
+    "name": "Replace a roll with a foretelling (1 CE)",
     "sort": 0,
     "activation": {
      "type": "reaction",
@@ -28,7 +28,14 @@
      "override": true
     },
     "consumption": {
-     "targets": [],
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1",
+       "scaling": {}
+      }
+     ],
      "scaling": {
       "allowed": false
      },
@@ -45,15 +52,15 @@
      "units": "inst",
      "override": true
     },
-    "useConditionText": "false"
+    "useConditionText": "reaction === \"isAttacked\" || reaction === \"isSave\""
    },
    "5jJZwQ04W30INTzj": {
     "_id": "5jJZwQ04W30INTzj",
     "type": "utility",
-    "name": "Action (1 CE)",
+    "name": "Short rest: gain a foretelling roll (1 CE)",
     "sort": 100000,
     "activation": {
-     "type": "action",
+     "type": "special",
      "value": 1,
      "condition": "",
      "override": true
@@ -75,13 +82,66 @@
     "duration": {
      "units": "inst",
      "override": true
+    },
+    "roll": {
+     "formula": "1d20",
+     "name": "Foretelling",
+     "prompt": false,
+     "visible": true
+    }
+   },
+   "M0WbaVVknQL6Jq4c": {
+    "_id": "M0WbaVVknQL6Jq4c",
+    "type": "utility",
+    "name": "Long rest: roll two foretelling d20s",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "roll": {
+     "formula": "2d20",
+     "name": "Foretelling rolls (record both)",
+     "prompt": false,
+     "visible": true
     }
    }
   },
   "uses": {
-   "max": "",
-   "recovery": [],
-   "spent": 0
+   "max": "3",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
+    }
+   ]
   },
   "level": 2,
   "school": "jjk",
@@ -119,7 +179,9 @@
    },
    "technique": "Laplace’s Demon",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Uses track foretelling rolls (2 per long rest + 1 from a short rest). Declare before the roll.",
+   "automation": "automated"
   }
  },
  "folder": "uhouPoPESjs6aBsz",

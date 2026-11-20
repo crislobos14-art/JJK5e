@@ -44,6 +44,11 @@ class Store:
     def save(self):
         for _id in sorted(self.dirty):
             pack, p, d = self.src[_id]
+            acts = d.get("system", {}).get("activities", {})
+            fl = d.get("flags", {}).get("jjk5e", {})
+            for k in ("ceCosts", "ceSteps", "dmgScale"):
+                if isinstance(fl.get(k), dict):
+                    for aid in [a for a in fl[k] if a not in acts]: fl[k].pop(aid)
             for e in d.get("effects", []):
                 e["_key"] = f"!items.effects!{d['_id']}.{e['_id']}"
             with open(p, "w", encoding="utf-8") as f: f.write(json.dumps(d, ensure_ascii=False, indent=1) + "\n")
@@ -3181,6 +3186,531 @@ def hair_manipulation(S):
     mark(dh)
 
 
+def ot_save(item, eid, ability, label, rounds=10, when="start"):
+    for e in item["effects"]:
+        if e["_id"] == eid:
+            e["duration"] = {"rounds": rounds}
+            e["changes"] = [c for c in e.get("changes", []) if c["key"] != "flags.midi-qol.OverTime"] + [
+                {"key": "flags.midi-qol.OverTime", "mode": 0, "priority": 20,
+                 "value": f"turn={when}, saveAbility={ability}, saveDC=JJKORIGINDC, label={label}"}]
+
+
+def heart_catch(S):
+    h = S.get("Hands of Love")
+    a = h["system"]["activities"]["CN6TTssteOaassfF"]
+    a["name"] = "Create Love Hands (1 CE)"
+    a["range"], a["target"] = RANGE_SELF, SELF
+    apply(a, fx(h, "hands", "Love Hands", rounds=None,
+                desc="Two hands within 15 ft (30 ft at 3rd): AC = CE DC (+prof at 3rd), HP = 2/3/4 × CE score; you take 1/10 of their damage."))
+    hit = act(h, "punch", "attack", "Love Hand strike (replaces an attack)", "special",
+              range={"value": "15 + 15 * floor(min(@details.level, 3) / 3)", "units": "ft", "override": True}, target=one_creature(),
+              attack={"ability": "str", "bonus": "", "critical": {"threshold": None}, "flat": False, "type": {"value": "melee", "classification": "unarmed"}},
+              damage={"includeBase": False, "parts": [dice(1, 4, ["bludgeoning"], bonus="@mod + floor(min(@details.level, 3) / 3) * " + CEMOD)]})
+    free(h, hit)
+    gr = act(h, "grab", "utility", "Grapple/shove with a hand (advantage)", "special", target=one_creature(),
+             roll={"formula": "2d20kh + @skills.ath.total", "name": "Athletics (advantage)", "prompt": False, "visible": True})
+    free(h, gr)
+    note(h, "Hand damage uses 1d4 + STR; replace with your unarmed/martial die. At 3rd: +CE mod damage, grappled = restrained.")
+    mark(h)
+
+    hd = S.get("Handy")
+    r = hd["system"]["activities"]["ZFV8r0xzxQdNPza1"]
+    r["name"] = "Grappled by a hand: restrained"
+    r["target"] = one_creature()
+    free(hd, r)
+    mark(hd)
+    hs = S.get("Hand Shield")
+    c = act(hs, "cover", "utility", "Guard a creature (¾ cover)", "special", range=_r(15), target=one_creature())
+    apply(c, fx(hs, "cover", "Hand Shield", rounds=None, changes=[("system.attributes.ac.bonus", 2, "+5"), ("system.abilities.dex.bonuses.save", 2, "+5")],
+                desc="Three-quarters cover (+5 AC/DEX saves). Half cover if each hand guards someone (edit to +2)."))
+    free(hs, c)
+    mark(hs)
+
+    ch = S.get("Cutie Honey")
+    a = ch["system"]["activities"]["OW8P8BPdrsaflpEH"]
+    a["name"] = "Cutie Honey (on melee hit, 5 CE)"
+    a["activation"]["type"] = "special"
+    a["useConditionText"] = 'reaction === "isHit"'
+    a["target"] = one_creature()
+    a["damage"] = {"onSave": "none", "parts": []}
+    ot_save(ch, "7wvMBfX5EbXrTJI2", "wis", "Cutie Honey")
+    mark(ch)
+
+    d = S.get("Domain Expansion: Lover’s Grasp")
+    i = d["system"]["activities"]["AOT9zvgsSauWbLgR"]
+    i["name"] = "Initiative 20: all restrained + charmed"
+    i["target"] = {"affects": {"type": "enemy", "choice": False}, "override": True}
+    i["effects"].append({"_id": fx(d, "charm", "Charmed (Lover's Grasp)", statuses=["charmed"], special=["turnEnd"]), "onSave": False})
+    for e in d["effects"]:
+        if e["_id"] == "I7GR0j7PzujJayoL": e.setdefault("flags", {}).setdefault("dae", {})["specialDuration"] = ["turnEnd"]
+    free(d, i)
+    note(d, "Love Hands auto-hit; creatures auto-fail grapple/shove contests and saves forced by the hands.")
+    mark(d)
+
+    fl = S.get("Fine Line")
+    a = fl["system"]["activities"]["1fxW5LIOvnfrRs1h"]
+    a["range"], a["target"] = RANGE_SELF, sphere(30, kind="cone")
+    a["damage"]["onSave"] = "half"
+    ot_save(fl, "SIjTJ4wq95JwbFpW", "wis", "Fine Line", when="end")
+    mark(fl)
+
+
+def ice_formation(S):
+    ic = S.get("Ice Creation")
+    a = ic["system"]["activities"]
+    c = a["5gL47zMatNoMr4T3"]
+    c["name"] = "Ice cone (1 CE): 10 ft"
+    c["range"], c["target"] = RANGE_SELF, sphere(10, kind="cone")
+    c["damage"]["onSave"] = "half"
+    scale(ic, c, [[1, "1d10"], [3, "2d10"], [6, "3d10"], [10, "4d10"], [14, "5d10"], [20, "6d10"]])
+    ot_save(ic, "9dgt9hnF33yz3Uyu", "str", "Ice (break free)", rounds=600)
+    stray = a.pop("I8RJht3EZwSVUxVC", None)
+    ic["effects"] = [e for e in ic["effects"] if e["_id"] != "pbtcDbH76bTmZjnj"]
+    ic["flags"]["jjk5e"].get("ceCosts", {}).pop("I8RJht3EZwSVUxVC", None)
+    note(ic, "Ice lasts until you end it, it's broken, or you are poisoned/incapacitated/unconscious.")
+    mark(ic)
+
+    ec = S.get("Extreme Cold")
+    t = act(ec, "trapped", "utility", "Encased: 1 exhaustion while in ice", "special", target=one_creature())
+    apply(t, fx(ec, "ex", "Extreme Cold (in ice)", rounds=None, changes=[("system.attributes.exhaustion", 2, "1")],
+                desc="One level of exhaustion while inside your ice; remove when freed."))
+    free(ec, t)
+    n = act(ec, "near", "utility", "Near ice: speed halved", "special", target=one_creature())
+    apply(n, fx(ec, "near", "Extreme Cold (near ice)", rounds=None, changes=[("system.attributes.movement.all", 1, "0.5")],
+                desc="Within 5 ft of your ice without cold resistance/immunity."))
+    free(ec, n)
+    mark(ec)
+
+    fc = S.get("Frost Calm")
+    a = fc["system"]["activities"]["qlZCvvTLSeKyofm6"]
+    a["range"], a["target"] = _r(60), sphere(30)
+    a["damage"]["onSave"] = "half"
+    ot_save(fc, "PeB6XH93ahsmArJd", "str", "Ice layer", rounds=600)
+    mark(fc)
+
+    f = S.get("Ice Fall")
+    a = f["system"]["activities"]["XXqVRtHuHqkmPL8j"]
+    act(f, "XXqVRtHuHqkmPL8j", "attack", "Ice Fall (8 CE): shard at each chosen creature", "action",
+        range=_r(30), target={"affects": {"type": "enemy", "choice": True}, "override": True},
+        attack={"ability": "spellcasting", "bonus": "", "critical": {"threshold": None}, "flat": False, "type": {"value": "ranged", "classification": "spell"}},
+        damage={"includeBase": False, "parts": [dice(1, 10, ["cold"])]})
+    a = f["system"]["activities"]["XXqVRtHuHqkmPL8j"]
+    a["effects"] = [{"_id": "zHG47wYGd8WKGahy", "onSave": False}]
+    ot_save(f, "zHG47wYGd8WKGahy", "str", "Ice Fall", rounds=600)
+    sp = act(f, "spikes", "save", "Falling spikes (DEX, hit or miss)", "special",
+             save={"ability": ["dex"], "dc": {"calculation": "spellcasting", "formula": ""}},
+             damage={"onSave": "half", "parts": [dice(6, 8, ["cold"]), dice(6, 8, ["piercing"])]},
+             target={"affects": {"type": "enemy", "choice": True}, "override": True})
+    free(f, sp)
+    a.setdefault("midiProperties", {})
+    trigger(a, sp, "self")
+    a["midiProperties"]["triggeredActivityTargets"] = "targets"
+    me = act(f, "self", "utility", "You lie prone until your next turn", "special", range=RANGE_SELF, target=SELF)
+    apply(me, "izMKZvLQhIcYxIav")
+    for e in f["effects"]:
+        if e["_id"] == "izMKZvLQhIcYxIav": e.setdefault("flags", {}).setdefault("dae", {})["specialDuration"] = ["turnStart"]
+    free(f, me)
+    mark(f)
+
+    d = S.get("Domain Expansion: White Abyss")
+    b = d["system"]["activities"]["baNd4KsTqloG3jFL"]
+    b["name"] = "End of each turn: 10d8 cold + restrained"
+    b["target"] = {"affects": {"type": "enemy", "choice": False}, "override": True}
+    ot_save(d, "GQz8GKEdPn3HU1pM", "str", "White Abyss (Athletics)", rounds=1)
+    free(d, b)
+    mark(d)
+
+    hd = S.get("Heat Dissociation")
+    a = hd["system"]["activities"]["SzjOEAamhOfqhc6z"]
+    a["range"] = _r(30)
+    a["target"] = {"affects": {"type": "creature", "count": CEMOD, "choice": True}, "override": True}
+    a["damage"]["onSave"] = "half"
+    scale(hd, a, [[1, "8d10"], [18, "10d10"], [20, "16d10"]])
+    apply(a, fx(hd, "exh", "Boiled (exhaustion)", rounds=None, changes=[("system.attributes.exhaustion", 2, "1")]))
+    note(hd, "Damage also lowers max HP until a long rest (apply as HP max reduction).")
+    mark(hd)
+
+
+def idle_transfiguration(S):
+    t = S.get("Transfiguration")
+    a = t["system"]["activities"]["PDD97g8ETyVvBxYc"]
+    a["name"] = "Transfigure (1 CE): CON save"
+    a["range"], a["target"] = _r(5), one_creature()
+    a["damage"]["onSave"] = "half"
+    scale(t, a, [[1, "1d10"], [3, "2d10"], [6, "3d10"], [11, "4d10"], [18, "5d10"]])
+    touch = act(t, "touch", "damage", "Soul touch (+1d6 necrotic on unarmed/natural hit)", "special", target=one_creature(),
+                damage={"parts": [dice(1, 6, ["necrotic"])]})
+    touch["useConditionText"] = 'reaction === "isHit"'
+    free(t, touch)
+    note(t, "Necrotic from this technique lowers max HP until a long rest; at 0 HP the creature becomes a Transfigured Creature (not constructs).")
+    mark(t)
+
+    al = S.get("Alteration")
+    al["effects"] = [e for e in al["effects"] if e["_id"] != "AyyxRu9CmSsHVXWO"]
+    al["system"]["activities"] = {}
+    for key, nm, ch in [
+        ("sword", "Sword Arms", []),
+        ("spike", "Spike Hands", [("system.bonuses.mwak.damage", 2, "+ @prof")]),
+        ("shield", "Arm Shields", [("system.attributes.ac.bonus", 2, "+2")]),
+        ("long", "Long Arms", []),
+        ("wings", "Wings", [("system.attributes.movement.fly", 4, "@attributes.movement.walk")]),
+    ]:
+        x = act(al, key, "utility", f"Self-Alteration: {nm} (2 CE)", "bonus", range=RANGE_SELF, target=SELF)
+        apply(x, fx(al, key, nm, rounds=None, changes=ch, desc=f"{nm} (see the table for restrictions)."))
+        cost(al, x, 2)
+    ally = act(al, "ally", "utility", "Ally Alteration (rest)", "special", range=_r(5), target=one_creature())
+    free(al, ally)
+    note(al, "Wings' exact benefit: check the table (fly speed assumed = walking). Ally alterations: up to prof per creature.")
+    mark(al)
+
+    bc = S.get("Body Clone")
+    note(bc, "Duplicate your actor with half current/max HP and CE; it acts after you and can only use Self-Alteration.")
+    mark(bc)
+
+    sm = S.get("Soul Multiplicity")
+    a = sm["system"]["activities"]["Qa1Z5K8PGagni1yp"]
+    a["name"] = "Body Repel (5 CE, 2+ transfigured)"
+    a["range"] = {"value": "60", "long": "120", "units": "ft", "override": True}
+    a["target"] = one_creature()
+    a.setdefault("attack", {})["ability"] = "spellcasting"
+    a["damage"] = {"includeBase": False, "parts": [dice(4, 8, ["necrotic"], scale=1)]}
+    iso = act(sm, "iso", "utility", "Polymorphic Soul Isomer (5 CE, 1 minute)", "action", range=_r(5), target=SELF)
+    cost(sm, iso, 5)
+    note(sm, "Scale +1d8 per extra transfigured creature; split dice for extra attacks. Self-Alteration is free on your turn.")
+    mark(sm)
+
+    d = S.get("Domain Expansion: Self Embodiment of Perfection")
+    x = act(d, "init20", "save", "Initiative 20: double Transfiguration", "special",
+            save={"ability": ["con"], "dc": {"calculation": "spellcasting", "formula": ""}},
+            damage={"onSave": "half", "parts": [dice(10, 10, ["necrotic"])]},
+            target={"affects": {"type": "enemy", "choice": True}, "override": True})
+    free(d, x)
+    note(d, "10d10 = twice the 18th-level touch (5d10).")
+    mark(d)
+
+    ot = S.get("Object Transfiguration")
+    a = ot["system"]["activities"]
+    a["vEcHzLX4wvXVsrEe"]["name"] = "Transfigure object (1 CE per property, special 3)"
+    a["vEcHzLX4wvXVsrEe"]["activation"]["type"] = "bonus"
+    a["vEcHzLX4wvXVsrEe"]["range"] = _r(5)
+    cost(ot, a["vEcHzLX4wvXVsrEe"], 1, 1, "2 * @prof")
+    ssw = a["NkfJzYQfdGx0r59c"]
+    act(ot, "NkfJzYQfdGx0r59c", "save", "Soul Splitting Weapon (on hit, 4 CE)", "special",
+        save={"ability": ["con"], "dc": {"calculation": "spellcasting", "formula": ""}},
+        damage={"onSave": "half", "parts": [dice(3, 10, ["necrotic"])]}, target=one_creature())
+    a["NkfJzYQfdGx0r59c"]["useConditionText"] = 'reaction === "isHit"'
+    scale(ot, a["NkfJzYQfdGx0r59c"], [[1, "1d10"], [3, "2d10"], [6, "3d10"], [11, "4d10"], [18, "5d10"]])
+    mark(ot)
+
+
+def _sv(ab): return {"ability": [ab] if isinstance(ab, str) else ab, "dc": {"calculation": "spellcasting", "formula": ""}}
+
+
+def illusive_mirage(S):
+    ci = S.get("Cursed Illusion")
+    a = ci["system"]["activities"]["8hp6SOVXqIlsCq8r"]
+    a["range"] = _r(60)
+    a["target"] = {"affects": {"type": "creature", "count": "1", "choice": True}, "override": True}
+    a["damage"] = {"onSave": "none", "parts": []}
+    cost(ci, a, 2, 2, "2 * " + CEMOD)
+    apply(a, fx(ci, "curse", "Cursed Illusion", rounds=None,
+                changes=[("flags.midi-qol.OverTime", 0, "turn=end, saveAbility=cha, saveDC=JJKORIGINDC, label=Cursed Illusion")],
+                desc="Sees distorted faces; tracked up to 400 ft. At 6th: disadvantage on INT/WIS/CHA saves and loses concentration."))
+    conf = act(ci, "confuse", "save", "First distorted face: INT or confused", "special", target=one_creature(),
+               save=_sv("int"), damage={"onSave": "none", "parts": []})
+    apply(conf, fx(ci, "conf", "Confused (distorted face)", rounds=2, special=["turnEnd"],
+                   changes=[("flags.midi-qol.disadvantage.attack.all", 0, "1"), ("flags.midi-qol.disadvantage.ability.check.int", 0, "1"),
+                            ("flags.midi-qol.disadvantage.ability.check.wis", 0, "1"), ("flags.midi-qol.disadvantage.ability.check.cha", 0, "1")]))
+    free(ci, conf)
+    note(ci, "At 6th: up to CE mod targets (scale 2 CE each).")
+    mark(ci)
+
+    sd = S.get("Self Distortion")
+    a = sd["system"]["activities"]["yAE44QI4ejp7wB7M"]
+    act(sd, "yAE44QI4ejp7wB7M", "attack", "Phase Fist (3 CE): phantom attack at disadvantage", "special",
+        **_ce_melee(5, []))
+    a = sd["system"]["activities"]["yAE44QI4ejp7wB7M"]
+    a["attack"]["type"]["classification"] = "spell"
+    a["activation"]["condition"] = "Phantom misses: real attack doubles damage dice on hit. Phantom hits: real attack at advantage."
+    for key, nm, ch, rnd in [
+        ("blur", "Blurring (3 CE)", [("flags.midi-qol.grants.disadvantage.attack.all", 0, "1")], 10),
+        ("disguise", "Distorting Disguise (3 CE)", [], 600),
+    ]:
+        x = act(sd, key, "utility", nm, "action", range=RANGE_SELF, target=SELF)
+        apply(x, fx(sd, key, nm.split(" (")[0], rounds=rnd, changes=ch,
+                    desc="Lasts CE mod rounds (hours for the disguise); no effect on blindsight/truesight."))
+        cost(sd, x, 3)
+    mark(sd)
+
+    od = S.get("Object Distortion")
+    acts = od["system"]["activities"]
+    acts["KvPOGDenY3iIN2OO"]["name"] = "Bump into invisible object: 1d6, lose reaction"
+    acts["KvPOGDenY3iIN2OO"]["activation"]["type"] = "special"
+    acts["KvPOGDenY3iIN2OO"]["target"] = one_creature()
+    free(od, acts["KvPOGDenY3iIN2OO"])
+    dist = act(od, "distort", "utility", "Distort object (1–10 CE by size)", "action", range=_r(60), target=SELF)
+    cost(od, dist, 1, 1, "10")
+    acts["VjvgH7c9gYQjon71"]["name"] = "Make it invisible (+3 CE)"
+    note(od, "Tiny 1, Small 2, Medium 3, Large 4, Huge 6, Gargantuan 10 CE. Investigation vs your DC to discern.")
+    mark(od)
+
+    it = S.get("Illusive Terrain")
+    a = it["system"]["activities"]["nEXujY3lN2V10UUJ"]
+    a["range"], a["target"] = RANGE_SELF, sphere(150)
+    a["target"]["affects"]["type"] = "enemy"
+    apply(a, fx(it, "rough", "Illusive Terrain", rounds=10, changes=[("system.attributes.movement.all", 1, "0.5")],
+                desc="Rough Ground: movement costs double. Obstructing Illusion: Investigation/Perception vs your DC."))
+    mark(it)
+
+    d = S.get("Domain Expansion: House of Mirrors")
+    r = d["system"]["activities"]["YViYoxBURaJd434p"]
+    r["name"] = "Redirect an attack (roll for new target)"
+    r["useConditionText"] = 'reaction === "isAttacked"'
+    r["roll"] = {"formula": "1d(max(2, @scaling))", "name": "Redirect (1 = still you)", "prompt": True, "visible": True}
+    free(d, r)
+    il = act(d, "init20", "save", "Initiative 20: illusion on everyone (CHA)", "special", save=_sv("cha"),
+             damage={"onSave": "none", "parts": []}, target={"affects": {"type": "enemy", "choice": False}, "override": True})
+    apply(il, fx(d, "ill", "House of Mirrors illusion", rounds=10, desc="Under an illusion of the caster's choice."))
+    free(d, il)
+    mark(d)
+
+    m = S.get("Materialization")
+    a = m["system"]["activities"]["buy7xLUGiVd5thGC"]
+    act(m, "buy7xLUGiVd5thGC", "save", "Materialization (4 CE)", "action", save=_sv(["wis", "cha"]),
+        damage={"onSave": "none", "parts": []}, range=_r(60), target=one_creature())
+    apply(m["system"]["activities"]["buy7xLUGiVd5thGC"],
+          fx(m, "real", "Face distorted (real)", rounds=None,
+             changes=[("flags.midi-qol.disadvantage.ability.check.int", 0, "1"), ("flags.midi-qol.disadvantage.ability.check.wis", 0, "1"),
+                      ("flags.midi-qol.disadvantage.ability.check.cha", 0, "1"), ("flags.midi-qol.disadvantage.ability.save.int", 0, "1"),
+                      ("flags.midi-qol.disadvantage.ability.save.wis", 0, "1"), ("flags.midi-qol.disadvantage.ability.save.cha", 0, "1"),
+                      ("flags.midi-qol.OverTime", 0, "turn=end, saveAbility=wis|cha, saveDC=JJKORIGINDC, label=Materialization")]))
+    mark(m)
+
+
+def inverse(S):
+    iv = S.get("Inversion")
+    a = iv["system"]["activities"]
+    on = a["i2BRWdWmFvbiSpO7"]
+    on["name"] = "Activate Inverse (2 CE, 1 minute)"
+    on["range"], on["target"] = RANGE_SELF, SELF
+    apply(on, fx(iv, "on", "Inverse", rounds=10,
+                 desc="Threshold = prof × CE mod; limit = prof × CE score. Above threshold: take damage − threshold. "
+                      "Below: take limit − damage (unchanged if negative). Apply by hand."))
+    a["UWhXh7EE14xJwXs0"]["name"] = "Extend 1 minute (1 CE)"
+    calc = act(iv, "calc", "utility", "Show threshold and limit", "special", range=RANGE_SELF, target=SELF,
+               roll={"formula": f"@prof * {CEMOD}", "name": "Threshold (limit = prof × CE score)", "prompt": False, "visible": True})
+    free(iv, calc)
+    mark(iv)
+
+    for nm, txt in [("Extreme Opposites", "Below threshold: vulnerable; above: resistant (even vs bypass)."),
+                    ("Break the Strong", "Damaging save: advantage if the damage is above your threshold, disadvantage below.")]:
+        x = S.get(nm)
+        note(x, txt + " Resolve while Inverse is active.")
+        mark(x)
+
+    q = S.get("Quick Inversion")
+    r = q["system"]["activities"]["PGfjGscigHI5RyTB"]
+    r["name"] = "Activate/deactivate Inverse (reaction)"
+    r["useConditionText"] = 'reaction === "isDamaged"'
+    apply(r, fx(q, "on", "Inverse (quick)", rounds=10))
+    cost(q, r, 2)
+    note(q, "Extra Inverse-only reactions: ½ prof (prof at 18th).")
+    mark(q)
+
+    d = S.get("Domain Expansion: Synesthesia")
+    x = d["system"]["activities"]["ne7CBK5oUp34sNnZ"]
+    x["name"] = "Initiative 20: invert a sense (d4)"
+    x["target"] = {"affects": {"type": "enemy", "choice": True}, "override": True}
+    x["roll"] = {"formula": "1d4", "name": "Sense: 1 taste, 2 smell, 3 touch, 4 sight", "prompt": False, "visible": True}
+    free(d, x)
+    note(d, "Sight lost = blinded. CE check at end of its turn to recover. Inverse is free and unlimited in the domain.")
+    mark(d)
+
+    pi = S.get("Power Inversion")
+    a = pi["system"]["activities"]
+    a["2246Pp7cSYce93YC"]["range"], a["2246Pp7cSYce93YC"]["target"] = RANGE_SELF, SELF
+    apply(a["2246Pp7cSYce93YC"], fx(pi, "on", "Power Inversion", rounds=20,
+                                     desc="Your damage: above threshold → damage − threshold; below → + (limit − damage). Apply by hand."))
+    a["qIib3E8DkVWEhv4W"]["name"] = "Extend 2 minutes (2 CE)"
+    mark(pi)
+
+
+def laplaces_demon(S):
+    di = S.get("Demonic Intellect")
+    di["effects"] = [e for e in di["effects"] if e["_id"] != "aawCcIgVjHchOkj0"]
+    a = di["system"]["activities"]["d6TJzaH1XAfXpiJ0"]
+    a["range"], a["target"] = RANGE_SELF, SELF
+    apply(a, fx(di, "oc", "Overclocked", rounds=10,
+                changes=[("flags.midi-qol.advantage.ability.check.int", 0, "1"), ("system.attributes.ac.bonus", 2, "+ @abilities.int.mod"),
+                         ("system.abilities.dex.bonuses.save", 2, "+ @abilities.int.mod")],
+                desc="Advantage on INT checks, +INT to AC and DEX saves; 2 CE: take an action as a reaction."))
+    re_ = act(di, "react", "utility", "Action as a reaction (2 CE)", "reaction", range=RANGE_SELF, target=SELF)
+    cost(di, re_, 2)
+    mark(di)
+
+    fp = S.get("Future and Past")
+    a = fp["system"]["activities"]
+    fp["system"]["uses"] = {"max": "3", "spent": 0, "recovery": [{"period": "lr", "type": "recoverAll"}]}
+    roll = act(fp, "foretell", "utility", "Long rest: roll two foretelling d20s", "special", range=RANGE_SELF, target=SELF,
+               roll={"formula": "2d20", "name": "Foretelling rolls (record both)", "prompt": False, "visible": True})
+    free(fp, roll)
+    use = a["hSZWONcn4CVabFLO"]
+    use["name"] = "Replace a roll with a foretelling (1 CE)"
+    use["useConditionText"] = 'reaction === "isAttacked" || reaction === "isSave"'
+    use.setdefault("consumption", {"targets": [], "scaling": {"allowed": False}})["targets"].append(
+        {"type": "itemUses", "target": "", "value": "1", "scaling": {}})
+    a["5jJZwQ04W30INTzj"]["name"] = "Short rest: gain a foretelling roll (1 CE)"
+    a["5jJZwQ04W30INTzj"]["activation"]["type"] = "special"
+    a["5jJZwQ04W30INTzj"]["roll"] = {"formula": "1d20", "name": "Foretelling", "prompt": False, "visible": True}
+    note(fp, "Uses track foretelling rolls (2 per long rest + 1 from a short rest). Declare before the roll.")
+    mark(fp)
+
+    ov = S.get("Overload")
+    a = ov["system"]["activities"]["tS0tCzG54ZOcmyBA"]
+    a["range"], a["target"] = _r(5), one_creature()
+    a["damage"]["onSave"] = "half"
+    for e in ov["effects"]:
+        if e["_id"] == "N3FOtjwNCSdvcau5": e.setdefault("flags", {}).setdefault("dae", {})["specialDuration"] = ["turnEnd"]
+    mark(ov)
+
+    im = S.get("Imaginary Demon Brain")
+    a = im["system"]["activities"]["OrQWkPQeSEHnEua1"]
+    a["range"], a["target"] = RANGE_SELF, SELF
+    apply(a, fx(im, "brain", "Imaginary Demon Brain", rounds=600,
+                changes=[("flags.midi-qol.advantage.all", 0, "1"), ("flags.midi-qol.grants.disadvantage.attack.all", 0, "1")],
+                desc="All your rolls at advantage, rolls against you at disadvantage (attacks automated)."))
+    add = act(im, "add", "utility", "Add INT to a roll (reaction, 15 ft)", "reaction", range=_r(15), target=one_creature(),
+              roll={"formula": "@abilities.int.mod", "name": "Add to the roll", "prompt": False, "visible": True})
+    free(im, add)
+    mark(im)
+
+    d = S.get("Domain Expansion: Laplace Threshold")
+    x = act(d, "init20", "utility", "Initiative 20: −2 to all rolls vs you (stacks)", "special",
+            target={"affects": {"type": "enemy", "choice": True}, "override": True})
+    apply(x, fx(d, "pen", "Laplace Threshold −2", rounds=10,
+                changes=[("system.bonuses.mwak.attack", 2, "-2"), ("system.bonuses.rwak.attack", 2, "-2"),
+                         ("system.bonuses.msak.attack", 2, "-2"), ("system.bonuses.rsak.attack", 2, "-2"),
+                         ("system.bonuses.abilities.save", 2, "-2"),
+                         ("system.bonuses.abilities.check", 2, "-2")],
+                desc="−2 per application (stacks each initiative 20). Applies to all its rolls here — the RAW limits it to rolls against you."))
+    free(d, x)
+    note(d, "You know HP, CE, effects and defences of everyone inside; invisibility and hiding give no advantage against you.")
+    mark(d)
+
+    bf = S.get("Butterfly Effect")
+    b = bf["system"]["activities"]["GQncrWbMc9ZWG4DP"]
+    b["name"] = "Replace another creature's roll with a foretelling (2 CE)"
+    b["target"] = one_creature()
+    b["range"] = _r(60)
+    cost(bf, b, 2)
+    fail = act(bf, "fail", "utility", "It failed: disadvantage until end of its next turn", "special", target=one_creature())
+    apply(fail, fx(bf, "fail", "Butterfly (failed)", rounds=2, special=["turnEnd"],
+                   changes=[("flags.midi-qol.disadvantage.all", 0, "1")]))
+    free(bf, fail)
+    ok = act(bf, "ok", "utility", "It succeeded: advantage until end of its next turn", "special", target=one_creature())
+    apply(ok, fx(bf, "ok", "Butterfly (succeeded)", rounds=2, special=["turnEnd"], changes=[("flags.midi-qol.advantage.all", 0, "1")]))
+    free(bf, ok)
+    mark(bf)
+
+    ct = S.get("Chaos Theory")
+    a = ct["system"]["activities"]["Ovo9aSb2P8IrfR9F"]
+    a["range"], a["target"] = RANGE_SELF, SELF
+    a["useConditionText"] = "false"
+    apply(a, fx(ct, "chaos", "Chaos Theory", rounds=20,
+                changes=[("system.bonuses.mwak.attack", 2, "+ @abilities.int.mod"), ("system.bonuses.rwak.attack", 2, "+ @abilities.int.mod"),
+                         ("system.bonuses.msak.attack", 2, "+ @abilities.int.mod"), ("system.bonuses.rsak.attack", 2, "+ @abilities.int.mod")],
+                desc="Targets' AC −INT (as +INT to hit); advantage after a miss vs that creature; d4 forced bonus action each turn."))
+    d4 = act(ct, "d4", "utility", "Start of turn: chaos d4", "special", range=RANGE_SELF, target=SELF,
+             roll={"formula": "1d4", "name": "1 Hide · 2 Disengage · 3 Dash · 4 one melee attack", "prompt": False, "visible": True})
+    free(ct, d4)
+    mark(ct)
+
+
+def limitless(S):
+    inf = S.get("Infinity")
+    a = inf["system"]["activities"]
+    on = a["57UvuIahfVf5dojK"]
+    on["name"] = "Activate Infinity (1 CE, +1 CE per turn)"
+    on["range"], on["target"] = RANGE_SELF, SELF
+    apply(on, fx(inf, "on", "Infinity", rounds=None, desc="Each attack/spell/save from outside: d6 roll (4+ / 3+ at 6th / 2+ at 11th) to negate."))
+    chk = act(inf, "roll", "utility", "Infinity roll (d6)", "special", range=RANGE_SELF, target=SELF,
+              roll={"formula": "1d6", "name": "Infinity (≥ 4 / 3 / 2 negates)", "prompt": False, "visible": True})
+    chk["useConditionText"] = 'reaction === "isAttacked" || reaction === "isSave"'
+    free(inf, chk)
+    a["5U2nqwCaRX6vM4sS"]["name"] = "Upkeep / auto-6 (1 CE)"
+    a["5U2nqwCaRX6vM4sS"]["activation"]["type"] = "special"
+    r = a["bnixF7T8xqXctZ5h"]
+    r["name"] = "Auto-6 for the round / reactive Infinity (2 CE, 11th)"
+    r["useConditionText"] = 'reaction === "isAttacked"'
+    note(inf, "Dodge with Infinity: advantage on the d6 and share it within reach. No effect vs poison or unseen attacks before 6th.")
+    mark(inf)
+
+    lb = S.get("Lapse Blue")
+    a = lb["system"]["activities"]["0XCLedJf9yzGwtvr"]
+    a["name"] = "Lapse Blue (1+ CE): 5-ft pull radius per CE"
+    a["range"], a["target"] = _r(30), sphere(5)
+    a["damage"] = {"onSave": "half", "parts": [dice(2, 8, ["force"]), dice(1, 8, ["force"], scale=1)]}
+    cost(lb, a, 1, 1, CEMOD)
+    for e in lb["effects"]:
+        if e["_id"] == "YaBVmd9NLkY17soF": e["statuses"] = ["grappled"]; e["name"] = "Grappled (Lapse Blue)"
+    mv = act(lb, "move", "utility", "Maximum Output: move the sphere 30 ft", "bonus", range=RANGE_SELF, target=SELF)
+    free(lb, mv)
+    note(lb, "5+ CE: Maximum Output (concentration, 1 minute; save at turn start inside). At 11th: fail by 5+ = max damage and restrained.")
+    mark(lb)
+
+    tp = S.get("Teleportation")
+    a = tp["system"]["activities"]["JwvU7XUNyvApOkhe"]
+    a["name"] = "Teleport (10 ft per CE; ×2 for another creature)"
+    a["range"], a["target"] = _r(5), SELF
+    cost(tp, a, 1, 1, CEMOD)
+    circ = act(tp, "circle", "utility", "Teleport to a prepared circle (5 CE)", "action", range=_r(5), target=one_creature())
+    cost(tp, circ, 5)
+    mark(tp)
+
+    oi = S.get("Offensive Infinity")
+    a = oi["system"]["activities"]["080Ss5xCYIYFDac7"]
+    a["name"] = "Repel (CE up to mod): 10-ft burst, 2d8 per CE"
+    a["range"], a["target"] = RANGE_SELF, sphere(10)
+    a["target"]["affects"]["type"] = "enemy"
+    a["damage"] = {"onSave": "half", "parts": [dice(2, 8, ["force"], scale=2)]}
+    a["effects"] = []
+    cost(oi, a, 1, 1, CEMOD)
+    crush = act(oi, "crush", "save", "Crush against a wall (CE up to mod): 3d8 per CE", "action", save=_sv("str"),
+                damage={"onSave": "half", "parts": [dice(3, 8, ["force"], scale=3)]}, range=_r(5), target=one_creature())
+    apply(crush, "5qH2Hjd2KG8siwpn")
+    for e in oi["effects"]:
+        if e["_id"] == "5qH2Hjd2KG8siwpn":
+            e["changes"] = []
+            e.setdefault("flags", {}).setdefault("dae", {})["specialDuration"] = ["turnStartSource"]
+    cost(oi, crush, 1, 1, CEMOD)
+    mark(oi)
+
+    d = S.get("Domain Expansion: Unlimited Void")
+    a = d["system"]["activities"]["YFTe31UdxKjUNspy"]
+    a["name"] = "Initiative 20: Unlimited Void (INT)"
+    a["target"] = {"affects": {"type": "enemy", "choice": False}, "override": True}
+    a["damage"]["onSave"] = "none"
+    for e in d["effects"]:
+        if e["_id"] == "v6mp8UNvQDEABiC3":
+            e["duration"] = {"rounds": 10}
+            e["changes"] = [{"key": "system.abilities.int.value", "mode": 5, "value": "1", "priority": 30},
+                            {"key": "system.abilities.wis.value", "mode": 5, "value": "1", "priority": 30},
+                            {"key": "system.abilities.cha.value", "mode": 5, "value": "1", "priority": 30}]
+    free(d, a)
+    note(d, "Repeat the save every minute; Greater Restoration or Wish ends it. Creatures touching you are excluded.")
+    mark(d)
+
+    rr = S.get("Reversal Red")
+    a = rr["system"]["activities"]["douy3a4rcRjk6FVc"]
+    a["range"] = RANGE_SELF
+    a["target"] = sphere("15 + 15 * floor(min(@details.level, 11) / 11)", kind="cone")
+    a["damage"] = {"onSave": "half", "parts": [dice(4, 8, ["force"]), dice(2, 8, ["force"], scale=2)]}
+    cost(rr, a, 2, 2, "2 * " + CEMOD)
+    rr["system"]["activities"]["ZiuBeW7MdsFDONgb"]["name"] = "Impact: remaining launch distance as falling damage + prone"
+    note(rr, "Launched 20 ft per 2 CE (half on save).")
+    mark(rr)
+
+
 TECHNIQUES = {"Antigravity System": antigravity_system,
               "Auspicious Beast Summon": auspicious_beast_summon,
               "Black Bird Manipulation": black_bird_manipulation,
@@ -3218,7 +3748,14 @@ TECHNIQUES = {"Antigravity System": antigravity_system,
               "Fate": fate,
               "G Warstaff": g_warstaff,
               "Golden Hour": golden_hour,
-              "Hair Manipulation": hair_manipulation}
+              "Hair Manipulation": hair_manipulation,
+              "Heart Catch": heart_catch,
+              "Ice Formation": ice_formation,
+              "Idle Transfiguration": idle_transfiguration,
+              "Illusive Mirage": illusive_mirage,
+              "Inverse": inverse,
+              "Laplace’s Demon": laplaces_demon,
+              "Limitless": limitless}
 
 if __name__ == "__main__":
     args = sys.argv[1:]

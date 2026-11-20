@@ -19,14 +19,159 @@
    "value": "class",
    "subtype": ""
   },
-  "requirements": "Ice Formation 3"
+  "requirements": "Ice Formation 3",
+  "activities": {
+   "as20Fg7AuXeK3y2C": {
+    "_id": "as20Fg7AuXeK3y2C",
+    "type": "utility",
+    "name": "Encased: 1 exhaustion while in ice",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "gZLXVLVWhqBZkc83",
+      "onSave": false
+     }
+    ]
+   },
+   "zrOfmGBQVbNaPC6w": {
+    "_id": "zrOfmGBQVbNaPC6w",
+    "type": "utility",
+    "name": "Near ice: speed halved",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "dlOHmn7Lh5s5PJ9n",
+      "onSave": false
+     }
+    ]
+   }
+  }
  },
  "flags": {
   "jjk5e": {
    "technique": "Ice Formation",
-   "level": 3
+   "level": 3,
+   "automation": "automated"
   }
  },
  "folder": "w9n29Anzntr6P6uo",
- "_key": "!items!wMJNs3CHZKwHhs28"
+ "_key": "!items!wMJNs3CHZKwHhs28",
+ "effects": [
+  {
+   "_id": "gZLXVLVWhqBZkc83",
+   "name": "Extreme Cold (in ice)",
+   "img": "modules/jjk5e/icons/techniques/ice-formation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>One level of exhaustion while inside your ice; remove when freed.</p>",
+   "changes": [
+    {
+     "key": "system.attributes.exhaustion",
+     "mode": 2,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Ice Formation"
+    }
+   },
+   "_key": "!items.effects!wMJNs3CHZKwHhs28.gZLXVLVWhqBZkc83"
+  },
+  {
+   "_id": "dlOHmn7Lh5s5PJ9n",
+   "name": "Extreme Cold (near ice)",
+   "img": "modules/jjk5e/icons/techniques/ice-formation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Within 5 ft of your ice without cold resistance/immunity.</p>",
+   "changes": [
+    {
+     "key": "system.attributes.movement.all",
+     "mode": 1,
+     "value": "0.5",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Ice Formation"
+    }
+   },
+   "_key": "!items.effects!wMJNs3CHZKwHhs28.dlOHmn7Lh5s5PJ9n"
+  }
+ ]
 }

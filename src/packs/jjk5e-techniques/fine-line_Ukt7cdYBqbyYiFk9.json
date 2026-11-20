@@ -38,7 +38,8 @@
      }
     },
     "range": {
-     "units": "self"
+     "units": "self",
+     "override": true
     },
     "target": {
      "template": {
@@ -51,7 +52,8 @@
      "affects": {
       "type": "creature",
       "choice": false
-     }
+     },
+     "override": true
     },
     "duration": {
      "value": "1",
@@ -115,7 +117,8 @@
       "Heart Catch"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "effects": [
@@ -130,14 +133,13 @@
     {
      "key": "flags.midi-qol.OverTime",
      "mode": 0,
-     "value": "turn=end, saveAbility=dex, saveDC=JJKORIGINDC, saveCount=1-, label=\"Frightened (Fine Line)\"",
-     "priority": 20
+     "priority": 20,
+     "value": "turn=end, saveAbility=wis, saveDC=JJKORIGINDC, label=Fine Line"
     }
    ],
    "transfer": false,
    "disabled": false,
    "duration": {
-    "seconds": 60,
     "rounds": 10
    },
    "description": "",

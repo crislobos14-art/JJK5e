@@ -19,7 +19,7 @@
    "Qa1Z5K8PGagni1yp": {
     "_id": "Qa1Z5K8PGagni1yp",
     "type": "attack",
-    "name": "Action (5 CE)",
+    "name": "Body Repel (5 CE, 2+ transfigured)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -36,10 +36,16 @@
     },
     "range": {
      "value": "60",
+     "long": "120",
      "units": "ft",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -77,6 +83,43 @@
       }
      ]
     }
+   },
+   "DkMPUGZUeB2uIync": {
+    "_id": "DkMPUGZUeB2uIync",
+    "type": "utility",
+    "name": "Polymorphic Soul Isomer (5 CE, 1 minute)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
    }
   },
   "uses": {
@@ -116,11 +159,14 @@
  "flags": {
   "jjk5e": {
    "ceCosts": {
-    "Qa1Z5K8PGagni1yp": 5
+    "Qa1Z5K8PGagni1yp": 5,
+    "DkMPUGZUeB2uIync": 5
    },
    "technique": "Idle Transfiguration",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Scale +1d8 per extra transfigured creature; split dice for extra attacks. Self-Alteration is free on your turn.",
+   "automation": "automated"
   }
  },
  "folder": "sz7xFTLSgxx5bxtq",

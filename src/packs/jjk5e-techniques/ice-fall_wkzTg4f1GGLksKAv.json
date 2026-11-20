@@ -18,9 +18,10 @@
   "activities": {
    "XXqVRtHuHqkmPL8j": {
     "_id": "XXqVRtHuHqkmPL8j",
-    "type": "save",
-    "name": "Action (8 CE)",
+    "type": "attack",
+    "name": "Ice Fall (8 CE): shard at each chosen creature",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "action",
      "value": 1,
@@ -30,9 +31,14 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
      "value": "30",
@@ -41,26 +47,31 @@
     },
     "target": {
      "affects": {
-      "type": "creature",
-      "count": "1"
+      "type": "enemy",
+      "choice": true
      },
      "override": true
     },
-    "duration": {
-     "units": "inst",
-     "override": true
-    },
-    "save": {
-     "ability": [
-      "str"
-     ],
-     "dc": {
-      "calculation": "spellcasting",
-      "formula": ""
+    "effects": [
+     {
+      "_id": "zHG47wYGd8WKGahy",
+      "onSave": false
+     }
+    ],
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
      }
     },
     "damage": {
-     "onSave": "half",
+     "includeBase": false,
      "parts": [
       {
        "number": 1,
@@ -73,19 +84,133 @@
         "enabled": false,
         "formula": ""
        },
-       "scaling": {
-        "number": 1
-       }
+       "scaling": {}
       }
      ]
+    },
+    "midiProperties": {
+     "triggeredActivityId": "LsRo0cW9YBIw7HaO",
+     "triggeredActivityTargets": "targets",
+     "triggeredActivityRollAs": "self",
+     "triggeredActivityConsume": false,
+     "triggeredActivityConfigure": false,
+     "triggeredActivityConditionText": ""
+    }
+   },
+   "LsRo0cW9YBIw7HaO": {
+    "_id": "LsRo0cW9YBIw7HaO",
+    "type": "save",
+    "name": "Falling spikes (DEX, hit or miss)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "enemy",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 6,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "cold"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      },
+      {
+       "number": 6,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "piercing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
+   },
+   "iMqM4obQixmE8gs3": {
+    "_id": "iMqM4obQixmE8gs3",
+    "type": "utility",
+    "name": "You lie prone until your next turn",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
     },
     "effects": [
      {
       "_id": "izMKZvLQhIcYxIav",
-      "onSave": false
-     },
-     {
-      "_id": "zHG47wYGd8WKGahy",
       "onSave": false
      }
     ]
@@ -138,7 +263,8 @@
    },
    "technique": "Ice Formation",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "effects": [
@@ -159,6 +285,11 @@
    "flags": {
     "jjk5e": {
      "condition": "prone"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStart"
+     ]
     }
    },
    "_key": "!items.effects!wkzTg4f1GGLksKAv.izMKZvLQhIcYxIav"
@@ -170,11 +301,18 @@
    "statuses": [
     "restrained"
    ],
-   "changes": [],
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "priority": 20,
+     "value": "turn=start, saveAbility=str, saveDC=JJKORIGINDC, label=Ice Fall"
+    }
+   ],
    "transfer": false,
    "disabled": false,
    "duration": {
-    "rounds": 1
+    "rounds": 600
    },
    "description": "",
    "flags": {

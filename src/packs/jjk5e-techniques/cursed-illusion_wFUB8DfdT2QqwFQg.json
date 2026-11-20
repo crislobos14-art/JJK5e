@@ -30,7 +30,8 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "2 * max(@abilities.wis.mod, @abilities.cha.mod)"
      },
      "spellSlot": false
     },
@@ -42,7 +43,8 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
@@ -53,6 +55,68 @@
     "save": {
      "ability": [
       "cha"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    },
+    "effects": [
+     {
+      "_id": "giVE7QR5TwgxrbHP",
+      "onSave": false
+     }
+    ]
+   },
+   "WTbI0HD6VnsdAhLu": {
+    "_id": "WTbI0HD6VnsdAhLu",
+    "type": "save",
+    "name": "First distorted face: INT or confused",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "J8fOz9SCYztDiIre",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "int"
      ],
      "dc": {
       "calculation": "spellcasting",
@@ -112,9 +176,93 @@
    },
    "technique": "Illusive Mirage",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceSteps": {
+    "8hp6SOVXqIlsCq8r": 2
+   },
+   "automationNotes": "At 6th: up to CE mod targets (scale 2 CE each).",
+   "automation": "automated"
   }
  },
  "folder": "8b1T5CIAvTiipny3",
- "_key": "!items!wFUB8DfdT2QqwFQg"
+ "_key": "!items!wFUB8DfdT2QqwFQg",
+ "effects": [
+  {
+   "_id": "giVE7QR5TwgxrbHP",
+   "name": "Cursed Illusion",
+   "img": "modules/jjk5e/icons/techniques/illusive-mirage.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Sees distorted faces; tracked up to 400 ft. At 6th: disadvantage on INT/WIS/CHA saves and loses concentration.</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "value": "turn=end, saveAbility=cha, saveDC=JJKORIGINDC, label=Cursed Illusion",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Illusive Mirage"
+    }
+   },
+   "_key": "!items.effects!wFUB8DfdT2QqwFQg.giVE7QR5TwgxrbHP"
+  },
+  {
+   "_id": "J8fOz9SCYztDiIre",
+   "name": "Confused (distorted face)",
+   "img": "modules/jjk5e/icons/techniques/illusive-mirage.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.disadvantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.disadvantage.ability.check.int",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.disadvantage.ability.check.wis",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.disadvantage.ability.check.cha",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 2
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Illusive Mirage"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnEnd"
+     ]
+    }
+   },
+   "_key": "!items.effects!wFUB8DfdT2QqwFQg.J8fOz9SCYztDiIre"
+  }
+ ]
 }

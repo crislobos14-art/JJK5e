@@ -19,7 +19,7 @@
    "ne7CBK5oUp34sNnZ": {
     "_id": "ne7CBK5oUp34sNnZ",
     "type": "utility",
-    "name": "Special",
+    "name": "Initiative 20: invert a sense (d4)",
     "sort": 0,
     "activation": {
      "type": "special",
@@ -39,11 +39,21 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "enemy",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
+    },
+    "roll": {
+     "formula": "1d4",
+     "name": "Sense: 1 taste, 2 smell, 3 touch, 4 sight",
+     "prompt": false,
+     "visible": true
     }
    },
    "lIx4cq4Ebxtoix4e": {
@@ -146,7 +156,9 @@
     "lIx4cq4Ebxtoix4e": 20
    },
    "domainActivity": "lIx4cq4Ebxtoix4e",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Sight lost = blinded. CE check at end of its turn to recover. Inverse is free and unlimited in the domain.",
+   "automation": "automated"
   }
  },
  "folder": "bh2ZyC5GSVoaToIo",

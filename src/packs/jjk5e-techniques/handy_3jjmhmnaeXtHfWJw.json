@@ -19,7 +19,7 @@
    "ZFV8r0xzxQdNPza1": {
     "_id": "ZFV8r0xzxQdNPza1",
     "type": "utility",
-    "name": "Special",
+    "name": "Grappled by a hand: restrained",
     "sort": 0,
     "activation": {
      "type": "special",
@@ -39,6 +39,11 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -90,7 +95,8 @@
   "jjk5e": {
    "technique": "Heart Catch",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "effects": [

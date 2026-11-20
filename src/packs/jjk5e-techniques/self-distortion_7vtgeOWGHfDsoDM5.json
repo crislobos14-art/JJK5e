@@ -19,20 +19,26 @@
    "yAE44QI4ejp7wB7M": {
     "_id": "yAE44QI4ejp7wB7M",
     "type": "attack",
-    "name": "Action (3 CE)",
+    "name": "Phase Fist (3 CE): phantom attack at disadvantage",
     "sort": 0,
+    "img": null,
     "activation": {
-     "type": "action",
-     "value": 1,
-     "condition": "",
+     "type": "special",
+     "value": null,
+     "condition": "Phantom misses: real attack doubles damage dice on hit. Phantom hits: real attack at advantage.",
      "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
      "value": "5",
@@ -40,15 +46,20 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
-    "duration": {
-     "units": "inst",
-     "override": true
-    },
+    "effects": [],
     "attack": {
      "ability": "spellcasting",
      "bonus": "",
+     "critical": {
+      "threshold": null
+     },
      "flat": false,
      "type": {
       "value": "melee",
@@ -59,6 +70,88 @@
      "includeBase": false,
      "parts": []
     }
+   },
+   "crPRHlSaGiW6728C": {
+    "_id": "crPRHlSaGiW6728C",
+    "type": "utility",
+    "name": "Blurring (3 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "123TUae5DeH2hHa4",
+      "onSave": false
+     }
+    ]
+   },
+   "EKhNt4g3dkDawmBW": {
+    "_id": "EKhNt4g3dkDawmBW",
+    "type": "utility",
+    "name": "Distorting Disguise (3 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "SulKwXQShjRhy0dx",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -97,13 +190,65 @@
  "flags": {
   "jjk5e": {
    "ceCosts": {
-    "yAE44QI4ejp7wB7M": 3
+    "yAE44QI4ejp7wB7M": 3,
+    "crPRHlSaGiW6728C": 3,
+    "EKhNt4g3dkDawmBW": 3
    },
    "technique": "Illusive Mirage",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "8b1T5CIAvTiipny3",
- "_key": "!items!7vtgeOWGHfDsoDM5"
+ "_key": "!items!7vtgeOWGHfDsoDM5",
+ "effects": [
+  {
+   "_id": "123TUae5DeH2hHa4",
+   "name": "Blurring",
+   "img": "modules/jjk5e/icons/techniques/illusive-mirage.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Lasts CE mod rounds (hours for the disguise); no effect on blindsight/truesight.</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.grants.disadvantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Illusive Mirage"
+    }
+   },
+   "_key": "!items.effects!7vtgeOWGHfDsoDM5.123TUae5DeH2hHa4"
+  },
+  {
+   "_id": "SulKwXQShjRhy0dx",
+   "name": "Distorting Disguise",
+   "img": "modules/jjk5e/icons/techniques/illusive-mirage.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Lasts CE mod rounds (hours for the disguise); no effect on blindsight/truesight.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 600
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Illusive Mirage"
+    }
+   },
+   "_key": "!items.effects!7vtgeOWGHfDsoDM5.SulKwXQShjRhy0dx"
+  }
+ ]
 }

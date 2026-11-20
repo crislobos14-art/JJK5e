@@ -24,21 +24,24 @@
    "vEcHzLX4wvXVsrEe": {
     "_id": "vEcHzLX4wvXVsrEe",
     "type": "utility",
-    "name": "Action (3 CE)",
+    "name": "Transfigure object (1 CE per property, special 3)",
     "sort": 0,
     "activation": {
-     "type": "action",
+     "type": "bonus",
      "value": 1,
      "condition": ""
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "2 * @prof"
      }
     },
     "range": {
-     "units": "self"
+     "value": "5",
+     "units": "ft",
+     "override": true
     },
     "target": {},
     "duration": {
@@ -47,34 +50,76 @@
    },
    "NkfJzYQfdGx0r59c": {
     "_id": "NkfJzYQfdGx0r59c",
-    "type": "utility",
-    "name": "Action (4 CE)",
-    "sort": 100000,
+    "type": "save",
+    "name": "Soul Splitting Weapon (on hit, 4 CE)",
+    "sort": 0,
+    "img": null,
     "activation": {
-     "type": "action",
-     "value": 1,
-     "condition": ""
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
-     }
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
-     "units": "self"
+     "units": "spec",
+     "override": true
     },
-    "target": {},
-    "duration": {
-     "units": "inst"
-    }
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 3,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    },
+    "useConditionText": "reaction === \"isHit\""
    }
   }
  },
  "flags": {
   "jjk5e": {
    "ceCosts": {
-    "vEcHzLX4wvXVsrEe": 3,
+    "vEcHzLX4wvXVsrEe": 1,
     "NkfJzYQfdGx0r59c": 4
    },
    "technique": "Idle Transfiguration",
@@ -91,7 +136,35 @@
       "Idle Transfiguration"
      ]
     ]
-   }
+   },
+   "ceSteps": {
+    "vEcHzLX4wvXVsrEe": 1
+   },
+   "dmgScale": {
+    "NkfJzYQfdGx0r59c": [
+     [
+      1,
+      "1d10"
+     ],
+     [
+      3,
+      "2d10"
+     ],
+     [
+      6,
+      "3d10"
+     ],
+     [
+      11,
+      "4d10"
+     ],
+     [
+      18,
+      "5d10"
+     ]
+    ]
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",

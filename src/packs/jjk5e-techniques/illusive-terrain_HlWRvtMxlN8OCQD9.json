@@ -47,7 +47,7 @@
       "contiguous": false
      },
      "affects": {
-      "type": "creature",
+      "type": "enemy",
       "choice": false
      },
      "override": true
@@ -55,7 +55,13 @@
     "duration": {
      "units": "inst",
      "override": true
-    }
+    },
+    "effects": [
+     {
+      "_id": "afw3KfGb3eQaEoFj",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -111,9 +117,39 @@
    },
    "technique": "Illusive Mirage",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "8b1T5CIAvTiipny3",
- "_key": "!items!HlWRvtMxlN8OCQD9"
+ "_key": "!items!HlWRvtMxlN8OCQD9",
+ "effects": [
+  {
+   "_id": "afw3KfGb3eQaEoFj",
+   "name": "Illusive Terrain",
+   "img": "modules/jjk5e/icons/techniques/illusive-mirage.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Rough Ground: movement costs double. Obstructing Illusion: Investigation/Perception vs your DC.</p>",
+   "changes": [
+    {
+     "key": "system.attributes.movement.all",
+     "mode": 1,
+     "value": "0.5",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Illusive Mirage"
+    }
+   },
+   "_key": "!items.effects!HlWRvtMxlN8OCQD9.afw3KfGb3eQaEoFj"
+  }
+ ]
 }

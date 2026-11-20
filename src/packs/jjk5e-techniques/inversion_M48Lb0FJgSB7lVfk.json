@@ -19,7 +19,7 @@
    "i2BRWdWmFvbiSpO7": {
     "_id": "i2BRWdWmFvbiSpO7",
     "type": "utility",
-    "name": "Bonus Action (2 CE)",
+    "name": "Activate Inverse (2 CE, 1 minute)",
     "sort": 0,
     "activation": {
      "type": "bonus",
@@ -39,6 +39,9 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
@@ -46,12 +49,18 @@
      "units": "minute",
      "concentration": false,
      "override": true
-    }
+    },
+    "effects": [
+     {
+      "_id": "WH2JLvJxWX8m4nvb",
+      "onSave": false
+     }
+    ]
    },
    "UWhXh7EE14xJwXs0": {
     "_id": "UWhXh7EE14xJwXs0",
     "type": "utility",
-    "name": "Action (1 CE)",
+    "name": "Extend 1 minute (1 CE)",
     "sort": 100000,
     "activation": {
      "type": "action",
@@ -76,6 +85,48 @@
     "duration": {
      "units": "inst",
      "override": true
+    }
+   },
+   "kJYCqnEBoZM0ZgqQ": {
+    "_id": "kJYCqnEBoZM0ZgqQ",
+    "type": "utility",
+    "name": "Show threshold and limit",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "roll": {
+     "formula": "@prof * max(@abilities.wis.mod, @abilities.cha.mod)",
+     "name": "Threshold (limit = prof × CE score)",
+     "prompt": false,
+     "visible": true
     }
    }
   },
@@ -121,9 +172,32 @@
    },
    "technique": "Inverse",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "bh2ZyC5GSVoaToIo",
- "_key": "!items!M48Lb0FJgSB7lVfk"
+ "_key": "!items!M48Lb0FJgSB7lVfk",
+ "effects": [
+  {
+   "_id": "WH2JLvJxWX8m4nvb",
+   "name": "Inverse",
+   "img": "modules/jjk5e/icons/techniques/inverse.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Threshold = prof × CE mod; limit = prof × CE score. Above threshold: take damage − threshold. Below: take limit − damage (unchanged if negative). Apply by hand.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Inverse"
+    }
+   },
+   "_key": "!items.effects!M48Lb0FJgSB7lVfk.WH2JLvJxWX8m4nvb"
+  }
+ ]
 }

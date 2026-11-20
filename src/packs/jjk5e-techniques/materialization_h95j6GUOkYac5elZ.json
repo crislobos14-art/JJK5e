@@ -23,26 +23,60 @@
   "activities": {
    "buy7xLUGiVd5thGC": {
     "_id": "buy7xLUGiVd5thGC",
-    "type": "utility",
-    "name": "Action (4 CE)",
+    "type": "save",
+    "name": "Materialization (4 CE)",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "action",
      "value": 1,
-     "condition": ""
+     "condition": "",
+     "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
-     }
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
-     "units": "self"
+     "value": "60",
+     "units": "ft",
+     "override": true
     },
-    "target": {},
-    "duration": {
-     "units": "inst"
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "LFRlP6bmX4hYvzRy",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "wis",
+      "cha"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
     }
    }
   }
@@ -66,10 +100,76 @@
       "Illusive Mirage"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!h95j6GUOkYac5elZ"
+ "_key": "!items!h95j6GUOkYac5elZ",
+ "effects": [
+  {
+   "_id": "LFRlP6bmX4hYvzRy",
+   "name": "Face distorted (real)",
+   "img": "modules/jjk5e/icons/techniques/illusive-mirage.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.disadvantage.ability.check.int",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.disadvantage.ability.check.wis",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.disadvantage.ability.check.cha",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.disadvantage.ability.save.int",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.disadvantage.ability.save.wis",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.disadvantage.ability.save.cha",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "value": "turn=end, saveAbility=wis|cha, saveDC=JJKORIGINDC, label=Materialization",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Illusive Mirage"
+    }
+   },
+   "_key": "!items.effects!h95j6GUOkYac5elZ.LFRlP6bmX4hYvzRy"
+  }
+ ]
 }

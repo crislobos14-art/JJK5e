@@ -19,14 +19,96 @@
    "value": "class",
    "subtype": ""
   },
-  "requirements": "Heart Catch 6"
+  "requirements": "Heart Catch 6",
+  "activities": {
+   "t53HbueGk1VDDjdT": {
+    "_id": "t53HbueGk1VDDjdT",
+    "type": "utility",
+    "name": "Guard a creature (¾ cover)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "15",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "ELKRtzBcgPJAK1j0",
+      "onSave": false
+     }
+    ]
+   }
+  }
  },
  "flags": {
   "jjk5e": {
    "technique": "Heart Catch",
-   "level": 6
+   "level": 6,
+   "automation": "automated"
   }
  },
  "folder": "AAtWazy4xXecJci4",
- "_key": "!items!OFmBZhtl0SCMuKe9"
+ "_key": "!items!OFmBZhtl0SCMuKe9",
+ "effects": [
+  {
+   "_id": "ELKRtzBcgPJAK1j0",
+   "name": "Hand Shield",
+   "img": "modules/jjk5e/icons/techniques/heart-catch.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Three-quarters cover (+5 AC/DEX saves). Half cover if each hand guards someone (edit to +2).</p>",
+   "changes": [
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+5",
+     "priority": 20
+    },
+    {
+     "key": "system.abilities.dex.bonuses.save",
+     "mode": 2,
+     "value": "+5",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Heart Catch"
+    }
+   },
+   "_key": "!items.effects!OFmBZhtl0SCMuKe9.ELKRtzBcgPJAK1j0"
+  }
+ ]
 }

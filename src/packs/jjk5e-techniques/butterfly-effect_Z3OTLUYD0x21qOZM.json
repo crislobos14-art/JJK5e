@@ -24,7 +24,7 @@
    "GQncrWbMc9ZWG4DP": {
     "_id": "GQncrWbMc9ZWG4DP",
     "type": "utility",
-    "name": "Reaction",
+    "name": "Replace another creature's roll with a foretelling (2 CE)",
     "sort": 0,
     "activation": {
      "type": "reaction",
@@ -38,13 +38,108 @@
      }
     },
     "range": {
-     "units": "self"
+     "value": "60",
+     "units": "ft",
+     "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
     },
     "useConditionText": "false"
+   },
+   "bbjxjKp83MOyIgaC": {
+    "_id": "bbjxjKp83MOyIgaC",
+    "type": "utility",
+    "name": "It failed: disadvantage until end of its next turn",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "Tn4wlrDhlULd2CBB",
+      "onSave": false
+     }
+    ]
+   },
+   "hcfBJYAIPTCaSMVb": {
+    "_id": "hcfBJYAIPTCaSMVb",
+    "type": "utility",
+    "name": "It succeeded: advantage until end of its next turn",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "zjyJHRpKAUoaUPXS",
+      "onSave": false
+     }
+    ]
    }
   }
  },
@@ -65,10 +160,80 @@
      ]
     ],
     "level": 3
-   }
+   },
+   "ceCosts": {
+    "GQncrWbMc9ZWG4DP": 2
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 10,
- "_key": "!items!Z3OTLUYD0x21qOZM"
+ "_key": "!items!Z3OTLUYD0x21qOZM",
+ "effects": [
+  {
+   "_id": "Tn4wlrDhlULd2CBB",
+   "name": "Butterfly (failed)",
+   "img": "modules/jjk5e/icons/techniques/laplace-s-demon.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.disadvantage.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 2
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Laplace’s Demon"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnEnd"
+     ]
+    }
+   },
+   "_key": "!items.effects!Z3OTLUYD0x21qOZM.Tn4wlrDhlULd2CBB"
+  },
+  {
+   "_id": "zjyJHRpKAUoaUPXS",
+   "name": "Butterfly (succeeded)",
+   "img": "modules/jjk5e/icons/techniques/laplace-s-demon.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.advantage.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 2
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Laplace’s Demon"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnEnd"
+     ]
+    }
+   },
+   "_key": "!items.effects!Z3OTLUYD0x21qOZM.zjyJHRpKAUoaUPXS"
+  }
+ ]
 }
