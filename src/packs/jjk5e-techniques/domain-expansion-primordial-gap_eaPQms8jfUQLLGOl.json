@@ -58,6 +58,62 @@
      "concentration": false,
      "override": true
     }
+   },
+   "vJFw7kvlXzTZ6owY": {
+    "_id": "vJFw7kvlXzTZ6owY",
+    "type": "save",
+    "name": "Initiative 20: three Perfect Cubes",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "3",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "ym4VJRfxjUwJcipo",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
    }
   },
   "uses": {
@@ -116,9 +172,32 @@
     "lhfTwYPZ1WPJEfRp": 20
    },
    "domainActivity": "lhfTwYPZ1WPJEfRp",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "h65v183tFsULjQrb",
- "_key": "!items!eaPQms8jfUQLLGOl"
+ "_key": "!items!eaPQms8jfUQLLGOl",
+ "effects": [
+  {
+   "_id": "ym4VJRfxjUwJcipo",
+   "name": "Trapped in a Perfect Cube",
+   "img": "modules/jjk5e/icons/techniques/black-box-domain.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Trapped in a Perfect Cube with reinforcements up to the caster's CE modifier, until the domain ends. Cube: AC = your CE save DC + 5 (+1 per 2 reinforcements), HP = proficiency × 2 × CE modifier (+10 per reinforcement), immune to psychic and poison; −1 damage taken per reinforcement.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Black Box"
+    }
+   },
+   "_key": "!items.effects!eaPQms8jfUQLLGOl.ym4VJRfxjUwJcipo"
+  }
+ ]
 }

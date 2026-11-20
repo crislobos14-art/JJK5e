@@ -75,7 +75,9 @@
    },
    "technique": "Black Box",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Spend with Dark Cube: the cube (not you) resists all damage and ignores abilities that would destroy, see into or invade it. Counts as 5 reinforcements.",
+   "automation": "automated"
   }
  },
  "folder": "h65v183tFsULjQrb",

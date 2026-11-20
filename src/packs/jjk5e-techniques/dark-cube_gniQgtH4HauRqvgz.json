@@ -19,7 +19,7 @@
    "UNgkJB1hNYCx1HyF": {
     "_id": "UNgkJB1hNYCx1HyF",
     "type": "save",
-    "name": "Action (2 CE)",
+    "name": "Action (2+ CE)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -30,7 +30,8 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "max(@abilities.wis.mod, @abilities.cha.mod)"
      },
      "spellSlot": false
     },
@@ -40,16 +41,22 @@
      "override": true
     },
     "target": {
+     "template": {
+      "type": "cube",
+      "size": "10",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
      "affects": {
       "type": "creature",
-      "count": "1"
+      "choice": false
      },
      "override": true
     },
     "duration": {
      "value": "1",
      "units": "minute",
-     "concentration": false,
      "override": true
     },
     "save": {
@@ -121,13 +128,18 @@
    },
    "technique": "Black Box",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceSteps": {
+    "UNgkJB1hNYCx1HyF": 1
+   },
+   "automationNotes": "Extra CE = reinforcements (Black Box Reinforcement, up to your CE modifier; twice at 11th). Cube: AC = your CE save DC + 5 (+1 per 2 reinforcements), HP = proficiency × 2 × CE modifier (+10 per reinforcement), immune to psychic and poison; −1 damage taken per reinforcement.",
+   "automation": "automated"
   }
  },
  "effects": [
   {
    "_id": "FC6A5IxdtB0bgbYq",
-   "name": "Blinded (Dark Cube)",
+   "name": "Trapped in Dark Cube",
    "img": "modules/jjk5e/icons/techniques/black-box.svg",
    "statuses": [
     "blinded"
@@ -136,10 +148,9 @@
    "transfer": false,
    "disabled": false,
    "duration": {
-    "seconds": 60,
     "rounds": 10
    },
-   "description": "",
+   "description": "<p>Trapped inside the cube: full cover against attacks from outside; blinded unless there is a light inside. Cube: AC = your CE save DC + 5 (+1 per 2 reinforcements), HP = proficiency × 2 × CE modifier (+10 per reinforcement), immune to psychic and poison; −1 damage taken per reinforcement.</p>",
    "flags": {
     "jjk5e": {
      "condition": "blinded"

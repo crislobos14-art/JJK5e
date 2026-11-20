@@ -26,32 +26,173 @@
     "type": "save",
     "name": "Action (4 CE)",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "action",
      "value": 1,
-     "condition": ""
+     "condition": "",
+     "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
-     }
-    },
-    "range": {
-     "value": "30",
-     "units": "ft"
-    },
-    "target": {
-     "affects": {
-      "type": "creature",
-      "count": "1"
-     }
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
     },
     "duration": {
      "value": "1",
      "units": "minute",
-     "concentration": false
+     "override": true
     },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "cube",
+      "size": "10",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "hKGEW5sLcZdQHvqi",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   },
+   "Z6NkFzlwwXNqq4K0": {
+    "_id": "Z6NkFzlwwXNqq4K0",
+    "type": "save",
+    "name": "Reaction (6 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "override": true
+    },
+    "range": {
+     "value": "10",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "cube",
+      "size": "10",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "hKGEW5sLcZdQHvqi",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    },
+    "useConditionText": "false"
+   },
+   "WSyccYV2PApVVRW2": {
+    "_id": "WSyccYV2PApVVRW2",
+    "type": "save",
+    "name": "Shatter (cube reaches 0 HP)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "5",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": [],
     "save": {
      "ability": [
       "dex"
@@ -63,39 +204,22 @@
     },
     "damage": {
      "onSave": "half",
-     "parts": []
+     "parts": [
+      {
+       "number": null,
+       "denomination": null,
+       "bonus": "",
+       "types": [
+        "slashing"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "(max(@abilities.wis.mod, @abilities.cha.mod) + @prof)d8"
+       },
+       "scaling": {}
+      }
+     ]
     }
-   },
-   "Z6NkFzlwwXNqq4K0": {
-    "_id": "Z6NkFzlwwXNqq4K0",
-    "type": "utility",
-    "name": "Reaction (6 CE)",
-    "sort": 100000,
-    "activation": {
-     "type": "reaction",
-     "value": 1,
-     "condition": ""
-    },
-    "consumption": {
-     "targets": [],
-     "scaling": {
-      "allowed": false
-     }
-    },
-    "range": {
-     "value": "10",
-     "units": "ft"
-    },
-    "target": {
-     "affects": {
-      "type": "creature",
-      "count": "1"
-     }
-    },
-    "duration": {
-     "units": "inst"
-    },
-    "useConditionText": "false"
    }
   }
  },
@@ -119,10 +243,33 @@
       "Black Box"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!36DodZLFS2U6sK5Z"
+ "_key": "!items!36DodZLFS2U6sK5Z",
+ "effects": [
+  {
+   "_id": "hKGEW5sLcZdQHvqi",
+   "name": "Trapped in Glass Box",
+   "img": "modules/jjk5e/icons/techniques/black-box.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Trapped inside a see-through cube with full cover from outside. Cube AC = CE save DC − 5, HP = 2 × proficiency. Creatures inside save against its shards with disadvantage.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Black Box"
+    }
+   },
+   "_key": "!items.effects!36DodZLFS2U6sK5Z.hKGEW5sLcZdQHvqi"
+  }
+ ]
 }

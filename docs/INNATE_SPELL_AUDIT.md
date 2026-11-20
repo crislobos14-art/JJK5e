@@ -3,13 +3,13 @@
 > Generado desde el compendio y las fuentes. **No certifica ejecución en Foundry ni fidelidad semántica a cada regla**.
 
 - Spells examinados: **360**; técnicas agrupadas: **81**.
-- Utilidad sin efecto configurado: revisar lógica: **113**.
+- Utilidad sin efecto configurado: revisar lógica: **112**.
 - Utilidad con efecto: comprobar activación: **17**.
-- Dominio genérico: resolver propiedades particulares: **54**.
+- Dominio genérico: resolver propiedades particulares: **53**.
 - Salvación sin daño/efecto automático: **29**.
 - Ataque sin daño propio: comprobar intención: **10**.
-- Mecánica configurada; falta prueba Foundry: **122**.
-- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **15**.
+- Mecánica configurada; falta prueba Foundry: **120**.
+- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **19**.
 
 ## Interpretación
 
@@ -54,10 +54,10 @@
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Dark Cube | 1 | save:Action (2 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/dark-cube_gniQgtH4HauRqvgz.json) |
-| Perfect Cube | 6 | utility:Extra (5 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/perfect-cube_0VcTooXJ3pi9MX0A.json) |
-| Maximum: Midnight Armor | 11 | damage:Action (6 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/maximum-midnight-armor_LUVi8jTFaORAG7eK.json) |
-| Domain Expansion: Primordial Gap | 18 | utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-primordial-gap_eaPQms8jfUQLLGOl.json) |
+| Dark Cube | 1 | save:Action (2+ CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/dark-cube_gniQgtH4HauRqvgz.json) |
+| Perfect Cube | 6 | utility:Extra (5 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/perfect-cube_0VcTooXJ3pi9MX0A.json) |
+| Maximum: Midnight Armor | 11 | heal:Action (6+ CE); attack:Midnight Armor strike (unarmed) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/maximum-midnight-armor_LUVi8jTFaORAG7eK.json) |
+| Domain Expansion: Primordial Gap | 18 | utility:Expand Domain (20 CE); save:Initiative 20: three Perfect Cubes | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-primordial-gap_eaPQms8jfUQLLGOl.json) |
 
 ### Blazing Courage (4 spells)
 

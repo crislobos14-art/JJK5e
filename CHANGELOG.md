@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.30.0 — Técnica por técnica: Black Box
+- **Dark Cube**: cubo de 10 pies a 30 pies; salvación de DES o queda atrapado (cegado sin luz). El CE extra son
+  los refuerzos (hasta tu mod. de EM). La descripción del efecto da CA/PG del cubo.
+- **Perfect Cube**: nota de reglas (el cubo resiste todo daño; cuenta como 5 refuerzos).
+- **Midnight Armor**: ya no es una tirada de daño. Da PG temporales = competencia × 2 × mod. EM (+10 por CE extra),
+  CA = CD de EM + 5 durante 1 minuto, y un golpe desarmado 3d8 + mod. necrótico.
+- **Primordial Gap**: en iniciativa 20 atrapa hasta 3 criaturas en Perfect Cubes (salvación de DES).
+- **Glass Box**: acción (4 CE) o reacción (6 CE) atrapa con salvación de DES; nueva acción *Shatter*:
+  (mod. EM + competencia)d8 cortante en 5 pies, mitad al salvar.
+- **Glass Weakening**: estaba roto (daño vacío); ahora suma mod. de EM cortante por cada debilitamiento (2 CE).
+- Automatizados a mano: 19/360 spells. Sin probar en Foundry real con Midi-QOL.
+
 ## 1.29.0 — Técnica por técnica: Auspicious Beast Summon y Black Bird Manipulation
 - **Kaichi**: invocar cuesta 1 CE (1 minuto) y el cuerno ataca gratis como ataque extra (1d6 → 3d6 por nivel).
 - **Reiki**: acción adicional duplica tu movimiento; reacción +5 CA al ser impactado (Midi la ofrece).

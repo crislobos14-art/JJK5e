@@ -471,9 +471,104 @@ def black_bird_manipulation(S):
     mark(w)
 
 
+def black_box(S):
+    cube_stats = ("Cube: AC = your CE save DC + 5 (+1 per 2 reinforcements), HP = proficiency × 2 × CE modifier "
+                  "(+10 per reinforcement), immune to psychic and poison; −1 damage taken per reinforcement.")
+    # --- Dark Cube (1st): DEX save or trapped (blinded without light); reinforcements as extra CE.
+    d = S.get("Dark Cube")
+    a = d["system"]["activities"]["UNgkJB1hNYCx1HyF"]
+    a["range"] = {"value": "30", "units": "ft", "override": True}
+    a["target"] = sphere(10, kind="cube")
+    a["duration"] = {"value": "1", "units": "minute", "override": True}
+    for e in d["effects"]:
+        if e["_id"] == "FC6A5IxdtB0bgbYq":
+            e.update({"name": "Trapped in Dark Cube", "duration": {"rounds": 10},
+                      "description": "<p>Trapped inside the cube: full cover against attacks from outside; blinded "
+                                     "unless there is a light inside. " + cube_stats + "</p>"})
+    cost(d, a, 2, 1, CE)
+    a["name"] = "Action (2+ CE)"
+    note(d, "Extra CE = reinforcements (Black Box Reinforcement, up to your CE modifier; twice at 11th). " + cube_stats)
+    mark(d)
+
+    # --- Perfect Cube (6th): +5 CE, resistance to all damage, cannot be seen into or invaded.
+    pc = S.get("Perfect Cube")
+    note(pc, "Spend with Dark Cube: the cube (not you) resists all damage and ignores abilities that would destroy, "
+             "see into or invade it. Counts as 5 reinforcements.")
+    mark(pc)
+
+    # --- Maximum: Midnight Armor (11th): cube HP as temp HP, AC = cube AC, CE unarmed strikes 3d8 + mod necrotic.
+    m = S.get("Maximum: Midnight Armor")
+    arm = fx(m, "armor", "Midnight Armor", rounds=10,
+             changes=[("system.attributes.ac.calc", 5, "custom"),
+                      ("system.attributes.ac.formula", 5, "@attributes.spell.dc + 5")],
+             desc="AC equals your Dark Cube's AC for 1 minute or until the temporary hit points are gone. "
+                  "Use 'Midnight Armor strike' for unarmed strikes.")
+    act(m, "nRKiEvk8BGn2WkHh", "heal", "Action (6+ CE)", "action",
+        healing={"number": None, "denomination": None, "bonus": "", "types": ["temphp"],
+                 "custom": {"enabled": True, "formula": f"@prof * 2 * {CE}"}, "scaling": {"mode": "whole", "formula": "10"}},
+        range=RANGE_SELF, target=SELF, duration={"value": "1", "units": "minute", "override": True})
+    h = m["system"]["activities"]["nRKiEvk8BGn2WkHh"]
+    apply(h, arm)
+    cost(m, h, 6, 1, f"2 * {CE}")
+    strike = act(m, "strike", "attack", "Midnight Armor strike (unarmed)", "action",
+                 attack={"ability": "", "bonus": "", "critical": {"threshold": None}, "flat": False,
+                         "type": {"value": "melee", "classification": "spell"}},
+                 damage={"includeBase": False, "parts": [dice(3, 8, ["necrotic"], "@mod")]},
+                 range={"value": "5", "units": "ft", "override": True},
+                 target={"affects": {"type": "creature", "count": "1"}, "override": True})
+    free(m, strike)
+    mark(m)
+
+    # --- Primordial Gap (18th): at initiative 20, three Perfect Cubes trap up to three creatures.
+    pg = S.get("Domain Expansion: Primordial Gap")
+    trap = fx(pg, "trap", "Trapped in a Perfect Cube", rounds=10,
+              desc="Trapped in a Perfect Cube with reinforcements up to the caster's CE modifier, until the domain "
+                   "ends. " + cube_stats)
+    i20 = act(pg, "init20", "save", "Initiative 20: three Perfect Cubes", "special",
+              target={"affects": {"type": "creature", "count": "3", "choice": True}, "override": True},
+              save={"ability": ["dex"], "dc": {"calculation": "spellcasting", "formula": ""}},
+              damage={"onSave": "none", "parts": []})
+    apply(i20, trap)
+    free(pg, i20)
+    mark(pg)
+
+    # --- Reversal: Glass Box — brittle cube; shatters for (CE + prof)d8 slashing in 5 ft.
+    g = S.get("Glass Box")
+    gtrap = fx(g, "trap", "Trapped in Glass Box", rounds=10,
+               desc="Trapped inside a see-through cube with full cover from outside. Cube AC = CE save DC − 5, "
+                    "HP = 2 × proficiency. Creatures inside save against its shards with disadvantage.")
+    for aid, act_name, rng, activation in [("wzFfstEZv4KfN2ty", "Action (4 CE)", "30", "action"),
+                                           ("Z6NkFzlwwXNqq4K0", "Reaction (6 CE)", "10", "reaction")]:
+        act(g, aid, "save", act_name, activation,
+            range={"value": rng, "units": "ft", "override": True}, target=sphere(10, kind="cube"),
+            save={"ability": ["dex"], "dc": {"calculation": "spellcasting", "formula": ""}},
+            damage={"onSave": "none", "parts": []}, duration={"value": "1", "units": "minute", "override": True})
+        ga = g["system"]["activities"][aid]
+        apply(ga, gtrap)
+    g["system"]["activities"]["Z6NkFzlwwXNqq4K0"]["useConditionText"] = "false"
+    shatter = act(g, "shatter", "save", "Shatter (cube reaches 0 HP)", "special",
+                  target=sphere(5), save={"ability": ["dex"], "dc": {"calculation": "spellcasting", "formula": ""}},
+                  damage={"onSave": "half", "parts": [{"number": None, "denomination": None, "bonus": "", "types": ["slashing"],
+                          "custom": {"enabled": True, "formula": f"({CE} + @prof)d8"}, "scaling": {}}]})
+    free(g, shatter)
+    mark(g)
+
+    # --- Glass Weakening: every 2 CE adds CE-modifier slashing to the shatter (and −1 AC/HP, +5 ft size).
+    w = S.get("Glass Weakening")
+    act(w, "RisoxJ2Bam0AlTUe", "damage", "Shatterability (2+ CE)", "special",
+        damage={"parts": [{"number": None, "denomination": None, "bonus": "", "types": ["slashing"],
+                           "custom": {"enabled": True, "formula": CE}, "scaling": {"mode": "whole", "formula": CE}}]},
+        target=sphere(5))
+    ww = w["system"]["activities"]["RisoxJ2Bam0AlTUe"]
+    cost(w, ww, 2, 2, f"2 * {CE}")
+    note(w, "Roll with Glass Box's shatter: extra slashing per weakening. Fragility/Size are applied by the GM.")
+    mark(w)
+
+
 TECHNIQUES = {"Antigravity System": antigravity_system,
               "Auspicious Beast Summon": auspicious_beast_summon,
-              "Black Bird Manipulation": black_bird_manipulation}
+              "Black Bird Manipulation": black_bird_manipulation,
+              "Black Box": black_box}
 
 if __name__ == "__main__":
     args = sys.argv[1:]
