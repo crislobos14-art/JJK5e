@@ -556,12 +556,17 @@ function registerActivityHooks() {
       ui.notifications.warn("JJK 5e: A broken binding vow prohibits this activity.");
       return false;
     }
+    if (activity.item?.flags?.jjk5e?.domain && domainOpen(actor)) {
+      ui.notifications.warn("JJK 5e: A domain is already active.");
+      return false;
+    }
     const ro = Number(actor?.getFlag(MODULE_ID, "reducedOutput")) || 0;
     if (cost && RO_MAX[ro] && cost > RO_MAX[ro]) {
       ui.notifications.warn(t("Notify.ROMax", { cost, max: RO_MAX[ro], level: ro }));
       return false;
     }
     if (!setting("autoSpendCE") || !cost) return;
+    if (!Number.isFinite(cost)) return false;
     const pool = findPool(actor);
     if (!pool) {
       ui.notifications.warn(t("Notify.NoPoolNotSpent", { name: actor?.name ?? "?" }));
@@ -1166,6 +1171,10 @@ async function maximumOutput(actor) {
   actor = requireActor(actor);
   if (!actor) return;
   const ro = Number(actor.getFlag(MODULE_ID, "reducedOutput")) || 0;
+  if (Number(actor.system.abilities?.[ceAbility(actor)]?.value) < 20) {
+    ui.notifications.warn("Maximum Output requires a Cursed Energy score of 20 (JJK V.6).");
+    return;
+  }
   const base = await promptNumber(t("Output.MaxTitle"), t("Output.MaxPrompt"), 5);
   if (!base) return;
   if (base < 3) return ui.notifications.warn(t("Output.TooLow"));
@@ -1184,7 +1193,7 @@ async function maximumOutput(actor) {
   }
   if (key) await actor.setFlag(MODULE_ID, "maxOutputRound", key);
   const extra = Math.ceil(base / 2) + 2 * ro;
-  await spendCE(actor, extra, t("Output.Max"));
+  if (!(await spendCE(actor, extra, t("Output.Max")))) return;
   await chat(actor, `<p><strong>${t("Output.Max")}</strong> (+${extra} CE)</p>${t("Output.Benefits")}`);
 }
 
@@ -2684,8 +2693,12 @@ async function vowPunishment(actor) {
   }).catch(() => "exhaustion");
   if (choice !== "roll") {
     const cur = Number(actor.system.attributes?.exhaustion) || 0;
+    const applied = Math.min(cur + 5, 6) - cur;
     await actor.update({ "system.attributes.exhaustion": Math.min(cur + 5, 6) });
-    return `<p>${t("Vow.ExhaustionApplied", { n: Math.min(cur + 5, 6) })}</p>`;
+    await actor.setFlag(MODULE_ID, "mutualVowExhaustion", {
+      amount: applied, expiry: (game.time?.worldTime ?? 0) + 10 * 86400
+    });
+    return `<p>${t("Vow.ExhaustionApplied", { n: Math.min(cur + 5, 6) })} (10 days)</p>`;
   }
   const roll = await new Roll("1d6").evaluate();
   const n = clamp(Number(roll.total) || 1, 1, 6);
