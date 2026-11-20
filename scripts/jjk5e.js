@@ -1909,6 +1909,11 @@ function applySureHit(actor, config) {
   const item = config?.subject?.item;
   if (!item?.flags?.jjk5e?.technique) return;
   if (sureHitBlocked(actor)) return;
+  const targets = [...(game.user?.targets ?? [])];
+  const state = getDomain(actor);
+  // Vanilla attack-roll hooks are not target-specific. Do not grant an unconditional
+  // sure hit when the targeted set contains mixed or unknown locations.
+  if (!state || targets.length !== 1 || !insideDomain(state, targets[0])) return;
   const roll = config?.rolls?.[0];
   if (!roll) return;
   roll.options ??= {};
@@ -2174,19 +2179,27 @@ function midiActive() {
 function registerMidiHooks() {
   if (!midiActive()) return;
   // Domain sure-hit: every target of an innate-technique attack is hit.
-  const sureHit = (workflow) => !!(workflow && setting("domainSureHit") && domainOpen(workflow.actor)
-    && workflow.item?.flags?.jjk5e?.technique && !sureHitBlocked(workflow.actor));
+  const sureHit = (workflow, target) => {
+    if (!(workflow && setting("domainSureHit") && domainOpen(workflow.actor)
+      && workflow.item?.flags?.jjk5e?.technique && !sureHitBlocked(workflow.actor))) return false;
+    const state = getDomain(workflow.actor);
+    return !!state && !!target && insideDomain(state, target);
+  };
   // Midi decides each target's hit here (after cover, AC bonuses and reactions).
   Hooks.on("midi-qol.premades.checkHitTarget", (hitCheck) => {
     try {
-      if (!sureHit(hitCheck?.workflow)) return;
+      if (!sureHit(hitCheck?.workflow, hitCheck?.target ?? hitCheck?.token)) return;
       hitCheck.isHit = true;
       if ("isHitEC" in hitCheck) hitCheck.isHitEC = true;
     } catch (err) { console.error(`${MODULE_ID} | midi sure-hit`, err); }
   });
   // Older Midi builds without that hook: force the hit list afterwards.
   Hooks.on("midi-qol.hitsChecked", (workflow) => {
-    try { if (sureHit(workflow)) workflow.hitTargets = new Set(workflow.targets); }
+    try {
+      if (!workflow) return;
+      const eligible = [...(workflow.targets ?? [])].filter((t) => sureHit(workflow, t));
+      if (eligible.length) workflow.hitTargets = new Set([...(workflow.hitTargets ?? []), ...eligible]);
+    }
     catch (err) { console.error(`${MODULE_ID} | midi sure-hit`, err); }
   });
   // Domain sure-hit: targets automatically fail the saving throws of your innate technique.
@@ -2195,8 +2208,9 @@ function registerMidiHooks() {
       const item = workflow?.item;
       if (!setting("domainSureHit") || !domainOpen(workflow?.actor) || !item?.flags?.jjk5e?.technique || sureHitBlocked(workflow?.actor)) return;
       const all = new Set([...(workflow.saves ?? []), ...(workflow.failedSaves ?? [])]);
-      workflow.failedSaves = all;
-      workflow.saves = new Set();
+      const forced = [...all].filter((token) => sureHit(workflow, token));
+      workflow.failedSaves = new Set([...(workflow.failedSaves ?? []), ...forced]);
+      workflow.saves = new Set([...(workflow.saves ?? [])].filter((token) => !forced.includes(token)));
     } catch (err) { console.error(`${MODULE_ID} | midi sure-hit saves`, err); }
   });
   // Animations with Midi's real hit list.
@@ -3254,8 +3268,7 @@ function sureHitBlocked(actor) {
   const state = getDomain(actor);
   if (!state) return false;
   if (state.clash && !state.clash.resolved) return true;
-  const targets = [...(game.user?.targets ?? [])];
-  return targets.length > 0 && targets.some((tk) => !insideDomain(state, tk));
+  return state.lethal === false;
 }
 
 /* ---- GM side: zone on the canvas ---- */
@@ -3326,7 +3339,8 @@ async function domainOpened(actor) {
   const c = token ? tokenCenter(token) : null;
   const max = Math.max(1, 10 * mod + ref);
   const state = { open: true, hp: max, max, ac: 10 + mod + Math.floor(ref / 100), refinement: ref,
-    radius: DOMAIN_RADIUS, sceneId: canvas?.scene?.id ?? null, x: c?.x ?? null, y: c?.y ?? null,
+    radius: DOMAIN_RADIUS, lethal: actor.getFlag(MODULE_ID, "domainLethal") !== false,
+    sceneId: canvas?.scene?.id ?? null, x: c?.x ?? null, y: c?.y ?? null,
     damageTaken: 0, zone: null, clash: null, name: actor.name };
   await setDomain(actor, state);
   if (c && state.sceneId) await viaGM("domainZone", { sceneId: state.sceneId, x: c.x, y: c.y, radius: DOMAIN_RADIUS,
