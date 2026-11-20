@@ -31,15 +31,26 @@
      "targets": [],
      "scaling": {
       "allowed": true,
-      "max": "max(1, max(@abilities.wis.mod, @abilities.cha.mod))"
+      "max": "max(@abilities.wis.mod, @abilities.cha.mod)"
      },
      "spellSlot": false
     },
     "range": {
-     "units": "spec",
+     "units": "self",
      "override": true
     },
     "target": {
+     "template": {
+      "type": "line",
+      "size": "60",
+      "width": "10",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature"
+     },
      "override": true
     },
     "duration": {
@@ -57,8 +68,73 @@
     },
     "damage": {
      "onSave": "half",
-     "parts": []
+     "parts": [
+      {
+       "number": 4,
+       "denomination": 6,
+       "bonus": "2 * @mod",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    },
+    "midiProperties": {
+     "triggeredActivityId": "1BoUGgAVLfrLMqaM",
+     "triggeredActivityTargets": "self",
+     "triggeredActivityRollAs": "self",
+     "triggeredActivityConsume": false,
+     "triggeredActivityConfigure": false,
+     "triggeredActivityConditionText": ""
     }
+   },
+   "1BoUGgAVLfrLMqaM": {
+    "_id": "1BoUGgAVLfrLMqaM",
+    "type": "utility",
+    "name": "Technique Burnout (until end of next turn)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "cHc9ATofRgknVcpW",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -104,9 +180,49 @@
    },
    "technique": "Cursed Cannon",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "dmgScale": {
+    "K5tMSDrkCbisKcMD": [
+     [
+      11,
+      "10d10"
+     ],
+     [
+      18,
+      "12d12"
+     ]
+    ]
+   },
+   "automation": "automated"
   }
  },
  "folder": "jTg0Bf76dJeyMkqJ",
- "_key": "!items!0Vvjb032PUzeQY5O"
+ "_key": "!items!0Vvjb032PUzeQY5O",
+ "effects": [
+  {
+   "_id": "cHc9ATofRgknVcpW",
+   "name": "Technique Burnout (Granita Lusso)",
+   "img": "modules/jjk5e/icons/techniques/cursed-cannon.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Technique Burnout until the end of your next turn.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Cursed Cannon"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnEndSource"
+     ]
+    }
+   },
+   "_key": "!items.effects!0Vvjb032PUzeQY5O.cHc9ATofRgknVcpW"
+  }
+ ]
 }

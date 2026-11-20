@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.40.0 — Técnica por técnica: Cursed Cannon
+- **Granite Blast**: CE extra limitado a tu mod. de EM; disparo dividido de Grape Choux (+1 CE).
+- **Dessert Deluge**: acciones +1 a +5 al siguiente ataque de EM (1–5 CE).
+- **Granita Lusso**: línea de 60×10 pies, doble daño de Granite Blast (10d10/12d12 + 2×mod.), mitad al salvar, y Burnout automático hasta tu siguiente turno.
+- **Il Gran Dolce**: Granite Blast gratis contra 3 objetivos en iniciativa 20.
+- **Cursed Shield**: reacción ofrecida por Midi al ser atacado o al salvar (CD 10 + mitad del CE entrante).
+- Automatizados a mano: 59/360. Sin probar en Foundry real.
+
 ## 1.39.0 — Técnica por técnica: Contractual Recreation
 - **Recreation**: una acción por tamaño de recibo (2/4/6/8/10/20 CE) con el daño al caer sobre una criatura (2d6 por tamaño sobre Diminuto; derribado y apresado si es Enorme o mayor), reserva (4 CE) y estructura (20 CE).
 - **Contractual Control**: carga de vehículo en línea de 60 pies, arma telequinética (5/7/10 dados por nivel) y mover objetos.

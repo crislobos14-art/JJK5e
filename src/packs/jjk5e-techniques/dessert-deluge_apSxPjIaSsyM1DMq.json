@@ -19,14 +19,421 @@
    "value": "class",
    "subtype": ""
   },
-  "requirements": "Cursed Cannon 6"
+  "requirements": "Cursed Cannon 6",
+  "activities": {
+   "FMIn0qU7z9g2Es00": {
+    "_id": "FMIn0qU7z9g2Es00",
+    "type": "utility",
+    "name": "Boost next attack roll +1 (1 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "GBVDPNkZM7eralIY",
+      "onSave": false
+     }
+    ]
+   },
+   "otuszvzcEJ40nWNG": {
+    "_id": "otuszvzcEJ40nWNG",
+    "type": "utility",
+    "name": "Boost next attack roll +2 (2 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "1hWjefObH3wvGZVj",
+      "onSave": false
+     }
+    ]
+   },
+   "bXUifm9IzuP4c5z9": {
+    "_id": "bXUifm9IzuP4c5z9",
+    "type": "utility",
+    "name": "Boost next attack roll +3 (3 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "GO7wfL1bhblHrcQR",
+      "onSave": false
+     }
+    ]
+   },
+   "YoNb0sY2YefzTVJh": {
+    "_id": "YoNb0sY2YefzTVJh",
+    "type": "utility",
+    "name": "Boost next attack roll +4 (4 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "AX3r7dwcV0ZUyuxP",
+      "onSave": false
+     }
+    ]
+   },
+   "L9KpZFGEgEEgcHS4": {
+    "_id": "L9KpZFGEgEEgcHS4",
+    "type": "utility",
+    "name": "Boost next attack roll +5 (5 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "dtJCjJenKGPANbuZ",
+      "onSave": false
+     }
+    ]
+   }
+  }
  },
  "flags": {
   "jjk5e": {
    "technique": "Cursed Cannon",
-   "level": 6
+   "level": 6,
+   "ceCosts": {
+    "FMIn0qU7z9g2Es00": 1,
+    "otuszvzcEJ40nWNG": 2,
+    "bXUifm9IzuP4c5z9": 3,
+    "YoNb0sY2YefzTVJh": 4,
+    "L9KpZFGEgEEgcHS4": 5
+   },
+   "automation": "automated"
   }
  },
  "folder": "jTg0Bf76dJeyMkqJ",
- "_key": "!items!apSxPjIaSsyM1DMq"
+ "_key": "!items!apSxPjIaSsyM1DMq",
+ "effects": [
+  {
+   "_id": "GBVDPNkZM7eralIY",
+   "name": "Dessert Deluge +1",
+   "img": "modules/jjk5e/icons/techniques/cursed-cannon.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>+1 to your next cursed energy attack roll.</p>",
+   "changes": [
+    {
+     "key": "system.bonuses.rsak.attack",
+     "mode": 2,
+     "value": "+ 1",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.msak.attack",
+     "mode": 2,
+     "value": "+ 1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Cursed Cannon"
+    },
+    "dae": {
+     "specialDuration": [
+      "1Attack"
+     ]
+    }
+   },
+   "_key": "!items.effects!apSxPjIaSsyM1DMq.GBVDPNkZM7eralIY"
+  },
+  {
+   "_id": "1hWjefObH3wvGZVj",
+   "name": "Dessert Deluge +2",
+   "img": "modules/jjk5e/icons/techniques/cursed-cannon.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>+2 to your next cursed energy attack roll.</p>",
+   "changes": [
+    {
+     "key": "system.bonuses.rsak.attack",
+     "mode": 2,
+     "value": "+ 2",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.msak.attack",
+     "mode": 2,
+     "value": "+ 2",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Cursed Cannon"
+    },
+    "dae": {
+     "specialDuration": [
+      "1Attack"
+     ]
+    }
+   },
+   "_key": "!items.effects!apSxPjIaSsyM1DMq.1hWjefObH3wvGZVj"
+  },
+  {
+   "_id": "GO7wfL1bhblHrcQR",
+   "name": "Dessert Deluge +3",
+   "img": "modules/jjk5e/icons/techniques/cursed-cannon.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>+3 to your next cursed energy attack roll.</p>",
+   "changes": [
+    {
+     "key": "system.bonuses.rsak.attack",
+     "mode": 2,
+     "value": "+ 3",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.msak.attack",
+     "mode": 2,
+     "value": "+ 3",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Cursed Cannon"
+    },
+    "dae": {
+     "specialDuration": [
+      "1Attack"
+     ]
+    }
+   },
+   "_key": "!items.effects!apSxPjIaSsyM1DMq.GO7wfL1bhblHrcQR"
+  },
+  {
+   "_id": "AX3r7dwcV0ZUyuxP",
+   "name": "Dessert Deluge +4",
+   "img": "modules/jjk5e/icons/techniques/cursed-cannon.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>+4 to your next cursed energy attack roll.</p>",
+   "changes": [
+    {
+     "key": "system.bonuses.rsak.attack",
+     "mode": 2,
+     "value": "+ 4",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.msak.attack",
+     "mode": 2,
+     "value": "+ 4",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Cursed Cannon"
+    },
+    "dae": {
+     "specialDuration": [
+      "1Attack"
+     ]
+    }
+   },
+   "_key": "!items.effects!apSxPjIaSsyM1DMq.AX3r7dwcV0ZUyuxP"
+  },
+  {
+   "_id": "dtJCjJenKGPANbuZ",
+   "name": "Dessert Deluge +5",
+   "img": "modules/jjk5e/icons/techniques/cursed-cannon.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>+5 to your next cursed energy attack roll.</p>",
+   "changes": [
+    {
+     "key": "system.bonuses.rsak.attack",
+     "mode": 2,
+     "value": "+ 5",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.msak.attack",
+     "mode": 2,
+     "value": "+ 5",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Cursed Cannon"
+    },
+    "dae": {
+     "specialDuration": [
+      "1Attack"
+     ]
+    }
+   },
+   "_key": "!items.effects!apSxPjIaSsyM1DMq.dtJCjJenKGPANbuZ"
+  }
+ ]
 }

@@ -31,7 +31,7 @@
      "targets": [],
      "scaling": {
       "allowed": true,
-      "max": "max(1, max(@abilities.wis.mod, @abilities.cha.mod))"
+      "max": "max(@abilities.wis.mod, @abilities.cha.mod)"
      },
      "spellSlot": false
     },
@@ -60,6 +60,76 @@
      "parts": [
       {
        "number": 2,
+       "denomination": 6,
+       "bonus": "@mod",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   },
+   "awxsvgBcsMNap7x9": {
+    "_id": "awxsvgBcsMNap7x9",
+    "type": "attack",
+    "name": "Grape Choux: split blast (+1 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "Grape Choux (3rd): roll once per target, dividing the dice; only two add the modifier",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "max(@abilities.wis.mod, @abilities.cha.mod)"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "150",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "effects": [],
+    "attack": {
+     "ability": "",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": 1,
        "denomination": 6,
        "bonus": "@mod",
        "types": [
@@ -113,10 +183,12 @@
  "flags": {
   "jjk5e": {
    "ceSteps": {
-    "GRtFwNVKyLM2wqbq": 1
+    "GRtFwNVKyLM2wqbq": 1,
+    "awxsvgBcsMNap7x9": 1
    },
    "ceCosts": {
-    "GRtFwNVKyLM2wqbq": 1
+    "GRtFwNVKyLM2wqbq": 1,
+    "awxsvgBcsMNap7x9": 2
    },
    "technique": "Cursed Cannon",
    "level": 1,
@@ -144,7 +216,8 @@
       "6d12"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "jTg0Bf76dJeyMkqJ",

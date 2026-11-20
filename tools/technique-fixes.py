@@ -1341,6 +1341,68 @@ def contractual_recreation(S):
     mark(t)
 
 
+GRANITE = [[1, "2d6"], [3, "3d6"], [6, "4d8"], [11, "5d10"], [18, "6d12"]]
+
+
+def cursed_cannon(S):
+    g = S.get("Granite Blast")
+    a = g["system"]["activities"]["GRtFwNVKyLM2wqbq"]
+    a["consumption"]["scaling"]["max"] = CE
+    split = act(g, "split", "attack", "Grape Choux: split blast (+1 CE)", "action",
+                attack={"ability": "", "bonus": "", "critical": {"threshold": None}, "flat": False,
+                        "type": {"value": "ranged", "classification": "spell"}},
+                damage={"includeBase": False, "parts": [dice(1, 6, ["necrotic"], "@mod", 1)]},
+                range={"value": "150", "units": "ft", "override": True},
+                target={"affects": {"type": "creature", "count": "1"}, "override": True})
+    split["activation"]["condition"] = "Grape Choux (3rd): roll once per target, dividing the dice; only two add the modifier"
+    cost(g, split, 2, 1, CE)
+    mark(g)
+
+    dd = S.get("Dessert Deluge")
+    dd.setdefault("effects", [])
+    for n in range(1, 6):
+        bo = act(dd, f"boost{n}", "utility", f"Boost next attack roll +{n} ({n} CE)", "special", range=RANGE_SELF, target=SELF)
+        apply(bo, fx(dd, f"boost{n}", f"Dessert Deluge +{n}", rounds=1, special=["1Attack"],
+                     changes=[("system.bonuses.rsak.attack", 2, f"+ {n}"), ("system.bonuses.msak.attack", 2, f"+ {n}")],
+                     desc=f"+{n} to your next cursed energy attack roll."))
+        cost(dd, bo, n)
+    mark(dd)
+
+    l = S.get("Maximum: Granita Lusso")
+    a = l["system"]["activities"]["K5tMSDrkCbisKcMD"]
+    a["target"] = {"template": {"type": "line", "size": "60", "width": "10", "units": "ft", "count": "1", "contiguous": False},
+                   "affects": {"type": "creature"}, "override": True}
+    a["range"] = RANGE_SELF
+    a["damage"] = {"onSave": "half", "parts": [dice(4, 6, ["necrotic"], "2 * @mod", 1)]}
+    a["consumption"]["scaling"]["max"] = CE
+    scale(l, a, [[11, "10d10"], [18, "12d12"]])
+    burn = act(l, "burnout", "utility", "Technique Burnout (until end of next turn)", "special", range=RANGE_SELF, target=SELF)
+    apply(burn, fx(l, "burnout", "Technique Burnout (Granita Lusso)", rounds=1, special=["turnEndSource"],
+                   desc="Technique Burnout until the end of your next turn."))
+    free(l, burn)
+    trigger(a, burn, "self")
+    mark(l)
+
+    d = S.get("Domain Expansion: Il Gran Dolce")
+    i20 = act(d, "init20", "attack", "Initiative 20: Granite Blast ×3", "special",
+              attack={"ability": "", "bonus": "", "critical": {"threshold": None}, "flat": False,
+                      "type": {"value": "ranged", "classification": "spell"}},
+              damage={"includeBase": False, "parts": [dice(6, 12, ["necrotic"], "@mod")]},
+              range={"units": "spec", "override": True},
+              target={"affects": {"type": "creature", "count": "3", "choice": True}, "override": True})
+    free(d, i20)
+    mark(d)
+
+    cs = S.get("Cursed Shield")
+    a = cs["system"]["activities"]["qWHnHecd13R6ExwJ"]
+    a["save"] = {"ability": ["con"], "dc": {"calculation": "", "formula": "10"}}
+    a["range"], a["target"] = RANGE_SELF, SELF
+    a["useConditionText"] = 'reaction === "isAttacked" || reaction === "isSave"'
+    note(cs, "DC = 10 + half the CE spent on the incoming effect (the activity uses 10: add the rest when rolling). Success: gain that CE and "
+             "negate it; failure: it hits / you fail the save. Not against Maximums, barriers or domains.")
+    mark(cs)
+
+
 TECHNIQUES = {"Antigravity System": antigravity_system,
               "Auspicious Beast Summon": auspicious_beast_summon,
               "Black Bird Manipulation": black_bird_manipulation,
@@ -1354,7 +1416,8 @@ TECHNIQUES = {"Antigravity System": antigravity_system,
               "Clone": clone,
               "Comedian": comedian,
               "Construction": construction,
-              "Contractual Recreation": contractual_recreation}
+              "Contractual Recreation": contractual_recreation,
+              "Cursed Cannon": cursed_cannon}
 
 if __name__ == "__main__":
     args = sys.argv[1:]

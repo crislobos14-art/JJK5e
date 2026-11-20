@@ -5,11 +5,11 @@
 - Spells examinados: **360**; técnicas agrupadas: **81**.
 - Utilidad sin efecto configurado: revisar lógica: **98**.
 - Utilidad con efecto: comprobar activación: **15**.
-- Dominio genérico: resolver propiedades particulares: **46**.
-- Salvación sin daño/efecto automático: **26**.
+- Dominio genérico: resolver propiedades particulares: **45**.
+- Salvación sin daño/efecto automático: **25**.
 - Ataque sin daño propio: comprobar intención: **10**.
-- Mecánica configurada; falta prueba Foundry: **109**.
-- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **56**.
+- Mecánica configurada; falta prueba Foundry: **108**.
+- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **59**.
 
 ## Interpretación
 
@@ -143,9 +143,9 @@
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Granite Blast | 1 | attack:Action (1+ CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/granite-blast_TlxFnlnJaW0uDBcH.json) |
-| Maximum: Granita Lusso | 11 | save:Action (6+ CE) | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/maximum-granita-lusso_0Vvjb032PUzeQY5O.json) |
-| Domain Expansion: Il Gran Dolce | 18 | utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-il-gran-dolce_fXBj2a32DG28BgH1.json) |
+| Granite Blast | 1 | attack:Action (1+ CE); attack:Grape Choux: split blast (+1 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/granite-blast_TlxFnlnJaW0uDBcH.json) |
+| Maximum: Granita Lusso | 11 | save:Action (6+ CE); utility:Technique Burnout (until end of next turn) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/maximum-granita-lusso_0Vvjb032PUzeQY5O.json) |
+| Domain Expansion: Il Gran Dolce | 18 | utility:Expand Domain (20 CE); attack:Initiative 20: Granite Blast ×3 | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-il-gran-dolce_fXBj2a32DG28BgH1.json) |
 
 ### Cursed Circuitry (5 spells)
 

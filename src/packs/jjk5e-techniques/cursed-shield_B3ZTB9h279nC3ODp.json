@@ -38,10 +38,15 @@
      }
     },
     "range": {
-     "units": "spec",
+     "units": "self",
      "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
     },
@@ -50,15 +55,15 @@
       "con"
      ],
      "dc": {
-      "calculation": "spellcasting",
-      "formula": ""
+      "calculation": "",
+      "formula": "10"
      }
     },
     "damage": {
      "onSave": "none",
      "parts": []
     },
-    "useConditionText": "false"
+    "useConditionText": "reaction === \"isAttacked\" || reaction === \"isSave\""
    }
   }
  },
@@ -78,7 +83,9 @@
       "Cursed Cannon"
      ]
     ]
-   }
+   },
+   "automationNotes": "DC = 10 + half the CE spent on the incoming effect (the activity uses 10: add the rest when rolling). Success: gain that CE and negate it; failure: it hits / you fail the save. Not against Maximums, barriers or domains.",
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
