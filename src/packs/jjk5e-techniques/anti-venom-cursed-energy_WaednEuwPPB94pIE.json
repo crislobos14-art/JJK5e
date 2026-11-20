@@ -24,10 +24,10 @@
    "vFnZHPwvVYSItiHa": {
     "_id": "vFnZHPwvVYSItiHa",
     "type": "damage",
-    "name": "Action (2 CE)",
+    "name": "Sun Dregs radiant hit (2 CE): +4d6",
     "sort": 0,
     "activation": {
-     "type": "action",
+     "type": "special",
      "value": 1,
      "condition": ""
     },
@@ -41,7 +41,14 @@
      "units": "spec",
      "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
     },
@@ -63,7 +70,8 @@
        }
       }
      ]
-    }
+    },
+    "useConditionText": "reaction === \"isHit\""
    }
   }
  },
@@ -87,7 +95,8 @@
      ]
     ],
     "level": 3
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",

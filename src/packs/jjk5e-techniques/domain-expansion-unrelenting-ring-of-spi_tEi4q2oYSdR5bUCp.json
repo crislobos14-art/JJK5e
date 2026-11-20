@@ -18,9 +18,10 @@
   "activities": {
    "zoIOpZsM7t1RRZBD": {
     "_id": "zoIOpZsM7t1RRZBD",
-    "type": "utility",
-    "name": "Action",
+    "type": "attack",
+    "name": "Free Missile Fist anywhere in the domain",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "action",
      "value": 1,
@@ -30,20 +31,57 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
-    },
-    "range": {
-     "units": "self",
-     "override": true
-    },
-    "target": {
-     "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": 4,
+       "denomination": 8,
+       "bonus": "max(@abilities.wis.mod, @abilities.cha.mod)",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
     }
    },
    "FJ70SfYI4r1JdAXd": {
@@ -138,7 +176,13 @@
        "scaling": {}
       }
      ]
-    }
+    },
+    "effects": [
+     {
+      "_id": "VfILo4n7gedPhieN",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -197,9 +241,34 @@
     "FJ70SfYI4r1JdAXd": 20
    },
    "domainActivity": "FJ70SfYI4r1JdAXd",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "coN536PDmNM37MtV",
- "_key": "!items!tEi4q2oYSdR5bUCp"
+ "_key": "!items!tEi4q2oYSdR5bUCp",
+ "effects": [
+  {
+   "_id": "VfILo4n7gedPhieN",
+   "name": "Prone (Ring of Spirit)",
+   "img": "modules/jjk5e/icons/techniques/missile-fist-domain.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [
+    "prone"
+   ],
+   "description": "",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Missile Fist"
+    }
+   },
+   "_key": "!items.effects!tEi4q2oYSdR5bUCp.VfILo4n7gedPhieN"
+  }
+ ]
 }

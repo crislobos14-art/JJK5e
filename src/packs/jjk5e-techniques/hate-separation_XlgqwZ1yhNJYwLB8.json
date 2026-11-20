@@ -24,10 +24,10 @@
    "IAWf5c0GzZEGGzyy": {
     "_id": "IAWf5c0GzZEGGzyy",
     "type": "utility",
-    "name": "Action (2 CE)",
+    "name": "Invert to Hate Separation (2 CE)",
     "sort": 0,
     "activation": {
-     "type": "action",
+     "type": "special",
      "value": 1,
      "condition": ""
     },
@@ -43,6 +43,63 @@
     "target": {},
     "duration": {
      "units": "inst"
+    }
+   },
+   "MHcmGaYNnEXe3qgz": {
+    "_id": "MHcmGaYNnEXe3qgz",
+    "type": "damage",
+    "name": "Repelled impact on lowest-CE creature (2 dice per 10 ft)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "damage": {
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 2
+       }
+      }
+     ]
     }
    }
   }
@@ -66,7 +123,9 @@
       "Love Rendezvous"
      ]
     ]
-   }
+   },
+   "automationNotes": "Reverse order; crashing objects/creatures take half.",
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",

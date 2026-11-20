@@ -24,9 +24,37 @@
  "flags": {
   "jjk5e": {
    "technique": "Mythical Beast Amber",
-   "level": 3
+   "level": 3,
+   "automation": "automated"
   }
  },
  "folder": "J9wuYC5ZIUpqsRHr",
- "_key": "!items!U67hANfZTVt3qhY1"
+ "_key": "!items!U67hANfZTVt3qhY1",
+ "effects": [
+  {
+   "_id": "puMaIhJWYvl21QVl",
+   "name": "Lightning Body",
+   "img": "modules/jjk5e/icons/techniques/mythical-beast-amber.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.attributes.init.bonus",
+     "mode": 2,
+     "value": "+ max(@abilities.wis.mod, @abilities.cha.mod)",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": "Mythical Beast Amber"
+    }
+   },
+   "_key": "!items.effects!U67hANfZTVt3qhY1.puMaIhJWYvl21QVl"
+  }
+ ]
 }

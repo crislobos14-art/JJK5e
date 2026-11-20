@@ -19,7 +19,7 @@
    "GvyKyWKjmfVvOBOC": {
     "_id": "GvyKyWKjmfVvOBOC",
     "type": "utility",
-    "name": "Bonus Action",
+    "name": "Extend techniques to 60 ft (bonus action)",
     "sort": 0,
     "activation": {
      "type": "bonus",
@@ -51,6 +51,49 @@
      "units": "inst",
      "override": true
     }
+   },
+   "g4bjIYU6viGAJdoj": {
+    "_id": "g4bjIYU6viGAJdoj",
+    "type": "utility",
+    "name": "Two free weapon attacks (prof per long rest)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1",
+       "scaling": {}
+      }
+     ],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": []
    }
   },
   "uses": {
@@ -95,7 +138,9 @@
   "jjk5e": {
    "technique": "New Shadow Style",
    "level": 18,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Simple Domain costs no CE and moves with you.",
+   "automation": "automated"
   }
  },
  "folder": "afNhLz8cb88QgbyD",

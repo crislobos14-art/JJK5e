@@ -19,14 +19,228 @@
    "value": "class",
    "subtype": ""
   },
-  "requirements": "Pachinko Fever 11"
+  "requirements": "Pachinko Fever 11",
+  "uses": {
+   "max": "@prof",
+   "spent": 0,
+   "recovery": []
+  },
+  "activities": {
+   "kGzQOLngrWodA6pr": {
+    "_id": "kGzQOLngrWodA6pr",
+    "type": "utility",
+    "name": "Fever: land a critical",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1",
+       "scaling": {}
+      }
+     ],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "9uLEvA8MMKyGBnMY",
+      "onSave": false
+     }
+    ]
+   },
+   "3LdPAIgkV8BAwaLP": {
+    "_id": "3LdPAIgkV8BAwaLP",
+    "type": "utility",
+    "name": "Fever: +10 to a save or check",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1",
+       "scaling": {}
+      }
+     ],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "aHCkzs25dpJc5ED1",
+      "onSave": false
+     }
+    ]
+   },
+   "OU2bVHsPPgu1ybaL": {
+    "_id": "OU2bVHsPPgu1ybaL",
+    "type": "utility",
+    "name": "Fever: an additional action",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1",
+       "scaling": {}
+      }
+     ],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
+   }
+  }
  },
  "flags": {
   "jjk5e": {
    "technique": "Pachinko Fever",
-   "level": 11
+   "level": 11,
+   "automationNotes": "Uses = fever points (gain one per round when dropped to 1 HP during the Jackpot; lost at the end of combat).",
+   "automation": "automated"
   }
  },
  "folder": "30lfiZHWDrH4G6F5",
- "_key": "!items!acpMW606uujEXSIi"
+ "_key": "!items!acpMW606uujEXSIi",
+ "effects": [
+  {
+   "_id": "9uLEvA8MMKyGBnMY",
+   "name": "land a critical",
+   "img": "modules/jjk5e/icons/techniques/pachinko-fever.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.critical.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Pachinko Fever"
+    },
+    "dae": {
+     "specialDuration": [
+      "1Attack"
+     ]
+    }
+   },
+   "_key": "!items.effects!acpMW606uujEXSIi.9uLEvA8MMKyGBnMY"
+  },
+  {
+   "_id": "aHCkzs25dpJc5ED1",
+   "name": "+10 to a save or check",
+   "img": "modules/jjk5e/icons/techniques/pachinko-fever.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.bonuses.abilities.save",
+     "mode": 2,
+     "value": "+10",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.abilities.check",
+     "mode": 2,
+     "value": "+10",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Pachinko Fever"
+    },
+    "dae": {
+     "specialDuration": [
+      "isSave"
+     ]
+    }
+   },
+   "_key": "!items.effects!acpMW606uujEXSIi.aHCkzs25dpJc5ED1"
+  }
+ ]
 }

@@ -16,11 +16,12 @@
    "rules": "2014"
   },
   "activities": {
-   "JWpITcy7VX1rdcIp": {
-    "_id": "JWpITcy7VX1rdcIp",
+   "PapKN0x8RhT5dGfA": {
+    "_id": "PapKN0x8RhT5dGfA",
     "type": "utility",
-    "name": "Special (1 CE)",
+    "name": "Mark ★Imai (1 CE, touch or unarmed hit)",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "special",
      "value": null,
@@ -30,22 +31,266 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
     },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
     "range": {
-     "units": "self",
+     "value": "5",
+     "units": "ft",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
-    "duration": {
-     "value": "10",
-     "units": "minute",
-     "concentration": false,
+    "effects": [
+     {
+      "_id": "vwdYhmFOTkLpo1CQ",
+      "onSave": false
+     }
+    ]
+   },
+   "fXh0IXlkX9VhC3Lo": {
+    "_id": "fXh0IXlkX9VhC3Lo",
+    "type": "utility",
+    "name": "Mark ★Acrux (1 CE, touch or unarmed hit)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
      "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "eRqvytlHyVU9LZQW",
+      "onSave": false
+     }
+    ]
+   },
+   "fTuDYcA4JTxXMgCn": {
+    "_id": "fTuDYcA4JTxXMgCn",
+    "type": "utility",
+    "name": "Mark ★Mimosa (1 CE, touch or unarmed hit)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "POOx0YzMW8JI0Hmj",
+      "onSave": false
+     }
+    ]
+   },
+   "jI6Bze5kzSbMZmO7": {
+    "_id": "jI6Bze5kzSbMZmO7",
+    "type": "utility",
+    "name": "Mark ★Ginan (1 CE, touch or unarmed hit)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "8jDoKbVeVuf0fR8C",
+      "onSave": false
+     }
+    ]
+   },
+   "Y8FL7QfxwEdmch2k": {
+    "_id": "Y8FL7QfxwEdmch2k",
+    "type": "utility",
+    "name": "Mark ★Gacrux (1 CE, touch or unarmed hit)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "dvMCcGmDm49rnscN",
+      "onSave": false
+     }
+    ]
+   },
+   "xZwAlOU4sAysJNPt": {
+    "_id": "xZwAlOU4sAysJNPt",
+    "type": "damage",
+    "name": "Star collision (2 dice per 10 ft)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "damage": {
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 2
+       }
+      }
+     ]
     }
    }
   },
@@ -86,13 +331,121 @@
  "flags": {
   "jjk5e": {
    "ceCosts": {
-    "JWpITcy7VX1rdcIp": 1
+    "PapKN0x8RhT5dGfA": 1,
+    "fXh0IXlkX9VhC3Lo": 1,
+    "fTuDYcA4JTxXMgCn": 1,
+    "jI6Bze5kzSbMZmO7": 1,
+    "Y8FL7QfxwEdmch2k": 1
    },
    "technique": "Love Rendezvous",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Marks per star = CE mod (2× at 11th). Collision die by size: edit (d6 assumed). Scale +1 per extra 10 ft.",
+   "automation": "automated"
   }
  },
  "folder": "wSkJnhi22IbLpEbi",
- "_key": "!items!HlC6hqoZAtbyQ2hV"
+ "_key": "!items!HlC6hqoZAtbyQ2hV",
+ "effects": [
+  {
+   "_id": "vwdYhmFOTkLpo1CQ",
+   "name": "★Imai",
+   "img": "modules/jjk5e/icons/techniques/love-rendezvous.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Marked with ★Imai (order Imai → Acrux → Mimosa → Ginan → Gacrux). Must touch the next star in order before approaching others.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Love Rendezvous"
+    }
+   },
+   "_key": "!items.effects!HlC6hqoZAtbyQ2hV.vwdYhmFOTkLpo1CQ"
+  },
+  {
+   "_id": "eRqvytlHyVU9LZQW",
+   "name": "★Acrux",
+   "img": "modules/jjk5e/icons/techniques/love-rendezvous.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Marked with ★Acrux (order Imai → Acrux → Mimosa → Ginan → Gacrux). Must touch the next star in order before approaching others.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Love Rendezvous"
+    }
+   },
+   "_key": "!items.effects!HlC6hqoZAtbyQ2hV.eRqvytlHyVU9LZQW"
+  },
+  {
+   "_id": "POOx0YzMW8JI0Hmj",
+   "name": "★Mimosa",
+   "img": "modules/jjk5e/icons/techniques/love-rendezvous.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Marked with ★Mimosa (order Imai → Acrux → Mimosa → Ginan → Gacrux). Must touch the next star in order before approaching others.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Love Rendezvous"
+    }
+   },
+   "_key": "!items.effects!HlC6hqoZAtbyQ2hV.POOx0YzMW8JI0Hmj"
+  },
+  {
+   "_id": "8jDoKbVeVuf0fR8C",
+   "name": "★Ginan",
+   "img": "modules/jjk5e/icons/techniques/love-rendezvous.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Marked with ★Ginan (order Imai → Acrux → Mimosa → Ginan → Gacrux). Must touch the next star in order before approaching others.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Love Rendezvous"
+    }
+   },
+   "_key": "!items.effects!HlC6hqoZAtbyQ2hV.8jDoKbVeVuf0fR8C"
+  },
+  {
+   "_id": "dvMCcGmDm49rnscN",
+   "name": "★Gacrux",
+   "img": "modules/jjk5e/icons/techniques/love-rendezvous.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Marked with ★Gacrux (order Imai → Acrux → Mimosa → Ginan → Gacrux). Must touch the next star in order before approaching others.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Love Rendezvous"
+    }
+   },
+   "_key": "!items.effects!HlC6hqoZAtbyQ2hV.dvMCcGmDm49rnscN"
+  }
+ ]
 }

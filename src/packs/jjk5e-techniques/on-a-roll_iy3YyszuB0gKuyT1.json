@@ -24,7 +24,9 @@
  "flags": {
   "jjk5e": {
    "technique": "Pachinko Fever",
-   "level": 6
+   "level": 6,
+   "automationNotes": "After a Jackpot: advantage on the next domain's Event or Multiplier roll (roll 2d20kh).",
+   "automation": "automated"
   }
  },
  "folder": "30lfiZHWDrH4G6F5",

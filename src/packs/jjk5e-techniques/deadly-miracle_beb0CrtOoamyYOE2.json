@@ -19,14 +19,85 @@
    "value": "class",
    "subtype": ""
   },
-  "requirements": "Miracle 6"
+  "requirements": "Miracle 6",
+  "activities": {
+   "rhzI0aAS06f5UGNo": {
+    "_id": "rhzI0aAS06f5UGNo",
+    "type": "utility",
+    "name": "Survive by a miracle (2 Miracles + 2 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "useConditionText": "reaction === \"isDamaged\" || reaction === \"isSave\""
+   }
+  }
  },
  "flags": {
   "jjk5e": {
    "technique": "Miracle",
-   "level": 6
+   "level": 6,
+   "ceCosts": {
+    "rhzI0aAS06f5UGNo": 2
+   },
+   "automationNotes": "Lethal hit or failed save: succeed / take no damage. At 11th: also vs anything dropping you to half HP or less.",
+   "automation": "automated"
   }
  },
  "folder": "tl97VGJouG41Z3rd",
- "_key": "!items!beb0CrtOoamyYOE2"
+ "_key": "!items!beb0CrtOoamyYOE2",
+ "effects": [
+  {
+   "_id": "mue65r1P6DLthGW0",
+   "name": "Deadly Miracle (death saves)",
+   "img": "modules/jjk5e/icons/techniques/miracle.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Advantage on death saves while you have at least 1 Miracle.</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.advantage.deathSave",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": "Miracle"
+    }
+   },
+   "_key": "!items.effects!beb0CrtOoamyYOE2.mue65r1P6DLthGW0"
+  }
+ ]
 }

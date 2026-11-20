@@ -23,28 +23,53 @@
   "activities": {
    "FvH5I4W3ZUZWcWcO": {
     "_id": "FvH5I4W3ZUZWcWcO",
-    "type": "utility",
-    "name": "Reaction",
+    "type": "heal",
+    "name": "Leg Aegis (CE up to 2× mod): 10 HP per CE",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "reaction",
      "value": 1,
-     "condition": ""
+     "condition": "",
+     "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
-     }
+      "allowed": true,
+      "max": "2 * max(@abilities.wis.mod, @abilities.cha.mod)"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
-     "units": "self"
+     "units": "self",
+     "override": true
     },
-    "target": {},
-    "duration": {
-     "units": "inst"
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
     },
-    "useConditionText": "false"
+    "effects": [],
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "",
+     "types": [
+      "temphp"
+     ],
+     "custom": {
+      "enabled": true,
+      "formula": "10 * @scaling"
+     },
+     "scaling": {}
+    },
+    "useConditionText": "reaction === \"isAttacked\""
    }
   }
  },
@@ -64,7 +89,15 @@
       "Missile Fist"
      ]
     ]
-   }
+   },
+   "ceCosts": {
+    "FvH5I4W3ZUZWcWcO": 1
+   },
+   "ceSteps": {
+    "FvH5I4W3ZUZWcWcO": 1
+   },
+   "automationNotes": "Absorption as temp HP until the start of your next turn (remove the rest then). Leg AC = your CE DC.",
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",

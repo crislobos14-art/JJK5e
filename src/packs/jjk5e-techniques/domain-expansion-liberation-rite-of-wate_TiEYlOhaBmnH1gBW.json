@@ -19,7 +19,7 @@
    "8r4a3xWzf8AvZK3J": {
     "_id": "8r4a3xWzf8AvZK3J",
     "type": "utility",
-    "name": "Action",
+    "name": "Command the tiny jellyfish (guaranteed hits)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -88,6 +88,61 @@
      "concentration": false,
      "override": true
     }
+   },
+   "KmaONHIWOyadKH7b": {
+    "_id": "KmaONHIWOyadKH7b",
+    "type": "damage",
+    "name": "Initiative 20: 8d6 poison/acid",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "enemy",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": [],
+    "damage": {
+     "parts": [
+      {
+       "number": 8,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "poison",
+        "acid"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
    }
   },
   "uses": {
@@ -146,7 +201,9 @@
     "MpCwl8qwmgSrp9NC": 20
    },
    "domainActivity": "MpCwl8qwmgSrp9NC",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Difficult terrain without swim speed. Jellyfish: CE mod of them, 30 HP, 1 attack each, count as Moon Dregs.",
+   "automation": "automated"
   }
  },
  "folder": "z6mgJlgIkKDRJURh",

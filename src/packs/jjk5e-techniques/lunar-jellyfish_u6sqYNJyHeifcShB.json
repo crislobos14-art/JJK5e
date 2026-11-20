@@ -19,7 +19,7 @@
    "dq2jkz88K1ENjer5": {
     "_id": "dq2jkz88K1ENjer5",
     "type": "utility",
-    "name": "Action (5 CE)",
+    "name": "Summon Moon Dregs (5 CE)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -51,7 +51,7 @@
    "6EhaTiNh5i430gxE": {
     "_id": "6EhaTiNh5i430gxE",
     "type": "utility",
-    "name": "Use (limited, no CE)",
+    "name": "Summon Moon Dregs (free, 1 per long rest)",
     "activation": {
      "type": "special",
      "condition": "",
@@ -67,6 +67,43 @@
      ],
      "spellSlot": false
     }
+   },
+   "lbjhKTFXWzgbE8FW": {
+    "_id": "lbjhKTFXWzgbE8FW",
+    "type": "utility",
+    "name": "Resize Moon Dregs (1 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
    }
   },
   "uses": {
@@ -111,11 +148,14 @@
  "flags": {
   "jjk5e": {
    "ceCosts": {
-    "dq2jkz88K1ENjer5": 5
+    "dq2jkz88K1ENjer5": 5,
+    "lbjhKTFXWzgbE8FW": 1
    },
    "technique": "Moon Dregs",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Drag the Moon Dregs actor; it Dodges unless commanded (bonus action). Destroyed: 1 minute before resummoning.",
+   "automation": "automated"
   }
  },
  "folder": "z6mgJlgIkKDRJURh",

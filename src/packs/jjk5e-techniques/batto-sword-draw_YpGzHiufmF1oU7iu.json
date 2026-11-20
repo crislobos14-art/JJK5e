@@ -19,7 +19,7 @@
    "zwBY4gywJIbOJGXk": {
     "_id": "zwBY4gywJIbOJGXk",
     "type": "attack",
-    "name": "Action (3 CE)",
+    "name": "Batto (3 CE): one attack vs up to prof targets, advantage",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -35,11 +35,16 @@
      "spellSlot": false
     },
     "range": {
-     "value": "5",
+     "value": "floor(@attributes.movement.walk / 2)",
      "units": "ft",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "@prof",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -47,18 +52,24 @@
      "override": true
     },
     "attack": {
-     "ability": "spellcasting",
+     "ability": "",
      "bonus": "",
      "flat": false,
      "type": {
       "value": "melee",
-      "classification": "spell"
+      "classification": "weapon"
      }
     },
     "damage": {
-     "includeBase": false,
+     "includeBase": true,
      "parts": []
-    }
+    },
+    "effects": [
+     {
+      "_id": "WmxTrrJL6ZaxIbUE",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -101,9 +112,45 @@
    },
    "technique": "New Shadow Style",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Uses your weapon damage (attack from the weapon if Midi can't read it here). End your turn behind the farthest target, no OAs.",
+   "automation": "automated"
   }
  },
  "folder": "afNhLz8cb88QgbyD",
- "_key": "!items!YpGzHiufmF1oU7iu"
+ "_key": "!items!YpGzHiufmF1oU7iu",
+ "effects": [
+  {
+   "_id": "WmxTrrJL6ZaxIbUE",
+   "name": "Batto stance",
+   "img": "modules/jjk5e/icons/techniques/new-shadow-style.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.advantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "New Shadow Style"
+    },
+    "dae": {
+     "specialDuration": [
+      "1Attack"
+     ]
+    }
+   },
+   "_key": "!items.effects!YpGzHiufmF1oU7iu.WmxTrrJL6ZaxIbUE"
+  }
+ ]
 }

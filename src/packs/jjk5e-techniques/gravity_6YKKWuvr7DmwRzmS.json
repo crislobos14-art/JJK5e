@@ -24,7 +24,9 @@
  "flags": {
   "jjk5e": {
    "technique": "Love Rendezvous",
-   "level": 6
+   "level": 6,
+   "automationNotes": "Collision damage ignores bludgeoning resistance; force at 11th; ignores force resistance at 18th (change the collision damage type).",
+   "automation": "automated"
   }
  },
  "folder": "wSkJnhi22IbLpEbi",

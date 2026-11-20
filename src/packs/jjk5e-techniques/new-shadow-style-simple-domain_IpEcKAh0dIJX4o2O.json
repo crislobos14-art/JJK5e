@@ -19,7 +19,7 @@
    "7e9fHJhPwYm4YhHv": {
     "_id": "7e9fHJhPwYm4YhHv",
     "type": "utility",
-    "name": "Bonus Action",
+    "name": "Simple Domain (free use, bonus action, 15 ft)",
     "sort": 0,
     "activation": {
      "type": "bonus",
@@ -32,7 +32,8 @@
       {
        "type": "itemUses",
        "target": "",
-       "value": "1"
+       "value": "1",
+       "scaling": {}
       }
      ],
      "scaling": {
@@ -45,12 +46,29 @@
      "override": true
     },
     "target": {
+     "template": {
+      "type": "radius",
+      "size": "15",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
      "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
-    }
+    },
+    "effects": [
+     {
+      "_id": "lTf224XCHOWOD3wM",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -95,9 +113,32 @@
   "jjk5e": {
    "technique": "New Shadow Style",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "afNhLz8cb88QgbyD",
- "_key": "!items!IpEcKAh0dIJX4o2O"
+ "_key": "!items!IpEcKAh0dIJX4o2O",
+ "effects": [
+  {
+   "_id": "lTf224XCHOWOD3wM",
+   "name": "Simple Domain",
+   "img": "modules/jjk5e/icons/techniques/new-shadow-style.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Simple Domain active (15 ft): see the Simple Domain feat for its effects.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "New Shadow Style"
+    }
+   },
+   "_key": "!items.effects!IpEcKAh0dIJX4o2O.lTf224XCHOWOD3wM"
+  }
+ ]
 }

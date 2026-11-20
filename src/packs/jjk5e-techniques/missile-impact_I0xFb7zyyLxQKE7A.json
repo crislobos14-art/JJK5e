@@ -19,7 +19,7 @@
    "euBB1jHwDj5pSPJe": {
     "_id": "euBB1jHwDj5pSPJe",
     "type": "attack",
-    "name": "Bonus Action (1 CE)",
+    "name": "Missile Fist (1 CE activates for the turn)",
     "sort": 0,
     "activation": {
      "type": "bonus",
@@ -35,14 +35,15 @@
      "spellSlot": false
     },
     "range": {
-     "value": "20",
+     "value": "20 + 10 * floor(min(@details.level, 3) / 3) + 20 * (floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11) + floor(min(@details.level, 18) / 18))",
      "units": "ft",
      "override": true
     },
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
@@ -65,7 +66,7 @@
       {
        "number": 1,
        "denomination": 8,
-       "bonus": "@mod",
+       "bonus": "max(@abilities.wis.mod, @abilities.cha.mod)",
        "types": [
         "necrotic"
        ],
@@ -73,9 +74,76 @@
         "enabled": false,
         "formula": ""
        },
-       "scaling": {
-        "number": 1
-       }
+       "scaling": {}
+      }
+     ]
+    }
+   },
+   "K6aEdttnEcMMU7Kc": {
+    "_id": "K6aEdttnEcMMU7Kc",
+    "type": "attack",
+    "name": "Missile Fist (replaces an attack, free)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "20 + 10 * floor(min(@details.level, 3) / 3) + 20 * (floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11) + floor(min(@details.level, 18) / 18))",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 8,
+       "bonus": "max(@abilities.wis.mod, @abilities.cha.mod)",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
       }
      ]
     }
@@ -128,7 +196,46 @@
    },
    "technique": "Missile Fist",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "dmgScale": {
+    "euBB1jHwDj5pSPJe": [
+     [
+      1,
+      "1d8"
+     ],
+     [
+      6,
+      "2d8"
+     ],
+     [
+      11,
+      "3d8"
+     ],
+     [
+      18,
+      "4d8"
+     ]
+    ],
+    "K6aEdttnEcMMU7Kc": [
+     [
+      1,
+      "1d8"
+     ],
+     [
+      6,
+      "2d8"
+     ],
+     [
+      11,
+      "3d8"
+     ],
+     [
+      18,
+      "4d8"
+     ]
+    ]
+   },
+   "automation": "automated"
   }
  },
  "folder": "coN536PDmNM37MtV",

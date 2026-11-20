@@ -19,7 +19,7 @@
    "4aEwGySubtb2WGSz": {
     "_id": "4aEwGySubtb2WGSz",
     "type": "utility",
-    "name": "Reaction",
+    "name": "Add a die to a failed roll (Miracle + 1 CE)",
     "sort": 0,
     "activation": {
      "type": "reaction",
@@ -45,7 +45,13 @@
      "units": "inst",
      "override": true
     },
-    "useConditionText": "false"
+    "useConditionText": "reaction === \"isSave\"",
+    "roll": {
+     "formula": "1d(6 + 2 * floor(min(@details.level, 6) / 6) + 2 * floor(min(@details.level, 11) / 11))",
+     "name": "Miraculous Outcome",
+     "prompt": false,
+     "visible": true
+    }
    }
   },
   "uses": {
@@ -85,7 +91,11 @@
   "jjk5e": {
    "technique": "Miracle",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceCosts": {
+    "4aEwGySubtb2WGSz": 1
+   },
+   "automation": "automated"
   }
  },
  "folder": "tl97VGJouG41Z3rd",

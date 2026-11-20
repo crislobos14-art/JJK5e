@@ -24,7 +24,7 @@
    "tapxN4JtczFg5XZk": {
     "_id": "tapxN4JtczFg5XZk",
     "type": "utility",
-    "name": "Reaction",
+    "name": "Spend a Calamity Mark (reaction to a success)",
     "sort": 0,
     "activation": {
      "type": "reaction",
@@ -32,7 +32,14 @@
      "condition": ""
     },
     "consumption": {
-     "targets": [],
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1",
+       "scaling": {}
+      }
+     ],
      "scaling": {
       "allowed": false
      }
@@ -45,7 +52,53 @@
      "units": "inst"
     },
     "useConditionText": "false"
+   },
+   "Y2UxchXeaLHgtWm4": {
+    "_id": "Y2UxchXeaLHgtWm4",
+    "type": "utility",
+    "name": "Gain a Calamity Mark",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "-1",
+       "scaling": {}
+      }
+     ],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
    }
+  },
+  "uses": {
+   "max": "6",
+   "spent": 6,
+   "recovery": []
   }
  },
  "flags": {
@@ -64,7 +117,12 @@
       "Miracle"
      ]
     ]
-   }
+   },
+   "ceCosts": {
+    "tapxN4JtczFg5XZk": 2
+   },
+   "automationNotes": "Item uses = Calamity Marks held (max 6).",
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",

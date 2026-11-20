@@ -19,7 +19,7 @@
    "No9KmbGtcneLQgGi": {
     "_id": "No9KmbGtcneLQgGi",
     "type": "utility",
-    "name": "Reaction",
+    "name": "Mark as a reaction (+CE mod extra mark-only reactions)",
     "sort": 0,
     "activation": {
      "type": "reaction",
@@ -85,7 +85,8 @@
   "jjk5e": {
    "technique": "Love Rendezvous",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "wSkJnhi22IbLpEbi",

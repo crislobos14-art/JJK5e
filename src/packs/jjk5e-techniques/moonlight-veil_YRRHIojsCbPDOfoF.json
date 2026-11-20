@@ -39,6 +39,9 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
@@ -46,7 +49,13 @@
      "units": "minute",
      "concentration": false,
      "override": true
-    }
+    },
+    "effects": [
+     {
+      "_id": "gbLcgDSqlx0HlezZ",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -90,9 +99,45 @@
    },
    "technique": "New Shadow Style",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "afNhLz8cb88QgbyD",
- "_key": "!items!YRRHIojsCbPDOfoF"
+ "_key": "!items!YRRHIojsCbPDOfoF",
+ "effects": [
+  {
+   "_id": "gbLcgDSqlx0HlezZ",
+   "name": "Moonlight Veil",
+   "img": "modules/jjk5e/icons/techniques/new-shadow-style.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>+CE mod to melee weapon/unarmed attack and damage; broken weapons work normally.</p>",
+   "changes": [
+    {
+     "key": "system.bonuses.mwak.attack",
+     "mode": 2,
+     "value": "+ max(@abilities.wis.mod, @abilities.cha.mod)",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ max(@abilities.wis.mod, @abilities.cha.mod)",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "New Shadow Style"
+    }
+   },
+   "_key": "!items.effects!YRRHIojsCbPDOfoF.gbLcgDSqlx0HlezZ"
+  }
+ ]
 }

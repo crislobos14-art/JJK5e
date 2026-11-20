@@ -18,9 +18,60 @@
   "activities": {
    "7I2bFGdGpPZaTmFh": {
     "_id": "7I2bFGdGpPZaTmFh",
-    "type": "utility",
-    "name": "Reaction",
+    "type": "heal",
+    "name": "Blind Luck (Miracle): reduce damage CE-mod d4 + prof",
     "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "",
+     "types": [
+      "temphp"
+     ],
+     "custom": {
+      "enabled": true,
+      "formula": "(max(@abilities.wis.mod, @abilities.cha.mod))d4 + @prof"
+     },
+     "scaling": {}
+    },
+    "useConditionText": "reaction === \"isDamaged\""
+   },
+   "JTd0zzvkxD8ZdIRk": {
+    "_id": "JTd0zzvkxD8ZdIRk",
+    "type": "heal",
+    "name": "Blind Luck reaction (Miracle + 1 CE): d6s + 2× prof",
+    "sort": 0,
+    "img": null,
     "activation": {
      "type": "reaction",
      "value": 1,
@@ -30,22 +81,40 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
      "units": "self",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
-    "duration": {
-     "units": "inst",
-     "override": true
+    "effects": [],
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "",
+     "types": [
+      "temphp"
+     ],
+     "custom": {
+      "enabled": true,
+      "formula": "(max(@abilities.wis.mod, @abilities.cha.mod))d6 + 2 * @prof"
+     },
+     "scaling": {}
     },
-    "useConditionText": "false"
+    "useConditionText": "reaction === \"isDamaged\""
    }
   },
   "uses": {
@@ -85,7 +154,12 @@
   "jjk5e": {
    "technique": "Miracle",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceCosts": {
+    "JTd0zzvkxD8ZdIRk": 1
+   },
+   "automationNotes": "Reduction applied as temp HP. Spend the Miracle on Little Miracles.",
+   "automation": "automated"
   }
  },
  "folder": "tl97VGJouG41Z3rd",

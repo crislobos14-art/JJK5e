@@ -19,7 +19,7 @@
    "glSZei3Ae16pW6Ap": {
     "_id": "glSZei3Ae16pW6Ap",
     "type": "utility",
-    "name": "Use",
+    "name": "Force a critical (1 per long rest, no Black Flash)",
     "activation": {
      "type": "special",
      "condition": "",
@@ -30,11 +30,20 @@
       {
        "type": "itemUses",
        "target": "",
-       "value": "1"
+       "value": "1",
+       "scaling": {}
       }
      ],
-     "spellSlot": false
-    }
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "effects": [
+     {
+      "_id": "E5UaQECEJ2tewNFx",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -77,9 +86,44 @@
   "jjk5e": {
    "technique": "Pachinko Fever",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "30lfiZHWDrH4G6F5",
- "_key": "!items!ekaS8GYbKDcFu0i8"
+ "_key": "!items!ekaS8GYbKDcFu0i8",
+ "effects": [
+  {
+   "_id": "E5UaQECEJ2tewNFx",
+   "name": "Great Luck",
+   "img": "modules/jjk5e/icons/techniques/pachinko-fever.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.critical.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Pachinko Fever"
+    },
+    "dae": {
+     "specialDuration": [
+      "1Attack"
+     ]
+    }
+   },
+   "_key": "!items.effects!ekaS8GYbKDcFu0i8.E5UaQECEJ2tewNFx"
+  }
+ ]
 }

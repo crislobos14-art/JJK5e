@@ -19,10 +19,10 @@
    "NmXVtv6gLY8sVL2e": {
     "_id": "NmXVtv6gLY8sVL2e",
     "type": "damage",
-    "name": "Action (1 CE)",
+    "name": "Poisonous hit (1 CE, once per turn)",
     "sort": 0,
     "activation": {
-     "type": "action",
+     "type": "special",
      "value": 1,
      "condition": "",
      "override": true
@@ -39,6 +39,11 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -62,8 +67,12 @@
         "number": 1
        }
       }
-     ]
-    }
+     ],
+     "critical": {
+      "allow": false
+     }
+    },
+    "useConditionText": "reaction === \"isHit\""
    }
   },
   "uses": {
@@ -106,7 +115,28 @@
    },
    "technique": "Moon Dregs",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "dmgScale": {
+    "NmXVtv6gLY8sVL2e": [
+     [
+      1,
+      "2d6"
+     ],
+     [
+      6,
+      "4d6"
+     ],
+     [
+      11,
+      "6d8"
+     ],
+     [
+      18,
+      "6d10"
+     ]
+    ]
+   },
+   "automation": "automated"
   }
  },
  "folder": "z6mgJlgIkKDRJURh",

@@ -19,10 +19,10 @@
    "RTkzKBIlRPkP4yDy": {
     "_id": "RTkzKBIlRPkP4yDy",
     "type": "damage",
-    "name": "Action (1 CE)",
+    "name": "Electric Energy (on melee damage, 1 CE)",
     "sort": 0,
     "activation": {
-     "type": "action",
+     "type": "special",
      "value": 1,
      "condition": "",
      "override": true
@@ -39,6 +39,11 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -63,7 +68,8 @@
        }
       }
      ]
-    }
+    },
+    "useConditionText": "reaction === \"isHit\""
    }
   },
   "uses": {
@@ -106,7 +112,36 @@
    },
    "technique": "Mythical Beast Amber",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "dmgScale": {
+    "RTkzKBIlRPkP4yDy": [
+     [
+      1,
+      "1d10"
+     ],
+     [
+      3,
+      "2d10"
+     ],
+     [
+      6,
+      "3d10"
+     ],
+     [
+      11,
+      "4d10"
+     ],
+     [
+      14,
+      "5d10"
+     ],
+     [
+      18,
+      "6d10"
+     ]
+    ]
+   },
+   "automation": "automated"
   }
  },
  "folder": "J9wuYC5ZIUpqsRHr",

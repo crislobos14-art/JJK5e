@@ -19,7 +19,7 @@
    "TXwXx9fXzICCIwJX": {
     "_id": "TXwXx9fXzICCIwJX",
     "type": "attack",
-    "name": "Bonus Action (1 CE)",
+    "name": "Bonus Action (+10% expectation)",
     "sort": 0,
     "activation": {
      "type": "bonus",
@@ -42,7 +42,8 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
@@ -83,7 +84,7 @@
    "2YBYxZ5VY36SuFOh": {
     "_id": "2YBYxZ5VY36SuFOh",
     "type": "attack",
-    "name": "Bonus Action (3 CE)",
+    "name": "Bonus Action (+25% expectation)",
     "sort": 100000,
     "activation": {
      "type": "bonus",
@@ -99,11 +100,16 @@
      "spellSlot": false
     },
     "range": {
-     "value": "175",
+     "value": "5",
      "units": "ft",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -142,9 +148,10 @@
    },
    "9tZPXV2hWCQnKAV3": {
     "_id": "9tZPXV2hWCQnKAV3",
-    "type": "save",
-    "name": "Bonus Action (4 CE)",
-    "sort": 200000,
+    "type": "attack",
+    "name": "Golden Train Door (4 CE, +50%)",
+    "sort": 0,
+    "img": null,
     "activation": {
      "type": "bonus",
      "value": 1,
@@ -154,9 +161,14 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
      "value": "30",
@@ -166,25 +178,26 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
-    "duration": {
-     "units": "inst",
-     "override": true
-    },
-    "save": {
-     "ability": [
-      "str"
-     ],
-     "dc": {
-      "calculation": "spellcasting",
-      "formula": ""
+    "effects": [],
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
      }
     },
     "damage": {
-     "onSave": "none",
+     "includeBase": false,
      "parts": [
       {
        "number": 1,
@@ -197,23 +210,23 @@
         "enabled": false,
         "formula": ""
        },
-       "scaling": {
-        "number": 1
-       }
+       "scaling": {}
       }
      ]
     },
-    "effects": [
-     {
-      "_id": "IOEoSqxJ7etd6f6j",
-      "onSave": false
-     }
-    ]
+    "midiProperties": {
+     "triggeredActivityId": "bboCXy0YToFRgPaD",
+     "triggeredActivityTargets": "hitTargets",
+     "triggeredActivityRollAs": "self",
+     "triggeredActivityConsume": false,
+     "triggeredActivityConfigure": false,
+     "triggeredActivityConditionText": ""
+    }
    },
    "wvrmw4fvEn5EbuDC": {
     "_id": "wvrmw4fvEn5EbuDC",
     "type": "utility",
-    "name": "Use (limited, no CE)",
+    "name": "Free expansion (1 per long rest)",
     "activation": {
      "type": "special",
      "condition": "",
@@ -224,10 +237,13 @@
       {
        "type": "itemUses",
        "target": "",
-       "value": "1"
+       "value": "1",
+       "scaling": {}
       }
      ],
-     "spellSlot": false
+     "scaling": {
+      "allowed": false
+     }
     }
    },
    "kspW9PPSA9yKZuyu": {
@@ -272,6 +288,397 @@
      "concentration": false,
      "override": true
     }
+   },
+   "bboCXy0YToFRgPaD": {
+    "_id": "bboCXy0YToFRgPaD",
+    "type": "save",
+    "name": "Train door: STR or restrained",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "IOEoSqxJ7etd6f6j",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "str"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   },
+   "XqirC5HlyduiZnUJ": {
+    "_id": "XqirC5HlyduiZnUJ",
+    "type": "utility",
+    "name": "Bet: event roll (d20 + expectation)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "roll": {
+     "formula": "1d20 + @scaling",
+     "name": "Event: 1–9 d12 · 10–14 d10 · 15–18 d8 · 19–20 d6",
+     "prompt": true,
+     "visible": true
+    }
+   },
+   "98q34SQYHrzNOEZP": {
+    "_id": "98q34SQYHrzNOEZP",
+    "type": "utility",
+    "name": "Event length (d10 rounds)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "roll": {
+     "formula": "1d10",
+     "name": "Event rounds",
+     "prompt": false,
+     "visible": true
+    }
+   },
+   "lCJvMV7ilsXNpeYs": {
+    "_id": "lCJvMV7ilsXNpeYs",
+    "type": "utility",
+    "name": "Multiplier roll (d20 + expectation)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "roll": {
+     "formula": "1d20 + @scaling",
+     "name": "1–12 ×3 · 13–15 ×4 · 16–17 ×5 · 18–19 ×10 · 20 Rainbow",
+     "prompt": true,
+     "visible": true
+    }
+   },
+   "SJauT0beJfqGoXwS": {
+    "_id": "SJauT0beJfqGoXwS",
+    "type": "utility",
+    "name": "Jackpot dice (3d12: triples win)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "roll": {
+     "formula": "3d12",
+     "name": "Jackpot",
+     "prompt": false,
+     "visible": true
+    }
+   },
+   "JfyV0rpkejrL2IBd": {
+    "_id": "JfyV0rpkejrL2IBd",
+    "type": "utility",
+    "name": "Jackpot dice (3d10: triples win)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "roll": {
+     "formula": "3d10",
+     "name": "Jackpot",
+     "prompt": false,
+     "visible": true
+    }
+   },
+   "lXMK1RskNkp5PhpW": {
+    "_id": "lXMK1RskNkp5PhpW",
+    "type": "utility",
+    "name": "Jackpot dice (3d8: triples win)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "roll": {
+     "formula": "3d8",
+     "name": "Jackpot",
+     "prompt": false,
+     "visible": true
+    }
+   },
+   "3kdkGNbt0P3vooG1": {
+    "_id": "3kdkGNbt0P3vooG1",
+    "type": "utility",
+    "name": "Jackpot dice (3d6: triples win)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "roll": {
+     "formula": "3d6",
+     "name": "Jackpot",
+     "prompt": false,
+     "visible": true
+    }
+   },
+   "d995EM1EwEGI1PlX": {
+    "_id": "d995EM1EwEGI1PlX",
+    "type": "utility",
+    "name": "JACKPOT: 4 rounds of immortality",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "MSLu7K7JzfmbZ2tk",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -338,7 +745,9 @@
    "level": 3,
    "domain": true,
    "domainActivity": "kspW9PPSA9yKZuyu",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Expectation: enter it as the scale (+1 per 10%, max +19) when rolling. Non-lethal domain with Anti-Domain Clash.",
+   "automation": "automated"
   }
  },
  "effects": [
@@ -357,9 +766,41 @@
    "flags": {
     "jjk5e": {
      "condition": "restrained"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnEndSource"
+     ]
     }
    },
    "_key": "!items.effects!JgbhHu3Xdg6y4dKN.IOEoSqxJ7etd6f6j"
+  },
+  {
+   "_id": "MSLu7K7JzfmbZ2tk",
+   "name": "Jackpot",
+   "img": "modules/jjk5e/icons/techniques/pachinko-fever-domain.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>CE refills each turn; free RCT (CE mod) at turn start; can't drop below 1 HP; heal injuries. No Technique Burnout; regain a free use.</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "value": "turn=start, label=Jackpot: refill CE, RCT heal",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 4
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Pachinko Fever"
+    }
+   },
+   "_key": "!items.effects!JgbhHu3Xdg6y4dKN.MSLu7K7JzfmbZ2tk"
   }
  ],
  "folder": "30lfiZHWDrH4G6F5",

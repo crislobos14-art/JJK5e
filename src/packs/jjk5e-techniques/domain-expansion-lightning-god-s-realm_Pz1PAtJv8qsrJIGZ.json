@@ -58,6 +58,48 @@
      "concentration": false,
      "override": true
     }
+   },
+   "nwtK0vlUy47TnaAw": {
+    "_id": "nwtK0vlUy47TnaAw",
+    "type": "utility",
+    "name": "Initiative 20: 3 positive charges on all",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "enemy",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "mawsJijJeqhGKIip",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -116,9 +158,32 @@
     "fSyYXmjs128rP092": 20
    },
    "domainActivity": "fSyYXmjs128rP092",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "J9wuYC5ZIUpqsRHr",
- "_key": "!items!Pz1PAtJv8qsrJIGZ"
+ "_key": "!items!Pz1PAtJv8qsrJIGZ",
+ "effects": [
+  {
+   "_id": "mawsJijJeqhGKIip",
+   "name": "Positive charges ×3",
+   "img": "modules/jjk5e/icons/techniques/mythical-beast-amber-domain.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>3 charges (no limit inside the domain).</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Mythical Beast Amber"
+    }
+   },
+   "_key": "!items.effects!Pz1PAtJv8qsrJIGZ.mawsJijJeqhGKIip"
+  }
+ ]
 }

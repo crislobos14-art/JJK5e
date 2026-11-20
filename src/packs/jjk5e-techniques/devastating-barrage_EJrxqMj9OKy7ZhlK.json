@@ -18,8 +18,8 @@
   "activities": {
    "GXrlPFNMcRUpwl4V": {
     "_id": "GXrlPFNMcRUpwl4V",
-    "type": "save",
-    "name": "Special (1+ CE)",
+    "type": "utility",
+    "name": "Extra Missile Fists (1 CE each, up to CE mod)",
     "sort": 0,
     "activation": {
      "type": "special",
@@ -31,7 +31,7 @@
      "targets": [],
      "scaling": {
       "allowed": true,
-      "max": "max(1, max(@abilities.wis.mod, @abilities.cha.mod))"
+      "max": "max(@abilities.wis.mod, @abilities.cha.mod)"
      },
      "spellSlot": false
     },
@@ -56,11 +56,93 @@
       "calculation": "spellcasting",
       "formula": ""
      }
-    },
-    "damage": {
-     "onSave": "none",
-     "parts": []
     }
+   },
+   "adpbCOty71QGW7OR": {
+    "_id": "adpbCOty71QGW7OR",
+    "type": "utility",
+    "name": "Grab instead of damage (grappled)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "A6oRPnrucfiP4Vrg",
+      "onSave": false
+     }
+    ]
+   },
+   "i5dNAI2VxAcHKNcm": {
+    "_id": "i5dNAI2VxAcHKNcm",
+    "type": "utility",
+    "name": "Grab a grappled target (restrained)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "zbuvzfsPLZ01O0B6",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -107,9 +189,70 @@
    },
    "technique": "Missile Fist",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "coN536PDmNM37MtV",
- "_key": "!items!EJrxqMj9OKy7ZhlK"
+ "_key": "!items!EJrxqMj9OKy7ZhlK",
+ "effects": [
+  {
+   "_id": "A6oRPnrucfiP4Vrg",
+   "name": "Grappled (Missile Fist)",
+   "img": "modules/jjk5e/icons/techniques/missile-fist.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [
+    "grappled"
+   ],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "priority": 20,
+     "value": "turn=end, saveAbility=str, saveDC=JJKORIGINDC, label=Missile Fist grip"
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Missile Fist"
+    }
+   },
+   "_key": "!items.effects!EJrxqMj9OKy7ZhlK.A6oRPnrucfiP4Vrg"
+  },
+  {
+   "_id": "zbuvzfsPLZ01O0B6",
+   "name": "Restrained (Missile Fist)",
+   "img": "modules/jjk5e/icons/techniques/missile-fist.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [
+    "restrained"
+   ],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "priority": 20,
+     "value": "turn=end, saveAbility=str, saveDC=JJKORIGINDC, label=Missile Fist grip"
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Missile Fist"
+    }
+   },
+   "_key": "!items.effects!EJrxqMj9OKy7ZhlK.zbuvzfsPLZ01O0B6"
+  }
+ ]
 }

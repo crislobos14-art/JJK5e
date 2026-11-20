@@ -38,12 +38,24 @@
      }
     },
     "range": {
-     "units": "self"
+     "units": "self",
+     "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
-    }
+    },
+    "effects": [
+     {
+      "_id": "Uxa7XiiVYaZ2hXkd",
+      "onSave": false
+     }
+    ]
    }
   }
  },
@@ -66,10 +78,33 @@
       "Mythical Beast Amber"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!fGCggY73l4b2e4Wu"
+ "_key": "!items!fGCggY73l4b2e4Wu",
+ "effects": [
+  {
+   "_id": "Uxa7XiiVYaZ2hXkd",
+   "name": "Reversing Amber",
+   "img": "modules/jjk5e/icons/techniques/mythical-beast-amber.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Concentration; wait as long as the Release lasted to end it safely.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Mythical Beast Amber"
+    }
+   },
+   "_key": "!items.effects!fGCggY73l4b2e4Wu.Uxa7XiiVYaZ2hXkd"
+  }
+ ]
 }

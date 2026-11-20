@@ -19,12 +19,62 @@
    "value": "class",
    "subtype": ""
   },
-  "requirements": "Miracle 1"
+  "requirements": "Miracle 1",
+  "uses": {
+   "max": "6",
+   "spent": 6,
+   "recovery": []
+  },
+  "activities": {
+   "ovBIfJWycAVvZtyG": {
+    "_id": "ovBIfJWycAVvZtyG",
+    "type": "utility",
+    "name": "Gain Miracles (witnessed fortune)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "-(1 + floor(min(@details.level, 11) / 11) + floor(min(@details.level, 18) / 18))",
+       "scaling": {}
+      }
+     ],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
+   }
+  }
  },
  "flags": {
   "jjk5e": {
    "technique": "Miracle",
-   "level": 1
+   "level": 1,
+   "automationNotes": "Item uses = Miracles held (max 6). Other Miracle features spend from here: lower the uses by hand when they say 'spend a Miracle'.",
+   "automation": "automated"
   }
  },
  "folder": "tl97VGJouG41Z3rd",

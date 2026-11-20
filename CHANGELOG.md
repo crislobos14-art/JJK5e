@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.49.0 — Técnica por técnica: Love Rendezvous → Pachinko Fever (7)
+- **Love Rendezvous**: marcas de las 5 estrellas (1 CE) como efectos, colisión escalable, dominio, Hate Separation.
+- **Miracle**: Miracles y Calamity Marks como usos del objeto (máx. 6); Blind Luck (reducción como PG temp), Miraculous Outcome (d6→d10), Deadly Miracle (ventaja en salvaciones de muerte), dominio con coste 2d20.
+- **Missile Fist**: puño a distancia que escala en alcance (20→90 pies) y dado (1d8→4d8); puños extra; agarrar/apresar con salvación de FUE; Unrelenting Fury; Brutal Bombardment con salpicadura; dominio 8d8 + derribo; Leg Aegis (10 PG temp por CE).
+- **Moon Dregs**: invocación (gratis 1/descanso), veneno al impactar (2d6→6d10, sin crítico), Noxious Poison con agotamiento, dominio 8d6, Sun Dregs y +4d6 radiante.
+- **Mythical Beast Amber**: Electric Energy (1d10→6d10), +mod. EM a iniciativa, cargas y descarga (1d12 por carga), Release con 5 etapas (FUE/DES/CON, velocidad, inmunidad, reducción, visión verdadera) y desactivación con CD 10–30 y agotamiento, Loud Blast, Cursed Beam, dominio.
+- **New Shadow Style**: Simple Domain con usos = comp., Batto contra varios objetivos, intercepción de Evening Moon, Moonlight Veil (+mod. EM), Perfect Shadow Style.
+- **Pachinko Fever**: Idle Death Gamble (1 gratis/descanso) con los 3 ataques, tiradas de evento, duración, multiplicador y jackpot (3dX); Jackpot; Great Luck; The Fever (puntos como usos); Luckiest Sorcerer; Joint Bankruptcy.
+- Automatizados a mano: 210/360. Sin probar en Foundry real.
+
 ## 1.48.0 — Técnica por técnica: Heart Catch → Limitless (7)
 - **Heart Catch**: Love Hands (golpe con alcance 15/30 pies, agarre con ventaja), restricción de Handy, Hand Shield (+5 CA), Cutie Honey al impactar, dominio (apresado + encantado), Fine Line.
 - **Ice Formation**: cono de hielo (1d10→6d10) con apresado y salvación de FUE cada turno; Extreme Cold (agotamiento/velocidad); Frost Calm; Ice Fall (ataque + púas DES 6d8+6d8, tú derribado); White Abyss; Heat Dissociation con agotamiento. Eliminada una actividad suelta con veneno.

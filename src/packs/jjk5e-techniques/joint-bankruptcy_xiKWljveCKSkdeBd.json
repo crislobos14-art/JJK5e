@@ -19,7 +19,46 @@
    "value": "class",
    "subtype": ""
   },
-  "requirements": "Cursed Technique Reversal, Pachinko Fever"
+  "requirements": "Cursed Technique Reversal, Pachinko Fever",
+  "activities": {
+   "mnfOOOfbnyGxFTl6": {
+    "_id": "mnfOOOfbnyGxFTl6",
+    "type": "utility",
+    "name": "Everyone rolls for a Jackpot",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": []
+   }
+  }
  },
  "flags": {
   "jjk5e": {
@@ -37,7 +76,9 @@
       "Pachinko Fever"
      ]
     ]
-   }
+   },
+   "automationNotes": "Jackpot: +10 CE. Fail: loses all CE and can't regain it for 1 minute.",
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",

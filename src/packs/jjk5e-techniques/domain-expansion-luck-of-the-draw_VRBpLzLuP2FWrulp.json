@@ -58,6 +58,84 @@
      "concentration": false,
      "override": true
     }
+   },
+   "WO4PYi9ybM0eWLmn": {
+    "_id": "WO4PYi9ybM0eWLmn",
+    "type": "utility",
+    "name": "Domain cost (2d20 CE) and duration (1d4 min)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "roll": {
+     "formula": "2d20",
+     "name": "Domain CE cost (then roll 1d4 minutes)",
+     "prompt": false,
+     "visible": true
+    }
+   },
+   "Z16NUYTa6ppHtuqL": {
+    "_id": "Z16NUYTa6ppHtuqL",
+    "type": "utility",
+    "name": "Initiative 20: gain 3 Miracles",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
    }
   },
   "uses": {
@@ -116,7 +194,9 @@
    "level": 18,
    "domain": true,
    "domainActivity": "mzyA3bqRWQ2H0szs",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Expansion activity charges 20 CE: refund/adjust to the 2d20 roll. No Miracle cap inside; spend a Miracle to give an attack/technique a guaranteed hit.",
+   "automation": "automated"
   }
  },
  "folder": "tl97VGJouG41Z3rd",

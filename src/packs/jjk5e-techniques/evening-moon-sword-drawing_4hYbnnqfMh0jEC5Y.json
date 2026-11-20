@@ -19,14 +19,204 @@
    "value": "class",
    "subtype": ""
   },
-  "requirements": "New Shadow Style 6"
+  "requirements": "New Shadow Style 6",
+  "activities": {
+   "LibkVXhrWQuBNhX9": {
+    "_id": "LibkVXhrWQuBNhX9",
+    "type": "utility",
+    "name": "Interception draw (creature crosses your Simple Domain)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "15",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "useConditionText": "false"
+   },
+   "Yu9mgJ1mdFKudMBa": {
+    "_id": "Yu9mgJ1mdFKudMBa",
+    "type": "damage",
+    "name": "On hit: +1 weapon die per CE",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "max(@abilities.wis.mod, @abilities.cha.mod)"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "damage": {
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "slashing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   },
+   "chqpgCFu0whYbncy": {
+    "_id": "chqpgCFu0whYbncy",
+    "type": "utility",
+    "name": "On hit: +AC/saves per CE until your turn",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "max(@abilities.wis.mod, @abilities.cha.mod)"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "ClJrDOLFJwdvOQrs",
+      "onSave": false
+     }
+    ]
+   }
+  }
  },
  "flags": {
   "jjk5e": {
    "technique": "New Shadow Style",
-   "level": 6
+   "level": 6,
+   "ceCosts": {
+    "Yu9mgJ1mdFKudMBa": 1,
+    "chqpgCFu0whYbncy": 1
+   },
+   "ceSteps": {
+    "Yu9mgJ1mdFKudMBa": 1,
+    "chqpgCFu0whYbncy": 1
+   },
+   "automationNotes": "Once per round per creature. Die shown as d8: use your weapon's.",
+   "automation": "automated"
   }
  },
  "folder": "afNhLz8cb88QgbyD",
- "_key": "!items!4hYbnnqfMh0jEC5Y"
+ "_key": "!items!4hYbnnqfMh0jEC5Y",
+ "effects": [
+  {
+   "_id": "ClJrDOLFJwdvOQrs",
+   "name": "Evening Moon guard",
+   "img": "modules/jjk5e/icons/techniques/new-shadow-style.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+ @scaling",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.abilities.save",
+     "mode": 2,
+     "value": "+ @scaling",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "New Shadow Style"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStartSource"
+     ]
+    }
+   },
+   "_key": "!items.effects!4hYbnnqfMh0jEC5Y.ClJrDOLFJwdvOQrs"
+  }
+ ]
 }

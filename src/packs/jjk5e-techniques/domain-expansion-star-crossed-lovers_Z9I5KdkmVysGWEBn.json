@@ -19,7 +19,7 @@
    "ufGCwUODQvDzJ5Dm": {
     "_id": "ufGCwUODQvDzJ5Dm",
     "type": "utility",
-    "name": "Action",
+    "name": "Pull a marked creature 30 ft toward another (guaranteed hit)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -39,6 +39,11 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -146,7 +151,9 @@
     "pORCTJVENP1H9qmz": 20
    },
    "domainActivity": "pORCTJVENP1H9qmz",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Initiative 20: mark any creatures with your stars (use the mark activities, free).",
+   "automation": "automated"
   }
  },
  "folder": "wSkJnhi22IbLpEbi",

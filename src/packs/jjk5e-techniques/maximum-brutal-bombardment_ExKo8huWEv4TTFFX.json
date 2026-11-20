@@ -19,10 +19,10 @@
    "hEA4OYlwEM5hHr1X": {
     "_id": "hEA4OYlwEM5hHr1X",
     "type": "save",
-    "name": "Bonus Action (6 CE)",
+    "name": "Brutal Bombardment (full turn, 6 CE): main target",
     "sort": 0,
     "activation": {
-     "type": "bonus",
+     "type": "action",
      "value": 1,
      "condition": "",
      "override": true
@@ -42,7 +42,8 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
@@ -60,17 +61,50 @@
      }
     },
     "damage": {
-     "onSave": "none",
-     "parts": []
-    }
+     "onSave": "half",
+     "parts": [
+      {
+       "number": null,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "(3 + 3 * (1 + floor(min(@details.level, 5) / 5)))d8"
+       },
+       "scaling": {}
+      },
+      {
+       "number": 4,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "D9tvLXURflWQbQ4u",
+      "onSave": false
+     }
+    ]
    },
    "S2O4IOTQtshbOEC8": {
     "_id": "S2O4IOTQtshbOEC8",
     "type": "save",
-    "name": "Action (1+ CE)",
+    "name": "Splash: creatures near the target (STR)",
     "sort": 100000,
     "activation": {
-     "type": "action",
+     "type": "special",
      "value": 1,
      "condition": "",
      "override": true
@@ -89,9 +123,16 @@
      "override": true
     },
     "target": {
+     "template": {
+      "type": "radius",
+      "size": "5",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
      "affects": {
       "type": "creature",
-      "count": "1"
+      "choice": false
      },
      "override": true
     },
@@ -123,7 +164,6 @@
         "formula": ""
        },
        "scaling": {
-        "mode": "whole",
         "number": 3
        }
       }
@@ -179,16 +219,15 @@
  },
  "flags": {
   "jjk5e": {
-   "ceSteps": {
-    "S2O4IOTQtshbOEC8": 1
-   },
+   "ceSteps": {},
    "ceCosts": {
-    "hEA4OYlwEM5hHr1X": 6,
-    "S2O4IOTQtshbOEC8": 1
+    "hEA4OYlwEM5hHr1X": 6
    },
    "technique": "Missile Fist",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Main necrotic assumes attacks per action = 1 (+1 with Extra Attack at 5th). +3d8 per extra CE (scale). Bludgeoning only on a failed save (Midi halves it: remove on success).",
+   "automation": "automated"
   }
  },
  "effects": [

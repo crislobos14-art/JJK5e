@@ -19,7 +19,7 @@
    "1Vzkeb3xIOtzq6y4": {
     "_id": "1Vzkeb3xIOtzq6y4",
     "type": "utility",
-    "name": "Special",
+    "name": "Multiplier roll (best of 3d20)",
     "sort": 0,
     "activation": {
      "type": "special",
@@ -44,6 +44,12 @@
     "duration": {
      "units": "inst",
      "override": true
+    },
+    "roll": {
+     "formula": "3d20kh + @scaling",
+     "name": "Multiplier",
+     "prompt": true,
+     "visible": true
     }
    }
   },
@@ -84,7 +90,9 @@
   "jjk5e": {
    "technique": "Pachinko Fever",
    "level": 18,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Jackpot lasts CE mod minutes; RCT as if 2 × CE mod spent, as a free action.",
+   "automation": "automated"
   }
  },
  "folder": "30lfiZHWDrH4G6F5",

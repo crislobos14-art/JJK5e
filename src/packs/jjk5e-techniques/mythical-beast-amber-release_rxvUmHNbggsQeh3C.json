@@ -19,7 +19,7 @@
    "KCuyWY0C4k6wvr81": {
     "_id": "KCuyWY0C4k6wvr81",
     "type": "utility",
-    "name": "Action (8 CE)",
+    "name": "Release (8 CE): enter Stage 1",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -39,17 +39,26 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
-    }
+    },
+    "effects": [
+     {
+      "_id": "suQwUhLhKWfQA6ch",
+      "onSave": false
+     }
+    ]
    },
    "mF6qqggdpt7QB4d9": {
     "_id": "mF6qqggdpt7QB4d9",
     "type": "save",
-    "name": "Action (6 CE)",
+    "name": "Cursed Beam (Stage 5, 6 CE): 30-ft line",
     "sort": 100000,
     "activation": {
      "type": "action",
@@ -72,6 +81,7 @@
      "template": {
       "type": "line",
       "size": "30",
+      "width": "5",
       "units": "ft",
       "count": "1",
       "contiguous": false
@@ -122,70 +132,10 @@
      }
     ]
    },
-   "uigNdvV8c7WRvFkn": {
-    "_id": "uigNdvV8c7WRvFkn",
-    "type": "save",
-    "name": "Bonus Action",
-    "sort": 200000,
-    "activation": {
-     "type": "bonus",
-     "value": 1,
-     "condition": "",
-     "override": true
-    },
-    "consumption": {
-     "targets": [],
-     "scaling": {
-      "allowed": false
-     },
-     "spellSlot": false
-    },
-    "range": {
-     "value": "30",
-     "units": "ft",
-     "override": true
-    },
-    "target": {
-     "override": true
-    },
-    "duration": {
-     "units": "inst",
-     "override": true
-    },
-    "save": {
-     "ability": [
-      "con"
-     ],
-     "dc": {
-      "calculation": "spellcasting",
-      "formula": ""
-     }
-    },
-    "damage": {
-     "onSave": "none",
-     "parts": [
-      {
-       "number": 1,
-       "denomination": 10,
-       "bonus": "",
-       "types": [
-        "lightning"
-       ],
-       "custom": {
-        "enabled": false,
-        "formula": ""
-       },
-       "scaling": {
-        "number": 1
-       }
-      }
-     ]
-    }
-   },
    "v32k7Qixy55vE2b9": {
     "_id": "v32k7Qixy55vE2b9",
     "type": "save",
-    "name": "Action",
+    "name": "Loud Blast area (Stage 2+): 6d6 thunder + deafened",
     "sort": 300000,
     "activation": {
      "type": "action",
@@ -206,9 +156,16 @@
      "override": true
     },
     "target": {
+     "template": {
+      "type": "radius",
+      "size": "15",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
      "affects": {
       "type": "creature",
-      "count": "1"
+      "choice": false
      },
      "override": true
     },
@@ -230,18 +187,16 @@
      "parts": [
       {
        "number": 6,
-       "denomination": 10,
+       "denomination": 6,
        "bonus": "",
        "types": [
-        "lightning"
+        "thunder"
        ],
        "custom": {
         "enabled": false,
         "formula": ""
        },
-       "scaling": {
-        "number": 1
-       }
+       "scaling": {}
       }
      ]
     },
@@ -251,6 +206,553 @@
       "onSave": false
      }
     ]
+   },
+   "VqSBK13O6BXb6dY3": {
+    "_id": "VqSBK13O6BXb6dY3",
+    "type": "save",
+    "name": "Deactivate at Stage 1 (DC 10 CON)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "3eIqYIyfd3nsGDGl",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "",
+      "formula": "10"
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   },
+   "yDAYfXhIIUeV17oo": {
+    "_id": "yDAYfXhIIUeV17oo",
+    "type": "utility",
+    "name": "Advance to Stage 2",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "lZL0FietwcAl920w",
+      "onSave": false
+     }
+    ]
+   },
+   "O7Lv9UqDYo0UTJHp": {
+    "_id": "O7Lv9UqDYo0UTJHp",
+    "type": "save",
+    "name": "Deactivate at Stage 2 (DC 15 CON)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "t6nQwkSqa9STrkza",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "",
+      "formula": "15"
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   },
+   "BtAE354yGN6DR0DO": {
+    "_id": "BtAE354yGN6DR0DO",
+    "type": "utility",
+    "name": "Advance to Stage 3",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "TWfttinBDPdMf8yy",
+      "onSave": false
+     }
+    ]
+   },
+   "vGFkGvgrLsRDAU0T": {
+    "_id": "vGFkGvgrLsRDAU0T",
+    "type": "save",
+    "name": "Deactivate at Stage 3 (DC 20 CON)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "VHs7HjaUBPIk4xEP",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "",
+      "formula": "20"
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   },
+   "DWkghWsO7Aofqjp5": {
+    "_id": "DWkghWsO7Aofqjp5",
+    "type": "utility",
+    "name": "Advance to Stage 4",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "jcMN7fZjUHZHOsQr",
+      "onSave": false
+     }
+    ]
+   },
+   "lIlK6GmUg64vx8Cd": {
+    "_id": "lIlK6GmUg64vx8Cd",
+    "type": "save",
+    "name": "Deactivate at Stage 4 (DC 25 CON)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "vmR8bUJctIj2Znib",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "",
+      "formula": "25"
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   },
+   "EuYPQw3iqdd8vFRa": {
+    "_id": "EuYPQw3iqdd8vFRa",
+    "type": "utility",
+    "name": "Advance to Stage 5",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "4phTDlDAEDnDJT4J",
+      "onSave": false
+     }
+    ]
+   },
+   "u4ueAdiBFfCqe6X5": {
+    "_id": "u4ueAdiBFfCqe6X5",
+    "type": "save",
+    "name": "Deactivate at Stage 5 (DC 30 CON)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "vlGv20HxxO7ngYrT",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "",
+      "formula": "30"
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   },
+   "cVKrpaZ3MezN66DU": {
+    "_id": "cVKrpaZ3MezN66DU",
+    "type": "utility",
+    "name": "Expedite: 1 round per 2 CE",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "40"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
+   },
+   "nnPZ4RpD5UlygSib": {
+    "_id": "nnPZ4RpD5UlygSib",
+    "type": "attack",
+    "name": "Loud Blast (Stage 2+): 6d10 lightning",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": 6,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "lightning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    },
+    "midiProperties": {
+     "triggeredActivityId": "v32k7Qixy55vE2b9",
+     "triggeredActivityTargets": "self",
+     "triggeredActivityRollAs": "self",
+     "triggeredActivityConsume": false,
+     "triggeredActivityConfigure": false,
+     "triggeredActivityConditionText": ""
+    }
    }
   },
   "uses": {
@@ -290,11 +792,17 @@
   "jjk5e": {
    "ceCosts": {
     "KCuyWY0C4k6wvr81": 8,
-    "mF6qqggdpt7QB4d9": 6
+    "mF6qqggdpt7QB4d9": 6,
+    "cVKrpaZ3MezN66DU": 2
    },
    "technique": "Mythical Beast Amber",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceSteps": {
+    "cVKrpaZ3MezN66DU": 2
+   },
+   "automationNotes": "Each stage lasts 5 rounds; after 5 rounds in Stage 5 you die. Remove the previous stage's effect when advancing. Extra attacks/actions per stage: track by hand. Usable once in your life.",
+   "automation": "automated"
   }
  },
  "effects": [
@@ -315,6 +823,11 @@
    "flags": {
     "jjk5e": {
      "condition": "blinded"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStartSource"
+     ]
     }
    },
    "_key": "!items.effects!rxvUmHNbggsQeh3C.JQ0jRF3WMJOTT4wI"
@@ -336,9 +849,464 @@
    "flags": {
     "jjk5e": {
      "condition": "deafened"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStartSource"
+     ]
     }
    },
    "_key": "!items.effects!rxvUmHNbggsQeh3C.WcnbOol0bc0uwQhM"
+  },
+  {
+   "_id": "suQwUhLhKWfQA6ch",
+   "name": "Amber Stage 1",
+   "img": "modules/jjk5e/icons/techniques/mythical-beast-amber.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Stage 1. Deactivation: DC 10 CON or 1 exhaustion levels.</p>",
+   "changes": [
+    {
+     "key": "system.abilities.str.value",
+     "mode": 2,
+     "value": "+2",
+     "priority": 20
+    },
+    {
+     "key": "system.abilities.dex.value",
+     "mode": 2,
+     "value": "+2",
+     "priority": 20
+    },
+    {
+     "key": "system.abilities.con.value",
+     "mode": 2,
+     "value": "+2",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.di.value",
+     "mode": 2,
+     "value": "lightning",
+     "priority": 20
+    },
+    {
+     "key": "system.attributes.movement.walk",
+     "mode": 2,
+     "value": "+20",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ 1d10[lightning]",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Mythical Beast Amber"
+    }
+   },
+   "_key": "!items.effects!rxvUmHNbggsQeh3C.suQwUhLhKWfQA6ch"
+  },
+  {
+   "_id": "3eIqYIyfd3nsGDGl",
+   "name": "Amber backlash (Stage 1)",
+   "img": "modules/jjk5e/icons/techniques/mythical-beast-amber.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.attributes.exhaustion",
+     "mode": 2,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Mythical Beast Amber"
+    }
+   },
+   "_key": "!items.effects!rxvUmHNbggsQeh3C.3eIqYIyfd3nsGDGl"
+  },
+  {
+   "_id": "lZL0FietwcAl920w",
+   "name": "Amber Stage 2",
+   "img": "modules/jjk5e/icons/techniques/mythical-beast-amber.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Stage 2. Deactivation: DC 15 CON or 2 exhaustion levels.</p>",
+   "changes": [
+    {
+     "key": "system.abilities.str.value",
+     "mode": 2,
+     "value": "+3",
+     "priority": 20
+    },
+    {
+     "key": "system.abilities.dex.value",
+     "mode": 2,
+     "value": "+3",
+     "priority": 20
+    },
+    {
+     "key": "system.abilities.con.value",
+     "mode": 2,
+     "value": "+3",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.di.value",
+     "mode": 2,
+     "value": "lightning",
+     "priority": 20
+    },
+    {
+     "key": "system.attributes.movement.walk",
+     "mode": 2,
+     "value": "+40",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ 1d10[lightning]",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Mythical Beast Amber"
+    }
+   },
+   "_key": "!items.effects!rxvUmHNbggsQeh3C.lZL0FietwcAl920w"
+  },
+  {
+   "_id": "t6nQwkSqa9STrkza",
+   "name": "Amber backlash (Stage 2)",
+   "img": "modules/jjk5e/icons/techniques/mythical-beast-amber.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.attributes.exhaustion",
+     "mode": 2,
+     "value": "2",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Mythical Beast Amber"
+    }
+   },
+   "_key": "!items.effects!rxvUmHNbggsQeh3C.t6nQwkSqa9STrkza"
+  },
+  {
+   "_id": "TWfttinBDPdMf8yy",
+   "name": "Amber Stage 3",
+   "img": "modules/jjk5e/icons/techniques/mythical-beast-amber.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Stage 3. Deactivation: DC 20 CON or 3 exhaustion levels.</p>",
+   "changes": [
+    {
+     "key": "system.abilities.str.value",
+     "mode": 2,
+     "value": "+4",
+     "priority": 20
+    },
+    {
+     "key": "system.abilities.dex.value",
+     "mode": 2,
+     "value": "+4",
+     "priority": 20
+    },
+    {
+     "key": "system.abilities.con.value",
+     "mode": 2,
+     "value": "+4",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.di.value",
+     "mode": 2,
+     "value": "lightning",
+     "priority": 20
+    },
+    {
+     "key": "system.attributes.movement.walk",
+     "mode": 2,
+     "value": "+60",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ 1d10[lightning]",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dm.amount.all",
+     "mode": 2,
+     "value": "-max(@abilities.wis.mod, @abilities.cha.mod)",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Mythical Beast Amber"
+    }
+   },
+   "_key": "!items.effects!rxvUmHNbggsQeh3C.TWfttinBDPdMf8yy"
+  },
+  {
+   "_id": "VHs7HjaUBPIk4xEP",
+   "name": "Amber backlash (Stage 3)",
+   "img": "modules/jjk5e/icons/techniques/mythical-beast-amber.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.attributes.exhaustion",
+     "mode": 2,
+     "value": "3",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Mythical Beast Amber"
+    }
+   },
+   "_key": "!items.effects!rxvUmHNbggsQeh3C.VHs7HjaUBPIk4xEP"
+  },
+  {
+   "_id": "jcMN7fZjUHZHOsQr",
+   "name": "Amber Stage 4",
+   "img": "modules/jjk5e/icons/techniques/mythical-beast-amber.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Stage 4. Deactivation: DC 25 CON or 4 exhaustion levels.</p>",
+   "changes": [
+    {
+     "key": "system.abilities.str.value",
+     "mode": 2,
+     "value": "+5",
+     "priority": 20
+    },
+    {
+     "key": "system.abilities.dex.value",
+     "mode": 2,
+     "value": "+5",
+     "priority": 20
+    },
+    {
+     "key": "system.abilities.con.value",
+     "mode": 2,
+     "value": "+5",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.di.value",
+     "mode": 2,
+     "value": "lightning",
+     "priority": 20
+    },
+    {
+     "key": "system.attributes.movement.walk",
+     "mode": 2,
+     "value": "+80",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ 1d10[lightning]",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dm.amount.all",
+     "mode": 2,
+     "value": "-max(@abilities.wis.mod, @abilities.cha.mod)",
+     "priority": 20
+    },
+    {
+     "key": "system.attributes.senses.truesight",
+     "mode": 4,
+     "value": "120",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Mythical Beast Amber"
+    }
+   },
+   "_key": "!items.effects!rxvUmHNbggsQeh3C.jcMN7fZjUHZHOsQr"
+  },
+  {
+   "_id": "vmR8bUJctIj2Znib",
+   "name": "Amber backlash (Stage 4)",
+   "img": "modules/jjk5e/icons/techniques/mythical-beast-amber.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.attributes.exhaustion",
+     "mode": 2,
+     "value": "4",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Mythical Beast Amber"
+    }
+   },
+   "_key": "!items.effects!rxvUmHNbggsQeh3C.vmR8bUJctIj2Znib"
+  },
+  {
+   "_id": "4phTDlDAEDnDJT4J",
+   "name": "Amber Stage 5",
+   "img": "modules/jjk5e/icons/techniques/mythical-beast-amber.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Stage 5. Deactivation: DC 30 CON or 6 exhaustion levels.</p>",
+   "changes": [
+    {
+     "key": "system.abilities.str.value",
+     "mode": 2,
+     "value": "+6",
+     "priority": 20
+    },
+    {
+     "key": "system.abilities.dex.value",
+     "mode": 2,
+     "value": "+6",
+     "priority": 20
+    },
+    {
+     "key": "system.abilities.con.value",
+     "mode": 2,
+     "value": "+6",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.di.value",
+     "mode": 2,
+     "value": "lightning",
+     "priority": 20
+    },
+    {
+     "key": "system.attributes.movement.walk",
+     "mode": 2,
+     "value": "+100",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ 1d10[lightning]",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dm.amount.all",
+     "mode": 2,
+     "value": "-max(@abilities.wis.mod, @abilities.cha.mod)",
+     "priority": 20
+    },
+    {
+     "key": "system.attributes.senses.truesight",
+     "mode": 4,
+     "value": "120",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Mythical Beast Amber"
+    }
+   },
+   "_key": "!items.effects!rxvUmHNbggsQeh3C.4phTDlDAEDnDJT4J"
+  },
+  {
+   "_id": "vlGv20HxxO7ngYrT",
+   "name": "Amber backlash (Stage 5)",
+   "img": "modules/jjk5e/icons/techniques/mythical-beast-amber.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.attributes.exhaustion",
+     "mode": 2,
+     "value": "6",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Mythical Beast Amber"
+    }
+   },
+   "_key": "!items.effects!rxvUmHNbggsQeh3C.vlGv20HxxO7ngYrT"
   }
  ],
  "folder": "J9wuYC5ZIUpqsRHr",

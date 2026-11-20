@@ -19,7 +19,7 @@
    "JAkRy5x5J986g5i9": {
     "_id": "JAkRy5x5J986g5i9",
     "type": "save",
-    "name": "Special",
+    "name": "Noxious: CON or poisoned (with the poisonous hit)",
     "sort": 0,
     "activation": {
      "type": "special",
@@ -39,6 +39,11 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -106,7 +111,9 @@
   "jjk5e": {
    "technique": "Moon Dregs",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Moon Dregs: 2 attacks; ¾ cover while in a creature's space (full at 11th).",
+   "automation": "automated"
   }
  },
  "effects": [
@@ -123,12 +130,17 @@
      "mode": 0,
      "value": "turn=end, saveAbility=con, saveDC=JJKORIGINDC, saveCount=1-, label=\"Poisoned (Noxious Poison)\"",
      "priority": 20
+    },
+    {
+     "key": "system.attributes.exhaustion",
+     "mode": 2,
+     "value": "1",
+     "priority": 20
     }
    ],
    "transfer": false,
    "disabled": false,
    "duration": {
-    "seconds": 60,
     "rounds": 10
    },
    "description": "",

@@ -3,13 +3,13 @@
 > Generado desde el compendio y las fuentes. **No certifica ejecución en Foundry ni fidelidad semántica a cada regla**.
 
 - Spells examinados: **360**; técnicas agrupadas: **81**.
-- Utilidad sin efecto configurado: revisar lógica: **59**.
+- Utilidad sin efecto configurado: revisar lógica: **48**.
 - Utilidad con efecto: comprobar activación: **8**.
-- Dominio genérico: resolver propiedades particulares: **27**.
-- Salvación sin daño/efecto automático: **20**.
-- Ataque sin daño propio: comprobar intención: **10**.
-- Mecánica configurada; falta prueba Foundry: **52**.
-- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **184**.
+- Dominio genérico: resolver propiedades particulares: **23**.
+- Salvación sin daño/efecto automático: **18**.
+- Ataque sin daño propio: comprobar intención: **9**.
+- Mecánica configurada; falta prueba Foundry: **44**.
+- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **210**.
 
 ## Interpretación
 
@@ -442,62 +442,62 @@
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Love Rendezvous | 1 | utility:Special (1 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/love-rendezvous_HlC6hqoZAtbyQ2hV.json) |
-| Effective Marking | 3 | utility:Reaction | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/effective-marking_WabghuPJeXcFn395.json) |
-| Domain Expansion: Star Crossed Lovers | 18 | utility:Action; utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-star-crossed-lovers_Z9I5KdkmVysGWEBn.json) |
+| Love Rendezvous | 1 | utility:Mark ★Imai (1 CE, touch or unarmed hit); utility:Mark ★Acrux (1 CE, touch or unarmed hit); utility:Mark ★Mimosa (1 CE, touch or unarmed hit); utility:Mark ★Ginan (1 CE, touch or unarmed hit); utility:Mark ★Gacrux (1 CE, touch or unarmed hit); damage:Star collision (2 dice per 10 ft) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/love-rendezvous_HlC6hqoZAtbyQ2hV.json) |
+| Effective Marking | 3 | utility:Mark as a reaction (+CE mod extra mark-only reactions) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/effective-marking_WabghuPJeXcFn395.json) |
+| Domain Expansion: Star Crossed Lovers | 18 | utility:Pull a marked creature 30 ft toward another (guaranteed hit); utility:Expand Domain (20 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-star-crossed-lovers_Z9I5KdkmVysGWEBn.json) |
 
 ### Miracle (3 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Blind Luck | 1 | utility:Reaction | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/blind-luck_PzwUt0MCons6qKtx.json) |
-| Miraculous Outcome | 3 | utility:Reaction | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/miraculous-outcome_IGdHEkIEb2j1ZSh2.json) |
-| Domain Expansion: Luck of the Draw | 18 | utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-luck-of-the-draw_VRBpLzLuP2FWrulp.json) |
+| Blind Luck | 1 | heal:Blind Luck (Miracle): reduce damage CE-mod d4 + prof; heal:Blind Luck reaction (Miracle + 1 CE): d6s + 2× prof | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/blind-luck_PzwUt0MCons6qKtx.json) |
+| Miraculous Outcome | 3 | utility:Add a die to a failed roll (Miracle + 1 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/miraculous-outcome_IGdHEkIEb2j1ZSh2.json) |
+| Domain Expansion: Luck of the Draw | 18 | utility:Expand Domain (20 CE); utility:Domain cost (2d20 CE) and duration (1d4 min); utility:Initiative 20: gain 3 Miracles | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-luck-of-the-draw_VRBpLzLuP2FWrulp.json) |
 
 ### Missile Fist (5 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Missile Impact | 1 | attack:Bonus Action (1 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/missile-impact_I0xFb7zyyLxQKE7A.json) |
-| Devastating Barrage | 3 | save:Special (1+ CE) | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/devastating-barrage_EJrxqMj9OKy7ZhlK.json) |
-| Unrelenting Fury | 6 | save:Unrelenting Fury (3 CE; set extra attacks in scaling); damage:Additional Fury damage (1+ CE, same action) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/unrelenting-fury_mBjxZbJJs4CS4osY.json) |
-| Maximum: Brutal Bombardment | 11 | save:Bonus Action (6 CE); save:Action (1+ CE) | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/maximum-brutal-bombardment_ExKo8huWEv4TTFFX.json) |
-| Domain Expansion: Unrelenting Ring of Spirit | 18 | utility:Action; utility:Expand Domain (20 CE); damage:Initiative 20: Missile Fists | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-unrelenting-ring-of-spi_tEi4q2oYSdR5bUCp.json) |
+| Missile Impact | 1 | attack:Missile Fist (1 CE activates for the turn); attack:Missile Fist (replaces an attack, free) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/missile-impact_I0xFb7zyyLxQKE7A.json) |
+| Devastating Barrage | 3 | utility:Extra Missile Fists (1 CE each, up to CE mod); utility:Grab instead of damage (grappled); utility:Grab a grappled target (restrained) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/devastating-barrage_EJrxqMj9OKy7ZhlK.json) |
+| Unrelenting Fury | 6 | save:Unrelenting Fury (3 CE; set extra attacks in scaling); damage:Additional Fury damage (1+ CE, same action) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/unrelenting-fury_mBjxZbJJs4CS4osY.json) |
+| Maximum: Brutal Bombardment | 11 | save:Brutal Bombardment (full turn, 6 CE): main target; save:Splash: creatures near the target (STR) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/maximum-brutal-bombardment_ExKo8huWEv4TTFFX.json) |
+| Domain Expansion: Unrelenting Ring of Spirit | 18 | attack:Free Missile Fist anywhere in the domain; utility:Expand Domain (20 CE); damage:Initiative 20: Missile Fists | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-unrelenting-ring-of-spi_tEi4q2oYSdR5bUCp.json) |
 
 ### Moon Dregs (4 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Lunar Jellyfish | 1 | utility:Action (5 CE); utility:Use (limited, no CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/lunar-jellyfish_u6sqYNJyHeifcShB.json) |
-| Poisonous Cursed Energy | 3 | damage:Action (1 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/poisonous-cursed-energy_8iRl9rttNMiSJeyK.json) |
-| Noxious Poison | 6 | save:Special | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/noxious-poison_3Dl1NrZNEan9OFpc.json) |
-| Domain Expansion: Liberation Rite of Water and Land | 18 | utility:Action; utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-liberation-rite-of-wate_TiEYlOhaBmnH1gBW.json) |
+| Lunar Jellyfish | 1 | utility:Summon Moon Dregs (5 CE); utility:Summon Moon Dregs (free, 1 per long rest); utility:Resize Moon Dregs (1 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/lunar-jellyfish_u6sqYNJyHeifcShB.json) |
+| Poisonous Cursed Energy | 3 | damage:Poisonous hit (1 CE, once per turn) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/poisonous-cursed-energy_8iRl9rttNMiSJeyK.json) |
+| Noxious Poison | 6 | save:Noxious: CON or poisoned (with the poisonous hit) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/noxious-poison_3Dl1NrZNEan9OFpc.json) |
+| Domain Expansion: Liberation Rite of Water and Land | 18 | utility:Command the tiny jellyfish (guaranteed hits); utility:Expand Domain (20 CE); damage:Initiative 20: 8d6 poison/acid | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-liberation-rite-of-wate_TiEYlOhaBmnH1gBW.json) |
 
 ### Mythical Beast Amber (4 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Electric Energy | 1 | damage:Action (1 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/electric-energy_Cd0MIDnKJNY1E74w.json) |
-| Lightning Discharge | 6 | utility:Action | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/lightning-discharge_6uqGLAdNxT5G3Tfw.json) |
-| Mythical Beast Amber Release | 11 | utility:Action (8 CE); save:Action (6 CE); save:Bonus Action; save:Action | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/mythical-beast-amber-release_rxvUmHNbggsQeh3C.json) |
-| Domain Expansion: Lightning God’s Realm | 18 | utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-lightning-god-s-realm_Pz1PAtJv8qsrJIGZ.json) |
+| Electric Energy | 1 | damage:Electric Energy (on melee damage, 1 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/electric-energy_Cd0MIDnKJNY1E74w.json) |
+| Lightning Discharge | 6 | damage:Discharge bolt (1d12 per charge); utility:Positive charge (on Electric Energy hit) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/lightning-discharge_6uqGLAdNxT5G3Tfw.json) |
+| Mythical Beast Amber Release | 11 | utility:Release (8 CE): enter Stage 1; save:Cursed Beam (Stage 5, 6 CE): 30-ft line; save:Loud Blast area (Stage 2+): 6d6 thunder + deafened; save:Deactivate at Stage 1 (DC 10 CON); utility:Advance to Stage 2; save:Deactivate at Stage 2 (DC 15 CON); utility:Advance to Stage 3; save:Deactivate at Stage 3 (DC 20 CON); utility:Advance to Stage 4; save:Deactivate at Stage 4 (DC 25 CON); utility:Advance to Stage 5; save:Deactivate at Stage 5 (DC 30 CON); utility:Expedite: 1 round per 2 CE; attack:Loud Blast (Stage 2+): 6d10 lightning | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/mythical-beast-amber-release_rxvUmHNbggsQeh3C.json) |
+| Domain Expansion: Lightning God’s Realm | 18 | utility:Expand Domain (20 CE); utility:Initiative 20: 3 positive charges on all | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-lightning-god-s-realm_Pz1PAtJv8qsrJIGZ.json) |
 
 ### New Shadow Style (4 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| New Shadow Style: Simple Domain | 1 | utility:Bonus Action | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/new-shadow-style-simple-domain_IpEcKAh0dIJX4o2O.json) |
-| Batto Sword Draw | 3 | attack:Action (3 CE) | Ataque sin daño propio: comprobar intención | [JSON](../src/packs/jjk5e-techniques/batto-sword-draw_YpGzHiufmF1oU7iu.json) |
-| Moonlight Veil | 11 | utility:Bonus Action (1 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/moonlight-veil_YRRHIojsCbPDOfoF.json) |
-| Perfect Shadow Style | 18 | utility:Bonus Action | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/perfect-shadow-style_QTcy6dQu1j5Lv2Mu.json) |
+| New Shadow Style: Simple Domain | 1 | utility:Simple Domain (free use, bonus action, 15 ft) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/new-shadow-style-simple-domain_IpEcKAh0dIJX4o2O.json) |
+| Batto Sword Draw | 3 | attack:Batto (3 CE): one attack vs up to prof targets, advantage | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/batto-sword-draw_YpGzHiufmF1oU7iu.json) |
+| Moonlight Veil | 11 | utility:Bonus Action (1 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/moonlight-veil_YRRHIojsCbPDOfoF.json) |
+| Perfect Shadow Style | 18 | utility:Extend techniques to 60 ft (bonus action); utility:Two free weapon attacks (prof per long rest) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/perfect-shadow-style_QTcy6dQu1j5Lv2Mu.json) |
 
 ### Pachinko Fever (3 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Great Luck | 1 | utility:Use | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/great-luck_ekaS8GYbKDcFu0i8.json) |
-| Domain Expansion: Idle Death Gamble | 3 | attack:Bonus Action (1 CE); attack:Bonus Action (3 CE); save:Bonus Action (4 CE); utility:Use (limited, no CE); utility:Expand Domain (20 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-idle-death-gamble_JgbhHu3Xdg6y4dKN.json) |
-| Luckiest Sorcerer Alive | 18 | utility:Special | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/luckiest-sorcerer-alive_BL0AkVup5SylGoSO.json) |
+| Great Luck | 1 | utility:Force a critical (1 per long rest, no Black Flash) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/great-luck_ekaS8GYbKDcFu0i8.json) |
+| Domain Expansion: Idle Death Gamble | 3 | attack:Bonus Action (+10% expectation); attack:Bonus Action (+25% expectation); attack:Golden Train Door (4 CE, +50%); utility:Free expansion (1 per long rest); utility:Expand Domain (20 CE); save:Train door: STR or restrained; utility:Bet: event roll (d20 + expectation); utility:Event length (d10 rounds); utility:Multiplier roll (d20 + expectation); utility:Jackpot dice (3d12: triples win); utility:Jackpot dice (3d10: triples win); utility:Jackpot dice (3d8: triples win); utility:Jackpot dice (3d6: triples win); utility:JACKPOT: 4 rounds of immortality | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-idle-death-gamble_JgbhHu3Xdg6y4dKN.json) |
+| Luckiest Sorcerer Alive | 18 | utility:Multiplier roll (best of 3d20) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/luckiest-sorcerer-alive_BL0AkVup5SylGoSO.json) |
 
 ### Pain Killer (4 spells)
 

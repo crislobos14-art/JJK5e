@@ -24,7 +24,7 @@
    "atOXd8RilzAdWkxZ": {
     "_id": "atOXd8RilzAdWkxZ",
     "type": "utility",
-    "name": "Action (10 CE)",
+    "name": "Summon Sun Dregs (10 CE)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -68,7 +68,9 @@
       "Moon Dregs"
      ]
     ]
-   }
+   },
+   "automationNotes": "Not alongside Moon Dregs before 18th. 2 attacks at 6th. Destroyed: 2 minutes before resummoning.",
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
