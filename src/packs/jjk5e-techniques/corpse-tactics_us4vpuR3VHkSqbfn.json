@@ -16,11 +16,12 @@
    "rules": "2014"
   },
   "activities": {
-   "i2cOkYwbrMPSPXvS": {
-    "_id": "i2cOkYwbrMPSPXvS",
+   "A69gphthKDzS8L70": {
+    "_id": "A69gphthKDzS8L70",
     "type": "utility",
-    "name": "Bonus Action",
+    "name": "Cooperative Tactics (part of command)",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "bonus",
      "value": 1,
@@ -30,21 +31,210 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
-    },
-    "range": {
-     "units": "self",
-     "override": true
-    },
-    "target": {
-     "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
-    }
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "47O6Eqg5F7DwNi1O",
+      "onSave": false
+     }
+    ]
+   },
+   "rp8uq2W0VSpndfia": {
+    "_id": "rp8uq2W0VSpndfia",
+    "type": "utility",
+    "name": "Offensive Tactics (part of command)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "cBBrUYwiuZbKYVxN",
+      "onSave": false
+     }
+    ]
+   },
+   "PnLsRTDMiVBhbK6J": {
+    "_id": "PnLsRTDMiVBhbK6J",
+    "type": "utility",
+    "name": "Defensive Tactics (part of command)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "ppaBDGh8e3ELFzSM",
+      "onSave": false
+     }
+    ]
+   },
+   "fD5NZVAp0HVGYEIV": {
+    "_id": "fD5NZVAp0HVGYEIV",
+    "type": "utility",
+    "name": "Guerilla Tactics (Disengage)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "CkcVnrLW1c0BORbn",
+      "onSave": false
+     }
+    ]
+   },
+   "bbVfdAyeSBYRaoyu": {
+    "_id": "bbVfdAyeSBYRaoyu",
+    "type": "utility",
+    "name": "Mobility Tactics (Dash)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "lmHfo0Y4BWnqepWm",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -84,9 +274,164 @@
   "jjk5e": {
    "technique": "Cursed Corpse Creation",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "qwzwYySzpsiw4XHW",
- "_key": "!items!us4vpuR3VHkSqbfn"
+ "_key": "!items!us4vpuR3VHkSqbfn",
+ "effects": [
+  {
+   "_id": "47O6Eqg5F7DwNi1O",
+   "name": "Cooperative Tactics",
+   "img": "modules/jjk5e/icons/techniques/cursed-corpse-creation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Cooperative Tactics until the start of your next turn.</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.advantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.advantage.ability.save.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Cursed Corpse Creation"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStartSource"
+     ]
+    }
+   },
+   "_key": "!items.effects!us4vpuR3VHkSqbfn.47O6Eqg5F7DwNi1O"
+  },
+  {
+   "_id": "cBBrUYwiuZbKYVxN",
+   "name": "Offensive Tactics",
+   "img": "modules/jjk5e/icons/techniques/cursed-corpse-creation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Offensive Tactics until the start of your next turn.</p>",
+   "changes": [
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ 1d8",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Cursed Corpse Creation"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStartSource"
+     ]
+    }
+   },
+   "_key": "!items.effects!us4vpuR3VHkSqbfn.cBBrUYwiuZbKYVxN"
+  },
+  {
+   "_id": "ppaBDGh8e3ELFzSM",
+   "name": "Defensive Tactics",
+   "img": "modules/jjk5e/icons/techniques/cursed-corpse-creation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Defensive Tactics until the start of your next turn.</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.grants.disadvantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Cursed Corpse Creation"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStartSource"
+     ]
+    }
+   },
+   "_key": "!items.effects!us4vpuR3VHkSqbfn.ppaBDGh8e3ELFzSM"
+  },
+  {
+   "_id": "CkcVnrLW1c0BORbn",
+   "name": "Guerilla Tactics (Disengage)",
+   "img": "modules/jjk5e/icons/techniques/cursed-corpse-creation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Guerilla Tactics (Disengage) granted to one corpse.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Cursed Corpse Creation"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStartSource"
+     ]
+    }
+   },
+   "_key": "!items.effects!us4vpuR3VHkSqbfn.CkcVnrLW1c0BORbn"
+  },
+  {
+   "_id": "lmHfo0Y4BWnqepWm",
+   "name": "Mobility Tactics (Dash)",
+   "img": "modules/jjk5e/icons/techniques/cursed-corpse-creation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Mobility Tactics (Dash) granted to one corpse.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Cursed Corpse Creation"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStartSource"
+     ]
+    }
+   },
+   "_key": "!items.effects!us4vpuR3VHkSqbfn.lmHfo0Y4BWnqepWm"
+  }
+ ]
 }

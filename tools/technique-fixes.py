@@ -1497,6 +1497,48 @@ def cursed_circuitry(S):
     mark(oc)
 
 
+def cursed_corpse_creation(S):
+    c = S.get("Cursed Corpse Creation")
+    act(c, "KqygVhuTM4tZcTPS", "utility", "Imbue a core (action)", "action",
+        range={"value": "5", "units": "ft", "override": True}, target=one_creature())
+    note(c, "Imbue: transfer any CE to the core (deduct it manually; core max by size table).")
+    mark(c)
+
+    t = S.get("Corpse Tactics")
+    t["system"]["activities"] = {}
+    tgt = one_creature()
+    for key, name, ch in [
+        ("coop", "Cooperative Tactics", [("flags.midi-qol.advantage.attack.all", 0, "1"), ("flags.midi-qol.advantage.ability.save.all", 0, "1")]),
+        ("off", "Offensive Tactics", [("system.bonuses.mwak.damage", 2, "+ 1d8")]),
+        ("def", "Defensive Tactics", [("flags.midi-qol.grants.disadvantage.attack.all", 0, "1")]),
+    ]:
+        a = act(t, key, "utility", f"{name} (part of command)", "bonus", range={"value": "60", "units": "ft", "override": True}, target=tgt)
+        apply(a, fx(t, key, name, changes=ch, special=["turnStartSource"], desc=f"{name} until the start of your next turn."))
+        free(t, a)
+    for key, name in [("gue", "Guerilla Tactics (Disengage)"), ("mob", "Mobility Tactics (Dash)")]:
+        a = act(t, key, "utility", name, "bonus", range={"value": "60", "units": "ft", "override": True}, target=tgt)
+        apply(a, fx(t, key, name, special=["turnStartSource"], desc=name + " granted to one corpse."))
+        free(t, a)
+    mark(t)
+
+    m = S.get("Cursed Corpse Mutation")
+    m["effects"] = [e for e in m.get("effects", []) if e["_id"] != "xWGgnGFOkKKmqVZl"]
+    r = act(m, "roll", "utility", "Roll mutation (d20 then d12)", "special", range=RANGE_SELF, target=SELF,
+            roll={"formula": "1d20", "name": "Mutation check (20 = mutate)", "prompt": False, "visible": True})
+    free(m, r)
+    r2 = act(m, "table", "utility", "Mutation table (d12)", "special", range=RANGE_SELF, target=SELF,
+             roll={"formula": "1d12", "name": "Mutation", "prompt": False, "visible": True})
+    free(m, r2)
+    mark(m)
+
+    pc = S.get("Perfect Creations")
+    act(pc, "fgf4JxUYNhnq7aBE", "utility", "Command all corpses (bonus action)", "bonus", range=RANGE_SELF, target=SELF)
+    mark(pc)
+    pz = S.get("Maximum: Prized Creation")
+    note(pz, "Apply to the favorite corpse's actor: +4 to two abilities and max, damage die +1 tier, 3 chosen mutations.")
+    mark(pz)
+
+
 TECHNIQUES = {"Antigravity System": antigravity_system,
               "Auspicious Beast Summon": auspicious_beast_summon,
               "Black Bird Manipulation": black_bird_manipulation,
@@ -1512,7 +1554,8 @@ TECHNIQUES = {"Antigravity System": antigravity_system,
               "Construction": construction,
               "Contractual Recreation": contractual_recreation,
               "Cursed Cannon": cursed_cannon,
-              "Cursed Circuitry": cursed_circuitry}
+              "Cursed Circuitry": cursed_circuitry,
+              "Cursed Corpse Creation": cursed_corpse_creation}
 
 if __name__ == "__main__":
     args = sys.argv[1:]

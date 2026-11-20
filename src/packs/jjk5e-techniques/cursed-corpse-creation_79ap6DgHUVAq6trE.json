@@ -19,8 +19,9 @@
    "KqygVhuTM4tZcTPS": {
     "_id": "KqygVhuTM4tZcTPS",
     "type": "utility",
-    "name": "Action",
+    "name": "Imbue a core (action)",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "action",
      "value": 1,
@@ -30,21 +31,29 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
-    },
-    "range": {
-     "units": "self",
-     "override": true
-    },
-    "target": {
-     "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
-    }
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": []
    }
   },
   "uses": {
@@ -84,7 +93,9 @@
   "jjk5e": {
    "technique": "Cursed Corpse Creation",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Imbue: transfer any CE to the core (deduct it manually; core max by size table).",
+   "automation": "automated"
   }
  },
  "folder": "qwzwYySzpsiw4XHW",

@@ -3,13 +3,13 @@
 > Generado desde el compendio y las fuentes. **No certifica ejecución en Foundry ni fidelidad semántica a cada regla**.
 
 - Spells examinados: **360**; técnicas agrupadas: **81**.
-- Utilidad sin efecto configurado: revisar lógica: **97**.
+- Utilidad sin efecto configurado: revisar lógica: **94**.
 - Utilidad con efecto: comprobar activación: **15**.
 - Dominio genérico: resolver propiedades particulares: **44**.
 - Salvación sin daño/efecto automático: **25**.
 - Ataque sin daño propio: comprobar intención: **10**.
 - Mecánica configurada; falta prueba Foundry: **105**.
-- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **64**.
+- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **67**.
 
 ## Interpretación
 
@@ -161,9 +161,9 @@
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Cursed Corpse Creation | 1 | utility:Action | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/cursed-corpse-creation_79ap6DgHUVAq6trE.json) |
-| Corpse Tactics | 3 | utility:Bonus Action | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/corpse-tactics_us4vpuR3VHkSqbfn.json) |
-| Perfect Creations | 18 | utility:Bonus Action | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/perfect-creations_FW1g0lrHsR4I2Dfn.json) |
+| Cursed Corpse Creation | 1 | utility:Imbue a core (action) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/cursed-corpse-creation_79ap6DgHUVAq6trE.json) |
+| Corpse Tactics | 3 | utility:Cooperative Tactics (part of command); utility:Offensive Tactics (part of command); utility:Defensive Tactics (part of command); utility:Guerilla Tactics (Disengage); utility:Mobility Tactics (Dash) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/corpse-tactics_us4vpuR3VHkSqbfn.json) |
+| Perfect Creations | 18 | utility:Command all corpses (bonus action) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/perfect-creations_FW1g0lrHsR4I2Dfn.json) |
 
 ### Cursed Speech (3 spells)
 

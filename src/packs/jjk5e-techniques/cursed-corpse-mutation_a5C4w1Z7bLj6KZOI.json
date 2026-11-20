@@ -19,39 +19,102 @@
    "value": "class",
    "subtype": ""
   },
-  "requirements": "Cursed Corpse Creation 6"
+  "requirements": "Cursed Corpse Creation 6",
+  "activities": {
+   "yMkGi6fjCLIyM0d1": {
+    "_id": "yMkGi6fjCLIyM0d1",
+    "type": "utility",
+    "name": "Roll mutation (d20 then d12)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "roll": {
+     "formula": "1d20",
+     "name": "Mutation check (20 = mutate)",
+     "prompt": false,
+     "visible": true
+    }
+   },
+   "XDwuXEYeUCgxpv0x": {
+    "_id": "XDwuXEYeUCgxpv0x",
+    "type": "utility",
+    "name": "Mutation table (d12)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "roll": {
+     "formula": "1d12",
+     "name": "Mutation",
+     "prompt": false,
+     "visible": true
+    }
+   }
+  }
  },
  "flags": {
   "jjk5e": {
    "technique": "Cursed Corpse Creation",
-   "level": 6
+   "level": 6,
+   "automation": "automated"
   }
  },
  "folder": "qwzwYySzpsiw4XHW",
- "effects": [
-  {
-   "_id": "xWGgnGFOkKKmqVZl",
-   "name": "Cursed Corpse Mutation (toggle)",
-   "img": "modules/jjk5e/icons/techniques/cursed-corpse-creation.svg",
-   "changes": [
-    {
-     "key": "system.attributes.ac.bonus",
-     "mode": 2,
-     "value": "+3",
-     "priority": null
-    }
-   ],
-   "transfer": true,
-   "disabled": true,
-   "duration": {},
-   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
-   "flags": {
-    "jjk5e": {
-     "auto": "toggle"
-    }
-   },
-   "_key": "!items.effects!a5C4w1Z7bLj6KZOI.xWGgnGFOkKKmqVZl"
-  }
- ],
+ "effects": [],
  "_key": "!items!a5C4w1Z7bLj6KZOI"
 }

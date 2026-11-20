@@ -19,8 +19,9 @@
    "fgf4JxUYNhnq7aBE": {
     "_id": "fgf4JxUYNhnq7aBE",
     "type": "utility",
-    "name": "Bonus Action",
+    "name": "Command all corpses (bonus action)",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "bonus",
      "value": 1,
@@ -30,21 +31,26 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
      "units": "self",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
-    "duration": {
-     "units": "inst",
-     "override": true
-    }
+    "effects": []
    }
   },
   "uses": {
@@ -84,7 +90,8 @@
   "jjk5e": {
    "technique": "Cursed Corpse Creation",
    "level": 18,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "qwzwYySzpsiw4XHW",

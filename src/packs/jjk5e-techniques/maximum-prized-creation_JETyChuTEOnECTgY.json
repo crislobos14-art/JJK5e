@@ -24,7 +24,9 @@
  "flags": {
   "jjk5e": {
    "technique": "Cursed Corpse Creation",
-   "level": 11
+   "level": 11,
+   "automationNotes": "Apply to the favorite corpse's actor: +4 to two abilities and max, damage die +1 tier, 3 chosen mutations.",
+   "automation": "automated"
   }
  },
  "folder": "qwzwYySzpsiw4XHW",

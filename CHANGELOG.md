@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.42.0 — Técnica por técnica: Cursed Corpse Creation
+- **Cursed Corpse Creation**: acción de imbuir núcleo a un objetivo.
+- **Corpse Tactics**: 5 tácticas como actividades sin coste (ventaja, +1 dado de daño, esquivar, retirada, carrera) hasta tu siguiente turno.
+- **Cursed Corpse Mutation**: tiradas d20 y d12 de la tabla; quitado el efecto +3 CA suelto.
+- **Perfect Creations / Prized Creation**: comando global y nota de aplicación.
+- Automatizados a mano: 67/360. Sin probar en Foundry real.
+
 ## 1.41.0 — Técnica por técnica: Cursed Circuitry
 - **Circuit / High Performance Circuit**: el módulo ahora rebaja el coste de CE del resto de rasgos mientras el circuito está activo (−1 o −3, mínimo 1); con **Pure Energy Efficiency** además se ahorra 1 CE por cada 5.
 - Circuito en objetos: +2d4 necrótico (alto rendimiento: +2d6/2d10 y +3/+5 CA).
