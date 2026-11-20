@@ -40,7 +40,7 @@
     },
     "target": {
      "template": {
-      "type": "radius",
+      "type": "cylinder",
       "size": "10",
       "units": "ft",
       "count": "1",
@@ -48,12 +48,13 @@
      },
      "affects": {
       "type": "creature",
-      "choice": false
+      "choice": true
      },
      "override": true
     },
     "duration": {
-     "units": "inst",
+     "value": "1",
+     "units": "round",
      "override": true
     },
     "save": {
@@ -68,7 +69,180 @@
     "damage": {
      "onSave": "none",
      "parts": []
+    },
+    "effects": [
+     {
+      "_id": "efK8Ra4MD7gaP9TE",
+      "onSave": false
+     }
+    ],
+    "midiProperties": {
+     "triggeredActivityId": "kdSpkE5ZRvDzJZI9",
+     "triggeredActivityTargets": "failedSaves",
+     "triggeredActivityRollAs": "self",
+     "triggeredActivityConsume": false,
+     "triggeredActivityConfigure": false,
+     "triggeredActivityConditionText": "items.some(i => i.name === \"Gravity Field\")"
     }
+   },
+   "jDNfLl7r9cf5Sn48": {
+    "_id": "jDNfLl7r9cf5Sn48",
+    "type": "damage",
+    "name": "Fall damage (field ends)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "damage": {
+     "parts": [
+      {
+       "number": 3,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
+   },
+   "kdSpkE5ZRvDzJZI9": {
+    "_id": "kdSpkE5ZRvDzJZI9",
+    "type": "save",
+    "name": "Disorienting Gravity (Gravity Field)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "FBfJWDmE7rhnrQPH",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    },
+    "midiProperties": {
+     "triggeredActivityId": "FZ41lY4F6gRYEgAg",
+     "triggeredActivityTargets": "failedSaves",
+     "triggeredActivityRollAs": "self",
+     "triggeredActivityConsume": false,
+     "triggeredActivityConfigure": false,
+     "triggeredActivityConditionText": "items.some(i => i.name === \"Boosted System\")"
+    }
+   },
+   "FZ41lY4F6gRYEgAg": {
+    "_id": "FZ41lY4F6gRYEgAg",
+    "type": "utility",
+    "name": "Nauseating Gravity (Boosted System)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "25Vl5r7bTftFYt3X",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -124,9 +298,121 @@
    },
    "technique": "Antigravity System",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "dmgScale": {
+    "jDNfLl7r9cf5Sn48": [
+     [
+      1,
+      "3d6"
+     ],
+     [
+      3,
+      "5d8"
+     ],
+     [
+      6,
+      "5d10"
+     ],
+     [
+      11,
+      "10d12"
+     ],
+     [
+      18,
+      "20d12"
+     ]
+    ]
+   },
+   "automationNotes": "Midi-QOL: failed Dexterity save applies Lifted; with Gravity Field the lifted creatures roll the Disorienting Gravity save; with Boosted System a failure there also stuns. Fall damage scales with level and is applied with 'Fall damage (field ends)'. Sweeping Gravity (no save below the DC) is GM-ruled.",
+   "automation": "automated"
   }
  },
  "folder": "h8faxx3TSM5qAlx3",
- "_key": "!items!YYIXcaNXo5YH89Yp"
+ "_key": "!items!YYIXcaNXo5YH89Yp",
+ "effects": [
+  {
+   "_id": "efK8Ra4MD7gaP9TE",
+   "name": "Lifted (Antigravity)",
+   "img": "modules/jjk5e/icons/techniques/antigravity-system.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Falls upward inside the antigravity cylinder (30/50/100/200 ft by level) and floats until the start of the caster's next turn, then falls back down. Use \"Fall damage\" when it ends.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Antigravity System"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStartSource"
+     ]
+    }
+   },
+   "_key": "!items.effects!YYIXcaNXo5YH89Yp.efK8Ra4MD7gaP9TE"
+  },
+  {
+   "_id": "FBfJWDmE7rhnrQPH",
+   "name": "Disoriented (Antigravity)",
+   "img": "modules/jjk5e/icons/techniques/antigravity-system.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Attacks at disadvantage and cannot maintain concentration while within the field.</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.disadvantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Antigravity System"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStartSource"
+     ]
+    }
+   },
+   "_key": "!items.effects!YYIXcaNXo5YH89Yp.FBfJWDmE7rhnrQPH"
+  },
+  {
+   "_id": "25Vl5r7bTftFYt3X",
+   "name": "Nauseated (Antigravity)",
+   "img": "modules/jjk5e/icons/techniques/antigravity-system.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [
+    "stunned"
+   ],
+   "description": "<p>Stunned until the end of its next turn (Nauseating Gravity).</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Antigravity System"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnEnd"
+     ]
+    }
+   },
+   "_key": "!items.effects!YYIXcaNXo5YH89Yp.25Vl5r7bTftFYt3X"
+  }
+ ]
 }

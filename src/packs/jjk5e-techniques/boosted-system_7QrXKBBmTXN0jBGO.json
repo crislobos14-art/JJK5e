@@ -18,47 +18,39 @@
   "activities": {
    "Yqj6r63O9Ffq54ux": {
     "_id": "Yqj6r63O9Ffq54ux",
-    "type": "save",
-    "name": "Special (1+ CE)",
+    "type": "utility",
+    "name": "Lasting Field (1+ CE)",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "special",
      "value": null,
-     "condition": "",
+     "condition": "When you use Antigravity: +10 ft and +1 round per extra CE",
      "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
       "allowed": true,
-      "max": "max(1, max(@abilities.wis.mod, @abilities.cha.mod))"
+      "max": "max(@abilities.wis.mod, @abilities.cha.mod)"
      },
      "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
      "units": "spec",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature"
+     },
      "override": true
     },
-    "duration": {
-     "units": "inst",
-     "override": true
-    },
-    "save": {
-     "ability": [
-      "dex"
-     ],
-     "dc": {
-      "calculation": "spellcasting",
-      "formula": ""
-     }
-    },
-    "damage": {
-     "onSave": "none",
-     "parts": []
-    }
+    "effects": []
    }
   },
   "uses": {
@@ -104,7 +96,9 @@
    },
    "technique": "Antigravity System",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Nauseating Gravity and Hard Fall (d12) are applied by Antigravity automatically.",
+   "automation": "automated"
   }
  },
  "folder": "h8faxx3TSM5qAlx3",

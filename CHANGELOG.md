@@ -1,5 +1,22 @@
 # Changelog
 
+## 1.28.0 — Técnica por técnica: Antigravity System
+- **Antigravity**: salvación de DES en cilindro de 10 pies (eliges a quién excluir, Focused System). Al fallar
+  aplica *Lifted* hasta el inicio de tu siguiente turno. Con Midi-QOL, si tienes **Gravity Field** los afectados
+  tiran automáticamente la salvación de CON de *Disorienting Gravity* (desventaja en ataques). Si además tienes
+  **Boosted System**, fallarla también los aturde hasta el final de su siguiente turno (*Nauseating Gravity*).
+  Nueva acción *Fall damage* que escala con el nivel (3d6 → 5d8 → 5d10 → 10d12 → 20d12).
+- **Gravity Field**: *Light Fall* como reacción (1 CE) para ti y hasta tu bonificador de competencia en criaturas.
+- **Antigravity Shield**: reacción al ser atacado (Midi la ofrece). Desventaja a los atacantes y reduce el daño no
+  psíquico en tu mod. de EM + nivel hasta tu siguiente turno.
+- **Boosted System**: *Lasting Field* gasta EM extra (+10 pies y +1 asalto por EM).
+- **Zero Gravity**: en iniciativa 20 aplica Antigravity a las criaturas que elijas y fallan sus salvaciones.
+- **Gravity System** (reversión): derribado y apresado al fallar, sus ataques cuerpo a cuerpo fallan; desventaja
+  cuerpo a cuerpo dentro del área; daño escala 10d10 → 25d10; reacción ofrecida por Midi.
+- Herramienta `tools/technique-fixes.py` para automatizar técnica por técnica; la auditoría cuenta las técnicas
+  automatizadas a mano (5/360 spells).
+- Sin probar en Foundry real con Midi-QOL.
+
 ## 1.27.0 — Hoja de personaje y técnicas innatas
 - Reorganiza el panel JJK de la hoja y separa el contador de energía maldita.
 - One Man Army y Twice the Fun crean copias en escena. Twice the Fun permite gastar 3 CE por copia e incorpora la ventaja de ataque cuerpo a cuerpo junto a un clon mediante Midi-QOL.

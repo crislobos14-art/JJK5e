@@ -18,21 +18,27 @@
   "activities": {
    "OuJ0Q9ywU3SspZxe": {
     "_id": "OuJ0Q9ywU3SspZxe",
-    "type": "save",
-    "name": "Reaction (1 CE)",
+    "type": "utility",
+    "name": "Light Fall — Reaction (1 CE)",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "reaction",
      "value": 1,
-     "condition": "",
+     "condition": "When you or a creature within 120 ft falls",
      "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
      "value": "120",
@@ -42,28 +48,17 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "@prof",
+      "choice": true
      },
      "override": true
     },
-    "duration": {
-     "units": "inst",
-     "override": true
-    },
-    "save": {
-     "ability": [
-      "con"
-     ],
-     "dc": {
-      "calculation": "spellcasting",
-      "formula": ""
+    "effects": [
+     {
+      "_id": "Slsf0rVjotCHyxD3",
+      "onSave": false
      }
-    },
-    "damage": {
-     "onSave": "none",
-     "parts": []
-    },
-    "useConditionText": "false"
+    ]
    }
   },
   "uses": {
@@ -115,9 +110,33 @@
    },
    "technique": "Antigravity System",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Disorienting Gravity runs from Antigravity automatically. Focused System: choose the creatures you exclude when placing Antigravity.",
+   "automation": "automated"
   }
  },
  "folder": "h8faxx3TSM5qAlx3",
- "_key": "!items!XJWuaIPUC0PQuyZ1"
+ "_key": "!items!XJWuaIPUC0PQuyZ1",
+ "effects": [
+  {
+   "_id": "Slsf0rVjotCHyxD3",
+   "name": "Light Fall",
+   "img": "modules/jjk5e/icons/techniques/antigravity-system.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Descends at 60 feet per round and takes no fall damage on landing.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Antigravity System"
+    }
+   },
+   "_key": "!items.effects!XJWuaIPUC0PQuyZ1.Slsf0rVjotCHyxD3"
+  }
+ ]
 }

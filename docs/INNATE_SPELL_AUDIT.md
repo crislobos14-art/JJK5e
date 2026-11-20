@@ -3,12 +3,13 @@
 > Generado desde el compendio y las fuentes. **No certifica ejecución en Foundry ni fidelidad semántica a cada regla**.
 
 - Spells examinados: **360**; técnicas agrupadas: **81**.
-- Utilidad sin efecto configurado: revisar lógica: **115**.
+- Utilidad sin efecto configurado: revisar lógica: **114**.
 - Utilidad con efecto: comprobar activación: **19**.
-- Dominio genérico: resolver propiedades particulares: **57**.
-- Salvación sin daño/efecto automático: **32**.
+- Dominio genérico: resolver propiedades particulares: **56**.
+- Salvación sin daño/efecto automático: **29**.
 - Ataque sin daño propio: comprobar intención: **10**.
 - Mecánica configurada; falta prueba Foundry: **127**.
+- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **5**.
 
 ## Interpretación
 
@@ -23,11 +24,11 @@
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Antigravity | 1 | save:Action (3 CE) | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/antigravity_YYIXcaNXo5YH89Yp.json) |
-| Gravity Field | 3 | save:Reaction (1 CE) | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/gravity-field_XJWuaIPUC0PQuyZ1.json) |
-| Antigravity Shield | 6 | utility:Reaction (2 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/antigravity-shield_PeFhjb43m6fIn3JU.json) |
-| Boosted System | 11 | save:Special (1+ CE) | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/boosted-system_7QrXKBBmTXN0jBGO.json) |
-| Domain Expansion: Zero Gravity | 18 | utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-zero-gravity_PMfC5O2A8EvH721k.json) |
+| Antigravity | 1 | save:Action (3 CE); damage:Fall damage (field ends); save:Disorienting Gravity (Gravity Field); utility:Nauseating Gravity (Boosted System) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/antigravity_YYIXcaNXo5YH89Yp.json) |
+| Gravity Field | 3 | utility:Light Fall — Reaction (1 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/gravity-field_XJWuaIPUC0PQuyZ1.json) |
+| Antigravity Shield | 6 | utility:Reaction (2 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/antigravity-shield_PeFhjb43m6fIn3JU.json) |
+| Boosted System | 11 | utility:Lasting Field (1+ CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/boosted-system_7QrXKBBmTXN0jBGO.json) |
+| Domain Expansion: Zero Gravity | 18 | utility:Expand Domain (20 CE); utility:Initiative 20: Antigravity (sure-hit) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-zero-gravity_PMfC5O2A8EvH721k.json) |
 
 ### Auspicious Beast Summon (5 spells)
 

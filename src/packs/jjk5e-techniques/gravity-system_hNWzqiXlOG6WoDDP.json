@@ -38,7 +38,8 @@
      }
     },
     "range": {
-     "units": "self"
+     "units": "self",
+     "override": true
     },
     "target": {
      "template": {
@@ -51,7 +52,8 @@
      "affects": {
       "type": "creature",
       "choice": false
-     }
+     },
+     "override": true
     },
     "duration": {
      "units": "inst"
@@ -87,56 +89,59 @@
     },
     "effects": [
      {
-      "_id": "Z4ZoxeMInInP5ko8",
+      "_id": "0N9eOKKuluFN5Ljx",
       "onSave": false
+     },
+     {
+      "_id": "MqpXlLic1pXlUrLS",
+      "onSave": true
      }
     ]
    },
    "opXNTcnURCTa93yu": {
     "_id": "opXNTcnURCTa93yu",
-    "type": "save",
-    "name": "Reaction",
-    "sort": 100000,
+    "type": "utility",
+    "name": "Reaction (6 CE)",
+    "sort": 0,
+    "img": null,
     "activation": {
      "type": "reaction",
      "value": 1,
-     "condition": ""
+     "condition": "When attacked or forced to make a physical saving throw",
+     "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
-     }
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
     },
-    "range": {
-     "units": "spec",
+    "duration": {
+     "units": "inst",
      "override": true
     },
-    "target": {},
-    "duration": {
-     "units": "inst"
+    "range": {
+     "units": "self",
+     "override": true
     },
-    "save": {
-     "ability": [
-      "con"
-     ],
-     "dc": {
-      "calculation": "spellcasting",
-      "formula": ""
-     }
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
     },
-    "damage": {
-     "onSave": "none",
-     "parts": []
-    },
-    "useConditionText": "reaction === \"isSave\""
+    "effects": [],
+    "useConditionText": "reaction === \"isAttacked\" || reaction === \"isSave\""
    }
   }
  },
  "flags": {
   "jjk5e": {
    "ceCosts": {
-    "Was3HiWmu550Xw12": 6
+    "Was3HiWmu550Xw12": 6,
+    "opXNTcnURCTa93yu": 6
    },
    "technique": "Antigravity System",
    "reversal": true,
@@ -152,30 +157,110 @@
       "Antigravity System"
      ]
     ]
-   }
+   },
+   "dmgScale": {
+    "Was3HiWmu550Xw12": [
+     [
+      1,
+      "10d10"
+     ],
+     [
+      11,
+      "15d10"
+     ],
+     [
+      18,
+      "20d10"
+     ],
+     [
+      20,
+      "25d10"
+     ]
+    ]
+   },
+   "automationNotes": "Reaction: reduce the triggering damage by a Gravity System damage roll (GM applies). Perfect Gravity (18th) disadvantage/exhaustion is GM-ruled.",
+   "automation": "automated"
   }
  },
  "effects": [
   {
-   "_id": "Z4ZoxeMInInP5ko8",
-   "name": "Prone (Gravity System)",
-   "img": "systems/dnd5e/icons/svg/statuses/prone.svg",
-   "statuses": [
-    "prone"
-   ],
-   "changes": [],
+   "_id": "0N9eOKKuluFN5Ljx",
+   "name": "Crushed (Gravity System)",
+   "img": "modules/jjk5e/icons/techniques/antigravity-system.svg",
+   "type": "base",
    "transfer": false,
    "disabled": false,
+   "statuses": [
+    "prone",
+    "restrained"
+   ],
+   "description": "<p>Prone and restrained, its melee attacks automatically fail, until the start of your next turn or until it leaves the area.</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.fail.attack.mwak",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.fail.attack.msak",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
    "duration": {
     "rounds": 1
    },
-   "description": "",
    "flags": {
     "jjk5e": {
-     "condition": "prone"
+     "technique": "Antigravity System"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStartSource"
+     ]
     }
    },
-   "_key": "!items.effects!hNWzqiXlOG6WoDDP.Z4ZoxeMInInP5ko8"
+   "_key": "!items.effects!hNWzqiXlOG6WoDDP.0N9eOKKuluFN5Ljx"
+  },
+  {
+   "_id": "MqpXlLic1pXlUrLS",
+   "name": "Heavy Gravity",
+   "img": "modules/jjk5e/icons/techniques/antigravity-system.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Melee attack rolls are made with disadvantage inside Gravity System.</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.disadvantage.attack.mwak",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.disadvantage.attack.msak",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Antigravity System"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStartSource"
+     ]
+    }
+   },
+   "_key": "!items.effects!hNWzqiXlOG6WoDDP.MqpXlLic1pXlUrLS"
   }
  ],
  "folder": "sHDJB680OC5pd1by",

@@ -24,7 +24,7 @@
     "activation": {
      "type": "reaction",
      "value": 1,
-     "condition": "",
+     "condition": "When you are attacked (Dodge: a creature within 5 ft)",
      "override": true
     },
     "consumption": {
@@ -39,13 +39,22 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
     },
-    "useConditionText": "false"
+    "useConditionText": "reaction === \"isAttacked\"",
+    "effects": [
+     {
+      "_id": "5P7AuD74LypsHJor",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -88,9 +97,116 @@
    },
    "technique": "Antigravity System",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "h8faxx3TSM5qAlx3",
- "_key": "!items!PeFhjb43m6fIn3JU"
+ "_key": "!items!PeFhjb43m6fIn3JU",
+ "effects": [
+  {
+   "_id": "5P7AuD74LypsHJor",
+   "name": "Antigravity Shield",
+   "img": "modules/jjk5e/icons/techniques/antigravity-system.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Attack rolls against you have disadvantage and non-psychic damage is reduced by your CE modifier + your level until the start of your next turn.</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.grants.disadvantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dm.amount.acid",
+     "mode": 2,
+     "value": "-(max(@abilities.wis.mod, @abilities.cha.mod) + @details.level)",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dm.amount.bludgeoning",
+     "mode": 2,
+     "value": "-(max(@abilities.wis.mod, @abilities.cha.mod) + @details.level)",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dm.amount.cold",
+     "mode": 2,
+     "value": "-(max(@abilities.wis.mod, @abilities.cha.mod) + @details.level)",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dm.amount.fire",
+     "mode": 2,
+     "value": "-(max(@abilities.wis.mod, @abilities.cha.mod) + @details.level)",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dm.amount.force",
+     "mode": 2,
+     "value": "-(max(@abilities.wis.mod, @abilities.cha.mod) + @details.level)",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dm.amount.lightning",
+     "mode": 2,
+     "value": "-(max(@abilities.wis.mod, @abilities.cha.mod) + @details.level)",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dm.amount.necrotic",
+     "mode": 2,
+     "value": "-(max(@abilities.wis.mod, @abilities.cha.mod) + @details.level)",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dm.amount.piercing",
+     "mode": 2,
+     "value": "-(max(@abilities.wis.mod, @abilities.cha.mod) + @details.level)",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dm.amount.poison",
+     "mode": 2,
+     "value": "-(max(@abilities.wis.mod, @abilities.cha.mod) + @details.level)",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dm.amount.radiant",
+     "mode": 2,
+     "value": "-(max(@abilities.wis.mod, @abilities.cha.mod) + @details.level)",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dm.amount.slashing",
+     "mode": 2,
+     "value": "-(max(@abilities.wis.mod, @abilities.cha.mod) + @details.level)",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dm.amount.thunder",
+     "mode": 2,
+     "value": "-(max(@abilities.wis.mod, @abilities.cha.mod) + @details.level)",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Antigravity System"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStartSource"
+     ]
+    }
+   },
+   "_key": "!items.effects!PeFhjb43m6fIn3JU.5P7AuD74LypsHJor"
+  }
+ ]
 }

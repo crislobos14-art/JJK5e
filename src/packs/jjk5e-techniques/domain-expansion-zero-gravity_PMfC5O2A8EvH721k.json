@@ -58,6 +58,52 @@
      "concentration": false,
      "override": true
     }
+   },
+   "G9mWyVQedGmr7fiN": {
+    "_id": "G9mWyVQedGmr7fiN",
+    "type": "utility",
+    "name": "Initiative 20: Antigravity (sure-hit)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "enemy",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "oxRG3NiWrZZJXKQN",
+      "onSave": false
+     },
+     {
+      "_id": "QkxEcQk4xnYaz5kg",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -116,9 +162,70 @@
     "hICHllqrRUv6KssL": 20
    },
    "domainActivity": "hICHllqrRUv6KssL",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "h8faxx3TSM5qAlx3",
- "_key": "!items!PMfC5O2A8EvH721k"
+ "_key": "!items!PMfC5O2A8EvH721k",
+ "effects": [
+  {
+   "_id": "oxRG3NiWrZZJXKQN",
+   "name": "Lifted (Zero Gravity)",
+   "img": "modules/jjk5e/icons/techniques/antigravity-system-domain.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Affected by Antigravity and fails every saving throw against it while the domain lasts.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Antigravity System"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStartSource"
+     ]
+    }
+   },
+   "_key": "!items.effects!PMfC5O2A8EvH721k.oxRG3NiWrZZJXKQN"
+  },
+  {
+   "_id": "QkxEcQk4xnYaz5kg",
+   "name": "Zero Gravity: fails saves",
+   "img": "modules/jjk5e/icons/techniques/antigravity-system-domain.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Automatically fails Dexterity and Constitution saving throws against Antigravity in the domain.</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.fail.ability.save.dex",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.fail.ability.save.con",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Antigravity System"
+    }
+   },
+   "_key": "!items.effects!PMfC5O2A8EvH721k.QkxEcQk4xnYaz5kg"
+  }
+ ]
 }

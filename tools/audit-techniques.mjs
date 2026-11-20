@@ -25,7 +25,8 @@ const statusText = {
   "domain-generic": "Dominio genérico: resolver propiedades particulares",
   "save-unresolved": "Salvación sin daño/efecto automático",
   "attack-no-damage": "Ataque sin daño propio: comprobar intención",
-  "mechanics-present": "Mecánica configurada; falta prueba Foundry"
+  "mechanics-present": "Mecánica configurada; falta prueba Foundry",
+  "hand-automated": "Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry"
 };
 const rows = [];
 const critical = [];
@@ -72,11 +73,13 @@ for (const item of pack.documents) {
   const declarativeMechanic = !!Object.keys(item.flags?.jjk5e?.selfBuffs ?? {}).length
     || !!Object.keys(item.flags?.jjk5e?.tokenSwap ?? {}).length;
   const unresolvedUtility = isOnlyUtility && !(item.effects ?? []).length && !declarativeMechanic && !item.flags?.jjk5e?.domain;
-  const status = unresolvedSave ? "save-unresolved" : unresolvedAttack ? "attack-no-damage"
+  const handAutomated = item.flags?.jjk5e?.automation === "automated";
+  const status = handAutomated && !unresolvedSave && !unresolvedAttack ? "hand-automated"
+    : unresolvedSave ? "save-unresolved" : unresolvedAttack ? "attack-no-damage"
     : item.flags?.jjk5e?.domain && isOnlyUtility ? "domain-generic"
     : unresolvedUtility ? "utility-unresolved" : isOnlyUtility ? "utility-with-effect" : "mechanics-present";
   rows.push({ item, src: src.file, status, actIds, costs });
-  if (status !== "mechanics-present") critical.push({ id, name: item.name, status });
+  if (!["mechanics-present", "hand-automated"].includes(status)) critical.push({ id, name: item.name, status });
 }
 const counts = Object.fromEntries(Object.keys(statusText).map(k => [k, rows.filter(r => r.status === k).length]));
 const techs = [...new Set(rows.map(r => r.item.flags?.jjk5e?.technique))].sort();
@@ -93,6 +96,7 @@ const lines = [
   `- ${statusText["save-unresolved"]}: **${counts["save-unresolved"]}**.`, 
   `- ${statusText["attack-no-damage"]}: **${counts["attack-no-damage"]}**.`,
   `- ${statusText["mechanics-present"]}: **${counts["mechanics-present"]}**.`,
+  `- ${statusText["hand-automated"]}: **${counts["hand-automated"]}**.`,
   "",
   "## Interpretación",
   "",
