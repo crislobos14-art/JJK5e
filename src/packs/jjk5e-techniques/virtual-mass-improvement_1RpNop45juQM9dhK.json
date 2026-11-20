@@ -1,0 +1,32 @@
+{
+ "_id": "1RpNop45juQM9dhK",
+ "name": "Virtual Mass Improvement",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/star-rage.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Star Rage — Innate Technique (6th level)</em></p><p>Once you reach 6th level, you have gained experience in refining your technique and can now add three times your Cursed Energy modifier.<br />\n<strong>Increased Strength</strong>. When you spend at least 5 CE on virtual mass, you gain advantage on Strength and Constitution checks and saving throws and +1 to the rolls for each further mass improvement.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Star Rage 6"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Star Rage",
+   "level": 6
+  }
+ },
+ "folder": "21st6P4AJoi9hlmG",
+ "_key": "!items!1RpNop45juQM9dhK"
+}

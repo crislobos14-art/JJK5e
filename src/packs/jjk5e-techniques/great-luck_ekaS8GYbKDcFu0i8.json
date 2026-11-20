@@ -1,0 +1,85 @@
+{
+ "_id": "ekaS8GYbKDcFu0i8",
+ "name": "Great Luck",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/pachinko-fever.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Pachinko Fever — Innate Technique (1st level)</em></p><blockquote><p>Did you know most gamblers stop before their big hit? Let's hope you don’t, as failing may mean death, but your luck has got you.</p></blockquote><p>Beginning at 1st level, luck has sided with you, and you can use it against your foes. Once per long rest you can force one of your rolls to be critical (cannot roll for black flash).</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "glSZei3Ae16pW6Ap": {
+    "_id": "glSZei3Ae16pW6Ap",
+    "type": "utility",
+    "name": "Use",
+    "activation": {
+     "type": "special",
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1"
+      }
+     ],
+     "spellSlot": false
+    }
+   }
+  },
+  "uses": {
+   "max": "1",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
+    }
+   ]
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "special",
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self"
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Pachinko Fever",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "30lfiZHWDrH4G6F5",
+ "_key": "!items!ekaS8GYbKDcFu0i8"
+}

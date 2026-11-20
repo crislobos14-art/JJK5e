@@ -1,0 +1,125 @@
+{
+ "_id": "A9XgEe7MCjeuMkwD",
+ "name": "Dragonfly Knuckles",
+ "type": "weapon",
+ "img": "icons/svg/sword.svg",
+ "folder": "xnCPfIMW0yQ370pR",
+ "system": {
+  "description": {
+   "value": "<p><em>Weapon (Knuckle Dusters), Grade 2</em></p><p>A pair of flashy silver knuckle dusters engraved with imagery of a monstrous dragonfly. When you take the Attack action with this weapon, you can make an additional attack using the knuckles as part of the attack action. Once per turn you can deal an additional 1d6 necrotic damage on a hit. If you score a critical hit against a creature using these knuckles, that creature has disadvantage on attack rolls against you until the end of their turn.</p>"
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "simpleM",
+   "baseItem": ""
+  },
+  "damage": {
+   "base": {
+    "number": 1,
+    "denomination": 4,
+    "types": [
+     "bludgeoning"
+    ]
+   }
+  },
+  "range": {
+   "value": 5,
+   "long": null,
+   "units": "ft",
+   "reach": 5
+  },
+  "properties": [
+   "mgc"
+  ],
+  "proficient": null,
+  "quantity": 1,
+  "activities": {
+   "00KFRRMBQxFRhQKJ": {
+    "_id": "00KFRRMBQxFRhQKJ",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "melee",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   },
+   "MKGFquLGvOrejmKg": {
+    "_id": "MKGFquLGvOrejmKg",
+    "type": "attack",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "rarity": "rare",
+  "attunement": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "2nd Grade"
+  }
+ },
+ "_key": "!items!A9XgEe7MCjeuMkwD"
+}

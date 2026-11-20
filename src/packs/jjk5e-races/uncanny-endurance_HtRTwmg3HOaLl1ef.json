@@ -1,0 +1,71 @@
+{
+ "_id": "HtRTwmg3HOaLl1ef",
+ "name": "Uncanny Endurance",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/trait-race.svg",
+ "system": {
+  "description": {
+   "value": "<p>You can focus on occasionally shrugging off injury. When you take damage, you can use your reaction to roll a d12. Add your Constitution modifier to the number rolled, and reduce the damage by that total. After you use this trait, you can’t use it again until you finish a short or long rest.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "race",
+   "subtype": ""
+  },
+  "requirements": "Human (Superhuman)",
+  "uses": {
+   "max": "1",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "sr",
+     "type": "recoverAll"
+    }
+   ]
+  },
+  "activities": {
+   "yFkqBrDn36650lTT": {
+    "_id": "yFkqBrDn36650lTT",
+    "type": "utility",
+    "name": "Reaction",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1"
+      }
+     ],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "FDVrGmw22BclKBnR",
+ "_key": "!items!HtRTwmg3HOaLl1ef"
+}

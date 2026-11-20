@@ -1,0 +1,107 @@
+{
+ "_id": "8M2beaenveq5TNhh",
+ "name": "Fist of Absorbing Power",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/fa-jin.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Fa Jin — Cursed Technique Reversal, 6th level</em></p><p>At 6th level, as an action for 6 CE you can create a 60 feet line while wielding a slashing or piercing weapon or a 30 feet cone while wielding a bludgeoning weapon or unarmed strike. All creatures in range must make a CE saving throw. On a failure, they take 6d8 necrotic damage and gain 3 negative Jin charges. You gain 3 Jin charges for every creature that fails its save against your technique.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Fa Jin 6",
+  "activities": {
+   "PhdF1hklt1xRyPCE": {
+    "_id": "PhdF1hklt1xRyPCE",
+    "type": "damage",
+    "name": "Action (6 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {
+     "template": {
+      "type": "line",
+      "size": "60",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 6,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "PhdF1hklt1xRyPCE": 6
+   },
+   "technique": "Fa Jin",
+   "reversal": true,
+   "reversalLevel": 6,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Fa Jin"
+     ]
+    ],
+    "level": 6
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 10,
+ "_key": "!items!8M2beaenveq5TNhh"
+}

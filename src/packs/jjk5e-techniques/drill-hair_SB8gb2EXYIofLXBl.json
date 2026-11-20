@@ -1,0 +1,188 @@
+{
+ "_id": "SB8gb2EXYIofLXBl",
+ "name": "Drill Hair",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/hair-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Hair Manipulation — Innate Technique (3rd level)</em></p><p>At 3rd level, you have learned to form your hair into drill bits and shoot them off as projectiles. When you take the Attack action, you can spend 1 cursed energy to replace an attack with a ranged cursed energy attack roll with a range of 30ft. This attack deals 1d6 + your CE modifier piercing damage. The range of this technique increases to 60 ft at 6th level.</p>\n<p>When attacking with a drill, you can spend an additional 2 cursed energy to make the drill explode in a 5 ft radius upon the point of impact causing creatures in range to make a Dexterity saving throw. On a failure, they take an additional 3d6 fire damage. On a success, they take half as much damage. The fire damage increases to 5d6 at 6th level, 8d6 at 11th level and 10d6 at 18th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "BiUJjyUJ5oqD5tRp": {
+    "_id": "BiUJjyUJ5oqD5tRp",
+    "type": "save",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "5",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 6,
+       "bonus": "@mod",
+       "types": [
+        "piercing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   },
+   "1QKHOQ1KZ49cbcxr": {
+    "_id": "1QKHOQ1KZ49cbcxr",
+    "type": "utility",
+    "name": "Extra (2 CE)",
+    "sort": 900000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "When attacking with a drill, you can spend an additional 2 cursed energy to make the dr...",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "radius",
+    "size": "5",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": false
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "dmgScale": {
+    "BiUJjyUJ5oqD5tRp": [
+     [
+      0,
+      "1d6"
+     ],
+     [
+      6,
+      "5d6"
+     ],
+     [
+      11,
+      "8d6"
+     ],
+     [
+      18,
+      "10d6"
+     ]
+    ]
+   },
+   "ceCosts": {
+    "BiUJjyUJ5oqD5tRp": 1,
+    "1QKHOQ1KZ49cbcxr": 2
+   },
+   "technique": "Hair Manipulation",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "gqEhAM7a9IFAzEwy",
+ "_key": "!items!SB8gb2EXYIofLXBl"
+}

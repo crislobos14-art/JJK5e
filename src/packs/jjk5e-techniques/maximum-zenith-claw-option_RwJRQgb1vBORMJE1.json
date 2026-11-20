@@ -1,0 +1,92 @@
+{
+ "_id": "RwJRQgb1vBORMJE1",
+ "name": "Maximum: Zenith Claw Option",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/dark-claw.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Dark Claw — Innate Technique (11th level)</em></p><p>At 11th level, you have learned that your claws have even more room for growth and can destroy cursed tools to strengthen your claws. As an action while holding a cursed tool, you must spend CE depending on the cursed tool’s grade and then crush it in your claws to destroy it. You can then use its abilities and bonuses as a Zenith Claw option.  You can only have one Zenith Claw option active at a time and can swap options as part of a short or long rest.</p>\n<table>\n<thead>\n<tr>\n<th>Grade</th>\n<th style=\"text-align: center;\">Cursed Energy Cost</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>4th Grade</td>\n<td style=\"text-align: center;\">3</td>\n</tr>\n<tr>\n<td>3rd Grade</td>\n<td style=\"text-align: center;\">4</td>\n</tr>\n<tr>\n<td>2nd Grade</td>\n<td style=\"text-align: center;\">6</td>\n</tr>\n<tr>\n<td>1st Grade</td>\n<td style=\"text-align: center;\">10</td>\n</tr>\n</tbody>\n</table>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "oDmto0UToZTftTUX": {
+    "_id": "oDmto0UToZTftTUX",
+    "type": "utility",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Dark Claw",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "TJotg7cBr19cOkoJ",
+ "_key": "!items!RwJRQgb1vBORMJE1"
+}

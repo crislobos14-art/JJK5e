@@ -1,0 +1,57 @@
+{
+ "_id": "pOl2dTpXx1R5P8Pc",
+ "name": "Improved Blind Fighting",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>You have blindsight with a range of 30 feet. Within that range, you can effectively see anything that isn't behind total cover, even if you're blinded or in darkness. Moreover, you can see an invisible creature within that range, unless the creature successfully hides from you.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Fighting Style (improved)"
+ },
+ "flags": {
+  "jjk5e": {
+   "fightingStyle": true,
+   "improved": true
+  }
+ },
+ "effects": [
+  {
+   "_id": "6EFog4PWWdK9yQkg",
+   "name": "Improved Blind Fighting",
+   "img": "modules/jjk5e/icons/feature.svg",
+   "changes": [
+    {
+     "key": "system.attributes.senses.blindsight",
+     "mode": 4,
+     "value": "30",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "auto": "passive"
+    }
+   },
+   "_key": "!items.effects!pOl2dTpXx1R5P8Pc.6EFog4PWWdK9yQkg"
+  }
+ ],
+ "folder": "I1ItOooRBoVLqHCS",
+ "_key": "!items!pOl2dTpXx1R5P8Pc"
+}

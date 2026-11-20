@@ -1,0 +1,118 @@
+{
+ "_id": "cVS3rOxClxBPcQP5",
+ "name": "Innate Technique: Solo Forbidden Zone",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/solo-forbidden-zone.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.9UTHSBip7mmqaupO]{Forbidden Zone}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.afIIyhhgkqx1ldcN]{Bless}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.uhroQuF4Rbd2kMyx]{Ritual Dance}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.CaRX3lIbroOmofpK]{Maximize Output}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.9Z4vMDDLb62nB51l]{Domain Expansion: Hallowed Zone}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "BmgyTprvCcH89R7u": {
+    "_id": "BmgyTprvCcH89R7u",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Solo Forbidden Zone (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.9UTHSBip7mmqaupO",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "jTSC5BLy0Vnfb3Ac": {
+    "_id": "jTSC5BLy0Vnfb3Ac",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Solo Forbidden Zone (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.afIIyhhgkqx1ldcN",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "n2H98pBpT9XXNn85": {
+    "_id": "n2H98pBpT9XXNn85",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Solo Forbidden Zone (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.uhroQuF4Rbd2kMyx",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "RGU33uvXAQNikYY1": {
+    "_id": "RGU33uvXAQNikYY1",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Solo Forbidden Zone (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.CaRX3lIbroOmofpK",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "UyrbFie6imtEtgqM": {
+    "_id": "UyrbFie6imtEtgqM",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Solo Forbidden Zone (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.9Z4vMDDLb62nB51l",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Solo Forbidden Zone"
+  }
+ },
+ "_key": "!items!cVS3rOxClxBPcQP5"
+}

@@ -1,0 +1,123 @@
+{
+ "_id": "7l4nQGOha2dpDXkG",
+ "name": "Angel’s Blessing",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/technique-extermination.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Technique Extermination — Innate Technique (3rd level)</em></p><p>At 3rd level,  your technique makes you feel like a divine being made to help others, you are a true angel. As a bonus action for 1 cursed energy, you can gain flying speed equal to half your walking speed for 1 minute, as wings of light emerge from your back and a halo stands on top of your head. While you have the wings active, you can freely move through barriers such as curtains without breaking them. You can also pass through walls and barriers that were cast with CE equal to or lower than your proficiency bonus. When said minute ends, you can spend another 1 more cursed energy to keep your fly speed for another minute. This fly speed increases to your walking speed at 11th level.<br />\n In addition, due to your holy nature you gain resistance to radiant damage.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "0nxTBCkURsXi2ZOJ": {
+    "_id": "0nxTBCkURsXi2ZOJ",
+    "type": "utility",
+    "name": "Bonus Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "0nxTBCkURsXi2ZOJ": 1
+   },
+   "technique": "Technique Extermination",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "lFpLbNxf0h2fGnvr",
+ "effects": [
+  {
+   "_id": "gS44aDQtPAOuLsWn",
+   "name": "Angel’s Blessing (toggle)",
+   "img": "modules/jjk5e/icons/techniques/technique-extermination.svg",
+   "changes": [
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "radiant",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!7l4nQGOha2dpDXkG.gS44aDQtPAOuLsWn"
+  }
+ ],
+ "_key": "!items!7l4nQGOha2dpDXkG"
+}

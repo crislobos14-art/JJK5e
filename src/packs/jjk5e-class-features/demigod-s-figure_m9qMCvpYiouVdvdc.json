@@ -1,0 +1,29 @@
+{
+ "_id": "m9qMCvpYiouVdvdc",
+ "name": "Demigod's Figure",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>At 15th level, your body is almost reaching its peak, however now it will take a long time until you get there. You can hold your breath for twice as long, suffocate for twice as long without dropping to 0 hit points, you can go twice as long without food and water, and exhaustion from food and water deprivation takes twice as long to occur. In addition, you require twice as many levels of exhaustion before suffering the penalties (for example, if you have one level of exhaustion, you do not suffer the normal penalty until you have 2 levels).</p>\n<p>You can also perceive the souls of objects when effects or features call for such.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Heavenly Restriction 15"
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "hWqAX9TqrOvuq1FE",
+ "_key": "!items!m9qMCvpYiouVdvdc"
+}

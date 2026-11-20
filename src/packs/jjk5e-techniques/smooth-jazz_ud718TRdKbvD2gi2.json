@@ -1,0 +1,114 @@
+{
+ "_id": "ud718TRdKbvD2gi2",
+ "name": "Smooth Jazz",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/rockstar.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Rockstar — Cursed Technique Reversal</em></p><p>You have mastered both the Reverse Cursed Technique and the art of soothing jazz. Doing so has unlocked your cursed technique reversal and instead of electrifying rock, you opt for smooth jazz. As an action for 4 cursed energy, you fill a 30-foot radius around yourself with smooth jazz. Any creature entirely inside of this radius is deafened and can only hear your music, giving them immunity to thunder damage. You must concentrate on this as if you were concentrating on a spell. This effect ends after 1 minute or when you end it at will.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Rockstar",
+  "activities": {
+   "NvEh1lLuCxnIKlFh": {
+    "_id": "NvEh1lLuCxnIKlFh",
+    "type": "utility",
+    "name": "Action (4 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "30",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "effects": [
+     {
+      "_id": "krStrU3zjr5sy7AX",
+      "onSave": false
+     }
+    ]
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "NvEh1lLuCxnIKlFh": 4
+   },
+   "technique": "Rockstar",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Rockstar"
+     ]
+    ]
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "krStrU3zjr5sy7AX",
+   "name": "Deafened (Smooth Jazz)",
+   "img": "systems/dnd5e/icons/svg/statuses/deafened.svg",
+   "statuses": [
+    "deafened"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "deafened"
+    }
+   },
+   "_key": "!items.effects!ud718TRdKbvD2gi2.krStrU3zjr5sy7AX"
+  }
+ ],
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!ud718TRdKbvD2gi2"
+}

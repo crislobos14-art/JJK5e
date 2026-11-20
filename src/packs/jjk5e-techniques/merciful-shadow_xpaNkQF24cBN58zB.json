@@ -1,0 +1,88 @@
+{
+ "_id": "xpaNkQF24cBN58zB",
+ "name": "Merciful Shadow",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/shadow-killer.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Shadow Killer — Cursed Technique Reversal</em></p><p>You have mastered your reversal, allowing you to heal instead of harm through shadows. When you make an attack roll, you can spend 2 cursed energy to target the shadow of a creature within your reach. On a hit, you stitch up their wounds through their shadow and the target regains hit points equal to your attack's damage roll + your Cursed Energy modifier. This healing increases to twice your Cursed Energy modifier at 6th level, and to thrice at 11th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Shadow Killer",
+  "activities": {
+   "4GIP7jlbxOCUYosw": {
+    "_id": "4GIP7jlbxOCUYosw",
+    "type": "attack",
+    "name": "Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "4GIP7jlbxOCUYosw": 2
+   },
+   "technique": "Shadow Killer",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Shadow Killer"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!xpaNkQF24cBN58zB"
+}

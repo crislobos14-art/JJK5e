@@ -1,0 +1,92 @@
+{
+ "_id": "yYkcM2fCzHLvLzzr",
+ "name": "Virtual Mass Mastery",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/star-rage.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Star Rage — Innate Technique (11th level)</em></p><p>At 11th level, you have refined and optimized your technique. You can now add up to four times your Cursed Energy modifier to your virtual mass and use your technique with melee weapon attacks.<br />\n<strong>Critical Power</strong>. Your critical range increases by 1 for every four mass increases and you deal maximum damage to objects and structures.<br />\n<strong>Quick Activation</strong>. You have learned how to instantly activate your technique. You can now activate Star Rage as a free action. </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "NoFMZTpqmPsDl0T9": {
+    "_id": "NoFMZTpqmPsDl0T9",
+    "type": "utility",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "special",
+   "value": null,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Star Rage",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "21st6P4AJoi9hlmG",
+ "_key": "!items!yYkcM2fCzHLvLzzr"
+}

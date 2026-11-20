@@ -1,0 +1,100 @@
+{
+ "_id": "ZZNBsMxbl5keP23k",
+ "name": "Deadpan",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/comedian.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Comedian — Cursed Technique Reversal</em></p><p>When a creature you can see within 60 ft would try to teleport, avoid damage,  or  do  something  obviously  impossible  via  normal  means  while your reversal is active, you can spend 5 CE to force that creature to make  a  Cursed  Energy  saving  throw.  On  a  failed  save,  their  attempt fails and they take 2d8 psychic damage as you lecture them on realism (Eg.  You  can’t  just  dodge  a  meteor,  are  you  stupid  or  something?). Creatures without cursed energy automatically fail this saving throw.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Comedian",
+  "activities": {
+   "Y4YJ3hjkkDPDMKRq": {
+    "_id": "Y4YJ3hjkkDPDMKRq",
+    "type": "damage",
+    "name": "Action (5 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "60",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "psychic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "Y4YJ3hjkkDPDMKRq": 5
+   },
+   "technique": "Comedian",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Comedian"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 10,
+ "_key": "!items!ZZNBsMxbl5keP23k"
+}

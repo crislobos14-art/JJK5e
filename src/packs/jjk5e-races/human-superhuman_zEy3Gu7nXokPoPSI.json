@@ -1,0 +1,109 @@
+{
+ "_id": "zEy3Gu7nXokPoPSI",
+ "name": "Human (Superhuman)",
+ "type": "race",
+ "img": "modules/jjk5e/icons/race.svg",
+ "system": {
+  "description": {
+   "value": "<p>While many humans vary in shape and size, your human character will have these traits.</p>\n<p><strong>Ability Score Increase.</strong> One ability score of your choice increases by 2 and other ability scores increase by 1. Choosing different Human races replaces this ASI.</p>\n<p><strong>Age.</strong> Humans reach adulthood in their teens and live for around a century.</p>\n<p><strong>Alignment.</strong> There is no clear alignment that is consistent among all humans. Just about any alignment can be justified.</p>\n<p><strong>Size.</strong> Humans in the Jujutsu Kaisen world are typically 5-6 feet tall. Some can rest far outside this range, but your size will count as medium.</p>\n<p><strong>Speed.</strong> Your base walking speed is 30 feet.</p>\n<p><strong>Superhuman</strong></p>\n<p>Very rarely, some humans may be astonishingly stronger than most others in the world, sometimes vastly stronger than the average human. If your human character happens to fall under this category, you can choose to replace the standard Human Ability Score Increase with these traits instead:</p>\n<p><strong>Ability Score Increase.</strong> You increase either your Strength, Dexterity, or Constitution score by 2 and the others by 1.</p>\n<p><strong>Natural Athlete.</strong> You have proficiency in the Athletics skill, if you already have proficiency, you instead gain Expertise.</p>\n<p><strong>Record Breaker.</strong> Your jumping distance is doubled.</p>\n<p><strong>Uncanny Endurance.</strong> You can focus on occasionally shrugging off injury. When you take damage, you can use your reaction to roll a d12. Add your Constitution modifier to the number rolled, and reduce the damage by that total. After you use this trait, you can’t use it again until you finish a short or long rest.</p>\n<p><strong>Powerful Build.</strong> You count as one size larger when determining your carrying capacity and the weight you can push, drag, or lift.</p>\n<p><strong>Speed.</strong> Your movement speed is 35 feet.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "identifier": "human-superhuman",
+  "movement": {
+   "walk": 35,
+   "units": "ft"
+  },
+  "type": {
+   "value": "humanoid",
+   "subtype": "",
+   "custom": ""
+  },
+  "advancement": {
+   "pda3A2JzNFkn21UP": {
+    "_id": "pda3A2JzNFkn21UP",
+    "type": "Size",
+    "configuration": {
+     "sizes": [
+      "med"
+     ]
+    },
+    "value": {}
+   },
+   "u6BGAiT0GZUFe0C9": {
+    "_id": "u6BGAiT0GZUFe0C9",
+    "type": "AbilityScoreImprovement",
+    "level": 0,
+    "title": "Ability Score Increase (+2 to STR, DEX or CON and +1 to the other two)",
+    "configuration": {
+     "points": 1,
+     "fixed": {
+      "str": 1,
+      "dex": 1,
+      "con": 1
+     },
+     "cap": 1,
+     "locked": [
+      "int",
+      "wis",
+      "cha"
+     ]
+    },
+    "value": {}
+   },
+   "q6VFPNPYt0QkBRJU": {
+    "_id": "q6VFPNPYt0QkBRJU",
+    "type": "Trait",
+    "level": 0,
+    "title": "Natural Athlete",
+    "configuration": {
+     "mode": "upgrade",
+     "allowReplacements": false,
+     "grants": [
+      "skills:ath"
+     ],
+     "choices": []
+    },
+    "value": {}
+   },
+   "dLlfb65ATUGaRl86": {
+    "_id": "dLlfb65ATUGaRl86",
+    "type": "ItemGrant",
+    "level": 0,
+    "title": "Traits",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-races.Item.agfrMySS2pJXJKoy",
+       "optional": false
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-races.Item.eqYYbcJBJ0xkTokw",
+       "optional": false
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-races.Item.HtRTwmg3HOaLl1ef",
+       "optional": false
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-races.Item.u2GWYJkGBkCijAHQ",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": null,
+ "_key": "!items!zEy3Gu7nXokPoPSI"
+}

@@ -1,0 +1,32 @@
+{
+ "_id": "mTztF6YZjkLOJ7sH",
+ "name": "Improved Great Weapon Fighting",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>When you roll a 1,2, or 3 on a damage die for an attack you make with a melee weapon that you are wielding with two hands, you can reroll the die and must use the new roll, even if the new roll is a 1, 2, or 3. The weapon must have the two-handed or versatile property for you to gain this benefit.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Fighting Style (improved)"
+ },
+ "flags": {
+  "jjk5e": {
+   "fightingStyle": true,
+   "improved": true
+  }
+ },
+ "folder": "I1ItOooRBoVLqHCS",
+ "_key": "!items!mTztF6YZjkLOJ7sH"
+}

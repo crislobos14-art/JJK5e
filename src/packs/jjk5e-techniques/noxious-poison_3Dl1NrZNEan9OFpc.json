@@ -1,0 +1,138 @@
+{
+ "_id": "3Dl1NrZNEan9OFpc",
+ "name": "Noxious Poison",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/moon-dregs.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Moon Dregs — Innate Technique (6th level)</em></p><p>At 6th level, your cursed energy has become more corrosive and noxious, further seeping into <em>Moon Dregs</em>. When you use <em>Poisonous Cursed Energy</em>, a creature must make a Constitution saving throw or be poisoned for 1 minute. They can repeat the saving throw at the end of their turns, ending the effect on a success. While poisoned in this way, the target has a temporary level of exhaustion.<br />\n<em>Moon Dregs</em> can now make two attacks when it takes the attack action and can grant a creature three quarters cover while occupying a creature’s space, and full cover at 11th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "JAkRy5x5J986g5i9": {
+    "_id": "JAkRy5x5J986g5i9",
+    "type": "save",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    },
+    "effects": [
+     {
+      "_id": "F1BV5oRL0dTPPjSw",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "special",
+   "value": null,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Moon Dregs",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "F1BV5oRL0dTPPjSw",
+   "name": "Poisoned (Noxious Poison)",
+   "img": "modules/jjk5e/icons/techniques/moon-dregs.svg",
+   "statuses": [
+    "poisoned"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "seconds": 60,
+    "rounds": 10
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "poisoned"
+    }
+   },
+   "_key": "!items.effects!3Dl1NrZNEan9OFpc.F1BV5oRL0dTPPjSw"
+  }
+ ],
+ "folder": "z6mgJlgIkKDRJURh",
+ "_key": "!items!3Dl1NrZNEan9OFpc"
+}

@@ -1,0 +1,32 @@
+{
+ "_id": "JETyChuTEOnECTgY",
+ "name": "Maximum: Prized Creation",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/cursed-corpse-creation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Corpse Creation — Innate Technique (11th level)</em></p><p>At 11th level, you can put extra time and care into one of your favorite cursed corpses to make a masterpiece. You can choose one of your existing Cursed Corpses or when you make a new Cursed Corpse to be your Favorite. It gains the following:</p>\n<ul>\n<li>\n<p>It gains a +4 bonus to two of its Ability scores and their maximums for that score.   </p>\n</li>\n<li>\n<p>The damage die of all its attacks increases by one tier (D10&lt;D12&lt;2d8).  </p>\n</li>\n<li>\n<p>It gains 3 Mutations of your choice. You cannot select the same Mutation multiple times.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Corpse Creation 11"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Cursed Corpse Creation",
+   "level": 11
+  }
+ },
+ "folder": "qwzwYySzpsiw4XHW",
+ "_key": "!items!JETyChuTEOnECTgY"
+}

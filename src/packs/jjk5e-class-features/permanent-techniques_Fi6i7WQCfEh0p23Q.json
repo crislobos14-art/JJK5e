@@ -1,0 +1,29 @@
+{
+ "_id": "Fi6i7WQCfEh0p23Q",
+ "name": "Permanent Techniques",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>At 20th level, you can maintain your curtains and barriers (not Domains) until the barriers are destroyed.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Support Specialist 20"
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "8dvEkkHwQxeLRi3Y",
+ "_key": "!items!Fi6i7WQCfEh0p23Q"
+}

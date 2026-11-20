@@ -1,0 +1,102 @@
+{
+ "_id": "4b5KMI6lzVkZEZ0A",
+ "name": "Mantle of Resolve",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/blazing-courage.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Blazing Courage — Cursed Technique Reversal</em></p><p>You have mastered extending your ice outside of your blade as well as fixing your blade. If your weapon is suffering any penalties from being broken in some kind, when you activate freezing resolve those penalties are removed until the technique ends. Also, while Freezing Resolve is active, you can spend 6 Cursed Energy as an Action to emit an aura of ice within a 10 ft radius centered on you that lasts for 1 minute. While the aura persists you have resistance to cold and fire damage, and any creature that enters the ring of ice or starts its turn on the radius must make a Constitution saving throw. On a failure, they take your Freezing Resolve damage dice and their movement speed becomes 0. On a success, they take half as much damage.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Blazing Courage",
+  "activities": {
+   "xROz3gAcBRYclR9H": {
+    "_id": "xROz3gAcBRYclR9H",
+    "type": "save",
+    "name": "Action (6 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "10",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     }
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "xROz3gAcBRYclR9H": 6
+   },
+   "technique": "Blazing Courage",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Blazing Courage"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 10,
+ "_key": "!items!4b5KMI6lzVkZEZ0A"
+}

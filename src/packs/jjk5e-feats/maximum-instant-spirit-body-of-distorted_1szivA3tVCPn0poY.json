@@ -1,0 +1,111 @@
+{
+ "_id": "1szivA3tVCPn0poY",
+ "name": "Maximum: Instant Spirit Body of Distorted Killing",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/idle-transfiguration.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Self Embodiment of Perfection</em></p>\n<p>As an action for 8 cursed energy, you mold your body and soul into a form most befitting you. A form suited for killing. For 1 hour, your AC cannot be lower than 25 and you gain damage reduction equal to your CE modifier as your body has become impossibly hard and dense. Additionally, you gain elbow blades that count as simple melee weapons that you are proficient with. They deal 1d12 + your Cursed Energy modifier in piercing damage on a hit. When you make an attack with your Elbow Blades, you can spend 1 cursed energy to gain advantage on and increase the range of the attack to 15 feet as the Elbow Blade extends and shoots out at the target.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Self Embodiment of Perfection",
+  "activities": {
+   "enNw25iDlwHChB9h": {
+    "_id": "enNw25iDlwHChB9h",
+    "type": "utility",
+    "name": "Action (8 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "1",
+     "units": "hour",
+     "concentration": false
+    }
+   },
+   "ia8qHWFhVPuVV9YR": {
+    "_id": "ia8qHWFhVPuVV9YR",
+    "type": "attack",
+    "name": "Action (1 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": []
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "enNw25iDlwHChB9h": 8,
+    "ia8qHWFhVPuVV9YR": 1
+   },
+   "prereq": {
+    "features": [
+     [
+      "Domain Expansion: Self Embodiment of Perfection"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "AzMxVgHP2Otjp6Ju",
+ "sort": 400,
+ "_key": "!items!1szivA3tVCPn0poY"
+}

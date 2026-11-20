@@ -1,0 +1,119 @@
+{
+ "_id": "bUI5DQpp7zvbRciW",
+ "name": "Cosmic Genesis (Reversal)",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/vairocana.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Creeps and Curses V.3.1</em></p><p><em>Vairocana Reversal — requires Reverse Cursed Technique. Not added automatically.</em></p><p>Through mastering reverse cursed technique, you have learned your reversal. Rather than breaking the logic of this world and ignoring the laws of physics, your reversal allows you to instead create your own logic and laws of physics. While using Cosmic Genesis, you cannot use your other Innate Technique features. As an action for 4 cursed energy, you force a new rule of reality into the world around you in a 30 ft radius centered on you. This rule affects all creatures, objects, and terrain within range for a number of rounds equal to twice your Cursed Energy modifier (minimum of 2 rounds). The rule you impose must alter a fundamental interaction of reality. The DM has final say over whether an implemented rule is valid. Examples include:</p>\n<p><strong>Rule of Absolute Gravity.</strong> Gravity is absolute and cannot be ignored. Creatures cannot fly or teleport and jumping distance is halved.</p>\n<p><strong>Rule of Perfect Motion.</strong> An object in motion will remain in motion, forever. Creatures ignore difficult terrain and cannot have their speed reduced.</p>\n<p><strong>Rule of Universal Sight.</strong> Eyes could always perceive the entire electromagnetic spectrum. Creatures cannot benefit from invisibility and hidden creatures are automatically revealed.</p>\n<p><strong>Rule of Damage Inversion.</strong> Fire always healed instead of damaging. Fire damage heals for half the damage roll and deals no actual damage.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "V9CwF0Urv5nbWupG": {
+    "_id": "V9CwF0Urv5nbWupG",
+    "type": "utility",
+    "name": "Action (4 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "30",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "radius",
+    "size": "30",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": false
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "V9CwF0Urv5nbWupG": 4
+   },
+   "technique": "Vairocana",
+   "reversal": true,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "CpSgW3tLoueRa6XV",
+ "_key": "!items!bUI5DQpp7zvbRciW"
+}

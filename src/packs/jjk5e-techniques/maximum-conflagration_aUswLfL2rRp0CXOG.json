@@ -1,0 +1,175 @@
+{
+ "_id": "aUswLfL2rRp0CXOG",
+ "name": "Maximum: Conflagration",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/blazing-courage.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Blazing Courage — Innate Technique (11th level)</em></p><p>At 11th level, while your technique may be simple, that does not mean it isn’t powerful. While holding a melee weapon you can spend 10 ce as an action to swing your weapon, creating a 30 feet cone of intense flame and heat. All creatures within range must make a Constitution saving throw, taking 10d12 fire damage and being knocked prone on a failed save or half as much on a successful save. <br />\n If a creature fails by 5 or more, they gain severe burns and take additional fire damage equal to your proficiency bonus from any source of fire damage until they finish a long rest.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "PjW4MhuJXtZcWTEL": {
+    "_id": "PjW4MhuJXtZcWTEL",
+    "type": "save",
+    "name": "Action (10 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "cone",
+      "size": "30",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 10,
+       "denomination": 12,
+       "bonus": "",
+       "types": [
+        "fire"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "RpuKBKI0QFdVACgV",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "cone",
+    "size": "30",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": false
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "PjW4MhuJXtZcWTEL": 10
+   },
+   "technique": "Blazing Courage",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "RpuKBKI0QFdVACgV",
+   "name": "Prone (Maximum: Conflagration)",
+   "img": "modules/jjk5e/icons/techniques/blazing-courage.svg",
+   "statuses": [
+    "prone"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!aUswLfL2rRp0CXOG.RpuKBKI0QFdVACgV"
+  }
+ ],
+ "folder": "VITDORKyY9It9TdZ",
+ "_key": "!items!aUswLfL2rRp0CXOG"
+}

@@ -1,0 +1,112 @@
+{
+ "_id": "7QrXKBBmTXN0jBGO",
+ "name": "Boosted System",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/antigravity-system.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Antigravity System — Innate Technique (11th level)</em></p><p>At 11th level, you master all aspects of your technique and gain the following improvements to your <em>Antigravity</em>:<br />\n<strong>Lasting Field</strong>. You can spend additional CE up to your modifier to increase the range by 10 feet and the duration by 1 round per CE.<br />\n<strong>Sweeping Gravity</strong>. Creatures with a Dexterity score below your CE save DC cannot make a Dexterity saving throw against your technique.<br />\n<strong>Nauseating Gravity</strong>. If a creature fails a saving throw against your <em>Disorienting Gravity</em>, they are also stunned until the end of their next turn.<br />\n<strong>Hard Fall</strong>. Fall damage from your field becomes d12 bludgeoning.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "Yqj6r63O9Ffq54ux": {
+    "_id": "Yqj6r63O9Ffq54ux",
+    "type": "save",
+    "name": "Special (1+ CE)",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "max(1, max(@abilities.wis.mod, @abilities.cha.mod))"
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "special",
+   "value": null,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceSteps": {
+    "Yqj6r63O9Ffq54ux": 1
+   },
+   "ceCosts": {
+    "Yqj6r63O9Ffq54ux": 1
+   },
+   "technique": "Antigravity System",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "h8faxx3TSM5qAlx3",
+ "_key": "!items!7QrXKBBmTXN0jBGO"
+}

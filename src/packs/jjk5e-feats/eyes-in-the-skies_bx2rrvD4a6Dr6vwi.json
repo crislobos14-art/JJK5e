@@ -1,0 +1,42 @@
+{
+ "_id": "bx2rrvD4a6Dr6vwi",
+ "name": "Eyes in the Skies",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/tool-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Floating Tool Improvement</em></p>\n<p>When you are riding your Floating Tool, you gain a +5 bonus to your passive Perception and Investigation and can use your CE modifier for Dexterity saving throws.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Floating Tool Improvement",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Floating Tool Improvement"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "U8kbD3GeDP98vXc5",
+ "sort": 200,
+ "_key": "!items!bx2rrvD4a6Dr6vwi"
+}

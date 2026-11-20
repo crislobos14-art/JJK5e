@@ -1,0 +1,46 @@
+{
+ "_id": "pG10aClodKwGc3Mu",
+ "name": "Maximum: Fortress",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/triple-core.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Defensive Form</em></p>\n<p>When you use your <em>Defensive Form</em> core option, you instead gain temporary hit points equal to four times your current CE. While you have these temporary hit points, you are resistant to Piercing, Bludgeoning, and Slashing damage.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Defensive Form",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "options": [
+     [
+      "Defensive Form"
+     ]
+    ]
+   },
+   "modifies": [
+    "First Core",
+    "Upgraded Form"
+   ]
+  }
+ },
+ "folder": "82rPUBoGJ4IokyPC",
+ "sort": 300,
+ "_key": "!items!pG10aClodKwGc3Mu"
+}

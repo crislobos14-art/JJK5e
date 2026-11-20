@@ -1,0 +1,42 @@
+{
+ "_id": "Fl8ZRhloX8Xw82xG",
+ "name": "True New Shadow Style",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/new-shadow-style.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have New Shadow Style: Simple Domain</em></p>\n<p>Your Simple Domain now has additional hit points equal to twice your Cursed Energy modifier.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have New Shadow Style: Simple Domain",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "New Shadow Style: Simple Domain"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "gFod6wGzEy6UctqC",
+ "sort": 100,
+ "_key": "!items!Fl8ZRhloX8Xw82xG"
+}

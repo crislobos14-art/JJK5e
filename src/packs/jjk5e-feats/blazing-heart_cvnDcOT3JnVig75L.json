@@ -1,0 +1,83 @@
+{
+ "_id": "cvnDcOT3JnVig75L",
+ "name": "Blazing Heart",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/blazing-courage.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Mantle of Courage</em></p>\n<p>When you use <em>Mantle of Courage</em>, all creatures of your choice in range gain 5 temporary hit points and again at the start of your turn for the duration.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Mantle of Courage",
+  "activities": {
+   "dcLwrkX5oUKQ2XB1": {
+    "_id": "dcLwrkX5oUKQ2XB1",
+    "type": "heal",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "5",
+     "types": [
+      "temphp"
+     ],
+     "custom": {
+      "enabled": false,
+      "formula": ""
+     },
+     "scaling": {
+      "number": 1
+     }
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Mantle of Courage"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "FQaknUUFDMQmvcGr",
+ "sort": 200,
+ "_key": "!items!cvnDcOT3JnVig75L"
+}

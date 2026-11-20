@@ -1,0 +1,13 @@
+{
+ "_id": "dCIZFZHpom7KReG3",
+ "name": "JJK: Generate Mission (GM)",
+ "type": "script",
+ "img": "icons/sundries/scrolls/scroll-bound-sealed-red.webp",
+ "scope": "global",
+ "command": "game.modules.get(\"jjk5e\").api.generateMission();",
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": null,
+ "_key": "!macros!dCIZFZHpom7KReG3"
+}

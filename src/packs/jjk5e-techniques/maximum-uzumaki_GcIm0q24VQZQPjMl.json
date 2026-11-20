@@ -1,0 +1,145 @@
+{
+ "_id": "GcIm0q24VQZQPjMl",
+ "name": "Maximum: Uzumaki",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/cursed-spirit-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Spirit Manipulation — Innate Technique (11th level)</em></p><p>When you reach 11th level, as an action you can put any number of your cursed spirits in a spiral-like pattern(minimum 2), making them into a dark spiral that you can use in an attack. Every creature in a 30-foot cone must make a Dexterity saving throw, on a success they take half damage, on a failure they take 2d12 Necrotic damage.<br />\n For every cursed spirit above 2, the area of effect will be increased by 5 feet, and the damage will increase by 1d12.<br />\n All of the cursed spirits that were used in the Uzumaki are killed. However, you can obtain the actions(including legendary actions)they have at a cost which must be paid when extracting them via <em>Uzumaki</em>. You can extract multiple actions from different curses as part of the process, but you must pay the cost for each action.<br />\n The cost for the actions is listed below and once extracted, the action can be used only once:</p>\n<table>\n<thead>\n<tr>\n<th>Action Type</th>\n<th style=\"text-align: center;\">Cursed Energy Cost</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Bonus Action</td>\n<td style=\"text-align: center;\">3</td>\n</tr>\n<tr>\n<td>Action</td>\n<td style=\"text-align: center;\">4</td>\n</tr>\n<tr>\n<td>Reactions</td>\n<td style=\"text-align: center;\">5</td>\n</tr>\n<tr>\n<td>Legendary Actions</td>\n<td style=\"text-align: center;\">10</td>\n</tr>\n</tbody>\n</table>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "21BCJjjeljm7BkO9": {
+    "_id": "21BCJjjeljm7BkO9",
+    "type": "save",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "cone",
+      "size": "30",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 12,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "cone",
+    "size": "30",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": false
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Cursed Spirit Manipulation",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "f8ljC8WN5acnKcA4",
+ "_key": "!items!GcIm0q24VQZQPjMl"
+}

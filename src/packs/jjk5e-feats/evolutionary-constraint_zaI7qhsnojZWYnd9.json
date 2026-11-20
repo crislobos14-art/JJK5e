@@ -1,0 +1,59 @@
+{
+ "_id": "zaI7qhsnojZWYnd9",
+ "name": "Evolutionary Constraint",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/pact.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Creeps and Curses V.3.1</em></p><p>A Cursed Womb is still growing and will eventually achieve maturity naturally or through growth. You can choose Evolutionary Constraints upon character creation. These will eventually become your strength as you experience Truth Rebirth and shed your status as a Cursed Womb.</p>\n<table>\n<thead>\n<tr>\n<th>Evolutionary Constraint</th>\n<th>Effect</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Soft Shell</td>\n<td>Your AC equals 10 + your Constitution modifier (min of +0) while not wearing armor. You do not gain the benefits of Unarmored Defense.</td>\n</tr>\n<tr>\n<td>Weak Constitution</td>\n<td>Your hit point maximum decreases by an amount equal to 1-3 times your level and decreases by 1-3 whenever you gain a level.</td>\n</tr>\n<tr>\n<td>Lacking Affinity</td>\n<td>You can not heal via Cursed Energy Affinity at level 5.</td>\n</tr>\n<tr>\n<td>No ASI</td>\n<td>You do not gain your Racial ASI.</td>\n</tr>\n<tr>\n<td>Weak CE</td>\n<td>You do not add your Cursed Energy modifier to your total Cursed Energy.</td>\n</tr>\n<tr>\n<td>Slow</td>\n<td>Your walking speed is lowered by 5 or 10 ft.</td>\n</tr>\n<tr>\n<td>Sedentary</td>\n<td>Your walking speed becomes 20 ft.</td>\n</tr>\n<tr>\n<td>Small Body</td>\n<td>Your size is Small and you have disadvantage on Strength checks and saving throws.</td>\n</tr>\n</tbody>\n</table>\n<p><strong>True Rebirth.</strong> You experience your first growth pangs at 8th level, and become a true Curse at 11th level and are truly reborn into this world. A DM can change the level prerequisite, allow True Rebirth to happen at an important character moment, or allow a player to trade a Constraint for a Rebirth Option for immediate benefit at level 1.</p>\n<table>\n<thead>\n<tr>\n<th>True Rebirth</th>\n<th>Effect</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Harder Shell</td>\n<td>At 8th level, your AC equals 10 + your proficiency bonus + your Constitution modifier while not wearing armor. At 15th level, this becomes 10 + your proficiency bonus + twice your Constitution modifier.</td>\n</tr>\n<tr>\n<td>Strongest Constitution</td>\n<td>At 8th level, your hit point maximum increases by an amount equal to 1-3 times your level and increases by 1-3 when you gain a level (depending how much you decreased).</td>\n</tr>\n<tr>\n<td>Powerful Affinity</td>\n<td>At 11th level, you gain Powerful Affinity. You can spend cursed energy up to your CE modifier to regain 10 hit points per cursed energy spent as a bonus action or reaction to damage.</td>\n</tr>\n<tr>\n<td>Greater ASI</td>\n<td>When you gain an Ability Score Increase, you can instead increase one ability score of your choice by 3, or increase three ability scores of your choice by 1, or one ability score by two and another by 1.</td>\n</tr>\n<tr>\n<td>Powerful CE</td>\n<td>At 11th level, you add twice your Cursed Energy modifier to your total Cursed Energy.</td>\n</tr>\n<tr>\n<td>Talented Sprinter</td>\n<td>At 8th level, your walking speed increases by 5 or 10 ft (depending on the decrease).</td>\n</tr>\n<tr>\n<td>Mobility</td>\n<td>At 11th level, your walking speed becomes 40 ft (or increases by 10 ft if your walking speed is higher) and you gain a 20 ft swim and fly speed that allows you to hover.</td>\n</tr>\n<tr>\n<td>Large Body</td>\n<td>At 11th level, your size becomes Large and you gain advantage on Strength checks and saving throws.</td>\n</tr>\n</tbody>\n</table>",
+   "chat": ""
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkPact"
+  },
+  "requirements": "Must be a Cursed Womb",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "TuD75Es2qNSvVZN6",
+ "effects": [
+  {
+   "_id": "dyfMITajCNRXAuCy",
+   "name": "Evolutionary Constraint (toggle)",
+   "img": "modules/jjk5e/icons/pact.svg",
+   "changes": [
+    {
+     "key": "system.abilities.str.check.roll.mode",
+     "mode": 2,
+     "value": "1",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!zaI7qhsnojZWYnd9.dyfMITajCNRXAuCy"
+  }
+ ],
+ "sort": 600,
+ "_key": "!items!zaI7qhsnojZWYnd9"
+}

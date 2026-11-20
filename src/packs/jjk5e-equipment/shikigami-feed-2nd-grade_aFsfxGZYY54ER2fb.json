@@ -1,0 +1,82 @@
+{
+ "_id": "aFsfxGZYY54ER2fb",
+ "name": "Shikigami Feed (2nd Grade)",
+ "type": "consumable",
+ "img": "icons/svg/explosion.svg",
+ "folder": "xnCPfIMW0yQ370pR",
+ "system": {
+  "description": {
+   "value": "<p><em>Potion, Grade 2</em></p><p>Shredded food meal made from the ground up bodies of medium grade curses. A shikigami can eat this as an action to regain 8d4+8 hit points and gain advantage on the next attack roll or skill check it makes.</p>\n<p>+3 Cursed Weapon This is any weapon that has been imbued with a curse, allowing it to damage curses or shikigami. You gain a +3 bonus to attack and damage rolls with this weapon.</p>"
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "rarity": "rare",
+  "quantity": 1,
+  "attunement": "",
+  "type": {
+   "value": "potion",
+   "subtype": ""
+  },
+  "uses": {
+   "max": "1",
+   "spent": 0,
+   "autoDestroy": true,
+   "recovery": []
+  },
+  "activities": {
+   "h0Eh1aENnnUjHRsv": {
+    "_id": "h0Eh1aENnnUjHRsv",
+    "type": "utility",
+    "name": "Consume",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1"
+      }
+     ]
+    }
+   },
+   "t2iQTOjO2X7VHLKM": {
+    "_id": "t2iQTOjO2X7VHLKM",
+    "type": "utility",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "2nd Grade"
+  }
+ },
+ "_key": "!items!aFsfxGZYY54ER2fb"
+}

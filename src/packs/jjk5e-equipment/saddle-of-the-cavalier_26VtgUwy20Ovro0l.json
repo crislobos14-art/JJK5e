@@ -1,0 +1,58 @@
+{
+ "_id": "26VtgUwy20Ovro0l",
+ "name": "Saddle of the Cavalier",
+ "type": "consumable",
+ "img": "icons/svg/explosion.svg",
+ "folder": "pB7mLAOAtbyDQKeT",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Item, Grade 3</em></p><p>This saddle confers the following benefits while you are seated in it and astride a mount.</p>\n<ul>\n<li>\n<p>Attack rolls against the mount have Disadvantage.</p>\n</li>\n<li>\n<p>You can’t be dismounted against your will. This property is suppressed while you have the Incapacitated condition.</p>\n</li>\n</ul>"
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "rarity": "uncommon",
+  "quantity": 1,
+  "attunement": "",
+  "type": {
+   "value": "trinket",
+   "subtype": ""
+  },
+  "activities": {
+   "jcUpDxyQCJkygqG4": {
+    "_id": "jcUpDxyQCJkygqG4",
+    "type": "utility",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "3rd Grade"
+  }
+ },
+ "_key": "!items!26VtgUwy20Ovro0l"
+}

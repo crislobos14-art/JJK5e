@@ -1,0 +1,42 @@
+{
+ "_id": "75PRCL0vQ2Stc0MF",
+ "name": "Maximum: Best Friend",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/boogie-woogie.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Round of Applause</em></p>\n<p>Boogie Woogie, as effective as it is in solo combat, only reaches its full potential not with an ally, but with a best friend. At the start of combat, you can choose one ally as a <em>Best Friend.</em> When fighting with that ally, you gain the following benefits:</p>\n<ul>\n<li>\n<p>When you switch the place of your <em>Best Friend</em> with an ally who was previously in melee range of an enemy, on top of advantage, the attack will have its critical range increased by 3.  </p>\n</li>\n<li>\n<p>Swapping your <em>Best Friend</em> has no cost.  </p>\n</li>\n<li>\n<p>When flanking with your <em>Best Friend</em>, you and your <em>Best Friend</em> gain a bonus to damage rolls equal to your proficiency bonus.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Round of Applause",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Round of Applause"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "lYPG7qB66tA5vtjF",
+ "sort": 300,
+ "_key": "!items!75PRCL0vQ2Stc0MF"
+}

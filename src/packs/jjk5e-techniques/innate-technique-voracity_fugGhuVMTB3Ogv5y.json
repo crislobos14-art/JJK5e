@@ -1,0 +1,118 @@
+{
+ "_id": "fugGhuVMTB3Ogv5y",
+ "name": "Innate Technique: Voracity",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/voracity.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>You get stronger by eating.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.i2elcnfEM3PqD4Xu]{Hunger of the Accursed}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.r1eIkRbHNYcdzsvl]{Regurgitation}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.gigQp0SO5fgfeziK]{Digestion}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.eTQgHnQfLmlqyKNA]{Maximum: Body of the Devourer}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.MVFoU6nfhwq857cp]{Domain Expansion: Tomb of the Devoured}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "ouRAQ0e3j6WGnoIk": {
+    "_id": "ouRAQ0e3j6WGnoIk",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Voracity (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.i2elcnfEM3PqD4Xu",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "Ic5Uwgy3mSqnxc5X": {
+    "_id": "Ic5Uwgy3mSqnxc5X",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Voracity (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.r1eIkRbHNYcdzsvl",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "em1ZYEy5dKl9icaC": {
+    "_id": "em1ZYEy5dKl9icaC",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Voracity (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.gigQp0SO5fgfeziK",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "jsp1dMl8Ms89HBdH": {
+    "_id": "jsp1dMl8Ms89HBdH",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Voracity (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.eTQgHnQfLmlqyKNA",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "TncCbgLPPMYVEBNL": {
+    "_id": "TncCbgLPPMYVEBNL",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Voracity (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.MVFoU6nfhwq857cp",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Voracity"
+  }
+ },
+ "_key": "!items!fugGhuVMTB3Ogv5y"
+}

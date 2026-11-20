@@ -1,0 +1,137 @@
+{
+ "_id": "spV68sqJ9ADOZP65",
+ "name": "Heavenly Pact: Overgeneration",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/pact.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Creeps and Curses V.3.1</em></p><p><em>Heavenly Restriction or Heavenly Pact refers to a binding vow forced on a sorcerer's body at birth. This usually affects their cursed energy in exchange for limitations or improvements on their body. The most notable is the absolute physicality of Zenin Toji, but there are many different types of Heavenly Pacts. A creature can only have one Heavenly Pact. If the limitations of the Heavenly Pact are superseded, anything gained becomes null.</em></p>\n<p>People with this Heavenly Restriction find themselves constantly flowing with cursed energy and rarely run out. However, their body emits a scent that makes them tantalizing to cursed spirits.</p>\n<p><strong>Cursed Spirit Attraction</strong></p>\n<ul>\n<li>\n<p>Any cursed spirit within 120 ft is automatically aware of your presence and feels drawn to you.</p>\n</li>\n<li>\n<p>A cursed spirit that starts its turn within 60 ft of you must make a DC 20 Wisdom saving throw. On a failure, the cursed spirit is charmed for 1 minute. While charmed, it will ignore creatures other than you and attempt to attack you. If a creature fails the save by 5 or more, it goes into a frenzy and has advantage on attacks against you.</p>\n</li>\n</ul>\n<p><strong>Overgeneration Increase</strong></p>\n<ul>\n<li>\n<p>You regain 1 CE every hour you do not have the incapacitated condition.</p>\n</li>\n<li>\n<p>When you take a short rest, you can spend your hit die to regain Cursed Energy equal to your CE modifier for every hit die spent.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkPact"
+  },
+  "requirements": "Heavenly Pact (only one per creature)",
+  "activities": {
+   "HwQY3lZJUPuF7vK3": {
+    "_id": "HwQY3lZJUPuF7vK3",
+    "type": "save",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "120",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    },
+    "save": {
+     "ability": [
+      "wis"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    },
+    "effects": [
+     {
+      "_id": "cHNRwsE9pVW1gfYo",
+      "onSave": false
+     },
+     {
+      "_id": "yyBqvFctjOedhHyV",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "effects": [
+  {
+   "_id": "cHNRwsE9pVW1gfYo",
+   "name": "Charmed (Heavenly Pact: Overgeneration)",
+   "img": "modules/jjk5e/icons/pact.svg",
+   "statuses": [
+    "charmed"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "seconds": 60,
+    "rounds": 10
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "charmed"
+    }
+   },
+   "_key": "!items.effects!spV68sqJ9ADOZP65.cHNRwsE9pVW1gfYo"
+  },
+  {
+   "_id": "yyBqvFctjOedhHyV",
+   "name": "Incapacitated (Heavenly Pact: Overgeneration)",
+   "img": "modules/jjk5e/icons/pact.svg",
+   "statuses": [
+    "incapacitated"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "seconds": 60,
+    "rounds": 10
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "incapacitated"
+    }
+   },
+   "_key": "!items.effects!spV68sqJ9ADOZP65.yyBqvFctjOedhHyV"
+  }
+ ],
+ "folder": "TuD75Es2qNSvVZN6",
+ "sort": 500,
+ "_key": "!items!spV68sqJ9ADOZP65"
+}

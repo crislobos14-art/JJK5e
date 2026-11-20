@@ -1,0 +1,118 @@
+{
+ "_id": "GalC8szcq6ZsyoYA",
+ "name": "Innate Technique: Cursed Spirit Manipulation",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/cursed-spirit-manipulation.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>You are blessed with an amazing technique to control Cursed Spirits.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.xSoW2QmMDoKA0mY2]{Cursed Spirit Absorption}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.sJ7cTapmdLmiABwi]{Curse Infused Spirits}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.W0HmlfoJxTJqDsPv]{Perfect Control}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.GcIm0q24VQZQPjMl]{Maximum: Uzumaki}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.F55gMSM27KKH5qPV]{Domain Expansion: Womb Profusion}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "HO7qSkzI2t08ho1S": {
+    "_id": "HO7qSkzI2t08ho1S",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Cursed Spirit Manipulation (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.xSoW2QmMDoKA0mY2",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "mfjeuIDZ9vaSp4fO": {
+    "_id": "mfjeuIDZ9vaSp4fO",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Cursed Spirit Manipulation (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.sJ7cTapmdLmiABwi",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "gMTJPP2ApDrgOTrX": {
+    "_id": "gMTJPP2ApDrgOTrX",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Cursed Spirit Manipulation (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.W0HmlfoJxTJqDsPv",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "y0qlfDqwVEs5AcWA": {
+    "_id": "y0qlfDqwVEs5AcWA",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Cursed Spirit Manipulation (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.GcIm0q24VQZQPjMl",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "UPgb9DV7etqyAQZM": {
+    "_id": "UPgb9DV7etqyAQZM",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Cursed Spirit Manipulation (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.F55gMSM27KKH5qPV",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Cursed Spirit Manipulation"
+  }
+ },
+ "_key": "!items!GalC8szcq6ZsyoYA"
+}

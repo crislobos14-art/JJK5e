@@ -1,0 +1,119 @@
+{
+ "_id": "uJBhnTudE8G6T5WK",
+ "name": "Construct",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/construction.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Construction — Innate Technique (1st level)</em></p><blockquote><p>Construction, as the name implies, allows the user to conjure objects from nothing.</p></blockquote><p>Beginning at 1st, you can create any kind of object you understand with your technique, although without much efficiency. As a bonus action for 3 CE, you create one non-magical weapon OR simple object that fits in a 3 ft cube in your hand or within 5 ft of you, as long as you have basic understanding and information of its properties. </p>\n<p>You can spend additional CE to create an object with one additional object’s properties or increase the cube by 1 ft. (Eg. You create a greatsword mixed with a spear with both the Heavy, two-handed, and the Versatile and Thrown (20/60) properties. When mixing a light and heavy weapon, choose which property it will maintain.)</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "BYmBLfm5BYDJi6wX": {
+    "_id": "BYmBLfm5BYDJi6wX",
+    "type": "utility",
+    "name": "Bonus Action (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "cube",
+      "size": "3",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "cube",
+    "size": "3",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": false
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "BYmBLfm5BYDJi6wX": 3
+   },
+   "technique": "Construction",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "dT7FkGZ40euglS6C",
+ "_key": "!items!uJBhnTudE8G6T5WK"
+}

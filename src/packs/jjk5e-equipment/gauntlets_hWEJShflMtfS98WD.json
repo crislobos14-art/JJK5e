@@ -1,0 +1,93 @@
+{
+ "_id": "hWEJShflMtfS98WD",
+ "name": "Gauntlets",
+ "type": "weapon",
+ "img": "icons/svg/sword.svg",
+ "folder": "8L9REK3UZxFoXRJA",
+ "system": {
+  "description": {
+   "value": "<p>Martial melee weapon. 1d6 bludgeoning. Defensive, Fist.</p><p><strong>Special:</strong> Defensive, Fist</p><p><em>Defensive: +1 AC while wielded (one weapon only).</em></p><p><em>Fist: counts as an unarmed strike and/or weapon attack for features that require it.</em></p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "martialM",
+   "baseItem": ""
+  },
+  "damage": {
+   "base": {
+    "number": 1,
+    "denomination": 6,
+    "types": [
+     "bludgeoning"
+    ]
+   }
+  },
+  "range": {
+   "value": 5,
+   "long": null,
+   "units": "ft",
+   "reach": 5
+  },
+  "properties": [],
+  "proficient": null,
+  "price": {
+   "value": 5.0,
+   "denomination": "gp"
+  },
+  "quantity": 1,
+  "activities": {
+   "t0KkMsZEIp3WvZDr": {
+    "_id": "t0KkMsZEIp3WvZDr",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "melee",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "priceUSD": "$500"
+  }
+ },
+ "effects": [
+  {
+   "_id": "SDLPRNzvEOdKvB69",
+   "name": "Defensive (+1 AC)",
+   "img": "icons/svg/sword.svg",
+   "changes": [
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+1",
+     "priority": null
+    }
+   ],
+   "disabled": false,
+   "transfer": true,
+   "duration": {},
+   "description": "",
+   "flags": {},
+   "_key": "!items.effects!hWEJShflMtfS98WD.SDLPRNzvEOdKvB69"
+  }
+ ],
+ "_key": "!items!hWEJShflMtfS98WD"
+}

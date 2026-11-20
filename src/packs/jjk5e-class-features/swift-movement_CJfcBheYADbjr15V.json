@@ -1,0 +1,55 @@
+{
+ "_id": "CJfcBheYADbjr15V",
+ "name": "Swift Movement",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>Starting at 2nd level, your quick thinking and agility allow you to move and act quickly. You can take the Dash, Disengage, or Hide action as a bonus action.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Scout 2",
+  "activities": {
+   "9K4b8ZZ27mOgJwaA": {
+    "_id": "9K4b8ZZ27mOgJwaA",
+    "type": "utility",
+    "name": "Bonus Action",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "Jrayu2BI11U3R1zF",
+ "_key": "!items!CJfcBheYADbjr15V"
+}

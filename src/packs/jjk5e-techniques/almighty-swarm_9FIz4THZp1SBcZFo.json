@@ -1,0 +1,32 @@
+{
+ "_id": "9FIz4THZp1SBcZFo",
+ "name": "Almighty Swarm",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/disaster-vermin.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Disaster Vermin — Innate Technique (6th level)</em></p><p>At 6th level, you have learned the power of the almighty swarm. As part of the bonus action to command your Insect Swarms, you can order different swarms to move closer and combine into one Vermin Swarm if within 5 ft of each other, becoming 1 size larger for every additional swarm. The Vermin Swarm gains the combined hit points and damage dice of all the swarms together. The individual Insect Swarms that make up the Vermin Swarms still count against your maximum number of controlled swarms.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Disaster Vermin 6"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Disaster Vermin",
+   "level": 6
+  }
+ },
+ "folder": "THumTyfrAaZo0XzQ",
+ "_key": "!items!9FIz4THZp1SBcZFo"
+}

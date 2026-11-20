@@ -1,0 +1,66 @@
+{
+ "_id": "1YbxYdixyaLzXZkZ",
+ "name": "Major Precognition",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Mind Improvements: Your body has increased both physically and mentally. You can have a number of these improvements equal to your Wisdom modifier. ---</em></p>\n<p>Precognition, 1 Body Point, 17th level<br />\nYour precognition has evolved to the point you're almost seeing the future. Once per round, when a creature targets you for an attack, you can use your reaction to force their attack rolls against you to be made at disadvantage until the beginning of your next turn. Additionally, once per round you can give yourself advantage against one saving throw.</p>\n<hr />",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Heavenly Restriction 2",
+  "activities": {
+   "sXxNojVtrJCS1fA0": {
+    "_id": "sXxNojVtrJCS1fA0",
+    "type": "utility",
+    "name": "Reaction",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "level": 17,
+    "features": [
+     [
+      "Precognition"
+     ]
+    ]
+   },
+   "bodyCost": 1,
+   "bodyCategory": "wis"
+  }
+ },
+ "folder": "ybhWCA27cbgjKLpN",
+ "_key": "!items!1YbxYdixyaLzXZkZ"
+}

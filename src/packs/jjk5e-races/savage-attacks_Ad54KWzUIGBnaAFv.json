@@ -1,0 +1,29 @@
+{
+ "_id": "Ad54KWzUIGBnaAFv",
+ "name": "Savage Attacks",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/trait-race.svg",
+ "system": {
+  "description": {
+   "value": "<p>When you score a critical hit with a melee weapon attack, you can roll one of the weapon's damage dice one additional time and add it to the extra damage of the critical hit.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "race",
+   "subtype": ""
+  },
+  "requirements": "Sumerian (Deskunte)"
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "cUxhy4eiPJek1pHp",
+ "_key": "!items!Ad54KWzUIGBnaAFv"
+}

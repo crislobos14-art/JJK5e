@@ -1,0 +1,34 @@
+{
+ "_id": "YgaCUaVLzXTbZFcS",
+ "name": "Expert Maker",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/cursed-corpse-creation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must make Cursed Corpse Creation</em></p>\n<p>You have spent your life learning your technique and learned tips and tricks that help you master the process. You can create a cursed core or body for 1/3 of the cost or time.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must make Cursed Corpse Creation",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "XXj1CTcWWYDx5bTY",
+ "sort": 100,
+ "_key": "!items!YgaCUaVLzXTbZFcS"
+}

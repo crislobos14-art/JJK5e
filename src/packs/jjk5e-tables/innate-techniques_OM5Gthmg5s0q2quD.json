@@ -1,0 +1,1312 @@
+{
+ "_id": "OM5Gthmg5s0q2quD",
+ "name": "Innate Techniques",
+ "img": "modules/jjk5e/icons/ce.svg",
+ "description": "<p>Roll to determine a random innate technique. Drag a result onto a character sheet or pick it with the class's Innate Technique choice.</p>",
+ "formula": "1d81",
+ "replacement": true,
+ "displayRoll": true,
+ "results": [
+  {
+   "_id": "AWN7oa8YqXlunefL",
+   "type": "document",
+   "name": "Antigravity System",
+   "img": "modules/jjk5e/icons/techniques/antigravity-system.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.gL98pPAhCp5btTmC",
+   "weight": 1,
+   "range": [
+    1,
+    1
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.AWN7oa8YqXlunefL"
+  },
+  {
+   "_id": "psiSvdIspA3V4Lse",
+   "type": "document",
+   "name": "Auspicious Beast Summon",
+   "img": "modules/jjk5e/icons/techniques/auspicious-beast-summon.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.eqaq8aAY4IN52lV5",
+   "weight": 1,
+   "range": [
+    2,
+    2
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.psiSvdIspA3V4Lse"
+  },
+  {
+   "_id": "ruW9dKoCTCDPupb6",
+   "type": "document",
+   "name": "Black Bird Manipulation",
+   "img": "modules/jjk5e/icons/techniques/black-bird-manipulation.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.0dbaO9jxbwCuGbyQ",
+   "weight": 1,
+   "range": [
+    3,
+    3
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.ruW9dKoCTCDPupb6"
+  },
+  {
+   "_id": "kv5JXVUUz567aHUc",
+   "type": "document",
+   "name": "Black Box",
+   "img": "modules/jjk5e/icons/techniques/black-box.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.kehmeyYWDuPGqhum",
+   "weight": 1,
+   "range": [
+    4,
+    4
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.kv5JXVUUz567aHUc"
+  },
+  {
+   "_id": "scfpHf3grWMkqqDk",
+   "type": "document",
+   "name": "Blazing Courage",
+   "img": "modules/jjk5e/icons/techniques/blazing-courage.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.2bwz0hTBn5ypp3dd",
+   "weight": 1,
+   "range": [
+    5,
+    5
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.scfpHf3grWMkqqDk"
+  },
+  {
+   "_id": "TqF7S62ZmhAj7RZf",
+   "type": "document",
+   "name": "Blood Manipulation",
+   "img": "modules/jjk5e/icons/techniques/blood-manipulation.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.5QLR4NkDGOJebVpF",
+   "weight": 1,
+   "range": [
+    6,
+    6
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.TqF7S62ZmhAj7RZf"
+  },
+  {
+   "_id": "UoeYWkOwOYVcFxEW",
+   "type": "document",
+   "name": "Body Manipulation",
+   "img": "modules/jjk5e/icons/techniques/body-manipulation.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.6rtLgvPvDN215CJQ",
+   "weight": 1,
+   "range": [
+    7,
+    7
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.UoeYWkOwOYVcFxEW"
+  },
+  {
+   "_id": "yNqJVyiCrPfpjk8V",
+   "type": "document",
+   "name": "Boogie Woogie",
+   "img": "modules/jjk5e/icons/techniques/boogie-woogie.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.H7qygxbG8Xq0c6vn",
+   "weight": 1,
+   "range": [
+    8,
+    8
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.yNqJVyiCrPfpjk8V"
+  },
+  {
+   "_id": "5d3nKBMSyjFFWD95",
+   "type": "document",
+   "name": "Centipede Shroud",
+   "img": "modules/jjk5e/icons/techniques/centipede-shroud.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.BTG1284sBIfXglvE",
+   "weight": 1,
+   "range": [
+    9,
+    9
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.5d3nKBMSyjFFWD95"
+  },
+  {
+   "_id": "ma0hW2s5iQT7w5XO",
+   "type": "document",
+   "name": "Clone",
+   "img": "modules/jjk5e/icons/techniques/clone.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.Pm0hVIfm4vApveGF",
+   "weight": 1,
+   "range": [
+    10,
+    10
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.ma0hW2s5iQT7w5XO"
+  },
+  {
+   "_id": "A7IpukYhdTVRH7zt",
+   "type": "document",
+   "name": "Comedian",
+   "img": "modules/jjk5e/icons/techniques/comedian.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.nhgADuSDYt7OecT5",
+   "weight": 1,
+   "range": [
+    11,
+    11
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.A7IpukYhdTVRH7zt"
+  },
+  {
+   "_id": "6WIOMhg7n10dNEfb",
+   "type": "document",
+   "name": "Construction",
+   "img": "modules/jjk5e/icons/techniques/construction.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.FNUTP31yZ80d9boq",
+   "weight": 1,
+   "range": [
+    12,
+    12
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.6WIOMhg7n10dNEfb"
+  },
+  {
+   "_id": "rT4UrKuxTNlt04d7",
+   "type": "document",
+   "name": "Contractual Recreation",
+   "img": "modules/jjk5e/icons/techniques/contractual-recreation.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.gtottgVuBQSaJpU2",
+   "weight": 1,
+   "range": [
+    13,
+    13
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.rT4UrKuxTNlt04d7"
+  },
+  {
+   "_id": "vOb6ps4x6rVrkuh4",
+   "type": "document",
+   "name": "Cursed Cannon",
+   "img": "modules/jjk5e/icons/techniques/cursed-cannon.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.xswFEEqp1iM7KdQs",
+   "weight": 1,
+   "range": [
+    14,
+    14
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.vOb6ps4x6rVrkuh4"
+  },
+  {
+   "_id": "FkssKFv3M7hD1bPI",
+   "type": "document",
+   "name": "Cursed Circuitry",
+   "img": "modules/jjk5e/icons/techniques/cursed-circuitry.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.bXBgxyXKLbBpuaMg",
+   "weight": 1,
+   "range": [
+    15,
+    15
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.FkssKFv3M7hD1bPI"
+  },
+  {
+   "_id": "aCHMaTCnrLjMTJZO",
+   "type": "document",
+   "name": "Cursed Corpse Creation",
+   "img": "modules/jjk5e/icons/techniques/cursed-corpse-creation.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.sgpQc4L7TW5D82SR",
+   "weight": 1,
+   "range": [
+    16,
+    16
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.aCHMaTCnrLjMTJZO"
+  },
+  {
+   "_id": "k5hT77Hli9tzeV19",
+   "type": "document",
+   "name": "Cursed Speech",
+   "img": "modules/jjk5e/icons/techniques/cursed-speech.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.rqBh5m04P5JgJttw",
+   "weight": 1,
+   "range": [
+    17,
+    17
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.k5hT77Hli9tzeV19"
+  },
+  {
+   "_id": "c9TyO8xNVx0hWy0R",
+   "type": "document",
+   "name": "Cursed Spirit Manipulation",
+   "img": "modules/jjk5e/icons/techniques/cursed-spirit-manipulation.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.GalC8szcq6ZsyoYA",
+   "weight": 1,
+   "range": [
+    18,
+    18
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.c9TyO8xNVx0hWy0R"
+  },
+  {
+   "_id": "JsFFXx8mFIxXZ9qi",
+   "type": "document",
+   "name": "Cursed Transmutation",
+   "img": "modules/jjk5e/icons/techniques/cursed-transmutation.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.ET5Qx7HqsfRErEEF",
+   "weight": 1,
+   "range": [
+    19,
+    19
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.JsFFXx8mFIxXZ9qi"
+  },
+  {
+   "_id": "U3xvCy54PApJpZie",
+   "type": "document",
+   "name": "Dark Claw",
+   "img": "modules/jjk5e/icons/techniques/dark-claw.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.7JfFhWTneFl0yW0R",
+   "weight": 1,
+   "range": [
+    20,
+    20
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.U3xvCy54PApJpZie"
+  },
+  {
+   "_id": "fYZQAkTQmpqAw5FL",
+   "type": "document",
+   "name": "Deadly Sentencing",
+   "img": "modules/jjk5e/icons/techniques/deadly-sentencing.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.XRDIjn80Rrz4vQmL",
+   "weight": 1,
+   "range": [
+    21,
+    21
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.fYZQAkTQmpqAw5FL"
+  },
+  {
+   "_id": "E1T7zEwGrmC30yfY",
+   "type": "document",
+   "name": "Disaster Flames",
+   "img": "modules/jjk5e/icons/techniques/disaster-flames.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.VAzY98mKXjdjNtZs",
+   "weight": 1,
+   "range": [
+    22,
+    22
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.E1T7zEwGrmC30yfY"
+  },
+  {
+   "_id": "BSS9YZGsSJJMB7vZ",
+   "type": "document",
+   "name": "Disaster Storms",
+   "img": "modules/jjk5e/icons/techniques/disaster-storms.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.TR9Ml7hAw1xRiXxv",
+   "weight": 1,
+   "range": [
+    23,
+    23
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.BSS9YZGsSJJMB7vZ"
+  },
+  {
+   "_id": "nxr7t57rN5ABFp71",
+   "type": "document",
+   "name": "Disaster Tides",
+   "img": "modules/jjk5e/icons/techniques/disaster-tides.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.LRuqxn21ZHzq7qia",
+   "weight": 1,
+   "range": [
+    24,
+    24
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.nxr7t57rN5ABFp71"
+  },
+  {
+   "_id": "Jfo1QfTWUsCyhk3j",
+   "type": "document",
+   "name": "Disaster Verdure",
+   "img": "modules/jjk5e/icons/techniques/disaster-verdure.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.W6VeWIjW4lfrmaOX",
+   "weight": 1,
+   "range": [
+    25,
+    25
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.Jfo1QfTWUsCyhk3j"
+  },
+  {
+   "_id": "GAmfGr3f9wUZSfae",
+   "type": "document",
+   "name": "Disaster Vermin",
+   "img": "modules/jjk5e/icons/techniques/disaster-vermin.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.7D5Bmjl59fmVBINV",
+   "weight": 1,
+   "range": [
+    26,
+    26
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.GAmfGr3f9wUZSfae"
+  },
+  {
+   "_id": "rhNsApIA4TwjvTEx",
+   "type": "document",
+   "name": "Divergent Fist",
+   "img": "modules/jjk5e/icons/techniques/divergent-fist.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.e1TEKNUYnm0Pbdw0",
+   "weight": 1,
+   "range": [
+    27,
+    27
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.rhNsApIA4TwjvTEx"
+  },
+  {
+   "_id": "lX2GrmjRcWELVn1h",
+   "type": "document",
+   "name": "Dragon Vein",
+   "img": "modules/jjk5e/icons/techniques/dragon-vein.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.ntI2UnoFpLvX430x",
+   "weight": 1,
+   "range": [
+    28,
+    28
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.lX2GrmjRcWELVn1h"
+  },
+  {
+   "_id": "jklAhn0sl7SNjWuX",
+   "type": "document",
+   "name": "Earth Manipulation",
+   "img": "modules/jjk5e/icons/techniques/earth-manipulation.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.Tewgtv0ElmefiICX",
+   "weight": 1,
+   "range": [
+    29,
+    29
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.jklAhn0sl7SNjWuX"
+  },
+  {
+   "_id": "AxJ9nqV6XsnrPNIJ",
+   "type": "document",
+   "name": "Eight Heads",
+   "img": "modules/jjk5e/icons/techniques/eight-heads.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.5GHs3Dqd6VxtGaK1",
+   "weight": 1,
+   "range": [
+    30,
+    30
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.AxJ9nqV6XsnrPNIJ"
+  },
+  {
+   "_id": "djatJXJGYEmkEJOE",
+   "type": "document",
+   "name": "Esoteric Art",
+   "img": "modules/jjk5e/icons/techniques/esoteric-art.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.1600B1v5cBczonpg",
+   "weight": 1,
+   "range": [
+    31,
+    31
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.djatJXJGYEmkEJOE"
+  },
+  {
+   "_id": "WKKoPgJ0LN2fRnwB",
+   "type": "document",
+   "name": "Explosive Flesh",
+   "img": "modules/jjk5e/icons/techniques/explosive-flesh.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.Y3Hv1JIWW5FMN3CQ",
+   "weight": 1,
+   "range": [
+    32,
+    32
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.WKKoPgJ0LN2fRnwB"
+  },
+  {
+   "_id": "lnlc5hPvW9XH8N2c",
+   "type": "document",
+   "name": "Fa Jin",
+   "img": "modules/jjk5e/icons/techniques/fa-jin.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.lGhaeV6UV5jriKdw",
+   "weight": 1,
+   "range": [
+    33,
+    33
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.lnlc5hPvW9XH8N2c"
+  },
+  {
+   "_id": "rNgacom8g99wnKO3",
+   "type": "document",
+   "name": "Faceless God",
+   "img": "modules/jjk5e/icons/techniques/faceless-god.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.qSoLn7kiSKoWP8Kr",
+   "weight": 1,
+   "range": [
+    34,
+    34
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.rNgacom8g99wnKO3"
+  },
+  {
+   "_id": "G19CwwTjEPEhwN4Q",
+   "type": "document",
+   "name": "Fate",
+   "img": "modules/jjk5e/icons/techniques/fate.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.qUQxqEazubsaGUB0",
+   "weight": 1,
+   "range": [
+    35,
+    35
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.G19CwwTjEPEhwN4Q"
+  },
+  {
+   "_id": "aJ9D9KVnifi3bcy6",
+   "type": "document",
+   "name": "G Warstaff",
+   "img": "modules/jjk5e/icons/techniques/g-warstaff.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.43oC5ulCse4R6sX4",
+   "weight": 1,
+   "range": [
+    36,
+    36
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.aJ9D9KVnifi3bcy6"
+  },
+  {
+   "_id": "T8cBS2E95cp8cfTJ",
+   "type": "document",
+   "name": "Golden Hour",
+   "img": "modules/jjk5e/icons/techniques/golden-hour.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.pcChRMv8ZFQDvpBi",
+   "weight": 1,
+   "range": [
+    37,
+    37
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.T8cBS2E95cp8cfTJ"
+  },
+  {
+   "_id": "GqtgFlxcqHbhhxrg",
+   "type": "document",
+   "name": "Hair Manipulation",
+   "img": "modules/jjk5e/icons/techniques/hair-manipulation.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.CNH3ao2m8dePGOBq",
+   "weight": 1,
+   "range": [
+    38,
+    38
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.GqtgFlxcqHbhhxrg"
+  },
+  {
+   "_id": "CB9XDaE0QGFn5BxK",
+   "type": "document",
+   "name": "Heart Catch",
+   "img": "modules/jjk5e/icons/techniques/heart-catch.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.UrGUl3BeiXnuAA5Y",
+   "weight": 1,
+   "range": [
+    39,
+    39
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.CB9XDaE0QGFn5BxK"
+  },
+  {
+   "_id": "r2CrVvGbPz1HNXAS",
+   "type": "document",
+   "name": "Ice Formation",
+   "img": "modules/jjk5e/icons/techniques/ice-formation.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.AOxJRQ60stcCNNOt",
+   "weight": 1,
+   "range": [
+    40,
+    40
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.r2CrVvGbPz1HNXAS"
+  },
+  {
+   "_id": "7NeTWBd61KclOrv8",
+   "type": "document",
+   "name": "Idle Transfiguration",
+   "img": "modules/jjk5e/icons/techniques/idle-transfiguration.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.Kxc1GIVgsguWyHIZ",
+   "weight": 1,
+   "range": [
+    41,
+    41
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.7NeTWBd61KclOrv8"
+  },
+  {
+   "_id": "1CAMS8QVFRgtVdzw",
+   "type": "document",
+   "name": "Illusive Mirage",
+   "img": "modules/jjk5e/icons/techniques/illusive-mirage.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.CPkSEbCTmBqEVUUZ",
+   "weight": 1,
+   "range": [
+    42,
+    42
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.1CAMS8QVFRgtVdzw"
+  },
+  {
+   "_id": "sSbxj8vXSsehmI0c",
+   "type": "document",
+   "name": "Inverse",
+   "img": "modules/jjk5e/icons/techniques/inverse.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.pKcWuRGMrMpue0pz",
+   "weight": 1,
+   "range": [
+    43,
+    43
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.sSbxj8vXSsehmI0c"
+  },
+  {
+   "_id": "m98zzhR0ByJv8mpf",
+   "type": "document",
+   "name": "Laplace’s Demon",
+   "img": "modules/jjk5e/icons/techniques/laplace-s-demon.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.2uUNMEoDx3UEOWCx",
+   "weight": 1,
+   "range": [
+    44,
+    44
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.m98zzhR0ByJv8mpf"
+  },
+  {
+   "_id": "9I93R3r4k3rJsQIK",
+   "type": "document",
+   "name": "Limitless",
+   "img": "modules/jjk5e/icons/techniques/limitless.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.4vFeNWkYDCDQEO4w",
+   "weight": 1,
+   "range": [
+    45,
+    45
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.9I93R3r4k3rJsQIK"
+  },
+  {
+   "_id": "WeWDOZiKP0nz747T",
+   "type": "document",
+   "name": "Love Rendezvous",
+   "img": "modules/jjk5e/icons/techniques/love-rendezvous.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.SCiOoekE3YZLn8WB",
+   "weight": 1,
+   "range": [
+    46,
+    46
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.WeWDOZiKP0nz747T"
+  },
+  {
+   "_id": "WabqGAlvuCaQgdVd",
+   "type": "document",
+   "name": "Miracle",
+   "img": "modules/jjk5e/icons/techniques/miracle.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.pf6eEm8FauaOSXu0",
+   "weight": 1,
+   "range": [
+    47,
+    47
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.WabqGAlvuCaQgdVd"
+  },
+  {
+   "_id": "H351uCYH5zph1F3n",
+   "type": "document",
+   "name": "Missile Fist",
+   "img": "modules/jjk5e/icons/techniques/missile-fist.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.5PytxdjLR0bdM9zo",
+   "weight": 1,
+   "range": [
+    48,
+    48
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.H351uCYH5zph1F3n"
+  },
+  {
+   "_id": "IMaDP8X0rlrQ4omK",
+   "type": "document",
+   "name": "Moon Dregs",
+   "img": "modules/jjk5e/icons/techniques/moon-dregs.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.nCSG71V9hWuAYlfS",
+   "weight": 1,
+   "range": [
+    49,
+    49
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.IMaDP8X0rlrQ4omK"
+  },
+  {
+   "_id": "I74F7plmTvw3AgeY",
+   "type": "document",
+   "name": "Mythical Beast Amber",
+   "img": "modules/jjk5e/icons/techniques/mythical-beast-amber.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.vdUDFiuJzTXFicB3",
+   "weight": 1,
+   "range": [
+    50,
+    50
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.I74F7plmTvw3AgeY"
+  },
+  {
+   "_id": "E6ZiqekwxtvD1PUr",
+   "type": "document",
+   "name": "New Shadow Style",
+   "img": "modules/jjk5e/icons/techniques/new-shadow-style.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.kO4MnRtvnA5xJnLh",
+   "weight": 1,
+   "range": [
+    51,
+    51
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.E6ZiqekwxtvD1PUr"
+  },
+  {
+   "_id": "q7xXxSEGLZMlaFVe",
+   "type": "document",
+   "name": "Pachinko Fever",
+   "img": "modules/jjk5e/icons/techniques/pachinko-fever.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.rWVrNvgmgyaTFzwF",
+   "weight": 1,
+   "range": [
+    52,
+    52
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.q7xXxSEGLZMlaFVe"
+  },
+  {
+   "_id": "fYgahaYuLSw4TpLI",
+   "type": "document",
+   "name": "Pain Killer",
+   "img": "modules/jjk5e/icons/techniques/pain-killer.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.08hqM0Oowg4NVy10",
+   "weight": 1,
+   "range": [
+    53,
+    53
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.fYgahaYuLSw4TpLI"
+  },
+  {
+   "_id": "syeKSsU2zAfY33fG",
+   "type": "document",
+   "name": "Paralyzing Gaze",
+   "img": "modules/jjk5e/icons/techniques/paralyzing-gaze.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.C5bFmUkafjxxkT2R",
+   "weight": 1,
+   "range": [
+    54,
+    54
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.syeKSsU2zAfY33fG"
+  },
+  {
+   "_id": "VulT0qnPloMuU1aF",
+   "type": "document",
+   "name": "Prayer Song",
+   "img": "modules/jjk5e/icons/techniques/prayer-song.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.5x1ubKmks1jKKZuu",
+   "weight": 1,
+   "range": [
+    55,
+    55
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.VulT0qnPloMuU1aF"
+  },
+  {
+   "_id": "jrYXeqK08RpsuVfP",
+   "type": "document",
+   "name": "Projection Sorcery",
+   "img": "modules/jjk5e/icons/techniques/projection-sorcery.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.N2Opwc9HKZmc7q1A",
+   "weight": 1,
+   "range": [
+    56,
+    56
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.jrYXeqK08RpsuVfP"
+  },
+  {
+   "_id": "QGDjLp47QNw21r9a",
+   "type": "document",
+   "name": "Puppet Manipulation",
+   "img": "modules/jjk5e/icons/techniques/puppet-manipulation.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.OaTTeYZSBU9Pi4Lh",
+   "weight": 1,
+   "range": [
+    57,
+    57
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.QGDjLp47QNw21r9a"
+  },
+  {
+   "_id": "IcW6Gsep4Pf8x9Aw",
+   "type": "document",
+   "name": "Ratio",
+   "img": "modules/jjk5e/icons/techniques/ratio.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.uNkcX7jkuF7F40aT",
+   "weight": 1,
+   "range": [
+    58,
+    58
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.IcW6Gsep4Pf8x9Aw"
+  },
+  {
+   "_id": "1BXmZTL8TVyDP7xY",
+   "type": "document",
+   "name": "Regalia",
+   "img": "modules/jjk5e/icons/techniques/regalia.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.8QS8U7U3kr2SSWyk",
+   "weight": 1,
+   "range": [
+    59,
+    59
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.1BXmZTL8TVyDP7xY"
+  },
+  {
+   "_id": "KGzGZ97yJMpI6BLR",
+   "type": "document",
+   "name": "Retrograde",
+   "img": "modules/jjk5e/icons/techniques/retrograde.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.cg2i7buGpVFp4p0F",
+   "weight": 1,
+   "range": [
+    60,
+    60
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.KGzGZ97yJMpI6BLR"
+  },
+  {
+   "_id": "cufpY6TclPRQ54p2",
+   "type": "document",
+   "name": "Rockstar",
+   "img": "modules/jjk5e/icons/techniques/rockstar.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.g934vUyvQfacqXwQ",
+   "weight": 1,
+   "range": [
+    61,
+    61
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.cufpY6TclPRQ54p2"
+  },
+  {
+   "_id": "Ht45peLZJaCLbMEC",
+   "type": "document",
+   "name": "Rot",
+   "img": "modules/jjk5e/icons/techniques/rot.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.L2EWnki0dICgqQ23",
+   "weight": 1,
+   "range": [
+    62,
+    62
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.Ht45peLZJaCLbMEC"
+  },
+  {
+   "_id": "9F8BHvwdDufejHIU",
+   "type": "document",
+   "name": "Schrift X",
+   "img": "modules/jjk5e/icons/techniques/schrift-x.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.9YLiWa4L5NVFbavf",
+   "weight": 1,
+   "range": [
+    63,
+    63
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.9F8BHvwdDufejHIU"
+  },
+  {
+   "_id": "mi1tqgW2HidMZHp9",
+   "type": "document",
+   "name": "Seance",
+   "img": "modules/jjk5e/icons/techniques/seance.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.aWJLJqovlwnihGZt",
+   "weight": 1,
+   "range": [
+    64,
+    64
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.mi1tqgW2HidMZHp9"
+  },
+  {
+   "_id": "5UXA4bf5PfuyI9s5",
+   "type": "document",
+   "name": "Shadow Killer",
+   "img": "modules/jjk5e/icons/techniques/shadow-killer.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.yhjIgcHNYNHVtW1G",
+   "weight": 1,
+   "range": [
+    65,
+    65
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.5UXA4bf5PfuyI9s5"
+  },
+  {
+   "_id": "vMjaDcBmqdZnCSb9",
+   "type": "document",
+   "name": "Shrine",
+   "img": "modules/jjk5e/icons/techniques/shrine.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.y0wtpMX5KkQVZ4mb",
+   "weight": 1,
+   "range": [
+    66,
+    66
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.vMjaDcBmqdZnCSb9"
+  },
+  {
+   "_id": "LOHF73QNd5YA3mnP",
+   "type": "document",
+   "name": "Sky Manipulation",
+   "img": "modules/jjk5e/icons/techniques/sky-manipulation.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.yZLf0hujW1V2oJjq",
+   "weight": 1,
+   "range": [
+    67,
+    67
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.LOHF73QNd5YA3mnP"
+  },
+  {
+   "_id": "u6FyTFknqLWUO8jQ",
+   "type": "document",
+   "name": "Solo Forbidden Zone",
+   "img": "modules/jjk5e/icons/techniques/solo-forbidden-zone.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.cVS3rOxClxBPcQP5",
+   "weight": 1,
+   "range": [
+    68,
+    68
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.u6FyTFknqLWUO8jQ"
+  },
+  {
+   "_id": "AKTCRop99fJNl7Po",
+   "type": "document",
+   "name": "Star Dictator",
+   "img": "modules/jjk5e/icons/techniques/star-dictator.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.jFCwHrudqlbz12GC",
+   "weight": 1,
+   "range": [
+    69,
+    69
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.AKTCRop99fJNl7Po"
+  },
+  {
+   "_id": "1I4bG5GF7WuFNlBN",
+   "type": "document",
+   "name": "Star Rage",
+   "img": "modules/jjk5e/icons/techniques/star-rage.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.WhFQTQLpZoixGLck",
+   "weight": 1,
+   "range": [
+    70,
+    70
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.1I4bG5GF7WuFNlBN"
+  },
+  {
+   "_id": "vrw5drCJ9GJHxeu3",
+   "type": "document",
+   "name": "Starlight Symphony",
+   "img": "modules/jjk5e/icons/techniques/starlight-symphony.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.g2goY9NXLBFtGEyL",
+   "weight": 1,
+   "range": [
+    71,
+    71
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.vrw5drCJ9GJHxeu3"
+  },
+  {
+   "_id": "JrsUrN4xoIGGNoah",
+   "type": "document",
+   "name": "Straw Doll Technique",
+   "img": "modules/jjk5e/icons/techniques/straw-doll-technique.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.qBi36foojEmbQY8y",
+   "weight": 1,
+   "range": [
+    72,
+    72
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.JrsUrN4xoIGGNoah"
+  },
+  {
+   "_id": "Q6zbVuz1BQ3Kus0B",
+   "type": "document",
+   "name": "Technique Extermination",
+   "img": "modules/jjk5e/icons/techniques/technique-extermination.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.pIvIaUSbNnggUeH9",
+   "weight": 1,
+   "range": [
+    73,
+    73
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.Q6zbVuz1BQ3Kus0B"
+  },
+  {
+   "_id": "VgliOxJJYidNIPvB",
+   "type": "document",
+   "name": "Teleportation",
+   "img": "modules/jjk5e/icons/techniques/teleportation.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.gBl4mTDOvZ9K0iH8",
+   "weight": 1,
+   "range": [
+    74,
+    74
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.VgliOxJJYidNIPvB"
+  },
+  {
+   "_id": "IlXKSzA3mRUmxt9y",
+   "type": "document",
+   "name": "Ten Shadows",
+   "img": "modules/jjk5e/icons/techniques/ten-shadows.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.kbngt5zGs6qa9rCa",
+   "weight": 1,
+   "range": [
+    75,
+    75
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.IlXKSzA3mRUmxt9y"
+  },
+  {
+   "_id": "7usQ6NUGzARYJNhi",
+   "type": "document",
+   "name": "Tool Manipulation",
+   "img": "modules/jjk5e/icons/techniques/tool-manipulation.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.zEzY3Sr93y4TX5fO",
+   "weight": 1,
+   "range": [
+    76,
+    76
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.7usQ6NUGzARYJNhi"
+  },
+  {
+   "_id": "JRSn5tW1KLTcSyPx",
+   "type": "document",
+   "name": "Triple Core",
+   "img": "modules/jjk5e/icons/techniques/triple-core.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.r1rGK2qKTM8N2wxs",
+   "weight": 1,
+   "range": [
+    77,
+    77
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.JRSn5tW1KLTcSyPx"
+  },
+  {
+   "_id": "k0wI0QtLtPCqBc9F",
+   "type": "document",
+   "name": "Vairocana",
+   "img": "modules/jjk5e/icons/techniques/vairocana.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.HAdDNpVlz1tL6SCL",
+   "weight": 1,
+   "range": [
+    78,
+    78
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.k0wI0QtLtPCqBc9F"
+  },
+  {
+   "_id": "XVqHht2LTF4wZwkJ",
+   "type": "document",
+   "name": "Vengeful Spirit Manipulation",
+   "img": "modules/jjk5e/icons/techniques/vengeful-spirit-manipulation.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.70beDon7MXaPLk4m",
+   "weight": 1,
+   "range": [
+    79,
+    79
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.XVqHht2LTF4wZwkJ"
+  },
+  {
+   "_id": "zcRJIXB21YlIJVtO",
+   "type": "document",
+   "name": "Voracity",
+   "img": "modules/jjk5e/icons/techniques/voracity.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.fugGhuVMTB3Ogv5y",
+   "weight": 1,
+   "range": [
+    80,
+    80
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.zcRJIXB21YlIJVtO"
+  },
+  {
+   "_id": "wOBui3MfADmWI6GN",
+   "type": "document",
+   "name": "████ and Light",
+   "img": "modules/jjk5e/icons/techniques/and-light.svg",
+   "description": "",
+   "documentUuid": "Compendium.jjk5e.jjk5e-techniques.Item.yGVI1LXlPXmIANZ7",
+   "weight": 1,
+   "range": [
+    81,
+    81
+   ],
+   "drawn": false,
+   "flags": {},
+   "_key": "!tables.results!OM5Gthmg5s0q2quD.wOBui3MfADmWI6GN"
+  }
+ ],
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": null,
+ "_key": "!tables!OM5Gthmg5s0q2quD"
+}

@@ -1,0 +1,90 @@
+{
+ "_id": "CDj4NdhcKBYrjW2p",
+ "name": "Maximum: Destructive Release",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/fa-jin.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Maximize Potential</em></p>\n<p>You have learned the method to magnify your destructive power. As a bonus action, you can spend 2 CE before using <em>Fist of Explosive Power</em>. You deal three damage die per Jin charge spent and all targets gain a -3 to their saving throw, being launched back 10 feet on a failed save, taking 1d6 bludgeoning damage if they hit an object, creature or structure.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Maximize Potential",
+  "activities": {
+   "jALubHKBdpPNG0Zi": {
+    "_id": "jALubHKBdpPNG0Zi",
+    "type": "damage",
+    "name": "Bonus Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "jALubHKBdpPNG0Zi": 2
+   },
+   "prereq": {
+    "features": [
+     [
+      "Maximize Potential Energy"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "qac6h84zrmqbsWnq",
+ "sort": 300,
+ "_key": "!items!CDj4NdhcKBYrjW2p"
+}

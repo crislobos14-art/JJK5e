@@ -1,0 +1,74 @@
+{
+ "_id": "6hXUNOX2sEtZkQBn",
+ "name": "Handgun",
+ "type": "weapon",
+ "img": "icons/svg/sword.svg",
+ "folder": "8L9REK3UZxFoXRJA",
+ "system": {
+  "description": {
+   "value": "<p>Martial ranged weapon. 1d10 piercing. Ammunition (50/150), reload (15).</p><p><strong>Special:</strong> reload (15)</p><p><em>Reload: number of shots before you must reload (action).</em></p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "martialR",
+   "baseItem": ""
+  },
+  "damage": {
+   "base": {
+    "number": 1,
+    "denomination": 10,
+    "types": [
+     "piercing"
+    ]
+   }
+  },
+  "range": {
+   "value": 50,
+   "long": 150,
+   "units": "ft"
+  },
+  "properties": [
+   "amm",
+   "rel"
+  ],
+  "proficient": 1,
+  "price": {
+   "value": 25.0,
+   "denomination": "gp"
+  },
+  "quantity": 1,
+  "activities": {
+   "O7XWy10bHUe3Qpoc": {
+    "_id": "O7XWy10bHUe3Qpoc",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "ranged",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "priceUSD": "$2,500"
+  }
+ },
+ "_key": "!items!6hXUNOX2sEtZkQBn"
+}

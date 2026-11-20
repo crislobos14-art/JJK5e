@@ -1,0 +1,147 @@
+{
+ "_id": "jCYKfu1uDbtYvTfi",
+ "name": "Technique Creativity",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>At 2nd level, you gain the ability to twist cursed techniques to suit your needs. You gain two of the following Modification options of your choice. You gain another one at 10th and 17th levels.<br />\n You can use only one Modification option on a technique when you cast it unless otherwise specified.</p>\n<ul>\n<li>\n<p><strong>Careful Technique.</strong> When you cast a technique that forces other creatures to make a saving throw, you can protect some of those creatures from the technique's full force. To do so, you spend 1 cursed energy and choose a number of those creatures up to your Cursed Energy modifier (minimum of one). A chosen creature automatically succeeds on its saving throw against the technique.  </p>\n</li>\n<li>\n<p><strong>Distant Technique.</strong> When you cast a technique that has a range of 5 feet or greater, you can spend 1 cursed energy to double the range of the technique. When you cast a technique that has a range of touch, you can spend 1 cursed energy to make the range of the technique 30 feet.  </p>\n</li>\n<li>\n<p><strong>Empowered Technique.</strong> When you roll damage for a technique, you can spend 1 cursed energy to reroll a number of the damage dice up to your Cursed Energy modifier (minimum of one). You must use the new rolls. You can use Empowered technique even if you have already used a different Modification option.  </p>\n</li>\n<li>\n<p><strong>Extended Technique.</strong> When you cast a technique that has a duration of 1 minute or longer, you can spend 1 cursed energy to double its duration, to a maximum duration of 24 hours.  </p>\n</li>\n<li>\n<p><strong>Heightened Technique.</strong> When you cast a technique that forces a creature to make a saving throw to resist its effects, you can spend 3 cursed energy to give one target of the technique disadvantage on its first saving throw against the technique.  </p>\n</li>\n<li>\n<p><strong>Quickened Technique.</strong> When you cast a technique that has a casting time of 1 action, you can spend 2 cursed energy to change the casting time to 1 bonus action for this casting.  </p>\n</li>\n<li>\n<p><strong>Seeking Technique.</strong> If you make an attack roll for a technique and miss, you can spend 2 cursed energy to reroll the d20, and you must use the new roll. You can use Seeking technique even if you have already used a different Modification option.  </p>\n</li>\n<li>\n<p><strong>Subtle Technique.</strong> When you cast a technique, you can spend 1 cursed energy to cast it without somatic or verbal components.  </p>\n</li>\n<li>\n<p><strong>Transmuted Technique.</strong> When you cast a technique that deals a type of damage from the following list, you can spend 1 cursed energy to change that damage type to one of the other listed types: acid, cold, fire, lightning, poison, or thunder.  </p>\n</li>\n<li>\n<p><strong>Twinned Technique.</strong> When you cast a technique that targets only one creature and doesn't have a range of self, you can spend a number of cursed energy equal to the technique's cost to target a second creature in range with the same technique (1 cursed energy if the technique is free). To be eligible, a technique must be incapable of targeting more than one creature at the technique's current level.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Strategist 2",
+  "activities": {
+   "mPdXgB8wiil1u8EZ": {
+    "_id": "mPdXgB8wiil1u8EZ",
+    "type": "utility",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   },
+   "PmI3AYJd9zTu2Bhd": {
+    "_id": "PmI3AYJd9zTu2Bhd",
+    "type": "utility",
+    "name": "Action (3 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   },
+   "J74PIcGi69RvOKmH": {
+    "_id": "J74PIcGi69RvOKmH",
+    "type": "utility",
+    "name": "Bonus Action (2 CE)",
+    "sort": 200000,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   },
+   "x73JBR4iOeoOrmmH": {
+    "_id": "x73JBR4iOeoOrmmH",
+    "type": "attack",
+    "name": "Action (2 CE)",
+    "sort": 300000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "mPdXgB8wiil1u8EZ": 1,
+    "PmI3AYJd9zTu2Bhd": 3,
+    "J74PIcGi69RvOKmH": 2,
+    "x73JBR4iOeoOrmmH": 2
+   }
+  }
+ },
+ "folder": "D1jub3NHW0Fbryho",
+ "_key": "!items!jCYKfu1uDbtYvTfi"
+}

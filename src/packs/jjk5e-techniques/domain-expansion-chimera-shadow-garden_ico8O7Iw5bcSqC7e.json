@@ -1,0 +1,154 @@
+{
+ "_id": "ico8O7Iw5bcSqC7e",
+ "name": "Domain Expansion: Chimera Shadow Garden",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/ten-shadows-domain.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Ten Shadows — Innate Technique (18th level)</em></p><p><em>Domain Expansion (rules): full-turn action, 20 CE unless stated, 175-ft radius, 1 minute. When the domain ends you suffer <strong>Technique Burnout</strong> (applied automatically by the module).</em></p><p>Finally, at 18th level you have learned how to expand your domain. Your domain is a huge shadow barrier, filling your surroundings with overwhelming darkness. Any hostile creatures that end their turn within your domain must make a Dexterity (Acrobatics) check or become restrained and sink. They can make a Strength (Athletics) check at the beginning of their turn to escape. The area is difficult terrain for creatures of your choice, and you are under the effects of Freedom of Movement within the domain.<br />\n<strong>Shadow Clones.</strong> While inside the domain, as a bonus action you can spend cursed energy up to your Cursed Energy modifier to create a number of clones of yourself equal to the CE spent. The clones have all your features and stats, but not weapons or hit points and cannot use Cursed Energy. Their hit points are equal to your Cursed Energy modifier and become a shadow puddle once reduced to 0 hit points. You can use your reaction to switch places with a clone when you are hit, making the clone take the hit instead.<br />\n<strong>Shikigami Clones.</strong> Your domain allows you to summon copies of your shikigami to overwhelm your opponents. Whenever you summon a shikigami, you can instead spend cursed energy equal to the shikigami's cost(treat its price as if you were outside your domain) to summon a perfect copy of the shikigami. You can spend CE to make a number of shikigami clones up to your Cursed Energy modifier on the same turn. You cannot create copies of Mahoraga with this feature.<br />\n In addition, your normal Shikigami won't cost you Cursed Energy within your domain.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "sRX9BbTTQJ3Dyvq3": {
+    "_id": "sRX9BbTTQJ3Dyvq3",
+    "type": "utility",
+    "name": "Bonus Action",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   },
+   "54DcdQU6TiXml8lI": {
+    "_id": "54DcdQU6TiXml8lI",
+    "type": "utility",
+    "name": "Expand Domain (20 CE)",
+    "sort": -100000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Full turn: Action + Bonus Action + Movement",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "175",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": true
+     },
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 9,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "special",
+   "value": null,
+   "condition": "Full turn: Action + Bonus Action + Movement",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "radius",
+    "size": "175",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": true
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Ten Shadows",
+   "level": 18,
+   "domain": true,
+   "ceCosts": {
+    "54DcdQU6TiXml8lI": 20
+   },
+   "domainActivity": "54DcdQU6TiXml8lI",
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "gEGcEQE7nJFCsor6",
+ "_key": "!items!ico8O7Iw5bcSqC7e"
+}

@@ -1,0 +1,42 @@
+{
+ "_id": "fS8A8sjlCTaa5nal",
+ "name": "Soul Imbuement",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/cursed-corpse-creation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Cursed Corpse Creation</em></p>\n<p>You have learned to copy a creature’s soul information into a Cursed Corpse. You can only have 1 soul imbued corpse at a time. This increases to 2 at 11th level and 3 at 18th level.<br />\n It takes 3 long rests to imbue someone's soul information into the core. You must have the person readily available or have a good memory of the person to turn their physical information into soul information. Once a corpse has been created, it takes 2 weeks to develop before it becomes sentient. It gains the Autonomy mutation and can choose a Cursed Energy feat as if it were a player. A corpse with this core is sentient and mimics the behavior of the soul they are imbued with, but it does not gain its memories.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Cursed Corpse Creation",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Cursed Corpse Creation"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "XXj1CTcWWYDx5bTY",
+ "sort": 200,
+ "_key": "!items!fS8A8sjlCTaa5nal"
+}

@@ -1,0 +1,122 @@
+{
+ "_id": "STzACDlhuJvyy7Il",
+ "name": "Shadow Strike",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/shadow-killer.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Shadow Killer — Innate Technique (1st level)</em></p><blockquote><p>You possess the eerie ability to kill without touching.</p></blockquote><p>Starting at 1st level, you can control your shadow and cast Minor Illusion through it in a 5 ft range around yourself.<br />\n You can also strike a creature through their shadow. When you make an attack roll, you can spend 1 cursed energy to target a creature’s shadow that exists within their space. If the creature is unaware of your technique, you automatically hit as they don’t guard their shadow. The target takes your attack in necrotic damage and you deal additional damage equal to your Cursed Energy modifier. This increases to twice your Cursed Energy modifier at 3rd level, thrice at 6th level, and four times at 11th level.</p>\n<p>If your attack roll is higher than the creature’s passive Perception, they are unaware of how they were damaged. If your attack roll is lower, then they see you attack their shadow and become aware of your technique. A creature that is aware of your technique can make a Dexterity saving throw to try and avoid your assault on their shadow. On a failure, you automatically hit. On a success, you roll against their AC. You cannot use this technique if you cannot see the target’s shadow.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "HlmIkdzNN0hw6cen": {
+    "_id": "HlmIkdzNN0hw6cen",
+    "type": "save",
+    "name": "Action (1 CE) — rider",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": [
+      {
+       "number": null,
+       "denomination": null,
+       "bonus": "",
+       "types": [],
+       "custom": {
+        "enabled": true,
+        "formula": "max(@abilities.wis.mod, @abilities.cha.mod)"
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "HlmIkdzNN0hw6cen": 1
+   },
+   "technique": "Shadow Killer",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "AZz0yh4SFsEeg2VN",
+ "_key": "!items!STzACDlhuJvyy7Il"
+}

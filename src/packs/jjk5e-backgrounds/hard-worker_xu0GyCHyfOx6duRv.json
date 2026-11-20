@@ -1,0 +1,207 @@
+{
+ "_id": "xu0GyCHyfOx6duRv",
+ "name": "Hard Worker",
+ "type": "background",
+ "img": "modules/jjk5e/icons/background.svg",
+ "folder": "CRaGqJh5HQKmdfVy",
+ "system": {
+  "description": {
+   "value": "<p>You were someone who always had to prove to themselves and others that you are worth your weight and space. You always had to work twice as hard and twice as long to see results, but the results are beginning to show. You never had the natural talent of your peers, no, you had peerless determination and persistence to push through all of the challenges you were faced with to make it to this point, while also looking forward to the next day to get better. You have reached a level of discipline that your peers can’t imagine, so you can keep up your training on your own time while not lagging when you do decide to take a break.<br />\n<strong>Feat:</strong> Pick one Physical Feat<br />\n<strong>Skill Proficiencies:</strong> Athletics, Acrobatics<br />\n<strong>Equipment:</strong> Set of Body weights that weigh 50+ pounds. For each part of your body, 3 Books containing training strategies, Training Gi, and a Wallet containing $1,000.<br />\n<strong>Feature:</strong> <strong>Focus and Grit</strong><br />\n You have trained yourself in such a way that you have absorbed multiple tomes of knowledge in whatever you worked your butt off to excel in. You are able to quickly bond with people who have the same drive and determination as you and even garner immediate audiences and conversations with those people. You are also able to reference and call out different books, strategies, and texts to catch the attention of those who have read those texts or follow those strategies.  </p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "identifier": "hard-worker",
+  "advancement": {
+   "wNH8SnrBQUd3jNf5": {
+    "_id": "wNH8SnrBQUd3jNf5",
+    "type": "Trait",
+    "level": 0,
+    "title": "Skill Proficiencies",
+    "configuration": {
+     "mode": "default",
+     "grants": [
+      "skills:acr",
+      "skills:ath"
+     ],
+     "choices": []
+    },
+    "value": {}
+   },
+   "CynrjwCBz64yLqrM": {
+    "_id": "CynrjwCBz64yLqrM",
+    "type": "ItemChoice",
+    "level": 0,
+    "title": "Physical Feat (background feat)",
+    "value": {},
+    "configuration": {
+     "choices": {
+      "0": {
+       "count": 1,
+       "replacement": false
+      }
+     },
+     "allowDrops": true,
+     "type": "feat",
+     "pool": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.sN9YyvdTrAChq2jm"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.tLxC2U4qoWIey3rA"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.MM13vMO5nqWGZaIe"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.3sWDnOZCN8K7yIaO"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.xQ1AduST3If22jVe"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.ShRWUp25PJhy0fZx"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.p8u1qNGExbrBBkkX"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.Ly3sIvBF6IFMMUR8"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.IcwUsYlidHL5HY6a"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.R5RlygZB2MKFmi4H"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.7izYYXGrBHl9t3ka"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.Y8DXoF19Lv2gZQ29"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.9VXmm1ia2tIAUIjS"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.oGWpx4OV5DClaQRm"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.OioNaq4rWdpaUFsN"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.ZFBGEkjmjvIRLYY0"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.4cVW3whZxaX8drIr"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.4iW9iX2qGgmiNBaA"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.JfV44deHPJv82Ubl"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.NwKIStf7NFVWznPx"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.mHg7WV1jbTv1yZAZ"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.BCC62VwGryD8L5jX"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.gWWqpaVQzjmgL1Ko"
+      }
+     ],
+     "restriction": {
+      "type": "",
+      "subtype": "",
+      "level": ""
+     }
+    }
+   },
+   "QYZB4LZuXne3fXbV": {
+    "_id": "QYZB4LZuXne3fXbV",
+    "type": "ItemChoice",
+    "level": 0,
+    "title": "Mindset",
+    "hint": "Choose the mindset that drives your sorcery (it replaces Inspiration).",
+    "value": {},
+    "configuration": {
+     "choices": {
+      "0": {
+       "count": 1,
+       "replacement": false
+      }
+     },
+     "allowDrops": true,
+     "type": "feat",
+     "pool": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.0DRc7Ftd4oRxhmPP"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.tfptMmAPJyi5Fa28"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.BDtYSEj7wP0CSJSd"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.LDbMTb0R84yNZUaZ"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.z6LYQIl1YlosCyL7"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.AypG9meZokT7ds3Q"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.BOsYXnjKpnbtwfmW"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.BXVn0o2H4L9n82TN"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.g4KqCmc1MqQHfLFV"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.NEra1YZ6BxPjoGdV"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.H01e3yAvW04BYK0o"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.66G2J5gn804C8EZI"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.mLhSUvyfKRj4jU5u"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.5WUvEI9FuZelFdaw"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.M6qTsvh64leWYpJm"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.a7Rh5bEHZv0PyaA8"
+      }
+     ],
+     "restriction": {
+      "type": "",
+      "subtype": "",
+      "level": ""
+     }
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "_key": "!items!xu0GyCHyfOx6duRv"
+}

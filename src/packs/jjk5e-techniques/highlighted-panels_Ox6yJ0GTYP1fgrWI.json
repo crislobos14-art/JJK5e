@@ -1,0 +1,32 @@
+{
+ "_id": "Ox6yJ0GTYP1fgrWI",
+ "name": "Highlighted Panels",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/g-warstaff.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>G Warstaff — Innate Technique (3rd level)</em></p><p>At 3rd level, with the power of reading into the future, no one surprises you anymore. As long as you can see 2 seconds into a creature's future, you take half damage on a failure, and no damage on a success against saving throws caused by that creature.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "G Warstaff 3"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "G Warstaff",
+   "level": 3
+  }
+ },
+ "folder": "GjZxtO8W2HfeT6Hl",
+ "_key": "!items!Ox6yJ0GTYP1fgrWI"
+}

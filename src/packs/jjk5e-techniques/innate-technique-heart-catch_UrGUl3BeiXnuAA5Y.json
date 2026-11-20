@@ -1,0 +1,118 @@
+{
+ "_id": "UrGUl3BeiXnuAA5Y",
+ "name": "Innate Technique: Heart Catch",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/heart-catch.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>A simple yet effective technique, powered by the heart.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.hhllCgATbWx58n7P]{Hands of Love}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.3jjmhmnaeXtHfWJw]{Handy}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.OFmBZhtl0SCMuKe9]{Hand Shield}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.DKJPQD3LXXPc2tHm]{Cutie Honey}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.ZAqh5epfSwH68e8V]{Domain Expansion: Lover’s Grasp}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "DXlbRrEpvtfuhfYi": {
+    "_id": "DXlbRrEpvtfuhfYi",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Heart Catch (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.hhllCgATbWx58n7P",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "OaN2iIrTnZxWIMu7": {
+    "_id": "OaN2iIrTnZxWIMu7",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Heart Catch (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.3jjmhmnaeXtHfWJw",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "c2urGKzwITq4jfdN": {
+    "_id": "c2urGKzwITq4jfdN",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Heart Catch (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.OFmBZhtl0SCMuKe9",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "0OdGbrcpxsQLqDqQ": {
+    "_id": "0OdGbrcpxsQLqDqQ",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Heart Catch (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.DKJPQD3LXXPc2tHm",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "egTPiuhYtakIVaTg": {
+    "_id": "egTPiuhYtakIVaTg",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Heart Catch (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.ZAqh5epfSwH68e8V",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Heart Catch"
+  }
+ },
+ "_key": "!items!UrGUl3BeiXnuAA5Y"
+}

@@ -1,0 +1,88 @@
+{
+ "_id": "l4nTRMUL6vloOH5O",
+ "name": "Skilled Cursed Energy Manipulation",
+ "type": "feat",
+ "img": "icons/svg/lightning.svg",
+ "system": {
+  "description": {
+   "value": "<p>You have focused on the basics, allowing you to directly manipulate cursed energy to great effect.</p>\n<ul>\n<li>\n<p><strong>Cursed Strike</strong>. On a hit, you can spend up to your proficiency bonus, dealing an additional d8 necrotic damage per CE spent.  </p>\n</li>\n<li>\n<p><strong>Cursed Reinforcement</strong>. As an action you can spend up to your Cursed Energy modifier to reinforce your body. You gain 5 temporary hit points per CE.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkCursedEnergy"
+  },
+  "requirements": "16+ Cursed Energy score, 1 Breakthrough",
+  "activities": {
+   "X8XxNed7kW49sF3O": {
+    "_id": "X8XxNed7kW49sF3O",
+    "type": "heal",
+    "name": "Action (1+ CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "max(1, max(@abilities.wis.mod, @abilities.cha.mod))"
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "5",
+     "types": [
+      "temphp"
+     ],
+     "custom": {
+      "enabled": false,
+      "formula": ""
+     },
+     "scaling": {
+      "mode": "whole",
+      "formula": "5"
+     }
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceSteps": {
+    "X8XxNed7kW49sF3O": 1
+   },
+   "ceCosts": {
+    "X8XxNed7kW49sF3O": 1
+   },
+   "prereq": {
+    "ceScore": 16,
+    "breakthroughs": 1
+   }
+  }
+ },
+ "folder": "4WdO47AHGi8vRSbo",
+ "sort": 100,
+ "_key": "!items!l4nTRMUL6vloOH5O"
+}

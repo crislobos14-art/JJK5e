@@ -1,0 +1,118 @@
+{
+ "_id": "CPkSEbCTmBqEVUUZ",
+ "name": "Innate Technique: Illusive Mirage",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/illusive-mirage.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>Your technique lets you curse people and make them see illusions.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.wFUB8DfdT2QqwFQg]{Cursed Illusion}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.7vtgeOWGHfDsoDM5]{Self Distortion}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.nj6asjw6WgTG2Vst]{Object Distortion}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.HlWRvtMxlN8OCQD9]{Illusive Terrain}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.TDn8CRNZOzsQlu56]{Domain Expansion: House of Mirrors}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "mOmiL0OWfH1SUtFk": {
+    "_id": "mOmiL0OWfH1SUtFk",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Illusive Mirage (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.wFUB8DfdT2QqwFQg",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "EuYoXTqsRErVwWob": {
+    "_id": "EuYoXTqsRErVwWob",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Illusive Mirage (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.7vtgeOWGHfDsoDM5",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "jbIIGc838hX41EQL": {
+    "_id": "jbIIGc838hX41EQL",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Illusive Mirage (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.nj6asjw6WgTG2Vst",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "1Qfuxvq3rE012DJv": {
+    "_id": "1Qfuxvq3rE012DJv",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Illusive Mirage (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.HlWRvtMxlN8OCQD9",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "QpI37HJ8pmvVmN3y": {
+    "_id": "QpI37HJ8pmvVmN3y",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Illusive Mirage (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.TDn8CRNZOzsQlu56",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Illusive Mirage"
+  }
+ },
+ "_key": "!items!CPkSEbCTmBqEVUUZ"
+}

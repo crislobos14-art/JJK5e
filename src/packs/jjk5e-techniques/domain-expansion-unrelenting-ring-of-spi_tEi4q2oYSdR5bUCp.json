@@ -1,0 +1,154 @@
+{
+ "_id": "tEi4q2oYSdR5bUCp",
+ "name": "Domain Expansion: Unrelenting Ring of Spirit",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/missile-fist-domain.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Missile Fist — Innate Technique (18th level)</em></p><p><em>Domain Expansion (rules): full-turn action, 20 CE unless stated, 175-ft radius, 1 minute. When the domain ends you suffer <strong>Technique Burnout</strong> (applied automatically by the module).</em></p><p>At 18th level you have learned to expand your domain. At initiative 20, all creatures take 8d8 necrotic damage and are knocked prone by giant <em>Missile Fists</em>. As an action, you can target any creature of your choice within your domain with a single <em>Missile Fist</em> without spending cursed energy.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "zoIOpZsM7t1RRZBD": {
+    "_id": "zoIOpZsM7t1RRZBD",
+    "type": "utility",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   },
+   "FJ70SfYI4r1JdAXd": {
+    "_id": "FJ70SfYI4r1JdAXd",
+    "type": "utility",
+    "name": "Expand Domain (20 CE)",
+    "sort": -100000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Full turn: Action + Bonus Action + Movement",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "175",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": true
+     },
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 9,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "special",
+   "value": null,
+   "condition": "Full turn: Action + Bonus Action + Movement",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "radius",
+    "size": "175",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": true
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Missile Fist",
+   "level": 18,
+   "domain": true,
+   "ceCosts": {
+    "FJ70SfYI4r1JdAXd": 20
+   },
+   "domainActivity": "FJ70SfYI4r1JdAXd",
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "coN536PDmNM37MtV",
+ "_key": "!items!tEi4q2oYSdR5bUCp"
+}

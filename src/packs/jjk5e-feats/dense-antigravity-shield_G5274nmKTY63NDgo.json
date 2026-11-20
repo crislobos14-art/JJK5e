@@ -1,0 +1,64 @@
+{
+ "_id": "G5274nmKTY63NDgo",
+ "name": "Dense Antigravity Shield",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/antigravity-system.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Antigravity Shield</em></p>\n<p>For an additional 3 CE, your <em>Antigravity Shield</em> instead reduces all damage against you by half your <em>Antigravity</em>’s maximum height fall damage dice until the beginning of your next turn.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Antigravity Shield",
+  "activities": {
+   "yglviAYR2Eu6pcfB": {
+    "_id": "yglviAYR2Eu6pcfB",
+    "type": "utility",
+    "name": "Extra (3 CE)",
+    "sort": 900000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Prerequisite: Must have Antigravity Shield For an additional 3 CE, your Antigravity Shi..."
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "yglviAYR2Eu6pcfB": 3
+   },
+   "prereq": {
+    "features": [
+     [
+      "Antigravity Shield"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "aLDCA5tMqdkRqKRy",
+ "sort": 200,
+ "_key": "!items!G5274nmKTY63NDgo"
+}

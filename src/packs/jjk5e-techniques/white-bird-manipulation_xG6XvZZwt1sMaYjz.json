@@ -1,0 +1,143 @@
+{
+ "_id": "xG6XvZZwt1sMaYjz",
+ "name": "White Bird Manipulation",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/black-bird-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Black Bird Manipulation — Cursed Technique Reversal</em></p><p>With your mastery of Reverse Cursed Technique, you have learned Black Bird Manipulation's reversal. You are now able to tame Doves for 2 CE. As a bonus action, you can turn an amount of Crows equal to your CE modifier into Doves, spending 2 CE per Crow. Doves operate and follow the same rules as Crows but cannot be used for Bird Strike. As part of controlling a Dove, you can spend cursed energy up to twice your CE modifier to heal a creature within 5 ft of the Dove by sacrificing the Dove. The creature regains 1d8 hit points per Cursed Energy spent. While any allies are within 30 ft of a Dove, they have advantage on saving throws against the Frightened and Charmed conditions. If any allied creatures within range are reduced to 0 hit points or making death saves, they are instead stabilized. Additionally, a Dove can suppress an effect causing a creature within range to be Charmed or Frightened. If the Dove leaves the 30 ft radius of that creature, any suppressed effect resumes.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Black Bird Manipulation",
+  "activities": {
+   "GkBeM89Ln4COqNbF": {
+    "_id": "GkBeM89Ln4COqNbF",
+    "type": "utility",
+    "name": "Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   },
+   "xX0DRqjTwBBubzWs": {
+    "_id": "xX0DRqjTwBBubzWs",
+    "type": "utility",
+    "name": "Bonus Action (2+ CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "2 * max(1, max(@abilities.wis.mod, @abilities.cha.mod))"
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "30",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "effects": [
+     {
+      "_id": "zmUYBXHKwqE9te79",
+      "onSave": false
+     }
+    ]
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceSteps": {
+    "xX0DRqjTwBBubzWs": 1
+   },
+   "ceCosts": {
+    "GkBeM89Ln4COqNbF": 2,
+    "xX0DRqjTwBBubzWs": 2
+   },
+   "technique": "Black Bird Manipulation",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Black Bird Manipulation"
+     ]
+    ]
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "zmUYBXHKwqE9te79",
+   "name": "Charmed (White Bird Manipulation)",
+   "img": "systems/dnd5e/icons/svg/statuses/charmed.svg",
+   "statuses": [
+    "charmed"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "charmed"
+    }
+   },
+   "_key": "!items.effects!xG6XvZZwt1sMaYjz.zmUYBXHKwqE9te79"
+  }
+ ],
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!xG6XvZZwt1sMaYjz"
+}

@@ -1,0 +1,32 @@
+{
+ "_id": "789EsITMhxKabOtH",
+ "name": "Improved Ratio",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/ratio.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Ratio — Innate Technique (11th level)</em></p><p>At 11th level, you have become more lethal and precise with your Ratio. When you use Ratio, you now roll 2d10 instead of one and you can spend additional CE up to your Cursed Energy modifier to roll an additional d10 per CE spent. You roll 4 additional damage dice on a critical hit.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Ratio 11"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Ratio",
+   "level": 11
+  }
+ },
+ "folder": "SXVh9xBdNDfszcIg",
+ "_key": "!items!789EsITMhxKabOtH"
+}

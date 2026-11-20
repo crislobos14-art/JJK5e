@@ -1,0 +1,89 @@
+{
+ "_id": "RKmO90Vx9GbVt1g9",
+ "name": "Six Eyes (Dormant)",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/trait.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Creeps and Curses V.3.1</em></p><p><em>Special Trait. Please note that these abilities are incredibly powerful even for the JJK system and should only be used for purposely high power games. Of course, certain traits are stronger than others. Stages of these traits have been added to grow with characters with higher levels of play. Dormant, Stirring, and Awakened. Though a DM can decide to change the leveling format or instead give them out at appropriate character moments.</em></p><p><em>You have the gift granted only to the Gojo Clan, the Six Eyes.</em></p>\n<p><strong>Illuminated Vision.</strong> You gain 120 ft of truesight. You can see through thin objects such as a blindfold, allowing you to use it as a way of protecting from the sheer amount of information of your eyes.</p>\n<p><strong>Information Overload.</strong> Due to the amount of information your eyes capture, while not wearing any light object to protect your eyes during combat, you receive 1 level of exhaustion every minute, to a maximum of 3 levels. Additionally, for every exhaustion level you gain like this, the damage die tier and save DC of your techniques decreases by 1. If you wear eye protection, this resets after a minute of having your eyes covered. Outside of combat, you only gain one level of exhaustion every hour your eyes are uncovered, with the timer and exhaustion resetting if you wear eye protection for 10 minutes. If you have Reverse Cursed Technique, you can remove these exhaustion levels for 20 hit points per level of exhaustion.</p>\n<p><strong>Perfect Cursed Energy Manipulation.</strong> Due to the six eyes, you can manipulate cursed energy on the atomic level. A number of times equal to your proficiency bonus each long rest, you reduce cursed energy you spend by 10 times, even into decimals. (Example: If you spend 3 cursed energy, you only spend 0.3 cursed energy)</p>\n<p><em>Special Trait tiers stack: keep the earlier tiers on the sheet. When a benefit says it replaces an earlier one, the module's effects already account for it.</em></p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTrait"
+  },
+  "requirements": "Gojo Clan sorcerer family, must be Human; Six Eyes, level 1",
+  "uses": {
+   "max": "@prof",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
+    }
+   ]
+  },
+  "activities": {
+   "vL3aQMSQfxkBeA2x": {
+    "_id": "vL3aQMSQfxkBeA2x",
+    "type": "utility",
+    "name": "Perfect CE Manipulation (CE cost ÷10)",
+    "activation": {
+     "type": "special",
+     "condition": "When you spend CE"
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1"
+      }
+     ]
+    }
+   }
+  },
+  "prerequisites": {
+   "level": 1,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "level": 1
+   }
+  }
+ },
+ "folder": "WpMvDh8sKw65orZ9",
+ "effects": [
+  {
+   "_id": "ts6OHy2HmSjgoGry",
+   "name": "Six Eyes (Dormant)",
+   "img": "modules/jjk5e/icons/trait.svg",
+   "changes": [
+    {
+     "key": "system.attributes.senses.truesight",
+     "mode": 4,
+     "value": "120",
+     "priority": null
+    }
+   ],
+   "disabled": false,
+   "transfer": true,
+   "duration": {},
+   "description": "",
+   "flags": {},
+   "_key": "!items.effects!RKmO90Vx9GbVt1g9.ts6OHy2HmSjgoGry"
+  }
+ ],
+ "sort": 100,
+ "_key": "!items!RKmO90Vx9GbVt1g9"
+}

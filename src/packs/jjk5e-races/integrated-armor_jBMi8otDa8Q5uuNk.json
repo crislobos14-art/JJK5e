@@ -1,0 +1,50 @@
+{
+ "_id": "jBMi8otDa8Q5uuNk",
+ "name": "Integrated Armor",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/trait-race.svg",
+ "system": {
+  "description": {
+   "value": "<p>Your body has built-in defensive layers, which can be enhanced with armor.</p>\n<ul>\n<li>\n<p>You gain a +1 bonus to Armor Class.  </p>\n</li>\n<li>\n<p>You can don only armor with which you have proficiency. To don armor, you must incorporate it into your body over the course of 1 hour, during which you must remain in contact with the armor. To doff armor, you must spend 1 hour removing it. You can rest while donning or doffing armor in this way.  </p>\n</li>\n<li>\n<p>While you live, your armor can't be removed from your body against your will.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "race",
+   "subtype": ""
+  },
+  "requirements": "Cursed Corpse (Hard Shell)"
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "Mqs4VShTrWUzPyvN",
+ "effects": [
+  {
+   "_id": "oMdIkQuaGaub0VhQ",
+   "name": "Integrated Armor",
+   "img": "modules/jjk5e/icons/trait-race.svg",
+   "changes": [
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+1",
+     "priority": null
+    }
+   ],
+   "disabled": false,
+   "transfer": true,
+   "duration": {},
+   "description": "",
+   "flags": {},
+   "_key": "!items.effects!jBMi8otDa8Q5uuNk.oMdIkQuaGaub0VhQ"
+  }
+ ],
+ "_key": "!items!jBMi8otDa8Q5uuNk"
+}

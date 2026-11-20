@@ -1,0 +1,117 @@
+{
+ "_id": "LUVi8jTFaORAG7eK",
+ "name": "Maximum: Midnight Armor",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/black-box.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Black Box — Innate Technique (11th level)</em></p><p>At 11th level, you have learned to manifest your barrier around yourself. You can spend 6 cursed energy as an action to manifest parts of your cube around your body like armor for 1 minute or until the armor is destroyed:</p>\n<ul>\n<li>\n<p>You gain the hit points of your barrier as temporary hit points.  </p>\n</li>\n<li>\n<p>Your AC equals your Dark Cube’s AC.  </p>\n</li>\n<li>\n<p>Your unarmed strikes can use your CE modifier for attack rolls and deal 3d8 + CE modifier necrotic damage on a hit.  </p>\n</li>\n<li>\n<p>You can spend additional cursed energy up to twice your cursed energy modifier to also gain the benefits of any reinforcement other than Size.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "nRKiEvk8BGn2WkHh": {
+    "_id": "nRKiEvk8BGn2WkHh",
+    "type": "damage",
+    "name": "Action (6 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 3,
+       "denomination": 8,
+       "bonus": "@mod",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "nRKiEvk8BGn2WkHh": 6
+   },
+   "technique": "Black Box",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "h65v183tFsULjQrb",
+ "_key": "!items!LUVi8jTFaORAG7eK"
+}

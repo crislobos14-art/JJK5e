@@ -1,0 +1,92 @@
+{
+ "_id": "TeIZqCZDUnfAtHgr",
+ "name": "Faster Throws",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/explosive-flesh.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Explosive Flesh — Innate Technique (3rd level)</em></p><p>At 3rd level, you have gained more expertise over your technique, and can now throw your bombs faster. You can now throw a body part as an action or bonus action.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "C2xaEGhPJbPfkhbL": {
+    "_id": "C2xaEGhPJbPfkhbL",
+    "type": "utility",
+    "name": "Bonus Action",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Explosive Flesh",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "g4gimERTa06iViza",
+ "_key": "!items!TeIZqCZDUnfAtHgr"
+}

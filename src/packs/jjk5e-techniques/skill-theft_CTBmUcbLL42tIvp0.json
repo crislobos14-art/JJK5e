@@ -1,0 +1,32 @@
+{
+ "_id": "CTBmUcbLL42tIvp0",
+ "name": "Skill Theft",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/body-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Body Manipulation — Innate Technique (3rd level)</em></p><p>Beginning at 3rd, your control over the body you take over increases. You can choose to take two of the body’s Innate Technique features. Cursed Energy features, or proficiencies from a body you have inhabited in the past. You cannot use Innate Technique features from different techniques at the same time. If you do, one of them deactivates until you are only using one innate technique. You can choose two more features at 6th, 11th, and 18th levels.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Body Manipulation 3"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Body Manipulation",
+   "level": 3
+  }
+ },
+ "folder": "suKJQVV38yYdZJCL",
+ "_key": "!items!CTBmUcbLL42tIvp0"
+}

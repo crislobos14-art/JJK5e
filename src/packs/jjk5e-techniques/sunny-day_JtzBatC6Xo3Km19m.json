@@ -1,0 +1,93 @@
+{
+ "_id": "JtzBatC6Xo3Km19m",
+ "name": "Sunny Day",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/disaster-storms.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Disaster Storms — Cursed Technique Reversal</em></p><p>You have learned your reversal which allows you to instead create a beautiful sunny day that empowers you and allies. You can spend 6 cursed energy as an action to create a miniature sun floating above your head for 2 minutes that creates a sunny aura in a 20 ft radius centered around you. You can spend additional cursed energy equal to twice your proficiency bonus to increase the radius of the aura by 5 ft per cursed energy. Friendly creatures within the aura have resistance to fire damage and gain temporary hit points equal to twice your CE modifier (min of 2) at the start of your turn. You cannot have Sunny Day and Storm Creation or Divine Storm Sovereign active at the same time.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Disaster Storms",
+  "activities": {
+   "OM31HL66a1JtFZY2": {
+    "_id": "OM31HL66a1JtFZY2",
+    "type": "utility",
+    "name": "Action (6+ CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "20"
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "20",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     }
+    },
+    "duration": {
+     "value": "2",
+     "units": "minute",
+     "concentration": false
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceSteps": {
+    "OM31HL66a1JtFZY2": 1
+   },
+   "ceCosts": {
+    "OM31HL66a1JtFZY2": 6
+   },
+   "technique": "Disaster Storms",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Disaster Storms"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!JtzBatC6Xo3Km19m"
+}

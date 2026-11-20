@@ -1,0 +1,32 @@
+{
+ "_id": "WEeRNRtlGxpBviCA",
+ "name": "Splurge",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/contractual-recreation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Contractual Recreation — Innate Technique (6th level)</em></p><p>At 6th level, you become even better with your technique and can use multiple receipts at a time. You can now use a number of receipts at once equal to your proficiency bonus, as long as you're holding them.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Contractual Recreation 6"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Contractual Recreation",
+   "level": 6
+  }
+ },
+ "folder": "1Ch8dLVYSEvwWjZr",
+ "_key": "!items!WEeRNRtlGxpBviCA"
+}

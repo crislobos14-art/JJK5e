@@ -1,0 +1,42 @@
+{
+ "_id": "RUr3fHSfWpcvAUGO",
+ "name": "Fighting Words",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/cursed-speech.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Power of Words</em></p>\n<p>“Oh, them's fighting words”, you have found a way to make your words insulting. When using a word you can force the enemy to make a Wisdom saving throw. On a failure they have disadvantage on attack rolls against creatures other than you.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Power of Words",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Power of Words"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "d9an5RUaI1VEAGca",
+ "sort": 100,
+ "_key": "!items!RUr3fHSfWpcvAUGO"
+}

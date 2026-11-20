@@ -1,0 +1,173 @@
+{
+ "_id": "Fbv1XCPZS9QhB6nh",
+ "name": "Domain Expansion: Bloodbath",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/blood-manipulation-domain.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Blood Manipulation — Innate Technique (18th level)</em></p><p><em>Domain Expansion (rules): full-turn action, 20 CE unless stated, 175-ft radius, 1 minute. When the domain ends you suffer <strong>Technique Burnout</strong> (applied automatically by the module).</em></p><p>When you reach 18th level, you gain your domain expansion.  At Initiative 20, all creatures take 4d12 necrotic damage as their blood attacks them from the inside. While in the domain your blood manipulation techniques can use hit points from other creatures within the domain.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "Buq47Z33ocVziK66": {
+    "_id": "Buq47Z33ocVziK66",
+    "type": "damage",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 4,
+       "denomination": 12,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   },
+   "oDqhu9WCzzgPtrPh": {
+    "_id": "oDqhu9WCzzgPtrPh",
+    "type": "utility",
+    "name": "Expand Domain (20 CE)",
+    "sort": -100000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Full turn: Action + Bonus Action + Movement",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "175",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": true
+     },
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 9,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "special",
+   "value": null,
+   "condition": "Full turn: Action + Bonus Action + Movement",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "radius",
+    "size": "175",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": true
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Blood Manipulation",
+   "level": 18,
+   "domain": true,
+   "ceCosts": {
+    "oDqhu9WCzzgPtrPh": 20
+   },
+   "domainActivity": "oDqhu9WCzzgPtrPh",
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "WIi7n6E644owqihn",
+ "_key": "!items!Fbv1XCPZS9QhB6nh"
+}

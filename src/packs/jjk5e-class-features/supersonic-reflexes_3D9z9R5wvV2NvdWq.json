@@ -1,0 +1,63 @@
+{
+ "_id": "3D9z9R5wvV2NvdWq",
+ "name": "Supersonic Reflexes",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Speed Improvements: You feel like you could probably win against a special grade in a race due to how fast you are now. You can have a number of these improvements equal to your Dexterity modifier. ---</em></p>\n<p>1 body point, 15 Dexterity<br />\nYou gain an additional reaction per round. You can use your reaction to grant yourself advantage on a Dexterity check you make.  </p>\n<hr />",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Heavenly Restriction 2",
+  "activities": {
+   "Mauk5jgpXHDy9Hv2": {
+    "_id": "Mauk5jgpXHDy9Hv2",
+    "type": "utility",
+    "name": "Reaction",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "abilities": {
+     "dex": 15
+    }
+   },
+   "bodyCost": 1,
+   "bodyCategory": "dex"
+  }
+ },
+ "folder": "JeA0bNLBGnvPx6Zr",
+ "_key": "!items!3D9z9R5wvV2NvdWq"
+}

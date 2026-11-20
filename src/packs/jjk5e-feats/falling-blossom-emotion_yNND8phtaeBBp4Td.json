@@ -1,0 +1,100 @@
+{
+ "_id": "yNND8phtaeBBp4Td",
+ "name": "Falling Blossom Emotion",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have the Clan Sorcerer Background</em></p>\n<p>Unlike Simple Domain, which manifests its own domain to protect against a guaranteed hit, Falling Blossom Emotion shrouds the user in cursed energy to counterattack the moment a domain's guaranteed hit makes contact. As an action or reaction for 5 Cursed Energy, you surround yourself in cursed energy to make any attack or effect with a guaranteed hit nullified and deal no damage. This technique lasts for 1 minute, but does not affect attacks without a guaranteed hit.<br />\n You can also use this technique offensively while wielding a melee weapon. As an action for 4 Cursed Energy, you can surround yourself in cursed energy to prepare for an attack for 1 minute. As a reaction to an attack, you can make a melee weapon attack at advantage against the attacker before the attack happens. On a hit, the attack counts as a critical hit and deals necrotic damage. Once you make this attack, you must reactivate the technique to use it again. If your cursed energy or technique alters damage type, it can also alter this damage</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkBarrier"
+  },
+  "requirements": "Must have the Clan Sorcerer Background",
+  "activities": {
+   "OzAsTpmgXLCCfngk": {
+    "_id": "OzAsTpmgXLCCfngk",
+    "type": "utility",
+    "name": "Reaction (5 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    }
+   },
+   "bXDmGd838GaKDl6t": {
+    "_id": "bXDmGd838GaKDl6t",
+    "type": "utility",
+    "name": "Action (4 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "OzAsTpmgXLCCfngk": 5,
+    "bXDmGd838GaKDl6t": 4
+   },
+   "prereq": {
+    "features": [
+     [
+      "Clan Sorcerer"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "w6CtJKH5qYx1fgN4",
+ "sort": 300,
+ "_key": "!items!yNND8phtaeBBp4Td"
+}

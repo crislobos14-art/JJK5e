@@ -1,0 +1,58 @@
+{
+ "_id": "fHpQFMp5jK9RWgP4",
+ "name": "Cursed Rope",
+ "type": "consumable",
+ "img": "icons/svg/explosion.svg",
+ "folder": "xnCPfIMW0yQ370pR",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Item, Grade 2</em></p><p>This rope is 30 feet long and weighs 3 pounds. If you hold one end of the rope and use an action to speak its command word, the other end darts forward to entangle a creature you can see within 20 feet of you. The target must succeed on a DC 15 Dexterity saving throw or become restrained. You can release the creature by using a bonus action to speak a second command word. A target restrained by the rope can use an action to make a DC 15 Strength or Dexterity check (target’s choice). On a success, the creature is no longer restrained by the rope. The rope has AC 20 and 20 hit points. It regains 1 hit point every 5 minutes as long as it has at least 1 hit point. If the rope drops to 0 hit points, it is destroyed.</p>"
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "rarity": "rare",
+  "quantity": 1,
+  "attunement": "",
+  "type": {
+   "value": "trinket",
+   "subtype": ""
+  },
+  "activities": {
+   "cukzhLcdNGfaX0P7": {
+    "_id": "cukzhLcdNGfaX0P7",
+    "type": "utility",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "2nd Grade"
+  }
+ },
+ "_key": "!items!fHpQFMp5jK9RWgP4"
+}

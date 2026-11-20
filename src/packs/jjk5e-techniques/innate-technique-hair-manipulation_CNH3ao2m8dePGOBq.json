@@ -1,0 +1,118 @@
+{
+ "_id": "CNH3ao2m8dePGOBq",
+ "name": "Innate Technique: Hair Manipulation",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/hair-manipulation.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>Your technique allows you to form your hair into a variety of shapes.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.Y5f6ekgOoItXjNcS]{Scorpion Hair}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.SB8gb2EXYIofLXBl]{Drill Hair}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.Fg2uQWtBv1hbcKXy]{Aircraft Hair}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.XELY6ZF06NXQTLhs]{Hair Spray}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.2ACdzLEnWCXja6i9]{Domain Expansion: Silken Strand Execution Ground}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "SwWqX4iiW3necFXT": {
+    "_id": "SwWqX4iiW3necFXT",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Hair Manipulation (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.Y5f6ekgOoItXjNcS",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "qLtCZbh0xRWrdcjr": {
+    "_id": "qLtCZbh0xRWrdcjr",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Hair Manipulation (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.SB8gb2EXYIofLXBl",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "ELvE5WJGM6OWpXjP": {
+    "_id": "ELvE5WJGM6OWpXjP",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Hair Manipulation (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.Fg2uQWtBv1hbcKXy",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "uj9Fyq1TcKFsMHab": {
+    "_id": "uj9Fyq1TcKFsMHab",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Hair Manipulation (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.XELY6ZF06NXQTLhs",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "rW7elt5WHypXLTBb": {
+    "_id": "rW7elt5WHypXLTBb",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Hair Manipulation (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.2ACdzLEnWCXja6i9",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Hair Manipulation"
+  }
+ },
+ "_key": "!items!CNH3ao2m8dePGOBq"
+}

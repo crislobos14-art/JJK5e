@@ -1,0 +1,87 @@
+{
+ "_id": "rSt3OAfpNPUKQR1M",
+ "name": "Cursed Energy Perception",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have proficiency in Perception</em></p>\n<p>You have learned how to track down remains of cursed energy. You gain Expertise in Perception if you don't already. You also gain a +5 bonus to checks relating to sensing Cursed Energy and can sense cursed energy from 90 ft away.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkCursedEnergy"
+  },
+  "requirements": "Must have proficiency in Perception",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "skill": "prc"
+   },
+   "ceSenseRange": 90
+  }
+ },
+ "effects": [
+  {
+   "_id": "PgJk1WYwt6FroyEJ",
+   "name": "Cursed Energy Perception",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "changes": [
+    {
+     "key": "system.skills.prc.value",
+     "mode": 4,
+     "value": "1",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "auto": "passive"
+    }
+   },
+   "_key": "!items.effects!rSt3OAfpNPUKQR1M.PgJk1WYwt6FroyEJ"
+  },
+  {
+   "_id": "4yVgvyTT6WRmgdHk",
+   "name": "Cursed Energy Perception (toggle)",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "changes": [
+    {
+     "key": "system.skills.prc.value",
+     "mode": 4,
+     "value": "2",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!rSt3OAfpNPUKQR1M.4yVgvyTT6WRmgdHk"
+  }
+ ],
+ "folder": "58RlNbYPWxO2Xi4E",
+ "sort": 400,
+ "_key": "!items!rSt3OAfpNPUKQR1M"
+}

@@ -1,0 +1,118 @@
+{
+ "_id": "Y3Hv1JIWW5FMN3CQ",
+ "name": "Innate Technique: Explosive Flesh",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/explosive-flesh.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>You can make your body into a deadly bomb.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.xHgNg53HKZU5LCTU]{Self-Destruction}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.TeIZqCZDUnfAtHgr]{Faster Throws}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.RQb419zvaYlemuUU]{Guerilla Tactics}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.6HchntUbMrRiBTpO]{Stronger Explosions}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.Rzlgaj4eRo9sh64x]{Domain Expansion: True Art}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "72JF5Nb3tQres6YE": {
+    "_id": "72JF5Nb3tQres6YE",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Explosive Flesh (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.xHgNg53HKZU5LCTU",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "w8pKPI9khMKt1Pc7": {
+    "_id": "w8pKPI9khMKt1Pc7",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Explosive Flesh (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.TeIZqCZDUnfAtHgr",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "JDKYfqxmsL6PNhgB": {
+    "_id": "JDKYfqxmsL6PNhgB",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Explosive Flesh (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.RQb419zvaYlemuUU",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "wJGacEk0kqhWpVZM": {
+    "_id": "wJGacEk0kqhWpVZM",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Explosive Flesh (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.6HchntUbMrRiBTpO",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "zgJHUZI21ihHAUaQ": {
+    "_id": "zgJHUZI21ihHAUaQ",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Explosive Flesh (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.Rzlgaj4eRo9sh64x",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Explosive Flesh"
+  }
+ },
+ "_key": "!items!Y3Hv1JIWW5FMN3CQ"
+}

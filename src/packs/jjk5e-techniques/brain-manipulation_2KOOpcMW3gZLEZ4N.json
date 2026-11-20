@@ -1,0 +1,106 @@
+{
+ "_id": "2KOOpcMW3gZLEZ4N",
+ "name": "Brain Manipulation",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/body-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Body Manipulation — Cursed Technique Reversal</em></p><p>Due to your mastery over Reverse Cursed Technique, you have unlocked your cursed technique reversal. Your reversal is very interesting as so is your innate technique. Normally you are controlling your brain, but with your reversal, you are able to disrupt the brains of others. As an action for 8 cursed energy, you can reach out and touch the head of a creature within range. This disrupts their brain function causing them to make a Constitution saving throw. On a failure, they will take 8d8 psychic damage and have their neural network disrupted for 1 minute. While disrupted, they must make another Constitution saving throw when they attempt to use an innate technique feature. On a failure their cursed energy will be shot out in a useless form being wasted. At the end of their turns, an affected creature can repeat the initial saving throw, ending the disruption on a success.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Body Manipulation",
+  "activities": {
+   "rv0eJkh5Z7W5C7uN": {
+    "_id": "rv0eJkh5Z7W5C7uN",
+    "type": "save",
+    "name": "Action (8 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": [
+      {
+       "number": 8,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "psychic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "rv0eJkh5Z7W5C7uN": 8
+   },
+   "technique": "Body Manipulation",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Body Manipulation"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!2KOOpcMW3gZLEZ4N"
+}

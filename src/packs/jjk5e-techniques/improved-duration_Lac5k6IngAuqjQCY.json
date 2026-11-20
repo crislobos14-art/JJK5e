@@ -1,0 +1,32 @@
+{
+ "_id": "Lac5k6IngAuqjQCY",
+ "name": "Improved Duration",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/star-rage.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Star Rage — Innate Technique (3rd level)</em></p><p>When you reach 3rd level, you have honed your skills with your technique, learning how to make it last longer. <em>Virtual Mass Increase</em> now lasts for a number of rounds equal to twice your Cursed Energy modifier. This becomes three times at 11th level and four at 18th.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Star Rage 3"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Star Rage",
+   "level": 3
+  }
+ },
+ "folder": "21st6P4AJoi9hlmG",
+ "_key": "!items!Lac5k6IngAuqjQCY"
+}

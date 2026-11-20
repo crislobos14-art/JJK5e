@@ -1,0 +1,88 @@
+{
+ "_id": "JEYr3SXGuqH2sSPD",
+ "name": "Iron Skin",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Durability Improvements: You're like a wall that cannot be moved, not even the hardest of blows will bring you down. You can have a number of these improvements equal to your Constitution modifier. ---</em></p>\n<p>Hardened Skin, 1 body point, 9th level, 24 Constitution<br />\nYour skin has further hardened, becoming more like steel than flesh. You gain +2 more maximum hit points per level, and you take 3 less damage from non-magical bludgeoning, piercing, and slashing.  </p>\n<hr />",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Heavenly Restriction 2"
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "level": 9,
+    "abilities": {
+     "con": 24
+    },
+    "features": [
+     [
+      "Hardened Skin"
+     ]
+    ]
+   },
+   "bodyCost": 1,
+   "bodyCategory": "con"
+  }
+ },
+ "folder": "0PwoOvAjGZHw3HqL",
+ "effects": [
+  {
+   "_id": "be7P1iGedCy38sSO",
+   "name": "Iron Skin",
+   "img": "modules/jjk5e/icons/feature.svg",
+   "changes": [
+    {
+     "key": "system.attributes.hp.bonuses.level",
+     "mode": 2,
+     "value": "2",
+     "priority": null
+    },
+    {
+     "key": "system.traits.dm.amount.bludgeoning",
+     "mode": 2,
+     "value": "-3",
+     "priority": null
+    },
+    {
+     "key": "system.traits.dm.amount.piercing",
+     "mode": 2,
+     "value": "-3",
+     "priority": null
+    },
+    {
+     "key": "system.traits.dm.amount.slashing",
+     "mode": 2,
+     "value": "-3",
+     "priority": null
+    },
+    {
+     "key": "system.traits.dm.bypasses",
+     "mode": 2,
+     "value": "mgc",
+     "priority": null
+    }
+   ],
+   "disabled": false,
+   "transfer": true,
+   "duration": {},
+   "description": "",
+   "flags": {},
+   "_key": "!items.effects!JEYr3SXGuqH2sSPD.be7P1iGedCy38sSO"
+  }
+ ],
+ "_key": "!items!JEYr3SXGuqH2sSPD"
+}

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+<defs><radialGradient id="g" cx="50%" cy="40%" r="65%">
+<stop offset="0%" stop-color="hsl(65,65%,42%)"/><stop offset="70%" stop-color="hsl(65,75%,16%)"/>
+<stop offset="100%" stop-color="hsl(65,65%,8%)"/></radialGradient></defs>
+<rect width="128" height="128" rx="18" fill="#0d0a12"/>
+<circle cx="64" cy="64" r="56" fill="url(#g)"/>
+<circle cx="64" cy="64" r="56" fill="none" stroke="#e8d9ff" stroke-width="4"/>
+<circle cx="64" cy="64" r="48" fill="none" stroke="#e8d9ff" stroke-opacity=".35" stroke-width="1.5" stroke-dasharray="4 5"/>
+<text x="64" y="64" dy=".35em" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-weight="bold" font-size="46" fill="#ffffff" stroke="#000" stroke-opacity=".5" stroke-width="1.5" paint-order="stroke">PK</text></svg>

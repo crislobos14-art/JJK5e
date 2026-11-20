@@ -1,0 +1,115 @@
+{
+ "_id": "LMOXAAoH42D7H9GN",
+ "name": "Maximum: Hollow Purple",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/limitless.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Lapse Blue and Reversal Red</em></p>\n<p>You have learned how to mix positive and negative space, creating imaginary mass. After using your action to prepare the technique, you can release it as an action for 10 Cursed Energy. Every creature in a 5 feet wide 100-foot line must make a Dexterity saving throw. On a failure, they take 20d12 force damage, are moved to the end of the line, gain 1 level of exhaustion and you can target a limb from the Limb Damage Table. On a successful save, they take half as much damage.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Lapse Blue and Reversal Red",
+  "activities": {
+   "EXI2n1xQ1b4mh8fm": {
+    "_id": "EXI2n1xQ1b4mh8fm",
+    "type": "save",
+    "name": "Action (10 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {
+     "template": {
+      "type": "line",
+      "size": "100",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 20,
+       "denomination": 12,
+       "bonus": "",
+       "types": [
+        "force"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "EXI2n1xQ1b4mh8fm": 10
+   },
+   "prereq": {
+    "features": [
+     [
+      "Lapse Blue"
+     ],
+     [
+      "Reversal Red"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "MYCXBgSVkzwVdmJj",
+ "sort": 200,
+ "_key": "!items!LMOXAAoH42D7H9GN"
+}

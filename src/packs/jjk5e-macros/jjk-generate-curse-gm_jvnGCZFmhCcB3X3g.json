@@ -1,0 +1,13 @@
+{
+ "_id": "jvnGCZFmhCcB3X3g",
+ "name": "JJK: Generate Curse (GM)",
+ "type": "script",
+ "img": "icons/svg/terror.svg",
+ "scope": "global",
+ "command": "game.modules.get(\"jjk5e\").api.createCurse();",
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": null,
+ "_key": "!macros!jvnGCZFmhCcB3X3g"
+}

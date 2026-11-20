@@ -1,0 +1,61 @@
+{
+ "_id": "AArfwiim6GSGHMPY",
+ "name": "Necklace of Adaptation",
+ "type": "equipment",
+ "img": "icons/svg/explosion.svg",
+ "folder": "pB7mLAOAtbyDQKeT",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Item, Grade 3(Requires Attunement)</em></p><p>A small necklace with the symbol of a wheel with eight grips. While wearing this necklace, you can breathe normally in any environment, and you have Advantage on saving throws made to avoid or end the Poisoned condition.</p>"
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "rarity": "uncommon",
+  "quantity": 1,
+  "attunement": "required",
+  "type": {
+   "value": "trinket",
+   "baseItem": ""
+  },
+  "armor": {
+   "value": null
+  },
+  "activities": {
+   "EbuWTdqjrNErXGpC": {
+    "_id": "EbuWTdqjrNErXGpC",
+    "type": "utility",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "3rd Grade"
+  }
+ },
+ "_key": "!items!AArfwiim6GSGHMPY"
+}

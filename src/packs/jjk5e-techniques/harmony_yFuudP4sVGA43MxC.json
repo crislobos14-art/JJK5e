@@ -1,0 +1,126 @@
+{
+ "_id": "yFuudP4sVGA43MxC",
+ "name": "Harmony",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/vairocana.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Creeps and Curses V.3.1</em></p><p><em>Vairocana — Innate Technique (1st level)</em></p><blockquote><p>Harmony and Chaos, the infinite universe that makes up all of creation.</p></blockquote><p>At 1st level, you possess the ability to connect to all things that exist. As an action for 3 cursed energy, you can cast the Locate Creature spell without any components. The range increases to 1 mile at 6th level, 5 miles ft at 11th level and 30 miles at 18th level. As an action for 2 cursed energy, you can cast Speak with Animals or Tongues. At 6th level, you can extend the benefits of Tongues to a number of additional creatures equal to your CE modifier that are within range when you cast it.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "NJRqobgMxqK7LgVu": {
+    "_id": "NJRqobgMxqK7LgVu",
+    "type": "utility",
+    "name": "Action (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   },
+   "VPsbZw4pGUGe4iHI": {
+    "_id": "VPsbZw4pGUGe4iHI",
+    "type": "utility",
+    "name": "Action (2 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "NJRqobgMxqK7LgVu": 3,
+    "VPsbZw4pGUGe4iHI": 2
+   },
+   "technique": "Vairocana",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "CpSgW3tLoueRa6XV",
+ "_key": "!items!yFuudP4sVGA43MxC"
+}

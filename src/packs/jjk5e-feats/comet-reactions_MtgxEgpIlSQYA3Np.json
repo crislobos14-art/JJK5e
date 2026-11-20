@@ -1,0 +1,42 @@
+{
+ "_id": "MtgxEgpIlSQYA3Np",
+ "name": "Comet Reactions",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/love-rendezvous.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Effective Marking</em></p>\n<p>Your reaction speed has further increased. At the cost of one CE, you gain the ability to use the reactions from effective markings for other purposes.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Effective Marking",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Effective Marking"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "pD3ZDzAduni2nSWL",
+ "sort": 100,
+ "_key": "!items!MtgxEgpIlSQYA3Np"
+}

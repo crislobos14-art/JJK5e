@@ -1,0 +1,118 @@
+{
+ "_id": "7D5Bmjl59fmVBINV",
+ "name": "Innate Technique: Disaster Vermin",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/disaster-vermin.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>You are born with a disgusting power, with many disgusting possibilities.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.KCq00fhfScjcilZM]{Vermin of Disaster}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.iPsDZpKgj5u032te]{Earthen Insect Trance}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.9FIz4THZp1SBcZFo]{Almighty Swarm}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.2TX7VyPgCnFRXgkD]{Parthenogenesis}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.C4DMbvYDumMLyH33]{Domain Expansion: Brood Cathedral of the Crawling God}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "WqXg4NzpNi9NmbhH": {
+    "_id": "WqXg4NzpNi9NmbhH",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Disaster Vermin (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.KCq00fhfScjcilZM",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "AabEdAEMbHe77ki7": {
+    "_id": "AabEdAEMbHe77ki7",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Disaster Vermin (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.iPsDZpKgj5u032te",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "oMWZG2JWVYnlPeva": {
+    "_id": "oMWZG2JWVYnlPeva",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Disaster Vermin (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.9FIz4THZp1SBcZFo",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "a32y8Z1a6btutdFK": {
+    "_id": "a32y8Z1a6btutdFK",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Disaster Vermin (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.2TX7VyPgCnFRXgkD",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "rD9FyDI8hed7CCP5": {
+    "_id": "rD9FyDI8hed7CCP5",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Disaster Vermin (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.C4DMbvYDumMLyH33",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Disaster Vermin"
+  }
+ },
+ "_key": "!items!7D5Bmjl59fmVBINV"
+}

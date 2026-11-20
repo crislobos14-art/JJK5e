@@ -1,0 +1,154 @@
+{
+ "_id": "DrswMpqH5qloWUqP",
+ "name": "Domain Expansion: Synesthesia",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/inverse-domain.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Inverse — Innate Technique (18th level)</em></p><p><em>Domain Expansion (rules): full-turn action, 20 CE unless stated, 175-ft radius, 1 minute. When the domain ends you suffer <strong>Technique Burnout</strong> (applied automatically by the module).</em></p><p>At 18th level, you have mastered your technique allowing you to open your domain. Within your domain, you can activate Inverse as a free action an infinite number of times for no cost. At initiative 20, creatures of your choice have their senses inverted. Each creature rolls a d4 (1: taste, 2: smell, 3: touch, 4: sight) having a sense inverted and unable to be used. A creature can make a Cursed Energy check at the end of their turn to regain their lost sense.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "ne7CBK5oUp34sNnZ": {
+    "_id": "ne7CBK5oUp34sNnZ",
+    "type": "utility",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   },
+   "lIx4cq4Ebxtoix4e": {
+    "_id": "lIx4cq4Ebxtoix4e",
+    "type": "utility",
+    "name": "Expand Domain (20 CE)",
+    "sort": -100000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Full turn: Action + Bonus Action + Movement",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "175",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": true
+     },
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 9,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "special",
+   "value": null,
+   "condition": "Full turn: Action + Bonus Action + Movement",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "radius",
+    "size": "175",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": true
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Inverse",
+   "level": 18,
+   "domain": true,
+   "ceCosts": {
+    "lIx4cq4Ebxtoix4e": 20
+   },
+   "domainActivity": "lIx4cq4Ebxtoix4e",
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "bh2ZyC5GSVoaToIo",
+ "_key": "!items!DrswMpqH5qloWUqP"
+}

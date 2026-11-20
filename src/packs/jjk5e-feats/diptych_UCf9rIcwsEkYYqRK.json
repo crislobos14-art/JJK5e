@@ -1,0 +1,71 @@
+{
+ "_id": "UCf9rIcwsEkYYqRK",
+ "name": "Diptych",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/esoteric-art.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Cursed Painting</em></p>\n<p>You have learned to fold, expand, and even connect the subspaces of your paintings. When you enter one of your painting subspaces, you can spend 4 cursed energy to exit from one of your physical paintings. Additionally, the number of paintings you can have at once increases by your proficiency bonus and the area of your subspace doubles.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Cursed Painting",
+  "activities": {
+   "ehCW5uRuORIepfxY": {
+    "_id": "ehCW5uRuORIepfxY",
+    "type": "utility",
+    "name": "Action (4 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "ehCW5uRuORIepfxY": 4
+   },
+   "prereq": {
+    "features": [
+     [
+      "Cursed Painting"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "0WVL6in6ehAyEIQ5",
+ "sort": 100,
+ "_key": "!items!UCf9rIcwsEkYYqRK"
+}

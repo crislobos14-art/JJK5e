@@ -1,0 +1,42 @@
+{
+ "_id": "RDk5bEnUZegEx6mK",
+ "name": "Chimerafication",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/ten-shadows.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Totality</em></p>\n<p>You have learned how to better fuse the powers of your Shadows even at the cost of creating a monstrosity. When creating a <em>Totality</em>, you can sacrifice a tamed shikigami even if it is not destroyed. You can use a number of shikigami up to half your proficiency bonus (rounded up) + 1 that are eligible for Totality to fuse into an eligible Non-Totality shikigami, forming a Chimera. Chimeras can have humanoid forms, but cannot be used for <em>Well’s Unknown Abyss</em>. <br />\n You can also give an additional alteration to your altered shikigami created with <em>Well’s Unknown Abyss</em>, counting as part of the technique.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Totality",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Totality"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "9OwEZW5sd90aZTPm",
+ "sort": 200,
+ "_key": "!items!RDk5bEnUZegEx6mK"
+}

@@ -1,0 +1,71 @@
+{
+ "_id": "WxSK3jQxFmdYVG0z",
+ "name": "Centipede Festival",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/centipede-shroud.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Earthquake</em></p>\n<p>Through your bond with your shikigami, you have learned of its hunger for both flesh and battle, improving your teamwork even more:</p>\n<ul>\n<li>\n<p>When you or your centipede kill a creature within 5 ft, your centipede partially devours the corpse and regains hit points equal to your level + your CE modifier. At 11th level, your centipede can also feast on its cursed energy (unless it has none), causing you to regain 1 cursed energy.  </p>\n</li>\n<li>\n<p>You can spend 1 CE as a bonus action or as part of summoning it to give it temporary hit points equal to twice your level.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Earthquake",
+  "activities": {
+   "OZFMDIZ4RspApuDg": {
+    "_id": "OZFMDIZ4RspApuDg",
+    "type": "utility",
+    "name": "Bonus Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "OZFMDIZ4RspApuDg": 1
+   },
+   "prereq": {
+    "features": [
+     [
+      "Earthquake"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "zu76XEphc8IiezIo",
+ "sort": 300,
+ "_key": "!items!WxSK3jQxFmdYVG0z"
+}

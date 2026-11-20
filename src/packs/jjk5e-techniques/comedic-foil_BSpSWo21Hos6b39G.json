@@ -1,0 +1,32 @@
+{
+ "_id": "BSpSWo21Hos6b39G",
+ "name": "Comedic Foil",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/comedian.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Comedian — Innate Technique (6th level)</em></p><p>At 6th level, you can even hijack the thoughts of others to go along with your jokes and skits. They find themselves saying things that lead into your jokes. A creature that starts their turn within 300 ft of you while your technique is active must make a Cursed Energy saving throw. On a failure, they cannot use any cursed techniques that would interfere with your current joke until their next turn.</p>\n<p>Additionally, you can choose to not allow other creatures to interfere with your combat while your technique is active. This stops other creatures from rolling for initiative or affecting the battle in any way as some random reason prevents them from joining in. You can also choose to remove a creature’s ability to sense cursed energy while they are within 300 ft of you while your technique is active to stop them from being distracted from your jokes.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Comedian 6"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Comedian",
+   "level": 6
+  }
+ },
+ "folder": "8AlwpNPBMedHlchF",
+ "_key": "!items!BSpSWo21Hos6b39G"
+}

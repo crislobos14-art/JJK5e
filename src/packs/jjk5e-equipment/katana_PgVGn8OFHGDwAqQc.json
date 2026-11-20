@@ -1,0 +1,81 @@
+{
+ "_id": "PgVGn8OFHGDwAqQc",
+ "name": "Katana",
+ "type": "weapon",
+ "img": "icons/svg/sword.svg",
+ "folder": "8L9REK3UZxFoXRJA",
+ "system": {
+  "description": {
+   "value": "<p>Martial melee weapon. 2d4 slashing. Versatile(1d10).</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "martialM",
+   "baseItem": ""
+  },
+  "damage": {
+   "base": {
+    "number": 2,
+    "denomination": 4,
+    "types": [
+     "slashing"
+    ]
+   },
+   "versatile": {
+    "number": 1,
+    "denomination": 10,
+    "types": [
+     "slashing"
+    ]
+   }
+  },
+  "range": {
+   "value": 5,
+   "long": null,
+   "units": "ft",
+   "reach": 5
+  },
+  "properties": [
+   "ver"
+  ],
+  "proficient": null,
+  "price": {
+   "value": 20.0,
+   "denomination": "gp"
+  },
+  "quantity": 1,
+  "activities": {
+   "QgwiNWS9z1S1cXIE": {
+    "_id": "QgwiNWS9z1S1cXIE",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "melee",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "priceUSD": "$2,000"
+  }
+ },
+ "_key": "!items!PgVGn8OFHGDwAqQc"
+}

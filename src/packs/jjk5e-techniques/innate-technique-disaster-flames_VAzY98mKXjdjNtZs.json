@@ -1,0 +1,118 @@
+{
+ "_id": "VAzY98mKXjdjNtZs",
+ "name": "Innate Technique: Disaster Flames",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/disaster-flames.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>You are born with a great power, with nigh-endless possibilities, fire manipulation, allowing you to burn down everything in your way.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.H3zzUtaO4Cap4QOd]{Flames of Disaster}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.wqgf4qz5z0zgYZ9K]{Erupting Volcanoes}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.VSqFE0jfDFne8RpL]{Ember Insects}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.uJD8rltKMIu5fwrr]{Maximum: Meteor}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.KRWrFxJblGacGrpx]{Domain Expansion: Coffin of the Iron Mountain}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "D802E8g4VvkDrTLO": {
+    "_id": "D802E8g4VvkDrTLO",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Disaster Flames (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.H3zzUtaO4Cap4QOd",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "gawvizXi8v4A8gM1": {
+    "_id": "gawvizXi8v4A8gM1",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Disaster Flames (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.wqgf4qz5z0zgYZ9K",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "iFFoRDyK04OppY8i": {
+    "_id": "iFFoRDyK04OppY8i",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Disaster Flames (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.VSqFE0jfDFne8RpL",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "zI7e4zGbWmVVKXNs": {
+    "_id": "zI7e4zGbWmVVKXNs",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Disaster Flames (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.uJD8rltKMIu5fwrr",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "3Ump992v0ceMfZep": {
+    "_id": "3Ump992v0ceMfZep",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Disaster Flames (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.KRWrFxJblGacGrpx",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Disaster Flames"
+  }
+ },
+ "_key": "!items!VAzY98mKXjdjNtZs"
+}

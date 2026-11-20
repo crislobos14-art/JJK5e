@@ -1,0 +1,80 @@
+{
+ "_id": "RkAjdMVjQM82kgPf",
+ "name": "Tavern Brawler",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: N/A</em></p>\n<p>Accustomed to the rough-and-tumble fighting using whatever weapons happen to be at hand, you gain the following benefits:</p>\n<ul>\n<li>\n<p>Increase your Strength or Constitution score by 1, to a maximum of 20.  </p>\n</li>\n<li>\n<p>You are proficient with improvised weapons.  </p>\n</li>\n<li>\n<p>Your unarmed strike uses a d4 for damage.  </p>\n</li>\n<li>\n<p>When you hit a creature with an unarmed strike or an improvised weapon on your turn, you can use a bonus action to attempt to grapple the target.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkSkill"
+  },
+  "requirements": "N/A",
+  "activities": {
+   "tHiZm0zBL4AJ49nJ": {
+    "_id": "tHiZm0zBL4AJ49nJ",
+    "type": "utility",
+    "name": "Bonus Action",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "advancement": {
+   "EdRdrGusldnGMvDK": {
+    "_id": "EdRdrGusldnGMvDK",
+    "type": "AbilityScoreImprovement",
+    "level": 0,
+    "title": "Ability Score Increase",
+    "value": {},
+    "configuration": {
+     "points": 1,
+     "cap": 1,
+     "fixed": {},
+     "locked": [
+      "dex",
+      "int",
+      "wis",
+      "cha"
+     ]
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "EtgHYidIGv42ylfo",
+ "sort": 2000,
+ "_key": "!items!RkAjdMVjQM82kgPf"
+}

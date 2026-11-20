@@ -1,0 +1,72 @@
+{
+ "_id": "UdVYnIUWtZ7jQTVa",
+ "name": "Virtual Mass Decrease",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/star-rage.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Star Rage — Cursed Technique Reversal</em></p><p>Due to your mastery over Reverse Cursed Technique, you have learned to reverse the mass increase. This allows you to get rid of all the mass in your body. This state can be entered as a bonus action or a reaction. You can spend as much Cursed energy on this with no limit, gaining a mass decrease for each cursed energy spent. This state lasts double your current time limit or until you end it as a free action. This cannot be used with Virtual Mass Increase.</p>\n<p><strong>Decreased Weight.</strong> For every mass decrease, your movement speed increases by 10 feet and you gain a +1 to unarmed attack rolls, but a -1 to damage rolls. If you move in a straight line before hitting a target with an unarmed strike, you gain a +1 to damage rolls for every 5 feet.</p>\n<p><strong>Increased Evasion.</strong> When you spend at least 6 CE on virtual mass, you gain the Evasion feature and advantage on Dexterity checks and saving throws. You gain a further +2 to Dexterity rolls and AC and -1 to Strength checks and saves for each additional mass decrease.</p>\n<p><strong>Critical  Speed.</strong> Your  critical  range  increases  by  2  for  every  four mass decreases and you deal minimum damage to objects and structures.</p>\n<p><strong>Zero Virtual Mass.</strong> Despite your reversal being powerful there is a limit. At 11th level, if you spend more than 10 Cursed Energy, you can choose to reduce your mass to 0. Reducing your mass in this way forces you to enter an incorporeal state, and temporarily takes away half of your maximum hit points. During this state, you become unaffected by all damage except psychic, and can phase through objects and creatures. You also cannot interact with other creatures or objects. In addition your speed increases by 30 feet. This lasts for 1 minute or until stopped as a free action.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Star Rage",
+  "activities": {
+   "MBFVtqxWvJil5f3W": {
+    "_id": "MBFVtqxWvJil5f3W",
+    "type": "utility",
+    "name": "Bonus Action",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Star Rage",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Star Rage"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!UdVYnIUWtZ7jQTVa"
+}

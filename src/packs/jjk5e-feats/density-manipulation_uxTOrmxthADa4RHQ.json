@@ -1,0 +1,42 @@
+{
+ "_id": "uxTOrmxthADa4RHQ",
+ "name": "Density Manipulation",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/earth-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Excavation</em></p>\n<p>You have learned to increase the density of your stone creations. The amount of hit points each cube created by your <em>Excavation</em> now equals 10 times your CE modifier. Stone constructs created by your other Innate Technique features gain an additional 10 hit points.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Excavation",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Excavation"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "CvsPtOy5HUgba8G0",
+ "sort": 100,
+ "_key": "!items!uxTOrmxthADa4RHQ"
+}

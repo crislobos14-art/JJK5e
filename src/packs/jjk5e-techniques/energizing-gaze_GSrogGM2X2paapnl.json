@@ -1,0 +1,106 @@
+{
+ "_id": "GSrogGM2X2paapnl",
+ "name": "Energizing Gaze",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/paralyzing-gaze.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Paralyzing Gaze — Cursed Technique Reversal</em></p><p>You have gained the ability to reverse your technique, making your technique quicken instead of slow. As an action for 4 CE, you can choose a target that you can see within 30 ft. The target doubles their movement, gains a bonus to their AC equal to your CE modifier and gains an additional bonus action on their turn. At the start of your turn, you can spend 2 CE as a bonus action to maintain the technique. This effect ends if line of sight is broken.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Paralyzing Gaze",
+  "activities": {
+   "Ri01OLpTb9kW8AR9": {
+    "_id": "Ri01OLpTb9kW8AR9",
+    "type": "utility",
+    "name": "Action (4 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "30",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    }
+   },
+   "rZTE8uPTRoUmB24x": {
+    "_id": "rZTE8uPTRoUmB24x",
+    "type": "utility",
+    "name": "Bonus Action (2 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "Ri01OLpTb9kW8AR9": 4,
+    "rZTE8uPTRoUmB24x": 2
+   },
+   "technique": "Paralyzing Gaze",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Paralyzing Gaze"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!GSrogGM2X2paapnl"
+}

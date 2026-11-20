@@ -1,0 +1,118 @@
+{
+ "_id": "e1TEKNUYnm0Pbdw0",
+ "name": "Innate Technique: Divergent Fist",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/divergent-fist.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>A learnt technique using cursed energy manipulation created accidentally due to slow cursed energy, turns out to be effective.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.WwsOi9d6vXukT6rB]{Divergent Flow}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.CrWM1xCTd63nJBUq]{Martial Prowess}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.LopSrEEkD6jZme5o]{Extreme Divergent Flow}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.dmeqRRSG8j49BR5r]{Stance of the Sparks}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.zD0Ax7q6063LSXAM]{Chosen by the Sparks}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "eefDAEmbEpWmHbaj": {
+    "_id": "eefDAEmbEpWmHbaj",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Divergent Fist (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.WwsOi9d6vXukT6rB",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "TYgPtOejuwUELVCY": {
+    "_id": "TYgPtOejuwUELVCY",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Divergent Fist (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.CrWM1xCTd63nJBUq",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "j0CQtTY8389NlwMu": {
+    "_id": "j0CQtTY8389NlwMu",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Divergent Fist (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.LopSrEEkD6jZme5o",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "UgtCM436vlikIuha": {
+    "_id": "UgtCM436vlikIuha",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Divergent Fist (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.dmeqRRSG8j49BR5r",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "rD0s8TEkzHOizfWQ": {
+    "_id": "rD0s8TEkzHOizfWQ",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Divergent Fist (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.zD0Ax7q6063LSXAM",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Divergent Fist"
+  }
+ },
+ "_key": "!items!e1TEKNUYnm0Pbdw0"
+}

@@ -1,0 +1,32 @@
+{
+ "_id": "lkaVCW2EJODeRx9X",
+ "name": "Madness Enhancement",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/faceless-god.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Faceless God — Innate Technique (3rd level)</em></p><p>At 3rd level, you learn to directly inject madness into a creature. Once per turn, when you hit a creature with a melee attack while your technique is active, they gain a 5% increase to <em>Mental Corruption</em>. You can spend additional cursed energy up to your proficiency bonus on a hit to increase <em>Mental Corruption</em> by 5% per cursed energy spent.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Faceless God 3"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Faceless God",
+   "level": 3
+  }
+ },
+ "folder": "TxiITYXHPOTbqkOW",
+ "_key": "!items!lkaVCW2EJODeRx9X"
+}

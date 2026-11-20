@@ -1,0 +1,118 @@
+{
+ "_id": "LRuqxn21ZHzq7qia",
+ "name": "Innate Technique: Disaster Tides",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/disaster-tides.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>You are born with a great power, with great possibilities, and astounding potential, water manipulation.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.OswVkVAkUYOOzURL]{Tides of Disaster}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.NUoFYdG435JZWnLM]{Domain Expansion: Horizon of Captivating Skhanda}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.8R4ubskMKSNo9cjj]{Water Defensive Ring}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.5EjQTkPsRJ3rKiT9]{Flash Flood}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.ht3B9B5NSQBfgmUH]{Maximum: Tsunami}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "A6Krgqrs9pXYIo4w": {
+    "_id": "A6Krgqrs9pXYIo4w",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Disaster Tides (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.OswVkVAkUYOOzURL",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "99WCLkVWUeSwK2CS": {
+    "_id": "99WCLkVWUeSwK2CS",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Disaster Tides (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.NUoFYdG435JZWnLM",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "QMGrk788ev8Modiq": {
+    "_id": "QMGrk788ev8Modiq",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Disaster Tides (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.8R4ubskMKSNo9cjj",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "XcJj5r7zZ1OHW4ro": {
+    "_id": "XcJj5r7zZ1OHW4ro",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Disaster Tides (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.5EjQTkPsRJ3rKiT9",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "Hqa1tojZrScvUV0X": {
+    "_id": "Hqa1tojZrScvUV0X",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Disaster Tides (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.ht3B9B5NSQBfgmUH",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Disaster Tides"
+  }
+ },
+ "_key": "!items!LRuqxn21ZHzq7qia"
+}

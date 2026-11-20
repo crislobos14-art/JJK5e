@@ -1,0 +1,118 @@
+{
+ "_id": "AOxJRQ60stcCNNOt",
+ "name": "Innate Technique: Ice Formation",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/ice-formation.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>Your technique is beautiful in its simplicity, and the ability to make and control ice.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.6d05GBnkO9d2vAY9]{Ice Creation}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.wMJNs3CHZKwHhs28]{Extreme Cold}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.Jcsw1LCj12wtxbiG]{Frost Calm}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.wkzTg4f1GGLksKAv]{Ice Fall}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.dKwXApTwzsxj95yd]{Domain Expansion: White Abyss}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "GEN6a8WAj9kMtwNE": {
+    "_id": "GEN6a8WAj9kMtwNE",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Ice Formation (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.6d05GBnkO9d2vAY9",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "jQLBva5DrHGGGZMU": {
+    "_id": "jQLBva5DrHGGGZMU",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Ice Formation (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.wMJNs3CHZKwHhs28",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "r3A7Y1tovyW1QtP2": {
+    "_id": "r3A7Y1tovyW1QtP2",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Ice Formation (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.Jcsw1LCj12wtxbiG",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "KzIewIvyhtElQCtq": {
+    "_id": "KzIewIvyhtElQCtq",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Ice Formation (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.wkzTg4f1GGLksKAv",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "4mFKT3TIHJTNolUm": {
+    "_id": "4mFKT3TIHJTNolUm",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Ice Formation (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.dKwXApTwzsxj95yd",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Ice Formation"
+  }
+ },
+ "_key": "!items!AOxJRQ60stcCNNOt"
+}

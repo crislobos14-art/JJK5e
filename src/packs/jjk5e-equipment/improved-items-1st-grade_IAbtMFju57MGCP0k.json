@@ -1,0 +1,30 @@
+{
+ "_id": "IAbtMFju57MGCP0k",
+ "name": "Improved Items (1st Grade)",
+ "type": "loot",
+ "img": "icons/svg/explosion.svg",
+ "folder": "5URJFab0BietcWnO",
+ "system": {
+  "type": {
+   "value": "gear"
+  },
+  "description": {
+   "value": "<p><em>1st Grade category rule.</em></p>\n<p>These items are filled with Cursed Energy which allows them to become more effective. This is represented by adding a +3 to related activities.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "rarity": "veryRare",
+  "quantity": 1
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "1st Grade"
+  }
+ },
+ "_key": "!items!IAbtMFju57MGCP0k"
+}

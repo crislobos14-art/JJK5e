@@ -1,0 +1,118 @@
+{
+ "_id": "g2goY9NXLBFtGEyL",
+ "name": "Innate Technique: Starlight Symphony",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/starlight-symphony.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>You can create and mold a shining cursed fog.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.rrxmgN9E1kMY4Y6C]{Cursed Fog}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.p2UOibKpvVVJg9bI]{Kitsune Creation}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.JTj0PkI6UX19MGBs]{Living Fog}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.orRoUK5XNH9MciAs]{Inari}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.gKmWnQNo0RtBc5t6]{Domain Expansion: Heaven and Earth}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "s9KkZkGmgwOXGL4Z": {
+    "_id": "s9KkZkGmgwOXGL4Z",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Starlight Symphony (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.rrxmgN9E1kMY4Y6C",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "fN4Si92v7BaUbvn2": {
+    "_id": "fN4Si92v7BaUbvn2",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Starlight Symphony (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.p2UOibKpvVVJg9bI",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "ANohiq7TzZAUs70u": {
+    "_id": "ANohiq7TzZAUs70u",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Starlight Symphony (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.JTj0PkI6UX19MGBs",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "c9V0RuaAHbDwnqFJ": {
+    "_id": "c9V0RuaAHbDwnqFJ",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Starlight Symphony (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.orRoUK5XNH9MciAs",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "nUjvuUSoAKHGcWaP": {
+    "_id": "nUjvuUSoAKHGcWaP",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Starlight Symphony (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.gKmWnQNo0RtBc5t6",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Starlight Symphony"
+  }
+ },
+ "_key": "!items!g2goY9NXLBFtGEyL"
+}

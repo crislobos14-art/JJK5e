@@ -1,0 +1,93 @@
+{
+ "_id": "sO3GOknB1VilfwJu",
+ "name": "Transfiguration Adept",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/idle-transfiguration.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Transfiguration</em></p>\n<p>You have mastered your observation of the soul and learned grotesque molds to shape them into. You gain the two of the following ways to use transfigured humans (this feat can be repeated):</p>\n<ul>\n<li>\n<p><strong>Remote Transfiguration</strong>. When using <em>Transfiguration</em>, you can instead imprint a small, latent amount  of cursed energy upon their souls, allowing you to transfigure them from large distances (only one touch per creature).  </p>\n</li>\n<li>\n<p><strong>Wall of Flesh</strong>. As an action, you spend humans up to your proficiency bonus to form a flat panel of human flesh up to 5 ft long and wide per human used in an unoccupied space within 5 ft. The wall’s AC equals your CE save DC and has hit points equal to 5 x the combined CR of the creatures used. You can move it 5 ft as a bonus action and can have only one wall at a time.  </p>\n</li>\n<li>\n<p><strong>Human Weapon</strong>. As a bonus action, you form a creature into a simple or martial weapon or ammunition. The weapon gains a +1 bonus to attack and damage rolls if the creature’s CR is 5 or higher and increases by +1 per 5 CR to a maximum of +4.  </p>\n</li>\n<li>\n<p><strong>People Spikes</strong>. As an action, you spend humans up to your proficiency bonus, covering a 5 ft area per human on the ground within 30 ft of you with human spikes. A creature that walks through this area takes 2d8 piercing damage.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Transfiguration",
+  "activities": {
+   "BRAjjurH92eMbIxw": {
+    "_id": "BRAjjurH92eMbIxw",
+    "type": "damage",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "5",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "piercing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Transfiguration"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "AzMxVgHP2Otjp6Ju",
+ "sort": 100,
+ "_key": "!items!sO3GOknB1VilfwJu"
+}

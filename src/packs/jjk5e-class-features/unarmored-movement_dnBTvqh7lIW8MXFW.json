@@ -1,0 +1,54 @@
+{
+ "_id": "dnBTvqh7lIW8MXFW",
+ "name": "Unarmored Movement",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>Also at 1st level, your speed increases by 20 feet while you are not wearing armor or wielding a shield. This bonus increases when you reach certain Heavenly Restriction levels, as shown in the Heavenly Restriction table.</p>\n<p>In addition, you gain the ability to move and run along vertical surfaces and across liquids on your turn without falling during the move.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Heavenly Restriction 1"
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "hWqAX9TqrOvuq1FE",
+ "effects": [
+  {
+   "_id": "XoJR2C429xJDMRZy",
+   "name": "Unarmored Movement (speed bonus)",
+   "img": "modules/jjk5e/icons/feature.svg",
+   "changes": [
+    {
+     "key": "system.attributes.movement.walk",
+     "mode": 2,
+     "value": "20",
+     "priority": null
+    }
+   ],
+   "disabled": false,
+   "transfer": true,
+   "duration": {},
+   "description": "<p>Only while not wearing armor or a shield. Value follows the Heavenly Restriction table (updated by the module on level-up). Disable it if you wear armor.</p>",
+   "flags": {
+    "jjk5e": {
+     "scaleKey": "heavenly-restriction.unarmored-movement"
+    }
+   },
+   "_key": "!items.effects!dnBTvqh7lIW8MXFW.XoJR2C429xJDMRZy"
+  }
+ ],
+ "_key": "!items!dnBTvqh7lIW8MXFW"
+}

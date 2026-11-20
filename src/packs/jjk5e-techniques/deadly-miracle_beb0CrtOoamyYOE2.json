@@ -1,0 +1,32 @@
+{
+ "_id": "beb0CrtOoamyYOE2",
+ "name": "Deadly Miracle",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/miracle.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Miracle — Innate Technique (6th level)</em></p><p>At 6th level, you have learned that out of difficulties, miracles grow. Your technique lets you fend off death by some miracle. When you are hit by an attack or fail a saving throw that would reduce you to 0 hit points or kill you outright, you can spend 2 Miracles and 2 CE to instead succeed the save or survive the attack and take no damage or additional effects. Completely escaping harm by seemingly dumb luck.<br />\nWhile you have at least 1 Miracle, you make death saving throws at advantage.<br />\n At 11th level, you can use this feature against an attack or effect that would reduce you to 1/2 or below your hit point maximum.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Miracle 6"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Miracle",
+   "level": 6
+  }
+ },
+ "folder": "tl97VGJouG41Z3rd",
+ "_key": "!items!beb0CrtOoamyYOE2"
+}

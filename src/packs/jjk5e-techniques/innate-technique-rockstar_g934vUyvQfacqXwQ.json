@@ -1,0 +1,118 @@
+{
+ "_id": "g934vUyvQfacqXwQ",
+ "name": "Innate Technique: Rockstar",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/rockstar.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>You can amplify sound and launch it as a blast of energy.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.wmS4XVAE6EL1dJ17]{Sound Amplification}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.EJxDOAJZ1UjcbLR9]{Jacked Audio}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.YMUit2oYBKZFVC0u]{Resonating Music}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.2KYLeuvZfdjkOvzV]{Maximum: Epic Solo}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.QmfPpOxDrEUDCBSU]{Domain Expansion: Hall of Fame}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "qrm4X7BC43Sflqjz": {
+    "_id": "qrm4X7BC43Sflqjz",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Rockstar (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.wmS4XVAE6EL1dJ17",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "KnXEZTz5AJGHBDsP": {
+    "_id": "KnXEZTz5AJGHBDsP",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Rockstar (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.EJxDOAJZ1UjcbLR9",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "B5dYCgrz3XcnBhsD": {
+    "_id": "B5dYCgrz3XcnBhsD",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Rockstar (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.YMUit2oYBKZFVC0u",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "vyiQzYXptWvdBYk8": {
+    "_id": "vyiQzYXptWvdBYk8",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Rockstar (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.2KYLeuvZfdjkOvzV",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "quPFGfyx21qYNiTJ": {
+    "_id": "quPFGfyx21qYNiTJ",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Rockstar (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.QmfPpOxDrEUDCBSU",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Rockstar"
+  }
+ },
+ "_key": "!items!g934vUyvQfacqXwQ"
+}

@@ -1,0 +1,118 @@
+{
+ "_id": "5PytxdjLR0bdM9zo",
+ "name": "Innate Technique: Missile Fist",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/missile-fist.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>You can launch a barrage of giant fists against your opponents.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.I0xFb7zyyLxQKE7A]{Missile Impact}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.EJrxqMj9OKy7ZhlK]{Devastating Barrage}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.mBjxZbJJs4CS4osY]{Unrelenting Fury}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.ExKo8huWEv4TTFFX]{Maximum: Brutal Bombardment}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.tEi4q2oYSdR5bUCp]{Domain Expansion: Unrelenting Ring of Spirit}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "3SYmmXyalKMOhD0h": {
+    "_id": "3SYmmXyalKMOhD0h",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Missile Fist (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.I0xFb7zyyLxQKE7A",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "3hLzmGJvYkvQoV98": {
+    "_id": "3hLzmGJvYkvQoV98",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Missile Fist (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.EJrxqMj9OKy7ZhlK",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "ITp0O9zDda5XiLxN": {
+    "_id": "ITp0O9zDda5XiLxN",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Missile Fist (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.mBjxZbJJs4CS4osY",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "9LC8oY06pM6ce1Di": {
+    "_id": "9LC8oY06pM6ce1Di",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Missile Fist (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.ExKo8huWEv4TTFFX",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "i4sNGm7Xu7bmro2L": {
+    "_id": "i4sNGm7Xu7bmro2L",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Missile Fist (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.tEi4q2oYSdR5bUCp",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Missile Fist"
+  }
+ },
+ "_key": "!items!5PytxdjLR0bdM9zo"
+}

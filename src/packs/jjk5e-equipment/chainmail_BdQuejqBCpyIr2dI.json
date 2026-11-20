@@ -1,0 +1,41 @@
+{
+ "_id": "BdQuejqBCpyIr2dI",
+ "name": "Chainmail",
+ "type": "equipment",
+ "img": "icons/svg/shield.svg",
+ "folder": "qVuyydidyeepCNvu",
+ "system": {
+  "description": {
+   "value": "<p>Heavy armor. AC 16(Disadvantage on Stealth).</p><p>Made of interlocking metal rings, chain mail includes a layer of quilted fabric worn underneath the mail to prevent chafing and cushion the impact of blows. The suit includes gauntlets.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "heavy",
+   "baseItem": ""
+  },
+  "armor": {
+   "value": 16,
+   "dex": 0
+  },
+  "price": {
+   "value": 75.0,
+   "denomination": "gp"
+  },
+  "properties": [
+   "stealthDisadvantage"
+  ],
+  "quantity": 1
+ },
+ "flags": {
+  "jjk5e": {
+   "priceUSD": "$7,500"
+  }
+ },
+ "_key": "!items!BdQuejqBCpyIr2dI"
+}

@@ -1,0 +1,55 @@
+{
+ "_id": "fJMCXEKIgcoWoIou",
+ "name": "Martial Arts",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>At 1st level, your practice of martial arts gives you mastery of combat styles that use unarmed strikes, shortswords and any simple melee weapons that lack the two-handed or heavy property. You gain the following benefits while unarmed or wielding a Martial Arts Weapons:</p>\n<ul>\n<li>\n<p>You can use Dexterity instead of Strength for attack and damage rolls of your unarmed strikes and martial arts weapons.  </p>\n</li>\n<li>\n<p>You can roll a d4 in place of the normal damage of your unarmed strike or martial arts weapon. This die changes as you gain shikigami user levels, as shown in the Martial Arts column of the shikigami user table.  </p>\n</li>\n<li>\n<p>When you use the Attack action with an unarmed strike or a Martial Arts weapon on your turn, you can make one unarmed strike as a bonus action. For example, if you take the Attack action and attack with a quarterstaff, you can also make an unarmed strike as a bonus action, if you haven't already taken a bonus action.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Shikigami User 1",
+  "activities": {
+   "KGAPKHkAuAjP2CGW": {
+    "_id": "KGAPKHkAuAjP2CGW",
+    "type": "utility",
+    "name": "Bonus Action",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "69XiiJo14iwd80Zo",
+ "_key": "!items!fJMCXEKIgcoWoIou"
+}

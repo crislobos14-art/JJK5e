@@ -1,0 +1,122 @@
+{
+ "_id": "L2EWnki0dICgqQ23",
+ "name": "Innate Technique: Rot",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/rot.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.8ob4DIhgqqluRPbD]{Rot Techniques}, @UUID[Compendium.jjk5e.jjk5e-techniques.Item.P3P35yj02Ltq67v3]{Rotten Blood}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.sg0SgAZBqxgPvW74]{Decay}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.SisjRsbJMU1CYl6j]{Scarlet Rot}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.xWdQR7gjV6e3o70B]{Maximum: Wing King}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.pei0xqJxONsFvIou]{Domain Expansion: Mind Palace of Corrupted Ego}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "dSwcsYjp9D8tuJ1T": {
+    "_id": "dSwcsYjp9D8tuJ1T",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Rot (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.8ob4DIhgqqluRPbD",
+       "optional": false
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.P3P35yj02Ltq67v3",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "qcQieYdtC8NS0UZ7": {
+    "_id": "qcQieYdtC8NS0UZ7",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Rot (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.sg0SgAZBqxgPvW74",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "eBe77W0AielEIpfk": {
+    "_id": "eBe77W0AielEIpfk",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Rot (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.SisjRsbJMU1CYl6j",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "DTcpXPq5ULkkKAeN": {
+    "_id": "DTcpXPq5ULkkKAeN",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Rot (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.xWdQR7gjV6e3o70B",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "gI1ih53k6RVu4IdN": {
+    "_id": "gI1ih53k6RVu4IdN",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Rot (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.pei0xqJxONsFvIou",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Rot"
+  }
+ },
+ "_key": "!items!L2EWnki0dICgqQ23"
+}

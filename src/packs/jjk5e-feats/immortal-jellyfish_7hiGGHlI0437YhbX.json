@@ -1,0 +1,91 @@
+{
+ "_id": "7hiGGHlI0437YhbX",
+ "name": "Immortal Jellyfish",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/moon-dregs.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Lunar Jellyfish</em></p>\n<p>You have learned to reinforce your shikigami with cursed energy. As part of the bonus action to command <em>Moon Dregs</em>, you can spend cursed energy up to your Cursed Energy modifier to give <em>Moon Dregs</em> 5 temporary hit points per Cursed Energy spent. This increases to 10 temporary hit points per cursed energy at 11th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Lunar Jellyfish",
+  "activities": {
+   "rwIMxM8ebIsy49k9": {
+    "_id": "rwIMxM8ebIsy49k9",
+    "type": "heal",
+    "name": "Special (1+ CE)",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "max(1, max(@abilities.wis.mod, @abilities.cha.mod))"
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "5",
+     "types": [
+      "temphp"
+     ],
+     "custom": {
+      "enabled": false,
+      "formula": ""
+     },
+     "scaling": {
+      "mode": "whole",
+      "formula": "5"
+     }
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceSteps": {
+    "rwIMxM8ebIsy49k9": 1
+   },
+   "ceCosts": {
+    "rwIMxM8ebIsy49k9": 1
+   },
+   "prereq": {
+    "features": [
+     [
+      "Lunar Jellyfish"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "xS0EmCX82T9CW9Eg",
+ "sort": 100,
+ "_key": "!items!7hiGGHlI0437YhbX"
+}

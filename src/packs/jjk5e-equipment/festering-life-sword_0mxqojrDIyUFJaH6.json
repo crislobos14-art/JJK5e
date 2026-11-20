@@ -1,0 +1,127 @@
+{
+ "_id": "0mxqojrDIyUFJaH6",
+ "name": "Festering Life Sword",
+ "type": "weapon",
+ "img": "icons/svg/sword.svg",
+ "folder": "OqdCuXcZ0pFqRc3h",
+ "system": {
+  "description": {
+   "value": "<p>Weapon(Shortsword), Special Grade</p>\n<p>You have a +4 bonus to attack and damage rolls made with this cursed tool. On a hit with this weapon, the target must make a Constitution saving throw. On a failure they take 6d10 necrotic damage.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "martialM",
+   "baseItem": "shortsword"
+  },
+  "damage": {
+   "base": {
+    "number": 1,
+    "denomination": 6,
+    "types": [
+     "slashing"
+    ]
+   }
+  },
+  "range": {
+   "value": 5,
+   "long": null,
+   "units": "ft",
+   "reach": 5
+  },
+  "properties": [
+   "fin",
+   "lgt",
+   "mgc"
+  ],
+  "proficient": null,
+  "quantity": 1,
+  "activities": {
+   "Nk8N4jHZzFT8JyEb": {
+    "_id": "Nk8N4jHZzFT8JyEb",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "melee",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   },
+   "Sfs317SeiXn7Rmzx": {
+    "_id": "Sfs317SeiXn7Rmzx",
+    "type": "save",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": [
+      {
+       "number": 6,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "magicalBonus": 4,
+  "rarity": "legendary"
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "Special Grade"
+  }
+ },
+ "_key": "!items!0mxqojrDIyUFJaH6"
+}

@@ -1,0 +1,146 @@
+{
+ "_id": "IqCosBDfGxvNyaCw",
+ "name": "Virtual Mass Increase",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/star-rage.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Star Rage — Innate Technique (1st level)</em></p><p>Beginning at 1st level, you have learned the most fundamental technique for a star rage user, the virtual mass increase. As a bonus action for an amount of Cursed Energy up to twice your Cursed Energy modifier, you gain a mass increase for each CE spent for a number of rounds equal to your Cursed Energy modifier. You gain the following benefits depending on your added mass:</p>\n<ul>\n<li>\n<p><strong>Stronger Martial Arts.</strong> Your Unarmed Strike die increases by one tier per two mass increases. (1-&gt;d4-&gt;d6-&gt;d8-&gt;d10-&gt;d12-&gt;2d8)  </p>\n</li>\n<li>\n<p><strong>Mass Impact.</strong> At one mass increase, whenever you roll a critical with an unarmed strike the target must make a Constitution saving throw or be knocked prone. At two mass increases, a creature within 5 ft of the target must make a Constitution save or take half of the same damage. At three mass increases, if the target fails the Constitution saving throw upon a critical, it will also have its speed halved until the beginning of your next turn. At four mass increases their speed will be reduced to 0 if they fail.  </p>\n</li>\n<li>\n<p><strong>Increased Damage.</strong> You gain a +1 to unarmed strikes damage rolls per mass increase.  </p>\n</li>\n<li>\n<p><strong>Grappler.</strong> At one mass increase, you count as one size larger. You count as one size larger per 2 mass increases up to Gargantuan.</p>\n</li>\n</ul>\n<p>You can only activate this technique again after the full duration has passed.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "cuxPRyAQGDEgB5Up": {
+    "_id": "cuxPRyAQGDEgB5Up",
+    "type": "save",
+    "name": "Bonus Action",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    },
+    "effects": [
+     {
+      "_id": "8OKBKcaw9GgTDcde",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "5",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Star Rage",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "8OKBKcaw9GgTDcde",
+   "name": "Prone (Virtual Mass Increase)",
+   "img": "modules/jjk5e/icons/techniques/star-rage.svg",
+   "statuses": [
+    "prone"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "rounds": 1
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!IqCosBDfGxvNyaCw.8OKBKcaw9GgTDcde"
+  }
+ ],
+ "folder": "21st6P4AJoi9hlmG",
+ "_key": "!items!IqCosBDfGxvNyaCw"
+}

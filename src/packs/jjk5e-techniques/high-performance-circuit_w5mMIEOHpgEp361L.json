@@ -1,0 +1,173 @@
+{
+ "_id": "w5mMIEOHpgEp361L",
+ "name": "High Performance Circuit",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/cursed-circuitry.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Circuitry — Innate Technique (6th level)</em></p><p>Starting at 6th level, you can now apply a high performing <em>Circuit</em> to yourself or an object you touch as a bonus action for 2 CE or a willing creature you touch for 5 CE. Your circuit now lasts for 1 hour or 10 minutes if applied to another creature.<br />\n<strong>Improved Efficiency</strong>. The base cost of a feature that requires cursed energy other than <em>Cursed Circuitry</em> features decreases by 3 (min cost of 1). If a feature’s effects depend on how much cursed energy you spend, 1 CE you spend counts as 3 CE (Eg. Spending 2 CE on Cursed Strike counts as 6 CE). This cannot cause the effective cursed energy to be higher than a feature’s output limit.<br />\n<strong>Increased Output</strong>. When a feature allows you to spend additional cursed energy to strengthen the effects, you can spend additional cursed energy up to your proficiency bonus.<br />\n<strong>Enhancement</strong>. If you apply your circuit onto an Object or Cursed Tool, it instead gains two of the following benefits of your choice:</p>\n<ul>\n<li>\n<p>The item deals an additional 2d6 necrotic damage on a hit, increasing to 2d10 at 11th level.  </p>\n</li>\n<li>\n<p>The item grants a +3 bonus to AC, increasing to +5 at 11th level.  </p>\n</li>\n<li>\n<p>The cursed energy cost of the tool decreases by 2 (min of 1). This instead decreases cost by 4 at 11th level.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "2NVKEHapFnbt8le4": {
+    "_id": "2NVKEHapFnbt8le4",
+    "type": "utility",
+    "name": "Bonus Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "hour",
+     "concentration": false,
+     "override": true
+    }
+   },
+   "35NYwF70yqZU3pJU": {
+    "_id": "35NYwF70yqZU3pJU",
+    "type": "damage",
+    "name": "Action (2 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "hour"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "2NVKEHapFnbt8le4": 2,
+    "35NYwF70yqZU3pJU": 2
+   },
+   "technique": "Cursed Circuitry",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "hm057iS0RUqvPJaN",
+ "effects": [
+  {
+   "_id": "wftLXfHdXPvGV4EQ",
+   "name": "High Performance Circuit (toggle)",
+   "img": "modules/jjk5e/icons/techniques/cursed-circuitry.svg",
+   "changes": [
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+3",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!w5mMIEOHpgEp361L.wftLXfHdXPvGV4EQ"
+  }
+ ],
+ "_key": "!items!w5mMIEOHpgEp361L"
+}

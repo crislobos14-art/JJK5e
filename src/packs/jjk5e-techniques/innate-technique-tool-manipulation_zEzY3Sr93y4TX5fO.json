@@ -1,0 +1,130 @@
+{
+ "_id": "zEzY3Sr93y4TX5fO",
+ "name": "Innate Technique: Tool Manipulation",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/tool-manipulation.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>You can control tools you imbue with cursed energy.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.st3cozIWTsDaaE5B]{Guided Control}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.mSD3lm8nPAmP6Uez]{Floating Tool}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.tqugDcnrPlxkDgBx]{Combat Tool Improvement}, @UUID[Compendium.jjk5e.jjk5e-techniques.Item.dODAFTjp3chNe4Qs]{Floating Tool Improvement}, @UUID[Compendium.jjk5e.jjk5e-techniques.Item.m41fSV57Ry2AN0QF]{Tool Improvement}, @UUID[Compendium.jjk5e.jjk5e-techniques.Item.gig1BD38hPdQI65H]{Wind Scythe}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.c2w7ELQ8oGbTnvyF]{Tool Mastery}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.zZKvJON3anKgwIvl]{Domain Expansion: Tsukumogami Spirit World}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "u7D97iOylShurOpD": {
+    "_id": "u7D97iOylShurOpD",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Tool Manipulation (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.st3cozIWTsDaaE5B",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "6bLmeVyCxTieEEHq": {
+    "_id": "6bLmeVyCxTieEEHq",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Tool Manipulation (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.mSD3lm8nPAmP6Uez",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "37gUYiXeBj6xIG37": {
+    "_id": "37gUYiXeBj6xIG37",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Tool Manipulation (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.tqugDcnrPlxkDgBx",
+       "optional": false
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.dODAFTjp3chNe4Qs",
+       "optional": false
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.m41fSV57Ry2AN0QF",
+       "optional": false
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.gig1BD38hPdQI65H",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "0O02QV0Og02T53MX": {
+    "_id": "0O02QV0Og02T53MX",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Tool Manipulation (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.c2w7ELQ8oGbTnvyF",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "m3AAs5pnaVUvLiGI": {
+    "_id": "m3AAs5pnaVUvLiGI",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Tool Manipulation (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.zZKvJON3anKgwIvl",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Tool Manipulation"
+  }
+ },
+ "_key": "!items!zEzY3Sr93y4TX5fO"
+}

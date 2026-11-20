@@ -1,0 +1,42 @@
+{
+ "_id": "nsBbLaPoahCoRCVM",
+ "name": "Maximum: Sancrosanct",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/schrift-x.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Intangibility</em></p>\n<p>You have practiced and mastered your technique allowing you to utilize it flawlessly. When you activate <em>Intangibility</em>, you are instead resistant to all damage other than psychic, but are still able to use your Innate Technique features and for the duration you can use <em>Piercing Schrift</em> for free once per turn.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Intangibility",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Intangibility"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "udJs5rzXyPeZN5uV",
+ "sort": 300,
+ "_key": "!items!nsBbLaPoahCoRCVM"
+}

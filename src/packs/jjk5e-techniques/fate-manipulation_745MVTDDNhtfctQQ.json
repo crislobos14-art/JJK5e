@@ -1,0 +1,135 @@
+{
+ "_id": "745MVTDDNhtfctQQ",
+ "name": "Fate Manipulation",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/fate.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Fate — Innate Technique (1st level)</em></p><blockquote><p>The wheel of fate is yours to steer and yours alone.</p></blockquote><p>Beginning at 1st level, you can weave together threads of fate. As an action for 2 cursed energy, you bind two creatures within 30 ft of you with an invisible red thread for 1 minute. If a Fate requires Touch, you must touch both targets, but not necessarily at the same time. You choose a Fate, +1 Fate per 2 additional CE, up to your proficiency bonus that affects both while within 30 ft of each other:</p>\n<table>\n<thead>\n<tr>\n<th style=\"text-align: center;\">Fate</th>\n<th style=\"text-align: center;\">Effect</th>\n<th style=\"text-align: center;\">Requirement</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td style=\"text-align: center;\">Bonds</td>\n<td style=\"text-align: center;\">The targets gain a +2 bonus to AC.</td>\n<td style=\"text-align: center;\">N/A</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">Promised Time?</td>\n<td style=\"text-align: center;\">The creatures both have either advantage or disadvantage on attacks against each other.</td>\n<td style=\"text-align: center;\">N/A</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">Mirrored</td>\n<td style=\"text-align: center;\">If one target rolls a 20 or 1 on their turn, the other’s next roll will be the opposite.</td>\n<td style=\"text-align: center;\">N/A</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">Magnetic</td>\n<td style=\"text-align: center;\">If targets start their turn within 30 ft of each other, they are pulled 10 ft closer. If this brings them within 5 ft, they become tangled and prone (Str save to pull away).</td>\n<td style=\"text-align: center;\">Touch</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">Shared Strengths</td>\n<td style=\"text-align: center;\">Choose a damage resistance, immunity, vulnerability or condition immunity of a target. Both targets share that strength/weakness.</td>\n<td style=\"text-align: center;\">6th level</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">Linked Suffering</td>\n<td style=\"text-align: center;\">When one of the linked targets takes damage, they take half as much damage and the linked creature takes the other half.</td>\n<td style=\"text-align: center;\">6th level, Touch</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">Destined Death</td>\n<td style=\"text-align: center;\">The targets both have either advantage or disadvantage on saves against each other.</td>\n<td style=\"text-align: center;\">11th level, Touch</td>\n</tr>\n</tbody>\n</table>\n<p>An effect that would damage the soul is capable of cutting your thread and removing your technique’s effects. Additionally, you cannot manipulate the fate of a creature that is completely lacking cursed energy (such as via Heavenly Restriction).</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "y0xkFff9ta46MTeq": {
+    "_id": "y0xkFff9ta46MTeq",
+    "type": "utility",
+    "name": "Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "value": "30",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "y0xkFff9ta46MTeq": 2
+   },
+   "technique": "Fate",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "UdYh82jLla1edrDf",
+ "effects": [
+  {
+   "_id": "gvIMz85YIK6Emwtc",
+   "name": "Fate Manipulation (toggle)",
+   "img": "modules/jjk5e/icons/techniques/fate.svg",
+   "changes": [
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+2",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!745MVTDDNhtfctQQ.gvIMz85YIK6Emwtc"
+  }
+ ],
+ "_key": "!items!745MVTDDNhtfctQQ"
+}

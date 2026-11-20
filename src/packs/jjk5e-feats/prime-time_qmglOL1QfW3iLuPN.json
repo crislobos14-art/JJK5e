@@ -1,0 +1,95 @@
+{
+ "_id": "qmglOL1QfW3iLuPN",
+ "name": "Prime Time",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/golden-hour.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Golden Week</em></p>\n<p>Instead of making your technique last longer, you can increase the intensity to create an even sharper burst. When you use <em>Majestic Pose</em>, you can spend an additional 3 cursed energy to instead quadruple your movement speed and gain a +5 bonus to attack rolls within stopped time. However, once time resumes you are unable to move or take actions until the end of your next turn, as a wave of lethargy sweeps over you.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Golden Week",
+  "activities": {
+   "BG3CqygYdRPvci25": {
+    "_id": "BG3CqygYdRPvci25",
+    "type": "utility",
+    "name": "Extra (3 CE)",
+    "sort": 900000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "When you use Majestic Pose, you can spend an additional 3 cursed energy to instead quad..."
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "BG3CqygYdRPvci25": 3
+   },
+   "prereq": {
+    "features": [
+     [
+      "Golden Week"
+     ]
+    ]
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "fjqzcx5oiYrYXmbX",
+   "name": "Prime Time (toggle)",
+   "img": "modules/jjk5e/icons/techniques/golden-hour.svg",
+   "changes": [
+    {
+     "key": "system.bonuses.mwak.attack",
+     "mode": 2,
+     "value": "+5",
+     "priority": null
+    },
+    {
+     "key": "system.bonuses.rwak.attack",
+     "mode": 2,
+     "value": "+5",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!qmglOL1QfW3iLuPN.fjqzcx5oiYrYXmbX"
+  }
+ ],
+ "folder": "d3tvju1gFLiRbf1c",
+ "sort": 200,
+ "_key": "!items!qmglOL1QfW3iLuPN"
+}

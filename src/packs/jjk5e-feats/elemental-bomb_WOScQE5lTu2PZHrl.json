@@ -1,0 +1,42 @@
+{
+ "_id": "WOScQE5lTu2PZHrl",
+ "name": "Elemental Bomb",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/explosive-flesh.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Guerilla Tactics</em></p>\n<p>You have learned how to create different types of explosions, making them create different effects. You can spend additional cursed energy equal to the energy spent in using the bomb to make them an elemental bomb. The elemental bomb will deal additional dice of fire, cold or lightning damage, equal to the original bombs' damage.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Guerilla Tactics",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Guerilla Tactics"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "vYo4tKf7KcEIUKP8",
+ "sort": 200,
+ "_key": "!items!WOScQE5lTu2PZHrl"
+}

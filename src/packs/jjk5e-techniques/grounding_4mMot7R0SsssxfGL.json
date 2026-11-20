@@ -1,0 +1,77 @@
+{
+ "_id": "4mMot7R0SsssxfGL",
+ "name": "Grounding",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/teleportation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Teleportation — Cursed Technique Reversal</em></p><p>You have mastered Reverse Cursed Technique and unlocked your cursed technique reversal. You have now learned how to force people to stay still by reversing your technique. As a bonus action for 2 cursed energy, you can cover an enemy and force them to make a CE saving throw. This must be an enemy that is not being viewed by other creatures or they must be in melee range so you can cover them with your sheet. On a failure, their speed is reduced to 0 for 1 minute, on a success they are not affected. A creature who fails can repeat the saving throw at the end of their turns, ending the effect on a success.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Teleportation",
+  "activities": {
+   "14o9RFO6KUqSMXCP": {
+    "_id": "14o9RFO6KUqSMXCP",
+    "type": "utility",
+    "name": "Bonus Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "14o9RFO6KUqSMXCP": 2
+   },
+   "technique": "Teleportation",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Teleportation"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!4mMot7R0SsssxfGL"
+}

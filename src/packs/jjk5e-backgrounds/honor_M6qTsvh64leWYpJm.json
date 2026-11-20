@@ -1,0 +1,46 @@
+{
+ "_id": "M6qTsvh64leWYpJm",
+ "name": "Honor",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/mindset.svg",
+ "system": {
+  "description": {
+   "value": "<p>Your name carries weight, and with it, duty. You fight for the principles that define you. When you use your inspiration, for the next minute if an ally within 10 feet is damaged, you can choose to interpose yourself and force the attack to target you and take half damage, as you uphold your honor by protecting those under your watch.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": ""
+  },
+  "requirements": "Mindset",
+  "activities": {
+   "TmoyY5PyXJIMJoDu": {
+    "_id": "TmoyY5PyXJIMJoDu",
+    "type": "utility",
+    "name": "Use Inspiration",
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Spend your inspiration"
+    },
+    "consumption": {
+     "targets": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "mindset": true
+  }
+ },
+ "folder": "ymyii86sdbVo8H5C",
+ "_key": "!items!M6qTsvh64leWYpJm"
+}

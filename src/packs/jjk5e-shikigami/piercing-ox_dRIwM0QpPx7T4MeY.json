@@ -1,0 +1,347 @@
+{
+ "_id": "dRIwM0QpPx7T4MeY",
+ "name": "Piercing Ox",
+ "type": "npc",
+ "img": "modules/jjk5e/icons/shikigami/piercing-ox.svg",
+ "system": {
+  "abilities": {
+   "str": {
+    "value": 24,
+    "proficient": 1
+   },
+   "dex": {
+    "value": 12,
+    "proficient": 0
+   },
+   "con": {
+    "value": 18,
+    "proficient": 0
+   },
+   "int": {
+    "value": 7,
+    "proficient": 0
+   },
+   "wis": {
+    "value": 12,
+    "proficient": 0
+   },
+   "cha": {
+    "value": 7,
+    "proficient": 0
+   }
+  },
+  "attributes": {
+   "ac": {
+    "calc": "flat",
+    "flat": 13
+   },
+   "hp": {
+    "value": 118,
+    "max": 118,
+    "formula": ""
+   },
+   "movement": {
+    "walk": 60,
+    "units": "ft",
+    "hover": false
+   },
+   "senses": {
+    "darkvision": 60,
+    "units": "ft",
+    "special": ""
+   }
+  },
+  "details": {
+   "cr": 8,
+   "alignment": "Unaligned",
+   "type": {
+    "value": "monstrosity",
+    "subtype": "",
+    "swarm": "",
+    "custom": "Shikigami"
+   },
+   "biography": {
+    "value": "<p><em>Piercing Ox</em> — Ten Shadows shikigami. Summon cost: 10 Cursed Energy. AC and hit points scale with the summoner's proficiency bonus when summoned through the Ten Shadows features.</p>"
+   }
+  },
+  "traits": {
+   "size": "lg",
+   "dr": {
+    "value": []
+   },
+   "ci": {
+    "value": []
+   },
+   "languages": {
+    "value": []
+   }
+  },
+  "skills": {
+   "ath": {
+    "value": 2,
+    "ability": "str"
+   }
+  },
+  "resources": {
+   "legact": {
+    "max": 0,
+    "spent": 0
+   },
+   "legres": {
+    "max": 0,
+    "spent": 0
+   }
+  }
+ },
+ "items": [
+  {
+   "_id": "EZ5AHGjKyDF2L28i",
+   "name": "Unrelenting Charge",
+   "type": "feat",
+   "img": "icons/svg/aura.svg",
+   "system": {
+    "description": {
+     "value": "<p>Piercing Ox deals an additional d12 of damage for every 10 feet it moves in a straight line (up to a maximum of 20 additional dice) before hitting a target with its gore.</p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Ten Shadows"
+    },
+    "activities": {},
+    "type": {
+     "value": "monster",
+     "subtype": ""
+    },
+    "requirements": "",
+    "properties": [],
+    "uses": {
+     "max": "",
+     "recovery": [],
+     "spent": 0
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!dRIwM0QpPx7T4MeY.EZ5AHGjKyDF2L28i"
+  },
+  {
+   "_id": "HXVyfwpXlWMWxrgj",
+   "name": "Gore",
+   "type": "weapon",
+   "img": "icons/svg/sword.svg",
+   "system": {
+    "description": {
+     "value": "<p></p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Ten Shadows"
+    },
+    "activities": {
+     "1CpxZ0s089taiJM5": {
+      "_id": "1CpxZ0s089taiJM5",
+      "type": "attack",
+      "name": "",
+      "sort": 0,
+      "activation": {
+       "type": "action",
+       "value": 1,
+       "condition": "",
+       "override": false
+      },
+      "consumption": {
+       "targets": [],
+       "scaling": {
+        "allowed": false
+       },
+       "spellSlot": false
+      },
+      "duration": {
+       "units": "inst",
+       "concentration": false,
+       "override": false
+      },
+      "range": {
+       "override": false
+      },
+      "target": {
+       "override": false,
+       "prompt": true,
+       "affects": {
+        "count": "1",
+        "type": "creature"
+       }
+      },
+      "attack": {
+       "ability": "str",
+       "bonus": "",
+       "critical": {
+        "threshold": null
+       },
+       "flat": false,
+       "type": {
+        "value": "melee",
+        "classification": "weapon"
+       }
+      },
+      "damage": {
+       "critical": {
+        "bonus": ""
+       },
+       "includeBase": true,
+       "parts": []
+      }
+     }
+    },
+    "type": {
+     "value": "natural",
+     "baseItem": ""
+    },
+    "ability": "str",
+    "proficient": 1,
+    "equipped": true,
+    "damage": {
+     "base": {
+      "number": 1,
+      "denomination": 12,
+      "bonus": "",
+      "types": [
+       "piercing"
+      ],
+      "custom": {
+       "enabled": false,
+       "formula": ""
+      },
+      "scaling": {
+       "mode": "",
+       "number": null,
+       "formula": ""
+      }
+     }
+    },
+    "range": {
+     "reach": 5,
+     "value": null,
+     "long": null,
+     "units": "ft"
+    },
+    "magicalBonus": null,
+    "properties": [],
+    "uses": {
+     "max": "",
+     "recovery": [],
+     "spent": 0
+    },
+    "quantity": 1,
+    "weight": {
+     "value": 0,
+     "units": "lb"
+    },
+    "price": {
+     "value": 0,
+     "denomination": "gp"
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!dRIwM0QpPx7T4MeY.HXVyfwpXlWMWxrgj"
+  },
+  {
+   "_id": "5RHPTcmgxZUo6CRL",
+   "name": "Aggressive",
+   "type": "feat",
+   "img": "icons/svg/aura.svg",
+   "system": {
+    "description": {
+     "value": "<p>As a bonus action, Piercing Ox can move up to its speed toward a hostile creature that it can see.</p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Ten Shadows"
+    },
+    "activities": {
+     "ea3wnhgDWa1EOlmc": {
+      "_id": "ea3wnhgDWa1EOlmc",
+      "type": "utility",
+      "name": "",
+      "sort": 0,
+      "activation": {
+       "type": "bonus",
+       "value": 1,
+       "condition": "",
+       "override": false
+      },
+      "consumption": {
+       "targets": [],
+       "scaling": {
+        "allowed": false
+       },
+       "spellSlot": false
+      },
+      "duration": {
+       "units": "inst",
+       "concentration": false,
+       "override": false
+      },
+      "range": {
+       "override": false
+      },
+      "target": {
+       "override": false,
+       "prompt": true
+      }
+     }
+    },
+    "type": {
+     "value": "monster",
+     "subtype": ""
+    },
+    "requirements": "",
+    "properties": [],
+    "uses": {
+     "max": "",
+     "recovery": [],
+     "spent": 0
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!dRIwM0QpPx7T4MeY.5RHPTcmgxZUo6CRL"
+  }
+ ],
+ "effects": [],
+ "prototypeToken": {
+  "name": "Piercing Ox",
+  "actorLink": false,
+  "disposition": 1,
+  "width": 2,
+  "height": 2,
+  "texture": {
+   "src": "modules/jjk5e/icons/shikigami/piercing-ox.svg"
+  },
+  "displayName": 20,
+  "displayBars": 20,
+  "bar1": {
+   "attribute": "attributes.hp"
+  },
+  "sight": {
+   "enabled": true
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "shikigami": true,
+   "ceCost": 10,
+   "hpPerProf": 4,
+   "dmgProf": false
+  }
+ },
+ "folder": null,
+ "_key": "!actors!dRIwM0QpPx7T4MeY"
+}

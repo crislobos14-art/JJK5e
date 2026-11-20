@@ -1,0 +1,92 @@
+{
+ "_id": "us4vpuR3VHkSqbfn",
+ "name": "Corpse Tactics",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/cursed-corpse-creation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Corpse Creation — Innate Technique (3rd level)</em></p><p>At 3rd level, you have learned new ways to command your cursed corpses during combat. You can use one of these tactics as part of the bonus action you take to command your Cursed Corpses and lasts until the start of your next turn.</p>\n<p><strong>Cooperative Tactics.</strong> You give one of your Cursed Corpses advantage on an attack or saving throw on their turn.<br />\n<strong>Offensive Tactics.</strong> You cause one of your Cursed Corpses to deal an additional damage die on a hit.<br />\n<strong>Defensive Tactics.</strong> You let one of your Cursed Corpses take the Dodge action as a bonus action.<br />\n<strong>Guerilla Tactics.</strong> You let one of your cursed Corpses take the Disengage action as a bonus action.<br />\n<strong>Mobility Tactics.</strong> You let one of your Cursed Corpses take the Dash action as a bonus action.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "i2cOkYwbrMPSPXvS": {
+    "_id": "i2cOkYwbrMPSPXvS",
+    "type": "utility",
+    "name": "Bonus Action",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Cursed Corpse Creation",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "qwzwYySzpsiw4XHW",
+ "_key": "!items!us4vpuR3VHkSqbfn"
+}

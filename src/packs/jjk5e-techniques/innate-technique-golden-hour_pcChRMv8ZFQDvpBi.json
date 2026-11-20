@@ -1,0 +1,118 @@
+{
+ "_id": "pcChRMv8ZFQDvpBi",
+ "name": "Innate Technique: Golden Hour",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/golden-hour.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>You have the unique ability to manipulate time when you strike a pose.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.4q9OGsvSzNAxybcY]{Golden Hour}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.by9eHzYOCKk4O6zh]{Majestic Pose}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.BiQmr9X82yv0uLD4]{Golden Week}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.GHA3E4TudpXbvdC4]{Samsara Rewind}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.3bit65lbBkYI7DGN]{Domain Expansion: The World}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "GPXekDsIfGG26UKm": {
+    "_id": "GPXekDsIfGG26UKm",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Golden Hour (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.4q9OGsvSzNAxybcY",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "GGGvDbJyn9l1zBqC": {
+    "_id": "GGGvDbJyn9l1zBqC",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Golden Hour (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.by9eHzYOCKk4O6zh",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "soB4FBXrB4VueLgh": {
+    "_id": "soB4FBXrB4VueLgh",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Golden Hour (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.BiQmr9X82yv0uLD4",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "7e711jKFnz0KB31x": {
+    "_id": "7e711jKFnz0KB31x",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Golden Hour (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.GHA3E4TudpXbvdC4",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "7ZCgIOnOxJdx9sMM": {
+    "_id": "7ZCgIOnOxJdx9sMM",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Golden Hour (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.3bit65lbBkYI7DGN",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Golden Hour"
+  }
+ },
+ "_key": "!items!pcChRMv8ZFQDvpBi"
+}

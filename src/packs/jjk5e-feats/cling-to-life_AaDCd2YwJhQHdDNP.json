@@ -1,0 +1,42 @@
+{
+ "_id": "AaDCd2YwJhQHdDNP",
+ "name": "Cling to Life",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/seance.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Maximum: Black Seance</em></p>\n<p>When a target runs out of cursed energy and can no longer maintain the seance, they can choose to forcefully hold the spirit within their body. At the beginning of the target’s turn, they instead spend 5 HP, reducing their maximum by the same amount. Your hit point maximum is restored by 15 after each long rest.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Maximum: Black Seance",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Maximum: Black Seance"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "Bzl0QdjoRI5R4DB5",
+ "sort": 300,
+ "_key": "!items!AaDCd2YwJhQHdDNP"
+}

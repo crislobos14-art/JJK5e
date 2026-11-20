@@ -1,0 +1,71 @@
+{
+ "_id": "V06eGkoDGUNYKBpt",
+ "name": "Meant to be Expendable",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/clone.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have One Man Army</em></p>\n<p>As a reaction to damage, you can spend 4 CE to summon a Clone, which shoves you 5 feet and takes the damage in your place.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have One Man Army",
+  "activities": {
+   "M0J6GhFeC1nwwwwB": {
+    "_id": "M0J6GhFeC1nwwwwB",
+    "type": "utility",
+    "name": "Reaction (4 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "M0J6GhFeC1nwwwwB": 4
+   },
+   "prereq": {
+    "features": [
+     [
+      "One Man Army"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "PMUUoKMzebFsTMdN",
+ "sort": 100,
+ "_key": "!items!V06eGkoDGUNYKBpt"
+}

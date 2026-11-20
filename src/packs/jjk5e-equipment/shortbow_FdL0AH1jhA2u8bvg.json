@@ -1,0 +1,74 @@
+{
+ "_id": "FdL0AH1jhA2u8bvg",
+ "name": "Shortbow",
+ "type": "weapon",
+ "img": "icons/svg/sword.svg",
+ "folder": "8L9REK3UZxFoXRJA",
+ "system": {
+  "description": {
+   "value": "<p>Simple ranged weapon. 1d6 piercing. Ammunition (80/320), Two-handed.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "simpleR",
+   "baseItem": "shortbow"
+  },
+  "damage": {
+   "base": {
+    "number": 1,
+    "denomination": 6,
+    "types": [
+     "piercing"
+    ]
+   }
+  },
+  "range": {
+   "value": 80,
+   "long": 320,
+   "units": "ft"
+  },
+  "properties": [
+   "amm",
+   "two"
+  ],
+  "proficient": null,
+  "price": {
+   "value": 25.0,
+   "denomination": "gp"
+  },
+  "quantity": 1,
+  "activities": {
+   "EpjJ7UKpOf3p40Yv": {
+    "_id": "EpjJ7UKpOf3p40Yv",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "ranged",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "priceUSD": "$2,500"
+  }
+ },
+ "_key": "!items!FdL0AH1jhA2u8bvg"
+}

@@ -1,0 +1,153 @@
+{
+ "_id": "MLLR1v3HhPAmTEO8",
+ "name": "Flower Field",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/disaster-verdure.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Disaster Verdure — Innate Technique (6th level)</em></p><p>At 6th level, you can create a circle of flower petals that surrounds your opponents and removes their will to fight. As an action for 5 Cursed Energy, you create a 30 ft diameter circle in a point within 100 feet of yourself, all creatures within that circle must make a Wisdom saving throw. On a failure they are charmed for 1 minute as their will to fight is completely drained and their mind enters a state of tranquility and happiness. While charmed in this way, they are unable to take any kind of actions that would help in the battle. A creature can repeat the save at the beginning of its turn or when they take damage. Any attacks against a charmed creature is made at advantage, and any saving throws other than saves against this feature the creature makes are at disadvantage.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "l7JoSf52R5Q74d2w": {
+    "_id": "l7JoSf52R5Q74d2w",
+    "type": "save",
+    "name": "Action (5 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "100",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "wis"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    },
+    "effects": [
+     {
+      "_id": "51wXQEJbwvjC2CY1",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "value": "100",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "l7JoSf52R5Q74d2w": 5
+   },
+   "technique": "Disaster Verdure",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "51wXQEJbwvjC2CY1",
+   "name": "Charmed (Flower Field)",
+   "img": "modules/jjk5e/icons/techniques/disaster-verdure.svg",
+   "statuses": [
+    "charmed"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "seconds": 60,
+    "rounds": 10
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "charmed"
+    }
+   },
+   "_key": "!items.effects!MLLR1v3HhPAmTEO8.51wXQEJbwvjC2CY1"
+  }
+ ],
+ "folder": "iWhpioZs4gSAxzA7",
+ "_key": "!items!MLLR1v3HhPAmTEO8"
+}

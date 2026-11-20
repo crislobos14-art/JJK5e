@@ -1,0 +1,75 @@
+{
+ "_id": "5ueDN0QDt0RAWLj0",
+ "name": "Longbow",
+ "type": "weapon",
+ "img": "icons/svg/sword.svg",
+ "folder": "8L9REK3UZxFoXRJA",
+ "system": {
+  "description": {
+   "value": "<p>Martial ranged weapon. 1d8 piercing. Ammunition(150/600), heavy, two-handed.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "martialR",
+   "baseItem": "longbow"
+  },
+  "damage": {
+   "base": {
+    "number": 1,
+    "denomination": 8,
+    "types": [
+     "piercing"
+    ]
+   }
+  },
+  "range": {
+   "value": 150,
+   "long": 600,
+   "units": "ft"
+  },
+  "properties": [
+   "amm",
+   "hvy",
+   "two"
+  ],
+  "proficient": null,
+  "price": {
+   "value": 50.0,
+   "denomination": "gp"
+  },
+  "quantity": 1,
+  "activities": {
+   "nNoJc9jYpuH52OPQ": {
+    "_id": "nNoJc9jYpuH52OPQ",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "ranged",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "priceUSD": "$5,000"
+  }
+ },
+ "_key": "!items!5ueDN0QDt0RAWLj0"
+}

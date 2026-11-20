@@ -1,0 +1,42 @@
+{
+ "_id": "lec3iOX8JHH2kjEd",
+ "name": "Web of Fate",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/fate.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Cursed Eyes of Fate</em></p>\n<p>When you cast a <em>Fate</em> onto targets, you can instead target a number of creatures equal to 1 + your proficiency bonus within range. If the <em>Fate</em> requires Touch, you must touch all targets of the technique.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Cursed Eyes of Fate",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Cursed Eyes of Fate"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "MeEjv8rwdOA6DSvK",
+ "sort": 200,
+ "_key": "!items!lec3iOX8JHH2kjEd"
+}

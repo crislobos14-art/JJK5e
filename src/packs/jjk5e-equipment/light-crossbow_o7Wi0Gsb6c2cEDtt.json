@@ -1,0 +1,75 @@
+{
+ "_id": "o7Wi0Gsb6c2cEDtt",
+ "name": "Light Crossbow",
+ "type": "weapon",
+ "img": "icons/svg/sword.svg",
+ "folder": "8L9REK3UZxFoXRJA",
+ "system": {
+  "description": {
+   "value": "<p>Simple ranged weapon. 1d8 piercing. Ammunition (80/320), loading, Two-handed.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "simpleR",
+   "baseItem": "lightcrossbow"
+  },
+  "damage": {
+   "base": {
+    "number": 1,
+    "denomination": 8,
+    "types": [
+     "piercing"
+    ]
+   }
+  },
+  "range": {
+   "value": 80,
+   "long": 320,
+   "units": "ft"
+  },
+  "properties": [
+   "amm",
+   "lod",
+   "two"
+  ],
+  "proficient": null,
+  "price": {
+   "value": 25.0,
+   "denomination": "gp"
+  },
+  "quantity": 1,
+  "activities": {
+   "2bI7EITfyMATUnKe": {
+    "_id": "2bI7EITfyMATUnKe",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "ranged",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "priceUSD": "$2,500"
+  }
+ },
+ "_key": "!items!o7Wi0Gsb6c2cEDtt"
+}

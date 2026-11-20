@@ -1,0 +1,95 @@
+{
+ "_id": "SDramqMcTdzcvVKw",
+ "name": "Four is a Party",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/clone.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Clone — Innate Technique (11th level)</em></p><p>At 11th level, you have mastered the ability to choose which of your Clones is your actual body. Your Clones have hit points equal to yours and you can swap bodies with one of your clones as a bonus action for 1 CE, trading hit points and causing that Clone to become your new body. When you are reduced to 0 hit points or killed outright while you have a Clone active, you can instead transfer yourself into one of your clones, gaining the Clone’s current hit points.</p>\n<p>Your Clones can now create one Clone by spending your Cursed Energy with each Clone counting against your limit.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "RXgYAERWoLMPOHZ8": {
+    "_id": "RXgYAERWoLMPOHZ8",
+    "type": "utility",
+    "name": "Bonus Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "RXgYAERWoLMPOHZ8": 1
+   },
+   "technique": "Clone",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "FD3rp7a4OW9fKrOc",
+ "_key": "!items!SDramqMcTdzcvVKw"
+}

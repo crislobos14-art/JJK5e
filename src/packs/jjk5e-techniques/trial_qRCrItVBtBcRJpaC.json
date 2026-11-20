@@ -1,0 +1,783 @@
+{
+ "_id": "qRCrItVBtBcRJpaC",
+ "name": "Trial",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/ten-shadows.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Ten Shadows — Innate Technique (3rd level)</em></p><p>Once you reach the 3rd level, you have gained access to your other spirits, and you must face them in ritual combat alone to gain access to them. As an action, you can summon an untamed Shikigami within 30 ft of you without spending cursed energy. Any creature within 50 feet is considered participating in the ritual. An untamed shikigami will be berserk (attack the nearest creature), but if you have defeated the <a href=\"https://docs.google.com/document/d/1EMuqLweHWYLnx1On473iLcpcU0xnmZ3qBlKh91p7-hU/edit?tab=t.0\">shikigami</a> alone (not including your shikigami) and reduce it to 0 hit points, you can now summon the <a href=\"https://docs.google.com/document/d/1EMuqLweHWYLnx1On473iLcpcU0xnmZ3qBlKh91p7-hU/edit?tab=t.0\">shikigami</a> normally as an action for up to 1 hour and can dismiss them as a bonus action. You can summon a number of <a href=\"https://docs.google.com/document/d/1EMuqLweHWYLnx1On473iLcpcU0xnmZ3qBlKh91p7-hU/edit?tab=t.0\">shikigami</a> at a time equal to half your level rounded up (Divine Dogs and Rabbits each count as one entity).</p>\n<table>\n<thead>\n<tr>\n<th style=\"text-align: left;\">Cursed Energy</th>\n<th style=\"text-align: left;\">Shikigami</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td style=\"text-align: left;\">1 Cursed Energy</td>\n<td style=\"text-align: left;\">Gama</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">2 Cursed Energy</td>\n<td style=\"text-align: left;\">Nue</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">4 Cursed Energy</td>\n<td style=\"text-align: left;\">Great Serpent</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">6 Cursed Energy</td>\n<td style=\"text-align: left;\">Rabbit Escape</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">7 Cursed Energy</td>\n<td style=\"text-align: left;\">Mourn Tiger</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">8 Cursed Energy</td>\n<td style=\"text-align: left;\">Max Elephant</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">9 Cursed Energy</td>\n<td style=\"text-align: left;\">Round Deer</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">10 Cursed Energy</td>\n<td style=\"text-align: left;\">Piercing Ox</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">20 Cursed Energy</td>\n<td style=\"text-align: left;\">Divine General Mahoraga</td>\n</tr>\n</tbody>\n</table>\n<p>If reduced to 0 hit points during a trial with multiple participants, you do not make death saving throws until all participants are unconscious.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "GIb9Yt3s4aeTqp4K": {
+    "_id": "GIb9Yt3s4aeTqp4K",
+    "type": "utility",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   },
+   "CgMIB2UA7oyD1B7b": {
+    "_id": "CgMIB2UA7oyD1B7b",
+    "type": "summon",
+    "name": "Summon Gama (1 CE)",
+    "sort": 1000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "value": "1",
+     "units": "hour",
+     "concentration": false,
+     "override": true
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "override": true,
+     "prompt": false
+    },
+    "bonuses": {
+     "ac": "@prof",
+     "hp": "2 * @prof",
+     "attackDamage": "",
+     "hd": "",
+     "saveDamage": "",
+     "healing": ""
+    },
+    "creatureSizes": [],
+    "creatureTypes": [],
+    "match": {
+     "proficiency": true,
+     "disposition": true,
+     "attacks": false,
+     "saves": false,
+     "ability": ""
+    },
+    "profiles": [
+     {
+      "_id": "ZEXgV6ASImVHifZX",
+      "count": "1",
+      "cr": "",
+      "level": {
+       "min": null,
+       "max": null
+      },
+      "name": "Gama",
+      "types": [],
+      "uuid": "Actor.tMGu9BVVfpcFPwvD"
+     }
+    ],
+    "summon": {
+     "mode": "",
+     "prompt": true
+    },
+    "tempHP": ""
+   },
+   "WiGe14HGuDNFK3oT": {
+    "_id": "WiGe14HGuDNFK3oT",
+    "type": "summon",
+    "name": "Summon Nue (2 CE)",
+    "sort": 2000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "value": "1",
+     "units": "hour",
+     "concentration": false,
+     "override": true
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "override": true,
+     "prompt": false
+    },
+    "bonuses": {
+     "ac": "@prof",
+     "hp": "2 * @prof",
+     "attackDamage": "",
+     "hd": "",
+     "saveDamage": "",
+     "healing": ""
+    },
+    "creatureSizes": [],
+    "creatureTypes": [],
+    "match": {
+     "proficiency": true,
+     "disposition": true,
+     "attacks": false,
+     "saves": false,
+     "ability": ""
+    },
+    "profiles": [
+     {
+      "_id": "ruFxpEYOfAODpAia",
+      "count": "1",
+      "cr": "",
+      "level": {
+       "min": null,
+       "max": null
+      },
+      "name": "Nue",
+      "types": [],
+      "uuid": "Actor.3Jt1pYK8alAAf0yK"
+     }
+    ],
+    "summon": {
+     "mode": "",
+     "prompt": true
+    },
+    "tempHP": ""
+   },
+   "EYNXif8dlmqnAGSU": {
+    "_id": "EYNXif8dlmqnAGSU",
+    "type": "summon",
+    "name": "Summon Great Serpent (4 CE)",
+    "sort": 3000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "value": "1",
+     "units": "hour",
+     "concentration": false,
+     "override": true
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "override": true,
+     "prompt": false
+    },
+    "bonuses": {
+     "ac": "@prof",
+     "hp": "3 * @prof",
+     "attackDamage": "",
+     "hd": "",
+     "saveDamage": "",
+     "healing": ""
+    },
+    "creatureSizes": [],
+    "creatureTypes": [],
+    "match": {
+     "proficiency": true,
+     "disposition": true,
+     "attacks": false,
+     "saves": false,
+     "ability": ""
+    },
+    "profiles": [
+     {
+      "_id": "brsLeeQSXJO7CNe9",
+      "count": "1",
+      "cr": "",
+      "level": {
+       "min": null,
+       "max": null
+      },
+      "name": "Great Serpent",
+      "types": [],
+      "uuid": "Actor.WoDYZcWCNnDrfqf8"
+     }
+    ],
+    "summon": {
+     "mode": "",
+     "prompt": true
+    },
+    "tempHP": ""
+   },
+   "y1WkAUYBMEjnrzyj": {
+    "_id": "y1WkAUYBMEjnrzyj",
+    "type": "summon",
+    "name": "Summon Rabbit Escape (6 CE)",
+    "sort": 4000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "value": "1",
+     "units": "hour",
+     "concentration": false,
+     "override": true
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "override": true,
+     "prompt": false
+    },
+    "bonuses": {
+     "ac": "@prof",
+     "hp": "5 * @prof",
+     "attackDamage": "",
+     "hd": "",
+     "saveDamage": "",
+     "healing": ""
+    },
+    "creatureSizes": [],
+    "creatureTypes": [],
+    "match": {
+     "proficiency": true,
+     "disposition": true,
+     "attacks": false,
+     "saves": false,
+     "ability": ""
+    },
+    "profiles": [
+     {
+      "_id": "AlCEWAJ4EFA9H6mn",
+      "count": "1",
+      "cr": "",
+      "level": {
+       "min": null,
+       "max": null
+      },
+      "name": "Rabbit Escape",
+      "types": [],
+      "uuid": "Actor.7rW9n8RAYixAqSVJ"
+     }
+    ],
+    "summon": {
+     "mode": "",
+     "prompt": true
+    },
+    "tempHP": ""
+   },
+   "mZEglaN8EEboJKdr": {
+    "_id": "mZEglaN8EEboJKdr",
+    "type": "summon",
+    "name": "Summon Mourning Tiger (7 CE)",
+    "sort": 5000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "value": "1",
+     "units": "hour",
+     "concentration": false,
+     "override": true
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "override": true,
+     "prompt": false
+    },
+    "bonuses": {
+     "ac": "@prof",
+     "hp": "4 * @prof",
+     "attackDamage": "",
+     "hd": "",
+     "saveDamage": "",
+     "healing": ""
+    },
+    "creatureSizes": [],
+    "creatureTypes": [],
+    "match": {
+     "proficiency": true,
+     "disposition": true,
+     "attacks": false,
+     "saves": false,
+     "ability": ""
+    },
+    "profiles": [
+     {
+      "_id": "TJ2OTU5Bi3KSWb2M",
+      "count": "1",
+      "cr": "",
+      "level": {
+       "min": null,
+       "max": null
+      },
+      "name": "Mourning Tiger",
+      "types": [],
+      "uuid": "Actor.WnMpN5dDtG00cBTw"
+     }
+    ],
+    "summon": {
+     "mode": "",
+     "prompt": true
+    },
+    "tempHP": ""
+   },
+   "SuazGsEn6RwAuSlo": {
+    "_id": "SuazGsEn6RwAuSlo",
+    "type": "summon",
+    "name": "Summon Max Elephant (8 CE)",
+    "sort": 6000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "value": "1",
+     "units": "hour",
+     "concentration": false,
+     "override": true
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "override": true,
+     "prompt": false
+    },
+    "bonuses": {
+     "ac": "@prof",
+     "hp": "4 * @prof",
+     "attackDamage": "",
+     "hd": "",
+     "saveDamage": "",
+     "healing": ""
+    },
+    "creatureSizes": [],
+    "creatureTypes": [],
+    "match": {
+     "proficiency": true,
+     "disposition": true,
+     "attacks": false,
+     "saves": false,
+     "ability": ""
+    },
+    "profiles": [
+     {
+      "_id": "B9oiHKNeNYwHVtQN",
+      "count": "1",
+      "cr": "",
+      "level": {
+       "min": null,
+       "max": null
+      },
+      "name": "Max Elephant",
+      "types": [],
+      "uuid": "Actor.bv2qBx43QBnd9WJO"
+     }
+    ],
+    "summon": {
+     "mode": "",
+     "prompt": true
+    },
+    "tempHP": ""
+   },
+   "ZOCLEJjcHkbpPPJH": {
+    "_id": "ZOCLEJjcHkbpPPJH",
+    "type": "summon",
+    "name": "Summon Round Deer (9 CE)",
+    "sort": 7000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "value": "1",
+     "units": "hour",
+     "concentration": false,
+     "override": true
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "override": true,
+     "prompt": false
+    },
+    "bonuses": {
+     "ac": "@prof",
+     "hp": "4 * @prof",
+     "attackDamage": "",
+     "hd": "",
+     "saveDamage": "",
+     "healing": ""
+    },
+    "creatureSizes": [],
+    "creatureTypes": [],
+    "match": {
+     "proficiency": true,
+     "disposition": true,
+     "attacks": false,
+     "saves": false,
+     "ability": ""
+    },
+    "profiles": [
+     {
+      "_id": "5wWL7P4FOZb1fAbo",
+      "count": "1",
+      "cr": "",
+      "level": {
+       "min": null,
+       "max": null
+      },
+      "name": "Round Deer",
+      "types": [],
+      "uuid": "Actor.tFnezTx8wJQF4GQG"
+     }
+    ],
+    "summon": {
+     "mode": "",
+     "prompt": true
+    },
+    "tempHP": ""
+   },
+   "IRTS95BmUOD4S1x2": {
+    "_id": "IRTS95BmUOD4S1x2",
+    "type": "summon",
+    "name": "Summon Piercing Ox (10 CE)",
+    "sort": 8000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "value": "1",
+     "units": "hour",
+     "concentration": false,
+     "override": true
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "override": true,
+     "prompt": false
+    },
+    "bonuses": {
+     "ac": "@prof",
+     "hp": "4 * @prof",
+     "attackDamage": "",
+     "hd": "",
+     "saveDamage": "",
+     "healing": ""
+    },
+    "creatureSizes": [],
+    "creatureTypes": [],
+    "match": {
+     "proficiency": true,
+     "disposition": true,
+     "attacks": false,
+     "saves": false,
+     "ability": ""
+    },
+    "profiles": [
+     {
+      "_id": "aQs21974dWwFjcid",
+      "count": "1",
+      "cr": "",
+      "level": {
+       "min": null,
+       "max": null
+      },
+      "name": "Piercing Ox",
+      "types": [],
+      "uuid": "Actor.dRIwM0QpPx7T4MeY"
+     }
+    ],
+    "summon": {
+     "mode": "",
+     "prompt": true
+    },
+    "tempHP": ""
+   },
+   "EEmAyNxjNLkLCRhI": {
+    "_id": "EEmAyNxjNLkLCRhI",
+    "type": "summon",
+    "name": "Summon Mahoraga (20 CE)",
+    "sort": 9000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "value": "1",
+     "units": "hour",
+     "concentration": false,
+     "override": true
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "override": true,
+     "prompt": false
+    },
+    "bonuses": {
+     "ac": "@prof",
+     "hp": "20 * @prof",
+     "attackDamage": "",
+     "hd": "",
+     "saveDamage": "",
+     "healing": ""
+    },
+    "creatureSizes": [],
+    "creatureTypes": [],
+    "match": {
+     "proficiency": true,
+     "disposition": true,
+     "attacks": false,
+     "saves": false,
+     "ability": ""
+    },
+    "profiles": [
+     {
+      "_id": "oiuFSKVwu1YsOEav",
+      "count": "1",
+      "cr": "",
+      "level": {
+       "min": null,
+       "max": null
+      },
+      "name": "Mahoraga",
+      "types": [],
+      "uuid": "Actor.gw1DJ3muC7MAuA4S"
+     }
+    ],
+    "summon": {
+     "mode": "",
+     "prompt": true
+    },
+    "tempHP": ""
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "30",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Ten Shadows",
+   "level": 3,
+   "ceCosts": {
+    "CgMIB2UA7oyD1B7b": 1,
+    "WiGe14HGuDNFK3oT": 2,
+    "EYNXif8dlmqnAGSU": 4,
+    "y1WkAUYBMEjnrzyj": 6,
+    "mZEglaN8EEboJKdr": 7,
+    "SuazGsEn6RwAuSlo": 8,
+    "ZOCLEJjcHkbpPPJH": 9,
+    "IRTS95BmUOD4S1x2": 10,
+    "EEmAyNxjNLkLCRhI": 20
+   },
+   "summons": {
+    "CgMIB2UA7oyD1B7b": {
+     "name": "Gama",
+     "count": 1
+    },
+    "WiGe14HGuDNFK3oT": {
+     "name": "Nue",
+     "count": 1
+    },
+    "EYNXif8dlmqnAGSU": {
+     "name": "Great Serpent",
+     "count": 1
+    },
+    "y1WkAUYBMEjnrzyj": {
+     "name": "Rabbit Escape",
+     "count": 1
+    },
+    "mZEglaN8EEboJKdr": {
+     "name": "Mourning Tiger",
+     "count": 1
+    },
+    "SuazGsEn6RwAuSlo": {
+     "name": "Max Elephant",
+     "count": 1
+    },
+    "ZOCLEJjcHkbpPPJH": {
+     "name": "Round Deer",
+     "count": 1
+    },
+    "IRTS95BmUOD4S1x2": {
+     "name": "Piercing Ox",
+     "count": 1
+    },
+    "EEmAyNxjNLkLCRhI": {
+     "name": "Mahoraga",
+     "count": 1
+    }
+   },
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "gEGcEQE7nJFCsor6",
+ "_key": "!items!qRCrItVBtBcRJpaC"
+}

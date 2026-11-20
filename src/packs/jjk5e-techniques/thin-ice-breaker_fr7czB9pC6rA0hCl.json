@@ -1,0 +1,159 @@
+{
+ "_id": "fr7czB9pC6rA0hCl",
+ "name": "Thin Ice Breaker",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/sky-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Sky Manipulation — Innate Technique (11th level)</em></p><p>At 11th level, you have created an extension technique to your sky manipulation, literally breaking the sky as if it were ice. As an action for 5 Cursed Energy, you can force every creature in a 30 feet line to make a Dexterity saving throw. On a failure, they will take a number of d10s equal to twice your Cursed Energy modifier in force damage and be knocked prone, on a success they take half as much damage and are not prone. While you are flying, all creatures make their save at disadvantage.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "9BMtt8kVD9uxtCUt": {
+    "_id": "9BMtt8kVD9uxtCUt",
+    "type": "save",
+    "name": "Action (5 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "line",
+      "size": "30",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": []
+    },
+    "effects": [
+     {
+      "_id": "2toYWI2e6EHuBR6c",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "line",
+    "size": "30",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": false
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "9BMtt8kVD9uxtCUt": 5
+   },
+   "technique": "Sky Manipulation",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "2toYWI2e6EHuBR6c",
+   "name": "Prone (Thin Ice Breaker)",
+   "img": "modules/jjk5e/icons/techniques/sky-manipulation.svg",
+   "statuses": [
+    "prone"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!fr7czB9pC6rA0hCl.2toYWI2e6EHuBR6c"
+  }
+ ],
+ "folder": "i7KDxPjzj0GuzdPl",
+ "_key": "!items!fr7czB9pC6rA0hCl"
+}

@@ -1,0 +1,132 @@
+{
+ "_id": "AQpmy5BZluKFUBx2",
+ "name": "Excavation",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/earth-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Earth Manipulation — Innate Technique (1st level)</em></p><blockquote><p>A simple yet powerful technique to mold rock as you please.</p></blockquote><p>Starting at 1st level, your technique allows you to mold stone using your cursed energy. As an action for 1 cursed energy, you can shape the stone around yourself to make a 5-foot cubes of stone within 30 feet. You can choose to create multiple stone cubes up to your CE modifier (the cubes must be connected) as part of the same action, spending 1 CE for each cube. Each cube has an AC equal to your cursed energy DC and hit points equal to 5 times your CE modifier.</p>\n<p>You can move a creature using these cubes. When creating the cubes in a creature’s area, you can attempt to move the target to a space within 5 feet. The creature must make a Dexterity saving throw, being pushed on a failure. If you create multiple stone cubes as part of the same action, a creature that fails the save is pushed to the end of the connected cubes.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "iekatqZz8ODvkP4j": {
+    "_id": "iekatqZz8ODvkP4j",
+    "type": "save",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "cube",
+      "size": "5",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "cube",
+    "size": "5",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": false
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "iekatqZz8ODvkP4j": 1
+   },
+   "technique": "Earth Manipulation",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "75t5TorhPqVS4tjs",
+ "_key": "!items!AQpmy5BZluKFUBx2"
+}

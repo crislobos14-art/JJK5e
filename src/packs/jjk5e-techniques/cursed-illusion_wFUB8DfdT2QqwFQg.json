@@ -1,0 +1,120 @@
+{
+ "_id": "wFUB8DfdT2QqwFQg",
+ "name": "Cursed Illusion",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/illusive-mirage.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Illusive Mirage — Innate Technique (1st level)</em></p><blockquote><p>Your technique lets you curse people and make them see illusions.</p></blockquote><p>At 1st level, your technique allows you to curse creatures and make them see other people's faces in a distorted way. You are also able to track those you have cursed. As an action for 2 cursed energy, you can curse a creature within 60 feet. The target must make a Charisma saving throw. On a failure, the next person they see has a distorted face. Upon seeing this distortion for the first time, the creature must make an Intelligence saving throw. On a failure, the creature is confused and has disadvantage on attack rolls and Intelligence, Wisdom, and Charisma checks until the end of their next turn. A sorcerer can repeat the Charisma save at the end of their turns to end the curse.<br />\n When a creature fails their Charisma saving throw, you gain the ability to track them up to 400 feet away. While a creature is cursed, you know its general location. The cursed creature keeps seeing the distorted face until they succeed the save or leave your tracking range.</p>\n<p>At 6th level, you can target a number of creatures up to your Cursed Energy modifier as an action, spending 2 CE for each. Additionally, a creature that fails its save also has disadvantage on Intelligence, Wisdom, and Charisma saves and loses concentration on any technique or feature it was concentrating on.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "8hp6SOVXqIlsCq8r": {
+    "_id": "8hp6SOVXqIlsCq8r",
+    "type": "save",
+    "name": "Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "cha"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "60",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "8hp6SOVXqIlsCq8r": 2
+   },
+   "technique": "Illusive Mirage",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "8b1T5CIAvTiipny3",
+ "_key": "!items!wFUB8DfdT2QqwFQg"
+}

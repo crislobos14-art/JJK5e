@@ -1,0 +1,72 @@
+{
+ "_id": "QaR3KqZVGmHngeBJ",
+ "name": "Cursed Weapon: Tail (2 PP)",
+ "type": "feat",
+ "img": "icons/svg/upgrade.svg",
+ "system": {
+  "description": {
+   "value": "<p>The reach of your tail increases to 10 ft. As a reaction to an attack roll, you can swipe your tail to roll a 1d6 and add it to your AC against the triggering attack, potentially causing it to miss. You can spend 1 CE to add a +2 to the number rolled. This becomes +4 at 10th level. You must have the <em>Cursed Weapon</em> attribute and choose tail to take this attribute.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTrait"
+  },
+  "requirements": "Cursed Spirit, 2 Profane Points",
+  "activities": {
+   "EWOYocikkp7cWCvj": {
+    "_id": "EWOYocikkp7cWCvj",
+    "type": "utility",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "EWOYocikkp7cWCvj": 1
+   },
+   "profaneCost": 2,
+   "prereq": {
+    "prefixes": [
+     [
+      "Cursed Spirit"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "ar3Bgj4YHvYRp8DL",
+ "sort": 1000,
+ "_key": "!items!QaR3KqZVGmHngeBJ"
+}

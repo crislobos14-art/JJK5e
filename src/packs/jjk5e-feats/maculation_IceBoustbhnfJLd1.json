@@ -1,0 +1,76 @@
+{
+ "_id": "IceBoustbhnfJLd1",
+ "name": "Maculation",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/new-shadow-style.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Moonlight Veil</em></p>\n<p>As an action for up to 6 cursed energy, you create up to 6 smaller Simple Domains on the ground within 30 ft of yourself that each cover a 5 ft space for 1 minute. Each <em>Maculation</em> functions as a Simple Domain with hit points equal to 5 x your proficiency bonus. While standing in a space with <em>Maculation</em>, you can use your reaction to either gain a +3 bonus to AC or reduce incoming damage by your weapon's damage until the beginning of your next turn. A <em>Maculation</em> disappears if you end your turn more than 30 ft away from one.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Moonlight Veil",
+  "activities": {
+   "M7SThcbJ6cXlHZdy": {
+    "_id": "M7SThcbJ6cXlHZdy",
+    "type": "utility",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "30",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Moonlight Veil"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "gFod6wGzEy6UctqC",
+ "sort": 400,
+ "_key": "!items!IceBoustbhnfJLd1"
+}

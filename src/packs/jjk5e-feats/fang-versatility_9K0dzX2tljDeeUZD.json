@@ -1,0 +1,126 @@
+{
+ "_id": "9K0dzX2tljDeeUZD",
+ "name": "Fang Versatility",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/eight-heads.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Fangs of Orochi</em></p>\n<p>You have trained your technique to be more versatile in combat. You can wield <em>Fangs or Orochi</em> as a Dagger or Shortsword. On a hit with this weapon, a creature must make a Constitution saving throw. On a failure, the creature takes an additional 2d6 poison damage and is poisoned until the end of their next turn. Your Fang Shikigami gain the following improvements:</p>\n<ul>\n<li>\n<p>The AC of your Fangs becomes 15 + your proficiency bonus.  </p>\n</li>\n<li>\n<p>Your Fangs deal an additional 2d4 poison damage on a hit.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Fangs of Orochi",
+  "activities": {
+   "m1pKmeD0oIONFdGZ": {
+    "_id": "m1pKmeD0oIONFdGZ",
+    "type": "save",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "poison"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "MyO6d36cVxKJczXE",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Fangs of Orochi"
+     ]
+    ]
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "MyO6d36cVxKJczXE",
+   "name": "Poisoned (Fang Versatility)",
+   "img": "modules/jjk5e/icons/techniques/eight-heads.svg",
+   "statuses": [
+    "poisoned"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "rounds": 1
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "poisoned"
+    }
+   },
+   "_key": "!items.effects!9K0dzX2tljDeeUZD.MyO6d36cVxKJczXE"
+  }
+ ],
+ "folder": "ScNBVqds1jNrXfTg",
+ "sort": 300,
+ "_key": "!items!9K0dzX2tljDeeUZD"
+}

@@ -1,0 +1,29 @@
+{
+ "_id": "mBZlP90SrjFv2Z5a",
+ "name": "Innate Cursed Technique",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/trait-race.svg",
+ "system": {
+  "description": {
+   "value": "<p>You gain one cantrip of your choice that fits with your Technique. Your spellcasting ability is Wisdom or Charisma (your choice).</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "race",
+   "subtype": ""
+  },
+  "requirements": "Sumerian (Shaama)"
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "cUxhy4eiPJek1pHp",
+ "_key": "!items!mBZlP90SrjFv2Z5a"
+}

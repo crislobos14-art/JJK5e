@@ -1,0 +1,106 @@
+{
+ "_id": "B5AugG6aXTsdBkCK",
+ "name": "Maximum: Love Train",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/pachinko-fever.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have The Fever</em></p>\n<p>You have fully understood the essence of your technique. As an action for 10 Cursed Energy, you can summon the <em>Love Train</em>. This is a 200 foot long, 20 feet wide Line attack in which a creature within range must make a Dexterity saving throw. On a failure they are launched 200 feet and take 15d6 bludgeoning damage. The train is summoned on a space of your choice within 30ft, and the opponent is launched in the opposite direction.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have The Fever",
+  "activities": {
+   "UcxQErDZckiyqstj": {
+    "_id": "UcxQErDZckiyqstj",
+    "type": "save",
+    "name": "Action (10 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "30",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": [
+      {
+       "number": 15,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "UcxQErDZckiyqstj": 10
+   },
+   "prereq": {
+    "features": [
+     [
+      "The Fever"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "UYi4Xs2gTgIgFdZ7",
+ "sort": 300,
+ "_key": "!items!B5AugG6aXTsdBkCK"
+}

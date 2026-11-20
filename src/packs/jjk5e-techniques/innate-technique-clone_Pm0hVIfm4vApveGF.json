@@ -1,0 +1,118 @@
+{
+ "_id": "Pm0hVIfm4vApveGF",
+ "name": "Innate Technique: Clone",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/clone.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>Your technique allows you to create perfect clones of yourself.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.BTUW78kwj863OxX0]{One Man Army}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.huWZEPcUrmqk36im]{Twice the Fun}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.AjxtLvBeAWhVE7cB]{Three is a Crowd}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.SDramqMcTdzcvVKw]{Four is a Party}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.yHfhhod8QZmTjtWa]{Domain Expansion: Divide and Conquer}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "y4pF1BqjnKlQHBe0": {
+    "_id": "y4pF1BqjnKlQHBe0",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Clone (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.BTUW78kwj863OxX0",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "8UstXLZoTFcakHtZ": {
+    "_id": "8UstXLZoTFcakHtZ",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Clone (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.huWZEPcUrmqk36im",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "hTqurXCFGacUBYaE": {
+    "_id": "hTqurXCFGacUBYaE",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Clone (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.AjxtLvBeAWhVE7cB",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "N5TyMb4PBRfXYlPP": {
+    "_id": "N5TyMb4PBRfXYlPP",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Clone (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.SDramqMcTdzcvVKw",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "rHsnojBcFJLiqInP": {
+    "_id": "rHsnojBcFJLiqInP",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Clone (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.yHfhhod8QZmTjtWa",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Clone"
+  }
+ },
+ "_key": "!items!Pm0hVIfm4vApveGF"
+}

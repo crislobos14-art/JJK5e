@@ -1,0 +1,117 @@
+{
+ "_id": "1j8EyDLkddYqXHmE",
+ "name": "Panoramic Composition",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/esoteric-art.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Esoteric Art — Innate Technique (11th level)</em></p><p>At 11th level, as an action, you can spend cursed energy up to twice your CE modifier, forcing that number of creatures within 60 ft to make a Dexterity saving throw. On a failed save, they are sucked into your cursed paintings.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "P6OcM4dm9NqJuBYB": {
+    "_id": "P6OcM4dm9NqJuBYB",
+    "type": "save",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "60",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Esoteric Art",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "epKj1Q5Dq7LYHOJd",
+ "_key": "!items!1j8EyDLkddYqXHmE"
+}

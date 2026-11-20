@@ -1,0 +1,161 @@
+{
+ "_id": "kxqSZAEhS2KvXJZa",
+ "name": "Sgraffito",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/esoteric-art.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Esoteric Art — Innate Technique (6th level)</em></p><p>At 6th level, you have improved your technique. You can now manipulate your painting as a bonus action and gain the following improvements and options:<br />\n<strong>Ink Shikigami</strong>. You can summon new types of shikigami:<br />\n<a href=\"https://5e.tools/bestiary/young-winter-wolf-tftyp.html\">Greater Ink Wolf</a> (2 CE)<br />\n<a href=\"https://5e.tools/bestiary/giant-eagle-mm.html\">Ink Crow</a> (3 CE)<br />\n<strong>Exit Shift</strong>. You cause the location of the <em>Exit Painting</em> to a new random accessible location in the subspace.<br />\n<strong>Difficult Terrain</strong>. You can now create a 30 ft radius area of difficult terrain anywhere within your painting.<br />\n<strong>Structure Generation</strong>. Each 5 ft by 5 ft section of a structure you create now has hit points equal to 10 x your proficiency bonus.<br />\n<strong>Trap Creation</strong>. Your traps now deal an additional 2 damage dice. This increases to an additional 4 damage dice at 11th level.<br />\n<strong>Ink Wave</strong>. As an action for 2 cursed energy, you create a 30 ft cone originating from you or an <em>Ink Shikigami</em>. A creature within the cone must make a Constitution saving throw, taking your proficiency bonus in d6s of necrotic damage and be blinded until the end of their next turn on a failed save. (This can also be used outside your subspace)<br />\n<strong>Larger Frames</strong>. You can now use <em>Cursed Painting</em> on Large or smaller creatures. This increases to Huge at 11th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "6Nh37jJYKZ5aLuc4": {
+    "_id": "6Nh37jJYKZ5aLuc4",
+    "type": "save",
+    "name": "Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "30",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    },
+    "effects": [
+     {
+      "_id": "6fWEhCa9V7wwa9MB",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "radius",
+    "size": "30",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": false
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "6Nh37jJYKZ5aLuc4": 2
+   },
+   "technique": "Esoteric Art",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "6fWEhCa9V7wwa9MB",
+   "name": "Blinded (Sgraffito)",
+   "img": "modules/jjk5e/icons/techniques/esoteric-art.svg",
+   "statuses": [
+    "blinded"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "rounds": 1
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "blinded"
+    }
+   },
+   "_key": "!items.effects!kxqSZAEhS2KvXJZa.6fWEhCa9V7wwa9MB"
+  }
+ ],
+ "folder": "epKj1Q5Dq7LYHOJd",
+ "_key": "!items!kxqSZAEhS2KvXJZa"
+}

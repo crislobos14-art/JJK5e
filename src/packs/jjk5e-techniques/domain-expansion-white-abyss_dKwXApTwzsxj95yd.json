@@ -1,0 +1,200 @@
+{
+ "_id": "dKwXApTwzsxj95yd",
+ "name": "Domain Expansion: White Abyss",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/ice-formation-domain.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Ice Formation — Innate Technique (18th level)</em></p><p><em>Domain Expansion (rules): full-turn action, 20 CE unless stated, 175-ft radius, 1 minute. When the domain ends you suffer <strong>Technique Burnout</strong> (applied automatically by the module).</em></p><p>If you achieve 18th level, you hone your technique to a fine edge, allowing you to use your Domain Expansion. While inside it, every creature except you takes 10d8 cold damage and is restrained at the end of their turn. A creature can make a Strength (Athletics) check at the beginning of their turn to break out.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "baNd4KsTqloG3jFL": {
+    "_id": "baNd4KsTqloG3jFL",
+    "type": "damage",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 10,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "cold"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "GQz8GKEdPn3HU1pM",
+      "onSave": false
+     }
+    ]
+   },
+   "H8FzRN86DGtRmyYU": {
+    "_id": "H8FzRN86DGtRmyYU",
+    "type": "utility",
+    "name": "Expand Domain (20 CE)",
+    "sort": -100000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Full turn: Action + Bonus Action + Movement",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "175",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": true
+     },
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 9,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "special",
+   "value": null,
+   "condition": "Full turn: Action + Bonus Action + Movement",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "radius",
+    "size": "175",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": true
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Ice Formation",
+   "level": 18,
+   "domain": true,
+   "ceCosts": {
+    "H8FzRN86DGtRmyYU": 20
+   },
+   "domainActivity": "H8FzRN86DGtRmyYU",
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "GQz8GKEdPn3HU1pM",
+   "name": "Restrained (Domain Expansion: White Abyss)",
+   "img": "modules/jjk5e/icons/techniques/ice-formation-domain.svg",
+   "statuses": [
+    "restrained"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "restrained"
+    }
+   },
+   "_key": "!items.effects!dKwXApTwzsxj95yd.GQz8GKEdPn3HU1pM"
+  }
+ ],
+ "folder": "w9n29Anzntr6P6uo",
+ "_key": "!items!dKwXApTwzsxj95yd"
+}

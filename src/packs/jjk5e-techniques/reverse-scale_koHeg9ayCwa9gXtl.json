@@ -1,0 +1,140 @@
+{
+ "_id": "koHeg9ayCwa9gXtl",
+ "name": "Reverse Scale",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/eight-heads.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Eight Heads — Cursed Technique Reversal</em></p><p>You have mastered reverse cursed technique and learned the reversal of your technique. Life is precious. Unlike you, most people do not get do-overs. As an action for 10 CE, you target a creature within 60 ft and reinforce their mortality. Until they complete a long rest, they are unable to regain hit points, automatically fail death saves, and take additional necrotic damage equal to your CE modifier whenever they take necrotic damage.</p>\n<p><strong>Offering.</strong> At 11th level, when you would use Maximum: Sacrifice, you can instead spend 12 cursed energy. A creature of your choice within the barrier instead regains 10d4 hit points at the start of their turn.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Eight Heads",
+  "activities": {
+   "JF4s8lUAEraNzZGp": {
+    "_id": "JF4s8lUAEraNzZGp",
+    "type": "damage",
+    "name": "Action (10 CE) — rider",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "60",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": null,
+       "denomination": null,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "max(@abilities.wis.mod, @abilities.cha.mod)"
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   },
+   "frXuserErmvPh55O": {
+    "_id": "frXuserErmvPh55O",
+    "type": "heal",
+    "name": "Action (12 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "healing": {
+     "number": 10,
+     "denomination": 4,
+     "bonus": "",
+     "types": [
+      "healing"
+     ],
+     "custom": {
+      "enabled": false,
+      "formula": ""
+     },
+     "scaling": {
+      "number": 1
+     }
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "JF4s8lUAEraNzZGp": 10,
+    "frXuserErmvPh55O": 12
+   },
+   "technique": "Eight Heads",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Eight Heads"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!koHeg9ayCwa9gXtl"
+}

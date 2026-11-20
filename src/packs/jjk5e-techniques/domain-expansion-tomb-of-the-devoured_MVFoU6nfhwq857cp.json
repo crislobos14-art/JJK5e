@@ -1,0 +1,124 @@
+{
+ "_id": "MVFoU6nfhwq857cp",
+ "name": "Domain Expansion: Tomb of the Devoured",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/voracity-domain.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Voracity — Innate Technique (18th level)</em></p><p><em>Domain Expansion (rules): full-turn action, 20 CE unless stated, 175-ft radius, 1 minute. When the domain ends you suffer <strong>Technique Burnout</strong> (applied automatically by the module).</em></p><p>At 18th level you have mastered your technique allowing you to expand your domain. At initiative 20, you can regurgitate a creature whose corpse you devoured into an unoccupied space within 5 ft of you. The creature is friendly to you and your allies and acts immediately after your turn, attacking all enemies within your domain whether you command it to or not. If the creature was sentient in life, it is barely sentient within your domain as a mere husk of its former self. All regurgitated creatures disappear once your domain ends.</p>\n<p>.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "TCNQ7zL19xRKA4Mf": {
+    "_id": "TCNQ7zL19xRKA4Mf",
+    "type": "utility",
+    "name": "Expand Domain (20 CE)",
+    "sort": -100000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Full turn: Action + Bonus Action + Movement",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "175",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": true
+     },
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 9,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "special",
+   "value": null,
+   "condition": "Full turn: Action + Bonus Action + Movement",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "radius",
+    "size": "175",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": true
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Voracity",
+   "level": 18,
+   "domain": true,
+   "ceCosts": {
+    "TCNQ7zL19xRKA4Mf": 20
+   },
+   "domainActivity": "TCNQ7zL19xRKA4Mf",
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "xeaTaRsDQ88YPtDB",
+ "_key": "!items!MVFoU6nfhwq857cp"
+}

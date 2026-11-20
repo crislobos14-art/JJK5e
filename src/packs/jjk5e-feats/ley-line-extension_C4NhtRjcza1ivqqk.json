@@ -1,0 +1,42 @@
+{
+ "_id": "C4NhtRjcza1ivqqk",
+ "name": "Ley Line Extension",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/dragon-vein.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Ley Line Command</em></p>\n<p>You have learned to extend the benefits of your connection with the earth to others. When you create a Ley Line you can give a number of creatures equal to your Cursed Energy modifier the benefits of <em>Flow of the Dragon</em> while they are within 30 ft and touching the same ground as you.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Ley Line Command",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Ley Line Command"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "kdDPAkw4B2QyEnB0",
+ "sort": 100,
+ "_key": "!items!C4NhtRjcza1ivqqk"
+}

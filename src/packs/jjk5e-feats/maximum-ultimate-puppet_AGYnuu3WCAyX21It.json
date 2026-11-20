@@ -1,0 +1,42 @@
+{
+ "_id": "AGYnuu3WCAyX21It",
+ "name": "Maximum: Ultimate Puppet",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/puppet-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Absolute Puppet</em></p>\n<p>You gain the ability to make a puppet of your Ultimate Puppet. This puppet can have double the traits, however it also costs double the resources, time, and Cursed Energy to create.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Absolute Puppet",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Absolute Puppet"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "tHLyqviVXptUEOWk",
+ "sort": 300,
+ "_key": "!items!AGYnuu3WCAyX21It"
+}

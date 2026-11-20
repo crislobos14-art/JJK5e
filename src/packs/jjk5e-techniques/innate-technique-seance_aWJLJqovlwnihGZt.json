@@ -1,0 +1,118 @@
+{
+ "_id": "aWJLJqovlwnihGZt",
+ "name": "Innate Technique: Seance",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/seance.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>You summon the dead into yourself or a willing vessel.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.JAeKHJYaOvVKwaEI]{Seance}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.lF18uQBxg4fzpAp2]{Blessing of the Grateful Dead}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.pCVNLTJfW9n5olZi]{Ritual of Resurrection}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.04GKHfCeCbyONYQP]{Maximum: Black Seance}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.emxMfPh3YWvdbE3U]{Domain Expansion: Seance Parlor}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "kZabYmZCwIDgV6f5": {
+    "_id": "kZabYmZCwIDgV6f5",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Seance (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.JAeKHJYaOvVKwaEI",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "HMvclFPhj7wboxcI": {
+    "_id": "HMvclFPhj7wboxcI",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Seance (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.lF18uQBxg4fzpAp2",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "Q4nIiS2av02NgtGS": {
+    "_id": "Q4nIiS2av02NgtGS",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Seance (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.pCVNLTJfW9n5olZi",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "E6Bfjvl2l7CFUkpI": {
+    "_id": "E6Bfjvl2l7CFUkpI",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Seance (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.04GKHfCeCbyONYQP",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "euyDtpzPLmJgBVK6": {
+    "_id": "euyDtpzPLmJgBVK6",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Seance (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.emxMfPh3YWvdbE3U",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Seance"
+  }
+ },
+ "_key": "!items!aWJLJqovlwnihGZt"
+}

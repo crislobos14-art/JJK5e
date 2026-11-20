@@ -1,0 +1,32 @@
+{
+ "_id": "XBOD9iWsaQ3y8Fdt",
+ "name": "Fated for Fortune",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/miracle.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Miracle — Innate Technique (11th level)</em></p><p>At 11th level you realize there is no bad future for you, only a path to fortune paved with miracles! If you roll 20 or higher using <em>Miraculous Outcome</em>, it is considered a critical success as if you had rolled a natural 20 (cannot roll for Black Flash or gain Miracle).</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Miracle 11"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Miracle",
+   "level": 11
+  }
+ },
+ "folder": "tl97VGJouG41Z3rd",
+ "_key": "!items!XBOD9iWsaQ3y8Fdt"
+}

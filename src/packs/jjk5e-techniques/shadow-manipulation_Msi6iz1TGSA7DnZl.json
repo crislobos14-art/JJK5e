@@ -1,0 +1,144 @@
+{
+ "_id": "Msi6iz1TGSA7DnZl",
+ "name": "Shadow Manipulation",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/ten-shadows.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Ten Shadows — Innate Technique (6th level)</em></p><p>Starting at 6th level, you've learned to make use of your ability to manipulate shadows, allowing you to form an extra dimensional space to hide your things and even manipulate the shadows of others.<br />\n<strong>Shadow Storage</strong>. You can store objects in an extra-dimensional space within your shadow. You can physically place something into your shadow, costing no cursed energy. However you must spend 1 cursed energy to interact with an object in this space, potentially removing it. Everything in your shadow counts for your carrying capacity. Additionally, you can trap creatures within your shadow. As a bonus action for 2 ce, you can force a creature to make a Dexterity (Acrobatics) check against your CE save DC. This check is made at Disadvantage if they are in complete darkness or inside a veil, and automatically fail within your domain. On a failure they are trapped inside your shadow, counting for carrying capacity. They can hold their breath for a number of minutes equal to their Constitution modifier (min of 1) before suffocating. They can make a Strength or Dexterity saving throw at the end of their turns, freeing themselves on a success and appearing prone in an unoccupied space within 5 ft.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "48qkc8s1CPwBVvK0": {
+    "_id": "48qkc8s1CPwBVvK0",
+    "type": "utility",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   },
+   "mHQIg1Nb1IHki6pW": {
+    "_id": "mHQIg1Nb1IHki6pW",
+    "type": "save",
+    "name": "Bonus Action (2 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "48qkc8s1CPwBVvK0": 1,
+    "mHQIg1Nb1IHki6pW": 2
+   },
+   "technique": "Ten Shadows",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "gEGcEQE7nJFCsor6",
+ "_key": "!items!Msi6iz1TGSA7DnZl"
+}

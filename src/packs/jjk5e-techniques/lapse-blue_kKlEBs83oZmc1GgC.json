@@ -1,0 +1,158 @@
+{
+ "_id": "kKlEBs83oZmc1GgC",
+ "name": "Lapse Blue",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/limitless.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Limitless — Innate Technique (3rd level)</em></p><p>At 3rd level, you can create another impossible concept, negative numbers which manifests as negative space. As an action for CE up to your modifier, you pick an unoccupied space within 30 feet you can see and create a 5 ft sphere until the beginning of your next turn as space corrects itself. This pulls targets within a radius of 5 feet for each CE spent, forcing a Strength saving throw. On a failure, they take 2d8 + 1d8 for each CE in force damage and are dragged into the blue and grappled. At 11th level, on a failure of 5 or more they take maximum damage and are restrained. On a success they take half as much damage. A creature can repeat the save at the end of their turn.<br />\nWhen you spend at least 5 CE on <em>Blue</em>, you can use its <em>Maximum Output</em> form to make it last for up to a minute while concentrating. As bonus action, you can move the sphere 30 ft in any direction. All creatures currently stuck in the sphere are also moved and a creature that starts their turn in range must make the saving throw. You can end the technique at will.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "0XCLedJf9yzGwtvr": {
+    "_id": "0XCLedJf9yzGwtvr",
+    "type": "save",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "sphere",
+      "size": "5",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "str"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": []
+    },
+    "effects": [
+     {
+      "_id": "YaBVmd9NLkY17soF",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "sphere",
+    "size": "5",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": false
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Limitless",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "YaBVmd9NLkY17soF",
+   "name": "Restrained (Lapse Blue)",
+   "img": "modules/jjk5e/icons/techniques/limitless.svg",
+   "statuses": [
+    "restrained"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "rounds": 1
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "restrained"
+    }
+   },
+   "_key": "!items.effects!kKlEBs83oZmc1GgC.YaBVmd9NLkY17soF"
+  }
+ ],
+ "folder": "9dzjvEM8kgWba7oJ",
+ "_key": "!items!kKlEBs83oZmc1GgC"
+}

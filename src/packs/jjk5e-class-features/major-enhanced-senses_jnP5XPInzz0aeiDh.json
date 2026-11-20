@@ -1,0 +1,67 @@
+{
+ "_id": "jnP5XPInzz0aeiDh",
+ "name": "Major Enhanced Senses",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Mind Improvements: Your body has increased both physically and mentally. You can have a number of these improvements equal to your Wisdom modifier. ---</em></p>\n<p>Medium Enhanced Senses, 1 Body point, 17th level<br />\nYour senses have reached their peak. Your blindsight increases again by 60ft and your tremorsense range increases to 60ft. You gain advantage in Wisdom (Perception) checks involving hearing.  </p>\n<hr />",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Heavenly Restriction 2"
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "level": 17,
+    "features": [
+     [
+      "Medium Enhanced Senses"
+     ]
+    ]
+   },
+   "bodyCost": 1,
+   "bodyCategory": "wis"
+  }
+ },
+ "folder": "ybhWCA27cbgjKLpN",
+ "effects": [
+  {
+   "_id": "QSqjmUxS5WM9UbHm",
+   "name": "Major Enhanced Senses",
+   "img": "modules/jjk5e/icons/feature.svg",
+   "changes": [
+    {
+     "key": "system.attributes.senses.blindsight",
+     "mode": 4,
+     "value": "90",
+     "priority": null
+    },
+    {
+     "key": "system.attributes.senses.tremorsense",
+     "mode": 4,
+     "value": "60",
+     "priority": null
+    }
+   ],
+   "disabled": false,
+   "transfer": true,
+   "duration": {},
+   "description": "",
+   "flags": {},
+   "_key": "!items.effects!jnP5XPInzz0aeiDh.QSqjmUxS5WM9UbHm"
+  }
+ ],
+ "_key": "!items!jnP5XPInzz0aeiDh"
+}

@@ -1,0 +1,170 @@
+{
+ "_id": "EMDjz5QEQDEucr5I",
+ "name": "Offensive Infinity",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/limitless.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Limitless — Innate Technique (11th level)</em></p><p>At 11th level, you have learned to push infinity to an aggressive mode through offensive training. As an action, you can spend CE up to your Cursed Energy modifier to amplify <em>Infinity</em>. All creatures within 10 ft must make a Strength saving throw. On a failed save, they are forced 10 ft directly away from you and take 2d8 force damage per cursed energy spent. On a successful save they take half as much damage and are not pushed away. <br />\nIf used at <em>Maximum Output</em>, a creature within 5 ft makes this save at disadvantage.<br />\n Alternatively, you can choose one target within 5 ft of you and 10 ft away from a wall or solid structure, and spend CE up to your CE modifier as an action to crush them against it. The target must make a Strength saving throw, being forced against the wall and taking 3d8 Force damage for each Cursed Energy spent and be restrained until the start of your next turn on a failed save. On a success, they are pushed 5 ft back and take half as much damage. If you are more than 10 ft away from the target, the technique ends.<br />\n If used at <em>Maximum Output</em>, you can spend CE up to your modifier at the start of your turn to maintain the technique, forcing the creature to repeat the save.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "080Ss5xCYIYFDac7": {
+    "_id": "080Ss5xCYIYFDac7",
+    "type": "save",
+    "name": "Action (1+ CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "max(1, max(@abilities.wis.mod, @abilities.cha.mod))"
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "10",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "str"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "force"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "mode": "whole",
+        "number": 2
+       }
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "5qH2Hjd2KG8siwpn",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "10",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceSteps": {
+    "080Ss5xCYIYFDac7": 1
+   },
+   "ceCosts": {
+    "080Ss5xCYIYFDac7": 1
+   },
+   "technique": "Limitless",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "5qH2Hjd2KG8siwpn",
+   "name": "Restrained (Offensive Infinity)",
+   "img": "modules/jjk5e/icons/techniques/limitless.svg",
+   "statuses": [
+    "restrained"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "rounds": 1
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "restrained"
+    }
+   },
+   "_key": "!items.effects!EMDjz5QEQDEucr5I.5qH2Hjd2KG8siwpn"
+  }
+ ],
+ "folder": "9dzjvEM8kgWba7oJ",
+ "_key": "!items!EMDjz5QEQDEucr5I"
+}

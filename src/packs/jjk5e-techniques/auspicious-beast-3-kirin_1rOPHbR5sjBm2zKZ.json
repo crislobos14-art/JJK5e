@@ -1,0 +1,115 @@
+{
+ "_id": "1rOPHbR5sjBm2zKZ",
+ "name": "Auspicious Beast #3: Kirin",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/auspicious-beast-summon.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Auspicious Beast Summon — Innate Technique (6th level)</em></p><p>Once you reach 6th level, you gain a power to help you last longer in battles. As a bonus action, for every 1 Cursed Energy you spend you gain 5 temporary hit points. <br />\nWhile you have these temporary hit points, you ignore exhaustion. However, after activating, your movement is 0 until the start of your next turn.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "5Zbe2Fgjfbs6ILFe": {
+    "_id": "5Zbe2Fgjfbs6ILFe",
+    "type": "heal",
+    "name": "Bonus Action (1+ CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "20"
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "5",
+     "types": [
+      "temphp"
+     ],
+     "custom": {
+      "enabled": false,
+      "formula": ""
+     },
+     "scaling": {
+      "mode": "whole",
+      "formula": "5"
+     }
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceSteps": {
+    "5Zbe2Fgjfbs6ILFe": 1
+   },
+   "ceCosts": {
+    "5Zbe2Fgjfbs6ILFe": 1
+   },
+   "technique": "Auspicious Beast Summon",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "brFOPY7ZHkwkGj1z",
+ "_key": "!items!1rOPHbR5sjBm2zKZ"
+}

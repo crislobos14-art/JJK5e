@@ -1,0 +1,87 @@
+{
+ "_id": "A0Mtq2jtb2UjVHAX",
+ "name": "Destructive Gaze",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/paralyzing-gaze.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Peripheral Vision</em></p>\n<p>As part of your bonus action while maintaining your technique on a creature, the target takes 2d8 psychic damage. This increases to 2d10 at 6th level, 4d8 at 11th level, and 6d8 at 18th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Peripheral Vision",
+  "activities": {
+   "z8EpHsiJixPFZ0Mv": {
+    "_id": "z8EpHsiJixPFZ0Mv",
+    "type": "damage",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "psychic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Peripheral Vision"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "4cwsl1cPyRP6EWgd",
+ "sort": 200,
+ "_key": "!items!A0Mtq2jtb2UjVHAX"
+}

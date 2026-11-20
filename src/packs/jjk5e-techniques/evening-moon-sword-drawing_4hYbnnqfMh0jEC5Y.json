@@ -1,0 +1,32 @@
+{
+ "_id": "4hYbnnqfMh0jEC5Y",
+ "name": "Evening Moon Sword Drawing",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/new-shadow-style.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>New Shadow Style — Innate Technique (6th level)</em></p><p>Once you reach 6th level, you enter a crouched stance. When a creature willingly moves in or out of your <em>Simple Domain</em> you can make a weapon attack against them. On a hit, you can choose to either spend CE up to your cursed energy modifier to deal an additional damage die for each CE spent, or you can gain a bonus to your AC and saving throws equal to the CE spent until the beginning of your next turn. You can only make this attack once per round per creature, meaning you can use it once against each creature.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "New Shadow Style 6"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "New Shadow Style",
+   "level": 6
+  }
+ },
+ "folder": "afNhLz8cb88QgbyD",
+ "_key": "!items!4hYbnnqfMh0jEC5Y"
+}

@@ -1,0 +1,46 @@
+{
+ "_id": "LDbMTb0R84yNZUaZ",
+ "name": "Vengeful",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/mindset.svg",
+ "system": {
+  "description": {
+   "value": "<p>There are two reasons for your actions, spite and hatred. If you use your inspiration you pick one creature, and that creature becomes vulnerable to your attacks for 1 turn.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": ""
+  },
+  "requirements": "Mindset",
+  "activities": {
+   "TLFN7tYcaFlsIriv": {
+    "_id": "TLFN7tYcaFlsIriv",
+    "type": "utility",
+    "name": "Use Inspiration",
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Spend your inspiration"
+    },
+    "consumption": {
+     "targets": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "mindset": true
+  }
+ },
+ "folder": "ymyii86sdbVo8H5C",
+ "_key": "!items!LDbMTb0R84yNZUaZ"
+}

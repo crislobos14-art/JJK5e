@@ -1,0 +1,46 @@
+{
+ "_id": "aWy3dBCN6jAKpnzU",
+ "name": "Prayer Beads",
+ "type": "equipment",
+ "img": "icons/svg/explosion.svg",
+ "folder": "pB7mLAOAtbyDQKeT",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Item, Grade 3 (Requires Attunement)</em></p><p>While wearing these prayer beads, you have advantage on saving throws against being frightened or charmed.</p>\n<p><strong>Amplify Technique.</strong> You can spend up to 3 CE when you use a cursed technique to increase the save DC by 1 for each CE spent. Once used, you cannot use this feature again until you finish a long rest.</p>"
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "rarity": "uncommon",
+  "quantity": 1,
+  "attunement": "required",
+  "type": {
+   "value": "trinket",
+   "baseItem": ""
+  },
+  "armor": {
+   "value": null
+  },
+  "activities": {},
+  "uses": {
+   "max": "1",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
+    }
+   ]
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "3rd Grade"
+  }
+ },
+ "_key": "!items!aWy3dBCN6jAKpnzU"
+}

@@ -1,0 +1,81 @@
+{
+ "_id": "8AZMJxzbIkArJEQK",
+ "name": "Trident",
+ "type": "weapon",
+ "img": "icons/svg/sword.svg",
+ "folder": "8L9REK3UZxFoXRJA",
+ "system": {
+  "description": {
+   "value": "<p>Martial melee weapon. 1d6 piercing. Thrown(20/60), versatile(1d8).</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "martialM",
+   "baseItem": "trident"
+  },
+  "damage": {
+   "base": {
+    "number": 1,
+    "denomination": 6,
+    "types": [
+     "piercing"
+    ]
+   },
+   "versatile": {
+    "number": 1,
+    "denomination": 8,
+    "types": [
+     "piercing"
+    ]
+   }
+  },
+  "range": {
+   "value": 20,
+   "long": 60,
+   "units": "ft"
+  },
+  "properties": [
+   "thr",
+   "ver"
+  ],
+  "proficient": null,
+  "price": {
+   "value": 50.0,
+   "denomination": "gp"
+  },
+  "quantity": 1,
+  "activities": {
+   "q1nOhhv7BjcrPf2i": {
+    "_id": "q1nOhhv7BjcrPf2i",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "melee",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "priceUSD": "$5,000"
+  }
+ },
+ "_key": "!items!8AZMJxzbIkArJEQK"
+}

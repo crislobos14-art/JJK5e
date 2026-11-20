@@ -1,0 +1,29 @@
+{
+ "_id": "Fa9DL9vrciJOYHDG",
+ "name": "Celestial Body",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>At 10th level, your body is like a divine object none shall harm, not even god itself. You cannot be targeted by the sure hit effect of a Domain Expansion, and cannot be detected by one while inside one. <br />\n(Ex: If you are trapped inside a domain that forces you to make a Constitution saving throw as its sure hit, you won't have to make the saving throw.) <br />\nYou can also freely pass through magical barriers of any kind, suffering no ill effects for doing so.</p>\n<p>This, however, doesn’t work on sure-hit effects which target objects, or creatures without cursed energy, such as Malevolent Shrine.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Heavenly Restriction 10"
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "hWqAX9TqrOvuq1FE",
+ "_key": "!items!Fa9DL9vrciJOYHDG"
+}

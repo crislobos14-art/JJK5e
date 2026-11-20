@@ -1,0 +1,103 @@
+{
+ "_id": "IpEcKAh0dIJX4o2O",
+ "name": "New Shadow Style: Simple Domain",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/new-shadow-style.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>New Shadow Style — Innate Technique (1st level)</em></p><blockquote><p>You are born with no innate technique, but in order to make up you learn a special secret. A domain for the weak.</p></blockquote><p>Beginning at 1st level, you gain the <em>Simple Domain</em> feat with the following benefits:</p>\n<ul>\n<li>\n<p>You can activate <em>Simple Domain</em> for free a number of times equal to your proficiency bonus each long rest  </p>\n</li>\n<li>\n<p>You can activate Simple Domain as a bonus action  </p>\n</li>\n<li>\n<p>The area of Simple Domain can be up to 15 feet instead of 10</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "7e9fHJhPwYm4YhHv": {
+    "_id": "7e9fHJhPwYm4YhHv",
+    "type": "utility",
+    "name": "Bonus Action",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1"
+      }
+     ],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "@prof",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
+    }
+   ]
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "New Shadow Style",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "afNhLz8cb88QgbyD",
+ "_key": "!items!IpEcKAh0dIJX4o2O"
+}

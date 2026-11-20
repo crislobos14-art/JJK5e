@@ -1,0 +1,46 @@
+{
+ "_id": "cGViMJztBQmGolPs",
+ "name": "Living Bomb",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/explosive-flesh.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Explosive Flesh — Cursed Technique Reversal</em></p><p>After mastering Reverse Cursed Technique, you have learned your cursed technique reversal. You gain the ability to turn the body parts of creatures you touch into bombs. Once per turn for X cursed energy when you make a melee weapon attack you can try to blow up the body parts of other creatures. On a hit, they must make a CE saving throw. On a failed save, you can choose a body part of the creature to explode, causing damage and effects as per your original abilities. On a success, nothing happens. The Cursed energy cost for this feature is equal to twice the Explosive Feature’s cost depending on the body part targeted and the damage dice for Explosive Flesh is doubled when using this Technique. The creature suffers the effects of Explosive Flesh as normal. The limb that is targeted cannot be the skull, neck, or torso.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Explosive Flesh"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Explosive Flesh",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Explosive Flesh"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!cGViMJztBQmGolPs"
+}

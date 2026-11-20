@@ -1,0 +1,31 @@
+{
+ "_id": "tRoBSw4w8N0w7ykM",
+ "name": "Sorcerous Restoration",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>At 15th level, you regain 4 cursed energy on a short rest.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Strategist 15"
+ },
+ "flags": {
+  "jjk5e": {
+   "srRegainCE": 4
+  }
+ },
+ "folder": "D1jub3NHW0Fbryho",
+ "_key": "!items!tRoBSw4w8N0w7ykM"
+}

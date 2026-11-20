@@ -1,0 +1,81 @@
+{
+ "_id": "ESXc902ky0UafXTZ",
+ "name": "War Hammer",
+ "type": "weapon",
+ "img": "icons/svg/sword.svg",
+ "folder": "8L9REK3UZxFoXRJA",
+ "system": {
+  "description": {
+   "value": "<p>Martial melee weapon. 1d8 bludgeoning. Versatile(1d10).</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "martialM",
+   "baseItem": "warhammer"
+  },
+  "damage": {
+   "base": {
+    "number": 1,
+    "denomination": 8,
+    "types": [
+     "bludgeoning"
+    ]
+   },
+   "versatile": {
+    "number": 1,
+    "denomination": 10,
+    "types": [
+     "bludgeoning"
+    ]
+   }
+  },
+  "range": {
+   "value": 5,
+   "long": null,
+   "units": "ft",
+   "reach": 5
+  },
+  "properties": [
+   "ver"
+  ],
+  "proficient": null,
+  "price": {
+   "value": 15.0,
+   "denomination": "gp"
+  },
+  "quantity": 1,
+  "activities": {
+   "Mdf9YhIj6iaIvwJ4": {
+    "_id": "Mdf9YhIj6iaIvwJ4",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "melee",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "priceUSD": "$1,500"
+  }
+ },
+ "_key": "!items!ESXc902ky0UafXTZ"
+}

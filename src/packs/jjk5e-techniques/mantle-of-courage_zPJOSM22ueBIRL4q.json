@@ -1,0 +1,154 @@
+{
+ "_id": "zPJOSM22ueBIRL4q",
+ "name": "Mantle of Courage",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/blazing-courage.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Blazing Courage — Innate Technique (3rd level)</em></p><p>Starting at 3rd level, you can strengthen both yourself and your weapon. When you use Ignition, you ignore any detriments or penalties of the weapon or can use it on yourself for your unarmed strikes, potentially recreating a lost limb for the duration.<br />\n While <em>Ignition</em> is active, you can spend 3 CE as a free action on your turn. You emit an aura of flames within 10 feet of you for 1 minute, giving you resistance to fire and cold damage. An enemy that enters your mantle or starts their turn there must make a Constitution saving throw, taking your <em>Ignition</em> damage on a failed save or half as much on a successful save.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "tOmjfZVwLHC54lbH": {
+    "_id": "tOmjfZVwLHC54lbH",
+    "type": "save",
+    "name": "Special (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "10",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": []
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "special",
+   "value": null,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "value": "10",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "tOmjfZVwLHC54lbH": 3
+   },
+   "technique": "Blazing Courage",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "VITDORKyY9It9TdZ",
+ "effects": [
+  {
+   "_id": "fMhgS7ampc0pY9Q3",
+   "name": "Mantle of Courage (toggle)",
+   "img": "modules/jjk5e/icons/techniques/blazing-courage.svg",
+   "changes": [
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "fire",
+     "priority": null
+    },
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "cold",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!zPJOSM22ueBIRL4q.fMhgS7ampc0pY9Q3"
+  }
+ ],
+ "_key": "!items!zPJOSM22ueBIRL4q"
+}

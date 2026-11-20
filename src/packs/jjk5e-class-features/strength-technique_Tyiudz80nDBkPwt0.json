@@ -1,0 +1,37 @@
+{
+ "_id": "Tyiudz80nDBkPwt0",
+ "name": "Strength Technique",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Strength Improvements: You can have a number of these improvements equal to your Strength modifier.</em></p>\n<p>2 body point, 20 Strength<br />\nUpon selecting this body improvement, you gain 1 Physical Feat of your choice with prerequisites you meet.</p>\n<h2>You can take this body improvement multiple times however you can only select at certain levels in this class. These levels are 2nd, 5th, 11th, and 17th level.</h2>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Heavenly Restriction 2"
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "abilities": {
+     "str": 20
+    }
+   },
+   "bodyCost": 2,
+   "bodyCategory": "str"
+  }
+ },
+ "folder": "fG9dHqhvzewoqwrt",
+ "_key": "!items!Tyiudz80nDBkPwt0"
+}

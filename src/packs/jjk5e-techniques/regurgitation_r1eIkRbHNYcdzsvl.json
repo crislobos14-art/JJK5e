@@ -1,0 +1,98 @@
+{
+ "_id": "r1eIkRbHNYcdzsvl",
+ "name": "Regurgitation",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/voracity.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Voracity — Innate Technique (3rd level)</em></p><p>At 3rd level, you have learned to access previous abilities you have eaten. As a bonus action you can spend 4 cursed energy to gain an ability you have stolen in the past and can use it for 1 hour. This does not increase at 6th level.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "Ve8rA5LYWi4pxv0v": {
+    "_id": "Ve8rA5LYWi4pxv0v",
+    "type": "utility",
+    "name": "Bonus Action (4 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "hour",
+     "concentration": false,
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "hour"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "Ve8rA5LYWi4pxv0v": 4
+   },
+   "technique": "Voracity",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "xeaTaRsDQ88YPtDB",
+ "_key": "!items!r1eIkRbHNYcdzsvl"
+}

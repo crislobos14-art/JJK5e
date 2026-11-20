@@ -1,0 +1,92 @@
+{
+ "_id": "NY4mXqV70GgnVRot",
+ "name": "Convergence",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/blood-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Blood Manipulation — Innate Technique (6th level)</em></p><p>At 6th level, you compress and condense blood to its absolute limit. Before you use a blood manipulation technique with a casting time of one action, you can spend your bonus action, reaction and movement to enhance the technique's potency, gaining the following benefits:</p>\n<ul>\n<li>\n<p>You deal additional damage die equal to your proficiency bonus  </p>\n</li>\n<li>\n<p>Your damage die increases by 1 level(d10-&gt;d12-&gt;2d8)  </p>\n</li>\n<li>\n<p>The range increases by 30 feet</p>\n</li>\n</ul>\n<p>If you spend an additional turn using your action, bonus action, reaction and movement to charge up <em>Convergence</em> before using your technique, you gain these benefits an additional time and gain advantage on the first technique attack roll or can force creatures to make their first saving throw against your technique at disadvantage.  Certain <em>Blood Techniques</em> may have additional or different bonuses if used with <em>Convergence</em> that are listed with each technique.</p>\n<p>Alternatively, instead of spending time to compress blood, you quicken the process with cursed energy. You can spend 1 additional CE when using a <em>Blood Technique</em> to gain additional benefits. <em>Slicing Exorcism</em>, <em>Blood Burst</em> and <em>Blood Meteorite</em> deal 1 additional damage dice on a hit. <em>Crimson Binding</em> increases the DC by 1. <em>Crimson Rain</em> and <em>Blood Geyser</em> deal 1 additional damage per damage dice.<br />\n At 11th level, the additional CE you can spend increases to 2, which causes these bonuses to double if spending 2 instead of 1. At 18th level, this becomes 3 CE, which can cause these bonuses to triple. You cannot use both methods of <em>Convergence</em> on the same technique.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "qNvp8X1IeGQJn56M": {
+    "_id": "qNvp8X1IeGQJn56M",
+    "type": "utility",
+    "name": "Bonus Action",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Blood Manipulation",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "WIi7n6E644owqihn",
+ "_key": "!items!NY4mXqV70GgnVRot"
+}

@@ -1,0 +1,108 @@
+{
+ "_id": "K4zdSyPh9KprkqzG",
+ "name": "Maximum: Antithesis",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/inverse.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Synesthesia</em></p>\n<p>You’ve learned to channel your inverted energy outward, inverting the flow of harm itself while your <em>Inverse</em> is active:</p>\n<ul>\n<li>\n<p>When you take damage within your threshold, you can spend 4 CE as a reaction to reflect half of that damage back to the attacker (damage becomes force or necrotic, your choice) if they are within 30 ft.  </p>\n</li>\n<li>\n<p>When you take damage below your threshold, you can instead spend 1 CE as a free action to transfer the pain. Choose a creature within 30 ft to take force or necrotic damage (your choice) equal to twice your CE modifier.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Synesthesia",
+  "activities": {
+   "7cjgbs0OFwmtgeIL": {
+    "_id": "7cjgbs0OFwmtgeIL",
+    "type": "utility",
+    "name": "Reaction (4 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "30",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    }
+   },
+   "W2RKS4D4JHU27dIM": {
+    "_id": "W2RKS4D4JHU27dIM",
+    "type": "utility",
+    "name": "Special (1 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "30",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "7cjgbs0OFwmtgeIL": 4,
+    "W2RKS4D4JHU27dIM": 1
+   },
+   "prereq": {
+    "features": [
+     [
+      "Domain Expansion: Synesthesia"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "DzKuT4Xc8CSjGmeg",
+ "sort": 300,
+ "_key": "!items!K4zdSyPh9KprkqzG"
+}

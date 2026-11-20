@@ -1,0 +1,32 @@
+{
+ "_id": "U67hANfZTVt3qhY1",
+ "name": "Lightning Body",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/mythical-beast-amber.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Mythical Beast Amber — Innate Technique (3rd level)</em></p><p>At 3rd level, your cursed energy is always electrifying your whole body, making your reactions instant. Your eyes gain marks of lightning around them, as a sign of your energy always refilling you. You can now add your Cursed Energy modifier to your initiative rolls.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Mythical Beast Amber 3"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Mythical Beast Amber",
+   "level": 3
+  }
+ },
+ "folder": "J9wuYC5ZIUpqsRHr",
+ "_key": "!items!U67hANfZTVt3qhY1"
+}

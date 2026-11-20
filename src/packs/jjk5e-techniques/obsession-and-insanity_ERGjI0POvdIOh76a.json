@@ -1,0 +1,32 @@
+{
+ "_id": "ERGjI0POvdIOh76a",
+ "name": "Obsession and Insanity",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/faceless-god.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Faceless God — Innate Technique (6th level)</em></p><p>At 6th level, the percent of Mental Corruption you can force on a creature increases to 50% and increases by 25% again at 11th level and 18th level. The die size for <em>Paranoia and Madness</em> decreases with every 25% increase and at 100% it happens automatically. At 90% you fall further into madness and must make a Wisdom saving throw at the beginning of your turn, moving in a random direction on a failed save.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Faceless God 6"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Faceless God",
+   "level": 6
+  }
+ },
+ "folder": "TxiITYXHPOTbqkOW",
+ "_key": "!items!ERGjI0POvdIOh76a"
+}

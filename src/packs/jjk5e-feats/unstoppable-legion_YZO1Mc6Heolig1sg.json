@@ -1,0 +1,85 @@
+{
+ "_id": "YZO1Mc6Heolig1sg",
+ "name": "Unstoppable Legion",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/clone.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Three is a Crowd</em></p>\n<p>You have trained extensively in fighting together with your Clones, gaining the following benefits:</p>\n<ul>\n<li>\n<p>When flanking with a Clone, you deal additional damage equal to your proficiency bonus  </p>\n</li>\n<li>\n<p>You can create Clones as a bonus action for 1 extra CE per clone  </p>\n</li>\n<li>\n<p>When one of your Clones is reduced to 0 hit points, rather than waiting 1 minute, you only need to wait 1 round</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Three is a Crowd",
+  "activities": {
+   "JT0YIl3UDHgR51KB": {
+    "_id": "JT0YIl3UDHgR51KB",
+    "type": "damage",
+    "name": "Bonus Action — rider",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": null,
+       "denomination": null,
+       "bonus": "",
+       "types": [],
+       "custom": {
+        "enabled": true,
+        "formula": "@prof"
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Three is a Crowd"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "PMUUoKMzebFsTMdN",
+ "sort": 200,
+ "_key": "!items!YZO1Mc6Heolig1sg"
+}

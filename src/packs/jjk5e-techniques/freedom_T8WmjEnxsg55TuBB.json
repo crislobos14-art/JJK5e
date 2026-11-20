@@ -1,0 +1,77 @@
+{
+ "_id": "T8WmjEnxsg55TuBB",
+ "name": "Freedom",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/fate.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Fate — Cursed Technique Reversal</em></p><p>You have learned your reversal that uses the opposite of your technique. Rather than the restricting binds of Fate, you can break free and become truly unchained by Destiny. As an action for 4 CE, you activate your reversal for 1 minute. For the duration, you cannot use cursed energy in any way and are considered to be completely devoid of cursed energy, making you immune to the guaranteed hit effects of domains, effects that target based on cursed energy, or effects that would give you disadvantage or penalties to attack rolls, ability checks, and saving throws.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Fate",
+  "activities": {
+   "HspT4B97VzoXgETZ": {
+    "_id": "HspT4B97VzoXgETZ",
+    "type": "utility",
+    "name": "Action (4 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "HspT4B97VzoXgETZ": 4
+   },
+   "technique": "Fate",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Fate"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!T8WmjEnxsg55TuBB"
+}

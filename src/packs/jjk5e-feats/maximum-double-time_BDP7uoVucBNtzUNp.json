@@ -1,0 +1,71 @@
+{
+ "_id": "BDP7uoVucBNtzUNp",
+ "name": "Maximum: Double Time",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/prayer-song.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Crescendo</em></p>\n<p>As an action for 3 CE, you double the tempo of your song and the battle. You treat every turn as if two turns passed.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Crescendo",
+  "activities": {
+   "bxh1XZth9g8WlIOL": {
+    "_id": "bxh1XZth9g8WlIOL",
+    "type": "utility",
+    "name": "Action (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "bxh1XZth9g8WlIOL": 3
+   },
+   "prereq": {
+    "features": [
+     [
+      "Crescendo"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "gzL8Vv0WJ18xaevn",
+ "sort": 300,
+ "_key": "!items!BDP7uoVucBNtzUNp"
+}

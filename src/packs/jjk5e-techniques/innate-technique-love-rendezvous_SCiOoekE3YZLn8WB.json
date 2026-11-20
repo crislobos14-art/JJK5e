@@ -1,0 +1,118 @@
+{
+ "_id": "SCiOoekE3YZLn8WB",
+ "name": "Innate Technique: Love Rendezvous",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/love-rendezvous.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>Love Rendezvous is a technique based on the Southern Cross. It marks creatures or objects with cursed energy and makes the lowest star have to pass through the other ones before they can move.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.HlC6hqoZAtbyQ2hV]{Love Rendezvous}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.WabghuPJeXcFn395]{Effective Marking}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.6YKKWuvr7DmwRzmS]{Gravity}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.jRT6oAmJpbn9zSBI]{Shining Stars}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.Z9I5KdkmVysGWEBn]{Domain Expansion: Star Crossed Lovers}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "m8e8KT6Ml3sph8AF": {
+    "_id": "m8e8KT6Ml3sph8AF",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Love Rendezvous (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.HlC6hqoZAtbyQ2hV",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "RNrE8pwQ9SySNU2T": {
+    "_id": "RNrE8pwQ9SySNU2T",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Love Rendezvous (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.WabghuPJeXcFn395",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "qp6STLtD3RMAcY17": {
+    "_id": "qp6STLtD3RMAcY17",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Love Rendezvous (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.6YKKWuvr7DmwRzmS",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "Re5DH3YbciyAyime": {
+    "_id": "Re5DH3YbciyAyime",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Love Rendezvous (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.jRT6oAmJpbn9zSBI",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "sQ5N7diko5wSQe61": {
+    "_id": "sQ5N7diko5wSQe61",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Love Rendezvous (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.Z9I5KdkmVysGWEBn",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Love Rendezvous"
+  }
+ },
+ "_key": "!items!SCiOoekE3YZLn8WB"
+}

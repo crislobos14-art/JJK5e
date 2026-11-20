@@ -1,0 +1,42 @@
+{
+ "_id": "0smLF44edBbcNfl1",
+ "name": "Long Lasting Medicine",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/pain-killer.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Practiced Hands</em></p>\n<p>A creature now gains the benefits of <em>Pain Killer</em> for 24 hours and is automatically stabilized if they are reduced to 0 hit points while under the effect.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Practiced Hands",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Practiced Hands"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "Maq8utaMhQSZRR4y",
+ "sort": 200,
+ "_key": "!items!0smLF44edBbcNfl1"
+}

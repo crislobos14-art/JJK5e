@@ -1,0 +1,73 @@
+{
+ "_id": "uACXGvmJdJgDQWuQ",
+ "name": "Maximum: Tsukumogami",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/tool-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Tool Mastery</em></p>\n<p>As an action for 8 CE, you can imbue a cursed tool with sentience, causing it to come to life and become a <em>Tsukumogami</em> for 1 hour. Your <em>Tsukumogami</em> is always under the effects of Floating Tool and can freely move by itself. It does not count against the number of Floating Tools you can have at once, but you can only have one <em>Tsukumogami</em> at a time.<br />\n  The <em>Tsukumogami</em> can take an action on your turn while you are holding it. That action can be used only to take the Attack action (one weapon attack only), Dash, Disengage, Hide, or Use an Object action. If you use Wind Scythe or Combat Tool Improvement’s reaction with your <em>Tsukumogami</em>, you can roll three additional dice.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Tool Mastery",
+  "activities": {
+   "FOEfL5V75e4Wv1xM": {
+    "_id": "FOEfL5V75e4Wv1xM",
+    "type": "utility",
+    "name": "Action (8 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "1",
+     "units": "hour",
+     "concentration": false
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "FOEfL5V75e4Wv1xM": 8
+   },
+   "prereq": {
+    "features": [
+     [
+      "Tool Mastery"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "U8kbD3GeDP98vXc5",
+ "sort": 300,
+ "_key": "!items!uACXGvmJdJgDQWuQ"
+}

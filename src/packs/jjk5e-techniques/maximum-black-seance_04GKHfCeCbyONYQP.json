@@ -1,0 +1,83 @@
+{
+ "_id": "04GKHfCeCbyONYQP",
+ "name": "Maximum: Black Seance",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/seance.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Seance — Innate Technique (11th level)</em></p><p>At 11th level, when you complete Ritual of Resurrection you can spend an additional 5 cursed energy to cause the target of the Seance to gain one of the following benefits.</p>\n<p><strong>Physical Information Overload</strong>. The target gains the hit points of the dead humanoid as temporary hit points if channeling Physical Information.</p>\n<p><strong>Soul Information Overload</strong>. The target gains access to all the dead humanoid’s Cursed Technique and Innate Technique features if channeling Soul Information. You cannot use Domain Expansion this way and can only use the minimum required cursed energy for innate technique features. The target also cannot use the dead humanoid’s innate technique and its own at the same time.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "721nZ5oYwxoP5WfB": {
+    "_id": "721nZ5oYwxoP5WfB",
+    "type": "utility",
+    "name": "Extra (5 CE)",
+    "sort": 900000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "At 11th level, when you complete Ritual of Resurrection you can spend an additional 5 c...",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "special",
+   "value": null,
+   "condition": "At 11th level, when you complete Ritual of Resurrection you can spend an additional 5 c...",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self"
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "721nZ5oYwxoP5WfB": 5
+   },
+   "technique": "Seance",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "z1MGG49oTB7xZ6Pc",
+ "_key": "!items!04GKHfCeCbyONYQP"
+}

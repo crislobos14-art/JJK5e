@@ -1,0 +1,118 @@
+{
+ "_id": "yGVI1LXlPXmIANZ7",
+ "name": "Innate Technique: ████ and Light",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/and-light.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>Your technique allows you to form killing intent into bars of light.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.XX6Rnw19OtQjYBnb]{Light Constructs}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.HTujAuWtwUzZQr2G]{Light Techniques}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.wgDtozCWclpmllfO]{Hyperspeed}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.CaaEcBGImDyI8hBg]{Maximum: Light Speed}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.YkSDOUb7CYJvTBFE]{Domain Expansion: Reverse Transcendence}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "4Ix8SNktSBDwCKE8": {
+    "_id": "4Ix8SNktSBDwCKE8",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "████ and Light (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.XX6Rnw19OtQjYBnb",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "IE8boRNfE2z3vdw2": {
+    "_id": "IE8boRNfE2z3vdw2",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "████ and Light (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.HTujAuWtwUzZQr2G",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "a3Q6qXFjRKZegzHg": {
+    "_id": "a3Q6qXFjRKZegzHg",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "████ and Light (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.wgDtozCWclpmllfO",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "ajleaFGDR2gnASTZ": {
+    "_id": "ajleaFGDR2gnASTZ",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "████ and Light (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.CaaEcBGImDyI8hBg",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "0EqPsxy7QFSMGcTB": {
+    "_id": "0EqPsxy7QFSMGcTB",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "████ and Light (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.YkSDOUb7CYJvTBFE",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "████ and Light"
+  }
+ },
+ "_key": "!items!yGVI1LXlPXmIANZ7"
+}

@@ -1,0 +1,43 @@
+{
+ "_id": "jygkPR4jIYIHv0v4",
+ "name": "General Understanding (5 PP)",
+ "type": "feat",
+ "img": "icons/svg/upgrade.svg",
+ "system": {
+  "description": {
+   "value": "<p>You gain 1 Physical or Skill Feat of your choice that you qualify for. You can take this attribute multiple times, but must choose a different feat each time.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTrait"
+  },
+  "requirements": "Cursed Spirit, 5 Profane Points",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "profaneCost": 5,
+   "prereq": {
+    "prefixes": [
+     [
+      "Cursed Spirit"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "ar3Bgj4YHvYRp8DL",
+ "sort": 2600,
+ "_key": "!items!jygkPR4jIYIHv0v4"
+}

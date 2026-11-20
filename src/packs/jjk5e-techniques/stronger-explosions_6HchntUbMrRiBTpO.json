@@ -1,0 +1,164 @@
+{
+ "_id": "6HchntUbMrRiBTpO",
+ "name": "Stronger Explosions",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/explosive-flesh.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Explosive Flesh — Innate Technique (11th level)</em></p><p>At 11th level, with the extensive use of your technique, your explosions became deadlier. When a creature fails the saving throw of your explosions, they gain the deafened condition for 1 minute. They can make a Constitution saving throw at the beginning of their turns, ending the condition early on a success. Also, your explosions deal three times as much damage to objects and structures and their explosion range is increased by 5ft.<br />\nAt 18th level, the creature also gains the blinded condition.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "wENdbq2O9vRdPcPp": {
+    "_id": "wENdbq2O9vRdPcPp",
+    "type": "save",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    },
+    "effects": [
+     {
+      "_id": "oavaaJ63thw5ibXF",
+      "onSave": false
+     },
+     {
+      "_id": "T5GLe3zyx3FjMbHC",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "special",
+   "value": null,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Explosive Flesh",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "oavaaJ63thw5ibXF",
+   "name": "Deafened (Stronger Explosions)",
+   "img": "modules/jjk5e/icons/techniques/explosive-flesh.svg",
+   "statuses": [
+    "deafened"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "seconds": 60,
+    "rounds": 10
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "deafened"
+    }
+   },
+   "_key": "!items.effects!6HchntUbMrRiBTpO.oavaaJ63thw5ibXF"
+  },
+  {
+   "_id": "T5GLe3zyx3FjMbHC",
+   "name": "Blinded (Stronger Explosions)",
+   "img": "modules/jjk5e/icons/techniques/explosive-flesh.svg",
+   "statuses": [
+    "blinded"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "seconds": 60,
+    "rounds": 10
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "blinded"
+    }
+   },
+   "_key": "!items.effects!6HchntUbMrRiBTpO.T5GLe3zyx3FjMbHC"
+  }
+ ],
+ "folder": "g4gimERTa06iViza",
+ "_key": "!items!6HchntUbMrRiBTpO"
+}

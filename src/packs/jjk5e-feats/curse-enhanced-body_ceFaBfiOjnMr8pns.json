@@ -1,0 +1,100 @@
+{
+ "_id": "ceFaBfiOjnMr8pns",
+ "name": "Curse Enhanced Body",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: 18+ Cursed Energy score</em></p>\n<p>You can enhance your body with Cursed energy. While not wearing armor, you add your Cursed Energy modifier to your AC. This becomes half your modifier (rounded up) if you have a feature such as Unarmored Defense.<br />\nAdditionally, you can use your Cursed Energy modifier for unarmed strikes in place of Strength or Dexterity. As a reaction you can spend cursed energy up to your Cursed Energy modifier and gain a bonus to a physical saving throw equal to the cursed energy spent. If you have Reverse Cursed Technique, you can also use this feature for mental saving throws.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkCursedEnergy"
+  },
+  "requirements": "18+ Cursed Energy score",
+  "activities": {
+   "P9Zs4Ivxat1VaafR": {
+    "_id": "P9Zs4Ivxat1VaafR",
+    "type": "utility",
+    "name": "Save bonus (1+ CE)",
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "max(1, max(@abilities.wis.mod, @abilities.cha.mod))"
+     }
+    },
+    "roll": {
+     "formula": "1",
+     "name": "Save bonus per CE",
+     "visible": true
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "ceScore": 18
+   },
+   "ceCosts": {
+    "P9Zs4Ivxat1VaafR": 1
+   },
+   "ceSteps": {
+    "P9Zs4Ivxat1VaafR": 1
+   }
+  }
+ },
+ "folder": "58RlNbYPWxO2Xi4E",
+ "effects": [
+  {
+   "_id": "bptC7LwCugP1YYNp",
+   "name": "Curse Enhanced Body (unarmored AC)",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "changes": [
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+0",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": false,
+   "duration": {},
+   "description": "<p>Adds your CE modifier to AC (half, rounded up, if you have Unarmored Defense or similar). Disable it while wearing armor.</p>",
+   "statuses": [],
+   "flags": {
+    "jjk5e": {
+     "ceChanges": [
+      {
+       "key": "system.attributes.ac.bonus",
+       "mode": 2,
+       "tpl": "+{CEHALF}"
+      }
+     ]
+    }
+   },
+   "_key": "!items.effects!ceFaBfiOjnMr8pns.bptC7LwCugP1YYNp"
+  }
+ ],
+ "sort": 700,
+ "_key": "!items!ceFaBfiOjnMr8pns"
+}

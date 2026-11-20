@@ -1,0 +1,92 @@
+{
+ "_id": "PzwUt0MCons6qKtx",
+ "name": "Blind Luck",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/miracle.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Miracle — Innate Technique (1st level)</em></p><p>Once per round when you take damage, you can spend a Miracle to reduce the incoming damage by Xd4 equal to your CE modifier. You add your proficiency bonus to the rolled amount and reduce the damage by that much. You can also do this as a reaction for a Miracle and 1 CE.<br />\n When used this way, the d4 increases to a d6 and you add your proficiency bonus twice.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "7I2bFGdGpPZaTmFh": {
+    "_id": "7I2bFGdGpPZaTmFh",
+    "type": "utility",
+    "name": "Reaction",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "reaction",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Miracle",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "tl97VGJouG41Z3rd",
+ "_key": "!items!PzwUt0MCons6qKtx"
+}

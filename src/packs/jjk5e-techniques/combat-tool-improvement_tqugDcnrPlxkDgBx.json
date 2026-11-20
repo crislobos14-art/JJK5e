@@ -1,0 +1,92 @@
+{
+ "_id": "tqugDcnrPlxkDgBx",
+ "name": "Combat Tool Improvement",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/tool-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Tool Manipulation — Innate Technique (6th level)</em></p><p>You gain a +1 bonus to attack and damage rolls when using an imbued tool for each CE spent.</p>\n<p>As a reaction, you can cause one of your imbued tools to protect you. It grants you a bonus to AC or reduces damage depending on its size. If the tool has a bonus to AC or damage rolls, it is included in the AC and reduction respectively.</p>\n<table>\n<thead>\n<tr>\n<th style=\"text-align: left;\">Size</th>\n<th style=\"text-align: left;\">AC</th>\n<th style=\"text-align: left;\">Reduction</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td style=\"text-align: left;\">Tiny</td>\n<td style=\"text-align: left;\">+1</td>\n<td style=\"text-align: left;\">1d4</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">Small</td>\n<td style=\"text-align: left;\">+2</td>\n<td style=\"text-align: left;\">2d4</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">Medium</td>\n<td style=\"text-align: left;\">+3</td>\n<td style=\"text-align: left;\">2d6</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">Large</td>\n<td style=\"text-align: left;\">+4</td>\n<td style=\"text-align: left;\">2d8</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">Huge</td>\n<td style=\"text-align: left;\">+5</td>\n<td style=\"text-align: left;\">2d10</td>\n</tr>\n</tbody>\n</table>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "akoyaBelu1j40XNt": {
+    "_id": "akoyaBelu1j40XNt",
+    "type": "utility",
+    "name": "Reaction",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "reaction",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Tool Manipulation",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "7tmhlm7tDflRZlKD",
+ "_key": "!items!tqugDcnrPlxkDgBx"
+}

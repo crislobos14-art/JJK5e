@@ -1,0 +1,118 @@
+{
+ "_id": "CYIYdPsyDtmdrcrA",
+ "name": "Slaughter Demon",
+ "type": "weapon",
+ "img": "icons/svg/sword.svg",
+ "folder": "pB7mLAOAtbyDQKeT",
+ "system": {
+  "description": {
+   "value": "<p><em>Weapon(Dagger), Grade 3</em></p><p>You gain a +1 bonus to attack and damage rolls with this weapon. On a hit, it deals an additional 1d4 necrotic damage.</p>"
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "simpleM",
+   "baseItem": "dagger"
+  },
+  "damage": {
+   "base": {
+    "number": 1,
+    "denomination": 4,
+    "types": [
+     "piercing"
+    ]
+   }
+  },
+  "range": {
+   "value": 20,
+   "long": 60,
+   "units": "ft"
+  },
+  "properties": [
+   "fin",
+   "lgt",
+   "mgc",
+   "thr"
+  ],
+  "proficient": null,
+  "quantity": 1,
+  "activities": {
+   "e7HSQfbRNHltZMfU": {
+    "_id": "e7HSQfbRNHltZMfU",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "melee",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   },
+   "EgGjXxWjNBptsiwY": {
+    "_id": "EgGjXxWjNBptsiwY",
+    "type": "damage",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 4,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "magicalBonus": 1,
+  "rarity": "uncommon",
+  "attunement": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "3rd Grade"
+  }
+ },
+ "_key": "!items!CYIYdPsyDtmdrcrA"
+}

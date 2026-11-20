@@ -1,0 +1,148 @@
+{
+ "_id": "Ukt7cdYBqbyYiFk9",
+ "name": "Fine Line",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/heart-catch.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Heart Catch — Cursed Technique Reversal</em></p><p>After mastering Reverse Cursed Technique, you have unlocked your cursed technique reversal. You are now able to summon small feet which disrupt the focus of creatures. As an action for 4 cursed energy, you may shoot out a bunch of little feet in a 30 foot cone. Creatures in this cone must make a Dexterity saving throw. On a failure, they take 5d6 bludgeoning damage and are frightened for 1 minute. On a success, they take half damage and are not frightened. Frightened creatures can repeat the save at the end of their turns.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Heart Catch",
+  "activities": {
+   "1fxW5LIOvnfrRs1h": {
+    "_id": "1fxW5LIOvnfrRs1h",
+    "type": "save",
+    "name": "Action (4 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {
+     "template": {
+      "type": "cone",
+      "size": "30",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     }
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 5,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "SIjTJ4wq95JwbFpW",
+      "onSave": false
+     }
+    ]
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "1fxW5LIOvnfrRs1h": 4
+   },
+   "technique": "Heart Catch",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Heart Catch"
+     ]
+    ]
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "SIjTJ4wq95JwbFpW",
+   "name": "Frightened (Fine Line)",
+   "img": "systems/dnd5e/icons/svg/statuses/frightened.svg",
+   "statuses": [
+    "frightened"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "seconds": 60,
+    "rounds": 10
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "frightened"
+    }
+   },
+   "_key": "!items.effects!Ukt7cdYBqbyYiFk9.SIjTJ4wq95JwbFpW"
+  }
+ ],
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!Ukt7cdYBqbyYiFk9"
+}

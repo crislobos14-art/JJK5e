@@ -1,0 +1,182 @@
+{
+ "_id": "Z9Ni91hHu2mMVtHZ",
+ "name": "Recreation",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/contractual-recreation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Contractual Recreation — Innate Technique (1st level)</em></p><blockquote><p>You can recreate the subject of contracts you find, like receipts.</p></blockquote><p>Starting at 1st level, you have learned the basics of your technique in materializing things from receipts, paying the cost in cursed energy. You start with 5 receipts of your choice. To materialize from a receipt, you spend the required cursed energy as an action. The receipt then becomes ashes and you cannot use this technique if the receipts are wet. You can summon materializations within 100 ft.</p>\n<table>\n<thead>\n<tr>\n<th style=\"text-align: left;\">Size</th>\n<th style=\"text-align: left;\">CE Cost</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td style=\"text-align: left;\">Tiny</td>\n<td style=\"text-align: left;\">2</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">Small</td>\n<td style=\"text-align: left;\">4</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">Medium</td>\n<td style=\"text-align: left;\">6</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">Large</td>\n<td style=\"text-align: left;\">8</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">Huge</td>\n<td style=\"text-align: left;\">10</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">Gargantuan</td>\n<td style=\"text-align: left;\">20</td>\n</tr>\n</tbody>\n</table>\n<p><strong>Object</strong>. You summon an object from the receipt, spending cursed energy equal to its size.<br />\n<strong>Vehicle</strong>. You can summon a vehicle from the receipt, spending cursed energy equal to its size.<br />\n<strong>Reservation</strong>. You can use a reservation receipt for 4 cursed energy, giving you the same effects staying on said place for all of the duration would. For example, a 2 day spa reservation would give you the benefits of a long rest.<br />\n<strong>Structure</strong>. You can create a structure from a receipt for 20 CE.</p>\n<p>If you create an object over a creature, they must make a Dexterity save against your CE save DC. On a failure they take 2d6 bludgeoning damage for every size larger than Tiny the object is. If the object is Huge or larger, a creature takes half as much damage on a successful save or is knocked prone and restrained under the object in addition to damage on a fail. Anything created through your technique lasts indefinitely.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "vzVK16H72nDncqyb": {
+    "_id": "vzVK16H72nDncqyb",
+    "type": "utility",
+    "name": "Action (4 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   },
+   "UvaaphKlwkGp9O6f": {
+    "_id": "UvaaphKlwkGp9O6f",
+    "type": "save",
+    "name": "Action (20 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "HsPEvpT91A1Dt4Gk",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "vzVK16H72nDncqyb": 4,
+    "UvaaphKlwkGp9O6f": 20
+   },
+   "technique": "Contractual Recreation",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "HsPEvpT91A1Dt4Gk",
+   "name": "Prone (Recreation)",
+   "img": "modules/jjk5e/icons/techniques/contractual-recreation.svg",
+   "statuses": [
+    "prone"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!Z9Ni91hHu2mMVtHZ.HsPEvpT91A1Dt4Gk"
+  }
+ ],
+ "folder": "1Ch8dLVYSEvwWjZr",
+ "_key": "!items!Z9Ni91hHu2mMVtHZ"
+}

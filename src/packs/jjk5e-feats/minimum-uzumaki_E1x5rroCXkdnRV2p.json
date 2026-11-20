@@ -1,0 +1,90 @@
+{
+ "_id": "E1x5rroCXkdnRV2p",
+ "name": "Minimum: Uzumaki",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/cursed-spirit-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Maximum: Uzumaki</em></p>\n<p>Due to your extended studies, you have made a smaller version of Uzumaki that's more deadly and much harder to dodge. As a bonus action, you can spend two cursed spirits to create a miniature Uzumaki that fits in your hand. It can't be seen by the creature unless its passive Perception is 25 or higher, or the creature succeeds a Perception check. As an action or reaction for 5 Cursed Energy, you can release all the condensed energy from this Uzumaki at a target within 30 feet. Make a ranged cursed energy attack roll, on a hit the target takes Xd12 of necrotic damage(X being the combined CR of the 2 curses). Like Maximum Uzumaki, this ignores resistance and treats immunity like resistance. You have advantage on your attack roll if the target has not detected your Minimum Uzumaki.<br />\nSimilar to Maximum Uzumaki, you can obtain actions, reactions, bonus actions, and legendary actions of the creature's technique.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Maximum: Uzumaki",
+  "activities": {
+   "bjQNjov0ucG06ILz": {
+    "_id": "bjQNjov0ucG06ILz",
+    "type": "attack",
+    "name": "Reaction (5 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "30",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": []
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "bjQNjov0ucG06ILz": 5
+   },
+   "prereq": {
+    "features": [
+     [
+      "Maximum: Uzumaki"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "808kDeN1ffx0XP3c",
+ "sort": 300,
+ "_key": "!items!E1x5rroCXkdnRV2p"
+}

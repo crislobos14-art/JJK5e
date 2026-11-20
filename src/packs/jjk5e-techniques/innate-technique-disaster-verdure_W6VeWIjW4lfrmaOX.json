@@ -1,0 +1,118 @@
+{
+ "_id": "W6VeWIjW4lfrmaOX",
+ "name": "Innate Technique: Disaster Verdure",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/disaster-verdure.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>You are born with an amazing power, with many possibilities, plant manipulation, allowing you to protect those you care about.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.rXXHBBI0bIPLLHsu]{Forests of Disaster}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.u7p2yaIifyDSZYtW]{Root Bundle}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.MLLR1v3HhPAmTEO8]{Flower Field}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.rAbsflTzfT1qFbq4]{Cursed Buds}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.7clE8rWvh6MVK4iK]{Domain Expansion: Ceremonial Sea of Light}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "augP0GnkUSqNTnQX": {
+    "_id": "augP0GnkUSqNTnQX",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Disaster Verdure (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.rXXHBBI0bIPLLHsu",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "vwEy1LptFPvdDIDK": {
+    "_id": "vwEy1LptFPvdDIDK",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Disaster Verdure (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.u7p2yaIifyDSZYtW",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "tgsGegDaUtLqbaY2": {
+    "_id": "tgsGegDaUtLqbaY2",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Disaster Verdure (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.MLLR1v3HhPAmTEO8",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "u0txlCqIgmq8Yo7t": {
+    "_id": "u0txlCqIgmq8Yo7t",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Disaster Verdure (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.rAbsflTzfT1qFbq4",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "D5CpSfCs0jZpsFQB": {
+    "_id": "D5CpSfCs0jZpsFQB",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Disaster Verdure (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.7clE8rWvh6MVK4iK",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Disaster Verdure"
+  }
+ },
+ "_key": "!items!W6VeWIjW4lfrmaOX"
+}

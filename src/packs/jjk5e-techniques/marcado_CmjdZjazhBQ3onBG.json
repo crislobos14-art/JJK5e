@@ -1,0 +1,95 @@
+{
+ "_id": "CmjdZjazhBQ3onBG",
+ "name": "Marcado",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/prayer-song.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prayer Song — Innate Technique (3rd level)</em></p><p>At 3rd level, you give certain blows more of a kick. Once per turn for 1 CE, you deal 2 additional damage dice on an attack.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "6vfB7yNFal6DmnTZ": {
+    "_id": "6vfB7yNFal6DmnTZ",
+    "type": "utility",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "6vfB7yNFal6DmnTZ": 1
+   },
+   "technique": "Prayer Song",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "LeKt9DxatfKKBe3c",
+ "_key": "!items!CmjdZjazhBQ3onBG"
+}

@@ -1,0 +1,32 @@
+{
+ "_id": "RydhWysbYbqx9hoH",
+ "name": "Cleansing of Purity",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/moon-dregs.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Moon Dregs — Innate Technique (11th level)</em></p><p>At 11th level, you can add your Cursed Energy modifier to <em>Moon Dregs’</em> AC as well as its Strength, Dexterity, and Constitution scores. <em>Moon Dregs</em> now makes three attacks when it takes the Attack action.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Moon Dregs 11"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Moon Dregs",
+   "level": 11
+  }
+ },
+ "folder": "z6mgJlgIkKDRJURh",
+ "_key": "!items!RydhWysbYbqx9hoH"
+}

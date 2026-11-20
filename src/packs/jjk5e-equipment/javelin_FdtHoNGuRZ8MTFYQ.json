@@ -1,0 +1,73 @@
+{
+ "_id": "FdtHoNGuRZ8MTFYQ",
+ "name": "Javelin",
+ "type": "weapon",
+ "img": "icons/svg/sword.svg",
+ "folder": "8L9REK3UZxFoXRJA",
+ "system": {
+  "description": {
+   "value": "<p>Simple melee weapon. 1d6 piercing. Thrown(30/120).</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "simpleM",
+   "baseItem": "javelin"
+  },
+  "damage": {
+   "base": {
+    "number": 1,
+    "denomination": 6,
+    "types": [
+     "piercing"
+    ]
+   }
+  },
+  "range": {
+   "value": 30,
+   "long": 120,
+   "units": "ft"
+  },
+  "properties": [
+   "thr"
+  ],
+  "proficient": null,
+  "price": {
+   "value": 0.5,
+   "denomination": "gp"
+  },
+  "quantity": 1,
+  "activities": {
+   "1b1lkV33b0yAFhGK": {
+    "_id": "1b1lkV33b0yAFhGK",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "melee",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "priceUSD": "$50"
+  }
+ },
+ "_key": "!items!FdtHoNGuRZ8MTFYQ"
+}

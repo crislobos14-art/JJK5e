@@ -1,0 +1,100 @@
+{
+ "_id": "Om8PQArctHSaxHes",
+ "name": "Glass Weakening",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/black-box.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Black Box — Cursed Technique Reversal, 3rd level</em></p><p>At 3rd level, you can spend up to twice your CE modifier in additional cursed energy to gain a weakening for every 2 CE spent.</p>\n<p><strong>Fragility.</strong> Your Cube loses 1 HP and gains a -1 to AC for every weakening and lasts an additional minute for every 2 weakenings.</p>\n<p><strong>Shatterability.</strong> Your box deals additional slashing damage equal to your CE modifier for every weakening.</p>\n<p><strong>Size.</strong> For every weakening, you can make your Glass Box 5 feet larger, allowing you to fit more creatures. (10 ft &lt; 15 ft &lt; 20ft)</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Black Box 3",
+  "activities": {
+   "RisoxJ2Bam0AlTUe": {
+    "_id": "RisoxJ2Bam0AlTUe",
+    "type": "damage",
+    "name": "Special (2+ CE)",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "2 * max(1, max(@abilities.wis.mod, @abilities.cha.mod))"
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": null,
+       "denomination": null,
+       "bonus": "",
+       "types": [
+        "slashing"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "max(@abilities.wis.mod, @abilities.cha.mod)"
+       },
+       "scaling": {
+        "mode": "whole",
+        "number": null
+       }
+      }
+     ]
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceSteps": {
+    "RisoxJ2Bam0AlTUe": 2
+   },
+   "ceCosts": {
+    "RisoxJ2Bam0AlTUe": 2
+   },
+   "technique": "Black Box",
+   "reversal": true,
+   "reversalLevel": 3,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Black Box"
+     ]
+    ],
+    "level": 3
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 10,
+ "_key": "!items!Om8PQArctHSaxHes"
+}

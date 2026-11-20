@@ -1,0 +1,81 @@
+{
+ "_id": "LMyOmZN0EyllkS3Y",
+ "name": "Seki",
+ "type": "weapon",
+ "img": "icons/svg/sword.svg",
+ "folder": "TBXVbdCh1Kxu8AKz",
+ "system": {
+  "description": {
+   "value": "<p><em>Weapon(Longsword), Grade 1</em></p><p>You gain a +2 bonus to attack and damage rolls with this weapon. On a critical hit with this weapon, the target loses 1d4 cursed energy that is absorbed by the sword. The sword can absorb up to 6 cursed energy. Once per turn, you can spend up to 3 cursed energy to gain a bonus to an attack roll you make with this weapon equal to the cursed energy spent.</p>"
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "martialM",
+   "baseItem": "longsword"
+  },
+  "damage": {
+   "base": {
+    "number": 1,
+    "denomination": 8,
+    "types": [
+     "slashing"
+    ]
+   },
+   "versatile": {
+    "number": 1,
+    "denomination": 10,
+    "types": [
+     "slashing"
+    ]
+   }
+  },
+  "range": {
+   "value": 5,
+   "long": null,
+   "units": "ft",
+   "reach": 5
+  },
+  "properties": [
+   "mgc",
+   "ver"
+  ],
+  "proficient": null,
+  "quantity": 1,
+  "activities": {
+   "P4o6vutRhScbfbcm": {
+    "_id": "P4o6vutRhScbfbcm",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "melee",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   }
+  },
+  "magicalBonus": 2,
+  "rarity": "veryRare",
+  "attunement": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "1st Grade"
+  }
+ },
+ "_key": "!items!LMyOmZN0EyllkS3Y"
+}

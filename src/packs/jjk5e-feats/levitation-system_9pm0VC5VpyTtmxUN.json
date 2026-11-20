@@ -1,0 +1,89 @@
+{
+ "_id": "9pm0VC5VpyTtmxUN",
+ "name": "Levitation System",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/antigravity-system.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Gravity Field</em></p>\n<p>As an action for 2 CE, you can cast Levitate. You can spend an additional 2 CE to force the creature to make the save at disadvantage.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Gravity Field",
+  "activities": {
+   "T6X7yeGI9SaTmrzD": {
+    "_id": "T6X7yeGI9SaTmrzD",
+    "type": "utility",
+    "name": "Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   },
+   "HNDMKo055frRbOTz": {
+    "_id": "HNDMKo055frRbOTz",
+    "type": "utility",
+    "name": "Extra (2 CE)",
+    "sort": 900000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "You can spend an additional 2 CE to force the creature to make the save at disadvantage."
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "T6X7yeGI9SaTmrzD": 2,
+    "HNDMKo055frRbOTz": 2
+   },
+   "prereq": {
+    "features": [
+     [
+      "Gravity Field"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "aLDCA5tMqdkRqKRy",
+ "sort": 100,
+ "_key": "!items!9pm0VC5VpyTtmxUN"
+}

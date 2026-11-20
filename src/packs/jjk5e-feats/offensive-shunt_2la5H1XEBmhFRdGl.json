@@ -1,0 +1,162 @@
+{
+ "_id": "2la5H1XEBmhFRdGl",
+ "name": "Offensive Shunt",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/teleportation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Teleport</em></p>\n<p>You have learned to use your technique offensively. When you mark an object that is Small size category or smaller, you can spend 3 CE to forcefully teleport it into a space occupied by a creature within 60 ft that you can see, which forces a Dexterity saving throw. On a failed save, the object teleports into their body and they take Xd6 force damage that ignores damage resistances (X = proficiency bonus). At 6th level, you can spend additional CE up to your proficiency bonus to increase the die tier of <em>Offensive Shunt</em> by 1 per CE spent up to a maximum of d12s (d6 &gt; d8 &gt; d10 &gt; d12).<br />\n At 11th level, when teleporting a willing or unwilling creature, you can spend an additional 6 CE to teleport them into an area occupied by a Large size category object or structure or larger within 30 ft that you can see. Both the creature and the object or structure take double the damage of your <em>Offensive Shunt</em>. If this destroys the object or structure, the creature falls prone. Otherwise, the target is restrained in the item until removed or the obstruction is destroyed.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Teleport",
+  "activities": {
+   "acmaIpHw7Z4eipIV": {
+    "_id": "acmaIpHw7Z4eipIV",
+    "type": "save",
+    "name": "Action (3+ CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "@prof"
+     }
+    },
+    "range": {
+     "value": "60",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    },
+    "effects": [
+     {
+      "_id": "xHMkpMWXUqAhfb8R",
+      "onSave": false
+     },
+     {
+      "_id": "zjtzRoaZx1ZQkwkk",
+      "onSave": false
+     }
+    ]
+   },
+   "ZK50KyqXn7mbKz6M": {
+    "_id": "ZK50KyqXn7mbKz6M",
+    "type": "utility",
+    "name": "Extra (6 CE)",
+    "sort": 900000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "At 11th level, when teleporting a willing or unwilling creature, you can spend an addit..."
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceSteps": {
+    "acmaIpHw7Z4eipIV": 1
+   },
+   "ceCosts": {
+    "acmaIpHw7Z4eipIV": 3,
+    "ZK50KyqXn7mbKz6M": 6
+   },
+   "prereq": {
+    "features": [
+     [
+      "Teleport"
+     ]
+    ]
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "xHMkpMWXUqAhfb8R",
+   "name": "Prone (Offensive Shunt)",
+   "img": "modules/jjk5e/icons/techniques/teleportation.svg",
+   "statuses": [
+    "prone"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!2la5H1XEBmhFRdGl.xHMkpMWXUqAhfb8R"
+  },
+  {
+   "_id": "zjtzRoaZx1ZQkwkk",
+   "name": "Restrained (Offensive Shunt)",
+   "img": "modules/jjk5e/icons/techniques/teleportation.svg",
+   "statuses": [
+    "restrained"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "restrained"
+    }
+   },
+   "_key": "!items.effects!2la5H1XEBmhFRdGl.zjtzRoaZx1ZQkwkk"
+  }
+ ],
+ "folder": "giRwgEP8Enx3V3vx",
+ "sort": 100,
+ "_key": "!items!2la5H1XEBmhFRdGl"
+}

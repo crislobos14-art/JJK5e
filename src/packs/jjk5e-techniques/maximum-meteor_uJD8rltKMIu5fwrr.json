@@ -1,0 +1,177 @@
+{
+ "_id": "uJD8rltKMIu5fwrr",
+ "name": "Maximum: Meteor",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/disaster-flames.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Disaster Flames — Innate Technique (11th level)</em></p><p>When you reach 11th level, you have learned to extract the maximum from Disaster Flames, creating your Maximum. As an action for 10 Cursed Energy, you can fly up 120 ft in the air until the end of your next turn and create a single gigantic meteor. In the following turn you float down 120 ft harmlessly. Every other creature in a 120 ft radius centered on you must make a Dexterity saving throw. On a failure, they take 10d4 bludgeoning damage + 10d6 fire damage and are knocked prone. On a success, they take half as much damage.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "455HEYu0KXZmQGyn": {
+    "_id": "455HEYu0KXZmQGyn",
+    "type": "save",
+    "name": "Action (10 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "120",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 10,
+       "denomination": 4,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "uVjr71gzsr0kefcx",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "radius",
+    "size": "120",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": false
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "455HEYu0KXZmQGyn": 10
+   },
+   "technique": "Disaster Flames",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "uVjr71gzsr0kefcx",
+   "name": "Prone (Maximum: Meteor)",
+   "img": "modules/jjk5e/icons/techniques/disaster-flames.svg",
+   "statuses": [
+    "prone"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "rounds": 1
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!uJD8rltKMIu5fwrr.uVjr71gzsr0kefcx"
+  }
+ ],
+ "folder": "Xs1qvLjpsB4bwM5D",
+ "_key": "!items!uJD8rltKMIu5fwrr"
+}

@@ -1,0 +1,42 @@
+{
+ "_id": "RptOsTVqEQe3xgZs",
+ "name": "True Mania",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/faceless-god.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Maximum: Rumination</em></p>\n<p>A creature gains a temporary level of exhaustion while at 50% corruption or two levels of exhaustion at 100%.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Maximum: Rumination",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Maximum: Rumination"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "ZsSLGfOrda4TafgY",
+ "sort": 300,
+ "_key": "!items!RptOsTVqEQe3xgZs"
+}

@@ -1,0 +1,46 @@
+{
+ "_id": "mLhSUvyfKRj4jU5u",
+ "name": "Defiant",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/mindset.svg",
+ "system": {
+  "description": {
+   "value": "<p>You are pride, stubbornness, and conviction incarnate. When you would be reduced to 0 hit points, you can use your inspiration to defy death and instead fall to 1/6 your hit point maximum (rounded up) and immediately take one action.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": ""
+  },
+  "requirements": "Mindset",
+  "activities": {
+   "hc3Hy8thBPNEj7g5": {
+    "_id": "hc3Hy8thBPNEj7g5",
+    "type": "utility",
+    "name": "Use Inspiration",
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Spend your inspiration"
+    },
+    "consumption": {
+     "targets": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "mindset": true
+  }
+ },
+ "folder": "ymyii86sdbVo8H5C",
+ "_key": "!items!mLhSUvyfKRj4jU5u"
+}

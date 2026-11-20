@@ -1,0 +1,54 @@
+{
+ "_id": "DG6Qp9fzcWmIfgnR",
+ "name": "Observer",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: N/A</em></p>\n<p>Quick to notice details of your environment, you gain the following benefits:</p>\n<ul>\n<li>\n<p>Increase your Intelligence or Wisdom score by 1, to a maximum of 20.  </p>\n</li>\n<li>\n<p>If you can see a creature's mouth while it is speaking a language you understand, you can interpret what it's saying by reading its lips.  </p>\n</li>\n<li>\n<p>You have a +5 bonus to your passive Wisdom (Perception) and passive Intelligence (Investigation) scores.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkSkill"
+  },
+  "requirements": "N/A",
+  "advancement": {
+   "oZAPrIBfyXCiJQAf": {
+    "_id": "oZAPrIBfyXCiJQAf",
+    "type": "AbilityScoreImprovement",
+    "level": 0,
+    "title": "Ability Score Increase",
+    "value": {},
+    "configuration": {
+     "points": 1,
+     "cap": 1,
+     "fixed": {},
+     "locked": [
+      "str",
+      "dex",
+      "con",
+      "cha"
+     ]
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "EtgHYidIGv42ylfo",
+ "sort": 1200,
+ "_key": "!items!DG6Qp9fzcWmIfgnR"
+}

@@ -1,0 +1,96 @@
+{
+ "_id": "8LGbt2QpvSSZv9Rn",
+ "name": "Drill Claws",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/dark-claw.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Claw Modifications</em></p>\n<p>You have learned to control the length of your claws. As a bonus action, you lengthen your claws and increase your melee reach with them by 5 ft for 1 minute or until you retract them as a bonus action. </p>\n<p>Additionally, you learn to shoot out your claws as projectiles. Once per turn when you take the Attack action you can spend 1 CE to replace one of your attacks with a Drill Claw attack. You make a ranged Claw attack using your Strength, Dexterity, or Cursed Energy modifier against a creature within 30 ft. On a hit, this attack deals 4d8 piercing damage. This increases to 6d8 at 6th level, 8d8 at 11th level and 10d8 at 18th level. The range of this attack doubles at 6th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Claw Modifications",
+  "activities": {
+   "6Y20vzbRskj57gj8": {
+    "_id": "6Y20vzbRskj57gj8",
+    "type": "damage",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "30",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 4,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "piercing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "6Y20vzbRskj57gj8": 1
+   },
+   "prereq": {
+    "features": [
+     [
+      "Claws Modifications"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "zt8ujvT8aBbmfDqZ",
+ "sort": 200,
+ "_key": "!items!8LGbt2QpvSSZv9Rn"
+}

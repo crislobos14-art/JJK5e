@@ -1,0 +1,201 @@
+{
+ "_id": "Fg2uQWtBv1hbcKXy",
+ "name": "Aircraft Hair",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/hair-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Hair Manipulation — Innate Technique (6th level)</em></p><p>At 6th level you have learned to make more complex constructs from your hair. As an action for 3 CE, you form your hair into either a Jet or Helicopter for 1 minute and can spend 1 CE to keep the form active for 1 minute:</p>\n<p><strong>Helicopter Hair</strong>. You gain a flying speed equal to your walking speed and can take the Dash action as a bonus action. When you take the attack action, you can spend 2 cursed energy to replace one attack by extending your blades and attempting to slash an enemy. Make a melee cursed energy attack, on a hit you deal 6d8 + your CE modifier slashing damage. This damage increases to 8d8 at 11th level, and 10d8 at 18th level.<br />\n A creature that hits you with an Opportunity attack takes slashing damage equal to your CE modifier. This becomes twice your CE modifier at 11th level.</p>\n<p><strong>Jet Hair</strong>. You gain a flying speed equal to your walking speed. When you take the dash action while flying, you not only do not provoke opportunity attacks, but can also choose to move in a straight line and crash through creatures. All creatures in your path must make a Dexterity saving throw. On a failed save, they take Xd8 bludgeoning damage and are pushed back 30 ft away from you and knocked prone. If they impact a solid surface, they take 1d4 bludgeoning for every 10 ft you traveled in a straight line before crashing into them. On a successful save they take half as much damage and are not pushed or knocked prone. (X = CE modifier)</p>\n<p>At 11th level, taking the Dash action while flying you instead move up to twice your flying speed. This increases to three times your flying speed at 18th level.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "eOcvntLcnlzOiafX": {
+    "_id": "eOcvntLcnlzOiafX",
+    "type": "utility",
+    "name": "Action (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    }
+   },
+   "4paFjPNu3b466ZR7": {
+    "_id": "4paFjPNu3b466ZR7",
+    "type": "save",
+    "name": "Action (2 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 6,
+       "denomination": 8,
+       "bonus": "@mod",
+       "types": [
+        "slashing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "HBIOSOsQ9oLxpNVo",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "dmgScale": {
+    "4paFjPNu3b466ZR7": [
+     [
+      0,
+      "6d8"
+     ],
+     [
+      11,
+      "8d8"
+     ],
+     [
+      18,
+      "10d8"
+     ]
+    ]
+   },
+   "ceCosts": {
+    "eOcvntLcnlzOiafX": 3,
+    "4paFjPNu3b466ZR7": 2
+   },
+   "technique": "Hair Manipulation",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "HBIOSOsQ9oLxpNVo",
+   "name": "Prone (Aircraft Hair)",
+   "img": "modules/jjk5e/icons/techniques/hair-manipulation.svg",
+   "statuses": [
+    "prone"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!Fg2uQWtBv1hbcKXy.HBIOSOsQ9oLxpNVo"
+  }
+ ],
+ "folder": "gqEhAM7a9IFAzEwy",
+ "_key": "!items!Fg2uQWtBv1hbcKXy"
+}

@@ -1,0 +1,126 @@
+{
+ "_id": "tUu7Y7Fpc26s97zh",
+ "name": "Peripheral Vision",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/paralyzing-gaze.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Paralyzing Gaze — Innate Technique (3rd level)</em></p><p>At 3rd level, you have trained your peripheral vision to lock down multiple targets at once. When you use <em>Immobilizing Eyes</em>, you instead spend a Full-Turn Action (Action + Bonus Action + Movement) to affect a number of creatures up to your Cursed Energy modifier, spending 1 CE for every creature beyond the first. You must spend 1 CE for each targeted creature to maintain your technique against them.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "DTINx1WfX2xsnk4f": {
+    "_id": "DTINx1WfX2xsnk4f",
+    "type": "utility",
+    "name": "Bonus Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   },
+   "By1iifz3o9klqhw7": {
+    "_id": "By1iifz3o9klqhw7",
+    "type": "utility",
+    "name": "Action (1 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "DTINx1WfX2xsnk4f": 1,
+    "By1iifz3o9klqhw7": 1
+   },
+   "technique": "Paralyzing Gaze",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "NgfqZW5WmZKy5Fbs",
+ "_key": "!items!tUu7Y7Fpc26s97zh"
+}

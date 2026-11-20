@@ -1,0 +1,13 @@
+{
+ "_id": "YZiBVPg6mu2azFrT",
+ "name": "JJK: Binding Vows",
+ "type": "script",
+ "img": "icons/magic/symbols/runes-triangle-blue.webp",
+ "scope": "global",
+ "command": "game.modules.get(\"jjk5e\").api.openVows();",
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": null,
+ "_key": "!macros!YZiBVPg6mu2azFrT"
+}

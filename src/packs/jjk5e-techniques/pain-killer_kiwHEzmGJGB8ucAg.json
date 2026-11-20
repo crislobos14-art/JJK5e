@@ -1,0 +1,150 @@
+{
+ "_id": "kiwHEzmGJGB8ucAg",
+ "name": "Pain Killer",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/pain-killer.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Pain Killer — Innate Technique (1st level)</em></p><blockquote><p>While you cannot heal, you can stop injuries from getting worse.</p></blockquote><p>Starting at 1st level, you can use your technique to stop injuries from getting worse. As a bonus action for 1 CE, you can make a symbol with your hand and touch a creature within 5 feet. If a creature is taking damage over time, you cause that damage to stop and the creature gains temporary hit points equal to your CE modifier + your level for 1 hour. This does not stop new effects from affecting the target. You also gain proficiency in Medicine.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "2YF1OrneWFTeGyE4": {
+    "_id": "2YF1OrneWFTeGyE4",
+    "type": "heal",
+    "name": "Bonus Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "hour",
+     "concentration": false,
+     "override": true
+    },
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "",
+     "types": [
+      "temphp"
+     ],
+     "custom": {
+      "enabled": true,
+      "formula": "max(@abilities.wis.mod, @abilities.cha.mod)"
+     },
+     "scaling": {
+      "number": 1
+     }
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "hour"
+  },
+  "range": {
+   "value": "5",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "2YF1OrneWFTeGyE4": 1
+   },
+   "technique": "Pain Killer",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "dNStemY1SSBJjSwq",
+ "effects": [
+  {
+   "_id": "7OzLVmP6uZLQWKKt",
+   "name": "Pain Killer (toggle)",
+   "img": "modules/jjk5e/icons/techniques/pain-killer.svg",
+   "changes": [
+    {
+     "key": "system.skills.med.value",
+     "mode": 4,
+     "value": "1",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!kiwHEzmGJGB8ucAg.7OzLVmP6uZLQWKKt"
+  }
+ ],
+ "_key": "!items!kiwHEzmGJGB8ucAg"
+}

@@ -1,0 +1,118 @@
+{
+ "_id": "H7qygxbG8Xq0c6vn",
+ "name": "Innate Technique: Boogie Woogie",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/boogie-woogie.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>You were born with a simple although tricky ability to swap places with your opponents with a clap.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.5vAGmViQgCS1lFHt]{Boogie}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.cVdZahpNqUHQl5QK]{Woogie}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.wh6kIPv5jF9mXwov]{Clap Back}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.GLlokhkylJzrd121]{Round of Applause}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.jH3RgblvAF3tyNmI]{Domain Expansion: Standing Ovation}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "XnGMre6XBD8yhySu": {
+    "_id": "XnGMre6XBD8yhySu",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Boogie Woogie (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.5vAGmViQgCS1lFHt",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "UADCoBYUfx3Puf09": {
+    "_id": "UADCoBYUfx3Puf09",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Boogie Woogie (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.cVdZahpNqUHQl5QK",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "vJ3WrcrCpXMDbi6r": {
+    "_id": "vJ3WrcrCpXMDbi6r",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Boogie Woogie (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.wh6kIPv5jF9mXwov",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "M6aXzhypHPyamRyJ": {
+    "_id": "M6aXzhypHPyamRyJ",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Boogie Woogie (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.GLlokhkylJzrd121",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "8u8EiJvf12p1Zh41": {
+    "_id": "8u8EiJvf12p1Zh41",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Boogie Woogie (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.jH3RgblvAF3tyNmI",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Boogie Woogie"
+  }
+ },
+ "_key": "!items!H7qygxbG8Xq0c6vn"
+}

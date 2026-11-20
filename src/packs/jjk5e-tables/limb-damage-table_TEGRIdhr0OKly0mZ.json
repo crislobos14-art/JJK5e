@@ -1,0 +1,106 @@
+{
+ "_id": "TEGRIdhr0OKly0mZ",
+ "name": "Limb Damage Table",
+ "img": "icons/svg/d20-grey.svg",
+ "description": "",
+ "formula": "1d6",
+ "replacement": true,
+ "displayRoll": true,
+ "results": [
+  {
+   "_id": "hIRRddOoIpEq1kjK",
+   "type": "text",
+   "text": "<p><strong>Right Leg</strong> — <strong>Required Damage:</strong> Con mod×Level — <strong>Broken Limb:</strong> Your movement is halved and you can’t jump. — <strong>Lost Limb:</strong> You lose your right leg.</p>",
+   "description": "<p><strong>Right Leg</strong> — <strong>Required Damage:</strong> Con mod×Level — <strong>Broken Limb:</strong> Your movement is halved and you can’t jump. — <strong>Lost Limb:</strong> You lose your right leg.</p>",
+   "name": "Right Leg",
+   "img": "icons/svg/d20-black.svg",
+   "weight": 1,
+   "range": [
+    1,
+    1
+   ],
+   "drawn": false,
+   "_key": "!tables.results!TEGRIdhr0OKly0mZ.hIRRddOoIpEq1kjK"
+  },
+  {
+   "_id": "CNMNGw3rs3MbzIhb",
+   "type": "text",
+   "text": "<p><strong>Left Leg</strong> — <strong>Required Damage:</strong> Con mod×Level — <strong>Broken Limb:</strong> Your movement is halved and you can’t jump. — <strong>Lost Limb:</strong> You lose your left leg.</p>",
+   "description": "<p><strong>Left Leg</strong> — <strong>Required Damage:</strong> Con mod×Level — <strong>Broken Limb:</strong> Your movement is halved and you can’t jump. — <strong>Lost Limb:</strong> You lose your left leg.</p>",
+   "name": "Left Leg",
+   "img": "icons/svg/d20-black.svg",
+   "weight": 1,
+   "range": [
+    2,
+    2
+   ],
+   "drawn": false,
+   "_key": "!tables.results!TEGRIdhr0OKly0mZ.CNMNGw3rs3MbzIhb"
+  },
+  {
+   "_id": "B9be7JqPrJ8pVW0e",
+   "type": "text",
+   "text": "<p><strong>Right Arm</strong> — <strong>Required Damage:</strong> Con mod×Level — <strong>Broken Limb:</strong> Skill checks and attack rolls using this arm have disadvantage. — <strong>Lost Limb:</strong> Skill checks and attack rolls with this arm are impossible.</p>",
+   "description": "<p><strong>Right Arm</strong> — <strong>Required Damage:</strong> Con mod×Level — <strong>Broken Limb:</strong> Skill checks and attack rolls using this arm have disadvantage. — <strong>Lost Limb:</strong> Skill checks and attack rolls with this arm are impossible.</p>",
+   "name": "Right Arm",
+   "img": "icons/svg/d20-black.svg",
+   "weight": 1,
+   "range": [
+    3,
+    3
+   ],
+   "drawn": false,
+   "_key": "!tables.results!TEGRIdhr0OKly0mZ.B9be7JqPrJ8pVW0e"
+  },
+  {
+   "_id": "bFW8z75AqXo9Bgi7",
+   "type": "text",
+   "text": "<p><strong>Left Arm</strong> — <strong>Required Damage:</strong> Con mod×Level — <strong>Broken Limb:</strong> Skill checks and attack rolls using this arm have disadvantage. — <strong>Lost Limb:</strong> Skill checks and attack rolls with this arm are impossible.</p>",
+   "description": "<p><strong>Left Arm</strong> — <strong>Required Damage:</strong> Con mod×Level — <strong>Broken Limb:</strong> Skill checks and attack rolls using this arm have disadvantage. — <strong>Lost Limb:</strong> Skill checks and attack rolls with this arm are impossible.</p>",
+   "name": "Left Arm",
+   "img": "icons/svg/d20-black.svg",
+   "weight": 1,
+   "range": [
+    4,
+    4
+   ],
+   "drawn": false,
+   "_key": "!tables.results!TEGRIdhr0OKly0mZ.bFW8z75AqXo9Bgi7"
+  },
+  {
+   "_id": "hg7qSG6qEmDF4dBt",
+   "type": "text",
+   "text": "<p><strong>Torso</strong> — <strong>Required Damage:</strong> Con mod×(Level×2) — <strong>Broken Limb:</strong> Max HP is halved. — <strong>Lost Limb:</strong> The target dies unless it can live without a torso.</p>",
+   "description": "<p><strong>Torso</strong> — <strong>Required Damage:</strong> Con mod×(Level×2) — <strong>Broken Limb:</strong> Max HP is halved. — <strong>Lost Limb:</strong> The target dies unless it can live without a torso.</p>",
+   "name": "Torso",
+   "img": "icons/svg/d20-black.svg",
+   "weight": 1,
+   "range": [
+    5,
+    5
+   ],
+   "drawn": false,
+   "_key": "!tables.results!TEGRIdhr0OKly0mZ.hg7qSG6qEmDF4dBt"
+  },
+  {
+   "_id": "HIwB7SftvvqNZ0R0",
+   "type": "text",
+   "text": "<p><strong>Head</strong> — <strong>Required Damage:</strong> Con mod×(Level×2) — <strong>Broken Limb:</strong> The target is unconscious. — <strong>Lost Limb:</strong> The target dies unless it can live without a head.</p>",
+   "description": "<p><strong>Head</strong> — <strong>Required Damage:</strong> Con mod×(Level×2) — <strong>Broken Limb:</strong> The target is unconscious. — <strong>Lost Limb:</strong> The target dies unless it can live without a head.</p>",
+   "name": "Head",
+   "img": "icons/svg/d20-black.svg",
+   "weight": 1,
+   "range": [
+    6,
+    6
+   ],
+   "drawn": false,
+   "_key": "!tables.results!TEGRIdhr0OKly0mZ.HIwB7SftvvqNZ0R0"
+  }
+ ],
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": null,
+ "_key": "!tables!TEGRIdhr0OKly0mZ"
+}

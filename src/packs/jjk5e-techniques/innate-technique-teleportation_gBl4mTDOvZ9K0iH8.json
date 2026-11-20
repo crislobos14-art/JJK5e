@@ -1,0 +1,118 @@
+{
+ "_id": "gBl4mTDOvZ9K0iH8",
+ "name": "Innate Technique: Teleportation",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/teleportation.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>You can teleport yourself and others to marked locations while not being viewed.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.XgpkqX2WVbuoEe3W]{Teleport}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.BqyAkex2Rh3zkicX]{Improved Teleport}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.HNOXHeofJKDjUaXx]{Mastered Teleport}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.6TuIxZgnzBdihaIn]{Improved Marking}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.AiOuuvz1Ke0PUE6e]{Domain Expansion: Crossroads of Instance}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "fdXYOC1zHhx6kmxd": {
+    "_id": "fdXYOC1zHhx6kmxd",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Teleportation (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.XgpkqX2WVbuoEe3W",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "3fw4D9X3GrbdDEos": {
+    "_id": "3fw4D9X3GrbdDEos",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Teleportation (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.BqyAkex2Rh3zkicX",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "tlIoUyarJreAiyR3": {
+    "_id": "tlIoUyarJreAiyR3",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Teleportation (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.HNOXHeofJKDjUaXx",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "Ckgv32araenDOInb": {
+    "_id": "Ckgv32araenDOInb",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Teleportation (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.6TuIxZgnzBdihaIn",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "baF26N3DA8hUOjHO": {
+    "_id": "baF26N3DA8hUOjHO",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Teleportation (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.AiOuuvz1Ke0PUE6e",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Teleportation"
+  }
+ },
+ "_key": "!items!gBl4mTDOvZ9K0iH8"
+}

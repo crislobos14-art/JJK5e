@@ -1,0 +1,118 @@
+{
+ "_id": "7JfFhWTneFl0yW0R",
+ "name": "Innate Technique: Dark Claw",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/dark-claw.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>You possess powerful claws that can do anything.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.uaZXduMgpa7QEYE3]{Claw}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.QHFUIT3ubv4jRSHX]{Claws Modifications}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.knygdgMi5lm5yekS]{Ultimate Claws}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.RwJRQgb1vBORMJE1]{Maximum: Zenith Claw Option}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.rccn9Z3zTunjKZM3]{Domain Expansion: Hall of the Five Clawed Dragon}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "0EEJeoEkRsmDRPZN": {
+    "_id": "0EEJeoEkRsmDRPZN",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Dark Claw (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.uaZXduMgpa7QEYE3",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "siDKS5ilibSzbgsW": {
+    "_id": "siDKS5ilibSzbgsW",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Dark Claw (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.QHFUIT3ubv4jRSHX",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "FPGCyMy26Bg8iQIF": {
+    "_id": "FPGCyMy26Bg8iQIF",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Dark Claw (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.knygdgMi5lm5yekS",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "rzlpVVOblr7Ltfol": {
+    "_id": "rzlpVVOblr7Ltfol",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Dark Claw (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.RwJRQgb1vBORMJE1",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "W7BzJW7C3GlcSzl5": {
+    "_id": "W7BzJW7C3GlcSzl5",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Dark Claw (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.rccn9Z3zTunjKZM3",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Dark Claw"
+  }
+ },
+ "_key": "!items!7JfFhWTneFl0yW0R"
+}

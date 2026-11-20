@@ -1,0 +1,175 @@
+{
+ "_id": "Jcsw1LCj12wtxbiG",
+ "name": "Frost Calm",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/ice-formation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Ice Formation — Innate Technique (6th level)</em></p><p>When you reach 6th level, you have learned how to unleash thick layers of ice through the mist. As an action for 4 cursed energy, you can send a cloud of freezing mist to a spot within 60 feet of you. Every creature in a 30-foot radius sphere in that spot must make a Dexterity saving throw. On a failure, they take 6d8 cold damage and are restrained by an ice layer. On a success, they take half as much damage and are not restrained.<br />\n The creature can make a Strength saving throw at the beginning of its turns to break the ice and end the restrained condition.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "qlZCvvTLSeKyofm6": {
+    "_id": "qlZCvvTLSeKyofm6",
+    "type": "save",
+    "name": "Action (4 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "sphere",
+      "size": "30",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 6,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "cold"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "PeB6XH93ahsmArJd",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "sphere",
+    "size": "30",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": false
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "qlZCvvTLSeKyofm6": 4
+   },
+   "technique": "Ice Formation",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "PeB6XH93ahsmArJd",
+   "name": "Restrained (Frost Calm)",
+   "img": "modules/jjk5e/icons/techniques/ice-formation.svg",
+   "statuses": [
+    "restrained"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "restrained"
+    }
+   },
+   "_key": "!items.effects!Jcsw1LCj12wtxbiG.PeB6XH93ahsmArJd"
+  }
+ ],
+ "folder": "w9n29Anzntr6P6uo",
+ "_key": "!items!Jcsw1LCj12wtxbiG"
+}

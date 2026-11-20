@@ -1,0 +1,181 @@
+{
+ "_id": "AL362dkbXUfLAD8r",
+ "name": "Domain Expansion: Oomukade Banzai",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/centipede-shroud-domain.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Centipede Shroud — Innate Technique (18th level)</em></p><p><em>Domain Expansion (rules): full-turn action, 20 CE unless stated, 175-ft radius, 1 minute. When the domain ends you suffer <strong>Technique Burnout</strong> (applied automatically by the module).</em></p><p>At 18th level, you have mastered your technique allowing you to open your domain. Within your domain, your cursed centipedes’s attacks are guaranteed hits. At initiative 20, all creatures are restrained by cursed centipedes and can make a Strength (Athletics) check at the beginning of their turns to escape. The centipedes restraining a creature assists all attacks against the target, causing such attacks to deal an additional 2d10 damage. The cursed centipedes disappear once the domain ends or the creature is no longer grappled.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "CElllpRCkEQhgmv7": {
+    "_id": "CElllpRCkEQhgmv7",
+    "type": "utility",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "GlGyR2r3uyAPzhDG",
+      "onSave": false
+     }
+    ]
+   },
+   "vrBtWoQkyKsrjjDL": {
+    "_id": "vrBtWoQkyKsrjjDL",
+    "type": "utility",
+    "name": "Expand Domain (20 CE)",
+    "sort": -100000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Full turn: Action + Bonus Action + Movement",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "175",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": true
+     },
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 9,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "special",
+   "value": null,
+   "condition": "Full turn: Action + Bonus Action + Movement",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "radius",
+    "size": "175",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": true
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Centipede Shroud",
+   "level": 18,
+   "domain": true,
+   "ceCosts": {
+    "vrBtWoQkyKsrjjDL": 20
+   },
+   "domainActivity": "vrBtWoQkyKsrjjDL",
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "GlGyR2r3uyAPzhDG",
+   "name": "Restrained (Domain Expansion: Oomukade Banzai)",
+   "img": "modules/jjk5e/icons/techniques/centipede-shroud-domain.svg",
+   "statuses": [
+    "restrained"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "restrained"
+    }
+   },
+   "_key": "!items.effects!AL362dkbXUfLAD8r.GlGyR2r3uyAPzhDG"
+  }
+ ],
+ "folder": "CxDLBZfVDaXb8XWS",
+ "_key": "!items!AL362dkbXUfLAD8r"
+}

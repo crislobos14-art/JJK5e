@@ -1,0 +1,29 @@
+{
+ "_id": "qmGckyXkCErmD88V",
+ "name": "Tailored Appearance",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/trait-race.svg",
+ "system": {
+  "description": {
+   "value": "<p>You gain expertise in either intimidation, persuasion, or performance.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "race",
+   "subtype": ""
+  },
+  "requirements": "Cursed Corpse (Softbody)"
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "Mqs4VShTrWUzPyvN",
+ "_key": "!items!qmGckyXkCErmD88V"
+}

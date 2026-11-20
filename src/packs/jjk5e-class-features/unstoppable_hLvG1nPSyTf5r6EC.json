@@ -1,0 +1,59 @@
+{
+ "_id": "hLvG1nPSyTf5r6EC",
+ "name": "Unstoppable",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>Beginning at 9th level, you can reroll a saving throw that you fail. If you do so, you must use the new roll, and you can't use this feature again until you finish a long rest.</p>\n<p>You can use this feature twice between long rests starting at 13th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Warrior 9",
+  "uses": {
+   "max": "min(2, 1 + floor(@classes.warrior.levels / 13))",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
+    }
+   ]
+  },
+  "activities": {
+   "6T7RfCMXPkiM0TJT": {
+    "_id": "6T7RfCMXPkiM0TJT",
+    "type": "utility",
+    "name": "Reroll failed save",
+    "activation": {
+     "type": "special",
+     "condition": "You fail a saving throw"
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1"
+      }
+     ]
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "7ecbupybBLUFyYzw",
+ "_key": "!items!hLvG1nPSyTf5r6EC"
+}

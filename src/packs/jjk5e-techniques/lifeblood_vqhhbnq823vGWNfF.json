@@ -1,0 +1,46 @@
+{
+ "_id": "vqhhbnq823vGWNfF",
+ "name": "Lifeblood",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/rot.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Rot — Cursed Technique Reversal</em></p><p>Your blood is blood red, healthy and capable of healing the body whenever it touches it. Whenever you use a Rot Technique, you can choose to cause the damage taken to instead heal that amount of hit points instead of damaging. Additionally, you can spend 2 additional cursed energy when using a Rot Technique or Rotten Blood so whenever it damages a creature, whether through an attack roll or a saving throw, the target must make a Constitution saving throw. On a failure, nothing happens. On a success, they regain additional hit points equal to twice your Rotten Blood damage.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Rot"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Rot",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Rot"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!vqhhbnq823vGWNfF"
+}

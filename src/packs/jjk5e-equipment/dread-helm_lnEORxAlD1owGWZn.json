@@ -1,0 +1,36 @@
+{
+ "_id": "lnEORxAlD1owGWZn",
+ "name": "Dread Helm",
+ "type": "equipment",
+ "img": "icons/svg/explosion.svg",
+ "folder": "RVpkkOiLvLva4ZNf",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Item, Grade 4</em></p><p>While you’re wearing this fearsome steel helm, your eyes glow red and the rest of your face is hidden in shadow. Any checks to determine your identity from your face are impossible.</p>"
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "rarity": "common",
+  "quantity": 1,
+  "attunement": "",
+  "type": {
+   "value": "trinket",
+   "baseItem": ""
+  },
+  "armor": {
+   "value": null
+  },
+  "activities": {}
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "4th Grade"
+  }
+ },
+ "_key": "!items!lnEORxAlD1owGWZn"
+}

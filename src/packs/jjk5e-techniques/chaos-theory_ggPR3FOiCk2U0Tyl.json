@@ -1,0 +1,77 @@
+{
+ "_id": "ggPR3FOiCk2U0Tyl",
+ "name": "Chaos Theory",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/laplace-s-demon.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Laplace’s Demon — Cursed Technique Reversal</em></p><p>describes how a deterministic system can nonetheless exhibit behavior that is impossible to predict: as in the butterfly effect, minor variations between the starting conditions of two systems can result in major differences. You can spend 4 cursed energy as a reaction to instead of using logic, force a chaotic rush of extremity for 2 minutes. You gain the following benefits for the duration: ● When you make attack rolls, you treat a creature’s AC as being lowered by your Intelligence modifier. ● When you miss an attack roll, you have advantage on your next attack against that creature. ● Roll a D4 at the start of your turn. Depending on the outcome, you must take the following action as a bonus action: (1: Hide, 2: Disengage, 3: Dash, 4: Attack, (one melee attack))</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Laplace’s Demon",
+  "activities": {
+   "Ovo9aSb2P8IrfR9F": {
+    "_id": "Ovo9aSb2P8IrfR9F",
+    "type": "utility",
+    "name": "Reaction (4 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "2",
+     "units": "minute",
+     "concentration": false
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "Ovo9aSb2P8IrfR9F": 4
+   },
+   "technique": "Laplace’s Demon",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Laplace’s Demon"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!ggPR3FOiCk2U0Tyl"
+}

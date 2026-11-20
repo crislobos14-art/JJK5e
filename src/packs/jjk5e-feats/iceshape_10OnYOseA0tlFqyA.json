@@ -1,0 +1,92 @@
+{
+ "_id": "10OnYOseA0tlFqyA",
+ "name": "Iceshape",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/ice-formation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Ice Creation</em></p>\n<p>You have gained the ability to further shape your ice into a weapon. As an action for 1 Cursed Energy you can make a weapon made of ice or transform ice into a weapon for 1 minute. Once per turn, you can deal additional cold damage equal to your CE modifier on an attack made with that weapon.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Ice Creation",
+  "activities": {
+   "xUvHkR1cgprN3Waq": {
+    "_id": "xUvHkR1cgprN3Waq",
+    "type": "damage",
+    "name": "Action (1 CE) — rider",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": null,
+       "denomination": null,
+       "bonus": "",
+       "types": [
+        "cold"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "max(@abilities.wis.mod, @abilities.cha.mod)"
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "xUvHkR1cgprN3Waq": 1
+   },
+   "prereq": {
+    "features": [
+     [
+      "Ice Creation"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "49nTgJGO4NrAusFo",
+ "sort": 100,
+ "_key": "!items!10OnYOseA0tlFqyA"
+}

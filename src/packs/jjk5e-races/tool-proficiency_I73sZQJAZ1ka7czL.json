@@ -1,0 +1,29 @@
+{
+ "_id": "I73sZQJAZ1ka7czL",
+ "name": "Tool Proficiency",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/trait-race.svg",
+ "system": {
+  "description": {
+   "value": "<p>You gain proficiency with one artisan's tools of your choice.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "race",
+   "subtype": ""
+  },
+  "requirements": "Sumerian (Shaama)"
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "cUxhy4eiPJek1pHp",
+ "_key": "!items!I73sZQJAZ1ka7czL"
+}

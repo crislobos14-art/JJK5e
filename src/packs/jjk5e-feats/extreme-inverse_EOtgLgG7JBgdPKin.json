@@ -1,0 +1,42 @@
+{
+ "_id": "EOtgLgG7JBgdPKin",
+ "name": "Extreme Inverse",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/inverse.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Extreme Opposites</em></p>\n<p>You have fully mastered your Inverse technique, allowing you to withstand devastating attacks while weak strikes take a heavy toll. When you take damage, the effect depends on whether it exceeds or falls below your threshold.<br />\n If the damage exceeds your threshold, you reduce it by an amount equal to your level. However, if the damage is below your threshold, you increase the damage taken by an amount equal to your level. This makes you near-invulnerable to powerful blows, but even the lightest strike can prove perilous.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Extreme Opposites",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Extreme Opposites"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "DzKuT4Xc8CSjGmeg",
+ "sort": 100,
+ "_key": "!items!EOtgLgG7JBgdPKin"
+}

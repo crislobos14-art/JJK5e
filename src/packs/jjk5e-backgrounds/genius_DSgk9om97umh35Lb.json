@@ -1,0 +1,204 @@
+{
+ "_id": "DSgk9om97umh35Lb",
+ "name": "Genius",
+ "type": "background",
+ "img": "modules/jjk5e/icons/background.svg",
+ "folder": "CRaGqJh5HQKmdfVy",
+ "system": {
+  "description": {
+   "value": "<p>You are someone who was raised with a notion of greatness about you. Always placed on a pedestal above your peers for your intelligence, skills, or natural-born ability. Before coming to Jujutsu Tech, you had such an aptitude for success that strangers, parents, and teachers alike all placed you in a league of your own. You have proven that to be the case up until now and will likely continue to prove it moving forward. Whether you choose to continue the path assumed you would, or shift focus is your own choice. You have both good and bad experiences with this assumption of genius about you. Memories like these are something you may cherish or despise, but you are a Genius through and through.<br />\n<strong>Feat:</strong> Pick one Skill feat<br />\n<strong>Skill Proficiencies:</strong> Arcana, Athletics<br />\n<strong>Equipment:</strong> One letter of recommendation passed down to you from someone of importance, 1 Blank Scroll, A Wallet Containing $1,000.<br />\n<strong>Feature:</strong> <strong>Meeting Expectations</strong><br />\n You always seem to rise to the expectations of others during a challenge. When confronted with a difficult situation, you seem to gain insight after just one attempt, passing or failing it. This insight is a hint at how this particular challenge does or doesn’t work, that others around you may not understand.  </p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "identifier": "genius",
+  "advancement": {
+   "LicN50rrIf3GByvG": {
+    "_id": "LicN50rrIf3GByvG",
+    "type": "Trait",
+    "level": 0,
+    "title": "Skill Proficiencies",
+    "configuration": {
+     "mode": "default",
+     "grants": [
+      "skills:arc",
+      "skills:ath"
+     ],
+     "choices": []
+    },
+    "value": {}
+   },
+   "rLfg6RdO00lpkQqP": {
+    "_id": "rLfg6RdO00lpkQqP",
+    "type": "ItemChoice",
+    "level": 0,
+    "title": "Skill Feat (background feat)",
+    "value": {},
+    "configuration": {
+     "choices": {
+      "0": {
+       "count": 1,
+       "replacement": false
+      }
+     },
+     "allowDrops": true,
+     "type": "feat",
+     "pool": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.xm6ZmpjxfUqFTcA8"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.Pt1P5fSGY1fDaVhX"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.3cFti7dnCozWXAdF"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.0VZP5YR0JBSjVtWB"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.lOCwJAdbJ7UMpciE"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.znCgHcC4UG2NpASz"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.sAge2bAPjkPuflBR"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.8bn0z4tqqRS2VnEe"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.1mm8lC2fLd3ay1SJ"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.x3lg19IMgMgdhJlR"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.gDxXLiJDVOe95yKU"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.DG6Qp9fzcWmIfgnR"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.uAXZWOXisMIrqCkM"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.snGqzHCmJ7dNIy01"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.QFnVVfAnxxHfUWRr"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.f4PSKSys0cXpHlqq"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.YBmpM3iwX00k3yZR"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.Relfw9MNinc3QEqP"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.rkuEbwssyp5PkZdn"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.RkAjdMVjQM82kgPf"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.3eFtYtoCfdoXurkF"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.yZqVDTiU1PzuvBK4"
+      }
+     ],
+     "restriction": {
+      "type": "",
+      "subtype": "",
+      "level": ""
+     }
+    }
+   },
+   "Z5aNev5XP59BWlrl": {
+    "_id": "Z5aNev5XP59BWlrl",
+    "type": "ItemChoice",
+    "level": 0,
+    "title": "Mindset",
+    "hint": "Choose the mindset that drives your sorcery (it replaces Inspiration).",
+    "value": {},
+    "configuration": {
+     "choices": {
+      "0": {
+       "count": 1,
+       "replacement": false
+      }
+     },
+     "allowDrops": true,
+     "type": "feat",
+     "pool": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.0DRc7Ftd4oRxhmPP"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.tfptMmAPJyi5Fa28"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.BDtYSEj7wP0CSJSd"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.LDbMTb0R84yNZUaZ"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.z6LYQIl1YlosCyL7"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.AypG9meZokT7ds3Q"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.BOsYXnjKpnbtwfmW"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.BXVn0o2H4L9n82TN"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.g4KqCmc1MqQHfLFV"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.NEra1YZ6BxPjoGdV"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.H01e3yAvW04BYK0o"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.66G2J5gn804C8EZI"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.mLhSUvyfKRj4jU5u"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.5WUvEI9FuZelFdaw"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.M6qTsvh64leWYpJm"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.a7Rh5bEHZv0PyaA8"
+      }
+     ],
+     "restriction": {
+      "type": "",
+      "subtype": "",
+      "level": ""
+     }
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "_key": "!items!DSgk9om97umh35Lb"
+}

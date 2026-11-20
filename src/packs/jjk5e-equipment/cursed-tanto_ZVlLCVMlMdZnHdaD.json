@@ -1,0 +1,111 @@
+{
+ "_id": "ZVlLCVMlMdZnHdaD",
+ "name": "Cursed Tanto",
+ "type": "weapon",
+ "img": "icons/svg/sword.svg",
+ "folder": "xnCPfIMW0yQ370pR",
+ "system": {
+  "description": {
+   "value": "<p><em>Weapon(Dagger), Grade 2(Requires Attunement)</em></p><p>This weapon deals 1d6 damage on a hit. As a reaction to an attack made against you, you can roll 1d6 and add the result to your AC against the triggering attack, potentially causing it to miss. If this causes the attack to miss, you can make an attack with the Tanto as part of the reaction if the creature is within range.</p>\n<p><strong>Honorable Death.</strong> As an action while holding the tanto, you can commit Seppuku and disembowel yourself with the weapon. You die without any saving throws and after 5 rounds (10 minutes if out of combat) have passed, you return as a Vengeful Cursed Spirit under the effects of Indefinite Madness as stated in Cursed Upon Death. Your Hit Points equal your Hit Points at the moment of Honorable Death, unless they were lower than half your maximum hit points, in which case your Hit Points equal half your maximum. Once used, this property does not function for 1 year and must build up resentment.</p>"
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "simpleM",
+   "baseItem": "dagger"
+  },
+  "damage": {
+   "base": {
+    "number": 1,
+    "denomination": 4,
+    "types": [
+     "piercing"
+    ]
+   }
+  },
+  "range": {
+   "value": 20,
+   "long": 60,
+   "units": "ft"
+  },
+  "properties": [
+   "fin",
+   "lgt",
+   "mgc",
+   "thr"
+  ],
+  "proficient": null,
+  "quantity": 1,
+  "activities": {
+   "ne2dqHQL3kGU7GW9": {
+    "_id": "ne2dqHQL3kGU7GW9",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "melee",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   },
+   "wGSE6tuNfMG5mRJ5": {
+    "_id": "wGSE6tuNfMG5mRJ5",
+    "type": "attack",
+    "name": "Reaction",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": []
+    }
+   }
+  },
+  "rarity": "rare",
+  "attunement": "required"
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "2nd Grade"
+  }
+ },
+ "_key": "!items!ZVlLCVMlMdZnHdaD"
+}

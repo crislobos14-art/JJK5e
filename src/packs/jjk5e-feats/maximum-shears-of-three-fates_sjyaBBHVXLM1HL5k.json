@@ -1,0 +1,77 @@
+{
+ "_id": "sjyaBBHVXLM1HL5k",
+ "name": "Maximum: Shears of Three Fates",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/fate.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Road of Karma</em></p>\n<p>As an action for 15 cursed energy, you form a scissor with your fingers and snip one of the threads of fate of a creature you can see within 5 ft of you. At the start of each of the target’s turns, they must make a Death saving throw. This roll cannot have advantage or disadvantage or any bonuses or penalties. The target gains 1 level of exhaustion for every failed death save. If the target fails 3 death saves, they fall to 0 hit points and die. They are unable to be revived by cursed techniques. If the target succeeds 3 death saves or you are reduced to 0 hit points or die, the technique ends and the target becomes immune to this technique for 3 days.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Road of Karma",
+  "activities": {
+   "rRkusxhkwfhLPpLl": {
+    "_id": "rRkusxhkwfhLPpLl",
+    "type": "utility",
+    "name": "Action (15 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "5",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "rRkusxhkwfhLPpLl": 15
+   },
+   "prereq": {
+    "features": [
+     [
+      "Domain Expansion: Road of Karma"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "MeEjv8rwdOA6DSvK",
+ "sort": 300,
+ "_key": "!items!sjyaBBHVXLM1HL5k"
+}

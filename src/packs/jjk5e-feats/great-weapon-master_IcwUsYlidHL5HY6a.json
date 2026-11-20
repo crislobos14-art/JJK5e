@@ -1,0 +1,73 @@
+{
+ "_id": "IcwUsYlidHL5HY6a",
+ "name": "Great Weapon Master",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: N/A</em></p>\n<p>You've learned to put the weight of a weapon to your advantage, letting its momentum empower your strikes. You gain the following benefits:</p>\n<ul>\n<li>\n<p>On your turn, when you score a critical hit with a melee weapon or reduce a creature to 0 hit points with one, you can make one melee weapon attack as a bonus action.  </p>\n</li>\n<li>\n<p>Before you make a melee attack with a heavy weapon that you are proficient with, you can choose to take a -5 penalty to the attack roll. If the attack hits, you add +10 to the attack's damage.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkPhysical"
+  },
+  "requirements": "N/A",
+  "activities": {
+   "8xYlLAZU0ykT5Q4u": {
+    "_id": "8xYlLAZU0ykT5Q4u",
+    "type": "attack",
+    "name": "Bonus Action",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "flat": false,
+     "type": {
+      "value": "melee",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": []
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "cxPIGjcxqJdZTMQ5",
+ "sort": 900,
+ "_key": "!items!IcwUsYlidHL5HY6a"
+}

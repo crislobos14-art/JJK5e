@@ -1,0 +1,107 @@
+{
+ "_id": "j9yv3LQ6VU4LZZeC",
+ "name": "Analgesic",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/pain-killer.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Pain Killer — Innate Technique (11th level)</em></p><p>At 11th level, when a creature that you can see within 10 feet would take damage, as a reaction for 4 CE you can halve the damage.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "c5fwBy4Igz2S5uCZ": {
+    "_id": "c5fwBy4Igz2S5uCZ",
+    "type": "utility",
+    "name": "Reaction (4 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "10",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "reaction",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "10",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "c5fwBy4Igz2S5uCZ": 4
+   },
+   "technique": "Pain Killer",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "dNStemY1SSBJjSwq",
+ "_key": "!items!j9yv3LQ6VU4LZZeC"
+}

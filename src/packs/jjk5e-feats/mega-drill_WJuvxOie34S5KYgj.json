@@ -1,0 +1,100 @@
+{
+ "_id": "WJuvxOie34S5KYgj",
+ "name": "Mega-Drill",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/hair-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Drill Hair</em></p>\n<p>You can now use more cursed energy to imbue one Mega-drill. As an action for 4 cursed energy, you can shoot this Mega-drill in a 5 ft wide, 80 ft long line. Creatures in this line must make a Dexterity saving throw. On a failure, it deals 6d10 piercing damage. On a success, they take half the damage. This technique deals maximum damage to objects and structures and ignores half and three quarters cover. The damage of this technique increases to 8d10 at 6th level and becomes 10d10 at 11th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Drill Hair",
+  "activities": {
+   "UE65tqQSh7vdAcpJ": {
+    "_id": "UE65tqQSh7vdAcpJ",
+    "type": "save",
+    "name": "Action (4 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 6,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "piercing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "UE65tqQSh7vdAcpJ": 4
+   },
+   "prereq": {
+    "features": [
+     [
+      "Drill Hair"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "vK6vTr2zkjipQvME",
+ "sort": 200,
+ "_key": "!items!WJuvxOie34S5KYgj"
+}

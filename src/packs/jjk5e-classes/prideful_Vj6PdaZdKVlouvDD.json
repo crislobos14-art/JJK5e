@@ -1,0 +1,91 @@
+{
+ "_id": "Vj6PdaZdKVlouvDD",
+ "name": "Prideful",
+ "type": "subclass",
+ "img": "modules/jjk5e/icons/classes/prideful.svg",
+ "system": {
+  "description": {
+   "value": "<p>Those who Ideals are to show their superiority, are the Prideful.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "identifier": "prideful",
+  "classIdentifier": "heavenly-restriction",
+  "advancement": {
+   "zXcHbp3PNv0PQN1R": {
+    "_id": "zXcHbp3PNv0PQN1R",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Features",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.dEWsM6USFg1h5FX8",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "T7NEiSL133QWHNNG": {
+    "_id": "T7NEiSL133QWHNNG",
+    "type": "ItemGrant",
+    "level": 9,
+    "title": "Features",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.ErAOR8ZbdIKBbME1",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "FOafKEtFNcpJTQW7": {
+    "_id": "FOafKEtFNcpJTQW7",
+    "type": "ItemGrant",
+    "level": 13,
+    "title": "Features",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.BT7yeo6YFOOVKJKm",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "8zEzEmAVlNp55SuI": {
+    "_id": "8zEzEmAVlNp55SuI",
+    "type": "ItemGrant",
+    "level": 17,
+    "title": "Features",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.nGxgt57bTY1YuaLB",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": null,
+ "_key": "!items!Vj6PdaZdKVlouvDD"
+}

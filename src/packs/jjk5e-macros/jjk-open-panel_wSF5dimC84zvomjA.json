@@ -1,0 +1,13 @@
+{
+ "_id": "wSF5dimC84zvomjA",
+ "name": "JJK: Open Panel",
+ "type": "script",
+ "img": "modules/jjk5e/icons/ce.svg",
+ "scope": "global",
+ "command": "game.modules.get(\"jjk5e\").api.openPanel();",
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": null,
+ "_key": "!macros!wSF5dimC84zvomjA"
+}

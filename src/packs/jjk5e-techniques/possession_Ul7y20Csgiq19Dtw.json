@@ -1,0 +1,127 @@
+{
+ "_id": "Ul7y20Csgiq19Dtw",
+ "name": "Possession",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/seance.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Seance — Cursed Technique Reversal</em></p><p>You have now mastered Reverse Cursed technique and learned your cursed technique reversal. Rather than drawing the dead into you, you are now able to use your Séance technique to put yourself into the body of others.</p>\n<p>As a full turn action for 8 cursed energy, you can target a willing or helpless (restrained, incapacitated, unconscious) creature and turn them into yourself. You take control of the target as you overwrite them with your soul information. Your real body will remain in the same position as when you used this technique and is unconscious. You have all of your own statistics, other than the target’s cursed technique and innate technique features and cursed energy. You must spend 1 cursed energy at the beginning of your turns to keep yourself in control. You return to your original body once the cursed energy is not spent on this.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Seance",
+  "activities": {
+   "886Pnz5kN0SnYAWF": {
+    "_id": "886Pnz5kN0SnYAWF",
+    "type": "utility",
+    "name": "Action (8 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "effects": [
+     {
+      "_id": "oALlN7r7MOQmcoD1",
+      "onSave": false
+     }
+    ]
+   },
+   "dEqDSnBQ0OyqQ900": {
+    "_id": "dEqDSnBQ0OyqQ900",
+    "type": "utility",
+    "name": "Action (1 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "886Pnz5kN0SnYAWF": 8,
+    "dEqDSnBQ0OyqQ900": 1
+   },
+   "technique": "Seance",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Seance"
+     ]
+    ]
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "oALlN7r7MOQmcoD1",
+   "name": "Unconscious (Possession)",
+   "img": "systems/dnd5e/icons/svg/statuses/unconscious.svg",
+   "statuses": [
+    "unconscious"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "unconscious"
+    }
+   },
+   "_key": "!items.effects!Ul7y20Csgiq19Dtw.oALlN7r7MOQmcoD1"
+  }
+ ],
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!Ul7y20Csgiq19Dtw"
+}

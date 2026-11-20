@@ -1,0 +1,59 @@
+{
+ "_id": "BOOatXVlg4CJ2ETE",
+ "name": "Surprise",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/trait-race.svg",
+ "system": {
+  "description": {
+   "value": "<p>You can make a Performance check to disguise yourself as what you resemble. Your sudden reveal may stun an enemy. Once per long rest when you reveal yourself, you can force a creature within 10 feet to make a Wisdom saving throw:<br />\n(DC 10 + your proficiency bonus + your <br />\nCharisma modifier) becoming stunned until <br />\nthe beginning of their turn on failure.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "race",
+   "subtype": ""
+  },
+  "requirements": "Cursed Corpse (Softbody)",
+  "uses": {
+   "max": "1",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
+    }
+   ]
+  },
+  "activities": {
+   "ANdWDDI1OKrLyHN2": {
+    "_id": "ANdWDDI1OKrLyHN2",
+    "type": "utility",
+    "name": "Use",
+    "activation": {
+     "type": "special",
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1"
+      }
+     ]
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "Mqs4VShTrWUzPyvN",
+ "_key": "!items!BOOatXVlg4CJ2ETE"
+}

@@ -1,0 +1,42 @@
+{
+ "_id": "jKbTlrSmPH5djCQ4",
+ "name": "Cursed Technique Reversal",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Reverse Cursed Technique</em></p>\n<p>You have learned to feed your cursed techniques with reverse cursed energy instead of normal. This leads your technique to have the opposite of its normal effect. Turning debuffing into buffing and inverting damage types, resulting in a <a href=\"https://docs.google.com/document/u/0/d/1LWkskbY0Wi05D_LVk15r04TQ_0bUiciOPMcG0gcknFw/edit\">Reversal</a>.</p><p><strong>JJK 5e (Foundry):</strong> when you gain this feat, the reversal features of your innate technique (compendium folder <em>★ Cursed Technique Reversals</em>) are added automatically, and level-gated ones when you reach their level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkRCT"
+  },
+  "requirements": "Must have Reverse Cursed Technique",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Reverse Cursed Technique"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "r4NXrJGBzO6U71JG",
+ "sort": 100,
+ "_key": "!items!jKbTlrSmPH5djCQ4"
+}

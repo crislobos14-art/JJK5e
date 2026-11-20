@@ -1,0 +1,114 @@
+{
+ "_id": "Cd0MIDnKJNY1E74w",
+ "name": "Electric Energy",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/mythical-beast-amber.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Mythical Beast Amber — Innate Technique (1st level)</em></p><blockquote><p>You hold a technique that changes the very essence of your energy to electricity. However, its true power is unknown even to you.</p></blockquote><p>Starting at 1st level, you may not know your cursed technique yet, but you have gained insane mastery over your energy. Once per turn when you deal damage with a melee attack, you can spend 1 cursed energy to add 1d10 lightning damage to the total amount. This increases to 2d10 at 3rd level, 3d10 at 6th level, 4d10 at 11th level, to 5d10 at 14th level, and to 6d10 at 18th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "RTkzKBIlRPkP4yDy": {
+    "_id": "RTkzKBIlRPkP4yDy",
+    "type": "damage",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "lightning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "RTkzKBIlRPkP4yDy": 1
+   },
+   "technique": "Mythical Beast Amber",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "J9wuYC5ZIUpqsRHr",
+ "_key": "!items!Cd0MIDnKJNY1E74w"
+}

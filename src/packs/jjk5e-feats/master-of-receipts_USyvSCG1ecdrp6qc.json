@@ -1,0 +1,42 @@
+{
+ "_id": "USyvSCG1ecdrp6qc",
+ "name": "Master of Receipts",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/contractual-recreation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Contractual Control</em></p>\n<p>You have become a master at utilizing your receipts. The cost of materializing is halved, and creations you use with <em>Contractual Control</em> can be used a number of times equal to your proficiency bonus before they disappear.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Contractual Control",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Contractual Control"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "UU2pjYTH69wH4knu",
+ "sort": 300,
+ "_key": "!items!USyvSCG1ecdrp6qc"
+}

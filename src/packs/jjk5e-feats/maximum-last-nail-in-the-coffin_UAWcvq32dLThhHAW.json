@@ -1,0 +1,71 @@
+{
+ "_id": "UAWcvq32dLThhHAW",
+ "name": "Maximum: Last Nail in the Coffin",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/straw-doll-technique.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Improved Resonance</em></p>\n<p>You have mastered the Straw Doll Technique, when you use your action to damage a straw doll with Resonance, for 8 Cursed Energy you can choose to land an <em>Improved Resonance</em>.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Improved Resonance",
+  "activities": {
+   "pav6nE60w7CBq3wQ": {
+    "_id": "pav6nE60w7CBq3wQ",
+    "type": "utility",
+    "name": "Action (8 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "pav6nE60w7CBq3wQ": 8
+   },
+   "prereq": {
+    "features": [
+     [
+      "Improved Resonance"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "Z9rCGnehs0OjjdOk",
+ "sort": 300,
+ "_key": "!items!UAWcvq32dLThhHAW"
+}

@@ -1,0 +1,42 @@
+{
+ "_id": "fc7qHDllT48DkEqP",
+ "name": "Bulk Buyer",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/contractual-recreation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Splurge</em></p>\n<p>You’ve learned that buying in bulk can lead to a sale! When you use two or more receipts as part of the same action, the CE costs are each reduced by 1 for every receipt you use (minimum cost of 1). If the receipts are of the same type, you gain advantage on attack rolls and ability checks using those creations for 1 minute.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Splurge",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Splurge"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "UU2pjYTH69wH4knu",
+ "sort": 200,
+ "_key": "!items!fc7qHDllT48DkEqP"
+}

@@ -1,0 +1,173 @@
+{
+ "_id": "7clE8rWvh6MVK4iK",
+ "name": "Domain Expansion: Ceremonial Sea of Light",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/disaster-verdure-domain.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Disaster Verdure — Innate Technique (18th level)</em></p><p><em>Domain Expansion (rules): full-turn action, 20 CE unless stated, 175-ft radius, 1 minute. When the domain ends you suffer <strong>Technique Burnout</strong> (applied automatically by the module).</em></p><p>At 18th level, you have refined your technique to the absolute and learned to expand your domain. <br />\n At initiative 20, creatures within your domain fall under the effect of <em>Flower Field</em> and take 2d4 Necrotic damage. You gain half of the damage as temporary Cursed Energy that disappears once your domain ends.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "Yv33kKE2ljCkjyPj": {
+    "_id": "Yv33kKE2ljCkjyPj",
+    "type": "damage",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 4,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   },
+   "w7vSV1T82OoaNVXk": {
+    "_id": "w7vSV1T82OoaNVXk",
+    "type": "utility",
+    "name": "Expand Domain (20 CE)",
+    "sort": -100000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Full turn: Action + Bonus Action + Movement",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "175",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": true
+     },
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 9,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "special",
+   "value": null,
+   "condition": "Full turn: Action + Bonus Action + Movement",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "radius",
+    "size": "175",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": true
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Disaster Verdure",
+   "level": 18,
+   "domain": true,
+   "ceCosts": {
+    "w7vSV1T82OoaNVXk": 20
+   },
+   "domainActivity": "w7vSV1T82OoaNVXk",
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "iWhpioZs4gSAxzA7",
+ "_key": "!items!7clE8rWvh6MVK4iK"
+}

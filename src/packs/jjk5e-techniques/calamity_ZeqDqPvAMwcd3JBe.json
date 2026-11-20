@@ -1,0 +1,72 @@
+{
+ "_id": "ZeqDqPvAMwcd3JBe",
+ "name": "Calamity",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/miracle.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Miracle — Cursed Technique Reversal</em></p><p>After mastering reverse cursed technique, you found out your technique reversal, learning about Calamity Marks. Whenever you witness a calamity happening, a yellow marking appears right somewhere on your body, making you gain a Calamity Mark. You can have up to 6 Calamity Marks.</p>\n<ul>\n<li>\n<p>Calamity Description</p>\n</li>\n<li>\n<p>Unlucky… Failing makes no one but the person who failed sad. Whenever you or a hostile creature you can see or hear rolls the minimum amount they could on a dice roll, you gain 1 Calamity Mark.</p>\n</li>\n<li>\n<p>Opposite Nobody likes opposite numbers, it just looks ugly.</p>\n</li>\n<li>\n<p>Numbers… Every time you or a hostile creature you can see or hear rolls two different numbers with one being odd and the other being even, you gain 1 Calamity Mark.</p>\n</li>\n<li>\n<p>Trash… Finding free stuff is cool, but only if it’s valuable. Every time you or a hostile creature you can see finds a new item, weapon or armor of at max Uncommon rarity you gain 1 Calamity Mark. This only counts towards cursed tools and magical items.</p>\n</li>\n<li>\n<p>Failing Overcoming hardships is something rare to see in such</p>\n</li>\n<li>\n<p>with Ease… a vile world we live in, so seeing it is truly a miracle. Whenever you or a hostile creature you can see or hear fails in a saving throw, ability check, or attack roll they had advantage on, you gain 1 Calamity Mark. As a reaction to a creature succeeding a roll, you can spend 1 Calamity Marks and 2 cursed energy to roll a d10. After rolling it, subtract it from the roll. If they fail because of your die and it reaches a 1 or lower (counting the natural die with no modifiers), it is considered as if they have rolled a natural 1 and ignores features that avoid natural 1s.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Miracle",
+  "activities": {
+   "tapxN4JtczFg5XZk": {
+    "_id": "tapxN4JtczFg5XZk",
+    "type": "utility",
+    "name": "Reaction",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Miracle",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Miracle"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!ZeqDqPvAMwcd3JBe"
+}

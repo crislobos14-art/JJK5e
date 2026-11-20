@@ -1,0 +1,199 @@
+{
+ "_id": "QHFUIT3ubv4jRSHX",
+ "name": "Claws Modifications",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/dark-claw.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Dark Claw — Innate Technique (3rd level)</em></p><p>At 3rd level, you have learned new methods of enhancement. You gain two Claw options and one more option at 6th, 11th, and 18th level.</p>\n<ul>\n<li>\n<p><strong>Brutal Claws</strong>. Your claws deal an additional damage dice.  </p>\n</li>\n<li>\n<p><strong>Elemental Claws</strong>. You can choose to change the damage type of your claws to one of the following types: fire, cold, lightning, thunder, acid. You can change the type during a long rest.  </p>\n</li>\n<li>\n<p><strong>Absorbing Claws</strong>. On a hit, you can spend 1 CE to deal an additional 1d6 necrotic damage. You regain hit points equal to the necrotic damage dealt.  </p>\n</li>\n<li>\n<p><strong>Pure Claws</strong>. Your claws ignore resistances to damage.  </p>\n</li>\n<li>\n<p><strong>Barbed Claws</strong>. Once per turn on a hit, you can spend 2 CE to force the target to make a Constitution saving throw. On a failed save, they are bleeding and take 1d6 slashing damage at the start of their turn until a creature uses their action to staunch the wound or they regain hit points.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "55NndOxWTSkPhqhE": {
+    "_id": "55NndOxWTSkPhqhE",
+    "type": "damage",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   },
+   "mPzLOB6LwDMub0oR": {
+    "_id": "mPzLOB6LwDMub0oR",
+    "type": "save",
+    "name": "Action (2 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "slashing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   },
+   "MjsiHNzAHZ8qqEhE": {
+    "_id": "MjsiHNzAHZ8qqEhE",
+    "type": "utility",
+    "name": "Use (limited, no CE)",
+    "activation": {
+     "type": "special",
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1"
+      }
+     ],
+     "spellSlot": false
+    }
+   }
+  },
+  "uses": {
+   "max": "1",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
+    }
+   ]
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "55NndOxWTSkPhqhE": 1,
+    "mPzLOB6LwDMub0oR": 2
+   },
+   "technique": "Dark Claw",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "TJotg7cBr19cOkoJ",
+ "_key": "!items!QHFUIT3ubv4jRSHX"
+}

@@ -1,0 +1,71 @@
+{
+ "_id": "5btxwzaRUvTUxvM6",
+ "name": "Combat IQ",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/laplace-s-demon.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Demonic Intellect</em></p>\n<p>Through refining your ability, you have become more skilled in using your technique in combat and can add your Intelligence modifier to Initiative rolls. Additionally, when using <em>Demonic Intellect</em>, you gain the following additional benefits:</p>\n<ul>\n<li>\n<p>You add your proficiency bonus to any saving throws you make if you don’t already.  </p>\n</li>\n<li>\n<p>You can spend 1 CE to gain an additional reaction each round.  </p>\n</li>\n<li>\n<p>Once per round you can add your Intelligence modifier to a damage roll you make.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Demonic Intellect",
+  "activities": {
+   "SiejWGgxs13QdBxS": {
+    "_id": "SiejWGgxs13QdBxS",
+    "type": "utility",
+    "name": "Reaction (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "SiejWGgxs13QdBxS": 1
+   },
+   "prereq": {
+    "features": [
+     [
+      "Demonic Intellect"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "LY5kMspFULfnXfB0",
+ "sort": 100,
+ "_key": "!items!5btxwzaRUvTUxvM6"
+}

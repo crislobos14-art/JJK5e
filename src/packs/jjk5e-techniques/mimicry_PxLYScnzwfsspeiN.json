@@ -1,0 +1,95 @@
+{
+ "_id": "PxLYScnzwfsspeiN",
+ "name": "Mimicry",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/vengeful-spirit-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Vengeful Spirit Manipulation — Innate Technique (6th level)</em></p><p>When you reach 6th level, you begin to learn about your innate technique. As a bonus action, while your Vengeful Spirit is in the world, you can command it to make a claw attack against a creature within range. On a hit it can extract the creature's DNA with a claw attack. You can attempt to replicate it by spending 3 CE as an action to make an ability check using your Cursed Energy score. On a success you can copy one feature of the Cursed Technique you have seen that is of a level that you qualify for and fill prerequisites (such as RCT):<br />\n<strong>-Cursed Technique</strong> = User’s Cursed Energy save DC + 2<br />\n You cannot copy <strong>Domain Expansions</strong> or <strong>CR 5+</strong> <strong>Summons</strong> with <em>Mimicry</em>.<br />\n When you copy a cursed technique, you can only spend the base cost the technique requires. No matter what you copy, you can only use the technique in its base form. For example, a maximum output hollow purple would only come as a hollow purple. You cannot use different copied techniques at the same time if they are from different innate techniques.<br />\n You can have a number of copied techniques features equal to your Cursed Energy Modifier and can use them a number of times equal to your proficiency bonus before they disappear and you must copy them again. If you have a limb or body part of the user, the number of times you can use the technique is doubled. When you copy more than your limit, you remove a copied feature to make space for another.<br />\n In addition, you automatically pass the Cursed Energy check if you have already copied the cursed technique before.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "4fgZQbTNRVg0yeXw": {
+    "_id": "4fgZQbTNRVg0yeXw",
+    "type": "utility",
+    "name": "Action (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "4fgZQbTNRVg0yeXw": 3
+   },
+   "technique": "Vengeful Spirit Manipulation",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "fx5WSQ1mGtKNDLmm",
+ "_key": "!items!PxLYScnzwfsspeiN"
+}

@@ -1,0 +1,98 @@
+{
+ "_id": "SB9abj3aHRhwq4hL",
+ "name": "Flowing Red Scale: Stack",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/blood-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Flowing Red Scale</em></p>\n<p>The power of the Flowing Red Scale has reached new heights. As a bonus action for 6 CE or while Flowing Red Scale is active for 3 CE, you instead gain the following benefits for 1 minute:</p>\n<ul>\n<li>\n<p>Your movement speed is tripled  </p>\n</li>\n<li>\n<p>You gain a +4 bonus to AC  </p>\n</li>\n<li>\n<p>You have advantage on Dexterity and Strength saving throws and Strength checks and once per round you can reroll a check or save  </p>\n</li>\n<li>\n<p>You gain one extra action and reaction.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Flowing Red Scale",
+  "activities": {
+   "t5X8c1RKR66NtqAe": {
+    "_id": "t5X8c1RKR66NtqAe",
+    "type": "utility",
+    "name": "Bonus Action (6 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "t5X8c1RKR66NtqAe": 6
+   },
+   "prereq": {
+    "features": [
+     [
+      "Flowing Red Scale"
+     ]
+    ]
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "tsOdgWTg8DKf5RTx",
+   "name": "Flowing Red Scale: Stack (toggle)",
+   "img": "modules/jjk5e/icons/techniques/blood-manipulation.svg",
+   "changes": [
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+4",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!SB9abj3aHRhwq4hL.tsOdgWTg8DKf5RTx"
+  }
+ ],
+ "folder": "nBcvifZT3OePW2PN",
+ "sort": 400,
+ "_key": "!items!SB9abj3aHRhwq4hL"
+}

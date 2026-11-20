@@ -1,0 +1,122 @@
+{
+ "_id": "O8EAishBxZWvLMqb",
+ "name": "Prayer",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/prayer-song.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prayer Song — Innate Technique (1st level)</em></p><blockquote><p>Through dance and the beat engraved in your body, you gain the ability to buff yourself and debuff your opponent even without a domain.</p></blockquote><p>Starting at 1st level, as a bonus action for 1 Cursed Energy you can start catching the beat of a fight. The effects depend on how long it has been active and end if you are stunned, paralyzed, grappled, restrained, or knocked prone.</p>\n<table>\n<thead>\n<tr>\n<th style=\"text-align: left;\">Turns Active</th>\n<th style=\"text-align: left;\">Effect</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td style=\"text-align: left;\">1</td>\n<td style=\"text-align: left;\">Your AC and Dex Saves increase by +2</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">2</td>\n<td style=\"text-align: left;\">Your Enemies AC decreases by -2</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">3</td>\n<td style=\"text-align: left;\">You can add your Cursed Energy modifier to your attack rolls</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">4</td>\n<td style=\"text-align: left;\">Your opponent has disadvantage on attacks and you have advantage on saving throws</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">5</td>\n<td style=\"text-align: left;\">Your attacks deal additional damage equal to your proficiency</td>\n</tr>\n</tbody>\n</table>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "JFf7uuFbevBJos36": {
+    "_id": "JFf7uuFbevBJos36",
+    "type": "utility",
+    "name": "Bonus Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "3nY872WGP5eEjNaG",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "JFf7uuFbevBJos36": 1
+   },
+   "technique": "Prayer Song",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "3nY872WGP5eEjNaG",
+   "name": "Prone (Prayer)",
+   "img": "modules/jjk5e/icons/techniques/prayer-song.svg",
+   "statuses": [
+    "prone"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!O8EAishBxZWvLMqb.3nY872WGP5eEjNaG"
+  }
+ ],
+ "folder": "LeKt9DxatfKKBe3c",
+ "_key": "!items!O8EAishBxZWvLMqb"
+}

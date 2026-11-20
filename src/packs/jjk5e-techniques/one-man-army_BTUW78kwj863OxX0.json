@@ -1,0 +1,123 @@
+{
+ "_id": "BTUW78kwj863OxX0",
+ "name": "One Man Army",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/clone.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Clone — Innate Technique (1st level)</em></p><blockquote><p>Your technique allows you to create perfect clones of yourself.</p></blockquote><p>Starting at 1st level, you can spend 3 CE as an action to create a clone within 5 feet of yourself for 8 hours. They are completely indistinguishable from you in every way. A clone has 1/4 of your hit point maximum (rounded up) as well as your AC and access to all your class features and cursed techniques, but not innate technique features. Any cursed energy or features used is treated as if you spent it. Your Clones act on your turn, but can only make one attack on their turn even if you have Extra Attack or bonus action attacks. You can replace any of your attacks on your turn with an attack from the Clone’s space. Your Clones do not have any of your items.<br />\n You can have a number of clones equal to your proficiency bonus at once and when a clone dies, the number of clones you can have is reduced by 1 for 1 minute.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "qFQ7sw16JZ7fimWD": {
+    "_id": "qFQ7sw16JZ7fimWD",
+    "type": "attack",
+    "name": "Action (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "value": "8",
+     "units": "hour",
+     "concentration": false,
+     "override": true
+    },
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": []
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "8",
+   "units": "hour"
+  },
+  "range": {
+   "value": "5",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "qFQ7sw16JZ7fimWD": 3
+   },
+   "technique": "Clone",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "FD3rp7a4OW9fKrOc",
+ "_key": "!items!BTUW78kwj863OxX0"
+}

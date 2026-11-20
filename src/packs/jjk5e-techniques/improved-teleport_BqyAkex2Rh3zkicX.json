@@ -1,0 +1,92 @@
+{
+ "_id": "BqyAkex2Rh3zkicX",
+ "name": "Improved Teleport",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/teleportation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Teleportation — Innate Technique (3rd level)</em></p><p>At 3rd level, you have improved your technique. The range of your teleport now increases to (your CE modifier + your proficiency bonus + your level) x 100 feet, and you can now teleport as a reaction to an attack or saving throw as long as you have a way to cause yourself to disappear from view (such as covering yourself with a sheet).</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "ZYDoOOjcalF9uP1m": {
+    "_id": "ZYDoOOjcalF9uP1m",
+    "type": "utility",
+    "name": "Reaction",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "reaction",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Teleportation",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "1SK1DEKKg87PUQf6",
+ "_key": "!items!BqyAkex2Rh3zkicX"
+}

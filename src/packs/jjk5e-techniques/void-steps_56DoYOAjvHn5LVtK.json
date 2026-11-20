@@ -1,0 +1,145 @@
+{
+ "_id": "56DoYOAjvHn5LVtK",
+ "name": "Void Steps",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/shadow-killer.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Shadow Killer — Innate Technique (6th level)</em></p><p>At 6th level, you have learned to become one with the shadows, gaining darkvision out to 200 ft and can see through magical darkness within this range. You can spend 2 CE to cast <em>Pass Without Trace</em>. When you take the Hide action in dim light or darkness, you become invisible until you attack, use a technique, or enter an area of bright light.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "fGhCrm4JNr846uYP": {
+    "_id": "fGhCrm4JNr846uYP",
+    "type": "utility",
+    "name": "Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "7iV76RQuDuBBE9qM",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "fGhCrm4JNr846uYP": 2
+   },
+   "technique": "Shadow Killer",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "7iV76RQuDuBBE9qM",
+   "name": "Invisible (Void Steps)",
+   "img": "modules/jjk5e/icons/techniques/shadow-killer.svg",
+   "statuses": [
+    "invisible"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "invisible"
+    }
+   },
+   "_key": "!items.effects!56DoYOAjvHn5LVtK.7iV76RQuDuBBE9qM"
+  },
+  {
+   "_id": "LQOpXmQkMQA0kGRj",
+   "name": "Void Steps (toggle)",
+   "img": "modules/jjk5e/icons/techniques/shadow-killer.svg",
+   "changes": [
+    {
+     "key": "system.attributes.senses.darkvision",
+     "mode": 4,
+     "value": "200",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!56DoYOAjvHn5LVtK.LQOpXmQkMQA0kGRj"
+  }
+ ],
+ "folder": "AZz0yh4SFsEeg2VN",
+ "_key": "!items!56DoYOAjvHn5LVtK"
+}

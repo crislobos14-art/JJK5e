@@ -1,0 +1,118 @@
+{
+ "_id": "qUQxqEazubsaGUB0",
+ "name": "Innate Technique: Fate",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/fate.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>The wheel of fate is yours to steer and yours alone.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.745MVTDDNhtfctQQ]{Fate Manipulation}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.dpjaBTyscou71Drz]{Cursed Eyes of Fate}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.0cwUM0MVo8t1hBck]{Strong Destiny}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.iHFQdjB7DhXF1CEU]{Karmic Entanglement}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.1bA6LFa3Mo1Ekpqx]{Domain Expansion: Road of Karma}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "3c6yAvXRZcluHgg4": {
+    "_id": "3c6yAvXRZcluHgg4",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Fate (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.745MVTDDNhtfctQQ",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "c43a61iMfcdGYq21": {
+    "_id": "c43a61iMfcdGYq21",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Fate (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.dpjaBTyscou71Drz",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "8XX0jU8UkjBsSAgA": {
+    "_id": "8XX0jU8UkjBsSAgA",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Fate (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.0cwUM0MVo8t1hBck",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "XNbG2mj2CTFb6J6e": {
+    "_id": "XNbG2mj2CTFb6J6e",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Fate (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.iHFQdjB7DhXF1CEU",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "N5fXaWYadgKIzb66": {
+    "_id": "N5fXaWYadgKIzb66",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Fate (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.1bA6LFa3Mo1Ekpqx",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Fate"
+  }
+ },
+ "_key": "!items!qUQxqEazubsaGUB0"
+}

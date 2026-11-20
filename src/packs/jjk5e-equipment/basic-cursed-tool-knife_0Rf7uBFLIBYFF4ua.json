@@ -1,0 +1,30 @@
+{
+ "_id": "0Rf7uBFLIBYFF4ua",
+ "name": "Basic Cursed Tool Knife",
+ "type": "loot",
+ "img": "icons/svg/explosion.svg",
+ "folder": "wqSDHMRYLTxcUWTY",
+ "system": {
+  "type": {
+   "value": "gear"
+  },
+  "description": {
+   "value": "<p>An ordinary steel blade etched with faint markings that allow it to cut low-grade curses or weak barriers. The knife counts as a 4th grade cursed tool. While within 5 ft of a barrier, you can spend half a minute to discreetly cut a 5 ft hole in a Basic Curtain or similarly weak barrier without alerting the one who placed it. You can use the knife in this way three times before it breaks and becomes unusable.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "rarity": "uncommon",
+  "quantity": 1
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "3rd Grade"
+  }
+ },
+ "_key": "!items!0Rf7uBFLIBYFF4ua"
+}

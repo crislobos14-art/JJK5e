@@ -1,0 +1,31 @@
+{
+ "_id": "5bryxK9UmOU9PGzH",
+ "name": "Basic Cursed Weapon",
+ "type": "loot",
+ "img": "icons/svg/explosion.svg",
+ "folder": "RVpkkOiLvLva4ZNf",
+ "system": {
+  "description": {
+   "value": "<p><em>Weapon (Any), Grade 4</em></p><p>This is any weapon that has been imbued with a curse, allowing it to damage curses or shikigami.</p>"
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "rarity": "common",
+  "quantity": 1,
+  "attunement": "",
+  "type": {
+   "value": "gear"
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "4th Grade"
+  }
+ },
+ "_key": "!items!5bryxK9UmOU9PGzH"
+}

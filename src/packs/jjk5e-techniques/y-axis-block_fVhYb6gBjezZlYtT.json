@@ -1,0 +1,76 @@
+{
+ "_id": "fVhYb6gBjezZlYtT",
+ "name": "Y-Axis Block",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/schrift-x.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Schrift X — Cursed Technique Reversal, 3rd level</em></p><p>At 3rd level, When you see a creature being targeted by a ranged attack, you can spend 6 CE to cause the attack to automatically miss.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Schrift X 3",
+  "activities": {
+   "kFSP0E0XaviUEKfl": {
+    "_id": "kFSP0E0XaviUEKfl",
+    "type": "utility",
+    "name": "Action (6 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "kFSP0E0XaviUEKfl": 6
+   },
+   "technique": "Schrift X",
+   "reversal": true,
+   "reversalLevel": 3,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Schrift X"
+     ]
+    ],
+    "level": 3
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 10,
+ "_key": "!items!fVhYb6gBjezZlYtT"
+}

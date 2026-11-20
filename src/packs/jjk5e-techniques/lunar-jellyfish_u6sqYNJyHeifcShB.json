@@ -1,0 +1,123 @@
+{
+ "_id": "u6sqYNJyHeifcShB",
+ "name": "Lunar Jellyfish",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/moon-dregs.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Moon Dregs — Innate Technique (1st level)</em></p><blockquote><p>Your technique forms a poison unique to you and comes with your own shikigami to help manifest it.</p></blockquote><p>Starting at 1st level, you can use your action to summon a Jellyfish shikigami, which lasts for 8 hours and uses your proficiency bonus. You can spend 1 additional cursed energy to change the shikigami’s size between tiny and large as an action. <em>Moon Dregs</em> only takes the dodge action unless you command <em>Moon Dregs</em> using your bonus action each turn. You can summon <em>Moon Dregs</em> for free once per long rest and again for 5 cursed energy. When <em>Moon Dregs</em> is destroyed, it cannot be summoned again for 1 minute.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "dq2jkz88K1ENjer5": {
+    "_id": "dq2jkz88K1ENjer5",
+    "type": "utility",
+    "name": "Action (5 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    }
+   },
+   "6EhaTiNh5i430gxE": {
+    "_id": "6EhaTiNh5i430gxE",
+    "type": "utility",
+    "name": "Use (limited, no CE)",
+    "activation": {
+     "type": "special",
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1"
+      }
+     ],
+     "spellSlot": false
+    }
+   }
+  },
+  "uses": {
+   "max": "1",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
+    }
+   ]
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "dq2jkz88K1ENjer5": 5
+   },
+   "technique": "Moon Dregs",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "z6mgJlgIkKDRJURh",
+ "_key": "!items!u6sqYNJyHeifcShB"
+}

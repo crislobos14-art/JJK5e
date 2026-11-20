@@ -1,0 +1,46 @@
+{
+ "_id": "NEra1YZ6BxPjoGdV",
+ "name": "Reliable",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/mindset.svg",
+ "system": {
+  "description": {
+   "value": "<p>Support isn’t about glory. It’s about making sure everyone gets home. You are the backbone of coordination. When you use your inspiration, you and up to two allies gain temporary hit points equal to twice your level + your proficiency bonus.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": ""
+  },
+  "requirements": "Mindset",
+  "activities": {
+   "X06MWKgps9vU30A0": {
+    "_id": "X06MWKgps9vU30A0",
+    "type": "utility",
+    "name": "Use Inspiration",
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Spend your inspiration"
+    },
+    "consumption": {
+     "targets": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "mindset": true
+  }
+ },
+ "folder": "ymyii86sdbVo8H5C",
+ "_key": "!items!NEra1YZ6BxPjoGdV"
+}

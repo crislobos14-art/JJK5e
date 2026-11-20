@@ -1,0 +1,92 @@
+{
+ "_id": "IGdHEkIEb2j1ZSh2",
+ "name": "Miraculous Outcome",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/miracle.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Miracle — Innate Technique (3rd level)</em></p><p>At 3rd level, you can self-consciously alter fate. As a reaction to failing a roll you can spend 1 Miracle and 1 CE to add a d6 to the roll, potentially turning it into a success. This increases to a d8 at 6th level and a d10 at 11th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "4aEwGySubtb2WGSz": {
+    "_id": "4aEwGySubtb2WGSz",
+    "type": "utility",
+    "name": "Reaction",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "reaction",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Miracle",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "tl97VGJouG41Z3rd",
+ "_key": "!items!IGdHEkIEb2j1ZSh2"
+}

@@ -1,0 +1,746 @@
+{
+ "_id": "gw1DJ3muC7MAuA4S",
+ "name": "Mahoraga",
+ "type": "npc",
+ "img": "modules/jjk5e/icons/shikigami/mahoraga.svg",
+ "system": {
+  "abilities": {
+   "str": {
+    "value": 30,
+    "proficient": 1
+   },
+   "dex": {
+    "value": 22,
+    "proficient": 1
+   },
+   "con": {
+    "value": 30,
+    "proficient": 1
+   },
+   "int": {
+    "value": 12,
+    "proficient": 1
+   },
+   "wis": {
+    "value": 16,
+    "proficient": 1
+   },
+   "cha": {
+    "value": 18,
+    "proficient": 1
+   }
+  },
+  "attributes": {
+   "ac": {
+    "calc": "flat",
+    "flat": 20
+   },
+   "hp": {
+    "value": 700,
+    "max": 700,
+    "formula": ""
+   },
+   "movement": {
+    "walk": 50,
+    "units": "ft",
+    "hover": false
+   },
+   "senses": {
+    "units": "ft",
+    "special": ""
+   }
+  },
+  "details": {
+   "cr": 25,
+   "alignment": "Unaligned",
+   "type": {
+    "value": "monstrosity",
+    "subtype": "",
+    "swarm": "",
+    "custom": "Shikigami"
+   },
+   "biography": {
+    "value": "<p><em>Eight-Handled Sword Divergent Sila Divine General Mahoraga</em> — Ten Shadows shikigami. Summon cost: 20 Cursed Energy. AC and hit points scale with the summoner's proficiency bonus when summoned through the Ten Shadows features.</p><h3>Adaptation Examples</h3>\n<p><strong>Damage Types.</strong> 2 turns: resistance to the damage. 3 turns: immunity to the damage.</p>\n<p><strong>Conditions.</strong> 3 turns: immunity to the condition.</p>\n<p><strong>Flying Enemy.</strong> 1 turn: triples (3×) jump distance. 2 turns: decuples (10×) jump distance. 3 turns: ignores jump distance.</p>\n<p><strong>Resistant/Immune Enemy.</strong> 2 turns: ignores damage/condition resistance. 3 turns: ignores damage/condition immunity.</p>\n<p><strong>Hard to Hit Enemy.</strong> 1 turn: +4 to hit against the enemy. 2 turns: +8 to hit. 3 turns: automatically hits the enemy (does not counter techniques).</p>\n<p><strong>Impassable Physical Barrier.</strong> 2 turns: gains the Incorporeal Movement trait.</p>\n<p><strong>Limb Damage Effect.</strong> 1 turn: regeneration cost to regenerate limbs is halved. 2 turns: damage to break/remove limbs is doubled. 3 turns: quadrupled. 4 turns: immunity to limb damage effects.</p>\n<p><strong>Technique (Saving Throw).</strong> 1 turn: +4 to saves against the technique. 2 turns: +8 and advantage. 3 turns: immunity to the technique.</p>\n<p><strong>Technique (Defensive).</strong> 2 turns: ignores half cover and AC bonuses. 3 turns: ignores three-quarters cover and reduction/redirection effects (Sky Shape). 4 turns: ignores full cover and automatic misses (Infinity).</p>\n<p><strong>Soul Damage.</strong> 2 turns: regeneration also undoes hit point maximum reduction.</p>\n<p><strong>Cursed Energy.</strong> 1 turn: gains 50 cursed energy and Cursesight. 2 turns: gains Cursed Strike and Cursed Reinforcement (Skilled). 3 turns: gains Advanced Cursed Energy Manipulation. 4 turns: gains Mastered Cursed Energy Manipulation.</p>"
+   }
+  },
+  "traits": {
+   "size": "lg",
+   "dr": {
+    "value": []
+   },
+   "ci": {
+    "value": []
+   },
+   "languages": {
+    "value": []
+   }
+  },
+  "skills": {
+   "ath": {
+    "value": 2,
+    "ability": "str"
+   },
+   "ins": {
+    "value": 1,
+    "ability": "wis"
+   },
+   "itm": {
+    "value": 1,
+    "ability": "cha"
+   },
+   "inv": {
+    "value": 1,
+    "ability": "int"
+   },
+   "prc": {
+    "value": 1,
+    "ability": "wis"
+   },
+   "slt": {
+    "value": 1,
+    "ability": "dex"
+   }
+  },
+  "resources": {
+   "legact": {
+    "max": 3,
+    "spent": 0
+   },
+   "legres": {
+    "max": 5,
+    "spent": 0
+   }
+  }
+ },
+ "items": [
+  {
+   "_id": "uRg7N7xaZcqGJyx6",
+   "name": "Legendary Resistance (5/day)",
+   "type": "feat",
+   "img": "icons/svg/aura.svg",
+   "system": {
+    "description": {
+     "value": "<p>If Mahoraga fails a saving throw, it can choose to succeed instead.</p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Ten Shadows"
+    },
+    "activities": {},
+    "type": {
+     "value": "monster",
+     "subtype": ""
+    },
+    "requirements": "",
+    "properties": [],
+    "uses": {
+     "max": "",
+     "recovery": [],
+     "spent": 0
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!gw1DJ3muC7MAuA4S.uRg7N7xaZcqGJyx6"
+  },
+  {
+   "_id": "iYogTkEUUOOiWxGt",
+   "name": "Regeneration",
+   "type": "feat",
+   "img": "icons/svg/aura.svg",
+   "system": {
+    "description": {
+     "value": "<p>Mahoraga regains 40 hit points at the start of its turn if it has at least 1 hit point. Mahoraga can forgo 20 hit points of regeneration to instead regenerate an arm or leg, or 40 hit points of regeneration to instead regenerate the head or torso.</p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Ten Shadows"
+    },
+    "activities": {},
+    "type": {
+     "value": "monster",
+     "subtype": ""
+    },
+    "requirements": "",
+    "properties": [],
+    "uses": {
+     "max": "",
+     "recovery": [],
+     "spent": 0
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!gw1DJ3muC7MAuA4S.iYogTkEUUOOiWxGt"
+  },
+  {
+   "_id": "bcqMxT0WR4kw1mTm",
+   "name": "Conditional Adaptation",
+   "type": "feat",
+   "img": "icons/svg/aura.svg",
+   "system": {
+    "description": {
+     "value": "<p>When Mahoraga gains a condition, it removes that condition at the end of its turn and begins adapting to it. After 3 rounds have passed, it becomes immune to that condition.</p><h3>Adaptation Examples</h3>\n<p><strong>Damage Types.</strong> 2 turns: resistance to the damage. 3 turns: immunity to the damage.</p>\n<p><strong>Conditions.</strong> 3 turns: immunity to the condition.</p>\n<p><strong>Flying Enemy.</strong> 1 turn: triples (3×) jump distance. 2 turns: decuples (10×) jump distance. 3 turns: ignores jump distance.</p>\n<p><strong>Resistant/Immune Enemy.</strong> 2 turns: ignores damage/condition resistance. 3 turns: ignores damage/condition immunity.</p>\n<p><strong>Hard to Hit Enemy.</strong> 1 turn: +4 to hit against the enemy. 2 turns: +8 to hit. 3 turns: automatically hits the enemy (does not counter techniques).</p>\n<p><strong>Impassable Physical Barrier.</strong> 2 turns: gains the Incorporeal Movement trait.</p>\n<p><strong>Limb Damage Effect.</strong> 1 turn: regeneration cost to regenerate limbs is halved. 2 turns: damage to break/remove limbs is doubled. 3 turns: quadrupled. 4 turns: immunity to limb damage effects.</p>\n<p><strong>Technique (Saving Throw).</strong> 1 turn: +4 to saves against the technique. 2 turns: +8 and advantage. 3 turns: immunity to the technique.</p>\n<p><strong>Technique (Defensive).</strong> 2 turns: ignores half cover and AC bonuses. 3 turns: ignores three-quarters cover and reduction/redirection effects (Sky Shape). 4 turns: ignores full cover and automatic misses (Infinity).</p>\n<p><strong>Soul Damage.</strong> 2 turns: regeneration also undoes hit point maximum reduction.</p>\n<p><strong>Cursed Energy.</strong> 1 turn: gains 50 cursed energy and Cursesight. 2 turns: gains Cursed Strike and Cursed Reinforcement (Skilled). 3 turns: gains Advanced Cursed Energy Manipulation. 4 turns: gains Mastered Cursed Energy Manipulation.</p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Ten Shadows"
+    },
+    "activities": {},
+    "type": {
+     "value": "monster",
+     "subtype": ""
+    },
+    "requirements": "",
+    "properties": [],
+    "uses": {
+     "max": "",
+     "recovery": [],
+     "spent": 0
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!gw1DJ3muC7MAuA4S.bcqMxT0WR4kw1mTm"
+  },
+  {
+   "_id": "9dywidYQ9ogzp5bk",
+   "name": "Eight Handled Wheel",
+   "type": "feat",
+   "img": "icons/svg/aura.svg",
+   "system": {
+    "description": {
+     "value": "<p>When Mahoraga takes damage, the wheel above its head spins at the end of its turn. Once the wheel has turned twice, Mahoraga has resistance to that damage type. Upon three turns, it gains immunity. Mahoraga can only adapt to one damage type at a time.</p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Ten Shadows"
+    },
+    "activities": {},
+    "type": {
+     "value": "monster",
+     "subtype": ""
+    },
+    "requirements": "",
+    "properties": [],
+    "uses": {
+     "max": "",
+     "recovery": [],
+     "spent": 0
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!gw1DJ3muC7MAuA4S.9dywidYQ9ogzp5bk"
+  },
+  {
+   "_id": "f1PexasJEj4Lk4O0",
+   "name": "Obstacle Adaptation",
+   "type": "feat",
+   "img": "icons/svg/aura.svg",
+   "system": {
+    "description": {
+     "value": "<p>Mahoraga possesses the ability to adapt to all phenomena. If Mahoraga encounters an obstruction such as a flying enemy, an obstruction it cannot pass, or a special attack or technique used against it, Mahoraga will begin adapting according to Eight Handled Wheel. Such as through jumping up to the target despite its own movement speed, gaining the Incorporeal Movement trait to move through solid matter, or slowly becoming immune to a certain technique, spell, effect, or ability up to the DM.</p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Ten Shadows"
+    },
+    "activities": {},
+    "type": {
+     "value": "monster",
+     "subtype": ""
+    },
+    "requirements": "",
+    "properties": [],
+    "uses": {
+     "max": "",
+     "recovery": [],
+     "spent": 0
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!gw1DJ3muC7MAuA4S.f1PexasJEj4Lk4O0"
+  },
+  {
+   "_id": "HHCENYQS2VHHffxh",
+   "name": "Multiattack",
+   "type": "feat",
+   "img": "icons/svg/aura.svg",
+   "system": {
+    "description": {
+     "value": "<p>Mahoraga makes three attacks with its slam or one attack with its slam and one attack with the Sword of Extermination.</p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Ten Shadows"
+    },
+    "activities": {
+     "QxoXrPiWtdXoQr96": {
+      "_id": "QxoXrPiWtdXoQr96",
+      "type": "utility",
+      "name": "Multiattack",
+      "sort": 0,
+      "activation": {
+       "type": "action",
+       "value": 1,
+       "condition": "",
+       "override": false
+      },
+      "consumption": {
+       "targets": [],
+       "scaling": {
+        "allowed": false
+       },
+       "spellSlot": false
+      },
+      "duration": {
+       "units": "inst",
+       "concentration": false,
+       "override": false
+      },
+      "range": {
+       "override": false
+      },
+      "target": {
+       "override": false,
+       "prompt": true
+      }
+     }
+    },
+    "type": {
+     "value": "monster",
+     "subtype": ""
+    },
+    "requirements": "",
+    "properties": [],
+    "uses": {
+     "max": "",
+     "recovery": [],
+     "spent": 0
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!gw1DJ3muC7MAuA4S.HHCENYQS2VHHffxh"
+  },
+  {
+   "_id": "dYQEywfxrDVsxTSQ",
+   "name": "Slam",
+   "type": "weapon",
+   "img": "icons/svg/sword.svg",
+   "system": {
+    "description": {
+     "value": "<p></p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Ten Shadows"
+    },
+    "activities": {
+     "oRu2oNkFI4n8kwJl": {
+      "_id": "oRu2oNkFI4n8kwJl",
+      "type": "attack",
+      "name": "",
+      "sort": 0,
+      "activation": {
+       "type": "action",
+       "value": 1,
+       "condition": "",
+       "override": false
+      },
+      "consumption": {
+       "targets": [],
+       "scaling": {
+        "allowed": false
+       },
+       "spellSlot": false
+      },
+      "duration": {
+       "units": "inst",
+       "concentration": false,
+       "override": false
+      },
+      "range": {
+       "override": false
+      },
+      "target": {
+       "override": false,
+       "prompt": true,
+       "affects": {
+        "count": "1",
+        "type": "creature"
+       }
+      },
+      "attack": {
+       "ability": "str",
+       "bonus": "",
+       "critical": {
+        "threshold": null
+       },
+       "flat": false,
+       "type": {
+        "value": "melee",
+        "classification": "weapon"
+       }
+      },
+      "damage": {
+       "critical": {
+        "bonus": ""
+       },
+       "includeBase": true,
+       "parts": []
+      }
+     }
+    },
+    "type": {
+     "value": "natural",
+     "baseItem": ""
+    },
+    "ability": "str",
+    "proficient": 1,
+    "equipped": true,
+    "damage": {
+     "base": {
+      "number": 5,
+      "denomination": 10,
+      "bonus": "",
+      "types": [
+       "bludgeoning"
+      ],
+      "custom": {
+       "enabled": false,
+       "formula": ""
+      },
+      "scaling": {
+       "mode": "",
+       "number": null,
+       "formula": ""
+      }
+     }
+    },
+    "range": {
+     "reach": 5,
+     "value": null,
+     "long": null,
+     "units": "ft"
+    },
+    "magicalBonus": null,
+    "properties": [],
+    "uses": {
+     "max": "",
+     "recovery": [],
+     "spent": 0
+    },
+    "quantity": 1,
+    "weight": {
+     "value": 0,
+     "units": "lb"
+    },
+    "price": {
+     "value": 0,
+     "denomination": "gp"
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!gw1DJ3muC7MAuA4S.dYQEywfxrDVsxTSQ"
+  },
+  {
+   "_id": "uEciKdYP47P9qTr9",
+   "name": "Sword of Extermination",
+   "type": "weapon",
+   "img": "icons/svg/sword.svg",
+   "system": {
+    "description": {
+     "value": "<p>If the target is a cursed spirit, it must make a DC 30 Constitution saving throw or be exorcised and die instantly.</p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Ten Shadows"
+    },
+    "activities": {
+     "JGIYdRhWSq0A3xYy": {
+      "_id": "JGIYdRhWSq0A3xYy",
+      "type": "attack",
+      "name": "",
+      "sort": 0,
+      "activation": {
+       "type": "action",
+       "value": 1,
+       "condition": "",
+       "override": false
+      },
+      "consumption": {
+       "targets": [],
+       "scaling": {
+        "allowed": false
+       },
+       "spellSlot": false
+      },
+      "duration": {
+       "units": "inst",
+       "concentration": false,
+       "override": false
+      },
+      "range": {
+       "override": false
+      },
+      "target": {
+       "override": false,
+       "prompt": true,
+       "affects": {
+        "count": "1",
+        "type": "creature"
+       }
+      },
+      "attack": {
+       "ability": "str",
+       "bonus": "4",
+       "critical": {
+        "threshold": null
+       },
+       "flat": false,
+       "type": {
+        "value": "melee",
+        "classification": "weapon"
+       }
+      },
+      "damage": {
+       "critical": {
+        "bonus": ""
+       },
+       "includeBase": true,
+       "parts": []
+      }
+     }
+    },
+    "type": {
+     "value": "natural",
+     "baseItem": ""
+    },
+    "ability": "str",
+    "proficient": 1,
+    "equipped": true,
+    "damage": {
+     "base": {
+      "number": 5,
+      "denomination": 6,
+      "bonus": "4",
+      "types": [
+       "piercing"
+      ],
+      "custom": {
+       "enabled": false,
+       "formula": ""
+      },
+      "scaling": {
+       "mode": "",
+       "number": null,
+       "formula": ""
+      }
+     }
+    },
+    "range": {
+     "reach": 5,
+     "value": null,
+     "long": null,
+     "units": "ft"
+    },
+    "magicalBonus": 4,
+    "properties": [],
+    "uses": {
+     "max": "",
+     "recovery": [],
+     "spent": 0
+    },
+    "quantity": 1,
+    "weight": {
+     "value": 0,
+     "units": "lb"
+    },
+    "price": {
+     "value": 0,
+     "denomination": "gp"
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!gw1DJ3muC7MAuA4S.uEciKdYP47P9qTr9"
+  },
+  {
+   "_id": "opSeErWzlQp7PzIu",
+   "name": "Flurry (Costs 1 Action)",
+   "type": "feat",
+   "img": "icons/svg/aura.svg",
+   "system": {
+    "description": {
+     "value": "<p>Mahoraga makes one slam or sword of extermination attack against a target within range.</p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Ten Shadows"
+    },
+    "activities": {
+     "I57ooRcPVk55G2gE": {
+      "_id": "I57ooRcPVk55G2gE",
+      "type": "utility",
+      "name": "",
+      "sort": 0,
+      "activation": {
+       "type": "legendary",
+       "value": 1,
+       "condition": "",
+       "override": false
+      },
+      "consumption": {
+       "targets": [],
+       "scaling": {
+        "allowed": false
+       },
+       "spellSlot": false
+      },
+      "duration": {
+       "units": "inst",
+       "concentration": false,
+       "override": false
+      },
+      "range": {
+       "override": false
+      },
+      "target": {
+       "override": false,
+       "prompt": true
+      }
+     }
+    },
+    "type": {
+     "value": "monster",
+     "subtype": ""
+    },
+    "requirements": "",
+    "properties": [],
+    "uses": {
+     "max": "",
+     "recovery": [],
+     "spent": 0
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!gw1DJ3muC7MAuA4S.opSeErWzlQp7PzIu"
+  },
+  {
+   "_id": "SdtI2etF5CQaQUqj",
+   "name": "Quick Adaptation (Costs 3 Actions)",
+   "type": "feat",
+   "img": "icons/svg/aura.svg",
+   "system": {
+    "description": {
+     "value": "<p>Mahoraga's wheel spins violently, immediately completing one turn of adaptation.</p><h3>Adaptation Examples</h3>\n<p><strong>Damage Types.</strong> 2 turns: resistance to the damage. 3 turns: immunity to the damage.</p>\n<p><strong>Conditions.</strong> 3 turns: immunity to the condition.</p>\n<p><strong>Flying Enemy.</strong> 1 turn: triples (3×) jump distance. 2 turns: decuples (10×) jump distance. 3 turns: ignores jump distance.</p>\n<p><strong>Resistant/Immune Enemy.</strong> 2 turns: ignores damage/condition resistance. 3 turns: ignores damage/condition immunity.</p>\n<p><strong>Hard to Hit Enemy.</strong> 1 turn: +4 to hit against the enemy. 2 turns: +8 to hit. 3 turns: automatically hits the enemy (does not counter techniques).</p>\n<p><strong>Impassable Physical Barrier.</strong> 2 turns: gains the Incorporeal Movement trait.</p>\n<p><strong>Limb Damage Effect.</strong> 1 turn: regeneration cost to regenerate limbs is halved. 2 turns: damage to break/remove limbs is doubled. 3 turns: quadrupled. 4 turns: immunity to limb damage effects.</p>\n<p><strong>Technique (Saving Throw).</strong> 1 turn: +4 to saves against the technique. 2 turns: +8 and advantage. 3 turns: immunity to the technique.</p>\n<p><strong>Technique (Defensive).</strong> 2 turns: ignores half cover and AC bonuses. 3 turns: ignores three-quarters cover and reduction/redirection effects (Sky Shape). 4 turns: ignores full cover and automatic misses (Infinity).</p>\n<p><strong>Soul Damage.</strong> 2 turns: regeneration also undoes hit point maximum reduction.</p>\n<p><strong>Cursed Energy.</strong> 1 turn: gains 50 cursed energy and Cursesight. 2 turns: gains Cursed Strike and Cursed Reinforcement (Skilled). 3 turns: gains Advanced Cursed Energy Manipulation. 4 turns: gains Mastered Cursed Energy Manipulation.</p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Ten Shadows"
+    },
+    "activities": {
+     "39rlPBr8xuz4y4DP": {
+      "_id": "39rlPBr8xuz4y4DP",
+      "type": "utility",
+      "name": "",
+      "sort": 0,
+      "activation": {
+       "type": "legendary",
+       "value": 3,
+       "condition": "",
+       "override": false
+      },
+      "consumption": {
+       "targets": [],
+       "scaling": {
+        "allowed": false
+       },
+       "spellSlot": false
+      },
+      "duration": {
+       "units": "inst",
+       "concentration": false,
+       "override": false
+      },
+      "range": {
+       "override": false
+      },
+      "target": {
+       "override": false,
+       "prompt": true
+      }
+     }
+    },
+    "type": {
+     "value": "monster",
+     "subtype": ""
+    },
+    "requirements": "",
+    "properties": [],
+    "uses": {
+     "max": "",
+     "recovery": [],
+     "spent": 0
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!gw1DJ3muC7MAuA4S.SdtI2etF5CQaQUqj"
+  }
+ ],
+ "effects": [],
+ "prototypeToken": {
+  "name": "Mahoraga",
+  "actorLink": false,
+  "disposition": 1,
+  "width": 2,
+  "height": 2,
+  "texture": {
+   "src": "modules/jjk5e/icons/shikigami/mahoraga.svg"
+  },
+  "displayName": 20,
+  "displayBars": 20,
+  "bar1": {
+   "attribute": "attributes.hp"
+  },
+  "sight": {
+   "enabled": true
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "shikigami": true,
+   "ceCost": 20,
+   "hpPerProf": 20,
+   "dmgProf": false
+  }
+ },
+ "folder": null,
+ "_key": "!actors!gw1DJ3muC7MAuA4S"
+}

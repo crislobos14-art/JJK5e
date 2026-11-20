@@ -1,0 +1,42 @@
+{
+ "_id": "LoV0AVxSDVAH23DV",
+ "name": "Gourmand",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/voracity.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Body of the Devourer</em></p>\n<p>You have learned to appreciate the good food you have eaten. When you use <em>Regurgitation</em>, you gain temporary hit points equal to half the hit points of the creature whose devoured ability you are calling upon. The amount of temporary hit points cannot exceed half your hit point maximum.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Body of the Devourer",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Maximum: Body of the Devourer"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "3wVUVT1CJTINFbDN",
+ "sort": 300,
+ "_key": "!items!LoV0AVxSDVAH23DV"
+}

@@ -1,0 +1,71 @@
+{
+ "_id": "77BiPkIICiOOUXS1",
+ "name": "Quick Pose",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/golden-hour.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Majestic Pose</em></p>\n<p>You have learned to activate your technique in a fraction of a second. </p>\n<ul>\n<li>\n<p>When you use <em>Golden Hour</em>, you can instead use it as a free action on your turn instead of as a bonus action.   </p>\n</li>\n<li>\n<p>As a reaction for 5 CE, you can stop time for yourself and immediately take one turn. After time resumes, your movement is 0 ft and you cannot take actions until the end of your next turn.  </p>\n</li>\n<li>\n<p>At 6th level, you can use <em>Golden Week</em> as a bonus action instead of an action.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Majestic Pose",
+  "activities": {
+   "JT234T44PNaxfWeZ": {
+    "_id": "JT234T44PNaxfWeZ",
+    "type": "utility",
+    "name": "Reaction (5 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "JT234T44PNaxfWeZ": 5
+   },
+   "prereq": {
+    "features": [
+     [
+      "Majestic Pose"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "d3tvju1gFLiRbf1c",
+ "sort": 100,
+ "_key": "!items!77BiPkIICiOOUXS1"
+}

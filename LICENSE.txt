@@ -1,0 +1,16 @@
+Jujutsu Kaisen 5e (V.6) — Foundry VTT conversion
+
+Original content: "Jujutsu Kaisen 5e" V.6 © 2026 [I watch Anime]
+Licensed under the Creative Commons Attribution–NonCommercial–ShareAlike 4.0
+International License (CC BY-NC-SA 4.0): https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+This module is an unofficial, fan-made, NON-COMMERCIAL adaptation of that work for
+Foundry Virtual Tabletop. It is distributed under the same CC BY-NC-SA 4.0 license.
+It may not be sold, paywalled or otherwise monetized.
+
+Original author's links: Discord https://discord.gg/6r736Wnp5q ·
+Patreon https://www.patreon.com/c/IwatchAnime
+
+This project is not affiliated with, endorsed by, or associated with Shueisha,
+Gege Akutami, Wizards of the Coast or Foundry Gaming LLC. Jujutsu Kaisen and all
+related names belong to their respective rights holders.

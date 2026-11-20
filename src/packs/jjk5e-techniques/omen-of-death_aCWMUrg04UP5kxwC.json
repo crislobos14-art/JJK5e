@@ -1,0 +1,150 @@
+{
+ "_id": "aCWMUrg04UP5kxwC",
+ "name": "Omen of Death",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/black-bird-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Black Bird Manipulation — Innate Technique (3rd level)</em></p><p>When you reach 3rd level, you are constantly followed by an omen of death, giving you an aura of terror. As a bonus action, you force each creature of your choice that you can see within 30 ft to make a Wisdom saving throw. On a failed save, a creature becomes frightened of you for 1 minute. A frightened creature can repeat the save at the end of its turns, ending the effect on a success.<br />\n You have advantage on attack rolls against frightened creatures.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "7iJWff7wrgkdEqqV": {
+    "_id": "7iJWff7wrgkdEqqV",
+    "type": "save",
+    "name": "Bonus Action",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "wis"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    },
+    "effects": [
+     {
+      "_id": "ic6dPQKN7voOmx4g",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "value": "30",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Black Bird Manipulation",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "ic6dPQKN7voOmx4g",
+   "name": "Frightened (Omen of Death)",
+   "img": "modules/jjk5e/icons/techniques/black-bird-manipulation.svg",
+   "statuses": [
+    "frightened"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "seconds": 60,
+    "rounds": 10
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "frightened"
+    }
+   },
+   "_key": "!items.effects!aCWMUrg04UP5kxwC.ic6dPQKN7voOmx4g"
+  }
+ ],
+ "folder": "51kqIFJDFNS150R8",
+ "_key": "!items!aCWMUrg04UP5kxwC"
+}

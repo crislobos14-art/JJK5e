@@ -1,0 +1,32 @@
+{
+ "_id": "jRT6oAmJpbn9zSBI",
+ "name": "Shining Stars",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/love-rendezvous.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Love Rendezvous — Innate Technique (11th level)</em></p><p>At 11th level, you became better with your technique, now being able to have more stars. The amount of stars you can put of the same type is increased to twice your Cursed Energy modifier.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Love Rendezvous 11"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Love Rendezvous",
+   "level": 11
+  }
+ },
+ "folder": "wSkJnhi22IbLpEbi",
+ "_key": "!items!jRT6oAmJpbn9zSBI"
+}

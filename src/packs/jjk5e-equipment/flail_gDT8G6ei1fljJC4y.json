@@ -1,0 +1,72 @@
+{
+ "_id": "gDT8G6ei1fljJC4y",
+ "name": "Flail",
+ "type": "weapon",
+ "img": "icons/svg/sword.svg",
+ "folder": "8L9REK3UZxFoXRJA",
+ "system": {
+  "description": {
+   "value": "<p>Martial melee weapon. 1d8 bludgeoning. -.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "martialM",
+   "baseItem": "flail"
+  },
+  "damage": {
+   "base": {
+    "number": 1,
+    "denomination": 8,
+    "types": [
+     "bludgeoning"
+    ]
+   }
+  },
+  "range": {
+   "value": 5,
+   "long": null,
+   "units": "ft",
+   "reach": 5
+  },
+  "properties": [],
+  "proficient": null,
+  "price": {
+   "value": 10.0,
+   "denomination": "gp"
+  },
+  "quantity": 1,
+  "activities": {
+   "t8ZYx6oDOe8zklPa": {
+    "_id": "t8ZYx6oDOe8zklPa",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "melee",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "priceUSD": "$1,000"
+  }
+ },
+ "_key": "!items!gDT8G6ei1fljJC4y"
+}

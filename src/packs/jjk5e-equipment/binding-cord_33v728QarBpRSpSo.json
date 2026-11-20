@@ -1,0 +1,30 @@
+{
+ "_id": "33v728QarBpRSpSo",
+ "name": "Binding Cord",
+ "type": "loot",
+ "img": "icons/svg/explosion.svg",
+ "folder": "Z18gXvGvvqaYHnqC",
+ "system": {
+  "type": {
+   "value": "gear"
+  },
+  "description": {
+   "value": "<p>A bundle of cord soaked with the blood of cursed spirits and carries a pungent smell. Low grade curses cannot phase through these cords as they can with most physical objects and can therefore be used to bind and restrain them.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "rarity": "common",
+  "quantity": 1
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "4th Grade"
+  }
+ },
+ "_key": "!items!33v728QarBpRSpSo"
+}

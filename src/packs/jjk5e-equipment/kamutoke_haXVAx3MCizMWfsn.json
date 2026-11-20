@@ -1,0 +1,169 @@
+{
+ "_id": "haXVAx3MCizMWfsn",
+ "name": "Kamutoke",
+ "type": "weapon",
+ "img": "icons/svg/sword.svg",
+ "folder": "QgDaE1oZxMUlsCnN",
+ "system": {
+  "description": {
+   "value": "<p><em>Weapon(Club), Special Grade</em></p><p>You have a +4 bonus to attack rolls and damage rolls made with this weapon. You can spend up to 10 cursed energy as an action to send out a blast of lightning against up to 5 creatures within 120 ft. Each creature must make a DC 22 Constitution saving throw, taking 2d12 lightning damage per CE spent or half as much damage on a successful save. A creature that gets a 10 or less on the save is paralyzed until the end of their next turn.</p>"
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "simpleM",
+   "baseItem": "club"
+  },
+  "damage": {
+   "base": {
+    "number": 1,
+    "denomination": 4,
+    "types": [
+     "bludgeoning"
+    ]
+   }
+  },
+  "range": {
+   "value": 5,
+   "long": null,
+   "units": "ft",
+   "reach": 5
+  },
+  "properties": [
+   "lgt",
+   "mgc"
+  ],
+  "proficient": null,
+  "quantity": 1,
+  "activities": {
+   "XtLCTBC42Z1ZYbgV": {
+    "_id": "XtLCTBC42Z1ZYbgV",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "melee",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   },
+   "heLHJOaREcBrjcgK": {
+    "_id": "heLHJOaREcBrjcgK",
+    "type": "save",
+    "name": "Action (1+ CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "20"
+     }
+    },
+    "range": {
+     "value": "120",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 12,
+       "bonus": "",
+       "types": [
+        "lightning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "mode": "whole",
+        "number": 2
+       }
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "xVnNKSj0uKxOAqcb",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "rarity": "legendary",
+  "attunement": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "Special Grade",
+   "ceCosts": {
+    "heLHJOaREcBrjcgK": 1
+   },
+   "ceSteps": {
+    "heLHJOaREcBrjcgK": 1
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "xVnNKSj0uKxOAqcb",
+   "name": "Paralyzed (Kamutoke)",
+   "img": "systems/dnd5e/icons/svg/statuses/paralyzed.svg",
+   "statuses": [
+    "paralyzed"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "rounds": 1
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "paralyzed"
+    }
+   },
+   "_key": "!items.effects!haXVAx3MCizMWfsn.xVnNKSj0uKxOAqcb"
+  }
+ ],
+ "_key": "!items!haXVAx3MCizMWfsn"
+}

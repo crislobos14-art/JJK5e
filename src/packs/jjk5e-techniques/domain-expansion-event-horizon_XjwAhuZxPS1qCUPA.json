@@ -1,0 +1,200 @@
+{
+ "_id": "XjwAhuZxPS1qCUPA",
+ "name": "Domain Expansion: Event Horizon",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/star-rage-domain.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Star Rage — Innate Technique (18th level)</em></p><p><em>Domain Expansion (rules): full-turn action, 20 CE unless stated, 175-ft radius, 1 minute. When the domain ends you suffer <strong>Technique Burnout</strong> (applied automatically by the module).</em></p><p>Finally, 18th at level, you have learned to expand your domain. All in your domain are crushed by ground-shaking mass as every 1 ft cost 4 ft of movement. At initiative 20, all hostile creatures in your domain are knocked prone and take 8d8 force damage as they experience crushing mass. A creature must make a Strength (Athletics) check against your Cursed Energy save DC at the beginning of their turn to stand up and again at the end of their turn to remain standing.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "4Kinngzzx56fO6IL": {
+    "_id": "4Kinngzzx56fO6IL",
+    "type": "damage",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 8,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "force"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "2kllomSKc8EPOd0U",
+      "onSave": false
+     }
+    ]
+   },
+   "qJtwkBijxCyLQTMG": {
+    "_id": "qJtwkBijxCyLQTMG",
+    "type": "utility",
+    "name": "Expand Domain (20 CE)",
+    "sort": -100000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Full turn: Action + Bonus Action + Movement",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "175",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": true
+     },
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 9,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "special",
+   "value": null,
+   "condition": "Full turn: Action + Bonus Action + Movement",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "radius",
+    "size": "175",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": true
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Star Rage",
+   "level": 18,
+   "domain": true,
+   "ceCosts": {
+    "qJtwkBijxCyLQTMG": 20
+   },
+   "domainActivity": "qJtwkBijxCyLQTMG",
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "2kllomSKc8EPOd0U",
+   "name": "Prone (Domain Expansion: Event Horizon)",
+   "img": "modules/jjk5e/icons/techniques/star-rage-domain.svg",
+   "statuses": [
+    "prone"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!XjwAhuZxPS1qCUPA.2kllomSKc8EPOd0U"
+  }
+ ],
+ "folder": "21st6P4AJoi9hlmG",
+ "_key": "!items!XjwAhuZxPS1qCUPA"
+}

@@ -1,0 +1,58 @@
+{
+ "_id": "APCjYcgieTSzelQc",
+ "name": "Hardened Skin",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Durability Improvements: You're like a wall that cannot be moved, not even the hardest of blows will bring you down. You can have a number of these improvements equal to your Constitution modifier. ---</em></p>\n<p>1 body point, 15 Constitution<br />\nYour skin has hardened, becoming more akin to bone. You gain +2 maximum hit points per level that you have, and you gain +2 more for every level you gain thereafter.  </p>\n<hr />",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Heavenly Restriction 2"
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "abilities": {
+     "con": 15
+    }
+   },
+   "bodyCost": 1,
+   "bodyCategory": "con"
+  }
+ },
+ "folder": "0PwoOvAjGZHw3HqL",
+ "effects": [
+  {
+   "_id": "ckLf0sMtU4cGnvfR",
+   "name": "Hardened Skin",
+   "img": "modules/jjk5e/icons/feature.svg",
+   "changes": [
+    {
+     "key": "system.attributes.hp.bonuses.level",
+     "mode": 2,
+     "value": "2",
+     "priority": null
+    }
+   ],
+   "disabled": false,
+   "transfer": true,
+   "duration": {},
+   "description": "",
+   "flags": {},
+   "_key": "!items.effects!APCjYcgieTSzelQc.ckLf0sMtU4cGnvfR"
+  }
+ ],
+ "_key": "!items!APCjYcgieTSzelQc"
+}

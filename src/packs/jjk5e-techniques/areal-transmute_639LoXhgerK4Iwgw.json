@@ -1,0 +1,194 @@
+{
+ "_id": "639LoXhgerK4Iwgw",
+ "name": "Areal Transmute",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/cursed-transmutation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Transmutation — Innate Technique (6th level)</em></p><p>At 6th level, you have learned to change the properties of larger areas. As an action for 6 cursed energy, you can transmute the ground beneath you in a radius of up to 30 ft in the following ways:<br />\n<strong>Slippery.</strong> You coat the area in a solution, forcing all creatures other than yourself to make a Dexterity saving throw or fall prone.<br />\n<strong>Explosive.</strong> You destabilize the ground by adding protons. As an action on your next turn, you release an explosion forcing all creatures in range (including you) to make a Constitution saving throw. On a failure, a creature takes 4d6 fire damage or half as much on a success. This increases to 6d6 at 11th level and 8d6 at 18th level.<br />\n<strong>Spikey.</strong> You form physical spikes in the area. A creature that walks 5 ft through this area takes 2d4 piercing damage.<br />\n<strong>Shifting.</strong> You form random foot falls and hazards in the area, causing it to become difficult terrain.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "2UD59HgF24X60TJX": {
+    "_id": "2UD59HgF24X60TJX",
+    "type": "save",
+    "name": "Action (6 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    },
+    "effects": [
+     {
+      "_id": "nc4oGLTB73uhXvpq",
+      "onSave": false
+     }
+    ]
+   },
+   "AtIu9kGGzCe2w3Fr": {
+    "_id": "AtIu9kGGzCe2w3Fr",
+    "type": "save",
+    "name": "Action",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 4,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "fire"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "2UD59HgF24X60TJX": 6
+   },
+   "technique": "Cursed Transmutation",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "nc4oGLTB73uhXvpq",
+   "name": "Prone (Areal Transmute)",
+   "img": "modules/jjk5e/icons/techniques/cursed-transmutation.svg",
+   "statuses": [
+    "prone"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!639LoXhgerK4Iwgw.nc4oGLTB73uhXvpq"
+  }
+ ],
+ "folder": "mZ3PzIRAkGl7SSou",
+ "_key": "!items!639LoXhgerK4Iwgw"
+}

@@ -1,0 +1,117 @@
+{
+ "_id": "by9eHzYOCKk4O6zh",
+ "name": "Majestic Pose",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/golden-hour.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Golden Hour — Innate Technique (3rd level)</em></p><p>At 3rd level, you can instead spend up to twice your proficiency bonus in cursed energy as a Full Turn Action (Action + Bonus Action + Movement) to strike a majestic pose and immediately take one turn per three CE spent in stopped time. Doing so places extreme stress on your body. Once time resumes your movement speed is reduced to 0 until the end of your next turn.<br />\n When you stop time, your speed increases by 10 ft until time resumes. This increases by 5 ft at 6th, 11th, and 18th level.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "8vWFnEg9QnfiwtPh": {
+    "_id": "8vWFnEg9QnfiwtPh",
+    "type": "utility",
+    "name": "Bonus Action",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Golden Hour",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "OPfUdWvA8mZmDQ8i",
+ "effects": [
+  {
+   "_id": "t6QPc9SyrYsahyy1",
+   "name": "Majestic Pose (toggle)",
+   "img": "modules/jjk5e/icons/techniques/golden-hour.svg",
+   "changes": [
+    {
+     "key": "system.attributes.movement.walk",
+     "mode": 2,
+     "value": "10",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!by9eHzYOCKk4O6zh.t6QPc9SyrYsahyy1"
+  }
+ ],
+ "_key": "!items!by9eHzYOCKk4O6zh"
+}

@@ -1,0 +1,120 @@
+{
+ "_id": "BP2dCOForc7QrwFI",
+ "name": "Judge’s Gavel",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/deadly-sentencing.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Deadly Sentencing — Innate Technique (1st level)</em></p><blockquote><p>The technique you have is made for one purpose, justice.</p></blockquote><p>At 1st level, once per long rest, you can summon a magical gavel for free once per long rest. Otherwise, you can spend 1 Cursed Energy to resummon it to your hand. This weapon has 3 forms: a base form a light hammer, maul, and pole hammer (Reach, d10).</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "JlbrFRiWuFCCoI5D": {
+    "_id": "JlbrFRiWuFCCoI5D",
+    "type": "utility",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   },
+   "7dh0pRNk1WUwM33y": {
+    "_id": "7dh0pRNk1WUwM33y",
+    "type": "utility",
+    "name": "Use (limited, no CE)",
+    "activation": {
+     "type": "special",
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1"
+      }
+     ],
+     "spellSlot": false
+    }
+   }
+  },
+  "uses": {
+   "max": "1",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
+    }
+   ]
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "JlbrFRiWuFCCoI5D": 1
+   },
+   "technique": "Deadly Sentencing",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "jvdEqnCHI6BBkSgt",
+ "_key": "!items!BP2dCOForc7QrwFI"
+}

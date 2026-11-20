@@ -1,0 +1,73 @@
+{
+ "_id": "OvHymvVnhXGERgOM",
+ "name": "Calculate Scenario",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/laplace-s-demon.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Overload</em></p>\n<p>You focus your mind for 1 minute and spend 5 cursed energy. You ask a single question concerning a specific goal, event, or activity to occur within 7 days. The DM offers a truthful reply.<br />\n The answer doesn’t take into account any possible circumstances that might change the outcome, such as additional glimpses of the future or the loss or gain of a companion. Between now and the predicted event, you gain an insight of knowledge that grants you advantage on one roll of your choice. You cannot have more than one insight at a time.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Overload",
+  "activities": {
+   "buhtkpQkaUgv5ZEm": {
+    "_id": "buhtkpQkaUgv5ZEm",
+    "type": "utility",
+    "name": "Action (5 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "buhtkpQkaUgv5ZEm": 5
+   },
+   "prereq": {
+    "features": [
+     [
+      "Overload"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "LY5kMspFULfnXfB0",
+ "sort": 300,
+ "_key": "!items!OvHymvVnhXGERgOM"
+}

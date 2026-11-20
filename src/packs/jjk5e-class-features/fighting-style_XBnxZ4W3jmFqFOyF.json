@@ -1,0 +1,75 @@
+{
+ "_id": "XBnxZ4W3jmFqFOyF",
+ "name": "Fighting Style",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>At 2nd level, due to your training and constant improving body, you have a newfound ability when wielding weapons. You can choose one of the fighting styles bellow:</p>\n<ul>\n<li>\n<p><strong>Archery (PHB).</strong> You gain a +2 bonus to attack rolls you make with ranged weapons.  </p>\n</li>\n<li>\n<p><strong>Blind Fighting (TCE).</strong> You have blindsight with a range of 10 feet. Within that range, you can effectively see anything that isn't behind total cover, even if you're blinded or in darkness. Moreover, you can see an invisible creature within that range, unless the creature successfully hides from you.  </p>\n</li>\n<li>\n<p><strong>Dueling (PHB).</strong> When you are wielding a melee weapon in one hand and no other weapons, you gain a +2 bonus to damage rolls with that weapon.  </p>\n</li>\n<li>\n<p><strong>Great Weapon Fighting (PHB).</strong> When you roll a 1 or 2 on a damage die for an attack you make with a melee weapon that you are wielding with two hands, you can reroll the die and must use the new roll, even if the new roll is a 1 or a 2. The weapon must have the two-handed or versatile property for you to gain this benefit.  </p>\n</li>\n<li>\n<p><strong>Grappler.</strong> At the start of each of your turns, you can deal 1d4 bludgeoning damage to one creature grappled by you.  </p>\n</li>\n<li>\n<p><strong>Interception (TCE).</strong> When a creature you can see hits a target, other than you, within 5 feet of you with an attack, you can use your reaction to reduce the damage the target takes by 1d10 + your proficiency bonus (to a minimum of 0 damage). You must be wielding a shield or a simple or martial weapon to use this reaction.  </p>\n</li>\n<li>\n<p><strong>Protection (PHB).</strong> When a creature you can see attacks a target other than you that is within 5 feet of you, you can use your reaction to impose disadvantage on the attack roll.   </p>\n</li>\n<li>\n<p><strong>Two-Weapon Fighting (PHB).</strong> When you engage in two-weapon fighting, you can add your ability modifier to the damage of the second attack.  </p>\n</li>\n<li>\n<p><strong>Tunnel Fighter (UA).</strong> As a bonus action, you can enter a defensive stance that lasts until the start of your next turn. While in your defensive stance, you can make opportunity attacks without using your reaction, and you can use your reaction to make a melee attack against a creature that moves more than 5 feet while within your reach.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Heavenly Restriction 2",
+  "activities": {
+   "lQCcip7D0oLqtfhT": {
+    "_id": "lQCcip7D0oLqtfhT",
+    "type": "attack",
+    "name": "Reaction",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "5",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "flat": false,
+     "type": {
+      "value": "melee",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "hWqAX9TqrOvuq1FE",
+ "effects": [],
+ "_key": "!items!XBnxZ4W3jmFqFOyF"
+}

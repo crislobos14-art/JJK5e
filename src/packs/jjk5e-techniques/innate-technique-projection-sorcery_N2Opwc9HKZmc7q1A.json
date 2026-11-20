@@ -1,0 +1,118 @@
+{
+ "_id": "N2Opwc9HKZmc7q1A",
+ "name": "Innate Technique: Projection Sorcery",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/projection-sorcery.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>You were born with one of the praised techniques of the Zenin Clan, turning animation into reality.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.C5RGYdyoQiko1drM]{Projection}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.sbId7whXWQQyGwaz]{Acceleration}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.xSSfkLjiDQ8aBAEs]{24 Frame Rule}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.7A7AqyqQoly3BVGF]{Fastest Sorcerer Alive}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.aKwBW0FtSBN296Y8]{Domain Expansion: Lunar Palace Womb of Time}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "TjmaUkqeZHXGNTiY": {
+    "_id": "TjmaUkqeZHXGNTiY",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Projection Sorcery (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.C5RGYdyoQiko1drM",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "Gwa1QvLUnaHsIZoI": {
+    "_id": "Gwa1QvLUnaHsIZoI",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Projection Sorcery (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.sbId7whXWQQyGwaz",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "dWzWxNg9KqGqKd1E": {
+    "_id": "dWzWxNg9KqGqKd1E",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Projection Sorcery (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.xSSfkLjiDQ8aBAEs",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "NHVro6lLsYNGPrLt": {
+    "_id": "NHVro6lLsYNGPrLt",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Projection Sorcery (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.7A7AqyqQoly3BVGF",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "SIWmZfGLvNN4yOAq": {
+    "_id": "SIWmZfGLvNN4yOAq",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Projection Sorcery (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.aKwBW0FtSBN296Y8",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Projection Sorcery"
+  }
+ },
+ "_key": "!items!N2Opwc9HKZmc7q1A"
+}

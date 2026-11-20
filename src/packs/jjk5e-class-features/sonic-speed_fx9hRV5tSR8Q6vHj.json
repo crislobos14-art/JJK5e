@@ -1,0 +1,84 @@
+{
+ "_id": "fx9hRV5tSR8Q6vHj",
+ "name": "Sonic Speed",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Speed Improvements: You feel like you could probably win against a special grade in a race due to how fast you are now. You can have a number of these improvements equal to your Dexterity modifier. ---</em></p>\n<p>1 body point, 15 Dexterity<br />\nYour speed has increased dramatically. Your movement speed doubles and you can take the Dash action as a bonus action.  </p>\n<hr />",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Heavenly Restriction 2",
+  "activities": {
+   "J4cI01jJ0xf0gnFP": {
+    "_id": "J4cI01jJ0xf0gnFP",
+    "type": "utility",
+    "name": "Bonus Action",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "abilities": {
+     "dex": 15
+    }
+   },
+   "bodyCost": 1,
+   "bodyCategory": "dex"
+  }
+ },
+ "folder": "JeA0bNLBGnvPx6Zr",
+ "effects": [
+  {
+   "_id": "lJhpuxSq8EvnNA4h",
+   "name": "Sonic Speed",
+   "img": "modules/jjk5e/icons/feature.svg",
+   "changes": [
+    {
+     "key": "system.attributes.movement.walk",
+     "mode": 1,
+     "value": "2",
+     "priority": null
+    }
+   ],
+   "disabled": false,
+   "transfer": true,
+   "duration": {},
+   "description": "",
+   "flags": {},
+   "_key": "!items.effects!fx9hRV5tSR8Q6vHj.lJhpuxSq8EvnNA4h"
+  }
+ ],
+ "_key": "!items!fx9hRV5tSR8Q6vHj"
+}

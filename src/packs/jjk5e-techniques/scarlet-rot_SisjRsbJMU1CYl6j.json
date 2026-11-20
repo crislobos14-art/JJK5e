@@ -1,0 +1,167 @@
+{
+ "_id": "SisjRsbJMU1CYl6j",
+ "name": "Scarlet Rot",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/rot.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Rot — Innate Technique (6th level)</em></p><p>At 6th level, you have proved your mastery over your technique. Your technique now ignores resistance to acid damage and a creature that fails a saving throw against your technique is poisoned for 1 minute and can make a Constitution save at the end of their turn to end the effect on themselves.<br />\n You gain immunity to poison and acid damage as well as the poisoned condition. At 18th level, your technique treats immunity to acid damage as resistance.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "MlQVR5ZUCE8FRAzA": {
+    "_id": "MlQVR5ZUCE8FRAzA",
+    "type": "save",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    },
+    "effects": [
+     {
+      "_id": "gb3txyFerIE5LEO8",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "special",
+   "value": null,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Rot",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "gb3txyFerIE5LEO8",
+   "name": "Poisoned (Scarlet Rot)",
+   "img": "modules/jjk5e/icons/techniques/rot.svg",
+   "statuses": [
+    "poisoned"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "seconds": 60,
+    "rounds": 10
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "poisoned"
+    }
+   },
+   "_key": "!items.effects!SisjRsbJMU1CYl6j.gb3txyFerIE5LEO8"
+  },
+  {
+   "_id": "DqYDGSrvprQayJZW",
+   "name": "Scarlet Rot (toggle)",
+   "img": "modules/jjk5e/icons/techniques/rot.svg",
+   "changes": [
+    {
+     "key": "system.traits.di.value",
+     "mode": 2,
+     "value": "poison",
+     "priority": null
+    },
+    {
+     "key": "system.traits.di.value",
+     "mode": 2,
+     "value": "acid",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!SisjRsbJMU1CYl6j.DqYDGSrvprQayJZW"
+  }
+ ],
+ "folder": "TOdSvSBhuENKcEJX",
+ "_key": "!items!SisjRsbJMU1CYl6j"
+}

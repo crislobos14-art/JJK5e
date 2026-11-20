@@ -1,0 +1,198 @@
+{
+ "_id": "lLGj4BOM4kCmXD8H",
+ "name": "Shadow User",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/ten-shadows.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Divine Dogs</em></p>\n<p>You have furthered your use of shadows. Choose one of the following features (This feat can be taken multiple times).</p>\n<ul>\n<li>\n<p><strong>Shadow Skulker</strong>. As an action for 2 CE you physically enter the shadows gaining full cover for a turn or until you exit from a shadow within 10 feet. At the start of your turn, you can spend 1 CE to remain in the shadow. You can hear and see through the shadow and can summon tamed shikigami within the shadow. If the shadow is sufficiently illuminated, you exit the shadow.  </p>\n</li>\n<li>\n<p><strong>Shadow Ridge</strong>. As a reaction for 1 CE against a melee attack, you force a creature within 10 ft to make a Dexterity saving throw. On a failure the target rolls the attack at disadvantage as their legs fall into their shadow briefly and they fall prone. You can instead spend 3 CE to give the target disadvantage on the save.  </p>\n</li>\n<li>\n<p>Two shadow spells below 5th level. The CE cost equals the spell’s level.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Divine Dogs",
+  "activities": {
+   "kuA3cfcogTqEo5lL": {
+    "_id": "kuA3cfcogTqEo5lL",
+    "type": "utility",
+    "name": "Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "10",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    }
+   },
+   "ciXDfDhKit2nz2JO": {
+    "_id": "ciXDfDhKit2nz2JO",
+    "type": "utility",
+    "name": "Action (1 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   },
+   "ob4aL0vEOTKn1k5C": {
+    "_id": "ob4aL0vEOTKn1k5C",
+    "type": "save",
+    "name": "Reaction (1 CE)",
+    "sort": 200000,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "10",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    },
+    "effects": [
+     {
+      "_id": "8eFkxQ9czoPaSqGB",
+      "onSave": false
+     }
+    ]
+   },
+   "FnR02810yOmG8buU": {
+    "_id": "FnR02810yOmG8buU",
+    "type": "utility",
+    "name": "Action (3 CE)",
+    "sort": 300000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "kuA3cfcogTqEo5lL": 2,
+    "ciXDfDhKit2nz2JO": 1,
+    "ob4aL0vEOTKn1k5C": 1,
+    "FnR02810yOmG8buU": 3
+   },
+   "prereq": {
+    "features": [
+     [
+      "Divine Dogs"
+     ]
+    ]
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "8eFkxQ9czoPaSqGB",
+   "name": "Prone (Shadow User)",
+   "img": "modules/jjk5e/icons/techniques/ten-shadows.svg",
+   "statuses": [
+    "prone"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!lLGj4BOM4kCmXD8H.8eFkxQ9czoPaSqGB"
+  }
+ ],
+ "folder": "9OwEZW5sd90aZTPm",
+ "sort": 100,
+ "_key": "!items!lLGj4BOM4kCmXD8H"
+}

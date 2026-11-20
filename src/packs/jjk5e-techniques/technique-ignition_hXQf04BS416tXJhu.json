@@ -1,0 +1,81 @@
+{
+ "_id": "hXQf04BS416tXJhu",
+ "name": "Technique Ignition",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/technique-extermination.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Technique Extermination — Cursed Technique Reversal</em></p><p>After mastering Reverse Cursed Technique, you have now unlocked your technique reversal. Instead of extinguishing someone’s technique you amplify it for a certain amount of time. As a bonus action, you can spend 4 cursed energy to choose one ally or enemy within 60 ft to ignite their cursed technique. For the next minute, the chosen creature's techniques exhibit the following enhancements: ● The damage dice of their techniques are increased by one tier (for example, from d6 to d8). ● They can add your CE modifier to the damage of their techniques. However, once the minute has elapsed, the creature suffers the effects of Technique Extinguishment for one minute, during which they experience the following additional effects: ● They cannot regain cursed energy until the end of their next turn. ● Their maximum cursed energy is reduced by an amount equal to your CE modifier until they finish a long rest. If the target is an unwilling creature, they must make a CE saving throw, on a failure, they are affected by this reversal. On a success, nothing happens. They can repeat the saving throw at the beginning of their turns, ending the effect on a success.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Technique Extermination",
+  "activities": {
+   "E92xM6bYUV79BRkT": {
+    "_id": "E92xM6bYUV79BRkT",
+    "type": "utility",
+    "name": "Bonus Action (4 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "60",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "E92xM6bYUV79BRkT": 4
+   },
+   "technique": "Technique Extermination",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Technique Extermination"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!hXQf04BS416tXJhu"
+}

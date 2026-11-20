@@ -1,0 +1,29 @@
+{
+ "_id": "cmLh9r6hSr287xUV",
+ "name": "Extra Attack",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>At 5th level, you can attack twice, instead of once when you use the Attack action during your turn. </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Scout 5"
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "Jrayu2BI11U3R1zF",
+ "_key": "!items!cmLh9r6hSr287xUV"
+}

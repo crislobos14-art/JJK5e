@@ -1,0 +1,146 @@
+{
+ "_id": "HrqIX9ihcD7nvEPE",
+ "name": "Gavel Improvements",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/deadly-sentencing.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Deadly Sentencing — Innate Technique (6th level)</em></p><p>Starting at 6th level, your mastery over <em>Judge’s Gavel</em> has improved. You can now re-summon your gavel as a free action. You can also spend 2 CE to increase the size of the gavel for 1 minute. The damage dice increase by one tier (d8&lt;d10&lt;d12&lt;2d8). As an action, you can swing the enlarged gavel down on a 10 feet diameter square within 5 feet of you, forcing creatures within range to make a Dexterity saving throw or take twice your gavel’s damage.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "i3XrSuMfGBZEYwb7": {
+    "_id": "i3XrSuMfGBZEYwb7",
+    "type": "utility",
+    "name": "Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    }
+   },
+   "YcdY6qSwX3tuOvYg": {
+    "_id": "YcdY6qSwX3tuOvYg",
+    "type": "save",
+    "name": "Action",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "i3XrSuMfGBZEYwb7": 2
+   },
+   "technique": "Deadly Sentencing",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "jvdEqnCHI6BBkSgt",
+ "_key": "!items!HrqIX9ihcD7nvEPE"
+}

@@ -1,0 +1,46 @@
+{
+ "_id": "BDtYSEj7wP0CSJSd",
+ "name": "Professional",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/mindset.svg",
+ "system": {
+  "description": {
+   "value": "<p>This is a job, like all others you clock in, clock out. If you use your inspiration, you can choose to gain the effects of Haste for 1 minute as the deadline approaches.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": ""
+  },
+  "requirements": "Mindset",
+  "activities": {
+   "7xo28xy7WwT6rrTw": {
+    "_id": "7xo28xy7WwT6rrTw",
+    "type": "utility",
+    "name": "Use Inspiration",
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Spend your inspiration"
+    },
+    "consumption": {
+     "targets": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "mindset": true
+  }
+ },
+ "folder": "ymyii86sdbVo8H5C",
+ "_key": "!items!BDtYSEj7wP0CSJSd"
+}

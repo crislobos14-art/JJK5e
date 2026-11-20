@@ -1,0 +1,75 @@
+{
+ "_id": "WbToRkqrrG7j5Ifd",
+ "name": "Weighted Chain",
+ "type": "weapon",
+ "img": "icons/svg/sword.svg",
+ "folder": "8L9REK3UZxFoXRJA",
+ "system": {
+  "description": {
+   "value": "<p>Martial melee weapon. 1d4 bludgeoning. Reach, Special.</p><p><strong>Special:</strong> Special</p><p><em>A Large or smaller creature hit by a chain is restrained until it is freed. A chain does not affect creatures that are tiny or creatures that are Huge or larger. A creature can use its action to make a DC 14 Strength check, freeing itself or a creature within reach on a success.</em></p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "martialM",
+   "baseItem": ""
+  },
+  "damage": {
+   "base": {
+    "number": 1,
+    "denomination": 4,
+    "types": [
+     "bludgeoning"
+    ]
+   }
+  },
+  "range": {
+   "value": 10,
+   "long": null,
+   "units": "ft",
+   "reach": 10
+  },
+  "properties": [
+   "rch",
+   "spc"
+  ],
+  "proficient": null,
+  "price": {
+   "value": 20.0,
+   "denomination": "gp"
+  },
+  "quantity": 1,
+  "activities": {
+   "iZO48kU4x2tjQJRL": {
+    "_id": "iZO48kU4x2tjQJRL",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "melee",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "priceUSD": "$2,000"
+  }
+ },
+ "_key": "!items!WbToRkqrrG7j5Ifd"
+}

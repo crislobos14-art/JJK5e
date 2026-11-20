@@ -1,0 +1,38 @@
+{
+ "_id": "3THduip9CRpwPfJe",
+ "name": "Cursed Lover (Awakened)",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/trait.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Creeps and Curses V.3.1</em></p><p><em>Special Trait. Please note that these abilities are incredibly powerful even for the JJK system and should only be used for purposely high power games. Of course, certain traits are stronger than others. Stages of these traits have been added to grow with characters with higher levels of play. Dormant, Stirring, and Awakened. Though a DM can decide to change the leveling format or instead give them out at appropriate character moments.</em></p><p><strong>Perfect Bond.</strong> You and your Vengeful Spirit share Cursed Energy together. Once per turn, you can use your Vengeful Spirit’s Cursed Technique. You can use your Vengeful Spirit’s technique a number of times equal to your proficiency bonus.</p>\n<p><strong>Shared Understanding.</strong> Your Vengeful Spirit gains a Cursed Feat of your choice that it qualifies for. Your Vengeful Spirit gains a number of ability points equal to twice your proficiency bonus that can be allocated to ability scores of your choice. This cannot increase an ability score above 22.</p>\n<p><em>Special Trait tiers stack: keep the earlier tiers on the sheet. When a benefit says it replaces an earlier one, the module's effects already account for it.</em></p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTrait"
+  },
+  "requirements": "Cursed Lover, level 14",
+  "prerequisites": {
+   "level": 14,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "level": 14
+   }
+  }
+ },
+ "folder": "WpMvDh8sKw65orZ9",
+ "sort": 900,
+ "_key": "!items!3THduip9CRpwPfJe"
+}

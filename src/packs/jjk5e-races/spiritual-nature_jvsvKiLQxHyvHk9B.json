@@ -1,0 +1,131 @@
+{
+ "_id": "jvsvKiLQxHyvHk9B",
+ "name": "Spiritual Nature",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/trait-race.svg",
+ "system": {
+  "description": {
+   "value": "<p>You function completely differently from normal creatures:</p>\n<ul>\n<li>\n<p>You don’t need to eat, drink, breathe or sleep, but must remain inactive for 4 hours a day to gain the benefits of a long rest.   </p>\n</li>\n<li>\n<p>You have advantage on saving throws against disease and being poisoned, and you have resistance to poison damage.  </p>\n</li>\n<li>\n<p>You are immune to nonmagical bludgeoning, piercing, or slashing.  </p>\n</li>\n<li>\n<p>You are invisible to creatures without cursed energy.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "race",
+   "subtype": ""
+  },
+  "requirements": "Cursed Spirit",
+  "activities": {
+   "RiuG2uSxTy17JIxL": {
+    "_id": "RiuG2uSxTy17JIxL",
+    "type": "utility",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "4",
+     "units": "hour",
+     "concentration": false
+    },
+    "effects": [
+     {
+      "_id": "Vust81WVul4PiJ1U",
+      "onSave": false
+     }
+    ]
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "effects": [
+  {
+   "_id": "Vust81WVul4PiJ1U",
+   "name": "Invisible (Spiritual Nature)",
+   "img": "modules/jjk5e/icons/trait-race.svg",
+   "statuses": [
+    "invisible"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "invisible"
+    }
+   },
+   "_key": "!items.effects!jvsvKiLQxHyvHk9B.Vust81WVul4PiJ1U"
+  },
+  {
+   "_id": "4EEp7cuoQIKyMDdh",
+   "name": "Spiritual Nature",
+   "img": "modules/jjk5e/icons/trait-race.svg",
+   "transfer": true,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "changes": [
+    {
+     "key": "system.traits.di.value",
+     "mode": 2,
+     "value": "bludgeoning",
+     "priority": null
+    },
+    {
+     "key": "system.traits.di.value",
+     "mode": 2,
+     "value": "piercing",
+     "priority": null
+    },
+    {
+     "key": "system.traits.di.value",
+     "mode": 2,
+     "value": "slashing",
+     "priority": null
+    },
+    {
+     "key": "system.traits.di.bypasses",
+     "mode": 2,
+     "value": "mgc",
+     "priority": null
+    },
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "poison",
+     "priority": null
+    }
+   ],
+   "flags": {
+    "jjk5e": {
+     "auto": "passive"
+    }
+   },
+   "_key": "!items.effects!jvsvKiLQxHyvHk9B.4EEp7cuoQIKyMDdh"
+  }
+ ],
+ "folder": "MrUJYYzCm8S5kHBr",
+ "_key": "!items!jvsvKiLQxHyvHk9B"
+}

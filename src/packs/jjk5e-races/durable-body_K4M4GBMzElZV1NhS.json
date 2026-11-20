@@ -1,0 +1,50 @@
+{
+ "_id": "K4M4GBMzElZV1NhS",
+ "name": "Durable Body",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/trait-race.svg",
+ "system": {
+  "description": {
+   "value": "<p>Once you incarnated into a vessel, due to your unnatural properties the body became more durable. Your maximum hit points increase by 2, and increase by 2 again every time you gain a level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "race",
+   "subtype": ""
+  },
+  "requirements": "Cursed Vessel (Death Painting)"
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "A3CBV9dvsdKk3l4V",
+ "effects": [
+  {
+   "_id": "729gYYLcrxeTatx9",
+   "name": "Durable Body",
+   "img": "modules/jjk5e/icons/trait-race.svg",
+   "changes": [
+    {
+     "key": "system.attributes.hp.bonuses.level",
+     "mode": 2,
+     "value": "2",
+     "priority": null
+    }
+   ],
+   "disabled": false,
+   "transfer": true,
+   "duration": {},
+   "description": "",
+   "flags": {},
+   "_key": "!items.effects!K4M4GBMzElZV1NhS.729gYYLcrxeTatx9"
+  }
+ ],
+ "_key": "!items!K4M4GBMzElZV1NhS"
+}

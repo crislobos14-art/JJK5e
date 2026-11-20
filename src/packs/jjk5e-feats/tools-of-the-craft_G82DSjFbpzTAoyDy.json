@@ -1,0 +1,42 @@
+{
+ "_id": "G82DSjFbpzTAoyDy",
+ "name": "Tools of the Craft",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/tool-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Guided Control</em></p>\n<p>You can imbue a set of tools with your cursed energy, such as artisan’s tools or thieve’s tools. You can use your CE modifier for ability checks made using these tools and gain a +1 bonus for each CE spent on the imbuement up to a maximum of your CE modifier.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Guided Control",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Guided Control"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "U8kbD3GeDP98vXc5",
+ "sort": 100,
+ "_key": "!items!G82DSjFbpzTAoyDy"
+}

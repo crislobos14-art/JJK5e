@@ -1,0 +1,107 @@
+{
+ "_id": "sN9YyvdTrAChq2jm",
+ "name": "Athlete",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: N/A</em></p>\n<p>You have undergone extensive physical training to gain the following benefits:</p>\n<ul>\n<li>\n<p>Increase your Strength or Dexterity score by 1, to a maximum of 20.  </p>\n</li>\n<li>\n<p>When you are prone, standing up uses only 5 feet of your movement.  </p>\n</li>\n<li>\n<p>Climbing doesn't cost you extra movement.  </p>\n</li>\n<li>\n<p>You can make a running long jump or a running high jump after moving only 5 feet on foot, rather than 10 feet.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkPhysical"
+  },
+  "requirements": "N/A",
+  "activities": {
+   "lc2iqyE70ynSBzEO": {
+    "_id": "lc2iqyE70ynSBzEO",
+    "type": "utility",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "effects": [
+     {
+      "_id": "kJdfJWpK8892qYOx",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "advancement": {
+   "PmyRaUSL986xjKPE": {
+    "_id": "PmyRaUSL986xjKPE",
+    "type": "AbilityScoreImprovement",
+    "level": 0,
+    "title": "Ability Score Increase",
+    "value": {},
+    "configuration": {
+     "points": 1,
+     "cap": 1,
+     "fixed": {},
+     "locked": [
+      "con",
+      "int",
+      "wis",
+      "cha"
+     ]
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "effects": [
+  {
+   "_id": "kJdfJWpK8892qYOx",
+   "name": "Prone (Athlete)",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "statuses": [
+    "prone"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!sN9YyvdTrAChq2jm.kJdfJWpK8892qYOx"
+  }
+ ],
+ "folder": "cxPIGjcxqJdZTMQ5",
+ "sort": 100,
+ "_key": "!items!sN9YyvdTrAChq2jm"
+}

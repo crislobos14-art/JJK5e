@@ -1,0 +1,159 @@
+{
+ "_id": "ia2V87ivL7uJHpkl",
+ "name": "Hands of Madness",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/faceless-god.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Obsession and Insanity</em></p>\n<p>As a bonus action for 3 cursed energy, you summon either the Left Hand or Right Hand for 10 minutes. Attacks made with a <em>Hand of Madness</em> increases <em>Mental Corruption</em> by 5% once per turn, even when your technique is not activated. You can only have one hand active at a time. At 11th level, you can spend 6 CE as a bonus action to use both.</p>\n<p><strong>Right Hand</strong>. The <em>Right Hand of Madness</em> covers your right hand. You and creatures with Mental Corruption see a horrid arm of rotting flesh, wriggling tendrils, or similarly terrifying to them. An unarmed strike made with your right hand can use your CE modifier for attack and damage rolls and deals 1d12 psychic damage on a hit. Attacks with the right hand have advantage on targets with 50% or more corruption.<br />\n<strong>Left Hand</strong>. The <em>Left Hand of Madness</em> covers your left hand. You and creatures with Mental Corruption see your normal arm, but it invokes an inexplicable sense of terror within them. An unarmed strike made with your left hand can use your CE modifier for attack and damage rolls and deals 1d6 psychic damage on a hit. On a hit, a creature must make a Wisdom saving throw or gain the frightened condition for 1 minute. A creature can repeat the save at the end of their turns, ending the effect on a success.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Obsession and Insanity",
+  "activities": {
+   "aM69oK0ZIb9m7gIb": {
+    "_id": "aM69oK0ZIb9m7gIb",
+    "type": "utility",
+    "name": "Bonus Action (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "10",
+     "units": "minute",
+     "concentration": false
+    }
+   },
+   "Dlvh9vifewh1plqH": {
+    "_id": "Dlvh9vifewh1plqH",
+    "type": "save",
+    "name": "Bonus Action (6 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    },
+    "save": {
+     "ability": [
+      "wis"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 12,
+       "bonus": "",
+       "types": [
+        "psychic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "WVHgbzsm3eLtOSSW",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "aM69oK0ZIb9m7gIb": 3,
+    "Dlvh9vifewh1plqH": 6
+   },
+   "prereq": {
+    "features": [
+     [
+      "Obsession and Insanity"
+     ]
+    ]
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "WVHgbzsm3eLtOSSW",
+   "name": "Frightened (Hands of Madness)",
+   "img": "modules/jjk5e/icons/techniques/faceless-god.svg",
+   "statuses": [
+    "frightened"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "seconds": 60,
+    "rounds": 10
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "frightened"
+    }
+   },
+   "_key": "!items.effects!ia2V87ivL7uJHpkl.WVHgbzsm3eLtOSSW"
+  }
+ ],
+ "folder": "ZsSLGfOrda4TafgY",
+ "sort": 200,
+ "_key": "!items!ia2V87ivL7uJHpkl"
+}

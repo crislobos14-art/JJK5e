@@ -1,0 +1,118 @@
+{
+ "_id": "rWVrNvgmgyaTFzwF",
+ "name": "Innate Technique: Pachinko Fever",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/pachinko-fever.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>Did you know most gamblers stop before their big hit? Let's hope you don’t, as failing may mean death, but your luck has got you.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.ekaS8GYbKDcFu0i8]{Great Luck}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.JgbhHu3Xdg6y4dKN]{Domain Expansion: Idle Death Gamble}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.iy3YyszuB0gKuyT1]{On a Roll}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.acpMW606uujEXSIi]{The Fever}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.BL0AkVup5SylGoSO]{Luckiest Sorcerer Alive}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "ksCCj3PZqk3lJGmG": {
+    "_id": "ksCCj3PZqk3lJGmG",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Pachinko Fever (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.ekaS8GYbKDcFu0i8",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "DKB3SEaVRss9IoxC": {
+    "_id": "DKB3SEaVRss9IoxC",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Pachinko Fever (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.JgbhHu3Xdg6y4dKN",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "iBUu135QWP3PomaY": {
+    "_id": "iBUu135QWP3PomaY",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Pachinko Fever (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.iy3YyszuB0gKuyT1",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "gYX0rDAQiecqk2gr": {
+    "_id": "gYX0rDAQiecqk2gr",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Pachinko Fever (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.acpMW606uujEXSIi",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "tWY5kQ1gCYpaLFJz": {
+    "_id": "tWY5kQ1gCYpaLFJz",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Pachinko Fever (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.BL0AkVup5SylGoSO",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Pachinko Fever"
+  }
+ },
+ "_key": "!items!rWVrNvgmgyaTFzwF"
+}

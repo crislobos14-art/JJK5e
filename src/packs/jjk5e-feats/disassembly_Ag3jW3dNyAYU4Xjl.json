@@ -1,0 +1,42 @@
+{
+ "_id": "Ag3jW3dNyAYU4Xjl",
+ "name": "Disassembly",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/shrine.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Slicing and Severing</em></p>\n<p>You have learned to further segment your attacks. When you spend more than 1 CE for <em>Dismantle</em>, you can instead fire multiple slashes splitting damage die between the slashes before attacking and making separate attack rolls for each.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Slicing and Severing",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Slicing and Severing"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "2XiAKaCJUnpH62hA",
+ "sort": 300,
+ "_key": "!items!Ag3jW3dNyAYU4Xjl"
+}

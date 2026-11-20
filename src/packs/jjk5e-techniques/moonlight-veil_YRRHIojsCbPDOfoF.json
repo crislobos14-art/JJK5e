@@ -1,0 +1,98 @@
+{
+ "_id": "YRRHIojsCbPDOfoF",
+ "name": "Moonlight Veil",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/new-shadow-style.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>New Shadow Style — Innate Technique (11th level)</em></p><p>Starting at 11th level, you can spend 1 cursed energy as a bonus action to imbue your weapon with your simple domain for 1 minute. You can add your Cursed Energy modifier to attack and damage rolls of melee weapon attacks or unarmed strikes. When you use this technique, you ignore any penalties for using a broken weapon.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "ySn9I0P30nQZ2e2n": {
+    "_id": "ySn9I0P30nQZ2e2n",
+    "type": "utility",
+    "name": "Bonus Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "ySn9I0P30nQZ2e2n": 1
+   },
+   "technique": "New Shadow Style",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "afNhLz8cb88QgbyD",
+ "_key": "!items!YRRHIojsCbPDOfoF"
+}

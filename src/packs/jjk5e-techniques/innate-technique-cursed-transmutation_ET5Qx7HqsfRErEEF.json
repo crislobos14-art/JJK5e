@@ -1,0 +1,118 @@
+{
+ "_id": "ET5Qx7HqsfRErEEF",
+ "name": "Innate Technique: Cursed Transmutation",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/cursed-transmutation.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>You can change form, nature, and substance through your technique.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.JE38jRZe07KGrjZx]{Basic Transmutation}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.EK3gaDikW90ogzkX]{Chemical Formulae}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.639LoXhgerK4Iwgw]{Areal Transmute}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.7e1MLm2DCQtxl0qA]{Maximum: Railgun}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.Y4dv3CGqUaPgeAZk]{Domain Expansion: Mandala of Dependant Origination}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "0TFMtMr1hni4VASC": {
+    "_id": "0TFMtMr1hni4VASC",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Cursed Transmutation (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.JE38jRZe07KGrjZx",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "olKuMnD1nIUTJjJ7": {
+    "_id": "olKuMnD1nIUTJjJ7",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Cursed Transmutation (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.EK3gaDikW90ogzkX",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "o1QYssiKvfZXo3W0": {
+    "_id": "o1QYssiKvfZXo3W0",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Cursed Transmutation (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.639LoXhgerK4Iwgw",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "EfW1GQ0zpAnDl1vm": {
+    "_id": "EfW1GQ0zpAnDl1vm",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Cursed Transmutation (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.7e1MLm2DCQtxl0qA",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "yU7zsVkpSAfRwRVl": {
+    "_id": "yU7zsVkpSAfRwRVl",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Cursed Transmutation (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.Y4dv3CGqUaPgeAZk",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Cursed Transmutation"
+  }
+ },
+ "_key": "!items!ET5Qx7HqsfRErEEF"
+}

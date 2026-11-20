@@ -1,0 +1,64 @@
+{
+ "_id": "HkLjEteuqo2D4lTe",
+ "name": "Adamantine Skin",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Durability Improvements: You're like a wall that cannot be moved, not even the hardest of blows will bring you down. You can have a number of these improvements equal to your Constitution modifier. ---</em></p>\n<p>Iron Skin, 2 body points, 17th level, 30 Constitution<br />\nYour skin has even further hardened, becoming more like adamantine. You add your constitution modifier an additional time when calculating your maximum hit points per level, and the damage reduction you gained from Iron Skin now applies to all bludgeoning, piercing, and slashing damage.  </p>\n<hr />",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Heavenly Restriction 2"
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "level": 17,
+    "abilities": {
+     "con": 30
+    },
+    "features": [
+     [
+      "Iron Skin"
+     ]
+    ]
+   },
+   "bodyCost": 2,
+   "bodyCategory": "con"
+  }
+ },
+ "folder": "0PwoOvAjGZHw3HqL",
+ "effects": [
+  {
+   "_id": "XXgQSgC0OtonzCtB",
+   "name": "Adamantine Skin",
+   "img": "modules/jjk5e/icons/feature.svg",
+   "changes": [
+    {
+     "key": "system.attributes.hp.bonuses.level",
+     "mode": 2,
+     "value": "@abilities.con.mod",
+     "priority": null
+    }
+   ],
+   "disabled": false,
+   "transfer": true,
+   "duration": {},
+   "description": "",
+   "flags": {},
+   "_key": "!items.effects!HkLjEteuqo2D4lTe.XXgQSgC0OtonzCtB"
+  }
+ ],
+ "_key": "!items!HkLjEteuqo2D4lTe"
+}

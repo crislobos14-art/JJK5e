@@ -1,0 +1,102 @@
+{
+ "_id": "AFpsIAZcO76fecXJ",
+ "name": "Cursed Spirit (Vengeful)",
+ "type": "race",
+ "img": "modules/jjk5e/icons/race.svg",
+ "system": {
+  "description": {
+   "value": "<p>Beings made up of negative energy, festering over time.</p>\n<p><strong>Ability Score Improvement.</strong> You increase one ability score of your choice by 2 and another by 1.</p>\n<p><strong>Creature Type</strong>. You are Undead.</p>\n<p><strong>Age.</strong> You are cursed to live forever.</p>\n<p><strong>Alignment.</strong> Cursed Spirits rarely maintain any level of intelligence, but when they do, their alignment turns towards being more Chaotic or Evil.</p>\n<p><strong>Size.</strong> Your size can be Small or Medium.</p>\n<p><strong>Speed.</strong> Your base walking speed is 30 feet.</p>\n<p><strong>Spiritual Nature</strong>. You function completely differently from normal creatures:</p>\n<ul>\n<li>\n<p>You don’t need to eat, drink, breathe or sleep, but must remain inactive for 4 hours a day to gain the benefits of a long rest.   </p>\n</li>\n<li>\n<p>You have advantage on saving throws against disease and being poisoned, and you have resistance to poison damage.  </p>\n</li>\n<li>\n<p>You are immune to nonmagical bludgeoning, piercing, or slashing.  </p>\n</li>\n<li>\n<p>You are invisible to creatures without cursed energy.</p>\n</li>\n</ul>\n<p><strong>Cursed Energy Affinity</strong>. Due to your nature of being made of cursed energy, you are unable to utilize reverse cursed technique which is positive energy. Though you can still restore your body with pure cursed energy. Starting at 5th level, you can spend cursed energy up to your CE modifier to regain 5 hit points per cursed energy spent as an action once per turn.</p>\n<p><strong>Subrace</strong>. There are several types of cursed spirits, depending on your origin.</p>\n<p><strong>Vengeful</strong></p>\n<p>You were once human, but when you died your powerful grudge made you into a curse.</p>\n<p><strong>Grudge</strong>. When reduced to 0 hit points, you can choose to remain at 1 hit point. You can use this feature once per long rest.</p>\n<p><strong>Curse</strong>. When you choose this subrace, choose a race that you hated. You gain a +2 bonus to damage rolls against that race.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "identifier": "cursed-spirit-vengeful",
+  "movement": {
+   "walk": 30,
+   "units": "ft"
+  },
+  "type": {
+   "value": "undead",
+   "subtype": "",
+   "custom": ""
+  },
+  "advancement": {
+   "YVch2P0PDxGd48k0": {
+    "_id": "YVch2P0PDxGd48k0",
+    "type": "Size",
+    "configuration": {
+     "sizes": [
+      "sm",
+      "med"
+     ]
+    },
+    "value": {}
+   },
+   "ZJddKJF0dTEdIYHI": {
+    "_id": "ZJddKJF0dTEdIYHI",
+    "type": "AbilityScoreImprovement",
+    "level": 0,
+    "title": "Ability Score Increase (+2 to one ability and +1 to another)",
+    "configuration": {
+     "points": 3,
+     "fixed": {},
+     "cap": 2,
+     "locked": []
+    },
+    "value": {}
+   },
+   "vE2phMduYDmldks7": {
+    "_id": "vE2phMduYDmldks7",
+    "type": "Trait",
+    "level": 0,
+    "title": "Spiritual Nature",
+    "configuration": {
+     "mode": "default",
+     "allowReplacements": false,
+     "grants": [
+      "dr:poison"
+     ],
+     "choices": []
+    },
+    "value": {}
+   },
+   "cwZbiNYEjGcIDQzu": {
+    "_id": "cwZbiNYEjGcIDQzu",
+    "type": "ItemGrant",
+    "level": 0,
+    "title": "Traits",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-races.Item.jvsvKiLQxHyvHk9B",
+       "optional": false
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-races.Item.aPTWKjpTB26rpoZV",
+       "optional": false
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-races.Item.pUGj7iQlOMjRpcqM",
+       "optional": false
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-races.Item.hpZzSn15czR4YlSO",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": null,
+ "_key": "!items!AFpsIAZcO76fecXJ"
+}

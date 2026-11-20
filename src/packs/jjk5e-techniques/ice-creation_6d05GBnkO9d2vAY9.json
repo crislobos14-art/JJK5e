@@ -1,0 +1,249 @@
+{
+ "_id": "6d05GBnkO9d2vAY9",
+ "name": "Ice Creation",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/ice-formation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Ice Formation — Innate Technique (1st level)</em></p><blockquote><p>Your technique is beautiful in its simplicity, and the ability to make and control ice.</p></blockquote><p>Beginning at 1st level, your innate technique has allowed you to mess with the temperature around you, creating extreme levels of cold. As an action for 1 cursed energy, you can force creatures in a 10ft cone to make a Dexterity saving throw. On a failure, they take 1d10 cold damage and are restrained as ice covers part of their bodies. On a success, they take half as much damage and are not restrained.<br />\n The creature can make a Strength saving throw at the beginning of its turns to break the ice and end the restrained condition.<br />\n All ice created by your technique will last until you end it as a free action, a creature breaks it, or you are poisoned, incapacitated, or unconscious.<br />\n At 3rd level, the damage of this feature increases to 2d10, to 3d10 at 6th, to 4d10 at 10th, to 5d10 at 14th, and to 6d10 cold damage at 20th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "5gL47zMatNoMr4T3": {
+    "_id": "5gL47zMatNoMr4T3",
+    "type": "save",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "cone",
+      "size": "10",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "cold"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "9dgt9hnF33yz3Uyu",
+      "onSave": false
+     }
+    ]
+   },
+   "I8RJht3EZwSVUxVC": {
+    "_id": "I8RJht3EZwSVUxVC",
+    "type": "damage",
+    "name": "Special",
+    "sort": 100000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 6,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "cold"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "pbtcDbH76bTmZjnj",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "cone",
+    "size": "10",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": false
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "5gL47zMatNoMr4T3": 1
+   },
+   "technique": "Ice Formation",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "9dgt9hnF33yz3Uyu",
+   "name": "Restrained (Ice Creation)",
+   "img": "modules/jjk5e/icons/techniques/ice-formation.svg",
+   "statuses": [
+    "restrained"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "restrained"
+    }
+   },
+   "_key": "!items.effects!6d05GBnkO9d2vAY9.9dgt9hnF33yz3Uyu"
+  },
+  {
+   "_id": "pbtcDbH76bTmZjnj",
+   "name": "Poisoned (Ice Creation)",
+   "img": "modules/jjk5e/icons/techniques/ice-formation.svg",
+   "statuses": [
+    "poisoned"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "poisoned"
+    }
+   },
+   "_key": "!items.effects!6d05GBnkO9d2vAY9.pbtcDbH76bTmZjnj"
+  }
+ ],
+ "folder": "w9n29Anzntr6P6uo",
+ "_key": "!items!6d05GBnkO9d2vAY9"
+}

@@ -1,0 +1,95 @@
+{
+ "_id": "QoIxDJ2ApVfogPIv",
+ "name": "Graverobber",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/body-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Body Manipulation — Innate Technique (1st level)</em></p><blockquote><p>You were born with the horrifying but useful ability to swap bodies and take the abilities from that body.</p></blockquote><p>Starting at 1st level, you have a rather disgusting technique, which is frowned upon by the majority of sorcerers. When you have a humanoid creature's corpse, you can spend 1 cursed energy during a long rest to put your brain on that creature through a transfer technique. While on the creature's body, you lose any racial features of your old body but keep all of your class features. You gain the following benefits while inside the body:</p>\n<ul>\n<li>\n<p>The creature’s innate technique features are now yours.  </p>\n</li>\n<li>\n<p>The creature’s cursed energy features are now yours.  </p>\n</li>\n<li>\n<p>The creature's racial features are now yours.  </p>\n</li>\n<li>\n<p>The creature's ability scores overwrite yours but you keep your Charisma, Wisdom, and Intelligence scores.  </p>\n</li>\n<li>\n<p>The creature's proficiencies and languages are now yours.</p>\n</li>\n</ul>\n<p>When you change into that creature's body, it will look the same outside of having a scar on its forehead, which is a sign your brain is inside its body. You can pull the top of your head to show your brain, which is a normal brain with a human mouth. Other creatures can try to identify you're not the humanoid by making a DC 30 Insight check. Creatures who knew the body's owner before you stole it can do the roll with advantage.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "P9IpMoskuDAa5VWI": {
+    "_id": "P9IpMoskuDAa5VWI",
+    "type": "utility",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "P9IpMoskuDAa5VWI": 1
+   },
+   "technique": "Body Manipulation",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "suKJQVV38yYdZJCL",
+ "_key": "!items!QoIxDJ2ApVfogPIv"
+}

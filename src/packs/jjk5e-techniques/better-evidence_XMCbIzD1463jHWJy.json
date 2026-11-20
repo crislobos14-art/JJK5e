@@ -1,0 +1,32 @@
+{
+ "_id": "XMCbIzD1463jHWJy",
+ "name": "Better Evidence",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/deadly-sentencing.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Deadly Sentencing — Innate Technique (11th level)</em></p><p>At 11th level, when rolling for evidence you can roll two dice and pick the one you find more beneficial. This becomes 3 at 18th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Deadly Sentencing 11"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Deadly Sentencing",
+   "level": 11
+  }
+ },
+ "folder": "jvdEqnCHI6BBkSgt",
+ "_key": "!items!XMCbIzD1463jHWJy"
+}

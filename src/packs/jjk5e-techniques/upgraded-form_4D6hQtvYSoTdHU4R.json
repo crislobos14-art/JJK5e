@@ -1,0 +1,95 @@
+{
+ "_id": "4D6hQtvYSoTdHU4R",
+ "name": "Upgraded Form",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/triple-core.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Triple Core — Innate Technique (6th level)</em></p><p>At 6th level, you have learned to specialize in one of your forms, allowing it to become semi-permanent. Choose one of your core options you have access to and gain its upgraded option:</p>\n<p><strong>Unblockable Blows.</strong> Your strikes are imbued with unblockable power. Once per turn when you miss with a melee attack, you still deal damage equal to your Strength or Dexterity modifier.<br />\n<strong>Energy Blast.</strong> Your cursed energy has become far more destructive. Once per turn when you deal damage with a ranged cursed energy attack, you add your Cursed Energy modifier to the damage roll. If you already add your modifier to the roll, you add it a second time.<br />\n<strong>Defensive Form.</strong> Your body passively reinforces itself with cursed energy. When you take damage, you can use your reaction to reduce the damage by your Cursed Energy modifier + your proficiency bonus.<br />\n<strong>Divebomb.</strong> Your body has adapted to improve its swiftness. You can spend 1 ce to take the dash, disengage, or dodge action as a bonus action.</p>\n<p>Your upgraded options are always active even when you haven’t entered a core form. Though you can not benefit from an upgraded option while in a different core option’s form. You can gain an additional upgraded option at 11th and 18th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "w2tmNpEIdLgXtUyG": {
+    "_id": "w2tmNpEIdLgXtUyG",
+    "type": "utility",
+    "name": "Bonus Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "w2tmNpEIdLgXtUyG": 1
+   },
+   "technique": "Triple Core",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "IyJg53UICeEoqtxa",
+ "_key": "!items!4D6hQtvYSoTdHU4R"
+}

@@ -1,0 +1,179 @@
+{
+ "_id": "LLsfnjkR98WtV2WQ",
+ "name": "Circuit",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/cursed-circuitry.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Circuitry — Innate Technique (1st level)</em></p><blockquote><p>You can apply a circuit that allows for extremely efficient use of cursed energy.</p></blockquote><p>Starting at 1st level, as a bonus action for 2 Cursed Energy, you can apply a <em>Circuit</em> to yourself or an object you touch for 1 minute. You can also apply your <em>Circuit</em> to another willing creature you touch for 5 CE for half the time. Your cursed circuit gives the following:<br />\n<strong>Efficiency</strong>. The base cost of a feature that requires cursed energy other than <em>Cursed Circuitry</em> features decreases by 1 (min cost of 1). If a feature’s effects depend on how much cursed energy you spend, one cursed energy you spend gives the effects of two. (Eg. Spending 2 CE on Cursed Strike counts as 4 CE). This cannot cause the cursed energy to be higher than your output limit.<br />\n<strong>Output</strong>. When a feature allows you to spend additional cursed energy to strengthen the effects, you can spend additional cursed energy up to half to your proficiency bonus (rounded up).<br />\n<strong>Enhancement</strong>. If you apply your circuit onto an Object or Cursed Tool, it instead gains one of the following benefits of your choice:</p>\n<ul>\n<li>\n<p>The item deals an additional 2d4 necrotic damage on a hit.  </p>\n</li>\n<li>\n<p>The item grants a +2 bonus to AC  </p>\n</li>\n<li>\n<p>The cursed energy cost of the tool decreases by 1 (min of 1)</p>\n</li>\n</ul>\n<p>You can only have 1 circuit at a time. This becomes 2 circuits at 3rd level, 3 circuits at 6th, and 4 at 11th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "ujsQ0PvPcpojMKjh": {
+    "_id": "ujsQ0PvPcpojMKjh",
+    "type": "utility",
+    "name": "Bonus Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    }
+   },
+   "XKdQmZyISEExLJRY": {
+    "_id": "XKdQmZyISEExLJRY",
+    "type": "utility",
+    "name": "Action (5 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   },
+   "DlaqK6vPGGgwBpGh": {
+    "_id": "DlaqK6vPGGgwBpGh",
+    "type": "damage",
+    "name": "Action (2 CE)",
+    "sort": 200000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 4,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "ujsQ0PvPcpojMKjh": 2,
+    "XKdQmZyISEExLJRY": 5,
+    "DlaqK6vPGGgwBpGh": 2
+   },
+   "technique": "Cursed Circuitry",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "hm057iS0RUqvPJaN",
+ "_key": "!items!LLsfnjkR98WtV2WQ"
+}

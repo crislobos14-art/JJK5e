@@ -1,0 +1,46 @@
+{
+ "_id": "BOsYXnjKpnbtwfmW",
+ "name": "Exceptional",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/mindset.svg",
+ "system": {
+  "description": {
+   "value": "<p>The bells of the Gion monastery in India echo with the warning that all things are impermanent. The blossoms of the sala trees teach us through their hues that what flourishes must fade. However! We are the exception! If you use your inspiration, you can choose an ally as a fellow exception to share hit points with you in a unified pool for 1 hour.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": ""
+  },
+  "requirements": "Mindset",
+  "activities": {
+   "ZGEuktwWpISVO6gy": {
+    "_id": "ZGEuktwWpISVO6gy",
+    "type": "utility",
+    "name": "Use Inspiration",
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Spend your inspiration"
+    },
+    "consumption": {
+     "targets": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "mindset": true
+  }
+ },
+ "folder": "ymyii86sdbVo8H5C",
+ "_key": "!items!BOsYXnjKpnbtwfmW"
+}

@@ -1,0 +1,43 @@
+{
+ "_id": "z1hqCzxU5rANYuFN",
+ "name": "Powerful Build (2 PP)",
+ "type": "feat",
+ "img": "icons/svg/upgrade.svg",
+ "system": {
+  "description": {
+   "value": "<p>You count as 1 size larger when determining your carrying capacity and the weight you can push, drag, or lift.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTrait"
+  },
+  "requirements": "Cursed Spirit, 2 Profane Points",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "profaneCost": 2,
+   "prereq": {
+    "prefixes": [
+     [
+      "Cursed Spirit"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "ar3Bgj4YHvYRp8DL",
+ "sort": 1300,
+ "_key": "!items!z1hqCzxU5rANYuFN"
+}

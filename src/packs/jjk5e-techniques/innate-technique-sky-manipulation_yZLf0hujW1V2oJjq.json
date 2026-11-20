@@ -1,0 +1,118 @@
+{
+ "_id": "yZLf0hujW1V2oJjq",
+ "name": "Innate Technique: Sky Manipulation",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/sky-manipulation.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>A great technique allowing you to grab space and wield it to your command.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.J9LNnuJcYPznq0zd]{Sky Shape}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.44NLHabuBSw6VRZ5]{Sky Armor}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.1KKP2bcsJmg1yA0g]{Sky Shape Improvement}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.fr7czB9pC6rA0hCl]{Thin Ice Breaker}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.YJwMFSe1lpxbi8FF]{Domain Expansion: Heaven’s Gate}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "8LGLLuYOUjBTbHhP": {
+    "_id": "8LGLLuYOUjBTbHhP",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Sky Manipulation (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.J9LNnuJcYPznq0zd",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "Ig3aeoSRoVTVY4RR": {
+    "_id": "Ig3aeoSRoVTVY4RR",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Sky Manipulation (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.44NLHabuBSw6VRZ5",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "u5s0X8J5Jb6FTJqD": {
+    "_id": "u5s0X8J5Jb6FTJqD",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Sky Manipulation (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.1KKP2bcsJmg1yA0g",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "X9G9meqw0zK8Xbct": {
+    "_id": "X9G9meqw0zK8Xbct",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Sky Manipulation (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.fr7czB9pC6rA0hCl",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "vYX1HqgemHLL7xFx": {
+    "_id": "vYX1HqgemHLL7xFx",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Sky Manipulation (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.YJwMFSe1lpxbi8FF",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Sky Manipulation"
+  }
+ },
+ "_key": "!items!yZLf0hujW1V2oJjq"
+}

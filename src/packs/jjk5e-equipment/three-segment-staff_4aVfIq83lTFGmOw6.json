@@ -1,0 +1,75 @@
+{
+ "_id": "4aVfIq83lTFGmOw6",
+ "name": "Three Segment Staff",
+ "type": "weapon",
+ "img": "icons/svg/sword.svg",
+ "folder": "8L9REK3UZxFoXRJA",
+ "system": {
+  "description": {
+   "value": "<p>Martial melee weapon. 3d4 bludgeoning. Finesse, two-handed.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "martialM",
+   "baseItem": ""
+  },
+  "damage": {
+   "base": {
+    "number": 3,
+    "denomination": 4,
+    "types": [
+     "bludgeoning"
+    ]
+   }
+  },
+  "range": {
+   "value": 5,
+   "long": null,
+   "units": "ft",
+   "reach": 5
+  },
+  "properties": [
+   "fin",
+   "two"
+  ],
+  "proficient": null,
+  "price": {
+   "value": 50.0,
+   "denomination": "gp"
+  },
+  "quantity": 1,
+  "activities": {
+   "K85BPrx8xXUJdT1k": {
+    "_id": "K85BPrx8xXUJdT1k",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "melee",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "priceUSD": "$5,000"
+  }
+ },
+ "_key": "!items!4aVfIq83lTFGmOw6"
+}

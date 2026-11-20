@@ -1,0 +1,59 @@
+{
+ "_id": "ErAOR8ZbdIKBbME1",
+ "name": "Fighter's Drive",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>At 9th level, you have a will to fight that drives you beyond your limits, making you go further than what you could normally do for a moment. On your turn, you can take an additional action.</p>\n<p>This can only be used once per long rest. You can use this two times per long rest but only once per turn at 18th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Heavenly Restriction (Prideful) 9",
+  "uses": {
+   "max": "1",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
+    }
+   ]
+  },
+  "activities": {
+   "wC1Gs0wUW6UEk2BI": {
+    "_id": "wC1Gs0wUW6UEk2BI",
+    "type": "utility",
+    "name": "Use",
+    "activation": {
+     "type": "special",
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1"
+      }
+     ]
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "dKzsnD6daLKk9Ah9",
+ "_key": "!items!ErAOR8ZbdIKBbME1"
+}

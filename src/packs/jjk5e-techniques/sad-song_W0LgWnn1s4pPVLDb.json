@@ -1,0 +1,77 @@
+{
+ "_id": "W0LgWnn1s4pPVLDb",
+ "name": "Sad Song",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/prayer-song.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prayer Song — Cursed Technique Reversal</em></p><p>You have mastered Reverse Cursed Technique and therefore gained your cursed technique reversal. Dancing is your whole thing, so your reversal forces you to not be able to dance. However, this makes you incredibly sad. As a bonus action, you can stop using your technique and spend 6 cursed energy to enter this new sad form for 1 minute. During this you have disadvantage on all saving throws, attack rolls are made with disadvantage, and attacks against you have advantage. However, this increased sadness boosts your negative emotions and generates more cursed energy. You regain cursed energy equal to your CE modifier at the beginning of your turns. This regen only works if you are in combat where your life is in danger. You can deactivate your reversal at will.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Prayer Song",
+  "activities": {
+   "uWopKwYgMekMXnVs": {
+    "_id": "uWopKwYgMekMXnVs",
+    "type": "utility",
+    "name": "Bonus Action (6 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "uWopKwYgMekMXnVs": 6
+   },
+   "technique": "Prayer Song",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Prayer Song"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!W0LgWnn1s4pPVLDb"
+}

@@ -1,0 +1,68 @@
+{
+ "_id": "HjlFDDaez4Ty54cz",
+ "name": "Scorpion Tactics",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/hair-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Scorpion Hair</em></p>\n<p>You have trained with your hair and unlocked the following maneuvers:<br />\n<strong>Barbed Defense</strong>. As a reaction to being targeted by an attack, you can make a Scorpion Hair attack against the attacker if they are within range.<br />\n<strong>Hair Wrapping</strong>. On a hit with your Scorpion Hair, you can choose to deal no damage and instead grapple the creature. You can use your Cursed Energy modifier to make grapple checks with your hair.<br />\n<strong>Split Ends</strong>. Once per turn, when you hit with your Scorpion Hair, you can add your Cursed Energy modifier to the damage roll.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Scorpion Hair",
+  "activities": {
+   "ld1Mhzg11Unkh2UE": {
+    "_id": "ld1Mhzg11Unkh2UE",
+    "type": "utility",
+    "name": "Reaction",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Scorpion Hair"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "vK6vTr2zkjipQvME",
+ "sort": 100,
+ "_key": "!items!HjlFDDaez4Ty54cz"
+}

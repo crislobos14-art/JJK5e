@@ -1,0 +1,53 @@
+{
+ "_id": "ac6hSaDVMor9OPyP",
+ "name": "Minor Precognition",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Mind Improvements: Your body has increased both physically and mentally. You can have a number of these improvements equal to your Wisdom modifier. ---</em></p>\n<p>1 Body point<br />\nYou have a minor sense of how to read your opponents, giving you a small advantage in battle. You gain a +5 to your passive perception, and unseen attacks are not rolled with advantage against you.  </p>\n<hr />",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Heavenly Restriction 2"
+ },
+ "flags": {
+  "jjk5e": {
+   "bodyCost": 1,
+   "bodyCategory": "wis"
+  }
+ },
+ "folder": "ybhWCA27cbgjKLpN",
+ "effects": [
+  {
+   "_id": "5wHUtpu79elggIFy",
+   "name": "Minor Precognition",
+   "img": "modules/jjk5e/icons/feature.svg",
+   "changes": [
+    {
+     "key": "system.skills.prc.bonuses.passive",
+     "mode": 2,
+     "value": "5",
+     "priority": null
+    }
+   ],
+   "disabled": false,
+   "transfer": true,
+   "duration": {},
+   "description": "",
+   "flags": {},
+   "_key": "!items.effects!ac6hSaDVMor9OPyP.5wHUtpu79elggIFy"
+  }
+ ],
+ "_key": "!items!ac6hSaDVMor9OPyP"
+}

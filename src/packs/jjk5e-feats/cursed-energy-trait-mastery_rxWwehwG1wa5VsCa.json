@@ -1,0 +1,330 @@
+{
+ "_id": "rxWwehwG1wa5VsCa",
+ "name": "Cursed Energy Trait Mastery",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Cursed Energy Trait</em></p>\n<p>You have mastered the trait peculiar to your energy:<br />\n<strong>Rough</strong>. You gain a bonus to damage rolls using raw cursed energy equal to 2 + your CE modifier (such as cursed strike). This replaces the bonus to damage rolls from your Cursed Energy Trait.<br />\n<strong>Smooth</strong>. You reduce bludgeoning, slashing, and piercing damage by your CE modifier and your walking speed increases by 10 ft. This replaces the bonus to walking speed from your Cursed Energy Trait. As a reaction to an attack for 1 CE, you gain a bonus to AC equal to twice your CE modifier, potentially causing the attack to miss.<br />\n<strong>Elemental</strong>. Once per turn on a hit imbued with raw cursed energy (eg. Cursed Strike) or a creature failing a save against your raw cursed energy (eg. Cursed Energy Slash), they suffer an additional effect. These effects stack up to your proficiency bonus (if applicable) and last a number of turns equal to your CE modifier: </p>\n<ul>\n<li>\n<p>Acid, reduces the target’s AC by 1  </p>\n</li>\n<li>\n<p>Bludgeoning, ignores resistance to bludgeoning  </p>\n</li>\n<li>\n<p>Cold, reduces movement by 10 ft  </p>\n</li>\n<li>\n<p>Fire, target takes an extra 2 fire damage from your cursed energy  </p>\n</li>\n<li>\n<p>Force, target is knocked back 10 ft  </p>\n</li>\n<li>\n<p>Lightning, the target cannot take reactions  </p>\n</li>\n<li>\n<p>Piercing, ignores resistance to piercing  </p>\n</li>\n<li>\n<p>Poison, target gains the Poisoned condition  </p>\n</li>\n<li>\n<p>Psychic, target gains the frightened condition  </p>\n</li>\n<li>\n<p>Slashing, ignores resistance to slashing  </p>\n</li>\n<li>\n<p>Thunder, target is knocked Prone and Deafened </p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkCursedEnergy"
+  },
+  "requirements": "Cursed Energy Trait",
+  "activities": {
+   "sUe5ynj33eA6bhwN": {
+    "_id": "sUe5ynj33eA6bhwN",
+    "type": "utility",
+    "name": "Smooth: AC + 2× CE mod (1 CE)",
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     }
+    },
+    "duration": {
+     "units": "round",
+     "value": "1"
+    },
+    "roll": {
+     "formula": "2 * max(@abilities.wis.mod, @abilities.cha.mod)",
+     "name": "AC bonus",
+     "visible": true
+    }
+   },
+   "OAalhcbCD5UTCA78": {
+    "_id": "OAalhcbCD5UTCA78",
+    "type": "utility",
+    "name": "Elemental rider",
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     }
+    },
+    "effects": [
+     {
+      "_id": "ULjEpRFCVdLyYnbC"
+     },
+     {
+      "_id": "3Lw1d5geM92Yd60T"
+     },
+     {
+      "_id": "y3qL9F8nMTt5ozgi"
+     },
+     {
+      "_id": "tjtqbMBZS8PiJyMn"
+     },
+     {
+      "_id": "70rt2v4YjpgbwPaP"
+     },
+     {
+      "_id": "1XT1GIDbeH8xGdzY"
+     }
+    ]
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "sUe5ynj33eA6bhwN": 1
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "vtFrFFPIqCocY1Hi",
+   "name": "Mastery: Rough",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "changes": [],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Raw cursed energy damage + 2 + CE modifier (replaces the Trait bonus). Applied automatically.</p>",
+   "statuses": [],
+   "flags": {
+    "jjk5e": {
+     "ceMastery": "rough"
+    }
+   },
+   "_key": "!items.effects!rxWwehwG1wa5VsCa.vtFrFFPIqCocY1Hi"
+  },
+  {
+   "_id": "Qvbh0pz75oHjumex",
+   "name": "Mastery: Smooth",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "changes": [
+    {
+     "key": "system.attributes.movement.walk",
+     "mode": 2,
+     "value": "5",
+     "priority": null
+    },
+    {
+     "key": "system.traits.dm.amount.bludgeoning",
+     "mode": 2,
+     "value": "-0",
+     "priority": null
+    },
+    {
+     "key": "system.traits.dm.amount.piercing",
+     "mode": 2,
+     "value": "-0",
+     "priority": null
+    },
+    {
+     "key": "system.traits.dm.amount.slashing",
+     "mode": 2,
+     "value": "-0",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Reduce B/P/S damage by your CE modifier; speed +10 ft in total with the Trait.</p>",
+   "statuses": [],
+   "flags": {
+    "jjk5e": {
+     "ceMastery": "smooth",
+     "ceChanges": [
+      {
+       "key": "system.traits.dm.amount.bludgeoning",
+       "mode": 2,
+       "tpl": "-{CE}"
+      },
+      {
+       "key": "system.traits.dm.amount.piercing",
+       "mode": 2,
+       "tpl": "-{CE}"
+      },
+      {
+       "key": "system.traits.dm.amount.slashing",
+       "mode": 2,
+       "tpl": "-{CE}"
+      }
+     ]
+    }
+   },
+   "_key": "!items.effects!rxWwehwG1wa5VsCa.Qvbh0pz75oHjumex"
+  },
+  {
+   "_id": "81AM1MzBxTUkDWWk",
+   "name": "Mastery: Elemental",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "changes": [],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Use the 'Elemental rider' activity to apply the element's condition.</p>",
+   "statuses": [],
+   "flags": {
+    "jjk5e": {
+     "ceMastery": "elemental"
+    }
+   },
+   "_key": "!items.effects!rxWwehwG1wa5VsCa.81AM1MzBxTUkDWWk"
+  },
+  {
+   "_id": "ULjEpRFCVdLyYnbC",
+   "name": "Poisoned (Poison, Elemental Mastery)",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "rounds": 1
+   },
+   "description": "",
+   "statuses": [
+    "poisoned"
+   ],
+   "flags": {
+    "jjk5e": {
+     "condition": "poisoned"
+    }
+   },
+   "_key": "!items.effects!rxWwehwG1wa5VsCa.ULjEpRFCVdLyYnbC"
+  },
+  {
+   "_id": "3Lw1d5geM92Yd60T",
+   "name": "Frightened (Psychic, Elemental Mastery)",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "rounds": 1
+   },
+   "description": "",
+   "statuses": [
+    "frightened"
+   ],
+   "flags": {
+    "jjk5e": {
+     "condition": "frightened"
+    }
+   },
+   "_key": "!items.effects!rxWwehwG1wa5VsCa.3Lw1d5geM92Yd60T"
+  },
+  {
+   "_id": "y3qL9F8nMTt5ozgi",
+   "name": "Prone (Thunder, Elemental Mastery)",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "rounds": 1
+   },
+   "description": "",
+   "statuses": [
+    "prone"
+   ],
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!rxWwehwG1wa5VsCa.y3qL9F8nMTt5ozgi"
+  },
+  {
+   "_id": "tjtqbMBZS8PiJyMn",
+   "name": "Deafened (Thunder, Elemental Mastery)",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "rounds": 1
+   },
+   "description": "",
+   "statuses": [
+    "deafened"
+   ],
+   "flags": {
+    "jjk5e": {
+     "condition": "deafened"
+    }
+   },
+   "_key": "!items.effects!rxWwehwG1wa5VsCa.tjtqbMBZS8PiJyMn"
+  },
+  {
+   "_id": "70rt2v4YjpgbwPaP",
+   "name": "Acid: AC −1 (Elemental Mastery)",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "changes": [
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "-1",
+     "priority": null
+    }
+   ],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "rounds": 1
+   },
+   "description": "",
+   "statuses": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!items.effects!rxWwehwG1wa5VsCa.70rt2v4YjpgbwPaP"
+  },
+  {
+   "_id": "1XT1GIDbeH8xGdzY",
+   "name": "Cold: speed −10 ft (Elemental Mastery)",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "changes": [
+    {
+     "key": "system.attributes.movement.walk",
+     "mode": 2,
+     "value": "-10",
+     "priority": null
+    }
+   ],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "rounds": 1
+   },
+   "description": "",
+   "statuses": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!items.effects!rxWwehwG1wa5VsCa.1XT1GIDbeH8xGdzY"
+  }
+ ],
+ "folder": "58RlNbYPWxO2Xi4E",
+ "sort": 1100,
+ "_key": "!items!rxWwehwG1wa5VsCa"
+}

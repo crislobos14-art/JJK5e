@@ -1,0 +1,180 @@
+{
+ "_id": "L9RcJelTKo86oVLG",
+ "name": "Maximum: Paralyzing Gaze",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/paralyzing-gaze.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Paralyzing Gaze — Innate Technique (11th level)</em></p><p>At 11th level, you have learned to completely paralyze targets with your technique. Your eyes' hit points increase to 1/2 of your maximum hit points (rounded up). As an action for 6 cursed energy, you force a creature you can see within 120 ft to make a Dexterity saving throw. On a failed save, they are paralyzed and have their AC reduced by your Cursed Energy modifier. You must maintain concentration on the technique as if concentrating on a spell and at the beginning of your turn by spending 2 CE as a bonus action. However, focusing your power to this extent leaves you vulnerable. The target can make an Strength (Athletics) check at the end of their turn. On a success, your eyes take 2 damage for every 1 they rolled above your Cursed Energy save DC (damage to your eyes does not force a concentration check). A creature paralyzed by this technique cannot be physically moved, even remaining suspended in the air.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "1DZCHVnlatlYFYfG": {
+    "_id": "1DZCHVnlatlYFYfG",
+    "type": "save",
+    "name": "Action (6 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "120",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    },
+    "effects": [
+     {
+      "_id": "Qo6WErARjd9ahkuW",
+      "onSave": false
+     }
+    ]
+   },
+   "S3EuFdYe8bgPf0Cl": {
+    "_id": "S3EuFdYe8bgPf0Cl",
+    "type": "utility",
+    "name": "Bonus Action (2 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [
+   "concentration"
+  ],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "120",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "1DZCHVnlatlYFYfG": 6,
+    "S3EuFdYe8bgPf0Cl": 2
+   },
+   "technique": "Paralyzing Gaze",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "Qo6WErARjd9ahkuW",
+   "name": "Paralyzed (Maximum: Paralyzing Gaze)",
+   "img": "modules/jjk5e/icons/techniques/paralyzing-gaze.svg",
+   "statuses": [
+    "paralyzed"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "paralyzed"
+    }
+   },
+   "_key": "!items.effects!L9RcJelTKo86oVLG.Qo6WErARjd9ahkuW"
+  }
+ ],
+ "folder": "NgfqZW5WmZKy5Fbs",
+ "_key": "!items!L9RcJelTKo86oVLG"
+}

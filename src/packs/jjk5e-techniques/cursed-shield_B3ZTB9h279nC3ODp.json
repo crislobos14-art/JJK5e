@@ -1,0 +1,85 @@
+{
+ "_id": "B3ZTB9h279nC3ODp",
+ "name": "Cursed Shield",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/cursed-cannon.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Cannon — Cursed Technique Reversal</em></p><p>After mastering Reverse Cursed Technique, you have learned your cursed technique reversal. You have learned how to defend against cursed energy. Whenever you are the target of a cursed energy effect, you can attempt to deflect the cursed energy being used. As a reaction, you can make a Constitution saving throw with the DC equaling 10 + 1/2 the cursed energy spent. On a success, you gain cursed energy equal to what was spent. If the effect was a cursed energy attack roll or forced a saving throw, the effect is negated. If the effect was a melee attack roll, you will nullify any features apart of it that are fueled by cursed energy. If you fail, you regain no cursed energy and the attack automatically hits. If the effect forces a saving throw you automatically fail the saving throw of the effect you were trying to absorb. This cannot absorb Maximums, Barriers, or Domain Expansions.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Cursed Cannon",
+  "activities": {
+   "qWHnHecd13R6ExwJ": {
+    "_id": "qWHnHecd13R6ExwJ",
+    "type": "save",
+    "name": "Reaction",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Cursed Cannon",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Cursed Cannon"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!B3ZTB9h279nC3ODp"
+}

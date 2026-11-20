@@ -1,0 +1,39 @@
+{
+ "_id": "XWtXSFfnn4gOxjep",
+ "name": "Hide",
+ "type": "equipment",
+ "img": "icons/svg/shield.svg",
+ "folder": "qVuyydidyeepCNvu",
+ "system": {
+  "description": {
+   "value": "<p>Medium armor. AC 12 + Dex modifier (max 2).</p><p>This crude armor is made from various thick beast skins and pelts. Tribal groups, evil humanoids, and savages often wear this type of material for protection.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "medium",
+   "baseItem": ""
+  },
+  "armor": {
+   "value": 12,
+   "dex": 2
+  },
+  "price": {
+   "value": 10.0,
+   "denomination": "gp"
+  },
+  "properties": [],
+  "quantity": 1
+ },
+ "flags": {
+  "jjk5e": {
+   "priceUSD": "$1,000"
+  }
+ },
+ "_key": "!items!XWtXSFfnn4gOxjep"
+}

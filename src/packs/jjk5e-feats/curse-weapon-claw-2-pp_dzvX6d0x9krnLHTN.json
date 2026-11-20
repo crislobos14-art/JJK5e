@@ -1,0 +1,72 @@
+{
+ "_id": "dzvX6d0x9krnLHTN",
+ "name": "Curse Weapon: Claw (2 PP)",
+ "type": "feat",
+ "img": "icons/svg/upgrade.svg",
+ "system": {
+  "description": {
+   "value": "<p>Once per turn when you hit a creature with a claw attack, you can force the creature to take a Constitution saving throw (DC 8 + your proficiency bonus + your Strength or Dexterity modifier). On a failed save, the target bleeds and takes 1d4 slashing damage at the start of their next turn. This increases to 1d6 slashing damage at 10th level. You can spend 1 CE to make the extra damage necrotic. You must have the <em>Cursed Weapon</em> attribute and choose claw to take this attribute.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTrait"
+  },
+  "requirements": "Cursed Spirit, 2 Profane Points",
+  "activities": {
+   "vXJ7VUUI2HuWUNSd": {
+    "_id": "vXJ7VUUI2HuWUNSd",
+    "type": "utility",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "vXJ7VUUI2HuWUNSd": 1
+   },
+   "profaneCost": 2,
+   "prereq": {
+    "prefixes": [
+     [
+      "Cursed Spirit"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "ar3Bgj4YHvYRp8DL",
+ "sort": 700,
+ "_key": "!items!dzvX6d0x9krnLHTN"
+}

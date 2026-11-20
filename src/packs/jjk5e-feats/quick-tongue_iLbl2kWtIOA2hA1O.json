@@ -1,0 +1,42 @@
+{
+ "_id": "iLbl2kWtIOA2hA1O",
+ "name": "Quick Tongue",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/cursed-speech.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Interjection</em></p>\n<p>Your versatility and training have increased the amount of words you have and your speed. You can choose one more word to be under the effect of <em>Interjection</em>.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Interjection",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Interjection"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "d9an5RUaI1VEAGca",
+ "sort": 200,
+ "_key": "!items!iLbl2kWtIOA2hA1O"
+}

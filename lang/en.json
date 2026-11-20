@@ -1,0 +1,594 @@
+{
+  "JJK5E": {
+    "Common": {
+      "OK": "OK",
+      "End": "End",
+      "Wisdom": "Wisdom",
+      "Charisma": "Charisma",
+      "Cancel": "Cancel",
+      "Days": "days",
+      "Edit": "Edit"
+    },
+    "Import": {
+      "Start": "JJK 5e: importing {n} compendiums… this can take a minute.",
+      "Done": "JJK 5e: import finished. Open the Compendium tab → \"JJK 5e V.6\".",
+      "ConfirmNew": "<p>Import the <strong>Jujutsu Kaisen 5e (V.6)</strong> content into world compendiums?</p><p>Classes, Innate Techniques, Races, Feats, Backgrounds, Equipment, Macros, Roll Tables and the full rules journal.</p>",
+      "ConfirmUpdate": "<p>Re-import all <strong>JJK 5e V.6</strong> compendiums? Their current contents will be replaced. Items already on actors are not touched.</p>",
+      "ModulePacks": "JJK 5e: compendiums are now built into the module (Compendium tab → \"JJK 5e V.6\"). No import needed.",
+      "RemoveOld": "<p>The JJK 5e compendiums now ship inside the module. This world still has <strong>{n}</strong> old imported copies.</p><p>Characters were re-linked to the new compendiums. Delete the old copies?</p>"
+    },
+    "CE": {
+      "Name": "Cursed Energy",
+      "Remaining": "{value}/{max} remaining",
+      "Overspent": "overspent",
+      "SpendTitle": "Spend Cursed Energy",
+      "RegainTitle": "Regain Cursed Energy",
+      "Amount": "Amount of CE:",
+      "Spent": "Cursed Energy spent",
+      "Regained": "Cursed Energy regained",
+      "ShortRestTitle": "Short Rest CE Recovery",
+      "ShortRestPrompt": "Hit Dice to spend for CE (max {cap}). Mark the Hit Dice as spent on the sheet.",
+      "ShortRestLabel": "Short rest: {n} Hit Dice → CE",
+      "NegativeEmotion": "Negative Emotion Recovery",
+      "AbilityTitle": "Cursed Energy Ability",
+      "AbilityPrompt": "Cursed Energy ability for <strong>{name}</strong>. It sets the CE pool, the CE save DC (8 + PB + mod) and CE attack rolls (via the sheet's spellcasting ability).",
+      "ShortRestRestore": "Sorcerous Restoration (+{n} CE)",
+      "Short": "CE"
+    },
+    "Technique": {
+      "Title": "Choose Innate Technique",
+      "Prompt": "Innate Technique for <strong>{name}</strong> (technique level {level}):",
+      "Current": "Current: {name}. Changing it does not delete old features."
+    },
+    "BlackFlash": {
+      "Check": "Black Flash check",
+      "Needs": "critical hit — needs {target}+",
+      "Success": "Critical damage uses <strong>3× dice</strong> and ignores resistances. You enter (or stack) <strong>The Zone</strong>.",
+      "Damage": "critical dice tripled. Remember: this damage ignores resistances."
+    },
+    "Zone": {
+      "Name": "The Zone",
+      "Description": "The Zone (1 minute): advantage on attack rolls, +1 critical range and +1 Black Flash range per stack, recover Technique Burnout and RCT pool, lower Reduced Output by 1."
+    },
+    "Domain": {
+      "Open": "Domain open",
+      "SureHit": "Sure-hit (Domain)",
+      "SureHitAttack": "this technique attack counts as a hit against targets you choose inside your domain.",
+      "SureHitSave": "targets you choose inside your domain automatically fail this saving throw.",
+      "Description": "Domain open (1 minute). When it ends (or you delete this effect), Technique Burnout is applied automatically.",
+      "SureHitShort": "Sure hit",
+      "Zone": "Domain",
+      "Opened": "{name} expands their domain",
+      "BarrierStats": "Barrier: <strong>{hp}</strong> HP, AC <strong>{ac}</strong>, refinement {ref}.",
+      "OutsideHint": "Creatures outside take {n}d6 bludgeoning and are pushed to the edge (apply manually).",
+      "ClashWon": "{name} wins the domain clash: sure hit restored.",
+      "BarrierHit": "Barrier takes {dmg} damage ({side}): {hp}/{max}.",
+      "Side": {
+        "outside": "from outside",
+        "inside": "from inside"
+      },
+      "Shattered": "{name}'s domain shatters!",
+      "WeakFound": "{name} finds the weak spot (Perception {total}).",
+      "WeakMissed": "{name} can't find the weak spot (Perception {total} vs DC 30).",
+      "Clash": "Domain clash",
+      "ClashEqual": "Equal refinement: the domains cancel out. At 1/3 HP each caster rolls a flat DC 15 or loses the domain.",
+      "ClashResult": "{win} overpowers {lose} (+{diff} refinement): {lose}'s domain breaks in {rounds} rounds, shrinking 15 ft per round.",
+      "ClashNoSureHit": "Sure hit is negated for both domains during the clash.",
+      "ClashLost": "{name}'s domain breaks!",
+      "ClashShrink": "{name}'s domain shrinks to {r} ft ({rounds} rounds left).",
+      "EqualCheck": "Domain clash: keep the domain (DC 15, no modifiers)",
+      "HitBarrier": "Damage barrier",
+      "SideLabel": "Attack comes",
+      "Psychic": "Psychic damage (not doubled outside)",
+      "Refinement": "Domain refinement",
+      "RefinementPrompt": "Refinement points (1–1000):",
+      "Balanced": "Balanced barrier",
+      "Flipped": "Weak inside, resistant outside",
+      "Normal": "Resistant inside, weak outside",
+      "HUD": "Domain",
+      "Closed": "No domain open.",
+      "Role": {
+        "winner": "winning",
+        "loser": "losing",
+        "equal": "equal"
+      },
+      "RoundsLeft": "{n} rounds left",
+      "Stats": "AC {ac} · refinement {ref} · radius {r} ft",
+      "Mode": "Barrier",
+      "WeakSpot": "Find weak spot (DC 30)",
+      "Close": "Close domain"
+    },
+    "Burnout": {
+      "Name": "Technique Burnout",
+      "Description": "After a Domain Expansion: no Innate Technique features and 2 levels of exhaustion for 1 minute or until you land a Black Flash."
+    },
+    "Output": {
+      "Title": "Output",
+      "Max": "Maximum Output",
+      "Reduced": "Reduced Output",
+      "MaxTitle": "Maximum Output",
+      "MaxPrompt": "Base CE cost of the technique you amplify (minimum 5, or 3 for a shikigami summon):",
+      "TooLow": "Maximum Output needs a base cost of at least 5 CE (3 for shikigami).",
+      "ShikigamiOnly": "A base cost under 5 only works for shikigami summoning techniques.",
+      "Check": "Cursed Energy check vs Reduced Output (DC {dc})",
+      "GainedRO": "Reduced Output increased to level {level}.",
+      "Benefits": "<p>Choose one: range +50%, one damage roll +50% dice, attack bonus +50% (DC + half PB), duration +50%, or another value +50%. Shikigami: size +1 with an extra necrotic die, HP +50%, or attack + half PB.</p>",
+      "ReducedDescription": "Lowers the CE range of techniques by the Output penalty. A technique whose base cost exceeds the Max cannot be used (enforced by the module). Not using CE for 1 minute or landing a Black Flash removes 1 level."
+    },
+    "Soul": {
+      "Name": "Soul Awareness",
+      "Description": "See the rules journal (Intricacies of Sorcery → Soul Awareness Levels) for each ability."
+    },
+    "Limb": {
+      "Title": "Limb Damage",
+      "Roll": "Roll limb",
+      "Broken": "Broken at",
+      "Lost": "Lost at",
+      "ok": "OK",
+      "broken": "Broken",
+      "lost": "Lost",
+      "rleg": "Right Leg",
+      "lleg": "Left Leg",
+      "rarm": "Right Arm",
+      "larm": "Left Arm",
+      "torso": "Torso",
+      "head": "Head",
+      "Effect": {
+        "rleg": {
+          "broken": "Movement is halved and you can't jump.",
+          "lost": "You lose your right leg. Movement is halved."
+        },
+        "lleg": {
+          "broken": "Movement is halved and you can't jump.",
+          "lost": "You lose your left leg. Movement is halved."
+        },
+        "rarm": {
+          "broken": "Skill checks and attack rolls using this arm have disadvantage.",
+          "lost": "Skill checks and attack rolls with this arm are impossible."
+        },
+        "larm": {
+          "broken": "Skill checks and attack rolls using this arm have disadvantage.",
+          "lost": "Skill checks and attack rolls with this arm are impossible."
+        },
+        "torso": {
+          "broken": "Max HP is halved.",
+          "lost": "The target dies unless it can live without a torso."
+        },
+        "head": {
+          "broken": "The target is unconscious.",
+          "lost": "The target dies unless it can live without a head."
+        }
+      }
+    },
+    "Summon": {
+      "Title": "Summons",
+      "Placeholder": "Creature or shikigami name",
+      "Dismiss": "Dismiss all my summons in this scene",
+      "NotFound": "JJK 5e: no actor named \"{name}\" in the world or compendiums.",
+      "Hint": "Searches your actors (folder \"JJK Shikigami\") and then the compendiums (SRD). Tokens appear next to yours; the GM must be online."
+    },
+    "Panel": {
+      "Open": "Open JJK panel",
+      "Technique": "Technique",
+      "CEAbility": "CE ability",
+      "None": "none",
+      "HR": "Heavenly Restriction",
+      "ChooseTechnique": "Choose Innate Technique",
+      "SetAbility": "Set Cursed Energy ability",
+      "Spend": "Spend…",
+      "Regain": "Regain…",
+      "Status": "Status",
+      "NoPool": "No Cursed Energy pool yet: add a JJK class."
+    },
+    "Notify": {
+      "NoActor": "JJK 5e: select a token or assign a character first.",
+      "NotOwner": "JJK 5e: you do not own that actor.",
+      "HRNoTechnique": "JJK 5e: Heavenly Restriction has no Innate Technique.",
+      "NoPool": "{name} has no Cursed Energy pool feature.",
+      "NoPoolNotSpent": "JJK 5e: {name} has no Cursed Energy pool, CE was not spent.",
+      "NotEnoughCE": "JJK 5e: not enough Cursed Energy ({value} / {cost} needed).",
+      "Burnout": "JJK 5e: Technique Burnout — you cannot use Innate Technique features right now.",
+      "ROMax": "JJK 5e: Reduced Output {level} — base cost {cost} CE exceeds the max of {max}.",
+      "NoTechPack": "JJK 5e: Innate Techniques compendium not found. Import the content first.",
+      "Gained": "JJK 5e: {name} gained {list}.",
+      "TechniqueSet": "JJK 5e: {name} technique set to {technique} (no new features for this level).",
+      "CEAbility": "JJK 5e: {name} uses {ability} for Cursed Energy.",
+      "Burnt": "JJK 5e: {name} suffers Technique Burnout.",
+      "NoGM": "JJK 5e: a GM must be connected to summon or dismiss tokens.",
+      "NeedDnd5e": "JJK 5e V.6 requires the D&D 5e system.",
+      "NoInspiration": "JJK 5e: {name} has no inspiration to use this mindset.",
+      "GMOnly": "Only the GM can do that."
+    },
+    "Settings": {
+      "autoSpendCE": {
+        "Name": "Automatic Cursed Energy spending",
+        "Hint": "Features with a fixed CE cost spend it from the Cursed Energy pool and are blocked if there is not enough CE. Scaled costs use the scaling field."
+      },
+      "ceChat": {
+        "Name": "Cursed Energy chat messages",
+        "Hint": "Post a short chat line every time CE is spent or regained."
+      },
+      "ceResource": {
+        "Name": "Cursed Energy resource slot",
+        "Hint": "Mirror the CE pool in this actor resource so it can be shown as a token bar and edited there.",
+        "None": "Do not mirror",
+        "Primary": "Primary resource",
+        "Secondary": "Secondary resource",
+        "Tertiary": "Tertiary resource"
+      },
+      "autoTokenBar": {
+        "Name": "Show CE as token bar",
+        "Hint": "If a token has no second bar, use it for Cursed Energy."
+      },
+      "blackFlash": {
+        "Name": "Automatic Black Flash checks",
+        "Hint": "On a melee critical hit by a player character (not Heavenly Restriction) roll a d20 for Black Flash and apply / stack The Zone."
+      },
+      "blackFlashDamage": {
+        "Name": "Black Flash triple damage",
+        "Hint": "After a Black Flash the next critical damage roll uses 3× dice instead of 2×."
+      },
+      "zoneAdvantage": {
+        "Name": "The Zone grants advantage",
+        "Hint": "While in The Zone attack rolls are made with advantage."
+      },
+      "domainTracking": {
+        "Name": "Domain Expansion tracking",
+        "Hint": "Expanding a domain adds a 1-minute effect; when it ends Technique Burnout is applied (2 exhaustion, techniques blocked)."
+      },
+      "domainSureHit": {
+        "Name": "Domain sure-hit reminders",
+        "Hint": "While your domain is open, technique attacks and saves post a sure-hit reminder in the chat."
+      },
+      "autoExpire": {
+        "Name": "Expire JJK effects",
+        "Hint": "Delete The Zone, Domain and Technique Burnout when their duration ends (skipped if the Times Up module is active)."
+      },
+      "headerButton": {
+        "Name": "JJK button on character sheets",
+        "Hint": "Show a JJK button in the header of character sheets to open the JJK panel."
+      },
+      "importMenu": {
+        "Name": "Re-import JJK 5e content",
+        "Label": "Import / Update compendiums",
+        "Hint": "Rebuild the JJK 5e V.6 world compendiums from the module data."
+      },
+      "modifierReminders": {
+        "Name": "Feat modifier reminders",
+        "Hint": "When you use a technique feature, list in the chat the feats you own that modify it."
+      },
+      "checkPrereqs": {
+        "Name": "Check feat prerequisites",
+        "Hint": "Warn when a feat or feature is added to an actor that does not meet its prerequisites (features, CE score, level, skill)."
+      },
+      "pointBuyBudget": {
+        "Name": "Point buy: points",
+        "Hint": "Points available for the point buy (default 27)."
+      },
+      "pointBuyMin": {
+        "Name": "Point buy: minimum score",
+        "Hint": "Starting and minimum score for each ability (default 10)."
+      },
+      "pointBuyMax": {
+        "Name": "Point buy: maximum score",
+        "Hint": "Highest score you can buy before race, background or class bonuses (default 18)."
+      },
+      "pointBuyDoubleFrom": {
+        "Name": "Point buy: double cost from",
+        "Hint": "Scores at or above this value cost 2 points each (default 14)."
+      },
+      "asiFeatPicker": {
+        "Name": "JJK feats in Ability Score Improvement",
+        "Hint": "Adds a list of the JJK feats you qualify for to every Ability Score Improvement step when you level up."
+      },
+      "animations": {
+        "Name": "Animations (Sequencer + JB2A)",
+        "Hint": "Plays animations for JJK attacks, techniques, healing and domains when Sequencer and JB2A are active. Items you configured in Automated Animations keep their own animation."
+      },
+      "animOverrides": {
+        "Name": "Animation overrides (JSON)",
+        "Hint": "Optional JSON mapping animation keys to Sequencer database paths or files, e.g. {\"melee\": \"jb2a.unarmed_strike.physical.02.blue\", \"domain\": \"jb2a.darkness.green\"}."
+      },
+      "sceneTools": {
+        "Name": "JJK buttons in the token toolbar",
+        "Hint": "Shows one JJK button in the left Token controls toolbar that opens a compact menu with all JJK macros."
+      },
+      "levelUpButton": {
+        "Name": "Level-up button on full XP bar",
+        "Hint": "Shows a Level up button under the XP bar when the character has enough experience. It opens the normal level-up dialog."
+      },
+      "enableSummoning": {
+        "Name": "Enable shikigami summoning",
+        "Hint": "Turns on the system's Allow Summoning setting so Ten Shadows features place their shikigami tokens. Players without token permission get them placed by the GM automatically."
+      },
+      "pointBuyCosts": {
+        "Name": "Point buy: cost table",
+        "Hint": "Total cost of each score, as score:cost pairs (default 10:0, 11:1, 12:2, 13:3, 14:5, 15:7, 16:10, 17:13, 18:17)."
+      },
+      "dataLanguage": {
+        "Name": "Compendium language",
+        "Hint": "Language of the imported compendium items and folders. The rules journals always include both the English original and the Spanish manual. Changing it asks to re-import.",
+        "Auto": "Auto (Foundry language)",
+        "En": "English (original)",
+        "Es": "Español"
+      },
+      "sheetStrip": {
+        "Name": "JJK bar on the character sheet",
+        "Hint": "CE with +/−, grade, vows and quick buttons at the top of the sheet."
+      },
+      "turnSummary": {
+        "Name": "Turn summary",
+        "Hint": "At the start of your turn, whisper your CE, active vows and active forms."
+      },
+      "autoHotbar": {
+        "Name": "Automatic JJK hotbar",
+        "Hint": "Refill the JJK hotbar page whenever a JJK item is added to your character."
+      },
+      "hotbarPage": {
+        "Name": "JJK hotbar page",
+        "Hint": "Hotbar page (1–5) used for technique and CE abilities."
+      },
+      "diceColors": {
+        "Name": "JJK dice colors (Dice So Nice)",
+        "Hint": "Purple dice for techniques, gold in a domain, black and red on a Black Flash."
+      },
+      "domainZones": {
+        "Name": "Domain zone and barrier",
+        "Hint": "Draw the domain on the map, track barrier HP/AC, clashes and sure hit only inside."
+      }
+    },
+    "Feats": {
+      "ModifiedBy": "Modified by your feats — {name}",
+      "Or": " or ",
+      "CEScore": "Cursed Energy score {need}+ (you have {have})",
+      "Level": "level {need}",
+      "Skill": "proficiency in {skill}",
+      "Missing": "JJK 5e: {name} — prerequisites not met: {list}",
+      "Ability": "{ability} {need}+ (you have {have})",
+      "BodyPoints": "body points: {used} used + {cost} > {budget} available",
+      "BodyCategory": "this category allows {limit} improvements ({ability} modifier)",
+      "InspirationUsed": "inspiration spent.",
+      "Refinement": "Domain refinement {need}+ (you have {have})",
+      "Breakthroughs": "{need}+ Breakthroughs (you have {have})",
+      "Profane": "{need} Profane Points (you have {have} left)"
+    },
+    "Group": {
+      "focus": "Focused",
+      "fury": "Fury",
+      "reckless": "Reckless"
+    },
+    "PointBuy": {
+      "Title": "Point Buy",
+      "Ability": "Ability",
+      "Score": "Score",
+      "Cost": "Cost",
+      "Remaining": "Points",
+      "Apply": "Apply",
+      "Hint": "Every score starts at {min}. Budget: {budget}/{budget} points, maximum {max} before other bonuses. Cost of each score:",
+      "Order": "Use this before adding your race, class or background so their ability bonuses are added on top.",
+      "Over": "You spent {spent} points; the limit is {budget}.",
+      "Done": "{name}: ability scores set ({left} points left)."
+    },
+    "ASI": {
+      "Legend": "JJK 5e feats",
+      "Hint": "{n} JJK feats meet your prerequisites. Choose one instead of the ability score increase.",
+      "Take": "Take feat"
+    },
+    "SceneTools": {
+      "Panel": "JJK: Open panel",
+      "Spend": "JJK: Spend Cursed Energy",
+      "Regain": "JJK: Regain Cursed Energy",
+      "Technique": "JJK: Choose Innate Technique",
+      "CEAbility": "JJK: Set Cursed Energy ability",
+      "NegEmotion": "JJK: Negative Emotion Recovery",
+      "ShortRest": "JJK: Short Rest CE recovery",
+      "MaxOutput": "JJK: Maximum Output",
+      "Limb": "JJK: Roll limb damage",
+      "PointBuy": "JJK: Point buy",
+      "Import": "JJK: Import / update compendiums",
+      "Menu": "JJK 5e menu",
+      "LevelUp": "JJK: Level up",
+      "Vows": "Binding vows",
+      "Career": "Sorcerer career",
+      "Mission": "Generate mission",
+      "Hotbar": "Fill JJK hotbar",
+      "Domain": "Domain (barrier)",
+      "Curse": "Generate curse",
+      "RCT": "Roll RCT awakening (d100)",
+      "Breakthrough": "Add breakthroughs (GM)"
+    },
+    "Spell": {
+      "Method": "Innate Technique",
+      "School": "Cursed Technique"
+    },
+    "FeatType": {
+      "Physical": "JJK: Physical",
+      "CursedEnergy": "JJK: Cursed Energy",
+      "Barrier": "JJK: Barrier",
+      "RCT": "JJK: Reverse Cursed Technique",
+      "Skill": "JJK: Skill",
+      "Technique": "JJK: Innate Technique",
+      "Pact": "JJK: Heavenly Pact",
+      "Boon": "JJK: Special Grade Boon",
+      "Trait": "JJK: Special Trait",
+      "CursedTechnique": "JJK: Cursed Technique (C&C)"
+    },
+    "LevelUp": {
+      "Button": "Level up!",
+      "Title": "Level up",
+      "Which": "Which class gains the level?",
+      "NoClass": "This character has no class yet.",
+      "Max": "Already at level 20."
+    },
+    "Vow": {
+      "Prefix": "Vow",
+      "Title": "Binding Vows",
+      "New": "New binding vow",
+      "Make": "Make vow",
+      "Preset": "Template",
+      "Name": "Name",
+      "FromPreset": "(from template)",
+      "Kind": "Type",
+      "Personal": "Personal",
+      "Mutual": "Mutual",
+      "Partner": "Other party",
+      "Restriction": "Restriction",
+      "Benefit": "Benefit",
+      "Mechanics": "Automatic modifiers",
+      "MechanicsHint": "Optional. Positive numbers for benefits, negative for restrictions. They become an Active Effect.",
+      "Lock": "Cannot be suspended until",
+      "LockNone": "Can be suspended anytime",
+      "LockLongRest": "A long rest",
+      "LockWeek": "The GM unlocks it (1 work week)",
+      "EndsOn": "Ends",
+      "EndsNever": "When you suspend or break it",
+      "EndsCombat": "When combat ends",
+      "OverLimit": "{n} active vows exceed your limit ({max} = proficiency bonus). Allowed, but tell your GM.",
+      "PartnerManual": "{name} must record the vow on their own sheet (you don't own that character).",
+      "Made": "Binding vow made",
+      "Locked": "This vow can't be suspended yet.",
+      "Break": "Break vow",
+      "BreakConfirm": "Break <strong>{name}</strong>? You lose its benefits and may suffer the punishment.",
+      "Broken": "Binding vow broken",
+      "LostBenefits": "All benefits of the vow are lost.",
+      "PersonalBreak": "Personal vow: the GM decides any further consequence.",
+      "Punishment": "Punishment for breaking a vow",
+      "PunishmentHint": "Choose: 5 levels of exhaustion for 10 days, or roll on the misfortune table.",
+      "Exhaustion": "5 exhaustion levels",
+      "RollMisfortune": "Roll misfortune (d6)",
+      "ExhaustionApplied": "Exhaustion set to {n} for 10 days.",
+      "Misfortune": "Vow misfortune",
+      "MisfortuneRoll": "Misfortune",
+      "Delete": "Delete",
+      "DeleteConfirm": "Delete this vow from the list (without in-game consequences)?",
+      "CombatEnded": "Combat ended: {names} ended.",
+      "Count": "Active vows: <strong>{n}</strong> / {max}",
+      "None": "No vows yet.",
+      "StateBroken": "Broken",
+      "StateActive": "Active",
+      "StateInactive": "Suspended",
+      "Suspend": "Suspend",
+      "Activate": "Activate",
+      "UnlockAll": "Unlock all"
+    },
+    "Career": {
+      "Title": "Sorcerer Career",
+      "Grade": {
+        "4": "Grade 4",
+        "3": "Grade 3",
+        "2": "Grade 2",
+        "1": "Grade 1",
+        "special": "Special Grade"
+      },
+      "Tab": {
+        "grade": "Grade",
+        "missions": "Missions",
+        "rep": "Reputation"
+      },
+      "StepRecs": "Recommendations from two Grade 1 sorcerers ({n}/2)",
+      "StepSemi": "Named semi-{grade}",
+      "StepTrials": "Pass 3 missions with a Grade 1 sorcerer ({n}/3)",
+      "SemiOf": "Semi-{grade}",
+      "Next": "Next: {grade}",
+      "DirectPromotion": "The GM can promote directly.",
+      "Recs": "Recommendations",
+      "RecRule": "Teachers can't recommend their own students.",
+      "AddRec": "Add recommendation",
+      "RecHint": "Name of the Grade 1 sorcerer who recommends:",
+      "MakeSemi": "Name semi-grade",
+      "Promote": "Promote",
+      "History": "History",
+      "LogRec": "Recommended by {name}",
+      "Promoted": "{name} promoted to {grade}",
+      "Demoted": "{name} demoted to {grade}",
+      "LogMission": "Mission assigned: {title}",
+      "LogDone": "Mission completed: {title}",
+      "LogFailed": "Mission failed: {title}"
+    },
+    "Mission": {
+      "Generate": "Generate mission",
+      "ForActor": "Mission for this sorcerer",
+      "Grade": "Mission grade",
+      "Assign": "Assign to",
+      "Trial": "Promotion trial",
+      "Roll": "Generate",
+      "Title": "Mission",
+      "Place": "Location",
+      "Curse": "Curse",
+      "Victims": "Victims",
+      "Twist": "Complication",
+      "GMOnly": "GM only",
+      "Reward": "Pay",
+      "Team": "Team",
+      "Folder": "JJK Missions",
+      "None": "No missions.",
+      "Pass": "Completed",
+      "Fail": "Failed",
+      "Status": {
+        "active": "Active",
+        "done": "Completed",
+        "failed": "Failed"
+      },
+      "MakeCurse": "Create the curse NPC"
+    },
+    "Faction": {
+      "higherUps": "Higher-ups",
+      "tokyo": "Tokyo Jujutsu High",
+      "kyoto": "Kyoto Jujutsu High",
+      "gojo": "Gojo clan",
+      "zenin": "Zenin clan",
+      "kamo": "Kamo clan",
+      "freelance": "Freelancers & black market",
+      "curseUsers": "Curse users"
+    },
+    "Rep": {
+      "Hostile": "Hostile",
+      "Distrust": "Distrustful",
+      "Wary": "Wary",
+      "Neutral": "Neutral",
+      "Known": "Known",
+      "Respected": "Respected",
+      "Allied": "Allied"
+    },
+    "Hotbar": {
+      "Fill": "Fill JJK hotbar",
+      "Filled": "{n} JJK abilities placed on hotbar page {page}.",
+      "NoPermission": "Couldn't create macros. Ask the GM for the 'Create script macros' permission."
+    },
+    "Curse": {
+      "Generate": "Generate curse",
+      "Kind": "Kind of curse",
+      "Place": "Place a hidden token in view",
+      "Folder": "JJK Curses",
+      "Created": "Curse created: {name} (CR {cr})."
+    },
+    "Keys": {
+      "menu": "Open/close JJK menu",
+      "panel": "Open JJK panel",
+      "spend1": "Spend 1 CE",
+      "regain1": "Regain 1 CE",
+      "spend": "Spend CE (amount)",
+      "vows": "Binding vows",
+      "career": "Sorcerer career",
+      "domain": "Domain HUD",
+      "technique": "Choose innate technique",
+      "hotbar": "Fill JJK hotbar",
+      "mission": "Generate mission (GM)",
+      "curse": "Generate curse (GM)",
+      "HudHint": "JJK: click = panel · right click = −1 CE · Shift + right click = +1 CE"
+    },
+    "Breakthrough": {
+      "Name": "Breakthroughs",
+      "Gained": "{name} reaches a breakthrough (total {total}).",
+      "RCTRoll": "Reverse Cursed Technique awakening (90+)",
+      "RCTYes": "Reverse Cursed Technique awakened! Add the RCT feature.",
+      "RCTNo": "Not this time.",
+      "RCT": "Reverse Cursed Technique",
+      "Prompt": "Breakthroughs to add (negative to remove):",
+      "Manual": "GM"
+    },
+    "Reversal": {
+      "Added": "Cursed Technique Reversal: {names} added."
+    }
+  }
+}

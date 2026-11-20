@@ -1,0 +1,594 @@
+{
+  "JJK5E": {
+    "Common": {
+      "OK": "OK",
+      "End": "Terminar",
+      "Wisdom": "Sabiduría",
+      "Charisma": "Carisma",
+      "Cancel": "Cancelar",
+      "Days": "días",
+      "Edit": "Editar"
+    },
+    "Import": {
+      "Start": "JJK 5e: importando {n} compendios… puede tardar un minuto.",
+      "Done": "JJK 5e: importación terminada. Abre la pestaña Compendios → \"JJK 5e V.6\".",
+      "ConfirmNew": "<p>¿Importar el contenido de <strong>Jujutsu Kaisen 5e (V.6)</strong> a compendios del mundo?</p><p>Clases, Técnicas Innatas, Razas, Dotes, Trasfondos, Equipo, Macros, Tablas y el diario de reglas completo.</p>",
+      "ConfirmUpdate": "<p>¿Reimportar todos los compendios de <strong>JJK 5e V.6</strong>? Se reemplaza su contenido. Los ítems que ya tienen los actores no se tocan.</p>",
+      "ModulePacks": "JJK 5e: los compendios ahora vienen dentro del módulo (pestaña Compendios → \"JJK 5e V.6\"). No hace falta importar.",
+      "RemoveOld": "<p>Los compendios de JJK 5e ahora vienen dentro del módulo. Este mundo aún tiene <strong>{n}</strong> copias importadas antiguas.</p><p>Los personajes ya se re-vincularon a los compendios nuevos. ¿Borrar las copias antiguas?</p>"
+    },
+    "CE": {
+      "Name": "Energía Maldita",
+      "Remaining": "quedan {value}/{max}",
+      "Overspent": "sobregasto",
+      "SpendTitle": "Gastar Energía Maldita",
+      "RegainTitle": "Recuperar Energía Maldita",
+      "Amount": "Cantidad de EM:",
+      "Spent": "Energía Maldita gastada",
+      "Regained": "Energía Maldita recuperada",
+      "ShortRestTitle": "Recuperar EM en descanso corto",
+      "ShortRestPrompt": "Dados de Golpe a gastar por EM (máx. {cap}). Márcalos como gastados en la hoja.",
+      "ShortRestLabel": "Descanso corto: {n} Dados de Golpe → EM",
+      "NegativeEmotion": "Recuperación por emoción negativa",
+      "AbilityTitle": "Característica de Energía Maldita",
+      "AbilityPrompt": "Característica de Energía Maldita de <strong>{name}</strong>. Define la reserva de EM, la CD de EM (8 + competencia + mod) y los ataques de EM (mediante la característica de conjuro de la hoja).",
+      "ShortRestRestore": "Sorcerous Restoration (+{n} EM)",
+      "Short": "EM"
+    },
+    "Technique": {
+      "Title": "Elegir Técnica Innata",
+      "Prompt": "Técnica Innata de <strong>{name}</strong> (nivel de técnica {level}):",
+      "Current": "Actual: {name}. Cambiarla no borra los rasgos anteriores."
+    },
+    "BlackFlash": {
+      "Check": "Tirada de Black Flash",
+      "Needs": "golpe crítico — necesita {target}+",
+      "Success": "El daño crítico usa <strong>dados ×3</strong> e ignora resistencias. Entras (o apilas) <strong>The Zone</strong>.",
+      "Damage": "dados de crítico triplicados. Recuerda: este daño ignora resistencias."
+    },
+    "Zone": {
+      "Name": "The Zone",
+      "Description": "The Zone (1 minuto): ventaja en ataques, +1 al rango de crítico y de Black Flash por nivel, recuperas el Technique Burnout y la reserva de RCT, y bajas 1 nivel de Reduced Output."
+    },
+    "Domain": {
+      "Open": "Dominio abierto",
+      "SureHit": "Acierto seguro (Dominio)",
+      "SureHitAttack": "este ataque de técnica cuenta como impacto contra los objetivos que elijas dentro de tu dominio.",
+      "SureHitSave": "los objetivos que elijas dentro de tu dominio fallan automáticamente esta salvación.",
+      "Description": "Dominio abierto (1 minuto). Al terminar (o al borrar este efecto) se aplica Technique Burnout automáticamente.",
+      "SureHitShort": "Golpe seguro",
+      "Zone": "Dominio",
+      "Opened": "{name} expande su dominio",
+      "BarrierStats": "Barrera: <strong>{hp}</strong> PG, CA <strong>{ac}</strong>, refinamiento {ref}.",
+      "OutsideHint": "Las criaturas de fuera reciben {n}d6 contundente y son empujadas al borde (aplícalo a mano).",
+      "ClashWon": "{name} gana el choque de dominios: vuelve el impacto garantizado.",
+      "BarrierHit": "La barrera recibe {dmg} de daño ({side}): {hp}/{max}.",
+      "Side": {
+        "outside": "desde fuera",
+        "inside": "desde dentro"
+      },
+      "Shattered": "¡El dominio de {name} se rompe!",
+      "WeakFound": "{name} encuentra el punto débil (Percepción {total}).",
+      "WeakMissed": "{name} no encuentra el punto débil (Percepción {total} contra CD 30).",
+      "Clash": "Choque de dominios",
+      "ClashEqual": "Refinamiento igual: los dominios se anulan. Al llegar a 1/3 de PG, cada lanzador tira CD 15 sin modificadores o pierde el dominio.",
+      "ClashResult": "{win} se impone a {lose} (+{diff} de refinamiento): el dominio de {lose} se rompe en {rounds} rondas y encoge 15 pies por ronda.",
+      "ClashNoSureHit": "Durante el choque se anula el impacto garantizado de ambos dominios.",
+      "ClashLost": "¡El dominio de {name} se rompe!",
+      "ClashShrink": "El dominio de {name} encoge a {r} pies (quedan {rounds} rondas).",
+      "EqualCheck": "Choque de dominios: mantener el dominio (CD 15, sin modificadores)",
+      "HitBarrier": "Dañar barrera",
+      "SideLabel": "El ataque viene",
+      "Psychic": "Daño psíquico (no se duplica desde fuera)",
+      "Refinement": "Refinamiento del dominio",
+      "RefinementPrompt": "Puntos de refinamiento (1–1000):",
+      "Balanced": "Barrera equilibrada",
+      "Flipped": "Débil dentro, resistente fuera",
+      "Normal": "Resistente dentro, débil fuera",
+      "HUD": "Dominio",
+      "Closed": "No hay dominio abierto.",
+      "Role": {
+        "winner": "ganando",
+        "loser": "perdiendo",
+        "equal": "empate"
+      },
+      "RoundsLeft": "quedan {n} rondas",
+      "Stats": "CA {ac} · refinamiento {ref} · radio {r} pies",
+      "Mode": "Barrera",
+      "WeakSpot": "Buscar punto débil (CD 30)",
+      "Close": "Cerrar dominio"
+    },
+    "Burnout": {
+      "Name": "Technique Burnout",
+      "Description": "Tras una Expansión de Dominio: sin rasgos de Técnica Innata y 2 niveles de agotamiento durante 1 minuto o hasta lograr un Black Flash."
+    },
+    "Output": {
+      "Title": "Output",
+      "Max": "Maximum Output",
+      "Reduced": "Reduced Output",
+      "MaxTitle": "Maximum Output",
+      "MaxPrompt": "Costo base en EM de la técnica que amplificas (mínimo 5, o 3 para invocar shikigami):",
+      "TooLow": "Maximum Output necesita un costo base de al menos 5 EM (3 para shikigami).",
+      "ShikigamiOnly": "Un costo base menor a 5 solo vale para técnicas de invocación de shikigami.",
+      "Check": "Prueba de Energía Maldita contra Reduced Output (CD {dc})",
+      "GainedRO": "Reduced Output sube al nivel {level}.",
+      "Benefits": "<p>Elige uno: alcance +50%, una tirada de daño +50% de dados, bonificador de ataque +50% (CD + mitad de la competencia), duración +50% u otro valor +50%. Shikigami: tamaño +1 con un dado necrótico extra, PG +50% o ataque + mitad de la competencia.</p>",
+      "ReducedDescription": "Reduce el rango de EM de las técnicas según la penalización de Output. No puedes usar técnicas cuyo costo base supere el Máximo (el módulo lo aplica). No usar EM durante 1 minuto o lograr un Black Flash quita 1 nivel."
+    },
+    "Soul": {
+      "Name": "Soul Awareness",
+      "Description": "Consulta el diario de reglas (Intricacies of Sorcery → Soul Awareness Levels) para cada habilidad."
+    },
+    "Limb": {
+      "Title": "Daño de extremidades",
+      "Roll": "Tirar extremidad",
+      "Broken": "Rota con",
+      "Lost": "Perdida con",
+      "ok": "OK",
+      "broken": "Rota",
+      "lost": "Perdida",
+      "rleg": "Pierna derecha",
+      "lleg": "Pierna izquierda",
+      "rarm": "Brazo derecho",
+      "larm": "Brazo izquierdo",
+      "torso": "Torso",
+      "head": "Cabeza",
+      "Effect": {
+        "rleg": {
+          "broken": "El movimiento se reduce a la mitad y no puedes saltar.",
+          "lost": "Pierdes la pierna derecha. Movimiento a la mitad."
+        },
+        "lleg": {
+          "broken": "El movimiento se reduce a la mitad y no puedes saltar.",
+          "lost": "Pierdes la pierna izquierda. Movimiento a la mitad."
+        },
+        "rarm": {
+          "broken": "Las pruebas de habilidad y tiradas de ataque con este brazo tienen desventaja.",
+          "lost": "Las pruebas y ataques con este brazo son imposibles."
+        },
+        "larm": {
+          "broken": "Las pruebas de habilidad y tiradas de ataque con este brazo tienen desventaja.",
+          "lost": "Las pruebas y ataques con este brazo son imposibles."
+        },
+        "torso": {
+          "broken": "Los PG máximos se reducen a la mitad.",
+          "lost": "El objetivo muere salvo que pueda vivir sin torso."
+        },
+        "head": {
+          "broken": "El objetivo queda inconsciente.",
+          "lost": "El objetivo muere salvo que pueda vivir sin cabeza."
+        }
+      }
+    },
+    "Summon": {
+      "Title": "Invocaciones",
+      "Placeholder": "Nombre de criatura o shikigami",
+      "Dismiss": "Retirar todas mis invocaciones de la escena",
+      "NotFound": "JJK 5e: no hay ningún actor llamado \"{name}\" en el mundo ni en los compendios.",
+      "Hint": "Busca en tus actores (carpeta \"JJK Shikigami\") y luego en los compendios (SRD). Los tokens aparecen junto al tuyo; el GM debe estar conectado."
+    },
+    "Panel": {
+      "Open": "Abrir panel JJK",
+      "Technique": "Técnica",
+      "CEAbility": "Característica de EM",
+      "None": "ninguna",
+      "HR": "Heavenly Restriction",
+      "ChooseTechnique": "Elegir Técnica Innata",
+      "SetAbility": "Elegir característica de EM",
+      "Spend": "Gastar…",
+      "Regain": "Recuperar…",
+      "Status": "Estado",
+      "NoPool": "Aún no hay reserva de Energía Maldita: añade una clase JJK."
+    },
+    "Notify": {
+      "NoActor": "JJK 5e: selecciona un token o asigna un personaje primero.",
+      "NotOwner": "JJK 5e: no eres dueño de ese actor.",
+      "HRNoTechnique": "JJK 5e: Heavenly Restriction no tiene Técnica Innata.",
+      "NoPool": "{name} no tiene el rasgo de reserva de Energía Maldita.",
+      "NoPoolNotSpent": "JJK 5e: {name} no tiene reserva de Energía Maldita; no se gastó EM.",
+      "NotEnoughCE": "JJK 5e: no alcanza la Energía Maldita ({value} / se necesitan {cost}).",
+      "Burnout": "JJK 5e: Technique Burnout — ahora no puedes usar rasgos de Técnica Innata.",
+      "ROMax": "JJK 5e: Reduced Output {level} — el costo base de {cost} EM supera el máximo de {max}.",
+      "NoTechPack": "JJK 5e: no se encontró el compendio de Técnicas Innatas. Importa el contenido primero.",
+      "Gained": "JJK 5e: {name} obtuvo {list}.",
+      "TechniqueSet": "JJK 5e: técnica de {name} fijada en {technique} (sin rasgos nuevos para este nivel).",
+      "CEAbility": "JJK 5e: {name} usa {ability} para la Energía Maldita.",
+      "Burnt": "JJK 5e: {name} sufre Technique Burnout.",
+      "NoGM": "JJK 5e: debe haber un GM conectado para invocar o retirar tokens.",
+      "NeedDnd5e": "JJK 5e V.6 necesita el sistema D&D 5e.",
+      "NoInspiration": "JJK 5e: {name} no tiene inspiración para usar este mindset.",
+      "GMOnly": "Solo el GM puede hacer eso."
+    },
+    "Settings": {
+      "autoSpendCE": {
+        "Name": "Gasto automático de Energía Maldita",
+        "Hint": "Los rasgos con costo fijo de EM lo descuentan de la reserva y se bloquean si no alcanza. Los costos escalables usan el campo de escalado."
+      },
+      "ceChat": {
+        "Name": "Mensajes de Energía Maldita en el chat",
+        "Hint": "Publica una línea en el chat cada vez que se gasta o recupera EM."
+      },
+      "ceResource": {
+        "Name": "Recurso para la Energía Maldita",
+        "Hint": "Copia la reserva de EM en este recurso del actor para verla como barra del token y editarla ahí.",
+        "None": "No copiar",
+        "Primary": "Recurso primario",
+        "Secondary": "Recurso secundario",
+        "Tertiary": "Recurso terciario"
+      },
+      "autoTokenBar": {
+        "Name": "Mostrar la EM como barra del token",
+        "Hint": "Si un token no tiene segunda barra, la usa para la Energía Maldita."
+      },
+      "blackFlash": {
+        "Name": "Tiradas automáticas de Black Flash",
+        "Hint": "En un crítico cuerpo a cuerpo de un personaje (no Heavenly Restriction) tira un d20 de Black Flash y aplica o apila The Zone."
+      },
+      "blackFlashDamage": {
+        "Name": "Daño triple de Black Flash",
+        "Hint": "Tras un Black Flash, la siguiente tirada de daño crítico usa dados ×3 en vez de ×2."
+      },
+      "zoneAdvantage": {
+        "Name": "The Zone da ventaja",
+        "Hint": "Mientras estás en The Zone las tiradas de ataque tienen ventaja."
+      },
+      "domainTracking": {
+        "Name": "Seguimiento de Expansión de Dominio",
+        "Hint": "Expandir un dominio añade un efecto de 1 minuto; al terminar se aplica Technique Burnout (2 de agotamiento, técnicas bloqueadas)."
+      },
+      "domainSureHit": {
+        "Name": "Avisos de acierto seguro del Dominio",
+        "Hint": "Con tu dominio abierto, los ataques y salvaciones de técnica publican un aviso de acierto seguro en el chat."
+      },
+      "autoExpire": {
+        "Name": "Expirar efectos JJK",
+        "Hint": "Borra The Zone, Dominio y Technique Burnout cuando termina su duración (no se usa si el módulo Times Up está activo)."
+      },
+      "headerButton": {
+        "Name": "Botón JJK en las hojas",
+        "Hint": "Muestra un botón JJK en la cabecera de las hojas de personaje para abrir el panel JJK."
+      },
+      "importMenu": {
+        "Name": "Reimportar contenido JJK 5e",
+        "Label": "Importar / actualizar compendios",
+        "Hint": "Reconstruye los compendios de JJK 5e V.6 con los datos del módulo."
+      },
+      "modifierReminders": {
+        "Name": "Recordatorio de dotes modificadoras",
+        "Hint": "Al usar un rasgo de técnica, muestra en el chat las dotes que tienes que lo modifican."
+      },
+      "checkPrereqs": {
+        "Name": "Comprobar requisitos de dotes",
+        "Hint": "Avisa cuando se añade una dote o rasgo a un actor que no cumple sus requisitos (rasgos, puntuación de EM, nivel, habilidad)."
+      },
+      "pointBuyBudget": {
+        "Name": "Compra de puntos: puntos",
+        "Hint": "Puntos disponibles para la compra de puntos (por defecto 27)."
+      },
+      "pointBuyMin": {
+        "Name": "Compra de puntos: mínimo",
+        "Hint": "Puntuación inicial y mínima de cada característica (por defecto 10)."
+      },
+      "pointBuyMax": {
+        "Name": "Compra de puntos: máximo",
+        "Hint": "Puntuación máxima comprable antes de bonos de raza, trasfondo o clase (por defecto 18)."
+      },
+      "pointBuyDoubleFrom": {
+        "Name": "Compra de puntos: coste doble desde",
+        "Hint": "Las puntuaciones iguales o superiores a este valor cuestan 2 puntos cada una (por defecto 14)."
+      },
+      "asiFeatPicker": {
+        "Name": "Dotes de JJK en la Mejora de característica",
+        "Hint": "Añade a cada paso de Mejora de característica una lista de las dotes de JJK que cumples al subir de nivel."
+      },
+      "animations": {
+        "Name": "Animaciones (Sequencer + JB2A)",
+        "Hint": "Reproduce animaciones para ataques, técnicas, curación y dominios de JJK si Sequencer y JB2A están activos. Los objetos configurados en Automated Animations mantienen su animación."
+      },
+      "animOverrides": {
+        "Name": "Animaciones personalizadas (JSON)",
+        "Hint": "JSON opcional que asigna claves de animación a rutas de Sequencer, p. ej. {\"melee\": \"jb2a.unarmed_strike.physical.02.blue\", \"domain\": \"jb2a.darkness.green\"}."
+      },
+      "sceneTools": {
+        "Name": "Botones JJK en la barra de fichas",
+        "Hint": "Muestra un botón JJK en la barra izquierda de Fichas (Tokens) que abre un menú compacto con todas las macros de JJK."
+      },
+      "levelUpButton": {
+        "Name": "Botón de subir de nivel con la barra de XP llena",
+        "Hint": "Muestra un botón Subir de nivel bajo la barra de experiencia cuando el personaje tiene la XP necesaria. Abre el diálogo normal de subida de nivel."
+      },
+      "enableSummoning": {
+        "Name": "Activar invocación de shikigami",
+        "Hint": "Activa el ajuste Permitir invocaciones del sistema para que los rasgos de Ten Shadows coloquen las fichas de sus shikigami. Si un jugador no tiene permiso para crear fichas, el GM las coloca automáticamente."
+      },
+      "pointBuyCosts": {
+        "Name": "Compra de puntos: tabla de costes",
+        "Hint": "Coste total de cada puntuación, en pares puntuación:coste (por defecto 10:0, 11:1, 12:2, 13:3, 14:5, 15:7, 16:10, 17:13, 18:17)."
+      },
+      "dataLanguage": {
+        "Name": "Idioma de los compendios",
+        "Hint": "Idioma de los objetos y carpetas importados. Los diarios de reglas incluyen siempre el original en inglés y el manual en español. Al cambiarlo se pide reimportar.",
+        "Auto": "Automático (idioma de Foundry)",
+        "En": "Inglés (original)",
+        "Es": "Español"
+      },
+      "sheetStrip": {
+        "Name": "Barra JJK en la hoja de personaje",
+        "Hint": "EM con +/−, grado, votos y botones rápidos arriba de la hoja."
+      },
+      "turnSummary": {
+        "Name": "Resumen de turno",
+        "Hint": "Al empezar tu turno, te susurra tu EM, votos activos y formas activas."
+      },
+      "autoHotbar": {
+        "Name": "Barra JJK automática",
+        "Hint": "Rellena la página JJK de la barra cada vez que se añade un objeto JJK a tu personaje."
+      },
+      "hotbarPage": {
+        "Name": "Página de la barra JJK",
+        "Hint": "Página de la barra (1–5) para técnicas y habilidades de EM."
+      },
+      "diceColors": {
+        "Name": "Dados JJK (Dice So Nice)",
+        "Hint": "Dados morados en técnicas, dorados dentro de un dominio y negro y rojo en un Destello Negro."
+      },
+      "domainZones": {
+        "Name": "Zona y barrera de dominio",
+        "Hint": "Dibuja el dominio en el mapa, lleva PG/CA de la barrera, choques e impacto garantizado solo dentro."
+      }
+    },
+    "Feats": {
+      "ModifiedBy": "Modificado por tus dotes — {name}",
+      "Or": " o ",
+      "CEScore": "puntuación de Energía Maldita {need}+ (tienes {have})",
+      "Level": "nivel {need}",
+      "Skill": "competencia en {skill}",
+      "Missing": "JJK 5e: {name} — requisitos no cumplidos: {list}",
+      "Ability": "{ability} {need}+ (tienes {have})",
+      "BodyPoints": "puntos corporales: {used} usados + {cost} > {budget} disponibles",
+      "BodyCategory": "esta categoría permite {limit} mejoras (modificador de {ability})",
+      "InspirationUsed": "inspiración gastada.",
+      "Refinement": "Refinamiento de dominio {need}+ (tienes {have})",
+      "Breakthroughs": "{need}+ avances (tienes {have})",
+      "Profane": "{need} Puntos Profanos (te quedan {have})"
+    },
+    "Group": {
+      "focus": "Concentrado (Focus)",
+      "fury": "Furia",
+      "reckless": "Temerario"
+    },
+    "PointBuy": {
+      "Title": "Compra de puntos",
+      "Ability": "Característica",
+      "Score": "Puntuación",
+      "Cost": "Coste",
+      "Remaining": "Puntos",
+      "Apply": "Aplicar",
+      "Hint": "Cada puntuación empieza en {min}. Presupuesto: {budget}/{budget} puntos, máximo {max} antes de otros bonos. Coste de cada puntuación:",
+      "Order": "Úsalo antes de añadir raza, clase o trasfondo para que sus bonos se sumen encima.",
+      "Over": "Gastaste {spent} puntos; el límite es {budget}.",
+      "Done": "{name}: características asignadas (sobran {left} puntos)."
+    },
+    "ASI": {
+      "Legend": "Dotes de JJK 5e",
+      "Hint": "{n} dotes de JJK cumplen tus requisitos. Elige una en lugar del aumento de característica.",
+      "Take": "Tomar dote"
+    },
+    "SceneTools": {
+      "Panel": "JJK: Abrir panel",
+      "Spend": "JJK: Gastar Energía Maldita",
+      "Regain": "JJK: Recuperar Energía Maldita",
+      "Technique": "JJK: Elegir Técnica Innata",
+      "CEAbility": "JJK: Elegir característica de EM",
+      "NegEmotion": "JJK: Recuperación por emoción negativa",
+      "ShortRest": "JJK: Recuperar EM en descanso corto",
+      "MaxOutput": "JJK: Máxima potencia",
+      "Limb": "JJK: Tirar daño de extremidad",
+      "PointBuy": "JJK: Compra de puntos",
+      "Import": "JJK: Importar / actualizar compendios",
+      "Menu": "Menú JJK 5e",
+      "LevelUp": "JJK: Subir de nivel",
+      "Vows": "Votos vinculantes",
+      "Career": "Carrera del hechicero",
+      "Mission": "Generar misión",
+      "Hotbar": "Rellenar barra JJK",
+      "Domain": "Dominio (barrera)",
+      "Curse": "Generar maldición",
+      "RCT": "Tirada de despertar de TMI (d100)",
+      "Breakthrough": "Añadir avances (GM)"
+    },
+    "Spell": {
+      "Method": "Técnica Innata",
+      "School": "Técnica Maldita"
+    },
+    "FeatType": {
+      "Physical": "JJK: Físicas",
+      "CursedEnergy": "JJK: Energía Maldita",
+      "Barrier": "JJK: Barrera",
+      "RCT": "JJK: Técnica Maldita Inversa",
+      "Skill": "JJK: Habilidad",
+      "Technique": "JJK: Técnica Innata",
+      "Pact": "JJK: Pacto Celestial",
+      "Boon": "JJK: Don de Grado Especial",
+      "Trait": "JJK: Rasgo Especial",
+      "CursedTechnique": "JJK: Técnica Maldita (C&C)"
+    },
+    "LevelUp": {
+      "Button": "¡Subir de nivel!",
+      "Title": "Subir de nivel",
+      "Which": "¿Qué clase sube de nivel?",
+      "NoClass": "Este personaje aún no tiene clase.",
+      "Max": "Ya está en nivel 20."
+    },
+    "Vow": {
+      "Prefix": "Voto",
+      "Title": "Votos vinculantes",
+      "New": "Nuevo voto vinculante",
+      "Make": "Hacer voto",
+      "Preset": "Plantilla",
+      "Name": "Nombre",
+      "FromPreset": "(de la plantilla)",
+      "Kind": "Tipo",
+      "Personal": "Personal",
+      "Mutual": "Múltiple",
+      "Partner": "Otra parte",
+      "Restriction": "Restricción",
+      "Benefit": "Beneficio",
+      "Mechanics": "Modificadores automáticos",
+      "MechanicsHint": "Opcional. Números positivos para beneficios y negativos para restricciones. Se convierten en un efecto activo.",
+      "Lock": "No puede suspenderse hasta",
+      "LockNone": "Se puede suspender cuando quieras",
+      "LockLongRest": "Un descanso largo",
+      "LockWeek": "Que el GM lo desbloquee (1 semana laboral)",
+      "EndsOn": "Termina",
+      "EndsNever": "Al suspenderlo o romperlo",
+      "EndsCombat": "Al terminar el combate",
+      "OverLimit": "{n} votos activos superan tu límite ({max} = bonificador por competencia). Está permitido, pero avisa al GM.",
+      "PartnerManual": "{name} debe registrar el voto en su propia hoja (no controlas a ese personaje).",
+      "Made": "Voto vinculante hecho",
+      "Locked": "Este voto aún no puede suspenderse.",
+      "Break": "Romper voto",
+      "BreakConfirm": "¿Romper <strong>{name}</strong>? Pierdes sus beneficios y puedes sufrir el castigo.",
+      "Broken": "Voto vinculante roto",
+      "LostBenefits": "Se pierden todos los beneficios del voto.",
+      "PersonalBreak": "Voto personal: el GM decide cualquier otra consecuencia.",
+      "Punishment": "Castigo por romper un voto",
+      "PunishmentHint": "Elige: 5 niveles de agotamiento durante 10 días o tirar en la tabla de desgracias.",
+      "Exhaustion": "5 niveles de agotamiento",
+      "RollMisfortune": "Tirar desgracia (d6)",
+      "ExhaustionApplied": "Agotamiento a {n} durante 10 días.",
+      "Misfortune": "Desgracia del voto",
+      "MisfortuneRoll": "Desgracia",
+      "Delete": "Borrar",
+      "DeleteConfirm": "¿Borrar este voto de la lista (sin consecuencias en el juego)?",
+      "CombatEnded": "Fin del combate: terminan {names}.",
+      "Count": "Votos activos: <strong>{n}</strong> / {max}",
+      "None": "Aún no hay votos.",
+      "StateBroken": "Roto",
+      "StateActive": "Activo",
+      "StateInactive": "Suspendido",
+      "Suspend": "Suspender",
+      "Activate": "Activar",
+      "UnlockAll": "Desbloquear todos"
+    },
+    "Career": {
+      "Title": "Carrera del hechicero",
+      "Grade": {
+        "4": "Grado 4",
+        "3": "Grado 3",
+        "2": "Grado 2",
+        "1": "Grado 1",
+        "special": "Grado especial"
+      },
+      "Tab": {
+        "grade": "Grado",
+        "missions": "Misiones",
+        "rep": "Reputación"
+      },
+      "StepRecs": "Recomendación de dos hechiceros de grado 1 ({n}/2)",
+      "StepSemi": "Nombrado semi-{grade}",
+      "StepTrials": "Superar 3 misiones con un hechicero de grado 1 ({n}/3)",
+      "SemiOf": "Semi-{grade}",
+      "Next": "Siguiente: {grade}",
+      "DirectPromotion": "El GM puede ascender directamente.",
+      "Recs": "Recomendaciones",
+      "RecRule": "Los profesores no pueden recomendar a sus alumnos.",
+      "AddRec": "Añadir recomendación",
+      "RecHint": "Nombre del hechicero de grado 1 que recomienda:",
+      "MakeSemi": "Nombrar semi-grado",
+      "Promote": "Ascender",
+      "History": "Historial",
+      "LogRec": "Recomendado por {name}",
+      "Promoted": "{name} asciende a {grade}",
+      "Demoted": "{name} desciende a {grade}",
+      "LogMission": "Misión asignada: {title}",
+      "LogDone": "Misión completada: {title}",
+      "LogFailed": "Misión fallida: {title}"
+    },
+    "Mission": {
+      "Generate": "Generar misión",
+      "ForActor": "Misión para este hechicero",
+      "Grade": "Grado de la misión",
+      "Assign": "Asignar a",
+      "Trial": "Prueba de ascenso",
+      "Roll": "Generar",
+      "Title": "Misión",
+      "Place": "Lugar",
+      "Curse": "Maldición",
+      "Victims": "Víctimas",
+      "Twist": "Complicación",
+      "GMOnly": "solo GM",
+      "Reward": "Pago",
+      "Team": "Equipo",
+      "Folder": "Misiones JJK",
+      "None": "Sin misiones.",
+      "Pass": "Completada",
+      "Fail": "Fallida",
+      "Status": {
+        "active": "Activa",
+        "done": "Completada",
+        "failed": "Fallida"
+      },
+      "MakeCurse": "Crear la maldición (PNJ)"
+    },
+    "Faction": {
+      "higherUps": "Altos mandos",
+      "tokyo": "Instituto de Jujutsu de Tokio",
+      "kyoto": "Instituto de Jujutsu de Kioto",
+      "gojo": "Clan Gojo",
+      "zenin": "Clan Zenin",
+      "kamo": "Clan Kamo",
+      "freelance": "Independientes y mercado negro",
+      "curseUsers": "Usuarios de maldiciones"
+    },
+    "Rep": {
+      "Hostile": "Hostil",
+      "Distrust": "Desconfiado",
+      "Wary": "Receloso",
+      "Neutral": "Neutral",
+      "Known": "Conocido",
+      "Respected": "Respetado",
+      "Allied": "Aliado"
+    },
+    "Hotbar": {
+      "Fill": "Rellenar barra JJK",
+      "Filled": "{n} habilidades JJK colocadas en la página {page} de la barra.",
+      "NoPermission": "No se pudieron crear macros. Pide al GM el permiso «Crear macros de script»."
+    },
+    "Curse": {
+      "Generate": "Generar maldición",
+      "Kind": "Tipo de maldición",
+      "Place": "Colocar un token oculto a la vista",
+      "Folder": "Maldiciones JJK",
+      "Created": "Maldición creada: {name} (VD {cr})."
+    },
+    "Keys": {
+      "menu": "Abrir/cerrar menú JJK",
+      "panel": "Abrir panel JJK",
+      "spend1": "Gastar 1 EM",
+      "regain1": "Recuperar 1 EM",
+      "spend": "Gastar EM (cantidad)",
+      "vows": "Votos vinculantes",
+      "career": "Carrera del hechicero",
+      "domain": "Ventana del dominio",
+      "technique": "Elegir técnica innata",
+      "hotbar": "Rellenar barra JJK",
+      "mission": "Generar misión (GM)",
+      "curse": "Generar maldición (GM)",
+      "HudHint": "JJK: clic = panel · clic derecho = −1 EM · Mayús + clic derecho = +1 EM"
+    },
+    "Breakthrough": {
+      "Name": "Avances (Breakthroughs)",
+      "Gained": "{name} logra un avance (total {total}).",
+      "RCTRoll": "Despertar de la Técnica Maldita Inversa (90+)",
+      "RCTYes": "¡Técnica Maldita Inversa despertada! Añade el rasgo de TMI.",
+      "RCTNo": "Esta vez no.",
+      "RCT": "Técnica Maldita Inversa",
+      "Prompt": "Avances a añadir (negativo para quitar):",
+      "Manual": "GM"
+    },
+    "Reversal": {
+      "Added": "Reversión de técnica maldita: se añade {names}."
+    }
+  }
+}

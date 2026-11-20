@@ -1,0 +1,29 @@
+{
+ "_id": "qabuXVCcD2XEsf00",
+ "name": "Extra Attack",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>Once you get to 5th level, you can attack twice, instead of once, whenever you take the Attack action on your turn.</p>\n<p>The number of attacks increases to three when you reach 11th level in this class, to four when you reach 17th level in this class, and to five when you reach 20th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Warrior 5"
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "7ecbupybBLUFyYzw",
+ "_key": "!items!qabuXVCcD2XEsf00"
+}

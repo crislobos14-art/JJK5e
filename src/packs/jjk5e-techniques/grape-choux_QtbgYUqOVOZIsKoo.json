@@ -1,0 +1,32 @@
+{
+ "_id": "QtbgYUqOVOZIsKoo",
+ "name": "Grape Choux",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/cursed-cannon.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Cannon — Innate Technique (3rd level)</em></p><p>At 3rd level, your versatility with your blasts has increased. For 1 additional cursed energy, you can split your <em>Granite Blast</em> into different blasts, with damage dice spread evenly between them. Only two of the damage rolls can add your Cursed Energy modifier to the damage roll.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Cannon 3"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Cursed Cannon",
+   "level": 3
+  }
+ },
+ "folder": "jTg0Bf76dJeyMkqJ",
+ "_key": "!items!QtbgYUqOVOZIsKoo"
+}

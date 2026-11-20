@@ -1,0 +1,71 @@
+{
+ "_id": "YamGIMObLzQygHu7",
+ "name": "Maximum: Soul Punch",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/divergent-fist.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Chosen by the Sparks</em></p>\n<p>You have mastered your ability to target the soul. Before you make an unarmed strike, you can choose to spend 5 CE to cause any unarmed strikes you make on your turn to target the soul of a creature you attack. These attacks’ damage reduces the target’s maximum hit point (this does not include additional damage like Cursed Strike). This technique is a <em>Reduced Output Effect</em> that gives 1 level of Reduced Output when you deal damage to them with <em>Soul Punch</em>. This can cause a number of levels of Reduced Output up to your Cursed Energy modifier per target and no more. These levels of Reduced Output last until the target takes a short or long rest.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Chosen by the Sparks",
+  "activities": {
+   "qQMwHAu6G1iOYmvT": {
+    "_id": "qQMwHAu6G1iOYmvT",
+    "type": "utility",
+    "name": "Action (5 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "qQMwHAu6G1iOYmvT": 5
+   },
+   "prereq": {
+    "features": [
+     [
+      "Chosen by the Sparks"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "wZIFQphpPzNuXv3W",
+ "sort": 300,
+ "_key": "!items!YamGIMObLzQygHu7"
+}

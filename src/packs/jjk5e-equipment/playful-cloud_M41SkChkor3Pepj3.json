@@ -1,0 +1,74 @@
+{
+ "_id": "M41SkChkor3Pepj3",
+ "name": "Playful Cloud",
+ "type": "weapon",
+ "img": "icons/svg/sword.svg",
+ "folder": "OqdCuXcZ0pFqRc3h",
+ "system": {
+  "description": {
+   "value": "<p>Weapon(Three Segment Staff), Special Grade</p>\n<p>You have a +4 bonus to attack and damage rolls made with this cursed tool. In addition while wielding this weapon you gain a +1 bonus to AC and on a hit you gain a bonus to damage equal to 3 times your (Strength modifier + 4).</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "martialM",
+   "baseItem": ""
+  },
+  "damage": {
+   "base": {
+    "number": 3,
+    "denomination": 4,
+    "types": [
+     "bludgeoning"
+    ]
+   }
+  },
+  "range": {
+   "value": 5,
+   "long": null,
+   "units": "ft",
+   "reach": 5
+  },
+  "properties": [
+   "fin",
+   "two",
+   "mgc"
+  ],
+  "proficient": null,
+  "quantity": 1,
+  "activities": {
+   "PVpYXrDSqaR6r8ON": {
+    "_id": "PVpYXrDSqaR6r8ON",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "melee",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   }
+  },
+  "magicalBonus": 4,
+  "rarity": "legendary"
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "Special Grade"
+  }
+ },
+ "_key": "!items!M41SkChkor3Pepj3"
+}

@@ -1,0 +1,124 @@
+{
+ "_id": "hgum5VAcDalK1FTK",
+ "name": "Domain Expansion: Requiem of Retrograde",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/retrograde-domain.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Retrograde — Innate Technique (18th level)</em></p><p><em>Domain Expansion (rules): full-turn action, 20 CE unless stated, 175-ft radius, 1 minute. When the domain ends you suffer <strong>Technique Burnout</strong> (applied automatically by the module).</em></p><p>Finally at 18th level, you have learned to expand your domain. At initiative 20, choose one creature within your domain. The first thing that creature does on their turn (Eg. using movement, taking an action, etc) is automatically reversed back to their original point and the movement or action is wasted. At initiative 20, you can target a different creature by switching the effects of your domain to that creature. <br />\n Additionally, all creatures of your choice are under the base effects of <em>Reversion</em>. When you use <em>Reversion</em> on your own attack rolls, they are guaranteed to hit.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "Z20EDNbUB9Sz5WZN": {
+    "_id": "Z20EDNbUB9Sz5WZN",
+    "type": "utility",
+    "name": "Expand Domain (20 CE)",
+    "sort": -100000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Full turn: Action + Bonus Action + Movement",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "175",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": true
+     },
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 9,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "special",
+   "value": null,
+   "condition": "Full turn: Action + Bonus Action + Movement",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "radius",
+    "size": "175",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": true
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Retrograde",
+   "level": 18,
+   "domain": true,
+   "ceCosts": {
+    "Z20EDNbUB9Sz5WZN": 20
+   },
+   "domainActivity": "Z20EDNbUB9Sz5WZN",
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "6YaSgqVRe4IqL8er",
+ "_key": "!items!hgum5VAcDalK1FTK"
+}

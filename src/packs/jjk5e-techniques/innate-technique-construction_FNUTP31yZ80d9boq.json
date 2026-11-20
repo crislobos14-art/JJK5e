@@ -1,0 +1,118 @@
+{
+ "_id": "FNUTP31yZ80d9boq",
+ "name": "Innate Technique: Construction",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/construction.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>Construction, as the name implies, allows the user to conjure objects from nothing.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.uJBhnTudE8G6T5WK]{Construct}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.3SKl5qzgphoe5in3]{Cursed Creation}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.O4cN7o6CDngD9xOo]{Liquid Metal}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.BQMHIhgw7gdse8gy]{Insectoid Armor}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.Z4nVb185TCkskJ4R]{Domain Expansion: Threefold Affliction}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "lyX9hAdPad4aQyXI": {
+    "_id": "lyX9hAdPad4aQyXI",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Construction (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.uJBhnTudE8G6T5WK",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "ihuW7hLuXyALwt6x": {
+    "_id": "ihuW7hLuXyALwt6x",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Construction (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.3SKl5qzgphoe5in3",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "ieb2xcdlRaU5pryo": {
+    "_id": "ieb2xcdlRaU5pryo",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Construction (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.O4cN7o6CDngD9xOo",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "238bTbfRiDs2Pgoe": {
+    "_id": "238bTbfRiDs2Pgoe",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Construction (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.BQMHIhgw7gdse8gy",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "jumMMMuyVBJjmjPH": {
+    "_id": "jumMMMuyVBJjmjPH",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Construction (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.Z4nVb185TCkskJ4R",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Construction"
+  }
+ },
+ "_key": "!items!FNUTP31yZ80d9boq"
+}

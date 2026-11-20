@@ -1,0 +1,90 @@
+{
+ "_id": "zpBehrM0ojvM4ZHJ",
+ "name": "Ascetic Void",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/dragon-vein.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Dragon Vein — Cursed Technique Reversal</em></p><p>You have learned the reversal of your technique. Instead of reinforcing your body with the power of the earth, you gain detachment and remove earthly desires. As a bonus action for 6 CE, you gain a flying speed equal to twice your walking speed for 2 minutes and can hover. While you are flying and not touching the ground, you regain hit points equal to twice your Cursed Energy modifier at the start of your turn while you have at least 1 hit point.</p>\n<p>At 11th level, when you are subjected to an effect that allows you to make a Dexterity saving throw to take only half damage while you are flying, you instead take no damage if you succeed on the saving throw, and only half damage if you fail.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Dragon Vein",
+  "activities": {
+   "wwxlvDEmsEJ9EfF1": {
+    "_id": "wwxlvDEmsEJ9EfF1",
+    "type": "save",
+    "name": "Bonus Action (6 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "2",
+     "units": "minute",
+     "concentration": false
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "wwxlvDEmsEJ9EfF1": 6
+   },
+   "technique": "Dragon Vein",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Dragon Vein"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!zpBehrM0ojvM4ZHJ"
+}

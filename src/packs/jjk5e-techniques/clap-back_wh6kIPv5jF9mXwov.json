@@ -1,0 +1,95 @@
+{
+ "_id": "wh6kIPv5jF9mXwov",
+ "name": "Clap Back",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/boogie-woogie.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Boogie Woogie — Innate Technique (6th level)</em></p><p>Beginning at 6th level, “The act of applause is an acclamation of the soul”, you have gained a deeper understanding of your technique and how it can be used, your <em>Boogie</em> gains the following benefits:</p>\n<ul>\n<li>\n<p>Your range increases to 45 feet.  </p>\n</li>\n<li>\n<p>The Cursed Energy cost is reduced by 1 Cursed Energy for all Boogie Woogie techniques (min cost of 1).  </p>\n</li>\n<li>\n<p>You can use <em>Boogie</em> once per turn as a free action for 1 cursed energy.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "ouA0eQeNTPbAg5Zb": {
+    "_id": "ouA0eQeNTPbAg5Zb",
+    "type": "utility",
+    "name": "Special (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "special",
+   "value": null,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "ouA0eQeNTPbAg5Zb": 1
+   },
+   "technique": "Boogie Woogie",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "JUFxrHmgG8mOdlrV",
+ "_key": "!items!wh6kIPv5jF9mXwov"
+}

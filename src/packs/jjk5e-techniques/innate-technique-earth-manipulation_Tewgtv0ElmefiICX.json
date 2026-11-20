@@ -1,0 +1,118 @@
+{
+ "_id": "Tewgtv0ElmefiICX",
+ "name": "Innate Technique: Earth Manipulation",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/earth-manipulation.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>A simple yet powerful technique to mold rock as you please.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.AQpmy5BZluKFUBx2]{Excavation}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.CZ2e6aKrHci9L2Qq]{Sculpted Earth}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.G5JohGkx3AABfoyH]{Wall of Stone}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.pTdglNHJKLO2Srb0]{Stone Arms}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.UrKH3JnnRbRhWS8Q]{Domain Expansion: Trichiliocosm}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "ME9LdxbGnIVjfSl1": {
+    "_id": "ME9LdxbGnIVjfSl1",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Earth Manipulation (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.AQpmy5BZluKFUBx2",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "t3myt3zyZ751Rr38": {
+    "_id": "t3myt3zyZ751Rr38",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Earth Manipulation (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.CZ2e6aKrHci9L2Qq",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "5PCvTp2kfn1kzqlT": {
+    "_id": "5PCvTp2kfn1kzqlT",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Earth Manipulation (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.G5JohGkx3AABfoyH",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "uqHCdvUM7pD3uIM2": {
+    "_id": "uqHCdvUM7pD3uIM2",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Earth Manipulation (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.pTdglNHJKLO2Srb0",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "AKy0DHW767KW8p1z": {
+    "_id": "AKy0DHW767KW8p1z",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Earth Manipulation (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.UrKH3JnnRbRhWS8Q",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Earth Manipulation"
+  }
+ },
+ "_key": "!items!Tewgtv0ElmefiICX"
+}

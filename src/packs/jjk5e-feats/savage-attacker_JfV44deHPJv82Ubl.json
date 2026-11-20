@@ -1,0 +1,48 @@
+{
+ "_id": "JfV44deHPJv82Ubl",
+ "name": "Savage Attacker",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: N/A</em></p>\n<p>Once per turn when you roll damage for a melee weapon attack, you can reroll the weapon's damage dice and use either total.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkPhysical"
+  },
+  "requirements": "N/A",
+  "activities": {
+   "2cUDqkMm4IqTNfDG": {
+    "_id": "2cUDqkMm4IqTNfDG",
+    "type": "utility",
+    "name": "Reroll weapon damage (once per turn)",
+    "activation": {
+     "type": "special",
+     "condition": "Melee weapon damage roll"
+    },
+    "consumption": {
+     "targets": []
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "cxPIGjcxqJdZTMQ5",
+ "sort": 1900,
+ "_key": "!items!JfV44deHPJv82Ubl"
+}

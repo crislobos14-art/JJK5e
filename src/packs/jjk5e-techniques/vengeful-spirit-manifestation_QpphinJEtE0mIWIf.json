@@ -1,0 +1,115 @@
+{
+ "_id": "QpphinJEtE0mIWIf",
+ "name": "Vengeful Spirit Manifestation",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/vengeful-spirit-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Vengeful Spirit Manipulation — Innate Technique (3rd level)</em></p><p>At 3rd level, your life is very stressful, being a sorcerer is filled with danger and trouble. When times of danger come, your Vengeful Spirit may forcefully manifest. When you take damage above your level + your Cursed Energy modifier, you must make a DC 20 Wisdom saving throw. On a success, you can handle the strain and don't let your spirit out. On a failure, your Vengeful Spirit manifests itself to protect you, going berserk (attacking the nearest creature to you). It acts on your turn, is charmed by you and cannot move more more than 200 feet from you. Once per round, as a free action you can make a DC 20 Persuasion check. On a success it will stop attacking and unmanifest. On a failure, it will keep attacking until there are no creatures within 200 feet. They will always focus on the last thing to damage you and then the closest creature to you. If killed, it respawns after finishing a long rest.<br />\n At 6th level, the DC for the Persuasion check becomes 15 and your Vengeful Spirit stays manifested for a number of rounds equal to your Cursed Energy modifier under your control before going berserk.<br />\nAt 11th level, you have gained more control over your vengeful cursed spirit. You can now manifest your spirit as a bonus action for 1 minute, now obeying your verbal orders. You can summon the spirit a number of times equal to half your Cursed Energy modifier (rounded up), regaining expended uses on a long rest.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "gmSJPcsVfWBCCoiy": {
+    "_id": "gmSJPcsVfWBCCoiy",
+    "type": "utility",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1"
+      }
+     ],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "200",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "1",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
+    }
+   ]
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "special",
+   "value": null,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "200",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Vengeful Spirit Manipulation",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "fx5WSQ1mGtKNDLmm",
+ "_key": "!items!QpphinJEtE0mIWIf"
+}

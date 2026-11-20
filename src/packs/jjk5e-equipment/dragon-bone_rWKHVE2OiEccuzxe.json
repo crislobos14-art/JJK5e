@@ -1,0 +1,73 @@
+{
+ "_id": "rWKHVE2OiEccuzxe",
+ "name": "Dragon Bone",
+ "type": "weapon",
+ "img": "icons/svg/sword.svg",
+ "folder": "5URJFab0BietcWnO",
+ "system": {
+  "description": {
+   "value": "<p>Weapon(Scimitar), Grade 1</p>\n<p>Once per turn, you can gain a bonus to an attack or damage roll made with this cursed tool equal to 1/3 of the slashing damage dealt by your last attack (rounded down).</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "martialM",
+   "baseItem": "scimitar"
+  },
+  "damage": {
+   "base": {
+    "number": 1,
+    "denomination": 6,
+    "types": [
+     "slashing"
+    ]
+   }
+  },
+  "range": {
+   "value": 5,
+   "long": null,
+   "units": "ft",
+   "reach": 5
+  },
+  "properties": [
+   "fin",
+   "lgt",
+   "mgc"
+  ],
+  "proficient": null,
+  "quantity": 1,
+  "activities": {
+   "7az2cMeja9OXqWaR": {
+    "_id": "7az2cMeja9OXqWaR",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "melee",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   }
+  },
+  "rarity": "veryRare"
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "1st Grade"
+  }
+ },
+ "_key": "!items!rWKHVE2OiEccuzxe"
+}

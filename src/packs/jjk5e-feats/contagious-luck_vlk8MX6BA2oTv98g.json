@@ -1,0 +1,42 @@
+{
+ "_id": "vlk8MX6BA2oTv98g",
+ "name": "Contagious Luck",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/pachinko-fever.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Great Luck</em></p>\n<p>Your luck seems to spread to those around you. You can use <em>Great Luck</em> on another creature of your choice instead of yourself.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Great Luck",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Great Luck"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "UYi4Xs2gTgIgFdZ7",
+ "sort": 100,
+ "_key": "!items!vlk8MX6BA2oTv98g"
+}

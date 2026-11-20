@@ -1,0 +1,222 @@
+{
+ "_id": "x65tUSq8GjFrdeNz",
+ "name": "Divine Dogs",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/ten-shadows.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Ten Shadows — Innate Technique (1st level)</em></p><blockquote><p>You have the Zenin Clan’s praised technique, said to rival the six eyes.</p></blockquote><p>Beginning at 1st level, you have the prized technique of the Zenin clan, the ten shadows earned to summon Shikigami from the shadows. As an action for 1 Cursed Energy, you can summon up to 2 Divine Dogs(1 CE per dog) within 10 ft of you. Your Divine Dogs last for 1 hour, until they are reduced to 0 hit points or you dismiss any summoned shikigami as a bonus action while within line of sight. As a reaction to seeing your shikigami reduced to 0 hit points, you can unsummon them and cannot summon them again until you finish a long rest. <br />\n Your shikigami cannot use actions on their own. You must spend a bonus action to command your shikigami or can spend an action to order them to do something more specific for longer, such as protect that creature, grab that, defend that area, etc. The number of Shikigami you can control at once is equal to half your level(rounded up).  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "mcfefVYZhnhS45Sw": {
+    "_id": "mcfefVYZhnhS45Sw",
+    "type": "summon",
+    "name": "Summon 1 Divine Dog (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "value": "1",
+     "units": "hour",
+     "concentration": false,
+     "override": true
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "override": true,
+     "prompt": false
+    },
+    "bonuses": {
+     "ac": "@prof",
+     "hp": "2 * @prof",
+     "attackDamage": "@prof",
+     "hd": "",
+     "saveDamage": "",
+     "healing": ""
+    },
+    "creatureSizes": [],
+    "creatureTypes": [],
+    "match": {
+     "proficiency": true,
+     "disposition": true,
+     "attacks": false,
+     "saves": false,
+     "ability": ""
+    },
+    "profiles": [
+     {
+      "_id": "SHvFWM3BkYG0PUGD",
+      "count": "1",
+      "cr": "",
+      "level": {
+       "min": null,
+       "max": null
+      },
+      "name": "Divine Dogs",
+      "types": [],
+      "uuid": "Actor.QXcGjJ2SaTKZxjJ9"
+     }
+    ],
+    "summon": {
+     "mode": "",
+     "prompt": true
+    },
+    "tempHP": ""
+   },
+   "ajQ0RdpMMz5EBr4j": {
+    "_id": "ajQ0RdpMMz5EBr4j",
+    "type": "summon",
+    "name": "Summon 2 Divine Dogs (2 CE)",
+    "sort": 1000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "value": "1",
+     "units": "hour",
+     "concentration": false,
+     "override": true
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "override": true,
+     "prompt": false
+    },
+    "bonuses": {
+     "ac": "@prof",
+     "hp": "2 * @prof",
+     "attackDamage": "@prof",
+     "hd": "",
+     "saveDamage": "",
+     "healing": ""
+    },
+    "creatureSizes": [],
+    "creatureTypes": [],
+    "match": {
+     "proficiency": true,
+     "disposition": true,
+     "attacks": false,
+     "saves": false,
+     "ability": ""
+    },
+    "profiles": [
+     {
+      "_id": "YVdeVZbJEMd4n15H",
+      "count": "2",
+      "cr": "",
+      "level": {
+       "min": null,
+       "max": null
+      },
+      "name": "Divine Dogs",
+      "types": [],
+      "uuid": "Actor.QXcGjJ2SaTKZxjJ9"
+     }
+    ],
+    "summon": {
+     "mode": "",
+     "prompt": true
+    },
+    "tempHP": ""
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "hour",
+   "override": true
+  },
+  "range": {
+   "value": "30",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "override": true,
+   "prompt": false
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "mcfefVYZhnhS45Sw": 1,
+    "ajQ0RdpMMz5EBr4j": 2
+   },
+   "technique": "Ten Shadows",
+   "level": 1,
+   "summons": {
+    "mcfefVYZhnhS45Sw": {
+     "name": "Divine Dogs",
+     "count": 1
+    },
+    "ajQ0RdpMMz5EBr4j": {
+     "name": "Divine Dogs",
+     "count": 2
+    }
+   },
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "gEGcEQE7nJFCsor6",
+ "_key": "!items!x65tUSq8GjFrdeNz"
+}

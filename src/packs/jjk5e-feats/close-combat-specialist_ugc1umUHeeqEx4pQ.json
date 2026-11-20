@@ -1,0 +1,74 @@
+{
+ "_id": "ugc1umUHeeqEx4pQ",
+ "name": "Close Combat Specialist",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/dark-claw.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Claw</em></p>\n<p>When you hit a creature with a claw attack while within 5 ft, you can attempt to grapple the creature as a bonus action. While grappling a creature, you can cause the creature to take your claw damage at the start of their turn.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Claw",
+  "activities": {
+   "vAxZSiVj1XXHJslT": {
+    "_id": "vAxZSiVj1XXHJslT",
+    "type": "utility",
+    "name": "Bonus Action",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "5",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Claw"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "zt8ujvT8aBbmfDqZ",
+ "sort": 100,
+ "_key": "!items!ugc1umUHeeqEx4pQ"
+}

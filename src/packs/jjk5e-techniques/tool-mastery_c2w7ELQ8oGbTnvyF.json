@@ -1,0 +1,92 @@
+{
+ "_id": "c2w7ELQ8oGbTnvyF",
+ "name": "Tool Mastery",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/tool-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Tool Manipulation — Innate Technique (11th level)</em></p><p>At 11th level, you have mastered your respective style, granting you the following:</p>\n<p><strong>Floating Tool Mastery.</strong> You can command two <em>Floating Tools</em> using your bonus action or one <em>Floating Tool</em> as a free action on your turn. You and other creatures also gain advantage on Dexterity saves while riding a <em>Floating Tool</em>.</p>\n<p><strong>Combat Tool Mastery.</strong> Your mastery over imbued tools allows you to manipulate the flow of combat with exceptional precision. When you use <em>Combat Tool Improvement</em>, the AC bonus it grants increases by 1, and the damage reduction provided increases by one additional die. In addition, you gain one extra reaction each round that can only be used to activate <em>Combat Tool Improvement</em>.</p>\n<p>When your or a creature you can see makes an attack using your imbued tool, you can use your reaction to grant that attack roll advantage.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "CUFleHZOj9zv72Zf": {
+    "_id": "CUFleHZOj9zv72Zf",
+    "type": "utility",
+    "name": "Bonus Action",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Tool Manipulation",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "7tmhlm7tDflRZlKD",
+ "_key": "!items!c2w7ELQ8oGbTnvyF"
+}

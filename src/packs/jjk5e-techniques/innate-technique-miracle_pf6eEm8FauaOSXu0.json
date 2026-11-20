@@ -1,0 +1,122 @@
+{
+ "_id": "pf6eEm8FauaOSXu0",
+ "name": "Innate Technique: Miracle",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/miracle.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.PzwUt0MCons6qKtx]{Blind Luck}, @UUID[Compendium.jjk5e.jjk5e-techniques.Item.MhQFFoxzRxh2jJIo]{Little Miracles}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.IGdHEkIEb2j1ZSh2]{Miraculous Outcome}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.beb0CrtOoamyYOE2]{Deadly Miracle}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.XBOD9iWsaQ3y8Fdt]{Fated for Fortune}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.VRBpLzLuP2FWrulp]{Domain Expansion: Luck of the Draw}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "paRRAL608UChdkG9": {
+    "_id": "paRRAL608UChdkG9",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Miracle (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.PzwUt0MCons6qKtx",
+       "optional": false
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.MhQFFoxzRxh2jJIo",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "IMT2T8YWWch5Gmgk": {
+    "_id": "IMT2T8YWWch5Gmgk",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Miracle (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.IGdHEkIEb2j1ZSh2",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "SCaLPo7D8LfgrBL3": {
+    "_id": "SCaLPo7D8LfgrBL3",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Miracle (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.beb0CrtOoamyYOE2",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "v2dY2dGLsJppvLcr": {
+    "_id": "v2dY2dGLsJppvLcr",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Miracle (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.XBOD9iWsaQ3y8Fdt",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "NQJdhk0WEqM701o6": {
+    "_id": "NQJdhk0WEqM701o6",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Miracle (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.VRBpLzLuP2FWrulp",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Miracle"
+  }
+ },
+ "_key": "!items!pf6eEm8FauaOSXu0"
+}

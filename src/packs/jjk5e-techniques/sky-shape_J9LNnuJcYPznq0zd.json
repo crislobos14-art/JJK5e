@@ -1,0 +1,108 @@
+{
+ "_id": "J9LNnuJcYPznq0zd",
+ "name": "Sky Shape",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/sky-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Sky Manipulation — Innate Technique (1st level)</em></p><blockquote><p>A great technique allowing you to grab space and wield it to your command.</p></blockquote><p>Beginning at 1st level, your innate technique manifests, making you able to manipulate the sky around you. As a reaction to an attack roll, you can spend 1 Cursed Energy to add +4 to your AC by distorting the sky until the start of your next turn. If it makes a ranged attack miss, you can make a cursed energy attack roll against the attacker, redirecting the attack and dealing the attack's damage and effects on a hit. If it makes a melee weapon attack miss, it will render the limb used in the attack stuck and unusable until the beginning of the creature's next turn. If you have taken the dodge action, you can use this reaction on allies within 5 feet.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "65BKEHCfUk8GGVuH": {
+    "_id": "65BKEHCfUk8GGVuH",
+    "type": "attack",
+    "name": "Reaction (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": []
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "reaction",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "65BKEHCfUk8GGVuH": 1
+   },
+   "technique": "Sky Manipulation",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "i7KDxPjzj0GuzdPl",
+ "_key": "!items!J9LNnuJcYPznq0zd"
+}

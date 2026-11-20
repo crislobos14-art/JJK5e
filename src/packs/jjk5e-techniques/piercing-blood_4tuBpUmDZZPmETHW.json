@@ -1,0 +1,202 @@
+{
+ "_id": "4tuBpUmDZZPmETHW",
+ "name": "Piercing Blood",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/blood-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Blood Manipulation — Innate Technique (11th level)</em></p><p>Beginning at 11th level, you can compress your blood into a deadly supersonic beam. As an action for 8 CE and 5 HP, you unleash a 100ft line of blood. Creatures in range must make a Dexterity save taking 10d8 piercing on a failure. <br />\n If used with <em>Convergence</em>, you can continue shooting the beam for an additional round. Any creature that enters the lingering Piercing Blood must make the saving throw. As an action you can swing the line, making it into a 130 feet cone forcing an additional Dexterity save and the technique ends.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "4LA53X4gsUOzmo1s": {
+    "_id": "4LA53X4gsUOzmo1s",
+    "type": "save",
+    "name": "Action (8 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "line",
+      "size": "100",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": [
+      {
+       "number": 10,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "piercing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   },
+   "VwHHoCDnTNKGLfKH": {
+    "_id": "VwHHoCDnTNKGLfKH",
+    "type": "save",
+    "name": "Action",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "cone",
+      "size": "130",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "line",
+    "size": "100",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": false
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "4LA53X4gsUOzmo1s": 8
+   },
+   "technique": "Blood Manipulation",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "WIi7n6E644owqihn",
+ "_key": "!items!4tuBpUmDZZPmETHW"
+}

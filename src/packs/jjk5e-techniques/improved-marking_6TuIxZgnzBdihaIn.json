@@ -1,0 +1,95 @@
+{
+ "_id": "6TuIxZgnzBdihaIn",
+ "name": "Improved Marking",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/teleportation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Teleportation — Innate Technique (11th level)</em></p><p>At 11th level, you have learned to mark things more efficiently. You can now mark as a free action instead of a bonus action and your amount of markings is increased to 3 times your CE modifier. You can spend 5 CE to make a mark last indefinitely unless destroyed.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "q2UBntDo4yawiuxr": {
+    "_id": "q2UBntDo4yawiuxr",
+    "type": "utility",
+    "name": "Action (5 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "q2UBntDo4yawiuxr": 5
+   },
+   "technique": "Teleportation",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "1SK1DEKKg87PUQf6",
+ "_key": "!items!6TuIxZgnzBdihaIn"
+}

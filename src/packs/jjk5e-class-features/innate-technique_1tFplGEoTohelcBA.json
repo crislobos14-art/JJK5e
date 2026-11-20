@@ -1,0 +1,43 @@
+{
+ "_id": "1tFplGEoTohelcBA",
+ "name": "Innate Technique",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>Starting at 1st level, you were born with an Innate Technique. Innate Techniques are unique abilities congenitally engraved into the user's body, specifically in the right prefrontal cortex of the brain. Most jujutsu sorcerers are born with an innate technique that manifests around the age of five or six, which continually carves its formula into the user over time. You must choose one Innate Technique, all detailed under Innate Techniques. Your choice grants you features at 1st, and again at 3rd, 6th, 11th, and 18th level</p>\n<p><em>Foundry: run the macro </em><em>JJK: Choose Innate Technique</em><em> (compendium </em>JJK 5e: Macros<em>). It adds the technique's features for your level and adds new ones automatically when you level up (levels 1, 3, 6, 11 and 18). You can also drag them by hand from </em>JJK 5e: Innate Techniques<em>.</em></p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Warrior 1",
+  "activities": {
+   "UkzeMe0TEZoCWCJJ": {
+    "_id": "UkzeMe0TEZoCWCJJ",
+    "type": "utility",
+    "name": "Choose Innate Technique",
+    "activation": {
+     "type": "special",
+     "condition": ""
+    },
+    "consumption": {
+     "targets": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "7ecbupybBLUFyYzw",
+ "_key": "!items!1tFplGEoTohelcBA"
+}

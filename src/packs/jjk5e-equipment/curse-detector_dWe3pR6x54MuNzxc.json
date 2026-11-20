@@ -1,0 +1,60 @@
+{
+ "_id": "dWe3pR6x54MuNzxc",
+ "name": "Curse Detector",
+ "type": "consumable",
+ "img": "icons/svg/explosion.svg",
+ "folder": "wqSDHMRYLTxcUWTY",
+ "system": {
+  "type": {
+   "value": "trinket",
+   "subtype": ""
+  },
+  "description": {
+   "value": "<p>A small device resembling a geiger counter with a simple screen. You can use this item to gain advantage on a Wisdom or Cursed Energy (Perception) check to locate residuals, curses and cursed energy. On a success, you can track where the cursed energy trail leads you and you are aware of whose cursed energy it is if you are familiar with them. The DC equals the cursed energy save DC of the creature being tracked. You can use this item a number of times equal to your proficiency bonus before it needs to be recharged by spending 1 cursed energy.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "rarity": "uncommon",
+  "quantity": 1,
+  "activities": {
+   "EID8BAq5uPzTJnNn": {
+    "_id": "EID8BAq5uPzTJnNn",
+    "type": "utility",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "3rd Grade",
+   "ceCosts": {
+    "EID8BAq5uPzTJnNn": 1
+   }
+  }
+ },
+ "_key": "!items!dWe3pR6x54MuNzxc"
+}

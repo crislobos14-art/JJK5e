@@ -1,0 +1,130 @@
+{
+ "_id": "fSlao0pLDQcpsTMT",
+ "name": "Poisonous Weapon (2 PP)",
+ "type": "feat",
+ "img": "icons/svg/upgrade.svg",
+ "system": {
+  "description": {
+   "value": "<p>Once per turn when you hit a creature with a natural weapon, you can spend 1 CE to force the target to make a Constitution saving throw (DC equals 8 + your proficiency bonus + your Constitution or CE modifier). On a failed save, the target takes 2d4 poison damage and is poisoned until the start of your next turn. The damage becomes 3d4 at 6th level and 4d4 at 12th level. You must have the <em>Cursed Weapon</em> attribute to choose this attribute.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTrait"
+  },
+  "requirements": "Cursed Spirit, 2 Profane Points",
+  "activities": {
+   "aA7NdoeFhaEe1XXe": {
+    "_id": "aA7NdoeFhaEe1XXe",
+    "type": "save",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 4,
+       "bonus": "",
+       "types": [
+        "poison"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "BhAiHkzD67zvWKb0",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "aA7NdoeFhaEe1XXe": 1
+   },
+   "profaneCost": 2,
+   "prereq": {
+    "prefixes": [
+     [
+      "Cursed Spirit"
+     ]
+    ]
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "BhAiHkzD67zvWKb0",
+   "name": "Poisoned (Poisonous Weapon (2 PP))",
+   "img": "systems/dnd5e/icons/svg/statuses/poisoned.svg",
+   "statuses": [
+    "poisoned"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "rounds": 1
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "poisoned"
+    }
+   },
+   "_key": "!items.effects!fSlao0pLDQcpsTMT.BhAiHkzD67zvWKb0"
+  }
+ ],
+ "folder": "ar3Bgj4YHvYRp8DL",
+ "sort": 1100,
+ "_key": "!items!fSlao0pLDQcpsTMT"
+}

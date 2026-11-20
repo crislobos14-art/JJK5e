@@ -1,0 +1,62 @@
+{
+ "_id": "h1UpLET2fm0FeigH",
+ "name": "Cursed Lantern",
+ "type": "consumable",
+ "img": "icons/svg/explosion.svg",
+ "folder": "wqSDHMRYLTxcUWTY",
+ "system": {
+  "type": {
+   "value": "trinket",
+   "subtype": ""
+  },
+  "description": {
+   "value": "<p>A small paper lantern inlaid with paper tags to detect cursed energy. You can spend 1 cursed energy to light the lantern for 1 hour. It glows brighter when near cursed energy and sputters violently when near a cursed spirit, shikigami, or cursed corpse.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "rarity": "uncommon",
+  "quantity": 1,
+  "activities": {
+   "NAcpzjJiRp7ZNHyJ": {
+    "_id": "NAcpzjJiRp7ZNHyJ",
+    "type": "utility",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "1",
+     "units": "hour",
+     "concentration": false
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "3rd Grade",
+   "ceCosts": {
+    "NAcpzjJiRp7ZNHyJ": 1
+   }
+  }
+ },
+ "_key": "!items!h1UpLET2fm0FeigH"
+}

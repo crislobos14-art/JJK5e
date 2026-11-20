@@ -1,0 +1,71 @@
+{
+ "_id": "aCFFuHg1NgEyHFFi",
+ "name": "Celestial Raiment",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/regalia.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Cursed Wave</em></p>\n<p>While you have your Regalia manifested, you can spend 3 CE as a bonus action to summon a hagoromo scarf around your body that lasts until your Regalia disappears. As a reaction, you can add your proficiency bonus to your AC until the beginning of your next turn, or to a saving throw you make as the silken scarf protects you from harm.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Cursed Wave",
+  "activities": {
+   "ugMYOnC1IkP2DdE4": {
+    "_id": "ugMYOnC1IkP2DdE4",
+    "type": "utility",
+    "name": "Bonus Action (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "ugMYOnC1IkP2DdE4": 3
+   },
+   "prereq": {
+    "features": [
+     [
+      "Cursed Wave"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "8Lhg7pdvWFL32xJj",
+ "sort": 200,
+ "_key": "!items!aCFFuHg1NgEyHFFi"
+}

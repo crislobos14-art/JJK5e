@@ -1,0 +1,42 @@
+{
+ "_id": "WWdGpM33SUUZ2u9q",
+ "name": "Tides of Chaos",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/vairocana.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Creeps and Curses V.3.1</em></p><p><em>Prerequisite: Must have Chaos Amplification</em></p>\n<p>You gain a modicum of control over the chaos and harmony that fills this world. Whenever you roll on the Chaos table, you can roll twice and use either number.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Chaos Amplification",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Chaos Amplification"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "pzOq88uXswZY9vPv",
+ "sort": 300,
+ "_key": "!items!WWdGpM33SUUZ2u9q"
+}

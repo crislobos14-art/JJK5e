@@ -1,0 +1,95 @@
+{
+ "_id": "UBN1RIqIcqsMeixc",
+ "name": "Lover’s Embrace",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/heart-catch.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Hands of Love</em></p>\n<p>You have mastered the basic use of your love hands. Whenever you Shove a creature, they are instead pushed 10 feet. When creatures are grappled or restrained, they take a d6 bludgeoning damage at the start of their turn. Structures also take maximum damage from your Love Hands.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Hands of Love",
+  "activities": {
+   "ql7ybvIAPS9ElguY": {
+    "_id": "ql7ybvIAPS9ElguY",
+    "type": "utility",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "effects": [
+     {
+      "_id": "OsNEkWuAIBaI4qld",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Hands of Love"
+     ]
+    ]
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "OsNEkWuAIBaI4qld",
+   "name": "Grappled (Lover’s Embrace)",
+   "img": "modules/jjk5e/icons/techniques/heart-catch.svg",
+   "statuses": [
+    "grappled"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "grappled"
+    }
+   },
+   "_key": "!items.effects!UBN1RIqIcqsMeixc.OsNEkWuAIBaI4qld"
+  }
+ ],
+ "folder": "KjinDnRWPvOPNN3Z",
+ "sort": 100,
+ "_key": "!items!UBN1RIqIcqsMeixc"
+}

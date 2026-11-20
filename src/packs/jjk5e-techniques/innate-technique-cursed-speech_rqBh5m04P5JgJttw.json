@@ -1,0 +1,118 @@
+{
+ "_id": "rqBh5m04P5JgJttw",
+ "name": "Innate Technique: Cursed Speech",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/cursed-speech.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>This power is called both a blessing and a curse, you can speak your will to reality.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.PYKTN7ypRA7nj61N]{Power of Words}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.OjriXIhJJ8zduMfC]{Interjection}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.pn3cSaw5qkVgAJA0]{Iron Chords}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.Eon79ATheS1tDNb1]{Resounding Voice}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.nBfeiSn64MN1fSES]{Domain Expansion: Echo Chamber}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "4QSReaDystAlWnlq": {
+    "_id": "4QSReaDystAlWnlq",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Cursed Speech (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.PYKTN7ypRA7nj61N",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "SJHxCxyOOz5oR0rL": {
+    "_id": "SJHxCxyOOz5oR0rL",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Cursed Speech (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.OjriXIhJJ8zduMfC",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "biaAAfE7CdNWqIt3": {
+    "_id": "biaAAfE7CdNWqIt3",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Cursed Speech (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.pn3cSaw5qkVgAJA0",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "qjFotKb3uNzLPN8U": {
+    "_id": "qjFotKb3uNzLPN8U",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Cursed Speech (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.Eon79ATheS1tDNb1",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "TMmaz1tn8JXLpzAo": {
+    "_id": "TMmaz1tn8JXLpzAo",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Cursed Speech (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.nBfeiSn64MN1fSES",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Cursed Speech"
+  }
+ },
+ "_key": "!items!rqBh5m04P5JgJttw"
+}

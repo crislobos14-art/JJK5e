@@ -1,0 +1,119 @@
+{
+ "_id": "2trzvoegPbodgYgl",
+ "name": "United Front",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>At 10th level, your companion finds new ways to help you in combat. Once per turn, after an attack you can choose for your companion to do one of the following if they are within 5ft of you or the enemy:</p>\n<ul>\n<li>\n<p>The attack's target takes 1d8 necrotic damage from the companion.  </p>\n</li>\n<li>\n<p>The attack's target must succeed on a Strength saving throw against your CE save DC or be moved by the shikigami up to 15 feet horizontally in a direction of your choice and knocked prone.  </p>\n</li>\n<li>\n<p>You are moved by the companion 5 feet horizontally in a direction of your choice, gaining half cover until the beginning of your next turn.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Shikigami User 10",
+  "activities": {
+   "MumDhe0oyfjknxBO": {
+    "_id": "MumDhe0oyfjknxBO",
+    "type": "save",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "5",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "str"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "idtfWijv9gcDbPri",
+      "onSave": false
+     }
+    ]
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "effects": [
+  {
+   "_id": "idtfWijv9gcDbPri",
+   "name": "Prone (United Front)",
+   "img": "modules/jjk5e/icons/feature.svg",
+   "statuses": [
+    "prone"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "rounds": 1
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!2trzvoegPbodgYgl.idtfWijv9gcDbPri"
+  }
+ ],
+ "folder": "69XiiJo14iwd80Zo",
+ "_key": "!items!2trzvoegPbodgYgl"
+}

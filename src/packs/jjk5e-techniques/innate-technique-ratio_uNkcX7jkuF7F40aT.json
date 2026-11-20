@@ -1,0 +1,118 @@
+{
+ "_id": "uNkcX7jkuF7F40aT",
+ "name": "Innate Technique: Ratio",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/ratio.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>You were born with a powerful technique that creates a weak spot on a 7:3 ratio</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.uF0UM0ezJcLv0lIp]{Critical Focus}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.2n2TueL9H08LTHZ5]{Ratio}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.reU5zR7aPdvrc8di]{Collapse}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.789EsITMhxKabOtH]{Improved Ratio}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.YckjoN5r8h1jyJW8]{Domain Expansion: Golden Ratio}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "WuuOp4Gr1JgkIFc3": {
+    "_id": "WuuOp4Gr1JgkIFc3",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Ratio (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.uF0UM0ezJcLv0lIp",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "1ZshodCMARZpVKwL": {
+    "_id": "1ZshodCMARZpVKwL",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Ratio (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.2n2TueL9H08LTHZ5",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "YTxcb5iLtKxddSmq": {
+    "_id": "YTxcb5iLtKxddSmq",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Ratio (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.reU5zR7aPdvrc8di",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "PpI2EOUg7YdCScTd": {
+    "_id": "PpI2EOUg7YdCScTd",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Ratio (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.789EsITMhxKabOtH",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "RTD3jR3dkP5MoR2t": {
+    "_id": "RTD3jR3dkP5MoR2t",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Ratio (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.YckjoN5r8h1jyJW8",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Ratio"
+  }
+ },
+ "_key": "!items!uNkcX7jkuF7F40aT"
+}

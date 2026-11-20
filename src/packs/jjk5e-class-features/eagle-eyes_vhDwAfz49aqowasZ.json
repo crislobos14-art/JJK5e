@@ -1,0 +1,54 @@
+{
+ "_id": "vhDwAfz49aqowasZ",
+ "name": "Eagle Eyes",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>Starting at 5th level, you can see even fine details up to a mile away. You also gain advantage on Perception checks using sight.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Scout 5"
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "Jrayu2BI11U3R1zF",
+ "effects": [
+  {
+   "_id": "7mtVMDq5ozdOZVPw",
+   "name": "Eagle Eyes",
+   "img": "modules/jjk5e/icons/feature.svg",
+   "changes": [
+    {
+     "key": "system.skills.prc.roll.mode",
+     "mode": 2,
+     "value": "1",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "auto": "passive"
+    }
+   },
+   "_key": "!items.effects!vhDwAfz49aqowasZ.7mtVMDq5ozdOZVPw"
+  }
+ ],
+ "_key": "!items!vhDwAfz49aqowasZ"
+}

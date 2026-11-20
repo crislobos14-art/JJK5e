@@ -1,0 +1,31 @@
+{
+ "_id": "W24GkN4RCTH8y8Sj",
+ "name": "Cursed Battery",
+ "type": "loot",
+ "img": "icons/svg/explosion.svg",
+ "folder": "pB7mLAOAtbyDQKeT",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Item, Grade 3 (Requires Attunement)</em></p><p>This smooth, oval stone is etched with faintly glowing, magical symbols. A creature can make a DC 15 Intelligence (History) check to determine that these runes are reminiscent of the norse shamans. While attuned to the item, at the start of a long rest you can store cursed energy within the battery up to your proficiency bonus + your Cursed Energy modifier and the battery is considered full. This cursed energy cannot be regained until you finish a long rest. While holding the battery, you can take an action to touch the battery to immediately regain the stored cursed energy.</p>"
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "rarity": "uncommon",
+  "quantity": 1,
+  "attunement": "required",
+  "type": {
+   "value": "gear"
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "3rd Grade"
+  }
+ },
+ "_key": "!items!W24GkN4RCTH8y8Sj"
+}

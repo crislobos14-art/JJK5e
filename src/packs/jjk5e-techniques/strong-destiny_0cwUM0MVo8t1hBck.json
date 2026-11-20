@@ -1,0 +1,138 @@
+{
+ "_id": "0cwUM0MVo8t1hBck",
+ "name": "Strong Destiny",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/fate.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Fate — Innate Technique (6th level)</em></p><p>At 6th level, you have learned to strengthen your threads of fate with cursed energy. When you apply a fate to creatures, you can increase the duration by 1 minute per additional cursed energy spent. As a reaction to the target’s turn starting for 2 CE, you can cause a creature under one of your Fates to take Xd8 bludgeoning, slashing, or piercing damage (your choice) equaling your proficiency bonus as random unlucky phenomena assaults them. Additionally, the target must make a Dexterity saving throw or fall prone. <br />\n At 11th level, your <em>Fate Manipulation</em> now lasts for 1 hour and you can increase the duration by 1 hour per additional cursed energy spent. </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "LBVlO7eNrfULztpx": {
+    "_id": "LBVlO7eNrfULztpx",
+    "type": "save",
+    "name": "Reaction (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "hour",
+     "concentration": false,
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    },
+    "effects": [
+     {
+      "_id": "KOVf8Ubbf6yJZ6Mt",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "reaction",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "hour"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "LBVlO7eNrfULztpx": 2
+   },
+   "technique": "Fate",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "KOVf8Ubbf6yJZ6Mt",
+   "name": "Prone (Strong Destiny)",
+   "img": "modules/jjk5e/icons/techniques/fate.svg",
+   "statuses": [
+    "prone"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!0cwUM0MVo8t1hBck.KOVf8Ubbf6yJZ6Mt"
+  }
+ ],
+ "folder": "UdYh82jLla1edrDf",
+ "_key": "!items!0cwUM0MVo8t1hBck"
+}

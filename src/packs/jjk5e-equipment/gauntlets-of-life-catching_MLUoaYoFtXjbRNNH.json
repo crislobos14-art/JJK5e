@@ -1,0 +1,118 @@
+{
+ "_id": "MLUoaYoFtXjbRNNH",
+ "name": "Gauntlets of Life Catching",
+ "type": "weapon",
+ "img": "icons/svg/sword.svg",
+ "folder": "TBXVbdCh1Kxu8AKz",
+ "system": {
+  "description": {
+   "value": "<p><em>Weapon (Gauntlets), Grade 1 (requires attunement)</em></p><p>Your Constitution score is 20 while you wield these gauntlets. This property of the gauntlets has no effect on you if your Constitution is already 20 or higher. After making a successful unarmed strike while wielding these gauntlets, you are able to target vitality and can deal an extra 2d10 necrotic damage to the target, and you can spend 1 CE to regain a number of hit points equal to the necrotic damage dealt. Alternatively, instead of regaining hit points in this way, you can choose to gain advantage on one attack roll, ability check, or saving throw you make before the end of your next turn.</p>"
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "martialM",
+   "baseItem": ""
+  },
+  "damage": {
+   "base": {
+    "number": 1,
+    "denomination": 6,
+    "types": [
+     "bludgeoning"
+    ]
+   }
+  },
+  "range": {
+   "value": 5,
+   "long": null,
+   "units": "ft",
+   "reach": 5
+  },
+  "properties": [
+   "mgc"
+  ],
+  "proficient": null,
+  "quantity": 1,
+  "activities": {
+   "h5j0UZRghbfjG9eo": {
+    "_id": "h5j0UZRghbfjG9eo",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "melee",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   },
+   "3KnvRUUE1qcztVHV": {
+    "_id": "3KnvRUUE1qcztVHV",
+    "type": "damage",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "rarity": "veryRare",
+  "attunement": "required"
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "1st Grade",
+   "ceCosts": {
+    "3KnvRUUE1qcztVHV": 1
+   }
+  }
+ },
+ "_key": "!items!MLUoaYoFtXjbRNNH"
+}

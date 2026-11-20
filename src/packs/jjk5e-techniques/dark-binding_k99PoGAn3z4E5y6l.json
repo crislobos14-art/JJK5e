@@ -1,0 +1,122 @@
+{
+ "_id": "k99PoGAn3z4E5y6l",
+ "name": "Dark Binding",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/shadow-killer.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Shadow Killer — Innate Technique (3rd level)</em></p><p>At 3rd level, your ability to affect creatures through their shadows has improved. When you make a weapon attack, you can spend 3 cursed energy to target a creature’s shadow. On a hit, instead of dealing damage you release your grip on the weapon used to make the attack, leaving it to pin the target’s shadow in place. The creature is grappled and restrained and is unable to move or be moved until the weapon is removed. The weapon can be removed as an attack.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "Zcv5CmDFLDrHq7ee": {
+    "_id": "Zcv5CmDFLDrHq7ee",
+    "type": "utility",
+    "name": "Action (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "sGr1hR1sx7T8Er5y",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "Zcv5CmDFLDrHq7ee": 3
+   },
+   "technique": "Shadow Killer",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "sGr1hR1sx7T8Er5y",
+   "name": "Grappled (Dark Binding)",
+   "img": "modules/jjk5e/icons/techniques/shadow-killer.svg",
+   "statuses": [
+    "grappled"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "grappled"
+    }
+   },
+   "_key": "!items.effects!k99PoGAn3z4E5y6l.sGr1hR1sx7T8Er5y"
+  }
+ ],
+ "folder": "AZz0yh4SFsEeg2VN",
+ "_key": "!items!k99PoGAn3z4E5y6l"
+}

@@ -1,0 +1,81 @@
+{
+ "_id": "fwuPOkYpGbemJ4mA",
+ "name": "Black Belt",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/divergent-fist.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Martial Prowess</em></p>\n<p>Through much training, you gain the following martial options:</p>\n<ul>\n<li>\n<p><strong>Takedown:</strong> Immediately after you hit a creature with a melee attack on your turn, you can try to grapple or shove the target as a bonus action.  </p>\n</li>\n<li>\n<p><strong>Judo Throw:</strong> When you hit a grappled creature with a melee attack, you can grab the target and flip them on their back. If the target is Huge or smaller, it must make a Strength saving throw. On a failed save, you knock them prone, and if they fail it by 5 or more they are stunned until the end of their next turn.  </p>\n</li>\n<li>\n<p><strong>Flying Drop Kick:</strong> You can use an action to jump up and land a Flying Drop Kick. You target a creature within your jump distance with an unarmed attack (Calculator <a href=\"https://fexlabs.com/5ejump/\">here</a>). The target takes your unarmed damage, and is pushed back 30ft.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Martial Prowess",
+  "activities": {
+   "vLQ6ytZvDHlnFz03": {
+    "_id": "vLQ6ytZvDHlnFz03",
+    "type": "save",
+    "name": "Bonus Action",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "str"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Martial Prowess"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "wZIFQphpPzNuXv3W",
+ "sort": 100,
+ "_key": "!items!fwuPOkYpGbemJ4mA"
+}

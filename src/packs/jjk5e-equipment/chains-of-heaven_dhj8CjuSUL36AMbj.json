@@ -1,0 +1,117 @@
+{
+ "_id": "dhj8CjuSUL36AMbj",
+ "name": "Chains of Heaven",
+ "type": "weapon",
+ "img": "icons/svg/sword.svg",
+ "folder": "QgDaE1oZxMUlsCnN",
+ "system": {
+  "description": {
+   "value": "<p><em>Weapon(Weighted Chain), Special Grade</em></p><p>These chains become indestructible when physically binding a creature with strong cursed energy. While wielding this weapon, you can use your action to make an attack roll using your Cursed Energy modifier against a target within 50 ft. A creature bound this way cannot use cursed energy until they escape (escape DC 20). The DC increases by +1 for every 10 cursed energy the target currently has.</p>"
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "martialM",
+   "baseItem": ""
+  },
+  "damage": {
+   "base": {
+    "number": 1,
+    "denomination": 4,
+    "types": [
+     "bludgeoning"
+    ]
+   }
+  },
+  "range": {
+   "value": 10,
+   "long": null,
+   "units": "ft",
+   "reach": 10
+  },
+  "properties": [
+   "mgc",
+   "rch",
+   "spc"
+  ],
+  "proficient": null,
+  "quantity": 1,
+  "activities": {
+   "iTYj8iiae8xXoqqE": {
+    "_id": "iTYj8iiae8xXoqqE",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "melee",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   },
+   "JZbNd4NqnBXAZ7oI": {
+    "_id": "JZbNd4NqnBXAZ7oI",
+    "type": "attack",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "50",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": []
+    }
+   }
+  },
+  "rarity": "legendary",
+  "attunement": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "Special Grade"
+  }
+ },
+ "_key": "!items!dhj8CjuSUL36AMbj"
+}

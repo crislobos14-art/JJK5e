@@ -1,0 +1,92 @@
+{
+ "_id": "BL0AkVup5SylGoSO",
+ "name": "Luckiest Sorcerer Alive",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/pachinko-fever.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Pachinko Fever — Innate Technique (18th level)</em></p><p>At 18th level , you now roll 3d20 when deciding your multiplier, and can choose which roll you want. Your reverse cursed technique makes you regain hit points as if you had spent a number of cursed energy equal to twice your Cursed Energy modifier, and you can use <em>Reverse Cursed Technique</em> as a free action while you have the jackpot bonus.<br />\n In addition, your jackpot duration is now a number of minutes equal to your Cursed Energy modifier (min of 1).</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "1Vzkeb3xIOtzq6y4": {
+    "_id": "1Vzkeb3xIOtzq6y4",
+    "type": "utility",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 9,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "special",
+   "value": null,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Pachinko Fever",
+   "level": 18,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "30lfiZHWDrH4G6F5",
+ "_key": "!items!BL0AkVup5SylGoSO"
+}

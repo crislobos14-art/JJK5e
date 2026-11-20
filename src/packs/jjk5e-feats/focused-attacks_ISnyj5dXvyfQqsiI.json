@@ -1,0 +1,42 @@
+{
+ "_id": "ISnyj5dXvyfQqsiI",
+ "name": "Focused Attacks",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/ratio.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Critical Focus</em></p>\n<p>You gain a +1 bonus to your critical range.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Critical Focus",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Critical Focus"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "b0K9kretIN46uAAM",
+ "sort": 100,
+ "_key": "!items!ISnyj5dXvyfQqsiI"
+}

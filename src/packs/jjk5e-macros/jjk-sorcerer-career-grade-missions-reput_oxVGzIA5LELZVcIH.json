@@ -1,0 +1,13 @@
+{
+ "_id": "oxVGzIA5LELZVcIH",
+ "name": "JJK: Sorcerer Career (Grade, Missions, Reputation)",
+ "type": "script",
+ "img": "icons/commodities/treasure/medal-ribbon-gold-blue.webp",
+ "scope": "global",
+ "command": "game.modules.get(\"jjk5e\").api.openCareer();",
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": null,
+ "_key": "!macros!oxVGzIA5LELZVcIH"
+}

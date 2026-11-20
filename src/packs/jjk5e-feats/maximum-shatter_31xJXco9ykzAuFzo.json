@@ -1,0 +1,101 @@
+{
+ "_id": "31xJXco9ykzAuFzo",
+ "name": "Maximum: Shatter",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/ice-formation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Icefall</em></p>\n<p>You now freeze through flesh and muscle. As an action while within 5 ft of a creature that is restrained by your ice, you can break off a limb that is not the head or torso (Using the limb damage table). The creature is then no longer restrained.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Icefall",
+  "activities": {
+   "I9MTDVPfHhF18WdD": {
+    "_id": "I9MTDVPfHhF18WdD",
+    "type": "utility",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "5",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "effects": [
+     {
+      "_id": "G4yBjmqIzHX7V9ih",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Ice Fall"
+     ]
+    ]
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "G4yBjmqIzHX7V9ih",
+   "name": "Restrained (Maximum: Shatter)",
+   "img": "modules/jjk5e/icons/techniques/ice-formation.svg",
+   "statuses": [
+    "restrained"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "restrained"
+    }
+   },
+   "_key": "!items.effects!31xJXco9ykzAuFzo.G4yBjmqIzHX7V9ih"
+  }
+ ],
+ "folder": "49nTgJGO4NrAusFo",
+ "sort": 300,
+ "_key": "!items!31xJXco9ykzAuFzo"
+}

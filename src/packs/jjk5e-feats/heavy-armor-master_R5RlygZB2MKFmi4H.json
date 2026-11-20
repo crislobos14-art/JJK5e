@@ -1,0 +1,59 @@
+{
+ "_id": "R5RlygZB2MKFmi4H",
+ "name": "Heavy Armor Master",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: N/A</em></p>\n<p>You can use your armor to deflect strikes that would kill others. You gain the following benefits, on top of Heavy armor proficiency:</p>\n<ul>\n<li>\n<p>Increase your Strength score by 1, to a maximum of 20.  </p>\n</li>\n<li>\n<p>While you are wearing heavy armor, bludgeoning, piercing, and slashing damage that you take from nonmagical attacks is reduced by 3.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkPhysical"
+  },
+  "requirements": "N/A",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "effects": [
+  {
+   "_id": "gSGHPzNSRNdjZUTV",
+   "name": "Heavy Armor Master",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "changes": [
+    {
+     "key": "system.abilities.str.value",
+     "mode": 2,
+     "value": "1",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "auto": "passive"
+    }
+   },
+   "_key": "!items.effects!R5RlygZB2MKFmi4H.gSGHPzNSRNdjZUTV"
+  }
+ ],
+ "folder": "cxPIGjcxqJdZTMQ5",
+ "sort": 1000,
+ "_key": "!items!R5RlygZB2MKFmi4H"
+}

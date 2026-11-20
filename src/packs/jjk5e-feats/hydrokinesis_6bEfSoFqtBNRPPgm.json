@@ -1,0 +1,133 @@
+{
+ "_id": "6bEfSoFqtBNRPPgm",
+ "name": "Hydrokinesis",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/disaster-tides.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Tides of Disaster</em></p>\n<p>Through training and understanding, you have found new applications to your water. You gain the one of the following (You can select this feat multiple times):</p>\n<ul>\n<li>\n<p><strong>Piercing Water:</strong> You make a small water beam made to pierce through enemies. As an action for 2 CE, you make a cursed energy attack against a creature within 30 ft. On a hit, they take 2d10 cold damage + 2d6 piercing damage and are forced to make a Constitution saving throw. On a failure, they are knocked prone and will receive the damage rolled one additional time as a vital organ is hit. On a success, they don't take additional damage and are not prone.  </p>\n</li>\n<li>\n<p>Two water spells below 5th level. The ce cost equals the spell’s level in Cursed Energy.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Tides of Disaster",
+  "activities": {
+   "SM2Tpg4qknauYJaJ": {
+    "_id": "SM2Tpg4qknauYJaJ",
+    "type": "save",
+    "name": "Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "30",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "cold"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "ncLkqgwm3FuAaSuY",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "SM2Tpg4qknauYJaJ": 2
+   },
+   "prereq": {
+    "features": [
+     [
+      "Tides of Disaster"
+     ]
+    ]
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "ncLkqgwm3FuAaSuY",
+   "name": "Prone (Hydrokinesis)",
+   "img": "modules/jjk5e/icons/techniques/disaster-tides.svg",
+   "statuses": [
+    "prone"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!6bEfSoFqtBNRPPgm.ncLkqgwm3FuAaSuY"
+  }
+ ],
+ "folder": "QUxVHS82lupOHPQu",
+ "sort": 100,
+ "_key": "!items!6bEfSoFqtBNRPPgm"
+}

@@ -1,0 +1,46 @@
+{
+ "_id": "33mkZ4KhWtcnQ0DB",
+ "name": "Assemble",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/shrine.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Shrine — Cursed Technique Reversal</em></p><p>With your mastery of Reverse Cursed Technique, you have learned Shrine's reversal. You are now able to attach things with your technique instead of cutting them apart. Whenever you take the Attack action, you can spend cursed energy up to twice your CE modifier to replace a Dismantle with an Assemble, using Dismantle's range. A creature or object targeted by an Assemble will regain 2d8 hit points per 2 cursed energy spent. If their limbs are wounded or worse, the limbs receive twice as many hit points. At 18th level, you can spend up to thrice your CE modifier.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Shrine"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Shrine",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Shrine"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!33mkZ4KhWtcnQ0DB"
+}

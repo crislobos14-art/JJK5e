@@ -1,0 +1,153 @@
+{
+ "_id": "gniQgtH4HauRqvgz",
+ "name": "Dark Cube",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/black-box.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Black Box — Innate Technique (1st level)</em></p><blockquote><p>You can create incredibly tough black cube barriers.</p></blockquote><p>Starting at 1st level, you can spend 2 cursed energy as an action to create an immovable 10 feet opaque black cube within 30 feet of you for 1 minute or until you end it as a free action. If a Large or smaller creature is within range, they must make a Dexterity saving throw or be trapped within the cube. A creature inside your cube has full cover against attacks outside the cube and creatures other than you are blinded if there isn’t a source of light inside the cube.<br />\n The cube has an AC equal to your Cursed Energy save DC + 5, hit points equal to your proficiency bonus times twice your Cursed Energy modifier and immunity to psychic and poison damage.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "UNgkJB1hNYCx1HyF": {
+    "_id": "UNgkJB1hNYCx1HyF",
+    "type": "save",
+    "name": "Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    },
+    "effects": [
+     {
+      "_id": "FC6A5IxdtB0bgbYq",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "value": "30",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "UNgkJB1hNYCx1HyF": 2
+   },
+   "technique": "Black Box",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "FC6A5IxdtB0bgbYq",
+   "name": "Blinded (Dark Cube)",
+   "img": "modules/jjk5e/icons/techniques/black-box.svg",
+   "statuses": [
+    "blinded"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "seconds": 60,
+    "rounds": 10
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "blinded"
+    }
+   },
+   "_key": "!items.effects!gniQgtH4HauRqvgz.FC6A5IxdtB0bgbYq"
+  }
+ ],
+ "folder": "h65v183tFsULjQrb",
+ "_key": "!items!gniQgtH4HauRqvgz"
+}

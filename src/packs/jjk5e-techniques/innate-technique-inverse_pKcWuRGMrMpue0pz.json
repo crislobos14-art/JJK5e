@@ -1,0 +1,118 @@
+{
+ "_id": "pKcWuRGMrMpue0pz",
+ "name": "Innate Technique: Inverse",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/inverse.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>You invert damage taken based on a specific threshold.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.M48Lb0FJgSB7lVfk]{Inversion}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.UU0excQqDE0MEFgm]{Extreme Opposites}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.ToY68kKWc6rmMWPs]{Break the Strong}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.nBS99egazwd4cDfZ]{Quick Inversion}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.DrswMpqH5qloWUqP]{Domain Expansion: Synesthesia}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "p4QDLTAkcZ5gMLrN": {
+    "_id": "p4QDLTAkcZ5gMLrN",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Inverse (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.M48Lb0FJgSB7lVfk",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "TTe5JqNIX77L4w5H": {
+    "_id": "TTe5JqNIX77L4w5H",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Inverse (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.UU0excQqDE0MEFgm",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "OkxLE5FC3niVBueZ": {
+    "_id": "OkxLE5FC3niVBueZ",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Inverse (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.ToY68kKWc6rmMWPs",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "DIPp9XRYosNutpkL": {
+    "_id": "DIPp9XRYosNutpkL",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Inverse (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.nBS99egazwd4cDfZ",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "v77ddzCYxEsGIKA4": {
+    "_id": "v77ddzCYxEsGIKA4",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Inverse (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.DrswMpqH5qloWUqP",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Inverse"
+  }
+ },
+ "_key": "!items!pKcWuRGMrMpue0pz"
+}

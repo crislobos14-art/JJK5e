@@ -1,0 +1,42 @@
+{
+ "_id": "eEwsCj0wKuDAtTjJ",
+ "name": "Boogie Down",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/boogie-woogie.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Boogie</em></p>\n<p>Your <em>Boogie</em> has increased in speed and the unpredictability of your <em>Boogie</em>. You gain 2 additional reactions which can only be used to <em>Boogie</em>. Additionally, when you <em>Boogie</em> the next attack made against you has disadvantage.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Boogie",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Boogie"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "lYPG7qB66tA5vtjF",
+ "sort": 100,
+ "_key": "!items!eEwsCj0wKuDAtTjJ"
+}

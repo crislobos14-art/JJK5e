@@ -1,0 +1,42 @@
+{
+ "_id": "mQC0xlwc8eAg24Ci",
+ "name": "Massive Push",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/star-rage.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Virtual Mass Increase</em></p>\n<p>After landing a critical you can choose to also push the creature 30 feet away. If they hit a solid object or structure, they take the remaining distance as fall damage.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Virtual Mass Increase",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Virtual Mass Increase"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "8WZAgQOeGTbPipxv",
+ "sort": 100,
+ "_key": "!items!mQC0xlwc8eAg24Ci"
+}

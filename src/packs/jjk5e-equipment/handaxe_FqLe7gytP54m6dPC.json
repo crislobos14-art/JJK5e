@@ -1,0 +1,74 @@
+{
+ "_id": "FqLe7gytP54m6dPC",
+ "name": "Handaxe",
+ "type": "weapon",
+ "img": "icons/svg/sword.svg",
+ "folder": "8L9REK3UZxFoXRJA",
+ "system": {
+  "description": {
+   "value": "<p>Simple melee weapon. 1d6 slashing. Light, thrown(20/60).</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "simpleM",
+   "baseItem": "handaxe"
+  },
+  "damage": {
+   "base": {
+    "number": 1,
+    "denomination": 6,
+    "types": [
+     "slashing"
+    ]
+   }
+  },
+  "range": {
+   "value": 20,
+   "long": 60,
+   "units": "ft"
+  },
+  "properties": [
+   "lgt",
+   "thr"
+  ],
+  "proficient": null,
+  "price": {
+   "value": 5.0,
+   "denomination": "gp"
+  },
+  "quantity": 1,
+  "activities": {
+   "nN2N9Y1NsmBFRjMi": {
+    "_id": "nN2N9Y1NsmBFRjMi",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "melee",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "priceUSD": "$500"
+  }
+ },
+ "_key": "!items!FqLe7gytP54m6dPC"
+}

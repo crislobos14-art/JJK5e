@@ -1,0 +1,159 @@
+{
+ "_id": "fDcXasO9qtbZEnXH",
+ "name": "Hair Pin",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/straw-doll-technique.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Straw Doll Technique — Innate Technique (6th level)</em></p><p>Once you reach 6th level, you learn a new way to damage your enemies. When you launch a <em>Nail Projectile</em> and hit a creature or as a bonus action for 1 Cursed Energy, you can stick a nail into an object. If hitting a creature, the initial attack deals no damage. As a bonus action or as a reaction to a creature coming within 5 feet of the nail, you can create cursed explosions. Creatures within 10 feet of the nails must make a Dexterity saving throw. On a failure, they take 1d8 necrotic damage for each nail, taking half as much damage on a success. You can spend additional Cursed Energy when you drive the nail, increasing the damage by 1d8 for every additional Cursed Energy spent.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "dcQm0JQlx7Bps7r8": {
+    "_id": "dcQm0JQlx7Bps7r8",
+    "type": "utility",
+    "name": "Bonus Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   },
+   "eYayPO9O7w18fnMl": {
+    "_id": "eYayPO9O7w18fnMl",
+    "type": "save",
+    "name": "Bonus Action",
+    "sort": 100000,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "dcQm0JQlx7Bps7r8": 1
+   },
+   "technique": "Straw Doll Technique",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "YmMAY3fFTK6UIkG2",
+ "_key": "!items!fDcXasO9qtbZEnXH"
+}

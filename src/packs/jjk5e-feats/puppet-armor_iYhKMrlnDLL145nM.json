@@ -1,0 +1,74 @@
+{
+ "_id": "iYhKMrlnDLL145nM",
+ "name": "Puppet Armor",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/puppet-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Ultimate Mechamaru</em></p>\n<p>As an action, you can wear one of your puppets within 5 ft. This gives you your puppets HP as temporary hit points, as well as traits and physical ability scores and also increases your AC by 2. You can only wear one Puppet at a time and cannot command this Puppet.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Ultimate Mechamaru",
+  "activities": {
+   "weu7XX5L5A1Fh0qY": {
+    "_id": "weu7XX5L5A1Fh0qY",
+    "type": "utility",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "5",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Ultimate Mechamaru"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "tHLyqviVXptUEOWk",
+ "sort": 100,
+ "_key": "!items!iYhKMrlnDLL145nM"
+}

@@ -1,0 +1,226 @@
+{
+ "_id": "rXXHBBI0bIPLLHsu",
+ "name": "Forests of Disaster",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/disaster-verdure.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Disaster Verdure — Innate Technique (1st level)</em></p><blockquote><p>You are born with an amazing power, with many possibilities, plant manipulation, allowing you to protect those you care about.</p></blockquote><p>Beginning at 1st level, Starting at 1st level, you have begun to understand the power of nature. You gain the ability to manipulate nature at will. You can cast <em>Druidcraft</em> at will and gain the following cursed techniques:</p>\n<ul>\n<li>\n<p><strong>Binding Plants.</strong> As an action for 1 Cursed Energy, you can choose one target within 30 feet of you trapped by plants. The target must make a Strength saving throw, on a failure it will be restrained. It can make a Strength check to break free from the plants, on a success they are free from the binds, on a failure they remain stuck.  </p>\n</li>\n<li>\n<p><strong>Piercing Roots.</strong> As an action for 1 Cursed Energy, you can raise a bunch of roots from the ground to strike a target. You force all creatures in a 50ft line to make a Dexterity saving throw, on a failure they take 1d12 piercing damage, on a success they take half as much damage. This damage increases to 2d12 at 5th level, 3d12 at 11th level, and to 4d12 at 18th level.  </p>\n</li>\n<li>\n<p><strong>Wall of Roots.</strong> As a reaction for 1 Cursed Energy, you rise deep roots from the ground to defend yourself or allies from attacks. As a reaction to you or an ally being targeted by an attack, you spring forth a wall of roots 10 ft tall and 5ft wide. The wall has an amount of hit points equal to your Cursed Energy modifier times your proficiency bonus.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "rfqiDE2D1qWv9TeJ": {
+    "_id": "rfqiDE2D1qWv9TeJ",
+    "type": "save",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "line",
+      "size": "50",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "str"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 12,
+       "bonus": "",
+       "types": [
+        "piercing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "Ex5F2IrqMMZF5RrV",
+      "onSave": false
+     }
+    ]
+   },
+   "V6swR8hZFSeJkXVb": {
+    "_id": "V6swR8hZFSeJkXVb",
+    "type": "utility",
+    "name": "Reaction (1 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "line",
+    "size": "50",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": false
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "dmgScale": {
+    "rfqiDE2D1qWv9TeJ": [
+     [
+      0,
+      "1d12"
+     ],
+     [
+      5,
+      "2d12"
+     ],
+     [
+      11,
+      "3d12"
+     ],
+     [
+      18,
+      "4d12"
+     ]
+    ]
+   },
+   "ceCosts": {
+    "rfqiDE2D1qWv9TeJ": 1,
+    "V6swR8hZFSeJkXVb": 1
+   },
+   "technique": "Disaster Verdure",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "Ex5F2IrqMMZF5RrV",
+   "name": "Restrained (Forests of Disaster)",
+   "img": "modules/jjk5e/icons/techniques/disaster-verdure.svg",
+   "statuses": [
+    "restrained"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "restrained"
+    }
+   },
+   "_key": "!items.effects!rXXHBBI0bIPLLHsu.Ex5F2IrqMMZF5RrV"
+  }
+ ],
+ "folder": "iWhpioZs4gSAxzA7",
+ "_key": "!items!rXXHBBI0bIPLLHsu"
+}

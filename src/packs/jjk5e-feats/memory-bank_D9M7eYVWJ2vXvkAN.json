@@ -1,0 +1,42 @@
+{
+ "_id": "D9M7eYVWJ2vXvkAN",
+ "name": "Memory Bank",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/body-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Skill Theft</em></p>\n<p>Memories fade and wane, you however have grown beyond that. You remember everything you experience, and you can store them in objects allowing anyone who touches them to experience them from your point of view.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Skill Theft",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Skill Theft"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "XJZyFbzkyclVqRZa",
+ "sort": 200,
+ "_key": "!items!D9M7eYVWJ2vXvkAN"
+}

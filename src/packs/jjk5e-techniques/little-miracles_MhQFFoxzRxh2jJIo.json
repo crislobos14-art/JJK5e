@@ -1,0 +1,32 @@
+{
+ "_id": "MhQFFoxzRxh2jJIo",
+ "name": "Little Miracles",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/miracle.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Miracle — Innate Technique (1st level)</em></p><blockquote><p>Your technique erases your memory of everyday little miracles to store them for when needed.</p></blockquote><p>Starting at 1st level, your technique brings you strength when you witness good fortune. When you witness this, you gain a Miracle. You can have up to six Miracles at once, which are stored as marks somewhere on your body.  You gain 2 Miracles for every miracle you witness at 11th level and 3 Miracles at 18th level.</p>\n<table>\n<thead>\n<tr>\n<th style=\"text-align: left;\">Miracle</th>\n<th></th>\n<th style=\"text-align: left;\">Description</th>\n<th></th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td style=\"text-align: left;\">Lucky!</td>\n<td></td>\n<td style=\"text-align: left;\">Everyone loves a Jackpot!  When you or an ally you can see rolls the maximum amount on a roll, you gain a Miracle.</td>\n<td></td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">Equal Numbers!</td>\n<td></td>\n<td style=\"text-align: left;\">Equal Numbers are supposed to be lucky, right?  When you or an ally you can see rolls two equal numbers one after the other, you gain a Miracle.</td>\n<td></td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">Treasure!</td>\n<td></td>\n<td style=\"text-align: left;\">Finding free stuff is always cool! When you or an ally you can see find an item worth $1,000 or more, you gain a Miracle.</td>\n<td></td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">Overcoming Hardship</td>\n<td></td>\n<td style=\"text-align: left;\">Overcoming hardship is something rare in this harsh world, so every chance we get is a miracle.  When you or a creature you can see succeeds on a roll they had disadvantage on, you gain a Miracle.</td>\n<td></td>\n</tr>\n</tbody>\n</table>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Miracle 1"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Miracle",
+   "level": 1
+  }
+ },
+ "folder": "tl97VGJouG41Z3rd",
+ "_key": "!items!MhQFFoxzRxh2jJIo"
+}

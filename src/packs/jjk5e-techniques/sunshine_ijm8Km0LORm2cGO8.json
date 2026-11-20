@@ -1,0 +1,110 @@
+{
+ "_id": "ijm8Km0LORm2cGO8",
+ "name": "Sunshine",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/disaster-storms.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Disaster Storms — Cursed Technique Reversal</em></p><p>You can spend 4 CE to replace an attack on your turn with a burning ray from the miniature sun. Make a cursed energy attack against a creature within 120 ft. On a hit, you deal 6d6 fire damage. This increases to 8d6 at 6th level and 12d6 at 11th level. If this attack hits a creature within the radius, you add your CE modifier to the damage roll.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Disaster Storms",
+  "activities": {
+   "vvg0y1Ga9QXl6bXU": {
+    "_id": "vvg0y1Ga9QXl6bXU",
+    "type": "attack",
+    "name": "Action (4 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "120",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": 6,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "fire"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "vvg0y1Ga9QXl6bXU": 4
+   },
+   "technique": "Disaster Storms",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Disaster Storms"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 10,
+ "_key": "!items!ijm8Km0LORm2cGO8"
+}

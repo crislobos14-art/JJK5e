@@ -1,0 +1,122 @@
+{
+ "_id": "y3LBulYKMnbDwSNs",
+ "name": "Cursed Crows",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/black-bird-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Black Bird Manipulation — Innate Technique (1st level)</em></p><blockquote><p>You were born with a simple ability many called weak, the ability to control and see through crows.</p></blockquote><p>At 1st level, you have learned how to imbue crows with cursed energy to use them as part of your technique. As an action for 1 Cursed Energy, you can imbue a raven with cursed energy if it's restrained, grappled, or incapacitated. It then becomes one of your cursed crows, it will become charmed by you and will follow your orders. As an action, you can close your eyes giving you the blinded condition unless you have blindsight, while you see through one of your crows. While seeing through your crows, you can use your passive Perception instead of the crows. You can only see through one crow at a time and can switch between them as an action or stop as a bonus action. You start with 3 cursed crows.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "9AKrMGlQ0JWWWCRg": {
+    "_id": "9AKrMGlQ0JWWWCRg",
+    "type": "utility",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "VuOfabzOtQgknh1u",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "9AKrMGlQ0JWWWCRg": 1
+   },
+   "technique": "Black Bird Manipulation",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "VuOfabzOtQgknh1u",
+   "name": "Charmed (Cursed Crows)",
+   "img": "modules/jjk5e/icons/techniques/black-bird-manipulation.svg",
+   "statuses": [
+    "charmed"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "charmed"
+    }
+   },
+   "_key": "!items.effects!y3LBulYKMnbDwSNs.VuOfabzOtQgknh1u"
+  }
+ ],
+ "folder": "51kqIFJDFNS150R8",
+ "_key": "!items!y3LBulYKMnbDwSNs"
+}

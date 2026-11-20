@@ -1,0 +1,117 @@
+{
+ "_id": "mxwFcvMxYv3CzmBv",
+ "name": "Divine Flame Open",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/shrine.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Shrine — Innate Technique (6th level)</em></p><p>At 6th level, you can utter an incantation to create an arrow of fire. As an action, you can spend Cursed Energy up to twice your proficiency bonus, choosing a point within 150/600 feet of you. Each creature within 15 ft of that point must make a Dexterity saving throw, which is made at advantage if the creature is more than 150 feet away. On a failed save, they take a d12 of fire damage for each cursed energy spent. On a successful save, they take half as much damage.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "u7pikmLFeX1CnNuV": {
+    "_id": "u7pikmLFeX1CnNuV",
+    "type": "save",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "15",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": []
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "15",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Shrine",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "m9ZssDMA8savxH5G",
+ "_key": "!items!mxwFcvMxYv3CzmBv"
+}

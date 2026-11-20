@@ -1,0 +1,85 @@
+{
+ "_id": "wYhQhSlnoCr7kqhg",
+ "name": "Megaphone",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/cursed-speech.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Resounding Voice</em></p>\n<p>You have found a way to increase your power using an outside tool. For 3 Cursed Energy you can create or imbue a megaphone for 1 minute that causes your words to affect a 60-foot cone. The megaphone has hit points equal to twice your CE score and damages the megaphone instead of your vocal chords when used in this way. When reduced to 0 hit points, the megaphone turns to dust.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Resounding Voice",
+  "activities": {
+   "eymckJJNupFHfYdt": {
+    "_id": "eymckJJNupFHfYdt",
+    "type": "utility",
+    "name": "Action (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {
+     "template": {
+      "type": "cone",
+      "size": "60",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     }
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "eymckJJNupFHfYdt": 3
+   },
+   "prereq": {
+    "features": [
+     [
+      "Resounding Voice"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "d9an5RUaI1VEAGca",
+ "sort": 300,
+ "_key": "!items!wYhQhSlnoCr7kqhg"
+}

@@ -1,0 +1,90 @@
+{
+ "_id": "W5duwlBV6Eo8CO4a",
+ "name": "Air Bomber",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/hair-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Aircraft Hair</em></p>\n<p>You have learned the following destructive ways to amplify your <em>Aircraft Hair</em> forms:<br />\n<strong>Copter Frenzy</strong>. As an action for 5 CE, you force all creatures within 15 ft to make a Dexterity saving throw. On a failed save they take your <em>Helicopter Hair</em> damage. On a successful save, they take half as much.<br />\n<strong>Jet Crash</strong>. The damage a creature takes from impacting a solid surface from your crash increases to 1d6 per 10 ft traveled in a straight line before hitting the. This becomes 1d8 at 11th level and 1d10 at 18th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Aircraft Hair",
+  "activities": {
+   "yEQoJcApquibG2ry": {
+    "_id": "yEQoJcApquibG2ry",
+    "type": "save",
+    "name": "Action (5 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "15",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": []
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "yEQoJcApquibG2ry": 5
+   },
+   "prereq": {
+    "features": [
+     [
+      "Aircraft Hair"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "vK6vTr2zkjipQvME",
+ "sort": 300,
+ "_key": "!items!W5duwlBV6Eo8CO4a"
+}

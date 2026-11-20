@@ -1,0 +1,42 @@
+{
+ "_id": "RKQ914SfcvJ9Uo09",
+ "name": "Subtle Constructs",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/construction.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Construct</em></p>\n<p>After making a creation you can use underhanded tactics to trick your opponent. After making an item, you can make a Sleight of Hand check against their passive perception. On a success, your first attack or check using this creation has advantage.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Construct",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Construct"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "kyQQ2jjaJXT8blxH",
+ "sort": 100,
+ "_key": "!items!RKQ914SfcvJ9Uo09"
+}

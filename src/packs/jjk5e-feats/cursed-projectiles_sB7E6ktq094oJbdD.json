@@ -1,0 +1,60 @@
+{
+ "_id": "sB7E6ktq094oJbdD",
+ "name": "Cursed Projectiles",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Proficiency in a Ranged or Thrown weapon</em></p>\n<p>You have learned to imbue your cursed energy into projectiles such as arrows, bolts or any other type of ammunition or weapon with the thrown property. As an action, you can imbue a number of projectiles up to your Cursed Energy modifier, turning them into Cursed Projectiles until you finish a long rest. When using Cursed Projectiles, you make ranged Cursed Energy attacks instead of what you would normally use to attack with them, and you control their trajectory while in the air, making it so that attacks with them ignore half and three quarters cover. </p>\n<p>Additionally, on a miss they will stay in the air floating for a number of rounds equal to your Cursed Energy modifier, allowing you to keep making attacks with them even after being shot or thrown until they hit a solid object or target. You can use a bonus action to cause each active Cursed Projectile to make another ranged Cursed Energy attack against a creature within 60 feet. You can control a number of Cursed Projectiles equal to your Cursed Energy modifier. A creature can attack your Cursed Projectiles to destroy them; they have 1 hit point and an AC equal to your Cursed Technique DC.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkCursedEnergy"
+  },
+  "requirements": "Proficiency in a Ranged or Thrown weapon",
+  "activities": {
+   "hR28AIOLDMaVNRec": {
+    "_id": "hR28AIOLDMaVNRec",
+    "type": "utility",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "58RlNbYPWxO2Xi4E",
+ "sort": 1200,
+ "_key": "!items!sB7E6ktq094oJbdD"
+}

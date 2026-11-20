@@ -1,0 +1,72 @@
+{
+ "_id": "WUlUvXIFO5zX8MG7",
+ "name": "Leg Aegis",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/missile-fist.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Missile Fist — Cursed Technique Reversal</em></p><p>After mastering the Reverse Cursed Technique, you have learned the reversal of your offensive Missile Fist is the defensive Leg Aegis. As a reaction to being attacked, you can spend Cursed Energy up to twice your Cursed Energy modifier to summon a large leg in front of you that kicks away attacks. The Leg Aegis has hit points equal to 10 times the amount of Cursed Energy spent, and its Armor Class is equal to your Cursed Energy Save DC. The Leg Aegis absorbs damage you would take, and automatically fails saving throws. The Leg Aegis lasts until its hit points are depleted or until the beginning of your next turn.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Missile Fist",
+  "activities": {
+   "FvH5I4W3ZUZWcWcO": {
+    "_id": "FvH5I4W3ZUZWcWcO",
+    "type": "utility",
+    "name": "Reaction",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Missile Fist",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Missile Fist"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!WUlUvXIFO5zX8MG7"
+}

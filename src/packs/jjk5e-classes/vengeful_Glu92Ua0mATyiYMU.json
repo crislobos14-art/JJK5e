@@ -1,0 +1,91 @@
+{
+ "_id": "Glu92Ua0mATyiYMU",
+ "name": "Vengeful",
+ "type": "subclass",
+ "img": "modules/jjk5e/icons/classes/vengeful.svg",
+ "system": {
+  "description": {
+   "value": "<p>People have wronged you in the past, and despite your body healing from the damage caused, the scars in your heart will never heal.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "identifier": "vengeful",
+  "classIdentifier": "heavenly-restriction",
+  "advancement": {
+   "Ww1SD5EuRmqdokjg": {
+    "_id": "Ww1SD5EuRmqdokjg",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Features",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.B0FGULtttLUhFXig",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "La0rUegUo36Hg5uD": {
+    "_id": "La0rUegUo36Hg5uD",
+    "type": "ItemGrant",
+    "level": 9,
+    "title": "Features",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.tMtaW7UwJwxumRv5",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "8w4fXBPX6t2d8mye": {
+    "_id": "8w4fXBPX6t2d8mye",
+    "type": "ItemGrant",
+    "level": 13,
+    "title": "Features",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.ikUnK81OVw8GpQMw",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "NQptgiz9hnPoqCfS": {
+    "_id": "NQptgiz9hnPoqCfS",
+    "type": "ItemGrant",
+    "level": 17,
+    "title": "Features",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.k43yoUp0XD7k31e3",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": null,
+ "_key": "!items!Glu92Ua0mATyiYMU"
+}

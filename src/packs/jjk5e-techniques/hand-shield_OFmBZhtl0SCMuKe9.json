@@ -1,0 +1,32 @@
+{
+ "_id": "OFmBZhtl0SCMuKe9",
+ "name": "Hand Shield",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/heart-catch.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Heart Catch — Innate Technique (6th level)</em></p><p>Beginning at 6th level, you can use your <em>Love Hands</em> to guard a creature within 5 ft of both hands, granting them three quarters cover. Alternatively, you can have each hand guard a different target to grant them half cover.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Heart Catch 6"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Heart Catch",
+   "level": 6
+  }
+ },
+ "folder": "AAtWazy4xXecJci4",
+ "_key": "!items!OFmBZhtl0SCMuKe9"
+}

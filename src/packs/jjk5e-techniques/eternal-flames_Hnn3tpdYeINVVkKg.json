@@ -1,0 +1,32 @@
+{
+ "_id": "Hnn3tpdYeINVVkKg",
+ "name": "Eternal Flames",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/blazing-courage.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Blazing Courage — Innate Technique (6th level)</em></p><p>At 6th level, when you spend at least 3 ce on <em>Ignition</em>, you can increase the weapon’s range by 10 feet, ignore resistance to fire damage and when you miss with a weapon attack by 2 or less, you deal half your <em>Ignition</em> damage. <br />\n This increases to 3 or less at 11th level and 4 or less at 18th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Blazing Courage 6"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Blazing Courage",
+   "level": 6
+  }
+ },
+ "folder": "VITDORKyY9It9TdZ",
+ "_key": "!items!Hnn3tpdYeINVVkKg"
+}

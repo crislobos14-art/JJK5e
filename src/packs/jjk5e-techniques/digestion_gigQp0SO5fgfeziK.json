@@ -1,0 +1,126 @@
+{
+ "_id": "gigQp0SO5fgfeziK",
+ "name": "Digestion",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/voracity.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Voracity — Innate Technique (6th level)</em></p><p>At 6th level, your stomach calls for satiation and gives you the means to feed it. The amount of cursed energy required for <em>Hunger of the Accursed</em> and <em>Regurgitation</em> decreases by 1 (minimum cost of 1).</p>\n<p>Additionally, you have learned to use cursed energy to enhance the abilities of the devoured. You can use one of the following benefits once per turn when you use a stolen ability:<br />\n<strong>Efficiency.</strong> When you use an ability with a base cursed energy cost, the cost of the feature decreases by 1 (minimum cost of 1).<br />\n<strong>Output.</strong> When you use an ability that lets you spend up to a certain amount of cursed energy, you can increase that amount by 2.<br />\n<strong>Speed.</strong> When using stolen movement, you can spend up to your proficiency bonus to increase it by 5 ft per cursed energy spent.<br />\n<strong>Reinforcement.</strong> When using stolen AC and are hit by an attack roll, you can spend 1 CE to add your proficiency bonus to your AC against that attack roll, potentially causing it to miss.<br />\n<strong>Instinct.</strong> When using a feature, you can spend 2 cursed energy to decrease its action cost by one (Full-Turn Action &gt; Action &gt; Bonus Action &gt; Reaction).</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "l71aF9Qo5eXCITwG": {
+    "_id": "l71aF9Qo5eXCITwG",
+    "type": "utility",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   },
+   "QYRnTygBGHGnzYOb": {
+    "_id": "QYRnTygBGHGnzYOb",
+    "type": "utility",
+    "name": "Bonus Action (2 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "l71aF9Qo5eXCITwG": 1,
+    "QYRnTygBGHGnzYOb": 2
+   },
+   "technique": "Voracity",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "xeaTaRsDQ88YPtDB",
+ "_key": "!items!gigQp0SO5fgfeziK"
+}

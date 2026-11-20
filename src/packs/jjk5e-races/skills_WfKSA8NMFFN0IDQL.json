@@ -1,0 +1,29 @@
+{
+ "_id": "WfKSA8NMFFN0IDQL",
+ "name": "Skills",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/trait-race.svg",
+ "system": {
+  "description": {
+   "value": "<p>You gain proficiency in martial weapons.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "race",
+   "subtype": ""
+  },
+  "requirements": "Human (Jujutsu Sorcerer)"
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "FDVrGmw22BclKBnR",
+ "_key": "!items!WfKSA8NMFFN0IDQL"
+}

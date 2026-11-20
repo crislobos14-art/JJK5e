@@ -1,0 +1,71 @@
+{
+ "_id": "NOCT1jMh4LJanYMQ",
+ "name": "Undaunted",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>At 2nd level, even after being damaged you still stand and fight as if nothing happened. On your turn, you can use a bonus action to regain hit points equal to 1d10 + your warrior level. You gain a second use at 10th level.</p>\n<p>Once you use this feature, you must finish a short or long rest before you can use it again.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Warrior 2",
+  "uses": {
+   "max": "1",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "sr",
+     "type": "recoverAll"
+    }
+   ]
+  },
+  "activities": {
+   "zmzaoQMGpSW04nwf": {
+    "_id": "zmzaoQMGpSW04nwf",
+    "type": "utility",
+    "name": "Bonus Action",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1"
+      }
+     ],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "7ecbupybBLUFyYzw",
+ "_key": "!items!NOCT1jMh4LJanYMQ"
+}

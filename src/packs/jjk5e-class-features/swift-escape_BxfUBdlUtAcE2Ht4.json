@@ -1,0 +1,71 @@
+{
+ "_id": "BxfUBdlUtAcE2Ht4",
+ "name": "Swift Escape",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>At 17th level, your character is rescued at the last moment by your shikigami. When you take damage, you can use your reaction to give yourself resistance to that damage. You are moved by your companion and you are moved to an unoccupied space that you can see within your companion’s movement speed, where you reappear with the shikigami.</p>\n<p>You can use this feature a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Shikigami User 17",
+  "uses": {
+   "max": "@prof",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
+    }
+   ]
+  },
+  "activities": {
+   "q9SlLM8CvWlHCKnt": {
+    "_id": "q9SlLM8CvWlHCKnt",
+    "type": "utility",
+    "name": "Reaction",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1"
+      }
+     ],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "69XiiJo14iwd80Zo",
+ "_key": "!items!BxfUBdlUtAcE2Ht4"
+}

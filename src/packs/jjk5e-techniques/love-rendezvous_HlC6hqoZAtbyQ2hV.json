@@ -1,0 +1,98 @@
+{
+ "_id": "HlC6hqoZAtbyQ2hV",
+ "name": "Love Rendezvous",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/love-rendezvous.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Love Rendezvous — Innate Technique (1st level)</em></p><blockquote><p>Love Rendezvous is a technique based on the Southern Cross. It marks creatures or objects with cursed energy and makes the lowest star have to pass through the other ones before they can move.</p></blockquote><p>Starting at 1st level, you have a very complex technique, and you have learned the basics of how to use it. As a free action when you touch a creature or object(this can be done with yourself) with cursed energy or as part of hitting an unarmed strike, you can spend 1 cursed energy to mark the target's cursed energy with a star of your choice. Only one star can be placed in one creature's cursed energy at a time, however the same star can be applied to different people's cursed energy at a time. You can mark a number of creatures with the same star up to your Cursed Energy modifier. If you mark a creature, everything that has their cursed energy will be marked as well, like Shikigami, cursed tools etc. <br />\nThe following stars are available to mark: <br />\n★Imai, ★Acrux, ★Mimosa, ★Ginan and ★Gacrux.</p>\n<p>When you mark a creature, a sparking light will appear above their head. They can also find the star's name marked on their body with a Wisdom (Perception) check.<br />\nAnyone appointed with a star must follow a sequential order if they want to attempt approaching another star. When they make their movement, they must move directly towards the next star in order and touch them, which allows them to move on to the next star in order. Failing to do this will make them restrained until the beginning of their next turn and every single creature or object marked with the same star will be attracted to the point with the highest cursed energy, being all rapidly thrown at that point. The highest cursed energy point will take 1 dice of bludgeoning damage per 5ft the other stars have travelled and their size, while the objects and creatures that crashed into it will take half as much damage. See the following chart for measure of damage:</p>\n<table>\n<thead>\n<tr>\n<th style=\"text-align: left;\">Size</th>\n<th style=\"text-align: left;\">Damage Dice</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td style=\"text-align: left;\">Tiny</td>\n<td style=\"text-align: left;\">1d4</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">Small</td>\n<td style=\"text-align: left;\">d6</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">Medium</td>\n<td style=\"text-align: left;\">d8</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">Large</td>\n<td style=\"text-align: left;\">d10</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">Huge</td>\n<td style=\"text-align: left;\">d12</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">Gargantuan</td>\n<td style=\"text-align: left;\">2d12</td>\n</tr>\n</tbody>\n</table>\n<p>The order of the stars is as follows: ★Imai → ★Acrux → ★Mimosa → ★Ginan → ★Gacrux</p>\n<p>If there is no possible path for a target to follow the order, the target isn’t affected by the technique until such a possible path is created. The target is immediately affected again once such a path exists. For example, if Gacrux is placed in front of Ginan for a creature marked with Acrux, then the technique no longer functions for that creature, as there is no way to touch Ginan without approaching Gacrux. Once the creature passes Gacrux, thus opening a path for them to get to Ginan, the technique functions for them once more, and they must touch Ginan before approaching Gacrux.</p>\n<p>The stars last for 10 minutes or until you remove one or more of them.</p>\n<p>Creatures won't know they're being affected by the technique until they suffer the consequences from not following the order. After that, they can make a Perception check to find the star. After they discover the star, they can make a Wisdom (Insight) check at disadvantage against your cursed energy DC to try to understand your technique. Unless they have the Cursed Energy Perception feat or are familiar with the southern star constellation, which allows them to ignore disadvantage to the roll.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "JWpITcy7VX1rdcIp": {
+    "_id": "JWpITcy7VX1rdcIp",
+    "type": "utility",
+    "name": "Special (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "value": "10",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "special",
+   "value": null,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "10",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "JWpITcy7VX1rdcIp": 1
+   },
+   "technique": "Love Rendezvous",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "wSkJnhi22IbLpEbi",
+ "_key": "!items!HlC6hqoZAtbyQ2hV"
+}

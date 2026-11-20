@@ -1,0 +1,13 @@
+{
+ "_id": "zSwLtU95aoPjkhc2",
+ "name": "JJK: Fill JJK Hotbar",
+ "type": "script",
+ "img": "icons/svg/item-bag.svg",
+ "scope": "global",
+ "command": "game.modules.get(\"jjk5e\").api.fillHotbar();",
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": null,
+ "_key": "!macros!zSwLtU95aoPjkhc2"
+}

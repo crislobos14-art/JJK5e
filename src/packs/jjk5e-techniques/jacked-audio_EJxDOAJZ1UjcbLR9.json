@@ -1,0 +1,95 @@
+{
+ "_id": "EJxDOAJZ1UjcbLR9",
+ "name": "Jacked Audio",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/rockstar.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Rockstar — Innate Technique (3rd level)</em></p><p>At 3rd level, when you use your action to launch a Sound Blast, you can launch up to two Sound Blasts, spending 1 Cursed Energy for each. At 11th level you can make up to three Sound Blast attacks as part of your action.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "QZslfH06BotZdDRL": {
+    "_id": "QZslfH06BotZdDRL",
+    "type": "utility",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "QZslfH06BotZdDRL": 1
+   },
+   "technique": "Rockstar",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "vosb36eMO9PhuX42",
+ "_key": "!items!EJxDOAJZ1UjcbLR9"
+}

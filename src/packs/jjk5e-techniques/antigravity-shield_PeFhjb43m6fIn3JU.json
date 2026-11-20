@@ -1,0 +1,95 @@
+{
+ "_id": "PeFhjb43m6fIn3JU",
+ "name": "Antigravity Shield",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/antigravity-system.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Antigravity System — Innate Technique (6th level)</em></p><p>At 6th level, you have learned to defend yourself from attacks using your antigravity. As a reaction for 2 CE, you can encase yourself in a field of antigravity, causing attack rolls against you to be made at disadvantage and any damage other than psychic is reduced by your CE modifier + your level until the beginning of your next turn. If you are taking the Dodge action, you can use this reaction on another creature within 5 feet.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "HHt4hG5MQzCTafuK": {
+    "_id": "HHt4hG5MQzCTafuK",
+    "type": "utility",
+    "name": "Reaction (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "reaction",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "HHt4hG5MQzCTafuK": 2
+   },
+   "technique": "Antigravity System",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "h8faxx3TSM5qAlx3",
+ "_key": "!items!PeFhjb43m6fIn3JU"
+}

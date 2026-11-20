@@ -1,0 +1,71 @@
+{
+ "_id": "L8ZVE2QpdnYn2BQ0",
+ "name": "Blood Production",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/blood-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Blood Manipulation</em></p>\n<p>You have found a way to link your blood to Cursed Energy. For 1 CE, you can create a sufficient source of blood worth 10 HP that can only be used for your Blood Manipulation features. This does not regain HP.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Blood Manipulation",
+  "activities": {
+   "lvRnwmx0gSDEZnIc": {
+    "_id": "lvRnwmx0gSDEZnIc",
+    "type": "utility",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "lvRnwmx0gSDEZnIc": 1
+   },
+   "prereq": {
+    "techniques": [
+     [
+      "Blood Manipulation"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "nBcvifZT3OePW2PN",
+ "sort": 100,
+ "_key": "!items!L8ZVE2QpdnYn2BQ0"
+}

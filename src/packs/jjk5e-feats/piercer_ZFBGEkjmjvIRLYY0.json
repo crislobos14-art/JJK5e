@@ -1,0 +1,54 @@
+{
+ "_id": "ZFBGEkjmjvIRLYY0",
+ "name": "Piercer",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: N/A</em></p>\n<p>You have achieved a penetrating precision in combat, granting you the following benefits:</p>\n<ul>\n<li>\n<p>Increase your Strength or Dexterity by 1, to a maximum of 20.  </p>\n</li>\n<li>\n<p>Once per turn, when you hit a creature with an attack that deals piercing damage, you can re-roll one of the attack’s damage dice, and you must use the new roll.  </p>\n</li>\n<li>\n<p>When you score a critical hit that deals piercing damage to a creature, you can roll one additional damage die when determining the extra piercing damage the target takes.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkPhysical"
+  },
+  "requirements": "N/A",
+  "advancement": {
+   "bQg2vVWQhq0Ml1VP": {
+    "_id": "bQg2vVWQhq0Ml1VP",
+    "type": "AbilityScoreImprovement",
+    "level": 0,
+    "title": "Ability Score Increase",
+    "value": {},
+    "configuration": {
+     "points": 1,
+     "cap": 1,
+     "fixed": {},
+     "locked": [
+      "con",
+      "int",
+      "wis",
+      "cha"
+     ]
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "cxPIGjcxqJdZTMQ5",
+ "sort": 1600,
+ "_key": "!items!ZFBGEkjmjvIRLYY0"
+}

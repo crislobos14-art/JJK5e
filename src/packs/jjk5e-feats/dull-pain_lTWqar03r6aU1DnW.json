@@ -1,0 +1,42 @@
+{
+ "_id": "lTWqar03r6aU1DnW",
+ "name": "Dull Pain",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/pain-killer.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Pain Killer</em></p>\n<p>A creature under the effects of <em>Pain Killer</em> now gains additional temporary hit points equal to 5 times your proficiency bonus.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Pain Killer",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Pain Killer"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "Maq8utaMhQSZRR4y",
+ "sort": 100,
+ "_key": "!items!lTWqar03r6aU1DnW"
+}

@@ -1,0 +1,39 @@
+{
+ "_id": "UIybdWfyvaqCTgiT",
+ "name": "Bulletproof Jacket",
+ "type": "equipment",
+ "img": "icons/svg/shield.svg",
+ "folder": "qVuyydidyeepCNvu",
+ "system": {
+  "description": {
+   "value": "<p>Medium armor. AC 13 + Dex modifier (max 2).</p><p>A protective jacket consisting of durable synthetic fibers that provides decent protection against bullets and other weapons without making too much noise.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "medium",
+   "baseItem": ""
+  },
+  "armor": {
+   "value": 13,
+   "dex": 2
+  },
+  "price": {
+   "value": 50.0,
+   "denomination": "gp"
+  },
+  "properties": [],
+  "quantity": 1
+ },
+ "flags": {
+  "jjk5e": {
+   "priceUSD": "$5,000"
+  }
+ },
+ "_key": "!items!UIybdWfyvaqCTgiT"
+}

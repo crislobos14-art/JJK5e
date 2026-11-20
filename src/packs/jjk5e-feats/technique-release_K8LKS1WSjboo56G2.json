@@ -1,0 +1,42 @@
+{
+ "_id": "K8LKS1WSjboo56G2",
+ "name": "Technique Release",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/blazing-courage.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Maximum: Conflagration</em></p>\n<p>When you hit with an attack while <em>Ignition</em> is activated, you can release the technique, ending the effects of <em>Ignition</em> on the weapon in exchange for doubling your fire damage for this attack. If used with <em>Maximum: Conflagration</em>, it instead deals a number of additional damage die equal to the CE spent on <em>Ignition</em>.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Maximum: Conflagration",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Maximum: Conflagration"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "FQaknUUFDMQmvcGr",
+ "sort": 400,
+ "_key": "!items!K8LKS1WSjboo56G2"
+}

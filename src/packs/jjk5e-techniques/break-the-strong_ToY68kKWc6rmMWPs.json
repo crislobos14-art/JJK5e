@@ -1,0 +1,32 @@
+{
+ "_id": "ToY68kKWc6rmMWPs",
+ "name": "Break the Strong",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/inverse.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Inverse — Innate Technique (6th level)</em></p><p>At 6th level, you’ve become adept at manipulating damage based on its intensity, even when making saving throws. When you are forced to make a saving throw against an effect that deals damage, the difficulty of the save depends on whether the damage is above or below your threshold.<br />\nIf the damage is above your threshold, you have advantage on the saving throw, regardless of the damage type. If the damage is below your threshold, you have disadvantage on the saving throw, as weaker attacks become more dangerous to you.<br />\nFor example, if your threshold is 15 and you would take 18 damage from a fireball, you gain advantage on the saving throw. However, if you take 10 damage from the same attack, you would roll with disadvantage instead.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Inverse 6"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Inverse",
+   "level": 6
+  }
+ },
+ "folder": "bh2ZyC5GSVoaToIo",
+ "_key": "!items!ToY68kKWc6rmMWPs"
+}

@@ -1,0 +1,92 @@
+{
+ "_id": "nBS99egazwd4cDfZ",
+ "name": "Quick Inversion",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/inverse.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Inverse — Innate Technique (11th level)</em></p><p>At 11th level, staying with your technique active for long periods of time can become a disadvantage at times, so you have trained to have easier access to your technique. You can now use your technique as a reaction to damage and can deactivate your technique as a reaction.<br />\nIn addition, you now have additional reactions equal to half of your proficiency bonus(rounded up) that can be used only for the inverse technique. At 18th level, this becomes a number of reactions equal to your proficiency bonus.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "PGfjGscigHI5RyTB": {
+    "_id": "PGfjGscigHI5RyTB",
+    "type": "utility",
+    "name": "Reaction",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "reaction",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Inverse",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "bh2ZyC5GSVoaToIo",
+ "_key": "!items!nBS99egazwd4cDfZ"
+}

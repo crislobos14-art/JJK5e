@@ -1,0 +1,118 @@
+{
+ "_id": "43oC5ulCse4R6sX4",
+ "name": "Innate Technique: G Warstaff",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/g-warstaff.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>You can conjure a pen-like cursed tool that lets you see the future.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.lPvmTuuxb9GiKkQ4]{Warstaff}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.Ox6yJ0GTYP1fgrWI]{Highlighted Panels}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.vXaWHaio8ChSQVIn]{Predictable Strikes}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.oCZBhN6O2HwVIW9m]{Precognition}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.HxfdcfxdpJridm05]{Domain Expansion: Storyboard Dominion}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "GiH2fpRqTkyUZWAC": {
+    "_id": "GiH2fpRqTkyUZWAC",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "G Warstaff (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.lPvmTuuxb9GiKkQ4",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "dWp5AsSHp8OZlHSZ": {
+    "_id": "dWp5AsSHp8OZlHSZ",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "G Warstaff (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.Ox6yJ0GTYP1fgrWI",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "iFodBOtE8HcilJn7": {
+    "_id": "iFodBOtE8HcilJn7",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "G Warstaff (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.vXaWHaio8ChSQVIn",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "BHeEt6xpWcABFtEk": {
+    "_id": "BHeEt6xpWcABFtEk",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "G Warstaff (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.oCZBhN6O2HwVIW9m",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "90exkQOLqrN6CZtf": {
+    "_id": "90exkQOLqrN6CZtf",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "G Warstaff (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.HxfdcfxdpJridm05",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "G Warstaff"
+  }
+ },
+ "_key": "!items!43oC5ulCse4R6sX4"
+}

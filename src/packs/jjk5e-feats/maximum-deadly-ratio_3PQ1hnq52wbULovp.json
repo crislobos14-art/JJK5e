@@ -1,0 +1,64 @@
+{
+ "_id": "3PQ1hnq52wbULovp",
+ "name": "Maximum: Deadly Ratio",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/ratio.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Improved Ratio</em></p>\n<p>For an additional 6 Cursed Energy, when you land a critical hit using ratio your target automatically loses a limb that is not the head or torso, using the limb damage table.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Improved Ratio",
+  "activities": {
+   "RfUnN5aUzdEcVdep": {
+    "_id": "RfUnN5aUzdEcVdep",
+    "type": "utility",
+    "name": "Extra (6 CE)",
+    "sort": 900000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Prerequisite: Must have Improved Ratio For an additional 6 Cursed Energy, when you land..."
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "RfUnN5aUzdEcVdep": 6
+   },
+   "prereq": {
+    "features": [
+     [
+      "Improved Ratio"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "b0K9kretIN46uAAM",
+ "sort": 300,
+ "_key": "!items!3PQ1hnq52wbULovp"
+}

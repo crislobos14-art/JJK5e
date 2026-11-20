@@ -1,0 +1,118 @@
+{
+ "_id": "sgpQc4L7TW5D82SR",
+ "name": "Innate Technique: Cursed Corpse Creation",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/cursed-corpse-creation.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>You create advanced cursed corpses that can function autonomously.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.79ap6DgHUVAq6trE]{Cursed Corpse Creation}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.us4vpuR3VHkSqbfn]{Corpse Tactics}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.a5C4w1Z7bLj6KZOI]{Cursed Corpse Mutation}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.JETyChuTEOnECTgY]{Maximum: Prized Creation}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.FW1g0lrHsR4I2Dfn]{Perfect Creations}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "fKgowT4vpORTQN98": {
+    "_id": "fKgowT4vpORTQN98",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Cursed Corpse Creation (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.79ap6DgHUVAq6trE",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "GYMZPmFZVGQpfbdX": {
+    "_id": "GYMZPmFZVGQpfbdX",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Cursed Corpse Creation (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.us4vpuR3VHkSqbfn",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "6SrYuoe6NP3sGsQn": {
+    "_id": "6SrYuoe6NP3sGsQn",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Cursed Corpse Creation (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.a5C4w1Z7bLj6KZOI",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "qCGETyB6TIdSWMST": {
+    "_id": "qCGETyB6TIdSWMST",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Cursed Corpse Creation (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.JETyChuTEOnECTgY",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "w3kFA3tbsSj24jxa": {
+    "_id": "w3kFA3tbsSj24jxa",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Cursed Corpse Creation (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.FW1g0lrHsR4I2Dfn",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Cursed Corpse Creation"
+  }
+ },
+ "_key": "!items!sgpQc4L7TW5D82SR"
+}

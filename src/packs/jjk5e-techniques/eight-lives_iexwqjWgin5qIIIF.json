@@ -1,0 +1,95 @@
+{
+ "_id": "iexwqjWgin5qIIIF",
+ "name": "Eight Lives",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/eight-heads.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Eight Heads — Innate Technique (1st level)</em></p><blockquote><p>One of your ancestors devoured Yamata no Orochi, the Eight Headed Serpent, creating a hereditary technique with its power.</p></blockquote><p>Starting at 1st level, you have the ability to come back to life after you die, up to 8 times. When you are reduced to 0 hit points or die outright, you can spend 1 CE to come back to life at half your hitpoint maximum and harmful conditions other than exhaustion are removed. You have 8 lives and can use a life this way three times per long rest. This increases to four at 3rd level and eight at 6th level.  You regain one expended life after eight days.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "5SmXcppT0Hr5HzUQ": {
+    "_id": "5SmXcppT0Hr5HzUQ",
+    "type": "utility",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "5SmXcppT0Hr5HzUQ": 1
+   },
+   "technique": "Eight Heads",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "DMcMPNJMAkcTYNF8",
+ "_key": "!items!iexwqjWgin5qIIIF"
+}

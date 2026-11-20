@@ -1,0 +1,46 @@
+{
+ "_id": "XiKZVS9s2x5a8XL9",
+ "name": "Duplicated Reversal",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/vengeful-spirit-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Vengeful Spirit Manipulation — Cursed Technique Reversal</em></p><p>Coming with your mastery over Reverse Cursed Technique, you can now copy the reversal features of cursed techniques you’ve copied.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Vengeful Spirit Manipulation"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Vengeful Spirit Manipulation",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Vengeful Spirit Manipulation"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!XiKZVS9s2x5a8XL9"
+}

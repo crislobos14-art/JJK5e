@@ -1,0 +1,95 @@
+{
+ "_id": "dpjaBTyscou71Drz",
+ "name": "Cursed Eyes of Fate",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/fate.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Fate — Innate Technique (3rd level)</em></p><p>At 3rd level, you learn that fate is not simple. It is what makes up all connections between people and everything else. As a bonus action for 1 CE, when you look at a creature you can focus until you see the red threads of fate that connect the souls of all living creatures. As part of this bonus action, you can tell who the threads connect to if they are within sight, as well as the type of connection. This can range from familial connections, admiration, or feelings of love.<br />\n Alternatively, you can instead read the target’s personal thread of fate to learn one of the following:</p>\n<ul>\n<li>\n<p>The target’s damage resistances, immunities, or vulnerabilities.  </p>\n</li>\n<li>\n<p>The target’s CR or Level.  </p>\n</li>\n<li>\n<p>The target’s remaining hit points.  </p>\n</li>\n<li>\n<p>The target’s AC or an Ability modifier.  </p>\n</li>\n<li>\n<p>The target’s current emotions.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "WVjxC1vFewIJD6uf": {
+    "_id": "WVjxC1vFewIJD6uf",
+    "type": "utility",
+    "name": "Bonus Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "WVjxC1vFewIJD6uf": 1
+   },
+   "technique": "Fate",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "UdYh82jLla1edrDf",
+ "_key": "!items!dpjaBTyscou71Drz"
+}

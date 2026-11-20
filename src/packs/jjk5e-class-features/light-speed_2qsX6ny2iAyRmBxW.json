@@ -1,0 +1,64 @@
+{
+ "_id": "2qsX6ny2iAyRmBxW",
+ "name": "Light Speed",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Speed Improvements: You feel like you could probably win against a special grade in a race due to how fast you are now. You can have a number of these improvements equal to your Dexterity modifier. ---</em></p>\n<p>Sight Speed, 1 body point, 17th level, 30 Dexterity<br />\nYou have become faster than people can even perceive, seemingly approaching even the speed of light. Your movement speed doubles again, and creatures cannot perceive you moving, thus creatures can’t take reactions in response to your movement unless they have blindsight.  </p>\n<hr />",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Heavenly Restriction 2"
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "level": 17,
+    "abilities": {
+     "dex": 30
+    },
+    "features": [
+     [
+      "Sight Speed"
+     ]
+    ]
+   },
+   "bodyCost": 1,
+   "bodyCategory": "dex"
+  }
+ },
+ "folder": "JeA0bNLBGnvPx6Zr",
+ "effects": [
+  {
+   "_id": "puENkeXspg34XJcc",
+   "name": "Light Speed",
+   "img": "modules/jjk5e/icons/feature.svg",
+   "changes": [
+    {
+     "key": "system.attributes.movement.walk",
+     "mode": 1,
+     "value": "2",
+     "priority": null
+    }
+   ],
+   "disabled": false,
+   "transfer": true,
+   "duration": {},
+   "description": "",
+   "flags": {},
+   "_key": "!items.effects!2qsX6ny2iAyRmBxW.puENkeXspg34XJcc"
+  }
+ ],
+ "_key": "!items!2qsX6ny2iAyRmBxW"
+}

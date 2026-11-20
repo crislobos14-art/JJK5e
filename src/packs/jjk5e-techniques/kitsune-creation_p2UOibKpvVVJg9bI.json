@@ -1,0 +1,95 @@
+{
+ "_id": "p2UOibKpvVVJg9bI",
+ "name": "Kitsune Creation",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/starlight-symphony.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Starlight Symphony — Innate Technique (3rd level)</em></p><p>At 3rd level, you can summon a fox shikigami as an action for 2 cursed energy. The shikigami lasts for 24 hours or until dismissed as a free action. Your fox shikigami act on your turn and you can command all fox shikigami as a bonus action.<br />\n You can have a number of shikigami summoned equal to your proficiency bonus and always know if your shikigami has died. </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "hqsMkT3umtujwRFp": {
+    "_id": "hqsMkT3umtujwRFp",
+    "type": "utility",
+    "name": "Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "hqsMkT3umtujwRFp": 2
+   },
+   "technique": "Starlight Symphony",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "MxqACO3emHCjwL5R",
+ "_key": "!items!p2UOibKpvVVJg9bI"
+}

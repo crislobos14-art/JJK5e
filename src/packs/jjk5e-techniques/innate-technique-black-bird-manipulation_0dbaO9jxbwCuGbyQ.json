@@ -1,0 +1,118 @@
+{
+ "_id": "0dbaO9jxbwCuGbyQ",
+ "name": "Innate Technique: Black Bird Manipulation",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/black-bird-manipulation.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>You were born with a simple ability many called weak, the ability to control and see through crows.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.y3LBulYKMnbDwSNs]{Cursed Crows}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.aCWMUrg04UP5kxwC]{Omen of Death}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.VRx1ByQ8bVhRmbdx]{Raven’s Eye}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.9Q2ddIFWSmNrpEH8]{Bird Strike}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.Ao4mm1RP1nEiYzPS]{Domain Expansion: Black Mahakala}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "9Xok6Q9P51KiASNW": {
+    "_id": "9Xok6Q9P51KiASNW",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Black Bird Manipulation (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.y3LBulYKMnbDwSNs",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "guiQGv0jtie323RN": {
+    "_id": "guiQGv0jtie323RN",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Black Bird Manipulation (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.aCWMUrg04UP5kxwC",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "o092F53JCs9ia83B": {
+    "_id": "o092F53JCs9ia83B",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Black Bird Manipulation (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.VRx1ByQ8bVhRmbdx",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "EGikFW1Wx1r0ZaUy": {
+    "_id": "EGikFW1Wx1r0ZaUy",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Black Bird Manipulation (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.9Q2ddIFWSmNrpEH8",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "FTxiYSXVEuIHpX2U": {
+    "_id": "FTxiYSXVEuIHpX2U",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Black Bird Manipulation (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.Ao4mm1RP1nEiYzPS",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Black Bird Manipulation"
+  }
+ },
+ "_key": "!items!0dbaO9jxbwCuGbyQ"
+}

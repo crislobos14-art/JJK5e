@@ -1,0 +1,77 @@
+{
+ "_id": "u937Au4lMEJcgb6F",
+ "name": "Shadow User",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/shadow-killer.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Shadow Strike</em></p>\n<p>You have furthered the uses of your shadow choosing one of the following features (This feat can be taken multiple times).</p>\n<ul>\n<li>\n<p><strong>Shadow Skulker</strong>. As an action for 2 CE you physically enter the shadows gaining full cover for X rounds or until you exit from a shadow within 10 feet. As an action while the technique is active, you can move into a shadow within 10 ft. You can hear and see through the shadow you entered. If the shadow is sufficiently illuminated, you exit the shadow. (X = CE mod)  </p>\n</li>\n<li>\n<p><strong>Shadow Envoy</strong>. As an action for 2 cursed energy, you can imbue your cursed energy into a creature's shadow within 5 ft. To attempt this technique without them noticing, you must make a Cursed Energy check against their passive perception. You can imbue conditions for when the technique is triggered. You can choose to leave either a melee attack with a range of 10 ft using <em>Shadow Strike</em> or a simple message. If you choose to leave a <em>Shadow Strike</em>, it targets a specific creature under a condition you set, uses your Cursed Energy modifier and is made at advantage if the target is unaware. If you choose a message, you can choose to leave five words. When you create the message, you can choose any number of creatures who can see the message in the shadow.  </p>\n</li>\n<li>\n<p>Two shadow spells below 5th level. The CE cost equals the spell’s level.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Shadow Strike",
+  "activities": {
+   "uzaPSkvTozqMkPuD": {
+    "_id": "uzaPSkvTozqMkPuD",
+    "type": "utility",
+    "name": "Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "10",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "uzaPSkvTozqMkPuD": 2
+   },
+   "prereq": {
+    "features": [
+     [
+      "Shadow Strike"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "yU2uxvCgVRVwhJwX",
+ "sort": 100,
+ "_key": "!items!u937Au4lMEJcgb6F"
+}

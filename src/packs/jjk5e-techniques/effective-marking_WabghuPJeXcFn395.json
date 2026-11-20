@@ -1,0 +1,92 @@
+{
+ "_id": "WabghuPJeXcFn395",
+ "name": "Effective Marking",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/love-rendezvous.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Love Rendezvous — Innate Technique (3rd level)</em></p><p>At 3rd level, you learned how to mark creatures in a quicker and more effective manner. You can now mark creatures with stars as a reaction. Also, you gain a number of additional reactions equal to your Cursed Energy modifier that can only be used to mark other creatures.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "No9KmbGtcneLQgGi": {
+    "_id": "No9KmbGtcneLQgGi",
+    "type": "utility",
+    "name": "Reaction",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "reaction",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Love Rendezvous",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "wSkJnhi22IbLpEbi",
+ "_key": "!items!WabghuPJeXcFn395"
+}

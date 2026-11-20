@@ -1,0 +1,79 @@
+{
+ "_id": "Vw0Ab2ObUrl6OxxU",
+ "name": "Wing King Imitation",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/blood-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Piercing Blood</em></p>\n<p>You condense your blood into wings resembling veins as a bonus action for 10 CE, gathering the wings behind you and gaining the following benefits for 1 minute:</p>\n<ul>\n<li>\n<p>Your walking speed is quadrupled  </p>\n</li>\n<li>\n<p>You gain a flying speed equal to half your walking speed  </p>\n</li>\n<li>\n<p>As a free action on your turn, you can unleash lines of blood. This takes shape as three ranged Cursed Energy attacks against a creature within 60 feet. Each attack deals 3d10 + your CE modifier in necrotic damage.</p>\n</li>\n</ul>\n<p>While using Wing King, you cannot use <em>Piercing Blood</em>.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Piercing Blood",
+  "activities": {
+   "arsz7ETOYgXEqntl": {
+    "_id": "arsz7ETOYgXEqntl",
+    "type": "utility",
+    "name": "Bonus Action (10 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "60",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "arsz7ETOYgXEqntl": 10
+   },
+   "prereq": {
+    "features": [
+     [
+      "Piercing Blood"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "nBcvifZT3OePW2PN",
+ "sort": 600,
+ "_key": "!items!Vw0Ab2ObUrl6OxxU"
+}

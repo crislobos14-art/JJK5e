@@ -1,0 +1,43 @@
+{
+ "_id": "TbNZvfgjVhP0jjqp",
+ "name": "Refined Domain",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Domain Expansion, 400 Refinement points</em></p>\n<p>Your refinement allows you to further empower your domain expansion. You can choose one of the following benefits:</p>\n<ul>\n<li>\n<p><strong>Severe Danification.</strong> If your domain has a passive effect that causes damage at Initiative 20, the number of damage dice are increased by your CE modifier.  </p>\n</li>\n<li>\n<p><strong>Non-Lethality.</strong> If your domain is Non-Lethal or has a restriction, you can add an additional condition or restriction to your technique.  </p>\n</li>\n<li>\n<p><strong>Cost Reduction.</strong> Your domain refinement enhances the technique imbued into the barrier. While within your domain, the CE cost of your innate technique features are halved(rounded up).   </p>\n</li>\n<li>\n<p><strong>Lightning Speed Release.</strong> Your domain refinement has made your techniques faster. Your innate technique features action costs reduced by one while your domain is active (Action &gt; Bonus Action &gt; Reaction &gt; Free Action).  </p>\n</li>\n<li>\n<p><strong>Multiplication.</strong> Your domain has multiplied the output of the imbued innate technique. When a feature lets you spend up to a certain amount of cursed energy, that maximum amount is doubled.  </p>\n</li>\n<li>\n<p><strong>Improved Technique.</strong> Your imbued technique has been refined. While within your domain, you can choose one of your Innate Technique features. The damage dice of that technique increases by your CE modifier.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkBarrier"
+  },
+  "requirements": "Must have Domain Expansion, 400 Refinement points",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "prefixes": [
+     [
+      "Domain Expansion"
+     ]
+    ],
+    "refinement": 400
+   }
+  }
+ },
+ "folder": "w6CtJKH5qYx1fgN4",
+ "sort": 700,
+ "_key": "!items!TbNZvfgjVhP0jjqp"
+}

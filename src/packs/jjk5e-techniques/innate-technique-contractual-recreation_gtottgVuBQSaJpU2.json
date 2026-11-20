@@ -1,0 +1,118 @@
+{
+ "_id": "gtottgVuBQSaJpU2",
+ "name": "Innate Technique: Contractual Recreation",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/contractual-recreation.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>You can recreate the subject of contracts you find, like receipts.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.Z9Ni91hHu2mMVtHZ]{Recreation}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.qP8ItUbMudHGs7Ms]{Quick Spender}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.WEeRNRtlGxpBviCA]{Splurge}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.KQ0xKxXHF4freo6F]{Contractual Control}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.h9YVxaMHywr3BtDi]{Domain Expansion: Black Friday}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "nTzw8fb2GRIvNj2B": {
+    "_id": "nTzw8fb2GRIvNj2B",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Contractual Recreation (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.Z9Ni91hHu2mMVtHZ",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "bI4NbH2Kw4wq5uWz": {
+    "_id": "bI4NbH2Kw4wq5uWz",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Contractual Recreation (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.qP8ItUbMudHGs7Ms",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "KquD37IMQnTsK0fI": {
+    "_id": "KquD37IMQnTsK0fI",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Contractual Recreation (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.WEeRNRtlGxpBviCA",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "vY7O9kqIRrvtErJ9": {
+    "_id": "vY7O9kqIRrvtErJ9",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Contractual Recreation (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.KQ0xKxXHF4freo6F",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "dVHqiymINYjze42u": {
+    "_id": "dVHqiymINYjze42u",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Contractual Recreation (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.h9YVxaMHywr3BtDi",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Contractual Recreation"
+  }
+ },
+ "_key": "!items!gtottgVuBQSaJpU2"
+}

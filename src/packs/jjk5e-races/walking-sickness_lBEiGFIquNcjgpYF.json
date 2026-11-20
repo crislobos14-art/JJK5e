@@ -1,0 +1,122 @@
+{
+ "_id": "lBEiGFIquNcjgpYF",
+ "name": "Walking Sickness",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/trait-race.svg",
+ "system": {
+  "description": {
+   "value": "<p>As an action, you can force all creatures within 30 feet of you to make a Constitution saving throw against your Cursed Energy save DC. On a failure, they gain the poisoned condition for 1 minute. A creature can repeat this save at the end of their turn. Once you use this feature, you cannot use it again until you complete a long rest.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "race",
+   "subtype": ""
+  },
+  "requirements": "Cursed Spirit (Disease)",
+  "uses": {
+   "max": "1",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
+    }
+   ]
+  },
+  "activities": {
+   "T6YUhcwbVLvylbHD": {
+    "_id": "T6YUhcwbVLvylbHD",
+    "type": "save",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1"
+      }
+     ],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "30",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    },
+    "effects": [
+     {
+      "_id": "lqS66je0X4X0uIZM",
+      "onSave": false
+     }
+    ]
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "effects": [
+  {
+   "_id": "lqS66je0X4X0uIZM",
+   "name": "Poisoned (Walking Sickness)",
+   "img": "modules/jjk5e/icons/trait-race.svg",
+   "statuses": [
+    "poisoned"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "seconds": 60,
+    "rounds": 10
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "poisoned"
+    }
+   },
+   "_key": "!items.effects!lBEiGFIquNcjgpYF.lqS66je0X4X0uIZM"
+  }
+ ],
+ "folder": "MrUJYYzCm8S5kHBr",
+ "_key": "!items!lBEiGFIquNcjgpYF"
+}

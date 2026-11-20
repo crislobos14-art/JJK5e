@@ -1,0 +1,42 @@
+{
+ "_id": "wXDerODkoWujlI81",
+ "name": "Imbue",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/construction.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Cursed Creations</em></p>\n<p>You have broken down your ability to create a cursed tool into its very essence, including imbuing cursed techniques into objects. At twice the cost of the normal creation of a Cursed Tool, you can imbue an existing item with that cursed tool's ability for one week. At 6th level this becomes 2 weeks, 3 weeks at 11th level, and a month at 18th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Cursed Creations",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Cursed Creation"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "kyQQ2jjaJXT8blxH",
+ "sort": 200,
+ "_key": "!items!wXDerODkoWujlI81"
+}

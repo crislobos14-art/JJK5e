@@ -1,0 +1,42 @@
+{
+ "_id": "g6vXNF5knJQ3YoZC",
+ "name": "Blackened Blood",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/rot.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Maximum: Wing King</em></p>\n<p>Your blood has become bubbling and black. A creature that fails a Constitution saving throw against your technique by 5 or more gains a level of exhaustion. A creature cannot gain more than 3 levels of exhaustion from this feature.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Maximum: Wing King",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Maximum: Wing King"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "gN0JGJzsnMHTyd5r",
+ "sort": 300,
+ "_key": "!items!g6vXNF5knJQ3YoZC"
+}

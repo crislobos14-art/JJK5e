@@ -1,0 +1,124 @@
+{
+ "_id": "zZKvJON3anKgwIvl",
+ "name": "Domain Expansion: Tsukumogami Spirit World",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/tool-manipulation-domain.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Tool Manipulation — Innate Technique (18th level)</em></p><p><em>Domain Expansion (rules): full-turn action, 20 CE unless stated, 175-ft radius, 1 minute. When the domain ends you suffer <strong>Technique Burnout</strong> (applied automatically by the module).</em></p><p>Finally at 18th level you have learned to manifest your domain. All weapon attacks made by creatures other than you become a guaranteed miss as you can manipulate all tools within your domain, causing them to come to life and obey your commands. <br />\n  At initiative 20, you choose one of your imbued tools to gain the benefits of <em>Floating Tool</em> and have all <em>Floating Tools</em> move 60 ft and attack a creature within range or have all creatures suffer the effects of <em>Wind Scythe</em>. You can control a number of <em>Floating Tools</em> equal to your CE modifier (min of 2) within your domain.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "VlPB9t0LmWOIBZvO": {
+    "_id": "VlPB9t0LmWOIBZvO",
+    "type": "utility",
+    "name": "Expand Domain (20 CE)",
+    "sort": -100000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Full turn: Action + Bonus Action + Movement",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "175",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": true
+     },
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 9,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "special",
+   "value": null,
+   "condition": "Full turn: Action + Bonus Action + Movement",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "radius",
+    "size": "175",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": true
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Tool Manipulation",
+   "level": 18,
+   "domain": true,
+   "ceCosts": {
+    "VlPB9t0LmWOIBZvO": 20
+   },
+   "domainActivity": "VlPB9t0LmWOIBZvO",
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "7tmhlm7tDflRZlKD",
+ "_key": "!items!zZKvJON3anKgwIvl"
+}

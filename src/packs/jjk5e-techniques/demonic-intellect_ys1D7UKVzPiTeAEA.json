@@ -1,0 +1,123 @@
+{
+ "_id": "ys1D7UKVzPiTeAEA",
+ "name": "Demonic Intellect",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/laplace-s-demon.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Laplace’s Demon — Innate Technique (1st level)</em></p><blockquote><p>A thought experiment proposing an intellect so vast it knows the position and momentum of every particle, allowing it to predict the future and recall the past.</p></blockquote><p>Starting at 1st level, you have extreme control of your emotions with a logical mindset allowing you to use Intelligence as your Cursed Energy modifier. You can spend 1 CE as a bonus action to overclock your brain for 1 minute, gaining the following benefits:</p>\n<ul>\n<li>\n<p>You can spend 2 CE to take an action as a reaction.  </p>\n</li>\n<li>\n<p>You gain advantage on Intelligence checks.  </p>\n</li>\n<li>\n<p>You add your Intelligence modifier to AC and Dexterity saves.  </p>\n</li>\n<li>\n<p>You gain the 2000 IQ Skill feat.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "d6TJzaH1XAfXpiJ0": {
+    "_id": "d6TJzaH1XAfXpiJ0",
+    "type": "utility",
+    "name": "Bonus Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "d6TJzaH1XAfXpiJ0": 1
+   },
+   "technique": "Laplace’s Demon",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "uhouPoPESjs6aBsz",
+ "effects": [
+  {
+   "_id": "aawCcIgVjHchOkj0",
+   "name": "Demonic Intellect (toggle)",
+   "img": "modules/jjk5e/icons/techniques/laplace-s-demon.svg",
+   "changes": [
+    {
+     "key": "system.abilities.int.check.roll.mode",
+     "mode": 2,
+     "value": "1",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!ys1D7UKVzPiTeAEA.aawCcIgVjHchOkj0"
+  }
+ ],
+ "_key": "!items!ys1D7UKVzPiTeAEA"
+}

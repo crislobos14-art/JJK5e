@@ -1,0 +1,64 @@
+{
+ "_id": "bVAqnOEYvVk3XdkU",
+ "name": "Maximum: Shrine of The Gods",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/solo-forbidden-zone.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Maximize Output</em></p>\n<p>When setting up your Ritual Zone as part of your full turn action, you can spend an additional 3 cursed energy to roll a d10. Instead of you having to maintain your zone each turn, it instead lasts for a number of rounds equal to the number rolled + your Cursed Energy modifier<strong>.</strong></p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Maximize Output",
+  "activities": {
+   "DlyQnPcP8oIF3FhT": {
+    "_id": "DlyQnPcP8oIF3FhT",
+    "type": "utility",
+    "name": "Extra (3 CE)",
+    "sort": 900000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Prerequisite: Must have Maximize Output When setting up your Ritual Zone as part of you..."
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "DlyQnPcP8oIF3FhT": 3
+   },
+   "prereq": {
+    "features": [
+     [
+      "Maximize Output"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "B010nMqksvk4lI5S",
+ "sort": 300,
+ "_key": "!items!bVAqnOEYvVk3XdkU"
+}

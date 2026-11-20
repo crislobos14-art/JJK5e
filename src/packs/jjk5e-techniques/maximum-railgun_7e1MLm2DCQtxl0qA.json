@@ -1,0 +1,163 @@
+{
+ "_id": "7e1MLm2DCQtxl0qA",
+ "name": "Maximum: Railgun",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/cursed-transmutation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Transmutation — Innate Technique (11th level)</em></p><p>Starting at 11th level, you can compress matter and cursed energy into a hyper-accelerated projectile, launching it at a deafening velocity.<br />\n As an action, you spend 8 cursed energy and transmute a small piece of nonliving material you can touch or that is on your person into a railgun slug. Choose a point or creature you can see within 120 feet to be the target and make a ranged cursed energy attack against them</p>\n<p>On a hit, the target takes 8d12 piercing damage or half as much damage if the attack misses and must succeed on a Strength saving throw against your Cursed Energy save DC or be pushed up to 30 feet directly away from you and knocked prone. If the target impacts another object or structure it takes 2d12 bludgeoning damage. Objects and structures in the projectile’s path automatically take twice as much damage and are destroyed if reduced to 0 hit points. A creature in the projectile’s path must make a Dexterity saving throw, taking 4d12 thunder damage on a failure or half as much on a success.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "IM9qKBX6wgzaffo1": {
+    "_id": "IM9qKBX6wgzaffo1",
+    "type": "save",
+    "name": "Action (8 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "120",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "str"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 8,
+       "denomination": 12,
+       "bonus": "",
+       "types": [
+        "piercing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "oPhoMAdwgo36g2Dd",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "120",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "IM9qKBX6wgzaffo1": 8
+   },
+   "technique": "Cursed Transmutation",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "oPhoMAdwgo36g2Dd",
+   "name": "Prone (Maximum: Railgun)",
+   "img": "modules/jjk5e/icons/techniques/cursed-transmutation.svg",
+   "statuses": [
+    "prone"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!7e1MLm2DCQtxl0qA.oPhoMAdwgo36g2Dd"
+  }
+ ],
+ "folder": "mZ3PzIRAkGl7SSou",
+ "_key": "!items!7e1MLm2DCQtxl0qA"
+}

@@ -1,0 +1,114 @@
+{
+ "_id": "KN0Rbf1EptiiwW0k",
+ "name": "Shikigami Companion",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>Beginning at 1st level, you shape your cursed energy into a living being under your control and determine its appearance. As an action, you can summon the shikigami that is bound to you. It appears in an unoccupied space of your choice within 30 feet of you. You can summon your shikigami companion for free once per long rest or again as an action for 3 cursed energy.</p>\n<p>The shikigami is friendly to you and your companions, and it obeys your commands. Use its game statistics in the accompanying Shikigami Companion stat blocks, which uses your proficiency bonus (PB) in several places. </p>\n<p>In combat, the shikigami shares your initiative and takes its turn immediately after yours. It can move and use its reaction on its own, but only takes the Dodge action unless you take a bonus action on your turn to command it to take another action. That action can be one in its statblock or some other action. If you are incapacitated, the shikigami can take any action of its choice, not just Dodge.</p>\n<p>The shikigami remains until reduced to 0 hit points, you summon the shikigami again, or you die. Anything the shikigami was wearing or carrying is left behind when it vanishes.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Shikigami User 1",
+  "uses": {
+   "max": "1",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
+    }
+   ]
+  },
+  "activities": {
+   "Fq4ht9Tnu6EiFROE": {
+    "_id": "Fq4ht9Tnu6EiFROE",
+    "type": "utility",
+    "name": "Action (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "effects": [
+     {
+      "_id": "noGPctbZKT8oiCFl",
+      "onSave": false
+     }
+    ]
+   },
+   "gU2qQeiE9L9aQNs5": {
+    "_id": "gU2qQeiE9L9aQNs5",
+    "type": "utility",
+    "name": "Use (limited, no CE)",
+    "activation": {
+     "type": "special",
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1"
+      }
+     ]
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "Fq4ht9Tnu6EiFROE": 3
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "noGPctbZKT8oiCFl",
+   "name": "Incapacitated (Shikigami Companion)",
+   "img": "modules/jjk5e/icons/feature.svg",
+   "statuses": [
+    "incapacitated"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "incapacitated"
+    }
+   },
+   "_key": "!items.effects!KN0Rbf1EptiiwW0k.noGPctbZKT8oiCFl"
+  }
+ ],
+ "folder": "69XiiJo14iwd80Zo",
+ "_key": "!items!KN0Rbf1EptiiwW0k"
+}

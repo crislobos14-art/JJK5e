@@ -1,0 +1,32 @@
+{
+ "_id": "q2XNvJF1rNksTOkC",
+ "name": "Black Box Reinforcement",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/black-box.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Black Box — Innate Technique (3rd level)</em></p><p>Starting at 3rd level you can reinforce your barriers with cursed energy. You can spend additional cursed energy up to your Cursed Energy modifier to give your <em>Dark Cube</em> a reinforcement for every cursed energy spent:<br />\n<strong>Persistence</strong>. Your Cube gains 10 additional hit points for every 1 reinforcement, +1 bonus to AC for every 2 reinforcements and lasts an additional minute for every 3 reinforcements.<br />\n<strong>Toughness</strong>. Your Cube reduces all damage taken by 1 for each reinforcement.<br />\n<strong>Size</strong>. For every 2 reinforcements, you can make your <em>Dark Cube</em> 5 feet larger, allowing you to fit more creatures. (10 ft &lt; 15 ft &lt; 20ft)<br />\n At 11th level, you can spend up to twice your CE modifier on reinforcements.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Black Box 3"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Black Box",
+   "level": 3
+  }
+ },
+ "folder": "h65v183tFsULjQrb",
+ "_key": "!items!q2XNvJF1rNksTOkC"
+}

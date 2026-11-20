@@ -1,0 +1,118 @@
+{
+ "_id": "1600B1v5cBczonpg",
+ "name": "Innate Technique: Esoteric Art",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/esoteric-art.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>You were born with the ability to create cursed paintings leading to unique subspaces.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.uTkKYysExKqyTfA0]{Cursed Painting}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.geIiULNWftqTgOLM]{Impasto Canvas}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.kxqSZAEhS2KvXJZa]{Sgraffito}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.1j8EyDLkddYqXHmE]{Panoramic Composition}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.kUgWQuaoTcYppNWF]{Domain Expansion: Magnum Opus}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "wQUxhJhzJSWePtwc": {
+    "_id": "wQUxhJhzJSWePtwc",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Esoteric Art (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.uTkKYysExKqyTfA0",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "UXv1hiRw9o2W7ulu": {
+    "_id": "UXv1hiRw9o2W7ulu",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Esoteric Art (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.geIiULNWftqTgOLM",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "rRAS0HYOXs6tFZuk": {
+    "_id": "rRAS0HYOXs6tFZuk",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Esoteric Art (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.kxqSZAEhS2KvXJZa",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "WELKIJGVL4IiqP4w": {
+    "_id": "WELKIJGVL4IiqP4w",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Esoteric Art (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.1j8EyDLkddYqXHmE",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "FsL1G19JfkyeyhsA": {
+    "_id": "FsL1G19JfkyeyhsA",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Esoteric Art (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.kUgWQuaoTcYppNWF",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Esoteric Art"
+  }
+ },
+ "_key": "!items!1600B1v5cBczonpg"
+}

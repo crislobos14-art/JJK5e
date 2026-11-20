@@ -1,0 +1,42 @@
+{
+ "_id": "0BFneiaPMP2X57XH",
+ "name": "Sealing Cube",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/black-box.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Maximum: Midnight Armor</em></p>\n<p>When you trap a creature in a <em>Perfect Cube</em>, you can choose to seal the output of the creature, as a <em>Reduced Output Effect</em>. Any Reduced Output such a creature possesses increases by 6 levels while trapped within your <em>Perfect Cube</em>.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Maximum: Midnight Armor",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Maximum: Midnight Armor"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "hYJ9CtCLF0NIbhhU",
+ "sort": 300,
+ "_key": "!items!0BFneiaPMP2X57XH"
+}

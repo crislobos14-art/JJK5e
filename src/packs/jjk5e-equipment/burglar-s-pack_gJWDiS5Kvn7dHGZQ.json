@@ -1,0 +1,31 @@
+{
+ "_id": "gJWDiS5Kvn7dHGZQ",
+ "name": "Burglar's Pack",
+ "type": "loot",
+ "img": "icons/svg/item-bag.svg",
+ "folder": "5TkjeIlCFmk1GLJi",
+ "system": {
+  "description": {
+   "value": "<p>Contains a compact backpack, steel bearings, nylon wire, small bell alarm, compact crowbar, hammer, climbing hooks, flashlight, 2 bottles of oil, 5 energy bars, lighter, water bottle, 60 feet of rope, and a bundle of <strong>binding cord</strong>.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "price": {
+   "value": 16.0,
+   "denomination": "gp"
+  },
+  "type": {
+   "value": "gear"
+  },
+  "quantity": 1
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "_key": "!items!gJWDiS5Kvn7dHGZQ"
+}

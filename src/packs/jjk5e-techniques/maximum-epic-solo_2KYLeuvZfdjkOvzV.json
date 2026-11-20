@@ -1,0 +1,131 @@
+{
+ "_id": "2KYLeuvZfdjkOvzV",
+ "name": "Maximum: Epic Solo",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/rockstar.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Rockstar — Innate Technique (11th level)</em></p><p>At 11th level, you can spend 8 cursed energy to start a solo. For the next minute, your attacks deal an additional 2d10 thunder damage and if a creature fails its saving throw against your technique it gains disadvantage on its next attack roll or ability check. <br />\n You can also spend additional cursed energy up to half your proficiency bonus to deal an additional 2d10 thunder per CE spent. A hostile creature that ends its turn within 15 feet of you during your solo takes thunder damage equal to your CE modifier + your proficiency bonus.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "tgeBW16oNUq6SVid": {
+    "_id": "tgeBW16oNUq6SVid",
+    "type": "damage",
+    "name": "Action (8+ CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "max(1, floor(@prof / 2))"
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "15",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "thunder"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "mode": "whole",
+        "number": 2
+       }
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "15",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceSteps": {
+    "tgeBW16oNUq6SVid": 1
+   },
+   "ceCosts": {
+    "tgeBW16oNUq6SVid": 8
+   },
+   "technique": "Rockstar",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "vosb36eMO9PhuX42",
+ "_key": "!items!2KYLeuvZfdjkOvzV"
+}

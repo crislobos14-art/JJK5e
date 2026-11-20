@@ -1,0 +1,107 @@
+{
+ "_id": "5vAGmViQgCS1lFHt",
+ "name": "Boogie",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/boogie-woogie.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Boogie Woogie — Innate Technique (1st level)</em></p><blockquote><p>You were born with a simple although tricky ability to swap places with your opponents with a clap.</p></blockquote><p>At 1st level, you have created a unique technique to switch places with your others, extremely simple yet effective. You can switch places with a willing creature or magical object within 30 feet of you by clapping for 1 Cursed Energy. You can use this technique as an action or bonus action, or you can also swap as a reaction for 2 additional Cursed Energy.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "ih4MTTL3k7FulYvj": {
+    "_id": "ih4MTTL3k7FulYvj",
+    "type": "utility",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "30",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "ih4MTTL3k7FulYvj": 1
+   },
+   "technique": "Boogie Woogie",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "JUFxrHmgG8mOdlrV",
+ "_key": "!items!5vAGmViQgCS1lFHt"
+}

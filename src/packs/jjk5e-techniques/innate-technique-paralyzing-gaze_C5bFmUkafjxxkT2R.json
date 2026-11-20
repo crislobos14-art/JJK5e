@@ -1,0 +1,118 @@
+{
+ "_id": "C5bFmUkafjxxkT2R",
+ "name": "Innate Technique: Paralyzing Gaze",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/paralyzing-gaze.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>Your technique allows you to paralyze others with a mere gaze.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.hVxwa4zAWjFsDhiB]{Immobilizing Eyes}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.tUu7Y7Fpc26s97zh]{Peripheral Vision}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.aRhLqFgvq7Kx3qQ2]{Reactive Eye Movement}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.L9RcJelTKo86oVLG]{Maximum: Paralyzing Gaze}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.wvTri5uUZ3FfDuPH]{Domain Expansion: Chamber of Fractured Reflections}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "xFNcOr2cKTjfQA3A": {
+    "_id": "xFNcOr2cKTjfQA3A",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Paralyzing Gaze (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.hVxwa4zAWjFsDhiB",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "OowSgVg6ddcfkO6M": {
+    "_id": "OowSgVg6ddcfkO6M",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Paralyzing Gaze (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.tUu7Y7Fpc26s97zh",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "SLUyXkJ3vdzvrE1u": {
+    "_id": "SLUyXkJ3vdzvrE1u",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Paralyzing Gaze (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.aRhLqFgvq7Kx3qQ2",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "d2ifavBLieoRL3wZ": {
+    "_id": "d2ifavBLieoRL3wZ",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Paralyzing Gaze (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.L9RcJelTKo86oVLG",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "ig8VgFNri4ysIXnN": {
+    "_id": "ig8VgFNri4ysIXnN",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Paralyzing Gaze (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.wvTri5uUZ3FfDuPH",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Paralyzing Gaze"
+  }
+ },
+ "_key": "!items!C5bFmUkafjxxkT2R"
+}

@@ -1,0 +1,156 @@
+{
+ "_id": "rKANGZ47xLsfVBJD",
+ "name": "Lightning",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/disaster-storms.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Disaster Storms — Innate Technique (3rd level)</em></p><p>At 3rd level, as an action for 2 cursed energy you can make a ranged cursed energy attack roll against a creature you can see within 60 ft. On a hit, you deal 3d6 lightning damage. </p>\n<p>If another creature is within 10 ft of the target, you can make another attack against them, dealing half as much damage on a hit. This damage increases to 4d6 at 6th level, 6d6 at 11th level, and 8d6 at 18th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "QQS0doGNBq7dmJc8": {
+    "_id": "QQS0doGNBq7dmJc8",
+    "type": "attack",
+    "name": "Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": 3,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "lightning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "60",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "dmgScale": {
+    "QQS0doGNBq7dmJc8": [
+     [
+      0,
+      "3d6"
+     ],
+     [
+      6,
+      "4d6"
+     ],
+     [
+      11,
+      "6d6"
+     ],
+     [
+      18,
+      "8d6"
+     ]
+    ]
+   },
+   "ceCosts": {
+    "QQS0doGNBq7dmJc8": 2
+   },
+   "technique": "Disaster Storms",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "5WRl9NqkIbDZzpyp",
+ "_key": "!items!rKANGZ47xLsfVBJD"
+}

@@ -1,0 +1,104 @@
+{
+ "_id": "6uqGLAdNxT5G3Tfw",
+ "name": "Lightning Discharge",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/mythical-beast-amber.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Mythical Beast Amber — Innate Technique (6th level)</em></p><p>When you reach 6th level, your control over your technique has improved to the point where you are able to separate the charges of electricity. After hitting a creature with <em>Electric Energy</em> you can mark the creature with a positive charge for 1 minute. You can have a number of charges on a target equal to twice your Cursed Energy Modifier. As an action you can expend charges to release a lightning bolt at one creature within 60 ft which heads straight for the accumulated charges dealing a number of d12s equal to the number of charges. <br />\n Starting at 11th level, this gains the limb-removing effect of the Limb Damage Table.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "ixdRf2qdEBTsV0aX": {
+    "_id": "ixdRf2qdEBTsV0aX",
+    "type": "utility",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "60",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Mythical Beast Amber",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "J9wuYC5ZIUpqsRHr",
+ "_key": "!items!6uqGLAdNxT5G3Tfw"
+}

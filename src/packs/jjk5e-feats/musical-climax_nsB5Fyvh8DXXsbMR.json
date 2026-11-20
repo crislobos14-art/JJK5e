@@ -1,0 +1,68 @@
+{
+ "_id": "nsB5Fyvh8DXXsbMR",
+ "name": "Musical Climax",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/rockstar.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Sound Waves</em></p>\n<p>You've learned that just playing isn't enough, you need to build up to the best part. As an action you can start playing your instrument to charge up your technique. You can charge your technique using your action this way for a number of times equal to your CE modifier while concentrating, after which you must release your technique. You can use your reaction to launch either a Sound Blast or Sound Wave at any time while playing this way and add 2 damage die per action you use to play before releasing and ignore resistances.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Sound Waves",
+  "activities": {
+   "4l6CkELEGQKliwOB": {
+    "_id": "4l6CkELEGQKliwOB",
+    "type": "utility",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Resonating Music"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "68qyxNdSSfIl8CWR",
+ "sort": 100,
+ "_key": "!items!nsB5Fyvh8DXXsbMR"
+}

@@ -1,0 +1,75 @@
+{
+ "_id": "e5ElXi1K7zKZWSGN",
+ "name": "Lance",
+ "type": "weapon",
+ "img": "icons/svg/sword.svg",
+ "folder": "8L9REK3UZxFoXRJA",
+ "system": {
+  "description": {
+   "value": "<p>Martial melee weapon. 1d12 piercing. Reach, special.</p><p><strong>Special:</strong> special</p><p><em>You have disadvantage when you use a lance to attack a target within 5 feet of you. Also, a lance requires two hands to wield when you aren’t mounted.</em></p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "martialM",
+   "baseItem": "lance"
+  },
+  "damage": {
+   "base": {
+    "number": 1,
+    "denomination": 12,
+    "types": [
+     "piercing"
+    ]
+   }
+  },
+  "range": {
+   "value": 10,
+   "long": null,
+   "units": "ft",
+   "reach": 10
+  },
+  "properties": [
+   "rch",
+   "spc"
+  ],
+  "proficient": null,
+  "price": {
+   "value": 10.0,
+   "denomination": "gp"
+  },
+  "quantity": 1,
+  "activities": {
+   "SAdBQXpKNKuapVwN": {
+    "_id": "SAdBQXpKNKuapVwN",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "melee",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "priceUSD": "$1,000"
+  }
+ },
+ "_key": "!items!e5ElXi1K7zKZWSGN"
+}

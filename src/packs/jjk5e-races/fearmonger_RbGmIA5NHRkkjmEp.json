@@ -1,0 +1,54 @@
+{
+ "_id": "RbGmIA5NHRkkjmEp",
+ "name": "Fearmonger",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/trait-race.svg",
+ "system": {
+  "description": {
+   "value": "<p>You gain proficiency in Intimidation and have a +1 bonus to attack and damage rolls against frightened creatures.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "race",
+   "subtype": ""
+  },
+  "requirements": "Cursed Spirit (Imaginary)"
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "MrUJYYzCm8S5kHBr",
+ "effects": [
+  {
+   "_id": "v4k08bCEkqB25af3",
+   "name": "Fearmonger (toggle)",
+   "img": "modules/jjk5e/icons/trait-race.svg",
+   "changes": [
+    {
+     "key": "system.skills.itm.value",
+     "mode": 4,
+     "value": "1",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!RbGmIA5NHRkkjmEp.v4k08bCEkqB25af3"
+  }
+ ],
+ "_key": "!items!RbGmIA5NHRkkjmEp"
+}

@@ -1,0 +1,31 @@
+{
+ "_id": "NuGlnBs7GSa82pm1",
+ "name": "Entertainer's Pack",
+ "type": "loot",
+ "img": "icons/svg/item-bag.svg",
+ "folder": "5TkjeIlCFmk1GLJi",
+ "system": {
+  "description": {
+   "value": "<p>Contains a duffel bag, sleeping bag, two performance outfits, makeup kit, five candles, five snacks, a water bottle, a disguise kit, and a <strong>trick mirror</strong>.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "price": {
+   "value": 40.0,
+   "denomination": "gp"
+  },
+  "type": {
+   "value": "gear"
+  },
+  "quantity": 1
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "_key": "!items!NuGlnBs7GSa82pm1"
+}

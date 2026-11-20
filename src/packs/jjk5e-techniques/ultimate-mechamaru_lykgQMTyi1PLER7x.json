@@ -1,0 +1,264 @@
+{
+ "_id": "lykgQMTyi1PLER7x",
+ "name": "Ultimate Mechamaru",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/puppet-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Puppet Manipulation — Innate Technique (1st level)</em></p><blockquote><p>You gain the ability to control puppets with your Cursed Energy,</p></blockquote><p>Beginning at 1st level, you gain mastery over puppets. You gain proficiency in Tinkerer’s Tools, and over a long rest, you can create a puppet. As an action for 1 Cursed Energy, you can imbue a Puppet, this puppet can only have 2 Minor Traits. You can summon as many puppets as you want. Any Puppets can only take an action if you use your bonus action to command it. It cannot use its reaction unless you use your reaction to command it to. The puppet can use bonus actions on its own. You can speak, hear, and see through any of your Puppets. In case you have more than one puppet at once, you need to control them at the same time. Whenever you gain a puppet, use the following for its sheet:</p>\n<ul>\n<li>\n<p>Your Puppet's starting Strength, Constitution, and Dexterity scores are 15, 14, and 13 + bonus points to distribute between them equal to your Cursed Energy modifier. The Puppet's mental scores equal to your own.  </p>\n</li>\n<li>\n<p>Your Puppet is a Medium Construct.  </p>\n</li>\n<li>\n<p>Your Puppet has its hit dice based on what material they are made from, if the case is wood is a d4, stone is a d6, iron is a d8, and modern metal hit die is a d10. Your puppet has the same amount of hit die as you.  </p>\n</li>\n<li>\n<p>Your Puppet has a 30 feet walking speed.  </p>\n</li>\n<li>\n<p>You control your Puppet from afar, watching its every move and controlling it to dodge attacks. Your Puppet's AC is equal to 10 + its Dexterity modifier.  </p>\n</li>\n<li>\n<p>Your Puppet uses your proficiency bonus and is immune to the charmed and poisoned condition.  </p>\n</li>\n<li>\n<p>Your Puppet gains proficiency in Strength, Constitution, and Dexterity saving throws.  </p>\n</li>\n<li>\n<p>Your Puppet deals 1d6 + Strength modifier in bludgeoning with unarmed strikes.</p>\n</li>\n</ul>\n<table>\n<thead>\n<tr>\n<th>Trait Level</th>\n<th style=\"text-align: left;\">Traits</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Minor</td>\n<td style=\"text-align: left;\"><strong>Enhanced Defense.</strong> Your Puppet's defenses were increased so that he could fare better against attacks. Its armor class is increased to 10 + its Dexterity modifier + your Cursed Energy modifier.  <strong>Basic Weapon Training.</strong> Your puppet gains proficiency in simple weapons and shields.  <strong>Faster Movement.</strong> Your puppet is fast and cannot be caught so easily. Your puppet gains a +10 ft bonus to its walking speed.  <strong>Stronger Strikes.</strong> Your puppet gains better natural weapons, changing its unarmed strikes to deal 1d8 piercing, slashing, or bludgeoning damage, based on the new weapons. Your puppet's unarmed strikes will now overcome resistance. Your puppet can use dexterity or strength for these attacks.  <strong>Heightened Senses.</strong> Your puppet is always sharp and is a perfect detection machine. He will gain 60 ft. of Darkvision and will gain advantage in perception checks against living things.</td>\n</tr>\n<tr>\n<td>Lesser</td>\n<td style=\"text-align: left;\"><strong>Improved Reach.</strong> Your puppet's arms elongate, its agility heightens, or it grows tentacles, and your puppet's melee reach increases by 5 feet.  <strong>Advanced Weapon Training.</strong> Your puppet gains proficiency in martial weapons.  <strong>Hardened Shell.</strong> Your puppet's shell is thicker, scalier, or harder than normal. Your Puppet will gain resistance against non-magical Bludgeoning, Slashing, or Piercing damage.  <strong>Deflect Missiles.</strong> Your puppet has developed quick reaction skills, and can now defend itself from high-speed ranged projectiles. Using its reaction, your puppet can reduce an incoming projectile damage by 1d12 + your level.  <strong>Minor Magic.</strong> Your puppet learns to cast one cantrip, and one 1st level spell, both from the wizard spell list(no healing). It uses its Cursed Energy modifier for the spellcasting ability and must take a long rest before casting the 1st-level spell again.</td>\n</tr>\n<tr>\n<td>Advanced</td>\n<td style=\"text-align: left;\"><strong>Colossus.</strong> Your puppet's body increases in size in all dimensions, changing its size to Large. This functions like the enlarge/reduce spell.  <strong>Flying Behemoth.</strong> Your puppet gains wings, jets, or some other way of flight, giving it flight speed equal to its movement speed.  <strong>Major Magic.</strong> Your puppet learns to cast one cantrip, one 1st level spell, one 2nd level spell, and one 3rd level spell, all from the wizard spell list (no healing). It uses its Cursed Energy modifier for the spellcasting ability, casts the three spells at 3rd level, and can only use each spell once before they must take a long rest to use it again.  <strong>Armor Training.</strong> Your puppet gains proficiency in all armor.  <strong>High Caliber Striker.</strong> Your puppet's natural weapons improve further, growing stronger, harder, or sharper. Your puppet's unarmed strikes now deal 2d8 piercing, slashing, or bludgeoning damage. Your puppet can use dexterity or strength for these attacks.</td>\n</tr>\n<tr>\n<td>Absolute</td>\n<td style=\"text-align: left;\"><strong>Mech.</strong> Your puppet's body increases in size in all dimensions, changing its size to Gargantuan. However, to control this puppet you must be inside it, but you are under full cover, and the puppet's Hit dice is a d12.  <strong>Energy Cannon.</strong> As an action, you generate a large amount of cursed energy in the palm of one hand, blasting it at a target for 6 CE. Make a ranged attack with Dex + Proficiency + 3, This attack deals 20d6 Necrotic damage and recharges on a 5-6 d6.  <strong>Energy Volley.</strong> As an action, you create 5 orbs made of cursed energy and blast them. Choose targets for each orb and make a ranged Cursed Energy attack with a +3 for 4 CE. On a hit, this attack Deals 6d6 Necrotic damage. Recharges on a 5-6 d6.</td>\n</tr>\n</tbody>\n</table>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "EKcGWGZTKptdIRSC": {
+    "_id": "EKcGWGZTKptdIRSC",
+    "type": "utility",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   },
+   "jzPwmId29fqDnLPW": {
+    "_id": "jzPwmId29fqDnLPW",
+    "type": "attack",
+    "name": "Action (6 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": 20,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   },
+   "EVUDlPLUjdvCguIS": {
+    "_id": "EVUDlPLUjdvCguIS",
+    "type": "attack",
+    "name": "Action (4 CE)",
+    "sort": 200000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": 6,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   },
+   "pdv5BU842aD3j9bS": {
+    "_id": "pdv5BU842aD3j9bS",
+    "type": "damage",
+    "name": "Reaction",
+    "sort": 300000,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "piercing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "EKcGWGZTKptdIRSC": 1,
+    "jzPwmId29fqDnLPW": 6,
+    "EVUDlPLUjdvCguIS": 4
+   },
+   "technique": "Puppet Manipulation",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "OLsap1LLdAsbuhbG",
+ "_key": "!items!lykgQMTyi1PLER7x"
+}

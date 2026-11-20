@@ -1,0 +1,118 @@
+{
+ "_id": "jFCwHrudqlbz12GC",
+ "name": "Innate Technique: Star Dictator",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/star-dictator.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>The path of your shikigami constitutes the domain.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.VF9rOo0wZKbbBy7s]{Minor Star Shikigami}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.LjQg82tR5YL4UbNQ]{Pseudo-Domain Constitution}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.68zRFEvni8MoZ7To]{Major Star Shikigami}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.LSe1S6W9A2O7cWJF]{Army of the Dictator}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.FgyzDjSsxafAoVYo]{Domain Expansion: Divine Mandate}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "4qvBDsF32Dyk2a3c": {
+    "_id": "4qvBDsF32Dyk2a3c",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Star Dictator (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.VF9rOo0wZKbbBy7s",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "qnugm0OfnddS3tuz": {
+    "_id": "qnugm0OfnddS3tuz",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Star Dictator (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.LjQg82tR5YL4UbNQ",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "Dm48fOPrB0ZILaPg": {
+    "_id": "Dm48fOPrB0ZILaPg",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Star Dictator (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.68zRFEvni8MoZ7To",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "Ea2rz8pDIquzKI5W": {
+    "_id": "Ea2rz8pDIquzKI5W",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Star Dictator (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.LSe1S6W9A2O7cWJF",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "mOOjWaAU2EWvu07u": {
+    "_id": "mOOjWaAU2EWvu07u",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Star Dictator (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.FgyzDjSsxafAoVYo",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Star Dictator"
+  }
+ },
+ "_key": "!items!jFCwHrudqlbz12GC"
+}

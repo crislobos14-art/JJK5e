@@ -1,0 +1,158 @@
+{
+ "_id": "rAbsflTzfT1qFbq4",
+ "name": "Cursed Buds",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/disaster-verdure.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Disaster Verdure — Innate Technique (11th level)</em></p><p>At 11th level, you have studied the true nature of your innate technique, creating a new type of plant that feeds on cursed energy. As an action for 6 Cursed Energy, you can create and launch a number of cursed buds equal to your CE modifier toward one or more targets within 30 feet. Make a cursed energy attack roll for each, on a hit they will attach to the creature. At the beginning of the creature's turns it loses an amount of Hit Points equal to your CE modifier and you steal 1 CE from the target. If an affected creature uses cursed energy while infected with a cursed bud, they lose hit points equal to your proficiency bonus. An affected creature can attempt a Strength check as an action against your CE save DC to remove the curse bud. <br />\n You can instead spend 10 Cursed Energy to create a Large tree within 10 feet that will launch one cursed bud at every hostile creature within 30 feet. The tree has an AC equal to your Cursed Energy save DC, hit points equal to your proficiency bonus times your level and lasts for 1 minute, launching one cursed bud at creatures within range at the beginning of your turn.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "OA6xjF2Db7g141RC": {
+    "_id": "OA6xjF2Db7g141RC",
+    "type": "attack",
+    "name": "Action (6 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": []
+    }
+   },
+   "DBdzEheQjsHH67SS": {
+    "_id": "DBdzEheQjsHH67SS",
+    "type": "utility",
+    "name": "Action (10 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "10",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "30",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "OA6xjF2Db7g141RC": 6,
+    "DBdzEheQjsHH67SS": 10
+   },
+   "technique": "Disaster Verdure",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "iWhpioZs4gSAxzA7",
+ "_key": "!items!rAbsflTzfT1qFbq4"
+}

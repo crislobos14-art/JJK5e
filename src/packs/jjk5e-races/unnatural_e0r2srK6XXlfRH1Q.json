@@ -1,0 +1,29 @@
+{
+ "_id": "e0r2srK6XXlfRH1Q",
+ "name": "Unnatural",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/trait-race.svg",
+ "system": {
+  "description": {
+   "value": "<p>As a construct, you don’t need to breathe, drink, eat, or sleep. However you need materials to mend yourself during a rest.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "race",
+   "subtype": ""
+  },
+  "requirements": "Cursed Corpse"
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "Mqs4VShTrWUzPyvN",
+ "_key": "!items!e0r2srK6XXlfRH1Q"
+}

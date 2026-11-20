@@ -1,0 +1,123 @@
+{
+ "_id": "JE38jRZe07KGrjZx",
+ "name": "Basic Transmutation",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/cursed-transmutation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Transmutation — Innate Technique (1st level)</em></p><blockquote><p>You can change form, nature, and substance through your technique.</p></blockquote><p>Starting at 1st level, you have learned to use your technique to alter the properties of items you touch. As an action you can spend an amount of cursed energy up to your Cursed Energy modifier to alter the shape or properties of a nonliving object you touch. <br />\nFor each cursed energy point spent, you can affect up to a 5 ft cube of material per cursed energy spent (Metal costs an additional CE per cube). You can reshape the affected material in any way that fits within its original volume, allowing you to create cover, create difficult terrain, block passages, form platforms, or otherwise reposition the material to aid movement. At 6th level you can spend up to twice your Cursed Energy modifier, three times at 11th and four times at 18th.</p>\n<p>A Transmuted Object has an AC of 10 and 5 hit points per 5 ft cube affected. The object’s durability increases if transmuting one of the following, as shown below:</p>\n<ul>\n<li>\n<p><strong>Wood:</strong> +1 AC and +10 hit points per cube  </p>\n</li>\n<li>\n<p><strong>Earth:</strong> +2 AC and +15 hit points per cube  </p>\n</li>\n<li>\n<p><strong>Stone:</strong> +3 AC and +20 hit points per cube  </p>\n</li>\n<li>\n<p><strong>Metal:</strong> +4 AC and +30 hit points per cube</p>\n</li>\n</ul>\n<p>Transmuted Objects automatically fail Strength and Dexterity saving throws and are immune to poison and psychic damage.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "2q42DDn3IAl5Gug3": {
+    "_id": "2q42DDn3IAl5Gug3",
+    "type": "utility",
+    "name": "Action (1+ CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "2 * max(1, max(@abilities.wis.mod, @abilities.cha.mod))"
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "cube",
+      "size": "5",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "cube",
+    "size": "5",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": false
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceSteps": {
+    "2q42DDn3IAl5Gug3": 1
+   },
+   "ceCosts": {
+    "2q42DDn3IAl5Gug3": 1
+   },
+   "technique": "Cursed Transmutation",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "mZ3PzIRAkGl7SSou",
+ "_key": "!items!JE38jRZe07KGrjZx"
+}

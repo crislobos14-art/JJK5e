@@ -1,0 +1,42 @@
+{
+ "_id": "jcGIYcAU3HqFomFl",
+ "name": "Maximum: Kirin’s Flames",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/auspicious-beast-summon.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Auspicious Beast #3: Kirin</em></p>\n<p>Your proficiency with your technique reaches a crescendo, and your bond with Kirin improves. Whenever a creature hits you with a melee attack while you have Kirin activated, you can force them to take fire damage equal to twice the damage taken.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Auspicious Beast #3: Kirin",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Auspicious Beast #3: Kirin"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "mHzbbOlvnwQSEnjZ",
+ "sort": 300,
+ "_key": "!items!jcGIYcAU3HqFomFl"
+}

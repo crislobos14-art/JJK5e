@@ -1,0 +1,64 @@
+{
+ "_id": "3eFtYtoCfdoXurkF",
+ "name": "Tool Maker",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: 16+ Cursed Energy score, Proficiency in Arcana</em></p>\n<p>You have the unique ability to create cursed tools. The time it takes to make a cursed tool depends on the rarity of the item, and the rarity of item you can make is dependent on your level and you can spend 8 hours per day working on a cursed tool. After creating a cursed tool, you must wait an amount of time equal to its crafting time before working on another cursed tool. The GM decides the cost of any materials.</p>\n<p><strong>Level 1-4</strong>: Fourth Grade (Common) <br />\nTime: 72 hours<br />\n<strong>Level 5-8</strong>: Third Grade (Uncommon)<br />\nTime: 216 hours<br />\n<strong>Level 9-12</strong>: Second Grade (Rare)<br />\nTime: 648 hours <br />\n<strong>Level 13-16</strong>: First Grade (Very Rare)<br />\nTime: 1944 hours</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkSkill"
+  },
+  "requirements": "16+ Cursed Energy score, Proficiency in Arcana",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "ceScore": 16,
+    "skill": "arc"
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "pov01RX53EMHAg5H",
+   "name": "Tool Maker",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "changes": [
+    {
+     "key": "system.skills.arc.value",
+     "mode": 4,
+     "value": "1",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "auto": "passive"
+    }
+   },
+   "_key": "!items.effects!3eFtYtoCfdoXurkF.pov01RX53EMHAg5H"
+  }
+ ],
+ "folder": "EtgHYidIGv42ylfo",
+ "sort": 2100,
+ "_key": "!items!3eFtYtoCfdoXurkF"
+}

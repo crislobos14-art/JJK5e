@@ -1,0 +1,73 @@
+{
+ "_id": "ZfaSX0sU8REP2bqV",
+ "name": "Judgeman Release",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/deadly-sentencing.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Gavel Improvements</em></p>\n<p>Your attunement with <em>Deadly Sentencing</em> has allowed you to summon Judgeman outside the domain. As a bonus action for 5 Cursed Energy, you summon Judgeman for 1 minute. Every time your opponent attacks you, they are penalized for assault and the opponent gains a -1 penalty to attack rolls and saving throws. If a creature targets you with a cursed technique that is not an attack roll, they gain a -1 penalty to their CE save DC. These penalties last until Judgeman disappears.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Gavel Improvements",
+  "activities": {
+   "2oLyKSVyKo9SgPup": {
+    "_id": "2oLyKSVyKo9SgPup",
+    "type": "utility",
+    "name": "Bonus Action (5 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "2oLyKSVyKo9SgPup": 5
+   },
+   "prereq": {
+    "features": [
+     [
+      "Gavel Improvements"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "cq0B0G5hxGuaBi5H",
+ "sort": 300,
+ "_key": "!items!ZfaSX0sU8REP2bqV"
+}

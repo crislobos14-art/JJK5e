@@ -1,0 +1,50 @@
+{
+ "_id": "BIh2egXDEzJXM048",
+ "name": "Strong Constitution",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/trait-race.svg",
+ "system": {
+  "description": {
+   "value": "<p>Your hit point maximum increases by an amount equal to your level and increases by 1 whenever you gain a level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "race",
+   "subtype": ""
+  },
+  "requirements": "Cursed Spirit (Cursed Womb)"
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "MrUJYYzCm8S5kHBr",
+ "effects": [
+  {
+   "_id": "wq1ULbtAdawS1RVc",
+   "name": "Strong Constitution",
+   "img": "modules/jjk5e/icons/trait-race.svg",
+   "changes": [
+    {
+     "key": "system.attributes.hp.bonuses.level",
+     "mode": 2,
+     "value": "1",
+     "priority": null
+    }
+   ],
+   "disabled": false,
+   "transfer": true,
+   "duration": {},
+   "description": "",
+   "flags": {},
+   "_key": "!items.effects!BIh2egXDEzJXM048.wq1ULbtAdawS1RVc"
+  }
+ ],
+ "_key": "!items!BIh2egXDEzJXM048"
+}

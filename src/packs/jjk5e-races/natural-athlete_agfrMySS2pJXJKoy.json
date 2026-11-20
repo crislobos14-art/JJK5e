@@ -1,0 +1,54 @@
+{
+ "_id": "agfrMySS2pJXJKoy",
+ "name": "Natural Athlete",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/trait-race.svg",
+ "system": {
+  "description": {
+   "value": "<p>You have proficiency in the Athletics skill, if you already have proficiency, you instead gain Expertise.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "race",
+   "subtype": ""
+  },
+  "requirements": "Human (Superhuman)"
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "FDVrGmw22BclKBnR",
+ "effects": [
+  {
+   "_id": "e6HnwxTCFJObiRCE",
+   "name": "Natural Athlete (toggle)",
+   "img": "modules/jjk5e/icons/trait-race.svg",
+   "changes": [
+    {
+     "key": "system.skills.ath.value",
+     "mode": 4,
+     "value": "1",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!agfrMySS2pJXJKoy.e6HnwxTCFJObiRCE"
+  }
+ ],
+ "_key": "!items!agfrMySS2pJXJKoy"
+}

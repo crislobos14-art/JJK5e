@@ -1,0 +1,32 @@
+{
+ "_id": "m41fSV57Ry2AN0QF",
+ "name": "Tool Improvement",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/tool-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Tool Manipulation — Innate Technique (6th level)</em></p><p>Additionally, your specialty grants you the following Tool Improvements. </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Tool Manipulation 6"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Tool Manipulation",
+   "level": 6
+  }
+ },
+ "folder": "7tmhlm7tDflRZlKD",
+ "_key": "!items!m41fSV57Ry2AN0QF"
+}

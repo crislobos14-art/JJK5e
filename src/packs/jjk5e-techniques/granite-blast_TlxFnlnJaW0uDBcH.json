@@ -1,0 +1,112 @@
+{
+ "_id": "TlxFnlnJaW0uDBcH",
+ "name": "Granite Blast",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/cursed-cannon.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Cannon — Innate Technique (1st level)</em></p><blockquote><p>Cursed Cannon, as the name says, allows you to unleash blasts of cursed energy. As simple as it is, its power is undeniable.</p></blockquote><p>Starting at 1st level, your CE output is off the charts, and thanks to your technique allowing you to output it in a destructive death ray. As an action, you can spend 1 cursed energy to release a beam. Make a ranged cursed energy attack roll with a range of 150/600 feet. On a hit, it deals 2d6 + your CE modifier in necrotic damage. Before you make your attack roll, you can spend additional cursed energy up to your CE modifier to deal one additional damage dice per CE spent.</p>\n<p>Beginning at 3rd level, the damage increases to 3d6, to 4d8 at 6th, to 5d10 at 11th, to 6d12 at 18th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "GRtFwNVKyLM2wqbq": {
+    "_id": "GRtFwNVKyLM2wqbq",
+    "type": "attack",
+    "name": "Action (1+ CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "max(1, max(@abilities.wis.mod, @abilities.cha.mod))"
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": []
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceSteps": {
+    "GRtFwNVKyLM2wqbq": 1
+   },
+   "ceCosts": {
+    "GRtFwNVKyLM2wqbq": 1
+   },
+   "technique": "Cursed Cannon",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "jTg0Bf76dJeyMkqJ",
+ "_key": "!items!TlxFnlnJaW0uDBcH"
+}

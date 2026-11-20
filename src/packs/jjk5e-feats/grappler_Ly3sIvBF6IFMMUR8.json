@@ -1,0 +1,66 @@
+{
+ "_id": "Ly3sIvBF6IFMMUR8",
+ "name": "Grappler",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: 13+ Str</em></p>\n<p>You've developed the skills necessary to hold your own in close-quarters grappling. You gain the following benefits:</p>\n<ul>\n<li>\n<p>You have advantage on attack rolls against a creature you are grappling.  </p>\n</li>\n<li>\n<p>You can use your action to try to pin a creature grappled by you. To do so, make another grapple check. If you succeed, you and the creature are both restrained until the grapple ends.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkPhysical"
+  },
+  "requirements": "13+ Str",
+  "activities": {
+   "KEi2TT9lebrDpJRl": {
+    "_id": "KEi2TT9lebrDpJRl",
+    "type": "utility",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "abilities": {
+     "str": 13
+    }
+   }
+  }
+ },
+ "folder": "cxPIGjcxqJdZTMQ5",
+ "sort": 800,
+ "_key": "!items!Ly3sIvBF6IFMMUR8"
+}

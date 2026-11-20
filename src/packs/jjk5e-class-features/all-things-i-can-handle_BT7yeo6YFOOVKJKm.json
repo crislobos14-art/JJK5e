@@ -1,0 +1,55 @@
+{
+ "_id": "BT7yeo6YFOOVKJKm",
+ "name": "All Things I can Handle",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>At 13th level, due to being experienced with killing sorcerers, dealing with their techniques has become an easy task for you. Whenever you are targeted by a spell or technique attack roll or saving throw, you learn how it works and adapt to it. After adapting to it, you can use your reaction to gain advantage on the saving throw or force the attack roll to be made at disadvantage.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Heavenly Restriction (Prideful) 13",
+  "activities": {
+   "nYfupPKuaTshaYXn": {
+    "_id": "nYfupPKuaTshaYXn",
+    "type": "utility",
+    "name": "Reaction",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "dKzsnD6daLKk9Ah9",
+ "_key": "!items!BT7yeo6YFOOVKJKm"
+}

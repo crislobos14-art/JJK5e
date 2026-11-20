@@ -1,0 +1,89 @@
+{
+ "_id": "YBmpM3iwX00k3yZR",
+ "name": "Skill Expert",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: N/A</em></p>\n<p>You have honed your proficiency with particular skills, granting you  the following benefits:</p>\n<ul>\n<li>\n<p>Increase one ability score of your choice by 1 (maximum of 20).  </p>\n</li>\n<li>\n<p>You gain proficiency in one skill of your choice.  </p>\n</li>\n<li>\n<p>Choose one skill in which you have proficiency. You gain expertise with that skill, which means your proficiency bonus is doubled for any ability check you make with it. The skill you choose must be one that isn't already benefiting from a feature, such as Expertise, that doubles your proficiency bonus.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkSkill"
+  },
+  "requirements": "N/A",
+  "advancement": {
+   "tEAlEigIsy8sXjbW": {
+    "_id": "tEAlEigIsy8sXjbW",
+    "type": "AbilityScoreImprovement",
+    "level": 0,
+    "title": "Ability Score Increase",
+    "value": {},
+    "configuration": {
+     "points": 1,
+     "cap": 1,
+     "fixed": {},
+     "locked": []
+    }
+   },
+   "ka27QUq6pfgsLQew": {
+    "_id": "ka27QUq6pfgsLQew",
+    "type": "Trait",
+    "level": 0,
+    "title": "Proficiencies",
+    "value": {},
+    "configuration": {
+     "mode": "default",
+     "allowReplacements": false,
+     "grants": [],
+     "choices": [
+      {
+       "count": 1,
+       "pool": [
+        "skills:*"
+       ]
+      }
+     ]
+    }
+   },
+   "8KtJX7WxzoWAbh5L": {
+    "_id": "8KtJX7WxzoWAbh5L",
+    "type": "Trait",
+    "level": 0,
+    "title": "Expertise",
+    "value": {},
+    "configuration": {
+     "mode": "expertise",
+     "allowReplacements": false,
+     "grants": [],
+     "choices": [
+      {
+       "count": 1,
+       "pool": [
+        "skills:*"
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "EtgHYidIGv42ylfo",
+ "sort": 1700,
+ "_key": "!items!YBmpM3iwX00k3yZR"
+}

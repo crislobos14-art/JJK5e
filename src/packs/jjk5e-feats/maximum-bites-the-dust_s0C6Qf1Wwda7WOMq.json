@@ -1,0 +1,121 @@
+{
+ "_id": "s0C6Qf1Wwda7WOMq",
+ "name": "Maximum: Bites the Dust",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/explosive-flesh.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Stronger Explosions</em></p>\n<p>Your explosive prowess has reached new heights, allowing you to trigger massive blasts from your removed body parts. As an action, you can spend cursed energy equal to the body part to trigger a delayed explosion. Choose a body part you have removed within 30 ft. It detonates at the end of your next turn, forcing all creatures within 20 ft to make a Dexterity saving throw at disadvantage. On a failure, they take Xd12 force damage and are knocked prone. On a success, they take half damage and are not knocked prone. You can spend additional cursed energy up to half your proficiency bonus (rounded up) to increase the damage by an additional Xd12 for every cursed energy spent. The X is your Cursed Energy modifier.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Stronger Explosions",
+  "activities": {
+   "3uRL0UCei479AbzW": {
+    "_id": "3uRL0UCei479AbzW",
+    "type": "save",
+    "name": "Action (1+ CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "max(1, floor(@prof / 2))"
+     }
+    },
+    "range": {
+     "value": "30",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": []
+    },
+    "effects": [
+     {
+      "_id": "SZt0gE3wgNE03u0B",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceSteps": {
+    "3uRL0UCei479AbzW": 1
+   },
+   "ceCosts": {
+    "3uRL0UCei479AbzW": 1
+   },
+   "prereq": {
+    "features": [
+     [
+      "Stronger Explosions"
+     ]
+    ]
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "SZt0gE3wgNE03u0B",
+   "name": "Prone (Maximum: Bites the Dust)",
+   "img": "modules/jjk5e/icons/techniques/explosive-flesh.svg",
+   "statuses": [
+    "prone"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!s0C6Qf1Wwda7WOMq.SZt0gE3wgNE03u0B"
+  }
+ ],
+ "folder": "vYo4tKf7KcEIUKP8",
+ "sort": 300,
+ "_key": "!items!s0C6Qf1Wwda7WOMq"
+}

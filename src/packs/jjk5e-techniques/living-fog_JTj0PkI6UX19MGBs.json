@@ -1,0 +1,155 @@
+{
+ "_id": "JTj0PkI6UX19MGBs",
+ "name": "Living Fog",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/starlight-symphony.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Starlight Symphony — Innate Technique (6th level)</em></p><p>At 6th level, you have learned to become the fog itself. As an action for 3 Cursed Energy you transform yourself or one of your fox shikigami into a misty cloud for up to 1 hour while concentrating. While in this form, your only method of moving is a fly speed of 30 feet. You can enter and occupy the space of another creature. While occupying the space of another creature, you can force them to make a Constitution saving throw, taking Xd8 equal to your Cursed Energy modifier in cold damage on a failed save as they choke on your fog.</p>\n<p>You have resistance to nonmagical damage and advantage on Strength, Dexterity, and Constitution saving throws. You can pass through small holes, narrow openings, and even mere cracks, though you treat liquids as though they were solid surfaces. You can’t fall and remain hovering in the air even when stunned or otherwise incapacitated.<br />\n While in the form of a misty cloud, you can’t manipulate objects, and any objects you were carrying or holding can’t be dropped, used, or otherwise interacted with. You can spend an additional 3 cursed energy to also become invisible for the duration.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "9o7rSli7874Z2Hgj": {
+    "_id": "9o7rSli7874Z2Hgj",
+    "type": "save",
+    "name": "Action (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    },
+    "effects": [
+     {
+      "_id": "aii9VYcIiNtzz0iO",
+      "onSave": false
+     }
+    ]
+   },
+   "KCqJ5jPUyH5LMlo2": {
+    "_id": "KCqJ5jPUyH5LMlo2",
+    "type": "utility",
+    "name": "Extra (3 CE)",
+    "sort": 900000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "You can spend an additional 3 cursed energy to also become invisible for the duration.",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "9o7rSli7874Z2Hgj": 3,
+    "KCqJ5jPUyH5LMlo2": 3
+   },
+   "technique": "Starlight Symphony",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "aii9VYcIiNtzz0iO",
+   "name": "Invisible (Living Fog)",
+   "img": "modules/jjk5e/icons/techniques/starlight-symphony.svg",
+   "statuses": [
+    "invisible"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "invisible"
+    }
+   },
+   "_key": "!items.effects!JTj0PkI6UX19MGBs.aii9VYcIiNtzz0iO"
+  }
+ ],
+ "folder": "MxqACO3emHCjwL5R",
+ "_key": "!items!JTj0PkI6UX19MGBs"
+}

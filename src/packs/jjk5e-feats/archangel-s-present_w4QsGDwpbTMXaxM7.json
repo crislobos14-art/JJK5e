@@ -1,0 +1,43 @@
+{
+ "_id": "w4QsGDwpbTMXaxM7",
+ "name": "Archangel’s Present",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/technique-extermination.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Angel’s Blessing, Breakthrough</em></p>\n<p>You gain a Blessing from the Dungeon Master’s Guide.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Angel’s Blessing, Breakthrough",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Angel’s Blessing"
+     ]
+    ],
+    "breakthroughs": 1
+   }
+  }
+ },
+ "folder": "gjva3zbKGp06jB9X",
+ "sort": 200,
+ "_key": "!items!w4QsGDwpbTMXaxM7"
+}

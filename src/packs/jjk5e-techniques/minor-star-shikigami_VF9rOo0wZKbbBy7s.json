@@ -1,0 +1,138 @@
+{
+ "_id": "VF9rOo0wZKbbBy7s",
+ "name": "Minor Star Shikigami",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/star-dictator.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Star Dictator — Innate Technique (1st level)</em></p><blockquote><p>The path of your shikigami constitutes the domain.</p></blockquote><p>Starting at 1st level, you can spend cursed energy up to your proficiency bonus as an action. For every cursed energy, you summon a minor shikigami in an unoccupied space within 5 ft of you. As a bonus action, you can command any shikigami created with your technique, otherwise they take the dodge action. As an action, you can share senses with one of your minor shikigami. While sharing senses with your shikigami, you are blinded and deafened. You can only have up to your proficiency bonus in shikigami at a time.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "JhTld6NhLQKLlaBT": {
+    "_id": "JhTld6NhLQKLlaBT",
+    "type": "utility",
+    "name": "Action (1+ CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "@prof"
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "3bD0fcEhNYxV2krG",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "5",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceSteps": {
+    "JhTld6NhLQKLlaBT": 1
+   },
+   "ceCosts": {
+    "JhTld6NhLQKLlaBT": 1
+   },
+   "technique": "Star Dictator",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "3bD0fcEhNYxV2krG",
+   "name": "Blinded (Minor Star Shikigami)",
+   "img": "modules/jjk5e/icons/techniques/star-dictator.svg",
+   "statuses": [
+    "blinded"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "blinded"
+    }
+   },
+   "_key": "!items.effects!VF9rOo0wZKbbBy7s.3bD0fcEhNYxV2krG"
+  }
+ ],
+ "folder": "ba0AWxHF6sBvbrZq",
+ "_key": "!items!VF9rOo0wZKbbBy7s"
+}

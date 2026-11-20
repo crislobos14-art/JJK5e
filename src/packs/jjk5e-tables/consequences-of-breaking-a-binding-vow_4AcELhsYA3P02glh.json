@@ -1,0 +1,106 @@
+{
+ "_id": "4AcELhsYA3P02glh",
+ "name": "Consequences of Breaking a Binding Vow",
+ "img": "icons/svg/d20-grey.svg",
+ "description": "",
+ "formula": "1d6",
+ "replacement": true,
+ "displayRoll": true,
+ "results": [
+  {
+   "_id": "7vqP2d0AGA40XbDT",
+   "type": "text",
+   "text": "<p><strong>Death.</strong></p>",
+   "description": "<p><strong>Death.</strong></p>",
+   "name": "Death.",
+   "img": "icons/svg/d20-black.svg",
+   "weight": 1,
+   "range": [
+    1,
+    1
+   ],
+   "drawn": false,
+   "_key": "!tables.results!4AcELhsYA3P02glh.7vqP2d0AGA40XbDT"
+  },
+  {
+   "_id": "mmQDWTVGdD7xuEqX",
+   "type": "text",
+   "text": "<p><strong>You lose a limb.</strong></p>",
+   "description": "<p><strong>You lose a limb.</strong></p>",
+   "name": "You lose a limb.",
+   "img": "icons/svg/d20-black.svg",
+   "weight": 1,
+   "range": [
+    2,
+    2
+   ],
+   "drawn": false,
+   "_key": "!tables.results!4AcELhsYA3P02glh.mmQDWTVGdD7xuEqX"
+  },
+  {
+   "_id": "9UiIKMzLBJlwiRwz",
+   "type": "text",
+   "text": "<p><strong>You lose a sense(D4: 1.Touch, 2. Taste, 3. Smell, 4. Sight)</strong></p>",
+   "description": "<p><strong>You lose a sense(D4: 1.Touch, 2. Taste, 3. Smell, 4. Sight)</strong></p>",
+   "name": "You lose a sense(D4: 1.Touch, 2. Taste, 3. Smell, 4. Sight)",
+   "img": "icons/svg/d20-black.svg",
+   "weight": 1,
+   "range": [
+    3,
+    3
+   ],
+   "drawn": false,
+   "_key": "!tables.results!4AcELhsYA3P02glh.9UiIKMzLBJlwiRwz"
+  },
+  {
+   "_id": "YwjBkgPmKUrjGz2p",
+   "type": "text",
+   "text": "<p><strong>Your stats are reduced by 2.</strong></p>",
+   "description": "<p><strong>Your stats are reduced by 2.</strong></p>",
+   "name": "Your stats are reduced by 2.",
+   "img": "icons/svg/d20-black.svg",
+   "weight": 1,
+   "range": [
+    4,
+    4
+   ],
+   "drawn": false,
+   "_key": "!tables.results!4AcELhsYA3P02glh.YwjBkgPmKUrjGz2p"
+  },
+  {
+   "_id": "OZaoM73Y3iDoqZLE",
+   "type": "text",
+   "text": "<p><strong>You cannot use Cursed Energy for 8d4 days.</strong></p>",
+   "description": "<p><strong>You cannot use Cursed Energy for 8d4 days.</strong></p>",
+   "name": "You cannot use Cursed Energy for 8d4 days.",
+   "img": "icons/svg/d20-black.svg",
+   "weight": 1,
+   "range": [
+    5,
+    5
+   ],
+   "drawn": false,
+   "_key": "!tables.results!4AcELhsYA3P02glh.OZaoM73Y3iDoqZLE"
+  },
+  {
+   "_id": "5cd1JYUQDAfTp4pD",
+   "type": "text",
+   "text": "<p><strong>Your Innate Technique is confiscated for 6d4 days.</strong></p>",
+   "description": "<p><strong>Your Innate Technique is confiscated for 6d4 days.</strong></p>",
+   "name": "Your Innate Technique is confiscated for 6d4 days.",
+   "img": "icons/svg/d20-black.svg",
+   "weight": 1,
+   "range": [
+    6,
+    6
+   ],
+   "drawn": false,
+   "_key": "!tables.results!4AcELhsYA3P02glh.5cd1JYUQDAfTp4pD"
+  }
+ ],
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": null,
+ "_key": "!tables!4AcELhsYA3P02glh"
+}

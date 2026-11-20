@@ -1,0 +1,34 @@
+{
+ "_id": "lp5JR4iUqXduHR6Y",
+ "name": "Heavenly Pact: Limited Physical Potential",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/pact.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Creeps and Curses V.3.1</em></p><p><em>Heavenly Restriction or Heavenly Pact refers to a binding vow forced on a sorcerer's body at birth. This usually affects their cursed energy in exchange for limitations or improvements on their body. The most notable is the absolute physicality of Zenin Toji, but there are many different types of Heavenly Pacts. A creature can only have one Heavenly Pact. If the limitations of the Heavenly Pact are superseded, anything gained becomes null.</em></p>\n<p>Though many Heavenly Restrictions restrict cursed energy to strengthen the body, it is not uncommon for the opposite to occur. A person with this Heavenly Restriction has higher than average cursed energy with decreased physical abilities, sometimes to their extreme detriment. Depending on how much their Heavenly Restriction limits them, their cursed energy increases accordingly.</p>\n<table>\n<thead>\n<tr>\n<th>Physical Limitation</th>\n<th>CE Increase</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>You do not add your Con modifier to your HP max</td>\n<td>+X CE (Con mod)</td>\n</tr>\n<tr>\n<td>Decrease Str, Dex, Con (1-6 each)</td>\n<td>+1 CE per 2 ASI lost</td>\n</tr>\n<tr>\n<td>You were born without a limb (stackable x4)</td>\n<td>+5 CE</td>\n</tr>\n<tr>\n<td>You have a walking speed of 0</td>\n<td>+8 CE</td>\n</tr>\n<tr>\n<td>You have vulnerability to all damage other than psychic</td>\n<td>+12 CE</td>\n</tr>\n</tbody>\n</table>\n<ul>\n<li>\n<p>You cannot decrease an Ability score below 4 using this Heavenly Restriction.</p>\n</li>\n<li>\n<p>For every Physical Limitation you choose you gain a +30 ft bonus to range for one of your cursed techniques. Additionally, when using a feature depending on your CE modifier, you count it as 1 higher for every Physical Limitation (Save DC, attacks, etc).</p>\n</li>\n<li>\n<p>If you have every Physical Limitation, you can instead choose one of your cursed techniques and gain the ability to maintain your technique from 600 miles away.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkPact"
+  },
+  "requirements": "Heavenly Pact (only one per creature)",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "TuD75Es2qNSvVZN6",
+ "sort": 300,
+ "_key": "!items!lp5JR4iUqXduHR6Y"
+}

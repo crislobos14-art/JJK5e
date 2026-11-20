@@ -1,0 +1,118 @@
+{
+ "_id": "4vFeNWkYDCDQEO4w",
+ "name": "Innate Technique: Limitless",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/limitless.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>A technique whose power is only matched by its complexity,<br />\n Limitless allows manipulation over space.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.Z8th34Qso5xXJcFA]{Infinity}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.kKlEBs83oZmc1GgC]{Lapse Blue}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.Udk2fPMDLwKx7fER]{Teleportation}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.EMDjz5QEQDEucr5I]{Offensive Infinity}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.pKNgqGZiGhI1CjxQ]{Domain Expansion: Unlimited Void}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "G96yDU5bFuYZdq0E": {
+    "_id": "G96yDU5bFuYZdq0E",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Limitless (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.Z8th34Qso5xXJcFA",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "QSrZpcsukV06E868": {
+    "_id": "QSrZpcsukV06E868",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Limitless (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.kKlEBs83oZmc1GgC",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "4K42lODerVObVeTm": {
+    "_id": "4K42lODerVObVeTm",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Limitless (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.Udk2fPMDLwKx7fER",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "aqgqFz1Zx6IT1LZM": {
+    "_id": "aqgqFz1Zx6IT1LZM",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Limitless (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.EMDjz5QEQDEucr5I",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "Y4Mz7CG2U93qugre": {
+    "_id": "Y4Mz7CG2U93qugre",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Limitless (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.pKNgqGZiGhI1CjxQ",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Limitless"
+  }
+ },
+ "_key": "!items!4vFeNWkYDCDQEO4w"
+}

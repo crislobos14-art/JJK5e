@@ -1,0 +1,32 @@
+{
+ "_id": "vXaWHaio8ChSQVIn",
+ "name": "Predictable Strikes",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/g-warstaff.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>G Warstaff — Innate Technique (6th level)</em></p><p>At 6th level, your opponents become extremely easy to read after being affected by your technique, and you learned how to exploit that. Once per turn when you hit an attack using G Warstaff against a creature that you can see 3 seconds into the future, you can turn that attack into a critical. You cannot roll for a black flash using this feature.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "G Warstaff 6"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "G Warstaff",
+   "level": 6
+  }
+ },
+ "folder": "GjZxtO8W2HfeT6Hl",
+ "_key": "!items!vXaWHaio8ChSQVIn"
+}

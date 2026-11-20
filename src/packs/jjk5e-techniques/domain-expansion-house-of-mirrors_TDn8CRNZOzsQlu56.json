@@ -1,0 +1,154 @@
+{
+ "_id": "TDn8CRNZOzsQlu56",
+ "name": "Domain Expansion: House of Mirrors",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/illusive-mirage-domain.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Illusive Mirage — Innate Technique (18th level)</em></p><p><em>Domain Expansion (rules): full-turn action, 20 CE unless stated, 175-ft radius, 1 minute. When the domain ends you suffer <strong>Technique Burnout</strong> (applied automatically by the module).</em></p><p>At 18th level, you have mastered your technique allowing you to open your domain. At initiative 20, you can force all creatures to fall under an illusion of your choice. Additionally, you can use your reaction to trick a creature that attacks you to target a random creature within range. They must roll a dice to see who is targeted with the dice depending on the number of creatures within range. On a 1, you are still targeted. On a higher roll, a different creature is targeted. If there are no other creatures in range, roll a d2. On a 2, the attack targets a random direction, missing you completely.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "YViYoxBURaJd434p": {
+    "_id": "YViYoxBURaJd434p",
+    "type": "utility",
+    "name": "Reaction",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   },
+   "vapuxwdT9LjXjndx": {
+    "_id": "vapuxwdT9LjXjndx",
+    "type": "utility",
+    "name": "Expand Domain (20 CE)",
+    "sort": -100000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Full turn: Action + Bonus Action + Movement",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "175",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": true
+     },
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 9,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "special",
+   "value": null,
+   "condition": "Full turn: Action + Bonus Action + Movement",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "radius",
+    "size": "175",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": true
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Illusive Mirage",
+   "level": 18,
+   "domain": true,
+   "ceCosts": {
+    "vapuxwdT9LjXjndx": 20
+   },
+   "domainActivity": "vapuxwdT9LjXjndx",
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "8b1T5CIAvTiipny3",
+ "_key": "!items!TDn8CRNZOzsQlu56"
+}

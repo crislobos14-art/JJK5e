@@ -1,0 +1,114 @@
+{
+ "_id": "ySExszCtKEff7Lhl",
+ "name": "Circuit Breaker",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/cursed-circuitry.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Circuitry — Innate Technique (11th level)</em></p><p>At 11th level, your <em>Circuit</em> now lasts for 8 hours or until you end it as a bonus action. Once per turn when one of your circuits ends, your next unarmed strike or attack with the item that held the circuit deals an additional 5d10 necrotic damage on a hit.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "iRqx406U0RSXjtZb": {
+    "_id": "iRqx406U0RSXjtZb",
+    "type": "damage",
+    "name": "Bonus Action",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "value": "8",
+     "units": "hour",
+     "concentration": false,
+     "override": true
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 5,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "8",
+   "units": "hour"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Cursed Circuitry",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "hm057iS0RUqvPJaN",
+ "_key": "!items!ySExszCtKEff7Lhl"
+}

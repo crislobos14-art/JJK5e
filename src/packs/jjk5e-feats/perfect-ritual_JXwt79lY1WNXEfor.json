@@ -1,0 +1,42 @@
+{
+ "_id": "JXwt79lY1WNXEfor",
+ "name": "Perfect Ritual",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/seance.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Ritual of Resurrection</em></p>\n<p>You won’t allow anyone to interrupt your seance. You have advantage on saving throws to maintain concentration for your Seance technique and the time to complete your Ritual is decreased to 3 rounds. Additionally, you decrease the saving throw DC a target makes against the dead humanoid’s Soul Information by your CE modifier.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Ritual of Resurrection",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Ritual of Resurrection"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "Bzl0QdjoRI5R4DB5",
+ "sort": 200,
+ "_key": "!items!JXwt79lY1WNXEfor"
+}

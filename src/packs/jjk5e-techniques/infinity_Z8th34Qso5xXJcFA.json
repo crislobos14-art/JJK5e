@@ -1,0 +1,157 @@
+{
+ "_id": "Z8th34Qso5xXJcFA",
+ "name": "Infinity",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/limitless.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Limitless — Innate Technique (1st level)</em></p><blockquote><p>A technique whose power is only matched by its complexity,<br />\n Limitless allows manipulation over space.</p></blockquote><p>Beginning at 1st level, you gain the ability to use your manipulation over space to protect yourself effectively. As a bonus action for 1 Cursed Energy, you can encase yourself in a field of mathematical infinity costing 1 Cursed Energy at the start of your turn. When you are targeted by a weapon, spell, Cursed Energy attack roll or any saving throws from sources outside your body you roll a d6. On a 4 or higher, any attacks or spells made against you automatically fail to touch or harm you in any physical way. At 6th level, this becomes 3 or higher, and 2 or higher at 11th level.<br />\n You can spend 1 Cursed Energy to automatically roll a 6 on an Infinity roll. At 11th level, you can spend 2 Cursed Energy at the beginning of each of your turns to automatically roll a 6 on Infinity rolls and you can activate Infinity as a reaction to being targeted by an attack or effect that you can see.<br />\n When you take the Dodge action while Infinity is activated, you gain advantage on the d6 roll, and you can grant its benefits to any creatures within your reach.<br />\nThis feature does not work against poison or attacks that you cannot see until 6th level.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "57UvuIahfVf5dojK": {
+    "_id": "57UvuIahfVf5dojK",
+    "type": "utility",
+    "name": "Bonus Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   },
+   "5U2nqwCaRX6vM4sS": {
+    "_id": "5U2nqwCaRX6vM4sS",
+    "type": "utility",
+    "name": "Action (1 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   },
+   "bnixF7T8xqXctZ5h": {
+    "_id": "bnixF7T8xqXctZ5h",
+    "type": "utility",
+    "name": "Reaction (2 CE)",
+    "sort": 200000,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "57UvuIahfVf5dojK": 1,
+    "5U2nqwCaRX6vM4sS": 1,
+    "bnixF7T8xqXctZ5h": 2
+   },
+   "technique": "Limitless",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "9dzjvEM8kgWba7oJ",
+ "_key": "!items!Z8th34Qso5xXJcFA"
+}

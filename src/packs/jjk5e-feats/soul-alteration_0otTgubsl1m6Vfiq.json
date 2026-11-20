@@ -1,0 +1,98 @@
+{
+ "_id": "0otTgubsl1m6Vfiq",
+ "name": "Soul Alteration",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/idle-transfiguration.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Body Clone</em></p>\n<p>Your manipulation over your soul has increased dramatically, making you almost impossible to kill by those who cannot target your soul. When you use <em>Self-Alteration</em>, you can instead spend cursed energy up to your Cursed Energy modifier to regain 5 hit points per cursed energy spent. You can regrow a limb for every 2 cursed energy spent in this way. At 11th level, this instead becomes 10 hit points per CE, can be used as a reaction to damage, and costs 1 CE to regrow limbs.<br />\n When you are reduced to 0 hit points while you have at least 1 CE, by a method that does not directly harm your soul, you are instead incapacitated until you regain hit points and do not make death saves. While incapacitated in this way, the only action you can take is to use <em>Soul Alteration</em> as an action.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Body Clone",
+  "activities": {
+   "sZQ9cxbXdyslRPl6": {
+    "_id": "sZQ9cxbXdyslRPl6",
+    "type": "utility",
+    "name": "Reaction (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "effects": [
+     {
+      "_id": "6goaMKV3yMUlt5Fx",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "sZQ9cxbXdyslRPl6": 1
+   },
+   "prereq": {
+    "features": [
+     [
+      "Body Clone"
+     ]
+    ]
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "6goaMKV3yMUlt5Fx",
+   "name": "Incapacitated (Soul Alteration)",
+   "img": "modules/jjk5e/icons/techniques/idle-transfiguration.svg",
+   "statuses": [
+    "incapacitated"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "incapacitated"
+    }
+   },
+   "_key": "!items.effects!0otTgubsl1m6Vfiq.6goaMKV3yMUlt5Fx"
+  }
+ ],
+ "folder": "AzMxVgHP2Otjp6Ju",
+ "sort": 300,
+ "_key": "!items!0otTgubsl1m6Vfiq"
+}

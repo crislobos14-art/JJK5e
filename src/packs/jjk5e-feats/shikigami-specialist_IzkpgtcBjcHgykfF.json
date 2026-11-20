@@ -1,0 +1,60 @@
+{
+ "_id": "IzkpgtcBjcHgykfF",
+ "name": "Shikigami Specialist",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must be able to summon shikigami</em></p>\n<p>You have specialized in shikigami and made it your life. Choose one type of shikigami you can summon to be your special. You have a number of Ability points equal to twice your proficiency bonus that you can use to increase the ability score of that shikigami (up to a max of 20). Additionally, you can command any of your shikigami as a free action on your turn. This does not let you command a shikigami multiple times per turn. If you have multiple shikigami, you can swap your special shikigami as part of a long rest.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkCursedEnergy"
+  },
+  "requirements": "Must be able to summon shikigami",
+  "activities": {
+   "zGvMLQ7kf2bxQ60b": {
+    "_id": "zGvMLQ7kf2bxQ60b",
+    "type": "utility",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "58RlNbYPWxO2Xi4E",
+ "sort": 1700,
+ "_key": "!items!IzkpgtcBjcHgykfF"
+}

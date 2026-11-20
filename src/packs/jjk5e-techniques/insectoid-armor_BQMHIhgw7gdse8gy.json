@@ -1,0 +1,98 @@
+{
+ "_id": "BQMHIhgw7gdse8gy",
+ "name": "Insectoid Armor",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/construction.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Construction — Innate Technique (11th level)</em></p><p>At 11th level, you realize you need a way to efficiently use your cursed energy despite being an inefficient technique. You have learned how to create armor that simulates the efficiency of an insect's bug body. As a bonus action for 10 cursed energy, you can surround yourself in this armor and gain the following benefits for 1 hour:</p>\n<ul>\n<li>\n<p>Your Strength, Dexterity, and Armor Class scores increase by +4, as a result of the efficiency of the constructs.  </p>\n</li>\n<li>\n<p>You will gain resistance to non-magical bludgeoning, piercing and slashing damage. This becomes immunity at 18th level.  </p>\n</li>\n<li>\n<p>Wings will sprout from your back, granting you a flying speed equal to your walking speed. In addition, you can now use a free action to dash on your turn.  </p>\n</li>\n<li>\n<p>Your unarmed strikes deal two additional damage dice and your unarmed strikes roll one additional damage dice on a critical.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "zDVP8kBDUxuwVc4I": {
+    "_id": "zDVP8kBDUxuwVc4I",
+    "type": "utility",
+    "name": "Bonus Action (10 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "hour",
+     "concentration": false,
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "hour"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "zDVP8kBDUxuwVc4I": 10
+   },
+   "technique": "Construction",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "dT7FkGZ40euglS6C",
+ "_key": "!items!BQMHIhgw7gdse8gy"
+}

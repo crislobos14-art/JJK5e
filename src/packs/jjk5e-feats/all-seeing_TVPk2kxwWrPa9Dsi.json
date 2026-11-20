@@ -1,0 +1,101 @@
+{
+ "_id": "TVPk2kxwWrPa9Dsi",
+ "name": "All Seeing",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/black-bird-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Cursed Crow</em></p>\n<p>You have improved your ability to manage information. While you see through the crows you don’t gain the blinded condition. You gain 10 ft of blindsight for every cursed crow within 60 ft of you that is not incapacitated.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Cursed Crow",
+  "activities": {
+   "Etcz8UIKyLWnipwh": {
+    "_id": "Etcz8UIKyLWnipwh",
+    "type": "utility",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "60",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "effects": [
+     {
+      "_id": "6km3LRu00FAd4uCu",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Cursed Crows"
+     ]
+    ]
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "6km3LRu00FAd4uCu",
+   "name": "Blinded (All Seeing)",
+   "img": "modules/jjk5e/icons/techniques/black-bird-manipulation.svg",
+   "statuses": [
+    "blinded"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "blinded"
+    }
+   },
+   "_key": "!items.effects!TVPk2kxwWrPa9Dsi.6km3LRu00FAd4uCu"
+  }
+ ],
+ "folder": "vJ6bBNDO9hiSQvl9",
+ "sort": 100,
+ "_key": "!items!TVPk2kxwWrPa9Dsi"
+}

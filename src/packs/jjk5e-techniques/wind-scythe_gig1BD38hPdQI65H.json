@@ -1,0 +1,163 @@
+{
+ "_id": "gig1BD38hPdQI65H",
+ "name": "Wind Scythe",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/tool-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Tool Manipulation — Innate Technique (6th level)</em></p><p>At 6th level you have learned to use tools offensively. As an action for 3 CE, you can create a blast of wind from an imbued tool you are holding. Or from a <em>Floating Tool</em> within 60 ft for 1 additional CE.<br />\n This creates a 10 feet wide, 60 feet long line. Creatures within range must make a Strength saving throw, taking 3d10 bludgeoning damage and pushed back 10 feet on a failed save or half as much on a success.<br />\n At 11th level, your <em>Wind Scythe</em> now deals 6d10 bludgeoning damage and a creature that fails their save is pushed back 20 feet and knocked prone.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "FFSv2ilzd3aMzoWD": {
+    "_id": "FFSv2ilzd3aMzoWD",
+    "type": "save",
+    "name": "Action (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "str"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 3,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "SPvJIHzOEtBVslR7",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "60",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "FFSv2ilzd3aMzoWD": 3
+   },
+   "technique": "Tool Manipulation",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "SPvJIHzOEtBVslR7",
+   "name": "Prone (Wind Scythe)",
+   "img": "modules/jjk5e/icons/techniques/tool-manipulation.svg",
+   "statuses": [
+    "prone"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!gig1BD38hPdQI65H.SPvJIHzOEtBVslR7"
+  }
+ ],
+ "folder": "7tmhlm7tDflRZlKD",
+ "_key": "!items!gig1BD38hPdQI65H"
+}

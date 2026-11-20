@@ -1,0 +1,71 @@
+{
+ "_id": "E9mY60ADG0KqXTDv",
+ "name": "Kinetic Absorption",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/fa-jin.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Store and Release</em></p>\n<p>As a reaction to bludgeoning, slashing, or piercing damage, you can spend 1 cursed energy to reduce the incoming damage by your Cursed Energy score and gain 1 Jin Charge. You cannot reduce the damage of other damage types.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Store and Release",
+  "activities": {
+   "onP8BwiFSEOWGej5": {
+    "_id": "onP8BwiFSEOWGej5",
+    "type": "utility",
+    "name": "Reaction (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "onP8BwiFSEOWGej5": 1
+   },
+   "prereq": {
+    "features": [
+     [
+      "Store and Release"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "qac6h84zrmqbsWnq",
+ "sort": 100,
+ "_key": "!items!E9mY60ADG0KqXTDv"
+}

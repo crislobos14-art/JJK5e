@@ -1,0 +1,81 @@
+{
+ "_id": "2IgdiucvpATGKxUq",
+ "name": "Inauspicious Beast Banishment",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/auspicious-beast-summon.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Auspicious Beast Summon — Cursed Technique Reversal</em></p><p>After you have mastered Reverse Cursed Technique, you have finally unlocked your cursed technique reversal. You now have the ability to remove other people's summons. As an action or reaction for 5 cursed energy, you can force all summoners of any shikigami, curses, familiars, or any other form of summon within 60 ft to make a CE saving throw. On a failure, their summons are undone.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Auspicious Beast Summon",
+  "activities": {
+   "eGBc09FV9WqJ83U1": {
+    "_id": "eGBc09FV9WqJ83U1",
+    "type": "utility",
+    "name": "Reaction (5 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "60",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "eGBc09FV9WqJ83U1": 5
+   },
+   "technique": "Auspicious Beast Summon",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Auspicious Beast Summon"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!2IgdiucvpATGKxUq"
+}

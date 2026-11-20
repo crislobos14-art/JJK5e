@@ -1,0 +1,118 @@
+{
+ "_id": "gL98pPAhCp5btTmC",
+ "name": "Innate Technique: Antigravity System",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/antigravity-system.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>You can create devastating fields of antigravity.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.YYIXcaNXo5YH89Yp]{Antigravity}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.XJWuaIPUC0PQuyZ1]{Gravity Field}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.PeFhjb43m6fIn3JU]{Antigravity Shield}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.7QrXKBBmTXN0jBGO]{Boosted System}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.PMfC5O2A8EvH721k]{Domain Expansion: Zero Gravity}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "Ee7agTDjT9nmDFuh": {
+    "_id": "Ee7agTDjT9nmDFuh",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Antigravity System (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.YYIXcaNXo5YH89Yp",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "c6Fgc8N2GXEZIV0e": {
+    "_id": "c6Fgc8N2GXEZIV0e",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Antigravity System (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.XJWuaIPUC0PQuyZ1",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "QJmUq4KqdoMbwfp4": {
+    "_id": "QJmUq4KqdoMbwfp4",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Antigravity System (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.PeFhjb43m6fIn3JU",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "H48uzc7UiuXV0XAs": {
+    "_id": "H48uzc7UiuXV0XAs",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Antigravity System (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.7QrXKBBmTXN0jBGO",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "JzEhxTv8LnBSBj3H": {
+    "_id": "JzEhxTv8LnBSBj3H",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Antigravity System (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.PMfC5O2A8EvH721k",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Antigravity System"
+  }
+ },
+ "_key": "!items!gL98pPAhCp5btTmC"
+}

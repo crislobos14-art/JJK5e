@@ -1,0 +1,42 @@
+{
+ "_id": "v8TNx2xVhtr2dqXj",
+ "name": "00 — JJK 5e V.6: License & Credits",
+ "sort": 0,
+ "pages": [
+  {
+   "_id": "5ydOgFNU3BhVNdOl",
+   "name": "License & Credits",
+   "type": "text",
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Jujutsu Kaisen 5e</p>\n<p><strong>License &amp; Disclaimer</strong></p>\n<p>This tabletop roleplaying game system is an unofficial fan-made project and is not affiliated with, endorsed by, or associated with any official publishers or rights holders.</p>\n<p>All original text, mechanics descriptions, and content in this document are © 2026 [I watch Anime] and are licensed under the Creative Commons Attribution–NonCommercial–ShareAlike 4.0 International License (CC BY-NC-SA 4.0).</p>\n<p>You are free to share and adapt this work for non-commercial purposes only, provided appropriate credit is given and any derivative works are distributed under the same license.</p>\n<p>Commercial use (including paid products, paywalled tools, or monetized VTT modules) is not permitted without explicit written permission from the creator.</p>\n<p>This license applies only to original content created for this system and does not grant any rights to third-party intellectual property.</p>\n<p>This work is licensed under the Creative Commons<br />\nAttribution–NonCommercial–ShareAlike 4.0 International License.</p>\n<p>© 2026 [I watch Anime]</p>\n<h1>Table of Contents</h1>\n<p>Chapter 1: Making a Character (Pg. 3)<br />\n1.1 Setting Up a Character<br />\nChapter 2: Races (Pg. 6)<br />\n2.1 Humans<br />\n2.2 Cursed Vessels<br />\n2.3 Cursed Corpses<br />\n2.4 Cursed Spirits<br />\nChapter 3: Classes (Pg. 17)<br />\n3.1 Juggernaut<br />\n3.2 Scout<br />\n3.3 Strategist<br />\n3.4 Shikigami User<br />\n3.5 Support Specialist<br />\n3.6 Warrior<br />\n3.7 Innate Techniques<br />\n3.8 Heavenly Restriction<br />\nChapter 4: Backgrounds &amp; Mindsets(Pg. 273)<br />\n4.1 Backgrounds<br />\n4.2 Character Mindsets<br />\nChapter 5: Equipment (Pg. 281)<br />\n5.1 Armor and Shields<br />\n5.2 Weapons and Adventuring Gear<br />\n5.3 Cursed Tools<br />\nChapter 6: Customization &amp; Feats (Pg. 298)<br />\n6.1 Multiclassing<br />\n6.2 Feats<br />\nChapter 7: Intricacies of Sorcery (Pg. 410)<br />\n7.1 Binding Vows<br />\n7.2 Breakthroughs<br />\n7.3 Domain Expansion<br />\n7.4 Limb Damage Table<br />\n7.5 Maximum Output<br />\n7.6 The Zone<br />\n7.7 Rules of Thumb<br />\nChapter 8: Credits<br />\n<a href=\"https://discord.gg/6r736Wnp5q\">Silly Discord?</a> <br />\n<a href=\"https://docs.google.com/document/d/1fE5rhr0oSLzWurRvjxurSr4KjbfVil4UnQBPYCrHjN8/edit?tab=t.0\">Creeps and Curses Expansion</a> V.3 <br />\n(updates OTW)<br />\n<a href=\"https://www.patreon.com/c/IwatchAnime\">Patreon</a> </p>\n<p>This tabletop roleplaying game system is an unofficial fan-made project and is not affiliated with, endorsed by, or associated with any official publishers or rights holders. All rights belong to Shounen Jump and Gege Akutami.</p>\n<p>Big thanks to everyone who gave their support or enjoyed this book! Keep Larping!</p><hr><p><em>Foundry VTT conversion: unofficial fan module, non-commercial, distributed under the same CC BY-NC-SA 4.0 license. All JJK rights belong to Gege Akutami / Shueisha.</em></p>"
+   },
+   "_key": "!journal.pages!v8TNx2xVhtr2dqXj.5ydOgFNU3BhVNdOl"
+  },
+  {
+   "_id": "gKNgwtvRQEeN9Tmj",
+   "name": "Creeps and Curses V.3.1",
+   "type": "text",
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p><strong>Creeps and Curses: 5e Expansion V.3.1</strong> © 2026 [I watch Anime], CC BY-NC-SA 4.0. Included: Heavenly Pacts, Evolutionary Constraint, Special Grade Boons, Special Traits, the techniques ████ and Light and Vairocana (with feats and reversals) and example Minor/Major Cursed Techniques. The Vairocana Chaos Table is not in V.3.1.</p><blockquote><p>Heavenly Restriction or Heavenly Pact refers to a binding vow forced on a sorcerer's body at birth. This usually affects their cursed energy in exchange for limitations or improvements on their body. The most notable is the absolute physicality of Zenin Toji, but there are many different types of Heavenly Pacts. A creature can only have one Heavenly Pact. If the limitations of the Heavenly Pact are superseded, anything gained becomes null.</p></blockquote>"
+   },
+   "_key": "!journal.pages!v8TNx2xVhtr2dqXj.gKNgwtvRQEeN9Tmj"
+  }
+ ],
+ "flags": {
+  "jjk5e": {
+   "lang": "en"
+  }
+ },
+ "folder": null,
+ "_key": "!journal!v8TNx2xVhtr2dqXj"
+}

@@ -1,0 +1,80 @@
+{
+ "_id": "Tl2YydqV92juMHnp",
+ "name": "Improved Body",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>At 7th level, the longer you live the more you'll realize your body has no limits. You gain +4 to your Strength, Dexterity and Constitution scores. You gain proficiency in Dexterity saving throws.<br />\nIn addition, you gain immunity to disease and the poisoned condition and resistance to poison damage.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Heavenly Restriction 7",
+  "activities": {
+   "FCkQlTod8Y5VBUK6": {
+    "_id": "FCkQlTod8Y5VBUK6",
+    "type": "utility",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "hWqAX9TqrOvuq1FE",
+ "effects": [
+  {
+   "_id": "tS9skn2ffOcAFsj9",
+   "name": "Improved Body",
+   "img": "modules/jjk5e/icons/feature.svg",
+   "changes": [
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "poison",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "auto": "passive"
+    }
+   },
+   "_key": "!items.effects!Tl2YydqV92juMHnp.tS9skn2ffOcAFsj9"
+  }
+ ],
+ "_key": "!items!Tl2YydqV92juMHnp"
+}

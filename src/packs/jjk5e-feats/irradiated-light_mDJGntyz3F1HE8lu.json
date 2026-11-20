@@ -1,0 +1,111 @@
+{
+ "_id": "mDJGntyz3F1HE8lu",
+ "name": "Irradiated Light",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/and-light.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Creeps and Curses V.3.1</em></p><p><em>Prerequisite: Must have Light Techniques</em></p>\n<p>You have learned to weaponize the radiation of your light constructs. When a creature fails a save against one of your innate technique features, you can spend 1 cursed energy to cause that creature to gain the poisoned condition and take radiant damage at the beginning of their turn equal to your CE modifier. This lasts a number of rounds equal to your CE modifier. A creature can make a Constitution saving throw at the end of their turn, ending the effect on a success.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Light Techniques",
+  "activities": {
+   "W7hC5ELSyxOqFha5": {
+    "_id": "W7hC5ELSyxOqFha5",
+    "type": "save",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    },
+    "effects": [
+     {
+      "_id": "l5XcEaFQsIqP4Pq2",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "W7hC5ELSyxOqFha5": 1
+   },
+   "prereq": {
+    "features": [
+     [
+      "Light Techniques"
+     ]
+    ]
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "l5XcEaFQsIqP4Pq2",
+   "name": "Poisoned (Irradiated Light)",
+   "img": "modules/jjk5e/icons/techniques/and-light.svg",
+   "statuses": [
+    "poisoned"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "poisoned"
+    }
+   },
+   "_key": "!items.effects!mDJGntyz3F1HE8lu.l5XcEaFQsIqP4Pq2"
+  }
+ ],
+ "folder": "mlZiXvNnBJnPDxwe",
+ "sort": 200,
+ "_key": "!items!mDJGntyz3F1HE8lu"
+}

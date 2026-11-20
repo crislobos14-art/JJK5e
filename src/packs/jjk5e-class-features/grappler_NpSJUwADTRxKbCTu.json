@@ -1,0 +1,77 @@
+{
+ "_id": "NpSJUwADTRxKbCTu",
+ "name": "Grappler",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>At the start of each of your turns, you can deal 1d4 bludgeoning damage to one creature grappled by you.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Fighting Style",
+  "activities": {
+   "0vVtIIAX0t3NmmBt": {
+    "_id": "0vVtIIAX0t3NmmBt",
+    "type": "damage",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 4,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "fightingStyle": true,
+   "improved": false
+  }
+ },
+ "folder": "I1ItOooRBoVLqHCS",
+ "_key": "!items!NpSJUwADTRxKbCTu"
+}

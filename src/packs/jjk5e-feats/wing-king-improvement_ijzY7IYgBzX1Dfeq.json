@@ -1,0 +1,68 @@
+{
+ "_id": "ijzY7IYgBzX1Dfeq",
+ "name": "Wing King Improvement",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/rot.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Maximum: Wing King</em></p>\n<p>You have mastered your Maximum technique, granting you the following benefits while using Wing King:</p>\n<ul>\n<li>\n<p>You gain the Evasion feature  </p>\n</li>\n<li>\n<p>You can now make four lines of blood attacks as a free action on your turn  </p>\n</li>\n<li>\n<p>You can use a Rot Technique as a bonus action</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Maximum: Wing King",
+  "activities": {
+   "xJ0az6DjMDaOX5hi": {
+    "_id": "xJ0az6DjMDaOX5hi",
+    "type": "utility",
+    "name": "Bonus Action",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Maximum: Wing King"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "gN0JGJzsnMHTyd5r",
+ "sort": 400,
+ "_key": "!items!ijzY7IYgBzX1Dfeq"
+}

@@ -1,0 +1,34 @@
+{
+ "_id": "KyAqoXXWGTIXbp6H",
+ "name": "Flow Technique",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Creeps and Curses V.3.1</em></p><p><em>Minor Cursed Technique. Example technique for sorcerers and NPCs (GM approval).</em></p><p>A technique based on using CE residuals. When a creature hits you with a cursed technique, innate technique or cursed strike, you can spend your reaction to reduce the damage by twice your proficiency bonus. You can then add your proficiency bonus to the next damage roll you make before the end of your next turn. This later increases to three times your proficiency bonus.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkCursedTechnique"
+  },
+  "requirements": "Minor Cursed Technique",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "PUm8acbqVGSo8Rm6",
+ "sort": 200,
+ "_key": "!items!KyAqoXXWGTIXbp6H"
+}

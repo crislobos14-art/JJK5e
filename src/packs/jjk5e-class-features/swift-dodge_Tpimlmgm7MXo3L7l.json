@@ -1,0 +1,55 @@
+{
+ "_id": "Tpimlmgm7MXo3L7l",
+ "name": "Swift Dodge",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>Starting at 17th level, when an attacker that you can see hits you with an attack, you can use your reaction to ignore the attack's damage against you. You can use this feature a number of times equal to half your proficiency bonus (rounded up) per long rest.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Scout 17",
+  "activities": {
+   "fkHopZ1Z0Cn7V7H3": {
+    "_id": "fkHopZ1Z0Cn7V7H3",
+    "type": "utility",
+    "name": "Reaction",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "Jrayu2BI11U3R1zF",
+ "_key": "!items!Tpimlmgm7MXo3L7l"
+}

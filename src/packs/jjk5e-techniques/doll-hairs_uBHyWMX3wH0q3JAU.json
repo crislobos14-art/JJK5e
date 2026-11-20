@@ -1,0 +1,94 @@
+{
+ "_id": "uBHyWMX3wH0q3JAU",
+ "name": "Doll Hairs",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/hair-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Hair Manipulation — Cursed Technique Reversal</em></p><p>You have learned your reversal, allowing you to gain the opposite of your technique. As an action for 4 CE, you implant your own hairs onto a creature within 10 ft of you. A creature can make a Dexterity saving throw to avoid this effect on a success. When you implant your hairs into a creature, you can use your Hair Manipulation features (other than Domain Expansion) through that creature’s hair a number of times equal to twice your CE modifier before your implanted hairs run out of cursed energy. A creature can target the hair with attacks and effects to destroy the implanted hair. The hair has an AC equal to your CE save DC and is destroyed if it takes fire or slashing damage equal to your level at once. Destroying the implanted hair in this way leaves the target bald.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Hair Manipulation",
+  "activities": {
+   "O8Nk2PrZ1n3LEdde": {
+    "_id": "O8Nk2PrZ1n3LEdde",
+    "type": "save",
+    "name": "Action (4 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "10",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "O8Nk2PrZ1n3LEdde": 4
+   },
+   "technique": "Hair Manipulation",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Hair Manipulation"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!uBHyWMX3wH0q3JAU"
+}

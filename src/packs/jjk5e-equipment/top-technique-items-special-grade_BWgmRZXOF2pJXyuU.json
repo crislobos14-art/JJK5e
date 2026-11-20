@@ -1,0 +1,30 @@
+{
+ "_id": "BWgmRZXOF2pJXyuU",
+ "name": "Top Technique Items (Special Grade)",
+ "type": "loot",
+ "img": "icons/svg/explosion.svg",
+ "folder": "OqdCuXcZ0pFqRc3h",
+ "system": {
+  "type": {
+   "value": "gear"
+  },
+  "description": {
+   "value": "<p><em>Special Grade category rule.</em></p>\n<p>Items that hold an innate technique are found in many different grades of strength. Mechanically, these are all 5e Legendary and above items.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "rarity": "legendary",
+  "quantity": 1
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "Special Grade"
+  }
+ },
+ "_key": "!items!BWgmRZXOF2pJXyuU"
+}

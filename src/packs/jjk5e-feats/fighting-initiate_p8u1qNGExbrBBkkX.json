@@ -1,0 +1,87 @@
+{
+ "_id": "p8u1qNGExbrBBkkX",
+ "name": "Fighting Initiate",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: N/A</em></p>\n<p>Your martial training has helped you develop a particular style of fighting. As a result, you learn one Fighting Style option of your choice from the Heavenly Restriction class. If you already have a style, the one you choose must be different.<br />\n Whenever you reach a level that grants the Ability Score Improvement feature, you can replace this feat's fighting style with another one from the Heavenly Restriction class that you don't have.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkPhysical"
+  },
+  "requirements": "N/A",
+  "advancement": {
+   "mCrN0NGh8X1X550S": {
+    "_id": "mCrN0NGh8X1X550S",
+    "type": "ItemChoice",
+    "level": 0,
+    "title": "Fighting Style",
+    "value": {},
+    "configuration": {
+     "choices": {
+      "0": {
+       "count": 1,
+       "replacement": false
+      }
+     },
+     "allowDrops": true,
+     "type": "feat",
+     "pool": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.nMyMXxNLMokmP3yP"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.BztfSbvdhmqg0MZT"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.3FARatYQgXK1DmXO"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.3wFYzZUMvs7ddPUE"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.NpSJUwADTRxKbCTu"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.3VceeadUtLy743gn"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.CWj3eWj8gisfdL1z"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.3fIgisi1ObpqAv9E"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.nYMqk3ezK1005NNg"
+      }
+     ],
+     "restriction": {
+      "type": "",
+      "subtype": "",
+      "level": ""
+     }
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "cxPIGjcxqJdZTMQ5",
+ "sort": 700,
+ "_key": "!items!p8u1qNGExbrBBkkX"
+}

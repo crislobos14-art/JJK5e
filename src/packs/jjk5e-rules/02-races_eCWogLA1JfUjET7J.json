@@ -1,0 +1,74 @@
+{
+ "_id": "eCWogLA1JfUjET7J",
+ "name": "02 — Races",
+ "sort": 2000,
+ "pages": [
+  {
+   "_id": "bWNC9Tb72YJGpNS4",
+   "name": "Human Races",
+   "type": "text",
+   "sort": 0,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p><strong>Human</strong><br />\n While many humans vary in shape and size, your human character will have these traits.</p>\n<p><strong>Ability Score Increase.</strong> One ability score of your choice increases by 2 and other ability scores increase by 1. Choosing different Human races replaces this ASI.</p>\n<p><strong>Age.</strong> Humans reach adulthood in their teens and live for around a century.</p>\n<p><strong>Alignment.</strong> There is no clear alignment that is consistent among all humans. Just about any alignment can be justified.</p>\n<p><strong>Size.</strong> Humans in the Jujutsu Kaisen world are typically 5-6 feet tall. Some can rest far outside this range, but your size will count as medium.</p>\n<p><strong>Speed.</strong> Your base walking speed is 30 feet.</p>\n<p><strong>Jujutsu Sorcerer</strong><br />\n You are part of a family of sorcerers or have been involved from a young age, you gain the following:</p>\n<p><strong>Ability Score Increase.</strong> One ability score of your choice increases by 2 and another by 1.</p>\n<p><strong>Skills.</strong> You gain proficiency in martial weapons.</p>\n<p><strong>Trained Cursed Energy.</strong> You gain a Cursed Energy feat.<br />\n<strong>Superhuman</strong><br />\n Very rarely, some humans may be astonishingly stronger than most others in the world, sometimes vastly stronger than the average human. If your human character happens to fall under this category, you can choose to replace the standard Human Ability Score Increase with these traits instead:</p>\n<p><strong>Ability Score Increase.</strong> You increase either your Strength, Dexterity, or Constitution score by 2 and the others by 1.</p>\n<p><strong>Natural Athlete.</strong> You have proficiency in the Athletics skill, if you already have proficiency, you instead gain Expertise.</p>\n<p><strong>Record Breaker.</strong> Your jumping distance is doubled.</p>\n<p><strong>Uncanny Endurance.</strong> You can focus on occasionally shrugging off injury. When you take damage, you can use your reaction to roll a d12. Add your Constitution modifier to the number rolled, and reduce the damage by that total. After you use this trait, you can’t use it again until you finish a short or long rest.</p>\n<p><strong>Powerful Build.</strong> You count as one size larger when determining your carrying capacity and the weight you can push, drag, or lift.</p>\n<p><strong>Speed.</strong> Your movement speed is 35 feet.</p>"
+   },
+   "_key": "!journal.pages!eCWogLA1JfUjET7J.bWNC9Tb72YJGpNS4"
+  },
+  {
+   "_id": "KeSh8UJwoid39njf",
+   "name": "Cursed Vessel",
+   "type": "text",
+   "sort": 1000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Sorcerers who became cursed objects, and are now in a new body</p>\n<p><strong>Age.</strong> Your lifespan depends on the body you have possessed.</p>\n<p><strong>Alignment.</strong> Cursed vessels are almost always chaotic people, not caring about what happens to others around them and wanting to cause destruction.</p>\n<p><strong>Size.</strong> Your size depends on the race you have possessed.</p>\n<p><strong>Speed</strong>. Your base walking speed depends on the race you have possessed.</p>\n<p><strong>This Body Is Mine.</strong> You have advantage on saving throws against effects that would alter or change your form.</p>\n<p><strong>Languages.</strong> You can speak, read, and write Common and one other language of your choice.</p>\n<p><strong>Subrace.</strong> There are multiple forms of vessels, however they are all based on consuming cursed objects. There are the reincarnated, who were simply sorcerers who were consumed by creatures who were adapted for their incarnation. There are the death paintings, which take over the body of said vessel despite its host having a will. And then there are the incomplete and complete vessels. In case the cursed object's host still had a will, it would start as an incomplete vessel and then become a complete vessel after erasing the will of the old body owner.<br />\n<strong>Reincarnated</strong><br />\n You are a sorcerer from a past era. Now you are in your second life through some deal or accident.</p>\n<p><strong>Ability Score Increase.</strong> You have been brought back to your peak, you can choose one ability score to increase by 2 and another ability score to increase by 2.</p>\n<p><strong>Life Experience.</strong> This isn't your first shot at life and last time you learned a few things. You will gain proficiency in two skills or one skill and one tool of your choice.</p>\n<p><strong>Cling to Life.</strong> You have died once and refuse to let it happen again. Whenever you are reduced to 0 hit points, you can choose to instead remain at 1 hit point, once per long rest.</p>\n<p><strong>Death Painting</strong><br />\n A disastrous mixture of curse and man made by an evil scientist. Stuck as a fetus until fed to a host.</p>\n<p><strong>Ability Score Increase.</strong> Your cursed object has overcome the body of your initial host, so instead of gaining the host's ability scores, you gain a +3 to your Cursed Energy score. This cannot go above 20.</p>\n<p><strong>Durable Body.</strong> Once you incarnated into a vessel, due to your unnatural properties the body became more durable. Your maximum hit points increase by 2, and increase by 2 again every time you gain a level.</p>\n<p><strong>Poisonous Blood.</strong> Your birth came from someone from the Kamo clan, and from experimentation, your blood became poisonous. As a reaction, when you take piercing or slashing damage, you can choose a creature within 5 feet of you to take poison damage equal to your proficiency bonus. If the creature has an injury or less than their maximum hit points, they must make a DC 10 Constitution save or be poisoned until the end of their next turn.</p>"
+   },
+   "_key": "!journal.pages!eCWogLA1JfUjET7J.KeSh8UJwoid39njf"
+  },
+  {
+   "_id": "bYqiSf5u4u6n4jus",
+   "name": "Cursed Corpses",
+   "type": "text",
+   "sort": 2000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Beings made of cursed energy within a shell, somehow gaining sentience.</p>\n<p><strong>Ability Score Improvement.</strong> You increase one ability score of your choice by 4, as you are purpose built for a single purpose.</p>\n<p><strong>Age.</strong> Your lifespan is hypothetically infinite if you repair yourself.</p>\n<p><strong>Alignment.</strong> Cursed Corpses are almost always neutral people, not caring about what happens to others around them and usually wanting to exist peacefully.</p>\n<p><strong>Size.</strong> Your size can be small to large.</p>\n<p><strong>Speed.</strong> Your base walking speed is 35 feet.</p>\n<p><strong>Unnatural.</strong> As a construct, you don’t need to breathe, drink, eat, or sleep. However you need materials to mend yourself during a rest.</p>\n<p><strong>Languages.</strong> You can speak, read, and write Common</p>\n<p><strong>Subrace.</strong> There are multiple forms of corpses. The soft bodies range from plush like, to normal living materials like flesh. Hard Shell is the hard skinned stone, wood, or metal.<br />\n<strong>Softbody</strong><br />\n The simpler, more life-like Cursed Corpses are soft bodies, with their life-like design having both advantages and flaws.</p>\n<p><strong>Tailored Appearance.</strong> You gain expertise in either intimidation, persuasion, or performance.</p>\n<p><strong>Surprise.</strong> You can make a Performance check to disguise yourself as what you resemble. Your sudden reveal may stun an enemy. Once per long rest when you reveal yourself, you can force a creature within 10 feet to make a Wisdom saving throw:<br />\n(DC 10 + your proficiency bonus + your <br />\nCharisma modifier) becoming stunned until <br />\nthe beginning of their turn on failure.</p>\n<p><strong>Hard Shell</strong><br />\n The more complicated intricate form of Cursed Corpses are the hard shells. Their combat ability is not to be underestimated.</p>\n<p><strong>Integrated Armor.</strong> Your body has built-in defensive layers, which can be enhanced with armor.</p>\n<ul>\n<li>\n<p>You gain a +1 bonus to Armor Class.  </p>\n</li>\n<li>\n<p>You can don only armor with which you have proficiency. To don armor, you must incorporate it into your body over the course of 1 hour, during which you must remain in contact with the armor. To doff armor, you must spend 1 hour removing it. You can rest while donning or doffing armor in this way.  </p>\n</li>\n<li>\n<p>While you live, your armor can't be removed from your body against your will.</p>\n</li>\n</ul>"
+   },
+   "_key": "!journal.pages!eCWogLA1JfUjET7J.bYqiSf5u4u6n4jus"
+  },
+  {
+   "_id": "ZjMAzO7YqzR3jSNM",
+   "name": "Cursed Spirits",
+   "type": "text",
+   "sort": 3000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Beings made up of negative energy, festering over time.</p>\n<p><strong>Ability Score Improvement.</strong> You increase one ability score of your choice by 2 and another by 1.</p>\n<p><strong>Creature Type</strong>. You are Undead.</p>\n<p><strong>Age.</strong> You are cursed to live forever.</p>\n<p><strong>Alignment.</strong> Cursed Spirits rarely maintain any level of intelligence, but when they do, their alignment turns towards being more Chaotic or Evil.</p>\n<p><strong>Size.</strong> Your size can be Small or Medium.</p>\n<p><strong>Speed.</strong> Your base walking speed is 30 feet.</p>\n<p><strong>Spiritual Nature</strong>. You function completely differently from normal creatures:</p>\n<ul>\n<li>\n<p>You don’t need to eat, drink, breathe or sleep, but must remain inactive for 4 hours a day to gain the benefits of a long rest.   </p>\n</li>\n<li>\n<p>You have advantage on saving throws against disease and being poisoned, and you have resistance to poison damage.  </p>\n</li>\n<li>\n<p>You are immune to nonmagical bludgeoning, piercing, or slashing.  </p>\n</li>\n<li>\n<p>You are invisible to creatures without cursed energy.</p>\n</li>\n</ul>\n<p><strong>Cursed Energy Affinity</strong>. Due to your nature of being made of cursed energy, you are unable to utilize reverse cursed technique which is positive energy. Though you can still restore your body with pure cursed energy. Starting at 5th level, you can spend cursed energy up to your CE modifier to regain 5 hit points per cursed energy spent as an action once per turn.</p>\n<p><strong>Subrace</strong>. There are several types of cursed spirits, depending on your origin.</p>\n<p><strong>Vengeful</strong><br />\nYou were once human, but when you died your powerful grudge made you into a curse.</p>\n<p><strong>Grudge</strong>. When reduced to 0 hit points, you can choose to remain at 1 hit point. You can use this feature once per long rest.</p>\n<p><strong>Curse</strong>. When you choose this subrace, choose a race that you hated. You gain a +2 bonus to damage rolls against that race.</p>\n<p><strong>Imaginary</strong><br />\nYou are made up of humanity’s fears, formed from a shared negative image.</p>\n<p><strong>Frightful Presence</strong>. As an action, you can force all creatures within 30 feet of you to make a Wisdom saving throw against your Cursed Energy save DC. On a failure, they are frightened of you for 1 minute. A creature can repeat the save at the end of their turn. Once you use this feature, you cannot use it again until you finish a long rest.</p>\n<p><strong>Fearmonger</strong>. You gain proficiency in Intimidation and have a +1 bonus to attack and damage rolls against frightened creatures.</p>\n<p><strong>Disease</strong><br />\nPlague and sickness are concepts cursed by humanity, giving rise to powerful curses.</p>\n<p><strong>Born from Plague</strong>. You are immune to disease and poison, as well as the poisoned condition. Your unarmed strikes deal 1d4 poison damage on a hit.</p>\n<p><strong>Walking Sickness</strong>. As an action, you can force all creatures within 30 feet of you to make a Constitution saving throw against your Cursed Energy save DC. On a failure, they gain the poisoned condition for 1 minute. A creature can repeat this save at the end of their turn. Once you use this feature, you cannot use it again until you complete a long rest.</p>\n<p><strong>Cursed Womb</strong><br />\nYou are a young cursed spirit that has yet to develop.</p>\n<p><strong>Hard Shell</strong>. Your AC equals 14 + your Constitution modifier while not wearing armor.</p>\n<p><strong>Strong Constitution</strong>. Your hit point maximum increases by an amount equal to your level and increases by 1 whenever you gain a level.</p>"
+   },
+   "_key": "!journal.pages!eCWogLA1JfUjET7J.ZjMAzO7YqzR3jSNM"
+  }
+ ],
+ "flags": {
+  "jjk5e": {
+   "lang": "en"
+  }
+ },
+ "folder": null,
+ "_key": "!journal!eCWogLA1JfUjET7J"
+}

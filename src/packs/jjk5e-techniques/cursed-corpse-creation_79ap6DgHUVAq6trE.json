@@ -1,0 +1,92 @@
+{
+ "_id": "79ap6DgHUVAq6trE",
+ "name": "Cursed Corpse Creation",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/cursed-corpse-creation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Corpse Creation — Innate Technique (1st level)</em></p><blockquote><p>You create advanced cursed corpses that can function autonomously.</p></blockquote><p>Starting at 1st level, your technique allows you to master the process of creating cursed corpses. A cursed corpse requires a cursed core to function, cursed energy for fuel, and a body. You start with either 2 completed tiny cursed corpses or 1 small cursed corpse.</p>\n<p><strong>Core.</strong> While you have enough money and access to materials, you can create up to a Small core as part of a long rest. At 3rd level, you can make a Medium Core, a Large at 6th level, Huge at 11th level, and Gargantuan at 18th level.</p>\n<h2><strong>Cursed Core Size</strong>     | <strong>Cost</strong>        | <strong>Max Cursed Energy</strong></h2>\n<p>Tiny Core            | $5,000      | 10<br />\nSmall Core           | $30,000     | 25<br />\nMedium Core          | $100,000    | 50<br />\nLarge Core           | $250,000    | 75<br />\nHuge Core            | $500,000    | 100<br />\nGargantuan Core      | $1,000,000  | 150</p>\n<p><strong>Imbuement.</strong> While you have a core, you can imbue the core with cursed energy, allowing it to animate. You can imbue cursed energy into a core you touch as an action and grant it any amount of your cursed energy. However as shown in the table above it has a maximum amount it can handle. If the corpse uses cursed energy it comes from this pool and must be recharged by you. A tiny or small cursed corpse expends 1 CE for each day it is active. A medium or large consumes 5, huge consumes 10, and gargantuan consumes 20.<br />\n<strong>Body.</strong> The third thing you need is a body. The amount of materials and time needed for your cursed corpse is defined by its size. Your cursed corpse requires a core with a size matching the body. You can create up to a Small Cursed Corpse. At 3rd level, you can make a Medium Cursed Corpse, a Large at 6th level, Huge at 11th level, and Gargantuan at 18th level.</p>\n<h2><strong>Cursed Corpse Size</strong>          | <strong>Cost</strong>                         | <strong>Time</strong></h2>\n<p>Tiny Cursed Corpse          | $1,000 worth of materials    | 30 min<br />\nSmall Cursed Corpse         | $10,000 worth of materials   | 3 hours<br />\nMedium Cursed Corpse        | $50,000 worth of materials   | 24 hours<br />\nLarge Cursed Corpse         | $75,000 worth of materials   | 72 hours<br />\nHuge Cursed Corpse          | $100,000 worth of materials  | 216 hours<br />\nGargantuan Cursed Corpse    | $150,000 worth of materials  | 648 hours</p>\n<p><strong>Completed Cursed Corpse.</strong> After building your cursed corpse, it will use the following depending on what size it is. The cursed corpse inherits your proficiency bonus at the time of its creation. They regain their health normally on a short or long rest, and cannot be healed using Reversed Cursed Technique.<br />\nCursed corpses are created for a niche and you allocate their stats during creation. Each score is a 6 before allocation and you have 27 points that you allocate between scores. Every increase costs 1 point, except for 14 and above, which cost 2 points each. The maximum score is as follows:</p>\n<h2><strong>Ability</strong>       | <strong>Tiny</strong> | <strong>Small</strong> | <strong>Medium</strong> | <strong>Large</strong> | <strong>Huge</strong> | <strong>Gargantuan</strong> |</h2>\n<p><strong>Strength</strong>      | 12   | 14    | 16     | 18    | 20   | 24         |<br />\n<strong>Dexterity</strong>     | 18   | 16    | 14     | 12    | 10   | 8          |<br />\n<strong>Constitution</strong>  | 12   | 14    | 16     | 18    | 20   | 24         |<br />\n<strong>Intelligence</strong>  | 10   | 9     | 8      | 8     | 8    | 6          |<br />\n<strong>Wisdom</strong>        | 10   | 9     | 8      | 8     | 8    | 6          |<br />\n<strong>Charisma</strong>      | 10   | 9     | 8      | 8     | 8    | 6          |</p>\n<p>You can command a number of cursed corpses up to your proficiency bonus as a bonus action to act on your turn to have them act. Additionally, you can command the same number of cursed corpses as an action to give them a complex command that allows them to function for much longer as long as they are following that command. A Cursed Corpse with the <em>Autonomy Mutation</em> does not require commands to act, but can be commanded as a free action on your turn. </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "KqygVhuTM4tZcTPS": {
+    "_id": "KqygVhuTM4tZcTPS",
+    "type": "utility",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Cursed Corpse Creation",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "qwzwYySzpsiw4XHW",
+ "_key": "!items!79ap6DgHUVAq6trE"
+}

@@ -1,0 +1,110 @@
+{
+ "_id": "eHjbAvSVPuugcxGw",
+ "name": "Curse Weapon: Gnarled Fist (2 PP)",
+ "type": "feat",
+ "img": "icons/svg/upgrade.svg",
+ "system": {
+  "description": {
+   "value": "<p>The bludgeoning damage of your gnarled fists become 1d8. This increases to 1d10 at 5th level and 1d12 at 10th level. Once per turn when you hit a creature with a gnarled fists attack, you can force the creature to take a Strength saving throw (DC 8 + your proficiency bonus + your Strength modifier). On a failed save, the target is pushed back 10 ft. If the target impacts a solid object or structure, it takes 1d4 bludgeoning damage. This increases to 15 ft at 5th level and the bludgeoning damage increases to 2d4 at 10th level. You must have the <em>Cursed Weapon</em> attribute and choose gnarled fist to take this attribute.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTrait"
+  },
+  "requirements": "Cursed Spirit, 2 Profane Points",
+  "activities": {
+   "zfcCJEgwCu4K3hYx": {
+    "_id": "zfcCJEgwCu4K3hYx",
+    "type": "save",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "str"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 4,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "dmgScale": {
+    "zfcCJEgwCu4K3hYx": [
+     [
+      0,
+      "1d4"
+     ],
+     [
+      10,
+      "2d4"
+     ]
+    ]
+   },
+   "profaneCost": 2,
+   "prereq": {
+    "prefixes": [
+     [
+      "Cursed Spirit"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "ar3Bgj4YHvYRp8DL",
+ "sort": 900,
+ "_key": "!items!eHjbAvSVPuugcxGw"
+}

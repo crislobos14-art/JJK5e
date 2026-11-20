@@ -1,0 +1,77 @@
+{
+ "_id": "G50exyEsovqssPJQ",
+ "name": "Poison Jar",
+ "type": "consumable",
+ "img": "icons/svg/explosion.svg",
+ "folder": "xnCPfIMW0yQ370pR",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Item, Grade 2</em></p><p>A small handheld clay jar that acts as a vessel to trap a cursed spirit. As an action you can force a cursed spirit within 5 feet to make a DC 15 Charisma saving throw. On a failure, they are sealed within the jar.</p>\n<ul>\n<li>\n<p>A cursed spirit with a CR lower than 1 automatically fails.</p>\n</li>\n<li>\n<p>A cursed spirit with a CR higher than 2 automatically succeeds. The jar can hold a number of cursed spirits with a combined CR equal to 5. If the jar is destroyed, all contained cursed spirits are released.</p>\n</li>\n</ul>"
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "rarity": "rare",
+  "quantity": 1,
+  "attunement": "",
+  "type": {
+   "value": "trinket",
+   "subtype": ""
+  },
+  "activities": {
+   "6Lu97codsFnGxfVu": {
+    "_id": "6Lu97codsFnGxfVu",
+    "type": "save",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "5",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "cha"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "2nd Grade"
+  }
+ },
+ "_key": "!items!G50exyEsovqssPJQ"
+}

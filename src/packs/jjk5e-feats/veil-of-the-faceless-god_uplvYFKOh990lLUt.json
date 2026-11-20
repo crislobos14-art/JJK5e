@@ -1,0 +1,86 @@
+{
+ "_id": "uplvYFKOh990lLUt",
+ "name": "Veil of the Faceless God",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/faceless-god.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Madness Inducement</em></p>\n<p>As a bonus action for 3 cursed energy, your face is adorned with a veil for 1 minute. A creature with at least 10% corruption that can see you must make an Intelligence saving throw at the beginning of their turn. On a failed save, they gain a -1 to all rolls for every 10% corruption they have until the start of their next turn (does not stack with <em>Theia Mania</em>). An affected creature repeats the save at the start of their turn, ending the effect on a success and automatically succeeds the save if it cannot see you.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Madness Inducement",
+  "activities": {
+   "e5APyZK7Ri8YUITa": {
+    "_id": "e5APyZK7Ri8YUITa",
+    "type": "save",
+    "name": "Bonus Action (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    },
+    "save": {
+     "ability": [
+      "int"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "e5APyZK7Ri8YUITa": 3
+   },
+   "prereq": {
+    "features": [
+     [
+      "Madness Inducement"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "ZsSLGfOrda4TafgY",
+ "sort": 100,
+ "_key": "!items!uplvYFKOh990lLUt"
+}

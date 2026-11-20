@@ -1,0 +1,46 @@
+{
+ "_id": "z6LYQIl1YlosCyL7",
+ "name": "Rush",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/mindset.svg",
+ "system": {
+  "description": {
+   "value": "<p>Getting lost in your passion and the rush of success, this is what you live for. If you use your inspiration, for the next minute when you hit a creature or another creature damages you, gain a stackable +1 to attack and damage rolls.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": ""
+  },
+  "requirements": "Mindset",
+  "activities": {
+   "mKmT0FiTwgSGR8fi": {
+    "_id": "mKmT0FiTwgSGR8fi",
+    "type": "utility",
+    "name": "Use Inspiration",
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Spend your inspiration"
+    },
+    "consumption": {
+     "targets": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "mindset": true
+  }
+ },
+ "folder": "ymyii86sdbVo8H5C",
+ "_key": "!items!z6LYQIl1YlosCyL7"
+}

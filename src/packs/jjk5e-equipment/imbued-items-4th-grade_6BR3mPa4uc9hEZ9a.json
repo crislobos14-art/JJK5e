@@ -1,0 +1,30 @@
+{
+ "_id": "6BR3mPa4uc9hEZ9a",
+ "name": "Imbued Items (4th Grade)",
+ "type": "loot",
+ "img": "icons/svg/explosion.svg",
+ "folder": "Z18gXvGvvqaYHnqC",
+ "system": {
+  "type": {
+   "value": "gear"
+  },
+  "description": {
+   "value": "<p><em>4th Grade category rule.</em></p>\n<p>These items are just simple weapons and day to day objects imbued with cursed energy, thus they are able to hurt things  such as curses.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "rarity": "common",
+  "quantity": 1
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "4th Grade"
+  }
+ },
+ "_key": "!items!6BR3mPa4uc9hEZ9a"
+}

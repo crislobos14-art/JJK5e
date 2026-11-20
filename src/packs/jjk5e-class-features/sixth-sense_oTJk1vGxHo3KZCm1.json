@@ -1,0 +1,60 @@
+{
+ "_id": "oTJk1vGxHo3KZCm1",
+ "name": "Sixth Sense",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>Beginning at 14th level, you gain advantage on Dexterity saving throws and blindsight out to 30 feet.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Scout 14"
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "Jrayu2BI11U3R1zF",
+ "effects": [
+  {
+   "_id": "O1J5iG2WZ3VTQc2R",
+   "name": "Sixth Sense",
+   "img": "modules/jjk5e/icons/feature.svg",
+   "changes": [
+    {
+     "key": "system.attributes.senses.blindsight",
+     "mode": 4,
+     "value": "30",
+     "priority": null
+    },
+    {
+     "key": "system.abilities.dex.save.roll.mode",
+     "mode": 2,
+     "value": "1",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "auto": "passive"
+    }
+   },
+   "_key": "!items.effects!oTJk1vGxHo3KZCm1.O1J5iG2WZ3VTQc2R"
+  }
+ ],
+ "_key": "!items!oTJk1vGxHo3KZCm1"
+}

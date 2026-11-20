@@ -1,0 +1,136 @@
+{
+ "_id": "Rf5Hd5OWeGdCdMU0",
+ "name": "Maximum: Rumination",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/faceless-god.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Faceless God — Innate Technique (11th level)</em></p><p>At 11th level, you can spend 6 cursed energy as an action to target a creature within 30 feet that you can see and is currently afflicted by your madness. The target must make an Intelligence saving throw or take 1d10 psychic damage per 10% <em>Mental Corruption</em> they currently have. <br />\n A creature with more than 50% <em>Mental Corruption</em> makes this save with disadvantage.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "jKkmtNfACcxkLF9P": {
+    "_id": "jKkmtNfACcxkLF9P",
+    "type": "save",
+    "name": "Action (6 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "int"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "psychic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "30",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "jKkmtNfACcxkLF9P": 6
+   },
+   "technique": "Faceless God",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "TxiITYXHPOTbqkOW",
+ "_key": "!items!Rf5Hd5OWeGdCdMU0"
+}

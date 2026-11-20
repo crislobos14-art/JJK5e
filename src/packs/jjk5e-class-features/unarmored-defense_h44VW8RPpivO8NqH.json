@@ -1,0 +1,50 @@
+{
+ "_id": "h44VW8RPpivO8NqH",
+ "name": "Unarmored Defense",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>While you are not wearing any armor and not using a shield, your Armor Class equals 10 + your Dexterity modifier + your Constitution modifier.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Warrior 1"
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "7ecbupybBLUFyYzw",
+ "effects": [
+  {
+   "_id": "v8MLJT5II6tVqOG6",
+   "name": "Unarmored Defense",
+   "img": "modules/jjk5e/icons/feature.svg",
+   "changes": [
+    {
+     "key": "system.attributes.ac.calc",
+     "mode": 5,
+     "value": "unarmoredBarb",
+     "priority": null
+    }
+   ],
+   "disabled": false,
+   "transfer": true,
+   "duration": {},
+   "description": "",
+   "flags": {},
+   "_key": "!items.effects!h44VW8RPpivO8NqH.v8MLJT5II6tVqOG6"
+  }
+ ],
+ "_key": "!items!h44VW8RPpivO8NqH"
+}

@@ -1,0 +1,73 @@
+{
+ "_id": "ujApbJWNI4lWKCH1",
+ "name": "Curtain",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>“<em>Emerge from the darkness, blacker than darkness. Purify that which is impure.”</em> As an action for 5 Cursed Energy, you cover the area around you within a 2165-foot radius with a black dome for 10 minutes. Upon activation, a dark, almost liquid-like matter drips down from the sky to form the outer barrier wall in the shape of a half-sphere. The curtain changes the sky into night, provoking cursed spirits out of hiding. For each 1 extra Cursed Energy you spend, you add +1 minute to the curtain's duration. Those without cursed energy, or magic cannot see anything inside the barrier, merely seeing as if nothing but the vegetation was there. Creatures who can see into the ethereal plane or have levels in a sorcerer class can see the black half-sphere. <br />\nYour curtain has a number of hit points equal to your Cursed Energy modifier times your level. At 7th level, your curtains have health equal to your cursed energy modifier times 25, and at 13th level, it is 50 times your cursed energy modifier.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Support Specialist 1",
+  "activities": {
+   "RLfZLyOlsXe8m7ty": {
+    "_id": "RLfZLyOlsXe8m7ty",
+    "type": "utility",
+    "name": "Action (5 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "2165",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     }
+    },
+    "duration": {
+     "value": "10",
+     "units": "minute",
+     "concentration": false
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "RLfZLyOlsXe8m7ty": 5
+   }
+  }
+ },
+ "folder": "8dvEkkHwQxeLRi3Y",
+ "_key": "!items!ujApbJWNI4lWKCH1"
+}

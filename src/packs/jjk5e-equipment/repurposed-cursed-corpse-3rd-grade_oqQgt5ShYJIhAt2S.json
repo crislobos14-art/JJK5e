@@ -1,0 +1,64 @@
+{
+ "_id": "oqQgt5ShYJIhAt2S",
+ "name": "Repurposed Cursed Corpse (3rd Grade)",
+ "type": "consumable",
+ "img": "icons/svg/explosion.svg",
+ "folder": "pB7mLAOAtbyDQKeT",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Item, Grade 3</em></p><p>A Repurposed Cursed Corpse is a bottle containing a statuette small enough to fit in a pocket. If you take an action to throw the bottle to a point on the ground within 60 feet of yourself, the bottle smashes and the figurine grows and becomes a cursed corpse specified in the description below(as a construct). If the space where the creature would appear is occupied by other creatures or objects, or if there isn’t enough space for the creature, the statuette doesn’t become a creature. The creature is Friendly to you and your allies. It understands your languages, obeys your commands, and takes its turn immediately after you on your Initiative count. If you issue no commands, the creature defends itself but takes no other actions. The creature exists for a duration specific to each figurine. At the end of the duration, the creature reverts to its figurine form. It reverts to a figurine early if its creature form drops to 0 Hit Points or if you take an action while touching the creature to make it revert to figurine form. When the creature becomes a figurine again, its property can’t be used again until the bottle has reformed around the cursed corpse, as specified in the figurine’s description. Ebony Fly (Grade 3) This ebony statuette, carved in the likeness of a horsefly, can become a Giant Fly for up to 12 hours and can be ridden as a mount. Once it has been used, it can’t be used again until 2 days have passed. Onyx Dog (Grade 3) This onyx statuette of a dog can become a Mastiff for up to 6 hours. The mastiff has an Intelligence of 8 and can speak Common. It also has Blindsight with a range of 60 feet. Once it has been used, it can’t be used again until 7 days have passed. Silver Raven (Grade 3) This silver statuette of a raven can become a Raven for up to 12 hours. Once it has been used, it can’t be used again until 2 days have passed. While in raven form, the figurine grants you the ability to cast Animal Messenger on it. Serpentine Owl (Grade 3) This serpentine statuette of an owl can become a Giant Owl for up to 8 hours. The owl can communicate telepathically with you at any range if you and it are on the same plane of existence. Once it has been used, it can’t be used again until 2 days have passed.</p>"
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "rarity": "uncommon",
+  "quantity": 1,
+  "attunement": "",
+  "type": {
+   "value": "trinket",
+   "subtype": ""
+  },
+  "activities": {
+   "B3k8v50ji0sBYO5c": {
+    "_id": "B3k8v50ji0sBYO5c",
+    "type": "utility",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "60",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "3rd Grade"
+  }
+ },
+ "_key": "!items!oqQgt5ShYJIhAt2S"
+}

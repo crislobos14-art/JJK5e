@@ -1,0 +1,73 @@
+{
+ "_id": "y4xIe0N1toUfG6a1",
+ "name": "Unarmed Strike (Heavenly Restriction)",
+ "type": "weapon",
+ "img": "icons/svg/combat.svg",
+ "folder": "hWqAX9TqrOvuq1FE",
+ "system": {
+  "description": {
+   "value": "<p>Unarmed strike using the <strong>Heavenly Restriction</strong> damage die (<code>@scale.heavenly-restriction.die</code>), which grows with your level. Uses DEX or STR (finesse).</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "simpleM",
+   "baseItem": ""
+  },
+  "proficient": 1,
+  "equipped": true,
+  "quantity": 1,
+  "properties": [
+   "fin"
+  ],
+  "range": {
+   "value": 5,
+   "units": "ft",
+   "reach": 5
+  },
+  "damage": {
+   "base": {
+    "number": null,
+    "denomination": null,
+    "bonus": "",
+    "types": [
+     "bludgeoning"
+    ],
+    "custom": {
+     "enabled": true,
+     "formula": "@scale.heavenly-restriction.die"
+    }
+   }
+  },
+  "activities": {
+   "fqJLFhg38ukeM9oC": {
+    "_id": "fqJLFhg38ukeM9oC",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "melee",
+      "classification": "unarmed"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "_key": "!items!y4xIe0N1toUfG6a1"
+}

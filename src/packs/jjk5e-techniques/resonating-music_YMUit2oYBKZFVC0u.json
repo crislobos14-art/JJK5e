@@ -1,0 +1,132 @@
+{
+ "_id": "YMUit2oYBKZFVC0u",
+ "name": "Resonating Music",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/rockstar.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Rockstar — Innate Technique (6th level)</em></p><p>At 6th level, you have learned to apply your Sound Blast to an area. As an action for 5 cursed energy, you can launch a Sound Wave in a 15 feet cone. All creatures within range must make a Constitution saving throw or take your Sound Blast damage + additional d10s equal to your proficiency bonus and be pushed back 20 feet and deafened until the end of their next turn on a failed save or half as much damage on a successful save.</p>\n<p>The range of your Sound Blast now increases to 60 feet. The range of your Sound Wave increases to 30 feet at 11th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "kvvCnOOckSlxEV93": {
+    "_id": "kvvCnOOckSlxEV93",
+    "type": "save",
+    "name": "Action (5 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "cone",
+      "size": "15",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": []
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "cone",
+    "size": "15",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": false
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "kvvCnOOckSlxEV93": 5
+   },
+   "technique": "Rockstar",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "vosb36eMO9PhuX42",
+ "_key": "!items!YMUit2oYBKZFVC0u"
+}

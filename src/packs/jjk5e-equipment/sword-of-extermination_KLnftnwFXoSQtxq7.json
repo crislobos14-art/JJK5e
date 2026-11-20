@@ -1,0 +1,74 @@
+{
+ "_id": "KLnftnwFXoSQtxq7",
+ "name": "Sword of Extermination",
+ "type": "weapon",
+ "img": "icons/svg/sword.svg",
+ "folder": "OqdCuXcZ0pFqRc3h",
+ "system": {
+  "description": {
+   "value": "<p>Weapon(Shortsword), Special Grade</p>\n<p>You have a +4 bonus to attack and damage rolls made with this cursed tool. On a hit, a cursed spirit must make a DC 30 Constitution saving throw, being exorcised instantaneously on a failed save.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "martialM",
+   "baseItem": "shortsword"
+  },
+  "damage": {
+   "base": {
+    "number": 1,
+    "denomination": 6,
+    "types": [
+     "slashing"
+    ]
+   }
+  },
+  "range": {
+   "value": 5,
+   "long": null,
+   "units": "ft",
+   "reach": 5
+  },
+  "properties": [
+   "fin",
+   "lgt",
+   "mgc"
+  ],
+  "proficient": null,
+  "quantity": 1,
+  "activities": {
+   "rL7GGNtCSUwt0v9v": {
+    "_id": "rL7GGNtCSUwt0v9v",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "melee",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   }
+  },
+  "magicalBonus": 4,
+  "rarity": "legendary"
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "Special Grade"
+  }
+ },
+ "_key": "!items!KLnftnwFXoSQtxq7"
+}

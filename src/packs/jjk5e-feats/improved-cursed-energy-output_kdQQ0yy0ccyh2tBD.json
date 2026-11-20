@@ -1,0 +1,67 @@
+{
+ "_id": "kdQQ0yy0ccyh2tBD",
+ "name": "Improved Cursed Energy Output",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: 18+ Cursed Energy score</em></p>\n<p>As opposed to simply forcing cursed energy into use for your abilities, you have become far more efficient in their output resulting in a dramatic boost in power.</p>\n<ul>\n<li>\n<p>When a feature allows you to spend additional cursed energy, you can spend 1 additional cursed energy. This increases to 2 CE at 6th level and 3 CE at 11th level.  </p>\n</li>\n<li>\n<p>Once per turn, you can increase the damage of an attack by your cursed energy modifier.  </p>\n</li>\n<li>\n<p>You can choose to shield yourself as a reaction, you can spend 1 CE to reduce an instance of damage by three times your Cursed Energy modifier.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkCursedEnergy"
+  },
+  "requirements": "18+ Cursed Energy score",
+  "activities": {
+   "KwgDnJItx9FjAI8r": {
+    "_id": "KwgDnJItx9FjAI8r",
+    "type": "utility",
+    "name": "Reaction (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "KwgDnJItx9FjAI8r": 1
+   },
+   "prereq": {
+    "ceScore": 18
+   }
+  }
+ },
+ "folder": "58RlNbYPWxO2Xi4E",
+ "sort": 900,
+ "_key": "!items!kdQQ0yy0ccyh2tBD"
+}

@@ -1,0 +1,195 @@
+{
+ "_id": "geIiULNWftqTgOLM",
+ "name": "Impasto Canvas",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/esoteric-art.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Esoteric Art — Innate Technique (3rd level)</em></p><p>At 3rd level, you gain the ability to change the content of one of your paintings in one the following ways while within your painting:<br />\n<strong>Ink Shikigami</strong>. As an action, you can spend up to your Cursed Energy modifier to create one <a href=\"https://5e.tools/bestiary/wolf-mm.html\">Ink Wolf</a> for each cursed energy spent. Each wolf appears in an unoccupied space you can see anywhere within your painting and acts on your initiative. The wolves obey your verbal commands (no action required).<br />\n<strong>Exit Shift</strong>. You move the <em>Exit Painting</em> up to 80 ft as an action.<br />\n<strong>Difficult Terrain</strong>. As an action, you create a 15 ft radius area of difficult terrain anywhere within your painting. The terrain lasts until the painting ends or until you use this feature again.<br />\n<strong>Structure Generation</strong>. As an action, you create one structure from cursed ink anywhere within your painting. The structure must fit entirely within a 30 ft cube and can be any ordinary structure you choose, such as walls, platforms, towers, bridges, or buildings.<br />\nThe structure’s AC equals your CE save DC and each 5 ft by 5 ft section has hit points equal to 5 x your proficiency bonus.<br />\nIf reduced to 0 hit points, it dissolves into ink and disappears. Any creatures standing on the structure when it is destroyed fall or are affected at the DM’s discretion. You can create, destroy, or replace a structure while within the painting.<br />\n<strong>Trap Creation</strong>. As an action, you create one trap of your choice in an unoccupied 5 ft square anywhere within your painting. The trap lasts until triggered or until the painting ends. A creature can detect a trap with an Intelligence (Investigation) or Wisdom (Perception) check against your Cursed Energy save DC. All traps use your CE save DC.:</p>\n<ul>\n<li>\n<p><strong>Pit Trap.</strong> When a creature enters the trapped space, it must succeed on a Dexterity saving throw or fall 20 feet into the pit, taking 2d6 bludgeoning damage and falling prone.  </p>\n</li>\n<li>\n<p><strong>Spike Trap.</strong> When a creature enters the trapped space, it must succeed on a Dexterity saving throw or fall 10 feet into the pit, taking 2d10 piercing damage and falling prone.  </p>\n</li>\n<li>\n<p><strong>Snare Trap.</strong> When a creature enters the trapped space, it must succeed on a Dexterity saving throw or become restrained. A creature can use its action to make a Strength (Athletics) or Dexterity (Acrobatics) check, freeing the target on a success.  </p>\n</li>\n<li>\n<p><strong>Rolling Stone Trap.</strong> When triggered, an ink-formed boulder rolls in a 5 ft wide 30 ft line from the trap’s space in a direction you choose. Each creature in the line must make a Dexterity saving throw, taking 4d10 bludgeoning damage and knocked prone on a fail, or half as much damage and not prone on a success.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "OCUpf0dX1NW95qdb": {
+    "_id": "OCUpf0dX1NW95qdb",
+    "type": "save",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "15",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "VnwjNLPHF7f26e7y",
+      "onSave": false
+     },
+     {
+      "_id": "5x8CYrTMV4LHqdiE",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "radius",
+    "size": "15",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": false
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Esoteric Art",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "VnwjNLPHF7f26e7y",
+   "name": "Restrained (Impasto Canvas)",
+   "img": "modules/jjk5e/icons/techniques/esoteric-art.svg",
+   "statuses": [
+    "restrained"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "restrained"
+    }
+   },
+   "_key": "!items.effects!geIiULNWftqTgOLM.VnwjNLPHF7f26e7y"
+  },
+  {
+   "_id": "5x8CYrTMV4LHqdiE",
+   "name": "Prone (Impasto Canvas)",
+   "img": "modules/jjk5e/icons/techniques/esoteric-art.svg",
+   "statuses": [
+    "prone"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!geIiULNWftqTgOLM.5x8CYrTMV4LHqdiE"
+  }
+ ],
+ "folder": "epKj1Q5Dq7LYHOJd",
+ "_key": "!items!geIiULNWftqTgOLM"
+}

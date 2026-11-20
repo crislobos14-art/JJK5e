@@ -1,0 +1,118 @@
+{
+ "_id": "nCSG71V9hWuAYlfS",
+ "name": "Innate Technique: Moon Dregs",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/moon-dregs.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>Your technique forms a poison unique to you and comes with your own shikigami to help manifest it.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.u6sqYNJyHeifcShB]{Lunar Jellyfish}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.8iRl9rttNMiSJeyK]{Poisonous Cursed Energy}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.3Dl1NrZNEan9OFpc]{Noxious Poison}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.RydhWysbYbqx9hoH]{Cleansing of Purity}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.TiEYlOhaBmnH1gBW]{Domain Expansion: Liberation Rite of Water and Land}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "aj9qwNXMqiMex3rE": {
+    "_id": "aj9qwNXMqiMex3rE",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Moon Dregs (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.u6sqYNJyHeifcShB",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "g4OR288zoeIWxmLd": {
+    "_id": "g4OR288zoeIWxmLd",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Moon Dregs (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.8iRl9rttNMiSJeyK",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "eH4zCZ09SYq6kw0l": {
+    "_id": "eH4zCZ09SYq6kw0l",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Moon Dregs (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.3Dl1NrZNEan9OFpc",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "byYpwSUzbhiwGcLB": {
+    "_id": "byYpwSUzbhiwGcLB",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Moon Dregs (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.RydhWysbYbqx9hoH",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "G38tWMZL15nZ3Pzu": {
+    "_id": "G38tWMZL15nZ3Pzu",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Moon Dregs (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.TiEYlOhaBmnH1gBW",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Moon Dregs"
+  }
+ },
+ "_key": "!items!nCSG71V9hWuAYlfS"
+}

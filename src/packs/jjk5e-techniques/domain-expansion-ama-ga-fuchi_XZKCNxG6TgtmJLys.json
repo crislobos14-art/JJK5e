@@ -1,0 +1,124 @@
+{
+ "_id": "XZKCNxG6TgtmJLys",
+ "name": "Domain Expansion: Ama ga Fuchi",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/eight-heads-domain.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Eight Heads — Innate Technique (18th level)</em></p><p><em>Domain Expansion (rules): full-turn action, 20 CE unless stated, 175-ft radius, 1 minute. When the domain ends you suffer <strong>Technique Burnout</strong> (applied automatically by the module).</em></p><p>Finally at 18th level, you have constructed a domain filled with your technique. The domain takes the form of grassy wetlands. At initiative 20, <em>Yamata no Orochi</em> forms from the earth. The shikigami does not take actions and does not have a turn in initiative. This is a false incarnation that only exists within your domain, containing the shackled mind of the original <em>Yamata no Orochi</em>.<br />\n On initiative 20 after <em>Yamata no Orochi</em> has formed, roll a 1d8. That number of creatures of your choice within the domain each suffer its bite. The shikigami disappears when your domain ends.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "cPbKSWALLWbfQa6a": {
+    "_id": "cPbKSWALLWbfQa6a",
+    "type": "utility",
+    "name": "Expand Domain (20 CE)",
+    "sort": -100000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Full turn: Action + Bonus Action + Movement",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "175",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": true
+     },
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 9,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "special",
+   "value": null,
+   "condition": "Full turn: Action + Bonus Action + Movement",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "radius",
+    "size": "175",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": true
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Eight Heads",
+   "level": 18,
+   "domain": true,
+   "ceCosts": {
+    "cPbKSWALLWbfQa6a": 20
+   },
+   "domainActivity": "cPbKSWALLWbfQa6a",
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "DMcMPNJMAkcTYNF8",
+ "_key": "!items!XZKCNxG6TgtmJLys"
+}

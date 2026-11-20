@@ -1,0 +1,42 @@
+{
+ "_id": "WniGPGfesQMHg4Aj",
+ "name": "Flawless Acting",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/body-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Grave Robber</em></p>\n<p>Your acting skills from hopping bodies transfer to other uses. You must spend seven days and 25 gp to establish the history, profession, and affiliations for an identity. You can't establish an identity that belongs to someone else. For example, you might acquire appropriate clothing, letters of introduction, and official-looking certification to establish yourself as a member of a trading house from a remote city so you can insinuate yourself into the company of others.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Grave Robber",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Graverobber"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "XJZyFbzkyclVqRZa",
+ "sort": 100,
+ "_key": "!items!WniGPGfesQMHg4Aj"
+}

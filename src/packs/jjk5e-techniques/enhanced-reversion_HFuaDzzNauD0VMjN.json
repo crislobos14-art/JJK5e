@@ -1,0 +1,114 @@
+{
+ "_id": "HFuaDzzNauD0VMjN",
+ "name": "Enhanced Reversion",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/retrograde.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Retrograde — Innate Technique (6th level)</em></p><p>At 6th level, you can use <em>Reversion</em> without using your reaction a number of times equal your proficiency bonus each round. Additionally, when you use <em>Reversion</em> you can spend an additional 3 CE to instead roll at advantage.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "lzbo6ZrJFbpS0kof": {
+    "_id": "lzbo6ZrJFbpS0kof",
+    "type": "utility",
+    "name": "Reaction",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   },
+   "ueJph2JGyPKrbpjB": {
+    "_id": "ueJph2JGyPKrbpjB",
+    "type": "utility",
+    "name": "Extra (3 CE)",
+    "sort": 900000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Additionally, when you use Reversion you can spend an additional 3 CE to instead roll a...",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "reaction",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "ueJph2JGyPKrbpjB": 3
+   },
+   "technique": "Retrograde",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "6YaSgqVRe4IqL8er",
+ "_key": "!items!HFuaDzzNauD0VMjN"
+}

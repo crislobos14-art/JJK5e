@@ -1,0 +1,177 @@
+{
+ "_id": "xWdQR7gjV6e3o70B",
+ "name": "Maximum: Wing King",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/rot.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Rot — Innate Technique (11th level)</em></p><p>At 11th level, you learn to condense your blood into wings resembling veins as a bonus action for 8 CE, gaining the following benefits for 1 minute:</p>\n<ul>\n<li>\n<p>Your movement  is quadrupled  </p>\n</li>\n<li>\n<p>You gain a flying speed equal to half your movement  </p>\n</li>\n<li>\n<p>You gain advantage on Dexterity saving throws  </p>\n</li>\n<li>\n<p>You can replace an attack on your turn with a Rot Technique or one line of blood attack.  </p>\n</li>\n<li>\n<p>As a free action on your turn, you can unleash lines of blood.</p>\n</li>\n</ul>\n<p>These lines of blood take the shape of three ranged Cursed Energy attacks against a target within 60 feet. Each attack deals 4d10 + your CE modifier acid or necrotic damage. You can also replace an attack on your turn with a line of blood attack. While using Wing King, you cannot use Decay.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "OdcZP46Jv7sO5dYd": {
+    "_id": "OdcZP46Jv7sO5dYd",
+    "type": "utility",
+    "name": "Bonus Action (8 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    }
+   },
+   "UFgrZvfA5S0POj5u": {
+    "_id": "UFgrZvfA5S0POj5u",
+    "type": "damage",
+    "name": "Special",
+    "sort": 100000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 4,
+       "denomination": 10,
+       "bonus": "@mod",
+       "types": [
+        "acid"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "OdcZP46Jv7sO5dYd": 8
+   },
+   "technique": "Rot",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "TOdSvSBhuENKcEJX",
+ "effects": [
+  {
+   "_id": "rOTqIOlWWnZtasa5",
+   "name": "Maximum: Wing King (toggle)",
+   "img": "modules/jjk5e/icons/techniques/rot.svg",
+   "changes": [
+    {
+     "key": "system.abilities.dex.save.roll.mode",
+     "mode": 2,
+     "value": "1",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!xWdQR7gjV6e3o70B.rOTqIOlWWnZtasa5"
+  }
+ ],
+ "_key": "!items!xWdQR7gjV6e3o70B"
+}

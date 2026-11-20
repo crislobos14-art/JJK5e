@@ -1,0 +1,92 @@
+{
+ "_id": "lPDpRTbneARPB4rC",
+ "name": "Maximum: Clock Hand",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/golden-hour.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Samsara Rewind</em></p>\n<p>As a bonus action, you can spend 5 CE to summon the <em>Clock Hand</em> to your hands for 10 minutes. The <em>Clock Hand</em> counts as a Simple Melee weapon that you are proficient with and has the finesse and reach property. It deals 1d10 piercing damage on a hit and has the Hour Hand and Minute Hand properties while you (not others) wield it.</p>\n<ul>\n<li>\n<p><strong>Hour Hand.</strong> If used against a creature in stopped time, the Clock Hand deals an additional 3d8 necrotic damage on a hit.  </p>\n</li>\n<li>\n<p><strong>Minute Hand.</strong> If used against a creature not in stopped time, on a hit the creature must make a Cursed Energy save or be frozen in time and suffer the penalties of stopped time until the end of their next turn. This can only force a save once per round.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Samsara Rewind",
+  "activities": {
+   "hbIVW3rbU6iDOeTc": {
+    "_id": "hbIVW3rbU6iDOeTc",
+    "type": "damage",
+    "name": "Bonus Action (5 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "10",
+     "units": "minute",
+     "concentration": false
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "piercing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "hbIVW3rbU6iDOeTc": 5
+   },
+   "prereq": {
+    "features": [
+     [
+      "Samsara Rewind"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "d3tvju1gFLiRbf1c",
+ "sort": 300,
+ "_key": "!items!lPDpRTbneARPB4rC"
+}

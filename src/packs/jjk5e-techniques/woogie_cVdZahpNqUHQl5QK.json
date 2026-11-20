@@ -1,0 +1,32 @@
+{
+ "_id": "cVdZahpNqUHQl5QK",
+ "name": "Woogie",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/boogie-woogie.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Boogie Woogie — Innate Technique (3rd level)</em></p><p>Starting at 3rd level, you have extended the grasp of your technique as well as its versatility. Your <em>Boogie</em> gains the following bonuses:</p>\n<ul>\n<li>\n<p>Unwilling creatures can be switched  </p>\n</li>\n<li>\n<p>You can make two creatures other than yourself swap places  </p>\n</li>\n<li>\n<p>Enemies teleported are disorientated and lose their reaction</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Boogie Woogie 3"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Boogie Woogie",
+   "level": 3
+  }
+ },
+ "folder": "JUFxrHmgG8mOdlrV",
+ "_key": "!items!cVdZahpNqUHQl5QK"
+}

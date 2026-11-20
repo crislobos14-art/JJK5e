@@ -1,0 +1,32 @@
+{
+ "_id": "iy3YyszuB0gKuyT1",
+ "name": "On a Roll",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/pachinko-fever.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Pachinko Fever — Innate Technique (6th level)</em></p><p>Once you reach 6th level, after activating <em>Idle Death Gamble</em> and getting a Jackpot, you gain advantage when making your Event roll or Multiplier roll within your next domain.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Pachinko Fever 6"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Pachinko Fever",
+   "level": 6
+  }
+ },
+ "folder": "30lfiZHWDrH4G6F5",
+ "_key": "!items!iy3YyszuB0gKuyT1"
+}

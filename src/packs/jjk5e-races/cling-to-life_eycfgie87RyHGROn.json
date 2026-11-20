@@ -1,0 +1,59 @@
+{
+ "_id": "eycfgie87RyHGROn",
+ "name": "Cling to Life",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/trait-race.svg",
+ "system": {
+  "description": {
+   "value": "<p>You have died once and refuse to let it happen again. Whenever you are reduced to 0 hit points, you can choose to instead remain at 1 hit point, once per long rest.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "race",
+   "subtype": ""
+  },
+  "requirements": "Cursed Vessel (Reincarnated)",
+  "uses": {
+   "max": "1",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
+    }
+   ]
+  },
+  "activities": {
+   "jcR8cxw6ebjaU3Ml": {
+    "_id": "jcR8cxw6ebjaU3Ml",
+    "type": "utility",
+    "name": "Use",
+    "activation": {
+     "type": "special",
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1"
+      }
+     ]
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "A3CBV9dvsdKk3l4V",
+ "_key": "!items!eycfgie87RyHGROn"
+}

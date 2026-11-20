@@ -1,0 +1,72 @@
+{
+ "_id": "9AwHd7nOpVqbOisO",
+ "name": "Cursed Immutation",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/cursed-transmutation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Transmutation — Cursed Technique Reversal</em></p><p>Your reversal allows you to instead alter chemical structure to make things extremely resistant to all forms of change. As an action, you can spend up to twice your cursed energy modifier to give yourself or an object or willing creature you touch a number of temporary hit points equal to the hit points that would be regained if you had used Reverse Cursed Technique using that amount of cursed energy. While a creature has these temporary hit points, it is immune to limb damaging effects and has advantage on saving throws against effects that would alter their form. While an object has these temporary hit points, it is immune to effects that would deal higher damage against objects or structures.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Cursed Transmutation",
+  "activities": {
+   "L3G1u2szCEVZuHDz": {
+    "_id": "L3G1u2szCEVZuHDz",
+    "type": "utility",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Cursed Transmutation",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Cursed Transmutation"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!9AwHd7nOpVqbOisO"
+}

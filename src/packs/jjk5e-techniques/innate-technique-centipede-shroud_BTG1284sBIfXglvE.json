@@ -1,0 +1,118 @@
+{
+ "_id": "BTG1284sBIfXglvE",
+ "name": "Innate Technique: Centipede Shroud",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/centipede-shroud.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>Your technique summons a centipede shikigami to fight with you.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.21lnu8kbAphhST0q]{Cursed Centipede}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.T2Ct1LdagWzoKjCR]{Insect Storage}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.DkEVmnT5xCcHJWzN]{Earthquake}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.k2z0gWagLw0keUWh]{Hundred Leg Catastrophe}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.AL362dkbXUfLAD8r]{Domain Expansion: Oomukade Banzai}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "W07bM6NMHcx5ELxf": {
+    "_id": "W07bM6NMHcx5ELxf",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Centipede Shroud (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.21lnu8kbAphhST0q",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "mFdWxyp8UOXvYNfQ": {
+    "_id": "mFdWxyp8UOXvYNfQ",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Centipede Shroud (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.T2Ct1LdagWzoKjCR",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "lyFlHRyu7Rp64FiW": {
+    "_id": "lyFlHRyu7Rp64FiW",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Centipede Shroud (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.DkEVmnT5xCcHJWzN",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "D6WNaAHXVAjW2LNs": {
+    "_id": "D6WNaAHXVAjW2LNs",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Centipede Shroud (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.k2z0gWagLw0keUWh",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "I3ErqyrRb3adG6IS": {
+    "_id": "I3ErqyrRb3adG6IS",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Centipede Shroud (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.AL362dkbXUfLAD8r",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Centipede Shroud"
+  }
+ },
+ "_key": "!items!BTG1284sBIfXglvE"
+}

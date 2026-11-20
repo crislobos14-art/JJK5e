@@ -1,0 +1,85 @@
+{
+ "_id": "zFvaQiJRjOIqt9N3",
+ "name": "Gradient",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/esoteric-art.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Sgraffito</em></p>\n<p>As an action for 5 cursed energy, you create a subspace <em>Gradient</em> that fills a 30 ft cube centered on you for 1 minute. You can use your innate technique features within this subspace, but they cannot extend beyond it and disappear once the technique ends. The subspace is stationary and does not move with you. At 11th level, you can increase the size of the cube to 60 ft.<br />\n Alternatively, instead of using your innate technique features within <em>Gradient</em>, you can instead enhance your spatial awareness. You gain advantage on attack rolls against creatures within the subspace. While <em>Gradient</em> is active, you can use your reaction to add your CE modifier to an attack roll, saving throw, or AC against one attack roll. While using <em>Gradient</em> this way, you cannot use <em>Impasto Canvas</em>.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Sgraffito",
+  "activities": {
+   "zT7Fbp86ixwt1t6A": {
+    "_id": "zT7Fbp86ixwt1t6A",
+    "type": "utility",
+    "name": "Action (5 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {
+     "template": {
+      "type": "cube",
+      "size": "30",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     }
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "zT7Fbp86ixwt1t6A": 5
+   },
+   "prereq": {
+    "features": [
+     [
+      "Sgraffito"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "0WVL6in6ehAyEIQ5",
+ "sort": 300,
+ "_key": "!items!zFvaQiJRjOIqt9N3"
+}

@@ -1,0 +1,59 @@
+{
+ "_id": "pUGj7iQlOMjRpcqM",
+ "name": "Grudge",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/trait-race.svg",
+ "system": {
+  "description": {
+   "value": "<p>When reduced to 0 hit points, you can choose to remain at 1 hit point. You can use this feature once per long rest.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "race",
+   "subtype": ""
+  },
+  "requirements": "Cursed Spirit (Vengeful)",
+  "uses": {
+   "max": "1",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
+    }
+   ]
+  },
+  "activities": {
+   "NlEaQajrDwDhGPBa": {
+    "_id": "NlEaQajrDwDhGPBa",
+    "type": "utility",
+    "name": "Use",
+    "activation": {
+     "type": "special",
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1"
+      }
+     ]
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "MrUJYYzCm8S5kHBr",
+ "_key": "!items!pUGj7iQlOMjRpcqM"
+}

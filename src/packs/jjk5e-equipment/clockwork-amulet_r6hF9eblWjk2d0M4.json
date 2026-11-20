@@ -1,0 +1,36 @@
+{
+ "_id": "r6hF9eblWjk2d0M4",
+ "name": "Clockwork Amulet",
+ "type": "equipment",
+ "img": "icons/svg/explosion.svg",
+ "folder": "RVpkkOiLvLva4ZNf",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Item, Grade 4</em></p><p>This copper amulet contains tiny interlocking gears and is powered by cursed energy from an unknown technique. Faint ticking and whirring noises emanate from within. When you make an attack roll while wearing the amulet, you can forgo rolling the d20 to get a 10 on the die. Once used, this property can’t be used again until the next dawn.</p>"
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "rarity": "common",
+  "quantity": 1,
+  "attunement": "",
+  "type": {
+   "value": "trinket",
+   "baseItem": ""
+  },
+  "armor": {
+   "value": null
+  },
+  "activities": {}
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "4th Grade"
+  }
+ },
+ "_key": "!items!r6hF9eblWjk2d0M4"
+}

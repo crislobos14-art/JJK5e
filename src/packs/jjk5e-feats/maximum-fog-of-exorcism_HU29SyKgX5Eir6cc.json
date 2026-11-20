@@ -1,0 +1,112 @@
+{
+ "_id": "HU29SyKgX5Eir6cc",
+ "name": "Maximum: Fog of Exorcism",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/starlight-symphony.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Inari</em></p>\n<p>As an action for 10 cursed energy, you can blast a 60 ft cone with an erupting wave of destructive exploding fog. All creatures within range must make a Constitution saving throw, taking twice your CE modifier XD10 + 6d10 cold damage on a failed save or half as much damage on a success. If a creature is a cursed spirit, the damage ignores any resistance to cold damage and it makes the save at disadvantage. If used at <em>Maximum Output</em>, Cursed spirits automatically fail their saving throw.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Inari",
+  "activities": {
+   "fMS4oydbBIcANVBR": {
+    "_id": "fMS4oydbBIcANVBR",
+    "type": "save",
+    "name": "Action (10 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {
+     "template": {
+      "type": "cone",
+      "size": "60",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 6,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "cold"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "fMS4oydbBIcANVBR": 10
+   },
+   "prereq": {
+    "features": [
+     [
+      "Inari"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "W3c86qCvNyFi2g3Q",
+ "sort": 300,
+ "_key": "!items!HU29SyKgX5Eir6cc"
+}

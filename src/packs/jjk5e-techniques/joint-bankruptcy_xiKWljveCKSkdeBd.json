@@ -1,0 +1,46 @@
+{
+ "_id": "xiKWljveCKSkdeBd",
+ "name": "Joint Bankruptcy",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/pachinko-fever.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Pachinko Fever — Cursed Technique Reversal</em></p><p>Your mastery over the Reverse Cursed Technique has granted you your technique’s reversal. Whenever you expand your domain, instead of rolling for a jackpot, you can force all creatures within your domain to roll for a Jackpot following the usual rules of your domain. On a Jackpot, a creature is rewarded with 10 cursed energy. On a failure, the creature loses all their current cursed energy and cannot regain cursed energy for 1 minute.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Pachinko Fever"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Pachinko Fever",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Pachinko Fever"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!xiKWljveCKSkdeBd"
+}

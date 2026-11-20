@@ -1,0 +1,126 @@
+{
+ "_id": "HpNz9JDqjejv7kjA",
+ "name": "Maximum: Crippling Neurotoxin",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/moon-dregs.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Cleansing of Purity</em></p>\n<p>You have finally learned to amplify your poisonous cursed energy into a crippling neurotoxin that locks down nerves. When you use <em>Poisonous Cursed Energy</em>, you can spend 8 additional cursed energy to enhance the poison. If a creature fails their save against <em>Noxious Poison</em> they are stunned until the end of their next turn and poisoned for 8 hours. On a successful save, the target is poisoned for 1 minute. A creature poisoned in this way is treated as being under 3 temporary levels of exhaustion. If a creature fails the save by 5 or more, they are paralyzed until the end of their next turn and poisoned for 24 hours.<br />\n This poison ignores cursed techniques that grant resistance, immunity, or other reductions to poison damage and the poisoned condition. This poison cannot be removed by cursed techniques or reverse cursed technique.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Cleansing of Purity",
+  "activities": {
+   "3cba2pcNizaydYT7": {
+    "_id": "3cba2pcNizaydYT7",
+    "type": "utility",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "8",
+     "units": "hour",
+     "concentration": false
+    },
+    "effects": [
+     {
+      "_id": "8yy5AOFvcAveSblt",
+      "onSave": false
+     },
+     {
+      "_id": "K7Swo9Qmg7RhgCvN",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Cleansing of Purity"
+     ]
+    ]
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "8yy5AOFvcAveSblt",
+   "name": "Poisoned (Maximum: Crippling Neurotoxin)",
+   "img": "modules/jjk5e/icons/techniques/moon-dregs.svg",
+   "statuses": [
+    "poisoned"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "seconds": 60,
+    "rounds": 10
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "poisoned"
+    }
+   },
+   "_key": "!items.effects!HpNz9JDqjejv7kjA.8yy5AOFvcAveSblt"
+  },
+  {
+   "_id": "K7Swo9Qmg7RhgCvN",
+   "name": "Paralyzed (Maximum: Crippling Neurotoxin)",
+   "img": "modules/jjk5e/icons/techniques/moon-dregs.svg",
+   "statuses": [
+    "paralyzed"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "seconds": 60,
+    "rounds": 10
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "paralyzed"
+    }
+   },
+   "_key": "!items.effects!HpNz9JDqjejv7kjA.K7Swo9Qmg7RhgCvN"
+  }
+ ],
+ "folder": "xS0EmCX82T9CW9Eg",
+ "sort": 300,
+ "_key": "!items!HpNz9JDqjejv7kjA"
+}

@@ -1,0 +1,296 @@
+{
+ "_id": "PYKTN7ypRA7nj61N",
+ "name": "Power of Words",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/cursed-speech.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Speech — Innate Technique (1st level)</em></p><blockquote><p>This power is called both a blessing and a curse, you can speak your will to reality.</p></blockquote><p>Starting at 1st level, you have been born with the Inumaki clan’s snake eyes and fangs seal on you, and can now curse other people just by merely speaking. However, this takes extreme strain on your vocal cords. Your vocal cords have a number of hit points equal to 1/3rd of your maximum hit points(rounded up). You are unable to speak unless in terms of whatever meaningless concept you choose such as sushi ingredients. For every Cursed Energy you spend in a cursed word, your vocal cords lose one hit point. Your vocal cords hit points all come back in a short or long rest. If your vocal chords reach 0 hit points, you won't be able to regain the hit points unless you receive hit points from Reverse Cursed Technique or take a long rest. If you have 0 hit points you cannot use your cursed words, and will always be under one level of exhaustion. Your vocal cords will regain 1 hit point at the beginning of your turns unless they are at 0 hit points. Any kind of hit point gain you receive affects your vocal cords' hit points. You can the Cursed Words below(X=Cursed Energy Mod):</p>\n<ul>\n<li>\n<p><strong>Sleep:</strong> Replace one of your attacks for 1 Cursed Energy to cast <a href=\"https://dnd5e.wikidot.com/spell:sleep\"><em>Sleep</em></a> at 1st level. You can add 3d8 per 1 extra Cursed Energy added at 3rd, 6th, 11th, and 18th levels.  </p>\n</li>\n<li>\n<p><strong>Return:</strong> As an attack, for 1 Cursed Energy, you make a summoned creature within 60 ft make a Charisma save against your save DC or be unsummoned. At 3rd, 6th, 11th, and 18th levels you can choose to spend +1 Cursed Energy for +1 to DC.  </p>\n</li>\n<li>\n<p><strong>Run Away:</strong> As an attack, for 2 Cursed Energy, you force one creature within 60 ft to run away from you, but not into harm. At 3rd, 6th, 11th, and 18th levels you can choose to spend +1 CE for +1 to DC or +1 target per Cursed Energy.  </p>\n</li>\n<li>\n<p><strong>Blast Away:</strong> As an attack for 4 cursed energy, you force one target to make a Charisma saving throw. On a failure, they are launched 60 ft back from the spot they were in, taking 1d8 force damage per 10ft traveled. At 3rd level, you can spend 1 additional Cursed Energy to add +10 to the distance the target is blasted away. You can spend another +1 at 6th, 11th, and 18th.  </p>\n</li>\n<li>\n<p><strong>Plummet:</strong> As an action for 6 Cursed Energy, you force a target to make a Charisma saving throw. On a failure, take Xd10 force damage and are knocked prone for 1 minute as a field of intensified gravity crushes them. They remove the prone condition if they succeed on a Strength saving throw on their turn. At 3rd level, you can spend +1 CE for additional Xd10 force damage. You can spend another +1 at 6th, 11th, and 18th. (X = CE modifier)  </p>\n</li>\n<li>\n<p><strong>Get Twisted:</strong> As an action for 8 Cursed Energy, you force a target to make a Charisma saving throw. On a failure one of their legs or arms of your choice will be twisted, breaking the limb. In addition, the target will lose hit points equal to their Constitution score times half your proficiency bonus(rounded down). An arm twisted removes the ability to use that arm and reduces the creature’s Strength by 2, and twisting a leg halves movement and reduces Dexterity by 2. At 3rd level, you can spend 1 additional Cursed Energy to add a +1 to the DC. You can spend another +1 at 6th, 11th, and 18th levels.  </p>\n</li>\n<li>\n<p><strong>Get Crushed:</strong> As an action for 10 Cursed Energy, you force a target to make a Charisma saving throw. On a failure, they are imploded which makes them lose xd12 maximum hit points and become paralyzed. They will keep being imploded for 1 minute, this can be ended early if they succeed on a Strength saving throw, on a failure they will keep losing xd12 of their maximum hit points at the beginning of their turns. The hit points lost will be regained at the end of a long rest. At 3rd level, you can spend 1 additional Cursed Energy to add a d12 to the amount of hit points lost. You can spend another +1 at 6th, 11th, and 18th levels.  </p>\n</li>\n<li>\n<p><strong>Don't Move:</strong> As an action for 12 Cursed Energy, you cast <em>Power Word Stun</em> at 8th level. You increase the HP limit by 25 HP per 1 point of Cursed Energy added at 3rd, 6th, 11th, and 18th levels.  </p>\n</li>\n<li>\n<p><strong>Explode:</strong> As an action for 14 Cursed Energy, you force a target and every creature within 5ft. of it to make a Charisma saving throw. On a failure, they will explode from the inside out making them receive 3d8 force damage + xd6 fire damage. At 3rd level, you can spend 1 additional Cursed Energy to add a d8 to the force damage. You can spend another +1 at 6th, 11th, and 18th levels.  </p>\n</li>\n<li>\n<p><strong>Die:</strong> As an action for 16 Cursed Energy, you force a target with 30 times your Cursed Energy modifier hit points or less to make a Charisma saving throw. On a failure, they die instantly. At 3rd level, you can spend 1 additional Cursed Energy to add a +1 to the DC and 10 hit points to the requirement. You can spend another +1 at 6th, 11th, and 18th levels.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "xblUSVP5qtHr5ppm": {
+    "_id": "xblUSVP5qtHr5ppm",
+    "type": "save",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "cha"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   },
+   "zspWvEFbSbjtRsMz": {
+    "_id": "zspWvEFbSbjtRsMz",
+    "type": "utility",
+    "name": "Action (2+ CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "20"
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   },
+   "rMA6CnCnrO1a2udx": {
+    "_id": "rMA6CnCnrO1a2udx",
+    "type": "save",
+    "name": "Action (4 CE)",
+    "sort": 200000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "cha"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "force"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   },
+   "19L9S9ZAJCPglq8Y": {
+    "_id": "19L9S9ZAJCPglq8Y",
+    "type": "save",
+    "name": "Action (6 CE)",
+    "sort": 300000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "cha"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    },
+    "effects": [
+     {
+      "_id": "Rzk91GZN4m8wBcwg",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "60",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceSteps": {
+    "zspWvEFbSbjtRsMz": 1
+   },
+   "ceCosts": {
+    "xblUSVP5qtHr5ppm": 1,
+    "zspWvEFbSbjtRsMz": 2,
+    "rMA6CnCnrO1a2udx": 4,
+    "19L9S9ZAJCPglq8Y": 6
+   },
+   "technique": "Cursed Speech",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "Rzk91GZN4m8wBcwg",
+   "name": "Prone (Power of Words)",
+   "img": "modules/jjk5e/icons/techniques/cursed-speech.svg",
+   "statuses": [
+    "prone"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "seconds": 60,
+    "rounds": 10
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!PYKTN7ypRA7nj61N.Rzk91GZN4m8wBcwg"
+  }
+ ],
+ "folder": "hKdstL12BA2dMsHA",
+ "_key": "!items!PYKTN7ypRA7nj61N"
+}

@@ -1,0 +1,32 @@
+{
+ "_id": "A6J2MDiMGjz2wer6",
+ "name": "Core Exhaustion",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/triple-core.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Triple Core — Innate Technique (11th level)</em></p><p>Starting at 11th level, when you would be reduced to 0 hit points, you can choose to lose access to one of your core forms for 1 week to return to half your maximum HP.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Triple Core 11"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Triple Core",
+   "level": 11
+  }
+ },
+ "folder": "IyJg53UICeEoqtxa",
+ "_key": "!items!A6J2MDiMGjz2wer6"
+}

@@ -1,0 +1,124 @@
+{
+ "_id": "9Q2ddIFWSmNrpEH8",
+ "name": "Bird Strike",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/black-bird-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Black Bird Manipulation — Innate Technique (11th level)</em></p><p>Beginning 11th level, your mastery of Black Bird Manipulation has made you develop its most powerful technique. As an action for 8 Cursed Energy, you can order one of your crows to launch themselves at a creature from their flying speed range. The target must make a Dexterity saving throw. On a failure, they take 10d10 necrotic damage and have one of their limbs damaged, rolling a d6 to see the damaged limb. On a successful save, they take half as much damage and do not have a limb damaged. The crow dies afterwards.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "QwWYu4v3lWvMwTb9": {
+    "_id": "QwWYu4v3lWvMwTb9",
+    "type": "save",
+    "name": "Action (8 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 10,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "QwWYu4v3lWvMwTb9": 8
+   },
+   "technique": "Black Bird Manipulation",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "51kqIFJDFNS150R8",
+ "_key": "!items!9Q2ddIFWSmNrpEH8"
+}

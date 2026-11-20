@@ -1,0 +1,118 @@
+{
+ "_id": "i2elcnfEM3PqD4Xu",
+ "name": "Hunger of the Accursed",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/voracity.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Voracity — Innate Technique (1st level)</em></p><blockquote><p>You get stronger by eating.</p></blockquote><p>Starting at 1st level, you are constantly filled with the hunger impulses that come with your technique. When you reduce a cursed spirit, shikigami, or cursed corpse to 0 hit points, you can use your reaction to spend 3 cursed energy to devour its corpse. For 1 hour you gain a feature, action, movement, resistance, immunity, sense, AC, Ability Score or other statistic from the dead creature’s statblock such as Cursed Energy Affinity (Cannot take legendary actions, Cursed Energy or Domains). You can spend an additional 3 cursed energy to steal an additional ability and can steal a number of abilities from a single corpse up to your Cursed Energy modifier.<br />\n When you steal an ability that does not suit your body (such as fly speed), your body changes to fit the ability (eg. growing wings). For the duration, you count as the creature type your stolen abilities come from. If you have stolen abilities from multiple creatures, you count as the one you have the most abilities from. You can have stolen abilities equal to your Cursed Energy modifier active at once. <br />\n At 6th level, you can have stolen abilities from a number of creatures equal to your Cursed Energy modifier +2 active at once and last for 24 hours. You cannot use different innate techniques at once.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "nCXaUY7ZzL3xGLo4": {
+    "_id": "nCXaUY7ZzL3xGLo4",
+    "type": "utility",
+    "name": "Reaction (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "hour",
+     "concentration": false,
+     "override": true
+    }
+   },
+   "RLvJZSjxqfsF9Swz": {
+    "_id": "RLvJZSjxqfsF9Swz",
+    "type": "utility",
+    "name": "Extra (3 CE)",
+    "sort": 900000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "You can spend an additional 3 cursed energy to steal an additional ability and can stea...",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "reaction",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "hour"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "nCXaUY7ZzL3xGLo4": 3,
+    "RLvJZSjxqfsF9Swz": 3
+   },
+   "technique": "Voracity",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "xeaTaRsDQ88YPtDB",
+ "_key": "!items!i2elcnfEM3PqD4Xu"
+}

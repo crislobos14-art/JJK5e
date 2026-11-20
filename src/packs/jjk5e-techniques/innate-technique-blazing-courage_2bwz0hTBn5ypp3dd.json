@@ -1,0 +1,118 @@
+{
+ "_id": "2bwz0hTBn5ypp3dd",
+ "name": "Innate Technique: Blazing Courage",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/blazing-courage.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>Through your beliefs, you set both your weapon and heart alight with your blazing courage.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.frIRVKvBDYwCRUVj]{Ignition}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.zPJOSM22ueBIRL4q]{Mantle of Courage}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.Hnn3tpdYeINVVkKg]{Eternal Flames}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.aUswLfL2rRp0CXOG]{Maximum: Conflagration}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.vGPxt14AJTLy0Gyu]{Domain Expansion: Fire of the Heart}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "3feLtJwOacmAmEtq": {
+    "_id": "3feLtJwOacmAmEtq",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Blazing Courage (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.frIRVKvBDYwCRUVj",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "YsIclE2vRY6mkwUH": {
+    "_id": "YsIclE2vRY6mkwUH",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Blazing Courage (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.zPJOSM22ueBIRL4q",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "KYxXeHflQjPwPyur": {
+    "_id": "KYxXeHflQjPwPyur",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Blazing Courage (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.Hnn3tpdYeINVVkKg",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "q9KSQx1sekKpUWCZ": {
+    "_id": "q9KSQx1sekKpUWCZ",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Blazing Courage (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.aUswLfL2rRp0CXOG",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "er72i0Ahsevrl3An": {
+    "_id": "er72i0Ahsevrl3An",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Blazing Courage (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.vGPxt14AJTLy0Gyu",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Blazing Courage"
+  }
+ },
+ "_key": "!items!2bwz0hTBn5ypp3dd"
+}

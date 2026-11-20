@@ -1,0 +1,118 @@
+{
+ "_id": "Kxc1GIVgsguWyHIZ",
+ "name": "Innate Technique: Idle Transfiguration",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/idle-transfiguration.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>The soul is an interesting thing and your technique manipulates it.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.D6lKzdMZxIzyGlg6]{Transfiguration}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.VAvGtxSod2JL2DbT]{Alteration}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.LyLbkXAvBNfW1loQ]{Body Clone}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.ksjHxv60hPYhyyuJ]{Soul Multiplicity}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.B6X39yIsShm1Q2km]{Domain Expansion: Self Embodiment of Perfection}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "dhcabqxwZQJvX6Lq": {
+    "_id": "dhcabqxwZQJvX6Lq",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Idle Transfiguration (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.D6lKzdMZxIzyGlg6",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "upUOwerTjU2XIuXv": {
+    "_id": "upUOwerTjU2XIuXv",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Idle Transfiguration (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.VAvGtxSod2JL2DbT",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "Sfqa77TGrIef3qQq": {
+    "_id": "Sfqa77TGrIef3qQq",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Idle Transfiguration (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.LyLbkXAvBNfW1loQ",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "9sKfRGczw2ajCMx6": {
+    "_id": "9sKfRGczw2ajCMx6",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Idle Transfiguration (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.ksjHxv60hPYhyyuJ",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "GgdMydNyI9p6efRz": {
+    "_id": "GgdMydNyI9p6efRz",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Idle Transfiguration (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.B6X39yIsShm1Q2km",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Idle Transfiguration"
+  }
+ },
+ "_key": "!items!Kxc1GIVgsguWyHIZ"
+}

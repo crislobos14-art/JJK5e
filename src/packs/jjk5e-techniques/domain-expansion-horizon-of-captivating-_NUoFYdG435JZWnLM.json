@@ -1,0 +1,149 @@
+{
+ "_id": "NUoFYdG435JZWnLM",
+ "name": "Domain Expansion: Horizon of Captivating Skhanda",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/disaster-tides-domain.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Disaster Tides — Innate Technique (3rd level)</em></p><p><em>Domain Expansion (rules): full-turn action, 20 CE unless stated, 175-ft radius, 1 minute. When the domain ends you suffer <strong>Technique Burnout</strong> (applied automatically by the module).</em></p><p>At 3rd level, due to being a prodigy, you have already learned to expand your domain as a calm beach. Your domain can be opened for free twice per long rest, otherwise it costs 20 Cursed Energy. If you don’t catch hostile creatures in your domain, it lasts indefinitely.</p>\n<ul>\n<li><strong>Death Swarm.</strong> While in your domain, you can use Death Swarm. As an action for X Cursed Energy, you can summon a number of sea Shikigami up to your Cursed Energy modifier within sight range. As part of being summoned, they make one guaranteed hit attack. At 18th level, all Death Swarm shikigami attacks are guaranteed. These shikigami can use swimming speed as a flying speed and you can have up to your Cursed Energy score at once in your domain.</li>\n</ul>\n<table>\n<thead>\n<tr>\n<th style=\"text-align: center;\">Shikigami</th>\n<th style=\"text-align: center;\">Cost</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td style=\"text-align: center;\"><a href=\"https://5e.tools/bestiary/giant-sea-eel-gos.html\">Giant Sea Eel</a></td>\n<td style=\"text-align: center;\">1 Cursed Energy</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\"><a href=\"https://5e.tools/bestiary.html#swarm%20of%20piranhas_psx\">Swarm of Piranhas</a></td>\n<td style=\"text-align: center;\">2 Cursed Energy</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\"><a href=\"https://5e.tools/bestiary/river-serpent-psa.html\">River Serpent</a></td>\n<td style=\"text-align: center;\">4 Cursed Energy</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\"><a href=\"https://5e.tools/bestiary/killer-whale-mm.html\">Killer Whale</a></td>\n<td style=\"text-align: center;\">6 Cursed Energy</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\"><a href=\"https://5e.tools/bestiary/sperm-whale-idrotf.html\">Sperm Whale</a></td>\n<td style=\"text-align: center;\">12 Cursed Energy</td>\n</tr>\n</tbody>\n</table>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "PL6dqN3e7hSY5JKm": {
+    "_id": "PL6dqN3e7hSY5JKm",
+    "type": "utility",
+    "name": "Use (limited, no CE)",
+    "activation": {
+     "type": "special",
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1"
+      }
+     ],
+     "spellSlot": false
+    }
+   },
+   "aJSJ7qoeHXBkDKzX": {
+    "_id": "aJSJ7qoeHXBkDKzX",
+    "type": "utility",
+    "name": "Expand Domain (20 CE)",
+    "sort": -100000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Full turn: Action + Bonus Action + Movement",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "175",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": true
+     },
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "2",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
+    }
+   ]
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "special",
+   "value": null,
+   "condition": "Full turn: Action + Bonus Action + Movement",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "radius",
+    "size": "175",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": true
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "aJSJ7qoeHXBkDKzX": 20
+   },
+   "technique": "Disaster Tides",
+   "level": 3,
+   "domain": true,
+   "domainActivity": "aJSJ7qoeHXBkDKzX",
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "Ao9OCl7PHP0hxQBD",
+ "_key": "!items!NUoFYdG435JZWnLM"
+}

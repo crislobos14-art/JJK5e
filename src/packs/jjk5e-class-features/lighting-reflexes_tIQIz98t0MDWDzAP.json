@@ -1,0 +1,69 @@
+{
+ "_id": "tIQIz98t0MDWDzAP",
+ "name": "Lighting Reflexes",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Speed Improvements: You feel like you could probably win against a special grade in a race due to how fast you are now. You can have a number of these improvements equal to your Dexterity modifier. ---</em></p>\n<p>Hypersonic Reflexes, 2 body point, 9th level, 24 Dexterity<br />\nYou gain one more reaction per round. You can also use your reaction to gain advantage on checks based on an ability score you choose from the following; Intelligence, Wisdom, and Charisma when you gain this body improvement. This choice cannot be changed later on.  </p>\n<hr />",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Heavenly Restriction 2",
+  "activities": {
+   "rYItz1ipvPTvbNC5": {
+    "_id": "rYItz1ipvPTvbNC5",
+    "type": "utility",
+    "name": "Reaction",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "level": 9,
+    "abilities": {
+     "dex": 24
+    },
+    "features": [
+     [
+      "Supersonic Reflexes"
+     ]
+    ]
+   },
+   "bodyCost": 2,
+   "bodyCategory": "dex"
+  }
+ },
+ "folder": "JeA0bNLBGnvPx6Zr",
+ "_key": "!items!tIQIz98t0MDWDzAP"
+}

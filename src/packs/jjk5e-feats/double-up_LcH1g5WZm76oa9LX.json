@@ -1,0 +1,42 @@
+{
+ "_id": "LcH1g5WZm76oa9LX",
+ "name": "Double Up",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/auspicious-beast-summon.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have a Auspicious Beast #1: Kaichi</em></p>\n<p>Your proficiency with your technique and bond with Kaichi improves. You can summon up to two <em>Kaichi</em> horns at the same time as part of your action. This lets you make an additional attack with your horns.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have a Auspicious Beast #1: Kaichi",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Auspicious Beast #1: Kaichi"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "mHzbbOlvnwQSEnjZ",
+ "sort": 100,
+ "_key": "!items!LcH1g5WZm76oa9LX"
+}

@@ -1,0 +1,163 @@
+{
+ "_id": "DkEVmnT5xCcHJWzN",
+ "name": "Earthquake",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/centipede-shroud.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Centipede Shroud — Innate Technique (6th level)</em></p><p>Starting at 6th level, as an action you can spend 3 CE to force all creatures within 30 feet to make a Strength saving throw if they are on the ground. On a failure, they take 6d6 bludgeoning damage and fall prone. On a success, they take half as much damage. If your cursed centipede is summoned, you can instead do this as a bonus action. This damage increases to 10d6 at 11th and 14d6 at 18th level.</p>\n<p>Additionally, you gain 5 stat points you can spend to increase your centipede’s ability scores (max of 22). You can now add your proficiency bonus to any saving throw or skill check it makes.<br />\nYou gain 5 additional stat points at 11th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "7pKnjFDhrMXc50tL": {
+    "_id": "7pKnjFDhrMXc50tL",
+    "type": "save",
+    "name": "Action (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "str"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 6,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "Ee9gfV18JnUyHIlt",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "30",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "7pKnjFDhrMXc50tL": 3
+   },
+   "technique": "Centipede Shroud",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "Ee9gfV18JnUyHIlt",
+   "name": "Prone (Earthquake)",
+   "img": "modules/jjk5e/icons/techniques/centipede-shroud.svg",
+   "statuses": [
+    "prone"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!DkEVmnT5xCcHJWzN.Ee9gfV18JnUyHIlt"
+  }
+ ],
+ "folder": "CxDLBZfVDaXb8XWS",
+ "_key": "!items!DkEVmnT5xCcHJWzN"
+}

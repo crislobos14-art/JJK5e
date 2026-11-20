@@ -1,0 +1,55 @@
+{
+ "_id": "cPWtyUNCOjMcTCmd",
+ "name": "Mastered Reverse Technique",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>Beginning at 17th level, you have mastered this new type of energy, becoming a high-level sorcerer. You will gain the following benefits:</p>\n<ul>\n<li>\n<p>You can use your reverse cursed technique twice as a free action on your turn.  </p>\n</li>\n<li>\n<p>Your reverse cursed technique healing pool is doubled.  </p>\n</li>\n<li>\n<p>You now regain 35 hit points per cursed energy instead of 30.</p>\n</li>\n</ul>\n<p>In addition, whenever you deal damage to a Monstrosity, Undead, or Cursed Spirit with an unarmed strike or natural weapon, you can spend cursed energy to remove hit points from your healing pool to add radiant damage, the creature takes this damage as vulnerable.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Support Specialist 17",
+  "activities": {
+   "feXedzM9Gg6Y2djY": {
+    "_id": "feXedzM9Gg6Y2djY",
+    "type": "utility",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "8dvEkkHwQxeLRi3Y",
+ "_key": "!items!cPWtyUNCOjMcTCmd"
+}

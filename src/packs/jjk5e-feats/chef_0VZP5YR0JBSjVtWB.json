@@ -1,0 +1,95 @@
+{
+ "_id": "0VZP5YR0JBSjVtWB",
+ "name": "Chef",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: N/A</em></p>\n<p>Time and effort spent mastering the culinary arts has paid off. You gain the following benefits:</p>\n<ul>\n<li>\n<p>Increase your Constitution or Wisdom score by 1, to a maximum of 20.  </p>\n</li>\n<li>\n<p>You gain proficiency with cook’s utensils if you don’t already have it.  </p>\n</li>\n<li>\n<p>As part of a short rest, you can cook special food, provided you have ingredients and cook's utensils on hand. You can prepare enough of this food for a number of creatures equal to 4 + your proficiency bonus. At the end of the short rest, any creature who eats the food and spends one or more Hit Dice to regain hit points regains an extra 1d8 hit points.  </p>\n</li>\n<li>\n<p>With one hour of work or when you finish a long rest, you can cook a number of treats equal to your proficiency bonus. These special treats last 8 hours after being made. A creature can use a bonus action to eat one of those treats to gain temporary hit points equal to your proficiency bonus.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkSkill"
+  },
+  "requirements": "N/A",
+  "activities": {
+   "3Oo9z7wg2UUR8fL8": {
+    "_id": "3Oo9z7wg2UUR8fL8",
+    "type": "heal",
+    "name": "Bonus Action",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "",
+     "types": [
+      "temphp"
+     ],
+     "custom": {
+      "enabled": true,
+      "formula": "@prof"
+     },
+     "scaling": {
+      "number": 1
+     }
+    }
+   }
+  },
+  "advancement": {
+   "Xuuc9Dvjq7cVyfc9": {
+    "_id": "Xuuc9Dvjq7cVyfc9",
+    "type": "AbilityScoreImprovement",
+    "level": 0,
+    "title": "Ability Score Increase",
+    "value": {},
+    "configuration": {
+     "points": 1,
+     "cap": 1,
+     "fixed": {},
+     "locked": [
+      "str",
+      "dex",
+      "int",
+      "cha"
+     ]
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "EtgHYidIGv42ylfo",
+ "sort": 400,
+ "_key": "!items!0VZP5YR0JBSjVtWB"
+}

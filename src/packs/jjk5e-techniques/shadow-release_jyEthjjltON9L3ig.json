@@ -1,0 +1,82 @@
+{
+ "_id": "jyEthjjltON9L3ig",
+ "name": "Shadow Release",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/shadow-killer.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Shadow Killer — Cursed Technique Reversal, 3rd level</em></p><p>At 3rd level, while within 10 ft of a bound creature you can spend 2 cursed energy as a bonus action to attempt to break their bindings. Make a Cursed Energy check against the DC of their bindings. On a success, you destroy the bindings with your shadow. You can use this as a full-turn action (Action + Bonus Action + Movement) to gain advantage on the check.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Shadow Killer 3",
+  "activities": {
+   "jwGAvYjpOP58OqlB": {
+    "_id": "jwGAvYjpOP58OqlB",
+    "type": "utility",
+    "name": "Bonus Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "10",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "jwGAvYjpOP58OqlB": 2
+   },
+   "technique": "Shadow Killer",
+   "reversal": true,
+   "reversalLevel": 3,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Shadow Killer"
+     ]
+    ],
+    "level": 3
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 10,
+ "_key": "!items!jyEthjjltON9L3ig"
+}

@@ -1,0 +1,42 @@
+{
+ "_id": "YpYwThQAdejiXDwW",
+ "name": "Bestial Seance",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/seance.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Seance</em></p>\n<p>You have learned to bring a bit of whimsy to your usually ghastly technique. When you use <em>Seance</em> on yourself, you can choose to instead channel the <strong>Physical Information</strong> of a Beast with a CR equal to or less than your proficiency bonus. You gain all the creature’s traits, senses, movements and actions in addition to the normal effects of <strong>Physical Information</strong>. To use this technique, you must be wearing a costume of that specific animal, costing $200 x the Beast’s CR. You can wear this costume with armor, but if it takes an amount of damage (other than psychic) equal to 3 x your level, it becomes unusable and you lose any benefits from this feature.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Seance",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Seance"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "Bzl0QdjoRI5R4DB5",
+ "sort": 100,
+ "_key": "!items!YpYwThQAdejiXDwW"
+}

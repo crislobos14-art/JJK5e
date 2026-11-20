@@ -1,0 +1,150 @@
+{
+ "_id": "xSoW2QmMDoKA0mY2",
+ "name": "Cursed Spirit Absorption",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/cursed-spirit-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Spirit Manipulation — Innate Technique (1st level)</em></p><blockquote><p>You are blessed with an amazing technique to control Cursed Spirits.</p></blockquote><p>Beginning at 1st level, you know the taste that no one will ever know, the taste of curses. As an action or reaction for 1 Cursed Energy, you exorcise a cursed spirit with 0 hit points, or a cursed spirit whose CR is less than your proficiency bonus within 120 ft that you can see and transform its soul into a small orb for you to eat. After that, you can summon it as an ally to fight for you. You can summon Cursed Spirits as an action by spending Cursed Energy equal to their CR. You can summon a number of cursed spirits as an action equal to your Cursed Energy modifier within 10 ft. They lose their free will and follow every command you give them. If reduced to 0 hit points they die and cannot be revived. They cannot use actions on their own. You must spend a bonus action to command each cursed spirit to attack, use cursed techniques, or do something more specific, such as 'protect that creature, grab that, kill that, etc. You can unsummon any number of curses as a bonus action, provided they are within line of sight. <br />\nYou can only consume orbs without physical detriments if the curse has a CR lower or equal to your level. If you try to eat an orb out of a creature with a CR higher than your level, you must roll a DC 5 + the creature's CR Constitution Saving Throw. On a success, you absorb the curse and can use it after a short or long rest. On a fail, you gain 2 levels of exhaustion and receive Xd12 Necrotic Damage (X = curse CR) and cannot absorb it.<br />\n You're also able to absorb other sorcerer's cursed spirits as long as you kill the master first. You can have any number of cursed spirits, but for every 10 cursed spirits you consume, you must make a DC 10 Wisdom saving throw. On a success, you will gain no aftereffects. On a failure, you will gain a level of exhaustion or two exhaustion levels if you fail the save by 5 or more. This becomes three levels of exhaustion if you fail the save by 10 or more.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "5vgr5IVvwIXwGnMd": {
+    "_id": "5vgr5IVvwIXwGnMd",
+    "type": "utility",
+    "name": "Reaction (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "120",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   },
+   "0SCVuTK5YT7V07aX": {
+    "_id": "0SCVuTK5YT7V07aX",
+    "type": "save",
+    "name": "Bonus Action",
+    "sort": 100000,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "reaction",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "120",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "5vgr5IVvwIXwGnMd": 1
+   },
+   "technique": "Cursed Spirit Manipulation",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "f8ljC8WN5acnKcA4",
+ "_key": "!items!xSoW2QmMDoKA0mY2"
+}

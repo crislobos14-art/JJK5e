@@ -1,0 +1,57 @@
+{
+ "_id": "0CMx0hKTB25yqUAb",
+ "name": "Pain Breaker",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/pain-killer.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Pain Killer — Innate Technique (6th level)</em></p><p>At 6th level, when you use <em>Pain Killer</em> on a creature, they also lose one condition of your choice and if they are making death saves they are immediately stabilized. You now gain Expertise in Medicine.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Pain Killer 6"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Pain Killer",
+   "level": 6
+  }
+ },
+ "folder": "dNStemY1SSBJjSwq",
+ "effects": [
+  {
+   "_id": "BHnWgBjavazx8UBf",
+   "name": "Pain Breaker",
+   "img": "modules/jjk5e/icons/techniques/pain-killer.svg",
+   "changes": [
+    {
+     "key": "system.skills.med.value",
+     "mode": 4,
+     "value": "2",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "auto": "passive"
+    }
+   },
+   "_key": "!items.effects!0CMx0hKTB25yqUAb.BHnWgBjavazx8UBf"
+  }
+ ],
+ "_key": "!items!0CMx0hKTB25yqUAb"
+}

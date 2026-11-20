@@ -1,0 +1,67 @@
+{
+ "_id": "4FNDrJB7uqzqd91Y",
+ "name": "Cursed Lover (Dormant)",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/trait.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Creeps and Curses V.3.1</em></p><p><em>Special Trait. Please note that these abilities are incredibly powerful even for the JJK system and should only be used for purposely high power games. Of course, certain traits are stronger than others. Stages of these traits have been added to grow with characters with higher levels of play. Dormant, Stirring, and Awakened. Though a DM can decide to change the leveling format or instead give them out at appropriate character moments.</em></p><p><em>Due to a traumatic event in your past, a loved one has since come to haunt you. You were unable to handle their death and have cursed them with love.</em></p>\n<p><strong>Bound Love.</strong> You have a Vengeful Spirit bound to you at all times. You can summon them to your side as an action for 3 cursed energy and they can be commanded as a bonus action. If the Vengeful Spirit is killed, you are unable to summon them until you complete 1d4 long rests.</p>\n<p><strong>Innate Technique.</strong> If your Vengeful Spirit possessed an Innate Technique in its life, even if it had been a non-sorcerer, it will still possess one as a spirit. Work with your DM to determine its innate technique. Your Vengeful Spirit counts as your level for the purposes of it using its innate technique. If it did not have one, instead work with the GM to come up with a different unique feature for the Vengeful Spirit.</p>\n<p><em>Special Trait tiers stack: keep the earlier tiers on the sheet. When a benefit says it replaces an earlier one, the module's effects already account for it.</em></p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTrait"
+  },
+  "requirements": "Cursed Lover, level 1",
+  "activities": {
+   "NCbBrxA6yXpLpfKl": {
+    "_id": "NCbBrxA6yXpLpfKl",
+    "type": "utility",
+    "name": "Bonus Action (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": 1,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "NCbBrxA6yXpLpfKl": 3
+   },
+   "prereq": {
+    "level": 1
+   }
+  }
+ },
+ "folder": "WpMvDh8sKw65orZ9",
+ "sort": 700,
+ "_key": "!items!4FNDrJB7uqzqd91Y"
+}

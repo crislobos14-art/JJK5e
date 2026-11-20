@@ -1,0 +1,32 @@
+{
+ "_id": "ldM0TMic8k2TC1Vc",
+ "name": "Crescendo",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/prayer-song.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prayer Song — Innate Technique (11th level)</em></p><p>Starting at 11th level, your abilities improve and find new heights. Only you gain these benefits against a creature you are fighting.</p>\n<table>\n<thead>\n<tr>\n<th style=\"text-align: left;\">Turns Active</th>\n<th style=\"text-align: left;\">Effect</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td style=\"text-align: left;\">1</td>\n<td style=\"text-align: left;\">Your AC and Dex Saves increase by +3</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">2</td>\n<td style=\"text-align: left;\">Your Enemies AC decreases by -3</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">3</td>\n<td style=\"text-align: left;\">You can add your Cursed Energy modifier to your attack and damage rolls</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">4</td>\n<td style=\"text-align: left;\">Your opponent has disadvantage on attacks and you have advantage on saving throws</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">5</td>\n<td style=\"text-align: left;\">Your attacks deal additional damage equal to your proficiency</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">6</td>\n<td style=\"text-align: left;\">Your opponent has their damage decreased by your proficiency</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">7</td>\n<td style=\"text-align: left;\">You gain an extra attack when you take the attack action</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">8</td>\n<td style=\"text-align: left;\">Your opponent's AC drops by a total of 5, and gains a -5 to saves.</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">9</td>\n<td style=\"text-align: left;\">Your critical range increases by 2.</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">10</td>\n<td style=\"text-align: left;\">Your opponent can only take an action, bonus action, or movement on their turn.</td>\n</tr>\n</tbody>\n</table>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Prayer Song 11"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Prayer Song",
+   "level": 11
+  }
+ },
+ "folder": "LeKt9DxatfKKBe3c",
+ "_key": "!items!ldM0TMic8k2TC1Vc"
+}

@@ -1,0 +1,121 @@
+{
+ "_id": "Sexxz4Zn7ek0a38D",
+ "name": "Cursed Silence",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/cursed-speech.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Speech — Cursed Technique Reversal</em></p><p>Because you have mastered Reverse Cursed Technique, you have gained your technique reversal. Instead of sending commands with your speech, you cancel out commands with your silence. You can cast Silence for 2 CE. You can activate Cursed Silence as an action for 8 cursed energy, one creature within 120 feet of you to make a CE saving throw. On a failure, they are now silenced, not being able to speak and suffering the effects of cursed silence for 1 minute. On a success, they become immune to this feature for 1 minute. For the duration, the creature affected by Cursed Silence must make a Wisdom saving throw whenever they try to make an action. On a failure, they do not take said action as it would be too loud and skip it. For the duration, you cannot speak and are concentrating as if you were concentrating on a spell. You can end your reversal technique at will.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Cursed Speech",
+  "activities": {
+   "M78rbnTh6yG7lnkv": {
+    "_id": "M78rbnTh6yG7lnkv",
+    "type": "utility",
+    "name": "Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   },
+   "W2HtQiO9cO2OMF6d": {
+    "_id": "W2HtQiO9cO2OMF6d",
+    "type": "save",
+    "name": "Action (8 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "120",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    },
+    "save": {
+     "ability": [
+      "wis"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "M78rbnTh6yG7lnkv": 2,
+    "W2HtQiO9cO2OMF6d": 8
+   },
+   "technique": "Cursed Speech",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Cursed Speech"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!Sexxz4Zn7ek0a38D"
+}

@@ -1,0 +1,59 @@
+{
+ "_id": "xQ1AduST3If22jVe",
+ "name": "Durable",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: N/A</em></p>\n<p>Hardy and resilient, you gain the following benefits:</p>\n<ul>\n<li>\n<p>Increase your Constitution score by 1, to a maximum of 20.  </p>\n</li>\n<li>\n<p>When you roll a Hit Die to regain hit points, the minimum number of hit points you regain from the roll equals twice your Constitution modifier (minimum of 2).</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkPhysical"
+  },
+  "requirements": "N/A",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "effects": [
+  {
+   "_id": "EOpNsZJoVOocgctO",
+   "name": "Durable",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "changes": [
+    {
+     "key": "system.abilities.con.value",
+     "mode": 2,
+     "value": "1",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "auto": "passive"
+    }
+   },
+   "_key": "!items.effects!xQ1AduST3If22jVe.EOpNsZJoVOocgctO"
+  }
+ ],
+ "folder": "cxPIGjcxqJdZTMQ5",
+ "sort": 500,
+ "_key": "!items!xQ1AduST3If22jVe"
+}

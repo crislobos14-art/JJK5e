@@ -1,0 +1,70 @@
+{
+ "_id": "ZxZd9Tzb80iQhU1Z",
+ "name": "Reckless Blows",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>Starting at 2nd level, you can throw aside all concern for defense to attack with fierce desperation. When you make your first attack on your turn, you can decide to attack recklessly. Doing so gives you advantage on melee weapon attack rolls using Strength during this turn, but attack rolls against you have advantage until your next turn.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Juggernaut 2",
+  "activities": {
+   "ig5upnDO9hIlNbn7": {
+    "_id": "ig5upnDO9hIlNbn7",
+    "type": "utility",
+    "name": "Attack recklessly",
+    "activation": {
+     "type": "special",
+     "condition": "First attack of your turn"
+    },
+    "duration": {
+     "value": "1",
+     "units": "round"
+    },
+    "consumption": {
+     "targets": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "activatesGroup": {
+    "ig5upnDO9hIlNbn7": "reckless"
+   }
+  }
+ },
+ "folder": "1ipDZJ01igqpFdub",
+ "effects": [
+  {
+   "_id": "s31tcizZjUl1pUCc",
+   "name": "Reckless",
+   "img": "modules/jjk5e/icons/feature.svg",
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Advantage on STR melee attacks this turn; attacks against you have advantage.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "group",
+     "group": "reckless"
+    }
+   },
+   "changes": [],
+   "_key": "!items.effects!ZxZd9Tzb80iQhU1Z.s31tcizZjUl1pUCc"
+  }
+ ],
+ "_key": "!items!ZxZd9Tzb80iQhU1Z"
+}

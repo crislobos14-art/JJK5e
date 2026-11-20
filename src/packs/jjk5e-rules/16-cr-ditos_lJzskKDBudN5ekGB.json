@@ -1,0 +1,30 @@
+{
+ "_id": "lJzskKDBudN5ekGB",
+ "name": "16 — Créditos",
+ "folder": "IXMKct7fx9qz8bdj",
+ "sort": 16000,
+ "pages": [
+  {
+   "_id": "65Oi4SsGVYbitXYo",
+   "name": "Créditos",
+   "type": "text",
+   "sort": 0,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Todo el arte pertenece a Gege Akutami y Shonen Jump.</p>\n<p>Gracias por la inspiración a la wiki de JJK D&amp;D. Y gracias también a mis amigos por darme ideas.</p>\n<p>¿Quizá quieras pasarte por el <a href=\"https://discord.gg/6r736Wnp5q\">silly discord</a>…?</p>\n<p>Esta obra está bajo la licencia Creative Commons<br />\nAtribución–NoComercial–CompartirIgual 4.0 Internacional.</p>\n<p>© 2026 [I watch Anime]</p>\n<p><em>Traducción al español no oficial incluida en el módulo de Foundry VTT.</em></p>\n"
+   },
+   "_key": "!journal.pages!lJzskKDBudN5ekGB.65Oi4SsGVYbitXYo"
+  }
+ ],
+ "flags": {
+  "jjk5e": {
+   "lang": "es",
+   "source": "zqSu6wzODMOPKxtf"
+  }
+ },
+ "_key": "!journal!lJzskKDBudN5ekGB"
+}

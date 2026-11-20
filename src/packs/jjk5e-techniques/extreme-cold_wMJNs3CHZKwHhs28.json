@@ -1,0 +1,32 @@
+{
+ "_id": "wMJNs3CHZKwHhs28",
+ "name": "Extreme Cold",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/ice-formation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Ice Formation — Innate Technique (3rd level)</em></p><p>At 3rd level, being stuck on your ice feels like staying in a cold mountain while you wait for death. A creature inside your ice is under one level of Exhaustion. Any creatures within 5ft of your ice that don't have resistance or immunity to cold damage have their movement speed halved.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Ice Formation 3"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Ice Formation",
+   "level": 3
+  }
+ },
+ "folder": "w9n29Anzntr6P6uo",
+ "_key": "!items!wMJNs3CHZKwHhs28"
+}

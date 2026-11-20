@@ -1,0 +1,112 @@
+{
+ "_id": "zVMxc91806XWgCmh",
+ "name": "Basic Curtain",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: 14+ Cursed Energy score</em></p>\n<p>Emerge from the darkness, blacker than darkness. Purify that which is impure. As an action for 5 Cursed Energy, you cover the sky and the ground within a 2165-foot radius dome of darkness for 10 minutes. Upon activation, a dark, almost liquid-like matter drips down from the sky to form the outer barrier wall in the shape of a half-sphere. The curtain changes and the sky becomes dark despite the time of day, provoking any cursed spirits out of hiding. For each extra 1 Cursed Energy spent, you can add 1 additional minute to the curtain's duration and +10 hit points. Your curtain has a number of hit points equal to your Cursed Energy modifier times your level. This barrier has an AC equal to the caster's Cursed Energy DC and automatically fails saving throws. It is also immune to Poison and Psychic damage.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkBarrier"
+  },
+  "requirements": "14+ Cursed Energy score",
+  "activities": {
+   "9Y5nut3bEi6LyH58": {
+    "_id": "9Y5nut3bEi6LyH58",
+    "type": "utility",
+    "name": "Action (5 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {
+     "template": {
+      "type": "sphere",
+      "size": "2165",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     }
+    },
+    "duration": {
+     "value": "10",
+     "units": "minute",
+     "concentration": false
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "9Y5nut3bEi6LyH58": 5
+   },
+   "prereq": {
+    "ceScore": 14
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "Prl92z2mvhHjHfeA",
+   "name": "Basic Curtain (toggle)",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "changes": [
+    {
+     "key": "system.traits.di.value",
+     "mode": 2,
+     "value": "poison",
+     "priority": null
+    },
+    {
+     "key": "system.traits.di.value",
+     "mode": 2,
+     "value": "psychic",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!zVMxc91806XWgCmh.Prl92z2mvhHjHfeA"
+  }
+ ],
+ "folder": "w6CtJKH5qYx1fgN4",
+ "sort": 100,
+ "_key": "!items!zVMxc91806XWgCmh"
+}

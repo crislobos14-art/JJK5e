@@ -1,0 +1,154 @@
+{
+ "_id": "TiEYlOhaBmnH1gBW",
+ "name": "Domain Expansion: Liberation Rite of Water and Land",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/moon-dregs-domain.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Moon Dregs — Innate Technique (18th level)</em></p><p><em>Domain Expansion (rules): full-turn action, 20 CE unless stated, 175-ft radius, 1 minute. When the domain ends you suffer <strong>Technique Burnout</strong> (applied automatically by the module).</em></p><p>Finally at 18th level, you have created a domain embedded with your technique. The air is filled with toxins and appears as if you are underwater, counting as difficult terrain unless you have a swim speed. Creatures are still able to breathe normally.<br />\nAt initiative 20, all creatures in your domain take 8d6 poison or acid damage. Moon Dregs attacks are imbued with your guaranteed hit and there are a number of tiny jellyfish shikigami swimming around equal to your cursed energy modifier that are also imbued with your guaranteed hit. You can command them as an action. They count as Moon Dregs, can only make 1 attack, and have 30 hitpoints.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "8r4a3xWzf8AvZK3J": {
+    "_id": "8r4a3xWzf8AvZK3J",
+    "type": "utility",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   },
+   "MpCwl8qwmgSrp9NC": {
+    "_id": "MpCwl8qwmgSrp9NC",
+    "type": "utility",
+    "name": "Expand Domain (20 CE)",
+    "sort": -100000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Full turn: Action + Bonus Action + Movement",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "175",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": true
+     },
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 9,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "special",
+   "value": null,
+   "condition": "Full turn: Action + Bonus Action + Movement",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "radius",
+    "size": "175",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": true
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Moon Dregs",
+   "level": 18,
+   "domain": true,
+   "ceCosts": {
+    "MpCwl8qwmgSrp9NC": 20
+   },
+   "domainActivity": "MpCwl8qwmgSrp9NC",
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "z6mgJlgIkKDRJURh",
+ "_key": "!items!TiEYlOhaBmnH1gBW"
+}

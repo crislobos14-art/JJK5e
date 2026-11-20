@@ -1,0 +1,59 @@
+{
+ "_id": "znCgHcC4UG2NpASz",
+ "name": "Gunner",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: N/A</em></p>\n<p>You have a quick hand and keen eye when employing firearms, granting you the following benefits:</p>\n<ul>\n<li>\n<p>Increase your Dexterity score by 1, to a maximum of 20.  </p>\n</li>\n<li>\n<p>You gain proficiency with firearms (see “Firearms” in the Dungeon Master’s Guide).  </p>\n</li>\n<li>\n<p>You ignore the loading property of firearms.  </p>\n</li>\n<li>\n<p>Being within 5 feet of a hostile creature doesn't impose disadvantage on your ranged attack rolls.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkSkill"
+  },
+  "requirements": "N/A",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "effects": [
+  {
+   "_id": "fEXMQoHSaeyZfnMB",
+   "name": "Gunner (toggle)",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "changes": [
+    {
+     "key": "system.abilities.dex.value",
+     "mode": 2,
+     "value": "1",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!znCgHcC4UG2NpASz.fEXMQoHSaeyZfnMB"
+  }
+ ],
+ "folder": "EtgHYidIGv42ylfo",
+ "sort": 600,
+ "_key": "!items!znCgHcC4UG2NpASz"
+}

@@ -2,7 +2,7 @@
   "id": "jjk5e",
   "title": "Jujutsu Kaisen 5e (V.6) — Compendium",
   "description": "Unofficial, non-commercial fan conversion of the Jujutsu Kaisen 5e homebrew (V.6) by I watch Anime for the D&D 5e system: 7 classes with level advancement, 79 Innate Techniques, races, feats, backgrounds, mindsets, equipment, cursed tools and the full rules journal. Includes Cursed Energy pool automation. Also includes feats and options from Creeps and Curses V.3.1 (Special Grade Boons, Special Traits, Heavenly Pacts, new techniques). Licensed CC BY-NC-SA 4.0.",
-  "version": "1.18.1",
+  "version": "1.19.0",
   "authors": [
     {
       "name": "I watch Anime",
@@ -79,7 +79,13 @@
   ],
   "license": "LICENSE.txt",
   "readme": "README.md",
-  "flags": {},
+  "flags": {
+    "dnd5e": {
+      "sourceBooks": {
+        "JJK5e": "Jujutsu Kaisen 5e V.6"
+      }
+    }
+  },
   "styles": [
     "styles/jjk5e.css"
   ],
@@ -98,5 +104,256 @@
   "socket": true,
   "url": "https://github.com/crislobos14-art/jjk5e",
   "manifest": "https://raw.githubusercontent.com/crislobos14-art/jjk5e/main/module.json",
-  "download": "https://raw.githubusercontent.com/crislobos14-art/jjk5e/main/module.zip"
+  "download": "https://github.com/crislobos14-art/jjk5e/releases/download/v1.19.0/module.zip",
+  "packs": [
+    {
+      "name": "jjk5e-classes",
+      "label": "JJK 5e: Classes",
+      "path": "packs/jjk5e-classes",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceBook": "JJK5e",
+          "types": [
+            "class",
+            "subclass"
+          ]
+        }
+      },
+      "system": "dnd5e"
+    },
+    {
+      "name": "jjk5e-class-features",
+      "label": "JJK 5e: Class Features",
+      "path": "packs/jjk5e-class-features",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceBook": "JJK5e",
+          "types": [
+            "feat",
+            "weapon"
+          ]
+        }
+      },
+      "system": "dnd5e"
+    },
+    {
+      "name": "jjk5e-techniques",
+      "label": "JJK 5e: Innate Techniques",
+      "path": "packs/jjk5e-techniques",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceBook": "JJK5e",
+          "types": [
+            "feat",
+            "spell"
+          ]
+        }
+      },
+      "system": "dnd5e"
+    },
+    {
+      "name": "jjk5e-races",
+      "label": "JJK 5e: Races",
+      "path": "packs/jjk5e-races",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceBook": "JJK5e",
+          "types": [
+            "feat",
+            "race"
+          ]
+        }
+      },
+      "system": "dnd5e"
+    },
+    {
+      "name": "jjk5e-feats",
+      "label": "JJK 5e: Feats",
+      "path": "packs/jjk5e-feats",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceBook": "JJK5e",
+          "types": [
+            "feat"
+          ]
+        }
+      },
+      "system": "dnd5e"
+    },
+    {
+      "name": "jjk5e-backgrounds",
+      "label": "JJK 5e: Backgrounds & Mindsets",
+      "path": "packs/jjk5e-backgrounds",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceBook": "JJK5e",
+          "types": [
+            "background",
+            "feat"
+          ]
+        }
+      },
+      "system": "dnd5e"
+    },
+    {
+      "name": "jjk5e-equipment",
+      "label": "JJK 5e: Equipment & Cursed Tools",
+      "path": "packs/jjk5e-equipment",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceBook": "JJK5e",
+          "types": [
+            "consumable",
+            "equipment",
+            "loot",
+            "weapon"
+          ]
+        }
+      },
+      "system": "dnd5e"
+    },
+    {
+      "name": "jjk5e-rules",
+      "label": "JJK 5e: Rules",
+      "path": "packs/jjk5e-rules",
+      "type": "JournalEntry",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceBook": "JJK5e"
+        }
+      },
+      "system": "dnd5e"
+    },
+    {
+      "name": "jjk5e-tables",
+      "label": "JJK 5e: Roll Tables",
+      "path": "packs/jjk5e-tables",
+      "type": "RollTable",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceBook": "JJK5e"
+        }
+      }
+    },
+    {
+      "name": "jjk5e-macros",
+      "label": "JJK 5e: Macros",
+      "path": "packs/jjk5e-macros",
+      "type": "Macro",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceBook": "JJK5e"
+        }
+      }
+    },
+    {
+      "name": "jjk5e-shikigami",
+      "label": "JJK 5e: Shikigami (Ten Shadows)",
+      "path": "packs/jjk5e-shikigami",
+      "type": "Actor",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "flags": {
+        "dnd5e": {
+          "sourceBook": "JJK5e",
+          "types": [
+            "npc"
+          ]
+        }
+      },
+      "system": "dnd5e"
+    }
+  ],
+  "packFolders": [
+    {
+      "name": "JJK 5e V.6",
+      "sorting": "m",
+      "color": "#4b1d6e",
+      "packs": [],
+      "folders": [
+        {
+          "name": "Rules & Tools",
+          "sorting": "m",
+          "color": "#3a1656",
+          "packs": [
+            "jjk5e-rules",
+            "jjk5e-tables",
+            "jjk5e-macros"
+          ]
+        },
+        {
+          "name": "Character Options",
+          "sorting": "m",
+          "color": "#3a1656",
+          "packs": [
+            "jjk5e-classes",
+            "jjk5e-class-features",
+            "jjk5e-techniques",
+            "jjk5e-races",
+            "jjk5e-backgrounds",
+            "jjk5e-feats"
+          ]
+        },
+        {
+          "name": "Items & Shikigami",
+          "sorting": "m",
+          "color": "#3a1656",
+          "packs": [
+            "jjk5e-equipment",
+            "jjk5e-shikigami"
+          ]
+        }
+      ]
+    }
+  ],
+  "changelog": "https://github.com/crislobos14-art/jjk5e/blob/main/CHANGELOG.md"
 }

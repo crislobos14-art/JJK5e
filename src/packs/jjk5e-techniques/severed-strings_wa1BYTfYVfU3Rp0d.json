@@ -1,0 +1,83 @@
+{
+ "_id": "wa1BYTfYVfU3Rp0d",
+ "name": "Severed Strings",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/puppet-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Puppet Manipulation — Cursed Technique Reversal</em></p><p>Due to mastering Reverse Cursed Technique, you have learned your cursed technique reversal. Instead of being able to control puppets, you can now sever the connection between one and their summons. As an action for 5 cursed energy, choose one person within 60 feet of yourself or one of your puppets who currently have some form of summon under their control. That person is then forced to make a CE saving throw. On a failure, the target loses control over their summons for 1 minute. These summons go berserk and attack the nearest creature for the duration. The creature can regain control by succeeding on another CE saving throw at the end of their turns.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Puppet Manipulation",
+  "activities": {
+   "LGhvgjCC0hLUDH6s": {
+    "_id": "LGhvgjCC0hLUDH6s",
+    "type": "utility",
+    "name": "Action (5 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "60",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "LGhvgjCC0hLUDH6s": 5
+   },
+   "technique": "Puppet Manipulation",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Puppet Manipulation"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!wa1BYTfYVfU3Rp0d"
+}

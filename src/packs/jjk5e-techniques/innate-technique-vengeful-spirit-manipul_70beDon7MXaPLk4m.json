@@ -1,0 +1,118 @@
+{
+ "_id": "70beDon7MXaPLk4m",
+ "name": "Innate Technique: Vengeful Spirit Manipulation",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/vengeful-spirit-manipulation.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>The Vengeful Cursed Spirit technique involves the use of the spirit of one you care about.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.uBsOHGjgsss8QfcX]{Partial Manifestation}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.QpphinJEtE0mIWIf]{Vengeful Spirit Manifestation}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.PxLYScnzwfsspeiN]{Mimicry}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.LUwEQJrkyoj4pke5]{Stronger Bond}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.wXbGY4lU6MeFrIOc]{Domain Expansion: True Mutual Love}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "8rGBy1vlnjEWszIj": {
+    "_id": "8rGBy1vlnjEWszIj",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Vengeful Spirit Manipulation (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.uBsOHGjgsss8QfcX",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "eRlNR96qRY4Np2qq": {
+    "_id": "eRlNR96qRY4Np2qq",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Vengeful Spirit Manipulation (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.QpphinJEtE0mIWIf",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "kDK4JiyWg2QEzG3B": {
+    "_id": "kDK4JiyWg2QEzG3B",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Vengeful Spirit Manipulation (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.PxLYScnzwfsspeiN",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "jY0hwjdo3rBOAydk": {
+    "_id": "jY0hwjdo3rBOAydk",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Vengeful Spirit Manipulation (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.LUwEQJrkyoj4pke5",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "pzisxzY6HPysQB0S": {
+    "_id": "pzisxzY6HPysQB0S",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Vengeful Spirit Manipulation (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.wXbGY4lU6MeFrIOc",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Vengeful Spirit Manipulation"
+  }
+ },
+ "_key": "!items!70beDon7MXaPLk4m"
+}

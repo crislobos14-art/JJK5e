@@ -1,0 +1,117 @@
+{
+ "_id": "uaZXduMgpa7QEYE3",
+ "name": "Claw",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/dark-claw.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Dark Claw — Innate Technique (1st level)</em></p><blockquote><p>You possess powerful claws that can do anything.</p></blockquote><p>Beginning at 1st level, you have learned to harden your cursed energy into dark claws on your left hand. As a bonus action for 1 cursed energy, you form your claw for 1 hour. Your claws are natural weapons, which counts as a simple melee weapon you are proficient with. It deals 1d6 slashing damage and has the light and finesse property and can use your Cursed Energy modifier for attack and damage rolls. This increases to 1d8 at 3rd level, 1d10 at 6th level, 1d12 at 11th level, and 2d8 at 18th.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "BV6prZgzvg7vJ9kx": {
+    "_id": "BV6prZgzvg7vJ9kx",
+    "type": "damage",
+    "name": "Bonus Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "hour",
+     "concentration": false,
+     "override": true
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "slashing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "hour"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "BV6prZgzvg7vJ9kx": 1
+   },
+   "technique": "Dark Claw",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "TJotg7cBr19cOkoJ",
+ "_key": "!items!uaZXduMgpa7QEYE3"
+}

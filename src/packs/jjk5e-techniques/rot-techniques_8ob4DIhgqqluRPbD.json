@@ -1,0 +1,343 @@
+{
+ "_id": "8ob4DIhgqqluRPbD",
+ "name": "Rot Techniques",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/rot.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Rot — Innate Technique (1st level)</em></p><p>Starting at 1st level, you can harness your blood in a manner fit for battle. When you use a Rot technique or feature, you can ignore the HP cost if you have an alternate source of blood. You gain four techniques and two additional techniques at 6th and 11th level:</p>\n<ul>\n<li>\n<p><strong>Blood Spit</strong>. As an action for 1 CE and 2 HP, you force a creature within 15 feet to make a Constitution save or take 2d6 acid damage and be blinded until the end of their turn on a fail.  </p>\n</li>\n<li>\n<p><strong>Rot Burst</strong>. Once per turn on a hit with a melee attack, you can spend 1 CE and 1 HP to deal an additional 2d8 acid damage.  </p>\n</li>\n<li>\n<p><strong>Rotten Blood Beam</strong>. As an action for 3 CE and 4 HP, you can make a ranged cursed energy attack against a target within 30 feet. On a hit, the target takes 2d8 piercing and 2d10 acid damage and must make a Constitution saving throw or have their movement reduced by 10 feet until the end of their next turn.  </p>\n</li>\n<li>\n<p><strong>Corrosive Wave</strong>. As an action for 3 CE and 5 HP, you launch waves of your rotten blood in a 15 feet cone. Creatures in range must make a Constitution saving throw or take 5d8 acid damage or half as much damage on a success.  </p>\n</li>\n<li>\n<p><strong>Blood Shield</strong>. As a reaction, you spend CE up to your modifier and twice that amount in HP. For each CE spent, the Blood Shield gains 10 hit points, which absorbs the damage and you take remaining damage. If this reduces a melee attack to 0, the attacker must make a Constitution save or take 2d8 acid damage.  </p>\n</li>\n<li>\n<p><strong>Homing Blood Missile</strong>. As an action for 4 CE and 5 HP you can shoot a seeking blood missile at a target within 60 feet. On a hit, the target takes 5d10 + your CE modifier in acid damage. You can reroll the attack roll using your bonus action or reaction.  </p>\n</li>\n<li>\n<p><strong>Blood Soak</strong>. As a bonus action for 3 CE and 3 HP, you can coat your limbs in your blood. For the next minute, your walking speed increases by 10 ft and your unarmed strikes deal 2d6 + CE modifier acid damage on a hit.  </p>\n</li>\n<li>\n<p><strong>Crimson Spear</strong>. As an action for 2 CE and 3 HP, you form your blood into a spear. Make a ranged cursed energy attack roll with a range of 30/90 feet. On a hit the target takes 1d6 piercing and 2d10 + CE modifier acid damage.  </p>\n</li>\n<li>\n<p><strong>Crimson Rain:</strong> As an action for 2 CE and 3 HP, you pick a point within 60 ft. Creatures within 15 feet must make a Dexterity Saving throw taking 1d10 piercing and 2d10 acid damage on failed save or half as much on a success.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "pN8eDU2CrMnRAIub": {
+    "_id": "pN8eDU2CrMnRAIub",
+    "type": "save",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "15",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "acid"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "9bVy7WKxTZ12kDrf",
+      "onSave": false
+     }
+    ]
+   },
+   "CNC7UBv3w881mFA1": {
+    "_id": "CNC7UBv3w881mFA1",
+    "type": "save",
+    "name": "Action (3 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "cone",
+      "size": "15",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "piercing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   },
+   "hjYydWeoujCBjmxF": {
+    "_id": "hjYydWeoujCBjmxF",
+    "type": "utility",
+    "name": "Action (4 CE)",
+    "sort": 200000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   },
+   "UxE9TaRcXs33RMy2": {
+    "_id": "UxE9TaRcXs33RMy2",
+    "type": "damage",
+    "name": "Bonus Action (3 CE)",
+    "sort": 300000,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 6,
+       "bonus": "@mod",
+       "types": [
+        "acid"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "15",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "pN8eDU2CrMnRAIub": 1,
+    "CNC7UBv3w881mFA1": 3,
+    "hjYydWeoujCBjmxF": 4,
+    "UxE9TaRcXs33RMy2": 3
+   },
+   "technique": "Rot",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "9bVy7WKxTZ12kDrf",
+   "name": "Blinded (Rot Techniques)",
+   "img": "modules/jjk5e/icons/techniques/rot.svg",
+   "statuses": [
+    "blinded"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "blinded"
+    }
+   },
+   "_key": "!items.effects!8ob4DIhgqqluRPbD.9bVy7WKxTZ12kDrf"
+  },
+  {
+   "_id": "iRCwpF7nAJ8IBWMv",
+   "name": "Rot Techniques (toggle)",
+   "img": "modules/jjk5e/icons/techniques/rot.svg",
+   "changes": [
+    {
+     "key": "system.attributes.movement.walk",
+     "mode": 2,
+     "value": "10",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!8ob4DIhgqqluRPbD.iRCwpF7nAJ8IBWMv"
+  }
+ ],
+ "folder": "TOdSvSBhuENKcEJX",
+ "_key": "!items!8ob4DIhgqqluRPbD"
+}

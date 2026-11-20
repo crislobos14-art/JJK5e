@@ -1,0 +1,42 @@
+{
+ "_id": "JTgtkz5kerB8bPLi",
+ "name": "Tyrant Shikigami",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/star-dictator.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Major Star Shikigami</em></p>\n<p>You have learned that strengthening cursed energy lets you summon stronger shikigami. You can spend 1 additional cursed energy when you summon your Major Star Shikigami to increase its size category to Large. This increases to 2 cursed energy to make it Huge at 11th level and 4 cursed energy to make it Gargantuan at 18th level. For every size category larger than medium, it gains the following:</p>\n<ul>\n<li>\n<p>+4 bonus to Strength score  </p>\n</li>\n<li>\n<p>+1d8 damage to Bite attacks  </p>\n</li>\n<li>\n<p>+30 hit points</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Major Star Shikigami",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Major Star Shikigami"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "bGKgrFplZpNnclwX",
+ "sort": 200,
+ "_key": "!items!JTgtkz5kerB8bPLi"
+}

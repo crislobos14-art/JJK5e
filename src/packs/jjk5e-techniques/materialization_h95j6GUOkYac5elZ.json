@@ -1,0 +1,75 @@
+{
+ "_id": "h95j6GUOkYac5elZ",
+ "name": "Materialization",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/illusive-mirage.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Illusive Mirage — Cursed Technique Reversal</em></p><p>Due to your mastery of Reverse Cursed Technique, you have learned your cursed technique reversal. You are now able to make the distorted faces real. As an action for 4 cursed energy, you can distort a creature's face that is distorted for a cursed creature. The creature must make a CE saving throw. On a failure, their face is distorted and they have disadvantage on Intelligence, Wisdom, and Charisma checks and saves and lose concentration on any technique or feature it was concentrating on. After failing, a creature may repeat the saves at the end of their turns, ending the effect on a success.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Illusive Mirage",
+  "activities": {
+   "buy7xLUGiVd5thGC": {
+    "_id": "buy7xLUGiVd5thGC",
+    "type": "utility",
+    "name": "Action (4 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "buy7xLUGiVd5thGC": 4
+   },
+   "technique": "Illusive Mirage",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Illusive Mirage"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!h95j6GUOkYac5elZ"
+}

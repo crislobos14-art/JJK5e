@@ -1,0 +1,40 @@
+{
+ "_id": "5xpSFf81Rrf15a3f",
+ "name": "Bottomless Cursed Energy",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: 20+ Cursed Energy Score and a Breakthrough</em></p>\n<p>You have touched both the core of Cursed Energy and the hidden Cursed Energy within you. Your Cursed Energy maximum increases by an amount equal to twice your level when you gain this feat. Whenever you gain a level, your Cursed Energy maximum increases by 2 Cursed Energy.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkCursedEnergy"
+  },
+  "requirements": "20+ Cursed Energy Score and a Breakthrough",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceMaxBonus": "2 * @details.level",
+   "prereq": {
+    "ceScore": 20,
+    "breakthroughs": 1
+   }
+  }
+ },
+ "folder": "58RlNbYPWxO2Xi4E",
+ "sort": 100,
+ "_key": "!items!5xpSFf81Rrf15a3f"
+}

@@ -1,0 +1,81 @@
+{
+ "_id": "9wL6klgi4eJ7iBDT",
+ "name": "First Strike",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/new-shadow-style.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Evening Moon Sword Drawing</em></p>\n<p>You have honed your reaction speed to the finest edge. When you roll initiative you can activate Simple Domain or make an attack as a free action.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Evening Moon Sword Drawing",
+  "activities": {
+   "IzT1v2jQiJcth44V": {
+    "_id": "IzT1v2jQiJcth44V",
+    "type": "attack",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": []
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Evening Moon Sword Drawing"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "gFod6wGzEy6UctqC",
+ "sort": 300,
+ "_key": "!items!9wL6klgi4eJ7iBDT"
+}

@@ -1,0 +1,57 @@
+{
+ "_id": "3FARatYQgXK1DmXO",
+ "name": "Dueling",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>When you are wielding a melee weapon in one hand and no other weapons, you gain a +2 bonus to damage rolls with that weapon.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Fighting Style"
+ },
+ "flags": {
+  "jjk5e": {
+   "fightingStyle": true,
+   "improved": false
+  }
+ },
+ "effects": [
+  {
+   "_id": "zwXqVo14G2gvdbKs",
+   "name": "Dueling (toggle)",
+   "img": "modules/jjk5e/icons/feature.svg",
+   "changes": [
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+2",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!3FARatYQgXK1DmXO.zwXqVo14G2gvdbKs"
+  }
+ ],
+ "folder": "I1ItOooRBoVLqHCS",
+ "_key": "!items!3FARatYQgXK1DmXO"
+}

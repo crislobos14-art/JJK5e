@@ -1,0 +1,98 @@
+{
+ "_id": "44NLHabuBSw6VRZ5",
+ "name": "Sky Armor",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/sky-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Sky Manipulation — Innate Technique (3rd level)</em></p><p>Once you reach 3rd level, you have become better at manipulating the space around you. As a bonus action for 1 Cursed Energy, you can cover part of your body with a part of the sky, making those parts covered invisible for 1 hour. While you have this armor equipped, your AC is 11 + Your Cursed Energy modifier + your proficiency bonus. You also gain a flying speed equal to your walking speed while under the effects of <em>Sky Armor</em>.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "s0Kr9fzi8LOIBbKi": {
+    "_id": "s0Kr9fzi8LOIBbKi",
+    "type": "utility",
+    "name": "Bonus Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "hour",
+     "concentration": false,
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "hour"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "s0Kr9fzi8LOIBbKi": 1
+   },
+   "technique": "Sky Manipulation",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "i7KDxPjzj0GuzdPl",
+ "_key": "!items!44NLHabuBSw6VRZ5"
+}

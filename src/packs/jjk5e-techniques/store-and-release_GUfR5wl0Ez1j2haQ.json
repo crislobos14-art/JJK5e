@@ -1,0 +1,32 @@
+{
+ "_id": "GUfR5wl0Ez1j2haQ",
+ "name": "Store and Release",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/fa-jin.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Fa Jin — Innate Technique (1st level)</em></p><blockquote><p>You can store and release kinetic energy using your cursed technique.</p></blockquote><p>Starting at 1st level, you can store and release energy. When you miss with a melee attack, you gain a Jin charge. You can have a number of Jin charges equal to your proficiency bonus + your level.<br />\nYou can spend a Jin charge or 1 Cursed Energy to either gain a +2 to a melee or cursed energy attack roll or deal an additional damage die for each charge spent. <br />\nYou must declare how many Jin charges you are using before making an attack or using a technique and can use a number of Jin charges equal to your proficiency bonus at once. On a miss, you waste the Jin charges. You lose all unused Jin charges on a long rest.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Fa Jin 1"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Fa Jin",
+   "level": 1
+  }
+ },
+ "folder": "F6im2Ck5LFiG7ZIX",
+ "_key": "!items!GUfR5wl0Ez1j2haQ"
+}

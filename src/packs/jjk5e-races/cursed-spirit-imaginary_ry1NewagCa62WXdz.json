@@ -1,0 +1,117 @@
+{
+ "_id": "ry1NewagCa62WXdz",
+ "name": "Cursed Spirit (Imaginary)",
+ "type": "race",
+ "img": "modules/jjk5e/icons/race.svg",
+ "system": {
+  "description": {
+   "value": "<p>Beings made up of negative energy, festering over time.</p>\n<p><strong>Ability Score Improvement.</strong> You increase one ability score of your choice by 2 and another by 1.</p>\n<p><strong>Creature Type</strong>. You are Undead.</p>\n<p><strong>Age.</strong> You are cursed to live forever.</p>\n<p><strong>Alignment.</strong> Cursed Spirits rarely maintain any level of intelligence, but when they do, their alignment turns towards being more Chaotic or Evil.</p>\n<p><strong>Size.</strong> Your size can be Small or Medium.</p>\n<p><strong>Speed.</strong> Your base walking speed is 30 feet.</p>\n<p><strong>Spiritual Nature</strong>. You function completely differently from normal creatures:</p>\n<ul>\n<li>\n<p>You don’t need to eat, drink, breathe or sleep, but must remain inactive for 4 hours a day to gain the benefits of a long rest.   </p>\n</li>\n<li>\n<p>You have advantage on saving throws against disease and being poisoned, and you have resistance to poison damage.  </p>\n</li>\n<li>\n<p>You are immune to nonmagical bludgeoning, piercing, or slashing.  </p>\n</li>\n<li>\n<p>You are invisible to creatures without cursed energy.</p>\n</li>\n</ul>\n<p><strong>Cursed Energy Affinity</strong>. Due to your nature of being made of cursed energy, you are unable to utilize reverse cursed technique which is positive energy. Though you can still restore your body with pure cursed energy. Starting at 5th level, you can spend cursed energy up to your CE modifier to regain 5 hit points per cursed energy spent as an action once per turn.</p>\n<p><strong>Subrace</strong>. There are several types of cursed spirits, depending on your origin.</p>\n<p><strong>Imaginary</strong></p>\n<p>You are made up of humanity’s fears, formed from a shared negative image.</p>\n<p><strong>Frightful Presence</strong>. As an action, you can force all creatures within 30 feet of you to make a Wisdom saving throw against your Cursed Energy save DC. On a failure, they are frightened of you for 1 minute. A creature can repeat the save at the end of their turn. Once you use this feature, you cannot use it again until you finish a long rest.</p>\n<p><strong>Fearmonger</strong>. You gain proficiency in Intimidation and have a +1 bonus to attack and damage rolls against frightened creatures.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "identifier": "cursed-spirit-imaginary",
+  "movement": {
+   "walk": 30,
+   "units": "ft"
+  },
+  "type": {
+   "value": "undead",
+   "subtype": "",
+   "custom": ""
+  },
+  "advancement": {
+   "7BJDtZLRsDMGu8q7": {
+    "_id": "7BJDtZLRsDMGu8q7",
+    "type": "Size",
+    "configuration": {
+     "sizes": [
+      "sm",
+      "med"
+     ]
+    },
+    "value": {}
+   },
+   "97cKPp7jORuEE3sj": {
+    "_id": "97cKPp7jORuEE3sj",
+    "type": "AbilityScoreImprovement",
+    "level": 0,
+    "title": "Ability Score Increase (+2 to one ability and +1 to another)",
+    "configuration": {
+     "points": 3,
+     "fixed": {},
+     "cap": 2,
+     "locked": []
+    },
+    "value": {}
+   },
+   "ktr2JNbarZbC7qCu": {
+    "_id": "ktr2JNbarZbC7qCu",
+    "type": "Trait",
+    "level": 0,
+    "title": "Spiritual Nature",
+    "configuration": {
+     "mode": "default",
+     "allowReplacements": false,
+     "grants": [
+      "dr:poison"
+     ],
+     "choices": []
+    },
+    "value": {}
+   },
+   "BOPl2zjJwaVbreJw": {
+    "_id": "BOPl2zjJwaVbreJw",
+    "type": "Trait",
+    "level": 0,
+    "title": "Fearmonger",
+    "configuration": {
+     "mode": "default",
+     "allowReplacements": false,
+     "grants": [
+      "skills:itm"
+     ],
+     "choices": []
+    },
+    "value": {}
+   },
+   "RcsTfvQxk8qpXIVo": {
+    "_id": "RcsTfvQxk8qpXIVo",
+    "type": "ItemGrant",
+    "level": 0,
+    "title": "Traits",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-races.Item.jvsvKiLQxHyvHk9B",
+       "optional": false
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-races.Item.aPTWKjpTB26rpoZV",
+       "optional": false
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-races.Item.gWRbnnJm4ZGTtNIn",
+       "optional": false
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-races.Item.RbGmIA5NHRkkjmEp",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": null,
+ "_key": "!items!ry1NewagCa62WXdz"
+}

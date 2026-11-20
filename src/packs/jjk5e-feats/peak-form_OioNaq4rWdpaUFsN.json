@@ -1,0 +1,125 @@
+{
+ "_id": "OioNaq4rWdpaUFsN",
+ "name": "Peak Form",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Level 10+</em></p>\n<p>You gain 1 body point that can be spent on a Body Improvement from the Heavenly Restriction class. You must fulfill any prerequisites before taking it and you use your total level for the purpose of fulfilling prerequisites.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkPhysical"
+  },
+  "requirements": "Level 10+",
+  "advancement": {
+   "VWlVJbwgM18a3fyJ": {
+    "_id": "VWlVJbwgM18a3fyJ",
+    "type": "ItemChoice",
+    "level": 0,
+    "title": "Body Improvement",
+    "value": {},
+    "configuration": {
+     "choices": {
+      "0": {
+       "count": 1,
+       "replacement": false
+      }
+     },
+     "allowDrops": true,
+     "type": "feat",
+     "pool": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.vsoalwf4erVLQQR9"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.i3Lf1lJZTzKnHIm0"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.moNsEvTj8THhS15d"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.ii9PKCGLBjtbKXXk"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.NpRBU6RmiKQWgtcz"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.Tyiudz80nDBkPwt0"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.fx9hRV5tSR8Q6vHj"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.zEzRTCD4MXd13fK2"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.2qsX6ny2iAyRmBxW"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.3D9z9R5wvV2NvdWq"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.tIQIz98t0MDWDzAP"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.APCjYcgieTSzelQc"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.JEYr3SXGuqH2sSPD"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.HkLjEteuqo2D4lTe"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.ac6hSaDVMor9OPyP"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.3FdbQftL8EfxGKEe"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.1YbxYdixyaLzXZkZ"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.5pDiJhDuMJKQO0P8"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.TVTnyBi12LGq72F4"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.jnP5XPInzz0aeiDh"
+      }
+     ],
+     "restriction": {
+      "type": "",
+      "subtype": "",
+      "level": ""
+     }
+    }
+   }
+  },
+  "prerequisites": {
+   "level": 10,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "level": 10
+   },
+   "bodyPointBonus": 1
+  }
+ },
+ "folder": "cxPIGjcxqJdZTMQ5",
+ "sort": 1500,
+ "_key": "!items!OioNaq4rWdpaUFsN"
+}

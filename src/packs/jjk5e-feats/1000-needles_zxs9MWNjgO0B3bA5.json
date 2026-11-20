@@ -1,0 +1,107 @@
+{
+ "_id": "zxs9MWNjgO0B3bA5",
+ "name": "1000 Needles",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/straw-doll-technique.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Hairpin</em></p>\n<p>When you use Hairpin, you can spend an additional 1 cursed energy per nail. If the creature fails its saves, it becomes Restrained by needles of cursed energy. An affected creature can make a Strength (Athletics) or Dexterity (Acrobatics) check against your cursed energy save at the end of their turn, freeing themselves on a success. On a failure, they take 1d8 piercing damage.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Hairpin",
+  "activities": {
+   "kNdoADZ27W75lF15": {
+    "_id": "kNdoADZ27W75lF15",
+    "type": "damage",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "piercing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   },
+   "xAZvAACK8i2aLIWD": {
+    "_id": "xAZvAACK8i2aLIWD",
+    "type": "utility",
+    "name": "Extra (1 CE)",
+    "sort": 900000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Prerequisite: Must have Hairpin When you use Hairpin, you can spend an additional 1 cur..."
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "xAZvAACK8i2aLIWD": 1
+   },
+   "prereq": {
+    "features": [
+     [
+      "Hair Pin"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "Z9rCGnehs0OjjdOk",
+ "sort": 200,
+ "_key": "!items!zxs9MWNjgO0B3bA5"
+}

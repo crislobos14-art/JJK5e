@@ -1,0 +1,181 @@
+{
+ "_id": "wmS4XVAE6EL1dJ17",
+ "name": "Sound Amplification",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/rockstar.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Rockstar — Innate Technique (1st level)</em></p><blockquote><p>You can amplify sound and launch it as a blast of energy.</p></blockquote><p>Starting at 1st level, you gain proficiency in Performance and one instrument of your choice. While holding an instrument you are proficient in, you can spend 1 CE as an action to play it and launch a Sound Blast at a target within 30 feet. Make a ranged Cursed Energy attack roll, on a hit you deal 2d10 thunder damage and if the target is a creature, it must succeed on a Strength saving throw or be pushed back 10 feet. This technique's damage increases to 3d10 at 6th level, 4d10 at 11th level, and 6d10 at 18th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "CdEOvhfEdsw1Axiq": {
+    "_id": "CdEOvhfEdsw1Axiq",
+    "type": "save",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "str"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "thunder"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "30",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "dmgScale": {
+    "CdEOvhfEdsw1Axiq": [
+     [
+      0,
+      "2d10"
+     ],
+     [
+      6,
+      "3d10"
+     ],
+     [
+      11,
+      "4d10"
+     ],
+     [
+      18,
+      "6d10"
+     ]
+    ]
+   },
+   "ceCosts": {
+    "CdEOvhfEdsw1Axiq": 1
+   },
+   "technique": "Rockstar",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "vosb36eMO9PhuX42",
+ "effects": [
+  {
+   "_id": "2MmdQsBa0MjAIHRg",
+   "name": "Sound Amplification (toggle)",
+   "img": "modules/jjk5e/icons/techniques/rockstar.svg",
+   "changes": [
+    {
+     "key": "system.skills.prf.value",
+     "mode": 4,
+     "value": "1",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!wmS4XVAE6EL1dJ17.2MmdQsBa0MjAIHRg"
+  }
+ ],
+ "_key": "!items!wmS4XVAE6EL1dJ17"
+}

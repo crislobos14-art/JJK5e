@@ -1,0 +1,42 @@
+{
+ "_id": "nv4nTlz48FEx7BzZ",
+ "name": "Reverse Cursed Technique Output",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Reverse Cursed Technique</em></p>\n<p>You have learned to offensively use reverse curse technique, whenever you deal damage to a Monstrosity, Undead, or Cursed Spirit with an unarmed strike or melee weapon, you can spend cursed energy to remove hit points from your healing pool adding them as radiant damage.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkRCT"
+  },
+  "requirements": "Must have Reverse Cursed Technique",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Reverse Cursed Technique"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "r4NXrJGBzO6U71JG",
+ "sort": 200,
+ "_key": "!items!nv4nTlz48FEx7BzZ"
+}

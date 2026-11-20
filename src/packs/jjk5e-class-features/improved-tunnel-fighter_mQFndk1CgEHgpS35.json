@@ -1,0 +1,58 @@
+{
+ "_id": "mQFndk1CgEHgpS35",
+ "name": "Improved Tunnel Fighter",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>As a bonus action, you can enter a defensive stance that lasts until the start of your next turn. While in your defensive stance, you can make opportunity attacks without using your reaction, and you can use your reaction to make a melee attack against a creature that moves more than 5 feet while within your reach. You gain a +1 bonus to attacks and damage rolls made this way.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Fighting Style (improved)",
+  "activities": {
+   "STXUs5eidAg9Ja6x": {
+    "_id": "STXUs5eidAg9Ja6x",
+    "type": "utility",
+    "name": "Bonus Action",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "fightingStyle": true,
+   "improved": true
+  }
+ },
+ "folder": "I1ItOooRBoVLqHCS",
+ "_key": "!items!mQFndk1CgEHgpS35"
+}

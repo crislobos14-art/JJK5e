@@ -1,0 +1,106 @@
+{
+ "_id": "zB6XD6pLA1s1U2U0",
+ "name": "Cursed Corpse (Softbody)",
+ "type": "race",
+ "img": "modules/jjk5e/icons/race.svg",
+ "system": {
+  "description": {
+   "value": "<p>Beings made of cursed energy within a shell, somehow gaining sentience.</p>\n<p><strong>Ability Score Improvement.</strong> You increase one ability score of your choice by 4, as you are purpose built for a single purpose.</p>\n<p><strong>Age.</strong> Your lifespan is hypothetically infinite if you repair yourself.</p>\n<p><strong>Alignment.</strong> Cursed Corpses are almost always neutral people, not caring about what happens to others around them and usually wanting to exist peacefully.</p>\n<p><strong>Size.</strong> Your size can be small to large.</p>\n<p><strong>Speed.</strong> Your base walking speed is 35 feet.</p>\n<p><strong>Unnatural.</strong> As a construct, you don’t need to breathe, drink, eat, or sleep. However you need materials to mend yourself during a rest.</p>\n<p><strong>Languages.</strong> You can speak, read, and write Common</p>\n<p><strong>Subrace.</strong> There are multiple forms of corpses. The soft bodies range from plush like, to normal living materials like flesh. Hard Shell is the hard skinned stone, wood, or metal.  </p>\n<p><strong>Softbody</strong></p>\n<p>The simpler, more life-like Cursed Corpses are soft bodies, with their life-like design having both advantages and flaws.</p>\n<p><strong>Tailored Appearance.</strong> You gain expertise in either intimidation, persuasion, or performance.</p>\n<p><strong>Surprise.</strong> You can make a Performance check to disguise yourself as what you resemble. Your sudden reveal may stun an enemy. Once per long rest when you reveal yourself, you can force a creature within 10 feet to make a Wisdom saving throw:<br />\n(DC 10 + your proficiency bonus + your <br />\nCharisma modifier) becoming stunned until <br />\nthe beginning of their turn on failure.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "identifier": "cursed-corpse-softbody",
+  "movement": {
+   "walk": 35,
+   "units": "ft"
+  },
+  "type": {
+   "value": "construct",
+   "subtype": "",
+   "custom": ""
+  },
+  "advancement": {
+   "12ZtfDaiOdNWWmP3": {
+    "_id": "12ZtfDaiOdNWWmP3",
+    "type": "Size",
+    "configuration": {
+     "sizes": [
+      "sm",
+      "med",
+      "lg"
+     ]
+    },
+    "value": {}
+   },
+   "dONKARSFZfqiSjIH": {
+    "_id": "dONKARSFZfqiSjIH",
+    "type": "AbilityScoreImprovement",
+    "level": 0,
+    "title": "Ability Score Increase (+4 to one ability)",
+    "configuration": {
+     "points": 4,
+     "fixed": {},
+     "cap": 4,
+     "locked": []
+    },
+    "value": {}
+   },
+   "T2C6U7DZTPMm1sd9": {
+    "_id": "T2C6U7DZTPMm1sd9",
+    "type": "Trait",
+    "level": 0,
+    "title": "Tailored Appearance",
+    "configuration": {
+     "mode": "forcedExpertise",
+     "allowReplacements": false,
+     "grants": [],
+     "choices": [
+      {
+       "count": 1,
+       "pool": [
+        "skills:itm",
+        "skills:per",
+        "skills:prf"
+       ]
+      }
+     ]
+    },
+    "value": {}
+   },
+   "CF7p5PBI1RESA4Vf": {
+    "_id": "CF7p5PBI1RESA4Vf",
+    "type": "ItemGrant",
+    "level": 0,
+    "title": "Traits",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-races.Item.e0r2srK6XXlfRH1Q",
+       "optional": false
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-races.Item.qmGckyXkCErmD88V",
+       "optional": false
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-races.Item.BOOatXVlg4CJ2ETE",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": null,
+ "_key": "!items!zB6XD6pLA1s1U2U0"
+}

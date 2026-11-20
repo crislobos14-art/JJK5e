@@ -1,0 +1,84 @@
+{
+ "_id": "1Y20N2NZKbqyPu9e",
+ "name": "Spatial Shatter",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/sky-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Thin Ice Breaker</em></p>\n<p>You can spend 6 CE to make an attack on your turn into a melee cursed energy attack roll using a melee weapon or unarmed strike. On a hit, you deal damage as normal and the target also suffers the effects of <em>Thin Ice Breaker</em>.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Thin Ice Breaker",
+  "activities": {
+   "g0crIV5HS69T5PLs": {
+    "_id": "g0crIV5HS69T5PLs",
+    "type": "attack",
+    "name": "Action (6 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "flat": false,
+     "type": {
+      "value": "melee",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": []
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "g0crIV5HS69T5PLs": 6
+   },
+   "prereq": {
+    "features": [
+     [
+      "Thin Ice Breaker"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "CIlfZOL4m5ZkufHa",
+ "sort": 200,
+ "_key": "!items!1Y20N2NZKbqyPu9e"
+}

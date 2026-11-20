@@ -1,0 +1,81 @@
+{
+ "_id": "pAmeUGcvFrhgUKu9",
+ "name": "Dark Fog",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/starlight-symphony.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Starlight Symphony — Cursed Technique Reversal (Dark Orchestra)</em></p><p>You can spend Cursed Energy up to twice your Cursed Energy modifier as an action. You create 10 feet of fog around yourself for every 2 cursed energy. The fog lasts for 2 minutes, spreads around corners and you choose if the fog follows you or not as part of the action to create it. Your fog counts as magical darkness and creatures within your fog have disadvantage on Perception and Investigation checks and automatically fail any ability checks made to detect cursed energy.</p>\n<p>At 6th level, you can use your reaction to give advantage or disadvantage to a roll made by a creature within your cursed fog and can spend up to four times your Cursed Energy modifier when creating your cursed fog. You can spend up to five times your Cursed Energy modifier at 11th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Starlight Symphony",
+  "activities": {
+   "3XdxfxM4hf2eM4ct": {
+    "_id": "3XdxfxM4hf2eM4ct",
+    "type": "utility",
+    "name": "Action (2+ CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "2 * max(1, max(@abilities.wis.mod, @abilities.cha.mod))"
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "2",
+     "units": "minute",
+     "concentration": false
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceSteps": {
+    "3XdxfxM4hf2eM4ct": 2
+   },
+   "ceCosts": {
+    "3XdxfxM4hf2eM4ct": 2
+   },
+   "technique": "Starlight Symphony",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Starlight Symphony"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!pAmeUGcvFrhgUKu9"
+}

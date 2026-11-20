@@ -1,0 +1,118 @@
+{
+ "_id": "eqaq8aAY4IN52lV5",
+ "name": "Innate Technique: Auspicious Beast Summon",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/auspicious-beast-summon.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>By covering your face you can become a medium for the spirit of the four auspicious beasts. These four beasts give you great abilities.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.YljWeNwIC8We2aY4]{Auspicious Beast #1: Kaichi}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.KToQLeKrM7o8UuVK]{Auspicious Beast #2: Reiki}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.1rOPHbR5sjBm2zKZ]{Auspicious Beast #3: Kirin}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.NcFMNwa5YsVhp9y3]{Auspicious Beast #4: Ryu}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.1YkXcsbuzkLSjva5]{Domain Expansion: Auspicious Beasts’ Realm}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "J2l6H8bmS6ViZntI": {
+    "_id": "J2l6H8bmS6ViZntI",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Auspicious Beast Summon (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.YljWeNwIC8We2aY4",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "JofmJg9vCkiwdDuc": {
+    "_id": "JofmJg9vCkiwdDuc",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Auspicious Beast Summon (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.KToQLeKrM7o8UuVK",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "ghQH2cOlFWIcIKJw": {
+    "_id": "ghQH2cOlFWIcIKJw",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Auspicious Beast Summon (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.1rOPHbR5sjBm2zKZ",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "b4sSlTcCg6TicsQd": {
+    "_id": "b4sSlTcCg6TicsQd",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Auspicious Beast Summon (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.NcFMNwa5YsVhp9y3",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "K2J5NuBGk3ovq0x7": {
+    "_id": "K2J5NuBGk3ovq0x7",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Auspicious Beast Summon (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.1YkXcsbuzkLSjva5",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Auspicious Beast Summon"
+  }
+ },
+ "_key": "!items!eqaq8aAY4IN52lV5"
+}

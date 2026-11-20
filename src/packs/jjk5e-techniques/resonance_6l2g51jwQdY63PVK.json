@@ -1,0 +1,120 @@
+{
+ "_id": "6l2g51jwQdY63PVK",
+ "name": "Resonance",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/straw-doll-technique.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Straw Doll Technique — Innate Technique (3rd level)</em></p><p>At 3rd level, you have learned the true use of your technique. As a reaction while within 5 feet of a target that just took slashing or piercing damage, you make a Sleight of Hand check against the target’s AC. The damage dealt  determines the size of the piece. You can mix a body part from a creature into the straw doll for three cursed energy. While within 200 feet, you can use your action to damage the original creature through your straw doll, depending on the body part. At 18th level, your attacks using <em>Resonance</em> lowers the target’s maximum health.</p>\n<table>\n<thead>\n<tr>\n<th style=\"text-align: left;\">Damage Required</th>\n<th style=\"text-align: left;\">Effect</th>\n<th>Damage Dice</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td style=\"text-align: left;\">&lt;10% of Enemy HP Blood Or Hairs</td>\n<td style=\"text-align: left;\">Minor Body Part: Target gains disadvantage on attack rolls until the end of their next turn.</td>\n<td>(Proficiency bonus)d6</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">25%&gt; of Enemy HP Teeth, Skin, Bones</td>\n<td style=\"text-align: left;\">Medium Body Part: The Target loses their reactions until the end of their next turn.</td>\n<td>(CE modifier + proficiency bonus)d8</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">50%&gt; of Enemy HP Limbs</td>\n<td style=\"text-align: left;\">Major Body Parts: The creature has to make a Constitution saving throw; on failure, black spikes erupt from the creature’s body stunning them for 1 minute. They can repeat the save at the end of their turn, ending the effect on success.</td>\n<td>(2×Cursed Energy modifier + proficiency bonus)d10</td>\n</tr>\n</tbody>\n</table>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "arrI3PIOlpXKEpxX": {
+    "_id": "arrI3PIOlpXKEpxX",
+    "type": "save",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "200",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "value": "200",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Straw Doll Technique",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "YmMAY3fFTK6UIkG2",
+ "_key": "!items!6l2g51jwQdY63PVK"
+}

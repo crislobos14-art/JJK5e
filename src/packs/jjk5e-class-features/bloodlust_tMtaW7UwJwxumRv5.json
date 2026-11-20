@@ -1,0 +1,59 @@
+{
+ "_id": "tMtaW7UwJwxumRv5",
+ "name": "Bloodlust",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>At 9th level, you have immense bloodlust for those who have wronged you, even making it your personal task to hunt them down. You can choose one creature that you can see that has damaged you or an ally. For 1 minute, your weapon attacks against that creature gain a +1 to Critical Range, deal one additional dice of damage, and whenever you score a critical hit you can knock them prone.<br />\nYou can use this feature a number of times equal to your proficiency bonus, and you recover all uses upon taking a long rest.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Heavenly Restriction (Vengeful) 9",
+  "uses": {
+   "max": "@prof",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
+    }
+   ]
+  },
+  "activities": {
+   "56K5LAfFNrfexh9D": {
+    "_id": "56K5LAfFNrfexh9D",
+    "type": "utility",
+    "name": "Use",
+    "activation": {
+     "type": "special",
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1"
+      }
+     ]
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "vonv3wc4YmJGEBE1",
+ "_key": "!items!tMtaW7UwJwxumRv5"
+}

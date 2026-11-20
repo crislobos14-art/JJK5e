@@ -1,0 +1,29 @@
+{
+ "_id": "MHEyZih4Y8MUC3r7",
+ "name": "Trained Cursed Energy",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/trait-race.svg",
+ "system": {
+  "description": {
+   "value": "<p>You gain a Cursed Energy feat.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "race",
+   "subtype": ""
+  },
+  "requirements": "Human (Jujutsu Sorcerer)"
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "FDVrGmw22BclKBnR",
+ "_key": "!items!MHEyZih4Y8MUC3r7"
+}

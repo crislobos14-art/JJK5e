@@ -1,0 +1,168 @@
+{
+ "_id": "Jl4NsvTGrLe6S2DE",
+ "name": "Comedy",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/comedian.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Comedian — Innate Technique (1st level)</em></p><blockquote><p>Why do you need an explanation? How about a joke!</p></blockquote><p>Beginning at 1st level, reality bends around you to fit your idea of comedy. As an action for 1 cursed energy, you activate your technique for 1 minute while maintaining concentration. When you are damaged, you can spend 1 cursed energy to take no damage as some funny phenomena allows you to avoid damage (Eg. you open an umbrella to block an attack, you slip on a banana peel to dodge, etc). You also gain proficiency in Performance and at 11th level you gain Expertise.</p>\n<p>A creature that knows how your technique works can make a contested Charisma (Persuasion) or Wisdom (Insight) check as an action to deconstruct your humor against your Charisma (Performance). If they roll higher, your technique deactivates as you lose confidence in your comedy and cannot use your technique. You can make a DC 15 Wisdom saving throw at the end of your turn to regain control of your technique and cause it to reactivate as normal.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "QoOS1sIRL8Cqt5zX": {
+    "_id": "QoOS1sIRL8Cqt5zX",
+    "type": "utility",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    }
+   },
+   "Ofx2k99ZDib0k6fO": {
+    "_id": "Ofx2k99ZDib0k6fO",
+    "type": "save",
+    "name": "Action",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "wis"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [
+   "concentration"
+  ],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "QoOS1sIRL8Cqt5zX": 1
+   },
+   "technique": "Comedian",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "8AlwpNPBMedHlchF",
+ "effects": [
+  {
+   "_id": "KkglstNCV3h664dH",
+   "name": "Comedy (toggle)",
+   "img": "modules/jjk5e/icons/techniques/comedian.svg",
+   "changes": [
+    {
+     "key": "system.skills.prf.value",
+     "mode": 4,
+     "value": "1",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!Jl4NsvTGrLe6S2DE.KkglstNCV3h664dH"
+  }
+ ],
+ "_key": "!items!Jl4NsvTGrLe6S2DE"
+}

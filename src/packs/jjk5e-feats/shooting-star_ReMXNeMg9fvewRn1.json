@@ -1,0 +1,73 @@
+{
+ "_id": "ReMXNeMg9fvewRn1",
+ "name": "Shooting Star",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/disaster-flames.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Erupting Volcanoes</em></p>\n<p>Through focus and thorough planning, you have gained further ideas. As a bonus action, you can spend Cursed Energy up to CE modifier to gain a 60 foot fly speed that lets you hover for a number of rounds equal to your CE modifier per Cursed Energy spent. For example, if you spend 2 CE with a modifier of +3, you can fly for 6 rounds.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Erupting Volcanoes",
+  "activities": {
+   "H7wfIq4qbug7hJOX": {
+    "_id": "H7wfIq4qbug7hJOX",
+    "type": "utility",
+    "name": "Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "6",
+     "units": "round",
+     "concentration": false
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "H7wfIq4qbug7hJOX": 2
+   },
+   "prereq": {
+    "features": [
+     [
+      "Erupting Volcanoes"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "4qq7EY8SFVGjnL4g",
+ "sort": 200,
+ "_key": "!items!ReMXNeMg9fvewRn1"
+}

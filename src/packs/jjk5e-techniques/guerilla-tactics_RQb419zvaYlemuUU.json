@@ -1,0 +1,105 @@
+{
+ "_id": "RQb419zvaYlemuUU",
+ "name": "Guerilla Tactics",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/explosive-flesh.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Explosive Flesh — Innate Technique (6th level)</em></p><p>At 6th level, your practice with your explosions allowed you to make them in an instant. You can now instantly explode one of your body parts for the normal cost, as a reaction to receiving or hitting a melee attack roll as the body part explodes on your body. All creatures make the Dexterity saving throw with disadvantage unless their passive perception is higher than your cursed energy DC.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "cDZqmBgEf1AjCNHG": {
+    "_id": "cDZqmBgEf1AjCNHG",
+    "type": "save",
+    "name": "Reaction",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "reaction",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Explosive Flesh",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "g4gimERTa06iViza",
+ "_key": "!items!RQb419zvaYlemuUU"
+}

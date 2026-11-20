@@ -1,0 +1,182 @@
+{
+ "_id": "hNWzqiXlOG6WoDDP",
+ "name": "Gravity System",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/antigravity-system.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Antigravity System — Cursed Technique Reversal</em></p><p>You have learned how to reverse your own technique, manifesting a field of intense gravity. As an action for 6 cursed energy, you force every creature within a 10-foot-radius of you to make a Strength saving throw. On a failure, they take 10d10 force damage and are knocked prone and restrained until the beginning of your next turn or until they leave the area, and their melee attack rolls will automatically fail. On a success, they take half as much damage. Melee attack rolls will be made with disadvantage.</p>\n<p>This technique deals twice as much damage to objects and structures. You can also use this technique as a reaction to an attack being made against you or if you're forced to make a saving throw. If used against a saving throw, you reduce the damage of the saving throw by the damage of your Gravity System. If you reduce the damage to 0, the effect ends. Any remaining damage after being reduced, is transferred to you. This only works on physical saves or things affected by gravity. Ranged attacks made inside Gravity System or whose projectiles enter it will fail if the roll is lower than twice your cursed energy DC. If a Dexterity or Constitution saving throw targets a creature inside Gravity System, its total damage will be reduced by your Gravity System damage die. This does not affect thunder or psychic damage. This technique's damage increases to 15d10 at 11th level, 20d10 at 18th level, and to 25d10 at 20th level.</p>\n<p><strong>Perfect Gravity.</strong> At 18th level, your gravity has reached its peak, completely destroying your opponents on contact. If your opponent's Strength score is equal or less than your cursed energy DC, they have disadvantage on the saving throw. Also, if they fail your saving throw by 5 or more they gain one level of exhaustion. Additionally, while a creature is restrained they now automatically fail Dexterity saving throws.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Antigravity System",
+  "activities": {
+   "Was3HiWmu550Xw12": {
+    "_id": "Was3HiWmu550Xw12",
+    "type": "save",
+    "name": "Action (6 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "10",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "str"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 10,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "force"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "Z4ZoxeMInInP5ko8",
+      "onSave": false
+     }
+    ]
+   },
+   "opXNTcnURCTa93yu": {
+    "_id": "opXNTcnURCTa93yu",
+    "type": "save",
+    "name": "Reaction",
+    "sort": 100000,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "Was3HiWmu550Xw12": 6
+   },
+   "technique": "Antigravity System",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Antigravity System"
+     ]
+    ]
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "Z4ZoxeMInInP5ko8",
+   "name": "Prone (Gravity System)",
+   "img": "systems/dnd5e/icons/svg/statuses/prone.svg",
+   "statuses": [
+    "prone"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "rounds": 1
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!hNWzqiXlOG6WoDDP.Z4ZoxeMInInP5ko8"
+  }
+ ],
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!hNWzqiXlOG6WoDDP"
+}

@@ -1,0 +1,71 @@
+{
+ "_id": "0BcdtSuwsMxmSEsf",
+ "name": "Soulfire",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/blazing-courage.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Eternal Flames</em></p>\n<p>You have learned to burn even the soul. When you hit with a melee attack, you can spend 3 CE to cause all fire damage dealt on your turn to ignore immunity to fire damage and reduce a creature’s maximum hit points until they complete a long rest.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Eternal Flames",
+  "activities": {
+   "1DuqBfRrOURQRadZ": {
+    "_id": "1DuqBfRrOURQRadZ",
+    "type": "utility",
+    "name": "Action (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "1DuqBfRrOURQRadZ": 3
+   },
+   "prereq": {
+    "features": [
+     [
+      "Eternal Flames"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "FQaknUUFDMQmvcGr",
+ "sort": 300,
+ "_key": "!items!0BcdtSuwsMxmSEsf"
+}

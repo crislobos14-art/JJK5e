@@ -1,0 +1,39 @@
+{
+ "_id": "ulFfcBafjjtRU7tD",
+ "name": "Light Bulletproof Shirt",
+ "type": "equipment",
+ "img": "icons/svg/shield.svg",
+ "folder": "qVuyydidyeepCNvu",
+ "system": {
+  "description": {
+   "value": "<p>Light armor. AC 12 + Dex modifier.</p><p>An undershirt consisting of durable synthetic fibers that provides noticeable protection against bullets and other weapons.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "light",
+   "baseItem": ""
+  },
+  "armor": {
+   "value": 12,
+   "dex": null
+  },
+  "price": {
+   "value": 50.0,
+   "denomination": "gp"
+  },
+  "properties": [],
+  "quantity": 1
+ },
+ "flags": {
+  "jjk5e": {
+   "priceUSD": "$5,000"
+  }
+ },
+ "_key": "!items!ulFfcBafjjtRU7tD"
+}

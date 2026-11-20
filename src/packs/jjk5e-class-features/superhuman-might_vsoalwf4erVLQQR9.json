@@ -1,0 +1,37 @@
+{
+ "_id": "vsoalwf4erVLQQR9",
+ "name": "Superhuman Might",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Strength Improvements: You can have a number of these improvements equal to your Strength modifier.</em></p>\n<p>1 body point, 15 Strength<br />\nYour strength is beyond that of even trained martial artists. You count as one size larger for the purposes of grappling, shoving, disarming, and the weight you can carry, push, drag or lift.  </p>\n<hr />",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Heavenly Restriction 2"
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "abilities": {
+     "str": 15
+    }
+   },
+   "bodyCost": 1,
+   "bodyCategory": "str"
+  }
+ },
+ "folder": "fG9dHqhvzewoqwrt",
+ "_key": "!items!vsoalwf4erVLQQR9"
+}

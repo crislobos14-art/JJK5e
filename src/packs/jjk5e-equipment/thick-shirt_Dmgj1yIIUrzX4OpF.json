@@ -1,0 +1,39 @@
+{
+ "_id": "Dmgj1yIIUrzX4OpF",
+ "name": "Thick Shirt",
+ "type": "equipment",
+ "img": "icons/svg/shield.svg",
+ "folder": "qVuyydidyeepCNvu",
+ "system": {
+  "description": {
+   "value": "<p>Light armor. AC 11 + Dex modifier.</p><p>Thicker shirts consist of high-quality quilted cloth or leather that don't hinder flexibility.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "light",
+   "baseItem": ""
+  },
+  "armor": {
+   "value": 11,
+   "dex": null
+  },
+  "price": {
+   "value": 10.0,
+   "denomination": "gp"
+  },
+  "properties": [],
+  "quantity": 1
+ },
+ "flags": {
+  "jjk5e": {
+   "priceUSD": "$1,000"
+  }
+ },
+ "_key": "!items!Dmgj1yIIUrzX4OpF"
+}

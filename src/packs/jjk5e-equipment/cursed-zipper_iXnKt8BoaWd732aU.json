@@ -1,0 +1,58 @@
+{
+ "_id": "iXnKt8BoaWd732aU",
+ "name": "Cursed Zipper",
+ "type": "consumable",
+ "img": "icons/svg/explosion.svg",
+ "folder": "TBXVbdCh1Kxu8AKz",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Tool, Grade 1(Requires Attunement)</em></p><p>As an action, you can attach this zipper aglet to a nonmagical object or structure and zip or unzip it to create a 5 ft hole until the zipper is detached. A creature attuned to this item can temporarily reattach a severed limb with the zipper.</p>"
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "rarity": "veryRare",
+  "quantity": 1,
+  "attunement": "required",
+  "type": {
+   "value": "trinket",
+   "subtype": ""
+  },
+  "activities": {
+   "Ji6sZbl1q31ifBzO": {
+    "_id": "Ji6sZbl1q31ifBzO",
+    "type": "utility",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "1st Grade"
+  }
+ },
+ "_key": "!items!iXnKt8BoaWd732aU"
+}

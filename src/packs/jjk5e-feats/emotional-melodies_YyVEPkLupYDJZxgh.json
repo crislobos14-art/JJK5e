@@ -1,0 +1,142 @@
+{
+ "_id": "YyVEPkLupYDJZxgh",
+ "name": "Emotional Melodies",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/rockstar.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Resonating Music</em></p>\n<p>As a bonus action for 5 cursed energy, you can introduce a vibe of your choice for 1 minute while concentrating. You can only have one Vibe active at a time. Deafened creatures automatically succeed.<br />\n<strong>Happy Vibes</strong>. Your music gives happy and upbeat vibes. On a hit with your <em>Sound Blast</em>, the target makes a Charisma saving throw or be Charmed and only hear you and your music until the Vibe ends. They can repeat the save at the beginning of their turn.<br />\n<strong>Sad Vibes</strong>. Your music gives sad and depressed vibes, bringing the mood down. On a hit with your <em>Sound Blast</em>, the target makes a Charisma saving throw or fall prone and their speed becomes 0 until the Vibe ends. They can repeat the save at the beginning of their turn.<br />\n<strong>Angry Vibes</strong>. Your music gives off angry and rebellious vibes! On a hit with your <em>Sound Blast</em>, the target makes a Charisma saving throw or becomes berserk until the Vibe ends. A berserk creature uses their reaction to make a melee attack at the closest creature at the start of their turn and must use their action to attack. They can repeat the save at the beginning of their turn.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Resonating Music",
+  "activities": {
+   "nMif4Gdew9q0HrFo": {
+    "_id": "nMif4Gdew9q0HrFo",
+    "type": "save",
+    "name": "Bonus Action (5 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    },
+    "save": {
+     "ability": [
+      "cha"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    },
+    "effects": [
+     {
+      "_id": "pj881GKSU7zKWxYJ",
+      "onSave": false
+     },
+     {
+      "_id": "vC7jRxtPsVQtQAjG",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "nMif4Gdew9q0HrFo": 5
+   },
+   "prereq": {
+    "features": [
+     [
+      "Resonating Music"
+     ]
+    ]
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "pj881GKSU7zKWxYJ",
+   "name": "Charmed (Emotional Melodies)",
+   "img": "modules/jjk5e/icons/techniques/rockstar.svg",
+   "statuses": [
+    "charmed"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "seconds": 60,
+    "rounds": 10
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "charmed"
+    }
+   },
+   "_key": "!items.effects!YyVEPkLupYDJZxgh.pj881GKSU7zKWxYJ"
+  },
+  {
+   "_id": "vC7jRxtPsVQtQAjG",
+   "name": "Prone (Emotional Melodies)",
+   "img": "modules/jjk5e/icons/techniques/rockstar.svg",
+   "statuses": [
+    "prone"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "seconds": 60,
+    "rounds": 10
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!YyVEPkLupYDJZxgh.vC7jRxtPsVQtQAjG"
+  }
+ ],
+ "folder": "68qyxNdSSfIl8CWR",
+ "sort": 200,
+ "_key": "!items!YyVEPkLupYDJZxgh"
+}

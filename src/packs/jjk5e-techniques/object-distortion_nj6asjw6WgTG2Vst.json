@@ -1,0 +1,133 @@
+{
+ "_id": "nj6asjw6WgTG2Vst",
+ "name": "Object Distortion",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/illusive-mirage.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Illusive Mirage — Innate Technique (6th level)</em></p><p>At 6th level, you have now learned a new way to distort the surroundings of those you have cursed. As an action, you may choose an object within the range of your cursed illusion that you can see to distort its appearance, this can include changing its opacity, luster, visible texture, or its seen value. A creature can attempt to discern the illusion by rolling an investigation check against your cursed energy save DC. You can spend an additional 3 CE to make the object invisible. If a creature runs into a medium or larger invisible object, they take 1d6 bludgeoning and lose their reaction.<br />\nThe cost of the technique depends on the size of the targeted object:</p>\n<table>\n<thead>\n<tr>\n<th style=\"text-align: left;\">Size</th>\n<th style=\"text-align: left;\">CE Cost</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td style=\"text-align: left;\">Tiny</td>\n<td style=\"text-align: left;\">1</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">Small</td>\n<td style=\"text-align: left;\">2</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">Medium</td>\n<td style=\"text-align: left;\">3</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">Large</td>\n<td style=\"text-align: left;\">4</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">Huge</td>\n<td style=\"text-align: left;\">6</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">Gargantuan</td>\n<td style=\"text-align: left;\">10</td>\n</tr>\n</tbody>\n</table>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "KvPOGDenY3iIN2OO": {
+    "_id": "KvPOGDenY3iIN2OO",
+    "type": "damage",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   },
+   "VjvgH7c9gYQjon71": {
+    "_id": "VjvgH7c9gYQjon71",
+    "type": "utility",
+    "name": "Extra (3 CE)",
+    "sort": 900000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "You can spend an additional 3 CE to make the object invisible.",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "VjvgH7c9gYQjon71": 3
+   },
+   "technique": "Illusive Mirage",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "8b1T5CIAvTiipny3",
+ "_key": "!items!nj6asjw6WgTG2Vst"
+}

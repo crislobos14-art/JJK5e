@@ -1,0 +1,84 @@
+{
+ "_id": "ipotsu3ZfbfCQcm1",
+ "name": "Shikigami Feed (1st Grade)",
+ "type": "consumable",
+ "img": "icons/svg/explosion.svg",
+ "folder": "TBXVbdCh1Kxu8AKz",
+ "system": {
+  "description": {
+   "value": "<p><em>Potion, Grade 1</em></p><p>Shredded food meal made from the ground up bodies of high grade curses. A shikigami can eat this as an action to regain 10d4+20 hit points and gain advantage on attack rolls and skill checks for 1 minute.</p>"
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "rarity": "veryRare",
+  "quantity": 1,
+  "attunement": "",
+  "type": {
+   "value": "potion",
+   "subtype": ""
+  },
+  "uses": {
+   "max": "1",
+   "spent": 0,
+   "autoDestroy": true,
+   "recovery": []
+  },
+  "activities": {
+   "bQrbwhsRUHH1teXx": {
+    "_id": "bQrbwhsRUHH1teXx",
+    "type": "utility",
+    "name": "Consume",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1"
+      }
+     ]
+    }
+   },
+   "ZmeN72W96seuA1Eq": {
+    "_id": "ZmeN72W96seuA1Eq",
+    "type": "utility",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "1st Grade"
+  }
+ },
+ "_key": "!items!ipotsu3ZfbfCQcm1"
+}

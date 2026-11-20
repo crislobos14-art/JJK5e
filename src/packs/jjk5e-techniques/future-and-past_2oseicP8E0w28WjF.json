@@ -1,0 +1,126 @@
+{
+ "_id": "2oseicP8E0w28WjF",
+ "name": "Future and Past",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/laplace-s-demon.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Laplace’s Demon — Innate Technique (3rd level)</em></p><p>Starting at 3rd level, you can accelerate your brain to predict the future and past with frightful accuracy.<br />\n When you finish a long rest, roll two d20s and record the numbers rolled. You can spend 1 CE as a reaction to replace any attack roll, saving throw, or ability check you make, or a saving throw you force another creature to make with one of these foretelling rolls. You must choose to do so before the roll.<br />\nEach foretelling roll can be used only once. When you finish a long rest, you lose any unused foretelling rolls. When you complete a short rest, you can spend 1 CE to gain another foretelling roll. You can only have one foretelling roll from a short rest at a time.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "hSZWONcn4CVabFLO": {
+    "_id": "hSZWONcn4CVabFLO",
+    "type": "utility",
+    "name": "Reaction (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   },
+   "5jJZwQ04W30INTzj": {
+    "_id": "5jJZwQ04W30INTzj",
+    "type": "utility",
+    "name": "Action (1 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "reaction",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "hSZWONcn4CVabFLO": 1,
+    "5jJZwQ04W30INTzj": 1
+   },
+   "technique": "Laplace’s Demon",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "uhouPoPESjs6aBsz",
+ "_key": "!items!2oseicP8E0w28WjF"
+}

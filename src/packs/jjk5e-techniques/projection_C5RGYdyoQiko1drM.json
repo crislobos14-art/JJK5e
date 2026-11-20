@@ -1,0 +1,151 @@
+{
+ "_id": "C5RGYdyoQiko1drM",
+ "name": "Projection",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/projection-sorcery.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Projection Sorcery — Innate Technique (1st level)</em></p><blockquote><p>You were born with one of the praised techniques of the Zenin Clan, turning animation into reality.</p></blockquote><p>Beginning at 1st level, you learn the projection technique, which gives you the possibility to divide 1 second into 24 frames which allows you to move faster. As a bonus action for 1 Cursed Energy, your walking speed increases by 10 feet and you will gain an additional attack on your Attack Action. However, this cursed technique is not perfect as you cannot change your movement course once you start, so when your turn ends you pick the spot you want to move to, due to your speed it will be impossible to change course. If you do not end your turn in that space, your speed becomes 0 until the end of your next turn. You must spend 1 Cursed Energy at the beginning of your turns to keep this cursed technique active.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "gL74cA8zuvksOhbn": {
+    "_id": "gL74cA8zuvksOhbn",
+    "type": "utility",
+    "name": "Bonus Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   },
+   "I3xaPqqLKDp84C76": {
+    "_id": "I3xaPqqLKDp84C76",
+    "type": "utility",
+    "name": "Action (1 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "gL74cA8zuvksOhbn": 1,
+    "I3xaPqqLKDp84C76": 1
+   },
+   "technique": "Projection Sorcery",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "RqqBayaXFFZrEuE3",
+ "effects": [
+  {
+   "_id": "aXRRi8ccKgpV5q5D",
+   "name": "Projection (toggle)",
+   "img": "modules/jjk5e/icons/techniques/projection-sorcery.svg",
+   "changes": [
+    {
+     "key": "system.attributes.movement.walk",
+     "mode": 2,
+     "value": "10",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!C5RGYdyoQiko1drM.aXRRi8ccKgpV5q5D"
+  }
+ ],
+ "_key": "!items!C5RGYdyoQiko1drM"
+}

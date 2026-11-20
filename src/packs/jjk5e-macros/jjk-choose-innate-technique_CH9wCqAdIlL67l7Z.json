@@ -1,0 +1,13 @@
+{
+ "_id": "CH9wCqAdIlL67l7Z",
+ "name": "JJK: Choose Innate Technique",
+ "type": "script",
+ "img": "icons/svg/aura.svg",
+ "scope": "global",
+ "command": "game.modules.get(\"jjk5e\").api.chooseTechnique();",
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": null,
+ "_key": "!macros!CH9wCqAdIlL67l7Z"
+}

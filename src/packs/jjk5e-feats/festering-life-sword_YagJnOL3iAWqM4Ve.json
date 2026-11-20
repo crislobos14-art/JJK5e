@@ -1,0 +1,71 @@
+{
+ "_id": "YagJnOL3iAWqM4Ve",
+ "name": "Festering Life Sword",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/disaster-vermin.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Parthenogenesis</em></p>\n<p>As a bonus action for 6 CE, you transform a weapon you are holding. It loses all previous benefits and becomes the Special Grade Cursed Tool: Festering Life Sword. You can only have one weapon transformed this way at a time and this tool disappears when you finish a long rest or die.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Parthenogenesis",
+  "activities": {
+   "wHZGMpzazgQpVQVa": {
+    "_id": "wHZGMpzazgQpVQVa",
+    "type": "utility",
+    "name": "Bonus Action (6 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "wHZGMpzazgQpVQVa": 6
+   },
+   "prereq": {
+    "features": [
+     [
+      "Parthenogenesis"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "miB06u1JGRXhMd1e",
+ "sort": 300,
+ "_key": "!items!YagJnOL3iAWqM4Ve"
+}

@@ -1,0 +1,64 @@
+{
+ "_id": "zEzRTCD4MXd13fK2",
+ "name": "Sight Speed",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Speed Improvements: You feel like you could probably win against a special grade in a race due to how fast you are now. You can have a number of these improvements equal to your Dexterity modifier. ---</em></p>\n<p>Requires Sonic Speed, 1 body point, 9th level, 24 Dexterity<br />\nYou have become so fast, people blink and you're already in front of them. Your movement speed doubles once again, and opportunity attacks against you are made with disadvantage due to your speed.  </p>\n<hr />",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Heavenly Restriction 2"
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "level": 9,
+    "abilities": {
+     "dex": 24
+    },
+    "features": [
+     [
+      "Sonic Speed"
+     ]
+    ]
+   },
+   "bodyCost": 1,
+   "bodyCategory": "dex"
+  }
+ },
+ "folder": "JeA0bNLBGnvPx6Zr",
+ "effects": [
+  {
+   "_id": "RSC1STpI6HoAwJhr",
+   "name": "Sight Speed",
+   "img": "modules/jjk5e/icons/feature.svg",
+   "changes": [
+    {
+     "key": "system.attributes.movement.walk",
+     "mode": 1,
+     "value": "2",
+     "priority": null
+    }
+   ],
+   "disabled": false,
+   "transfer": true,
+   "duration": {},
+   "description": "",
+   "flags": {},
+   "_key": "!items.effects!zEzRTCD4MXd13fK2.RSC1STpI6HoAwJhr"
+  }
+ ],
+ "_key": "!items!zEzRTCD4MXd13fK2"
+}

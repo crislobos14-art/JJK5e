@@ -1,0 +1,151 @@
+{
+ "_id": "CaaEcBGImDyI8hBg",
+ "name": "Maximum: Light Speed",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/and-light.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Creeps and Curses V.3.1</em></p><p><em>████ and Light — Innate Technique (11th level)</em></p><p>At 11th level, you have learned to imbue your body with killing intent to momentarily give it the properties of light. As an action for 8 CE, you instantaneously move in a 5 ft wide, 120 feet long line. All creatures in that line must make a Constitution saving throw or take 18d10 radiant damage and be knocked prone on a failed save or take half as much damage and not be knocked prone on a successful save. However, this technique risks tearing your body apart. For every creature, object, or structure you move through, you must make a Constitution saving throw against your Cursed Energy save DC. On a failed save, you take 20 bludgeoning damage. If used at Maximum Output, objects and structures take maximum damage and creatures with a Constitution score lower than your CE score automatically fail the saving throw. At 18th level, the length of the line increases to 200 ft and becomes 300 ft at 20th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "tW4lM8f36bJueMrg": {
+    "_id": "tW4lM8f36bJueMrg",
+    "type": "save",
+    "name": "Action (8 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 18,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "radiant"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "RpXhPAFUcVYnE2eE",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "tW4lM8f36bJueMrg": 8
+   },
+   "technique": "████ and Light",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "RpXhPAFUcVYnE2eE",
+   "name": "Prone (Maximum: Light Speed)",
+   "img": "modules/jjk5e/icons/techniques/and-light.svg",
+   "statuses": [
+    "prone"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!CaaEcBGImDyI8hBg.RpXhPAFUcVYnE2eE"
+  }
+ ],
+ "folder": "IGfpCBBJLQfBc6m2",
+ "_key": "!items!CaaEcBGImDyI8hBg"
+}

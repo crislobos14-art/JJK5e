@@ -1,0 +1,120 @@
+{
+ "_id": "kErS8w7ITb2KTHxT",
+ "name": "Divine Protection",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/regalia.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Regalia — Innate Technique (6th level)</em></p><p>At 6th level, the seal further loosens, granting you more abilities.<br />\nYour Regalia now has a +2 bonus to attack and damage rolls. This increases to a +3 bonus at 11th level and +4 at 18th level.<br />\n Your Regalia now has a pool of hit points equal to 5 times your level. When you take damage, you can spend 1 cursed energy as a reaction to damage to cause that damage to instead target the regalia’s pool. </p>\n<p>If this hit point pool is reduced to 0 hit points, you take any remaining damage and your regalia breaks and must be resummoned. When broken, your regalia can be resummoned a number of times equal to your Cursed Energy modifier. Otherwise, you cannot summon your regalia until you complete a long rest.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "ondRfHfUcPJupVeM": {
+    "_id": "ondRfHfUcPJupVeM",
+    "type": "utility",
+    "name": "Reaction (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   },
+   "baCgyVARl6Q8wep5": {
+    "_id": "baCgyVARl6Q8wep5",
+    "type": "utility",
+    "name": "Use (limited, no CE)",
+    "activation": {
+     "type": "special",
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1"
+      }
+     ],
+     "spellSlot": false
+    }
+   }
+  },
+  "uses": {
+   "max": "max(@abilities.wis.mod, @abilities.cha.mod, 1)",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
+    }
+   ]
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "reaction",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "ondRfHfUcPJupVeM": 1
+   },
+   "technique": "Regalia",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "jfP5e1LgOxgMmS1g",
+ "_key": "!items!kErS8w7ITb2KTHxT"
+}

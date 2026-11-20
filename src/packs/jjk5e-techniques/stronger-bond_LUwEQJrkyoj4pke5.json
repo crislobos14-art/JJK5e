@@ -1,0 +1,32 @@
+{
+ "_id": "LUwEQJrkyoj4pke5",
+ "name": "Stronger Bond",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/vengeful-spirit-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Vengeful Spirit Manipulation — Innate Technique (11th level)</em></p><p>Once you reach 11th level, the bond between the binding object and the Vengeful Spirit becomes stronger. Your Vengeful Spirit gains the following benefits:</p>\n<ul>\n<li>\n<p>Two of its ability scores will be increased by 2, and so will their maximum.  </p>\n</li>\n<li>\n<p>You will gain +2 to your CE score, including its maximum while your spirit is summoned.  </p>\n</li>\n<li>\n<p>Whenever it is summoned the Vengeful Spirit will gain temporary hit points equal to half your current hit points.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Vengeful Spirit Manipulation 11"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Vengeful Spirit Manipulation",
+   "level": 11
+  }
+ },
+ "folder": "fx5WSQ1mGtKNDLmm",
+ "_key": "!items!LUwEQJrkyoj4pke5"
+}

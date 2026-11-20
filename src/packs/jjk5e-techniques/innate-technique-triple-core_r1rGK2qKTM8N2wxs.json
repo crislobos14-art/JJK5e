@@ -1,0 +1,118 @@
+{
+ "_id": "r1rGK2qKTM8N2wxs",
+ "name": "Innate Technique: Triple Core",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/triple-core.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>3 cores, 1 body, you have different forms with separate powers.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.bWsg0w91O42mU8As]{First Core}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.r5gbtlpXeGxVjncc]{Triple Threat}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.4D6hQtvYSoTdHU4R]{Upgraded Form}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.A6J2MDiMGjz2wer6]{Core Exhaustion}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.kVXEl04i6zoZvUq6]{Domain Expansion: Rule of Three}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "cJEROfFMojJClmWy": {
+    "_id": "cJEROfFMojJClmWy",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Triple Core (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.bWsg0w91O42mU8As",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "jGgsoQVgn0at9pVp": {
+    "_id": "jGgsoQVgn0at9pVp",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Triple Core (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.r5gbtlpXeGxVjncc",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "mREquR3TtWN55UpA": {
+    "_id": "mREquR3TtWN55UpA",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Triple Core (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.4D6hQtvYSoTdHU4R",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "4bVXI5RcwK5W9Y2F": {
+    "_id": "4bVXI5RcwK5W9Y2F",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Triple Core (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.A6J2MDiMGjz2wer6",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "jSGrRu5KbAdt8259": {
+    "_id": "jSGrRu5KbAdt8259",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Triple Core (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.kVXEl04i6zoZvUq6",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Triple Core"
+  }
+ },
+ "_key": "!items!r1rGK2qKTM8N2wxs"
+}

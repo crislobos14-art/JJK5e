@@ -1,0 +1,31 @@
+{
+ "_id": "ylkcWZkjbaJguanL",
+ "name": "Cursewrought Armor",
+ "type": "loot",
+ "img": "icons/svg/explosion.svg",
+ "folder": "xnCPfIMW0yQ370pR",
+ "system": {
+  "description": {
+   "value": "<p><em>Armor(Medium or Heavy), Grade 2</em></p><p>This suit of armor is embedded with cursed talisman that automatically reinforce the armor with cursed energy. While you're wearing it, you gain a +1 bonus to AC and any critical hit against you becomes a normal hit.</p>"
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "rarity": "rare",
+  "quantity": 1,
+  "attunement": "",
+  "type": {
+   "value": "gear"
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "2nd Grade"
+  }
+ },
+ "_key": "!items!ylkcWZkjbaJguanL"
+}

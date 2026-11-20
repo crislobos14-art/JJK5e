@@ -1,0 +1,46 @@
+{
+ "_id": "tfptMmAPJyi5Fa28",
+ "name": "Cog",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/mindset.svg",
+ "system": {
+  "description": {
+   "value": "<p>In the greater schemes of sorcery you are a part of the greater whole. If you use your inspiration, you cure all conditions and minor injuries and regain 1/4 of your hit points. </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": ""
+  },
+  "requirements": "Mindset",
+  "activities": {
+   "qjs5fphtrmZGNhyh": {
+    "_id": "qjs5fphtrmZGNhyh",
+    "type": "utility",
+    "name": "Use Inspiration",
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Spend your inspiration"
+    },
+    "consumption": {
+     "targets": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "mindset": true
+  }
+ },
+ "folder": "ymyii86sdbVo8H5C",
+ "_key": "!items!tfptMmAPJyi5Fa28"
+}

@@ -1,0 +1,98 @@
+{
+ "_id": "hETxArHfIr95Mghx",
+ "name": "Imaginary Demon Brain",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/laplace-s-demon.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Laplace’s Demon — Innate Technique (11th level)</em></p><p>At 11th level, you have learned to push the effects of your technique to their maximum limit. As an action, you can spend 8 cursed energy to enter a state of elevated intellect and foresight for 1 hour. All rolls you make are at advantage and all rolls against you are at disadvantage as you are able to see through the truth of the world in its entirety. As a reaction, you can add your Intelligence modifier to an attack roll, skill check or saving throw made by you or a creature within 15 ft of you.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "OrQWkPQeSEHnEua1": {
+    "_id": "OrQWkPQeSEHnEua1",
+    "type": "utility",
+    "name": "Action (8 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "hour",
+     "concentration": false,
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "hour"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "OrQWkPQeSEHnEua1": 8
+   },
+   "technique": "Laplace’s Demon",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "uhouPoPESjs6aBsz",
+ "_key": "!items!hETxArHfIr95Mghx"
+}

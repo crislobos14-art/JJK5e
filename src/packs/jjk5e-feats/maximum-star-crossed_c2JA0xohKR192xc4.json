@@ -1,0 +1,100 @@
+{
+ "_id": "c2JA0xohKR192xc4",
+ "name": "Maximum: Star Crossed",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/love-rendezvous.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Shining Star</em></p>\n<p>As an action for 10 CE, you push yourself and mark a creature you touch with all your power. Marking a creature this way, attracts one body into itself causing massive damage. When you activate this, the creature must make a Constitution saving throw, taking 25d4 force damage and a level of exhaustion on a failed save or half as much on a success.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Shining Star",
+  "activities": {
+   "u6JQ8b6JHWR9htGb": {
+    "_id": "u6JQ8b6JHWR9htGb",
+    "type": "save",
+    "name": "Action (10 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 25,
+       "denomination": 4,
+       "bonus": "",
+       "types": [
+        "force"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "u6JQ8b6JHWR9htGb": 10
+   },
+   "prereq": {
+    "features": [
+     [
+      "Shining Stars"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "pD3ZDzAduni2nSWL",
+ "sort": 300,
+ "_key": "!items!c2JA0xohKR192xc4"
+}

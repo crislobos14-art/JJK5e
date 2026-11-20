@@ -1,0 +1,42 @@
+{
+ "_id": "uyP2Oqc2zwrrHjgj",
+ "name": "Blessing of the Hydra",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/eight-heads.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Collective Will</em></p>\n<p>When you use <em>Eight Lives</em> to return to life, you can gain resistance to one damage type that reduced you to 0 hit points or immunity to one harmful condition you had. This benefit lasts for 1 hour.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Collective Will",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Collective Will"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "ScNBVqds1jNrXfTg",
+ "sort": 200,
+ "_key": "!items!uyP2Oqc2zwrrHjgj"
+}

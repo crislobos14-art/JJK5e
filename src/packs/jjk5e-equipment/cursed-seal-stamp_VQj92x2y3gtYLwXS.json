@@ -1,0 +1,60 @@
+{
+ "_id": "VQj92x2y3gtYLwXS",
+ "name": "Cursed Seal Stamp",
+ "type": "consumable",
+ "img": "icons/svg/explosion.svg",
+ "folder": "iccGNPZSINUipQjv",
+ "system": {
+  "type": {
+   "value": "trinket",
+   "subtype": ""
+  },
+  "description": {
+   "value": "<p>A small stamp with the seal of your sorcerer clan or a different organization you are affiliated with. By spending 1 cursed energy, you can stamp a contract with your seal to agree to a binding vow within the contents of a contract. These are usually used for long and complicated binding vows or to make a binding vow without meeting in person. If the contract or the contents of the contract is changed or altered in any way, the stamp is invalidated and must be reapplied.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "rarity": "rare",
+  "quantity": 1,
+  "activities": {
+   "dvDy9od7p5h6klPz": {
+    "_id": "dvDy9od7p5h6klPz",
+    "type": "utility",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "2nd Grade",
+   "ceCosts": {
+    "dvDy9od7p5h6klPz": 1
+   }
+  }
+ },
+ "_key": "!items!VQj92x2y3gtYLwXS"
+}

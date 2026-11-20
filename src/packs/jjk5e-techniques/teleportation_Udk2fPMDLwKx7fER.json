@@ -1,0 +1,95 @@
+{
+ "_id": "Udk2fPMDLwKx7fER",
+ "name": "Teleportation",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/limitless.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Limitless — Innate Technique (6th level)</em></p><p>At 6th level, your control over blue and space has increased. As an action, you can teleport yourself or another willing creature you touch 10 ft per Cursed Energy used.<br />\n You can teleport an additional creature by doubling the cursed energy cost. Additionally, with the use of a binding vow, you can instead teleport a creature to a 5 ft circle you have prepared. You can teleport a willing creature you touch to one of these circles as an action for 5 cursed energy. You can only have one circle per binding vow.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "JwvU7XUNyvApOkhe": {
+    "_id": "JwvU7XUNyvApOkhe",
+    "type": "utility",
+    "name": "Action (5 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "JwvU7XUNyvApOkhe": 5
+   },
+   "technique": "Limitless",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "9dzjvEM8kgWba7oJ",
+ "_key": "!items!Udk2fPMDLwKx7fER"
+}

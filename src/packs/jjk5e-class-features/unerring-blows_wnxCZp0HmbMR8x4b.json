@@ -1,0 +1,43 @@
+{
+ "_id": "wnxCZp0HmbMR8x4b",
+ "name": "Unerring Blows",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>At 15th level, you hold great mastery over your attacks. When you miss an attack you can reroll the attack roll once per turn.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Warrior 15",
+  "activities": {
+   "yeV8F2czuJFM8Ed2": {
+    "_id": "yeV8F2czuJFM8Ed2",
+    "type": "utility",
+    "name": "Reroll missed attack (once per turn)",
+    "activation": {
+     "type": "special",
+     "condition": "You miss an attack"
+    },
+    "consumption": {
+     "targets": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "7ecbupybBLUFyYzw",
+ "_key": "!items!wnxCZp0HmbMR8x4b"
+}

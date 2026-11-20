@@ -1,0 +1,100 @@
+{
+ "_id": "Af1ZMKcggMOUNFMt",
+ "name": "Parfait Singulier",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/cursed-cannon.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Granita Lusso</em></p>\n<p>You have found a brand new and destructive pathway for your technique. When you use <em>Granite Lusso</em>, you can choose a number of creatures in range up to your Cursed Energy modifier, spending 1 cursed energy per creature. These creatures take additional necrotic damage equal to your Cursed Energy score. On a failed save, they are knocked prone and stunned until the end of their next turn.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Granita Lusso",
+  "activities": {
+   "W8rxb2g9jdsquUH6": {
+    "_id": "W8rxb2g9jdsquUH6",
+    "type": "utility",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "effects": [
+     {
+      "_id": "FUuVcaDmlUU6YuB1",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "W8rxb2g9jdsquUH6": 1
+   },
+   "prereq": {
+    "features": [
+     [
+      "Maximum: Granita Lusso"
+     ]
+    ]
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "FUuVcaDmlUU6YuB1",
+   "name": "Prone (Parfait Singulier)",
+   "img": "modules/jjk5e/icons/techniques/cursed-cannon.svg",
+   "statuses": [
+    "prone"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "rounds": 1
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!Af1ZMKcggMOUNFMt.FUuVcaDmlUU6YuB1"
+  }
+ ],
+ "folder": "21KhImE6dWZGP2gJ",
+ "sort": 400,
+ "_key": "!items!Af1ZMKcggMOUNFMt"
+}

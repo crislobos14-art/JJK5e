@@ -1,0 +1,108 @@
+{
+ "_id": "7vtgeOWGHfDsoDM5",
+ "name": "Self Distortion",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/illusive-mirage.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Illusive Mirage — Innate Technique (3rd level)</em></p><p>At 3rd level, you’ve learned how to distort your own body to confuse your opponents. You learn the 3 following distortion techniques:<br />\n<strong>Phase Fist</strong>. As part of making a melee attack, you can spend 3 cursed energy to create a duplicate of your weapon. Make a melee cursed attack roll at disadvantage, afterwards you make your normal attack against the same target. If the phase attack misses the actual attack will deal double the damage dice on a hit and if the phase attack hits the main attack will instead be made at advantage.<br />\n<strong>Blurring</strong>. As an action for 3 cursed energy, your body becomes blurred, shifting and wavering to all who can see you. For a number of rounds equal to your Cursed Energy modifier, a creature that can see you has disadvantage on attack rolls against you. An attacker is immune to this effect if it doesn't rely on sight like blindsight or can see through illusions like with true sight.<br />\n<strong>Distorting Disguise</strong>. For 3 cursed energy, you make yourself (including your clothing, armor, weapons, and other belongings) look different for a number of hours equal to your Cursed Energy modifier. The changes of this feature fail to hold up to physical inspection. For example, if you use this technique to add a hat to your outfit, objects pass through the hat, and anyone who touches it would feel nothing or would feel your head and hair. If you use this spell to appear thinner than you are, the hand of someone who reaches out to touch you would bump into you while it was seemingly still in midair. To discern that you are disguised, a creature can use its action to inspect your appearance and must succeed on an Intelligence (Investigation) check against your cursed energy save DC.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "yAE44QI4ejp7wB7M": {
+    "_id": "yAE44QI4ejp7wB7M",
+    "type": "attack",
+    "name": "Action (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "flat": false,
+     "type": {
+      "value": "melee",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": []
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "yAE44QI4ejp7wB7M": 3
+   },
+   "technique": "Illusive Mirage",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "8b1T5CIAvTiipny3",
+ "_key": "!items!7vtgeOWGHfDsoDM5"
+}

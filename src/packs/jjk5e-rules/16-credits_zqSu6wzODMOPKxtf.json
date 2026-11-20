@@ -1,0 +1,29 @@
+{
+ "_id": "zqSu6wzODMOPKxtf",
+ "name": "16 — Credits",
+ "sort": 16000,
+ "pages": [
+  {
+   "_id": "yw8OkxGSicpiMAIm",
+   "name": "Overview",
+   "type": "text",
+   "sort": 0,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Credit for all the art towards Gege Akutami and Shonen Jump.</p>\n<p>Thanks for inspiration from the JJK D&amp;D wiki. Further thanks to my friends for giving me ideas.</p>\n<p>Maybe check out <a href=\"https://discord.gg/6r736Wnp5q\">silly discord</a>…?</p>\n<p>This work is licensed under the Creative Commons<br />\nAttribution–NonCommercial–ShareAlike 4.0 International License.</p>\n<p>© 2026 [I watch Anime]</p>"
+   },
+   "_key": "!journal.pages!zqSu6wzODMOPKxtf.yw8OkxGSicpiMAIm"
+  }
+ ],
+ "flags": {
+  "jjk5e": {
+   "lang": "en"
+  }
+ },
+ "folder": null,
+ "_key": "!journal!zqSu6wzODMOPKxtf"
+}

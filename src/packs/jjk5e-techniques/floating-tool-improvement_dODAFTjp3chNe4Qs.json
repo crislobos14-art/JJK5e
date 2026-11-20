@@ -1,0 +1,57 @@
+{
+ "_id": "dODAFTjp3chNe4Qs",
+ "name": "Floating Tool Improvement",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/tool-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Tool Manipulation — Innate Technique (6th level)</em></p><ul>\n<li>\n<p>The cost to create a <em>Floating Tool</em> becomes 1 CE  </p>\n</li>\n<li>\n<p>When you command a <em>Floating Tool</em>, they can move up to 40 feet  </p>\n</li>\n<li>\n<p>You gain a flying speed of 60 feet by mounting a <em>Floating Tool</em>  </p>\n</li>\n<li>\n<p>You can have 2 <em>Floating Tools</em> active at the same time, commanding both as part of the same action.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Tool Manipulation 6"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Tool Manipulation",
+   "level": 6
+  }
+ },
+ "folder": "7tmhlm7tDflRZlKD",
+ "effects": [
+  {
+   "_id": "rbGUNT6ozXzx8rhX",
+   "name": "Floating Tool Improvement (toggle)",
+   "img": "modules/jjk5e/icons/techniques/tool-manipulation.svg",
+   "changes": [
+    {
+     "key": "system.attributes.movement.fly",
+     "mode": 4,
+     "value": "60",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!dODAFTjp3chNe4Qs.rbGUNT6ozXzx8rhX"
+  }
+ ],
+ "_key": "!items!dODAFTjp3chNe4Qs"
+}

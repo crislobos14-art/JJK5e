@@ -1,0 +1,42 @@
+{
+ "_id": "DMsumvTevaeOzjYe",
+ "name": "Reduced Harm",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/explosive-flesh.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Faster Throws</em></p>\n<p>You have learned to minimize the damage you take when using your technique. You decrease the hit point loss from using any part of your body as an explosive by an amount equal to your Constitution modifier (minimum 1 hit point).<br />\nAt 6th level, this reduction increases to an amount equal to twice your Constitution modifier plus your level (minimum 1 hit point).</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Faster Throws",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Faster Throws"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "vYo4tKf7KcEIUKP8",
+ "sort": 100,
+ "_key": "!items!DMsumvTevaeOzjYe"
+}

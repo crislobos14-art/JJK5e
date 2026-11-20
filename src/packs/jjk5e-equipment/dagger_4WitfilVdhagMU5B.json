@@ -1,0 +1,75 @@
+{
+ "_id": "4WitfilVdhagMU5B",
+ "name": "Dagger",
+ "type": "weapon",
+ "img": "icons/svg/sword.svg",
+ "folder": "8L9REK3UZxFoXRJA",
+ "system": {
+  "description": {
+   "value": "<p>Simple melee weapon. 1d4 piercing. Finesse, light, thrown(20/60).</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "simpleM",
+   "baseItem": "dagger"
+  },
+  "damage": {
+   "base": {
+    "number": 1,
+    "denomination": 4,
+    "types": [
+     "piercing"
+    ]
+   }
+  },
+  "range": {
+   "value": 20,
+   "long": 60,
+   "units": "ft"
+  },
+  "properties": [
+   "fin",
+   "lgt",
+   "thr"
+  ],
+  "proficient": null,
+  "price": {
+   "value": 2.0,
+   "denomination": "gp"
+  },
+  "quantity": 1,
+  "activities": {
+   "8JIC1fb5QRKnW56s": {
+    "_id": "8JIC1fb5QRKnW56s",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "melee",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "priceUSD": "$200"
+  }
+ },
+ "_key": "!items!4WitfilVdhagMU5B"
+}

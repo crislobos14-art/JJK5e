@@ -1,0 +1,89 @@
+{
+ "_id": "R6GIKl5g5dus2u9L",
+ "name": "Maximum: Overclock",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/cursed-circuitry.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Circuit Breaker</em></p>\n<p>While under the effects of your <em>Circuit</em>, you can cause overclock the <em>Circuit</em>, gaining the following benefits for 1 minute:</p>\n<ul>\n<li>\n<p>You reduce all damage taken by half your current cursed energy (minimum of 2 + your CE modifier).  </p>\n</li>\n<li>\n<p>If a feature’s effects depend on how much cursed energy you spend, you treat each one CE spent as five CE. This cannot cause the cursed energy spent to be higher than your output limit.  </p>\n</li>\n<li>\n<p>You deal an additional 2d12 necrotic damage on melee and ranged weapon attacks.</p>\n</li>\n</ul>\n<p>Once this minute ends, the circuit automatically ends as your technique becomes overheated and you cannot gain the benefit of a <em>Circuit</em> or apply a new <em>Circuit</em> for 1 minute.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Circuit Breaker",
+  "activities": {
+   "tTTm2iAuX9YUSAyG": {
+    "_id": "tTTm2iAuX9YUSAyG",
+    "type": "damage",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 12,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Circuit Breaker"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "G6JMovZa1ygvOgXz",
+ "sort": 300,
+ "_key": "!items!R6GIKl5g5dus2u9L"
+}

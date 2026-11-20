@@ -1,0 +1,207 @@
+{
+ "_id": "5EjQTkPsRJ3rKiT9",
+ "name": "Flash Flood",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/disaster-tides.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Disaster Tides — Innate Technique (11th level)</em></p><p>Starting at 11th level, with your studies you have learned how to condense the water that you create and use it as a ball of mass destruction. As an action for 6 Cursed Energy, you can choose one target within 30 feet of you. Make a cursed energy attack roll against it. On a hit, it will take 10d8 cold damage and be pushed 80 feet away from you. <br />\n You can instead as an action for 8 Cursed Energy choose a point within 30 feet of you. All creatures within a 10-foot radius circle of that point must make a Dexterity saving throw. On a failure they take 8d12 cold damage or half as much damage on a success. If the area is enclosed it is filled with 10 feet of water.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "MobgRH7arUrSxRwt": {
+    "_id": "MobgRH7arUrSxRwt",
+    "type": "attack",
+    "name": "Action (6 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": 10,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "cold"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   },
+   "9cSExV3daZJ4NcQJ": {
+    "_id": "9cSExV3daZJ4NcQJ",
+    "type": "save",
+    "name": "Action (8 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "10",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 8,
+       "denomination": 12,
+       "bonus": "",
+       "types": [
+        "cold"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "30",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "MobgRH7arUrSxRwt": 6,
+    "9cSExV3daZJ4NcQJ": 8
+   },
+   "technique": "Disaster Tides",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "Ao9OCl7PHP0hxQBD",
+ "_key": "!items!5EjQTkPsRJ3rKiT9"
+}

@@ -1,0 +1,95 @@
+{
+ "_id": "3SKl5qzgphoe5in3",
+ "name": "Cursed Creation",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/construction.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Construction — Innate Technique (3rd level)</em></p><p>At 3rd level, your construction technique has improved by a lot, you can now even create cursed objects. You can create a generic imbued Cursed Tool or a specific technique cursed tool you have seen for 3 cursed energy + 2 for every grade it has above 4. These cursed tools last a number of hours equal to your Cursed Energy modifier, before disappearing.<br />\n You can make a Special Grade (Legendary) Cursed Tool. However, due to the backlash of your technique, you will die afterward. You cannot be revived in any way, shape or form after using this feature.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "QcgNIk4rbHwUWGOy": {
+    "_id": "QcgNIk4rbHwUWGOy",
+    "type": "utility",
+    "name": "Action (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "QcgNIk4rbHwUWGOy": 3
+   },
+   "technique": "Construction",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "dT7FkGZ40euglS6C",
+ "_key": "!items!3SKl5qzgphoe5in3"
+}

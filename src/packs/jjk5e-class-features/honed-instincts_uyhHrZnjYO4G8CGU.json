@@ -1,0 +1,54 @@
+{
+ "_id": "uyhHrZnjYO4G8CGU",
+ "name": "Honed Instincts",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>By 7th level, your instincts are so honed that you have advantage on initiative rolls.</p>\n<p>Additionally, if you are surprised at the beginning of combat and aren't incapacitated, you can act normally on your first turn, but only if you enter your focus before doing anything else on that turn.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Juggernaut 7"
+ },
+ "flags": {
+  "jjk5e": {
+   "modifies": [
+    "Focus"
+   ]
+  }
+ },
+ "folder": "1ipDZJ01igqpFdub",
+ "effects": [
+  {
+   "_id": "18HkXfTi1HcclT7D",
+   "name": "Honed Instincts",
+   "img": "modules/jjk5e/icons/feature.svg",
+   "changes": [
+    {
+     "key": "system.attributes.init.roll.mode",
+     "mode": 2,
+     "value": "1",
+     "priority": null
+    }
+   ],
+   "disabled": false,
+   "transfer": true,
+   "duration": {},
+   "description": "",
+   "flags": {},
+   "_key": "!items.effects!uyhHrZnjYO4G8CGU.18HkXfTi1HcclT7D"
+  }
+ ],
+ "_key": "!items!uyhHrZnjYO4G8CGU"
+}

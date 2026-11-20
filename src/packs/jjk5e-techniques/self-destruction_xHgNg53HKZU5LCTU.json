@@ -1,0 +1,131 @@
+{
+ "_id": "xHgNg53HKZU5LCTU",
+ "name": "Self-Destruction",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/explosive-flesh.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Explosive Flesh — Innate Technique (1st level)</em></p><blockquote><p>You can make your body into a deadly bomb.</p></blockquote><p>Starting at 1st level, you can make any part of you a deadly bomb. You spend cursed energy to remove and throw your body parts. You remove the part as described below. Throwing takes an action:</p>\n<table>\n<thead>\n<tr>\n<th style=\"text-align: left;\">Attack</th>\n<th></th>\n<th style=\"text-align: left;\">Cost</th>\n<th style=\"text-align: left;\">Action</th>\n<th style=\"text-align: left;\">Effect</th>\n<th></th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td style=\"text-align: left;\">Tiny(Tooth, Finger, Hair)</td>\n<td></td>\n<td style=\"text-align: left;\">1 CE + Con mod HP</td>\n<td style=\"text-align: left;\">Free action</td>\n<td style=\"text-align: left;\">You throw the body part at a point within 120ft. Creatures within 5 ft make a Dex save. On a failure, they take Xd6 force damage. On a success, they take half.</td>\n<td></td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">Small(Ears, Nose)</td>\n<td></td>\n<td style=\"text-align: left;\">2 CE + Con mod×half your level HP</td>\n<td style=\"text-align: left;\">Bonus action</td>\n<td style=\"text-align: left;\">You throw the body part at a point within 100ft. Creatures within 10 ft make a Dex save. On a failure, they take Xd8 force damage and are knocked prone. On a success they take half.</td>\n<td></td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">Medium(Hands, Feet)</td>\n<td></td>\n<td style=\"text-align: left;\">4 CE + Con mod×level HP</td>\n<td style=\"text-align: left;\">Action</td>\n<td style=\"text-align: left;\">You throw the body part at a point within 80ft. Creatures within 15 ft make a Dex save. On a failure, they take Xd10 force damage and are knocked prone. On a success, they take half.</td>\n<td></td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">Large(Arms, Legs)</td>\n<td></td>\n<td style=\"text-align: left;\">6 CE + Con mod×level HP</td>\n<td style=\"text-align: left;\">Full Turn Action</td>\n<td style=\"text-align: left;\">You throw the body part at a point within 60ft. Creatures within 20 ft make a Dex save. On a failure, they take Xd12 force damage and are knocked prone. On a success, they take half.</td>\n<td></td>\n</tr>\n</tbody>\n</table>\n<p>After using a limb or body part in an explosion, it will be considered removed (Con mod is treated as min of 1).<br />\nThe X is your CE modifier. Damage from this technique deals twice as much damage to objects and structures.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "0utXEgaPdSSYbf5H": {
+    "_id": "0utXEgaPdSSYbf5H",
+    "type": "utility",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "120",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "Ia19f9JKcxiglWi8",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "special",
+   "value": null,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "120",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Explosive Flesh",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "Ia19f9JKcxiglWi8",
+   "name": "Prone (Self-Destruction)",
+   "img": "modules/jjk5e/icons/techniques/explosive-flesh.svg",
+   "statuses": [
+    "prone"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!xHgNg53HKZU5LCTU.Ia19f9JKcxiglWi8"
+  }
+ ],
+ "folder": "g4gimERTa06iViza",
+ "_key": "!items!xHgNg53HKZU5LCTU"
+}

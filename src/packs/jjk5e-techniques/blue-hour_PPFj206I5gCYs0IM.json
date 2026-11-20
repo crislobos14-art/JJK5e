@@ -1,0 +1,72 @@
+{
+ "_id": "PPFj206I5gCYs0IM",
+ "name": "Blue Hour",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/golden-hour.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Golden Hour — Cursed Technique Reversal</em></p><p>After mastering Reverse Cursed Technique, you have unlocked your cursed technique reversal. Once per turn on a hit with a melee attack, you can spend cursed energy up to twice your CE modifier. On a hit, in addition to the attack's damage, the target must make a Constitution saving throw against your Cursed Energy save DC. On a failure, the target is slowed for a turn for every 2 cursed energy spent. The target can repeat the saving throw at the end of each of its turns, ending the effect on a success. The DC for an affected creature equals your Cursed Energy save plus the number of of remaining turns. An affected target's speed is halved, it takes a -2 penalty to AC and Dexterity saving throws, and it can't use reactions. On its turn, it can use either an action or a bonus action, not both. Regardless of the creature's abilities or cursed items, it can't make more than one melee or ranged attack during its turn. If the creature attempts to use a technique with a casting time of 1 action, roll a d20. On an 11 or higher, the technique doesn't take effect until the creature's next turn, and the creature must use its action on that turn to complete it. If it can't, the technique is wasted.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Golden Hour",
+  "activities": {
+   "BbMsDIlRoSMylz1C": {
+    "_id": "BbMsDIlRoSMylz1C",
+    "type": "utility",
+    "name": "Bonus Action",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Golden Hour",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Golden Hour"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!PPFj206I5gCYs0IM"
+}

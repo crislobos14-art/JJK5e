@@ -1,0 +1,91 @@
+{
+ "_id": "3FJJtpPZUyrZ2uP5",
+ "name": "Fuko",
+ "type": "weapon",
+ "img": "icons/svg/sword.svg",
+ "folder": "TBXVbdCh1Kxu8AKz",
+ "system": {
+  "description": {
+   "value": "<p><em>Weapon(Katana), First Grade</em></p><p>You gain a +3 bonus to attack and damage rolls with this weapon. When you make an attack roll or saving throw, you can gain advantage on the roll as the tormented spirits within the blade grant you favor. You can use this a number of times equal to your proficiency bonus each long rest.</p>\n<p>Any cursed tool is imbued with a technique and has a +4 bonus to attack and damage rolls.</p>"
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "martialM",
+   "baseItem": ""
+  },
+  "damage": {
+   "base": {
+    "number": 2,
+    "denomination": 4,
+    "types": [
+     "slashing"
+    ]
+   },
+   "versatile": {
+    "number": 1,
+    "denomination": 10,
+    "types": [
+     "slashing"
+    ]
+   }
+  },
+  "range": {
+   "value": 5,
+   "long": null,
+   "units": "ft",
+   "reach": 5
+  },
+  "properties": [
+   "mgc",
+   "ver"
+  ],
+  "proficient": null,
+  "quantity": 1,
+  "activities": {
+   "up1fNM6WcUjAjAaz": {
+    "_id": "up1fNM6WcUjAjAaz",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "melee",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   }
+  },
+  "magicalBonus": 3,
+  "rarity": "veryRare",
+  "attunement": "",
+  "uses": {
+   "max": "@prof",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
+    }
+   ]
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "1st Grade"
+  }
+ },
+ "_key": "!items!3FJJtpPZUyrZ2uP5"
+}

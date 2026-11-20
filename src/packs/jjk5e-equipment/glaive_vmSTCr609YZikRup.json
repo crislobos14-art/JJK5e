@@ -1,0 +1,76 @@
+{
+ "_id": "vmSTCr609YZikRup",
+ "name": "Glaive",
+ "type": "weapon",
+ "img": "icons/svg/sword.svg",
+ "folder": "8L9REK3UZxFoXRJA",
+ "system": {
+  "description": {
+   "value": "<p>Martial melee weapon. 1d10 slashing. Heavy, reach, two-handed.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "martialM",
+   "baseItem": "glaive"
+  },
+  "damage": {
+   "base": {
+    "number": 1,
+    "denomination": 10,
+    "types": [
+     "slashing"
+    ]
+   }
+  },
+  "range": {
+   "value": 10,
+   "long": null,
+   "units": "ft",
+   "reach": 10
+  },
+  "properties": [
+   "hvy",
+   "rch",
+   "two"
+  ],
+  "proficient": null,
+  "price": {
+   "value": 20.0,
+   "denomination": "gp"
+  },
+  "quantity": 1,
+  "activities": {
+   "Bv4DymOSyifQFFBq": {
+    "_id": "Bv4DymOSyifQFFBq",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "melee",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "priceUSD": "$2,000"
+  }
+ },
+ "_key": "!items!vmSTCr609YZikRup"
+}

@@ -1,0 +1,54 @@
+{
+ "_id": "OdxwwszrqWMn5IEh",
+ "name": "Battle Readiness",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>Starting at 7th level, your awareness and preparation reached a new and constant state. This gives you advantage on initiative checks.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Warrior 7"
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "7ecbupybBLUFyYzw",
+ "effects": [
+  {
+   "_id": "HrvCMr4eRcnzBTIg",
+   "name": "Battle Readiness",
+   "img": "modules/jjk5e/icons/feature.svg",
+   "changes": [
+    {
+     "key": "system.attributes.init.roll.mode",
+     "mode": 2,
+     "value": "1",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "auto": "passive"
+    }
+   },
+   "_key": "!items.effects!OdxwwszrqWMn5IEh.HrvCMr4eRcnzBTIg"
+  }
+ ],
+ "_key": "!items!OdxwwszrqWMn5IEh"
+}

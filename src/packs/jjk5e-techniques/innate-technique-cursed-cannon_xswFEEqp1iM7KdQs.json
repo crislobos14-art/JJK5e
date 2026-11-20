@@ -1,0 +1,118 @@
+{
+ "_id": "xswFEEqp1iM7KdQs",
+ "name": "Innate Technique: Cursed Cannon",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/cursed-cannon.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>Cursed Cannon, as the name says, allows you to unleash blasts of cursed energy. As simple as it is, its power is undeniable.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.TlxFnlnJaW0uDBcH]{Granite Blast}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.QtbgYUqOVOZIsKoo]{Grape Choux}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.apSxPjIaSsyM1DMq]{Dessert Deluge}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.0Vvjb032PUzeQY5O]{Maximum: Granita Lusso}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.fXBj2a32DG28BgH1]{Domain Expansion: Il Gran Dolce}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "rAcUynZFMFu55Fvl": {
+    "_id": "rAcUynZFMFu55Fvl",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Cursed Cannon (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.TlxFnlnJaW0uDBcH",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "z8AVvUU7XCu4YUpJ": {
+    "_id": "z8AVvUU7XCu4YUpJ",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Cursed Cannon (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.QtbgYUqOVOZIsKoo",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "j4G541qUBKGI2nfR": {
+    "_id": "j4G541qUBKGI2nfR",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Cursed Cannon (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.apSxPjIaSsyM1DMq",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "G1kVhPeCsWyfl2KH": {
+    "_id": "G1kVhPeCsWyfl2KH",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Cursed Cannon (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.0Vvjb032PUzeQY5O",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "64LTMgBJQlMNyoYK": {
+    "_id": "64LTMgBJQlMNyoYK",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Cursed Cannon (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.fXBj2a32DG28BgH1",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Cursed Cannon"
+  }
+ },
+ "_key": "!items!xswFEEqp1iM7KdQs"
+}

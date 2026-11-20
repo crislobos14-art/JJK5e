@@ -1,0 +1,95 @@
+{
+ "_id": "5GIEPo1b6c1zyGl0",
+ "name": "Chaos",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/vairocana.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Creeps and Curses V.3.1</em></p><p><em>Vairocana — Innate Technique (3rd level)</em></p><p>Starting at 3rd level, you have learned to harness the destabilization of the world and channel into direct attacks or channel it into the area around you. As an action for 2 CE, you can cast Chaos Bolt. Chaos Bolt is automatically cast as a third level spell when you reach 6th level, automatically cast as 5th level at 11th level, and automatically cast as 8th level at 18th level. As an action, you can spend 2 cursed energy to cause Chaos to form in the world around you. Roll a d100 on the Chaos Table which determines the effect. If an effect is random, it can also affect you unless the effect originates from you. (X = your CE modifier)</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "fppuZf662RZQtCi6": {
+    "_id": "fppuZf662RZQtCi6",
+    "type": "utility",
+    "name": "Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "fppuZf662RZQtCi6": 2
+   },
+   "technique": "Vairocana",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "CpSgW3tLoueRa6XV",
+ "_key": "!items!5GIEPo1b6c1zyGl0"
+}

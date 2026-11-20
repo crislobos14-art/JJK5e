@@ -1,0 +1,103 @@
+{
+ "_id": "S4No6uuUuqDuOf79",
+ "name": "Cursed Vessel (Reincarnated)",
+ "type": "race",
+ "img": "modules/jjk5e/icons/race.svg",
+ "system": {
+  "description": {
+   "value": "<p>Sorcerers who became cursed objects, and are now in a new body</p>\n<p><strong>Age.</strong> Your lifespan depends on the body you have possessed.</p>\n<p><strong>Alignment.</strong> Cursed vessels are almost always chaotic people, not caring about what happens to others around them and wanting to cause destruction.</p>\n<p><strong>Size.</strong> Your size depends on the race you have possessed.</p>\n<p><strong>Speed</strong>. Your base walking speed depends on the race you have possessed.</p>\n<p><strong>This Body Is Mine.</strong> You have advantage on saving throws against effects that would alter or change your form.</p>\n<p><strong>Languages.</strong> You can speak, read, and write Common and one other language of your choice.</p>\n<p><strong>Subrace.</strong> There are multiple forms of vessels, however they are all based on consuming cursed objects. There are the reincarnated, who were simply sorcerers who were consumed by creatures who were adapted for their incarnation. There are the death paintings, which take over the body of said vessel despite its host having a will. And then there are the incomplete and complete vessels. In case the cursed object's host still had a will, it would start as an incomplete vessel and then become a complete vessel after erasing the will of the old body owner.  </p>\n<p><strong>Reincarnated</strong></p>\n<p>You are a sorcerer from a past era. Now you are in your second life through some deal or accident.</p>\n<p><strong>Ability Score Increase.</strong> You have been brought back to your peak, you can choose one ability score to increase by 2 and another ability score to increase by 2.</p>\n<p><strong>Life Experience.</strong> This isn't your first shot at life and last time you learned a few things. You will gain proficiency in two skills or one skill and one tool of your choice.</p>\n<p><strong>Cling to Life.</strong> You have died once and refuse to let it happen again. Whenever you are reduced to 0 hit points, you can choose to instead remain at 1 hit point, once per long rest.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "identifier": "cursed-vessel-reincarnated",
+  "movement": {
+   "walk": 30,
+   "units": "ft"
+  },
+  "type": {
+   "value": "humanoid",
+   "subtype": "",
+   "custom": ""
+  },
+  "advancement": {
+   "9l742TpR2G8tjlyG": {
+    "_id": "9l742TpR2G8tjlyG",
+    "type": "Size",
+    "configuration": {
+     "sizes": [
+      "med"
+     ]
+    },
+    "value": {}
+   },
+   "QleWo896wBwFfivg": {
+    "_id": "QleWo896wBwFfivg",
+    "type": "AbilityScoreImprovement",
+    "level": 0,
+    "title": "Ability Score Increase (+2 to two abilities)",
+    "configuration": {
+     "points": 4,
+     "fixed": {},
+     "cap": 2,
+     "locked": []
+    },
+    "value": {}
+   },
+   "UnF0BMbwG36IZ967": {
+    "_id": "UnF0BMbwG36IZ967",
+    "type": "Trait",
+    "level": 0,
+    "title": "Life Experience",
+    "configuration": {
+     "mode": "default",
+     "allowReplacements": false,
+     "grants": [],
+     "choices": [
+      {
+       "count": 2,
+       "pool": [
+        "skills:*",
+        "tool:*"
+       ]
+      }
+     ]
+    },
+    "value": {}
+   },
+   "ZfTB2UnNImG7LHb0": {
+    "_id": "ZfTB2UnNImG7LHb0",
+    "type": "ItemGrant",
+    "level": 0,
+    "title": "Traits",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-races.Item.akVkjIzoHyDUfdie",
+       "optional": false
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-races.Item.v6W642VKpSdpv5Ul",
+       "optional": false
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-races.Item.eycfgie87RyHGROn",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": null,
+ "_key": "!items!S4No6uuUuqDuOf79"
+}

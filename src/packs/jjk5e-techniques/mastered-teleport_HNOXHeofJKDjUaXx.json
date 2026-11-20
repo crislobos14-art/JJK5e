@@ -1,0 +1,107 @@
+{
+ "_id": "HNOXHeofJKDjUaXx",
+ "name": "Mastered Teleport",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/teleportation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Teleportation — Innate Technique (6th level)</em></p><p>At 6th level, with great training, you have reached the pinnacle of your teleport. As an action for 8 cursed energy you cast Teleport. You can only go to marks and you always go to the exact mark you want to go to, regardless of how far away from you they are. You are now able to teleport others while you do not leave. You can now choose to only teleport other creatures when using any teleport feature.<br />\n Additionally, you can attempt to teleport an unwilling creature within 5 ft. They must make a Cursed Energy saving throw. If they fail, they are teleported to one of your marks.<br />\n Additionally, your markings now last for a week instead of 12 hours.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "Lu6UGCZdxpVaSSdR": {
+    "_id": "Lu6UGCZdxpVaSSdR",
+    "type": "utility",
+    "name": "Action (8 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "5",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "Lu6UGCZdxpVaSSdR": 8
+   },
+   "technique": "Teleportation",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "1SK1DEKKg87PUQf6",
+ "_key": "!items!HNOXHeofJKDjUaXx"
+}

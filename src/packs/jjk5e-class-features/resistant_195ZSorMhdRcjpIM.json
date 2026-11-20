@@ -1,0 +1,29 @@
+{
+ "_id": "195ZSorMhdRcjpIM",
+ "name": "Resistant",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>At 7th level, your newfound abilities and body has allowed you to resist certain area effects, such as a blue dragon’s lightning breath or a fireball spell. Choose one of the following ability scores:</p>\n<p>Brawn - Strength<br />\nEvasion - Dexterity<br />\nEndurance - Constitution<br />\nDiscernment - Intelligence<br />\nIntuition - Wisdom<br />\nEgo - Charisma</p>\n<p>When you are subjected to an effect that allows you to make a saving throw of the chosen ability to only take half damage, you instead take no damage if you succeed on the saving throw, and only half damage if you fail. At 14th and 20th level, you choose one additional saving throw.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Heavenly Restriction 7"
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "hWqAX9TqrOvuq1FE",
+ "_key": "!items!195ZSorMhdRcjpIM"
+}

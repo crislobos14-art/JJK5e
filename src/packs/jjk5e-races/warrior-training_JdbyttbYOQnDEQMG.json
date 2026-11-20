@@ -1,0 +1,29 @@
+{
+ "_id": "JdbyttbYOQnDEQMG",
+ "name": "Warrior Training",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/trait-race.svg",
+ "system": {
+  "description": {
+   "value": "<p>You have proficiency with light and medium armor.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "race",
+   "subtype": ""
+  },
+  "requirements": "Sumerian (Deskunte)"
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "cUxhy4eiPJek1pHp",
+ "_key": "!items!JdbyttbYOQnDEQMG"
+}

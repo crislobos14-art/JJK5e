@@ -1,0 +1,140 @@
+{
+ "_id": "W67pztE5YzdQ8tVp",
+ "name": "Reversion",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/retrograde.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Retrograde — Innate Technique (1st level)</em></p><blockquote><p>The act of regression is the basis of your technique.</p></blockquote><p>Beginning at 1st level, when you make an attack roll or saving throw against an effect that you can see or are targeted by an attack roll, you can spend 1 cursed energy as a reaction to reverse time a few seconds, allowing you to reattempt a failed roll or make the attack reroll.<br />\n At 3rd level, this feature also grants you a +2 bonus to the second attempt this feature grants you. This increases to +3 at 6th level, +4 at 11th level, and +5 at 18th level. Also at 3rd level, you can use this feature on a creature within 30 ft of you that you can see for an additional 2 CE. Other creatures do not gain the bonus to rolls.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "pZKg6UrTUuDaEMX6": {
+    "_id": "pZKg6UrTUuDaEMX6",
+    "type": "attack",
+    "name": "Reaction (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": []
+    }
+   },
+   "V1XYlDRPVyUKryna": {
+    "_id": "V1XYlDRPVyUKryna",
+    "type": "utility",
+    "name": "Extra (2 CE)",
+    "sort": 900000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Also at 3rd level, you can use this feature on a creature within 30 ft of you that you ...",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "reaction",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "30",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "pZKg6UrTUuDaEMX6": 1,
+    "V1XYlDRPVyUKryna": 2
+   },
+   "technique": "Retrograde",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "6YaSgqVRe4IqL8er",
+ "_key": "!items!W67pztE5YzdQ8tVp"
+}

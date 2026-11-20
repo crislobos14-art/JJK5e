@@ -1,0 +1,122 @@
+{
+ "_id": "5QLR4NkDGOJebVpF",
+ "name": "Innate Technique: Blood Manipulation",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/blood-manipulation.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>You were born with a complex ability held and practiced by the Kamo family, you can control your blood.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.NKo4xTL2nxoqeOSt]{Blood Constructs}, @UUID[Compendium.jjk5e.jjk5e-techniques.Item.s8hzPznLcMB8vsLg]{Blood Techniques}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.0LPEMZDITFa9osgY]{Flowing Red Scale}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.NY4mXqV70GgnVRot]{Convergence}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.4tuBpUmDZZPmETHW]{Piercing Blood}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.Fbv1XCPZS9QhB6nh]{Domain Expansion: Bloodbath}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "LiLJnMLPYBEm48HO": {
+    "_id": "LiLJnMLPYBEm48HO",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Blood Manipulation (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.NKo4xTL2nxoqeOSt",
+       "optional": false
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.s8hzPznLcMB8vsLg",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "7AlTOPOeXNPBJxnU": {
+    "_id": "7AlTOPOeXNPBJxnU",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Blood Manipulation (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.0LPEMZDITFa9osgY",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "tBtTrf1r9L6byyBr": {
+    "_id": "tBtTrf1r9L6byyBr",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Blood Manipulation (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.NY4mXqV70GgnVRot",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "KQmNhEUMKVxdKKzC": {
+    "_id": "KQmNhEUMKVxdKKzC",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Blood Manipulation (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.4tuBpUmDZZPmETHW",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "tZ9tsAlyKJBWOcMQ": {
+    "_id": "tZ9tsAlyKJBWOcMQ",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Blood Manipulation (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.Fbv1XCPZS9QhB6nh",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Blood Manipulation"
+  }
+ },
+ "_key": "!items!5QLR4NkDGOJebVpF"
+}

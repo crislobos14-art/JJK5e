@@ -1,0 +1,109 @@
+{
+ "_id": "GCdVifVCL7A2JyrF",
+ "name": "Squall",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/disaster-storms.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Maximum: Divine Storm Sovereign</em></p>\n<p>While you are within a storm of your creation, your movement speed increases by 20 ft and you can teleport to a different point within the storm as a bonus action. Additionally when you are reduced to 0 hit points, you can instead melt into storms and reconstitute your form at a different point within the storm at 1 hit point. Once you reconstitute your body using this feature, you cannot use it again until you finish a long rest.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Maximum: Divine Storm Sovereign",
+  "uses": {
+   "max": "1",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
+    }
+   ]
+  },
+  "activities": {
+   "8yGUxl9UxrO5mMJ0": {
+    "_id": "8yGUxl9UxrO5mMJ0",
+    "type": "utility",
+    "name": "Bonus Action",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1"
+      }
+     ],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Maximum: Divine Storm Sovereign"
+     ]
+    ]
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "tiRR1WjPFuvcotiL",
+   "name": "Squall (toggle)",
+   "img": "modules/jjk5e/icons/techniques/disaster-storms.svg",
+   "changes": [
+    {
+     "key": "system.attributes.movement.walk",
+     "mode": 2,
+     "value": "20",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!GCdVifVCL7A2JyrF.tiRR1WjPFuvcotiL"
+  }
+ ],
+ "folder": "D27pyU4vw2lSmHn4",
+ "sort": 300,
+ "_key": "!items!GCdVifVCL7A2JyrF"
+}

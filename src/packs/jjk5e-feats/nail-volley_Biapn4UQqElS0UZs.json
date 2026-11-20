@@ -1,0 +1,81 @@
+{
+ "_id": "Biapn4UQqElS0UZs",
+ "name": "Nail Volley",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/straw-doll-technique.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Nail Projectiles</em></p>\n<p>As an action, for as much Cursed Energy as nails you unleash your nails in a cone equal to ten times the nails used you can force creatures in the area to do a Dexterity save or take a number of d6 equal to the nails used.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Nail Projectiles",
+  "activities": {
+   "FuwD32PXDnCWS2LR": {
+    "_id": "FuwD32PXDnCWS2LR",
+    "type": "save",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Nail Projectile"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "Z9rCGnehs0OjjdOk",
+ "sort": 100,
+ "_key": "!items!Biapn4UQqElS0UZs"
+}

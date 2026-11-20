@@ -1,0 +1,122 @@
+{
+ "_id": "XJWuaIPUC0PQuyZ1",
+ "name": "Gravity Field",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/antigravity-system.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Antigravity System — Innate Technique (3rd level)</em></p><p>At 3rd level, you gained the following benefits through practicing your technique.<br />\n<strong>Light Fall.</strong> As a reaction for 1 CE to falling, you and creatures equal to your proficiency bonus within 120 feet have their rate of descent slowed to 60 feet per round and take no fall damage when you land.  <br />\n<strong>Focused System</strong>. When you use your innate technique, you can choose a number of creatures equal to your CE modifier + your proficiency bonus to be unaffected by your technique.<br />\n<strong>Disorienting Gravity</strong>. Any creature that is lifted upwards by your <em>Antigravity</em> must make a Constitution saving throw. On a failure, they make any attacks at disadvantage and cannot maintain concentration while within your field.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "OuJ0Q9ywU3SspZxe": {
+    "_id": "OuJ0Q9ywU3SspZxe",
+    "type": "save",
+    "name": "Reaction (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "120",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [
+   "concentration"
+  ],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "reaction",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "120",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "OuJ0Q9ywU3SspZxe": 1
+   },
+   "technique": "Antigravity System",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "h8faxx3TSM5qAlx3",
+ "_key": "!items!XJWuaIPUC0PQuyZ1"
+}

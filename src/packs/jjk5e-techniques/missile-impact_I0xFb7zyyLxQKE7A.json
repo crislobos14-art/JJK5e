@@ -1,0 +1,136 @@
+{
+ "_id": "I0xFb7zyyLxQKE7A",
+ "name": "Missile Impact",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/missile-fist.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Missile Fist — Innate Technique (1st level)</em></p><blockquote><p>You can launch a barrage of giant fists against your opponents.</p></blockquote><p>Starting at 1st level, you can spend 1 cursed energy as a bonus action to materialize giant fists of cursed energy. Until the end of your turn, you can replace any of your attacks with a <em>Missile Fist</em>, making a ranged Cursed Energy attack against a creature within 20 ft. A <em>Missile Fist</em> does 1d8 + your CE modifier necrotic damage on a hit. As part of the bonus action you use to activate this technique, you can make one additional <em>Missile Fist</em> attack. If you use <em>Missile Fist</em> against a creature within 5 ft, you can instead make a melee Cursed Energy attack that can use your Strength or Dexterity modifier for the attack and damage rolls.</p>\n<p>The damage of your <em>Missile Fist</em> increases to 2d8 at 6th level, 3d8 at 11th level, and 4d8 at 18th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "euBB1jHwDj5pSPJe": {
+    "_id": "euBB1jHwDj5pSPJe",
+    "type": "attack",
+    "name": "Bonus Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "20",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 8,
+       "bonus": "@mod",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "20",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "euBB1jHwDj5pSPJe": 1
+   },
+   "technique": "Missile Fist",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "coN536PDmNM37MtV",
+ "_key": "!items!I0xFb7zyyLxQKE7A"
+}

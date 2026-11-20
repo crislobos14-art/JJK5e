@@ -1,0 +1,96 @@
+{
+ "_id": "2OwxAUf9B8LHPmRf",
+ "name": "Maximum: Hurricane",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/sky-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Thin Ice Breaker</em></p>\n<p>As an action, for 10 Cursed Energy you can spin the space around you forcing all creatures in a 30 foot radius to make a Strength saving throw or be launched 1000 feet into the air as the space rebounds upwards.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Thin Ice Breaker",
+  "activities": {
+   "qoGbPh8r9dEtutfO": {
+    "_id": "qoGbPh8r9dEtutfO",
+    "type": "save",
+    "name": "Action (10 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "30",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "str"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "qoGbPh8r9dEtutfO": 10
+   },
+   "prereq": {
+    "features": [
+     [
+      "Thin Ice Breaker"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "CIlfZOL4m5ZkufHa",
+ "sort": 300,
+ "_key": "!items!2OwxAUf9B8LHPmRf"
+}

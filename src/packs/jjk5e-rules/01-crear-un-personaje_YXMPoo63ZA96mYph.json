@@ -1,0 +1,90 @@
+{
+ "_id": "YXMPoo63ZA96mYph",
+ "name": "01 — Crear un personaje",
+ "folder": "IXMKct7fx9qz8bdj",
+ "sort": 1000,
+ "pages": [
+  {
+   "_id": "pk3f6LkTdeEZapcO",
+   "name": "Preparar un personaje",
+   "type": "text",
+   "sort": 0,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Este suele ser el primer paso en cualquier juego de rol de mesa o de estilo D&amp;D. Usa tu imaginación para pensar qué tipo de personaje quieres ser en este mundo. Procura que encaje con la ambientación, ya que no es una campaña de D&amp;D estándar.</p>\n<p>Piensa en la raza que quieres para tu personaje, su personalidad, sus metas, su historia, sus especialidades, su carrera, su aspecto, sus rasgos y sus relaciones. Cuando tengas decididas todas estas cualidades, sigue los pasos de abajo y apúntalo todo.</p>\n<p>Con una «hoja de personaje» de Wizards of the Coast para la 5.ª edición puedes llevar el control de casi todo esto. Puede que tengas que hacer algunos cambios para ciertas cosas, como llevar la cuenta de tu Expansión de dominio.</p>\n"
+   },
+   "_key": "!journal.pages!YXMPoo63ZA96mYph.pk3f6LkTdeEZapcO"
+  },
+  {
+   "_id": "oN1JQ2KtUaB0MuhK",
+   "name": "1. Elegir tu raza",
+   "type": "text",
+   "sort": 1000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Las razas en el mundo de Jujutsu Kaisen son bastante limitadas: casi todo se reduce a espíritus malditos y humanos. Elegir tu raza puede ser bastante importante para describir el aspecto y las capacidades de tu personaje, y a veces también para definir sus metas. Los humanos son, con diferencia, la raza más común que encontrarás al explorar el planeta; las maldiciones, en cambio, son peculiares, tienen todas las formas y tamaños y se limitan sobre todo a Japón, aunque rara vez aparecen fuera. Encontrarás más información sobre estas razas en el capítulo 2.</p>\n"
+   },
+   "_key": "!journal.pages!YXMPoo63ZA96mYph.oN1JQ2KtUaB0MuhK"
+  },
+  {
+   "_id": "L7r9Tyb0iaqJEvHi",
+   "name": "2. Elegir tu clase",
+   "type": "text",
+   "sort": 2000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Cada personaje debería especializarse en un campo mientras exorciza espíritus malditos. La clase determina tus talentos y habilidades principales, y permite que tu personaje pula y haga crecer sus capacidades a lo largo de la aventura. Por ejemplo, un luchador puede centrarse sobre todo en el combate, mientras que un estratega puede ser útil fuera del combate realizando tareas concretas que benefician al grupo, como levantar cortinas. Aunque es importante tener un personaje útil en todo, a veces no viene mal uno que sea extremadamente bueno en una sola cosa, siempre que ayude al grupo y sea divertido de jugar. Un grupo equilibrado hace que el viaje sea mucho más disfrutable a largo plazo.<br />\nDedica un tiempo a decidir qué papel quieres que tenga tu personaje en la unidad. Quizá puedas hablarlo con el resto del grupo para ver qué funciona mejor para todos. Pero asegúrate de elegir algo con lo que te vayas a divertir y que te guste. Cuando tengas una idea general de tu clase, elige entre las clases del capítulo 3.</p>\n"
+   },
+   "_key": "!journal.pages!YXMPoo63ZA96mYph.L7r9Tyb0iaqJEvHi"
+  },
+  {
+   "_id": "hy1bxYYVGguTXZvu",
+   "name": "3. Describir a tu personaje",
+   "type": "text",
+   "sort": 3000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Primero, con suerte ya habrás decidido un nombre para tu personaje. Si no, intenta pensar en algo que te guste cómo suena. Si no se te ocurre nada, puedes buscar generadores de nombres de D&amp;D en internet. Después, empieza a desarrollar en tu cabeza su personalidad y su aspecto.</p>\n<p>Cuando tengas un concepto en mente, empieza a escribir y ordenar estas ideas en tu hoja de personaje. Intenta encontrar el alineamiento que mejor encaje con él y con su moral. Luego piensa en algunos rasgos de personalidad que lo definan. Cuando los anotes en la hoja, pasa a sus ideales, vínculos y defectos. Te servirán de guía para interpretar y tomar decisiones con tu personaje.</p>\n<p>Ahora decide el trasfondo de tu personaje. Tu trasfondo te da herramientas y conocimientos obtenidos de cómo has vivido antes del comienzo de la campaña. Afecta a cómo te tratan quienes te reconocen, a cómo te trata el público general y a cuál es o fue tu ocupación. El DM puede darte trasfondos personalizados para esta aventura, pero puedes elegir libremente entre los del capítulo 4.</p>\n"
+   },
+   "_key": "!journal.pages!YXMPoo63ZA96mYph.hy1bxYYVGguTXZvu"
+  },
+  {
+   "_id": "T06fqqn7qqDYOZBA",
+   "name": "Nivel 1 y más allá",
+   "type": "text",
+   "sort": 4000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Al explorar el mundo y abrirte paso entre distintas fuerzas, tus personajes desarrollarán nuevas estrategias y se harán más fuertes con el tiempo. Cada vez que se produce un avance importante, ya sea por alcanzar cierta cantidad de puntos de experiencia o por llegar a un hito de la historia, ganas un nivel de personaje.</p>\n<p>Por ejemplo, si empiezas en nivel 1 con 0 puntos de experiencia y durante una sesión ganas experiencia suficiente para llegar al nivel 2, lo anotas en tu hoja de personaje y mejoras tus estadísticas durante tu siguiente descanso largo. Además, tu DM puede usar un sistema de hitos y darte un nivel al llegar a una nueva zona o isla, completar un objetivo importante u obtener un objeto o tesoro clave.</p>\n"
+   },
+   "_key": "!journal.pages!YXMPoo63ZA96mYph.T06fqqn7qqDYOZBA"
+  }
+ ],
+ "flags": {
+  "jjk5e": {
+   "lang": "es",
+   "source": "4AFNPHgkIDgdX7ta"
+  }
+ },
+ "_key": "!journal!YXMPoo63ZA96mYph"
+}

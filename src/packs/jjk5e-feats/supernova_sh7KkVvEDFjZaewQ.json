@@ -1,0 +1,133 @@
+{
+ "_id": "sh7KkVvEDFjZaewQ",
+ "name": "Supernova",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/blood-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Piercing Blood</em></p>\n<p>You can create small orbs of condensed blood that explode like a buckshot. As an action, you condense your <em>Piercing Blood</em> into a tiny orb of blood in an unoccupied space that you can see within 30 feet, which stays there for a maximum of 1 minute before exploding. You can create as many orbs as your proficiency bonus in an action with each having its own cost, spending 5 CE and 5 HP for each, and can choose for them to explode immediately upon creation or manually as a reaction to a creature entering the range of explosion.<br />\n The orb then explodes, forcing every creature within 10 feet of it to make a Dexterity saving throw for each orb. On a failure, the target takes 8d8 piercing damage and is knocked prone. On a success, they take half as much damage and aren't knocked prone.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Piercing Blood",
+  "activities": {
+   "wFXXw8tjAvu2ji9m": {
+    "_id": "wFXXw8tjAvu2ji9m",
+    "type": "save",
+    "name": "Reaction (5 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "10",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 8,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "piercing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "GDRl48tIuZRciBlF",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "wFXXw8tjAvu2ji9m": 5
+   },
+   "prereq": {
+    "features": [
+     [
+      "Piercing Blood"
+     ]
+    ]
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "GDRl48tIuZRciBlF",
+   "name": "Prone (Supernova)",
+   "img": "modules/jjk5e/icons/techniques/blood-manipulation.svg",
+   "statuses": [
+    "prone"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!sh7KkVvEDFjZaewQ.GDRl48tIuZRciBlF"
+  }
+ ],
+ "folder": "nBcvifZT3OePW2PN",
+ "sort": 500,
+ "_key": "!items!sh7KkVvEDFjZaewQ"
+}

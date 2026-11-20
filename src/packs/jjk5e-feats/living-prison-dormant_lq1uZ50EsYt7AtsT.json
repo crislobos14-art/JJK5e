@@ -1,0 +1,133 @@
+{
+ "_id": "lq1uZ50EsYt7AtsT",
+ "name": "Living Prison (Dormant)",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/trait.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Creeps and Curses V.3.1</em></p><p><em>Special Trait. Please note that these abilities are incredibly powerful even for the JJK system and should only be used for purposely high power games. Of course, certain traits are stronger than others. Stages of these traits have been added to grow with characters with higher levels of play. Dormant, Stirring, and Awakened. Though a DM can decide to change the leveling format or instead give them out at appropriate character moments.</em></p><p><em>You were born with a supremely powerful body for any number of reasons, such as being artificially created by a powerful sorcerer for a greater purpose.</em></p>\n<p><strong>Oddly Sturdy.</strong> Your hit point maximum increases by 2 times your level and increases by 2 every time you gain a level. Your walking speed increases to 40 ft unless it is higher already.</p>\n<p><strong>Strong Body.</strong> Your Strength, Dexterity, and Constitution scores increase by 2 and your maximum for those scores is 22. Additionally, you have resistance to poison damage and advantage on saves against the poisoned condition.</p>\n<p><strong>Prison.</strong> You reduce any DCs you make to consume or absorb cursed objects by your proficiency bonus + your Constitution modifier. If you fail the save, you are able to spit it out harmlessly.</p>\n<p><em>Special Trait tiers stack: keep the earlier tiers on the sheet. When a benefit says it replaces an earlier one, the module's effects already account for it.</em></p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTrait"
+  },
+  "requirements": "Living Prison, level 1",
+  "activities": {
+   "cMNNNJM3Ilm2PwPF": {
+    "_id": "cMNNNJM3Ilm2PwPF",
+    "type": "utility",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": 1,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "level": 1
+   }
+  }
+ },
+ "folder": "WpMvDh8sKw65orZ9",
+ "effects": [
+  {
+   "_id": "dYEJLMSKrIT0Ytrb",
+   "name": "Living Prison (Dormant)",
+   "img": "modules/jjk5e/icons/trait.svg",
+   "changes": [
+    {
+     "key": "system.attributes.hp.bonuses.level",
+     "mode": 2,
+     "value": "2",
+     "priority": null
+    },
+    {
+     "key": "system.attributes.movement.walk",
+     "mode": 4,
+     "value": "40",
+     "priority": null
+    },
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "poison",
+     "priority": null
+    },
+    {
+     "key": "system.abilities.str.value",
+     "mode": 2,
+     "value": "2",
+     "priority": null
+    },
+    {
+     "key": "system.abilities.dex.value",
+     "mode": 2,
+     "value": "2",
+     "priority": null
+    },
+    {
+     "key": "system.abilities.con.value",
+     "mode": 2,
+     "value": "2",
+     "priority": null
+    },
+    {
+     "key": "system.abilities.str.max",
+     "mode": 4,
+     "value": "22",
+     "priority": null
+    },
+    {
+     "key": "system.abilities.dex.max",
+     "mode": 4,
+     "value": "22",
+     "priority": null
+    },
+    {
+     "key": "system.abilities.con.max",
+     "mode": 4,
+     "value": "22",
+     "priority": null
+    }
+   ],
+   "disabled": false,
+   "transfer": true,
+   "duration": {},
+   "description": "",
+   "flags": {},
+   "_key": "!items.effects!lq1uZ50EsYt7AtsT.dYEJLMSKrIT0Ytrb"
+  }
+ ],
+ "sort": 1000,
+ "_key": "!items!lq1uZ50EsYt7AtsT"
+}

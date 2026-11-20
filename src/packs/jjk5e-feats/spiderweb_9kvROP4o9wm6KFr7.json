@@ -1,0 +1,42 @@
+{
+ "_id": "9kvROP4o9wm6KFr7",
+ "name": "Spiderweb",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/shrine.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Cleave</em></p>\n<p>Your <em>Cleave</em> has grown more versatile. For 1 extra Cursed energy you can touch an object or structure and make <em>Cleave</em> into a 30 ft cone which only damages objects and structures in contact with each other. This deals critical damage, creating difficult terrain and potentially destroying terrain and footholds causing creatures to fall. If this does not cause a creature within range to fall, the creature must make a Dexterity saving throw, falling prone on a failed save.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Cleave",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Cleave"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "2XiAKaCJUnpH62hA",
+ "sort": 200,
+ "_key": "!items!9kvROP4o9wm6KFr7"
+}

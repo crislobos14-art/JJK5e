@@ -1,0 +1,70 @@
+{
+ "_id": "DR7dsOsBx62ayUmW",
+ "name": "One In A Billion",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: 20+ Cursed Energy score, 15th level, Breakthrough</em></p>\n<p>Your cursed energy manipulation is some of the best that the world has ever seen, it must take at least a couple of centuries for another person such as yourself to be born once again. You gain the following benefits:</p>\n<ul>\n<li>\n<p>If a feature deals damage you can reroll all 1s and 2s on damage dice. Once per long rest you can deal maximum damage on a technique you use. This does not include ordinary attacks from you or shikigami.  </p>\n</li>\n<li>\n<p>Once per long rest, you can use one feature that requires Cursed Energy. The cost of that feature is lowered to 0 for that use, if a feature depends on how much Cursed Energy you spend, it counts as if you used the maximum required. For example, Reverse Cursed Technique would heal 50 with a modifier of +5.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkCursedEnergy"
+  },
+  "requirements": "20+ Cursed Energy score, 15th level, Breakthrough",
+  "uses": {
+   "max": "1",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
+    }
+   ]
+  },
+  "activities": {
+   "vBXGeu47k2YfldAn": {
+    "_id": "vBXGeu47k2YfldAn",
+    "type": "utility",
+    "name": "Use",
+    "activation": {
+     "type": "special",
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1"
+      }
+     ]
+    }
+   }
+  },
+  "prerequisites": {
+   "level": 15,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "ceScore": 20,
+    "level": 15,
+    "breakthroughs": 1
+   }
+  }
+ },
+ "folder": "58RlNbYPWxO2Xi4E",
+ "sort": 1300,
+ "_key": "!items!DR7dsOsBx62ayUmW"
+}

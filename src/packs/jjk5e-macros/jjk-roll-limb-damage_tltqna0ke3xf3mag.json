@@ -1,0 +1,13 @@
+{
+ "_id": "tltqna0ke3xf3mag",
+ "name": "JJK: Roll Limb Damage",
+ "type": "script",
+ "img": "modules/jjk5e/icons/limb.svg",
+ "scope": "global",
+ "command": "game.modules.get(\"jjk5e\").api.rollLimb();",
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": null,
+ "_key": "!macros!tltqna0ke3xf3mag"
+}

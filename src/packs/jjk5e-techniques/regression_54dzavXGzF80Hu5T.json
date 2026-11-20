@@ -1,0 +1,108 @@
+{
+ "_id": "54dzavXGzF80Hu5T",
+ "name": "Regression",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/retrograde.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Retrograde — Innate Technique (3rd level)</em></p><p>At 3rd level, you can spend 3 cursed energy as a bonus action. You physically regress to the previous point you were standing at the start of your turn, tracing the path you moved. This completely reverses your movement and actions even defying the laws of physics, such as jumping up backwards or running on nothing if the ground or platform was removed. Any opportunity attacks for this reversed movement are made at disadvantage. </p>\n<p>At 6th level, you can spend 3 additional cursed energy to continue regression to the point you started your previous turn.</p>\n<p>If your movement is blocked, you can force your way through. If your path is blocked by a creature, they must make a Dexterity save or take your proficiency bonus in d8s of bludgeoning damage and are pushed to a different space out of your path if their size is Large or smaller (your choice). If your path is blocked by a structure or object that is not fixed in place, you can make a Cursed Energy check to move it (DC 10 + 3 for every size category above Medium). On a success, you move it out of the way. Otherwise you take 5 bludgeoning damage and the structure or object takes 10 times your proficiency bonus in bludgeoning damage. If this destroys the object, you continue moving, otherwise you stop moving.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "3dGdrp5GCuYHtWE4": {
+    "_id": "3dGdrp5GCuYHtWE4",
+    "type": "save",
+    "name": "Bonus Action (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "3dGdrp5GCuYHtWE4": 3
+   },
+   "technique": "Retrograde",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "6YaSgqVRe4IqL8er",
+ "_key": "!items!54dzavXGzF80Hu5T"
+}

@@ -1,0 +1,58 @@
+{
+ "_id": "idRH9Fu06o5H2f6S",
+ "name": "Eternal Peach",
+ "type": "consumable",
+ "img": "icons/svg/explosion.svg",
+ "folder": "QgDaE1oZxMUlsCnN",
+ "system": {
+  "description": {
+   "value": "<p><em>Potion, Special Grade</em></p><p>This impossibly rare peach allows the consumer to permanently increase their Cursed Energy. If the fruit has ripened for 3 years, your Cursed Energy maximum increases by 2. After 6 years, it increases by 3. After 9 years, eating this peach increases your Cursed energy by 5.</p>"
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "rarity": "legendary",
+  "quantity": 1,
+  "attunement": "",
+  "type": {
+   "value": "potion",
+   "subtype": ""
+  },
+  "uses": {
+   "max": "1",
+   "spent": 0,
+   "autoDestroy": true,
+   "recovery": []
+  },
+  "activities": {
+   "6VbBH1TF2733wp2l": {
+    "_id": "6VbBH1TF2733wp2l",
+    "type": "utility",
+    "name": "Consume",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1"
+      }
+     ]
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "Special Grade"
+  }
+ },
+ "_key": "!items!idRH9Fu06o5H2f6S"
+}

@@ -1,0 +1,74 @@
+{
+ "_id": "F4uIuhtPqAIOpQvx",
+ "name": "Cursed Strike",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/ce.svg",
+ "folder": "ma0AyXgs6GhcKVCb",
+ "system": {
+  "description": {
+   "value": "<p>On a hit with an unarmed strike or melee weapon attack, you can spend Cursed Energy up to proficiency bonus to deal an additional d6 necrotic damage per CE.  </p><p><em>Use it after a hit; choose how many CE to spend in the scaling field (1 CE = 1d6 necrotic). CE is deducted automatically.</em></p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Energy",
+  "activities": {
+   "TcDPZiFJlMAb6Qcq": {
+    "_id": "TcDPZiFJlMAb6Qcq",
+    "type": "damage",
+    "name": "Cursed Strike (1+ CE)",
+    "activation": {
+     "type": "special",
+     "condition": "On a hit with an unarmed strike or melee weapon"
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "@prof"
+     }
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "mode": "whole",
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "TcDPZiFJlMAb6Qcq": 1
+   },
+   "ceSteps": {
+    "TcDPZiFJlMAb6Qcq": 1
+   },
+   "rawCE": true
+  }
+ },
+ "_key": "!items!F4uIuhtPqAIOpQvx"
+}

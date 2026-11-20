@@ -1,0 +1,160 @@
+{
+ "_id": "3mJStu8usYRZi2wT",
+ "name": "Maximum: Divine Storm Sovereign",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/disaster-storms.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Disaster Storms — Innate Technique (11th level)</em></p><p>At 11th level, you have learned to greatly amplify your storms. As an action for 10 cursed energy, you fill a 100 ft diameter sphere within 300 ft that you can see with a thick storm for 1 minute. The sphere is considered difficult terrain and heavily obscured to all creatures other than you. In addition to the effects of <em>Storm Creation</em>, all creatures other than you that start their turn within range take 3d10 lightning damage. When you take the Attack action, you can spend 2 cursed energy to replace one of your attacks with a use of <em>Lightning</em>, targeting a creature within the storm sphere with a ranged cursed energy attack even if you can’t see them.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "h5IE1UtNwUcdaIdN": {
+    "_id": "h5IE1UtNwUcdaIdN",
+    "type": "damage",
+    "name": "Action (10 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "300",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 3,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "lightning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   },
+   "MnsCHVI8HS7kbXrd": {
+    "_id": "MnsCHVI8HS7kbXrd",
+    "type": "utility",
+    "name": "Action (2 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "value": "300",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "h5IE1UtNwUcdaIdN": 10,
+    "MnsCHVI8HS7kbXrd": 2
+   },
+   "technique": "Disaster Storms",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "5WRl9NqkIbDZzpyp",
+ "_key": "!items!3mJStu8usYRZi2wT"
+}

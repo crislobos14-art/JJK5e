@@ -1,0 +1,103 @@
+{
+ "_id": "PHwPWELj9jl92FHN",
+ "name": "Typhoon",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/disaster-tides.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Water Defensive Ring</em></p>\n<p>The scale and power of the water ring surrounding you has increased. For an extra 2 cursed energy, it also creates a 20 ft radius sphere of whirling storm that is centered on and follows you. Each creature other than you in the sphere when it appears or that ends its turn there must succeed on a Strength saving throw or take 2d6 bludgeoning damage. The sphere’s space is difficult terrain.<br />\n Until the technique ends, you can use a bonus action to cause a bolt of lightning to leap from you toward a creature within 60 feet, making a cursed energy attack. You have advantage on the attack if the target is in the sphere. On a hit, the target takes 4d6 lightning damage. Creatures within 30 feet of the sphere have disadvantage on Wisdom (Perception) checks to hear.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Water Defensive Ring",
+  "activities": {
+   "pLtu13s5ZPKDJYTu": {
+    "_id": "pLtu13s5ZPKDJYTu",
+    "type": "attack",
+    "name": "Bonus Action",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "60",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": 4,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "lightning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Water Defensive Ring"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "QUxVHS82lupOHPQu",
+ "sort": 300,
+ "_key": "!items!PHwPWELj9jl92FHN"
+}

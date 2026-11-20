@@ -1,0 +1,664 @@
+{
+ "_id": "WnMpN5dDtG00cBTw",
+ "name": "Mourning Tiger",
+ "type": "npc",
+ "img": "modules/jjk5e/icons/shikigami/mourning-tiger.svg",
+ "system": {
+  "abilities": {
+   "str": {
+    "value": 16,
+    "proficient": 0
+   },
+   "dex": {
+    "value": 20,
+    "proficient": 1
+   },
+   "con": {
+    "value": 16,
+    "proficient": 0
+   },
+   "int": {
+    "value": 3,
+    "proficient": 0
+   },
+   "wis": {
+    "value": 15,
+    "proficient": 0
+   },
+   "cha": {
+    "value": 8,
+    "proficient": 0
+   }
+  },
+  "attributes": {
+   "ac": {
+    "calc": "flat",
+    "flat": 15
+   },
+   "hp": {
+    "value": 96,
+    "max": 96,
+    "formula": ""
+   },
+   "movement": {
+    "walk": 40,
+    "climb": 25,
+    "units": "ft",
+    "hover": false
+   },
+   "senses": {
+    "darkvision": 60,
+    "units": "ft",
+    "special": ""
+   }
+  },
+  "details": {
+   "cr": 5,
+   "alignment": "Unaligned",
+   "type": {
+    "value": "monstrosity",
+    "subtype": "",
+    "swarm": "",
+    "custom": "Shikigami"
+   },
+   "biography": {
+    "value": "<p><em>Mourning Tiger</em> — Ten Shadows shikigami. Summon cost: 7 Cursed Energy. AC and hit points scale with the summoner's proficiency bonus when summoned through the Ten Shadows features.</p>"
+   }
+  },
+  "traits": {
+   "size": "lg",
+   "dr": {
+    "value": []
+   },
+   "ci": {
+    "value": []
+   },
+   "languages": {
+    "value": []
+   }
+  },
+  "skills": {
+   "acr": {
+    "value": 1,
+    "ability": "dex"
+   },
+   "prc": {
+    "value": 2,
+    "ability": "wis"
+   },
+   "ste": {
+    "value": 2,
+    "ability": "dex"
+   }
+  },
+  "resources": {
+   "legact": {
+    "max": 0,
+    "spent": 0
+   },
+   "legres": {
+    "max": 0,
+    "spent": 0
+   }
+  }
+ },
+ "items": [
+  {
+   "_id": "XukPExMKDhRdfJHp",
+   "name": "Keen Hearing and Smell",
+   "type": "feat",
+   "img": "icons/svg/aura.svg",
+   "system": {
+    "description": {
+     "value": "<p>The Mourning Tiger has advantage on Wisdom (Perception) checks that rely on hearing or smell.</p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Ten Shadows"
+    },
+    "activities": {},
+    "type": {
+     "value": "monster",
+     "subtype": ""
+    },
+    "requirements": "",
+    "properties": [],
+    "uses": {
+     "max": "",
+     "recovery": [],
+     "spent": 0
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!WnMpN5dDtG00cBTw.XukPExMKDhRdfJHp"
+  },
+  {
+   "_id": "xudujCtvuwKbmsOr",
+   "name": "Pounce",
+   "type": "feat",
+   "img": "icons/svg/aura.svg",
+   "system": {
+    "description": {
+     "value": "<p>If the Mourning Tiger moves at least 20 ft straight toward a target and then hits it with a claw attack on the same turn, the target must succeed on a DC 16 Strength saving throw or be knocked prone. If the target is prone, the Mourning Tiger can make a bite attack against it as a bonus action.</p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Ten Shadows"
+    },
+    "activities": {},
+    "type": {
+     "value": "monster",
+     "subtype": ""
+    },
+    "requirements": "",
+    "properties": [],
+    "uses": {
+     "max": "",
+     "recovery": [],
+     "spent": 0
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!WnMpN5dDtG00cBTw.xudujCtvuwKbmsOr"
+  },
+  {
+   "_id": "AhVbs9pDITKmxdPe",
+   "name": "Incorporeal",
+   "type": "feat",
+   "img": "icons/svg/aura.svg",
+   "system": {
+    "description": {
+     "value": "<p>The Mourning Tiger can move through other creatures and objects as if they were difficult terrain. It takes 5 (2d4) force damage if it ends its turn inside an object.</p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Ten Shadows"
+    },
+    "activities": {},
+    "type": {
+     "value": "monster",
+     "subtype": ""
+    },
+    "requirements": "",
+    "properties": [],
+    "uses": {
+     "max": "",
+     "recovery": [],
+     "spent": 0
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!WnMpN5dDtG00cBTw.AhVbs9pDITKmxdPe"
+  },
+  {
+   "_id": "CGbvQmWz9iFpSNKh",
+   "name": "Multiattack",
+   "type": "feat",
+   "img": "icons/svg/aura.svg",
+   "system": {
+    "description": {
+     "value": "<p>The Mourning Tiger makes one attack with its Claw and one attack with its Bite in any order.</p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Ten Shadows"
+    },
+    "activities": {
+     "CUsnMfeloutt82Uc": {
+      "_id": "CUsnMfeloutt82Uc",
+      "type": "utility",
+      "name": "Multiattack",
+      "sort": 0,
+      "activation": {
+       "type": "action",
+       "value": 1,
+       "condition": "",
+       "override": false
+      },
+      "consumption": {
+       "targets": [],
+       "scaling": {
+        "allowed": false
+       },
+       "spellSlot": false
+      },
+      "duration": {
+       "units": "inst",
+       "concentration": false,
+       "override": false
+      },
+      "range": {
+       "override": false
+      },
+      "target": {
+       "override": false,
+       "prompt": true
+      }
+     }
+    },
+    "type": {
+     "value": "monster",
+     "subtype": ""
+    },
+    "requirements": "",
+    "properties": [],
+    "uses": {
+     "max": "",
+     "recovery": [],
+     "spent": 0
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!WnMpN5dDtG00cBTw.CGbvQmWz9iFpSNKh"
+  },
+  {
+   "_id": "uwsqk2944aXg27s8",
+   "name": "Claw",
+   "type": "weapon",
+   "img": "icons/svg/sword.svg",
+   "system": {
+    "description": {
+     "value": "<p></p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Ten Shadows"
+    },
+    "activities": {
+     "tWeP3HWE4F1Zockq": {
+      "_id": "tWeP3HWE4F1Zockq",
+      "type": "attack",
+      "name": "",
+      "sort": 0,
+      "activation": {
+       "type": "action",
+       "value": 1,
+       "condition": "",
+       "override": false
+      },
+      "consumption": {
+       "targets": [],
+       "scaling": {
+        "allowed": false
+       },
+       "spellSlot": false
+      },
+      "duration": {
+       "units": "inst",
+       "concentration": false,
+       "override": false
+      },
+      "range": {
+       "override": false
+      },
+      "target": {
+       "override": false,
+       "prompt": true,
+       "affects": {
+        "count": "1",
+        "type": "creature"
+       }
+      },
+      "attack": {
+       "ability": "dex",
+       "bonus": "",
+       "critical": {
+        "threshold": null
+       },
+       "flat": false,
+       "type": {
+        "value": "melee",
+        "classification": "weapon"
+       }
+      },
+      "damage": {
+       "critical": {
+        "bonus": ""
+       },
+       "includeBase": true,
+       "parts": []
+      }
+     }
+    },
+    "type": {
+     "value": "natural",
+     "baseItem": ""
+    },
+    "ability": "dex",
+    "proficient": 1,
+    "equipped": true,
+    "damage": {
+     "base": {
+      "number": 1,
+      "denomination": 8,
+      "bonus": "",
+      "types": [
+       "piercing"
+      ],
+      "custom": {
+       "enabled": false,
+       "formula": ""
+      },
+      "scaling": {
+       "mode": "",
+       "number": null,
+       "formula": ""
+      }
+     }
+    },
+    "range": {
+     "reach": 5,
+     "value": null,
+     "long": null,
+     "units": "ft"
+    },
+    "magicalBonus": null,
+    "properties": [],
+    "uses": {
+     "max": "",
+     "recovery": [],
+     "spent": 0
+    },
+    "quantity": 1,
+    "weight": {
+     "value": 0,
+     "units": "lb"
+    },
+    "price": {
+     "value": 0,
+     "denomination": "gp"
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!WnMpN5dDtG00cBTw.uwsqk2944aXg27s8"
+  },
+  {
+   "_id": "5Irc5PxslN8Ngypp",
+   "name": "Bite",
+   "type": "weapon",
+   "img": "icons/svg/sword.svg",
+   "system": {
+    "description": {
+     "value": "<p></p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Ten Shadows"
+    },
+    "activities": {
+     "6OBpyZE2M49ha7qH": {
+      "_id": "6OBpyZE2M49ha7qH",
+      "type": "attack",
+      "name": "",
+      "sort": 0,
+      "activation": {
+       "type": "action",
+       "value": 1,
+       "condition": "",
+       "override": false
+      },
+      "consumption": {
+       "targets": [],
+       "scaling": {
+        "allowed": false
+       },
+       "spellSlot": false
+      },
+      "duration": {
+       "units": "inst",
+       "concentration": false,
+       "override": false
+      },
+      "range": {
+       "override": false
+      },
+      "target": {
+       "override": false,
+       "prompt": true,
+       "affects": {
+        "count": "1",
+        "type": "creature"
+       }
+      },
+      "attack": {
+       "ability": "dex",
+       "bonus": "",
+       "critical": {
+        "threshold": null
+       },
+       "flat": false,
+       "type": {
+        "value": "melee",
+        "classification": "weapon"
+       }
+      },
+      "damage": {
+       "critical": {
+        "bonus": ""
+       },
+       "includeBase": true,
+       "parts": []
+      }
+     }
+    },
+    "type": {
+     "value": "natural",
+     "baseItem": ""
+    },
+    "ability": "dex",
+    "proficient": 1,
+    "equipped": true,
+    "damage": {
+     "base": {
+      "number": 1,
+      "denomination": 10,
+      "bonus": "",
+      "types": [
+       "piercing"
+      ],
+      "custom": {
+       "enabled": false,
+       "formula": ""
+      },
+      "scaling": {
+       "mode": "",
+       "number": null,
+       "formula": ""
+      }
+     }
+    },
+    "range": {
+     "reach": 5,
+     "value": null,
+     "long": null,
+     "units": "ft"
+    },
+    "magicalBonus": null,
+    "properties": [],
+    "uses": {
+     "max": "",
+     "recovery": [],
+     "spent": 0
+    },
+    "quantity": 1,
+    "weight": {
+     "value": 0,
+     "units": "lb"
+    },
+    "price": {
+     "value": 0,
+     "denomination": "gp"
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!WnMpN5dDtG00cBTw.5Irc5PxslN8Ngypp"
+  },
+  {
+   "_id": "32tJkUkBkrRSFEXi",
+   "name": "Mourning Roar (Recharge 6)",
+   "type": "feat",
+   "img": "icons/svg/aura.svg",
+   "system": {
+    "description": {
+     "value": "<p>All creatures within 30 feet must make a Cursed Energy saving throw. On a failed save, a creature takes 5d6 psychic damage and is paralyzed until the end of their next turn. On a success, the creature takes half as much damage and is not paralyzed.</p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Ten Shadows"
+    },
+    "activities": {
+     "ylXxkZFYNYBcG7gj": {
+      "_id": "ylXxkZFYNYBcG7gj",
+      "type": "save",
+      "name": "",
+      "sort": 0,
+      "activation": {
+       "type": "action",
+       "value": 1,
+       "condition": "",
+       "override": false
+      },
+      "consumption": {
+       "targets": [
+        {
+         "type": "itemUses",
+         "target": "",
+         "value": "1",
+         "scaling": {}
+        }
+       ],
+       "scaling": {
+        "allowed": false
+       },
+       "spellSlot": false
+      },
+      "duration": {
+       "units": "inst",
+       "concentration": false,
+       "override": false
+      },
+      "range": {
+       "units": "self",
+       "override": false
+      },
+      "target": {
+       "override": false,
+       "prompt": true,
+       "template": {
+        "type": "radius",
+        "size": "30",
+        "units": "ft",
+        "count": "1",
+        "contiguous": false
+       },
+       "affects": {
+        "type": "creature",
+        "choice": false
+       }
+      },
+      "save": {
+       "ability": [
+        "cha"
+       ],
+       "dc": {
+        "calculation": "",
+        "formula": "16"
+       }
+      },
+      "damage": {
+       "onSave": "half",
+       "parts": [
+        {
+         "number": 5,
+         "denomination": 6,
+         "bonus": "",
+         "types": [
+          "psychic"
+         ],
+         "custom": {
+          "enabled": false,
+          "formula": ""
+         },
+         "scaling": {
+          "mode": "",
+          "number": null,
+          "formula": ""
+         }
+        }
+       ]
+      }
+     }
+    },
+    "type": {
+     "value": "monster",
+     "subtype": ""
+    },
+    "requirements": "",
+    "properties": [],
+    "uses": {
+     "max": "1",
+     "spent": 0,
+     "recovery": [
+      {
+       "period": "recharge",
+       "formula": "6",
+       "type": "recoverAll"
+      }
+     ]
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!WnMpN5dDtG00cBTw.32tJkUkBkrRSFEXi"
+  }
+ ],
+ "effects": [],
+ "prototypeToken": {
+  "name": "Mourning Tiger",
+  "actorLink": false,
+  "disposition": 1,
+  "width": 2,
+  "height": 2,
+  "texture": {
+   "src": "modules/jjk5e/icons/shikigami/mourning-tiger.svg"
+  },
+  "displayName": 20,
+  "displayBars": 20,
+  "bar1": {
+   "attribute": "attributes.hp"
+  },
+  "sight": {
+   "enabled": true
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "shikigami": true,
+   "ceCost": 7,
+   "hpPerProf": 4,
+   "dmgProf": false
+  }
+ },
+ "folder": null,
+ "_key": "!actors!WnMpN5dDtG00cBTw"
+}

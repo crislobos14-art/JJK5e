@@ -1,0 +1,57 @@
+{
+ "_id": "a5C4w1Z7bLj6KZOI",
+ "name": "Cursed Corpse Mutation",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/cursed-corpse-creation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Corpse Creation — Innate Technique (6th level)</em></p><p>Starting at 6th level, your strong cursed energy has caused mutations to form. When you complete a cursed corpse, you roll a d20. On a roll of 20, your cursed corpse gains a random mutation.</p>\n<h2><strong>D12 Roll</strong>   | <strong>Mutation</strong>         | <strong>Effect</strong></h2>\n<p>1          | Quick Movement   | Gains +20 ft bonus to walking speed.<br />\n2          | Adaptive Movement| Gains 30 ft climb or swim speed.<br />\n3          | Skills           | Prof in 2 skills or 1 saving throw.<br />\n4          | Hardened Frame   | Gains +3 bonus to AC.<br />\n5          | Weapon Usage     | Can wield weapons proficiently.<br />\n6          | Toughness        | Max HP increases by 2 x your level.<br />\n7          | Energy Capacity  | One core can hold +30 additional CE.<br />\n8          | Energy Usage     | Can use Basic CE Manipulation.<br />\n9          | Improved Ability | Gains +4 to an Ability and Max.<br />\n10         | Autonomy         | Doesn’t require commands (sentient).<br />\n11         | Core Capacity    | Can hold 1d4 additional cores.<br />\n12         | Self Generation  | Regains 1 CE per hour.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Corpse Creation 6"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Cursed Corpse Creation",
+   "level": 6
+  }
+ },
+ "folder": "qwzwYySzpsiw4XHW",
+ "effects": [
+  {
+   "_id": "xWGgnGFOkKKmqVZl",
+   "name": "Cursed Corpse Mutation (toggle)",
+   "img": "modules/jjk5e/icons/techniques/cursed-corpse-creation.svg",
+   "changes": [
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+3",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!a5C4w1Z7bLj6KZOI.xWGgnGFOkKKmqVZl"
+  }
+ ],
+ "_key": "!items!a5C4w1Z7bLj6KZOI"
+}

@@ -1,0 +1,72 @@
+{
+ "_id": "UDxxuxWPamlQMi8e",
+ "name": "Gauntlets of Oni Power",
+ "type": "weapon",
+ "img": "icons/svg/sword.svg",
+ "folder": "pB7mLAOAtbyDQKeT",
+ "system": {
+  "description": {
+   "value": "<p><em>Weapon(Gauntlet), Grade 3(Requires Attunement)</em></p><p>These gauntlets are imbued with the accumulated fear of the mythical Oni. Your Strength is 17 while you wear these gauntlets. They have no effect on you if your Strength is 17 or higher without them.</p>"
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "martialM",
+   "baseItem": ""
+  },
+  "damage": {
+   "base": {
+    "number": 1,
+    "denomination": 6,
+    "types": [
+     "bludgeoning"
+    ]
+   }
+  },
+  "range": {
+   "value": 5,
+   "long": null,
+   "units": "ft",
+   "reach": 5
+  },
+  "properties": [
+   "mgc"
+  ],
+  "proficient": null,
+  "quantity": 1,
+  "activities": {
+   "rP8JzQ1DgH81InML": {
+    "_id": "rP8JzQ1DgH81InML",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "melee",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   }
+  },
+  "rarity": "uncommon",
+  "attunement": "required"
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "3rd Grade"
+  }
+ },
+ "_key": "!items!UDxxuxWPamlQMi8e"
+}

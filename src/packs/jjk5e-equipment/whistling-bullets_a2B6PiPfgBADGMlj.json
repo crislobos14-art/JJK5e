@@ -1,0 +1,31 @@
+{
+ "_id": "a2B6PiPfgBADGMlj",
+ "name": "Whistling Bullets",
+ "type": "loot",
+ "img": "icons/svg/explosion.svg",
+ "folder": "pB7mLAOAtbyDQKeT",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Item(Ammunition), Grade 3</em></p><p>Ranged weapon attack rolls made with this ammunition ignore half and three-quarters cover. In addition, attacking at long range doesn’t impose disadvantage on ranged weapon attack rolls made with this ammunition.</p>"
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "rarity": "uncommon",
+  "quantity": 1,
+  "attunement": "",
+  "type": {
+   "value": "gear"
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "3rd Grade"
+  }
+ },
+ "_key": "!items!a2B6PiPfgBADGMlj"
+}

@@ -1,0 +1,127 @@
+{
+ "_id": "36DodZLFS2U6sK5Z",
+ "name": "Glass Box",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/black-box.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Black Box — Cursed Technique Reversal</em></p><p>Your mastery of Reverse Cursed Technique has led to you unlocking your cursed technique reversal. Instead of creating incredibly dense barriers, you create brittle barriers that are easy to break. As an action for 4 CE, you create a 10 ft see-through cube within 30 feet of you for 1 minute. If a Large or smaller creature is within range, they must make a Dexterity saving throw or be trapped within the cube. A creature inside your cube has full cover against attacks outside. The cube has AC equal to your Cursed Energy save minus 5, and hit points equal to twice your proficiency bonus. If reduced to 0 hit points, all creatures within 5 ft must make a Dexterity saving throw as shards explode in every direction. On a failure, creatures take Xd8 slashing damage (your CE modifier + your proficiency bonus) or half as much on a success. Creatures within your cube make this save at disadvantage. You can also use this as a reaction for 6 CE within 10 ft of you.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Black Box",
+  "activities": {
+   "wzFfstEZv4KfN2ty": {
+    "_id": "wzFfstEZv4KfN2ty",
+    "type": "save",
+    "name": "Action (4 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "30",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": []
+    }
+   },
+   "Z6NkFzlwwXNqq4K0": {
+    "_id": "Z6NkFzlwwXNqq4K0",
+    "type": "utility",
+    "name": "Reaction (6 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "10",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "wzFfstEZv4KfN2ty": 4,
+    "Z6NkFzlwwXNqq4K0": 6
+   },
+   "technique": "Black Box",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Black Box"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!36DodZLFS2U6sK5Z"
+}

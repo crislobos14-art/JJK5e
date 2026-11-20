@@ -1,0 +1,72 @@
+{
+ "_id": "hpZzSn15czR4YlSO",
+ "name": "Curse",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/trait-race.svg",
+ "system": {
+  "description": {
+   "value": "<p>When you choose this subrace, choose a race that you hated. You gain a +2 bonus to damage rolls against that race.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "race",
+   "subtype": ""
+  },
+  "requirements": "Cursed Spirit (Vengeful)"
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "MrUJYYzCm8S5kHBr",
+ "effects": [
+  {
+   "_id": "0NjrnWsT6ZMCBVww",
+   "name": "Curse (+2 damage vs hated race)",
+   "img": "modules/jjk5e/icons/trait-race.svg",
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Enable against the race you hate.</p>",
+   "changes": [
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+2",
+     "priority": null
+    },
+    {
+     "key": "system.bonuses.rwak.damage",
+     "mode": 2,
+     "value": "+2",
+     "priority": null
+    },
+    {
+     "key": "system.bonuses.msak.damage",
+     "mode": 2,
+     "value": "+2",
+     "priority": null
+    },
+    {
+     "key": "system.bonuses.rsak.damage",
+     "mode": 2,
+     "value": "+2",
+     "priority": null
+    }
+   ],
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!hpZzSn15czR4YlSO.0NjrnWsT6ZMCBVww"
+  }
+ ],
+ "_key": "!items!hpZzSn15czR4YlSO"
+}

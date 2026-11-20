@@ -1,0 +1,68 @@
+{
+ "_id": "475OcvI8OtwvCqy3",
+ "name": "Communication Puppets",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/puppet-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Lesser Puppet</em></p>\n<p>After one long rest, you create a small puppet that can fit on the palm of your hand. This puppet holds a copy of consciousness when you created it and has enough charge for five minutes. You can have a number equal to your proficiency bonus and anything learned by one is shared to all. These can be activated as a free action or set to activate after a specific trigger.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Lesser Puppet",
+  "activities": {
+   "QYlA5GiB5Oxm1Gkm": {
+    "_id": "QYlA5GiB5Oxm1Gkm",
+    "type": "utility",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Lesser Puppet"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "tHLyqviVXptUEOWk",
+ "sort": 200,
+ "_key": "!items!475OcvI8OtwvCqy3"
+}

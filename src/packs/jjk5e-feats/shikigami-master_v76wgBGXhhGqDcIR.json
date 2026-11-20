@@ -1,0 +1,79 @@
+{
+ "_id": "v76wgBGXhhGqDcIR",
+ "name": "Shikigami Master",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/boon.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Creeps and Curses V.3.1</em></p><p><em>Special Grade Boon. When players reach level 20, they are generally expected to be capable enough to battle Special Grades. A GM can choose to give these players Special Grade Boons as rewards and power-ups to help in the battle against those nasty curses.</em></p><p>You gain ability points equal to your level and can use them to increase any ability score of a shikigami you can summon, even above 20. Additionally, any shikigami you summon have 30 temporary hit points.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkBoon"
+  },
+  "requirements": "Level 20, Must be able to summon shikigami",
+  "activities": {
+   "ZOp1Gk4QdnKLmzzz": {
+    "_id": "ZOp1Gk4QdnKLmzzz",
+    "type": "heal",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "30",
+     "types": [
+      "temphp"
+     ],
+     "custom": {
+      "enabled": false,
+      "formula": ""
+     },
+     "scaling": {
+      "number": 1
+     }
+    }
+   }
+  },
+  "prerequisites": {
+   "level": 20,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "level": 20
+   }
+  }
+ },
+ "folder": "BuykVM3mAwDd71E2",
+ "sort": 200,
+ "_key": "!items!v76wgBGXhhGqDcIR"
+}

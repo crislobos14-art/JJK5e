@@ -1,0 +1,65 @@
+{
+ "_id": "snGqzHCmJ7dNIy01",
+ "name": "Sharpshooter",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: N/A</em></p>\n<p>You have mastered ranged weapons and can make shots that others find impossible. You gain the following benefits:</p>\n<ul>\n<li>\n<p>Attacking at long range doesn't impose disadvantage on your ranged weapon attack rolls.  </p>\n</li>\n<li>\n<p>Your ranged weapon attacks ignore half and three-quarters cover.  </p>\n</li>\n<li>\n<p>Before you make an attack with a ranged weapon that you are proficient with, you can choose to take a -5 penalty to the attack roll. If that attack hits, you add +10 to the attack's damage.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkSkill"
+  },
+  "requirements": "N/A",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "EtgHYidIGv42ylfo",
+ "effects": [
+  {
+   "_id": "E04rVUDJPQLiaGmM",
+   "name": "Sharpshooter (−5 / +10)",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Enable before a ranged weapon attack you are proficient with.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "changes": [
+    {
+     "key": "system.bonuses.rwak.attack",
+     "mode": 2,
+     "value": "-5",
+     "priority": null
+    },
+    {
+     "key": "system.bonuses.rwak.damage",
+     "mode": 2,
+     "value": "+10",
+     "priority": null
+    }
+   ],
+   "_key": "!items.effects!snGqzHCmJ7dNIy01.E04rVUDJPQLiaGmM"
+  }
+ ],
+ "sort": 1400,
+ "_key": "!items!snGqzHCmJ7dNIy01"
+}

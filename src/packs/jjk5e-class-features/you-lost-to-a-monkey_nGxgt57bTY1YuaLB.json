@@ -1,0 +1,70 @@
+{
+ "_id": "nGxgt57bTY1YuaLB",
+ "name": "You Lost to a Monkey",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>At 17th level, no matter who they are, no matter their tricks, you can be assured of victory. Once per round, you can choose to deal critical damage on a hit.<br />\nIn addition, whenever you reduce a creature to 0 hit points you gain temporary hit points equal to your level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Heavenly Restriction (Prideful) 17",
+  "activities": {
+   "csjt7Gy7xkJ3o44m": {
+    "_id": "csjt7Gy7xkJ3o44m",
+    "type": "heal",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "",
+     "types": [
+      "temphp"
+     ],
+     "custom": {
+      "enabled": true,
+      "formula": "@details.level"
+     },
+     "scaling": {
+      "number": 1
+     }
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "dKzsnD6daLKk9Ah9",
+ "_key": "!items!nGxgt57bTY1YuaLB"
+}

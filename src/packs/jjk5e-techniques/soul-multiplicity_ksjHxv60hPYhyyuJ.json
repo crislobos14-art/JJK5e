@@ -1,0 +1,127 @@
+{
+ "_id": "ksjHxv60hPYhyyuJ",
+ "name": "Soul Multiplicity",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/idle-transfiguration.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Idle Transfiguration — Innate Technique (11th level)</em></p><p>Starting at 11th level, you can use <em>Self-Alteration</em> as a free action on your turn. As an action for 5 Cursed Energy you can spend 2 or more Transfigured Creatures, fusing together for one of the following:<br />\n<strong>Body Repel.</strong> You create a barrage of Transfigured creatures being launched at high speeds. You make a ranged Cursed Energy attack with a range of 60/120 feet that deals 4d8 necrotic damage on a hit. For every additional Transfigured Creature, you deal another 1d8 necrotic damage and can split the damage die between different targets to make multiple attacks.<br />\n<strong>Polymorphic Soul Isomer.</strong> You create a Polymorphic Soul Isomer for 1 minute. When using this technique, you can add another Transfigured Creature to the fusion. Each transfigured creature counts as one soul.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "Qa1Z5K8PGagni1yp": {
+    "_id": "Qa1Z5K8PGagni1yp",
+    "type": "attack",
+    "name": "Action (5 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    },
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": 4,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "Qa1Z5K8PGagni1yp": 5
+   },
+   "technique": "Idle Transfiguration",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "sz7xFTLSgxx5bxtq",
+ "_key": "!items!ksjHxv60hPYhyyuJ"
+}

@@ -1,0 +1,98 @@
+{
+ "_id": "3KWSjEyabBpcrl8t",
+ "name": "Walloping Ammunition",
+ "type": "consumable",
+ "img": "icons/svg/explosion.svg",
+ "folder": "RVpkkOiLvLva4ZNf",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Item(Ammunition), Grade 4</em></p><p>A creature hit by this ammunition must succeed on a DC 10 Strength saving throw or be knocked prone.</p>"
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "rarity": "common",
+  "quantity": 1,
+  "attunement": "",
+  "type": {
+   "value": "trinket",
+   "subtype": ""
+  },
+  "activities": {
+   "mwyPpc7bcwDNrHZv": {
+    "_id": "mwyPpc7bcwDNrHZv",
+    "type": "save",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "str"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    },
+    "effects": [
+     {
+      "_id": "aXTXBfxkK6ThjttJ",
+      "onSave": false
+     }
+    ]
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "4th Grade"
+  }
+ },
+ "effects": [
+  {
+   "_id": "aXTXBfxkK6ThjttJ",
+   "name": "Prone (Walloping Ammunition)",
+   "img": "systems/dnd5e/icons/svg/statuses/prone.svg",
+   "statuses": [
+    "prone"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!3KWSjEyabBpcrl8t.aXTXBfxkK6ThjttJ"
+  }
+ ],
+ "_key": "!items!3KWSjEyabBpcrl8t"
+}

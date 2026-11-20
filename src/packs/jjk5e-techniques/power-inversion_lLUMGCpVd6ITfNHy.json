@@ -1,0 +1,102 @@
+{
+ "_id": "lLUMGCpVd6ITfNHy",
+ "name": "Power Inversion",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/inverse.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Inverse — Cursed Technique Reversal</em></p><p>You have learned to reverse your technique, allowing you to inverse the damage of your own attacks. As a bonus action for 4 cursed energy, you activate Power Inversion for 2 minutes. While active, when you deal damage, it is modified based on a set damage limit and a threshold. The set damage limit is equal to your proficiency bonus multiplied by your CE score, and the threshold is equal to your proficiency bonus multiplied by your CE modifier. When you deal damage that exceeds your threshold, you subtract the threshold from the damage and deal the remaining difference as damage. However, when the damage is below your threshold, you subtract the damage from your set limit and increase the damage dealt by that amount. If the calculation results in a negative number, the damage remains unchanged. For example, if your set limit is 80 and you deal 100 damage, you would subtract the threshold from the damage if it exceeds it (e.g., 100 - 20 = 80), dealing the remaining 80 damage. Conversely, if you deal 10 damage and your threshold is 20, you would subtract that amount from your set limit (80 - 10 = 70), resulting in dealing 70 damage instead. You can spend 2 cursed energy at the end of the 2 minutes to maintain the effect for an additional 2 minutes.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Inverse",
+  "activities": {
+   "2246Pp7cSYce93YC": {
+    "_id": "2246Pp7cSYce93YC",
+    "type": "utility",
+    "name": "Bonus Action (4 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "2",
+     "units": "minute",
+     "concentration": false
+    }
+   },
+   "qIib3E8DkVWEhv4W": {
+    "_id": "qIib3E8DkVWEhv4W",
+    "type": "utility",
+    "name": "Action (2 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "2246Pp7cSYce93YC": 4,
+    "qIib3E8DkVWEhv4W": 2
+   },
+   "technique": "Inverse",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Inverse"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!lLUMGCpVd6ITfNHy"
+}

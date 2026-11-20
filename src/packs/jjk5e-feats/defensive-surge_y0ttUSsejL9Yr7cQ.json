@@ -1,0 +1,113 @@
+{
+ "_id": "y0ttUSsejL9Yr7cQ",
+ "name": "Defensive Surge",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/mythical-beast-amber.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Electric Energy</em></p>\n<p>Your Cursed Energy has gained a defensive property. As a reaction to being hit by a melee attack, you can spend 2 CE to force the attacker to make a Constitution Saving Throw. On a failure, the creature is stunned until the beginning of their next turn.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Electric Energy",
+  "activities": {
+   "JipUNDpondqnAqQ3": {
+    "_id": "JipUNDpondqnAqQ3",
+    "type": "save",
+    "name": "Reaction (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    },
+    "effects": [
+     {
+      "_id": "eVx0KKoG0VVIxvRB",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "JipUNDpondqnAqQ3": 2
+   },
+   "prereq": {
+    "features": [
+     [
+      "Electric Energy"
+     ]
+    ]
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "eVx0KKoG0VVIxvRB",
+   "name": "Stunned (Defensive Surge)",
+   "img": "modules/jjk5e/icons/techniques/mythical-beast-amber.svg",
+   "statuses": [
+    "stunned"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "rounds": 1
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "stunned"
+    }
+   },
+   "_key": "!items.effects!y0ttUSsejL9Yr7cQ.eVx0KKoG0VVIxvRB"
+  }
+ ],
+ "folder": "84RYYPEHHy0nXTWE",
+ "sort": 100,
+ "_key": "!items!y0ttUSsejL9Yr7cQ"
+}

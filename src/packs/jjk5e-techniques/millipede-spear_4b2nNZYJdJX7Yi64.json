@@ -1,0 +1,100 @@
+{
+ "_id": "4b2nNZYJdJX7Yi64",
+ "name": "Millipede Spear",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/centipede-shroud.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Centipede Shroud — Cursed Technique Reversal</em></p><p>Due to your mastery over Reverse Cursed Technique, you have unlocked your cursed technique reversal. Your reversal allows you to instead summon a white millipede that can be used offensively instead of supporting you. You can summon your cursed millipede for 6 cursed energy as a bonus action. It has the same stat block as your cursed centipede, but deals twice as much damage die on a hit. While within 5 ft of you, the millipede can enter your space, giving you the following benefits: ● On a hit with a melee or ranged attack, you deal an additional 2d10 damage as your Millipede fights with you. ● Your AC decreases by your proficiency bonus. ● When you or the millipede take damage, you can choose to have the other take the damage instead. If this damage would reduce the millipede to 0 hit points, you take the remaining damage. Once per turn, you can replace one of your attacks with two attacks from the millipede, which deals an additional 2d10 piercing damage on a hit. You cannot have your centipede and millipede summoned at the same time until you reach level 11. At level 11, you can have only one of each summoned at the same time.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Centipede Shroud",
+  "activities": {
+   "A8pAG8r49o9qWNyO": {
+    "_id": "A8pAG8r49o9qWNyO",
+    "type": "damage",
+    "name": "Bonus Action (6 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "5",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "piercing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "A8pAG8r49o9qWNyO": 6
+   },
+   "technique": "Centipede Shroud",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Centipede Shroud"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!4b2nNZYJdJX7Yi64"
+}

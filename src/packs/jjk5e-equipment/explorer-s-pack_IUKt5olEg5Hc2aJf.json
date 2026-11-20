@@ -1,0 +1,31 @@
+{
+ "_id": "IUKt5olEg5Hc2aJf",
+ "name": "Explorer's Pack",
+ "type": "loot",
+ "img": "icons/svg/item-bag.svg",
+ "folder": "5TkjeIlCFmk1GLJi",
+ "system": {
+  "description": {
+   "value": "<p>Contains a hiking backpack, sleeping bag, portable stove, lighter, flashlight, 10 spare batteries, 10 pre-packaged meals, a canteen, 60 feet of climbing rope and an <strong>energy tag</strong> made by fermenting in cursed energy for 100 years. You can rip the charm to regain 3 cursed energy.  </p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "price": {
+   "value": 16.0,
+   "denomination": "gp"
+  },
+  "type": {
+   "value": "gear"
+  },
+  "quantity": 1
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "_key": "!items!IUKt5olEg5Hc2aJf"
+}

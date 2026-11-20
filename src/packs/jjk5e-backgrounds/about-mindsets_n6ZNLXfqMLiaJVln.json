@@ -1,0 +1,29 @@
+{
+ "_id": "n6ZNLXfqMLiaJVln",
+ "name": "About Mindsets",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/mindset.svg",
+ "system": {
+  "description": {
+   "value": "<p>In sorcery your mindset affects your power. These are represented as an alternative to the inspiration system.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": ""
+  },
+  "requirements": ""
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "ymyii86sdbVo8H5C",
+ "_key": "!items!n6ZNLXfqMLiaJVln"
+}

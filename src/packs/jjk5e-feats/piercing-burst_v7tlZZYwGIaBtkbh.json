@@ -1,0 +1,42 @@
+{
+ "_id": "v7tlZZYwGIaBtkbh",
+ "name": "Piercing Burst",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/schrift-x.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Piercing Schrift</em></p>\n<p>You have perfected your accuracy and combined it with your piercing ability. When you use <em>Piercing Schrift</em>, you can also target additional targets up to your proficiency bonus that are either in front of or behind your target as long as they are within the path of the attack. You use the attack roll against the original target to determine if you would hit the additional targets.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Piercing Schrift",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Piercing Schrift"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "udJs5rzXyPeZN5uV",
+ "sort": 100,
+ "_key": "!items!v7tlZZYwGIaBtkbh"
+}

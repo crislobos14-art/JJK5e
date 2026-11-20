@@ -1,0 +1,31 @@
+{
+ "_id": "ee0a9omsWa6FiyGC",
+ "name": "Perfume of Bewitching",
+ "type": "loot",
+ "img": "icons/svg/explosion.svg",
+ "folder": "RVpkkOiLvLva4ZNf",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Item, Grade 4</em></p><p>This tiny vial contains perfume laced with cursed energy, enough for one use. You can take an action to apply the perfume to yourself, and its effect lasts 1 hour. For the duration, you have Advantage on all Charisma (Deception and Persuasion) checks made to influence a creature within 5 feet of yourself.</p>"
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "rarity": "common",
+  "quantity": 1,
+  "attunement": "",
+  "type": {
+   "value": "gear"
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "4th Grade"
+  }
+ },
+ "_key": "!items!ee0a9omsWa6FiyGC"
+}

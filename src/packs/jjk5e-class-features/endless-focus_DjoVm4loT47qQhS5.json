@@ -1,0 +1,59 @@
+{
+ "_id": "DjoVm4loT47qQhS5",
+ "name": "Endless Focus",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>Beginning at 15th level, your focus is so fierce that it only ends if you fall unconscious or if you choose to end it.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Juggernaut 15",
+  "activities": {
+   "fXHReIXZFiVL6DE8": {
+    "_id": "fXHReIXZFiVL6DE8",
+    "type": "utility",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "modifies": [
+    "Focus"
+   ]
+  }
+ },
+ "folder": "1ipDZJ01igqpFdub",
+ "_key": "!items!DjoVm4loT47qQhS5"
+}

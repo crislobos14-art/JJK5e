@@ -1,0 +1,54 @@
+{
+ "_id": "LIv7FTxQbEKTvscw",
+ "name": "Tough Body",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/trait-race.svg",
+ "system": {
+  "description": {
+   "value": "<p>Your hit point maximum increases by 1, and it increases by 1 again whenever you gain a level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "race",
+   "subtype": ""
+  },
+  "requirements": "Sumerian (Deskunte)"
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "effects": [
+  {
+   "_id": "a2lGjzg9JwMYBz6t",
+   "name": "Tough Body",
+   "img": "modules/jjk5e/icons/trait-race.svg",
+   "transfer": true,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "auto": "passive"
+    }
+   },
+   "changes": [
+    {
+     "key": "system.attributes.hp.bonuses.level",
+     "mode": 2,
+     "value": "1",
+     "priority": null
+    }
+   ],
+   "_key": "!items.effects!LIv7FTxQbEKTvscw.a2lGjzg9JwMYBz6t"
+  }
+ ],
+ "folder": "cUxhy4eiPJek1pHp",
+ "_key": "!items!LIv7FTxQbEKTvscw"
+}

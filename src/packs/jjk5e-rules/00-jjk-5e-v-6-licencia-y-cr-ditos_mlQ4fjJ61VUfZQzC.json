@@ -1,0 +1,45 @@
+{
+ "_id": "mlQ4fjJ61VUfZQzC",
+ "name": "00 — JJK 5e V.6: Licencia y créditos",
+ "folder": "IXMKct7fx9qz8bdj",
+ "sort": 0,
+ "pages": [
+  {
+   "_id": "wFuwoZhQZQjssc4l",
+   "name": "Licencia y créditos",
+   "type": "text",
+   "sort": 0,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Jujutsu Kaisen 5e</p>\n<p><strong>Licencia y aviso legal</strong></p>\n<p>Este sistema de juego de rol de mesa es un proyecto no oficial hecho por fans y no está afiliado, respaldado ni asociado con ninguna editorial ni titular de derechos oficial.</p>\n<p>Todo el texto original, las descripciones de mecánicas y el contenido de este documento son © 2026 [I watch Anime] y se distribuyen bajo la licencia Creative Commons Atribución–NoComercial–CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0).</p>\n<p>Puedes compartir y adaptar esta obra solo con fines no comerciales, siempre que des el crédito correspondiente y que cualquier obra derivada se distribuya con la misma licencia.</p>\n<p>El uso comercial (incluidos productos de pago, herramientas de pago o módulos de VTT monetizados) no está permitido sin permiso escrito explícito del creador.</p>\n<p>Esta licencia se aplica solo al contenido original creado para este sistema y no concede ningún derecho sobre la propiedad intelectual de terceros.</p>\n<p>Esta obra está bajo la licencia Creative Commons<br />\nAtribución–NoComercial–CompartirIgual 4.0 Internacional.</p>\n<p>© 2026 [I watch Anime]</p>\n<h1>Índice</h1>\n<p>Capítulo 1: Crear un personaje (pág. 3)<br />\n1.1 Preparar un personaje<br />\nCapítulo 2: Razas (pág. 6)<br />\n2.1 Humanos<br />\n2.2 Recipientes malditos<br />\n2.3 Cadáveres malditos<br />\n2.4 Espíritus malditos<br />\nCapítulo 3: Clases (pág. 17)<br />\n3.1 Juggernaut<br />\n3.2 Explorador (Scout)<br />\n3.3 Estratega (Strategist)<br />\n3.4 Usuario de shikigami (Shikigami User)<br />\n3.5 Especialista de apoyo (Support Specialist)<br />\n3.6 Guerrero (Warrior)<br />\n3.7 Técnicas innatas<br />\n3.8 Restricción celestial (Heavenly Restriction)<br />\nCapítulo 4: Trasfondos y mentalidades (pág. 273)<br />\n4.1 Trasfondos<br />\n4.2 Mentalidades del personaje<br />\nCapítulo 5: Equipo (pág. 281)<br />\n5.1 Armaduras y escudos<br />\n5.2 Armas y equipo de aventura<br />\n5.3 Herramientas malditas<br />\nCapítulo 6: Personalización y dotes (pág. 298)<br />\n6.1 Multiclase<br />\n6.2 Dotes<br />\nCapítulo 7: Complejidades de la hechicería (pág. 410)<br />\n7.1 Votos vinculantes<br />\n7.2 Avances<br />\n7.3 Expansión de dominio<br />\n7.4 Tabla de daño a extremidades<br />\n7.5 Máxima potencia<br />\n7.6 La Zona<br />\n7.7 Reglas generales<br />\nCapítulo 8: Créditos<br />\n<a href=\"https://discord.gg/6r736Wnp5q\">Silly Discord?</a> <br />\n<a href=\"https://docs.google.com/document/d/1fE5rhr0oSLzWurRvjxurSr4KjbfVil4UnQBPYCrHjN8/edit?tab=t.0\">Expansión Creeps and Curses</a> V.3 <br />\n(actualizaciones en camino)<br />\n<a href=\"https://www.patreon.com/c/IwatchAnime\">Patreon</a> </p>\n<p>Este sistema de juego de rol de mesa es un proyecto no oficial hecho por fans y no está afiliado, respaldado ni asociado con ninguna editorial ni titular de derechos oficial. Todos los derechos pertenecen a Shounen Jump y Gege Akutami.</p>\n<p>¡Muchas gracias a todos los que apoyaron o disfrutaron este libro! ¡Sigan jugando!</p><hr><p><em>Conversión a Foundry VTT: módulo no oficial hecho por fans, sin fines comerciales, distribuido bajo la misma licencia CC BY-NC-SA 4.0. Todos los derechos de JJK pertenecen a Gege Akutami / Shueisha. Traducción al español no oficial.</em></p>\n"
+   },
+   "_key": "!journal.pages!mlQ4fjJ61VUfZQzC.wFuwoZhQZQjssc4l"
+  },
+  {
+   "_id": "r4PLa1MuXIZPBTJa",
+   "name": "Creeps and Curses V.3.1",
+   "type": "text",
+   "sort": 1000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p><strong>Creeps and Curses: 5e Expansion V.3.1</strong> © 2026 [I watch Anime], CC BY-NC-SA 4.0. Incluye: Pactos celestiales, Restricción evolutiva, Dones de grado especial, Rasgos especiales, las técnicas ████ and Light y Vairocana (con sus dotes e inversiones) y técnicas malditas menores/mayores de ejemplo. La tabla de caos de Vairocana no está en la V.3.1.</p><blockquote><p>La Restricción celestial o Pacto celestial es un voto vinculante impuesto al cuerpo de un hechicero al nacer. Normalmente afecta a su energía maldita a cambio de limitaciones o mejoras en su cuerpo. El caso más conocido es la fisicalidad absoluta de Zenin Toji, pero existen muchos tipos distintos de Pactos celestiales. Una criatura solo puede tener un Pacto celestial. Si se superan las limitaciones del Pacto celestial, todo lo que se obtuvo queda anulado.</p></blockquote>\n"
+   },
+   "_key": "!journal.pages!mlQ4fjJ61VUfZQzC.r4PLa1MuXIZPBTJa"
+  }
+ ],
+ "flags": {
+  "jjk5e": {
+   "lang": "es",
+   "source": "v8TNx2xVhtr2dqXj"
+  }
+ },
+ "_key": "!journal!mlQ4fjJ61VUfZQzC"
+}

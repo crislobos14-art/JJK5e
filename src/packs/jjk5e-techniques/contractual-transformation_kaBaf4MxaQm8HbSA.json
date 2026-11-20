@@ -1,0 +1,72 @@
+{
+ "_id": "kaBaf4MxaQm8HbSA",
+ "name": "Contractual Transformation",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/contractual-recreation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Contractual Recreation — Cursed Technique Reversal</em></p><p>You have learned how to reverse your technique, transforming things into receipts. As a bonus action for an amount required of energy depending on the object's size, you can transform it into a receipt as long as it could be realistically sold. You cannot do this to magical objects, cursed objects, cursed tools, or if a creature is holding the object.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Contractual Recreation",
+  "activities": {
+   "wcQ33EOVejoz2ynQ": {
+    "_id": "wcQ33EOVejoz2ynQ",
+    "type": "utility",
+    "name": "Bonus Action",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Contractual Recreation",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Contractual Recreation"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!kaBaf4MxaQm8HbSA"
+}

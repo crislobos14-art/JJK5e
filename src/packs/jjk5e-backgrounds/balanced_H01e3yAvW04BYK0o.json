@@ -1,0 +1,46 @@
+{
+ "_id": "H01e3yAvW04BYK0o",
+ "name": "Balanced",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/mindset.svg",
+ "system": {
+  "description": {
+   "value": "<p>People may not care for your unconventional nature, but who cares? Humans are gross! When you use your inspiration, you cannot have disadvantage on any rolls and others cannot have advantage against you for the next minute.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": ""
+  },
+  "requirements": "Mindset",
+  "activities": {
+   "aStQcQE3zjQfyTMv": {
+    "_id": "aStQcQE3zjQfyTMv",
+    "type": "utility",
+    "name": "Use Inspiration",
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Spend your inspiration"
+    },
+    "consumption": {
+     "targets": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "mindset": true
+  }
+ },
+ "folder": "ymyii86sdbVo8H5C",
+ "_key": "!items!H01e3yAvW04BYK0o"
+}

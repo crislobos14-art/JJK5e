@@ -1,0 +1,68 @@
+{
+ "_id": "UwCrJkvFOY5gkuLV",
+ "name": "Regalia Versatility",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/regalia.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Regalia</em></p>\n<p>You have learned to alter your regalia and can change it to a different type of weapon as a bonus action, including ranged weapons and shields. While your Regalia is a ranged weapon, it creates its own ammunition. While it is a shield, you gain a bonus to AC while wielding equal to the bonus to attack and damage rolls your regalia has. Your GM may also choose to allow more unique weapons or items.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Regalia",
+  "activities": {
+   "rNTRIz6W9Je9hCTR": {
+    "_id": "rNTRIz6W9Je9hCTR",
+    "type": "utility",
+    "name": "Bonus Action",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Regalia"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "8Lhg7pdvWFL32xJj",
+ "sort": 100,
+ "_key": "!items!UwCrJkvFOY5gkuLV"
+}

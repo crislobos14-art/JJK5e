@@ -1,0 +1,38 @@
+{
+ "_id": "n1qaKdaMGXtNg4KF",
+ "name": "Six Eyes (Awakened)",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/trait.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Creeps and Curses V.3.1</em></p><p><em>Special Trait. Please note that these abilities are incredibly powerful even for the JJK system and should only be used for purposely high power games. Of course, certain traits are stronger than others. Stages of these traits have been added to grow with characters with higher levels of play. Dormant, Stirring, and Awakened. Though a DM can decide to change the leveling format or instead give them out at appropriate character moments.</em></p><p><strong>Perfect Cursed Energy Manipulation.</strong> Due to the six eyes, you can manipulate cursed energy on the atomic level. Any cursed energy you spend is reduced by 10 times, even into decimals. (Example: If you spend 3 cursed energy, you only spend 0.3 cursed energy)</p>\n<p><strong>Infinity Optimization.</strong> The Six Eyes naturally improves the efficiency of Infinity. If you have Reverse Cursed Technique, you can practice to improve the efficiency of Infinity. Once per month during a long rest, you can make a DC 20 Arcana check. On a success, you gain 1 success towards optimizing Infinity. Once you have 12 successes, you no longer need to spend reactions or cursed energy to nullify attacks using Infinity.</p>\n<p><em>Special Trait tiers stack: keep the earlier tiers on the sheet. When a benefit says it replaces an earlier one, the module's effects already account for it.</em></p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTrait"
+  },
+  "requirements": "Gojo Clan sorcerer family, must be Human; Six Eyes, level 14",
+  "prerequisites": {
+   "level": 14,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "level": 14
+   }
+  }
+ },
+ "folder": "WpMvDh8sKw65orZ9",
+ "sort": 300,
+ "_key": "!items!n1qaKdaMGXtNg4KF"
+}

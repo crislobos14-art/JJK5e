@@ -1,0 +1,37 @@
+{
+ "_id": "NpRBU6RmiKQWgtcz",
+ "name": "Strong Leap",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Strength Improvements: You can have a number of these improvements equal to your Strength modifier.</em></p>\n<p>1 body point, 15 Strength<br />\nYour leg strength has become truly monstrous. Whenever you jump, you can triple your jump height or distance.  </p>\n<hr />",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Heavenly Restriction 2"
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "abilities": {
+     "str": 15
+    }
+   },
+   "bodyCost": 1,
+   "bodyCategory": "str"
+  }
+ },
+ "folder": "fG9dHqhvzewoqwrt",
+ "_key": "!items!NpRBU6RmiKQWgtcz"
+}

@@ -1,0 +1,144 @@
+{
+ "_id": "G5JohGkx3AABfoyH",
+ "name": "Wall of Stone",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/earth-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Earth Manipulation — Innate Technique (6th level)</em></p><p>At 6th level, you have learned to create large scale constructs. As an action for 4 cursed energy, you make a wall of stone. This wall is made of ten 10 foot by 10 foot panels that are 1 inch thick. Each panel must be touching at least one other panel. The wall has an AC equal to your cursed energy DC and a number of hit points equal to 10 times your CE modifier.</p>\n<p>You can spend 1 CE as a bonus action to move connected panels within 60 feet of you up to 30 feet in a direction of your choice that is in contact with the ground. If this movement would move a creature, they must make a Dexterity saving throw or be pushed by the wall.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "LxT1q9GWcJ6jkbiV": {
+    "_id": "LxT1q9GWcJ6jkbiV",
+    "type": "utility",
+    "name": "Action (4 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   },
+   "tvcu87Oi4rbeVmim": {
+    "_id": "tvcu87Oi4rbeVmim",
+    "type": "save",
+    "name": "Bonus Action (1 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "LxT1q9GWcJ6jkbiV": 4,
+    "tvcu87Oi4rbeVmim": 1
+   },
+   "technique": "Earth Manipulation",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "75t5TorhPqVS4tjs",
+ "_key": "!items!G5JohGkx3AABfoyH"
+}

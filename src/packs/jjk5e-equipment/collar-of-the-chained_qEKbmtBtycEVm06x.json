@@ -1,0 +1,67 @@
+{
+ "_id": "qEKbmtBtycEVm06x",
+ "name": "Collar of the Chained",
+ "type": "equipment",
+ "img": "icons/svg/explosion.svg",
+ "folder": "pB7mLAOAtbyDQKeT",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Item, Grade 3</em></p><p>While this item is worn by a cursed spirit or shikigami, they gain a +10 ft bonus to walking speed.</p>\n<p>Cursed Shot Ammunition, Grade 3 You have a +1 bonus to attack and damage rolls with this ammunition. On a miss, you can use your reaction to reroll the attack roll against a target within 15 ft of the original target. After being fired, the ammunition loses its mystical properties.</p>"
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "rarity": "uncommon",
+  "quantity": 1,
+  "attunement": "",
+  "type": {
+   "value": "trinket",
+   "baseItem": ""
+  },
+  "armor": {
+   "value": null
+  },
+  "activities": {
+   "bX3K1qvd2FPIspBO": {
+    "_id": "bX3K1qvd2FPIspBO",
+    "type": "utility",
+    "name": "Reaction",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "15",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "3rd Grade"
+  }
+ },
+ "_key": "!items!qEKbmtBtycEVm06x"
+}

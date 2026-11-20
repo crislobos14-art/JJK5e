@@ -1,0 +1,95 @@
+{
+ "_id": "WaednEuwPPB94pIE",
+ "name": "Anti-Venom Cursed Energy",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/moon-dregs.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Moon Dregs — Cursed Technique Reversal (Sun Dregs), 3rd level</em></p><p>At 3rd level, when Sun Dregs hit a creature, you can spend 2 cursed energy to cause the attack to deal an extra 4d6 radiant damage. At 11th level, you can add your Cursed Energy modifier to Sun Dregs AC as well as its Strength, Dexterity, and Constitution scores. Sun Dregs can be commanded as a free action on your turn.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Moon Dregs 3",
+  "activities": {
+   "vFnZHPwvVYSItiHa": {
+    "_id": "vFnZHPwvVYSItiHa",
+    "type": "damage",
+    "name": "Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 4,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "radiant"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "vFnZHPwvVYSItiHa": 2
+   },
+   "technique": "Moon Dregs",
+   "reversal": true,
+   "reversalLevel": 3,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Moon Dregs"
+     ]
+    ],
+    "level": 3
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 10,
+ "_key": "!items!WaednEuwPPB94pIE"
+}

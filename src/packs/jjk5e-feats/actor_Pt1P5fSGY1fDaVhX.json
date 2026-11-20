@@ -1,0 +1,59 @@
+{
+ "_id": "Pt1P5fSGY1fDaVhX",
+ "name": "Actor",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: N/A</em></p>\n<p>Skilled at mimicry and dramatics, you gain the following benefits:</p>\n<ul>\n<li>\n<p>Increase your Charisma score by 1, to a maximum of 20.  </p>\n</li>\n<li>\n<p>You have an advantage on Charisma (Deception) and Charisma (Performance) checks when trying to pass yourself off as a different person.  </p>\n</li>\n<li>\n<p>You can mimic the speech of another person or the sounds made by other creatures. You must have heard the person speaking, or heard the creature make the sound, for at least 1 minute. A successful Wisdom (Insight) check contested by your Charisma (Deception) check allows a listener to determine that the effect is faked.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkSkill"
+  },
+  "requirements": "N/A",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "effects": [
+  {
+   "_id": "060soedZAcBe8Dnt",
+   "name": "Actor",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "changes": [
+    {
+     "key": "system.abilities.cha.value",
+     "mode": 2,
+     "value": "1",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "auto": "passive"
+    }
+   },
+   "_key": "!items.effects!Pt1P5fSGY1fDaVhX.060soedZAcBe8Dnt"
+  }
+ ],
+ "folder": "EtgHYidIGv42ylfo",
+ "sort": 200,
+ "_key": "!items!Pt1P5fSGY1fDaVhX"
+}

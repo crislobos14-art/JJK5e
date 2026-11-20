@@ -1,0 +1,85 @@
+{
+ "_id": "paRshIeAw9opHQxu",
+ "name": "Balance",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/vairocana.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Creeps and Curses V.3.1</em></p><p><em>Vairocana — Innate Technique (11th level)</em></p><p>At 11th level, you have learned to balance the chaos and harmony. When you use Chaos, you can choose either Order or Equilibrium:</p>\n<p><strong>Order.</strong> You control a random element of the rolled Chaos effect. This can include where an area of effect appears, which creature is affected, or the place a creature teleports to.</p>\n<p><strong>Equilibrium.</strong> This causes a number of creatures up to your Cursed Energy modifier to be immune to the Chaos effect. They cannot take damage or be selected by the Chaos. After using this feature a number of times equal to your proficiency bonus, you cannot use it again until you finish a long rest.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "AuSnWlVoTyGnbENt": {
+    "_id": "AuSnWlVoTyGnbENt",
+    "type": "utility",
+    "name": "Use",
+    "activation": {
+     "type": "special",
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1"
+      }
+     ],
+     "spellSlot": false
+    }
+   }
+  },
+  "uses": {
+   "max": "@prof",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
+    }
+   ]
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "special",
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self"
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Vairocana",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "CpSgW3tLoueRa6XV",
+ "_key": "!items!paRshIeAw9opHQxu"
+}

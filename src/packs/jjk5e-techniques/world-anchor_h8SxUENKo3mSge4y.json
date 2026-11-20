@@ -1,0 +1,95 @@
+{
+ "_id": "h8SxUENKo3mSge4y",
+ "name": "World Anchor",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/dragon-vein.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Dragon Vein — Innate Technique (11th level)</em></p><p>At 11th level, you gain temporary hit points equal to your proficiency bonus + your Cursed Energy modifier at the beginning of your turn while your feet are touching the ground. When you start your turn at half your hit point maximum or less while your Ley Line is active, you can spend 3 CE to gain resistance to all damage until the start of your next turn.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "dYq3q5REb4nwq0XE": {
+    "_id": "dYq3q5REb4nwq0XE",
+    "type": "utility",
+    "name": "Action (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "dYq3q5REb4nwq0XE": 3
+   },
+   "technique": "Dragon Vein",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "xkcQZ0iOxpoEyfI2",
+ "_key": "!items!h8SxUENKo3mSge4y"
+}

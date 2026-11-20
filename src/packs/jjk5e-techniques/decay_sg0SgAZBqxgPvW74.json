@@ -1,0 +1,158 @@
+{
+ "_id": "sg0SgAZBqxgPvW74",
+ "name": "Decay",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/rot.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Rot — Innate Technique (3rd level)</em></p><p>At 3rd level you have learned to use your blood infectiously. As a bonus action for 3 Cursed Energy, you can cause all creatures that have taken damage from your technique in the last minute to form black floral patterns on their body as they have been infected with your blood. <br />\n At the beginning of your turn, they take your Rotten Blood damage. This lasts for 1 minute unless you spend 3 cursed energy to continue the effect or end it as a free action.<br />\n At 6th level, creatures also gain the poisoned condition for the duration and Decay also reduces a creature’s hit point maximum. A creature’s maximum hit points return to normal after a long rest.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "BOJsbDVm4WDuB6Fd": {
+    "_id": "BOJsbDVm4WDuB6Fd",
+    "type": "utility",
+    "name": "Bonus Action (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   },
+   "ZLbekNXVENiDTvps": {
+    "_id": "ZLbekNXVENiDTvps",
+    "type": "utility",
+    "name": "Special (3 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "OYJHMek81mP6nhQL",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "BOJsbDVm4WDuB6Fd": 3,
+    "ZLbekNXVENiDTvps": 3
+   },
+   "technique": "Rot",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "OYJHMek81mP6nhQL",
+   "name": "Poisoned (Decay)",
+   "img": "modules/jjk5e/icons/techniques/rot.svg",
+   "statuses": [
+    "poisoned"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "seconds": 60,
+    "rounds": 10
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "poisoned"
+    }
+   },
+   "_key": "!items.effects!sg0SgAZBqxgPvW74.OYJHMek81mP6nhQL"
+  }
+ ],
+ "folder": "TOdSvSBhuENKcEJX",
+ "_key": "!items!sg0SgAZBqxgPvW74"
+}

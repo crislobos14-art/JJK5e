@@ -1,0 +1,62 @@
+{
+ "_id": "HBcY8P8oWZ4Fjz2U",
+ "name": "Cursed Imbuement",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: N/A</em></p>\n<p>When attacking with unarmed strikes or a weapon you are proficient with, you can use your Cursed Energy modifier instead of Strength or Dexterity for your attack and damage rolls. However, on a roll of natural one for an attack roll, you must make a Cursed Energy check against your Cursed Energy DC, or shatter the weapon as you overcharge it or take 1 necrotic damage if using unarmed strikes.<br />\nAdditionally, you can spend 1 cursed energy to imbue it into an object for 1 minute, causing it to deal necrotic damage for the duration.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkCursedEnergy"
+  },
+  "requirements": "N/A",
+  "activities": {
+   "9oDXUcz09THGyoVb": {
+    "_id": "9oDXUcz09THGyoVb",
+    "type": "utility",
+    "name": "Imbue object (1 CE)",
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     }
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "9oDXUcz09THGyoVb": 1
+   }
+  }
+ },
+ "folder": "58RlNbYPWxO2Xi4E",
+ "effects": [],
+ "sort": 600,
+ "_key": "!items!HBcY8P8oWZ4Fjz2U"
+}

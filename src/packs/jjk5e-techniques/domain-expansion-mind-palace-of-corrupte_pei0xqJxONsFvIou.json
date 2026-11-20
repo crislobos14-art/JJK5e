@@ -1,0 +1,124 @@
+{
+ "_id": "pei0xqJxONsFvIou",
+ "name": "Domain Expansion: Mind Palace of Corrupted Ego",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/rot-domain.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Rot — Innate Technique (18th level)</em></p><p><em>Domain Expansion (rules): full-turn action, 20 CE unless stated, 175-ft radius, 1 minute. When the domain ends you suffer <strong>Technique Burnout</strong> (applied automatically by the module).</em></p><p>At 18th level you have mastered your technique, allowing you to expand your domain. All creatures within your domain are under the effects of Decay and take additional Decay damage at initiative 20. Additionally, your Rot Techniques use hit points from other creatures within your domain.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "mdf9OuF8ur6ZzfH5": {
+    "_id": "mdf9OuF8ur6ZzfH5",
+    "type": "utility",
+    "name": "Expand Domain (20 CE)",
+    "sort": -100000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Full turn: Action + Bonus Action + Movement",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "175",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": true
+     },
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 9,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "special",
+   "value": null,
+   "condition": "Full turn: Action + Bonus Action + Movement",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "radius",
+    "size": "175",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": true
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Rot",
+   "level": 18,
+   "domain": true,
+   "ceCosts": {
+    "mdf9OuF8ur6ZzfH5": 20
+   },
+   "domainActivity": "mdf9OuF8ur6ZzfH5",
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "TOdSvSBhuENKcEJX",
+ "_key": "!items!pei0xqJxONsFvIou"
+}

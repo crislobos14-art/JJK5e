@@ -1,0 +1,139 @@
+{
+ "_id": "dxcj65gyKmS1FDaM",
+ "name": "Dustify",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/earth-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Earth Manipulation — Cursed Technique Reversal, 11th level</em></p><p>At 11th level, as an action for 1 CE you can target a small non-magical object made of earth, stone, or metal and turn it to dust. If a creature is holding it, they can make a Dexterity saving throw to dodge your touch. At 6th level, you can use this on a cursed tool of Second Grade or lower for 2 CE. If you touch it, it gains a -1 to attack and damage rolls if it is a weapon or AC if it is armor (first reducing the tool’s bonuses if any). If this penalty reaches -3, the item disintegrates into dust. At 11th level this can affect first grade tools for 3 CE, at 18th level it can affect special grades for 6 CE.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Earth Manipulation 11",
+  "activities": {
+   "p7fcuymVzpAu8NwL": {
+    "_id": "p7fcuymVzpAu8NwL",
+    "type": "save",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   },
+   "Jkp96IkWbBmwVRmQ": {
+    "_id": "Jkp96IkWbBmwVRmQ",
+    "type": "utility",
+    "name": "Action (2 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   },
+   "7snVRA0htNuDtBgA": {
+    "_id": "7snVRA0htNuDtBgA",
+    "type": "utility",
+    "name": "Action (3 CE)",
+    "sort": 200000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "p7fcuymVzpAu8NwL": 1,
+    "Jkp96IkWbBmwVRmQ": 2,
+    "7snVRA0htNuDtBgA": 3
+   },
+   "technique": "Earth Manipulation",
+   "reversal": true,
+   "reversalLevel": 11,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Earth Manipulation"
+     ]
+    ],
+    "level": 11
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 20,
+ "_key": "!items!dxcj65gyKmS1FDaM"
+}

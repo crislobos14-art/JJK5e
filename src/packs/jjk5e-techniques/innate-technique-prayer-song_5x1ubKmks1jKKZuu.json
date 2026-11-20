@@ -1,0 +1,118 @@
+{
+ "_id": "5x1ubKmks1jKKZuu",
+ "name": "Innate Technique: Prayer Song",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/prayer-song.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>Through dance and the beat engraved in your body, you gain the ability to buff yourself and debuff your opponent even without a domain.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.O8EAishBxZWvLMqb]{Prayer}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.CmjdZjazhBQ3onBG]{Marcado}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.tigG746ROVPhGTyr]{Caesura}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.ldM0TMic8k2TC1Vc]{Crescendo}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.mnWo4JotkNCbzihS]{Domain Expansion: Dance Dance Revolution}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "SM6m7hUeXAdCXD7b": {
+    "_id": "SM6m7hUeXAdCXD7b",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Prayer Song (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.O8EAishBxZWvLMqb",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "HL2wx9dweG4QxlQW": {
+    "_id": "HL2wx9dweG4QxlQW",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Prayer Song (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.CmjdZjazhBQ3onBG",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "DHgfKINGIOQDX3lv": {
+    "_id": "DHgfKINGIOQDX3lv",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Prayer Song (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.tigG746ROVPhGTyr",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "ocMmJmoNvPYODYji": {
+    "_id": "ocMmJmoNvPYODYji",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Prayer Song (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.ldM0TMic8k2TC1Vc",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "1aFQREpehuPjpZXn": {
+    "_id": "1aFQREpehuPjpZXn",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Prayer Song (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.mnWo4JotkNCbzihS",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Prayer Song"
+  }
+ },
+ "_key": "!items!5x1ubKmks1jKKZuu"
+}

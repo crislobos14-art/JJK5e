@@ -1,0 +1,95 @@
+{
+ "_id": "CaRX3lIbroOmofpK",
+ "name": "Maximize Output",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/solo-forbidden-zone.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Solo Forbidden Zone — Innate Technique (11th level)</em></p><p>Starting at 11th level, after setting up your Zone, you can maximize an ally's output. Once per turn when a creature uses a cursed technique that deals damage while within your zone, you can spend 5 CE to cause them to deal maximum damage instead of rolling.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "V7fED709mCReQflf": {
+    "_id": "V7fED709mCReQflf",
+    "type": "utility",
+    "name": "Action (5 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "V7fED709mCReQflf": 5
+   },
+   "technique": "Solo Forbidden Zone",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "pI3TNTzVyu2gPuxX",
+ "_key": "!items!CaRX3lIbroOmofpK"
+}

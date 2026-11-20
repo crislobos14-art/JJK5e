@@ -1,0 +1,39 @@
+{
+ "_id": "ih2sgCI4tFTpv7CJ",
+ "name": "Shield",
+ "type": "equipment",
+ "img": "icons/svg/shield.svg",
+ "folder": "qVuyydidyeepCNvu",
+ "system": {
+  "description": {
+   "value": "<p>Many warrior-type sorcerers supplement their armor with a Shield. A Shield is made from wood or metal and is carried in one hand. Wielding a Shield increases your Armor Class by 2. You can benefit from only one Shield at a time.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "shield",
+   "baseItem": "shield"
+  },
+  "armor": {
+   "value": 2,
+   "dex": null
+  },
+  "price": {
+   "value": 0,
+   "denomination": "gp"
+  },
+  "properties": [],
+  "quantity": 1
+ },
+ "flags": {
+  "jjk5e": {
+   "note": "Price not listed in JJK 5e V.6"
+  }
+ },
+ "_key": "!items!ih2sgCI4tFTpv7CJ"
+}

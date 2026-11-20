@@ -1,0 +1,92 @@
+{
+ "_id": "W0HmlfoJxTJqDsPv",
+ "name": "Perfect Control",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/cursed-spirit-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Spirit Manipulation — Innate Technique (6th level)</em></p><p>At 6th level, you have grown experienced with your cursed technique, giving you perfect control over your spirits and gain the following benefits:</p>\n<ul>\n<li>\n<p>The amount of cursed spirits it takes for you to make a Wisdom saving throw increases to 20.  </p>\n</li>\n<li>\n<p>Your cursed spirits cost is reduced by your Cursed Energy modifier (minimum cost of 1 CE).  </p>\n</li>\n<li>\n<p>Your DC for eating cursed spirits with a CR higher than your level is decreased by your Cursed Energy modifier  </p>\n</li>\n<li>\n<p>You can now summon cursed spirits as a bonus action.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "oBmcLc9J65fFoJg4": {
+    "_id": "oBmcLc9J65fFoJg4",
+    "type": "utility",
+    "name": "Bonus Action",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Cursed Spirit Manipulation",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "f8ljC8WN5acnKcA4",
+ "_key": "!items!W0HmlfoJxTJqDsPv"
+}

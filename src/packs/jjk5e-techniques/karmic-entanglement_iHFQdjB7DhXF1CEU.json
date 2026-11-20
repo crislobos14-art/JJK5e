@@ -1,0 +1,110 @@
+{
+ "_id": "iHFQdjB7DhXF1CEU",
+ "name": "Karmic Entanglement",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/fate.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Fate — Innate Technique (11th level)</em></p><p>At 11th level, you have learned to permanently entangle souls in the web of fate. Over an uninterrupted period of 1 week, you permanently intertwine the fates of two or more creatures together. The creatures become destined to meet by fate. You can attach this to an incredibly unique part of one of the creatures, such as Inherited Technique, Special Trait, or unique Constitution (Star Plasma Vessel) to cause it to be passed down even after the targets’ deaths. You can have a number of creatures with permanently intertwined fate equal to your proficiency bonus at once (including yourself).<br />\n<strong>Immortality.</strong> As a side effect of your technique, your fate has become set. You cannot die of old age, but still grow older. Every 500 years you must assimilate with a genetically similar human to reset your body and appearance. Failure to meet this causes you to begin to evolve beyond humanity, changing your race to Cursed Spirit.<br />\n<strong>Fate Control</strong>. As an action for 8 CE, you manifest fate for 1 minute. While active, you gain 3 fate points at the beginning of your turns. You can spend one fate point to add a -5 penalty to an attack roll, ability check, or saving throw made by a creature you can see within 30 ft (cannot stack). Unused fate points disappear at the start of your turn. While active, damage dice of <em>Strong Destiny</em> is doubled.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "dz82WwVrCykNwCWW": {
+    "_id": "dz82WwVrCykNwCWW",
+    "type": "utility",
+    "name": "Action (8 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "value": "30",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "dz82WwVrCykNwCWW": 8
+   },
+   "technique": "Fate",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "UdYh82jLla1edrDf",
+ "_key": "!items!iHFQdjB7DhXF1CEU"
+}

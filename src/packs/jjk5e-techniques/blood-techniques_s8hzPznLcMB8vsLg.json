@@ -1,0 +1,259 @@
+{
+ "_id": "s8hzPznLcMB8vsLg",
+ "name": "Blood Techniques",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/blood-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Blood Manipulation — Innate Technique (1st level)</em></p><p>Starting at 1st level, you can harness your blood in a manner fit for battle. When you use a Blood Manipulation feature, you can ignore the HP cost if you have an alternate source of blood. You gain three of following techniques and gain an additional two at 6th and 11th level:</p>\n<ul>\n<li>\n<p><strong>Crimson Binding:</strong> As an action for 1 CE and 1 HP, you unleash a red blood net, forcing a target Large or smaller within 30ft to make a Strength saving throw or be restrained. They can repeat the save at the start of their turn.  </p>\n</li>\n<li>\n<p><strong>Slicing Exorcism:</strong> As an action for 1 CE and 1 HP you  spin a ring of blood and unleash it as a projectile. Make a ranged CE attack against a target within 60 ft, on a hit you deal 1d10 + CE modifier necrotic damage. If used with <em>Convergence</em>, the attack still deals your CE modifier on a miss of 5 or less.  </p>\n</li>\n<li>\n<p><strong>Blood Edge</strong>: You can spend CE up to your Cursed Energy modifier to create a melee weapon as a free action which counts as magical for overcoming resistances. For every two Cursed Energy used the weapon gains an additional damage tier(d10-&gt;d12-&gt;2d8) and lasts 1 minute. If used with <em>Convergence</em>, it only gains the benefit of the damage tier increase.  </p>\n</li>\n<li>\n<p><strong>Crimson Rain:</strong> As an action for 3 CE and 2 HP, you pick an area within 60 ft, that spot becomes the center of a 15 ft radius of a rain of blood spikes. All creatures in that radius must make a Dexterity Saving throw taking 3d10 piercing damage on failure or half as much on a success. If used with <em>Convergence</em>, a target is also knocked prone on a failed save.  </p>\n</li>\n<li>\n<p><strong>Blood Burst:</strong> For 1 CE and 1 HP upon hitting with a weapon attack once per turn, you cover your strike with blood, causing it to explode on impact. The creature must make a Dexterity saving throw. On a failure they take 4d6 necrotic damage.  </p>\n</li>\n<li>\n<p><strong>Blood Meteorite:</strong> As an action for 1 CE and 3 HP you create a solid crystal of blood launched like an asteroid. You can make a ranged CE attack against a target in 30 ft. On a hit, this attack deals 4d4 + CE modifier in bludgeoning damage.  </p>\n</li>\n<li>\n<p><strong>Blood Geyser:</strong> As an action for 3 CE and 3 HP, you can choose a 5 feet space within 10 ft of yourself and saturate it with blood. When a creature starts their turn there or enters that area, all creatures within 5 feet must make a Dexterity saving throw or take 5d10 bludgeoning damage and get launched 30ft in the air or half as much on a success.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "pyzvctFBrnf7glUx": {
+    "_id": "pyzvctFBrnf7glUx",
+    "type": "save",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "str"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 10,
+       "bonus": "@mod",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "uJDin3pB0j6Pt2KK",
+      "onSave": false
+     }
+    ]
+   },
+   "F4wHJtXWhPY2U4aV": {
+    "_id": "F4wHJtXWhPY2U4aV",
+    "type": "save",
+    "name": "Action (3 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "15",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 3,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "piercing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "FiMuV25bcEXdbaP1",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "30",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "pyzvctFBrnf7glUx": 1,
+    "F4wHJtXWhPY2U4aV": 3
+   },
+   "technique": "Blood Manipulation",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "uJDin3pB0j6Pt2KK",
+   "name": "Restrained (Blood Techniques)",
+   "img": "modules/jjk5e/icons/techniques/blood-manipulation.svg",
+   "statuses": [
+    "restrained"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "restrained"
+    }
+   },
+   "_key": "!items.effects!s8hzPznLcMB8vsLg.uJDin3pB0j6Pt2KK"
+  },
+  {
+   "_id": "FiMuV25bcEXdbaP1",
+   "name": "Prone (Blood Techniques)",
+   "img": "modules/jjk5e/icons/techniques/blood-manipulation.svg",
+   "statuses": [
+    "prone"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!s8hzPznLcMB8vsLg.FiMuV25bcEXdbaP1"
+  }
+ ],
+ "folder": "WIi7n6E644owqihn",
+ "_key": "!items!s8hzPznLcMB8vsLg"
+}

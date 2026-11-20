@@ -1,0 +1,269 @@
+{
+ "_id": "HTujAuWtwUzZQr2G",
+ "name": "Light Techniques",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/and-light.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Creeps and Curses V.3.1</em></p><p><em>████ and Light — Innate Technique (3rd level)</em></p><p>At 3rd level, you have learned two new ways to use your technique:</p>\n<p><strong>Rain of Light.</strong> As an action for 3 cursed energy, you manifest bars of light to devastate your enemies. In either a 15 ft cone or 10 ft radius around yourself, you force all creatures to make a Dexterity saving throw. On a failed save, they take 3d10 radiant damage and are restrained by bars of light piercing their body. A restrained creature can repeat the save at the end of their turn, escaping on a success. This damage increases to 5d10 at 6th level, 8d10 at 11th level, and 10d10 at 18th level. The range of the cone increases by 15 ft and the radius increases by 5 ft at 6th, 11th, and 18th level.</p>\n<p><strong>████ of Dawn.</strong> As an action for 2 cursed energy, any magical darkness within 30 feet of you is dispelled. Additionally, each hostile creature within 30 feet of you must make a Constitution saving throw. A creature takes radiant damage equal to 2d10 + your CE modifier and is blinded until the end of their turn on a failed saving throw, and half as much damage and not being blinded on a successful save. A creature behind total cover is unaffected. This increases to 3d10 at 6th level, 5d10 at 11th level and 8d10 at 18th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "DoKKYxnV31QiXUSk": {
+    "_id": "DoKKYxnV31QiXUSk",
+    "type": "save",
+    "name": "Action (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "cone",
+      "size": "15",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": [
+      {
+       "number": 3,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "radiant"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "7pPnBAsvCt4Uan8g",
+      "onSave": false
+     }
+    ]
+   },
+   "dVjIsbJKfQ0R0yOC": {
+    "_id": "dVjIsbJKfQ0R0yOC",
+    "type": "save",
+    "name": "Action (2 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": []
+    },
+    "effects": [
+     {
+      "_id": "NSo2T0ad2zKYwIpB",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "cone",
+    "size": "15",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": false
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "dmgScale": {
+    "DoKKYxnV31QiXUSk": [
+     [
+      0,
+      "3d10"
+     ],
+     [
+      6,
+      "5d10"
+     ],
+     [
+      11,
+      "8d10"
+     ],
+     [
+      18,
+      "10d10"
+     ]
+    ]
+   },
+   "ceCosts": {
+    "DoKKYxnV31QiXUSk": 3,
+    "dVjIsbJKfQ0R0yOC": 2
+   },
+   "technique": "████ and Light",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "7pPnBAsvCt4Uan8g",
+   "name": "Restrained (Light Techniques)",
+   "img": "modules/jjk5e/icons/techniques/and-light.svg",
+   "statuses": [
+    "restrained"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "restrained"
+    }
+   },
+   "_key": "!items.effects!HTujAuWtwUzZQr2G.7pPnBAsvCt4Uan8g"
+  },
+  {
+   "_id": "NSo2T0ad2zKYwIpB",
+   "name": "Blinded (Light Techniques)",
+   "img": "modules/jjk5e/icons/techniques/and-light.svg",
+   "statuses": [
+    "blinded"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "blinded"
+    }
+   },
+   "_key": "!items.effects!HTujAuWtwUzZQr2G.NSo2T0ad2zKYwIpB"
+  }
+ ],
+ "folder": "IGfpCBBJLQfBc6m2",
+ "_key": "!items!HTujAuWtwUzZQr2G"
+}

@@ -1,0 +1,71 @@
+{
+ "_id": "dbu4srFZYGuADwOI",
+ "name": "Cloak of Invisibility",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/sky-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Sky Shape</em></p>\n<p>As an action, for 3 Cursed Energy you can cast the invisibility spell as the sky surrounds you preventing others from seeing you. When you reach third level, you also gain the benefits of <em>Sky Armor</em> when invisible.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Sky Shape",
+  "activities": {
+   "T5hurwXjygV2WPIv": {
+    "_id": "T5hurwXjygV2WPIv",
+    "type": "utility",
+    "name": "Action (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "T5hurwXjygV2WPIv": 3
+   },
+   "prereq": {
+    "features": [
+     [
+      "Sky Shape"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "CIlfZOL4m5ZkufHa",
+ "sort": 100,
+ "_key": "!items!dbu4srFZYGuADwOI"
+}

@@ -1,0 +1,32 @@
+{
+ "_id": "CTTD5FDs0Txn2oZx",
+ "name": "Immortality",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/body-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Body Manipulation — Innate Technique (18th level)</em></p><p>At the 18th level, your age is the same as the body you take over, making you immortal as long as you keep switching bodies.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Body Manipulation 18"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Body Manipulation",
+   "level": 18
+  }
+ },
+ "folder": "suKJQVV38yYdZJCL",
+ "_key": "!items!CTTD5FDs0Txn2oZx"
+}

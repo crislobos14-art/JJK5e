@@ -1,0 +1,167 @@
+{
+ "_id": "yMf8wQuycSMp1VuC",
+ "name": "Nyoi Staff",
+ "type": "weapon",
+ "img": "icons/svg/sword.svg",
+ "folder": "TBXVbdCh1Kxu8AKz",
+ "system": {
+  "description": {
+   "value": "<p><em>Weapon(Quarterstaff), Grade 1</em></p><p>This acts as a Quarterstaff with the Reach property. You have a +3 bonus to attack and damage rolls and on a hit you deal an additional 1d12 lightning damage. If wielded by a creature with Mythical Beast Amber, once per turn they can spend 1 cursed energy as a free action to give the staff a positive charge. As an action, you can release a lightning bolt to the staff if it is within 30 ft of you. All creatures between you and the staff must make a Dexterity saving throw against your Cursed Energy save DC, taking 1d12 lightning damage per charge on a failed save or half as much on a successful save.</p>"
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "simpleM",
+   "baseItem": "quarterstaff"
+  },
+  "damage": {
+   "base": {
+    "number": 1,
+    "denomination": 6,
+    "types": [
+     "bludgeoning"
+    ]
+   },
+   "versatile": {
+    "number": 1,
+    "denomination": 8,
+    "types": [
+     "bludgeoning"
+    ]
+   }
+  },
+  "range": {
+   "value": 5,
+   "long": null,
+   "units": "ft",
+   "reach": 5
+  },
+  "properties": [
+   "mgc",
+   "ver"
+  ],
+  "proficient": null,
+  "quantity": 1,
+  "activities": {
+   "VYuQDDZlTxyz0lUL": {
+    "_id": "VYuQDDZlTxyz0lUL",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "melee",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   },
+   "3BclauINRlQQM2t9": {
+    "_id": "3BclauINRlQQM2t9",
+    "type": "utility",
+    "name": "Special (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   },
+   "IJuBTGiUyXbRuMRA": {
+    "_id": "IJuBTGiUyXbRuMRA",
+    "type": "save",
+    "name": "Action",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "30",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 12,
+       "bonus": "",
+       "types": [
+        "lightning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "magicalBonus": 3,
+  "rarity": "veryRare",
+  "attunement": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "1st Grade",
+   "ceCosts": {
+    "3BclauINRlQQM2t9": 1
+   }
+  }
+ },
+ "_key": "!items!yMf8wQuycSMp1VuC"
+}

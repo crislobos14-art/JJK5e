@@ -1,0 +1,71 @@
+{
+ "_id": "4qqfHkOLLEQVSapF",
+ "name": "Retrograde Station",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/retrograde.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Reversion</em></p>\n<p>As an action while touching part of a nonliving object that was destroyed an hour ago, you can spend 2 cursed energy to entirely repair it. Any other fragments or separated parts of it disappear and any destroyed parts reform for the object. At 6th level this increases to 1 day, at 8th level this increases to 7 days, at 11th level this increases to 1 month, at 18th level this becomes 1 year and at 20th level this increases to any point in time.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Reversion",
+  "activities": {
+   "qeHzFKGFnqMXxdju": {
+    "_id": "qeHzFKGFnqMXxdju",
+    "type": "utility",
+    "name": "Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "qeHzFKGFnqMXxdju": 2
+   },
+   "prereq": {
+    "features": [
+     [
+      "Reversion"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "xdlt8ITade4Eg7u9",
+ "sort": 100,
+ "_key": "!items!4qqfHkOLLEQVSapF"
+}

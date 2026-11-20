@@ -1,0 +1,42 @@
+{
+ "_id": "dretiz0HBLcJ3FBN",
+ "name": "Beginner’s Luck",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/miracle.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Little Miracles</em></p>\n<p>You have learned to more efficiently store up luck. You can now store an additional number of Miracles equal to your CE modifier.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Little Miracles",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Little Miracles"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "Ja2gS6J7aZ9mXHwS",
+ "sort": 100,
+ "_key": "!items!dretiz0HBLcJ3FBN"
+}

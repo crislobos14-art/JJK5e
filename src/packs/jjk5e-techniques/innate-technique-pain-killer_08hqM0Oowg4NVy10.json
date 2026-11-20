@@ -1,0 +1,118 @@
+{
+ "_id": "08hqM0Oowg4NVy10",
+ "name": "Innate Technique: Pain Killer",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/pain-killer.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>While you cannot heal, you can stop injuries from getting worse.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.kiwHEzmGJGB8ucAg]{Pain Killer}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.bWfoIzaKvg4hfuBH]{Practiced Hands}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.0CMx0hKTB25yqUAb]{Pain Breaker}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.j9yv3LQ6VU4LZZeC]{Analgesic}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.9IgJ0CNa9s1UAeaN]{Domain Expansion: Medical Clinic}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "XiPGFA7AaPu4Yfca": {
+    "_id": "XiPGFA7AaPu4Yfca",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Pain Killer (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.kiwHEzmGJGB8ucAg",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "c7aJJIo0fzocyVxK": {
+    "_id": "c7aJJIo0fzocyVxK",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Pain Killer (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.bWfoIzaKvg4hfuBH",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "IjRiuIN2sVX6DpUz": {
+    "_id": "IjRiuIN2sVX6DpUz",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Pain Killer (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.0CMx0hKTB25yqUAb",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "LgedmIFm2hv73wHy": {
+    "_id": "LgedmIFm2hv73wHy",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Pain Killer (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.j9yv3LQ6VU4LZZeC",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "U57cNVjyEabKZ5Tq": {
+    "_id": "U57cNVjyEabKZ5Tq",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Pain Killer (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.9IgJ0CNa9s1UAeaN",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Pain Killer"
+  }
+ },
+ "_key": "!items!08hqM0Oowg4NVy10"
+}

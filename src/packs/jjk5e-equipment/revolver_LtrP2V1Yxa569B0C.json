@@ -1,0 +1,74 @@
+{
+ "_id": "LtrP2V1Yxa569B0C",
+ "name": "Revolver",
+ "type": "weapon",
+ "img": "icons/svg/sword.svg",
+ "folder": "8L9REK3UZxFoXRJA",
+ "system": {
+  "description": {
+   "value": "<p>Martial ranged weapon. 2d6 piercing. Ammunition (40/120), reload (6).</p><p><strong>Special:</strong> reload (6)</p><p><em>Reload: number of shots before you must reload (action).</em></p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "martialR",
+   "baseItem": ""
+  },
+  "damage": {
+   "base": {
+    "number": 2,
+    "denomination": 6,
+    "types": [
+     "piercing"
+    ]
+   }
+  },
+  "range": {
+   "value": 40,
+   "long": 120,
+   "units": "ft"
+  },
+  "properties": [
+   "amm",
+   "rel"
+  ],
+  "proficient": 1,
+  "price": {
+   "value": 25.0,
+   "denomination": "gp"
+  },
+  "quantity": 1,
+  "activities": {
+   "L2xGy0xMPLL7Ofv5": {
+    "_id": "L2xGy0xMPLL7Ofv5",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "ranged",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "priceUSD": "$2,500"
+  }
+ },
+ "_key": "!items!LtrP2V1Yxa569B0C"
+}

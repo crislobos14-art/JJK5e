@@ -1,0 +1,118 @@
+{
+ "_id": "HAdDNpVlz1tL6SCL",
+ "name": "Innate Technique: Vairocana",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/vairocana.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>Harmony and Chaos, the infinite universe that makes up all of creation.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.yFuudP4sVGA43MxC]{Harmony}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.5GIEPo1b6c1zyGl0]{Chaos}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.UATRcguzxf0S7YgE]{Chaos Amplification}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.paRshIeAw9opHQxu]{Balance}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.yQ18DyR8axN13pwh]{Domain Expansion: Mandala of Mutual Paradox}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "k6H5iMxV1EBaUeiW": {
+    "_id": "k6H5iMxV1EBaUeiW",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Vairocana (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.yFuudP4sVGA43MxC",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "TQLxLsv8G37AFiLv": {
+    "_id": "TQLxLsv8G37AFiLv",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Vairocana (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.5GIEPo1b6c1zyGl0",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "jjpyNByRtxxqfji1": {
+    "_id": "jjpyNByRtxxqfji1",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Vairocana (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.UATRcguzxf0S7YgE",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "Im4aX3uSkPcxwMRN": {
+    "_id": "Im4aX3uSkPcxwMRN",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Vairocana (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.paRshIeAw9opHQxu",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "bUPfrs00Wru5GvDS": {
+    "_id": "bUPfrs00Wru5GvDS",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Vairocana (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.yQ18DyR8axN13pwh",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Vairocana"
+  }
+ },
+ "_key": "!items!HAdDNpVlz1tL6SCL"
+}

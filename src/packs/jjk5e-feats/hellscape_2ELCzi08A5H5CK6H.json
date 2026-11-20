@@ -1,0 +1,142 @@
+{
+ "_id": "2ELCzi08A5H5CK6H",
+ "name": "Hellscape",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/disaster-flames.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Maximum: Meteor</em></p>\n<p>Your presence can now be felt, all around. As an action for 10 Cursed Energy, you can cause all non magical objects and structures of your choice in a 100 ft radius to melt. As an action you can either control move the lava 10 ft in any direction (must have area to spread to) or control it directly to make two cursed energy attacks against a creature within 60 ft of the Hellscape area, dealing 10d8 fire damage on a hit. Each creature that enters the lava or starts their turn touching the lava must make a Constitution saving throw, taking 8d8 fire damage on a failed save or half as much on a success. The lava cools after 10 minutes.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Maximum: Meteor",
+  "activities": {
+   "IEN7JyEj9hDNJAgs": {
+    "_id": "IEN7JyEj9hDNJAgs",
+    "type": "utility",
+    "name": "Action (10 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "100",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     }
+    },
+    "duration": {
+     "units": "inst"
+    }
+   },
+   "JGTPSWbBbVbL0qXu": {
+    "_id": "JGTPSWbBbVbL0qXu",
+    "type": "save",
+    "name": "Action",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "60",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 10,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "fire"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "IEN7JyEj9hDNJAgs": 10
+   },
+   "prereq": {
+    "features": [
+     [
+      "Maximum: Meteor"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "4qq7EY8SFVGjnL4g",
+ "sort": 300,
+ "_key": "!items!2ELCzi08A5H5CK6H"
+}

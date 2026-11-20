@@ -1,0 +1,95 @@
+{
+ "_id": "NKo4xTL2nxoqeOSt",
+ "name": "Blood Constructs",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/blood-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Blood Manipulation — Innate Technique (1st level)</em></p><blockquote><p>You were born with a complex ability held and practiced by the Kamo family, you can control your blood.</p></blockquote><p>Starting at 1st level, you have been blessed with the Innate Technique of the Kamo clan, making you begin with the most basic technique, the blood constructs. You can pull blood from an available source to create a semi-solid construct. As an action for 1 CE and 1 HP, you can create a small construct smaller than a 5ft by 5ft space. For every 5 ft the price increases by 1 CE and HP. You can ignore the HP cost if you have an alternate source of blood. These constructs have HP equal to your level times CE spent. <br />\n Once as part of a long rest, you can spend $100 and hit points up to your proficiency bonus to fill a Blood Bag with your own blood. This Blood Bag counts as a source of hit points for your Blood Manipulation features. A Blood Bag lasts 5 days outside of refrigeration before it goes bad. You can have a number of Blood Bags equal to your Constitution modifier at once.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "wVNUhJj3IichuJs5": {
+    "_id": "wVNUhJj3IichuJs5",
+    "type": "utility",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "wVNUhJj3IichuJs5": 1
+   },
+   "technique": "Blood Manipulation",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "WIi7n6E644owqihn",
+ "_key": "!items!NKo4xTL2nxoqeOSt"
+}

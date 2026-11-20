@@ -1,0 +1,80 @@
+{
+ "_id": "OAiNauTJ0md3hlr6",
+ "name": "Cursed Corpse (Hard Shell)",
+ "type": "race",
+ "img": "modules/jjk5e/icons/race.svg",
+ "system": {
+  "description": {
+   "value": "<p>Beings made of cursed energy within a shell, somehow gaining sentience.</p>\n<p><strong>Ability Score Improvement.</strong> You increase one ability score of your choice by 4, as you are purpose built for a single purpose.</p>\n<p><strong>Age.</strong> Your lifespan is hypothetically infinite if you repair yourself.</p>\n<p><strong>Alignment.</strong> Cursed Corpses are almost always neutral people, not caring about what happens to others around them and usually wanting to exist peacefully.</p>\n<p><strong>Size.</strong> Your size can be small to large.</p>\n<p><strong>Speed.</strong> Your base walking speed is 35 feet.</p>\n<p><strong>Unnatural.</strong> As a construct, you don’t need to breathe, drink, eat, or sleep. However you need materials to mend yourself during a rest.</p>\n<p><strong>Languages.</strong> You can speak, read, and write Common</p>\n<p><strong>Subrace.</strong> There are multiple forms of corpses. The soft bodies range from plush like, to normal living materials like flesh. Hard Shell is the hard skinned stone, wood, or metal.  </p>\n<p><strong>Hard Shell</strong></p>\n<p>The more complicated intricate form of Cursed Corpses are the hard shells. Their combat ability is not to be underestimated.</p>\n<p><strong>Integrated Armor.</strong> Your body has built-in defensive layers, which can be enhanced with armor.</p>\n<ul>\n<li>\n<p>You gain a +1 bonus to Armor Class.  </p>\n</li>\n<li>\n<p>You can don only armor with which you have proficiency. To don armor, you must incorporate it into your body over the course of 1 hour, during which you must remain in contact with the armor. To doff armor, you must spend 1 hour removing it. You can rest while donning or doffing armor in this way.  </p>\n</li>\n<li>\n<p>While you live, your armor can't be removed from your body against your will.</p>\n</li>\n</ul>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "identifier": "cursed-corpse-hard-shell",
+  "movement": {
+   "walk": 35,
+   "units": "ft"
+  },
+  "type": {
+   "value": "construct",
+   "subtype": "",
+   "custom": ""
+  },
+  "advancement": {
+   "g9QhsX9JGWlUe25Y": {
+    "_id": "g9QhsX9JGWlUe25Y",
+    "type": "Size",
+    "configuration": {
+     "sizes": [
+      "sm",
+      "med",
+      "lg"
+     ]
+    },
+    "value": {}
+   },
+   "2VzcgghJDlNDLCls": {
+    "_id": "2VzcgghJDlNDLCls",
+    "type": "AbilityScoreImprovement",
+    "level": 0,
+    "title": "Ability Score Increase (+4 to one ability)",
+    "configuration": {
+     "points": 4,
+     "fixed": {},
+     "cap": 4,
+     "locked": []
+    },
+    "value": {}
+   },
+   "ig7XTOuryLzpY5CN": {
+    "_id": "ig7XTOuryLzpY5CN",
+    "type": "ItemGrant",
+    "level": 0,
+    "title": "Traits",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-races.Item.e0r2srK6XXlfRH1Q",
+       "optional": false
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-races.Item.jBMi8otDa8Q5uuNk",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": null,
+ "_key": "!items!OAiNauTJ0md3hlr6"
+}

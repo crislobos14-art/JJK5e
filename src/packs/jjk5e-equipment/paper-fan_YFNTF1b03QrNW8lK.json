@@ -1,0 +1,125 @@
+{
+ "_id": "YFNTF1b03QrNW8lK",
+ "name": "Paper Fan",
+ "type": "weapon",
+ "img": "icons/svg/sword.svg",
+ "folder": "xnCPfIMW0yQ370pR",
+ "system": {
+  "description": {
+   "value": "<p><em>Weapon (War Fan), Grade 2</em></p><p>A ceremonial paper fan that appears ancient, but well maintained. It has been imbued with potent curses and can be properly used as a weapon. This paper fan can be used as a +1 War Fan with the addition of the finesse property and on a hit, it deals 1d8 slashing damage.</p>\n<p><strong>Retribution.</strong> As a reaction to taking damage, you can spend 2 CE to make a melee or ranged spell attack against the creature that damaged you if they are within 30 feet and on a hit you deal 4d8 slashing damage and the target's movement speed is reduced to 0 until the end of its next turn.</p>"
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "simpleM",
+   "baseItem": ""
+  },
+  "damage": {
+   "base": {
+    "number": 1,
+    "denomination": 6,
+    "types": [
+     "bludgeoning"
+    ]
+   }
+  },
+  "range": {
+   "value": 5,
+   "long": null,
+   "units": "ft",
+   "reach": 5
+  },
+  "properties": [
+   "lgt",
+   "mgc"
+  ],
+  "proficient": null,
+  "quantity": 1,
+  "activities": {
+   "ILqFZbAF3cJhBj6Q": {
+    "_id": "ILqFZbAF3cJhBj6Q",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "melee",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   },
+   "Upgg7wDfCaglC07r": {
+    "_id": "Upgg7wDfCaglC07r",
+    "type": "damage",
+    "name": "Reaction (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "30",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 4,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "slashing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "rarity": "rare",
+  "attunement": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "2nd Grade",
+   "ceCosts": {
+    "Upgg7wDfCaglC07r": 2
+   }
+  }
+ },
+ "_key": "!items!YFNTF1b03QrNW8lK"
+}

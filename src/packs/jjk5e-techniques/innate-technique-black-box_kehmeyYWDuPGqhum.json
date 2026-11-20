@@ -1,0 +1,118 @@
+{
+ "_id": "kehmeyYWDuPGqhum",
+ "name": "Innate Technique: Black Box",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/black-box.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>You can create incredibly tough black cube barriers.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.gniQgtH4HauRqvgz]{Dark Cube}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.q2XNvJF1rNksTOkC]{Black Box Reinforcement}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.0VcTooXJ3pi9MX0A]{Perfect Cube}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.LUVi8jTFaORAG7eK]{Maximum: Midnight Armor}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.eaPQms8jfUQLLGOl]{Domain Expansion: Primordial Gap}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "ZVyaYPD13MEHFSfi": {
+    "_id": "ZVyaYPD13MEHFSfi",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Black Box (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.gniQgtH4HauRqvgz",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "OoqiZyhOWmRBxSac": {
+    "_id": "OoqiZyhOWmRBxSac",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Black Box (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.q2XNvJF1rNksTOkC",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "QOmpotGi1yRt9RiW": {
+    "_id": "QOmpotGi1yRt9RiW",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Black Box (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.0VcTooXJ3pi9MX0A",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "JTZBmaC3rrOSZZk0": {
+    "_id": "JTZBmaC3rrOSZZk0",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Black Box (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.LUVi8jTFaORAG7eK",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "GGtuOaqGz3WPfZpt": {
+    "_id": "GGtuOaqGz3WPfZpt",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Black Box (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.eaPQms8jfUQLLGOl",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Black Box"
+  }
+ },
+ "_key": "!items!kehmeyYWDuPGqhum"
+}

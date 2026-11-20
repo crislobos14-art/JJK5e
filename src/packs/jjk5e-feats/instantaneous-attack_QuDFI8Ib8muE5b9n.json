@@ -1,0 +1,42 @@
+{
+ "_id": "QuDFI8Ib8muE5b9n",
+ "name": "Instantaneous Attack",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/new-shadow-style.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Batto Sword Draw</em></p>\n<p>You have learned the fastest way to draw defensively. Once per round after activating Simple Domain, you can make a melee attack against someone who enters it.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Batto Sword Draw",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Batto Sword Draw"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "gFod6wGzEy6UctqC",
+ "sort": 200,
+ "_key": "!items!QuDFI8Ib8muE5b9n"
+}

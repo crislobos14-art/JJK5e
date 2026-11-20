@@ -1,0 +1,906 @@
+{
+ "_id": "zcUm7ZxWM0gC0yVs",
+ "name": "Clan Sorcerer",
+ "type": "background",
+ "img": "modules/jjk5e/icons/background.svg",
+ "folder": "CRaGqJh5HQKmdfVy",
+ "system": {
+  "description": {
+   "value": "<p>You have spent your life as a sorcerer being part of a clan. You are well-versed in manipulating Cursed Energy, and you also possess great mastery over your innate technique. You are not necessarily well-treated or even particularly well-liked within your clan.<br />\n<strong>Feat:</strong> Pick one Innate Technique feat<br />\n<strong>Skill Proficiencies:</strong> Insight, History<br />\n<strong>Equipment:</strong> A clan symbol (a gift to you as part of your clan), a technique manual, formal clothing, a set of common clothes, and a wallet containing $1,500.<br />\n<strong>Feature:</strong> <strong>Family Ties</strong><br />\n As a Clan Sorcerer, you command the respect of those in Sorcery, and you are an effective sorcerer. You and your companions can expect to receive help from people who like your family.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "identifier": "clan-sorcerer",
+  "advancement": {
+   "dYvY1yJ0GeNl1L59": {
+    "_id": "dYvY1yJ0GeNl1L59",
+    "type": "Trait",
+    "level": 0,
+    "title": "Skill Proficiencies",
+    "configuration": {
+     "mode": "default",
+     "grants": [
+      "skills:his",
+      "skills:ins"
+     ],
+     "choices": []
+    },
+    "value": {}
+   },
+   "tk1PpG6Pzx6jkMuw": {
+    "_id": "tk1PpG6Pzx6jkMuw",
+    "type": "ItemChoice",
+    "level": 0,
+    "title": "Innate Technique Feat (background feat)",
+    "value": {},
+    "configuration": {
+     "choices": {
+      "0": {
+       "count": 1,
+       "replacement": false
+      }
+     },
+     "allowDrops": true,
+     "type": "feat",
+     "pool": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.9pm0VC5VpyTtmxUN"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.G5274nmKTY63NDgo"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.MazHPbgT9CJ26tTT"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.LcH1g5WZm76oa9LX"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.cSChMLjSWV6eGBho"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.jcGIYcAU3HqFomFl"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.TVPk2kxwWrPa9Dsi"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.WPTbnq0LKa6E8YR8"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.NgcWuk6OZh5VvZWa"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.cqjm8HdCKvGdjYwk"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.DDXBbBTdzQNCzfBp"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.0BFneiaPMP2X57XH"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.W922ZBZwuBYvOCPt"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.cvnDcOT3JnVig75L"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.0BcdtSuwsMxmSEsf"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.K8LKS1WSjboo56G2"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.L8ZVE2QpdnYn2BQ0"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.JNFDWDfMB3h8oG5q"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.dakohlOtfQfSnAhq"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.SB9abj3aHRhwq4hL"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.sh7KkVvEDFjZaewQ"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.Vw0Ab2ObUrl6OxxU"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.eEwsCj0wKuDAtTjJ"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.pnmkM59H5o15rIF7"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.75PRCL0vQ2Stc0MF"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.WniGPGfesQMHg4Aj"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.D9M7eYVWJ2vXvkAN"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.7t9e6AQRRY4OkR85"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.r4kLIGgoAxG0WhOI"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.WzeUzFWsk9AFiCzV"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.WxSK3jQxFmdYVG0z"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.V06eGkoDGUNYKBpt"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.YZO1Mc6Heolig1sg"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.asRsSMd9zeLlgpyL"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.Ykgt5wqtPV1ETLnd"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.LPE9zxTJRfH6rLSE"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.fu2DyoMfKLdvkV0d"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.RKQ914SfcvJ9Uo09"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.wXDerODkoWujlI81"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.lC9tnmDLJkuNmjtZ"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.XGgh8DE8cMTgqOun"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.fc7qHDllT48DkEqP"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.USyvSCG1ecdrp6qc"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.PDj2Gu2S29UQVfcN"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.4PZXRWAqEr1fidOS"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.UuX2ZFBhZvKrKfQH"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.Af1ZMKcggMOUNFMt"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.YgaCUaVLzXTbZFcS"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.fS8A8sjlCTaa5nal"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.AV3e9tW4oUyunYHv"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.KCl5SmLUv3UZL1Oa"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.kPKytCOanEqpxn5q"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.3HMCyHpFMnwQktYb"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.R6GIKl5g5dus2u9L"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.RUr3fHSfWpcvAUGO"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.iLbl2kWtIOA2hA1O"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.wYhQhSlnoCr7kqhg"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.XX3mraqnzOyM6sxw"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.B61C8WeS12rh7WeW"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.E1x5rroCXkdnRV2p"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.J0QM71wCMS4R9imj"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.BocQDFFBfRKXEFBX"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.FcCT3pME3FT62InU"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.ugc1umUHeeqEx4pQ"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.8LGbt2QpvSSZv9Rn"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.KK15BsYoUeG6Yuck"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.e9Ipf5jIaVVZ5Ue2"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.HjIZcb7XtjtE2ocF"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.ZfaSX0sU8REP2bqV"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.SzB2M3uQ7DyeomoT"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.ReMXNeMg9fvewRn1"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.2ELCzi08A5H5CK6H"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.Q1qqOPPEbJEfzmXK"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.8ADaewO9BHNwiGM6"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.GCdVifVCL7A2JyrF"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.6bEfSoFqtBNRPPgm"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.prrQ9kXzogKsrr47"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.PHwPWELj9jl92FHN"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.NqzlpHbC7WOz2Oj3"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.BSQjbv5lPottvmMR"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.gR2KxycwAm9AR3sQ"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.HQpbH2vRL83NhtmS"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.m90h3Ekrr1gjUw6P"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.YagJnOL3iAWqM4Ve"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.fwuPOkYpGbemJ4mA"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.WmWj1cxPRw9c9Uc9"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.YamGIMObLzQygHu7"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.C4NhtRjcza1ivqqk"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.0pqEBG470Cp7xbPa"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.0q3ahvpQt9wPwRJn"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.uxTOrmxthADa4RHQ"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.dzE4kbrjiaIouBaC"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.3qgs3sD9Qllm4sEl"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.LECwUVuqHERu3YYU"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.uyP2Oqc2zwrrHjgj"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.9K0dzX2tljDeeUZD"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.kZbTy0PXFwCKNNkx"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.UCf9rIcwsEkYYqRK"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.7FB4abf4IammFANC"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.zFvaQiJRjOIqt9N3"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.DMsumvTevaeOzjYe"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.WOScQE5lTu2PZHrl"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.s0C6Qf1Wwda7WOMq"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.E9mY60ADG0KqXTDv"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.LnQZntFFuMt15VpD"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.CDj4NdhcKBYrjW2p"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.uplvYFKOh990lLUt"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.ia2V87ivL7uJHpkl"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.RptOsTVqEQe3xgZs"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.O6ZpSdqOyk38NWVc"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.lec3iOX8JHH2kjEd"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.sjyaBBHVXLM1HL5k"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.gOgmeHnnKpJGL7xD"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.PL7jiwUZ9Q4PYwPc"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.GPInBkBhhDQh5bYv"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.77BiPkIICiOOUXS1"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.qmglOL1QfW3iLuPN"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.lPDpRTbneARPB4rC"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.HjlFDDaez4Ty54cz"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.WJuvxOie34S5KYgj"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.W5duwlBV6Eo8CO4a"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.UBN1RIqIcqsMeixc"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.lUF540Jspco883tx"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.2w1h3Fzi9gRqiPoF"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.10OnYOseA0tlFqyA"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.zliBMhDvTF5VnDGP"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.31xJXco9ykzAuFzo"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.sO3GOknB1VilfwJu"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.UBmImTHoSCBN1UwV"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.0otTgubsl1m6Vfiq"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.1szivA3tVCPn0poY"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.pOllUPH2K4i7mWW7"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.tsFnTUyBw4YSR5Xj"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.RtNGGyzrpvxy3ZZI"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.EOtgLgG7JBgdPKin"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.L30arDIQny89xa11"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.K4zdSyPh9KprkqzG"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.5btxwzaRUvTUxvM6"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.YA2HaHeTWqVPue38"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.OvHymvVnhXGERgOM"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.mWEZovEyjml1ndRK"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.LMOXAAoH42D7H9GN"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.QfTzlTBdhfB0MOQC"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.MtgxEgpIlSQYA3Np"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.hdsV384kJqqvoiOF"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.c2JA0xohKR192xc4"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.dretiz0HBLcJ3FBN"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.dVbv4HFQOj5IzHa2"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.F2DfQaud1F1Jm9pL"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.nTIk1d8lhMAJ6Xv1"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.7IR59MfKA24XeAqq"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.wueyCsaje1tUBhuQ"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.7hiGGHlI0437YhbX"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.AcNQ4FC2wPofNbdB"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.HpNz9JDqjejv7kjA"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.y0ttUSsejL9Yr7cQ"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.Ph7qLr8HcwdAjrIJ"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.fxcgtK3HPxzHzvnL"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.Fl8ZRhloX8Xw82xG"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.QuDFI8Ib8muE5b9n"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.9wL6klgi4eJ7iBDT"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.IceBoustbhnfJLd1"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.vlk8MX6BA2oTv98g"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.NqRyYQMgFucx13fq"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.B5AugG6aXTsdBkCK"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.lTWqar03r6aU1DnW"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.0smLF44edBbcNfl1"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.OplWXe9zrIpPBWOt"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.wueBNQftiq2TNnEp"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.A0Mtq2jtb2UjVHAX"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.5w3xWFIpOw1sZPKU"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.rCDSPQOLsec0G2cg"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.mmXJ2K9quT01hkQ1"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.BDP7uoVucBNtzUNp"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.iRun5GO9922sFwiz"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.WedoBXBgswX8XnKw"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.XEAPiCEU2CTb4ekl"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.iYhKMrlnDLL145nM"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.475OcvI8OtwvCqy3"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.AGYnuu3WCAyX21It"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.ISnyj5dXvyfQqsiI"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.Gf0XI8lwB5ayrSQJ"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.3PQ1hnq52wbULovp"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.UwCrJkvFOY5gkuLV"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.aCFFuHg1NgEyHFFi"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.Q6WqRpBFSO7ZXG8m"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.4qqfHkOLLEQVSapF"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.yo0JVtjDuc8iwO5r"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.CNFcMy0MNRW0epCA"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.nsB5Fyvh8DXXsbMR"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.YyVEPkLupYDJZxgh"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.N0SbXlpggWTIxjjt"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.M4zQZXl8MXljmHSK"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.NHXIxo8NvAG6OCNS"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.g6vXNF5knJQ3YoZC"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.ijzY7IYgBzX1Dfeq"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.v7tlZZYwGIaBtkbh"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.uuZYQXAZ2Msu86di"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.nsBbLaPoahCoRCVM"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.YpYwThQAdejiXDwW"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.JXwt79lY1WNXEfor"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.AaDCd2YwJhQHdDNP"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.u937Au4lMEJcgb6F"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.XkXlP9QKMkgotHci"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.NDvgctGvFZjHTkQn"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.WXa3ZaHRk7b7PDO4"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.9kvROP4o9wm6KFr7"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.Ag3jW3dNyAYU4Xjl"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.QMm76WsIVe8dbThb"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.dbu4srFZYGuADwOI"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.1Y20N2NZKbqyPu9e"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.2OwxAUf9B8LHPmRf"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.3tUctPbWmF8xSKBM"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.Komk2Nb65pHKyEDQ"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.bVAqnOEYvVk3XdkU"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.tryiaGfKa0u3MUox"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.JTgtkz5kerB8bPLi"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.Dfq9XAgnjiTzq0X9"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.mQC0xlwc8eAg24Ci"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.K3ECG09F5qxLV88I"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.UGacSC80MoG0deAE"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.xFqYg7qUzlIUATt4"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.KEROfKHaMqMxzTfu"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.HU29SyKgX5Eir6cc"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.Biapn4UQqElS0UZs"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.zxs9MWNjgO0B3bA5"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.UAWcvq32dLThhHAW"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.K3aWNR7XSTbWOSXI"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.w4QsGDwpbTMXaxM7"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.kP7O0eTDhfNUku5J"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.2la5H1XEBmhFRdGl"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.Me90W7kGtBmtDa4X"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.6DFF0SIfWxiSCKpU"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.lLGj4BOM4kCmXD8H"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.RDk5bEnUZegEx6mK"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.HQikCDHIltZK4SMD"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.G82DSjFbpzTAoyDy"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.bx2rrvD4a6Dr6vwi"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.uACXGvmJdJgDQWuQ"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.QfLOEctmQ31XUVzQ"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.RG4L3OJERkIdy1X6"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.pG10aClodKwGc3Mu"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.QIFx9TDRUTBCFMAO"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.uo4SCaz3rUJpiXA9"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.IlD8Q3c3fmSZu5p4"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.VNmnphw79yQx1wX8"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.eWIoBHtjadBXziBK"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.WTVXwCtRbgachvwF"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.LoV0AVxSDVAH23DV"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.euJVLRKa2f6GIAfI"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.mDJGntyz3F1HE8lu"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.OhbXnwHnF5cqVVRN"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.9Dvohq65em23Hx0D"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.rERYtOHpo5UG8BVc"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.q2F4G3zeaYKM637k"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.WWdGpM33SUUZ2u9q"
+      }
+     ],
+     "restriction": {
+      "type": "",
+      "subtype": "",
+      "level": ""
+     }
+    }
+   },
+   "tH8JmRo0Meu4CEtR": {
+    "_id": "tH8JmRo0Meu4CEtR",
+    "type": "ItemChoice",
+    "level": 0,
+    "title": "Mindset",
+    "hint": "Choose the mindset that drives your sorcery (it replaces Inspiration).",
+    "value": {},
+    "configuration": {
+     "choices": {
+      "0": {
+       "count": 1,
+       "replacement": false
+      }
+     },
+     "allowDrops": true,
+     "type": "feat",
+     "pool": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.0DRc7Ftd4oRxhmPP"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.tfptMmAPJyi5Fa28"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.BDtYSEj7wP0CSJSd"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.LDbMTb0R84yNZUaZ"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.z6LYQIl1YlosCyL7"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.AypG9meZokT7ds3Q"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.BOsYXnjKpnbtwfmW"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.BXVn0o2H4L9n82TN"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.g4KqCmc1MqQHfLFV"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.NEra1YZ6BxPjoGdV"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.H01e3yAvW04BYK0o"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.66G2J5gn804C8EZI"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.mLhSUvyfKRj4jU5u"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.5WUvEI9FuZelFdaw"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.M6qTsvh64leWYpJm"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.a7Rh5bEHZv0PyaA8"
+      }
+     ],
+     "restriction": {
+      "type": "",
+      "subtype": "",
+      "level": ""
+     }
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "_key": "!items!zcUm7ZxWM0gC0yVs"
+}

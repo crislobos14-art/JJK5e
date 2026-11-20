@@ -1,0 +1,71 @@
+{
+ "_id": "iRun5GO9922sFwiz",
+ "name": "White Space",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/projection-sorcery.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Acceleration</em></p>\n<p>As a reaction to an attack or damaging effect, you can spend 2 cursed energy to create a number of blank animation frames to absorb any damage. Roll a number of d10s equal to 2 + your CE modifier. Any damage you take before the start of your next turn instead damages these blank frames, but you take any remaining damage.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Acceleration",
+  "activities": {
+   "wULP20V5Tn2w6el5": {
+    "_id": "wULP20V5Tn2w6el5",
+    "type": "utility",
+    "name": "Reaction (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "wULP20V5Tn2w6el5": 2
+   },
+   "prereq": {
+    "features": [
+     [
+      "Acceleration"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "CFoGNkravs7kgdkV",
+ "sort": 100,
+ "_key": "!items!iRun5GO9922sFwiz"
+}

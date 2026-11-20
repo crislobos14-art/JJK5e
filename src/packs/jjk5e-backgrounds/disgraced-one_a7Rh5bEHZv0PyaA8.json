@@ -1,0 +1,46 @@
+{
+ "_id": "a7Rh5bEHZv0PyaA8",
+ "name": "Disgraced One",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/mindset.svg",
+ "system": {
+  "description": {
+   "value": "<p>You were cast out, reviled, and forgotten. Yet none can deny your power. When you use your inspiration, all creatures within 30 ft of you are frightened for the next minute.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": ""
+  },
+  "requirements": "Mindset",
+  "activities": {
+   "ytEYocG30ZJD1GYF": {
+    "_id": "ytEYocG30ZJD1GYF",
+    "type": "utility",
+    "name": "Use Inspiration",
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Spend your inspiration"
+    },
+    "consumption": {
+     "targets": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "mindset": true
+  }
+ },
+ "folder": "ymyii86sdbVo8H5C",
+ "_key": "!items!a7Rh5bEHZv0PyaA8"
+}

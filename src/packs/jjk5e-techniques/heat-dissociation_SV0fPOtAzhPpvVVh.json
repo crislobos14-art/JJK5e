@@ -1,0 +1,110 @@
+{
+ "_id": "SV0fPOtAzhPpvVVh",
+ "name": "Heat Dissociation",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/ice-formation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Ice Formation — Cursed Technique Reversal</em></p><p>Because of your mastery over Reverse Cursed Technique, you have learned your cursed technique reversal. You can now enhance the heat in the air, making creatures boil alive. As an action for 4 cursed energy, you can force a number of targets up to your CE modifier within 30 ft of you to make a Constitution saving throw. On a failure, they take 8d10 fire damage and receive one level of exhaustion. On a success, they take half as much damage and do not receive a level of exhaustion. Any damage dealt by this technique reversal also reduces the target’s maximum hit points from boiling their blood into air. The lost hit points are regained after they take a long rest. This technique’s damage increases to 10d10 fire damage at 18th level and 16d10 fire damage at 20th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Ice Formation",
+  "activities": {
+   "SzjOEAamhOfqhc6z": {
+    "_id": "SzjOEAamhOfqhc6z",
+    "type": "save",
+    "name": "Action (4 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "30",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 8,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "fire"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "SzjOEAamhOfqhc6z": 4
+   },
+   "technique": "Ice Formation",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Ice Formation"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!SV0fPOtAzhPpvVVh"
+}

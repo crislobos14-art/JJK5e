@@ -1,0 +1,33 @@
+{
+ "_id": "RmrdFMAgYcekh9LW",
+ "name": "Pursuer",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>Starting at 5th level, as part of your bonus action while entering a focus, you can move up to half your movement speed towards an enemy.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Juggernaut 5"
+ },
+ "flags": {
+  "jjk5e": {
+   "modifies": [
+    "Focus"
+   ]
+  }
+ },
+ "folder": "1ipDZJ01igqpFdub",
+ "_key": "!items!RmrdFMAgYcekh9LW"
+}

@@ -1,0 +1,42 @@
+{
+ "_id": "4PZXRWAqEr1fidOS",
+ "name": "Highest Output Alive",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/cursed-cannon.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Grape Choux</em></p>\n<p>You have never met anyone who can match you. When it comes to sheer output, you've always been overwhelmingly stronger.</p>\n<ul>\n<li>\n<p>When a feature allows you to spend additional cursed energy, you can spend even more additional cursed energy up to your proficiency bonus.  </p>\n</li>\n<li>\n<p>Once per turn, you can ignore one of the requirements for activating Maximum Output (e.g. 5 minimum CE or having 20+ CE score). This does not allow you to ignore the additional CE cost of Maximum Output.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Grape Choux",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Grape Choux"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "21KhImE6dWZGP2gJ",
+ "sort": 200,
+ "_key": "!items!4PZXRWAqEr1fidOS"
+}

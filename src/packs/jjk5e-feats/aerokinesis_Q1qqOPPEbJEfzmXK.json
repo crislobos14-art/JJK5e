@@ -1,0 +1,121 @@
+{
+ "_id": "Q1qqOPPEbJEfzmXK",
+ "name": "Aerokinesis",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/disaster-storms.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Storms of Disaster</em></p>\n<p>Through training and understanding, you have found new applications for your storms. You gain the one of the following (You can select this feat multiple times):</p>\n<ul>\n<li>\n<p><strong>Suffocation</strong>. As an action for 2 cursed energy, you target a creature within 30 ft that you can see. They must make a Constitution saving throw, taking your proficiency bonus in d6s of necrotic damage and start suffocating on a failed save. While suffocating their movement is halved and their attack rolls have disadvantage. If you are more than 30 ft away or lose concentration, the target stops suffocating.  </p>\n</li>\n<li>\n<p>Resistance to lightning and thunder damage.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Storms of Disaster",
+  "activities": {
+   "LLpvCGK1cFWc0aJF": {
+    "_id": "LLpvCGK1cFWc0aJF",
+    "type": "save",
+    "name": "Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "30",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "LLpvCGK1cFWc0aJF": 2
+   },
+   "prereq": {
+    "features": [
+     [
+      "Storms of Disaster"
+     ]
+    ]
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "iDzG7YWFM0B53btr",
+   "name": "Aerokinesis (toggle)",
+   "img": "modules/jjk5e/icons/techniques/disaster-storms.svg",
+   "changes": [
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "lightning",
+     "priority": null
+    },
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "thunder",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!Q1qqOPPEbJEfzmXK.iDzG7YWFM0B53btr"
+  }
+ ],
+ "folder": "D27pyU4vw2lSmHn4",
+ "sort": 100,
+ "_key": "!items!Q1qqOPPEbJEfzmXK"
+}

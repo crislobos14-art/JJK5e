@@ -1,0 +1,118 @@
+{
+ "_id": "pIvIaUSbNnggUeH9",
+ "name": "Innate Technique: Technique Extermination",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/technique-extermination.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>Your technique bestows its user with the gift of angelic power, capable of smiting villains and hampering enemy’s cursed techniques.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.ksvKQksG46ElTLQX]{Extinguishment}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.7l4nQGOha2dpDXkG]{Angel’s Blessing}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.7ntdHb934PcYXYk5]{Improved Extinguishment}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.xwJtNVF6QPcHKkK2]{Maximum: Jacob’s Ladder}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.QzNVXitimr4FN9q6]{Domain Expansion: Garden of Eden}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "FAX7suzNBTJrL4Cg": {
+    "_id": "FAX7suzNBTJrL4Cg",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Technique Extermination (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.ksvKQksG46ElTLQX",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "iPMbDIeUMfAXW0WO": {
+    "_id": "iPMbDIeUMfAXW0WO",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Technique Extermination (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.7l4nQGOha2dpDXkG",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "RUd2tDEycY0eFIiP": {
+    "_id": "RUd2tDEycY0eFIiP",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Technique Extermination (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.7ntdHb934PcYXYk5",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "yab11Mfk3Wz98El9": {
+    "_id": "yab11Mfk3Wz98El9",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Technique Extermination (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.xwJtNVF6QPcHKkK2",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "JdvTvkITvovKOIlV": {
+    "_id": "JdvTvkITvovKOIlV",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Technique Extermination (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.QzNVXitimr4FN9q6",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Technique Extermination"
+  }
+ },
+ "_key": "!items!pIvIaUSbNnggUeH9"
+}

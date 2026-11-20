@@ -1,0 +1,139 @@
+{
+ "_id": "uTkKYysExKqyTfA0",
+ "name": "Cursed Painting",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/esoteric-art.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Esoteric Art — Innate Technique (1st level)</em></p><blockquote><p>You were born with the ability to create cursed paintings leading to unique subspaces.</p></blockquote><p>Starting at 1st level, you can spend 1 cursed energy to create a painting of cursed ink under a Medium or smaller creature within 30 ft, forcing them to make a Dexterity saving throw. On a failed save, they are sucked into the painting. The painting takes the form of an empty 30 ft radius cube subspace of greyscale. You can change the color or create simple illustrations within the subspace as an action. You can enter, exit, place, or remove an item from the subspace of your paintings as a free action once per turn without spending cursed energy. Your subspace becomes 120 ft at 3rd level, 600 ft at 6th, and 1200 ft at 11th level.</p>\n<p>At the beginning of your turn, you must spend 1 CE to keep any creatures (including yourself) within a painting. Otherwise, they reappear at the point they disappeared.</p>\n<p>You can use a binding vow to remove the cost at the beginning of your turn by placing a method of escape. This creates an <em>Exit Painting</em> in a random, but accessible area within the subspace that allows a creature to exit the painting, reappearing in the space they disappeared.</p>\n<p>You can have a number of subspaces equal to your CE modifier, but if you have creatures in different paintings, you must spend 1 cursed energy for each subspace at the start of your turn. This increases to twice your CE modifier of paintings at 11th level.</p>\n<p>Alternatively, you can paint a physical painting and imbue it with up to 3 cursed energy during its creation, spending 1 hour painting per cursed energy. A creature that gets within 5 ft and can see the painting must make a Dexterity saving throw, getting sucked into the painting on a failed save. A painting imbued this way keeps a creature trapped for 3 rounds. The painting’s subspace can only be accessed through the physical painting.</p>\n<p>At 3rd level, you can spend additional cursed energy up to your Cursed Energy modifier to imbue the painting with more power and increase the painting time. This increases to twice your CE modifier at 11th level. This allows the painting to keep an unwilling creature trapped for an additional round for every cursed energy spent. You can also use this painting to store items, but it also counts against the number of paintings you can have at once.</p>\n<p>At 6th level, you can instead cause the painting to spend the imbued cursed energy to use <em>Ink Wave</em> against a creature that moves within 5 ft of it.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "jTp8GXWnG9RHFgGl": {
+    "_id": "jTp8GXWnG9RHFgGl",
+    "type": "save",
+    "name": "Action (1+ CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "2 * max(1, max(@abilities.wis.mod, @abilities.cha.mod))"
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "cube",
+      "size": "30",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "duration": {
+     "value": "3",
+     "units": "round",
+     "concentration": false,
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "3",
+   "units": "round"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "cube",
+    "size": "30",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": false
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceSteps": {
+    "jTp8GXWnG9RHFgGl": 1
+   },
+   "ceCosts": {
+    "jTp8GXWnG9RHFgGl": 1
+   },
+   "technique": "Esoteric Art",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "epKj1Q5Dq7LYHOJd",
+ "_key": "!items!uTkKYysExKqyTfA0"
+}

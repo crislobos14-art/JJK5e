@@ -1,0 +1,114 @@
+{
+ "_id": "QG7cUSxrMY5gk5jI",
+ "name": "Maximum: Sacrifice",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/eight-heads.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Eight Heads — Innate Technique (11th level)</em></p><p>At 11th level, when you have at least 3 <em>Fangs of Orochi</em> summoned, you can command them as an action for 6 cursed energy to move up to 40 ft, encircle a creature, and embed themselves into the ground in an unoccupied area. A barrier forms, connecting the Fangs like a cylinder resembling a trigram and trapping any within.  </p>\n<p>The barrier has a height of 20 ft and can have a maximum diameter of 15 ft. It has 20 AC and hit points equal to the hit points of the <em>Fangs of Orochi</em> used to create it. A trapped creature makes a cursed energy save at the start of their turns, taking 10d4 necrotic damage on a failed save or half as much on a successful save.</p>\n<p>If this damage reduces a humanoid to 0 hit points, the creature dies and you regain one life. Once you regain a life in this way, you cannot for 1 week.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "TngmakB38s9XNX33": {
+    "_id": "TngmakB38s9XNX33",
+    "type": "damage",
+    "name": "Action (6 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 10,
+       "denomination": 4,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "TngmakB38s9XNX33": 6
+   },
+   "technique": "Eight Heads",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "DMcMPNJMAkcTYNF8",
+ "_key": "!items!QG7cUSxrMY5gk5jI"
+}

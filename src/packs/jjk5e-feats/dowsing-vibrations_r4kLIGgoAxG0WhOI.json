@@ -1,0 +1,73 @@
+{
+ "_id": "r4kLIGgoAxG0WhOI",
+ "name": "Dowsing Vibrations",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/centipede-shroud.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Cursed Centipede</em></p>\n<p>While your centipede shikigami is summoned, you gain 100 ft tremorsense while both of your feet are on the ground. You gain a +2 bonus to attack rolls against creatures who are within your tremorsense (must be touching the ground). This increases to 150 ft at 6th level, 200 ft at 11th, and 300 ft at 18th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Cursed Centipede",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Cursed Centipede"
+     ]
+    ]
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "hst4MthGRpnoS0Ww",
+   "name": "Dowsing Vibrations (toggle)",
+   "img": "modules/jjk5e/icons/techniques/centipede-shroud.svg",
+   "changes": [
+    {
+     "key": "system.bonuses.mwak.attack",
+     "mode": 2,
+     "value": "+2",
+     "priority": null
+    },
+    {
+     "key": "system.bonuses.rwak.attack",
+     "mode": 2,
+     "value": "+2",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!r4kLIGgoAxG0WhOI.hst4MthGRpnoS0Ww"
+  }
+ ],
+ "folder": "zu76XEphc8IiezIo",
+ "sort": 100,
+ "_key": "!items!r4kLIGgoAxG0WhOI"
+}

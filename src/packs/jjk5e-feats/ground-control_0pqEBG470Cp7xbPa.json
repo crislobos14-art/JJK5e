@@ -1,0 +1,119 @@
+{
+ "_id": "0pqEBG470Cp7xbPa",
+ "name": "Ground Control",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/dragon-vein.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Earth Dragon Soul</em></p>\n<p>As an action for 3 CE, you stomp your foot and transform the ground within 30 ft in one of the following ways:</p>\n<ul>\n<li>\n<p>The ground becomes difficult terrain for all creatures other than yourself.  </p>\n</li>\n<li>\n<p>All creatures touching the ground other than you must make a Dexterity saving throw. On a failed save they are knocked prone.  </p>\n</li>\n<li>\n<p>You grant creatures of your choice within range three quarters cover until the end of your next turn with earthen walls.  </p>\n</li>\n<li>\n<p>You move one creature touching the ground with a wave of earth up to 20 ft horizontally to a point within range. An unwilling creature must make a Dexterity saving throw to avoid the effect.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Earth Dragon Soul",
+  "activities": {
+   "OCwqJpynM10CcBJ4": {
+    "_id": "OCwqJpynM10CcBJ4",
+    "type": "save",
+    "name": "Action (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "30",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    },
+    "effects": [
+     {
+      "_id": "Z9585BK1w8DxJi8T",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "OCwqJpynM10CcBJ4": 3
+   },
+   "prereq": {
+    "features": [
+     [
+      "Earth Dragon Soul"
+     ]
+    ]
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "Z9585BK1w8DxJi8T",
+   "name": "Prone (Ground Control)",
+   "img": "modules/jjk5e/icons/techniques/dragon-vein.svg",
+   "statuses": [
+    "prone"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "rounds": 1
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!0pqEBG470Cp7xbPa.Z9585BK1w8DxJi8T"
+  }
+ ],
+ "folder": "kdDPAkw4B2QyEnB0",
+ "sort": 200,
+ "_key": "!items!0pqEBG470Cp7xbPa"
+}

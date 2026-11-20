@@ -1,0 +1,206 @@
+{
+ "_id": "xwJtNVF6QPcHKkK2",
+ "name": "Maximum: Jacob’s Ladder",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/technique-extermination.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Technique Extermination — Innate Technique (11th level)</em></p><p>When you reach the 11th level, you have created an extension to your technique, one so powerful that you can burn your opponents as a radiant light falls upon them. As an action for 10 cursed energy, you summon a trumpet of light in your hands, blowing into it as you choose a point within 200 feet of you. A beam of light strikes down in a 10-foot radius circle centered on the point you choose, every creature in said area other than you has to make a Charisma saving throw. On a failure, they take 10d12 radiant damage and suffer the effects of <em>Extinguishment</em> for 2 minutes. On a success, they take half as much damage. Undead, cursed spirits and creatures of evil alignment make this saving throw at disadvantage.<br />\n You can also use this technique to destroy barriers and cursed objects. As an action for 6 cursed energy, you can summon a trumpet of light and blow into it, making a beam of light targeting a cursed object, cursed item, cursed tool, magic item, or any kind of barrier created by cursed energy or magic within 30 feet. Make a cursed energy attack roll against the cursed energy or spell save DC. On a hit you destroy the target, neutralizing barriers and power of cursed objects.<br />\n If you use this technique with Maximum Output, its beam of light increases to a 30-foot circle and ignores features that reduce damage.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "g5wT5D5gGs3zfogG": {
+    "_id": "g5wT5D5gGs3zfogG",
+    "type": "save",
+    "name": "Action (10 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "10",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "duration": {
+     "value": "2",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "cha"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 10,
+       "denomination": 12,
+       "bonus": "",
+       "types": [
+        "radiant"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   },
+   "d4NcKOrJ2ZMIyrGf": {
+    "_id": "d4NcKOrJ2ZMIyrGf",
+    "type": "attack",
+    "name": "Action (6 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "30",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": []
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "2",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "radius",
+    "size": "10",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": false
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "g5wT5D5gGs3zfogG": 10,
+    "d4NcKOrJ2ZMIyrGf": 6
+   },
+   "technique": "Technique Extermination",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "lFpLbNxf0h2fGnvr",
+ "_key": "!items!xwJtNVF6QPcHKkK2"
+}

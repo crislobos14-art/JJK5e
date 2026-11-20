@@ -1,0 +1,32 @@
+{
+ "_id": "uF0UM0ezJcLv0lIp",
+ "name": "Critical Focus",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/ratio.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Ratio — Innate Technique (1st level)</em></p><blockquote><p>You were born with a powerful technique that creates a weak spot on a 7:3 ratio</p></blockquote><p>Beginning at 1st level, you gain a +1 to critical range. Additionally, you roll an additional damage dice on a critical hit.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Ratio 1"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Ratio",
+   "level": 1
+  }
+ },
+ "folder": "SXVh9xBdNDfszcIg",
+ "_key": "!items!uF0UM0ezJcLv0lIp"
+}

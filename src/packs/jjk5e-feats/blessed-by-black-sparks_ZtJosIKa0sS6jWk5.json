@@ -1,0 +1,36 @@
+{
+ "_id": "ZtJosIKa0sS6jWk5",
+ "name": "Blessed by Black Sparks",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: N/A</em></p>\n<p>The sparks of black have chosen you to receive their blessings. You gain a +3 bonus to your Black Flash range.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkCursedEnergy"
+  },
+  "requirements": "N/A",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "blackFlashRange": 3
+  }
+ },
+ "folder": "58RlNbYPWxO2Xi4E",
+ "sort": 1600,
+ "_key": "!items!ZtJosIKa0sS6jWk5"
+}

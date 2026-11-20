@@ -1,0 +1,64 @@
+{
+ "_id": "Ykgt5wqtPV1ETLnd",
+ "name": "Lasting Laughs",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/comedian.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Comedy</em></p>\n<p>Even when you’re the one telling the joke, you can’t stop laughing. For an additional 2 CE when you activate <em>Comedy</em>, you can make the technique last 10 minutes. This does not work with <em>Peak Comedy</em>.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Comedy",
+  "activities": {
+   "Q4hNzr5oUT9ae2ZS": {
+    "_id": "Q4hNzr5oUT9ae2ZS",
+    "type": "utility",
+    "name": "Extra (2 CE)",
+    "sort": 900000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "For an additional 2 CE when you activate Comedy, you can make the technique last 10 min..."
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "Q4hNzr5oUT9ae2ZS": 2
+   },
+   "prereq": {
+    "features": [
+     [
+      "Comedy"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "ofzydWsjnAAHHzU3",
+ "sort": 100,
+ "_key": "!items!Ykgt5wqtPV1ETLnd"
+}

@@ -1,0 +1,43 @@
+{
+ "_id": "VbkTUxyccN0Zh3XJ",
+ "name": "Curse Weapon (1 PP)",
+ "type": "feat",
+ "img": "icons/svg/upgrade.svg",
+ "system": {
+  "description": {
+   "value": "<p>You gain a natural weapon that takes the form of claws (slashing), fangs (piercing), or gnarled fists or a tail (bludgeoning). Your Curse Weapon deals 1d6 + your Strength modifier of its damage type. This increases to 1d8 at 5th level and 1d10 at 10th level. If you have a different unarmed strike dice, you can choose to use that for these natural weapons. You can choose this attribute multiple times, but must choose a different option each time.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTrait"
+  },
+  "requirements": "Cursed Spirit, 1 Profane Point",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "profaneCost": 1,
+   "prereq": {
+    "prefixes": [
+     [
+      "Cursed Spirit"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "ar3Bgj4YHvYRp8DL",
+ "sort": 600,
+ "_key": "!items!VbkTUxyccN0Zh3XJ"
+}

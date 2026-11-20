@@ -1,0 +1,42 @@
+{
+ "_id": "Komk2Nb65pHKyEDQ",
+ "name": "Blessing of Combat",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/solo-forbidden-zone.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Ritual Dance</em></p>\n<p>When you use Forbidden Zone, you maximize a creature’s output offensively. Allies in your Zone can add a d4 to attack and damage rolls.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Ritual Dance",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Ritual Dance"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "B010nMqksvk4lI5S",
+ "sort": 200,
+ "_key": "!items!Komk2Nb65pHKyEDQ"
+}

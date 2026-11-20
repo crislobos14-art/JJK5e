@@ -1,0 +1,42 @@
+{
+ "_id": "NgcWuk6OZh5VvZWa",
+ "name": "Maximum: Kamikaze",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/black-bird-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Bird Strike</em></p>\n<p>Through trial and error, your mastery over Bird Strike has reached new heights. Whenever you use <em>Bird Strike</em> you can choose between either increasing the damage die size to d12 or to roll an additional d6 to damage a limb.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Bird Strike",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Bird Strike"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "vJ6bBNDO9hiSQvl9",
+ "sort": 300,
+ "_key": "!items!NgcWuk6OZh5VvZWa"
+}

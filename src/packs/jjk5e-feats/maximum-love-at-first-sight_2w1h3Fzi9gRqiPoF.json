@@ -1,0 +1,71 @@
+{
+ "_id": "2w1h3Fzi9gRqiPoF",
+ "name": "Maximum: Love at First Sight",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/heart-catch.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Cutie Honey</em></p>\n<p>As an action for 8 CE, you can choose to instantly put a creature you can see under the effects of Cutie Honey without needing to restrain them.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Cutie Honey",
+  "activities": {
+   "ti1l9yJ2isF0L3RF": {
+    "_id": "ti1l9yJ2isF0L3RF",
+    "type": "utility",
+    "name": "Action (8 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "ti1l9yJ2isF0L3RF": 8
+   },
+   "prereq": {
+    "features": [
+     [
+      "Cutie Honey"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "KjinDnRWPvOPNN3Z",
+ "sort": 300,
+ "_key": "!items!2w1h3Fzi9gRqiPoF"
+}

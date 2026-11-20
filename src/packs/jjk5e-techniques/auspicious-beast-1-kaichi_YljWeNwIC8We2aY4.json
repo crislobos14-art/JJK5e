@@ -1,0 +1,163 @@
+{
+ "_id": "YljWeNwIC8We2aY4",
+ "name": "Auspicious Beast #1: Kaichi",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/auspicious-beast-summon.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Auspicious Beast Summon — Innate Technique (1st level)</em></p><blockquote><p>By covering your face you can become a medium for the spirit of the four auspicious beasts. These four beasts give you great abilities.</p></blockquote><p>Beginning at 1st level, as an action using 1 Cursed Energy, you summon a yellow drill horn for 1 minute. This horn can be used to make an additional melee Cursed Energy attack against a creature within 30 ft as part of your turn, dealing 1d6 piercing damage on a hit. The damage increases to 1d8 at 3rd level, 1d10 at 6th level, 1d12 at 11th level, and 3d6 at 18th level. You can only have one <em>Kaichi</em> at a time.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "GCHuJRcdm5YBLZVK": {
+    "_id": "GCHuJRcdm5YBLZVK",
+    "type": "attack",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    },
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "flat": false,
+     "type": {
+      "value": "melee",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "piercing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "value": "30",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "dmgScale": {
+    "GCHuJRcdm5YBLZVK": [
+     [
+      0,
+      "1d6"
+     ],
+     [
+      3,
+      "1d8"
+     ],
+     [
+      6,
+      "1d10"
+     ],
+     [
+      11,
+      "1d12"
+     ],
+     [
+      18,
+      "3d6"
+     ]
+    ]
+   },
+   "ceCosts": {
+    "GCHuJRcdm5YBLZVK": 1
+   },
+   "technique": "Auspicious Beast Summon",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "brFOPY7ZHkwkGj1z",
+ "_key": "!items!YljWeNwIC8We2aY4"
+}

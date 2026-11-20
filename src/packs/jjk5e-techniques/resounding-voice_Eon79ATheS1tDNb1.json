@@ -1,0 +1,32 @@
+{
+ "_id": "Eon79ATheS1tDNb1",
+ "name": "Resounding Voice",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/cursed-speech.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Speech — Innate Technique (11th level)</em></p><p>At 11th level, you can spend 3 extra Cursed Energy to change the effect range of your technique into a 35-foot cone.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Speech 11"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Cursed Speech",
+   "level": 11
+  }
+ },
+ "folder": "hKdstL12BA2dMsHA",
+ "_key": "!items!Eon79ATheS1tDNb1"
+}

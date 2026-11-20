@@ -1,0 +1,108 @@
+{
+ "_id": "lC9tnmDLJkuNmjtZ",
+ "name": "Maximum: Perfect Sphere",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/construction.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Insectoid Armor</em></p>\n<p>Through research and creativity, you have created a Perfect Sphere with no contact area which generates infinite pressure. As an action for 10 Cursed Energy, you create a 10-foot diameter perfect sphere of metal that appears in an unoccupied space of your choice within 10 feet of you and lasts for 1 minute while concentrating. Any creature that touches or ends its turn within 5 feet of the sphere must make a Dexterity saving throw. The creature takes 8d12 force damage on a failed save, or half as much damage on a successful one.</p>\n<p>As a bonus action, you can move the sphere up to 30 feet. If you ram the sphere into a creature, that creature must make the saving throw against the sphere’s damage, and the sphere stops moving this turn.<br />\nWhen you move the sphere, it destroys all barriers and non-magical structures in its way.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Insectoid Armor",
+  "activities": {
+   "nOA9sEDrloAdk6D4": {
+    "_id": "nOA9sEDrloAdk6D4",
+    "type": "save",
+    "name": "Action (10 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "10",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 8,
+       "denomination": 12,
+       "bonus": "",
+       "types": [
+        "force"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "nOA9sEDrloAdk6D4": 10
+   },
+   "prereq": {
+    "features": [
+     [
+      "Insectoid Armor"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "kyQQ2jjaJXT8blxH",
+ "sort": 300,
+ "_key": "!items!lC9tnmDLJkuNmjtZ"
+}

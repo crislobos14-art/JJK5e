@@ -1,0 +1,32 @@
+{
+ "_id": "Ex0WPbhbQItZ39rE",
+ "name": "Improved Two-Weapon Fighting",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>When you engage in two-weapon fighting, you can add your ability modifier + 1 to the damage of the second attack.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Fighting Style (improved)"
+ },
+ "flags": {
+  "jjk5e": {
+   "fightingStyle": true,
+   "improved": true
+  }
+ },
+ "folder": "I1ItOooRBoVLqHCS",
+ "_key": "!items!Ex0WPbhbQItZ39rE"
+}

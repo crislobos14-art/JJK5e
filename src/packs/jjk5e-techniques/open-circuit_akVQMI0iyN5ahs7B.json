@@ -1,0 +1,87 @@
+{
+ "_id": "akVQMI0iyN5ahs7B",
+ "name": "Open Circuit",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/cursed-circuitry.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Circuitry — Cursed Technique Reversal</em></p><p>Because you have mastered Reverse Cursed Technique, you have gained your technique reversal. Instead of optimizing cursed energy usage, you can cripple a creature’s ability to optimize. As an action for 10 CE, you can target a creature within 5 ft. The target must make a CE saving throw. On a failure, the target takes your CE modifier in necrotic damage for every cursed energy they use for 1 hour as their attempts to utilize cursed energy destroys their bodies.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Cursed Circuitry",
+  "activities": {
+   "E46etEU7UM9lLuNR": {
+    "_id": "E46etEU7UM9lLuNR",
+    "type": "utility",
+    "name": "Action (10+ CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "20"
+     }
+    },
+    "range": {
+     "value": "5",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "value": "1",
+     "units": "hour",
+     "concentration": false
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceSteps": {
+    "E46etEU7UM9lLuNR": 1
+   },
+   "ceCosts": {
+    "E46etEU7UM9lLuNR": 10
+   },
+   "technique": "Cursed Circuitry",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Cursed Circuitry"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!akVQMI0iyN5ahs7B"
+}

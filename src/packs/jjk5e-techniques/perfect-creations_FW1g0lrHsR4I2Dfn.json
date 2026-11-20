@@ -1,0 +1,92 @@
+{
+ "_id": "FW1g0lrHsR4I2Dfn",
+ "name": "Perfect Creations",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/cursed-corpse-creation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Corpse Creation — Innate Technique (18th level)</em></p><p>At 18th level, you can command all Cursed Corpses under your control as a bonus action on your turn regardless of numbers or distance. Additionally, your Cursed Corpses can continue functioning for a week after running out of cursed energy.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "fgf4JxUYNhnq7aBE": {
+    "_id": "fgf4JxUYNhnq7aBE",
+    "type": "utility",
+    "name": "Bonus Action",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 9,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Cursed Corpse Creation",
+   "level": 18,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "qwzwYySzpsiw4XHW",
+ "_key": "!items!FW1g0lrHsR4I2Dfn"
+}

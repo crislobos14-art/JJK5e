@@ -1,0 +1,73 @@
+{
+ "_id": "LECwUVuqHERu3YYU",
+ "name": "Snake Scales",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/eight-heads.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Eight Lives</em></p>\n<p>As an action for 4 cursed energy, you summon the scales of <em>Yamata no Orochi</em> to protect your flesh. Your AC cannot be lower than 14 + your proficiency bonus and you become resistant to poison and slashing damage for 1 hour.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Eight Lives",
+  "activities": {
+   "DIxO4bedCYwZ6Y7q": {
+    "_id": "DIxO4bedCYwZ6Y7q",
+    "type": "utility",
+    "name": "Action (4 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "1",
+     "units": "hour",
+     "concentration": false
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "DIxO4bedCYwZ6Y7q": 4
+   },
+   "prereq": {
+    "features": [
+     [
+      "Eight Lives"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "ScNBVqds1jNrXfTg",
+ "sort": 100,
+ "_key": "!items!LECwUVuqHERu3YYU"
+}

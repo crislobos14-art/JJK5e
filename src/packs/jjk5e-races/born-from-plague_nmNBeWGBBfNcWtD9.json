@@ -1,0 +1,74 @@
+{
+ "_id": "nmNBeWGBBfNcWtD9",
+ "name": "Born from Plague",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/trait-race.svg",
+ "system": {
+  "description": {
+   "value": "<p>You are immune to disease and poison, as well as the poisoned condition. Your unarmed strikes deal 1d4 poison damage on a hit.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "race",
+   "subtype": ""
+  },
+  "requirements": "Cursed Spirit (Disease)",
+  "activities": {
+   "02XXGRek1bjbL9mL": {
+    "_id": "02XXGRek1bjbL9mL",
+    "type": "damage",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 4,
+       "bonus": "",
+       "types": [
+        "poison"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "MrUJYYzCm8S5kHBr",
+ "_key": "!items!nmNBeWGBBfNcWtD9"
+}

@@ -1,0 +1,95 @@
+{
+ "_id": "XELY6ZF06NXQTLhs",
+ "name": "Hair Spray",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/hair-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Hair Manipulation — Innate Technique (11th level)</em></p><p>At 11th level, your hair has become almost indestructible, allowing you to grow it to longer lengths and activate your techniques more freely. The melee reach of your techniques increases by 5 ft and your hair counts as a Grade 1 Cursed Tool. At 18th level, your hair counts as a Special Grade Cursed Tool. </p>\n<p>Once per turn you can spend 2 additional CE to activate one of your technique features requiring an attack roll as a bonus action. An attack roll made using this special free action is made at advantage. Alternatively, once per turn you can spend 4 CE to activate one of your technique features requiring a saving throw as a bonus action. A saving throw forced by this special free action is made at disadvantage.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "JVgDGXhMR3fNB5BQ": {
+    "_id": "JVgDGXhMR3fNB5BQ",
+    "type": "utility",
+    "name": "Bonus Action (4 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "JVgDGXhMR3fNB5BQ": 4
+   },
+   "technique": "Hair Manipulation",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "gqEhAM7a9IFAzEwy",
+ "_key": "!items!XELY6ZF06NXQTLhs"
+}

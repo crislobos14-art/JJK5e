@@ -1,0 +1,118 @@
+{
+ "_id": "6saiHqPvIY1YMOXW",
+ "name": "Demon-Culling Greatsword",
+ "type": "weapon",
+ "img": "icons/svg/sword.svg",
+ "folder": "TBXVbdCh1Kxu8AKz",
+ "system": {
+  "description": {
+   "value": "<p><em>Weapon(Greatsword), Grade 1</em></p><p>When attacking with the Demon-Culling Greatsword, you gain a +3 bonus to attack and damage rolls. On a hit, the weapon deals an additional 2d6 necrotic damage. On a critical hit, the target loses a limb (d4).</p>"
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "martialM",
+   "baseItem": "greatsword"
+  },
+  "damage": {
+   "base": {
+    "number": 2,
+    "denomination": 6,
+    "types": [
+     "slashing"
+    ]
+   }
+  },
+  "range": {
+   "value": 5,
+   "long": null,
+   "units": "ft",
+   "reach": 5
+  },
+  "properties": [
+   "hvy",
+   "mgc",
+   "two"
+  ],
+  "proficient": null,
+  "quantity": 1,
+  "activities": {
+   "GiNUGByH0I1TPUzt": {
+    "_id": "GiNUGByH0I1TPUzt",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "melee",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   },
+   "oZlW6JbC9FQ7U5vw": {
+    "_id": "oZlW6JbC9FQ7U5vw",
+    "type": "damage",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "magicalBonus": 3,
+  "rarity": "veryRare",
+  "attunement": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "1st Grade"
+  }
+ },
+ "_key": "!items!6saiHqPvIY1YMOXW"
+}

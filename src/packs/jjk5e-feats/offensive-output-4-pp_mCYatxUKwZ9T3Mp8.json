@@ -1,0 +1,43 @@
+{
+ "_id": "mCYatxUKwZ9T3Mp8",
+ "name": "Offensive Output (4 PP)",
+ "type": "feat",
+ "img": "icons/svg/upgrade.svg",
+ "system": {
+  "description": {
+   "value": "<p>When you use Cursed Strike, you deal an additional 1 necrotic damage per CE spent. If a feature alters the damage type of your cursed energy, it also changes this damage. This increases to 2 damage per CE spent at 10th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTrait"
+  },
+  "requirements": "Cursed Spirit, 4 Profane Points",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "profaneCost": 4,
+   "prereq": {
+    "prefixes": [
+     [
+      "Cursed Spirit"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "ar3Bgj4YHvYRp8DL",
+ "sort": 2400,
+ "_key": "!items!mCYatxUKwZ9T3Mp8"
+}

@@ -1,0 +1,118 @@
+{
+ "_id": "2uUNMEoDx3UEOWCx",
+ "name": "Innate Technique: Laplace’s Demon",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/laplace-s-demon.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>A thought experiment proposing an intellect so vast it knows the position and momentum of every particle, allowing it to predict the future and recall the past.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.ys1D7UKVzPiTeAEA]{Demonic Intellect}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.2oseicP8E0w28WjF]{Future and Past}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.8nsX5YC7QP3jFS6b]{Overload}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.hETxArHfIr95Mghx]{Imaginary Demon Brain}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.GgpqwrzwFIiCXpfm]{Domain Expansion: Laplace Threshold}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "pGcRzbsSNql2x3Gp": {
+    "_id": "pGcRzbsSNql2x3Gp",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Laplace’s Demon (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.ys1D7UKVzPiTeAEA",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "6Rj8s3NnjGlZk2VW": {
+    "_id": "6Rj8s3NnjGlZk2VW",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Laplace’s Demon (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.2oseicP8E0w28WjF",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "MzKlWwNIvRbaJe4e": {
+    "_id": "MzKlWwNIvRbaJe4e",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Laplace’s Demon (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.8nsX5YC7QP3jFS6b",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "KWwm8MKvALfBLhAH": {
+    "_id": "KWwm8MKvALfBLhAH",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Laplace’s Demon (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.hETxArHfIr95Mghx",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "QUZP1eztxC0ZrFed": {
+    "_id": "QUZP1eztxC0ZrFed",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Laplace’s Demon (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.GgpqwrzwFIiCXpfm",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Laplace’s Demon"
+  }
+ },
+ "_key": "!items!2uUNMEoDx3UEOWCx"
+}

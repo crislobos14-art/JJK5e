@@ -1,0 +1,77 @@
+{
+ "_id": "wueyCsaje1tUBhuQ",
+ "name": "Titan’s Grasp",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/missile-fist.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Unrelenting Fury</em></p>\n<p>As a reaction for 3 CE, when you or a creature within 30 ft would take damage, you interpose a <em>Missile Fist</em>, reducing the damage by your <em>Missile Fist</em> damage.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Unrelenting Fury",
+  "activities": {
+   "9cgIKbRvFRf4lz2s": {
+    "_id": "9cgIKbRvFRf4lz2s",
+    "type": "utility",
+    "name": "Reaction (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "30",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "9cgIKbRvFRf4lz2s": 3
+   },
+   "prereq": {
+    "features": [
+     [
+      "Unrelenting Fury"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "NrFEIsdcWt7L52EL",
+ "sort": 300,
+ "_key": "!items!wueyCsaje1tUBhuQ"
+}

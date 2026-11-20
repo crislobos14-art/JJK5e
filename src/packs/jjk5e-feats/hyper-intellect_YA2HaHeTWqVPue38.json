@@ -1,0 +1,123 @@
+{
+ "_id": "YA2HaHeTWqVPue38",
+ "name": "Hyper-Intellect",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/laplace-s-demon.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Future and Past</em></p>\n<p>Your brain has begun to acclimate to the constant amount of information being calculated. Your Intelligence score increases by 3 and you gain proficiency in either History, Investigation, Arcana, Religion, or Nature. Your Intelligence score increases by 1 again at 6th, 11th, and 18th level. Your maximum score for Intelligence is now 24.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Future and Past",
+  "advancement": {
+   "286qT7jQcf1CVedi": {
+    "_id": "286qT7jQcf1CVedi",
+    "type": "Trait",
+    "level": 0,
+    "title": "Knowledge skill",
+    "value": {},
+    "configuration": {
+     "mode": "default",
+     "allowReplacements": false,
+     "grants": [],
+     "choices": [
+      {
+       "count": 1,
+       "pool": [
+        "skills:his",
+        "skills:inv",
+        "skills:arc",
+        "skills:rel",
+        "skills:nat"
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Future and Past"
+     ]
+    ]
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "tiSMMEYJ6qbGdEyP",
+   "name": "Hyper-Intellect",
+   "img": "modules/jjk5e/icons/techniques/laplace-s-demon.svg",
+   "transfer": true,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "auto": "level",
+     "levelTable": {
+      "class": "*",
+      "table": [
+       [
+        0,
+        3
+       ],
+       [
+        6,
+        4
+       ],
+       [
+        11,
+        5
+       ],
+       [
+        18,
+        6
+       ]
+      ],
+      "keys": [
+       "system.abilities.int.value"
+      ]
+     }
+    }
+   },
+   "changes": [
+    {
+     "key": "system.abilities.int.value",
+     "mode": 2,
+     "value": "3",
+     "priority": null
+    },
+    {
+     "key": "system.abilities.int.max",
+     "mode": 4,
+     "value": "24",
+     "priority": null
+    }
+   ],
+   "_key": "!items.effects!YA2HaHeTWqVPue38.tiSMMEYJ6qbGdEyP"
+  }
+ ],
+ "folder": "LY5kMspFULfnXfB0",
+ "sort": 200,
+ "_key": "!items!YA2HaHeTWqVPue38"
+}

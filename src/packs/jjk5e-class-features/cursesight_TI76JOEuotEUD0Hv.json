@@ -1,0 +1,49 @@
+{
+ "_id": "TI76JOEuotEUD0Hv",
+ "name": "Cursesight",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "folder": "ma0AyXgs6GhcKVCb",
+ "system": {
+  "description": {
+   "value": "<p>As an action, you can make a Perception check using your CE modifier to sense cursed energy or residuals within 30 ft. The DC equals the target's CE save DC if the target was trying to conceal their cursed energy. You can track where a residual trail leads and you are aware of whose cursed energy it is if you are familiar. </p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Energy",
+  "activities": {
+   "D8rW89mCxcwSU55G": {
+    "_id": "D8rW89mCxcwSU55G",
+    "type": "utility",
+    "name": "Cursesight",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "range": {
+     "value": "30",
+     "units": "ft"
+    },
+    "roll": {
+     "formula": "1d20 + @skills.prc.prof + max(@abilities.wis.mod, @abilities.cha.mod)",
+     "name": "Perception (CE)",
+     "prompt": false,
+     "visible": true
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "_key": "!items!TI76JOEuotEUD0Hv"
+}

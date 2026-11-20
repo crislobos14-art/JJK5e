@@ -1,0 +1,74 @@
+{
+ "_id": "h1viqHKe2iho5cSb",
+ "name": "Proven Innocence",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/deadly-sentencing.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Deadly Sentencing — Cursed Technique Reversal</em></p><p>Because of your unique technique and your mastery over Reverse Cursed Technique, your cursed technique reversal is much different than others. Your reversal works inside of your domain. The main properties of your domain stay the same, but you now are proving the innocence of a deceased creature. If you witness a creature die in the range you can cast your domain, you can use a reaction to open it in its reversal. This costs cursed energy if you do not have a free use. When you open it in this way, you bring yourself, the deceased creature, and the creature who killed them. For the duration of the domain, the deceased creature is revived. Inside the domain, Judgeman will first announce the charges against the defendant, which are actual crimes they may or may not have committed(Chosen by the GM). These crimes should relate to why the defendant died. Judgeman automatically knows everything about everyone inside the domain but this information isn't shared with you. The verdict of the trial depends on the arguments presented by both sides. After the accusation is reviewed, the defendant is given one chance to defend their case. You can help the defendant prove their innocence. They have three options: silence, confession, or denial. If the defendant chooses to deny the charges, they can lie in their statements. The defendant's goal is to dispel all doubt and win a pronouncement of innocence from Judgeman. Lies the defendant makes can be cross examined by the prosecutor(Deception vs Insight) as normal, same for lies from the prosecutor being cross examined by the defendant. Confession or Silence make the guilty verdict automatic in the former’s case, or uncontestable given sufficient evidence in the latter’s case. Judgeman will give you information in the form of evidence to help you find the defendant not guilty. The evidence appears as a sealed envelope in your hand. The evidence submitted is not necessarily conclusive and it will not be opened and shared with the prosecutor until after their statement, but you will be informed of the contained information by Judgeman upon receiving the envelope. Evidence that is mostly unrelated or merely tangentially related may require a persuasion check to go through, with the DC depending on how much of a reach the argument is. (10 slight reach, 15 moderate reach, 20 hard reach, 25 exceedingly hard reach, and 30 nearly impossible to agree with reach. 45 for fully impossible to agree with reach). The prosecutor also only has one chance to make a statement. The prosecutor's goal is to provide reasoning for why they killed the defendant. After their statement, they must make the same persuasion check against your argument if their reasoning was not sufficient. (15 slight reach, 20 moderate reach, 25 hard reach, 30 exceedingly hard reach, and 35 nearly impossible to agree. 50 for fully impossible to agree with). Once the prosecution and defense have both made their statements, Judgeman(the Game Master) will deliver a lawful verdict. The person who proved their argument better will win the case. If the defendant is found innocent, the domain will end and they will be revived with full hit points. If the defendant is found guilty they will remain dead. If the defendant is found guilty, the domain will end and you will gain 1 level of exhaustion for 1 minute, and cannot use your innate technique features. Every time you cause a creature to be innocent, you gain an additional free domain use that day, and will gain refinement points as if you have reduced them to 0 hit points.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Deadly Sentencing",
+  "activities": {
+   "WXaJ2kTOUtBHKcxS": {
+    "_id": "WXaJ2kTOUtBHKcxS",
+    "type": "utility",
+    "name": "Reaction",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Deadly Sentencing",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Deadly Sentencing"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!h1viqHKe2iho5cSb"
+}

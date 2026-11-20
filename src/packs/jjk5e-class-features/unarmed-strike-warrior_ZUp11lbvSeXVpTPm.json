@@ -1,0 +1,71 @@
+{
+ "_id": "ZUp11lbvSeXVpTPm",
+ "name": "Unarmed Strike (Warrior)",
+ "type": "weapon",
+ "img": "icons/svg/combat.svg",
+ "folder": "7ecbupybBLUFyYzw",
+ "system": {
+  "description": {
+   "value": "<p>Unarmed strike using the <strong>Warrior</strong> damage die (<code>@scale.warrior.die</code>), which grows with your level.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "simpleM",
+   "baseItem": ""
+  },
+  "proficient": 1,
+  "equipped": true,
+  "quantity": 1,
+  "properties": [],
+  "range": {
+   "value": 5,
+   "units": "ft",
+   "reach": 5
+  },
+  "damage": {
+   "base": {
+    "number": null,
+    "denomination": null,
+    "bonus": "",
+    "types": [
+     "bludgeoning"
+    ],
+    "custom": {
+     "enabled": true,
+     "formula": "@scale.warrior.die"
+    }
+   }
+  },
+  "activities": {
+   "NcLa4HhlFsVO0uDq": {
+    "_id": "NcLa4HhlFsVO0uDq",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "melee",
+      "classification": "unarmed"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "_key": "!items!ZUp11lbvSeXVpTPm"
+}

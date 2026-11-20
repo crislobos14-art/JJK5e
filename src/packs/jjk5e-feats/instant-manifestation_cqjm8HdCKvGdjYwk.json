@@ -1,0 +1,80 @@
+{
+ "_id": "cqjm8HdCKvGdjYwk",
+ "name": "Instant Manifestation",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/black-box.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Dark Cube</em></p>\n<p>You have learned a trick to instantly deploy your technique. Creatures have disadvantage on saving throws against being trapped by your <em>Dark Cube</em> and you can create a <em>Dark Cube</em> around yourself as a reaction to being hit with an attack, causing it to take the damage in your stead. If you take the dodge action on your turn, you can also use this reaction to create a 10 feet cube around yourself and another creature within 5 feet.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Dark Cube",
+  "activities": {
+   "4iTk2NZ3xOhqro3O": {
+    "_id": "4iTk2NZ3xOhqro3O",
+    "type": "utility",
+    "name": "Reaction",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {
+     "template": {
+      "type": "cube",
+      "size": "10",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     }
+    },
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Dark Cube"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "hYJ9CtCLF0NIbhhU",
+ "sort": 100,
+ "_key": "!items!cqjm8HdCKvGdjYwk"
+}

@@ -1,0 +1,89 @@
+{
+ "_id": "xm6ZmpjxfUqFTcA8",
+ "name": "2000 IQ",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Proficiency in Arcana</em></p>\n<p>You can make an Intelligence (Arcana) check as a bonus action while viewing a technique in play to understand how it works. The DC is equal to the user’s Cursed Energy save DC. <br />\nWhen making this check, treat your Intelligence score as a 22. If you instead spend a full turn action (Action + Bonus Action + Movement) attempting to understand a technique, you have advantage on the check.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkSkill"
+  },
+  "requirements": "Proficiency in Arcana",
+  "activities": {
+   "fO1HNFlBET47Ttji": {
+    "_id": "fO1HNFlBET47Ttji",
+    "type": "utility",
+    "name": "Bonus Action",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "skill": "arc"
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "RNaP1ZpPZYGwnKJb",
+   "name": "2000 IQ (toggle)",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "changes": [
+    {
+     "key": "system.skills.arc.value",
+     "mode": 4,
+     "value": "1",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!xm6ZmpjxfUqFTcA8.RNaP1ZpPZYGwnKJb"
+  }
+ ],
+ "folder": "EtgHYidIGv42ylfo",
+ "sort": 100,
+ "_key": "!items!xm6ZmpjxfUqFTcA8"
+}

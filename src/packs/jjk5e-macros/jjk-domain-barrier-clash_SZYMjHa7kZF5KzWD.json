@@ -1,0 +1,13 @@
+{
+ "_id": "SZYMjHa7kZF5KzWD",
+ "name": "JJK: Domain (Barrier, Clash)",
+ "type": "script",
+ "img": "modules/jjk5e/icons/domain.svg",
+ "scope": "global",
+ "command": "game.modules.get(\"jjk5e\").api.openDomainHUD();",
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": null,
+ "_key": "!macros!SZYMjHa7kZF5KzWD"
+}

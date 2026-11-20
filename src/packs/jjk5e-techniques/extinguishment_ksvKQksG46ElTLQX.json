@@ -1,0 +1,139 @@
+{
+ "_id": "ksvKQksG46ElTLQX",
+ "name": "Extinguishment",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/technique-extermination.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Technique Extermination — Innate Technique (1st level)</em></p><blockquote><p>Your technique bestows its user with the gift of angelic power, capable of smiting villains and hampering enemy’s cursed techniques.</p></blockquote><p>Beginning at 1st level, you have gained use of the essentials of your technique. As an action for 2 cursed energy, you can target a creature you can see within 30 ft as a trumpet of light appears and a beam of light falls from the sky. The target must succeed a Charisma save, if the creature fails it takes 2d12 radiant damage and loses the ability to use Cursed Energy for 1 minute. On a success, they take half as much damage and don't have their cursed energy features negated. They can repeat the saving throw at the beginning of their turns, ending the effect on a success.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "Bqu7NpZJKf3s2nSO": {
+    "_id": "Bqu7NpZJKf3s2nSO",
+    "type": "save",
+    "name": "Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "cha"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 12,
+       "bonus": "",
+       "types": [
+        "radiant"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "value": "30",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "Bqu7NpZJKf3s2nSO": 2
+   },
+   "technique": "Technique Extermination",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "lFpLbNxf0h2fGnvr",
+ "_key": "!items!ksvKQksG46ElTLQX"
+}

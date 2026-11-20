@@ -1,0 +1,117 @@
+{
+ "_id": "HXiFoYwsPXElvgDk",
+ "name": "Dark Constructs (Reversal)",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/and-light.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Creeps and Curses V.3.1</em></p><p><em>████ and Light Reversal — requires Reverse Cursed Technique. Not added automatically.</em></p><p>As a bonus action for 4 cursed energy, you mold killing intent into a bar of darkness in a free hand. This weapon lasts for 1 minute and counts as a simple melee weapon with which you are proficient. It deals 4d8 necrotic damage on a hit and has the finesse, light, and thrown properties (range 20/60). Additionally, you can use your Cursed Energy modifier for attack and damage rolls using this weapon. If you drop the weapon or throw it, it dissipates and reappears in your hand. On a hit with this weapon, a creature’s speed is halved until the end of their next turn. This does not stack.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "7B4chJWglItc6EQW": {
+    "_id": "7B4chJWglItc6EQW",
+    "type": "damage",
+    "name": "Bonus Action (4 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 4,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "7B4chJWglItc6EQW": 4
+   },
+   "technique": "████ and Light",
+   "reversal": true,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "IGfpCBBJLQfBc6m2",
+ "_key": "!items!HXiFoYwsPXElvgDk"
+}

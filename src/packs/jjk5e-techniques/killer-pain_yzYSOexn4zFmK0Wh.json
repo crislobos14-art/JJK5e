@@ -1,0 +1,46 @@
+{
+ "_id": "yzYSOexn4zFmK0Wh",
+ "name": "Killer Pain",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/pain-killer.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Pain Killer — Cursed Technique Reversal</em></p><p>You have mastered reverse cursed technique and learned the reversal of your technique. You can attempt to touch a creature within 5 feet by succeeding a Dexterity (Sleight of Hand) check against their AC. On a success, you can spend CE up to your CE modifier to cause them to take 5 additional psychic damage from any source of damage for every 2 CE spent. This lasts for 1 hour and increases with your duration of Pain Killer. At 3rd level, you can use this feature with Practiced Hands.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Pain Killer"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Pain Killer",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Pain Killer"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!yzYSOexn4zFmK0Wh"
+}

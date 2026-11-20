@@ -1,0 +1,107 @@
+{
+ "_id": "lF18uQBxg4fzpAp2",
+ "name": "Blessing of the Grateful Dead",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/seance.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Seance — Innate Technique (3rd level)</em></p><p>At 3rd level, you have increased the potency of your seance.<br />\nWhen channeling <strong>Physical Information</strong>, the target gains temporary hit points equal to your level + your proficiency.<br />\nWhen channeling <strong>Soul Information</strong>, the target gains access to two Cursed Technique or Innate Technique features of your choice and does not lose access to their own Innate Technique features. The target cannot use Innate Technique features from different techniques at the same time.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "8cRxZpTSthq8DyY2": {
+    "_id": "8cRxZpTSthq8DyY2",
+    "type": "heal",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "",
+     "types": [
+      "temphp"
+     ],
+     "custom": {
+      "enabled": true,
+      "formula": "@details.level"
+     },
+     "scaling": {
+      "number": 1
+     }
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "special",
+   "value": null,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Seance",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "z1MGG49oTB7xZ6Pc",
+ "_key": "!items!lF18uQBxg4fzpAp2"
+}

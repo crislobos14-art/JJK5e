@@ -1,0 +1,33 @@
+{
+ "_id": "hG3CwhPadKGXhYUu",
+ "name": "Scanning Eyes",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>Beginning at 13th level, you can now as a part of <em>Sharp Eyes</em> tell your opponent's weaknesses(Weak Points, Vulnerabilities) and main attacks (Damage Type and highest damage action).</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Scout 13"
+ },
+ "flags": {
+  "jjk5e": {
+   "modifies": [
+    "Sharp Eyes"
+   ]
+  }
+ },
+ "folder": "Jrayu2BI11U3R1zF",
+ "_key": "!items!hG3CwhPadKGXhYUu"
+}

@@ -1,0 +1,507 @@
+{
+ "_id": "tFnezTx8wJQF4GQG",
+ "name": "Round Deer",
+ "type": "npc",
+ "img": "modules/jjk5e/icons/shikigami/round-deer.svg",
+ "system": {
+  "abilities": {
+   "str": {
+    "value": 14,
+    "proficient": 0
+   },
+   "dex": {
+    "value": 9,
+    "proficient": 0
+   },
+   "con": {
+    "value": 23,
+    "proficient": 1
+   },
+   "int": {
+    "value": 7,
+    "proficient": 0
+   },
+   "wis": {
+    "value": 18,
+    "proficient": 0
+   },
+   "cha": {
+    "value": 20,
+    "proficient": 0
+   }
+  },
+  "attributes": {
+   "ac": {
+    "calc": "flat",
+    "flat": 9
+   },
+   "hp": {
+    "value": 148,
+    "max": 148,
+    "formula": ""
+   },
+   "movement": {
+    "walk": 30,
+    "units": "ft",
+    "hover": false
+   },
+   "senses": {
+    "darkvision": 60,
+    "units": "ft",
+    "special": ""
+   }
+  },
+  "details": {
+   "cr": 8,
+   "alignment": "Unaligned",
+   "type": {
+    "value": "monstrosity",
+    "subtype": "",
+    "swarm": "",
+    "custom": "Shikigami"
+   },
+   "biography": {
+    "value": "<p><em>Round Deer</em> — Ten Shadows shikigami. Summon cost: 9 Cursed Energy. AC and hit points scale with the summoner's proficiency bonus when summoned through the Ten Shadows features.</p>"
+   }
+  },
+  "traits": {
+   "size": "med",
+   "dr": {
+    "value": []
+   },
+   "ci": {
+    "value": []
+   },
+   "languages": {
+    "value": []
+   }
+  },
+  "skills": {},
+  "resources": {
+   "legact": {
+    "max": 0,
+    "spent": 0
+   },
+   "legres": {
+    "max": 0,
+    "spent": 0
+   }
+  }
+ },
+ "items": [
+  {
+   "_id": "7W6FqnPCBS5Qcy5p",
+   "name": "RCT Pool",
+   "type": "feat",
+   "img": "icons/svg/aura.svg",
+   "system": {
+    "description": {
+     "value": "<p>Round Deer has a pool of Reverse Cursed Energy equal to its Charisma score times your proficiency bonus and regains 10 healing towards its pool at the start of its turn.</p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Ten Shadows"
+    },
+    "activities": {},
+    "type": {
+     "value": "monster",
+     "subtype": ""
+    },
+    "requirements": "",
+    "properties": [],
+    "uses": {
+     "max": "",
+     "recovery": [],
+     "spent": 0
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!tFnezTx8wJQF4GQG.7W6FqnPCBS5Qcy5p"
+  },
+  {
+   "_id": "piR6W8QoUaWQ4sJ0",
+   "name": "Reverse Cursed Energy Aura",
+   "type": "feat",
+   "img": "icons/svg/aura.svg",
+   "system": {
+    "description": {
+     "value": "<p>Round Deer has a 10 feet aura of reverse cursed energy around it at all times. Round Deer can spend 10 healing from its RCT Pool for each creature within its aura at the start of its turn, healing them for that amount. This aura also functions as an antimagic aura for all creatures other than its summoner. A creature that attempts to use cursed energy must make a DC 15 Cursed Energy check or be unable to use cursed energy while they are within the aura. Round Deer can suppress this aura while concentrating.</p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Ten Shadows"
+    },
+    "activities": {},
+    "type": {
+     "value": "monster",
+     "subtype": ""
+    },
+    "requirements": "",
+    "properties": [],
+    "uses": {
+     "max": "",
+     "recovery": [],
+     "spent": 0
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!tFnezTx8wJQF4GQG.piR6W8QoUaWQ4sJ0"
+  },
+  {
+   "_id": "FtYoYcGufPVgo6SQ",
+   "name": "Cursed Energy Boost",
+   "type": "feat",
+   "img": "icons/svg/aura.svg",
+   "system": {
+    "description": {
+     "value": "<p>As a bonus action or reaction, you can spend Cursed Energy up to your CE modifier to use Reverse Cursed Technique using Round Deer as a point of origin and drawing from its RCT Pool to heal a creature within its aura. You can use 10 points of healing for every 1 cursed energy spent.</p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Ten Shadows"
+    },
+    "activities": {},
+    "type": {
+     "value": "monster",
+     "subtype": ""
+    },
+    "requirements": "",
+    "properties": [],
+    "uses": {
+     "max": "",
+     "recovery": [],
+     "spent": 0
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!tFnezTx8wJQF4GQG.FtYoYcGufPVgo6SQ"
+  },
+  {
+   "_id": "Fi34vyT5L65Dnud1",
+   "name": "Horn",
+   "type": "weapon",
+   "img": "icons/svg/sword.svg",
+   "system": {
+    "description": {
+     "value": "<p>Deals an extra 27 (5d10) radiant damage if the target is a cursed spirit.</p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Ten Shadows"
+    },
+    "activities": {
+     "l5DUq0W2yZcZhwkC": {
+      "_id": "l5DUq0W2yZcZhwkC",
+      "type": "attack",
+      "name": "",
+      "sort": 0,
+      "activation": {
+       "type": "action",
+       "value": 1,
+       "condition": "",
+       "override": false
+      },
+      "consumption": {
+       "targets": [],
+       "scaling": {
+        "allowed": false
+       },
+       "spellSlot": false
+      },
+      "duration": {
+       "units": "inst",
+       "concentration": false,
+       "override": false
+      },
+      "range": {
+       "override": false
+      },
+      "target": {
+       "override": false,
+       "prompt": true,
+       "affects": {
+        "count": "1",
+        "type": "creature"
+       }
+      },
+      "attack": {
+       "ability": "str",
+       "bonus": "",
+       "critical": {
+        "threshold": null
+       },
+       "flat": false,
+       "type": {
+        "value": "melee",
+        "classification": "weapon"
+       }
+      },
+      "damage": {
+       "critical": {
+        "bonus": ""
+       },
+       "includeBase": true,
+       "parts": [
+        {
+         "number": 5,
+         "denomination": 10,
+         "bonus": "",
+         "types": [
+          "radiant"
+         ],
+         "custom": {
+          "enabled": false,
+          "formula": ""
+         },
+         "scaling": {
+          "mode": "",
+          "number": null,
+          "formula": ""
+         }
+        }
+       ]
+      }
+     }
+    },
+    "type": {
+     "value": "natural",
+     "baseItem": ""
+    },
+    "ability": "str",
+    "proficient": 1,
+    "equipped": true,
+    "damage": {
+     "base": {
+      "number": 1,
+      "denomination": 6,
+      "bonus": "",
+      "types": [
+       "piercing"
+      ],
+      "custom": {
+       "enabled": false,
+       "formula": ""
+      },
+      "scaling": {
+       "mode": "",
+       "number": null,
+       "formula": ""
+      }
+     }
+    },
+    "range": {
+     "reach": 5,
+     "value": null,
+     "long": null,
+     "units": "ft"
+    },
+    "magicalBonus": null,
+    "properties": [],
+    "uses": {
+     "max": "",
+     "recovery": [],
+     "spent": 0
+    },
+    "quantity": 1,
+    "weight": {
+     "value": 0,
+     "units": "lb"
+    },
+    "price": {
+     "value": 0,
+     "denomination": "gp"
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!tFnezTx8wJQF4GQG.Fi34vyT5L65Dnud1"
+  },
+  {
+   "_id": "Pabk71lSZhVSrRHf",
+   "name": "Reverse Cursed Technique",
+   "type": "feat",
+   "img": "icons/svg/aura.svg",
+   "system": {
+    "description": {
+     "value": "<p>Round Deer can spend healing from its RCT Pool on a creature within its aura. Round Deer can spend up to 10 times your proficiency bonus at once in increments of 10.</p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Ten Shadows"
+    },
+    "activities": {
+     "6A8fdJD6E07EMEtK": {
+      "_id": "6A8fdJD6E07EMEtK",
+      "type": "heal",
+      "name": "",
+      "sort": 0,
+      "activation": {
+       "type": "action",
+       "value": 1,
+       "condition": "",
+       "override": false
+      },
+      "consumption": {
+       "targets": [],
+       "scaling": {
+        "allowed": false
+       },
+       "spellSlot": false
+      },
+      "duration": {
+       "units": "inst",
+       "concentration": false,
+       "override": false
+      },
+      "range": {
+       "units": "ft",
+       "value": "10",
+       "override": false
+      },
+      "target": {
+       "override": false,
+       "prompt": true
+      },
+      "healing": {
+       "number": null,
+       "denomination": null,
+       "bonus": "",
+       "types": [
+        "healing"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "10 * @prof"
+       },
+       "scaling": {
+        "mode": "",
+        "number": null,
+        "formula": ""
+       }
+      }
+     }
+    },
+    "type": {
+     "value": "monster",
+     "subtype": ""
+    },
+    "requirements": "",
+    "properties": [],
+    "uses": {
+     "max": "",
+     "recovery": [],
+     "spent": 0
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!tFnezTx8wJQF4GQG.Pabk71lSZhVSrRHf"
+  },
+  {
+   "_id": "NKdO7XVJ27m92Z1f",
+   "name": "Reverse Cursed Technique (Self)",
+   "type": "feat",
+   "img": "icons/svg/aura.svg",
+   "system": {
+    "description": {
+     "value": "<p>Round Deer can use Reverse Cursed Technique on itself as a reaction to damage.</p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Ten Shadows"
+    },
+    "activities": {
+     "zeO49BwOMpzac3eF": {
+      "_id": "zeO49BwOMpzac3eF",
+      "type": "utility",
+      "name": "",
+      "sort": 0,
+      "activation": {
+       "type": "reaction",
+       "value": 1,
+       "condition": "",
+       "override": false
+      },
+      "consumption": {
+       "targets": [],
+       "scaling": {
+        "allowed": false
+       },
+       "spellSlot": false
+      },
+      "duration": {
+       "units": "inst",
+       "concentration": false,
+       "override": false
+      },
+      "range": {
+       "override": false
+      },
+      "target": {
+       "override": false,
+       "prompt": true
+      }
+     }
+    },
+    "type": {
+     "value": "monster",
+     "subtype": ""
+    },
+    "requirements": "",
+    "properties": [],
+    "uses": {
+     "max": "",
+     "recovery": [],
+     "spent": 0
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!tFnezTx8wJQF4GQG.NKdO7XVJ27m92Z1f"
+  }
+ ],
+ "effects": [],
+ "prototypeToken": {
+  "name": "Round Deer",
+  "actorLink": false,
+  "disposition": 1,
+  "width": 1,
+  "height": 1,
+  "texture": {
+   "src": "modules/jjk5e/icons/shikigami/round-deer.svg"
+  },
+  "displayName": 20,
+  "displayBars": 20,
+  "bar1": {
+   "attribute": "attributes.hp"
+  },
+  "sight": {
+   "enabled": true
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "shikigami": true,
+   "ceCost": 9,
+   "hpPerProf": 4,
+   "dmgProf": false
+  }
+ },
+ "folder": null,
+ "_key": "!actors!tFnezTx8wJQF4GQG"
+}

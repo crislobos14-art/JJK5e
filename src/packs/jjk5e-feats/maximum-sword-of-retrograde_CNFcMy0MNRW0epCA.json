@@ -1,0 +1,110 @@
+{
+ "_id": "CNFcMy0MNRW0epCA",
+ "name": "Maximum: Sword of Retrograde",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/retrograde.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Invert Causality</em></p>\n<p>When you use <em>Invert Causality</em>, your guaranteed attack deals critical damage (cannot roll black flash) and the target must make a Constitution saving throw. On a failed save, they are stunned until the end of your next turn.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Invert Causality",
+  "activities": {
+   "ituThRVwnzec0iui": {
+    "_id": "ituThRVwnzec0iui",
+    "type": "save",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    },
+    "effects": [
+     {
+      "_id": "BRp1Zr5kDnIH4Hnr",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Invert Causality"
+     ]
+    ]
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "BRp1Zr5kDnIH4Hnr",
+   "name": "Stunned (Maximum: Sword of Retrograde)",
+   "img": "modules/jjk5e/icons/techniques/retrograde.svg",
+   "statuses": [
+    "stunned"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "rounds": 1
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "stunned"
+    }
+   },
+   "_key": "!items.effects!CNFcMy0MNRW0epCA.BRp1Zr5kDnIH4Hnr"
+  }
+ ],
+ "folder": "xdlt8ITade4Eg7u9",
+ "sort": 300,
+ "_key": "!items!CNFcMy0MNRW0epCA"
+}

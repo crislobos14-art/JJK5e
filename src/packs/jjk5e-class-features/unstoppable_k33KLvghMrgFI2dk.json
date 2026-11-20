@@ -1,0 +1,56 @@
+{
+ "_id": "k33KLvghMrgFI2dk",
+ "name": "Unstoppable",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>At 20th level, you are aware of your role in society and will do your best to fulfill it. Your Strength and Constitution scores increase by 4. Your maximum for those scores is now 24.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Juggernaut 20"
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "1ipDZJ01igqpFdub",
+ "effects": [
+  {
+   "_id": "JHDMrHX5QlLxwZug",
+   "name": "Unstoppable (max 24)",
+   "img": "modules/jjk5e/icons/feature.svg",
+   "changes": [
+    {
+     "key": "system.abilities.str.max",
+     "mode": 4,
+     "value": "24",
+     "priority": null
+    },
+    {
+     "key": "system.abilities.con.max",
+     "mode": 4,
+     "value": "24",
+     "priority": null
+    }
+   ],
+   "disabled": false,
+   "transfer": true,
+   "duration": {},
+   "description": "",
+   "flags": {},
+   "_key": "!items.effects!k33KLvghMrgFI2dk.JHDMrHX5QlLxwZug"
+  }
+ ],
+ "_key": "!items!k33KLvghMrgFI2dk"
+}

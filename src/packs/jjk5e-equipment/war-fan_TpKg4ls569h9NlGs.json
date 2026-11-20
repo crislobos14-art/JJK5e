@@ -1,0 +1,95 @@
+{
+ "_id": "TpKg4ls569h9NlGs",
+ "name": "War Fan",
+ "type": "weapon",
+ "img": "icons/svg/sword.svg",
+ "folder": "8L9REK3UZxFoXRJA",
+ "system": {
+  "description": {
+   "value": "<p>Simple melee weapon. 1d6 bludgeoning. Light, Defensive.</p><p><strong>Special:</strong> Defensive</p><p><em>Defensive: +1 AC while wielded (one weapon only).</em></p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "simpleM",
+   "baseItem": ""
+  },
+  "damage": {
+   "base": {
+    "number": 1,
+    "denomination": 6,
+    "types": [
+     "bludgeoning"
+    ]
+   }
+  },
+  "range": {
+   "value": 5,
+   "long": null,
+   "units": "ft",
+   "reach": 5
+  },
+  "properties": [
+   "lgt"
+  ],
+  "proficient": null,
+  "price": {
+   "value": 3.0,
+   "denomination": "gp"
+  },
+  "quantity": 1,
+  "activities": {
+   "dVpSLkU5CJjVMvu3": {
+    "_id": "dVpSLkU5CJjVMvu3",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "melee",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "priceUSD": "$300"
+  }
+ },
+ "effects": [
+  {
+   "_id": "9gLPGh6wEKjHAe0u",
+   "name": "Defensive (+1 AC)",
+   "img": "icons/svg/sword.svg",
+   "changes": [
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+1",
+     "priority": null
+    }
+   ],
+   "disabled": false,
+   "transfer": true,
+   "duration": {},
+   "description": "",
+   "flags": {},
+   "_key": "!items.effects!TpKg4ls569h9NlGs.9gLPGh6wEKjHAe0u"
+  }
+ ],
+ "_key": "!items!TpKg4ls569h9NlGs"
+}

@@ -1,0 +1,129 @@
+{
+ "_id": "st3cozIWTsDaaE5B",
+ "name": "Guided Control",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/tool-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Tool Manipulation — Innate Technique (1st level)</em></p><blockquote><p>You can control tools you imbue with cursed energy.</p></blockquote><p>Beginning at 1st level, you can spend CE up to your CE modifier as a bonus action to imbue a tool you are holding with cursed energy. This imbuement lasts an hour for each cursed energy spent and gains the following benefits:</p>\n<ul>\n<li>\n<p>You gain a +2 bonus to attack rolls using this tool or a +1 bonus to AC if the tool is armor or used defensively  </p>\n</li>\n<li>\n<p>The damage die increases by 1 tier and again at 6th and 11th level (D4&lt;D6&lt;D8&lt;D10&lt;2d6&lt;2d8)</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "gC0eBQ0A4zsYoz5F": {
+    "_id": "gC0eBQ0A4zsYoz5F",
+    "type": "utility",
+    "name": "Bonus Action",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Tool Manipulation",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "7tmhlm7tDflRZlKD",
+ "effects": [
+  {
+   "_id": "uWC4DhaCdYoyYehD",
+   "name": "Guided Control (toggle)",
+   "img": "modules/jjk5e/icons/techniques/tool-manipulation.svg",
+   "changes": [
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+1",
+     "priority": null
+    },
+    {
+     "key": "system.bonuses.mwak.attack",
+     "mode": 2,
+     "value": "+2",
+     "priority": null
+    },
+    {
+     "key": "system.bonuses.rwak.attack",
+     "mode": 2,
+     "value": "+2",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!st3cozIWTsDaaE5B.uWC4DhaCdYoyYehD"
+  }
+ ],
+ "_key": "!items!st3cozIWTsDaaE5B"
+}

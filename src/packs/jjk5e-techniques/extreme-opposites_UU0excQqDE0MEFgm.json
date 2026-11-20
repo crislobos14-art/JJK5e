@@ -1,0 +1,32 @@
+{
+ "_id": "UU0excQqDE0MEFgm",
+ "name": "Extreme Opposites",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/inverse.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Inverse — Innate Technique (3rd level)</em></p><p>At 3rd level, you’ve learned to further manipulate the damage you take based on its intensity. If you take damage that is below your threshold, you are considered vulnerable to the damage dealt. However, if the damage exceeds your threshold, you gain resistance to the damage, even if it would normally bypass resistances or immunities.<br />\nFor example, if your threshold is 15 and you take 10 damage, you treat that as vulnerability. But if you take 18 damage, you instead halve it due to your resistance, even if that type of damage would normally ignore resistances.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Inverse 3"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Inverse",
+   "level": 3
+  }
+ },
+ "folder": "bh2ZyC5GSVoaToIo",
+ "_key": "!items!UU0excQqDE0MEFgm"
+}

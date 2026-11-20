@@ -1,0 +1,43 @@
+{
+ "_id": "moNsEvTj8THhS15d",
+ "name": "Godly Might",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Strength Improvements: You can have a number of these improvements equal to your Strength modifier.</em></p>\n<p>Monstrous Might, 1 body point, 17th level, 30 Strength<br />\nYou are the pinnacle of strength, some even consider you as athletic as an ancient god. You now count as three sizes larger for the purposes of grappling, shoving, disarming, and the weight you can carry, push, drag or lift and your martial arts die increases by 1 dice again, applying after die tier increases. In addition, you now deal twice as much damage to structures and objects.  </p>\n<hr />",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Heavenly Restriction 2"
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "level": 17,
+    "abilities": {
+     "str": 30
+    },
+    "features": [
+     [
+      "Monstrous Might"
+     ]
+    ]
+   },
+   "bodyCost": 1,
+   "bodyCategory": "str"
+  }
+ },
+ "folder": "fG9dHqhvzewoqwrt",
+ "_key": "!items!moNsEvTj8THhS15d"
+}

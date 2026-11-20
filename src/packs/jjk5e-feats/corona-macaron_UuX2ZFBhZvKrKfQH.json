@@ -1,0 +1,86 @@
+{
+ "_id": "UuX2ZFBhZvKrKfQH",
+ "name": "Corona Macaron",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/cursed-cannon.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Dessert Deluge</em></p>\n<p>You’ve learned to mold your cursed energy blasts into a fighting ring. As an action for 3 cursed energy, you create a 20 ft diameter ring centered on yourself for 1 minute. This ring follows you and provides half cover to creatures within the ring from outside attacks that pass through. This becomes three quarters cover at 11th level.<br />\n If a creature comes in contact with the outside of the ring, they must make a Dexterity saving throw or be pulled into the ring. Once a creature has been pulled inside, the ring is no longer centered on you and will not move. If you or the creature comes into contact with the ring, you take damage equal to your <em>Granite Blast</em>. You can only take this damage once per round. As an action, a creature inside can make a Dexterity (Acrobatics) check against your Cursed Energy save DC to escape. On a success, they slip past the ring and can exit. On a failure, they take your <em>Granite Blast</em> damage and are pushed 5 ft towards you. You can end this technique as a free action on your turn.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Dessert Deluge",
+  "activities": {
+   "LmttiJzj4t54PglX": {
+    "_id": "LmttiJzj4t54PglX",
+    "type": "save",
+    "name": "Action (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "LmttiJzj4t54PglX": 3
+   },
+   "prereq": {
+    "features": [
+     [
+      "Dessert Deluge"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "21KhImE6dWZGP2gJ",
+ "sort": 300,
+ "_key": "!items!UuX2ZFBhZvKrKfQH"
+}

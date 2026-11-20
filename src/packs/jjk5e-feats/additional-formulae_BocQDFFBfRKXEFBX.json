@@ -1,0 +1,186 @@
+{
+ "_id": "BocQDFFBfRKXEFBX",
+ "name": "Additional Formulae",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/cursed-transmutation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Chemical Formulae</em></p>\n<p>You can choose to gain two of the following options (This feat can be taken more than once):<br />\n<strong>Transmute Explosion (3 CE)</strong>. As an action, you transmute the chemical composition of a 10 ft cube of air within 60 ft of you creating an explosion. All creatures within that cube must make a Constitution saving throw. On a failure, a creature takes 5d6 fire damage or half as much on a success. This becomes 8d6 at 11th level and 14d6 at 18th level.<br />\n<strong>Modify Attributes (2 CE)</strong>. As a bonus action, you swap your Strength, Dexterity, or Constitution scores for 1 minute (can end it as a free action).<br />\n<strong>Pressurization (3 CE)</strong>. As an action, you transmute the pressure of the air around you for up to 1 minute while concentrating. For the duration, you gain a 15 ft fly speed. This increases to 25 ft at 6th level, 40 ft at 11th level and 60 ft at 18th level.<br />\n<strong>Transmute Element (1 CE).</strong> When you deal a damage type from the following list, you can spend 1 CE to change that damage type to one of the other listed types: acid, cold, fire, lightning, poison, thunder.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Chemical Formulae",
+  "activities": {
+   "nN0ASUPPgFHscGrD": {
+    "_id": "nN0ASUPPgFHscGrD",
+    "type": "utility",
+    "name": "Action (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   },
+   "80J8JI5DclCqX99g": {
+    "_id": "80J8JI5DclCqX99g",
+    "type": "utility",
+    "name": "Action (2 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   },
+   "obJj6z1U5ZX9b5vc": {
+    "_id": "obJj6z1U5ZX9b5vc",
+    "type": "utility",
+    "name": "Action (1 CE)",
+    "sort": 200000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   },
+   "0QQdgQ8sgzHC1Ilm": {
+    "_id": "0QQdgQ8sgzHC1Ilm",
+    "type": "save",
+    "name": "Action",
+    "sort": 300000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {
+     "template": {
+      "type": "cube",
+      "size": "10",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 5,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "fire"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "nN0ASUPPgFHscGrD": 3,
+    "80J8JI5DclCqX99g": 2,
+    "obJj6z1U5ZX9b5vc": 1
+   },
+   "prereq": {
+    "features": [
+     [
+      "Chemical Formulae"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "duKUqjyWPQ4gLCYh",
+ "sort": 200,
+ "_key": "!items!BocQDFFBfRKXEFBX"
+}

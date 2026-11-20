@@ -1,0 +1,124 @@
+{
+ "_id": "Ga4rJYPGjtSVOdr3",
+ "name": "Domain Expansion: Deus ex Machina",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/cursed-circuitry-domain.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Circuitry — Innate Technique (18th level)</em></p><p><em>Domain Expansion (rules): full-turn action, 20 CE unless stated, 175-ft radius, 1 minute. When the domain ends you suffer <strong>Technique Burnout</strong> (applied automatically by the module).</em></p><p>At 18th level, you have mastered your technique allowing you to expand your domain. Within your domain, you are always under the effect of your <em>Circuit</em>. At initiative 20, creatures of your choice within your domain take necrotic damage equal to their current cursed energy as your domain saps their cursed energy into the circuit.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "HxmAR9Wsg6o8LZ9e": {
+    "_id": "HxmAR9Wsg6o8LZ9e",
+    "type": "utility",
+    "name": "Expand Domain (20 CE)",
+    "sort": -100000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Full turn: Action + Bonus Action + Movement",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "175",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": true
+     },
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 9,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "special",
+   "value": null,
+   "condition": "Full turn: Action + Bonus Action + Movement",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "radius",
+    "size": "175",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": true
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Cursed Circuitry",
+   "level": 18,
+   "domain": true,
+   "ceCosts": {
+    "HxmAR9Wsg6o8LZ9e": 20
+   },
+   "domainActivity": "HxmAR9Wsg6o8LZ9e",
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "hm057iS0RUqvPJaN",
+ "_key": "!items!Ga4rJYPGjtSVOdr3"
+}

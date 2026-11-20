@@ -1,0 +1,104 @@
+{
+ "_id": "3IWNlxcrnJFvNxap",
+ "name": "Fangs of Orochi",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/eight-heads.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Eight Heads — Innate Technique (6th level)</em></p><p>At 6th level, as an action you can spend up to 8 cursed energy to summon an equal number of fangs from the jaws of <em>Yamata no Orochi</em> as shikigami. They appear in unoccupied spaces of your choice within 10 ft. You can have up to 8 summoned at a time. <br />\nYou can command any Fangs you have summoned as a bonus action. These Fangs disappear if you become unconscious and if destroyed cannot be resummoned for 1 minute. The Fangs hit points increase to 20 at 11th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "7d2VFbEUkGc1ICIn": {
+    "_id": "7d2VFbEUkGc1ICIn",
+    "type": "utility",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "10",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "10",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Eight Heads",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "DMcMPNJMAkcTYNF8",
+ "_key": "!items!3IWNlxcrnJFvNxap"
+}

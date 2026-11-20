@@ -1,0 +1,92 @@
+{
+ "_id": "eTQgHnQfLmlqyKNA",
+ "name": "Maximum: Body of the Devourer",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/voracity.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Voracity — Innate Technique (11th level)</em></p><p>At 11th level you have learned to draw the power of the devoured from your stomach and into your flesh. As an action you can transform into one of the creatures you have devoured, spending cursed energy equal to twice the Devoured’s CR (min of 1) or Level. Your statistics are replaced by the statblock of the chosen Devoured, but you retain your alignment, personality, mental scores, Cursed Energy and Hit Points.<br />\n You gain temporary hit points equal to the Hit Points of the Devoured. These Temporary Hit Points vanish if any remain when the technique ends. The technique ends early if you have no Temporary Hit Points from this technique left.</p>\n<p>You are limited in the actions it can perform by the anatomy of your new form and can only use your cursed techniques if your new form is capable of forming hand signs and chanting. This form lasts for a number of minutes equal to your level + your cursed energy modifier. You cannot use or benefit from <em>Regurgitation</em> while using this feature.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "mhfBeFLgedquCkLf": {
+    "_id": "mhfBeFLgedquCkLf",
+    "type": "utility",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Voracity",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "xeaTaRsDQ88YPtDB",
+ "_key": "!items!eTQgHnQfLmlqyKNA"
+}

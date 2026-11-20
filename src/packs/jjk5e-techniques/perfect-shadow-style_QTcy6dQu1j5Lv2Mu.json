@@ -1,0 +1,103 @@
+{
+ "_id": "QTcy6dQu1j5Lv2Mu",
+ "name": "Perfect Shadow Style",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/new-shadow-style.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>New Shadow Style — Innate Technique (18th level)</em></p><p>Finally, at 18th level, you manage to reach the peak of New Shadow Style. Your <em>Simple Domain</em> gains the following benefits:</p>\n<ul>\n<li>\n<p><em>Simple Domain</em> costs no cursed energy.  </p>\n</li>\n<li>\n<p>You can freely move and maintain <em>Simple Domain.</em>  </p>\n</li>\n<li>\n<p>The range of any of New Shadow Style techniques can be increased to up to 60 feet as a bonus action until the end of your turn</p>\n</li>\n</ul>\n<p>When you expand the range of your <em>Simple Domain</em> over a creature, you can make two weapon attacks against a single creature as a free action (regardless of range). You can do this a number of times equal to your proficiency bonus each long rest.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "GvyKyWKjmfVvOBOC": {
+    "_id": "GvyKyWKjmfVvOBOC",
+    "type": "utility",
+    "name": "Bonus Action",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1"
+      }
+     ],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "@prof",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
+    }
+   ]
+  },
+  "level": 9,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "New Shadow Style",
+   "level": 18,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "afNhLz8cb88QgbyD",
+ "_key": "!items!QTcy6dQu1j5Lv2Mu"
+}

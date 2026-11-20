@@ -1,0 +1,32 @@
+{
+ "_id": "acpMW606uujEXSIi",
+ "name": "The Fever",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/pachinko-fever.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Pachinko Fever — Innate Technique (11th level)</em></p><p>When you achieve the 11th level, after entering your jackpot, you start gathering fever points. Once per round when you are lowered to one hit point, you gain a fever point. You can have a number of them up to your proficiency bonus and unused fever points disappear at the end of combat. You can use one of your fever points to gain one of the following effects:</p>\n<ul>\n<li>\n<p>You can choose to land a critical hit (cannot black flash)  </p>\n</li>\n<li>\n<p>You gain an additional action  </p>\n</li>\n<li>\n<p>Add a +10 to a saving throw or ability check</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Pachinko Fever 11"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Pachinko Fever",
+   "level": 11
+  }
+ },
+ "folder": "30lfiZHWDrH4G6F5",
+ "_key": "!items!acpMW606uujEXSIi"
+}

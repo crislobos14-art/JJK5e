@@ -1,0 +1,634 @@
+{
+ "_id": "DiGPFreyCTswLXCl",
+ "name": "Strategist",
+ "type": "class",
+ "img": "modules/jjk5e/icons/classes/strategist.svg",
+ "system": {
+  "description": {
+   "value": "<table>\n<thead>\n<tr>\n<th>Level</th>\n<th>Prof</th>\n<th style=\"text-align: left;\">Features</th>\n<th>Total Cursed Energy Points</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1</td>\n<td>+2</td>\n<td style=\"text-align: left;\">Innate  Technique, Quick Recovery</td>\n<td>2 + CE modifier</td>\n</tr>\n<tr>\n<td>2</td>\n<td>+2</td>\n<td style=\"text-align: left;\">Technique Creativity</td>\n<td>4 + CE modifier</td>\n</tr>\n<tr>\n<td>3</td>\n<td>+2</td>\n<td style=\"text-align: left;\">Innate Technique Feature</td>\n<td>6 + CE modifier</td>\n</tr>\n<tr>\n<td>4</td>\n<td>+2</td>\n<td style=\"text-align: left;\">Ability Score Improvement</td>\n<td>8 + CE modifier</td>\n</tr>\n<tr>\n<td>5</td>\n<td>+3</td>\n<td style=\"text-align: left;\"></td>\n<td>10 + CE modifier</td>\n</tr>\n<tr>\n<td>6</td>\n<td>+3</td>\n<td style=\"text-align: left;\">Innate  Technique Feature, Ability Score Improvement</td>\n<td>12 + CE modifier</td>\n</tr>\n<tr>\n<td>7</td>\n<td>+3</td>\n<td style=\"text-align: left;\"></td>\n<td>14 + CE modifier</td>\n</tr>\n<tr>\n<td>8</td>\n<td>+3</td>\n<td style=\"text-align: left;\">Ability Score Improvement</td>\n<td>16 + CE modifier</td>\n</tr>\n<tr>\n<td>9</td>\n<td>+4</td>\n<td style=\"text-align: left;\"></td>\n<td>18 + CE modifier</td>\n</tr>\n<tr>\n<td>10</td>\n<td>+4</td>\n<td style=\"text-align: left;\">Ability Score Improvement</td>\n<td>20 + CE modifier</td>\n</tr>\n<tr>\n<td>11</td>\n<td>+4</td>\n<td style=\"text-align: left;\">Innate  Technique Feature</td>\n<td>22 + CE modifier</td>\n</tr>\n<tr>\n<td>12</td>\n<td>+4</td>\n<td style=\"text-align: left;\">Ability Score Improvement</td>\n<td>24 + CE modifier</td>\n</tr>\n<tr>\n<td>13</td>\n<td>+5</td>\n<td style=\"text-align: left;\"></td>\n<td>26 + CE modifier</td>\n</tr>\n<tr>\n<td>14</td>\n<td>+5</td>\n<td style=\"text-align: left;\"></td>\n<td>28 + CE modifier</td>\n</tr>\n<tr>\n<td>15</td>\n<td>+5</td>\n<td style=\"text-align: left;\">Sorcerous Restoration</td>\n<td>30 + CE modifier</td>\n</tr>\n<tr>\n<td>16</td>\n<td>+5</td>\n<td style=\"text-align: left;\">Ability Score Improvement</td>\n<td>32 + CE modifier</td>\n</tr>\n<tr>\n<td>17</td>\n<td>+6</td>\n<td style=\"text-align: left;\"></td>\n<td>34 + CE modifier</td>\n</tr>\n<tr>\n<td>18</td>\n<td>+6</td>\n<td style=\"text-align: left;\">Innate  Technique Feature</td>\n<td>36 + CE modifier</td>\n</tr>\n<tr>\n<td>19</td>\n<td>+6</td>\n<td style=\"text-align: left;\">Ability Score Improvement</td>\n<td>38 + CE modifier</td>\n</tr>\n<tr>\n<td>20</td>\n<td>+6</td>\n<td style=\"text-align: left;\">Signature Move</td>\n<td>40 + CE modifier</td>\n</tr>\n</tbody>\n</table>\n<p><strong>Hit Points</strong></p>\n<p><strong>Hit Dice:</strong> 1d6 per strategist level<br />\n<strong>Hit Points at 1st Level:</strong> 6 + your Constitution modifier<br />\n<strong>Hit Points at Higher Levels:</strong> 1d6 (or 4) + your Constitution modifier per strategist level after 1st</p>\n<p><strong>Proficiencies</strong></p>\n<p><strong>Armor:</strong> None</p>\n<p><strong>Weapons:</strong> Daggers, darts, slings, quarterstaffs, and handguns</p>\n<p><strong>Tools:</strong> None</p>\n<p><strong>Saving Throws:</strong> Intelligence, Wisdom</p>\n<p><strong>Skills:</strong> Choose two from Arcana, History, Insight, Investigation, Medicine, and Religion</p>\n<p><strong>Equipment</strong></p>\n<ul>\n<li>\n<p>(a) a handgun or (b) a dagger  </p>\n</li>\n<li>\n<p>(a) a component pouch or (b) an arcane focus  </p>\n</li>\n<li>\n<p>(a) a scholar's pack or (b) an explorer's pack  </p>\n</li>\n<li>\n<p>A technique manual</p>\n</li>\n</ul>\n<p><strong>Innate Technique</strong></p>\n<p>At 1st level choose an Innate Technique from the <em>JJK 5e: Innate Techniques</em> compendium. Add its features at 1st, 3rd, 6th, 11th and 18th level (see <em>Innate Technique Feature</em> in the table).</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "identifier": "strategist",
+  "levels": 1,
+  "hd": {
+   "denomination": "d6",
+   "spent": 0,
+   "additional": ""
+  },
+  "advancement": {
+   "QEm81iyQTlQQGmWj": {
+    "_id": "QEm81iyQTlQQGmWj",
+    "type": "HitPoints",
+    "configuration": {},
+    "value": {}
+   },
+   "kPBP8cZDbBqGFYjw": {
+    "_id": "kPBP8cZDbBqGFYjw",
+    "type": "ScaleValue",
+    "title": "Cursed Energy (base)",
+    "configuration": {
+     "identifier": "cursed-energy",
+     "type": "number",
+     "distance": {
+      "units": "ft"
+     },
+     "scale": {
+      "1": {
+       "value": 2
+      },
+      "2": {
+       "value": 4
+      },
+      "3": {
+       "value": 6
+      },
+      "4": {
+       "value": 8
+      },
+      "5": {
+       "value": 10
+      },
+      "6": {
+       "value": 12
+      },
+      "7": {
+       "value": 14
+      },
+      "8": {
+       "value": 16
+      },
+      "9": {
+       "value": 18
+      },
+      "10": {
+       "value": 20
+      },
+      "11": {
+       "value": 22
+      },
+      "12": {
+       "value": 24
+      },
+      "13": {
+       "value": 26
+      },
+      "14": {
+       "value": 28
+      },
+      "15": {
+       "value": 30
+      },
+      "16": {
+       "value": 32
+      },
+      "17": {
+       "value": 34
+      },
+      "18": {
+       "value": 36
+      },
+      "19": {
+       "value": 38
+      },
+      "20": {
+       "value": 40
+      }
+     }
+    }
+   },
+   "HrrvfwPQm5XN2WqH": {
+    "_id": "HrrvfwPQm5XN2WqH",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Basic Cursed Energy Manipulation (GM optional)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.F4uIuhtPqAIOpQvx",
+       "optional": true
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.TI76JOEuotEUD0Hv",
+       "optional": true
+      }
+     ],
+     "optional": true
+    },
+    "value": {}
+   },
+   "DSAia6TQJuYIgvPG": {
+    "_id": "DSAia6TQJuYIgvPG",
+    "type": "Trait",
+    "level": 1,
+    "title": "Saving Throws",
+    "classRestriction": "primary",
+    "configuration": {
+     "mode": "default",
+     "allowReplacements": false,
+     "grants": [
+      "saves:int",
+      "saves:wis"
+     ],
+     "choices": []
+    }
+   },
+   "we9kXn69sz3y84Ba": {
+    "_id": "we9kXn69sz3y84Ba",
+    "type": "Trait",
+    "level": 1,
+    "title": "Proficiencies",
+    "classRestriction": "primary",
+    "configuration": {
+     "mode": "default",
+     "allowReplacements": false,
+     "grants": [
+      "weapon:sim:dagger",
+      "weapon:sim:dart",
+      "weapon:sim:sling",
+      "weapon:sim:quarterstaff"
+     ],
+     "choices": []
+    }
+   },
+   "4kFVE6YWqBpOQ0Wr": {
+    "_id": "4kFVE6YWqBpOQ0Wr",
+    "type": "Trait",
+    "level": 1,
+    "title": "Skills",
+    "classRestriction": "primary",
+    "configuration": {
+     "mode": "default",
+     "allowReplacements": false,
+     "grants": [],
+     "choices": [
+      {
+       "count": 2,
+       "pool": [
+        "skills:arc",
+        "skills:his",
+        "skills:ins",
+        "skills:inv",
+        "skills:med",
+        "skills:rel"
+       ]
+      }
+     ]
+    }
+   },
+   "iBtBS0s2PU2zhQgp": {
+    "_id": "iBtBS0s2PU2zhQgp",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Features",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.OukRjDtHf0mdnfkS",
+       "optional": false
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.ZkhmhLeKdlobSKgP",
+       "optional": false
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.GgIpzex88s7T8ErZ",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "rKCPt3gfFRUZKdwv": {
+    "_id": "rKCPt3gfFRUZKdwv",
+    "type": "ItemGrant",
+    "level": 2,
+    "title": "Features",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.jCYKfu1uDbtYvTfi",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "8zuBgTODiu0Q6zjE": {
+    "_id": "8zuBgTODiu0Q6zjE",
+    "type": "ItemGrant",
+    "level": 15,
+    "title": "Features",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.tRoBSw4w8N0w7ykM",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "j35odgxvN6J8kqfS": {
+    "_id": "j35odgxvN6J8kqfS",
+    "type": "ItemGrant",
+    "level": 20,
+    "title": "Features",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-class-features.Item.V6zTNgTn332yUeWB",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "2iadfQH9UqLMJE5P": {
+    "_id": "2iadfQH9UqLMJE5P",
+    "type": "AbilityScoreImprovement",
+    "level": 4,
+    "title": "Ability Score Improvement",
+    "configuration": {
+     "points": 2,
+     "fixed": {},
+     "cap": 2,
+     "locked": []
+    },
+    "value": {}
+   },
+   "cnImh7KC7uBFFxyb": {
+    "_id": "cnImh7KC7uBFFxyb",
+    "type": "AbilityScoreImprovement",
+    "level": 6,
+    "title": "Ability Score Improvement",
+    "configuration": {
+     "points": 2,
+     "fixed": {},
+     "cap": 2,
+     "locked": []
+    },
+    "value": {}
+   },
+   "x3W7xBJ9R0BSecx3": {
+    "_id": "x3W7xBJ9R0BSecx3",
+    "type": "AbilityScoreImprovement",
+    "level": 8,
+    "title": "Ability Score Improvement",
+    "configuration": {
+     "points": 2,
+     "fixed": {},
+     "cap": 2,
+     "locked": []
+    },
+    "value": {}
+   },
+   "rAjXTspmT6Xm17YH": {
+    "_id": "rAjXTspmT6Xm17YH",
+    "type": "AbilityScoreImprovement",
+    "level": 10,
+    "title": "Ability Score Improvement",
+    "configuration": {
+     "points": 2,
+     "fixed": {},
+     "cap": 2,
+     "locked": []
+    },
+    "value": {}
+   },
+   "knsCkXW6hOKZlfub": {
+    "_id": "knsCkXW6hOKZlfub",
+    "type": "AbilityScoreImprovement",
+    "level": 12,
+    "title": "Ability Score Improvement",
+    "configuration": {
+     "points": 2,
+     "fixed": {},
+     "cap": 2,
+     "locked": []
+    },
+    "value": {}
+   },
+   "X80tR17JtgEOSvKh": {
+    "_id": "X80tR17JtgEOSvKh",
+    "type": "AbilityScoreImprovement",
+    "level": 16,
+    "title": "Ability Score Improvement",
+    "configuration": {
+     "points": 2,
+     "fixed": {},
+     "cap": 2,
+     "locked": []
+    },
+    "value": {}
+   },
+   "6ADd5GmYq1EhmZNC": {
+    "_id": "6ADd5GmYq1EhmZNC",
+    "type": "AbilityScoreImprovement",
+    "level": 19,
+    "title": "Ability Score Improvement",
+    "configuration": {
+     "points": 2,
+     "fixed": {},
+     "cap": 2,
+     "locked": []
+    },
+    "value": {}
+   },
+   "fgWJlR3Umf37c6un": {
+    "_id": "fgWJlR3Umf37c6un",
+    "type": "ItemChoice",
+    "level": 1,
+    "title": "Innate Technique",
+    "hint": "Choose the innate technique you were born with. It grants features at 1st, 3rd, 6th, 11th and 18th level.",
+    "value": {},
+    "configuration": {
+     "choices": {
+      "1": {
+       "count": 1,
+       "replacement": false
+      }
+     },
+     "allowDrops": true,
+     "type": "feat",
+     "pool": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.gL98pPAhCp5btTmC"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.eqaq8aAY4IN52lV5"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.0dbaO9jxbwCuGbyQ"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.kehmeyYWDuPGqhum"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.2bwz0hTBn5ypp3dd"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.5QLR4NkDGOJebVpF"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.6rtLgvPvDN215CJQ"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.H7qygxbG8Xq0c6vn"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.BTG1284sBIfXglvE"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.Pm0hVIfm4vApveGF"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.nhgADuSDYt7OecT5"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.FNUTP31yZ80d9boq"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.gtottgVuBQSaJpU2"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.xswFEEqp1iM7KdQs"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.bXBgxyXKLbBpuaMg"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.sgpQc4L7TW5D82SR"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.rqBh5m04P5JgJttw"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.GalC8szcq6ZsyoYA"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.ET5Qx7HqsfRErEEF"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.7JfFhWTneFl0yW0R"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.XRDIjn80Rrz4vQmL"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.VAzY98mKXjdjNtZs"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.TR9Ml7hAw1xRiXxv"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.LRuqxn21ZHzq7qia"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.W6VeWIjW4lfrmaOX"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.7D5Bmjl59fmVBINV"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.e1TEKNUYnm0Pbdw0"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.ntI2UnoFpLvX430x"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.Tewgtv0ElmefiICX"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.5GHs3Dqd6VxtGaK1"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.1600B1v5cBczonpg"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.Y3Hv1JIWW5FMN3CQ"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.lGhaeV6UV5jriKdw"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.qSoLn7kiSKoWP8Kr"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.qUQxqEazubsaGUB0"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.43oC5ulCse4R6sX4"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.pcChRMv8ZFQDvpBi"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.CNH3ao2m8dePGOBq"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.UrGUl3BeiXnuAA5Y"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.AOxJRQ60stcCNNOt"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.Kxc1GIVgsguWyHIZ"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.CPkSEbCTmBqEVUUZ"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.pKcWuRGMrMpue0pz"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.2uUNMEoDx3UEOWCx"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.4vFeNWkYDCDQEO4w"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.SCiOoekE3YZLn8WB"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.pf6eEm8FauaOSXu0"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.5PytxdjLR0bdM9zo"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.nCSG71V9hWuAYlfS"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.vdUDFiuJzTXFicB3"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.kO4MnRtvnA5xJnLh"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.rWVrNvgmgyaTFzwF"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.08hqM0Oowg4NVy10"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.C5bFmUkafjxxkT2R"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.5x1ubKmks1jKKZuu"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.N2Opwc9HKZmc7q1A"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.OaTTeYZSBU9Pi4Lh"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.uNkcX7jkuF7F40aT"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.8QS8U7U3kr2SSWyk"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.cg2i7buGpVFp4p0F"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.g934vUyvQfacqXwQ"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.L2EWnki0dICgqQ23"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.9YLiWa4L5NVFbavf"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.aWJLJqovlwnihGZt"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.yhjIgcHNYNHVtW1G"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.y0wtpMX5KkQVZ4mb"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.yZLf0hujW1V2oJjq"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.cVS3rOxClxBPcQP5"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.jFCwHrudqlbz12GC"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.WhFQTQLpZoixGLck"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.g2goY9NXLBFtGEyL"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.qBi36foojEmbQY8y"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.pIvIaUSbNnggUeH9"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.gBl4mTDOvZ9K0iH8"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.kbngt5zGs6qa9rCa"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.zEzY3Sr93y4TX5fO"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.r1rGK2qKTM8N2wxs"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.HAdDNpVlz1tL6SCL"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.70beDon7MXaPLk4m"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.fugGhuVMTB3Ogv5y"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.yGVI1LXlPXmIANZ7"
+      }
+     ],
+     "restriction": {
+      "type": "class",
+      "subtype": "",
+      "level": ""
+     }
+    },
+    "classRestriction": "primary"
+   }
+  },
+  "spellcasting": {
+   "progression": "none",
+   "ability": ""
+  },
+  "startingEquipment": [],
+  "primaryAbility": {
+   "value": [
+    "int"
+   ],
+   "all": true
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": null,
+ "_key": "!items!DiGPFreyCTswLXCl"
+}

@@ -1,0 +1,73 @@
+{
+ "_id": "nTIk1d8lhMAJ6Xv1",
+ "name": "Exploding Fighting Spirit",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/missile-fist.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Missile Impact</em></p>\n<p>You have learned to channel your passion for battle and fighting spirit into your cursed technique. When you hit a creature with <em>Missile Fist</em>, all creatures within 5 ft (other than you) take thunder damage equal to your CE modifier from the shockwaves. You can use this effect a number of times each turn equal to your proficiency bonus. When you hit a target with a <em>Missile Fist</em>, you gain a +1 bonus to attack rolls against that target. This bonus can stack and lasts until the end of your turn.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Missile Impact",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Missile Impact"
+     ]
+    ]
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "KPWVjR6E7k1YehNp",
+   "name": "Exploding Fighting Spirit (toggle)",
+   "img": "modules/jjk5e/icons/techniques/missile-fist.svg",
+   "changes": [
+    {
+     "key": "system.bonuses.mwak.attack",
+     "mode": 2,
+     "value": "+1",
+     "priority": null
+    },
+    {
+     "key": "system.bonuses.rwak.attack",
+     "mode": 2,
+     "value": "+1",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!nTIk1d8lhMAJ6Xv1.KPWVjR6E7k1YehNp"
+  }
+ ],
+ "folder": "NrFEIsdcWt7L52EL",
+ "sort": 100,
+ "_key": "!items!nTIk1d8lhMAJ6Xv1"
+}

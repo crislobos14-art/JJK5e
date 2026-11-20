@@ -1,0 +1,112 @@
+{
+ "_id": "0Vvjb032PUzeQY5O",
+ "name": "Maximum: Granita Lusso",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/cursed-cannon.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Cannon — Innate Technique (11th level)</em></p><p>At 11th level, your output reaches an all time high. As an action for 6 cursed energy, all creatures in a 10 ft wide 60 ft long line must make a Dexterity saving throw. On a failure, they take twice your <em>Granite Blast</em> damage or half as much on a success. You can spend additional cursed energy up to your CE modifier to deal one additional damage dice per cursed energy spent. Objects and structures within range take maximum damage. After using this, you fall under the effects of <em>Technique Burnout</em> until the end of your next turn.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "K5tMSDrkCbisKcMD": {
+    "_id": "K5tMSDrkCbisKcMD",
+    "type": "save",
+    "name": "Action (6+ CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "max(1, max(@abilities.wis.mod, @abilities.cha.mod))"
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": []
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceSteps": {
+    "K5tMSDrkCbisKcMD": 1
+   },
+   "ceCosts": {
+    "K5tMSDrkCbisKcMD": 6
+   },
+   "technique": "Cursed Cannon",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "jTg0Bf76dJeyMkqJ",
+ "_key": "!items!0Vvjb032PUzeQY5O"
+}

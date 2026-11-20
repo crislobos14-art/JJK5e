@@ -1,0 +1,31 @@
+{
+ "_id": "iE4bz6ZI6l5lDHUx",
+ "name": "Lesser Sealing Talisman",
+ "type": "loot",
+ "img": "icons/svg/explosion.svg",
+ "folder": "pB7mLAOAtbyDQKeT",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Item, Grade 3</em></p><p>Apply to an item, container, or door to make a Minor Magical Lock for 8 hours (DC 18 to open). The talisman cannot be removed while active and is expended after the 8 hours are complete.</p>"
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "rarity": "uncommon",
+  "quantity": 1,
+  "attunement": "",
+  "type": {
+   "value": "gear"
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "3rd Grade"
+  }
+ },
+ "_key": "!items!iE4bz6ZI6l5lDHUx"
+}

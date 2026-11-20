@@ -1,0 +1,55 @@
+{
+ "_id": "nuVtDe1gNDtRyhKt",
+ "name": "Combat Prowess",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>At 1st level, your life of scrapping and battling with beasts, humans, or other tough creatures has given you mastery of Combat styles that use unarmed strikes and Warrior weapons, which are melee weapons without the two-handed property, and improvised weapons. You can not use the finesse property of a weapon while using it as a Warrior weapon.</p>\n<p>You can roll a d6 in place of the normal damage of your unarmed strike or Warrior weapon. This die changes as you gain Warrior levels, as shown in the scrapper column on the Warrior table.<br />\nWhen you use the Attack action with an unarmed strike or a Warrior weapon on your turn, you can make one unarmed strike or grapple as a bonus action. For example, if you take the Attack action and Attack with a Club, you can also make an Unarmed Strike or grapple as a Bonus Action, assuming you haven’t already taken a Bonus Action this turn.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Warrior 1",
+  "activities": {
+   "9BP2JVAQ2MUKakWA": {
+    "_id": "9BP2JVAQ2MUKakWA",
+    "type": "utility",
+    "name": "Bonus Action",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "7ecbupybBLUFyYzw",
+ "_key": "!items!nuVtDe1gNDtRyhKt"
+}

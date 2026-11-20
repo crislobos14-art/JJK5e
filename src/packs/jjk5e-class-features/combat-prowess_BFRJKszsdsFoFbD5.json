@@ -1,0 +1,55 @@
+{
+ "_id": "BFRJKszsdsFoFbD5",
+ "name": "Combat Prowess",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>At 1st level, your life of scrapping and battling with beasts, has given you mastery of Combat styles that use unarmed strikes and Juggernaut weapons, which are melee weapons without the two-handed property, and improvised weapons. You can not use the finesse property of a weapon while using it as a Juggernaut weapon.</p>\n<ul>\n<li>\n<p>You can roll a d6 in place of the normal damage of your unarmed strike or Juggernaut weapon. This die changes as you gain Juggernaut levels, as shown in the scrapper column on the Juggernaut table.  </p>\n</li>\n<li>\n<p>When you use the Attack action with an unarmed strike or a Juggernaut weapon on your turn, you can make one unarmed strike or grapple as a bonus action. For example, if you take the Attack action and Attack with a Club, you can also make an Unarmed Strike or grapple as a Bonus Action, assuming you haven’t already taken a Bonus Action this turn.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Juggernaut 1",
+  "activities": {
+   "kdRKS2bOpqVWG0Yp": {
+    "_id": "kdRKS2bOpqVWG0Yp",
+    "type": "utility",
+    "name": "Bonus Action",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "1ipDZJ01igqpFdub",
+ "_key": "!items!BFRJKszsdsFoFbD5"
+}

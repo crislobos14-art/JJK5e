@@ -1,0 +1,42 @@
+{
+ "_id": "KK15BsYoUeG6Yuck",
+ "name": "Cutting Edge",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/dark-claw.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Ultimate Claws</em></p>\n<p>You have learned to sharpen your claws with cursed energy. You gain a +1 bonus to critical range with your Claws and can reroll and 1s or 2s when rolling damage for your Claws. The bonus to critical range increases to +2 at 11th level and +3 at 18th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Ultimate Claws",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Ultimate Claws"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "zt8ujvT8aBbmfDqZ",
+ "sort": 300,
+ "_key": "!items!KK15BsYoUeG6Yuck"
+}

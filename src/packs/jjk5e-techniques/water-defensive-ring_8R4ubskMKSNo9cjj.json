@@ -1,0 +1,166 @@
+{
+ "_id": "8R4ubskMKSNo9cjj",
+ "name": "Water Defensive Ring",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/disaster-tides.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Disaster Tides — Innate Technique (6th level)</em></p><p>Beginning at 6th level, you can make a ring of water that protects you from any incoming attack. As an action for 6 Cursed Energy, you can create a ring of water around you, granting you temporary hit points equal to your Cursed Energy modifier times 15. This can also be used as a reaction to incoming damage for 8 Cursed Energy. While the ring is active, you gain immunity to cold damage and resistance to bludgeoning, slashing, and piercing damage. You can only use this cursed technique again after the current ring is over.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "aLczDcFEaSepCqSW": {
+    "_id": "aLczDcFEaSepCqSW",
+    "type": "heal",
+    "name": "Action (6 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "",
+     "types": [
+      "temphp"
+     ],
+     "custom": {
+      "enabled": true,
+      "formula": "max(@abilities.wis.mod, @abilities.cha.mod)"
+     },
+     "scaling": {
+      "number": 1
+     }
+    }
+   },
+   "9UsTF81pn5oUAYgE": {
+    "_id": "9UsTF81pn5oUAYgE",
+    "type": "utility",
+    "name": "Reaction (8 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "aLczDcFEaSepCqSW": 6,
+    "9UsTF81pn5oUAYgE": 8
+   },
+   "technique": "Disaster Tides",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "Ao9OCl7PHP0hxQBD",
+ "effects": [
+  {
+   "_id": "M0tHCJw5J8GRPw9t",
+   "name": "Water Defensive Ring (toggle)",
+   "img": "modules/jjk5e/icons/techniques/disaster-tides.svg",
+   "changes": [
+    {
+     "key": "system.traits.di.value",
+     "mode": 2,
+     "value": "cold",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!8R4ubskMKSNo9cjj.M0tHCJw5J8GRPw9t"
+  }
+ ],
+ "_key": "!items!8R4ubskMKSNo9cjj"
+}

@@ -1,0 +1,83 @@
+{
+ "_id": "0VcTooXJ3pi9MX0A",
+ "name": "Perfect Cube",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/black-box.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Black Box — Innate Technique (6th level)</em></p><p>At 6th level, you have learned to create a nearly indestructible <em>Dark Cube</em>. For an additional 5 CE, you can create a <em>Perfect Cube</em> (this cursed energy counts towards the Cube’s Reinforcements). <br />\n Your <em>Perfect Cube</em> has resistance to all damage and ignores features or abilities that deal higher damage against objects and structures or would destroy, see into, or invade your barrier.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "suUDV5DHvN6DKUim": {
+    "_id": "suUDV5DHvN6DKUim",
+    "type": "utility",
+    "name": "Extra (5 CE)",
+    "sort": 900000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "For an additional 5 CE, you can create a Perfect Cube (this cursed energy counts toward...",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "special",
+   "value": null,
+   "condition": "For an additional 5 CE, you can create a Perfect Cube (this cursed energy counts toward...",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self"
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "suUDV5DHvN6DKUim": 5
+   },
+   "technique": "Black Box",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "h65v183tFsULjQrb",
+ "_key": "!items!0VcTooXJ3pi9MX0A"
+}

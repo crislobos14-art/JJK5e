@@ -1,0 +1,92 @@
+{
+ "_id": "LwQFSsaYhkLR6WV0",
+ "name": "Slicing and Severing",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/shrine.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Shrine — Innate Technique (11th level)</em></p><p>Beginning at 11th level, your body has adjusted to better handle your cursed technique. You can now use <em>Dismantle</em> as a bonus action or reaction (one attack each). Additionally, when using <em>Cleave</em> against a creature that has failed its save, it treats immunity as resistance. If using the maximum of 10 cursed energy on <em>Cleave</em>, you can target a limb from the limb damage table.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "QsakKkiLYbg9IwKI": {
+    "_id": "QsakKkiLYbg9IwKI",
+    "type": "utility",
+    "name": "Bonus Action",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Shrine",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "m9ZssDMA8savxH5G",
+ "_key": "!items!LwQFSsaYhkLR6WV0"
+}

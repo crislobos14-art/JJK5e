@@ -1,0 +1,71 @@
+{
+ "_id": "QIFx9TDRUTBCFMAO",
+ "name": "Maximum: Blitz",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/triple-core.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Divebomb</em></p>\n<p>You have hastened yourself even further. When you use your <em>Divebomb</em> core option, you instead increase your speed by 15 ft per CE spent and you gain a +4 bonus to AC. You deal an additional 1d6 damage for every 10 ft you move in a straight line before hitting a target with a melee attack.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Divebomb",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "options": [
+     [
+      "Divebomb"
+     ]
+    ]
+   },
+   "modifies": [
+    "First Core",
+    "Upgraded Form"
+   ]
+  }
+ },
+ "effects": [
+  {
+   "_id": "dNJBVDpioPALXauS",
+   "name": "Maximum: Blitz (toggle)",
+   "img": "modules/jjk5e/icons/techniques/triple-core.svg",
+   "changes": [
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+4",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!QIFx9TDRUTBCFMAO.dNJBVDpioPALXauS"
+  }
+ ],
+ "folder": "82rPUBoGJ4IokyPC",
+ "sort": 400,
+ "_key": "!items!QIFx9TDRUTBCFMAO"
+}

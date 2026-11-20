@@ -1,0 +1,118 @@
+{
+ "_id": "kO4MnRtvnA5xJnLh",
+ "name": "Innate Technique: New Shadow Style",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/new-shadow-style.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>You are born with no innate technique, but in order to make up you learn a special secret. A domain for the weak.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.IpEcKAh0dIJX4o2O]{New Shadow Style: Simple Domain}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.YpGzHiufmF1oU7iu]{Batto Sword Draw}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.4hYbnnqfMh0jEC5Y]{Evening Moon Sword Drawing}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.YRRHIojsCbPDOfoF]{Moonlight Veil}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.QTcy6dQu1j5Lv2Mu]{Perfect Shadow Style}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "6Kp5aFVjP7PjSRxH": {
+    "_id": "6Kp5aFVjP7PjSRxH",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "New Shadow Style (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.IpEcKAh0dIJX4o2O",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "onhB86VRzXxiuCoB": {
+    "_id": "onhB86VRzXxiuCoB",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "New Shadow Style (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.YpGzHiufmF1oU7iu",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "YIrlEfiif1cSmRot": {
+    "_id": "YIrlEfiif1cSmRot",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "New Shadow Style (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.4hYbnnqfMh0jEC5Y",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "DrUBgyb9r0dvqbQB": {
+    "_id": "DrUBgyb9r0dvqbQB",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "New Shadow Style (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.YRRHIojsCbPDOfoF",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "UDJfWCwfl7AV2XTq": {
+    "_id": "UDJfWCwfl7AV2XTq",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "New Shadow Style (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.QTcy6dQu1j5Lv2Mu",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "New Shadow Style"
+  }
+ },
+ "_key": "!items!kO4MnRtvnA5xJnLh"
+}

@@ -1,0 +1,139 @@
+{
+ "_id": "fZnK2A2LWwuuQ9hM",
+ "name": "Malevolent Cursed Energy",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Cursed Energy Score 20+</em></p>\n<p>Your soul is rotten, and your cursed energy shows that. As an action, you release your cursed energy and creatures within 100 ft must make a Wisdom saving throw against your cursed energy DC. On a success, they can feel your cruelty but are not shaken by it. On failure, they are frightened and receive one of the following detriments for 1 minute:</p>\n<ul>\n<li>\n<p>They hesitate to act due to your suffocating presence, their ability checks, saving throws, and attack rolls are reduced by your Cursed Energy modifier.  </p>\n</li>\n<li>\n<p>Your power makes them become paralyzed in fear, they have a disadvantage on your saving throws.  </p>\n</li>\n<li>\n<p>If the creature's CR or level is equal to or higher than your level, they make this saving throw with advantage. If the creature's CR or level is 3 or more below your level, they make this saving throw with disadvantage.</p>\n</li>\n</ul>\n<p>A creature can repeat this saving throw at the end of their turn. Once a creature passes this saving throw, it becomes immune to this effect for 24 hours.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkCursedEnergy"
+  },
+  "requirements": "Cursed Energy Score 20+",
+  "activities": {
+   "Qow7wShO8KXFuFPm": {
+    "_id": "Qow7wShO8KXFuFPm",
+    "type": "save",
+    "name": "Release cursed energy",
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     }
+    },
+    "save": {
+     "ability": [
+      "wis"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "100",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": true
+     }
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute"
+    },
+    "effects": [
+     {
+      "_id": "qMl3cyWISxSXKgRU",
+      "onSave": false
+     },
+     {
+      "_id": "1lNeDQ8h5PhEdx26",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "ceScore": 20
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "qMl3cyWISxSXKgRU",
+   "name": "Frightened (Malevolent Cursed Energy)",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "seconds": 60,
+    "rounds": 10
+   },
+   "description": "",
+   "statuses": [
+    "frightened"
+   ],
+   "flags": {
+    "jjk5e": {
+     "condition": "frightened"
+    }
+   },
+   "_key": "!items.effects!fZnK2A2LWwuuQ9hM.qMl3cyWISxSXKgRU"
+  },
+  {
+   "_id": "1lNeDQ8h5PhEdx26",
+   "name": "Suffocating presence (−CE mod to checks, saves, attacks)",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "seconds": 60,
+    "rounds": 10
+   },
+   "description": "<p>Ability checks, saving throws and attack rolls are reduced by the caster's CE modifier.</p>",
+   "statuses": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!items.effects!fZnK2A2LWwuuQ9hM.1lNeDQ8h5PhEdx26"
+  }
+ ],
+ "folder": "58RlNbYPWxO2Xi4E",
+ "sort": 300,
+ "_key": "!items!fZnK2A2LWwuuQ9hM"
+}

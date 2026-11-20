@@ -1,0 +1,73 @@
+{
+ "_id": "gR2KxycwAm9AR3sQ",
+ "name": "Sapping Roots",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/disaster-verdure.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Cursed Bud</em></p>\n<p>Your power has increased and been honed. As an action, for 5 Cursed Energy you give yourself the ability to drain Cursed Energy for 1 minute. On a hit with a melee attack or if you damage a creature with your Innate Technique, they lose 1 cursed energy which you gain.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Cursed Bud",
+  "activities": {
+   "gsGlvp1km0gsDLv0": {
+    "_id": "gsGlvp1km0gsDLv0",
+    "type": "utility",
+    "name": "Action (5 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "gsGlvp1km0gsDLv0": 5
+   },
+   "prereq": {
+    "features": [
+     [
+      "Cursed Buds"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "CXn6lpeOi1EKQe5u",
+ "sort": 300,
+ "_key": "!items!gR2KxycwAm9AR3sQ"
+}

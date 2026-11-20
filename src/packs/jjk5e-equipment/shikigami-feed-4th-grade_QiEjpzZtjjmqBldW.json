@@ -1,0 +1,82 @@
+{
+ "_id": "QiEjpzZtjjmqBldW",
+ "name": "Shikigami Feed (4th Grade)",
+ "type": "consumable",
+ "img": "icons/svg/explosion.svg",
+ "folder": "RVpkkOiLvLva4ZNf",
+ "system": {
+  "description": {
+   "value": "<p><em>Potion, Grade 4</em></p><p>Shredded food meal made from the ground up bodies of low grade curses. A shikigami can eat this as an action to regain 2d4+2 hit points.</p>"
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "rarity": "common",
+  "quantity": 1,
+  "attunement": "",
+  "type": {
+   "value": "potion",
+   "subtype": ""
+  },
+  "uses": {
+   "max": "1",
+   "spent": 0,
+   "autoDestroy": true,
+   "recovery": []
+  },
+  "activities": {
+   "nLulDeGtKfT9IWzT": {
+    "_id": "nLulDeGtKfT9IWzT",
+    "type": "utility",
+    "name": "Consume",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1"
+      }
+     ]
+    }
+   },
+   "8IF1Iaoi1Z8wb4rJ": {
+    "_id": "8IF1Iaoi1Z8wb4rJ",
+    "type": "utility",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "4th Grade"
+  }
+ },
+ "_key": "!items!QiEjpzZtjjmqBldW"
+}

@@ -1,0 +1,43 @@
+{
+ "_id": "ii9PKCGLBjtbKXXk",
+ "name": "Destructive Force",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Strength Improvements: You can have a number of these improvements equal to your Strength modifier.</em></p>\n<p>Godly Might, 2 body points, 20th level, 40 Strength<br />\nYou learn to better apply your godlike strength into your strikes, creating thunderous shockwaves. When you hit a creature with a weapon attack using strength, compare the attack roll result to the AC of every creature of your choice within 20 feet of the target other than the target. If the attack roll would hit, you deal half the damage of the attack(rounded down) to the creatures that were hit.</p>\n<hr />",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Heavenly Restriction 2"
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "level": 20,
+    "abilities": {
+     "str": 40
+    },
+    "features": [
+     [
+      "Godly Might"
+     ]
+    ]
+   },
+   "bodyCost": 2,
+   "bodyCategory": "str"
+  }
+ },
+ "folder": "fG9dHqhvzewoqwrt",
+ "_key": "!items!ii9PKCGLBjtbKXXk"
+}

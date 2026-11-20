@@ -1,0 +1,95 @@
+{
+ "_id": "WwsOi9d6vXukT6rB",
+ "name": "Divergent Flow",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/divergent-fist.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Divergent Fist — Innate Technique (1st level)</em></p><blockquote><p>A learnt technique using cursed energy manipulation created accidentally due to slow cursed energy, turns out to be effective.</p></blockquote><p>At 1st level, once per turn, you can choose the damage of one of your unarmed strikes or weapon attacks. For 1 cursed energy, you cause the creature to take the attack’s damage in necrotic damage at the beginning of their turn. These strikes can’t be black flashes. If used with Cursed Strike, the additional necrotic damage doesn’t happen until the start of the creature’s turn.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "gZAPVoQZiZ4rkhTu": {
+    "_id": "gZAPVoQZiZ4rkhTu",
+    "type": "utility",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "gZAPVoQZiZ4rkhTu": 1
+   },
+   "technique": "Divergent Fist",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "z0OBRtMvDoArKlLl",
+ "_key": "!items!WwsOi9d6vXukT6rB"
+}

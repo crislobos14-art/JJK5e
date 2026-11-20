@@ -1,0 +1,86 @@
+{
+ "_id": "a4rUm7E6pJQsmAow",
+ "name": "Depletion Zone",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/solo-forbidden-zone.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Solo Forbidden Zone — Cursed Technique Reversal</em></p><p>Your mastery over Reverse Cursed Technique has unlocked your cursed technique reversal. This allows you to now create an area that drains enemies of their cursed energy. As an action for up to your CE modifier + your proficiency bonus in cursed energy, you can create a 15 ft radius circle centered around yourself. Creatures of your choice in that circle at the beginning of your turn must make a CE saving throw or they will lose an amount of cursed energy equal to the amount you spent at the beginning of your turn for 1 minute while they remain in the circle.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Solo Forbidden Zone",
+  "activities": {
+   "hyuZ1bsrWzieYdoK": {
+    "_id": "hyuZ1bsrWzieYdoK",
+    "type": "utility",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "15",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     }
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Solo Forbidden Zone",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Solo Forbidden Zone"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!a4rUm7E6pJQsmAow"
+}

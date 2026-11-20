@@ -1,0 +1,73 @@
+{
+ "_id": "Hu1TwgpAXh0QI9qC",
+ "name": "Unarmed Strike (Shikigami User)",
+ "type": "weapon",
+ "img": "icons/svg/combat.svg",
+ "folder": "69XiiJo14iwd80Zo",
+ "system": {
+  "description": {
+   "value": "<p>Unarmed strike using the <strong>Shikigami User</strong> damage die (<code>@scale.shikigami-user.die</code>), which grows with your level. Uses DEX or STR (finesse).</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "simpleM",
+   "baseItem": ""
+  },
+  "proficient": 1,
+  "equipped": true,
+  "quantity": 1,
+  "properties": [
+   "fin"
+  ],
+  "range": {
+   "value": 5,
+   "units": "ft",
+   "reach": 5
+  },
+  "damage": {
+   "base": {
+    "number": null,
+    "denomination": null,
+    "bonus": "",
+    "types": [
+     "bludgeoning"
+    ],
+    "custom": {
+     "enabled": true,
+     "formula": "@scale.shikigami-user.die"
+    }
+   }
+  },
+  "activities": {
+   "PWobZpIXP8JCnYX7": {
+    "_id": "PWobZpIXP8JCnYX7",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "melee",
+      "classification": "unarmed"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "_key": "!items!Hu1TwgpAXh0QI9qC"
+}

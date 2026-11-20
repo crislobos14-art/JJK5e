@@ -1,0 +1,54 @@
+{
+ "_id": "aQsHyHT1TGgQ7N4F",
+ "name": "Third Eye",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/trait-race.svg",
+ "system": {
+  "description": {
+   "value": "<p>All Sumerians possess a third eye that allows them to focus 'Rolloluca' or Cursed Energy. You gain proficiency in Perception and the distance you can sense cursed energy from increases by 50 ft.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "race",
+   "subtype": ""
+  },
+  "requirements": "Sumerian"
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "effects": [
+  {
+   "_id": "m2u6nN7mNFzfmD92",
+   "name": "Third Eye",
+   "img": "modules/jjk5e/icons/trait-race.svg",
+   "changes": [
+    {
+     "key": "system.skills.prc.value",
+     "mode": 4,
+     "value": "1",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "auto": "passive"
+    }
+   },
+   "_key": "!items.effects!aQsHyHT1TGgQ7N4F.m2u6nN7mNFzfmD92"
+  }
+ ],
+ "folder": "cUxhy4eiPJek1pHp",
+ "_key": "!items!aQsHyHT1TGgQ7N4F"
+}

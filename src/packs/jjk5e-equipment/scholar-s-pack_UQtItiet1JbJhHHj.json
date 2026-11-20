@@ -1,0 +1,31 @@
+{
+ "_id": "UQtItiet1JbJhHHj",
+ "name": "Scholar's Pack",
+ "type": "loot",
+ "img": "icons/svg/item-bag.svg",
+ "folder": "5TkjeIlCFmk1GLJi",
+ "system": {
+  "description": {
+   "value": "<p>Contains a sturdy backpack, notebook, tablet or laptop, stylus pen, 10 sheets of blank paper, sandbag eraser, small utility knife, and a <strong>curse detector</strong>.<br />\nCursed Tools<br />\n Items, both brand new items and others from antiquity who are embedded with curses, since normal weapons cannot damage cursed spirits. These weapons are organized by grade 4th grade(Common), 3rd grade(Uncommon), 2nd grade(Rare), 1st grade(Very Rare), Special grade(Legendary).</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "price": {
+   "value": 40.0,
+   "denomination": "gp"
+  },
+  "type": {
+   "value": "gear"
+  },
+  "quantity": 1
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "_key": "!items!UQtItiet1JbJhHHj"
+}

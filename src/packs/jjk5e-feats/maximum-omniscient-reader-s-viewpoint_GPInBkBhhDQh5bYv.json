@@ -1,0 +1,68 @@
+{
+ "_id": "GPInBkBhhDQh5bYv",
+ "name": "Maximum: Omniscient Reader’s Viewpoint",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/g-warstaff.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Storyboard Dominion</em></p>\n<p>You have gained the ability to not only see, but also manipulate the contents of your manga panel. At the beginning of your turn, you can choose a creature that you can see that is marked by 6 seconds and roll a d20. Record the roll. As a reaction, you can replace one roll that creature makes with the result of that roll. At the beginning of your turn, you lose any unused rolls.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Storyboard Dominion",
+  "activities": {
+   "6STTnzQChOqS8D13": {
+    "_id": "6STTnzQChOqS8D13",
+    "type": "utility",
+    "name": "Reaction",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Domain Expansion: Storyboard Dominion"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "hKb2rJntQlJugE10",
+ "sort": 300,
+ "_key": "!items!GPInBkBhhDQh5bYv"
+}

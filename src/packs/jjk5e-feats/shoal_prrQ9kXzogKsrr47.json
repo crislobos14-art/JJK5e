@@ -1,0 +1,42 @@
+{
+ "_id": "prrQ9kXzogKsrr47",
+ "name": "Shoal",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/disaster-tides.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Horizon of Captivating Skhanda</em></p>\n<p>You have increased your technique’s potential. You can now use <em>Death Swarm</em> outside your domain without the sure hit effect. You can have a number of shikigami equal to your Cursed Energy modifier when used in this way. The number of shikigami increases by your CE modifier at 6th level (2x), 11th level (3x), and 18th level (4x).</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Horizon of Captivating Skhanda",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Domain Expansion: Horizon of Captivating Skhanda"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "QUxVHS82lupOHPQu",
+ "sort": 200,
+ "_key": "!items!prrQ9kXzogKsrr47"
+}

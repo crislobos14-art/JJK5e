@@ -1,0 +1,95 @@
+{
+ "_id": "rrxmgN9E1kMY4Y6C",
+ "name": "Cursed Fog",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/starlight-symphony.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Starlight Symphony — Innate Technique (1st level)</em></p><blockquote><p>You can create and mold a shining cursed fog.</p></blockquote><p>Starting at 1st level, you can spend Cursed Energy up to your Cursed Energy modifier as an action. You create 10 feet of fog around yourself for each cursed energy. The fog lasts for 1 minute, spreads around corners, heavily obscures the area and you choose if the fog follows you or not as part of the action to create it. Creatures within your fog have disadvantage on Perception and Investigation checks and cannot detect cursed energy.</p>\n<p>At 6th level, you can use your reaction to give advantage or disadvantage to a roll made by a creature within your cursed fog and can spend up to twice your Cursed Energy modifier when creating your cursed fog. You can spend up to thrice your Cursed Energy modifier at 11th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "B59JyS0jgQ8whyQG": {
+    "_id": "B59JyS0jgQ8whyQG",
+    "type": "utility",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Starlight Symphony",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "MxqACO3emHCjwL5R",
+ "_key": "!items!rrxmgN9E1kMY4Y6C"
+}

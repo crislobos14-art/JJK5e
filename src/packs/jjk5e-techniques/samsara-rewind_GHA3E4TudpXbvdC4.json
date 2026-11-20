@@ -1,0 +1,119 @@
+{
+ "_id": "GHA3E4TudpXbvdC4",
+ "name": "Samsara Rewind",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/golden-hour.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Golden Hour — Innate Technique (11th level)</em></p><p>At 11th level, you have gained the limited ability to reverse time. As a Full Turn Action (Action + Bonus Action + Movement) for 8 cursed energy you can strike a supreme pose and rewind time by 6 seconds, taking all creatures and objects within 100 ft back in time 1 round to the start of your previous turn.<br />\n Any damage taken or cursed energy spent (other than this technique) during that round is undone and all creatures are taken back to where they were 6 seconds ago as long as it is within the 100 ft radius of the rewind.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "DqujXlB0omasjWGo": {
+    "_id": "DqujXlB0omasjWGo",
+    "type": "utility",
+    "name": "Bonus Action (8 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "100",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "radius",
+    "size": "100",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": false
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "DqujXlB0omasjWGo": 8
+   },
+   "technique": "Golden Hour",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "OPfUdWvA8mZmDQ8i",
+ "_key": "!items!GHA3E4TudpXbvdC4"
+}

@@ -1,0 +1,56 @@
+{
+ "_id": "FX2D7Ik6WFW6xM2R",
+ "name": "Hard Shell",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/trait-race.svg",
+ "system": {
+  "description": {
+   "value": "<p>Your AC equals 14 + your Constitution modifier while not wearing armor.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "race",
+   "subtype": ""
+  },
+  "requirements": "Cursed Spirit (Cursed Womb)"
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "MrUJYYzCm8S5kHBr",
+ "effects": [
+  {
+   "_id": "JoHC8tnWxPjQ3zbb",
+   "name": "Hard Shell",
+   "img": "modules/jjk5e/icons/trait-race.svg",
+   "changes": [
+    {
+     "key": "system.attributes.ac.calc",
+     "mode": 5,
+     "value": "custom",
+     "priority": null
+    },
+    {
+     "key": "system.attributes.ac.formula",
+     "mode": 5,
+     "value": "14 + @abilities.con.mod",
+     "priority": null
+    }
+   ],
+   "disabled": false,
+   "transfer": true,
+   "duration": {},
+   "description": "",
+   "flags": {},
+   "_key": "!items.effects!FX2D7Ik6WFW6xM2R.JoHC8tnWxPjQ3zbb"
+  }
+ ],
+ "_key": "!items!FX2D7Ik6WFW6xM2R"
+}

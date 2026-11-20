@@ -1,0 +1,43 @@
+{
+ "_id": "goiByJoeI9hj9iuE",
+ "name": "Flight (6 PP)",
+ "type": "feat",
+ "img": "icons/svg/upgrade.svg",
+ "system": {
+  "description": {
+   "value": "<p>You sprout grotesque wings that give you a 30 ft fly speed. To use this speed, you cannot be wearing heavy armor or carrying more than your carry capacity. If you also have the <em>Greater Flight Improvement</em> attribute, you gain the Evasion feature while flying.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTrait"
+  },
+  "requirements": "Cursed Spirit, 6 Profane Points",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "profaneCost": 6,
+   "prereq": {
+    "prefixes": [
+     [
+      "Cursed Spirit"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "ar3Bgj4YHvYRp8DL",
+ "sort": 1600,
+ "_key": "!items!goiByJoeI9hj9iuE"
+}

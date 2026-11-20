@@ -1,0 +1,95 @@
+{
+ "_id": "UGacSC80MoG0deAE",
+ "name": "Maximum: Black Hole",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/star-rage.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Virtual Mass Mastery</em></p>\n<p>As an action you can sacrifice yourself, becoming a Black Hole for 1 minute, after which you die. This creates a 100 foot radius of difficult terrain where all creatures within range make a Strength saving throw at the end of your turn, being pulled 50 feet closer on a failed save or 25 feet on a success. If a creature or object gets within 5 feet of you as a result of this forced movement, they are sucked into the black hole and die.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Virtual Mass Mastery",
+  "activities": {
+   "OXYLIUIDnZkcZyQg": {
+    "_id": "OXYLIUIDnZkcZyQg",
+    "type": "save",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "100",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     }
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    },
+    "save": {
+     "ability": [
+      "str"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Virtual Mass Mastery"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "8WZAgQOeGTbPipxv",
+ "sort": 300,
+ "_key": "!items!UGacSC80MoG0deAE"
+}

@@ -1,0 +1,42 @@
+{
+ "_id": "Dfq9XAgnjiTzq0X9",
+ "name": "Judicial Amputation",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/star-dictator.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Army of the Dictator</em></p>\n<p>If a creature fails their saving throw against your pseudo-domain by 5 or more, the damage is treated as having the Limb Removing Effect and targets one of their arms or legs.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Army of the Dictator",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Army of the Dictator"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "bGKgrFplZpNnclwX",
+ "sort": 300,
+ "_key": "!items!Dfq9XAgnjiTzq0X9"
+}

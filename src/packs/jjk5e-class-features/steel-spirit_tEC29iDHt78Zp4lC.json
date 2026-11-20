@@ -1,0 +1,84 @@
+{
+ "_id": "tEC29iDHt78Zp4lC",
+ "name": "Steel Spirit",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>Once you reach 14th level, your mastery of Cursed Energy grants you proficiency in all saving throws.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Warrior 14"
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "7ecbupybBLUFyYzw",
+ "effects": [
+  {
+   "_id": "5E70azpkkYbKAnqs",
+   "name": "Steel Spirit",
+   "img": "modules/jjk5e/icons/feature.svg",
+   "transfer": true,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "auto": "level"
+    }
+   },
+   "changes": [
+    {
+     "key": "system.abilities.str.proficient",
+     "mode": 4,
+     "value": "1",
+     "priority": null
+    },
+    {
+     "key": "system.abilities.dex.proficient",
+     "mode": 4,
+     "value": "1",
+     "priority": null
+    },
+    {
+     "key": "system.abilities.con.proficient",
+     "mode": 4,
+     "value": "1",
+     "priority": null
+    },
+    {
+     "key": "system.abilities.int.proficient",
+     "mode": 4,
+     "value": "1",
+     "priority": null
+    },
+    {
+     "key": "system.abilities.wis.proficient",
+     "mode": 4,
+     "value": "1",
+     "priority": null
+    },
+    {
+     "key": "system.abilities.cha.proficient",
+     "mode": 4,
+     "value": "1",
+     "priority": null
+    }
+   ],
+   "_key": "!items.effects!tEC29iDHt78Zp4lC.5E70azpkkYbKAnqs"
+  }
+ ],
+ "_key": "!items!tEC29iDHt78Zp4lC"
+}

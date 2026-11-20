@@ -1,0 +1,118 @@
+{
+ "_id": "qSoLn7kiSKoWP8Kr",
+ "name": "Innate Technique: Faceless God",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/faceless-god.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>Just a glance in your direction slowly leads to mental corruption.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.KdemmuLMMISHWRIP]{Madness Inducement}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.lkaVCW2EJODeRx9X]{Madness Enhancement}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.ERGjI0POvdIOh76a]{Obsession and Insanity}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.Rf5Hd5OWeGdCdMU0]{Maximum: Rumination}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.zSGeI3ieeQad8lzW]{Domain Expansion: Theia Mania}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "N9ur9w4NLmzuxCJP": {
+    "_id": "N9ur9w4NLmzuxCJP",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Faceless God (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.KdemmuLMMISHWRIP",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "yrJKKK3YXq4Clc8K": {
+    "_id": "yrJKKK3YXq4Clc8K",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Faceless God (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.lkaVCW2EJODeRx9X",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "owlwdHMfv6aogPWC": {
+    "_id": "owlwdHMfv6aogPWC",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Faceless God (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.ERGjI0POvdIOh76a",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "zb96gjac01NTKU0S": {
+    "_id": "zb96gjac01NTKU0S",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Faceless God (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.Rf5Hd5OWeGdCdMU0",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "30EpsCUn8FsJs8CO": {
+    "_id": "30EpsCUn8FsJs8CO",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Faceless God (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.zSGeI3ieeQad8lzW",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Faceless God"
+  }
+ },
+ "_key": "!items!qSoLn7kiSKoWP8Kr"
+}

@@ -1,0 +1,95 @@
+{
+ "_id": "XDoCAxQgRPhFISef",
+ "name": "Earth Dragon Soul",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/dragon-vein.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Dragon Vein — Innate Technique (6th level)</em></p><p>At 6th level, you have learned to greater siphon the earth’s might. Once per turn when you hit with a melee attack while your Ley Line is active, you deal an additional 1d8 damage. This increases to 2d8 at 11th level and 3d8 at 18th level. If you have not moved since the start of your last turn, you can do this extra damage twice per turn and your speed is reduced to 0 until the start of your next turn. Additionally, when you gain resistance to a damage type with your Ley Line as a reaction, you can instead spend 3 CE to make the resistance last until the Ley Line ends.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "wjL00Dr9ku7MhBsV": {
+    "_id": "wjL00Dr9ku7MhBsV",
+    "type": "utility",
+    "name": "Reaction (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "reaction",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "wjL00Dr9ku7MhBsV": 3
+   },
+   "technique": "Dragon Vein",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "xkcQZ0iOxpoEyfI2",
+ "_key": "!items!XDoCAxQgRPhFISef"
+}

@@ -1,0 +1,116 @@
+{
+ "_id": "bDLZa17w9moStPRM",
+ "name": "Sumerian (Deskunte)",
+ "type": "race",
+ "img": "modules/jjk5e/icons/race.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Creeps and Curses V.3.1 — Modulo</em></p><p>You come from a different world with different knowledge of jujutsu. Rolloluca powers your techniques and you are accustomed to territorial wars. Sumerians can vary wildly in appearance, but all possess a third eye.</p>\n<p><strong>Ability Score Increase.</strong> +2 to one ability score of your choice and +1 to another.</p>\n<p><strong>Creature Type.</strong> Humanoid.</p>\n<p><strong>Age.</strong> Sumerians mature as fast as humans and live for around 100 years.</p>\n<p><strong>Alignment.</strong> Sumerians can be good, neutral, or evil, but mostly tend towards being lawful.</p>\n<p><strong>Speed.</strong> Your base walking speed is 30 feet.</p>\n<p><strong>Languages.</strong> Common and Sumerian.</p><p><strong>Deskunte.</strong> Horned Sumerians with vertical third eyes, a strict strength-based caste, who eradicate Kalyans on sight. Size: Medium or Large (6 to over 10 feet).</p>"
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "identifier": "sumerian-deskunte",
+  "movement": {
+   "walk": 30,
+   "units": "ft"
+  },
+  "type": {
+   "value": "humanoid",
+   "subtype": "",
+   "custom": ""
+  },
+  "advancement": {
+   "qPylBjcVVG57glIM": {
+    "_id": "qPylBjcVVG57glIM",
+    "type": "Size",
+    "configuration": {
+     "sizes": [
+      "med",
+      "lg"
+     ]
+    },
+    "value": {}
+   },
+   "QMkPhxvwEXkDigdi": {
+    "_id": "QMkPhxvwEXkDigdi",
+    "type": "AbilityScoreImprovement",
+    "level": 0,
+    "title": "Ability Score Increase (+2 / +1)",
+    "configuration": {
+     "points": 3,
+     "cap": 2,
+     "fixed": {},
+     "locked": []
+    },
+    "value": {}
+   },
+   "DlT99W3j0PPcMIyn": {
+    "_id": "DlT99W3j0PPcMIyn",
+    "type": "ItemGrant",
+    "level": 0,
+    "title": "Traits",
+    "value": {},
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-races.Item.aQsHyHT1TGgQ7N4F",
+       "optional": false
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-races.Item.LIv7FTxQbEKTvscw",
+       "optional": false
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-races.Item.Ad54KWzUIGBnaAFv",
+       "optional": false
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-races.Item.JdbyttbYOQnDEQMG",
+       "optional": false
+      }
+     ],
+     "optional": false
+    }
+   },
+   "3nLp3TCGBoAcDmka": {
+    "_id": "3nLp3TCGBoAcDmka",
+    "type": "Trait",
+    "level": 0,
+    "title": "Third Eye",
+    "value": {},
+    "configuration": {
+     "mode": "default",
+     "grants": [
+      "skills:prc"
+     ],
+     "choices": []
+    }
+   },
+   "SWAbgpT1AVPPU1l5": {
+    "_id": "SWAbgpT1AVPPU1l5",
+    "type": "Trait",
+    "level": 0,
+    "title": "Warrior Training",
+    "value": {},
+    "configuration": {
+     "mode": "default",
+     "grants": [
+      "armor:lgt",
+      "armor:med"
+     ],
+     "choices": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": null,
+ "_key": "!items!bDLZa17w9moStPRM"
+}

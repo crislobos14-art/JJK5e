@@ -1,0 +1,73 @@
+{
+ "_id": "Z3OTLUYD0x21qOZM",
+ "name": "Butterfly Effect",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/laplace-s-demon.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Laplace’s Demon — Cursed Technique Reversal, 3rd level</em></p><p>At 3rd level when you use Future and Past, you can instead expend 2 CE as a reaction to replace any attack roll, saving throw, or ability check  made  by  a  creature  you  can  see  with  one  of  these  foretelling rolls. You must choose to do so before the roll. If the target fails the  roll, they gain disadvantage on all attack rolls, saving throws, or  ability  checks  until  the  end  of  their  next  turn.  If  the  target succeeds, they instead gain advantage.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Laplace’s Demon 3",
+  "activities": {
+   "GQncrWbMc9ZWG4DP": {
+    "_id": "GQncrWbMc9ZWG4DP",
+    "type": "utility",
+    "name": "Reaction",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Laplace’s Demon",
+   "reversal": true,
+   "reversalLevel": 3,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Laplace’s Demon"
+     ]
+    ],
+    "level": 3
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 10,
+ "_key": "!items!Z3OTLUYD0x21qOZM"
+}

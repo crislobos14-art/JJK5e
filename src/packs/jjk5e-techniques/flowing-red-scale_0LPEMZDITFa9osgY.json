@@ -1,0 +1,129 @@
+{
+ "_id": "0LPEMZDITFa9osgY",
+ "name": "Flowing Red Scale",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/blood-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Blood Manipulation — Innate Technique (3rd level)</em></p><p>At 3rd level, you can control body temperature, pulse rate, and the number of red blood cells to give yourself greatly increased physical capabilities. You can spend 3 Cursed Energy as a bonus action to gain the following benefits for 1 minute:</p>\n<ul>\n<li>\n<p>Your walking speed is doubled  </p>\n</li>\n<li>\n<p>You gain a +2 bonus to your AC  </p>\n</li>\n<li>\n<p>You advantage on Dexterity saving throws and Strength checks  </p>\n</li>\n<li>\n<p>You gain an additional action on each of your turns. That action can be used only to take the Attack (one weapon attack only), Dash, Disengage, Hide, or Use an Object action.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "SBbp4UPlSVhFiioL": {
+    "_id": "SBbp4UPlSVhFiioL",
+    "type": "utility",
+    "name": "Bonus Action (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "SBbp4UPlSVhFiioL": 3
+   },
+   "technique": "Blood Manipulation",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "WIi7n6E644owqihn",
+ "effects": [
+  {
+   "_id": "ZHLStW986TAesiju",
+   "name": "Flowing Red Scale (toggle)",
+   "img": "modules/jjk5e/icons/techniques/blood-manipulation.svg",
+   "changes": [
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+2",
+     "priority": null
+    },
+    {
+     "key": "system.abilities.dex.save.roll.mode",
+     "mode": 2,
+     "value": "1",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!0LPEMZDITFa9osgY.ZHLStW986TAesiju"
+  }
+ ],
+ "_key": "!items!0LPEMZDITFa9osgY"
+}

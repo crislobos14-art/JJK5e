@@ -1,0 +1,71 @@
+{
+ "_id": "kZbTy0PXFwCKNNkx",
+ "name": "Incarnation",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/eight-heads.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Maximum: Sacrifice</em></p>\n<p>When you use <em>Sacrifice</em> and kill a humanoid, instead of gaining a life, you can summon a <em>Head of Orochi</em> as a <a href=\"https://docs.google.com/document/d/1m1uO4k6gN38PatRELnFdCiEqIexA-8G-D0Kxy7ZwJvk/edit?tab=t.0\">shikigami</a> under your control. You can control or unsummon the head as a bonus action or summon it as an action for 3 CE later, being stored somewhere on your body as a tattoo of the head of a snake. This replaces one of your <em>Fangs of Orochi</em> shikigami you can have active at once.</p>\n<p>Once you have used <em>Sacrifice</em> to gain all eight heads, the tattoos come together to form a knot on your chest. As a Full-Turn Action (Action + Bonus Action + Movement), you can complete the ritual and incarnate the Special Grade Cursed Spirit: <em>Yamata no Orochi</em> as a <a href=\"https://docs.google.com/document/d/1m1uO4k6gN38PatRELnFdCiEqIexA-8G-D0Kxy7ZwJvk/edit?tab=t.0\">shikigami</a> in an unoccupied space within 10 ft of you.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Maximum: Sacrifice",
+  "activities": {
+   "2VWUpsb1r3TIwJ5X": {
+    "_id": "2VWUpsb1r3TIwJ5X",
+    "type": "utility",
+    "name": "Bonus Action (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "2VWUpsb1r3TIwJ5X": 3
+   },
+   "prereq": {
+    "features": [
+     [
+      "Maximum: Sacrifice"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "ScNBVqds1jNrXfTg",
+ "sort": 400,
+ "_key": "!items!kZbTy0PXFwCKNNkx"
+}

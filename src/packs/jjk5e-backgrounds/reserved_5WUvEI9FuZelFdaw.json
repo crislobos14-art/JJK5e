@@ -1,0 +1,46 @@
+{
+ "_id": "5WUvEI9FuZelFdaw",
+ "name": "Reserved",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/mindset.svg",
+ "system": {
+  "description": {
+   "value": "<p>You’ve learned that silence can speak louder than rage.<br />\nWhen you use your inspiration you automatically succeed on Concentration checks and gain +5 to ability checks based on communication (like Persuasion or Intimidation) for 1 minute.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": ""
+  },
+  "requirements": "Mindset",
+  "activities": {
+   "GLNw2NMOzh4lhQSQ": {
+    "_id": "GLNw2NMOzh4lhQSQ",
+    "type": "utility",
+    "name": "Use Inspiration",
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Spend your inspiration"
+    },
+    "consumption": {
+     "targets": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "mindset": true
+  }
+ },
+ "folder": "ymyii86sdbVo8H5C",
+ "_key": "!items!5WUvEI9FuZelFdaw"
+}

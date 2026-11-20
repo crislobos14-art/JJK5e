@@ -1,0 +1,69 @@
+{
+ "_id": "rzC1hLKUv2W4uYXK",
+ "name": "Simple Domain",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: 16+ Cursed Energy score</em></p>\n<p>As an action or reaction against an attack roll or saving throw effect, spell or domain expansion opening for 4 Cursed Energy, you surround yourself with a 10 ft barrier for 1 minute. The circle has an amount of hit points equal to your proficiency bonus times twice your Cursed Energy modifier. Any damaging cursed techniques, spells, or attacks that target you or targets an area that overlaps with your simple domain, will now damage the barrier instead, reducing its hit points by the damage it would cause. Any damage leftover from an attack or effect that would damage you carries over after Simple Domain is destroyed. Your <em>Simple Domain</em> ends if you move.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkBarrier"
+  },
+  "requirements": "16+ Cursed Energy score",
+  "activities": {
+   "tHOSbbzwvdYegJ6X": {
+    "_id": "tHOSbbzwvdYegJ6X",
+    "type": "utility",
+    "name": "Reaction (4 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "tHOSbbzwvdYegJ6X": 4
+   },
+   "prereq": {
+    "ceScore": 16
+   }
+  }
+ },
+ "folder": "w6CtJKH5qYx1fgN4",
+ "sort": 600,
+ "_key": "!items!rzC1hLKUv2W4uYXK"
+}

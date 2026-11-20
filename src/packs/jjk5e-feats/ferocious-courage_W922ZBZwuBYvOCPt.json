@@ -1,0 +1,87 @@
+{
+ "_id": "W922ZBZwuBYvOCPt",
+ "name": "Ferocious Courage",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/blazing-courage.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Ignition</em></p>\n<p>Once per turn, you can choose to deal additional fire damage equal to your proficiency bonus.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Ignition",
+  "activities": {
+   "9uxA45C9ZGg2cRX2": {
+    "_id": "9uxA45C9ZGg2cRX2",
+    "type": "damage",
+    "name": "Special — rider",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": null,
+       "denomination": null,
+       "bonus": "",
+       "types": [
+        "fire"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "@prof"
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Ignition"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "FQaknUUFDMQmvcGr",
+ "sort": 100,
+ "_key": "!items!W922ZBZwuBYvOCPt"
+}

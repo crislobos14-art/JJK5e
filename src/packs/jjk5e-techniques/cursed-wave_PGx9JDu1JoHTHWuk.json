@@ -1,0 +1,108 @@
+{
+ "_id": "PGx9JDu1JoHTHWuk",
+ "name": "Cursed Wave",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/regalia.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Regalia — Innate Technique (3rd level)</em></p><p>At 3rd level, you have learned greater control over your Regalia. For 1 CE, you can make one of your attacks with your Regalia into a cutting wave of cursed energy. This creates a 5 ft wide 30 ft long line. Creatures in range must make a Dexterity save, taking the damage of your regalia in necrotic damage on a failed save.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "nOdC7wtQzMRR5L7C": {
+    "_id": "nOdC7wtQzMRR5L7C",
+    "type": "save",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "nOdC7wtQzMRR5L7C": 1
+   },
+   "technique": "Regalia",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "jfP5e1LgOxgMmS1g",
+ "_key": "!items!PGx9JDu1JoHTHWuk"
+}

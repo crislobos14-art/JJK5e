@@ -1,0 +1,222 @@
+{
+ "_id": "z1mJ0orAc2rvKGlW",
+ "name": "Totality",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/ten-shadows.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Ten Shadows — Innate Technique (3rd level)</em></p><p>Any <a href=\"https://docs.google.com/document/d/1EMuqLweHWYLnx1On473iLcpcU0xnmZ3qBlKh91p7-hU/edit?tab=t.0\">shikigami</a> reduced to 0 hit points dies and cannot be summoned again. A destroyed shikigami is eligible for Totality, with the exception of Rabbit Escape or Mahoraga.</p>\n<p>If one of your shikigami is killed, during a short or long rest you can perform a 1-hour ritual to pass on the strength of one deceased shikigami to a different Non-Totality (other than Rabbit Escape or Mahoraga), granting it a permanent Totality form. When you make a Totality, they gain the following changes:</p>\n<ul>\n<li>\n<p>Their Strength, Dexterity, Constitution, Wisdom, and Charisma scores become those of the creature who has the higher score. Then they gain a bonus to that ability score equal to the modifier of the creature with the smaller score.(Ex: Nue has 16 Strength while Divine Dog has 12, their Totality would have 17 Strength.) They also gain the higher AC of the shikigami used.  </p>\n</li>\n<li>\n<p>They receive the hit points of both creatures.  </p>\n</li>\n<li>\n<p>Their movement speed is added together.(2 with 30 would have 60)  </p>\n</li>\n<li>\n<p>They receive all features, traits, actions, bonus actions, reactions, legendary actions, skill, saving throw proficiencies, damage resistances, damage immunities and condition immunities from both creatures.  </p>\n</li>\n<li>\n<p>Their size can be either of the shikigami.  </p>\n</li>\n<li>\n<p>The CE cost becomes the higher shikigami + half of the lower shikigami’s cost.  </p>\n</li>\n<li>\n<p>Their CR equals the creature with a higher CR + half the CR of the creature with the smaller CR rounded up.(Ex: Nue's CR is 4, and Great Serpent's CR is 5, their totality's CR would be 7)  </p>\n</li>\n<li>\n<p>After calculating ability scores, the difference in the ability modifier of the original user of a damaging feature and the Totality is added to the amount of dice. For save effects damage, the score corresponding to the save is used. <br />\n  (Ex: Mourn Tiger has a +5 in Dexterity and Nue has a +3. Mourn Tiger’s Dexterity Score increases by +3, meaning a +1 bonus to Dexterity modifier so you add 1 additional dice to the Totality's attack to the damage dice that use Dexterity as the ability modifier, changing Mourn Tiger’s bite attack from a 1d10+5 into a 2d10+6.) This increase only applies to direct attack rolls and saving throws.  </p>\n</li>\n</ul>\n<p><strong>As an optional ruling, your DM can choose to ignore Totality, instead having all shikigami come back on a long rest, rather than being killed and eligible for Totality.</strong></p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "qhjmVVjzQGBEQk4X": {
+    "_id": "qhjmVVjzQGBEQk4X",
+    "type": "summon",
+    "name": "Summon Divine Dog Totality (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "value": "1",
+     "units": "hour",
+     "concentration": false,
+     "override": true
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "override": true,
+     "prompt": false
+    },
+    "bonuses": {
+     "ac": "@prof",
+     "hp": "4 * @prof",
+     "attackDamage": "@prof",
+     "hd": "",
+     "saveDamage": "",
+     "healing": ""
+    },
+    "creatureSizes": [],
+    "creatureTypes": [],
+    "match": {
+     "proficiency": true,
+     "disposition": true,
+     "attacks": false,
+     "saves": false,
+     "ability": ""
+    },
+    "profiles": [
+     {
+      "_id": "vcVOb8Q7ULu9Tlc5",
+      "count": "1",
+      "cr": "",
+      "level": {
+       "min": null,
+       "max": null
+      },
+      "name": "Divine Dog Totality",
+      "types": [],
+      "uuid": "Actor.H2btjtKNz70aUpXr"
+     }
+    ],
+    "summon": {
+     "mode": "",
+     "prompt": true
+    },
+    "tempHP": ""
+   },
+   "iJfJqbRp67ZRn61O": {
+    "_id": "iJfJqbRp67ZRn61O",
+    "type": "summon",
+    "name": "Summon Chimera Agito (16 CE)",
+    "sort": 1000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "value": "1",
+     "units": "hour",
+     "concentration": false,
+     "override": true
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "override": true,
+     "prompt": false
+    },
+    "bonuses": {
+     "ac": "@prof",
+     "hp": "13 * @prof",
+     "attackDamage": "",
+     "hd": "",
+     "saveDamage": "",
+     "healing": ""
+    },
+    "creatureSizes": [],
+    "creatureTypes": [],
+    "match": {
+     "proficiency": true,
+     "disposition": true,
+     "attacks": false,
+     "saves": false,
+     "ability": ""
+    },
+    "profiles": [
+     {
+      "_id": "U00ZznspOLmfKAQq",
+      "count": "1",
+      "cr": "",
+      "level": {
+       "min": null,
+       "max": null
+      },
+      "name": "Chimera Agito",
+      "types": [],
+      "uuid": "Actor.mb83uwNRiawMkd4J"
+     }
+    ],
+    "summon": {
+     "mode": "",
+     "prompt": true
+    },
+    "tempHP": ""
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "hour",
+   "override": true
+  },
+  "range": {
+   "value": "30",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "override": true,
+   "prompt": false
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Ten Shadows",
+   "level": 3,
+   "ceCosts": {
+    "qhjmVVjzQGBEQk4X": 2,
+    "iJfJqbRp67ZRn61O": 16
+   },
+   "summons": {
+    "qhjmVVjzQGBEQk4X": {
+     "name": "Divine Dog Totality",
+     "count": 1
+    },
+    "iJfJqbRp67ZRn61O": {
+     "name": "Chimera Agito",
+     "count": 1
+    }
+   },
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "gEGcEQE7nJFCsor6",
+ "_key": "!items!z1mJ0orAc2rvKGlW"
+}

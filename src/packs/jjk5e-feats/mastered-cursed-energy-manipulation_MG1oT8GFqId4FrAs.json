@@ -1,0 +1,96 @@
+{
+ "_id": "MG1oT8GFqId4FrAs",
+ "name": "Mastered Cursed Energy Manipulation",
+ "type": "feat",
+ "img": "icons/svg/lightning.svg",
+ "system": {
+  "description": {
+   "value": "<ul>\n<li>\n<p><strong>Cursed Strike</strong>. On a hit, you can spend up to your proficiency bonus, dealing an additional 2d8 necrotic damage per CE. Additionally, you can spend CE up to your proficiency to add to your attack roll.  </p>\n</li>\n<li>\n<p><strong>Efficiency</strong>. When using a cursed technique, the base cost decreases by 2 (min cost of 1).</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkCursedEnergy"
+  },
+  "requirements": "Advanced Cursed Energy Manipulation, 8 Breakthroughs",
+  "activities": {
+   "iLbSz4oxiFZDQygl": {
+    "_id": "iLbSz4oxiFZDQygl",
+    "type": "damage",
+    "name": "Special (1+ CE)",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "@prof"
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "mode": "whole",
+        "number": 2
+       }
+      }
+     ]
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceSteps": {
+    "iLbSz4oxiFZDQygl": 1
+   },
+   "ceCosts": {
+    "iLbSz4oxiFZDQygl": 1
+   },
+   "prereq": {
+    "features": [
+     [
+      "Advanced Cursed Energy Manipulation"
+     ]
+    ],
+    "breakthroughs": 8
+   }
+  }
+ },
+ "folder": "4WdO47AHGi8vRSbo",
+ "sort": 300,
+ "_key": "!items!MG1oT8GFqId4FrAs"
+}

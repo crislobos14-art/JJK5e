@@ -1,0 +1,95 @@
+{
+ "_id": "7dMiTpDehniSeq7U",
+ "name": "Absolute Puppet",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/puppet-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Puppet Manipulation — Innate Technique (11th level)</em></p><p>When you reach 11th level, you have perfected your puppet for its desired uses. You will gain a Master Puppet and can summon it as an action for 10 Cursed Energy, though this Puppet can only have 2 Minor Traits, 2 Lesser Traits, 2 Advanced Traits, and 2 Absolute Traits.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "lT8Ipbu685h91Gkt": {
+    "_id": "lT8Ipbu685h91Gkt",
+    "type": "utility",
+    "name": "Action (10 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "lT8Ipbu685h91Gkt": 10
+   },
+   "technique": "Puppet Manipulation",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "OLsap1LLdAsbuhbG",
+ "_key": "!items!7dMiTpDehniSeq7U"
+}

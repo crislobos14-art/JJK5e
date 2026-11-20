@@ -1,0 +1,151 @@
+{
+ "_id": "JAeKHJYaOvVKwaEI",
+ "name": "Seance",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/seance.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Seance — Innate Technique (1st level)</em></p><blockquote><p>You summon the dead into yourself or a willing vessel.</p></blockquote><p>Starting at 1st level, you have a very powerful and dangerous technique, and you begin to learn its basics. As a Full Turn Action you can spend 2 CE per information you Seance. You can target yourself or another willing creature within 15 ft for the seance of a dead humanoid with a CR or level no more than 1 higher than your level. You must have a small body part such as a finger of the deceased humanoid that you or the willing participant must consume. </p>\n<p>You or the target of the seance must spend 1 cursed energy at the beginning of the target’s turns while the technique is active to maintain its form, with the technique ending once the cursed energy runs out. You cannot use an alternate source of cursed energy, even with a binding vow. You lose access to your Innate Technique features while affected by this technique.</p>\n<p><strong>Physical Information</strong>. The target of the seance gains the appearance, racial traits, features, proficiencies, and Strength, Dexterity, and Constitution scores of the deceased humanoid and temporary hit points equal to your proficiency.</p>\n<p><strong>Soul Information</strong>. The target gains access to the full information the body has including all memories and one of their Cursed Technique or Innate Technique features. While it is useful, this is also a dangerous method of utilizing this technique. At the beginning of their turns, the target must make a Charisma saving throw against the deceased person (DC 8 + their proficiency bonus + Charisma modifier). On a failure, the dead humanoid takes control until the target’s cursed energy runs out.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "yn7JrUsDc5H8JdGr": {
+    "_id": "yn7JrUsDc5H8JdGr",
+    "type": "utility",
+    "name": "Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "15",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   },
+   "JitvMjiNFYyLPFjU": {
+    "_id": "JitvMjiNFYyLPFjU",
+    "type": "save",
+    "name": "Action (1 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "cha"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "15",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "yn7JrUsDc5H8JdGr": 2,
+    "JitvMjiNFYyLPFjU": 1
+   },
+   "technique": "Seance",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "z1MGG49oTB7xZ6Pc",
+ "_key": "!items!JAeKHJYaOvVKwaEI"
+}

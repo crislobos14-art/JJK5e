@@ -1,0 +1,30 @@
+{
+ "_id": "WC56v2u05cpDOqsP",
+ "name": "Improved Items (3rd Grade)",
+ "type": "loot",
+ "img": "icons/svg/explosion.svg",
+ "folder": "wqSDHMRYLTxcUWTY",
+ "system": {
+  "type": {
+   "value": "gear"
+  },
+  "description": {
+   "value": "<p><em>3rd Grade category rule.</em></p>\n<p>These items are filled with Cursed Energy which allows them to become more effective. This is represented by gaining a +1 bonus to related activities.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "rarity": "uncommon",
+  "quantity": 1
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "3rd Grade"
+  }
+ },
+ "_key": "!items!WC56v2u05cpDOqsP"
+}

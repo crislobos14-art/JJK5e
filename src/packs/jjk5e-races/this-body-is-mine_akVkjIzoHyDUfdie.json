@@ -1,0 +1,29 @@
+{
+ "_id": "akVkjIzoHyDUfdie",
+ "name": "This Body Is Mine",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/trait-race.svg",
+ "system": {
+  "description": {
+   "value": "<p>You have advantage on saving throws against effects that would alter or change your form.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "race",
+   "subtype": ""
+  },
+  "requirements": "Cursed Vessel"
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "A3CBV9dvsdKk3l4V",
+ "_key": "!items!akVkjIzoHyDUfdie"
+}

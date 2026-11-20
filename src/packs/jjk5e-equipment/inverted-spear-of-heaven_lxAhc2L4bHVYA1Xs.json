@@ -1,0 +1,74 @@
+{
+ "_id": "lxAhc2L4bHVYA1Xs",
+ "name": "Inverted Spear of Heaven",
+ "type": "weapon",
+ "img": "icons/svg/sword.svg",
+ "folder": "OqdCuXcZ0pFqRc3h",
+ "system": {
+  "description": {
+   "value": "<p>Weapon(Dagger), Special Grade</p>\n<p>You have a +4 bonus to attack and damage rolls made with this cursed tool. All magic and cursed energy-related features are deactivated against this weapon.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "simpleM",
+   "baseItem": "dagger"
+  },
+  "damage": {
+   "base": {
+    "number": 1,
+    "denomination": 4,
+    "types": [
+     "piercing"
+    ]
+   }
+  },
+  "range": {
+   "value": 20,
+   "long": 60,
+   "units": "ft"
+  },
+  "properties": [
+   "fin",
+   "lgt",
+   "thr",
+   "mgc"
+  ],
+  "proficient": null,
+  "quantity": 1,
+  "activities": {
+   "EAJ5YbtO79iQYuwW": {
+    "_id": "EAJ5YbtO79iQYuwW",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "melee",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   }
+  },
+  "magicalBonus": 4,
+  "rarity": "legendary"
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "Special Grade"
+  }
+ },
+ "_key": "!items!lxAhc2L4bHVYA1Xs"
+}

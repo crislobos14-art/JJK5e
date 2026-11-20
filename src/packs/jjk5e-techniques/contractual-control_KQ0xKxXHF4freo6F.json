@@ -1,0 +1,135 @@
+{
+ "_id": "KQ0xKxXHF4freo6F",
+ "name": "Contractual Control",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/contractual-recreation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Contractual Recreation — Innate Technique (11th level)</em></p><p>At 11th level, you have learned how to manipulate your materializations using your mind. You can manipulate objects or vehicles as a bonus action by spending 3 cursed energy per object or vehicle manipulated. Anything you use this on disappears afterwards.<br />\n<strong>Objects</strong>. You can manipulate a number of objects you have summoned telepathically. You can move them in the air up to 60 ft, and can use them normally from afar.<br />\n<strong>Weapon</strong>. Once per turn when you take the attack action, you can replace one of your attacks with a melee cursed energy attack roll with said object if it was a weapon. On a hit, it deals 5 of the weapon's damage dice. This increases to 7 dice at 15th level and 10 at 18th level.<br />\n<strong>Vehicles</strong>. You can order a vehicle to ride up to 60 ft. A creature in the path must make a Dexterity save or take the vehicle damage dice (depending on size) and be knocked prone.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "9N70spOoRTEVVi7O": {
+    "_id": "9N70spOoRTEVVi7O",
+    "type": "save",
+    "name": "Bonus Action (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    },
+    "effects": [
+     {
+      "_id": "b7ZjWuK9j7wejoGk",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "9N70spOoRTEVVi7O": 3
+   },
+   "technique": "Contractual Recreation",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "b7ZjWuK9j7wejoGk",
+   "name": "Prone (Contractual Control)",
+   "img": "modules/jjk5e/icons/techniques/contractual-recreation.svg",
+   "statuses": [
+    "prone"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!KQ0xKxXHF4freo6F.b7ZjWuK9j7wejoGk"
+  }
+ ],
+ "folder": "1Ch8dLVYSEvwWjZr",
+ "_key": "!items!KQ0xKxXHF4freo6F"
+}

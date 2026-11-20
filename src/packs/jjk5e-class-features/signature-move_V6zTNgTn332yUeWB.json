@@ -1,0 +1,29 @@
+{
+ "_id": "V6zTNgTn332yUeWB",
+ "name": "Signature Move",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>At 20th level, you can choose a feature that uses cursed energy, that is not a domain expansion, maximum, or reverse curse technique, and use it for no cursed energy cost. It counts as the minimum input of Cursed Energy necessary.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Strategist 20"
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "D1jub3NHW0Fbryho",
+ "_key": "!items!V6zTNgTn332yUeWB"
+}

@@ -1,0 +1,107 @@
+{
+ "_id": "bWfoIzaKvg4hfuBH",
+ "name": "Practiced Hands",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/pain-killer.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Pain Killer — Innate Technique (3rd level)</em></p><p>At 3rd level, you can use <em>Pain Killer</em> on all willing creatures within 5 feet as a free action on your turn, spending 1 CE for each creature. This increases to 10 feet at 6th level and 15 feet at 11th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "Jf6kX6ukS0BzcayA": {
+    "_id": "Jf6kX6ukS0BzcayA",
+    "type": "utility",
+    "name": "Special (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "special",
+   "value": null,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "5",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "Jf6kX6ukS0BzcayA": 1
+   },
+   "technique": "Pain Killer",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "dNStemY1SSBJjSwq",
+ "_key": "!items!bWfoIzaKvg4hfuBH"
+}

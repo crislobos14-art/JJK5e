@@ -1,0 +1,57 @@
+{
+ "_id": "7A7AqyqQoly3BVGF",
+ "name": "Fastest Sorcerer Alive",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/projection-sorcery.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Projection Sorcery — Innate Technique (11th level)</em></p><p>At 11th level, due to your advanced studies, you can now reach a higher speed level than any sorcerer ever could. While your cursed technique is active, you will gain the following benefits:</p>\n<ul>\n<li>\n<p>You gain +30 feet to your walking speed.  </p>\n</li>\n<li>\n<p>You gain +20 feet to your walking speed at the beginning of your turns.  </p>\n</li>\n<li>\n<p>You have advantage on Dexterity saving throws.  </p>\n</li>\n<li>\n<p>Your Dexterity score increases by +2 ignoring your maximum.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Projection Sorcery 11"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Projection Sorcery",
+   "level": 11
+  }
+ },
+ "folder": "RqqBayaXFFZrEuE3",
+ "effects": [
+  {
+   "_id": "lWoMx5IJmSeIUzmy",
+   "name": "Fastest Sorcerer Alive",
+   "img": "modules/jjk5e/icons/techniques/projection-sorcery.svg",
+   "changes": [
+    {
+     "key": "system.abilities.dex.save.roll.mode",
+     "mode": 2,
+     "value": "1",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "auto": "passive"
+    }
+   },
+   "_key": "!items.effects!7A7AqyqQoly3BVGF.lWoMx5IJmSeIUzmy"
+  }
+ ],
+ "_key": "!items!7A7AqyqQoly3BVGF"
+}

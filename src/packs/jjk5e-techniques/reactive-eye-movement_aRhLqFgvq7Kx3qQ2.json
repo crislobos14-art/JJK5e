@@ -1,0 +1,120 @@
+{
+ "_id": "aRhLqFgvq7Kx3qQ2",
+ "name": "Reactive Eye Movement",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/paralyzing-gaze.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Paralyzing Gaze — Innate Technique (6th level)</em></p><p>At 6th level, whenever a target you can see makes an attack roll while within 60 ft or the attack is against you, you can spend 2 CE to force that creature to make a Dexterity saving throw. On a failure, they have disadvantage on the attack roll. A creature under the effects of <em>Immobilizing Eyes</em> automatically fails this saving throw.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "5rA6Nn0tE6dkoFCV": {
+    "_id": "5rA6Nn0tE6dkoFCV",
+    "type": "save",
+    "name": "Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "60",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "5rA6Nn0tE6dkoFCV": 2
+   },
+   "technique": "Paralyzing Gaze",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "NgfqZW5WmZKy5Fbs",
+ "_key": "!items!aRhLqFgvq7Kx3qQ2"
+}

@@ -1,0 +1,64 @@
+{
+ "_id": "niG6aJ2FCEqBFHmI",
+ "name": "Divine Blessing",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/trait-race.svg",
+ "system": {
+  "description": {
+   "value": "<p>When you make an ability check or saving throw, you can roll a d4 and add the number rolled. You can use this feature a number of times equal to your proficiency bonus each long rest.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "race",
+   "subtype": ""
+  },
+  "requirements": "Sumerian (Rumelian)",
+  "uses": {
+   "max": "@prof",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
+    }
+   ]
+  },
+  "activities": {
+   "POrHFBCpe6v8KIwK": {
+    "_id": "POrHFBCpe6v8KIwK",
+    "type": "utility",
+    "name": "Divine Blessing (+1d4)",
+    "activation": {
+     "type": "special",
+     "condition": "Ability check or saving throw"
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1"
+      }
+     ]
+    },
+    "roll": {
+     "formula": "1d4",
+     "name": "Divine Blessing",
+     "visible": true
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "cUxhy4eiPJek1pHp",
+ "_key": "!items!niG6aJ2FCEqBFHmI"
+}

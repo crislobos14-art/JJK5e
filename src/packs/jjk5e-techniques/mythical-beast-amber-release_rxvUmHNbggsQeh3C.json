@@ -1,0 +1,345 @@
+{
+ "_id": "rxvUmHNbggsQeh3C",
+ "name": "Mythical Beast Amber Release",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/mythical-beast-amber.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Mythical Beast Amber — Innate Technique (11th level)</em></p><p>Once you reach 11th level, you have finally learned your innate technique and its terrible cost. Once activated, this technique reconstructs the user's flesh in order to manifest phenomena that can be created by electricity, which is converted from the user's cursed energy. However, since the technique causes the user's body to surpass the limits of a human, it can only be used once before their body collapses following the technique's conclusion. As an action for 8 cursed energy, your body will start getting filled with electric cursed energy, making you constantly grow in power for a short period of time. You start at Stage 1 and every 5 rounds, you gain the next stage. As a bonus action, you can spend CE to expedite your transformation by 1 round per 2 CE. You can deactivate your form at any moment as a bonus action, however, depending on what stage you reached, your deactivation causes more backlash. After your fifth round in Stage 5, it instantly ends, making you die instantly:</p>\n<table>\n<thead>\n<tr>\n<th>Stage</th>\n<th style=\"text-align: center;\">Benefits</th>\n<th>Deactivation Side Effects</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Stage 1</td>\n<td style=\"text-align: center;\">+2 to Str, Dex, and Con ignoring limits. Immunity to lightning. +20 feet of movement.</td>\n<td>You must make a DC:10 Constitution saving throw, on a failure you will gain 1 level of exhaustion. On a success, you suffer nothing.</td>\n</tr>\n<tr>\n<td>Stage 2</td>\n<td style=\"text-align: center;\">+3 to Str, Dex, and Con ignoring limits. Immunity to lightning. +40 feet of movement. +1 Attack.</td>\n<td>You must make a DC:15 Constitution saving throw, on a failure you will gain 2 levels of exhaustion. On a success, you suffer only 1.</td>\n</tr>\n<tr>\n<td>Stage 3</td>\n<td style=\"text-align: center;\">+4 to Str, Dex, and Con ignoring limits. Immunity to lightning. +60 feet of movement. +1 Attack, +1 BA.</td>\n<td>You must make a DC:20 Constitution saving throw, on a failure you will gain 3 levels of exhaustion. On a success, you suffer only 2.</td>\n</tr>\n<tr>\n<td>Stage 4</td>\n<td style=\"text-align: center;\">+5 to Str, Dex, and Con ignoring limits. Immunity to lightning. +80 feet of movement. +1 Action, +1 BA.</td>\n<td>You must make a DC:25 Constitution saving throw, on a failure you will gain 4 levels of exhaustion. On a success, you suffer only 3.</td>\n</tr>\n<tr>\n<td>Stage 5</td>\n<td style=\"text-align: center;\">+6 to Str, Dex, and Con ignoring limits. Immunity to lightning. +100 feet of movement. +2 Action, +1 BA.</td>\n<td>You must make a DC:30 Constitution saving throw, on a failure you will gain 6 levels of exhaustion. On a success, you suffer only 5.</td>\n</tr>\n</tbody>\n</table>\n<p>Your body will slowly alter itself while in this form, gaining the following as it progresses.<br />\n<strong>Cursed Claw(Stage 1).</strong> When you activate this form, your cursed energy will surround your hands and increase your overall attack power. Your unarmed strikes now deal one of the following damage types: Thunder, Lightning, Fire, Force, or Cold, and will deal one additional damage dice + 1d10 Lightning damage.<br />\n<strong>Loud Blast(Stage 2).</strong> When you reach Stage 2 in this form, your mouth will start to get covered with cursed energy, allowing you to emit loud energy blasts from your mouth. As an action, make a cursed energy attack roll against a creature within 30 ft. On a hit it deals 6d10 lightning damage. Hit or miss, all creatures within 15 ft of the target must make a Constitution saving throw. On a failure, they take 6d6 thunder damage and are deafened until the beginning of your next turn. On a success, they take half as much.<br />\n<strong>Lightning Armor(Stage 3).</strong> When you reach Stage 3 in this form, your torso and legs will start to get filled with cursed energy. You will gain damage reduction equal to your Cursed Energy modifier.<br />\n<strong>X-Ray Vision(Stage 4).</strong> When you reach Stage 4 in this form, your head is completely filled with cursed energy, even granting you new eyes. You will gain 120 feet of truesight, and will also be able to see all the features one creature of your choice has as a bonus action.<br />\n<strong>Cursed Beam(Stage 5).</strong> When you reach Stage 5 in this form, your very cursed energy has been improved. As an action for 6 cursed energy, you launch a huge cursed energy beam in a 30-foot line, forcing every creature in that line to make a Dexterity saving throw. On a failure, they take 10d10 force damage and are blinded until the beginning of your next turn. On a success, they take half as much damage and are not blinded. You can spend up to 4 additional cursed energy, with each one adding 1d10 force damage and a +1 to its DC.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "KCuyWY0C4k6wvr81": {
+    "_id": "KCuyWY0C4k6wvr81",
+    "type": "utility",
+    "name": "Action (8 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   },
+   "mF6qqggdpt7QB4d9": {
+    "_id": "mF6qqggdpt7QB4d9",
+    "type": "save",
+    "name": "Action (6 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "line",
+      "size": "30",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 10,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "force"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "JQ0jRF3WMJOTT4wI",
+      "onSave": false
+     }
+    ]
+   },
+   "uigNdvV8c7WRvFkn": {
+    "_id": "uigNdvV8c7WRvFkn",
+    "type": "save",
+    "name": "Bonus Action",
+    "sort": 200000,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "lightning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   },
+   "v32k7Qixy55vE2b9": {
+    "_id": "v32k7Qixy55vE2b9",
+    "type": "save",
+    "name": "Action",
+    "sort": 300000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 6,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "lightning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "WcnbOol0bc0uwQhM",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "KCuyWY0C4k6wvr81": 8,
+    "mF6qqggdpt7QB4d9": 6
+   },
+   "technique": "Mythical Beast Amber",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "JQ0jRF3WMJOTT4wI",
+   "name": "Blinded (Mythical Beast Amber Release)",
+   "img": "modules/jjk5e/icons/techniques/mythical-beast-amber.svg",
+   "statuses": [
+    "blinded"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "rounds": 1
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "blinded"
+    }
+   },
+   "_key": "!items.effects!rxvUmHNbggsQeh3C.JQ0jRF3WMJOTT4wI"
+  },
+  {
+   "_id": "WcnbOol0bc0uwQhM",
+   "name": "Deafened (Mythical Beast Amber Release)",
+   "img": "modules/jjk5e/icons/techniques/mythical-beast-amber.svg",
+   "statuses": [
+    "deafened"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "rounds": 1
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "deafened"
+    }
+   },
+   "_key": "!items.effects!rxvUmHNbggsQeh3C.WcnbOol0bc0uwQhM"
+  }
+ ],
+ "folder": "J9wuYC5ZIUpqsRHr",
+ "_key": "!items!rxvUmHNbggsQeh3C"
+}

@@ -1,0 +1,59 @@
+{
+ "_id": "k8XIsHa0uBhNypDC",
+ "name": "God of War",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>Finally at 20th level, your supernatural body reaches its pinnacle. Your Strength, Dexterity, and Constitution scores increase by +4 each. You also gain the following benefits:</p>\n<ul>\n<li>\n<p><strong>Inevitable Triumph.</strong> Once per long rest when reduced to 0 hit points, you can choose to remain at 1 hit point. Additionally, you gain resistance to all non-magical damage and immunity to non-magical bludgeoning, slashing and piercing damage.  </p>\n</li>\n<li>\n<p><strong>Ultimate Mastery.</strong> You have mastered every aspect of combat. You gain proficiency in all saving throws and have advantage on all ability checks related to Strength, Dexterity, and Constitution.  </p>\n</li>\n<li>\n<p><strong>Eternal Vigor.</strong> You ignore the detriments of age and stay in your physical prime. You become immune to any effects that age you magically.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Heavenly Restriction 20",
+  "uses": {
+   "max": "1",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
+    }
+   ]
+  },
+  "activities": {
+   "Sn7U4YJvB4gidLmA": {
+    "_id": "Sn7U4YJvB4gidLmA",
+    "type": "utility",
+    "name": "Use",
+    "activation": {
+     "type": "special",
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1"
+      }
+     ]
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "hWqAX9TqrOvuq1FE",
+ "_key": "!items!k8XIsHa0uBhNypDC"
+}

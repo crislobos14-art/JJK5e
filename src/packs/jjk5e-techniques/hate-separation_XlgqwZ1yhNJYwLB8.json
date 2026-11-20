@@ -1,0 +1,75 @@
+{
+ "_id": "XlgqwZ1yhNJYwLB8",
+ "name": "Hate Separation",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/love-rendezvous.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Love Rendezvous — Cursed Technique Reversal</em></p><p>Because of your mastery over Reverse Cursed Technique, you have unlocked your cursed technique reversal, now making your technique repel instead of attract. When you use Love Rendezvous, you can spend 2 cursed energy to instead turn it into Hate Separation, causing the order of the stars to be inverted. Anyone appointed with a star must follow a reversed sequential order if they want to attempt approaching another star. When they make their movement, they must move directly toward the previous star in order and touch them, which allows them to move on to the next star in reverse order. Failing to do this will result in them being unable to close the distance toward their target, though they still expend any movement until the technique is disabled. The objects, creatures, and cursed energy marked with the same star will be repelled toward the creature with the lowest cursed energy, being all rapidly launched toward that point. The creature with the lowest cursed energy will take 2 dice of bludgeoning damage per 10ft the other stars have traveled and their size, while the objects and creatures that are repelled and crash into the target will take half as much damage. If the marked creature goes in the correct reversed order, nothing happens, and the stars they've touched disappear. Upon touching all stars in the reversed order, the stars on them disappear. See the following chart for the measure of damage:</p>\n<ul>\n<li>\n<p>Size Damage</p>\n</li>\n<li>\n<p>Dice Tiny 1d4 Small d6 Medium d8 Large d10 Huge d12 Gargantu2d12 an The reversed order of the stars is as follows: ○ ★Gacrux → ★Ginan → ★Mimosa → ★Acrux → ★Imai.** If a creature has shikigami summoned, the shikigami are marked with the same stars as the summoner's. If a creature marked with a star attempts to target you in the incorrect reversed order with a cursed energy attack roll or forces you to make a saving throw against a feature, the attack or feature is repelled toward the creature with the lowest cursed energy. For attack rolls, the attacker instead targets the creature with the lowest cursed energy, rolling against their AC. For saving throws, the repelled effect forces the attacker to roll against the DC of the creature with the lowest cursed energy. As long as the cursed energy of the feature belongs to the mark, the feature cannot close the distance between the attacker and their intended target, allowing the intended target to take no damage from the attack as long as the reversed sequence is violated. If an ★Gacrux attempts to target ★Acrux with a cursed energy ray without first moving through ★Ginan and ★Mimosa, the cursed energy ray will instead be repelled toward the creature with the lowest cursed energy in the area. This repulsion continues until the attacker follows the reversed sequence correctly.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Love Rendezvous",
+  "activities": {
+   "IAWf5c0GzZEGGzyy": {
+    "_id": "IAWf5c0GzZEGGzyy",
+    "type": "utility",
+    "name": "Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "IAWf5c0GzZEGGzyy": 2
+   },
+   "technique": "Love Rendezvous",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Love Rendezvous"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!XlgqwZ1yhNJYwLB8"
+}

@@ -1,0 +1,114 @@
+{
+ "_id": "SiPL1Dzm9Ck74Wah",
+ "name": "X-Axis Shot",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/schrift-x.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Schrift X — Innate Technique (3rd level)</em></p><p>At 3rd level, your technique has evolved and a cursed seal forms on your eye, providing near perfect accuracy. As an action for 3 cursed energy, you automatically hit a creature within range with a ranged weapon attack without rolling and deal an additional 2d6 necrotic damage. This increases to 3d6 at 6th level, 5d6 at 11th level, and 7d6 at 18th level.<br />\nYou can use this technique only if you haven't moved this turn, and after you use it, your speed is 0 until the end of the current turn.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "iuRxDAeUgMb2vW57": {
+    "_id": "iuRxDAeUgMb2vW57",
+    "type": "damage",
+    "name": "Action (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "iuRxDAeUgMb2vW57": 3
+   },
+   "technique": "Schrift X",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "sHIaW6mkEHmwduDu",
+ "_key": "!items!SiPL1Dzm9Ck74Wah"
+}

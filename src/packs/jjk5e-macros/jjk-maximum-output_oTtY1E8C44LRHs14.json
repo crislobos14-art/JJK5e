@@ -1,0 +1,13 @@
+{
+ "_id": "oTtY1E8C44LRHs14",
+ "name": "JJK: Maximum Output",
+ "type": "script",
+ "img": "modules/jjk5e/icons/zone.svg",
+ "scope": "global",
+ "command": "game.modules.get(\"jjk5e\").api.maximumOutput();",
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": null,
+ "_key": "!macros!oTtY1E8C44LRHs14"
+}

@@ -1,0 +1,165 @@
+{
+ "_id": "Qg7EnOsToGuy1kOy",
+ "name": "Fist of Explosive Power",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/fa-jin.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Fa Jin — Innate Technique (6th level)</em></p><p>At 6th level, you have learned to use your cursed energy to amplify your Fa Jin. You can spend 3 cursed energy as an action to launch a blast of compressed air using Jin charges, which have different effects based on the weapon you use.</p>\n<table>\n<thead>\n<tr>\n<th style=\"text-align: left;\">Attack</th>\n<th></th>\n<th style=\"text-align: left;\">Effect</th>\n<th></th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td style=\"text-align: left;\">Unarmed or Bludgeoning</td>\n<td></td>\n<td style=\"text-align: left;\">15 feet cone, Con save, 2D6 bludgeoning damage per Jin charge, knocked prone on a failed save</td>\n<td></td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">Slashing or Piercing</td>\n<td></td>\n<td style=\"text-align: left;\">30 feet line, Dex save, 2D10 slashing damage per Jin charge</td>\n<td></td>\n</tr>\n</tbody>\n</table>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "fZFMhutSZEES7qco": {
+    "_id": "fZFMhutSZEES7qco",
+    "type": "damage",
+    "name": "Action (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "cone",
+      "size": "15",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "UYCFda7CTIFy4V1L",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "cone",
+    "size": "15",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": false
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "fZFMhutSZEES7qco": 3
+   },
+   "technique": "Fa Jin",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "UYCFda7CTIFy4V1L",
+   "name": "Prone (Fist of Explosive Power)",
+   "img": "modules/jjk5e/icons/techniques/fa-jin.svg",
+   "statuses": [
+    "prone"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!Qg7EnOsToGuy1kOy.UYCFda7CTIFy4V1L"
+  }
+ ],
+ "folder": "F6im2Ck5LFiG7ZIX",
+ "_key": "!items!Qg7EnOsToGuy1kOy"
+}

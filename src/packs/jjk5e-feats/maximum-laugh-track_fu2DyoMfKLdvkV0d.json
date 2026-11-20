@@ -1,0 +1,77 @@
+{
+ "_id": "fu2DyoMfKLdvkV0d",
+ "name": "Maximum: Laugh Track",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/comedian.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Peak Comedy</em></p>\n<p>As a bonus action for 3 CE while your technique is active, you summon an invisible audience around you. For the next minute, creatures within 30 ft have disadvantage on saves against your techniques and you have advantage on ability checks and saves to maintain your technique.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Peak Comedy",
+  "activities": {
+   "fXil3kew42lcs1rq": {
+    "_id": "fXil3kew42lcs1rq",
+    "type": "utility",
+    "name": "Bonus Action (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "30",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "fXil3kew42lcs1rq": 3
+   },
+   "prereq": {
+    "features": [
+     [
+      "Maximum: Peak Comedy"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "ofzydWsjnAAHHzU3",
+ "sort": 300,
+ "_key": "!items!fu2DyoMfKLdvkV0d"
+}

@@ -1,0 +1,83 @@
+{
+ "_id": "O4cN7o6CDngD9xOo",
+ "name": "Liquid Metal",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/construction.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Construction — Innate Technique (6th level)</em></p><p>At 6th level, you have learned how to create liquid metal, a substance with fluid form and changeable volume but stable physical properties due to semi-autonomous cursed energy. As part of creating a weapon with your construction, you can spend up to an additional 4 cursed energy to make them become fluid with volume for 1 minute. This allows you to extend the range of melee weapons 10ft per cursed energy.</p>\n<p>In addition, whenever you attack with them in this increased range form their damage die tier will increase by 1 per additional cursed energy used. (1d8-&gt;1d10-&gt;1d12-&gt;2d6-&gt;2d8)</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "QAL2FXDt3LBc2P1d": {
+    "_id": "QAL2FXDt3LBc2P1d",
+    "type": "utility",
+    "name": "Extra (4 CE)",
+    "sort": 900000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "As part of creating a weapon with your construction, you can spend up to an additional ...",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "special",
+   "value": null,
+   "condition": "As part of creating a weapon with your construction, you can spend up to an additional ...",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self"
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "QAL2FXDt3LBc2P1d": 4
+   },
+   "technique": "Construction",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "dT7FkGZ40euglS6C",
+ "_key": "!items!O4cN7o6CDngD9xOo"
+}

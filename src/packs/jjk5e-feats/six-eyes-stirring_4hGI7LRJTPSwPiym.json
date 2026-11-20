@@ -1,0 +1,89 @@
+{
+ "_id": "4hGI7LRJTPSwPiym",
+ "name": "Six Eyes (Stirring)",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/trait.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Creeps and Curses V.3.1</em></p><p><em>Special Trait. Please note that these abilities are incredibly powerful even for the JJK system and should only be used for purposely high power games. Of course, certain traits are stronger than others. Stages of these traits have been added to grow with characters with higher levels of play. Dormant, Stirring, and Awakened. Though a DM can decide to change the leveling format or instead give them out at appropriate character moments.</em></p><p><strong>Perfect Cursed Energy Manipulation.</strong> Due to the six eyes, you can manipulate cursed energy on the atomic level. A number of times equal to your level, you can reduce cursed energy you spend by 10 times, even into decimals. (Example: If you spend 3 cursed energy, you only spend 0.3 cursed energy)</p>\n<p><strong>Technique Analyzer.</strong> Your eyes allow you to uncover the secrets of techniques. As a reaction to seeing an Extension, Reversal, or Maximum technique used while your eyes are uncovered, or as a bonus action within 1 minute of seeing them used while your eyes were uncovered, you can make an Intelligence (Arcana) check against their cursed energy DC. On a success, you will learn the feature and its capabilities. If it is a domain, you learn the guaranteed hit effect and the user’s refinement.</p>\n<p><strong>Perceptive Eyes.</strong> Nothing escapes your watch, you gain expertise in Perception, advantage on all Perception checks, and can add your CE modifier to (Perception) checks. Additionally, you gain the Cursed Energy Perception feat, and can use it to detect any remains of Cursed Energy in a 300 ft radius, detecting it even if you can't see it directly. While wearing eye protection, you do not have advantage on all perception checks.</p>\n<p><em>Special Trait tiers stack: keep the earlier tiers on the sheet. When a benefit says it replaces an earlier one, the module's effects already account for it.</em></p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTrait"
+  },
+  "requirements": "Gojo Clan sorcerer family, must be Human; Six Eyes, level 6",
+  "activities": {
+   "ErzmSQSVRsOGioAS": {
+    "_id": "ErzmSQSVRsOGioAS",
+    "type": "utility",
+    "name": "Perfect CE Manipulation (CE cost ÷10)",
+    "activation": {
+     "type": "special",
+     "condition": "When you spend CE"
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1"
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "@details.level",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
+    }
+   ]
+  },
+  "prerequisites": {
+   "level": 6,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "level": 6
+   }
+  }
+ },
+ "folder": "WpMvDh8sKw65orZ9",
+ "effects": [
+  {
+   "_id": "vrW6aUBdnOEFCjYq",
+   "name": "Six Eyes (Stirring)",
+   "img": "modules/jjk5e/icons/trait.svg",
+   "changes": [
+    {
+     "key": "system.skills.prc.value",
+     "mode": 4,
+     "value": "2",
+     "priority": null
+    }
+   ],
+   "disabled": false,
+   "transfer": true,
+   "duration": {},
+   "description": "",
+   "flags": {},
+   "_key": "!items.effects!4hGI7LRJTPSwPiym.vrW6aUBdnOEFCjYq"
+  }
+ ],
+ "sort": 200,
+ "_key": "!items!4hGI7LRJTPSwPiym"
+}

@@ -1,0 +1,85 @@
+{
+ "_id": "bxSurrzBgl0GtcSQ",
+ "name": "Unstopping Justice",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/deadly-sentencing.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Deadly Sentencing — Innate Technique (18th level)</em></p><p>Finally, at 18th level, you have reached the peak of your technique, showing off to others that only with skill you can truly win. You can now use Deadly Sentencing a number of times equal to your CE modifier without spending Cursed Energy each long rest.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "zbRdrCYbDoFUEXsi": {
+    "_id": "zbRdrCYbDoFUEXsi",
+    "type": "utility",
+    "name": "Use",
+    "activation": {
+     "type": "special",
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1"
+      }
+     ],
+     "spellSlot": false
+    }
+   }
+  },
+  "uses": {
+   "max": "max(@abilities.wis.mod, @abilities.cha.mod, 1)",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
+    }
+   ]
+  },
+  "level": 9,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "special",
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self"
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Deadly Sentencing",
+   "level": 18,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "jvdEqnCHI6BBkSgt",
+ "_key": "!items!bxSurrzBgl0GtcSQ"
+}

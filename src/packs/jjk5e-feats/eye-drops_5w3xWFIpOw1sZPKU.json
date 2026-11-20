@@ -1,0 +1,72 @@
+{
+ "_id": "5w3xWFIpOw1sZPKU",
+ "name": "Eye Drops",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/paralyzing-gaze.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Reactive Eye Movement</em></p>\n<p>Through constant exposure, your eyes have become surprisingly tough. Whenever your eyes take damage, the damage is halved. When your eyes’ hit points would be reduced to 0 hit points, you can make a DC 20 Constitution saving throw for your eyes to stay at 1 hit point. If you have Reverse Cursed Technique, you automatically succeed. You can make this saving throw a number of times equal to your proficiency bonus each long rest.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Reactive Eye Movement",
+  "uses": {
+   "max": "@prof",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
+    }
+   ]
+  },
+  "activities": {
+   "n5KWHTsynSVi18hB": {
+    "_id": "n5KWHTsynSVi18hB",
+    "type": "utility",
+    "name": "Use",
+    "activation": {
+     "type": "special",
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1"
+      }
+     ]
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Reactive Eye Movement"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "4cwsl1cPyRP6EWgd",
+ "sort": 300,
+ "_key": "!items!5w3xWFIpOw1sZPKU"
+}

@@ -1,0 +1,145 @@
+{
+ "_id": "lPvmTuuxb9GiKkQ4",
+ "name": "Warstaff",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/g-warstaff.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>G Warstaff — Innate Technique (1st level)</em></p><blockquote><p>You can conjure a pen-like cursed tool that lets you see the future.</p></blockquote><p>Starting at 1st level, you can summon a pen-like cursed tool that allows you to see into the future of your opponents. As a bonus action for 2 cursed energy, you create an oversized pen-like cursed tool. This cursed tool has the reach and two-handed properties and you can use your CE modifier for its attack and damage rolls. On a hit it deals 1d4 + your CE modifier piercing damage and counts as a grade 4 cursed tool and can be used with martial arts die. You can dismiss the Warstaff at will and can only have one created at a time.</p>\n<p>When you hit a creature with G Warstaff, you fulfill the condition for ink and attach a manga panel to the target, being able to view 1 second into the target's future. Hitting a target more than once adds another 1 second to the total, making you gain the benefits of the earlier seconds and the current. As a reaction or bonus action for 1 cursed energy, you can view that creature's future again and gain the following foresights until the beginning of your next turn depending on the creature’s marks. You cannot use this while blinded.</p>\n<table>\n<thead>\n<tr>\n<th style=\"text-align: left;\">Seconds</th>\n<th></th>\n<th style=\"text-align: left;\">Foresight</th>\n<th></th>\n<th></th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td style=\"text-align: left;\">1 Second</td>\n<td></td>\n<td style=\"text-align: left;\">The creature's attack rolls against you are made at disadvantage</td>\n<td></td>\n<td></td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">2 Seconds</td>\n<td></td>\n<td style=\"text-align: left;\">You have advantage on saving throws from that creature</td>\n<td></td>\n<td></td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">3 Seconds</td>\n<td></td>\n<td style=\"text-align: left;\">You have advantage on attack rolls against that creature</td>\n<td></td>\n<td></td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">4 Seconds</td>\n<td></td>\n<td style=\"text-align: left;\">You know the next actions of the creature (The DM tells you at the start of their turn)</td>\n<td></td>\n<td></td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">5 Seconds</td>\n<td></td>\n<td style=\"text-align: left;\">You know the next actions of the creature (The DM tells you at the end of your turn)</td>\n<td></td>\n<td></td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">6 Seconds</td>\n<td></td>\n<td style=\"text-align: left;\">You know the next actions of the creature (The DM tells you at the beginning of your turn)</td>\n<td></td>\n<td></td>\n</tr>\n</tbody>\n</table>\n<p>You can only see into a number of seconds into a creature's future equal to your proficiency bonus. The number of creatures that can be affected by this technique is equal to your CE modifier, and you can end the technique at will or it ends when the combat ends.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "m4ZxTvPNLGndeoSD": {
+    "_id": "m4ZxTvPNLGndeoSD",
+    "type": "damage",
+    "name": "Bonus Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 4,
+       "bonus": "@mod",
+       "types": [
+        "piercing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   },
+   "nn5GJvMMdLGh7KZu": {
+    "_id": "nn5GJvMMdLGh7KZu",
+    "type": "utility",
+    "name": "Bonus Action (1 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "m4ZxTvPNLGndeoSD": 2,
+    "nn5GJvMMdLGh7KZu": 1
+   },
+   "technique": "G Warstaff",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "GjZxtO8W2HfeT6Hl",
+ "_key": "!items!lPvmTuuxb9GiKkQ4"
+}

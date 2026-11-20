@@ -1,0 +1,174 @@
+{
+ "_id": "mSD3lm8nPAmP6Uez",
+ "name": "Floating Tool",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/tool-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Tool Manipulation — Innate Technique (3rd level)</em></p><p>At 3rd level, when you imbue a tool, you can spend an additional 2 CE to create a <em>Floating Tool</em>. You can command a <em>Floating Tool</em> as an action to hover up to 35 feet in any direction and make a melee attack using your CE modifier. The <em>Floating Tool</em> deals its normal weapon damage or 1d4 bludgeoning, slashing, or piercing if it is an improvised weapon. You can only have one floating tool at a time and it falls to the ground if it is more than 120 ft from you.</p>\n<p>A <em>Floating Tool</em> has AC equal to your CE save DC and hit points equal to 5 x your proficiency bonus + 10 for each grade above 4th if it is a cursed tool. A <em>Floating Tool</em> reduced to 0 HP is destroyed unless it is a cursed tool, in which case it loses the benefits of <em>Floating Tool</em>. You can spend 2 CE as a bonus action to return the effect of <em>Floating Tool</em> to the cursed tool by touching it.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "U55lRROmCeODfjoZ": {
+    "_id": "U55lRROmCeODfjoZ",
+    "type": "utility",
+    "name": "Bonus Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   },
+   "Im9iQPF49NGk56zC": {
+    "_id": "Im9iQPF49NGk56zC",
+    "type": "attack",
+    "name": "Action",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "flat": false,
+     "type": {
+      "value": "melee",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 4,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   },
+   "Lzlk2ZqnzFIceqvs": {
+    "_id": "Lzlk2ZqnzFIceqvs",
+    "type": "utility",
+    "name": "Extra (2 CE)",
+    "sort": 900000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "At 3rd level, when you imbue a tool, you can spend an additional 2 CE to create a Float...",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "U55lRROmCeODfjoZ": 2,
+    "Lzlk2ZqnzFIceqvs": 2
+   },
+   "technique": "Tool Manipulation",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "7tmhlm7tDflRZlKD",
+ "_key": "!items!mSD3lm8nPAmP6Uez"
+}

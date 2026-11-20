@@ -1,0 +1,118 @@
+{
+ "_id": "cg2i7buGpVFp4p0F",
+ "name": "Innate Technique: Retrograde",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/retrograde.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>The act of regression is the basis of your technique.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.W67pztE5YzdQ8tVp]{Reversion}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.54dzavXGzF80Hu5T]{Regression}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.HFuaDzzNauD0VMjN]{Enhanced Reversion}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.mnTFpMXKYAUFX5Aw]{Invert Causality}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.hgum5VAcDalK1FTK]{Domain Expansion: Requiem of Retrograde}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "zNYxE0bHJgY5VXlz": {
+    "_id": "zNYxE0bHJgY5VXlz",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Retrograde (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.W67pztE5YzdQ8tVp",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "Z7Tt1qMaFw973lEd": {
+    "_id": "Z7Tt1qMaFw973lEd",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Retrograde (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.54dzavXGzF80Hu5T",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "m7aOsLKgAuB7FboE": {
+    "_id": "m7aOsLKgAuB7FboE",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Retrograde (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.HFuaDzzNauD0VMjN",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "Pfv6kAhWSX2fnCsI": {
+    "_id": "Pfv6kAhWSX2fnCsI",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Retrograde (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.mnTFpMXKYAUFX5Aw",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "UPf6mQVtxitoDWeX": {
+    "_id": "UPf6mQVtxitoDWeX",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Retrograde (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.hgum5VAcDalK1FTK",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Retrograde"
+  }
+ },
+ "_key": "!items!cg2i7buGpVFp4p0F"
+}

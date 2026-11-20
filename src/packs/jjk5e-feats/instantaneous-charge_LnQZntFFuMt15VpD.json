@@ -1,0 +1,87 @@
+{
+ "_id": "LnQZntFFuMt15VpD",
+ "name": "Instantaneous Charge",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/fa-jin.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Instantaneous Movement</em></p>\n<p>When you use at least 3 Jin charges for <em>Instantaneous Movement</em>, you gain advantage on your next melee attack roll. On a hit, you deal additional thunder damage equal to your Cursed Energy modifier.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Instantaneous Movement",
+  "activities": {
+   "Que0RYYZxGPV4AtQ": {
+    "_id": "Que0RYYZxGPV4AtQ",
+    "type": "damage",
+    "name": "Special — rider",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": null,
+       "denomination": null,
+       "bonus": "",
+       "types": [
+        "thunder"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "max(@abilities.wis.mod, @abilities.cha.mod)"
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Instantaneous Movement"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "qac6h84zrmqbsWnq",
+ "sort": 200,
+ "_key": "!items!LnQZntFFuMt15VpD"
+}

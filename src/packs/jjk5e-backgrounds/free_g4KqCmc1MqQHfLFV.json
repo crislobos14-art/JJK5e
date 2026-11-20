@@ -1,0 +1,46 @@
+{
+ "_id": "g4KqCmc1MqQHfLFV",
+ "name": "Free",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/mindset.svg",
+ "system": {
+  "description": {
+   "value": "<p>The hatred, the anger, the jealousy, the envy, the bonds that chain you down. You have decided to leave those all behind with your overwhelming intensity. If you use your inspiration, you gain an extra bonus action or reaction each turn for 1 minute.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": ""
+  },
+  "requirements": "Mindset",
+  "activities": {
+   "IZgeor7BsZdUHses": {
+    "_id": "IZgeor7BsZdUHses",
+    "type": "utility",
+    "name": "Use Inspiration",
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Spend your inspiration"
+    },
+    "consumption": {
+     "targets": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "mindset": true
+  }
+ },
+ "folder": "ymyii86sdbVo8H5C",
+ "_key": "!items!g4KqCmc1MqQHfLFV"
+}

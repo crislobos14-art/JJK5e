@@ -1,0 +1,118 @@
+{
+ "_id": "TR9Ml7hAw1xRiXxv",
+ "name": "Innate Technique: Disaster Storms",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/disaster-storms.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>You are born with an amazing power, with many possibilities, storm creation to ride the breeze.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.1oP2gwQofeJq4BzA]{Storms of Disaster}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.rKANGZ47xLsfVBJD]{Lightning}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.ujyEsUgfQSrgLbJD]{Storm Creation}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.3mJStu8usYRZi2wT]{Maximum: Divine Storm Sovereign}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.QYNj4Bn6j6DQy5LH]{Domain Expansion: Heavenly Throne of the Raging Tempest}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "PtI1KUxSL2WoD9Wp": {
+    "_id": "PtI1KUxSL2WoD9Wp",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Disaster Storms (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.1oP2gwQofeJq4BzA",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "u1ZzIAEmYzhRioFh": {
+    "_id": "u1ZzIAEmYzhRioFh",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Disaster Storms (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.rKANGZ47xLsfVBJD",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "Kg9FoStKgLv5Kptm": {
+    "_id": "Kg9FoStKgLv5Kptm",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Disaster Storms (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.ujyEsUgfQSrgLbJD",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "61sgeluZKln7mw0i": {
+    "_id": "61sgeluZKln7mw0i",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Disaster Storms (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.3mJStu8usYRZi2wT",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "S2e7gkGvyDxK5RN7": {
+    "_id": "S2e7gkGvyDxK5RN7",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Disaster Storms (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.QYNj4Bn6j6DQy5LH",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Disaster Storms"
+  }
+ },
+ "_key": "!items!TR9Ml7hAw1xRiXxv"
+}

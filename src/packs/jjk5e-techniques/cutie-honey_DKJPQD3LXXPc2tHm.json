@@ -1,0 +1,141 @@
+{
+ "_id": "DKJPQD3LXXPc2tHm",
+ "name": "Cutie Honey",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/heart-catch.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Heart Catch — Innate Technique (11th level)</em></p><p>Starting at 11th level, on a hit you can spend 5 Cursed Energy to force a creature you hit with a melee attack to become Charmed. A creature charmed in this way can only target you with attacks and harmful effects for 1 minute and must make a Wisdom save at the start of their turn to end the condition.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "OW8P8BPdrsaflpEH": {
+    "_id": "OW8P8BPdrsaflpEH",
+    "type": "save",
+    "name": "Action (5 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "wis"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    },
+    "effects": [
+     {
+      "_id": "7wvMBfX5EbXrTJI2",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "OW8P8BPdrsaflpEH": 5
+   },
+   "technique": "Heart Catch",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "7wvMBfX5EbXrTJI2",
+   "name": "Charmed (Cutie Honey)",
+   "img": "modules/jjk5e/icons/techniques/heart-catch.svg",
+   "statuses": [
+    "charmed"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "seconds": 60,
+    "rounds": 10
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "charmed"
+    }
+   },
+   "_key": "!items.effects!DKJPQD3LXXPc2tHm.7wvMBfX5EbXrTJI2"
+  }
+ ],
+ "folder": "AAtWazy4xXecJci4",
+ "_key": "!items!DKJPQD3LXXPc2tHm"
+}

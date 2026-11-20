@@ -1,0 +1,321 @@
+{
+ "_id": "tMGu9BVVfpcFPwvD",
+ "name": "Gama",
+ "type": "npc",
+ "img": "modules/jjk5e/icons/shikigami/gama.svg",
+ "system": {
+  "abilities": {
+   "str": {
+    "value": 14,
+    "proficient": 0
+   },
+   "dex": {
+    "value": 13,
+    "proficient": 1
+   },
+   "con": {
+    "value": 11,
+    "proficient": 0
+   },
+   "int": {
+    "value": 2,
+    "proficient": 0
+   },
+   "wis": {
+    "value": 13,
+    "proficient": 0
+   },
+   "cha": {
+    "value": 3,
+    "proficient": 0
+   }
+  },
+  "attributes": {
+   "ac": {
+    "calc": "flat",
+    "flat": 11
+   },
+   "hp": {
+    "value": 22,
+    "max": 22,
+    "formula": ""
+   },
+   "movement": {
+    "walk": 30,
+    "climb": 30,
+    "swim": 30,
+    "units": "ft",
+    "hover": false
+   },
+   "senses": {
+    "darkvision": 30,
+    "units": "ft",
+    "special": ""
+   }
+  },
+  "details": {
+   "cr": 0.25,
+   "alignment": "Unaligned",
+   "type": {
+    "value": "monstrosity",
+    "subtype": "",
+    "swarm": "",
+    "custom": "Shikigami"
+   },
+   "biography": {
+    "value": "<p><em>Gama</em> — Ten Shadows shikigami. Summon cost: 1 Cursed Energy. AC and hit points scale with the summoner's proficiency bonus when summoned through the Ten Shadows features.</p>"
+   }
+  },
+  "traits": {
+   "size": "med",
+   "dr": {
+    "value": []
+   },
+   "ci": {
+    "value": []
+   },
+   "languages": {
+    "value": []
+   }
+  },
+  "skills": {
+   "acr": {
+    "value": 1,
+    "ability": "dex"
+   },
+   "ste": {
+    "value": 1,
+    "ability": "dex"
+   }
+  },
+  "resources": {
+   "legact": {
+    "max": 0,
+    "spent": 0
+   },
+   "legres": {
+    "max": 0,
+    "spent": 0
+   }
+  }
+ },
+ "items": [
+  {
+   "_id": "8g8pxYIYE3DwKGGK",
+   "name": "Amphibious",
+   "type": "feat",
+   "img": "icons/svg/aura.svg",
+   "system": {
+    "description": {
+     "value": "<p>Gama can breathe air and water.</p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Ten Shadows"
+    },
+    "activities": {},
+    "type": {
+     "value": "monster",
+     "subtype": ""
+    },
+    "requirements": "",
+    "properties": [],
+    "uses": {
+     "max": "",
+     "recovery": [],
+     "spent": 0
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!tMGu9BVVfpcFPwvD.8g8pxYIYE3DwKGGK"
+  },
+  {
+   "_id": "ZXM6KVzDfKLxzEHW",
+   "name": "Standing Leap",
+   "type": "feat",
+   "img": "icons/svg/aura.svg",
+   "system": {
+    "description": {
+     "value": "<p>Gama's long jump is up to 20 ft. and its high jump is up to 10 ft., with or without a running start.</p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Ten Shadows"
+    },
+    "activities": {},
+    "type": {
+     "value": "monster",
+     "subtype": ""
+    },
+    "requirements": "",
+    "properties": [],
+    "uses": {
+     "max": "",
+     "recovery": [],
+     "spent": 0
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!tMGu9BVVfpcFPwvD.ZXM6KVzDfKLxzEHW"
+  },
+  {
+   "_id": "kUtvJNJNZZocMLv4",
+   "name": "Tongue",
+   "type": "weapon",
+   "img": "icons/svg/sword.svg",
+   "system": {
+    "description": {
+     "value": "<p>The creature is grappled if it is the same size or smaller than Gama (escape DC 11). Until the grapple ends, the target is restrained and Gama cannot use its Tongue attack.</p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Ten Shadows"
+    },
+    "activities": {
+     "WbRPjkULDLoiE3Cm": {
+      "_id": "WbRPjkULDLoiE3Cm",
+      "type": "attack",
+      "name": "",
+      "sort": 0,
+      "activation": {
+       "type": "action",
+       "value": 1,
+       "condition": "",
+       "override": false
+      },
+      "consumption": {
+       "targets": [],
+       "scaling": {
+        "allowed": false
+       },
+       "spellSlot": false
+      },
+      "duration": {
+       "units": "inst",
+       "concentration": false,
+       "override": false
+      },
+      "range": {
+       "override": false
+      },
+      "target": {
+       "override": false,
+       "prompt": true,
+       "affects": {
+        "count": "1",
+        "type": "creature"
+       }
+      },
+      "attack": {
+       "ability": "str",
+       "bonus": "",
+       "critical": {
+        "threshold": null
+       },
+       "flat": false,
+       "type": {
+        "value": "melee",
+        "classification": "weapon"
+       }
+      },
+      "damage": {
+       "critical": {
+        "bonus": ""
+       },
+       "includeBase": true,
+       "parts": []
+      }
+     }
+    },
+    "type": {
+     "value": "natural",
+     "baseItem": ""
+    },
+    "ability": "str",
+    "proficient": 1,
+    "equipped": true,
+    "damage": {
+     "base": {
+      "number": 1,
+      "denomination": 6,
+      "bonus": "",
+      "types": [
+       "bludgeoning"
+      ],
+      "custom": {
+       "enabled": false,
+       "formula": ""
+      },
+      "scaling": {
+       "mode": "",
+       "number": null,
+       "formula": ""
+      }
+     }
+    },
+    "range": {
+     "reach": 10,
+     "value": null,
+     "long": null,
+     "units": "ft"
+    },
+    "magicalBonus": null,
+    "properties": [],
+    "uses": {
+     "max": "",
+     "recovery": [],
+     "spent": 0
+    },
+    "quantity": 1,
+    "weight": {
+     "value": 0,
+     "units": "lb"
+    },
+    "price": {
+     "value": 0,
+     "denomination": "gp"
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!tMGu9BVVfpcFPwvD.kUtvJNJNZZocMLv4"
+  }
+ ],
+ "effects": [],
+ "prototypeToken": {
+  "name": "Gama",
+  "actorLink": false,
+  "disposition": 1,
+  "width": 1,
+  "height": 1,
+  "texture": {
+   "src": "modules/jjk5e/icons/shikigami/gama.svg"
+  },
+  "displayName": 20,
+  "displayBars": 20,
+  "bar1": {
+   "attribute": "attributes.hp"
+  },
+  "sight": {
+   "enabled": true
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "shikigami": true,
+   "ceCost": 1,
+   "hpPerProf": 2,
+   "dmgProf": false
+  }
+ },
+ "folder": null,
+ "_key": "!actors!tMGu9BVVfpcFPwvD"
+}

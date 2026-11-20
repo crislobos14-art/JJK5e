@@ -1,0 +1,88 @@
+{
+ "_id": "F54J4xBgTzaq6Xvt",
+ "name": "Cursed Vessel (Death Painting)",
+ "type": "race",
+ "img": "modules/jjk5e/icons/race.svg",
+ "system": {
+  "description": {
+   "value": "<p>Sorcerers who became cursed objects, and are now in a new body</p>\n<p><strong>Age.</strong> Your lifespan depends on the body you have possessed.</p>\n<p><strong>Alignment.</strong> Cursed vessels are almost always chaotic people, not caring about what happens to others around them and wanting to cause destruction.</p>\n<p><strong>Size.</strong> Your size depends on the race you have possessed.</p>\n<p><strong>Speed</strong>. Your base walking speed depends on the race you have possessed.</p>\n<p><strong>This Body Is Mine.</strong> You have advantage on saving throws against effects that would alter or change your form.</p>\n<p><strong>Languages.</strong> You can speak, read, and write Common and one other language of your choice.</p>\n<p><strong>Subrace.</strong> There are multiple forms of vessels, however they are all based on consuming cursed objects. There are the reincarnated, who were simply sorcerers who were consumed by creatures who were adapted for their incarnation. There are the death paintings, which take over the body of said vessel despite its host having a will. And then there are the incomplete and complete vessels. In case the cursed object's host still had a will, it would start as an incomplete vessel and then become a complete vessel after erasing the will of the old body owner.  </p>\n<p><strong>Death Painting</strong></p>\n<p>A disastrous mixture of curse and man made by an evil scientist. Stuck as a fetus until fed to a host.</p>\n<p><strong>Ability Score Increase.</strong> Your cursed object has overcome the body of your initial host, so instead of gaining the host's ability scores, you gain a +3 to your Cursed Energy score. This cannot go above 20.</p>\n<p><strong>Durable Body.</strong> Once you incarnated into a vessel, due to your unnatural properties the body became more durable. Your maximum hit points increase by 2, and increase by 2 again every time you gain a level.</p>\n<p><strong>Poisonous Blood.</strong> Your birth came from someone from the Kamo clan, and from experimentation, your blood became poisonous. As a reaction, when you take piercing or slashing damage, you can choose a creature within 5 feet of you to take poison damage equal to your proficiency bonus. If the creature has an injury or less than their maximum hit points, they must make a DC 10 Constitution save or be poisoned until the end of their next turn.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "identifier": "cursed-vessel-death-painting",
+  "movement": {
+   "walk": 30,
+   "units": "ft"
+  },
+  "type": {
+   "value": "humanoid",
+   "subtype": "",
+   "custom": ""
+  },
+  "advancement": {
+   "70ncQd58ET0Z18PY": {
+    "_id": "70ncQd58ET0Z18PY",
+    "type": "Size",
+    "configuration": {
+     "sizes": [
+      "med"
+     ]
+    },
+    "value": {}
+   },
+   "JkstRaDJeD4D8E67": {
+    "_id": "JkstRaDJeD4D8E67",
+    "type": "ItemGrant",
+    "level": 0,
+    "title": "Traits",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-races.Item.akVkjIzoHyDUfdie",
+       "optional": false
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-races.Item.K4M4GBMzElZV1NhS",
+       "optional": false
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-races.Item.vewaJbNU2EcSmPJi",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "LxLnJT9tFXyOUHnC": {
+    "_id": "LxLnJT9tFXyOUHnC",
+    "type": "AbilityScoreImprovement",
+    "level": 0,
+    "title": "Ability Score Increase (+3 to your Cursed Energy score: WIS or CHA)",
+    "configuration": {
+     "points": 3,
+     "fixed": {},
+     "cap": 3,
+     "max": 20,
+     "locked": [
+      "str",
+      "dex",
+      "con",
+      "int"
+     ]
+    },
+    "value": {}
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": null,
+ "_key": "!items!F54J4xBgTzaq6Xvt"
+}

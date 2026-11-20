@@ -1,0 +1,61 @@
+{
+ "_id": "dEWsM6USFg1h5FX8",
+ "name": "Sorcerer Hunter",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>At 3rd level, you have grown a prideful stance against sorcerers, mocking them by saying things like they lost against a primate. You have become a sorcerer hunter, making you gain the following benefits:</p>\n<ul>\n<li>\n<p>When a creature within 5 feet of you uses a Cursed technique, you can use your reaction to make a melee weapon attack against that creature.  </p>\n</li>\n<li>\n<p>When you damage a creature that is concentrating on a spell or a Cursed technique, that creature has disadvantage on the saving throw it makes to maintain its concentration.  </p>\n</li>\n<li>\n<p>You have advantage on saving throws against spells or Cursed techniques cast by creatures within 10 feet of you.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Heavenly Restriction (Prideful) 3",
+  "activities": {
+   "9q8TUJUvLGGIw2R3": {
+    "_id": "9q8TUJUvLGGIw2R3",
+    "type": "utility",
+    "name": "Reaction",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "5",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "dKzsnD6daLKk9Ah9",
+ "_key": "!items!dEWsM6USFg1h5FX8"
+}

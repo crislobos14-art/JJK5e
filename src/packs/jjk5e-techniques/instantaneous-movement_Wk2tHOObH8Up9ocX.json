@@ -1,0 +1,95 @@
+{
+ "_id": "Wk2tHOObH8Up9ocX",
+ "name": "Instantaneous Movement",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/fa-jin.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Fa Jin — Innate Technique (3rd level)</em></p><p>At 3rd level, you gain more flexibility when using your Fa Jin. At the beginning of your turn, you can forgo your movement or spend 1 cursed energy to gain a Jin charge. You can now also use a Jin charge to increase your movement speed by 10 feet and triple your jump distance until the end of your turn or to instantly move 10 feet per charge in any direction as a reaction without provoking opportunity attacks.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "cbOplIjiLd2Rj3Iu": {
+    "_id": "cbOplIjiLd2Rj3Iu",
+    "type": "utility",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "cbOplIjiLd2Rj3Iu": 1
+   },
+   "technique": "Fa Jin",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "F6im2Ck5LFiG7ZIX",
+ "_key": "!items!Wk2tHOObH8Up9ocX"
+}

@@ -1,0 +1,86 @@
+{
+ "_id": "6rtLgvPvDN215CJQ",
+ "name": "Innate Technique: Body Manipulation",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/body-manipulation.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>You were born with the horrifying but useful ability to swap bodies and take the abilities from that body.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.QoIxDJ2ApVfogPIv]{Graverobber}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.CTBmUcbLL42tIvp0]{Skill Theft}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.CTTD5FDs0Txn2oZx]{Immortality}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "T7PJqgBGKbc8V1pD": {
+    "_id": "T7PJqgBGKbc8V1pD",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Body Manipulation (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.QoIxDJ2ApVfogPIv",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "YTxKxGhJPL3ldDgI": {
+    "_id": "YTxKxGhJPL3ldDgI",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Body Manipulation (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.CTBmUcbLL42tIvp0",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "haV9pYIDxcchiden": {
+    "_id": "haV9pYIDxcchiden",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Body Manipulation (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.CTTD5FDs0Txn2oZx",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Body Manipulation"
+  }
+ },
+ "_key": "!items!6rtLgvPvDN215CJQ"
+}

@@ -1,0 +1,42 @@
+{
+ "_id": "NqRyYQMgFucx13fq",
+ "name": "Pachinko Manifest",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/pachinko-fever.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Idle Death Gamble</em></p>\n<p>Through thorough understanding of your domain, you can now manifest Pachinko Attacks outside your domain and have a 30 foot range when used this way. Whenever you use a Pachinko Attack, you add your Cursed Energy modifier to the damage rolls. Additionally, you reduce the Cursed Energy cost of your Pachinko Attacks by 1 CE. This reduces the CE cost of Green Balls to 0 CE, but cannot reduce the CE cost of other Pachinko Attacks to 0 CE (minimum of 1). These attacks do not build Expectation.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Idle Death Gamble",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Domain Expansion: Idle Death Gamble"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "UYi4Xs2gTgIgFdZ7",
+ "sort": 200,
+ "_key": "!items!NqRyYQMgFucx13fq"
+}

@@ -1,0 +1,13 @@
+{
+ "_id": "xXX3QGqYivUX5HzZ",
+ "name": "JJK: Regain Cursed Energy",
+ "type": "script",
+ "img": "icons/svg/regen.svg",
+ "scope": "global",
+ "command": "game.modules.get(\"jjk5e\").api.promptCE(\"regain\");",
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": null,
+ "_key": "!macros!xXX3QGqYivUX5HzZ"
+}

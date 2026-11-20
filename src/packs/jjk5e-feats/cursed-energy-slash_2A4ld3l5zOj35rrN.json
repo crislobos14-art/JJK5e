@@ -1,0 +1,106 @@
+{
+ "_id": "2A4ld3l5zOj35rrN",
+ "name": "Cursed Energy Slash",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Cursed Imbuement or Cursed Enhancement</em></p>\n<p>As an action while holding a weapon that deals slashing damage, you can spend 5 Cursed Energy to make a huge cursed energy slash. You make all creatures in a 15 ft cone or a 30 ft line make a Dexterity saving throw. On a failed save, a creature takes the weapon’s normal damage + additional damage dice equal to a single die of the weapon times your Cursed Energy modifier in necrotic damage. On a success, they take half as much (Eg. Greatsword with a +3 CE modifier would be 2d6 + 3d6 necrotic damage).</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkCursedEnergy"
+  },
+  "requirements": "Cursed Imbuement or Cursed Enhancement",
+  "activities": {
+   "D8txMJ59TpkZZyXb": {
+    "_id": "D8txMJ59TpkZZyXb",
+    "type": "save",
+    "name": "Action (5 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {
+     "template": {
+      "type": "cone",
+      "size": "15",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 3,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "D8txMJ59TpkZZyXb": 5
+   },
+   "rawCE": true
+  }
+ },
+ "folder": "58RlNbYPWxO2Xi4E",
+ "sort": 800,
+ "_key": "!items!2A4ld3l5zOj35rrN"
+}

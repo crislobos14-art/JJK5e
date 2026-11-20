@@ -1,0 +1,73 @@
+{
+ "_id": "MazHPbgT9CJ26tTT",
+ "name": "Antigravitational Flight",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/antigravity-system.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Boosted System</em></p>\n<p>As an action for 3 CE, you can give yourself or another creature you touch a 60 feet hover speed for 10 minutes.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Boosted System",
+  "activities": {
+   "hfNIPB6hSYoaX7Yh": {
+    "_id": "hfNIPB6hSYoaX7Yh",
+    "type": "utility",
+    "name": "Action (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "10",
+     "units": "minute",
+     "concentration": false
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "hfNIPB6hSYoaX7Yh": 3
+   },
+   "prereq": {
+    "features": [
+     [
+      "Boosted System"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "aLDCA5tMqdkRqKRy",
+ "sort": 300,
+ "_key": "!items!MazHPbgT9CJ26tTT"
+}

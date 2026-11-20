@@ -1,0 +1,194 @@
+{
+ "_id": "wqgf4qz5z0zgYZ9K",
+ "name": "Erupting Volcanoes",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/disaster-flames.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Disaster Flames — Innate Technique (3rd level)</em></p><p>Beginning 3rd level, with a better understanding of the flames you possess, you can now create volcanoes. As an action for 2 Cursed Energy per volcano, you can create a number of volcanoes up to your Cursed Energy modifier within 60 ft of you, with each volcano occupying a 5 ft circle. As a bonus action, you can force every creature in a 30 ft long and 5 ft wide line originating from each volcano to make a Dexterity saving throw as the volcanoes erupt and disappear. On a failure, they take Xd10 fire damage equal to proficiency and become restrained by the magma for 1 minute. On success, they take half as much damage and are not restrained. The creature can make a Strength saving throw at the beginning of their turns, ending the condition early on success. Any area targeted by this feature becomes difficult terrain.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "3Z7NwylVtsjnbOEp": {
+    "_id": "3Z7NwylVtsjnbOEp",
+    "type": "utility",
+    "name": "Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "5",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   },
+   "AuEcnTkTPSeA0KJa": {
+    "_id": "AuEcnTkTPSeA0KJa",
+    "type": "save",
+    "name": "Bonus Action",
+    "sort": 100000,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": []
+    },
+    "effects": [
+     {
+      "_id": "wPSk250Rrx6Njjxk",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "radius",
+    "size": "5",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": false
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "3Z7NwylVtsjnbOEp": 2
+   },
+   "technique": "Disaster Flames",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "wPSk250Rrx6Njjxk",
+   "name": "Restrained (Erupting Volcanoes)",
+   "img": "modules/jjk5e/icons/techniques/disaster-flames.svg",
+   "statuses": [
+    "restrained"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "seconds": 60,
+    "rounds": 10
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "restrained"
+    }
+   },
+   "_key": "!items.effects!wqgf4qz5z0zgYZ9K.wPSk250Rrx6Njjxk"
+  }
+ ],
+ "folder": "Xs1qvLjpsB4bwM5D",
+ "_key": "!items!wqgf4qz5z0zgYZ9K"
+}

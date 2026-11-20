@@ -1,0 +1,137 @@
+{
+ "_id": "xSSfkLjiDQ8aBAEs",
+ "name": "24 Frame Rule",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/projection-sorcery.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Projection Sorcery — Innate Technique (6th level)</em></p><p>Once you reach 6th level, you have learned how to affect creatures with the 24 FPS rule, making them become stuck in one frame of animation. While your cursed technique is active, when you hit an unarmed strike on a creature you can choose to deal no damage by spending 2 Cursed Energy, forcing the creature to make an Intelligence saving throw. On a failure they will be stuck in one frame of animation, making them stunned until the beginning of your next turn. The creature loses its stunned condition early if it is hit by an attack which will automatically count as a critical. This critical ignores damage resistance and treats damage immunity as resistance.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "mwDEHQCHlIp7d432": {
+    "_id": "mwDEHQCHlIp7d432",
+    "type": "save",
+    "name": "Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "int"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    },
+    "effects": [
+     {
+      "_id": "lyxFE4igXqxsmxeV",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "mwDEHQCHlIp7d432": 2
+   },
+   "technique": "Projection Sorcery",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "lyxFE4igXqxsmxeV",
+   "name": "Stunned (24 Frame Rule)",
+   "img": "modules/jjk5e/icons/techniques/projection-sorcery.svg",
+   "statuses": [
+    "stunned"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "rounds": 1
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "stunned"
+    }
+   },
+   "_key": "!items.effects!xSSfkLjiDQ8aBAEs.lyxFE4igXqxsmxeV"
+  }
+ ],
+ "folder": "RqqBayaXFFZrEuE3",
+ "_key": "!items!xSSfkLjiDQ8aBAEs"
+}

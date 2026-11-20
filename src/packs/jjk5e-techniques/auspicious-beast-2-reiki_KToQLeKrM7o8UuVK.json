@@ -1,0 +1,151 @@
+{
+ "_id": "KToQLeKrM7o8UuVK",
+ "name": "Auspicious Beast #2: Reiki",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/auspicious-beast-summon.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Auspicious Beast Summon — Innate Technique (3rd level)</em></p><p>At 3rd level, you summon dark water to assist yourself. You can use a bonus action to spend 1 Cursed Energy and double your movement until the end of your next turn. Additionally, as a reaction for 2 Cursed Energy, you gain a +5 bonus to AC until the beginning of your next turn.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "TOiqVr1p4VytfTdo": {
+    "_id": "TOiqVr1p4VytfTdo",
+    "type": "utility",
+    "name": "Bonus Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   },
+   "b2gex8XcWCXeP4G3": {
+    "_id": "b2gex8XcWCXeP4G3",
+    "type": "utility",
+    "name": "Reaction (2 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "TOiqVr1p4VytfTdo": 1,
+    "b2gex8XcWCXeP4G3": 2
+   },
+   "technique": "Auspicious Beast Summon",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "brFOPY7ZHkwkGj1z",
+ "effects": [
+  {
+   "_id": "454LFPLROeF8Z1Cm",
+   "name": "Auspicious Beast #2: Reiki (toggle)",
+   "img": "modules/jjk5e/icons/techniques/auspicious-beast-summon.svg",
+   "changes": [
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+5",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!KToQLeKrM7o8UuVK.454LFPLROeF8Z1Cm"
+  }
+ ],
+ "_key": "!items!KToQLeKrM7o8UuVK"
+}

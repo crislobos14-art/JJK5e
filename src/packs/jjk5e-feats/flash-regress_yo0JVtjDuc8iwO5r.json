@@ -1,0 +1,42 @@
+{
+ "_id": "yo0JVtjDuc8iwO5r",
+ "name": "Flash Regress",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/retrograde.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Regression</em></p>\n<p>What if we just went backwards, like really fast? When you use <em>Regression</em>, you no longer provoke opportunity attacks during your regressing movement. Additionally, you can instead spend up to your proficiency bonus in cursed energy. If you spend more than 1 CE, you gain a +1 bonus to the DC or Cursed Energy check per Cursed Energy spent. At 11th level, you can push creatures Huge or smaller out of your path.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Regression",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Regression"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "xdlt8ITade4Eg7u9",
+ "sort": 200,
+ "_key": "!items!yo0JVtjDuc8iwO5r"
+}

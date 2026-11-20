@@ -1,0 +1,107 @@
+{
+ "_id": "hhllCgATbWx58n7P",
+ "name": "Hands of Love",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/heart-catch.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Heart Catch — Innate Technique (1st level)</em></p><blockquote><p>A simple yet effective technique, powered by the heart.</p></blockquote><p>Starting at 1st level, you create a pair of translucent hands as a bonus action for 1 Cursed Energy. These hands stay within 15 ft of you and each count as medium constructs. You can replace any attacks you make on your turn with an attack from your <em>Love Hands</em>. These hands deal your unarmed damage, and have advantage on grappling and shoving. The hands have an AC equal to your Cursed Energy save DC, HP equal to twice your cursed energy score and you take 1/10th of damage they take. This increases to three times your cursed energy score at 6th level and four times at 11th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "CN6TTssteOaassfF": {
+    "_id": "CN6TTssteOaassfF",
+    "type": "utility",
+    "name": "Bonus Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "15",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "15",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "CN6TTssteOaassfF": 1
+   },
+   "technique": "Heart Catch",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "AAtWazy4xXecJci4",
+ "_key": "!items!hhllCgATbWx58n7P"
+}

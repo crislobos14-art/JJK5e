@@ -1,0 +1,74 @@
+{
+ "_id": "GgIpzex88s7T8ErZ",
+ "name": "Quick Recovery",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>You have a pool of latent cursed energy that replenishes when you take a long rest. The pool equals half your Strategist level (rounded up) and you can draw from it at will.<br />\n For example, if you're a 4th-level strategist, you have a pool of 2 cursed energy points. You can recover either 1 at two different times or 2 at once.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Strategist 1",
+  "uses": {
+   "max": "ceil(@classes.strategist.levels / 2)",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
+    }
+   ]
+  },
+  "activities": {
+   "Jt55eu41OQX7G6Sh": {
+    "_id": "Jt55eu41OQX7G6Sh",
+    "type": "utility",
+    "name": "Recover CE (1 per use)",
+    "activation": {
+     "type": "special",
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1",
+       "scaling": {
+        "mode": "amount",
+        "formula": "1"
+       }
+      }
+     ],
+     "scaling": {
+      "allowed": true,
+      "max": "@item.uses.value"
+     }
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "Jt55eu41OQX7G6Sh": -1
+   },
+   "ceSteps": {
+    "Jt55eu41OQX7G6Sh": -1
+   }
+  }
+ },
+ "folder": "D1jub3NHW0Fbryho",
+ "_key": "!items!GgIpzex88s7T8ErZ"
+}

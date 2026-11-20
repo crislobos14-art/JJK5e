@@ -1,0 +1,70 @@
+{
+ "_id": "HQikCDHIltZK4SMD",
+ "name": "Maximum: Embodiment",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/ten-shadows.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Chimera Shadow Garden</em></p>\n<p>As an action, you can spend half the cost (min of 1) of one of your tamed shikigami (no Totality or Chimera). Rather than summoning, you instead gain their movement, actions, legendary actions, features and one ability score of your choice from the shikigami for 1 hour. (Eg. Divine Dog’s movement, Max Elephant’s Constitution, or Mahoraga’s Adaption.) You can embody one shikigami at a time.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Chimera Shadow Garden",
+  "activities": {
+   "UX7ZWMtZY2aIPUvy": {
+    "_id": "UX7ZWMtZY2aIPUvy",
+    "type": "utility",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "1",
+     "units": "hour",
+     "concentration": false
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Domain Expansion: Chimera Shadow Garden"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "9OwEZW5sd90aZTPm",
+ "sort": 300,
+ "_key": "!items!HQikCDHIltZK4SMD"
+}

@@ -1,0 +1,122 @@
+{
+ "_id": "kbngt5zGs6qa9rCa",
+ "name": "Innate Technique: Ten Shadows",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/ten-shadows.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>You have the Zenin Clan’s praised technique, said to rival the six eyes.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.x65tUSq8GjFrdeNz]{Divine Dogs}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.z1mJ0orAc2rvKGlW]{Totality}, @UUID[Compendium.jjk5e.jjk5e-techniques.Item.qRCrItVBtBcRJpaC]{Trial}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.Msi6iz1TGSA7DnZl]{Shadow Manipulation}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.9LQ4u1eh0eGQileG]{Well’s Unknown Abyss}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.ico8O7Iw5bcSqC7e]{Domain Expansion: Chimera Shadow Garden}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "gHgv07ALdZVUsY33": {
+    "_id": "gHgv07ALdZVUsY33",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Ten Shadows (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.x65tUSq8GjFrdeNz",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "Yxy7yk2NOQOMsfVE": {
+    "_id": "Yxy7yk2NOQOMsfVE",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Ten Shadows (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.z1mJ0orAc2rvKGlW",
+       "optional": false
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.qRCrItVBtBcRJpaC",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "FSNMU1r5467vWnTc": {
+    "_id": "FSNMU1r5467vWnTc",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Ten Shadows (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.Msi6iz1TGSA7DnZl",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "JGPM9u0eUSy9pYdS": {
+    "_id": "JGPM9u0eUSy9pYdS",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Ten Shadows (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.9LQ4u1eh0eGQileG",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "9XO5dDkDypqZRzUa": {
+    "_id": "9XO5dDkDypqZRzUa",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Ten Shadows (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.ico8O7Iw5bcSqC7e",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Ten Shadows"
+  }
+ },
+ "_key": "!items!kbngt5zGs6qa9rCa"
+}

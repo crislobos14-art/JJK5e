@@ -1,0 +1,69 @@
+{
+ "_id": "64UZFrd9TGWPbRSv",
+ "name": "Additional Limbs (3 PP)",
+ "type": "feat",
+ "img": "icons/svg/upgrade.svg",
+ "system": {
+  "description": {
+   "value": "<p><strong>Arm</strong>. You have an additional arm somewhere on your body. The additional arm can manipulate an object, open or close a door or container, pick up or set down a Tiny object, or wield a weapon that has the light property. This does not give you additional attacks, but does give you a +2 bonus on ability checks to grapple a creature.<br />\n<strong>Leg</strong>. You have an additional leg somewhere on your body. This leg gives you a +2 bonus on ability checks and saving throws against being knocked prone or moved against your will. Your walking speed increases by 5 ft per additional leg you have when you take the dash action.<br />\nYou can take this attribute multiple times, up to a total of four times.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTrait"
+  },
+  "requirements": "Cursed Spirit, 3 Profane Points",
+  "activities": {
+   "yORThY1HOT0aWGOY": {
+    "_id": "yORThY1HOT0aWGOY",
+    "type": "utility",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "profaneCost": 3,
+   "prereq": {
+    "prefixes": [
+     [
+      "Cursed Spirit"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "ar3Bgj4YHvYRp8DL",
+ "sort": 1400,
+ "_key": "!items!64UZFrd9TGWPbRSv"
+}

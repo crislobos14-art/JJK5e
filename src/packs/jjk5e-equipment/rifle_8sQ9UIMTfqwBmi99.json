@@ -1,0 +1,75 @@
+{
+ "_id": "8sQ9UIMTfqwBmi99",
+ "name": "Rifle",
+ "type": "weapon",
+ "img": "icons/svg/sword.svg",
+ "folder": "8L9REK3UZxFoXRJA",
+ "system": {
+  "description": {
+   "value": "<p>Martial ranged weapon. 2d6 piercing. Ammunition (80/240), reload (30), two-handed.</p><p><strong>Special:</strong> reload (30)</p><p><em>Reload: number of shots before you must reload (action).</em></p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "martialR",
+   "baseItem": ""
+  },
+  "damage": {
+   "base": {
+    "number": 2,
+    "denomination": 6,
+    "types": [
+     "piercing"
+    ]
+   }
+  },
+  "range": {
+   "value": 80,
+   "long": 240,
+   "units": "ft"
+  },
+  "properties": [
+   "amm",
+   "rel",
+   "two"
+  ],
+  "proficient": null,
+  "price": {
+   "value": 75.0,
+   "denomination": "gp"
+  },
+  "quantity": 1,
+  "activities": {
+   "nRTZD4A6vN4JMsqH": {
+    "_id": "nRTZD4A6vN4JMsqH",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "ranged",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "priceUSD": "$7,500"
+  }
+ },
+ "_key": "!items!8sQ9UIMTfqwBmi99"
+}

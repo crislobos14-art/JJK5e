@@ -1,0 +1,73 @@
+{
+ "_id": "RtNGGyzrpvxy3ZZI",
+ "name": "Maximum: Absolute Perspective",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/illusive-mirage.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Illusive Terrain</em></p>\n<p>For 10 cursed energy, you can force a creature in range to make a Cursed Energy saving throw at disadvantage. On a failure, you completely fool all of their senses for 1 minute. You can freely create illusions around the target as if they are under your <em>Cursed Illusion</em> or <em>Illusive Terrain</em>. They automatically fail checks to determine the illusions are fake as their mind rationalizes any inconsistencies. Additionally, the target believes so strongly that your illusions are real that they can actually take damage. Once per turn if you create a harmful illusion, the target can take psychic damage equal to your proficiency bonus in d6s.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Illusive Terrain",
+  "activities": {
+   "hNxdeIY6wB70pybA": {
+    "_id": "hNxdeIY6wB70pybA",
+    "type": "utility",
+    "name": "Action (10 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "hNxdeIY6wB70pybA": 10
+   },
+   "prereq": {
+    "features": [
+     [
+      "Illusive Terrain"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "0zKSvuqnQNE6NMsP",
+ "sort": 300,
+ "_key": "!items!RtNGGyzrpvxy3ZZI"
+}

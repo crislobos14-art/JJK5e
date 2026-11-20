@@ -1,0 +1,42 @@
+{
+ "_id": "N0SbXlpggWTIxjjt",
+ "name": "Rock Squad",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/rockstar.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Maximum: Epic Solo</em></p>\n<p>Looks like the band is getting back together! An epic guitar solo is always welcome, but people came for a show. When an allied creature ends their turn within 15 feet of you during your <em>Epic Solo</em>, their next attack or technique deals additional d4 in thunder damage equal to your proficiency bonus.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Maximum: Epic Solo",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Maximum: Epic Solo"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "68qyxNdSSfIl8CWR",
+ "sort": 300,
+ "_key": "!items!N0SbXlpggWTIxjjt"
+}

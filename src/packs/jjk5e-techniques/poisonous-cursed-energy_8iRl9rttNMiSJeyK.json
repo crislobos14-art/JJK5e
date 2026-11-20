@@ -1,0 +1,114 @@
+{
+ "_id": "8iRl9rttNMiSJeyK",
+ "name": "Poisonous Cursed Energy",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/moon-dregs.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Moon Dregs — Innate Technique (3rd level)</em></p><p>At 3rd level, your cursed energy has toxic properties which seep into <em>Moon Dregs</em> and empower it. Once per turn, when you or <em>Moon Dregs</em> hit a creature with a melee attack on your turn, you can spend 1 cursed energy to cause the attack to deal an extra 2d6 poison damage. This increases to 4d6 at 6th level, 6d8 at 11th level and 6d10 at 18th level. This damage is not amplified by a critical hit.</p>\n<p>You can replace any of your attacks on your turn with an attack from <em>Moon Dregs</em>.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "NmXVtv6gLY8sVL2e": {
+    "_id": "NmXVtv6gLY8sVL2e",
+    "type": "damage",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "poison"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "NmXVtv6gLY8sVL2e": 1
+   },
+   "technique": "Moon Dregs",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "z6mgJlgIkKDRJURh",
+ "_key": "!items!8iRl9rttNMiSJeyK"
+}

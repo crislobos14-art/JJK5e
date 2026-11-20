@@ -1,0 +1,73 @@
+{
+ "_id": "6DFF0SIfWxiSCKpU",
+ "name": "Maximum: Soul Swap",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/teleportation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Improved Marking</em></p>\n<p>With creative thinking you’ve figured out teleporting the souls of creatures. As an action for 6 CE with two willing creatures you touch, you mark and swap the souls of the creatures. For 1 hour or until you dismiss it (no action required), all of the creatures’ game statistics are swapped except for mental stats (Intelligence, Wisdom, and Charisma) and any non-Physical feats. They lose access to their Innate Technique features and gain the other’s Technique and cursed energy, hit points, racial features, and weapon proficiencies. <br />\n<strong>Body Training</strong>. When the swap ends both creatures are returned to their original bodies, reverting all changes, but each creature can ignore one prerequisite of any feats the other creature used while in their body, except for prerequisites that require you to be or not be a certain race, have a certain cursed technique, require other feats, require a breakthrough, or require you to be a certain class. A creature can only be swapped twice in one month, after which you must wait one month before swapping that creature again. If a creature dies while swapped, the other dies once the duration ends. <br />\n<strong>RCT Training</strong>. Once per month if swapped with an RCT user, after training for the full duration and spending at least 20 CE utilizing RCT, a creature without can roll the d100 to attempt RCT Breakthrough with a +5 bonus to the success range. Even if the roll fails, the success range for future d100 rolls for RCT permanently increases by +1 to a maximum of +3. If you fail this roll 3 times, you can no longer make this roll using Soul Swap.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Improved Marking",
+  "activities": {
+   "Db3MfNDft4wx6loX": {
+    "_id": "Db3MfNDft4wx6loX",
+    "type": "utility",
+    "name": "Action (6 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "1",
+     "units": "hour",
+     "concentration": false
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "Db3MfNDft4wx6loX": 6
+   },
+   "prereq": {
+    "features": [
+     [
+      "Improved Marking"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "giRwgEP8Enx3V3vx",
+ "sort": 300,
+ "_key": "!items!6DFF0SIfWxiSCKpU"
+}

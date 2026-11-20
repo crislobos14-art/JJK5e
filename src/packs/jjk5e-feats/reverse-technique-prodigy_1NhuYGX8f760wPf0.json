@@ -1,0 +1,68 @@
+{
+ "_id": "1NhuYGX8f760wPf0",
+ "name": "Reverse Technique Prodigy",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Reverse Cursed Technique</em></p>\n<p>You have reached new heights with this new type of energy, becoming an unheard prodigy. You can cause a creature you touch to gain the benefits of reverse cursed technique instead of you and can use reverse cursed technique once per turn as a free action.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkRCT"
+  },
+  "requirements": "Must have Reverse Cursed Technique",
+  "activities": {
+   "gCstaBNOw05DrClZ": {
+    "_id": "gCstaBNOw05DrClZ",
+    "type": "utility",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Reverse Cursed Technique"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "r4NXrJGBzO6U71JG",
+ "sort": 300,
+ "_key": "!items!1NhuYGX8f760wPf0"
+}

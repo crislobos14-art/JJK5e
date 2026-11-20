@@ -1,0 +1,42 @@
+{
+ "_id": "8ADaewO9BHNwiGM6",
+ "name": "Flying Nimbus",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/disaster-storms.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Storm Creation</em></p>\n<p>While using <em>Storm Creation</em>, you have a flying speed equal to your walking speed and can hover. When you use <em>Storms of Disaster</em> while flying, you can immediately move up to 10 ft without spending movement or provoking opportunity attacks.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Storm Creation",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Storm Creation"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "D27pyU4vw2lSmHn4",
+ "sort": 200,
+ "_key": "!items!8ADaewO9BHNwiGM6"
+}

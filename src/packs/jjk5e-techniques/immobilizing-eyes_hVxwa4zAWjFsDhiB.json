@@ -1,0 +1,178 @@
+{
+ "_id": "hVxwa4zAWjFsDhiB",
+ "name": "Immobilizing Eyes",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/paralyzing-gaze.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Paralyzing Gaze — Innate Technique (1st level)</em></p><blockquote><p>Your technique allows you to paralyze others with a mere gaze.</p></blockquote><p>Starting at 1st level, you gain the ability to slow anyone you have within line of sight. As an action for 2 CE, you force a creature within 60 ft to make a Dexterity saving throw. On a failure, their movement speed is halved and their attack rolls and AC are reduced by your Cursed Energy modifier until the beginning of your next turn. At the beginning of your next turn, you can spend 1 CE as a bonus action to maintain the technique. If you lose line of sight, the technique automatically ends.<br />\n Using your technique places extreme strain on your eyes. Your eyes have a number of hit points equal to 1/3rd of your maximum hit points(rounded up). Your eyes take 1 damage for every 1 a creature rolls above your save DC to resist your technique. Your eyes regain 1 hit point at the beginning of your turn, unless at 0 hit points. Any HP you regain affects your eyes as well.  If your eyes reach 0 hit points, you are blinded and they can’t regain hit points unless by Reverse Cursed Technique or long rest.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "hHZRC41mn5brBCkQ": {
+    "_id": "hHZRC41mn5brBCkQ",
+    "type": "save",
+    "name": "Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   },
+   "gADipBTrvXlRPeDi": {
+    "_id": "gADipBTrvXlRPeDi",
+    "type": "utility",
+    "name": "Bonus Action (1 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "JH2A80fyDuCz6WAT",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "60",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "hHZRC41mn5brBCkQ": 2,
+    "gADipBTrvXlRPeDi": 1
+   },
+   "technique": "Paralyzing Gaze",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "JH2A80fyDuCz6WAT",
+   "name": "Blinded (Immobilizing Eyes)",
+   "img": "modules/jjk5e/icons/techniques/paralyzing-gaze.svg",
+   "statuses": [
+    "blinded"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "blinded"
+    }
+   },
+   "_key": "!items.effects!hVxwa4zAWjFsDhiB.JH2A80fyDuCz6WAT"
+  }
+ ],
+ "folder": "NgfqZW5WmZKy5Fbs",
+ "_key": "!items!hVxwa4zAWjFsDhiB"
+}

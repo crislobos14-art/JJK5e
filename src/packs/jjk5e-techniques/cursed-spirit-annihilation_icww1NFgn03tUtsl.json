@@ -1,0 +1,91 @@
+{
+ "_id": "icww1NFgn03tUtsl",
+ "name": "Cursed Spirit Annihilation",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/cursed-spirit-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Spirit Manipulation — Cursed Technique Reversal</em></p><p>With your mastery of the Reverse cursed technique, you have now unlocked your reversal, the ability to infuse spirits with positive energy, annihilating them. As an action or reaction for an amount of cursed energy equal to half of the spirit's CR(rounded up) you can target a spirit with a number of hit points equal to twice your CE modifier times twice your proficiency bonus that is within 60 feet of you. The spirit must make a Constitution saving throw. On a failure, they are overloaded with positive energy and die. You can also ignore the conditions if the spirit’s CR is equal to or lower than your proficiency bonus.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Cursed Spirit Manipulation",
+  "activities": {
+   "iDDMRSZhS7reJKiU": {
+    "_id": "iDDMRSZhS7reJKiU",
+    "type": "save",
+    "name": "Reaction",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "60",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Cursed Spirit Manipulation",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Cursed Spirit Manipulation"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!icww1NFgn03tUtsl"
+}

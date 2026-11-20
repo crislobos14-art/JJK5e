@@ -1,0 +1,115 @@
+{
+ "_id": "6SZMvw4njYzRPMkV",
+ "name": "Claws of Calamity",
+ "type": "weapon",
+ "img": "icons/svg/sword.svg",
+ "folder": "5URJFab0BietcWnO",
+ "system": {
+  "description": {
+   "value": "<p>Weapon(Gauntlets), Grade 1</p>\n<p>When attacking with the Claws of Calamity you gain a +3 to attack and damage rolls, and deal 1d12 bludgeoning, slashing or piercing damage. The damage required for Limb Removal for arms increases by 20.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "martialM",
+   "baseItem": ""
+  },
+  "damage": {
+   "base": {
+    "number": 1,
+    "denomination": 6,
+    "types": [
+     "bludgeoning"
+    ]
+   }
+  },
+  "range": {
+   "value": 5,
+   "long": null,
+   "units": "ft",
+   "reach": 5
+  },
+  "properties": [
+   "mgc"
+  ],
+  "proficient": null,
+  "quantity": 1,
+  "activities": {
+   "KRyW0QAhp0N6Nsas": {
+    "_id": "KRyW0QAhp0N6Nsas",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "melee",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   },
+   "cmxz6S5e9wtdJ2gR": {
+    "_id": "cmxz6S5e9wtdJ2gR",
+    "type": "damage",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 12,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "magicalBonus": 3,
+  "rarity": "veryRare"
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "1st Grade"
+  }
+ },
+ "_key": "!items!6SZMvw4njYzRPMkV"
+}

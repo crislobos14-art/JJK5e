@@ -1,0 +1,32 @@
+{
+ "_id": "zD0Ax7q6063LSXAM",
+ "name": "Chosen by the Sparks",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/divergent-fist.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Divergent Fist — Innate Technique (18th level)</em></p><p>Finally, at 18th level, you no longer need to roll for a black flash after a critical hit or using Stance of Sparks, you always hit a black flash. </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Divergent Fist 18"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Divergent Fist",
+   "level": 18
+  }
+ },
+ "folder": "z0OBRtMvDoArKlLl",
+ "_key": "!items!zD0Ax7q6063LSXAM"
+}

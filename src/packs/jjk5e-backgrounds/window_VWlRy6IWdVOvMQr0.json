@@ -1,0 +1,174 @@
+{
+ "_id": "VWlRy6IWdVOvMQr0",
+ "name": "Window",
+ "type": "background",
+ "img": "modules/jjk5e/icons/background.svg",
+ "folder": "CRaGqJh5HQKmdfVy",
+ "system": {
+  "description": {
+   "value": "<p>Windows are the eyes and ears of the jujutsu society, monitoring spiritual activity, identifying incidents, and supporting exorcists in the field. Most Windows are civilians with just enough cursed energy to see curses, while others may be failed sorcerers who could not handle field assignments and now handle deploying veils. Though you may initially lack the power to destroy curses yourself, your vigilance and courage allow others to act before it’s too late.<br />\n<strong>Feat:</strong> Pick one Barrier Feat<br />\n<strong>Skill Proficiency:</strong> Persuasion, Investigation<br />\n<strong>Tool Proficiency:</strong> Calligrapher’s Tools<br />\n<strong>Equipment:</strong> set of fine clothes for work, a pair of cursed glasses that let you see curses, calligrapher’s tools, a wallet with $1,000 dollars.  </p>\n<p><strong>Feature: In the System</strong></p>\n<p>You are recognized by the jujutsu community as a trained observer. You know how to file reports, contact field agents, and navigate the bureaucratic maze between exorcists, schools, and local authorities. You can usually gain an audience with a jujutsu operative or access to minor restricted areas where supernatural activity is being investigated. When you’re in a new area, you can quickly locate the nearest contact point, safe zone, or local informant tied to curse management. Those in the know may not trust you, but they’ll usually hear you out before turning you away.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "identifier": "window",
+  "advancement": {
+   "u9fcwnnaEtjW6oYC": {
+    "_id": "u9fcwnnaEtjW6oYC",
+    "type": "Trait",
+    "level": 0,
+    "title": "Skill Proficiencies",
+    "configuration": {
+     "mode": "default",
+     "grants": [
+      "skills:inv",
+      "skills:per"
+     ],
+     "choices": []
+    },
+    "value": {}
+   },
+   "lRSSg6j5PbKyxXpM": {
+    "_id": "lRSSg6j5PbKyxXpM",
+    "type": "ItemChoice",
+    "level": 0,
+    "title": "Barrier Feat (background feat)",
+    "value": {},
+    "configuration": {
+     "choices": {
+      "0": {
+       "count": 1,
+       "replacement": false
+      }
+     },
+     "allowDrops": true,
+     "type": "feat",
+     "pool": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.zVMxc91806XWgCmh"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.9gVHUilkuZSY75Dq"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.yNND8phtaeBBp4Td"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.8Hqj2GK7SsOPD7IY"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.aaUrnTtPpj4JBrTd"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.rzC1hLKUv2W4uYXK"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.TbNZvfgjVhP0jjqp"
+      }
+     ],
+     "restriction": {
+      "type": "",
+      "subtype": "",
+      "level": ""
+     }
+    }
+   },
+   "Kd3pm4UdJfXvk9yX": {
+    "_id": "Kd3pm4UdJfXvk9yX",
+    "type": "Trait",
+    "level": 0,
+    "title": "Tool Proficiency",
+    "value": {},
+    "configuration": {
+     "mode": "default",
+     "allowReplacements": false,
+     "grants": [
+      "tool:art:calligrapher"
+     ],
+     "choices": []
+    }
+   },
+   "jwGQpw0Ohqiwajg2": {
+    "_id": "jwGQpw0Ohqiwajg2",
+    "type": "ItemChoice",
+    "level": 0,
+    "title": "Mindset",
+    "hint": "Choose the mindset that drives your sorcery (it replaces Inspiration).",
+    "value": {},
+    "configuration": {
+     "choices": {
+      "0": {
+       "count": 1,
+       "replacement": false
+      }
+     },
+     "allowDrops": true,
+     "type": "feat",
+     "pool": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.0DRc7Ftd4oRxhmPP"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.tfptMmAPJyi5Fa28"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.BDtYSEj7wP0CSJSd"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.LDbMTb0R84yNZUaZ"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.z6LYQIl1YlosCyL7"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.AypG9meZokT7ds3Q"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.BOsYXnjKpnbtwfmW"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.BXVn0o2H4L9n82TN"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.g4KqCmc1MqQHfLFV"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.NEra1YZ6BxPjoGdV"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.H01e3yAvW04BYK0o"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.66G2J5gn804C8EZI"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.mLhSUvyfKRj4jU5u"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.5WUvEI9FuZelFdaw"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.M6qTsvh64leWYpJm"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.a7Rh5bEHZv0PyaA8"
+      }
+     ],
+     "restriction": {
+      "type": "",
+      "subtype": "",
+      "level": ""
+     }
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "_key": "!items!VWlRy6IWdVOvMQr0"
+}

@@ -1,0 +1,118 @@
+{
+ "_id": "5GHs3Dqd6VxtGaK1",
+ "name": "Innate Technique: Eight Heads",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/eight-heads.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>One of your ancestors devoured Yamata no Orochi, the Eight Headed Serpent, creating a hereditary technique with its power.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.iexwqjWgin5qIIIF]{Eight Lives}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.Gnvd68sXDmEW2FWO]{Collective Will}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.3IWNlxcrnJFvNxap]{Fangs of Orochi}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.QG7cUSxrMY5gk5jI]{Maximum: Sacrifice}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.XZKCNxG6TgtmJLys]{Domain Expansion: Ama ga Fuchi}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "tNhDelVlmVWOF35K": {
+    "_id": "tNhDelVlmVWOF35K",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Eight Heads (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.iexwqjWgin5qIIIF",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "2Lrx9Kxosupmy0Yj": {
+    "_id": "2Lrx9Kxosupmy0Yj",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Eight Heads (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.Gnvd68sXDmEW2FWO",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "bc3FBvM9uwadKabK": {
+    "_id": "bc3FBvM9uwadKabK",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Eight Heads (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.3IWNlxcrnJFvNxap",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "Be3OkIp1pTBPJxb3": {
+    "_id": "Be3OkIp1pTBPJxb3",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Eight Heads (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.QG7cUSxrMY5gk5jI",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "D65hKrm9D3OSKxpJ": {
+    "_id": "D65hKrm9D3OSKxpJ",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Eight Heads (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.XZKCNxG6TgtmJLys",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Eight Heads"
+  }
+ },
+ "_key": "!items!5GHs3Dqd6VxtGaK1"
+}

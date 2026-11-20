@@ -1,0 +1,91 @@
+{
+ "_id": "ANxRI3BaVm82ka6o",
+ "name": "Domain Expansion: Deadly Sentencing",
+ "img": "icons/svg/d20-grey.svg",
+ "description": "",
+ "formula": "1d20",
+ "replacement": true,
+ "displayRoll": true,
+ "results": [
+  {
+   "_id": "iOJ7xS9MoFdjiiT3",
+   "type": "text",
+   "text": "<p><strong>Innocent: The person is innocent but accused of a heinous crime which is easily excusable. You fail unless the defendant admits to it for some reason, if so a dependent punishment can apply.</strong></p>",
+   "description": "<p><strong>Innocent: The person is innocent but accused of a heinous crime which is easily excusable. You fail unless the defendant admits to it for some reason, if so a dependent punishment can apply.</strong></p>",
+   "name": "Innocent: The person is innocent but accused of a heinous crime which is easily excusable. You fail unless the defendant admits to it for some reason, if so a dependent punishment can apply.",
+   "img": "icons/svg/d20-black.svg",
+   "weight": 1,
+   "range": [
+    1,
+    1
+   ],
+   "drawn": false,
+   "_key": "!tables.results!ANxRI3BaVm82ka6o.iOJ7xS9MoFdjiiT3"
+  },
+  {
+   "_id": "2m1xvMOahzWnZHz2",
+   "type": "text",
+   "text": "<p><strong>Guilty: The person is guilty of a small crime with minimum evidence, your roll is normal. Confiscation</strong></p>",
+   "description": "<p><strong>Guilty: The person is guilty of a small crime with minimum evidence, your roll is normal. Confiscation</strong></p>",
+   "name": "Guilty: The person is guilty of a small crime with minimum evidence, your roll is normal. Confiscation",
+   "img": "icons/svg/d20-black.svg",
+   "weight": 1,
+   "range": [
+    2,
+    9
+   ],
+   "drawn": false,
+   "_key": "!tables.results!ANxRI3BaVm82ka6o.2m1xvMOahzWnZHz2"
+  },
+  {
+   "_id": "0ZnLe2JYDTLSqTN6",
+   "type": "text",
+   "text": "<p><strong>Very Guilty: The person is guilty of a crime, and you have good evidence, your roll is at advantage. Confiscation</strong></p>",
+   "description": "<p><strong>Very Guilty: The person is guilty of a crime, and you have good evidence, your roll is at advantage. Confiscation</strong></p>",
+   "name": "Very Guilty: The person is guilty of a crime, and you have good evidence, your roll is at advantage. Confiscation",
+   "img": "icons/svg/d20-black.svg",
+   "weight": 1,
+   "range": [
+    10,
+    14
+   ],
+   "drawn": false,
+   "_key": "!tables.results!ANxRI3BaVm82ka6o.0ZnLe2JYDTLSqTN6"
+  },
+  {
+   "_id": "wWBJQlVODzPkwOf0",
+   "type": "text",
+   "text": "<p><strong>Severely Guilty: The person is guilty of a severe crime, and you have decent evidence. Death Penalty</strong></p>",
+   "description": "<p><strong>Severely Guilty: The person is guilty of a severe crime, and you have decent evidence. Death Penalty</strong></p>",
+   "name": "Severely Guilty: The person is guilty of a severe crime, and you have decent evidence. Death Penalty",
+   "img": "icons/svg/d20-black.svg",
+   "weight": 1,
+   "range": [
+    15,
+    19
+   ],
+   "drawn": false,
+   "_key": "!tables.results!ANxRI3BaVm82ka6o.wWBJQlVODzPkwOf0"
+  },
+  {
+   "_id": "i2L1ZXWkfnEalFbr",
+   "type": "text",
+   "text": "<p><strong>Unforgivably Guilty: The person is guilty beyond a doubt of an unforgivable sin, you instantly succeed. Death Penalty, Confiscation</strong></p>",
+   "description": "<p><strong>Unforgivably Guilty: The person is guilty beyond a doubt of an unforgivable sin, you instantly succeed. Death Penalty, Confiscation</strong></p>",
+   "name": "Unforgivably Guilty: The person is guilty beyond a doubt of an unforgivable sin, you instantly succeed. Death Penalty, Confiscation",
+   "img": "icons/svg/d20-black.svg",
+   "weight": 1,
+   "range": [
+    20,
+    20
+   ],
+   "drawn": false,
+   "_key": "!tables.results!ANxRI3BaVm82ka6o.i2L1ZXWkfnEalFbr"
+  }
+ ],
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": null,
+ "_key": "!tables!ANxRI3BaVm82ka6o"
+}

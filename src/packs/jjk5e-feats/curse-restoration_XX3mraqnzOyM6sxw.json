@@ -1,0 +1,81 @@
+{
+ "_id": "XX3mraqnzOyM6sxw",
+ "name": "Curse Restoration",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/cursed-spirit-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Curse Infused Spirits</em></p>\n<p>You have learned to weaponize the affinity cursed spirits have and utilize to regenerate and can activate it using your own cursed energy. Once per turn as an action, bonus action, or reaction you can spend up to your cursed energy modifier to restore 5 hit points per cursed energy spent to a cursed spirit you have summoned within 60 ft of you. At 11th level this becomes 10 hit points per cursed energy.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Curse Infused Spirits",
+  "activities": {
+   "E2691k5Yf4n2s6Mo": {
+    "_id": "E2691k5Yf4n2s6Mo",
+    "type": "utility",
+    "name": "Bonus Action (1+ CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "max(1, max(@abilities.wis.mod, @abilities.cha.mod))"
+     }
+    },
+    "range": {
+     "value": "60",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceSteps": {
+    "E2691k5Yf4n2s6Mo": 1
+   },
+   "ceCosts": {
+    "E2691k5Yf4n2s6Mo": 1
+   },
+   "prereq": {
+    "features": [
+     [
+      "Curse Infused Spirits"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "808kDeN1ffx0XP3c",
+ "sort": 100,
+ "_key": "!items!XX3mraqnzOyM6sxw"
+}

@@ -1,0 +1,42 @@
+{
+ "_id": "uo4SCaz3rUJpiXA9",
+ "name": "Partial Manifestation Versatility",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/vengeful-spirit-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Partial Manifestation</em></p>\n<p>Your manipulation over the manifestation of limbs and such increase. The range of your partial manifestation attacks increases to 15 ft. Additionally, when you hit with one of these attacks, you can attempt to grapple or shove the target as part of the attack.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Partial Manifestation",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Partial Manifestation"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "HWYMcdZMnHXtfOxG",
+ "sort": 100,
+ "_key": "!items!uo4SCaz3rUJpiXA9"
+}

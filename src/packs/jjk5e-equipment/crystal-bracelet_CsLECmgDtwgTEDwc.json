@@ -1,0 +1,88 @@
+{
+ "_id": "CsLECmgDtwgTEDwc",
+ "name": "Crystal Bracelet",
+ "type": "equipment",
+ "img": "icons/svg/explosion.svg",
+ "folder": "RVpkkOiLvLva4ZNf",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Item, Grade 4</em></p><p>Three small, crystal beads are strung on this leather bracelet. As an action, you can pluck one bead from the bracelet to gain Advantage on Strength (Athletics) checks for 1 minute. A bead disappears immediately after it’s plucked. Once all three beads have been plucked, the bracelet loses its magic.</p>"
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "rarity": "common",
+  "quantity": 1,
+  "attunement": "",
+  "type": {
+   "value": "trinket",
+   "baseItem": ""
+  },
+  "armor": {
+   "value": null
+  },
+  "activities": {
+   "AuolEaFbEPsKgU0N": {
+    "_id": "AuolEaFbEPsKgU0N",
+    "type": "utility",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "4th Grade"
+  }
+ },
+ "effects": [
+  {
+   "_id": "QC5kfdHOBRm69PDz",
+   "name": "Crystal Bracelet (toggle)",
+   "img": null,
+   "changes": [
+    {
+     "key": "system.skills.ath.roll.mode",
+     "mode": 2,
+     "value": "1",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!CsLECmgDtwgTEDwc.QC5kfdHOBRm69PDz"
+  }
+ ],
+ "_key": "!items!CsLECmgDtwgTEDwc"
+}

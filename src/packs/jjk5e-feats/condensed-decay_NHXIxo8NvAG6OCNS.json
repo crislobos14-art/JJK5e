@@ -1,0 +1,42 @@
+{
+ "_id": "NHXIxo8NvAG6OCNS",
+ "name": "Condensed Decay",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/rot.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Scarlet Rot</em></p>\n<p>You have learned to increase the potency of your blood’s properties. When you use a Rot Technique, you can spend additional HP up to twice your CE modifier to increase the damage dice of acid dealt by your technique by one tier for every 2 HP spent (d8&lt;d10&lt;d12) to a max of d12. </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Scarlet Rot",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Scarlet Rot"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "gN0JGJzsnMHTyd5r",
+ "sort": 200,
+ "_key": "!items!NHXIxo8NvAG6OCNS"
+}

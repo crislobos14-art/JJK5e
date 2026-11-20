@@ -1,0 +1,32 @@
+{
+ "_id": "apSxPjIaSsyM1DMq",
+ "name": "Dessert Deluge",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/cursed-cannon.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Cannon — Innate Technique (6th level)</em></p><p>Beginning at 6th level, your shots are malleable and extremely difficult to avoid. Once per attack roll, you can choose to spend up to 5 cursed energy points to add to the attack roll.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Cannon 6"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Cursed Cannon",
+   "level": 6
+  }
+ },
+ "folder": "jTg0Bf76dJeyMkqJ",
+ "_key": "!items!apSxPjIaSsyM1DMq"
+}

@@ -1,0 +1,32 @@
+{
+ "_id": "pCVNLTJfW9n5olZi",
+ "name": "Ritual of Resurrection",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/seance.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Seance — Innate Technique (6th level)</em></p><p>At 6th level, you have learned how to create a prolonged ritual to make your technique more powerful. When you use your technique, you can start a ritual instead of immediately shapeshifting. You must make a Full Turn Action (Action + Bonus Action + Movement) every turn for 1 minute to perform this ritual while maintaining concentration. If you lose concentration, the ritual stops and you must start over. After you have finished the ritual, you or a willing creature within 30 ft can transform into the dead humanoid if the CR or level is equal to or lower than your level + your proficiency bonus.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Seance 6"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Seance",
+   "level": 6
+  }
+ },
+ "folder": "z1MGG49oTB7xZ6Pc",
+ "_key": "!items!pCVNLTJfW9n5olZi"
+}

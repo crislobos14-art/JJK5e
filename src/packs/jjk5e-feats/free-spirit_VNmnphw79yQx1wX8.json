@@ -1,0 +1,68 @@
+{
+ "_id": "VNmnphw79yQx1wX8",
+ "name": "Free Spirit",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/vengeful-spirit-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Stronger Bond</em></p>\n<p>You and your spirit have finally made amends, making it finally pass on to the afterlife. However, the spirit left you a present before going. Your Vengeful Spirit is now fully under your control, not being berserk when you summon it. It is now a Shikigami instead of a Cursed Spirit. Although you can use your action to give it an order, making it act on its own to complete the order. While summoned, you can use your action to borrow its power, drawing cursed energy equal to your level into yourself from its pool once per day. The spirit can only be active for a number of minutes equal to your CE modifier per day, these minutes do not need to be consecutive.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Stronger Bond",
+  "activities": {
+   "iT1qO4WTIKS5q9PJ": {
+    "_id": "iT1qO4WTIKS5q9PJ",
+    "type": "utility",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Stronger Bond"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "HWYMcdZMnHXtfOxG",
+ "sort": 300,
+ "_key": "!items!VNmnphw79yQx1wX8"
+}

@@ -1,0 +1,107 @@
+{
+ "_id": "VSqFE0jfDFne8RpL",
+ "name": "Ember Insects",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/disaster-flames.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Disaster Flames — Innate Technique (6th level)</em></p><p>At 6th level, you have learned how to create small insect shikigami from your body. As an action for 4 Cursed Energy, you can create a swarm of Ember Insects Swarm within 5 ft. These shikigami act immediately after your turn.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "B0ox2OBVuO4ILdAJ": {
+    "_id": "B0ox2OBVuO4ILdAJ",
+    "type": "utility",
+    "name": "Action (4 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "5",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "B0ox2OBVuO4ILdAJ": 4
+   },
+   "technique": "Disaster Flames",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "Xs1qvLjpsB4bwM5D",
+ "_key": "!items!VSqFE0jfDFne8RpL"
+}

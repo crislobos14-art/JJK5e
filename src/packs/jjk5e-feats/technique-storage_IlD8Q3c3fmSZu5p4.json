@@ -1,0 +1,42 @@
+{
+ "_id": "IlD8Q3c3fmSZu5p4",
+ "name": "Technique Storage",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/vengeful-spirit-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Mimicry</em></p>\n<p>When you copy techniques, you can keep more in the Vengeful Spirit. You can store twice as many techniques, with any additional techniques being stored within your spirit. You must use an action to retrieve them while within 5 ft of the Vengeful Spirit while it is summoned.<br />\n While your Vengeful Spirit is summoned, the number of times you can use a copied technique feature before it disappears increases by your CE modifier. The increased number of uses does not reset when your Vengeful Spirit is resummoned.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Mimicry",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Mimicry"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "HWYMcdZMnHXtfOxG",
+ "sort": 200,
+ "_key": "!items!IlD8Q3c3fmSZu5p4"
+}

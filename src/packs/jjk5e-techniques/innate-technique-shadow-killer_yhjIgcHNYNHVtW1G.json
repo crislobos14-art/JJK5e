@@ -1,0 +1,118 @@
+{
+ "_id": "yhjIgcHNYNHVtW1G",
+ "name": "Innate Technique: Shadow Killer",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/shadow-killer.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>You possess the eerie ability to kill without touching.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.STzACDlhuJvyy7Il]{Shadow Strike}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.k99PoGAn3z4E5y6l]{Dark Binding}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.56DoYOAjvHn5LVtK]{Void Steps}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.waS7WxGlqH3cHO7I]{Shadows of Mortality}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.dK1MasxExSPNNJSp]{Domain Expansion: Zero Hour}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "8JwelMqBeI0CMWB9": {
+    "_id": "8JwelMqBeI0CMWB9",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Shadow Killer (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.STzACDlhuJvyy7Il",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "PERbxbJt9cZpAX92": {
+    "_id": "PERbxbJt9cZpAX92",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Shadow Killer (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.k99PoGAn3z4E5y6l",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "6fjlE0FI1EHdDRD1": {
+    "_id": "6fjlE0FI1EHdDRD1",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Shadow Killer (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.56DoYOAjvHn5LVtK",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "cAZAIjmfQuV2x2Wo": {
+    "_id": "cAZAIjmfQuV2x2Wo",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Shadow Killer (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.waS7WxGlqH3cHO7I",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "7CopqwLqNyns3Ezv": {
+    "_id": "7CopqwLqNyns3Ezv",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Shadow Killer (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.dK1MasxExSPNNJSp",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Shadow Killer"
+  }
+ },
+ "_key": "!items!yhjIgcHNYNHVtW1G"
+}

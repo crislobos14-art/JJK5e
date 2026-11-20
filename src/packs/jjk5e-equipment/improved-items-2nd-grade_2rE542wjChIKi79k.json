@@ -1,0 +1,30 @@
+{
+ "_id": "2rE542wjChIKi79k",
+ "name": "Improved Items (2nd Grade)",
+ "type": "loot",
+ "img": "icons/svg/explosion.svg",
+ "folder": "iccGNPZSINUipQjv",
+ "system": {
+  "type": {
+   "value": "gear"
+  },
+  "description": {
+   "value": "<p><em>2nd Grade category rule.</em></p>\n<p>These items are filled with Cursed Energy which allows them to become more effective. This is represented by adding a +2 to related things.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "rarity": "rare",
+  "quantity": 1
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "2nd Grade"
+  }
+ },
+ "_key": "!items!2rE542wjChIKi79k"
+}

@@ -1,0 +1,190 @@
+{
+ "_id": "wkzTg4f1GGLksKAv",
+ "name": "Ice Fall",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/ice-formation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Ice Formation — Innate Technique (11th level)</em></p><p>Once you reach 11th level, you learn a great execution method that makes sure your enemies won't escape. As an action for 8 cursed energy, you fall prone until the beginning of your next turn to create ice on the ground. You telepathically manipulate the ice created, launching one for every creature within 30 ft of you of your choice. Make a cursed energy attack roll, on a hit they take 1d10 cold damage and become restrained.<br />\n The creature can make a Strength saving throw at the beginning of its turns to break the ice and end the restrained condition.<br />\n Hitting or missing, giant spikes of ice will fall from the sky on top of the targeted creatures, forcing them to make a Dexterity saving throw. On a failure, they take 6d8 cold damage and 6d8 piercing damage. On a success, they take half as much damage.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "XXqVRtHuHqkmPL8j": {
+    "_id": "XXqVRtHuHqkmPL8j",
+    "type": "save",
+    "name": "Action (8 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "str"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "cold"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "izMKZvLQhIcYxIav",
+      "onSave": false
+     },
+     {
+      "_id": "zHG47wYGd8WKGahy",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "30",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "XXqVRtHuHqkmPL8j": 8
+   },
+   "technique": "Ice Formation",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "izMKZvLQhIcYxIav",
+   "name": "Prone (Ice Fall)",
+   "img": "modules/jjk5e/icons/techniques/ice-formation.svg",
+   "statuses": [
+    "prone"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "rounds": 1
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!wkzTg4f1GGLksKAv.izMKZvLQhIcYxIav"
+  },
+  {
+   "_id": "zHG47wYGd8WKGahy",
+   "name": "Restrained (Ice Fall)",
+   "img": "modules/jjk5e/icons/techniques/ice-formation.svg",
+   "statuses": [
+    "restrained"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "rounds": 1
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "restrained"
+    }
+   },
+   "_key": "!items.effects!wkzTg4f1GGLksKAv.zHG47wYGd8WKGahy"
+  }
+ ],
+ "folder": "w9n29Anzntr6P6uo",
+ "_key": "!items!wkzTg4f1GGLksKAv"
+}

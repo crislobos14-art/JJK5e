@@ -1,0 +1,131 @@
+{
+ "_id": "XgpkqX2WVbuoEe3W",
+ "name": "Teleport",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/teleportation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Teleportation — Innate Technique (1st level)</em></p><blockquote><p>You can teleport yourself and others to marked locations while not being viewed.</p></blockquote><p>Beginning at 1st level, your technique allows you to teleport to destinations you have marked. As a bonus action for 1 cursed energy, you can mark a person, location, or object which you can touch. You can have up to twice your CE modifier in marks at once and your marks remain for up to 12 hours. You can remove any of your marks at will.<br />\n As an action for 2 cursed energy, while not being viewed, you and any willing creatures within 5ft of you that are also not being viewed teleport up to 500 feet to a mark of your choice.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "wqrqC6e1z4KlqTfS": {
+    "_id": "wqrqC6e1z4KlqTfS",
+    "type": "utility",
+    "name": "Bonus Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   },
+   "HDAzFniPvfLmVc8K": {
+    "_id": "HDAzFniPvfLmVc8K",
+    "type": "utility",
+    "name": "Action (2 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "wqrqC6e1z4KlqTfS": 1,
+    "HDAzFniPvfLmVc8K": 2
+   },
+   "technique": "Teleportation",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "1SK1DEKKg87PUQf6",
+ "_key": "!items!XgpkqX2WVbuoEe3W"
+}

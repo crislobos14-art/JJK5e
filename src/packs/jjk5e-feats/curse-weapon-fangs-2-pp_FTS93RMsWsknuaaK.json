@@ -1,0 +1,109 @@
+{
+ "_id": "FTS93RMsWsknuaaK",
+ "name": "Curse Weapon: Fangs (2 PP)",
+ "type": "feat",
+ "img": "icons/svg/upgrade.svg",
+ "system": {
+  "description": {
+   "value": "<p>Once per turn when you hit a creature with a fang attack, you can force the creature to take a Strength saving throw (DC 8 + your proficiency bonus + your Strength modifier). On a failed save, the target is dragged down and falls prone. You must have the <em>Cursed Weapon</em> attribute and choose fang to take this attribute.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTrait"
+  },
+  "requirements": "Cursed Spirit, 2 Profane Points",
+  "activities": {
+   "zzIU25oDtaB1Ikmh": {
+    "_id": "zzIU25oDtaB1Ikmh",
+    "type": "save",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "str"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    },
+    "effects": [
+     {
+      "_id": "oEsrH2xMgidmYw0b",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "profaneCost": 2,
+   "prereq": {
+    "prefixes": [
+     [
+      "Cursed Spirit"
+     ]
+    ]
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "oEsrH2xMgidmYw0b",
+   "name": "Prone (Curse Weapon: Fangs (2 PP))",
+   "img": "systems/dnd5e/icons/svg/statuses/prone.svg",
+   "statuses": [
+    "prone"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!FTS93RMsWsknuaaK.oEsrH2xMgidmYw0b"
+  }
+ ],
+ "folder": "ar3Bgj4YHvYRp8DL",
+ "sort": 800,
+ "_key": "!items!FTS93RMsWsknuaaK"
+}

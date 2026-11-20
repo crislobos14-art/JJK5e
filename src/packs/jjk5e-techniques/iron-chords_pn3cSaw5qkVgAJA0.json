@@ -1,0 +1,32 @@
+{
+ "_id": "pn3cSaw5qkVgAJA0",
+ "name": "Iron Chords",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/cursed-speech.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Speech — Innate Technique (6th level)</em></p><p>When you reach 6th level,  due to the constant usage of your vocal cords, they have gotten stronger. Your vocal cords' hit points increase to half your maximum hit points(rounded up). </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Speech 6"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Cursed Speech",
+   "level": 6
+  }
+ },
+ "folder": "hKdstL12BA2dMsHA",
+ "_key": "!items!pn3cSaw5qkVgAJA0"
+}

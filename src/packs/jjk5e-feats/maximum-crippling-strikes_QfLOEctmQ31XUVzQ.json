@@ -1,0 +1,45 @@
+{
+ "_id": "QfLOEctmQ31XUVzQ",
+ "name": "Maximum: Crippling Strikes",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/triple-core.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Unblockable Blows</em></p>\n<p>You have mastered your <em>Unblockable Blows</em> core option. Your blows can now treat immunity as resistance by spending 1 additional CE. You can now spend more than 1 CE in an attack.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Unblockable Blows",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "options": [
+     [
+      "Unblockable Blows"
+     ]
+    ]
+   },
+   "modifies": [
+    "Upgraded Form"
+   ]
+  }
+ },
+ "folder": "82rPUBoGJ4IokyPC",
+ "sort": 100,
+ "_key": "!items!QfLOEctmQ31XUVzQ"
+}

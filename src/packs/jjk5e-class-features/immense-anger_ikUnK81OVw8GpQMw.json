@@ -1,0 +1,77 @@
+{
+ "_id": "ikUnK81OVw8GpQMw",
+ "name": "Immense Anger",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>At 13th level, your rage is growing deeper, making you feel almost invincible. When you enter your fury, you gain the following benefits:</p>\n<ul>\n<li>\n<p>When you take bludgeoning, piercing or slashing damage, the damage is decreased by twice your proficiency bonus.  </p>\n</li>\n<li>\n<p>You deal two additional damage dice when you score a critical hit with a melee weapon.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Heavenly Restriction (Vengeful) 13"
+ },
+ "flags": {
+  "jjk5e": {
+   "modifies": [
+    "Vengeful Fury"
+   ]
+  }
+ },
+ "folder": "vonv3wc4YmJGEBE1",
+ "effects": [
+  {
+   "_id": "3Vl7L2Vsddmznm4f",
+   "name": "Fury: Immense Anger",
+   "img": "modules/jjk5e/icons/feature.svg",
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "auto": "group",
+     "group": "fury"
+    }
+   },
+   "changes": [
+    {
+     "key": "system.traits.dm.amount.bludgeoning",
+     "mode": 2,
+     "value": "-@prof",
+     "priority": null
+    },
+    {
+     "key": "system.traits.dm.amount.piercing",
+     "mode": 2,
+     "value": "-@prof",
+     "priority": null
+    },
+    {
+     "key": "system.traits.dm.amount.slashing",
+     "mode": 2,
+     "value": "-@prof",
+     "priority": null
+    },
+    {
+     "key": "flags.dnd5e.meleeCriticalDamageDice",
+     "mode": 2,
+     "value": "1",
+     "priority": null
+    }
+   ],
+   "_key": "!items.effects!ikUnK81OVw8GpQMw.3Vl7L2Vsddmznm4f"
+  }
+ ],
+ "_key": "!items!ikUnK81OVw8GpQMw"
+}

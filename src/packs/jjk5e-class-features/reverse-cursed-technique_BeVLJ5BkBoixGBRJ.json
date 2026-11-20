@@ -1,0 +1,54 @@
+{
+ "_id": "BeVLJ5BkBoixGBRJ",
+ "name": "Reverse Cursed Technique",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/ce.svg",
+ "system": {
+  "description": {
+   "value": "<p>Starting at 5th level, you have been born with a great aptitude for healing others, despite never really studying medicine. You will gain the Reverse Cursed Technique feature. Your reverse cursed technique is stronger than normal, letting you use 20 hit points from your RCT pool per cursed energy spent instead of 10.<br />\n In addition, you gain proficiency in the Medicine skill. If you  are already proficient, you gain expertise instead. If you already have expertise you gain advantage. Whenever you make a medicine check to stabilize someone and succeed, the creature regains 1 hit point.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Support Specialist 5"
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "8dvEkkHwQxeLRi3Y",
+ "effects": [
+  {
+   "_id": "vtl62rRqZQVPRTTr",
+   "name": "Reverse Cursed Technique",
+   "img": "modules/jjk5e/icons/ce.svg",
+   "changes": [
+    {
+     "key": "system.skills.med.value",
+     "mode": 4,
+     "value": "1",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "auto": "passive"
+    }
+   },
+   "_key": "!items.effects!BeVLJ5BkBoixGBRJ.vtl62rRqZQVPRTTr"
+  }
+ ],
+ "_key": "!items!BeVLJ5BkBoixGBRJ"
+}

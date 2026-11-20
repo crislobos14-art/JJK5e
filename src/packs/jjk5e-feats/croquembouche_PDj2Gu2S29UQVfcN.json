@@ -1,0 +1,71 @@
+{
+ "_id": "PDj2Gu2S29UQVfcN",
+ "name": "Croquembouche",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/cursed-cannon.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Granite Blast</em></p>\n<p>You have realized a new way to utilize your massive output. Once per turn when you take the Attack action on your turn, you can spend 1 CE to replace an attack with a use of your <em>Granite Blast</em> as a melee cursed energy attack. This cannot be used with <em>Grape Choux.</em></p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Granite Blast",
+  "activities": {
+   "v9ss24w8aOAbQREB": {
+    "_id": "v9ss24w8aOAbQREB",
+    "type": "utility",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "v9ss24w8aOAbQREB": 1
+   },
+   "prereq": {
+    "features": [
+     [
+      "Granite Blast"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "21KhImE6dWZGP2gJ",
+ "sort": 100,
+ "_key": "!items!PDj2Gu2S29UQVfcN"
+}

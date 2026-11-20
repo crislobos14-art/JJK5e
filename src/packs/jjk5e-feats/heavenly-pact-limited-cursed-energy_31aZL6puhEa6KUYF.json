@@ -1,0 +1,34 @@
+{
+ "_id": "31aZL6puhEa6KUYF",
+ "name": "Heavenly Pact: Limited Cursed Energy",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/pact.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Creeps and Curses V.3.1</em></p><p><em>Heavenly Restriction or Heavenly Pact refers to a binding vow forced on a sorcerer's body at birth. This usually affects their cursed energy in exchange for limitations or improvements on their body. The most notable is the absolute physicality of Zenin Toji, but there are many different types of Heavenly Pacts. A creature can only have one Heavenly Pact. If the limitations of the Heavenly Pact are superseded, anything gained becomes null.</em></p>\n<p>Though the Heavenly Restriction of Zenin Toji is widely considered to be the strongest, it is impossibly rare and considered an enigma. The Limited Cursed Energy restriction is still rare, but more common. A person with this Heavenly Restriction has lower than average cursed energy and will heavily struggle to utilize it properly. Depending on how much their Heavenly Restriction limits them, their physical attributes increase accordingly.</p>\n<table>\n<thead>\n<tr>\n<th>CE Limitation</th>\n<th>Physical Increase</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>You do not add your CE modifier to your CE max</td>\n<td>+2 ASI</td>\n</tr>\n<tr>\n<td>You only gain +1 CE per 2 levels</td>\n<td>+2 ASI, +1 HP per level</td>\n</tr>\n<tr>\n<td>You cannot utilize Basic CE Manipulation</td>\n<td>+4 ASI</td>\n</tr>\n<tr>\n<td>You cannot see Cursed Spirits normally</td>\n<td>+4 ASI</td>\n</tr>\n<tr>\n<td>You cannot utilize Cursed Energy in any way</td>\n<td>+14 ASI, +2 HP per level</td>\n</tr>\n</tbody>\n</table>\n<ul>\n<li>\n<p>When you increase an Ability Score with this Heavenly Restriction, you cannot increase it above 24 (26 at 6th level).</p>\n</li>\n<li>\n<p>If you choose the inability to utilize CE in any way, you still possess the CE of an ordinary person. However you cannot have an Innate Technique, but gain a Physical or Skill feat at the level you would gain an Innate Technique feature.</p>\n</li>\n<li>\n<p>If you choose the inability to utilize CE in any way, you are ineligible for the first 3 CE Limitations. You instead gain a Physical Feat of your choice at 6th, 10th and 14th level.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkPact"
+  },
+  "requirements": "Heavenly Pact (only one per creature)",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "TuD75Es2qNSvVZN6",
+ "sort": 200,
+ "_key": "!items!31aZL6puhEa6KUYF"
+}

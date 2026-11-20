@@ -1,0 +1,65 @@
+{
+ "_id": "3FdbQftL8EfxGKEe",
+ "name": "Precognition",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Mind Improvements: Your body has increased both physically and mentally. You can have a number of these improvements equal to your Wisdom modifier. ---</em></p>\n<p>Minor Precognition, 1 Body Point, 9th level<br />\nYour precognition is getting better, now being able to even predict what your opponents will do. You cannot be surprised while conscious, and you have advantage on Dexterity saving throws against an effect you can see, such as traps or spells. You can't receive this benefit if you're blinded, deafened or incapacitated.  </p>\n<hr />",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Heavenly Restriction 2"
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "level": 9,
+    "features": [
+     [
+      "Minor Precognition"
+     ]
+    ]
+   },
+   "bodyCost": 1,
+   "bodyCategory": "wis"
+  }
+ },
+ "effects": [
+  {
+   "_id": "oN9yiApnmqVANabV",
+   "name": "Precognition (toggle)",
+   "img": "modules/jjk5e/icons/feature.svg",
+   "changes": [
+    {
+     "key": "system.abilities.dex.save.roll.mode",
+     "mode": 2,
+     "value": "1",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!3FdbQftL8EfxGKEe.oN9yiApnmqVANabV"
+  }
+ ],
+ "folder": "ybhWCA27cbgjKLpN",
+ "_key": "!items!3FdbQftL8EfxGKEe"
+}

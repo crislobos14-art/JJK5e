@@ -1,0 +1,95 @@
+{
+ "_id": "2TX7VyPgCnFRXgkD",
+ "name": "Parthenogenesis",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/disaster-vermin.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Disaster Vermin — Innate Technique (11th level)</em></p><p>At 11th level, you have learned that your instinctual hunger is not without reason, but exists to stimulate the desire to multiply. As an action for 8 cursed energy, you create an insect egg affixed to a wall/ceiling. The cost to create the egg decreases by 1 CE per creature devoured by you or a swarm in the last 8 hours (min cost 1).</p>\n<p>The egg has an AC equal to your Cursed Energy save DC and hit points equal to twice your level. If you die within an hour of creating the egg, it births an identical copy of you from it with current hit points equal to half your hit point maximum. Your cursed energy is passed on after your death, giving your new body your remaining cursed energy from when you died. You do not regain any gear you had beforehand.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "53YDe0Ck0x7iSj6P": {
+    "_id": "53YDe0Ck0x7iSj6P",
+    "type": "utility",
+    "name": "Action (8 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "53YDe0Ck0x7iSj6P": 8
+   },
+   "technique": "Disaster Vermin",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "THumTyfrAaZo0XzQ",
+ "_key": "!items!2TX7VyPgCnFRXgkD"
+}

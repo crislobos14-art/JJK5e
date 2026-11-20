@@ -1,0 +1,29 @@
+{
+ "_id": "YvDrRNaCdfnn3KeN",
+ "name": "Extra Attack",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>At 5th level, you can now attack twice instead of once when you take the attack action. This increases to three times instead of twice at 11th level. It increases to four times at 18th level, and to five times at 20th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Heavenly Restriction 5"
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "hWqAX9TqrOvuq1FE",
+ "_key": "!items!YvDrRNaCdfnn3KeN"
+}

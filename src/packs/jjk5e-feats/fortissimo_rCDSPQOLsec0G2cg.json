@@ -1,0 +1,71 @@
+{
+ "_id": "rCDSPQOLsec0G2cg",
+ "name": "Fortissimo",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/prayer-song.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Marcado</em></p>\n<p>Once per turn, when you hit a creature with an attack while Prayer is active, you can spend 3 CE to deal maximum damage.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Marcado",
+  "activities": {
+   "jtwAr9qjqwfeHwW5": {
+    "_id": "jtwAr9qjqwfeHwW5",
+    "type": "utility",
+    "name": "Action (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "jtwAr9qjqwfeHwW5": 3
+   },
+   "prereq": {
+    "features": [
+     [
+      "Marcado"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "gzL8Vv0WJ18xaevn",
+ "sort": 100,
+ "_key": "!items!rCDSPQOLsec0G2cg"
+}

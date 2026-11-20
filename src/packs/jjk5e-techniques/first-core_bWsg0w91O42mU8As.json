@@ -1,0 +1,194 @@
+{
+ "_id": "bWsg0w91O42mU8As",
+ "name": "First Core",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/triple-core.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Triple Core — Innate Technique (1st level)</em></p><blockquote><p>3 cores, 1 body, you have different forms with separate powers.</p></blockquote><p>Starting at 1st level, your cursed energy is gathered into a single core. As a bonus action, you can choose to enter a secondary form giving you access to a special ability for 1 minute. You gain one core option at this level:</p>\n<ul>\n<li>\n<p><strong>Unblockable Blows:</strong> When you hit with a melee attack, you can spend 1 CE to ignore resistances. If the creature is not resistant, they are considered vulnerable.  </p>\n</li>\n<li>\n<p><strong>Energy Blast:</strong> As an action you spend CE up to your CE modifier to launch a blast of cursed energy. You make a ranged cursed energy attack against a target within 80 feet dealing 2d6 necrotic damage for each CE.  </p>\n</li>\n<li>\n<p><strong>Defensive Form.</strong> As a bonus action, you assume this form for 1 minute, buffing your defense. You gain a number of temporary hit points equal to twice your current cursed energy. You can spend 1 CE at the beginning of your turn to refresh the temporary hit points.  </p>\n</li>\n<li>\n<p><strong>Divebomb.</strong> As part of the bonus action you take to enter this form, you spend CE up to your CE modifier. For the duration of this form, your speed increases by 10 ft per CE spent and you gain a +2 bonus to AC. You deal an additional 1d4 damage for every 15 ft you move in a straight line before hitting a target with a melee attack.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "ttjyPQhLJHFeGaog": {
+    "_id": "ttjyPQhLJHFeGaog",
+    "type": "utility",
+    "name": "Action (1+ CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "max(1, max(@abilities.wis.mod, @abilities.cha.mod))"
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   },
+   "2lr4Xtp24Jv8ajRW": {
+    "_id": "2lr4Xtp24Jv8ajRW",
+    "type": "attack",
+    "name": "Action",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "80",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceSteps": {
+    "ttjyPQhLJHFeGaog": 1
+   },
+   "ceCosts": {
+    "ttjyPQhLJHFeGaog": 1
+   },
+   "technique": "Triple Core",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "IyJg53UICeEoqtxa",
+ "effects": [
+  {
+   "_id": "Uw7DxNjlqswkMpNe",
+   "name": "First Core (toggle)",
+   "img": "modules/jjk5e/icons/techniques/triple-core.svg",
+   "changes": [
+    {
+     "key": "system.attributes.movement.walk",
+     "mode": 2,
+     "value": "10",
+     "priority": null
+    },
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+2",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!bWsg0w91O42mU8As.Uw7DxNjlqswkMpNe"
+  }
+ ],
+ "_key": "!items!bWsg0w91O42mU8As"
+}

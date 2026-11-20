@@ -1,0 +1,68 @@
+{
+ "_id": "kPKytCOanEqpxn5q",
+ "name": "Closed Circuit",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/cursed-circuitry.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Circuit</em></p>\n<p>Your technique specializing in energy efficiency has begun to develop your body. You no longer leave residuals of your cursed energy and creatures have disadvantage on checks to directly detect you through your cursed energy. As an action, you can concentrate for up to 1 minute to hide your cursed energy within your circuit, giving anyone a -5 to their skill checks to directly sense your cursed energy.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Circuit",
+  "activities": {
+   "4fGoAilFJG37SiGQ": {
+    "_id": "4fGoAilFJG37SiGQ",
+    "type": "utility",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Circuit"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "G6JMovZa1ygvOgXz",
+ "sort": 100,
+ "_key": "!items!kPKytCOanEqpxn5q"
+}

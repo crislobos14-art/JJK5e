@@ -1,0 +1,91 @@
+{
+ "_id": "qewP7h69t2CALGbG",
+ "name": "Living Prison (Awakened)",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/trait.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Creeps and Curses V.3.1</em></p><p><em>Special Trait. Please note that these abilities are incredibly powerful even for the JJK system and should only be used for purposely high power games. Of course, certain traits are stronger than others. Stages of these traits have been added to grow with characters with higher levels of play. Dormant, Stirring, and Awakened. Though a DM can decide to change the leveling format or instead give them out at appropriate character moments.</em></p><p><strong>Strangely Sturdy.</strong> Your hit point maximum increases by 6 times your level and increases by 6 every time you gain a level. Your walking speed increases to 50 ft unless it is already higher and you can take the Dash action as a bonus action. (This replaces Bizarrely Sturdy)</p>\n<p><strong>Carved Technique.</strong> If you serve as the Vessel of a Reincarnated Sorcerer for 6 months (with the Sorcerer incarnating and using their technique at least once per month), their technique is carved into your body and you gain access to one of their Innate Technique features.</p>\n<p><em>Special Trait tiers stack: keep the earlier tiers on the sheet. When a benefit says it replaces an earlier one, the module's effects already account for it.</em></p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTrait"
+  },
+  "requirements": "Living Prison, level 14",
+  "activities": {
+   "a4vIFvbKAFdBYJbF": {
+    "_id": "a4vIFvbKAFdBYJbF",
+    "type": "utility",
+    "name": "Bonus Action",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": 14,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "level": 14
+   }
+  }
+ },
+ "folder": "WpMvDh8sKw65orZ9",
+ "effects": [
+  {
+   "_id": "tEOI1yckqJhc70hi",
+   "name": "Living Prison (Awakened)",
+   "img": "modules/jjk5e/icons/trait.svg",
+   "changes": [
+    {
+     "key": "system.attributes.hp.bonuses.level",
+     "mode": 2,
+     "value": "2",
+     "priority": null
+    },
+    {
+     "key": "system.attributes.movement.walk",
+     "mode": 4,
+     "value": "50",
+     "priority": null
+    }
+   ],
+   "disabled": false,
+   "transfer": true,
+   "duration": {},
+   "description": "",
+   "flags": {},
+   "_key": "!items.effects!qewP7h69t2CALGbG.tEOI1yckqJhc70hi"
+  }
+ ],
+ "sort": 1200,
+ "_key": "!items!qewP7h69t2CALGbG"
+}

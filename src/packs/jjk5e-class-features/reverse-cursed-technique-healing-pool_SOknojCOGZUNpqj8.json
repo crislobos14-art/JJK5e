@@ -1,0 +1,89 @@
+{
+ "_id": "SOknojCOGZUNpqj8",
+ "name": "Reverse Cursed Technique (Healing Pool)",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/ce.svg",
+ "folder": "ma0AyXgs6GhcKVCb",
+ "system": {
+  "description": {
+   "value": "<p>Pool of healing = 5 × your level × your CE modifier (the uses of this item). As a bonus action spend CE up to your CE modifier: each CE heals 10 HP and removes 10 from the pool. Refills on a long rest; recovers 10 every two rounds (adjust by hand). See the rules journal, <em>Breakthroughs</em>.</p><p><em>Choose the CE in the scaling field; CE and pool are deducted automatically.</em></p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Breakthrough: Reverse Cursed Technique",
+  "uses": {
+   "max": "5 * @details.level * max(@abilities.wis.mod, @abilities.cha.mod)",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
+    }
+   ]
+  },
+  "activities": {
+   "BGwzqb2aPck3yZ7U": {
+    "_id": "BGwzqb2aPck3yZ7U",
+    "type": "heal",
+    "name": "Heal (1+ CE)",
+    "activation": {
+     "type": "bonus",
+     "value": 1
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "10",
+       "scaling": {
+        "mode": "amount",
+        "formula": "10"
+       }
+      }
+     ],
+     "scaling": {
+      "allowed": true,
+      "max": "max(1, max(@abilities.wis.mod, @abilities.cha.mod))"
+     }
+    },
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "10",
+     "types": [
+      "healing"
+     ],
+     "custom": {
+      "enabled": false,
+      "formula": ""
+     },
+     "scaling": {
+      "mode": "whole",
+      "formula": "10"
+     }
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "BGwzqb2aPck3yZ7U": 1
+   },
+   "ceSteps": {
+    "BGwzqb2aPck3yZ7U": 1
+   }
+  }
+ },
+ "_key": "!items!SOknojCOGZUNpqj8"
+}

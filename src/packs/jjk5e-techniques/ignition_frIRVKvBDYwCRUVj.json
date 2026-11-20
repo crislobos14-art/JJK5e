@@ -1,0 +1,122 @@
+{
+ "_id": "frIRVKvBDYwCRUVj",
+ "name": "Ignition",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/blazing-courage.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Blazing Courage — Innate Technique (1st level)</em></p><blockquote><p>Through your beliefs, you set both your weapon and heart alight with your blazing courage.</p></blockquote><p>Starting at 1st level, your technique allows yourself to ignite your weapon in flames, increasing your fire power. You can spend up to your proficiency bonus as a bonus action while holding a melee weapon, igniting said weapon in flames for 1 minute. For the duration, the weapon deals an additional 1d6 fire damage on a hit per CE spent, and emits bright light for 5 feet and dim light for another 10 feet.<br />\n This increases to 1d8 per ce spent at 6th level and again to 1d10 at 11th level and 1d12 at 18th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "OKvwwUwpanZQnU9d": {
+    "_id": "OKvwwUwpanZQnU9d",
+    "type": "damage",
+    "name": "Bonus Action (1+ CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "@prof"
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "fire"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "mode": "whole",
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceSteps": {
+    "OKvwwUwpanZQnU9d": 1
+   },
+   "ceCosts": {
+    "OKvwwUwpanZQnU9d": 1
+   },
+   "technique": "Blazing Courage",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "VITDORKyY9It9TdZ",
+ "_key": "!items!frIRVKvBDYwCRUVj"
+}

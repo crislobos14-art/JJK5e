@@ -1,0 +1,149 @@
+{
+ "_id": "wgDtozCWclpmllfO",
+ "name": "Hyperspeed",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/and-light.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Creeps and Curses V.3.1</em></p><p><em>████ and Light — Innate Technique (6th level)</em></p><p>At 6th level, you have learned to imbue your body and constructs with high speed. You gain resistance to radiant damage and the following:</p>\n<p><strong>Light Beam.</strong> When you make an attack with your Light Construct, you can spend 1 CE to make the attack at advantage and launch the bar, making a ranged spell attack against a creature within 60 ft. When you hit a creature with a melee attack using your Light Construct, you can teleport 10 ft to an unoccupied space you can see as your body becomes a beam of light for a moment.</p>\n<p><strong>Laser Light Techniques.</strong> When you use a Light Technique, you can spend additional CE up to your CE modifier. You deal an additional damage dice per CE spent. This increases to 2 additional dice per CE at 11th level and 3 additional dice at 18th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "IF6ShpMab1LGYOdF": {
+    "_id": "IF6ShpMab1LGYOdF",
+    "type": "attack",
+    "name": "Action (1+ CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "max(1, max(@abilities.wis.mod, @abilities.cha.mod))"
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "flat": false,
+     "type": {
+      "value": "melee",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": []
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "60",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceSteps": {
+    "IF6ShpMab1LGYOdF": 1
+   },
+   "ceCosts": {
+    "IF6ShpMab1LGYOdF": 1
+   },
+   "technique": "████ and Light",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "IGfpCBBJLQfBc6m2",
+ "effects": [
+  {
+   "_id": "0ReZlkxUw6lTDcep",
+   "name": "Hyperspeed (toggle)",
+   "img": "modules/jjk5e/icons/techniques/and-light.svg",
+   "changes": [
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "radiant",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!wgDtozCWclpmllfO.0ReZlkxUw6lTDcep"
+  }
+ ],
+ "_key": "!items!wgDtozCWclpmllfO"
+}

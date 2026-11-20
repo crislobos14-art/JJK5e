@@ -1,0 +1,80 @@
+{
+ "_id": "Wa5s6izf1uoeH7YV",
+ "name": "Soul Split Katana",
+ "type": "weapon",
+ "img": "icons/svg/sword.svg",
+ "folder": "OqdCuXcZ0pFqRc3h",
+ "system": {
+  "description": {
+   "value": "<p>Weapon(Katana), Special Grade</p>\n<p>You have a +4 bonus to attack and damage rolls made with this cursed tool. Attacks made with this weapon ignores resistances and immunities and damage from this sword reduces the maximum hit points of the target until a long rest.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "martialM",
+   "baseItem": ""
+  },
+  "damage": {
+   "base": {
+    "number": 2,
+    "denomination": 4,
+    "types": [
+     "slashing"
+    ]
+   },
+   "versatile": {
+    "number": 1,
+    "denomination": 10,
+    "types": [
+     "slashing"
+    ]
+   }
+  },
+  "range": {
+   "value": 5,
+   "long": null,
+   "units": "ft",
+   "reach": 5
+  },
+  "properties": [
+   "ver",
+   "mgc"
+  ],
+  "proficient": null,
+  "quantity": 1,
+  "activities": {
+   "75fG6bkYfabHWxng": {
+    "_id": "75fG6bkYfabHWxng",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "melee",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   }
+  },
+  "magicalBonus": 4,
+  "rarity": "legendary"
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "Special Grade"
+  }
+ },
+ "_key": "!items!Wa5s6izf1uoeH7YV"
+}

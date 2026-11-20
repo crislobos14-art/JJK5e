@@ -1,0 +1,133 @@
+{
+ "_id": "LjQg82tR5YL4UbNQ",
+ "name": "Pseudo-Domain Constitution",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/star-dictator.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Star Dictator — Innate Technique (3rd level)</em></p><p>Starting at 3rd level, you have learned to form a pseudo-domain that follows the path of your shikigami. As a bonus action, you command any number of your minor shikigami to create your domain. They spend their action taking the dash action to orbit around a point, forming a circle within 5 ft of the center. On each of your turns, you can use your bonus action to increase the radius of the domain by 5 ft or command more shikigami to join the domain orbit. <br />\n The maximum range and damage of the domain depends on the number of shikigami making up the domain. A creature within the domain other than you must make a Dexterity saving throw at the end of your turn. On a failed save, a creature takes 1d6 slashing damage per orbiting shikigami or half as much on a success. <br />\nThe maximum radius of the domain is 5 ft x the number of orbiting shikigami. If one of the orbiting shikigami is killed, the range and damage decreases. If all of your shikigami stop orbiting the domain path, the pseudo-domain ends.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "cdUZnJ88N5QDCwP8": {
+    "_id": "cdUZnJ88N5QDCwP8",
+    "type": "save",
+    "name": "Bonus Action",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "slashing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "5",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Star Dictator",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "ba0AWxHF6sBvbrZq",
+ "_key": "!items!LjQg82tR5YL4UbNQ"
+}

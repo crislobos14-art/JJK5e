@@ -1,0 +1,48 @@
+{
+ "_id": "BmgoyG7X5TfvjQCE",
+ "name": "Sharp Eyes",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>At 2nd level, you can make a bonus action Insight check against your opponents against an opponent’s Deception check. On a success, you gain an advantage on all rolls against that opponent for that turn.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Scout 2",
+  "activities": {
+   "Dz3l5YxKUg3vk0Pb": {
+    "_id": "Dz3l5YxKUg3vk0Pb",
+    "type": "utility",
+    "name": "Insight vs Deception",
+    "activation": {
+     "type": "bonus",
+     "value": 1
+    },
+    "consumption": {
+     "targets": []
+    },
+    "roll": {
+     "formula": "1d20 + @skills.ins.total",
+     "name": "Insight (Sharp Eyes)",
+     "visible": true
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "Jrayu2BI11U3R1zF",
+ "_key": "!items!BmgoyG7X5TfvjQCE"
+}

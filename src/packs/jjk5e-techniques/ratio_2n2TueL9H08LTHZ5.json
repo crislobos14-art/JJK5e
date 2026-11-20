@@ -1,0 +1,95 @@
+{
+ "_id": "2n2TueL9H08LTHZ5",
+ "name": "Ratio",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/ratio.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Ratio — Innate Technique (3rd level)</em></p><p>Once you reach 3rd level, you have learned your technique that creates weak spots in enemies. Whenever you hit an attack, you can spend 1 cursed energy to roll a d10. If you roll a 3 or 7 the attack becomes a critical hit.<br />\n You now roll 2 additional damage dice on a critical hit.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "O3ZJjRkxSG0e9WMs": {
+    "_id": "O3ZJjRkxSG0e9WMs",
+    "type": "utility",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "O3ZJjRkxSG0e9WMs": 1
+   },
+   "technique": "Ratio",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "SXVh9xBdNDfszcIg",
+ "_key": "!items!2n2TueL9H08LTHZ5"
+}

@@ -1,0 +1,102 @@
+{
+ "_id": "mSjFF9Qagzn8qrk9",
+ "name": "Soft Beats Hard",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/dark-claw.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Dark Claw — Cursed Technique Reversal</em></p><p>You have learned the reversal of your technique. Instead of hardening cursed energy to form claws, you mold soft cursed energy over your hand. As a bonus action for 2 CE, you activate this technique for 2 hours or until you end it as a bonus action. While your reversal is active, you cannot form claws and you gain a special reaction. When you are targeted by an attack roll, you can use your reaction to make a melee attack roll using your unarmed strikes (using Strength, Dexterity, or your Cursed Energy modifier) against the damage roll. If your roll is higher, the attack’s impact is absorbed by your soft cursed energy and the damage is nullified. You can spend 2 CE to use this again without spending your reaction.</p>\n<p>You gain a +2 bonus to this special attack roll at 6th level. This increases to +3 at 11th level and +4 at 18th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Dark Claw",
+  "activities": {
+   "Jwx6Nh8ta3KxG7Bm": {
+    "_id": "Jwx6Nh8ta3KxG7Bm",
+    "type": "utility",
+    "name": "Bonus Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "2",
+     "units": "hour",
+     "concentration": false
+    }
+   },
+   "Tmh3pCHViOtoPrbe": {
+    "_id": "Tmh3pCHViOtoPrbe",
+    "type": "utility",
+    "name": "Reaction (2 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "Jwx6Nh8ta3KxG7Bm": 2,
+    "Tmh3pCHViOtoPrbe": 2
+   },
+   "technique": "Dark Claw",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Dark Claw"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!mSjFF9Qagzn8qrk9"
+}

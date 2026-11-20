@@ -1,0 +1,124 @@
+{
+ "_id": "D6lKzdMZxIzyGlg6",
+ "name": "Transfiguration",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/idle-transfiguration.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Idle Transfiguration — Innate Technique (1st level)</em></p><blockquote><p>The soul is an interesting thing and your technique manipulates it.</p></blockquote><p>Starting at 1st level, your touch can alter a creature's very own being, their soul. Whenever you hit a creature with a natural weapon, unarmed strike, or touch them, you can deal an additional 1d6 Necrotic damage.<br />\n In addition, as an action for 1 Cursed Energy, you can force a creature within your reach to make a Constitution saving throw. On a failure, they will take 1d10 Necrotic Damage, which increases to 2d10 at 3rd level, 3d10 at 6th level, 4d10 at 11th level, and 5d10 at 18th level. On a success, the creature takes half as much damage. This damage reduces a creature’s hit point maximum until they finish a long rest.<br />\n If Necrotic damage from any features of Idle Transfiguration reduces a creature's total hit points to 0, the creature will become one of your Transfigured Creatures. This does not work on Constructs.<br />\n<strong>Transfigured Creatures.</strong> You can have a number of transfigured creatures equal to your level x your Cursed Energy modifier. Transfigured creatures will follow your orders, act at the end of your turn and their creature type is undead. On a short or long rest, you can modify a transfigured creature’s size from tiny to huge.</p>\n<ul>\n<li>\n<p><strong>Ability Scores.</strong> The creature’s mental scores will be decreased to 4. You can redistribute the points removed from their mental stats into their physical scores, even beyond 20.  </p>\n</li>\n<li>\n<p><strong>Primitiveness.</strong> Transformed creatures lose all supernatural abilities like cursed technique as well as proficiencies, and their AC is 10 + Dexterity modifier. They can only use natural weapons or unarmed attacks. They roll a d6 in place of the normal damage of their unarmed strike.</p>\n</li>\n</ul>\n<p>You can command with simple orders such as to attack a creature as a bonus action. Complex orders like area control are an action. You can store transfigured creatures, extracting any number as an action.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "PDD97g8ETyVvBxYc": {
+    "_id": "PDD97g8ETyVvBxYc",
+    "type": "save",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "PDD97g8ETyVvBxYc": 1
+   },
+   "technique": "Idle Transfiguration",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "sz7xFTLSgxx5bxtq",
+ "_key": "!items!D6lKzdMZxIzyGlg6"
+}

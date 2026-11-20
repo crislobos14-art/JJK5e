@@ -1,0 +1,82 @@
+{
+ "_id": "ipsjySVLfaLqZMm8",
+ "name": "Purified Salt",
+ "type": "consumable",
+ "img": "icons/svg/explosion.svg",
+ "folder": "pB7mLAOAtbyDQKeT",
+ "system": {
+  "description": {
+   "value": "<p><em>Potion, Grade 3</em></p><p>A pouch of purified salt contains 1d4+1 pinches of salt. As an action, you can scatter up to 5 pinches of salt and each pinch covers a 5 ft area. Cursed Spirits of Grade 3 or lower are unwilling to cross the line of salt.</p>"
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "rarity": "uncommon",
+  "quantity": 1,
+  "attunement": "",
+  "type": {
+   "value": "potion",
+   "subtype": ""
+  },
+  "uses": {
+   "max": "1",
+   "spent": 0,
+   "autoDestroy": true,
+   "recovery": []
+  },
+  "activities": {
+   "4vN18DteZLmUcoKf": {
+    "_id": "4vN18DteZLmUcoKf",
+    "type": "utility",
+    "name": "Consume",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1"
+      }
+     ]
+    }
+   },
+   "hdnQNvQ7r7vfdkRC": {
+    "_id": "hdnQNvQ7r7vfdkRC",
+    "type": "utility",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "3rd Grade"
+  }
+ },
+ "_key": "!items!ipsjySVLfaLqZMm8"
+}

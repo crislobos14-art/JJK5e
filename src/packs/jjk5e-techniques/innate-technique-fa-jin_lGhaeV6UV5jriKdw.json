@@ -1,0 +1,118 @@
+{
+ "_id": "lGhaeV6UV5jriKdw",
+ "name": "Innate Technique: Fa Jin",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/fa-jin.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>You can store and release kinetic energy using your cursed technique.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.GUfR5wl0Ez1j2haQ]{Store and Release}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.Wk2tHOObH8Up9ocX]{Instantaneous Movement}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.Qg7EnOsToGuy1kOy]{Fist of Explosive Power}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.9mtD8EPd3LMxJE3R]{Maximize Potential Energy}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.WwelZoITRpIds1NY]{Domain Expansion: Hall of Divine Bagua}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "MFqBqBcy2WKtT7Ld": {
+    "_id": "MFqBqBcy2WKtT7Ld",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Fa Jin (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.GUfR5wl0Ez1j2haQ",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "tkjj9SoDcMj2HqV9": {
+    "_id": "tkjj9SoDcMj2HqV9",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Fa Jin (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.Wk2tHOObH8Up9ocX",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "v5jf3nqIwGaSG4C9": {
+    "_id": "v5jf3nqIwGaSG4C9",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Fa Jin (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.Qg7EnOsToGuy1kOy",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "4nQYSGAYyZwizKSz": {
+    "_id": "4nQYSGAYyZwizKSz",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Fa Jin (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.9mtD8EPd3LMxJE3R",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "bR4mqB2lOK9nNqfW": {
+    "_id": "bR4mqB2lOK9nNqfW",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Fa Jin (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.WwelZoITRpIds1NY",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Fa Jin"
+  }
+ },
+ "_key": "!items!lGhaeV6UV5jriKdw"
+}

@@ -1,0 +1,200 @@
+{
+ "_id": "EK3gaDikW90ogzkX",
+ "name": "Chemical Formulae",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/cursed-transmutation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Transmutation — Innate Technique (3rd level)</em></p><p>At 3rd level, you have studied the structure of your technique and learned greater ways to utilize it:</p>\n<p><strong>Transmute Explosion</strong>. On a hit with a weapon attack, you can spend 2 cursed energy to transmute the attack and force the creature to make a Dexterity saving throw, taking 2d6 fire damage on a failed save or half as much on a successful save. This increases to 3d6 at 6th level, 4d6 at 11th level and 6d6 at 18th level.<br />\n<strong>Transmute Self.</strong> As a reaction, you can spend cursed energy to transmute yourself in one of the following ways (X = CE modifier):</p>\n<ul>\n<li>\n<p><strong>Harden (2 CE)</strong> You harden your body and gain a +4 bonus to AC until the start of your turn.  </p>\n</li>\n<li>\n<p><strong>Shell (X CE)</strong> You create a shell over your body and gain 5 temporary hit points per cursed energy spent.  </p>\n</li>\n<li>\n<p><strong>Slick (2 CE)</strong> You cover parts of your body in a solution and gain a 20 ft bonus to walking speed and do not provoke opportunity attacks until the start of your turn.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "71OpcvHoIIoXxl4s": {
+    "_id": "71OpcvHoIIoXxl4s",
+    "type": "save",
+    "name": "Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "fire"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   },
+   "vXAXQp4RV4HyCbqB": {
+    "_id": "vXAXQp4RV4HyCbqB",
+    "type": "heal",
+    "name": "Reaction (2+ CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "20"
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "5",
+     "types": [
+      "temphp"
+     ],
+     "custom": {
+      "enabled": false,
+      "formula": ""
+     },
+     "scaling": {
+      "mode": "whole",
+      "formula": "5"
+     }
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceSteps": {
+    "vXAXQp4RV4HyCbqB": 1
+   },
+   "ceCosts": {
+    "71OpcvHoIIoXxl4s": 2,
+    "vXAXQp4RV4HyCbqB": 2
+   },
+   "technique": "Cursed Transmutation",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "mZ3PzIRAkGl7SSou",
+ "effects": [
+  {
+   "_id": "o5FRr5zmHXVSM4Ng",
+   "name": "Chemical Formulae (toggle)",
+   "img": "modules/jjk5e/icons/techniques/cursed-transmutation.svg",
+   "changes": [
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+4",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!EK3gaDikW90ogzkX.o5FRr5zmHXVSM4Ng"
+  }
+ ],
+ "_key": "!items!EK3gaDikW90ogzkX"
+}

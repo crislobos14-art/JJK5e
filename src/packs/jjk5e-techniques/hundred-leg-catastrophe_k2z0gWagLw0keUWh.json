@@ -1,0 +1,163 @@
+{
+ "_id": "k2z0gWagLw0keUWh",
+ "name": "Hundred Leg Catastrophe",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/centipede-shroud.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Centipede Shroud — Innate Technique (11th level)</em></p><p>At 11th level, your technique increases by leaps and bounds. As an action for 8 cursed energy, you can launch up to 3 giant centipedes at targets within 120 feet, making a ranged cursed energy attack roll for each. On a hit, they deal 8d10 necrotic damage and the target must make a Strength saving throw. On a failure, the target is pushed or pulled 30ft closer or further (your choice) and falls prone.<br />\n Additionally, you can now have two cursed centipedes summoned at a time. While you have two cursed centipedes acting as your shroud, you can make 2 melee attacks as a bonus action and instead add 3 + your proficiency bonus to your AC.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "Xxh4SKTAnNz37Osw": {
+    "_id": "Xxh4SKTAnNz37Osw",
+    "type": "save",
+    "name": "Action (8 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "120",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "str"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": [
+      {
+       "number": 8,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "e5sccugYjQz2rIrq",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "120",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "Xxh4SKTAnNz37Osw": 8
+   },
+   "technique": "Centipede Shroud",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "e5sccugYjQz2rIrq",
+   "name": "Prone (Hundred Leg Catastrophe)",
+   "img": "modules/jjk5e/icons/techniques/centipede-shroud.svg",
+   "statuses": [
+    "prone"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!k2z0gWagLw0keUWh.e5sccugYjQz2rIrq"
+  }
+ ],
+ "folder": "CxDLBZfVDaXb8XWS",
+ "_key": "!items!k2z0gWagLw0keUWh"
+}

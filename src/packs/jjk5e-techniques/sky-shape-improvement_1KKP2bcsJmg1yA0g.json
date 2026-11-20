@@ -1,0 +1,95 @@
+{
+ "_id": "1KKP2bcsJmg1yA0g",
+ "name": "Sky Shape Improvement",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/sky-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Sky Manipulation — Innate Technique (6th level)</em></p><p>When you reach 6th level, your manipulation has become so refined even techniques pass through you. You can now use your reaction against cursed energy attack rolls, and you can use this reaction for 3 Cursed Energy to redirect a cone or line saving throw, redirecting the attack if you pass the saving throw, making it not affect you or other creatures in the area.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "5EJNgzTlXThWRMQJ": {
+    "_id": "5EJNgzTlXThWRMQJ",
+    "type": "utility",
+    "name": "Reaction (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "reaction",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "5EJNgzTlXThWRMQJ": 3
+   },
+   "technique": "Sky Manipulation",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "i7KDxPjzj0GuzdPl",
+ "_key": "!items!1KKP2bcsJmg1yA0g"
+}

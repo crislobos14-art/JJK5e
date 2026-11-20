@@ -1,0 +1,95 @@
+{
+ "_id": "hdsV384kJqqvoiOF",
+ "name": "Repelling Forces",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/love-rendezvous.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Gravity</em></p>\n<p>You have gained further variety with your Marks and the forces within it. As a bonus action for up to 3 CE you can force marked creatures to be repelled from the creature with the highest amount of CE. How far depends on how much CE you use, with them moving 10 feet for every CE. They take 2d8 bludgeoning damage if the repelled movement forces them into a structure, object, or creature.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Gravity",
+  "activities": {
+   "4OrVIBcE4ixwcXL0": {
+    "_id": "4OrVIBcE4ixwcXL0",
+    "type": "damage",
+    "name": "Bonus Action (1+ CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "20"
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "mode": "whole",
+        "number": 2
+       }
+      }
+     ]
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceSteps": {
+    "4OrVIBcE4ixwcXL0": 1
+   },
+   "ceCosts": {
+    "4OrVIBcE4ixwcXL0": 1
+   },
+   "prereq": {
+    "features": [
+     [
+      "Gravity"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "pD3ZDzAduni2nSWL",
+ "sort": 200,
+ "_key": "!items!hdsV384kJqqvoiOF"
+}

@@ -1,0 +1,153 @@
+{
+ "_id": "8nsX5YC7QP3jFS6b",
+ "name": "Overload",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/laplace-s-demon.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Laplace’s Demon — Innate Technique (6th level)</em></p><p>At 6th level, you have learned to overload the minds of others instead of your own. As an action for 4 cursed energy you can touch a creature and force them to make an Intelligence saving throw. On a failure they take 5d10 psychic damage and are stunned until the end of their next turn, on a success they take half as much damage and aren’t stunned.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "tS0tCzG54ZOcmyBA": {
+    "_id": "tS0tCzG54ZOcmyBA",
+    "type": "save",
+    "name": "Action (4 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "int"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 5,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "psychic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "N3FOtjwNCSdvcau5",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "tS0tCzG54ZOcmyBA": 4
+   },
+   "technique": "Laplace’s Demon",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "N3FOtjwNCSdvcau5",
+   "name": "Stunned (Overload)",
+   "img": "modules/jjk5e/icons/techniques/laplace-s-demon.svg",
+   "statuses": [
+    "stunned"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "rounds": 1
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "stunned"
+    }
+   },
+   "_key": "!items.effects!8nsX5YC7QP3jFS6b.N3FOtjwNCSdvcau5"
+  }
+ ],
+ "folder": "uhouPoPESjs6aBsz",
+ "_key": "!items!8nsX5YC7QP3jFS6b"
+}

@@ -1,0 +1,57 @@
+{
+ "_id": "Relfw9MNinc3QEqP",
+ "name": "Skilled",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: N/A</em></p>\n<p>You gain proficiency in any combination of three skills or tools.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkSkill"
+  },
+  "requirements": "N/A",
+  "advancement": {
+   "POqjESYglzKtdLmJ": {
+    "_id": "POqjESYglzKtdLmJ",
+    "type": "Trait",
+    "level": 0,
+    "title": "Proficiencies",
+    "value": {},
+    "configuration": {
+     "mode": "default",
+     "allowReplacements": false,
+     "grants": [],
+     "choices": [
+      {
+       "count": 3,
+       "pool": [
+        "skills:*",
+        "tool:*"
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "EtgHYidIGv42ylfo",
+ "sort": 1800,
+ "_key": "!items!Relfw9MNinc3QEqP"
+}

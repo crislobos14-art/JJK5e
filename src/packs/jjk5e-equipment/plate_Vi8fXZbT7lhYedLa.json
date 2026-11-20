@@ -1,0 +1,41 @@
+{
+ "_id": "Vi8fXZbT7lhYedLa",
+ "name": "Plate",
+ "type": "equipment",
+ "img": "icons/svg/shield.svg",
+ "folder": "qVuyydidyeepCNvu",
+ "system": {
+  "description": {
+   "value": "<p>Heavy armor. AC 18(Disadvantage on Stealth).</p><p>Consists of shaped, interlocking steel plates to cover the entire body. A suit of plate includes gauntlets, heavy leather boots, giant shoulder plates, and thick layers of padding underneath the armor. Sometimes it comes with a coating.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "heavy",
+   "baseItem": ""
+  },
+  "armor": {
+   "value": 18,
+   "dex": 0
+  },
+  "price": {
+   "value": 150.0,
+   "denomination": "gp"
+  },
+  "properties": [
+   "stealthDisadvantage"
+  ],
+  "quantity": 1
+ },
+ "flags": {
+  "jjk5e": {
+   "priceUSD": "$15,000"
+  }
+ },
+ "_key": "!items!Vi8fXZbT7lhYedLa"
+}

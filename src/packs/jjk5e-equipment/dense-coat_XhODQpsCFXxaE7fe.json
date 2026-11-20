@@ -1,0 +1,41 @@
+{
+ "_id": "XhODQpsCFXxaE7fe",
+ "name": "Dense Coat",
+ "type": "equipment",
+ "img": "icons/svg/shield.svg",
+ "folder": "qVuyydidyeepCNvu",
+ "system": {
+  "description": {
+   "value": "<p>Light armor. AC 11 + Dex modifier(Dis Stealth).</p><p>This type of coat is made from durable fabrics and materials that provide basic protection.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "light",
+   "baseItem": ""
+  },
+  "armor": {
+   "value": 11,
+   "dex": null
+  },
+  "price": {
+   "value": 5.0,
+   "denomination": "gp"
+  },
+  "properties": [
+   "stealthDisadvantage"
+  ],
+  "quantity": 1
+ },
+ "flags": {
+  "jjk5e": {
+   "priceUSD": "$500"
+  }
+ },
+ "_key": "!items!XhODQpsCFXxaE7fe"
+}

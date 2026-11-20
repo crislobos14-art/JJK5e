@@ -1,0 +1,103 @@
+{
+ "_id": "3qgs3sD9Qllm4sEl",
+ "name": "Arms of the Giant",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/earth-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Stone Arms</em></p>\n<p>You are no longer required to maintain concentration to maintain your Stone Arms. Additionally, while spending 1 CE each turn to maintain your hands, you are able to control your Stone Arms as if casting the spell Bigby’s Hand. A creature that gains the restrained condition from your Stone Arms has their movement speed halved for 1 minute or until they regain hit points.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Stone Arms",
+  "activities": {
+   "loc8Fm68hVKXOWHj": {
+    "_id": "loc8Fm68hVKXOWHj",
+    "type": "utility",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    },
+    "effects": [
+     {
+      "_id": "3m7UcVTkRunc9eki",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "loc8Fm68hVKXOWHj": 1
+   },
+   "prereq": {
+    "features": [
+     [
+      "Stone Arms"
+     ]
+    ]
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "3m7UcVTkRunc9eki",
+   "name": "Restrained (Arms of the Giant)",
+   "img": "modules/jjk5e/icons/techniques/earth-manipulation.svg",
+   "statuses": [
+    "restrained"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "seconds": 60,
+    "rounds": 10
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "restrained"
+    }
+   },
+   "_key": "!items.effects!3qgs3sD9Qllm4sEl.3m7UcVTkRunc9eki"
+  }
+ ],
+ "folder": "CvsPtOy5HUgba8G0",
+ "sort": 300,
+ "_key": "!items!3qgs3sD9Qllm4sEl"
+}

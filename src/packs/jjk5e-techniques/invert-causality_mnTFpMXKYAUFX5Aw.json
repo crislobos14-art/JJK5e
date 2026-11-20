@@ -1,0 +1,120 @@
+{
+ "_id": "mnTFpMXKYAUFX5Aw",
+ "name": "Invert Causality",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/retrograde.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Retrograde — Innate Technique (11th level)</em></p><p>At 11th level, rather than reversing events you have learned to use a conceptual curse that inverts causality to rewrite the flow of events so your attack always lands first. After an attack or damaging effect made by a creature within 30 ft damages you, you can spend 8 CE as a reaction. Time is then rewound to before the attack is made or the effect happens. <br />\n You can immediately make one attack against the creature that ignores range and is guaranteed to hit by reversing causality, causing the triggering action to be wasted.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "UQbIGoR0Bxusrp9j": {
+    "_id": "UQbIGoR0Bxusrp9j",
+    "type": "attack",
+    "name": "Reaction (8 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": []
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "reaction",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "30",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "UQbIGoR0Bxusrp9j": 8
+   },
+   "technique": "Retrograde",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "6YaSgqVRe4IqL8er",
+ "_key": "!items!mnTFpMXKYAUFX5Aw"
+}

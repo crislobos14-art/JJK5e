@@ -1,0 +1,146 @@
+{
+ "_id": "p78k0JeYFtoXASUk",
+ "name": "Heat Extinguishment",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/disaster-flames.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Disaster Flames — Cursed Technique Reversal</em></p><p>By mastering Reverse Cursed Technique and your primary ability, you have inverted your control over flames into the power to extinguish and nullify them, even affecting the heat within living beings.</p>\n<p>As an action or reaction to being targeted by a cursed technique AOE that deals fire damage, you can spend 2 cursed energy to extinguish a 10 feet cube of flames within 30 feet where the technique is nullified. If the technique is an attack roll, you can spend 2 CE as a reaction to reduce the fire damage by 6d8. If an attack’s damage is reduced to 0, any additional effects of the attack are canceled out.</p>\n<p><strong>Hypothermic Touch.</strong> At 3rd level, as an action you can spend an amount of cursed energy up to twice your CE modifier to make a melee attack roll and extinguish the heat within a target's body. The target must succeed on a Constitution saving throw or take 2d8 cold damage per cursed energy spent. On a success, they take half as much damage. If they fail by 5 or more, their movement is reduced to 0 until the end of their turn. This reversal does not affect creatures that do not rely on body heat or are immune to cold damage.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Disaster Flames",
+  "activities": {
+   "g24VOuJAXhXeFMkD": {
+    "_id": "g24VOuJAXhXeFMkD",
+    "type": "utility",
+    "name": "Reaction (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {
+     "template": {
+      "type": "cube",
+      "size": "10",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     }
+    },
+    "duration": {
+     "units": "inst"
+    }
+   },
+   "TwHrX3jWHk1dqtBs": {
+    "_id": "TwHrX3jWHk1dqtBs",
+    "type": "save",
+    "name": "Action (1+ CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "2 * max(1, max(@abilities.wis.mod, @abilities.cha.mod))"
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "cold"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "mode": "whole",
+        "number": 2
+       }
+      }
+     ]
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceSteps": {
+    "TwHrX3jWHk1dqtBs": 1
+   },
+   "ceCosts": {
+    "g24VOuJAXhXeFMkD": 2,
+    "TwHrX3jWHk1dqtBs": 1
+   },
+   "technique": "Disaster Flames",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Disaster Flames"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!p78k0JeYFtoXASUk"
+}

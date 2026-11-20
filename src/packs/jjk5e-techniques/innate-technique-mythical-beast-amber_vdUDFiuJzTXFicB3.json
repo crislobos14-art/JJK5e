@@ -1,0 +1,118 @@
+{
+ "_id": "vdUDFiuJzTXFicB3",
+ "name": "Innate Technique: Mythical Beast Amber",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/mythical-beast-amber.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>You hold a technique that changes the very essence of your energy to electricity. However, its true power is unknown even to you.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.Cd0MIDnKJNY1E74w]{Electric Energy}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.U67hANfZTVt3qhY1]{Lightning Body}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.6uqGLAdNxT5G3Tfw]{Lightning Discharge}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.rxvUmHNbggsQeh3C]{Mythical Beast Amber Release}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.Pz1PAtJv8qsrJIGZ]{Domain Expansion: Lightning God’s Realm}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "AGw7qFtKb1NgS1ih": {
+    "_id": "AGw7qFtKb1NgS1ih",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Mythical Beast Amber (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.Cd0MIDnKJNY1E74w",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "3OwrlcFV9RFCpO30": {
+    "_id": "3OwrlcFV9RFCpO30",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Mythical Beast Amber (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.U67hANfZTVt3qhY1",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "UAMoqKhV56qhsyX3": {
+    "_id": "UAMoqKhV56qhsyX3",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Mythical Beast Amber (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.6uqGLAdNxT5G3Tfw",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "mgIm6aVFMWeOHRdZ": {
+    "_id": "mgIm6aVFMWeOHRdZ",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Mythical Beast Amber (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.rxvUmHNbggsQeh3C",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "RmeH3ODjtagrDboK": {
+    "_id": "RmeH3ODjtagrDboK",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Mythical Beast Amber (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.Pz1PAtJv8qsrJIGZ",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Mythical Beast Amber"
+  }
+ },
+ "_key": "!items!vdUDFiuJzTXFicB3"
+}

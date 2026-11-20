@@ -1,0 +1,132 @@
+{
+ "_id": "uhroQuF4Rbd2kMyx",
+ "name": "Ritual Dance",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/solo-forbidden-zone.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Solo Forbidden Zone — Innate Technique (6th level)</em></p><p>Beginning at 6th level, you can spend CE up to your CE modifier + your proficiency as a Full Turn Action (Action + Bonus Action + Movement) to make a 50 ft sphere centered on yourself into a <em>Ritual Zone</em> for 1 minute while concentrating. You must maintain your Zone using your bonus action on your turn and cannot move more than 10 feet. You can choose to not allow hostile creatures to enter or leave your Zone, forcing them to make a Wisdom save, becoming unable to enter or leave for 1 minute on a failure. Allies gain your Zone’s normal effects and benefits depending on how much CE you spent to activate this technique:</p>\n<ul>\n<li>\n<p>Allies deal an additional 5 damage with techniques for each CE spent.  </p>\n</li>\n<li>\n<p>Allies gain temporary cursed energy equal to CE spent (doesn’t affect yourself).  </p>\n</li>\n<li>\n<p>If allies can spend additional cursed energy on a feature, they can spend additional cursed energy up to your CE modifier (min of 1).</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "8g1i0F03tSYGgeU1": {
+    "_id": "8g1i0F03tSYGgeU1",
+    "type": "save",
+    "name": "Bonus Action",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "sphere",
+      "size": "50",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "wis"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "sphere",
+    "size": "50",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": false
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Solo Forbidden Zone",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "pI3TNTzVyu2gPuxX",
+ "_key": "!items!uhroQuF4Rbd2kMyx"
+}

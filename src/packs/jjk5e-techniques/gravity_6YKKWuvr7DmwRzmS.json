@@ -1,0 +1,32 @@
+{
+ "_id": "6YKKWuvr7DmwRzmS",
+ "name": "Gravity",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/love-rendezvous.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Love Rendezvous — Innate Technique (6th level)</em></p><p>At 6th level, your technique's attraction has grown stronger. The damage of creatures colliding now ignores resistance to bludgeoning damage. This becomes force damage at 11th level and ignores resistance to force damage at 18th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Love Rendezvous 6"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Love Rendezvous",
+   "level": 6
+  }
+ },
+ "folder": "wSkJnhi22IbLpEbi",
+ "_key": "!items!6YKKWuvr7DmwRzmS"
+}

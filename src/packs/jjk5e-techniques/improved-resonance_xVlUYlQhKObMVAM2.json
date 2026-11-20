@@ -1,0 +1,141 @@
+{
+ "_id": "xVlUYlQhKObMVAM2",
+ "name": "Improved Resonance",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/straw-doll-technique.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Straw Doll Technique — Innate Technique (11th level)</em></p><p>When you reach 11th level, you’ve discovered a way to utilize <em>Resonance</em>. Instead of using the straw doll to target the creature, you can instead use the creature’s very body in place of it to dramatically increase its effectiveness. As an action for 6 cursed energy, you make an attack roll against a creature under one of the following conditions: incapacitated, restrained, stunned, petrified, or paralyzed. On a hit, the creature is knocked prone and struck by resonance with its body being used in place of the straw doll with the following effect:</p>\n<table>\n<thead>\n<tr>\n<th style=\"text-align: left;\">Effect</th>\n<th>Damage Dice</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td style=\"text-align: left;\">For 1 minute, every time they try to use a feature that costs CE, they must make a Charisma saving throw at disadvantage. On a failure, the technique fails to activate and the cursed energy is wasted. The creature can repeat the saving throw at the end of its turns, still at disadvantage, ending the effect on a success.</td>\n<td>(2×CE modifier + your proficiency bonus)d12</td>\n</tr>\n</tbody>\n</table>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "EUvE5BEqnpxLhCtY": {
+    "_id": "EUvE5BEqnpxLhCtY",
+    "type": "save",
+    "name": "Action (6 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "cha"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    },
+    "effects": [
+     {
+      "_id": "6JIXMYW8Cl9z8NIa",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "EUvE5BEqnpxLhCtY": 6
+   },
+   "technique": "Straw Doll Technique",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "6JIXMYW8Cl9z8NIa",
+   "name": "Prone (Improved Resonance)",
+   "img": "modules/jjk5e/icons/techniques/straw-doll-technique.svg",
+   "statuses": [
+    "prone"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "seconds": 60,
+    "rounds": 10
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!xVlUYlQhKObMVAM2.6JIXMYW8Cl9z8NIa"
+  }
+ ],
+ "folder": "YmMAY3fFTK6UIkG2",
+ "_key": "!items!xVlUYlQhKObMVAM2"
+}

@@ -1,0 +1,122 @@
+{
+ "_id": "pOllUPH2K4i7mWW7",
+ "name": "Funny Faces",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/illusive-mirage.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Cursed Illusion</em></p>\n<p>You have learned to add a bit of humor to your technique. When a cursed creature sees a distorted face, you can spend 2 CE to force the Intelligence saving throw to be made at disadvantage by making the face look extra goofy. Additionally, you can spend 1 CE to change the distortion, causing them to have to make an additional Intelligence save on their next turn if they see a distorted face.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Cursed Illusion",
+  "activities": {
+   "PjGgfNwCDWYBRRJg": {
+    "_id": "PjGgfNwCDWYBRRJg",
+    "type": "save",
+    "name": "Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "int"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   },
+   "vWjJ9P5cZCofYPDv": {
+    "_id": "vWjJ9P5cZCofYPDv",
+    "type": "save",
+    "name": "Action (1 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "int"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "PjGgfNwCDWYBRRJg": 2,
+    "vWjJ9P5cZCofYPDv": 1
+   },
+   "prereq": {
+    "features": [
+     [
+      "Cursed Illusion"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "0zKSvuqnQNE6NMsP",
+ "sort": 100,
+ "_key": "!items!pOllUPH2K4i7mWW7"
+}

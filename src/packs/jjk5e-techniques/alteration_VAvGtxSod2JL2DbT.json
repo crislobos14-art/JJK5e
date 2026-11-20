@@ -1,0 +1,132 @@
+{
+ "_id": "VAvGtxSod2JL2DbT",
+ "name": "Alteration",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/idle-transfiguration.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Idle Transfiguration — Innate Technique (3rd level)</em></p><p>Beginning at 3rd level, you can safely alter yourself or an ally.<br />\n<strong>Ally Alteration:</strong> You can use your alteration on willing creatures, to alter them as you see fit. You alter a willing creature during a short or long rest, granting them one or more of the following benefits:</p>\n<table>\n<thead>\n<tr>\n<th style=\"text-align: center;\">Alteration</th>\n<th style=\"text-align: center;\">Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td style=\"text-align: center;\">Heightened Smell</td>\n<td style=\"text-align: center;\">The creature gains advantage in perception checks involving smell.</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">Heightened Hearing</td>\n<td style=\"text-align: center;\">The creature gains advantage in perception checks involving hearing.</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">Heightened Sight</td>\n<td style=\"text-align: center;\">The creature  gains advantage in perception checks involving seeing.</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">Darkvision</td>\n<td style=\"text-align: center;\">The creature gains darkvision up to 60 feet, if the creature already has darkvision it will extend its range by 30 feet.</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">Hardened Skin</td>\n<td style=\"text-align: center;\">The creature gains resistance to either: bludgeoning, slashing, or piercing.</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">Gills</td>\n<td style=\"text-align: center;\">The creature gains a swimming speed equal to its walking speed and can breathe underwater.</td>\n</tr>\n</tbody>\n</table>\n<p>You can grant a number of different alterations to the same creature equal to your proficiency.</p>\n<p><strong>Self-Alteration:</strong> You have learned how to shape your own form in many different ways. As a bonus action, you can gain new body parts. You can choose one of the following:</p>\n<table>\n<thead>\n<tr>\n<th style=\"text-align: center;\">Alteration</th>\n<th style=\"text-align: center;\">CE Cost</th>\n<th style=\"text-align: center;\">Description</th>\n<th style=\"text-align: center;\">Restrictions</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td style=\"text-align: center;\">Sword Arms</td>\n<td style=\"text-align: center;\">2</td>\n<td style=\"text-align: center;\">Your unarmed strikes deal slashing and count as light, finesse, martial melee weapons</td>\n<td style=\"text-align: center;\">No Spike Hands or Wings</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">Spike Hands</td>\n<td style=\"text-align: center;\">2</td>\n<td style=\"text-align: center;\">Your unarmed strikes deal piercing damage, and increases damage by your Proficiency</td>\n<td style=\"text-align: center;\">No Sword Arms or Wings</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">Arm Shields</td>\n<td style=\"text-align: center;\">2</td>\n<td style=\"text-align: center;\">+2 bonus to AC.</td>\n<td style=\"text-align: center;\">No Wings</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">Long Arms</td>\n<td style=\"text-align: center;\">2</td>\n<td style=\"text-align: center;\">Increase melee reach by 10 feet</td>\n<td style=\"text-align: center;\">No Wings</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">Horse Hooves</td>\n<td style=\"text-align: center;\">3</td>\n<td style=\"text-align: center;\">Increase movement by 10 feet and Bonus Action dash.</td>\n<td style=\"text-align: center;\">N/A</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">Spiked Skin</td>\n<td style=\"text-align: center;\">2</td>\n<td style=\"text-align: center;\">As a reaction to a melee attack within 5 feet, you can deal Piercing damage equal to 4x your Proficiency.</td>\n<td style=\"text-align: center;\">N/A</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">Wings</td>\n<td style=\"text-align: center;\">4</td>\n<td style=\"text-align: center;\">You gain a 60 ft fly speed. While at least 15 feet away, you gain a +2 bonus to AC</td>\n<td style=\"text-align: center;\">No Spike Hands, Sword Hands,  Arm Shield, or Long Arms</td>\n</tr>\n</tbody>\n</table>\n<p>At 6th level, you gain the following <em>Self-Alteration</em> option:<br />\n<strong>Size Change</strong>. For 2 CE, you increase or decrease your size by 1 category for 1 min (does not stack). While enlarged you have advantage on Strength checks and Strength saving throws and your unarmed strikes deal 1d4 extra damage. While reduced you have advantage on Dexterity checks and saves and a +1 to AC. You can revert as a bonus action.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "6TqvvlFnyfAODuCW": {
+    "_id": "6TqvvlFnyfAODuCW",
+    "type": "utility",
+    "name": "Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "6TqvvlFnyfAODuCW": 2
+   },
+   "technique": "Idle Transfiguration",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "sz7xFTLSgxx5bxtq",
+ "effects": [
+  {
+   "_id": "AyyxRu9CmSsHVXWO",
+   "name": "Alteration (toggle)",
+   "img": "modules/jjk5e/icons/techniques/idle-transfiguration.svg",
+   "changes": [
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+2",
+     "priority": null
+    },
+    {
+     "key": "system.abilities.str.check.roll.mode",
+     "mode": 2,
+     "value": "1",
+     "priority": null
+    },
+    {
+     "key": "system.abilities.dex.check.roll.mode",
+     "mode": 2,
+     "value": "1",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!VAvGtxSod2JL2DbT.AyyxRu9CmSsHVXWO"
+  }
+ ],
+ "_key": "!items!VAvGtxSod2JL2DbT"
+}

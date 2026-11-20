@@ -1,0 +1,118 @@
+{
+ "_id": "9YLiWa4L5NVFbavf",
+ "name": "Innate Technique: Schrift X",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/schrift-x.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>You can create cursed seals that allow for permeation and your eyes are also cursed with a seal due to this technique.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.diVgFAJkfw6xhcmJ]{Piercing Schrift}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.SiPL1Dzm9Ck74Wah]{X-Axis Shot}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.LIyLn3xqjfp3xIBD]{Cursed Mark}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.djiYzCUqNqKK4eqo]{Intangibility}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.RWZxCvu1t7IKQbV3]{Domain Expansion: Divine Sight}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "aiH6F8nIt3eiR11c": {
+    "_id": "aiH6F8nIt3eiR11c",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Schrift X (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.diVgFAJkfw6xhcmJ",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "y7ytZC9C1c2mmvbq": {
+    "_id": "y7ytZC9C1c2mmvbq",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Schrift X (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.SiPL1Dzm9Ck74Wah",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "IAWMOgMmLk5LG6tW": {
+    "_id": "IAWMOgMmLk5LG6tW",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Schrift X (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.LIyLn3xqjfp3xIBD",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "npxpaJKvUdE9fQcl": {
+    "_id": "npxpaJKvUdE9fQcl",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Schrift X (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.djiYzCUqNqKK4eqo",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "kHfKUt5KxmOVAqmR": {
+    "_id": "kHfKUt5KxmOVAqmR",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Schrift X (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.RWZxCvu1t7IKQbV3",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Schrift X"
+  }
+ },
+ "_key": "!items!9YLiWa4L5NVFbavf"
+}

@@ -1,0 +1,152 @@
+{
+ "_id": "jGiSURG0H6aGEgTN",
+ "name": "Soul Bound Treasure",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/regalia.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Regalia — Innate Technique (11th level)</em></p><p>At 11th level, your control over your Soul Regalia has loosened nearly all of the seal. Your regalia is now a special grade cursed tool. Work with your GM to decide what its ability is.<br />\n As an action, you can spend 10 cursed energy to cause your regalia to hover for 1 minute. Your regalia has an AC equal to 12 + your cursed energy modifier + your proficiency bonus and hit points equal to its pool while hovering. The regalia is destroyed if reduced to 0 hit points. You gain the following actions:</p>\n<ul>\n<li>\n<p>As an action you can command the weapon to move up to 100 feet and can make any attacks on your turn originate from the Regalia as if you were wielding it. You can use your cursed energy modifier for attack and damage rolls for these attacks.  </p>\n</li>\n<li>\n<p>As an action, you can cause your regalia to move in a 100 foot line attack, appearing at the end of the line if it is a melee weapon. All creatures within range must make a Dexterity saving throw, taking your regalia damage on a hit.</p>\n</li>\n</ul>\n<p>After the minute is up, the Soul Regalia moves 100 ft towards you, attempting to return. If unable to, it falls to the ground.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "xnni6zG7OVk4esQS": {
+    "_id": "xnni6zG7OVk4esQS",
+    "type": "utility",
+    "name": "Action (10 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    }
+   },
+   "GSvAwjMEvRKGbmGw": {
+    "_id": "GSvAwjMEvRKGbmGw",
+    "type": "save",
+    "name": "Action",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "line",
+      "size": "100",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "xnni6zG7OVk4esQS": 10
+   },
+   "technique": "Regalia",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "jfP5e1LgOxgMmS1g",
+ "_key": "!items!jGiSURG0H6aGEgTN"
+}

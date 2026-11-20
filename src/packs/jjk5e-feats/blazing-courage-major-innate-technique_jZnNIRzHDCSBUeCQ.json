@@ -1,0 +1,192 @@
+{
+ "_id": "jZnNIRzHDCSBUeCQ",
+ "name": "Blazing Courage (Major Innate Technique)",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Creeps and Curses V.3.1</em></p><p><em>Major Innate Technique. Example technique for sorcerers and NPCs (GM approval).</em></p><p><strong>Ignition</strong></p>\n<p>You can spend up to your CE modifier (min of 1) as a bonus action while holding a melee weapon, igniting said weapon in flames for 1 minute. For the duration, the weapon deals 1d8 fire damage on a hit per CE spent. When using Ignition you ignore any detriments or penalties of the weapon or can use it on yourself for your unarmed strikes, potentially recreating a lost limb for the duration.</p>\n<p><strong>Mantle of Courage</strong></p>\n<p>While Ignition is active, you can spend 3 CE as a free action. You emit an aura of flames within 10 feet of you for 1 minute, giving you resistance to fire and cold damage. A creature that enters your mantle or starts their turn there must make a Constitution saving throw, taking your Ignition damage on a failed save or half as much on a successful save.</p>\n<p><strong>Burning Rend</strong></p>\n<p>While Ignition is active, you can spend 1 cursed energy to launch a burning slash, increasing the range of one of your melee attacks to 30 ft. This later increases to 60 ft.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkCursedTechnique"
+  },
+  "requirements": "Major Innate Technique",
+  "activities": {
+   "2d71dBWNOR7QBdAg": {
+    "_id": "2d71dBWNOR7QBdAg",
+    "type": "save",
+    "name": "Special (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "10",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": []
+    }
+   },
+   "Qdo8ya8fv7uRRg6k": {
+    "_id": "Qdo8ya8fv7uRRg6k",
+    "type": "utility",
+    "name": "Action (1 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   },
+   "9CcGcgFfjpTUGers": {
+    "_id": "9CcGcgFfjpTUGers",
+    "type": "damage",
+    "name": "Bonus Action (1+ CE)",
+    "sort": 200000,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "max(1, max(@abilities.wis.mod, @abilities.cha.mod))"
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "fire"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "mode": "whole",
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceSteps": {
+    "9CcGcgFfjpTUGers": 1
+   },
+   "ceCosts": {
+    "2d71dBWNOR7QBdAg": 3,
+    "Qdo8ya8fv7uRRg6k": 1,
+    "9CcGcgFfjpTUGers": 1
+   }
+  }
+ },
+ "folder": "PUm8acbqVGSo8Rm6",
+ "effects": [
+  {
+   "_id": "9QgbfM5ItoBWZRE2",
+   "name": "Blazing Courage (Major Innate Technique) (toggle)",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "changes": [
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "fire",
+     "priority": null
+    },
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "cold",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!jZnNIRzHDCSBUeCQ.9QgbfM5ItoBWZRE2"
+  }
+ ],
+ "sort": 700,
+ "_key": "!items!jZnNIRzHDCSBUeCQ"
+}

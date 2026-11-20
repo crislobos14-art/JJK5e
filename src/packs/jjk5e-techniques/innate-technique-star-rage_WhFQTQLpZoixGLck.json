@@ -1,0 +1,118 @@
+{
+ "_id": "WhFQTQLpZoixGLck",
+ "name": "Innate Technique: Star Rage",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/star-rage.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.IqCosBDfGxvNyaCw]{Virtual Mass Increase}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.Lac5k6IngAuqjQCY]{Improved Duration}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.1RpNop45juQM9dhK]{Virtual Mass Improvement}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.yYkcM2fCzHLvLzzr]{Virtual Mass Mastery}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.XjwAhuZxPS1qCUPA]{Domain Expansion: Event Horizon}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "xgVIq2UnJIWbspZZ": {
+    "_id": "xgVIq2UnJIWbspZZ",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Star Rage (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.IqCosBDfGxvNyaCw",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "5PCS088S4ov7ds8J": {
+    "_id": "5PCS088S4ov7ds8J",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Star Rage (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.Lac5k6IngAuqjQCY",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "JVOa0z9YmS0Y8d4T": {
+    "_id": "JVOa0z9YmS0Y8d4T",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Star Rage (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.1RpNop45juQM9dhK",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "1Inex3Ordr19jIqF": {
+    "_id": "1Inex3Ordr19jIqF",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Star Rage (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.yYkcM2fCzHLvLzzr",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "mhNcOdcA5cPPs7wy": {
+    "_id": "mhNcOdcA5cPPs7wy",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Star Rage (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.XjwAhuZxPS1qCUPA",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Star Rage"
+  }
+ },
+ "_key": "!items!WhFQTQLpZoixGLck"
+}

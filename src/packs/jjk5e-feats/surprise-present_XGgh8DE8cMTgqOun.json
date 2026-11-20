@@ -1,0 +1,81 @@
+{
+ "_id": "XGgh8DE8cMTgqOun",
+ "name": "Surprise Present",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/contractual-recreation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Quick Spender</em></p>\n<p>As a reaction against any hostile action taken against you, you can materialize one of your receipts for twice the cursed energy cost in a surprise attack. If using an object, you force the creature to make a Dexterity saving throw at disadvantage if they are within range. On a failure, they take bludgeoning damage depending on the object’s size. On a success, the creature takes half as much damage. If using a weapon, you can make an attack with the weapon against the attacker at advantage if they are within range. At 11th level, this can be used with <em>Contractual Control</em> with only the one Object or Weapon used as part of this reaction.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Quick Spender",
+  "activities": {
+   "VEM2rDGIcThDiozK": {
+    "_id": "VEM2rDGIcThDiozK",
+    "type": "save",
+    "name": "Reaction",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": []
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Quick Spender"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "UU2pjYTH69wH4knu",
+ "sort": 100,
+ "_key": "!items!XGgh8DE8cMTgqOun"
+}

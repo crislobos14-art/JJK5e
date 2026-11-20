@@ -1,0 +1,32 @@
+{
+ "_id": "LopSrEEkD6jZme5o",
+ "name": "Extreme Divergent Flow",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/divergent-fist.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Divergent Fist — Innate Technique (6th level)</em></p><p>Once you reach 6th level, you have gained better manipulation over your divergent fist attack. You can now use <em>Divergent Flow</em> on two separate attacks on your turn. When a creature is damaged by your <em>Divergent Flow</em>, they must make a Constitution saving throw. On a failure they become disoriented. Their next attack is made at disadvantage or creatures have advantage on the next saving throw forced by that creature.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Divergent Fist 6"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Divergent Fist",
+   "level": 6
+  }
+ },
+ "folder": "z0OBRtMvDoArKlLl",
+ "_key": "!items!LopSrEEkD6jZme5o"
+}

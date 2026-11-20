@@ -1,0 +1,93 @@
+{
+ "_id": "pwnKn6QaTymEsSYv",
+ "name": "Freezing Resolve",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/blazing-courage.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Blazing Courage — Cursed Technique Reversal</em></p><p>Your mastery of Reverse Cursed Technique has led to you unlocking your cursed technique reversal. You are now able to imbue your weapon with ice instead of fire. You can spend up to twice your CE modifier (minimum of 2) in cursed energy as a bonus action while holding a melee weapon, freezing said weapon for 1 minute. For the duration, the weapon deals 2d6 cold damage on a hit per 2 energy spent. At 6th level, you now deal 2d8 cold damage per energy spent, this increases to 2d10 at 11th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Blazing Courage",
+  "activities": {
+   "qtyDXA6HZfw6i9Wr": {
+    "_id": "qtyDXA6HZfw6i9Wr",
+    "type": "damage",
+    "name": "Bonus Action",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "cold"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Blazing Courage",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Blazing Courage"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!pwnKn6QaTymEsSYv"
+}

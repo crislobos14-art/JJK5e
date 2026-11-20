@@ -1,0 +1,115 @@
+{
+ "_id": "EJrxqMj9OKy7ZhlK",
+ "name": "Devastating Barrage",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/missile-fist.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Missile Fist — Innate Technique (3rd level)</em></p><p>At 3rd level, when you use your Missile Fist, you can spend additional cursed energy up to your Cursed Energy modifier to make an additional <em>Missile Fist</em> attack per cursed energy spent. Additionally, the range of your <em>Missile Fists</em> increases to 30 ft. This range increases by 20 ft again at 6th, 11th, and 18th level.</p>\n<p>If you hit a creature that is Large or smaller with a <em>Missile Fist</em>, instead of dealing damage, you can choose to grapple it for 1 minute. If you hit a grappled creature that is Large or smaller with a <em>Missile Fist</em>, instead of dealing damage, you can choose to restrain it for 1 minute. A creature can make a Strength saving throw against your CE save DC at the end of their turn to escape your technique. On a success, they can remove one of the <em>Missile Fists</em>, removing either the Grappled or Restrained conditions. These conditions end if you become Incapacitated.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "GXrlPFNMcRUpwl4V": {
+    "_id": "GXrlPFNMcRUpwl4V",
+    "type": "save",
+    "name": "Special (1+ CE)",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "max(1, max(@abilities.wis.mod, @abilities.cha.mod))"
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "str"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "special",
+   "value": null,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceSteps": {
+    "GXrlPFNMcRUpwl4V": 1
+   },
+   "ceCosts": {
+    "GXrlPFNMcRUpwl4V": 1
+   },
+   "technique": "Missile Fist",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "coN536PDmNM37MtV",
+ "_key": "!items!EJrxqMj9OKy7ZhlK"
+}

@@ -1,0 +1,29 @@
+{
+ "_id": "v6W642VKpSdpv5Ul",
+ "name": "Life Experience",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/trait-race.svg",
+ "system": {
+  "description": {
+   "value": "<p>This isn't your first shot at life and last time you learned a few things. You will gain proficiency in two skills or one skill and one tool of your choice.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "race",
+   "subtype": ""
+  },
+  "requirements": "Cursed Vessel (Reincarnated)"
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "A3CBV9dvsdKk3l4V",
+ "_key": "!items!v6W642VKpSdpv5Ul"
+}

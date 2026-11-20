@@ -1,0 +1,33 @@
+{
+ "_id": "xh9LLgcgXVOfWli2",
+ "name": "Shared Technique",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>At 2nd level, your attunement with your shikigami has increased. Any effects or actions granted to you by your technique are also granted to your Shikigami Companion (other than summons), drawing from your pool of CE.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Shikigami User 2"
+ },
+ "flags": {
+  "jjk5e": {
+   "modifies": [
+    "Shikigami Companion"
+   ]
+  }
+ },
+ "folder": "69XiiJo14iwd80Zo",
+ "_key": "!items!xh9LLgcgXVOfWli2"
+}

@@ -1,0 +1,118 @@
+{
+ "_id": "XRDIjn80Rrz4vQmL",
+ "name": "Innate Technique: Deadly Sentencing",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/deadly-sentencing.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>The technique you have is made for one purpose, justice.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.BP2dCOForc7QrwFI]{Judge’s Gavel}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.EdkOzraQgWFnQMJT]{Domain Expansion: Deadly Sentencing}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.HrqIX9ihcD7nvEPE]{Gavel Improvements}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.XMCbIzD1463jHWJy]{Better Evidence}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.bxSurrzBgl0GtcSQ]{Unstopping Justice}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "VNAkKNexLPoBnsZp": {
+    "_id": "VNAkKNexLPoBnsZp",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Deadly Sentencing (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.BP2dCOForc7QrwFI",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "db7HFRGvVJUXrhgj": {
+    "_id": "db7HFRGvVJUXrhgj",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Deadly Sentencing (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.EdkOzraQgWFnQMJT",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "vlXP4WCpYleCy95J": {
+    "_id": "vlXP4WCpYleCy95J",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Deadly Sentencing (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.HrqIX9ihcD7nvEPE",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "ledH4tcy84zIAlyd": {
+    "_id": "ledH4tcy84zIAlyd",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Deadly Sentencing (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.XMCbIzD1463jHWJy",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "f7NPBkD8vR5Uq7fm": {
+    "_id": "f7NPBkD8vR5Uq7fm",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Deadly Sentencing (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.bxSurrzBgl0GtcSQ",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Deadly Sentencing"
+  }
+ },
+ "_key": "!items!XRDIjn80Rrz4vQmL"
+}

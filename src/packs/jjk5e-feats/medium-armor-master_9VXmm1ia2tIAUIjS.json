@@ -1,0 +1,51 @@
+{
+ "_id": "9VXmm1ia2tIAUIjS",
+ "name": "Medium Armor Master",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: N/A</em></p>\n<p>You have practiced moving in medium armor to gain the following benefits, on top of proficiency with medium armor:</p>\n<ul>\n<li>\n<p>Wearing medium armor doesn't impose disadvantage on your Dexterity (Stealth) checks.  </p>\n</li>\n<li>\n<p>When you wear medium armor, you can add 3, rather than 2, to your AC if you have a Dexterity of 16 or higher.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkPhysical"
+  },
+  "requirements": "N/A",
+  "advancement": {
+   "uGCmXFfJ1QKHYD8A": {
+    "_id": "uGCmXFfJ1QKHYD8A",
+    "type": "Trait",
+    "level": 0,
+    "title": "Proficiencies",
+    "value": {},
+    "configuration": {
+     "mode": "default",
+     "allowReplacements": false,
+     "grants": [
+      "armor:med"
+     ],
+     "choices": []
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "cxPIGjcxqJdZTMQ5",
+ "sort": 1300,
+ "_key": "!items!9VXmm1ia2tIAUIjS"
+}

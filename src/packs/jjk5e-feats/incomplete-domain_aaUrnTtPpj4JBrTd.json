@@ -1,0 +1,69 @@
+{
+ "_id": "aaUrnTtPpj4JBrTd",
+ "name": "Incomplete Domain",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: 1 Breakthrough</em></p>\n<p>You learn to prematurely create an incomplete Domain Expansion. As an action for 10 cursed energy, you create an unrefined incomplete domain 100 ft around yourself for 1 minute. This structureless domain does not follow you, has a refinement of 0, and has no barrier. <br />\nThe domain lacks a guaranteed hit, but you gain advantage on technique attack rolls and creatures inside your domain have disadvantage on saving throws against your Innate Technique. Any effects of your domain are halved until you gain your complete Domain Expansion, upon which you can choose a different feat. When the domain ends, you experience <em>Technique Burnout</em> for 5 rounds. See Incomplete Domain (pg 451) in Rules of Thumb for further explanation.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkBarrier"
+  },
+  "requirements": "1 Breakthrough",
+  "activities": {
+   "2IlgR7SaJRWz36AP": {
+    "_id": "2IlgR7SaJRWz36AP",
+    "type": "utility",
+    "name": "Action (10 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "2IlgR7SaJRWz36AP": 10
+   },
+   "prereq": {
+    "breakthroughs": 1
+   }
+  }
+ },
+ "folder": "w6CtJKH5qYx1fgN4",
+ "sort": 500,
+ "_key": "!items!aaUrnTtPpj4JBrTd"
+}

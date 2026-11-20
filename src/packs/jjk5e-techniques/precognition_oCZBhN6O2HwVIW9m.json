@@ -1,0 +1,32 @@
+{
+ "_id": "oCZBhN6O2HwVIW9m",
+ "name": "Precognition",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/g-warstaff.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>G Warstaff — Innate Technique (11th level)</em></p><p>At 11th level, you can glimpse your own future, knowing exactly what to do and when. When you roll with advantage against a creature because of your technique, your critical range is increased by half your CE modifier(rounded down). <br />\n Whenever a creature rolls with disadvantage against you because of your technique, the roll’s critical fail range is increased by half of your CE modifier(rounded down). For example, if you have a +4 CE modifier and they roll a natural 3 on their roll, it counts as a critical failure.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "G Warstaff 11"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "G Warstaff",
+   "level": 11
+  }
+ },
+ "folder": "GjZxtO8W2HfeT6Hl",
+ "_key": "!items!oCZBhN6O2HwVIW9m"
+}

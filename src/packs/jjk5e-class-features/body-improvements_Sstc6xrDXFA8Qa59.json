@@ -1,0 +1,29 @@
+{
+ "_id": "Sstc6xrDXFA8Qa59",
+ "name": "Body Improvements",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>At 2nd level, your body is constantly growing and improving, becoming better by the day. You have a number of body points equal to your Heavenly Restriction level. These points can be used to obtain body improvements, all listed down at the Body Improvements List section. You cannot change an improvement once chosen.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Heavenly Restriction 2"
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "hWqAX9TqrOvuq1FE",
+ "_key": "!items!Sstc6xrDXFA8Qa59"
+}

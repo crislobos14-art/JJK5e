@@ -1,0 +1,32 @@
+{
+ "_id": "T2Ct1LdagWzoKjCR",
+ "name": "Insect Storage",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/centipede-shroud.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Centipede Shroud — Innate Technique (3rd level)</em></p><p>Starting at 3rd level, you can store items in the stomach of your centipede. You must have your centipede summoned to take items in or out of it and items can be no larger than a shield or polearm. Your centipede can store a number of pounds equal to twice your Cursed Energy score times your proficiency bonus and you can store or withdraw an item as an object interaction. If you die, the items stored in your centipede explode from your stomach.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Centipede Shroud 3"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Centipede Shroud",
+   "level": 3
+  }
+ },
+ "folder": "CxDLBZfVDaXb8XWS",
+ "_key": "!items!T2Ct1LdagWzoKjCR"
+}

@@ -1,0 +1,118 @@
+{
+ "_id": "ntI2UnoFpLvX430x",
+ "name": "Innate Technique: Dragon Vein",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/dragon-vein.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>Your technique forms an unbreakable connection between you and the earth while your feet touch the ground.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.hkjKjJNWrFqOsjLR]{Flow of the Dragon}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.qTsOx6OCHUpYLbgX]{Ley Line Command}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.XDoCAxQgRPhFISef]{Earth Dragon Soul}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.h8SxUENKo3mSge4y]{World Anchor}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.BOWeUicZygm9sbIU]{Domain Expansion: Of Primordial World}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "xwbgSISINBRXLftE": {
+    "_id": "xwbgSISINBRXLftE",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Dragon Vein (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.hkjKjJNWrFqOsjLR",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "Xux98djOT9B13sEF": {
+    "_id": "Xux98djOT9B13sEF",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Dragon Vein (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.qTsOx6OCHUpYLbgX",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "pb10J85xjPTUKdjx": {
+    "_id": "pb10J85xjPTUKdjx",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Dragon Vein (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.XDoCAxQgRPhFISef",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "8Dpxd7iSim7MTQVT": {
+    "_id": "8Dpxd7iSim7MTQVT",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Dragon Vein (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.h8SxUENKo3mSge4y",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "CcKsKLFPpBGX2Ib5": {
+    "_id": "CcKsKLFPpBGX2Ib5",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Dragon Vein (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.BOWeUicZygm9sbIU",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Dragon Vein"
+  }
+ },
+ "_key": "!items!ntI2UnoFpLvX430x"
+}

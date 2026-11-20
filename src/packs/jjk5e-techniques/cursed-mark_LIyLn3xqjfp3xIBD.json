@@ -1,0 +1,110 @@
+{
+ "_id": "LIyLn3xqjfp3xIBD",
+ "name": "Cursed Mark",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/schrift-x.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Schrift X — Innate Technique (6th level)</em></p><p>At 6th level, you have learned to apply your cursed seals onto others, allowing for even more accurate and deadly shots. When you use a mark, any previous marks you have active ends.</p>\n<ul>\n<li>\n<p><strong>Critical Mark:</strong> As a bonus action for 3 CE, you can mark a target of your choice within 30 feet for 1 minute. If you hit the marked target with an attack, your next attack against the target is made at advantage. On a hit, the attack deals critical damage and the mark ends.  </p>\n</li>\n<li>\n<p><strong>Multi-Mark:</strong> As a bonus action for 3 CE, you can mark a number of targets up to your CE modifier within 30 feet for 1 minute. As an action, you can make a ranged attack and activate the marks, causing the attack to split and attack each marked target within range of your attack. You make a ranged weapon or cursed energy attack roll against each creature, dealing your normal damage on a hit and the mark ends.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "zqMCIv6aDmtyaGTc": {
+    "_id": "zqMCIv6aDmtyaGTc",
+    "type": "utility",
+    "name": "Bonus Action (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "value": "30",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "zqMCIv6aDmtyaGTc": 3
+   },
+   "technique": "Schrift X",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "sHIaW6mkEHmwduDu",
+ "_key": "!items!LIyLn3xqjfp3xIBD"
+}

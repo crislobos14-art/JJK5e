@@ -1,0 +1,13 @@
+{
+ "_id": "jAfdFd2aU4QumD6v",
+ "name": "JJK: Import / Update Compendiums",
+ "type": "script",
+ "img": "icons/svg/book.svg",
+ "scope": "global",
+ "command": "game.modules.get(\"jjk5e\").api.promptImport(true);",
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": null,
+ "_key": "!macros!jAfdFd2aU4QumD6v"
+}

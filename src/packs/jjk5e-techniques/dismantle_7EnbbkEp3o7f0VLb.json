@@ -1,0 +1,95 @@
+{
+ "_id": "7EnbbkEp3o7f0VLb",
+ "name": "Dismantle",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/shrine.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Shrine — Innate Technique (1st level)</em></p><blockquote><p>Dissect and fillet, preparing your oven. Simple things like that are your cursed technique.</p></blockquote><p>Starting at 1st level, you learn the basics of your technique, which is cutting. When you take the attack action, you can spend Cursed Energy up to your proficiency bonus to replace your attack with Dismantle. Make a melee or ranged CE attack with a range of 120/250 ft. On a hit you deal 1d12 slashing damage per CE spent. The base damage becomes 2d12 at 6th level as long as you spend 1 CE. This increases to 3d12 at 11th and 4d12 at 18th level.<br />\n If you gain the Extra Attack feature, you can replace attacks with <em>Dismantle</em>, but must spend Cursed Energy for each attack. If a target cannot see <em>Dismantle</em>, you gain advantage on Dismantle attacks against that creature (passive Perception lower than your CE save DC cannot see <em>Dismantle</em>). You gain +1 bonus to <em>Dismantle</em>’s critical range at 3rd, 6th, 11th, and 18th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "JFolT83oXSYI2EbK": {
+    "_id": "JFolT83oXSYI2EbK",
+    "type": "utility",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "JFolT83oXSYI2EbK": 1
+   },
+   "technique": "Shrine",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "m9ZssDMA8savxH5G",
+ "_key": "!items!7EnbbkEp3o7f0VLb"
+}

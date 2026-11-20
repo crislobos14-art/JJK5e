@@ -1,0 +1,93 @@
+{
+ "_id": "Tyi2OmEG9MQWYtr5",
+ "name": "Human (Jujutsu Sorcerer)",
+ "type": "race",
+ "img": "modules/jjk5e/icons/race.svg",
+ "system": {
+  "description": {
+   "value": "<p>While many humans vary in shape and size, your human character will have these traits.</p>\n<p><strong>Ability Score Increase.</strong> One ability score of your choice increases by 2 and other ability scores increase by 1. Choosing different Human races replaces this ASI.</p>\n<p><strong>Age.</strong> Humans reach adulthood in their teens and live for around a century.</p>\n<p><strong>Alignment.</strong> There is no clear alignment that is consistent among all humans. Just about any alignment can be justified.</p>\n<p><strong>Size.</strong> Humans in the Jujutsu Kaisen world are typically 5-6 feet tall. Some can rest far outside this range, but your size will count as medium.</p>\n<p><strong>Speed.</strong> Your base walking speed is 30 feet.</p>\n<p><strong>Jujutsu Sorcerer</strong></p>\n<p>You are part of a family of sorcerers or have been involved from a young age, you gain the following:</p>\n<p><strong>Ability Score Increase.</strong> One ability score of your choice increases by 2 and another by 1.</p>\n<p><strong>Skills.</strong> You gain proficiency in martial weapons.</p>\n<p><strong>Trained Cursed Energy.</strong> You gain a Cursed Energy feat.  </p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "identifier": "human-jujutsu-sorcerer",
+  "movement": {
+   "walk": 30,
+   "units": "ft"
+  },
+  "type": {
+   "value": "humanoid",
+   "subtype": "",
+   "custom": ""
+  },
+  "advancement": {
+   "2crLnxBJKt9eNyAB": {
+    "_id": "2crLnxBJKt9eNyAB",
+    "type": "Size",
+    "configuration": {
+     "sizes": [
+      "med"
+     ]
+    },
+    "value": {}
+   },
+   "rjvFSJzIkdv95JGE": {
+    "_id": "rjvFSJzIkdv95JGE",
+    "type": "AbilityScoreImprovement",
+    "level": 0,
+    "title": "Ability Score Increase (+2 to one ability and +1 to another)",
+    "configuration": {
+     "points": 3,
+     "fixed": {},
+     "cap": 2,
+     "locked": []
+    },
+    "value": {}
+   },
+   "TwmXHhvK7Aq14Ge9": {
+    "_id": "TwmXHhvK7Aq14Ge9",
+    "type": "Trait",
+    "level": 0,
+    "title": "Skills",
+    "configuration": {
+     "mode": "default",
+     "allowReplacements": false,
+     "grants": [
+      "weapon:mar"
+     ],
+     "choices": []
+    },
+    "value": {}
+   },
+   "DOt1vKENCd8NpE4w": {
+    "_id": "DOt1vKENCd8NpE4w",
+    "type": "ItemGrant",
+    "level": 0,
+    "title": "Traits",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-races.Item.WfKSA8NMFFN0IDQL",
+       "optional": false
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-races.Item.MHEyZih4Y8MUC3r7",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": null,
+ "_key": "!items!Tyi2OmEG9MQWYtr5"
+}

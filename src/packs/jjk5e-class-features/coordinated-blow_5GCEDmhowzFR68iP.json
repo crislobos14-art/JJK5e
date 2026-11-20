@@ -1,0 +1,74 @@
+{
+ "_id": "5GCEDmhowzFR68iP",
+ "name": "Coordinated Blow",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>Beginning at 5th level, you and your shikigami strike as one. As part of the attack action, you can command your companion to move and attack a creature within range or take a different action.</p>\n<p><strong>Shikigami Improvement</strong></p>\n<p>Starting at 7th level, your shikigami grows stronger. Your companion gains the following:</p>\n<ul>\n<li>\n<p>It gains a hover speed equal to its walking speed  </p>\n</li>\n<li>\n<p>Its strike attacks deal 1d6 extra necrotic damage  </p>\n</li>\n<li>\n<p>You can either choose for your shikigami to become medium or gain the ability to become any weapon, dealing an additional 1d6 necrotic damage on a hit.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Shikigami User 5",
+  "activities": {
+   "Bnbf1HdDs6ASM8jO": {
+    "_id": "Bnbf1HdDs6ASM8jO",
+    "type": "damage",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "69XiiJo14iwd80Zo",
+ "_key": "!items!5GCEDmhowzFR68iP"
+}

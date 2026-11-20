@@ -1,0 +1,79 @@
+[
+ {
+  "name": "jjk5e-classes",
+  "label": "JJK 5e: Classes",
+  "type": "Item",
+  "file": "data/jjk5e-classes.json",
+  "count": 9
+ },
+ {
+  "name": "jjk5e-class-features",
+  "label": "JJK 5e: Class Features",
+  "type": "Item",
+  "file": "data/jjk5e-class-features.json",
+  "count": 131
+ },
+ {
+  "name": "jjk5e-techniques",
+  "label": "JJK 5e: Innate Techniques",
+  "type": "Item",
+  "file": "data/jjk5e-techniques.json",
+  "count": 586
+ },
+ {
+  "name": "jjk5e-races",
+  "label": "JJK 5e: Races",
+  "type": "Item",
+  "file": "data/jjk5e-races.json",
+  "count": 48
+ },
+ {
+  "name": "jjk5e-feats",
+  "label": "JJK 5e: Feats",
+  "type": "Item",
+  "file": "data/jjk5e-feats.json",
+  "count": 395
+ },
+ {
+  "name": "jjk5e-backgrounds",
+  "label": "JJK 5e: Backgrounds & Mindsets",
+  "type": "Item",
+  "file": "data/jjk5e-backgrounds.json",
+  "count": 22
+ },
+ {
+  "name": "jjk5e-equipment",
+  "label": "JJK 5e: Equipment & Cursed Tools",
+  "type": "Item",
+  "file": "data/jjk5e-equipment.json",
+  "count": 146
+ },
+ {
+  "name": "jjk5e-rules",
+  "label": "JJK 5e: Rules",
+  "type": "JournalEntry",
+  "file": "data/jjk5e-rules.json",
+  "count": 30
+ },
+ {
+  "name": "jjk5e-tables",
+  "label": "JJK 5e: Roll Tables",
+  "type": "RollTable",
+  "file": "data/jjk5e-tables.json",
+  "count": 4
+ },
+ {
+  "name": "jjk5e-macros",
+  "label": "JJK 5e: Macros",
+  "type": "Macro",
+  "file": "data/jjk5e-macros.json",
+  "count": 16
+ },
+ {
+  "name": "jjk5e-shikigami",
+  "label": "JJK 5e: Shikigami (Ten Shadows)",
+  "type": "Actor",
+  "file": "data/jjk5e-shikigami.json",
+  "count": 12
+ }
+]

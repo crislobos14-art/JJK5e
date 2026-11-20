@@ -1,0 +1,71 @@
+{
+ "_id": "WXa3ZaHRk7b7PDO4",
+ "name": "Chainsaw Dismantle",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/shrine.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Dismantle</em></p>\n<p>Once per turn, you can spend 2 CE to apply <em>Dismantle</em> to your punches. When you make an unarmed strike you deal 1d12 additional slashing damage. This increases to 2d12 at 6th level, 3d12 at 11th level and 4d12 at 18th level. At 11th level, you can use <em>Chainsaw Dismantle</em> as a reaction to an attack. You roll the damage for your Dismantle based on the CE you spend and reduce the damage by that amount. If this reduces the damage to 0, the attack is nullified.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Dismantle",
+  "activities": {
+   "jhXeoMft6mfwjmwu": {
+    "_id": "jhXeoMft6mfwjmwu",
+    "type": "utility",
+    "name": "Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "jhXeoMft6mfwjmwu": 2
+   },
+   "prereq": {
+    "features": [
+     [
+      "Dismantle"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "2XiAKaCJUnpH62hA",
+ "sort": 100,
+ "_key": "!items!WXa3ZaHRk7b7PDO4"
+}

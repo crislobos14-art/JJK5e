@@ -1,0 +1,42 @@
+{
+ "_id": "XEAPiCEU2CTb4ekl",
+ "name": "Maximum: Sakuga",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/projection-sorcery.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Fastest Sorcerer Alive</em></p>\n<p>When you activate your cursed energy you can force it past its limit for short periods of time. For an additional cursed energy per round, you also gain the following effects in addition to the other effects of your technique:</p>\n<ul>\n<li>\n<p>Your speed is doubled  </p>\n</li>\n<li>\n<p>You gain advantage on Dexterity saves  </p>\n</li>\n<li>\n<p>Your Dexterity score increases by +2, ignoring your maximum  </p>\n</li>\n<li>\n<p>An additional action on each of your turns. That action can be used only to take the Attack action (one weapon attack only), Dash, Disengage, Hide, or Use an Object action.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Fastest Sorcerer Alive",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Fastest Sorcerer Alive"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "CFoGNkravs7kgdkV",
+ "sort": 300,
+ "_key": "!items!XEAPiCEU2CTb4ekl"
+}

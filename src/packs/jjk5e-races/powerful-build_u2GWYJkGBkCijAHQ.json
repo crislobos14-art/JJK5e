@@ -1,0 +1,50 @@
+{
+ "_id": "u2GWYJkGBkCijAHQ",
+ "name": "Powerful Build",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/trait-race.svg",
+ "system": {
+  "description": {
+   "value": "<p>You count as one size larger when determining your carrying capacity and the weight you can push, drag, or lift.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "race",
+   "subtype": ""
+  },
+  "requirements": "Human (Superhuman)"
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "FDVrGmw22BclKBnR",
+ "effects": [
+  {
+   "_id": "7kQzR3F1IsLOcVvC",
+   "name": "Powerful Build",
+   "img": "modules/jjk5e/icons/trait-race.svg",
+   "changes": [
+    {
+     "key": "flags.dnd5e.powerfulBuild",
+     "mode": 5,
+     "value": "true",
+     "priority": null
+    }
+   ],
+   "disabled": false,
+   "transfer": true,
+   "duration": {},
+   "description": "",
+   "flags": {},
+   "_key": "!items.effects!u2GWYJkGBkCijAHQ.7kQzR3F1IsLOcVvC"
+  }
+ ],
+ "_key": "!items!u2GWYJkGBkCijAHQ"
+}

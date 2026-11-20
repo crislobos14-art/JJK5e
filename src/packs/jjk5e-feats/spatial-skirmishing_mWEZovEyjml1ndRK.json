@@ -1,0 +1,42 @@
+{
+ "_id": "mWEZovEyjml1ndRK",
+ "name": "Spatial Skirmishing",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/limitless.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Lapse Blue</em></p>\n<p>Through intense training and familiarizing yourself with your technique, you have gained the ability to apply Blue to your fists. Once per turn, when you make an unarmed strike, by spending cursed energy you can make them suffer the effects of Lapse Blue on a hit. For this attack you can use your cursed energy modifier for attack rolls. When you use Blue in this way, the target takes additional damage equal to <em>Lapse Blue</em> on a hit and you gain advantage on that attack roll as your technique attracts the target. <br />\n  If you have access to <em>Reversal Red</em>, you can also imbue Red to your fists. When you use Red in this way, the target takes additional damage equal to <em>Reversal Red</em> on a hit and must make a Strength saving throw or be launched the same distance as a normal Red.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Lapse Blue",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Lapse Blue"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "MYCXBgSVkzwVdmJj",
+ "sort": 100,
+ "_key": "!items!mWEZovEyjml1ndRK"
+}

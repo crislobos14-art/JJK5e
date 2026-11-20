@@ -1,0 +1,125 @@
+{
+ "_id": "K6UyZtHqEtOyh6Ua",
+ "name": "Sumerian (Shaama)",
+ "type": "race",
+ "img": "modules/jjk5e/icons/race.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Creeps and Curses V.3.1 — Modulo</em></p><p>You come from a different world with different knowledge of jujutsu. Rolloluca powers your techniques and you are accustomed to territorial wars. Sumerians can vary wildly in appearance, but all possess a third eye.</p>\n<p><strong>Ability Score Increase.</strong> +2 to one ability score of your choice and +1 to another.</p>\n<p><strong>Creature Type.</strong> Humanoid.</p>\n<p><strong>Age.</strong> Sumerians mature as fast as humans and live for around 100 years.</p>\n<p><strong>Alignment.</strong> Sumerians can be good, neutral, or evil, but mostly tend towards being lawful.</p>\n<p><strong>Speed.</strong> Your base walking speed is 30 feet.</p>\n<p><strong>Languages.</strong> Common and Sumerian.</p><p><strong>Shaama.</strong> Little is known about the Shaama; they stay out of the battles between Deskunte and Rumelians. Size: Medium.</p>"
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "identifier": "sumerian-shaama",
+  "movement": {
+   "walk": 30,
+   "units": "ft"
+  },
+  "type": {
+   "value": "humanoid",
+   "subtype": "",
+   "custom": ""
+  },
+  "advancement": {
+   "YUtlC7I1XMAXqoAE": {
+    "_id": "YUtlC7I1XMAXqoAE",
+    "type": "Size",
+    "configuration": {
+     "sizes": [
+      "med"
+     ]
+    },
+    "value": {}
+   },
+   "mE6xLgu8Rpit2faO": {
+    "_id": "mE6xLgu8Rpit2faO",
+    "type": "AbilityScoreImprovement",
+    "level": 0,
+    "title": "Ability Score Increase (+2 / +1)",
+    "configuration": {
+     "points": 3,
+     "cap": 2,
+     "fixed": {},
+     "locked": []
+    },
+    "value": {}
+   },
+   "ONGjUDS8ReIaZwTY": {
+    "_id": "ONGjUDS8ReIaZwTY",
+    "type": "ItemGrant",
+    "level": 0,
+    "title": "Traits",
+    "value": {},
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-races.Item.aQsHyHT1TGgQ7N4F",
+       "optional": false
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-races.Item.mBZlP90SrjFv2Z5a",
+       "optional": false
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-races.Item.AANviDB6dhJp2Fww",
+       "optional": false
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-races.Item.I73sZQJAZ1ka7czL",
+       "optional": false
+      }
+     ],
+     "optional": false
+    }
+   },
+   "FJr5cy4fYbP4M4nk": {
+    "_id": "FJr5cy4fYbP4M4nk",
+    "type": "Trait",
+    "level": 0,
+    "title": "Third Eye",
+    "value": {},
+    "configuration": {
+     "mode": "default",
+     "grants": [
+      "skills:prc"
+     ],
+     "choices": []
+    }
+   },
+   "Q89aqAXQ2GG6GPqX": {
+    "_id": "Q89aqAXQ2GG6GPqX",
+    "type": "Trait",
+    "level": 0,
+    "title": "Refined Study",
+    "value": {},
+    "configuration": {
+     "mode": "default",
+     "grants": [],
+     "choices": [
+      {
+       "count": 2,
+       "pool": [
+        "skills:*"
+       ]
+      },
+      {
+       "count": 1,
+       "pool": [
+        "tool:art:*"
+       ]
+      }
+     ]
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": null,
+ "_key": "!items!K6UyZtHqEtOyh6Ua"
+}

@@ -1,0 +1,140 @@
+{
+ "_id": "JP0V3A2SfLlehDRP",
+ "name": "Dehydration",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/disaster-tides.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Disaster Tides — Cursed Technique Reversal</em></p><p>While studying reverse cursed technique you have managed to invert your technique, instead of creating you now can destroy water. As an action for 2 cursed energy per 10 gallons destroyed, you can destroy up to 10 times your CE modifier gallons of water within range. Alternatively, you destroy fog in a 30-foot cube within range. You can also remove the water of a living being within reach of you. As an action for up to twice your CE modifier, you touch a creature and force it to make a Constitution saving throw. On a failure, they take 2d8 necrotic damage per energy spent. On a success, they take half as much. If they fail the save by 5 or more, they gain 1 level of exhaustion. This reversal does not work in creatures without water in their body.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Disaster Tides",
+  "activities": {
+   "FbMipC8WWqQSgfdW": {
+    "_id": "FbMipC8WWqQSgfdW",
+    "type": "utility",
+    "name": "Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {
+     "template": {
+      "type": "cube",
+      "size": "30",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     }
+    },
+    "duration": {
+     "units": "inst"
+    }
+   },
+   "xAteEEccbxv1k3ub": {
+    "_id": "xAteEEccbxv1k3ub",
+    "type": "save",
+    "name": "Action",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "FbMipC8WWqQSgfdW": 2
+   },
+   "technique": "Disaster Tides",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Disaster Tides"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!JP0V3A2SfLlehDRP"
+}

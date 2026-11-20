@@ -1,0 +1,105 @@
+{
+ "_id": "B0FGULtttLUhFXig",
+ "name": "Vengeful Fury",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>At 3rd level, you are filled with a deep hatred filled by vengeance, making you ignore everything and let anger consume you. As a bonus action you can enter your fury state if you're not wearing heavy armor, gaining the following benefits:</p>\n<ul>\n<li>\n<p>When you take bludgeoning, piercing, or slashing damage, you reduce the damage by your proficiency bonus.  </p>\n</li>\n<li>\n<p>You deal one additional dice of damage whenever you score a critical hit with a melee weapon.  </p>\n</li>\n<li>\n<p>Your fury lasts for 1 minute. It ends early if you are knocked unconscious or if your turn ends and you haven't attacked a hostile creature since your last turn or taken damage since then. You can also end your rage state on your turn as a bonus action.  </p>\n</li>\n<li>\n<p>You can enter your fury a number of times up to your proficiency bonus, and recover all uses upon a short or long rest.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Heavenly Restriction (Vengeful) 3",
+  "activities": {
+   "Gk4aDS22a26nkhHN": {
+    "_id": "Gk4aDS22a26nkhHN",
+    "type": "utility",
+    "name": "Bonus Action",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "activatesGroup": {
+    "Gk4aDS22a26nkhHN": "fury"
+   }
+  }
+ },
+ "folder": "vonv3wc4YmJGEBE1",
+ "effects": [
+  {
+   "_id": "ZLgiay5UrJKPQtcx",
+   "name": "Fury",
+   "img": "modules/jjk5e/icons/feature.svg",
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "auto": "group",
+     "group": "fury"
+    }
+   },
+   "changes": [
+    {
+     "key": "system.traits.dm.amount.bludgeoning",
+     "mode": 2,
+     "value": "-@prof",
+     "priority": null
+    },
+    {
+     "key": "system.traits.dm.amount.piercing",
+     "mode": 2,
+     "value": "-@prof",
+     "priority": null
+    },
+    {
+     "key": "system.traits.dm.amount.slashing",
+     "mode": 2,
+     "value": "-@prof",
+     "priority": null
+    },
+    {
+     "key": "flags.dnd5e.meleeCriticalDamageDice",
+     "mode": 2,
+     "value": "1",
+     "priority": null
+    }
+   ],
+   "_key": "!items.effects!B0FGULtttLUhFXig.ZLgiay5UrJKPQtcx"
+  }
+ ],
+ "_key": "!items!B0FGULtttLUhFXig"
+}

@@ -1,0 +1,118 @@
+{
+ "_id": "8QS8U7U3kr2SSWyk",
+ "name": "Innate Technique: Regalia",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/regalia.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>Your very soul has become a cursed tool that has been sealed within. You have the ability to manifest it using cursed energy.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.akoptGrJDbodhSRV]{Regalia}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.PGx9JDu1JoHTHWuk]{Cursed Wave}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.kErS8w7ITb2KTHxT]{Divine Protection}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.jGiSURG0H6aGEgTN]{Soul Bound Treasure}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.0EfuxPmRKXaYG7ms]{Domain Expansion: Cursed Soul Armory}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "1tmgcCzApAasZH0T": {
+    "_id": "1tmgcCzApAasZH0T",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Regalia (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.akoptGrJDbodhSRV",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "vK8Kt6FZEuPJ2kLz": {
+    "_id": "vK8Kt6FZEuPJ2kLz",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Regalia (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.PGx9JDu1JoHTHWuk",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "hD1Q1q9S8thnzvE6": {
+    "_id": "hD1Q1q9S8thnzvE6",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Regalia (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.kErS8w7ITb2KTHxT",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "rJ3Q0FwuStALAeU8": {
+    "_id": "rJ3Q0FwuStALAeU8",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Regalia (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.jGiSURG0H6aGEgTN",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "bWK7jJl2kB1AOiGE": {
+    "_id": "bWK7jJl2kB1AOiGE",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Regalia (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.0EfuxPmRKXaYG7ms",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Regalia"
+  }
+ },
+ "_key": "!items!8QS8U7U3kr2SSWyk"
+}

@@ -1,0 +1,42 @@
+{
+ "_id": "Me90W7kGtBmtDa4X",
+ "name": "Perfected Teleport",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/teleportation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Mastered Teleport</em></p>\n<p>You're grown more efficient with your teleports and have perfected their efficiency to reduce cursed energy costs. The cost to use your technique instead becomes 1 CE and the cost to cast Teleport is reduced by your CE modifier.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Mastered Teleport",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Mastered Teleport"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "giRwgEP8Enx3V3vx",
+ "sort": 200,
+ "_key": "!items!Me90W7kGtBmtDa4X"
+}

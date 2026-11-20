@@ -1,0 +1,46 @@
+{
+ "_id": "k7YECe6gRX3Lu5NM",
+ "name": "Replay Sorcery",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/projection-sorcery.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Projection Sorcery — Cursed Technique Reversal</em></p><p>You have mastered the Reverse Cursed Technique and the 24 FPS rule, learning how to rewind time itself. As a Full Turn Action, you can activate Replay Technique by spending Cursed Energy up to twice your CE modifier. For every 2 cursed energy spent, you teleport back 6 seconds in time to where you previously were. You cannot use Replay Sorcery and Projection Sorcery at the same time.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Projection Sorcery"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Projection Sorcery",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Projection Sorcery"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!k7YECe6gRX3Lu5NM"
+}

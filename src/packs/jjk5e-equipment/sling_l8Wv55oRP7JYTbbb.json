@@ -1,0 +1,73 @@
+{
+ "_id": "l8Wv55oRP7JYTbbb",
+ "name": "Sling",
+ "type": "weapon",
+ "img": "icons/svg/sword.svg",
+ "folder": "8L9REK3UZxFoXRJA",
+ "system": {
+  "description": {
+   "value": "<p>Simple ranged weapon. 1d4 bludgeoning. Ammunition(30/120).</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "simpleR",
+   "baseItem": "sling"
+  },
+  "damage": {
+   "base": {
+    "number": 1,
+    "denomination": 4,
+    "types": [
+     "bludgeoning"
+    ]
+   }
+  },
+  "range": {
+   "value": 30,
+   "long": 120,
+   "units": "ft"
+  },
+  "properties": [
+   "amm"
+  ],
+  "proficient": null,
+  "price": {
+   "value": 5.0,
+   "denomination": "gp"
+  },
+  "quantity": 1,
+  "activities": {
+   "dxpnm4mkFyRszfJ6": {
+    "_id": "dxpnm4mkFyRszfJ6",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "ranged",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "priceUSD": "$500"
+  }
+ },
+ "_key": "!items!l8Wv55oRP7JYTbbb"
+}

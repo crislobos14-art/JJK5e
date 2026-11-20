@@ -1,0 +1,68 @@
+{
+ "_id": "7t9e6AQRRY4OkR85",
+ "name": "Maximum: Backup",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/body-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Immortality</em></p>\n<p>As much as you might as well be immortal, it never hurts to be prepared. As an action, after having a dead body prepared, you can prepare it as a backup. This backup works the same as the <em>Clone</em> spell (only for yourself), without the cost or time requirement.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Immortality",
+  "activities": {
+   "7VDt5qW3AcW2Piep": {
+    "_id": "7VDt5qW3AcW2Piep",
+    "type": "utility",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Immortality"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "XJZyFbzkyclVqRZa",
+ "sort": 300,
+ "_key": "!items!7t9e6AQRRY4OkR85"
+}

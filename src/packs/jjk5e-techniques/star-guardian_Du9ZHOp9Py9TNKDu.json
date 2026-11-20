@@ -1,0 +1,94 @@
+{
+ "_id": "Du9ZHOp9Py9TNKDu",
+ "name": "Star Guardian",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/star-dictator.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Star Dictator — Cursed Technique Reversal</em></p><p>You have learned your technique reversal that allows your pseudo-domains to instead form an anti-domain. For 4 cursed energy, you reverse one of your active pseudo-domains into an anti-domain. Any guaranteed hits or effects that would cause attacks to automatically hit and saving throws to automatically fail are nullified and have no effect against orbiting shikigami and creatures within the anti-domain. A creature that hits your orbiting shikigami that are creating the anti-domain takes 1d12 slashing damage.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Star Dictator",
+  "activities": {
+   "gn5lWOYUUa8j6WTx": {
+    "_id": "gn5lWOYUUa8j6WTx",
+    "type": "damage",
+    "name": "Action (4 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 12,
+       "bonus": "",
+       "types": [
+        "slashing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "gn5lWOYUUa8j6WTx": 4
+   },
+   "technique": "Star Dictator",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Star Dictator"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!Du9ZHOp9Py9TNKDu"
+}

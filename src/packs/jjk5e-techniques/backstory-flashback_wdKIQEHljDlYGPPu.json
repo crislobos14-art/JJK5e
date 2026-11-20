@@ -1,0 +1,75 @@
+{
+ "_id": "wdKIQEHljDlYGPPu",
+ "name": "Backstory Flashback",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/g-warstaff.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>G Warstaff — Cursed Technique Reversal</em></p><p>With your mastery over Reverse Cursed Technique comes your cursed technique reversal. Just like when using G Warstaff normally, you fulfill G Warstaff's condition for ink by hitting a creature. However, instead of being able to see their future, you can see their past. As a bonus action for 2 cursed energy, you can view their manga panel and learn the general actions they took over the past few weeks. You can see a number of weeks in the past equal to the amount of seconds marked by G Warstaff.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, G Warstaff",
+  "activities": {
+   "1irvq4NUXJqrRk2p": {
+    "_id": "1irvq4NUXJqrRk2p",
+    "type": "utility",
+    "name": "Bonus Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "1irvq4NUXJqrRk2p": 2
+   },
+   "technique": "G Warstaff",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "G Warstaff"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!wdKIQEHljDlYGPPu"
+}

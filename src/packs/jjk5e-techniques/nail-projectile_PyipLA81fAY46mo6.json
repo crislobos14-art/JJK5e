@@ -1,0 +1,114 @@
+{
+ "_id": "PyipLA81fAY46mo6",
+ "name": "Nail Projectile",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/straw-doll-technique.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Straw Doll Technique — Innate Technique (1st level)</em></p><p>Beginning at 1st level, due to your experience with your technique, you will start with 1 Hammer, 24 nails, and 1 straw doll. As an action for 1 Cursed Energy, you strike 2 nails by hitting them with your hammer. Make two melee or ranged cursed energy attack rolls with a range of 20/60 feet. On a hit, each nail deals 1d6 + your CE modifier piercing damage. You can also spend 2 additional Cursed Energy to make 2 additional attacks in this way.<br />\n At 6th level, you have become rather cheap with your nails, making sure to always recover as many as possible from the battlefield. As a bonus action while touching a creature that has taken damage from Nail Projectile, you can make a DC 10 Dexterity check. On a success, you regain the nail.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "fQhKGcKWsr5KPuJW": {
+    "_id": "fQhKGcKWsr5KPuJW",
+    "type": "damage",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 6,
+       "bonus": "@mod",
+       "types": [
+        "piercing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "fQhKGcKWsr5KPuJW": 1
+   },
+   "technique": "Straw Doll Technique",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "YmMAY3fFTK6UIkG2",
+ "_key": "!items!PyipLA81fAY46mo6"
+}

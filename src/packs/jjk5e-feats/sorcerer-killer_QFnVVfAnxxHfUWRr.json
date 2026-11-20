@@ -1,0 +1,66 @@
+{
+ "_id": "QFnVVfAnxxHfUWRr",
+ "name": "Sorcerer Killer",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: N/A</em></p>\n<p>You have practiced techniques in melee combat against sorcerers, gaining the following benefits:</p>\n<ul>\n<li>\n<p>When a creature within 10 feet of you uses Cursed Energy, you can use your reaction to make a melee weapon attack against that creature if they are within range.  </p>\n</li>\n<li>\n<p>You have advantage on saving throws against cursed techniques made by creatures within 15 feet of you.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkSkill"
+  },
+  "requirements": "N/A",
+  "activities": {
+   "zUD30hjVLHPg5s75": {
+    "_id": "zUD30hjVLHPg5s75",
+    "type": "utility",
+    "name": "Reaction",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "10",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "EtgHYidIGv42ylfo",
+ "sort": 1500,
+ "_key": "!items!QFnVVfAnxxHfUWRr"
+}

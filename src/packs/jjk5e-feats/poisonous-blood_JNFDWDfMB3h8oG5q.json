@@ -1,0 +1,113 @@
+{
+ "_id": "JNFDWDfMB3h8oG5q",
+ "name": "Poisonous Blood",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/blood-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Blood Manipulation</em></p>\n<p>Your blood has grown to be harmful to others. If you hit a creature by 5 or more than their AC or a creature fails a save against a Blood Manipulation technique by 5 or more, the target is poisoned for 1 minute. They can make a Constitution save at the end of their turn to cure the condition.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Blood Manipulation",
+  "activities": {
+   "cXl6nEdQJGtd0bFV": {
+    "_id": "cXl6nEdQJGtd0bFV",
+    "type": "save",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    },
+    "effects": [
+     {
+      "_id": "A9vjxWi8Wpxqo7gh",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "techniques": [
+     [
+      "Blood Manipulation"
+     ]
+    ]
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "A9vjxWi8Wpxqo7gh",
+   "name": "Poisoned (Poisonous Blood)",
+   "img": "modules/jjk5e/icons/techniques/blood-manipulation.svg",
+   "statuses": [
+    "poisoned"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "seconds": 60,
+    "rounds": 10
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "poisoned"
+    }
+   },
+   "_key": "!items.effects!JNFDWDfMB3h8oG5q.A9vjxWi8Wpxqo7gh"
+  }
+ ],
+ "folder": "nBcvifZT3OePW2PN",
+ "sort": 200,
+ "_key": "!items!JNFDWDfMB3h8oG5q"
+}

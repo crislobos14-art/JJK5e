@@ -1,0 +1,57 @@
+{
+ "_id": "sbId7whXWQQyGwaz",
+ "name": "Acceleration",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/projection-sorcery.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Projection Sorcery — Innate Technique (3rd level)</em></p><p>When you get to 3rd level, for every consecutive turn with <em>Projection</em> active your movement speed increases by 10 feet. If you charge in a straight line building momentum you can deal an additional d6 for every 10 feet on your next melee attack.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Projection Sorcery 3"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Projection Sorcery",
+   "level": 3
+  }
+ },
+ "folder": "RqqBayaXFFZrEuE3",
+ "effects": [
+  {
+   "_id": "pTAydcaXQZpWq5Fe",
+   "name": "Acceleration (toggle)",
+   "img": "modules/jjk5e/icons/techniques/projection-sorcery.svg",
+   "changes": [
+    {
+     "key": "system.attributes.movement.walk",
+     "mode": 2,
+     "value": "10",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!sbId7whXWQQyGwaz.pTAydcaXQZpWq5Fe"
+  }
+ ],
+ "_key": "!items!sbId7whXWQQyGwaz"
+}

@@ -1,0 +1,376 @@
+{
+ "_id": "WoDYZcWCNnDrfqf8",
+ "name": "Great Serpent",
+ "type": "npc",
+ "img": "modules/jjk5e/icons/shikigami/great-serpent.svg",
+ "system": {
+  "abilities": {
+   "str": {
+    "value": 19,
+    "proficient": 1
+   },
+   "dex": {
+    "value": 14,
+    "proficient": 0
+   },
+   "con": {
+    "value": 14,
+    "proficient": 0
+   },
+   "int": {
+    "value": 1,
+    "proficient": 0
+   },
+   "wis": {
+    "value": 10,
+    "proficient": 0
+   },
+   "cha": {
+    "value": 3,
+    "proficient": 0
+   }
+  },
+  "attributes": {
+   "ac": {
+    "calc": "flat",
+    "flat": 12
+   },
+   "hp": {
+    "value": 84,
+    "max": 84,
+    "formula": ""
+   },
+   "movement": {
+    "walk": 30,
+    "burrow": 30,
+    "units": "ft",
+    "hover": false
+   },
+   "senses": {
+    "blindsight": 10,
+    "units": "ft",
+    "special": ""
+   }
+  },
+  "details": {
+   "cr": 1,
+   "alignment": "Unaligned",
+   "type": {
+    "value": "monstrosity",
+    "subtype": "",
+    "swarm": "",
+    "custom": "Shikigami"
+   },
+   "biography": {
+    "value": "<p><em>Great Serpent</em> — Ten Shadows shikigami. Summon cost: 4 Cursed Energy. AC and hit points scale with the summoner's proficiency bonus when summoned through the Ten Shadows features.</p>"
+   }
+  },
+  "traits": {
+   "size": "huge",
+   "dr": {
+    "value": []
+   },
+   "ci": {
+    "value": []
+   },
+   "languages": {
+    "value": []
+   }
+  },
+  "skills": {
+   "ste": {
+    "value": 1,
+    "ability": "dex"
+   }
+  },
+  "resources": {
+   "legact": {
+    "max": 0,
+    "spent": 0
+   },
+   "legres": {
+    "max": 0,
+    "spent": 0
+   }
+  }
+ },
+ "items": [
+  {
+   "_id": "odJstXF40f9CLVZr",
+   "name": "Bite",
+   "type": "weapon",
+   "img": "icons/svg/sword.svg",
+   "system": {
+    "description": {
+     "value": "<p></p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Ten Shadows"
+    },
+    "activities": {
+     "O0WdHJQDnXTu9VAG": {
+      "_id": "O0WdHJQDnXTu9VAG",
+      "type": "attack",
+      "name": "",
+      "sort": 0,
+      "activation": {
+       "type": "action",
+       "value": 1,
+       "condition": "",
+       "override": false
+      },
+      "consumption": {
+       "targets": [],
+       "scaling": {
+        "allowed": false
+       },
+       "spellSlot": false
+      },
+      "duration": {
+       "units": "inst",
+       "concentration": false,
+       "override": false
+      },
+      "range": {
+       "override": false
+      },
+      "target": {
+       "override": false,
+       "prompt": true,
+       "affects": {
+        "count": "1",
+        "type": "creature"
+       }
+      },
+      "attack": {
+       "ability": "str",
+       "bonus": "",
+       "critical": {
+        "threshold": null
+       },
+       "flat": false,
+       "type": {
+        "value": "melee",
+        "classification": "weapon"
+       }
+      },
+      "damage": {
+       "critical": {
+        "bonus": ""
+       },
+       "includeBase": true,
+       "parts": []
+      }
+     }
+    },
+    "type": {
+     "value": "natural",
+     "baseItem": ""
+    },
+    "ability": "str",
+    "proficient": 1,
+    "equipped": true,
+    "damage": {
+     "base": {
+      "number": 2,
+      "denomination": 6,
+      "bonus": "",
+      "types": [
+       "piercing"
+      ],
+      "custom": {
+       "enabled": false,
+       "formula": ""
+      },
+      "scaling": {
+       "mode": "",
+       "number": null,
+       "formula": ""
+      }
+     }
+    },
+    "range": {
+     "reach": 10,
+     "value": null,
+     "long": null,
+     "units": "ft"
+    },
+    "magicalBonus": null,
+    "properties": [],
+    "uses": {
+     "max": "",
+     "recovery": [],
+     "spent": 0
+    },
+    "quantity": 1,
+    "weight": {
+     "value": 0,
+     "units": "lb"
+    },
+    "price": {
+     "value": 0,
+     "denomination": "gp"
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!WoDYZcWCNnDrfqf8.odJstXF40f9CLVZr"
+  },
+  {
+   "_id": "DHs1inFEJAokoP0j",
+   "name": "Constrict",
+   "type": "weapon",
+   "img": "icons/svg/sword.svg",
+   "system": {
+    "description": {
+     "value": "<p>If the target is the same size or smaller than Great Serpent it is grappled (escape DC 16). While grappled the target is restrained and Great Serpent can't constrict another target.</p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Ten Shadows"
+    },
+    "activities": {
+     "mgMkRBm3lDRe8TYj": {
+      "_id": "mgMkRBm3lDRe8TYj",
+      "type": "attack",
+      "name": "",
+      "sort": 0,
+      "activation": {
+       "type": "action",
+       "value": 1,
+       "condition": "",
+       "override": false
+      },
+      "consumption": {
+       "targets": [],
+       "scaling": {
+        "allowed": false
+       },
+       "spellSlot": false
+      },
+      "duration": {
+       "units": "inst",
+       "concentration": false,
+       "override": false
+      },
+      "range": {
+       "override": false
+      },
+      "target": {
+       "override": false,
+       "prompt": true,
+       "affects": {
+        "count": "1",
+        "type": "creature"
+       }
+      },
+      "attack": {
+       "ability": "str",
+       "bonus": "",
+       "critical": {
+        "threshold": null
+       },
+       "flat": false,
+       "type": {
+        "value": "melee",
+        "classification": "weapon"
+       }
+      },
+      "damage": {
+       "critical": {
+        "bonus": ""
+       },
+       "includeBase": true,
+       "parts": []
+      }
+     }
+    },
+    "type": {
+     "value": "natural",
+     "baseItem": ""
+    },
+    "ability": "str",
+    "proficient": 1,
+    "equipped": true,
+    "damage": {
+     "base": {
+      "number": 2,
+      "denomination": 8,
+      "bonus": "",
+      "types": [
+       "bludgeoning"
+      ],
+      "custom": {
+       "enabled": false,
+       "formula": ""
+      },
+      "scaling": {
+       "mode": "",
+       "number": null,
+       "formula": ""
+      }
+     }
+    },
+    "range": {
+     "reach": 5,
+     "value": null,
+     "long": null,
+     "units": "ft"
+    },
+    "magicalBonus": null,
+    "properties": [],
+    "uses": {
+     "max": "",
+     "recovery": [],
+     "spent": 0
+    },
+    "quantity": 1,
+    "weight": {
+     "value": 0,
+     "units": "lb"
+    },
+    "price": {
+     "value": 0,
+     "denomination": "gp"
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!WoDYZcWCNnDrfqf8.DHs1inFEJAokoP0j"
+  }
+ ],
+ "effects": [],
+ "prototypeToken": {
+  "name": "Great Serpent",
+  "actorLink": false,
+  "disposition": 1,
+  "width": 3,
+  "height": 3,
+  "texture": {
+   "src": "modules/jjk5e/icons/shikigami/great-serpent.svg"
+  },
+  "displayName": 20,
+  "displayBars": 20,
+  "bar1": {
+   "attribute": "attributes.hp"
+  },
+  "sight": {
+   "enabled": true
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "shikigami": true,
+   "ceCost": 4,
+   "hpPerProf": 3,
+   "dmgProf": false
+  }
+ },
+ "folder": null,
+ "_key": "!actors!WoDYZcWCNnDrfqf8"
+}

@@ -1,0 +1,55 @@
+{
+ "_id": "aPTWKjpTB26rpoZV",
+ "name": "Cursed Energy Affinity",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/trait-race.svg",
+ "system": {
+  "description": {
+   "value": "<p>Due to your nature of being made of cursed energy, you are unable to utilize reverse cursed technique which is positive energy. Though you can still restore your body with pure cursed energy. Starting at 5th level, you can spend cursed energy up to your CE modifier to regain 5 hit points per cursed energy spent as an action once per turn.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "race",
+   "subtype": ""
+  },
+  "requirements": "Cursed Spirit",
+  "activities": {
+   "Vbp2ECFjBSfXUJ3K": {
+    "_id": "Vbp2ECFjBSfXUJ3K",
+    "type": "utility",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "MrUJYYzCm8S5kHBr",
+ "_key": "!items!aPTWKjpTB26rpoZV"
+}

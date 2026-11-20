@@ -1,0 +1,111 @@
+{
+ "_id": "RG4L3OJERkIdy1X6",
+ "name": "Maximum: Blast Away",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/triple-core.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Energy Blast</em></p>\n<p>You have improved your output. When you use your <em>Energy Blast</em> core option with at least 4 CE, the damage dice becomes d8 and creatures must make a Strength saving throw or be knocked 10ft back and fall prone.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Energy Blast",
+  "activities": {
+   "AyHTNj7qBAkMgGQz": {
+    "_id": "AyHTNj7qBAkMgGQz",
+    "type": "save",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "str"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    },
+    "effects": [
+     {
+      "_id": "TkUqePAp7LczhZme",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "options": [
+     [
+      "Energy Blast"
+     ]
+    ]
+   },
+   "modifies": [
+    "Upgraded Form"
+   ]
+  }
+ },
+ "effects": [
+  {
+   "_id": "TkUqePAp7LczhZme",
+   "name": "Prone (Maximum: Blast Away)",
+   "img": "modules/jjk5e/icons/techniques/triple-core.svg",
+   "statuses": [
+    "prone"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!RG4L3OJERkIdy1X6.TkUqePAp7LczhZme"
+  }
+ ],
+ "folder": "82rPUBoGJ4IokyPC",
+ "sort": 200,
+ "_key": "!items!RG4L3OJERkIdy1X6"
+}

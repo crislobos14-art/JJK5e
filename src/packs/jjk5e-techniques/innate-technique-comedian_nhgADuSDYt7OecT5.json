@@ -1,0 +1,118 @@
+{
+ "_id": "nhgADuSDYt7OecT5",
+ "name": "Innate Technique: Comedian",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/comedian.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>Why do you need an explanation? How about a joke!</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.Jl4NsvTGrLe6S2DE]{Comedy}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.ddEwns90CtDAv2iC]{Commit to the Bit}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.BSpSWo21Hos6b39G]{Comedic Foil}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.8lD36BfUqndCBmNA]{Maximum: Peak Comedy}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.kCIBMzUknW2TOySQ]{Domain Expansion: Stand Up Comedy}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "nvqjy9mHQEAKKdUK": {
+    "_id": "nvqjy9mHQEAKKdUK",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Comedian (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.Jl4NsvTGrLe6S2DE",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "mtbnJjSW3A5N9B4j": {
+    "_id": "mtbnJjSW3A5N9B4j",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Comedian (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.ddEwns90CtDAv2iC",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "1DRiPJXeGEIq4JHX": {
+    "_id": "1DRiPJXeGEIq4JHX",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Comedian (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.BSpSWo21Hos6b39G",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "IglTnPdwPTN38a4b": {
+    "_id": "IglTnPdwPTN38a4b",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Comedian (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.8lD36BfUqndCBmNA",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "F3yWPdW8PNViW9qY": {
+    "_id": "F3yWPdW8PNViW9qY",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Comedian (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.kCIBMzUknW2TOySQ",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Comedian"
+  }
+ },
+ "_key": "!items!nhgADuSDYt7OecT5"
+}

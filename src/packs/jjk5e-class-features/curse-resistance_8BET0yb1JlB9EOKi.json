@@ -1,0 +1,55 @@
+{
+ "_id": "8BET0yb1JlB9EOKi",
+ "name": "Curse Resistance",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>Beginning at 14th level, you also gain resistance to necrotic damage while focused.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Juggernaut 14"
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "1ipDZJ01igqpFdub",
+ "effects": [
+  {
+   "_id": "SJzq4GRrF0wbAbda",
+   "name": "Focused: necrotic resistance",
+   "img": "modules/jjk5e/icons/feature.svg",
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "auto": "group",
+     "group": "focus"
+    }
+   },
+   "changes": [
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "necrotic",
+     "priority": null
+    }
+   ],
+   "_key": "!items.effects!8BET0yb1JlB9EOKi.SJzq4GRrF0wbAbda"
+  }
+ ],
+ "_key": "!items!8BET0yb1JlB9EOKi"
+}

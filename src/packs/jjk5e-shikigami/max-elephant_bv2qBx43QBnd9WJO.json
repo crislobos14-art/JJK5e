@@ -1,0 +1,526 @@
+{
+ "_id": "bv2qBx43QBnd9WJO",
+ "name": "Max Elephant",
+ "type": "npc",
+ "img": "modules/jjk5e/icons/shikigami/max-elephant.svg",
+ "system": {
+  "abilities": {
+   "str": {
+    "value": 22,
+    "proficient": 0
+   },
+   "dex": {
+    "value": 9,
+    "proficient": 0
+   },
+   "con": {
+    "value": 17,
+    "proficient": 1
+   },
+   "int": {
+    "value": 3,
+    "proficient": 0
+   },
+   "wis": {
+    "value": 11,
+    "proficient": 0
+   },
+   "cha": {
+    "value": 6,
+    "proficient": 0
+   }
+  },
+  "attributes": {
+   "ac": {
+    "calc": "flat",
+    "flat": 13
+   },
+   "hp": {
+    "value": 112,
+    "max": 112,
+    "formula": ""
+   },
+   "movement": {
+    "walk": 30,
+    "units": "ft",
+    "hover": false
+   },
+   "senses": {
+    "units": "ft",
+    "special": ""
+   }
+  },
+  "details": {
+   "cr": 4,
+   "alignment": "Unaligned",
+   "type": {
+    "value": "monstrosity",
+    "subtype": "",
+    "swarm": "",
+    "custom": "Shikigami"
+   },
+   "biography": {
+    "value": "<p><em>Max Elephant</em> — Ten Shadows shikigami. Summon cost: 8 Cursed Energy. AC and hit points scale with the summoner's proficiency bonus when summoned through the Ten Shadows features.</p>"
+   }
+  },
+  "traits": {
+   "size": "huge",
+   "dr": {
+    "value": []
+   },
+   "ci": {
+    "value": []
+   },
+   "languages": {
+    "value": []
+   }
+  },
+  "skills": {
+   "ath": {
+    "value": 1,
+    "ability": "str"
+   }
+  },
+  "resources": {
+   "legact": {
+    "max": 0,
+    "spent": 0
+   },
+   "legres": {
+    "max": 0,
+    "spent": 0
+   }
+  }
+ },
+ "items": [
+  {
+   "_id": "k8VwM5NZFh62kwVA",
+   "name": "Trampling Charge",
+   "type": "feat",
+   "img": "icons/svg/aura.svg",
+   "system": {
+    "description": {
+     "value": "<p>If Max Elephant moves at least 20 ft. straight toward a target and then hits it with a gore attack on the same turn, the target takes an extra 7 (2d6) piercing damage. If the target is a creature, it must succeed on a DC 16 Strength saving throw or be knocked prone. If the target is prone, the Max Elephant can make a stomp attack against it as a bonus action.</p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Ten Shadows"
+    },
+    "activities": {},
+    "type": {
+     "value": "monster",
+     "subtype": ""
+    },
+    "requirements": "",
+    "properties": [],
+    "uses": {
+     "max": "",
+     "recovery": [],
+     "spent": 0
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!bv2qBx43QBnd9WJO.k8VwM5NZFh62kwVA"
+  },
+  {
+   "_id": "c1c9LxjCkXSUrl0K",
+   "name": "Gore",
+   "type": "weapon",
+   "img": "icons/svg/sword.svg",
+   "system": {
+    "description": {
+     "value": "<p></p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Ten Shadows"
+    },
+    "activities": {
+     "WLoaqsmiVkEdPK58": {
+      "_id": "WLoaqsmiVkEdPK58",
+      "type": "attack",
+      "name": "",
+      "sort": 0,
+      "activation": {
+       "type": "action",
+       "value": 1,
+       "condition": "",
+       "override": false
+      },
+      "consumption": {
+       "targets": [],
+       "scaling": {
+        "allowed": false
+       },
+       "spellSlot": false
+      },
+      "duration": {
+       "units": "inst",
+       "concentration": false,
+       "override": false
+      },
+      "range": {
+       "override": false
+      },
+      "target": {
+       "override": false,
+       "prompt": true,
+       "affects": {
+        "count": "1",
+        "type": "creature"
+       }
+      },
+      "attack": {
+       "ability": "str",
+       "bonus": "",
+       "critical": {
+        "threshold": null
+       },
+       "flat": false,
+       "type": {
+        "value": "melee",
+        "classification": "weapon"
+       }
+      },
+      "damage": {
+       "critical": {
+        "bonus": ""
+       },
+       "includeBase": true,
+       "parts": []
+      }
+     }
+    },
+    "type": {
+     "value": "natural",
+     "baseItem": ""
+    },
+    "ability": "str",
+    "proficient": 1,
+    "equipped": true,
+    "damage": {
+     "base": {
+      "number": 3,
+      "denomination": 6,
+      "bonus": "",
+      "types": [
+       "piercing"
+      ],
+      "custom": {
+       "enabled": false,
+       "formula": ""
+      },
+      "scaling": {
+       "mode": "",
+       "number": null,
+       "formula": ""
+      }
+     }
+    },
+    "range": {
+     "reach": 5,
+     "value": null,
+     "long": null,
+     "units": "ft"
+    },
+    "magicalBonus": null,
+    "properties": [],
+    "uses": {
+     "max": "",
+     "recovery": [],
+     "spent": 0
+    },
+    "quantity": 1,
+    "weight": {
+     "value": 0,
+     "units": "lb"
+    },
+    "price": {
+     "value": 0,
+     "denomination": "gp"
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!bv2qBx43QBnd9WJO.c1c9LxjCkXSUrl0K"
+  },
+  {
+   "_id": "nx9358jrR4MB4Tar",
+   "name": "Stomp",
+   "type": "weapon",
+   "img": "icons/svg/sword.svg",
+   "system": {
+    "description": {
+     "value": "<p></p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Ten Shadows"
+    },
+    "activities": {
+     "wq7WF55Wl8qkKetX": {
+      "_id": "wq7WF55Wl8qkKetX",
+      "type": "attack",
+      "name": "",
+      "sort": 0,
+      "activation": {
+       "type": "action",
+       "value": 1,
+       "condition": "",
+       "override": false
+      },
+      "consumption": {
+       "targets": [],
+       "scaling": {
+        "allowed": false
+       },
+       "spellSlot": false
+      },
+      "duration": {
+       "units": "inst",
+       "concentration": false,
+       "override": false
+      },
+      "range": {
+       "override": false
+      },
+      "target": {
+       "override": false,
+       "prompt": true,
+       "affects": {
+        "count": "1",
+        "type": "creature"
+       }
+      },
+      "attack": {
+       "ability": "str",
+       "bonus": "",
+       "critical": {
+        "threshold": null
+       },
+       "flat": false,
+       "type": {
+        "value": "melee",
+        "classification": "weapon"
+       }
+      },
+      "damage": {
+       "critical": {
+        "bonus": ""
+       },
+       "includeBase": true,
+       "parts": []
+      }
+     }
+    },
+    "type": {
+     "value": "natural",
+     "baseItem": ""
+    },
+    "ability": "str",
+    "proficient": 1,
+    "equipped": true,
+    "damage": {
+     "base": {
+      "number": 3,
+      "denomination": 8,
+      "bonus": "",
+      "types": [
+       "bludgeoning"
+      ],
+      "custom": {
+       "enabled": false,
+       "formula": ""
+      },
+      "scaling": {
+       "mode": "",
+       "number": null,
+       "formula": ""
+      }
+     }
+    },
+    "range": {
+     "reach": 5,
+     "value": null,
+     "long": null,
+     "units": "ft"
+    },
+    "magicalBonus": null,
+    "properties": [],
+    "uses": {
+     "max": "",
+     "recovery": [],
+     "spent": 0
+    },
+    "quantity": 1,
+    "weight": {
+     "value": 0,
+     "units": "lb"
+    },
+    "price": {
+     "value": 0,
+     "denomination": "gp"
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!bv2qBx43QBnd9WJO.nx9358jrR4MB4Tar"
+  },
+  {
+   "_id": "mpjTkLb9e0Brq1WK",
+   "name": "Flood (Recharge 6)",
+   "type": "feat",
+   "img": "icons/svg/aura.svg",
+   "system": {
+    "description": {
+     "value": "<p>Max Elephant shoots water in a 60 feet cone. Each creature within range must make a DC 16 Strength saving throw, taking 10d6 cold damage and being knocked prone on a failed save or half as much on a successful save.</p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Ten Shadows"
+    },
+    "activities": {
+     "Xn35VsShA7TS00eT": {
+      "_id": "Xn35VsShA7TS00eT",
+      "type": "save",
+      "name": "",
+      "sort": 0,
+      "activation": {
+       "type": "action",
+       "value": 1,
+       "condition": "",
+       "override": false
+      },
+      "consumption": {
+       "targets": [
+        {
+         "type": "itemUses",
+         "target": "",
+         "value": "1",
+         "scaling": {}
+        }
+       ],
+       "scaling": {
+        "allowed": false
+       },
+       "spellSlot": false
+      },
+      "duration": {
+       "units": "inst",
+       "concentration": false,
+       "override": false
+      },
+      "range": {
+       "units": "self",
+       "override": false
+      },
+      "target": {
+       "override": false,
+       "prompt": true,
+       "template": {
+        "type": "cone",
+        "size": "60",
+        "units": "ft",
+        "count": "1",
+        "contiguous": false
+       },
+       "affects": {
+        "type": "creature",
+        "choice": false
+       }
+      },
+      "save": {
+       "ability": [
+        "str"
+       ],
+       "dc": {
+        "calculation": "",
+        "formula": "16"
+       }
+      },
+      "damage": {
+       "onSave": "half",
+       "parts": [
+        {
+         "number": 10,
+         "denomination": 6,
+         "bonus": "",
+         "types": [
+          "cold"
+         ],
+         "custom": {
+          "enabled": false,
+          "formula": ""
+         },
+         "scaling": {
+          "mode": "",
+          "number": null,
+          "formula": ""
+         }
+        }
+       ]
+      }
+     }
+    },
+    "type": {
+     "value": "monster",
+     "subtype": ""
+    },
+    "requirements": "",
+    "properties": [],
+    "uses": {
+     "max": "1",
+     "spent": 0,
+     "recovery": [
+      {
+       "period": "recharge",
+       "formula": "6",
+       "type": "recoverAll"
+      }
+     ]
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!bv2qBx43QBnd9WJO.mpjTkLb9e0Brq1WK"
+  }
+ ],
+ "effects": [],
+ "prototypeToken": {
+  "name": "Max Elephant",
+  "actorLink": false,
+  "disposition": 1,
+  "width": 3,
+  "height": 3,
+  "texture": {
+   "src": "modules/jjk5e/icons/shikigami/max-elephant.svg"
+  },
+  "displayName": 20,
+  "displayBars": 20,
+  "bar1": {
+   "attribute": "attributes.hp"
+  },
+  "sight": {
+   "enabled": true
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "shikigami": true,
+   "ceCost": 8,
+   "hpPerProf": 4,
+   "dmgProf": false
+  }
+ },
+ "folder": null,
+ "_key": "!actors!bv2qBx43QBnd9WJO"
+}

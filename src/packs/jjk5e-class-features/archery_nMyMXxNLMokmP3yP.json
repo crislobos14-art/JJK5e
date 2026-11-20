@@ -1,0 +1,57 @@
+{
+ "_id": "nMyMXxNLMokmP3yP",
+ "name": "Archery",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>You gain a +2 bonus to attack rolls you make with ranged weapons.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Fighting Style"
+ },
+ "flags": {
+  "jjk5e": {
+   "fightingStyle": true,
+   "improved": false
+  }
+ },
+ "effects": [
+  {
+   "_id": "YK3XgYMBZEmPAhGp",
+   "name": "Archery",
+   "img": "modules/jjk5e/icons/feature.svg",
+   "changes": [
+    {
+     "key": "system.bonuses.rwak.attack",
+     "mode": 2,
+     "value": "+2",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "auto": "passive"
+    }
+   },
+   "_key": "!items.effects!nMyMXxNLMokmP3yP.YK3XgYMBZEmPAhGp"
+  }
+ ],
+ "folder": "I1ItOooRBoVLqHCS",
+ "_key": "!items!nMyMXxNLMokmP3yP"
+}

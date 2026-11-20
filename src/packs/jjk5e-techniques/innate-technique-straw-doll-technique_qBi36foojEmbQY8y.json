@@ -1,0 +1,118 @@
+{
+ "_id": "qBi36foojEmbQY8y",
+ "name": "Innate Technique: Straw Doll Technique",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/straw-doll-technique.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.PyipLA81fAY46mo6]{Nail Projectile}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.6l2g51jwQdY63PVK]{Resonance}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.fDcXasO9qtbZEnXH]{Hair Pin}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.xVlUYlQhKObMVAM2]{Improved Resonance}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.5cJeAI1z9NwuCHIx]{Domain Expansion: Wara Ningyo}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "G2VW9rm7uGYedSDD": {
+    "_id": "G2VW9rm7uGYedSDD",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Straw Doll Technique (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.PyipLA81fAY46mo6",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "6JLFOxeBdlOwOwFq": {
+    "_id": "6JLFOxeBdlOwOwFq",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Straw Doll Technique (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.6l2g51jwQdY63PVK",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "CXv2SH6jQ1S3LKQY": {
+    "_id": "CXv2SH6jQ1S3LKQY",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Straw Doll Technique (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.fDcXasO9qtbZEnXH",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "ze3EyVRQrPWx05U4": {
+    "_id": "ze3EyVRQrPWx05U4",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Straw Doll Technique (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.xVlUYlQhKObMVAM2",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "iHbu519tBCeJVTri": {
+    "_id": "iHbu519tBCeJVTri",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Straw Doll Technique (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.5cJeAI1z9NwuCHIx",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Straw Doll Technique"
+  }
+ },
+ "_key": "!items!qBi36foojEmbQY8y"
+}

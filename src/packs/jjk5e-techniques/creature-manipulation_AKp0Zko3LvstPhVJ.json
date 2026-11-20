@@ -1,0 +1,126 @@
+{
+ "_id": "AKp0Zko3LvstPhVJ",
+ "name": "Creature Manipulation",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/tool-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Tool Manipulation — Cursed Technique Reversal</em></p><p>You have found out about your technique reversal, allowing you to control living creatures as your tools. As an action for 6 cursed energy, you force one creature within 60 feet of you to make a Wisdom saving throw. On a failure, they are charmed by you for 1 minute while concentrating. While the target is charmed, you have a telepathic link while the two of you are on the same plane of existence. You can use this telepathic link to issue commands to the creature as a bonus action. Each time the target takes damage, it can repeat the save against the technique. If the saving throw succeeds, the technique ends. You can only control two creatures at once. At 11th level, you can control a number of creatures up to your CE modifier (minimum of 2).</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Tool Manipulation",
+  "activities": {
+   "vwrCtHKftm0gQW66": {
+    "_id": "vwrCtHKftm0gQW66",
+    "type": "save",
+    "name": "Action (6 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "60",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    },
+    "save": {
+     "ability": [
+      "wis"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    },
+    "effects": [
+     {
+      "_id": "cPypsBmIXwRsbscA",
+      "onSave": false
+     }
+    ]
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "vwrCtHKftm0gQW66": 6
+   },
+   "technique": "Tool Manipulation",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Tool Manipulation"
+     ]
+    ]
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "cPypsBmIXwRsbscA",
+   "name": "Charmed (Creature Manipulation)",
+   "img": "systems/dnd5e/icons/svg/statuses/charmed.svg",
+   "statuses": [
+    "charmed"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "seconds": 60,
+    "rounds": 10
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "charmed"
+    }
+   },
+   "_key": "!items.effects!AKp0Zko3LvstPhVJ.cPypsBmIXwRsbscA"
+  }
+ ],
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!AKp0Zko3LvstPhVJ"
+}

@@ -1,0 +1,29 @@
+{
+ "_id": "31eQQf2XR4511Dbd",
+ "name": "Perfected Bond",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>At 20th level, your companion no longer needs to be commanded, having perfect synchronicity. Your companion no longer takes any action to command, and you can share senses with it.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Shikigami User 20"
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "69XiiJo14iwd80Zo",
+ "_key": "!items!31eQQf2XR4511Dbd"
+}

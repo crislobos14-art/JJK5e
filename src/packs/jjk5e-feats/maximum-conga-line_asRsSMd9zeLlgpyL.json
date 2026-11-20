@@ -1,0 +1,71 @@
+{
+ "_id": "asRsSMd9zeLlgpyL",
+ "name": "Maximum: Conga Line",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/clone.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Four is a Party</em></p>\n<p>You can spend 8 CE as a free action on your turn to tag team an enemy with your Clones, making a Conga Line on your way to stomp them. You and all clones can immediately move 30 feet and take the attack action.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Four is a Party",
+  "activities": {
+   "c5u2yeQ5NMlLCZS7": {
+    "_id": "c5u2yeQ5NMlLCZS7",
+    "type": "utility",
+    "name": "Special (8 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "c5u2yeQ5NMlLCZS7": 8
+   },
+   "prereq": {
+    "features": [
+     [
+      "Four is a Party"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "PMUUoKMzebFsTMdN",
+ "sort": 300,
+ "_key": "!items!asRsSMd9zeLlgpyL"
+}

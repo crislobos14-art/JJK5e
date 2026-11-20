@@ -1,0 +1,111 @@
+{
+ "_id": "LSe1S6W9A2O7cWJF",
+ "name": "Army of the Dictator",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/star-dictator.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Star Dictator — Innate Technique (11th level)</em></p><p>At 11th level, you have learned mass summoning. You can now maintain a number of Minor Star Shikigami equal to three times your proficiency bonus and can have two Major Star Shikigami active at once.<br />\n Additionally, the damage of your pseudo-domain increases to 1d10 slashing damage per shikigami orbiting and ignores immunity and resistance to slashing damage. The radius of your pseudo-domain increases to 10 ft x the number of orbiting shikigami.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "lKkrGWN2fudFZv1s": {
+    "_id": "lKkrGWN2fudFZv1s",
+    "type": "damage",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "slashing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "special",
+   "value": null,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Star Dictator",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "ba0AWxHF6sBvbrZq",
+ "_key": "!items!LSe1S6W9A2O7cWJF"
+}

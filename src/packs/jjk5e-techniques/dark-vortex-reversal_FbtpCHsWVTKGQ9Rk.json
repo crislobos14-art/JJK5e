@@ -1,0 +1,138 @@
+{
+ "_id": "FbtpCHsWVTKGQ9Rk",
+ "name": "Dark Vortex (Reversal)",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/and-light.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Creeps and Curses V.3.1</em></p><p><em>████ and Light Reversal — requires Reverse Cursed Technique. Not added automatically.</em></p><p>As an action for 12 cursed energy, you create a dark vortex in your hands for up to 1 minute while you maintain concentration. All creatures within 60 ft must make a Strength saving throw. On a failed save, they take 6d10 necrotic damage and are pulled 10 ft closer. On a successful save, they take half as much damage and are not pulled. You maintain the vortex as an action on your turn, forcing all creatures within range to repeat the save. As a reaction to taking damage while maintaining the vortex, you can absorb the attack into the vortex, rolling your vortex damage and reducing the attack by that much. If this reduces the damage to 0, the attack or effect is nullified. If the damage is from a melee attack, the weapon is destroyed unless it is Grade 1 cursed tool or higher. If used at Maximum Output, a creature that is pulled within 5 ft or is within 5 ft and fails their save, they treat this damage as a Limb Removing Effect. The damage of this technique increases to 10d10 at 6th level, 14d10 at 11th level, and 18d10 at 18th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "z0ZuXBlsQJj8QDH1": {
+    "_id": "z0ZuXBlsQJj8QDH1",
+    "type": "save",
+    "name": "Action (12 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "str"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 6,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [
+   "concentration"
+  ],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "60",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "z0ZuXBlsQJj8QDH1": 12
+   },
+   "technique": "████ and Light",
+   "reversal": true,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "IGfpCBBJLQfBc6m2",
+ "_key": "!items!FbtpCHsWVTKGQ9Rk"
+}

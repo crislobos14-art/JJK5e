@@ -1,0 +1,133 @@
+{
+ "_id": "u7p2yaIifyDSZYtW",
+ "name": "Root Bundle",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/disaster-verdure.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Disaster Verdure — Innate Technique (3rd level)</em></p><p>At 3rd level, you have learned how to create small wooden balls to launch and pierce your opponents. As an action, you can create a number of two wooden balls, at the price of two cursed energy. The wooden balls will have a number of hit points equal to your Cursed Energy modifier, an AC of 10 + your CE modifier, and will keep floating around you. As a bonus action, you can send one or more of your balls towards a target within 30 feet of you. Make a cursed energy attack roll, on a hit the balls create large branches that pierce through its target, dealing 2d10 piercing damage. Right after they hit or miss the balls will disappear. You can also spend your bonus action to stand on one of the balls, gaining flying speed equal to half your walking speed while standing on them.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "lxIvbpHMossbpRUd": {
+    "_id": "lxIvbpHMossbpRUd",
+    "type": "attack",
+    "name": "Bonus Action",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "piercing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "30",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Disaster Verdure",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "iWhpioZs4gSAxzA7",
+ "_key": "!items!u7p2yaIifyDSZYtW"
+}

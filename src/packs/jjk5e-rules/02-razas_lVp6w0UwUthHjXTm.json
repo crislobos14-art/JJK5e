@@ -1,0 +1,75 @@
+{
+ "_id": "lVp6w0UwUthHjXTm",
+ "name": "02 — Razas",
+ "folder": "IXMKct7fx9qz8bdj",
+ "sort": 2000,
+ "pages": [
+  {
+   "_id": "h1y28d06cZbGVQTW",
+   "name": "Razas humanas",
+   "type": "text",
+   "sort": 0,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p><strong>Humano</strong><br />\n Aunque los humanos varían mucho en forma y tamaño, tu personaje humano tendrá estos rasgos.</p>\n<p><strong>Mejora de característica.</strong> Una característica de tu elección aumenta en 2 y las demás aumentan en 1. Elegir otra raza humana sustituye esta mejora.</p>\n<p><strong>Edad.</strong> Los humanos llegan a la edad adulta en la adolescencia y viven alrededor de un siglo.</p>\n<p><strong>Alineamiento.</strong> No hay un alineamiento común a todos los humanos. Casi cualquier alineamiento puede justificarse.</p>\n<p><strong>Tamaño.</strong> Los humanos del mundo de Jujutsu Kaisen suelen medir entre 1,5 y 1,8 metros. Algunos se salen mucho de ese rango, pero tu tamaño cuenta como Mediano.</p>\n<p><strong>Velocidad.</strong> Tu velocidad base caminando es de 30 pies.</p>\n<p><strong>Hechicero de jujutsu</strong><br />\n Formas parte de una familia de hechiceros o estás involucrado desde muy joven, y obtienes lo siguiente:</p>\n<p><strong>Mejora de característica.</strong> Una característica de tu elección aumenta en 2 y otra en 1.</p>\n<p><strong>Habilidades.</strong> Obtienes competencia con armas marciales.</p>\n<p><strong>Energía Maldita entrenada.</strong> Obtienes una dote de Energía Maldita.<br />\n<strong>Sobrehumano</strong><br />\n Muy rara vez, algunos humanos son asombrosamente más fuertes que la mayoría, a veces muchísimo más que el humano medio. Si tu personaje humano entra en esta categoría, puedes sustituir la mejora de característica estándar de los humanos por estos rasgos:</p>\n<p><strong>Mejora de característica.</strong> Aumentas en 2 tu Fuerza, Destreza o Constitución, y las otras dos en 1.</p>\n<p><strong>Atleta nato.</strong> Tienes competencia en la habilidad Atletismo; si ya la tenías, obtienes pericia.</p>\n<p><strong>Rompe récords.</strong> Tu distancia de salto se duplica.</p>\n<p><strong>Resistencia asombrosa.</strong> Puedes concentrarte para ignorar las heridas de vez en cuando. Cuando recibes daño, puedes usar tu reacción para tirar un d12. Suma tu modificador de Constitución al resultado y reduce el daño en ese total. Después de usar este rasgo, no puedes volver a usarlo hasta terminar un descanso corto o largo.</p>\n<p><strong>Complexión poderosa.</strong> Cuentas como una categoría de tamaño mayor al determinar tu capacidad de carga y el peso que puedes empujar, arrastrar o levantar.</p>\n<p><strong>Velocidad.</strong> Tu velocidad de movimiento es de 35 pies.</p>\n"
+   },
+   "_key": "!journal.pages!lVp6w0UwUthHjXTm.h1y28d06cZbGVQTW"
+  },
+  {
+   "_id": "Kt2PgoQkgfSr8jGy",
+   "name": "Recipiente maldito",
+   "type": "text",
+   "sort": 1000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Hechiceros que se convirtieron en objetos malditos y ahora están en un cuerpo nuevo.</p>\n<p><strong>Edad.</strong> Tu esperanza de vida depende del cuerpo que has poseído.</p>\n<p><strong>Alineamiento.</strong> Los recipientes malditos casi siempre son caóticos: no les importa lo que les pase a los demás y quieren causar destrucción.</p>\n<p><strong>Tamaño.</strong> Tu tamaño depende de la raza que has poseído.</p>\n<p><strong>Velocidad</strong>. Tu velocidad base caminando depende de la raza que has poseído.</p>\n<p><strong>Este cuerpo es mío.</strong> Tienes ventaja en las tiradas de salvación contra efectos que alterarían o cambiarían tu forma.</p>\n<p><strong>Idiomas.</strong> Puedes hablar, leer y escribir el común y otro idioma de tu elección.</p>\n<p><strong>Subraza.</strong> Hay varias formas de recipiente, pero todas se basan en consumir objetos malditos. Están los reencarnados, hechiceros que fueron consumidos por criaturas adaptadas para su encarnación. Están las pinturas de la muerte, que toman el cuerpo del recipiente aunque su anfitrión tenga voluntad. Y están los recipientes incompletos y completos: si el anfitrión del objeto maldito aún tenía voluntad, empieza como recipiente incompleto y se convierte en completo tras borrar la voluntad del antiguo dueño del cuerpo.<br />\n<strong>Reencarnado</strong><br />\n Eres un hechicero de una era pasada. Ahora vives tu segunda vida gracias a algún trato o accidente.</p>\n<p><strong>Mejora de característica.</strong> Has vuelto en tu mejor momento: elige una característica que aumenta en 2 y otra que también aumenta en 2.</p>\n<p><strong>Experiencia vital.</strong> No es tu primera oportunidad en la vida y la última vez aprendiste algunas cosas. Obtienes competencia en dos habilidades, o en una habilidad y una herramienta, de tu elección.</p>\n<p><strong>Aferrarse a la vida.</strong> Ya has muerto una vez y te niegas a que vuelva a pasar. Cuando tus puntos de golpe bajan a 0, puedes quedarte en 1 punto de golpe en su lugar, una vez por descanso largo.</p>\n<p><strong>Pintura de la muerte</strong><br />\n Una mezcla desastrosa de maldición y humano creada por un científico malvado. Queda atrapada como un feto hasta que se la da de comer a un anfitrión.</p>\n<p><strong>Mejora de característica.</strong> Tu objeto maldito ha dominado el cuerpo de tu anfitrión inicial, así que en vez de obtener las características del anfitrión, obtienes +3 a tu puntuación de Energía Maldita. No puede superar 20.</p>\n<p><strong>Cuerpo resistente.</strong> Al encarnarte en un recipiente, tus propiedades antinaturales hicieron el cuerpo más resistente. Tus puntos de golpe máximos aumentan en 2, y vuelven a aumentar en 2 cada vez que subes de nivel.</p>\n<p><strong>Sangre venenosa.</strong> Naciste de alguien del clan Kamo y, por la experimentación, tu sangre se volvió venenosa. Como reacción, cuando recibes daño perforante o cortante, puedes elegir una criatura a 5 pies o menos de ti para que reciba daño de veneno igual a tu bonificador por competencia. Si la criatura tiene una herida o menos puntos de golpe que su máximo, debe superar una tirada de salvación de Constitución CD 10 o quedar envenenada hasta el final de su siguiente turno.</p>\n"
+   },
+   "_key": "!journal.pages!lVp6w0UwUthHjXTm.Kt2PgoQkgfSr8jGy"
+  },
+  {
+   "_id": "qM6WD7RnzDCT3CFf",
+   "name": "Cadáveres malditos",
+   "type": "text",
+   "sort": 2000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Seres hechos de energía maldita dentro de un armazón que de algún modo han adquirido conciencia.</p>\n<p><strong>Mejora de característica.</strong> Aumentas en 4 una característica de tu elección, ya que fuiste construido para un único propósito.</p>\n<p><strong>Edad.</strong> En teoría tu vida es infinita si te reparas.</p>\n<p><strong>Alineamiento.</strong> Los cadáveres malditos casi siempre son neutrales: no les importa lo que les pase a los demás y suelen querer existir en paz.</p>\n<p><strong>Tamaño.</strong> Tu tamaño puede ir de Pequeño a Grande.</p>\n<p><strong>Velocidad.</strong> Tu velocidad base caminando es de 35 pies.</p>\n<p><strong>Antinatural.</strong> Como constructo, no necesitas respirar, beber, comer ni dormir. Sin embargo, necesitas materiales para repararte durante un descanso.</p>\n<p><strong>Idiomas.</strong> Puedes hablar, leer y escribir el común.</p>\n<p><strong>Subraza.</strong> Hay varias formas de cadáver. Los de cuerpo blando van desde los de peluche hasta los de materiales vivos normales, como la carne. Los de caparazón duro tienen la piel dura de piedra, madera o metal.<br />\n<strong>Cuerpo blando</strong><br />\n Los cadáveres malditos más simples y parecidos a seres vivos son los de cuerpo blando; su diseño realista tiene ventajas y defectos.</p>\n<p><strong>Apariencia a medida.</strong> Obtienes pericia en Intimidación, Persuasión o Interpretación.</p>\n<p><strong>Sorpresa.</strong> Puedes hacer una prueba de Interpretación para disfrazarte de aquello a lo que te pareces. Tu revelación repentina puede aturdir a un enemigo. Una vez por descanso largo, cuando te revelas, puedes obligar a una criatura a 10 pies o menos a hacer una tirada de salvación de Sabiduría<br />\n(CD 10 + tu bonificador por competencia + tu<br />\nmodificador de Carisma); si falla, queda aturdida hasta<br />\nel comienzo de su turno.</p>\n<p><strong>Caparazón duro</strong><br />\n La forma más compleja y elaborada de cadáver maldito es el caparazón duro. No hay que subestimar su capacidad de combate.</p>\n<p><strong>Armadura integrada.</strong> Tu cuerpo tiene capas defensivas incorporadas que pueden mejorarse con armadura.</p>\n<ul>\n<li>\n<p>Obtienes un bonificador de +1 a la clase de armadura.  </p>\n</li>\n<li>\n<p>Solo puedes ponerte armaduras con las que tengas competencia. Para ponerte una armadura debes incorporarla a tu cuerpo durante 1 hora, y en ese tiempo debes permanecer en contacto con ella. Para quitártela debes dedicar 1 hora. Puedes descansar mientras te pones o te quitas la armadura de este modo.  </p>\n</li>\n<li>\n<p>Mientras vivas, nadie puede quitarte la armadura del cuerpo en contra de tu voluntad.</p>\n</li>\n</ul>\n"
+   },
+   "_key": "!journal.pages!lVp6w0UwUthHjXTm.qM6WD7RnzDCT3CFf"
+  },
+  {
+   "_id": "nrB2gN0URW9JmtZI",
+   "name": "Espíritus malditos",
+   "type": "text",
+   "sort": 3000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Seres hechos de energía negativa que se pudren con el tiempo.</p>\n<p><strong>Mejora de característica.</strong> Aumentas en 2 una característica de tu elección y otra en 1.</p>\n<p><strong>Tipo de criatura</strong>. Eres un muerto viviente.</p>\n<p><strong>Edad.</strong> Estás maldito a vivir para siempre.</p>\n<p><strong>Alineamiento.</strong> Los espíritus malditos rara vez conservan algo de inteligencia, pero cuando lo hacen, su alineamiento tiende a lo caótico o lo malvado.</p>\n<p><strong>Tamaño.</strong> Tu tamaño puede ser Pequeño o Mediano.</p>\n<p><strong>Velocidad.</strong> Tu velocidad base caminando es de 30 pies.</p>\n<p><strong>Naturaleza espiritual</strong>. Funcionas de manera totalmente distinta a las criaturas normales:</p>\n<ul>\n<li>\n<p>No necesitas comer, beber, respirar ni dormir, pero debes permanecer inactivo 4 horas al día para obtener los beneficios de un descanso largo.   </p>\n</li>\n<li>\n<p>Tienes ventaja en las tiradas de salvación contra enfermedades y contra quedar envenenado, y tienes resistencia al daño de veneno.  </p>\n</li>\n<li>\n<p>Eres inmune al daño contundente, perforante o cortante no mágico.  </p>\n</li>\n<li>\n<p>Eres invisible para las criaturas sin energía maldita.</p>\n</li>\n</ul>\n<p><strong>Afinidad con la Energía Maldita</strong>. Como estás hecho de energía maldita, no puedes usar la Técnica Maldita Inversa, que es energía positiva. Aun así, puedes restaurar tu cuerpo con energía maldita pura. A partir del nivel 5, como acción, una vez por turno, puedes gastar Energía Maldita hasta tu modificador de EM para recuperar 5 puntos de golpe por cada punto de EM gastado.</p>\n<p><strong>Subraza</strong>. Hay varios tipos de espíritus malditos según su origen.</p>\n<p><strong>Vengativo</strong><br />\nFuiste humano, pero al morir tu poderoso rencor te convirtió en una maldición.</p>\n<p><strong>Rencor</strong>. Cuando tus puntos de golpe bajan a 0, puedes quedarte en 1 punto de golpe. Puedes usar este rasgo una vez por descanso largo.</p>\n<p><strong>Maldición</strong>. Al elegir esta subraza, elige una raza que odiabas. Obtienes un bonificador de +2 a las tiradas de daño contra esa raza.</p>\n<p><strong>Imaginario</strong><br />\nEstás hecho de los miedos de la humanidad, formado a partir de una imagen negativa compartida.</p>\n<p><strong>Presencia aterradora</strong>. Como acción, puedes obligar a todas las criaturas a 30 pies o menos de ti a hacer una tirada de salvación de Sabiduría contra tu CD de salvación de Energía Maldita. Si fallan, quedan asustadas de ti durante 1 minuto. Una criatura puede repetir la tirada al final de su turno. Una vez usado este rasgo, no puedes volver a usarlo hasta terminar un descanso largo.</p>\n<p><strong>Sembrador de miedo</strong>. Obtienes competencia en Intimidación y un bonificador de +1 a las tiradas de ataque y de daño contra criaturas asustadas.</p>\n<p><strong>Enfermedad</strong><br />\nLa peste y la enfermedad son conceptos que la humanidad maldice, y dan lugar a maldiciones poderosas.</p>\n<p><strong>Nacido de la peste</strong>. Eres inmune a las enfermedades y al veneno, así como a la condición de envenenado. Tus golpes sin armas infligen 1d4 de daño de veneno al impactar.</p>\n<p><strong>Enfermedad andante</strong>. Como acción, puedes obligar a todas las criaturas a 30 pies o menos de ti a hacer una tirada de salvación de Constitución contra tu CD de salvación de Energía Maldita. Si fallan, quedan envenenadas durante 1 minuto. Una criatura puede repetir la tirada al final de su turno. Una vez usado este rasgo, no puedes volver a usarlo hasta terminar un descanso largo.</p>\n<p><strong>Útero maldito</strong><br />\nEres un espíritu maldito joven que aún no se ha desarrollado.</p>\n<p><strong>Caparazón duro</strong>. Tu CA es 14 + tu modificador de Constitución mientras no lleves armadura.</p>\n<p><strong>Constitución fuerte</strong>. Tus puntos de golpe máximos aumentan en una cantidad igual a tu nivel, y aumentan en 1 cada vez que subes de nivel.</p>\n"
+   },
+   "_key": "!journal.pages!lVp6w0UwUthHjXTm.nrB2gN0URW9JmtZI"
+  }
+ ],
+ "flags": {
+  "jjk5e": {
+   "lang": "es",
+   "source": "eCWogLA1JfUjET7J"
+  }
+ },
+ "_key": "!journal!lVp6w0UwUthHjXTm"
+}

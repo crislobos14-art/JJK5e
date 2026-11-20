@@ -1,0 +1,42 @@
+{
+ "_id": "fxcgtK3HPxzHzvnL",
+ "name": "Grounded Charge",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/mythical-beast-amber.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Mythical Beast Amber Release</em></p>\n<p>Through repeated usage of your cursed technique's release your body has grown used to the manifestation of phenomena.  The side effects of using <em>Mythical Beast Amber: Release</em> are reduced by 1 stage. This causes stage 0 to have no side effects.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Mythical Beast Amber Release",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Mythical Beast Amber Release"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "84RYYPEHHy0nXTWE",
+ "sort": 300,
+ "_key": "!items!fxcgtK3HPxzHzvnL"
+}

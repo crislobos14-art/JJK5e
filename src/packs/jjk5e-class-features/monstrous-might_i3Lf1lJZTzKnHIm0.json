@@ -1,0 +1,43 @@
+{
+ "_id": "i3Lf1lJZTzKnHIm0",
+ "name": "Monstrous Might",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Strength Improvements: You can have a number of these improvements equal to your Strength modifier.</em></p>\n<p>Superhuman Might, 1 body point, 9th level, 24 Strength<br />\nYour body strength is increasing by the second, you could even be called a monster at this point. You now count as two sizes larger for the purposes of grappling, shoving, disarming, and the weight you can carry, push, drag or lift. In addition, your martial arts die increases by 1 dice, applying after die tier increases.  </p>\n<hr />",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Heavenly Restriction 2"
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "level": 9,
+    "abilities": {
+     "str": 24
+    },
+    "features": [
+     [
+      "Superhuman Might"
+     ]
+    ]
+   },
+   "bodyCost": 1,
+   "bodyCategory": "str"
+  }
+ },
+ "folder": "fG9dHqhvzewoqwrt",
+ "_key": "!items!i3Lf1lJZTzKnHIm0"
+}

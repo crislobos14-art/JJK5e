@@ -1,0 +1,38 @@
+{
+ "_id": "zWsgayPGpQ7Bv4xk",
+ "name": "Chanting",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: 12th level+</em></p>\n<p>You can set a recitation of chanting for one of your innate technique features. You recite your chant as a full turn action and must concentrate until the technique is released. If you lose concentration, the cursed energy spent on the technique is wasted. When you use the technique on your next turn after reciting your chant, it will be given the following boost:</p>\n<ul>\n<li>\n<p>Your technique will ignore resistances and treat immunities as resistance.  </p>\n</li>\n<li>\n<p>If your Innate Technique feature is an attack, it gains advantage on the attack roll. If it instead requires a saving throw, the target(s) make their saves at disadvantage.  </p>\n</li>\n<li>\n<p>Your Technique feature deals double the damage dice.</p>\n</li>\n</ul>\n<p>If your Innate Technique does not directly deal damage, you can choose the following options:</p>\n<ul>\n<li>\n<p>The technique's range doubles.  </p>\n</li>\n<li>\n<p>The technique can target an additional number of creatures equal to your Cursed Energy modifier.  </p>\n</li>\n<li>\n<p>You can double the duration of the Innate Technique feature.</p>\n</li>\n</ul>\n<p>If your Innate Technique feature that benefits from Chanting requires more than one attack or damage roll or save to be made, only the first gains the benefits of Chanting. You cannot use Maximum Output or Domain Expansion while Chanting.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkCursedEnergy"
+  },
+  "requirements": "12th level+",
+  "prerequisites": {
+   "level": 12,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "level": 12
+   }
+  }
+ },
+ "folder": "58RlNbYPWxO2Xi4E",
+ "sort": 1500,
+ "_key": "!items!zWsgayPGpQ7Bv4xk"
+}

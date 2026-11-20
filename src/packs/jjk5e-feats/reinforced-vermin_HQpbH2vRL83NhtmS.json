@@ -1,0 +1,73 @@
+{
+ "_id": "HQpbH2vRL83NhtmS",
+ "name": "Reinforced Vermin",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/disaster-vermin.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Vermin of Disaster</em></p>\n<p>As part of the bonus action you take to command your Insect Swarms, you can spend 2 cursed energy to reinforce one of your Insect Swarms with cursed energy for 1 minute. While reinforced, their size category increases by one and they deal an additional 2 damage dice on a successful Bites attack (only +1 if bloodied). If you use multiple Reinforced Insect Swarms to form a Vermin Swarm, it only gains these benefits once.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Vermin of Disaster",
+  "activities": {
+   "r8NfgdbKZy771re3": {
+    "_id": "r8NfgdbKZy771re3",
+    "type": "utility",
+    "name": "Bonus Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "r8NfgdbKZy771re3": 2
+   },
+   "prereq": {
+    "features": [
+     [
+      "Vermin of Disaster"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "miB06u1JGRXhMd1e",
+ "sort": 100,
+ "_key": "!items!HQpbH2vRL83NhtmS"
+}

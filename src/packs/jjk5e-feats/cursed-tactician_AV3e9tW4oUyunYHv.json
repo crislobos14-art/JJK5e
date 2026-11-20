@@ -1,0 +1,42 @@
+{
+ "_id": "AV3e9tW4oUyunYHv",
+ "name": "Cursed Tactician",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/cursed-corpse-creation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Corpse Tactics</em></p>\n<p>When you use <em>Corpse Tactics</em>, you can spend ce up to your proficiency bonus to use an additional tactics option for each ce spent. You can choose the same tactics option as part of the same bonus action, but you cannot use the same tactics multiple times on the same cursed corpse.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Corpse Tactics",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Corpse Tactics"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "XXj1CTcWWYDx5bTY",
+ "sort": 300,
+ "_key": "!items!AV3e9tW4oUyunYHv"
+}

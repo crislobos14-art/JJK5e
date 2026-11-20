@@ -1,0 +1,129 @@
+{
+ "_id": "M48Lb0FJgSB7lVfk",
+ "name": "Inversion",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/inverse.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Inverse — Innate Technique (1st level)</em></p><blockquote><p>You invert damage taken based on a specific threshold.</p></blockquote><p>Starting at 1st level, you gain the ability to invert the damage you take. As a bonus action, you can spend 2 cursed energy to activate Inverse for 1 minute. While Inverse is active, when you take damage, it is modified based on a damage limit and threshold. The damage limit equals your proficiency bonus times your Cursed Energy score, and the threshold is equal to your proficiency bonus times your Cursed Energy modifier.<br />\n When you take damage that exceeds your threshold, you subtract the threshold from the damage and take the remaining difference as damage. However, when the damage is below your threshold, you subtract the threshold from the damage and take the resulting number as damage instead. For example, if your set limit is 100 and you take 90 damage, you would subtract the damage from your limit if it exceeds the threshold (e.g., 90 - 20 = 70), and take the remaining 70 damage. Conversely, if the damage is below the threshold (e.g., 10 damage), you subtract that amount from your set limit (100 - 10 = 90), and take 90 damage instead. If the calculation results in a negative number, the damage remains unchanged.<br />\n You can extend the duration of Inverse by spending 1 cursed energy to maintain the effect for an additional minute.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "i2BRWdWmFvbiSpO7": {
+    "_id": "i2BRWdWmFvbiSpO7",
+    "type": "utility",
+    "name": "Bonus Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    }
+   },
+   "UWhXh7EE14xJwXs0": {
+    "_id": "UWhXh7EE14xJwXs0",
+    "type": "utility",
+    "name": "Action (1 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "i2BRWdWmFvbiSpO7": 2,
+    "UWhXh7EE14xJwXs0": 1
+   },
+   "technique": "Inverse",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "bh2ZyC5GSVoaToIo",
+ "_key": "!items!M48Lb0FJgSB7lVfk"
+}

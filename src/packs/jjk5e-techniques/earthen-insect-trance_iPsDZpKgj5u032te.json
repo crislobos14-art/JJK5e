@@ -1,0 +1,107 @@
+{
+ "_id": "iPsDZpKgj5u032te",
+ "name": "Earthen Insect Trance",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/disaster-vermin.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Disaster Vermin — Innate Technique (3rd level)</em></p><p>At 3rd level, your mastery over insects has grown. You can have a number of Insect Swarms summoned equal to your proficiency bonus and can command any number of them as a bonus action. </p>\n<p>Additionally, you gain access to an insect shikigami with a large pouch. As an action, you can summon up to 2 shikigami, spending 2 cursed energy per shikigami to summon them in an unoccupied space within 10 ft of you. You can command the Shikigami and Insect Swarm as part of the same bonus action.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "fF1W1iUfbBN0i5bR": {
+    "_id": "fF1W1iUfbBN0i5bR",
+    "type": "utility",
+    "name": "Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "10",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "10",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "fF1W1iUfbBN0i5bR": 2
+   },
+   "technique": "Disaster Vermin",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "THumTyfrAaZo0XzQ",
+ "_key": "!items!iPsDZpKgj5u032te"
+}

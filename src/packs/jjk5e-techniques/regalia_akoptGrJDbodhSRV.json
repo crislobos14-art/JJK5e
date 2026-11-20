@@ -1,0 +1,145 @@
+{
+ "_id": "akoptGrJDbodhSRV",
+ "name": "Regalia",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/regalia.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Regalia — Innate Technique (1st level)</em></p><blockquote><p>Your very soul has become a cursed tool that has been sealed within. You have the ability to manifest it using cursed energy.</p></blockquote><p>Starting at 1st level, you can manifest your Regalia as an action for 2 CE for a number of hours equal to your Cursed Energy modifier. Your Regalia takes the form of a simple or martial melee weapon of your choice, such as Dagger or a Shortsword. You are proficient with the weapon and gain a +1 bonus to attack and damage rolls using your Regalia. Once per turn on a hit you can spend 1 CE to deal an additional 1d8 necrotic damage. This becomes 2d8 at 3rd level, 3d8 at 6th level, 4d8 at 11th level and 6d8 at 18th level.<br />\n Your Regalia disappears if it is more than 30 feet away from you and cannot be wielded by other creatures.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "4ZYehpeGjC443jyo": {
+    "_id": "4ZYehpeGjC443jyo",
+    "type": "utility",
+    "name": "Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   },
+   "6n7ztqbNWA03K4hw": {
+    "_id": "6n7ztqbNWA03K4hw",
+    "type": "damage",
+    "name": "Action (1 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "4ZYehpeGjC443jyo": 2,
+    "6n7ztqbNWA03K4hw": 1
+   },
+   "technique": "Regalia",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "jfP5e1LgOxgMmS1g",
+ "_key": "!items!akoptGrJDbodhSRV"
+}

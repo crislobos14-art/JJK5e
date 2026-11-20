@@ -1,0 +1,79 @@
+{
+ "_id": "CT6YvP3As14jRLdu",
+ "name": "Heavenly Pact: Reverse Cursed Energy Generation",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/pact.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Creeps and Curses V.3.1</em></p><p><em>Heavenly Restriction or Heavenly Pact refers to a binding vow forced on a sorcerer's body at birth. This usually affects their cursed energy in exchange for limitations or improvements on their body. The most notable is the absolute physicality of Zenin Toji, but there are many different types of Heavenly Pacts. A creature can only have one Heavenly Pact. If the limitations of the Heavenly Pact are superseded, anything gained becomes null.</em></p>\n<p>The body of the sorcerer only produces positive energy instead of negative energy, making them incredibly effective against cursed spirits in exchange for being unable to use cursed energy in normal ways. They cannot use features requiring cursed energy and instead have Reverse Cursed Energy equal to their normal cursed energy.</p>\n<ul>\n<li>\n<p>They are ineligible for Cursed Energy, Barrier, or Innate Technique feats due to the unique property of their cursed energy preventing them from utilizing it properly.</p>\n</li>\n<li>\n<p>They gain Reverse Cursed Technique as well as the Cursed Technique Reversal and Reverse Cursed Technique Output Feats. For these features, one Reverse Cursed Energy counts as two CE.</p>\n</li>\n<li>\n<p>Instead of being able to use their normal innate technique features, they instead gain the Reversal of their technique. Cursed Strike is replaced with Reverse Cursed Strike:</p>\n</li>\n<li>\n<p>Reverse Cursed Strike. On a hit with an unarmed strike or melee weapon attack, you can spend Reverse Cursed Energy up to proficiency bonus to deal an additional 2d6 radiant damage per RCE.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkPact"
+  },
+  "requirements": "Heavenly Pact (only one per creature)",
+  "activities": {
+   "dYcnZeyPVqsC3MfH": {
+    "_id": "dYcnZeyPVqsC3MfH",
+    "type": "damage",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "radiant"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "TuD75Es2qNSvVZN6",
+ "sort": 100,
+ "_key": "!items!CT6YvP3As14jRLdu"
+}

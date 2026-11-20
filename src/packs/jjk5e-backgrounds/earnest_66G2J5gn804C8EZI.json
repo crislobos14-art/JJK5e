@@ -1,0 +1,46 @@
+{
+ "_id": "66G2J5gn804C8EZI",
+ "name": "Earnest",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/mindset.svg",
+ "system": {
+  "description": {
+   "value": "<p>You fight with pure sincerity, even when outmatched. When you use your inspiration, whenever you make an attack roll, ability check, or saving throw, you can choose to treat the roll as a 10 for the next minute.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": ""
+  },
+  "requirements": "Mindset",
+  "activities": {
+   "rpyWOsJYE6USXFpM": {
+    "_id": "rpyWOsJYE6USXFpM",
+    "type": "utility",
+    "name": "Use Inspiration",
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Spend your inspiration"
+    },
+    "consumption": {
+     "targets": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "mindset": true
+  }
+ },
+ "folder": "ymyii86sdbVo8H5C",
+ "_key": "!items!66G2J5gn804C8EZI"
+}

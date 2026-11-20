@@ -1,0 +1,32 @@
+{
+ "_id": "hkjKjJNWrFqOsjLR",
+ "name": "Flow of the Dragon",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/dragon-vein.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Dragon Vein — Innate Technique (1st level)</em></p><blockquote><p>Your technique forms an unbreakable connection between you and the earth while your feet touch the ground.</p></blockquote><p>At 1st level you have formed a powerful connection between you and the earth that keeps you grounded. While your feet are touching the ground, you add your proficiency bonus to melee damage rolls and have advantage on ability checks and saving throws against being forcefully moved.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Dragon Vein 1"
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Dragon Vein",
+   "level": 1
+  }
+ },
+ "folder": "xkcQZ0iOxpoEyfI2",
+ "_key": "!items!hkjKjJNWrFqOsjLR"
+}

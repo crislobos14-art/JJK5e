@@ -1,0 +1,42 @@
+{
+ "_id": "gOgmeHnnKpJGL7xD",
+ "name": "Greater Foresight",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/g-warstaff.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Predictable Strikes</em></p>\n<p>Your foresight ability has reached even greater potential, reaching the point some consider enlightened. Whenever you have advantage because of your technique, you can roll 3 dice instead of 2 and keep the highest roll. Also, whenever a creature has disadvantage on attack rolls against you because of your technique, they roll 3 dice instead of 2 and keep the lowest roll.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Predictable Strikes",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Predictable Strikes"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "hKb2rJntQlJugE10",
+ "sort": 100,
+ "_key": "!items!gOgmeHnnKpJGL7xD"
+}

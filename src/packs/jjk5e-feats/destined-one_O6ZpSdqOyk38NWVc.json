@@ -1,0 +1,42 @@
+{
+ "_id": "O6ZpSdqOyk38NWVc",
+ "name": "Destined One",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/fate.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Fate Manipulation</em></p>\n<p>You or the DM chooses one creature you touch as your <em>Destined One</em>. You can always tell where your <em>Destined One</em> is as the thread of Fate always guides your hand. While within 30 ft of your <em>Destined One</em>, you have advantage on saving throws against being charmed or frightened. Additionally, once per round you can add your proficiency bonus to your AC against an attack roll made against you or to a saving throw you make, potentially changing the outcome. You cannot change the creature chosen as your <em>Destined One</em> unless they die.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Fate Manipulation",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Fate Manipulation"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "MeEjv8rwdOA6DSvK",
+ "sort": 100,
+ "_key": "!items!O6ZpSdqOyk38NWVc"
+}

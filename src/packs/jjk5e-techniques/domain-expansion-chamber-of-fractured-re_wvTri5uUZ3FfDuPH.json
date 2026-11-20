@@ -1,0 +1,124 @@
+{
+ "_id": "wvTri5uUZ3FfDuPH",
+ "name": "Domain Expansion: Chamber of Fractured Reflections",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/paralyzing-gaze-domain.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Paralyzing Gaze — Innate Technique (18th level)</em></p><p><em>Domain Expansion (rules): full-turn action, 20 CE unless stated, 175-ft radius, 1 minute. When the domain ends you suffer <strong>Technique Burnout</strong> (applied automatically by the module).</em></p><p>At 18th level, you have learned to expand your domain. At initiative 20, three creatures of your choice within the domain suffer the effects of <em>Immobilizing Eyes</em>. At each initiative 20, you can change the target for your domain’s guaranteed hit effect. The domain takes the appearance of several mirrors that reflect your gaze from every angle, making line of sight impossible to break within the domain.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "VOHKhA24viVIByjE": {
+    "_id": "VOHKhA24viVIByjE",
+    "type": "utility",
+    "name": "Expand Domain (20 CE)",
+    "sort": -100000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Full turn: Action + Bonus Action + Movement",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "175",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": true
+     },
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 9,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "special",
+   "value": null,
+   "condition": "Full turn: Action + Bonus Action + Movement",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "radius",
+    "size": "175",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": true
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Paralyzing Gaze",
+   "level": 18,
+   "domain": true,
+   "ceCosts": {
+    "VOHKhA24viVIByjE": 20
+   },
+   "domainActivity": "VOHKhA24viVIByjE",
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "NgfqZW5WmZKy5Fbs",
+ "_key": "!items!wvTri5uUZ3FfDuPH"
+}

@@ -1,0 +1,153 @@
+{
+ "_id": "P3P35yj02Ltq67v3",
+ "name": "Rotten Blood",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/rot.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Rot — Innate Technique (1st level)</em></p><blockquote><p>Utilize your toxic dark blood to devastating effectiveness.</p></blockquote><p>Starting at 1st level, you possess toxic blood. You gain resistance to poison and acid damage and have advantage on saving throws against the poisoned condition. When you have less than your hit point maximum, you can cause your unarmed strikes or melee weapon attacks to deal an additional 1d8 acid damage once per turn. This increases to 2d8 at 3rd level, 3d8 at 6th level, and 4d8 at 11th level.</p>\n<p>Once as part of a long rest, you can spend $100 and hit points up to your proficiency bonus to fill a Blood Bag with your own blood. This Blood Bag counts as a source of hit points for your Rot features. A Blood Bag lasts 5 days outside of refrigeration before it goes bad. You can have a number of Blood Bags equal to your Constitution modifier at once.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "qxwr7MCLQF64tLOc": {
+    "_id": "qxwr7MCLQF64tLOc",
+    "type": "damage",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1"
+      }
+     ],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "acid"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "1",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
+    }
+   ]
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "special",
+   "value": null,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Rot",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "TOdSvSBhuENKcEJX",
+ "effects": [
+  {
+   "_id": "NNBe8t6D2Oom0eRC",
+   "name": "Rotten Blood (toggle)",
+   "img": "modules/jjk5e/icons/techniques/rot.svg",
+   "changes": [
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "poison",
+     "priority": null
+    },
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "acid",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!P3P35yj02Ltq67v3.NNBe8t6D2Oom0eRC"
+  }
+ ],
+ "_key": "!items!P3P35yj02Ltq67v3"
+}

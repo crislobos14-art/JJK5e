@@ -1,0 +1,42 @@
+{
+ "_id": "J0QM71wCMS4R9imj",
+ "name": "Amplified Transmute",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/cursed-transmutation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Basic Transmutations</em></p>\n<p>You have learned to amplify your transmutations with modified formulas and stronger cursed energy. The AC of a Transmuted Object increases by your proficiency bonus and has 15 hit points per 5 ft cube. This increases to 20 at 3rd level, 30 at 6th level, 45 at 11th level and 60 at 18th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Basic Transmutations",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Basic Transmutation"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "duKUqjyWPQ4gLCYh",
+ "sort": 100,
+ "_key": "!items!J0QM71wCMS4R9imj"
+}

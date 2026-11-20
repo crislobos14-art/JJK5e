@@ -1,0 +1,118 @@
+{
+ "_id": "y0wtpMX5KkQVZ4mb",
+ "name": "Innate Technique: Shrine",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/shrine.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>Dissect and fillet, preparing your oven. Simple things like that are your cursed technique.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.7EnbbkEp3o7f0VLb]{Dismantle}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.KzRHCk2wttIY8wKv]{Cleave}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.mxwFcvMxYv3CzmBv]{Divine Flame Open}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.LwQFSsaYhkLR6WV0]{Slicing and Severing}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.O5AXSTSlqi53tosZ]{Domain Expansion: Malevolent Shrine}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "EhLDfHKdqPg8TelH": {
+    "_id": "EhLDfHKdqPg8TelH",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Shrine (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.7EnbbkEp3o7f0VLb",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "bItGEuC97RVdeP8a": {
+    "_id": "bItGEuC97RVdeP8a",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Shrine (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.KzRHCk2wttIY8wKv",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "lsL3mqE6k7ZIV05H": {
+    "_id": "lsL3mqE6k7ZIV05H",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Shrine (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.mxwFcvMxYv3CzmBv",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "zT8z7n6nLnclhojv": {
+    "_id": "zT8z7n6nLnclhojv",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Shrine (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.LwQFSsaYhkLR6WV0",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "j0sw7Fa89oeicDL6": {
+    "_id": "j0sw7Fa89oeicDL6",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Shrine (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.O5AXSTSlqi53tosZ",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Shrine"
+  }
+ },
+ "_key": "!items!y0wtpMX5KkQVZ4mb"
+}

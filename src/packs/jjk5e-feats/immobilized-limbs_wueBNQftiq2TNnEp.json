@@ -1,0 +1,108 @@
+{
+ "_id": "wueBNQftiq2TNnEp",
+ "name": "Immobilized Limbs",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/paralyzing-gaze.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Immobilizing Eyes</em></p>\n<p>When you use Immobilizing Eyes, you can spend 1 additional CE as part of activating the technique concentrate your eyes on a specific part of the creature, also causing one of the following restrictions while you maintain your technique:</p>\n<ul>\n<li>\n<p><strong>Legs</strong>. The target’s speed is halved. If the target tries to move more than their movement speed, they must make a Dexterity saving throw or fall prone.  </p>\n</li>\n<li>\n<p><strong>Arms</strong>. The target gains an additional -3 penalty to attack rolls and cannot take object interactions.  </p>\n</li>\n<li>\n<p><strong>Torso</strong>. You reduce the target’s AC by 3.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Immobilizing Eyes",
+  "activities": {
+   "0OG7tDUCtVYkIgzB": {
+    "_id": "0OG7tDUCtVYkIgzB",
+    "type": "save",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    },
+    "effects": [
+     {
+      "_id": "0Cjn1hfe8F75WmRP",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Immobilizing Eyes"
+     ]
+    ]
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "0Cjn1hfe8F75WmRP",
+   "name": "Prone (Immobilized Limbs)",
+   "img": "modules/jjk5e/icons/techniques/paralyzing-gaze.svg",
+   "statuses": [
+    "prone"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!wueBNQftiq2TNnEp.0Cjn1hfe8F75WmRP"
+  }
+ ],
+ "folder": "4cwsl1cPyRP6EWgd",
+ "sort": 100,
+ "_key": "!items!wueBNQftiq2TNnEp"
+}

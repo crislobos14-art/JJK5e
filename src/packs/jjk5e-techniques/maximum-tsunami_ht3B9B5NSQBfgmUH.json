@@ -1,0 +1,95 @@
+{
+ "_id": "ht3B9B5NSQBfgmUH",
+ "name": "Maximum: Tsunami",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/disaster-tides.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Disaster Tides — Innate Technique (18th level)</em></p><p>At 18th level, you have reached the pinnacle of manipulating your tides, creating a massive wave that destroys everything in its path. As an action for 8 Cursed Energy, you can cast the <em>Tsunami</em> spell as an 8th-level spell.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "49jmvydcAg9jYSQl": {
+    "_id": "49jmvydcAg9jYSQl",
+    "type": "utility",
+    "name": "Action (8 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 9,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "49jmvydcAg9jYSQl": 8
+   },
+   "technique": "Disaster Tides",
+   "level": 18,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "Ao9OCl7PHP0hxQBD",
+ "_key": "!items!ht3B9B5NSQBfgmUH"
+}

@@ -1,0 +1,87 @@
+{
+ "_id": "AcNQ4FC2wPofNbdB",
+ "name": "Adorable Poison Jar",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/moon-dregs.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Poisonous Cursed Energy</em></p>\n<p>You have learned to refine your poisons within Moon Dregs to create powerful mixtures. You gain the following benefits:</p>\n<ul>\n<li>\n<p><em>Moon Dregs</em> deals an additional 1d6 poison damage on a hit. This increases to 2d6 at 6th level and 3d8 at 11th level.  </p>\n</li>\n<li>\n<p>A creature grappled by <em>Moon Dregs</em> takes 2d4 poison damage at the beginning of their turn. This increases to 2d8 poison damage at 11th level.  </p>\n</li>\n<li>\n<p>Poison can also be used as an enhancer. You gain 4 ability points you can use to increase <em>Moon Dregs</em> ability scores (max of 20).</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Poisonous Cursed Energy",
+  "activities": {
+   "URxs6nfpFnfqcIkA": {
+    "_id": "URxs6nfpFnfqcIkA",
+    "type": "damage",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "poison"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Poisonous Cursed Energy"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "xS0EmCX82T9CW9Eg",
+ "sort": 200,
+ "_key": "!items!AcNQ4FC2wPofNbdB"
+}

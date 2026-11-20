@@ -1,0 +1,118 @@
+{
+ "_id": "bXBgxyXKLbBpuaMg",
+ "name": "Innate Technique: Cursed Circuitry",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/cursed-circuitry.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>You can apply a circuit that allows for extremely efficient use of cursed energy.</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.LLsfnjkR98WtV2WQ]{Circuit}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.4bXHS5NUENSlo5bS]{Pure Energy Efficiency}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.w5mMIEOHpgEp361L]{High Performance Circuit}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.ySExszCtKEff7Lhl]{Circuit Breaker}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.Ga4rJYPGjtSVOdr3]{Domain Expansion: Deus ex Machina}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "LoIT1crw6oT4sKWd": {
+    "_id": "LoIT1crw6oT4sKWd",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Cursed Circuitry (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.LLsfnjkR98WtV2WQ",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "CNcb1cZ8117NrwmI": {
+    "_id": "CNcb1cZ8117NrwmI",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Cursed Circuitry (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.4bXHS5NUENSlo5bS",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "qSBizFKXCiQ5rqqC": {
+    "_id": "qSBizFKXCiQ5rqqC",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Cursed Circuitry (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.w5mMIEOHpgEp361L",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "p9MPa2FZFPl3i4sY": {
+    "_id": "p9MPa2FZFPl3i4sY",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Cursed Circuitry (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.ySExszCtKEff7Lhl",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "qAAZsCiK5JCy7zFf": {
+    "_id": "qAAZsCiK5JCy7zFf",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Cursed Circuitry (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.Ga4rJYPGjtSVOdr3",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Cursed Circuitry"
+  }
+ },
+ "_key": "!items!bXBgxyXKLbBpuaMg"
+}

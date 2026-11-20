@@ -1,0 +1,237 @@
+{
+ "_id": "ddEwns90CtDAv2iC",
+ "name": "Commit to the Bit",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/comedian.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Comedian — Innate Technique (3rd level)</em></p><p>At 3rd level, you have learned to use your comedy to supplement your abilities. You gain access to the following gags while your technique is active:</p>\n<p><strong>Blasting Off.</strong> On a hit with a melee attack, you can spend 1 CE to cause the target to go flying up to 60 ft away from you and fall prone. This increases to 90 ft at 6th level, 120 ft at 11th level, and 200 ft at 18th level.<br />\n<strong>Props</strong>. As a bonus action for 2 CE, you create a number of items equal to your CE modifier that fit in a 5 ft cube that help with your current joke or bit. These items increase to a 10 ft cube at 6th level, 15 ft cube at 11th level, and 20 ft cube at 18th level. These props last for 1 minute or until your technique deactivates.<br />\n<strong>Powerful Punchline</strong>. As an action for 3 CE, you let loose a good punchline related to a joke you tell or a bit you have going. Choose a range and source of the punchline: </p>\n<ul>\n<li>\n<p>30 ft diameter sphere within 80 ft  </p>\n</li>\n<li>\n<p>60 ft long, 5 ft wide line  </p>\n</li>\n<li>\n<p>30 ft cone</p>\n</li>\n</ul>\n<p>All creatures within range must make a Strength, Dexterity, or Constitution saving throw based on the source of the punchline. On a failed save, a target takes your proficiency bonus + your CE modifier in d8s of bludgeoning, piercing, slashing, or psychic damage and an additional effect depending on the punchline (Eg. A bus runs someone over. Creatures in a 60 ft long, 5 ft wide line must make a Dexterity saving throw or take 5d8 bludgeoning damage and are pushed to the end of the line and knocked prone on a failed save or half as much damage and not pushed or prone on a success). This damage cannot kill a person since comedy isn’t funny if someone dies.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "WSkfhE5kG2RIjgJf": {
+    "_id": "WSkfhE5kG2RIjgJf",
+    "type": "utility",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "Ok3ehX0EStTcO9dS",
+      "onSave": false
+     }
+    ]
+   },
+   "sqZU5kXKLOuvCqF4": {
+    "_id": "sqZU5kXKLOuvCqF4",
+    "type": "utility",
+    "name": "Bonus Action (2 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "cube",
+      "size": "5",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    }
+   },
+   "uenzuFk571nNCSdD": {
+    "_id": "uenzuFk571nNCSdD",
+    "type": "save",
+    "name": "Action (3 CE)",
+    "sort": 200000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "cone",
+      "size": "30",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 5,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "WSkfhE5kG2RIjgJf": 1,
+    "sqZU5kXKLOuvCqF4": 2,
+    "uenzuFk571nNCSdD": 3
+   },
+   "technique": "Comedian",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "Ok3ehX0EStTcO9dS",
+   "name": "Prone (Commit to the Bit)",
+   "img": "modules/jjk5e/icons/techniques/comedian.svg",
+   "statuses": [
+    "prone"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!ddEwns90CtDAv2iC.Ok3ehX0EStTcO9dS"
+  }
+ ],
+ "folder": "8AlwpNPBMedHlchF",
+ "_key": "!items!ddEwns90CtDAv2iC"
+}

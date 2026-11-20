@@ -1,0 +1,210 @@
+{
+ "_id": "2LJZ8Jv607fSEyQ5",
+ "name": "Freelance",
+ "type": "background",
+ "img": "modules/jjk5e/icons/background.svg",
+ "folder": "CRaGqJh5HQKmdfVy",
+ "system": {
+  "description": {
+   "value": "<p>Whether you are a first generation sorcerer born to a normal family or someone who split away from the jujutsu world to become an illegal curse user, you have learned to survive without the backing of a clan or the approval of the higher-ups. The world is vast beyond the walls of the schools and great, and not every sorcerer chooses, or is allowed, to live under their watchful eyes. Some Freelancers are wanderers, exorcising curses in forgotten villages or protecting those too poor to afford official aid. Others drift into the underbelly of the jujutsu world, selling techniques, cursed tools, or information to whoever can pay. Without the structure of the clans or the bureaucracy of the schools, you rely on your own wit and adaptability. You make connections where you can, trust few, and keep your head down when the higher-ups come sniffing around.<br />\n<strong>Feat:</strong> Pick one Cursed Energy Feat<br />\n<strong>Skill Proficiency:</strong> Perception, Deception<br />\n<strong>Tool Proficiency:</strong> Thieves Tools or Disguise Kit<br />\n<strong>Equipment:</strong> Set of travelers clothes for streetwear, a notebook of jobs, a burner cellphone, forgery kit or thieves tools, a wallet containing $2,000.  </p>\n<p><strong>Feature: Independent Network</strong></p>\n<p>Years spent working outside official channels have given you access to an informal web of contacts; smugglers, minor sorcerers, black-market exorcists, and ordinary citizens who owe you a favor. You can usually find information, shelter, or supplies through this network when operating in a city or settlement, even if it’s unofficial or risky.<br />\nYou can also identify whether a community is under the influence of jujutsu authorities or illegal curse activity within a few hours of arriving, letting you decide which side to approach or avoid first.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "identifier": "freelance",
+  "advancement": {
+   "L3iaZYCCzOJTNmlu": {
+    "_id": "L3iaZYCCzOJTNmlu",
+    "type": "Trait",
+    "level": 0,
+    "title": "Skill Proficiencies",
+    "configuration": {
+     "mode": "default",
+     "grants": [
+      "skills:dec",
+      "skills:prc"
+     ],
+     "choices": []
+    },
+    "value": {}
+   },
+   "0sEXbyI75G7VREJj": {
+    "_id": "0sEXbyI75G7VREJj",
+    "type": "ItemChoice",
+    "level": 0,
+    "title": "Cursed Energy Feat (background feat)",
+    "value": {},
+    "configuration": {
+     "choices": {
+      "0": {
+       "count": 1,
+       "replacement": false
+      }
+     },
+     "allowDrops": true,
+     "type": "feat",
+     "pool": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.5xpSFf81Rrf15a3f"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.qyQ6XfprYJNRTB0p"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.fZnK2A2LWwuuQ9hM"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.rSt3OAfpNPUKQR1M"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.K9ab3a5Tvq1Q2MHX"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.HBcY8P8oWZ4Fjz2U"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.ceFaBfiOjnMr8pns"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.2A4ld3l5zOj35rrN"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.kdQQ0yy0ccyh2tBD"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.dJqrp7xMBqFDMPJt"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.rxWwehwG1wa5VsCa"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.sB7E6ktq094oJbdD"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.DR7dsOsBx62ayUmW"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.2RX2eSjhogly3SRm"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.zWsgayPGpQ7Bv4xk"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.ZtJosIKa0sS6jWk5"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.IzkpgtcBjcHgykfF"
+      }
+     ],
+     "restriction": {
+      "type": "",
+      "subtype": "",
+      "level": ""
+     }
+    }
+   },
+   "nnT6vkJtXEttwwnz": {
+    "_id": "nnT6vkJtXEttwwnz",
+    "type": "Trait",
+    "level": 0,
+    "title": "Tool Proficiency",
+    "value": {},
+    "configuration": {
+     "mode": "default",
+     "allowReplacements": false,
+     "grants": [],
+     "choices": [
+      {
+       "count": 1,
+       "pool": [
+        "tool:disg",
+        "tool:thief"
+       ]
+      }
+     ]
+    }
+   },
+   "LpWoZGVJwtsh9w1V": {
+    "_id": "LpWoZGVJwtsh9w1V",
+    "type": "ItemChoice",
+    "level": 0,
+    "title": "Mindset",
+    "hint": "Choose the mindset that drives your sorcery (it replaces Inspiration).",
+    "value": {},
+    "configuration": {
+     "choices": {
+      "0": {
+       "count": 1,
+       "replacement": false
+      }
+     },
+     "allowDrops": true,
+     "type": "feat",
+     "pool": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.0DRc7Ftd4oRxhmPP"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.tfptMmAPJyi5Fa28"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.BDtYSEj7wP0CSJSd"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.LDbMTb0R84yNZUaZ"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.z6LYQIl1YlosCyL7"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.AypG9meZokT7ds3Q"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.BOsYXnjKpnbtwfmW"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.BXVn0o2H4L9n82TN"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.g4KqCmc1MqQHfLFV"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.NEra1YZ6BxPjoGdV"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.H01e3yAvW04BYK0o"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.66G2J5gn804C8EZI"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.mLhSUvyfKRj4jU5u"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.5WUvEI9FuZelFdaw"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.M6qTsvh64leWYpJm"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-backgrounds.Item.a7Rh5bEHZv0PyaA8"
+      }
+     ],
+     "restriction": {
+      "type": "",
+      "subtype": "",
+      "level": ""
+     }
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "_key": "!items!2LJZ8Jv607fSEyQ5"
+}

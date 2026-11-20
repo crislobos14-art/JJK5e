@@ -1,0 +1,54 @@
+{
+ "_id": "D7x95n66ahRsc5Tf",
+ "name": "Unparalleled Movement",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>At 1st level, your speed increases by 10 feet. This bonus increases when you reach certain scout levels, as shown in the scout table<br />\nAt 9th level, you gain the ability to move along vertical surfaces and across liquids on your turn without falling during the move.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Scout 1"
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "Jrayu2BI11U3R1zF",
+ "effects": [
+  {
+   "_id": "hgAWbHH3qFyep7Qa",
+   "name": "Unparalleled Movement (speed bonus)",
+   "img": "modules/jjk5e/icons/feature.svg",
+   "changes": [
+    {
+     "key": "system.attributes.movement.walk",
+     "mode": 2,
+     "value": "10",
+     "priority": null
+    }
+   ],
+   "disabled": false,
+   "transfer": true,
+   "duration": {},
+   "description": "<p>Value follows the Scout table (updated by the module on level-up).</p>",
+   "flags": {
+    "jjk5e": {
+     "scaleKey": "scout.speed-bonus"
+    }
+   },
+   "_key": "!items.effects!D7x95n66ahRsc5Tf.hgAWbHH3qFyep7Qa"
+  }
+ ],
+ "_key": "!items!D7x95n66ahRsc5Tf"
+}

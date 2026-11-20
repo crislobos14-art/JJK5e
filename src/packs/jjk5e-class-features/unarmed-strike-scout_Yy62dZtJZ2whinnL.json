@@ -1,0 +1,73 @@
+{
+ "_id": "Yy62dZtJZ2whinnL",
+ "name": "Unarmed Strike (Scout)",
+ "type": "weapon",
+ "img": "icons/svg/combat.svg",
+ "folder": "Jrayu2BI11U3R1zF",
+ "system": {
+  "description": {
+   "value": "<p>Unarmed strike using the <strong>Scout</strong> damage die (<code>@scale.scout.die</code>), which grows with your level. Uses DEX or STR (finesse).</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "simpleM",
+   "baseItem": ""
+  },
+  "proficient": 1,
+  "equipped": true,
+  "quantity": 1,
+  "properties": [
+   "fin"
+  ],
+  "range": {
+   "value": 5,
+   "units": "ft",
+   "reach": 5
+  },
+  "damage": {
+   "base": {
+    "number": null,
+    "denomination": null,
+    "bonus": "",
+    "types": [
+     "bludgeoning"
+    ],
+    "custom": {
+     "enabled": true,
+     "formula": "@scale.scout.die"
+    }
+   }
+  },
+  "activities": {
+   "TPa1n9yd5ZwYxzSy": {
+    "_id": "TPa1n9yd5ZwYxzSy",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "melee",
+      "classification": "unarmed"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "_key": "!items!Yy62dZtJZ2whinnL"
+}

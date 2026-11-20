@@ -1,0 +1,149 @@
+{
+ "_id": "EdkOzraQgWFnQMJT",
+ "name": "Domain Expansion: Deadly Sentencing",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/deadly-sentencing-domain.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Deadly Sentencing — Innate Technique (3rd level)</em></p><p><em>Domain Expansion (rules): full-turn action, 20 CE unless stated, 175-ft radius, 1 minute. When the domain ends you suffer <strong>Technique Burnout</strong> (applied automatically by the module).</em></p><p>Beginning at 3rd level, your will lets you expand your domain for free once per long rest. Within the domain, no offensive action can be taken by either party. The target must make a contested Persuasion check against you to prove their innocence. You gain a piece of Evidence determined by a d20 roll. If you succeed, they suffer the punishment based on your Evidence for 1 minute and the domain ends.</p>\n<table>\n<thead>\n<tr>\n<th style=\"text-align: center;\">Roll</th>\n<th style=\"text-align: center;\">Evidence</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td style=\"text-align: center;\">1</td>\n<td style=\"text-align: center;\"><strong>Innocent:</strong> The person is innocent but accused of a heinous crime which is easily excusable. You fail unless the defendant admits to it for some reason, if so a dependent punishment can  apply.</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">2-9</td>\n<td style=\"text-align: center;\"><strong>Guilty:</strong> The person is guilty of a small crime with minimum evidence, your roll is normal. <em>Confiscation</em></td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">10-15</td>\n<td style=\"text-align: center;\"><strong>Very Guilty:</strong> The person is guilty of a crime, and you have good evidence,  your roll is at advantage. <em>Confiscation</em></td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">15-19</td>\n<td style=\"text-align: center;\"><strong>Severely Guilty:</strong> The person is guilty of a severe crime, and you have decent evidence. <em>Death Penalty</em></td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">20</td>\n<td style=\"text-align: center;\"><strong>Unforgivably Guilty:</strong> The person is guilty beyond a doubt of an unforgivable sin, you instantly succeed. <em>Death Penalty, Confiscation</em></td>\n</tr>\n</tbody>\n</table>\n<p><strong>Confiscation:</strong> The target loses either their innate technique or any magic items(items first). A creature without loses their CE.<br />\n<strong>Death Penalty:</strong> Your <em>Judge’s Gavel</em> is replaced by the Executioner’s Sword which instantly kills the accused on a hit.<br />\nYour DM may impose bonuses or penalties to Evidence rolls if fitting.<br />\nYour domain is Non-Lethal and instead of a guaranteed hit, gains the benefits of <em>Peace Treaty</em> as listed in Non-Lethal Domains. If you manage to convict a target with <em>Confiscation</em> or <em>Death Penalty</em>, you are not affected by Technique Burnout when your domain ends.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "ntA78JqzibjeNcT8": {
+    "_id": "ntA78JqzibjeNcT8",
+    "type": "utility",
+    "name": "Use",
+    "activation": {
+     "type": "special",
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1"
+      }
+     ],
+     "spellSlot": false
+    }
+   },
+   "MGIi4U05pEvEsoP9": {
+    "_id": "MGIi4U05pEvEsoP9",
+    "type": "utility",
+    "name": "Expand Domain (20 CE)",
+    "sort": -100000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Full turn: Action + Bonus Action + Movement",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "175",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": true
+     },
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "1",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
+    }
+   ]
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "special",
+   "value": null,
+   "condition": "Full turn: Action + Bonus Action + Movement",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "radius",
+    "size": "175",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": true
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Deadly Sentencing",
+   "level": 3,
+   "domain": true,
+   "ceCosts": {
+    "MGIi4U05pEvEsoP9": 20
+   },
+   "domainActivity": "MGIi4U05pEvEsoP9",
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "jvdEqnCHI6BBkSgt",
+ "_key": "!items!EdkOzraQgWFnQMJT"
+}

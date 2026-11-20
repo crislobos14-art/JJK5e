@@ -1,0 +1,108 @@
+{
+ "_id": "diVgFAJkfw6xhcmJ",
+ "name": "Piercing Schrift",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/schrift-x.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Schrift X — Innate Technique (1st level)</em></p><blockquote><p>You can create cursed seals that allow for permeation and your eyes are also cursed with a seal due to this technique.</p></blockquote><p>Starting at 1st level, you have a cursed mark somewhere on your body that molds your cursed energy automatically. When you make a ranged weapon attack, you can choose to use your Cursed Energy modifier for the attack or damage rolls. When you make a ranged attack, you can spend 1 ce to ignore cover by phasing through a solid object. You can only pierce through 5 feet of one object. This increases to two objects at 3rd, three at 6th, and four at 11th.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "LfH3LW4pEsZnebcw": {
+    "_id": "LfH3LW4pEsZnebcw",
+    "type": "attack",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": []
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "LfH3LW4pEsZnebcw": 1
+   },
+   "technique": "Schrift X",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "sHIaW6mkEHmwduDu",
+ "_key": "!items!diVgFAJkfw6xhcmJ"
+}

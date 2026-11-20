@@ -1,0 +1,90 @@
+{
+ "_id": "K3aWNR7XSTbWOSXI",
+ "name": "Blessed Blow",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/technique-extermination.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Extinguishment</em></p>\n<p>On a hit you can spend 2 Cursed Energy to deal an additional 2d12 radiant damage. You can increase the damage by 1d12 by spending an additional Cursed Energy. You can only spend as much cursed energy as your Cursed Energy modifier using this feature.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Extinguishment",
+  "activities": {
+   "CoDekGZ15uizp6rY": {
+    "_id": "CoDekGZ15uizp6rY",
+    "type": "damage",
+    "name": "Action (2 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 12,
+       "bonus": "",
+       "types": [
+        "radiant"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "CoDekGZ15uizp6rY": 2
+   },
+   "prereq": {
+    "features": [
+     [
+      "Extinguishment"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "gjva3zbKGp06jB9X",
+ "sort": 100,
+ "_key": "!items!K3aWNR7XSTbWOSXI"
+}

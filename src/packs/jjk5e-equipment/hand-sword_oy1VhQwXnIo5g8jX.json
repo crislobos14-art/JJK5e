@@ -1,0 +1,133 @@
+{
+ "_id": "oy1VhQwXnIo5g8jX",
+ "name": "Hand Sword",
+ "type": "weapon",
+ "img": "icons/svg/sword.svg",
+ "folder": "iccGNPZSINUipQjv",
+ "system": {
+  "description": {
+   "value": "<p>Weapon (Shortsword), Grade 2 <br />\nWhen attacking with the Cursed Hand Sword you gain a +2 to attack and damage rolls and advantage on ability checks or saving throws against being disarmed of this weapon. <br />\nYou can choose to remotely control it to move and attack as a bonus action. The weapon moves up to 25 feet and makes one attack per turn and remains active while within 100 ft. When attacking remotely, use your Cursed Energy modifier for attack rolls, and deal 2d10 slashing damage (no ability modifier). You can command it to travel somewhere or target a creature as an action, not requiring actions.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "martialM",
+   "baseItem": "shortsword"
+  },
+  "damage": {
+   "base": {
+    "number": 1,
+    "denomination": 6,
+    "types": [
+     "slashing"
+    ]
+   }
+  },
+  "range": {
+   "value": 5,
+   "long": null,
+   "units": "ft",
+   "reach": 5
+  },
+  "properties": [
+   "fin",
+   "lgt",
+   "mgc"
+  ],
+  "proficient": null,
+  "quantity": 1,
+  "activities": {
+   "1ZspsSlVFuzSBG4t": {
+    "_id": "1ZspsSlVFuzSBG4t",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "melee",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   },
+   "W5RzpkS6kKvHkSeA": {
+    "_id": "W5RzpkS6kKvHkSeA",
+    "type": "attack",
+    "name": "Bonus Action",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "100",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "slashing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "magicalBonus": 2,
+  "rarity": "rare"
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "2nd Grade"
+  }
+ },
+ "_key": "!items!oy1VhQwXnIo5g8jX"
+}

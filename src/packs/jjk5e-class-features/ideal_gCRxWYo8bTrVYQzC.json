@@ -1,0 +1,29 @@
+{
+ "_id": "gCRxWYo8bTrVYQzC",
+ "name": "Ideal",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>At 3rd level, due to bad life experiences, you have acquired an ideal. Choose between Prideful or Vengeful, both detailed at the end of the class description. Your choice grants you features at 3rd and again at 9th, 13th and 17th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Heavenly Restriction 3"
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "hWqAX9TqrOvuq1FE",
+ "_key": "!items!gCRxWYo8bTrVYQzC"
+}

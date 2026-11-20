@@ -1,0 +1,95 @@
+{
+ "_id": "ZvSOk5JO7MypjFsd",
+ "name": "Entropy (Reversal)",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/vairocana.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Creeps and Curses V.3.1</em></p><p><em>Vairocana Reversal — requires Reverse Cursed Technique. Not added automatically.</em></p><p>At 6th level, you can cause your original created world of rules to expand. At the start of your turn while Cosmic Genesis is active, you can spend 1 CE to gain one of the following benefits.</p>\n<p><strong>Expansion.</strong> The range of Cosmic Genesis increases by 10 ft (to a maximum of 120 ft).</p>\n<p><strong>Addition.</strong> You add a minor rule that functions half as effectively (to a maximum of 3 minor rules).</p>\n<p><strong>Duration.</strong> The duration of Cosmic Genesis increases by 1 round.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "yEvqd8kYWry0gKIl": {
+    "_id": "yEvqd8kYWry0gKIl",
+    "type": "utility",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "yEvqd8kYWry0gKIl": 1
+   },
+   "technique": "Vairocana",
+   "reversal": true,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "CpSgW3tLoueRa6XV",
+ "_key": "!items!ZvSOk5JO7MypjFsd"
+}

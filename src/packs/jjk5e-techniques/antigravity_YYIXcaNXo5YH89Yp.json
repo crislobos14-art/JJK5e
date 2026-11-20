@@ -1,0 +1,132 @@
+{
+ "_id": "YYIXcaNXo5YH89Yp",
+ "name": "Antigravity",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/antigravity-system.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Antigravity System — Innate Technique (1st level)</em></p><blockquote><p>You can create devastating fields of antigravity.</p></blockquote><p>Starting at 1st level, you have learned how to use your technique to manipulate gravity, allowing you to make a small gravitational field around yourself. As an action for 3 cursed energy, you can reverse gravity in a 10 foot-radius 30 foot-high cylinder centered on you for all creatures but yourself until the beginning of your next turn.</p>\n<p>All creatures and objects that aren’t anchored to the ground in the area fall upward. A creature can make a Dexterity saving throw to grab onto a fixed object it can reach, thus avoiding the fall. If a solid object (such as a ceiling) is encountered in this fall, falling objects and creatures strike it and take the remaining height as fall damage. If an object or creature reaches the top of the area without striking anything, it remains there, oscillating slightly, for the duration. At the end of the duration, affected objects and creatures fall back down, taking fall damage.</p>\n<p>The height of the cylinder increases to 50 feet at 3rd level, 100 feet at 11th level and 200 feet at 18th level. Fall damage from this technique ignores any type of fall damage reduction or immunity. Fall damage die becomes d8 at 3rd level and d10 at 6th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "MMpYKCffDsrJ2Qfk": {
+    "_id": "MMpYKCffDsrJ2Qfk",
+    "type": "save",
+    "name": "Action (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "10",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "radius",
+    "size": "10",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": false
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "MMpYKCffDsrJ2Qfk": 3
+   },
+   "technique": "Antigravity System",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "h8faxx3TSM5qAlx3",
+ "_key": "!items!YYIXcaNXo5YH89Yp"
+}

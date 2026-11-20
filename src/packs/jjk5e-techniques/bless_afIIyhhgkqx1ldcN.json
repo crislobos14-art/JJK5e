@@ -1,0 +1,110 @@
+{
+ "_id": "afIIyhhgkqx1ldcN",
+ "name": "Bless",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/solo-forbidden-zone.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Solo Forbidden Zone — Innate Technique (3rd level)</em></p><p>At 3rd level, you gain better control over your Zone, allowing you to focus it on a single person. As an action for 3 CE you target a willing creature within 60 feet. That creature is under the effects of your <em>Forbidden Zone</em> for 1 minute or until you lose concentration.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "8rBkNLHOAFcQBe5m": {
+    "_id": "8rBkNLHOAFcQBe5m",
+    "type": "utility",
+    "name": "Action (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "value": "60",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "8rBkNLHOAFcQBe5m": 3
+   },
+   "technique": "Solo Forbidden Zone",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "pI3TNTzVyu2gPuxX",
+ "_key": "!items!afIIyhhgkqx1ldcN"
+}

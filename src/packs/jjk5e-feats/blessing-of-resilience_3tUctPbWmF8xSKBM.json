@@ -1,0 +1,42 @@
+{
+ "_id": "3tUctPbWmF8xSKBM",
+ "name": "Blessing of Resilience",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/solo-forbidden-zone.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Bless</em></p>\n<p>You have mastered Blessing those within your Zone. Those in your Zone have their output and durability increased. When you create your Zone, all allies in range gain temporary hit points at the start of their turns equal to your Cursed Energy modifier.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Bless",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Bless"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "B010nMqksvk4lI5S",
+ "sort": 100,
+ "_key": "!items!3tUctPbWmF8xSKBM"
+}

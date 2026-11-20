@@ -1,0 +1,81 @@
+{
+ "_id": "6r0pd6hTLoOyJGUH",
+ "name": "Quarterstaff",
+ "type": "weapon",
+ "img": "icons/svg/sword.svg",
+ "folder": "8L9REK3UZxFoXRJA",
+ "system": {
+  "description": {
+   "value": "<p>Simple melee weapon. 1d6 bludgeoning. Versatile(1d8).</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "simpleM",
+   "baseItem": "quarterstaff"
+  },
+  "damage": {
+   "base": {
+    "number": 1,
+    "denomination": 6,
+    "types": [
+     "bludgeoning"
+    ]
+   },
+   "versatile": {
+    "number": 1,
+    "denomination": 8,
+    "types": [
+     "bludgeoning"
+    ]
+   }
+  },
+  "range": {
+   "value": 5,
+   "long": null,
+   "units": "ft",
+   "reach": 5
+  },
+  "properties": [
+   "ver"
+  ],
+  "proficient": null,
+  "price": {
+   "value": 0.2,
+   "denomination": "gp"
+  },
+  "quantity": 1,
+  "activities": {
+   "bFksctXD8y05xxlO": {
+    "_id": "bFksctXD8y05xxlO",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "melee",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "priceUSD": "$20"
+  }
+ },
+ "_key": "!items!6r0pd6hTLoOyJGUH"
+}

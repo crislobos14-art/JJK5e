@@ -1,0 +1,42 @@
+{
+ "_id": "zliBMhDvTF5VnDGP",
+ "name": "Frostbite",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/ice-formation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Frost Calm</em></p>\n<p>The cold of your ice has increased exponentially. While restrained by your ice, your opponent gains an additional temporary level of exhaustion and a -2 to attack rolls and ability checks.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Frost Calm",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Frost Calm"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "49nTgJGO4NrAusFo",
+ "sort": 200,
+ "_key": "!items!zliBMhDvTF5VnDGP"
+}

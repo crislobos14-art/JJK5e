@@ -1,0 +1,120 @@
+{
+ "_id": "e7Msuz67LALkDuQG",
+ "name": "Pain Maker",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/pain-killer.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Pain Killer — Cursed Technique Reversal, 6th level</em></p><p>At 6th level, if a creature has less than their hit point maximum, they immediately take 10 psychic damage from Killer Pain and a creature under the effects of Killer Pain makes death saves at disadvantage. Additionally, you can spend an additional 6 CE as part of using Killer Pain to give the target the poisoned condition for the duration.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Pain Killer 6",
+  "activities": {
+   "BRh59QweJIfmXUqc": {
+    "_id": "BRh59QweJIfmXUqc",
+    "type": "utility",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "effects": [
+     {
+      "_id": "0KmyToxB0HWEE3zZ",
+      "onSave": false
+     }
+    ]
+   },
+   "GpJZVSnz42cOd07Z": {
+    "_id": "GpJZVSnz42cOd07Z",
+    "type": "utility",
+    "name": "Extra (6 CE)",
+    "sort": 900000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Additionally, you can spend an additional 6 CE as part of using Killer Pain to give the..."
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "GpJZVSnz42cOd07Z": 6
+   },
+   "technique": "Pain Killer",
+   "reversal": true,
+   "reversalLevel": 6,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Pain Killer"
+     ]
+    ],
+    "level": 6
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "0KmyToxB0HWEE3zZ",
+   "name": "Poisoned (Pain Maker)",
+   "img": "systems/dnd5e/icons/svg/statuses/poisoned.svg",
+   "statuses": [
+    "poisoned"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "poisoned"
+    }
+   },
+   "_key": "!items.effects!e7Msuz67LALkDuQG.0KmyToxB0HWEE3zZ"
+  }
+ ],
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 10,
+ "_key": "!items!e7Msuz67LALkDuQG"
+}

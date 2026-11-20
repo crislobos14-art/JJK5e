@@ -1,0 +1,34 @@
+{
+ "_id": "2RX2eSjhogly3SRm",
+ "name": "Pact Maker",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: N/A</em></p>\n<p>You have specialized in the intricacies of binding vows, causing you to understand their innate workings. You can now make a number of binding vows equal to twice your proficiency bonus.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkCursedEnergy"
+  },
+  "requirements": "N/A",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "58RlNbYPWxO2Xi4E",
+ "sort": 1400,
+ "_key": "!items!2RX2eSjhogly3SRm"
+}

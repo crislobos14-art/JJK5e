@@ -1,0 +1,66 @@
+{
+ "_id": "8Hqj2GK7SsOPD7IY",
+ "name": "Hollow Wicker Basket",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: N/A</em></p>\n<p>As an action, bonus action, or reaction against being affected by a sure hit effect of a Domain, or seeing a Domain Expansion open, for 4 Cursed Energy you surround yourself with a 15 ft barrier for 1 minute. Within that radius, the sure hit effect of a domain is negated and deals no damage. Anyone of your choice inside the barrier is unaffected. The barrier has no effect on normal cursed techniques or others entering the barrier. It only negates sure hit effects.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkBarrier"
+  },
+  "requirements": "N/A",
+  "activities": {
+   "u5U7oemdPT2z1E4M": {
+    "_id": "u5U7oemdPT2z1E4M",
+    "type": "utility",
+    "name": "Bonus Action (4 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "u5U7oemdPT2z1E4M": 4
+   }
+  }
+ },
+ "folder": "w6CtJKH5qYx1fgN4",
+ "sort": 400,
+ "_key": "!items!8Hqj2GK7SsOPD7IY"
+}

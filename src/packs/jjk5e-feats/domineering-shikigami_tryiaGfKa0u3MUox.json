@@ -1,0 +1,42 @@
+{
+ "_id": "tryiaGfKa0u3MUox",
+ "name": "Domineering Shikigami",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/star-dictator.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Minor Star Shikigami</em></p>\n<p>You have learned that strengthening cursed energy lets you summon stronger shikigami. Your Minor Star Shikigami gain the following benefits.</p>\n<ul>\n<li>\n<p>The Shikigami’s Bite attack increases to 1d6. It becomes 1d8 at 6th level and 1d10 at 11th level.  </p>\n</li>\n<li>\n<p>The Shikigami gains a +2 bonus to their Dexterity score and again at 6th, and 11th level (max of 20).  </p>\n</li>\n<li>\n<p>When the shikigami is subjected to an effect that allows it to make a Dexterity saving throw to take only half damage, it instead takes no damage if it succeeds on the saving throw, and only half damage if it fails.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Minor Star Shikigami",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Minor Star Shikigami"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "bGKgrFplZpNnclwX",
+ "sort": 100,
+ "_key": "!items!tryiaGfKa0u3MUox"
+}

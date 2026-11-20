@@ -1,0 +1,53 @@
+{
+ "_id": "5pDiJhDuMJKQO0P8",
+ "name": "Minor Enhanced Senses",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Mind Improvements: Your body has increased both physically and mentally. You can have a number of these improvements equal to your Wisdom modifier. ---</em></p>\n<p>1 Body point<br />\nYou do not need to have your eyes open to see, your instincts are enough. You gain blindsight to a range of 10ft. Within that range, you can effectively see anything that isn't behind total cover, even if you're blinded or in darkness. Moreover, you can see an invisible creature within that range, unless the creature successfully hides from you. If you have blindsight, the range increases by 10ft.   </p>\n<hr />",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Heavenly Restriction 2"
+ },
+ "flags": {
+  "jjk5e": {
+   "bodyCost": 1,
+   "bodyCategory": "wis"
+  }
+ },
+ "folder": "ybhWCA27cbgjKLpN",
+ "effects": [
+  {
+   "_id": "INRfOEKEPxPVdY1U",
+   "name": "Minor Enhanced Senses",
+   "img": "modules/jjk5e/icons/feature.svg",
+   "changes": [
+    {
+     "key": "system.attributes.senses.blindsight",
+     "mode": 4,
+     "value": "10",
+     "priority": null
+    }
+   ],
+   "disabled": false,
+   "transfer": true,
+   "duration": {},
+   "description": "",
+   "flags": {},
+   "_key": "!items.effects!5pDiJhDuMJKQO0P8.INRfOEKEPxPVdY1U"
+  }
+ ],
+ "_key": "!items!5pDiJhDuMJKQO0P8"
+}

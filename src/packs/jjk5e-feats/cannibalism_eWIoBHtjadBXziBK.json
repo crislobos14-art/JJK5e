@@ -1,0 +1,42 @@
+{
+ "_id": "eWIoBHtjadBXziBK",
+ "name": "Cannibalism",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/voracity.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Hunger of the Accursed</em></p>\n<p>Your hunger has overwhelmed your humanity and led you to resort to this inhumane act. You can now devour the corpses of human races and use them for your innate technique features. You can take a Class Feature or Innate Technique feature using the rules of <em>Hunger of the Accursed</em> from a dead humanoid, changing parts of your appearance to resemble them when used. You cannot take Domain Expansions using this feature.<br />\n When you steal a cursed technique or innate technique feature from a dead humanoid, you can only take it if you are of the correct level and fulfill any prerequisites for using it. Additionally, you can only spend the base cost the technique requires. No matter what you copy, you can only use the technique in its base form. For example, a maximum output hollow purple would only come as a hollow purple. This changes if used with the <em>Output</em> option of <em>Digestion</em> at 6th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Hunger of the Accursed",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Hunger of the Accursed"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "3wVUVT1CJTINFbDN",
+ "sort": 100,
+ "_key": "!items!eWIoBHtjadBXziBK"
+}

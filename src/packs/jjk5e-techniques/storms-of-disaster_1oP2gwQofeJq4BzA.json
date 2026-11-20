@@ -1,0 +1,168 @@
+{
+ "_id": "1oP2gwQofeJq4BzA",
+ "name": "Storms of Disaster",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/disaster-storms.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Disaster Storms — Innate Technique (1st level)</em></p><blockquote><p>You are born with an amazing power, with many possibilities, storm creation to ride the breeze.</p></blockquote><p>Starting at 1st level, you have learned the basics of storm generation and can launch a wave of cutting winds from your hands as well as the ability to cast <em>Gust</em>. As a bonus action for 1 Cursed Energy, you unleash a 15-foot cone which forces targets in range to make a Dexterity save. On a failure, they take 2d8 slashing or thunder (your choice) damage or half as much damage on a success. Your damage dice increases to 3d8 at 5th level, 4d8 at 11th level, and 5d8 at 17th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "ikVHbTkz7MEdGtag": {
+    "_id": "ikVHbTkz7MEdGtag",
+    "type": "save",
+    "name": "Bonus Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "cone",
+      "size": "15",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "slashing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "cone",
+    "size": "15",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": false
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "dmgScale": {
+    "ikVHbTkz7MEdGtag": [
+     [
+      0,
+      "2d8"
+     ],
+     [
+      5,
+      "3d8"
+     ],
+     [
+      11,
+      "4d8"
+     ],
+     [
+      17,
+      "5d8"
+     ]
+    ]
+   },
+   "ceCosts": {
+    "ikVHbTkz7MEdGtag": 1
+   },
+   "technique": "Disaster Storms",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "5WRl9NqkIbDZzpyp",
+ "_key": "!items!1oP2gwQofeJq4BzA"
+}

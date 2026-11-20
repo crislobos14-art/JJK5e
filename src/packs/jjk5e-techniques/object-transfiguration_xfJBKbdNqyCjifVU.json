@@ -1,0 +1,100 @@
+{
+ "_id": "xfJBKbdNqyCjifVU",
+ "name": "Object Transfiguration",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/idle-transfiguration.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Idle Transfiguration — Cursed Technique Reversal</em></p><p>You have learned how to reverse your technique, allowing you to transfigure targets without souls. As a Bonus Action while holding or touching an object or weapon, you can spend Cursed Energy up to twice your proficiency bonus. For every 1 Cursed Energy spent, you can change one property of the object or to increase/decrease the size category of the object. The Special property costs 3 Cursed Energy instead of 1, and you must work with your DM to figure out its rules. These transfigurations last until you dismiss them as a Free Action while holding or touching the object.</p>\n<p><strong>Soul Splitting Weapon.</strong> At 6th level, you have learned to transfigure objects in a way to damage the souls of others. Once per turn when you hit a creature with a transfigured weapon, you can spend 4 CE to cause that creature to also suffer the effects of Transfiguration on a hit.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Idle Transfiguration",
+  "activities": {
+   "vEcHzLX4wvXVsrEe": {
+    "_id": "vEcHzLX4wvXVsrEe",
+    "type": "utility",
+    "name": "Action (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   },
+   "NkfJzYQfdGx0r59c": {
+    "_id": "NkfJzYQfdGx0r59c",
+    "type": "utility",
+    "name": "Action (4 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "vEcHzLX4wvXVsrEe": 3,
+    "NkfJzYQfdGx0r59c": 4
+   },
+   "technique": "Idle Transfiguration",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Idle Transfiguration"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!xfJBKbdNqyCjifVU"
+}

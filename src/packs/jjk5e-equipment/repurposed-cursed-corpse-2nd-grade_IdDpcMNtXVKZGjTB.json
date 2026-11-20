@@ -1,0 +1,64 @@
+{
+ "_id": "IdDpcMNtXVKZGjTB",
+ "name": "Repurposed Cursed Corpse (2nd Grade)",
+ "type": "consumable",
+ "img": "icons/svg/explosion.svg",
+ "folder": "xnCPfIMW0yQ370pR",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Item, Grade 2</em></p><p>A Repurposed Cursed Corpse is a bottle containing a statuette small enough to fit in a pocket. If you take an action to throw the bottle to a point on the ground within 60 feet of yourself, the bottle smashes and the figurine grows and becomes a cursed corpse specified in the description below(as a construct). If the space where the creature would appear is occupied by other creatures or objects, or if there isn’t enough space for the creature, the statuette doesn’t become a creature. The creature is Friendly to you and your allies. It understands your languages, obeys your commands, and takes its turn immediately after you on your Initiative count. If you issue no commands, the creature defends itself but takes no other actions. The creature exists for a duration specific to each figurine. At the end of the duration, the creature reverts to its figurine form. It reverts to a figurine early if its creature form drops to 0 Hit Points or if you take an action while touching the creature to make it revert to figurine form. When the creature becomes a figurine again, its property can’t be used again until the bottle has reformed around the cursed corpse, as specified in the figurine’s description. Golden Lions (Grade 2) These gold statuettes of lions are always created in pairs. You can use one figurine or both simultaneously. Each can become a Lion for up to 1 hour. Once a lion has been used, it can’t be used again until 7 days have passed. Marble Elephant (Grade 2) This marble statuette resembles a trumpeting elephant. It can become an Elephant for up to 24 hours. Once it has been used, it can’t be used again until 7 days have passed. Bronze Griffon (Grade 2) This bronze statuette is of a griffon rampant. It can become a Griffon for up to 6 hours. Once it has been used, it can’t be used again until 5 days have passed.</p>"
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "rarity": "rare",
+  "quantity": 1,
+  "attunement": "",
+  "type": {
+   "value": "trinket",
+   "subtype": ""
+  },
+  "activities": {
+   "MPBMWPX286C1blFz": {
+    "_id": "MPBMWPX286C1blFz",
+    "type": "utility",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "60",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "2nd Grade"
+  }
+ },
+ "_key": "!items!IdDpcMNtXVKZGjTB"
+}

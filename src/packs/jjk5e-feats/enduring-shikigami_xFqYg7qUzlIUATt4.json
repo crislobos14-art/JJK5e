@@ -1,0 +1,42 @@
+{
+ "_id": "xFqYg7qUzlIUATt4",
+ "name": "Enduring Shikigami",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/starlight-symphony.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Kitsune Creation</em></p>\n<p>You have learned to remove the time limit of your shikigami. Your fox shikigami (other than <em>Inari</em>) last until reduced to 0 hit points and you can add your proficiency bonus to any saving throws your shikigami make. You are still limited by the number of shikigami you can have active at once<strong>.</strong></p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Kitsune Creation",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Kitsune Creation"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "W3c86qCvNyFi2g3Q",
+ "sort": 100,
+ "_key": "!items!xFqYg7qUzlIUATt4"
+}

@@ -1,0 +1,215 @@
+{
+ "_id": "pKNgqGZiGhI1CjxQ",
+ "name": "Domain Expansion: Unlimited Void",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/limitless-domain.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Limitless — Innate Technique (18th level)</em></p><p><em>Domain Expansion (rules): full-turn action, 20 CE unless stated, 175-ft radius, 1 minute. When the domain ends you suffer <strong>Technique Burnout</strong> (applied automatically by the module).</em></p><p>Finally, at 18th level you have learned how to expand your own domain, showing the dangers of the Unlimited Void. You can create a void in space that causes victims to receive all kinds of stimuli and information endlessly, restricting their thought processes and actions. At initiative 20, every creature within your domain that is not touching you must make an Intelligence saving throw. On a failure, they take 12d8 psychic damage, their Intelligence, Wisdom, and Charisma scores become 1 and they are unable to cast spells, attack, use magic items, understand language, or communicate in any intelligible way, and fall unconscious for 1 minute. At the end of every minute, the creature can repeat this saving throw, ending these effects on a success. This effect can also be ended by Greater Restoration or Wish.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "YFTe31UdxKjUNspy": {
+    "_id": "YFTe31UdxKjUNspy",
+    "type": "save",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "int"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": [
+      {
+       "number": 12,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "psychic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "v6mp8UNvQDEABiC3",
+      "onSave": false
+     }
+    ]
+   },
+   "NZiRylxnq6mO5VYi": {
+    "_id": "NZiRylxnq6mO5VYi",
+    "type": "utility",
+    "name": "Expand Domain (20 CE)",
+    "sort": -100000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Full turn: Action + Bonus Action + Movement",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "175",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": true
+     },
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 9,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "special",
+   "value": null,
+   "condition": "Full turn: Action + Bonus Action + Movement",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "radius",
+    "size": "175",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": true
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Limitless",
+   "level": 18,
+   "domain": true,
+   "ceCosts": {
+    "NZiRylxnq6mO5VYi": 20
+   },
+   "domainActivity": "NZiRylxnq6mO5VYi",
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "v6mp8UNvQDEABiC3",
+   "name": "Unconscious (Domain Expansion: Unlimited Void)",
+   "img": "modules/jjk5e/icons/techniques/limitless-domain.svg",
+   "statuses": [
+    "unconscious"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "seconds": 60,
+    "rounds": 10
+   },
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "unconscious"
+    }
+   },
+   "_key": "!items.effects!pKNgqGZiGhI1CjxQ.v6mp8UNvQDEABiC3"
+  }
+ ],
+ "folder": "9dzjvEM8kgWba7oJ",
+ "_key": "!items!pKNgqGZiGhI1CjxQ"
+}

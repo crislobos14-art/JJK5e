@@ -1,0 +1,87 @@
+{
+ "_id": "QMm76WsIVe8dbThb",
+ "name": "Maximum: World Cutting Slash",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/shrine.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Malevolent Shrine</em></p>\n<p>You have broadened your understanding, cutting the area your target is in instead of the target itself. You can spend the maximum amount of cursed energy on <em>Dismantle</em> as an action to instead target one creature within 60 ft you can see. The target must make a Constitution saving throw. On a failure they take maximum damage, on a success they take half as much maximum damage. This damage ignores resistances, immunities,  temporary hit points, cover, obstacles, bonuses to saving throws (from techniques) and cursed techniques. This is a limb damaging effect and can target any limb on the limb damage table.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Malevolent Shrine",
+  "activities": {
+   "Ma9Xn3ATLzZzVBv0": {
+    "_id": "Ma9Xn3ATLzZzVBv0",
+    "type": "save",
+    "name": "Action",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "60",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": []
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Domain Expansion: Malevolent Shrine"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "2XiAKaCJUnpH62hA",
+ "sort": 400,
+ "_key": "!items!QMm76WsIVe8dbThb"
+}

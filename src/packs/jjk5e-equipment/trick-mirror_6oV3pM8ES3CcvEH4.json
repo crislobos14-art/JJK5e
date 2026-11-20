@@ -1,0 +1,30 @@
+{
+ "_id": "6oV3pM8ES3CcvEH4",
+ "name": "Trick Mirror",
+ "type": "loot",
+ "img": "icons/svg/explosion.svg",
+ "folder": "Z18gXvGvvqaYHnqC",
+ "system": {
+  "type": {
+   "value": "gear"
+  },
+  "description": {
+   "value": "<p>A small handheld mirror. Normally curses do not have reflections and do not appear in photographs. However, using this trick mirror, you can see curses in the mirror’s reflection.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "rarity": "common",
+  "quantity": 1
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "4th Grade"
+  }
+ },
+ "_key": "!items!6oV3pM8ES3CcvEH4"
+}

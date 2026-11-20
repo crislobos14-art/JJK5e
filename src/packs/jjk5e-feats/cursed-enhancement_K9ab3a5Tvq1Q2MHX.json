@@ -1,0 +1,70 @@
+{
+ "_id": "K9ab3a5Tvq1Q2MHX",
+ "name": "Cursed Enhancement",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feat.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: N/A</em></p>\n<p>As a bonus action while touching a weapon, you can spend cursed energy up to half your proficiency bonus (rounded down) to enhance that weapon. The weapon gains a +1 bonus to attack and damage rolls for every cursed energy spent (to a maximum of +3) for 1 hour. This does not stack with a weapon’s bonus if it already has a bonus to attack and damage rolls.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkCursedEnergy"
+  },
+  "requirements": "N/A",
+  "activities": {
+   "vWlMeRrE78kKoqgu": {
+    "_id": "vWlMeRrE78kKoqgu",
+    "type": "utility",
+    "name": "Enhance weapon (+1 per CE, 1+ CE)",
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "max(1, min(floor(@prof / 2), 3))"
+     }
+    },
+    "duration": {
+     "value": "1",
+     "units": "hour"
+    },
+    "roll": {
+     "formula": "1",
+     "name": "Weapon bonus per CE",
+     "visible": true
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "vWlMeRrE78kKoqgu": 1
+   },
+   "ceSteps": {
+    "vWlMeRrE78kKoqgu": 1
+   }
+  }
+ },
+ "folder": "58RlNbYPWxO2Xi4E",
+ "effects": [],
+ "sort": 500,
+ "_key": "!items!K9ab3a5Tvq1Q2MHX"
+}

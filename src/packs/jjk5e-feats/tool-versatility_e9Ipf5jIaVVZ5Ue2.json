@@ -1,0 +1,42 @@
+{
+ "_id": "e9Ipf5jIaVVZ5Ue2",
+ "name": "Tool Versatility",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/deadly-sentencing.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Judge’s Gavel</em></p>\n<p>Through a broadening of your understanding over your gavel. On top of your normal forms, you can turn your Gavel into any melee weapon. You also gain a +1 bonus to attack and damage rolls using your Gavel. This increases to a +2 bonus at 6th level and +3 bonus at 11th level. The Executioner’s Sword does not gain this bonus.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Judge’s Gavel",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Judge’s Gavel"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "cq0B0G5hxGuaBi5H",
+ "sort": 100,
+ "_key": "!items!e9Ipf5jIaVVZ5Ue2"
+}

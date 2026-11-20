@@ -1,0 +1,135 @@
+{
+ "_id": "NDvgctGvFZjHTkQn",
+ "name": "Maximum: Heavenly Star of Darkness",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/shadow-killer.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Shadows of Mortality</em></p>\n<p>As an action for 10 cursed energy, you invoke primordial darkness, forming a dark sun 300 ft in the sky that inhabits a 30 ft sphere for 1 minute. A creature that enters the 30 ft sphere the dark sun inhabits takes 4d6 necrotic damage and and again at the start of their turns. At the end of the minute, you can spend 1 cursed energy to increase the duration by 1 minute. The technique ends if you become incapacitated. The dark sun radiates magical darkness within 600 ft of it that you can see normally in and any light from a technique costing less than 5 cursed energy is suppressed within this area. Any creature within that range with a Cursed Energy score or Passive perception higher than your Cursed Energy save DC can see through this magical darkness as if it were dim light.<br />\n You can use <em>Shadow Strike</em> against a creature within this area without spending cursed energy and the target has disadvantage on Dexterity saves to protect their shadow. If you spend cursed energy on <em>Shadow Strike</em> against a creature within this area, they are considered vulnerable to the damage.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Shadows of Mortality",
+  "activities": {
+   "uqlF7RijoPwUgNkT": {
+    "_id": "uqlF7RijoPwUgNkT",
+    "type": "damage",
+    "name": "Action (10 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {
+     "template": {
+      "type": "sphere",
+      "size": "30",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     }
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 4,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   },
+   "Uqb7QWLmSrAeykw4": {
+    "_id": "Uqb7QWLmSrAeykw4",
+    "type": "utility",
+    "name": "Action (1 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "600",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    }
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "uqlF7RijoPwUgNkT": 10,
+    "Uqb7QWLmSrAeykw4": 1
+   },
+   "prereq": {
+    "features": [
+     [
+      "Shadows of Mortality"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "yU2uxvCgVRVwhJwX",
+ "sort": 300,
+ "_key": "!items!NDvgctGvFZjHTkQn"
+}

@@ -1,0 +1,217 @@
+{
+ "_id": "ExKo8huWEv4TTFFX",
+ "name": "Maximum: Brutal Bombardment",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/missile-fist.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Missile Fist — Innate Technique (11th level)</em></p><p>At 11th level, you can combine your Missile Fists into a larger, more brutal attack. As a Full-Turn Action Action (Action + Bonus Action + Movement) for 6 CE, you create a wave of <em>Missile Fists</em>. A creature within 50 ft must make a Strength saving throw. On a failed save, the target takes 3d8 + 3d8 necrotic damage for every attack you can make as an action (counting as an additional <em>Missile Fist</em> for range) and is knocked prone. If the target is a creature, the target takes an additional 4d10 bludgeoning damage from being crushed. On a successful save, a creature takes half as much necrotic damage and no bludgeoning damage. If the target is an object or structure, it instead takes maximum damage. <br />\n All creatures within 5 ft of the target (+5 ft per <em>Missile Fist</em>) must make a Strength saving throw or similarly be crushed, taking the necrotic damage of the <em>Missile Fist</em> wave on a failed save or half as much damage on a successful save. Objects and structures automatically fail this save. You can spend cursed energy up to your CE modifier to increase the damage by 3d8 per CE spent, counting as an additional <em>Missile Fist</em>.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "hEA4OYlwEM5hHr1X": {
+    "_id": "hEA4OYlwEM5hHr1X",
+    "type": "save",
+    "name": "Bonus Action (6 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "50",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "str"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   },
+   "S2O4IOTQtshbOEC8": {
+    "_id": "S2O4IOTQtshbOEC8",
+    "type": "save",
+    "name": "Action (1+ CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "max(1, max(@abilities.wis.mod, @abilities.cha.mod))"
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "str"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 3,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "mode": "whole",
+        "number": 3
+       }
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "D9tvLXURflWQbQ4u",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "50",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceSteps": {
+    "S2O4IOTQtshbOEC8": 1
+   },
+   "ceCosts": {
+    "hEA4OYlwEM5hHr1X": 6,
+    "S2O4IOTQtshbOEC8": 1
+   },
+   "technique": "Missile Fist",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "effects": [
+  {
+   "_id": "D9tvLXURflWQbQ4u",
+   "name": "Prone (Maximum: Brutal Bombardment)",
+   "img": "modules/jjk5e/icons/techniques/missile-fist.svg",
+   "statuses": [
+    "prone"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!ExKo8huWEv4TTFFX.D9tvLXURflWQbQ4u"
+  }
+ ],
+ "folder": "coN536PDmNM37MtV",
+ "_key": "!items!ExKo8huWEv4TTFFX"
+}

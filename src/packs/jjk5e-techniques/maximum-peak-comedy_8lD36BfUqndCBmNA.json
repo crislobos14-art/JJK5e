@@ -1,0 +1,177 @@
+{
+ "_id": "8lD36BfUqndCBmNA",
+ "name": "Maximum: Peak Comedy",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/comedian.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Comedian — Innate Technique (11th level)</em></p><p>At 11th level, you can activate your technique at maximum efficiency. As an action for 10 cursed energy, you activate <em>Comedy</em> for 1 minute. During this minute you gain the following improvements:</p>\n<ul>\n<li>\n<p>Once per turn you can use your <em>Gags</em> without spending cursed energy. You can use <em>Comedy’s</em> negation for free a number of times equal to your CE modifier each round.  </p>\n</li>\n<li>\n<p>The number of props you can create becomes twice your CE modifier. This becomes thrice your CE modifier at 18th level.  </p>\n</li>\n<li>\n<p>The range and radius of your <em>Powerful Punchline</em> are doubled and you can spend 2 cursed energy to deal additional damage dice equal to your proficiency bonus.  </p>\n</li>\n<li>\n<p>As an action you completely change the scene and scenario into one fitting of the joke you tell, teleporting creatures within 100ft into a cutaway. A target in the cutaway must make a Wisdom save or cannot attack unless they make it fit into the cutaway gag.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "n7uJBt6ZtFcH011J": {
+    "_id": "n7uJBt6ZtFcH011J",
+    "type": "utility",
+    "name": "Action (10 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    }
+   },
+   "DA02NMtOwowPF6JD": {
+    "_id": "DA02NMtOwowPF6JD",
+    "type": "utility",
+    "name": "Action (2 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   },
+   "25SomdojAg6Z124L": {
+    "_id": "25SomdojAg6Z124L",
+    "type": "save",
+    "name": "Action",
+    "sort": 200000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "100",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "wis"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 6,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "n7uJBt6ZtFcH011J": 10,
+    "DA02NMtOwowPF6JD": 2
+   },
+   "technique": "Comedian",
+   "level": 11,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "8AlwpNPBMedHlchF",
+ "_key": "!items!8lD36BfUqndCBmNA"
+}

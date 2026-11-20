@@ -1,0 +1,55 @@
+{
+ "_id": "XWcj4Vkq3fyYX6lX",
+ "name": "Reverse Technique Understanding",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>When you reach 10th level, you have reached new heights with this new type of energy, becoming a high-level sorcerer. You will gain the following benefits:</p>\n<ul>\n<li>\n<p>You can cause a creature you touch to gain the benefits of reverse cursed technique instead of you.  </p>\n</li>\n<li>\n<p>You can use your reverse cursed technique once as a free action on your turn.  </p>\n</li>\n<li>\n<p>Your reverse cursed technique healing pool is multiplied by your Cursed Energy modifier again.  </p>\n</li>\n<li>\n<p>You now regain 30 HP per CE with RCT instead of 20.</p>\n</li>\n</ul>\n<p>In addition, whenever you deal damage to a Monstrosity, Undead, or Cursed Spirit with an unarmed strike or natural weapon, you can spend cursed energy to remove hit points from your healing pool to add radiant damage.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Support Specialist 10",
+  "activities": {
+   "05BHuZDRjY7sV5HJ": {
+    "_id": "05BHuZDRjY7sV5HJ",
+    "type": "utility",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "8dvEkkHwQxeLRi3Y",
+ "_key": "!items!XWcj4Vkq3fyYX6lX"
+}

@@ -1,0 +1,92 @@
+{
+ "_id": "sJ7cTapmdLmiABwi",
+ "name": "Curse Infused Spirits",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/cursed-spirit-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Spirit Manipulation — Innate Technique (3rd level)</em></p><p>Once you reach 3rd level, your Cursed Energy increases the power of your Cursed Spirits in the following ways:</p>\n<ul>\n<li>\n<p>Their Strength, Dexterity, and Constitution scores will gain a bonus equal to your Cursed Energy modifier.  </p>\n</li>\n<li>\n<p>They regain all HP at the end of a short rest.  </p>\n</li>\n<li>\n<p>They become immune to the frightened or charmed condition.  </p>\n</li>\n<li>\n<p>Regardless of distance, you'll know if your cursed spirits were exorcised.  </p>\n</li>\n<li>\n<p>In addition, as a reaction for x Cursed Energy you can sacrifice a cursed spirit in exchange for reducing incoming damage by xd20, with x being the CR of the creature sacrificed in the process.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "aZSGsRETuS1H0fLZ": {
+    "_id": "aZSGsRETuS1H0fLZ",
+    "type": "utility",
+    "name": "Reaction",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "reaction",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Cursed Spirit Manipulation",
+   "level": 3,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "f8ljC8WN5acnKcA4",
+ "_key": "!items!sJ7cTapmdLmiABwi"
+}

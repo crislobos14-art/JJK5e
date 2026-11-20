@@ -1,0 +1,136 @@
+{
+ "_id": "Y5f6ekgOoItXjNcS",
+ "name": "Scorpion Hair",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/hair-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Hair Manipulation — Innate Technique (1st level)</em></p><blockquote><p>Your technique allows you to form your hair into a variety of shapes.</p></blockquote><p>Beginning at 1st level, you have learned to move your hair into different forms using cursed energy. When you take the Attack action, you can spend 1 CE to replace an attack by shaping your hair into a barbed stinger. Make a melee cursed energy attack against a creature within 10 ft of you. On a hit you deal 1d10 + your CE modifier piercing damage. You gain a +1 bonus to attack and damage rolls with this attack at 3rd level. This increases to a +2 bonus at 6th level, +3 bonus at 11th level and +4 bonus at 18th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "651MhZdeI7xhonCW": {
+    "_id": "651MhZdeI7xhonCW",
+    "type": "attack",
+    "name": "Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "10",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "flat": false,
+     "type": {
+      "value": "melee",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 10,
+       "bonus": "@mod",
+       "types": [
+        "piercing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "value": "10",
+   "units": "ft",
+   "override": true
+  },
+  "target": {
+   "affects": {
+    "type": "creature",
+    "count": "1"
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "651MhZdeI7xhonCW": 1
+   },
+   "technique": "Hair Manipulation",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "gqEhAM7a9IFAzEwy",
+ "_key": "!items!Y5f6ekgOoItXjNcS"
+}

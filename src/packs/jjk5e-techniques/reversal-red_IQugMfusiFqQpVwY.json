@@ -1,0 +1,166 @@
+{
+ "_id": "IQugMfusiFqQpVwY",
+ "name": "Reversal Red",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/limitless.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Limitless — Cursed Technique Reversal</em></p><p>You  gain the ability to Reverse your Lapse Blue technique, creating a great amount of space. As an action, you can spend up to twice your CE modifier to create a 15 feet cone. Creatures in range must make a Strength save, taking 4d8 force damage + an additional 2d8 for every additional  2  CE  spent  and  being  launched  20ft  for every 2 CE spent. On  a  success,  a  creature  takes  half  as  much  damage  and  is  only launched  half  the  distance.  If  the  creature  impacts  an  object  or structure  they  take  the  remaining  distance  as  fall  damage  and  fall prone. This increases to a 30 ft cone at 11th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Limitless",
+  "activities": {
+   "douy3a4rcRjk6FVc": {
+    "_id": "douy3a4rcRjk6FVc",
+    "type": "save",
+    "name": "Action (2+ CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "2 * max(1, max(@abilities.wis.mod, @abilities.cha.mod))"
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {
+     "template": {
+      "type": "cone",
+      "size": "15",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "str"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 4,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "force"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "mode": "whole",
+        "number": 4
+       }
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "46tUFkda30LMMN4N",
+      "onSave": false
+     }
+    ]
+   },
+   "ZiuBeW7MdsFDONgb": {
+    "_id": "ZiuBeW7MdsFDONgb",
+    "type": "utility",
+    "name": "Extra (2 CE)",
+    "sort": 900000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Creatures in range must make a Strength save, taking 4d8 force damage + an additional 2..."
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceSteps": {
+    "douy3a4rcRjk6FVc": 2
+   },
+   "ceCosts": {
+    "douy3a4rcRjk6FVc": 2,
+    "ZiuBeW7MdsFDONgb": 2
+   },
+   "technique": "Limitless",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Limitless"
+     ]
+    ]
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "46tUFkda30LMMN4N",
+   "name": "Prone (Reversal Red)",
+   "img": "systems/dnd5e/icons/svg/statuses/prone.svg",
+   "statuses": [
+    "prone"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!IQugMfusiFqQpVwY.46tUFkda30LMMN4N"
+  }
+ ],
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!IQugMfusiFqQpVwY"
+}

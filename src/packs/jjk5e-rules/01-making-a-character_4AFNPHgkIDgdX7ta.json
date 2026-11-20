@@ -1,0 +1,89 @@
+{
+ "_id": "4AFNPHgkIDgdX7ta",
+ "name": "01 — Making a Character",
+ "sort": 1000,
+ "pages": [
+  {
+   "_id": "P9sN70Bz1NUy63ZF",
+   "name": "Setting Up a Character",
+   "type": "text",
+   "sort": 0,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>This is typically the first step in any tabletop RPG or D&amp;D-styled game. Use your imagination to think up what type of character you want to be in this world. Make sure it remains mostly thematic regarding the setting, as this isn't a standard D&amp;D campaign.</p>\n<p>Think about what race you would like your character to be, their personality, goals, back story, specialties, career, appearance, traits, and relationships. Once you have all of these qualities decided, start following the steps below and writing everything down.</p>\n<p>Using a \"Character Sheet\" provided by Wizards of the Coast for 5th Edition, you can track much of this. You may need to make a few modifications for certain things, like tracking your Domain Expansion.</p>"
+   },
+   "_key": "!journal.pages!4AFNPHgkIDgdX7ta.P9sN70Bz1NUy63ZF"
+  },
+  {
+   "_id": "SLyOGrrGH9JMusQD",
+   "name": "1. Choosing Your Race",
+   "type": "text",
+   "sort": 1000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Races in the Jujutsu Kaisen world are quite limited, mostly being between cursed spirits and humans. Deciding your race can be pretty important to describing your character's appearance and abilities, as well as occasionally defining their goals. Humans are easily the most common race to find when exploring the planet, Curses however are peculiar and in all shapes and sizes and limited to mostly Japan although rarely found outside. More information on these races is listed in Chapter 2.</p>"
+   },
+   "_key": "!journal.pages!4AFNPHgkIDgdX7ta.SLyOGrrGH9JMusQD"
+  },
+  {
+   "_id": "Yv05PA4qRFDTFyOR",
+   "name": "2. Choosing Your Class",
+   "type": "text",
+   "sort": 2000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Each character should specialize in a field while killing cursed spirits. A class will determine your prominent talents and skills, allowing your character to hone and grow their abilities throughout the adventure. For example, a brawler may focus mainly on fighting while a strategist can be useful in performing specific tasks outside of combat that may benefit the group, such as curtains. While having an all-around useful character is important, sometimes it doesn't hurt to have a character that tends to be extremely good at only one thing, so long as they benefit the group and feel fun to play. A well-rounded party can make the journey far more enjoyable in the long run.<br />\nPut some time into deciding what you want your character's role to be in the unit. Maybe discuss it with others in the group to see what would work best for everyone. However, make sure to choose something you will have fun with and appreciate. Once you have a general idea of what your class will be, pick from the classes listed in Chapter 3.</p>"
+   },
+   "_key": "!journal.pages!4AFNPHgkIDgdX7ta.Yv05PA4qRFDTFyOR"
+  },
+  {
+   "_id": "7nOtlKgW0yy8JBQK",
+   "name": "3. Describing Your Character",
+   "type": "text",
+   "sort": 3000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>First, hopefully, you've already decided on a name for your character. If not, try to think of something you like the sound of. If you can't think of anything, feel free to look up D&amp;D name generators online. Then, start to develop their personality and appearance in your head.</p>\n<p>After you have a concept in mind, you want to start writing and organizing these ideas onto your character sheet. Try to find what Alignment best fits them and their morals. Then, start to think up some defining Personality Traits. Once you mark those down on your character sheet, start getting into their Ideals, Bonds, and Flaws. These will provide a guideline on how you plan on roleplaying and making decisions with your character.</p>\n<p>Now you want to decide on your character's Background. Your background will provide you with tools and knowledge gained from how you've lived your life before the start of the campaign. This will affect how those who recognize you interact with you, how you're treated by the general public, and what your occupation is or was. A DM may provide you with custom backgrounds for this adventure, but feel free to choose from the ones listed in Chapter 4.</p>"
+   },
+   "_key": "!journal.pages!4AFNPHgkIDgdX7ta.7nOtlKgW0yy8JBQK"
+  },
+  {
+   "_id": "625FHfQCLPAtJ22W",
+   "name": "1st level and beyond",
+   "type": "text",
+   "sort": 4000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>By exploring the World and fighting your way through various forces, your characters will start to develop new strategies and grow stronger over time. Each time a major advancement occurs, either due to reaching a specific number of Experience Points or reaching a Milestone in the story, you will gain a Character Level.</p>\n<p>For example, if you start at level 1 with 0 Experience Points and gain enough experience throughout a session to make your way to Level 2, you will mark this on your character sheet and upgrade your stats accordingly during your next Long Rest. Additionally, your DM may decide to use a Milestone system by granting you a level up upon reaching a new area or island, completing an important objective, or obtaining a key item or treasure.</p>"
+   },
+   "_key": "!journal.pages!4AFNPHgkIDgdX7ta.625FHfQCLPAtJ22W"
+  }
+ ],
+ "flags": {
+  "jjk5e": {
+   "lang": "en"
+  }
+ },
+ "folder": null,
+ "_key": "!journal!4AFNPHgkIDgdX7ta"
+}

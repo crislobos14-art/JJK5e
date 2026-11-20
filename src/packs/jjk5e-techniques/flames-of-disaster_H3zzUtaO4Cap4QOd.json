@@ -1,0 +1,168 @@
+{
+ "_id": "H3zzUtaO4Cap4QOd",
+ "name": "Flames of Disaster",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/disaster-flames.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Disaster Flames — Innate Technique (1st level)</em></p><blockquote><p>You are born with a great power, with nigh-endless possibilities, fire manipulation, allowing you to burn down everything in your way.</p></blockquote><p>Starting at 1st level, you have learned the basics of fire manipulation, being able to launch a wave of flames from your hands as well as the ability to cast <em>Control Flames</em>. As a bonus action for 1 Cursed Energy, you unleash a 15 ft cone which forces people to make a Dexterity save. On a failure, they take 2d8 fire damage or half as much damage on a success. The fire ignites any flammable objects in the area that aren’t being worn or carried. Your damage dice increases to 3d8 at 5th level, 4d8 at 11th level, and 5d8 at 17th level.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "tVl7onQZVcwWibt1": {
+    "_id": "tVl7onQZVcwWibt1",
+    "type": "save",
+    "name": "Bonus Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "cone",
+      "size": "15",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "fire"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {
+   "template": {
+    "type": "cone",
+    "size": "15",
+    "units": "ft",
+    "count": "1",
+    "contiguous": false
+   },
+   "affects": {
+    "type": "creature",
+    "choice": false
+   },
+   "override": true
+  },
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "dmgScale": {
+    "tVl7onQZVcwWibt1": [
+     [
+      0,
+      "2d8"
+     ],
+     [
+      5,
+      "3d8"
+     ],
+     [
+      11,
+      "4d8"
+     ],
+     [
+      17,
+      "5d8"
+     ]
+    ]
+   },
+   "ceCosts": {
+    "tVl7onQZVcwWibt1": 1
+   },
+   "technique": "Disaster Flames",
+   "level": 1,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "Xs1qvLjpsB4bwM5D",
+ "_key": "!items!H3zzUtaO4Cap4QOd"
+}

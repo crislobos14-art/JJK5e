@@ -1,0 +1,96 @@
+{
+ "_id": "mKNL79F0vof22J3B",
+ "name": "Sumerian (Rumelian)",
+ "type": "race",
+ "img": "modules/jjk5e/icons/race.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Creeps and Curses V.3.1 — Modulo</em></p><p>You come from a different world with different knowledge of jujutsu. Rolloluca powers your techniques and you are accustomed to territorial wars. Sumerians can vary wildly in appearance, but all possess a third eye.</p>\n<p><strong>Ability Score Increase.</strong> +2 to one ability score of your choice and +1 to another.</p>\n<p><strong>Creature Type.</strong> Humanoid.</p>\n<p><strong>Age.</strong> Sumerians mature as fast as humans and live for around 100 years.</p>\n<p><strong>Alignment.</strong> Sumerians can be good, neutral, or evil, but mostly tend towards being lawful.</p>\n<p><strong>Speed.</strong> Your base walking speed is 30 feet.</p>\n<p><strong>Languages.</strong> Common and Sumerian.</p><p><strong>Rumelian.</strong> Sumerians with horizontal third eyes who worship the Kalyans as Divine Beasts. Size: Medium.</p>"
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "identifier": "sumerian-rumelian",
+  "movement": {
+   "walk": 30,
+   "units": "ft"
+  },
+  "type": {
+   "value": "humanoid",
+   "subtype": "",
+   "custom": ""
+  },
+  "advancement": {
+   "6D5zYaxv5zgBE0rv": {
+    "_id": "6D5zYaxv5zgBE0rv",
+    "type": "Size",
+    "configuration": {
+     "sizes": [
+      "med"
+     ]
+    },
+    "value": {}
+   },
+   "SJDYx1EF2OSC29sU": {
+    "_id": "SJDYx1EF2OSC29sU",
+    "type": "AbilityScoreImprovement",
+    "level": 0,
+    "title": "Ability Score Increase (+2 / +1)",
+    "configuration": {
+     "points": 3,
+     "cap": 2,
+     "fixed": {},
+     "locked": []
+    },
+    "value": {}
+   },
+   "9zy1INZdoWCk2P23": {
+    "_id": "9zy1INZdoWCk2P23",
+    "type": "ItemGrant",
+    "level": 0,
+    "title": "Traits",
+    "value": {},
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-races.Item.aQsHyHT1TGgQ7N4F",
+       "optional": false
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-races.Item.LDvswkDWtZossfq3",
+       "optional": false
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-races.Item.niG6aJ2FCEqBFHmI",
+       "optional": false
+      }
+     ],
+     "optional": false
+    }
+   },
+   "mgl2P0OUsPyWU0Gm": {
+    "_id": "mgl2P0OUsPyWU0Gm",
+    "type": "Trait",
+    "level": 0,
+    "title": "Third Eye",
+    "value": {},
+    "configuration": {
+     "mode": "default",
+     "grants": [
+      "skills:prc"
+     ],
+     "choices": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": null,
+ "_key": "!items!mKNL79F0vof22J3B"
+}

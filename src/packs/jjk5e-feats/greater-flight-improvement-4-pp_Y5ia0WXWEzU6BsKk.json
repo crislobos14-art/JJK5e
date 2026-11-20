@@ -1,0 +1,96 @@
+{
+ "_id": "Y5ia0WXWEzU6BsKk",
+ "name": "Greater Flight Improvement (4 PP)",
+ "type": "feat",
+ "img": "icons/svg/upgrade.svg",
+ "system": {
+  "description": {
+   "value": "<p>You gain a 30 ft fly speed that allows you to hover, so being stunned or knocked prone will not cause you to fall. If you are wearing heavy armor or carrying more than your carry capacity this speed is halved. If you do not have the <em>Flight</em> attribute, the cost of this feature increases by 3 points.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTrait"
+  },
+  "requirements": "Cursed Spirit, 4 Profane Points",
+  "activities": {
+   "msQMr19mlrq667KP": {
+    "_id": "msQMr19mlrq667KP",
+    "type": "utility",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "effects": [
+     {
+      "_id": "oj7QE5vVXsSEvRKW",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "profaneCost": 4,
+   "prereq": {
+    "prefixes": [
+     [
+      "Cursed Spirit"
+     ]
+    ]
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "oj7QE5vVXsSEvRKW",
+   "name": "Prone (Greater Flight Improvement (4 PP))",
+   "img": "systems/dnd5e/icons/svg/statuses/prone.svg",
+   "statuses": [
+    "prone"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {},
+   "description": "",
+   "flags": {
+    "jjk5e": {
+     "condition": "prone"
+    }
+   },
+   "_key": "!items.effects!Y5ia0WXWEzU6BsKk.oj7QE5vVXsSEvRKW"
+  }
+ ],
+ "folder": "ar3Bgj4YHvYRp8DL",
+ "sort": 1800,
+ "_key": "!items!Y5ia0WXWEzU6BsKk"
+}

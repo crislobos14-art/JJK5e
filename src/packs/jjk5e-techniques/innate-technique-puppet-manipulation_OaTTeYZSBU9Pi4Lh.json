@@ -1,0 +1,118 @@
+{
+ "_id": "OaTTeYZSBU9Pi4Lh",
+ "name": "Innate Technique: Puppet Manipulation",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/puppet-manipulation.svg",
+ "folder": "8VOHImWMocnXgaTy",
+ "system": {
+  "description": {
+   "value": "<p><em>Innate Technique</em></p><blockquote><p>You gain the ability to control puppets with your Cursed Energy,</p></blockquote><p>Your innate technique grants you the following features as you gain levels in a class with the Innate Technique feature:</p><ul><li><strong>1st level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.lykgQMTyi1PLER7x]{Ultimate Mechamaru}</li><li><strong>3rd level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.brI7kRSO5w3zcgwM]{Lesser Puppet}</li><li><strong>6th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.2hdXZ4El5oK4nKXT]{Advanced Puppet}</li><li><strong>11th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.7dMiTpDehniSeq7U]{Absolute Puppet}</li><li><strong>18th level:</strong> @UUID[Compendium.jjk5e.jjk5e-techniques.Item.1SZNbSAkT5kDKvtC]{Domain Expansion: Puppet Show}</li></ul>",
+   "chat": ""
+  },
+  "source": {
+   "custom": "JJK 5e V.6",
+   "book": "JJK 5e"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Innate Technique",
+  "advancement": {
+   "Csvbh9Za9rEO0DDm": {
+    "_id": "Csvbh9Za9rEO0DDm",
+    "type": "ItemGrant",
+    "level": 1,
+    "title": "Puppet Manipulation (1st level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.lykgQMTyi1PLER7x",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "kLgKgrAc4Ue57ki4": {
+    "_id": "kLgKgrAc4Ue57ki4",
+    "type": "ItemGrant",
+    "level": 3,
+    "title": "Puppet Manipulation (3rd level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.brI7kRSO5w3zcgwM",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "ExeygjL49XwbteuX": {
+    "_id": "ExeygjL49XwbteuX",
+    "type": "ItemGrant",
+    "level": 6,
+    "title": "Puppet Manipulation (6th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.2hdXZ4El5oK4nKXT",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "Q4eAD6sZPeKqs3iJ": {
+    "_id": "Q4eAD6sZPeKqs3iJ",
+    "type": "ItemGrant",
+    "level": 11,
+    "title": "Puppet Manipulation (11th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.7dMiTpDehniSeq7U",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   },
+   "fo1qcS2puvzGi3Hb": {
+    "_id": "fo1qcS2puvzGi3Hb",
+    "type": "ItemGrant",
+    "level": 18,
+    "title": "Puppet Manipulation (18th level)",
+    "configuration": {
+     "items": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-techniques.Item.1SZNbSAkT5kDKvtC",
+       "optional": false
+      }
+     ],
+     "optional": false
+    },
+    "value": {}
+   }
+  },
+  "activities": {},
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "properties": []
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueRoot": "Puppet Manipulation"
+  }
+ },
+ "_key": "!items!OaTTeYZSBU9Pi4Lh"
+}

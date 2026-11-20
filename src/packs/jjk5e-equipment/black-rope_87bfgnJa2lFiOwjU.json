@@ -1,0 +1,73 @@
+{
+ "_id": "87bfgnJa2lFiOwjU",
+ "name": "Black Rope",
+ "type": "weapon",
+ "img": "icons/svg/sword.svg",
+ "folder": "5URJFab0BietcWnO",
+ "system": {
+  "description": {
+   "value": "<p>Weapon(Whip), Grade 1</p>\n<p>When you attack using this weapon you can use a charge that makes it so all magic and cursed energy features are deactivated. However, for every hit this effect is active, you subtract one from your hit and damage bonus, once you reach a -5 <em>Black Rope</em> will burn away.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "martialM",
+   "baseItem": "whip"
+  },
+  "damage": {
+   "base": {
+    "number": 1,
+    "denomination": 6,
+    "types": [
+     "slashing"
+    ]
+   }
+  },
+  "range": {
+   "value": 10,
+   "long": null,
+   "units": "ft",
+   "reach": 10
+  },
+  "properties": [
+   "fin",
+   "rch",
+   "mgc"
+  ],
+  "proficient": null,
+  "quantity": 1,
+  "activities": {
+   "x9p5t01gV7q4em9K": {
+    "_id": "x9p5t01gV7q4em9K",
+    "type": "attack",
+    "name": "",
+    "activation": {
+     "type": "action",
+     "value": 1
+    },
+    "attack": {
+     "type": {
+      "value": "melee",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
+   }
+  },
+  "rarity": "veryRare"
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "1st Grade"
+  }
+ },
+ "_key": "!items!87bfgnJa2lFiOwjU"
+}

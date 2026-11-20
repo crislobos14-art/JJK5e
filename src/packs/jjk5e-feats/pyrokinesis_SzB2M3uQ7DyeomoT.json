@@ -1,0 +1,67 @@
+{
+ "_id": "SzB2M3uQ7DyeomoT",
+ "name": "Pyrokinesis",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/disaster-flames.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: Must have Flames of Disaster</em></p>\n<p>Through training and understanding, you have found new applications to your flames. You gain the one of the following (This feat can be taken more than once):</p>\n<ul>\n<li>\n<p>Resistance to Fire Damage and when you roll damage for a technique that deals fire damage, you can reroll any 1s, but must take the new result, even if the new roll is a 1.  </p>\n</li>\n<li>\n<p>Two spells below 5th level dealing fire damage. The ce cost equals the spell’s level.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": "jjkTechnique"
+  },
+  "requirements": "Must have Flames of Disaster",
+  "prerequisites": {
+   "level": null,
+   "repeatable": false
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "prereq": {
+    "features": [
+     [
+      "Flames of Disaster"
+     ]
+    ]
+   }
+  }
+ },
+ "effects": [
+  {
+   "_id": "gwMVMPF0pwvuVxKi",
+   "name": "Pyrokinesis (toggle)",
+   "img": "modules/jjk5e/icons/techniques/disaster-flames.svg",
+   "changes": [
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "fire",
+     "priority": null
+    }
+   ],
+   "transfer": true,
+   "disabled": true,
+   "duration": {},
+   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "flags": {
+    "jjk5e": {
+     "auto": "toggle"
+    }
+   },
+   "_key": "!items.effects!SzB2M3uQ7DyeomoT.gwMVMPF0pwvuVxKi"
+  }
+ ],
+ "folder": "4qq7EY8SFVGjnL4g",
+ "sort": 100,
+ "_key": "!items!SzB2M3uQ7DyeomoT"
+}

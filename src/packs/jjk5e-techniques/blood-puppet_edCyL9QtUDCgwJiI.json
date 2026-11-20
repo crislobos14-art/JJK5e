@@ -1,0 +1,131 @@
+{
+ "_id": "edCyL9QtUDCgwJiI",
+ "name": "Blood Puppet",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/techniques/blood-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Blood Manipulation — Cursed Technique Reversal</em></p><p>Coming with your mastery over both Reverse Cursed Technique and Blood Manipulation, you have gained your technique reversal. As an action for 5 cursed energy if a target was damaged by a slashing or piercing attack within the last round or otherwise considered to have an open wound, you can attempt to manipulate the blood in a creature's body within 60 feet of you to make them your puppet. The target must make a Constitution saving throw. If they are dead, they automatically fail. If you try to control another Blood Manipulation user, the target has advantage on the Constitution saving throw. On a failure the target becomes your puppet. Creatures with no bodily fluids are immune to this feature and this technique requires concentration. The target can still talk, see, hear, and have their own consciousness, but they cannot control the rest of their body and are incapacitated and cannot use their cursed technique. You can use an action or bonus action to move the target up to 30 feet, or you can have them attack with any weapon they have on them or that is within their reach. You roll for attack and damage, and you are proficient with any weapon. The creature can repeat the Constitution saving throw at the beginning of their turns.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Cursed Technique Reversal, Blood Manipulation",
+  "activities": {
+   "FDkIfSPeFZDwdErl": {
+    "_id": "FDkIfSPeFZDwdErl",
+    "type": "save",
+    "name": "Action (5 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "60",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   },
+   "nFiAWtEmSARotYEs": {
+    "_id": "nFiAWtEmSARotYEs",
+    "type": "save",
+    "name": "Bonus Action",
+    "sort": 100000,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "FDkIfSPeFZDwdErl": 5
+   },
+   "technique": "Blood Manipulation",
+   "reversal": true,
+   "reversalLevel": 1,
+   "prereq": {
+    "features": [
+     [
+      "Cursed Technique Reversal"
+     ]
+    ],
+    "techniques": [
+     [
+      "Blood Manipulation"
+     ]
+    ]
+   }
+  }
+ },
+ "folder": "sHDJB680OC5pd1by",
+ "sort": 0,
+ "_key": "!items!edCyL9QtUDCgwJiI"
+}

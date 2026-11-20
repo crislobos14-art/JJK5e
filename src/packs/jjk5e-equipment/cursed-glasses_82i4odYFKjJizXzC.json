@@ -1,0 +1,30 @@
+{
+ "_id": "82i4odYFKjJizXzC",
+ "name": "Cursed Glasses",
+ "type": "loot",
+ "img": "icons/svg/explosion.svg",
+ "folder": "Z18gXvGvvqaYHnqC",
+ "system": {
+  "type": {
+   "value": "gear"
+  },
+  "description": {
+   "value": "<p>These are glasses with lenses embedded with cursed energy allowing those who wear it to see curses if they otherwise would not be able to.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "rarity": "common",
+  "quantity": 1
+ },
+ "flags": {
+  "jjk5e": {
+   "grade": "4th Grade"
+  }
+ },
+ "_key": "!items!82i4odYFKjJizXzC"
+}

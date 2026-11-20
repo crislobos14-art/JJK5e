@@ -1,0 +1,95 @@
+{
+ "_id": "LyLbkXAvBNfW1loQ",
+ "name": "Body Clone",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/idle-transfiguration.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Idle Transfiguration — Innate Technique (6th level)</em></p><p>At 6th level, you have learned how to create a near perfect clone of yourself. As an action for 6 Cursed Energy, you create a copy of yourself, giving it half of your current and max Hit Points and Cursed Energy. It is identical to you, controlled by you, acts at the end of your turn, and you can view through its senses. Your clone cannot use your Innate Technique features except Self-Alteration. You can't make another clone until it dies or you touch it and rejoin, granting you back the rest of your max HP and Cursed Energy.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "mnV7x8492brd81Dd": {
+    "_id": "mnV7x8492brd81Dd",
+    "type": "utility",
+    "name": "Action (6 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "mnV7x8492brd81Dd": 6
+   },
+   "technique": "Idle Transfiguration",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "sz7xFTLSgxx5bxtq",
+ "_key": "!items!LyLbkXAvBNfW1loQ"
+}

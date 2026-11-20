@@ -1,0 +1,74 @@
+{
+ "_id": "DhU4QtubVsF3ilBs",
+ "name": "Advanced Shikigami",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/feature.svg",
+ "system": {
+  "description": {
+   "value": "<p>Beginning at 13th level, your shikigami grows stronger. Your companion gains the following benefits:</p>\n<ul>\n<li>\n<p>You can spread out 4 points among its ability scores (max of 20).  </p>\n</li>\n<li>\n<p>Its strike attacks deal 1d6 extra necrotic damage(total of 2d6).  </p>\n</li>\n<li>\n<p>You can either choose for your shikigami to become large, or gain the ability to become any weapon, dealing an additional 2d6 necrotic damage.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "class",
+   "subtype": ""
+  },
+  "requirements": "Shikigami User 13",
+  "activities": {
+   "8MW88xtWEsUB2n0x": {
+    "_id": "8MW88xtWEsUB2n0x",
+    "type": "damage",
+    "name": "Special",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "units": "inst"
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  }
+ },
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": "69XiiJo14iwd80Zo",
+ "_key": "!items!DhU4QtubVsF3ilBs"
+}

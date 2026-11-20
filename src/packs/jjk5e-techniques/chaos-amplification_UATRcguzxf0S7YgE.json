@@ -1,0 +1,99 @@
+{
+ "_id": "UATRcguzxf0S7YgE",
+ "name": "Chaos Amplification",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/vairocana.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Creeps and Curses V.3.1</em></p><p><em>Vairocana — Innate Technique (6th level)</em></p><p>At 6th level, after using Chaos, you can spend 1 CE to increase either the effect’s duration or damage dice by your CE modifier. If the effect’s duration is 1 round or 1 minute, the duration is instead doubled. When you cast Chaos Bolt, you can spend Cursed Energy up to your proficiency bonus to upcast Chaos Bolt by one spell level per CE spent (up to a maximum of 9th level).</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "I1SyCWcDjCAYCYdl": {
+    "_id": "I1SyCWcDjCAYCYdl",
+    "type": "utility",
+    "name": "Action (1+ CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "@prof"
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceSteps": {
+    "I1SyCWcDjCAYCYdl": 1
+   },
+   "ceCosts": {
+    "I1SyCWcDjCAYCYdl": 1
+   },
+   "technique": "Vairocana",
+   "level": 6,
+   "spellFrom": "feat"
+  }
+ },
+ "folder": "CpSgW3tLoueRa6XV",
+ "_key": "!items!UATRcguzxf0S7YgE"
+}

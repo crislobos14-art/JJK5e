@@ -1,0 +1,318 @@
+{
+ "_id": "H2btjtKNz70aUpXr",
+ "name": "Divine Dog Totality",
+ "type": "npc",
+ "img": "modules/jjk5e/icons/shikigami/divine-dog-totality.svg",
+ "system": {
+  "abilities": {
+   "str": {
+    "value": 13,
+    "proficient": 0
+   },
+   "dex": {
+    "value": 17,
+    "proficient": 0
+   },
+   "con": {
+    "value": 13,
+    "proficient": 0
+   },
+   "int": {
+    "value": 3,
+    "proficient": 0
+   },
+   "wis": {
+    "value": 13,
+    "proficient": 0
+   },
+   "cha": {
+    "value": 6,
+    "proficient": 0
+   }
+  },
+  "attributes": {
+   "ac": {
+    "calc": "flat",
+    "flat": 13
+   },
+   "hp": {
+    "value": 32,
+    "max": 32,
+    "formula": ""
+   },
+   "movement": {
+    "walk": 80,
+    "units": "ft",
+    "hover": false
+   },
+   "senses": {
+    "units": "ft",
+    "special": ""
+   }
+  },
+  "details": {
+   "cr": 0.25,
+   "alignment": "Unaligned",
+   "type": {
+    "value": "monstrosity",
+    "subtype": "",
+    "swarm": "",
+    "custom": "Shikigami"
+   },
+   "biography": {
+    "value": "<p><em>Divine Dog Totality</em> — Ten Shadows shikigami. Summon cost: 2 Cursed Energy. AC and hit points scale with the summoner's proficiency bonus when summoned through the Ten Shadows features.</p>"
+   }
+  },
+  "traits": {
+   "size": "lg",
+   "dr": {
+    "value": []
+   },
+   "ci": {
+    "value": []
+   },
+   "languages": {
+    "value": []
+   }
+  },
+  "skills": {
+   "prc": {
+    "value": 1,
+    "ability": "wis"
+   },
+   "ste": {
+    "value": 1,
+    "ability": "dex"
+   }
+  },
+  "resources": {
+   "legact": {
+    "max": 0,
+    "spent": 0
+   },
+   "legres": {
+    "max": 0,
+    "spent": 0
+   }
+  }
+ },
+ "items": [
+  {
+   "_id": "5nbeAoqHMicrdTKM",
+   "name": "Keen Hearing and Smell",
+   "type": "feat",
+   "img": "icons/svg/aura.svg",
+   "system": {
+    "description": {
+     "value": "<p>The wolf has advantage on Wisdom (Perception) checks that rely on hearing or smell.</p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Ten Shadows"
+    },
+    "activities": {},
+    "type": {
+     "value": "monster",
+     "subtype": ""
+    },
+    "requirements": "",
+    "properties": [],
+    "uses": {
+     "max": "",
+     "recovery": [],
+     "spent": 0
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!H2btjtKNz70aUpXr.5nbeAoqHMicrdTKM"
+  },
+  {
+   "_id": "5JrSRuC54keXmHUN",
+   "name": "Pack Tactics",
+   "type": "feat",
+   "img": "icons/svg/aura.svg",
+   "system": {
+    "description": {
+     "value": "<p>The wolf has advantage on an attack roll against a creature if at least one of the wolf's allies is within 5 ft. of the creature and the ally isn't incapacitated.</p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Ten Shadows"
+    },
+    "activities": {},
+    "type": {
+     "value": "monster",
+     "subtype": ""
+    },
+    "requirements": "",
+    "properties": [],
+    "uses": {
+     "max": "",
+     "recovery": [],
+     "spent": 0
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!H2btjtKNz70aUpXr.5JrSRuC54keXmHUN"
+  },
+  {
+   "_id": "TIq5omfTaSksh3Un",
+   "name": "Bite",
+   "type": "weapon",
+   "img": "icons/svg/sword.svg",
+   "system": {
+    "description": {
+     "value": "<p>If the target is a creature, it must succeed on a DC 11 Strength saving throw or be knocked prone.</p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Ten Shadows"
+    },
+    "activities": {
+     "kVvor591R9ko9nXn": {
+      "_id": "kVvor591R9ko9nXn",
+      "type": "attack",
+      "name": "",
+      "sort": 0,
+      "activation": {
+       "type": "action",
+       "value": 1,
+       "condition": "",
+       "override": false
+      },
+      "consumption": {
+       "targets": [],
+       "scaling": {
+        "allowed": false
+       },
+       "spellSlot": false
+      },
+      "duration": {
+       "units": "inst",
+       "concentration": false,
+       "override": false
+      },
+      "range": {
+       "override": false
+      },
+      "target": {
+       "override": false,
+       "prompt": true,
+       "affects": {
+        "count": "1",
+        "type": "creature"
+       }
+      },
+      "attack": {
+       "ability": "dex",
+       "bonus": "-1",
+       "critical": {
+        "threshold": null
+       },
+       "flat": false,
+       "type": {
+        "value": "melee",
+        "classification": "weapon"
+       }
+      },
+      "damage": {
+       "critical": {
+        "bonus": ""
+       },
+       "includeBase": true,
+       "parts": []
+      }
+     }
+    },
+    "type": {
+     "value": "natural",
+     "baseItem": ""
+    },
+    "ability": "dex",
+    "proficient": 1,
+    "equipped": true,
+    "damage": {
+     "base": {
+      "number": 4,
+      "denomination": 4,
+      "bonus": "-1",
+      "types": [
+       "piercing"
+      ],
+      "custom": {
+       "enabled": false,
+       "formula": ""
+      },
+      "scaling": {
+       "mode": "",
+       "number": null,
+       "formula": ""
+      }
+     }
+    },
+    "range": {
+     "reach": 5,
+     "value": null,
+     "long": null,
+     "units": "ft"
+    },
+    "magicalBonus": null,
+    "properties": [],
+    "uses": {
+     "max": "",
+     "recovery": [],
+     "spent": 0
+    },
+    "quantity": 1,
+    "weight": {
+     "value": 0,
+     "units": "lb"
+    },
+    "price": {
+     "value": 0,
+     "denomination": "gp"
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!H2btjtKNz70aUpXr.TIq5omfTaSksh3Un"
+  }
+ ],
+ "effects": [],
+ "prototypeToken": {
+  "name": "Divine Dog Totality",
+  "actorLink": false,
+  "disposition": 1,
+  "width": 2,
+  "height": 2,
+  "texture": {
+   "src": "modules/jjk5e/icons/shikigami/divine-dog-totality.svg"
+  },
+  "displayName": 20,
+  "displayBars": 20,
+  "bar1": {
+   "attribute": "attributes.hp"
+  },
+  "sight": {
+   "enabled": true
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "shikigami": true,
+   "ceCost": 2,
+   "hpPerProf": 4,
+   "dmgProf": true
+  }
+ },
+ "folder": null,
+ "_key": "!actors!H2btjtKNz70aUpXr"
+}
