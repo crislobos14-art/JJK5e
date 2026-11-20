@@ -24,7 +24,7 @@
    "VJVQ8pefr46RHrBe": {
     "_id": "VJVQ8pefr46RHrBe",
     "type": "utility",
-    "name": "Action (10 CE)",
+    "name": "Deconstruct magical / cursed object (10 CE, CE check)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -38,29 +38,172 @@
      }
     },
     "range": {
-     "units": "self"
+     "value": "5",
+     "units": "ft",
+     "override": true
     },
     "target": {},
     "duration": {
      "units": "inst"
+    },
+    "roll": {
+     "formula": "1d20 + max(@abilities.wis.mod, @abilities.cha.mod)",
+     "name": "CE check (DC 5/10/15/20/25 by rarity)",
+     "prompt": false,
+     "visible": true
     }
    },
-   "FcUquoFRGIZLfXeJ": {
-    "_id": "FcUquoFRGIZLfXeJ",
+   "j8iIG9XPpBfr39w1": {
+    "_id": "j8iIG9XPpBfr39w1",
     "type": "utility",
-    "name": "Extra (5 CE)",
-    "sort": 900000,
+    "name": "Vaporize a Tiny object (1 CE)",
+    "sort": 0,
+    "img": null,
     "activation": {
-     "type": "special",
-     "value": null,
-     "condition": "You gain 5 CE for deconstructing a 4th grade tool and an additional 5 CE for each grade..."
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
-     }
-    }
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "object",
+      "count": "1"
+     },
+     "override": true
+    },
+    "effects": []
+   },
+   "duUUbBqETeGQyJeg": {
+    "_id": "duUUbBqETeGQyJeg",
+    "type": "utility",
+    "name": "Vaporize a Small object (2 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "object",
+      "count": "1"
+     },
+     "override": true
+    },
+    "effects": []
+   },
+   "qD6csfuVzyDzXgIq": {
+    "_id": "qD6csfuVzyDzXgIq",
+    "type": "utility",
+    "name": "Vaporize a Medium object (4 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "object",
+      "count": "1"
+     },
+     "override": true
+    },
+    "effects": []
+   },
+   "rhzvTflxhTcUMtqG": {
+    "_id": "rhzvTflxhTcUMtqG",
+    "type": "utility",
+    "name": "Vaporize a Large object (8 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "object",
+      "count": "1"
+     },
+     "override": true
+    },
+    "effects": []
    }
   }
  },
@@ -68,7 +211,10 @@
   "jjk5e": {
    "ceCosts": {
     "VJVQ8pefr46RHrBe": 10,
-    "FcUquoFRGIZLfXeJ": 5
+    "j8iIG9XPpBfr39w1": 1,
+    "duUUbBqETeGQyJeg": 2,
+    "qD6csfuVzyDzXgIq": 4,
+    "rhzvTflxhTcUMtqG": 8
    },
    "technique": "Construction",
    "reversal": true,
@@ -84,7 +230,9 @@
       "Construction"
      ]
     ]
-   }
+   },
+   "automationNotes": "Also usable as a bonus action or reaction. Destroying your own Construction tool refunds half its CE; a 4th-grade tool gives 5 CE (+5 per grade above).",
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",

@@ -3,13 +3,13 @@
 > Generado desde el compendio y las fuentes. **No certifica ejecución en Foundry ni fidelidad semántica a cada regla**.
 
 - Spells examinados: **360**; técnicas agrupadas: **81**.
-- Utilidad sin efecto configurado: revisar lógica: **103**.
+- Utilidad sin efecto configurado: revisar lógica: **99**.
 - Utilidad con efecto: comprobar activación: **15**.
-- Dominio genérico: resolver propiedades particulares: **48**.
+- Dominio genérico: resolver propiedades particulares: **47**.
 - Salvación sin daño/efecto automático: **26**.
 - Ataque sin daño propio: comprobar intención: **10**.
 - Mecánica configurada; falta prueba Foundry: **111**.
-- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **47**.
+- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **52**.
 
 ## Interpretación
 
@@ -124,11 +124,11 @@
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Construct | 1 | utility:Bonus Action (3 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/construct_uJBhnTudE8G6T5WK.json) |
-| Cursed Creation | 3 | utility:Action (3 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/cursed-creation_3SKl5qzgphoe5in3.json) |
-| Liquid Metal | 6 | utility:Extra (4 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/liquid-metal_O4cN7o6CDngD9xOo.json) |
-| Insectoid Armor | 11 | utility:Bonus Action (10 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/insectoid-armor_BQMHIhgw7gdse8gy.json) |
-| Domain Expansion: Threefold Affliction | 18 | utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-threefold-affliction_Z4nVb185TCkskJ4R.json) |
+| Construct | 1 | utility:Construct — Bonus Action (3+ CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/construct_uJBhnTudE8G6T5WK.json) |
+| Cursed Creation | 3 | utility:Create a cursed tool (3 CE, +2 per grade above 4) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/cursed-creation_3SKl5qzgphoe5in3.json) |
+| Liquid Metal | 6 | utility:Liquid Metal (1–4 CE extra) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/liquid-metal_O4cN7o6CDngD9xOo.json) |
+| Insectoid Armor | 11 | utility:Bonus Action (10 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/insectoid-armor_BQMHIhgw7gdse8gy.json) |
+| Domain Expansion: Threefold Affliction | 18 | utility:Expand Domain (20 CE); utility:Create an item (free in the domain) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-threefold-affliction_Z4nVb185TCkskJ4R.json) |
 
 ### Contractual Recreation (4 spells)
 

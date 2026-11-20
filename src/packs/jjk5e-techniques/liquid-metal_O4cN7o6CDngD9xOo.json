@@ -19,7 +19,7 @@
    "QAL2FXDt3LBc2P1d": {
     "_id": "QAL2FXDt3LBc2P1d",
     "type": "utility",
-    "name": "Extra (4 CE)",
+    "name": "Liquid Metal (1–4 CE extra)",
     "sort": 900000,
     "activation": {
      "type": "special",
@@ -30,10 +30,32 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "3"
      },
      "spellSlot": false
-    }
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "Kx920Jp6qqr9BJN5",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -71,13 +93,39 @@
  "flags": {
   "jjk5e": {
    "ceCosts": {
-    "QAL2FXDt3LBc2P1d": 4
+    "QAL2FXDt3LBc2P1d": 1
    },
    "technique": "Construction",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceSteps": {
+    "QAL2FXDt3LBc2P1d": 1
+   },
+   "automation": "automated"
   }
  },
  "folder": "dT7FkGZ40euglS6C",
- "_key": "!items!O4cN7o6CDngD9xOo"
+ "_key": "!items!O4cN7o6CDngD9xOo",
+ "effects": [
+  {
+   "_id": "Kx920Jp6qqr9BJN5",
+   "name": "Liquid Metal",
+   "img": "modules/jjk5e/icons/techniques/construction.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>For 1 minute the constructed melee weapon reaches +10 ft per CE spent; at extended reach its damage die grows one tier per CE (d8 → d10 → d12 → 2d6 → 2d8).</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Construction"
+    }
+   },
+   "_key": "!items.effects!O4cN7o6CDngD9xOo.Kx920Jp6qqr9BJN5"
+  }
+ ]
 }

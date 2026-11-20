@@ -19,7 +19,7 @@
    "QcgNIk4rbHwUWGOy": {
     "_id": "QcgNIk4rbHwUWGOy",
     "type": "utility",
-    "name": "Action (3 CE)",
+    "name": "Create a cursed tool (3 CE, +2 per grade above 4)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -30,7 +30,8 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "6"
      },
      "spellSlot": false
     },
@@ -39,6 +40,9 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
@@ -87,7 +91,12 @@
    },
    "technique": "Construction",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceSteps": {
+    "QcgNIk4rbHwUWGOy": 2
+   },
+   "automationNotes": "Lasts CE-modifier hours. A Special Grade tool kills you afterwards (no revival).",
+   "automation": "automated"
   }
  },
  "folder": "dT7FkGZ40euglS6C",

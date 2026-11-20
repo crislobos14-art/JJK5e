@@ -58,6 +58,47 @@
      "concentration": false,
      "override": true
     }
+   },
+   "h9fWj7MJ32BXysr3": {
+    "_id": "h9fWj7MJ32BXysr3",
+    "type": "utility",
+    "name": "Create an item (free in the domain)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "hWbfbgppD34TliWB",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -116,9 +157,32 @@
     "K7qkfsGXThBaVanR": 20
    },
    "domainActivity": "K7qkfsGXThBaVanR",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "dT7FkGZ40euglS6C",
- "_key": "!items!Z4nVb185TCkskJ4R"
+ "_key": "!items!Z4nVb185TCkskJ4R",
+ "effects": [
+  {
+   "_id": "hWbfbgppD34TliWB",
+   "name": "Threefold Affliction weapons",
+   "img": "modules/jjk5e/icons/techniques/construction-domain.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Created items deal two extra damage dice and their attacks cannot miss (domain sure-hit); they vanish when the domain ends.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Construction"
+    }
+   },
+   "_key": "!items.effects!Z4nVb185TCkskJ4R.hWbfbgppD34TliWB"
+  }
+ ]
 }

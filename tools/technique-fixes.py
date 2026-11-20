@@ -1201,6 +1201,70 @@ def comedian(S):
     mark(dp)
 
 
+def construction(S):
+    c = S.get("Construct")
+    a = c["system"]["activities"]["BYmBLfm5BYDJi6wX"]
+    a["name"] = "Construct — Bonus Action (3+ CE)"
+    a["range"], a["target"] = {"value": "5", "units": "ft", "override": True}, SELF
+    cost(c, a, 3, 1, "20")
+    note(c, "Each extra CE: one more object's properties or +1 ft cube. Add the created weapon to your inventory.")
+    mark(c)
+    cc = S.get("Cursed Creation")
+    a = cc["system"]["activities"]["QcgNIk4rbHwUWGOy"]
+    a["name"] = "Create a cursed tool (3 CE, +2 per grade above 4)"
+    a["range"], a["target"] = RANGE_SELF, SELF
+    cost(cc, a, 3, 2, "6")
+    note(cc, "Lasts CE-modifier hours. A Special Grade tool kills you afterwards (no revival).")
+    mark(cc)
+    lm = S.get("Liquid Metal")
+    a = lm["system"]["activities"]["QAL2FXDt3LBc2P1d"]
+    a["name"] = "Liquid Metal (1–4 CE extra)"
+    a["range"], a["target"] = RANGE_SELF, SELF
+    a["duration"] = {"value": "1", "units": "minute", "override": True}
+    cost(lm, a, 1, 1, "3")
+    apply(a, fx(lm, "liquid", "Liquid Metal", rounds=10,
+                desc="For 1 minute the constructed melee weapon reaches +10 ft per CE spent; at extended reach its "
+                     "damage die grows one tier per CE (d8 → d10 → d12 → 2d6 → 2d8)."))
+    mark(lm)
+    ia = S.get("Insectoid Armor")
+    a = ia["system"]["activities"]["zDVP8kBDUxuwVc4I"]
+    a["range"], a["target"] = RANGE_SELF, SELF
+    a["duration"] = {"value": "1", "units": "hour", "override": True}
+    apply(a, fx(ia, "armor", "Insectoid Armor", rounds=600,
+                changes=[("system.abilities.str.value", 2, "4"), ("system.abilities.dex.value", 2, "4"),
+                         ("system.attributes.ac.bonus", 2, "+4"),
+                         ("system.traits.dr.value", 2, "bludgeoning"), ("system.traits.dr.value", 2, "piercing"),
+                         ("system.traits.dr.value", 2, "slashing"),
+                         ("system.traits.dr.bypasses", 2, "mgc"),
+                         ("system.attributes.movement.fly", 4, "@attributes.movement.walk")],
+                desc="1 hour: +4 STR, DEX and AC; resistance to non-magical bludgeoning, piercing and slashing "
+                     "(immunity at 18th, GM); fly speed = walking speed; free-action Dash; unarmed strikes +2 damage "
+                     "dice (+1 on a critical)."))
+    mark(ia)
+    d = S.get("Domain Expansion: Threefold Affliction")
+    f = act(d, "free", "utility", "Create an item (free in the domain)", "bonus", range=RANGE_SELF, target=SELF)
+    apply(f, fx(d, "items", "Threefold Affliction weapons", rounds=10,
+                desc="Created items deal two extra damage dice and their attacks cannot miss (domain sure-hit); they "
+                     "vanish when the domain ends."))
+    free(d, f)
+    mark(d)
+    dc = S.get("Deconstruction")
+    dc["system"]["activities"] = {k: v for k, v in dc["system"]["activities"].items() if k == "VJVQ8pefr46RHrBe"}
+    dc["flags"]["jjk5e"]["ceCosts"] = {"VJVQ8pefr46RHrBe": 10}
+    m = dc["system"]["activities"]["VJVQ8pefr46RHrBe"]
+    m["name"] = "Deconstruct magical / cursed object (10 CE, CE check)"
+    m["roll"] = {"formula": f"1d20 + {CE}", "name": "CE check (DC 5/10/15/20/25 by rarity)", "prompt": False, "visible": True}
+    m["range"] = {"value": "5", "units": "ft", "override": True}
+    for size, c_ in (("Tiny", 1), ("Small", 2), ("Medium", 4), ("Large", 8)):
+        a = act(dc, f"size{c_}", "utility", f"Vaporize a {size} object ({c_} CE)", "action",
+                range={"value": "5", "units": "ft", "override": True},
+                target={"affects": {"type": "object", "count": "1"}, "override": True})
+        cost(dc, a, c_)
+    note(dc, "Also usable as a bonus action or reaction. Destroying your own Construction tool refunds half its CE; "
+             "a 4th-grade tool gives 5 CE (+5 per grade above).")
+    mark(dc)
+
+
 TECHNIQUES = {"Antigravity System": antigravity_system,
               "Auspicious Beast Summon": auspicious_beast_summon,
               "Black Bird Manipulation": black_bird_manipulation,
@@ -1212,7 +1276,8 @@ TECHNIQUES = {"Antigravity System": antigravity_system,
               "Body Manipulation": body_manipulation,
               "Centipede Shroud": centipede_shroud,
               "Clone": clone,
-              "Comedian": comedian}
+              "Comedian": comedian,
+              "Construction": construction}
 
 if __name__ == "__main__":
     args = sys.argv[1:]

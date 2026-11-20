@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.38.0 — Técnica por técnica: Construction
+- **Construct** y **Cursed Creation**: CE extra escalable (propiedades/tamaño; +2 por grado).
+- **Liquid Metal**: 1–4 CE extra, alcance y dado mayor durante 1 minuto.
+- **Insectoid Armor**: +4 FUE/DES/CA, resistencia física no mágica, vuelo = velocidad a pie, 1 hora.
+- **Threefold Affliction**: crear objetos gratis en el dominio.
+- **Deconstruction**: acciones por tamaño (1/2/4/8 CE) y prueba de EM para objetos mágicos (10 CE).
+- Automatizados a mano: 52/360. Sin probar en Foundry real.
+
 ## 1.37.0 — Técnica por técnica: Comedian
 - **Comedy**: activar (concentración, Interpretación); reacción *Gag dodge* (1 CE) al recibir daño anula ese golpe; recuperar el control con SAB CD 15.
 - **Commit to the Bit**: Blasting Off, Props y Powerful Punchline ((competencia + mod. EM)d8 con salvación y tipo a elegir).

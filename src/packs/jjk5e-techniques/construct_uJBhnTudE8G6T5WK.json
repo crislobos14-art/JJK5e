@@ -19,7 +19,7 @@
    "BYmBLfm5BYDJi6wX": {
     "_id": "BYmBLfm5BYDJi6wX",
     "type": "utility",
-    "name": "Bonus Action (3 CE)",
+    "name": "Construct — Bonus Action (3+ CE)",
     "sort": 0,
     "activation": {
      "type": "bonus",
@@ -30,25 +30,19 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "20"
      },
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "value": "5",
+     "units": "ft",
      "override": true
     },
     "target": {
-     "template": {
-      "type": "cube",
-      "size": "3",
-      "units": "ft",
-      "count": "1",
-      "contiguous": false
-     },
      "affects": {
-      "type": "creature",
-      "choice": false
+      "type": "self"
      },
      "override": true
     },
@@ -111,7 +105,12 @@
    },
    "technique": "Construction",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceSteps": {
+    "BYmBLfm5BYDJi6wX": 1
+   },
+   "automationNotes": "Each extra CE: one more object's properties or +1 ft cube. Add the created weapon to your inventory.",
+   "automation": "automated"
   }
  },
  "folder": "dT7FkGZ40euglS6C",

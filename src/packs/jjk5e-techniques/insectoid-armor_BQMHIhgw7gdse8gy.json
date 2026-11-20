@@ -39,14 +39,22 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
      "value": "1",
      "units": "hour",
-     "concentration": false,
      "override": true
-    }
+    },
+    "effects": [
+     {
+      "_id": "DhHXB5as7Dv36KgC",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -90,9 +98,81 @@
    },
    "technique": "Construction",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "dT7FkGZ40euglS6C",
- "_key": "!items!BQMHIhgw7gdse8gy"
+ "_key": "!items!BQMHIhgw7gdse8gy",
+ "effects": [
+  {
+   "_id": "DhHXB5as7Dv36KgC",
+   "name": "Insectoid Armor",
+   "img": "modules/jjk5e/icons/techniques/construction.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>1 hour: +4 STR, DEX and AC; resistance to non-magical bludgeoning, piercing and slashing (immunity at 18th, GM); fly speed = walking speed; free-action Dash; unarmed strikes +2 damage dice (+1 on a critical).</p>",
+   "changes": [
+    {
+     "key": "system.abilities.str.value",
+     "mode": 2,
+     "value": "4",
+     "priority": 20
+    },
+    {
+     "key": "system.abilities.dex.value",
+     "mode": 2,
+     "value": "4",
+     "priority": 20
+    },
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+4",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "bludgeoning",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "piercing",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "slashing",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dr.bypasses",
+     "mode": 2,
+     "value": "mgc",
+     "priority": 20
+    },
+    {
+     "key": "system.attributes.movement.fly",
+     "mode": 4,
+     "value": "@attributes.movement.walk",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 600
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Construction"
+    }
+   },
+   "_key": "!items.effects!BQMHIhgw7gdse8gy.DhHXB5as7Dv36KgC"
+  }
+ ]
 }
