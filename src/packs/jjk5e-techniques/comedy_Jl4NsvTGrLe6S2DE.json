@@ -39,22 +39,31 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
      "value": "1",
      "units": "minute",
-     "concentration": false,
+     "concentration": true,
      "override": true
-    }
+    },
+    "effects": [
+     {
+      "_id": "VkZXseX5IW0XFxNp",
+      "onSave": false
+     }
+    ]
    },
    "Ofx2k99ZDib0k6fO": {
     "_id": "Ofx2k99ZDib0k6fO",
     "type": "save",
-    "name": "Action",
+    "name": "Regain control (end of turn, DC 15 WIS)",
     "sort": 100000,
     "activation": {
-     "type": "action",
+     "type": "special",
      "value": 1,
      "condition": "",
      "override": true
@@ -67,10 +76,13 @@
      "spellSlot": false
     },
     "range": {
-     "units": "spec",
+     "units": "self",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
@@ -82,14 +94,56 @@
       "wis"
      ],
      "dc": {
-      "calculation": "spellcasting",
-      "formula": ""
+      "calculation": "",
+      "formula": "15"
      }
     },
     "damage": {
      "onSave": "none",
      "parts": []
     }
+   },
+   "tpClhmu9pI4LbleE": {
+    "_id": "tpClhmu9pI4LbleE",
+    "type": "utility",
+    "name": "Gag dodge — Reaction (1 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "When you take damage while Comedy is active",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "8veGEGXUXiPCrwwK",
+      "onSave": false
+     }
+    ],
+    "useConditionText": "reaction === \"isDamaged\""
    }
   },
   "uses": {
@@ -131,37 +185,75 @@
  "flags": {
   "jjk5e": {
    "ceCosts": {
-    "QoOS1sIRL8Cqt5zX": 1
+    "QoOS1sIRL8Cqt5zX": 1,
+    "tpClhmu9pI4LbleE": 1
    },
    "technique": "Comedian",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "8AlwpNPBMedHlchF",
  "effects": [
   {
-   "_id": "KkglstNCV3h664dH",
-   "name": "Comedy (toggle)",
+   "_id": "VkZXseX5IW0XFxNp",
+   "name": "Comedy (active)",
    "img": "modules/jjk5e/icons/techniques/comedian.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Reality bends to your comedy for 1 minute (concentration). Performance proficiency (expertise at 11th: set by hand).</p>",
    "changes": [
     {
      "key": "system.skills.prf.value",
      "mode": 4,
      "value": "1",
-     "priority": null
+     "priority": 20
     }
    ],
-   "transfer": true,
-   "disabled": true,
-   "duration": {},
-   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "duration": {
+    "rounds": 10
+   },
    "flags": {
     "jjk5e": {
-     "auto": "toggle"
+     "technique": "Comedian"
     }
    },
-   "_key": "!items.effects!Jl4NsvTGrLe6S2DE.KkglstNCV3h664dH"
+   "_key": "!items.effects!Jl4NsvTGrLe6S2DE.VkZXseX5IW0XFxNp"
+  },
+  {
+   "_id": "8veGEGXUXiPCrwwK",
+   "name": "Gag dodge",
+   "img": "modules/jjk5e/icons/techniques/comedian.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>You take no damage from the triggering hit (a slapstick escape).</p>",
+   "changes": [
+    {
+     "key": "system.traits.di.all",
+     "mode": 5,
+     "value": "true",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Comedian"
+    },
+    "dae": {
+     "specialDuration": [
+      "isDamaged"
+     ]
+    }
+   },
+   "_key": "!items.effects!Jl4NsvTGrLe6S2DE.8veGEGXUXiPCrwwK"
   }
  ],
  "_key": "!items!Jl4NsvTGrLe6S2DE"

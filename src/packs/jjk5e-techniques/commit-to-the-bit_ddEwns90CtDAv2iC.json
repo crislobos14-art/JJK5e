@@ -19,12 +19,12 @@
    "WSkfhE5kG2RIjgJf": {
     "_id": "WSkfhE5kG2RIjgJf",
     "type": "utility",
-    "name": "Action (1 CE)",
+    "name": "Blasting Off — on a melee hit (1 CE)",
     "sort": 0,
     "activation": {
-     "type": "action",
-     "value": 1,
-     "condition": "",
+     "type": "special",
+     "value": null,
+     "condition": "On a melee hit while Comedy is active",
      "override": true
     },
     "consumption": {
@@ -35,10 +35,16 @@
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "value": "5",
+     "units": "ft",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -55,7 +61,7 @@
    "sqZU5kXKLOuvCqF4": {
     "_id": "sqZU5kXKLOuvCqF4",
     "type": "utility",
-    "name": "Bonus Action (2 CE)",
+    "name": "Props — Bonus Action (2 CE)",
     "sort": 100000,
     "activation": {
      "type": "bonus",
@@ -75,16 +81,8 @@
      "override": true
     },
     "target": {
-     "template": {
-      "type": "cube",
-      "size": "5",
-      "units": "ft",
-      "count": "1",
-      "contiguous": false
-     },
      "affects": {
-      "type": "creature",
-      "choice": false
+      "type": "self"
      },
      "override": true
     },
@@ -98,7 +96,7 @@
    "uenzuFk571nNCSdD": {
     "_id": "uenzuFk571nNCSdD",
     "type": "save",
-    "name": "Action (3 CE)",
+    "name": "Powerful Punchline (3 CE)",
     "sort": 200000,
     "activation": {
      "type": "action",
@@ -114,13 +112,14 @@
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "value": "80",
+     "units": "ft",
      "override": true
     },
     "target": {
      "template": {
-      "type": "cone",
-      "size": "30",
+      "type": "radius",
+      "size": "15",
       "units": "ft",
       "count": "1",
       "contiguous": false
@@ -137,6 +136,8 @@
     },
     "save": {
      "ability": [
+      "str",
+      "dex",
       "con"
      ],
      "dc": {
@@ -145,22 +146,23 @@
      }
     },
     "damage": {
-     "onSave": "half",
+     "onSave": "none",
      "parts": [
       {
-       "number": 5,
-       "denomination": 8,
+       "number": null,
+       "denomination": null,
        "bonus": "",
        "types": [
-        "bludgeoning"
+        "bludgeoning",
+        "piercing",
+        "slashing",
+        "psychic"
        ],
        "custom": {
-        "enabled": false,
-        "formula": ""
+        "enabled": true,
+        "formula": "(@prof + max(@abilities.wis.mod, @abilities.cha.mod))d8"
        },
-       "scaling": {
-        "number": 1
-       }
+       "scaling": {}
       }
      ]
     }
@@ -208,7 +210,9 @@
    },
    "technique": "Comedian",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Punchline area: 30-ft sphere within 80 ft, 60×5-ft line or 30-ft cone; pick the save and damage type that fit the joke, extra effect by the GM. Blasting Off distance: 60/90/120/200 ft by level.",
+   "automation": "automated"
   }
  },
  "effects": [

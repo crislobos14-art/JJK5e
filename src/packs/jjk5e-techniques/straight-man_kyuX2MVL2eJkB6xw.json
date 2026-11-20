@@ -38,20 +38,35 @@
      }
     },
     "range": {
-     "value": "20",
-     "units": "ft"
+     "units": "self",
+     "override": true
     },
     "target": {
+     "template": {
+      "type": "radius",
+      "size": "20",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
      "affects": {
-      "type": "creature",
-      "count": "1"
-     }
+      "type": "ally",
+      "choice": true
+     },
+     "override": true
     },
     "duration": {
      "value": "1",
      "units": "minute",
-     "concentration": false
-    }
+     "concentration": true,
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "Q2iE25qFhLGauFHp",
+      "onSave": false
+     }
+    ]
    }
   }
  },
@@ -74,10 +89,46 @@
       "Comedian"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!kyuX2MVL2eJkB6xw"
+ "_key": "!items!kyuX2MVL2eJkB6xw",
+ "effects": [
+  {
+   "_id": "Q2iE25qFhLGauFHp",
+   "name": "Straight Man",
+   "img": "modules/jjk5e/icons/techniques/comedian.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Immune to frightened and charmed while the reversal lasts (you + up to CE modifier creatures).</p>",
+   "changes": [
+    {
+     "key": "system.traits.ci.value",
+     "mode": 2,
+     "value": "frightened",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.ci.value",
+     "mode": 2,
+     "value": "charmed",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Comedian"
+    }
+   },
+   "_key": "!items.effects!kyuX2MVL2eJkB6xw.Q2iE25qFhLGauFHp"
+  }
+ ]
 }

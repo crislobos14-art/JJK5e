@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.37.0 — Técnica por técnica: Comedian
+- **Comedy**: activar (concentración, Interpretación); reacción *Gag dodge* (1 CE) al recibir daño anula ese golpe; recuperar el control con SAB CD 15.
+- **Commit to the Bit**: Blasting Off, Props y Powerful Punchline ((competencia + mod. EM)d8 con salvación y tipo a elegir).
+- **Peak Comedy**: efecto de 1 minuto, dados extra de Punchline (2 CE) y Cutaway (SAB).
+- **Stand Up Comedy**: cutaway en iniciativa 20, abucheo 8d8 psíquico y chiste (Persuasión).
+- **Straight Man**: inmunidad a asustado y hechizado en 20 pies; **Deadpan**: reacción 2d8 psíquico con salvación de EM.
+- Automatizados a mano: 47/360. Sin probar en Foundry real.
+
 ## 1.36.0 — Técnica por técnica: Clone
 - **Divide and Conquer**: el clon gratis (acción adicional) y el clon extra de iniciativa 20 crean tokens reales como One Man Army.
 - **Four is a Party**: intercambio de cuerpo con un clon (1 CE).

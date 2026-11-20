@@ -1099,6 +1099,108 @@ def clone(S):
     mark(o)
 
 
+def comedian(S):
+    ft = lambda n: {"value": str(n), "units": "ft", "override": True}
+    conc = {"value": "1", "units": "minute", "concentration": True, "override": True}
+    c = S.get("Comedy")
+    c["effects"] = [e for e in c.get("effects", []) if e["_id"] != "KkglstNCV3h664dH"]
+    on = c["system"]["activities"]["QoOS1sIRL8Cqt5zX"]
+    on["range"], on["target"], on["duration"] = RANGE_SELF, SELF, conc
+    apply(on, fx(c, "on", "Comedy (active)", rounds=10,
+                 changes=[("system.skills.prf.value", 4, "1")],
+                 desc="Reality bends to your comedy for 1 minute (concentration). Performance proficiency "
+                      "(expertise at 11th: set by hand)."))
+    gag = act(c, "gag", "utility", "Gag dodge — Reaction (1 CE)", "reaction", range=RANGE_SELF, target=SELF)
+    gag["activation"]["condition"] = "When you take damage while Comedy is active"
+    gag["useConditionText"] = 'reaction === "isDamaged"'
+    apply(gag, fx(c, "gag", "Gag dodge", rounds=1, special=["isDamaged"],
+                  changes=[("system.traits.di.all", 5, "true")],
+                  desc="You take no damage from the triggering hit (a slapstick escape)."))
+    cost(c, gag, 1)
+    rg = c["system"]["activities"]["Ofx2k99ZDib0k6fO"]
+    rg["name"] = "Regain control (end of turn, DC 15 WIS)"
+    rg["save"] = {"ability": ["wis"], "dc": {"calculation": "", "formula": "15"}}
+    rg["activation"]["type"] = "special"
+    rg["range"], rg["target"] = RANGE_SELF, SELF
+    mark(c)
+
+    b = S.get("Commit to the Bit")
+    bo = b["system"]["activities"]["WSkfhE5kG2RIjgJf"]
+    bo["name"] = "Blasting Off — on a melee hit (1 CE)"
+    bo["activation"] = {"type": "special", "value": None, "condition": "On a melee hit while Comedy is active", "override": True}
+    bo["range"], bo["target"] = ft(5), one_creature()
+    pr = b["system"]["activities"]["sqZU5kXKLOuvCqF4"]
+    pr["name"] = "Props — Bonus Action (2 CE)"
+    pr["range"], pr["target"] = RANGE_SELF, SELF
+    pu = b["system"]["activities"]["uenzuFk571nNCSdD"]
+    pu["name"] = "Powerful Punchline (3 CE)"
+    pu["save"] = {"ability": ["str", "dex", "con"], "dc": {"calculation": "spellcasting", "formula": ""}}
+    pu["damage"] = {"onSave": "none", "parts": [{"number": None, "denomination": None, "bonus": "",
+                    "types": ["bludgeoning", "piercing", "slashing", "psychic"],
+                    "custom": {"enabled": True, "formula": f"(@prof + {CE})d8"}, "scaling": {}}]}
+    pu["range"] = ft(80)
+    pu["target"] = sphere(15)
+    note(b, "Punchline area: 30-ft sphere within 80 ft, 60×5-ft line or 30-ft cone; pick the save and damage type "
+            "that fit the joke, extra effect by the GM. Blasting Off distance: 60/90/120/200 ft by level.")
+    mark(b)
+
+    pk = S.get("Maximum: Peak Comedy")
+    a = pk["system"]["activities"]["n7uJBt6ZtFcH011J"]
+    a["range"], a["target"] = RANGE_SELF, SELF
+    a["duration"] = {"value": "1", "units": "minute", "override": True}
+    apply(a, fx(pk, "peak", "Peak Comedy", rounds=10,
+                desc="One free gag per turn; free gag dodges equal to your CE modifier each round; props ×2 (×3 at "
+                     "18th); Punchline range and area doubled."))
+    ex = pk["system"]["activities"]["DA02NMtOwowPF6JD"]
+    act(pk, "DA02NMtOwowPF6JD", "damage", "Punchline: extra dice (2 CE)", "special",
+        damage={"parts": [{"number": None, "denomination": None, "bonus": "", "types": ["bludgeoning", "piercing", "slashing", "psychic"],
+                           "custom": {"enabled": True, "formula": "(@prof)d8"}, "scaling": {}}]},
+        target={"affects": {"type": "creature", "choice": True}, "override": True})
+    cut = pk["system"]["activities"]["25SomdojAg6Z124L"]
+    cut["name"] = "Cutaway (Action)"
+    cut["range"], cut["target"] = RANGE_SELF, sphere(100)
+    cut["damage"] = {"onSave": "none", "parts": []}
+    apply(cut, fx(pk, "cut", "Cutaway", rounds=10,
+                  desc="Cannot attack unless the attack fits the cutaway gag."))
+    mark(pk)
+
+    d = S.get("Domain Expansion: Stand Up Comedy")
+    boo = d["system"]["activities"]["9WjeHauKpt0kOIgs"]
+    boo["name"] = "Booed (once per round)"
+    boo["activation"]["type"] = "special"
+    boo["target"] = {"affects": {"type": "creature", "choice": True}, "override": True}
+    free(d, boo)
+    i20 = act(d, "init20", "utility", "Initiative 20: cutaway", "special",
+              target={"affects": {"type": "enemy", "choice": True}, "override": True})
+    apply(i20, fx(d, "cut", "Cutaway (Stand Up Comedy)", rounds=10,
+                  desc="Cannot attack you unless it fits the gag; acting against the joke means 8d8 psychic (Booed)."))
+    free(d, i20)
+    joke = act(d, "joke", "utility", "Tell a joke (full turn): Persuasion vs Insight", "special",
+               range=RANGE_SELF, target=SELF, roll={"formula": "1d20 + @skills.per.total", "name": "Joke (Persuasion)",
+                                                    "prompt": False, "visible": True})
+    free(d, joke)
+    note(d, "Creatures that roll lower on Insight (or do not roll) take 'Booed'.")
+    mark(d)
+
+    st = S.get("Straight Man")
+    a = st["system"]["activities"]["C5z0pFYun9FQgV6E"]
+    a["range"], a["target"], a["duration"] = RANGE_SELF, sphere(20), conc
+    a["target"]["affects"].update({"type": "ally", "choice": True})
+    apply(a, fx(st, "real", "Straight Man", rounds=10,
+                changes=[("system.traits.ci.value", 2, "frightened"), ("system.traits.ci.value", 2, "charmed")],
+                desc="Immune to frightened and charmed while the reversal lasts (you + up to CE modifier creatures)."))
+    mark(st)
+
+    dp = S.get("Deadpan")
+    act(dp, "Y4YJ3hjkkDPDMKRq", "save", "Deadpan — Reaction (5 CE)", "reaction", range=ft(60), target=one_creature(),
+        save={"ability": ["wis", "cha"], "dc": {"calculation": "spellcasting", "formula": ""}},
+        damage={"onSave": "none", "parts": [dice(2, 8, ["psychic"])]})
+    dp["system"]["activities"]["Y4YJ3hjkkDPDMKRq"]["activation"]["condition"] = \
+        "A creature tries to teleport, avoid damage or do something impossible (it fails on a failed save)"
+    dp["system"]["activities"]["Y4YJ3hjkkDPDMKRq"]["useConditionText"] = "false"
+    mark(dp)
+
+
 TECHNIQUES = {"Antigravity System": antigravity_system,
               "Auspicious Beast Summon": auspicious_beast_summon,
               "Black Bird Manipulation": black_bird_manipulation,
@@ -1109,7 +1211,8 @@ TECHNIQUES = {"Antigravity System": antigravity_system,
               "Blazing Courage": blazing_courage,
               "Body Manipulation": body_manipulation,
               "Centipede Shroud": centipede_shroud,
-              "Clone": clone}
+              "Clone": clone,
+              "Comedian": comedian}
 
 if __name__ == "__main__":
     args = sys.argv[1:]

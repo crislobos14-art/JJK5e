@@ -39,20 +39,85 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
      "value": "1",
      "units": "minute",
-     "concentration": false,
      "override": true
-    }
+    },
+    "effects": [
+     {
+      "_id": "vCtdvKDhvPS4Vr9t",
+      "onSave": false
+     }
+    ]
    },
    "DA02NMtOwowPF6JD": {
     "_id": "DA02NMtOwowPF6JD",
-    "type": "utility",
-    "name": "Action (2 CE)",
-    "sort": 100000,
+    "type": "damage",
+    "name": "Punchline: extra dice (2 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "damage": {
+     "parts": [
+      {
+       "number": null,
+       "denomination": null,
+       "bonus": "",
+       "types": [
+        "bludgeoning",
+        "piercing",
+        "slashing",
+        "psychic"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "(@prof)d8"
+       },
+       "scaling": {}
+      }
+     ]
+    }
+   },
+   "25SomdojAg6Z124L": {
+    "_id": "25SomdojAg6Z124L",
+    "type": "save",
+    "name": "Cutaway (Action)",
+    "sort": 200000,
     "activation": {
      "type": "action",
      "value": 1,
@@ -71,40 +136,16 @@
      "override": true
     },
     "target": {
-     "override": true
-    },
-    "duration": {
-     "units": "inst",
-     "override": true
-    }
-   },
-   "25SomdojAg6Z124L": {
-    "_id": "25SomdojAg6Z124L",
-    "type": "save",
-    "name": "Action",
-    "sort": 200000,
-    "activation": {
-     "type": "action",
-     "value": 1,
-     "condition": "",
-     "override": true
-    },
-    "consumption": {
-     "targets": [],
-     "scaling": {
-      "allowed": false
+     "template": {
+      "type": "radius",
+      "size": "100",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
      },
-     "spellSlot": false
-    },
-    "range": {
-     "value": "100",
-     "units": "ft",
-     "override": true
-    },
-    "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "choice": false
      },
      "override": true
     },
@@ -124,7 +165,13 @@
     "damage": {
      "onSave": "none",
      "parts": []
-    }
+    },
+    "effects": [
+     {
+      "_id": "cGk3hrOjESNo1wFP",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -169,9 +216,52 @@
    },
    "technique": "Comedian",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "8AlwpNPBMedHlchF",
- "_key": "!items!8lD36BfUqndCBmNA"
+ "_key": "!items!8lD36BfUqndCBmNA",
+ "effects": [
+  {
+   "_id": "vCtdvKDhvPS4Vr9t",
+   "name": "Peak Comedy",
+   "img": "modules/jjk5e/icons/techniques/comedian.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>One free gag per turn; free gag dodges equal to your CE modifier each round; props ×2 (×3 at 18th); Punchline range and area doubled.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Comedian"
+    }
+   },
+   "_key": "!items.effects!8lD36BfUqndCBmNA.vCtdvKDhvPS4Vr9t"
+  },
+  {
+   "_id": "cGk3hrOjESNo1wFP",
+   "name": "Cutaway",
+   "img": "modules/jjk5e/icons/techniques/comedian.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Cannot attack unless the attack fits the cutaway gag.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Comedian"
+    }
+   },
+   "_key": "!items.effects!8lD36BfUqndCBmNA.cGk3hrOjESNo1wFP"
+  }
+ ]
 }

@@ -19,10 +19,10 @@
    "9WjeHauKpt0kOIgs": {
     "_id": "9WjeHauKpt0kOIgs",
     "type": "damage",
-    "name": "Bonus Action",
+    "name": "Booed (once per round)",
     "sort": 0,
     "activation": {
-     "type": "bonus",
+     "type": "special",
      "value": 1,
      "condition": "",
      "override": true
@@ -39,6 +39,10 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -107,6 +111,90 @@
      "concentration": false,
      "override": true
     }
+   },
+   "Txjz1RQRrosTHZOK": {
+    "_id": "Txjz1RQRrosTHZOK",
+    "type": "utility",
+    "name": "Initiative 20: cutaway",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "enemy",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "hg0D9bb3p7VgiyAp",
+      "onSave": false
+     }
+    ]
+   },
+   "lwDPiKBBO4ZbmZfr": {
+    "_id": "lwDPiKBBO4ZbmZfr",
+    "type": "utility",
+    "name": "Tell a joke (full turn): Persuasion vs Insight",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "roll": {
+     "formula": "1d20 + @skills.per.total",
+     "name": "Joke (Persuasion)",
+     "prompt": false,
+     "visible": true
+    }
    }
   },
   "uses": {
@@ -165,9 +253,33 @@
     "x3NkVloeCy6AcxFi": 20
    },
    "domainActivity": "x3NkVloeCy6AcxFi",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Creatures that roll lower on Insight (or do not roll) take 'Booed'.",
+   "automation": "automated"
   }
  },
  "folder": "8AlwpNPBMedHlchF",
- "_key": "!items!kCIBMzUknW2TOySQ"
+ "_key": "!items!kCIBMzUknW2TOySQ",
+ "effects": [
+  {
+   "_id": "hg0D9bb3p7VgiyAp",
+   "name": "Cutaway (Stand Up Comedy)",
+   "img": "modules/jjk5e/icons/techniques/comedian-domain.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Cannot attack you unless it fits the gag; acting against the joke means 8d8 psychic (Booed).</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Comedian"
+    }
+   },
+   "_key": "!items.effects!kCIBMzUknW2TOySQ.hg0D9bb3p7VgiyAp"
+  }
+ ]
 }

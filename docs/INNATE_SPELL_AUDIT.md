@@ -6,10 +6,10 @@
 - Utilidad sin efecto configurado: revisar lógica: **103**.
 - Utilidad con efecto: comprobar activación: **15**.
 - Dominio genérico: resolver propiedades particulares: **48**.
-- Salvación sin daño/efecto automático: **27**.
+- Salvación sin daño/efecto automático: **26**.
 - Ataque sin daño propio: comprobar intención: **10**.
-- Mecánica configurada; falta prueba Foundry: **113**.
-- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **44**.
+- Mecánica configurada; falta prueba Foundry: **111**.
+- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **47**.
 
 ## Interpretación
 
@@ -115,10 +115,10 @@
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Comedy | 1 | utility:Action (1 CE); save:Action | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/comedy_Jl4NsvTGrLe6S2DE.json) |
-| Commit to the Bit | 3 | utility:Action (1 CE); utility:Bonus Action (2 CE); save:Action (3 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/commit-to-the-bit_ddEwns90CtDAv2iC.json) |
-| Maximum: Peak Comedy | 11 | utility:Action (10 CE); utility:Action (2 CE); save:Action | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/maximum-peak-comedy_8lD36BfUqndCBmNA.json) |
-| Domain Expansion: Stand Up Comedy | 18 | damage:Bonus Action; utility:Expand Domain (20 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-stand-up-comedy_kCIBMzUknW2TOySQ.json) |
+| Comedy | 1 | utility:Action (1 CE); save:Regain control (end of turn, DC 15 WIS); utility:Gag dodge — Reaction (1 CE) | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/comedy_Jl4NsvTGrLe6S2DE.json) |
+| Commit to the Bit | 3 | utility:Blasting Off — on a melee hit (1 CE); utility:Props — Bonus Action (2 CE); save:Powerful Punchline (3 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/commit-to-the-bit_ddEwns90CtDAv2iC.json) |
+| Maximum: Peak Comedy | 11 | utility:Action (10 CE); damage:Punchline: extra dice (2 CE); save:Cutaway (Action) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/maximum-peak-comedy_8lD36BfUqndCBmNA.json) |
+| Domain Expansion: Stand Up Comedy | 18 | damage:Booed (once per round); utility:Expand Domain (20 CE); utility:Initiative 20: cutaway; utility:Tell a joke (full turn): Persuasion vs Insight | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-stand-up-comedy_kCIBMzUknW2TOySQ.json) |
 
 ### Construction (5 spells)
 

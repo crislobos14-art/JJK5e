@@ -23,34 +23,54 @@
   "activities": {
    "Y4YJ3hjkkDPDMKRq": {
     "_id": "Y4YJ3hjkkDPDMKRq",
-    "type": "damage",
-    "name": "Action (5 CE)",
+    "type": "save",
+    "name": "Deadpan — Reaction (5 CE)",
     "sort": 0,
+    "img": null,
     "activation": {
-     "type": "action",
+     "type": "reaction",
      "value": 1,
-     "condition": ""
+     "condition": "A creature tries to teleport, avoid damage or do something impossible (it fails on a failed save)",
+     "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
-     }
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
      "value": "60",
-     "units": "ft"
+     "units": "ft",
+     "override": true
     },
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "save": {
+     "ability": [
+      "wis",
+      "cha"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
      }
     },
-    "duration": {
-     "units": "inst"
-    },
     "damage": {
+     "onSave": "none",
      "parts": [
       {
        "number": 2,
@@ -63,12 +83,11 @@
         "enabled": false,
         "formula": ""
        },
-       "scaling": {
-        "number": 1
-       }
+       "scaling": {}
       }
      ]
-    }
+    },
+    "useConditionText": "false"
    }
   }
  },
@@ -91,7 +110,8 @@
       "Comedian"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
