@@ -18,8 +18,8 @@
   "activities": {
    "CSZMCFNURLLanC5o": {
     "_id": "CSZMCFNURLLanC5o",
-    "type": "save",
-    "name": "Action",
+    "type": "attack",
+    "name": "Action (1+ CE)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -30,7 +30,85 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "10"
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": null,
+       "denomination": null,
+       "bonus": "",
+       "types": [
+        "slashing"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "(@prof)d10"
+       },
+       "scaling": {
+        "mode": "whole",
+        "formula": "1d10"
+       }
+      }
+     ]
+    },
+    "attack": {
+     "ability": "",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "melee",
+      "classification": "spell"
+     }
+    },
+    "effects": [],
+    "midiProperties": {
+     "triggeredActivityId": "yYEZ6bLNOZFpVS1A",
+     "triggeredActivityTargets": "hitTargets",
+     "triggeredActivityRollAs": "self",
+     "triggeredActivityConsume": false,
+     "triggeredActivityConfigure": false
+    }
+   },
+   "yYEZ6bLNOZFpVS1A": {
+    "_id": "yYEZ6bLNOZFpVS1A",
+    "type": "save",
+    "name": "Action — save",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "10"
      },
      "spellSlot": false
     },
@@ -109,7 +187,13 @@
   "jjk5e": {
    "technique": "Shrine",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceCosts": {
+    "CSZMCFNURLLanC5o": 1
+   },
+   "ceSteps": {
+    "CSZMCFNURLLanC5o": 1
+   }
   }
  },
  "folder": "m9ZssDMA8savxH5G",

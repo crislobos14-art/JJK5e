@@ -19,7 +19,7 @@
    "0XCLedJf9yzGwtvr": {
     "_id": "0XCLedJf9yzGwtvr",
     "type": "save",
-    "name": "Action",
+    "name": "Action (1+ CE)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -30,12 +30,14 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "max(1, max(@abilities.wis.mod, @abilities.cha.mod))"
      },
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "value": "30",
+     "units": "ft",
      "override": true
     },
     "target": {
@@ -67,7 +69,23 @@
     },
     "damage": {
      "onSave": "half",
-     "parts": []
+     "parts": [
+      {
+       "number": 3,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "force"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
     },
     "effects": [
      {
@@ -127,7 +145,13 @@
   "jjk5e": {
    "technique": "Limitless",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceCosts": {
+    "0XCLedJf9yzGwtvr": 1
+   },
+   "ceSteps": {
+    "0XCLedJf9yzGwtvr": 1
+   }
   }
  },
  "effects": [

@@ -103,7 +103,9 @@
      }
     },
     "range": {
-     "units": "self"
+     "value": "30",
+     "units": "ft",
+     "override": true
     },
     "target": {},
     "duration": {
@@ -142,7 +144,9 @@
      }
     },
     "range": {
-     "units": "self"
+     "value": "30",
+     "units": "ft",
+     "override": true
     },
     "target": {},
     "duration": {

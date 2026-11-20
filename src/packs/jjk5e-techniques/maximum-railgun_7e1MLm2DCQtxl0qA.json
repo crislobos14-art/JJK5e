@@ -18,12 +18,87 @@
   "activities": {
    "IM9qKBX6wgzaffo1": {
     "_id": "IM9qKBX6wgzaffo1",
-    "type": "save",
+    "type": "attack",
     "name": "Action (8 CE)",
     "sort": 0,
     "activation": {
      "type": "action",
      "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "120",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": 8,
+       "denomination": 12,
+       "bonus": "",
+       "types": [
+        "piercing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    },
+    "effects": [],
+    "attack": {
+     "ability": "",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "midiProperties": {
+     "triggeredActivityId": "9GVsHWBEldEVcJvW",
+     "triggeredActivityTargets": "hitTargets",
+     "triggeredActivityRollAs": "self",
+     "triggeredActivityConsume": false,
+     "triggeredActivityConfigure": false
+    }
+   },
+   "9GVsHWBEldEVcJvW": {
+    "_id": "9GVsHWBEldEVcJvW",
+    "type": "save",
+    "name": "Action — save",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
      "condition": "",
      "override": true
     },
@@ -59,32 +134,16 @@
       "formula": ""
      }
     },
-    "damage": {
-     "onSave": "half",
-     "parts": [
-      {
-       "number": 8,
-       "denomination": 12,
-       "bonus": "",
-       "types": [
-        "piercing"
-       ],
-       "custom": {
-        "enabled": false,
-        "formula": ""
-       },
-       "scaling": {
-        "number": 1
-       }
-      }
-     ]
-    },
     "effects": [
      {
       "_id": "oPhoMAdwgo36g2Dd",
       "onSave": false
      }
-    ]
+    ],
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
    }
   },
   "uses": {

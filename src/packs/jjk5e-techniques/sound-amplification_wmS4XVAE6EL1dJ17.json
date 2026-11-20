@@ -18,12 +18,87 @@
   "activities": {
    "CdEOvhfEdsw1Axiq": {
     "_id": "CdEOvhfEdsw1Axiq",
-    "type": "save",
+    "type": "attack",
     "name": "Action (1 CE)",
     "sort": 0,
     "activation": {
      "type": "action",
      "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "thunder"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    },
+    "attack": {
+     "ability": "",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "effects": [],
+    "midiProperties": {
+     "triggeredActivityId": "4rqeXMwiiEKlho4p",
+     "triggeredActivityTargets": "hitTargets",
+     "triggeredActivityRollAs": "self",
+     "triggeredActivityConsume": false,
+     "triggeredActivityConfigure": false
+    }
+   },
+   "4rqeXMwiiEKlho4p": {
+    "_id": "4rqeXMwiiEKlho4p",
+    "type": "save",
+    "name": "Action — save",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
      "condition": "",
      "override": true
     },
@@ -61,23 +136,7 @@
     },
     "damage": {
      "onSave": "none",
-     "parts": [
-      {
-       "number": 2,
-       "denomination": 10,
-       "bonus": "",
-       "types": [
-        "thunder"
-       ],
-       "custom": {
-        "enabled": false,
-        "formula": ""
-       },
-       "scaling": {
-        "number": 1
-       }
-      }
-     ]
+     "parts": []
     }
    }
   },

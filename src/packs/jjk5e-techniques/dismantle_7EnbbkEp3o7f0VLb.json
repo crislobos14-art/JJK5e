@@ -18,8 +18,8 @@
   "activities": {
    "JFolT83oXSYI2EbK": {
     "_id": "JFolT83oXSYI2EbK",
-    "type": "utility",
-    "name": "Action (1 CE)",
+    "type": "attack",
+    "name": "Action (1+ CE)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -30,12 +30,14 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "@prof"
      },
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "value": "120",
+     "units": "ft",
      "override": true
     },
     "target": {
@@ -44,6 +46,38 @@
     "duration": {
      "units": "inst",
      "override": true
+    },
+    "attack": {
+     "ability": "",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 12,
+       "bonus": "",
+       "types": [
+        "slashing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
     }
    }
   },
@@ -87,7 +121,30 @@
    },
    "technique": "Shrine",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceSteps": {
+    "JFolT83oXSYI2EbK": 1
+   },
+   "dmgScale": {
+    "JFolT83oXSYI2EbK": [
+     [
+      1,
+      "1d12"
+     ],
+     [
+      6,
+      "2d12"
+     ],
+     [
+      11,
+      "3d12"
+     ],
+     [
+      18,
+      "4d12"
+     ]
+    ]
+   }
   }
  },
  "folder": "m9ZssDMA8savxH5G",

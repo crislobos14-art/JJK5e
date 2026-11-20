@@ -36,7 +36,8 @@
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "value": "150",
+     "units": "ft",
      "override": true
     },
     "target": {
@@ -56,8 +57,23 @@
      }
     },
     "damage": {
-     "includeBase": false,
-     "parts": []
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 6,
+       "bonus": "@mod",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
     }
    }
   },
@@ -104,7 +120,31 @@
    },
    "technique": "Cursed Cannon",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "dmgScale": {
+    "GRtFwNVKyLM2wqbq": [
+     [
+      1,
+      "2d6"
+     ],
+     [
+      3,
+      "3d6"
+     ],
+     [
+      6,
+      "4d8"
+     ],
+     [
+      11,
+      "5d10"
+     ],
+     [
+      18,
+      "6d12"
+     ]
+    ]
+   }
   }
  },
  "folder": "jTg0Bf76dJeyMkqJ",

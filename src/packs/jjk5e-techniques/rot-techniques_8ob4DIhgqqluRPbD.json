@@ -88,7 +88,7 @@
    },
    "CNC7UBv3w881mFA1": {
     "_id": "CNC7UBv3w881mFA1",
-    "type": "save",
+    "type": "attack",
     "name": "Action (3 CE)",
     "sort": 100000,
     "activation": {
@@ -105,20 +105,14 @@
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "value": "30",
+     "units": "ft",
      "override": true
     },
     "target": {
-     "template": {
-      "type": "cone",
-      "size": "15",
-      "units": "ft",
-      "count": "1",
-      "contiguous": false
-     },
      "affects": {
       "type": "creature",
-      "choice": false
+      "count": "1"
      },
      "override": true
     },
@@ -126,17 +120,8 @@
      "units": "inst",
      "override": true
     },
-    "save": {
-     "ability": [
-      "con"
-     ],
-     "dc": {
-      "calculation": "spellcasting",
-      "formula": ""
-     }
-    },
     "damage": {
-     "onSave": "half",
+     "includeBase": false,
      "parts": [
       {
        "number": 2,
@@ -152,8 +137,41 @@
        "scaling": {
         "number": 1
        }
+      },
+      {
+       "number": 2,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "acid"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
       }
      ]
+    },
+    "attack": {
+     "ability": "",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "effects": [],
+    "midiProperties": {
+     "triggeredActivityId": "cIQOP4cYVOVLHVjS",
+     "triggeredActivityTargets": "hitTargets",
+     "triggeredActivityRollAs": "self",
+     "triggeredActivityConsume": false,
+     "triggeredActivityConfigure": false
     }
    },
    "hjYydWeoujCBjmxF": {
@@ -210,7 +228,8 @@
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "value": "30",
+     "units": "ft",
      "override": true
     },
     "target": {
@@ -238,6 +257,60 @@
        }
       }
      ]
+    }
+   },
+   "cIQOP4cYVOVLHVjS": {
+    "_id": "cIQOP4cYVOVLHVjS",
+    "type": "save",
+    "name": "Action — save",
+    "sort": 100000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "cone",
+      "size": "15",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
     }
    }
   },

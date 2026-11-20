@@ -35,7 +35,8 @@
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "value": "5",
+     "units": "ft",
      "override": true
     },
     "target": {

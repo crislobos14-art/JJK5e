@@ -50,8 +50,8 @@
    },
    "UFgrZvfA5S0POj5u": {
     "_id": "UFgrZvfA5S0POj5u",
-    "type": "damage",
-    "name": "Special",
+    "type": "attack",
+    "name": "Line of Blood (attack)",
     "sort": 100000,
     "activation": {
      "type": "special",
@@ -89,7 +89,8 @@
        "denomination": 10,
        "bonus": "@mod",
        "types": [
-        "acid"
+        "acid",
+        "necrotic"
        ],
        "custom": {
         "enabled": false,
@@ -99,7 +100,20 @@
         "number": 1
        }
       }
-     ]
+     ],
+     "includeBase": false
+    },
+    "attack": {
+     "ability": "",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
     }
    }
   },

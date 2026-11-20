@@ -50,7 +50,7 @@
    },
    "4paFjPNu3b466ZR7": {
     "_id": "4paFjPNu3b466ZR7",
-    "type": "save",
+    "type": "attack",
     "name": "Action (2 CE)",
     "sort": 100000,
     "activation": {
@@ -67,27 +67,23 @@
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "value": "5",
+     "units": "ft",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
      "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
     },
-    "save": {
-     "ability": [
-      "dex"
-     ],
-     "dc": {
-      "calculation": "spellcasting",
-      "formula": ""
-     }
-    },
     "damage": {
-     "onSave": "half",
+     "includeBase": false,
      "parts": [
       {
        "number": 6,
@@ -106,12 +102,75 @@
       }
      ]
     },
+    "effects": [],
+    "attack": {
+     "ability": "",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "melee",
+      "classification": "spell"
+     }
+    },
+    "midiProperties": {
+     "triggeredActivityId": "jQiw29edvLAZPulD",
+     "triggeredActivityTargets": "hitTargets",
+     "triggeredActivityRollAs": "self",
+     "triggeredActivityConsume": false,
+     "triggeredActivityConfigure": false
+    }
+   },
+   "jQiw29edvLAZPulD": {
+    "_id": "jQiw29edvLAZPulD",
+    "type": "save",
+    "name": "Action — save",
+    "sort": 100000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
     "effects": [
      {
       "_id": "HBIOSOsQ9oLxpNVo",
       "onSave": false
      }
-    ]
+    ],
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
    }
   },
   "uses": {

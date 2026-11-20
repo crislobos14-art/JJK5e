@@ -18,7 +18,7 @@
   "activities": {
    "8VEriIq1GcuVBmFT": {
     "_id": "8VEriIq1GcuVBmFT",
-    "type": "damage",
+    "type": "attack",
     "name": "Action (1 CE)",
     "sort": 0,
     "activation": {
@@ -67,7 +67,20 @@
         "number": 1
        }
       }
-     ]
+     ],
+     "includeBase": false
+    },
+    "attack": {
+     "ability": "",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
     }
    }
   },
@@ -118,7 +131,27 @@
    },
    "technique": "Disaster Tides",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "dmgScale": {
+    "8VEriIq1GcuVBmFT": [
+     [
+      1,
+      "2d8"
+     ],
+     [
+      5,
+      "3d8"
+     ],
+     [
+      11,
+      "4d8"
+     ],
+     [
+      18,
+      "5d8"
+     ]
+    ]
+   }
   }
  },
  "folder": "Ao9OCl7PHP0hxQBD",

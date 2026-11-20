@@ -35,7 +35,7 @@
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "units": "spec",
      "override": true
     },
     "target": {
@@ -84,7 +84,7 @@
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "units": "spec",
      "override": true
     },
     "target": {

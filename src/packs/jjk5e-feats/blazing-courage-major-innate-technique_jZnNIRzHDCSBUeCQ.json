@@ -108,7 +108,9 @@
      }
     },
     "range": {
-     "units": "self"
+     "value": "10",
+     "units": "ft",
+     "override": true
     },
     "target": {},
     "duration": {

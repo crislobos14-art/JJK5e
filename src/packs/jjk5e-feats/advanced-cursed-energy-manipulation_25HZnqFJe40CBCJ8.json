@@ -61,6 +61,60 @@
       "formula": "5"
      }
     }
+   },
+   "hvWsWK2Ud01wnsph": {
+    "_id": "hvWsWK2Ud01wnsph",
+    "type": "damage",
+    "name": "Cursed Strike (1+ CE)",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "@prof"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 12,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
    }
   },
   "prerequisites": {
@@ -71,10 +125,12 @@
  "flags": {
   "jjk5e": {
    "ceSteps": {
-    "uPbOGJpBD1pS1zD7": 1
+    "uPbOGJpBD1pS1zD7": 1,
+    "hvWsWK2Ud01wnsph": 1
    },
    "ceCosts": {
-    "uPbOGJpBD1pS1zD7": 1
+    "uPbOGJpBD1pS1zD7": 1,
+    "hvWsWK2Ud01wnsph": 1
    },
    "prereq": {
     "features": [

@@ -18,7 +18,7 @@
   "activities": {
    "fQhKGcKWsr5KPuJW": {
     "_id": "fQhKGcKWsr5KPuJW",
-    "type": "damage",
+    "type": "attack",
     "name": "Action (1 CE)",
     "sort": 0,
     "activation": {
@@ -35,7 +35,8 @@
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "value": "20",
+     "units": "ft",
      "override": true
     },
     "target": {
@@ -62,7 +63,20 @@
         "number": 1
        }
       }
-     ]
+     ],
+     "includeBase": false
+    },
+    "attack": {
+     "ability": "",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
     }
    }
   },

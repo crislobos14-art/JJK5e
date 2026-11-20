@@ -38,7 +38,8 @@
      }
     },
     "range": {
-     "units": "self"
+     "units": "spec",
+     "override": true
     },
     "target": {},
     "duration": {
@@ -75,7 +76,8 @@
      }
     },
     "range": {
-     "units": "self"
+     "units": "spec",
+     "override": true
     },
     "target": {},
     "duration": {

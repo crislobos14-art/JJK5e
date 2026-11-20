@@ -76,7 +76,9 @@
      }
     },
     "range": {
-     "units": "self"
+     "value": "30",
+     "units": "ft",
+     "override": true
     },
     "target": {},
     "duration": {
@@ -111,6 +113,64 @@
        }
       }
      ]
+    }
+   },
+   "gb27jJ6YPij5sC8U": {
+    "_id": "gb27jJ6YPij5sC8U",
+    "type": "attack",
+    "name": "Hypothermic Touch (attack)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "attack": {
+     "ability": "",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "melee",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": []
+    },
+    "midiProperties": {
+     "triggeredActivityId": "TwHrX3jWHk1dqtBs",
+     "triggeredActivityTargets": "hitTargets",
+     "triggeredActivityRollAs": "self",
+     "triggeredActivityConsume": false,
+     "triggeredActivityConfigure": false
     }
    }
   }

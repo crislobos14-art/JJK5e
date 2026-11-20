@@ -88,6 +88,57 @@
      "concentration": false,
      "override": true
     }
+   },
+   "e2jFI68e746zTO4m": {
+    "_id": "e2jFI68e746zTO4m",
+    "type": "damage",
+    "name": "Initiative 20: Lesser Regalia",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "enemy",
+      "choice": false
+     },
+     "override": true
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 8,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
    }
   },
   "uses": {

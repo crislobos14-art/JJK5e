@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.22.2
+- Fixed: techniques that spend extra Cursed Energy ("1+ CE") asked for spell slots instead of the extra CE, so the
+  extra damage could not be chosen. Technique spells no longer use spell slots at all.
+- Fixed: 186 technique and feat activities that target other creatures had range "self" (Midi-QOL targeted the
+  caster); their range now comes from the text.
+- Fixed techniques: Granite Blast (damage was missing), Tides of Disaster, Nail Projectile and Dismantle (now attack
+  rolls), Lapse Blue (damage, area and CE cost), Wing King lines of blood, Railgun, Sound Amplification, Rotten Blood
+  Beam and Cleave (attack roll first, then the save; with Midi-QOL the save follows the hit automatically),
+  Aircraft Hair, Hypothermic Touch, Wing King Imitation, Cursed Strike.
+- Added missing rolls: Unrelenting Ring of Spirit and Cursed Soul Armory initiative 20 damage, Manji Kick save,
+  Womb Profusion absorb save.
+
 ## 1.22.1
 - Fixed: technique feats with the same name in two techniques (Blood Production, Shooting Star, Shadow User) were
   shown for the wrong technique.

@@ -45,6 +45,54 @@
      "units": "inst",
      "override": true
     }
+   },
+   "nRz5TtM7pnHLQl3u": {
+    "_id": "nRz5TtM7pnHLQl3u",
+    "type": "save",
+    "name": "Manji Kick",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "",
+      "formula": "8 + @prof + max(@abilities.str.mod, @abilities.dex.mod)"
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
    }
   },
   "uses": {

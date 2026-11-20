@@ -9,7 +9,7 @@
  * - JJK panel on character sheets, Spanish / English UI, effect expiry (unless Times Up is active).
  */
 const MODULE_ID = "jjk5e";
-const DATA_VERSION = "1.22.1";
+const DATA_VERSION = "1.22.2";
 const FOLDER_NAME = "JJK 5e V.6";
 const ICONS = `modules/${MODULE_ID}/icons`;
 
@@ -4190,4 +4190,23 @@ Hooks.once("init", () => {
 
 Hooks.once("ready", () => {
   Object.assign(game.modules.get(MODULE_ID).api ?? {}, { syncTokenAuras, domainSceneFX, aaHandles, vaeButtons });
+});
+
+/* ---- 1.22.2: Innate Technique spells never use spell slots ---------------------------------------------- */
+/* dnd5e treats any spell activity that can scale as needing a spell slot: the usage dialog then offered the
+   caster's spell slots (none for JJK classes) instead of the "extra CE" scaling field, so "1+ CE" techniques could
+   not spend more CE. Technique spells scale with Cursed Energy, not slots. */
+Hooks.once("setup", () => {
+  try {
+    const proto = globalThis.dnd5e?.dataModels?.activity?.BaseActivityData?.prototype;
+    const desc = proto && Object.getOwnPropertyDescriptor(proto, "requiresSpellSlot");
+    if (!desc?.get || desc.get._jjk5e) return;
+    const original = desc.get;
+    const patched = function () {
+      if (this.item?.type === "spell" && this.item.system?.method === "technique") return false;
+      return original.call(this);
+    };
+    patched._jjk5e = true;
+    Object.defineProperty(proto, "requiresSpellSlot", { ...desc, get: patched });
+  } catch (err) { console.error(`${MODULE_ID} | technique spell slots`, err); }
 });
