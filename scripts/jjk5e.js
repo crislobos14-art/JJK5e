@@ -11,7 +11,7 @@
 import { activityCECost, ceTransaction, blackFlashCheck, clashRoundsFromRefinement, vowBlocksUsage } from "./jjk5e-rules.mjs";
 
 const MODULE_ID = "jjk5e";
-const DATA_VERSION = "1.23.0";
+const DATA_VERSION = "1.24.0";
 const FOLDER_NAME = "JJK 5e V.6";
 const ICONS = `modules/${MODULE_ID}/icons`;
 
