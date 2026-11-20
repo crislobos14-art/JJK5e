@@ -829,14 +829,39 @@ async function promptCE(mode = "spend", actor) {
   return mode === "spend" ? spendCE(actor, n, t("CE.Spent")) : spendCE(actor, -n, t("CE.Regained"));
 }
 
+/** Exchange actual unused class Hit Dice for CE (V.6: 1 HD => 1 CE, half total HD cap). */
 async function shortRestCE(actor) {
   actor = requireActor(actor);
-  if (!actor) return;
+  if (!actor || !actor.isOwner) return;
+  const pool = findPool(actor);
+  if (!pool) return ui.notifications.warn(t("Notify.NoPool", { name: actor.name }));
   const classes = actor.items.filter((i) => i.type === "class");
-  const maxHD = classes.reduce((tot, c) => tot + (Number(c.system.levels) || 0), 0);
-  const cap = Math.floor(maxHD / 2);
+  const total = classes.reduce((n, c) => n + Math.max(0, Number(c.system.levels) || 0), 0);
+  const available = classes.reduce((n, c) =>
+    n + Math.max(0, (Number(c.system.levels) || 0) - (Number(c.system.hd?.spent) || 0)), 0);
+  const missingCE = Math.max(0, poolMax(pool) - poolValue(pool));
+  const cap = Math.min(Math.floor(total / 2), available, Math.floor(missingCE));
+  if (cap < 1) {
+    ui.notifications.warn("JJK 5e: No usable Hit Dice or missing Cursed Energy.");
+    return;
+  }
   const n = Math.min(cap, await promptNumber(t("CE.ShortRestTitle"), t("CE.ShortRestPrompt", { cap })));
-  if (n > 0) await spendCE(actor, -n, t("CE.ShortRestLabel", { n }));
+  if (!Number.isSafeInteger(n) || n < 1) return;
+  const ok = await confirmDialog(t("CE.ShortRestTitle"),
+    `<p>Consume ${n} class Hit Dice to restore ${n} Cursed Energy?</p>`);
+  if (!ok) return;
+  let left = n;
+  for (const cls of classes) {
+    if (!left) break;
+    const spent = Number(cls.system.hd?.spent) || 0;
+    const usable = Math.max(0, (Number(cls.system.levels) || 0) - spent);
+    const take = Math.min(usable, left);
+    if (!take) continue;
+    await cls.update({ "system.hd.spent": spent + take });
+    left -= take;
+  }
+  if (left) return ui.notifications.error("JJK 5e: Hit Dice allocation incomplete; GM review required.");
+  await spendCE(actor, -n, t("CE.ShortRestLabel", { n }));
 }
 
 async function negativeEmotion(actor) {
@@ -1379,6 +1404,20 @@ async function expireEffects() {
   }
 }
 
+/** Remove only the exhaustion levels this module previously added for mutual vows. */
+async function expireVowExhaustion() {
+  if (!isActiveGM()) return;
+  const now = Number(game.time?.worldTime) || 0;
+  for (const actor of game.actors?.contents ?? []) {
+    const penalty = actor.getFlag(MODULE_ID, "mutualVowExhaustion");
+    if (!penalty || now < (Number(penalty.expiry) || Infinity)) continue;
+    const amount = Math.max(0, Number(penalty.amount) || 0);
+    const exhaustion = Number(actor.system.attributes?.exhaustion) || 0;
+    await actor.update({ "system.attributes.exhaustion": Math.max(0, exhaustion - amount) });
+    await actor.unsetFlag(MODULE_ID, "mutualVowExhaustion");
+  }
+}
+
 /* -------------------------------------------- */
 /*  JJK Panel                                    */
 /* -------------------------------------------- */
@@ -1683,7 +1722,7 @@ Hooks.once("ready", async () => {
     const n = actor.items.reduce((tot, i) => tot + (Number(i.flags?.jjk5e?.srRegainCE) || 0), 0);
     if (n > 0 && findPool(actor)) await spendCE(actor, -n, t("CE.ShortRestRestore", { n }));
   });
-  Hooks.on("updateWorldTime", () => expireEffects());
+  Hooks.on("updateWorldTime", () => { expireEffects(); expireVowExhaustion(); });
 
   Hooks.on("renderActorSheet", (app, html) => addHeaderButton(app, html));
   Hooks.on("renderActorSheetV2", (app, element) => addHeaderButton(app, element));
