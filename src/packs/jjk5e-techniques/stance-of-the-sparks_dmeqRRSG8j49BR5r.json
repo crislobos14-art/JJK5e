@@ -18,9 +18,10 @@
   "activities": {
    "9XRPWqUPwSnDQjjn": {
     "_id": "9XRPWqUPwSnDQjjn",
-    "type": "attack",
-    "name": "Action",
+    "type": "utility",
+    "name": "Enter Stance of the Sparks (action)",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "action",
      "value": 1,
@@ -30,34 +31,31 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
-    },
-    "range": {
-     "units": "spec",
-     "override": true
-    },
-    "target": {
-     "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
     },
-    "attack": {
-     "ability": "spellcasting",
-     "bonus": "",
-     "flat": false,
-     "type": {
-      "value": "ranged",
-      "classification": "spell"
-     }
+    "range": {
+     "units": "self",
+     "override": true
     },
-    "damage": {
-     "includeBase": false,
-     "parts": []
-    }
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "Tv8TSbPZOrjfrt5I",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -97,9 +95,44 @@
   "jjk5e": {
    "technique": "Divergent Fist",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "z0OBRtMvDoArKlLl",
- "_key": "!items!dmeqRRSG8j49BR5r"
+ "_key": "!items!dmeqRRSG8j49BR5r",
+ "effects": [
+  {
+   "_id": "Tv8TSbPZOrjfrt5I",
+   "name": "Stance of the Sparks",
+   "img": "modules/jjk5e/icons/techniques/divergent-fist.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Speed 0; one attack next turn that rolls for Black Flash even without a crit, at advantage.</p>",
+   "changes": [
+    {
+     "key": "system.attributes.movement.all",
+     "mode": 0,
+     "value": "0",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 2
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Divergent Fist"
+    },
+    "dae": {
+     "specialDuration": [
+      "1Attack"
+     ]
+    }
+   },
+   "_key": "!items.effects!dmeqRRSG8j49BR5r.Tv8TSbPZOrjfrt5I"
+  }
+ ]
 }

@@ -19,7 +19,7 @@
    "53YDe0Ck0x7iSj6P": {
     "_id": "53YDe0Ck0x7iSj6P",
     "type": "utility",
-    "name": "Action (8 CE)",
+    "name": "Lay egg (8 CE, −1 per creature devoured in 8 h)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -35,10 +35,14 @@
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "value": "5",
+     "units": "ft",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
@@ -87,7 +91,9 @@
    },
    "technique": "Disaster Vermin",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Egg AC = your CE DC, HP = 2 × level. Die within 1 hour: reborn at half max HP with remaining CE, no gear.",
+   "automation": "automated"
   }
  },
  "folder": "THumTyfrAaZo0XzQ",

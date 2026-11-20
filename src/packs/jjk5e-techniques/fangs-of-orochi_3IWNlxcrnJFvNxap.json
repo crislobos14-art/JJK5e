@@ -19,7 +19,7 @@
    "7d2VFbEUkGc1ICIn": {
     "_id": "7d2VFbEUkGc1ICIn",
     "type": "utility",
-    "name": "Action",
+    "name": "Summon Fangs (1 CE each, up to 8)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -30,7 +30,8 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "8"
      },
      "spellSlot": false
     },
@@ -41,8 +42,7 @@
     },
     "target": {
      "affects": {
-      "type": "creature",
-      "count": "1"
+      "type": "self"
      },
      "override": true
     },
@@ -96,7 +96,15 @@
   "jjk5e": {
    "technique": "Eight Heads",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceCosts": {
+    "7d2VFbEUkGc1ICIn": 1
+   },
+   "ceSteps": {
+    "7d2VFbEUkGc1ICIn": 1
+   },
+   "automationNotes": "Drag the Fang of Orochi actor; command all as a bonus action; HP 20 at 11th; destroyed fangs return after 1 minute.",
+   "automation": "automated"
   }
  },
  "folder": "DMcMPNJMAkcTYNF8",

@@ -1,111 +1,114 @@
 {
-  "_id": "Gnvd68sXDmEW2FWO",
-  "name": "Collective Will",
-  "type": "spell",
-  "img": "modules/jjk5e/icons/techniques/eight-heads.svg",
-  "system": {
-    "description": {
-      "value": "<p><em>Eight Heads — Innate Technique (3rd level)</em></p><p>At 3rd level, when you make an Intelligence, Wisdom, or Charisma  ability check or saving throw, you can spend 1 cursed energy to reroll and must use the new roll. You can use this feature up to 8 times per long rest.  </p>",
-      "chat": ""
-    },
-    "source": {
-      "book": "JJK 5e V.6",
-      "page": "",
-      "custom": "",
-      "license": "CC BY-NC-SA 4.0",
-      "rules": "2014"
-    },
-    "activities": {
-      "2kNNSi7n5371fZoR": {
-        "_id": "2kNNSi7n5371fZoR",
-        "type": "utility",
-        "name": "Triggered reroll (1 CE; 1/8 uses)",
-        "sort": 0,
-        "activation": {
-          "type": "special",
-          "condition": "Immediately after an Intelligence, Wisdom or Charisma ability check or saving throw",
-          "override": true
-        },
-        "consumption": {
-          "targets": [
-            {
-              "type": "itemUses",
-              "target": "",
-              "value": "1"
-            }
-          ],
-          "scaling": {
-            "allowed": false
-          },
-          "spellSlot": false
-        },
-        "range": {
-          "units": "self",
-          "override": true
-        },
-        "target": {
-          "override": true
-        },
-        "duration": {
-          "units": "inst",
-          "override": true
-        },
-        "roll": {
-          "formula": "1d20",
-          "name": "Replacement d20 (apply the original modifiers)",
-          "prompt": false,
-          "visible": true
-        }
-      }
-    },
-    "uses": {
-      "max": "8",
-      "spent": 0,
-      "recovery": [
-        {
-          "period": "lr",
-          "type": "recoverAll"
-        }
-      ]
-    },
-    "level": 2,
-    "school": "jjk",
-    "method": "technique",
-    "prepared": 1,
-    "ability": "",
-    "properties": [],
-    "materials": {
-      "value": "",
-      "consumed": false,
-      "cost": 0,
-      "supply": 0
-    },
+ "_id": "Gnvd68sXDmEW2FWO",
+ "name": "Collective Will",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/eight-heads.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Eight Heads — Innate Technique (3rd level)</em></p><p>At 3rd level, when you make an Intelligence, Wisdom, or Charisma  ability check or saving throw, you can spend 1 cursed energy to reroll and must use the new roll. You can use this feature up to 8 times per long rest.  </p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "2kNNSi7n5371fZoR": {
+    "_id": "2kNNSi7n5371fZoR",
+    "type": "utility",
+    "name": "Triggered reroll (1 CE; 1/8 uses)",
+    "sort": 0,
     "activation": {
-      "type": "action",
-      "value": 1,
-      "condition": "",
-      "override": true
+     "type": "special",
+     "condition": "Immediately after an Intelligence, Wisdom or Charisma ability check or saving throw",
+     "override": true
     },
-    "duration": {
-      "units": "inst"
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1"
+      }
+     ],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
     },
     "range": {
-      "units": "self",
-      "override": true
+     "units": "self",
+     "override": true
     },
-    "target": {},
-    "sourceItem": ""
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "roll": {
+     "formula": "1d20",
+     "name": "Replacement d20 (apply the original modifiers)",
+     "prompt": false,
+     "visible": true
+    },
+    "useConditionText": "reaction === \"isSave\""
+   }
   },
-  "flags": {
-    "jjk5e": {
-      "ceCosts": {
-        "2kNNSi7n5371fZoR": 1
-      },
-      "technique": "Eight Heads",
-      "level": 3,
-      "spellFrom": "feat"
+  "uses": {
+   "max": "8",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
     }
+   ]
   },
-  "folder": "DMcMPNJMAkcTYNF8",
-  "_key": "!items!Gnvd68sXDmEW2FWO"
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "2kNNSi7n5371fZoR": 1
+   },
+   "technique": "Eight Heads",
+   "level": 3,
+   "spellFrom": "feat",
+   "automationNotes": "INT/WIS/CHA checks or saves only; must use the new roll.",
+   "automation": "automated"
+  }
+ },
+ "folder": "DMcMPNJMAkcTYNF8",
+ "_key": "!items!Gnvd68sXDmEW2FWO"
 }

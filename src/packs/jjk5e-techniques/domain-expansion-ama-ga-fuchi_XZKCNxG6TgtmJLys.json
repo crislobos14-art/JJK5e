@@ -58,6 +58,102 @@
      "concentration": false,
      "override": true
     }
+   },
+   "uGy8WOOKOdVVoNea": {
+    "_id": "uGy8WOOKOdVVoNea",
+    "type": "utility",
+    "name": "Initiative 20: Orochi bites (1d8 creatures)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "roll": {
+     "formula": "1d8",
+     "name": "Creatures bitten",
+     "prompt": false,
+     "visible": true
+    }
+   },
+   "ewxv9sb7AId0jioz": {
+    "_id": "ewxv9sb7AId0jioz",
+    "type": "damage",
+    "name": "Orochi bite",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "enemy",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "damage": {
+     "parts": [
+      {
+       "number": 4,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "piercing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
    }
   },
   "uses": {
@@ -116,7 +212,9 @@
     "cPbKSWALLWbfQa6a": 20
    },
    "domainActivity": "cPbKSWALLWbfQa6a",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Bite damage uses 4d10 piercing as a stand-in; use the Yamata no Orochi stat block's bite if you have it.",
+   "automation": "automated"
   }
  },
  "folder": "DMcMPNJMAkcTYNF8",

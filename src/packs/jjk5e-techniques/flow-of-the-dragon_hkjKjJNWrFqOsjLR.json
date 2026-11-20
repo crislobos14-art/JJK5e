@@ -24,9 +24,43 @@
  "flags": {
   "jjk5e": {
    "technique": "Dragon Vein",
-   "level": 1
+   "level": 1,
+   "automation": "automated"
   }
  },
  "folder": "xkcQZ0iOxpoEyfI2",
- "_key": "!items!hkjKjJNWrFqOsjLR"
+ "_key": "!items!hkjKjJNWrFqOsjLR",
+ "effects": [
+  {
+   "_id": "o2AWPjB0aeQHAN04",
+   "name": "Flow of the Dragon",
+   "img": "modules/jjk5e/icons/techniques/dragon-vein.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>While your feet touch the ground: +prof to melee damage; advantage vs forced movement.</p>",
+   "changes": [
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ @prof",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.msak.damage",
+     "mode": 2,
+     "value": "+ @prof",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": "Dragon Vein"
+    }
+   },
+   "_key": "!items.effects!hkjKjJNWrFqOsjLR.o2AWPjB0aeQHAN04"
+  }
+ ]
 }

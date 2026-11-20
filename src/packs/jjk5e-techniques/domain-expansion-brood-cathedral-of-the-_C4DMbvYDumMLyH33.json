@@ -19,7 +19,7 @@
    "fsZvjThbLlmGO7cM": {
     "_id": "fsZvjThbLlmGO7cM",
     "type": "damage",
-    "name": "Special",
+    "name": "Initiative 20: eggs burst (3 creatures, 6d10)",
     "sort": 0,
     "activation": {
      "type": "special",
@@ -39,6 +39,11 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "enemy",
+      "count": "3",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -165,7 +170,9 @@
     "P1nUkQL96PfNSqRn": 20
    },
    "domainActivity": "P1nUkQL96PfNSqRn",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "A creature that dies in the domain becomes an extra Insect Swarm (doesn't count against the limit).",
+   "automation": "automated"
   }
  },
  "folder": "THumTyfrAaZo0XzQ",

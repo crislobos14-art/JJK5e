@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.46.0 — Técnica por técnica: Vermin, Divergent Fist, Dragon Vein, Earth, Eight Heads, Esoteric Art
+- **Disaster Vermin**: enjambres e insectos con bolsa, fusión, huevo de Parthenogenesis, dominio (3 objetivos, 6d10), aura de Stillbirth Colony.
+- **Divergent Fist**: Divergent Flow al impactar (daño diferido), desorientación con CON, Manji Kick (CD propia, aturdido hasta su turno), One-Two, Weave como reacción de esquivar, Stance of the Sparks.
+- **Dragon Vein**: +comp. al daño cuerpo a cuerpo en el suelo; Ley Line (−comp. al daño recibido) y resistencia por reacción; Earth Dragon Soul (1d8→3d8); World Anchor (PG temp y resistencia total); Ascetic Void (vuelo, curación por turno, súper salvación DES a 11.º); dominio.
+- **Earth Manipulation**: cubos de piedra, Rock Blast, Earthen Armor (+CA por CE), Tremor (3d10→6d10), Wall of Stone, Stone Arms con aplastamiento, dominio con grieta y púas, Disintegration/Mass Disintegration/Dustify.
+- **Eight Heads**: Eight Lives con usos por descanso (3/4/8) y revivir a mitad de PG; Collective Will (8 usos); Fangs; barrera de Sacrifice con OverTime 10d4; dominio; Reverse Scale.
+- **Esoteric Art**: Cursed Painting con mantenimiento, Impasto Canvas, Sgraffito (Ink Wave, lobo mayor, cuervo), Panoramic Composition, dominio, Artistic Vandalism (50 + 25/CE), Sfumato (desventaja mutua y 2×nivel necrótico por turno).
+- Nuevo marcador `JJKORIGINLEVEL` (nivel del lanzador) en efectos.
+- Automatizados a mano: 125/360. Sin probar en Foundry real.
+
 ## 1.45.0 — Técnica por técnica: Disaster Flames, Storms, Tides y Verdure
 - **Disaster Flames**: cono de 15 pies (2d8→5d8); volcanes (2 CE c/u) y erupción en línea con Xd10 = competencia y apresado con salvación de FUE; Meteor 120 pies (10d4 + 10d6, derribo) con vuelo; dominio 10d8; Heat Extinguishment (reducción 6d8) e Hypothermic Touch encadenado.
 - **Disaster Storms**: cono cortante/trueno; Lightning (3d6→8d6) con salto a 10 pies; Storm Creation con derribo OverTime y desventaja a distancia; Divine Storm Sovereign 3d10 por turno; dominio 6d12; Sunny Day (resistencia a fuego y PG temporales) y Sunshine (6d6→12d6).

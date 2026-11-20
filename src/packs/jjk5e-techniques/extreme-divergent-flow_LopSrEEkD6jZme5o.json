@@ -19,14 +19,108 @@
    "value": "class",
    "subtype": ""
   },
-  "requirements": "Divergent Fist 6"
+  "requirements": "Divergent Fist 6",
+  "activities": {
+   "luov1nB2xff3ALXu": {
+    "_id": "luov1nB2xff3ALXu",
+    "type": "save",
+    "name": "Disorient (CON on Divergent Flow damage)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "hWid2kMvavVpB9lD",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   }
+  }
  },
  "flags": {
   "jjk5e": {
    "technique": "Divergent Fist",
-   "level": 6
+   "level": 6,
+   "automationNotes": "Divergent Flow twice per turn.",
+   "automation": "automated"
   }
  },
  "folder": "z0OBRtMvDoArKlLl",
- "_key": "!items!LopSrEEkD6jZme5o"
+ "_key": "!items!LopSrEEkD6jZme5o",
+ "effects": [
+  {
+   "_id": "hWid2kMvavVpB9lD",
+   "name": "Disoriented",
+   "img": "modules/jjk5e/icons/techniques/divergent-fist.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Next attack at disadvantage (or targets get advantage on its next forced save).</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.disadvantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Divergent Fist"
+    },
+    "dae": {
+     "specialDuration": [
+      "1Attack"
+     ]
+    }
+   },
+   "_key": "!items.effects!LopSrEEkD6jZme5o.hWid2kMvavVpB9lD"
+  }
+ ]
 }

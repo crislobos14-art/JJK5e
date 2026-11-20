@@ -23,8 +23,8 @@
   "activities": {
    "JF4s8lUAEraNzZGp": {
     "_id": "JF4s8lUAEraNzZGp",
-    "type": "damage",
-    "name": "Action (10 CE) — rider",
+    "type": "utility",
+    "name": "Reinforce mortality (10 CE)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -39,41 +39,31 @@
     },
     "range": {
      "value": "60",
-     "units": "ft"
+     "units": "ft",
+     "override": true
     },
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
-     }
+      "count": "1",
+      "choice": true
+     },
+     "override": true
     },
     "duration": {
      "units": "inst"
     },
-    "damage": {
-     "parts": [
-      {
-       "number": null,
-       "denomination": null,
-       "bonus": "",
-       "types": [
-        "necrotic"
-       ],
-       "custom": {
-        "enabled": true,
-        "formula": "max(@abilities.wis.mod, @abilities.cha.mod)"
-       },
-       "scaling": {
-        "number": 1
-       }
-      }
-     ]
-    }
+    "effects": [
+     {
+      "_id": "JNVryoWgOlNKNxWp",
+      "onSave": false
+     }
+    ]
    },
    "frXuserErmvPh55O": {
     "_id": "frXuserErmvPh55O",
     "type": "heal",
-    "name": "Action (12 CE)",
+    "name": "Offering barrier (12 CE): ally heals 10d4 per turn",
     "sort": 100000,
     "activation": {
      "type": "action",
@@ -91,7 +81,14 @@
      "units": "ft",
      "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
     },
@@ -109,7 +106,13 @@
      "scaling": {
       "number": 1
      }
-    }
+    },
+    "effects": [
+     {
+      "_id": "DQZSOqYg5vI2cRog",
+      "onSave": false
+     }
+    ]
    }
   }
  },
@@ -133,10 +136,79 @@
       "Eight Heads"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!koHeg9ayCwa9gXtl"
+ "_key": "!items!koHeg9ayCwa9gXtl",
+ "effects": [
+  {
+   "_id": "JNVryoWgOlNKNxWp",
+   "name": "Mortal",
+   "img": "modules/jjk5e/icons/techniques/eight-heads.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Until a long rest: no healing, auto-fail death saves, +caster's CE mod on necrotic damage taken.</p>",
+   "changes": [
+    {
+     "key": "system.traits.di.value",
+     "mode": 2,
+     "value": "healing",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.fail.deathSave",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dm.amount.necrotic",
+     "mode": 2,
+     "value": "JJKORIGINCEMOD",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Eight Heads"
+    }
+   },
+   "_key": "!items.effects!koHeg9ayCwa9gXtl.JNVryoWgOlNKNxWp"
+  },
+  {
+   "_id": "DQZSOqYg5vI2cRog",
+   "name": "Offering",
+   "img": "modules/jjk5e/icons/techniques/eight-heads.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "value": "turn=start, damageRoll=10d4, damageType=healing, label=Offering",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Eight Heads"
+    }
+   },
+   "_key": "!items.effects!koHeg9ayCwa9gXtl.DQZSOqYg5vI2cRog"
+  }
+ ]
 }

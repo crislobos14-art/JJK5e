@@ -19,7 +19,7 @@
    "gPedh4LMUYgWqxzh": {
     "_id": "gPedh4LMUYgWqxzh",
     "type": "utility",
-    "name": "Action (2 CE)",
+    "name": "Create Insect Swarm (2 CE)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -41,8 +41,7 @@
     },
     "target": {
      "affects": {
-      "type": "creature",
-      "count": "1"
+      "type": "self"
      },
      "override": true
     },
@@ -99,7 +98,9 @@
    },
    "technique": "Disaster Vermin",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Drag the Insect Swarm actor from the compendium; one at a time; command it as a bonus action or it Dodges.",
+   "automation": "automated"
   }
  },
  "folder": "THumTyfrAaZo0XzQ",

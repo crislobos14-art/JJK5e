@@ -18,8 +18,8 @@
   "activities": {
    "TngmakB38s9XNX33": {
     "_id": "TngmakB38s9XNX33",
-    "type": "damage",
-    "name": "Action (6 CE)",
+    "type": "utility",
+    "name": "Sacrifice barrier (6 CE, needs 3+ Fangs)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -35,35 +35,28 @@
      "spellSlot": false
     },
     "range": {
-     "units": "spec",
+     "value": "40",
+     "units": "ft",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
     },
-    "damage": {
-     "parts": [
-      {
-       "number": 10,
-       "denomination": 4,
-       "bonus": "",
-       "types": [
-        "necrotic"
-       ],
-       "custom": {
-        "enabled": false,
-        "formula": ""
-       },
-       "scaling": {
-        "number": 1
-       }
-      }
-     ]
-    }
+    "effects": [
+     {
+      "_id": "IZbK5wZaErtVHVAg",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -106,9 +99,39 @@
    },
    "technique": "Eight Heads",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "DMcMPNJMAkcTYNF8",
- "_key": "!items!QG7cUSxrMY5gk5jI"
+ "_key": "!items!QG7cUSxrMY5gk5jI",
+ "effects": [
+  {
+   "_id": "IZbK5wZaErtVHVAg",
+   "name": "Sacrifice barrier",
+   "img": "modules/jjk5e/icons/techniques/eight-heads.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Trapped: CE save at turn start, 10d4 necrotic (half on save). Humanoid killed: you regain a life (1/week).</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "value": "turn=start, saveAbility=wis|cha, saveDC=JJKORIGINDC, saveDamage=halfdamage, damageRoll=10d4, damageType=necrotic, label=Sacrifice",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Eight Heads"
+    }
+   },
+   "_key": "!items.effects!QG7cUSxrMY5gk5jI.IZbK5wZaErtVHVAg"
+  }
+ ]
 }

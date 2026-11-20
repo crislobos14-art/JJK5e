@@ -23,32 +23,58 @@
   "activities": {
    "gqJLJFDmqWTiSyFt": {
     "_id": "gqJLJFDmqWTiSyFt",
-    "type": "utility",
-    "name": "Action (2 CE)",
+    "type": "damage",
+    "name": "Artistic Vandalism (2 CE): object",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "action",
      "value": 1,
-     "condition": ""
+     "condition": "",
+     "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
-     }
+      "allowed": true,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
      "value": "5",
-     "units": "ft"
+     "units": "ft",
+     "override": true
     },
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
-     }
+      "count": "1",
+      "choice": true
+     },
+     "override": true
     },
-    "duration": {
-     "units": "inst"
+    "effects": [],
+    "damage": {
+     "parts": [
+      {
+       "number": null,
+       "denomination": null,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "50 + 25 * (@scaling - 1)"
+       },
+       "scaling": {}
+      }
+     ]
     }
    }
   }
@@ -72,7 +98,12 @@
       "Esoteric Art"
      ]
     ]
-   }
+   },
+   "ceSteps": {
+    "gqJLJFDmqWTiSyFt": 2
+   },
+   "automationNotes": "Objects/structures only: +2 CE per size above Medium (that extra CE does not add damage); destroyed objects turn to ink.",
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",

@@ -3,13 +3,13 @@
 > Generado desde el compendio y las fuentes. **No certifica ejecución en Foundry ni fidelidad semántica a cada regla**.
 
 - Spells examinados: **360**; técnicas agrupadas: **81**.
-- Utilidad sin efecto configurado: revisar lógica: **86**.
+- Utilidad sin efecto configurado: revisar lógica: **76**.
 - Utilidad con efecto: comprobar activación: **15**.
-- Dominio genérico: resolver propiedades particulares: **40**.
-- Salvación sin daño/efecto automático: **24**.
-- Ataque sin daño propio: comprobar intención: **11**.
-- Mecánica configurada; falta prueba Foundry: **82**.
-- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **102**.
+- Dominio genérico: resolver propiedades particulares: **38**.
+- Salvación sin daño/efecto automático: **23**.
+- Ataque sin daño propio: comprobar intención: **10**.
+- Mecánica configurada; falta prueba Foundry: **73**.
+- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **125**.
 
 ## Interpretación
 
@@ -256,57 +256,57 @@
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Vermin of Disaster | 1 | utility:Action (2 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/vermin-of-disaster_KCq00fhfScjcilZM.json) |
-| Earthen Insect Trance | 3 | utility:Action (2 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/earthen-insect-trance_iPsDZpKgj5u032te.json) |
-| Parthenogenesis | 11 | utility:Action (8 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/parthenogenesis_2TX7VyPgCnFRXgkD.json) |
-| Domain Expansion: Brood Cathedral of the Crawling God | 18 | damage:Special; utility:Expand Domain (20 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-brood-cathedral-of-the-_C4DMbvYDumMLyH33.json) |
+| Vermin of Disaster | 1 | utility:Create Insect Swarm (2 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/vermin-of-disaster_KCq00fhfScjcilZM.json) |
+| Earthen Insect Trance | 3 | utility:Summon pouch insect (2 CE each, up to 2) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/earthen-insect-trance_iPsDZpKgj5u032te.json) |
+| Parthenogenesis | 11 | utility:Lay egg (8 CE, −1 per creature devoured in 8 h) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/parthenogenesis_2TX7VyPgCnFRXgkD.json) |
+| Domain Expansion: Brood Cathedral of the Crawling God | 18 | damage:Initiative 20: eggs burst (3 creatures, 6d10); utility:Expand Domain (20 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-brood-cathedral-of-the-_C4DMbvYDumMLyH33.json) |
 
 ### Divergent Fist (3 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Divergent Flow | 1 | utility:Action (1 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/divergent-flow_WwsOi9d6vXukT6rB.json) |
-| Martial Prowess | 3 | utility:Bonus Action; save:Manji Kick | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/martial-prowess_CrWM1xCTd63nJBUq.json) |
-| Stance of the Sparks | 11 | attack:Action | Ataque sin daño propio: comprobar intención | [JSON](../src/packs/jjk5e-techniques/stance-of-the-sparks_dmeqRRSG8j49BR5r.json) |
+| Divergent Flow | 1 | damage:Divergent Flow (on hit, 1 CE): delayed necrotic | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/divergent-flow_WwsOi9d6vXukT6rB.json) |
+| Martial Prowess | 3 | utility:One-Two (bonus action: two unarmed strikes); save:Manji Kick (on unarmed hit); damage:One-Two: second hit bonus (+3× mod); utility:Weave (Dodge as a reaction) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/martial-prowess_CrWM1xCTd63nJBUq.json) |
+| Stance of the Sparks | 11 | utility:Enter Stance of the Sparks (action) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/stance-of-the-sparks_dmeqRRSG8j49BR5r.json) |
 
 ### Dragon Vein (4 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Ley Line Command | 3 | utility:Bonus Action (3 CE); utility:Reaction (1 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/ley-line-command_qTsOx6OCHUpYLbgX.json) |
-| Earth Dragon Soul | 6 | utility:Reaction (3 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/earth-dragon-soul_XDoCAxQgRPhFISef.json) |
-| World Anchor | 11 | utility:Action (3 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/world-anchor_h8SxUENKo3mSge4y.json) |
-| Domain Expansion: Of Primordial World | 18 | damage:Special; utility:Expand Domain (20 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-of-primordial-world_BOWeUicZygm9sbIU.json) |
+| Ley Line Command | 3 | utility:Ley Line (3 CE, 1 minute); utility:Reinforce: resist triggering damage (1 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/ley-line-command_qTsOx6OCHUpYLbgX.json) |
+| Earth Dragon Soul | 6 | utility:Lock resistance until Ley Line ends (3 CE); damage:Earth Dragon Soul (once per turn on melee hit) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/earth-dragon-soul_XDoCAxQgRPhFISef.json) |
+| World Anchor | 11 | utility:Resist all damage (≤ half HP, 3 CE); heal:Start of turn: temp HP (grounded) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/world-anchor_h8SxUENKo3mSge4y.json) |
+| Domain Expansion: Of Primordial World | 18 | damage:Crushed: teleport or fly >10 ft (5d10 force, once per turn); utility:Expand Domain (20 CE); utility:Domain: permanent Ley Line | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-of-primordial-world_BOWeUicZygm9sbIU.json) |
 
 ### Earth Manipulation (5 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Excavation | 1 | save:Action (1 CE) | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/excavation_AQpmy5BZluKFUBx2.json) |
-| Sculpted Earth | 3 | damage:Action (1 CE); save:Action (3 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/sculpted-earth_CZ2e6aKrHci9L2Qq.json) |
-| Wall of Stone | 6 | utility:Action (4 CE); save:Bonus Action (1 CE) | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/wall-of-stone_G5JohGkx3AABfoyH.json) |
-| Stone Arms | 11 | save:Action (5 CE); utility:Action (1 CE); save:Action | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/stone-arms_pTdglNHJKLO2Srb0.json) |
-| Domain Expansion: Trichiliocosm | 18 | damage:Special; utility:Expand Domain (20 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-trichiliocosm_UrKH3JnnRbRhWS8Q.json) |
+| Excavation | 1 | save:Stone cubes (1 CE each, up to CE mod) | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/excavation_AQpmy5BZluKFUBx2.json) |
+| Sculpted Earth | 3 | attack:Rock Blast (1 CE); save:Tremor (3 CE); attack:Rock Blast, necrotic (2 CE); utility:Earthen Armor (1 CE per +1 AC, max prof) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/sculpted-earth_CZ2e6aKrHci9L2Qq.json) |
+| Wall of Stone | 6 | utility:Wall of Stone (4 CE, ten 10×10 panels); save:Move panels 30 ft (1 CE, DEX or pushed) | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/wall-of-stone_G5JohGkx3AABfoyH.json) |
+| Stone Arms | 11 | save:Action (5 CE); utility:Keep arms (1 CE, start of turn); save:Crush restrained target | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/stone-arms_pTdglNHJKLO2Srb0.json) |
+| Domain Expansion: Trichiliocosm | 18 | damage:Initiative 20: 6d12 + restrained; utility:Expand Domain (20 CE); utility:Reshape: 20-ft chasm (1d10 × 10 ft deep); damage:Spiked terrain: 2d4 per 5 ft moved | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-trichiliocosm_UrKH3JnnRbRhWS8Q.json) |
 
 ### Eight Heads (5 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Eight Lives | 1 | utility:Action (1 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/eight-lives_iexwqjWgin5qIIIF.json) |
-| Collective Will | 3 | utility:Triggered reroll (1 CE; 1/8 uses) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/collective-will_Gnvd68sXDmEW2FWO.json) |
-| Fangs of Orochi | 6 | utility:Action | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/fangs-of-orochi_3IWNlxcrnJFvNxap.json) |
-| Maximum: Sacrifice | 11 | damage:Action (6 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/maximum-sacrifice_QG7cUSxrMY5gk5jI.json) |
-| Domain Expansion: Ama ga Fuchi | 18 | utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-ama-ga-fuchi_XZKCNxG6TgtmJLys.json) |
+| Eight Lives | 1 | heal:Spend a life (1 CE): revive at half HP | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/eight-lives_iexwqjWgin5qIIIF.json) |
+| Collective Will | 3 | utility:Triggered reroll (1 CE; 1/8 uses) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/collective-will_Gnvd68sXDmEW2FWO.json) |
+| Fangs of Orochi | 6 | utility:Summon Fangs (1 CE each, up to 8) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/fangs-of-orochi_3IWNlxcrnJFvNxap.json) |
+| Maximum: Sacrifice | 11 | utility:Sacrifice barrier (6 CE, needs 3+ Fangs) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/maximum-sacrifice_QG7cUSxrMY5gk5jI.json) |
+| Domain Expansion: Ama ga Fuchi | 18 | utility:Expand Domain (20 CE); utility:Initiative 20: Orochi bites (1d8 creatures); damage:Orochi bite | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-ama-ga-fuchi_XZKCNxG6TgtmJLys.json) |
 
 ### Esoteric Art (5 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Cursed Painting | 1 | save:Action (1+ CE) | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/cursed-painting_uTkKYysExKqyTfA0.json) |
-| Impasto Canvas | 3 | save:Action | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/impasto-canvas_geIiULNWftqTgOLM.json) |
-| Sgraffito | 6 | save:Action (2 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/sgraffito_kxqSZAEhS2KvXJZa.json) |
-| Panoramic Composition | 11 | save:Action | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/panoramic-composition_1j8EyDLkddYqXHmE.json) |
-| Domain Expansion: Magnum Opus | 18 | utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-magnum-opus_kUgWQuaoTcYppNWF.json) |
+| Cursed Painting | 1 | save:Cursed Painting (1 CE): DEX or sucked in; utility:Keep creatures inside (1 CE, start of turn) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/cursed-painting_uTkKYysExKqyTfA0.json) |
+| Impasto Canvas | 3 | save:Ink trap; utility:Ink Shikigami: Ink Wolves (1 CE each); utility:Exit Shift (80 ft); utility:Difficult terrain (15 ft); utility:Structure Generation (30 ft cube) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/impasto-canvas_geIiULNWftqTgOLM.json) |
+| Sgraffito | 6 | save:Ink Wave (2 CE): 30-ft cone; utility:Greater Ink Wolf (2 CE); utility:Ink Crow (3 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/sgraffito_kxqSZAEhS2KvXJZa.json) |
+| Panoramic Composition | 11 | save:Panoramic Composition (1 CE per creature) | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/panoramic-composition_1j8EyDLkddYqXHmE.json) |
+| Domain Expansion: Magnum Opus | 18 | utility:Expand Domain (20 CE); utility:Initiative 20: two Impasto Canvas effects | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-magnum-opus_kUgWQuaoTcYppNWF.json) |
 
 ### Explosive Flesh (5 spells)
 

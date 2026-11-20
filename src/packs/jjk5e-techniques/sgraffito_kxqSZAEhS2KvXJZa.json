@@ -19,7 +19,7 @@
    "6Nh37jJYKZ5aLuc4": {
     "_id": "6Nh37jJYKZ5aLuc4",
     "type": "save",
-    "name": "Action (2 CE)",
+    "name": "Ink Wave (2 CE): 30-ft cone",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -40,7 +40,7 @@
     },
     "target": {
      "template": {
-      "type": "radius",
+      "type": "cone",
       "size": "30",
       "units": "ft",
       "count": "1",
@@ -67,7 +67,21 @@
     },
     "damage": {
      "onSave": "none",
-     "parts": []
+     "parts": [
+      {
+       "number": null,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "(@prof)d6"
+       },
+       "scaling": {}
+      }
+     ]
     },
     "effects": [
      {
@@ -75,6 +89,78 @@
       "onSave": false
      }
     ]
+   },
+   "MHkvVUtvTdsZYCgN": {
+    "_id": "MHkvVUtvTdsZYCgN",
+    "type": "utility",
+    "name": "Greater Ink Wolf (2 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
+   },
+   "eDs9XGrpWdPma7os": {
+    "_id": "eDs9XGrpWdPma7os",
+    "type": "utility",
+    "name": "Ink Crow (3 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
    }
   },
   "uses": {
@@ -126,11 +212,15 @@
  "flags": {
   "jjk5e": {
    "ceCosts": {
-    "6Nh37jJYKZ5aLuc4": 2
+    "6Nh37jJYKZ5aLuc4": 2,
+    "MHkvVUtvTdsZYCgN": 2,
+    "eDs9XGrpWdPma7os": 3
    },
    "technique": "Esoteric Art",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Painting manipulation is now a bonus action; traps +2 dice (+4 at 11th); 30-ft terrain; sturdier structures.",
+   "automation": "automated"
   }
  },
  "effects": [
@@ -151,6 +241,11 @@
    "flags": {
     "jjk5e": {
      "condition": "blinded"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnEnd"
+     ]
     }
    },
    "_key": "!items.effects!kxqSZAEhS2KvXJZa.6fWEhCa9V7wwa9MB"

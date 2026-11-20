@@ -1,169 +1,313 @@
 {
-  "_id": "CrWM1xCTd63nJBUq",
-  "name": "Martial Prowess",
-  "type": "spell",
-  "img": "modules/jjk5e/icons/techniques/divergent-fist.svg",
-  "system": {
-    "description": {
-      "value": "<p><em>Divergent Fist — Innate Technique (3rd level)</em></p><p>At 3rd level, your lack of an innate technique has caused you to make up for it with pure martial prowess. Once per round, you can use one of the following abilities:</p>\n<ul>\n<li>\n<p><strong>Manji Kick:</strong> As part of an unarmed strike, drop your knees and rotate your body down to give a massive kick in your opponent's face. On a hit, the opponent must make a Constitution saving throw (DC 8 + your proficiency bonus + your Strength or Dexterity modifier). On a failure, the creature will be stunned until the beginning of their next turn and take twice as much bludgeoning damage from the attack.   </p>\n</li>\n<li>\n<p><strong>One-Two:</strong> As a bonus action, you land a One-Two combo. Make two unarmed attacks. The first damage roll doesn’t add your ability modifier, but on a hit the second gains advantage. The second attack adds three times your Strength or Dexterity modifier to the damage roll if both attacks hit.  </p>\n</li>\n<li>\n<p><strong>Weave:</strong> You enter a defensive stance. You take the dodge action as a reaction instead.</p>\n</li>\n</ul>",
-      "chat": ""
-    },
-    "source": {
-      "book": "JJK 5e V.6",
-      "page": "",
-      "custom": "",
-      "license": "CC BY-NC-SA 4.0",
-      "rules": "2014"
-    },
-    "activities": {
-      "D941KeaQof2fVEWL": {
-        "_id": "D941KeaQof2fVEWL",
-        "type": "utility",
-        "name": "Bonus Action",
-        "sort": 0,
-        "activation": {
-          "type": "bonus",
-          "value": 1,
-          "condition": "",
-          "override": true
-        },
-        "consumption": {
-          "targets": [],
-          "scaling": {
-            "allowed": false
-          },
-          "spellSlot": false
-        },
-        "range": {
-          "units": "self",
-          "override": true
-        },
-        "target": {
-          "override": true
-        },
-        "duration": {
-          "units": "inst",
-          "override": true
-        }
-      },
-      "nRz5TtM7pnHLQl3u": {
-        "_id": "nRz5TtM7pnHLQl3u",
-        "type": "save",
-        "name": "Manji Kick",
-        "sort": 0,
-        "activation": {
-          "type": "special",
-          "value": null,
-          "condition": "As part of a successful unarmed strike; on failed CON save stun until start of target's next turn. Double strike damage is manual.",
-          "override": true
-        },
-        "consumption": {
-          "targets": [],
-          "scaling": {
-            "allowed": false
-          },
-          "spellSlot": false
-        },
-        "duration": {
-          "units": "inst",
-          "override": true
-        },
-        "range": {
-          "value": "5",
-          "units": "ft",
-          "override": true
-        },
-        "target": {
-          "affects": {
-            "type": "creature",
-            "count": "1"
-          },
-          "override": true
-        },
-        "save": {
-          "ability": [
-            "con"
-          ],
-          "dc": {
-            "calculation": "",
-            "formula": "8 + @prof + max(@abilities.str.mod, @abilities.dex.mod)"
-          }
-        },
-        "damage": {
-          "onSave": "none",
-          "parts": []
-        },
-        "effects": [
-          {
-            "_id": "JJKManjiStun0001",
-            "onSave": false
-          }
-        ]
-      }
-    },
-    "uses": {
-      "max": "",
-      "recovery": [],
-      "spent": 0
-    },
-    "level": 2,
-    "school": "jjk",
-    "method": "technique",
-    "prepared": 1,
-    "ability": "",
-    "properties": [],
-    "materials": {
-      "value": "",
-      "consumed": false,
-      "cost": 0,
-      "supply": 0
-    },
+ "_id": "CrWM1xCTd63nJBUq",
+ "name": "Martial Prowess",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/divergent-fist.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Divergent Fist — Innate Technique (3rd level)</em></p><p>At 3rd level, your lack of an innate technique has caused you to make up for it with pure martial prowess. Once per round, you can use one of the following abilities:</p>\n<ul>\n<li>\n<p><strong>Manji Kick:</strong> As part of an unarmed strike, drop your knees and rotate your body down to give a massive kick in your opponent's face. On a hit, the opponent must make a Constitution saving throw (DC 8 + your proficiency bonus + your Strength or Dexterity modifier). On a failure, the creature will be stunned until the beginning of their next turn and take twice as much bludgeoning damage from the attack.   </p>\n</li>\n<li>\n<p><strong>One-Two:</strong> As a bonus action, you land a One-Two combo. Make two unarmed attacks. The first damage roll doesn’t add your ability modifier, but on a hit the second gains advantage. The second attack adds three times your Strength or Dexterity modifier to the damage roll if both attacks hit.  </p>\n</li>\n<li>\n<p><strong>Weave:</strong> You enter a defensive stance. You take the dodge action as a reaction instead.</p>\n</li>\n</ul>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "D941KeaQof2fVEWL": {
+    "_id": "D941KeaQof2fVEWL",
+    "type": "utility",
+    "name": "One-Two (bonus action: two unarmed strikes)",
+    "sort": 0,
     "activation": {
-      "type": "bonus",
-      "value": 1,
-      "condition": "",
-      "override": true
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
     },
-    "duration": {
-      "units": "inst"
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
     },
     "range": {
-      "units": "self",
-      "override": true
+     "units": "self",
+     "override": true
     },
-    "target": {},
-    "sourceItem": ""
-  },
-  "flags": {
-    "jjk5e": {
-      "technique": "Divergent Fist",
-      "level": 3,
-      "spellFrom": "feat"
+    "target": {
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     }
-  },
-  "folder": "z0OBRtMvDoArKlLl",
-  "_key": "!items!CrWM1xCTd63nJBUq",
-  "effects": [
-    {
+   },
+   "nRz5TtM7pnHLQl3u": {
+    "_id": "nRz5TtM7pnHLQl3u",
+    "type": "save",
+    "name": "Manji Kick (on unarmed hit)",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "As part of a successful unarmed strike; on failed CON save stun until start of target's next turn. Double strike damage is manual.",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "",
+      "formula": "8 + @prof + max(@abilities.str.mod, @abilities.dex.mod)"
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    },
+    "effects": [
+     {
       "_id": "JJKManjiStun0001",
-      "name": "Stunned (Manji Kick)",
-      "img": "modules/jjk5e/icons/techniques/divergent-fist.svg",
-      "statuses": [
-        "stunned"
-      ],
-      "changes": [],
-      "transfer": false,
-      "disabled": false,
-      "duration": {
-        "rounds": 1
-      },
-      "description": "Stunned until the beginning of the target's next turn; double unarmed-strike damage must be applied manually.",
-      "flags": {
-        "jjk5e": {
-          "condition": "stunned"
-        }
-      },
-      "_key": "!items.effects!CrWM1xCTd63nJBUq.JJKManjiStun0001"
+      "onSave": false
+     }
+    ],
+    "useConditionText": "reaction === \"isHit\""
+   },
+   "6hV5Q4SAUNS3s32v": {
+    "_id": "6hV5Q4SAUNS3s32v",
+    "type": "damage",
+    "name": "One-Two: second hit bonus (+3× mod)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "damage": {
+     "parts": [
+      {
+       "number": null,
+       "denomination": null,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "3 * max(@abilities.str.mod, @abilities.dex.mod)"
+       },
+       "scaling": {}
+      }
+     ]
     }
-  ]
+   },
+   "Qf6ypgza9y6wPskF": {
+    "_id": "Qf6ypgza9y6wPskF",
+    "type": "utility",
+    "name": "Weave (Dodge as a reaction)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "SngHwffxCbl50HKa",
+      "onSave": false
+     }
+    ],
+    "useConditionText": "reaction === \"isAttacked\""
+   }
+  },
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 2,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "bonus",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "technique": "Divergent Fist",
+   "level": 3,
+   "spellFrom": "feat",
+   "automationNotes": "Once per round, one option. Manji Kick: failed save also doubles the kick's bludgeoning damage.",
+   "automation": "automated"
+  }
+ },
+ "folder": "z0OBRtMvDoArKlLl",
+ "_key": "!items!CrWM1xCTd63nJBUq",
+ "effects": [
+  {
+   "_id": "JJKManjiStun0001",
+   "name": "Stunned (Manji Kick)",
+   "img": "modules/jjk5e/icons/techniques/divergent-fist.svg",
+   "statuses": [
+    "stunned"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "rounds": 1
+   },
+   "description": "Stunned until the beginning of the target's next turn; double unarmed-strike damage must be applied manually.",
+   "flags": {
+    "jjk5e": {
+     "condition": "stunned"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStart"
+     ]
+    }
+   },
+   "_key": "!items.effects!CrWM1xCTd63nJBUq.JJKManjiStun0001"
+  },
+  {
+   "_id": "SngHwffxCbl50HKa",
+   "name": "Weave",
+   "img": "modules/jjk5e/icons/techniques/divergent-fist.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Dodging until the start of your turn.</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.grants.disadvantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.advantage.ability.save.dex",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Divergent Fist"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStartSource"
+     ]
+    }
+   },
+   "_key": "!items.effects!CrWM1xCTd63nJBUq.SngHwffxCbl50HKa"
+  }
+ ]
 }

@@ -19,7 +19,7 @@
    "P6OcM4dm9NqJuBYB": {
     "_id": "P6OcM4dm9NqJuBYB",
     "type": "save",
-    "name": "Action",
+    "name": "Panoramic Composition (1 CE per creature)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -30,7 +30,8 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "2 * max(@abilities.wis.mod, @abilities.cha.mod)"
      },
      "spellSlot": false
     },
@@ -42,7 +43,8 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
@@ -109,7 +111,14 @@
   "jjk5e": {
    "technique": "Esoteric Art",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceCosts": {
+    "P6OcM4dm9NqJuBYB": 1
+   },
+   "ceSteps": {
+    "P6OcM4dm9NqJuBYB": 1
+   },
+   "automation": "automated"
   }
  },
  "folder": "epKj1Q5Dq7LYHOJd",

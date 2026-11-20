@@ -19,7 +19,7 @@
    "OCUpf0dX1NW95qdb": {
     "_id": "OCUpf0dX1NW95qdb",
     "type": "save",
-    "name": "Action",
+    "name": "Ink trap",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -66,7 +66,7 @@
      }
     },
     "damage": {
-     "onSave": "half",
+     "onSave": "none",
      "parts": [
       {
        "number": 2,
@@ -95,6 +95,150 @@
       "onSave": false
      }
     ]
+   },
+   "U2P7BTV8Ey6KHkeh": {
+    "_id": "U2P7BTV8Ey6KHkeh",
+    "type": "utility",
+    "name": "Ink Shikigami: Ink Wolves (1 CE each)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "max(@abilities.wis.mod, @abilities.cha.mod)"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
+   },
+   "QPLJl0OXoy9LFcOr": {
+    "_id": "QPLJl0OXoy9LFcOr",
+    "type": "utility",
+    "name": "Exit Shift (80 ft)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
+   },
+   "QPAVOztx1gMeUXal": {
+    "_id": "QPAVOztx1gMeUXal",
+    "type": "utility",
+    "name": "Difficult terrain (15 ft)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
+   },
+   "Thd38HRhxvSFDvVD": {
+    "_id": "Thd38HRhxvSFDvVD",
+    "type": "utility",
+    "name": "Structure Generation (30 ft cube)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
    }
   },
   "uses": {
@@ -147,7 +291,14 @@
   "jjk5e": {
    "technique": "Esoteric Art",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceCosts": {
+    "U2P7BTV8Ey6KHkeh": 1
+   },
+   "ceSteps": {
+    "U2P7BTV8Ey6KHkeh": 1
+   },
+   "automation": "automated"
   }
  },
  "effects": [

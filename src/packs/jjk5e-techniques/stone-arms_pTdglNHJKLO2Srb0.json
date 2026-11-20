@@ -42,7 +42,8 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
@@ -89,10 +90,10 @@
    "LbEeM13IHnhDCjZS": {
     "_id": "LbEeM13IHnhDCjZS",
     "type": "utility",
-    "name": "Action (1 CE)",
+    "name": "Keep arms (1 CE, start of turn)",
     "sort": 100000,
     "activation": {
-     "type": "action",
+     "type": "special",
      "value": 1,
      "condition": "",
      "override": true
@@ -119,7 +120,7 @@
    "0DSo7QJVhzKO5mLg": {
     "_id": "0DSo7QJVhzKO5mLg",
     "type": "save",
-    "name": "Action",
+    "name": "Crush restrained target",
     "sort": 200000,
     "activation": {
      "type": "action",
@@ -140,6 +141,11 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -227,7 +233,9 @@
    },
    "technique": "Earth Manipulation",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Concentration; arms AC 18, HP = your max HP. Escape: action, Athletics/Acrobatics vs your CE DC.",
+   "automation": "automated"
   }
  },
  "effects": [
@@ -248,6 +256,11 @@
    "flags": {
     "jjk5e": {
      "condition": "restrained"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStartSource"
+     ]
     }
    },
    "_key": "!items.effects!pTdglNHJKLO2Srb0.4ruxGJwk5WBSM0JE"

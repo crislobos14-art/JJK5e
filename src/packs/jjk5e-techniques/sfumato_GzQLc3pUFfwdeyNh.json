@@ -39,13 +39,16 @@
     },
     "range": {
      "value": "30",
-     "units": "ft"
+     "units": "ft",
+     "override": true
     },
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
-     }
+      "count": "1",
+      "choice": true
+     },
+     "override": true
     },
     "duration": {
      "value": "1",
@@ -67,7 +70,7 @@
     },
     "effects": [
      {
-      "_id": "VX3ajMhyJDity4uf",
+      "_id": "Ur52Su9wMuMYNubB",
       "onSave": false
      }
     ]
@@ -93,7 +96,8 @@
       "Esoteric Art"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "effects": [
@@ -118,6 +122,45 @@
     }
    },
    "_key": "!items.effects!GzQLc3pUFfwdeyNh.VX3ajMhyJDity4uf"
+  },
+  {
+   "_id": "Ur52Su9wMuMYNubB",
+   "name": "Sfumato",
+   "img": "modules/jjk5e/icons/techniques/esoteric-art.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Blurred: attacks by and against it at disadvantage; caster may deal 2× level necrotic and −5 ft speed at its turn start Speed 0: restrained.</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.disadvantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.grants.disadvantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "value": "turn=start, damageRoll=2 * JJKORIGINLEVEL, damageType=necrotic, label=Sfumato",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Esoteric Art"
+    }
+   },
+   "_key": "!items.effects!GzQLc3pUFfwdeyNh.Ur52Su9wMuMYNubB"
   }
  ],
  "folder": "sHDJB680OC5pd1by",

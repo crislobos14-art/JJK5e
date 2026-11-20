@@ -45,7 +45,7 @@ test("summoning and reroll activities respect V.6 activation economy", () => {
 
 test("Manji Kick and Unrelenting Fury now attach statuses to failed saves", () => {
   const martial=spell("Martial Prowess","Divergent Fist");
-  const kick=Object.values(martial.system.activities).find(a=>a.name==="Manji Kick");
+  const kick=Object.values(martial.system.activities).find(a=>a.name.startsWith("Manji Kick"));
   assert.ok(kick.effects.some(e=>martial.effects.find(x=>x._id===e._id)?.statuses?.includes("stunned") && !e.onSave));
   const fury=spell("Unrelenting Fury","Missile Fist");
   const first=Object.values(fury.system.activities).find(a=>a.type==="save");

@@ -23,8 +23,8 @@
   "activities": {
    "wwxlvDEmsEJ9EfF1": {
     "_id": "wwxlvDEmsEJ9EfF1",
-    "type": "save",
-    "name": "Bonus Action (6 CE)",
+    "type": "utility",
+    "name": "Ascetic Void (6 CE, 2 minutes)",
     "sort": 0,
     "activation": {
      "type": "bonus",
@@ -38,10 +38,15 @@
      }
     },
     "range": {
-     "units": "spec",
+     "units": "self",
      "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
     "duration": {
      "value": "2",
      "units": "minute",
@@ -56,10 +61,12 @@
       "formula": ""
      }
     },
-    "damage": {
-     "onSave": "half",
-     "parts": []
-    }
+    "effects": [
+     {
+      "_id": "gMKDIRl8ypW8uzeu",
+      "onSave": false
+     }
+    ]
    }
   }
  },
@@ -82,10 +89,58 @@
       "Dragon Vein"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!zpBehrM0ojvM4ZHJ"
+ "_key": "!items!zpBehrM0ojvM4ZHJ",
+ "effects": [
+  {
+   "_id": "gMKDIRl8ypW8uzeu",
+   "name": "Ascetic Void",
+   "img": "modules/jjk5e/icons/techniques/dragon-vein.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Fly 2× speed and hover; regain 2 × CE mod HP at turn start while airborne; at 11th, DEX saves: success 0, fail half.</p>",
+   "changes": [
+    {
+     "key": "system.attributes.movement.fly",
+     "mode": 4,
+     "value": "2 * @attributes.movement.walk",
+     "priority": 20
+    },
+    {
+     "key": "system.attributes.movement.hover",
+     "mode": 5,
+     "value": "true",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "value": "turn=start, damageRoll=2 * max(@abilities.wis.mod, @abilities.cha.mod), damageType=healing, label=Ascetic Void",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.superSaver.dex",
+     "mode": 0,
+     "value": "floor(min(@details.level, 11) / 11)",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 20
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Dragon Vein"
+    }
+   },
+   "_key": "!items.effects!zpBehrM0ojvM4ZHJ.gMKDIRl8ypW8uzeu"
+  }
+ ]
 }

@@ -19,7 +19,7 @@
    "wjL00Dr9ku7MhBsV": {
     "_id": "wjL00Dr9ku7MhBsV",
     "type": "utility",
-    "name": "Reaction (3 CE)",
+    "name": "Lock resistance until Ley Line ends (3 CE)",
     "sort": 0,
     "activation": {
      "type": "reaction",
@@ -39,13 +39,78 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
     },
-    "useConditionText": "false"
+    "useConditionText": "reaction === \"isDamaged\"",
+    "effects": [
+     {
+      "_id": "Rv6Xbm52lHHFcmg3",
+      "onSave": false
+     }
+    ]
+   },
+   "wqNmo3B5pwpFvfao": {
+    "_id": "wqNmo3B5pwpFvfao",
+    "type": "damage",
+    "name": "Earth Dragon Soul (once per turn on melee hit)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "damage": {
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "force"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    },
+    "useConditionText": "reaction === \"isHit\""
    }
   },
   "uses": {
@@ -88,9 +153,49 @@
    },
    "technique": "Dragon Vein",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "dmgScale": {
+    "wqNmo3B5pwpFvfao": [
+     [
+      1,
+      "1d8"
+     ],
+     [
+      11,
+      "2d8"
+     ],
+     [
+      18,
+      "3d8"
+     ]
+    ]
+   },
+   "automationNotes": "Hasn't moved since last turn: extra damage twice per turn, speed 0 until your next turn.",
+   "automation": "automated"
   }
  },
  "folder": "xkcQZ0iOxpoEyfI2",
- "_key": "!items!XDoCAxQgRPhFISef"
+ "_key": "!items!XDoCAxQgRPhFISef",
+ "effects": [
+  {
+   "_id": "Rv6Xbm52lHHFcmg3",
+   "name": "Locked Ley resistance",
+   "img": "modules/jjk5e/icons/techniques/dragon-vein.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Resistance (pick the type) until the Ley Line ends.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Dragon Vein"
+    }
+   },
+   "_key": "!items.effects!XDoCAxQgRPhFISef.Rv6Xbm52lHHFcmg3"
+  }
+ ]
 }

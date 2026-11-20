@@ -58,6 +58,42 @@
      "concentration": false,
      "override": true
     }
+   },
+   "9Hh1qX9rf9imtWGV": {
+    "_id": "9Hh1qX9rf9imtWGV",
+    "type": "utility",
+    "name": "Initiative 20: two Impasto Canvas effects",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
    }
   },
   "uses": {
@@ -116,7 +152,9 @@
     "VdKRCLcmiZQEcUeq": 20
    },
    "domainActivity": "VdKRCLcmiZQEcUeq",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Domain = your subspace; Ink Shikigami and traps hit automatically.",
+   "automation": "automated"
   }
  },
  "folder": "epKj1Q5Dq7LYHOJd",

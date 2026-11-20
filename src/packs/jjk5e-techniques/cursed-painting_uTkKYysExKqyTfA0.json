@@ -19,7 +19,7 @@
    "jTp8GXWnG9RHFgGl": {
     "_id": "jTp8GXWnG9RHFgGl",
     "type": "save",
-    "name": "Action (1+ CE)",
+    "name": "Cursed Painting (1 CE): DEX or sucked in",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -36,20 +36,15 @@
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "value": "30",
+     "units": "ft",
      "override": true
     },
     "target": {
-     "template": {
-      "type": "cube",
-      "size": "30",
-      "units": "ft",
-      "count": "1",
-      "contiguous": false
-     },
      "affects": {
       "type": "creature",
-      "choice": false
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
@@ -71,7 +66,49 @@
     "damage": {
      "onSave": "none",
      "parts": []
-    }
+    },
+    "effects": [
+     {
+      "_id": "ZiNiMVsW3lLfBOKf",
+      "onSave": false
+     }
+    ]
+   },
+   "pRbNwKkygemNKNGG": {
+    "_id": "pRbNwKkygemNKNGG",
+    "type": "utility",
+    "name": "Keep creatures inside (1 CE, start of turn)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
    }
   },
   "uses": {
@@ -127,13 +164,37 @@
     "jTp8GXWnG9RHFgGl": 1
    },
    "ceCosts": {
-    "jTp8GXWnG9RHFgGl": 1
+    "jTp8GXWnG9RHFgGl": 1,
+    "pRbNwKkygemNKNGG": 1
    },
    "technique": "Esoteric Art",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "epKj1Q5Dq7LYHOJd",
- "_key": "!items!uTkKYysExKqyTfA0"
+ "_key": "!items!uTkKYysExKqyTfA0",
+ "effects": [
+  {
+   "_id": "ZiNiMVsW3lLfBOKf",
+   "name": "Inside a painting",
+   "img": "modules/jjk5e/icons/techniques/esoteric-art.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>In the subspace; caster pays 1 CE at their turn start to keep it there.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Esoteric Art"
+    }
+   },
+   "_key": "!items.effects!uTkKYysExKqyTfA0.ZiNiMVsW3lLfBOKf"
+  }
+ ]
 }

@@ -19,7 +19,7 @@
    "LxT1q9GWcJ6jkbiV": {
     "_id": "LxT1q9GWcJ6jkbiV",
     "type": "utility",
-    "name": "Action (4 CE)",
+    "name": "Wall of Stone (4 CE, ten 10×10 panels)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -35,10 +35,24 @@
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "value": "60",
+     "units": "ft",
      "override": true
     },
     "target": {
+     "template": {
+      "type": "wall",
+      "size": "100",
+      "width": "1",
+      "height": "10",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "",
+      "choice": false
+     },
      "override": true
     },
     "duration": {
@@ -49,7 +63,7 @@
    "tvcu87Oi4rbeVmim": {
     "_id": "tvcu87Oi4rbeVmim",
     "type": "save",
-    "name": "Bonus Action (1 CE)",
+    "name": "Move panels 30 ft (1 CE, DEX or pushed)",
     "sort": 100000,
     "activation": {
      "type": "bonus",
@@ -72,7 +86,8 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
@@ -136,7 +151,9 @@
    },
    "technique": "Earth Manipulation",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Wall AC = your CE DC, HP = 10 × CE mod.",
+   "automation": "automated"
   }
  },
  "folder": "75t5TorhPqVS4tjs",

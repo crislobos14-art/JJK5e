@@ -24,7 +24,7 @@
    "p7fcuymVzpAu8NwL": {
     "_id": "p7fcuymVzpAu8NwL",
     "type": "save",
-    "name": "Action (1 CE)",
+    "name": "Dustify small object (1 CE, holder DEX)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -38,10 +38,18 @@
      }
     },
     "range": {
-     "units": "spec",
+     "value": "5",
+     "units": "ft",
      "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
     },
@@ -62,7 +70,7 @@
    "Jkp96IkWbBmwVRmQ": {
     "_id": "Jkp96IkWbBmwVRmQ",
     "type": "utility",
-    "name": "Action (2 CE)",
+    "name": "Weaken cursed tool ≤ 2nd grade (2 CE)",
     "sort": 100000,
     "activation": {
      "type": "action",
@@ -76,7 +84,9 @@
      }
     },
     "range": {
-     "units": "self"
+     "value": "5",
+     "units": "ft",
+     "override": true
     },
     "target": {},
     "duration": {
@@ -86,7 +96,7 @@
    "7snVRA0htNuDtBgA": {
     "_id": "7snVRA0htNuDtBgA",
     "type": "utility",
-    "name": "Action (3 CE)",
+    "name": "Weaken 1st-grade tool (3 CE)",
     "sort": 200000,
     "activation": {
      "type": "action",
@@ -100,12 +110,51 @@
      }
     },
     "range": {
-     "units": "self"
+     "value": "5",
+     "units": "ft",
+     "override": true
     },
     "target": {},
     "duration": {
      "units": "inst"
     }
+   },
+   "eEo9E2p8NB9u8sws": {
+    "_id": "eEo9E2p8NB9u8sws",
+    "type": "utility",
+    "name": "Weaken special-grade tool (6 CE, 18th)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
    }
   }
  },
@@ -114,7 +163,8 @@
    "ceCosts": {
     "p7fcuymVzpAu8NwL": 1,
     "Jkp96IkWbBmwVRmQ": 2,
-    "7snVRA0htNuDtBgA": 3
+    "7snVRA0htNuDtBgA": 3,
+    "eEo9E2p8NB9u8sws": 6
    },
    "technique": "Earth Manipulation",
    "reversal": true,
@@ -131,7 +181,9 @@
      ]
     ],
     "level": 11
-   }
+   },
+   "automationNotes": "Each touch: −1 attack/damage (weapon) or AC (armor); at −3 it crumbles.",
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",

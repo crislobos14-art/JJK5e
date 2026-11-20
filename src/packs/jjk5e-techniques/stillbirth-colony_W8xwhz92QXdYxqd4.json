@@ -23,8 +23,8 @@
   "activities": {
    "cJMZgHAf949E6ydV": {
     "_id": "cJMZgHAf949E6ydV",
-    "type": "save",
-    "name": "Action (6 CE)",
+    "type": "utility",
+    "name": "Stillbirth Colony aura (6 CE)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -38,10 +38,23 @@
      }
     },
     "range": {
-     "units": "spec",
+     "units": "self",
      "override": true
     },
-    "target": {},
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "15",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "enemy",
+      "choice": false
+     },
+     "override": true
+    },
     "duration": {
      "value": "1",
      "units": "minute",
@@ -59,7 +72,13 @@
     "damage": {
      "onSave": "none",
      "parts": []
-    }
+    },
+    "effects": [
+     {
+      "_id": "SOltSAoZ7OZtyqmP",
+      "onSave": false
+     }
+    ]
    }
   }
  },
@@ -82,10 +101,33 @@
       "Disaster Vermin"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!W8xwhz92QXdYxqd4"
+ "_key": "!items!W8xwhz92QXdYxqd4",
+ "effects": [
+  {
+   "_id": "SOltSAoZ7OZtyqmP",
+   "name": "Stillbirth Colony",
+   "img": "modules/jjk5e/icons/techniques/disaster-vermin.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>CON save whenever it would gain HP or temp HP (DC = caster's CE DC): fail wastes the healing; fail by 5+: disadvantage on CON saves, no bonus action or reaction until end of its next turn.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Disaster Vermin"
+    }
+   },
+   "_key": "!items.effects!W8xwhz92QXdYxqd4.SOltSAoZ7OZtyqmP"
+  }
+ ]
 }

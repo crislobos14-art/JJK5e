@@ -18,33 +18,64 @@
   "activities": {
    "gZAPVoQZiZ4rkhTu": {
     "_id": "gZAPVoQZiZ4rkhTu",
-    "type": "utility",
-    "name": "Action (1 CE)",
+    "type": "damage",
+    "name": "Divergent Flow (on hit, 1 CE): delayed necrotic",
     "sort": 0,
+    "img": null,
     "activation": {
-     "type": "action",
-     "value": 1,
-     "condition": "",
+     "type": "special",
+     "value": null,
+     "condition": "Roll the attack's damage as necrotic at the start of the creature's turn (edit 0 → the damage). Not a Black Flash.",
      "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
-    },
-    "range": {
-     "units": "self",
-     "override": true
-    },
-    "target": {
-     "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
-    }
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "cv4MmzHiz7vLCyuS",
+      "onSave": false
+     }
+    ],
+    "damage": {
+     "parts": [
+      {
+       "number": null,
+       "denomination": null,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "0"
+       },
+       "scaling": {}
+      }
+     ]
+    },
+    "useConditionText": "reaction === \"isHit\""
    }
   },
   "uses": {
@@ -87,9 +118,37 @@
    },
    "technique": "Divergent Fist",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "z0OBRtMvDoArKlLl",
- "_key": "!items!WwsOi9d6vXukT6rB"
+ "_key": "!items!WwsOi9d6vXukT6rB",
+ "effects": [
+  {
+   "_id": "cv4MmzHiz7vLCyuS",
+   "name": "Divergent Flow (delayed hit)",
+   "img": "modules/jjk5e/icons/techniques/divergent-fist.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Takes the stored hit's damage as necrotic at the start of its turn.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Divergent Fist"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStart"
+     ]
+    }
+   },
+   "_key": "!items.effects!WwsOi9d6vXukT6rB.cv4MmzHiz7vLCyuS"
+  }
+ ]
 }

@@ -19,7 +19,7 @@
    "iekatqZz8ODvkP4j": {
     "_id": "iekatqZz8ODvkP4j",
     "type": "save",
-    "name": "Action (1 CE)",
+    "name": "Stone cubes (1 CE each, up to CE mod)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -30,12 +30,14 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "max(@abilities.wis.mod, @abilities.cha.mod)"
      },
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "value": "30",
+     "units": "ft",
      "override": true
     },
     "target": {
@@ -44,7 +46,7 @@
       "size": "5",
       "units": "ft",
       "count": "1",
-      "contiguous": false
+      "contiguous": true
      },
      "affects": {
       "type": "creature",
@@ -124,7 +126,12 @@
    },
    "technique": "Earth Manipulation",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceSteps": {
+    "iekatqZz8ODvkP4j": 1
+   },
+   "automationNotes": "Cubes: AC = your CE DC, HP = 5 × CE mod. Failed DEX: pushed to the end of the connected cubes.",
+   "automation": "automated"
   }
  },
  "folder": "75t5TorhPqVS4tjs",

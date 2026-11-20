@@ -24,7 +24,7 @@
    "ibC7B6Tdns9WTowu": {
     "_id": "ibC7B6Tdns9WTowu",
     "type": "save",
-    "name": "Action (2 CE)",
+    "name": "Disintegrate 5-ft cube (2 CE, +1 metal)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -38,7 +38,9 @@
      }
     },
     "range": {
-     "units": "self"
+     "value": "20",
+     "units": "ft",
+     "override": true
     },
     "target": {
      "template": {
@@ -46,12 +48,13 @@
       "size": "5",
       "units": "ft",
       "count": "1",
-      "contiguous": false
+      "contiguous": true
      },
      "affects": {
       "type": "creature",
       "choice": false
-     }
+     },
+     "override": true
     },
     "duration": {
      "units": "inst"
@@ -79,7 +82,7 @@
    "IbBqNTKHiobR2R95": {
     "_id": "IbBqNTKHiobR2R95",
     "type": "utility",
-    "name": "Extra (1 CE)",
+    "name": "Metal surcharge (+1 CE)",
     "sort": 900000,
     "activation": {
      "type": "special",
@@ -115,7 +118,8 @@
       "Earth Manipulation"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "effects": [

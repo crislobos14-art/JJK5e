@@ -19,12 +19,52 @@
    "value": "class",
    "subtype": ""
   },
-  "requirements": "Disaster Vermin 6"
+  "requirements": "Disaster Vermin 6",
+  "activities": {
+   "lDwyWz0voH9ZBfYQ": {
+    "_id": "lDwyWz0voH9ZBfYQ",
+    "type": "utility",
+    "name": "Merge swarms (part of command)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
+   }
+  }
  },
  "flags": {
   "jjk5e": {
    "technique": "Disaster Vermin",
-   "level": 6
+   "level": 6,
+   "automationNotes": "Merged Vermin Swarm: +1 size per extra swarm, combined HP and damage dice (edit the swarm actor).",
+   "automation": "automated"
   }
  },
  "folder": "THumTyfrAaZo0XzQ",

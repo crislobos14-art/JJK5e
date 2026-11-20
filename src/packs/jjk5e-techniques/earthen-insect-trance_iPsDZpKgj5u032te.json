@@ -19,7 +19,7 @@
    "fF1W1iUfbBN0i5bR": {
     "_id": "fF1W1iUfbBN0i5bR",
     "type": "utility",
-    "name": "Action (2 CE)",
+    "name": "Summon pouch insect (2 CE each, up to 2)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -30,7 +30,8 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "4"
      },
      "spellSlot": false
     },
@@ -41,8 +42,7 @@
     },
     "target": {
      "affects": {
-      "type": "creature",
-      "count": "1"
+      "type": "self"
      },
      "override": true
     },
@@ -99,7 +99,12 @@
    },
    "technique": "Disaster Vermin",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Swarms allowed = proficiency bonus; command all swarms and shikigami with one bonus action.",
+   "automation": "automated",
+   "ceSteps": {
+    "fF1W1iUfbBN0i5bR": 2
+   }
   }
  },
  "folder": "THumTyfrAaZo0XzQ",

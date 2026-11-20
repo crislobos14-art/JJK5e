@@ -4461,10 +4461,18 @@ function originCEMod(effect) {
   return Math.max(1, Number(actor?.system?.abilities?.[actor ? ceAbility(actor) : "wis"]?.mod) || 1);
 }
 
-const ORIGIN_TOKENS = /JJKORIGINDC|JJKORIGINCEMOD/;
+function originLevel(effect) {
+  let item = null;
+  try { item = effect?.origin ? fromUuidSync(effect.origin) : null; } catch (err) { item = null; }
+  const actor = item?.actor ?? (item?.documentName === "Actor" ? item : null);
+  return Math.max(1, Number(actor?.system?.details?.level) || Number(actor?.system?.details?.cr) || 1);
+}
+
+const ORIGIN_TOKENS = /JJKORIGINDC|JJKORIGINCEMOD|JJKORIGINLEVEL/;
 function resolveOverTimeDC(effect, data) {
   const sub = (v) => v.replaceAll("JJKORIGINDC", String(originSaveDC(effect)))
-    .replaceAll("JJKORIGINCEMOD", String(originCEMod(effect)));
+    .replaceAll("JJKORIGINCEMOD", String(originCEMod(effect)))
+    .replaceAll("JJKORIGINLEVEL", String(originLevel(effect)));
   const fix = (list) => (list ?? []).map((c) => (typeof c?.value === "string" && ORIGIN_TOKENS.test(c.value)
     ? { ...c, value: sub(c.value) } : c));
   const upd = {};

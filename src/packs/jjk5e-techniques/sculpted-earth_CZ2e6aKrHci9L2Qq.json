@@ -18,9 +18,10 @@
   "activities": {
    "ublSHi2hUYDOpiM5": {
     "_id": "ublSHi2hUYDOpiM5",
-    "type": "damage",
-    "name": "Action (1 CE)",
+    "type": "attack",
+    "name": "Rock Blast (1 CE)",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "action",
      "value": 1,
@@ -30,9 +31,14 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
      "value": "30",
@@ -42,20 +48,31 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
-    "duration": {
-     "units": "inst",
-     "override": true
+    "effects": [],
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
     },
     "damage": {
+     "includeBase": false,
      "parts": [
       {
        "number": 1,
        "denomination": 12,
-       "bonus": "",
+       "bonus": "@mod",
        "types": [
         "bludgeoning"
        ],
@@ -63,9 +80,7 @@
         "enabled": false,
         "formula": ""
        },
-       "scaling": {
-        "number": 1
-       }
+       "scaling": {}
       }
      ]
     }
@@ -73,7 +88,7 @@
    "1XNwZ1O9tP5b8SvC": {
     "_id": "1XNwZ1O9tP5b8SvC",
     "type": "save",
-    "name": "Action (3 CE)",
+    "name": "Tremor (3 CE)",
     "sort": 100000,
     "activation": {
      "type": "action",
@@ -145,6 +160,116 @@
       "onSave": false
      }
     ]
+   },
+   "GXMwBTyhEjGVybGJ": {
+    "_id": "GXMwBTyhEjGVybGJ",
+    "type": "attack",
+    "name": "Rock Blast, necrotic (2 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 12,
+       "bonus": "@mod",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
+   },
+   "DlGq5vWai6I7V0Dw": {
+    "_id": "DlGq5vWai6I7V0Dw",
+    "type": "utility",
+    "name": "Earthen Armor (1 CE per +1 AC, max prof)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "@prof"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "6rbt2giqnnFISS38",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -191,11 +316,37 @@
   "jjk5e": {
    "ceCosts": {
     "ublSHi2hUYDOpiM5": 1,
-    "1XNwZ1O9tP5b8SvC": 3
+    "1XNwZ1O9tP5b8SvC": 3,
+    "GXMwBTyhEjGVybGJ": 2,
+    "DlGq5vWai6I7V0Dw": 1
    },
    "technique": "Earth Manipulation",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceSteps": {
+    "DlGq5vWai6I7V0Dw": 1
+   },
+   "dmgScale": {
+    "1XNwZ1O9tP5b8SvC": [
+     [
+      1,
+      "3d10"
+     ],
+     [
+      6,
+      "4d10"
+     ],
+     [
+      11,
+      "5d10"
+     ],
+     [
+      18,
+      "6d10"
+     ]
+    ]
+   },
+   "automation": "automated"
   }
  },
  "effects": [
@@ -217,6 +368,33 @@
     }
    },
    "_key": "!items.effects!CZ2e6aKrHci9L2Qq.IkslUMr28M7wVRkW"
+  },
+  {
+   "_id": "6rbt2giqnnFISS38",
+   "name": "Earthen Armor",
+   "img": "modules/jjk5e/icons/techniques/earth-manipulation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>+AC equal to the CE spent for 1 minute.</p>",
+   "changes": [
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+ @scaling",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Earth Manipulation"
+    }
+   },
+   "_key": "!items.effects!CZ2e6aKrHci9L2Qq.6rbt2giqnnFISS38"
   }
  ],
  "folder": "75t5TorhPqVS4tjs",

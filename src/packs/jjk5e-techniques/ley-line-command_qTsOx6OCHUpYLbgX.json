@@ -19,7 +19,7 @@
    "vIv57Pz5aTC7XNQu": {
     "_id": "vIv57Pz5aTC7XNQu",
     "type": "utility",
-    "name": "Bonus Action (3 CE)",
+    "name": "Ley Line (3 CE, 1 minute)",
     "sort": 0,
     "activation": {
      "type": "bonus",
@@ -39,6 +39,9 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
@@ -46,12 +49,18 @@
      "units": "minute",
      "concentration": false,
      "override": true
-    }
+    },
+    "effects": [
+     {
+      "_id": "Z56rhjuOzcHxcl0X",
+      "onSave": false
+     }
+    ]
    },
    "e6DAqsMKaDe7MZSY": {
     "_id": "e6DAqsMKaDe7MZSY",
     "type": "utility",
-    "name": "Reaction (1 CE)",
+    "name": "Reinforce: resist triggering damage (1 CE)",
     "sort": 100000,
     "activation": {
      "type": "reaction",
@@ -71,13 +80,22 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
     },
-    "useConditionText": "false"
+    "useConditionText": "reaction === \"isDamaged\"",
+    "effects": [
+     {
+      "_id": "V0T4lIY91iXzfq4H",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -122,9 +140,64 @@
    },
    "technique": "Dragon Vein",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "xkcQZ0iOxpoEyfI2",
- "_key": "!items!qTsOx6OCHUpYLbgX"
+ "_key": "!items!qTsOx6OCHUpYLbgX",
+ "effects": [
+  {
+   "_id": "Z56rhjuOzcHxcl0X",
+   "name": "Ley Line",
+   "img": "modules/jjk5e/icons/techniques/dragon-vein.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Immune to forced movement/teleport; −prof to all damage; at 11th immune to grappled/restrained/prone. Ends off the ground.</p>",
+   "changes": [
+    {
+     "key": "system.traits.dm.amount.all",
+     "mode": 2,
+     "value": "-@prof",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Dragon Vein"
+    }
+   },
+   "_key": "!items.effects!qTsOx6OCHUpYLbgX.Z56rhjuOzcHxcl0X"
+  },
+  {
+   "_id": "V0T4lIY91iXzfq4H",
+   "name": "Ley Line resistance",
+   "img": "modules/jjk5e/icons/techniques/dragon-vein.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Resistance to the triggering damage type (pick it in the effect) until your next turn.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Dragon Vein"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStartSource"
+     ]
+    }
+   },
+   "_key": "!items.effects!qTsOx6OCHUpYLbgX.V0T4lIY91iXzfq4H"
+  }
+ ]
 }

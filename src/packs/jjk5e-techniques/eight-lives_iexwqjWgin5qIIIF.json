@@ -18,17 +18,24 @@
   "activities": {
    "5SmXcppT0Hr5HzUQ": {
     "_id": "5SmXcppT0Hr5HzUQ",
-    "type": "utility",
-    "name": "Action (1 CE)",
+    "type": "heal",
+    "name": "Spend a life (1 CE): revive at half HP",
     "sort": 0,
     "activation": {
-     "type": "action",
+     "type": "special",
      "value": 1,
-     "condition": "",
+     "condition": "On dropping to 0 HP or dying outright; removes harmful conditions except exhaustion. 8 lives total (track them; one returns every 8 days).",
      "override": true
     },
     "consumption": {
-     "targets": [],
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1",
+       "scaling": {}
+      }
+     ],
      "scaling": {
       "allowed": false
      },
@@ -39,18 +46,39 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
+    },
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "",
+     "types": [
+      "healing"
+     ],
+     "custom": {
+      "enabled": true,
+      "formula": "floor(@attributes.hp.max / 2)"
+     },
+     "scaling": {}
     }
    }
   },
   "uses": {
-   "max": "",
-   "recovery": [],
-   "spent": 0
+   "max": "3 + floor(min(@details.level, 3) / 3) + 4 * floor(min(@details.level, 6) / 6)",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
+    }
+   ]
   },
   "level": 1,
   "school": "jjk",
@@ -87,7 +115,8 @@
    },
    "technique": "Eight Heads",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "DMcMPNJMAkcTYNF8",

@@ -24,7 +24,9 @@
  "flags": {
   "jjk5e": {
    "technique": "Divergent Fist",
-   "level": 18
+   "level": 18,
+   "automationNotes": "Crits and Stance of the Sparks attacks are always Black Flashes (resolve without rolling).",
+   "automation": "automated"
   }
  },
  "folder": "z0OBRtMvDoArKlLl",

@@ -19,7 +19,7 @@
    "Nwpqjb5OiM9CQVuc": {
     "_id": "Nwpqjb5OiM9CQVuc",
     "type": "damage",
-    "name": "Special",
+    "name": "Initiative 20: 6d12 + restrained",
     "sort": 0,
     "activation": {
      "type": "special",
@@ -39,16 +39,9 @@
      "override": true
     },
     "target": {
-     "template": {
-      "type": "radius",
-      "size": "20",
-      "units": "ft",
-      "count": "1",
-      "contiguous": false
-     },
      "affects": {
-      "type": "creature",
-      "choice": false
+      "type": "enemy",
+      "choice": true
      },
      "override": true
     },
@@ -124,6 +117,111 @@
      "concentration": false,
      "override": true
     }
+   },
+   "WyvAXAbhGJWhavzF": {
+    "_id": "WyvAXAbhGJWhavzF",
+    "type": "utility",
+    "name": "Reshape: 20-ft chasm (1d10 × 10 ft deep)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "20",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": [],
+    "roll": {
+     "formula": "1d10 * 10",
+     "name": "Chasm depth (ft)",
+     "prompt": false,
+     "visible": true
+    }
+   },
+   "fkX9ESNehArq7TmH": {
+    "_id": "fkX9ESNehArq7TmH",
+    "type": "damage",
+    "name": "Spiked terrain: 2d4 per 5 ft moved",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "damage": {
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 4,
+       "bonus": "",
+       "types": [
+        "piercing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
    }
   },
   "uses": {
@@ -182,7 +280,8 @@
     "h1Vhm9H4eVHkMM5R": 20
    },
    "domainActivity": "h1Vhm9H4eVHkMM5R",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "effects": [
@@ -203,6 +302,11 @@
    "flags": {
     "jjk5e": {
      "condition": "restrained"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStart"
+     ]
     }
    },
    "_key": "!items.effects!UrKH3JnnRbRhWS8Q.L0ozQWYn1agn85Ad"

@@ -19,7 +19,7 @@
    "snl3KBJuHFmvdVAU": {
     "_id": "snl3KBJuHFmvdVAU",
     "type": "damage",
-    "name": "Special",
+    "name": "Crushed: teleport or fly >10 ft (5d10 force, once per turn)",
     "sort": 0,
     "activation": {
      "type": "special",
@@ -39,6 +39,11 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -107,6 +112,47 @@
      "concentration": false,
      "override": true
     }
+   },
+   "Par5cTjXMTuEqs9g": {
+    "_id": "Par5cTjXMTuEqs9g",
+    "type": "utility",
+    "name": "Domain: permanent Ley Line",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "X7H75ncohviNev8f",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -165,9 +211,39 @@
     "LVCHA9VJCKaWTCmX": 20
    },
    "domainActivity": "LVCHA9VJCKaWTCmX",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "xkcQZ0iOxpoEyfI2",
- "_key": "!items!BOWeUicZygm9sbIU"
+ "_key": "!items!BOWeUicZygm9sbIU",
+ "effects": [
+  {
+   "_id": "X7H75ncohviNev8f",
+   "name": "Ley Line (domain)",
+   "img": "modules/jjk5e/icons/techniques/dragon-vein-domain.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.traits.dm.amount.all",
+     "mode": 2,
+     "value": "-@prof",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Dragon Vein"
+    }
+   },
+   "_key": "!items.effects!BOWeUicZygm9sbIU.X7H75ncohviNev8f"
+  }
+ ]
 }

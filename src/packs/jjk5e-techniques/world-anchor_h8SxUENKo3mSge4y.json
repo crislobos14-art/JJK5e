@@ -19,10 +19,10 @@
    "dYq3q5REb4nwq0XE": {
     "_id": "dYq3q5REb4nwq0XE",
     "type": "utility",
-    "name": "Action (3 CE)",
+    "name": "Resist all damage (≤ half HP, 3 CE)",
     "sort": 0,
     "activation": {
-     "type": "action",
+     "type": "special",
      "value": 1,
      "condition": "",
      "override": true
@@ -39,11 +39,69 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
+    },
+    "effects": [
+     {
+      "_id": "J7RqEIfY7WAn5FW6",
+      "onSave": false
+     }
+    ]
+   },
+   "LSbiP31lqxtSteha": {
+    "_id": "LSbiP31lqxtSteha",
+    "type": "heal",
+    "name": "Start of turn: temp HP (grounded)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "",
+     "types": [
+      "temphp"
+     ],
+     "custom": {
+      "enabled": true,
+      "formula": "@prof + max(@abilities.wis.mod, @abilities.cha.mod)"
+     },
+     "scaling": {}
     }
    }
   },
@@ -87,9 +145,44 @@
    },
    "technique": "Dragon Vein",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "xkcQZ0iOxpoEyfI2",
- "_key": "!items!h8SxUENKo3mSge4y"
+ "_key": "!items!h8SxUENKo3mSge4y",
+ "effects": [
+  {
+   "_id": "J7RqEIfY7WAn5FW6",
+   "name": "World Anchor",
+   "img": "modules/jjk5e/icons/techniques/dragon-vein.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Resistance to all damage until your next turn.</p>",
+   "changes": [
+    {
+     "key": "system.traits.dr.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Dragon Vein"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStartSource"
+     ]
+    }
+   },
+   "_key": "!items.effects!h8SxUENKo3mSge4y.J7RqEIfY7WAn5FW6"
+  }
+ ]
 }
