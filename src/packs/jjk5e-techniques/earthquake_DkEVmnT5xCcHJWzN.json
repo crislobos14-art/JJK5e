@@ -35,14 +35,20 @@
      "spellSlot": false
     },
     "range": {
-     "value": "30",
-     "units": "ft",
+     "units": "self",
      "override": true
     },
     "target": {
+     "template": {
+      "type": "radius",
+      "size": "30",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
      "affects": {
       "type": "creature",
-      "count": "1"
+      "choice": false
      },
      "override": true
     },
@@ -85,6 +91,82 @@
       "onSave": false
      }
     ]
+   },
+   "LvZX5Mfz0UdFWmOa": {
+    "_id": "LvZX5Mfz0UdFWmOa",
+    "type": "save",
+    "name": "Bonus Action with centipede summoned (3 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "30",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "Ee9gfV18JnUyHIlt",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "str"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 6,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
    }
   },
   "uses": {
@@ -130,11 +212,44 @@
  "flags": {
   "jjk5e": {
    "ceCosts": {
-    "7pKnjFDhrMXc50tL": 3
+    "7pKnjFDhrMXc50tL": 3,
+    "LvZX5Mfz0UdFWmOa": 3
    },
    "technique": "Centipede Shroud",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "dmgScale": {
+    "7pKnjFDhrMXc50tL": [
+     [
+      1,
+      "6d6"
+     ],
+     [
+      11,
+      "10d6"
+     ],
+     [
+      18,
+      "14d6"
+     ]
+    ],
+    "LvZX5Mfz0UdFWmOa": [
+     [
+      1,
+      "6d6"
+     ],
+     [
+      11,
+      "10d6"
+     ],
+     [
+      18,
+      "14d6"
+     ]
+    ]
+   },
+   "automationNotes": "Only creatures on the ground. Centipede stat points: edit your centipede actor.",
+   "automation": "automated"
   }
  },
  "effects": [

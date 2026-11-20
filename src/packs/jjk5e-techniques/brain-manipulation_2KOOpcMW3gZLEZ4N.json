@@ -38,10 +38,18 @@
      }
     },
     "range": {
-     "units": "spec",
+     "value": "5",
+     "units": "ft",
      "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
     "duration": {
      "value": "1",
      "units": "minute",
@@ -75,7 +83,13 @@
        }
       }
      ]
-    }
+    },
+    "effects": [
+     {
+      "_id": "7twIdGCf4UHOt6ib",
+      "onSave": false
+     }
+    ]
    }
   }
  },
@@ -98,10 +112,40 @@
       "Body Manipulation"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!2KOOpcMW3gZLEZ4N"
+ "_key": "!items!2KOOpcMW3gZLEZ4N",
+ "effects": [
+  {
+   "_id": "7twIdGCf4UHOt6ib",
+   "name": "Neural disruption",
+   "img": "modules/jjk5e/icons/techniques/body-manipulation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>For 1 minute: each time it uses an innate technique it makes a CON save or the CE is wasted. Repeats the save at the end of its turns.</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "value": "turn=end, saveAbility=con, saveDC=JJKORIGINDC, saveCount=1-, label=\"Neural disruption\"",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Body Manipulation"
+    }
+   },
+   "_key": "!items.effects!2KOOpcMW3gZLEZ4N.7twIdGCf4UHOt6ib"
+  }
+ ]
 }

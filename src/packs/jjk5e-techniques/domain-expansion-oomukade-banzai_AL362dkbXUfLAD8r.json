@@ -19,7 +19,7 @@
    "CElllpRCkEQhgmv7": {
     "_id": "CElllpRCkEQhgmv7",
     "type": "utility",
-    "name": "Special",
+    "name": "Initiative 20: centipedes restrain everyone",
     "sort": 0,
     "activation": {
      "type": "special",
@@ -39,6 +39,10 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "enemy",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -152,7 +156,8 @@
     "vrBtWoQkyKsrjjDL": 20
    },
    "domainActivity": "vrBtWoQkyKsrjjDL",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "effects": [
@@ -163,11 +168,20 @@
    "statuses": [
     "restrained"
    ],
-   "changes": [],
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "priority": 20,
+     "value": "turn=start, saveAbility=str, saveDC=JJKORIGINDC, saveCount=1-, label=\"Oomukade Banzai (Athletics)\""
+    }
+   ],
    "transfer": false,
    "disabled": false,
-   "duration": {},
-   "description": "",
+   "duration": {
+    "rounds": 10
+   },
+   "description": "<p>Restrained by centipedes: escape with Strength (Athletics) at the start of its turns. Attacks against it deal +2d10 (GM adds).</p>",
    "flags": {
     "jjk5e": {
      "condition": "restrained"

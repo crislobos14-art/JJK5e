@@ -19,12 +19,12 @@
    "P9IpMoskuDAa5VWI": {
     "_id": "P9IpMoskuDAa5VWI",
     "type": "utility",
-    "name": "Action (1 CE)",
+    "name": "Transfer into a corpse (1 CE, long rest)",
     "sort": 0,
     "activation": {
-     "type": "action",
-     "value": 1,
-     "condition": "",
+     "type": "special",
+     "value": null,
+     "condition": "During a long rest, with a humanoid corpse",
      "override": true
     },
     "consumption": {
@@ -35,15 +35,28 @@
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "value": "5",
+     "units": "ft",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
+    },
+    "check": {
+     "ability": "wis",
+     "dc": {
+      "calculation": "",
+      "formula": "30"
+     }
     }
    }
   },
@@ -87,7 +100,9 @@
    },
    "technique": "Body Manipulation",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Body swap is a character-sheet change (ability scores except INT/WIS/CHA, racial features, technique). Others spot it with a DC 30 Insight check (advantage if they knew the body's owner).",
+   "automation": "automated"
   }
  },
  "folder": "suKJQVV38yYdZJCL",

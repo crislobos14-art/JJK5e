@@ -969,6 +969,103 @@ def one_creature():
     return {"affects": {"type": "creature", "count": "1", "choice": True}, "override": True}
 
 
+def body_manipulation(S):
+    g = S.get("Graverobber")
+    a = g["system"]["activities"]["P9IpMoskuDAa5VWI"]
+    a["name"] = "Transfer into a corpse (1 CE, long rest)"
+    a["activation"] = {"type": "special", "value": None, "condition": "During a long rest, with a humanoid corpse", "override": True}
+    a["range"], a["target"] = {"value": "5", "units": "ft", "override": True}, one_creature()
+    a["check"] = {"ability": "wis", "dc": {"calculation": "", "formula": "30"}}
+    note(g, "Body swap is a character-sheet change (ability scores except INT/WIS/CHA, racial features, technique). "
+            "Others spot it with a DC 30 Insight check (advantage if they knew the body's owner).")
+    mark(g)
+    br = S.get("Brain Manipulation")
+    b = br["system"]["activities"]["rv0eJkh5Z7W5C7uN"]
+    b["range"], b["target"] = {"value": "5", "units": "ft", "override": True}, one_creature()
+    b["damage"]["onSave"] = "none"
+    apply(b, fx(br, "disrupt", "Neural disruption", rounds=10,
+                changes=[("flags.midi-qol.OverTime", 0,
+                          'turn=end, saveAbility=con, saveDC=JJKORIGINDC, saveCount=1-, label="Neural disruption"')],
+                desc="For 1 minute: each time it uses an innate technique it makes a CON save or the CE is wasted. "
+                     "Repeats the save at the end of its turns."))
+    mark(br)
+
+
+def centipede_shroud(S):
+    ft = lambda n: {"value": str(n), "units": "ft", "override": True}
+    c = S.get("Cursed Centipede")
+    shroud = fx(c, "shroud", "Centipede Shroud", rounds=0,
+                changes=[("system.bonuses.mwak.damage", 2, "+ 1d10"), ("system.attributes.ac.bonus", 2, "+@prof")],
+                desc="The centipede floats around you: +1d10 on melee hits, +proficiency to AC, an extra melee attack "
+                     "as a bonus action, and you can redirect damage between you and it. Delete when dismissed. With "
+                     "two centipedes (11th): AC +3 + proficiency and two bonus-action attacks (GM).")
+    for e in c["effects"]:
+        if e["_id"] == shroud: e["duration"] = {}
+    for aid in ("SbWpjaFLpf5qQ5YQ", "KE4lL8uxh0YyqQcB"):
+        a = c["system"]["activities"][aid]
+        a["range"], a["target"] = RANGE_SELF, SELF
+        apply(a, shroud)
+    mark(c)
+
+    e = S.get("Earthquake")
+    q = e["system"]["activities"]["7pKnjFDhrMXc50tL"]
+    q["range"], q["target"] = RANGE_SELF, sphere(30)
+    q["damage"]["onSave"] = "half"
+    scale(e, q, [[1, "6d6"], [11, "10d6"], [18, "14d6"]])
+    qb = act(e, "bonus", "save", "Bonus Action with centipede summoned (3 CE)", "bonus", range=RANGE_SELF, target=sphere(30),
+             save={"ability": ["str"], "dc": {"calculation": "spellcasting", "formula": ""}},
+             damage={"onSave": "half", "parts": [dice(6, 6, ["bludgeoning"])]})
+    apply(qb, "Ee9gfV18JnUyHIlt")
+    cost(e, qb, 3)
+    scale(e, qb, [[1, "6d6"], [11, "10d6"], [18, "14d6"]])
+    note(e, "Only creatures on the ground. Centipede stat points: edit your centipede actor.")
+    mark(e)
+
+    h = S.get("Hundred Leg Catastrophe")
+    a = h["system"]["activities"]["Xxh4SKTAnNz37Osw"]
+    sv = act(h, "push", "save", "Pushed or pulled 30 ft and prone", "special", range=ft(120), target=one_creature(),
+             save={"ability": ["str"], "dc": {"calculation": "spellcasting", "formula": ""}}, damage={"onSave": "none", "parts": []})
+    apply(sv, "e5sccugYjQz2rIrq")
+    free(h, sv)
+    a["type"] = "attack"
+    a["attack"] = {"ability": "", "bonus": "", "critical": {"threshold": None}, "flat": False,
+                   "type": {"value": "ranged", "classification": "spell"}}
+    a.pop("save", None)
+    a["effects"] = []
+    a["damage"] = {"includeBase": False, "parts": [dice(8, 10, ["necrotic"])]}
+    a["range"] = ft(120)
+    a["target"] = {"affects": {"type": "creature", "count": "3", "choice": True}, "override": True}
+    trigger(a, sv, "hitTargets")
+    mark(h)
+
+    d = S.get("Domain Expansion: Oomukade Banzai")
+    da = d["system"]["activities"]["CElllpRCkEQhgmv7"]
+    da["name"] = "Initiative 20: centipedes restrain everyone"
+    da["target"] = {"affects": {"type": "enemy", "choice": True}, "override": True}
+    for x in d["effects"]:
+        if x["_id"] == "GlGyR2r3uyAPzhDG":
+            x["changes"] = [{"key": "flags.midi-qol.OverTime", "mode": 0, "priority": 20,
+                             "value": 'turn=start, saveAbility=str, saveDC=JJKORIGINDC, saveCount=1-, label="Oomukade Banzai (Athletics)"'}]
+            x["duration"] = {"rounds": 10}
+            x["description"] = ("<p>Restrained by centipedes: escape with Strength (Athletics) at the start of its turns. "
+                                "Attacks against it deal +2d10 (GM adds).</p>")
+    mark(d)
+
+    m = S.get("Millipede Spear")
+    act(m, "A8pAG8r49o9qWNyO", "utility", "Summon millipede — Bonus Action (6 CE)", "bonus", range=RANGE_SELF, target=SELF)
+    ma = m["system"]["activities"]["A8pAG8r49o9qWNyO"]
+    mil = fx(m, "mill", "Millipede Shroud", rounds=0,
+             changes=[("system.bonuses.mwak.damage", 2, "+ 2d10"), ("system.bonuses.rwak.damage", 2, "+ 2d10"),
+                      ("system.attributes.ac.bonus", 2, "-@prof")],
+             desc="+2d10 on melee and ranged hits, AC −proficiency, damage can be redirected; once per turn replace "
+                  "an attack with two millipede attacks (+2d10 piercing). Delete when dismissed.")
+    for x in m["effects"]:
+        if x["_id"] == mil: x["duration"] = {}
+    apply(ma, mil)
+    cost(m, ma, 6)
+    mark(m)
+
+
 TECHNIQUES = {"Antigravity System": antigravity_system,
               "Auspicious Beast Summon": auspicious_beast_summon,
               "Black Bird Manipulation": black_bird_manipulation,
@@ -976,7 +1073,9 @@ TECHNIQUES = {"Antigravity System": antigravity_system,
               "Blood Manipulation": blood_manipulation,
               "Boogie Woogie": boogie_woogie,
               "Cursed Speech": cursed_speech,
-              "Blazing Courage": blazing_courage}
+              "Blazing Courage": blazing_courage,
+              "Body Manipulation": body_manipulation,
+              "Centipede Shroud": centipede_shroud}
 
 if __name__ == "__main__":
     args = sys.argv[1:]

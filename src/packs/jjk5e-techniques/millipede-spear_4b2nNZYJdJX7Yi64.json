@@ -23,52 +23,44 @@
   "activities": {
    "A8pAG8r49o9qWNyO": {
     "_id": "A8pAG8r49o9qWNyO",
-    "type": "damage",
-    "name": "Bonus Action (6 CE)",
+    "type": "utility",
+    "name": "Summon millipede — Bonus Action (6 CE)",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "bonus",
      "value": 1,
-     "condition": ""
+     "condition": "",
+     "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
-     }
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
-     "value": "5",
-     "units": "ft"
+     "units": "self",
+     "override": true
     },
     "target": {
      "affects": {
-      "type": "creature",
-      "count": "1"
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "Dsb9uSMyLLkGIaod",
+      "onSave": false
      }
-    },
-    "duration": {
-     "units": "inst"
-    },
-    "damage": {
-     "parts": [
-      {
-       "number": 2,
-       "denomination": 10,
-       "bonus": "",
-       "types": [
-        "piercing"
-       ],
-       "custom": {
-        "enabled": false,
-        "formula": ""
-       },
-       "scaling": {
-        "number": 1
-       }
-      }
-     ]
-    }
+    ]
    }
   }
  },
@@ -91,10 +83,50 @@
       "Centipede Shroud"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!4b2nNZYJdJX7Yi64"
+ "_key": "!items!4b2nNZYJdJX7Yi64",
+ "effects": [
+  {
+   "_id": "Dsb9uSMyLLkGIaod",
+   "name": "Millipede Shroud",
+   "img": "modules/jjk5e/icons/techniques/centipede-shroud.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>+2d10 on melee and ranged hits, AC −proficiency, damage can be redirected; once per turn replace an attack with two millipede attacks (+2d10 piercing). Delete when dismissed.</p>",
+   "changes": [
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ 2d10",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.rwak.damage",
+     "mode": 2,
+     "value": "+ 2d10",
+     "priority": 20
+    },
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "-@prof",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": "Centipede Shroud"
+    }
+   },
+   "_key": "!items.effects!4b2nNZYJdJX7Yi64.Dsb9uSMyLLkGIaod"
+  }
+ ]
 }

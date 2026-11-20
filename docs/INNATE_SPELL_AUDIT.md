@@ -3,13 +3,13 @@
 > Generado desde el compendio y las fuentes. **No certifica ejecución en Foundry ni fidelidad semántica a cada regla**.
 
 - Spells examinados: **360**; técnicas agrupadas: **81**.
-- Utilidad sin efecto configurado: revisar lógica: **108**.
+- Utilidad sin efecto configurado: revisar lógica: **106**.
 - Utilidad con efecto: comprobar activación: **15**.
-- Dominio genérico: resolver propiedades particulares: **50**.
+- Dominio genérico: resolver propiedades particulares: **49**.
 - Salvación sin daño/efecto automático: **27**.
 - Ataque sin daño propio: comprobar intención: **10**.
-- Mecánica configurada; falta prueba Foundry: **115**.
-- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **35**.
+- Mecánica configurada; falta prueba Foundry: **113**.
+- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **40**.
 
 ## Interpretación
 
@@ -83,7 +83,7 @@
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Graverobber | 1 | utility:Action (1 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/graverobber_QoIxDJ2ApVfogPIv.json) |
+| Graverobber | 1 | utility:Transfer into a corpse (1 CE, long rest) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/graverobber_QoIxDJ2ApVfogPIv.json) |
 
 ### Boogie Woogie (3 spells)
 
@@ -97,10 +97,10 @@
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Cursed Centipede | 1 | utility:Bonus Action (3 CE); utility:Bonus Action (free once per long rest) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/cursed-centipede_21lnu8kbAphhST0q.json) |
-| Earthquake | 6 | save:Action (3 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/earthquake_DkEVmnT5xCcHJWzN.json) |
-| Hundred Leg Catastrophe | 11 | save:Action (8 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/hundred-leg-catastrophe_k2z0gWagLw0keUWh.json) |
-| Domain Expansion: Oomukade Banzai | 18 | utility:Special; utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-oomukade-banzai_AL362dkbXUfLAD8r.json) |
+| Cursed Centipede | 1 | utility:Bonus Action (3 CE); utility:Bonus Action (free once per long rest) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/cursed-centipede_21lnu8kbAphhST0q.json) |
+| Earthquake | 6 | save:Action (3 CE); save:Bonus Action with centipede summoned (3 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/earthquake_DkEVmnT5xCcHJWzN.json) |
+| Hundred Leg Catastrophe | 11 | attack:Action (8 CE); save:Pushed or pulled 30 ft and prone | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/hundred-leg-catastrophe_k2z0gWagLw0keUWh.json) |
+| Domain Expansion: Oomukade Banzai | 18 | utility:Initiative 20: centipedes restrain everyone; utility:Expand Domain (20 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-oomukade-banzai_AL362dkbXUfLAD8r.json) |
 
 ### Clone (4 spells)
 

@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.35.0 — Técnica por técnica: Body Manipulation y Centipede Shroud
+- **Graverobber**: transferencia durante descanso largo (1 CE), prueba de Perspicacia CD 30 para descubrirte.
+- **Brain Manipulation**: 8d8 psíquico y disrupción neural 1 minuto con CON repetida al final de su turno.
+- **Cursed Centipede**: el escudo da +1d10 en golpes cuerpo a cuerpo y +competencia a la CA.
+- **Earthquake**: radio de 30 pies, mitad al salvar, escala 6d6/10d6/14d6; versión acción adicional con el ciempiés invocado.
+- **Hundred Leg Catastrophe**: ahora son ataques a distancia (hasta 3) de 8d10; al impactar Midi tira la FUE para empujar/atraer y derribar.
+- **Oomukade Banzai**: apresados con prueba de FUE al inicio de su turno.
+- **Millipede Spear**: invocar da +2d10 en golpes y −competencia a la CA.
+- Automatizados a mano: 40/360. Sin probar en Foundry real.
+
 ## 1.34.0 — Técnica por técnica: Blazing Courage
 - **Ignition**: acciones de 1 a 6 CE; el arma cuerpo a cuerpo hace +N dados de fuego (d6/d8/d10/d12 por nivel) durante 1 minuto.
 - **Mantle of Courage**: resistencia a fuego y frío; *burn* aplica a enemigos la salvación de CON con los dados de Ignition.
