@@ -19,7 +19,7 @@
    "Buq47Z33ocVziK66": {
     "_id": "Buq47Z33ocVziK66",
     "type": "damage",
-    "name": "Special",
+    "name": "Initiative 20: blood attacks from inside",
     "sort": 0,
     "activation": {
      "type": "special",
@@ -39,6 +39,10 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -165,7 +169,9 @@
     "oDqhu9WCzzgPtrPh": 20
    },
    "domainActivity": "oDqhu9WCzzgPtrPh",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Inside the domain your blood techniques may take their HP cost from other creatures in it (GM).",
+   "automation": "automated"
   }
  },
  "folder": "WIi7n6E644owqihn",

@@ -565,10 +565,143 @@ def black_box(S):
     mark(w)
 
 
+def hp_cost(a, hp, scale_step=0):
+    """Blood techniques also cost hit points (untick it in the usage dialog with another blood source)."""
+    t = {"type": "attribute", "target": "attributes.hp.value", "value": str(hp)}
+    if scale_step: t["scaling"] = {"mode": "amount", "formula": str(scale_step)}
+    a["consumption"]["targets"] = [t]
+
+
+def blood_manipulation(S):
+    atk = lambda kind: {"ability": "", "bonus": "", "critical": {"threshold": None}, "flat": False,
+                        "type": {"value": kind, "classification": "spell"}}
+    one = {"affects": {"type": "creature", "count": "1"}, "override": True}
+    ft = lambda n: {"value": str(n), "units": "ft", "override": True}
+
+    # --- Blood Constructs (1st): 1 CE + 1 HP per 5 ft of construct.
+    c = S.get("Blood Constructs")
+    ca = c["system"]["activities"]["wVNUhJj3IichuJs5"]
+    ca["name"] = "Action (1+ CE, 1+ HP)"
+    cost(c, ca, 1, 1, "20")
+    hp_cost(ca, 1, 1)
+    note(c, "Construct HP = your level × CE spent. Untick the HP cost when you use another blood source. "
+            "Blood Bags are tracked as inventory.")
+    mark(c)
+
+    # --- Blood Techniques (1st): each technique as its own activity with its CE and HP cost.
+    b = S.get("Blood Techniques")
+    rest = fx(b, "bind", "Restrained (Crimson Binding)", statuses=["restrained"], rounds=10,
+              desc="Bound by a blood net; repeats the Strength save at the start of each of its turns.")
+    for e in b["effects"]:
+        if e["_id"] == rest:
+            e["changes"] = [{"key": "flags.midi-qol.OverTime", "mode": 0, "priority": 20,
+                             "value": 'turn=start, saveAbility=str, saveDC=JJKORIGINDC, saveCount=1-, label="Crimson Binding"'}]
+    b["effects"] = [e for e in b["effects"] if e["_id"] not in ("uJDin3pB0j6Pt2KK", "FiMuV25bcEXdbaP1")]
+    cb = act(b, "pyzvctFBrnf7glUx", "save", "Crimson Binding (1 CE, 1 HP)", "action", range=ft(30), target=one,
+             save={"ability": ["str"], "dc": {"calculation": "spellcasting", "formula": ""}}, damage={"onSave": "none", "parts": []})
+    apply(cb, rest); cost(b, cb, 1); hp_cost(cb, 1)
+    se = act(b, "slicing", "attack", "Slicing Exorcism (1 CE, 1 HP)", "action", range=ft(60), target=one,
+             attack=atk("ranged"), damage={"includeBase": False, "parts": [dice(1, 10, ["necrotic"], "@mod")]})
+    cost(b, se, 1); hp_cost(se, 1)
+    edge_fx = fx(b, "edge", "Blood Edge", rounds=10,
+                 desc="A blood weapon (magical for overcoming resistance): +1 damage tier per 2 CE spent "
+                      "(d10 → d12 → 2d8), lasts 1 minute.")
+    edge = act(b, "edge", "utility", "Blood Edge (free, CE up to your modifier)", "special", range=RANGE_SELF, target=SELF)
+    apply(edge, edge_fx); cost(b, edge, 1, 1, CE)
+    cr = act(b, "F4wHJtXWhPY2U4aV", "save", "Crimson Rain (3 CE, 2 HP)", "action", range=ft(60), target=sphere(15),
+             save={"ability": ["dex"], "dc": {"calculation": "spellcasting", "formula": ""}},
+             damage={"onSave": "half", "parts": [dice(3, 10, ["piercing"])]})
+    cost(b, cr, 3); hp_cost(cr, 2)
+    burst = act(b, "burst", "save", "Blood Burst (1 CE, 1 HP)", "special", range=ft(5), target=one,
+                save={"ability": ["dex"], "dc": {"calculation": "spellcasting", "formula": ""}},
+                damage={"onSave": "none", "parts": [dice(4, 6, ["necrotic"])]})
+    burst["activation"]["condition"] = "Once per turn when you hit with a weapon attack"
+    cost(b, burst, 1); hp_cost(burst, 1)
+    met = act(b, "meteor", "attack", "Blood Meteorite (1 CE, 3 HP)", "action", range=ft(30), target=one,
+              attack=atk("ranged"), damage={"includeBase": False, "parts": [dice(4, 4, ["bludgeoning"], "@mod")]})
+    cost(b, met, 1); hp_cost(met, 3)
+    gey = act(b, "geyser", "save", "Blood Geyser (3 CE, 3 HP)", "action", range=ft(10), target=sphere(5),
+              save={"ability": ["dex"], "dc": {"calculation": "spellcasting", "formula": ""}},
+              damage={"onSave": "half", "parts": [dice(5, 10, ["bludgeoning"])]})
+    gey["activation"]["condition"] = "Also when a creature starts its turn in or enters the area (launched 30 ft up)"
+    cost(b, gey, 3); hp_cost(gey, 3)
+    note(b, "You know three techniques (+2 at 6th and 11th): use only the ones you chose. With Convergence, Crimson "
+            "Rain also knocks prone (GM).")
+    mark(b)
+
+    # --- Flowing Red Scale (3rd): keep the module's AC/speed buff; add the advantages; drop the old toggle.
+    f = S.get("Flowing Red Scale")
+    f["effects"] = [e for e in f.get("effects", []) if e["_id"] != "ZHLStW986TAesiju"]
+    adv = fx(f, "adv", "Flowing Red Scale: advantages", rounds=10,
+             changes=[("flags.midi-qol.advantage.ability.save.dex", 0, "1"),
+                      ("flags.midi-qol.advantage.ability.check.str", 0, "1")],
+             desc="Advantage on Dexterity saving throws and Strength checks for 1 minute (speed and AC come from the "
+                  "technique's own buff). Extra limited action each turn: GM.")
+    fa = f["system"]["activities"]["SBbp4UPlSVhFiioL"]
+    fa["range"], fa["target"] = RANGE_SELF, SELF
+    apply(fa, adv)
+    mark(f)
+
+    # --- Convergence (6th): charged technique: +prof damage dice (Midi optional bonus) for the next technique.
+    cv = S.get("Convergence")
+    charge = fx(cv, "charge", "Convergence (charged)", rounds=1, special=["1Spell"],
+                changes=[("flags.midi-qol.optional.Convergence.damage.all", 0, "(@prof)d10"),
+                         ("flags.midi-qol.optional.Convergence.count", 0, "1"),
+                         ("flags.midi-qol.optional.Convergence.label", 0, "Convergence: +prof damage dice")],
+                desc="Your next Blood technique this turn: +proficiency damage dice, damage die one step larger, "
+                     "+30 ft range (Midi offers the extra dice as an optional bonus).")
+    ca = cv["system"]["activities"]["qNvp8X1IeGQJn56M"]
+    ca["name"] = "Charge (bonus action, reaction and movement)"
+    ca["range"], ca["target"] = RANGE_SELF, SELF
+    apply(ca, charge)
+    quick = act(cv, "quick", "utility", "Quick Convergence (1+ CE)", "special", range=RANGE_SELF, target=SELF)
+    quick["activation"]["condition"] = "When you use a Blood Technique: +1 die (Slicing, Burst, Meteorite), +1 DC "\
+                                       "(Binding) or +1 per die (Rain, Geyser) per CE; max 1/2/3 CE at 1st/11th/18th"
+    cost(cv, quick, 1, 1, "3")
+    mark(cv)
+
+    # --- Piercing Blood (11th): 100-ft line, 8 CE + 5 HP; Convergence sweep in a 130-ft cone.
+    pb = S.get("Piercing Blood")
+    p1 = pb["system"]["activities"]["4LA53X4gsUOzmo1s"]
+    p1["target"] = {"template": {"type": "line", "size": "100", "width": "5", "units": "ft", "count": "1", "contiguous": False},
+                    "affects": {"type": "creature", "choice": False}, "override": True}
+    p1["range"] = RANGE_SELF
+    hp_cost(p1, 5)
+    p2 = pb["system"]["activities"]["VwHHoCDnTNKGLfKH"]
+    p2["target"] = {"template": {"type": "cone", "size": "130", "units": "ft", "count": "1", "contiguous": False},
+                    "affects": {"type": "creature", "choice": False}, "override": True}
+    p2["range"] = RANGE_SELF
+    mark(pb)
+
+    # --- Bloodbath (18th): 4d12 necrotic to all creatures at initiative 20.
+    bb = S.get("Domain Expansion: Bloodbath")
+    d = bb["system"]["activities"]["Buq47Z33ocVziK66"]
+    d["name"] = "Initiative 20: blood attacks from inside"
+    d["target"] = {"affects": {"type": "creature", "choice": True}, "override": True}
+    note(bb, "Inside the domain your blood techniques may take their HP cost from other creatures in it (GM).")
+    mark(bb)
+
+    # --- Reversal: Blood Puppet — CON save or incapacitated puppet (concentration), repeat save each turn.
+    bp = S.get("Blood Puppet")
+    pup = fx(bp, "puppet", "Blood Puppet", statuses=["incapacitated"], rounds=10,
+             changes=[("flags.midi-qol.OverTime", 0,
+                       'turn=start, saveAbility=con, saveDC=JJKORIGINDC, saveCount=1-, label="Blood Puppet"')],
+             desc="Cannot control its body or use its cursed technique; the puppeteer moves it 30 ft or makes it "
+                  "attack with its weapons (action or bonus action). Repeats the CON save at the start of its turns.")
+    a1 = bp["system"]["activities"]["FDkIfSPeFZDwdErl"]
+    a1["range"], a1["target"] = ft(60), one
+    a1["duration"] = {"value": "1", "units": "minute", "concentration": True, "override": True}
+    apply(a1, pup)
+    act(bp, "nFiAWtEmSARotYEs", "utility", "Command puppet (bonus action)", "bonus", range=ft(60), target=one)
+    free(bp, bp["system"]["activities"]["nFiAWtEmSARotYEs"])
+    mark(bp)
+
+
 TECHNIQUES = {"Antigravity System": antigravity_system,
               "Auspicious Beast Summon": auspicious_beast_summon,
               "Black Bird Manipulation": black_bird_manipulation,
-              "Black Box": black_box}
+              "Black Box": black_box,
+              "Blood Manipulation": blood_manipulation}
 
 if __name__ == "__main__":
     args = sys.argv[1:]

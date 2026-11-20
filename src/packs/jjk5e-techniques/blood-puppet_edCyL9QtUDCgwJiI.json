@@ -39,16 +39,21 @@
     },
     "range": {
      "value": "60",
-     "units": "ft"
+     "units": "ft",
+     "override": true
     },
     "target": {
      "affects": {
       "type": "creature",
       "count": "1"
-     }
+     },
+     "override": true
     },
     "duration": {
-     "units": "inst"
+     "value": "1",
+     "units": "minute",
+     "concentration": true,
+     "override": true
     },
     "save": {
      "ability": [
@@ -62,46 +67,51 @@
     "damage": {
      "onSave": "none",
      "parts": []
-    }
+    },
+    "effects": [
+     {
+      "_id": "zdO8zRf3oVPsCmM5",
+      "onSave": false
+     }
+    ]
    },
    "nFiAWtEmSARotYEs": {
     "_id": "nFiAWtEmSARotYEs",
-    "type": "save",
-    "name": "Bonus Action",
-    "sort": 100000,
+    "type": "utility",
+    "name": "Command puppet (bonus action)",
+    "sort": 0,
+    "img": null,
     "activation": {
      "type": "bonus",
      "value": 1,
-     "condition": ""
+     "condition": "",
+     "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
-     }
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
      "value": "60",
      "units": "ft",
      "override": true
     },
-    "target": {},
-    "duration": {
-     "units": "inst"
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
     },
-    "save": {
-     "ability": [
-      "con"
-     ],
-     "dc": {
-      "calculation": "spellcasting",
-      "formula": ""
-     }
-    },
-    "damage": {
-     "onSave": "none",
-     "parts": []
-    }
+    "effects": []
    }
   }
  },
@@ -124,10 +134,42 @@
       "Blood Manipulation"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!edCyL9QtUDCgwJiI"
+ "_key": "!items!edCyL9QtUDCgwJiI",
+ "effects": [
+  {
+   "_id": "zdO8zRf3oVPsCmM5",
+   "name": "Blood Puppet",
+   "img": "modules/jjk5e/icons/techniques/blood-manipulation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [
+    "incapacitated"
+   ],
+   "description": "<p>Cannot control its body or use its cursed technique; the puppeteer moves it 30 ft or makes it attack with its weapons (action or bonus action). Repeats the CON save at the start of its turns.</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "value": "turn=start, saveAbility=con, saveDC=JJKORIGINDC, saveCount=1-, label=\"Blood Puppet\"",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Blood Manipulation"
+    }
+   },
+   "_key": "!items.effects!edCyL9QtUDCgwJiI.zdO8zRf3oVPsCmM5"
+  }
+ ]
 }

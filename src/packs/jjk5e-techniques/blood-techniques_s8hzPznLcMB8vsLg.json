@@ -19,8 +19,9 @@
    "pyzvctFBrnf7glUx": {
     "_id": "pyzvctFBrnf7glUx",
     "type": "save",
-    "name": "Action (1 CE)",
+    "name": "Crimson Binding (1 CE, 1 HP)",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "action",
      "value": 1,
@@ -28,11 +29,22 @@
      "override": true
     },
     "consumption": {
-     "targets": [],
+     "targets": [
+      {
+       "type": "attribute",
+       "target": "attributes.hp.value",
+       "value": "1"
+      }
+     ],
      "scaling": {
-      "allowed": false
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
      "value": "30",
@@ -46,10 +58,12 @@
      },
      "override": true
     },
-    "duration": {
-     "units": "inst",
-     "override": true
-    },
+    "effects": [
+     {
+      "_id": "9zLwpNM0fmH2zrDV",
+      "onSave": false
+     }
+    ],
     "save": {
      "ability": [
       "str"
@@ -61,36 +75,15 @@
     },
     "damage": {
      "onSave": "none",
-     "parts": [
-      {
-       "number": 1,
-       "denomination": 10,
-       "bonus": "@mod",
-       "types": [
-        "necrotic"
-       ],
-       "custom": {
-        "enabled": false,
-        "formula": ""
-       },
-       "scaling": {
-        "number": 1
-       }
-      }
-     ]
-    },
-    "effects": [
-     {
-      "_id": "uJDin3pB0j6Pt2KK",
-      "onSave": false
-     }
-    ]
+     "parts": []
+    }
    },
    "F4wHJtXWhPY2U4aV": {
     "_id": "F4wHJtXWhPY2U4aV",
     "type": "save",
-    "name": "Action (3 CE)",
-    "sort": 100000,
+    "name": "Crimson Rain (3 CE, 2 HP)",
+    "sort": 0,
+    "img": null,
     "activation": {
      "type": "action",
      "value": 1,
@@ -98,14 +91,26 @@
      "override": true
     },
     "consumption": {
-     "targets": [],
+     "targets": [
+      {
+       "type": "attribute",
+       "target": "attributes.hp.value",
+       "value": "2"
+      }
+     ],
      "scaling": {
-      "allowed": false
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
     },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
     "range": {
-     "units": "self",
+     "value": "60",
+     "units": "ft",
      "override": true
     },
     "target": {
@@ -122,10 +127,7 @@
      },
      "override": true
     },
-    "duration": {
-     "units": "inst",
-     "override": true
-    },
+    "effects": [],
     "save": {
      "ability": [
       "dex"
@@ -149,18 +151,348 @@
         "enabled": false,
         "formula": ""
        },
-       "scaling": {
-        "number": 1
-       }
+       "scaling": {}
       }
      ]
+    }
+   },
+   "LQwCsS5mLRIqnXs9": {
+    "_id": "LQwCsS5mLRIqnXs9",
+    "type": "attack",
+    "name": "Slicing Exorcism (1 CE, 1 HP)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "attribute",
+       "target": "attributes.hp.value",
+       "value": "1"
+      }
+     ],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "effects": [],
+    "attack": {
+     "ability": "",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 10,
+       "bonus": "@mod",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
+   },
+   "fGNq4PZAPtSUfT4N": {
+    "_id": "fGNq4PZAPtSUfT4N",
+    "type": "utility",
+    "name": "Blood Edge (free, CE up to your modifier)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "max(@abilities.wis.mod, @abilities.cha.mod)"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
     },
     "effects": [
      {
-      "_id": "FiMuV25bcEXdbaP1",
+      "_id": "juvZNRvBtUguBCjt",
       "onSave": false
      }
     ]
+   },
+   "PmibjlGyLJHcNUUJ": {
+    "_id": "PmibjlGyLJHcNUUJ",
+    "type": "save",
+    "name": "Blood Burst (1 CE, 1 HP)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Once per turn when you hit with a weapon attack",
+     "override": true
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "attribute",
+       "target": "attributes.hp.value",
+       "value": "1"
+      }
+     ],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "effects": [],
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": [
+      {
+       "number": 4,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
+   },
+   "mTfa2oqNcRd1A2Rq": {
+    "_id": "mTfa2oqNcRd1A2Rq",
+    "type": "attack",
+    "name": "Blood Meteorite (1 CE, 3 HP)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "attribute",
+       "target": "attributes.hp.value",
+       "value": "3"
+      }
+     ],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "effects": [],
+    "attack": {
+     "ability": "",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": 4,
+       "denomination": 4,
+       "bonus": "@mod",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
+   },
+   "r1ByqvEfwSQ6F5Cy": {
+    "_id": "r1ByqvEfwSQ6F5Cy",
+    "type": "save",
+    "name": "Blood Geyser (3 CE, 3 HP)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "Also when a creature starts its turn in or enters the area (launched 30 ft up)",
+     "override": true
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "attribute",
+       "target": "attributes.hp.value",
+       "value": "3"
+      }
+     ],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "10",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "5",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": [],
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 5,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
    }
   },
   "uses": {
@@ -207,58 +539,72 @@
   "jjk5e": {
    "ceCosts": {
     "pyzvctFBrnf7glUx": 1,
-    "F4wHJtXWhPY2U4aV": 3
+    "F4wHJtXWhPY2U4aV": 3,
+    "LQwCsS5mLRIqnXs9": 1,
+    "fGNq4PZAPtSUfT4N": 1,
+    "PmibjlGyLJHcNUUJ": 1,
+    "mTfa2oqNcRd1A2Rq": 1,
+    "r1ByqvEfwSQ6F5Cy": 3
    },
    "technique": "Blood Manipulation",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceSteps": {
+    "fGNq4PZAPtSUfT4N": 1
+   },
+   "automationNotes": "You know three techniques (+2 at 6th and 11th): use only the ones you chose. With Convergence, Crimson Rain also knocks prone (GM).",
+   "automation": "automated"
   }
  },
  "effects": [
   {
-   "_id": "uJDin3pB0j6Pt2KK",
-   "name": "Restrained (Blood Techniques)",
+   "_id": "9zLwpNM0fmH2zrDV",
+   "name": "Restrained (Crimson Binding)",
    "img": "modules/jjk5e/icons/techniques/blood-manipulation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
    "statuses": [
     "restrained"
    ],
+   "description": "<p>Bound by a blood net; repeats the Strength save at the start of each of its turns.</p>",
    "changes": [
     {
      "key": "flags.midi-qol.OverTime",
      "mode": 0,
-     "value": "turn=end, saveAbility=str, saveDC=JJKORIGINDC, saveCount=1-, label=\"Restrained (Blood Techniques)\"",
-     "priority": 20
+     "priority": 20,
+     "value": "turn=start, saveAbility=str, saveDC=JJKORIGINDC, saveCount=1-, label=\"Crimson Binding\""
     }
    ],
-   "transfer": false,
-   "disabled": false,
-   "duration": {},
-   "description": "",
+   "duration": {
+    "rounds": 10
+   },
    "flags": {
     "jjk5e": {
-     "condition": "restrained"
+     "technique": "Blood Manipulation"
     }
    },
-   "_key": "!items.effects!s8hzPznLcMB8vsLg.uJDin3pB0j6Pt2KK"
+   "_key": "!items.effects!s8hzPznLcMB8vsLg.9zLwpNM0fmH2zrDV"
   },
   {
-   "_id": "FiMuV25bcEXdbaP1",
-   "name": "Prone (Blood Techniques)",
+   "_id": "juvZNRvBtUguBCjt",
+   "name": "Blood Edge",
    "img": "modules/jjk5e/icons/techniques/blood-manipulation.svg",
-   "statuses": [
-    "prone"
-   ],
-   "changes": [],
+   "type": "base",
    "transfer": false,
    "disabled": false,
-   "duration": {},
-   "description": "",
+   "statuses": [],
+   "description": "<p>A blood weapon (magical for overcoming resistance): +1 damage tier per 2 CE spent (d10 → d12 → 2d8), lasts 1 minute.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
    "flags": {
     "jjk5e": {
-     "condition": "prone"
+     "technique": "Blood Manipulation"
     }
    },
-   "_key": "!items.effects!s8hzPznLcMB8vsLg.FiMuV25bcEXdbaP1"
+   "_key": "!items.effects!s8hzPznLcMB8vsLg.juvZNRvBtUguBCjt"
   }
  ],
  "folder": "WIi7n6E644owqihn",

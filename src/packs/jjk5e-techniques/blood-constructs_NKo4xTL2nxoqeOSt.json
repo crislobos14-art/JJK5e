@@ -19,7 +19,7 @@
    "wVNUhJj3IichuJs5": {
     "_id": "wVNUhJj3IichuJs5",
     "type": "utility",
-    "name": "Action (1 CE)",
+    "name": "Action (1+ CE, 1+ HP)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -28,9 +28,20 @@
      "override": true
     },
     "consumption": {
-     "targets": [],
+     "targets": [
+      {
+       "type": "attribute",
+       "target": "attributes.hp.value",
+       "value": "1",
+       "scaling": {
+        "mode": "amount",
+        "formula": "1"
+       }
+      }
+     ],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "20"
      },
      "spellSlot": false
     },
@@ -87,7 +98,12 @@
    },
    "technique": "Blood Manipulation",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceSteps": {
+    "wVNUhJj3IichuJs5": 1
+   },
+   "automationNotes": "Construct HP = your level × CE spent. Untick the HP cost when you use another blood source. Blood Bags are tracked as inventory.",
+   "automation": "automated"
   }
  },
  "folder": "WIi7n6E644owqihn",

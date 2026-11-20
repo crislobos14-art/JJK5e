@@ -3,13 +3,13 @@
 > Generado desde el compendio y las fuentes. **No certifica ejecución en Foundry ni fidelidad semántica a cada regla**.
 
 - Spells examinados: **360**; técnicas agrupadas: **81**.
-- Utilidad sin efecto configurado: revisar lógica: **112**.
-- Utilidad con efecto: comprobar activación: **17**.
+- Utilidad sin efecto configurado: revisar lógica: **110**.
+- Utilidad con efecto: comprobar activación: **16**.
 - Dominio genérico: resolver propiedades particulares: **53**.
 - Salvación sin daño/efecto automático: **29**.
 - Ataque sin daño propio: comprobar intención: **10**.
-- Mecánica configurada; falta prueba Foundry: **120**.
-- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **19**.
+- Mecánica configurada; falta prueba Foundry: **117**.
+- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **25**.
 
 ## Interpretación
 
@@ -72,12 +72,12 @@
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Blood Constructs | 1 | utility:Action (1 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/blood-constructs_NKo4xTL2nxoqeOSt.json) |
-| Blood Techniques | 1 | save:Action (1 CE); save:Action (3 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/blood-techniques_s8hzPznLcMB8vsLg.json) |
-| Flowing Red Scale | 3 | utility:Bonus Action (3 CE) | Utilidad con efecto: comprobar activación | [JSON](../src/packs/jjk5e-techniques/flowing-red-scale_0LPEMZDITFa9osgY.json) |
-| Convergence | 6 | utility:Bonus Action | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/convergence_NY4mXqV70GgnVRot.json) |
-| Piercing Blood | 11 | save:Action (8 CE); save:Convergence: sweep the lingering beam | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/piercing-blood_4tuBpUmDZZPmETHW.json) |
-| Domain Expansion: Bloodbath | 18 | damage:Special; utility:Expand Domain (20 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-bloodbath_Fbv1XCPZS9QhB6nh.json) |
+| Blood Constructs | 1 | utility:Action (1+ CE, 1+ HP) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/blood-constructs_NKo4xTL2nxoqeOSt.json) |
+| Blood Techniques | 1 | save:Crimson Binding (1 CE, 1 HP); save:Crimson Rain (3 CE, 2 HP); attack:Slicing Exorcism (1 CE, 1 HP); utility:Blood Edge (free, CE up to your modifier); save:Blood Burst (1 CE, 1 HP); attack:Blood Meteorite (1 CE, 3 HP); save:Blood Geyser (3 CE, 3 HP) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/blood-techniques_s8hzPznLcMB8vsLg.json) |
+| Flowing Red Scale | 3 | utility:Bonus Action (3 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/flowing-red-scale_0LPEMZDITFa9osgY.json) |
+| Convergence | 6 | utility:Charge (bonus action, reaction and movement); utility:Quick Convergence (1+ CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/convergence_NY4mXqV70GgnVRot.json) |
+| Piercing Blood | 11 | save:Action (8 CE); save:Convergence: sweep the lingering beam | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/piercing-blood_4tuBpUmDZZPmETHW.json) |
+| Domain Expansion: Bloodbath | 18 | damage:Initiative 20: blood attacks from inside; utility:Expand Domain (20 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-bloodbath_Fbv1XCPZS9QhB6nh.json) |
 
 ### Body Manipulation (1 spells)
 

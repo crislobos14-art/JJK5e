@@ -1,5 +1,22 @@
 # Changelog
 
+## 1.31.0 — Técnica por técnica: Blood Manipulation
+- Las técnicas de sangre ahora descuentan también sus **PG** (se puede desmarcar en el diálogo si usas otra
+  fuente de sangre).
+- **Blood Techniques**: cada técnica es su propia acción con su coste: Crimson Binding (apresado, repite FUE al
+  inicio de su turno), Slicing Exorcism (ataque 1d10 + mod.), Blood Edge, Crimson Rain (3d10, 15 pies), Blood Burst
+  (4d6 al impactar), Blood Meteorite (ataque 4d4 + mod.) y Blood Geyser (5d10). Antes Crimson Binding hacía el daño
+  de Slicing Exorcism y Crimson Rain derribaba siempre.
+- **Flowing Red Scale**: ventaja en salvaciones de DES y pruebas de FUE; se quitó el viejo efecto manual que
+  duplicaba el +2 CA.
+- **Convergence**: cargar da con Midi un bono opcional de +competencia dados de daño en tu siguiente técnica;
+  versión rápida con CE.
+- **Piercing Blood**: línea de 100 pies (5 PG) y barrido en cono de 130 pies.
+- **Bloodbath**: 4d12 necrótico en iniciativa 20 a las criaturas que elijas.
+- **Blood Puppet**: incapacitado mientras dure tu concentración, repite CON al inicio de su turno; orden como
+  acción adicional.
+- Automatizados a mano: 25/360 spells. Sin probar en Foundry real con Midi-QOL.
+
 ## 1.30.0 — Técnica por técnica: Black Box
 - **Dark Cube**: cubo de 10 pies a 30 pies; salvación de DES o queda atrapado (cegado sin luz). El CE extra son
   los refuerzos (hasta tu mod. de EM). La descripción del efecto da CA/PG del cubo.

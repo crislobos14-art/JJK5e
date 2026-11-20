@@ -19,7 +19,7 @@
    "qNvp8X1IeGQJn56M": {
     "_id": "qNvp8X1IeGQJn56M",
     "type": "utility",
-    "name": "Bonus Action",
+    "name": "Charge (bonus action, reaction and movement)",
     "sort": 0,
     "activation": {
      "type": "bonus",
@@ -39,12 +39,57 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
-    }
+    },
+    "effects": [
+     {
+      "_id": "ETccBK8zHfpz4vuN",
+      "onSave": false
+     }
+    ]
+   },
+   "h3d4d8d2PL0h3abv": {
+    "_id": "h3d4d8d2PL0h3abv",
+    "type": "utility",
+    "name": "Quick Convergence (1+ CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "When you use a Blood Technique: +1 die (Slicing, Burst, Meteorite), +1 DC (Binding) or +1 per die (Rain, Geyser) per CE; max 1/2/3 CE at 1st/11th/18th",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "3"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
    }
   },
   "uses": {
@@ -84,9 +129,62 @@
   "jjk5e": {
    "technique": "Blood Manipulation",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceCosts": {
+    "h3d4d8d2PL0h3abv": 1
+   },
+   "ceSteps": {
+    "h3d4d8d2PL0h3abv": 1
+   },
+   "automation": "automated"
   }
  },
  "folder": "WIi7n6E644owqihn",
- "_key": "!items!NY4mXqV70GgnVRot"
+ "_key": "!items!NY4mXqV70GgnVRot",
+ "effects": [
+  {
+   "_id": "ETccBK8zHfpz4vuN",
+   "name": "Convergence (charged)",
+   "img": "modules/jjk5e/icons/techniques/blood-manipulation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Your next Blood technique this turn: +proficiency damage dice, damage die one step larger, +30 ft range (Midi offers the extra dice as an optional bonus).</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.optional.Convergence.damage.all",
+     "mode": 0,
+     "value": "(@prof)d10",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.optional.Convergence.count",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.optional.Convergence.label",
+     "mode": 0,
+     "value": "Convergence: +prof damage dice",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Blood Manipulation"
+    },
+    "dae": {
+     "specialDuration": [
+      "1Spell"
+     ]
+    }
+   },
+   "_key": "!items.effects!NY4mXqV70GgnVRot.ETccBK8zHfpz4vuN"
+  }
+ ]
 }
