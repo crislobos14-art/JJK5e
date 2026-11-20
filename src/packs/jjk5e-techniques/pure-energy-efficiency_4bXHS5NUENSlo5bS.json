@@ -15,38 +15,7 @@
    "license": "CC BY-NC-SA 4.0",
    "rules": "2014"
   },
-  "activities": {
-   "XHlZGGCDNQl0cjqH": {
-    "_id": "XHlZGGCDNQl0cjqH",
-    "type": "utility",
-    "name": "Action (10 CE)",
-    "sort": 0,
-    "activation": {
-     "type": "action",
-     "value": 1,
-     "condition": "",
-     "override": true
-    },
-    "consumption": {
-     "targets": [],
-     "scaling": {
-      "allowed": false
-     },
-     "spellSlot": false
-    },
-    "range": {
-     "units": "self",
-     "override": true
-    },
-    "target": {
-     "override": true
-    },
-    "duration": {
-     "units": "inst",
-     "override": true
-    }
-   }
-  },
+  "activities": {},
   "uses": {
    "max": "",
    "recovery": [],
@@ -82,12 +51,12 @@
  },
  "flags": {
   "jjk5e": {
-   "ceCosts": {
-    "XHlZGGCDNQl0cjqH": 10
-   },
+   "ceCosts": {},
    "technique": "Cursed Circuitry",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Passive: while a Circuit is active, the module charges 1 CE less per 5 CE of a cost.",
+   "automation": "automated"
   }
  },
  "folder": "hm057iS0RUqvPJaN",

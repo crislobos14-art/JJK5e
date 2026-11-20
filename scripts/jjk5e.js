@@ -363,7 +363,24 @@ function ceMod(actor) {
 
 function activityCost(activity) {
   const costs = activity?.item?.flags?.jjk5e?.ceCosts;
-  return Number(costs?.[activity.id] ?? 0);
+  const base = Number(costs?.[activity.id] ?? 0);
+  return circuitCost(activity, base);
+}
+
+/** Cursed Circuitry: an active Circuit lowers the base CE cost of other features (min 1); 3rd-level
+ *  Pure Energy Efficiency then saves 1 CE per 5 spent. Circuit features themselves are not reduced. */
+function circuitCost(activity, base) {
+  const actor = activity?.actor ?? activity?.item?.actor;
+  if (!actor || base <= 0 || activity?.item?.flags?.jjk5e?.technique === "Cursed Circuitry") return base;
+  let reduce = 0;
+  for (const e of actor.effects ?? []) {
+    if (e.disabled) continue;
+    reduce = Math.max(reduce, Number(e.flags?.jjk5e?.circuit) || 0);
+  }
+  if (!reduce) return base;
+  let cost = Math.max(1, base - reduce);
+  if (actor.items?.some((i) => baseName(i) === "Pure Energy Efficiency")) cost -= Math.floor(cost / 5);
+  return Math.max(1, cost);
 }
 
 /** Serializes CE spending within this client to prevent double charges from overlapping hooks. */

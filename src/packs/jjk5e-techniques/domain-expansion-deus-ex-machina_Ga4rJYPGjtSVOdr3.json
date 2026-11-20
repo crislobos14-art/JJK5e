@@ -58,6 +58,101 @@
      "concentration": false,
      "override": true
     }
+   },
+   "A8ATzCGq5bB9t206": {
+    "_id": "A8ATzCGq5bB9t206",
+    "type": "utility",
+    "name": "Domain: permanent Circuit",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "XUakKtGg0dTFyHsU",
+      "onSave": false
+     }
+    ]
+   },
+   "4CixCLX6ufqghCLk": {
+    "_id": "4CixCLX6ufqghCLk",
+    "type": "damage",
+    "name": "Initiative 20: sap cursed energy",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Damage = each target's current CE (enter it per target)",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "enemy",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "damage": {
+     "parts": [
+      {
+       "number": null,
+       "denomination": null,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "0"
+       },
+       "scaling": {}
+      }
+     ]
+    }
    }
   },
   "uses": {
@@ -116,9 +211,33 @@
     "HxmAR9Wsg6o8LZ9e": 20
    },
    "domainActivity": "HxmAR9Wsg6o8LZ9e",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "hm057iS0RUqvPJaN",
- "_key": "!items!Ga4rJYPGjtSVOdr3"
+ "_key": "!items!Ga4rJYPGjtSVOdr3",
+ "effects": [
+  {
+   "_id": "XUakKtGg0dTFyHsU",
+   "name": "Deus ex Machina: Circuit",
+   "img": "modules/jjk5e/icons/techniques/cursed-circuitry-domain.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>You are always under your Circuit in the domain.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Cursed Circuitry",
+     "circuit": 3
+    }
+   },
+   "_key": "!items.effects!Ga4rJYPGjtSVOdr3.XUakKtGg0dTFyHsU"
+  }
+ ]
 }

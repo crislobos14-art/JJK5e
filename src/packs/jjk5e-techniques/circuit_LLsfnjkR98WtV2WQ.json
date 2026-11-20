@@ -19,7 +19,7 @@
    "ujsQ0PvPcpojMKjh": {
     "_id": "ujsQ0PvPcpojMKjh",
     "type": "utility",
-    "name": "Bonus Action (2 CE)",
+    "name": "Circuit on yourself — Bonus Action (2 CE)",
     "sort": 0,
     "activation": {
      "type": "bonus",
@@ -39,6 +39,9 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
@@ -46,12 +49,18 @@
      "units": "minute",
      "concentration": false,
      "override": true
-    }
+    },
+    "effects": [
+     {
+      "_id": "neDSVKe36NRw3CVt",
+      "onSave": false
+     }
+    ]
    },
    "XKdQmZyISEExLJRY": {
     "_id": "XKdQmZyISEExLJRY",
     "type": "utility",
-    "name": "Action (5 CE)",
+    "name": "Circuit on a willing creature (5 CE)",
     "sort": 100000,
     "activation": {
      "type": "action",
@@ -67,24 +76,37 @@
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "value": "5",
+     "units": "ft",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
-    }
+    },
+    "effects": [
+     {
+      "_id": "xq7zlaKf09BKY6VW",
+      "onSave": false
+     }
+    ]
    },
    "DlaqK6vPGGgwBpGh": {
     "_id": "DlaqK6vPGGgwBpGh",
-    "type": "damage",
-    "name": "Action (2 CE)",
-    "sort": 200000,
+    "type": "utility",
+    "name": "Circuit on an item (2 CE)",
+    "sort": 0,
+    "img": null,
     "activation": {
-     "type": "action",
+     "type": "bonus",
      "value": 1,
      "condition": "",
      "override": true
@@ -92,40 +114,32 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
-    },
-    "range": {
-     "units": "spec",
-     "override": true
-    },
-    "target": {
-     "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
     },
-    "damage": {
-     "parts": [
-      {
-       "number": 2,
-       "denomination": 4,
-       "bonus": "",
-       "types": [
-        "necrotic"
-       ],
-       "custom": {
-        "enabled": false,
-        "formula": ""
-       },
-       "scaling": {
-        "number": 1
-       }
-      }
-     ]
-    }
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "4GCHDW1dx0L0a1Ju",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -171,9 +185,87 @@
    },
    "technique": "Cursed Circuitry",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "hm057iS0RUqvPJaN",
- "_key": "!items!LLsfnjkR98WtV2WQ"
+ "_key": "!items!LLsfnjkR98WtV2WQ",
+ "effects": [
+  {
+   "_id": "neDSVKe36NRw3CVt",
+   "name": "Circuit",
+   "img": "modules/jjk5e/icons/techniques/cursed-circuitry.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Efficiency: other features cost 1 CE less (min 1, applied by the module); CE that scales counts double; you may spend extra CE up to half your proficiency bonus.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Cursed Circuitry",
+     "circuit": 1
+    }
+   },
+   "_key": "!items.effects!LLsfnjkR98WtV2WQ.neDSVKe36NRw3CVt"
+  },
+  {
+   "_id": "xq7zlaKf09BKY6VW",
+   "name": "Circuit (other creature)",
+   "img": "modules/jjk5e/icons/techniques/cursed-circuitry.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Same Circuit on a willing creature for 30 seconds.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 5
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Cursed Circuitry",
+     "circuit": 1
+    }
+   },
+   "_key": "!items.effects!LLsfnjkR98WtV2WQ.xq7zlaKf09BKY6VW"
+  },
+  {
+   "_id": "4GCHDW1dx0L0a1Ju",
+   "name": "Circuit: enhanced item",
+   "img": "modules/jjk5e/icons/techniques/cursed-circuitry.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Enhancement chosen: +2d4 necrotic on hits with the item (alternatives: +2 AC, or the tool costs 1 CE less — swap the change if you pick those).</p>",
+   "changes": [
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ 2d4[necrotic]",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.rwak.damage",
+     "mode": 2,
+     "value": "+ 2d4[necrotic]",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Cursed Circuitry"
+    }
+   },
+   "_key": "!items.effects!LLsfnjkR98WtV2WQ.4GCHDW1dx0L0a1Ju"
+  }
+ ]
 }

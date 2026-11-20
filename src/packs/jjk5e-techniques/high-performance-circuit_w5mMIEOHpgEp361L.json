@@ -19,7 +19,7 @@
    "2NVKEHapFnbt8le4": {
     "_id": "2NVKEHapFnbt8le4",
     "type": "utility",
-    "name": "Bonus Action (2 CE)",
+    "name": "High Performance Circuit — Bonus Action (2 CE)",
     "sort": 0,
     "activation": {
      "type": "bonus",
@@ -39,20 +39,71 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
      "value": "1",
      "units": "hour",
-     "concentration": false,
      "override": true
-    }
+    },
+    "effects": [
+     {
+      "_id": "fpQ7lo6TRhBnHwPI",
+      "onSave": false
+     }
+    ]
    },
    "35NYwF70yqZU3pJU": {
     "_id": "35NYwF70yqZU3pJU",
-    "type": "damage",
-    "name": "Action (2 CE)",
-    "sort": 100000,
+    "type": "utility",
+    "name": "High Performance item (2 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "VFwZ3i4JxzJaYNrR",
+      "onSave": false
+     }
+    ]
+   },
+   "8gcSBl1R5Dnp91P7": {
+    "_id": "8gcSBl1R5Dnp91P7",
+    "type": "utility",
+    "name": "High Performance on a willing creature (5 CE)",
+    "sort": 0,
+    "img": null,
     "activation": {
      "type": "action",
      "value": 1,
@@ -62,40 +113,34 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
-    },
-    "range": {
-     "units": "spec",
-     "override": true
-    },
-    "target": {
-     "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
     },
-    "damage": {
-     "parts": [
-      {
-       "number": 2,
-       "denomination": 6,
-       "bonus": "",
-       "types": [
-        "necrotic"
-       ],
-       "custom": {
-        "enabled": false,
-        "formula": ""
-       },
-       "scaling": {
-        "number": 1
-       }
-      }
-     ]
-    }
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "kzPUfErXydA3sscz",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -136,37 +181,91 @@
   "jjk5e": {
    "ceCosts": {
     "2NVKEHapFnbt8le4": 2,
-    "35NYwF70yqZU3pJU": 2
+    "35NYwF70yqZU3pJU": 2,
+    "8gcSBl1R5Dnp91P7": 5
    },
    "technique": "Cursed Circuitry",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "hm057iS0RUqvPJaN",
  "effects": [
   {
-   "_id": "wftLXfHdXPvGV4EQ",
-   "name": "High Performance Circuit (toggle)",
+   "_id": "fpQ7lo6TRhBnHwPI",
+   "name": "High Performance Circuit",
    "img": "modules/jjk5e/icons/techniques/cursed-circuitry.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Improved Efficiency: other features cost 3 CE less (min 1, applied by the module); scaling CE counts triple; extra CE up to your proficiency bonus. 1 hour (8 hours at 11th).</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 600
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Cursed Circuitry",
+     "circuit": 3
+    }
+   },
+   "_key": "!items.effects!w5mMIEOHpgEp361L.fpQ7lo6TRhBnHwPI"
+  },
+  {
+   "_id": "VFwZ3i4JxzJaYNrR",
+   "name": "High Performance item",
+   "img": "modules/jjk5e/icons/techniques/cursed-circuitry.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Two enhancements: +2d6 necrotic on hits (2d10 at 11th) and +3 AC (+5 at 11th).</p>",
    "changes": [
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ 2d(6 + 4 * floor(min(@details.level, 11) / 11))[necrotic]",
+     "priority": 20
+    },
     {
      "key": "system.attributes.ac.bonus",
      "mode": 2,
-     "value": "+3",
-     "priority": null
+     "value": "+ (3 + 2 * floor(min(@details.level, 11) / 11))",
+     "priority": 20
     }
    ],
-   "transfer": true,
-   "disabled": true,
-   "duration": {},
-   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "duration": {
+    "rounds": 600
+   },
    "flags": {
     "jjk5e": {
-     "auto": "toggle"
+     "technique": "Cursed Circuitry"
     }
    },
-   "_key": "!items.effects!w5mMIEOHpgEp361L.wftLXfHdXPvGV4EQ"
+   "_key": "!items.effects!w5mMIEOHpgEp361L.VFwZ3i4JxzJaYNrR"
+  },
+  {
+   "_id": "kzPUfErXydA3sscz",
+   "name": "High Performance Circuit (other)",
+   "img": "modules/jjk5e/icons/techniques/cursed-circuitry.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Lasts 10 minutes on another creature.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 100
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Cursed Circuitry",
+     "circuit": 3
+    }
+   },
+   "_key": "!items.effects!w5mMIEOHpgEp361L.kzPUfErXydA3sscz"
   }
  ],
  "_key": "!items!w5mMIEOHpgEp361L"

@@ -3,13 +3,13 @@
 > Generado desde el compendio y las fuentes. **No certifica ejecución en Foundry ni fidelidad semántica a cada regla**.
 
 - Spells examinados: **360**; técnicas agrupadas: **81**.
-- Utilidad sin efecto configurado: revisar lógica: **98**.
+- Utilidad sin efecto configurado: revisar lógica: **97**.
 - Utilidad con efecto: comprobar activación: **15**.
-- Dominio genérico: resolver propiedades particulares: **45**.
+- Dominio genérico: resolver propiedades particulares: **44**.
 - Salvación sin daño/efecto automático: **25**.
 - Ataque sin daño propio: comprobar intención: **10**.
-- Mecánica configurada; falta prueba Foundry: **108**.
-- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **59**.
+- Mecánica configurada; falta prueba Foundry: **105**.
+- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **64**.
 
 ## Interpretación
 
@@ -151,11 +151,11 @@
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Circuit | 1 | utility:Bonus Action (2 CE); utility:Action (5 CE); damage:Action (2 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/circuit_LLsfnjkR98WtV2WQ.json) |
-| Pure Energy Efficiency | 3 | utility:Action (10 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/pure-energy-efficiency_4bXHS5NUENSlo5bS.json) |
-| High Performance Circuit | 6 | utility:Bonus Action (2 CE); damage:Action (2 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/high-performance-circuit_w5mMIEOHpgEp361L.json) |
-| Circuit Breaker | 11 | damage:Bonus Action | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/circuit-breaker_ySExszCtKEff7Lhl.json) |
-| Domain Expansion: Deus ex Machina | 18 | utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-deus-ex-machina_Ga4rJYPGjtSVOdr3.json) |
+| Circuit | 1 | utility:Circuit on yourself — Bonus Action (2 CE); utility:Circuit on a willing creature (5 CE); utility:Circuit on an item (2 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/circuit_LLsfnjkR98WtV2WQ.json) |
+| Pure Energy Efficiency | 3 |  | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/pure-energy-efficiency_4bXHS5NUENSlo5bS.json) |
+| High Performance Circuit | 6 | utility:High Performance Circuit — Bonus Action (2 CE); utility:High Performance item (2 CE); utility:High Performance on a willing creature (5 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/high-performance-circuit_w5mMIEOHpgEp361L.json) |
+| Circuit Breaker | 11 | utility:Release a circuit (bonus action) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/circuit-breaker_ySExszCtKEff7Lhl.json) |
+| Domain Expansion: Deus ex Machina | 18 | utility:Expand Domain (20 CE); utility:Domain: permanent Circuit; damage:Initiative 20: sap cursed energy | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-deus-ex-machina_Ga4rJYPGjtSVOdr3.json) |
 
 ### Cursed Corpse Creation (3 spells)
 

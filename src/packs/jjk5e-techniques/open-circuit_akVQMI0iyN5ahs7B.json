@@ -23,44 +23,67 @@
   "activities": {
    "E46etEU7UM9lLuNR": {
     "_id": "E46etEU7UM9lLuNR",
-    "type": "utility",
-    "name": "Action (10+ CE)",
+    "type": "save",
+    "name": "Open Circuit — Action (10 CE)",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "action",
      "value": 1,
-     "condition": ""
+     "condition": "",
+     "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": true,
-      "max": "20"
-     }
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
      "value": "5",
-     "units": "ft"
+     "units": "ft",
+     "override": true
     },
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "odUqwgvfuswx4W6b",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "wis",
+      "cha"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
      }
     },
-    "duration": {
-     "value": "1",
-     "units": "hour",
-     "concentration": false
+    "damage": {
+     "onSave": "none",
+     "parts": []
     }
    }
   }
  },
  "flags": {
   "jjk5e": {
-   "ceSteps": {
-    "E46etEU7UM9lLuNR": 1
-   },
+   "ceSteps": {},
    "ceCosts": {
     "E46etEU7UM9lLuNR": 10
    },
@@ -78,10 +101,33 @@
       "Cursed Circuitry"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!akVQMI0iyN5ahs7B"
+ "_key": "!items!akVQMI0iyN5ahs7B",
+ "effects": [
+  {
+   "_id": "odUqwgvfuswx4W6b",
+   "name": "Open Circuit",
+   "img": "modules/jjk5e/icons/techniques/cursed-circuitry.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>For 1 hour it takes the caster's CE modifier in necrotic damage for every CE it spends (GM applies).</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 600
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Cursed Circuitry"
+    }
+   },
+   "_key": "!items.effects!akVQMI0iyN5ahs7B.odUqwgvfuswx4W6b"
+  }
+ ]
 }

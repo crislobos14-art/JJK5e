@@ -18,9 +18,10 @@
   "activities": {
    "iRqx406U0RSXjtZb": {
     "_id": "iRqx406U0RSXjtZb",
-    "type": "damage",
-    "name": "Bonus Action",
+    "type": "utility",
+    "name": "Release a circuit (bonus action)",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "bonus",
      "value": 1,
@@ -30,42 +31,31 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
     },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
     "range": {
-     "units": "spec",
+     "units": "self",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
-    "duration": {
-     "value": "8",
-     "units": "hour",
-     "concentration": false,
-     "override": true
-    },
-    "damage": {
-     "parts": [
-      {
-       "number": 5,
-       "denomination": 10,
-       "bonus": "",
-       "types": [
-        "necrotic"
-       ],
-       "custom": {
-        "enabled": false,
-        "formula": ""
-       },
-       "scaling": {
-        "number": 1
-       }
-      }
-     ]
-    }
+    "effects": [
+     {
+      "_id": "bmdtQuhxmplw5dMm",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -106,9 +96,45 @@
   "jjk5e": {
    "technique": "Cursed Circuitry",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Circuits now last 8 hours (adjust the effect duration).",
+   "automation": "automated"
   }
  },
  "folder": "hm057iS0RUqvPJaN",
- "_key": "!items!ySExszCtKEff7Lhl"
+ "_key": "!items!ySExszCtKEff7Lhl",
+ "effects": [
+  {
+   "_id": "bmdtQuhxmplw5dMm",
+   "name": "Circuit Breaker",
+   "img": "modules/jjk5e/icons/techniques/cursed-circuitry.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Your next unarmed strike or attack with that item deals +5d10 necrotic on a hit.</p>",
+   "changes": [
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ 5d10[necrotic]",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Cursed Circuitry"
+    },
+    "dae": {
+     "specialDuration": [
+      "1Hit"
+     ]
+    }
+   },
+   "_key": "!items.effects!ySExszCtKEff7Lhl.bmdtQuhxmplw5dMm"
+  }
+ ]
 }

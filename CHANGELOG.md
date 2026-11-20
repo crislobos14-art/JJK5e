@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.41.0 — Técnica por técnica: Cursed Circuitry
+- **Circuit / High Performance Circuit**: el módulo ahora rebaja el coste de CE del resto de rasgos mientras el circuito está activo (−1 o −3, mínimo 1); con **Pure Energy Efficiency** además se ahorra 1 CE por cada 5.
+- Circuito en objetos: +2d4 necrótico (alto rendimiento: +2d6/2d10 y +3/+5 CA).
+- **Circuit Breaker**: el siguiente golpe hace +5d10 necrótico.
+- **Deus ex Machina**: circuito permanente en el dominio y drenaje de CE en iniciativa 20.
+- **Open Circuit**: salvación de EM; 1 hora de daño por CE gastado.
+- Automatizados a mano: 64/360. Sin probar en Foundry real.
+
 ## 1.40.0 — Técnica por técnica: Cursed Cannon
 - **Granite Blast**: CE extra limitado a tu mod. de EM; disparo dividido de Grape Choux (+1 CE).
 - **Dessert Deluge**: acciones +1 a +5 al siguiente ataque de EM (1–5 CE).

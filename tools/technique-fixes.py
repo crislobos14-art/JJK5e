@@ -1403,6 +1403,100 @@ def cursed_cannon(S):
     mark(cs)
 
 
+def set_flag(item, eid, **kv):
+    for e in item["effects"]:
+        if e["_id"] == eid: e["flags"].setdefault("jjk5e", {}).update(kv)
+
+
+def cursed_circuitry(S):
+    touch = {"value": "5", "units": "ft", "override": True}
+    c = S.get("Circuit")
+    me = fx(c, "self", "Circuit", rounds=10,
+            desc="Efficiency: other features cost 1 CE less (min 1, applied by the module); CE that scales counts "
+                 "double; you may spend extra CE up to half your proficiency bonus.")
+    set_flag(c, me, circuit=1)
+    other = fx(c, "other", "Circuit (other creature)", rounds=5, desc="Same Circuit on a willing creature for 30 seconds.")
+    set_flag(c, other, circuit=1)
+    a = c["system"]["activities"]
+    a["ujsQ0PvPcpojMKjh"]["name"] = "Circuit on yourself — Bonus Action (2 CE)"
+    a["ujsQ0PvPcpojMKjh"]["range"], a["ujsQ0PvPcpojMKjh"]["target"] = RANGE_SELF, SELF
+    apply(a["ujsQ0PvPcpojMKjh"], me)
+    a["XKdQmZyISEExLJRY"]["name"] = "Circuit on a willing creature (5 CE)"
+    a["XKdQmZyISEExLJRY"]["range"], a["XKdQmZyISEExLJRY"]["target"] = touch, one_creature()
+    apply(a["XKdQmZyISEExLJRY"], other)
+    act(c, "DlaqK6vPGGgwBpGh", "utility", "Circuit on an item (2 CE)", "bonus", range=touch, target=SELF)
+    it = c["system"]["activities"]["DlaqK6vPGGgwBpGh"]
+    apply(it, fx(c, "item", "Circuit: enhanced item", rounds=10,
+                 changes=[("system.bonuses.mwak.damage", 2, "+ 2d4[necrotic]"), ("system.bonuses.rwak.damage", 2, "+ 2d4[necrotic]")],
+                 desc="Enhancement chosen: +2d4 necrotic on hits with the item (alternatives: +2 AC, or the tool costs "
+                      "1 CE less — swap the change if you pick those)."))
+    mark(c)
+
+    p = S.get("Pure Energy Efficiency")
+    p["system"]["activities"] = {}
+    p["flags"]["jjk5e"]["ceCosts"] = {}
+    note(p, "Passive: while a Circuit is active, the module charges 1 CE less per 5 CE of a cost.")
+    mark(p)
+
+    h = S.get("High Performance Circuit")
+    h["effects"] = [e for e in h.get("effects", []) if e["_id"] != "wftLXfHdXPvGV4EQ"]
+    hp_ = fx(h, "self", "High Performance Circuit", rounds=600,
+             desc="Improved Efficiency: other features cost 3 CE less (min 1, applied by the module); scaling CE "
+                  "counts triple; extra CE up to your proficiency bonus. 1 hour (8 hours at 11th).")
+    set_flag(h, hp_, circuit=3)
+    a = h["system"]["activities"]
+    a["2NVKEHapFnbt8le4"]["name"] = "High Performance Circuit — Bonus Action (2 CE)"
+    a["2NVKEHapFnbt8le4"]["range"], a["2NVKEHapFnbt8le4"]["target"] = RANGE_SELF, SELF
+    a["2NVKEHapFnbt8le4"]["duration"] = {"value": "1", "units": "hour", "override": True}
+    apply(a["2NVKEHapFnbt8le4"], hp_)
+    act(h, "35NYwF70yqZU3pJU", "utility", "High Performance item (2 CE)", "bonus", range=touch, target=SELF)
+    apply(h["system"]["activities"]["35NYwF70yqZU3pJU"],
+          fx(h, "item", "High Performance item", rounds=600,
+             changes=[("system.bonuses.mwak.damage", 2, "+ 2d(6 + 4 * floor(min(@details.level, 11) / 11))[necrotic]"),
+                      ("system.attributes.ac.bonus", 2, "+ (3 + 2 * floor(min(@details.level, 11) / 11))")],
+             desc="Two enhancements: +2d6 necrotic on hits (2d10 at 11th) and +3 AC (+5 at 11th)."))
+    o = act(h, "other", "utility", "High Performance on a willing creature (5 CE)", "action", range=touch, target=one_creature())
+    o_fx = fx(h, "other", "High Performance Circuit (other)", rounds=100, desc="Lasts 10 minutes on another creature.")
+    set_flag(h, o_fx, circuit=3)
+    apply(o, o_fx)
+    cost(h, o, 5)
+    mark(h)
+
+    b = S.get("Circuit Breaker")
+    act(b, "iRqx406U0RSXjtZb", "utility", "Release a circuit (bonus action)", "bonus", range=RANGE_SELF, target=SELF)
+    apply(b["system"]["activities"]["iRqx406U0RSXjtZb"],
+          fx(b, "charge", "Circuit Breaker", rounds=1, special=["1Hit"],
+             changes=[("system.bonuses.mwak.damage", 2, "+ 5d10[necrotic]")],
+             desc="Your next unarmed strike or attack with that item deals +5d10 necrotic on a hit."))
+    note(b, "Circuits now last 8 hours (adjust the effect duration).")
+    mark(b)
+
+    d = S.get("Domain Expansion: Deus ex Machina")
+    alw = act(d, "always", "utility", "Domain: permanent Circuit", "special", range=RANGE_SELF, target=SELF)
+    on = fx(d, "circuit", "Deus ex Machina: Circuit", rounds=10, desc="You are always under your Circuit in the domain.")
+    set_flag(d, on, circuit=3)
+    apply(alw, on)
+    free(d, alw)
+    sap = act(d, "init20", "damage", "Initiative 20: sap cursed energy", "special",
+              damage={"parts": [{"number": None, "denomination": None, "bonus": "", "types": ["necrotic"],
+                                 "custom": {"enabled": True, "formula": "0"}, "scaling": {}}]},
+              target={"affects": {"type": "enemy", "choice": True}, "override": True})
+    sap["activation"]["condition"] = "Damage = each target's current CE (enter it per target)"
+    free(d, sap)
+    mark(d)
+
+    oc = S.get("Open Circuit")
+    a = oc["system"]["activities"]["E46etEU7UM9lLuNR"]
+    act(oc, "E46etEU7UM9lLuNR", "save", "Open Circuit — Action (10 CE)", "action", range=touch, target=one_creature(),
+        save={"ability": ["wis", "cha"], "dc": {"calculation": "spellcasting", "formula": ""}},
+        damage={"onSave": "none", "parts": []})
+    oc["flags"]["jjk5e"].get("ceSteps", {}).pop("E46etEU7UM9lLuNR", None)
+    apply(oc["system"]["activities"]["E46etEU7UM9lLuNR"],
+          fx(oc, "open", "Open Circuit", rounds=600,
+             desc="For 1 hour it takes the caster's CE modifier in necrotic damage for every CE it spends (GM applies)."))
+    mark(oc)
+
+
 TECHNIQUES = {"Antigravity System": antigravity_system,
               "Auspicious Beast Summon": auspicious_beast_summon,
               "Black Bird Manipulation": black_bird_manipulation,
@@ -1417,7 +1511,8 @@ TECHNIQUES = {"Antigravity System": antigravity_system,
               "Comedian": comedian,
               "Construction": construction,
               "Contractual Recreation": contractual_recreation,
-              "Cursed Cannon": cursed_cannon}
+              "Cursed Cannon": cursed_cannon,
+              "Cursed Circuitry": cursed_circuitry}
 
 if __name__ == "__main__":
     args = sys.argv[1:]
