@@ -1,214 +1,233 @@
 {
- "_id": "mBjxZbJJs4CS4osY",
- "name": "Unrelenting Fury",
- "type": "spell",
- "img": "modules/jjk5e/icons/techniques/missile-fist.svg",
- "system": {
-  "description": {
-   "value": "<p><em>Missile Fist — Innate Technique (6th level)</em></p><p>At 6th level, you have learned that a strong offense is the only thing that matters. As an action for 3 CE, you create a 30 ft cone of <em>Missile Fists</em>. All creatures within the cone must make a Strength saving throw. <br />\nOn a failed save, they take 2d8 necrotic damage for every attack you can make as an action and they are knocked prone. On a successful save, a creature takes half as much damage and is not knocked prone. You can spend your bonus action to increase the damage by 2d8. You can spend cursed energy up to your CE modifier to increase damage by 2d8 per CE.</p>",
-   "chat": ""
-  },
-  "source": {
-   "book": "JJK 5e V.6",
-   "page": "",
-   "custom": "",
-   "license": "CC BY-NC-SA 4.0",
-   "rules": "2014"
-  },
-  "activities": {
-   "hfrVz0zJOTUV1Y4k": {
-    "_id": "hfrVz0zJOTUV1Y4k",
-    "type": "save",
-    "name": "Action (3 CE)",
-    "sort": 0,
-    "activation": {
-     "type": "action",
-     "value": 1,
-     "condition": "",
-     "override": true
+  "_id": "mBjxZbJJs4CS4osY",
+  "name": "Unrelenting Fury",
+  "type": "spell",
+  "img": "modules/jjk5e/icons/techniques/missile-fist.svg",
+  "system": {
+    "description": {
+      "value": "<p><em>Missile Fist — Innate Technique (6th level)</em></p><p>At 6th level, you have learned that a strong offense is the only thing that matters. As an action for 3 CE, you create a 30 ft cone of <em>Missile Fists</em>. All creatures within the cone must make a Strength saving throw. <br />\nOn a failed save, they take 2d8 necrotic damage for every attack you can make as an action and they are knocked prone. On a successful save, a creature takes half as much damage and is not knocked prone. You can spend your bonus action to increase the damage by 2d8. You can spend cursed energy up to your CE modifier to increase damage by 2d8 per CE.</p>",
+      "chat": ""
     },
-    "consumption": {
-     "targets": [],
-     "scaling": {
-      "allowed": false
-     },
-     "spellSlot": false
+    "source": {
+      "book": "JJK 5e V.6",
+      "page": "",
+      "custom": "",
+      "license": "CC BY-NC-SA 4.0",
+      "rules": "2014"
     },
-    "range": {
-     "units": "self",
-     "override": true
-    },
-    "target": {
-     "template": {
-      "type": "cone",
-      "size": "30",
-      "units": "ft",
-      "count": "1",
-      "contiguous": false
-     },
-     "affects": {
-      "type": "creature",
-      "choice": false
-     },
-     "override": true
-    },
-    "duration": {
-     "units": "inst",
-     "override": true
-    },
-    "save": {
-     "ability": [
-      "str"
-     ],
-     "dc": {
-      "calculation": "spellcasting",
-      "formula": ""
-     }
-    },
-    "damage": {
-     "onSave": "none",
-     "parts": []
-    }
-   },
-   "bkIrMyJl0NgekUq9": {
-    "_id": "bkIrMyJl0NgekUq9",
-    "type": "damage",
-    "name": "Action (1+ CE)",
-    "sort": 100000,
-    "activation": {
-     "type": "action",
-     "value": 1,
-     "condition": "",
-     "override": true
-    },
-    "consumption": {
-     "targets": [],
-     "scaling": {
-      "allowed": true,
-      "max": "max(1, max(@abilities.wis.mod, @abilities.cha.mod))"
-     },
-     "spellSlot": false
-    },
-    "range": {
-     "units": "spec",
-     "override": true
-    },
-    "target": {
-     "override": true
-    },
-    "duration": {
-     "units": "inst",
-     "override": true
-    },
-    "damage": {
-     "parts": [
-      {
-       "number": 2,
-       "denomination": 8,
-       "bonus": "",
-       "types": [
-        "necrotic"
-       ],
-       "custom": {
-        "enabled": false,
-        "formula": ""
-       },
-       "scaling": {
-        "mode": "whole",
-        "number": 2
-       }
+    "activities": {
+      "hfrVz0zJOTUV1Y4k": {
+        "_id": "hfrVz0zJOTUV1Y4k",
+        "type": "save",
+        "name": "Unrelenting Fury (3 CE; set extra attacks in scaling)",
+        "sort": 0,
+        "activation": {
+          "type": "action",
+          "value": 1,
+          "condition": "2d8 necrotic per attack available in your Attack action; scaling adds 2d8 per additional attack without extra CE. Failed save also knocks prone.",
+          "override": true
+        },
+        "consumption": {
+          "targets": [],
+          "scaling": {
+            "allowed": true,
+            "max": "6"
+          },
+          "spellSlot": false
+        },
+        "range": {
+          "units": "self",
+          "override": true
+        },
+        "target": {
+          "template": {
+            "type": "cone",
+            "size": "30",
+            "units": "ft",
+            "count": "1",
+            "contiguous": false
+          },
+          "affects": {
+            "type": "creature",
+            "choice": false
+          },
+          "override": true
+        },
+        "duration": {
+          "units": "inst",
+          "override": true
+        },
+        "save": {
+          "ability": [
+            "str"
+          ],
+          "dc": {
+            "calculation": "spellcasting",
+            "formula": ""
+          }
+        },
+        "damage": {
+          "onSave": "half",
+          "parts": [
+            {
+              "number": 2,
+              "denomination": 8,
+              "bonus": "",
+              "types": [
+                "necrotic"
+              ],
+              "custom": {
+                "enabled": false,
+                "formula": ""
+              },
+              "scaling": {
+                "mode": "whole",
+                "number": 2
+              }
+            }
+          ]
+        },
+        "effects": [
+          {
+            "_id": "qZha6XPcysoBXKi8",
+            "onSave": false
+          }
+        ]
+      },
+      "bkIrMyJl0NgekUq9": {
+        "_id": "bkIrMyJl0NgekUq9",
+        "type": "damage",
+        "name": "Additional Fury damage (1+ CE, same action)",
+        "sort": 100000,
+        "activation": {
+          "type": "special",
+          "value": null,
+          "condition": "Additional 2d8 for each extra cursed energy spent as part of Unrelenting Fury. Apply save reductions consistently with the base activity.",
+          "override": true
+        },
+        "consumption": {
+          "targets": [],
+          "scaling": {
+            "allowed": true,
+            "max": "max(1, max(@abilities.wis.mod, @abilities.cha.mod))"
+          },
+          "spellSlot": false
+        },
+        "range": {
+          "units": "spec",
+          "override": true
+        },
+        "target": {
+          "override": true
+        },
+        "duration": {
+          "units": "inst",
+          "override": true
+        },
+        "damage": {
+          "parts": [
+            {
+              "number": 2,
+              "denomination": 8,
+              "bonus": "",
+              "types": [
+                "necrotic"
+              ],
+              "custom": {
+                "enabled": false,
+                "formula": ""
+              },
+              "scaling": {
+                "mode": "whole",
+                "number": 2
+              }
+            }
+          ]
+        },
+        "effects": []
       }
-     ]
     },
-    "effects": [
-     {
-      "_id": "qZha6XPcysoBXKi8",
-      "onSave": false
-     }
-    ]
-   }
+    "uses": {
+      "max": "",
+      "recovery": [],
+      "spent": 0
+    },
+    "level": 3,
+    "school": "jjk",
+    "method": "technique",
+    "prepared": 1,
+    "ability": "",
+    "properties": [],
+    "materials": {
+      "value": "",
+      "consumed": false,
+      "cost": 0,
+      "supply": 0
+    },
+    "activation": {
+      "type": "action",
+      "value": 1,
+      "condition": "",
+      "override": true
+    },
+    "duration": {
+      "units": "inst"
+    },
+    "range": {
+      "units": "self",
+      "override": true
+    },
+    "target": {
+      "template": {
+        "type": "cone",
+        "size": "30",
+        "units": "ft",
+        "count": "1",
+        "contiguous": false
+      },
+      "affects": {
+        "type": "creature",
+        "choice": false
+      },
+      "override": true
+    },
+    "sourceItem": ""
   },
-  "uses": {
-   "max": "",
-   "recovery": [],
-   "spent": 0
-  },
-  "level": 3,
-  "school": "jjk",
-  "method": "technique",
-  "prepared": 1,
-  "ability": "",
-  "properties": [],
-  "materials": {
-   "value": "",
-   "consumed": false,
-   "cost": 0,
-   "supply": 0
-  },
-  "activation": {
-   "type": "action",
-   "value": 1,
-   "condition": "",
-   "override": true
-  },
-  "duration": {
-   "units": "inst"
-  },
-  "range": {
-   "units": "self",
-   "override": true
-  },
-  "target": {
-   "template": {
-    "type": "cone",
-    "size": "30",
-    "units": "ft",
-    "count": "1",
-    "contiguous": false
-   },
-   "affects": {
-    "type": "creature",
-    "choice": false
-   },
-   "override": true
-  },
-  "sourceItem": ""
- },
- "flags": {
-  "jjk5e": {
-   "ceSteps": {
-    "bkIrMyJl0NgekUq9": 1
-   },
-   "ceCosts": {
-    "hfrVz0zJOTUV1Y4k": 3,
-    "bkIrMyJl0NgekUq9": 1
-   },
-   "technique": "Missile Fist",
-   "level": 6,
-   "spellFrom": "feat"
-  }
- },
- "effects": [
-  {
-   "_id": "qZha6XPcysoBXKi8",
-   "name": "Prone (Unrelenting Fury)",
-   "img": "modules/jjk5e/icons/techniques/missile-fist.svg",
-   "statuses": [
-    "prone"
-   ],
-   "changes": [],
-   "transfer": false,
-   "disabled": false,
-   "duration": {},
-   "description": "",
-   "flags": {
+  "flags": {
     "jjk5e": {
-     "condition": "prone"
+      "ceSteps": {
+        "bkIrMyJl0NgekUq9": 1
+      },
+      "ceCosts": {
+        "hfrVz0zJOTUV1Y4k": 3,
+        "bkIrMyJl0NgekUq9": 1
+      },
+      "technique": "Missile Fist",
+      "level": 6,
+      "spellFrom": "feat"
     }
-   },
-   "_key": "!items.effects!mBjxZbJJs4CS4osY.qZha6XPcysoBXKi8"
-  }
- ],
- "folder": "coN536PDmNM37MtV",
- "_key": "!items!mBjxZbJJs4CS4osY"
+  },
+  "effects": [
+    {
+      "_id": "qZha6XPcysoBXKi8",
+      "name": "Prone (Unrelenting Fury)",
+      "img": "modules/jjk5e/icons/techniques/missile-fist.svg",
+      "statuses": [
+        "prone"
+      ],
+      "changes": [],
+      "transfer": false,
+      "disabled": false,
+      "duration": {},
+      "description": "",
+      "flags": {
+        "jjk5e": {
+          "condition": "prone"
+        }
+      },
+      "_key": "!items.effects!mBjxZbJJs4CS4osY.qZha6XPcysoBXKi8"
+    }
+  ],
+  "folder": "coN536PDmNM37MtV",
+  "_key": "!items!mBjxZbJJs4CS4osY"
 }
