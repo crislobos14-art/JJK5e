@@ -6,9 +6,9 @@
 - Utilidad sin efecto configurado: revisar lógica: **114**.
 - Utilidad con efecto: comprobar activación: **18**.
 - Dominio genérico: resolver propiedades particulares: **57**.
-- Salvación sin daño/efecto automático: **37**.
+- Salvación sin daño/efecto automático: **35**.
 - Ataque sin daño propio: comprobar intención: **12**.
-- Mecánica configurada; falta prueba Foundry: **122**.
+- Mecánica configurada; falta prueba Foundry: **124**.
 
 ## Interpretación
 
@@ -265,7 +265,7 @@
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
 | Divergent Flow | 1 | utility:Action (1 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/divergent-flow_WwsOi9d6vXukT6rB.json) |
-| Martial Prowess | 3 | utility:Bonus Action; save:Manji Kick | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/martial-prowess_CrWM1xCTd63nJBUq.json) |
+| Martial Prowess | 3 | utility:Bonus Action; save:Manji Kick | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/martial-prowess_CrWM1xCTd63nJBUq.json) |
 | Stance of the Sparks | 11 | attack:Action | Ataque sin daño propio: comprobar intención | [JSON](../src/packs/jjk5e-techniques/stance-of-the-sparks_dmeqRRSG8j49BR5r.json) |
 
 ### Dragon Vein (4 spells)
@@ -459,7 +459,7 @@
 |---|---:|---|---|---|
 | Missile Impact | 1 | attack:Bonus Action (1 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/missile-impact_I0xFb7zyyLxQKE7A.json) |
 | Devastating Barrage | 3 | save:Special (1+ CE) | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/devastating-barrage_EJrxqMj9OKy7ZhlK.json) |
-| Unrelenting Fury | 6 | save:Action (3 CE); damage:Action (1+ CE) | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/unrelenting-fury_mBjxZbJJs4CS4osY.json) |
+| Unrelenting Fury | 6 | save:Unrelenting Fury (3 CE; set extra attacks in scaling); damage:Additional Fury damage (1+ CE, same action) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/unrelenting-fury_mBjxZbJJs4CS4osY.json) |
 | Maximum: Brutal Bombardment | 11 | save:Bonus Action (6 CE); save:Action (1+ CE) | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/maximum-brutal-bombardment_ExKo8huWEv4TTFFX.json) |
 | Domain Expansion: Unrelenting Ring of Spirit | 18 | utility:Action; utility:Expand Domain (20 CE); damage:Initiative 20: Missile Fists | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-unrelenting-ring-of-spi_tEi4q2oYSdR5bUCp.json) |
 
