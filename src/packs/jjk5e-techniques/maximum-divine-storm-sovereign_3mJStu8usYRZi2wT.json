@@ -18,8 +18,8 @@
   "activities": {
    "h5IE1UtNwUcdaIdN": {
     "_id": "h5IE1UtNwUcdaIdN",
-    "type": "damage",
-    "name": "Action (10 CE)",
+    "type": "utility",
+    "name": "Divine Storm Sovereign (10 CE)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -40,9 +40,16 @@
      "override": true
     },
     "target": {
+     "template": {
+      "type": "radius",
+      "size": "50",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
      "affects": {
-      "type": "creature",
-      "count": "1"
+      "type": "enemy",
+      "choice": false
      },
      "override": true
     },
@@ -52,33 +59,20 @@
      "concentration": false,
      "override": true
     },
-    "damage": {
-     "parts": [
-      {
-       "number": 3,
-       "denomination": 10,
-       "bonus": "",
-       "types": [
-        "lightning"
-       ],
-       "custom": {
-        "enabled": false,
-        "formula": ""
-       },
-       "scaling": {
-        "number": 1
-       }
-      }
-     ]
-    }
+    "effects": [
+     {
+      "_id": "rUbl0JNvbnT7bw3K",
+      "onSave": false
+     }
+    ]
    },
    "MnsCHVI8HS7kbXrd": {
     "_id": "MnsCHVI8HS7kbXrd",
     "type": "utility",
-    "name": "Action (2 CE)",
+    "name": "Replace an attack with Lightning (2 CE, no sight needed)",
     "sort": 100000,
     "activation": {
-     "type": "action",
+     "type": "special",
      "value": 1,
      "condition": "",
      "override": true
@@ -152,9 +146,40 @@
    },
    "technique": "Disaster Storms",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Use Lightning's attack after paying the 2 CE here.",
+   "automation": "automated"
   }
  },
  "folder": "5WRl9NqkIbDZzpyp",
- "_key": "!items!3mJStu8usYRZi2wT"
+ "_key": "!items!3mJStu8usYRZi2wT",
+ "effects": [
+  {
+   "_id": "rUbl0JNvbnT7bw3K",
+   "name": "Divine Storm",
+   "img": "modules/jjk5e/icons/techniques/disaster-storms.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Heavily obscured, difficult terrain; 3d10 lightning at turn start.</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "value": "turn=start, damageRoll=3d10, damageType=lightning, label=Divine Storm",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Disaster Storms"
+    }
+   },
+   "_key": "!items.effects!3mJStu8usYRZi2wT.rUbl0JNvbnT7bw3K"
+  }
+ ]
 }

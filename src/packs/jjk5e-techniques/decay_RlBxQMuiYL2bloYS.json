@@ -24,7 +24,7 @@
    "QEU26LaIdL97ieGV": {
     "_id": "QEU26LaIdL97ieGV",
     "type": "save",
-    "name": "Action (6 CE)",
+    "name": "Decay plants (6 CE): 5d12 to plant creatures",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -38,7 +38,8 @@
      }
     },
     "range": {
-     "units": "self"
+     "units": "self",
+     "override": true
     },
     "target": {
      "template": {
@@ -51,7 +52,8 @@
      "affects": {
       "type": "creature",
       "choice": false
-     }
+     },
+     "override": true
     },
     "duration": {
      "units": "inst"
@@ -89,7 +91,7 @@
    "6CIjisR6JwyKaY4o": {
     "_id": "6CIjisR6JwyKaY4o",
     "type": "save",
-    "name": "Action (1+ CE)",
+    "name": "Withering Plant (open wound, CE up to 2× mod)",
     "sort": 100000,
     "activation": {
      "type": "action",
@@ -100,14 +102,22 @@
      "targets": [],
      "scaling": {
       "allowed": true,
-      "max": "2 * max(1, max(@abilities.wis.mod, @abilities.cha.mod))"
+      "max": "2 * max(@abilities.wis.mod, @abilities.cha.mod)"
      }
     },
     "range": {
-     "units": "spec",
+     "value": "5",
+     "units": "ft",
      "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
     },
@@ -135,11 +145,69 @@
         "formula": ""
        },
        "scaling": {
-        "mode": "whole",
         "number": 2
        }
       }
      ]
+    }
+   },
+   "hts47KweA171pVTc": {
+    "_id": "hts47KweA171pVTc",
+    "type": "attack",
+    "name": "Withering Plant: melee attack",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "melee",
+      "classification": "spell"
+     }
+    },
+    "midiProperties": {
+     "triggeredActivityId": "6CIjisR6JwyKaY4o",
+     "triggeredActivityTargets": "hitTargets",
+     "triggeredActivityRollAs": "self",
+     "triggeredActivityConsume": false,
+     "triggeredActivityConfigure": false,
+     "triggeredActivityConditionText": ""
     }
    }
   }
@@ -167,7 +235,8 @@
       "Disaster Verdure"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",

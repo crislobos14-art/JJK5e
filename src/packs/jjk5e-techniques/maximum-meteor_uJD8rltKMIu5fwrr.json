@@ -47,7 +47,7 @@
       "contiguous": false
      },
      "affects": {
-      "type": "creature",
+      "type": "enemy",
       "choice": false
      },
      "override": true
@@ -79,15 +79,67 @@
         "enabled": false,
         "formula": ""
        },
-       "scaling": {
-        "number": 1
-       }
+       "scaling": {}
+      },
+      {
+       "number": 10,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "fire"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
       }
      ]
     },
     "effects": [
      {
       "_id": "uVjr71gzsr0kefcx",
+      "onSave": false
+     }
+    ]
+   },
+   "dsX9ya8gGmxeJCsr": {
+    "_id": "dsX9ya8gGmxeJCsr",
+    "type": "utility",
+    "name": "Rise 120 ft (until end of next turn)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "AZdBIINEuxOqK4Rk",
       "onSave": false
      }
     ]
@@ -146,7 +198,8 @@
    },
    "technique": "Disaster Flames",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "effects": [
@@ -170,6 +223,33 @@
     }
    },
    "_key": "!items.effects!uJD8rltKMIu5fwrr.uVjr71gzsr0kefcx"
+  },
+  {
+   "_id": "AZdBIINEuxOqK4Rk",
+   "name": "Meteor ascent",
+   "img": "modules/jjk5e/icons/techniques/disaster-flames.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Float 120 ft up, then down harmlessly next turn.</p>",
+   "changes": [
+    {
+     "key": "system.attributes.movement.fly",
+     "mode": 4,
+     "value": "120",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 2
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Disaster Flames"
+    }
+   },
+   "_key": "!items.effects!uJD8rltKMIu5fwrr.AZdBIINEuxOqK4Rk"
   }
  ],
  "folder": "Xs1qvLjpsB4bwM5D",

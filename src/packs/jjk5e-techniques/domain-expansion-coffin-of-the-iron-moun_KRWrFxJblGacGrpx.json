@@ -19,7 +19,7 @@
    "t4HtZDdn7lJaJ9i3": {
     "_id": "t4HtZDdn7lJaJ9i3",
     "type": "damage",
-    "name": "Special",
+    "name": "Initiative 20: 10d8 fire to all others",
     "sort": 0,
     "activation": {
      "type": "special",
@@ -39,6 +39,10 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "enemy",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -165,7 +169,8 @@
     "yEt83HvWXQyc8ovN": 20
    },
    "domainActivity": "yEt83HvWXQyc8ovN",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "Xs1qvLjpsB4bwM5D",

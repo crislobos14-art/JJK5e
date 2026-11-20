@@ -19,7 +19,7 @@
    "rfqiDE2D1qWv9TeJ": {
     "_id": "rfqiDE2D1qWv9TeJ",
     "type": "save",
-    "name": "Action (1 CE)",
+    "name": "Binding Plants (1 CE)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -35,20 +35,15 @@
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "value": "30",
+     "units": "ft",
      "override": true
     },
     "target": {
-     "template": {
-      "type": "line",
-      "size": "50",
-      "units": "ft",
-      "count": "1",
-      "contiguous": false
-     },
      "affects": {
       "type": "creature",
-      "choice": false
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
@@ -59,6 +54,114 @@
     "save": {
      "ability": [
       "str"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    },
+    "effects": [
+     {
+      "_id": "Ex5F2IrqMMZF5RrV",
+      "onSave": false
+     }
+    ]
+   },
+   "V6swR8hZFSeJkXVb": {
+    "_id": "V6swR8hZFSeJkXVb",
+    "type": "utility",
+    "name": "Wall of Roots (reaction, 1 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "You or an ally is targeted by an attack. Wall HP = CE mod × proficiency.",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "wall",
+      "size": "5",
+      "width": "1",
+      "height": "10",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "",
+      "choice": false
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "useConditionText": "reaction === \"isAttacked\""
+   },
+   "LarPsQsBfxjcvCe7": {
+    "_id": "LarPsQsBfxjcvCe7",
+    "type": "save",
+    "name": "Piercing Roots (1 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "line",
+      "size": "50",
+      "width": "5",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": [],
+    "save": {
+     "ability": [
+      "dex"
      ],
      "dc": {
       "calculation": "spellcasting",
@@ -79,49 +182,10 @@
         "enabled": false,
         "formula": ""
        },
-       "scaling": {
-        "number": 1
-       }
+       "scaling": {}
       }
      ]
-    },
-    "effects": [
-     {
-      "_id": "Ex5F2IrqMMZF5RrV",
-      "onSave": false
-     }
-    ]
-   },
-   "V6swR8hZFSeJkXVb": {
-    "_id": "V6swR8hZFSeJkXVb",
-    "type": "utility",
-    "name": "Reaction (1 CE)",
-    "sort": 100000,
-    "activation": {
-     "type": "reaction",
-     "value": 1,
-     "condition": "",
-     "override": true
-    },
-    "consumption": {
-     "targets": [],
-     "scaling": {
-      "allowed": false
-     },
-     "spellSlot": false
-    },
-    "range": {
-     "units": "self",
-     "override": true
-    },
-    "target": {
-     "override": true
-    },
-    "duration": {
-     "units": "inst",
-     "override": true
-    },
-    "useConditionText": "reaction === \"isAttacked\""
+    }
    }
   },
   "uses": {
@@ -190,15 +254,35 @@
       18,
       "4d12"
      ]
+    ],
+    "LarPsQsBfxjcvCe7": [
+     [
+      1,
+      "1d12"
+     ],
+     [
+      5,
+      "2d12"
+     ],
+     [
+      11,
+      "3d12"
+     ],
+     [
+      18,
+      "4d12"
+     ]
     ]
    },
    "ceCosts": {
     "rfqiDE2D1qWv9TeJ": 1,
-    "V6swR8hZFSeJkXVb": 1
+    "V6swR8hZFSeJkXVb": 1,
+    "LarPsQsBfxjcvCe7": 1
    },
    "technique": "Disaster Verdure",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "effects": [
@@ -209,10 +293,19 @@
    "statuses": [
     "restrained"
    ],
-   "changes": [],
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "priority": 20,
+     "value": "turn=end, saveAbility=str, saveDC=JJKORIGINDC, label=Binding Plants (STR check in RAW)"
+    }
+   ],
    "transfer": false,
    "disabled": false,
-   "duration": {},
+   "duration": {
+    "rounds": 10
+   },
    "description": "",
    "flags": {
     "jjk5e": {

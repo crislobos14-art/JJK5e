@@ -19,7 +19,7 @@
    "lxIvbpHMossbpRUd": {
     "_id": "lxIvbpHMossbpRUd",
     "type": "attack",
-    "name": "Bonus Action",
+    "name": "Send a ball (bonus action)",
     "sort": 0,
     "activation": {
      "type": "bonus",
@@ -42,7 +42,8 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
@@ -79,6 +80,88 @@
       }
      ]
     }
+   },
+   "byhp12bF0dv8SYJL": {
+    "_id": "byhp12bF0dv8SYJL",
+    "type": "utility",
+    "name": "Create two wooden balls (2 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "ITzdIJLNk2DdHicc",
+      "onSave": false
+     }
+    ]
+   },
+   "UIN34A5Bi05T9em5": {
+    "_id": "UIN34A5Bi05T9em5",
+    "type": "utility",
+    "name": "Stand on a ball (bonus action)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "AYJO70Sodi2iDmGo",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -125,9 +208,62 @@
   "jjk5e": {
    "technique": "Disaster Verdure",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceCosts": {
+    "byhp12bF0dv8SYJL": 2
+   },
+   "automation": "automated"
   }
  },
  "folder": "iWhpioZs4gSAxzA7",
- "_key": "!items!u7p2yaIifyDSZYtW"
+ "_key": "!items!u7p2yaIifyDSZYtW",
+ "effects": [
+  {
+   "_id": "ITzdIJLNk2DdHicc",
+   "name": "Root Bundle balls",
+   "img": "modules/jjk5e/icons/techniques/disaster-verdure.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Two floating balls (HP = CE mod, AC 10 + CE mod).</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 600
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Disaster Verdure"
+    }
+   },
+   "_key": "!items.effects!u7p2yaIifyDSZYtW.ITzdIJLNk2DdHicc"
+  },
+  {
+   "_id": "AYJO70Sodi2iDmGo",
+   "name": "Riding a root ball",
+   "img": "modules/jjk5e/icons/techniques/disaster-verdure.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Fly speed = half your walking speed while standing on a ball.</p>",
+   "changes": [
+    {
+     "key": "system.attributes.movement.fly",
+     "mode": 4,
+     "value": "floor(@attributes.movement.walk / 2)",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Disaster Verdure"
+    }
+   },
+   "_key": "!items.effects!u7p2yaIifyDSZYtW.AYJO70Sodi2iDmGo"
+  }
+ ]
 }

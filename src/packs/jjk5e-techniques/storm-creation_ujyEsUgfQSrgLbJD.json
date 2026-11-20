@@ -19,7 +19,7 @@
    "r4vulKLiD0Z95JXC": {
     "_id": "r4vulKLiD0Z95JXC",
     "type": "save",
-    "name": "Action (3+ CE)",
+    "name": "Create storm (3+ CE): 10 ft + 5 ft per extra CE",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -31,7 +31,7 @@
      "targets": [],
      "scaling": {
       "allowed": true,
-      "max": "@prof"
+      "max": "3 + @prof"
      },
      "spellSlot": false
     },
@@ -68,16 +68,20 @@
       "formula": ""
      }
     },
+    "effects": [
+     {
+      "_id": "xb6NIuuTd01v8ftr",
+      "onSave": false
+     },
+     {
+      "_id": "u4oWmeI1HnqO2pfa",
+      "onSave": false
+     }
+    ],
     "damage": {
      "onSave": "none",
      "parts": []
-    },
-    "effects": [
-     {
-      "_id": "3w2T1Fbl8PyqdLl2",
-      "onSave": false
-     }
-    ]
+    }
    }
   },
   "uses": {
@@ -137,31 +141,76 @@
    },
    "technique": "Disaster Storms",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "effects": [
   {
-   "_id": "3w2T1Fbl8PyqdLl2",
-   "name": "Prone (Storm Creation)",
+   "_id": "xb6NIuuTd01v8ftr",
+   "name": "Storm (caught)",
    "img": "modules/jjk5e/icons/techniques/disaster-storms.svg",
-   "statuses": [
-    "prone"
-   ],
-   "changes": [],
+   "type": "base",
    "transfer": false,
    "disabled": false,
+   "statuses": [],
+   "description": "<p>Difficult terrain; STR save at turn start or prone; ranged attacks against it have disadvantage.</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "value": "turn=start, saveAbility=str, saveDC=JJKORIGINDC, label=Storm (prone on fail)",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.grants.disadvantage.attack.rwak",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.grants.disadvantage.attack.rsak",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
    "duration": {
-    "seconds": 60,
     "rounds": 10
    },
-   "description": "",
    "flags": {
     "jjk5e": {
-     "condition": "prone"
+     "technique": "Disaster Storms"
     }
    },
-   "_key": "!items.effects!ujyEsUgfQSrgLbJD.3w2T1Fbl8PyqdLl2"
+   "_key": "!items.effects!ujyEsUgfQSrgLbJD.xb6NIuuTd01v8ftr"
+  },
+  {
+   "_id": "u4oWmeI1HnqO2pfa",
+   "name": "Storm Creation (caster)",
+   "img": "modules/jjk5e/icons/techniques/disaster-storms.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>+CE mod to lightning/thunder damage on creatures in the storm (applies to your CE attacks).</p>",
+   "changes": [
+    {
+     "key": "system.bonuses.rsak.damage",
+     "mode": 2,
+     "value": "+ max(@abilities.wis.mod, @abilities.cha.mod)",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Disaster Storms"
+    }
+   },
+   "_key": "!items.effects!ujyEsUgfQSrgLbJD.u4oWmeI1HnqO2pfa"
   }
  ],
  "folder": "5WRl9NqkIbDZzpyp",

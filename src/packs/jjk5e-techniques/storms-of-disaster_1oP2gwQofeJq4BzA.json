@@ -19,7 +19,7 @@
    "ikVHbTkz7MEdGtag": {
     "_id": "ikVHbTkz7MEdGtag",
     "type": "save",
-    "name": "Bonus Action (1 CE)",
+    "name": "Cutting winds — Bonus Action (1 CE)",
     "sort": 0,
     "activation": {
      "type": "bonus",
@@ -73,15 +73,14 @@
        "denomination": 8,
        "bonus": "",
        "types": [
-        "slashing"
+        "slashing",
+        "thunder"
        ],
        "custom": {
         "enabled": false,
         "formula": ""
        },
-       "scaling": {
-        "number": 1
-       }
+       "scaling": {}
       }
      ]
     }
@@ -138,7 +137,7 @@
    "dmgScale": {
     "ikVHbTkz7MEdGtag": [
      [
-      0,
+      1,
       "2d8"
      ],
      [
@@ -160,7 +159,8 @@
    },
    "technique": "Disaster Storms",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "5WRl9NqkIbDZzpyp",

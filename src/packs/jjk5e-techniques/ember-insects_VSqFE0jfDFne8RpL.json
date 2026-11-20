@@ -99,7 +99,9 @@
    },
    "technique": "Disaster Flames",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Summons the Ember Insects Swarm (drag its actor from the compendium); it acts right after your turn.",
+   "automation": "automated"
   }
  },
  "folder": "Xs1qvLjpsB4bwM5D",

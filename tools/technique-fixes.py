@@ -34,8 +34,9 @@ class Store:
                     d = json.load(open(p, encoding="utf-8"))
                     self.src[d["_id"]] = (pack, p, d)
 
-    def get(self, name, pack="jjk5e-techniques"):
-        hits = [d for (pk, _, d) in self.src.values() if pk == pack and d["name"] == name]
+    def get(self, name, pack="jjk5e-techniques", technique=None):
+        hits = [d for (pk, _, d) in self.src.values() if pk == pack and d["name"] == name
+                and (technique is None or d.get("flags", {}).get("jjk5e", {}).get("technique") == technique)]
         if len(hits) != 1: raise KeyError(f"{name}: {len(hits)} matches in {pack}")
         self.dirty.add(hits[0]["_id"])
         return hits[0]
@@ -1833,6 +1834,367 @@ def deadly_sentencing(S):
     mark(pi)
 
 
+CONE_TIERS = [[1, "2d8"], [5, "3d8"], [11, "4d8"], [17, "5d8"]]
+
+
+def _cone(item, aid, nm, types):
+    a = item["system"]["activities"][aid]
+    a["name"] = nm
+    a["range"], a["target"] = RANGE_SELF, sphere(15, kind="cone")
+    a["damage"] = {"onSave": "half", "parts": [dice(2, 8, types)]}
+    scale(item, a, CONE_TIERS)
+    mark(item)
+    return a
+
+
+def _domain_burst(item, aid, nm):
+    a = item["system"]["activities"][aid]
+    a["name"] = nm
+    a["target"] = {"affects": {"type": "enemy", "choice": True}, "override": True}
+    free(item, a)
+    mark(item)
+
+
+def disaster_flames(S):
+    f = S.get("Flames of Disaster")
+    _cone(f, "tVl7onQZVcwWibt1", "Wave of flames — Bonus Action (1 CE)", ["fire"])
+
+    v = S.get("Erupting Volcanoes")
+    mk = v["system"]["activities"]["3Z7NwylVtsjnbOEp"]
+    mk["name"] = "Create volcanoes (2 CE each)"
+    mk["range"] = {"value": "60", "units": "ft", "override": True}
+    mk["target"] = {"template": {"type": "circle", "size": "2.5", "units": "ft", "count": "1", "contiguous": False},
+                    "affects": {"type": "", "choice": False}, "override": True}
+    cost(v, mk, 2, 2, "2 * max(@abilities.wis.mod, @abilities.cha.mod)")
+    er = v["system"]["activities"]["AuEcnTkTPSeA0KJa"]
+    er["name"] = "Erupt (bonus action, per volcano)"
+    er["target"] = {"template": {"type": "line", "size": "30", "width": "5", "units": "ft", "count": "1", "contiguous": False},
+                    "affects": {"type": "creature", "choice": False}, "override": True}
+    er["damage"] = {"onSave": "half", "parts": [{"number": None, "denomination": 10, "bonus": "", "types": ["fire"],
+                                                  "custom": {"enabled": True, "formula": "(@prof)d10"}, "scaling": {}}]}
+    free(v, er)
+    for e in v["effects"]:
+        if e["_id"] == "wPSk250Rrx6Njjxk":
+            e["duration"] = {"rounds": 10}
+            e["changes"] = [{"key": "flags.midi-qol.OverTime", "mode": 0, "priority": 20,
+                             "value": "turn=start, saveAbility=str, saveDC=JJKORIGINDC, label=Magma"}]
+    mark(v)
+
+    ei = S.get("Ember Insects")
+    a = ei["system"]["activities"]["B0ox2OBVuO4ILdAJ"]
+    a["range"] = {"value": "5", "units": "ft", "override": True}
+    note(ei, "Summons the Ember Insects Swarm (drag its actor from the compendium); it acts right after your turn.")
+    mark(ei)
+
+    m = S.get("Maximum: Meteor")
+    me = m["system"]["activities"]["455HEYu0KXZmQGyn"]
+    me["range"], me["target"] = RANGE_SELF, sphere(120)
+    me["target"]["affects"]["type"] = "enemy"
+    me["damage"] = {"onSave": "half", "parts": [dice(10, 4, ["bludgeoning"]), dice(10, 6, ["fire"])]}
+    fly = act(m, "fly", "utility", "Rise 120 ft (until end of next turn)", "special", range=RANGE_SELF, target=SELF)
+    apply(fly, fx(m, "fly", "Meteor ascent", rounds=2, changes=[("system.attributes.movement.fly", 4, "120")],
+                  desc="Float 120 ft up, then down harmlessly next turn."))
+    free(m, fly)
+    mark(m)
+
+    _domain_burst(S.get("Domain Expansion: Coffin of the Iron Mountain"), "t4HtZDdn7lJaJ9i3", "Initiative 20: 10d8 fire to all others")
+
+    h = S.get("Heat Extinguishment")
+    ex = h["system"]["activities"]["g24VOuJAXhXeFMkD"]
+    ex["name"] = "Extinguish flames / reduce fire 6d8 (2 CE)"
+    ex["useConditionText"] = 'reaction === "isAttacked" || reaction === "isSave"'
+    ex["range"] = {"value": "30", "units": "ft", "override": True}
+    red = act(h, "reduce", "heal", "Reduce incoming fire damage (6d8)", "special", range=RANGE_SELF, target=SELF,
+              healing={"number": 6, "denomination": 8, "bonus": "", "types": ["temphp"],
+                       "custom": {"enabled": False, "formula": ""}, "scaling": {}})
+    trigger(ex, red, "self")
+    free(h, red)
+    ht = h["system"]["activities"]["gb27jJ6YPij5sC8U"]
+    ht["name"] = "Hypothermic Touch (attack)"
+    ht["range"], ht["target"] = {"value": "5", "units": "ft", "override": True}, one_creature()
+    ht.setdefault("attack", {})["ability"] = "spellcasting"
+    ht["attack"].setdefault("type", {})["value"] = "melee"
+    free(h, ht)
+    sv = h["system"]["activities"]["TwHrX3jWHk1dqtBs"]
+    sv["name"] = "Hypothermic Touch: CON save (2d8 cold per CE)"
+    sv["activation"]["type"] = "special"
+    sv["damage"] = {"onSave": "half", "parts": [dice(2, 8, ["cold"], scale=2)]}
+    trigger(ht, sv, "hitTargets")
+    cost(h, sv, 1, 1, "2 * max(@abilities.wis.mod, @abilities.cha.mod)")
+    note(h, "Fail by 5+: speed 0 until end of its turn (GM). Fire reduction shows as temp HP soaking the hit.")
+    mark(h)
+
+
+def disaster_storms(S):
+    st = S.get("Storms of Disaster")
+    a = _cone(st, "ikVHbTkz7MEdGtag", "Cutting winds — Bonus Action (1 CE)", ["slashing", "thunder"])
+
+    l = S.get("Lightning")
+    la = l["system"]["activities"]["QQS0doGNBq7dmJc8"]
+    la["range"] = {"value": "60", "units": "ft", "override": True}
+    la["target"] = one_creature()
+    la.setdefault("attack", {})["ability"] = "spellcasting"
+    scale(l, la, [[1, "3d6"], [6, "4d6"], [11, "6d6"], [18, "8d6"]])
+    ch = act(l, "chain", "attack", "Chain to a creature within 10 ft (half damage)", "special",
+             range={"value": "10", "units": "ft", "override": True}, target=one_creature(),
+             attack={"ability": "spellcasting", "bonus": "", "critical": {"threshold": None}, "flat": False,
+                     "type": {"value": "ranged", "classification": "spell"}},
+             damage={"includeBase": False, "parts": [{"number": None, "denomination": None, "bonus": "", "types": ["lightning"],
+                     "custom": {"enabled": True, "formula": "floor(((3 + floor(min(@details.level, 6) / 6) + 2 * floor(min(@details.level, 11) / 11) + 2 * floor(min(@details.level, 18) / 18)))d6 / 2)"}, "scaling": {}}]})
+    ch["damage"]["parts"][0]["custom"]["formula"] = "floor((3 + floor(min(@details.level, 6) / 6) + 2 * floor(min(@details.level, 11) / 11) + 2 * floor(min(@details.level, 18) / 18)) * 3.5 / 2)"
+    free(l, ch)
+    mark(l)
+
+    sc = S.get("Storm Creation")
+    sa = sc["system"]["activities"]["r4vulKLiD0Z95JXC"]
+    sa["name"] = "Create storm (3+ CE): 10 ft + 5 ft per extra CE"
+    sa["range"], sa["target"] = RANGE_SELF, sphere(10)
+    sa["save"] = {"ability": [], "dc": {"calculation": "spellcasting", "formula": ""}}
+    sa["type"] = "utility"
+    for k in ("damage",): sa.pop(k, None)
+    sc["effects"] = [e for e in sc["effects"] if e["_id"] != "3w2T1Fbl8PyqdLl2"]
+    zone = fx(sc, "zone", "Storm (caught)", rounds=10,
+              changes=[("flags.midi-qol.OverTime", 0, "turn=start, saveAbility=str, saveDC=JJKORIGINDC, label=Storm (prone on fail)"),
+                       ("flags.midi-qol.grants.disadvantage.attack.rwak", 0, "1"),
+                       ("flags.midi-qol.grants.disadvantage.attack.rsak", 0, "1")],
+              desc="Difficult terrain; STR save at turn start or prone; ranged attacks against it have disadvantage.")
+    apply(sa, zone)
+    own = fx(sc, "own", "Storm Creation (caster)", rounds=10,
+             changes=[("system.bonuses.rsak.damage", 2, "+ max(@abilities.wis.mod, @abilities.cha.mod)")],
+             desc="+CE mod to lightning/thunder damage on creatures in the storm (applies to your CE attacks).")
+    sa["effects"].append({"_id": own, "onSave": False})
+    cost(sc, sa, 3, 1, "3 + @prof")
+    sa["type"] = "save"
+    sa["save"] = {"ability": ["str"], "dc": {"calculation": "spellcasting", "formula": ""}}
+    sa["damage"] = {"onSave": "none", "parts": []}
+    mark(sc)
+
+    d = S.get("Maximum: Divine Storm Sovereign")
+    ds = d["system"]["activities"]["h5IE1UtNwUcdaIdN"]
+    ds["type"] = "utility"
+    ds.pop("damage", None)
+    ds["name"] = "Divine Storm Sovereign (10 CE)"
+    ds["range"] = {"value": "300", "units": "ft", "override": True}
+    ds["target"] = sphere(50)
+    ds["target"]["affects"]["type"] = "enemy"
+    apply(ds, fx(d, "storm", "Divine Storm", rounds=10,
+                 changes=[("flags.midi-qol.OverTime", 0, "turn=start, damageRoll=3d10, damageType=lightning, label=Divine Storm")],
+                 desc="Heavily obscured, difficult terrain; 3d10 lightning at turn start."))
+    rp = d["system"]["activities"]["MnsCHVI8HS7kbXrd"]
+    rp["name"] = "Replace an attack with Lightning (2 CE, no sight needed)"
+    rp["activation"]["type"] = "special"
+    note(d, "Use Lightning's attack after paying the 2 CE here.")
+    mark(d)
+
+    _domain_burst(S.get("Domain Expansion: Heavenly Throne of the Raging Tempest"), "W34gUJDAv6OCDkM2", "Initiative 20: 6d12 lightning to all")
+
+    sd = S.get("Sunny Day")
+    su = sd["system"]["activities"]["OM31HL66a1JtFZY2"]
+    su["range"], su["target"] = RANGE_SELF, sphere(20)
+    su["target"]["affects"]["type"] = "ally"
+    su["duration"] = {"value": "2", "units": "minute", "override": True}
+    apply(su, fx(sd, "sun", "Sunny Day", rounds=20,
+                 changes=[("system.traits.dr.value", 2, "fire")],
+                 desc="Resistance to fire; temp HP = 2 × CE mod (min 2) at the start of the caster's turn."))
+    cost(sd, su, 6, 1, "6 + 2 * @prof")
+    tmp = act(sd, "thp", "heal", "Sunny Day: start-of-turn temp HP", "special", range=RANGE_SELF, target=sphere(20),
+              healing={"number": None, "denomination": None, "bonus": "", "types": ["temphp"],
+                       "custom": {"enabled": True, "formula": "max(2, 2 * max(@abilities.wis.mod, @abilities.cha.mod))"}, "scaling": {}})
+    tmp["target"]["affects"]["type"] = "ally"
+    free(sd, tmp)
+    mark(sd)
+
+    sh = S.get("Sunshine")
+    ra = sh["system"]["activities"]["vvg0y1Ga9QXl6bXU"]
+    ra["name"] = "Burning ray (replaces an attack, 4 CE)"
+    ra["activation"]["type"] = "special"
+    ra["range"], ra["target"] = {"value": "120", "units": "ft", "override": True}, one_creature()
+    ra.setdefault("attack", {})["ability"] = "spellcasting"
+    scale(sh, ra, [[1, "6d6"], [6, "8d6"], [11, "12d6"]])
+    note(sh, "Target inside the Sunny Day radius: add your CE modifier to the damage.")
+    mark(sh)
+
+
+CEMOD = "max(@abilities.wis.mod, @abilities.cha.mod)"
+
+
+def _ce_attack(a, rng):
+    a["range"], a["target"] = {"value": str(rng), "units": "ft", "override": True}, one_creature()
+    a.setdefault("attack", {})["ability"] = "spellcasting"
+    a["attack"].setdefault("type", {})["value"] = "ranged"
+
+
+def _scaling_touch(item, aid, nm, ex_fail=None):
+    a = item["system"]["activities"][aid]
+    a["name"] = nm
+    a["range"], a["target"] = {"value": "5", "units": "ft", "override": True}, one_creature()
+    a["damage"] = {"onSave": "half", "parts": [dice(2, 8, ["necrotic"], scale=2)]}
+    cost(item, a, 1, 1, "2 * " + CEMOD)
+    return a
+
+
+def disaster_tides(S):
+    t = S.get("Tides of Disaster")
+    a = t["system"]["activities"]["8VEriIq1GcuVBmFT"]
+    _ce_attack(a, 80)
+    scale(t, a, [[1, "2d8"], [5, "3d8"], [11, "4d8"], [18, "5d8"]])
+    mark(t)
+
+    d = S.get("Domain Expansion: Horizon of Captivating Skhanda")
+    fr = d["system"]["activities"]["PL6dqN3e7hSY5JKm"]
+    fr["name"] = "Free expansion (2 per long rest)"
+    d["system"]["uses"] = {"max": "2", "spent": 0, "recovery": [{"period": "lr", "type": "recoverAll"}]}
+    fr["consumption"] = {"targets": [{"type": "itemUses", "target": "", "value": "1", "scaling": {}}], "scaling": {"allowed": False}}
+    sw = act(d, "swarm", "utility", "Death Swarm (X CE by shikigami)", "action", range={"value": "120", "units": "ft", "override": True},
+             target=SELF)
+    cost(d, sw, 1, 1, "12")
+    note(d, "Death Swarm costs: eel 1, piranhas 2, serpent 4, killer whale 6, sperm whale 12 CE; each summon makes one guaranteed hit. "
+            "Lasts indefinitely if no hostile creature is caught.")
+    mark(d)
+
+    w = S.get("Water Defensive Ring")
+    w["effects"] = [e for e in w["effects"] if e["_id"] != "M0tHCJw5J8GRPw9t"]
+    ring = fx(w, "ring", "Water Defensive Ring", rounds=600,
+              changes=[("system.traits.di.value", 2, "cold"), ("system.traits.dr.value", 2, "bludgeoning"),
+                       ("system.traits.dr.value", 2, "slashing"), ("system.traits.dr.value", 2, "piercing")],
+              desc="Cold immunity and B/P/S resistance while the ring's temp HP last (remove when they are gone).")
+    thp = {"number": None, "denomination": None, "bonus": "", "types": ["temphp"],
+           "custom": {"enabled": True, "formula": "15 * " + CEMOD}, "scaling": {}}
+    a1 = w["system"]["activities"]["aLczDcFEaSepCqSW"]
+    a1["name"], a1["healing"] = "Water ring (6 CE)", dict(thp)
+    a1["range"], a1["target"] = RANGE_SELF, SELF
+    apply(a1, ring)
+    act(w, "9UsTF81pn5oUAYgE", "heal", "Water ring as reaction (8 CE)", "reaction", range=RANGE_SELF, target=SELF, healing=dict(thp))
+    r = w["system"]["activities"]["9UsTF81pn5oUAYgE"]
+    r["useConditionText"] = 'reaction === "isDamaged"'
+    apply(r, ring)
+    mark(w)
+
+    f = S.get("Flash Flood")
+    b = f["system"]["activities"]["MobgRH7arUrSxRwt"]
+    _ce_attack(b, 30)
+    b["name"] = "Water ball (6 CE): 10d8 cold, push 80 ft"
+    c = f["system"]["activities"]["9cSExV3daZJ4NcQJ"]
+    c["range"], c["target"] = {"value": "30", "units": "ft", "override": True}, sphere(10)
+    c["damage"]["onSave"] = "half"
+    mark(f)
+
+    ts = S.get("Maximum: Tsunami")
+    tt = ts["system"]["activities"]["49jmvydcAg9jYSQl"]
+    act(ts, "49jmvydcAg9jYSQl", "save", "Tsunami (8 CE, as 8th-level spell)", "action",
+        save={"ability": ["str"], "dc": {"calculation": "spellcasting", "formula": ""}},
+        damage={"onSave": "half", "parts": [dice(6, 10, ["bludgeoning"])]},
+        range={"value": "1", "units": "mi", "override": True},
+        target={"template": {"type": "wall", "size": "300", "width": "50", "height": "300", "units": "ft", "count": "1", "contiguous": False},
+                "affects": {"type": "creature", "choice": False}, "override": True})
+    note(ts, "Tsunami spell: concentration 6 rounds; wall loses 50 ft height and 1d10 damage each round (track by hand).")
+    mark(ts)
+
+    dh = S.get("Dehydration")
+    dd = dh["system"]["activities"]["FbMipC8WWqQSgfdW"]
+    dd["name"] = "Destroy water / fog (2 CE per 10 gal)"
+    dd["range"], dd["target"] = {"value": "60", "units": "ft", "override": True}, {"template": {"type": "cube", "size": "30", "units": "ft", "count": "1", "contiguous": False}, "affects": {"type": "", "choice": False}, "override": True}
+    cost(dh, dd, 2, 2, "2 * " + CEMOD)
+    sv = _scaling_touch(dh, "xAteEEccbxv1k3ub", "Dehydrate a creature (CE up to 2× mod)")
+    note(dh, "Fail by 5+: gain 1 exhaustion level (GM). No effect on creatures without water.")
+    mark(dh)
+
+
+def disaster_verdure(S):
+    f = S.get("Forests of Disaster")
+    a = f["system"]["activities"]
+    bind = a["rfqiDE2D1qWv9TeJ"]
+    bind["name"] = "Binding Plants (1 CE)"
+    bind["range"], bind["target"] = {"value": "30", "units": "ft", "override": True}, one_creature()
+    bind["damage"] = {"onSave": "none", "parts": []}
+    for e in f["effects"]:
+        if e["_id"] == "Ex5F2IrqMMZF5RrV":
+            e["changes"] = [{"key": "flags.midi-qol.OverTime", "mode": 0, "priority": 20,
+                             "value": "turn=end, saveAbility=str, saveDC=JJKORIGINDC, label=Binding Plants (STR check in RAW)"}]
+            e["duration"] = {"rounds": 10}
+    roots = act(f, "roots", "save", "Piercing Roots (1 CE)", "action",
+                save={"ability": ["dex"], "dc": {"calculation": "spellcasting", "formula": ""}},
+                damage={"onSave": "half", "parts": [dice(1, 12, ["piercing"])]},
+                range=RANGE_SELF,
+                target={"template": {"type": "line", "size": "50", "width": "5", "units": "ft", "count": "1", "contiguous": False},
+                        "affects": {"type": "creature", "choice": False}, "override": True})
+    cost(f, roots, 1)
+    scale(f, roots, [[1, "1d12"], [5, "2d12"], [11, "3d12"], [18, "4d12"]])
+    wall = a["V6swR8hZFSeJkXVb"]
+    wall["name"] = "Wall of Roots (reaction, 1 CE)"
+    wall["useConditionText"] = 'reaction === "isAttacked"'
+    wall["target"] = {"template": {"type": "wall", "size": "5", "width": "1", "height": "10", "units": "ft", "count": "1", "contiguous": False},
+                      "affects": {"type": "", "choice": False}, "override": True}
+    wall["activation"]["condition"] = "You or an ally is targeted by an attack. Wall HP = CE mod × proficiency."
+    mark(f)
+
+    rb = S.get("Root Bundle")
+    mk = act(rb, "make", "utility", "Create two wooden balls (2 CE)", "action", range=RANGE_SELF, target=SELF)
+    cost(rb, mk, 2)
+    apply(mk, fx(rb, "balls", "Root Bundle balls", rounds=600, desc="Two floating balls (HP = CE mod, AC 10 + CE mod)."))
+    shot = rb["system"]["activities"]["lxIvbpHMossbpRUd"]
+    _ce_attack(shot, 30)
+    shot["name"] = "Send a ball (bonus action)"
+    free(rb, shot)
+    ride = act(rb, "ride", "utility", "Stand on a ball (bonus action)", "bonus", range=RANGE_SELF, target=SELF)
+    apply(ride, fx(rb, "ride", "Riding a root ball", rounds=10,
+                   changes=[("system.attributes.movement.fly", 4, "floor(@attributes.movement.walk / 2)")],
+                   desc="Fly speed = half your walking speed while standing on a ball."))
+    free(rb, ride)
+    mark(rb)
+
+    ff = S.get("Flower Field")
+    fl = ff["system"]["activities"]["l7JoSf52R5Q74d2w"]
+    fl["range"], fl["target"] = {"value": "100", "units": "ft", "override": True}, sphere(15)
+    for e in ff["effects"]:
+        if e["_id"] == "51wXQEJbwvjC2CY1":
+            e["duration"] = {"rounds": 10}
+            e["changes"] = [
+                {"key": "flags.midi-qol.OverTime", "mode": 0, "priority": 20,
+                 "value": "turn=start, saveAbility=wis, saveDC=JJKORIGINDC, label=Flower Field"},
+                {"key": "flags.midi-qol.grants.advantage.attack.all", "mode": 0, "value": "1", "priority": 20},
+                {"key": "flags.dae.specialDuration", "mode": 2, "value": "isDamaged", "priority": 20}]
+    note(ff, "Ends on damage (simplified: RAW allows a repeat save). Disadvantage on other saves: apply by hand.")
+    mark(ff)
+
+    cb = S.get("Cursed Buds")
+    bud = cb["system"]["activities"]["OA6xjF2Db7g141RC"]
+    _ce_attack(bud, 30)
+    bud["name"] = "Cursed buds (6 CE): one attack per bud"
+    bud["damage"] = {"includeBase": False, "parts": []}
+    apply(bud, fx(cb, "bud", "Cursed Bud", rounds=None,
+                  changes=[("flags.midi-qol.OverTime", 0,
+                            "turn=start, damageRoll=JJKORIGINCEMOD, damageType=none, label=Cursed Bud (caster steals 1 CE)")],
+                  desc="Loses HP = caster's CE mod at turn start; caster steals 1 CE; using CE costs it HP = prof. "
+                       "Remove: action, STR check vs your DC."))
+    tree = cb["system"]["activities"]["DBdzEheQjsHH67SS"]
+    tree["name"] = "Bud tree (10 CE): one bud at each hostile within 30 ft"
+    tree["range"] = {"value": "10", "units": "ft", "override": True}
+    note(cb, "Tree: AC = your CE DC, HP = prof × level, 1 minute; use the bud attack against each hostile at your turn start.")
+    mark(cb)
+
+    sea = S.get("Domain Expansion: Ceremonial Sea of Light")
+    sl = sea["system"]["activities"]["Yv33kKE2ljCkjyPj"]
+    sl["name"] = "Initiative 20: Flower Field + 2d4 necrotic"
+    sl["target"] = {"affects": {"type": "enemy", "choice": True}, "override": True}
+    free(sea, sl)
+    note(sea, "Also roll Flower Field's WIS save for everyone; you gain half the damage as temporary CE.")
+    mark(sea)
+
+    dc = S.get("Decay", technique="Disaster Verdure")
+    ar = dc["system"]["activities"]["QEU26LaIdL97ieGV"]
+    ar["name"] = "Decay plants (6 CE): 5d12 to plant creatures"
+    ar["range"], ar["target"] = RANGE_SELF, sphere(30)
+    ar["damage"]["onSave"] = "half"
+    _scaling_touch(dc, "6CIjisR6JwyKaY4o", "Withering Plant (open wound, CE up to 2× mod)")
+    hit = act(dc, "touch", "attack", "Withering Plant: melee attack", "action", range={"value": "5", "units": "ft", "override": True},
+              target=one_creature(), attack={"ability": "spellcasting", "bonus": "", "critical": {"threshold": None}, "flat": False,
+                                             "type": {"value": "melee", "classification": "spell"}})
+    trigger(hit, dc["system"]["activities"]["6CIjisR6JwyKaY4o"], "hitTargets")
+    free(dc, hit)
+    mark(dc)
+
+
 TECHNIQUES = {"Antigravity System": antigravity_system,
               "Auspicious Beast Summon": auspicious_beast_summon,
               "Black Bird Manipulation": black_bird_manipulation,
@@ -1853,7 +2215,11 @@ TECHNIQUES = {"Antigravity System": antigravity_system,
               "Cursed Spirit Manipulation": cursed_spirit_manipulation,
               "Cursed Transmutation": cursed_transmutation,
               "Dark Claw": dark_claw,
-              "Deadly Sentencing": deadly_sentencing}
+              "Deadly Sentencing": deadly_sentencing,
+              "Disaster Flames": disaster_flames,
+              "Disaster Storms": disaster_storms,
+              "Disaster Tides": disaster_tides,
+              "Disaster Verdure": disaster_verdure}
 
 if __name__ == "__main__":
     args = sys.argv[1:]

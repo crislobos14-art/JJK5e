@@ -19,7 +19,7 @@
    "OA6xjF2Db7g141RC": {
     "_id": "OA6xjF2Db7g141RC",
     "type": "attack",
-    "name": "Action (6 CE)",
+    "name": "Cursed buds (6 CE): one attack per bud",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -42,7 +42,8 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
@@ -62,12 +63,18 @@
     "damage": {
      "includeBase": false,
      "parts": []
-    }
+    },
+    "effects": [
+     {
+      "_id": "X80FejAdRDvOf8Ne",
+      "onSave": false
+     }
+    ]
    },
    "DBdzEheQjsHH67SS": {
     "_id": "DBdzEheQjsHH67SS",
     "type": "utility",
-    "name": "Action (10 CE)",
+    "name": "Bud tree (10 CE): one bud at each hostile within 30 ft",
     "sort": 100000,
     "activation": {
      "type": "action",
@@ -150,9 +157,40 @@
    },
    "technique": "Disaster Verdure",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Tree: AC = your CE DC, HP = prof × level, 1 minute; use the bud attack against each hostile at your turn start.",
+   "automation": "automated"
   }
  },
  "folder": "iWhpioZs4gSAxzA7",
- "_key": "!items!rAbsflTzfT1qFbq4"
+ "_key": "!items!rAbsflTzfT1qFbq4",
+ "effects": [
+  {
+   "_id": "X80FejAdRDvOf8Ne",
+   "name": "Cursed Bud",
+   "img": "modules/jjk5e/icons/techniques/disaster-verdure.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Loses HP = caster's CE mod at turn start; caster steals 1 CE; using CE costs it HP = prof. Remove: action, STR check vs your DC.</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "value": "turn=start, damageRoll=JJKORIGINCEMOD, damageType=none, label=Cursed Bud (caster steals 1 CE)",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Disaster Verdure"
+    }
+   },
+   "_key": "!items.effects!rAbsflTzfT1qFbq4.X80FejAdRDvOf8Ne"
+  }
+ ]
 }

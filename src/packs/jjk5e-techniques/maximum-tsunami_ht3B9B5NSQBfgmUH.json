@@ -18,9 +18,10 @@
   "activities": {
    "49jmvydcAg9jYSQl": {
     "_id": "49jmvydcAg9jYSQl",
-    "type": "utility",
-    "name": "Action (8 CE)",
+    "type": "save",
+    "name": "Tsunami (8 CE, as 8th-level spell)",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "action",
      "value": 1,
@@ -30,20 +31,63 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
-    },
-    "range": {
-     "units": "self",
-     "override": true
-    },
-    "target": {
-     "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
+    },
+    "range": {
+     "value": "1",
+     "units": "mi",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "wall",
+      "size": "300",
+      "width": "50",
+      "height": "300",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": [],
+    "save": {
+     "ability": [
+      "str"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 6,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
     }
    }
   },
@@ -87,7 +131,9 @@
    },
    "technique": "Disaster Tides",
    "level": 18,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Tsunami spell: concentration 6 rounds; wall loses 50 ft height and 1d10 damage each round (track by hand).",
+   "automation": "automated"
   }
  },
  "folder": "Ao9OCl7PHP0hxQBD",

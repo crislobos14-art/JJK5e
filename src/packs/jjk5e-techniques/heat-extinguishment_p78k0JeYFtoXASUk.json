@@ -24,7 +24,7 @@
    "g24VOuJAXhXeFMkD": {
     "_id": "g24VOuJAXhXeFMkD",
     "type": "utility",
-    "name": "Reaction (2 CE)",
+    "name": "Extinguish flames / reduce fire 6d8 (2 CE)",
     "sort": 0,
     "activation": {
      "type": "reaction",
@@ -38,7 +38,9 @@
      }
     },
     "range": {
-     "units": "self"
+     "value": "30",
+     "units": "ft",
+     "override": true
     },
     "target": {
      "template": {
@@ -56,15 +58,23 @@
     "duration": {
      "units": "inst"
     },
-    "useConditionText": "false"
+    "useConditionText": "reaction === \"isAttacked\" || reaction === \"isSave\"",
+    "midiProperties": {
+     "triggeredActivityId": "pfISkYThexSJjBwv",
+     "triggeredActivityTargets": "self",
+     "triggeredActivityRollAs": "self",
+     "triggeredActivityConsume": false,
+     "triggeredActivityConfigure": false,
+     "triggeredActivityConditionText": ""
+    }
    },
    "TwHrX3jWHk1dqtBs": {
     "_id": "TwHrX3jWHk1dqtBs",
     "type": "save",
-    "name": "Action (1+ CE)",
+    "name": "Hypothermic Touch: CON save (2d8 cold per CE)",
     "sort": 100000,
     "activation": {
-     "type": "action",
+     "type": "special",
      "value": 1,
      "condition": ""
     },
@@ -72,7 +82,7 @@
      "targets": [],
      "scaling": {
       "allowed": true,
-      "max": "2 * max(1, max(@abilities.wis.mod, @abilities.cha.mod))"
+      "max": "2 * max(@abilities.wis.mod, @abilities.cha.mod)"
      }
     },
     "range": {
@@ -108,7 +118,6 @@
         "formula": ""
        },
        "scaling": {
-        "mode": "whole",
         "number": 2
        }
       }
@@ -145,12 +154,13 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
     "attack": {
-     "ability": "",
+     "ability": "spellcasting",
      "bonus": "",
      "critical": {
       "threshold": null
@@ -170,7 +180,57 @@
      "triggeredActivityTargets": "hitTargets",
      "triggeredActivityRollAs": "self",
      "triggeredActivityConsume": false,
-     "triggeredActivityConfigure": false
+     "triggeredActivityConfigure": false,
+     "triggeredActivityConditionText": ""
+    }
+   },
+   "pfISkYThexSJjBwv": {
+    "_id": "pfISkYThexSJjBwv",
+    "type": "heal",
+    "name": "Reduce incoming fire damage (6d8)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "healing": {
+     "number": 6,
+     "denomination": 8,
+     "bonus": "",
+     "types": [
+      "temphp"
+     ],
+     "custom": {
+      "enabled": false,
+      "formula": ""
+     },
+     "scaling": {}
     }
    }
   }
@@ -198,7 +258,9 @@
       "Disaster Flames"
      ]
     ]
-   }
+   },
+   "automationNotes": "Fail by 5+: speed 0 until end of its turn (GM). Fire reduction shows as temp HP soaking the hit.",
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",

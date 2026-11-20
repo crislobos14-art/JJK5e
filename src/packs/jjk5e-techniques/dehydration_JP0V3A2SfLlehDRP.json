@@ -24,7 +24,7 @@
    "FbMipC8WWqQSgfdW": {
     "_id": "FbMipC8WWqQSgfdW",
     "type": "utility",
-    "name": "Action (2 CE)",
+    "name": "Destroy water / fog (2 CE per 10 gal)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -34,11 +34,14 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "2 * max(@abilities.wis.mod, @abilities.cha.mod)"
      }
     },
     "range": {
-     "units": "self"
+     "value": "60",
+     "units": "ft",
+     "override": true
     },
     "target": {
      "template": {
@@ -49,9 +52,10 @@
       "contiguous": false
      },
      "affects": {
-      "type": "creature",
+      "type": "",
       "choice": false
-     }
+     },
+     "override": true
     },
     "duration": {
      "units": "inst"
@@ -60,7 +64,7 @@
    "xAteEEccbxv1k3ub": {
     "_id": "xAteEEccbxv1k3ub",
     "type": "save",
-    "name": "Action",
+    "name": "Dehydrate a creature (CE up to 2× mod)",
     "sort": 100000,
     "activation": {
      "type": "action",
@@ -70,14 +74,23 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "2 * max(@abilities.wis.mod, @abilities.cha.mod)"
      }
     },
     "range": {
-     "units": "spec",
+     "value": "5",
+     "units": "ft",
      "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
     },
@@ -105,7 +118,7 @@
         "formula": ""
        },
        "scaling": {
-        "number": 1
+        "number": 2
        }
       }
      ]
@@ -116,7 +129,8 @@
  "flags": {
   "jjk5e": {
    "ceCosts": {
-    "FbMipC8WWqQSgfdW": 2
+    "FbMipC8WWqQSgfdW": 2,
+    "xAteEEccbxv1k3ub": 1
    },
    "technique": "Disaster Tides",
    "reversal": true,
@@ -132,7 +146,13 @@
       "Disaster Tides"
      ]
     ]
-   }
+   },
+   "ceSteps": {
+    "FbMipC8WWqQSgfdW": 2,
+    "xAteEEccbxv1k3ub": 1
+   },
+   "automationNotes": "Fail by 5+: gain 1 exhaustion level (GM). No effect on creatures without water.",
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",

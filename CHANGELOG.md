@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.45.0 — Técnica por técnica: Disaster Flames, Storms, Tides y Verdure
+- **Disaster Flames**: cono de 15 pies (2d8→5d8); volcanes (2 CE c/u) y erupción en línea con Xd10 = competencia y apresado con salvación de FUE; Meteor 120 pies (10d4 + 10d6, derribo) con vuelo; dominio 10d8; Heat Extinguishment (reducción 6d8) e Hypothermic Touch encadenado.
+- **Disaster Storms**: cono cortante/trueno; Lightning (3d6→8d6) con salto a 10 pies; Storm Creation con derribo OverTime y desventaja a distancia; Divine Storm Sovereign 3d10 por turno; dominio 6d12; Sunny Day (resistencia a fuego y PG temporales) y Sunshine (6d6→12d6).
+- **Disaster Tides**: ataque de agua (2d8→5d8); 2 dominios gratis y Death Swarm; Water Defensive Ring (15×mod PG temp, inmunidad a frío, resistencia física) también como reacción; Flash Flood; Tsunami; Dehydration.
+- **Disaster Verdure**: Binding Plants, Piercing Roots (1d12→4d12), Wall of Roots como reacción; Root Bundle con vuelo; Flower Field (encantado, ventaja contra él, termina al recibir daño); Cursed Buds con drenaje automático; dominio; Decay y Withering Plant encadenado.
+- Nuevo marcador `JJKORIGINCEMOD` en OverTime: se sustituye por el mod. de EM del lanzador.
+- Automatizados a mano: 102/360. Sin probar en Foundry real.
+
 ## 1.44.0 — Técnica por técnica: Dark Claw y Deadly Sentencing
 - **Dark Claw**: formar garra (1 hora) y ataque de garra con EM y dado por nivel (1d6→2d8); Absorbing y Barbed Claws al impactar (sangrado OverTime 1d6/2d6); Brutal como efecto activable; Zenith (3–10 CE); dominio con golpe crítico en iniciativa 20 y garras que siempre impactan; Soft Beats Hard con parada (+2/+3/+4) y repetición por 2 CE.
 - **Deadly Sentencing**: tres formas del mazo como ataques; dominio con tirada de Evidencia, Persuasión enfrentada, Confiscación, Espada del Verdugo y bloqueo de ataques; mazo agrandado y golpe de área; Better Evidence (mejor de 2/3); usos gratis de Unstopping Justice; Proven Innocence 20 CE.

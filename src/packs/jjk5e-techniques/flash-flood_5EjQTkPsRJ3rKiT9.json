@@ -19,7 +19,7 @@
    "MobgRH7arUrSxRwt": {
     "_id": "MobgRH7arUrSxRwt",
     "type": "attack",
-    "name": "Action (6 CE)",
+    "name": "Water ball (6 CE): 10d8 cold, push 80 ft",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -42,7 +42,8 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
@@ -99,7 +100,8 @@
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "value": "30",
+     "units": "ft",
      "override": true
     },
     "target": {
@@ -199,7 +201,8 @@
    },
    "technique": "Disaster Tides",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "Ao9OCl7PHP0hxQBD",

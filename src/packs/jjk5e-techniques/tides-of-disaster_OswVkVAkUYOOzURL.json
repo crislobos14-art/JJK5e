@@ -42,7 +42,8 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
@@ -71,7 +72,7 @@
      "includeBase": false
     },
     "attack": {
-     "ability": "",
+     "ability": "spellcasting",
      "bonus": "",
      "critical": {
       "threshold": null
@@ -151,7 +152,8 @@
       "5d8"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "Ao9OCl7PHP0hxQBD",

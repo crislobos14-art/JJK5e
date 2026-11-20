@@ -40,9 +40,16 @@
      "override": true
     },
     "target": {
+     "template": {
+      "type": "radius",
+      "size": "15",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
      "affects": {
       "type": "creature",
-      "count": "1"
+      "choice": false
      },
      "override": true
     },
@@ -121,7 +128,9 @@
    },
    "technique": "Disaster Verdure",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Ends on damage (simplified: RAW allows a repeat save). Disadvantage on other saves: apply by hand.",
+   "automation": "automated"
   }
  },
  "effects": [
@@ -136,14 +145,25 @@
     {
      "key": "flags.midi-qol.OverTime",
      "mode": 0,
-     "value": "turn=end, saveAbility=wis, saveDC=JJKORIGINDC, saveCount=1-, label=\"Charmed (Flower Field)\"",
+     "priority": 20,
+     "value": "turn=start, saveAbility=wis, saveDC=JJKORIGINDC, label=Flower Field"
+    },
+    {
+     "key": "flags.midi-qol.grants.advantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.dae.specialDuration",
+     "mode": 2,
+     "value": "isDamaged",
      "priority": 20
     }
    ],
    "transfer": false,
    "disabled": false,
    "duration": {
-    "seconds": 60,
     "rounds": 10
    },
    "description": "",

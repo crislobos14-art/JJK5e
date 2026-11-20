@@ -19,7 +19,7 @@
    "aLczDcFEaSepCqSW": {
     "_id": "aLczDcFEaSepCqSW",
     "type": "heal",
-    "name": "Action (6 CE)",
+    "name": "Water ring (6 CE)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -39,6 +39,9 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
@@ -54,18 +57,23 @@
      ],
      "custom": {
       "enabled": true,
-      "formula": "max(@abilities.wis.mod, @abilities.cha.mod)"
+      "formula": "15 * max(@abilities.wis.mod, @abilities.cha.mod)"
      },
-     "scaling": {
-      "number": 1
+     "scaling": {}
+    },
+    "effects": [
+     {
+      "_id": "ZGq8HAIZkRoUm89g",
+      "onSave": false
      }
-    }
+    ]
    },
    "9UsTF81pn5oUAYgE": {
     "_id": "9UsTF81pn5oUAYgE",
-    "type": "utility",
-    "name": "Reaction (8 CE)",
-    "sort": 100000,
+    "type": "heal",
+    "name": "Water ring as reaction (8 CE)",
+    "sort": 0,
+    "img": null,
     "activation": {
      "type": "reaction",
      "value": 1,
@@ -75,22 +83,45 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
      "units": "self",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
-    "duration": {
-     "units": "inst",
-     "override": true
+    "effects": [
+     {
+      "_id": "ZGq8HAIZkRoUm89g",
+      "onSave": false
+     }
+    ],
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "",
+     "types": [
+      "temphp"
+     ],
+     "custom": {
+      "enabled": true,
+      "formula": "15 * max(@abilities.wis.mod, @abilities.cha.mod)"
+     },
+     "scaling": {}
     },
-    "useConditionText": "false"
+    "useConditionText": "reaction === \"isDamaged\""
    }
   },
   "uses": {
@@ -134,33 +165,56 @@
    },
    "technique": "Disaster Tides",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "Ao9OCl7PHP0hxQBD",
  "effects": [
   {
-   "_id": "M0tHCJw5J8GRPw9t",
-   "name": "Water Defensive Ring (toggle)",
+   "_id": "ZGq8HAIZkRoUm89g",
+   "name": "Water Defensive Ring",
    "img": "modules/jjk5e/icons/techniques/disaster-tides.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Cold immunity and B/P/S resistance while the ring's temp HP last (remove when they are gone).</p>",
    "changes": [
     {
      "key": "system.traits.di.value",
      "mode": 2,
      "value": "cold",
-     "priority": null
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "bludgeoning",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "slashing",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "piercing",
+     "priority": 20
     }
    ],
-   "transfer": true,
-   "disabled": true,
-   "duration": {},
-   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "duration": {
+    "rounds": 600
+   },
    "flags": {
     "jjk5e": {
-     "auto": "toggle"
+     "technique": "Disaster Tides"
     }
    },
-   "_key": "!items.effects!8R4ubskMKSNo9cjj.M0tHCJw5J8GRPw9t"
+   "_key": "!items.effects!8R4ubskMKSNo9cjj.ZGq8HAIZkRoUm89g"
   }
  ],
  "_key": "!items!8R4ubskMKSNo9cjj"

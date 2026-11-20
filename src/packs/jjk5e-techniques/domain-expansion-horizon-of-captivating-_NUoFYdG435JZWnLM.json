@@ -19,7 +19,7 @@
    "PL6dqN3e7hSY5JKm": {
     "_id": "PL6dqN3e7hSY5JKm",
     "type": "utility",
-    "name": "Use (limited, no CE)",
+    "name": "Free expansion (2 per long rest)",
     "activation": {
      "type": "special",
      "condition": "",
@@ -30,10 +30,13 @@
       {
        "type": "itemUses",
        "target": "",
-       "value": "1"
+       "value": "1",
+       "scaling": {}
       }
      ],
-     "spellSlot": false
+     "scaling": {
+      "allowed": false
+     }
     }
    },
    "aJSJ7qoeHXBkDKzX": {
@@ -78,6 +81,43 @@
      "concentration": false,
      "override": true
     }
+   },
+   "X11WN98Wg3kWsTP8": {
+    "_id": "X11WN98Wg3kWsTP8",
+    "type": "utility",
+    "name": "Death Swarm (X CE by shikigami)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "12"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "120",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
    }
   },
   "uses": {
@@ -135,13 +175,19 @@
  "flags": {
   "jjk5e": {
    "ceCosts": {
-    "aJSJ7qoeHXBkDKzX": 20
+    "aJSJ7qoeHXBkDKzX": 20,
+    "X11WN98Wg3kWsTP8": 1
    },
    "technique": "Disaster Tides",
    "level": 3,
    "domain": true,
    "domainActivity": "aJSJ7qoeHXBkDKzX",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceSteps": {
+    "X11WN98Wg3kWsTP8": 1
+   },
+   "automationNotes": "Death Swarm costs: eel 1, piranhas 2, serpent 4, killer whale 6, sperm whale 12 CE; each summon makes one guaranteed hit. Lasts indefinitely if no hostile creature is caught.",
+   "automation": "automated"
   }
  },
  "folder": "Ao9OCl7PHP0hxQBD",

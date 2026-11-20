@@ -19,7 +19,7 @@
    "tVl7onQZVcwWibt1": {
     "_id": "tVl7onQZVcwWibt1",
     "type": "save",
-    "name": "Bonus Action (1 CE)",
+    "name": "Wave of flames — Bonus Action (1 CE)",
     "sort": 0,
     "activation": {
      "type": "bonus",
@@ -79,9 +79,7 @@
         "enabled": false,
         "formula": ""
        },
-       "scaling": {
-        "number": 1
-       }
+       "scaling": {}
       }
      ]
     }
@@ -138,7 +136,7 @@
    "dmgScale": {
     "tVl7onQZVcwWibt1": [
      [
-      0,
+      1,
       "2d8"
      ],
      [
@@ -160,7 +158,8 @@
    },
    "technique": "Disaster Flames",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "Xs1qvLjpsB4bwM5D",

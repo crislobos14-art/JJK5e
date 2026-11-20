@@ -3,13 +3,13 @@
 > Generado desde el compendio y las fuentes. **No certifica ejecución en Foundry ni fidelidad semántica a cada regla**.
 
 - Spells examinados: **360**; técnicas agrupadas: **81**.
-- Utilidad sin efecto configurado: revisar lógica: **88**.
+- Utilidad sin efecto configurado: revisar lógica: **86**.
 - Utilidad con efecto: comprobar activación: **15**.
-- Dominio genérico: resolver propiedades particulares: **41**.
+- Dominio genérico: resolver propiedades particulares: **40**.
 - Salvación sin daño/efecto automático: **24**.
 - Ataque sin daño propio: comprobar intención: **11**.
-- Mecánica configurada; falta prueba Foundry: **98**.
-- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **83**.
+- Mecánica configurada; falta prueba Foundry: **82**.
+- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **102**.
 
 ## Interpretación
 
@@ -216,41 +216,41 @@
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Flames of Disaster | 1 | save:Bonus Action (1 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/flames-of-disaster_H3zzUtaO4Cap4QOd.json) |
-| Erupting Volcanoes | 3 | utility:Action (2 CE); save:Bonus Action | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/erupting-volcanoes_wqgf4qz5z0zgYZ9K.json) |
-| Ember Insects | 6 | utility:Action (4 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/ember-insects_VSqFE0jfDFne8RpL.json) |
-| Maximum: Meteor | 11 | save:Action (10 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/maximum-meteor_uJD8rltKMIu5fwrr.json) |
-| Domain Expansion: Coffin of the Iron Mountain | 18 | damage:Special; utility:Expand Domain (20 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-coffin-of-the-iron-moun_KRWrFxJblGacGrpx.json) |
+| Flames of Disaster | 1 | save:Wave of flames — Bonus Action (1 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/flames-of-disaster_H3zzUtaO4Cap4QOd.json) |
+| Erupting Volcanoes | 3 | utility:Create volcanoes (2 CE each); save:Erupt (bonus action, per volcano) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/erupting-volcanoes_wqgf4qz5z0zgYZ9K.json) |
+| Ember Insects | 6 | utility:Action (4 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/ember-insects_VSqFE0jfDFne8RpL.json) |
+| Maximum: Meteor | 11 | save:Action (10 CE); utility:Rise 120 ft (until end of next turn) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/maximum-meteor_uJD8rltKMIu5fwrr.json) |
+| Domain Expansion: Coffin of the Iron Mountain | 18 | damage:Initiative 20: 10d8 fire to all others; utility:Expand Domain (20 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-coffin-of-the-iron-moun_KRWrFxJblGacGrpx.json) |
 
 ### Disaster Storms (5 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Storms of Disaster | 1 | save:Bonus Action (1 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/storms-of-disaster_1oP2gwQofeJq4BzA.json) |
-| Lightning | 3 | attack:Action (2 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/lightning_rKANGZ47xLsfVBJD.json) |
-| Storm Creation | 6 | save:Action (3+ CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/storm-creation_ujyEsUgfQSrgLbJD.json) |
-| Maximum: Divine Storm Sovereign | 11 | damage:Action (10 CE); utility:Action (2 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/maximum-divine-storm-sovereign_3mJStu8usYRZi2wT.json) |
-| Domain Expansion: Heavenly Throne of the Raging Tempest | 18 | damage:Special; utility:Expand Domain (20 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-heavenly-throne-of-the-_QYNj4Bn6j6DQy5LH.json) |
+| Storms of Disaster | 1 | save:Cutting winds — Bonus Action (1 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/storms-of-disaster_1oP2gwQofeJq4BzA.json) |
+| Lightning | 3 | attack:Action (2 CE); attack:Chain to a creature within 10 ft (half damage) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/lightning_rKANGZ47xLsfVBJD.json) |
+| Storm Creation | 6 | save:Create storm (3+ CE): 10 ft + 5 ft per extra CE | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/storm-creation_ujyEsUgfQSrgLbJD.json) |
+| Maximum: Divine Storm Sovereign | 11 | utility:Divine Storm Sovereign (10 CE); utility:Replace an attack with Lightning (2 CE, no sight needed) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/maximum-divine-storm-sovereign_3mJStu8usYRZi2wT.json) |
+| Domain Expansion: Heavenly Throne of the Raging Tempest | 18 | damage:Initiative 20: 6d12 lightning to all; utility:Expand Domain (20 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-heavenly-throne-of-the-_QYNj4Bn6j6DQy5LH.json) |
 
 ### Disaster Tides (5 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Tides of Disaster | 1 | attack:Action (1 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/tides-of-disaster_OswVkVAkUYOOzURL.json) |
-| Domain Expansion: Horizon of Captivating Skhanda | 3 | utility:Use (limited, no CE); utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-horizon-of-captivating-_NUoFYdG435JZWnLM.json) |
-| Water Defensive Ring | 6 | heal:Action (6 CE); utility:Reaction (8 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/water-defensive-ring_8R4ubskMKSNo9cjj.json) |
-| Flash Flood | 11 | attack:Action (6 CE); save:Action (8 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/flash-flood_5EjQTkPsRJ3rKiT9.json) |
-| Maximum: Tsunami | 18 | utility:Action (8 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/maximum-tsunami_ht3B9B5NSQBfgmUH.json) |
+| Tides of Disaster | 1 | attack:Action (1 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/tides-of-disaster_OswVkVAkUYOOzURL.json) |
+| Domain Expansion: Horizon of Captivating Skhanda | 3 | utility:Free expansion (2 per long rest); utility:Expand Domain (20 CE); utility:Death Swarm (X CE by shikigami) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-horizon-of-captivating-_NUoFYdG435JZWnLM.json) |
+| Water Defensive Ring | 6 | heal:Water ring (6 CE); heal:Water ring as reaction (8 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/water-defensive-ring_8R4ubskMKSNo9cjj.json) |
+| Flash Flood | 11 | attack:Water ball (6 CE): 10d8 cold, push 80 ft; save:Action (8 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/flash-flood_5EjQTkPsRJ3rKiT9.json) |
+| Maximum: Tsunami | 18 | save:Tsunami (8 CE, as 8th-level spell) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/maximum-tsunami_ht3B9B5NSQBfgmUH.json) |
 
 ### Disaster Verdure (5 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Forests of Disaster | 1 | save:Action (1 CE); utility:Reaction (1 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/forests-of-disaster_rXXHBBI0bIPLLHsu.json) |
-| Root Bundle | 3 | attack:Bonus Action | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/root-bundle_u7p2yaIifyDSZYtW.json) |
-| Flower Field | 6 | save:Action (5 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/flower-field_MLLR1v3HhPAmTEO8.json) |
-| Cursed Buds | 11 | attack:Action (6 CE); utility:Action (10 CE) | Ataque sin daño propio: comprobar intención | [JSON](../src/packs/jjk5e-techniques/cursed-buds_rAbsflTzfT1qFbq4.json) |
-| Domain Expansion: Ceremonial Sea of Light | 18 | damage:Special; utility:Expand Domain (20 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-ceremonial-sea-of-light_7clE8rWvh6MVK4iK.json) |
+| Forests of Disaster | 1 | save:Binding Plants (1 CE); utility:Wall of Roots (reaction, 1 CE); save:Piercing Roots (1 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/forests-of-disaster_rXXHBBI0bIPLLHsu.json) |
+| Root Bundle | 3 | attack:Send a ball (bonus action); utility:Create two wooden balls (2 CE); utility:Stand on a ball (bonus action) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/root-bundle_u7p2yaIifyDSZYtW.json) |
+| Flower Field | 6 | save:Action (5 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/flower-field_MLLR1v3HhPAmTEO8.json) |
+| Cursed Buds | 11 | attack:Cursed buds (6 CE): one attack per bud; utility:Bud tree (10 CE): one bud at each hostile within 30 ft | Ataque sin daño propio: comprobar intención | [JSON](../src/packs/jjk5e-techniques/cursed-buds_rAbsflTzfT1qFbq4.json) |
+| Domain Expansion: Ceremonial Sea of Light | 18 | damage:Initiative 20: Flower Field + 2d4 necrotic; utility:Expand Domain (20 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-ceremonial-sea-of-light_7clE8rWvh6MVK4iK.json) |
 
 ### Disaster Vermin (4 spells)
 

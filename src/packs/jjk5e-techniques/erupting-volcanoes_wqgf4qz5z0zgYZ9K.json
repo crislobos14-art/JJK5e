@@ -19,7 +19,7 @@
    "3Z7NwylVtsjnbOEp": {
     "_id": "3Z7NwylVtsjnbOEp",
     "type": "utility",
-    "name": "Action (2 CE)",
+    "name": "Create volcanoes (2 CE each)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -30,24 +30,26 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "2 * max(@abilities.wis.mod, @abilities.cha.mod)"
      },
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "value": "60",
+     "units": "ft",
      "override": true
     },
     "target": {
      "template": {
-      "type": "radius",
-      "size": "5",
+      "type": "circle",
+      "size": "2.5",
       "units": "ft",
       "count": "1",
       "contiguous": false
      },
      "affects": {
-      "type": "creature",
+      "type": "",
       "choice": false
      },
      "override": true
@@ -60,7 +62,7 @@
    "AuEcnTkTPSeA0KJa": {
     "_id": "AuEcnTkTPSeA0KJa",
     "type": "save",
-    "name": "Bonus Action",
+    "name": "Erupt (bonus action, per volcano)",
     "sort": 100000,
     "activation": {
      "type": "bonus",
@@ -81,6 +83,18 @@
      "override": true
     },
     "target": {
+     "template": {
+      "type": "line",
+      "size": "30",
+      "width": "5",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
      "override": true
     },
     "duration": {
@@ -100,7 +114,21 @@
     },
     "damage": {
      "onSave": "half",
-     "parts": []
+     "parts": [
+      {
+       "number": null,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "fire"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "(@prof)d10"
+       },
+       "scaling": {}
+      }
+     ]
     },
     "effects": [
      {
@@ -163,7 +191,11 @@
    },
    "technique": "Disaster Flames",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceSteps": {
+    "3Z7NwylVtsjnbOEp": 2
+   },
+   "automation": "automated"
   }
  },
  "effects": [
@@ -174,11 +206,17 @@
    "statuses": [
     "restrained"
    ],
-   "changes": [],
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "priority": 20,
+     "value": "turn=start, saveAbility=str, saveDC=JJKORIGINDC, label=Magma"
+    }
+   ],
    "transfer": false,
    "disabled": false,
    "duration": {
-    "seconds": 60,
     "rounds": 10
    },
    "description": "",

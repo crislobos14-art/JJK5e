@@ -4453,14 +4453,25 @@ function originSaveDC(effect) {
   return 8 + prof + mod;
 }
 
+/** CE modifier of the effect's origin actor (JJKORIGINCEMOD placeholder, e.g. Cursed Buds drain). */
+function originCEMod(effect) {
+  let item = null;
+  try { item = effect?.origin ? fromUuidSync(effect.origin) : null; } catch (err) { item = null; }
+  const actor = item?.actor ?? (item?.documentName === "Actor" ? item : null);
+  return Math.max(1, Number(actor?.system?.abilities?.[actor ? ceAbility(actor) : "wis"]?.mod) || 1);
+}
+
+const ORIGIN_TOKENS = /JJKORIGINDC|JJKORIGINCEMOD/;
 function resolveOverTimeDC(effect, data) {
-  const fix = (list) => (list ?? []).map((c) => (typeof c?.value === "string" && c.value.includes("JJKORIGINDC")
-    ? { ...c, value: c.value.replaceAll("JJKORIGINDC", String(originSaveDC(effect))) } : c));
+  const sub = (v) => v.replaceAll("JJKORIGINDC", String(originSaveDC(effect)))
+    .replaceAll("JJKORIGINCEMOD", String(originCEMod(effect)));
+  const fix = (list) => (list ?? []).map((c) => (typeof c?.value === "string" && ORIGIN_TOKENS.test(c.value)
+    ? { ...c, value: sub(c.value) } : c));
   const upd = {};
   const top = data?.changes ?? effect?._source?.changes;
-  if (top?.some?.((c) => String(c?.value).includes("JJKORIGINDC"))) upd.changes = fix(top);
+  if (top?.some?.((c) => ORIGIN_TOKENS.test(String(c?.value)))) upd.changes = fix(top);
   const sys = data?.system?.changes ?? effect?._source?.system?.changes;
-  if (sys?.some?.((c) => String(c?.value).includes("JJKORIGINDC"))) upd["system.changes"] = fix(sys);
+  if (sys?.some?.((c) => ORIGIN_TOKENS.test(String(c?.value)))) upd["system.changes"] = fix(sys);
   if (Object.keys(upd).length) effect.updateSource(upd);
 }
 

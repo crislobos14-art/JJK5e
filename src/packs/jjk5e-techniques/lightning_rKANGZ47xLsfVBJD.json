@@ -42,7 +42,8 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
@@ -76,6 +77,75 @@
        "scaling": {
         "number": 1
        }
+      }
+     ]
+    }
+   },
+   "GHNUvadRT8oaEw1w": {
+    "_id": "GHNUvadRT8oaEw1w",
+    "type": "attack",
+    "name": "Chain to a creature within 10 ft (half damage)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "10",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": null,
+       "denomination": null,
+       "bonus": "",
+       "types": [
+        "lightning"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "floor((3 + floor(min(@details.level, 6) / 6) + 2 * floor(min(@details.level, 11) / 11) + 2 * floor(min(@details.level, 18) / 18)) * 3.5 / 2)"
+       },
+       "scaling": {}
       }
      ]
     }
@@ -126,7 +196,7 @@
    "dmgScale": {
     "QQS0doGNBq7dmJc8": [
      [
-      0,
+      1,
       "3d6"
      ],
      [
@@ -148,7 +218,8 @@
    },
    "technique": "Disaster Storms",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "5WRl9NqkIbDZzpyp",

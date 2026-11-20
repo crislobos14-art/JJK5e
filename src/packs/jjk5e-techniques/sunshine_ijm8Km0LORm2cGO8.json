@@ -24,10 +24,10 @@
    "vvg0y1Ga9QXl6bXU": {
     "_id": "vvg0y1Ga9QXl6bXU",
     "type": "attack",
-    "name": "Action (4 CE)",
+    "name": "Burning ray (replaces an attack, 4 CE)",
     "sort": 0,
     "activation": {
-     "type": "action",
+     "type": "special",
      "value": 1,
      "condition": ""
     },
@@ -39,13 +39,16 @@
     },
     "range": {
      "value": "120",
-     "units": "ft"
+     "units": "ft",
+     "override": true
     },
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
-     }
+      "count": "1",
+      "choice": true
+     },
+     "override": true
     },
     "duration": {
      "units": "inst"
@@ -101,7 +104,25 @@
       "Disaster Storms"
      ]
     ]
-   }
+   },
+   "dmgScale": {
+    "vvg0y1Ga9QXl6bXU": [
+     [
+      1,
+      "6d6"
+     ],
+     [
+      6,
+      "8d6"
+     ],
+     [
+      11,
+      "12d6"
+     ]
+    ]
+   },
+   "automationNotes": "Target inside the Sunny Day radius: add your CE modifier to the damage.",
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",

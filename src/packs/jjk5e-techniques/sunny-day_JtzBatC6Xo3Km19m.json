@@ -35,11 +35,12 @@
      "targets": [],
      "scaling": {
       "allowed": true,
-      "max": "20"
+      "max": "6 + 2 * @prof"
      }
     },
     "range": {
-     "units": "self"
+     "units": "self",
+     "override": true
     },
     "target": {
      "template": {
@@ -50,14 +51,78 @@
       "contiguous": false
      },
      "affects": {
-      "type": "creature",
+      "type": "ally",
       "choice": false
-     }
+     },
+     "override": true
     },
     "duration": {
      "value": "2",
      "units": "minute",
-     "concentration": false
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "gPCItmGmcGI13vb5",
+      "onSave": false
+     }
+    ]
+   },
+   "nFOeof9kzI5eiJoZ": {
+    "_id": "nFOeof9kzI5eiJoZ",
+    "type": "heal",
+    "name": "Sunny Day: start-of-turn temp HP",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "20",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "ally",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": [],
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "",
+     "types": [
+      "temphp"
+     ],
+     "custom": {
+      "enabled": true,
+      "formula": "max(2, 2 * max(@abilities.wis.mod, @abilities.cha.mod))"
+     },
+     "scaling": {}
     }
    }
   }
@@ -84,10 +149,40 @@
       "Disaster Storms"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!JtzBatC6Xo3Km19m"
+ "_key": "!items!JtzBatC6Xo3Km19m",
+ "effects": [
+  {
+   "_id": "gPCItmGmcGI13vb5",
+   "name": "Sunny Day",
+   "img": "modules/jjk5e/icons/techniques/disaster-storms.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Resistance to fire; temp HP = 2 × CE mod (min 2) at the start of the caster's turn.</p>",
+   "changes": [
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "fire",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 20
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Disaster Storms"
+    }
+   },
+   "_key": "!items.effects!JtzBatC6Xo3Km19m.gPCItmGmcGI13vb5"
+  }
+ ]
 }
