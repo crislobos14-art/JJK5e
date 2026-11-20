@@ -712,7 +712,10 @@ function onPreCreateItem(item, data, options, userId) {
   const actor = item.parent;
   if (actor?.documentName !== "Actor" || options?.jjk5eSkipPrereq) return;
   const missing = missingPrereqs(actor, item);
-  if (missing.length) ui.notifications.warn(t("Feats.Missing", { name: item.name, list: missing.join("; ") }), { permanent: false });
+  if (missing.length) {
+    ui.notifications.warn(t("Feats.Missing", { name: item.name, list: missing.join("; ") }), { permanent: false });
+    if (setting("strictPrereqs") && !game.user.isGM) return false;
+  }
 }
 
 /* -------------------------------------------- */
@@ -813,7 +816,15 @@ async function chooseTechnique(actor) {
     + `<select name="technique" style="width:100%">${options}</select>`
     + (current ? `<p><em>${t("Technique.Current", { name: esc(current) })}</em></p>` : "");
   const choice = await promptField(t("Technique.Title"), content, "technique");
-  if (!choice) return;
+  if (!choice || choice === current) return;
+  if (current) {
+    const old = actor.items.filter((item) => item.flags?.jjk5e?.technique === current);
+    const approved = await confirmDialog(t("Technique.Title"),
+      `<p>Change ${esc(current)} to ${esc(choice)}?</p>
+       <p>This will remove ${old.length} old innate-technique items from this character. Back up the actor first.</p>`);
+    if (!approved) return;
+    if (old.length) await actor.deleteEmbeddedDocuments("Item", old.map((i) => i.id));
+  }
   await actor.setFlag(MODULE_ID, "technique", choice);
   if (!actor.getFlag(MODULE_ID, "ceAbility")) await chooseCEAbility(actor);
   const added = await syncTechnique(actor);
@@ -1654,6 +1665,7 @@ Hooks.once("init", () => {
   reg("autoExpire", Boolean, true);
   reg("modifierReminders", Boolean, true);
   reg("checkPrereqs", Boolean, true);
+  reg("strictPrereqs", Boolean, true);
   reg("headerButton", Boolean, true, { scope: "client" });
   game.settings.registerMenu(MODULE_ID, "importMenu", {
     name: "JJK5E.Settings.importMenu.Name", label: "JJK5E.Settings.importMenu.Label",
