@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import {
   activityCECost, ceTransaction, blackFlashCheck, clashRoundsFromRefinement,
-  domainSureHitEligible, vowBlocksUsage
+  domainSureHitEligible, multiDomainClash, vowBlocksUsage
 } from "../scripts/jjk5e-rules.mjs";
 
 test("base and scaled CE costs are combined before discounts", () => {
@@ -31,6 +31,19 @@ test("domain clash progression follows V.6 table", () => {
   assert.equal(clashRoundsFromRefinement(90), 1);
   assert.equal(clashRoundsFromRefinement(100), 0);
   assert.equal(clashRoundsFromRefinement(0), null);
+});
+
+test("three-way clashes track every weaker domain instead of picking one rival", () => {
+  const result = multiDomainClash([
+    { id: "a", refinement: 90 }, { id: "b", refinement: 50 }, { id: "c", refinement: 20 }
+  ]);
+  assert.deepEqual(result.map(({ id, role, rounds }) => ({ id, role, rounds })), [
+    { id: "a", role: "winner", rounds: null },
+    { id: "b", role: "loser", rounds: 6 },
+    { id: "c", role: "loser", rounds: 3 }
+  ]);
+  const tied = multiDomainClash([{ id: "a", refinement: 90 }, { id: "b", refinement: 90 }, { id: "c", refinement: 20 }]);
+  assert.deepEqual(tied.map((x) => x.role), ["equal", "equal", "loser"]);
 });
 
 test("lethal sure-hit requires an eligible in-domain target", () => {

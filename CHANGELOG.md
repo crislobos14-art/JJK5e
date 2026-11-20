@@ -1,11 +1,20 @@
 # Changelog
 
+## 1.25.0 — Multi-domain clashes and executable Boogie Woogie
+- Replaced the former three-or-more-domain GM-only warning with deterministic V.6 clash tracking for every participating domain. Tied leaders remain tied; each weaker domain receives its own countdown and shrinks each round while sure-hit effects remain disabled.
+- Added a pure multi-domain resolver and regression coverage for unique and tied leaders.
+- Boogie Woogie now exposes its action, bonus-action and reaction variants at the documented CE costs (1/1/3) and executes a real same-scene token-position swap after a successful use.
+- Token swaps use the privileged-operation gate, validate the source token against the actor and never let a player move a token they do not own without explicit GM approval.
+- Extended the per-spell audit so declarative runtime mechanics such as swaps count as configured mechanics while remaining explicitly unverified in live Foundry.
+
+### Validation boundary
+- Static JSON/source parity, JavaScript syntax and Node regression tests pass locally.
+- The official Foundry pack compiler is exercised by GitHub Actions; it could not be run locally because npm is unavailable in this workstation image.
+- No claim is made that all 360 spells have been functionally tested in Foundry V14. The audit still distinguishes native/declarative mechanics from unresolved utility, save, attack and domain behavior.
+
 ## 1.24.1 — Review of 1.23/1.24
-- Fixed: while a domain was open, every activity of the domain item was blocked, including the domain's own
-  in-domain activities (34 domains, e.g. Bloodbath, Womb Profusion, Coffin of the Iron Mountain). Only the
-  "Expand Domain" activity is blocked now.
-- Fixed: strict feat prerequisites blocked feats gained during level-up when their prerequisite feature arrived in
-  the same level (dnd5e creates them in one batch). Advancement now only warns.
+- Fixed: while a domain was open, every activity of the domain item was blocked, including the domain's own in-domain activities. Only the "Expand Domain" activity is blocked now.
+- Fixed: strict feat prerequisites blocked feats gained during level-up when their prerequisite feature arrived in the same level. Advancement now only warns.
 - Fixed: a Black Flash pending from an older version (no linked activity) was never applied.
 
 ## 1.24.0 — Innate spell coverage audit and first mechanical corrections

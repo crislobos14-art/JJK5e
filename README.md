@@ -314,7 +314,7 @@ This release corrects several critical V.6 / Creeps and Curses mismatches but **
 
 **Testing:** `node --test tests/*.test.mjs`. GitHub Actions validates source JSON and rebuilds compendiums. These tests do **not** replace live tests in Foundry V14 with two player clients and optional integrations.
 
-**Important outstanding work:** true three-plus-domain clashes, all Maximum/Reduced Output modifiers, exterior damage and displacement when opening domains, all custom technique behaviors, and additional supplement-specific automatic restrictions remain incomplete. For unresolved mechanics use GM adjudication rather than assuming the automation is correct.
+**Important outstanding work:** all Maximum/Reduced Output modifiers, exterior damage and displacement when opening domains, many custom technique behaviors, and additional supplement-specific automatic restrictions remain incomplete. Three-plus-domain countdowns are automated as of v1.25.0, but their live Foundry behavior still requires testing. For unresolved mechanics use GM adjudication rather than assuming the automation is correct.
 
 ## v1.24.0 — Auditoría de los 360 spells innatos
 

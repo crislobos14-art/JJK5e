@@ -34,6 +34,22 @@ export function clashRoundsFromRefinement(diff) {
   return diff < 10 ? 10 : 10 - Math.floor(diff / 10);
 }
 
+/** Resolve the common V.6 progression for a clash of two or more domains. */
+export function multiDomainClash(domains = []) {
+  const valid = domains
+    .map((d) => ({ ...d, refinement: Number(d.refinement) }))
+    .filter((d) => d.id && Number.isFinite(d.refinement) && d.refinement >= 0);
+  if (valid.length < 2) return [];
+  const highest = Math.max(...valid.map((d) => d.refinement));
+  const leaders = valid.filter((d) => d.refinement === highest);
+  return valid.map((d) => ({
+    id: d.id,
+    role: d.refinement === highest ? (leaders.length > 1 ? "equal" : "winner") : "loser",
+    rounds: d.refinement === highest ? null : clashRoundsFromRefinement(highest - d.refinement),
+    opponents: valid.filter((x) => x.id !== d.id).map((x) => x.id)
+  }));
+}
+
 /** Domain sure-hit can only affect selected, inside, eligible targets of a lethal domain. */
 export function domainSureHitEligible({ selected, inside, lethal = true, clash = false, warded = false }) {
   return !!selected && !!inside && !!lethal && !clash && !warded;

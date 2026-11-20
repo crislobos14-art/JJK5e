@@ -8,7 +8,7 @@
  *   Technique Burnout), Maximum / Reduced Output, Soul Awareness, Limb Damage, summons.
  * - JJK panel on character sheets, Spanish / English UI, effect expiry (unless Times Up is active).
  */
-import { activityCECost, ceTransaction, blackFlashCheck, clashRoundsFromRefinement, vowBlocksUsage } from "./jjk5e-rules.mjs";
+import { activityCECost, ceTransaction, blackFlashCheck, clashRoundsFromRefinement, multiDomainClash, vowBlocksUsage } from "./jjk5e-rules.mjs";
 
 const MODULE_ID = "jjk5e";
 const DATA_VERSION = "1.24.0";
@@ -633,6 +633,27 @@ function registerActivityHooks() {
         ? t("Domain.SureHitAttack") : t("Domain.SureHitSave")}</p>`);
     }
     await applySpellSelfBuff(actor, item, activity);
+    await applyTokenSwap(actor, item, activity);
+  });
+}
+
+/** Execute explicitly declared token-position swaps without granting players
+ * authority over tokens they do not own. */
+async function applyTokenSwap(actor, item, activity) {
+  if (!item?.flags?.jjk5e?.tokenSwap?.[activity?.id] || !canvas?.scene) return;
+  const source = actor?.getActiveTokens?.(true, true)?.find((t) => t.parent?.id === canvas.scene.id)
+    ?? canvas.tokens?.controlled?.find((t) => t.actor === actor)?.document;
+  const targets = [...(game.user?.targets ?? [])];
+  const target = targets.length === 1 ? targets[0]?.document : null;
+  if (!source || !target || source.id === target.id || source.parent?.id !== target.parent?.id) {
+    return ui.notifications.warn("JJK 5e: select exactly one token in the same scene to swap positions.");
+  }
+  if (!game.user.isGM && !target.actor?.isOwner) {
+    return ui.notifications.warn("JJK 5e: the selected token must be owned by you; ask the GM to resolve other swaps.");
+  }
+  await viaGM("tokenSwap", {
+    sceneId: canvas.scene.id, sourceId: source.id, targetId: target.id,
+    actorUuid: actor.uuid, userId: game.user.id
   });
 }
 
@@ -1409,6 +1430,20 @@ async function gmDismiss({ actorUuid, sceneId }) {
 /** Extra GM-side handlers registered by later systems (domains, curses...). */
 const GM_EXTRA = {};
 
+GM_EXTRA.tokenSwap = async ({ sceneId, sourceId, targetId, actorUuid }) => {
+  const scene = game.scenes.get(sceneId);
+  const source = scene?.tokens.get(sourceId);
+  const target = scene?.tokens.get(targetId);
+  const actor = actorUuid ? await fromUuid(actorUuid).catch(() => null) : null;
+  if (!scene || !source || !target || source.id === target.id) return;
+  const actorId = actor?.isToken ? actor.token?.actorId : actor?.id;
+  if (!actorId || source.actorId !== actorId) return;
+  await scene.updateEmbeddedDocuments("Token", [
+    { _id: source.id, x: target.x, y: target.y, elevation: target.elevation },
+    { _id: target.id, x: source.x, y: source.y, elevation: source.elevation }
+  ], { animate: false, jjk5eTokenSwap: true });
+};
+
 function viaGM(action, payload) {
   if (game.user.isGM) return GM_EXTRA[action] ? GM_EXTRA[action](payload) : (action === "summon" ? gmSummon(payload) : gmDismiss(payload));
   const gm = game.users.activeGM ?? game.users.find((u) => u.isGM && u.active);
@@ -1791,7 +1826,7 @@ Hooks.once("ready", async () => {
     if (!setting("playerGMRequests") || !msg?.requestedBy) return;
     const requester = game.users.get(msg.requestedBy);
     const action = String(msg.action ?? "");
-    const allowed = new Set(["summon", "dismiss", "domainZone", "domainZoneResize", "domainZoneDelete",
+    const allowed = new Set(["summon", "dismiss", "tokenSwap", "domainZone", "domainZoneResize", "domainZoneDelete",
       "domainUpdate", "customizeShikigami"]);
     if (!requester?.active || requester.isGM || !allowed.has(action)) return;
     const actor = msg.payload?.actorUuid ? await fromUuid(msg.payload.actorUuid).catch(() => null) : null;
@@ -3523,10 +3558,29 @@ async function detectClash(actor) {
   const tokenOthers = (canvas?.tokens?.placeables ?? []).map((tk) => tk.actor).filter((a) => a && a !== actor && !a.prototypeToken?.actorLink
     && getDomain(a)?.open && !getDomain(a).clash && !others.includes(a));
   const candidates = [...new Set([...others, ...tokenOthers])];
-  // A multi-domain clash has different rules; never silently choose one rival.
   if (candidates.length > 1) {
-    ui.notifications.warn("JJK V.6: a three-or-more-way domain clash requires GM adjudication.");
-    await chat(actor, "<p>Multiple Domain Clash: resolve all refinements and barriers with the GM. No automatic winner is applied.</p>");
+    const actors = [actor, ...candidates];
+    const results = multiDomainClash(actors.map((a) => ({ id: a.uuid, refinement: getDomain(a).refinement })));
+    const clashId = foundry.utils.randomID();
+    for (const a of actors) {
+      const state = getDomain(a);
+      const result = results.find((r) => r.id === a.uuid);
+      state.clash = {
+        id: clashId, with: result.opponents, role: result.role, rounds: result.rounds,
+        resolved: false, thirdChecked: false, multi: true
+      };
+      await setDomain(a, state);
+    }
+    const lines = actors.map((a) => {
+      const state = getDomain(a), result = results.find((r) => r.id === a.uuid);
+      const outcome = result.role === "loser" ? `${result.rounds} round(s) remaining` : result.role;
+      return `<li>${esc(a.name)} (${state.refinement}): ${esc(outcome)}</li>`;
+    }).join("");
+    await docClass("ChatMessage").create({ content: `<div class="jjk5e-card"><h3>Multiple Domain Clash</h3><ul>${lines}</ul><p class="hint">Sure-hit effects are disabled until the clash resolves. Every losing barrier shrinks each round.</p></div>` });
+    for (const a of actors) {
+      const result = results.find((r) => r.id === a.uuid);
+      if (result.role === "loser" && result.rounds === 0) await closeDomainOf(a, t("Domain.ClashLost", { name: esc(a.name) }));
+    }
     return;
   }
   const rival = candidates[0];

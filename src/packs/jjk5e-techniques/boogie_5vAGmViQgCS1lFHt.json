@@ -50,6 +50,76 @@
      "units": "inst",
      "override": true
     }
+   },
+   "bwBonusAction001": {
+    "_id": "bwBonusAction001",
+    "type": "utility",
+    "name": "Bonus Action (1 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
+   },
+   "bwReaction002CE": {
+    "_id": "bwReaction002CE",
+    "type": "utility",
+    "name": "Reaction (3 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    }
    }
   },
   "uses": {
@@ -95,11 +165,18 @@
  "flags": {
   "jjk5e": {
    "ceCosts": {
-    "ih4MTTL3k7FulYvj": 1
+    "ih4MTTL3k7FulYvj": 1,
+    "bwBonusAction001": 1,
+    "bwReaction002CE": 3
    },
    "technique": "Boogie Woogie",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "tokenSwap": {
+    "ih4MTTL3k7FulYvj": true,
+    "bwBonusAction001": true,
+    "bwReaction002CE": true
+   }
   }
  },
  "folder": "JUFxrHmgG8mOdlrV",

@@ -62,12 +62,16 @@ for (const item of pack.documents) {
   for (const aid of Object.keys(steps)) if (!acts[aid]) errors.push(`Invalid CE scaling ref: ${item.name} (${aid})`);
   if (JSON.stringify(item.flags?.jjk5e?.selfBuffs ?? null) !== JSON.stringify(src.doc.flags?.jjk5e?.selfBuffs ?? null))
     errors.push(`Self buff source differs: ${item.name}`);
+  if (JSON.stringify(item.flags?.jjk5e?.tokenSwap ?? null) !== JSON.stringify(src.doc.flags?.jjk5e?.tokenSwap ?? null))
+    errors.push(`Token swap source differs: ${item.name}`);
   if (item.type !== "spell") continue;
   const activityList = Object.values(acts);
   const isOnlyUtility = activityList.length > 0 && activityList.every(a => a.type === "utility");
   const unresolvedSave = activityList.some(a => a.type === "save" && !(a.damage?.parts?.length) && !(a.effects?.length));
   const unresolvedAttack = activityList.some(a => a.type === "attack" && !(a.damage?.parts?.length) && !a.damage?.includeBase);
-  const unresolvedUtility = isOnlyUtility && !(item.effects ?? []).length && !item.flags?.jjk5e?.domain;
+  const declarativeMechanic = !!Object.keys(item.flags?.jjk5e?.selfBuffs ?? {}).length
+    || !!Object.keys(item.flags?.jjk5e?.tokenSwap ?? {}).length;
+  const unresolvedUtility = isOnlyUtility && !(item.effects ?? []).length && !declarativeMechanic && !item.flags?.jjk5e?.domain;
   const status = unresolvedSave ? "save-unresolved" : unresolvedAttack ? "attack-no-damage"
     : item.flags?.jjk5e?.domain && isOnlyUtility ? "domain-generic"
     : unresolvedUtility ? "utility-unresolved" : isOnlyUtility ? "utility-with-effect" : "mechanics-present";

@@ -62,3 +62,11 @@ test("all CE-cost entries point at real activities", () => {
     }
   }
 });
+
+test("Boogie Woogie declares executable swaps for every V.6 activation", () => {
+  const boogie = spell("Boogie", "Boogie Woogie");
+  const activities = Object.values(boogie.system.activities);
+  assert.deepEqual(activities.map((a) => a.activation.type).sort(), ["action", "bonus", "reaction"]);
+  assert.deepEqual(activities.map((a) => boogie.flags.jjk5e.ceCosts[a._id]).sort((a, b) => a - b), [1, 1, 3]);
+  assert.ok(activities.every((a) => boogie.flags.jjk5e.tokenSwap[a._id]));
+});
