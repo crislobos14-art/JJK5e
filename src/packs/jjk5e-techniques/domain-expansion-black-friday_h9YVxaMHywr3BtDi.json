@@ -58,6 +58,48 @@
      "concentration": false,
      "override": true
     }
+   },
+   "H81ET4GHT9mU18e9": {
+    "_id": "H81ET4GHT9mU18e9",
+    "type": "utility",
+    "name": "Initiative 20: random receipt (d4)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "roll": {
+     "formula": "1d4",
+     "name": "Receipt: 1 Object, 2 Vehicle, 3 Reservation, 4 Structure",
+     "prompt": false,
+     "visible": true
+    }
    }
   },
   "uses": {
@@ -116,7 +158,9 @@
     "ZdNzm5fOHviM36fA": 20
    },
    "domainActivity": "ZdNzm5fOHviM36fA",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Recreation and Contractual Control cost no CE inside the domain (skip the CE in the usage dialog).",
+   "automation": "automated"
   }
  },
  "folder": "1Ch8dLVYSEvwWjZr",

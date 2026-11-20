@@ -21,29 +21,233 @@
   },
   "requirements": "Cursed Technique Reversal, Contractual Recreation",
   "activities": {
-   "wcQ33EOVejoz2ynQ": {
-    "_id": "wcQ33EOVejoz2ynQ",
+   "XmQ2fuxQMF1I5MeG": {
+    "_id": "XmQ2fuxQMF1I5MeG",
     "type": "utility",
-    "name": "Bonus Action",
+    "name": "Turn a Tiny object into a receipt (2 CE)",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "bonus",
      "value": 1,
-     "condition": ""
+     "condition": "",
+     "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
-     }
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
-     "units": "self"
+     "value": "5",
+     "units": "ft",
+     "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "object",
+      "count": "1"
+     },
+     "override": true
+    },
+    "effects": []
+   },
+   "XD6mUwaX4C1uxgPj": {
+    "_id": "XD6mUwaX4C1uxgPj",
+    "type": "utility",
+    "name": "Turn a Small object into a receipt (4 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
     "duration": {
-     "units": "inst"
-    }
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "object",
+      "count": "1"
+     },
+     "override": true
+    },
+    "effects": []
+   },
+   "4aCeVrqIFxKzqBSf": {
+    "_id": "4aCeVrqIFxKzqBSf",
+    "type": "utility",
+    "name": "Turn a Medium object into a receipt (6 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "object",
+      "count": "1"
+     },
+     "override": true
+    },
+    "effects": []
+   },
+   "Ubc0FZuF7ujgdwIM": {
+    "_id": "Ubc0FZuF7ujgdwIM",
+    "type": "utility",
+    "name": "Turn a Large object into a receipt (8 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "object",
+      "count": "1"
+     },
+     "override": true
+    },
+    "effects": []
+   },
+   "3WIBlVLm7ivlPge7": {
+    "_id": "3WIBlVLm7ivlPge7",
+    "type": "utility",
+    "name": "Turn a Huge object into a receipt (10 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "object",
+      "count": "1"
+     },
+     "override": true
+    },
+    "effects": []
+   },
+   "hvxX84zD0lRa9UPm": {
+    "_id": "hvxX84zD0lRa9UPm",
+    "type": "utility",
+    "name": "Turn a Gargantuan object into a receipt (20 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "object",
+      "count": "1"
+     },
+     "override": true
+    },
+    "effects": []
    }
   }
  },
@@ -63,7 +267,16 @@
       "Contractual Recreation"
      ]
     ]
-   }
+   },
+   "ceCosts": {
+    "XmQ2fuxQMF1I5MeG": 2,
+    "XD6mUwaX4C1uxgPj": 4,
+    "4aCeVrqIFxKzqBSf": 6,
+    "Ubc0FZuF7ujgdwIM": 8,
+    "3WIBlVLm7ivlPge7": 10,
+    "hvxX84zD0lRa9UPm": 20
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",

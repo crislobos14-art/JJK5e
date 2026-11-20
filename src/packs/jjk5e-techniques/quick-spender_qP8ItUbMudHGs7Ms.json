@@ -84,7 +84,9 @@
   "jjk5e": {
    "technique": "Contractual Recreation",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Use any Recreation activity as a bonus action (free action at 18th).",
+   "automation": "automated"
   }
  },
  "folder": "1Ch8dLVYSEvwWjZr",

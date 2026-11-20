@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.39.0 — Técnica por técnica: Contractual Recreation
+- **Recreation**: una acción por tamaño de recibo (2/4/6/8/10/20 CE) con el daño al caer sobre una criatura (2d6 por tamaño sobre Diminuto; derribado y apresado si es Enorme o mayor), reserva (4 CE) y estructura (20 CE).
+- **Contractual Control**: carga de vehículo en línea de 60 pies, arma telequinética (5/7/10 dados por nivel) y mover objetos.
+- **Black Friday**: recibo aleatorio (d4) en iniciativa 20.
+- **Contractual Transformation**: acciones por tamaño.
+- Automatizados a mano: 56/360. Sin probar en Foundry real.
+
 ## 1.38.0 — Técnica por técnica: Construction
 - **Construct** y **Cursed Creation**: CE extra escalable (propiedades/tamaño; +2 por grado).
 - **Liquid Metal**: 1–4 CE extra, alcance y dado mayor durante 1 minuto.

@@ -1265,6 +1265,82 @@ def construction(S):
     mark(dc)
 
 
+SIZES = [("Tiny", 2), ("Small", 4), ("Medium", 6), ("Large", 8), ("Huge", 10), ("Gargantuan", 20)]
+
+
+def contractual_recreation(S):
+    ft = lambda n: {"value": str(n), "units": "ft", "override": True}
+    r = S.get("Recreation")
+    keep = r["system"]["activities"]
+    res = keep["vzVK16H72nDncqyb"]
+    res["name"] = "Reservation receipt (4 CE)"
+    res["range"], res["target"] = RANGE_SELF, SELF
+    st = keep["UvaaphKlwkGp9O6f"]
+    st["name"] = "Structure receipt (20 CE)"
+    st["range"], st["target"] = ft(100), sphere(20)
+    st["damage"] = {"onSave": "half", "parts": [dice(10, 6, ["bludgeoning"])]}
+    pinned = fx(r, "pinned", "Pinned under a materialization", statuses=["prone", "restrained"], rounds=0,
+                desc="Prone and restrained under a Huge or larger materialization until freed (GM).")
+    for e in r["effects"]:
+        if e["_id"] == pinned: e["duration"] = {}
+    r["effects"] = [e for e in r["effects"] if e["_id"] != "HsPEvpT91A1Dt4Gk"]
+    apply(st, pinned)
+    for i, (size, c_) in enumerate(SIZES):
+        dmg = [dice(2 * i, 6, ["bludgeoning"])] if i else []
+        a = act(r, f"obj{size}", "save" if i else "utility", f"Object / vehicle receipt — {size} ({c_} CE)", "action",
+                range=ft(100), target=one_creature())
+        if i:
+            a["save"] = {"ability": ["dex"], "dc": {"calculation": "spellcasting", "formula": ""}}
+            a["damage"] = {"onSave": "half" if i >= 4 else "none", "parts": dmg}
+            if i >= 4: apply(a, pinned)
+        cost(r, a, c_)
+    note(r, "Damage applies only if you drop the materialization on a creature (2d6 per size above Tiny). "
+            "Receipts are inventory items; wet receipts cannot be used.")
+    mark(r)
+
+    q = S.get("Quick Spender")
+    note(q, "Use any Recreation activity as a bonus action (free action at 18th).")
+    mark(q)
+
+    cc = S.get("Contractual Control")
+    v = cc["system"]["activities"]["9N70spOoRTEVVi7O"]
+    v["name"] = "Vehicle charge 60 ft (3 CE)"
+    v["target"] = {"template": {"type": "line", "size": "60", "width": "10", "units": "ft", "count": "1", "contiguous": False},
+                   "affects": {"type": "creature"}, "override": True}
+    v["damage"] = {"onSave": "none", "parts": [dice(4, 6, ["bludgeoning"])]}
+    w = act(cc, "weapon", "attack", "Telekinetic weapon (3 CE)", "special",
+            attack={"ability": "", "bonus": "", "critical": {"threshold": None}, "flat": False,
+                    "type": {"value": "melee", "classification": "spell"}},
+            damage={"includeBase": False, "parts": [dice(5, 8, ["slashing", "piercing", "bludgeoning"])]},
+            range=ft(60), target=one_creature())
+    w["activation"]["condition"] = "Replaces one attack (once per turn); use the weapon's die"
+    cost(cc, w, 3)
+    scale(cc, w, [[11, "5d8"], [15, "7d8"], [18, "10d8"]])
+    obj = act(cc, "objects", "utility", "Move summoned objects 60 ft (3 CE each)", "bonus", range=ft(60),
+              target={"affects": {"type": "object"}, "override": True})
+    cost(cc, obj, 3, 3, "60")
+    note(cc, "Vehicle damage uses the size dice of Recreation (adjust the dice). Everything used disappears afterwards.")
+    mark(cc)
+
+    d = S.get("Domain Expansion: Black Friday")
+    i20 = act(d, "init20", "utility", "Initiative 20: random receipt (d4)", "special", range=RANGE_SELF, target=SELF,
+              roll={"formula": "1d4", "name": "Receipt: 1 Object, 2 Vehicle, 3 Reservation, 4 Structure",
+                    "prompt": False, "visible": True})
+    free(d, i20)
+    note(d, "Recreation and Contractual Control cost no CE inside the domain (skip the CE in the usage dialog).")
+    mark(d)
+
+    t = S.get("Contractual Transformation")
+    t["system"]["activities"] = {}
+    t["flags"]["jjk5e"]["ceCosts"] = {}
+    for size, c_ in SIZES:
+        a = act(t, f"t{size}", "utility", f"Turn a {size} object into a receipt ({c_} CE)", "bonus",
+                range={"value": "5", "units": "ft", "override": True},
+                target={"affects": {"type": "object", "count": "1"}, "override": True})
+        cost(t, a, c_)
+    mark(t)
+
+
 TECHNIQUES = {"Antigravity System": antigravity_system,
               "Auspicious Beast Summon": auspicious_beast_summon,
               "Black Bird Manipulation": black_bird_manipulation,
@@ -1277,7 +1353,8 @@ TECHNIQUES = {"Antigravity System": antigravity_system,
               "Centipede Shroud": centipede_shroud,
               "Clone": clone,
               "Comedian": comedian,
-              "Construction": construction}
+              "Construction": construction,
+              "Contractual Recreation": contractual_recreation}
 
 if __name__ == "__main__":
     args = sys.argv[1:]

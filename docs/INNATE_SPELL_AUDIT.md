@@ -3,13 +3,13 @@
 > Generado desde el compendio y las fuentes. **No certifica ejecución en Foundry ni fidelidad semántica a cada regla**.
 
 - Spells examinados: **360**; técnicas agrupadas: **81**.
-- Utilidad sin efecto configurado: revisar lógica: **99**.
+- Utilidad sin efecto configurado: revisar lógica: **98**.
 - Utilidad con efecto: comprobar activación: **15**.
-- Dominio genérico: resolver propiedades particulares: **47**.
+- Dominio genérico: resolver propiedades particulares: **46**.
 - Salvación sin daño/efecto automático: **26**.
 - Ataque sin daño propio: comprobar intención: **10**.
-- Mecánica configurada; falta prueba Foundry: **111**.
-- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **52**.
+- Mecánica configurada; falta prueba Foundry: **109**.
+- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **56**.
 
 ## Interpretación
 
@@ -134,10 +134,10 @@
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Recreation | 1 | utility:Action (4 CE); save:Action (20 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/recreation_Z9Ni91hHu2mMVtHZ.json) |
-| Quick Spender | 3 | utility:Bonus Action | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/quick-spender_qP8ItUbMudHGs7Ms.json) |
-| Contractual Control | 11 | save:Bonus Action (3 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/contractual-control_KQ0xKxXHF4freo6F.json) |
-| Domain Expansion: Black Friday | 18 | utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-black-friday_h9YVxaMHywr3BtDi.json) |
+| Recreation | 1 | utility:Reservation receipt (4 CE); save:Structure receipt (20 CE); utility:Object / vehicle receipt — Tiny (2 CE); save:Object / vehicle receipt — Small (4 CE); save:Object / vehicle receipt — Medium (6 CE); save:Object / vehicle receipt — Large (8 CE); save:Object / vehicle receipt — Huge (10 CE); save:Object / vehicle receipt — Gargantuan (20 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/recreation_Z9Ni91hHu2mMVtHZ.json) |
+| Quick Spender | 3 | utility:Bonus Action | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/quick-spender_qP8ItUbMudHGs7Ms.json) |
+| Contractual Control | 11 | save:Vehicle charge 60 ft (3 CE); attack:Telekinetic weapon (3 CE); utility:Move summoned objects 60 ft (3 CE each) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/contractual-control_KQ0xKxXHF4freo6F.json) |
+| Domain Expansion: Black Friday | 18 | utility:Expand Domain (20 CE); utility:Initiative 20: random receipt (d4) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-black-friday_h9YVxaMHywr3BtDi.json) |
 
 ### Cursed Cannon (3 spells)
 

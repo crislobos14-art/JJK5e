@@ -19,7 +19,7 @@
    "vzVK16H72nDncqyb": {
     "_id": "vzVK16H72nDncqyb",
     "type": "utility",
-    "name": "Action (4 CE)",
+    "name": "Reservation receipt (4 CE)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -39,6 +39,9 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
@@ -49,7 +52,7 @@
    "UvaaphKlwkGp9O6f": {
     "_id": "UvaaphKlwkGp9O6f",
     "type": "save",
-    "name": "Action (20 CE)",
+    "name": "Structure receipt (20 CE)",
     "sort": 100000,
     "activation": {
      "type": "action",
@@ -70,6 +73,17 @@
      "override": true
     },
     "target": {
+     "template": {
+      "type": "radius",
+      "size": "20",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
      "override": true
     },
     "duration": {
@@ -89,6 +103,117 @@
      "onSave": "half",
      "parts": [
       {
+       "number": 10,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "vdnlLmxBWp3UPFxR",
+      "onSave": false
+     }
+    ]
+   },
+   "WZmvtOueFwcHN2PQ": {
+    "_id": "WZmvtOueFwcHN2PQ",
+    "type": "utility",
+    "name": "Object / vehicle receipt — Tiny (2 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "100",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": []
+   },
+   "7MirTYzMmMExfx8C": {
+    "_id": "7MirTYzMmMExfx8C",
+    "type": "save",
+    "name": "Object / vehicle receipt — Small (4 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "100",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": [
+      {
        "number": 2,
        "denomination": 6,
        "bonus": "",
@@ -99,18 +224,284 @@
         "enabled": false,
         "formula": ""
        },
-       "scaling": {
-        "number": 1
-       }
+       "scaling": {}
       }
      ]
+    }
+   },
+   "oapp2zTLnARxu4oQ": {
+    "_id": "oapp2zTLnARxu4oQ",
+    "type": "save",
+    "name": "Object / vehicle receipt — Medium (6 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "100",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": [
+      {
+       "number": 4,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
+   },
+   "W3n6rxPspiUI3Lg1": {
+    "_id": "W3n6rxPspiUI3Lg1",
+    "type": "save",
+    "name": "Object / vehicle receipt — Large (8 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "100",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": [
+      {
+       "number": 6,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
+   },
+   "74POdqh5KngH4AQ7": {
+    "_id": "74POdqh5KngH4AQ7",
+    "type": "save",
+    "name": "Object / vehicle receipt — Huge (10 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "100",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
     },
     "effects": [
      {
-      "_id": "HsPEvpT91A1Dt4Gk",
+      "_id": "vdnlLmxBWp3UPFxR",
       "onSave": false
      }
-    ]
+    ],
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 8,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
+   },
+   "DhRrV11W0mEf3Xu5": {
+    "_id": "DhRrV11W0mEf3Xu5",
+    "type": "save",
+    "name": "Object / vehicle receipt — Gargantuan (20 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "100",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "vdnlLmxBWp3UPFxR",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 10,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
    }
   },
   "uses": {
@@ -150,32 +541,42 @@
   "jjk5e": {
    "ceCosts": {
     "vzVK16H72nDncqyb": 4,
-    "UvaaphKlwkGp9O6f": 20
+    "UvaaphKlwkGp9O6f": 20,
+    "WZmvtOueFwcHN2PQ": 2,
+    "7MirTYzMmMExfx8C": 4,
+    "oapp2zTLnARxu4oQ": 6,
+    "W3n6rxPspiUI3Lg1": 8,
+    "74POdqh5KngH4AQ7": 10,
+    "DhRrV11W0mEf3Xu5": 20
    },
    "technique": "Contractual Recreation",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Damage applies only if you drop the materialization on a creature (2d6 per size above Tiny). Receipts are inventory items; wet receipts cannot be used.",
+   "automation": "automated"
   }
  },
  "effects": [
   {
-   "_id": "HsPEvpT91A1Dt4Gk",
-   "name": "Prone (Recreation)",
+   "_id": "vdnlLmxBWp3UPFxR",
+   "name": "Pinned under a materialization",
    "img": "modules/jjk5e/icons/techniques/contractual-recreation.svg",
-   "statuses": [
-    "prone"
-   ],
-   "changes": [],
+   "type": "base",
    "transfer": false,
    "disabled": false,
+   "statuses": [
+    "prone",
+    "restrained"
+   ],
+   "description": "<p>Prone and restrained under a Huge or larger materialization until freed (GM).</p>",
+   "changes": [],
    "duration": {},
-   "description": "",
    "flags": {
     "jjk5e": {
-     "condition": "prone"
+     "technique": "Contractual Recreation"
     }
    },
-   "_key": "!items.effects!Z9Ni91hHu2mMVtHZ.HsPEvpT91A1Dt4Gk"
+   "_key": "!items.effects!Z9Ni91hHu2mMVtHZ.vdnlLmxBWp3UPFxR"
   }
  ],
  "folder": "1Ch8dLVYSEvwWjZr",

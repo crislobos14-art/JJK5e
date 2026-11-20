@@ -19,7 +19,7 @@
    "9N70spOoRTEVVi7O": {
     "_id": "9N70spOoRTEVVi7O",
     "type": "save",
-    "name": "Bonus Action (3 CE)",
+    "name": "Vehicle charge 60 ft (3 CE)",
     "sort": 0,
     "activation": {
      "type": "bonus",
@@ -39,6 +39,17 @@
      "override": true
     },
     "target": {
+     "template": {
+      "type": "line",
+      "size": "60",
+      "width": "10",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature"
+     },
      "override": true
     },
     "duration": {
@@ -56,7 +67,21 @@
     },
     "damage": {
      "onSave": "none",
-     "parts": []
+     "parts": [
+      {
+       "number": 4,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
     },
     "effects": [
      {
@@ -64,6 +89,114 @@
       "onSave": false
      }
     ]
+   },
+   "r345egQt42krWnAD": {
+    "_id": "r345egQt42krWnAD",
+    "type": "attack",
+    "name": "Telekinetic weapon (3 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Replaces one attack (once per turn); use the weapon's die",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "attack": {
+     "ability": "",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "melee",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": 5,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "slashing",
+        "piercing",
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
+   },
+   "7fVfPBag8w7h4hda": {
+    "_id": "7fVfPBag8w7h4hda",
+    "type": "utility",
+    "name": "Move summoned objects 60 ft (3 CE each)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "60"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "object"
+     },
+     "override": true
+    },
+    "effects": []
    }
   },
   "uses": {
@@ -102,11 +235,34 @@
  "flags": {
   "jjk5e": {
    "ceCosts": {
-    "9N70spOoRTEVVi7O": 3
+    "9N70spOoRTEVVi7O": 3,
+    "r345egQt42krWnAD": 3,
+    "7fVfPBag8w7h4hda": 3
    },
    "technique": "Contractual Recreation",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "dmgScale": {
+    "r345egQt42krWnAD": [
+     [
+      11,
+      "5d8"
+     ],
+     [
+      15,
+      "7d8"
+     ],
+     [
+      18,
+      "10d8"
+     ]
+    ]
+   },
+   "ceSteps": {
+    "7fVfPBag8w7h4hda": 3
+   },
+   "automationNotes": "Vehicle damage uses the size dice of Recreation (adjust the dice). Everything used disappears afterwards.",
+   "automation": "automated"
   }
  },
  "effects": [
