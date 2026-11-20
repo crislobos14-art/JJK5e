@@ -19,7 +19,59 @@
    "value": "class",
    "subtype": ""
   },
-  "requirements": "Cursed Technique Reversal, Pain Killer"
+  "requirements": "Cursed Technique Reversal, Pain Killer",
+  "activities": {
+   "3drv7wD2oocnfAsX": {
+    "_id": "3drv7wD2oocnfAsX",
+    "type": "utility",
+    "name": "Killer Pain touch (Sleight of Hand vs AC)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "max(@abilities.wis.mod, @abilities.cha.mod)"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "DlcO6kmsKoCIcvrw",
+      "onSave": false
+     }
+    ],
+    "roll": {
+     "formula": "1d20 + @skills.slt.total",
+     "name": "Sleight of Hand vs AC",
+     "prompt": false,
+     "visible": true
+    }
+   }
+  }
  },
  "flags": {
   "jjk5e": {
@@ -37,10 +89,39 @@
       "Pain Killer"
      ]
     ]
-   }
+   },
+   "ceCosts": {
+    "3drv7wD2oocnfAsX": 2
+   },
+   "ceSteps": {
+    "3drv7wD2oocnfAsX": 2
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!yzYSOexn4zFmK0Wh"
+ "_key": "!items!yzYSOexn4zFmK0Wh",
+ "effects": [
+  {
+   "_id": "DlcO6kmsKoCIcvrw",
+   "name": "Killer Pain",
+   "img": "modules/jjk5e/icons/techniques/pain-killer.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>+5 psychic damage per 2 CE spent from every damage source for 1 hour (add by hand).</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 600
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Pain Killer"
+    }
+   },
+   "_key": "!items.effects!yzYSOexn4zFmK0Wh.DlcO6kmsKoCIcvrw"
+  }
+ ]
 }

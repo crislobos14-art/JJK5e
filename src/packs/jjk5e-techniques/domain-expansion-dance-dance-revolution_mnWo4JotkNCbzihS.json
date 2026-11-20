@@ -58,6 +58,47 @@
      "concentration": false,
      "override": true
     }
+   },
+   "AbYCk0x8RyCJ0aca": {
+    "_id": "AbYCk0x8RyCJ0aca",
+    "type": "utility",
+    "name": "Domain: all ten Prayer turns",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "dkSy9tlqmDJ3HPIm",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -116,9 +157,93 @@
     "pGdU7dVajLHX9T0I": 20
    },
    "domainActivity": "pGdU7dVajLHX9T0I",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "LeKt9DxatfKKBe3c",
- "_key": "!items!mnWo4JotkNCbzihS"
+ "_key": "!items!mnWo4JotkNCbzihS",
+ "effects": [
+  {
+   "_id": "dkSy9tlqmDJ3HPIm",
+   "name": "Dance Dance Revolution",
+   "img": "modules/jjk5e/icons/techniques/prayer-song-domain.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Counts as ten turns of Prayer.</p>",
+   "changes": [
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+3",
+     "priority": 20
+    },
+    {
+     "key": "system.abilities.dex.bonuses.save",
+     "mode": 2,
+     "value": "+3",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ max(@abilities.wis.mod, @abilities.cha.mod)",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.rwak.damage",
+     "mode": 2,
+     "value": "+ max(@abilities.wis.mod, @abilities.cha.mod)",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.mwak.attack",
+     "mode": 2,
+     "value": "+ max(@abilities.wis.mod, @abilities.cha.mod)",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.rwak.attack",
+     "mode": 2,
+     "value": "+ max(@abilities.wis.mod, @abilities.cha.mod)",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.critical.range",
+     "mode": 2,
+     "value": "-2",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.grants.disadvantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.advantage.ability.save.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ @prof",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Prayer Song"
+    }
+   },
+   "_key": "!items.effects!mnWo4JotkNCbzihS.dkSy9tlqmDJ3HPIm"
+  }
+ ]
 }

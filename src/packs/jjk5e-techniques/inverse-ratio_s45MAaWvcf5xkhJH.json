@@ -38,12 +38,108 @@
      }
     },
     "range": {
-     "units": "self"
+     "units": "self",
+     "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
-    }
+    },
+    "effects": [
+     {
+      "_id": "sYdz5NIPjBoE8Qoj",
+      "onSave": false
+     }
+    ]
+   },
+   "GQ1tg6YFastqCrYx": {
+    "_id": "GQ1tg6YFastqCrYx",
+    "type": "utility",
+    "name": "Inverse Ratio d10",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "roll": {
+     "formula": "1d10",
+     "name": "3 or 7 = weak point",
+     "prompt": false,
+     "visible": true
+    },
+    "useConditionText": "reaction === \"isAttacked\" || reaction === \"isSave\""
+   },
+   "kF9edMIaigzjJW8F": {
+    "_id": "kF9edMIaigzjJW8F",
+    "type": "utility",
+    "name": "Reinforced (not 3/7)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "egheORyyNzYQARjt",
+      "onSave": false
+     }
+    ]
    }
   }
  },
@@ -66,10 +162,71 @@
       "Ratio"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!s45MAaWvcf5xkhJH"
+ "_key": "!items!s45MAaWvcf5xkhJH",
+ "effects": [
+  {
+   "_id": "sYdz5NIPjBoE8Qoj",
+   "name": "Inverse Ratio",
+   "img": "modules/jjk5e/icons/techniques/ratio.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Each attack/save vs you: d10. Not 3/7: resistance to all, DR ½ level, resistances become immunities. 3/7: auto-hit / auto-fail. CE mod rounds.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Ratio"
+    }
+   },
+   "_key": "!items.effects!s45MAaWvcf5xkhJH.sYdz5NIPjBoE8Qoj"
+  },
+  {
+   "_id": "egheORyyNzYQARjt",
+   "name": "Reinforced",
+   "img": "modules/jjk5e/icons/techniques/ratio.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.traits.dr.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dm.amount.all",
+     "mode": 2,
+     "value": "-floor(@details.level / 2)",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Ratio"
+    },
+    "dae": {
+     "specialDuration": [
+      "isDamaged"
+     ]
+    }
+   },
+   "_key": "!items.effects!s45MAaWvcf5xkhJH.egheORyyNzYQARjt"
+  }
+ ]
 }

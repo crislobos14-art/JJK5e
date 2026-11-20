@@ -24,7 +24,9 @@
  "flags": {
   "jjk5e": {
    "technique": "Ratio",
-   "level": 11
+   "level": 11,
+   "automationNotes": "Ratio rolls 2d10 (+1d10 per extra CE up to CE mod); +4 critical dice.",
+   "automation": "automated"
   }
  },
  "folder": "SXVh9xBdNDfszcIg",

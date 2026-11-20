@@ -42,7 +42,8 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
@@ -62,12 +63,18 @@
     "damage": {
      "onSave": "none",
      "parts": []
-    }
+    },
+    "effects": [
+     {
+      "_id": "Ndd2hq3mgyimlDpF",
+      "onSave": false
+     }
+    ]
    },
    "gADipBTrvXlRPeDi": {
     "_id": "gADipBTrvXlRPeDi",
     "type": "utility",
-    "name": "Bonus Action (1 CE)",
+    "name": "Maintain gaze (1 CE, bonus action)",
     "sort": 100000,
     "activation": {
      "type": "bonus",
@@ -87,10 +94,56 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
      "units": "inst",
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "Ndd2hq3mgyimlDpF",
+      "onSave": false
+     }
+    ]
+   },
+   "rOTTyerVeAEe2EI4": {
+    "_id": "rOTTyerVeAEe2EI4",
+    "type": "utility",
+    "name": "Eyes at 0 HP: blinded",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "effects": [
@@ -102,9 +155,14 @@
    }
   },
   "uses": {
-   "max": "",
-   "recovery": [],
-   "spent": 0
+   "max": "ceil(@attributes.hp.max / 3)",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
+    }
+   ]
   },
   "level": 1,
   "school": "jjk",
@@ -149,7 +207,9 @@
    },
    "technique": "Paralyzing Gaze",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Item uses = eye HP (⅓ max HP; ½ at 11th). Eyes lose 1 per point a target beats your DC by; regain 1 at your turn start.",
+   "automation": "automated"
   }
  },
  "effects": [
@@ -171,6 +231,68 @@
     }
    },
    "_key": "!items.effects!hVxwa4zAWjFsDhiB.JH2A80fyDuCz6WAT"
+  },
+  {
+   "_id": "Ndd2hq3mgyimlDpF",
+   "name": "Immobilized (gaze)",
+   "img": "modules/jjk5e/icons/techniques/paralyzing-gaze.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Half speed; AC and attack rolls −caster's CE mod until the caster's next turn.</p>",
+   "changes": [
+    {
+     "key": "system.attributes.movement.all",
+     "mode": 1,
+     "value": "0.5",
+     "priority": 20
+    },
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "-JJKORIGINCEMOD",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.mwak.attack",
+     "mode": 2,
+     "value": "-JJKORIGINCEMOD",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.rwak.attack",
+     "mode": 2,
+     "value": "-JJKORIGINCEMOD",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.msak.attack",
+     "mode": 2,
+     "value": "-JJKORIGINCEMOD",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.rsak.attack",
+     "mode": 2,
+     "value": "-JJKORIGINCEMOD",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Paralyzing Gaze"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStartSource"
+     ]
+    }
+   },
+   "_key": "!items.effects!hVxwa4zAWjFsDhiB.Ndd2hq3mgyimlDpF"
   }
  ],
  "folder": "NgfqZW5WmZKy5Fbs",

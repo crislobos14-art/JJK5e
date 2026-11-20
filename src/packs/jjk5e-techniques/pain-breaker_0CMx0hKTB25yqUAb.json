@@ -24,33 +24,37 @@
  "flags": {
   "jjk5e": {
    "technique": "Pain Killer",
-   "level": 6
+   "level": 6,
+   "automationNotes": "Pain Killer also removes one condition and stabilizes a dying creature.",
+   "automation": "automated"
   }
  },
  "folder": "dNStemY1SSBJjSwq",
  "effects": [
   {
-   "_id": "BHnWgBjavazx8UBf",
-   "name": "Pain Breaker",
+   "_id": "JoumKnCJPNgi1oTa",
+   "name": "Medicine expertise",
    "img": "modules/jjk5e/icons/techniques/pain-killer.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
    "changes": [
     {
      "key": "system.skills.med.value",
      "mode": 4,
      "value": "2",
-     "priority": null
+     "priority": 20
     }
    ],
-   "transfer": true,
-   "disabled": false,
    "duration": {},
-   "description": "",
    "flags": {
     "jjk5e": {
-     "auto": "passive"
+     "technique": "Pain Killer"
     }
    },
-   "_key": "!items.effects!0CMx0hKTB25yqUAb.BHnWgBjavazx8UBf"
+   "_key": "!items.effects!0CMx0hKTB25yqUAb.JoumKnCJPNgi1oTa"
   }
  ],
  "_key": "!items!0CMx0hKTB25yqUAb"

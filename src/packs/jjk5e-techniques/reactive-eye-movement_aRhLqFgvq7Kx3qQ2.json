@@ -19,10 +19,10 @@
    "5rA6Nn0tE6dkoFCV": {
     "_id": "5rA6Nn0tE6dkoFCV",
     "type": "save",
-    "name": "Action (2 CE)",
+    "name": "Reactive gaze (2 CE): DEX or disadvantage on its attack",
     "sort": 0,
     "activation": {
-     "type": "action",
+     "type": "reaction",
      "value": 1,
      "condition": "",
      "override": true
@@ -42,7 +42,8 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
@@ -62,7 +63,14 @@
     "damage": {
      "onSave": "none",
      "parts": []
-    }
+    },
+    "useConditionText": "reaction === \"isAttacked\"",
+    "effects": [
+     {
+      "_id": "SZMrcNqDkitnej2S",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -112,9 +120,45 @@
    },
    "technique": "Paralyzing Gaze",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Creatures under Immobilizing Eyes fail automatically.",
+   "automation": "automated"
   }
  },
  "folder": "NgfqZW5WmZKy5Fbs",
- "_key": "!items!aRhLqFgvq7Kx3qQ2"
+ "_key": "!items!aRhLqFgvq7Kx3qQ2",
+ "effects": [
+  {
+   "_id": "SZMrcNqDkitnej2S",
+   "name": "Gaze-locked",
+   "img": "modules/jjk5e/icons/techniques/paralyzing-gaze.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.disadvantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Paralyzing Gaze"
+    },
+    "dae": {
+     "specialDuration": [
+      "1Attack"
+     ]
+    }
+   },
+   "_key": "!items.effects!aRhLqFgvq7Kx3qQ2.SZMrcNqDkitnej2S"
+  }
+ ]
 }

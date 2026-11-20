@@ -18,8 +18,8 @@
   "activities": {
    "Jf6kX6ukS0BzcayA": {
     "_id": "Jf6kX6ukS0BzcayA",
-    "type": "utility",
-    "name": "Special (1 CE)",
+    "type": "heal",
+    "name": "Pain Killer on all willing nearby (1 CE each)",
     "sort": 0,
     "activation": {
      "type": "special",
@@ -30,25 +30,45 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "20"
      },
      "spellSlot": false
     },
     "range": {
-     "value": "5",
-     "units": "ft",
+     "units": "self",
      "override": true
     },
     "target": {
+     "template": {
+      "type": "radius",
+      "size": "5 + 5 * floor(min(@details.level, 6) / 6) + 5 * floor(min(@details.level, 11) / 11)",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
      "affects": {
-      "type": "creature",
-      "count": "1"
+      "type": "ally",
+      "choice": false
      },
      "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
+    },
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "",
+     "types": [
+      "temphp"
+     ],
+     "custom": {
+      "enabled": true,
+      "formula": "max(@abilities.wis.mod, @abilities.cha.mod) + @details.level"
+     },
+     "scaling": {}
     }
    }
   },
@@ -99,7 +119,11 @@
    },
    "technique": "Pain Killer",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceSteps": {
+    "Jf6kX6ukS0BzcayA": 1
+   },
+   "automation": "automated"
   }
  },
  "folder": "dNStemY1SSBJjSwq",

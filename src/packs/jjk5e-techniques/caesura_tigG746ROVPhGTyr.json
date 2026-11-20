@@ -19,7 +19,7 @@
    "GyzMO0Gq5npdBKci": {
     "_id": "GyzMO0Gq5npdBKci",
     "type": "utility",
-    "name": "Reaction",
+    "name": "Caesura: force a reroll (while dancing)",
     "sort": 0,
     "activation": {
      "type": "reaction",
@@ -35,17 +35,23 @@
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "value": "60",
+     "units": "ft",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
     },
-    "useConditionText": "false"
+    "useConditionText": "reaction === \"isAttacked\" || reaction === \"isDamaged\""
    }
   },
   "uses": {
@@ -85,7 +91,8 @@
   "jjk5e": {
    "technique": "Prayer Song",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "LeKt9DxatfKKBe3c",

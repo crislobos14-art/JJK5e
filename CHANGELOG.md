@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.50.0 — Técnica por técnica: Pain Killer → Regalia (7)
+- **Pain Killer**: PG temp (mod. EM + nivel), versión en área, Medicina competente/pericia, Analgesic (mitad del daño por reacción), dominio, Killer Pain y Pain Maker.
+- **Paralyzing Gaze**: Immobilizing Eyes (mitad de velocidad, −mod. EM a CA y ataques) con mantenimiento y PG de ojos como usos; Peripheral Vision; Reactive Eye Movement; paralizar con salvación de FUE por turno; dominio; Energizing Gaze.
+- **Prayer Song**: Prayer por turnos (1–5) con beneficios acumulados; Marcado; Caesura; Crescendo (turnos 1, 3, 9); dominio con los 10 turnos; Sad Song.
+- **Projection Sorcery**: Projection (+10 pies, mantenimiento), Acceleration acumulable y carga, 24 Frame Rule (aturdido, el siguiente golpe es crítico), Fastest Sorcerer, dominio 8d10, Replay Sorcery.
+- **Puppet Manipulation**: imbuir y 3 niveles de marioneta, Energy Cannon/Volley con recarga 5–6, Deflect Missiles, dominio, Severed Strings.
+- **Ratio**: +1 rango de crítico, tirada de Ratio (3 o 7 = crítico, escalable a 11.º), Collapse, dominio de críticos, Inverse Ratio.
+- **Regalia**: manifestar con +1→+4, necrótico al impactar (1d8→6d8), Cursed Wave, reserva de PG de Divine Protection como usos, Soul Bound Treasure, dominio 8d10, Riches to Rags.
+- Automatizados a mano: 239/360. Sin probar en Foundry real.
+
 ## 1.49.0 — Técnica por técnica: Love Rendezvous → Pachinko Fever (7)
 - **Love Rendezvous**: marcas de las 5 estrellas (1 CE) como efectos, colisión escalable, dominio, Hate Separation.
 - **Miracle**: Miracles y Calamity Marks como usos del objeto (máx. 6); Blind Luck (reducción como PG temp), Miraculous Outcome (d6→d10), Deadly Miracle (ventaja en salvaciones de muerte), dominio con coste 2d20.

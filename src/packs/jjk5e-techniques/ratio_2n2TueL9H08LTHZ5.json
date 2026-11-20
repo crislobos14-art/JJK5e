@@ -19,10 +19,10 @@
    "O3ZJjRkxSG0e9WMs": {
     "_id": "O3ZJjRkxSG0e9WMs",
     "type": "utility",
-    "name": "Action (1 CE)",
+    "name": "Ratio roll (on hit, 1 CE): 3 or 7 = critical",
     "sort": 0,
     "activation": {
-     "type": "action",
+     "type": "special",
      "value": 1,
      "condition": "",
      "override": true
@@ -30,7 +30,8 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "1 + max(@abilities.wis.mod, @abilities.cha.mod)"
      },
      "spellSlot": false
     },
@@ -39,11 +40,21 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
+    },
+    "useConditionText": "reaction === \"isHit\"",
+    "roll": {
+     "formula": "(1 + floor(min(@details.level, 11) / 11) + @scaling)d10",
+     "name": "Ratio (any 3 or 7 = crit)",
+     "prompt": false,
+     "visible": true
     }
    }
   },
@@ -87,7 +98,12 @@
    },
    "technique": "Ratio",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceSteps": {
+    "O3ZJjRkxSG0e9WMs": 1
+   },
+   "automationNotes": "At 11th: 2d10 plus one more per extra CE. On 3/7 re-roll damage as a critical.",
+   "automation": "automated"
   }
  },
  "folder": "SXVh9xBdNDfszcIg",

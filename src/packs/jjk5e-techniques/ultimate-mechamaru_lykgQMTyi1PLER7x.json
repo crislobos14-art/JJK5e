@@ -19,7 +19,7 @@
    "EKcGWGZTKptdIRSC": {
     "_id": "EKcGWGZTKptdIRSC",
     "type": "utility",
-    "name": "Action (1 CE)",
+    "name": "Imbue a puppet (1 CE, 2 Minor traits)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -35,7 +35,8 @@
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "value": "60",
+     "units": "ft",
      "override": true
     },
     "target": {
@@ -49,7 +50,7 @@
    "jzPwmId29fqDnLPW": {
     "_id": "jzPwmId29fqDnLPW",
     "type": "attack",
-    "name": "Action (6 CE)",
+    "name": "Energy Cannon (Absolute Mech, 6 CE): 20d6",
     "sort": 100000,
     "activation": {
      "type": "action",
@@ -58,17 +59,30 @@
      "override": true
     },
     "consumption": {
-     "targets": [],
+     "targets": [
+      {
+       "type": "activityUses",
+       "target": "",
+       "value": "1",
+       "scaling": {}
+      }
+     ],
      "scaling": {
       "allowed": false
      },
      "spellSlot": false
     },
     "range": {
-     "units": "spec",
+     "value": "120",
+     "units": "ft",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -76,8 +90,8 @@
      "override": true
     },
     "attack": {
-     "ability": "spellcasting",
-     "bonus": "",
+     "ability": "dex",
+     "bonus": "@prof + 3",
      "flat": false,
      "type": {
       "value": "ranged",
@@ -103,12 +117,22 @@
        }
       }
      ]
+    },
+    "uses": {
+     "max": "1",
+     "spent": 0,
+     "recovery": [
+      {
+       "period": "recharge",
+       "formula": "5"
+      }
+     ]
     }
    },
    "EVUDlPLUjdvCguIS": {
     "_id": "EVUDlPLUjdvCguIS",
     "type": "attack",
-    "name": "Action (4 CE)",
+    "name": "Energy Volley (Absolute Mech, 4 CE): 5 orbs × 6d6",
     "sort": 200000,
     "activation": {
      "type": "action",
@@ -117,17 +141,30 @@
      "override": true
     },
     "consumption": {
-     "targets": [],
+     "targets": [
+      {
+       "type": "activityUses",
+       "target": "",
+       "value": "1",
+       "scaling": {}
+      }
+     ],
      "scaling": {
       "allowed": false
      },
      "spellSlot": false
     },
     "range": {
-     "units": "spec",
+     "value": "120",
+     "units": "ft",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "5",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -136,7 +173,7 @@
     },
     "attack": {
      "ability": "spellcasting",
-     "bonus": "",
+     "bonus": "3",
      "flat": false,
      "type": {
       "value": "ranged",
@@ -162,12 +199,22 @@
        }
       }
      ]
+    },
+    "uses": {
+     "max": "1",
+     "spent": 0,
+     "recovery": [
+      {
+       "period": "recharge",
+       "formula": "5"
+      }
+     ]
     }
    },
    "pdv5BU842aD3j9bS": {
     "_id": "pdv5BU842aD3j9bS",
-    "type": "damage",
-    "name": "Reaction",
+    "type": "heal",
+    "name": "Deflect Missiles (puppet reaction): reduce 1d12 + level",
     "sort": 300000,
     "activation": {
      "type": "reaction",
@@ -183,36 +230,36 @@
      "spellSlot": false
     },
     "range": {
-     "units": "spec",
+     "value": "60",
+     "units": "ft",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
     },
-    "damage": {
-     "parts": [
-      {
-       "number": 1,
-       "denomination": 8,
-       "bonus": "",
-       "types": [
-        "piercing"
-       ],
-       "custom": {
-        "enabled": false,
-        "formula": ""
-       },
-       "scaling": {
-        "number": 1
-       }
-      }
-     ]
-    },
-    "useConditionText": "false"
+    "useConditionText": "reaction === \"isAttacked\"",
+    "healing": {
+     "number": 1,
+     "denomination": 12,
+     "bonus": "@details.level",
+     "types": [
+      "temphp"
+     ],
+     "custom": {
+      "enabled": false,
+      "formula": ""
+     },
+     "scaling": {}
+    }
    }
   },
   "uses": {
@@ -257,7 +304,9 @@
    },
    "technique": "Puppet Manipulation",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Build the puppet as a Construct actor (STR 15 / CON 14 / DEX 13 + CE mod points, AC 10 + DEX, your HD by material). Command: bonus action (actions), reaction (reactions). Cannon/Volley recharge 5–6; attack bonuses follow the text.",
+   "automation": "automated"
   }
  },
  "folder": "OLsap1LLdAsbuhbG",

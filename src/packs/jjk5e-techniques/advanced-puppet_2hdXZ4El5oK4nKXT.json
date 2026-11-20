@@ -19,7 +19,7 @@
    "f7qA14YARgv3w3AZ": {
     "_id": "f7qA14YARgv3w3AZ",
     "type": "utility",
-    "name": "Action (6 CE)",
+    "name": "Summon Advanced Puppet (6 CE)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -35,10 +35,14 @@
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "value": "30",
+     "units": "ft",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
@@ -87,7 +91,9 @@
    },
    "technique": "Puppet Manipulation",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Puppet traits: 2 Minor + 2 Lesser + 2 Advanced. Drag its actor onto the scene.",
+   "automation": "automated"
   }
  },
  "folder": "OLsap1LLdAsbuhbG",

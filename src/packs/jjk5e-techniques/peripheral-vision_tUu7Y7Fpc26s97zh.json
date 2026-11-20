@@ -19,7 +19,7 @@
    "DTINx1WfX2xsnk4f": {
     "_id": "DTINx1WfX2xsnk4f",
     "type": "utility",
-    "name": "Bonus Action (1 CE)",
+    "name": "Maintain on each extra creature (1 CE each)",
     "sort": 0,
     "activation": {
      "type": "bonus",
@@ -49,7 +49,7 @@
    "By1iifz3o9klqhw7": {
     "_id": "By1iifz3o9klqhw7",
     "type": "utility",
-    "name": "Action (1 CE)",
+    "name": "Gaze at several (full turn, +1 CE per extra creature)",
     "sort": 100000,
     "activation": {
      "type": "action",
@@ -60,15 +60,22 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "max(@abilities.wis.mod, @abilities.cha.mod)"
      },
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "value": "60",
+     "units": "ft",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "max(@abilities.wis.mod, @abilities.cha.mod)",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -118,7 +125,12 @@
    },
    "technique": "Paralyzing Gaze",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceSteps": {
+    "By1iifz3o9klqhw7": 1
+   },
+   "automationNotes": "Use Immobilizing Eyes' save for each target.",
+   "automation": "automated"
   }
  },
  "folder": "NgfqZW5WmZKy5Fbs",

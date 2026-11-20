@@ -19,7 +19,45 @@
    "value": "class",
    "subtype": ""
   },
-  "requirements": "Cursed Technique Reversal, Projection Sorcery"
+  "requirements": "Cursed Technique Reversal, Projection Sorcery",
+  "activities": {
+   "y5TidkWt2wHekPJS": {
+    "_id": "y5TidkWt2wHekPJS",
+    "type": "utility",
+    "name": "Replay (full turn): 6 s back per 2 CE",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "2 * max(@abilities.wis.mod, @abilities.cha.mod)"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
+   }
+  }
  },
  "flags": {
   "jjk5e": {
@@ -37,7 +75,15 @@
       "Projection Sorcery"
      ]
     ]
-   }
+   },
+   "ceCosts": {
+    "y5TidkWt2wHekPJS": 2
+   },
+   "ceSteps": {
+    "y5TidkWt2wHekPJS": 2
+   },
+   "automationNotes": "Teleport to where you were that many rounds ago. Not while Projection is active.",
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",

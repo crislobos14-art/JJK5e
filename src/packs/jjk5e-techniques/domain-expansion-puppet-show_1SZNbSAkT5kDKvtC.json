@@ -58,6 +58,43 @@
      "concentration": false,
      "override": true
     }
+   },
+   "nTcjzkcGs0FuGrln": {
+    "_id": "nTcjzkcGs0FuGrln",
+    "type": "utility",
+    "name": "Initiative 20: every creature takes an action you choose (no CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": []
    }
   },
   "uses": {
@@ -116,7 +153,8 @@
     "5aE7NAqQJxEKuCix": 20
    },
    "domainActivity": "5aE7NAqQJxEKuCix",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "OLsap1LLdAsbuhbG",

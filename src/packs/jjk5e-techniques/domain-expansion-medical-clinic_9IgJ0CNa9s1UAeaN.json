@@ -19,7 +19,7 @@
    "A5Xa3C8jrRwuQgM6": {
     "_id": "A5Xa3C8jrRwuQgM6",
     "type": "utility",
-    "name": "Reaction",
+    "name": "Free Analgesic (once per damage instance)",
     "sort": 0,
     "activation": {
      "type": "reaction",
@@ -39,13 +39,24 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
     },
-    "useConditionText": "false"
+    "useConditionText": "reaction === \"isDamaged\"",
+    "effects": [
+     {
+      "_id": "rXb1EQl6NcKaySV1",
+      "onSave": false
+     }
+    ]
    },
    "9TpuXLdyC6HKIOQZ": {
     "_id": "9TpuXLdyC6HKIOQZ",
@@ -88,6 +99,56 @@
      "units": "minute",
      "concentration": false,
      "override": true
+    }
+   },
+   "VkSyJ3TwbGc7zKwT": {
+    "_id": "VkSyJ3TwbGc7zKwT",
+    "type": "heal",
+    "name": "Initiative 20: Pain Killer on chosen creatures",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "ally",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "",
+     "types": [
+      "temphp"
+     ],
+     "custom": {
+      "enabled": true,
+      "formula": "max(@abilities.wis.mod, @abilities.cha.mod) + @details.level"
+     },
+     "scaling": {}
     }
    }
   },
@@ -147,9 +208,44 @@
     "9TpuXLdyC6HKIOQZ": 20
    },
    "domainActivity": "9TpuXLdyC6HKIOQZ",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "dNStemY1SSBJjSwq",
- "_key": "!items!9IgJ0CNa9s1UAeaN"
+ "_key": "!items!9IgJ0CNa9s1UAeaN",
+ "effects": [
+  {
+   "_id": "rXb1EQl6NcKaySV1",
+   "name": "Analgesic (domain)",
+   "img": "modules/jjk5e/icons/techniques/pain-killer-domain.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.traits.dr.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Pain Killer"
+    },
+    "dae": {
+     "specialDuration": [
+      "isDamaged"
+     ]
+    }
+   },
+   "_key": "!items.effects!9IgJ0CNa9s1UAeaN.rXb1EQl6NcKaySV1"
+  }
+ ]
 }

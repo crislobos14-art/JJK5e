@@ -19,7 +19,7 @@
    "lT8Ipbu685h91Gkt": {
     "_id": "lT8Ipbu685h91Gkt",
     "type": "utility",
-    "name": "Action (10 CE)",
+    "name": "Summon Absolute Puppet (10 CE)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -35,10 +35,14 @@
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "value": "30",
+     "units": "ft",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
@@ -87,7 +91,9 @@
    },
    "technique": "Puppet Manipulation",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Puppet traits: 2 of each tier incl. Absolute. Drag its actor onto the scene.",
+   "automation": "automated"
   }
  },
  "folder": "OLsap1LLdAsbuhbG",

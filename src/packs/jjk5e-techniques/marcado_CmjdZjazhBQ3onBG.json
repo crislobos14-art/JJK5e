@@ -18,33 +18,59 @@
   "activities": {
    "6vfB7yNFal6DmnTZ": {
     "_id": "6vfB7yNFal6DmnTZ",
-    "type": "utility",
-    "name": "Action (1 CE)",
+    "type": "damage",
+    "name": "Marcado (on hit, 1 CE): +2 damage dice",
     "sort": 0,
+    "img": null,
     "activation": {
-     "type": "action",
-     "value": 1,
+     "type": "special",
+     "value": null,
      "condition": "",
      "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
-    },
-    "range": {
-     "units": "self",
-     "override": true
-    },
-    "target": {
-     "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
-    }
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "damage": {
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    },
+    "useConditionText": "reaction === \"isHit\""
    }
   },
   "uses": {
@@ -87,7 +113,9 @@
    },
    "technique": "Prayer Song",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Dice shown as 2d8: use your weapon's die and damage type.",
+   "automation": "automated"
   }
  },
  "folder": "LeKt9DxatfKKBe3c",

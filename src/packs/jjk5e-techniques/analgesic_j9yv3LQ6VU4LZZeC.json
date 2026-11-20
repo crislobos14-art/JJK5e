@@ -19,7 +19,7 @@
    "c5fwBy4Igz2S5uCZ": {
     "_id": "c5fwBy4Igz2S5uCZ",
     "type": "utility",
-    "name": "Reaction (4 CE)",
+    "name": "Analgesic (4 CE): halve damage to a creature within 10 ft",
     "sort": 0,
     "activation": {
      "type": "reaction",
@@ -42,7 +42,8 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
@@ -50,7 +51,13 @@
      "units": "inst",
      "override": true
     },
-    "useConditionText": "false"
+    "useConditionText": "reaction === \"isDamaged\"",
+    "effects": [
+     {
+      "_id": "sF7MhqlCkDXnlvIc",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -100,9 +107,44 @@
    },
    "technique": "Pain Killer",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "dNStemY1SSBJjSwq",
- "_key": "!items!j9yv3LQ6VU4LZZeC"
+ "_key": "!items!j9yv3LQ6VU4LZZeC",
+ "effects": [
+  {
+   "_id": "sF7MhqlCkDXnlvIc",
+   "name": "Analgesic",
+   "img": "modules/jjk5e/icons/techniques/pain-killer.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Resistance to the triggering damage (halved).</p>",
+   "changes": [
+    {
+     "key": "system.traits.dr.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Pain Killer"
+    },
+    "dae": {
+     "specialDuration": [
+      "isDamaged"
+     ]
+    }
+   },
+   "_key": "!items.effects!j9yv3LQ6VU4LZZeC.sF7MhqlCkDXnlvIc"
+  }
+ ]
 }

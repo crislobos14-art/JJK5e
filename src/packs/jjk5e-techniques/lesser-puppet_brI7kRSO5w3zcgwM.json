@@ -19,7 +19,7 @@
    "ONuQCDWThGyf0Zjw": {
     "_id": "ONuQCDWThGyf0Zjw",
     "type": "utility",
-    "name": "Action (3 CE)",
+    "name": "Summon Lesser Puppet (3 CE)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -35,10 +35,14 @@
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "value": "30",
+     "units": "ft",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
@@ -87,7 +91,9 @@
    },
    "technique": "Puppet Manipulation",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Puppet traits: 2 Minor + 2 Lesser. Drag its actor onto the scene.",
+   "automation": "automated"
   }
  },
  "folder": "OLsap1LLdAsbuhbG",

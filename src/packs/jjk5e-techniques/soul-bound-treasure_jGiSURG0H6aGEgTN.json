@@ -19,7 +19,7 @@
    "xnni6zG7OVk4esQS": {
     "_id": "xnni6zG7OVk4esQS",
     "type": "utility",
-    "name": "Action (10 CE)",
+    "name": "Hover the Regalia (10 CE, 1 minute)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -35,7 +35,8 @@
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "value": "100",
+     "units": "ft",
      "override": true
     },
     "target": {
@@ -46,12 +47,18 @@
      "units": "minute",
      "concentration": false,
      "override": true
-    }
+    },
+    "effects": [
+     {
+      "_id": "5V7ariJ2ghQqzQQv",
+      "onSave": false
+     }
+    ]
    },
    "GSvAwjMEvRKGbmGw": {
     "_id": "GSvAwjMEvRKGbmGw",
     "type": "save",
-    "name": "Action",
+    "name": "Regalia line (100 ft, DEX)",
     "sort": 100000,
     "activation": {
      "type": "action",
@@ -74,6 +81,7 @@
      "template": {
       "type": "line",
       "size": "100",
+      "width": "5",
       "units": "ft",
       "count": "1",
       "contiguous": false
@@ -99,7 +107,90 @@
     },
     "damage": {
      "onSave": "none",
-     "parts": []
+     "parts": [
+      {
+       "number": null,
+       "denomination": null,
+       "bonus": "",
+       "types": [
+        "slashing"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "1d8 + max(@abilities.wis.mod, @abilities.cha.mod) + 4"
+       },
+       "scaling": {}
+      }
+     ]
+    }
+   },
+   "Ahk1ixdUOAeiRefq": {
+    "_id": "Ahk1ixdUOAeiRefq",
+    "type": "attack",
+    "name": "Attack from the hovering Regalia",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "100",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "melee",
+      "classification": "weapon"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 8,
+       "bonus": "max(@abilities.wis.mod, @abilities.cha.mod)",
+       "types": [
+        "slashing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
     }
    }
   },
@@ -144,9 +235,32 @@
    },
    "technique": "Regalia",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "jfP5e1LgOxgMmS1g",
- "_key": "!items!jGiSURG0H6aGEgTN"
+ "_key": "!items!jGiSURG0H6aGEgTN",
+ "effects": [
+  {
+   "_id": "5V7ariJ2ghQqzQQv",
+   "name": "Regalia hovering",
+   "img": "modules/jjk5e/icons/techniques/regalia.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>AC 12 + CE mod + prof; HP = the pool. Attack from it with CE mod.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Regalia"
+    }
+   },
+   "_key": "!items.effects!jGiSURG0H6aGEgTN.5V7ariJ2ghQqzQQv"
+  }
+ ]
 }

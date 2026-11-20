@@ -3,13 +3,13 @@
 > Generado desde el compendio y las fuentes. **No certifica ejecución en Foundry ni fidelidad semántica a cada regla**.
 
 - Spells examinados: **360**; técnicas agrupadas: **81**.
-- Utilidad sin efecto configurado: revisar lógica: **48**.
-- Utilidad con efecto: comprobar activación: **8**.
-- Dominio genérico: resolver propiedades particulares: **23**.
-- Salvación sin daño/efecto automático: **18**.
+- Utilidad sin efecto configurado: revisar lógica: **38**.
+- Utilidad con efecto: comprobar activación: **6**.
+- Dominio genérico: resolver propiedades particulares: **18**.
+- Salvación sin daño/efecto automático: **14**.
 - Ataque sin daño propio: comprobar intención: **9**.
-- Mecánica configurada; falta prueba Foundry: **44**.
-- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **210**.
+- Mecánica configurada; falta prueba Foundry: **36**.
+- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **239**.
 
 ## Interpretación
 
@@ -503,65 +503,65 @@
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Pain Killer | 1 | heal:Bonus Action (1 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/pain-killer_kiwHEzmGJGB8ucAg.json) |
-| Practiced Hands | 3 | utility:Special (1 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/practiced-hands_bWfoIzaKvg4hfuBH.json) |
-| Analgesic | 11 | utility:Reaction (4 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/analgesic_j9yv3LQ6VU4LZZeC.json) |
-| Domain Expansion: Medical Clinic | 18 | utility:Reaction; utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-medical-clinic_9IgJ0CNa9s1UAeaN.json) |
+| Pain Killer | 1 | heal:Pain Killer (1 CE): stop ongoing damage + temp HP | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/pain-killer_kiwHEzmGJGB8ucAg.json) |
+| Practiced Hands | 3 | heal:Pain Killer on all willing nearby (1 CE each) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/practiced-hands_bWfoIzaKvg4hfuBH.json) |
+| Analgesic | 11 | utility:Analgesic (4 CE): halve damage to a creature within 10 ft | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/analgesic_j9yv3LQ6VU4LZZeC.json) |
+| Domain Expansion: Medical Clinic | 18 | utility:Free Analgesic (once per damage instance); utility:Expand Domain (20 CE); heal:Initiative 20: Pain Killer on chosen creatures | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-medical-clinic_9IgJ0CNa9s1UAeaN.json) |
 
 ### Paralyzing Gaze (5 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Immobilizing Eyes | 1 | save:Action (2 CE); utility:Bonus Action (1 CE) | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/immobilizing-eyes_hVxwa4zAWjFsDhiB.json) |
-| Peripheral Vision | 3 | utility:Bonus Action (1 CE); utility:Action (1 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/peripheral-vision_tUu7Y7Fpc26s97zh.json) |
-| Reactive Eye Movement | 6 | save:Action (2 CE) | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/reactive-eye-movement_aRhLqFgvq7Kx3qQ2.json) |
-| Maximum: Paralyzing Gaze | 11 | save:Action (6 CE); utility:Bonus Action (2 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/maximum-paralyzing-gaze_L9RcJelTKo86oVLG.json) |
-| Domain Expansion: Chamber of Fractured Reflections | 18 | utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-chamber-of-fractured-re_wvTri5uUZ3FfDuPH.json) |
+| Immobilizing Eyes | 1 | save:Action (2 CE); utility:Maintain gaze (1 CE, bonus action); utility:Eyes at 0 HP: blinded | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/immobilizing-eyes_hVxwa4zAWjFsDhiB.json) |
+| Peripheral Vision | 3 | utility:Maintain on each extra creature (1 CE each); utility:Gaze at several (full turn, +1 CE per extra creature) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/peripheral-vision_tUu7Y7Fpc26s97zh.json) |
+| Reactive Eye Movement | 6 | save:Reactive gaze (2 CE): DEX or disadvantage on its attack | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/reactive-eye-movement_aRhLqFgvq7Kx3qQ2.json) |
+| Maximum: Paralyzing Gaze | 11 | save:Action (6 CE); utility:Maintain paralysis (2 CE, bonus action) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/maximum-paralyzing-gaze_L9RcJelTKo86oVLG.json) |
+| Domain Expansion: Chamber of Fractured Reflections | 18 | utility:Expand Domain (20 CE); utility:Initiative 20: gaze on 3 creatures | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-chamber-of-fractured-re_wvTri5uUZ3FfDuPH.json) |
 
 ### Prayer Song (4 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Prayer | 1 | utility:Bonus Action (1 CE) | Utilidad con efecto: comprobar activación | [JSON](../src/packs/jjk5e-techniques/prayer_O8EAishBxZWvLMqb.json) |
-| Marcado | 3 | utility:Action (1 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/marcado_CmjdZjazhBQ3onBG.json) |
-| Caesura | 6 | utility:Reaction | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/caesura_tigG746ROVPhGTyr.json) |
-| Domain Expansion: Dance Dance Revolution | 18 | utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-dance-dance-revolution_mnWo4JotkNCbzihS.json) |
+| Prayer | 1 | utility:Start Prayer (1 CE): turn 1; utility:Prayer: advance to turn 2; utility:Prayer: advance to turn 3; utility:Prayer: advance to turn 4; utility:Prayer: advance to turn 5; utility:Prayer turn 2+: your opponent's AC −2 | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/prayer_O8EAishBxZWvLMqb.json) |
+| Marcado | 3 | damage:Marcado (on hit, 1 CE): +2 damage dice | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/marcado_CmjdZjazhBQ3onBG.json) |
+| Caesura | 6 | utility:Caesura: force a reroll (while dancing) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/caesura_tigG746ROVPhGTyr.json) |
+| Domain Expansion: Dance Dance Revolution | 18 | utility:Expand Domain (20 CE); utility:Domain: all ten Prayer turns | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-dance-dance-revolution_mnWo4JotkNCbzihS.json) |
 
 ### Projection Sorcery (3 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Projection | 1 | utility:Bonus Action (1 CE); utility:Action (1 CE) | Utilidad con efecto: comprobar activación | [JSON](../src/packs/jjk5e-techniques/projection_C5RGYdyoQiko1drM.json) |
-| 24 Frame Rule | 6 | save:Action (2 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/24-frame-rule_xSSfkLjiDQ8aBAEs.json) |
-| Domain Expansion: Lunar Palace Womb of Time | 18 | damage:Special; utility:Expand Domain (20 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-lunar-palace-womb-of-ti_aKwBW0FtSBN296Y8.json) |
+| Projection | 1 | utility:Activate Projection (1 CE); utility:Upkeep (1 CE, start of turn); utility:Missed the frame: speed 0 | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/projection_C5RGYdyoQiko1drM.json) |
+| 24 Frame Rule | 6 | save:Freeze frame (on unarmed hit, 2 CE, no damage) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/24-frame-rule_xSSfkLjiDQ8aBAEs.json) |
+| Domain Expansion: Lunar Palace Womb of Time | 18 | damage:Moves or acts: 8d10 necrotic; utility:Expand Domain (20 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-lunar-palace-womb-of-ti_aKwBW0FtSBN296Y8.json) |
 
 ### Puppet Manipulation (5 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Ultimate Mechamaru | 1 | utility:Action (1 CE); attack:Action (6 CE); attack:Action (4 CE); damage:Reaction | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/ultimate-mechamaru_lykgQMTyi1PLER7x.json) |
-| Lesser Puppet | 3 | utility:Action (3 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/lesser-puppet_brI7kRSO5w3zcgwM.json) |
-| Advanced Puppet | 6 | utility:Action (6 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/advanced-puppet_2hdXZ4El5oK4nKXT.json) |
-| Absolute Puppet | 11 | utility:Action (10 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/absolute-puppet_7dMiTpDehniSeq7U.json) |
-| Domain Expansion: Puppet Show | 18 | utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-puppet-show_1SZNbSAkT5kDKvtC.json) |
+| Ultimate Mechamaru | 1 | utility:Imbue a puppet (1 CE, 2 Minor traits); attack:Energy Cannon (Absolute Mech, 6 CE): 20d6; attack:Energy Volley (Absolute Mech, 4 CE): 5 orbs × 6d6; heal:Deflect Missiles (puppet reaction): reduce 1d12 + level | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/ultimate-mechamaru_lykgQMTyi1PLER7x.json) |
+| Lesser Puppet | 3 | utility:Summon Lesser Puppet (3 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/lesser-puppet_brI7kRSO5w3zcgwM.json) |
+| Advanced Puppet | 6 | utility:Summon Advanced Puppet (6 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/advanced-puppet_2hdXZ4El5oK4nKXT.json) |
+| Absolute Puppet | 11 | utility:Summon Absolute Puppet (10 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/absolute-puppet_7dMiTpDehniSeq7U.json) |
+| Domain Expansion: Puppet Show | 18 | utility:Expand Domain (20 CE); utility:Initiative 20: every creature takes an action you choose (no CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-puppet-show_1SZNbSAkT5kDKvtC.json) |
 
 ### Ratio (3 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Ratio | 3 | utility:Action (1 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/ratio_2n2TueL9H08LTHZ5.json) |
-| Collapse | 6 | save:Action (4 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/collapse_reU5zR7aPdvrc8di.json) |
-| Domain Expansion: Golden Ratio | 18 | utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-golden-ratio_YckjoN5r8h1jyJW8.json) |
+| Ratio | 3 | utility:Ratio roll (on hit, 1 CE): 3 or 7 = critical | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/ratio_2n2TueL9H08LTHZ5.json) |
+| Collapse | 6 | save:Action (4 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/collapse_reU5zR7aPdvrc8di.json) |
+| Domain Expansion: Golden Ratio | 18 | utility:Expand Domain (20 CE); utility:Domain: every attack is a critical | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-golden-ratio_YckjoN5r8h1jyJW8.json) |
 
 ### Regalia (5 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Regalia | 1 | utility:Action (2 CE); damage:Action (1 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/regalia_akoptGrJDbodhSRV.json) |
-| Cursed Wave | 3 | save:Action (1 CE) | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/cursed-wave_PGx9JDu1JoHTHWuk.json) |
-| Divine Protection | 6 | utility:Reaction (1 CE); utility:Use (limited, no CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/divine-protection_kErS8w7ITb2KTHxT.json) |
-| Soul Bound Treasure | 11 | utility:Action (10 CE); save:Action | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/soul-bound-treasure_jGiSURG0H6aGEgTN.json) |
-| Domain Expansion: Cursed Soul Armory | 18 | utility:Action; utility:Expand Domain (20 CE); damage:Initiative 20: Lesser Regalia | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-cursed-soul-armory_0EfuxPmRKXaYG7ms.json) |
+| Regalia | 1 | utility:Manifest Regalia (2 CE, CE mod hours); damage:Regalia necrotic (on hit, 1 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/regalia_akoptGrJDbodhSRV.json) |
+| Cursed Wave | 3 | save:Cursed Wave (1 CE, replaces an attack) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/cursed-wave_PGx9JDu1JoHTHWuk.json) |
+| Divine Protection | 6 | heal:Redirect damage to the Regalia pool (1 CE); utility:Resummon broken Regalia (CE mod per long rest) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/divine-protection_kErS8w7ITb2KTHxT.json) |
+| Soul Bound Treasure | 11 | utility:Hover the Regalia (10 CE, 1 minute); save:Regalia line (100 ft, DEX); attack:Attack from the hovering Regalia | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/soul-bound-treasure_jGiSURG0H6aGEgTN.json) |
+| Domain Expansion: Cursed Soul Armory | 18 | utility:Soul Bound Treasure free (immune to damage); utility:Expand Domain (20 CE); damage:Initiative 20: Lesser Regalia | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-cursed-soul-armory_0EfuxPmRKXaYG7ms.json) |
 
 ### Retrograde (5 spells)
 

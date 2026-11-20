@@ -19,7 +19,7 @@
    "2YF1OrneWFTeGyE4": {
     "_id": "2YF1OrneWFTeGyE4",
     "type": "heal",
-    "name": "Bonus Action (1 CE)",
+    "name": "Pain Killer (1 CE): stop ongoing damage + temp HP",
     "sort": 0,
     "activation": {
      "type": "bonus",
@@ -42,7 +42,8 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
@@ -61,11 +62,9 @@
      ],
      "custom": {
       "enabled": true,
-      "formula": "max(@abilities.wis.mod, @abilities.cha.mod)"
+      "formula": "max(@abilities.wis.mod, @abilities.cha.mod) + @details.level"
      },
-     "scaling": {
-      "number": 1
-     }
+     "scaling": {}
     }
    }
   },
@@ -117,33 +116,37 @@
    },
    "technique": "Pain Killer",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Remove the target's damage-over-time effects (bleeding, OverTime damage) by hand; temp HP last 1 hour.",
+   "automation": "automated"
   }
  },
  "folder": "dNStemY1SSBJjSwq",
  "effects": [
   {
-   "_id": "7OzLVmP6uZLQWKKt",
-   "name": "Pain Killer (toggle)",
+   "_id": "awEJwIjM5tBUaQCL",
+   "name": "Medicine proficiency",
    "img": "modules/jjk5e/icons/techniques/pain-killer.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
    "changes": [
     {
      "key": "system.skills.med.value",
      "mode": 4,
      "value": "1",
-     "priority": null
+     "priority": 20
     }
    ],
-   "transfer": true,
-   "disabled": true,
    "duration": {},
-   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
    "flags": {
     "jjk5e": {
-     "auto": "toggle"
+     "technique": "Pain Killer"
     }
    },
-   "_key": "!items.effects!kiwHEzmGJGB8ucAg.7OzLVmP6uZLQWKKt"
+   "_key": "!items.effects!kiwHEzmGJGB8ucAg.awEJwIjM5tBUaQCL"
   }
  ],
  "_key": "!items!kiwHEzmGJGB8ucAg"

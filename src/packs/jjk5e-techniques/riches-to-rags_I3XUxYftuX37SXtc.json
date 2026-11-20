@@ -23,29 +23,61 @@
   "activities": {
    "WM0j8F1YA0qCZcLT": {
     "_id": "WM0j8F1YA0qCZcLT",
-    "type": "utility",
-    "name": "Action (4 CE)",
+    "type": "save",
+    "name": "Riches to Rags (on hit, 4 CE)",
     "sort": 0,
+    "img": null,
     "activation": {
-     "type": "action",
-     "value": 1,
-     "condition": ""
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
-     }
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
-     "units": "self"
+     "units": "spec",
+     "override": true
     },
-    "target": {},
-    "duration": {
-     "value": "1",
-     "units": "hour",
-     "concentration": false
-    }
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "S6tAfh4pCEBA75Vb",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "wis",
+      "cha"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    },
+    "useConditionText": "reaction === \"isHit\""
    }
   }
  },
@@ -68,10 +100,33 @@
       "Regalia"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!I3XUxYftuX37SXtc"
+ "_key": "!items!I3XUxYftuX37SXtc",
+ "effects": [
+  {
+   "_id": "S6tAfh4pCEBA75Vb",
+   "name": "Cursed tool sealed",
+   "img": "modules/jjk5e/icons/techniques/regalia.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>A chosen cursed tool is non-functional for 1 hour (unattune it). −2 to the save per grade below Special.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 600
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Regalia"
+    }
+   },
+   "_key": "!items.effects!I3XUxYftuX37SXtc.S6tAfh4pCEBA75Vb"
+  }
+ ]
 }

@@ -18,8 +18,8 @@
   "activities": {
    "ondRfHfUcPJupVeM": {
     "_id": "ondRfHfUcPJupVeM",
-    "type": "utility",
-    "name": "Reaction (1 CE)",
+    "type": "heal",
+    "name": "Redirect damage to the Regalia pool (1 CE)",
     "sort": 0,
     "activation": {
      "type": "reaction",
@@ -45,12 +45,25 @@
      "units": "inst",
      "override": true
     },
-    "useConditionText": "reaction === \"isDamaged\""
+    "useConditionText": "reaction === \"isDamaged\"",
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "",
+     "types": [
+      "temphp"
+     ],
+     "custom": {
+      "enabled": true,
+      "formula": "@item.uses.value"
+     },
+     "scaling": {}
+    }
    },
    "baCgyVARl6Q8wep5": {
     "_id": "baCgyVARl6Q8wep5",
     "type": "utility",
-    "name": "Use (limited, no CE)",
+    "name": "Resummon broken Regalia (CE mod per long rest)",
     "activation": {
      "type": "special",
      "condition": "",
@@ -69,7 +82,7 @@
    }
   },
   "uses": {
-   "max": "max(@abilities.wis.mod, @abilities.cha.mod, 1)",
+   "max": "5 * @details.level",
    "spent": 0,
    "recovery": [
     {
@@ -113,7 +126,9 @@
    },
    "technique": "Regalia",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Item uses = Regalia HP pool (5 × level): lower it by the damage absorbed. The shield is shown as temp HP equal to the pool.",
+   "automation": "automated"
   }
  },
  "folder": "jfP5e1LgOxgMmS1g",

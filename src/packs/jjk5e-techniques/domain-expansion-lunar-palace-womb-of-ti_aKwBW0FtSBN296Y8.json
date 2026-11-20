@@ -19,7 +19,7 @@
    "qseTIQ0W3Se2Ycwc": {
     "_id": "qseTIQ0W3Se2Ycwc",
     "type": "damage",
-    "name": "Special",
+    "name": "Moves or acts: 8d10 necrotic",
     "sort": 0,
     "activation": {
      "type": "special",
@@ -39,6 +39,11 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -165,7 +170,8 @@
     "aNDviS5sJDua2iKr": 20
    },
    "domainActivity": "aNDviS5sJDua2iKr",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "RqqBayaXFFZrEuE3",

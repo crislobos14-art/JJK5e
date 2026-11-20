@@ -19,10 +19,10 @@
    "nOdC7wtQzMRR5L7C": {
     "_id": "nOdC7wtQzMRR5L7C",
     "type": "save",
-    "name": "Action (1 CE)",
+    "name": "Cursed Wave (1 CE, replaces an attack)",
     "sort": 0,
     "activation": {
-     "type": "action",
+     "type": "special",
      "value": 1,
      "condition": "",
      "override": true
@@ -35,10 +35,22 @@
      "spellSlot": false
     },
     "range": {
-     "units": "spec",
+     "units": "self",
      "override": true
     },
     "target": {
+     "template": {
+      "type": "line",
+      "size": "30",
+      "width": "5",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
      "override": true
     },
     "duration": {
@@ -56,7 +68,21 @@
     },
     "damage": {
      "onSave": "none",
-     "parts": []
+     "parts": [
+      {
+       "number": null,
+       "denomination": null,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "1d8 + @abilities.str.mod + 1"
+       },
+       "scaling": {}
+      }
+     ]
     }
    }
   },
@@ -100,7 +126,9 @@
    },
    "technique": "Regalia",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Damage = your Regalia's damage (1d8 + STR + bonus assumed).",
+   "automation": "automated"
   }
  },
  "folder": "jfP5e1LgOxgMmS1g",

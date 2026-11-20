@@ -19,10 +19,10 @@
    "mwDEHQCHlIp7d432": {
     "_id": "mwDEHQCHlIp7d432",
     "type": "save",
-    "name": "Action (2 CE)",
+    "name": "Freeze frame (on unarmed hit, 2 CE, no damage)",
     "sort": 0,
     "activation": {
-     "type": "action",
+     "type": "special",
      "value": 1,
      "condition": "",
      "override": true
@@ -39,6 +39,11 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -63,7 +68,8 @@
       "_id": "lyxFE4igXqxsmxeV",
       "onSave": false
      }
-    ]
+    ],
+    "useConditionText": "reaction === \"isHit\""
    }
   },
   "uses": {
@@ -106,7 +112,9 @@
    },
    "technique": "Projection Sorcery",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Next hit on it is a critical that ignores resistance (immunity → resistance) and ends the stun.",
+   "automation": "automated"
   }
  },
  "effects": [
@@ -117,7 +125,14 @@
    "statuses": [
     "stunned"
    ],
-   "changes": [],
+   "changes": [
+    {
+     "key": "flags.midi-qol.grants.critical.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
    "transfer": false,
    "disabled": false,
    "duration": {
@@ -127,6 +142,12 @@
    "flags": {
     "jjk5e": {
      "condition": "stunned"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStartSource",
+      "isAttacked"
+     ]
     }
    },
    "_key": "!items.effects!xSSfkLjiDQ8aBAEs.lyxFE4igXqxsmxeV"

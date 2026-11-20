@@ -58,6 +58,47 @@
      "concentration": false,
      "override": true
     }
+   },
+   "GfdvRWNz0YveAnAx": {
+    "_id": "GfdvRWNz0YveAnAx",
+    "type": "utility",
+    "name": "Domain: every attack is a critical",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "xc1aHnKCI3ESKn8d",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -116,9 +157,39 @@
     "R8rpJlKCb3IiQedc": 20
    },
    "domainActivity": "R8rpJlKCb3IiQedc",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "SXVh9xBdNDfszcIg",
- "_key": "!items!YckjoN5r8h1jyJW8"
+ "_key": "!items!YckjoN5r8h1jyJW8",
+ "effects": [
+  {
+   "_id": "xc1aHnKCI3ESKn8d",
+   "name": "Golden Ratio",
+   "img": "modules/jjk5e/icons/techniques/ratio-domain.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>All your attacks are critical hits (+5 crit dice).</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.critical.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Ratio"
+    }
+   },
+   "_key": "!items.effects!YckjoN5r8h1jyJW8.xc1aHnKCI3ESKn8d"
+  }
+ ]
 }

@@ -58,6 +58,56 @@
      "concentration": false,
      "override": true
     }
+   },
+   "EyAMdB7UC5d9f9qy": {
+    "_id": "EyAMdB7UC5d9f9qy",
+    "type": "utility",
+    "name": "Initiative 20: gaze on 3 creatures",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "enemy",
+      "count": "3",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "soCaNvI92OXaREnO",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    }
    }
   },
   "uses": {
@@ -116,9 +166,51 @@
     "VOHKhA24viVIByjE": 20
    },
    "domainActivity": "VOHKhA24viVIByjE",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Guaranteed hit: domain effect (no save). Line of sight can't be broken inside.",
+   "automation": "automated"
   }
  },
  "folder": "NgfqZW5WmZKy5Fbs",
- "_key": "!items!wvTri5uUZ3FfDuPH"
+ "_key": "!items!wvTri5uUZ3FfDuPH",
+ "effects": [
+  {
+   "_id": "soCaNvI92OXaREnO",
+   "name": "Immobilized (domain)",
+   "img": "modules/jjk5e/icons/techniques/paralyzing-gaze-domain.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.attributes.movement.all",
+     "mode": 1,
+     "value": "0.5",
+     "priority": 20
+    },
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "-JJKORIGINCEMOD",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Paralyzing Gaze"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStartSource"
+     ]
+    }
+   },
+   "_key": "!items.effects!wvTri5uUZ3FfDuPH.soCaNvI92OXaREnO"
+  }
+ ]
 }

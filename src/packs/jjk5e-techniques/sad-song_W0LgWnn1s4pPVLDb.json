@@ -38,14 +38,26 @@
      }
     },
     "range": {
-     "units": "self"
+     "units": "self",
+     "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
     "duration": {
      "value": "1",
      "units": "minute",
      "concentration": false
-    }
+    },
+    "effects": [
+     {
+      "_id": "iW2je0XE14ApP4xQ",
+      "onSave": false
+     }
+    ]
    }
   }
  },
@@ -68,10 +80,52 @@
       "Prayer Song"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!W0LgWnn1s4pPVLDb"
+ "_key": "!items!W0LgWnn1s4pPVLDb",
+ "effects": [
+  {
+   "_id": "iW2je0XE14ApP4xQ",
+   "name": "Sad Song",
+   "img": "modules/jjk5e/icons/techniques/prayer-song.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Regain CE mod CE at turn start in life-threatening combat (add by hand).</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.disadvantage.ability.save.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.disadvantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.grants.advantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Prayer Song"
+    }
+   },
+   "_key": "!items.effects!W0LgWnn1s4pPVLDb.iW2je0XE14ApP4xQ"
+  }
+ ]
 }

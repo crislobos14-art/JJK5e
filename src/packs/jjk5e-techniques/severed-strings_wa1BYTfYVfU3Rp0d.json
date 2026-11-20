@@ -23,34 +23,60 @@
   "activities": {
    "LGhvgjCC0hLUDH6s": {
     "_id": "LGhvgjCC0hLUDH6s",
-    "type": "utility",
-    "name": "Action (5 CE)",
+    "type": "save",
+    "name": "Severed Strings (5 CE)",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "action",
      "value": 1,
-     "condition": ""
+     "condition": "",
+     "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
-     }
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
      "value": "60",
-     "units": "ft"
+     "units": "ft",
+     "override": true
     },
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "HqaTkQYZe4Ucuts4",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "wis",
+      "cha"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
      }
     },
-    "duration": {
-     "value": "1",
-     "units": "minute",
-     "concentration": false
+    "damage": {
+     "onSave": "none",
+     "parts": []
     }
    }
   }
@@ -74,10 +100,40 @@
       "Puppet Manipulation"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!wa1BYTfYVfU3Rp0d"
+ "_key": "!items!wa1BYTfYVfU3Rp0d",
+ "effects": [
+  {
+   "_id": "HqaTkQYZe4Ucuts4",
+   "name": "Strings severed",
+   "img": "modules/jjk5e/icons/techniques/puppet-manipulation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Its summons go berserk and attack the nearest creature.</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "value": "turn=end, saveAbility=wis|cha, saveDC=JJKORIGINDC, label=Severed Strings",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Puppet Manipulation"
+    }
+   },
+   "_key": "!items.effects!wa1BYTfYVfU3Rp0d.HqaTkQYZe4Ucuts4"
+  }
+ ]
 }

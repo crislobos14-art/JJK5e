@@ -19,7 +19,7 @@
    "M1S8tPimSEOTeQAG": {
     "_id": "M1S8tPimSEOTeQAG",
     "type": "utility",
-    "name": "Action",
+    "name": "Soul Bound Treasure free (immune to damage)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -197,7 +197,8 @@
     "MKRy88DiVcjJL2hJ": 20
    },
    "domainActivity": "MKRy88DiVcjJL2hJ",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "jfP5e1LgOxgMmS1g",

@@ -23,8 +23,8 @@
   "activities": {
    "BRh59QweJIfmXUqc": {
     "_id": "BRh59QweJIfmXUqc",
-    "type": "utility",
-    "name": "Special",
+    "type": "damage",
+    "name": "Wounded target: 10 psychic",
     "sort": 0,
     "activation": {
      "type": "special",
@@ -40,21 +40,40 @@
     "range": {
      "units": "self"
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
     },
-    "effects": [
-     {
-      "_id": "0KmyToxB0HWEE3zZ",
-      "onSave": false
-     }
-    ]
+    "effects": [],
+    "damage": {
+     "parts": [
+      {
+       "number": null,
+       "denomination": null,
+       "bonus": "",
+       "types": [
+        "psychic"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "10"
+       },
+       "scaling": {}
+      }
+     ]
+    }
    },
    "GpJZVSnz42cOd07Z": {
     "_id": "GpJZVSnz42cOd07Z",
     "type": "utility",
-    "name": "Extra (6 CE)",
+    "name": "Also poison it (+6 CE)",
     "sort": 900000,
     "activation": {
      "type": "special",
@@ -66,7 +85,21 @@
      "scaling": {
       "allowed": false
      }
-    }
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "0KmyToxB0HWEE3zZ",
+      "onSave": false
+     }
+    ]
    }
   }
  },
@@ -90,7 +123,8 @@
      ]
     ],
     "level": 6
-   }
+   },
+   "automation": "automated"
   }
  },
  "effects": [
@@ -101,10 +135,19 @@
    "statuses": [
     "poisoned"
    ],
-   "changes": [],
+   "changes": [
+    {
+     "key": "flags.midi-qol.disadvantage.deathSave",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
    "transfer": false,
    "disabled": false,
-   "duration": {},
+   "duration": {
+    "rounds": 600
+   },
    "description": "",
    "flags": {
     "jjk5e": {

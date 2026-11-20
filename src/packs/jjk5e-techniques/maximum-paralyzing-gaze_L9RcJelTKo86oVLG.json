@@ -42,7 +42,8 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
@@ -73,10 +74,10 @@
    "S3EuFdYe8bgPf0Cl": {
     "_id": "S3EuFdYe8bgPf0Cl",
     "type": "utility",
-    "name": "Bonus Action (2 CE)",
+    "name": "Maintain paralysis (2 CE, bonus action)",
     "sort": 100000,
     "activation": {
-     "type": "bonus",
+     "type": "special",
      "value": 1,
      "condition": "",
      "override": true
@@ -151,7 +152,9 @@
    },
    "technique": "Paralyzing Gaze",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Concentration. Escape check: your eyes take 2 per point it beats your DC. Eye HP = ½ max HP.",
+   "automation": "automated"
   }
  },
  "effects": [
@@ -162,10 +165,25 @@
    "statuses": [
     "paralyzed"
    ],
-   "changes": [],
+   "changes": [
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "-JJKORIGINCEMOD",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "priority": 20,
+     "value": "turn=end, saveAbility=str, saveDC=JJKORIGINDC, label=Paralyzing Gaze (Athletics)"
+    }
+   ],
    "transfer": false,
    "disabled": false,
-   "duration": {},
+   "duration": {
+    "rounds": 10
+   },
    "description": "",
    "flags": {
     "jjk5e": {

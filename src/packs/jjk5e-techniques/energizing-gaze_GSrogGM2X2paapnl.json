@@ -39,17 +39,26 @@
     },
     "range": {
      "value": "30",
-     "units": "ft"
+     "units": "ft",
+     "override": true
     },
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
-     }
+      "count": "1",
+      "choice": true
+     },
+     "override": true
     },
     "duration": {
      "units": "inst"
-    }
+    },
+    "effects": [
+     {
+      "_id": "Sshd4iEgyS9Bz31f",
+      "onSave": false
+     }
+    ]
    },
    "rZTE8uPTRoUmB24x": {
     "_id": "rZTE8uPTRoUmB24x",
@@ -70,10 +79,23 @@
     "range": {
      "units": "self"
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
-    }
+    },
+    "effects": [
+     {
+      "_id": "Sshd4iEgyS9Bz31f",
+      "onSave": false
+     }
+    ]
    }
   }
  },
@@ -97,10 +119,51 @@
       "Paralyzing Gaze"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!GSrogGM2X2paapnl"
+ "_key": "!items!GSrogGM2X2paapnl",
+ "effects": [
+  {
+   "_id": "Sshd4iEgyS9Bz31f",
+   "name": "Energized",
+   "img": "modules/jjk5e/icons/techniques/paralyzing-gaze.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Double speed, +caster's CE mod AC, an extra bonus action.</p>",
+   "changes": [
+    {
+     "key": "system.attributes.movement.all",
+     "mode": 1,
+     "value": "2",
+     "priority": 20
+    },
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+JJKORIGINCEMOD",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Paralyzing Gaze"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStartSource"
+     ]
+    }
+   },
+   "_key": "!items.effects!GSrogGM2X2paapnl.Sshd4iEgyS9Bz31f"
+  }
+ ]
 }

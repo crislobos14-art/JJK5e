@@ -19,14 +19,296 @@
    "value": "class",
    "subtype": ""
   },
-  "requirements": "Prayer Song 11"
+  "requirements": "Prayer Song 11",
+  "activities": {
+   "r5bvfH1yf3EgoQpc": {
+    "_id": "r5bvfH1yf3EgoQpc",
+    "type": "utility",
+    "name": "Crescendo (turn 1+)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "VPYCaxpzIcv6pN5w",
+      "onSave": false
+     }
+    ]
+   },
+   "yBd7P533H32FsyWa": {
+    "_id": "yBd7P533H32FsyWa",
+    "type": "utility",
+    "name": "Crescendo (turn 3+)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "GOf1Ctzt3cWh8a3k",
+      "onSave": false
+     }
+    ]
+   },
+   "fgHKGv1SFdcHYFm6": {
+    "_id": "fgHKGv1SFdcHYFm6",
+    "type": "utility",
+    "name": "Crescendo (turn 9+)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "bhmy8jW7SD1JZtpX",
+      "onSave": false
+     }
+    ]
+   }
+  }
  },
  "flags": {
   "jjk5e": {
    "technique": "Prayer Song",
-   "level": 11
+   "level": 11,
+   "automationNotes": "Replaces Prayer's table at 11th. Other turns (enemy −3 AC, disadvantage, +prof, −prof to its damage, extra attack, −5 AC/saves, action economy limit): apply by hand.",
+   "automation": "automated"
   }
  },
  "folder": "LeKt9DxatfKKBe3c",
- "_key": "!items!ldM0TMic8k2TC1Vc"
+ "_key": "!items!ldM0TMic8k2TC1Vc",
+ "effects": [
+  {
+   "_id": "VPYCaxpzIcv6pN5w",
+   "name": "Crescendo (turn 1+)",
+   "img": "modules/jjk5e/icons/techniques/prayer-song.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>T1: +3 AC and DEX saves</p>",
+   "changes": [
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+3",
+     "priority": 20
+    },
+    {
+     "key": "system.abilities.dex.bonuses.save",
+     "mode": 2,
+     "value": "+3",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Prayer Song"
+    }
+   },
+   "_key": "!items.effects!ldM0TMic8k2TC1Vc.VPYCaxpzIcv6pN5w"
+  },
+  {
+   "_id": "GOf1Ctzt3cWh8a3k",
+   "name": "Crescendo (turn 3+)",
+   "img": "modules/jjk5e/icons/techniques/prayer-song.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>T1: +3 AC and DEX saves; T3: +CE mod to attack and damage</p>",
+   "changes": [
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+3",
+     "priority": 20
+    },
+    {
+     "key": "system.abilities.dex.bonuses.save",
+     "mode": 2,
+     "value": "+3",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ max(@abilities.wis.mod, @abilities.cha.mod)",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.rwak.damage",
+     "mode": 2,
+     "value": "+ max(@abilities.wis.mod, @abilities.cha.mod)",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.mwak.attack",
+     "mode": 2,
+     "value": "+ max(@abilities.wis.mod, @abilities.cha.mod)",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.rwak.attack",
+     "mode": 2,
+     "value": "+ max(@abilities.wis.mod, @abilities.cha.mod)",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Prayer Song"
+    }
+   },
+   "_key": "!items.effects!ldM0TMic8k2TC1Vc.GOf1Ctzt3cWh8a3k"
+  },
+  {
+   "_id": "bhmy8jW7SD1JZtpX",
+   "name": "Crescendo (turn 9+)",
+   "img": "modules/jjk5e/icons/techniques/prayer-song.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>T1: +3 AC and DEX saves; T3: +CE mod to attack and damage; T9: Critical range +2</p>",
+   "changes": [
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+3",
+     "priority": 20
+    },
+    {
+     "key": "system.abilities.dex.bonuses.save",
+     "mode": 2,
+     "value": "+3",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ max(@abilities.wis.mod, @abilities.cha.mod)",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.rwak.damage",
+     "mode": 2,
+     "value": "+ max(@abilities.wis.mod, @abilities.cha.mod)",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.mwak.attack",
+     "mode": 2,
+     "value": "+ max(@abilities.wis.mod, @abilities.cha.mod)",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.rwak.attack",
+     "mode": 2,
+     "value": "+ max(@abilities.wis.mod, @abilities.cha.mod)",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.critical.range",
+     "mode": 2,
+     "value": "-2",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Prayer Song"
+    }
+   },
+   "_key": "!items.effects!ldM0TMic8k2TC1Vc.bhmy8jW7SD1JZtpX"
+  }
+ ]
 }

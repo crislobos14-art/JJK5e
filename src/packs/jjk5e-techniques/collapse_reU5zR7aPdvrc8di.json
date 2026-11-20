@@ -79,11 +79,25 @@
         "enabled": false,
         "formula": ""
        },
-       "scaling": {
-        "number": 1
-       }
+       "scaling": {}
+      },
+      {
+       "number": null,
+       "denomination": null,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "2 * (1d8 + @abilities.str.mod)"
+       },
+       "scaling": {}
       }
-     ]
+     ],
+     "critical": {
+      "allow": true
+     }
     }
    }
   },
@@ -140,7 +154,9 @@
    },
    "technique": "Ratio",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Second part = your attack's damage doubled as a critical (d8 + STR assumed). Area becomes difficult terrain.",
+   "automation": "automated"
   }
  },
  "folder": "SXVh9xBdNDfszcIg",

@@ -19,10 +19,49 @@
    "gL74cA8zuvksOhbn": {
     "_id": "gL74cA8zuvksOhbn",
     "type": "utility",
-    "name": "Bonus Action (1 CE)",
+    "name": "Activate Projection (1 CE)",
     "sort": 0,
     "activation": {
      "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "HdA9l8OdhoqfE5Bi",
+      "onSave": false
+     }
+    ]
+   },
+   "I3xaPqqLKDp84C76": {
+    "_id": "I3xaPqqLKDp84C76",
+    "type": "utility",
+    "name": "Upkeep (1 CE, start of turn)",
+    "sort": 100000,
+    "activation": {
+     "type": "special",
      "value": 1,
      "condition": "",
      "override": true
@@ -46,35 +85,46 @@
      "override": true
     }
    },
-   "I3xaPqqLKDp84C76": {
-    "_id": "I3xaPqqLKDp84C76",
+   "KkjOhiy1gmbFqPXI": {
+    "_id": "KkjOhiy1gmbFqPXI",
     "type": "utility",
-    "name": "Action (1 CE)",
-    "sort": 100000,
+    "name": "Missed the frame: speed 0",
+    "sort": 0,
+    "img": null,
     "activation": {
-     "type": "action",
-     "value": 1,
+     "type": "special",
+     "value": null,
      "condition": "",
      "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
      "units": "self",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
-    "duration": {
-     "units": "inst",
-     "override": true
-    }
+    "effects": [
+     {
+      "_id": "8gqcwIND428qXGci",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -118,33 +168,70 @@
    },
    "technique": "Projection Sorcery",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "RqqBayaXFFZrEuE3",
  "effects": [
   {
-   "_id": "aXRRi8ccKgpV5q5D",
-   "name": "Projection (toggle)",
+   "_id": "HdA9l8OdhoqfE5Bi",
+   "name": "Projection",
    "img": "modules/jjk5e/icons/techniques/projection-sorcery.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>+10 ft speed and +1 attack on the Attack action. Commit your end point; deviating sets speed 0 until end of next turn.</p>",
    "changes": [
     {
      "key": "system.attributes.movement.walk",
      "mode": 2,
-     "value": "10",
-     "priority": null
+     "value": "+10",
+     "priority": 20
     }
    ],
-   "transfer": true,
-   "disabled": true,
-   "duration": {},
-   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "duration": {
+    "rounds": null
+   },
    "flags": {
     "jjk5e": {
-     "auto": "toggle"
+     "technique": "Projection Sorcery"
     }
    },
-   "_key": "!items.effects!C5RGYdyoQiko1drM.aXRRi8ccKgpV5q5D"
+   "_key": "!items.effects!C5RGYdyoQiko1drM.HdA9l8OdhoqfE5Bi"
+  },
+  {
+   "_id": "8gqcwIND428qXGci",
+   "name": "Frame missed",
+   "img": "modules/jjk5e/icons/techniques/projection-sorcery.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.attributes.movement.all",
+     "mode": 0,
+     "value": "0",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 2
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Projection Sorcery"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnEnd"
+     ]
+    }
+   },
+   "_key": "!items.effects!C5RGYdyoQiko1drM.8gqcwIND428qXGci"
   }
  ],
  "_key": "!items!C5RGYdyoQiko1drM"

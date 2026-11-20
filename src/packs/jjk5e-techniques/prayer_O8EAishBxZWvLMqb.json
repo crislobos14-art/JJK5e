@@ -19,7 +19,7 @@
    "JFf7uuFbevBJos36": {
     "_id": "JFf7uuFbevBJos36",
     "type": "utility",
-    "name": "Bonus Action (1 CE)",
+    "name": "Start Prayer (1 CE): turn 1",
     "sort": 0,
     "activation": {
      "type": "bonus",
@@ -39,6 +39,9 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
@@ -47,7 +50,214 @@
     },
     "effects": [
      {
-      "_id": "3nY872WGP5eEjNaG",
+      "_id": "mADpGEWRzZcXJVgX",
+      "onSave": false
+     }
+    ]
+   },
+   "P4YYkbHJ8PTDRSJE": {
+    "_id": "P4YYkbHJ8PTDRSJE",
+    "type": "utility",
+    "name": "Prayer: advance to turn 2",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "zMFfFehLAmYiJa6s",
+      "onSave": false
+     }
+    ]
+   },
+   "RSMk94ajRrNlhPWs": {
+    "_id": "RSMk94ajRrNlhPWs",
+    "type": "utility",
+    "name": "Prayer: advance to turn 3",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "6fMCfmfxe60NOZTI",
+      "onSave": false
+     }
+    ]
+   },
+   "uSxo1oGpVadFS57G": {
+    "_id": "uSxo1oGpVadFS57G",
+    "type": "utility",
+    "name": "Prayer: advance to turn 4",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "0AozsidSJ51M5R7C",
+      "onSave": false
+     }
+    ]
+   },
+   "aEzQRvcqOiZYb41D": {
+    "_id": "aEzQRvcqOiZYb41D",
+    "type": "utility",
+    "name": "Prayer: advance to turn 5",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "9On28S8VTbc5DWQa",
+      "onSave": false
+     }
+    ]
+   },
+   "iipu17hM6a45hcuy": {
+    "_id": "iipu17hM6a45hcuy",
+    "type": "utility",
+    "name": "Prayer turn 2+: your opponent's AC −2",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "18Fa8gjVvOzaJssq",
       "onSave": false
      }
     ]
@@ -93,28 +303,275 @@
    },
    "technique": "Prayer Song",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Remove the previous turn's effect when advancing (each one includes the earlier benefits).",
+   "automation": "automated"
   }
  },
  "effects": [
   {
-   "_id": "3nY872WGP5eEjNaG",
-   "name": "Prone (Prayer)",
+   "_id": "mADpGEWRzZcXJVgX",
+   "name": "Prayer (turn 1)",
    "img": "modules/jjk5e/icons/techniques/prayer-song.svg",
-   "statuses": [
-    "prone"
-   ],
-   "changes": [],
+   "type": "base",
    "transfer": false,
    "disabled": false,
-   "duration": {},
-   "description": "",
+   "statuses": [],
+   "description": "<p>T1: +2 AC and DEX saves. Ends if you're stunned, paralyzed, grappled, restrained or prone.</p>",
+   "changes": [
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+2",
+     "priority": 20
+    },
+    {
+     "key": "system.abilities.dex.bonuses.save",
+     "mode": 2,
+     "value": "+2",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
    "flags": {
     "jjk5e": {
-     "condition": "prone"
+     "technique": "Prayer Song"
     }
    },
-   "_key": "!items.effects!O8EAishBxZWvLMqb.3nY872WGP5eEjNaG"
+   "_key": "!items.effects!O8EAishBxZWvLMqb.mADpGEWRzZcXJVgX"
+  },
+  {
+   "_id": "zMFfFehLAmYiJa6s",
+   "name": "Prayer (turn 2)",
+   "img": "modules/jjk5e/icons/techniques/prayer-song.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>T1: +2 AC and DEX saves; T2: Enemies' AC −2 (apply to them). Ends if you're stunned, paralyzed, grappled, restrained or prone.</p>",
+   "changes": [
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+2",
+     "priority": 20
+    },
+    {
+     "key": "system.abilities.dex.bonuses.save",
+     "mode": 2,
+     "value": "+2",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Prayer Song"
+    }
+   },
+   "_key": "!items.effects!O8EAishBxZWvLMqb.zMFfFehLAmYiJa6s"
+  },
+  {
+   "_id": "6fMCfmfxe60NOZTI",
+   "name": "Prayer (turn 3)",
+   "img": "modules/jjk5e/icons/techniques/prayer-song.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>T1: +2 AC and DEX saves; T2: Enemies' AC −2 (apply to them); T3: +CE mod to attack rolls. Ends if you're stunned, paralyzed, grappled, restrained or prone.</p>",
+   "changes": [
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+2",
+     "priority": 20
+    },
+    {
+     "key": "system.abilities.dex.bonuses.save",
+     "mode": 2,
+     "value": "+2",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.mwak.attack",
+     "mode": 2,
+     "value": "+ max(@abilities.wis.mod, @abilities.cha.mod)",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.rwak.attack",
+     "mode": 2,
+     "value": "+ max(@abilities.wis.mod, @abilities.cha.mod)",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Prayer Song"
+    }
+   },
+   "_key": "!items.effects!O8EAishBxZWvLMqb.6fMCfmfxe60NOZTI"
+  },
+  {
+   "_id": "0AozsidSJ51M5R7C",
+   "name": "Prayer (turn 4)",
+   "img": "modules/jjk5e/icons/techniques/prayer-song.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>T1: +2 AC and DEX saves; T2: Enemies' AC −2 (apply to them); T3: +CE mod to attack rolls; T4: Opponent attacks at disadvantage; you save at advantage. Ends if you're stunned, paralyzed, grappled, restrained or prone.</p>",
+   "changes": [
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+2",
+     "priority": 20
+    },
+    {
+     "key": "system.abilities.dex.bonuses.save",
+     "mode": 2,
+     "value": "+2",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.mwak.attack",
+     "mode": 2,
+     "value": "+ max(@abilities.wis.mod, @abilities.cha.mod)",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.rwak.attack",
+     "mode": 2,
+     "value": "+ max(@abilities.wis.mod, @abilities.cha.mod)",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.grants.disadvantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.advantage.ability.save.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Prayer Song"
+    }
+   },
+   "_key": "!items.effects!O8EAishBxZWvLMqb.0AozsidSJ51M5R7C"
+  },
+  {
+   "_id": "9On28S8VTbc5DWQa",
+   "name": "Prayer (turn 5)",
+   "img": "modules/jjk5e/icons/techniques/prayer-song.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>T1: +2 AC and DEX saves; T2: Enemies' AC −2 (apply to them); T3: +CE mod to attack rolls; T4: Opponent attacks at disadvantage; you save at advantage; T5: +prof damage. Ends if you're stunned, paralyzed, grappled, restrained or prone.</p>",
+   "changes": [
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+2",
+     "priority": 20
+    },
+    {
+     "key": "system.abilities.dex.bonuses.save",
+     "mode": 2,
+     "value": "+2",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.mwak.attack",
+     "mode": 2,
+     "value": "+ max(@abilities.wis.mod, @abilities.cha.mod)",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.rwak.attack",
+     "mode": 2,
+     "value": "+ max(@abilities.wis.mod, @abilities.cha.mod)",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.grants.disadvantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.advantage.ability.save.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ @prof",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.rwak.damage",
+     "mode": 2,
+     "value": "+ @prof",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Prayer Song"
+    }
+   },
+   "_key": "!items.effects!O8EAishBxZWvLMqb.9On28S8VTbc5DWQa"
+  },
+  {
+   "_id": "18Fa8gjVvOzaJssq",
+   "name": "Off-beat (−2 AC)",
+   "img": "modules/jjk5e/icons/techniques/prayer-song.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "-2",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Prayer Song"
+    }
+   },
+   "_key": "!items.effects!O8EAishBxZWvLMqb.18Fa8gjVvOzaJssq"
   }
  ],
  "folder": "LeKt9DxatfKKBe3c",

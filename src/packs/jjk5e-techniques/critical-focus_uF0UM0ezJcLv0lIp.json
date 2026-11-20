@@ -24,9 +24,44 @@
  "flags": {
   "jjk5e": {
    "technique": "Ratio",
-   "level": 1
+   "level": 1,
+   "automationNotes": "Extra critical dice: add them on the weapon (Extra Critical Damage field), e.g. 1 at 1st, 3 at 3rd, 4 at 6th, 5 at 11th.",
+   "automation": "automated"
   }
  },
  "folder": "SXVh9xBdNDfszcIg",
- "_key": "!items!uF0UM0ezJcLv0lIp"
+ "_key": "!items!uF0UM0ezJcLv0lIp",
+ "effects": [
+  {
+   "_id": "KvmCD5WAe3Br4uAP",
+   "name": "Critical Focus",
+   "img": "modules/jjk5e/icons/techniques/ratio.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>+1 critical range. Extra crit dice: 1 (+2 at 3rd, +3 at 6th, +4 at 11th, +5 in the domain).</p>",
+   "changes": [
+    {
+     "key": "flags.dnd5e.weaponCriticalThreshold",
+     "mode": 3,
+     "value": "19",
+     "priority": 20
+    },
+    {
+     "key": "flags.dnd5e.spellCriticalThreshold",
+     "mode": 3,
+     "value": "19",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": "Ratio"
+    }
+   },
+   "_key": "!items.effects!uF0UM0ezJcLv0lIp.KvmCD5WAe3Br4uAP"
+  }
+ ]
 }

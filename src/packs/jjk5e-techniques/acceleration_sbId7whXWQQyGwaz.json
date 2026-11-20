@@ -19,38 +19,143 @@
    "value": "class",
    "subtype": ""
   },
-  "requirements": "Projection Sorcery 3"
+  "requirements": "Projection Sorcery 3",
+  "activities": {
+   "kjXtSghGbFpOgmZB": {
+    "_id": "kjXtSghGbFpOgmZB",
+    "type": "utility",
+    "name": "Consecutive turn: +10 ft speed",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "UUWxp9ZMhOSsZDJE",
+      "onSave": false
+     }
+    ]
+   },
+   "WfJX4LPskxoHdcxu": {
+    "_id": "WfJX4LPskxoHdcxu",
+    "type": "damage",
+    "name": "Momentum strike (+1d6 per 10 ft charged)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "damage": {
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
+  }
  },
  "flags": {
   "jjk5e": {
    "technique": "Projection Sorcery",
-   "level": 3
+   "level": 3,
+   "automation": "automated"
   }
  },
  "folder": "RqqBayaXFFZrEuE3",
  "effects": [
   {
-   "_id": "pTAydcaXQZpWq5Fe",
-   "name": "Acceleration (toggle)",
+   "_id": "UUWxp9ZMhOSsZDJE",
+   "name": "Acceleration +10 ft",
    "img": "modules/jjk5e/icons/techniques/projection-sorcery.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Stack one per consecutive Projection turn.</p>",
    "changes": [
     {
      "key": "system.attributes.movement.walk",
      "mode": 2,
-     "value": "10",
-     "priority": null
+     "value": "+10",
+     "priority": 20
     }
    ],
-   "transfer": true,
-   "disabled": true,
-   "duration": {},
-   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "duration": {
+    "rounds": null
+   },
    "flags": {
     "jjk5e": {
-     "auto": "toggle"
+     "technique": "Projection Sorcery"
     }
    },
-   "_key": "!items.effects!sbId7whXWQQyGwaz.pTAydcaXQZpWq5Fe"
+   "_key": "!items.effects!sbId7whXWQQyGwaz.UUWxp9ZMhOSsZDJE"
   }
  ],
  "_key": "!items!sbId7whXWQQyGwaz"

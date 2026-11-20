@@ -19,7 +19,7 @@
    "4ZYehpeGjC443jyo": {
     "_id": "4ZYehpeGjC443jyo",
     "type": "utility",
-    "name": "Action (2 CE)",
+    "name": "Manifest Regalia (2 CE, CE mod hours)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -39,20 +39,29 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
-    }
+    },
+    "effects": [
+     {
+      "_id": "2O2Qhh8zfSL45TyJ",
+      "onSave": false
+     }
+    ]
    },
    "6n7ztqbNWA03K4hw": {
     "_id": "6n7ztqbNWA03K4hw",
     "type": "damage",
-    "name": "Action (1 CE)",
+    "name": "Regalia necrotic (on hit, 1 CE)",
     "sort": 100000,
     "activation": {
-     "type": "action",
+     "type": "special",
      "value": 1,
      "condition": "",
      "override": true
@@ -69,6 +78,11 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -93,7 +107,8 @@
        }
       }
      ]
-    }
+    },
+    "useConditionText": "reaction === \"isHit\""
    }
   },
   "uses": {
@@ -137,9 +152,69 @@
    },
    "technique": "Regalia",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "dmgScale": {
+    "6n7ztqbNWA03K4hw": [
+     [
+      1,
+      "1d8"
+     ],
+     [
+      3,
+      "2d8"
+     ],
+     [
+      6,
+      "3d8"
+     ],
+     [
+      11,
+      "4d8"
+     ],
+     [
+      18,
+      "6d8"
+     ]
+    ]
+   },
+   "automation": "automated"
   }
  },
  "folder": "jfP5e1LgOxgMmS1g",
- "_key": "!items!akoptGrJDbodhSRV"
+ "_key": "!items!akoptGrJDbodhSRV",
+ "effects": [
+  {
+   "_id": "2O2Qhh8zfSL45TyJ",
+   "name": "Regalia",
+   "img": "modules/jjk5e/icons/techniques/regalia.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>+1 to attack/damage with the Regalia (+2/+3/+4 at 6th/11th/18th). Applies to all melee weapon attacks: equip only the Regalia.</p>",
+   "changes": [
+    {
+     "key": "system.bonuses.mwak.attack",
+     "mode": 2,
+     "value": "+ (1 + floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11) + floor(min(@details.level, 18) / 18))",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ (1 + floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11) + floor(min(@details.level, 18) / 18) + floor(min(@details.level, 6) / 6))",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Regalia"
+    }
+   },
+   "_key": "!items.effects!akoptGrJDbodhSRV.2O2Qhh8zfSL45TyJ"
+  }
+ ]
 }
