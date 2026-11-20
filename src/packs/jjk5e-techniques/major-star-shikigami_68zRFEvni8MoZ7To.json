@@ -1,98 +1,98 @@
 {
- "_id": "68zRFEvni8MoZ7To",
- "name": "Major Star Shikigami",
- "type": "spell",
- "img": "modules/jjk5e/icons/techniques/star-dictator.svg",
- "system": {
-  "description": {
-   "value": "<p><em>Star Dictator — Innate Technique (6th level)</em></p><p>Starting at 6th level, you have learned how to keep your pseudo-domain active without sacrificing offensive power. Your pseudo-domain now deals 1d8 slashing damage per shikigami creating the domain. You gain the ability to summon your major star shikigami. You can summon your major star shikigami as an action for 6 CE and can command it as a bonus action, otherwise it takes the dodge action. You can only have one major star shikigami active at a time. Once your major star shikigami is killed, you cannot summon it again for 1 hour. </p>\n<p>As a Full-Turn Action (Action + Bonus Action + Movement), you can command the major star shikigami to begin forming a special pseudo-domain. Once it has completed a full orbit, the special domain allows your Minor Star Shikigami to move freely within the domain while still maintaining the range and damage of your pseudo-domain. This special domain still follows the same maximum for range and damage, now scaling with the number of Minor Star Shikigami within the domain.</p>",
-   "chat": ""
-  },
-  "source": {
-   "book": "JJK 5e V.6",
-   "page": "",
-   "custom": "",
-   "license": "CC BY-NC-SA 4.0",
-   "rules": "2014"
-  },
-  "activities": {
-   "sb7OhoI9bvpaEuhF": {
-    "_id": "sb7OhoI9bvpaEuhF",
-    "type": "utility",
-    "name": "Bonus Action (6 CE)",
-    "sort": 0,
+  "_id": "68zRFEvni8MoZ7To",
+  "name": "Major Star Shikigami",
+  "type": "spell",
+  "img": "modules/jjk5e/icons/techniques/star-dictator.svg",
+  "system": {
+    "description": {
+      "value": "<p><em>Star Dictator — Innate Technique (6th level)</em></p><p>Starting at 6th level, you have learned how to keep your pseudo-domain active without sacrificing offensive power. Your pseudo-domain now deals 1d8 slashing damage per shikigami creating the domain. You gain the ability to summon your major star shikigami. You can summon your major star shikigami as an action for 6 CE and can command it as a bonus action, otherwise it takes the dodge action. You can only have one major star shikigami active at a time. Once your major star shikigami is killed, you cannot summon it again for 1 hour. </p>\n<p>As a Full-Turn Action (Action + Bonus Action + Movement), you can command the major star shikigami to begin forming a special pseudo-domain. Once it has completed a full orbit, the special domain allows your Minor Star Shikigami to move freely within the domain while still maintaining the range and damage of your pseudo-domain. This special domain still follows the same maximum for range and damage, now scaling with the number of Minor Star Shikigami within the domain.</p>",
+      "chat": ""
+    },
+    "source": {
+      "book": "JJK 5e V.6",
+      "page": "",
+      "custom": "",
+      "license": "CC BY-NC-SA 4.0",
+      "rules": "2014"
+    },
+    "activities": {
+      "sb7OhoI9bvpaEuhF": {
+        "_id": "sb7OhoI9bvpaEuhF",
+        "type": "utility",
+        "name": "Action (6 CE)",
+        "sort": 0,
+        "activation": {
+          "type": "action",
+          "value": 1,
+          "condition": "",
+          "override": true
+        },
+        "consumption": {
+          "targets": [],
+          "scaling": {
+            "allowed": false
+          },
+          "spellSlot": false
+        },
+        "range": {
+          "units": "self",
+          "override": true
+        },
+        "target": {
+          "override": true
+        },
+        "duration": {
+          "value": "1",
+          "units": "hour",
+          "concentration": false,
+          "override": true
+        }
+      }
+    },
+    "uses": {
+      "max": "",
+      "recovery": [],
+      "spent": 0
+    },
+    "level": 3,
+    "school": "jjk",
+    "method": "technique",
+    "prepared": 1,
+    "ability": "",
+    "properties": [],
+    "materials": {
+      "value": "",
+      "consumed": false,
+      "cost": 0,
+      "supply": 0
+    },
     "activation": {
-     "type": "bonus",
-     "value": 1,
-     "condition": "",
-     "override": true
-    },
-    "consumption": {
-     "targets": [],
-     "scaling": {
-      "allowed": false
-     },
-     "spellSlot": false
-    },
-    "range": {
-     "units": "self",
-     "override": true
-    },
-    "target": {
-     "override": true
+      "type": "bonus",
+      "value": 1,
+      "condition": "",
+      "override": true
     },
     "duration": {
-     "value": "1",
-     "units": "hour",
-     "concentration": false,
-     "override": true
+      "value": "1",
+      "units": "hour"
+    },
+    "range": {
+      "units": "self",
+      "override": true
+    },
+    "target": {},
+    "sourceItem": ""
+  },
+  "flags": {
+    "jjk5e": {
+      "ceCosts": {
+        "sb7OhoI9bvpaEuhF": 6
+      },
+      "technique": "Star Dictator",
+      "level": 6,
+      "spellFrom": "feat"
     }
-   }
   },
-  "uses": {
-   "max": "",
-   "recovery": [],
-   "spent": 0
-  },
-  "level": 3,
-  "school": "jjk",
-  "method": "technique",
-  "prepared": 1,
-  "ability": "",
-  "properties": [],
-  "materials": {
-   "value": "",
-   "consumed": false,
-   "cost": 0,
-   "supply": 0
-  },
-  "activation": {
-   "type": "bonus",
-   "value": 1,
-   "condition": "",
-   "override": true
-  },
-  "duration": {
-   "value": "1",
-   "units": "hour"
-  },
-  "range": {
-   "units": "self",
-   "override": true
-  },
-  "target": {},
-  "sourceItem": ""
- },
- "flags": {
-  "jjk5e": {
-   "ceCosts": {
-    "sb7OhoI9bvpaEuhF": 6
-   },
-   "technique": "Star Dictator",
-   "level": 6,
-   "spellFrom": "feat"
-  }
- },
- "folder": "ba0AWxHF6sBvbrZq",
- "_key": "!items!68zRFEvni8MoZ7To"
+  "folder": "ba0AWxHF6sBvbrZq",
+  "_key": "!items!68zRFEvni8MoZ7To"
 }
