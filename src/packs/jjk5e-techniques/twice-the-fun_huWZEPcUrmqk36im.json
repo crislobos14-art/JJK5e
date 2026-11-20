@@ -18,8 +18,8 @@
   "activities": {
    "oZYzniqWJTsImkZe": {
     "_id": "oZYzniqWJTsImkZe",
-    "type": "attack",
-    "name": "Action (3 CE)",
+    "type": "utility",
+    "name": "Create clones (3 CE each)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -30,7 +30,8 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "@prof - 1"
      },
      "spellSlot": false
     },
@@ -41,27 +42,14 @@
     },
     "target": {
      "affects": {
-      "type": "creature",
-      "count": "1"
+      "type": "",
+      "count": ""
      },
      "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
-    },
-    "attack": {
-     "ability": "spellcasting",
-     "bonus": "",
-     "flat": false,
-     "type": {
-      "value": "melee",
-      "classification": "spell"
-     }
-    },
-    "damage": {
-     "includeBase": false,
-     "parts": []
     }
    }
   },
@@ -98,8 +86,8 @@
   },
   "target": {
    "affects": {
-    "type": "creature",
-    "count": "1"
+    "type": "",
+    "count": ""
    },
    "override": true
   },
@@ -112,7 +100,10 @@
    },
    "technique": "Clone",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceSteps": {
+    "oZYzniqWJTsImkZe": 3
+   }
   }
  },
  "folder": "FD3rp7a4OW9fKrOc",

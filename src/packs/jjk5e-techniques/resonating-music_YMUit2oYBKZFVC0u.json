@@ -67,8 +67,30 @@
     },
     "damage": {
      "onSave": "half",
-     "parts": []
-    }
+     "parts": [
+      {
+       "number": 3,
+       "denomination": 10,
+       "bonus": "(@prof)d10",
+       "types": [
+        "thunder"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "jjkSoundWaveDeaf",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -124,9 +146,52 @@
    },
    "technique": "Rockstar",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "dmgScale": {
+    "kvvCnOOckSlxEV93": [
+     [
+      0,
+      "2d10"
+     ],
+     [
+      6,
+      "3d10"
+     ],
+     [
+      11,
+      "4d10"
+     ],
+     [
+      18,
+      "6d10"
+     ]
+    ]
+   }
   }
  },
  "folder": "vosb36eMO9PhuX42",
- "_key": "!items!YMUit2oYBKZFVC0u"
+ "_key": "!items!YMUit2oYBKZFVC0u",
+ "effects": [
+  {
+   "_id": "jjkSoundWaveDeaf",
+   "name": "Sound Wave: deafened",
+   "img": "modules/jjk5e/icons/techniques/rockstar.svg",
+   "statuses": [
+    "deafened"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "dae": {
+     "specialDuration": [
+      "turnEnd"
+     ]
+    }
+   }
+  }
+ ]
 }

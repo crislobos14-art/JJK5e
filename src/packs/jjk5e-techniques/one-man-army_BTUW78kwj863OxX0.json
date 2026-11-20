@@ -18,7 +18,7 @@
   "activities": {
    "qFQ7sw16JZ7fimWD": {
     "_id": "qFQ7sw16JZ7fimWD",
-    "type": "attack",
+    "type": "utility",
     "name": "Action (3 CE)",
     "sort": 0,
     "activation": {
@@ -41,8 +41,8 @@
     },
     "target": {
      "affects": {
-      "type": "creature",
-      "count": "1"
+      "type": "",
+      "count": ""
      },
      "override": true
     },
@@ -51,19 +51,6 @@
      "units": "hour",
      "concentration": false,
      "override": true
-    },
-    "attack": {
-     "ability": "spellcasting",
-     "bonus": "",
-     "flat": false,
-     "type": {
-      "value": "ranged",
-      "classification": "spell"
-     }
-    },
-    "damage": {
-     "includeBase": false,
-     "parts": []
     }
    }
   },
@@ -101,8 +88,8 @@
   },
   "target": {
    "affects": {
-    "type": "creature",
-    "count": "1"
+    "type": "",
+    "count": ""
    },
    "override": true
   },

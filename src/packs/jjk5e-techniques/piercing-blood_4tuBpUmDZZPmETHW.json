@@ -89,7 +89,7 @@
    "VwHHoCDnTNKGLfKH": {
     "_id": "VwHHoCDnTNKGLfKH",
     "type": "save",
-    "name": "Action",
+    "name": "Convergence: sweep the lingering beam",
     "sort": 100000,
     "activation": {
      "type": "action",
@@ -137,7 +137,23 @@
     },
     "damage": {
      "onSave": "none",
-     "parts": []
+     "parts": [
+      {
+       "number": 10,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "piercing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
     }
    }
   },

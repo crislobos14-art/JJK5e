@@ -3,12 +3,12 @@
 > Generado desde el compendio y las fuentes. **No certifica ejecución en Foundry ni fidelidad semántica a cada regla**.
 
 - Spells examinados: **360**; técnicas agrupadas: **81**.
-- Utilidad sin efecto configurado: revisar lógica: **113**.
+- Utilidad sin efecto configurado: revisar lógica: **115**.
 - Utilidad con efecto: comprobar activación: **19**.
 - Dominio genérico: resolver propiedades particulares: **57**.
-- Salvación sin daño/efecto automático: **35**.
-- Ataque sin daño propio: comprobar intención: **12**.
-- Mecánica configurada; falta prueba Foundry: **124**.
+- Salvación sin daño/efecto automático: **32**.
+- Ataque sin daño propio: comprobar intención: **10**.
+- Mecánica configurada; falta prueba Foundry: **127**.
 
 ## Interpretación
 
@@ -75,7 +75,7 @@
 | Blood Techniques | 1 | save:Action (1 CE); save:Action (3 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/blood-techniques_s8hzPznLcMB8vsLg.json) |
 | Flowing Red Scale | 3 | utility:Bonus Action (3 CE) | Utilidad con efecto: comprobar activación | [JSON](../src/packs/jjk5e-techniques/flowing-red-scale_0LPEMZDITFa9osgY.json) |
 | Convergence | 6 | utility:Bonus Action | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/convergence_NY4mXqV70GgnVRot.json) |
-| Piercing Blood | 11 | save:Action (8 CE); save:Action | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/piercing-blood_4tuBpUmDZZPmETHW.json) |
+| Piercing Blood | 11 | save:Action (8 CE); save:Convergence: sweep the lingering beam | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/piercing-blood_4tuBpUmDZZPmETHW.json) |
 | Domain Expansion: Bloodbath | 18 | damage:Special; utility:Expand Domain (20 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-bloodbath_Fbv1XCPZS9QhB6nh.json) |
 
 ### Body Manipulation (1 spells)
@@ -105,8 +105,8 @@
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| One Man Army | 1 | attack:Action (3 CE) | Ataque sin daño propio: comprobar intención | [JSON](../src/packs/jjk5e-techniques/one-man-army_BTUW78kwj863OxX0.json) |
-| Twice the Fun | 3 | attack:Action (3 CE) | Ataque sin daño propio: comprobar intención | [JSON](../src/packs/jjk5e-techniques/twice-the-fun_huWZEPcUrmqk36im.json) |
+| One Man Army | 1 | utility:Action (3 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/one-man-army_BTUW78kwj863OxX0.json) |
+| Twice the Fun | 3 | utility:Create clones (3 CE each) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/twice-the-fun_huWZEPcUrmqk36im.json) |
 | Four is a Party | 11 | utility:Bonus Action (1 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/four-is-a-party_SDramqMcTdzcvVKw.json) |
 | Domain Expansion: Divide and Conquer | 18 | utility:Bonus Action; utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-divide-and-conquer_yHfhhod8QZmTjtWa.json) |
 
@@ -578,7 +578,7 @@
 |---|---:|---|---|---|
 | Sound Amplification | 1 | attack:Action (1 CE); save:Action — save | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/sound-amplification_wmS4XVAE6EL1dJ17.json) |
 | Jacked Audio | 3 | utility:Action (1 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/jacked-audio_EJxDOAJZ1UjcbLR9.json) |
-| Resonating Music | 6 | save:Action (5 CE) | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/resonating-music_YMUit2oYBKZFVC0u.json) |
+| Resonating Music | 6 | save:Action (5 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/resonating-music_YMUit2oYBKZFVC0u.json) |
 | Maximum: Epic Solo | 11 | damage:Action (8+ CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/maximum-epic-solo_2KYLeuvZfdjkOvzV.json) |
 | Domain Expansion: Hall of Fame | 18 | utility:Special; utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-hall-of-fame_QmfPpOxDrEUDCBSU.json) |
 
@@ -628,7 +628,7 @@
 |---|---:|---|---|---|
 | Dismantle | 1 | attack:Action (1+ CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/dismantle_7EnbbkEp3o7f0VLb.json) |
 | Cleave | 3 | attack:Action (1+ CE); save:Action — save | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/cleave_KzRHCk2wttIY8wKv.json) |
-| Divine Flame Open | 6 | save:Action | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/divine-flame-open_mxwFcvMxYv3CzmBv.json) |
+| Divine Flame Open | 6 | save:Divine Flame (1+ CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/divine-flame-open_mxwFcvMxYv3CzmBv.json) |
 | Slicing and Severing | 11 | utility:Bonus Action | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/slicing-and-severing_LwQFSsaYhkLR6WV0.json) |
 | Domain Expansion: Malevolent Shrine | 18 | utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-malevolent-shrine_O5AXSTSlqi53tosZ.json) |
 

@@ -19,7 +19,7 @@
    "u7pikmLFeX1CnNuV": {
     "_id": "u7pikmLFeX1CnNuV",
     "type": "save",
-    "name": "Action",
+    "name": "Divine Flame (1+ CE)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -30,18 +30,24 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "2 * @prof - 1"
      },
      "spellSlot": false
     },
     "range": {
-     "value": "15",
+     "value": "600",
      "units": "ft",
      "override": true
     },
     "target": {
      "affects": {
-      "type": "creature",
+      "type": "creature"
+     },
+     "template": {
+      "type": "sphere",
+      "size": "15",
+      "units": "ft",
       "count": "1"
      },
      "override": true
@@ -61,7 +67,23 @@
     },
     "damage": {
      "onSave": "half",
-     "parts": []
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 12,
+       "bonus": "",
+       "types": [
+        "fire"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
     }
    }
   },
@@ -92,13 +114,18 @@
    "units": "inst"
   },
   "range": {
-   "value": "15",
+   "value": "600",
    "units": "ft",
    "override": true
   },
   "target": {
    "affects": {
-    "type": "creature",
+    "type": "creature"
+   },
+   "template": {
+    "type": "sphere",
+    "size": "15",
+    "units": "ft",
     "count": "1"
    },
    "override": true
@@ -109,7 +136,13 @@
   "jjk5e": {
    "technique": "Shrine",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceCosts": {
+    "u7pikmLFeX1CnNuV": 1
+   },
+   "ceSteps": {
+    "u7pikmLFeX1CnNuV": 1
+   }
   }
  },
  "folder": "m9ZssDMA8savxH5G",

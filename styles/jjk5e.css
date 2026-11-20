@@ -61,6 +61,15 @@ button.jjk5e-levelup { display: block; margin: 4px auto 0; padding: 2px 10px; fo
 .jjk5e-strip button:hover { background: rgba(255,255,255,.2); }
 .jjk5e-strip .jjk-ce { display: inline-flex; align-items: center; gap: 3px; margin-right: 6px; }
 .jjk5e-strip .jjk-ce strong { min-width: 40px; text-align: center; }
+.jjk5e-strip { gap: 5px; padding: 9px; border: 1px solid #635474; border-radius: 8px;
+  background: linear-gradient(145deg, #30263d, #18151f 75%); color: #f5effb; }
+.jjk5e-strip .jjk-strip-heading { flex: 1 0 100%; text-align: left; font-size: 10px;
+  letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: #dbc8eb; }
+.jjk5e-strip .jjk-ce { flex: 1 0 100%; justify-content: space-between; margin: 0;
+  padding-bottom: 6px; border-bottom: 1px solid #594d61; font-variant-numeric: tabular-nums; }
+.jjk5e-strip button:focus-visible { outline: 2px solid #eed293; outline-offset: 2px; }
+.jjk5e-strip button[data-a="panel"], .jjk5e-strip button[data-a="technique"],
+.jjk5e-strip button[data-a="rest"], .jjk5e-strip button[data-a="hotbar"] { flex: 1 1 18%; }
 .jjk-grade-badge { font-weight: bold; border-radius: 4px; padding: 1px 6px; }
 .jjk-grade-badge.g4 { background: #5b6470 !important; } .jjk-grade-badge.g3 { background: #2f6f4f !important; }
 .jjk-grade-badge.g2 { background: #2f4f8f !important; } .jjk-grade-badge.g1 { background: #8f6a1f !important; }

@@ -549,6 +549,11 @@ const RO_ROWS = [
 
 function registerActivityHooks() {
   Hooks.on("dnd5e.preUseActivity", (activity, usageConfig) => {
+    if (activity.item?.actor?.token?.flags?.jjk5e?.cloneOrigin && activity.item.flags?.jjk5e?.technique) {
+      ui.notifications.warn("Clone: this copy cannot use innate techniques.");
+      return false;
+    }
+    if (isCloneCreation(activity) && !canCreateClone(activity.item.actor)) return false;
     if (activity.item?.flags?.jjk5e?.tokenSwap?.[activity.id] && !validateTokenSwap(activity)) return false;
     const actor = activity.actor ?? activity.item?.actor;
     if (activity.item?.flags?.jjk5e?.mindset && actor && !actor.system.attributes?.inspiration) {
@@ -589,6 +594,7 @@ function registerActivityHooks() {
 
   // D&D5e 6.1: this gate runs after the user selected CE scaling, before item consumption.
   Hooks.on("dnd5e.preActivityConsumption", (activity, usageConfig) => {
+    if (isCloneCreation(activity) && !canCreateClone(activity.item.actor, cloneQuantity(activity, usageConfig))) return false;
     if (activity.item?.flags?.jjk5e?.tokenSwap?.[activity.id] && !validateTokenSwap(activity)) return false;
     if (!setting("autoSpendCE")) return;
     const actor = activity.actor ?? activity.item?.actor;
@@ -604,6 +610,8 @@ function registerActivityHooks() {
   Hooks.on("dnd5e.postUseActivity", async (activity, usageConfig) => {
     const actor = activity.actor ?? activity.item?.actor;
     const item = activity.item;
+    const quantity = isCloneCreation(activity) ? cloneQuantity(activity, usageConfig) : 0;
+    if (isCloneCreation(activity) && !canCreateClone(actor, quantity)) return;
     if (item?.flags?.jjk5e?.tokenSwap?.[activity.id]) {
       if (!validateTokenSwap(activity)) return;
     }
@@ -623,6 +631,7 @@ function registerActivityHooks() {
         /Perfect CE Manipulation/i.test(activity.name ?? "")) {
       await actor.setFlag(MODULE_ID, "sixEyesNext", true);
     }
+    if (quantity) await createCombatClone(actor, quantity);
     await remindModifiers(actor, item);
     if (item?.flags?.jjk5e?.openTechnique) await chooseTechnique(actor);
     const grp = item?.flags?.jjk5e?.activatesGroup?.[activity.id];
@@ -678,6 +687,50 @@ function validateTokenSwap(activity) {
   if (!Number.isFinite(range) || range <= 0 || distance > range + 0.001)
     return fail("JJK 5e: swap target is outside the technique's range.");
   return true;
+}
+
+function isCloneCreation(activity) {
+  return activity?.item?.flags?.jjk5e?.technique === "Clone" &&
+    ["One Man Army", "Twice the Fun"].includes(baseName(activity.item));
+}
+
+function cloneQuantity(activity, config) {
+  return baseName(activity.item) === "Twice the Fun" ? 1 + Number(config?.scaling ?? 0) : 1;
+}
+
+function canCreateClone(actor, quantity = 1) {
+  if (!Number.isSafeInteger(quantity) || quantity < 1) return false;
+  const scene = canvas.scene;
+  const source = actorToken(actor);
+  if (!source || !scene || !game.user.can("TOKEN_CREATE")) {
+    ui.notifications.warn("Clone: place the caster on the scene and use an account with token creation permission.");
+    return false;
+  }
+  const count = scene.tokens.filter(token => token.flags?.jjk5e?.cloneOrigin === actor.uuid).length;
+  if (!domainOpen(actor) && count + quantity > actor.system.attributes.prof) {
+    ui.notifications.warn("Clone: proficiency limit reached.");
+    return false;
+  }
+  return true;
+}
+
+async function createCombatClone(actor, quantity) {
+  const source = actorToken(actor).document;
+  const level = techniqueLevel(actor);
+  const hp = Math.ceil(actor.system.attributes.hp.max / (level >= 11 ? 1 : level >= 6 ? 2 : 4));
+  const doc = await actor.getTokenDocument({
+    actorLink: false, x: source.x + source.width * canvas.scene.grid.size, y: source.y,
+    elevation: source.elevation, disposition: source.disposition,
+    flags: { jjk5e: { cloneOrigin: actor.uuid, cloneExpiry: game.time.worldTime + 28800 } },
+    delta: { system: { attributes: { hp: { value: hp, max: hp, temp: 0, tempmax: 0 },
+      ac: { calc: "flat", flat: actor.system.attributes.ac.value } } } }
+  });
+  const tokens = Array.from({ length: quantity }, () => {
+    const token = doc.toObject();
+    delete token._id;
+    return token;
+  });
+  await canvas.scene.createEmbeddedDocuments("Token", tokens);
 }
 
 /** Apply narrowly defined, verifiable self buffs. Unknown effects remain GM decisions. */
@@ -1843,7 +1896,15 @@ Hooks.once("ready", async () => {
     const n = actor.items.reduce((tot, i) => tot + (Number(i.flags?.jjk5e?.srRegainCE) || 0), 0);
     if (n > 0 && findPool(actor)) await spendCE(actor, -n, t("CE.ShortRestRestore", { n }));
   });
-  Hooks.on("updateWorldTime", () => { expireEffects(); expireVowExhaustion(); });
+  Hooks.on("updateWorldTime", async () => {
+    expireEffects(); expireVowExhaustion();
+    if (!isActiveGM()) return;
+    for (const scene of game.scenes) {
+      const expired = scene.tokens.filter(token => token.flags?.jjk5e?.cloneOrigin &&
+        token.flags.jjk5e.cloneExpiry <= game.time.worldTime);
+      if (expired.length) await scene.deleteEmbeddedDocuments("Token", expired.map(token => token.id));
+    }
+  });
 
   Hooks.on("renderActorSheet", (app, html) => addHeaderButton(app, html));
   Hooks.on("renderActorSheetV2", (app, element) => addHeaderButton(app, element));
@@ -2338,6 +2399,19 @@ function midiActive() {
 
 function registerMidiHooks() {
   if (!midiActive()) return;
+  Hooks.on("midi-qol.preAttackRoll", workflow => {
+    const actor = workflow.actor;
+    const attack = workflow.activity?.attack?.type?.value;
+    if (attack !== "melee" || workflow.targets?.size !== 1 || !actor?.items.some(item =>
+      item.flags?.jjk5e?.technique === "Clone" && baseName(item) === "Twice the Fun")) return;
+    const [target] = workflow.targets;
+    const adjacent = canvas.tokens.placeables.some(token => {
+      if (token.document.flags?.jjk5e?.cloneOrigin !== actor.uuid || token.actor?.system.attributes.hp.value <= 0) return false;
+      const distance = globalThis.MidiQOL?.computeDistance?.(token, target, { wallsBlock: true });
+      return Number.isFinite(distance) && distance >= 0 && distance <= 5;
+    });
+    if (adjacent) workflow.advantage = true;
+  });
   // Domain sure-hit: every target of an innate-technique attack is hit.
   const sureHit = (workflow, target) => {
     if (!(workflow && setting("domainSureHit") && domainOpen(workflow.actor)
@@ -3257,7 +3331,7 @@ function addSheetStrip(app, element) {
   strip.className = "jjk5e-strip";
   const ce = pool ? `<span class="jjk-ce"><i class="fas fa-bolt"></i> ${t("CE.Short")}
       <button type="button" data-a="ce-" title="−1">−</button><strong>${poolValue(pool)}/${poolMax(pool)}</strong><button type="button" data-a="ce+" title="+1">+</button></span>` : "";
-  strip.innerHTML = `${ce}
+  strip.innerHTML = `<div class="jjk-strip-heading">Jujutsu Kaisen</div>${ce}
     <button type="button" data-a="career" class="jjk-grade-badge g${c.grade}" title="${t("Career.Title")}">${esc(gradeLabel(c.grade))}${c.semi ? "*" : ""}</button>
     <button type="button" data-a="vows" title="${t("Vow.Title")}"><i class="fas fa-handshake"></i> ${vows.length}/${vowLimit(actor)}</button>
     <span class="jjk-bt" title="${t("Breakthrough.Name")}"><i class="fas fa-bolt-lightning"></i> ${Number(actor.getFlag(MODULE_ID, "breakthroughs")) || 0}</span>
@@ -3265,6 +3339,7 @@ function addSheetStrip(app, element) {
     <button type="button" data-a="technique" title="${t("SceneTools.Technique")}"><i class="fas fa-hand-sparkles"></i></button>
     <button type="button" data-a="rest" title="${t("SceneTools.ShortRest")}"><i class="fas fa-bed"></i></button>
     <button type="button" data-a="hotbar" title="${t("Hotbar.Fill")}"><i class="fas fa-table-cells"></i></button>`;
+  for (const button of strip.querySelectorAll("button[title]")) button.setAttribute("aria-label", button.title);
   strip.addEventListener("click", (ev) => {
     const b = ev.target.closest("[data-a]");
     if (!b) return;

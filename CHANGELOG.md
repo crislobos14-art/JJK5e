@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.27.0 — Hoja de personaje y técnicas innatas
+- Reorganiza el panel JJK de la hoja y separa el contador de energía maldita.
+- One Man Army y Twice the Fun crean copias en escena. Twice the Fun permite gastar 3 CE por copia e incorpora la ventaja de ataque cuerpo a cuerpo junto a un clon mediante Midi-QOL.
+- Piercing Blood incorpora el daño del barrido de Convergence. Divine Flame Open incorpora el área y el daño por CE. Resonating Music incorpora daño y sordera, y Blood Spit incorpora ceguera.
+- Validación local de sintaxis, reglas e integridad del compendio. La cobertura de los 360 spells es parcial. El uso en una sesión real de Foundry con Midi-QOL y el aspecto de la hoja siguen pendientes de validación.
+
 ## 1.26.0 — Combat dependencies and table usability
 - Foundry now declares Midi-QOL and DAE as required combat dependencies. Visual integrations remain recommended. The GM receives an activation warning if either combat module is inactive.
 - Check Boogie's target, ownership and horizontal range before charging CE. A GM can perform swaps involving other players' tokens.

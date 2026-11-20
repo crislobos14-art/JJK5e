@@ -83,6 +83,10 @@
      {
       "_id": "9bVy7WKxTZ12kDrf",
       "onSave": false
+     },
+     {
+      "_id": "jjkBloodSpitBlnd",
+      "onSave": false
      }
     ]
    },
@@ -384,8 +388,7 @@
     "jjk5e": {
      "condition": "blinded"
     }
-   },
-   "_key": "!items.effects!8ob4DIhgqqluRPbD.9bVy7WKxTZ12kDrf"
+   }
   },
   {
    "_id": "iRCwpF7nAJ8IBWMv",
@@ -407,8 +410,28 @@
     "jjk5e": {
      "auto": "toggle"
     }
+   }
+  },
+  {
+   "_id": "jjkBloodSpitBlnd",
+   "name": "Blood Spit: blinded",
+   "img": "modules/jjk5e/icons/techniques/rot.svg",
+   "statuses": [
+    "blinded"
+   ],
+   "changes": [],
+   "transfer": false,
+   "disabled": false,
+   "duration": {
+    "rounds": 1
    },
-   "_key": "!items.effects!8ob4DIhgqqluRPbD.iRCwpF7nAJ8IBWMv"
+   "flags": {
+    "dae": {
+     "specialDuration": [
+      "turnEnd"
+     ]
+    }
+   }
   }
  ],
  "folder": "TOdSvSBhuENKcEJX",
