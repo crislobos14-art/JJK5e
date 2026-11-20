@@ -1066,6 +1066,39 @@ def centipede_shroud(S):
     mark(m)
 
 
+def clone(S):
+    for n in ("One Man Army", "Twice the Fun"):
+        x = S.get(n)
+        note(x, "Clone tokens are created on the scene by the module (HP 1/4, 1/2 at 6th, full at 11th; 8 hours).")
+        mark(x)
+    f = S.get("Four is a Party")
+    a = f["system"]["activities"]["RXgYAERWoLMPOHZ8"]
+    a["name"] = "Swap bodies with a clone (1 CE)"
+    a["range"], a["target"] = {"units": "spec", "override": True}, one_creature()
+    note(f, "Swap your token position and current HP with the chosen clone; on dropping to 0 HP you can move into a "
+            "clone instead (GM).")
+    mark(f)
+    d = S.get("Domain Expansion: Divide and Conquer")
+    b = d["system"]["activities"]["haVK6Y2XrWnA1sBw"]
+    b["name"] = "Free clone (bonus action, once per turn)"
+    b["range"], b["target"] = RANGE_SELF, SELF
+    free(d, b)
+    i20 = act(d, "init20", "utility", "Initiative 20: extra clone", "special", range=RANGE_SELF, target=SELF)
+    free(d, i20)
+    d["flags"]["jjk5e"]["cloneSpawn"] = {b["_id"]: True, i20["_id"]: True}
+    note(d, "Unlimited clones inside the domain; clone attacks get the domain sure-hit. Delete domain clones when it ends.")
+    mark(d)
+    o = S.get("Object Cloning")
+    for key, label, c_ in [("XwmFtNdk688spebl", "Clone object or structure (4 CE, +2 per size above Medium)", 4),
+                           ("hEZ2JmK5WSwaD0cX", "Clone common magic item / semi-grade tool (6 CE)", 6),
+                           ("uncommon", "Clone uncommon item / grade 3 tool (8 CE)", 8),
+                           ("rare", "Clone rare item / grade 2 tool (10 CE)", 10)]:
+        a = act(o, key, "utility", label, "action", range={"units": "spec", "override": True},
+                target={"affects": {"type": "object", "count": "1"}, "override": True})
+        cost(o, a, c_, 2 if c_ == 4 else 0, "8" if c_ == 4 else "")
+    mark(o)
+
+
 TECHNIQUES = {"Antigravity System": antigravity_system,
               "Auspicious Beast Summon": auspicious_beast_summon,
               "Black Bird Manipulation": black_bird_manipulation,
@@ -1075,7 +1108,8 @@ TECHNIQUES = {"Antigravity System": antigravity_system,
               "Cursed Speech": cursed_speech,
               "Blazing Courage": blazing_courage,
               "Body Manipulation": body_manipulation,
-              "Centipede Shroud": centipede_shroud}
+              "Centipede Shroud": centipede_shroud,
+              "Clone": clone}
 
 if __name__ == "__main__":
     args = sys.argv[1:]

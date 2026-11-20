@@ -24,52 +24,150 @@
    "XwmFtNdk688spebl": {
     "_id": "XwmFtNdk688spebl",
     "type": "utility",
-    "name": "Action (4 CE)",
+    "name": "Clone object or structure (4 CE, +2 per size above Medium)",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "action",
      "value": 1,
-     "condition": ""
+     "condition": "",
+     "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
-     }
+      "allowed": true,
+      "max": "8"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
-     "units": "self"
+     "units": "spec",
+     "override": true
     },
-    "target": {},
-    "duration": {
-     "units": "inst"
-    }
+    "target": {
+     "affects": {
+      "type": "object",
+      "count": "1"
+     },
+     "override": true
+    },
+    "effects": []
    },
    "hEZ2JmK5WSwaD0cX": {
     "_id": "hEZ2JmK5WSwaD0cX",
     "type": "utility",
-    "name": "Action (6 CE)",
-    "sort": 100000,
+    "name": "Clone common magic item / semi-grade tool (6 CE)",
+    "sort": 0,
+    "img": null,
     "activation": {
      "type": "action",
      "value": 1,
-     "condition": ""
+     "condition": "",
+     "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
-     }
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
-     "units": "self"
+     "units": "spec",
+     "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "object",
+      "count": "1"
+     },
+     "override": true
+    },
+    "effects": []
+   },
+   "7rFevVIlVrs3vGXN": {
+    "_id": "7rFevVIlVrs3vGXN",
+    "type": "utility",
+    "name": "Clone uncommon item / grade 3 tool (8 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
     "duration": {
-     "value": "1",
-     "units": "hour",
-     "concentration": false
-    }
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "object",
+      "count": "1"
+     },
+     "override": true
+    },
+    "effects": []
+   },
+   "whIaWqt05KCRPG4S": {
+    "_id": "whIaWqt05KCRPG4S",
+    "type": "utility",
+    "name": "Clone rare item / grade 2 tool (10 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "object",
+      "count": "1"
+     },
+     "override": true
+    },
+    "effects": []
    }
   }
  },
@@ -77,7 +175,9 @@
   "jjk5e": {
    "ceCosts": {
     "XwmFtNdk688spebl": 4,
-    "hEZ2JmK5WSwaD0cX": 6
+    "hEZ2JmK5WSwaD0cX": 6,
+    "7rFevVIlVrs3vGXN": 8,
+    "whIaWqt05KCRPG4S": 10
    },
    "technique": "Clone",
    "reversal": true,
@@ -93,7 +193,11 @@
       "Clone"
      ]
     ]
-   }
+   },
+   "ceSteps": {
+    "XwmFtNdk688spebl": 2
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",

@@ -3,13 +3,13 @@
 > Generado desde el compendio y las fuentes. **No certifica ejecución en Foundry ni fidelidad semántica a cada regla**.
 
 - Spells examinados: **360**; técnicas agrupadas: **81**.
-- Utilidad sin efecto configurado: revisar lógica: **106**.
+- Utilidad sin efecto configurado: revisar lógica: **103**.
 - Utilidad con efecto: comprobar activación: **15**.
-- Dominio genérico: resolver propiedades particulares: **49**.
+- Dominio genérico: resolver propiedades particulares: **48**.
 - Salvación sin daño/efecto automático: **27**.
 - Ataque sin daño propio: comprobar intención: **10**.
 - Mecánica configurada; falta prueba Foundry: **113**.
-- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **40**.
+- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **44**.
 
 ## Interpretación
 
@@ -106,10 +106,10 @@
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| One Man Army | 1 | utility:Action (3 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/one-man-army_BTUW78kwj863OxX0.json) |
-| Twice the Fun | 3 | utility:Create clones (3 CE each) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/twice-the-fun_huWZEPcUrmqk36im.json) |
-| Four is a Party | 11 | utility:Bonus Action (1 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/four-is-a-party_SDramqMcTdzcvVKw.json) |
-| Domain Expansion: Divide and Conquer | 18 | utility:Bonus Action; utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-divide-and-conquer_yHfhhod8QZmTjtWa.json) |
+| One Man Army | 1 | utility:Action (3 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/one-man-army_BTUW78kwj863OxX0.json) |
+| Twice the Fun | 3 | utility:Create clones (3 CE each) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/twice-the-fun_huWZEPcUrmqk36im.json) |
+| Four is a Party | 11 | utility:Swap bodies with a clone (1 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/four-is-a-party_SDramqMcTdzcvVKw.json) |
+| Domain Expansion: Divide and Conquer | 18 | utility:Free clone (bonus action, once per turn); utility:Expand Domain (20 CE); utility:Initiative 20: extra clone | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-divide-and-conquer_yHfhhod8QZmTjtWa.json) |
 
 ### Comedian (4 spells)
 

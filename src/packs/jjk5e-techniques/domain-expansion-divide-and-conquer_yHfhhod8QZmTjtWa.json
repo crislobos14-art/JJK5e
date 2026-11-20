@@ -19,7 +19,7 @@
    "haVK6Y2XrWnA1sBw": {
     "_id": "haVK6Y2XrWnA1sBw",
     "type": "utility",
-    "name": "Bonus Action",
+    "name": "Free clone (bonus action, once per turn)",
     "sort": 0,
     "activation": {
      "type": "bonus",
@@ -39,6 +39,9 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
@@ -88,6 +91,42 @@
      "concentration": false,
      "override": true
     }
+   },
+   "uluV427kSJscDJo3": {
+    "_id": "uluV427kSJscDJo3",
+    "type": "utility",
+    "name": "Initiative 20: extra clone",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
    }
   },
   "uses": {
@@ -146,7 +185,13 @@
     "d1PVQneQyJJM4RqU": 20
    },
    "domainActivity": "d1PVQneQyJJM4RqU",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "cloneSpawn": {
+    "haVK6Y2XrWnA1sBw": true,
+    "uluV427kSJscDJo3": true
+   },
+   "automationNotes": "Unlimited clones inside the domain; clone attacks get the domain sure-hit. Delete domain clones when it ends.",
+   "automation": "automated"
   }
  },
  "folder": "FD3rp7a4OW9fKrOc",

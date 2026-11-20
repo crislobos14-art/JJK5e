@@ -19,7 +19,7 @@
    "RXgYAERWoLMPOHZ8": {
     "_id": "RXgYAERWoLMPOHZ8",
     "type": "utility",
-    "name": "Bonus Action (1 CE)",
+    "name": "Swap bodies with a clone (1 CE)",
     "sort": 0,
     "activation": {
      "type": "bonus",
@@ -35,10 +35,15 @@
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "units": "spec",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -87,7 +92,9 @@
    },
    "technique": "Clone",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Swap your token position and current HP with the chosen clone; on dropping to 0 HP you can move into a clone instead (GM).",
+   "automation": "automated"
   }
  },
  "folder": "FD3rp7a4OW9fKrOc",

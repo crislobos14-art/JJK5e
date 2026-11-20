@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.36.0 — Técnica por técnica: Clone
+- **Divide and Conquer**: el clon gratis (acción adicional) y el clon extra de iniciativa 20 crean tokens reales como One Man Army.
+- **Four is a Party**: intercambio de cuerpo con un clon (1 CE).
+- **Object Cloning**: cuatro acciones según el objeto (4/6/8/10 CE; +2 CE por tamaño sobre Mediano).
+- One Man Army y Twice the Fun ya creaban clones (sin cambios).
+- Automatizados a mano: 44/360. Sin probar en Foundry real.
+
 ## 1.35.0 — Técnica por técnica: Body Manipulation y Centipede Shroud
 - **Graverobber**: transferencia durante descanso largo (1 CE), prueba de Perspicacia CD 30 para descubrirte.
 - **Brain Manipulation**: 8d8 psíquico y disrupción neural 1 minuto con CON repetida al final de su turno.

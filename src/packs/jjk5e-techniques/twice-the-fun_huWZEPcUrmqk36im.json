@@ -103,7 +103,9 @@
    "spellFrom": "feat",
    "ceSteps": {
     "oZYzniqWJTsImkZe": 3
-   }
+   },
+   "automationNotes": "Clone tokens are created on the scene by the module (HP 1/4, 1/2 at 6th, full at 11th; 8 hours).",
+   "automation": "automated"
   }
  },
  "folder": "FD3rp7a4OW9fKrOc",

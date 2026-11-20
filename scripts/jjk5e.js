@@ -690,6 +690,7 @@ function validateTokenSwap(activity) {
 }
 
 function isCloneCreation(activity) {
+  if (activity?.item?.flags?.jjk5e?.cloneSpawn?.[activity.id]) return true;
   return activity?.item?.flags?.jjk5e?.technique === "Clone" &&
     ["One Man Army", "Twice the Fun"].includes(baseName(activity.item));
 }
