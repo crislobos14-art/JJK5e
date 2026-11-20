@@ -340,9 +340,12 @@ function findPool(actor) {
 }
 
 function poolValue(pool) {
+  if (!pool) return 0;
   const uses = pool.system.uses ?? {};
-  if (Number.isFinite(uses.value)) return uses.value;
-  return (Number(uses.max) || 0) - (Number(uses.spent) || 0);
+  // D&D5e 6.1 UsesField.spent is INTEGER ONLY. Store sub-unit spending in
+  // jjk5e flags, otherwise Six Eyes 0.1-CE costs silently disappear.
+  const frac = Number(pool.flags?.jjk5e?.fractionalSpent) || 0;
+  return Math.max(0, Math.round((poolMax(pool) - (Number(uses.spent) || 0) - frac) * 1000) / 1000);
 }
 
 function poolMax(pool) {
@@ -395,7 +398,10 @@ async function doSpendCE(actor, amount, label = "") {
     ui.notifications.warn(t("Notify.NotEnoughCE", { value: previous, cost: charge }));
     return false;
   }
-  await pool.update({ "system.uses.spent": result.spent }, { jjk5eCE: true });
+  const whole = Math.floor(result.spent + 1e-6);
+  const fractional = Math.max(0, Math.round((result.spent - whole) * 1000) / 1000);
+  await pool.update({ "system.uses.spent": whole,
+    "flags.jjk5e.fractionalSpent": fractional }, { jjk5eCE: true });
   if (discount && actor.getFlag(MODULE_ID, "sixEyesNext")) await actor.unsetFlag(MODULE_ID, "sixEyesNext");
   if (setting("ceChat")) {
     const verb = charge >= 0 ? `−${charge}` : `+${-charge}`;
@@ -456,7 +462,8 @@ async function onActorUpdate(actor, changes, options, userId) {
   const pool = findPool(actor);
   if (!pool) return;
   const max = poolMax(pool);
-  await pool.update({ "system.uses.spent": clamp(max - Number(v), 0, max) }, { jjk5eSync: true });
+  await pool.update({ "system.uses.spent": Math.floor(clamp(max - Number(v), 0, max)),
+    "flags.jjk5e.fractionalSpent": Math.max(0, (max - Number(v)) % 1) }, { jjk5eSync: true });
 }
 
 /* -------------------------------------------- */
@@ -1730,7 +1737,12 @@ Hooks.once("ready", async () => {
 
   Hooks.on("updateCombat", () => expireEffects());
   Hooks.on("dnd5e.restCompleted", async (actor, result) => {
-    if (!actor?.isOwner || result?.longRest) return;
+    if (!actor?.isOwner) return;
+    if (result?.longRest) {
+      const pool = findPool(actor);
+      if (pool && Number(pool.flags?.jjk5e?.fractionalSpent)) await pool.setFlag(MODULE_ID, "fractionalSpent", 0);
+      return;
+    }
     const n = actor.items.reduce((tot, i) => tot + (Number(i.flags?.jjk5e?.srRegainCE) || 0), 0);
     if (n > 0 && findPool(actor)) await spendCE(actor, -n, t("CE.ShortRestRestore", { n }));
   });
