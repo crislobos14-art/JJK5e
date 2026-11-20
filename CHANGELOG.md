@@ -1,5 +1,28 @@
 # Changelog
 
+## 1.23.0 — V6 audit hardening (partial remediation)
+- Security: player-sent privileged GM socket operations disabled by default. Optional GM approval with action allowlist; client-reported identity remains untrusted.
+- CE: reject unaffordable costs; validate scaling before activity consumption; serialize same-client CE updates; prevent vow-prohibited spending.
+- Six Eyes: implement the next-CE 90% discount and permanent Awakened discount. Store fractional CE separately because D&D5e 6.1 item-use counters require integers.
+- Black Flash: use the second d20's natural face; link pending triple-critical dice to the originating activity; restore the RCT healing pool when The Zone is gained.
+- Short rests: recover 1 CE per actually expended class Hit Die (maximum half total hit dice). Manual confirmation required.
+- Binding vows: block CE and innate-technique activities while the corresponding penalty applies; track and expire the ten-day exhaustion punishment on world-time updates.
+- Domains: constrain sure-hit to inside eligible targets with Midi-QOL; permit lethal/non-lethal status via domain HUD; avoid falsely resolving 3+ domain clashes as a two-person duel.
+- Requirements: configurable strict feat prerequisite enforcement for players; confirm a change of innate technique and remove old technique items.
+- Maximum Output: enforce CE score >= 20 and reject unaffordable bonus costs (benefit modifiers still require manual handling).
+- Content corrections (also synced to JSON fallback data): Creeps and Curses Overgeneration fixed DC 20 / 60 ft charm without incapacitation; Cursed Lover Dormant summoning is an action; Vengeful Spirit Partial Manifestation uses an additional attack in the Attack action.
+- Quality: a pure mechanics helper module, Node regression tests, GitHub Actions JSON/syntax validation, and compendium build smoke test.
+
+IMPORTANT — KNOWN LIMITATIONS IN 1.23.0
+- This release is a limited, auditable corrective update, NOT a full-rule automation or validation of all 1,401 compendium entries.
+- Full Maximum Output benefits, Reduced Output die/area/duration effects, GM-guided outside-domain displacement, 3+ domain clash automation, all unique cursed techniques, and remaining Creeps and Curses special rules are still pending.
+- The safe multi-clash behavior is to stop automatic resolution and ask the GM; it is not automated yet.
+- Per-client CE serialization is not cross-client atomicity. Multiplayer concurrency and Foundry UI integration still require in-world tests.
+- Foundry 14 / D&D5e 6.1 / Midi-QOL actual gameplay testing has not been performed in this CI environment.
+- With D&D5e's integer UsesField, the item-use UI may display rounded CE; the module tracks fractional spending in flags and its own CE display.
+- The module still uses a prototype override for spell-slot behavior and has not been fully refactored.
+
+
 ## 1.22.2
 - Fixed: techniques that spend extra Cursed Energy ("1+ CE") asked for spell slots instead of the extra CE, so the
   extra damage could not be chosen. Technique spells no longer use spell slots at all.
