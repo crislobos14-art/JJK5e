@@ -1539,6 +1539,144 @@ def cursed_corpse_creation(S):
     mark(pz)
 
 
+def cursed_spirit_manipulation(S):
+    r120 = {"value": "120", "units": "ft", "override": True}
+    a = S.get("Cursed Spirit Absorption")
+    act(a, "5vgr5IVvwIXwGnMd", "utility", "Absorb a cursed spirit (1 CE, action/reaction)", "reaction", range=r120, target=one_creature())
+    a["system"]["activities"]["5vgr5IVvwIXwGnMd"]["activation"]["condition"] = "A cursed spirit at 0 HP, or CR below your proficiency bonus"
+    note(a, "Summon a stored spirit: action, CE = its CR. The CON save activity is the eating save.")
+    mark(a)
+
+    ci = S.get("Curse Infused Spirits")
+    sac = act(ci, "aZSGsRETuS1H0fLZ", "heal", "Sacrifice a spirit: reduce damage (X CE)", "reaction", range=RANGE_SELF, target=SELF,
+              healing={"number": 1, "denomination": 20, "bonus": "", "types": ["temphp"],
+                       "custom": {"enabled": False, "formula": ""}, "scaling": {"mode": "whole", "number": 1}})
+    sac["useConditionText"] = 'reaction === "isDamaged"'
+    sac["activation"]["condition"] = "X = sacrificed spirit's CR (scale the usage); the d20s soak the incoming damage"
+    cost(ci, sac, 1, 1)
+    note(ci, "Spirits: +CE mod to STR/DEX/CON, full HP on short rest, immune charmed/frightened (apply on their actors).")
+    mark(ci)
+
+    pc = S.get("Perfect Control")
+    act(pc, "oBmcLc9J65fFoJg4", "utility", "Summon cursed spirit (bonus action)", "bonus", range={"value": "30", "units": "ft", "override": True}, target=SELF)
+    note(pc, "Spirit summon cost is reduced by your CE modifier (min 1); 20 spirits before the WIS save.")
+    mark(pc)
+
+    u = S.get("Maximum: Uzumaki")
+    ua = u["system"]["activities"]["21BCJjjeljm7BkO9"]
+    ua["name"] = "Uzumaki (2+ spirits)"
+    ua["target"] = sphere(30, kind="cone")
+    ua["damage"] = {"onSave": "half", "parts": [dice(2, 12, ["necrotic"], scale=1)]}
+    ua["activation"]["condition"] = "Scale +1 per spirit above 2: +1d12 (add 5 ft to the cone by hand)"
+    mark(u)
+
+    d = S.get("Domain Expansion: Womb Profusion")
+    ab = d["system"]["activities"]["UvragSJbMzkhBjsI"]
+    ab["target"] = {"affects": {"type": "enemy", "choice": True}, "override": True}
+    free(d, ab)
+    note(d, "Difficult terrain in the domain; your spirits cost no CE; enemy spirits save CHA at turn start or are absorbed.")
+    mark(d)
+
+    an = S.get("Cursed Spirit Annihilation")
+    aa = an["system"]["activities"]["iDDMRSZhS7reJKiU"]
+    aa["range"], aa["target"] = {"value": "60", "units": "ft", "override": True}, one_creature()
+    eid = fx(an, "die", "Annihilated", statuses=["dead"], desc="Overloaded with positive energy and destroyed.")
+    apply(aa, eid)
+    cost(an, aa, 1, 1)
+    aa["activation"]["condition"] = "CE = half the spirit's CR (rounded up); only if its HP ≤ 4 × CE mod × prof"
+    mark(an)
+
+
+def cursed_transmutation(S):
+    touch = {"value": "5", "units": "ft", "override": True}
+    b = S.get("Basic Transmutation")
+    bb = b["system"]["activities"]["2q42DDn3IAl5Gug3"]
+    bb["range"] = touch
+    bb["target"] = {"template": {"type": "cube", "size": "5", "units": "ft", "count": "1", "contiguous": True},
+                    "affects": {"type": "", "choice": False}, "override": True}
+    cost(b, bb, 1, 1, "max(@abilities.wis.mod, @abilities.cha.mod)")
+    note(b, "One 5-ft cube per CE (metal +1 CE per cube); cover, difficult terrain, walls, platforms.")
+    mark(b)
+
+    c = S.get("Chemical Formulae")
+    c["effects"] = [e for e in c.get("effects", []) if e["_id"] != "o5FRr5zmHXVSM4Ng"]
+    ex = c["system"]["activities"]["71OpcvHoIIoXxl4s"]
+    ex["name"] = "Transmute Explosion (on hit, 2 CE)"
+    ex["activation"]["type"] = "special"
+    ex["useConditionText"] = 'reaction === "isHit"'
+    ex["target"] = one_creature()
+    ex["damage"] = {"onSave": "half", "parts": [dice(2, 6, ["fire"])]}
+    scale(c, ex, [[1, "2d6"], [6, "3d6"], [11, "4d6"], [18, "6d6"]])
+    sh = c["system"]["activities"]["vXAXQp4RV4HyCbqB"]
+    sh["name"] = "Shell (X CE): 5 temp HP per CE"
+    sh["range"], sh["target"] = RANGE_SELF, SELF
+    sh["useConditionText"] = 'reaction === "isAttacked"'
+    for key, name, n, ch in [
+        ("harden", "Harden (2 CE)", "Harden", [("system.attributes.ac.bonus", 2, "+4")]),
+        ("slick", "Slick (2 CE)", "Slick", [("system.attributes.movement.walk", 2, "+20")]),
+    ]:
+        a = act(c, key, "utility", name, "reaction", range=RANGE_SELF, target=SELF)
+        if key == "harden": a["useConditionText"] = 'reaction === "isAttacked"'
+        apply(a, fx(c, key, n, changes=ch, special=["turnStartSource"],
+                    desc=n + (": +4 AC" if key == "harden" else ": +20 ft speed, no opportunity attacks") + " until your turn."))
+        cost(c, a, 2)
+    mark(c)
+
+    ar = S.get("Areal Transmute")
+    sl = ar["system"]["activities"]["2UD59HgF24X60TJX"]
+    sl["name"] = "Slippery (6 CE)"
+    sl["target"] = sphere(30)
+    boom = ar["system"]["activities"]["AtIu9kGGzCe2w3Fr"]
+    boom["name"] = "Explosive: detonate (next turn)"
+    boom["target"] = sphere(30)
+    boom["damage"] = {"onSave": "half", "parts": [dice(4, 6, ["fire"])]}
+    scale(ar, boom, [[1, "4d6"], [11, "6d6"], [18, "8d6"]])
+    free(ar, boom)
+    sp = act(ar, "spikey", "damage", "Spikey: 2d4 per 5 ft walked", "special",
+             damage={"parts": [dice(2, 4, ["piercing"])]}, target=one_creature())
+    free(ar, sp)
+    note(ar, "Pick one: Slippery (DEX or prone), Explosive (set now with the 6 CE, detonate next turn), "
+             "Spikey, or Shifting (difficult terrain). The 6 CE is charged on Slippery; use it for the others too.")
+    mark(ar)
+
+    rg = S.get("Maximum: Railgun")
+    ra = rg["system"]["activities"]["IM9qKBX6wgzaffo1"]
+    ra["range"] = {"value": "120", "units": "ft", "override": True}
+    ra.setdefault("midiProperties", {})["otherActivityCompatible"] = True
+    push = rg["system"]["activities"]["9GVsHWBEldEVcJvW"]
+    trigger(ra, push, "hitTargets")
+    imp = act(rg, "impact", "damage", "Impact with object: 2d12", "special", damage={"parts": [dice(2, 12, ["bludgeoning"])]}, target=one_creature())
+    free(rg, imp)
+    path = act(rg, "path", "save", "Creatures in the path (DEX)", "special",
+               save={"ability": ["dex"], "dc": {"calculation": "spellcasting", "formula": ""}},
+               damage={"onSave": "half", "parts": [dice(4, 12, ["thunder"])]},
+               target={"template": {"type": "line", "size": "120", "width": "5", "units": "ft", "count": "1", "contiguous": False},
+                       "affects": {"type": "creature", "choice": True}, "override": True})
+    free(rg, path)
+    note(rg, "Half damage on a miss (roll damage anyway). Hit triggers the STR save: push 30 ft and prone.")
+    mark(rg)
+
+    dm = S.get("Domain Expansion: Mandala of Dependant Origination")
+    i20 = act(dm, "init20", "save", "Initiative 20: domain-wide Slippery", "special",
+              save={"ability": ["dex"], "dc": {"calculation": "spellcasting", "formula": ""}},
+              damage={"onSave": "none", "parts": []}, target={"affects": {"type": "enemy", "choice": True}, "override": True})
+    apply(i20, fx(dm, "prone", "Prone (Mandala)", statuses=["prone"]))
+    free(dm, i20)
+    note(dm, "Any Areal Transmute may be chosen instead; Transmute Self works on willing creatures in the domain.")
+    mark(dm)
+
+    im = S.get("Cursed Immutation")
+    ia = act(im, "L3G1u2szCEVZuHDz", "heal", "Cursed Immutation (CE up to 2× mod)", "action", range=touch, target=one_creature(),
+             healing={"number": None, "denomination": None, "bonus": "", "types": ["temphp"],
+                      "custom": {"enabled": True, "formula": "(@scaling)d8 + @abilities.con.mod"}, "scaling": {}})
+    cost(im, ia, 1, 1, "2 * max(@abilities.wis.mod, @abilities.cha.mod)")
+    apply(ia, fx(im, "imm", "Immutable", rounds=600,
+                 changes=[("flags.midi-qol.advantage.ability.save.all", 0, "1")],
+                 desc="While the temp HP last: immune to limb damage, advantage on saves against form-altering effects (the module grants all saves; remove when the temp HP are gone)."))
+    note(im, "Temp HP formula approximates RCT healing (1d8 per CE + CON); adjust if your RCT table differs.")
+    mark(im)
+
+
 TECHNIQUES = {"Antigravity System": antigravity_system,
               "Auspicious Beast Summon": auspicious_beast_summon,
               "Black Bird Manipulation": black_bird_manipulation,
@@ -1555,7 +1693,9 @@ TECHNIQUES = {"Antigravity System": antigravity_system,
               "Contractual Recreation": contractual_recreation,
               "Cursed Cannon": cursed_cannon,
               "Cursed Circuitry": cursed_circuitry,
-              "Cursed Corpse Creation": cursed_corpse_creation}
+              "Cursed Corpse Creation": cursed_corpse_creation,
+              "Cursed Spirit Manipulation": cursed_spirit_manipulation,
+              "Cursed Transmutation": cursed_transmutation}
 
 if __name__ == "__main__":
     args = sys.argv[1:]

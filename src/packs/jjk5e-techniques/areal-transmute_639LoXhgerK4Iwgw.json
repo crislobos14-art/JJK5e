@@ -19,7 +19,7 @@
    "2UD59HgF24X60TJX": {
     "_id": "2UD59HgF24X60TJX",
     "type": "save",
-    "name": "Action (6 CE)",
+    "name": "Slippery (6 CE)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -39,6 +39,17 @@
      "override": true
     },
     "target": {
+     "template": {
+      "type": "radius",
+      "size": "30",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
      "override": true
     },
     "duration": {
@@ -68,7 +79,7 @@
    "AtIu9kGGzCe2w3Fr": {
     "_id": "AtIu9kGGzCe2w3Fr",
     "type": "save",
-    "name": "Action",
+    "name": "Explosive: detonate (next turn)",
     "sort": 100000,
     "activation": {
      "type": "action",
@@ -88,6 +99,17 @@
      "override": true
     },
     "target": {
+     "template": {
+      "type": "radius",
+      "size": "30",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
      "override": true
     },
     "duration": {
@@ -117,9 +139,62 @@
         "enabled": false,
         "formula": ""
        },
-       "scaling": {
-        "number": 1
-       }
+       "scaling": {}
+      }
+     ]
+    }
+   },
+   "edoqkvmUr3XhiaFD": {
+    "_id": "edoqkvmUr3XhiaFD",
+    "type": "damage",
+    "name": "Spikey: 2d4 per 5 ft walked",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "damage": {
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 4,
+       "bonus": "",
+       "types": [
+        "piercing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
       }
      ]
     }
@@ -165,7 +240,25 @@
    },
    "technique": "Cursed Transmutation",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "dmgScale": {
+    "AtIu9kGGzCe2w3Fr": [
+     [
+      1,
+      "4d6"
+     ],
+     [
+      11,
+      "6d6"
+     ],
+     [
+      18,
+      "8d6"
+     ]
+    ]
+   },
+   "automationNotes": "Pick one: Slippery (DEX or prone), Explosive (set now with the 6 CE, detonate next turn), Spikey, or Shifting (difficult terrain). The 6 CE is charged on Slippery; use it for the others too.",
+   "automation": "automated"
   }
  },
  "effects": [

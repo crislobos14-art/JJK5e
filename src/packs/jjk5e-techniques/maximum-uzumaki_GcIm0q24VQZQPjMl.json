@@ -19,12 +19,12 @@
    "21BCJjjeljm7BkO9": {
     "_id": "21BCJjjeljm7BkO9",
     "type": "save",
-    "name": "Action",
+    "name": "Uzumaki (2+ spirits)",
     "sort": 0,
     "activation": {
      "type": "action",
      "value": 1,
-     "condition": "",
+     "condition": "Scale +1 per spirit above 2: +1d12 (add 5 ft to the cone by hand)",
      "override": true
     },
     "consumption": {
@@ -137,7 +137,8 @@
   "jjk5e": {
    "technique": "Cursed Spirit Manipulation",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "f8ljC8WN5acnKcA4",

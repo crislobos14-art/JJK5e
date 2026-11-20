@@ -23,26 +23,59 @@
   "activities": {
    "L3G1u2szCEVZuHDz": {
     "_id": "L3G1u2szCEVZuHDz",
-    "type": "utility",
-    "name": "Action",
+    "type": "heal",
+    "name": "Cursed Immutation (CE up to 2× mod)",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "action",
      "value": 1,
-     "condition": ""
+     "condition": "",
+     "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
-     }
+      "allowed": true,
+      "max": "2 * max(@abilities.wis.mod, @abilities.cha.mod)"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
-     "units": "self"
+     "value": "5",
+     "units": "ft",
+     "override": true
     },
-    "target": {},
-    "duration": {
-     "units": "inst"
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "f0kQrezFHPBqKjCC",
+      "onSave": false
+     }
+    ],
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "",
+     "types": [
+      "temphp"
+     ],
+     "custom": {
+      "enabled": true,
+      "formula": "(@scaling)d8 + @abilities.con.mod"
+     },
+     "scaling": {}
     }
    }
   }
@@ -63,10 +96,47 @@
       "Cursed Transmutation"
      ]
     ]
-   }
+   },
+   "ceCosts": {
+    "L3G1u2szCEVZuHDz": 1
+   },
+   "ceSteps": {
+    "L3G1u2szCEVZuHDz": 1
+   },
+   "automationNotes": "Temp HP formula approximates RCT healing (1d8 per CE + CON); adjust if your RCT table differs.",
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!9AwHd7nOpVqbOisO"
+ "_key": "!items!9AwHd7nOpVqbOisO",
+ "effects": [
+  {
+   "_id": "f0kQrezFHPBqKjCC",
+   "name": "Immutable",
+   "img": "modules/jjk5e/icons/techniques/cursed-transmutation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>While the temp HP last: immune to limb damage, advantage on saves against form-altering effects (the module grants all saves; remove when the temp HP are gone).</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.advantage.ability.save.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 600
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Cursed Transmutation"
+    }
+   },
+   "_key": "!items.effects!9AwHd7nOpVqbOisO.f0kQrezFHPBqKjCC"
+  }
+ ]
 }

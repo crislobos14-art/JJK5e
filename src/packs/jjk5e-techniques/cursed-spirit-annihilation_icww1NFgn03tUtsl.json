@@ -29,23 +29,27 @@
     "activation": {
      "type": "reaction",
      "value": 1,
-     "condition": ""
+     "condition": "CE = half the spirit's CR (rounded up); only if its HP ≤ 4 × CE mod × prof"
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": ""
      }
     },
     "range": {
      "value": "60",
-     "units": "ft"
+     "units": "ft",
+     "override": true
     },
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
-     }
+      "count": "1",
+      "choice": true
+     },
+     "override": true
     },
     "duration": {
      "units": "inst"
@@ -63,7 +67,13 @@
      "onSave": "none",
      "parts": []
     },
-    "useConditionText": "false"
+    "useConditionText": "false",
+    "effects": [
+     {
+      "_id": "NxPScll2f5CgjgtX",
+      "onSave": false
+     }
+    ]
    }
   }
  },
@@ -83,10 +93,41 @@
       "Cursed Spirit Manipulation"
      ]
     ]
-   }
+   },
+   "ceCosts": {
+    "iDDMRSZhS7reJKiU": 1
+   },
+   "ceSteps": {
+    "iDDMRSZhS7reJKiU": 1
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!icww1NFgn03tUtsl"
+ "_key": "!items!icww1NFgn03tUtsl",
+ "effects": [
+  {
+   "_id": "NxPScll2f5CgjgtX",
+   "name": "Annihilated",
+   "img": "modules/jjk5e/icons/techniques/cursed-spirit-manipulation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [
+    "dead"
+   ],
+   "description": "<p>Overloaded with positive energy and destroyed.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Cursed Spirit Manipulation"
+    }
+   },
+   "_key": "!items.effects!icww1NFgn03tUtsl.NxPScll2f5CgjgtX"
+  }
+ ]
 }

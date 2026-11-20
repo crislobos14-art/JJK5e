@@ -19,10 +19,10 @@
    "71OpcvHoIIoXxl4s": {
     "_id": "71OpcvHoIIoXxl4s",
     "type": "save",
-    "name": "Action (2 CE)",
+    "name": "Transmute Explosion (on hit, 2 CE)",
     "sort": 0,
     "activation": {
-     "type": "action",
+     "type": "special",
      "value": 1,
      "condition": "",
      "override": true
@@ -39,6 +39,11 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -68,17 +73,16 @@
         "enabled": false,
         "formula": ""
        },
-       "scaling": {
-        "number": 1
-       }
+       "scaling": {}
       }
      ]
-    }
+    },
+    "useConditionText": "reaction === \"isHit\""
    },
    "vXAXQp4RV4HyCbqB": {
     "_id": "vXAXQp4RV4HyCbqB",
     "type": "heal",
-    "name": "Reaction (2+ CE)",
+    "name": "Shell (X CE): 5 temp HP per CE",
     "sort": 100000,
     "activation": {
      "type": "reaction",
@@ -95,10 +99,13 @@
      "spellSlot": false
     },
     "range": {
-     "units": "spec",
+     "units": "self",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
@@ -121,7 +128,90 @@
       "formula": "5"
      }
     },
-    "useConditionText": "false"
+    "useConditionText": "reaction === \"isAttacked\""
+   },
+   "Ey0Oqh6SLzT1rcMR": {
+    "_id": "Ey0Oqh6SLzT1rcMR",
+    "type": "utility",
+    "name": "Harden (2 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "k91yNEE4YSESfIzW",
+      "onSave": false
+     }
+    ],
+    "useConditionText": "reaction === \"isAttacked\""
+   },
+   "hu5HV6g6tZYBf8Vu": {
+    "_id": "hu5HV6g6tZYBf8Vu",
+    "type": "utility",
+    "name": "Slick (2 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "wdTNIPTGz7SFzmpu",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -164,37 +254,101 @@
    },
    "ceCosts": {
     "71OpcvHoIIoXxl4s": 2,
-    "vXAXQp4RV4HyCbqB": 2
+    "vXAXQp4RV4HyCbqB": 2,
+    "Ey0Oqh6SLzT1rcMR": 2,
+    "hu5HV6g6tZYBf8Vu": 2
    },
    "technique": "Cursed Transmutation",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "dmgScale": {
+    "71OpcvHoIIoXxl4s": [
+     [
+      1,
+      "2d6"
+     ],
+     [
+      6,
+      "3d6"
+     ],
+     [
+      11,
+      "4d6"
+     ],
+     [
+      18,
+      "6d6"
+     ]
+    ]
+   },
+   "automation": "automated"
   }
  },
  "folder": "mZ3PzIRAkGl7SSou",
  "effects": [
   {
-   "_id": "o5FRr5zmHXVSM4Ng",
-   "name": "Chemical Formulae (toggle)",
+   "_id": "k91yNEE4YSESfIzW",
+   "name": "Harden",
    "img": "modules/jjk5e/icons/techniques/cursed-transmutation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Harden: +4 AC until your turn.</p>",
    "changes": [
     {
      "key": "system.attributes.ac.bonus",
      "mode": 2,
      "value": "+4",
-     "priority": null
+     "priority": 20
     }
    ],
-   "transfer": true,
-   "disabled": true,
-   "duration": {},
-   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "duration": {
+    "rounds": 1
+   },
    "flags": {
     "jjk5e": {
-     "auto": "toggle"
+     "technique": "Cursed Transmutation"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStartSource"
+     ]
     }
    },
-   "_key": "!items.effects!EK3gaDikW90ogzkX.o5FRr5zmHXVSM4Ng"
+   "_key": "!items.effects!EK3gaDikW90ogzkX.k91yNEE4YSESfIzW"
+  },
+  {
+   "_id": "wdTNIPTGz7SFzmpu",
+   "name": "Slick",
+   "img": "modules/jjk5e/icons/techniques/cursed-transmutation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Slick: +20 ft speed, no opportunity attacks until your turn.</p>",
+   "changes": [
+    {
+     "key": "system.attributes.movement.walk",
+     "mode": 2,
+     "value": "+20",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Cursed Transmutation"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStartSource"
+     ]
+    }
+   },
+   "_key": "!items.effects!EK3gaDikW90ogzkX.wdTNIPTGz7SFzmpu"
   }
  ],
  "_key": "!items!EK3gaDikW90ogzkX"

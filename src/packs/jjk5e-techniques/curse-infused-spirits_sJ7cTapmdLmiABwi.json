@@ -18,34 +18,56 @@
   "activities": {
    "aZSGsRETuS1H0fLZ": {
     "_id": "aZSGsRETuS1H0fLZ",
-    "type": "utility",
-    "name": "Reaction",
+    "type": "heal",
+    "name": "Sacrifice a spirit: reduce damage (X CE)",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "reaction",
      "value": 1,
-     "condition": "",
+     "condition": "X = sacrificed spirit's CR (scale the usage); the d20s soak the incoming damage",
      "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": ""
      },
      "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
      "units": "self",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
-    "duration": {
-     "units": "inst",
-     "override": true
+    "effects": [],
+    "healing": {
+     "number": 1,
+     "denomination": 20,
+     "bonus": "",
+     "types": [
+      "temphp"
+     ],
+     "custom": {
+      "enabled": false,
+      "formula": ""
+     },
+     "scaling": {
+      "mode": "whole",
+      "number": 1
+     }
     },
-    "useConditionText": "false"
+    "useConditionText": "reaction === \"isDamaged\""
    }
   },
   "uses": {
@@ -85,7 +107,15 @@
   "jjk5e": {
    "technique": "Cursed Spirit Manipulation",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceCosts": {
+    "aZSGsRETuS1H0fLZ": 1
+   },
+   "ceSteps": {
+    "aZSGsRETuS1H0fLZ": 1
+   },
+   "automationNotes": "Spirits: +CE mod to STR/DEX/CON, full HP on short rest, immune charmed/frightened (apply on their actors).",
+   "automation": "automated"
   }
  },
  "folder": "f8ljC8WN5acnKcA4",

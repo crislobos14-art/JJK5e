@@ -88,7 +88,8 @@
      "triggeredActivityTargets": "hitTargets",
      "triggeredActivityRollAs": "self",
      "triggeredActivityConsume": false,
-     "triggeredActivityConfigure": false
+     "triggeredActivityConfigure": false,
+     "triggeredActivityConditionText": ""
     }
    },
    "9GVsHWBEldEVcJvW": {
@@ -144,6 +145,133 @@
      "onSave": "none",
      "parts": []
     }
+   },
+   "8FBCMDgV3Oy0QxUa": {
+    "_id": "8FBCMDgV3Oy0QxUa",
+    "type": "damage",
+    "name": "Impact with object: 2d12",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "damage": {
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 12,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
+   },
+   "89mCCjghabhxdGtS": {
+    "_id": "89mCCjghabhxdGtS",
+    "type": "save",
+    "name": "Creatures in the path (DEX)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "line",
+      "size": "120",
+      "width": "5",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 4,
+       "denomination": 12,
+       "bonus": "",
+       "types": [
+        "thunder"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
    }
   },
   "uses": {
@@ -193,7 +321,9 @@
    },
    "technique": "Cursed Transmutation",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Half damage on a miss (roll damage anyway). Hit triggers the STR save: push 30 ft and prone.",
+   "automation": "automated"
   }
  },
  "effects": [

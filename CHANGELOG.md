@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.43.0 — Técnica por técnica: Cursed Spirit Manipulation y Cursed Transmutation
+- **Cursed Spirit Manipulation**: absorción a 120 pies, sacrificio de espíritu como reacción al recibir daño (Xd20), invocación como acción adicional, Uzumaki en cono 30 pies con +1d12 por espíritu extra, Womb Profusion sin coste de absorción, Annihilation con estado muerto.
+- **Cursed Transmutation**: transmutación básica en cubos con CE escalable; Transmute Explosion al impactar (2d6→6d6); Harden/Shell/Slick como reacciones; Areal Transmute (resbaladizo, explosivo 4d6→8d6, púas); Railgun con empuje y derribo automático al impactar, impacto y línea de 4d12; dominio con resbaladizo global; Cursed Immutation con PG temporales.
+- Automatizados a mano: 75/360. Sin probar en Foundry real.
+
 ## 1.42.0 — Técnica por técnica: Cursed Corpse Creation
 - **Cursed Corpse Creation**: acción de imbuir núcleo a un objetivo.
 - **Corpse Tactics**: 5 tácticas como actividades sin coste (ventaja, +1 dado de daño, esquivar, retirada, carrera) hasta tu siguiente turno.

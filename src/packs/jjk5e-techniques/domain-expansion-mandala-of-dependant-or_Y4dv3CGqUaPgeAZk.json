@@ -58,6 +58,61 @@
      "concentration": false,
      "override": true
     }
+   },
+   "4i3XvqQROHCh2yK8": {
+    "_id": "4i3XvqQROHCh2yK8",
+    "type": "save",
+    "name": "Initiative 20: domain-wide Slippery",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "enemy",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "J3VdwmZIG3gJAj4T",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
    }
   },
   "uses": {
@@ -116,9 +171,35 @@
     "Wv0rgb6DlzxFgTTW": 20
    },
    "domainActivity": "Wv0rgb6DlzxFgTTW",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Any Areal Transmute may be chosen instead; Transmute Self works on willing creatures in the domain.",
+   "automation": "automated"
   }
  },
  "folder": "mZ3PzIRAkGl7SSou",
- "_key": "!items!Y4dv3CGqUaPgeAZk"
+ "_key": "!items!Y4dv3CGqUaPgeAZk",
+ "effects": [
+  {
+   "_id": "J3VdwmZIG3gJAj4T",
+   "name": "Prone (Mandala)",
+   "img": "modules/jjk5e/icons/techniques/cursed-transmutation-domain.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [
+    "prone"
+   ],
+   "description": "",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Cursed Transmutation"
+    }
+   },
+   "_key": "!items.effects!Y4dv3CGqUaPgeAZk.J3VdwmZIG3gJAj4T"
+  }
+ ]
 }

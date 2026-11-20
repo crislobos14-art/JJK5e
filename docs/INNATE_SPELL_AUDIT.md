@@ -3,13 +3,13 @@
 > Generado desde el compendio y las fuentes. **No certifica ejecución en Foundry ni fidelidad semántica a cada regla**.
 
 - Spells examinados: **360**; técnicas agrupadas: **81**.
-- Utilidad sin efecto configurado: revisar lógica: **94**.
+- Utilidad sin efecto configurado: revisar lógica: **91**.
 - Utilidad con efecto: comprobar activación: **15**.
-- Dominio genérico: resolver propiedades particulares: **44**.
+- Dominio genérico: resolver propiedades particulares: **43**.
 - Salvación sin daño/efecto automático: **25**.
 - Ataque sin daño propio: comprobar intención: **10**.
-- Mecánica configurada; falta prueba Foundry: **105**.
-- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **67**.
+- Mecánica configurada; falta prueba Foundry: **101**.
+- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **75**.
 
 ## Interpretación
 
@@ -177,21 +177,21 @@
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Cursed Spirit Absorption | 1 | utility:Reaction (1 CE); save:Bonus Action | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/cursed-spirit-absorption_xSoW2QmMDoKA0mY2.json) |
-| Curse Infused Spirits | 3 | utility:Reaction | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/curse-infused-spirits_sJ7cTapmdLmiABwi.json) |
-| Perfect Control | 6 | utility:Bonus Action | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/perfect-control_W0HmlfoJxTJqDsPv.json) |
-| Maximum: Uzumaki | 11 | save:Action | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/maximum-uzumaki_GcIm0q24VQZQPjMl.json) |
+| Cursed Spirit Absorption | 1 | utility:Absorb a cursed spirit (1 CE, action/reaction); save:Bonus Action | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/cursed-spirit-absorption_xSoW2QmMDoKA0mY2.json) |
+| Curse Infused Spirits | 3 | heal:Sacrifice a spirit: reduce damage (X CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/curse-infused-spirits_sJ7cTapmdLmiABwi.json) |
+| Perfect Control | 6 | utility:Summon cursed spirit (bonus action) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/perfect-control_W0HmlfoJxTJqDsPv.json) |
+| Maximum: Uzumaki | 11 | save:Uzumaki (2+ spirits) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/maximum-uzumaki_GcIm0q24VQZQPjMl.json) |
 | Domain Expansion: Womb Profusion | 18 | utility:Expand Domain (20 CE); save:Absorb cursed spirits | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/domain-expansion-womb-profusion_F55gMSM27KKH5qPV.json) |
 
 ### Cursed Transmutation (5 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Basic Transmutation | 1 | utility:Action (1+ CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/basic-transmutation_JE38jRZe07KGrjZx.json) |
-| Chemical Formulae | 3 | save:Action (2 CE); heal:Reaction (2+ CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/chemical-formulae_EK3gaDikW90ogzkX.json) |
-| Areal Transmute | 6 | save:Action (6 CE); save:Action | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/areal-transmute_639LoXhgerK4Iwgw.json) |
-| Maximum: Railgun | 11 | attack:Action (8 CE); save:Action — save | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/maximum-railgun_7e1MLm2DCQtxl0qA.json) |
-| Domain Expansion: Mandala of Dependant Origination | 18 | utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-mandala-of-dependant-or_Y4dv3CGqUaPgeAZk.json) |
+| Basic Transmutation | 1 | utility:Action (1+ CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/basic-transmutation_JE38jRZe07KGrjZx.json) |
+| Chemical Formulae | 3 | save:Transmute Explosion (on hit, 2 CE); heal:Shell (X CE): 5 temp HP per CE; utility:Harden (2 CE); utility:Slick (2 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/chemical-formulae_EK3gaDikW90ogzkX.json) |
+| Areal Transmute | 6 | save:Slippery (6 CE); save:Explosive: detonate (next turn); damage:Spikey: 2d4 per 5 ft walked | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/areal-transmute_639LoXhgerK4Iwgw.json) |
+| Maximum: Railgun | 11 | attack:Action (8 CE); save:Action — save; damage:Impact with object: 2d12; save:Creatures in the path (DEX) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/maximum-railgun_7e1MLm2DCQtxl0qA.json) |
+| Domain Expansion: Mandala of Dependant Origination | 18 | utility:Expand Domain (20 CE); save:Initiative 20: domain-wide Slippery | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-mandala-of-dependant-or_Y4dv3CGqUaPgeAZk.json) |
 
 ### Dark Claw (5 spells)
 

@@ -19,20 +19,26 @@
    "5vgr5IVvwIXwGnMd": {
     "_id": "5vgr5IVvwIXwGnMd",
     "type": "utility",
-    "name": "Reaction (1 CE)",
+    "name": "Absorb a cursed spirit (1 CE, action/reaction)",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "reaction",
      "value": 1,
-     "condition": "",
+     "condition": "A cursed spirit at 0 HP, or CR below your proficiency bonus",
      "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
      "value": "120",
@@ -42,15 +48,12 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
-    "duration": {
-     "units": "inst",
-     "override": true
-    },
-    "useConditionText": "false"
+    "effects": []
    },
    "0SCVuTK5YT7V07aX": {
     "_id": "0SCVuTK5YT7V07aX",
@@ -144,7 +147,9 @@
    },
    "technique": "Cursed Spirit Manipulation",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Summon a stored spirit: action, CE = its CR. The CON save activity is the eating save.",
+   "automation": "automated"
   }
  },
  "folder": "f8ljC8WN5acnKcA4",
