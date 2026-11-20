@@ -9,7 +9,7 @@
  * - JJK panel on character sheets, Spanish / English UI, effect expiry (unless Times Up is active).
  */
 const MODULE_ID = "jjk5e";
-const DATA_VERSION = "1.20.0";
+const DATA_VERSION = "1.21.0";
 const FOLDER_NAME = "JJK 5e V.6";
 const ICONS = `modules/${MODULE_ID}/icons`;
 
@@ -1014,7 +1014,8 @@ function onPreRollDamage(config) {
   if (actor && config?.subject?.item?.flags?.jjk5e?.rawCE) rawCEDamageBonus(actor).forEach((p) => addPart(config, p));
   if (!setting("blackFlashDamage")) return;
   if (!actor?.getFlag?.(MODULE_ID, "pendingBlackFlash")) return;
-  const critical = config.isCritical === true || (config.rolls ?? []).some((r) => r.options?.isCritical === true);
+  const critical = config.isCritical === true || config.midiOptions?.isCritical === true
+    || (config.rolls ?? []).some((r) => r.options?.isCritical === true);
   if (!critical) return;
   for (const r of config.rolls ?? []) {
     r.options ??= {};
@@ -1582,8 +1583,10 @@ Hooks.once("ready", async () => {
   Hooks.on("deleteActiveEffect", onDeleteEffect);
   Hooks.on("preCreateItem", onPreCreateItem);
 
-  Hooks.on("dnd5e.rollAttackV2", (rolls, data) => onAttackRoll(rolls, data?.subject));
+  // With Midi-QOL the Black Flash check runs inside its workflow (awaited), see registerMidiAutomation.
+  Hooks.on("dnd5e.rollAttackV2", (rolls, data) => { if (!midiActive()) onAttackRoll(rolls, data?.subject); });
   Hooks.on("dnd5e.rollAttack", (a, b) => {
+    if (midiActive()) return;
     if (Array.isArray(a)) return onAttackRoll(a, b?.subject);
     if (b && typeof b === "object" && "isCritical" in b) return onAttackRoll(b, a?.system?.activities?.contents?.[0] ?? a);
   });
@@ -3731,7 +3734,8 @@ Hooks.once("ready", () => {
   Object.assign(game.modules.get(MODULE_ID).api, { addBreakthrough, rollRCTAwakening, regenRCTPools });
   Hooks.on("dnd5e.preCalculateDamage", (actor, damages, options) => {
     const rolls = options?.originatingMessage?.rolls ?? [];
-    if (!rolls.some((r) => r.options?.jjkBlackFlash)) return;
+    const midiCard = options?.midi?.itemCardUuid;
+    if (!rolls.some((r) => r.options?.jjkBlackFlash) && !(midiCard && midiBlackFlashCards.has(midiCard))) return;
     options.ignore ??= {};
     if (options.ignore !== true) options.ignore.resistance = true;
   });
@@ -3998,4 +4002,64 @@ Hooks.once("init", () => {
 Hooks.once("ready", () => {
   Object.assign(game.modules.get(MODULE_ID).api ?? {}, { createCharacterWizard, customizeShikigami, featFitsTechnique,
     filterItemChoiceFlow, asiOrFeatChooser, actorTechniques });
+});
+
+
+/* -------------------------------------------- */
+/*  1.21: Midi-QOL automation                    */
+/* -------------------------------------------- */
+
+/** Chat cards of Midi workflows whose damage was a Black Flash (the damage ignores resistance). */
+const midiBlackFlashCards = new Set();
+
+/** Save DC of the creature that applied an effect (for OverTime repeat saves baked into the compendium data). */
+function originSaveDC(effect) {
+  let item = null;
+  try { item = effect?.origin ? fromUuidSync(effect.origin) : null; } catch (err) { item = null; }
+  const actor = item?.actor ?? (item?.documentName === "Actor" ? item : null);
+  const dc = Number(actor?.system?.attributes?.spell?.dc) || Number(actor?.system?.attributes?.spelldc);
+  if (dc) return dc;
+  const prof = Number(actor?.system?.attributes?.prof) || 2;
+  const mod = Number(actor?.system?.abilities?.[actor ? ceAbility(actor) : "wis"]?.mod) || 0;
+  return 8 + prof + mod;
+}
+
+function resolveOverTimeDC(effect, data) {
+  const fix = (list) => (list ?? []).map((c) => (typeof c?.value === "string" && c.value.includes("##JJKDC##")
+    ? { ...c, value: c.value.replaceAll("##JJKDC##", String(originSaveDC(effect))) } : c));
+  const upd = {};
+  const top = data?.changes ?? effect?._source?.changes;
+  if (top?.some?.((c) => String(c?.value).includes("##JJKDC##"))) upd.changes = fix(top);
+  const sys = data?.system?.changes ?? effect?._source?.system?.changes;
+  if (sys?.some?.((c) => String(c?.value).includes("##JJKDC##"))) upd["system.changes"] = fix(sys);
+  if (Object.keys(upd).length) effect.updateSource(upd);
+}
+
+function registerMidiAutomation() {
+  if (!midiActive()) return;
+  // Black Flash: check after Midi's attack roll, before its damage roll (Midi awaits these hooks).
+  Hooks.on("midi-qol.AttackRollComplete", async (workflow) => {
+    try {
+      const roll = workflow?.attackRoll;
+      if (!roll) return;
+      if (workflow.isCritical && !roll.isCritical) {
+        await onAttackRoll(Object.assign(Object.create(Object.getPrototypeOf(roll)), roll, { isCritical: true }), workflow.activity);
+      } else await onAttackRoll(roll, workflow.activity);
+    } catch (err) { console.error(`${MODULE_ID} | midi black flash`, err); }
+  });
+  Hooks.on("midi-qol.DamageRollComplete", (workflow) => {
+    const rolls = workflow?.damageRolls ?? [];
+    if (rolls.some((r) => r.options?.jjkBlackFlash) && workflow.itemCardUuid) {
+      midiBlackFlashCards.add(workflow.itemCardUuid);
+      setTimeout(() => midiBlackFlashCards.delete(workflow.itemCardUuid), 120000);
+    }
+  });
+}
+
+Hooks.once("init", () => {
+  Hooks.on("preCreateActiveEffect", (effect, data) => { try { resolveOverTimeDC(effect, data); } catch (err) { console.error(`${MODULE_ID} | overtime dc`, err); } });
+});
+Hooks.once("ready", () => {
+  registerMidiAutomation();
+  Object.assign(game.modules.get(MODULE_ID).api ?? {}, { originSaveDC, resolveOverTimeDC, registerMidiAutomation });
 });

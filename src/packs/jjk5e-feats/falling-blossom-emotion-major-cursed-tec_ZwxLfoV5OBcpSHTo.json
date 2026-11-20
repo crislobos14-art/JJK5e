@@ -45,7 +45,8 @@
      "value": "1",
      "units": "minute",
      "concentration": false
-    }
+    },
+    "useConditionText": "false"
    },
    "qBFeI24c97Icjpe1": {
     "_id": "qBFeI24c97Icjpe1",

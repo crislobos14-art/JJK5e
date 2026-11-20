@@ -107,7 +107,8 @@
        }
       }
      ]
-    }
+    },
+    "useConditionText": "false"
    }
   },
   "rarity": "rare",

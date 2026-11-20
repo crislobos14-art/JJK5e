@@ -104,7 +104,8 @@
     "duration": {
      "units": "inst",
      "override": true
-    }
+    },
+    "useConditionText": "reaction === \"isAttacked\""
    }
   },
   "uses": {

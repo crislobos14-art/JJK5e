@@ -45,7 +45,8 @@
      "formula": "max(@abilities.wis.mod, @abilities.cha.mod)",
      "name": "AC bonus",
      "visible": true
-    }
+    },
+    "useConditionText": "false"
    }
   },
   "prerequisites": {

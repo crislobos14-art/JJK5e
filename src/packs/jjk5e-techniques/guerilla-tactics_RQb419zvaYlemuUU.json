@@ -57,7 +57,8 @@
     "damage": {
      "onSave": "none",
      "parts": []
-    }
+    },
+    "useConditionText": "false"
    }
   },
   "uses": {

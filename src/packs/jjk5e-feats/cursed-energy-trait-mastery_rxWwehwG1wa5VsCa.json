@@ -45,7 +45,8 @@
      "formula": "2 * max(@abilities.wis.mod, @abilities.cha.mod)",
      "name": "AC bonus",
      "visible": true
-    }
+    },
+    "useConditionText": "false"
    },
    "OAalhcbCD5UTCA78": {
     "_id": "OAalhcbCD5UTCA78",

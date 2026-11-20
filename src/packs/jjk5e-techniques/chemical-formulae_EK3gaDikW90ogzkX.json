@@ -120,7 +120,8 @@
       "mode": "whole",
       "formula": "5"
      }
-    }
+    },
+    "useConditionText": "false"
    }
   },
   "uses": {

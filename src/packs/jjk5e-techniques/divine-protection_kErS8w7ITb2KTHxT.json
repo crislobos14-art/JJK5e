@@ -44,7 +44,8 @@
     "duration": {
      "units": "inst",
      "override": true
-    }
+    },
+    "useConditionText": "reaction === \"isDamaged\""
    },
    "baCgyVARl6Q8wep5": {
     "_id": "baCgyVARl6Q8wep5",

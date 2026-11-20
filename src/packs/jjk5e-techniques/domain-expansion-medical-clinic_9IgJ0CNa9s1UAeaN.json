@@ -44,7 +44,8 @@
     "duration": {
      "units": "inst",
      "override": true
-    }
+    },
+    "useConditionText": "false"
    },
    "9TpuXLdyC6HKIOQZ": {
     "_id": "9TpuXLdyC6HKIOQZ",

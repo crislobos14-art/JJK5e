@@ -95,7 +95,8 @@
       "_id": "uXpiyQikd9SPu9Zb",
       "onSave": false
      }
-    ]
+    ],
+    "useConditionText": "reaction === \"isHit\""
    }
   },
   "rarity": "legendary",

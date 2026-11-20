@@ -65,7 +65,8 @@
       "_id": "KOVf8Ubbf6yJZ6Mt",
       "onSave": false
      }
-    ]
+    ],
+    "useConditionText": "false"
    }
   },
   "uses": {

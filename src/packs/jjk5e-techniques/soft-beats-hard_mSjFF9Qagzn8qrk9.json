@@ -69,7 +69,8 @@
     "target": {},
     "duration": {
      "units": "inst"
-    }
+    },
+    "useConditionText": "reaction === \"isAttacked\""
    }
   }
  },

@@ -62,7 +62,8 @@
       "_id": "eVx0KKoG0VVIxvRB",
       "onSave": false
      }
-    ]
+    ],
+    "useConditionText": "false"
    }
   },
   "prerequisites": {

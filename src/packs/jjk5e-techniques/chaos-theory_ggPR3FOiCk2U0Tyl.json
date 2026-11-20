@@ -45,7 +45,8 @@
      "value": "2",
      "units": "minute",
      "concentration": false
-    }
+    },
+    "useConditionText": "false"
    }
   }
  },

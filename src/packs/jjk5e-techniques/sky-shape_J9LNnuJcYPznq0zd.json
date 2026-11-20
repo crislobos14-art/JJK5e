@@ -57,7 +57,8 @@
     "damage": {
      "includeBase": false,
      "parts": []
-    }
+    },
+    "useConditionText": "false"
    }
   },
   "uses": {

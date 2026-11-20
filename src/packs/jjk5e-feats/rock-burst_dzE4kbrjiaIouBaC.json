@@ -86,7 +86,8 @@
       "_id": "eAb119fGRjrldxjy",
       "onSave": false
      }
-    ]
+    ],
+    "useConditionText": "false"
    }
   },
   "prerequisites": {

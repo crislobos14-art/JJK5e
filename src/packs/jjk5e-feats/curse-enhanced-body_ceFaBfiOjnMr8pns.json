@@ -41,7 +41,8 @@
      "formula": "1",
      "name": "Save bonus per CE",
      "visible": true
-    }
+    },
+    "useConditionText": "false"
    }
   },
   "prerequisites": {

@@ -89,7 +89,8 @@
     "duration": {
      "units": "inst",
      "override": true
-    }
+    },
+    "useConditionText": "false"
    }
   },
   "uses": {

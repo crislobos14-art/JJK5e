@@ -44,7 +44,8 @@
     "duration": {
      "units": "inst",
      "override": true
-    }
+    },
+    "useConditionText": "false"
    },
    "ueJph2JGyPKrbpjB": {
     "_id": "ueJph2JGyPKrbpjB",

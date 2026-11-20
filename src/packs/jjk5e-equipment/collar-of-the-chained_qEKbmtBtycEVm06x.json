@@ -54,7 +54,8 @@
     },
     "duration": {
      "units": "inst"
-    }
+    },
+    "useConditionText": "false"
    }
   }
  },

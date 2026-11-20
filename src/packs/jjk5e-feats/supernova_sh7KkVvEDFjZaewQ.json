@@ -84,7 +84,8 @@
       "_id": "GDRl48tIuZRciBlF",
       "onSave": false
      }
-    ]
+    ],
+    "useConditionText": "false"
    }
   },
   "prerequisites": {

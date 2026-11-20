@@ -99,7 +99,8 @@
     "damage": {
      "onSave": "half",
      "parts": []
-    }
+    },
+    "useConditionText": "false"
    }
   },
   "prerequisites": {

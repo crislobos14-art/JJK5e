@@ -127,7 +127,8 @@
     "damage": {
      "onSave": "none",
      "parts": []
-    }
+    },
+    "useConditionText": "reaction === \"isSave\""
    }
   }
  },

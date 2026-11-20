@@ -132,7 +132,14 @@
    "statuses": [
     "charmed"
    ],
-   "changes": [],
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "value": "turn=end, saveAbility=wis, saveDC=##JJKDC##, saveCount=1-, label=\"Charmed (Flower Field)\"",
+     "priority": 20
+    }
+   ],
    "transfer": false,
    "disabled": false,
    "duration": {

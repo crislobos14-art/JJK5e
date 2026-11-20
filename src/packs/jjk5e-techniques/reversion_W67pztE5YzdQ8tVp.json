@@ -62,7 +62,8 @@
     "damage": {
      "includeBase": false,
      "parts": []
-    }
+    },
+    "useConditionText": "reaction === \"isSave\""
    },
    "V1XYlDRPVyUKryna": {
     "_id": "V1XYlDRPVyUKryna",

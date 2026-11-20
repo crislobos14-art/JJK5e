@@ -49,7 +49,8 @@
       "_id": "6goaMKV3yMUlt5Fx",
       "onSave": false
      }
-    ]
+    ],
+    "useConditionText": "false"
    }
   },
   "prerequisites": {

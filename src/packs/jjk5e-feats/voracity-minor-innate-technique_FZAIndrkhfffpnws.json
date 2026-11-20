@@ -45,7 +45,8 @@
      "value": "1",
      "units": "hour",
      "concentration": false
-    }
+    },
+    "useConditionText": "false"
    },
    "Chz6aCyGXfgOXoSG": {
     "_id": "Chz6aCyGXfgOXoSG",

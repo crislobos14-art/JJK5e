@@ -46,7 +46,8 @@
      "units": "hour",
      "concentration": false,
      "override": true
-    }
+    },
+    "useConditionText": "false"
    },
    "RLvJZSjxqfsF9Swz": {
     "_id": "RLvJZSjxqfsF9Swz",

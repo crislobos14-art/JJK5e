@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.21.0
+- Midi-QOL integration (optional, Midi-QOL 14.7.0+ for dnd5e 6.1):
+  - Black Flash is checked inside Midi's workflow, after the attack roll and before damage, so its triple-dice
+    damage and resistance bypass apply with Midi's automatic damage.
+  - JJK reaction abilities have Midi reaction conditions: those used when you take damage, are attacked, are hit or
+    make/fail a saving throw are offered automatically; the rest stay manual.
+  - Conditions from techniques that allow a repeat saving throw (frightened, charmed, blinded, restrained…) get a Midi
+    OverTime save at the end of each turn, with the caster's save DC.
+
 ## 1.20.0
 - Character sheet: the JJK bar (CE, grade, vows, tools) moved into the sidebar card and its buttons now work in play mode.
 - New character creation guide (button on sheets without a class, macro and JJK menu): ability scores → class and

@@ -232,7 +232,14 @@
    "statuses": [
     "restrained"
    ],
-   "changes": [],
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "value": "turn=end, saveAbility=dex, saveDC=##JJKDC##, saveCount=1-, label=\"Restrained (Light Techniques)\"",
+     "priority": 20
+    }
+   ],
    "transfer": false,
    "disabled": false,
    "duration": {},
@@ -251,7 +258,14 @@
    "statuses": [
     "blinded"
    ],
-   "changes": [],
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "value": "turn=end, saveAbility=con, saveDC=##JJKDC##, saveCount=1-, label=\"Blinded (Light Techniques)\"",
+     "priority": 20
+    }
+   ],
    "transfer": false,
    "disabled": false,
    "duration": {},

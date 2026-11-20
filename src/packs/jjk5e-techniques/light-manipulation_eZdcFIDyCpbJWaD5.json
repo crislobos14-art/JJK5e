@@ -111,7 +111,8 @@
       "_id": "DP2DF3UP2G9hCl20",
       "onSave": false
      }
-    ]
+    ],
+    "useConditionText": "false"
    },
    "Yvnov7vqStqVLRed": {
     "_id": "Yvnov7vqStqVLRed",
@@ -196,7 +197,14 @@
    "statuses": [
     "blinded"
    ],
-   "changes": [],
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "value": "turn=end, saveAbility=con, saveDC=##JJKDC##, saveCount=1-, label=\"Blinded (Light Manipulation)\"",
+     "priority": 20
+    }
+   ],
    "transfer": false,
    "disabled": false,
    "duration": {},
@@ -215,7 +223,14 @@
    "statuses": [
     "blinded"
    ],
-   "changes": [],
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "value": "turn=end, saveAbility=con, saveDC=##JJKDC##, saveCount=1-, label=\"Blinded (Light Manipulation)\"",
+     "priority": 20
+    }
+   ],
    "transfer": false,
    "disabled": false,
    "duration": {},

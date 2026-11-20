@@ -62,7 +62,8 @@
     "damage": {
      "includeBase": false,
      "parts": []
-    }
+    },
+    "useConditionText": "false"
    }
   },
   "prerequisites": {

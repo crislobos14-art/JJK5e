@@ -43,7 +43,8 @@
     "target": {},
     "duration": {
      "units": "inst"
-    }
+    },
+    "useConditionText": "reaction === \"isHit\""
    }
   }
  },

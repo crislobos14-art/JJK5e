@@ -96,7 +96,8 @@
     "damage": {
      "includeBase": false,
      "parts": []
-    }
+    },
+    "useConditionText": "false"
    }
   },
   "rarity": "rare",

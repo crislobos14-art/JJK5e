@@ -49,7 +49,8 @@
     },
     "duration": {
      "units": "inst"
-    }
+    },
+    "useConditionText": "reaction === \"isDamaged\""
    },
    "W2RKS4D4JHU27dIM": {
     "_id": "W2RKS4D4JHU27dIM",

@@ -44,7 +44,8 @@
     "duration": {
      "units": "inst",
      "override": true
-    }
+    },
+    "useConditionText": "false"
    },
    "5jJZwQ04W30INTzj": {
     "_id": "5jJZwQ04W30INTzj",

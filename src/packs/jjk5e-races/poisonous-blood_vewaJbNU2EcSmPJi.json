@@ -68,7 +68,8 @@
       "_id": "4caMnOrPPnHTxYFK",
       "onSave": false
      }
-    ]
+    ],
+    "useConditionText": "false"
    }
   }
  },

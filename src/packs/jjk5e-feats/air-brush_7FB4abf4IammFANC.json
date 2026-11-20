@@ -43,7 +43,8 @@
     "target": {},
     "duration": {
      "units": "inst"
-    }
+    },
+    "useConditionText": "false"
    },
    "ahsdDDLy7vI1nanY": {
     "_id": "ahsdDDLy7vI1nanY",

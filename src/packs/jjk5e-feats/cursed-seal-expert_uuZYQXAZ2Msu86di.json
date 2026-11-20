@@ -103,7 +103,14 @@
    "statuses": [
     "blinded"
    ],
-   "changes": [],
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "value": "turn=end, saveAbility=con, saveDC=##JJKDC##, saveCount=1-, label=\"Blinded (Cursed Seal Expert)\"",
+     "priority": 20
+    }
+   ],
    "transfer": false,
    "disabled": false,
    "duration": {
