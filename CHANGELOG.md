@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.32.0 — Técnica por técnica: Boogie Woogie
+- **Boogie**: alcance 30 pies, 1 objetivo (el intercambio lo hace el módulo).
+- **Woogie**: acción para que el enemigo intercambiado pierda su reacción hasta tu turno.
+- **Clap Back**: Boogie como acción libre por 1 CE a 45 pies (intercambio real).
+- **Standing Ovation**: Boogie gratis e ilimitado a 175 pies dentro del dominio.
+- **Slow Dance**: aturdidos (tú y dos más) hasta tu siguiente turno, salvación de EM al final de sus turnos; variantes acción adicional y reacción.
+- Automatizados a mano: 28/360 spells. Sin probar en Foundry real.
+
 ## 1.31.0 — Técnica por técnica: Blood Manipulation
 - Las técnicas de sangre ahora descuentan también sus **PG** (se puede desmarcar en el diálogo si usas otra
   fuente de sangre).

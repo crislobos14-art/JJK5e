@@ -697,11 +697,75 @@ def blood_manipulation(S):
     mark(bp)
 
 
+def boogie_woogie(S):
+    ft = lambda n: {"value": str(n), "units": "ft", "override": True}
+    one = {"affects": {"type": "creature", "count": "1", "choice": True}, "override": True}
+    # --- Boogie (1st): the module swaps tokens; range 30 ft; enemies swapped with Woogie lose their reaction.
+    b = S.get("Boogie")
+    for aid in ("ih4MTTL3k7FulYvj", "bwBonusAction001", "bwReaction002CE"):
+        a = b["system"]["activities"][aid]
+        a["range"], a["target"] = ft(30), one
+        a["effects"] = []
+    w = S.get("Woogie")
+    w.setdefault("effects", [])
+    lost = fx(w, "disoriented", "Disoriented (Boogie Woogie)", rounds=1, special=["turnStartSource"],
+              desc="Teleported by Boogie Woogie: loses its reaction until your next turn.")
+    dis = act(w, "disorient", "utility", "Swapped enemy loses its reaction", "special", range=ft(60), target=one)
+    apply(dis, lost)
+    mark(w)
+    b["system"]["activities"]["bwReaction002CE"]["useConditionText"] = "false"
+    note(b, "The token swap is done by the module (range from the activity). Woogie (3rd): unwilling creatures, swap "
+            "two others; enemies lose their reaction (Woogie item). Round of Applause (11th): 60 ft, up to four "
+            "creatures, advantage on the next attack after a favourable swap (GM).")
+    mark(b)
+
+    # --- Clap Back (6th): once per turn free-action Boogie for 1 CE at 45 ft (swap handled by the module).
+    c = S.get("Clap Back")
+    ca = c["system"]["activities"]["ouA0eQeNTPbAg5Zb"]
+    ca["name"] = "Free-action Boogie (1 CE, once per turn)"
+    ca["range"], ca["target"] = ft(45), one
+    c["flags"]["jjk5e"].setdefault("tokenSwap", {})["ouA0eQeNTPbAg5Zb"] = True
+    note(c, "Also reduces every Boogie Woogie cost by 1 (min 1): pay the lower cost (GM).")
+    mark(c)
+
+    # --- Standing Ovation (18th): unlimited free Boogie without CE inside the domain.
+    d = S.get("Domain Expansion: Standing Ovation")
+    da = d["system"]["activities"]["LEryQhWsnH8HS9rS"]
+    da["name"] = "Free Boogie (no CE, unlimited)"
+    da["range"], da["target"] = ft(175), one
+    free(d, da)
+    d["flags"]["jjk5e"].setdefault("tokenSwap", {})["LEryQhWsnH8HS9rS"] = True
+    mark(d)
+
+    # --- Reversal: Slow Dance — you and two others stunned until your next turn; later CE saves to end it.
+    sd = S.get("Slow Dance")
+    for e in sd["effects"]:
+        if e["_id"] == "nipdvIZgJypmVzha":
+            e["duration"] = {"rounds": 1}
+            e.setdefault("flags", {})["dae"] = {"specialDuration": ["turnStartSource"]}
+            e["changes"] = [{"key": "flags.midi-qol.OverTime", "mode": 0, "priority": 20,
+                             "value": 'turn=end, saveAbility=wis, saveDC=JJKORIGINDC, saveCount=1-, label="Slow Dance"'}]
+            e["description"] = ("<p>Stunned until the start of the caster's next turn; after the first use an affected "
+                                "creature may make a CE saving throw at the end of its turns to end it.</p>")
+    base = sd["system"]["activities"]["bBXvb2CNLAATvN2K"]
+    base["range"] = ft(60)
+    base["target"] = {"affects": {"type": "creature", "count": "3", "choice": True}, "override": True}
+    for key, label, kind in [("bonus", "Bonus Action (2 CE)", "bonus"), ("reaction", "Reaction (2 CE)", "reaction")]:
+        a = act(sd, key, "utility", label, kind, range=ft(60),
+                target={"affects": {"type": "creature", "count": "3", "choice": True}, "override": True})
+        apply(a, "nipdvIZgJypmVzha")
+        cost(sd, a, 2)
+        if kind == "reaction": a["useConditionText"] = "false"
+    note(sd, "Targets: yourself and two other creatures or objects.")
+    mark(sd)
+
+
 TECHNIQUES = {"Antigravity System": antigravity_system,
               "Auspicious Beast Summon": auspicious_beast_summon,
               "Black Bird Manipulation": black_bird_manipulation,
               "Black Box": black_box,
-              "Blood Manipulation": blood_manipulation}
+              "Blood Manipulation": blood_manipulation,
+              "Boogie Woogie": boogie_woogie}
 
 if __name__ == "__main__":
     args = sys.argv[1:]

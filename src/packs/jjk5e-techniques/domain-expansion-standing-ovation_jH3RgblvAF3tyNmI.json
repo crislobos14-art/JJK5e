@@ -19,7 +19,7 @@
    "LEryQhWsnH8HS9rS": {
     "_id": "LEryQhWsnH8HS9rS",
     "type": "utility",
-    "name": "Special",
+    "name": "Free Boogie (no CE, unlimited)",
     "sort": 0,
     "activation": {
      "type": "special",
@@ -35,10 +35,16 @@
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "value": "175",
+     "units": "ft",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -146,7 +152,11 @@
     "SGdgEfSOEZJvjp5k": 20
    },
    "domainActivity": "SGdgEfSOEZJvjp5k",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "tokenSwap": {
+    "LEryQhWsnH8HS9rS": true
+   },
+   "automation": "automated"
   }
  },
  "folder": "JUFxrHmgG8mOdlrV",

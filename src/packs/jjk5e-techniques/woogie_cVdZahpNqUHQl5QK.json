@@ -19,14 +19,88 @@
    "value": "class",
    "subtype": ""
   },
-  "requirements": "Boogie Woogie 3"
+  "requirements": "Boogie Woogie 3",
+  "activities": {
+   "4S9DFlRXVyMdLeXY": {
+    "_id": "4S9DFlRXVyMdLeXY",
+    "type": "utility",
+    "name": "Swapped enemy loses its reaction",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "iGa7giJgxpJxfsXu",
+      "onSave": false
+     }
+    ]
+   }
+  }
  },
  "flags": {
   "jjk5e": {
    "technique": "Boogie Woogie",
-   "level": 3
+   "level": 3,
+   "automation": "automated"
   }
  },
  "folder": "JUFxrHmgG8mOdlrV",
- "_key": "!items!cVdZahpNqUHQl5QK"
+ "_key": "!items!cVdZahpNqUHQl5QK",
+ "effects": [
+  {
+   "_id": "iGa7giJgxpJxfsXu",
+   "name": "Disoriented (Boogie Woogie)",
+   "img": "modules/jjk5e/icons/techniques/boogie-woogie.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Teleported by Boogie Woogie: loses its reaction until your next turn.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Boogie Woogie"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStartSource"
+     ]
+    }
+   },
+   "_key": "!items.effects!cVdZahpNqUHQl5QK.iGa7giJgxpJxfsXu"
+  }
+ ]
 }

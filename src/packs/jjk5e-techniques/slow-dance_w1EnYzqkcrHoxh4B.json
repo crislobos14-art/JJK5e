@@ -39,13 +39,16 @@
     },
     "range": {
      "value": "60",
-     "units": "ft"
+     "units": "ft",
+     "override": true
     },
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
-     }
+      "count": "3",
+      "choice": true
+     },
+     "override": true
     },
     "duration": {
      "units": "inst"
@@ -56,13 +59,104 @@
       "onSave": false
      }
     ]
+   },
+   "lqWqzltvC3KT6ja3": {
+    "_id": "lqWqzltvC3KT6ja3",
+    "type": "utility",
+    "name": "Bonus Action (2 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "3",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "nipdvIZgJypmVzha",
+      "onSave": false
+     }
+    ]
+   },
+   "yRbeconVovNYASXp": {
+    "_id": "yRbeconVovNYASXp",
+    "type": "utility",
+    "name": "Reaction (2 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "3",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "nipdvIZgJypmVzha",
+      "onSave": false
+     }
+    ],
+    "useConditionText": "false"
    }
   }
  },
  "flags": {
   "jjk5e": {
    "ceCosts": {
-    "bBXvb2CNLAATvN2K": 2
+    "bBXvb2CNLAATvN2K": 2,
+    "lqWqzltvC3KT6ja3": 2,
+    "yRbeconVovNYASXp": 2
    },
    "technique": "Boogie Woogie",
    "reversal": true,
@@ -78,7 +172,9 @@
       "Boogie Woogie"
      ]
     ]
-   }
+   },
+   "automationNotes": "Targets: yourself and two other creatures or objects.",
+   "automation": "automated"
   }
  },
  "effects": [
@@ -89,16 +185,28 @@
    "statuses": [
     "stunned"
    ],
-   "changes": [],
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "priority": 20,
+     "value": "turn=end, saveAbility=wis, saveDC=JJKORIGINDC, saveCount=1-, label=\"Slow Dance\""
+    }
+   ],
    "transfer": false,
    "disabled": false,
    "duration": {
     "rounds": 1
    },
-   "description": "",
+   "description": "<p>Stunned until the start of the caster's next turn; after the first use an affected creature may make a CE saving throw at the end of its turns to end it.</p>",
    "flags": {
     "jjk5e": {
      "condition": "stunned"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStartSource"
+     ]
     }
    },
    "_key": "!items.effects!w1EnYzqkcrHoxh4B.nipdvIZgJypmVzha"

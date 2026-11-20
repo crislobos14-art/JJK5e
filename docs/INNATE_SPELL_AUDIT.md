@@ -3,13 +3,13 @@
 > Generado desde el compendio y las fuentes. **No certifica ejecución en Foundry ni fidelidad semántica a cada regla**.
 
 - Spells examinados: **360**; técnicas agrupadas: **81**.
-- Utilidad sin efecto configurado: revisar lógica: **110**.
-- Utilidad con efecto: comprobar activación: **16**.
-- Dominio genérico: resolver propiedades particulares: **53**.
+- Utilidad sin efecto configurado: revisar lógica: **109**.
+- Utilidad con efecto: comprobar activación: **15**.
+- Dominio genérico: resolver propiedades particulares: **52**.
 - Salvación sin daño/efecto automático: **29**.
 - Ataque sin daño propio: comprobar intención: **10**.
 - Mecánica configurada; falta prueba Foundry: **117**.
-- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **25**.
+- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **28**.
 
 ## Interpretación
 
@@ -89,9 +89,9 @@
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Boogie | 1 | utility:Action (1 CE); utility:Bonus Action (1 CE); utility:Reaction (3 CE) | Utilidad con efecto: comprobar activación | [JSON](../src/packs/jjk5e-techniques/boogie_5vAGmViQgCS1lFHt.json) |
-| Clap Back | 6 | utility:Special (1 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/clap-back_wh6kIPv5jF9mXwov.json) |
-| Domain Expansion: Standing Ovation | 18 | utility:Special; utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-standing-ovation_jH3RgblvAF3tyNmI.json) |
+| Boogie | 1 | utility:Action (1 CE); utility:Bonus Action (1 CE); utility:Reaction (3 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/boogie_5vAGmViQgCS1lFHt.json) |
+| Clap Back | 6 | utility:Free-action Boogie (1 CE, once per turn) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/clap-back_wh6kIPv5jF9mXwov.json) |
+| Domain Expansion: Standing Ovation | 18 | utility:Free Boogie (no CE, unlimited); utility:Expand Domain (20 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-standing-ovation_jH3RgblvAF3tyNmI.json) |
 
 ### Centipede Shroud (4 spells)
 

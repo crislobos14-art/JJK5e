@@ -19,7 +19,7 @@
    "ouA0eQeNTPbAg5Zb": {
     "_id": "ouA0eQeNTPbAg5Zb",
     "type": "utility",
-    "name": "Special (1 CE)",
+    "name": "Free-action Boogie (1 CE, once per turn)",
     "sort": 0,
     "activation": {
      "type": "special",
@@ -35,10 +35,16 @@
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "value": "45",
+     "units": "ft",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -87,7 +93,12 @@
    },
    "technique": "Boogie Woogie",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "tokenSwap": {
+    "ouA0eQeNTPbAg5Zb": true
+   },
+   "automationNotes": "Also reduces every Boogie Woogie cost by 1 (min 1): pay the lower cost (GM).",
+   "automation": "automated"
   }
  },
  "folder": "JUFxrHmgG8mOdlrV",
