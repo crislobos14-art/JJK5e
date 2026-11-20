@@ -1,5 +1,25 @@
 # Changelog
 
+## 1.24.0 — Innate spell coverage audit and first mechanical corrections
+- Audited the full library (586 innate-technique records; 360 spells in 81 named technique groups) with a reproducible static audit script and a [per-spell inventory](docs/INNATE_SPELL_AUDIT.md).
+- Added source vs fallback consistency checks, activity/effect/CE reference validation and a CI gate to catch stale spell coverage reports.
+- Corrected a core issue: Cursed Energy is now charged before activating domain side effects or tagged self-buffs. An unaffordable activity cannot apply these benefits.
+- Added explicit mechanical ActiveEffects for the AC bonus and walking-speed multiplier of **Flowing Red Scale** and **Golden Week** (with expiration). Their extra-action and conditional advantage restrictions remain GM-managed; they are NOT fully automated.
+- Fixed the action economy of **Cursed Centipede** (bonus-action summon) and **Major Star Shikigami** (action summon); note these skills still require a valid summon actor/profile and manual shikigami management.
+- **Collective Will** now tracks eight long-rest uses, costs 1 CE and provides a d20 replacement roll. Applying the replacement to the triggering roll remains a player/GM action.
+- **Manji Kick** now attaches the Stunned condition on a failed save. Multiplying its originating unarmed strike damage still requires manual adjudication.
+- **Unrelenting Fury** now rolls the base saving-throw damage and applies Prone on failure; extra attacks and optional CE-powered damage require selection and review by the GM.
+- Added regression tests for these high-confidence rule mappings and the 360-spell inventory.
+
+### Coverage and remaining work (NOT a full certification)
+- 124 spells have a mechanical activity configuration and no obvious static warning, but gameplay correctness is **not verified**.
+- 114 utility-only spells have no embedded effects and need individual design reviews (some may be passive or narrative rather than broken).
+- 18 utility-only spells include effects that require activation verification.
+- 57 domain spells use generic domain behavior whose unique effects are not fully automated.
+- 35 spells have a save with no configured damage or effect; 12 have attack activities with no own damage.
+- A full verification still needs manual-by-manual semantic checks and live Foundry V14, D&D5e 6.1 and optional Midi-QOL testing of each of the 360 spells. This release does not claim that all spells work automatically.
+
+
 ## 1.23.0 — V6 audit hardening (partial remediation)
 - Security: player-sent privileged GM socket operations disabled by default. Optional GM approval with action allowlist; client-reported identity remains untrusted.
 - CE: reject unaffordable costs; validate scaling before activity consumption; serialize same-client CE updates; prevent vow-prohibited spending.
