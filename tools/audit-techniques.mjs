@@ -22,6 +22,7 @@ if (source.size !== pack.documents.length) errors.push(`Source/fallback item cou
 const statusText = {
   "utility-unresolved": "Utilidad sin efecto configurado: revisar lógica",
   "utility-with-effect": "Utilidad con efecto: comprobar activación",
+  "domain-generic": "Dominio genérico: resolver propiedades particulares",
   "save-unresolved": "Salvación sin daño/efecto automático",
   "attack-no-damage": "Ataque sin daño propio: comprobar intención",
   "mechanics-present": "Mecánica configurada; falta prueba Foundry"
@@ -59,6 +60,8 @@ for (const item of pack.documents) {
       errors.push(`Source CE cost differs: ${item.name} (${aid})`);
   }
   for (const aid of Object.keys(steps)) if (!acts[aid]) errors.push(`Invalid CE scaling ref: ${item.name} (${aid})`);
+  if (JSON.stringify(item.flags?.jjk5e?.selfBuffs ?? null) !== JSON.stringify(src.doc.flags?.jjk5e?.selfBuffs ?? null))
+    errors.push(`Self buff source differs: ${item.name}`);
   if (item.type !== "spell") continue;
   const activityList = Object.values(acts);
   const isOnlyUtility = activityList.length > 0 && activityList.every(a => a.type === "utility");
@@ -66,6 +69,7 @@ for (const item of pack.documents) {
   const unresolvedAttack = activityList.some(a => a.type === "attack" && !(a.damage?.parts?.length) && !a.damage?.includeBase);
   const unresolvedUtility = isOnlyUtility && !(item.effects ?? []).length && !item.flags?.jjk5e?.domain;
   const status = unresolvedSave ? "save-unresolved" : unresolvedAttack ? "attack-no-damage"
+    : item.flags?.jjk5e?.domain && isOnlyUtility ? "domain-generic"
     : unresolvedUtility ? "utility-unresolved" : isOnlyUtility ? "utility-with-effect" : "mechanics-present";
   rows.push({ item, src: src.file, status, actIds, costs });
   if (status !== "mechanics-present") critical.push({ id, name: item.name, status });
@@ -81,7 +85,8 @@ const lines = [
   `- Spells examinados: **${rows.length}**; técnicas agrupadas: **${techs.length}**.`,
   `- ${statusText["utility-unresolved"]}: **${counts["utility-unresolved"]}**.`,
   `- ${statusText["utility-with-effect"]}: **${counts["utility-with-effect"]}**.`,
-  `- ${statusText["save-unresolved"]}: **${counts["save-unresolved"]}**.`,
+  `- ${statusText["domain-generic"]}: **${counts["domain-generic"]}**.`,
+  `- ${statusText["save-unresolved"]}: **${counts["save-unresolved"]}**.`, 
   `- ${statusText["attack-no-damage"]}: **${counts["attack-no-damage"]}**.`,
   `- ${statusText["mechanics-present"]}: **${counts["mechanics-present"]}**.`,
   "",
