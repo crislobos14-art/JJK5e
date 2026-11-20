@@ -8,8 +8,10 @@
  *   Technique Burnout), Maximum / Reduced Output, Soul Awareness, Limb Damage, summons.
  * - JJK panel on character sheets, Spanish / English UI, effect expiry (unless Times Up is active).
  */
+import { activityCECost, ceTransaction, blackFlashCheck, clashRoundsFromRefinement, vowBlocksUsage } from "./jjk5e-rules.mjs";
+
 const MODULE_ID = "jjk5e";
-const DATA_VERSION = "1.22.2";
+const DATA_VERSION = "1.23.0";
 const FOLDER_NAME = "JJK 5e V.6";
 const ICONS = `modules/${MODULE_ID}/icons`;
 
@@ -361,24 +363,54 @@ function activityCost(activity) {
   return Number(costs?.[activity.id] ?? 0);
 }
 
-async function spendCE(actor, amount, label = "") {
+/** Serializes CE spending within this client to prevent double charges from overlapping hooks. */
+const CE_QUEUES = new Map();
+function ceDiscountFactor(actor) {
+  if (!actor) return 1;
+  if (actor.items.some((i) => baseName(i) === "Six Eyes (Awakened)")) return 0.1;
+  return actor.getFlag(MODULE_ID, "sixEyesNext") ? 0.1 : 1;
+}
+function totalActivityCECost(actor, activity, usageConfig = {}) {
+  const base = activityCost(activity);
+  const step = Number(activity?.item?.flags?.jjk5e?.ceSteps?.[activity.id] ?? 0);
+  const scaling = Number(usageConfig?.scaling) || 0;
+  return activityCECost({ base, step, scaling, factor: ceDiscountFactor(actor) });
+}
+async function doSpendCE(actor, amount, label = "") {
+  if (!actor?.isOwner) return false;
   const pool = findPool(actor);
   if (!pool) {
     ui.notifications.warn(t("Notify.NoPool", { name: actor?.name ?? "?" }));
     return false;
   }
-  const value = poolValue(pool);
-  const spent = Number(pool.system.uses?.spent) || 0;
-  const max = poolMax(pool);
-  const newSpent = clamp(spent + amount, 0, max);
-  await pool.update({ "system.uses.spent": newSpent });
-  const remaining = max - newSpent;
+  const discount = amount > 0 && ceDiscountFactor(actor) < 1;
+  const charge = discount ? activityCECost({ base: amount, factor: 0.1 }) : amount;
+  if (charge > 0 && vowBlocksUsage(actor.effects, { costsCE: true })) {
+    ui.notifications.warn("JJK 5e: A binding-vow penalty blocks Cursed Energy.");
+    return false;
+  }
+  const previous = poolValue(pool), maximum = poolMax(pool);
+  const result = ceTransaction(previous, maximum, charge);
+  if (!result) {
+    ui.notifications.warn(t("Notify.NotEnoughCE", { value: previous, cost: charge }));
+    return false;
+  }
+  await pool.update({ "system.uses.spent": result.spent }, { jjk5eCE: true });
+  if (discount && actor.getFlag(MODULE_ID, "sixEyesNext")) await actor.unsetFlag(MODULE_ID, "sixEyesNext");
   if (setting("ceChat")) {
-    const verb = amount >= 0 ? `−${amount}` : `+${-amount}`;
+    const verb = charge >= 0 ? `−${charge}` : `+${-charge}`;
     await chat(actor, `<p><strong>${esc(label || t("CE.Name"))}</strong>: ${verb} CE `
-      + `<span style="opacity:.8">(${t("CE.Remaining", { value: remaining, max })}${value < amount ? `, ${t("CE.Overspent")}` : ""})</span></p>`);
+      + `<span style="opacity:.8">(${t("CE.Remaining", { value: result.remaining, max: maximum })})</span></p>`);
   }
   return true;
+}
+async function spendCE(actor, amount, label = "") {
+  const key = actor?.uuid ?? "unknown";
+  const previous = CE_QUEUES.get(key) ?? Promise.resolve();
+  const next = previous.catch(() => {}).then(() => doSpendCE(actor, amount, label));
+  CE_QUEUES.set(key, next);
+  try { return await next; }
+  finally { if (CE_QUEUES.get(key) === next) CE_QUEUES.delete(key); }
 }
 
 /* ---- token bar / actor resource sync ---- */
@@ -509,7 +541,7 @@ const RO_ROWS = [
 ];
 
 function registerActivityHooks() {
-  Hooks.on("dnd5e.preUseActivity", (activity) => {
+  Hooks.on("dnd5e.preUseActivity", (activity, usageConfig) => {
     const actor = activity.actor ?? activity.item?.actor;
     if (activity.item?.flags?.jjk5e?.mindset && actor && !actor.system.attributes?.inspiration) {
       ui.notifications.warn(t("Notify.NoInspiration", { name: actor.name }));
@@ -519,7 +551,11 @@ function registerActivityHooks() {
       ui.notifications.warn(t("Notify.Burnout"));
       return false;
     }
-    const cost = activityCost(activity);
+    const cost = totalActivityCECost(actor, activity, usageConfig);
+    if (vowBlocksUsage(actor?.effects, { costsCE: cost > 0, innateTechnique: !!activity.item?.flags?.jjk5e?.technique })) {
+      ui.notifications.warn("JJK 5e: A broken binding vow prohibits this activity.");
+      return false;
+    }
     const ro = Number(actor?.getFlag(MODULE_ID, "reducedOutput")) || 0;
     if (cost && RO_MAX[ro] && cost > RO_MAX[ro]) {
       ui.notifications.warn(t("Notify.ROMax", { cost, max: RO_MAX[ro], level: ro }));
@@ -537,9 +573,26 @@ function registerActivityHooks() {
     }
   });
 
+  // D&D5e 6.1: this gate runs after the user selected CE scaling, before item consumption.
+  Hooks.on("dnd5e.preActivityConsumption", (activity, usageConfig) => {
+    if (!setting("autoSpendCE")) return;
+    const actor = activity.actor ?? activity.item?.actor;
+    const cost = totalActivityCECost(actor, activity, usageConfig);
+    if (!Number.isFinite(cost)) return false;
+    if (!cost) return;
+    const pool = findPool(actor);
+    if (!pool || poolValue(pool) < cost) {
+      ui.notifications.warn(t("Notify.NotEnoughCE", { value: pool ? poolValue(pool) : 0, cost }));
+      return false;
+    }
+  });
   Hooks.on("dnd5e.postUseActivity", async (activity, usageConfig) => {
     const actor = activity.actor ?? activity.item?.actor;
     const item = activity.item;
+    if (actor && /^Six Eyes \\((Dormant|Stirring)\\)$/.test(baseName(item)) &&
+        /Perfect CE Manipulation/i.test(activity.name ?? "")) {
+      await actor.setFlag(MODULE_ID, "sixEyesNext", true);
+    }
     await remindModifiers(actor, item);
     if (item?.flags?.jjk5e?.openTechnique) await chooseTechnique(actor);
     const grp = item?.flags?.jjk5e?.activatesGroup?.[activity.id];
@@ -555,12 +608,9 @@ function registerActivityHooks() {
         ? t("Domain.SureHitAttack") : t("Domain.SureHitSave")}</p>`);
     }
     if (!setting("autoSpendCE")) return;
-    let cost = activityCost(activity);
-    if (!cost) return;
-    const step = Number(item?.flags?.jjk5e?.ceSteps?.[activity.id] ?? 0);
-    const extra = Number(usageConfig?.scaling) || 0;
-    if (step && extra > 0) cost += step * extra;
-    if (!findPool(actor)) return;
+    const cost = activityCost(activity)
+      + Number(item?.flags?.jjk5e?.ceSteps?.[activity.id] ?? 0) * (Number(usageConfig?.scaling) || 0);
+    if (!cost || !findPool(actor)) return;
     await spendCE(actor, cost, `${item.name}${activity.name ? ` — ${activity.name}` : ""}`);
   });
 }
