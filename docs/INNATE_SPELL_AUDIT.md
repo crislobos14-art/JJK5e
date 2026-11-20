@@ -3,13 +3,13 @@
 > Generado desde el compendio y las fuentes. **No certifica ejecución en Foundry ni fidelidad semántica a cada regla**.
 
 - Spells examinados: **360**; técnicas agrupadas: **81**.
-- Utilidad sin efecto configurado: revisar lógica: **76**.
-- Utilidad con efecto: comprobar activación: **15**.
-- Dominio genérico: resolver propiedades particulares: **38**.
-- Salvación sin daño/efecto automático: **23**.
+- Utilidad sin efecto configurado: revisar lógica: **68**.
+- Utilidad con efecto: comprobar activación: **11**.
+- Dominio genérico: resolver propiedades particulares: **32**.
+- Salvación sin daño/efecto automático: **21**.
 - Ataque sin daño propio: comprobar intención: **10**.
-- Mecánica configurada; falta prueba Foundry: **73**.
-- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **125**.
+- Mecánica configurada; falta prueba Foundry: **64**.
+- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **154**.
 
 ## Interpretación
 
@@ -312,65 +312,65 @@
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Self-Destruction | 1 | utility:Special | Utilidad con efecto: comprobar activación | [JSON](../src/packs/jjk5e-techniques/self-destruction_xHgNg53HKZU5LCTU.json) |
-| Faster Throws | 3 | utility:Bonus Action | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/faster-throws_TeIZqCZDUnfAtHgr.json) |
-| Guerilla Tactics | 6 | save:Reaction | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/guerilla-tactics_RQb419zvaYlemuUU.json) |
-| Stronger Explosions | 11 | save:Special | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/stronger-explosions_6HchntUbMrRiBTpO.json) |
-| Domain Expansion: True Art | 18 | utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-true-art_Rzlgaj4eRo9sh64x.json) |
+| Self-Destruction | 1 | save:Throw Tiny part (tooth, finger, hair) (1 CE + HP); save:Throw Small part (ear, nose) (2 CE + HP); save:Throw Medium part (hand, foot) (4 CE + HP); save:Throw Large part (arm, leg) (6 CE + HP) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/self-destruction_xHgNg53HKZU5LCTU.json) |
+| Faster Throws | 3 |  | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/faster-throws_TeIZqCZDUnfAtHgr.json) |
+| Guerilla Tactics | 6 | save:Instant explosion (reaction on melee hit given/received) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/guerilla-tactics_RQb419zvaYlemuUU.json) |
+| Stronger Explosions | 11 | save:Explosion aftermath (on failed DEX); save:Aftermath at 18th (deafened + blinded) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/stronger-explosions_6HchntUbMrRiBTpO.json) |
+| Domain Expansion: True Art | 18 | utility:Expand Domain (20 CE); save:Initiative 20: detonate a creature's limb | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-true-art_Rzlgaj4eRo9sh64x.json) |
 
 ### Fa Jin (4 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Instantaneous Movement | 3 | utility:Action (1 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/instantaneous-movement_Wk2tHOObH8Up9ocX.json) |
-| Fist of Explosive Power | 6 | damage:Action (3 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/fist-of-explosive-power_Qg7EnOsToGuy1kOy.json) |
-| Maximize Potential Energy | 11 | utility:Action | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/maximize-potential-energy_9mtD8EPd3LMxJE3R.json) |
-| Domain Expansion: Hall of Divine Bagua | 18 | utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-hall-of-divine-bagua_WwelZoITRpIds1NY.json) |
+| Instantaneous Movement | 3 | utility:Gain a Jin charge (start of turn, 1 CE or forgo movement); utility:Spend a charge: +10 ft speed, triple jump; utility:Spend charges: move 10 ft each (reaction, no OA) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/instantaneous-movement_Wk2tHOObH8Up9ocX.json) |
+| Fist of Explosive Power | 6 | save:Blunt blast: 15-ft cone, CON (3 CE); save:Edged blast: 30-ft line, DEX (3 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/fist-of-explosive-power_Qg7EnOsToGuy1kOy.json) |
+| Maximize Potential Energy | 11 | utility:Give Jin charges by touch (up to CE mod) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/maximize-potential-energy_9mtD8EPd3LMxJE3R.json) |
+| Domain Expansion: Hall of Divine Bagua | 18 | utility:Expand Domain (20 CE); utility:Initiative 20: negative Jin on all | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-hall-of-divine-bagua_WwelZoITRpIds1NY.json) |
 
 ### Faceless God (3 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Madness Inducement | 1 | save:Action (3 CE) | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/madness-inducement_KdemmuLMMISHWRIP.json) |
-| Maximum: Rumination | 11 | save:Action (6 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/maximum-rumination_Rf5Hd5OWeGdCdMU0.json) |
-| Domain Expansion: Theia Mania | 18 | utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-theia-mania_zSGeI3ieeQad8lzW.json) |
+| Madness Inducement | 1 | utility:Activate madness (3 CE, 1 minute); utility:Add 5% Mental Corruption; utility:Add 10% Mental Corruption; utility:Add 25% Mental Corruption; utility:Paranoia roll (d10; 1–2 attacks nearest) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/madness-inducement_KdemmuLMMISHWRIP.json) |
+| Maximum: Rumination | 11 | save:Action (6 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/maximum-rumination_Rf5Hd5OWeGdCdMU0.json) |
+| Domain Expansion: Theia Mania | 18 | utility:Expand Domain (20 CE); utility:Initiative 20: +5% corruption to all | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-theia-mania_zSGeI3ieeQad8lzW.json) |
 
 ### Fate (5 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Fate Manipulation | 1 | utility:Action (2 CE) | Utilidad con efecto: comprobar activación | [JSON](../src/packs/jjk5e-techniques/fate-manipulation_745MVTDDNhtfctQQ.json) |
-| Cursed Eyes of Fate | 3 | utility:Bonus Action (1 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/cursed-eyes-of-fate_dpjaBTyscou71Drz.json) |
-| Strong Destiny | 6 | save:Reaction (2 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/strong-destiny_0cwUM0MVo8t1hBck.json) |
-| Karmic Entanglement | 11 | utility:Action (8 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/karmic-entanglement_iHFQdjB7DhXF1CEU.json) |
-| Domain Expansion: Road of Karma | 18 | utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-road-of-karma_1bA6LFa3Mo1Ekpqx.json) |
+| Fate Manipulation | 1 | utility:Bind two creatures (2 CE, +1 Fate per 2 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/fate-manipulation_745MVTDDNhtfctQQ.json) |
+| Cursed Eyes of Fate | 3 | utility:Bonus Action (1 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/cursed-eyes-of-fate_dpjaBTyscou71Drz.json) |
+| Strong Destiny | 6 | save:Unlucky phenomena (reaction at its turn start, 2 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/strong-destiny_0cwUM0MVo8t1hBck.json) |
+| Karmic Entanglement | 11 | utility:Karmic Entanglement (1 week ritual, 8 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/karmic-entanglement_iHFQdjB7DhXF1CEU.json) |
+| Domain Expansion: Road of Karma | 18 | utility:Expand Domain (20 CE); utility:Initiative 20: choose Destined Foe | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-road-of-karma_1bA6LFa3Mo1Ekpqx.json) |
 
 ### G Warstaff (2 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Warstaff | 1 | damage:Bonus Action (2 CE); utility:Bonus Action (1 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/warstaff_lPvmTuuxb9GiKkQ4.json) |
-| Domain Expansion: Storyboard Dominion | 18 | utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-storyboard-dominion_HxfdcfxdpJridm05.json) |
+| Warstaff | 1 | utility:Summon Warstaff (2 CE); utility:View the future (1 CE, bonus/reaction); attack:Warstaff strike (reach); utility:Ink: +1 second marked (on hit); utility:Foresight 1 s: its attacks vs you at disadvantage (1 CE); utility:Foresight 3 s: you have advantage vs it (1 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/warstaff_lPvmTuuxb9GiKkQ4.json) |
+| Domain Expansion: Storyboard Dominion | 18 | utility:Expand Domain (20 CE); utility:Initiative 20: see 6 s into everyone's future | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-storyboard-dominion_HxfdcfxdpJridm05.json) |
 
 ### Golden Hour (5 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Golden Hour | 1 | utility:Bonus Action (1 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/golden-hour_4q9OGsvSzNAxybcY.json) |
-| Majestic Pose | 3 | utility:Bonus Action | Utilidad con efecto: comprobar activación | [JSON](../src/packs/jjk5e-techniques/majestic-pose_by9eHzYOCKk4O6zh.json) |
-| Golden Week | 6 | utility:Action (4 CE) | Utilidad con efecto: comprobar activación | [JSON](../src/packs/jjk5e-techniques/golden-week_BiQmr9X82yv0uLD4.json) |
-| Samsara Rewind | 11 | utility:Bonus Action (8 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/samsara-rewind_GHA3E4TudpXbvdC4.json) |
-| Domain Expansion: The World | 18 | utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-the-world_3bit65lbBkYI7DGN.json) |
+| Golden Hour | 1 | utility:Stop time (1 CE) until end of turn; utility:Frozen creatures (stopped time) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/golden-hour_4q9OGsvSzNAxybcY.json) |
+| Majestic Pose | 3 | utility:Majestic Pose (full turn): 1 extra turn per 3 CE; utility:Strain: speed 0 after time resumes | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/majestic-pose_by9eHzYOCKk4O6zh.json) |
+| Golden Week | 6 | utility:Action (4 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/golden-week_BiQmr9X82yv0uLD4.json) |
+| Samsara Rewind | 11 | utility:Samsara Rewind (full turn, 8 CE): rewind 1 round within 100 ft | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/samsara-rewind_GHA3E4TudpXbvdC4.json) |
+| Domain Expansion: The World | 18 | utility:Expand Domain (20 CE); utility:Initiative 20: stop time, take a turn | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-the-world_3bit65lbBkYI7DGN.json) |
 
 ### Hair Manipulation (5 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Scorpion Hair | 1 | attack:Action (1 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/scorpion-hair_Y5f6ekgOoItXjNcS.json) |
-| Drill Hair | 3 | save:Action (1 CE); utility:Extra (2 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/drill-hair_SB8gb2EXYIofLXBl.json) |
-| Aircraft Hair | 6 | utility:Action (3 CE); attack:Action (2 CE); save:Action — save | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/aircraft-hair_Fg2uQWtBv1hbcKXy.json) |
-| Hair Spray | 11 | utility:Bonus Action (4 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/hair-spray_XELY6ZF06NXQTLhs.json) |
-| Domain Expansion: Silken Strand Execution Ground | 18 | damage:Special; utility:Expand Domain (20 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-silken-strand-execution_2ACdzLEnWCXja6i9.json) |
+| Scorpion Hair | 1 | attack:Scorpion stinger (1 CE, replaces an attack) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/scorpion-hair_Y5f6ekgOoItXjNcS.json) |
+| Drill Hair | 3 | attack:Drill shot (1 CE, replaces an attack); save:Explosive drill (+2 CE): 5-ft burst | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/drill-hair_SB8gb2EXYIofLXBl.json) |
+| Aircraft Hair | 6 | utility:Helicopter Hair (3 CE, 1 minute); attack:Rotor blades (2 CE, replaces an attack); save:Jet ram (DEX): push 30 ft, prone; utility:Jet Hair (3 CE, 1 minute); utility:Keep form 1 more minute (1 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/aircraft-hair_Fg2uQWtBv1hbcKXy.json) |
+| Hair Spray | 11 | utility:Save technique as bonus action (4 CE, target disadvantage); utility:Attack technique as bonus action (+2 CE, advantage) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/hair-spray_XELY6ZF06NXQTLhs.json) |
+| Domain Expansion: Silken Strand Execution Ground | 18 | damage:Hair cuts: 2d10 per 5 ft moved; utility:Expand Domain (20 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-silken-strand-execution_2ACdzLEnWCXja6i9.json) |
 
 ### Heart Catch (4 spells)
 

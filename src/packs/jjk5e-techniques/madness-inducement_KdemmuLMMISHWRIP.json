@@ -18,8 +18,8 @@
   "activities": {
    "bNsokXCoOhCb9NUg": {
     "_id": "bNsokXCoOhCb9NUg",
-    "type": "save",
-    "name": "Action (3 CE)",
+    "type": "utility",
+    "name": "Activate madness (3 CE, 1 minute)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -35,14 +35,20 @@
      "spellSlot": false
     },
     "range": {
-     "value": "60",
-     "units": "ft",
+     "units": "self",
      "override": true
     },
     "target": {
+     "template": {
+      "type": "radius",
+      "size": "60",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
      "affects": {
-      "type": "creature",
-      "count": "1"
+      "type": "enemy",
+      "choice": false
      },
      "override": true
     },
@@ -61,9 +67,182 @@
       "formula": ""
      }
     },
-    "damage": {
-     "onSave": "none",
-     "parts": []
+    "effects": [
+     {
+      "_id": "M8VgNOXmtFhtfene",
+      "onSave": false
+     }
+    ]
+   },
+   "J2PhiePWYSQxYhfD": {
+    "_id": "J2PhiePWYSQxYhfD",
+    "type": "utility",
+    "name": "Add 5% Mental Corruption",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "oR2sPOMAWdelYYRZ",
+      "onSave": false
+     }
+    ]
+   },
+   "vdJyba9ehdAgjzig": {
+    "_id": "vdJyba9ehdAgjzig",
+    "type": "utility",
+    "name": "Add 10% Mental Corruption",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "uhjkIOnMv11O74Y8",
+      "onSave": false
+     }
+    ]
+   },
+   "NQxJYTUo9OjM62fr": {
+    "_id": "NQxJYTUo9OjM62fr",
+    "type": "utility",
+    "name": "Add 25% Mental Corruption",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "bWwpHvHXZw3EqLGK",
+      "onSave": false
+     }
+    ]
+   },
+   "iV8twkqhTFXX2huT": {
+    "_id": "iV8twkqhTFXX2huT",
+    "type": "utility",
+    "name": "Paranoia roll (d10; 1–2 attacks nearest)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "roll": {
+     "formula": "1d10",
+     "name": "Paranoia",
+     "prompt": false,
+     "visible": true
     }
    }
   },
@@ -117,9 +296,99 @@
    },
    "technique": "Faceless God",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "TxiITYXHPOTbqkOW",
- "_key": "!items!KdemmuLMMISHWRIP"
+ "_key": "!items!KdemmuLMMISHWRIP",
+ "effects": [
+  {
+   "_id": "M8VgNOXmtFhtfene",
+   "name": "Madness Inducement",
+   "img": "modules/jjk5e/icons/techniques/faceless-god.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Ends its turn within 60 ft seeing you: +5% Mental Corruption.</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "value": "turn=end, label=Mental Corruption +5% (sees the caster)",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Faceless God"
+    }
+   },
+   "_key": "!items.effects!KdemmuLMMISHWRIP.M8VgNOXmtFhtfene"
+  },
+  {
+   "_id": "oR2sPOMAWdelYYRZ",
+   "name": "Mental Corruption +5%",
+   "img": "modules/jjk5e/icons/techniques/faceless-god.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>+5% Mental Corruption. Track the total on the creature (10% −1 AC · 20% −1 saves · 40% −2 AC/saves · 50% no concentration · 60% disadv. skills · 70% charmed · 80% −4 AC/saves).</p>",
+   "changes": [],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Faceless God"
+    }
+   },
+   "_key": "!items.effects!KdemmuLMMISHWRIP.oR2sPOMAWdelYYRZ"
+  },
+  {
+   "_id": "uhjkIOnMv11O74Y8",
+   "name": "Mental Corruption +10%",
+   "img": "modules/jjk5e/icons/techniques/faceless-god.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>+10% Mental Corruption. Track the total on the creature (10% −1 AC · 20% −1 saves · 40% −2 AC/saves · 50% no concentration · 60% disadv. skills · 70% charmed · 80% −4 AC/saves).</p>",
+   "changes": [],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Faceless God"
+    }
+   },
+   "_key": "!items.effects!KdemmuLMMISHWRIP.uhjkIOnMv11O74Y8"
+  },
+  {
+   "_id": "bWwpHvHXZw3EqLGK",
+   "name": "Mental Corruption +25%",
+   "img": "modules/jjk5e/icons/techniques/faceless-god.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>+25% Mental Corruption. Track the total on the creature (10% −1 AC · 20% −1 saves · 40% −2 AC/saves · 50% no concentration · 60% disadv. skills · 70% charmed · 80% −4 AC/saves).</p>",
+   "changes": [],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Faceless God"
+    }
+   },
+   "_key": "!items.effects!KdemmuLMMISHWRIP.bWwpHvHXZw3EqLGK"
+  }
+ ]
 }

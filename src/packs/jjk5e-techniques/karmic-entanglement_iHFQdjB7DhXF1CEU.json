@@ -19,12 +19,12 @@
    "dz82WwVrCykNwCWW": {
     "_id": "dz82WwVrCykNwCWW",
     "type": "utility",
-    "name": "Action (8 CE)",
+    "name": "Karmic Entanglement (1 week ritual, 8 CE)",
     "sort": 0,
     "activation": {
      "type": "action",
      "value": 1,
-     "condition": "",
+     "condition": "Uninterrupted week; up to prof creatures (you included).",
      "override": true
     },
     "consumption": {
@@ -102,7 +102,8 @@
    },
    "technique": "Fate",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "UdYh82jLla1edrDf",

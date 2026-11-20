@@ -18,21 +18,27 @@
   "activities": {
    "fZFMhutSZEES7qco": {
     "_id": "fZFMhutSZEES7qco",
-    "type": "damage",
-    "name": "Action (3 CE)",
+    "type": "save",
+    "name": "Blunt blast: 15-ft cone, CON (3 CE)",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "action",
      "value": 1,
-     "condition": "",
+     "condition": "Scale = Jin charges spent (2d6 each); deduct them on Store and Release",
      "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
      "units": "self",
@@ -52,11 +58,23 @@
      },
      "override": true
     },
-    "duration": {
-     "units": "inst",
-     "override": true
+    "effects": [
+     {
+      "_id": "UYCFda7CTIFy4V1L",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
     },
     "damage": {
+     "onSave": "half",
      "parts": [
       {
        "number": 2,
@@ -70,17 +88,85 @@
         "formula": ""
        },
        "scaling": {
-        "number": 1
+        "number": 2
        }
       }
      ]
+    }
+   },
+   "5bGgr3ZlxuYKmqhs": {
+    "_id": "5bGgr3ZlxuYKmqhs",
+    "type": "save",
+    "name": "Edged blast: 30-ft line, DEX (3 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
     },
-    "effects": [
-     {
-      "_id": "UYCFda7CTIFy4V1L",
-      "onSave": false
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "line",
+      "size": "30",
+      "width": "5",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": [],
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
      }
-    ]
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "slashing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 2
+       }
+      }
+     ]
+    }
    }
   },
   "uses": {
@@ -132,11 +218,16 @@
  "flags": {
   "jjk5e": {
    "ceCosts": {
-    "fZFMhutSZEES7qco": 3
+    "fZFMhutSZEES7qco": 3,
+    "5bGgr3ZlxuYKmqhs": 3
    },
    "technique": "Fa Jin",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceSteps": {
+    "fZFMhutSZEES7qco": 0
+   },
+   "automation": "automated"
   }
  },
  "effects": [

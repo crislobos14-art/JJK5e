@@ -19,20 +19,26 @@
    "651MhZdeI7xhonCW": {
     "_id": "651MhZdeI7xhonCW",
     "type": "attack",
-    "name": "Action (1 CE)",
+    "name": "Scorpion stinger (1 CE, replaces an attack)",
     "sort": 0,
+    "img": null,
     "activation": {
-     "type": "action",
-     "value": 1,
+     "type": "special",
+     "value": null,
      "condition": "",
      "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
      "value": "10",
@@ -42,17 +48,18 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
-    "duration": {
-     "units": "inst",
-     "override": true
-    },
+    "effects": [],
     "attack": {
      "ability": "spellcasting",
-     "bonus": "",
+     "bonus": "(floor(min(@details.level, 3) / 3) + floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11) + floor(min(@details.level, 18) / 18))",
+     "critical": {
+      "threshold": null
+     },
      "flat": false,
      "type": {
       "value": "melee",
@@ -65,7 +72,7 @@
       {
        "number": 1,
        "denomination": 10,
-       "bonus": "@mod",
+       "bonus": "max(@abilities.wis.mod, @abilities.cha.mod) + (floor(min(@details.level, 3) / 3) + floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11) + floor(min(@details.level, 18) / 18))",
        "types": [
         "piercing"
        ],
@@ -73,9 +80,7 @@
         "enabled": false,
         "formula": ""
        },
-       "scaling": {
-        "number": 1
-       }
+       "scaling": {}
       }
      ]
     }
@@ -128,7 +133,8 @@
    },
    "technique": "Hair Manipulation",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "gqEhAM7a9IFAzEwy",

@@ -58,6 +58,76 @@
      "concentration": false,
      "override": true
     }
+   },
+   "TOzGUgcqi0ZeeTd1": {
+    "_id": "TOzGUgcqi0ZeeTd1",
+    "type": "save",
+    "name": "Initiative 20: detonate a creature's limb",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "3n7O25cqgfkGoV6f",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": null,
+       "denomination": 12,
+       "bonus": "",
+       "types": [
+        "force"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "(max(@abilities.wis.mod, @abilities.cha.mod))d12"
+       },
+       "scaling": {}
+      }
+     ]
+    }
    }
   },
   "uses": {
@@ -116,9 +186,35 @@
     "V8Fci9YkxabB0YWA": 20
    },
    "domainActivity": "V8Fci9YkxabB0YWA",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Your own body parts cost no CE inside the domain.",
+   "automation": "automated"
   }
  },
  "folder": "g4gimERTa06iViza",
- "_key": "!items!Rzlgaj4eRo9sh64x"
+ "_key": "!items!Rzlgaj4eRo9sh64x",
+ "effects": [
+  {
+   "_id": "3n7O25cqgfkGoV6f",
+   "name": "Prone",
+   "img": "modules/jjk5e/icons/techniques/explosive-flesh-domain.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [
+    "prone"
+   ],
+   "description": "",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Explosive Flesh"
+    }
+   },
+   "_key": "!items.effects!Rzlgaj4eRo9sh64x.3n7O25cqgfkGoV6f"
+  }
+ ]
 }

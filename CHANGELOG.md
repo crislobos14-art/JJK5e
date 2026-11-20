@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.47.0 — Técnica por técnica: Explosive Flesh → Hair Manipulation (7)
+- **Explosive Flesh**: 4 tamaños de parte del cuerpo con coste de CE + PG automático, radio, dado y derribo; explosión instantánea por reacción; ensordecido/cegado con OverTime; Living Bomb; dominio.
+- **Fa Jin**: cargas de Jin como usos del objeto (máx. comp. + nivel), gastar cargas para +2 ataque o +1 dado; movimiento instantáneo; Explosive Power cono/línea escalable; Negative Jin (−3d6 al siguiente daño); Absorbing Power; dominio.
+- **Faceless God**: aura de Madness Inducement, efectos de Mental Corruption (+5/10/25%) con tabla, tirada de paranoia, Madness Enhancement al impactar, Rumination escalable, dominio, Face of Wisdom.
+- **Fate**: unir dos criaturas con 7 Fates elegibles (Bonds +2 CA, etc.); Cursed Eyes; Strong Destiny (Xd8 + derribo); Road of Karma; Freedom.
+- **G Warstaff**: invocar y golpear con alcance; marcas de tinta al impactar; previsión de 1 s (desventaja contra ti) y 3 s (ventaja tuya); crítico de Predictable Strikes; dominio.
+- **Golden Hour**: detener el tiempo (ventaja, enemigos fallan FUE/DES), Majestic Pose con turnos extra y tensión, Golden Week, Samsara Rewind, The World, Blue Hour (lentitud con OverTime), Leisure Time.
+- **Hair Manipulation**: Scorpion Hair (+1→+4), Drill Hair y explosión (3d6→10d6), Helicopter/Jet con aspas (6d8→10d8) y embestida, Hair Spray, dominio, Doll Hairs.
+- Automatizados a mano: 154/360. Sin probar en Foundry real.
+
 ## 1.46.0 — Técnica por técnica: Vermin, Divergent Fist, Dragon Vein, Earth, Eight Heads, Esoteric Art
 - **Disaster Vermin**: enjambres e insectos con bolsa, fusión, huevo de Parthenogenesis, dominio (3 objetivos, 6d10), aura de Stillbirth Colony.
 - **Divergent Fist**: Divergent Flow al impactar (daño diferido), desorientación con CON, Manji Kick (CD propia, aturdido hasta su turno), One-Two, Weave como reacción de esquivar, Stance of the Sparks.

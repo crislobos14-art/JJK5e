@@ -58,6 +58,49 @@
      "concentration": false,
      "override": true
     }
+   },
+   "GClOqdTlA3gJlzVF": {
+    "_id": "GClOqdTlA3gJlzVF",
+    "type": "utility",
+    "name": "Initiative 20: choose Destined Foe",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "hfSsraotJJeBSNKs",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -116,9 +159,39 @@
     "tlcFIsdvxxpA3aef": 20
    },
    "domainActivity": "tlcFIsdvxxpA3aef",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "UdYh82jLla1edrDf",
- "_key": "!items!1bA6LFa3Mo1Ekpqx"
+ "_key": "!items!1bA6LFa3Mo1Ekpqx",
+ "effects": [
+  {
+   "_id": "hfSsraotJJeBSNKs",
+   "name": "Destined Foe",
+   "img": "modules/jjk5e/icons/techniques/fate-domain.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Caster's attacks against it are guaranteed hits (Midi advantage as proxy). Fates ignore range/touch in the domain.</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.grants.advantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Fate"
+    }
+   },
+   "_key": "!items.effects!1bA6LFa3Mo1Ekpqx.hfSsraotJJeBSNKs"
+  }
+ ]
 }

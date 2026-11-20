@@ -40,7 +40,14 @@
     "range": {
      "units": "self"
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
     }
@@ -66,7 +73,9 @@
       "G Warstaff"
      ]
     ]
-   }
+   },
+   "automationNotes": "See its past: 1 week per second marked.",
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",

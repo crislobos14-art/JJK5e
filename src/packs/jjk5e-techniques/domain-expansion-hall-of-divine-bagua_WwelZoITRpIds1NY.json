@@ -58,6 +58,48 @@
      "concentration": false,
      "override": true
     }
+   },
+   "ntQZBwvZ067ir5cJ": {
+    "_id": "ntQZBwvZ067ir5cJ",
+    "type": "utility",
+    "name": "Initiative 20: negative Jin on all",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "enemy",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "HeKY4MEQ5GmJss5g",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -116,9 +158,57 @@
     "gnudM0Ct4ZtFL1nt": 20
    },
    "domainActivity": "gnudM0Ct4ZtFL1nt",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "F6im2Ck5LFiG7ZIX",
- "_key": "!items!WwelZoITRpIds1NY"
+ "_key": "!items!WwelZoITRpIds1NY",
+ "effects": [
+  {
+   "_id": "HeKY4MEQ5GmJss5g",
+   "name": "Negative Jin (domain)",
+   "img": "modules/jjk5e/icons/techniques/fa-jin-domain.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>−1d6 damage per charge; unlimited Jin charges for you while the domain lasts.</p>",
+   "changes": [
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "- 1d6",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.rwak.damage",
+     "mode": 2,
+     "value": "- 1d6",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.msak.damage",
+     "mode": 2,
+     "value": "- 1d6",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.rsak.damage",
+     "mode": 2,
+     "value": "- 1d6",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Fa Jin"
+    }
+   },
+   "_key": "!items.effects!WwelZoITRpIds1NY.HeKY4MEQ5GmJss5g"
+  }
+ ]
 }

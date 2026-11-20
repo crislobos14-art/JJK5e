@@ -19,10 +19,10 @@
    "8vWFnEg9QnfiwtPh": {
     "_id": "8vWFnEg9QnfiwtPh",
     "type": "utility",
-    "name": "Bonus Action",
+    "name": "Majestic Pose (full turn): 1 extra turn per 3 CE",
     "sort": 0,
     "activation": {
-     "type": "bonus",
+     "type": "action",
      "value": 1,
      "condition": "",
      "override": true
@@ -30,7 +30,8 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "2 * @prof"
      },
      "spellSlot": false
     },
@@ -39,12 +40,62 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
-    }
+    },
+    "effects": [
+     {
+      "_id": "3hQcCCUjdetfGq5e",
+      "onSave": false
+     }
+    ]
+   },
+   "1euuNpsi32QDWtmV": {
+    "_id": "1euuNpsi32QDWtmV",
+    "type": "utility",
+    "name": "Strain: speed 0 after time resumes",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "ihoYu52ibkiGKjSp",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -84,33 +135,76 @@
   "jjk5e": {
    "technique": "Golden Hour",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceCosts": {
+    "8vWFnEg9QnfiwtPh": 3
+   },
+   "ceSteps": {
+    "8vWFnEg9QnfiwtPh": 3
+   },
+   "automation": "automated"
   }
  },
  "folder": "OPfUdWvA8mZmDQ8i",
  "effects": [
   {
-   "_id": "t6QPc9SyrYsahyy1",
-   "name": "Majestic Pose (toggle)",
+   "_id": "3hQcCCUjdetfGq5e",
+   "name": "Stopped-time speed",
    "img": "modules/jjk5e/icons/techniques/golden-hour.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
    "changes": [
     {
      "key": "system.attributes.movement.walk",
      "mode": 2,
-     "value": "10",
-     "priority": null
+     "value": "+ (10 + 5 * (floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11) + floor(min(@details.level, 18) / 18)))",
+     "priority": 20
     }
    ],
-   "transfer": true,
-   "disabled": true,
-   "duration": {},
-   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "duration": {
+    "rounds": 2
+   },
    "flags": {
     "jjk5e": {
-     "auto": "toggle"
+     "technique": "Golden Hour"
     }
    },
-   "_key": "!items.effects!by9eHzYOCKk4O6zh.t6QPc9SyrYsahyy1"
+   "_key": "!items.effects!by9eHzYOCKk4O6zh.3hQcCCUjdetfGq5e"
+  },
+  {
+   "_id": "ihoYu52ibkiGKjSp",
+   "name": "Pose strain",
+   "img": "modules/jjk5e/icons/techniques/golden-hour.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.attributes.movement.all",
+     "mode": 0,
+     "value": "0",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 2
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Golden Hour"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnEnd"
+     ]
+    }
+   },
+   "_key": "!items.effects!by9eHzYOCKk4O6zh.ihoYu52ibkiGKjSp"
   }
  ],
  "_key": "!items!by9eHzYOCKk4O6zh"

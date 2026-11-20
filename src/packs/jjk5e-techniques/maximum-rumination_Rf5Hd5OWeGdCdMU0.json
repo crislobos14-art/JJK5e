@@ -24,7 +24,7 @@
     "activation": {
      "type": "action",
      "value": 1,
-     "condition": "",
+     "condition": "Scale = corruption tens (e.g. 40% → 4d10, enter +3). Over 50%: the save has disadvantage.",
      "override": true
     },
     "consumption": {
@@ -42,7 +42,8 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
@@ -128,7 +129,11 @@
    },
    "technique": "Faceless God",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceSteps": {
+    "jKkmtNfACcxkLF9P": 0
+   },
+   "automation": "automated"
   }
  },
  "folder": "TxiITYXHPOTbqkOW",

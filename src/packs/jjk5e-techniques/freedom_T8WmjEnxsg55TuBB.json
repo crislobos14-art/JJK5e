@@ -38,14 +38,26 @@
      }
     },
     "range": {
-     "units": "self"
+     "units": "self",
+     "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
     "duration": {
      "value": "1",
      "units": "minute",
      "concentration": false
-    }
+    },
+    "effects": [
+     {
+      "_id": "7x94BjaBdajkZpA0",
+      "onSave": false
+     }
+    ]
    }
   }
  },
@@ -68,10 +80,33 @@
       "Fate"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!T8WmjEnxsg55TuBB"
+ "_key": "!items!T8WmjEnxsg55TuBB",
+ "effects": [
+  {
+   "_id": "7x94BjaBdajkZpA0",
+   "name": "Freedom",
+   "img": "modules/jjk5e/icons/techniques/fate.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Cannot use CE (don't spend any); immune to domain guaranteed hits, CE-targeting effects, and disadvantage/penalties on attacks, checks and saves (remove disadvantage effects by hand).</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Fate"
+    }
+   },
+   "_key": "!items.effects!T8WmjEnxsg55TuBB.7x94BjaBdajkZpA0"
+  }
+ ]
 }

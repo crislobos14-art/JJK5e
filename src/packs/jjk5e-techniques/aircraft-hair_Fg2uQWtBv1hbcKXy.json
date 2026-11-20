@@ -19,7 +19,7 @@
    "eOcvntLcnlzOiafX": {
     "_id": "eOcvntLcnlzOiafX",
     "type": "utility",
-    "name": "Action (3 CE)",
+    "name": "Helicopter Hair (3 CE, 1 minute)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -39,6 +39,9 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
@@ -46,25 +49,37 @@
      "units": "minute",
      "concentration": false,
      "override": true
-    }
+    },
+    "effects": [
+     {
+      "_id": "T32YBohCKUdygsmr",
+      "onSave": false
+     }
+    ]
    },
    "4paFjPNu3b466ZR7": {
     "_id": "4paFjPNu3b466ZR7",
     "type": "attack",
-    "name": "Action (2 CE)",
-    "sort": 100000,
+    "name": "Rotor blades (2 CE, replaces an attack)",
+    "sort": 0,
+    "img": null,
     "activation": {
-     "type": "action",
-     "value": 1,
+     "type": "special",
+     "value": null,
      "condition": "",
      "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
      "value": "5",
@@ -74,37 +89,14 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
-    "duration": {
-     "units": "inst",
-     "override": true
-    },
-    "damage": {
-     "includeBase": false,
-     "parts": [
-      {
-       "number": 6,
-       "denomination": 8,
-       "bonus": "@mod",
-       "types": [
-        "slashing"
-       ],
-       "custom": {
-        "enabled": false,
-        "formula": ""
-       },
-       "scaling": {
-        "number": 1
-       }
-      }
-     ]
-    },
     "effects": [],
     "attack": {
-     "ability": "",
+     "ability": "spellcasting",
      "bonus": "",
      "critical": {
       "threshold": null
@@ -115,18 +107,29 @@
       "classification": "spell"
      }
     },
-    "midiProperties": {
-     "triggeredActivityId": "jQiw29edvLAZPulD",
-     "triggeredActivityTargets": "hitTargets",
-     "triggeredActivityRollAs": "self",
-     "triggeredActivityConsume": false,
-     "triggeredActivityConfigure": false
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": 6,
+       "denomination": 8,
+       "bonus": "max(@abilities.wis.mod, @abilities.cha.mod)",
+       "types": [
+        "slashing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
     }
    },
    "jQiw29edvLAZPulD": {
     "_id": "jQiw29edvLAZPulD",
     "type": "save",
-    "name": "Action — save",
+    "name": "Jet ram (DEX): push 30 ft, prone",
     "sort": 100000,
     "activation": {
      "type": "special",
@@ -146,6 +149,18 @@
      "override": true
     },
     "target": {
+     "template": {
+      "type": "line",
+      "size": "60",
+      "width": "5",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
      "override": true
     },
     "duration": {
@@ -168,9 +183,100 @@
      }
     ],
     "damage": {
-     "onSave": "none",
-     "parts": []
+     "onSave": "half",
+     "parts": [
+      {
+       "number": null,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "(max(@abilities.wis.mod, @abilities.cha.mod))d8"
+       },
+       "scaling": {}
+      }
+     ]
     }
+   },
+   "1QIiaQw1s67ex50f": {
+    "_id": "1QIiaQw1s67ex50f",
+    "type": "utility",
+    "name": "Jet Hair (3 CE, 1 minute)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "fruA04QUBdjw1qic",
+      "onSave": false
+     }
+    ]
+   },
+   "cj04VaMTxe3UrCF3": {
+    "_id": "cj04VaMTxe3UrCF3",
+    "type": "utility",
+    "name": "Keep form 1 more minute (1 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
    }
   },
   "uses": {
@@ -212,7 +318,7 @@
    "dmgScale": {
     "4paFjPNu3b466ZR7": [
      [
-      0,
+      1,
       "6d8"
      ],
      [
@@ -227,11 +333,15 @@
    },
    "ceCosts": {
     "eOcvntLcnlzOiafX": 3,
-    "4paFjPNu3b466ZR7": 2
+    "4paFjPNu3b466ZR7": 2,
+    "1QIiaQw1s67ex50f": 3,
+    "cj04VaMTxe3UrCF3": 1
    },
    "technique": "Hair Manipulation",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Impact with a surface: +1d4 bludgeoning per 10 ft travelled.",
+   "automation": "automated"
   }
  },
  "effects": [
@@ -253,6 +363,60 @@
     }
    },
    "_key": "!items.effects!Fg2uQWtBv1hbcKXy.HBIOSOsQ9oLxpNVo"
+  },
+  {
+   "_id": "T32YBohCKUdygsmr",
+   "name": "Helicopter Hair",
+   "img": "modules/jjk5e/icons/techniques/hair-manipulation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Fly = walk; Dash as bonus action; OA attackers take CE mod (2× at 11th) slashing.</p>",
+   "changes": [
+    {
+     "key": "system.attributes.movement.fly",
+     "mode": 4,
+     "value": "@attributes.movement.walk",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Hair Manipulation"
+    }
+   },
+   "_key": "!items.effects!Fg2uQWtBv1hbcKXy.T32YBohCKUdygsmr"
+  },
+  {
+   "_id": "fruA04QUBdjw1qic",
+   "name": "Jet Hair",
+   "img": "modules/jjk5e/icons/techniques/hair-manipulation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Fly = walk; Dash while flying: no OAs and can ram in a line (2× fly at 11th, 3× at 18th).</p>",
+   "changes": [
+    {
+     "key": "system.attributes.movement.fly",
+     "mode": 4,
+     "value": "@attributes.movement.walk",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Hair Manipulation"
+    }
+   },
+   "_key": "!items.effects!Fg2uQWtBv1hbcKXy.fruA04QUBdjw1qic"
   }
  ],
  "folder": "gqEhAM7a9IFAzEwy",

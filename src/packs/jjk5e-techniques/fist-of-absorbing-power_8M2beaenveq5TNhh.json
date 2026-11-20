@@ -23,27 +23,36 @@
   "activities": {
    "PhdF1hklt1xRyPCE": {
     "_id": "PhdF1hklt1xRyPCE",
-    "type": "damage",
-    "name": "Action (6 CE)",
+    "type": "save",
+    "name": "Absorbing blast: 30-ft cone (6 CE)",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "action",
      "value": 1,
-     "condition": ""
+     "condition": "",
+     "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
-     }
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
-     "units": "self"
+     "units": "self",
+     "override": true
     },
     "target": {
      "template": {
-      "type": "line",
-      "size": "60",
+      "type": "cone",
+      "size": "30",
       "units": "ft",
       "count": "1",
       "contiguous": false
@@ -51,12 +60,27 @@
      "affects": {
       "type": "creature",
       "choice": false
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "GjYQAmbhVsBDsNly",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "wis",
+      "cha"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
      }
     },
-    "duration": {
-     "units": "inst"
-    },
     "damage": {
+     "onSave": "none",
      "parts": [
       {
        "number": 6,
@@ -69,9 +93,80 @@
         "enabled": false,
         "formula": ""
        },
-       "scaling": {
-        "number": 1
-       }
+       "scaling": {}
+      }
+     ]
+    }
+   },
+   "5l03AojHr5Q2tdoq": {
+    "_id": "5l03AojHr5Q2tdoq",
+    "type": "save",
+    "name": "Absorbing blast: 60-ft line (edged weapon, 6 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "line",
+      "size": "60",
+      "width": "5",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": [],
+    "save": {
+     "ability": [
+      "wis",
+      "cha"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": [
+      {
+       "number": 6,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
       }
      ]
     }
@@ -81,7 +176,8 @@
  "flags": {
   "jjk5e": {
    "ceCosts": {
-    "PhdF1hklt1xRyPCE": 6
+    "PhdF1hklt1xRyPCE": 6,
+    "5l03AojHr5Q2tdoq": 6
    },
    "technique": "Fa Jin",
    "reversal": true,
@@ -98,10 +194,52 @@
      ]
     ],
     "level": 6
-   }
+   },
+   "automationNotes": "You gain 3 Jin charges per creature that fails.",
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 10,
- "_key": "!items!8M2beaenveq5TNhh"
+ "_key": "!items!8M2beaenveq5TNhh",
+ "effects": [
+  {
+   "_id": "GjYQAmbhVsBDsNly",
+   "name": "Negative Jin ×3 (absorbed)",
+   "img": "modules/jjk5e/icons/techniques/fa-jin.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "- 3d6",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.msak.damage",
+     "mode": 2,
+     "value": "- 3d6",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Fa Jin"
+    },
+    "dae": {
+     "specialDuration": [
+      "1Attack"
+     ]
+    }
+   },
+   "_key": "!items.effects!8M2beaenveq5TNhh.GjYQAmbhVsBDsNly"
+  }
+ ]
 }

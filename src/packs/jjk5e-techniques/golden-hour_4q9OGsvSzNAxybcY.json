@@ -19,7 +19,7 @@
    "kZc1uthKYagtyfvi": {
     "_id": "kZc1uthKYagtyfvi",
     "type": "utility",
-    "name": "Bonus Action (1 CE)",
+    "name": "Stop time (1 CE) until end of turn",
     "sort": 0,
     "activation": {
      "type": "bonus",
@@ -39,12 +39,63 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
-    }
+    },
+    "effects": [
+     {
+      "_id": "QuhiBjx9LAonzhbr",
+      "onSave": false
+     }
+    ]
+   },
+   "RcR887n5lNypyFbE": {
+    "_id": "RcR887n5lNypyFbE",
+    "type": "utility",
+    "name": "Frozen creatures (stopped time)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "VhTxVIyEh7nzTGhs",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -87,9 +138,90 @@
    },
    "technique": "Golden Hour",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "OPfUdWvA8mZmDQ8i",
- "_key": "!items!4q9OGsvSzNAxybcY"
+ "_key": "!items!4q9OGsvSzNAxybcY",
+ "effects": [
+  {
+   "_id": "QuhiBjx9LAonzhbr",
+   "name": "Time Stop",
+   "img": "modules/jjk5e/icons/techniques/golden-hour.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>You can't use CE; advantage vs creatures; they auto-fail STR/DEX saves and have no reactions.</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.advantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Golden Hour"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnEnd"
+     ]
+    }
+   },
+   "_key": "!items.effects!4q9OGsvSzNAxybcY.QuhiBjx9LAonzhbr"
+  },
+  {
+   "_id": "VhTxVIyEh7nzTGhs",
+   "name": "In stopped time",
+   "img": "modules/jjk5e/icons/techniques/golden-hour.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [
+    "incapacitated"
+   ],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.fail.ability.save.str",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.fail.ability.save.dex",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.grants.advantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Golden Hour"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnEndSource"
+     ]
+    }
+   },
+   "_key": "!items.effects!4q9OGsvSzNAxybcY.VhTxVIyEh7nzTGhs"
+  }
+ ]
 }

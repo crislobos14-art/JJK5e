@@ -38,12 +38,24 @@
      }
     },
     "range": {
-     "units": "self"
+     "units": "self",
+     "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
-    }
+    },
+    "effects": [
+     {
+      "_id": "pDDvxcIVeRmBCdV7",
+      "onSave": false
+     }
+    ]
    }
   }
  },
@@ -66,10 +78,51 @@
       "Golden Hour"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 10,
- "_key": "!items!IbDMRrgRh2LabQeZ"
+ "_key": "!items!IbDMRrgRh2LabQeZ",
+ "effects": [
+  {
+   "_id": "pDDvxcIVeRmBCdV7",
+   "name": "Leisure Time",
+   "img": "modules/jjk5e/icons/techniques/golden-hour.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.advantage.skill.prc",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.advantage.ability.save.dex",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Golden Hour"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStart"
+     ]
+    }
+   },
+   "_key": "!items.effects!IbDMRrgRh2LabQeZ.pDDvxcIVeRmBCdV7"
+  }
+ ]
 }

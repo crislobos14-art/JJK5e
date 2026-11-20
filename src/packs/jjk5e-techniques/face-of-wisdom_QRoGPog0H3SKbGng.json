@@ -38,20 +38,34 @@
      }
     },
     "range": {
-     "value": "30",
-     "units": "ft"
+     "units": "self",
+     "override": true
     },
     "target": {
+     "template": {
+      "type": "radius",
+      "size": "30",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
      "affects": {
-      "type": "creature",
-      "count": "1"
-     }
+      "type": "ally",
+      "choice": false
+     },
+     "override": true
     },
     "duration": {
      "value": "2",
      "units": "minute",
      "concentration": false
-    }
+    },
+    "effects": [
+     {
+      "_id": "Cye6hEK4uNQzlRcI",
+      "onSave": false
+     }
+    ]
    }
   }
  },
@@ -74,10 +88,70 @@
       "Faceless God"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!QRoGPog0H3SKbGng"
+ "_key": "!items!QRoGPog0H3SKbGng",
+ "effects": [
+  {
+   "_id": "Cye6hEK4uNQzlRcI",
+   "name": "Face of Wisdom",
+   "img": "modules/jjk5e/icons/techniques/faceless-god.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.traits.ci.value",
+     "mode": 2,
+     "value": "charmed",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.ci.value",
+     "mode": 2,
+     "value": "frightened",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "psychic",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.advantage.ability.save.int",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.advantage.ability.save.wis",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.advantage.ability.save.cha",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 20
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Faceless God"
+    }
+   },
+   "_key": "!items.effects!QRoGPog0H3SKbGng.Cye6hEK4uNQzlRcI"
+  }
+ ]
 }

@@ -19,10 +19,10 @@
    "cbOplIjiLd2Rj3Iu": {
     "_id": "cbOplIjiLd2Rj3Iu",
     "type": "utility",
-    "name": "Action (1 CE)",
+    "name": "Gain a Jin charge (start of turn, 1 CE or forgo movement)",
     "sort": 0,
     "activation": {
-     "type": "action",
+     "type": "special",
      "value": 1,
      "condition": "",
      "override": true
@@ -39,12 +39,92 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
     }
+   },
+   "aQlY9v16dDN0jPM5": {
+    "_id": "aQlY9v16dDN0jPM5",
+    "type": "utility",
+    "name": "Spend a charge: +10 ft speed, triple jump",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "h6ZXu6oDDHk4rZ7f",
+      "onSave": false
+     }
+    ]
+   },
+   "uYNLpYVeMNEcRGOe": {
+    "_id": "uYNLpYVeMNEcRGOe",
+    "type": "utility",
+    "name": "Spend charges: move 10 ft each (reaction, no OA)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
    }
   },
   "uses": {
@@ -87,9 +167,45 @@
    },
    "technique": "Fa Jin",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Adjust Jin charges on Store and Release's uses.",
+   "automation": "automated"
   }
  },
  "folder": "F6im2Ck5LFiG7ZIX",
- "_key": "!items!Wk2tHOObH8Up9ocX"
+ "_key": "!items!Wk2tHOObH8Up9ocX",
+ "effects": [
+  {
+   "_id": "h6ZXu6oDDHk4rZ7f",
+   "name": "Jin burst",
+   "img": "modules/jjk5e/icons/techniques/fa-jin.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.attributes.movement.walk",
+     "mode": 2,
+     "value": "+10",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Fa Jin"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnEnd"
+     ]
+    }
+   },
+   "_key": "!items.effects!Wk2tHOObH8Up9ocX.h6ZXu6oDDHk4rZ7f"
+  }
+ ]
 }

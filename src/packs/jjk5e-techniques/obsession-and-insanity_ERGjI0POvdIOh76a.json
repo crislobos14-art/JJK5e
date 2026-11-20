@@ -19,12 +19,67 @@
    "value": "class",
    "subtype": ""
   },
-  "requirements": "Faceless God 6"
+  "requirements": "Faceless God 6",
+  "activities": {
+   "NGTqV07N53HHPuSf": {
+    "_id": "NGTqV07N53HHPuSf",
+    "type": "save",
+    "name": "90%: random direction (WIS)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "save": {
+     "ability": [
+      "wis"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   }
+  }
  },
  "flags": {
   "jjk5e": {
    "technique": "Faceless God",
-   "level": 6
+   "level": 6,
+   "automationNotes": "Corruption cap 50% (75% at 11th, 100% at 18th). Paranoia die: d10 → d6 (50%) → d4 (75%) → automatic (100%). 90%: WIS save or random movement.",
+   "automation": "automated"
   }
  },
  "folder": "TxiITYXHPOTbqkOW",

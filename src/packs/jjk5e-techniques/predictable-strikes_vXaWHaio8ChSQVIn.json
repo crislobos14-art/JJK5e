@@ -19,12 +19,52 @@
    "value": "class",
    "subtype": ""
   },
-  "requirements": "G Warstaff 6"
+  "requirements": "G Warstaff 6",
+  "activities": {
+   "bkcIrYBCpEEIGt1r": {
+    "_id": "bkcIrYBCpEEIGt1r",
+    "type": "utility",
+    "name": "Turn Warstaff hit into a critical (3+ s, once per turn)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "useConditionText": "reaction === \"isHit\""
+   }
+  }
  },
  "flags": {
   "jjk5e": {
    "technique": "G Warstaff",
-   "level": 6
+   "level": 6,
+   "automation": "automated"
   }
  },
  "folder": "GjZxtO8W2HfeT6Hl",

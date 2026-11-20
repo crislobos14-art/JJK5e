@@ -18,9 +18,10 @@
   "activities": {
    "m4ZxTvPNLGndeoSD": {
     "_id": "m4ZxTvPNLGndeoSD",
-    "type": "damage",
-    "name": "Bonus Action (2 CE)",
+    "type": "utility",
+    "name": "Summon Warstaff (2 CE)",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "bonus",
      "value": 1,
@@ -30,45 +31,31 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
-    },
-    "range": {
-     "units": "spec",
-     "override": true
-    },
-    "target": {
-     "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
     },
-    "damage": {
-     "parts": [
-      {
-       "number": 1,
-       "denomination": 4,
-       "bonus": "@mod",
-       "types": [
-        "piercing"
-       ],
-       "custom": {
-        "enabled": false,
-        "formula": ""
-       },
-       "scaling": {
-        "number": 1
-       }
-      }
-     ]
-    }
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
    },
    "nn5GJvMMdLGh7KZu": {
     "_id": "nn5GJvMMdLGh7KZu",
     "type": "utility",
-    "name": "Bonus Action (1 CE)",
+    "name": "View the future (1 CE, bonus/reaction)",
     "sort": 100000,
     "activation": {
      "type": "bonus",
@@ -84,16 +71,231 @@
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "value": "120",
+     "units": "ft",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
     }
+   },
+   "ZZWjjnXYDzLGYzpe": {
+    "_id": "ZZWjjnXYDzLGYzpe",
+    "type": "attack",
+    "name": "Warstaff strike (reach)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "10",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "melee",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 4,
+       "bonus": "max(@abilities.wis.mod, @abilities.cha.mod)",
+       "types": [
+        "piercing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    },
+    "midiProperties": {
+     "triggeredActivityId": "WIupivSvFPYC2xlv",
+     "triggeredActivityTargets": "hitTargets",
+     "triggeredActivityRollAs": "self",
+     "triggeredActivityConsume": false,
+     "triggeredActivityConfigure": false,
+     "triggeredActivityConditionText": ""
+    }
+   },
+   "WIupivSvFPYC2xlv": {
+    "_id": "WIupivSvFPYC2xlv",
+    "type": "utility",
+    "name": "Ink: +1 second marked (on hit)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "m9hneqV0Jrc1BMMd",
+      "onSave": false
+     }
+    ],
+    "useConditionText": "reaction === \"isHit\""
+   },
+   "goNV077dC7CKHtnH": {
+    "_id": "goNV077dC7CKHtnH",
+    "type": "utility",
+    "name": "Foresight 1 s: its attacks vs you at disadvantage (1 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "120",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "ang91gDcXQdQhfBF",
+      "onSave": false
+     }
+    ]
+   },
+   "U7F4yTcIZ447z471": {
+    "_id": "U7F4yTcIZ447z471",
+    "type": "utility",
+    "name": "Foresight 3 s: you have advantage vs it (1 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "120",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "veSbMBontrTEK1Ym",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -133,13 +335,103 @@
   "jjk5e": {
    "ceCosts": {
     "m4ZxTvPNLGndeoSD": 2,
-    "nn5GJvMMdLGh7KZu": 1
+    "nn5GJvMMdLGh7KZu": 1,
+    "goNV077dC7CKHtnH": 1,
+    "U7F4yTcIZ447z471": 1
    },
    "technique": "G Warstaff",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "2 s: advantage on saves vs it; 4–6 s: the GM tells you its next actions. Affects up to CE mod creatures.",
+   "automation": "automated"
   }
  },
  "folder": "GjZxtO8W2HfeT6Hl",
- "_key": "!items!lPvmTuuxb9GiKkQ4"
+ "_key": "!items!lPvmTuuxb9GiKkQ4",
+ "effects": [
+  {
+   "_id": "m9hneqV0Jrc1BMMd",
+   "name": "Manga panel (+1 s)",
+   "img": "modules/jjk5e/icons/techniques/g-warstaff.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>+1 second of future visible (stack one effect per second, max = your proficiency bonus).</p>",
+   "changes": [],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "G Warstaff"
+    }
+   },
+   "_key": "!items.effects!lPvmTuuxb9GiKkQ4.m9hneqV0Jrc1BMMd"
+  },
+  {
+   "_id": "ang91gDcXQdQhfBF",
+   "name": "Foresight (1 s)",
+   "img": "modules/jjk5e/icons/techniques/g-warstaff.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>1 s: its attacks vs you at disadvantage</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.disadvantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "G Warstaff"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStartSource"
+     ]
+    }
+   },
+   "_key": "!items.effects!lPvmTuuxb9GiKkQ4.ang91gDcXQdQhfBF"
+  },
+  {
+   "_id": "veSbMBontrTEK1Ym",
+   "name": "Foresight (3 s)",
+   "img": "modules/jjk5e/icons/techniques/g-warstaff.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>3 s: you have advantage vs it</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.grants.advantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "G Warstaff"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStartSource"
+     ]
+    }
+   },
+   "_key": "!items.effects!lPvmTuuxb9GiKkQ4.veSbMBontrTEK1Ym"
+  }
+ ]
 }

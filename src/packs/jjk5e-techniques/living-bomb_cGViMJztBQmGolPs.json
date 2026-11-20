@@ -19,7 +19,76 @@
    "value": "class",
    "subtype": ""
   },
-  "requirements": "Cursed Technique Reversal, Explosive Flesh"
+  "requirements": "Cursed Technique Reversal, Explosive Flesh",
+  "activities": {
+   "Ax6kkdh9ljdOKEzP": {
+    "_id": "Ax6kkdh9ljdOKEzP",
+    "type": "save",
+    "name": "Living Bomb (on melee hit): CE save",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Cost = 2× the part's cost (small 4, medium 8, large 12); damage dice doubled (shown for a hand/foot). Not skull/neck/torso.",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "12"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "save": {
+     "ability": [
+      "wis",
+      "cha"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": [
+      {
+       "number": null,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "force"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "(2 * max(@abilities.wis.mod, @abilities.cha.mod))d10"
+       },
+       "scaling": {}
+      }
+     ]
+    },
+    "useConditionText": "reaction === \"isHit\""
+   }
+  }
  },
  "flags": {
   "jjk5e": {
@@ -37,7 +106,14 @@
       "Explosive Flesh"
      ]
     ]
-   }
+   },
+   "ceCosts": {
+    "Ax6kkdh9ljdOKEzP": 8
+   },
+   "ceSteps": {
+    "Ax6kkdh9ljdOKEzP": 2
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",

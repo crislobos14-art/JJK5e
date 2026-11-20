@@ -23,42 +23,47 @@
   "activities": {
    "ZeEZxJQIvCJbhNXh": {
     "_id": "ZeEZxJQIvCJbhNXh",
-    "type": "attack",
-    "name": "Action (2 CE)",
+    "type": "utility",
+    "name": "Negative Jin (on unarmed hit, 2 CE)",
     "sort": 0,
+    "img": null,
     "activation": {
-     "type": "action",
-     "value": 1,
-     "condition": ""
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
-     }
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
     },
-    "range": {
-     "value": "5",
-     "units": "ft",
+    "duration": {
+     "units": "inst",
      "override": true
     },
-    "target": {},
-    "duration": {
-     "units": "inst"
+    "range": {
+     "units": "spec",
+     "override": true
     },
-    "attack": {
-     "ability": "spellcasting",
-     "bonus": "",
-     "flat": false,
-     "type": {
-      "value": "melee",
-      "classification": "spell"
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "NJ8dvQH7EC1jt5wo",
+      "onSave": false
      }
-    },
-    "damage": {
-     "includeBase": false,
-     "parts": []
-    }
+    ],
+    "useConditionText": "reaction === \"isHit\""
    }
   }
  },
@@ -81,10 +86,63 @@
       "Fa Jin"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!LyztajWyOpeblwfk"
+ "_key": "!items!LyztajWyOpeblwfk",
+ "effects": [
+  {
+   "_id": "NJ8dvQH7EC1jt5wo",
+   "name": "Negative Jin ×3",
+   "img": "modules/jjk5e/icons/techniques/fa-jin.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Its next damaging attack/technique deals up to 3d6 less; 0 damage nullifies it.</p>",
+   "changes": [
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "- 3d6",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.rwak.damage",
+     "mode": 2,
+     "value": "- 3d6",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.msak.damage",
+     "mode": 2,
+     "value": "- 3d6",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.rsak.damage",
+     "mode": 2,
+     "value": "- 3d6",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Fa Jin"
+    },
+    "dae": {
+     "specialDuration": [
+      "1Attack"
+     ]
+    }
+   },
+   "_key": "!items.effects!LyztajWyOpeblwfk.NJ8dvQH7EC1jt5wo"
+  }
+ ]
 }

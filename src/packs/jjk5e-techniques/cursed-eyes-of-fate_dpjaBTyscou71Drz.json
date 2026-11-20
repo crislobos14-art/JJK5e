@@ -35,10 +35,16 @@
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "value": "60",
+     "units": "ft",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -87,7 +93,9 @@
    },
    "technique": "Fate",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "GM reveals one: resistances/immunities, CR/level, current HP, AC or an ability mod, emotions — or the target's threads.",
+   "automation": "automated"
   }
  },
  "folder": "UdYh82jLla1edrDf",

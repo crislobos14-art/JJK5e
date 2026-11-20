@@ -18,24 +18,99 @@
   "activities": {
    "BiUJjyUJ5oqD5tRp": {
     "_id": "BiUJjyUJ5oqD5tRp",
-    "type": "save",
-    "name": "Action (1 CE)",
+    "type": "attack",
+    "name": "Drill shot (1 CE, replaces an attack)",
     "sort": 0,
+    "img": null,
     "activation": {
-     "type": "action",
-     "value": 1,
+     "type": "special",
+     "value": null,
      "condition": "",
      "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
     },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
     "range": {
-     "units": "self",
+     "value": "30 + 30 * floor(min(@details.level, 6) / 6)",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 6,
+       "bonus": "max(@abilities.wis.mod, @abilities.cha.mod)",
+       "types": [
+        "piercing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
+   },
+   "1QKHOQ1KZ49cbcxr": {
+    "_id": "1QKHOQ1KZ49cbcxr",
+    "type": "save",
+    "name": "Explosive drill (+2 CE): 5-ft burst",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
      "override": true
     },
     "target": {
@@ -52,10 +127,7 @@
      },
      "override": true
     },
-    "duration": {
-     "units": "inst",
-     "override": true
-    },
+    "effects": [],
     "save": {
      "ability": [
       "dex"
@@ -69,40 +141,19 @@
      "onSave": "half",
      "parts": [
       {
-       "number": 1,
+       "number": 3,
        "denomination": 6,
-       "bonus": "@mod",
+       "bonus": "",
        "types": [
-        "piercing"
+        "fire"
        ],
        "custom": {
         "enabled": false,
         "formula": ""
        },
-       "scaling": {
-        "number": 1
-       }
+       "scaling": {}
       }
      ]
-    }
-   },
-   "1QKHOQ1KZ49cbcxr": {
-    "_id": "1QKHOQ1KZ49cbcxr",
-    "type": "utility",
-    "name": "Extra (2 CE)",
-    "sort": 900000,
-    "activation": {
-     "type": "special",
-     "value": null,
-     "condition": "When attacking with a drill, you can spend an additional 2 cursed energy to make the dr...",
-     "override": true
-    },
-    "consumption": {
-     "targets": [],
-     "scaling": {
-      "allowed": false
-     },
-     "spellSlot": false
     }
    }
   },
@@ -172,6 +223,24 @@
       18,
       "10d6"
      ]
+    ],
+    "1QKHOQ1KZ49cbcxr": [
+     [
+      1,
+      "3d6"
+     ],
+     [
+      6,
+      "5d6"
+     ],
+     [
+      11,
+      "8d6"
+     ],
+     [
+      18,
+      "10d6"
+     ]
     ]
    },
    "ceCosts": {
@@ -180,7 +249,8 @@
    },
    "technique": "Hair Manipulation",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "gqEhAM7a9IFAzEwy",

@@ -19,14 +19,248 @@
    "value": "class",
    "subtype": ""
   },
-  "requirements": "Fa Jin 1"
+  "requirements": "Fa Jin 1",
+  "uses": {
+   "max": "@prof + @details.level",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
+    }
+   ]
+  },
+  "activities": {
+   "RTbLQ2wwFHqbkTh5": {
+    "_id": "RTbLQ2wwFHqbkTh5",
+    "type": "utility",
+    "name": "Gain a Jin charge (melee miss)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "-1",
+       "scaling": {}
+      }
+     ],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "useConditionText": "false"
+   },
+   "7Q6eriB8SlAkXxjM": {
+    "_id": "7Q6eriB8SlAkXxjM",
+    "type": "utility",
+    "name": "Spend charges: +2 attack each",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1",
+       "scaling": {
+        "mode": "amount",
+        "formula": "1"
+       }
+      }
+     ],
+     "scaling": {
+      "allowed": true,
+      "max": "@prof"
+     }
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "gytrJPE0fQvYSNKU",
+      "onSave": false
+     }
+    ]
+   },
+   "KFjbrbzT5i4VEov2": {
+    "_id": "KFjbrbzT5i4VEov2",
+    "type": "utility",
+    "name": "Spend charges: +1 damage die each",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1",
+       "scaling": {
+        "mode": "amount",
+        "formula": "1"
+       }
+      }
+     ],
+     "scaling": {
+      "allowed": true,
+      "max": "@prof"
+     }
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "JBSukmHPGGy4d11y",
+      "onSave": false
+     }
+    ]
+   }
+  }
  },
  "flags": {
   "jjk5e": {
    "technique": "Fa Jin",
-   "level": 1
+   "level": 1,
+   "automationNotes": "Item uses = Jin charges (max prof + level, empty after a long rest). Paying 1 CE instead of a charge: use the CE spend in the dialog. Damage die shown as d6; swap for your weapon die.",
+   "automation": "automated"
   }
  },
  "folder": "F6im2Ck5LFiG7ZIX",
- "_key": "!items!GUfR5wl0Ez1j2haQ"
+ "_key": "!items!GUfR5wl0Ez1j2haQ",
+ "effects": [
+  {
+   "_id": "gytrJPE0fQvYSNKU",
+   "name": "+2 attack each",
+   "img": "modules/jjk5e/icons/techniques/fa-jin.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Applies to your next melee or CE attack; wasted on a miss.</p>",
+   "changes": [
+    {
+     "key": "system.bonuses.mwak.attack",
+     "mode": 2,
+     "value": "+ (2 * @scaling)",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.msak.attack",
+     "mode": 2,
+     "value": "+ (2 * @scaling)",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Fa Jin"
+    },
+    "dae": {
+     "specialDuration": [
+      "1Attack"
+     ]
+    }
+   },
+   "_key": "!items.effects!GUfR5wl0Ez1j2haQ.gytrJPE0fQvYSNKU"
+  },
+  {
+   "_id": "JBSukmHPGGy4d11y",
+   "name": "+1 damage die each",
+   "img": "modules/jjk5e/icons/techniques/fa-jin.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Applies to your next melee or CE attack; wasted on a miss.</p>",
+   "changes": [
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ (@scaling)d6",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.msak.damage",
+     "mode": 2,
+     "value": "+ (@scaling)d6",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Fa Jin"
+    },
+    "dae": {
+     "specialDuration": [
+      "1Attack"
+     ]
+    }
+   },
+   "_key": "!items.effects!GUfR5wl0Ez1j2haQ.JBSukmHPGGy4d11y"
+  }
+ ]
 }

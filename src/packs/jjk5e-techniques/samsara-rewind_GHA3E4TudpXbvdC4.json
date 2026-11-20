@@ -19,10 +19,10 @@
    "DqujXlB0omasjWGo": {
     "_id": "DqujXlB0omasjWGo",
     "type": "utility",
-    "name": "Bonus Action (8 CE)",
+    "name": "Samsara Rewind (full turn, 8 CE): rewind 1 round within 100 ft",
     "sort": 0,
     "activation": {
-     "type": "bonus",
+     "type": "action",
      "value": 1,
      "condition": "",
      "override": true
@@ -111,7 +111,9 @@
    },
    "technique": "Golden Hour",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Undo damage and CE spent (except this) and positions in 100 ft since the start of your previous turn — GM resets.",
+   "automation": "automated"
   }
  },
  "folder": "OPfUdWvA8mZmDQ8i",

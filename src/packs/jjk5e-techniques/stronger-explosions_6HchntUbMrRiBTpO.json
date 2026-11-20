@@ -19,7 +19,7 @@
    "wENdbq2O9vRdPcPp": {
     "_id": "wENdbq2O9vRdPcPp",
     "type": "save",
-    "name": "Special",
+    "name": "Explosion aftermath (on failed DEX)",
     "sort": 0,
     "activation": {
      "type": "special",
@@ -39,6 +39,11 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -64,12 +69,68 @@
      {
       "_id": "oavaaJ63thw5ibXF",
       "onSave": false
+     }
+    ]
+   },
+   "bwpuhaTd2EhJg5bc": {
+    "_id": "bwpuhaTd2EhJg5bc",
+    "type": "save",
+    "name": "Aftermath at 18th (deafened + blinded)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "oavaaJ63thw5ibXF",
+      "onSave": false
      },
      {
       "_id": "T5GLe3zyx3FjMbHC",
       "onSave": false
      }
-    ]
+    ],
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
    }
   },
   "uses": {
@@ -110,7 +171,9 @@
   "jjk5e": {
    "technique": "Explosive Flesh",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Explosions +5 ft radius and triple damage to objects.",
+   "automation": "automated"
   }
  },
  "effects": [
@@ -121,11 +184,17 @@
    "statuses": [
     "deafened"
    ],
-   "changes": [],
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "priority": 20,
+     "value": "turn=start, saveAbility=con, saveDC=JJKORIGINDC, label=Deafened (Stronger Explosions)"
+    }
+   ],
    "transfer": false,
    "disabled": false,
    "duration": {
-    "seconds": 60,
     "rounds": 10
    },
    "description": "",
@@ -143,11 +212,17 @@
    "statuses": [
     "blinded"
    ],
-   "changes": [],
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "priority": 20,
+     "value": "turn=start, saveAbility=con, saveDC=JJKORIGINDC, label=Blinded (Stronger Explosions)"
+    }
+   ],
    "transfer": false,
    "disabled": false,
    "duration": {
-    "seconds": 60,
     "rounds": 10
    },
    "description": "",

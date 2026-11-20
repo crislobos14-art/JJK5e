@@ -19,7 +19,7 @@
    "sjMhQBxYfnW8VLez": {
     "_id": "sjMhQBxYfnW8VLez",
     "type": "damage",
-    "name": "Special",
+    "name": "Hair cuts: 2d10 per 5 ft moved",
     "sort": 0,
     "activation": {
      "type": "special",
@@ -39,6 +39,11 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -165,7 +170,9 @@
     "seDdYTzDG66y3yxB": 20
    },
    "domainActivity": "seDdYTzDG66y3yxB",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Difficult terrain for everyone but you.",
+   "automation": "automated"
   }
  },
  "folder": "gqEhAM7a9IFAzEwy",

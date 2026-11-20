@@ -19,7 +19,7 @@
    "gg6Cm5uMOgzvt7fn": {
     "_id": "gg6Cm5uMOgzvt7fn",
     "type": "utility",
-    "name": "Action",
+    "name": "Give Jin charges by touch (up to CE mod)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -35,10 +35,16 @@
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "value": "5",
+     "units": "ft",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -84,7 +90,9 @@
   "jjk5e": {
    "technique": "Fa Jin",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Keep up to CE mod charges on a miss; 3+ charges on Explosive Power: +30 ft and thunder damage; 1 CE buys 2 charges.",
+   "automation": "automated"
   }
  },
  "folder": "F6im2Ck5LFiG7ZIX",

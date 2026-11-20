@@ -15,38 +15,7 @@
    "license": "CC BY-NC-SA 4.0",
    "rules": "2014"
   },
-  "activities": {
-   "C2xaEGhPJbPfkhbL": {
-    "_id": "C2xaEGhPJbPfkhbL",
-    "type": "utility",
-    "name": "Bonus Action",
-    "sort": 0,
-    "activation": {
-     "type": "bonus",
-     "value": 1,
-     "condition": "",
-     "override": true
-    },
-    "consumption": {
-     "targets": [],
-     "scaling": {
-      "allowed": false
-     },
-     "spellSlot": false
-    },
-    "range": {
-     "units": "self",
-     "override": true
-    },
-    "target": {
-     "override": true
-    },
-    "duration": {
-     "units": "inst",
-     "override": true
-    }
-   }
-  },
+  "activities": {},
   "uses": {
    "max": "",
    "recovery": [],
@@ -84,7 +53,9 @@
   "jjk5e": {
    "technique": "Explosive Flesh",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Small, Medium and Large throws may be an action or a bonus action (change the activation when you throw).",
+   "automation": "automated"
   }
  },
  "folder": "g4gimERTa06iViza",

@@ -39,13 +39,16 @@
     },
     "range": {
      "value": "10",
-     "units": "ft"
+     "units": "ft",
+     "override": true
     },
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
-     }
+      "count": "1",
+      "choice": true
+     },
+     "override": true
     },
     "duration": {
      "units": "inst"
@@ -62,7 +65,13 @@
     "damage": {
      "onSave": "none",
      "parts": []
-    }
+    },
+    "effects": [
+     {
+      "_id": "8PeNIfQDAcB2Qzgw",
+      "onSave": false
+     }
+    ]
    }
   }
  },
@@ -85,10 +94,33 @@
       "Hair Manipulation"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!uBHyWMX3wH0q3JAU"
+ "_key": "!items!uBHyWMX3wH0q3JAU",
+ "effects": [
+  {
+   "_id": "8PeNIfQDAcB2Qzgw",
+   "name": "Doll Hairs",
+   "img": "modules/jjk5e/icons/techniques/hair-manipulation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Caster can use Hair Manipulation through its hair 2 × CE mod times. Hair AC = caster's DC; fire/slashing ≥ caster level destroys it.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Hair Manipulation"
+    }
+   },
+   "_key": "!items.effects!uBHyWMX3wH0q3JAU.8PeNIfQDAcB2Qzgw"
+  }
+ ]
 }

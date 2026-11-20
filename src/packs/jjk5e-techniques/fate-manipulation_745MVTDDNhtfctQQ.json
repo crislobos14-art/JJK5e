@@ -19,7 +19,7 @@
    "y0xkFff9ta46MTeq": {
     "_id": "y0xkFff9ta46MTeq",
     "type": "utility",
-    "name": "Action (2 CE)",
+    "name": "Bind two creatures (2 CE, +1 Fate per 2 CE)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -30,7 +30,8 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "2 * @prof"
      },
      "spellSlot": false
     },
@@ -42,16 +43,46 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "2",
+      "choice": true
      },
      "override": true
     },
     "duration": {
      "value": "1",
      "units": "minute",
-     "concentration": false,
      "override": true
-    }
+    },
+    "effects": [
+     {
+      "_id": "LxMNAzwPNMGFLhXf",
+      "onSave": false
+     },
+     {
+      "_id": "AZKB9fcgXkjZZ3On",
+      "onSave": false
+     },
+     {
+      "_id": "yEA2ycR0B6m2Yv2X",
+      "onSave": false
+     },
+     {
+      "_id": "OgLtvDfHxz0wnhqc",
+      "onSave": false
+     },
+     {
+      "_id": "oY4X6nsq7vtnQXmo",
+      "onSave": false
+     },
+     {
+      "_id": "CbQsT3RfFaklmwO2",
+      "onSave": false
+     },
+     {
+      "_id": "JJB2wGO9jx7kdehn",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -102,33 +133,162 @@
    },
    "technique": "Fate",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceSteps": {
+    "y0xkFff9ta46MTeq": 2
+   },
+   "automationNotes": "Pick the Fate effects in the usage dialog (one per 2 CE above the base, up to prof). Soul damage cuts the thread; no effect on creatures without CE.",
+   "automation": "automated"
   }
  },
  "folder": "UdYh82jLla1edrDf",
  "effects": [
   {
-   "_id": "gvIMz85YIK6Emwtc",
-   "name": "Fate Manipulation (toggle)",
+   "_id": "LxMNAzwPNMGFLhXf",
+   "name": "Fate — Bonds: +2 AC",
    "img": "modules/jjk5e/icons/techniques/fate.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Bonds: +2 AC. Active while both are within 30 ft.</p>",
    "changes": [
     {
      "key": "system.attributes.ac.bonus",
      "mode": 2,
      "value": "+2",
-     "priority": null
+     "priority": 20
     }
    ],
-   "transfer": true,
-   "disabled": true,
-   "duration": {},
-   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "duration": {
+    "rounds": 10
+   },
    "flags": {
     "jjk5e": {
-     "auto": "toggle"
+     "technique": "Fate"
     }
    },
-   "_key": "!items.effects!745MVTDDNhtfctQQ.gvIMz85YIK6Emwtc"
+   "_key": "!items.effects!745MVTDDNhtfctQQ.LxMNAzwPNMGFLhXf"
+  },
+  {
+   "_id": "AZKB9fcgXkjZZ3On",
+   "name": "Fate — Promised Time: adv./disadv. vs each other",
+   "img": "modules/jjk5e/icons/techniques/fate.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Promised Time: adv./disadv. vs each other. Active while both are within 30 ft.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Fate"
+    }
+   },
+   "_key": "!items.effects!745MVTDDNhtfctQQ.AZKB9fcgXkjZZ3On"
+  },
+  {
+   "_id": "yEA2ycR0B6m2Yv2X",
+   "name": "Fate — Mirrored: opposite rolls on 20/1",
+   "img": "modules/jjk5e/icons/techniques/fate.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Mirrored: opposite rolls on 20/1. Active while both are within 30 ft.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Fate"
+    }
+   },
+   "_key": "!items.effects!745MVTDDNhtfctQQ.yEA2ycR0B6m2Yv2X"
+  },
+  {
+   "_id": "OgLtvDfHxz0wnhqc",
+   "name": "Fate — Magnetic: pulled 10 ft together",
+   "img": "modules/jjk5e/icons/techniques/fate.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Magnetic: pulled 10 ft together. Active while both are within 30 ft.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Fate"
+    }
+   },
+   "_key": "!items.effects!745MVTDDNhtfctQQ.OgLtvDfHxz0wnhqc"
+  },
+  {
+   "_id": "oY4X6nsq7vtnQXmo",
+   "name": "Fate — Shared Strengths (touch)",
+   "img": "modules/jjk5e/icons/techniques/fate.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Shared Strengths (touch). Active while both are within 30 ft.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Fate"
+    }
+   },
+   "_key": "!items.effects!745MVTDDNhtfctQQ.oY4X6nsq7vtnQXmo"
+  },
+  {
+   "_id": "CbQsT3RfFaklmwO2",
+   "name": "Fate — Linked Suffering (6th, touch): split damage",
+   "img": "modules/jjk5e/icons/techniques/fate.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Linked Suffering (6th, touch): split damage. Active while both are within 30 ft.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Fate"
+    }
+   },
+   "_key": "!items.effects!745MVTDDNhtfctQQ.CbQsT3RfFaklmwO2"
+  },
+  {
+   "_id": "JJB2wGO9jx7kdehn",
+   "name": "Fate — Destined Death (11th, touch): adv./disadv. on saves vs each other",
+   "img": "modules/jjk5e/icons/techniques/fate.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Destined Death (11th, touch): adv./disadv. on saves vs each other. Active while both are within 30 ft.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Fate"
+    }
+   },
+   "_key": "!items.effects!745MVTDDNhtfctQQ.JJB2wGO9jx7kdehn"
   }
  ],
  "_key": "!items!745MVTDDNhtfctQQ"

@@ -23,27 +23,60 @@
   "activities": {
    "BbMsDIlRoSMylz1C": {
     "_id": "BbMsDIlRoSMylz1C",
-    "type": "utility",
-    "name": "Bonus Action",
+    "type": "save",
+    "name": "Blue Hour (on melee hit): slowed",
     "sort": 0,
+    "img": null,
     "activation": {
-     "type": "bonus",
-     "value": 1,
-     "condition": ""
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
-     }
+      "allowed": true,
+      "max": "2 * max(@abilities.wis.mod, @abilities.cha.mod)"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
-     "units": "self"
+     "units": "spec",
+     "override": true
     },
-    "target": {},
-    "duration": {
-     "units": "inst"
-    }
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "A81JwEfFUC3d1xRt",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    },
+    "useConditionText": "reaction === \"isHit\""
    }
   }
  },
@@ -63,10 +96,64 @@
       "Golden Hour"
      ]
     ]
-   }
+   },
+   "ceCosts": {
+    "BbMsDIlRoSMylz1C": 2
+   },
+   "ceSteps": {
+    "BbMsDIlRoSMylz1C": 2
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!PPFj206I5gCYs0IM"
+ "_key": "!items!PPFj206I5gCYs0IM",
+ "effects": [
+  {
+   "_id": "A81JwEfFUC3d1xRt",
+   "name": "Slowed (Blue Hour)",
+   "img": "modules/jjk5e/icons/techniques/golden-hour.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Slow spell effects: half speed, −2 AC/DEX saves, no reactions, action or bonus action, one attack. 1 turn per 2 CE.</p>",
+   "changes": [
+    {
+     "key": "system.attributes.movement.all",
+     "mode": 1,
+     "value": "0.5",
+     "priority": 20
+    },
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "-2",
+     "priority": 20
+    },
+    {
+     "key": "system.abilities.dex.bonuses.save",
+     "mode": 2,
+     "value": "-2",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "value": "turn=end, saveAbility=con, saveDC=JJKORIGINDC, label=Blue Hour",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Golden Hour"
+    }
+   },
+   "_key": "!items.effects!PPFj206I5gCYs0IM.A81JwEfFUC3d1xRt"
+  }
+ ]
 }

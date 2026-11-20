@@ -19,12 +19,12 @@
    "LBVlO7eNrfULztpx": {
     "_id": "LBVlO7eNrfULztpx",
     "type": "save",
-    "name": "Reaction (2 CE)",
+    "name": "Unlucky phenomena (reaction at its turn start, 2 CE)",
     "sort": 0,
     "activation": {
      "type": "reaction",
      "value": 1,
-     "condition": "",
+     "condition": "A creature under your Fate starts its turn. Damage always; DEX save vs prone.",
      "override": true
     },
     "consumption": {
@@ -39,6 +39,11 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -58,7 +63,23 @@
     },
     "damage": {
      "onSave": "none",
-     "parts": []
+     "parts": [
+      {
+       "number": null,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "bludgeoning",
+        "slashing",
+        "piercing"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "(@prof)d8"
+       },
+       "scaling": {}
+      }
+     ]
     },
     "effects": [
      {
@@ -110,7 +131,9 @@
    },
    "technique": "Fate",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "+1 minute per extra CE on Fates (1 hour, +1 hour per CE at 11th): edit the Fate duration.",
+   "automation": "automated"
   }
  },
  "effects": [

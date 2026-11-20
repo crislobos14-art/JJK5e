@@ -19,14 +19,89 @@
    "value": "class",
    "subtype": ""
   },
-  "requirements": "Faceless God 3"
+  "requirements": "Faceless God 3",
+  "activities": {
+   "G0keUGeOLwqn2zt8": {
+    "_id": "G0keUGeOLwqn2zt8",
+    "type": "utility",
+    "name": "Madness on hit (+5%, +5% per extra CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "@prof"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "mIzA0FWfaVdVE6cE",
+      "onSave": false
+     }
+    ],
+    "useConditionText": "reaction === \"isHit\""
+   }
+  }
  },
  "flags": {
   "jjk5e": {
    "technique": "Faceless God",
-   "level": 3
+   "level": 3,
+   "ceCosts": {
+    "G0keUGeOLwqn2zt8": 0
+   },
+   "ceSteps": {
+    "G0keUGeOLwqn2zt8": 1
+   },
+   "automation": "automated"
   }
  },
  "folder": "TxiITYXHPOTbqkOW",
- "_key": "!items!lkaVCW2EJODeRx9X"
+ "_key": "!items!lkaVCW2EJODeRx9X",
+ "effects": [
+  {
+   "_id": "mIzA0FWfaVdVE6cE",
+   "name": "Mental Corruption +5%",
+   "img": "modules/jjk5e/icons/techniques/faceless-god.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>+5% Mental Corruption. Track the total on the creature (10% −1 AC · 20% −1 saves · 40% −2 AC/saves · 50% no concentration · 60% disadv. skills · 70% charmed · 80% −4 AC/saves).</p>",
+   "changes": [],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Faceless God"
+    }
+   },
+   "_key": "!items.effects!lkaVCW2EJODeRx9X.mIzA0FWfaVdVE6cE"
+  }
+ ]
 }

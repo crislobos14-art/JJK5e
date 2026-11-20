@@ -58,6 +58,48 @@
      "concentration": false,
      "override": true
     }
+   },
+   "GmskdMZJdpCHmFhL": {
+    "_id": "GmskdMZJdpCHmFhL",
+    "type": "utility",
+    "name": "Initiative 20: +5% corruption to all",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "enemy",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "I4QnEBH2hYN5Ebnl",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -116,9 +158,32 @@
     "WMrGABaFz6gY8oyS": 20
    },
    "domainActivity": "WMrGABaFz6gY8oyS",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "TxiITYXHPOTbqkOW",
- "_key": "!items!zSGeI3ieeQad8lzW"
+ "_key": "!items!zSGeI3ieeQad8lzW",
+ "effects": [
+  {
+   "_id": "I4QnEBH2hYN5Ebnl",
+   "name": "Mental Corruption +5%",
+   "img": "modules/jjk5e/icons/techniques/faceless-god-domain.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>+5% Mental Corruption; −1 to all rolls per 10% inside the domain. Track the total on the creature (10% −1 AC · 20% −1 saves · 40% −2 AC/saves · 50% no concentration · 60% disadv. skills · 70% charmed · 80% −4 AC/saves).</p>",
+   "changes": [],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Faceless God"
+    }
+   },
+   "_key": "!items.effects!zSGeI3ieeQad8lzW.I4QnEBH2hYN5Ebnl"
+  }
+ ]
 }

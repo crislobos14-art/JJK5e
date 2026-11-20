@@ -1,147 +1,167 @@
 {
-  "_id": "BiQmr9X82yv0uLD4",
-  "name": "Golden Week",
-  "type": "spell",
-  "img": "modules/jjk5e/icons/techniques/golden-hour.svg",
-  "system": {
-    "description": {
-      "value": "<p><em>Golden Hour — Innate Technique (6th level)</em></p><p>At 6th level, you have begun to master your technique. You have learned to use your technique for longer. As an action for 4 cursed energy instead of stopping time you can empower yourself for longer, gaining the following benefits for 1 minute: </p>\n<ul>\n<li>\n<p>Your speed is doubled.  </p>\n</li>\n<li>\n<p>You gain a +3 bonus to AC.  </p>\n</li>\n<li>\n<p>You have advantage on Dexterity saving throws.  </p>\n</li>\n<li>\n<p>You gain an additional action on each of its turns. That action can be used only to take the Attack (one weapon attack only), Dash, Disengage, Hide, or Use an Object action.</p>\n</li>\n</ul>\n<p>You cannot stop time until this feature ends.</p>",
-      "chat": ""
-    },
-    "source": {
-      "book": "JJK 5e V.6",
-      "page": "",
-      "custom": "",
-      "license": "CC BY-NC-SA 4.0",
-      "rules": "2014"
-    },
-    "activities": {
-      "egehxj5u7W8TYE5K": {
-        "_id": "egehxj5u7W8TYE5K",
-        "type": "utility",
-        "name": "Action (4 CE)",
-        "sort": 0,
-        "activation": {
-          "type": "action",
-          "value": 1,
-          "condition": "",
-          "override": true
-        },
-        "consumption": {
-          "targets": [],
-          "scaling": {
-            "allowed": false
-          },
-          "spellSlot": false
-        },
-        "range": {
-          "units": "self",
-          "override": true
-        },
-        "target": {
-          "override": true
-        },
-        "duration": {
-          "value": "1",
-          "units": "minute",
-          "concentration": false,
-          "override": true
-        }
-      }
-    },
-    "uses": {
-      "max": "",
-      "recovery": [],
-      "spent": 0
-    },
-    "level": 3,
-    "school": "jjk",
-    "method": "technique",
-    "prepared": 1,
-    "ability": "",
-    "properties": [],
-    "materials": {
-      "value": "",
-      "consumed": false,
-      "cost": 0,
-      "supply": 0
-    },
+ "_id": "BiQmr9X82yv0uLD4",
+ "name": "Golden Week",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/golden-hour.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Golden Hour — Innate Technique (6th level)</em></p><p>At 6th level, you have begun to master your technique. You have learned to use your technique for longer. As an action for 4 cursed energy instead of stopping time you can empower yourself for longer, gaining the following benefits for 1 minute: </p>\n<ul>\n<li>\n<p>Your speed is doubled.  </p>\n</li>\n<li>\n<p>You gain a +3 bonus to AC.  </p>\n</li>\n<li>\n<p>You have advantage on Dexterity saving throws.  </p>\n</li>\n<li>\n<p>You gain an additional action on each of its turns. That action can be used only to take the Attack (one weapon attack only), Dash, Disengage, Hide, or Use an Object action.</p>\n</li>\n</ul>\n<p>You cannot stop time until this feature ends.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "egehxj5u7W8TYE5K": {
+    "_id": "egehxj5u7W8TYE5K",
+    "type": "utility",
+    "name": "Action (4 CE)",
+    "sort": 0,
     "activation": {
-      "type": "action",
-      "value": 1,
-      "condition": "",
-      "override": true
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
     },
-    "duration": {
-      "value": "1",
-      "units": "minute"
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
     },
     "range": {
-      "units": "self",
-      "override": true
+     "units": "self",
+     "override": true
     },
-    "target": {},
-    "sourceItem": ""
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "ZRzxkHZRHWtCaHev",
+      "onSave": false
+     }
+    ]
+   }
   },
-  "flags": {
-    "jjk5e": {
-      "ceCosts": {
-        "egehxj5u7W8TYE5K": 4
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 3,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "value": "1",
+   "units": "minute"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "egehxj5u7W8TYE5K": 4
+   },
+   "technique": "Golden Hour",
+   "level": 6,
+   "spellFrom": "feat",
+   "selfBuffs": {
+    "egehxj5u7W8TYE5K": {
+     "rounds": 10,
+     "changes": [
+      {
+       "key": "system.attributes.movement.walk",
+       "type": "multiply",
+       "value": "2"
       },
-      "technique": "Golden Hour",
-      "level": 6,
-      "spellFrom": "feat",
-      "selfBuffs": {
-        "egehxj5u7W8TYE5K": {
-          "rounds": 10,
-          "changes": [
-            {
-              "key": "system.attributes.movement.walk",
-              "type": "multiply",
-              "value": "2"
-            },
-            {
-              "key": "system.attributes.ac.bonus",
-              "type": "add",
-              "value": "3"
-            }
-          ],
-          "manual": "Advantage on Dexterity saving throws. Extra limited action each turn: one weapon attack, Dash, Disengage, Hide or Use an Object. Cannot stop time while Golden Week is active. These restrictions need GM adjudication."
-        }
+      {
+       "key": "system.attributes.ac.bonus",
+       "type": "add",
+       "value": "3"
       }
+     ],
+     "manual": "Advantage on Dexterity saving throws. Extra limited action each turn: one weapon attack, Dash, Disengage, Hide or Use an Object. Cannot stop time while Golden Week is active. These restrictions need GM adjudication."
     }
-  },
-  "folder": "OPfUdWvA8mZmDQ8i",
-  "effects": [
+   },
+   "automation": "automated"
+  }
+ },
+ "folder": "OPfUdWvA8mZmDQ8i",
+ "effects": [
+  {
+   "_id": "ZRzxkHZRHWtCaHev",
+   "name": "Golden Week",
+   "img": "modules/jjk5e/icons/techniques/golden-hour.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Speed doubled, +3 AC, advantage on DEX saves, extra limited action (haste-like); no time stop meanwhile.</p>",
+   "changes": [
     {
-      "_id": "6CQLJ4Mi2URq1UL6",
-      "name": "Golden Week (toggle)",
-      "img": "modules/jjk5e/icons/techniques/golden-hour.svg",
-      "changes": [
-        {
-          "key": "system.attributes.ac.bonus",
-          "mode": 2,
-          "value": "+3",
-          "priority": null
-        },
-        {
-          "key": "system.abilities.dex.save.roll.mode",
-          "mode": 2,
-          "value": "1",
-          "priority": null
-        }
-      ],
-      "transfer": true,
-      "disabled": true,
-      "duration": {},
-      "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
-      "flags": {
-        "jjk5e": {
-          "auto": "toggle"
-        }
-      },
-      "_key": "!items.effects!BiQmr9X82yv0uLD4.6CQLJ4Mi2URq1UL6"
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+3",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.advantage.ability.save.dex",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "system.attributes.movement.all",
+     "mode": 1,
+     "value": "2",
+     "priority": 20
     }
-  ],
-  "_key": "!items!BiQmr9X82yv0uLD4"
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Golden Hour"
+    }
+   },
+   "_key": "!items.effects!BiQmr9X82yv0uLD4.ZRzxkHZRHWtCaHev"
+  }
+ ],
+ "_key": "!items!BiQmr9X82yv0uLD4"
 }

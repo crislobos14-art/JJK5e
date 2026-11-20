@@ -58,6 +58,48 @@
      "concentration": false,
      "override": true
     }
+   },
+   "ADVL3Kge2weemhyJ": {
+    "_id": "ADVL3Kge2weemhyJ",
+    "type": "utility",
+    "name": "Initiative 20: see 6 s into everyone's future",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "enemy",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "SYc0GBtKB4FAyOJB",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -116,9 +158,45 @@
     "1uLrGy50KQML8hMP": 20
    },
    "domainActivity": "1uLrGy50KQML8hMP",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "GjZxtO8W2HfeT6Hl",
- "_key": "!items!HxfdcfxdpJridm05"
+ "_key": "!items!HxfdcfxdpJridm05",
+ "effects": [
+  {
+   "_id": "SYc0GBtKB4FAyOJB",
+   "name": "Storyboard (6 s marked)",
+   "img": "modules/jjk5e/icons/techniques/g-warstaff-domain.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>All 6 seconds of foresight against the caster.</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.disadvantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.grants.advantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "G Warstaff"
+    }
+   },
+   "_key": "!items.effects!HxfdcfxdpJridm05.SYc0GBtKB4FAyOJB"
+  }
+ ]
 }

@@ -24,7 +24,9 @@
  "flags": {
   "jjk5e": {
    "technique": "G Warstaff",
-   "level": 3
+   "level": 3,
+   "automationNotes": "Saves forced by a creature you see 2+ s into: half on fail, none on success (Midi: tick superSaver).",
+   "automation": "automated"
   }
  },
  "folder": "GjZxtO8W2HfeT6Hl",

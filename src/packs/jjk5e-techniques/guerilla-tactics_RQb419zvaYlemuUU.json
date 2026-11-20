@@ -19,12 +19,12 @@
    "cDZqmBgEf1AjCNHG": {
     "_id": "cDZqmBgEf1AjCNHG",
     "type": "save",
-    "name": "Reaction",
+    "name": "Instant explosion (reaction on melee hit given/received)",
     "sort": 0,
     "activation": {
      "type": "reaction",
      "value": 1,
-     "condition": "",
+     "condition": "Pay the body part's cost; size = small here (change radius/die for others). Disadvantage unless their passive Perception beats your DC.",
      "override": true
     },
     "consumption": {
@@ -35,10 +35,21 @@
      "spellSlot": false
     },
     "range": {
-     "units": "spec",
+     "units": "self",
      "override": true
     },
     "target": {
+     "template": {
+      "type": "radius",
+      "size": "10",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
      "override": true
     },
     "duration": {
@@ -55,10 +66,24 @@
      }
     },
     "damage": {
-     "onSave": "none",
-     "parts": []
+     "onSave": "half",
+     "parts": [
+      {
+       "number": null,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "force"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "(max(@abilities.wis.mod, @abilities.cha.mod))d8"
+       },
+       "scaling": {}
+      }
+     ]
     },
-    "useConditionText": "false"
+    "useConditionText": "reaction === \"isHit\""
    }
   },
   "uses": {
@@ -98,7 +123,11 @@
   "jjk5e": {
    "technique": "Explosive Flesh",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceCosts": {
+    "cDZqmBgEf1AjCNHG": 2
+   },
+   "automation": "automated"
   }
  },
  "folder": "g4gimERTa06iViza",

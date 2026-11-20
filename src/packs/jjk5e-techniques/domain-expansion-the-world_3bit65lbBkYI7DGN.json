@@ -58,6 +58,47 @@
      "concentration": false,
      "override": true
     }
+   },
+   "L1Xd7TAwZi7Dyj3y": {
+    "_id": "L1Xd7TAwZi7Dyj3y",
+    "type": "utility",
+    "name": "Initiative 20: stop time, take a turn",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "rvruoxXKflJxCaSi",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -116,9 +157,45 @@
     "nbJ51mrzj6A7e4Nr": 20
    },
    "domainActivity": "nbJ51mrzj6A7e4Nr",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Each time stop in the domain lasts one extra turn.",
+   "automation": "automated"
   }
  },
  "folder": "OPfUdWvA8mZmDQ8i",
- "_key": "!items!3bit65lbBkYI7DGN"
+ "_key": "!items!3bit65lbBkYI7DGN",
+ "effects": [
+  {
+   "_id": "rvruoxXKflJxCaSi",
+   "name": "The World",
+   "img": "modules/jjk5e/icons/techniques/golden-hour-domain.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.advantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Golden Hour"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnEnd"
+     ]
+    }
+   },
+   "_key": "!items.effects!3bit65lbBkYI7DGN.rvruoxXKflJxCaSi"
+  }
+ ]
 }

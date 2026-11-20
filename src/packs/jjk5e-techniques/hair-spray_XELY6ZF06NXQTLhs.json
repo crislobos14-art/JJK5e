@@ -19,7 +19,7 @@
    "JVgDGXhMR3fNB5BQ": {
     "_id": "JVgDGXhMR3fNB5BQ",
     "type": "utility",
-    "name": "Bonus Action (4 CE)",
+    "name": "Save technique as bonus action (4 CE, target disadvantage)",
     "sort": 0,
     "activation": {
      "type": "bonus",
@@ -39,12 +39,62 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
-    }
+    },
+    "effects": [
+     {
+      "_id": "ZEqrGAceJ086qQC6",
+      "onSave": false
+     }
+    ]
+   },
+   "juuzoROFZzMH1knm": {
+    "_id": "juuzoROFZzMH1knm",
+    "type": "utility",
+    "name": "Attack technique as bonus action (+2 CE, advantage)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "VscBJyJlPMd9UPnc",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -83,13 +133,82 @@
  "flags": {
   "jjk5e": {
    "ceCosts": {
-    "JVgDGXhMR3fNB5BQ": 4
+    "JVgDGXhMR3fNB5BQ": 4,
+    "juuzoROFZzMH1knm": 2
    },
    "technique": "Hair Manipulation",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "+5 ft reach on hair techniques; hair = Grade 1 tool (Special Grade at 18th).",
+   "automation": "automated"
   }
  },
  "folder": "gqEhAM7a9IFAzEwy",
- "_key": "!items!XELY6ZF06NXQTLhs"
+ "_key": "!items!XELY6ZF06NXQTLhs",
+ "effects": [
+  {
+   "_id": "ZEqrGAceJ086qQC6",
+   "name": "Hair Spray (save)",
+   "img": "modules/jjk5e/icons/techniques/hair-manipulation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.grants.disadvantage.save.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Hair Manipulation"
+    },
+    "dae": {
+     "specialDuration": [
+      "1Spell"
+     ]
+    }
+   },
+   "_key": "!items.effects!XELY6ZF06NXQTLhs.ZEqrGAceJ086qQC6"
+  },
+  {
+   "_id": "VscBJyJlPMd9UPnc",
+   "name": "Hair Spray (attack)",
+   "img": "modules/jjk5e/icons/techniques/hair-manipulation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.advantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Hair Manipulation"
+    },
+    "dae": {
+     "specialDuration": [
+      "1Attack"
+     ]
+    }
+   },
+   "_key": "!items.effects!XELY6ZF06NXQTLhs.VscBJyJlPMd9UPnc"
+  }
+ ]
 }

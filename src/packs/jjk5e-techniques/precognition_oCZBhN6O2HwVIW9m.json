@@ -24,9 +24,12 @@
  "flags": {
   "jjk5e": {
    "technique": "G Warstaff",
-   "level": 11
+   "level": 11,
+   "automationNotes": "Midi has no per-source crit range; lower the crit threshold by ½ CE mod on the Warstaff when you have advantage.",
+   "automation": "automated"
   }
  },
  "folder": "GjZxtO8W2HfeT6Hl",
- "_key": "!items!oCZBhN6O2HwVIW9m"
+ "_key": "!items!oCZBhN6O2HwVIW9m",
+ "effects": []
 }
