@@ -19,7 +19,7 @@
    "vvbMyowtvHkpfGxJ": {
     "_id": "vvbMyowtvHkpfGxJ",
     "type": "damage",
-    "name": "Special",
+    "name": "Initiative 20: 1d12 per star shikigami",
     "sort": 0,
     "activation": {
      "type": "special",
@@ -39,6 +39,10 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "enemy",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -165,7 +169,8 @@
     "ZsIkFbcTF2D2Gi1D": 20
    },
    "domainActivity": "ZsIkFbcTF2D2Gi1D",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "ba0AWxHF6sBvbrZq",

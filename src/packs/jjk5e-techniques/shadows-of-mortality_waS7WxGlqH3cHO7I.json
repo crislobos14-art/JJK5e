@@ -19,7 +19,7 @@
    "11e01xD5dgvWWq2W": {
     "_id": "11e01xD5dgvWWq2W",
     "type": "utility",
-    "name": "Special (1 CE)",
+    "name": "Free Shadow Strike (1 CE, once per turn)",
     "sort": 0,
     "activation": {
      "type": "special",
@@ -44,7 +44,13 @@
     "duration": {
      "units": "inst",
      "override": true
-    }
+    },
+    "effects": [
+     {
+      "_id": "N20wjUD8IsMXPcvh",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -87,9 +93,44 @@
    },
    "technique": "Shadow Killer",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "AZz0yh4SFsEeg2VN",
- "_key": "!items!waS7WxGlqH3cHO7I"
+ "_key": "!items!waS7WxGlqH3cHO7I",
+ "effects": [
+  {
+   "_id": "N20wjUD8IsMXPcvh",
+   "name": "Shadows of Mortality",
+   "img": "modules/jjk5e/icons/techniques/shadow-killer.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Critical if the target hasn't acted yet or is surprised (remove otherwise); no Black Flash.</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.critical.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Shadow Killer"
+    },
+    "dae": {
+     "specialDuration": [
+      "1Attack"
+     ]
+    }
+   },
+   "_key": "!items.effects!waS7WxGlqH3cHO7I.N20wjUD8IsMXPcvh"
+  }
+ ]
 }

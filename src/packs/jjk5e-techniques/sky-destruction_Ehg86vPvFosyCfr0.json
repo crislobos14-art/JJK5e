@@ -38,7 +38,9 @@
      }
     },
     "range": {
-     "units": "self"
+     "value": "60",
+     "units": "ft",
+     "override": true
     },
     "target": {
      "template": {
@@ -51,7 +53,8 @@
      "affects": {
       "type": "creature",
       "choice": false
-     }
+     },
+     "override": true
     },
     "duration": {
      "units": "inst"
@@ -67,8 +70,65 @@
     },
     "damage": {
      "onSave": "half",
-     "parts": []
+     "parts": [
+      {
+       "number": null,
+       "denomination": null,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "2 * max(@abilities.wis.mod, @abilities.cha.mod)"
+       },
+       "scaling": {}
+      }
+     ]
     }
+   },
+   "ASmWfQEW5J5lFvNx": {
+    "_id": "ASmWfQEW5J5lFvNx",
+    "type": "utility",
+    "name": "Failed by 5+: stunned",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "qfUAwcHPjmpXMQzb",
+      "onSave": false
+     }
+    ]
    }
   }
  },
@@ -91,10 +151,41 @@
       "Sky Manipulation"
      ]
     ]
-   }
+   },
+   "automationNotes": "Damage: 2 × CE mod per creature/size it collides with (shown once — multiply).",
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!Ehg86vPvFosyCfr0"
+ "_key": "!items!Ehg86vPvFosyCfr0",
+ "effects": [
+  {
+   "_id": "qfUAwcHPjmpXMQzb",
+   "name": "Stunned (Sky Destruction)",
+   "img": "modules/jjk5e/icons/techniques/sky-manipulation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [
+    "stunned"
+   ],
+   "description": "",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Sky Manipulation"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStartSource"
+     ]
+    }
+   },
+   "_key": "!items.effects!Ehg86vPvFosyCfr0.qfUAwcHPjmpXMQzb"
+  }
+ ]
 }

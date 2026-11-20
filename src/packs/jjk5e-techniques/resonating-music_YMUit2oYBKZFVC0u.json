@@ -41,7 +41,7 @@
     "target": {
      "template": {
       "type": "cone",
-      "size": "15",
+      "size": "15 + 15 * floor(min(@details.level, 11) / 11)",
       "units": "ft",
       "count": "1",
       "contiguous": false
@@ -69,19 +69,17 @@
      "onSave": "half",
      "parts": [
       {
-       "number": 3,
+       "number": null,
        "denomination": 10,
-       "bonus": "(@prof)d10",
+       "bonus": "",
        "types": [
         "thunder"
        ],
        "custom": {
-        "enabled": false,
-        "formula": ""
+        "enabled": true,
+        "formula": "(2 + floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11) + 2 * floor(min(@details.level, 18) / 18) + @prof)d10"
        },
-       "scaling": {
-        "number": 1
-       }
+       "scaling": {}
       }
      ]
     },
@@ -166,7 +164,9 @@
       "6d10"
      ]
     ]
-   }
+   },
+   "automationNotes": "Failed save: pushed 20 ft. Sound Blast range is 60 ft from 6th.",
+   "automation": "automated"
   }
  },
  "folder": "vosb36eMO9PhuX42",

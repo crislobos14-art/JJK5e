@@ -39,6 +39,9 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
@@ -46,12 +49,18 @@
      "units": "minute",
      "concentration": false,
      "override": true
-    }
+    },
+    "effects": [
+     {
+      "_id": "CE8mEbcbQBTDboNv",
+      "onSave": false
+     }
+    ]
    },
    "UFgrZvfA5S0POj5u": {
     "_id": "UFgrZvfA5S0POj5u",
     "type": "attack",
-    "name": "Line of Blood (attack)",
+    "name": "Line of blood (3 free per turn)",
     "sort": 100000,
     "activation": {
      "type": "special",
@@ -74,7 +83,8 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
@@ -83,11 +93,12 @@
      "override": true
     },
     "damage": {
+     "includeBase": false,
      "parts": [
       {
        "number": 4,
        "denomination": 10,
-       "bonus": "@mod",
+       "bonus": "max(@abilities.wis.mod, @abilities.cha.mod)",
        "types": [
         "acid",
         "necrotic"
@@ -96,15 +107,12 @@
         "enabled": false,
         "formula": ""
        },
-       "scaling": {
-        "number": 1
-       }
+       "scaling": {}
       }
-     ],
-     "includeBase": false
+     ]
     },
     "attack": {
-     "ability": "",
+     "ability": "spellcasting",
      "bonus": "",
      "critical": {
       "threshold": null
@@ -158,33 +166,50 @@
    },
    "technique": "Rot",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "TOdSvSBhuENKcEJX",
  "effects": [
   {
-   "_id": "rOTqIOlWWnZtasa5",
-   "name": "Maximum: Wing King (toggle)",
+   "_id": "CE8mEbcbQBTDboNv",
+   "name": "Wing King",
    "img": "modules/jjk5e/icons/techniques/rot.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Speed ×4, fly = half that, advantage on DEX saves; three free blood-line attacks per turn; no Decay.</p>",
    "changes": [
     {
-     "key": "system.abilities.dex.save.roll.mode",
-     "mode": 2,
+     "key": "system.attributes.movement.walk",
+     "mode": 1,
+     "value": "4",
+     "priority": 20
+    },
+    {
+     "key": "system.attributes.movement.fly",
+     "mode": 4,
+     "value": "floor(@attributes.movement.walk * 2)",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.advantage.ability.save.dex",
+     "mode": 0,
      "value": "1",
-     "priority": null
+     "priority": 20
     }
    ],
-   "transfer": true,
-   "disabled": true,
-   "duration": {},
-   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "duration": {
+    "rounds": 10
+   },
    "flags": {
     "jjk5e": {
-     "auto": "toggle"
+     "technique": "Rot"
     }
    },
-   "_key": "!items.effects!xWdQR7gjV6e3o70B.rOTqIOlWWnZtasa5"
+   "_key": "!items.effects!xWdQR7gjV6e3o70B.CE8mEbcbQBTDboNv"
   }
  ],
  "_key": "!items!xWdQR7gjV6e3o70B"

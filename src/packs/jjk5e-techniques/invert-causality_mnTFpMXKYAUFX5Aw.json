@@ -19,7 +19,7 @@
    "UQbIGoR0Bxusrp9j": {
     "_id": "UQbIGoR0Bxusrp9j",
     "type": "attack",
-    "name": "Reaction (8 CE)",
+    "name": "Invert Causality (8 CE): rewind and strike first",
     "sort": 0,
     "activation": {
      "type": "reaction",
@@ -42,7 +42,8 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
@@ -63,7 +64,7 @@
      "includeBase": false,
      "parts": []
     },
-    "useConditionText": "false"
+    "useConditionText": "reaction === \"isDamaged\""
    }
   },
   "uses": {
@@ -113,7 +114,9 @@
    },
    "technique": "Retrograde",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Guaranteed hit (treat the attack as a hit); ignore range; the trigger is wasted (undo its damage).",
+   "automation": "automated"
   }
  },
  "folder": "6YaSgqVRe4IqL8er",

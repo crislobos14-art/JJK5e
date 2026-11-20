@@ -19,7 +19,60 @@
    "value": "class",
    "subtype": ""
   },
-  "requirements": "Cursed Technique Reversal, Rot"
+  "requirements": "Cursed Technique Reversal, Rot",
+  "activities": {
+   "mPr9ICt9hQoT8LHG": {
+    "_id": "mPr9ICt9hQoT8LHG",
+    "type": "heal",
+    "name": "Lifeblood: heal instead of damage",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "",
+     "types": [
+      "healing"
+     ],
+     "custom": {
+      "enabled": true,
+      "formula": "0"
+     },
+     "scaling": {}
+    }
+   }
+  }
  },
  "flags": {
   "jjk5e": {
@@ -37,7 +90,9 @@
       "Rot"
      ]
     ]
-   }
+   },
+   "automationNotes": "Enter the technique's damage as the heal. +2 CE: the target saves CON; on a success it regains 2 × Rotten Blood damage more.",
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",

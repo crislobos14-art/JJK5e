@@ -18,9 +18,10 @@
   "activities": {
    "65BKEHCfUk8GGVuH": {
     "_id": "65BKEHCfUk8GGVuH",
-    "type": "attack",
-    "name": "Reaction (1 CE)",
+    "type": "utility",
+    "name": "Sky Shape (1 CE): +4 AC",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "reaction",
      "value": 1,
@@ -30,36 +31,125 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
-    },
-    "range": {
-     "value": "5",
-     "units": "ft",
-     "override": true
-    },
-    "target": {
-     "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
     },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "xDo5SrgeVZE4A1mh",
+      "onSave": false
+     }
+    ],
+    "useConditionText": "reaction === \"isAttacked\""
+   },
+   "jPkDtAI1rYiDEXZ1": {
+    "_id": "jPkDtAI1rYiDEXZ1",
+    "type": "attack",
+    "name": "Redirect a missed ranged attack",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
     "attack": {
      "ability": "spellcasting",
      "bonus": "",
+     "critical": {
+      "threshold": null
+     },
      "flat": false,
      "type": {
       "value": "ranged",
       "classification": "spell"
      }
+    }
+   },
+   "HAUTaVBXz8e6wh8n": {
+    "_id": "HAUTaVBXz8e6wh8n",
+    "type": "utility",
+    "name": "Missed melee: limb stuck",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
     },
-    "damage": {
-     "includeBase": false,
-     "parts": []
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
     },
-    "useConditionText": "false"
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "BG9Lgay0HGCoIQJO",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -102,9 +192,70 @@
    },
    "technique": "Sky Manipulation",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Redirect deals the missed attack's damage and effects (enter them). While Dodging: protect allies within 5 ft.",
+   "automation": "automated"
   }
  },
  "folder": "i7KDxPjzj0GuzdPl",
- "_key": "!items!J9LNnuJcYPznq0zd"
+ "_key": "!items!J9LNnuJcYPznq0zd",
+ "effects": [
+  {
+   "_id": "xDo5SrgeVZE4A1mh",
+   "name": "Sky Shape",
+   "img": "modules/jjk5e/icons/techniques/sky-manipulation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+4",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Sky Manipulation"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStartSource"
+     ]
+    }
+   },
+   "_key": "!items.effects!J9LNnuJcYPznq0zd.xDo5SrgeVZE4A1mh"
+  },
+  {
+   "_id": "BG9Lgay0HGCoIQJO",
+   "name": "Limb stuck in the sky",
+   "img": "modules/jjk5e/icons/techniques/sky-manipulation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>That limb is unusable until its next turn.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Sky Manipulation"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStart"
+     ]
+    }
+   },
+   "_key": "!items.effects!J9LNnuJcYPznq0zd.BG9Lgay0HGCoIQJO"
+  }
+ ]
 }

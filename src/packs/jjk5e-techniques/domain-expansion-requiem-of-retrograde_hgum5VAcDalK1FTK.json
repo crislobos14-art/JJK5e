@@ -58,6 +58,49 @@
      "concentration": false,
      "override": true
     }
+   },
+   "pfI8SVbvyNVoDQgU": {
+    "_id": "pfI8SVbvyNVoDQgU",
+    "type": "utility",
+    "name": "Initiative 20: reverse a creature's first act",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "dxAVxTxA4XMcoiEE",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -116,9 +159,38 @@
     "Z20EDNbUB9Sz5WZN": 20
    },
    "domainActivity": "Z20EDNbUB9Sz5WZN",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Your Reversion attack rerolls are guaranteed hits; chosen creatures get Reversion's base effect.",
+   "automation": "automated"
   }
  },
  "folder": "6YaSgqVRe4IqL8er",
- "_key": "!items!hgum5VAcDalK1FTK"
+ "_key": "!items!hgum5VAcDalK1FTK",
+ "effects": [
+  {
+   "_id": "dxAVxTxA4XMcoiEE",
+   "name": "Requiem: first act reversed",
+   "img": "modules/jjk5e/icons/techniques/retrograde-domain.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Its first move/action this turn is undone and wasted.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Retrograde"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnEnd"
+     ]
+    }
+   },
+   "_key": "!items.effects!hgum5VAcDalK1FTK.dxAVxTxA4XMcoiEE"
+  }
+ ]
 }

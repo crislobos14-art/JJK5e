@@ -58,6 +58,61 @@
      "concentration": false,
      "override": true
     }
+   },
+   "uNcUpSwyi7pjPVQy": {
+    "_id": "uNcUpSwyi7pjPVQy",
+    "type": "damage",
+    "name": "Initiative 20: full Shadow Strike on 3 creatures",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "enemy",
+      "count": "3",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "damage": {
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "1d8 + @mod + 4 * max(@abilities.wis.mod, @abilities.cha.mod)"
+       },
+       "scaling": {}
+      }
+     ]
+    }
    }
   },
   "uses": {
@@ -116,7 +171,9 @@
     "fPubgLUpyoTaZNyf": 20
    },
    "domainActivity": "fPubgLUpyoTaZNyf",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Weapon die shown as d8. Every shadow can be targeted inside the domain.",
+   "automation": "automated"
   }
  },
  "folder": "AZz0yh4SFsEeg2VN",

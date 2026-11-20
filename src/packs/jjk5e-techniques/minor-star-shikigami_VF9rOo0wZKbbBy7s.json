@@ -19,7 +19,7 @@
    "JhTld6NhLQKLlaBT": {
     "_id": "JhTld6NhLQKLlaBT",
     "type": "utility",
-    "name": "Action (1+ CE)",
+    "name": "Summon minor stars (1 CE each, up to prof)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -42,8 +42,7 @@
     },
     "target": {
      "affects": {
-      "type": "creature",
-      "count": "1"
+      "type": "self"
      },
      "override": true
     },
@@ -51,9 +50,49 @@
      "units": "inst",
      "override": true
     },
+    "effects": []
+   },
+   "uqiZgJakMBLg5EPq": {
+    "_id": "uqiZgJakMBLg5EPq",
+    "type": "utility",
+    "name": "Share senses with a star (blinded & deafened)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
     "effects": [
      {
       "_id": "3bD0fcEhNYxV2krG",
+      "onSave": false
+     },
+     {
+      "_id": "dpWgIlCCHQZhJyh7",
       "onSave": false
      }
     ]
@@ -109,7 +148,9 @@
    },
    "technique": "Star Dictator",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Command all with a bonus action; otherwise they Dodge. Max prof minor stars (3 × prof at 11th).",
+   "automation": "automated"
   }
  },
  "effects": [
@@ -131,6 +172,28 @@
     }
    },
    "_key": "!items.effects!VF9rOo0wZKbbBy7s.3bD0fcEhNYxV2krG"
+  },
+  {
+   "_id": "dpWgIlCCHQZhJyh7",
+   "name": "Deafened (sharing senses)",
+   "img": "modules/jjk5e/icons/techniques/star-dictator.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [
+    "deafened"
+   ],
+   "description": "",
+   "changes": [],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Star Dictator"
+    }
+   },
+   "_key": "!items.effects!VF9rOo0wZKbbBy7s.dpWgIlCCHQZhJyh7"
   }
  ],
  "folder": "ba0AWxHF6sBvbrZq",

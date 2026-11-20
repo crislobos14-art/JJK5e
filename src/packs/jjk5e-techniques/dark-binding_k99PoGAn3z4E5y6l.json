@@ -19,10 +19,10 @@
    "Zcv5CmDFLDrHq7ee": {
     "_id": "Zcv5CmDFLDrHq7ee",
     "type": "utility",
-    "name": "Action (3 CE)",
+    "name": "Pin the shadow (on hit, 3 CE, no damage)",
     "sort": 0,
     "activation": {
-     "type": "action",
+     "type": "special",
      "value": 1,
      "condition": "",
      "override": true
@@ -39,6 +39,11 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -49,8 +54,13 @@
      {
       "_id": "sGr1hR1sx7T8Er5y",
       "onSave": false
+     },
+     {
+      "_id": "hsZouxHB9LTtRdUX",
+      "onSave": false
      }
-    ]
+    ],
+    "useConditionText": "reaction === \"isHit\""
    }
   },
   "uses": {
@@ -93,7 +103,8 @@
    },
    "technique": "Shadow Killer",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "effects": [
@@ -115,6 +126,28 @@
     }
    },
    "_key": "!items.effects!k99PoGAn3z4E5y6l.sGr1hR1sx7T8Er5y"
+  },
+  {
+   "_id": "hsZouxHB9LTtRdUX",
+   "name": "Restrained (shadow pinned)",
+   "img": "modules/jjk5e/icons/techniques/shadow-killer.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [
+    "restrained"
+   ],
+   "description": "",
+   "changes": [],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Shadow Killer"
+    }
+   },
+   "_key": "!items.effects!k99PoGAn3z4E5y6l.hsZouxHB9LTtRdUX"
   }
  ],
  "folder": "AZz0yh4SFsEeg2VN",

@@ -58,6 +58,60 @@
      "concentration": false,
      "override": true
     }
+   },
+   "TmtznVfxwejp427U": {
+    "_id": "TmtznVfxwejp427U",
+    "type": "damage",
+    "name": "Domain ends: maximum falling damage",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "enemy",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": [],
+    "damage": {
+     "parts": [
+      {
+       "number": null,
+       "denomination": null,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "120"
+       },
+       "scaling": {}
+      }
+     ]
+    }
    }
   },
   "uses": {
@@ -116,7 +170,9 @@
     "MN0be4SB5YtWDO4A": 20
    },
    "domainActivity": "MN0be4SB5YtWDO4A",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Hostiles without fly speed are falling throughout (20d6 max = 120).",
+   "automation": "automated"
   }
  },
  "folder": "i7KDxPjzj0GuzdPl",

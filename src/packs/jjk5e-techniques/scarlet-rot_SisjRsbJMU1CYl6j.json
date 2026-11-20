@@ -18,8 +18,8 @@
   "activities": {
    "MlQVR5ZUCE8FRAzA": {
     "_id": "MlQVR5ZUCE8FRAzA",
-    "type": "save",
-    "name": "Special",
+    "type": "utility",
+    "name": "Failed save vs Rot: poisoned 1 minute",
     "sort": 0,
     "activation": {
      "type": "special",
@@ -39,6 +39,11 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -46,19 +51,6 @@
      "units": "minute",
      "concentration": false,
      "override": true
-    },
-    "save": {
-     "ability": [
-      "con"
-     ],
-     "dc": {
-      "calculation": "spellcasting",
-      "formula": ""
-     }
-    },
-    "damage": {
-     "onSave": "none",
-     "parts": []
     },
     "effects": [
      {
@@ -106,7 +98,9 @@
   "jjk5e": {
    "technique": "Rot",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Your Rot techniques ignore acid resistance (18th: immunity → resistance).",
+   "automation": "automated"
   }
  },
  "effects": [
@@ -117,11 +111,17 @@
    "statuses": [
     "poisoned"
    ],
-   "changes": [],
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "priority": 20,
+     "value": "turn=end, saveAbility=con, saveDC=JJKORIGINDC, label=Scarlet Rot"
+    }
+   ],
    "transfer": false,
    "disabled": false,
    "duration": {
-    "seconds": 60,
     "rounds": 10
    },
    "description": "",
@@ -133,33 +133,41 @@
    "_key": "!items.effects!SisjRsbJMU1CYl6j.gb3txyFerIE5LEO8"
   },
   {
-   "_id": "DqYDGSrvprQayJZW",
-   "name": "Scarlet Rot (toggle)",
+   "_id": "Fh4IJBKsWjhOufxi",
+   "name": "Scarlet Rot",
    "img": "modules/jjk5e/icons/techniques/rot.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
    "changes": [
     {
      "key": "system.traits.di.value",
      "mode": 2,
      "value": "poison",
-     "priority": null
+     "priority": 20
     },
     {
      "key": "system.traits.di.value",
      "mode": 2,
      "value": "acid",
-     "priority": null
+     "priority": 20
+    },
+    {
+     "key": "system.traits.ci.value",
+     "mode": 2,
+     "value": "poisoned",
+     "priority": 20
     }
    ],
-   "transfer": true,
-   "disabled": true,
    "duration": {},
-   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
    "flags": {
     "jjk5e": {
-     "auto": "toggle"
+     "technique": "Rot"
     }
    },
-   "_key": "!items.effects!SisjRsbJMU1CYl6j.DqYDGSrvprQayJZW"
+   "_key": "!items.effects!SisjRsbJMU1CYl6j.Fh4IJBKsWjhOufxi"
   }
  ],
  "folder": "TOdSvSBhuENKcEJX",

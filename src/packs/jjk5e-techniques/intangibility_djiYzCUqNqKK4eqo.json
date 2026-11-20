@@ -39,6 +39,9 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
@@ -46,7 +49,13 @@
      "units": "minute",
      "concentration": false,
      "override": true
-    }
+    },
+    "effects": [
+     {
+      "_id": "Bila1qoJTx1GrWOR",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -92,9 +101,57 @@
    },
    "technique": "Schrift X",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "sHIaW6mkEHmwduDu",
- "_key": "!items!djiYzCUqNqKK4eqo"
+ "_key": "!items!djiYzCUqNqKK4eqo",
+ "effects": [
+  {
+   "_id": "Bila1qoJTx1GrWOR",
+   "name": "Intangible",
+   "img": "modules/jjk5e/icons/techniques/schrift-x.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Concentration; no innate technique features. Psychic damage is not resisted (remove by hand if relevant).</p>",
+   "changes": [
+    {
+     "key": "system.traits.di.value",
+     "mode": 2,
+     "value": "bludgeoning",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.di.value",
+     "mode": 2,
+     "value": "piercing",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.di.value",
+     "mode": 2,
+     "value": "slashing",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dr.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Schrift X"
+    }
+   },
+   "_key": "!items.effects!djiYzCUqNqKK4eqo.Bila1qoJTx1GrWOR"
+  }
+ ]
 }

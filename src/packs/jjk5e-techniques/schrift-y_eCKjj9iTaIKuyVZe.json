@@ -39,17 +39,26 @@
     },
     "range": {
      "value": "30",
-     "units": "ft"
+     "units": "ft",
+     "override": true
     },
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
-     }
+      "count": "1",
+      "choice": true
+     },
+     "override": true
     },
     "duration": {
      "units": "inst"
-    }
+    },
+    "effects": [
+     {
+      "_id": "Gt7CqjOjpUfyZhsR",
+      "onSave": false
+     }
+    ]
    }
   }
  },
@@ -72,10 +81,63 @@
       "Schrift X"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!eCKjj9iTaIKuyVZe"
+ "_key": "!items!eCKjj9iTaIKuyVZe",
+ "effects": [
+  {
+   "_id": "Gt7CqjOjpUfyZhsR",
+   "name": "Schrift Y",
+   "img": "modules/jjk5e/icons/techniques/schrift-x.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Its attacks treat everyone as behind half cover (¾ at 11th).</p>",
+   "changes": [
+    {
+     "key": "system.bonuses.mwak.attack",
+     "mode": 2,
+     "value": "-(2 + 3 * floor(min(@details.level, 11) / 11))",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.rwak.attack",
+     "mode": 2,
+     "value": "-(2 + 3 * floor(min(@details.level, 11) / 11))",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.msak.attack",
+     "mode": 2,
+     "value": "-(2 + 3 * floor(min(@details.level, 11) / 11))",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.rsak.attack",
+     "mode": 2,
+     "value": "-(2 + 3 * floor(min(@details.level, 11) / 11))",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 2
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Schrift X"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnEnd"
+     ]
+    }
+   },
+   "_key": "!items.effects!eCKjj9iTaIKuyVZe.Gt7CqjOjpUfyZhsR"
+  }
+ ]
 }

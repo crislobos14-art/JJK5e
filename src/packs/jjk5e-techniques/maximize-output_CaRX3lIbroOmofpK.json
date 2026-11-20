@@ -19,10 +19,10 @@
    "V7fED709mCReQflf": {
     "_id": "V7fED709mCReQflf",
     "type": "utility",
-    "name": "Action (5 CE)",
+    "name": "Maximize an ally's technique damage (5 CE)",
     "sort": 0,
     "activation": {
-     "type": "action",
+     "type": "special",
      "value": 1,
      "condition": "",
      "override": true
@@ -39,12 +39,23 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
-    }
+    },
+    "effects": [
+     {
+      "_id": "FqsBBUQoaaJo9IEz",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -87,9 +98,44 @@
    },
    "technique": "Solo Forbidden Zone",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "pI3TNTzVyu2gPuxX",
- "_key": "!items!CaRX3lIbroOmofpK"
+ "_key": "!items!CaRX3lIbroOmofpK",
+ "effects": [
+  {
+   "_id": "FqsBBUQoaaJo9IEz",
+   "name": "Maximized",
+   "img": "modules/jjk5e/icons/techniques/solo-forbidden-zone.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.max.damage.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Solo Forbidden Zone"
+    },
+    "dae": {
+     "specialDuration": [
+      "1Spell"
+     ]
+    }
+   },
+   "_key": "!items.effects!CaRX3lIbroOmofpK.FqsBBUQoaaJo9IEz"
+  }
+ ]
 }

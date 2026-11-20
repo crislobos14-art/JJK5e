@@ -19,7 +19,7 @@
    "BOJsbDVm4WDuB6Fd": {
     "_id": "BOJsbDVm4WDuB6Fd",
     "type": "utility",
-    "name": "Bonus Action (3 CE)",
+    "name": "Decay (3 CE): infect everyone you hurt this minute",
     "sort": 0,
     "activation": {
      "type": "bonus",
@@ -39,17 +39,27 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "enemy",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
-    }
+    },
+    "effects": [
+     {
+      "_id": "6es9whpwhJAQoCSs",
+      "onSave": false
+     }
+    ]
    },
    "ZLbekNXVENiDTvps": {
     "_id": "ZLbekNXVENiDTvps",
     "type": "utility",
-    "name": "Special (3 CE)",
+    "name": "Continue Decay (3 CE)",
     "sort": 100000,
     "activation": {
      "type": "special",
@@ -78,6 +88,10 @@
      "override": true
     },
     "effects": [
+     {
+      "_id": "6es9whpwhJAQoCSs",
+      "onSave": false
+     },
      {
       "_id": "OYJHMek81mP6nhQL",
       "onSave": false
@@ -126,7 +140,8 @@
    },
    "technique": "Rot",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "effects": [
@@ -141,7 +156,6 @@
    "transfer": false,
    "disabled": false,
    "duration": {
-    "seconds": 60,
     "rounds": 10
    },
    "description": "",
@@ -151,6 +165,33 @@
     }
    },
    "_key": "!items.effects!sg0SgAZBqxgPvW74.OYJHMek81mP6nhQL"
+  },
+  {
+   "_id": "6es9whpwhJAQoCSs",
+   "name": "Decay",
+   "img": "modules/jjk5e/icons/techniques/rot.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Rotten Blood damage at the start of the caster's turn (applied at its own turn start). At 6th: poisoned and max HP reduced.</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "value": "turn=start, damageRoll=(1 + floor(min(JJKORIGINLEVEL, 3) / 3) + floor(min(JJKORIGINLEVEL, 6) / 6) + floor(min(JJKORIGINLEVEL, 11) / 11))d8, damageType=acid, label=Decay",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Rot"
+    }
+   },
+   "_key": "!items.effects!sg0SgAZBqxgPvW74.6es9whpwhJAQoCSs"
   }
  ],
  "folder": "TOdSvSBhuENKcEJX",

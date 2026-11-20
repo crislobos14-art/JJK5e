@@ -40,14 +40,14 @@
     },
     "target": {
      "template": {
-      "type": "sphere",
+      "type": "radius",
       "size": "30",
       "units": "ft",
       "count": "1",
       "contiguous": false
      },
      "affects": {
-      "type": "creature",
+      "type": "ally",
       "choice": false
      },
      "override": true
@@ -55,7 +55,49 @@
     "duration": {
      "units": "inst",
      "override": true
-    }
+    },
+    "effects": [
+     {
+      "_id": "bTMZwtzD8jFqrRhe",
+      "onSave": false
+     }
+    ]
+   },
+   "C6UZzqpHi2SgpM44": {
+    "_id": "C6UZzqpHi2SgpM44",
+    "type": "utility",
+    "name": "Maintain the Zone (bonus action)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
    }
   },
   "uses": {
@@ -111,9 +153,39 @@
    },
    "technique": "Solo Forbidden Zone",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "pI3TNTzVyu2gPuxX",
- "_key": "!items!9UTHSBip7mmqaupO"
+ "_key": "!items!9UTHSBip7mmqaupO",
+ "effects": [
+  {
+   "_id": "bTMZwtzD8jFqrRhe",
+   "name": "Forbidden Zone",
+   "img": "modules/jjk5e/icons/techniques/solo-forbidden-zone.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Advantage on all rolls. Caster maintains with a bonus action.</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.advantage.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Solo Forbidden Zone"
+    }
+   },
+   "_key": "!items.effects!9UTHSBip7mmqaupO.bTMZwtzD8jFqrRhe"
+  }
+ ]
 }

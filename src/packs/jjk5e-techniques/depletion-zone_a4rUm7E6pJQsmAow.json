@@ -24,7 +24,7 @@
    "hyuZ1bsrWzieYdoK": {
     "_id": "hyuZ1bsrWzieYdoK",
     "type": "utility",
-    "name": "Action",
+    "name": "Depletion Zone (CE up to mod + prof)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -34,11 +34,13 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "max(@abilities.wis.mod, @abilities.cha.mod) + @prof"
      }
     },
     "range": {
-     "units": "self"
+     "units": "self",
+     "override": true
     },
     "target": {
      "template": {
@@ -49,15 +51,22 @@
       "contiguous": false
      },
      "affects": {
-      "type": "creature",
+      "type": "enemy",
       "choice": false
-     }
+     },
+     "override": true
     },
     "duration": {
      "value": "1",
      "units": "minute",
      "concentration": false
-    }
+    },
+    "effects": [
+     {
+      "_id": "jbubwpOlHackg2wt",
+      "onSave": false
+     }
+    ]
    }
   }
  },
@@ -77,10 +86,46 @@
       "Solo Forbidden Zone"
      ]
     ]
-   }
+   },
+   "ceCosts": {
+    "hyuZ1bsrWzieYdoK": 1
+   },
+   "ceSteps": {
+    "hyuZ1bsrWzieYdoK": 1
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!a4rUm7E6pJQsmAow"
+ "_key": "!items!a4rUm7E6pJQsmAow",
+ "effects": [
+  {
+   "_id": "jbubwpOlHackg2wt",
+   "name": "Depletion Zone",
+   "img": "modules/jjk5e/icons/techniques/solo-forbidden-zone.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "value": "turn=start, saveAbility=wis|cha, saveDC=JJKORIGINDC, label=Depletion Zone (lose CE = caster's spend)",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Solo Forbidden Zone"
+    }
+   },
+   "_key": "!items.effects!a4rUm7E6pJQsmAow.jbubwpOlHackg2wt"
+  }
+ ]
 }

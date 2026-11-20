@@ -19,7 +19,7 @@
    "lKkrGWN2fudFZv1s": {
     "_id": "lKkrGWN2fudFZv1s",
     "type": "damage",
-    "name": "Special",
+    "name": "Army pseudo-domain (1d10 per star, ignores slashing resistance)",
     "sort": 0,
     "activation": {
      "type": "special",
@@ -39,6 +39,17 @@
      "override": true
     },
     "target": {
+     "template": {
+      "type": "radius",
+      "size": "10",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
      "override": true
     },
     "duration": {
@@ -103,7 +114,8 @@
   "jjk5e": {
    "technique": "Star Dictator",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "ba0AWxHF6sBvbrZq",

@@ -19,7 +19,7 @@
    "5EJNgzTlXThWRMQJ": {
     "_id": "5EJNgzTlXThWRMQJ",
     "type": "utility",
-    "name": "Reaction (3 CE)",
+    "name": "Redirect a cone/line save (3 CE, on success)",
     "sort": 0,
     "activation": {
      "type": "reaction",
@@ -45,7 +45,7 @@
      "units": "inst",
      "override": true
     },
-    "useConditionText": "false"
+    "useConditionText": "reaction === \"isSave\""
    }
   },
   "uses": {
@@ -88,7 +88,9 @@
    },
    "technique": "Sky Manipulation",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Sky Shape also works against CE attack rolls.",
+   "automation": "automated"
   }
  },
  "folder": "i7KDxPjzj0GuzdPl",

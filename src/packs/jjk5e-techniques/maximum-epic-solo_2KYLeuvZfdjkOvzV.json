@@ -18,9 +18,10 @@
   "activities": {
    "tgeBW16oNUq6SVid": {
     "_id": "tgeBW16oNUq6SVid",
-    "type": "damage",
-    "name": "Action (8+ CE)",
+    "type": "utility",
+    "name": "Epic Solo (8 CE, +2d10 per extra CE)",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "action",
      "value": 1,
@@ -31,43 +32,82 @@
      "targets": [],
      "scaling": {
       "allowed": true,
-      "max": "max(1, floor(@prof / 2))"
+      "max": "8 + ceil(@prof / 2)"
      },
      "spellSlot": false
-    },
-    "range": {
-     "value": "15",
-     "units": "ft",
-     "override": true
-    },
-    "target": {
-     "affects": {
-      "type": "creature",
-      "count": "1"
-     },
-     "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
     },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "00qSk7tLQb4z6a7p",
+      "onSave": false
+     }
+    ]
+   },
+   "3UTSaf4Q5Ye9rawh": {
+    "_id": "3UTSaf4Q5Ye9rawh",
+    "type": "damage",
+    "name": "Solo aura: ends turn within 15 ft",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
     "damage": {
      "parts": [
       {
-       "number": 2,
-       "denomination": 10,
+       "number": null,
+       "denomination": null,
        "bonus": "",
        "types": [
         "thunder"
        ],
        "custom": {
-        "enabled": false,
-        "formula": ""
+        "enabled": true,
+        "formula": "max(@abilities.wis.mod, @abilities.cha.mod) + @prof"
        },
-       "scaling": {
-        "mode": "whole",
-        "number": 2
-       }
+       "scaling": {}
       }
      ]
     }
@@ -123,9 +163,58 @@
    },
    "technique": "Rockstar",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "@scaling in the effect is fixed when applied: re-apply if you change the extra CE.",
+   "automation": "automated"
   }
  },
  "folder": "vosb36eMO9PhuX42",
- "_key": "!items!2KYLeuvZfdjkOvzV"
+ "_key": "!items!2KYLeuvZfdjkOvzV",
+ "effects": [
+  {
+   "_id": "00qSk7tLQb4z6a7p",
+   "name": "Epic Solo",
+   "img": "modules/jjk5e/icons/techniques/rockstar.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>+2d10 thunder on attacks (+2d10 per extra CE). Failed saves vs your technique: disadvantage on its next attack/check.</p>",
+   "changes": [
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ (2 + 2 * @scaling)d10[thunder]",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.rwak.damage",
+     "mode": 2,
+     "value": "+ (2 + 2 * @scaling)d10[thunder]",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.msak.damage",
+     "mode": 2,
+     "value": "+ (2 + 2 * @scaling)d10[thunder]",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.rsak.damage",
+     "mode": 2,
+     "value": "+ (2 + 2 * @scaling)d10[thunder]",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Rockstar"
+    }
+   },
+   "_key": "!items.effects!2KYLeuvZfdjkOvzV.00qSk7tLQb4z6a7p"
+  }
+ ]
 }

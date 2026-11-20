@@ -23,8 +23,8 @@
   "activities": {
    "gn5lWOYUUa8j6WTx": {
     "_id": "gn5lWOYUUa8j6WTx",
-    "type": "damage",
-    "name": "Action (4 CE)",
+    "type": "utility",
+    "name": "Anti-domain (4 CE)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -38,13 +38,62 @@
      }
     },
     "range": {
-     "units": "spec",
+     "units": "self",
      "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
     },
+    "effects": [
+     {
+      "_id": "b8aX3doZZCH9VSi9",
+      "onSave": false
+     }
+    ]
+   },
+   "BPhJOsUs8dXqtYPH": {
+    "_id": "BPhJOsUs8dXqtYPH",
+    "type": "damage",
+    "name": "Hitting an orbiting star: 1d12 slashing",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
     "damage": {
      "parts": [
       {
@@ -58,9 +107,7 @@
         "enabled": false,
         "formula": ""
        },
-       "scaling": {
-        "number": 1
-       }
+       "scaling": {}
       }
      ]
     }
@@ -86,10 +133,33 @@
       "Star Dictator"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!Du9ZHOp9Py9TNKDu"
+ "_key": "!items!Du9ZHOp9Py9TNKDu",
+ "effects": [
+  {
+   "_id": "b8aX3doZZCH9VSi9",
+   "name": "Star Guardian anti-domain",
+   "img": "modules/jjk5e/icons/techniques/star-dictator.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Guaranteed hits and auto-fails don't work inside or on the orbiting stars.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Star Dictator"
+    }
+   },
+   "_key": "!items.effects!Du9ZHOp9Py9TNKDu.b8aX3doZZCH9VSi9"
+  }
+ ]
 }

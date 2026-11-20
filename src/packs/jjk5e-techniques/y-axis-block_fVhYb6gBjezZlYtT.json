@@ -24,10 +24,10 @@
    "kFSP0E0XaviUEKfl": {
     "_id": "kFSP0E0XaviUEKfl",
     "type": "utility",
-    "name": "Action (6 CE)",
+    "name": "Y-Axis Block (6 CE): a ranged attack misses",
     "sort": 0,
     "activation": {
-     "type": "action",
+     "type": "reaction",
      "value": 1,
      "condition": ""
     },
@@ -38,12 +38,28 @@
      }
     },
     "range": {
-     "units": "self"
+     "value": "120",
+     "units": "ft",
+     "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
-    }
+    },
+    "useConditionText": "reaction === \"isAttacked\"",
+    "effects": [
+     {
+      "_id": "MVb55gRERJOwgJHH",
+      "onSave": false
+     }
+    ]
    }
   }
  },
@@ -67,10 +83,45 @@
      ]
     ],
     "level": 3
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 10,
- "_key": "!items!fVhYb6gBjezZlYtT"
+ "_key": "!items!fVhYb6gBjezZlYtT",
+ "effects": [
+  {
+   "_id": "MVb55gRERJOwgJHH",
+   "name": "Y-Axis Block",
+   "img": "modules/jjk5e/icons/techniques/schrift-x.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.grants.fail.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Schrift X"
+    },
+    "dae": {
+     "specialDuration": [
+      "isAttacked"
+     ]
+    }
+   },
+   "_key": "!items.effects!fVhYb6gBjezZlYtT.MVb55gRERJOwgJHH"
+  }
+ ]
 }

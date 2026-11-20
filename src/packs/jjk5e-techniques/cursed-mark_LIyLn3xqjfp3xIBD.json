@@ -19,7 +19,7 @@
    "zqMCIv6aDmtyaGTc": {
     "_id": "zqMCIv6aDmtyaGTc",
     "type": "utility",
-    "name": "Bonus Action (3 CE)",
+    "name": "Critical Mark (3 CE)",
     "sort": 0,
     "activation": {
      "type": "bonus",
@@ -42,7 +42,8 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
@@ -51,7 +52,57 @@
      "units": "minute",
      "concentration": false,
      "override": true
-    }
+    },
+    "effects": [
+     {
+      "_id": "loq2PJKcUdexpAJH",
+      "onSave": false
+     }
+    ]
+   },
+   "cj5GckaIKonrTKHe": {
+    "_id": "cj5GckaIKonrTKHe",
+    "type": "utility",
+    "name": "Multi-Mark (3 CE, up to CE mod targets)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "max(@abilities.wis.mod, @abilities.cha.mod)",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "oKAkyaQc9irJj0nf",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -98,13 +149,75 @@
  "flags": {
   "jjk5e": {
    "ceCosts": {
-    "zqMCIv6aDmtyaGTc": 3
+    "zqMCIv6aDmtyaGTc": 3,
+    "cj5GckaIKonrTKHe": 3
    },
    "technique": "Schrift X",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "sHIaW6mkEHmwduDu",
- "_key": "!items!LIyLn3xqjfp3xIBD"
+ "_key": "!items!LIyLn3xqjfp3xIBD",
+ "effects": [
+  {
+   "_id": "loq2PJKcUdexpAJH",
+   "name": "Critical Mark",
+   "img": "modules/jjk5e/icons/techniques/schrift-x.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Next hit by the caster is at advantage and deals critical damage, then the mark ends (simplified: from the first hit).</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.grants.advantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.grants.critical.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Schrift X"
+    },
+    "dae": {
+     "specialDuration": [
+      "isHit"
+     ]
+    }
+   },
+   "_key": "!items.effects!LIyLn3xqjfp3xIBD.loq2PJKcUdexpAJH"
+  },
+  {
+   "_id": "oKAkyaQc9irJj0nf",
+   "name": "Multi-Mark",
+   "img": "modules/jjk5e/icons/techniques/schrift-x.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>One split ranged attack hits each marked creature (attack each).</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Schrift X"
+    }
+   },
+   "_key": "!items.effects!LIyLn3xqjfp3xIBD.oKAkyaQc9irJj0nf"
+  }
+ ]
 }

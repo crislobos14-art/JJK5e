@@ -19,7 +19,7 @@
    "8cRxZpTSthq8DyY2": {
     "_id": "8cRxZpTSthq8DyY2",
     "type": "heal",
-    "name": "Special",
+    "name": "Physical channelling: temp HP (level + prof)",
     "sort": 0,
     "activation": {
      "type": "special",
@@ -39,6 +39,11 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -54,11 +59,9 @@
      ],
      "custom": {
       "enabled": true,
-      "formula": "@details.level"
+      "formula": "@details.level + @prof"
      },
-     "scaling": {
-      "number": 1
-     }
+     "scaling": {}
     }
    }
   },
@@ -99,7 +102,9 @@
   "jjk5e": {
    "technique": "Seance",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Soul channelling: 2 of the dead's features, keeping your own (not from two techniques at once).",
+   "automation": "automated"
   }
  },
  "folder": "z1MGG49oTB7xZ6Pc",

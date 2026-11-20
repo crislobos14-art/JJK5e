@@ -38,7 +38,8 @@
      }
     },
     "range": {
-     "units": "self"
+     "units": "self",
+     "override": true
     },
     "target": {
      "template": {
@@ -51,7 +52,8 @@
      "affects": {
       "type": "creature",
       "choice": false
-     }
+     },
+     "override": true
     },
     "duration": {
      "units": "inst"
@@ -84,7 +86,8 @@
       "Rockstar"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "effects": [
@@ -95,10 +98,19 @@
    "statuses": [
     "deafened"
    ],
-   "changes": [],
+   "changes": [
+    {
+     "key": "system.traits.di.value",
+     "mode": 2,
+     "value": "thunder",
+     "priority": 20
+    }
+   ],
    "transfer": false,
    "disabled": false,
-   "duration": {},
+   "duration": {
+    "rounds": 10
+   },
    "description": "",
    "flags": {
     "jjk5e": {

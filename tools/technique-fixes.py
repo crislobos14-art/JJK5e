@@ -4755,6 +4755,747 @@ def regalia(S):
     mark(rr)
 
 
+def _atk(kind="ranged", ability="spellcasting", bonus=""):
+    return {"ability": ability, "bonus": bonus, "critical": {"threshold": None}, "flat": False,
+            "type": {"value": kind, "classification": "spell"}}
+
+
+REV_BONUS = "(2 * floor(min(@details.level, 3) / 3) + floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11) + floor(min(@details.level, 18) / 18))"
+
+
+def retrograde(S):
+    rv = S.get("Reversion")
+    a = rv["system"]["activities"]
+    r = a["pZKg6UrTUuDaEMX6"]
+    act(rv, "pZKg6UrTUuDaEMX6", "utility", "Reversion (1 CE): reroll your attack/save", "reaction", range=RANGE_SELF, target=SELF,
+        roll={"formula": "1d20 + " + REV_BONUS, "name": "Reroll bonus (+2→+5 from 3rd; add your normal modifier)", "prompt": False, "visible": True})
+    r = a["pZKg6UrTUuDaEMX6"]
+    r["useConditionText"] = 'reaction === "isAttacked" || reaction === "isSave"'
+    a["V1XYlDRPVyUKryna"]["name"] = "Reversion on a creature within 30 ft (+2 CE, no bonus)"
+    a["V1XYlDRPVyUKryna"]["range"], a["V1XYlDRPVyUKryna"]["target"] = _r(30), one_creature()
+    mark(rv)
+
+    rg = S.get("Regression")
+    a = rg["system"]["activities"]["3dGdrp5GCuYHtWE4"]
+    a["name"] = "Regression (3 CE): retrace to turn start"
+    a["type"] = "utility"
+    a.pop("damage", None)
+    a["range"], a["target"] = RANGE_SELF, SELF
+    blk = act(rg, "block", "save", "Blocking creature (DEX): prof d8 + pushed", "special", save=_sv("dex"),
+              damage={"onSave": "none", "parts": [{"number": None, "denomination": 8, "bonus": "", "types": ["bludgeoning"],
+                      "custom": {"enabled": True, "formula": "(@prof)d8"}, "scaling": {}}]}, target=one_creature())
+    free(rg, blk)
+    far = act(rg, "far", "utility", "Regress to previous turn start (+3 CE, 6th)", "special", range=RANGE_SELF, target=SELF)
+    cost(rg, far, 3)
+    note(rg, "OAs against the regression have disadvantage. Objects: CE check DC 10 + 3 per size above Medium.")
+    mark(rg)
+
+    er = S.get("Enhanced Reversion")
+    er["system"]["uses"] = {"max": "@prof", "spent": 0, "recovery": [{"period": "turnStart", "type": "recoverAll"}]}
+    a = er["system"]["activities"]
+    a["lzbo6ZrJFbpS0kof"]["name"] = "Reversion without a reaction (prof per round)"
+    a["lzbo6ZrJFbpS0kof"]["activation"]["type"] = "special"
+    a["lzbo6ZrJFbpS0kof"]["consumption"] = {"targets": [{"type": "itemUses", "target": "", "value": "1", "scaling": {}}], "scaling": {"allowed": False}}
+    a["ueJph2JGyPKrbpjB"]["name"] = "Reroll with advantage (+3 CE)"
+    a["ueJph2JGyPKrbpjB"]["roll"] = {"formula": "2d20kh + " + REV_BONUS, "name": "Reversion (advantage)", "prompt": False, "visible": True}
+    mark(er)
+
+    ic = S.get("Invert Causality")
+    a = ic["system"]["activities"]["UQbIGoR0Bxusrp9j"]
+    a["name"] = "Invert Causality (8 CE): rewind and strike first"
+    a["useConditionText"] = 'reaction === "isDamaged"'
+    a["range"], a["target"] = _r(30), one_creature()
+    a.setdefault("attack", {})["ability"] = "spellcasting"
+    note(ic, "Guaranteed hit (treat the attack as a hit); ignore range; the trigger is wasted (undo its damage).")
+    mark(ic)
+
+    d = S.get("Domain Expansion: Requiem of Retrograde")
+    x = act(d, "init20", "utility", "Initiative 20: reverse a creature's first act", "special", target=one_creature())
+    apply(x, fx(d, "rev", "Requiem: first act reversed", rounds=1, special=["turnEnd"], desc="Its first move/action this turn is undone and wasted."))
+    free(d, x)
+    note(d, "Your Reversion attack rerolls are guaranteed hits; chosen creatures get Reversion's base effect.")
+    mark(d)
+
+    pg = S.get("Prograde")
+    a = pg["system"]["activities"]["Ng1uuVHOtu1YXXkK"]
+    a["name"] = "Certain Defeat (6 CE)"
+    a["range"], a["target"] = _r(30), one_creature()
+    apply(a, fx(pg, "defeat", "Certain Defeat", rounds=10,
+                changes=[("flags.midi-qol.disadvantage.attack.all", 0, "0")],
+                desc="No advantage or rerolls; first damage or failed save each round: prof d10 necrotic (use the damage activity)."))
+    pg["effects"][-1]["changes"] = []
+    dmg = act(pg, "dmg", "damage", "Certain Defeat damage (once per round)", "special", target=one_creature(),
+              damage={"parts": [{"number": None, "denomination": 10, "bonus": "", "types": ["necrotic"],
+                      "custom": {"enabled": True, "formula": "(@prof)d10"}, "scaling": {}}]})
+    free(pg, dmg)
+    v = act(pg, "victory", "utility", "Certain Victory (6 CE)", "action", range=_r(30), target=one_creature())
+    apply(v, fx(pg, "win", "Certain Victory", rounds=10, desc="Can't gain disadvantage; advantage rolls 3 dice, keep the best."))
+    cost(pg, v, 6)
+    mark(pg)
+
+
+SB_TIERS = [[1, "2d10"], [6, "3d10"], [11, "4d10"], [18, "6d10"]]
+
+
+def rockstar(S):
+    sa = S.get("Sound Amplification")
+    _drop_fx(sa, "2MmdQsBa0MjAIHRg")
+    _passive(sa, "prf", "Performance proficiency", [("system.skills.prf.value", 4, "1")])
+    a = sa["system"]["activities"]
+    b = a["CdEOvhfEdsw1Axiq"]
+    b["name"] = "Sound Blast (1 CE)"
+    b["range"] = {"value": "30 + 30 * floor(min(@details.level, 6) / 6)", "units": "ft", "override": True}
+    b["target"] = one_creature()
+    b["attack"] = _atk()
+    scale(sa, b, SB_TIERS)
+    pu = a["4rqeXMwiiEKlho4p"]
+    pu["name"] = "Sound Blast push (STR or 10 ft)"
+    pu["target"] = one_creature()
+    pu["damage"] = {"onSave": "none", "parts": []}
+    free(sa, pu)
+    trigger(b, pu, "hitTargets")
+    mark(sa)
+
+    ja = S.get("Jacked Audio")
+    a = ja["system"]["activities"]["QZslfH06BotZdDRL"]
+    a["name"] = "Extra Sound Blast (1 CE each; 2, or 3 at 11th)"
+    a["activation"]["type"] = "special"
+    mark(ja)
+
+    rm = S.get("Resonating Music")
+    a = rm["system"]["activities"]["kvvCnOOckSlxEV93"]
+    a["range"] = RANGE_SELF
+    a["target"] = sphere("15 + 15 * floor(min(@details.level, 11) / 11)", kind="cone")
+    a["damage"] = {"onSave": "half", "parts": [{"number": None, "denomination": 10, "bonus": "", "types": ["thunder"],
+                   "custom": {"enabled": True, "formula": "(2 + floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11) + 2 * floor(min(@details.level, 18) / 18) + @prof)d10"}, "scaling": {}}]}
+    for e in rm["effects"]:
+        if e["_id"] == "jjkSoundWaveDeaf": e.setdefault("flags", {}).setdefault("dae", {})["specialDuration"] = ["turnEnd"]
+    note(rm, "Failed save: pushed 20 ft. Sound Blast range is 60 ft from 6th.")
+    mark(rm)
+
+    es = S.get("Maximum: Epic Solo")
+    a = es["system"]["activities"]["tgeBW16oNUq6SVid"]
+    act(es, "tgeBW16oNUq6SVid", "utility", "Epic Solo (8 CE, +2d10 per extra CE)", "action", range=RANGE_SELF, target=SELF)
+    a = es["system"]["activities"]["tgeBW16oNUq6SVid"]
+    apply(a, fx(es, "solo", "Epic Solo", rounds=10,
+                changes=[("system.bonuses.mwak.damage", 2, "+ (2 + 2 * @scaling)d10[thunder]"), ("system.bonuses.rwak.damage", 2, "+ (2 + 2 * @scaling)d10[thunder]"),
+                         ("system.bonuses.msak.damage", 2, "+ (2 + 2 * @scaling)d10[thunder]"), ("system.bonuses.rsak.damage", 2, "+ (2 + 2 * @scaling)d10[thunder]")],
+                desc="+2d10 thunder on attacks (+2d10 per extra CE). Failed saves vs your technique: disadvantage on its next attack/check."))
+    cost(es, a, 8, 1, "8 + ceil(@prof / 2)")
+    aura = act(es, "aura", "damage", "Solo aura: ends turn within 15 ft", "special", target=one_creature(),
+               damage={"parts": [{"number": None, "denomination": None, "bonus": "", "types": ["thunder"],
+                       "custom": {"enabled": True, "formula": f"{CEMOD} + @prof"}, "scaling": {}}]})
+    free(es, aura)
+    note(es, "@scaling in the effect is fixed when applied: re-apply if you change the extra CE.")
+    mark(es)
+
+    d = S.get("Domain Expansion: Hall of Fame")
+    x = d["system"]["activities"]["B6IVNe90qPm8dJhZ"]
+    x["type"] = "damage"
+    x["name"] = "Initiative 20: Sound Blast damage + deafened"
+    x["damage"] = {"parts": [dice(6, 10, ["thunder"])]}
+    x["target"] = {"affects": {"type": "enemy", "choice": True}, "override": True}
+    for e in d["effects"]:
+        if e["_id"] == "rce1JcnUqkglCO2O": e["duration"] = {"rounds": 10}
+    free(d, x)
+    mark(d)
+
+    sj = S.get("Smooth Jazz")
+    a = sj["system"]["activities"]["NvEh1lLuCxnIKlFh"]
+    a["range"], a["target"] = RANGE_SELF, sphere(30)
+    for e in sj["effects"]:
+        if e["_id"] == "krStrU3zjr5sy7AX":
+            e["duration"] = {"rounds": 10}
+            e["changes"] = [{"key": "system.traits.di.value", "mode": 2, "value": "thunder", "priority": 20}]
+    mark(sj)
+
+
+def rot(S):
+    rb = S.get("Rotten Blood")
+    _drop_fx(rb, "NNBe8t6D2Oom0eRC")
+    _passive(rb, "res", "Rotten Blood", [("system.traits.dr.value", 2, "poison"), ("system.traits.dr.value", 2, "acid"),
+                                         ("flags.midi-qol.advantage.ability.save.con", 0, "0")])
+    rb["effects"][-1]["changes"] = rb["effects"][-1]["changes"][:2]
+    a = rb["system"]["activities"]["qxwr7MCLQF64tLOc"]
+    a["name"] = "Rotten Blood (once per turn on hit while hurt)"
+    a["useConditionText"] = 'reaction === "isHit"'
+    a["target"] = one_creature()
+    scale(rb, a, [[1, "1d8"], [3, "2d8"], [6, "3d8"], [11, "4d8"]])
+    free(rb, a)
+    note(rb, "Advantage on saves vs poisoned (GM). Blood Bags: alternate HP source for Rot costs (untick the HP cost).")
+    mark(rb)
+
+    rt = S.get("Rot Techniques")
+    _drop_fx(rt, "iRCwpF7nAJ8IBWMv", "9bVy7WKxTZ12kDrf")
+    rt["system"]["activities"] = {}
+    rt["flags"]["jjk5e"]["ceCosts"] = {}
+    blind = "jjkBloodSpitBlnd"
+    for e in rt["effects"]:
+        if e["_id"] == blind: e.setdefault("flags", {}).setdefault("dae", {})["specialDuration"] = ["turnEnd"]
+    spec = [
+        ("spit", "save", "Blood Spit (1 CE, 2 HP)", "action", 1, 2, dict(save=_sv("con"), damage={"onSave": "none", "parts": [dice(2, 6, ["acid"])]},
+                                                                       range=_r(15), target=one_creature()), [blind]),
+        ("burst", "damage", "Rot Burst (on melee hit, 1 CE, 1 HP)", "special", 1, 1, dict(damage={"parts": [dice(2, 8, ["acid"])]}, target=one_creature()), []),
+        ("beam", "attack", "Rotten Blood Beam (3 CE, 4 HP)", "action", 3, 4, dict(attack=_atk(), damage={"includeBase": False, "parts": [dice(2, 8, ["piercing"]), dice(2, 10, ["acid"])]},
+                                                                                 range=_r(30), target=one_creature()), []),
+        ("wave", "save", "Corrosive Wave (3 CE, 5 HP)", "action", 3, 5, dict(save=_sv("con"), damage={"onSave": "half", "parts": [dice(5, 8, ["acid"])]},
+                                                                            range=RANGE_SELF, target=sphere(15, kind="cone")), []),
+        ("missile", "attack", "Homing Blood Missile (4 CE, 5 HP; 6th)", "action", 4, 5, dict(attack=_atk(), damage={"includeBase": False, "parts": [dice(5, 10, ["acid"], bonus=CEMOD)]},
+                                                                                            range=_r(60), target=one_creature()), []),
+        ("soak", "utility", "Blood Soak (3 CE, 3 HP; 6th)", "bonus", 3, 3, dict(range=RANGE_SELF, target=SELF), []),
+        ("spear", "attack", "Crimson Spear (2 CE, 3 HP; 11th)", "action", 2, 3, dict(attack=_atk(), damage={"includeBase": False, "parts": [dice(1, 6, ["piercing"]), dice(2, 10, ["acid"], bonus=CEMOD)]},
+                                                                                     range={"value": "30", "long": "90", "units": "ft", "override": True}, target=one_creature()), []),
+        ("rain", "save", "Crimson Rain (2 CE, 3 HP; 11th)", "action", 2, 3, dict(save=_sv("dex"), damage={"onSave": "half", "parts": [dice(1, 10, ["acid"])]},
+                                                                                range=_r(60), target=sphere(15)), []),
+    ]
+    for key, typ, nm, at, ce, hp, kw, fxs in spec:
+        x = act(rt, key, typ, nm, at, **kw)
+        if fxs: apply(x, *fxs)
+        hp_cost(x, hp)
+        cost(rt, x, ce)
+        if key == "burst": x["useConditionText"] = 'reaction === "isHit"'
+        if key == "soak":
+            apply(x, fx(rt, "soak", "Blood Soak", rounds=10, changes=[("system.attributes.movement.walk", 2, "+10")],
+                        desc="Unarmed strikes deal 2d6 + CE mod acid."))
+    sh = act(rt, "shield", "heal", "Blood Shield (reaction): 10 HP per CE, 2 HP per CE", "reaction", range=RANGE_SELF, target=SELF,
+             healing={"number": None, "denomination": None, "bonus": "", "types": ["temphp"],
+                      "custom": {"enabled": True, "formula": "10 * @scaling"}, "scaling": {}})
+    sh["useConditionText"] = 'reaction === "isDamaged"'
+    hp_cost(sh, 2, 2)
+    cost(rt, sh, 1, 1, CEMOD)
+    note(rt, "HP costs are charged automatically: untick them in the dialog when using a Blood Bag. Crimson Rain damage: check the full text "
+             "(1d10 shown). Blood Shield reducing a melee hit to 0: attacker CON or 2d8 acid.")
+    mark(rt)
+
+    dc = S.get("Decay", technique="Rot")
+    a = dc["system"]["activities"]
+    on = a["BOJsbDVm4WDuB6Fd"]
+    on["name"] = "Decay (3 CE): infect everyone you hurt this minute"
+    on["target"] = {"affects": {"type": "enemy", "choice": True}, "override": True}
+    dfx = fx(dc, "rot", "Decay", rounds=10,
+             changes=[("flags.midi-qol.OverTime", 0, "turn=start, damageRoll=(1 + floor(min(JJKORIGINLEVEL, 3) / 3) + floor(min(JJKORIGINLEVEL, 6) / 6) + floor(min(JJKORIGINLEVEL, 11) / 11))d8, damageType=acid, label=Decay")],
+             desc="Rotten Blood damage at the start of the caster's turn (applied at its own turn start). At 6th: poisoned and max HP reduced.")
+    apply(on, dfx)
+    a["ZLbekNXVENiDTvps"]["name"] = "Continue Decay (3 CE)"
+    apply(a["ZLbekNXVENiDTvps"], dfx, "OYJHMek81mP6nhQL")
+    for e in dc["effects"]:
+        if e["_id"] == "OYJHMek81mP6nhQL": e["duration"] = {"rounds": 10}
+    mark(dc)
+
+    sr = S.get("Scarlet Rot")
+    _drop_fx(sr, "DqYDGSrvprQayJZW")
+    _passive(sr, "imm", "Scarlet Rot", [("system.traits.di.value", 2, "poison"), ("system.traits.di.value", 2, "acid"),
+                                        ("system.traits.ci.value", 2, "poisoned")])
+    a = sr["system"]["activities"]["MlQVR5ZUCE8FRAzA"]
+    a["name"] = "Failed save vs Rot: poisoned 1 minute"
+    a["target"] = one_creature()
+    a["type"] = "utility"
+    a.pop("damage", None)
+    a.pop("save", None)
+    ot_save(sr, "gb3txyFerIE5LEO8", "con", "Scarlet Rot", when="end")
+    free(sr, a)
+    note(sr, "Your Rot techniques ignore acid resistance (18th: immunity → resistance).")
+    mark(sr)
+
+    wk = S.get("Maximum: Wing King")
+    _drop_fx(wk, "rOTqIOlWWnZtasa5")
+    a = wk["system"]["activities"]
+    on = a["OdcZP46Jv7sO5dYd"]
+    on["range"], on["target"] = RANGE_SELF, SELF
+    apply(on, fx(wk, "wings", "Wing King", rounds=10,
+                 changes=[("system.attributes.movement.walk", 1, "4"), ("system.attributes.movement.fly", 4, "floor(@attributes.movement.walk * 2)"),
+                          ("flags.midi-qol.advantage.ability.save.dex", 0, "1")],
+                 desc="Speed ×4, fly = half that, advantage on DEX saves; three free blood-line attacks per turn; no Decay."))
+    ln = a["UFgrZvfA5S0POj5u"]
+    ln["name"] = "Line of blood (3 free per turn)"
+    ln["range"], ln["target"] = _r(60), one_creature()
+    ln["attack"] = _atk()
+    ln["damage"] = {"includeBase": False, "parts": [dice(4, 10, ["acid", "necrotic"], bonus=CEMOD)]}
+    free(wk, ln)
+    mark(wk)
+
+    d = S.get("Domain Expansion: Mind Palace of Corrupted Ego")
+    x = act(d, "init20", "damage", "Initiative 20: extra Decay damage (all)", "special",
+            damage={"parts": [dice(4, 8, ["acid"])]}, target={"affects": {"type": "enemy", "choice": False}, "override": True})
+    free(d, x)
+    note(d, "Everyone is under Decay; your Rot HP costs can be paid by other creatures in the domain.")
+    mark(d)
+
+    lb = S.get("Lifeblood")
+    lb.setdefault("system", {}).setdefault("activities", {})
+    h = act(lb, "heal", "heal", "Lifeblood: heal instead of damage", "special", target=one_creature(),
+            healing={"number": None, "denomination": None, "bonus": "", "types": ["healing"],
+                     "custom": {"enabled": True, "formula": "0"}, "scaling": {}})
+    free(lb, h)
+    note(lb, "Enter the technique's damage as the heal. +2 CE: the target saves CON; on a success it regains 2 × Rotten Blood damage more.")
+    mark(lb)
+
+
+def schrift_x(S):
+    ps = S.get("Piercing Schrift")
+    a = ps["system"]["activities"]["LfH3LW4pEsZnebcw"]
+    act(ps, "LfH3LW4pEsZnebcw", "utility", "Phase through cover (1 CE, on a ranged attack)", "special", range=RANGE_SELF, target=SELF)
+    apply(ps["system"]["activities"]["LfH3LW4pEsZnebcw"],
+          fx(ps, "phase", "Piercing shot", rounds=1, special=["1Attack"], changes=[("flags.midi-qol.ignoreCover", 5, "1")],
+             desc="Ignore cover (5 ft of 1/2/3/4 objects at 1st/3rd/6th/11th)."))
+    _passive(ps, "ce", "Piercing Schrift (CE mod for ranged)", [("system.bonuses.rwak.attack", 2, f"+ max(0, {CEMOD} - @abilities.dex.mod)"),
+                                                               ("system.bonuses.rwak.damage", 2, f"+ max(0, {CEMOD} - @abilities.dex.mod)")])
+    mark(ps)
+
+    xs = S.get("X-Axis Shot")
+    a = xs["system"]["activities"]["iuRxDAeUgMb2vW57"]
+    a["name"] = "X-Axis Shot (3 CE): auto-hit + necrotic"
+    a["range"] = _r(150)
+    a["target"] = one_creature()
+    scale(xs, a, [[1, "2d6"], [6, "3d6"], [11, "5d6"], [18, "7d6"]])
+    apply(a, fx(xs, "stop", "X-Axis stance", special=["turnEnd"], changes=[("system.attributes.movement.all", 0, "0")]))
+    a["effects"] = []
+    me = act(xs, "self", "utility", "After the shot: speed 0 this turn", "special", range=RANGE_SELF, target=SELF)
+    apply(me, xs["effects"][-1]["_id"])
+    free(xs, me)
+    note(xs, "Also roll your weapon damage (automatic hit, no attack roll). Only if you haven't moved this turn.")
+    mark(xs)
+
+    cm = S.get("Cursed Mark")
+    a = cm["system"]["activities"]["zqMCIv6aDmtyaGTc"]
+    a["name"] = "Critical Mark (3 CE)"
+    a["range"], a["target"] = _r(30), one_creature()
+    apply(a, fx(cm, "crit", "Critical Mark", rounds=10, changes=[("flags.midi-qol.grants.advantage.attack.all", 0, "1"),
+                                                               ("flags.midi-qol.grants.critical.all", 0, "1")],
+                special=["isHit"], desc="Next hit by the caster is at advantage and deals critical damage, then the mark ends (simplified: from the first hit)."))
+    mm = act(cm, "multi", "utility", "Multi-Mark (3 CE, up to CE mod targets)", "bonus", range=_r(30),
+             target={"affects": {"type": "creature", "count": CEMOD, "choice": True}, "override": True})
+    apply(mm, fx(cm, "multi", "Multi-Mark", rounds=10, desc="One split ranged attack hits each marked creature (attack each)."))
+    cost(cm, mm, 3)
+    mark(cm)
+
+    it = S.get("Intangibility")
+    a = it["system"]["activities"]["g0O4BVsbYrP8wuHQ"]
+    a["range"], a["target"] = RANGE_SELF, SELF
+    apply(a, fx(it, "ghost", "Intangible", rounds=10,
+                changes=[("system.traits.di.value", 2, "bludgeoning"), ("system.traits.di.value", 2, "piercing"), ("system.traits.di.value", 2, "slashing"),
+                         ("system.traits.dr.all", 0, "1")],
+                desc="Concentration; no innate technique features. Psychic damage is not resisted (remove by hand if relevant)."))
+    mark(it)
+
+    d = S.get("Domain Expansion: Divine Sight")
+    x = act(d, "init20", "utility", "Initiative 20: Cursed Mark on everyone", "special",
+            target={"affects": {"type": "enemy", "choice": False}, "override": True})
+    apply(x, fx(d, "mark", "Divine Sight mark", rounds=10, changes=[("flags.midi-qol.grants.advantage.attack.all", 0, "1")]))
+    free(d, x)
+    mark(d)
+
+    sy = S.get("Schrift Y")
+    a = sy["system"]["activities"]["jaLUqT7JrFbjYlre"]
+    a["range"], a["target"] = _r(30), one_creature()
+    apply(a, fx(sy, "cover", "Schrift Y", rounds=2, special=["turnEnd"],
+                changes=[("system.bonuses.mwak.attack", 2, "-(2 + 3 * floor(min(@details.level, 11) / 11))"),
+                         ("system.bonuses.rwak.attack", 2, "-(2 + 3 * floor(min(@details.level, 11) / 11))"),
+                         ("system.bonuses.msak.attack", 2, "-(2 + 3 * floor(min(@details.level, 11) / 11))"),
+                         ("system.bonuses.rsak.attack", 2, "-(2 + 3 * floor(min(@details.level, 11) / 11))")],
+                desc="Its attacks treat everyone as behind half cover (¾ at 11th)."))
+    mark(sy)
+
+    yb = S.get("Y-Axis Block")
+    a = yb["system"]["activities"]["kFSP0E0XaviUEKfl"]
+    a["name"] = "Y-Axis Block (6 CE): a ranged attack misses"
+    a["activation"]["type"] = "reaction"
+    a["useConditionText"] = 'reaction === "isAttacked"'
+    a["range"], a["target"] = _r(120), one_creature()
+    apply(a, fx(yb, "miss", "Y-Axis Block", rounds=1, special=["isAttacked"], changes=[("flags.midi-qol.grants.fail.attack.all", 0, "1")]))
+    mark(yb)
+
+
+def seance(S):
+    se = S.get("Seance")
+    a = se["system"]["activities"]
+    on = a["yn7JrUsDc5H8JdGr"]
+    on["name"] = "Seance (full turn, 2 CE per information)"
+    on["range"], on["target"] = _r(15), one_creature()
+    on["type"] = "heal"
+    on["healing"] = {"number": None, "denomination": None, "bonus": "", "types": ["temphp"],
+                     "custom": {"enabled": True, "formula": "@prof"}, "scaling": {}}
+    cost(se, on, 2, 2, "4")
+    apply(on, fx(se, "seance", "Seance", rounds=None, desc="Channelling a dead humanoid (Physical: body, traits, STR/DEX/CON; Soul: memories + 1 feature). "
+                                                         "No own innate technique. 1 CE per turn to maintain."))
+    ch = a["JitvMjiNFYyLPFjU"]
+    ch["name"] = "Soul Information: CHA save vs the dead (upkeep 1 CE)"
+    ch["activation"]["type"] = "special"
+    ch["target"] = one_creature()
+    ch["save"]["dc"] = {"calculation": "", "formula": "8 + @prof + @abilities.cha.mod"}
+    ch["damage"] = {"onSave": "none", "parts": []}
+    note(se, "Soul save DC should use the dead humanoid's prof + CHA: edit the formula.")
+    mark(se)
+
+    bg = S.get("Blessing of the Grateful Dead")
+    a = bg["system"]["activities"]["8cRxZpTSthq8DyY2"]
+    a["name"] = "Physical channelling: temp HP (level + prof)"
+    a["target"] = one_creature()
+    a["healing"] = {"number": None, "denomination": None, "bonus": "", "types": ["temphp"],
+                    "custom": {"enabled": True, "formula": "@details.level + @prof"}, "scaling": {}}
+    free(bg, a)
+    note(bg, "Soul channelling: 2 of the dead's features, keeping your own (not from two techniques at once).")
+    mark(bg)
+
+    rr = S.get("Ritual of Resurrection")
+    rr.setdefault("system", {}).setdefault("activities", {})
+    x = act(rr, "ritual", "utility", "Ritual (full turn each round, 1 minute)", "action", range=_r(30), target=one_creature())
+    apply(x, fx(rr, "rit", "Resurrection ritual", rounds=10, desc="Concentration; then transform into a dead humanoid of CR/level ≤ your level + prof."))
+    free(rr, x)
+    mark(rr)
+
+    bs = S.get("Maximum: Black Seance")
+    a = bs["system"]["activities"]["721nZ5oYwxoP5WfB"]
+    a["name"] = "Overload (+5 CE after the ritual)"
+    a["type"] = "heal"
+    a["target"] = one_creature()
+    a["healing"] = {"number": None, "denomination": None, "bonus": "", "types": ["temphp"],
+                    "custom": {"enabled": True, "formula": "0"}, "scaling": {}}
+    note(bs, "Physical Overload: enter the dead's HP as temp HP. Soul Overload: all its features (minimum CE costs, no domain).")
+    mark(bs)
+
+    d = S.get("Domain Expansion: Seance Parlor")
+    x = act(d, "init20", "utility", "Initiative 20: Seance on a willing creature (free)", "special", range=_r(175), target=one_creature())
+    free(d, x)
+    note(d, "No upkeep; auto-succeed the soul save; seance techniques get the guaranteed hit. Body part need only be held.")
+    mark(d)
+
+    po = S.get("Possession")
+    a = po["system"]["activities"]
+    a["886Pnz5kN0SnYAWF"]["name"] = "Possess (full turn, 8 CE)"
+    a["886Pnz5kN0SnYAWF"]["range"], a["886Pnz5kN0SnYAWF"]["target"] = _r(5), one_creature()
+    a["886Pnz5kN0SnYAWF"]["effects"] = []
+    body = act(po, "body", "utility", "Your body falls unconscious", "special", range=RANGE_SELF, target=SELF)
+    apply(body, "oALlN7r7MOQmcoD1")
+    free(po, body)
+    a["dEqDSnBQ0OyqQ900"]["name"] = "Keep control (1 CE, start of turn)"
+    a["dEqDSnBQ0OyqQ900"]["activation"]["type"] = "special"
+    note(po, "Willing or helpless target. Control its token; you keep your stats except its technique features and CE.")
+    mark(po)
+
+
+def shadow_killer(S):
+    ss = S.get("Shadow Strike")
+    a = ss["system"]["activities"]["HlmIkdzNN0hw6cen"]
+    act(ss, "HlmIkdzNN0hw6cen", "damage", "Shadow Strike (on attack, 1 CE): necrotic + CE mod", "special", target=one_creature(),
+        damage={"parts": [{"number": None, "denomination": None, "bonus": "", "types": ["necrotic"],
+                "custom": {"enabled": True, "formula": f"(1 + floor(min(@details.level, 3) / 3) + floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11)) * {CEMOD}"}, "scaling": {}}]})
+    ss["system"]["activities"]["HlmIkdzNN0hw6cen"]["useConditionText"] = 'reaction === "isHit"'
+    note(ss, "Bonus necrotic = CE mod (×2/×3/×4 at 3rd/6th/11th); the attack's own damage becomes necrotic. Unaware target: automatic hit. "
+             "Attack roll > its passive Perception: it doesn't know how it was hurt.")
+    mark(ss)
+
+    db = S.get("Dark Binding")
+    a = db["system"]["activities"]["Zcv5CmDFLDrHq7ee"]
+    a["name"] = "Pin the shadow (on hit, 3 CE, no damage)"
+    a["activation"]["type"] = "special"
+    a["useConditionText"] = 'reaction === "isHit"'
+    a["target"] = one_creature()
+    a["effects"].append({"_id": fx(db, "rest", "Restrained (shadow pinned)", rounds=None, statuses=["restrained"]), "onSave": False})
+    mark(db)
+
+    vs = S.get("Void Steps")
+    a = vs["system"]["activities"]["fGhCrm4JNr846uYP"]
+    a["name"] = "Pass Without Trace (2 CE)"
+    a["range"], a["target"] = RANGE_SELF, sphere(30)
+    a["target"]["affects"]["type"] = "ally"
+    a["effects"] = [{"_id": fx(vs, "pwt", "Pass Without Trace", rounds=600, changes=[("system.skills.ste.bonuses.check", 2, "+10")]), "onSave": False}]
+    hide = act(vs, "hide", "utility", "Hide in dim light: invisible", "special", range=RANGE_SELF, target=SELF)
+    apply(hide, "7iV76RQuDuBBE9qM")
+    for e in vs["effects"]:
+        if e["_id"] == "7iV76RQuDuBBE9qM": e.setdefault("flags", {}).setdefault("dae", {})["specialDuration"] = ["1Attack", "1Spell"]
+        if e["_id"] == "LQOpXmQkMQA0kGRj": e["disabled"] = False
+    free(vs, hide)
+    mark(vs)
+
+    sm = S.get("Shadows of Mortality")
+    a = sm["system"]["activities"]["11e01xD5dgvWWq2W"]
+    a["name"] = "Free Shadow Strike (1 CE, once per turn)"
+    apply(a, fx(sm, "crit", "Shadows of Mortality", rounds=1, special=["1Attack"], changes=[("flags.midi-qol.critical.all", 0, "1")],
+                desc="Critical if the target hasn't acted yet or is surprised (remove otherwise); no Black Flash."))
+    mark(sm)
+
+    d = S.get("Domain Expansion: Zero Hour")
+    x = act(d, "init20", "damage", "Initiative 20: full Shadow Strike on 3 creatures", "special",
+            target={"affects": {"type": "enemy", "count": "3", "choice": True}, "override": True},
+            damage={"parts": [{"number": 1, "denomination": 8, "bonus": "", "types": ["necrotic"],
+                    "custom": {"enabled": True, "formula": f"1d8 + @mod + 4 * {CEMOD}"}, "scaling": {}}]})
+    free(d, x)
+    note(d, "Weapon die shown as d8. Every shadow can be targeted inside the domain.")
+    mark(d)
+
+    mf = S.get("Merciful Shadow")
+    a = mf["system"]["activities"]["4GIP7jlbxOCUYosw"]
+    act(mf, "4GIP7jlbxOCUYosw", "heal", "Merciful Shadow (on hit, 2 CE): heal", "special", target=one_creature(),
+        healing={"number": None, "denomination": None, "bonus": "", "types": ["healing"],
+                 "custom": {"enabled": True, "formula": f"1d8 + @mod + (1 + floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11)) * {CEMOD}"}, "scaling": {}})
+    note(mf, "Healing = your attack's damage (weapon die d8 shown) + CE mod (×2 at 6th, ×3 at 11th).")
+    mark(mf)
+
+    sr = S.get("Shadow Release")
+    a = sr["system"]["activities"]["jwGAvYjpOP58OqlB"]
+    a["range"], a["target"] = _r(10), one_creature()
+    a["roll"] = {"formula": f"1d20 + {CEMOD} + @prof", "name": "CE check vs binding DC", "prompt": False, "visible": True}
+    mark(sr)
+
+
+DIS_BASE = "(1 + floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11) + floor(min(@details.level, 18) / 18))"
+
+
+def shrine(S):
+    dm = S.get("Dismantle")
+    a = dm["system"]["activities"]["JFolT83oXSYI2EbK"]
+    a["name"] = "Dismantle (1+ CE, replaces an attack)"
+    a["activation"]["type"] = "special"
+    a["range"] = {"value": "120", "long": "250", "units": "ft", "override": True}
+    a["target"] = one_creature()
+    a["attack"] = _atk()
+    a["damage"] = {"includeBase": False, "parts": [{"number": None, "denomination": 12, "bonus": "", "types": ["slashing"],
+                   "custom": {"enabled": True, "formula": f"({DIS_BASE} + @scaling)d12"}, "scaling": {}}]}
+    cost(dm, a, 1, 1, "@prof")
+    a["attack"]["critical"]["threshold"] = None
+    note(dm, "Damage: base dice (1/2/3/4 at 1st/6th/11th/18th) + 1d12 per extra CE. Advantage vs creatures whose passive Perception < your DC. "
+             "Crit range +1 at 3rd, 6th, 11th and 18th (set the threshold).")
+    mark(dm)
+
+    cl = S.get("Cleave")
+    a = cl["system"]["activities"]
+    c = a["CSZMCFNURLLanC5o"]
+    c["name"] = "Cleave (1–10 CE)"
+    c["range"], c["target"] = _r(5), one_creature()
+    c["attack"] = _atk("melee")
+    c["damage"] = {"includeBase": False, "parts": [{"number": None, "denomination": 10, "bonus": "", "types": ["slashing"],
+                   "custom": {"enabled": True, "formula": "(@prof + 1 + @scaling)d10"}, "scaling": {}}]}
+    cost(cl, c, 1, 1, "10")
+    sv = a["yYEZ6bLNOZFpVS1A"]
+    sv["name"] = "Cleave: CON or adapted (ignores its resistances)"
+    sv["target"] = one_creature()
+    sv["damage"] = {"onSave": "none", "parts": []}
+    apply(sv, fx(cl, "adapt", "Cleave-adapted", rounds=None, desc="Later Cleaves ignore its resistances (11th: immunity → resistance)."))
+    free(cl, sv)
+    trigger(c, sv, "hitTargets")
+    mark(cl)
+
+    df = S.get("Divine Flame Open")
+    a = df["system"]["activities"]["u7pikmLFeX1CnNuV"]
+    a["range"] = {"value": "150", "long": "600", "units": "ft", "override": True}
+    a["target"] = sphere(15)
+    a["damage"] = {"onSave": "half", "parts": [dice(1, 12, ["fire"], scale=1)]}
+    cost(df, a, 1, 1, "2 * @prof")
+    note(df, "Creatures beyond 150 ft save at advantage.")
+    mark(df)
+
+    sl = S.get("Slicing and Severing")
+    a = sl["system"]["activities"]["QsakKkiLYbg9IwKI"]
+    a["name"] = "Dismantle as bonus action / reaction"
+    note(sl, "Use Dismantle's activity, changing its activation. Max Cleave (10 CE) can target a limb (Limb Damage table).")
+    mark(sl)
+
+    d = S.get("Domain Expansion: Malevolent Shrine")
+    for key, nm, die, n, typ in [("dis", "Initiative 20: max Dismantle (everything)", 12, "(" + DIS_BASE + " + @prof - 1)", "slashing"),
+                                 ("cle", "Initiative 20: max Cleave (creatures with CE)", 10, "(@prof + 10)", "slashing")]:
+        x = act(d, key, "damage", nm, "special", target={"affects": {"type": "enemy", "choice": False}, "override": True},
+                damage={"parts": [{"number": None, "denomination": die, "bonus": "", "types": [typ],
+                        "custom": {"enabled": True, "formula": f"{n}d{die}"}, "scaling": {}}]})
+        free(d, x)
+    mark(d)
+
+    asb = S.get("Assemble")
+    asb.setdefault("system", {}).setdefault("activities", {})
+    h = act(asb, "heal", "heal", "Assemble (replaces a Dismantle): 2d8 per 2 CE", "special",
+            range={"value": "120", "long": "250", "units": "ft", "override": True}, target=one_creature(),
+            healing={"number": 2, "denomination": 8, "bonus": "", "types": ["healing"], "custom": {"enabled": False, "formula": ""},
+                     "scaling": {"mode": "whole", "number": 1}})
+    cost(asb, h, 2, 2, f"2 * {CEMOD} + floor(min(@details.level, 18) / 18) * {CEMOD}")
+    note(asb, "Wounded limbs receive double.")
+    mark(asb)
+
+
+def sky_manipulation(S):
+    sk = S.get("Sky Shape")
+    a = sk["system"]["activities"]["65BKEHCfUk8GGVuH"]
+    act(sk, "65BKEHCfUk8GGVuH", "utility", "Sky Shape (1 CE): +4 AC", "reaction", range=RANGE_SELF, target=SELF)
+    a = sk["system"]["activities"]["65BKEHCfUk8GGVuH"]
+    a["useConditionText"] = 'reaction === "isAttacked"'
+    apply(a, fx(sk, "ac", "Sky Shape", special=["turnStartSource"], changes=[("system.attributes.ac.bonus", 2, "+4")]))
+    red = act(sk, "redirect", "attack", "Redirect a missed ranged attack", "special", target=one_creature(), attack=_atk())
+    free(sk, red)
+    stuck = act(sk, "stuck", "utility", "Missed melee: limb stuck", "special", target=one_creature())
+    apply(stuck, fx(sk, "stuck", "Limb stuck in the sky", special=["turnStart"], desc="That limb is unusable until its next turn."))
+    free(sk, stuck)
+    note(sk, "Redirect deals the missed attack's damage and effects (enter them). While Dodging: protect allies within 5 ft.")
+    mark(sk)
+
+    sa = S.get("Sky Armor")
+    a = sa["system"]["activities"]["s0Kr9fzi8LOIBbKi"]
+    a["range"], a["target"] = RANGE_SELF, SELF
+    apply(a, fx(sa, "armor", "Sky Armor", rounds=600,
+                changes=[("system.attributes.ac.calc", 5, "custom"), ("system.attributes.ac.formula", 5, f"11 + {CEMOD} + @prof"),
+                         ("system.attributes.movement.fly", 4, "@attributes.movement.walk")],
+                desc="AC 11 + CE mod + prof; fly = walk; covered parts invisible."))
+    mark(sa)
+
+    si = S.get("Sky Shape Improvement")
+    a = si["system"]["activities"]["5EJNgzTlXThWRMQJ"]
+    a["name"] = "Redirect a cone/line save (3 CE, on success)"
+    a["useConditionText"] = 'reaction === "isSave"'
+    note(si, "Sky Shape also works against CE attack rolls.")
+    mark(si)
+
+    ti = S.get("Thin Ice Breaker")
+    a = ti["system"]["activities"]["9BMtt8kVD9uxtCUt"]
+    a["range"] = RANGE_SELF
+    a["target"] = {"template": {"type": "line", "size": "30", "width": "5", "units": "ft", "count": "1", "contiguous": False},
+                   "affects": {"type": "creature", "choice": False}, "override": True}
+    a["damage"] = {"onSave": "half", "parts": [{"number": None, "denomination": 10, "bonus": "", "types": ["force"],
+                   "custom": {"enabled": True, "formula": f"(2 * {CEMOD})d10"}, "scaling": {}}]}
+    note(ti, "While you fly, creatures save at disadvantage.")
+    mark(ti)
+
+    d = S.get("Domain Expansion: Heaven’s Gate")
+    x = act(d, "end", "damage", "Domain ends: maximum falling damage", "special",
+            target={"affects": {"type": "enemy", "choice": False}, "override": True},
+            damage={"parts": [{"number": None, "denomination": None, "bonus": "", "types": ["bludgeoning"],
+                    "custom": {"enabled": True, "formula": "120"}, "scaling": {}}]})
+    free(d, x)
+    note(d, "Hostiles without fly speed are falling throughout (20d6 max = 120).")
+    mark(d)
+
+    sd = S.get("Sky Destruction")
+    a = sd["system"]["activities"]["VpOKyQ5a2t0ycPpz"]
+    a["range"], a["target"] = _r(60), sphere(20)
+    a["damage"] = {"onSave": "half", "parts": [{"number": None, "denomination": None, "bonus": "", "types": ["bludgeoning"],
+                   "custom": {"enabled": True, "formula": f"2 * {CEMOD} * @scaling"}, "scaling": {}}]}
+    a["damage"]["parts"][0]["custom"]["formula"] = f"2 * {CEMOD}"
+    st = act(sd, "stun", "utility", "Failed by 5+: stunned", "special", target=one_creature())
+    apply(st, fx(sd, "stun", "Stunned (Sky Destruction)", statuses=["stunned"], special=["turnStartSource"]))
+    free(sd, st)
+    note(sd, "Damage: 2 × CE mod per creature/size it collides with (shown once — multiply).")
+    mark(sd)
+
+
+def solo_forbidden_zone(S):
+    fz = S.get("Forbidden Zone")
+    a = fz["system"]["activities"]["crsVEjXnAjWFoEnP"]
+    a["range"], a["target"] = RANGE_SELF, sphere(30)
+    a["target"]["affects"]["type"] = "ally"
+    zone = fx(fz, "zone", "Forbidden Zone", rounds=10, changes=[("flags.midi-qol.advantage.all", 0, "1")],
+              desc="Advantage on all rolls. Caster maintains with a bonus action.")
+    apply(a, zone)
+    keep = act(fz, "keep", "utility", "Maintain the Zone (bonus action)", "bonus", range=RANGE_SELF, target=SELF)
+    free(fz, keep)
+    mark(fz)
+
+    bl = S.get("Bless", technique="Solo Forbidden Zone")
+    a = bl["system"]["activities"]["8rBkNLHOAFcQBe5m"]
+    a["range"], a["target"] = _r(60), one_creature()
+    apply(a, fx(bl, "z", "Forbidden Zone (blessed)", rounds=10, changes=[("flags.midi-qol.advantage.all", 0, "1")]))
+    mark(bl)
+
+    rd = S.get("Ritual Dance")
+    a = rd["system"]["activities"]["8g1i0F03tSYGgeU1"]
+    a["name"] = "Seal the zone: hostiles WIS or can't enter/leave"
+    a["target"] = {"affects": {"type": "enemy", "choice": True}, "override": True}
+    a["damage"] = {"onSave": "none", "parts": []}
+    apply(a, fx(rd, "seal", "Sealed by the Ritual Zone", rounds=10))
+    free(rd, a)
+    on = act(rd, "zone", "utility", "Ritual Zone (full turn, CE up to mod + prof)", "action", range=RANGE_SELF, target=sphere(50))
+    on["target"]["affects"]["type"] = "ally"
+    apply(on, fx(rd, "rz", "Ritual Zone", rounds=10,
+                 changes=[("flags.midi-qol.advantage.all", 0, "1"), ("system.bonuses.msak.damage", 2, "+ (5 * @scaling)"),
+                          ("system.bonuses.rsak.damage", 2, "+ (5 * @scaling)")],
+                 desc="Advantage; +5 technique damage per CE; temp CE = CE spent; extra CE spending up to the caster's CE mod."))
+    cost(rd, on, 1, 1, f"{CEMOD} + @prof")
+    note(rd, "Concentration; move ≤ 10 ft; maintain with a bonus action.")
+    mark(rd)
+
+    mo = S.get("Maximize Output")
+    a = mo["system"]["activities"]["V7fED709mCReQflf"]
+    a["name"] = "Maximize an ally's technique damage (5 CE)"
+    a["activation"]["type"] = "special"
+    a["target"] = one_creature()
+    apply(a, fx(mo, "max", "Maximized", rounds=1, special=["1Spell"], changes=[("flags.midi-qol.max.damage.all", 0, "1")]))
+    mark(mo)
+
+    d = S.get("Domain Expansion: Hallowed Zone")
+    x = act(d, "zone", "utility", "Domain: max Ritual Zone for all allies", "special",
+            target={"affects": {"type": "ally", "choice": False}, "override": True})
+    apply(x, fx(d, "rz", "Hallowed Zone", rounds=10, changes=[("flags.midi-qol.advantage.all", 0, "1")],
+                desc="Ritual Zone at maximum CE; allies' techniques are guaranteed hits."))
+    free(d, x)
+    mark(d)
+
+    dz = S.get("Depletion Zone")
+    a = dz["system"]["activities"]["hyuZ1bsrWzieYdoK"]
+    a["name"] = "Depletion Zone (CE up to mod + prof)"
+    a["range"], a["target"] = RANGE_SELF, sphere(15)
+    a["target"]["affects"]["type"] = "enemy"
+    apply(a, fx(dz, "drain", "Depletion Zone", rounds=10,
+                changes=[("flags.midi-qol.OverTime", 0, "turn=start, saveAbility=wis|cha, saveDC=JJKORIGINDC, label=Depletion Zone (lose CE = caster's spend)")]))
+    cost(dz, a, 1, 1, f"{CEMOD} + @prof")
+    mark(dz)
+
+
+def star_dictator(S):
+    mi = S.get("Minor Star Shikigami")
+    a = mi["system"]["activities"]["JhTld6NhLQKLlaBT"]
+    a["name"] = "Summon minor stars (1 CE each, up to prof)"
+    a["range"], a["target"] = _r(5), SELF
+    cost(mi, a, 1, 1, "@prof")
+    a["effects"] = []
+    sh = act(mi, "senses", "utility", "Share senses with a star (blinded & deafened)", "action", range=RANGE_SELF, target=SELF)
+    apply(sh, "3bD0fcEhNYxV2krG")
+    sh["effects"].append({"_id": fx(mi, "deaf", "Deafened (sharing senses)", rounds=None, statuses=["deafened"]), "onSave": False})
+    free(mi, sh)
+    note(mi, "Command all with a bonus action; otherwise they Dodge. Max prof minor stars (3 × prof at 11th).")
+    mark(mi)
+
+    pd = S.get("Pseudo-Domain Constitution")
+    a = pd["system"]["activities"]["cdUZnJ88N5QDCwP8"]
+    a["name"] = "Pseudo-domain (end of your turn): DEX, 1d6 per orbiting star"
+    a["activation"]["type"] = "special"
+    a["target"] = sphere(5)
+    a["damage"] = {"onSave": "half", "parts": [{"number": None, "denomination": None, "bonus": "", "types": ["slashing"],
+                   "custom": {"enabled": True, "formula": "(@scaling)d(6 + 2 * floor(min(@details.level, 6) / 6) + 2 * floor(min(@details.level, 11) / 11))"}, "scaling": {}}]}
+    free(pd, a)
+    note(pd, "Scale = orbiting stars (enter it). Radius ≤ 5 ft × stars (10 ft × at 11th); +5 ft per bonus action.")
+    mark(pd)
+
+    mj = S.get("Major Star Shikigami")
+    a = mj["system"]["activities"]["sb7OhoI9bvpaEuhF"]
+    a["name"] = "Summon the major star (6 CE)"
+    note(mj, "One at a time (two at 11th); killed: 1 hour before resummoning. Full turn: special pseudo-domain where minor stars move freely.")
+    mark(mj)
+
+    ar = S.get("Army of the Dictator")
+    a = ar["system"]["activities"]["lKkrGWN2fudFZv1s"]
+    a["name"] = "Army pseudo-domain (1d10 per star, ignores slashing resistance)"
+    a["damage"] = {"parts": [dice(1, 10, ["slashing"], scale=1)]}
+    a["target"] = sphere(10)
+    free(ar, a)
+    mark(ar)
+
+    d = S.get("Domain Expansion: Divine Mandate")
+    x = d["system"]["activities"]["vvbMyowtvHkpfGxJ"]
+    x["name"] = "Initiative 20: 1d12 per star shikigami"
+    x["target"] = {"affects": {"type": "enemy", "choice": True}, "override": True}
+    x["damage"] = {"parts": [dice(1, 12, ["slashing"], scale=1)]}
+    free(d, x)
+    mark(d)
+
+    sg = S.get("Star Guardian")
+    a = sg["system"]["activities"]["gn5lWOYUUa8j6WTx"]
+    a["type"] = "utility"
+    a.pop("damage", None)
+    a["name"] = "Anti-domain (4 CE)"
+    a["range"], a["target"] = RANGE_SELF, SELF
+    apply(a, fx(sg, "anti", "Star Guardian anti-domain", rounds=None, desc="Guaranteed hits and auto-fails don't work inside or on the orbiting stars."))
+    hit = act(sg, "thorn", "damage", "Hitting an orbiting star: 1d12 slashing", "special", target=one_creature(),
+              damage={"parts": [dice(1, 12, ["slashing"])]})
+    free(sg, hit)
+    mark(sg)
+
+
 TECHNIQUES = {"Antigravity System": antigravity_system,
               "Auspicious Beast Summon": auspicious_beast_summon,
               "Black Bird Manipulation": black_bird_manipulation,
@@ -4813,7 +5554,17 @@ TECHNIQUES = {"Antigravity System": antigravity_system,
               "Projection Sorcery": projection_sorcery,
               "Puppet Manipulation": puppet_manipulation,
               "Ratio": ratio,
-              "Regalia": regalia}
+              "Regalia": regalia,
+              "Retrograde": retrograde,
+              "Rockstar": rockstar,
+              "Rot": rot,
+              "Schrift X": schrift_x,
+              "Seance": seance,
+              "Shadow Killer": shadow_killer,
+              "Shrine": shrine,
+              "Sky Manipulation": sky_manipulation,
+              "Solo Forbidden Zone": solo_forbidden_zone,
+              "Star Dictator": star_dictator}
 
 if __name__ == "__main__":
     args = sys.argv[1:]

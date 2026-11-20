@@ -58,6 +58,45 @@
      "concentration": false,
      "override": true
     }
+   },
+   "i1tnvge9iQuAsTu1": {
+    "_id": "i1tnvge9iQuAsTu1",
+    "type": "utility",
+    "name": "Initiative 20: Seance on a willing creature (free)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "175",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": []
    }
   },
   "uses": {
@@ -116,7 +155,9 @@
     "dWy41YoN27E6VJBE": 20
    },
    "domainActivity": "dWy41YoN27E6VJBE",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "No upkeep; auto-succeed the soul save; seance techniques get the guaranteed hit. Body part need only be held.",
+   "automation": "automated"
   }
  },
  "folder": "z1MGG49oTB7xZ6Pc",

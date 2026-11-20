@@ -24,7 +24,7 @@
    "886Pnz5kN0SnYAWF": {
     "_id": "886Pnz5kN0SnYAWF",
     "type": "utility",
-    "name": "Action (8 CE)",
+    "name": "Possess (full turn, 8 CE)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -38,26 +38,30 @@
      }
     },
     "range": {
-     "units": "self"
+     "value": "5",
+     "units": "ft",
+     "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
     },
-    "effects": [
-     {
-      "_id": "oALlN7r7MOQmcoD1",
-      "onSave": false
-     }
-    ]
+    "effects": []
    },
    "dEqDSnBQ0OyqQ900": {
     "_id": "dEqDSnBQ0OyqQ900",
     "type": "utility",
-    "name": "Action (1 CE)",
+    "name": "Keep control (1 CE, start of turn)",
     "sort": 100000,
     "activation": {
-     "type": "action",
+     "type": "special",
      "value": 1,
      "condition": ""
     },
@@ -74,6 +78,47 @@
     "duration": {
      "units": "inst"
     }
+   },
+   "26hWFRA6OfYm0x0s": {
+    "_id": "26hWFRA6OfYm0x0s",
+    "type": "utility",
+    "name": "Your body falls unconscious",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "oALlN7r7MOQmcoD1",
+      "onSave": false
+     }
+    ]
    }
   }
  },
@@ -97,7 +142,9 @@
       "Seance"
      ]
     ]
-   }
+   },
+   "automationNotes": "Willing or helpless target. Control its token; you keep your stats except its technique features and CE.",
+   "automation": "automated"
   }
  },
  "effects": [

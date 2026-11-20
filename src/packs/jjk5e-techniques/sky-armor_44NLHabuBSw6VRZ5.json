@@ -39,6 +39,9 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
@@ -46,7 +49,13 @@
      "units": "hour",
      "concentration": false,
      "override": true
-    }
+    },
+    "effects": [
+     {
+      "_id": "cnDG28meyB45xyyO",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -90,9 +99,51 @@
    },
    "technique": "Sky Manipulation",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "i7KDxPjzj0GuzdPl",
- "_key": "!items!44NLHabuBSw6VRZ5"
+ "_key": "!items!44NLHabuBSw6VRZ5",
+ "effects": [
+  {
+   "_id": "cnDG28meyB45xyyO",
+   "name": "Sky Armor",
+   "img": "modules/jjk5e/icons/techniques/sky-manipulation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>AC 11 + CE mod + prof; fly = walk; covered parts invisible.</p>",
+   "changes": [
+    {
+     "key": "system.attributes.ac.calc",
+     "mode": 5,
+     "value": "custom",
+     "priority": 20
+    },
+    {
+     "key": "system.attributes.ac.formula",
+     "mode": 5,
+     "value": "11 + max(@abilities.wis.mod, @abilities.cha.mod) + @prof",
+     "priority": 20
+    },
+    {
+     "key": "system.attributes.movement.fly",
+     "mode": 4,
+     "value": "@attributes.movement.walk",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 600
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Sky Manipulation"
+    }
+   },
+   "_key": "!items.effects!44NLHabuBSw6VRZ5.cnDG28meyB45xyyO"
+  }
+ ]
 }

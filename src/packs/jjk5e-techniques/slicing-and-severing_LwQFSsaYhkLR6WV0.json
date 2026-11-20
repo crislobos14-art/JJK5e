@@ -19,7 +19,7 @@
    "QsakKkiLYbg9IwKI": {
     "_id": "QsakKkiLYbg9IwKI",
     "type": "utility",
-    "name": "Bonus Action",
+    "name": "Dismantle as bonus action / reaction",
     "sort": 0,
     "activation": {
      "type": "bonus",
@@ -84,7 +84,9 @@
   "jjk5e": {
    "technique": "Shrine",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Use Dismantle's activity, changing its activation. Max Cleave (10 CE) can target a limb (Limb Damage table).",
+   "automation": "automated"
   }
  },
  "folder": "m9ZssDMA8savxH5G",

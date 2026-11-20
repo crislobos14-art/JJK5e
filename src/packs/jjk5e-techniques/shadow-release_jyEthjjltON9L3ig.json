@@ -39,16 +39,25 @@
     },
     "range": {
      "value": "10",
-     "units": "ft"
+     "units": "ft",
+     "override": true
     },
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
-     }
+      "count": "1",
+      "choice": true
+     },
+     "override": true
     },
     "duration": {
      "units": "inst"
+    },
+    "roll": {
+     "formula": "1d20 + max(@abilities.wis.mod, @abilities.cha.mod) + @prof",
+     "name": "CE check vs binding DC",
+     "prompt": false,
+     "visible": true
     }
    }
   }
@@ -73,7 +82,8 @@
      ]
     ],
     "level": 3
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",

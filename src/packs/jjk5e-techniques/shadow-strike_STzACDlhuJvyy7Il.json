@@ -18,60 +18,59 @@
   "activities": {
    "HlmIkdzNN0hw6cen": {
     "_id": "HlmIkdzNN0hw6cen",
-    "type": "save",
-    "name": "Action (1 CE) — rider",
+    "type": "damage",
+    "name": "Shadow Strike (on attack, 1 CE): necrotic + CE mod",
     "sort": 0,
+    "img": null,
     "activation": {
-     "type": "action",
-     "value": 1,
+     "type": "special",
+     "value": null,
      "condition": "",
      "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
      "units": "spec",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
-    "duration": {
-     "units": "inst",
-     "override": true
-    },
-    "save": {
-     "ability": [
-      "dex"
-     ],
-     "dc": {
-      "calculation": "spellcasting",
-      "formula": ""
-     }
-    },
+    "effects": [],
     "damage": {
-     "onSave": "none",
      "parts": [
       {
        "number": null,
        "denomination": null,
        "bonus": "",
-       "types": [],
+       "types": [
+        "necrotic"
+       ],
        "custom": {
         "enabled": true,
-        "formula": "max(@abilities.wis.mod, @abilities.cha.mod)"
+        "formula": "(1 + floor(min(@details.level, 3) / 3) + floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11)) * max(@abilities.wis.mod, @abilities.cha.mod)"
        },
-       "scaling": {
-        "number": 1
-       }
+       "scaling": {}
       }
      ]
-    }
+    },
+    "useConditionText": "reaction === \"isHit\""
    }
   },
   "uses": {
@@ -114,7 +113,9 @@
    },
    "technique": "Shadow Killer",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Bonus necrotic = CE mod (×2/×3/×4 at 3rd/6th/11th); the attack's own damage becomes necrotic. Unaware target: automatic hit. Attack roll > its passive Perception: it doesn't know how it was hurt.",
+   "automation": "automated"
   }
  },
  "folder": "AZz0yh4SFsEeg2VN",

@@ -19,7 +19,7 @@
    "CdEOvhfEdsw1Axiq": {
     "_id": "CdEOvhfEdsw1Axiq",
     "type": "attack",
-    "name": "Action (1 CE)",
+    "name": "Sound Blast (1 CE)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -35,14 +35,15 @@
      "spellSlot": false
     },
     "range": {
-     "value": "30",
+     "value": "30 + 30 * floor(min(@details.level, 6) / 6)",
      "units": "ft",
      "override": true
     },
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
@@ -71,7 +72,7 @@
      ]
     },
     "attack": {
-     "ability": "",
+     "ability": "spellcasting",
      "bonus": "",
      "critical": {
       "threshold": null
@@ -88,13 +89,14 @@
      "triggeredActivityTargets": "hitTargets",
      "triggeredActivityRollAs": "self",
      "triggeredActivityConsume": false,
-     "triggeredActivityConfigure": false
+     "triggeredActivityConfigure": false,
+     "triggeredActivityConditionText": ""
     }
    },
    "4rqeXMwiiEKlho4p": {
     "_id": "4rqeXMwiiEKlho4p",
     "type": "save",
-    "name": "Action — save",
+    "name": "Sound Blast push (STR or 10 ft)",
     "sort": 0,
     "activation": {
      "type": "special",
@@ -117,7 +119,8 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
@@ -185,7 +188,7 @@
    "dmgScale": {
     "CdEOvhfEdsw1Axiq": [
      [
-      0,
+      1,
       "2d10"
      ],
      [
@@ -207,33 +210,36 @@
    },
    "technique": "Rockstar",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "vosb36eMO9PhuX42",
  "effects": [
   {
-   "_id": "2MmdQsBa0MjAIHRg",
-   "name": "Sound Amplification (toggle)",
+   "_id": "2slDRFsGavyJmcNc",
+   "name": "Performance proficiency",
    "img": "modules/jjk5e/icons/techniques/rockstar.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
    "changes": [
     {
      "key": "system.skills.prf.value",
      "mode": 4,
      "value": "1",
-     "priority": null
+     "priority": 20
     }
    ],
-   "transfer": true,
-   "disabled": true,
    "duration": {},
-   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
    "flags": {
     "jjk5e": {
-     "auto": "toggle"
+     "technique": "Rockstar"
     }
    },
-   "_key": "!items.effects!wmS4XVAE6EL1dJ17.2MmdQsBa0MjAIHRg"
+   "_key": "!items.effects!wmS4XVAE6EL1dJ17.2slDRFsGavyJmcNc"
   }
  ],
  "_key": "!items!wmS4XVAE6EL1dJ17"

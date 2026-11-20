@@ -19,7 +19,7 @@
    "CSZMCFNURLLanC5o": {
     "_id": "CSZMCFNURLLanC5o",
     "type": "attack",
-    "name": "Action (1+ CE)",
+    "name": "Cleave (1–10 CE)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -43,7 +43,8 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
@@ -56,24 +57,21 @@
      "parts": [
       {
        "number": null,
-       "denomination": null,
+       "denomination": 10,
        "bonus": "",
        "types": [
         "slashing"
        ],
        "custom": {
         "enabled": true,
-        "formula": "(@prof)d10"
+        "formula": "(@prof + 1 + @scaling)d10"
        },
-       "scaling": {
-        "mode": "whole",
-        "formula": "1d10"
-       }
+       "scaling": {}
       }
      ]
     },
     "attack": {
-     "ability": "",
+     "ability": "spellcasting",
      "bonus": "",
      "critical": {
       "threshold": null
@@ -90,13 +88,14 @@
      "triggeredActivityTargets": "hitTargets",
      "triggeredActivityRollAs": "self",
      "triggeredActivityConsume": false,
-     "triggeredActivityConfigure": false
+     "triggeredActivityConfigure": false,
+     "triggeredActivityConditionText": ""
     }
    },
    "yYEZ6bLNOZFpVS1A": {
     "_id": "yYEZ6bLNOZFpVS1A",
     "type": "save",
-    "name": "Action — save",
+    "name": "Cleave: CON or adapted (ignores its resistances)",
     "sort": 0,
     "activation": {
      "type": "special",
@@ -120,7 +119,8 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
@@ -140,7 +140,13 @@
     "damage": {
      "onSave": "none",
      "parts": []
-    }
+    },
+    "effects": [
+     {
+      "_id": "mbZoitmMV3s6pdxf",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -193,9 +199,32 @@
    },
    "ceSteps": {
     "CSZMCFNURLLanC5o": 1
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "m9ZssDMA8savxH5G",
- "_key": "!items!KzRHCk2wttIY8wKv"
+ "_key": "!items!KzRHCk2wttIY8wKv",
+ "effects": [
+  {
+   "_id": "mbZoitmMV3s6pdxf",
+   "name": "Cleave-adapted",
+   "img": "modules/jjk5e/icons/techniques/shrine.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Later Cleaves ignore its resistances (11th: immunity → resistance).</p>",
+   "changes": [],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Shrine"
+    }
+   },
+   "_key": "!items.effects!KzRHCk2wttIY8wKv.mbZoitmMV3s6pdxf"
+  }
+ ]
 }

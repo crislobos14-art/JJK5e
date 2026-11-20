@@ -19,10 +19,10 @@
    "QZslfH06BotZdDRL": {
     "_id": "QZslfH06BotZdDRL",
     "type": "utility",
-    "name": "Action (1 CE)",
+    "name": "Extra Sound Blast (1 CE each; 2, or 3 at 11th)",
     "sort": 0,
     "activation": {
-     "type": "action",
+     "type": "special",
      "value": 1,
      "condition": "",
      "override": true
@@ -87,7 +87,8 @@
    },
    "technique": "Rockstar",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "vosb36eMO9PhuX42",

@@ -19,14 +19,83 @@
    "value": "class",
    "subtype": ""
   },
-  "requirements": "Seance 6"
+  "requirements": "Seance 6",
+  "activities": {
+   "PWy7ySyZWFTbBLUl": {
+    "_id": "PWy7ySyZWFTbBLUl",
+    "type": "utility",
+    "name": "Ritual (full turn each round, 1 minute)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "uUcNlpSa0FeOXjeO",
+      "onSave": false
+     }
+    ]
+   }
+  }
  },
  "flags": {
   "jjk5e": {
    "technique": "Seance",
-   "level": 6
+   "level": 6,
+   "automation": "automated"
   }
  },
  "folder": "z1MGG49oTB7xZ6Pc",
- "_key": "!items!pCVNLTJfW9n5olZi"
+ "_key": "!items!pCVNLTJfW9n5olZi",
+ "effects": [
+  {
+   "_id": "uUcNlpSa0FeOXjeO",
+   "name": "Resurrection ritual",
+   "img": "modules/jjk5e/icons/techniques/seance.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Concentration; then transform into a dead humanoid of CR/level ≤ your level + prof.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Seance"
+    }
+   },
+   "_key": "!items.effects!pCVNLTJfW9n5olZi.uUcNlpSa0FeOXjeO"
+  }
+ ]
 }

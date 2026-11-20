@@ -18,11 +18,67 @@
   "activities": {
    "yn7JrUsDc5H8JdGr": {
     "_id": "yn7JrUsDc5H8JdGr",
-    "type": "utility",
-    "name": "Action (2 CE)",
+    "type": "heal",
+    "name": "Seance (full turn, 2 CE per information)",
     "sort": 0,
     "activation": {
      "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "4"
+     },
+     "spellSlot": false
+    },
+    "range": {
+     "value": "15",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "",
+     "types": [
+      "temphp"
+     ],
+     "custom": {
+      "enabled": true,
+      "formula": "@prof"
+     },
+     "scaling": {}
+    },
+    "effects": [
+     {
+      "_id": "4VljXQGrql7EYY9B",
+      "onSave": false
+     }
+    ]
+   },
+   "JitvMjiNFYyLPFjU": {
+    "_id": "JitvMjiNFYyLPFjU",
+    "type": "save",
+    "name": "Soul Information: CHA save vs the dead (upkeep 1 CE)",
+    "sort": 100000,
+    "activation": {
+     "type": "special",
      "value": 1,
      "condition": "",
      "override": true
@@ -42,39 +98,9 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
-     "override": true
-    },
-    "duration": {
-     "units": "inst",
-     "override": true
-    }
-   },
-   "JitvMjiNFYyLPFjU": {
-    "_id": "JitvMjiNFYyLPFjU",
-    "type": "save",
-    "name": "Action (1 CE)",
-    "sort": 100000,
-    "activation": {
-     "type": "action",
-     "value": 1,
-     "condition": "",
-     "override": true
-    },
-    "consumption": {
-     "targets": [],
-     "scaling": {
-      "allowed": false
-     },
-     "spellSlot": false
-    },
-    "range": {
-     "value": "15",
-     "units": "ft",
-     "override": true
-    },
-    "target": {
      "override": true
     },
     "duration": {
@@ -86,8 +112,8 @@
       "cha"
      ],
      "dc": {
-      "calculation": "spellcasting",
-      "formula": ""
+      "calculation": "",
+      "formula": "8 + @prof + @abilities.cha.mod"
      }
     },
     "damage": {
@@ -144,9 +170,36 @@
    },
    "technique": "Seance",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceSteps": {
+    "yn7JrUsDc5H8JdGr": 2
+   },
+   "automationNotes": "Soul save DC should use the dead humanoid's prof + CHA: edit the formula.",
+   "automation": "automated"
   }
  },
  "folder": "z1MGG49oTB7xZ6Pc",
- "_key": "!items!JAeKHJYaOvVKwaEI"
+ "_key": "!items!JAeKHJYaOvVKwaEI",
+ "effects": [
+  {
+   "_id": "4VljXQGrql7EYY9B",
+   "name": "Seance",
+   "img": "modules/jjk5e/icons/techniques/seance.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Channelling a dead humanoid (Physical: body, traits, STR/DEX/CON; Soul: memories + 1 feature). No own innate technique. 1 CE per turn to maintain.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Seance"
+    }
+   },
+   "_key": "!items.effects!JAeKHJYaOvVKwaEI.4VljXQGrql7EYY9B"
+  }
+ ]
 }

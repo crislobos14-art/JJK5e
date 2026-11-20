@@ -19,7 +19,7 @@
    "fGhCrm4JNr846uYP": {
     "_id": "fGhCrm4JNr846uYP",
     "type": "utility",
-    "name": "Action (2 CE)",
+    "name": "Pass Without Trace (2 CE)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -39,10 +39,62 @@
      "override": true
     },
     "target": {
+     "template": {
+      "type": "radius",
+      "size": "30",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "ally",
+      "choice": false
+     },
      "override": true
     },
     "duration": {
      "units": "inst",
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "Ex5W8tUvIJ5ie3eG",
+      "onSave": false
+     }
+    ]
+   },
+   "YgXQZUcwA6N7kZuc": {
+    "_id": "YgXQZUcwA6N7kZuc",
+    "type": "utility",
+    "name": "Hide in dim light: invisible",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "effects": [
@@ -93,7 +145,8 @@
    },
    "technique": "Shadow Killer",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "effects": [
@@ -112,6 +165,12 @@
    "flags": {
     "jjk5e": {
      "condition": "invisible"
+    },
+    "dae": {
+     "specialDuration": [
+      "1Attack",
+      "1Spell"
+     ]
     }
    },
    "_key": "!items.effects!56DoYOAjvHn5LVtK.7iV76RQuDuBBE9qM"
@@ -129,7 +188,7 @@
     }
    ],
    "transfer": true,
-   "disabled": true,
+   "disabled": false,
    "duration": {},
    "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
    "flags": {
@@ -138,6 +197,33 @@
     }
    },
    "_key": "!items.effects!56DoYOAjvHn5LVtK.LQOpXmQkMQA0kGRj"
+  },
+  {
+   "_id": "Ex5W8tUvIJ5ie3eG",
+   "name": "Pass Without Trace",
+   "img": "modules/jjk5e/icons/techniques/shadow-killer.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.skills.ste.bonuses.check",
+     "mode": 2,
+     "value": "+10",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 600
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Shadow Killer"
+    }
+   },
+   "_key": "!items.effects!56DoYOAjvHn5LVtK.Ex5W8tUvIJ5ie3eG"
   }
  ],
  "folder": "AZz0yh4SFsEeg2VN",

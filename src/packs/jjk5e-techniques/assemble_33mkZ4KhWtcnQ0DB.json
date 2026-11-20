@@ -19,7 +19,65 @@
    "value": "class",
    "subtype": ""
   },
-  "requirements": "Cursed Technique Reversal, Shrine"
+  "requirements": "Cursed Technique Reversal, Shrine",
+  "activities": {
+   "cSW5YTGpeDa5NTJo": {
+    "_id": "cSW5YTGpeDa5NTJo",
+    "type": "heal",
+    "name": "Assemble (replaces a Dismantle): 2d8 per 2 CE",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "2 * max(@abilities.wis.mod, @abilities.cha.mod) + floor(min(@details.level, 18) / 18) * max(@abilities.wis.mod, @abilities.cha.mod)"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "120",
+     "long": "250",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "healing": {
+     "number": 2,
+     "denomination": 8,
+     "bonus": "",
+     "types": [
+      "healing"
+     ],
+     "custom": {
+      "enabled": false,
+      "formula": ""
+     },
+     "scaling": {
+      "mode": "whole",
+      "number": 1
+     }
+    }
+   }
+  }
  },
  "flags": {
   "jjk5e": {
@@ -37,7 +95,15 @@
       "Shrine"
      ]
     ]
-   }
+   },
+   "ceCosts": {
+    "cSW5YTGpeDa5NTJo": 2
+   },
+   "ceSteps": {
+    "cSW5YTGpeDa5NTJo": 2
+   },
+   "automationNotes": "Wounded limbs receive double.",
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",

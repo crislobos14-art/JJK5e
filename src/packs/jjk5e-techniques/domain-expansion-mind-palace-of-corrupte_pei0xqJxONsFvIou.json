@@ -58,6 +58,60 @@
      "concentration": false,
      "override": true
     }
+   },
+   "XlGhIaBBHpao2FW2": {
+    "_id": "XlGhIaBBHpao2FW2",
+    "type": "damage",
+    "name": "Initiative 20: extra Decay damage (all)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "enemy",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": [],
+    "damage": {
+     "parts": [
+      {
+       "number": 4,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "acid"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
    }
   },
   "uses": {
@@ -116,7 +170,9 @@
     "mdf9OuF8ur6ZzfH5": 20
    },
    "domainActivity": "mdf9OuF8ur6ZzfH5",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Everyone is under Decay; your Rot HP costs can be paid by other creatures in the domain.",
+   "automation": "automated"
   }
  },
  "folder": "TOdSvSBhuENKcEJX",

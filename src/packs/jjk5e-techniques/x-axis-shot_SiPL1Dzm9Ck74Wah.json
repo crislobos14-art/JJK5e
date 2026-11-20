@@ -19,7 +19,7 @@
    "iuRxDAeUgMb2vW57": {
     "_id": "iuRxDAeUgMb2vW57",
     "type": "damage",
-    "name": "Action (3 CE)",
+    "name": "X-Axis Shot (3 CE): auto-hit + necrotic",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -35,10 +35,16 @@
      "spellSlot": false
     },
     "range": {
-     "units": "spec",
+     "value": "150",
+     "units": "ft",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -63,7 +69,49 @@
        }
       }
      ]
-    }
+    },
+    "effects": []
+   },
+   "2dqPXfnU6awu0PnK": {
+    "_id": "2dqPXfnU6awu0PnK",
+    "type": "utility",
+    "name": "After the shot: speed 0 this turn",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "WNZHaW2er6gav9Nq",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -106,9 +154,65 @@
    },
    "technique": "Schrift X",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "dmgScale": {
+    "iuRxDAeUgMb2vW57": [
+     [
+      1,
+      "2d6"
+     ],
+     [
+      6,
+      "3d6"
+     ],
+     [
+      11,
+      "5d6"
+     ],
+     [
+      18,
+      "7d6"
+     ]
+    ]
+   },
+   "automationNotes": "Also roll your weapon damage (automatic hit, no attack roll). Only if you haven't moved this turn.",
+   "automation": "automated"
   }
  },
  "folder": "sHIaW6mkEHmwduDu",
- "_key": "!items!SiPL1Dzm9Ck74Wah"
+ "_key": "!items!SiPL1Dzm9Ck74Wah",
+ "effects": [
+  {
+   "_id": "WNZHaW2er6gav9Nq",
+   "name": "X-Axis stance",
+   "img": "modules/jjk5e/icons/techniques/schrift-x.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.attributes.movement.all",
+     "mode": 0,
+     "value": "0",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Schrift X"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnEnd"
+     ]
+    }
+   },
+   "_key": "!items.effects!SiPL1Dzm9Ck74Wah.WNZHaW2er6gav9Nq"
+  }
+ ]
 }

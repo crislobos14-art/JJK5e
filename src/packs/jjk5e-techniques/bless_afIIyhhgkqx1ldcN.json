@@ -42,7 +42,8 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
@@ -51,7 +52,13 @@
      "units": "minute",
      "concentration": false,
      "override": true
-    }
+    },
+    "effects": [
+     {
+      "_id": "cxaJFeNbbkS41cQu",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -102,9 +109,39 @@
    },
    "technique": "Solo Forbidden Zone",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "pI3TNTzVyu2gPuxX",
- "_key": "!items!afIIyhhgkqx1ldcN"
+ "_key": "!items!afIIyhhgkqx1ldcN",
+ "effects": [
+  {
+   "_id": "cxaJFeNbbkS41cQu",
+   "name": "Forbidden Zone (blessed)",
+   "img": "modules/jjk5e/icons/techniques/solo-forbidden-zone.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.advantage.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Solo Forbidden Zone"
+    }
+   },
+   "_key": "!items.effects!afIIyhhgkqx1ldcN.cxaJFeNbbkS41cQu"
+  }
+ ]
 }

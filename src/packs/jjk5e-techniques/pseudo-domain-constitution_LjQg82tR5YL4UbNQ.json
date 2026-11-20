@@ -19,10 +19,10 @@
    "cdUZnJ88N5QDCwP8": {
     "_id": "cdUZnJ88N5QDCwP8",
     "type": "save",
-    "name": "Bonus Action",
+    "name": "Pseudo-domain (end of your turn): DEX, 1d6 per orbiting star",
     "sort": 0,
     "activation": {
-     "type": "bonus",
+     "type": "special",
      "value": 1,
      "condition": "",
      "override": true
@@ -40,9 +40,16 @@
      "override": true
     },
     "target": {
+     "template": {
+      "type": "radius",
+      "size": "5",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
      "affects": {
       "type": "creature",
-      "count": "1"
+      "choice": false
      },
      "override": true
     },
@@ -63,19 +70,17 @@
      "onSave": "half",
      "parts": [
       {
-       "number": 1,
-       "denomination": 6,
+       "number": null,
+       "denomination": null,
        "bonus": "",
        "types": [
         "slashing"
        ],
        "custom": {
-        "enabled": false,
-        "formula": ""
+        "enabled": true,
+        "formula": "(@scaling)d(6 + 2 * floor(min(@details.level, 6) / 6) + 2 * floor(min(@details.level, 11) / 11))"
        },
-       "scaling": {
-        "number": 1
-       }
+       "scaling": {}
       }
      ]
     }
@@ -125,7 +130,9 @@
   "jjk5e": {
    "technique": "Star Dictator",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Scale = orbiting stars (enter it). Radius ≤ 5 ft × stars (10 ft × at 11th); +5 ft per bonus action.",
+   "automation": "automated"
   }
  },
  "folder": "ba0AWxHF6sBvbrZq",

@@ -19,7 +19,7 @@
    "qxwr7MCLQF64tLOc": {
     "_id": "qxwr7MCLQF64tLOc",
     "type": "damage",
-    "name": "Special",
+    "name": "Rotten Blood (once per turn on hit while hurt)",
     "sort": 0,
     "activation": {
      "type": "special",
@@ -45,6 +45,11 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -69,7 +74,8 @@
        }
       }
      ]
-    }
+    },
+    "useConditionText": "reaction === \"isHit\""
    }
   },
   "uses": {
@@ -114,39 +120,63 @@
   "jjk5e": {
    "technique": "Rot",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "dmgScale": {
+    "qxwr7MCLQF64tLOc": [
+     [
+      1,
+      "1d8"
+     ],
+     [
+      3,
+      "2d8"
+     ],
+     [
+      6,
+      "3d8"
+     ],
+     [
+      11,
+      "4d8"
+     ]
+    ]
+   },
+   "automationNotes": "Advantage on saves vs poisoned (GM). Blood Bags: alternate HP source for Rot costs (untick the HP cost).",
+   "automation": "automated"
   }
  },
  "folder": "TOdSvSBhuENKcEJX",
  "effects": [
   {
-   "_id": "NNBe8t6D2Oom0eRC",
-   "name": "Rotten Blood (toggle)",
+   "_id": "O3NMl3VyJyBI06XB",
+   "name": "Rotten Blood",
    "img": "modules/jjk5e/icons/techniques/rot.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
    "changes": [
     {
      "key": "system.traits.dr.value",
      "mode": 2,
      "value": "poison",
-     "priority": null
+     "priority": 20
     },
     {
      "key": "system.traits.dr.value",
      "mode": 2,
      "value": "acid",
-     "priority": null
+     "priority": 20
     }
    ],
-   "transfer": true,
-   "disabled": true,
    "duration": {},
-   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
    "flags": {
     "jjk5e": {
-     "auto": "toggle"
+     "technique": "Rot"
     }
    },
-   "_key": "!items.effects!P3P35yj02Ltq67v3.NNBe8t6D2Oom0eRC"
+   "_key": "!items.effects!P3P35yj02Ltq67v3.O3NMl3VyJyBI06XB"
   }
  ],
  "_key": "!items!P3P35yj02Ltq67v3"

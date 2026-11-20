@@ -16,11 +16,12 @@
    "rules": "2014"
   },
   "activities": {
-   "pN8eDU2CrMnRAIub": {
-    "_id": "pN8eDU2CrMnRAIub",
+   "qxxP5amKeMAIfMMb": {
+    "_id": "qxxP5amKeMAIfMMb",
     "type": "save",
-    "name": "Action (1 CE)",
+    "name": "Blood Spit (1 CE, 2 HP)",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "action",
      "value": 1,
@@ -28,11 +29,22 @@
      "override": true
     },
     "consumption": {
-     "targets": [],
+     "targets": [
+      {
+       "type": "attribute",
+       "target": "attributes.hp.value",
+       "value": "2"
+      }
+     ],
      "scaling": {
-      "allowed": false
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
      "value": "15",
@@ -42,14 +54,17 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
-    "duration": {
-     "units": "inst",
-     "override": true
-    },
+    "effects": [
+     {
+      "_id": "jjkBloodSpitBlnd",
+      "onSave": false
+     }
+    ],
     "save": {
      "ability": [
       "con"
@@ -73,28 +88,79 @@
         "enabled": false,
         "formula": ""
        },
-       "scaling": {
-        "number": 1
-       }
+       "scaling": {}
+      }
+     ]
+    }
+   },
+   "A9PRkjaMadqhfm1a": {
+    "_id": "A9PRkjaMadqhfm1a",
+    "type": "damage",
+    "name": "Rot Burst (on melee hit, 1 CE, 1 HP)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "attribute",
+       "target": "attributes.hp.value",
+       "value": "1"
+      }
+     ],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "damage": {
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "acid"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
       }
      ]
     },
-    "effects": [
-     {
-      "_id": "9bVy7WKxTZ12kDrf",
-      "onSave": false
-     },
-     {
-      "_id": "jjkBloodSpitBlnd",
-      "onSave": false
-     }
-    ]
+    "useConditionText": "reaction === \"isHit\""
    },
-   "CNC7UBv3w881mFA1": {
-    "_id": "CNC7UBv3w881mFA1",
+   "8zWFYBZ1VR5WcSpF": {
+    "_id": "8zWFYBZ1VR5WcSpF",
     "type": "attack",
-    "name": "Action (3 CE)",
-    "sort": 100000,
+    "name": "Rotten Blood Beam (3 CE, 4 HP)",
+    "sort": 0,
+    "img": null,
     "activation": {
      "type": "action",
      "value": 1,
@@ -102,11 +168,22 @@
      "override": true
     },
     "consumption": {
-     "targets": [],
+     "targets": [
+      {
+       "type": "attribute",
+       "target": "attributes.hp.value",
+       "value": "4"
+      }
+     ],
      "scaling": {
-      "allowed": false
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
      "value": "30",
@@ -116,13 +193,23 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
-    "duration": {
-     "units": "inst",
-     "override": true
+    "effects": [],
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
     },
     "damage": {
      "includeBase": false,
@@ -138,9 +225,7 @@
         "enabled": false,
         "formula": ""
        },
-       "scaling": {
-        "number": 1
-       }
+       "scaling": {}
       },
       {
        "number": 2,
@@ -156,33 +241,14 @@
        "scaling": {}
       }
      ]
-    },
-    "attack": {
-     "ability": "",
-     "bonus": "",
-     "critical": {
-      "threshold": null
-     },
-     "flat": false,
-     "type": {
-      "value": "ranged",
-      "classification": "spell"
-     }
-    },
-    "effects": [],
-    "midiProperties": {
-     "triggeredActivityId": "cIQOP4cYVOVLHVjS",
-     "triggeredActivityTargets": "hitTargets",
-     "triggeredActivityRollAs": "self",
-     "triggeredActivityConsume": false,
-     "triggeredActivityConfigure": false
     }
    },
-   "hjYydWeoujCBjmxF": {
-    "_id": "hjYydWeoujCBjmxF",
-    "type": "utility",
-    "name": "Action (4 CE)",
-    "sort": 200000,
+   "fNVarqp5f4sxgdef": {
+    "_id": "fNVarqp5f4sxgdef",
+    "type": "save",
+    "name": "Corrosive Wave (3 CE, 5 HP)",
+    "sort": 0,
+    "img": null,
     "activation": {
      "type": "action",
      "value": 1,
@@ -190,96 +256,22 @@
      "override": true
     },
     "consumption": {
-     "targets": [],
-     "scaling": {
-      "allowed": false
-     },
-     "spellSlot": false
-    },
-    "range": {
-     "value": "60",
-     "units": "ft",
-     "override": true
-    },
-    "target": {
-     "affects": {
-      "type": "creature",
-      "count": "1"
-     },
-     "override": true
-    },
-    "duration": {
-     "units": "inst",
-     "override": true
-    }
-   },
-   "UxE9TaRcXs33RMy2": {
-    "_id": "UxE9TaRcXs33RMy2",
-    "type": "damage",
-    "name": "Bonus Action (3 CE)",
-    "sort": 300000,
-    "activation": {
-     "type": "bonus",
-     "value": 1,
-     "condition": "",
-     "override": true
-    },
-    "consumption": {
-     "targets": [],
-     "scaling": {
-      "allowed": false
-     },
-     "spellSlot": false
-    },
-    "range": {
-     "value": "30",
-     "units": "ft",
-     "override": true
-    },
-    "target": {
-     "override": true
-    },
-    "duration": {
-     "units": "inst",
-     "override": true
-    },
-    "damage": {
-     "parts": [
+     "targets": [
       {
-       "number": 2,
-       "denomination": 6,
-       "bonus": "@mod",
-       "types": [
-        "acid"
-       ],
-       "custom": {
-        "enabled": false,
-        "formula": ""
-       },
-       "scaling": {
-        "number": 1
-       }
+       "type": "attribute",
+       "target": "attributes.hp.value",
+       "value": "5"
       }
-     ]
-    }
-   },
-   "cIQOP4cYVOVLHVjS": {
-    "_id": "cIQOP4cYVOVLHVjS",
-    "type": "save",
-    "name": "Action — save",
-    "sort": 100000,
-    "activation": {
-     "type": "special",
-     "value": null,
-     "condition": "",
-     "override": true
-    },
-    "consumption": {
-     "targets": [],
+     ],
      "scaling": {
-      "allowed": false
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
      "units": "self",
@@ -299,10 +291,7 @@
      },
      "override": true
     },
-    "duration": {
-     "units": "inst",
-     "override": true
-    },
+    "effects": [],
     "save": {
      "ability": [
       "con"
@@ -313,9 +302,372 @@
      }
     },
     "damage": {
-     "onSave": "none",
-     "parts": []
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 5,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "acid"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
     }
+   },
+   "M4koMpds2bkyDNdV": {
+    "_id": "M4koMpds2bkyDNdV",
+    "type": "attack",
+    "name": "Homing Blood Missile (4 CE, 5 HP; 6th)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "attribute",
+       "target": "attributes.hp.value",
+       "value": "5"
+      }
+     ],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": 5,
+       "denomination": 10,
+       "bonus": "max(@abilities.wis.mod, @abilities.cha.mod)",
+       "types": [
+        "acid"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
+   },
+   "79Ig7qRY4aiwWyWO": {
+    "_id": "79Ig7qRY4aiwWyWO",
+    "type": "utility",
+    "name": "Blood Soak (3 CE, 3 HP; 6th)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "attribute",
+       "target": "attributes.hp.value",
+       "value": "3"
+      }
+     ],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "beklAegkKGdyBUFf",
+      "onSave": false
+     }
+    ]
+   },
+   "WOgVDndEdLBWSmr6": {
+    "_id": "WOgVDndEdLBWSmr6",
+    "type": "attack",
+    "name": "Crimson Spear (2 CE, 3 HP; 11th)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "attribute",
+       "target": "attributes.hp.value",
+       "value": "3"
+      }
+     ],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "30",
+     "long": "90",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "piercing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      },
+      {
+       "number": 2,
+       "denomination": 10,
+       "bonus": "max(@abilities.wis.mod, @abilities.cha.mod)",
+       "types": [
+        "acid"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
+   },
+   "cXkMDciIera9V8e3": {
+    "_id": "cXkMDciIera9V8e3",
+    "type": "save",
+    "name": "Crimson Rain (2 CE, 3 HP; 11th)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "attribute",
+       "target": "attributes.hp.value",
+       "value": "3"
+      }
+     ],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "15",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": [],
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "acid"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
+   },
+   "uzDaQvE1ULCQVbLA": {
+    "_id": "uzDaQvE1ULCQVbLA",
+    "type": "heal",
+    "name": "Blood Shield (reaction): 10 HP per CE, 2 HP per CE",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "attribute",
+       "target": "attributes.hp.value",
+       "value": "2",
+       "scaling": {
+        "mode": "amount",
+        "formula": "2"
+       }
+      }
+     ],
+     "scaling": {
+      "allowed": true,
+      "max": "max(@abilities.wis.mod, @abilities.cha.mod)"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "",
+     "types": [
+      "temphp"
+     ],
+     "custom": {
+      "enabled": true,
+      "formula": "10 * @scaling"
+     },
+     "scaling": {}
+    },
+    "useConditionText": "reaction === \"isDamaged\""
    }
   },
   "uses": {
@@ -361,59 +713,27 @@
  "flags": {
   "jjk5e": {
    "ceCosts": {
-    "pN8eDU2CrMnRAIub": 1,
-    "CNC7UBv3w881mFA1": 3,
-    "hjYydWeoujCBjmxF": 4,
-    "UxE9TaRcXs33RMy2": 3
+    "qxxP5amKeMAIfMMb": 1,
+    "A9PRkjaMadqhfm1a": 1,
+    "8zWFYBZ1VR5WcSpF": 3,
+    "fNVarqp5f4sxgdef": 3,
+    "M4koMpds2bkyDNdV": 4,
+    "79Ig7qRY4aiwWyWO": 3,
+    "WOgVDndEdLBWSmr6": 2,
+    "cXkMDciIera9V8e3": 2,
+    "uzDaQvE1ULCQVbLA": 1
    },
    "technique": "Rot",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceSteps": {
+    "uzDaQvE1ULCQVbLA": 1
+   },
+   "automationNotes": "HP costs are charged automatically: untick them in the dialog when using a Blood Bag. Crimson Rain damage: check the full text (1d10 shown). Blood Shield reducing a melee hit to 0: attacker CON or 2d8 acid.",
+   "automation": "automated"
   }
  },
  "effects": [
-  {
-   "_id": "9bVy7WKxTZ12kDrf",
-   "name": "Blinded (Rot Techniques)",
-   "img": "modules/jjk5e/icons/techniques/rot.svg",
-   "statuses": [
-    "blinded"
-   ],
-   "changes": [],
-   "transfer": false,
-   "disabled": false,
-   "duration": {},
-   "description": "",
-   "flags": {
-    "jjk5e": {
-     "condition": "blinded"
-    }
-   },
-   "_key": "!items.effects!8ob4DIhgqqluRPbD.9bVy7WKxTZ12kDrf"
-  },
-  {
-   "_id": "iRCwpF7nAJ8IBWMv",
-   "name": "Rot Techniques (toggle)",
-   "img": "modules/jjk5e/icons/techniques/rot.svg",
-   "changes": [
-    {
-     "key": "system.attributes.movement.walk",
-     "mode": 2,
-     "value": "10",
-     "priority": null
-    }
-   ],
-   "transfer": true,
-   "disabled": true,
-   "duration": {},
-   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
-   "flags": {
-    "jjk5e": {
-     "auto": "toggle"
-    }
-   },
-   "_key": "!items.effects!8ob4DIhgqqluRPbD.iRCwpF7nAJ8IBWMv"
-  },
   {
    "_id": "jjkBloodSpitBlnd",
    "name": "Blood Spit: blinded",
@@ -435,6 +755,33 @@
     }
    },
    "_key": "!items.effects!8ob4DIhgqqluRPbD.jjkBloodSpitBlnd"
+  },
+  {
+   "_id": "beklAegkKGdyBUFf",
+   "name": "Blood Soak",
+   "img": "modules/jjk5e/icons/techniques/rot.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Unarmed strikes deal 2d6 + CE mod acid.</p>",
+   "changes": [
+    {
+     "key": "system.attributes.movement.walk",
+     "mode": 2,
+     "value": "+10",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Rot"
+    }
+   },
+   "_key": "!items.effects!8ob4DIhgqqluRPbD.beklAegkKGdyBUFf"
   }
  ],
  "folder": "TOdSvSBhuENKcEJX",

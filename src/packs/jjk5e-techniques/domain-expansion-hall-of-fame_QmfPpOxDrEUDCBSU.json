@@ -18,8 +18,8 @@
   "activities": {
    "B6IVNe90qPm8dJhZ": {
     "_id": "B6IVNe90qPm8dJhZ",
-    "type": "utility",
-    "name": "Special",
+    "type": "damage",
+    "name": "Initiative 20: Sound Blast damage + deafened",
     "sort": 0,
     "activation": {
      "type": "special",
@@ -39,6 +39,10 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "enemy",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -52,7 +56,24 @@
       "_id": "rce1JcnUqkglCO2O",
       "onSave": false
      }
-    ]
+    ],
+    "damage": {
+     "parts": [
+      {
+       "number": 6,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "thunder"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
    },
    "msvl41xSfv0jFTIR": {
     "_id": "msvl41xSfv0jFTIR",
@@ -154,7 +175,8 @@
     "msvl41xSfv0jFTIR": 20
    },
    "domainActivity": "msvl41xSfv0jFTIR",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "effects": [
@@ -169,7 +191,6 @@
    "transfer": false,
    "disabled": false,
    "duration": {
-    "seconds": 60,
     "rounds": 10
    },
    "description": "",

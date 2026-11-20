@@ -23,40 +23,53 @@
   "activities": {
    "4GIP7jlbxOCUYosw": {
     "_id": "4GIP7jlbxOCUYosw",
-    "type": "attack",
-    "name": "Action (2 CE)",
+    "type": "heal",
+    "name": "Merciful Shadow (on hit, 2 CE): heal",
     "sort": 0,
+    "img": null,
     "activation": {
-     "type": "action",
-     "value": 1,
-     "condition": ""
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
-     }
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
      "units": "spec",
      "override": true
     },
-    "target": {},
-    "duration": {
-     "units": "inst"
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
     },
-    "attack": {
-     "ability": "spellcasting",
+    "effects": [],
+    "healing": {
+     "number": null,
+     "denomination": null,
      "bonus": "",
-     "flat": false,
-     "type": {
-      "value": "ranged",
-      "classification": "spell"
-     }
-    },
-    "damage": {
-     "includeBase": false,
-     "parts": []
+     "types": [
+      "healing"
+     ],
+     "custom": {
+      "enabled": true,
+      "formula": "1d8 + @mod + (1 + floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11)) * max(@abilities.wis.mod, @abilities.cha.mod)"
+     },
+     "scaling": {}
     }
    }
   }
@@ -80,7 +93,9 @@
       "Shadow Killer"
      ]
     ]
-   }
+   },
+   "automationNotes": "Healing = your attack's damage (weapon die d8 shown) + CE mod (×2 at 6th, ×3 at 11th).",
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",

@@ -18,46 +18,44 @@
   "activities": {
    "LfH3LW4pEsZnebcw": {
     "_id": "LfH3LW4pEsZnebcw",
-    "type": "attack",
-    "name": "Action (1 CE)",
+    "type": "utility",
+    "name": "Phase through cover (1 CE, on a ranged attack)",
     "sort": 0,
+    "img": null,
     "activation": {
-     "type": "action",
-     "value": 1,
+     "type": "special",
+     "value": null,
      "condition": "",
      "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
-    },
-    "range": {
-     "units": "spec",
-     "override": true
-    },
-    "target": {
-     "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
     },
-    "attack": {
-     "ability": "spellcasting",
-     "bonus": "",
-     "flat": false,
-     "type": {
-      "value": "ranged",
-      "classification": "spell"
-     }
+    "range": {
+     "units": "self",
+     "override": true
     },
-    "damage": {
-     "includeBase": false,
-     "parts": []
-    }
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "ZxKXb0CDkJHusOLD",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -100,9 +98,75 @@
    },
    "technique": "Schrift X",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "sHIaW6mkEHmwduDu",
- "_key": "!items!diVgFAJkfw6xhcmJ"
+ "_key": "!items!diVgFAJkfw6xhcmJ",
+ "effects": [
+  {
+   "_id": "ZxKXb0CDkJHusOLD",
+   "name": "Piercing shot",
+   "img": "modules/jjk5e/icons/techniques/schrift-x.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Ignore cover (5 ft of 1/2/3/4 objects at 1st/3rd/6th/11th).</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.ignoreCover",
+     "mode": 5,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Schrift X"
+    },
+    "dae": {
+     "specialDuration": [
+      "1Attack"
+     ]
+    }
+   },
+   "_key": "!items.effects!diVgFAJkfw6xhcmJ.ZxKXb0CDkJHusOLD"
+  },
+  {
+   "_id": "WDFHtFCbgSIJCjNn",
+   "name": "Piercing Schrift (CE mod for ranged)",
+   "img": "modules/jjk5e/icons/techniques/schrift-x.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.bonuses.rwak.attack",
+     "mode": 2,
+     "value": "+ max(0, max(@abilities.wis.mod, @abilities.cha.mod) - @abilities.dex.mod)",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.rwak.damage",
+     "mode": 2,
+     "value": "+ max(0, max(@abilities.wis.mod, @abilities.cha.mod) - @abilities.dex.mod)",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": "Schrift X"
+    }
+   },
+   "_key": "!items.effects!diVgFAJkfw6xhcmJ.WDFHtFCbgSIJCjNn"
+  }
+ ]
 }

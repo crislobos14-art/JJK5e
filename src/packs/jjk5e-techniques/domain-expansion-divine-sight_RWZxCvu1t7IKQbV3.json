@@ -58,6 +58,48 @@
      "concentration": false,
      "override": true
     }
+   },
+   "cqt5Q6LR9LrDi5iX": {
+    "_id": "cqt5Q6LR9LrDi5iX",
+    "type": "utility",
+    "name": "Initiative 20: Cursed Mark on everyone",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "enemy",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "VJScPCSjPtgP9hrw",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -116,9 +158,39 @@
     "1Fah1CmRzIOZhFk5": 20
    },
    "domainActivity": "1Fah1CmRzIOZhFk5",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "sHIaW6mkEHmwduDu",
- "_key": "!items!RWZxCvu1t7IKQbV3"
+ "_key": "!items!RWZxCvu1t7IKQbV3",
+ "effects": [
+  {
+   "_id": "VJScPCSjPtgP9hrw",
+   "name": "Divine Sight mark",
+   "img": "modules/jjk5e/icons/techniques/schrift-x-domain.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.grants.advantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Schrift X"
+    }
+   },
+   "_key": "!items.effects!RWZxCvu1t7IKQbV3.VJScPCSjPtgP9hrw"
+  }
+ ]
 }

@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.51.0 — Técnica por técnica: Retrograde → Star Dictator (10)
+- **Retrograde**: Reversion (+2→+5) por reacción y sobre otros, Regression con bloqueo, usos sin reacción por ronda, Invert Causality, dominio, Prograde (Certain Defeat/Victory).
+- **Rockstar**: Sound Blast (2d10→6d10) con empuje automático; ráfagas extra; Resonating Music en cono; Epic Solo (+2d10 trueno, aura); dominio; Smooth Jazz.
+- **Rot**: Rotten Blood (resistencias, +1d8→4d8); 8 técnicas de sangre con coste de CE y PG automático + Blood Shield; Decay con OverTime; Scarlet Rot (inmunidades, envenenado); Wing King; dominio; Lifeblood.
+- **Schrift X**: Piercing Schrift (ignorar cobertura, mod. EM a distancia), X-Axis Shot (2d6→7d6), Critical/Multi-Mark, Intangibility, dominio, Schrift Y, Y-Axis Block.
+- **Seance**: Seance con PG temp y salvación de alma, Blessing, ritual, Black Seance, dominio, Possession.
+- **Shadow Killer**: Shadow Strike (×1→×4 mod. EM), Dark Binding (apresado), Void Steps (Pass Without Trace, invisible), Shadows of Mortality, dominio, Merciful Shadow, Shadow Release.
+- **Shrine**: Dismantle (dados base 1→4 + 1d12/CE, 120/250 pies), Cleave (comp. + CE en d10) con adaptación, Divine Flame Open, dominio con Dismantle y Cleave máximos, Assemble.
+- **Sky Manipulation**: Sky Shape (+4 CA) con redirección, Sky Armor (CA 11 + EM + comp., vuelo), Thin Ice Breaker, Heaven's Gate, Sky Destruction.
+- **Solo Forbidden Zone**: Forbidden Zone (ventaja a aliados), Bless, Ritual Dance (+5 daño/CE), Maximize Output (daño máximo), Hallowed Zone, Depletion Zone.
+- **Star Dictator**: estrellas menores, pseudodominio escalable (d6→d10), estrella mayor, dominio, Star Guardian.
+- Automatizados a mano: 285/360. Sin probar en Foundry real.
+
 ## 1.50.0 — Técnica por técnica: Pain Killer → Regalia (7)
 - **Pain Killer**: PG temp (mod. EM + nivel), versión en área, Medicina competente/pericia, Analgesic (mitad del daño por reacción), dominio, Killer Pain y Pain Maker.
 - **Paralyzing Gaze**: Immobilizing Eyes (mitad de velocidad, −mod. EM a CA y ataques) con mantenimiento y PG de ojos como usos; Peripheral Vision; Reactive Eye Movement; paralizar con salvación de FUE por turno; dominio; Energizing Gaze.

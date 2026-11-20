@@ -18,13 +18,56 @@
   "activities": {
    "pZKg6UrTUuDaEMX6": {
     "_id": "pZKg6UrTUuDaEMX6",
-    "type": "attack",
-    "name": "Reaction (1 CE)",
+    "type": "utility",
+    "name": "Reversion (1 CE): reroll your attack/save",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "reaction",
      "value": 1,
      "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "roll": {
+     "formula": "1d20 + (2 * floor(min(@details.level, 3) / 3) + floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11) + floor(min(@details.level, 18) / 18))",
+     "name": "Reroll bonus (+2→+5 from 3rd; add your normal modifier)",
+     "prompt": false,
+     "visible": true
+    },
+    "useConditionText": "reaction === \"isAttacked\" || reaction === \"isSave\""
+   },
+   "V1XYlDRPVyUKryna": {
+    "_id": "V1XYlDRPVyUKryna",
+    "type": "utility",
+    "name": "Reversion on a creature within 30 ft (+2 CE, no bonus)",
+    "sort": 900000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Also at 3rd level, you can use this feature on a creature within 30 ft of you that you ...",
      "override": true
     },
     "consumption": {
@@ -42,46 +85,10 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
-    },
-    "duration": {
-     "units": "inst",
-     "override": true
-    },
-    "attack": {
-     "ability": "spellcasting",
-     "bonus": "",
-     "flat": false,
-     "type": {
-      "value": "ranged",
-      "classification": "spell"
-     }
-    },
-    "damage": {
-     "includeBase": false,
-     "parts": []
-    },
-    "useConditionText": "reaction === \"isSave\""
-   },
-   "V1XYlDRPVyUKryna": {
-    "_id": "V1XYlDRPVyUKryna",
-    "type": "utility",
-    "name": "Extra (2 CE)",
-    "sort": 900000,
-    "activation": {
-     "type": "special",
-     "value": null,
-     "condition": "Also at 3rd level, you can use this feature on a creature within 30 ft of you that you ...",
-     "override": true
-    },
-    "consumption": {
-     "targets": [],
-     "scaling": {
-      "allowed": false
-     },
-     "spellSlot": false
     }
    }
   },
@@ -133,7 +140,8 @@
    },
    "technique": "Retrograde",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "6YaSgqVRe4IqL8er",

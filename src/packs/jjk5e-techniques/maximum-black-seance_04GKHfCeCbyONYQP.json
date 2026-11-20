@@ -18,8 +18,8 @@
   "activities": {
    "721nZ5oYwxoP5WfB": {
     "_id": "721nZ5oYwxoP5WfB",
-    "type": "utility",
-    "name": "Extra (5 CE)",
+    "type": "heal",
+    "name": "Overload (+5 CE after the ritual)",
     "sort": 900000,
     "activation": {
      "type": "special",
@@ -33,6 +33,27 @@
       "allowed": false
      },
      "spellSlot": false
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "",
+     "types": [
+      "temphp"
+     ],
+     "custom": {
+      "enabled": true,
+      "formula": "0"
+     },
+     "scaling": {}
     }
    }
   },
@@ -75,7 +96,9 @@
    },
    "technique": "Seance",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Physical Overload: enter the dead's HP as temp HP. Soul Overload: all its features (minimum CE costs, no domain).",
+   "automation": "automated"
   }
  },
  "folder": "z1MGG49oTB7xZ6Pc",

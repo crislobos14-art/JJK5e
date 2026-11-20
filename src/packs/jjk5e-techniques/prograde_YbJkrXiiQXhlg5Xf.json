@@ -24,7 +24,7 @@
    "Ng1uuVHOtu1YXXkK": {
     "_id": "Ng1uuVHOtu1YXXkK",
     "type": "utility",
-    "name": "Action (6 CE)",
+    "name": "Certain Defeat (6 CE)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -39,26 +39,135 @@
     },
     "range": {
      "value": "30",
-     "units": "ft"
+     "units": "ft",
+     "override": true
     },
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
-     }
+      "count": "1",
+      "choice": true
+     },
+     "override": true
     },
     "duration": {
      "value": "1",
      "units": "minute",
      "concentration": false
+    },
+    "effects": [
+     {
+      "_id": "njz6PYa1eG6NmV4x",
+      "onSave": false
+     }
+    ]
+   },
+   "IeeSqAIKV25sYw2C": {
+    "_id": "IeeSqAIKV25sYw2C",
+    "type": "damage",
+    "name": "Certain Defeat damage (once per round)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "damage": {
+     "parts": [
+      {
+       "number": null,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "(@prof)d10"
+       },
+       "scaling": {}
+      }
+     ]
     }
+   },
+   "CYkAan6yIT5kbqkK": {
+    "_id": "CYkAan6yIT5kbqkK",
+    "type": "utility",
+    "name": "Certain Victory (6 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "wJjSDV5lUIZsSV2Y",
+      "onSave": false
+     }
+    ]
    }
   }
  },
  "flags": {
   "jjk5e": {
    "ceCosts": {
-    "Ng1uuVHOtu1YXXkK": 6
+    "Ng1uuVHOtu1YXXkK": 6,
+    "CYkAan6yIT5kbqkK": 6
    },
    "technique": "Retrograde",
    "reversal": true,
@@ -74,10 +183,53 @@
       "Retrograde"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!YbJkrXiiQXhlg5Xf"
+ "_key": "!items!YbJkrXiiQXhlg5Xf",
+ "effects": [
+  {
+   "_id": "njz6PYa1eG6NmV4x",
+   "name": "Certain Defeat",
+   "img": "modules/jjk5e/icons/techniques/retrograde.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>No advantage or rerolls; first damage or failed save each round: prof d10 necrotic (use the damage activity).</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Retrograde"
+    }
+   },
+   "_key": "!items.effects!YbJkrXiiQXhlg5Xf.njz6PYa1eG6NmV4x"
+  },
+  {
+   "_id": "wJjSDV5lUIZsSV2Y",
+   "name": "Certain Victory",
+   "img": "modules/jjk5e/icons/techniques/retrograde.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Can't gain disadvantage; advantage rolls 3 dice, keep the best.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Retrograde"
+    }
+   },
+   "_key": "!items.effects!YbJkrXiiQXhlg5Xf.wJjSDV5lUIZsSV2Y"
+  }
+ ]
 }

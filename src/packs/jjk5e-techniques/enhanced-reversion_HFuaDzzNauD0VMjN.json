@@ -19,20 +19,26 @@
    "lzbo6ZrJFbpS0kof": {
     "_id": "lzbo6ZrJFbpS0kof",
     "type": "utility",
-    "name": "Reaction",
+    "name": "Reversion without a reaction (prof per round)",
     "sort": 0,
     "activation": {
-     "type": "reaction",
+     "type": "special",
      "value": 1,
      "condition": "",
      "override": true
     },
     "consumption": {
-     "targets": [],
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1",
+       "scaling": {}
+      }
+     ],
      "scaling": {
       "allowed": false
-     },
-     "spellSlot": false
+     }
     },
     "range": {
      "units": "self",
@@ -50,7 +56,7 @@
    "ueJph2JGyPKrbpjB": {
     "_id": "ueJph2JGyPKrbpjB",
     "type": "utility",
-    "name": "Extra (3 CE)",
+    "name": "Reroll with advantage (+3 CE)",
     "sort": 900000,
     "activation": {
      "type": "special",
@@ -64,13 +70,24 @@
       "allowed": false
      },
      "spellSlot": false
+    },
+    "roll": {
+     "formula": "2d20kh + (2 * floor(min(@details.level, 3) / 3) + floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11) + floor(min(@details.level, 18) / 18))",
+     "name": "Reversion (advantage)",
+     "prompt": false,
+     "visible": true
     }
    }
   },
   "uses": {
-   "max": "",
-   "recovery": [],
-   "spent": 0
+   "max": "@prof",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "turnStart",
+     "type": "recoverAll"
+    }
+   ]
   },
   "level": 3,
   "school": "jjk",
@@ -107,7 +124,8 @@
    },
    "technique": "Retrograde",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "6YaSgqVRe4IqL8er",

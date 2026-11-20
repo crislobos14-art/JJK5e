@@ -19,7 +19,7 @@
    "8g1i0F03tSYGgeU1": {
     "_id": "8g1i0F03tSYGgeU1",
     "type": "save",
-    "name": "Bonus Action",
+    "name": "Seal the zone: hostiles WIS or can't enter/leave",
     "sort": 0,
     "activation": {
      "type": "bonus",
@@ -39,16 +39,9 @@
      "override": true
     },
     "target": {
-     "template": {
-      "type": "sphere",
-      "size": "50",
-      "units": "ft",
-      "count": "1",
-      "contiguous": false
-     },
      "affects": {
-      "type": "creature",
-      "choice": false
+      "type": "enemy",
+      "choice": true
      },
      "override": true
     },
@@ -70,7 +63,62 @@
     "damage": {
      "onSave": "none",
      "parts": []
-    }
+    },
+    "effects": [
+     {
+      "_id": "91etTpKqSpeXWPua",
+      "onSave": false
+     }
+    ]
+   },
+   "3OANy2KyMvwhz2io": {
+    "_id": "3OANy2KyMvwhz2io",
+    "type": "utility",
+    "name": "Ritual Zone (full turn, CE up to mod + prof)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "max(@abilities.wis.mod, @abilities.cha.mod) + @prof"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "50",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "ally",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "fWqTrlUQGR3f98b0",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -124,9 +172,78 @@
   "jjk5e": {
    "technique": "Solo Forbidden Zone",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceCosts": {
+    "3OANy2KyMvwhz2io": 1
+   },
+   "ceSteps": {
+    "3OANy2KyMvwhz2io": 1
+   },
+   "automationNotes": "Concentration; move ≤ 10 ft; maintain with a bonus action.",
+   "automation": "automated"
   }
  },
  "folder": "pI3TNTzVyu2gPuxX",
- "_key": "!items!uhroQuF4Rbd2kMyx"
+ "_key": "!items!uhroQuF4Rbd2kMyx",
+ "effects": [
+  {
+   "_id": "91etTpKqSpeXWPua",
+   "name": "Sealed by the Ritual Zone",
+   "img": "modules/jjk5e/icons/techniques/solo-forbidden-zone.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Solo Forbidden Zone"
+    }
+   },
+   "_key": "!items.effects!uhroQuF4Rbd2kMyx.91etTpKqSpeXWPua"
+  },
+  {
+   "_id": "fWqTrlUQGR3f98b0",
+   "name": "Ritual Zone",
+   "img": "modules/jjk5e/icons/techniques/solo-forbidden-zone.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Advantage; +5 technique damage per CE; temp CE = CE spent; extra CE spending up to the caster's CE mod.</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.advantage.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.msak.damage",
+     "mode": 2,
+     "value": "+ (5 * @scaling)",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.rsak.damage",
+     "mode": 2,
+     "value": "+ (5 * @scaling)",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Solo Forbidden Zone"
+    }
+   },
+   "_key": "!items.effects!uhroQuF4Rbd2kMyx.fWqTrlUQGR3f98b0"
+  }
+ ]
 }

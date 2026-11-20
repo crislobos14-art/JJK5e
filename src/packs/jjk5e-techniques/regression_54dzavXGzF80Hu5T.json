@@ -18,8 +18,8 @@
   "activities": {
    "3dGdrp5GCuYHtWE4": {
     "_id": "3dGdrp5GCuYHtWE4",
-    "type": "save",
-    "name": "Bonus Action (3 CE)",
+    "type": "utility",
+    "name": "Regression (3 CE): retrace to turn start",
     "sort": 0,
     "activation": {
      "type": "bonus",
@@ -35,10 +35,13 @@
      "spellSlot": false
     },
     "range": {
-     "units": "spec",
+     "units": "self",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
@@ -53,11 +56,108 @@
       "calculation": "spellcasting",
       "formula": ""
      }
+    }
+   },
+   "AfsMFNPlneY7zP8I": {
+    "_id": "AfsMFNPlneY7zP8I",
+    "type": "save",
+    "name": "Blocking creature (DEX): prof d8 + pushed",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
     },
     "damage": {
      "onSave": "none",
-     "parts": []
+     "parts": [
+      {
+       "number": null,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "(@prof)d8"
+       },
+       "scaling": {}
+      }
+     ]
     }
+   },
+   "bpcHdus5VNsCbQCF": {
+    "_id": "bpcHdus5VNsCbQCF",
+    "type": "utility",
+    "name": "Regress to previous turn start (+3 CE, 6th)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
    }
   },
   "uses": {
@@ -96,11 +196,14 @@
  "flags": {
   "jjk5e": {
    "ceCosts": {
-    "3dGdrp5GCuYHtWE4": 3
+    "3dGdrp5GCuYHtWE4": 3,
+    "bpcHdus5VNsCbQCF": 3
    },
    "technique": "Retrograde",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "OAs against the regression have disadvantage. Objects: CE check DC 10 + 3 per size above Medium.",
+   "automation": "automated"
   }
  },
  "folder": "6YaSgqVRe4IqL8er",
