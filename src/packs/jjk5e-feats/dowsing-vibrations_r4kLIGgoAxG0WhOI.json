@@ -33,7 +33,10 @@
       "Cursed Centipede"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Centipede Shroud"
+   ]
   }
  },
  "effects": [

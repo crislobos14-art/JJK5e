@@ -33,7 +33,10 @@
       "Maximum: Wing King"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Rot"
+   ]
   }
  },
  "folder": "gN0JGJzsnMHTyd5r",

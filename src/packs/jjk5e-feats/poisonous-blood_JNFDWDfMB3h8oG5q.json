@@ -80,7 +80,10 @@
       "Blood Manipulation"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Blood Manipulation"
+   ]
   }
  },
  "effects": [

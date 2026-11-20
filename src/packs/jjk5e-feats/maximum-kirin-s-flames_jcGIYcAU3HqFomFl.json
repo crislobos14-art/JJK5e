@@ -33,7 +33,10 @@
       "Auspicious Beast #3: Kirin"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Auspicious Beast Summon"
+   ]
   }
  },
  "folder": "mHzbbOlvnwQSEnjZ",

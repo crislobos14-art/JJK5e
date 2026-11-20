@@ -36,6 +36,9 @@
    },
    "modifies": [
     "Upgraded Form"
+   ],
+   "forTechniques": [
+    "Triple Core"
    ]
   }
  },

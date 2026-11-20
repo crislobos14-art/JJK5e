@@ -71,7 +71,10 @@
       "Cleansing of Purity"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Moon Dregs"
+   ]
   }
  },
  "effects": [

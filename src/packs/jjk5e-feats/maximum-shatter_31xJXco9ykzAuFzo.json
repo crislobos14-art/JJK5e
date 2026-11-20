@@ -71,7 +71,10 @@
       "Ice Fall"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Ice Formation"
+   ]
   }
  },
  "effects": [

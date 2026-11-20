@@ -372,7 +372,10 @@
     "ASI": {
       "Legend": "Dotes de JJK 5e",
       "Hint": "{n} dotes de JJK cumplen tus requisitos. Elige una en lugar del aumento de característica.",
-      "Take": "Tomar dote"
+      "Take": "Tomar dote",
+      "ChooseHint": "Elige una opción: mejorar tus características o tomar una dote.",
+      "ModeASI": "Mejorar características",
+      "ModeFeat": "Tomar una dote"
     },
     "SceneTools": {
       "Panel": "JJK: Abrir panel",
@@ -395,7 +398,9 @@
       "Domain": "Dominio (barrera)",
       "Curse": "Generar maldición",
       "RCT": "Tirada de despertar de TMI (d100)",
-      "Breakthrough": "Añadir avances (GM)"
+      "Breakthrough": "Añadir avances (GM)",
+      "Create": "JJK: Crear personaje",
+      "Shikigami": "JJK: Personalizar shikigami"
     },
     "Spell": {
       "Method": "Técnica Innata",
@@ -589,6 +594,30 @@
     },
     "Reversal": {
       "Added": "Reversión de técnica maldita: se añade {names}."
+    },
+    "Create": {
+      "Button": "Crear personaje",
+      "Title": "JJK 5e: crear personaje",
+      "Class": "Elige una clase",
+      "Race": "Elige una raza",
+      "Background": "Elige un trasfondo",
+      "Step": {
+        "abilities": "<strong>Paso 1 — Características.</strong> Reparte tus puntuaciones con compra de puntos.",
+        "class": "<strong>Paso 2 — Clase.</strong> Elige una clase; entre sus opciones de nivel 1 está tu <strong>Técnica innata</strong>.",
+        "technique": "<strong>Paso 3 — Técnica innata.</strong> Confirma la técnica de tu personaje.",
+        "race": "<strong>Paso 4 — Raza.</strong> Elige una raza y reparte sus bonos de característica.",
+        "background": "<strong>Paso 5 — Trasfondo.</strong> Elige un trasfondo; las dotes de técnica solo muestran las de tu técnica."
+      },
+      "Stopped": "Creación en pausa. Pulsa Crear personaje en la hoja para continuar.",
+      "Done": "{name} está listo.",
+      "OnlyTechnique": "Solo se muestran las {n} dotes de tu técnica innata.",
+      "NoTechniqueYet": "Elige primero tu técnica innata (nivel 1 de clase): las dotes de técnica quedan ocultas hasta entonces."
+    },
+    "Shikigami": {
+      "Title": "Personalizar shikigami",
+      "Hint": "Crea tu propia copia de la criatura (puedes editar estadísticas, nombre y token). Tu técnica invocará tu copia. ✎ = ya es tuya: abre su hoja.",
+      "Created": "{name} creado: edítalo libremente, tus invocaciones ya lo usan.",
+      "None": "Este personaje no tiene habilidades de invocación."
     }
   }
 }

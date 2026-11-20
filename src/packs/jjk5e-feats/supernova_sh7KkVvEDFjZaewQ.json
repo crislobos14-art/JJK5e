@@ -103,7 +103,10 @@
       "Piercing Blood"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Blood Manipulation"
+   ]
   }
  },
  "effects": [

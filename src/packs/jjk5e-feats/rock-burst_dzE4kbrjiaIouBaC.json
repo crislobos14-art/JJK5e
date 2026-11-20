@@ -108,7 +108,10 @@
       "Sculpted Earth"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Earth Manipulation"
+   ]
   }
  },
  "effects": [

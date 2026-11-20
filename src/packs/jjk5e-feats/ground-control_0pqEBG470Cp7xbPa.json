@@ -87,7 +87,10 @@
       "Earth Dragon Soul"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Dragon Vein"
+   ]
   }
  },
  "effects": [

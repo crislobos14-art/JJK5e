@@ -80,7 +80,10 @@
       "Circuit Breaker"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Cursed Circuitry"
+   ]
   }
  },
  "folder": "G6JMovZa1ygvOgXz",

@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.20.0
+- Character sheet: the JJK bar (CE, grade, vows, tools) moved into the sidebar card and its buttons now work in play mode.
+- New character creation guide (button on sheets without a class, macro and JJK menu): ability scores → class and
+  Innate Technique → race → background.
+- Level-up Ability Score Improvement: explicit choice between *Improve ability scores* and *Take a feat*.
+- Technique feats only show those of your Innate Technique (background feat choice and level-up feat list).
+- Human (Superhuman): the racial bonus (+2 and +1/+1) can go to any ability.
+- Human (Jujutsu Sorcerer): *Trained Cursed Energy* now lets you choose a Cursed Energy feat.
+- Shikigami: *Customize shikigami* (macro and JJK menu) makes your own editable copy that your technique summons.
+  Module updates no longer overwrite the shikigami actors in the world.
+
 ## 1.19.0
 - Compendiums now ship inside the module (`packs/`), built from JSON sources with the official Foundry CLI.
   No more world import for English data; they load instantly and update with the module.

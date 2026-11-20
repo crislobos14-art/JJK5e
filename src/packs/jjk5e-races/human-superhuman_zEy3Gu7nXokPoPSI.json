@@ -39,20 +39,12 @@
     "_id": "u6BGAiT0GZUFe0C9",
     "type": "AbilityScoreImprovement",
     "level": 0,
-    "title": "Ability Score Increase (+2 to STR, DEX or CON and +1 to the other two)",
+    "title": "Ability Score Increase (+2 to one ability and +1 to two others)",
     "configuration": {
-     "points": 1,
-     "fixed": {
-      "str": 1,
-      "dex": 1,
-      "con": 1
-     },
-     "cap": 1,
-     "locked": [
-      "int",
-      "wis",
-      "cha"
-     ]
+     "points": 4,
+     "fixed": {},
+     "cap": 2,
+     "locked": []
     },
     "value": {}
    },

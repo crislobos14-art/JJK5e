@@ -80,7 +80,10 @@
       "Gravity Field"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Antigravity System"
+   ]
   }
  },
  "folder": "aLDCA5tMqdkRqKRy",

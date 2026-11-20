@@ -372,7 +372,10 @@
     "ASI": {
       "Legend": "JJK 5e feats",
       "Hint": "{n} JJK feats meet your prerequisites. Choose one instead of the ability score increase.",
-      "Take": "Take feat"
+      "Take": "Take feat",
+      "ChooseHint": "Choose one: improve your ability scores, or take a feat instead.",
+      "ModeASI": "Improve ability scores",
+      "ModeFeat": "Take a feat"
     },
     "SceneTools": {
       "Panel": "JJK: Open panel",
@@ -395,7 +398,9 @@
       "Domain": "Domain (barrier)",
       "Curse": "Generate curse",
       "RCT": "Roll RCT awakening (d100)",
-      "Breakthrough": "Add breakthroughs (GM)"
+      "Breakthrough": "Add breakthroughs (GM)",
+      "Create": "JJK: Create character",
+      "Shikigami": "JJK: Customize shikigami"
     },
     "Spell": {
       "Method": "Innate Technique",
@@ -589,6 +594,30 @@
     },
     "Reversal": {
       "Added": "Cursed Technique Reversal: {names} added."
+    },
+    "Create": {
+      "Button": "Create character",
+      "Title": "JJK 5e: create a character",
+      "Class": "Choose a class",
+      "Race": "Choose a race",
+      "Background": "Choose a background",
+      "Step": {
+        "abilities": "<strong>Step 1 — Ability scores.</strong> Set your scores with point buy.",
+        "class": "<strong>Step 2 — Class.</strong> Pick a class; its level 1 choices include your <strong>Innate Technique</strong>.",
+        "technique": "<strong>Step 3 — Innate Technique.</strong> Confirm the technique of your character.",
+        "race": "<strong>Step 4 — Race.</strong> Pick a race and spend its ability bonuses.",
+        "background": "<strong>Step 5 — Background.</strong> Pick a background; technique feats only show those of your technique."
+      },
+      "Stopped": "Character creation paused. Click Create character on the sheet to continue.",
+      "Done": "{name} is ready.",
+      "OnlyTechnique": "Only the {n} feats of your Innate Technique are shown.",
+      "NoTechniqueYet": "Choose your Innate Technique first (class level 1): technique feats are hidden until then."
+    },
+    "Shikigami": {
+      "Title": "Customize a shikigami",
+      "Hint": "Creates your own copy of the creature (you can edit its stats, name and token). Your technique will summon your copy. ✎ = already yours: opens its sheet.",
+      "Created": "{name} created: edit it freely, your summons now use it.",
+      "None": "This character has no summon abilities."
     }
   }
 }

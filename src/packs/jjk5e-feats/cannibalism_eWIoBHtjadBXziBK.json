@@ -33,7 +33,10 @@
       "Hunger of the Accursed"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Voracity"
+   ]
   }
  },
  "folder": "3wVUVT1CJTINFbDN",

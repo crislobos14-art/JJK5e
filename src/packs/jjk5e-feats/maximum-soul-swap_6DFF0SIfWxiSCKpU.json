@@ -64,7 +64,10 @@
       "Improved Marking"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Teleportation"
+   ]
   }
  },
  "folder": "giRwgEP8Enx3V3vx",

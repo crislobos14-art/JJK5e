@@ -33,7 +33,10 @@
       "New Shadow Style: Simple Domain"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "New Shadow Style"
+   ]
   }
  },
  "folder": "gFod6wGzEy6UctqC",

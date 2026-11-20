@@ -62,7 +62,10 @@
       "Reversion"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Retrograde"
+   ]
   }
  },
  "folder": "xdlt8ITade4Eg7u9",

@@ -33,7 +33,10 @@
       "Missile Impact"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Missile Fist"
+   ]
   }
  },
  "effects": [

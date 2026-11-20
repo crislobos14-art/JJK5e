@@ -64,7 +64,10 @@
       "Illusive Terrain"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Illusive Mirage"
+   ]
   }
  },
  "folder": "0zKSvuqnQNE6NMsP",

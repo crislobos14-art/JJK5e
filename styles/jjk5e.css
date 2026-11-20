@@ -94,3 +94,19 @@ button.jjk5e-levelup { display: block; margin: 4px auto 0; padding: 2px 10px; fo
 .token-hud .jjk5e-hud { position: relative; } 
 .token-hud .jjk5e-hud .jjk-hud-ce { position: absolute; right: -4px; bottom: -4px; min-width: 16px; padding: 0 3px; border-radius: 8px;
   background: #4b1d6e; color: #fff; font-size: 10px; line-height: 14px; text-align: center; }
+
+/* 1.20: strip inside the dnd5e sidebar card */
+.jjk5e-strip.in-sidebar { justify-content: center; margin: 6px 4px 2px; padding: 4px; gap: 3px; border-radius: 6px; }
+.jjk5e-strip.in-sidebar .jjk-ce { width: 100%; justify-content: center; margin-right: 0; }
+.jjk5e-strip button.jjk-create { width: 100%; font-weight: bold; }
+/* ASI or feat */
+.jjk5e-asi-mode { margin-bottom: 8px; }
+.jjk5e-asi-buttons { display: flex; gap: 6px; }
+.jjk5e-asi-buttons button { flex: 1; }
+.jjk5e-asi-buttons button.active { background: #4b1d6e; color: #fff; border-color: #a76fd6; }
+.standard-form.jjk-mode-feat > ul.ability-scores,
+.standard-form.jjk-mode-asi > .feat-section, .standard-form.jjk-mode-asi .jjk5e-asi,
+.standard-form.jjk-mode-none > ul.ability-scores, .standard-form.jjk-mode-none > .feat-section,
+.standard-form.jjk-mode-none .jjk5e-asi { display: none; }
+.standard-form:has(.jjk5e-asi-mode) .pill-lg:has(dnd5e-checkbox[name="asi-selected"]) { display: none; }
+.jjk5e-choice-note { margin: 4px 0 6px; font-style: italic; }

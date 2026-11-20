@@ -9,7 +9,7 @@
  * - JJK panel on character sheets, Spanish / English UI, effect expiry (unless Times Up is active).
  */
 const MODULE_ID = "jjk5e";
-const DATA_VERSION = "1.19.0";
+const DATA_VERSION = "1.20.0";
 const FOLDER_NAME = "JJK 5e V.6";
 const ICONS = `modules/${MODULE_ID}/icons`;
 
@@ -279,11 +279,13 @@ async function importWorldCopies() {
     const Cls = docClass(type);
     const coll = type === "Macro" ? game.macros : type === "Actor" ? game.actors : game.tables;
     const keepId = type === "Actor";
-    const old = coll.filter((d) => d.flags?.jjk5e?.worldCopy).map((d) => d.id);
+    // Shikigami actors are kept once created (GMs/players customise them); only missing ones are added.
+    const keepIds = keepId ? new Set(coll.filter((d) => d.flags?.jjk5e?.worldCopy).map((d) => d.id)) : new Set();
+    const old = keepId ? [] : coll.filter((d) => d.flags?.jjk5e?.worldCopy).map((d) => d.id);
     if (old.length) await Cls.deleteDocuments(old);
     let folder = game.folders.find((f) => f.type === type && f.name === FOLDER_NAME);
     if (!folder) folder = await docClass("Folder").create({ name: FOLDER_NAME, type, color: "#4b1d6e" });
-    const docs = data.documents.map((d) => {
+    const docs = data.documents.filter((d) => !keepIds.has(d._id)).map((d) => {
       const o = foundry.utils.deepClone(d);
       if (!keepId) delete o._id;
       o.folder = folder?.id ?? null;
@@ -292,7 +294,7 @@ async function importWorldCopies() {
       if (Array.isArray(o.results)) o.results = o.results.map(({ _id, ...r }) => r);
       return o;
     });
-    await Cls.createDocuments(docs, { keepId });
+    if (docs.length) await Cls.createDocuments(docs, { keepId });
   }
 }
 
@@ -1204,8 +1206,9 @@ async function findSummonSource(name) {
   return null;
 }
 
-async function gmSummon({ actorUuid, name, count = 1, userId, sceneId, stats = null }) {
-  const src = await findSummonSource(name);
+async function gmSummon({ actorUuid, name, count = 1, userId, sceneId, stats = null, sourceUuid = null }) {
+  const byUuid = sourceUuid ? await fromUuid(sourceUuid) : null;
+  const src = (byUuid?.documentName === "Actor" && !byUuid.pack) ? { actor: byUuid } : await findSummonSource(name);
   if (!src) return ui.notifications.warn(t("Summon.NotFound", { name }));
   let actor = src.actor;
   if (!actor) {
@@ -1765,7 +1768,7 @@ async function injectASIFeats(app, element) {
   const owned = new Set(actor.items.map((i) => normName(baseName(i))));
   const eligible = docs.filter((d) => d.system?.type?.value === "feat"
     && (!owned.has(normName(baseName(d))) || d.system?.prerequisites?.repeatable)
-    && !missingPrereqs(actor, d).length)
+    && featFitsTechnique(actor, d) && !missingPrereqs(actor, d).length)
     .sort((a, b) => a.name.localeCompare(b.name));
   const box = document.createElement("fieldset");
   box.className = "jjk5e-asi";
@@ -1787,7 +1790,8 @@ async function injectASIFeats(app, element) {
     await adv.apply(app.level, { retainedItems: app.retainedData?.retainedItems, type: "feat", uuid });
     app.render();
   });
-  (root.querySelector("form") ?? root.querySelector(".window-content") ?? root).append(box);
+  const host = root.querySelector(".feat-section") ?? root.querySelector(".standard-form") ?? root.querySelector("form") ?? root.querySelector(".window-content") ?? root;
+  host.append(box);
 }
 
 function featCategoryLabel(sub) {
@@ -2137,14 +2141,14 @@ async function summonFallback(activity) {
   const actor = activity.actor;
   const rollData = activity.getRollData?.() ?? actor.getRollData();
   const evalF = async (f) => (f ? (await new Roll(String(f), rollData).evaluate()).total : 0);
-  const src = game.actors.find((a) => a.name === name);
+  const src = (profile?.uuid && fromUuidSync?.(profile.uuid)) || game.actors.find((a) => a.name === name);
   const base = src?.system?.attributes ?? {};
   const stats = {
     hp: (Number(base.hp?.max) || 0) + (await evalF(activity.bonuses?.hp)),
     ac: (Number(base.ac?.flat ?? base.ac?.value) || 10) + (await evalF(activity.bonuses?.ac))
   };
-  return viaGM("summon", { actorUuid: actor.uuid, name, count: Number(info?.count ?? profile?.count) || 1,
-    userId: game.user.id, sceneId: canvas.scene?.id, stats });
+  return viaGM("summon", { actorUuid: actor.uuid, name: src?.name ?? name, sourceUuid: src?.uuid ?? null,
+    count: Number(info?.count ?? profile?.count) || 1, userId: game.user.id, sceneId: canvas.scene?.id, stats });
 }
 
 Hooks.once("init", () => {
@@ -2965,8 +2969,19 @@ function addSheetStrip(app, element) {
     ev.preventDefault(); ev.stopPropagation();
     ({ "ce-": () => spendCE(actor, 1, t("CE.Name")), "ce+": () => spendCE(actor, -1, t("CE.Regained")),
       career: () => openCareer(actor), vows: () => openVows(actor), panel: () => openPanel(actor),
-      technique: () => chooseTechnique(actor), rest: () => shortRestCE(actor), hotbar: () => fillHotbar(actor) })[b.dataset.a]?.();
+      technique: () => chooseTechnique(actor), rest: () => shortRestCE(actor), hotbar: () => fillHotbar(actor),
+      create: () => createCharacterWizard(actor) })[b.dataset.a]?.();
   });
+  strip.querySelectorAll("button").forEach((b) => b.classList.add("always-interactive"));
+  if (!actor.items.some((i) => i.type === "class")) {
+    const wiz = document.createElement("button");
+    wiz.type = "button"; wiz.dataset.a = "create"; wiz.className = "jjk-create always-interactive";
+    wiz.innerHTML = `<i class="fas fa-user-plus"></i> ${t("Create.Button")}`;
+    strip.prepend(wiz);
+  }
+  // dnd5e 5/6 sheet: inside the sidebar card (the header is covered by the ability badges)
+  const side = root.querySelector(".sidebar .card .stats") ?? root.querySelector(".sidebar .card");
+  if (side) { strip.classList.add("in-sidebar"); side.append(strip); return; }
   const anchor = root.querySelector(".sheet-header, header.sheet-header, .window-content > header");
   if (anchor) anchor.after(strip);
   else (root.querySelector(".window-content") ?? root).prepend?.(strip);
@@ -3767,4 +3782,220 @@ Hooks.once("ready", () => {
   Hooks.on("updateItem", (item, changes, options, userId) => {
     if (userId === game.user.id && item.type === "class" && foundry.utils.hasProperty(changes, "system.levels")) later(item.parent);
   });
+});
+
+/* -------------------------------------------- */
+/*  1.20: Character progression                  */
+/*  technique-only feats, ASI or feat, creation  */
+/*  wizard, personal shikigami                   */
+/* -------------------------------------------- */
+
+/** Techniques of the actor (chosen flag + technique items). */
+function actorTechniques(actor) {
+  return new Set([actor?.getFlag?.(MODULE_ID, "technique"), ...[...(actor?.items ?? [])].map((i) => i.flags?.jjk5e?.technique)]
+    .filter(Boolean).map(normName));
+}
+
+/** Technique feats only fit characters with that technique. Other feats always fit. */
+function featFitsTechnique(actor, doc) {
+  const own = doc?.flags?.jjk5e?.forTechniques ?? (doc?.flags?.jjk5e?.technique ? [doc.flags.jjk5e.technique] : null);
+  if (!own?.length) return true;
+  const techs = actorTechniques(actor);
+  return own.some((n) => techs.has(normName(n)));
+}
+
+const choiceDocCache = new Map();
+async function choiceDoc(uuid) {
+  if (!choiceDocCache.has(uuid)) choiceDocCache.set(uuid, fromUuid(uuid).catch(() => null));
+  return choiceDocCache.get(uuid);
+}
+
+/** Item choice steps (background "Innate Technique Feat", class choices): hide technique feats of other techniques. */
+async function filterItemChoiceFlow(app, element) {
+  const adv = app?.advancement;
+  if (!adv || adv.type !== "ItemChoice") return;
+  const actor = adv.actor;
+  const root = element instanceof HTMLElement ? element : (element?.[0] ?? app.element);
+  if (!root?.querySelectorAll) return;
+  const rows = [...root.querySelectorAll("li.item[data-uuid]")];
+  if (!rows.length) return;
+  let hidden = 0; let techFeats = 0;
+  for (const li of rows) {
+    const doc = await choiceDoc(li.dataset.uuid);
+    if (!doc) continue;
+    const own = doc.flags?.jjk5e?.forTechniques;
+    if (!own?.length) continue;
+    techFeats++;
+    const checked = li.querySelector("dnd5e-checkbox")?.checked || li.querySelector("input[type=hidden]");
+    if (!checked && !featFitsTechnique(actor, doc)) { li.style.display = "none"; hidden++; }
+  }
+  root.querySelector(".jjk5e-choice-note")?.remove();
+  if (!techFeats || !hidden) return;
+  const note = document.createElement("p");
+  note.className = "hint jjk5e-choice-note";
+  note.textContent = actorTechniques(actor).size ? t("Create.OnlyTechnique", { n: techFeats - hidden })
+    : t("Create.NoTechniqueYet");
+  (root.querySelector(".items-section") ?? root.querySelector(".standard-form") ?? root).before(note);
+}
+
+/** Ability Score Improvement step: an explicit "improve abilities" or "take a feat" choice. */
+async function asiOrFeatChooser(app, element) {
+  const adv = app?.advancement;
+  if (!adv || adv.type !== "AbilityScoreImprovement" || adv.item?.type !== "class") return;
+  if (!adv.configuration?.points || Object.values(adv.configuration?.fixed ?? {}).some((v) => v)) return;
+  if (adv.isEpicBoon) return;
+  const root = element instanceof HTMLElement ? element : (element?.[0] ?? app.element);
+  const form = root?.querySelector?.(".standard-form");
+  if (!form) return;
+  root.querySelector(".jjk5e-asi-mode")?.remove();
+  const type = adv.value?.type ?? null;
+  const mode = type === "feat" ? "feat" : type === "asi" ? "asi" : (app._jjkMode ?? null);
+  const bar = document.createElement("div");
+  bar.className = "jjk5e-asi-mode";
+  bar.innerHTML = `<p class="hint">${t("ASI.ChooseHint")}</p>
+    <div class="jjk5e-asi-buttons">
+      <button type="button" data-m="asi" class="${mode === "asi" ? "active" : ""}"><i class="fas fa-arrow-up-right-dots"></i> ${t("ASI.ModeASI")}</button>
+      <button type="button" data-m="feat" class="${mode === "feat" ? "active" : ""}"><i class="fas fa-star"></i> ${t("ASI.ModeFeat")}</button>
+    </div>`;
+  form.prepend(bar);
+  form.classList.toggle("jjk-mode-asi", mode === "asi");
+  form.classList.toggle("jjk-mode-feat", mode === "feat");
+  form.classList.toggle("jjk-mode-none", !mode);
+  bar.addEventListener("click", async (ev) => {
+    const b = ev.target.closest("[data-m]");
+    if (!b) return;
+    ev.preventDefault(); ev.stopPropagation();
+    app._jjkMode = b.dataset.m;
+    try {
+      if (b.dataset.m === "asi" && adv.value?.type !== "asi") await adv.apply(app.level, { type: "asi" });
+      if (b.dataset.m === "feat" && adv.value?.type === "asi") await adv.reverse(app.level);
+    } catch (err) { console.error(`${MODULE_ID} | asi mode`, err); }
+    app.render();
+  });
+}
+
+/* ---- Character creation: abilities → class (+ technique) → race → background ---- */
+
+async function pickFromPack(packName, types, title) {
+  const pack = jjkPack(packName);
+  if (!pack) return null;
+  const docs = (await pack.getDocuments()).filter((d) => types.includes(d.type))
+    .sort((a, b) => a.name.localeCompare(b.name));
+  if (!docs.length) return null;
+  const options = docs.map((d) => `<option value="${d.uuid}">${esc(d.name)}</option>`).join("");
+  const uuid = await promptField(title, `<select name="pick" style="width:100%">${options}</select>`, "pick");
+  return uuid ? docs.find((d) => d.uuid === uuid) : null;
+}
+
+/** Add a compendium item through dnd5e's advancement manager and wait until it finishes. */
+async function addWithAdvancement(actor, doc) {
+  const data = game.items.fromCompendium ? game.items.fromCompendium(doc) : doc.toObject();
+  const Manager = dnd5e?.applications?.advancement?.AdvancementManager;
+  if (!Manager?.forNewItem) { await actor.createEmbeddedDocuments("Item", [data]); return true; }
+  const manager = Manager.forNewItem(actor, data);
+  if (!manager.steps?.length) { await actor.createEmbeddedDocuments("Item", [data]); return true; }
+  return new Promise((resolve) => {
+    let done = false;
+    const finish = (ok) => { if (done) return; done = true; Hooks.off("dnd5e.advancementManagerComplete", onDone); resolve(ok); };
+    const onDone = (m) => { if (m === manager) finish(true); };
+    Hooks.on("dnd5e.advancementManagerComplete", onDone);
+    const close = manager.close.bind(manager);
+    manager.close = async (...args) => { const r = await close(...args); setTimeout(() => finish(false), 50); return r; };
+    manager.render(true);
+  });
+}
+
+async function createCharacterWizard(actor) {
+  actor = requireActor(actor);
+  if (!actor || actor.type !== "character") return;
+  const has = (type) => actor.items.some((i) => i.type === type);
+  const steps = [
+    ["abilities", () => pointBuy(actor), () => false],
+    ["class", async () => { const d = await pickFromPack("jjk5e-classes", ["class"], t("Create.Class")); return d ? addWithAdvancement(actor, d) : false; }, () => has("class")],
+    ["technique", () => (actor.getFlag(MODULE_ID, "technique") ? true : chooseTechnique(actor)), () => !!actor.getFlag(MODULE_ID, "technique")
+      || actor.items.some((i) => i.type === "class" && i.system?.identifier === "heavenly-restriction")],
+    ["race", async () => { const d = await pickFromPack("jjk5e-races", ["race"], t("Create.Race")); return d ? addWithAdvancement(actor, d) : false; }, () => has("race")],
+    ["background", async () => { const d = await pickFromPack("jjk5e-backgrounds", ["background"], t("Create.Background")); return d ? addWithAdvancement(actor, d) : false; }, () => has("background")]
+  ];
+  for (const [key, run, done] of steps) {
+    if (done()) continue;
+    const go = await confirmDialog(t("Create.Title"), `<p>${t(`Create.Step.${key}`)}</p>`);
+    if (!go) return ui.notifications.info(t("Create.Stopped"));
+    try { await run(); } catch (err) { console.error(`${MODULE_ID} | create ${key}`, err); }
+  }
+  ui.notifications.info(t("Create.Done", { name: actor.name }));
+}
+
+/* ---- Personal shikigami (Ten Shadows and other summons) ---- */
+
+/** Summon activities of the actor whose summoned creature can be customised. */
+function summonProfiles(actor) {
+  const out = [];
+  for (const item of actor.items) {
+    const acts = item.system?.activities;
+    for (const act of (acts?.contents ?? Object.values(acts ?? {}))) {
+      if (act?.type !== "summon") continue;
+      for (const prof of act.profiles ?? []) {
+        if (!prof?.uuid) continue;
+        const src = fromUuidSync?.(prof.uuid);
+        out.push({ item, act, prof, src, personal: !!src?.flags?.jjk5e?.personalFor });
+      }
+    }
+  }
+  return out;
+}
+
+GM_EXTRA.customizeShikigami = async ({ actorUuid, itemId, activityId, profileId, userId }) => {
+  const actor = await fromUuid(actorUuid);
+  const item = actor?.items.get(itemId);
+  const act = item?.system?.activities?.get?.(activityId) ?? item?.system?.activities?.[activityId];
+  const prof = act?.profiles?.find((p) => p._id === profileId);
+  const src = prof?.uuid ? await fromUuid(prof.uuid) : null;
+  if (!src) return ui.notifications.warn(t("Summon.NotFound", { name: prof?.name ?? "?" }));
+  let folder = game.folders.find((f) => f.type === "Actor" && f.name === SUMMON_FOLDER);
+  if (!folder) folder = await docClass("Folder").create({ name: SUMMON_FOLDER, type: "Actor" });
+  const data = src.toObject();
+  delete data._id;
+  data.name = `${src.name} (${actor.name})`;
+  data.folder = folder.id;
+  data.ownership = { default: 0, ...Object.fromEntries(Object.entries(actor.ownership ?? {}).filter(([k]) => k !== "default")) };
+  if (userId) data.ownership[userId] = 3;
+  foundry.utils.setProperty(data, "flags.jjk5e.worldCopy", false);
+  foundry.utils.setProperty(data, "flags.jjk5e.personalFor", actor.uuid);
+  foundry.utils.setProperty(data, "flags.jjk5e.baseActor", src.uuid);
+  if (data.prototypeToken) data.prototypeToken.name = data.name;
+  const copy = await docClass("Actor").create(data);
+  const profiles = act.toObject ? act.toObject().profiles : foundry.utils.deepClone(act.profiles);
+  for (const p of profiles) if (p._id === profileId) { p.uuid = copy.uuid; p.name = copy.name; }
+  await item.update({ [`system.activities.${activityId}.profiles`]: profiles });
+  ui.notifications.info(t("Shikigami.Created", { name: copy.name }));
+  if (userId === game.user.id) copy.sheet?.render(true);
+};
+
+async function customizeShikigami(actor) {
+  actor = requireActor(actor);
+  if (!actor) return;
+  const list = summonProfiles(actor);
+  if (!list.length) return ui.notifications.warn(t("Shikigami.None"));
+  const options = list.map((e, i) => `<option value="${i}">${esc(e.src?.name ?? e.prof.name ?? "?")}${e.personal ? " ✎" : ""} — ${esc(e.item.name)}</option>`).join("");
+  const pick = await promptField(t("Shikigami.Title"), `<p>${t("Shikigami.Hint")}</p><select name="s" style="width:100%">${options}</select>`, "s");
+  if (pick === null || pick === undefined || pick === "") return;
+  const e = list[Number(pick)];
+  if (!e) return;
+  if (e.personal) return e.src?.sheet?.render(true);
+  return viaGM("customizeShikigami", { actorUuid: actor.uuid, itemId: e.item.id, activityId: e.act.id,
+    profileId: e.prof._id, userId: game.user.id });
+}
+
+Hooks.once("init", () => {
+  Hooks.on("renderItemChoiceFlow", (app, element) => { filterItemChoiceFlow(app, element).catch((err) => console.error(`${MODULE_ID} | choice filter`, err)); });
+  Hooks.on("renderAbilityScoreImprovementFlow", (app, element) => { asiOrFeatChooser(app, element).catch((err) => console.error(`${MODULE_ID} | asi mode`, err)); });
+  MENU_ACTIONS.splice(MENU_ACTIONS.length - 1, 0,
+    ["create", "fa-solid fa-user-plus", "SceneTools.Create", (a) => createCharacterWizard(a)],
+    ["shikigami", "fa-solid fa-dog", "SceneTools.Shikigami", (a) => customizeShikigami(a)]);
+});
+
+Hooks.once("ready", () => {
+  Object.assign(game.modules.get(MODULE_ID).api ?? {}, { createCharacterWizard, customizeShikigami, featFitsTechnique,
+    filterItemChoiceFlow, asiOrFeatChooser, actorTechniques });
 });

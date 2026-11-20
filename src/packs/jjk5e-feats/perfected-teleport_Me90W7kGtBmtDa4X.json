@@ -33,7 +33,10 @@
       "Mastered Teleport"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Teleportation"
+   ]
   }
  },
  "folder": "giRwgEP8Enx3V3vx",

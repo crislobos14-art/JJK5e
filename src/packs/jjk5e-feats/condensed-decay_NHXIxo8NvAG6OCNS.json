@@ -33,7 +33,10 @@
       "Scarlet Rot"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Rot"
+   ]
   }
  },
  "folder": "gN0JGJzsnMHTyd5r",

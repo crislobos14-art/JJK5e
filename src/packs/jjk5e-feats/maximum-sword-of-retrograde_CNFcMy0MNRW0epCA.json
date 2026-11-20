@@ -78,7 +78,10 @@
       "Invert Causality"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Retrograde"
+   ]
   }
  },
  "effects": [

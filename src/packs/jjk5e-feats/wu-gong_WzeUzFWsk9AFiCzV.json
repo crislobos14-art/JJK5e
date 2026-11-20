@@ -81,7 +81,10 @@
       "Insect Storage"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Centipede Shroud"
+   ]
   }
  },
  "effects": [

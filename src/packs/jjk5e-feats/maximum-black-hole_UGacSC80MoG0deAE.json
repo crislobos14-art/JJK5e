@@ -86,7 +86,10 @@
       "Virtual Mass Mastery"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Star Rage"
+   ]
   }
  },
  "folder": "8WZAgQOeGTbPipxv",

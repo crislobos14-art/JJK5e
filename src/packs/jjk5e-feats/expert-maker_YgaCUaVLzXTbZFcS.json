@@ -26,7 +26,11 @@
   }
  },
  "flags": {
-  "jjk5e": {}
+  "jjk5e": {
+   "forTechniques": [
+    "Cursed Corpse Creation"
+   ]
+  }
  },
  "folder": "XXj1CTcWWYDx5bTY",
  "sort": 100,

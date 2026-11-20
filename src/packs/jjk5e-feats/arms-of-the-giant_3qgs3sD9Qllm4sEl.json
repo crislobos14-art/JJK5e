@@ -70,7 +70,10 @@
       "Stone Arms"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Earth Manipulation"
+   ]
   }
  },
  "effects": [

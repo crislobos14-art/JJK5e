@@ -33,7 +33,10 @@
       "Auspicious Beast #2: Reiki"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Auspicious Beast Summon"
+   ]
   }
  },
  "effects": [

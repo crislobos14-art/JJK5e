@@ -33,7 +33,10 @@
       "Flames of Disaster"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Disaster Flames"
+   ]
   }
  },
  "effects": [

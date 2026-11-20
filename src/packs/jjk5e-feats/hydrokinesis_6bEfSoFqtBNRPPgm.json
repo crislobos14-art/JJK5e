@@ -103,7 +103,10 @@
       "Tides of Disaster"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Disaster Tides"
+   ]
   }
  },
  "effects": [

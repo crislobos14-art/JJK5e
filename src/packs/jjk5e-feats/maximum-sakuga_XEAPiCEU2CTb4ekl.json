@@ -33,7 +33,10 @@
       "Fastest Sorcerer Alive"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Projection Sorcery"
+   ]
   }
  },
  "folder": "CFoGNkravs7kgdkV",

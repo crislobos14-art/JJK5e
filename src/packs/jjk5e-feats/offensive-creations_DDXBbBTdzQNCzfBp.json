@@ -197,7 +197,10 @@
       "Black Box Reinforcement"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Black Box"
+   ]
   }
  },
  "effects": [

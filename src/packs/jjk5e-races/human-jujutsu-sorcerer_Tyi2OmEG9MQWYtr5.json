@@ -82,6 +82,76 @@
      "optional": false
     },
     "value": {}
+   },
+   "5E57kxyCifFmTgpR": {
+    "_id": "5E57kxyCifFmTgpR",
+    "type": "ItemChoice",
+    "level": 0,
+    "title": "Trained Cursed Energy (Cursed Energy feat)",
+    "configuration": {
+     "choices": {
+      "0": {
+       "count": 1,
+       "replacement": false
+      }
+     },
+     "allowDrops": true,
+     "type": "feat",
+     "pool": [
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.5xpSFf81Rrf15a3f"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.qyQ6XfprYJNRTB0p"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.fZnK2A2LWwuuQ9hM"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.rSt3OAfpNPUKQR1M"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.K9ab3a5Tvq1Q2MHX"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.HBcY8P8oWZ4Fjz2U"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.ceFaBfiOjnMr8pns"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.2A4ld3l5zOj35rrN"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.kdQQ0yy0ccyh2tBD"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.dJqrp7xMBqFDMPJt"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.rxWwehwG1wa5VsCa"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.sB7E6ktq094oJbdD"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.DR7dsOsBx62ayUmW"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.2RX2eSjhogly3SRm"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.zWsgayPGpQ7Bv4xk"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.ZtJosIKa0sS6jWk5"
+      },
+      {
+       "uuid": "Compendium.jjk5e.jjk5e-feats.Item.IzkpgtcBjcHgykfF"
+      }
+     ]
+    },
+    "value": {}
    }
   }
  },

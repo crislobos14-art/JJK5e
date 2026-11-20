@@ -62,7 +62,10 @@
       "Eternal Flames"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Blazing Courage"
+   ]
   }
  },
  "folder": "FQaknUUFDMQmvcGr",

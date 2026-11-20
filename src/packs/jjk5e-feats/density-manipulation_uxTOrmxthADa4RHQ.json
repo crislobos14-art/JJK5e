@@ -33,7 +33,10 @@
       "Excavation"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Earth Manipulation"
+   ]
   }
  },
  "folder": "CvsPtOy5HUgba8G0",

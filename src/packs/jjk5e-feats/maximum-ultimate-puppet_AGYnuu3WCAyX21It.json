@@ -33,7 +33,10 @@
       "Absolute Puppet"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Puppet Manipulation"
+   ]
   }
  },
  "folder": "tHLyqviVXptUEOWk",

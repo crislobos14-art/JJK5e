@@ -33,7 +33,10 @@
       "Maximum: Midnight Armor"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Black Box"
+   ]
   }
  },
  "folder": "hYJ9CtCLF0NIbhhU",

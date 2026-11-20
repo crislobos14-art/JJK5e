@@ -55,7 +55,10 @@
       "Improved Ratio"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Ratio"
+   ]
   }
  },
  "folder": "b0K9kretIN46uAAM",

@@ -94,7 +94,10 @@
       "Water Defensive Ring"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Disaster Tides"
+   ]
   }
  },
  "folder": "QUxVHS82lupOHPQu",

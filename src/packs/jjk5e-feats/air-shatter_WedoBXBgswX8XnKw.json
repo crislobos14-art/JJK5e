@@ -81,7 +81,10 @@
       "24 Frame Rule"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Projection Sorcery"
+   ]
   }
  },
  "effects": [

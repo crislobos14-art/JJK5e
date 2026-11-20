@@ -81,7 +81,10 @@
       "Storms of Disaster"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Disaster Storms"
+   ]
   }
  },
  "effects": [

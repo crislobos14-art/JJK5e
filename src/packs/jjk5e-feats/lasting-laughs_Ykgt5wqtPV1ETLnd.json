@@ -55,7 +55,10 @@
       "Comedy"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Comedian"
+   ]
   }
  },
  "folder": "ofzydWsjnAAHHzU3",

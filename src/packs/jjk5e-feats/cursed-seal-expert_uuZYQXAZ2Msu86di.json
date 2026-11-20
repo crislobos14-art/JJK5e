@@ -89,7 +89,10 @@
       "Cursed Mark"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Schrift X"
+   ]
   }
  },
  "effects": [

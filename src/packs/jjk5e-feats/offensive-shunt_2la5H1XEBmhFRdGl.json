@@ -113,7 +113,10 @@
       "Teleport"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Teleportation"
+   ]
   }
  },
  "effects": [

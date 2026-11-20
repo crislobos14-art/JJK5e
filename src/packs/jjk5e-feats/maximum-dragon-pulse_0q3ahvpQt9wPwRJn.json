@@ -103,7 +103,10 @@
       "World Anchor"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Dragon Vein"
+   ]
   }
  },
  "effects": [

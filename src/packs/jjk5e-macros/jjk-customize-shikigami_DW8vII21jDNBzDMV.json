@@ -1,0 +1,13 @@
+{
+ "_id": "DW8vII21jDNBzDMV",
+ "name": "JJK: Customize Shikigami",
+ "type": "script",
+ "img": "icons/svg/pawprint.svg",
+ "scope": "global",
+ "command": "game.modules.get(\"jjk5e\").api.customizeShikigami();",
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": null,
+ "_key": "!macros!DW8vII21jDNBzDMV"
+}

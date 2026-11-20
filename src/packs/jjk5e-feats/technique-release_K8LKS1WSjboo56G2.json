@@ -33,7 +33,10 @@
       "Maximum: Conflagration"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Blazing Courage"
+   ]
   }
  },
  "folder": "FQaknUUFDMQmvcGr",

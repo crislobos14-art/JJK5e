@@ -68,7 +68,10 @@
       "Shadow Strike"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Ten Shadows"
+   ]
   }
  },
  "folder": "yU2uxvCgVRVwhJwX",

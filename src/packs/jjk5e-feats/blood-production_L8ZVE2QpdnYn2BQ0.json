@@ -62,7 +62,10 @@
       "Blood Manipulation"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Rot"
+   ]
   }
  },
  "folder": "nBcvifZT3OePW2PN",

@@ -33,7 +33,10 @@
       "Critical Focus"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Ratio"
+   ]
   }
  },
  "folder": "b0K9kretIN46uAAM",

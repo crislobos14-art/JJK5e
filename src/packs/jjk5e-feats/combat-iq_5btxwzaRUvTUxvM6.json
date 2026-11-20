@@ -62,7 +62,10 @@
       "Demonic Intellect"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Laplace’s Demon"
+   ]
   }
  },
  "folder": "LY5kMspFULfnXfB0",

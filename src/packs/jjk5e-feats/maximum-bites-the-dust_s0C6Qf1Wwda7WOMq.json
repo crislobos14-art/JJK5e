@@ -91,7 +91,10 @@
       "Stronger Explosions"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Explosive Flesh"
+   ]
   }
  },
  "effects": [

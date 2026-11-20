@@ -33,7 +33,10 @@
       "Maximum: Black Seance"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Seance"
+   ]
   }
  },
  "folder": "Bzl0QdjoRI5R4DB5",

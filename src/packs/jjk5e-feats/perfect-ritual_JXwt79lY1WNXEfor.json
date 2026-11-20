@@ -33,7 +33,10 @@
       "Ritual of Resurrection"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Seance"
+   ]
   }
  },
  "folder": "Bzl0QdjoRI5R4DB5",

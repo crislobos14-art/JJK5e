@@ -68,7 +68,10 @@
       "Unrelenting Fury"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Missile Fist"
+   ]
   }
  },
  "folder": "NrFEIsdcWt7L52EL",

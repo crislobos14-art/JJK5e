@@ -37,6 +37,9 @@
    "modifies": [
     "First Core",
     "Upgraded Form"
+   ],
+   "forTechniques": [
+    "Triple Core"
    ]
   }
  },

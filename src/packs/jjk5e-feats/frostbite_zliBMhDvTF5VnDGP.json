@@ -33,7 +33,10 @@
       "Frost Calm"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Ice Formation"
+   ]
   }
  },
  "folder": "49nTgJGO4NrAusFo",

@@ -64,7 +64,10 @@
       "Devastating Barrage"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Missile Fist"
+   ]
   }
  },
  "effects": [

@@ -33,7 +33,10 @@
       "Cursed Corpse Mutation"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Cursed Corpse Creation"
+   ]
   }
  },
  "folder": "XXj1CTcWWYDx5bTY",

@@ -75,7 +75,10 @@
       "Maximum: Divine Storm Sovereign"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Disaster Storms"
+   ]
   }
  },
  "effects": [

@@ -33,7 +33,10 @@
       "Maximum: Body of the Devourer"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Voracity"
+   ]
   }
  },
  "folder": "3wVUVT1CJTINFbDN",

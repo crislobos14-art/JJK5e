@@ -59,7 +59,10 @@
       "Hand Shield"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Heart Catch"
+   ]
   }
  },
  "folder": "KjinDnRWPvOPNN3Z",

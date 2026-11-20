@@ -99,7 +99,10 @@
       "Insectoid Armor"
      ]
     ]
-   }
+   },
+   "forTechniques": [
+    "Construction"
+   ]
   }
  },
  "folder": "kyQQ2jjaJXT8blxH",
