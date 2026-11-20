@@ -1,7 +1,7 @@
 name: Validate JJK V6
 on:
   push:
-    branches: [main, "fix/**"]
+    branches: [main, "fix/**", "audit/**"]
   pull_request:
     branches: [main]
 permissions:
@@ -19,6 +19,7 @@ jobs:
           node --input-type=module --check < scripts/jjk5e.js
           node --check scripts/jjk5e-rules.mjs
           node --check tools/build-packs.mjs
+          node --check tools/audit-techniques.mjs
       - name: Pure rules regression tests
         run: node --test tests/*.test.mjs
       - name: Validate source JSON and compendium identity
@@ -37,6 +38,8 @@ jobs:
             for(const name of fs.readdirSync("lang").filter(x=>x.endsWith(".json")))JSON.parse(fs.readFileSync("lang/"+name));
             console.log("All JSON parsed");
           '
+      - name: Audit all innate spells against their source files
+        run: node tools/audit-techniques.mjs --check
       - name: Build Foundry compendium packs
         run: |
           npm install --no-save @foundryvtt/foundryvtt-cli

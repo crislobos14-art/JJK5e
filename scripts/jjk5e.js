@@ -11,7 +11,7 @@
 import { activityCECost, ceTransaction, blackFlashCheck, clashRoundsFromRefinement, vowBlocksUsage } from "./jjk5e-rules.mjs";
 
 const MODULE_ID = "jjk5e";
-const DATA_VERSION = "1.23.0";
+const DATA_VERSION = "1.24.0";
 const FOLDER_NAME = "JJK 5e V.6";
 const ICONS = `modules/${MODULE_ID}/icons`;
 
@@ -601,6 +601,18 @@ function registerActivityHooks() {
   Hooks.on("dnd5e.postUseActivity", async (activity, usageConfig) => {
     const actor = activity.actor ?? activity.item?.actor;
     const item = activity.item;
+    // Pay BEFORE opening domains or applying buffs. Failed CE payment must never
+    // leave a benefit in place. The pre-use gate handles ordinary insufficient CE.
+    if (setting("autoSpendCE") && actor && item) {
+      const cost = activityCost(activity)
+        + Number(item.flags?.jjk5e?.ceSteps?.[activity.id] ?? 0) * (Number(usageConfig?.scaling) || 0);
+      if (cost) {
+        if (!findPool(actor)) return ui.notifications.warn(t("Notify.NoPoolNotSpent", { name: actor.name }));
+        const paid = await spendCE(actor, cost,
+          `${item.name}${activity.name ? ` — ${activity.name}` : ""}`);
+        if (!paid) return;
+      }
+    }
     if (actor && /^Six Eyes \\((Dormant|Stirring)\\)$/.test(baseName(item)) &&
         /Perfect CE Manipulation/i.test(activity.name ?? "")) {
       await actor.setFlag(MODULE_ID, "sixEyesNext", true);
@@ -619,12 +631,30 @@ function registerActivityHooks() {
       await chat(actor, `<p><strong>${t("Domain.SureHit")}</strong> — ${activity.type === "attack"
         ? t("Domain.SureHitAttack") : t("Domain.SureHitSave")}</p>`);
     }
-    if (!setting("autoSpendCE")) return;
-    const cost = activityCost(activity)
-      + Number(item?.flags?.jjk5e?.ceSteps?.[activity.id] ?? 0) * (Number(usageConfig?.scaling) || 0);
-    if (!cost || !findPool(actor)) return;
-    await spendCE(actor, cost, `${item.name}${activity.name ? ` — ${activity.name}` : ""}`);
+    await applySpellSelfBuff(actor, item, activity);
   });
+}
+
+/** Apply narrowly defined, verifiable self buffs. Unknown effects remain GM decisions. */
+async function applySpellSelfBuff(actor, item, activity) {
+  const spec = item?.flags?.jjk5e?.selfBuffs?.[activity?.id];
+  if (!spec || !actor?.isOwner) return;
+  const original = [...(actor.effects ?? [])].filter((e) =>
+    e.flags?.jjk5e?.spellBuffItem === item.uuid &&
+    e.flags?.jjk5e?.spellBuffActivity === activity.id);
+  for (const effect of original) await safeDelete(effect);
+  const changes = (spec.changes ?? []).filter((c) =>
+    /^system\.attributes\.(?:ac\.bonus|movement\.(?:walk|fly|swim|climb))$/.test(c.key) &&
+    ["multiply", "add", "override"].includes(c.type) && Number.isFinite(Number(c.value)));
+  if (!changes.length) return;
+  await actor.createEmbeddedDocuments("ActiveEffect", [fxData({
+    name: item.name, img: item.img, transfer: false, disabled: false,
+    duration: { rounds: Number(spec.rounds) || 10 },
+    changes: changes.map((c) => ({ key: c.key, type: c.type, value: String(c.value) })),
+    flags: { jjk5e: { spellBuffItem: item.uuid, spellBuffActivity: activity.id } }
+  })]);
+  if (spec.manual) await chat(actor,
+    `<p><strong>${esc(item.name)} — ${t("Common.Reminder")}</strong></p><p>${esc(spec.manual)}</p>`);
 }
 
 /* -------------------------------------------- */

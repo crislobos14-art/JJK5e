@@ -315,3 +315,11 @@ This release corrects several critical V.6 / Creeps and Curses mismatches but **
 **Testing:** `node --test tests/*.test.mjs`. GitHub Actions validates source JSON and rebuilds compendiums. These tests do **not** replace live tests in Foundry V14 with two player clients and optional integrations.
 
 **Important outstanding work:** true three-plus-domain clashes, all Maximum/Reduced Output modifiers, exterior damage and displacement when opening domains, all custom technique behaviors, and additional supplement-specific automatic restrictions remain incomplete. For unresolved mechanics use GM adjudication rather than assuming the automation is correct.
+
+## v1.24.0 — Auditoría de los 360 spells innatos
+
+La [auditoría detallada por técnica y spell](docs/INNATE_SPELL_AUDIT.md) registra la cobertura mecánica observada para cada una de las 81 técnicas con spells. Para regenerarla: `node tools/audit-techniques.mjs --write`. Para verificarla: `node tools/audit-techniques.mjs --check`.
+
+Las etiquetas del informe indican **riesgo de implementación**, no pruebas de ejecución. Un spell puede tener tirada, daño y costo configurados y aun así requerir lógica especial para ser fiel a V.6. Por ello no debe considerarse completamente automatizado solo por aparecer como `mechanics-present`.
+
+Correcciones específicas: Flowing Red Scale y Golden Week activan bonificaciones mecánicas de CA y velocidad; Manji Kick aplica Stunned; Unrelenting Fury conecta daño y Prone a la salvación; Collective Will dispone de 8 usos y tirada de reemplazo; Cursed Centipede y Major Star Shikigami tienen sus activaciones corregidas. **No** están resueltos automáticamente el turno adicional, todas las tiradas de ventaja, la gestión completa de invocaciones ni el resto de técnicas especiales. La revisión y pruebas de cada efecto deben continuar para certificar el conjunto.
