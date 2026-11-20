@@ -1,120 +1,121 @@
 {
- "_id": "21lnu8kbAphhST0q",
- "name": "Cursed Centipede",
- "type": "spell",
- "img": "modules/jjk5e/icons/techniques/centipede-shroud.svg",
- "system": {
-  "description": {
-   "value": "<p><em>Centipede Shroud — Innate Technique (1st level)</em></p><blockquote><p>Your technique summons a centipede shikigami to fight with you.</p></blockquote><p>Starting at 1st level, you can summon your shikigami as a bonus action. You can command your shikigami on your turn as a bonus action. Your centipede can enter your space, floating around you as a shroud providing the following benefits:</p>\n<ul>\n<li>\n<p>On a hit with a melee attack, you deal an additional 1d10 damage as your Centipede fights with you.  </p>\n</li>\n<li>\n<p>You gain a bonus to AC equal to your proficiency bonus.  </p>\n</li>\n<li>\n<p>You can make an additional melee attack as a bonus action.  </p>\n</li>\n<li>\n<p>When you or the centipede take damage, you can choose to have the other take the damage instead. If this damage would reduce the centipede to 0 hit points, you take the remaining damage.</p>\n</li>\n</ul>\n<p>You can summon your shikigami for free once per long rest and again for 3 CE. You can only have one Cursed Centipede summoned at a time. The centipede cannot be targeted  with attacks directly while acting as a Shroud. However, if you are reduced to 0 HP, any remaining damage affects the shikigami.</p>",
-   "chat": ""
-  },
-  "source": {
-   "book": "JJK 5e V.6",
-   "page": "",
-   "custom": "",
-   "license": "CC BY-NC-SA 4.0",
-   "rules": "2014"
-  },
-  "activities": {
-   "SbWpjaFLpf5qQ5YQ": {
-    "_id": "SbWpjaFLpf5qQ5YQ",
-    "type": "utility",
-    "name": "Action (3 CE)",
-    "sort": 0,
+  "_id": "21lnu8kbAphhST0q",
+  "name": "Cursed Centipede",
+  "type": "spell",
+  "img": "modules/jjk5e/icons/techniques/centipede-shroud.svg",
+  "system": {
+    "description": {
+      "value": "<p><em>Centipede Shroud — Innate Technique (1st level)</em></p><blockquote><p>Your technique summons a centipede shikigami to fight with you.</p></blockquote><p>Starting at 1st level, you can summon your shikigami as a bonus action. You can command your shikigami on your turn as a bonus action. Your centipede can enter your space, floating around you as a shroud providing the following benefits:</p>\n<ul>\n<li>\n<p>On a hit with a melee attack, you deal an additional 1d10 damage as your Centipede fights with you.  </p>\n</li>\n<li>\n<p>You gain a bonus to AC equal to your proficiency bonus.  </p>\n</li>\n<li>\n<p>You can make an additional melee attack as a bonus action.  </p>\n</li>\n<li>\n<p>When you or the centipede take damage, you can choose to have the other take the damage instead. If this damage would reduce the centipede to 0 hit points, you take the remaining damage.</p>\n</li>\n</ul>\n<p>You can summon your shikigami for free once per long rest and again for 3 CE. You can only have one Cursed Centipede summoned at a time. The centipede cannot be targeted  with attacks directly while acting as a Shroud. However, if you are reduced to 0 HP, any remaining damage affects the shikigami.</p>",
+      "chat": ""
+    },
+    "source": {
+      "book": "JJK 5e V.6",
+      "page": "",
+      "custom": "",
+      "license": "CC BY-NC-SA 4.0",
+      "rules": "2014"
+    },
+    "activities": {
+      "SbWpjaFLpf5qQ5YQ": {
+        "_id": "SbWpjaFLpf5qQ5YQ",
+        "type": "utility",
+        "name": "Bonus Action (3 CE)",
+        "sort": 0,
+        "activation": {
+          "type": "bonus",
+          "value": 1,
+          "condition": "",
+          "override": true
+        },
+        "consumption": {
+          "targets": [],
+          "scaling": {
+            "allowed": false
+          },
+          "spellSlot": false
+        },
+        "range": {
+          "units": "self",
+          "override": true
+        },
+        "target": {
+          "override": true
+        },
+        "duration": {
+          "units": "inst",
+          "override": true
+        }
+      },
+      "KE4lL8uxh0YyqQcB": {
+        "_id": "KE4lL8uxh0YyqQcB",
+        "type": "utility",
+        "name": "Bonus Action (free once per long rest)",
+        "activation": {
+          "type": "bonus",
+          "condition": "",
+          "override": true,
+          "value": 1
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "itemUses",
+              "target": "",
+              "value": "1"
+            }
+          ],
+          "spellSlot": false
+        }
+      }
+    },
+    "uses": {
+      "max": "1",
+      "spent": 0,
+      "recovery": [
+        {
+          "period": "lr",
+          "type": "recoverAll"
+        }
+      ]
+    },
+    "level": 1,
+    "school": "jjk",
+    "method": "technique",
+    "prepared": 1,
+    "ability": "",
+    "properties": [],
+    "materials": {
+      "value": "",
+      "consumed": false,
+      "cost": 0,
+      "supply": 0
+    },
     "activation": {
-     "type": "action",
-     "value": 1,
-     "condition": "",
-     "override": true
-    },
-    "consumption": {
-     "targets": [],
-     "scaling": {
-      "allowed": false
-     },
-     "spellSlot": false
-    },
-    "range": {
-     "units": "self",
-     "override": true
-    },
-    "target": {
-     "override": true
+      "type": "action",
+      "value": 1,
+      "condition": "",
+      "override": true
     },
     "duration": {
-     "units": "inst",
-     "override": true
-    }
-   },
-   "KE4lL8uxh0YyqQcB": {
-    "_id": "KE4lL8uxh0YyqQcB",
-    "type": "utility",
-    "name": "Use (limited, no CE)",
-    "activation": {
-     "type": "special",
-     "condition": "",
-     "override": true
+      "units": "inst"
     },
-    "consumption": {
-     "targets": [
-      {
-       "type": "itemUses",
-       "target": "",
-       "value": "1"
-      }
-     ],
-     "spellSlot": false
+    "range": {
+      "units": "self",
+      "override": true
+    },
+    "target": {},
+    "sourceItem": ""
+  },
+  "flags": {
+    "jjk5e": {
+      "ceCosts": {
+        "SbWpjaFLpf5qQ5YQ": 3
+      },
+      "technique": "Centipede Shroud",
+      "level": 1,
+      "spellFrom": "feat"
     }
-   }
   },
-  "uses": {
-   "max": "1",
-   "spent": 0,
-   "recovery": [
-    {
-     "period": "lr",
-     "type": "recoverAll"
-    }
-   ]
-  },
-  "level": 1,
-  "school": "jjk",
-  "method": "technique",
-  "prepared": 1,
-  "ability": "",
-  "properties": [],
-  "materials": {
-   "value": "",
-   "consumed": false,
-   "cost": 0,
-   "supply": 0
-  },
-  "activation": {
-   "type": "action",
-   "value": 1,
-   "condition": "",
-   "override": true
-  },
-  "duration": {
-   "units": "inst"
-  },
-  "range": {
-   "units": "self",
-   "override": true
-  },
-  "target": {},
-  "sourceItem": ""
- },
- "flags": {
-  "jjk5e": {
-   "ceCosts": {
-    "SbWpjaFLpf5qQ5YQ": 3
-   },
-   "technique": "Centipede Shroud",
-   "level": 1,
-   "spellFrom": "feat"
-  }
- },
- "folder": "CxDLBZfVDaXb8XWS",
- "_key": "!items!21lnu8kbAphhST0q"
+  "folder": "CxDLBZfVDaXb8XWS",
+  "_key": "!items!21lnu8kbAphhST0q"
 }
