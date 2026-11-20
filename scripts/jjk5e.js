@@ -626,12 +626,12 @@ function registerActivityHooks() {
       await chat(actor, `<p><strong>${esc(item.name)}</strong> — ${t("Feats.InspirationUsed")}</p>`);
     }
     if (item?.flags?.jjk5e?.domainActivity === activity.id) await openDomain(actor, item);
-    await applySpellSelfBuff(actor, item, activity);
     else if (item?.flags?.jjk5e?.technique && domainOpen(actor) && setting("domainSureHit")
       && ["attack", "save"].includes(activity.type)) {
       await chat(actor, `<p><strong>${t("Domain.SureHit")}</strong> — ${activity.type === "attack"
         ? t("Domain.SureHitAttack") : t("Domain.SureHitSave")}</p>`);
     }
+    await applySpellSelfBuff(actor, item, activity);
   });
 }
 
