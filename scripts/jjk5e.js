@@ -1326,7 +1326,9 @@ function viaGM(action, payload) {
   if (game.user.isGM) return GM_EXTRA[action] ? GM_EXTRA[action](payload) : (action === "summon" ? gmSummon(payload) : gmDismiss(payload));
   const gm = game.users.activeGM ?? game.users.find((u) => u.isGM && u.active);
   if (!gm) return ui.notifications.warn(t("Notify.NoGM"));
-  game.socket.emit(`module.${MODULE_ID}`, { action, payload, gm: gm.id });
+  // Remote GM requests are disabled unless the world GM opts in.
+  if (!setting("playerGMRequests")) return ui.notifications.warn("JJK 5e: Ask the GM to perform this action.");
+  game.socket.emit(`module.${MODULE_ID}`, { action, payload, gm: gm.id, requestedBy: game.user.id });
 }
 
 async function summon(actor, name, count = 1) {
@@ -1589,6 +1591,7 @@ Hooks.once("init", () => {
     onChange: () => { if (game.user?.isGM) promptImport(false); }
   });
   reg("autoSpendCE", Boolean, true);
+  reg("playerGMRequests", Boolean, false);
   reg("ceChat", Boolean, true);
   reg("ceResource", String, "tertiary", {
     choices: { none: "JJK5E.Settings.ceResource.None", primary: "JJK5E.Settings.ceResource.Primary",
@@ -1676,11 +1679,25 @@ Hooks.once("ready", async () => {
   Hooks.on("renderActorSheet", (app, html) => addHeaderButton(app, html));
   Hooks.on("renderActorSheetV2", (app, element) => addHeaderButton(app, element));
 
-  game.socket.on(`module.${MODULE_ID}`, (msg) => {
-    if (!game.user.isGM || (msg.gm && msg.gm !== game.user.id)) return;
-    if (msg.action === "summon") gmSummon(msg.payload);
-    if (msg.action === "dismiss") gmDismiss(msg.payload);
-    if (GM_EXTRA[msg.action]) GM_EXTRA[msg.action](msg.payload);
+  game.socket.on(`module.${MODULE_ID}`, async (msg) => {
+    if (!game.user.isGM || !isActiveGM() || (msg?.gm && msg.gm !== game.user.id)) return;
+    if (!setting("playerGMRequests") || !msg?.requestedBy) return;
+    const requester = game.users.get(msg.requestedBy);
+    const action = String(msg.action ?? "");
+    const allowed = new Set(["summon", "dismiss", "domainZone", "domainZoneResize", "domainZoneDelete",
+      "domainUpdate", "customizeShikigami"]);
+    if (!requester?.active || requester.isGM || !allowed.has(action)) return;
+    const actor = msg.payload?.actorUuid ? await fromUuid(msg.payload.actorUuid).catch(() => null) : null;
+    // GM approval is explicit: client-provided user IDs are NOT a trusted identity.
+    const confirmed = await confirmDialog("JJK 5e: privileged request",
+      `<p>Request allegedly from <b>${esc(requester.name)}</b>: <b>${esc(action)}</b> for ${esc(actor?.name ?? "unresolved actor")}.</p>
+       <p>Client identifiers are untrusted. Verify with the player before approving.</p>`);
+    if (!confirmed) return;
+    try {
+      if (action === "summon") await gmSummon(msg.payload);
+      else if (action === "dismiss") await gmDismiss(msg.payload);
+      else if (GM_EXTRA[action]) await GM_EXTRA[action](msg.payload);
+    } catch (err) { console.error(`${MODULE_ID} | GM request`, err); }
   });
 
   if (game.user.character) syncResource(game.user.character);
