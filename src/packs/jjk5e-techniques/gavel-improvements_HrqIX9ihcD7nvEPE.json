@@ -39,6 +39,9 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
@@ -46,7 +49,13 @@
      "units": "minute",
      "concentration": false,
      "override": true
-    }
+    },
+    "effects": [
+     {
+      "_id": "k4mAU3SLtJCF57ph",
+      "onSave": false
+     }
+    ]
    },
    "YcdY6qSwX3tuOvYg": {
     "_id": "YcdY6qSwX3tuOvYg",
@@ -56,7 +65,7 @@
     "activation": {
      "type": "action",
      "value": 1,
-     "condition": "",
+     "condition": "Only while enlarged. Twice the gavel's damage (4d8 assumes maul tier d8→2d8 doubled).",
      "override": true
     },
     "consumption": {
@@ -72,9 +81,16 @@
      "override": true
     },
     "target": {
+     "template": {
+      "type": "cube",
+      "size": "10",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
      "affects": {
       "type": "creature",
-      "count": "1"
+      "choice": false
      },
      "override": true
     },
@@ -93,7 +109,21 @@
     },
     "damage": {
      "onSave": "none",
-     "parts": []
+     "parts": [
+      {
+       "number": 4,
+       "denomination": 8,
+       "bonus": "2 * @abilities.str.mod",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
     }
    }
   },
@@ -138,9 +168,39 @@
    },
    "technique": "Deadly Sentencing",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "jvdEqnCHI6BBkSgt",
- "_key": "!items!HrqIX9ihcD7nvEPE"
+ "_key": "!items!HrqIX9ihcD7nvEPE",
+ "effects": [
+  {
+   "_id": "k4mAU3SLtJCF57ph",
+   "name": "Enlarged Gavel",
+   "img": "modules/jjk5e/icons/techniques/deadly-sentencing.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Damage die one tier higher for 1 minute (+1d2 approximates the tier step).</p>",
+   "changes": [
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ 1d2",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Deadly Sentencing"
+    }
+   },
+   "_key": "!items.effects!HrqIX9ihcD7nvEPE.k4mAU3SLtJCF57ph"
+  }
+ ]
 }

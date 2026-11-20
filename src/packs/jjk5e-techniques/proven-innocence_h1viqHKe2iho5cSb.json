@@ -24,7 +24,7 @@
    "WXaJ2kTOUtBHKcxS": {
     "_id": "WXaJ2kTOUtBHKcxS",
     "type": "utility",
-    "name": "Reaction",
+    "name": "Open reversed domain (on witnessing a death)",
     "sort": 0,
     "activation": {
      "type": "reaction",
@@ -66,7 +66,12 @@
       "Deadly Sentencing"
      ]
     ]
-   }
+   },
+   "ceCosts": {
+    "WXaJ2kTOUtBHKcxS": 20
+   },
+   "automationNotes": "Uses the same trial and Evidence rolls as Deadly Sentencing; costs 20 CE without a free use.",
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",

@@ -19,8 +19,9 @@
    "oDmto0UToZTftTUX": {
     "_id": "oDmto0UToZTftTUX",
     "type": "utility",
-    "name": "Action",
+    "name": "Crush a cursed tool (3/4/6/10 CE by grade)",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "action",
      "value": 1,
@@ -30,21 +31,26 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "10"
      },
      "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
      "units": "self",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
-    "duration": {
-     "units": "inst",
-     "override": true
-    }
+    "effects": []
    }
   },
   "uses": {
@@ -84,7 +90,14 @@
   "jjk5e": {
    "technique": "Dark Claw",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceCosts": {
+    "oDmto0UToZTftTUX": 3
+   },
+   "ceSteps": {
+    "oDmto0UToZTftTUX": 1
+   },
+   "automation": "automated"
   }
  },
  "folder": "TJotg7cBr19cOkoJ",

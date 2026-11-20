@@ -19,7 +19,7 @@
    "zbRdrCYbDoFUEXsi": {
     "_id": "zbRdrCYbDoFUEXsi",
     "type": "utility",
-    "name": "Use",
+    "name": "Free Deadly Sentencing (CE mod per long rest)",
     "activation": {
      "type": "special",
      "condition": "",
@@ -30,15 +30,18 @@
       {
        "type": "itemUses",
        "target": "",
-       "value": "1"
+       "value": "1",
+       "scaling": {}
       }
      ],
-     "spellSlot": false
+     "scaling": {
+      "allowed": false
+     }
     }
    }
   },
   "uses": {
-   "max": "max(@abilities.wis.mod, @abilities.cha.mod, 1)",
+   "max": "max(@abilities.wis.mod, @abilities.cha.mod)",
    "spent": 0,
    "recovery": [
     {
@@ -77,7 +80,8 @@
   "jjk5e": {
    "technique": "Deadly Sentencing",
    "level": 18,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "jvdEqnCHI6BBkSgt",

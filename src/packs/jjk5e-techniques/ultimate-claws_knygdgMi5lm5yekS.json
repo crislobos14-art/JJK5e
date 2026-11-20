@@ -19,10 +19,10 @@
    "ESTS1iLHgsGqA5o2": {
     "_id": "ESTS1iLHgsGqA5o2",
     "type": "damage",
-    "name": "Action (1 CE)",
+    "name": "Absorbing Claws (on hit, 1 CE): +2d6 necrotic, heal that much",
     "sort": 0,
     "activation": {
-     "type": "action",
+     "type": "special",
      "value": 1,
      "condition": "",
      "override": true
@@ -39,6 +39,11 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -63,15 +68,16 @@
        }
       }
      ]
-    }
+    },
+    "useConditionText": "reaction === \"isHit\""
    },
    "zWZRzJ7xwCIZO67r": {
     "_id": "zWZRzJ7xwCIZO67r",
     "type": "save",
-    "name": "Action (2 CE)",
+    "name": "Barbed Claws (on hit, 2 CE): CON or bleeding",
     "sort": 100000,
     "activation": {
-     "type": "action",
+     "type": "special",
      "value": 1,
      "condition": "",
      "override": true
@@ -88,6 +94,11 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -105,29 +116,20 @@
     },
     "damage": {
      "onSave": "none",
-     "parts": [
-      {
-       "number": 2,
-       "denomination": 6,
-       "bonus": "",
-       "types": [
-        "slashing"
-       ],
-       "custom": {
-        "enabled": false,
-        "formula": ""
-       },
-       "scaling": {
-        "number": 1
-       }
-      }
-     ]
-    }
+     "parts": []
+    },
+    "useConditionText": "reaction === \"isHit\"",
+    "effects": [
+     {
+      "_id": "c9yWam4SubGrJbN3",
+      "onSave": false
+     }
+    ]
    },
    "lv4QfOu1qu8xFQ2K": {
     "_id": "lv4QfOu1qu8xFQ2K",
     "type": "utility",
-    "name": "Use (limited, no CE)",
+    "name": "Brutal / Elemental / Pure (passive options)",
     "activation": {
      "type": "special",
      "condition": "",
@@ -191,9 +193,91 @@
    },
    "technique": "Dark Claw",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "dmgScale": {
+    "ESTS1iLHgsGqA5o2": [
+     [
+      1,
+      "2d6"
+     ],
+     [
+      11,
+      "3d6"
+     ]
+    ]
+   },
+   "automationNotes": "Brutal is a toggle effect on the item; Elemental/Pure: change the claw damage type or tick 'ignore resistance' (Midi: DamageReduction bypass) by hand. Healing from Absorbing: enter the necrotic total.",
+   "automation": "automated"
   }
  },
  "folder": "TJotg7cBr19cOkoJ",
- "_key": "!items!knygdgMi5lm5yekS"
+ "_key": "!items!knygdgMi5lm5yekS",
+ "effects": [
+  {
+   "_id": "c9yWam4SubGrJbN3",
+   "name": "Bleeding (Barbed Claws)",
+   "img": "modules/jjk5e/icons/techniques/dark-claw.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [
+    "bleeding"
+   ],
+   "description": "<p>2d6 slashing at the start of its turn; ends when staunched (action) or healed.</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "value": "turn=start, damageRoll=2d6, damageType=slashing, label=Bleeding",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 600
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Dark Claw"
+    }
+   },
+   "_key": "!items.effects!knygdgMi5lm5yekS.c9yWam4SubGrJbN3"
+  },
+  {
+   "_id": "KTWPkPefTeDfS359",
+   "name": "Brutal Claws",
+   "img": "modules/jjk5e/icons/techniques/dark-claw.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": true,
+   "statuses": [],
+   "description": "<p>Extra damage die on claw hits (toggle when chosen).</p>",
+   "changes": [
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ 1d6",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.mwak.attack",
+     "mode": 2,
+     "value": "+ (2 + floor(min(@details.level, 11) / 11))",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ (2 + floor(min(@details.level, 11) / 11))",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": "Dark Claw"
+    }
+   },
+   "_key": "!items.effects!knygdgMi5lm5yekS.KTWPkPefTeDfS359"
+  }
+ ]
 }

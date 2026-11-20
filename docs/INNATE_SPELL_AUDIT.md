@@ -3,13 +3,13 @@
 > Generado desde el compendio y las fuentes. **No certifica ejecución en Foundry ni fidelidad semántica a cada regla**.
 
 - Spells examinados: **360**; técnicas agrupadas: **81**.
-- Utilidad sin efecto configurado: revisar lógica: **91**.
+- Utilidad sin efecto configurado: revisar lógica: **88**.
 - Utilidad con efecto: comprobar activación: **15**.
-- Dominio genérico: resolver propiedades particulares: **43**.
-- Salvación sin daño/efecto automático: **25**.
-- Ataque sin daño propio: comprobar intención: **10**.
-- Mecánica configurada; falta prueba Foundry: **101**.
-- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **75**.
+- Dominio genérico: resolver propiedades particulares: **41**.
+- Salvación sin daño/efecto automático: **24**.
+- Ataque sin daño propio: comprobar intención: **11**.
+- Mecánica configurada; falta prueba Foundry: **98**.
+- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **83**.
 
 ## Interpretación
 
@@ -197,20 +197,20 @@
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Claw | 1 | damage:Bonus Action (1 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/claw_uaZXduMgpa7QEYE3.json) |
-| Claws Modifications | 3 | damage:Action (1 CE); save:Action (2 CE); utility:Use (limited, no CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/claws-modifications_QHFUIT3ubv4jRSHX.json) |
-| Ultimate Claws | 6 | damage:Action (1 CE); save:Action (2 CE); utility:Use (limited, no CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/ultimate-claws_knygdgMi5lm5yekS.json) |
-| Maximum: Zenith Claw Option | 11 | utility:Action | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/maximum-zenith-claw-option_RwJRQgb1vBORMJE1.json) |
-| Domain Expansion: Hall of the Five Clawed Dragon | 18 | utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-hall-of-the-five-clawed_rccn9Z3zTunjKZM3.json) |
+| Claw | 1 | utility:Form claw — Bonus Action (1 CE); attack:Claw strike | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/claw_uaZXduMgpa7QEYE3.json) |
+| Claws Modifications | 3 | damage:Absorbing Claws (on hit, 1 CE): +1d6 necrotic, heal that much; save:Barbed Claws (on hit, 2 CE): CON or bleeding; utility:Brutal / Elemental / Pure (passive options) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/claws-modifications_QHFUIT3ubv4jRSHX.json) |
+| Ultimate Claws | 6 | damage:Absorbing Claws (on hit, 1 CE): +2d6 necrotic, heal that much; save:Barbed Claws (on hit, 2 CE): CON or bleeding; utility:Brutal / Elemental / Pure (passive options) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/ultimate-claws_knygdgMi5lm5yekS.json) |
+| Maximum: Zenith Claw Option | 11 | utility:Crush a cursed tool (3/4/6/10 CE by grade) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/maximum-zenith-claw-option_RwJRQgb1vBORMJE1.json) |
+| Domain Expansion: Hall of the Five Clawed Dragon | 18 | utility:Expand Domain (20 CE); damage:Initiative 20: guaranteed critical claw; utility:Domain: claws always hit | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-hall-of-the-five-clawed_rccn9Z3zTunjKZM3.json) |
 
 ### Deadly Sentencing (4 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Judge’s Gavel | 1 | utility:Action (1 CE); utility:Use (limited, no CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/judge-s-gavel_BP2dCOForc7QrwFI.json) |
-| Domain Expansion: Deadly Sentencing | 3 | utility:Use; utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-deadly-sentencing_EdkOzraQgWFnQMJT.json) |
-| Gavel Improvements | 6 | utility:Action (2 CE); save:Action | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/gavel-improvements_HrqIX9ihcD7nvEPE.json) |
-| Unstopping Justice | 18 | utility:Use | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/unstopping-justice_bxSurrzBgl0GtcSQ.json) |
+| Judge’s Gavel | 1 | utility:Action (1 CE); utility:Use (limited, no CE); attack:Gavel: Light hammer; attack:Gavel: Maul; attack:Gavel: Pole hammer (reach) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/judge-s-gavel_BP2dCOForc7QrwFI.json) |
+| Domain Expansion: Deadly Sentencing | 3 | utility:Evidence roll (d20); utility:Expand Domain (20 CE); utility:Trial: contested Persuasion; utility:Sentence: Confiscation; attack:Executioner's Sword (kills on hit); utility:Domain: no offensive actions | Ataque sin daño propio: comprobar intención | [JSON](../src/packs/jjk5e-techniques/domain-expansion-deadly-sentencing_EdkOzraQgWFnQMJT.json) |
+| Gavel Improvements | 6 | utility:Action (2 CE); save:Action | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/gavel-improvements_HrqIX9ihcD7nvEPE.json) |
+| Unstopping Justice | 18 | utility:Free Deadly Sentencing (CE mod per long rest) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/unstopping-justice_bxSurrzBgl0GtcSQ.json) |
 
 ### Disaster Flames (5 spells)
 

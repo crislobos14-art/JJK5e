@@ -19,12 +19,57 @@
    "value": "class",
    "subtype": ""
   },
-  "requirements": "Deadly Sentencing 11"
+  "requirements": "Deadly Sentencing 11",
+  "activities": {
+   "wJIHBg7d3XfSyqpo": {
+    "_id": "wJIHBg7d3XfSyqpo",
+    "type": "utility",
+    "name": "Evidence (best of 2, 3 at 18th)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "roll": {
+     "formula": "{1d20, 1d20, (floor(min(@details.level, 18) / 18))d20}kh",
+     "name": "Evidence",
+     "prompt": false,
+     "visible": true
+    }
+   }
+  }
  },
  "flags": {
   "jjk5e": {
    "technique": "Deadly Sentencing",
-   "level": 11
+   "level": 11,
+   "automation": "automated"
   }
  },
  "folder": "jvdEqnCHI6BBkSgt",

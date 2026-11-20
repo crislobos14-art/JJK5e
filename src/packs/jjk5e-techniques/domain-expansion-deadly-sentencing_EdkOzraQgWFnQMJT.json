@@ -19,21 +19,43 @@
    "ntA78JqzibjeNcT8": {
     "_id": "ntA78JqzibjeNcT8",
     "type": "utility",
-    "name": "Use",
+    "name": "Evidence roll (d20)",
+    "sort": 0,
+    "img": null,
     "activation": {
      "type": "special",
+     "value": null,
      "condition": "",
      "override": true
     },
     "consumption": {
-     "targets": [
-      {
-       "type": "itemUses",
-       "target": "",
-       "value": "1"
-      }
-     ],
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
      "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "roll": {
+     "formula": "1d20",
+     "name": "Evidence",
+     "prompt": false,
+     "visible": true
     }
    },
    "MGIi4U05pEvEsoP9": {
@@ -78,6 +100,189 @@
      "concentration": false,
      "override": true
     }
+   },
+   "ZrZLCkaELzSTs9w3": {
+    "_id": "ZrZLCkaELzSTs9w3",
+    "type": "utility",
+    "name": "Trial: contested Persuasion",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "roll": {
+     "formula": "1d20 + @skills.per.total",
+     "name": "Persuasion (contested)",
+     "prompt": false,
+     "visible": true
+    }
+   },
+   "yThoNOdqXvaDLxal": {
+    "_id": "yThoNOdqXvaDLxal",
+    "type": "utility",
+    "name": "Sentence: Confiscation",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "gef7mQv9H3wo3pii",
+      "onSave": false
+     }
+    ]
+   },
+   "OCfC7P1i2Ck5vbpK": {
+    "_id": "OCfC7P1i2Ck5vbpK",
+    "type": "attack",
+    "name": "Executioner's Sword (kills on hit)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "9B07huBBU2qHBSKm",
+      "onSave": false
+     }
+    ],
+    "attack": {
+     "ability": "str",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "melee",
+      "classification": "weapon"
+     }
+    }
+   },
+   "JCvbrqRPrc28QZf7": {
+    "_id": "JCvbrqRPrc28QZf7",
+    "type": "utility",
+    "name": "Domain: no offensive actions",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "Lholp10Pu0aZGlN7",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -141,9 +346,82 @@
     "MGIi4U05pEvEsoP9": 20
    },
    "domainActivity": "MGIi4U05pEvEsoP9",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Evidence: 1 innocent · 2–9 guilty · 10–15 advantage, Confiscation · 15–19 Death Penalty · 20 instant, both. Conviction with Confiscation/Death Penalty: no Technique Burnout (remove it by hand).",
+   "automation": "automated"
   }
  },
  "folder": "jvdEqnCHI6BBkSgt",
- "_key": "!items!EdkOzraQgWFnQMJT"
+ "_key": "!items!EdkOzraQgWFnQMJT",
+ "effects": [
+  {
+   "_id": "gef7mQv9H3wo3pii",
+   "name": "Confiscation",
+   "img": "modules/jjk5e/icons/techniques/deadly-sentencing-domain.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Loses its innate technique (or magic items first; else its CE) for 1 minute.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Deadly Sentencing"
+    }
+   },
+   "_key": "!items.effects!EdkOzraQgWFnQMJT.gef7mQv9H3wo3pii"
+  },
+  {
+   "_id": "9B07huBBU2qHBSKm",
+   "name": "Executed",
+   "img": "modules/jjk5e/icons/techniques/deadly-sentencing-domain.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [
+    "dead"
+   ],
+   "description": "",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Deadly Sentencing"
+    }
+   },
+   "_key": "!items.effects!EdkOzraQgWFnQMJT.9B07huBBU2qHBSKm"
+  },
+  {
+   "_id": "Lholp10Pu0aZGlN7",
+   "name": "Courtroom",
+   "img": "modules/jjk5e/icons/techniques/deadly-sentencing-domain.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>No offensive action can be taken by either party inside the domain.</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.fail.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Deadly Sentencing"
+    }
+   },
+   "_key": "!items.effects!EdkOzraQgWFnQMJT.Lholp10Pu0aZGlN7"
+  }
+ ]
 }

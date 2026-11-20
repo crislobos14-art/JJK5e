@@ -18,9 +18,10 @@
   "activities": {
    "BV6prZgzvg7vJ9kx": {
     "_id": "BV6prZgzvg7vJ9kx",
-    "type": "damage",
-    "name": "Bonus Action (1 CE)",
+    "type": "utility",
+    "name": "Form claw — Bonus Action (1 CE)",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "bonus",
      "value": 1,
@@ -30,29 +31,89 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
     },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
     "range": {
-     "units": "spec",
+     "units": "self",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
+    },
+    "effects": [
+     {
+      "_id": "gvNAhUjxkAGriis8",
+      "onSave": false
+     }
+    ]
+   },
+   "j3TBu97mUuGqUgA6": {
+    "_id": "j3TBu97mUuGqUgA6",
+    "type": "attack",
+    "name": "Claw strike",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
     },
     "duration": {
-     "value": "1",
-     "units": "hour",
-     "concentration": false,
+     "units": "inst",
      "override": true
     },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "melee",
+      "classification": "weapon"
+     }
+    },
     "damage": {
+     "includeBase": false,
      "parts": [
       {
        "number": 1,
        "denomination": 6,
-       "bonus": "",
+       "bonus": "max(@abilities.wis.mod, @abilities.cha.mod)",
        "types": [
         "slashing"
        ],
@@ -60,9 +121,7 @@
         "enabled": false,
         "formula": ""
        },
-       "scaling": {
-        "number": 1
-       }
+       "scaling": {}
       }
      ]
     }
@@ -109,9 +168,56 @@
    },
    "technique": "Dark Claw",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "dmgScale": {
+    "j3TBu97mUuGqUgA6": [
+     [
+      1,
+      "1d6"
+     ],
+     [
+      3,
+      "1d8"
+     ],
+     [
+      6,
+      "1d10"
+     ],
+     [
+      11,
+      "1d12"
+     ],
+     [
+      18,
+      "2d8"
+     ]
+    ]
+   },
+   "automation": "automated"
   }
  },
  "folder": "TJotg7cBr19cOkoJ",
- "_key": "!items!uaZXduMgpa7QEYE3"
+ "_key": "!items!uaZXduMgpa7QEYE3",
+ "effects": [
+  {
+   "_id": "gvNAhUjxkAGriis8",
+   "name": "Dark Claw",
+   "img": "modules/jjk5e/icons/techniques/dark-claw.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Claws formed for 1 hour.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 600
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Dark Claw"
+    }
+   },
+   "_key": "!items.effects!uaZXduMgpa7QEYE3.gvNAhUjxkAGriis8"
+  }
+ ]
 }

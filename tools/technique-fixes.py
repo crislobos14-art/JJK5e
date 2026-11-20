@@ -1677,6 +1677,162 @@ def cursed_transmutation(S):
     mark(im)
 
 
+def dark_claw(S):
+    melee = {"value": "5", "units": "ft", "override": True}
+    c = S.get("Claw")
+    form = c["system"]["activities"]["BV6prZgzvg7vJ9kx"]
+    act(c, "BV6prZgzvg7vJ9kx", "utility", "Form claw — Bonus Action (1 CE)", "bonus", range=RANGE_SELF, target=SELF)
+    apply(c["system"]["activities"]["BV6prZgzvg7vJ9kx"], fx(c, "on", "Dark Claw", rounds=600, desc="Claws formed for 1 hour."))
+    atk = act(c, "strike", "attack", "Claw strike", "action", range=melee, target=one_creature(),
+              attack={"ability": "", "bonus": "max(@abilities.wis.mod, @abilities.cha.mod) - @abilities.str.mod * 0",
+                      "critical": {"threshold": None}, "flat": False, "type": {"value": "melee", "classification": "weapon"}},
+              damage={"includeBase": False, "parts": [dice(1, 6, ["slashing"], bonus="max(@abilities.wis.mod, @abilities.cha.mod)")]})
+    atk["attack"]["ability"] = "spellcasting"
+    atk["attack"]["bonus"] = ""
+    scale(c, atk, [[1, "1d6"], [3, "1d8"], [6, "1d10"], [11, "1d12"], [18, "2d8"]])
+    free(c, atk)
+    mark(c)
+
+    for nm, base, absorb, bleed, absorb_d, bleed_d, tiers in [
+        ("Claws Modifications", "MjsiHNzAHZ8qqEhE", "55NndOxWTSkPhqhE", "mPzLOB6LwDMub0oR", 1, 1, None),
+        ("Ultimate Claws", "lv4QfOu1qu8xFQ2K", "ESTS1iLHgsGqA5o2", "zWZRzJ7xwCIZO67r", 2, 2, [[1, "2d6"], [11, "3d6"]]),
+    ]:
+        m = S.get(nm)
+        a = m["system"]["activities"]
+        ab = a[absorb]
+        ab["name"] = f"Absorbing Claws (on hit, 1 CE): +{absorb_d}d6 necrotic, heal that much"
+        ab["activation"]["type"] = "special"
+        ab["useConditionText"] = 'reaction === "isHit"'
+        ab["target"] = one_creature()
+        if tiers: scale(m, ab, tiers)
+        bl = a[bleed]
+        bl["name"] = "Barbed Claws (on hit, 2 CE): CON or bleeding"
+        bl["activation"]["type"] = "special"
+        bl["useConditionText"] = 'reaction === "isHit"'
+        bl["target"] = one_creature()
+        bl["damage"] = {"onSave": "none", "parts": []}
+        die = f"{bleed_d}d6"
+        bid = fx(m, "bleed", "Bleeding (Barbed Claws)", rounds=600, statuses=["bleeding"],
+                 changes=[("flags.midi-qol.OverTime", 0, f"turn=start, damageRoll={die}, damageType=slashing, label=Bleeding")],
+                 desc=f"{die} slashing at the start of its turn; ends when staunched (action) or healed.")
+        apply(bl, bid)
+        opt = a[base]
+        opt["name"] = "Brutal / Elemental / Pure (passive options)"
+        brutal = fx(m, "brutal", "Brutal Claws", rounds=None,
+                    changes=[("system.bonuses.mwak.damage", 2, "+ 1d6")] + (
+                        [("system.bonuses.mwak.attack", 2, "+ (2 + floor(min(@details.level, 11) / 11))"),
+                         ("system.bonuses.mwak.damage", 2, "+ (2 + floor(min(@details.level, 11) / 11))")] if bleed_d == 2 else []),
+                    desc="Extra damage die on claw hits (toggle when chosen).")
+        for e in m["effects"]:
+            if e["_id"] == brutal: e["transfer"], e["disabled"] = True, True; e["duration"] = {}
+        note(m, "Brutal is a toggle effect on the item; Elemental/Pure: change the claw damage type or tick 'ignore resistance' "
+                "(Midi: DamageReduction bypass) by hand. Healing from Absorbing: enter the necrotic total.")
+        mark(m)
+
+    z = S.get("Maximum: Zenith Claw Option")
+    zz = act(z, "oDmto0UToZTftTUX", "utility", "Crush a cursed tool (3/4/6/10 CE by grade)", "action", range=RANGE_SELF, target=SELF)
+    cost(z, zz, 3, 1, "10")
+    mark(z)
+
+    d = S.get("Domain Expansion: Hall of the Five Clawed Dragon")
+    st = act(d, "init20", "damage", "Initiative 20: guaranteed critical claw", "special", target=one_creature(),
+             damage={"critical": {"allow": True}, "parts": [dice(4, 8, ["slashing"], bonus="max(@abilities.wis.mod, @abilities.cha.mod)")]})
+    free(d, st)
+    sure = act(d, "sure", "utility", "Domain: claws always hit", "special", range=RANGE_SELF, target=SELF)
+    apply(sure, fx(d, "sure", "Five Clawed Dragon", rounds=10, changes=[("flags.midi-qol.max.attack.mwak", 0, "1"),
+                                                                   ("flags.midi-qol.advantage.attack.mwak", 0, "1")],
+                   desc="Claw attacks auto-hit in the domain (Midi max attack roll as proxy)."))
+    free(d, sure)
+    note(d, "Initiative-20 strike: doubled claw dice already in the formula (2d8 → 4d8 at 18th) — no Black Flash.")
+    mark(d)
+
+    sb = S.get("Soft Beats Hard")
+    on = sb["system"]["activities"]["Jwx6Nh8ta3KxG7Bm"]
+    on["range"], on["target"] = RANGE_SELF, SELF
+    apply(on, fx(sb, "on", "Soft Beats Hard", rounds=1200, desc="2 hours: no claws; special parry reaction."))
+    re_ = sb["system"]["activities"]["Tmh3pCHViOtoPrbe"]
+    act(sb, "Tmh3pCHViOtoPrbe", "attack", "Soft parry (attack vs. damage roll)", "reaction", range=RANGE_SELF, target=SELF,
+        attack={"ability": "", "bonus": "(2 * floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11) + floor(min(@details.level, 18) / 18))",
+                "critical": {"threshold": None}, "flat": False, "type": {"value": "melee", "classification": "unarmed"}})
+    r = sb["system"]["activities"]["Tmh3pCHViOtoPrbe"]
+    r["useConditionText"] = 'reaction === "isAttacked"'
+    r["activation"]["condition"] = "If your roll beats the damage roll, the damage is nullified. 2 CE: repeat without a reaction."
+    sb["flags"]["jjk5e"]["ceCosts"]["Tmh3pCHViOtoPrbe"] = 0
+    again = act(sb, "again", "attack", "Soft parry again (2 CE, no reaction)", "special", range=RANGE_SELF, target=SELF,
+                attack=dict(r["attack"]))
+    cost(sb, again, 2)
+    mark(sb)
+
+
+def deadly_sentencing(S):
+    g = S.get("Judge’s Gavel")
+    for key, nm, die, rng in [("light", "Light hammer", 4, 5), ("maul", "Maul", 6, 5), ("pole", "Pole hammer (reach)", 10, 10)]:
+        a = act(g, key, "attack", f"Gavel: {nm}", "action", range={"value": str(rng), "units": "ft", "override": True},
+                target=one_creature(),
+                attack={"ability": "str", "bonus": "", "critical": {"threshold": None}, "flat": False,
+                        "type": {"value": "melee", "classification": "weapon"}},
+                damage={"includeBase": False, "parts": [dice(2 if key == "maul" else 1, die, ["bludgeoning"], bonus="@mod")]})
+        free(g, a)
+    note(g, "First summon per long rest is free (limited-use activity); later summons cost 1 CE. Gavel Improvements makes it free.")
+    mark(g)
+
+    d = S.get("Domain Expansion: Deadly Sentencing")
+    ev = act(d, "ntA78JqzibjeNcT8", "utility", "Evidence roll (d20)", "special", range=RANGE_SELF, target=SELF,
+             roll={"formula": "1d20", "name": "Evidence", "prompt": False, "visible": True})
+    trial = act(d, "trial", "utility", "Trial: contested Persuasion", "special", range=RANGE_SELF, target=SELF,
+                roll={"formula": "1d20 + @skills.per.total", "name": "Persuasion (contested)", "prompt": False, "visible": True})
+    free(d, trial)
+    pen = act(d, "conf", "utility", "Sentence: Confiscation", "special", target=one_creature())
+    apply(pen, fx(d, "conf", "Confiscation", rounds=10, desc="Loses its innate technique (or magic items first; else its CE) for 1 minute."))
+    free(d, pen)
+    dp = act(d, "death", "attack", "Executioner's Sword (kills on hit)", "action", range={"value": "5", "units": "ft", "override": True},
+             target=one_creature(), attack={"ability": "str", "bonus": "", "critical": {"threshold": None}, "flat": False,
+                                            "type": {"value": "melee", "classification": "weapon"}})
+    apply(dp, fx(d, "dead", "Executed", statuses=["dead"]))
+    free(d, dp)
+    peace = act(d, "peace", "utility", "Domain: no offensive actions", "special",
+                target={"affects": {"type": "creature", "choice": False}, "override": True})
+    apply(peace, fx(d, "peace", "Courtroom", rounds=10, changes=[("flags.midi-qol.fail.attack.all", 0, "1")],
+                    desc="No offensive action can be taken by either party inside the domain."))
+    free(d, peace)
+    note(d, "Evidence: 1 innocent · 2–9 guilty · 10–15 advantage, Confiscation · 15–19 Death Penalty · 20 instant, both. "
+            "Conviction with Confiscation/Death Penalty: no Technique Burnout (remove it by hand).")
+    mark(d)
+
+    gi = S.get("Gavel Improvements")
+    en = gi["system"]["activities"]["i3XrSuMfGBZEYwb7"]
+    en["range"], en["target"] = RANGE_SELF, SELF
+    apply(en, fx(gi, "big", "Enlarged Gavel", rounds=10, changes=[("system.bonuses.mwak.damage", 2, "+ 1d2")],
+                 desc="Damage die one tier higher for 1 minute (+1d2 approximates the tier step)."))
+    sw = gi["system"]["activities"]["YcdY6qSwX3tuOvYg"]
+    sw["target"] = {"template": {"type": "cube", "size": "10", "units": "ft", "count": "1", "contiguous": False},
+                    "affects": {"type": "creature", "choice": False}, "override": True}
+    sw["damage"] = {"onSave": "none", "parts": [dice(4, 8, ["bludgeoning"], bonus="2 * @abilities.str.mod")]}
+    sw["activation"]["condition"] = "Only while enlarged. Twice the gavel's damage (4d8 assumes maul tier d8→2d8 doubled)."
+    mark(gi)
+
+    be = S.get("Better Evidence")
+    r = act(be, "roll", "utility", "Evidence (best of 2, 3 at 18th)", "special", range=RANGE_SELF, target=SELF,
+            roll={"formula": "{1d20, 1d20, (floor(min(@details.level, 18) / 18))d20}kh", "name": "Evidence", "prompt": False, "visible": True})
+    free(be, r)
+    mark(be)
+
+    u = S.get("Unstopping Justice")
+    uz = u["system"]["activities"]["zbRdrCYbDoFUEXsi"]
+    uz["name"] = "Free Deadly Sentencing (CE mod per long rest)"
+    u["system"]["uses"] = {"max": "max(@abilities.wis.mod, @abilities.cha.mod)", "spent": 0,
+                           "recovery": [{"period": "lr", "type": "recoverAll"}]}
+    uz["consumption"] = {"targets": [{"type": "itemUses", "target": "", "value": "1", "scaling": {}}], "scaling": {"allowed": False}}
+    mark(u)
+
+    pi = S.get("Proven Innocence")
+    pr = pi["system"]["activities"]["WXaJ2kTOUtBHKcxS"]
+    pr["name"] = "Open reversed domain (on witnessing a death)"
+    cost(pi, pr, 20)
+    note(pi, "Uses the same trial and Evidence rolls as Deadly Sentencing; costs 20 CE without a free use.")
+    mark(pi)
+
+
 TECHNIQUES = {"Antigravity System": antigravity_system,
               "Auspicious Beast Summon": auspicious_beast_summon,
               "Black Bird Manipulation": black_bird_manipulation,
@@ -1695,7 +1851,9 @@ TECHNIQUES = {"Antigravity System": antigravity_system,
               "Cursed Circuitry": cursed_circuitry,
               "Cursed Corpse Creation": cursed_corpse_creation,
               "Cursed Spirit Manipulation": cursed_spirit_manipulation,
-              "Cursed Transmutation": cursed_transmutation}
+              "Cursed Transmutation": cursed_transmutation,
+              "Dark Claw": dark_claw,
+              "Deadly Sentencing": deadly_sentencing}
 
 if __name__ == "__main__":
     args = sys.argv[1:]

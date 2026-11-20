@@ -19,10 +19,10 @@
    "55NndOxWTSkPhqhE": {
     "_id": "55NndOxWTSkPhqhE",
     "type": "damage",
-    "name": "Action (1 CE)",
+    "name": "Absorbing Claws (on hit, 1 CE): +1d6 necrotic, heal that much",
     "sort": 0,
     "activation": {
-     "type": "action",
+     "type": "special",
      "value": 1,
      "condition": "",
      "override": true
@@ -39,6 +39,11 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -63,15 +68,16 @@
        }
       }
      ]
-    }
+    },
+    "useConditionText": "reaction === \"isHit\""
    },
    "mPzLOB6LwDMub0oR": {
     "_id": "mPzLOB6LwDMub0oR",
     "type": "save",
-    "name": "Action (2 CE)",
+    "name": "Barbed Claws (on hit, 2 CE): CON or bleeding",
     "sort": 100000,
     "activation": {
-     "type": "action",
+     "type": "special",
      "value": 1,
      "condition": "",
      "override": true
@@ -88,6 +94,11 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -105,29 +116,20 @@
     },
     "damage": {
      "onSave": "none",
-     "parts": [
-      {
-       "number": 1,
-       "denomination": 6,
-       "bonus": "",
-       "types": [
-        "slashing"
-       ],
-       "custom": {
-        "enabled": false,
-        "formula": ""
-       },
-       "scaling": {
-        "number": 1
-       }
-      }
-     ]
-    }
+     "parts": []
+    },
+    "useConditionText": "reaction === \"isHit\"",
+    "effects": [
+     {
+      "_id": "Tgaok014cJXMN8f1",
+      "onSave": false
+     }
+    ]
    },
    "MjsiHNzAHZ8qqEhE": {
     "_id": "MjsiHNzAHZ8qqEhE",
     "type": "utility",
-    "name": "Use (limited, no CE)",
+    "name": "Brutal / Elemental / Pure (passive options)",
     "activation": {
      "type": "special",
      "condition": "",
@@ -191,9 +193,67 @@
    },
    "technique": "Dark Claw",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Brutal is a toggle effect on the item; Elemental/Pure: change the claw damage type or tick 'ignore resistance' (Midi: DamageReduction bypass) by hand. Healing from Absorbing: enter the necrotic total.",
+   "automation": "automated"
   }
  },
  "folder": "TJotg7cBr19cOkoJ",
- "_key": "!items!QHFUIT3ubv4jRSHX"
+ "_key": "!items!QHFUIT3ubv4jRSHX",
+ "effects": [
+  {
+   "_id": "Tgaok014cJXMN8f1",
+   "name": "Bleeding (Barbed Claws)",
+   "img": "modules/jjk5e/icons/techniques/dark-claw.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [
+    "bleeding"
+   ],
+   "description": "<p>1d6 slashing at the start of its turn; ends when staunched (action) or healed.</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "value": "turn=start, damageRoll=1d6, damageType=slashing, label=Bleeding",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 600
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Dark Claw"
+    }
+   },
+   "_key": "!items.effects!QHFUIT3ubv4jRSHX.Tgaok014cJXMN8f1"
+  },
+  {
+   "_id": "GOZMWvD7VqnYOgCj",
+   "name": "Brutal Claws",
+   "img": "modules/jjk5e/icons/techniques/dark-claw.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": true,
+   "statuses": [],
+   "description": "<p>Extra damage die on claw hits (toggle when chosen).</p>",
+   "changes": [
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ 1d6",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": "Dark Claw"
+    }
+   },
+   "_key": "!items.effects!QHFUIT3ubv4jRSHX.GOZMWvD7VqnYOgCj"
+  }
+ ]
 }

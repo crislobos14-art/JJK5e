@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.44.0 — Técnica por técnica: Dark Claw y Deadly Sentencing
+- **Dark Claw**: formar garra (1 hora) y ataque de garra con EM y dado por nivel (1d6→2d8); Absorbing y Barbed Claws al impactar (sangrado OverTime 1d6/2d6); Brutal como efecto activable; Zenith (3–10 CE); dominio con golpe crítico en iniciativa 20 y garras que siempre impactan; Soft Beats Hard con parada (+2/+3/+4) y repetición por 2 CE.
+- **Deadly Sentencing**: tres formas del mazo como ataques; dominio con tirada de Evidencia, Persuasión enfrentada, Confiscación, Espada del Verdugo y bloqueo de ataques; mazo agrandado y golpe de área; Better Evidence (mejor de 2/3); usos gratis de Unstopping Justice; Proven Innocence 20 CE.
+- Automatizados a mano: 83/360. Sin probar en Foundry real.
+
 ## 1.43.0 — Técnica por técnica: Cursed Spirit Manipulation y Cursed Transmutation
 - **Cursed Spirit Manipulation**: absorción a 120 pies, sacrificio de espíritu como reacción al recibir daño (Xd20), invocación como acción adicional, Uzumaki en cono 30 pies con +1d12 por espíritu extra, Womb Profusion sin coste de absorción, Annihilation con estado muerto.
 - **Cursed Transmutation**: transmutación básica en cubos con CE escalable; Transmute Explosion al impactar (2d6→6d6); Harden/Shell/Slick como reacciones; Areal Transmute (resbaladizo, explosivo 4d6→8d6, púas); Railgun con empuje y derribo automático al impactar, impacto y línea de 4d12; dominio con resbaladizo global; Cursed Immutation con PG temporales.

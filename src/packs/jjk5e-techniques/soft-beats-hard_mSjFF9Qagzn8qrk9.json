@@ -38,39 +38,123 @@
      }
     },
     "range": {
-     "units": "self"
+     "units": "self",
+     "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
     "duration": {
      "value": "2",
      "units": "hour",
      "concentration": false
-    }
+    },
+    "effects": [
+     {
+      "_id": "Tl1gw1MRQT1ScfzS",
+      "onSave": false
+     }
+    ]
    },
    "Tmh3pCHViOtoPrbe": {
     "_id": "Tmh3pCHViOtoPrbe",
-    "type": "utility",
-    "name": "Reaction (2 CE)",
-    "sort": 100000,
+    "type": "attack",
+    "name": "Soft parry (attack vs. damage roll)",
+    "sort": 0,
+    "img": null,
     "activation": {
      "type": "reaction",
      "value": 1,
-     "condition": ""
+     "condition": "If your roll beats the damage roll, the damage is nullified. 2 CE: repeat without a reaction.",
+     "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
-     }
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
-     "units": "self"
+     "units": "self",
+     "override": true
     },
-    "target": {},
-    "duration": {
-     "units": "inst"
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "attack": {
+     "ability": "",
+     "bonus": "(2 * floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11) + floor(min(@details.level, 18) / 18))",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "melee",
+      "classification": "unarmed"
+     }
     },
     "useConditionText": "reaction === \"isAttacked\""
+   },
+   "z62c11PUbFwLynsM": {
+    "_id": "z62c11PUbFwLynsM",
+    "type": "attack",
+    "name": "Soft parry again (2 CE, no reaction)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "attack": {
+     "ability": "",
+     "bonus": "(2 * floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11) + floor(min(@details.level, 18) / 18))",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "melee",
+      "classification": "unarmed"
+     }
+    }
    }
   }
  },
@@ -78,7 +162,8 @@
   "jjk5e": {
    "ceCosts": {
     "Jwx6Nh8ta3KxG7Bm": 2,
-    "Tmh3pCHViOtoPrbe": 2
+    "Tmh3pCHViOtoPrbe": 0,
+    "z62c11PUbFwLynsM": 2
    },
    "technique": "Dark Claw",
    "reversal": true,
@@ -94,10 +179,33 @@
       "Dark Claw"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!mSjFF9Qagzn8qrk9"
+ "_key": "!items!mSjFF9Qagzn8qrk9",
+ "effects": [
+  {
+   "_id": "Tl1gw1MRQT1ScfzS",
+   "name": "Soft Beats Hard",
+   "img": "modules/jjk5e/icons/techniques/dark-claw.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>2 hours: no claws; special parry reaction.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 1200
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Dark Claw"
+    }
+   },
+   "_key": "!items.effects!mSjFF9Qagzn8qrk9.Tl1gw1MRQT1ScfzS"
+  }
+ ]
 }

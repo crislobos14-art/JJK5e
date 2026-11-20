@@ -58,6 +58,105 @@
      "concentration": false,
      "override": true
     }
+   },
+   "vG8W0iNZtUohwunZ": {
+    "_id": "vG8W0iNZtUohwunZ",
+    "type": "damage",
+    "name": "Initiative 20: guaranteed critical claw",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "damage": {
+     "critical": {
+      "allow": true
+     },
+     "parts": [
+      {
+       "number": 4,
+       "denomination": 8,
+       "bonus": "max(@abilities.wis.mod, @abilities.cha.mod)",
+       "types": [
+        "slashing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
+   },
+   "N42wdiB4eKcOhSah": {
+    "_id": "N42wdiB4eKcOhSah",
+    "type": "utility",
+    "name": "Domain: claws always hit",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "x41DcOpRDDMkcFfH",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -116,9 +215,46 @@
     "qLSQaqj4fMYoIuru": 20
    },
    "domainActivity": "qLSQaqj4fMYoIuru",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Initiative-20 strike: doubled claw dice already in the formula (2d8 → 4d8 at 18th) — no Black Flash.",
+   "automation": "automated"
   }
  },
  "folder": "TJotg7cBr19cOkoJ",
- "_key": "!items!rccn9Z3zTunjKZM3"
+ "_key": "!items!rccn9Z3zTunjKZM3",
+ "effects": [
+  {
+   "_id": "x41DcOpRDDMkcFfH",
+   "name": "Five Clawed Dragon",
+   "img": "modules/jjk5e/icons/techniques/dark-claw-domain.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Claw attacks auto-hit in the domain (Midi max attack roll as proxy).</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.max.attack.mwak",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.advantage.attack.mwak",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Dark Claw"
+    }
+   },
+   "_key": "!items.effects!rccn9Z3zTunjKZM3.x41DcOpRDDMkcFfH"
+  }
+ ]
 }
