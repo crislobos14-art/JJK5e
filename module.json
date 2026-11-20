@@ -2,7 +2,7 @@
   "id": "jjk5e",
   "title": "Jujutsu Kaisen 5e (V.6) — Compendium",
   "description": "Unofficial, non-commercial fan conversion of the Jujutsu Kaisen 5e homebrew (V.6) by I watch Anime for the D&D 5e system: 7 classes with level advancement, 79 Innate Techniques, races, feats, backgrounds, mindsets, equipment, cursed tools and the full rules journal. Includes Cursed Energy pool automation. Also includes feats and options from Creeps and Curses V.3.1 (Special Grade Boons, Special Traits, Heavenly Pacts, new techniques). Licensed CC BY-NC-SA 4.0.",
-  "version": "1.12.0",
+  "version": "1.13.0",
   "authors": [
     {
       "name": "I watch Anime",
@@ -51,6 +51,26 @@
         "id": "midi-qol",
         "type": "module",
         "reason": "Optional combat automation: JJK domain sure-hit (auto-hit, auto-failed saves) and animations use Midi-QOL workflows when it is active."
+      },
+      {
+        "id": "visual-active-effects",
+        "type": "module",
+        "reason": "Shows CE forms, vows, domain and Technique Burnout on screen with their descriptions."
+      },
+      {
+        "id": "barbrawl",
+        "type": "module",
+        "reason": "Extra token bars: keep HP and Cursed Energy visible at the same time."
+      },
+      {
+        "id": "token-action-hud-dnd5e",
+        "type": "module",
+        "reason": "Quick action bar for techniques, CE abilities and JJK macros without opening the sheet."
+      },
+      {
+        "id": "fxmaster",
+        "type": "module",
+        "reason": "Scene particles and filters for domain interiors and curse ambience."
       }
     ]
   },
