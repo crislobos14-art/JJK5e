@@ -343,6 +343,14 @@
       "fxDomains": {
         "Name": "FXMaster domain tint",
         "Hint": "With FXMaster: tint the scene purple while a domain expansion is open."
+      },
+      "strictPrereqs": {
+        "Name": "Enforce prerequisite checks for players",
+        "Hint": "When enabled, a player cannot add a feat that fails the JJK requirement checks. GMs can still grant exceptions."
+      },
+      "playerGMRequests": {
+        "Name": "Allow player requests for GM operations (manual approval)",
+        "Hint": "Disabled by default. If enabled, requests still require active-GM confirmation; client-reported identity is not authenticated."
       }
     },
     "Feats": {
@@ -487,10 +495,10 @@
     "Career": {
       "Title": "Sorcerer Career",
       "Grade": {
-        "4": "Grade 4",
-        "3": "Grade 3",
-        "2": "Grade 2",
         "1": "Grade 1",
+        "2": "Grade 2",
+        "3": "Grade 3",
+        "4": "Grade 4",
         "special": "Special Grade"
       },
       "Tab": {

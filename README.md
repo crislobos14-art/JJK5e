@@ -301,3 +301,17 @@ CC BY-NC-SA 4.0 — see `LICENSE.txt`. Non-commercial use only.
 ### Recommended modules (Foundry 14)
 Sequencer + JB2A (animations), Dice So Nice, Visual Active Effects, Bar Brawl, Token Action HUD D&D 5e,
 Tidy 5e Sheets, FXMaster, Midi-QOL + DAE (optional automation), Automated Animations (optional).
+
+## v1.23.0 audit-hardening update
+
+This release corrects several critical V.6 / Creeps and Curses mismatches but **does not provide comprehensive automation of every feat, technique, domain or special trait**. See `CHANGELOG.md` for exact fixes and outstanding items.
+
+**New world settings:** `strictPrereqs` enforces feat requirements for non-GM players. `playerGMRequests` is **disabled by default** because remote socket requests cannot independently authenticate the sender. When manually enabled, each supported request still requires explicit GM approval; the alleged username supplied by a client is **not verified**. For security, prefer having the GM perform privileged operations directly.
+
+**Fractional CE:** Six Eyes discounts are tracked through a `flags.jjk5e.fractionalSpent` value on the Cursed Energy pool item, because D&D5e 6.1 uses are integer-only. Do not manually edit the item-use counter without checking the fractional flag.
+
+**Compendium corrections:** Overgeneration, Cursed Lover (Dormant), and Partial Manifestation are synchronized in both source packs and JSON fallback. Other Creeps and Curses mechanics require additional implementation.
+
+**Testing:** `node --test tests/*.test.mjs`. GitHub Actions validates source JSON and rebuilds compendiums. These tests do **not** replace live tests in Foundry V14 with two player clients and optional integrations.
+
+**Important outstanding work:** true three-plus-domain clashes, all Maximum/Reduced Output modifiers, exterior damage and displacement when opening domains, all custom technique behaviors, and additional supplement-specific automatic restrictions remain incomplete. For unresolved mechanics use GM adjudication rather than assuming the automation is correct.

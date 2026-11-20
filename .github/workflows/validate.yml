@@ -1,0 +1,44 @@
+name: Validate JJK V6
+on:
+  push:
+    branches: [main, "fix/**"]
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  static-and-rules:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: JavaScript syntax validation
+        run: |
+          node --input-type=module --check < scripts/jjk5e.js
+          node --check scripts/jjk5e-rules.mjs
+          node --check tools/build-packs.mjs
+      - name: Pure rules regression tests
+        run: node --test tests/*.test.mjs
+      - name: Validate source JSON and compendium identity
+        run: |
+          node --input-type=module -e '
+            import fs from "node:fs";
+            const manifest=JSON.parse(fs.readFileSync("module.json"));
+            const declared=new Set(manifest.packs.map(p=>p.name));
+            if(declared.size!==manifest.packs.length)throw Error("Duplicate packs");
+            for(const name of declared){
+              const path="src/packs/"+name;
+              const files=fs.readdirSync(path).filter(x=>x.endsWith(".json"));
+              for(const file of files)JSON.parse(fs.readFileSync(path+"/"+file));
+            }
+            for(const name of fs.readdirSync("data").filter(x=>x.endsWith(".json")))JSON.parse(fs.readFileSync("data/"+name));
+            for(const name of fs.readdirSync("lang").filter(x=>x.endsWith(".json")))JSON.parse(fs.readFileSync("lang/"+name));
+            console.log("All JSON parsed");
+          '
+      - name: Build Foundry compendium packs
+        run: |
+          npm install --no-save @foundryvtt/foundryvtt-cli
+          node tools/build-packs.mjs
+          test -d packs/jjk5e-feats

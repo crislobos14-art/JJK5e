@@ -8,8 +8,10 @@
  *   Technique Burnout), Maximum / Reduced Output, Soul Awareness, Limb Damage, summons.
  * - JJK panel on character sheets, Spanish / English UI, effect expiry (unless Times Up is active).
  */
+import { activityCECost, ceTransaction, blackFlashCheck, clashRoundsFromRefinement, vowBlocksUsage } from "./jjk5e-rules.mjs";
+
 const MODULE_ID = "jjk5e";
-const DATA_VERSION = "1.22.2";
+const DATA_VERSION = "1.23.0";
 const FOLDER_NAME = "JJK 5e V.6";
 const ICONS = `modules/${MODULE_ID}/icons`;
 
@@ -338,9 +340,12 @@ function findPool(actor) {
 }
 
 function poolValue(pool) {
+  if (!pool) return 0;
   const uses = pool.system.uses ?? {};
-  if (Number.isFinite(uses.value)) return uses.value;
-  return (Number(uses.max) || 0) - (Number(uses.spent) || 0);
+  // D&D5e 6.1 UsesField.spent is INTEGER ONLY. Store sub-unit spending in
+  // jjk5e flags, otherwise Six Eyes 0.1-CE costs silently disappear.
+  const frac = Number(pool.flags?.jjk5e?.fractionalSpent) || 0;
+  return Math.max(0, Math.round((poolMax(pool) - (Number(uses.spent) || 0) - frac) * 1000) / 1000);
 }
 
 function poolMax(pool) {
@@ -361,24 +366,57 @@ function activityCost(activity) {
   return Number(costs?.[activity.id] ?? 0);
 }
 
-async function spendCE(actor, amount, label = "") {
+/** Serializes CE spending within this client to prevent double charges from overlapping hooks. */
+const CE_QUEUES = new Map();
+function ceDiscountFactor(actor) {
+  if (!actor) return 1;
+  if (actor.items.some((i) => baseName(i) === "Six Eyes (Awakened)")) return 0.1;
+  return actor.getFlag(MODULE_ID, "sixEyesNext") ? 0.1 : 1;
+}
+function totalActivityCECost(actor, activity, usageConfig = {}) {
+  const base = activityCost(activity);
+  const step = Number(activity?.item?.flags?.jjk5e?.ceSteps?.[activity.id] ?? 0);
+  const scaling = Number(usageConfig?.scaling) || 0;
+  return activityCECost({ base, step, scaling, factor: ceDiscountFactor(actor) });
+}
+async function doSpendCE(actor, amount, label = "") {
+  if (!actor?.isOwner) return false;
   const pool = findPool(actor);
   if (!pool) {
     ui.notifications.warn(t("Notify.NoPool", { name: actor?.name ?? "?" }));
     return false;
   }
-  const value = poolValue(pool);
-  const spent = Number(pool.system.uses?.spent) || 0;
-  const max = poolMax(pool);
-  const newSpent = clamp(spent + amount, 0, max);
-  await pool.update({ "system.uses.spent": newSpent });
-  const remaining = max - newSpent;
+  const discount = amount > 0 && ceDiscountFactor(actor) < 1;
+  const charge = discount ? activityCECost({ base: amount, factor: 0.1 }) : amount;
+  if (charge > 0 && vowBlocksUsage(actor.effects, { costsCE: true })) {
+    ui.notifications.warn("JJK 5e: A binding-vow penalty blocks Cursed Energy.");
+    return false;
+  }
+  const previous = poolValue(pool), maximum = poolMax(pool);
+  const result = ceTransaction(previous, maximum, charge);
+  if (!result) {
+    ui.notifications.warn(t("Notify.NotEnoughCE", { value: previous, cost: charge }));
+    return false;
+  }
+  const whole = Math.floor(result.spent + 1e-6);
+  const fractional = Math.max(0, Math.round((result.spent - whole) * 1000) / 1000);
+  await pool.update({ "system.uses.spent": whole,
+    "flags.jjk5e.fractionalSpent": fractional }, { jjk5eCE: true });
+  if (discount && actor.getFlag(MODULE_ID, "sixEyesNext")) await actor.unsetFlag(MODULE_ID, "sixEyesNext");
   if (setting("ceChat")) {
-    const verb = amount >= 0 ? `−${amount}` : `+${-amount}`;
+    const verb = charge >= 0 ? `−${charge}` : `+${-charge}`;
     await chat(actor, `<p><strong>${esc(label || t("CE.Name"))}</strong>: ${verb} CE `
-      + `<span style="opacity:.8">(${t("CE.Remaining", { value: remaining, max })}${value < amount ? `, ${t("CE.Overspent")}` : ""})</span></p>`);
+      + `<span style="opacity:.8">(${t("CE.Remaining", { value: result.remaining, max: maximum })})</span></p>`);
   }
   return true;
+}
+async function spendCE(actor, amount, label = "") {
+  const key = actor?.uuid ?? "unknown";
+  const previous = CE_QUEUES.get(key) ?? Promise.resolve();
+  const next = previous.catch(() => {}).then(() => doSpendCE(actor, amount, label));
+  CE_QUEUES.set(key, next);
+  try { return await next; }
+  finally { if (CE_QUEUES.get(key) === next) CE_QUEUES.delete(key); }
 }
 
 /* ---- token bar / actor resource sync ---- */
@@ -424,7 +462,8 @@ async function onActorUpdate(actor, changes, options, userId) {
   const pool = findPool(actor);
   if (!pool) return;
   const max = poolMax(pool);
-  await pool.update({ "system.uses.spent": clamp(max - Number(v), 0, max) }, { jjk5eSync: true });
+  await pool.update({ "system.uses.spent": Math.floor(clamp(max - Number(v), 0, max)),
+    "flags.jjk5e.fractionalSpent": Math.max(0, (max - Number(v)) % 1) }, { jjk5eSync: true });
 }
 
 /* -------------------------------------------- */
@@ -509,7 +548,7 @@ const RO_ROWS = [
 ];
 
 function registerActivityHooks() {
-  Hooks.on("dnd5e.preUseActivity", (activity) => {
+  Hooks.on("dnd5e.preUseActivity", (activity, usageConfig) => {
     const actor = activity.actor ?? activity.item?.actor;
     if (activity.item?.flags?.jjk5e?.mindset && actor && !actor.system.attributes?.inspiration) {
       ui.notifications.warn(t("Notify.NoInspiration", { name: actor.name }));
@@ -519,13 +558,22 @@ function registerActivityHooks() {
       ui.notifications.warn(t("Notify.Burnout"));
       return false;
     }
-    const cost = activityCost(activity);
+    const cost = totalActivityCECost(actor, activity, usageConfig);
+    if (vowBlocksUsage(actor?.effects, { costsCE: cost > 0, innateTechnique: !!activity.item?.flags?.jjk5e?.technique })) {
+      ui.notifications.warn("JJK 5e: A broken binding vow prohibits this activity.");
+      return false;
+    }
+    if (activity.item?.flags?.jjk5e?.domain && domainOpen(actor)) {
+      ui.notifications.warn("JJK 5e: A domain is already active.");
+      return false;
+    }
     const ro = Number(actor?.getFlag(MODULE_ID, "reducedOutput")) || 0;
     if (cost && RO_MAX[ro] && cost > RO_MAX[ro]) {
       ui.notifications.warn(t("Notify.ROMax", { cost, max: RO_MAX[ro], level: ro }));
       return false;
     }
     if (!setting("autoSpendCE") || !cost) return;
+    if (!Number.isFinite(cost)) return false;
     const pool = findPool(actor);
     if (!pool) {
       ui.notifications.warn(t("Notify.NoPoolNotSpent", { name: actor?.name ?? "?" }));
@@ -537,9 +585,26 @@ function registerActivityHooks() {
     }
   });
 
+  // D&D5e 6.1: this gate runs after the user selected CE scaling, before item consumption.
+  Hooks.on("dnd5e.preActivityConsumption", (activity, usageConfig) => {
+    if (!setting("autoSpendCE")) return;
+    const actor = activity.actor ?? activity.item?.actor;
+    const cost = totalActivityCECost(actor, activity, usageConfig);
+    if (!Number.isFinite(cost)) return false;
+    if (!cost) return;
+    const pool = findPool(actor);
+    if (!pool || poolValue(pool) < cost) {
+      ui.notifications.warn(t("Notify.NotEnoughCE", { value: pool ? poolValue(pool) : 0, cost }));
+      return false;
+    }
+  });
   Hooks.on("dnd5e.postUseActivity", async (activity, usageConfig) => {
     const actor = activity.actor ?? activity.item?.actor;
     const item = activity.item;
+    if (actor && /^Six Eyes \\((Dormant|Stirring)\\)$/.test(baseName(item)) &&
+        /Perfect CE Manipulation/i.test(activity.name ?? "")) {
+      await actor.setFlag(MODULE_ID, "sixEyesNext", true);
+    }
     await remindModifiers(actor, item);
     if (item?.flags?.jjk5e?.openTechnique) await chooseTechnique(actor);
     const grp = item?.flags?.jjk5e?.activatesGroup?.[activity.id];
@@ -555,12 +620,9 @@ function registerActivityHooks() {
         ? t("Domain.SureHitAttack") : t("Domain.SureHitSave")}</p>`);
     }
     if (!setting("autoSpendCE")) return;
-    let cost = activityCost(activity);
-    if (!cost) return;
-    const step = Number(item?.flags?.jjk5e?.ceSteps?.[activity.id] ?? 0);
-    const extra = Number(usageConfig?.scaling) || 0;
-    if (step && extra > 0) cost += step * extra;
-    if (!findPool(actor)) return;
+    const cost = activityCost(activity)
+      + Number(item?.flags?.jjk5e?.ceSteps?.[activity.id] ?? 0) * (Number(usageConfig?.scaling) || 0);
+    if (!cost || !findPool(actor)) return;
     await spendCE(actor, cost, `${item.name}${activity.name ? ` — ${activity.name}` : ""}`);
   });
 }
@@ -657,7 +719,10 @@ function onPreCreateItem(item, data, options, userId) {
   const actor = item.parent;
   if (actor?.documentName !== "Actor" || options?.jjk5eSkipPrereq) return;
   const missing = missingPrereqs(actor, item);
-  if (missing.length) ui.notifications.warn(t("Feats.Missing", { name: item.name, list: missing.join("; ") }), { permanent: false });
+  if (missing.length) {
+    ui.notifications.warn(t("Feats.Missing", { name: item.name, list: missing.join("; ") }), { permanent: false });
+    if (setting("strictPrereqs") && !game.user.isGM) return false;
+  }
 }
 
 /* -------------------------------------------- */
@@ -758,7 +823,15 @@ async function chooseTechnique(actor) {
     + `<select name="technique" style="width:100%">${options}</select>`
     + (current ? `<p><em>${t("Technique.Current", { name: esc(current) })}</em></p>` : "");
   const choice = await promptField(t("Technique.Title"), content, "technique");
-  if (!choice) return;
+  if (!choice || choice === current) return;
+  if (current) {
+    const old = actor.items.filter((item) => item.flags?.jjk5e?.technique === current);
+    const approved = await confirmDialog(t("Technique.Title"),
+      `<p>Change ${esc(current)} to ${esc(choice)}?</p>
+       <p>This will remove ${old.length} old innate-technique items from this character. Back up the actor first.</p>`);
+    if (!approved) return;
+    if (old.length) await actor.deleteEmbeddedDocuments("Item", old.map((i) => i.id));
+  }
   await actor.setFlag(MODULE_ID, "technique", choice);
   if (!actor.getFlag(MODULE_ID, "ceAbility")) await chooseCEAbility(actor);
   const added = await syncTechnique(actor);
@@ -774,14 +847,41 @@ async function promptCE(mode = "spend", actor) {
   return mode === "spend" ? spendCE(actor, n, t("CE.Spent")) : spendCE(actor, -n, t("CE.Regained"));
 }
 
+/** Exchange actual unused class Hit Dice for CE (V.6: 1 HD => 1 CE, half total HD cap). */
 async function shortRestCE(actor) {
   actor = requireActor(actor);
-  if (!actor) return;
+  if (!actor || !actor.isOwner) return;
+  const pool = findPool(actor);
+  if (!pool) return ui.notifications.warn(t("Notify.NoPool", { name: actor.name }));
+  if (vowBlocksUsage(actor.effects, { costsCE: true }))
+    return ui.notifications.warn("JJK 5e: a vow penalty prohibits CE recovery.");
   const classes = actor.items.filter((i) => i.type === "class");
-  const maxHD = classes.reduce((tot, c) => tot + (Number(c.system.levels) || 0), 0);
-  const cap = Math.floor(maxHD / 2);
+  const total = classes.reduce((n, c) => n + Math.max(0, Number(c.system.levels) || 0), 0);
+  const available = classes.reduce((n, c) =>
+    n + Math.max(0, (Number(c.system.levels) || 0) - (Number(c.system.hd?.spent) || 0)), 0);
+  const missingCE = Math.max(0, poolMax(pool) - poolValue(pool));
+  const cap = Math.min(Math.floor(total / 2), available, Math.floor(missingCE));
+  if (cap < 1) {
+    ui.notifications.warn("JJK 5e: No usable Hit Dice or missing Cursed Energy.");
+    return;
+  }
   const n = Math.min(cap, await promptNumber(t("CE.ShortRestTitle"), t("CE.ShortRestPrompt", { cap })));
-  if (n > 0) await spendCE(actor, -n, t("CE.ShortRestLabel", { n }));
+  if (!Number.isSafeInteger(n) || n < 1) return;
+  const ok = await confirmDialog(t("CE.ShortRestTitle"),
+    `<p>Consume ${n} class Hit Dice to restore ${n} Cursed Energy?</p>`);
+  if (!ok) return;
+  let left = n;
+  for (const cls of classes) {
+    if (!left) break;
+    const spent = Number(cls.system.hd?.spent) || 0;
+    const usable = Math.max(0, (Number(cls.system.levels) || 0) - spent);
+    const take = Math.min(usable, left);
+    if (!take) continue;
+    await cls.update({ "system.hd.spent": spent + take });
+    left -= take;
+  }
+  if (left) return ui.notifications.error("JJK 5e: Hit Dice allocation incomplete; GM review required.");
+  await spendCE(actor, -n, t("CE.ShortRestLabel", { n }));
 }
 
 async function negativeEmotion(actor) {
@@ -961,7 +1061,8 @@ async function onAttackRoll(rolls, subject) {
   const bonusRange = actor.items.reduce((tot, i) => tot + (Number(i.flags?.jjk5e?.blackFlashRange) || 0), 0);
   const target = Math.max(2, 20 - stacks - bonusRange);
   const check = await new Roll("1d20").evaluate();
-  const success = check.total >= target;
+  const face = check.dice?.[0]?.results?.find((r) => r.active !== false)?.result ?? check.total;
+  const success = blackFlashCheck(face, stacks + bonusRange);
   const Chat = docClass("ChatMessage");
   await check.toMessage({
     speaker: Chat.getSpeaker({ actor }),
@@ -969,8 +1070,12 @@ async function onAttackRoll(rolls, subject) {
       + (success ? `<h3 style="color:#b00;text-align:center">⚡ BLACK FLASH ⚡</h3><p>${t("BlackFlash.Success")}</p>` : "")
   });
   if (!success) return;
-  if (setting("blackFlashDamage")) await actor.setFlag(MODULE_ID, "pendingBlackFlash", true);
+  if (setting("blackFlashDamage")) await actor.setFlag(MODULE_ID, "pendingBlackFlash", { activityUuid: activity?.uuid ?? null });
   await addBreakthrough(actor, 1, "Black Flash");
+  // V.6 The Zone also recovers the Reverse Cursed Technique healing pool.
+  for (const item of actor.items.filter((i) => /Reverse Cursed Technique \(Healing Pool\)/i.test(baseName(i)))) {
+    if (Number(item.system?.uses?.spent) > 0) await item.update({ "system.uses.spent": 0 });
+  }
   const next = stacks + 1;
   await setKindEffect(actor, "zone", {
     name: `${t("Zone.Name")}${next > 1 ? ` ×${next}` : ""}`, img: `${ICONS}/zone.svg`,
@@ -1028,7 +1133,9 @@ function onPreRollDamage(config) {
   const actor = config?.subject?.actor ?? config?.subject?.item?.actor;
   if (actor && config?.subject?.item?.flags?.jjk5e?.rawCE) rawCEDamageBonus(actor).forEach((p) => addPart(config, p));
   if (!setting("blackFlashDamage")) return;
-  if (!actor?.getFlag?.(MODULE_ID, "pendingBlackFlash")) return;
+  const pending = actor?.getFlag?.(MODULE_ID, "pendingBlackFlash");
+  if (!pending) return;
+  if (!pending.activityUuid || pending.activityUuid !== config?.subject?.uuid) return;
   const critical = config.isCritical === true || config.midiOptions?.isCritical === true
     || (config.rolls ?? []).some((r) => r.options?.isCritical === true);
   if (!critical) return;
@@ -1109,6 +1216,10 @@ async function maximumOutput(actor) {
   actor = requireActor(actor);
   if (!actor) return;
   const ro = Number(actor.getFlag(MODULE_ID, "reducedOutput")) || 0;
+  if (Number(actor.system.abilities?.[ceAbility(actor)]?.value) < 20) {
+    ui.notifications.warn("Maximum Output requires a Cursed Energy score of 20 (JJK V.6).");
+    return;
+  }
   const base = await promptNumber(t("Output.MaxTitle"), t("Output.MaxPrompt"), 5);
   if (!base) return;
   if (base < 3) return ui.notifications.warn(t("Output.TooLow"));
@@ -1127,7 +1238,7 @@ async function maximumOutput(actor) {
   }
   if (key) await actor.setFlag(MODULE_ID, "maxOutputRound", key);
   const extra = Math.ceil(base / 2) + 2 * ro;
-  await spendCE(actor, extra, t("Output.Max"));
+  if (!(await spendCE(actor, extra, t("Output.Max")))) return;
   await chat(actor, `<p><strong>${t("Output.Max")}</strong> (+${extra} CE)</p>${t("Output.Benefits")}`);
 }
 
@@ -1269,7 +1380,9 @@ function viaGM(action, payload) {
   if (game.user.isGM) return GM_EXTRA[action] ? GM_EXTRA[action](payload) : (action === "summon" ? gmSummon(payload) : gmDismiss(payload));
   const gm = game.users.activeGM ?? game.users.find((u) => u.isGM && u.active);
   if (!gm) return ui.notifications.warn(t("Notify.NoGM"));
-  game.socket.emit(`module.${MODULE_ID}`, { action, payload, gm: gm.id });
+  // Remote GM requests are disabled unless the world GM opts in.
+  if (!setting("playerGMRequests")) return ui.notifications.warn("JJK 5e: Ask the GM to perform this action.");
+  game.socket.emit(`module.${MODULE_ID}`, { action, payload, gm: gm.id, requestedBy: game.user.id });
 }
 
 async function summon(actor, name, count = 1) {
@@ -1308,6 +1421,20 @@ async function expireEffects() {
       const rem = e.duration?.remaining;
       if (rem !== null && rem !== undefined && rem <= 0) await e.update({ disabled: true });
     }
+  }
+}
+
+/** Remove only the exhaustion levels this module previously added for mutual vows. */
+async function expireVowExhaustion() {
+  if (!isActiveGM()) return;
+  const now = Number(game.time?.worldTime) || 0;
+  for (const actor of game.actors?.contents ?? []) {
+    const penalty = actor.getFlag(MODULE_ID, "mutualVowExhaustion");
+    if (!penalty || now < (Number(penalty.expiry) || Infinity)) continue;
+    const amount = Math.max(0, Number(penalty.amount) || 0);
+    const exhaustion = Number(actor.system.attributes?.exhaustion) || 0;
+    await actor.update({ "system.attributes.exhaustion": Math.max(0, exhaustion - amount) });
+    await actor.unsetFlag(MODULE_ID, "mutualVowExhaustion");
   }
 }
 
@@ -1532,6 +1659,7 @@ Hooks.once("init", () => {
     onChange: () => { if (game.user?.isGM) promptImport(false); }
   });
   reg("autoSpendCE", Boolean, true);
+  reg("playerGMRequests", Boolean, false);
   reg("ceChat", Boolean, true);
   reg("ceResource", String, "tertiary", {
     choices: { none: "JJK5E.Settings.ceResource.None", primary: "JJK5E.Settings.ceResource.Primary",
@@ -1546,6 +1674,7 @@ Hooks.once("init", () => {
   reg("autoExpire", Boolean, true);
   reg("modifierReminders", Boolean, true);
   reg("checkPrereqs", Boolean, true);
+  reg("strictPrereqs", Boolean, true);
   reg("headerButton", Boolean, true, { scope: "client" });
   game.settings.registerMenu(MODULE_ID, "importMenu", {
     name: "JJK5E.Settings.importMenu.Name", label: "JJK5E.Settings.importMenu.Label",
@@ -1610,20 +1739,39 @@ Hooks.once("ready", async () => {
 
   Hooks.on("updateCombat", () => expireEffects());
   Hooks.on("dnd5e.restCompleted", async (actor, result) => {
-    if (!actor?.isOwner || result?.longRest) return;
+    if (!actor?.isOwner) return;
+    if (result?.longRest) {
+      const pool = findPool(actor);
+      if (pool && Number(pool.flags?.jjk5e?.fractionalSpent)) await pool.setFlag(MODULE_ID, "fractionalSpent", 0);
+      return;
+    }
     const n = actor.items.reduce((tot, i) => tot + (Number(i.flags?.jjk5e?.srRegainCE) || 0), 0);
     if (n > 0 && findPool(actor)) await spendCE(actor, -n, t("CE.ShortRestRestore", { n }));
   });
-  Hooks.on("updateWorldTime", () => expireEffects());
+  Hooks.on("updateWorldTime", () => { expireEffects(); expireVowExhaustion(); });
 
   Hooks.on("renderActorSheet", (app, html) => addHeaderButton(app, html));
   Hooks.on("renderActorSheetV2", (app, element) => addHeaderButton(app, element));
 
-  game.socket.on(`module.${MODULE_ID}`, (msg) => {
-    if (!game.user.isGM || (msg.gm && msg.gm !== game.user.id)) return;
-    if (msg.action === "summon") gmSummon(msg.payload);
-    if (msg.action === "dismiss") gmDismiss(msg.payload);
-    if (GM_EXTRA[msg.action]) GM_EXTRA[msg.action](msg.payload);
+  game.socket.on(`module.${MODULE_ID}`, async (msg) => {
+    if (!game.user.isGM || !isActiveGM() || (msg?.gm && msg.gm !== game.user.id)) return;
+    if (!setting("playerGMRequests") || !msg?.requestedBy) return;
+    const requester = game.users.get(msg.requestedBy);
+    const action = String(msg.action ?? "");
+    const allowed = new Set(["summon", "dismiss", "domainZone", "domainZoneResize", "domainZoneDelete",
+      "domainUpdate", "customizeShikigami"]);
+    if (!requester?.active || requester.isGM || !allowed.has(action)) return;
+    const actor = msg.payload?.actorUuid ? await fromUuid(msg.payload.actorUuid).catch(() => null) : null;
+    // GM approval is explicit: client-provided user IDs are NOT a trusted identity.
+    const confirmed = await confirmDialog("JJK 5e: privileged request",
+      `<p>Request allegedly from <b>${esc(requester.name)}</b>: <b>${esc(action)}</b> for ${esc(actor?.name ?? "unresolved actor")}.</p>
+       <p>Client identifiers are untrusted. Verify with the player before approving.</p>`);
+    if (!confirmed) return;
+    try {
+      if (action === "summon") await gmSummon(msg.payload);
+      else if (action === "dismiss") await gmDismiss(msg.payload);
+      else if (GM_EXTRA[action]) await GM_EXTRA[action](msg.payload);
+    } catch (err) { console.error(`${MODULE_ID} | GM request`, err); }
   });
 
   if (game.user.character) syncResource(game.user.character);
@@ -1826,6 +1974,11 @@ function applySureHit(actor, config) {
   const item = config?.subject?.item;
   if (!item?.flags?.jjk5e?.technique) return;
   if (sureHitBlocked(actor)) return;
+  const targets = [...(game.user?.targets ?? [])];
+  const state = getDomain(actor);
+  // Vanilla attack-roll hooks are not target-specific. Do not grant an unconditional
+  // sure hit when the targeted set contains mixed or unknown locations.
+  if (!state || targets.length !== 1 || !insideDomain(state, targets[0])) return;
   const roll = config?.rolls?.[0];
   if (!roll) return;
   roll.options ??= {};
@@ -2091,19 +2244,27 @@ function midiActive() {
 function registerMidiHooks() {
   if (!midiActive()) return;
   // Domain sure-hit: every target of an innate-technique attack is hit.
-  const sureHit = (workflow) => !!(workflow && setting("domainSureHit") && domainOpen(workflow.actor)
-    && workflow.item?.flags?.jjk5e?.technique && !sureHitBlocked(workflow.actor));
+  const sureHit = (workflow, target) => {
+    if (!(workflow && setting("domainSureHit") && domainOpen(workflow.actor)
+      && workflow.item?.flags?.jjk5e?.technique && !sureHitBlocked(workflow.actor))) return false;
+    const state = getDomain(workflow.actor);
+    return !!state && !!target && insideDomain(state, target);
+  };
   // Midi decides each target's hit here (after cover, AC bonuses and reactions).
   Hooks.on("midi-qol.premades.checkHitTarget", (hitCheck) => {
     try {
-      if (!sureHit(hitCheck?.workflow)) return;
+      if (!sureHit(hitCheck?.workflow, hitCheck?.target ?? hitCheck?.token)) return;
       hitCheck.isHit = true;
       if ("isHitEC" in hitCheck) hitCheck.isHitEC = true;
     } catch (err) { console.error(`${MODULE_ID} | midi sure-hit`, err); }
   });
   // Older Midi builds without that hook: force the hit list afterwards.
   Hooks.on("midi-qol.hitsChecked", (workflow) => {
-    try { if (sureHit(workflow)) workflow.hitTargets = new Set(workflow.targets); }
+    try {
+      if (!workflow) return;
+      const eligible = [...(workflow.targets ?? [])].filter((t) => sureHit(workflow, t));
+      if (eligible.length) workflow.hitTargets = new Set([...(workflow.hitTargets ?? []), ...eligible]);
+    }
     catch (err) { console.error(`${MODULE_ID} | midi sure-hit`, err); }
   });
   // Domain sure-hit: targets automatically fail the saving throws of your innate technique.
@@ -2112,8 +2273,9 @@ function registerMidiHooks() {
       const item = workflow?.item;
       if (!setting("domainSureHit") || !domainOpen(workflow?.actor) || !item?.flags?.jjk5e?.technique || sureHitBlocked(workflow?.actor)) return;
       const all = new Set([...(workflow.saves ?? []), ...(workflow.failedSaves ?? [])]);
-      workflow.failedSaves = all;
-      workflow.saves = new Set();
+      const forced = [...all].filter((token) => sureHit(workflow, token));
+      workflow.failedSaves = new Set([...(workflow.failedSaves ?? []), ...forced]);
+      workflow.saves = new Set([...(workflow.saves ?? [])].filter((token) => !forced.includes(token)));
     } catch (err) { console.error(`${MODULE_ID} | midi sure-hit saves`, err); }
   });
   // Animations with Midi's real hit list.
@@ -2610,8 +2772,12 @@ async function vowPunishment(actor) {
   }).catch(() => "exhaustion");
   if (choice !== "roll") {
     const cur = Number(actor.system.attributes?.exhaustion) || 0;
+    const applied = Math.min(cur + 5, 6) - cur;
     await actor.update({ "system.attributes.exhaustion": Math.min(cur + 5, 6) });
-    return `<p>${t("Vow.ExhaustionApplied", { n: Math.min(cur + 5, 6) })}</p>`;
+    await actor.setFlag(MODULE_ID, "mutualVowExhaustion", {
+      amount: applied, expiry: (game.time?.worldTime ?? 0) + 10 * 86400
+    });
+    return `<p>${t("Vow.ExhaustionApplied", { n: Math.min(cur + 5, 6) })} (10 days)</p>`;
   }
   const roll = await new Roll("1d6").evaluate();
   const n = clamp(Number(roll.total) || 1, 1, 6);
@@ -3167,8 +3333,7 @@ function sureHitBlocked(actor) {
   const state = getDomain(actor);
   if (!state) return false;
   if (state.clash && !state.clash.resolved) return true;
-  const targets = [...(game.user?.targets ?? [])];
-  return targets.length > 0 && targets.some((tk) => !insideDomain(state, tk));
+  return state.lethal === false;
 }
 
 /* ---- GM side: zone on the canvas ---- */
@@ -3239,7 +3404,8 @@ async function domainOpened(actor) {
   const c = token ? tokenCenter(token) : null;
   const max = Math.max(1, 10 * mod + ref);
   const state = { open: true, hp: max, max, ac: 10 + mod + Math.floor(ref / 100), refinement: ref,
-    radius: DOMAIN_RADIUS, sceneId: canvas?.scene?.id ?? null, x: c?.x ?? null, y: c?.y ?? null,
+    radius: DOMAIN_RADIUS, lethal: actor.getFlag(MODULE_ID, "domainLethal") !== false,
+    sceneId: canvas?.scene?.id ?? null, x: c?.x ?? null, y: c?.y ?? null,
     damageTaken: 0, zone: null, clash: null, name: actor.name };
   await setDomain(actor, state);
   if (c && state.sceneId) await viaGM("domainZone", { sceneId: state.sceneId, x: c.x, y: c.y, radius: DOMAIN_RADIUS,
@@ -3314,11 +3480,7 @@ async function findWeakSpot(domainActor, seeker) {
 
 /* ---- Clashes ---- */
 
-function clashRounds(diff) {
-  if (diff <= 0) return null;
-  if (diff >= 100) return 0;
-  return diff < 10 ? 10 : 10 - Math.floor(diff / 10);
-}
+function clashRounds(diff) { return clashRoundsFromRefinement(diff); }
 
 async function detectClash(actor) {
   const mine = getDomain(actor);
@@ -3327,7 +3489,14 @@ async function detectClash(actor) {
     && getDomain(a).sceneId === mine.sceneId && !getDomain(a).clash);
   const tokenOthers = (canvas?.tokens?.placeables ?? []).map((tk) => tk.actor).filter((a) => a && a !== actor && !a.prototypeToken?.actorLink
     && getDomain(a)?.open && !getDomain(a).clash && !others.includes(a));
-  const rival = [...others, ...tokenOthers][0];
+  const candidates = [...new Set([...others, ...tokenOthers])];
+  // A multi-domain clash has different rules; never silently choose one rival.
+  if (candidates.length > 1) {
+    ui.notifications.warn("JJK V.6: a three-or-more-way domain clash requires GM adjudication.");
+    await chat(actor, "<p>Multiple Domain Clash: resolve all refinements and barriers with the GM. No automatic winner is applied.</p>");
+    return;
+  }
+  const rival = candidates[0];
   if (!rival) return;
   const rs = getDomain(rival);
   const diff = mine.refinement - rs.refinement;
@@ -3407,6 +3576,13 @@ function makeDomainClass() {
           if (s.balanced) await spendCE(this.actor, 5, t("Domain.Balanced"));
           await setDomain(this.actor, s);
         },
+        lethal: async function(ev, el) {
+          const lethal = el.dataset.m !== "nonlethal";
+          await this.actor.setFlag(MODULE_ID, "domainLethal", lethal);
+          const state = getDomain(this.actor);
+          if (state) { state.lethal = lethal; await setDomain(this.actor, state); }
+          this.render();
+        },
         close: function () { closeDomainOf(this.actor); }
       }
     };
@@ -3425,10 +3601,10 @@ function makeDomainClass() {
       return `<section class="jjk-panel">
         <div class="jjk-barrier"><div class="fill" style="width:${pct}%"></div><span>${s.hp} / ${s.max}</span></div>
         <p>${t("Domain.Stats", { ac: s.ac, ref: s.refinement, r: s.radius })}</p>${clash}
-        <p class="hint">${t("Domain.Mode")}: ${mode}</p>
+        <p class="hint">${t("Domain.Mode")}: ${mode}; ${s.lethal === false ? "Non-lethal (no sure-hit)" : "Lethal"}</p>
         <div class="btns"><button type="button" data-action="hit"><i class="fas fa-hammer"></i> ${t("Domain.HitBarrier")}</button>
           <button type="button" data-action="weak"><i class="fas fa-crosshairs"></i> ${t("Domain.WeakSpot")}</button></div>
-        ${this.actor.isOwner ? `<div class="btns">${s.refinement >= 100 ? `<button type="button" data-action="mode" data-m="flip">${t("Domain.Flipped")}</button>
+        ${this.actor.isOwner ? `<div class="btns"><button type="button" data-action="lethal" data-m="${s.lethal === false ? "lethal" : "nonlethal"}">${s.lethal === false ? "Make lethal" : "Make non-lethal"}</button>${s.refinement >= 100 ? `<button type="button" data-action="mode" data-m="flip">${t("Domain.Flipped")}</button>
           <button type="button" data-action="mode" data-m="balanced">${t("Domain.Balanced")} (5)</button>` : ""}
           <button type="button" data-action="close"><i class="fas fa-xmark"></i> ${t("Domain.Close")}</button></div>` : ""}
       </section>`;

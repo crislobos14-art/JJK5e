@@ -343,6 +343,14 @@
       "fxDomains": {
         "Name": "Tinte de dominio con FXMaster",
         "Hint": "Con FXMaster: tiñe la escena de morado mientras hay una expansión de dominio abierta."
+      },
+      "strictPrereqs": {
+        "Name": "Exigir requisitos de dotes a los jugadores",
+        "Hint": "Si se activa, los jugadores no pueden añadir dotes cuyos requisitos de JJK no cumplan. El DJ puede permitir excepciones."
+      },
+      "playerGMRequests": {
+        "Name": "Permitir solicitudes de los jugadores al DJ (aprobación manual)",
+        "Hint": "Desactivado por defecto. Si se activa, cada solicitud requiere aprobación explícita del DJ activo; la identidad indicada por el cliente no está autenticada."
       }
     },
     "Feats": {
@@ -487,10 +495,10 @@
     "Career": {
       "Title": "Carrera del hechicero",
       "Grade": {
-        "4": "Grado 4",
-        "3": "Grado 3",
-        "2": "Grado 2",
         "1": "Grado 1",
+        "2": "Grado 2",
+        "3": "Grado 3",
+        "4": "Grado 4",
         "special": "Grado especial"
       },
       "Tab": {
