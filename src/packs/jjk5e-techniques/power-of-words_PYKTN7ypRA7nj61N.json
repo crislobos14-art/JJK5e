@@ -16,11 +16,68 @@
    "rules": "2014"
   },
   "activities": {
-   "xblUSVP5qtHr5ppm": {
-    "_id": "xblUSVP5qtHr5ppm",
-    "type": "save",
-    "name": "Action (1 CE)",
+   "EUqi3lvwbvbvBCCf": {
+    "_id": "EUqi3lvwbvbvBCCf",
+    "type": "utility",
+    "name": "Sleep (1+ CE): 5d8 HP of creatures",
     "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "Replaces one attack",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "4"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "20",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "uBA4SLE50igVFzuC",
+      "onSave": false
+     }
+    ],
+    "roll": {
+     "formula": "5d8",
+     "name": "Sleep HP",
+     "prompt": false,
+     "visible": true
+    }
+   },
+   "7oQehAPpiUeAQzXx": {
+    "_id": "7oQehAPpiUeAQzXx",
+    "type": "save",
+    "name": "Return (1+ CE): unsummon",
+    "sort": 0,
+    "img": null,
     "activation": {
      "type": "action",
      "value": 1,
@@ -30,9 +87,14 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "4"
      },
      "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
      "value": "60",
@@ -42,14 +104,17 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
-    "duration": {
-     "units": "inst",
-     "override": true
-    },
+    "effects": [
+     {
+      "_id": "OdAilrDba32JCp7e",
+      "onSave": false
+     }
+    ],
     "save": {
      "ability": [
       "cha"
@@ -64,11 +129,12 @@
      "parts": []
     }
    },
-   "zspWvEFbSbjtRsMz": {
-    "_id": "zspWvEFbSbjtRsMz",
+   "2k2T3rPBNDGM0Tcw": {
+    "_id": "2k2T3rPBNDGM0Tcw",
     "type": "utility",
-    "name": "Action (2+ CE)",
-    "sort": 100000,
+    "name": "Run Away (2+ CE)",
+    "sort": 0,
+    "img": null,
     "activation": {
      "type": "action",
      "value": 1,
@@ -79,9 +145,13 @@
      "targets": [],
      "scaling": {
       "allowed": true,
-      "max": "20"
+      "max": "4"
      },
      "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
      "value": "60",
@@ -91,32 +161,41 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
-    "duration": {
-     "units": "inst",
-     "override": true
-    }
+    "effects": [
+     {
+      "_id": "i8fC8dh3wUrDF5Nd",
+      "onSave": false
+     }
+    ]
    },
-   "rMA6CnCnrO1a2udx": {
-    "_id": "rMA6CnCnrO1a2udx",
+   "MAGtF3ZAPGxVqSvx": {
+    "_id": "MAGtF3ZAPGxVqSvx",
     "type": "save",
-    "name": "Action (4 CE)",
-    "sort": 200000,
+    "name": "Blast Away (4+ CE)",
+    "sort": 0,
+    "img": null,
     "activation": {
      "type": "action",
      "value": 1,
-     "condition": "",
+     "condition": "Launched 60 ft (+10 ft and +1d8 per extra CE)",
      "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "4"
      },
      "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
      "value": "60",
@@ -124,12 +203,14 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
-    "duration": {
-     "units": "inst",
-     "override": true
-    },
+    "effects": [],
     "save": {
      "ability": [
       "cha"
@@ -143,7 +224,7 @@
      "onSave": "none",
      "parts": [
       {
-       "number": 1,
+       "number": 6,
        "denomination": 8,
        "bonus": "",
        "types": [
@@ -160,11 +241,12 @@
      ]
     }
    },
-   "19L9S9ZAJCPglq8Y": {
-    "_id": "19L9S9ZAJCPglq8Y",
+   "djkUtH9T94QbTo7W": {
+    "_id": "djkUtH9T94QbTo7W",
     "type": "save",
-    "name": "Action (6 CE)",
-    "sort": 300000,
+    "name": "Plummet (6+ CE)",
+    "sort": 0,
+    "img": null,
     "activation": {
      "type": "action",
      "value": 1,
@@ -174,9 +256,14 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "4"
      },
      "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
      "value": "60",
@@ -184,14 +271,93 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
+    },
+    "effects": [
+     {
+      "_id": "Obilj5hKYR7ys71X",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "cha"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": [
+      {
+       "number": null,
+       "denomination": null,
+       "bonus": "",
+       "types": [
+        "force"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "(max(@abilities.wis.mod, @abilities.cha.mod))d10"
+       },
+       "scaling": {
+        "mode": "whole",
+        "formula": "(max(@abilities.wis.mod, @abilities.cha.mod))d10"
+       }
+      }
+     ]
+    }
+   },
+   "3O7fpounYrWD2x7S": {
+    "_id": "3O7fpounYrWD2x7S",
+    "type": "save",
+    "name": "Get Twisted (8+ CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "4"
+     },
+     "spellSlot": false
     },
     "duration": {
-     "value": "1",
-     "units": "minute",
-     "concentration": false,
+     "units": "inst",
      "override": true
     },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "E0gy6mHdYOAOdxKE",
+      "onSave": false
+     }
+    ],
     "save": {
      "ability": [
       "cha"
@@ -204,13 +370,269 @@
     "damage": {
      "onSave": "none",
      "parts": []
+    }
+   },
+   "ghUeItNZ4mADHcrQ": {
+    "_id": "ghUeItNZ4mADHcrQ",
+    "type": "save",
+    "name": "Get Crushed (10+ CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "4"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
     },
     "effects": [
      {
-      "_id": "Rzk91GZN4m8wBcwg",
+      "_id": "YC8myvefYFg2kBk1",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "cha"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": [
+      {
+       "number": null,
+       "denomination": null,
+       "bonus": "",
+       "types": [
+        "force"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "(max(@abilities.wis.mod, @abilities.cha.mod))d12"
+       },
+       "scaling": {
+        "mode": "whole",
+        "formula": "1d12"
+       }
+      }
+     ]
+    }
+   },
+   "UDfkfCSGbLDQ98xX": {
+    "_id": "UDfkfCSGbLDQ98xX",
+    "type": "utility",
+    "name": "Don't Move (12+ CE): Power Word Stun",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "4"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "ckTou6q56eAyw2fp",
       "onSave": false
      }
     ]
+   },
+   "HaRzsEVdiUB58ePd": {
+    "_id": "HaRzsEVdiUB58ePd",
+    "type": "save",
+    "name": "Explode (14+ CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "4"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "5",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": [],
+    "save": {
+     "ability": [
+      "cha"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": [
+      {
+       "number": 3,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "force"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      },
+      {
+       "number": null,
+       "denomination": null,
+       "bonus": "",
+       "types": [
+        "fire"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "(max(@abilities.wis.mod, @abilities.cha.mod))d6"
+       },
+       "scaling": {}
+      }
+     ]
+    }
+   },
+   "RT1IKhbXFrFVRm4K": {
+    "_id": "RT1IKhbXFrFVRm4K",
+    "type": "save",
+    "name": "Die (16+ CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "4"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "Cb1A5aFE9w7IPmFE",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "cha"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
    }
   },
   "uses": {
@@ -256,41 +678,232 @@
  "flags": {
   "jjk5e": {
    "ceSteps": {
-    "zspWvEFbSbjtRsMz": 1
+    "EUqi3lvwbvbvBCCf": 1,
+    "7oQehAPpiUeAQzXx": 1,
+    "2k2T3rPBNDGM0Tcw": 1,
+    "MAGtF3ZAPGxVqSvx": 1,
+    "djkUtH9T94QbTo7W": 1,
+    "3O7fpounYrWD2x7S": 1,
+    "ghUeItNZ4mADHcrQ": 1,
+    "UDfkfCSGbLDQ98xX": 1,
+    "HaRzsEVdiUB58ePd": 1,
+    "RT1IKhbXFrFVRm4K": 1
    },
    "ceCosts": {
-    "xblUSVP5qtHr5ppm": 1,
-    "zspWvEFbSbjtRsMz": 2,
-    "rMA6CnCnrO1a2udx": 4,
-    "19L9S9ZAJCPglq8Y": 6
+    "EUqi3lvwbvbvBCCf": 1,
+    "7oQehAPpiUeAQzXx": 1,
+    "2k2T3rPBNDGM0Tcw": 2,
+    "MAGtF3ZAPGxVqSvx": 4,
+    "djkUtH9T94QbTo7W": 6,
+    "3O7fpounYrWD2x7S": 8,
+    "ghUeItNZ4mADHcrQ": 10,
+    "UDfkfCSGbLDQ98xX": 12,
+    "HaRzsEVdiUB58ePd": 14,
+    "RT1IKhbXFrFVRm4K": 16
    },
    "technique": "Cursed Speech",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Every word also damages your vocal cords (1 HP per CE). Extra CE: +1 DC where the word says so (GM).",
+   "automation": "automated"
   }
  },
  "effects": [
   {
-   "_id": "Rzk91GZN4m8wBcwg",
-   "name": "Prone (Power of Words)",
+   "_id": "uBA4SLE50igVFzuC",
+   "name": "Asleep (Cursed Speech)",
    "img": "modules/jjk5e/icons/techniques/cursed-speech.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [
+    "unconscious"
+   ],
+   "description": "<p>Falls asleep (Sleep): ends if it takes damage or someone uses an action to wake it. Affect creatures in ascending HP order up to the rolled total (+3d8 per extra CE).</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Cursed Speech"
+    }
+   },
+   "_key": "!items.effects!PYKTN7ypRA7nj61N.uBA4SLE50igVFzuC"
+  },
+  {
+   "_id": "OdAilrDba32JCp7e",
+   "name": "Unsummoned",
+   "img": "modules/jjk5e/icons/techniques/cursed-speech.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>This summoned creature is unsummoned.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Cursed Speech"
+    }
+   },
+   "_key": "!items.effects!PYKTN7ypRA7nj61N.OdAilrDba32JCp7e"
+  },
+  {
+   "_id": "i8fC8dh3wUrDF5Nd",
+   "name": "Run Away (Cursed Speech)",
+   "img": "modules/jjk5e/icons/techniques/cursed-speech.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Must use its movement to run away from you on its next turn (not into harm). +1 target or +1 DC per extra CE.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Cursed Speech"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnEnd"
+     ]
+    }
+   },
+   "_key": "!items.effects!PYKTN7ypRA7nj61N.i8fC8dh3wUrDF5Nd"
+  },
+  {
+   "_id": "Obilj5hKYR7ys71X",
+   "name": "Plummet: crushed prone",
+   "img": "modules/jjk5e/icons/techniques/cursed-speech.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
    "statuses": [
     "prone"
    ],
-   "changes": [],
-   "transfer": false,
-   "disabled": false,
+   "description": "<p>Prone for 1 minute under crushing gravity; ends with a Strength save on its turn.</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "value": "turn=end, saveAbility=str, saveDC=JJKORIGINDC, saveCount=1-, label=\"Plummet\"",
+     "priority": 20
+    }
+   ],
    "duration": {
-    "seconds": 60,
     "rounds": 10
    },
-   "description": "",
    "flags": {
     "jjk5e": {
-     "condition": "prone"
+     "technique": "Cursed Speech"
     }
    },
-   "_key": "!items.effects!PYKTN7ypRA7nj61N.Rzk91GZN4m8wBcwg"
+   "_key": "!items.effects!PYKTN7ypRA7nj61N.Obilj5hKYR7ys71X"
+  },
+  {
+   "_id": "E0gy6mHdYOAOdxKE",
+   "name": "Twisted limb",
+   "img": "modules/jjk5e/icons/techniques/cursed-speech.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>One limb broken: an arm cannot be used and −2 Strength, or a leg halves speed and −2 Dexterity. Loses HP = its Constitution score × half your proficiency bonus (GM).</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 0
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Cursed Speech"
+    }
+   },
+   "_key": "!items.effects!PYKTN7ypRA7nj61N.E0gy6mHdYOAOdxKE"
+  },
+  {
+   "_id": "YC8myvefYFg2kBk1",
+   "name": "Imploding",
+   "img": "modules/jjk5e/icons/techniques/cursed-speech.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [
+    "paralyzed"
+   ],
+   "description": "<p>Paralyzed for 1 minute (Strength save at the end of its turns ends it). The damage is lost maximum HP (regained on a long rest); it repeats at the start of its turns (GM rolls).</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "value": "turn=end, saveAbility=str, saveDC=JJKORIGINDC, saveCount=1-, label=\"Get Crushed\"",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Cursed Speech"
+    }
+   },
+   "_key": "!items.effects!PYKTN7ypRA7nj61N.YC8myvefYFg2kBk1"
+  },
+  {
+   "_id": "ckTou6q56eAyw2fp",
+   "name": "Don't Move (stunned)",
+   "img": "modules/jjk5e/icons/techniques/cursed-speech.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [
+    "stunned"
+   ],
+   "description": "<p>Power Word Stun: only if it has 150 HP or fewer (+25 per extra CE). Constitution save at the end of each of its turns ends it.</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "value": "turn=end, saveAbility=con, saveDC=JJKORIGINDC, saveCount=1-, label=\"Don't Move\"",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Cursed Speech"
+    }
+   },
+   "_key": "!items.effects!PYKTN7ypRA7nj61N.ckTou6q56eAyw2fp"
+  },
+  {
+   "_id": "Cb1A5aFE9w7IPmFE",
+   "name": "Die (Cursed Speech)",
+   "img": "modules/jjk5e/icons/techniques/cursed-speech.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [
+    "dead"
+   ],
+   "description": "<p>Dies instantly if it has at most 30 × your CE modifier HP (+10 and +1 DC per extra CE).</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 0
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Cursed Speech"
+    }
+   },
+   "_key": "!items.effects!PYKTN7ypRA7nj61N.Cb1A5aFE9w7IPmFE"
   }
  ],
  "folder": "hKdstL12BA2dMsHA",

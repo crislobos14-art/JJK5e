@@ -760,12 +760,113 @@ def boogie_woogie(S):
     mark(sd)
 
 
+def cursed_speech(S):
+    ft = lambda n: {"value": str(n), "units": "ft", "override": True}
+    one = {"affects": {"type": "creature", "count": "1", "choice": True}, "override": True}
+    cha = lambda: {"ability": ["cha"], "dc": {"calculation": "spellcasting", "formula": ""}}
+    X = CE
+    p = S.get("Power of Words")
+    keep = {}
+    for old in list(p["system"]["activities"]):
+        p["system"]["activities"].pop(old)
+    p["flags"]["jjk5e"]["ceCosts"] = {}
+    p["flags"]["jjk5e"]["ceSteps"] = {}
+    p["effects"] = []
+
+    def word(key, label, cost_, typ, **kw):
+        a = act(p, key, typ, label, "action", **kw)
+        cost(p, a, cost_, 1, "4")
+        return a
+
+    sl = word("sleep", "Sleep (1+ CE): 5d8 HP of creatures", 1, "utility", range=ft(60),
+              target=sphere(20), roll={"formula": "5d8", "name": "Sleep HP", "prompt": False, "visible": True})
+    asleep = fx(p, "sleep", "Asleep (Cursed Speech)", statuses=["unconscious"], rounds=10,
+                desc="Falls asleep (Sleep): ends if it takes damage or someone uses an action to wake it. Affect "
+                     "creatures in ascending HP order up to the rolled total (+3d8 per extra CE).")
+    apply(sl, asleep)
+    sl["activation"]["condition"] = "Replaces one attack"
+    ret = word("return", "Return (1+ CE): unsummon", 1, "save", range=ft(60), target=one, save=cha(),
+               damage={"onSave": "none", "parts": []})
+    apply(ret, fx(p, "return", "Unsummoned", rounds=1, desc="This summoned creature is unsummoned."))
+    run = word("run", "Run Away (2+ CE)", 2, "utility", range=ft(60), target=one)
+    apply(run, fx(p, "run", "Run Away (Cursed Speech)", rounds=1, special=["turnEnd"],
+                  desc="Must use its movement to run away from you on its next turn (not into harm). +1 target or "
+                       "+1 DC per extra CE."))
+    blast = word("blast", "Blast Away (4+ CE)", 4, "save", range=ft(60), target=one, save=cha(),
+                 damage={"onSave": "none", "parts": [dice(6, 8, ["force"], "", 1)]})
+    blast["activation"]["condition"] = "Launched 60 ft (+10 ft and +1d8 per extra CE)"
+    plum = word("plummet", "Plummet (6+ CE)", 6, "save", range=ft(60), target=one, save=cha(),
+                damage={"onSave": "none", "parts": [{"number": None, "denomination": None, "bonus": "", "types": ["force"],
+                        "custom": {"enabled": True, "formula": f"({X})d10"}, "scaling": {"mode": "whole", "formula": f"({X})d10"}}]})
+    apply(plum, fx(p, "plummet", "Plummet: crushed prone", statuses=["prone"], rounds=10,
+                   changes=[("flags.midi-qol.OverTime", 0,
+                             'turn=end, saveAbility=str, saveDC=JJKORIGINDC, saveCount=1-, label="Plummet"')],
+                   desc="Prone for 1 minute under crushing gravity; ends with a Strength save on its turn."))
+    tw = word("twist", "Get Twisted (8+ CE)", 8, "save", range=ft(60), target=one, save=cha(),
+              damage={"onSave": "none", "parts": []})
+    apply(tw, fx(p, "twist", "Twisted limb", rounds=0,
+                 desc="One limb broken: an arm cannot be used and −2 Strength, or a leg halves speed and −2 Dexterity. "
+                      "Loses HP = its Constitution score × half your proficiency bonus (GM)."))
+    cr = word("crush", "Get Crushed (10+ CE)", 10, "save", range=ft(60), target=one, save=cha(),
+              damage={"onSave": "none", "parts": [{"number": None, "denomination": None, "bonus": "", "types": ["force"],
+                      "custom": {"enabled": True, "formula": f"({X})d12"}, "scaling": {"mode": "whole", "formula": "1d12"}}]})
+    apply(cr, fx(p, "crush", "Imploding", statuses=["paralyzed"], rounds=10,
+                 changes=[("flags.midi-qol.OverTime", 0,
+                           'turn=end, saveAbility=str, saveDC=JJKORIGINDC, saveCount=1-, label="Get Crushed"')],
+                 desc="Paralyzed for 1 minute (Strength save at the end of its turns ends it). The damage is lost "
+                      "maximum HP (regained on a long rest); it repeats at the start of its turns (GM rolls)."))
+    stun = word("stun", "Don't Move (12+ CE): Power Word Stun", 12, "utility", range=ft(60), target=one)
+    apply(stun, fx(p, "stun", "Don't Move (stunned)", statuses=["stunned"], rounds=10,
+                   changes=[("flags.midi-qol.OverTime", 0,
+                             'turn=end, saveAbility=con, saveDC=JJKORIGINDC, saveCount=1-, label="Don\'t Move"')],
+                   desc="Power Word Stun: only if it has 150 HP or fewer (+25 per extra CE). Constitution save at the "
+                        "end of each of its turns ends it."))
+    ex = word("explode", "Explode (14+ CE)", 14, "save", range=ft(60), target=sphere(5), save=cha(),
+              damage={"onSave": "none", "parts": [dice(3, 8, ["force"], "", 1),
+                      {"number": None, "denomination": None, "bonus": "", "types": ["fire"],
+                       "custom": {"enabled": True, "formula": f"({X})d6"}, "scaling": {}}]})
+    die = word("die", "Die (16+ CE)", 16, "save", range=ft(60), target=one, save=cha(),
+               damage={"onSave": "none", "parts": []})
+    apply(die, fx(p, "die", "Die (Cursed Speech)", statuses=["dead"], rounds=0,
+                  desc="Dies instantly if it has at most 30 × your CE modifier HP (+10 and +1 DC per extra CE)."))
+    note(p, "Every word also damages your vocal cords (1 HP per CE). Extra CE: +1 DC where the word says so (GM).")
+    mark(p)
+
+    i = S.get("Interjection")
+    note(i, "Use the chosen word's activity as a bonus action or reaction.")
+    mark(i)
+
+    e = S.get("Domain Expansion: Echo Chamber")
+    w = act(e, "init20", "utility", "Initiative 20: a word on everyone (free)", "special",
+            target={"affects": {"type": "creature", "choice": True}, "override": True})
+    free(e, w)
+    note(e, "At initiative 20, use any Power of Words activity on all chosen creatures without paying CE "
+            "(the domain sure-hit makes them fail the save).")
+    mark(e)
+
+    cs = S.get("Cursed Silence")
+    sil = cs["system"]["activities"]["M78rbnTh6yG7lnkv"]
+    sil["name"] = "Silence (2 CE)"
+    sil["range"], sil["target"] = ft(120), sphere(20)
+    apply(sil, fx(cs, "silence", "Silence", rounds=100, desc="Silence spell: no sound in a 20-ft sphere for 10 minutes."))
+    big = cs["system"]["activities"]["W2HtQiO9cO2OMF6d"]
+    big["name"] = "Cursed Silence (8 CE)"
+    big["save"] = {"ability": ["wis", "cha"], "dc": {"calculation": "spellcasting", "formula": ""}}
+    big["range"], big["target"] = ft(120), one
+    big["duration"] = {"value": "1", "units": "minute", "concentration": True, "override": True}
+    apply(big, fx(cs, "cursed", "Cursed Silence", rounds=10,
+                  desc="Cannot speak. Must make a Wisdom save each time it tries to take an action or skips it. "
+                       "On a success against the technique it is immune for 1 minute."))
+    mark(cs)
+
+
 TECHNIQUES = {"Antigravity System": antigravity_system,
               "Auspicious Beast Summon": auspicious_beast_summon,
               "Black Bird Manipulation": black_bird_manipulation,
               "Black Box": black_box,
               "Blood Manipulation": blood_manipulation,
-              "Boogie Woogie": boogie_woogie}
+              "Boogie Woogie": boogie_woogie,
+              "Cursed Speech": cursed_speech}
 
 if __name__ == "__main__":
     args = sys.argv[1:]

@@ -24,7 +24,7 @@
    "M78rbnTh6yG7lnkv": {
     "_id": "M78rbnTh6yG7lnkv",
     "type": "utility",
-    "name": "Action (2 CE)",
+    "name": "Silence (2 CE)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -38,17 +38,38 @@
      }
     },
     "range": {
-     "units": "self"
+     "value": "120",
+     "units": "ft",
+     "override": true
     },
-    "target": {},
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "20",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
-    }
+    },
+    "effects": [
+     {
+      "_id": "HQ5sWpACwodsDL5l",
+      "onSave": false
+     }
+    ]
    },
    "W2HtQiO9cO2OMF6d": {
     "_id": "W2HtQiO9cO2OMF6d",
     "type": "save",
-    "name": "Action (8 CE)",
+    "name": "Cursed Silence (8 CE)",
     "sort": 100000,
     "activation": {
      "type": "action",
@@ -63,22 +84,27 @@
     },
     "range": {
      "value": "120",
-     "units": "ft"
+     "units": "ft",
+     "override": true
     },
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
-     }
+      "count": "1",
+      "choice": true
+     },
+     "override": true
     },
     "duration": {
      "value": "1",
      "units": "minute",
-     "concentration": false
+     "concentration": true,
+     "override": true
     },
     "save": {
      "ability": [
-      "wis"
+      "wis",
+      "cha"
      ],
      "dc": {
       "calculation": "spellcasting",
@@ -88,7 +114,13 @@
     "damage": {
      "onSave": "none",
      "parts": []
-    }
+    },
+    "effects": [
+     {
+      "_id": "oPwIoiCSFIFIEHe0",
+      "onSave": false
+     }
+    ]
    }
   }
  },
@@ -112,10 +144,53 @@
       "Cursed Speech"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!Sexxz4Zn7ek0a38D"
+ "_key": "!items!Sexxz4Zn7ek0a38D",
+ "effects": [
+  {
+   "_id": "HQ5sWpACwodsDL5l",
+   "name": "Silence",
+   "img": "modules/jjk5e/icons/techniques/cursed-speech.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Silence spell: no sound in a 20-ft sphere for 10 minutes.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 100
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Cursed Speech"
+    }
+   },
+   "_key": "!items.effects!Sexxz4Zn7ek0a38D.HQ5sWpACwodsDL5l"
+  },
+  {
+   "_id": "oPwIoiCSFIFIEHe0",
+   "name": "Cursed Silence",
+   "img": "modules/jjk5e/icons/techniques/cursed-speech.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Cannot speak. Must make a Wisdom save each time it tries to take an action or skips it. On a success against the technique it is immune for 1 minute.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Cursed Speech"
+    }
+   },
+   "_key": "!items.effects!Sexxz4Zn7ek0a38D.oPwIoiCSFIFIEHe0"
+  }
+ ]
 }

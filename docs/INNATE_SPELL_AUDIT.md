@@ -3,13 +3,13 @@
 > Generado desde el compendio y las fuentes. **No certifica ejecución en Foundry ni fidelidad semántica a cada regla**.
 
 - Spells examinados: **360**; técnicas agrupadas: **81**.
-- Utilidad sin efecto configurado: revisar lógica: **109**.
+- Utilidad sin efecto configurado: revisar lógica: **108**.
 - Utilidad con efecto: comprobar activación: **15**.
-- Dominio genérico: resolver propiedades particulares: **52**.
-- Salvación sin daño/efecto automático: **29**.
+- Dominio genérico: resolver propiedades particulares: **51**.
+- Salvación sin daño/efecto automático: **28**.
 - Ataque sin daño propio: comprobar intención: **10**.
 - Mecánica configurada; falta prueba Foundry: **117**.
-- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **28**.
+- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **31**.
 
 ## Interpretación
 
@@ -169,9 +169,9 @@
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Power of Words | 1 | save:Action (1 CE); utility:Action (2+ CE); save:Action (4 CE); save:Action (6 CE) | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/power-of-words_PYKTN7ypRA7nj61N.json) |
-| Interjection | 3 | utility:Bonus Action | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/interjection_OjriXIhJJ8zduMfC.json) |
-| Domain Expansion: Echo Chamber | 18 | utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-echo-chamber_nBfeiSn64MN1fSES.json) |
+| Power of Words | 1 | utility:Sleep (1+ CE): 5d8 HP of creatures; save:Return (1+ CE): unsummon; utility:Run Away (2+ CE); save:Blast Away (4+ CE); save:Plummet (6+ CE); save:Get Twisted (8+ CE); save:Get Crushed (10+ CE); utility:Don't Move (12+ CE): Power Word Stun; save:Explode (14+ CE); save:Die (16+ CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/power-of-words_PYKTN7ypRA7nj61N.json) |
+| Interjection | 3 | utility:Bonus Action | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/interjection_OjriXIhJJ8zduMfC.json) |
+| Domain Expansion: Echo Chamber | 18 | utility:Expand Domain (20 CE); utility:Initiative 20: a word on everyone (free) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-echo-chamber_nBfeiSn64MN1fSES.json) |
 
 ### Cursed Spirit Manipulation (5 spells)
 

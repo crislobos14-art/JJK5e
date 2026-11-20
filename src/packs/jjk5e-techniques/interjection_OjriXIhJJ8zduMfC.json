@@ -84,7 +84,9 @@
   "jjk5e": {
    "technique": "Cursed Speech",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Use the chosen word's activity as a bonus action or reaction.",
+   "automation": "automated"
   }
  },
  "folder": "hKdstL12BA2dMsHA",

@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.33.0 — Técnica por técnica: Cursed Speech
+- **Power of Words**: cada palabra es su propia acción con su CE y CE extra: Sleep, Return, Run Away, Blast Away (6d8 +1d8/CE), Plummet ((mod)d10, derribado 1 min con FUE), Get Twisted, Get Crushed (paralizado, FUE), Don't Move (aturdido, CON), Explode (3d8 fuerza + (mod)d6 fuego en 5 pies) y Die.
+- **Echo Chamber**: en iniciativa 20 una palabra gratis a todos.
+- **Cursed Silence**: Silence (2 CE) y Cursed Silence (8 CE, concentración).
+- Automatizados a mano: 31/360. Sin probar en Foundry real.
+
 ## 1.32.0 — Técnica por técnica: Boogie Woogie
 - **Boogie**: alcance 30 pies, 1 objetivo (el intercambio lo hace el módulo).
 - **Woogie**: acción para que el enemigo intercambiado pierda su reacción hasta tu turno.

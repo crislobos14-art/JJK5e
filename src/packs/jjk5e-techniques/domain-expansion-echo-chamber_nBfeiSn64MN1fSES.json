@@ -58,6 +58,43 @@
      "concentration": false,
      "override": true
     }
+   },
+   "ae26fwXUphDHrOwD": {
+    "_id": "ae26fwXUphDHrOwD",
+    "type": "utility",
+    "name": "Initiative 20: a word on everyone (free)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": []
    }
   },
   "uses": {
@@ -116,7 +153,9 @@
     "7wLxyYV8XlKP1CTa": 20
    },
    "domainActivity": "7wLxyYV8XlKP1CTa",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "At initiative 20, use any Power of Words activity on all chosen creatures without paying CE (the domain sure-hit makes them fail the save).",
+   "automation": "automated"
   }
  },
  "folder": "hKdstL12BA2dMsHA",
