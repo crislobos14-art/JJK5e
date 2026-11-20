@@ -84,9 +84,38 @@
   "jjk5e": {
    "technique": "Black Bird Manipulation",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Passive Perception bonus reads flags.jjk5e.crows (number of crows).",
+   "automation": "automated"
   }
  },
  "folder": "51kqIFJDFNS150R8",
- "_key": "!items!VRx1ByQ8bVhRmbdx"
+ "_key": "!items!VRx1ByQ8bVhRmbdx",
+ "effects": [
+  {
+   "_id": "I19lHaqG4xF8DZdy",
+   "name": "Raven's Eye (+1 passive Perception per crow)",
+   "img": "modules/jjk5e/icons/techniques/black-bird-manipulation.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Set the actor flag jjk5e.crows to your current number of crows (default 3).</p>",
+   "changes": [
+    {
+     "key": "system.skills.prc.bonuses.passive",
+     "mode": 2,
+     "value": "@flags.jjk5e.crows",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": "Black Bird Manipulation"
+    }
+   },
+   "_key": "!items.effects!VRx1ByQ8bVhRmbdx.I19lHaqG4xF8DZdy"
+  }
+ ]
 }

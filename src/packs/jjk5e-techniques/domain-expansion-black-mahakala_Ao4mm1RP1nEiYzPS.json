@@ -58,6 +58,76 @@
      "concentration": false,
      "override": true
     }
+   },
+   "iMFF4Zfh88cqKlZ3": {
+    "_id": "iMFF4Zfh88cqKlZ3",
+    "type": "save",
+    "name": "Initiative 20: Bird Strike ×3 (free)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "3",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "XKpCmmDWdjW2DEVz",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 10,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
    }
   },
   "uses": {
@@ -116,9 +186,30 @@
     "OKLquje7vIKyamYA": 20
    },
    "domainActivity": "OKLquje7vIKyamYA",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "51kqIFJDFNS150R8",
- "_key": "!items!Ao4mm1RP1nEiYzPS"
+ "_key": "!items!Ao4mm1RP1nEiYzPS",
+ "effects": [
+  {
+   "_id": "XKpCmmDWdjW2DEVz",
+   "name": "Bird Strike: damaged limb",
+   "img": "modules/jjk5e/icons/techniques/black-bird-manipulation-domain.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Roll 1d6 for the damaged limb (GM).</p>",
+   "changes": [],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": "Black Bird Manipulation"
+    }
+   },
+   "_key": "!items.effects!Ao4mm1RP1nEiYzPS.XKpCmmDWdjW2DEVz"
+  }
+ ]
 }

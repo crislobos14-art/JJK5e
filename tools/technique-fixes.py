@@ -276,7 +276,204 @@ def antigravity_system(S):
     mark(gs)
 
 
-TECHNIQUES = {"Antigravity System": antigravity_system}
+def auspicious_beast_summon(S):
+    # --- Kaichi (1st): summon costs 1 CE; the horn then attacks for free (an extra attack on your turn).
+    k = S.get("Auspicious Beast #1: Kaichi")
+    old = k["system"]["activities"]["GCHuJRcdm5YBLZVK"]
+    tiers = k["flags"]["jjk5e"].get("dmgScale", {}).pop("GCHuJRcdm5YBLZVK", None) \
+        or [[0, "1d6"], [3, "1d8"], [6, "1d10"], [11, "1d12"], [18, "3d6"]]
+    horn_fx = fx(k, "kaichi", "Kaichi (summoned)", rounds=10,
+                 desc="The yellow drill horn is summoned for 1 minute: use 'Kaichi Horn' once on each of your turns.")
+    summon = act(k, "GCHuJRcdm5YBLZVK", "utility", "Summon Kaichi — Action (1 CE)", "action",
+                 range=RANGE_SELF, target=SELF, duration={"value": "1", "units": "minute", "override": True})
+    apply(summon, horn_fx)
+    cost(k, summon, 1)
+    horn = act(k, "horn", "attack", "Kaichi Horn (extra attack)", "special",
+               attack={"ability": "", "bonus": "", "critical": {"threshold": None}, "flat": False,
+                       "type": {"value": "melee", "classification": "spell"}},
+               damage={"includeBase": False, "parts": [dice(1, 6, ["piercing"])]},
+               range={"value": "30", "units": "ft", "override": True},
+               target={"affects": {"type": "creature", "count": "1"}, "override": True})
+    horn["activation"]["condition"] = "Once per turn while Kaichi is summoned"
+    free(k, horn)
+    scale(k, horn, tiers)
+    mark(k)
+
+    # --- Reiki (3rd): bonus action double movement; reaction +5 AC.
+    r = S.get("Auspicious Beast #2: Reiki")
+    r["effects"] = [e for e in r.get("effects", []) if e["_id"] != "454LFPLROeF8Z1Cm"]   # old manual toggle
+    speed = fx(r, "speed", "Reiki: dark water (double speed)", rounds=1, special=["turnEndSource"],
+               changes=[(f"system.attributes.movement.{m}", 1, "2") for m in ("walk", "swim", "fly", "climb")],
+               desc="Your movement is doubled until the end of your next turn.")
+    b = r["system"]["activities"]["TOiqVr1p4VytfTdo"]
+    b["range"], b["target"] = RANGE_SELF, SELF
+    apply(b, speed)
+    ward = fx(r, "ac", "Reiki: dark water (+5 AC)", rounds=1, special=["turnStartSource"],
+              changes=[("system.attributes.ac.bonus", 2, "+5")],
+              desc="+5 bonus to AC until the start of your next turn.")
+    re_ = r["system"]["activities"]["b2gex8XcWCXeP4G3"]
+    re_["range"], re_["target"] = RANGE_SELF, SELF
+    re_["activation"]["condition"] = "When you are hit by an attack"
+    re_["useConditionText"] = 'reaction === "isHit"'
+    apply(re_, ward)
+    mark(r)
+
+    # --- Kirin (6th): 5 temp HP per CE, movement 0 until the start of your next turn.
+    ki = S.get("Auspicious Beast #3: Kirin")
+    h = ki["system"]["activities"]["5Zbe2Fgjfbs6ILFe"]
+    h["range"], h["target"] = RANGE_SELF, SELF
+    root = fx(ki, "root", "Kirin: rooted", rounds=1, special=["turnStartSource"],
+              changes=[(f"system.attributes.movement.{m}", 5, "0") for m in ("walk", "swim", "fly", "climb", "burrow")],
+              desc="Movement 0 until the start of your next turn. While you keep Kirin's temporary hit points you "
+                   "ignore exhaustion (GM).")
+    apply(h, root)
+    mark(ki)
+
+    # --- Ryu (11th): 8d10 piercing (STR save) where it lands, within 30 ft.
+    ry = S.get("Auspicious Beast #4: Ryu")
+    a = ry["system"]["activities"]["bNBcgNDbBlDvJeU3"]
+    a["range"] = {"value": "30", "units": "ft", "override": True}
+    a["target"] = {"affects": {"type": "creature", "count": "1"}, "override": True}
+    a["damage"]["onSave"] = "none"
+    ry_fx = fx(ry, "ryu", "Ryu (summoned)", rounds=100,
+               desc="Ryu stays up to 10 minutes or until you fall unconscious; command it as a bonus action, "
+                    "otherwise it Dodges. After it is destroyed you cannot summon it for 10 minutes.")
+    self_ = act(ry, "ryu-self", "utility", "Ryu: command (bonus action)", "bonus", range=RANGE_SELF, target=SELF)
+    free(ry, self_)
+    a["effects"] = []
+    apply(self_, ry_fx)
+    trigger(a, self_, "self")
+    mark(ry)
+
+    # --- Domain: beasts always active; at initiative 20 Kirin refreshes as if CE = your CE modifier.
+    d = S.get("Domain Expansion: Auspicious Beasts’ Realm")
+    realm = fx(d, "realm", "Auspicious Beasts' Realm", rounds=10,
+               desc="All four beasts are active without side effects; Kaichi and Ryu attacks always hit (domain "
+                    "sure-hit, applied by the module to technique attacks).")
+    kirin = act(d, "init20", "heal", "Initiative 20: Kirin refresh", "special",
+                healing={"number": None, "denomination": None, "bonus": "", "types": ["temphp"],
+                         "custom": {"enabled": True, "formula": f"5 * {CE}"}, "scaling": {}},
+                range=RANGE_SELF, target=SELF)
+    apply(kirin, realm)
+    free(d, kirin)
+    mark(d)
+
+    # --- Reversal: Inauspicious Beast Banishment — summoners within 60 ft save or lose their summons.
+    rv = S.get("Inauspicious Beast Banishment")
+    act(rv, "eGBc09FV9WqJ83U1", "save", "Action or Reaction (5 CE)", "reaction",
+        range=RANGE_SELF, target=sphere(60),
+        save={"ability": ["wis", "cha"], "dc": {"calculation": "spellcasting", "formula": ""}},
+        damage={"onSave": "none", "parts": []})
+    v = rv["system"]["activities"]["eGBc09FV9WqJ83U1"]
+    v["useConditionText"] = "false"
+    gone = fx(rv, "banished", "Summons undone", rounds=1,
+              desc="On a failed Cursed Energy save, this creature's summons, shikigami and familiars are undone.")
+    apply(v, gone)
+    cost(rv, v, 5)
+    mark(rv)
+
+
+def black_bird_manipulation(S):
+    # --- Cursed Crows (1st): imbue a crow (charmed); see through a crow (you are blinded).
+    c = S.get("Cursed Crows")
+    see_fx = fx(c, "see", "Seeing through a crow", statuses=["blinded"], rounds=0,
+                desc="Your eyes are closed (blinded unless you have blindsight) while you see through one crow; "
+                     "use its senses and your passive Perception. Delete this effect to stop (bonus action).")
+    c["effects"] = [e if e["_id"] != see_fx else {**e, "duration": {}} for e in c["effects"]]
+    see = act(c, "see", "utility", "See through a crow (Action)", "action", range=RANGE_SELF, target=SELF)
+    apply(see, see_fx)
+    free(c, see)
+    note(c, "Crow count is tracked by the player (you start with 3).")
+    mark(c)
+
+    # --- Omen of Death (3rd): frightened for 1 minute (repeat save, Midi OverTime); advantage vs frightened.
+    o = S.get("Omen of Death")
+    a = o["system"]["activities"]["7iJWff7wrgkdEqqV"]
+    a["range"] = RANGE_SELF
+    a["target"] = sphere(30)
+    a["target"]["affects"]["choice"] = True
+    for e in o["effects"]:
+        if e["_id"] == "ic6dPQKN7voOmx4g": e["duration"] = {"rounds": 10}
+    aura = fx(o, "adv", "Omen of Death: advantage vs frightened", rounds=0,
+              changes=[("flags.midi-qol.advantage.attack.all", 0, "target.statuses?.frightened")],
+              desc="You have advantage on attack rolls against frightened creatures.")
+    for e in o["effects"]:
+        if e["_id"] == aura: e.update({"transfer": True, "duration": {}})
+    mark(o)
+
+    # --- Raven's Eye (6th): +1 passive Perception per crow; switch crows as a bonus action.
+    rv = S.get("Raven’s Eye")
+    eye = fx(rv, "eye", "Raven's Eye (+1 passive Perception per crow)", rounds=0,
+             changes=[("system.skills.prc.bonuses.passive", 2, "@flags.jjk5e.crows")],
+             desc="Set the actor flag jjk5e.crows to your current number of crows (default 3).")
+    for e in rv["effects"]:
+        if e["_id"] == eye: e.update({"transfer": True, "duration": {}})
+    note(rv, "Passive Perception bonus reads flags.jjk5e.crows (number of crows).")
+    mark(rv)
+
+    # --- Bird Strike (11th): 10d10 necrotic, half on a DEX save; a failure damages a limb (d6).
+    b = S.get("Bird Strike")
+    bs = b["system"]["activities"]["QwWYu4v3lWvMwTb9"]
+    bs["target"] = {"affects": {"type": "creature", "count": "1"}, "override": True}
+    bs["damage"]["onSave"] = "half"
+    limb = fx(b, "limb", "Bird Strike: damaged limb", rounds=0,
+              desc="One limb is damaged: roll 1d6 for which (1 right arm, 2 left arm, 3 right leg, 4 left leg, "
+                   "5 torso, 6 head; GM applies the effect). The crow dies.")
+    for e in b["effects"]:
+        if e["_id"] == limb: e["duration"] = {}
+    apply(bs, limb)
+    roll = act(b, "limb-roll", "utility", "Damaged limb (d6)", "special", roll={"formula": "1d6", "name": "Limb", "prompt": False, "visible": True},
+               range=RANGE_SELF, target=SELF)
+    free(b, roll)
+    trigger(bs, roll, "failedSaves")
+    mark(b)
+
+    # --- Black Mahakala (18th): at initiative 20, Bird Strike on up to three targets for free.
+    d = S.get("Domain Expansion: Black Mahakala")
+    i20 = act(d, "init20", "save", "Initiative 20: Bird Strike ×3 (free)", "special",
+              range={"units": "spec", "override": True},
+              target={"affects": {"type": "creature", "count": "3", "choice": True}, "override": True},
+              save={"ability": ["dex"], "dc": {"calculation": "spellcasting", "formula": ""}},
+              damage={"onSave": "half", "parts": [dice(10, 10, ["necrotic"])]})
+    limb2 = fx(d, "limb", "Bird Strike: damaged limb", rounds=0, desc="Roll 1d6 for the damaged limb (GM).")
+    for e in d["effects"]:
+        if e["_id"] == limb2: e["duration"] = {}
+    apply(i20, limb2)
+    free(d, i20)
+    mark(d)
+
+    # --- Reversal: White Bird Manipulation — doves; sacrifice a dove to heal 1d8 per CE.
+    w = S.get("White Bird Manipulation")
+    conv = w["system"]["activities"]["xX0DRqjTwBBubzWs"]
+    conv["name"] = "Turn crows into doves — Bonus Action (2 CE each)"
+    conv["effects"] = []
+    w["effects"] = [e for e in w.get("effects", []) if e["_id"] != "zmUYBXHKwqE9te79"]
+    conv["range"], conv["target"] = RANGE_SELF, SELF
+    heal = act(w, "dove-heal", "heal", "Sacrifice a dove: heal (1+ CE)", "special",
+               healing={"number": 1, "denomination": 8, "bonus": "", "types": ["healing"],
+                        "custom": {"enabled": False, "formula": ""}, "scaling": {"number": 1}},
+               range={"value": "5", "units": "ft", "override": True},
+               target={"affects": {"type": "creature", "count": "1"}, "override": True})
+    cost(w, heal, 1, 1, f"2 * {CE}")
+    ward = fx(w, "ward", "Dove ward", rounds=0,
+              changes=[("flags.midi-qol.advantage.ability.save.all", 0, "1")],
+              desc="Within 30 ft of a dove: advantage on saves against charmed and frightened; dying allies are "
+                   "stabilised; a dove can suppress a charm or fright effect (GM).")
+    for e in w["effects"]:
+        if e["_id"] == ward: e.update({"transfer": False, "duration": {}})
+    aura = act(w, "ward", "utility", "Dove ward (allies within 30 ft)", "special",
+               range=RANGE_SELF, target=sphere(30))
+    aura["target"]["affects"]["type"] = "ally"
+    apply(aura, ward)
+    free(w, aura)
+    note(w, "Dove ward gives advantage on all saves as an approximation of 'against charmed and frightened'; remove "
+            "it when the dove leaves.")
+    mark(w)
+
+
+TECHNIQUES = {"Antigravity System": antigravity_system,
+              "Auspicious Beast Summon": auspicious_beast_summon,
+              "Black Bird Manipulation": black_bird_manipulation}
 
 if __name__ == "__main__":
     args = sys.argv[1:]

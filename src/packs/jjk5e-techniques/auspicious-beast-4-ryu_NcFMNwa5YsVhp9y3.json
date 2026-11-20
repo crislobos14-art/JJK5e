@@ -78,7 +78,57 @@
        }
       }
      ]
+    },
+    "effects": [],
+    "midiProperties": {
+     "triggeredActivityId": "xoaiDU0QadRwhNOW",
+     "triggeredActivityTargets": "self",
+     "triggeredActivityRollAs": "self",
+     "triggeredActivityConsume": false,
+     "triggeredActivityConfigure": false,
+     "triggeredActivityConditionText": ""
     }
+   },
+   "xoaiDU0QadRwhNOW": {
+    "_id": "xoaiDU0QadRwhNOW",
+    "type": "utility",
+    "name": "Ryu: command (bonus action)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "yNPPUiOLQN7dVIro",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -128,9 +178,32 @@
    },
    "technique": "Auspicious Beast Summon",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "brFOPY7ZHkwkGj1z",
- "_key": "!items!NcFMNwa5YsVhp9y3"
+ "_key": "!items!NcFMNwa5YsVhp9y3",
+ "effects": [
+  {
+   "_id": "yNPPUiOLQN7dVIro",
+   "name": "Ryu (summoned)",
+   "img": "modules/jjk5e/icons/techniques/auspicious-beast-summon.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Ryu stays up to 10 minutes or until you fall unconscious; command it as a bonus action, otherwise it Dodges. After it is destroyed you cannot summon it for 10 minutes.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 100
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Auspicious Beast Summon"
+    }
+   },
+   "_key": "!items.effects!NcFMNwa5YsVhp9y3.yNPPUiOLQN7dVIro"
+  }
+ ]
 }

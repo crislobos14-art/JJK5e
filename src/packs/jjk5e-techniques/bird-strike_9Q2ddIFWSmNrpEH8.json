@@ -39,6 +39,10 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     },
      "override": true
     },
     "duration": {
@@ -73,6 +77,62 @@
        }
       }
      ]
+    },
+    "effects": [
+     {
+      "_id": "r9JJ3E8eZjPFgbRf",
+      "onSave": false
+     }
+    ],
+    "midiProperties": {
+     "triggeredActivityId": "0Yf8NGhpyZkNESJy",
+     "triggeredActivityTargets": "failedSaves",
+     "triggeredActivityRollAs": "self",
+     "triggeredActivityConsume": false,
+     "triggeredActivityConfigure": false,
+     "triggeredActivityConditionText": ""
+    }
+   },
+   "0Yf8NGhpyZkNESJy": {
+    "_id": "0Yf8NGhpyZkNESJy",
+    "type": "utility",
+    "name": "Damaged limb (d6)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "roll": {
+     "formula": "1d6",
+     "name": "Limb",
+     "prompt": false,
+     "visible": true
     }
    }
   },
@@ -116,9 +176,30 @@
    },
    "technique": "Black Bird Manipulation",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "51kqIFJDFNS150R8",
- "_key": "!items!9Q2ddIFWSmNrpEH8"
+ "_key": "!items!9Q2ddIFWSmNrpEH8",
+ "effects": [
+  {
+   "_id": "r9JJ3E8eZjPFgbRf",
+   "name": "Bird Strike: damaged limb",
+   "img": "modules/jjk5e/icons/techniques/black-bird-manipulation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>One limb is damaged: roll 1d6 for which (1 right arm, 2 left arm, 3 right leg, 4 left leg, 5 torso, 6 head; GM applies the effect). The crow dies.</p>",
+   "changes": [],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": "Black Bird Manipulation"
+    }
+   },
+   "_key": "!items.effects!9Q2ddIFWSmNrpEH8.r9JJ3E8eZjPFgbRf"
+  }
+ ]
 }

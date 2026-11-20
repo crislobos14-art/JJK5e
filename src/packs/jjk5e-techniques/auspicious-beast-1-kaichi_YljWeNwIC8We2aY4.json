@@ -18,9 +18,10 @@
   "activities": {
    "GCHuJRcdm5YBLZVK": {
     "_id": "GCHuJRcdm5YBLZVK",
-    "type": "attack",
-    "name": "Action (1 CE)",
+    "type": "utility",
+    "name": "Summon Kaichi — Action (1 CE)",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "action",
      "value": 1,
@@ -30,9 +31,56 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "dAkL3TPaCasdd4dw",
+      "onSave": false
+     }
+    ]
+   },
+   "hWdEU61tFCDYEOJ5": {
+    "_id": "hWdEU61tFCDYEOJ5",
+    "type": "attack",
+    "name": "Kaichi Horn (extra attack)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Once per turn while Kaichi is summoned",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
      "value": "30",
@@ -46,15 +94,13 @@
      },
      "override": true
     },
-    "duration": {
-     "value": "1",
-     "units": "minute",
-     "concentration": false,
-     "override": true
-    },
+    "effects": [],
     "attack": {
-     "ability": "spellcasting",
+     "ability": "",
      "bonus": "",
+     "critical": {
+      "threshold": null
+     },
      "flat": false,
      "type": {
       "value": "melee",
@@ -75,9 +121,7 @@
         "enabled": false,
         "formula": ""
        },
-       "scaling": {
-        "number": 1
-       }
+       "scaling": {}
       }
      ]
     }
@@ -127,7 +171,7 @@
  "flags": {
   "jjk5e": {
    "dmgScale": {
-    "GCHuJRcdm5YBLZVK": [
+    "hWdEU61tFCDYEOJ5": [
      [
       0,
       "1d6"
@@ -155,9 +199,32 @@
    },
    "technique": "Auspicious Beast Summon",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "brFOPY7ZHkwkGj1z",
- "_key": "!items!YljWeNwIC8We2aY4"
+ "_key": "!items!YljWeNwIC8We2aY4",
+ "effects": [
+  {
+   "_id": "dAkL3TPaCasdd4dw",
+   "name": "Kaichi (summoned)",
+   "img": "modules/jjk5e/icons/techniques/auspicious-beast-summon.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>The yellow drill horn is summoned for 1 minute: use 'Kaichi Horn' once on each of your turns.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Auspicious Beast Summon"
+    }
+   },
+   "_key": "!items.effects!YljWeNwIC8We2aY4.dAkL3TPaCasdd4dw"
+  }
+ ]
 }

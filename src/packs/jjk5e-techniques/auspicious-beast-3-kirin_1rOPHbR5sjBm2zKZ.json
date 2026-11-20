@@ -40,6 +40,9 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
@@ -61,7 +64,13 @@
       "mode": "whole",
       "formula": "5"
      }
-    }
+    },
+    "effects": [
+     {
+      "_id": "jWIWCXpbf7sIHGKE",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -107,9 +116,68 @@
    },
    "technique": "Auspicious Beast Summon",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "brFOPY7ZHkwkGj1z",
- "_key": "!items!1rOPHbR5sjBm2zKZ"
+ "_key": "!items!1rOPHbR5sjBm2zKZ",
+ "effects": [
+  {
+   "_id": "jWIWCXpbf7sIHGKE",
+   "name": "Kirin: rooted",
+   "img": "modules/jjk5e/icons/techniques/auspicious-beast-summon.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Movement 0 until the start of your next turn. While you keep Kirin's temporary hit points you ignore exhaustion (GM).</p>",
+   "changes": [
+    {
+     "key": "system.attributes.movement.walk",
+     "mode": 5,
+     "value": "0",
+     "priority": 20
+    },
+    {
+     "key": "system.attributes.movement.swim",
+     "mode": 5,
+     "value": "0",
+     "priority": 20
+    },
+    {
+     "key": "system.attributes.movement.fly",
+     "mode": 5,
+     "value": "0",
+     "priority": 20
+    },
+    {
+     "key": "system.attributes.movement.climb",
+     "mode": 5,
+     "value": "0",
+     "priority": 20
+    },
+    {
+     "key": "system.attributes.movement.burrow",
+     "mode": 5,
+     "value": "0",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Auspicious Beast Summon"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStartSource"
+     ]
+    }
+   },
+   "_key": "!items.effects!1rOPHbR5sjBm2zKZ.jWIWCXpbf7sIHGKE"
+  }
+ ]
 }

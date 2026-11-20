@@ -3,13 +3,13 @@
 > Generado desde el compendio y las fuentes. **No certifica ejecución en Foundry ni fidelidad semántica a cada regla**.
 
 - Spells examinados: **360**; técnicas agrupadas: **81**.
-- Utilidad sin efecto configurado: revisar lógica: **114**.
-- Utilidad con efecto: comprobar activación: **19**.
-- Dominio genérico: resolver propiedades particulares: **56**.
+- Utilidad sin efecto configurado: revisar lógica: **113**.
+- Utilidad con efecto: comprobar activación: **17**.
+- Dominio genérico: resolver propiedades particulares: **54**.
 - Salvación sin daño/efecto automático: **29**.
 - Ataque sin daño propio: comprobar intención: **10**.
-- Mecánica configurada; falta prueba Foundry: **127**.
-- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **5**.
+- Mecánica configurada; falta prueba Foundry: **122**.
+- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **15**.
 
 ## Interpretación
 
@@ -34,21 +34,21 @@
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Auspicious Beast #1: Kaichi | 1 | attack:Action (1 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/auspicious-beast-1-kaichi_YljWeNwIC8We2aY4.json) |
-| Auspicious Beast #2: Reiki | 3 | utility:Bonus Action (1 CE); utility:Reaction (2 CE) | Utilidad con efecto: comprobar activación | [JSON](../src/packs/jjk5e-techniques/auspicious-beast-2-reiki_KToQLeKrM7o8UuVK.json) |
-| Auspicious Beast #3: Kirin | 6 | heal:Bonus Action (1+ CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/auspicious-beast-3-kirin_1rOPHbR5sjBm2zKZ.json) |
-| Auspicious Beast #4: Ryu | 11 | save:Action (10 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/auspicious-beast-4-ryu_NcFMNwa5YsVhp9y3.json) |
-| Domain Expansion: Auspicious Beasts’ Realm | 18 | utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-auspicious-beasts-realm_1YkXcsbuzkLSjva5.json) |
+| Auspicious Beast #1: Kaichi | 1 | utility:Summon Kaichi — Action (1 CE); attack:Kaichi Horn (extra attack) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/auspicious-beast-1-kaichi_YljWeNwIC8We2aY4.json) |
+| Auspicious Beast #2: Reiki | 3 | utility:Bonus Action (1 CE); utility:Reaction (2 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/auspicious-beast-2-reiki_KToQLeKrM7o8UuVK.json) |
+| Auspicious Beast #3: Kirin | 6 | heal:Bonus Action (1+ CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/auspicious-beast-3-kirin_1rOPHbR5sjBm2zKZ.json) |
+| Auspicious Beast #4: Ryu | 11 | save:Action (10 CE); utility:Ryu: command (bonus action) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/auspicious-beast-4-ryu_NcFMNwa5YsVhp9y3.json) |
+| Domain Expansion: Auspicious Beasts’ Realm | 18 | utility:Expand Domain (20 CE); heal:Initiative 20: Kirin refresh | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-auspicious-beasts-realm_1YkXcsbuzkLSjva5.json) |
 
 ### Black Bird Manipulation (5 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Cursed Crows | 1 | utility:Action (1 CE) | Utilidad con efecto: comprobar activación | [JSON](../src/packs/jjk5e-techniques/cursed-crows_y3LBulYKMnbDwSNs.json) |
-| Omen of Death | 3 | save:Bonus Action | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/omen-of-death_aCWMUrg04UP5kxwC.json) |
-| Raven’s Eye | 6 | utility:Bonus Action | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/raven-s-eye_VRx1ByQ8bVhRmbdx.json) |
-| Bird Strike | 11 | save:Action (8 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/bird-strike_9Q2ddIFWSmNrpEH8.json) |
-| Domain Expansion: Black Mahakala | 18 | utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-black-mahakala_Ao4mm1RP1nEiYzPS.json) |
+| Cursed Crows | 1 | utility:Action (1 CE); utility:See through a crow (Action) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/cursed-crows_y3LBulYKMnbDwSNs.json) |
+| Omen of Death | 3 | save:Bonus Action | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/omen-of-death_aCWMUrg04UP5kxwC.json) |
+| Raven’s Eye | 6 | utility:Bonus Action | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/raven-s-eye_VRx1ByQ8bVhRmbdx.json) |
+| Bird Strike | 11 | save:Action (8 CE); utility:Damaged limb (d6) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/bird-strike_9Q2ddIFWSmNrpEH8.json) |
+| Domain Expansion: Black Mahakala | 18 | utility:Expand Domain (20 CE); save:Initiative 20: Bird Strike ×3 (free) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-black-mahakala_Ao4mm1RP1nEiYzPS.json) |
 
 ### Black Box (4 spells)
 

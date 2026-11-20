@@ -35,14 +35,20 @@
      "spellSlot": false
     },
     "range": {
-     "value": "30",
-     "units": "ft",
+     "units": "self",
      "override": true
     },
     "target": {
+     "template": {
+      "type": "radius",
+      "size": "30",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
      "affects": {
       "type": "creature",
-      "count": "1"
+      "choice": true
      },
      "override": true
     },
@@ -118,7 +124,8 @@
   "jjk5e": {
    "technique": "Black Bird Manipulation",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "effects": [
@@ -140,7 +147,6 @@
    "transfer": false,
    "disabled": false,
    "duration": {
-    "seconds": 60,
     "rounds": 10
    },
    "description": "",
@@ -150,6 +156,31 @@
     }
    },
    "_key": "!items.effects!aCWMUrg04UP5kxwC.ic6dPQKN7voOmx4g"
+  },
+  {
+   "_id": "OKxju1r5JOULV0H9",
+   "name": "Omen of Death: advantage vs frightened",
+   "img": "modules/jjk5e/icons/techniques/black-bird-manipulation.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>You have advantage on attack rolls against frightened creatures.</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.advantage.attack.all",
+     "mode": 0,
+     "value": "target.statuses?.frightened",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": "Black Bird Manipulation"
+    }
+   },
+   "_key": "!items.effects!aCWMUrg04UP5kxwC.OKxju1r5JOULV0H9"
   }
  ],
  "folder": "51kqIFJDFNS150R8",

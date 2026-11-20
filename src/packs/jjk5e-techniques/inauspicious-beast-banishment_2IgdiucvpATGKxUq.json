@@ -23,32 +23,65 @@
   "activities": {
    "eGBc09FV9WqJ83U1": {
     "_id": "eGBc09FV9WqJ83U1",
-    "type": "utility",
-    "name": "Reaction (5 CE)",
+    "type": "save",
+    "name": "Action or Reaction (5 CE)",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "reaction",
      "value": 1,
-     "condition": ""
+     "condition": "",
+     "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
-     }
-    },
-    "range": {
-     "value": "60",
-     "units": "ft"
-    },
-    "target": {
-     "affects": {
-      "type": "creature",
-      "count": "1"
-     }
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
     },
     "duration": {
-     "units": "inst"
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "60",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "tMgMvMM94wiy7BYK",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "wis",
+      "cha"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
     },
     "useConditionText": "false"
    }
@@ -73,10 +106,33 @@
       "Auspicious Beast Summon"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!2IgdiucvpATGKxUq"
+ "_key": "!items!2IgdiucvpATGKxUq",
+ "effects": [
+  {
+   "_id": "tMgMvMM94wiy7BYK",
+   "name": "Summons undone",
+   "img": "modules/jjk5e/icons/techniques/auspicious-beast-summon.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>On a failed Cursed Energy save, this creature's summons, shikigami and familiars are undone.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Auspicious Beast Summon"
+    }
+   },
+   "_key": "!items.effects!2IgdiucvpATGKxUq.tMgMvMM94wiy7BYK"
+  }
+ ]
 }

@@ -58,6 +58,60 @@
      "concentration": false,
      "override": true
     }
+   },
+   "wMjZLY9zkXdFKZ0h": {
+    "_id": "wMjZLY9zkXdFKZ0h",
+    "type": "heal",
+    "name": "Initiative 20: Kirin refresh",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "XCy124g3vaSq3hrM",
+      "onSave": false
+     }
+    ],
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "",
+     "types": [
+      "temphp"
+     ],
+     "custom": {
+      "enabled": true,
+      "formula": "5 * max(@abilities.wis.mod, @abilities.cha.mod)"
+     },
+     "scaling": {}
+    }
    }
   },
   "uses": {
@@ -116,9 +170,32 @@
     "eG4EszGJmKw5HLa2": 20
    },
    "domainActivity": "eG4EszGJmKw5HLa2",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "brFOPY7ZHkwkGj1z",
- "_key": "!items!1YkXcsbuzkLSjva5"
+ "_key": "!items!1YkXcsbuzkLSjva5",
+ "effects": [
+  {
+   "_id": "XCy124g3vaSq3hrM",
+   "name": "Auspicious Beasts' Realm",
+   "img": "modules/jjk5e/icons/techniques/auspicious-beast-summon-domain.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>All four beasts are active without side effects; Kaichi and Ryu attacks always hit (domain sure-hit, applied by the module to technique attacks).</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Auspicious Beast Summon"
+    }
+   },
+   "_key": "!items.effects!1YkXcsbuzkLSjva5.XCy124g3vaSq3hrM"
+  }
+ ]
 }

@@ -39,12 +39,21 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
-    }
+    },
+    "effects": [
+     {
+      "_id": "Ab7dRegtMAborneb",
+      "onSave": false
+     }
+    ]
    },
    "b2gex8XcWCXeP4G3": {
     "_id": "b2gex8XcWCXeP4G3",
@@ -54,7 +63,7 @@
     "activation": {
      "type": "reaction",
      "value": 1,
-     "condition": "",
+     "condition": "When you are hit by an attack",
      "override": true
     },
     "consumption": {
@@ -69,13 +78,22 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
     },
-    "useConditionText": "false"
+    "useConditionText": "reaction === \"isHit\"",
+    "effects": [
+     {
+      "_id": "Q3CGcJx8QVdaAzhk",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -119,33 +137,93 @@
    },
    "technique": "Auspicious Beast Summon",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "brFOPY7ZHkwkGj1z",
  "effects": [
   {
-   "_id": "454LFPLROeF8Z1Cm",
-   "name": "Auspicious Beast #2: Reiki (toggle)",
+   "_id": "Ab7dRegtMAborneb",
+   "name": "Reiki: dark water (double speed)",
    "img": "modules/jjk5e/icons/techniques/auspicious-beast-summon.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Your movement is doubled until the end of your next turn.</p>",
+   "changes": [
+    {
+     "key": "system.attributes.movement.walk",
+     "mode": 1,
+     "value": "2",
+     "priority": 20
+    },
+    {
+     "key": "system.attributes.movement.swim",
+     "mode": 1,
+     "value": "2",
+     "priority": 20
+    },
+    {
+     "key": "system.attributes.movement.fly",
+     "mode": 1,
+     "value": "2",
+     "priority": 20
+    },
+    {
+     "key": "system.attributes.movement.climb",
+     "mode": 1,
+     "value": "2",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Auspicious Beast Summon"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnEndSource"
+     ]
+    }
+   },
+   "_key": "!items.effects!KToQLeKrM7o8UuVK.Ab7dRegtMAborneb"
+  },
+  {
+   "_id": "Q3CGcJx8QVdaAzhk",
+   "name": "Reiki: dark water (+5 AC)",
+   "img": "modules/jjk5e/icons/techniques/auspicious-beast-summon.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>+5 bonus to AC until the start of your next turn.</p>",
    "changes": [
     {
      "key": "system.attributes.ac.bonus",
      "mode": 2,
      "value": "+5",
-     "priority": null
+     "priority": 20
     }
    ],
-   "transfer": true,
-   "disabled": true,
-   "duration": {},
-   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "duration": {
+    "rounds": 1
+   },
    "flags": {
     "jjk5e": {
-     "auto": "toggle"
+     "technique": "Auspicious Beast Summon"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStartSource"
+     ]
     }
    },
-   "_key": "!items.effects!KToQLeKrM7o8UuVK.454LFPLROeF8Z1Cm"
+   "_key": "!items.effects!KToQLeKrM7o8UuVK.Q3CGcJx8QVdaAzhk"
   }
  ],
  "_key": "!items!KToQLeKrM7o8UuVK"

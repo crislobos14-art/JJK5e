@@ -51,6 +51,47 @@
       "onSave": false
      }
     ]
+   },
+   "uAbOK0lMz6xpjauI": {
+    "_id": "uAbOK0lMz6xpjauI",
+    "type": "utility",
+    "name": "See through a crow (Action)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "GVi3ljx8IB0Nldem",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -93,7 +134,9 @@
    },
    "technique": "Black Bird Manipulation",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Crow count is tracked by the player (you start with 3).",
+   "automation": "automated"
   }
  },
  "effects": [
@@ -115,6 +158,26 @@
     }
    },
    "_key": "!items.effects!y3LBulYKMnbDwSNs.VuOfabzOtQgknh1u"
+  },
+  {
+   "_id": "GVi3ljx8IB0Nldem",
+   "name": "Seeing through a crow",
+   "img": "modules/jjk5e/icons/techniques/black-bird-manipulation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [
+    "blinded"
+   ],
+   "description": "<p>Your eyes are closed (blinded unless you have blindsight) while you see through one crow; use its senses and your passive Perception. Delete this effect to stop (bonus action).</p>",
+   "changes": [],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": "Black Bird Manipulation"
+    }
+   },
+   "_key": "!items.effects!y3LBulYKMnbDwSNs.GVi3ljx8IB0Nldem"
   }
  ],
  "folder": "51kqIFJDFNS150R8",

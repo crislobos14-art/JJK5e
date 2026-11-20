@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.29.0 — Técnica por técnica: Auspicious Beast Summon y Black Bird Manipulation
+- **Kaichi**: invocar cuesta 1 CE (1 minuto) y el cuerno ataca gratis como ataque extra (1d6 → 3d6 por nivel).
+- **Reiki**: acción adicional duplica tu movimiento; reacción +5 CA al ser impactado (Midi la ofrece).
+- **Kirin**: 5 PG temporales por CE y movimiento 0 hasta tu siguiente turno.
+- **Ryu**: 8d10 perforante (FUE) a una criatura a 30 pies y efecto de Ryu invocado (10 minutos).
+- **Auspicious Beasts' Realm**: en iniciativa 20 Kirin se recarga (5 × mod. EM PG temporales).
+- **Inauspicious Beast Banishment**: salvación de EM en 60 pies; al fallar, sus invocaciones se deshacen.
+- **Cursed Crows**: ver a través de un cuervo te deja cegado hasta que lo terminas.
+- **Omen of Death**: asustado 1 minuto con salvación repetida (Midi) y ventaja en ataques contra asustados.
+- **Raven's Eye**: +1 a Percepción pasiva por cuervo (flag `jjk5e.crows`).
+- **Bird Strike**: mitad al salvar; al fallar, Midi tira el d6 de la extremidad dañada.
+- **Black Mahakala**: en iniciativa 20, Bird Strike gratis a hasta 3 objetivos.
+- **White Bird Manipulation**: sacrificar paloma cura 1d8 por CE (hasta 2 × mod. EM); protección de paloma.
+- Automatizados a mano: 15/360 spells. Sin probar en Foundry real con Midi-QOL.
+
 ## 1.28.0 — Técnica por técnica: Antigravity System
 - **Antigravity**: salvación de DES en cilindro de 10 pies (eliges a quién excluir, Focused System). Al fallar
   aplica *Lifted* hasta el inicio de tu siguiente turno. Con Midi-QOL, si tienes **Gravity Field** los afectados
