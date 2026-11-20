@@ -9,7 +9,7 @@
  * - JJK panel on character sheets, Spanish / English UI, effect expiry (unless Times Up is active).
  */
 const MODULE_ID = "jjk5e";
-const DATA_VERSION = "1.21.0";
+const DATA_VERSION = "1.22.0";
 const FOLDER_NAME = "JJK 5e V.6";
 const ICONS = `modules/${MODULE_ID}/icons`;
 
@@ -1932,8 +1932,22 @@ function themeFile(theme, slot, item) {
   return null;
 }
 
+/** Automated Animations will animate this item: its own flags, or a Global Automatic Recognition match by name. */
 function aaHandles(item) {
-  return !!(game.modules.get("autoanimations")?.active && item?.flags?.autoanimations?.isEnabled);
+  if (!game.modules.get("autoanimations")?.active || !item) return false;
+  const flags = item.flags?.autoanimations;
+  if (flags?.killAnim || flags?.isEnabled === false) return false;
+  if (flags?.isEnabled && flags?.isCustomized) return true;
+  try {
+    if (game.settings.get("autoanimations", "disableAutoRec")) return !!flags?.isEnabled;
+    const rinse = (n) => String(n ?? "").replace(/\s+/g, "").toLowerCase();
+    const menus = ["melee", "range", "ontoken", "templatefx", "aura", "preset"]
+      .flatMap((k) => { try { return game.settings.get("autoanimations", `aaAutorec-${k}`) ?? []; } catch (err) { return []; } });
+    const name = item.name ?? "";
+    const rinsed = rinse(name);
+    return menus.some((m) => m?.label && (m.advanced?.exactMatch ? m.label === name
+      : rinsed.includes(rinse(m.label)) && !(m.advanced?.excludedTerms ?? []).some((x) => rinsed.includes(rinse(x)))));
+  } catch (err) { return !!flags?.isEnabled; }
 }
 
 function tokenOf(actor) {
@@ -3163,6 +3177,7 @@ GM_EXTRA.domainZone = async ({ sceneId, x, y, radius, name, color, actorUuid }) 
   }
   const actor = await fromUuid(actorUuid);
   if (zone && actor) await actor.setFlag(MODULE_ID, "domainState", { ...(getDomain(actor) ?? {}), zone });
+  if (zone) await domainSceneFX(scene, zone.id, true);
 };
 
 GM_EXTRA.domainZoneResize = async ({ sceneId, zone, x, y, radius }) => {
@@ -3177,6 +3192,7 @@ GM_EXTRA.domainZoneDelete = async ({ sceneId, zone }) => {
   const scene = game.scenes?.get?.(sceneId);
   const doc = zone && scene?.getEmbeddedDocument?.(zone.kind, zone.id);
   if (doc) await doc.delete();
+  if (zone && scene) await domainSceneFX(scene, zone.id, false);
 };
 
 GM_EXTRA.domainUpdate = async ({ actorUuid, state }) => {
@@ -4025,13 +4041,13 @@ function originSaveDC(effect) {
 }
 
 function resolveOverTimeDC(effect, data) {
-  const fix = (list) => (list ?? []).map((c) => (typeof c?.value === "string" && c.value.includes("##JJKDC##")
-    ? { ...c, value: c.value.replaceAll("##JJKDC##", String(originSaveDC(effect))) } : c));
+  const fix = (list) => (list ?? []).map((c) => (typeof c?.value === "string" && c.value.includes("JJKORIGINDC")
+    ? { ...c, value: c.value.replaceAll("JJKORIGINDC", String(originSaveDC(effect))) } : c));
   const upd = {};
   const top = data?.changes ?? effect?._source?.changes;
-  if (top?.some?.((c) => String(c?.value).includes("##JJKDC##"))) upd.changes = fix(top);
+  if (top?.some?.((c) => String(c?.value).includes("JJKORIGINDC"))) upd.changes = fix(top);
   const sys = data?.system?.changes ?? effect?._source?.system?.changes;
-  if (sys?.some?.((c) => String(c?.value).includes("##JJKDC##"))) upd["system.changes"] = fix(sys);
+  if (sys?.some?.((c) => String(c?.value).includes("JJKORIGINDC"))) upd["system.changes"] = fix(sys);
   if (Object.keys(upd).length) effect.updateSource(upd);
 }
 
@@ -4062,4 +4078,92 @@ Hooks.once("init", () => {
 Hooks.once("ready", () => {
   registerMidiAutomation();
   Object.assign(game.modules.get(MODULE_ID).api ?? {}, { originSaveDC, resolveOverTimeDC, registerMidiAutomation });
+});
+
+
+/* -------------------------------------------- */
+/*  1.22: Recommended modules (all optional)     */
+/*  Token Magic FX, FXMaster, Visual Active      */
+/*  Effects, Automated Animations                */
+/* -------------------------------------------- */
+
+const modActive = (id) => !!game.modules?.get?.(id)?.active;
+
+/* ---- FXMaster: scene tint while a domain is open (GM side) ---- */
+
+async function domainSceneFX(scene, zoneId, on) {
+  if (!modActive("fxmaster") || !globalThis.FXMASTER?.api?.effects || !setting("fxDomains")) return;
+  const id = `apiMacro_jjk5eDomain${zoneId}_f`;
+  try {
+    if (on) {
+      await FXMASTER.api.effects.play({ scene, filters: [{ id, type: "color",
+        options: { color: { value: "#4b1d6e", apply: true }, saturation: 0.7, contrast: 1.15, brightness: 0.85 } }] });
+    } else {
+      await FXMASTER.api.effects.stop({ scene, filters: [id] });
+    }
+  } catch (err) { console.warn(`${MODULE_ID} | FXMaster domain filter`, err); }
+}
+
+/* ---- Token Magic FX: token auras for the Zone and an open domain ---- */
+
+const TMFX_AURAS = {
+  zone: { filterType: "glow", filterId: "jjk5e-zone", outerStrength: 5, innerStrength: 0, color: 0x220000, quality: 0.5, padding: 10,
+    animated: { color: { active: true, loopDuration: 1200, animType: "colorOscillation", val1: 0x000000, val2: 0xd00000 } } },
+  domain: { filterType: "glow", filterId: "jjk5e-domain", outerStrength: 7, innerStrength: 1, color: 0x4b1d6e, quality: 0.5, padding: 12,
+    animated: { color: { active: true, loopDuration: 3000, animType: "colorOscillation", val1: 0x2a0a40, val2: 0xa76fd6 } } }
+};
+
+function auraKind(effect) {
+  const f = effect?.flags?.jjk5e ?? {};
+  if (f.kind === "zone") return "zone";
+  if (f.kind === "domain" || f.domainOpen) return "domain";
+  return null;
+}
+
+async function syncTokenAuras(actor) {
+  if (!modActive("tokenmagic") || !globalThis.TokenMagic || !setting("tmfxAuras") || !actor?.isOwner) return;
+  const active = new Set(actor.effects.filter((e) => !e.disabled).map(auraKind).filter(Boolean));
+  for (const token of actor.getActiveTokens?.() ?? []) {
+    for (const [kind, params] of Object.entries(TMFX_AURAS)) {
+      try {
+        const has = TokenMagic.hasFilterId?.(token, params.filterId);
+        if (active.has(kind) && !has) await TokenMagic.addUpdateFilters(token, [foundry.utils.deepClone(params)]);
+        if (!active.has(kind) && has) await TokenMagic.deleteFilters(token, params.filterId);
+      } catch (err) { console.warn(`${MODULE_ID} | Token Magic FX`, err); }
+    }
+  }
+}
+
+/* ---- Visual Active Effects: buttons on JJK effects ---- */
+
+function vaeButtons(effect, buttons) {
+  const actor = effect?.parent;
+  if (!actor || actor.documentName !== "Actor" || !actor.isOwner || !Array.isArray(buttons)) return;
+  const f = effect.flags?.jjk5e ?? {};
+  if (f.kind === "domain" || f.domainOpen) {
+    buttons.push({ label: t("Domain.Close"), callback: () => closeDomainOf(actor) });
+    buttons.push({ label: t("Domain.HUD"), callback: () => openDomainHUD(actor) });
+  }
+  if (f.vow) buttons.push({ label: t("Vow.Title"), callback: () => openVows(actor) });
+  if (f.kind === "burnout" || f.burnout) buttons.push({ label: t("SceneTools.ShortRest"), callback: () => shortRestCE(actor) });
+}
+
+Hooks.once("init", () => {
+  const reg = (key, def) => game.settings.register(MODULE_ID, key, {
+    name: `JJK5E.Settings.${key}.Name`, hint: `JJK5E.Settings.${key}.Hint`, scope: "world", config: true, type: Boolean, default: def });
+  reg("tmfxAuras", true);
+  reg("fxDomains", true);
+  const auraHook = (effect, data, userId) => {
+    if (userId !== game.user.id || !auraKind(effect) || effect.parent?.documentName !== "Actor") return;
+    syncTokenAuras(effect.parent);
+  };
+  Hooks.on("createActiveEffect", (e, o, u) => auraHook(e, o, u));
+  Hooks.on("updateActiveEffect", (e, c, o, u) => auraHook(e, c, u));
+  Hooks.on("deleteActiveEffect", (e, o, u) => auraHook(e, o, u));
+  Hooks.on("createToken", (doc, o, userId) => { if (userId === game.user.id && doc.actor) setTimeout(() => syncTokenAuras(doc.actor), 200); });
+  Hooks.on("visual-active-effects.createEffectButtons", (effect, buttons) => { try { vaeButtons(effect, buttons); } catch (err) { console.warn(`${MODULE_ID} | VAE`, err); } });
+});
+
+Hooks.once("ready", () => {
+  Object.assign(game.modules.get(MODULE_ID).api ?? {}, { syncTokenAuras, domainSceneFX, aaHandles, vaeButtons });
 });

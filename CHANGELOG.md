@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.22.0
+- Recommended modules updated for Foundry 14 / dnd5e 6.1: Midi-QOL 14.7.0+, DAE 14.6.0+, Sequencer 4+, JB2A,
+  Automated Animations, Token Magic FX, FXMaster 8+, Dice So Nice, Visual Active Effects, Bar Brawl, Token Action HUD.
+- Token Magic FX: red glow while in the Zone (Black Flash), purple glow while your domain is open (setting).
+- FXMaster: the scene is tinted purple while a domain expansion is open, removed when it closes (setting).
+- Visual Active Effects: buttons on JJK effects (close domain, domain HUD, binding vows, short rest CE).
+- Automated Animations: JJK animations are skipped for items that Automated Animations recognises by name, so the
+  same use is never animated twice.
+- OverTime save DC placeholder made safe with DAE's value evaluation.
+
 ## 1.21.0
 - Midi-QOL integration (optional, Midi-QOL 14.7.0+ for dnd5e 6.1):
   - Black Flash is checked inside Midi's workflow, after the attack roll and before damage, so its triple-dice

@@ -201,7 +201,7 @@
     {
      "key": "flags.midi-qol.OverTime",
      "mode": 0,
-     "value": "turn=end, saveAbility=con, saveDC=##JJKDC##, saveCount=1-, label=\"Blinded (Light Manipulation)\"",
+     "value": "turn=end, saveAbility=con, saveDC=JJKORIGINDC, saveCount=1-, label=\"Blinded (Light Manipulation)\"",
      "priority": 20
     }
    ],
@@ -227,7 +227,7 @@
     {
      "key": "flags.midi-qol.OverTime",
      "mode": 0,
-     "value": "turn=end, saveAbility=con, saveDC=##JJKDC##, saveCount=1-, label=\"Blinded (Light Manipulation)\"",
+     "value": "turn=end, saveAbility=con, saveDC=JJKORIGINDC, saveCount=1-, label=\"Blinded (Light Manipulation)\"",
      "priority": 20
     }
    ],

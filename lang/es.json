@@ -335,6 +335,14 @@
       "domainZones": {
         "Name": "Zona y barrera de dominio",
         "Hint": "Dibuja el dominio en el mapa, lleva PG/CA de la barrera, choques e impacto garantizado solo dentro."
+      },
+      "tmfxAuras": {
+        "Name": "Auras de Token Magic FX",
+        "Hint": "Con Token Magic FX: brillo rojo en los tokens en la Zona (tras un Black Flash) y brillo morado mientras su dominio está abierto."
+      },
+      "fxDomains": {
+        "Name": "Tinte de dominio con FXMaster",
+        "Hint": "Con FXMaster: tiñe la escena de morado mientras hay una expansión de dominio abierta."
       }
     },
     "Feats": {

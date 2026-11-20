@@ -130,7 +130,7 @@
     {
      "key": "flags.midi-qol.OverTime",
      "mode": 0,
-     "value": "turn=end, saveAbility=dex, saveDC=##JJKDC##, saveCount=1-, label=\"Frightened (Fine Line)\"",
+     "value": "turn=end, saveAbility=dex, saveDC=JJKORIGINDC, saveCount=1-, label=\"Frightened (Fine Line)\"",
      "priority": 20
     }
    ],

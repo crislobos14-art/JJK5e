@@ -105,7 +105,7 @@
     {
      "key": "flags.midi-qol.OverTime",
      "mode": 0,
-     "value": "turn=end, saveAbility=wis, saveDC=##JJKDC##, saveCount=1-, label=\"Frightened (Frightful Presence)\"",
+     "value": "turn=end, saveAbility=wis, saveDC=JJKORIGINDC, saveCount=1-, label=\"Frightened (Frightful Presence)\"",
      "priority": 20
     }
    ],

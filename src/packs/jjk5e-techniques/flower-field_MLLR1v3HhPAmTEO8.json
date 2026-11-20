@@ -136,7 +136,7 @@
     {
      "key": "flags.midi-qol.OverTime",
      "mode": 0,
-     "value": "turn=end, saveAbility=wis, saveDC=##JJKDC##, saveCount=1-, label=\"Charmed (Flower Field)\"",
+     "value": "turn=end, saveAbility=wis, saveDC=JJKORIGINDC, saveCount=1-, label=\"Charmed (Flower Field)\"",
      "priority": 20
     }
    ],

@@ -142,7 +142,7 @@
     {
      "key": "flags.midi-qol.OverTime",
      "mode": 0,
-     "value": "turn=end, saveAbility=str, saveDC=##JJKDC##, saveCount=1-, label=\"Restrained (Lapse Blue)\"",
+     "value": "turn=end, saveAbility=str, saveDC=JJKORIGINDC, saveCount=1-, label=\"Restrained (Lapse Blue)\"",
      "priority": 20
     }
    ],

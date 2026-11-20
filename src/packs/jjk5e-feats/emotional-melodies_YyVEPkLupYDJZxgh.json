@@ -105,7 +105,7 @@
     {
      "key": "flags.midi-qol.OverTime",
      "mode": 0,
-     "value": "turn=end, saveAbility=cha, saveDC=##JJKDC##, saveCount=1-, label=\"Charmed (Emotional Melodies)\"",
+     "value": "turn=end, saveAbility=cha, saveDC=JJKORIGINDC, saveCount=1-, label=\"Charmed (Emotional Melodies)\"",
      "priority": 20
     }
    ],

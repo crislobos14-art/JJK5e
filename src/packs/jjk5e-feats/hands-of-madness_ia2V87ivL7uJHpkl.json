@@ -144,7 +144,7 @@
     {
      "key": "flags.midi-qol.OverTime",
      "mode": 0,
-     "value": "turn=end, saveAbility=wis, saveDC=##JJKDC##, saveCount=1-, label=\"Frightened (Hands of Madness)\"",
+     "value": "turn=end, saveAbility=wis, saveDC=JJKORIGINDC, saveCount=1-, label=\"Frightened (Hands of Madness)\"",
      "priority": 20
     }
    ],

@@ -154,7 +154,7 @@
     {
      "key": "flags.midi-qol.OverTime",
      "mode": 0,
-     "value": "turn=end, saveAbility=str, saveDC=##JJKDC##, saveCount=1-, label=\"Restrained (Offensive Infinity)\"",
+     "value": "turn=end, saveAbility=str, saveDC=JJKORIGINDC, saveCount=1-, label=\"Restrained (Offensive Infinity)\"",
      "priority": 20
     }
    ],

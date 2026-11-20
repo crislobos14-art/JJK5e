@@ -236,7 +236,7 @@
     {
      "key": "flags.midi-qol.OverTime",
      "mode": 0,
-     "value": "turn=end, saveAbility=dex, saveDC=##JJKDC##, saveCount=1-, label=\"Restrained (Light Techniques)\"",
+     "value": "turn=end, saveAbility=dex, saveDC=JJKORIGINDC, saveCount=1-, label=\"Restrained (Light Techniques)\"",
      "priority": 20
     }
    ],
@@ -262,7 +262,7 @@
     {
      "key": "flags.midi-qol.OverTime",
      "mode": 0,
-     "value": "turn=end, saveAbility=con, saveDC=##JJKDC##, saveCount=1-, label=\"Blinded (Light Techniques)\"",
+     "value": "turn=end, saveAbility=con, saveDC=JJKORIGINDC, saveCount=1-, label=\"Blinded (Light Techniques)\"",
      "priority": 20
     }
    ],

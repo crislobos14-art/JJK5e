@@ -121,7 +121,7 @@
     {
      "key": "flags.midi-qol.OverTime",
      "mode": 0,
-     "value": "turn=end, saveAbility=con, saveDC=##JJKDC##, saveCount=1-, label=\"Poisoned (Noxious Poison)\"",
+     "value": "turn=end, saveAbility=con, saveDC=JJKORIGINDC, saveCount=1-, label=\"Poisoned (Noxious Poison)\"",
      "priority": 20
     }
    ],

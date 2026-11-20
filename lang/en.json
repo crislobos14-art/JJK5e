@@ -335,6 +335,14 @@
       "domainZones": {
         "Name": "Domain zone and barrier",
         "Hint": "Draw the domain on the map, track barrier HP/AC, clashes and sure hit only inside."
+      },
+      "tmfxAuras": {
+        "Name": "Token Magic FX auras",
+        "Hint": "With Token Magic FX: a red glow on tokens in the Zone (after a Black Flash) and a purple glow while their domain is open."
+      },
+      "fxDomains": {
+        "Name": "FXMaster domain tint",
+        "Hint": "With FXMaster: tint the scene purple while a domain expansion is open."
       }
     },
     "Feats": {

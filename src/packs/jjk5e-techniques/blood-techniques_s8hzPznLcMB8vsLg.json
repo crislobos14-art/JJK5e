@@ -226,7 +226,7 @@
     {
      "key": "flags.midi-qol.OverTime",
      "mode": 0,
-     "value": "turn=end, saveAbility=str, saveDC=##JJKDC##, saveCount=1-, label=\"Restrained (Blood Techniques)\"",
+     "value": "turn=end, saveAbility=str, saveDC=JJKORIGINDC, saveCount=1-, label=\"Restrained (Blood Techniques)\"",
      "priority": 20
     }
    ],
