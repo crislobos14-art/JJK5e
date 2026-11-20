@@ -3487,7 +3487,14 @@ async function detectClash(actor) {
     && getDomain(a).sceneId === mine.sceneId && !getDomain(a).clash);
   const tokenOthers = (canvas?.tokens?.placeables ?? []).map((tk) => tk.actor).filter((a) => a && a !== actor && !a.prototypeToken?.actorLink
     && getDomain(a)?.open && !getDomain(a).clash && !others.includes(a));
-  const rival = [...others, ...tokenOthers][0];
+  const candidates = [...new Set([...others, ...tokenOthers])];
+  // A multi-domain clash has different rules; never silently choose one rival.
+  if (candidates.length > 1) {
+    ui.notifications.warn("JJK V.6: a three-or-more-way domain clash requires GM adjudication.");
+    await chat(actor, "<p>Multiple Domain Clash: resolve all refinements and barriers with the GM. No automatic winner is applied.</p>");
+    return;
+  }
+  const rival = candidates[0];
   if (!rival) return;
   const rs = getDomain(rival);
   const diff = mine.refinement - rs.refinement;
