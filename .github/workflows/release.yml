@@ -29,6 +29,12 @@ jobs:
           if gh release view "$TAG" >/dev/null 2>&1; then echo "exists=true" >> "$GITHUB_OUTPUT"; echo "$TAG already released"; fi
           node -e "const m=require('./module.json'); if(!m.download.includes('/releases/download/$TAG/')) { console.error('download URL does not match $TAG'); process.exit(1); }"
 
+      - name: Validate before publishing
+        run: |
+          node --input-type=module --check < scripts/jjk5e.js
+          node --test tests/*.test.mjs
+          node tools/audit-techniques.mjs --check
+
       - name: Build compendium packs
         if: steps.v.outputs.exists != 'true'
         run: |

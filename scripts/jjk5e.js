@@ -549,6 +549,7 @@ const RO_ROWS = [
 
 function registerActivityHooks() {
   Hooks.on("dnd5e.preUseActivity", (activity, usageConfig) => {
+    if (activity.item?.flags?.jjk5e?.tokenSwap?.[activity.id] && !validateTokenSwap(activity)) return false;
     const actor = activity.actor ?? activity.item?.actor;
     if (activity.item?.flags?.jjk5e?.mindset && actor && !actor.system.attributes?.inspiration) {
       ui.notifications.warn(t("Notify.NoInspiration", { name: actor.name }));
@@ -588,6 +589,7 @@ function registerActivityHooks() {
 
   // D&D5e 6.1: this gate runs after the user selected CE scaling, before item consumption.
   Hooks.on("dnd5e.preActivityConsumption", (activity, usageConfig) => {
+    if (activity.item?.flags?.jjk5e?.tokenSwap?.[activity.id] && !validateTokenSwap(activity)) return false;
     if (!setting("autoSpendCE")) return;
     const actor = activity.actor ?? activity.item?.actor;
     const cost = totalActivityCECost(actor, activity, usageConfig);
@@ -602,6 +604,9 @@ function registerActivityHooks() {
   Hooks.on("dnd5e.postUseActivity", async (activity, usageConfig) => {
     const actor = activity.actor ?? activity.item?.actor;
     const item = activity.item;
+    if (item?.flags?.jjk5e?.tokenSwap?.[activity.id]) {
+      if (!validateTokenSwap(activity)) return;
+    }
     // Pay BEFORE opening domains or applying buffs. Failed CE payment must never
     // leave a benefit in place. The pre-use gate handles ordinary insufficient CE.
     if (setting("autoSpendCE") && actor && item) {
@@ -651,10 +656,28 @@ async function applyTokenSwap(actor, item, activity) {
   if (!game.user.isGM && !target.actor?.isOwner) {
     return ui.notifications.warn("JJK 5e: the selected token must be owned by you; ask the GM to resolve other swaps.");
   }
-  await viaGM("tokenSwap", {
+  await GM_EXTRA.tokenSwap({
     sceneId: canvas.scene.id, sourceId: source.id, targetId: target.id,
     actorUuid: actor.uuid, userId: game.user.id
   });
+}
+
+function validateTokenSwap(activity) {
+  const actor = activity.actor ?? activity.item?.actor;
+  const source = actor?.getActiveTokens?.(true, true)?.find((t) => t.parent?.id === canvas.scene?.id);
+  const targets = [...(game.user?.targets ?? [])];
+  const target = targets.length === 1 ? targets[0].document : null;
+  const fail = (message) => { ui.notifications.warn(message); return false; };
+  if (!source || !target || source.id === target.id || source.parent !== target.parent)
+    return fail("JJK 5e: select exactly one other token in the caster's scene.");
+  if (!source.isOwner || !target.isOwner)
+    return fail("JJK 5e: the GM must perform swaps involving tokens you do not own. No CE has been charged.");
+  const a = tokenCenter(source), b = tokenCenter(target);
+  const distance = Math.hypot(a.x - b.x, a.y - b.y) / ftToPx(source.parent, 1);
+  const range = Number(activity.range?.value);
+  if (!Number.isFinite(range) || range <= 0 || distance > range + 0.001)
+    return fail("JJK 5e: swap target is outside the technique's range.");
+  return true;
 }
 
 /** Apply narrowly defined, verifiable self buffs. Unknown effects remain GM decisions. */
@@ -1764,6 +1787,10 @@ Hooks.once("ready", async () => {
     return;
   }
   registerActivityHooks();
+  if (game.user.isGM) {
+    const inactive = ["midi-qol", "dae"].filter(id => !game.modules.get(id)?.active);
+    if (inactive.length) ui.notifications.warn("JJK5e · " + (game.i18n.lang === "es" ? "Activa los módulos de combate: " : "Enable combat modules: ") + inactive.join(", "));
+  }
 
   Hooks.on("dnd5e.advancementManagerComplete", async (manager) => {
     const actor = manager?.actor;
@@ -3488,13 +3515,15 @@ async function domainClosed(actor) {
   const state = getDomain(actor);
   if (!state) return;
   if (state.zone) await viaGM("domainZoneDelete", { sceneId: state.sceneId, zone: state.zone });
-  if (state.clash?.with) {
-    const other = await fromUuid(state.clash.with);
+  const peers = state.clash?.with ? [state.clash.with].flat() : [];
+  for (const uuid of peers) {
+    const other = await fromUuid(uuid).catch(() => null);
     const os = getDomain(other);
-    if (os?.clash?.with === actor.uuid) {
-      os.clash = { ...os.clash, resolved: true };
+    if (os?.clash && [os.clash.with].flat().includes(actor.uuid)) {
+      const remaining = [os.clash.with].flat().filter((id) => id !== actor.uuid);
+      os.clash = { ...os.clash, with: remaining, resolved: remaining.length === 0 };
       await setDomain(other, os);
-      await chat(other, `<p><i class="fas fa-crown"></i> ${t("Domain.ClashWon", { name: esc(other.name) })}</p>`);
+      if (!remaining.length) await chat(other, `<p><i class="fas fa-crown"></i> ${t("Domain.ClashWon", { name: esc(other.name) })}</p>`);
     }
   }
   if (actor.isOwner) await actor.unsetFlag(MODULE_ID, "domainState");
@@ -3554,10 +3583,14 @@ async function detectClash(actor) {
   const mine = getDomain(actor);
   if (!mine?.open) return;
   const others = (game.actors?.contents ?? [...(game.actors ?? [])]).filter((a) => a !== actor && getDomain(a)?.open
-    && getDomain(a).sceneId === mine.sceneId && !getDomain(a).clash);
+    && getDomain(a).sceneId === mine.sceneId);
   const tokenOthers = (canvas?.tokens?.placeables ?? []).map((tk) => tk.actor).filter((a) => a && a !== actor && !a.prototypeToken?.actorLink
-    && getDomain(a)?.open && !getDomain(a).clash && !others.includes(a));
-  const candidates = [...new Set([...others, ...tokenOthers])];
+    && getDomain(a)?.open && !others.includes(a));
+  const candidates = [...new Set([...others, ...tokenOthers])].filter((a) => {
+    const state = getDomain(a);
+    if (state.sceneId !== mine.sceneId || ![state.x, state.y, mine.x, mine.y].every(Number.isFinite)) return false;
+    return Math.hypot(state.x - mine.x, state.y - mine.y) <= ftToPx(game.scenes.get(mine.sceneId), state.radius + mine.radius);
+  });
   if (candidates.length > 1) {
     const actors = [actor, ...candidates];
     const results = multiDomainClash(actors.map((a) => ({ id: a.uuid, refinement: getDomain(a).refinement })));

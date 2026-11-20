@@ -5,8 +5,8 @@ Content is in English, as in the original document.
 
 ## Requirements
 
-- Foundry VTT v13 or v14 (verified on 14.370)
-- dnd5e system 5.3+ (Foundry v13) or 6.x (Foundry v14, verified on 6.1.1)
+- Foundry VTT 14 and dnd5e 6.x for the combat integration profile.
+- Install and enable **Midi-QOL 14.7.0+** and **DAE 14.6.0+** before starting the world.
 - Optional: **Sequencer** + **JB2A** (free) for animations; **Automated Animations** keeps working for official D&D items
 
 ## Installation
@@ -98,7 +98,7 @@ Change any animation with the *Animation overrides (JSON)* setting, or turn them
 
 ## Midi-QOL
 
-Midi-QOL is optional. When it is active, the domain sure-hit marks every target of your innate-technique attacks as hit
+Midi-QOL handles domain sure-hit for eligible targets of innate-technique attacks
 and makes targets fail the saving throws of your technique, and animations use Midi's real hit list.
 
 ## Domain Expansion sure-hit
@@ -300,7 +300,7 @@ CC BY-NC-SA 4.0 — see `LICENSE.txt`. Non-commercial use only.
 
 ### Recommended modules (Foundry 14)
 Sequencer + JB2A (animations), Dice So Nice, Visual Active Effects, Bar Brawl, Token Action HUD D&D 5e,
-Tidy 5e Sheets, FXMaster, Midi-QOL + DAE (optional automation), Automated Animations (optional).
+Tidy 5e Sheets, FXMaster and Automated Animations complement the required combat modules.
 
 ## v1.23.0 audit-hardening update
 

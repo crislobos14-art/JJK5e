@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.26.0 — Combat dependencies and table usability
+- Foundry now declares Midi-QOL and DAE as required combat dependencies. Visual integrations remain recommended. The GM receives an activation warning if either combat module is inactive.
+- Check Boogie's target, ownership and horizontal range before charging CE. A GM can perform swaps involving other players' tokens.
+- Domain detection considers overlapping barriers in the same scene, including already engaged opponents. Closing a domain removes its references from surviving participants.
+- Release builds run syntax, regression and compendium audit checks before packaging.
+- Verification covers automated checks. Live multiplayer play, interrupted swaps, and redistribution of clash roles after a leader leaves remain unverified.
+
 ## 1.25.0 — Multi-domain clashes and executable Boogie Woogie
 - Replaced the former three-or-more-domain GM-only warning with deterministic V.6 clash tracking for every participating domain. Tied leaders remain tied; each weaker domain receives its own countdown and shrinks each round while sure-hit effects remain disabled.
 - Added a pure multi-domain resolver and regression coverage for unique and tied leaders.
