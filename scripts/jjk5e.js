@@ -853,6 +853,8 @@ async function shortRestCE(actor) {
   if (!actor || !actor.isOwner) return;
   const pool = findPool(actor);
   if (!pool) return ui.notifications.warn(t("Notify.NoPool", { name: actor.name }));
+  if (vowBlocksUsage(actor.effects, { costsCE: true }))
+    return ui.notifications.warn("JJK 5e: a vow penalty prohibits CE recovery.");
   const classes = actor.items.filter((i) => i.type === "class");
   const total = classes.reduce((n, c) => n + Math.max(0, Number(c.system.levels) || 0), 0);
   const available = classes.reduce((n, c) =>
@@ -3574,6 +3576,13 @@ function makeDomainClass() {
           if (s.balanced) await spendCE(this.actor, 5, t("Domain.Balanced"));
           await setDomain(this.actor, s);
         },
+        lethal: async function(ev, el) {
+          const lethal = el.dataset.m !== "nonlethal";
+          await this.actor.setFlag(MODULE_ID, "domainLethal", lethal);
+          const state = getDomain(this.actor);
+          if (state) { state.lethal = lethal; await setDomain(this.actor, state); }
+          this.render();
+        },
         close: function () { closeDomainOf(this.actor); }
       }
     };
@@ -3592,10 +3601,10 @@ function makeDomainClass() {
       return `<section class="jjk-panel">
         <div class="jjk-barrier"><div class="fill" style="width:${pct}%"></div><span>${s.hp} / ${s.max}</span></div>
         <p>${t("Domain.Stats", { ac: s.ac, ref: s.refinement, r: s.radius })}</p>${clash}
-        <p class="hint">${t("Domain.Mode")}: ${mode}</p>
+        <p class="hint">${t("Domain.Mode")}: ${mode}; ${s.lethal === false ? "Non-lethal (no sure-hit)" : "Lethal"}</p>
         <div class="btns"><button type="button" data-action="hit"><i class="fas fa-hammer"></i> ${t("Domain.HitBarrier")}</button>
           <button type="button" data-action="weak"><i class="fas fa-crosshairs"></i> ${t("Domain.WeakSpot")}</button></div>
-        ${this.actor.isOwner ? `<div class="btns">${s.refinement >= 100 ? `<button type="button" data-action="mode" data-m="flip">${t("Domain.Flipped")}</button>
+        ${this.actor.isOwner ? `<div class="btns"><button type="button" data-action="lethal" data-m="${s.lethal === false ? "lethal" : "nonlethal"}">${s.lethal === false ? "Make lethal" : "Make non-lethal"}</button>${s.refinement >= 100 ? `<button type="button" data-action="mode" data-m="flip">${t("Domain.Flipped")}</button>
           <button type="button" data-action="mode" data-m="balanced">${t("Domain.Balanced")} (5)</button>` : ""}
           <button type="button" data-action="close"><i class="fas fa-xmark"></i> ${t("Domain.Close")}</button></div>` : ""}
       </section>`;
