@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.22.1
+- Fixed: technique feats with the same name in two techniques (Blood Production, Shooting Star, Shadow User) were
+  shown for the wrong technique.
+- Fixed: duplicated feats (Tavern Brawler) appeared twice in the level-up feat list.
+- Fixed: with several GMs connected, world automation (effect expiry, domain clashes, RCT pool regeneration, vows at
+  the end of combat, first-load setup) ran once per GM.
+- Fixed: an effect deleted by two clients or modules at once (Foundry 14 expiry, DAE, Midi) raised a permanent
+  error popup.
+- Midi-QOL: domain sure-hit is now decided inside Midi's per-target hit check, so the hit card and reactions agree.
+- Default shortcuts changed to avoid browser menus: spend CE Alt+G (was Alt+E), domain HUD Alt+B (was Alt+D).
+
 ## 1.22.0
 - Recommended modules updated for Foundry 14 / dnd5e 6.1: Midi-QOL 14.7.0+, DAE 14.6.0+, Sequencer 4+, JB2A,
   Automated Animations, Token Magic FX, FXMaster 8+, Dice So Nice, Visual Active Effects, Bar Brawl, Token Action HUD.

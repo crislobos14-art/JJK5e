@@ -9,7 +9,7 @@
  * - JJK panel on character sheets, Spanish / English UI, effect expiry (unless Times Up is active).
  */
 const MODULE_ID = "jjk5e";
-const DATA_VERSION = "1.22.0";
+const DATA_VERSION = "1.22.1";
 const FOLDER_NAME = "JJK 5e V.6";
 const ICONS = `modules/${MODULE_ID}/icons`;
 
@@ -33,6 +33,21 @@ const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "
 
 function getCompendiumClass() {
   return foundry.documents?.collections?.CompendiumCollection ?? globalThis.CompendiumCollection;
+}
+
+/** Only one GM runs automated world updates (several GMs can be logged in). */
+function isActiveGM() {
+  const gm = game.users?.activeGM;
+  return gm ? (gm.isSelf ?? gm.id === game.user?.id) : !!game.user?.isGM;
+}
+
+/** Delete a document that another client or module may already be deleting (no error popups). */
+async function safeDelete(doc) {
+  if (!doc || doc._jjkDeleting) return;
+  const coll = doc.parent?.[doc.constructor?.metadata?.collection ?? "effects"];
+  if (doc.parent && coll?.get && !coll.get(doc.id)) return;
+  doc._jjkDeleting = true;
+  try { await doc.delete(); } catch (err) { if (!/does not exist|not exist/i.test(String(err?.message))) console.warn(`${MODULE_ID} | delete`, err); }
 }
 
 async function confirmDialog(title, content) {
@@ -468,7 +483,7 @@ function kindEffect(actor, kind) {
 async function setKindEffect(actor, kind, data) {
   const existing = kindEffect(actor, kind);
   if (!data) {
-    if (existing) await existing.delete();
+    if (existing) await safeDelete(existing);
     return null;
   }
   data = fxData(foundry.utils.mergeObject(data, { flags: { jjk5e: { kind } } }, { inplace: false }));
@@ -1274,7 +1289,7 @@ async function dismissSummons(actor) {
 /* -------------------------------------------- */
 
 async function expireEffects() {
-  if (!game.user.isGM || !setting("autoExpire") || game.modules.get("times-up")?.active) return;
+  if (!isActiveGM() || !setting("autoExpire") || game.modules.get("times-up")?.active) return;
   const actors = new Set();
   game.combat?.combatants?.forEach((c) => c.actor && actors.add(c.actor));
   canvas?.scene?.tokens?.forEach((tk) => tk.actor && actors.add(tk.actor));
@@ -1287,7 +1302,7 @@ async function expireEffects() {
       const rem = e.duration?.remaining;
       return rem !== null && rem !== undefined && rem <= 0;
     }).map((e) => e.id);
-    for (const id of ids) await actor.effects.get(id)?.delete();
+    for (const id of ids) await safeDelete(actor.effects.get(id));
     for (const item of actor.items) for (const e of item.effects ?? []) {
       if (!e.flags?.jjk5e?.group || e.disabled) continue;
       const rem = e.duration?.remaining;
@@ -1407,7 +1422,7 @@ const PANEL_ACTIONS = {
     const ids = actor.effects.filter((e) => e.flags?.jjk5e?.kind === "burnout" || e.flags?.jjk5e?.burnout).map((e) => e.id);
     if (ids.length) await actor.deleteEmbeddedDocuments("ActiveEffect", ids);
   },
-  clearZone: async (actor) => { const z = zoneEffect(actor); if (z) await z.delete(); },
+  clearZone: async (actor) => { const z = zoneEffect(actor); if (z) await safeDelete(z); },
   clearBF: (actor) => actor.unsetFlag(MODULE_ID, "pendingBlackFlash"),
   endGroup: (actor, target) => endGroup(actor, target.dataset.group),
   maxOutput: (actor) => maximumOutput(actor),
@@ -1612,7 +1627,7 @@ Hooks.once("ready", async () => {
   });
 
   if (game.user.character) syncResource(game.user.character);
-  if (game.user.isGM && setting("importedVersion") !== DATA_VERSION) {
+  if (isActiveGM() && setting("importedVersion") !== DATA_VERSION) {
     if (needsWorldImport()) await promptImport(false);
     else await setupFromModulePacks();
   }
@@ -1772,6 +1787,8 @@ async function injectASIFeats(app, element) {
   const eligible = docs.filter((d) => d.system?.type?.value === "feat"
     && (!owned.has(normName(baseName(d))) || d.system?.prerequisites?.repeatable)
     && featFitsTechnique(actor, d) && !missingPrereqs(actor, d).length)
+    .filter((d, i, arr) => arr.findIndex((o) => o.name === d.name
+      && o.system?.description?.value === d.system?.description?.value) === i)
     .sort((a, b) => a.name.localeCompare(b.name));
   const box = document.createElement("fieldset");
   box.className = "jjk5e-asi";
@@ -2074,13 +2091,20 @@ function midiActive() {
 function registerMidiHooks() {
   if (!midiActive()) return;
   // Domain sure-hit: every target of an innate-technique attack is hit.
-  Hooks.on("midi-qol.AttackRollComplete", (workflow) => {
+  const sureHit = (workflow) => !!(workflow && setting("domainSureHit") && domainOpen(workflow.actor)
+    && workflow.item?.flags?.jjk5e?.technique && !sureHitBlocked(workflow.actor));
+  // Midi decides each target's hit here (after cover, AC bonuses and reactions).
+  Hooks.on("midi-qol.premades.checkHitTarget", (hitCheck) => {
     try {
-      const actor = workflow?.actor;
-      const item = workflow?.item;
-      if (!setting("domainSureHit") || !domainOpen(actor) || !item?.flags?.jjk5e?.technique || sureHitBlocked(actor)) return;
-      workflow.hitTargets = new Set(workflow.targets);
+      if (!sureHit(hitCheck?.workflow)) return;
+      hitCheck.isHit = true;
+      if ("isHitEC" in hitCheck) hitCheck.isHitEC = true;
     } catch (err) { console.error(`${MODULE_ID} | midi sure-hit`, err); }
+  });
+  // Older Midi builds without that hook: force the hit list afterwards.
+  Hooks.on("midi-qol.hitsChecked", (workflow) => {
+    try { if (sureHit(workflow)) workflow.hitTargets = new Set(workflow.targets); }
+    catch (err) { console.error(`${MODULE_ID} | midi sure-hit`, err); }
   });
   // Domain sure-hit: targets automatically fail the saving throws of your innate technique.
   Hooks.on("midi-qol.postCheckSaves", (workflow) => {
@@ -3092,7 +3116,7 @@ Hooks.once("ready", () => {
     if (long) unlockVows(actor, ["longRest"]);
   });
   Hooks.on("deleteCombat", (combat) => {
-    if (!game.user.isGM) return;
+    if (!isActiveGM()) return;
     for (const c of combat.combatants ?? []) if (c.actor) endCombatVows(c.actor);
   });
   Hooks.on("combatTurnChange", (combat) => turnSummary(combat));
@@ -3247,7 +3271,7 @@ async function domainClosed(actor) {
 async function closeDomainOf(actor, reason = "") {
   const eff = actor?.effects?.find((e) => e.flags?.jjk5e?.kind === "domain" || e.flags?.jjk5e?.domainOpen);
   if (reason) await chat(actor, `<p><i class="fas fa-burst"></i> ${reason}</p>`);
-  if (eff) await eff.delete();
+  if (eff) await safeDelete(eff);
   else await domainClosed(actor);
 }
 
@@ -3324,7 +3348,7 @@ async function detectClash(actor) {
 
 /** GM: each new round, losing domains shrink 15 ft and lose a round; at 0 they break. */
 async function tickClashes() {
-  if (!game.user.isGM) return;
+  if (!isActiveGM()) return;
   const losers = [...(game.actors?.contents ?? []), ...(canvas?.tokens?.placeables ?? []).map((tk) => tk.actor)]
     .filter((a, i, arr) => a && arr.indexOf(a) === i && getDomain(a)?.clash?.role === "loser" && !getDomain(a).clash.resolved);
   for (const a of losers) {
@@ -3340,7 +3364,7 @@ async function tickClashes() {
 
 /** Equal clash: at 1/3 HP the caster rolls a flat DC 15 or the domain breaks. */
 async function checkEqualClash(actor) {
-  if (!game.user.isGM) return;
+  if (!isActiveGM()) return;
   const s = getDomain(actor);
   if (s?.clash?.role !== "equal" || s.clash.resolved || s.clash.thirdChecked) return;
   const hp = actor.system?.attributes?.hp;
@@ -3627,10 +3651,10 @@ const KEY_ACTIONS = [
   ["panel", "KeyJ", ["Shift"], () => openPanel()],
   ["spend1", "Minus", ["Alt"], () => { const a = requireActor(); if (a) spendCE(a, 1, t("CE.Name")); }],
   ["regain1", "Equal", ["Alt"], () => { const a = requireActor(); if (a) spendCE(a, -1, t("CE.Regained")); }],
-  ["spend", "KeyE", ["Alt"], () => promptCE("spend")],
+  ["spend", "KeyG", ["Alt"], () => promptCE("spend")],
   ["vows", "KeyV", ["Alt"], () => openVows()],
   ["career", "KeyC", ["Alt"], () => openCareer()],
-  ["domain", "KeyD", ["Alt"], () => openDomainHUD()],
+  ["domain", "KeyB", ["Alt"], () => openDomainHUD()],
   ["technique", "KeyT", ["Alt"], () => chooseTechnique()],
   ["hotbar", "KeyH", ["Alt"], () => fillHotbar()],
   ["mission", "KeyM", ["Alt"], () => generateMission(), true],
@@ -3678,9 +3702,9 @@ Hooks.once("ready", () => {
   Hooks.on("renderTokenHUD", (hud, html) => { try { addTokenHUDButton(hud, html); } catch (err) { console.error(`${MODULE_ID} | token hud`, err); } });
   // Foundry 14 disables expired effects instead of deleting them: delete JJK timed effects so their cleanup runs.
   Hooks.on("updateActiveEffect", (effect, changes) => {
-    if (!game.user.isGM || changes?.disabled !== true) return;
+    if (!isActiveGM() || changes?.disabled !== true) return;
     const f = effect.flags?.jjk5e ?? {};
-    if (["zone", "burnout", "domain"].includes(f.kind) || f.domainOpen || f.burnout) effect.delete();
+    if (["zone", "burnout", "domain"].includes(f.kind) || f.domainOpen || f.burnout) safeDelete(effect);
   });
 });
 
@@ -3737,7 +3761,7 @@ async function rollRCTAwakening(actor) {
 
 /** Every two rounds in combat the RCT healing pool recovers 10 hit points. */
 async function regenRCTPools(combat) {
-  if (!game.user.isGM || !combat?.round || combat.round % 2 !== 0) return;
+  if (!isActiveGM() || !combat?.round || combat.round % 2 !== 0) return;
   for (const c of combat.combatants ?? []) {
     const pool = c.actor?.items?.find?.((i) => /Reverse Cursed Technique \(Healing Pool\)/i.test(baseName(i)));
     const spent = Number(pool?.system?.uses?.spent) || 0;

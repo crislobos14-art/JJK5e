@@ -294,7 +294,7 @@ CC BY-NC-SA 4.0 — see `LICENSE.txt`. Non-commercial use only.
 - Domain zone uses the Foundry 14 `circle` region shape (ellipse on 13). Midi-QOL sure hit respects clashes and
   targets outside the domain. Dice So Nice reads the item from dnd5e 6 chat messages.
 - **Keyboard shortcuts** (Configure Controls → JJK 5e): J menu, Shift+J panel, Alt+− / Alt+= spend/regain 1 CE,
-  Alt+E spend amount, Alt+V vows, Alt+C career, Alt+D domain, Alt+T technique, Alt+H hotbar, Alt+M mission (GM),
+  Alt+G spend amount, Alt+V vows, Alt+C career, Alt+B domain, Alt+T technique, Alt+H hotbar, Alt+M mission (GM),
   Alt+K curse (GM).
 - **Token HUD**: yin-yang button with current CE — click opens the panel, right click −1 CE, Shift+right click +1 CE.
 
