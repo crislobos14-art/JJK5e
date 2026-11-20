@@ -1011,7 +1011,8 @@ async function onAttackRoll(rolls, subject) {
   const bonusRange = actor.items.reduce((tot, i) => tot + (Number(i.flags?.jjk5e?.blackFlashRange) || 0), 0);
   const target = Math.max(2, 20 - stacks - bonusRange);
   const check = await new Roll("1d20").evaluate();
-  const success = check.total >= target;
+  const face = check.dice?.[0]?.results?.find((r) => r.active !== false)?.result ?? check.total;
+  const success = blackFlashCheck(face, stacks + bonusRange);
   const Chat = docClass("ChatMessage");
   await check.toMessage({
     speaker: Chat.getSpeaker({ actor }),
@@ -1019,8 +1020,12 @@ async function onAttackRoll(rolls, subject) {
       + (success ? `<h3 style="color:#b00;text-align:center">⚡ BLACK FLASH ⚡</h3><p>${t("BlackFlash.Success")}</p>` : "")
   });
   if (!success) return;
-  if (setting("blackFlashDamage")) await actor.setFlag(MODULE_ID, "pendingBlackFlash", true);
+  if (setting("blackFlashDamage")) await actor.setFlag(MODULE_ID, "pendingBlackFlash", { activityUuid: activity?.uuid ?? null });
   await addBreakthrough(actor, 1, "Black Flash");
+  // V.6 The Zone also recovers the Reverse Cursed Technique healing pool.
+  for (const item of actor.items.filter((i) => /Reverse Cursed Technique \(Healing Pool\)/i.test(baseName(i)))) {
+    if (Number(item.system?.uses?.spent) > 0) await item.update({ "system.uses.spent": 0 });
+  }
   const next = stacks + 1;
   await setKindEffect(actor, "zone", {
     name: `${t("Zone.Name")}${next > 1 ? ` ×${next}` : ""}`, img: `${ICONS}/zone.svg`,
@@ -1078,7 +1083,9 @@ function onPreRollDamage(config) {
   const actor = config?.subject?.actor ?? config?.subject?.item?.actor;
   if (actor && config?.subject?.item?.flags?.jjk5e?.rawCE) rawCEDamageBonus(actor).forEach((p) => addPart(config, p));
   if (!setting("blackFlashDamage")) return;
-  if (!actor?.getFlag?.(MODULE_ID, "pendingBlackFlash")) return;
+  const pending = actor?.getFlag?.(MODULE_ID, "pendingBlackFlash");
+  if (!pending) return;
+  if (!pending.activityUuid || pending.activityUuid !== config?.subject?.uuid) return;
   const critical = config.isCritical === true || config.midiOptions?.isCritical === true
     || (config.rolls ?? []).some((r) => r.options?.isCritical === true);
   if (!critical) return;
@@ -3364,11 +3371,7 @@ async function findWeakSpot(domainActor, seeker) {
 
 /* ---- Clashes ---- */
 
-function clashRounds(diff) {
-  if (diff <= 0) return null;
-  if (diff >= 100) return 0;
-  return diff < 10 ? 10 : 10 - Math.floor(diff / 10);
-}
+function clashRounds(diff) { return clashRoundsFromRefinement(diff); }
 
 async function detectClash(actor) {
   const mine = getDomain(actor);
