@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.24.1 — Review of 1.23/1.24
+- Fixed: while a domain was open, every activity of the domain item was blocked, including the domain's own
+  in-domain activities (34 domains, e.g. Bloodbath, Womb Profusion, Coffin of the Iron Mountain). Only the
+  "Expand Domain" activity is blocked now.
+- Fixed: strict feat prerequisites blocked feats gained during level-up when their prerequisite feature arrived in
+  the same level (dnd5e creates them in one batch). Advancement now only warns.
+- Fixed: a Black Flash pending from an older version (no linked activity) was never applied.
+
 ## 1.24.0 — Innate spell coverage audit and first mechanical corrections
 - Audited the full library (586 innate-technique records; 360 spells in 81 named technique groups) with a reproducible static audit script and a [per-spell inventory](docs/INNATE_SPELL_AUDIT.md).
 - Added source vs fallback consistency checks, activity/effect/CE reference validation and a CI gate to catch stale spell coverage reports.

@@ -563,7 +563,8 @@ function registerActivityHooks() {
       ui.notifications.warn("JJK 5e: A broken binding vow prohibits this activity.");
       return false;
     }
-    if (activity.item?.flags?.jjk5e?.domain && domainOpen(actor)) {
+    // Only the activity that expands the domain is blocked; the domain's own in-domain activities stay usable.
+    if (activity.item?.flags?.jjk5e?.domainActivity === activity.id && domainOpen(actor)) {
       ui.notifications.warn("JJK 5e: A domain is already active.");
       return false;
     }
@@ -751,7 +752,9 @@ function onPreCreateItem(item, data, options, userId) {
   const missing = missingPrereqs(actor, item);
   if (missing.length) {
     ui.notifications.warn(t("Feats.Missing", { name: item.name, list: missing.join("; ") }), { permanent: false });
-    if (setting("strictPrereqs") && !game.user.isGM) return false;
+    // dnd5e advancement creates a level's features and feats in one batch: prerequisites granted in the same
+    // batch are not on the actor yet, so never block there (warning only).
+    if (setting("strictPrereqs") && !game.user.isGM && !options?.isAdvancement) return false;
   }
 }
 
@@ -1165,7 +1168,7 @@ function onPreRollDamage(config) {
   if (!setting("blackFlashDamage")) return;
   const pending = actor?.getFlag?.(MODULE_ID, "pendingBlackFlash");
   if (!pending) return;
-  if (!pending.activityUuid || pending.activityUuid !== config?.subject?.uuid) return;
+  if (pending.activityUuid && pending.activityUuid !== config?.subject?.uuid) return;
   const critical = config.isCritical === true || config.midiOptions?.isCritical === true
     || (config.rolls ?? []).some((r) => r.options?.isCritical === true);
   if (!critical) return;
