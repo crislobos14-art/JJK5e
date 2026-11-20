@@ -2,7 +2,9 @@ name: Release
 
 on:
   push:
-    tags: ["v*"]
+    branches: [main]
+    paths: [module.json, .github/workflows/release.yml]
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -17,26 +19,35 @@ jobs:
         with:
           node-version: 20
 
-      - name: Check version matches tag
+      - name: Version
+        id: v
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          V=$(node -p "require('./module.json').version")
-          test "v$V" = "$GITHUB_REF_NAME" || { echo "module.json $V != tag $GITHUB_REF_NAME"; exit 1; }
-          node -e "const m=require('./module.json'); if(!m.download.includes('/releases/download/'+process.env.GITHUB_REF_NAME+'/')) { console.error('download URL does not match tag'); process.exit(1); }"
+          TAG="v$(node -p "require('./module.json').version")"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          if gh release view "$TAG" >/dev/null 2>&1; then echo "exists=true" >> "$GITHUB_OUTPUT"; echo "$TAG already released"; fi
+          node -e "const m=require('./module.json'); if(!m.download.includes('/releases/download/$TAG/')) { console.error('download URL does not match $TAG'); process.exit(1); }"
 
       - name: Build compendium packs
+        if: steps.v.outputs.exists != 'true'
         run: |
-          npm install --no-save @foundryvtt/foundryvtt-cli@^3
+          npm install --no-save @foundryvtt/foundryvtt-cli
           node tools/build-packs.mjs
 
       - name: Zip module
+        if: steps.v.outputs.exists != 'true'
         run: zip -r -q module.zip module.json LICENSE.txt README.md CHANGELOG.md scripts styles lang data icons packs
 
       - name: Release notes
+        if: steps.v.outputs.exists != 'true'
         run: |
-          awk -v t="## ${GITHUB_REF_NAME#v}" '$0 ~ "^## " { p = index($0, t) == 1 } p' CHANGELOG.md > notes.md
-          test -s notes.md || echo "Release $GITHUB_REF_NAME" > notes.md
+          TAG="${{ steps.v.outputs.tag }}"
+          awk -v t="## ${TAG#v}" '$0 ~ "^## " { p = index($0, t) == 1 } p' CHANGELOG.md > notes.md
+          test -s notes.md || echo "Release $TAG" > notes.md
 
       - name: Publish release
+        if: steps.v.outputs.exists != 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release create "$GITHUB_REF_NAME" module.zip module.json --title "$GITHUB_REF_NAME" --notes-file notes.md
+        run: gh release create "${{ steps.v.outputs.tag }}" module.zip module.json --target "$GITHUB_SHA" --title "${{ steps.v.outputs.tag }}" --notes-file notes.md
