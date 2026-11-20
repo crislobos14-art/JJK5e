@@ -16,58 +16,257 @@
    "rules": "2014"
   },
   "activities": {
-   "OKvwwUwpanZQnU9d": {
-    "_id": "OKvwwUwpanZQnU9d",
-    "type": "damage",
-    "name": "Bonus Action (1+ CE)",
+   "eylZjQIS5Uw5wd1Q": {
+    "_id": "eylZjQIS5Uw5wd1Q",
+    "type": "utility",
+    "name": "Ignition — 1 CE",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "bonus",
      "value": 1,
-     "condition": "",
+     "condition": "While holding a melee weapon",
      "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": true,
-      "max": "@prof"
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
-    },
-    "range": {
-     "units": "spec",
-     "override": true
-    },
-    "target": {
-     "override": true
     },
     "duration": {
      "value": "1",
      "units": "minute",
-     "concentration": false,
      "override": true
     },
-    "damage": {
-     "parts": [
-      {
-       "number": 1,
-       "denomination": 6,
-       "bonus": "",
-       "types": [
-        "fire"
-       ],
-       "custom": {
-        "enabled": false,
-        "formula": ""
-       },
-       "scaling": {
-        "mode": "whole",
-        "number": 1
-       }
-      }
-     ]
-    }
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "peVzm0OYamfza1uf",
+      "onSave": false
+     }
+    ]
+   },
+   "BgdDzvTwgiNY7DUR": {
+    "_id": "BgdDzvTwgiNY7DUR",
+    "type": "utility",
+    "name": "Ignition — 2 CE",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "Proficiency bonus ≥ 2",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "0gzdqmMkBBBpxq0c",
+      "onSave": false
+     }
+    ]
+   },
+   "JVS1EPVt4nsg262d": {
+    "_id": "JVS1EPVt4nsg262d",
+    "type": "utility",
+    "name": "Ignition — 3 CE",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "Proficiency bonus ≥ 3",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "jao21IlgmEPWndCW",
+      "onSave": false
+     }
+    ]
+   },
+   "NQO638VSeXdOVCaf": {
+    "_id": "NQO638VSeXdOVCaf",
+    "type": "utility",
+    "name": "Ignition — 4 CE",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "Proficiency bonus ≥ 4",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "9faaOIOAIzVuncyI",
+      "onSave": false
+     }
+    ]
+   },
+   "vgMlDFfGjM3MCJTx": {
+    "_id": "vgMlDFfGjM3MCJTx",
+    "type": "utility",
+    "name": "Ignition — 5 CE",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "Proficiency bonus ≥ 5",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "ibbmtkdhz9miob0a",
+      "onSave": false
+     }
+    ]
+   },
+   "uhDOMruXa9IgKWEq": {
+    "_id": "uhDOMruXa9IgKWEq",
+    "type": "utility",
+    "name": "Ignition — 6 CE",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "Proficiency bonus ≥ 6",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "SCsqUsrN7gGe8db7",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -106,17 +305,221 @@
  },
  "flags": {
   "jjk5e": {
-   "ceSteps": {
-    "OKvwwUwpanZQnU9d": 1
-   },
+   "ceSteps": {},
    "ceCosts": {
-    "OKvwwUwpanZQnU9d": 1
+    "eylZjQIS5Uw5wd1Q": 1,
+    "BgdDzvTwgiNY7DUR": 2,
+    "JVS1EPVt4nsg262d": 3,
+    "NQO638VSeXdOVCaf": 4,
+    "vgMlDFfGjM3MCJTx": 5,
+    "uhDOMruXa9IgKWEq": 6
    },
    "technique": "Blazing Courage",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "VITDORKyY9It9TdZ",
- "_key": "!items!frIRVKvBDYwCRUVj"
+ "_key": "!items!frIRVKvBDYwCRUVj",
+ "effects": [
+  {
+   "_id": "peVzm0OYamfza1uf",
+   "name": "Ignition (1 CE)",
+   "img": "modules/jjk5e/icons/techniques/blazing-courage.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Your melee weapon burns for 1 minute: +1 fire damage dice on a hit (d6, d8 at 6th, d10 at 11th, d12 at 18th); bright light 5 ft, dim 10 ft.</p>",
+   "changes": [
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ 1d(6 + 2 * (floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11) + floor(min(@details.level, 18) / 18)))[fire]",
+     "priority": 20
+    },
+    {
+     "key": "flags.jjk5e.ignition",
+     "mode": 5,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Blazing Courage"
+    }
+   },
+   "_key": "!items.effects!frIRVKvBDYwCRUVj.peVzm0OYamfza1uf"
+  },
+  {
+   "_id": "0gzdqmMkBBBpxq0c",
+   "name": "Ignition (2 CE)",
+   "img": "modules/jjk5e/icons/techniques/blazing-courage.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Your melee weapon burns for 1 minute: +2 fire damage dice on a hit (d6, d8 at 6th, d10 at 11th, d12 at 18th); bright light 5 ft, dim 10 ft.</p>",
+   "changes": [
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ 2d(6 + 2 * (floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11) + floor(min(@details.level, 18) / 18)))[fire]",
+     "priority": 20
+    },
+    {
+     "key": "flags.jjk5e.ignition",
+     "mode": 5,
+     "value": "2",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Blazing Courage"
+    }
+   },
+   "_key": "!items.effects!frIRVKvBDYwCRUVj.0gzdqmMkBBBpxq0c"
+  },
+  {
+   "_id": "jao21IlgmEPWndCW",
+   "name": "Ignition (3 CE)",
+   "img": "modules/jjk5e/icons/techniques/blazing-courage.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Your melee weapon burns for 1 minute: +3 fire damage dice on a hit (d6, d8 at 6th, d10 at 11th, d12 at 18th); bright light 5 ft, dim 10 ft.</p>",
+   "changes": [
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ 3d(6 + 2 * (floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11) + floor(min(@details.level, 18) / 18)))[fire]",
+     "priority": 20
+    },
+    {
+     "key": "flags.jjk5e.ignition",
+     "mode": 5,
+     "value": "3",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Blazing Courage"
+    }
+   },
+   "_key": "!items.effects!frIRVKvBDYwCRUVj.jao21IlgmEPWndCW"
+  },
+  {
+   "_id": "9faaOIOAIzVuncyI",
+   "name": "Ignition (4 CE)",
+   "img": "modules/jjk5e/icons/techniques/blazing-courage.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Your melee weapon burns for 1 minute: +4 fire damage dice on a hit (d6, d8 at 6th, d10 at 11th, d12 at 18th); bright light 5 ft, dim 10 ft.</p>",
+   "changes": [
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ 4d(6 + 2 * (floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11) + floor(min(@details.level, 18) / 18)))[fire]",
+     "priority": 20
+    },
+    {
+     "key": "flags.jjk5e.ignition",
+     "mode": 5,
+     "value": "4",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Blazing Courage"
+    }
+   },
+   "_key": "!items.effects!frIRVKvBDYwCRUVj.9faaOIOAIzVuncyI"
+  },
+  {
+   "_id": "ibbmtkdhz9miob0a",
+   "name": "Ignition (5 CE)",
+   "img": "modules/jjk5e/icons/techniques/blazing-courage.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Your melee weapon burns for 1 minute: +5 fire damage dice on a hit (d6, d8 at 6th, d10 at 11th, d12 at 18th); bright light 5 ft, dim 10 ft.</p>",
+   "changes": [
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ 5d(6 + 2 * (floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11) + floor(min(@details.level, 18) / 18)))[fire]",
+     "priority": 20
+    },
+    {
+     "key": "flags.jjk5e.ignition",
+     "mode": 5,
+     "value": "5",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Blazing Courage"
+    }
+   },
+   "_key": "!items.effects!frIRVKvBDYwCRUVj.ibbmtkdhz9miob0a"
+  },
+  {
+   "_id": "SCsqUsrN7gGe8db7",
+   "name": "Ignition (6 CE)",
+   "img": "modules/jjk5e/icons/techniques/blazing-courage.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Your melee weapon burns for 1 minute: +6 fire damage dice on a hit (d6, d8 at 6th, d10 at 11th, d12 at 18th); bright light 5 ft, dim 10 ft.</p>",
+   "changes": [
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ 6d(6 + 2 * (floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11) + floor(min(@details.level, 18) / 18)))[fire]",
+     "priority": 20
+    },
+    {
+     "key": "flags.jjk5e.ignition",
+     "mode": 5,
+     "value": "6",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Blazing Courage"
+    }
+   },
+   "_key": "!items.effects!frIRVKvBDYwCRUVj.SCsqUsrN7gGe8db7"
+  }
+ ]
 }

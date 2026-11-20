@@ -23,22 +23,72 @@
   "activities": {
    "xROz3gAcBRYclR9H": {
     "_id": "xROz3gAcBRYclR9H",
-    "type": "save",
-    "name": "Action (6 CE)",
+    "type": "utility",
+    "name": "Mantle of ice — Action (6 CE)",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "action",
      "value": 1,
-     "condition": ""
+     "condition": "",
+     "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
-     }
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
-     "units": "self"
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "DgZz2dENgm7MyXcs",
+      "onSave": false
+     }
+    ]
+   },
+   "8ixahN2Y5m7p7wWo": {
+    "_id": "8ixahN2Y5m7p7wWo",
+    "type": "save",
+    "name": "Ring of ice (enters / starts turn)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
     },
     "target": {
      "template": {
@@ -49,15 +99,17 @@
       "contiguous": false
      },
      "affects": {
-      "type": "creature",
+      "type": "enemy",
       "choice": false
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "STL11uVe7wSv6Rdq",
+      "onSave": false
      }
-    },
-    "duration": {
-     "value": "1",
-     "units": "minute",
-     "concentration": false
-    },
+    ],
     "save": {
      "ability": [
       "con"
@@ -69,7 +121,21 @@
     },
     "damage": {
      "onSave": "half",
-     "parts": []
+     "parts": [
+      {
+       "number": null,
+       "denomination": null,
+       "bonus": "",
+       "types": [
+        "cold"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "(@flags.jjk5e.freezing)d(6 + 2 * (floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11)))"
+       },
+       "scaling": {}
+      }
+     ]
     }
    }
   }
@@ -93,10 +159,102 @@
       "Blazing Courage"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 10,
- "_key": "!items!4b5KMI6lzVkZEZ0A"
+ "_key": "!items!4b5KMI6lzVkZEZ0A",
+ "effects": [
+  {
+   "_id": "DgZz2dENgm7MyXcs",
+   "name": "Mantle of Resolve",
+   "img": "modules/jjk5e/icons/techniques/blazing-courage.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Ring of ice (10 ft) for 1 minute: resistance to cold and fire.</p>",
+   "changes": [
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "cold",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "fire",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Blazing Courage"
+    }
+   },
+   "_key": "!items.effects!4b5KMI6lzVkZEZ0A.DgZz2dENgm7MyXcs"
+  },
+  {
+   "_id": "STL11uVe7wSv6Rdq",
+   "name": "Frozen in place",
+   "img": "modules/jjk5e/icons/techniques/blazing-courage.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Speed 0 (failed the ring of ice save).</p>",
+   "changes": [
+    {
+     "key": "system.attributes.movement.walk",
+     "mode": 5,
+     "value": "0",
+     "priority": 20
+    },
+    {
+     "key": "system.attributes.movement.fly",
+     "mode": 5,
+     "value": "0",
+     "priority": 20
+    },
+    {
+     "key": "system.attributes.movement.swim",
+     "mode": 5,
+     "value": "0",
+     "priority": 20
+    },
+    {
+     "key": "system.attributes.movement.climb",
+     "mode": 5,
+     "value": "0",
+     "priority": 20
+    },
+    {
+     "key": "system.attributes.movement.burrow",
+     "mode": 5,
+     "value": "0",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Blazing Courage"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnEnd"
+     ]
+    }
+   },
+   "_key": "!items.effects!4b5KMI6lzVkZEZ0A.STL11uVe7wSv6Rdq"
+  }
+ ]
 }

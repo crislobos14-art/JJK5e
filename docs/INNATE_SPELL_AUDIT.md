@@ -5,11 +5,11 @@
 - Spells examinados: **360**; técnicas agrupadas: **81**.
 - Utilidad sin efecto configurado: revisar lógica: **108**.
 - Utilidad con efecto: comprobar activación: **15**.
-- Dominio genérico: resolver propiedades particulares: **51**.
-- Salvación sin daño/efecto automático: **28**.
+- Dominio genérico: resolver propiedades particulares: **50**.
+- Salvación sin daño/efecto automático: **27**.
 - Ataque sin daño propio: comprobar intención: **10**.
-- Mecánica configurada; falta prueba Foundry: **117**.
-- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **31**.
+- Mecánica configurada; falta prueba Foundry: **115**.
+- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **35**.
 
 ## Interpretación
 
@@ -63,10 +63,10 @@
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Ignition | 1 | damage:Bonus Action (1+ CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/ignition_frIRVKvBDYwCRUVj.json) |
-| Mantle of Courage | 3 | save:Special (3 CE) | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/mantle-of-courage_zPJOSM22ueBIRL4q.json) |
-| Maximum: Conflagration | 11 | save:Action (10 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/maximum-conflagration_aUswLfL2rRp0CXOG.json) |
-| Domain Expansion: Fire of the Heart | 18 | utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-fire-of-the-heart_vGPxt14AJTLy0Gyu.json) |
+| Ignition | 1 | utility:Ignition — 1 CE; utility:Ignition — 2 CE; utility:Ignition — 3 CE; utility:Ignition — 4 CE; utility:Ignition — 5 CE; utility:Ignition — 6 CE | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/ignition_frIRVKvBDYwCRUVj.json) |
+| Mantle of Courage | 3 | utility:Mantle on — free action (3 CE); save:Mantle: burn (enters / starts turn) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/mantle-of-courage_zPJOSM22ueBIRL4q.json) |
+| Maximum: Conflagration | 11 | save:Action (10 CE); utility:Severe burns (failed by 5+) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/maximum-conflagration_aUswLfL2rRp0CXOG.json) |
+| Domain Expansion: Fire of the Heart | 18 | utility:Expand Domain (20 CE); save:Initiative 20: Mantle of Courage | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-fire-of-the-heart_vGPxt14AJTLy0Gyu.json) |
 
 ### Blood Manipulation (6 spells)
 

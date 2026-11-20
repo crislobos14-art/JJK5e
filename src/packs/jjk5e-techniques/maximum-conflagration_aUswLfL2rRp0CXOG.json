@@ -47,8 +47,7 @@
       "contiguous": false
      },
      "affects": {
-      "type": "creature",
-      "choice": false
+      "type": "creature"
      },
      "override": true
     },
@@ -88,6 +87,49 @@
     "effects": [
      {
       "_id": "RpuKBKI0QFdVACgV",
+      "onSave": false
+     }
+    ]
+   },
+   "aJrtN8I8aexTy64P": {
+    "_id": "aJrtN8I8aexTy64P",
+    "type": "utility",
+    "name": "Severe burns (failed by 5+)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "9ATjKQTt50dNppjs",
       "onSave": false
      }
     ]
@@ -146,7 +188,8 @@
    },
    "technique": "Blazing Courage",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "effects": [
@@ -168,6 +211,33 @@
     }
    },
    "_key": "!items.effects!aUswLfL2rRp0CXOG.RpuKBKI0QFdVACgV"
+  },
+  {
+   "_id": "9ATjKQTt50dNppjs",
+   "name": "Severe burns",
+   "img": "modules/jjk5e/icons/techniques/blazing-courage.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Failed by 5 or more: takes extra fire damage equal to the caster's proficiency bonus from any fire until it finishes a long rest (apply by hand on a fail by 5+).</p>",
+   "changes": [
+    {
+     "key": "system.traits.dm.amount.fire",
+     "mode": 2,
+     "value": "+@prof",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 0
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Blazing Courage"
+    }
+   },
+   "_key": "!items.effects!aUswLfL2rRp0CXOG.9ATjKQTt50dNppjs"
   }
  ],
  "folder": "VITDORKyY9It9TdZ",

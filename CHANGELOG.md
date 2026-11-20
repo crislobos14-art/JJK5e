@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.34.0 — Técnica por técnica: Blazing Courage
+- **Ignition**: acciones de 1 a 6 CE; el arma cuerpo a cuerpo hace +N dados de fuego (d6/d8/d10/d12 por nivel) durante 1 minuto.
+- **Mantle of Courage**: resistencia a fuego y frío; *burn* aplica a enemigos la salvación de CON con los dados de Ignition.
+- **Conflagration**: cono de 30 pies, mitad al salvar, quemaduras severas (+competencia al daño de fuego) si fallan por 5+.
+- **Fire of the Heart**: en iniciativa 20 el daño del Mantle a quien elijas.
+- **Freezing Resolve / Mantle of Resolve**: versión de hielo (frío, velocidad 0 al fallar).
+- Automatizados a mano: 35/360. Sin probar en Foundry real.
+
 ## 1.33.0 — Técnica por técnica: Cursed Speech
 - **Power of Words**: cada palabra es su propia acción con su CE y CE extra: Sleep, Return, Run Away, Blast Away (6d8 +1d8/CE), Plummet ((mod)d10, derribado 1 min con FUE), Get Twisted, Get Crushed (paralizado, FUE), Don't Move (aturdido, CON), Explode (3d8 fuerza + (mod)d6 fuego en 5 pies) y Die.
 - **Echo Chamber**: en iniciativa 20 una palabra gratis a todos.

@@ -58,6 +58,70 @@
      "concentration": false,
      "override": true
     }
+   },
+   "XvOjzGkK9xeig97f": {
+    "_id": "XvOjzGkK9xeig97f",
+    "type": "save",
+    "name": "Initiative 20: Mantle of Courage",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "enemy",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": null,
+       "denomination": null,
+       "bonus": "",
+       "types": [
+        "fire"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "(@prof)d(6 + 2 * (floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11) + floor(min(@details.level, 18) / 18)))"
+       },
+       "scaling": {}
+      }
+     ]
+    }
    }
   },
   "uses": {
@@ -116,7 +180,9 @@
     "xNYX0YBHrZTeoFYZ": 20
    },
    "domainActivity": "xNYX0YBHrZTeoFYZ",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Your held melee weapon counts as Ignition at maximum CE and gets the domain's sure-hit.",
+   "automation": "automated"
   }
  },
  "folder": "VITDORKyY9It9TdZ",

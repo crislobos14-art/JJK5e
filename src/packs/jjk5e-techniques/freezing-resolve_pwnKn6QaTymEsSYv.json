@@ -21,51 +21,215 @@
   },
   "requirements": "Cursed Technique Reversal, Blazing Courage",
   "activities": {
-   "qtyDXA6HZfw6i9Wr": {
-    "_id": "qtyDXA6HZfw6i9Wr",
-    "type": "damage",
-    "name": "Bonus Action",
+   "XFZBOLkEaxUhz6tM": {
+    "_id": "XFZBOLkEaxUhz6tM",
+    "type": "utility",
+    "name": "Freezing Resolve — 2 CE",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "bonus",
      "value": 1,
-     "condition": ""
+     "condition": "Up to 2 × CE modifier (2 CE)",
+     "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
-     }
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
     },
-    "range": {
-     "units": "spec",
-     "override": true
-    },
-    "target": {},
     "duration": {
      "value": "1",
      "units": "minute",
-     "concentration": false
+     "override": true
     },
-    "damage": {
-     "parts": [
-      {
-       "number": 2,
-       "denomination": 6,
-       "bonus": "",
-       "types": [
-        "cold"
-       ],
-       "custom": {
-        "enabled": false,
-        "formula": ""
-       },
-       "scaling": {
-        "number": 1
-       }
-      }
-     ]
-    }
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "5lwRAAVYaPxirojD",
+      "onSave": false
+     }
+    ]
+   },
+   "BsGNKXGuUqnzOGwW": {
+    "_id": "BsGNKXGuUqnzOGwW",
+    "type": "utility",
+    "name": "Freezing Resolve — 4 CE",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "Up to 2 × CE modifier (4 CE)",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "i28fxn0a1bgEbYnB",
+      "onSave": false
+     }
+    ]
+   },
+   "JDAsKEnjBhy7b4PP": {
+    "_id": "JDAsKEnjBhy7b4PP",
+    "type": "utility",
+    "name": "Freezing Resolve — 6 CE",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "Up to 2 × CE modifier (6 CE)",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "Ba9SgjZcaIObwuIG",
+      "onSave": false
+     }
+    ]
+   },
+   "lBl8NWQ1aqLKhbfG": {
+    "_id": "lBl8NWQ1aqLKhbfG",
+    "type": "utility",
+    "name": "Freezing Resolve — 8 CE",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "Up to 2 × CE modifier (8 CE)",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "zmZ5YvTYuHHKhDxh",
+      "onSave": false
+     }
+    ]
+   },
+   "hI2EdUBF5AJj2rxp": {
+    "_id": "hI2EdUBF5AJj2rxp",
+    "type": "utility",
+    "name": "Freezing Resolve — 10 CE",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "Up to 2 × CE modifier (10 CE)",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "zdQ6DSva3inMurIO",
+      "onSave": false
+     }
+    ]
    }
   }
  },
@@ -85,10 +249,186 @@
       "Blazing Courage"
      ]
     ]
-   }
+   },
+   "ceCosts": {
+    "XFZBOLkEaxUhz6tM": 2,
+    "BsGNKXGuUqnzOGwW": 4,
+    "JDAsKEnjBhy7b4PP": 6,
+    "lBl8NWQ1aqLKhbfG": 8,
+    "hI2EdUBF5AJj2rxp": 10
+   },
+   "ceSteps": {},
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!pwnKn6QaTymEsSYv"
+ "_key": "!items!pwnKn6QaTymEsSYv",
+ "effects": [
+  {
+   "_id": "5lwRAAVYaPxirojD",
+   "name": "Freezing Resolve (2 CE)",
+   "img": "modules/jjk5e/icons/techniques/blazing-courage.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Your melee weapon freezes for 1 minute: +2 cold damage dice on a hit (2 dice per 2 CE).</p>",
+   "changes": [
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ 2d(6 + 2 * (floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11)))[cold]",
+     "priority": 20
+    },
+    {
+     "key": "flags.jjk5e.freezing",
+     "mode": 5,
+     "value": "2",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Blazing Courage"
+    }
+   },
+   "_key": "!items.effects!pwnKn6QaTymEsSYv.5lwRAAVYaPxirojD"
+  },
+  {
+   "_id": "i28fxn0a1bgEbYnB",
+   "name": "Freezing Resolve (4 CE)",
+   "img": "modules/jjk5e/icons/techniques/blazing-courage.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Your melee weapon freezes for 1 minute: +4 cold damage dice on a hit (2 dice per 2 CE).</p>",
+   "changes": [
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ 4d(6 + 2 * (floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11)))[cold]",
+     "priority": 20
+    },
+    {
+     "key": "flags.jjk5e.freezing",
+     "mode": 5,
+     "value": "4",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Blazing Courage"
+    }
+   },
+   "_key": "!items.effects!pwnKn6QaTymEsSYv.i28fxn0a1bgEbYnB"
+  },
+  {
+   "_id": "Ba9SgjZcaIObwuIG",
+   "name": "Freezing Resolve (6 CE)",
+   "img": "modules/jjk5e/icons/techniques/blazing-courage.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Your melee weapon freezes for 1 minute: +6 cold damage dice on a hit (2 dice per 2 CE).</p>",
+   "changes": [
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ 6d(6 + 2 * (floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11)))[cold]",
+     "priority": 20
+    },
+    {
+     "key": "flags.jjk5e.freezing",
+     "mode": 5,
+     "value": "6",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Blazing Courage"
+    }
+   },
+   "_key": "!items.effects!pwnKn6QaTymEsSYv.Ba9SgjZcaIObwuIG"
+  },
+  {
+   "_id": "zmZ5YvTYuHHKhDxh",
+   "name": "Freezing Resolve (8 CE)",
+   "img": "modules/jjk5e/icons/techniques/blazing-courage.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Your melee weapon freezes for 1 minute: +8 cold damage dice on a hit (2 dice per 2 CE).</p>",
+   "changes": [
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ 8d(6 + 2 * (floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11)))[cold]",
+     "priority": 20
+    },
+    {
+     "key": "flags.jjk5e.freezing",
+     "mode": 5,
+     "value": "8",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Blazing Courage"
+    }
+   },
+   "_key": "!items.effects!pwnKn6QaTymEsSYv.zmZ5YvTYuHHKhDxh"
+  },
+  {
+   "_id": "zdQ6DSva3inMurIO",
+   "name": "Freezing Resolve (10 CE)",
+   "img": "modules/jjk5e/icons/techniques/blazing-courage.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Your melee weapon freezes for 1 minute: +10 cold damage dice on a hit (2 dice per 2 CE).</p>",
+   "changes": [
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ 10d(6 + 2 * (floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11)))[cold]",
+     "priority": 20
+    },
+    {
+     "key": "flags.jjk5e.freezing",
+     "mode": 5,
+     "value": "10",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Blazing Courage"
+    }
+   },
+   "_key": "!items.effects!pwnKn6QaTymEsSYv.zdQ6DSva3inMurIO"
+  }
+ ]
 }

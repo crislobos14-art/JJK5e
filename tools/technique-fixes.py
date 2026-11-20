@@ -860,13 +860,123 @@ def cursed_speech(S):
     mark(cs)
 
 
+DIE_BY_LEVEL = "(6 + 2 * (floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11) + floor(min(@details.level, 18) / 18)))"
+DIE_BY_LEVEL_3 = "(6 + 2 * (floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11)))"
+
+
+def blazing_courage(S):
+    ft = lambda n: {"value": str(n), "units": "ft", "override": True}
+    custom = lambda formula, t: {"number": None, "denomination": None, "bonus": "", "types": [t],
+                                 "custom": {"enabled": True, "formula": formula}, "scaling": {}}
+    # --- Ignition (1st): bonus action, 1..prof CE; +Nd6 fire per CE on melee weapon hits for 1 minute.
+    ig = S.get("Ignition")
+    ig["system"]["activities"] = {}
+    ig["flags"]["jjk5e"]["ceCosts"], ig["flags"]["jjk5e"]["ceSteps"] = {}, {}
+    ig["effects"] = []
+    for n in range(1, 7):
+        e = fx(ig, f"ign{n}", f"Ignition ({n} CE)", rounds=10,
+               changes=[("system.bonuses.mwak.damage", 2, f"+ {n}d{DIE_BY_LEVEL}[fire]"),
+                        ("flags.jjk5e.ignition", 5, str(n))],
+               desc=f"Your melee weapon burns for 1 minute: +{n} fire damage dice on a hit (d6, d8 at 6th, d10 at "
+                    "11th, d12 at 18th); bright light 5 ft, dim 10 ft.")
+        a = act(ig, "OKvwwUwpanZQnU9d" if n == 1 else f"ign{n}", "utility", f"Ignition — {n} CE", "bonus",
+                range=RANGE_SELF, target=SELF, duration={"value": "1", "units": "minute", "override": True})
+        a["activation"]["condition"] = f"Proficiency bonus ≥ {n}" if n > 1 else "While holding a melee weapon"
+        apply(a, e)
+        cost(ig, a, n)
+    mark(ig)
+
+    # --- Mantle of Courage (3rd): free action 3 CE, aura 10 ft: resist fire/cold; enemies CON save vs Ignition dice.
+    m = S.get("Mantle of Courage")
+    m["effects"] = [e for e in m.get("effects", []) if e["_id"] != "fMhgS7ampc0pY9Q3"]
+    res = fx(m, "res", "Mantle of Courage", rounds=10,
+             changes=[("system.traits.dr.value", 2, "fire"), ("system.traits.dr.value", 2, "cold")],
+             desc="Aura of flames (10 ft) for 1 minute: resistance to fire and cold. Enemies entering or starting "
+                  "their turn there use 'Mantle: burn'.")
+    on = act(m, "tOmjfZVwLHC54lbH", "utility", "Mantle on — free action (3 CE)", "special", range=RANGE_SELF, target=SELF)
+    on["activation"]["condition"] = "While Ignition is active"
+    apply(on, res)
+    cost(m, on, 3)
+    burn = act(m, "burn", "save", "Mantle: burn (enters / starts turn)", "special", range=RANGE_SELF, target=sphere(10),
+               save={"ability": ["con"], "dc": {"calculation": "spellcasting", "formula": ""}},
+               damage={"onSave": "half", "parts": [custom(f"(@flags.jjk5e.ignition)d{DIE_BY_LEVEL}", "fire")]})
+    burn["target"]["affects"]["type"] = "enemy"
+    free(m, burn)
+    mark(m)
+
+    # --- Maximum: Conflagration (11th): 30-ft cone, 10d12 fire + prone; severe burns on fail by 5+.
+    c = S.get("Maximum: Conflagration")
+    ca = c["system"]["activities"]["PjW4MhuJXtZcWTEL"]
+    ca["target"] = {"template": {"type": "cone", "size": "30", "units": "ft", "count": "1", "contiguous": False},
+                    "affects": {"type": "creature"}, "override": True}
+    ca["range"] = RANGE_SELF
+    ca["damage"]["onSave"] = "half"
+    burns = fx(c, "burns", "Severe burns", rounds=0,
+               changes=[("system.traits.dm.amount.fire", 2, "+@prof")],
+               desc="Failed by 5 or more: takes extra fire damage equal to the caster's proficiency bonus from any "
+                    "fire until it finishes a long rest (apply by hand on a fail by 5+).")
+    sb = act(c, "burns", "utility", "Severe burns (failed by 5+)", "special", target=one_creature())
+    apply(sb, burns)
+    free(c, sb)
+    mark(c)
+
+    # --- Fire of the Heart (18th): max Ignition; at initiative 20 the Mantle damage hits all chosen creatures.
+    d = S.get("Domain Expansion: Fire of the Heart")
+    i20 = act(d, "init20", "save", "Initiative 20: Mantle of Courage", "special",
+              target={"affects": {"type": "enemy", "choice": True}, "override": True},
+              save={"ability": ["con"], "dc": {"calculation": "spellcasting", "formula": ""}},
+              damage={"onSave": "half", "parts": [custom(f"(@prof)d{DIE_BY_LEVEL}", "fire")]})
+    free(d, i20)
+    note(d, "Your held melee weapon counts as Ignition at maximum CE and gets the domain's sure-hit.")
+    mark(d)
+
+    # --- Reversal: Freezing Resolve — 2..2×CE CE: +N d6 cold per 2 CE (d8 at 6th, d10 at 11th).
+    f = S.get("Freezing Resolve")
+    f["system"]["activities"] = {}
+    f["flags"]["jjk5e"]["ceCosts"], f["flags"]["jjk5e"]["ceSteps"] = {}, {}
+    f["effects"] = []
+    for n in (2, 4, 6, 8, 10):
+        e = fx(f, f"frz{n}", f"Freezing Resolve ({n} CE)", rounds=10,
+               changes=[("system.bonuses.mwak.damage", 2, f"+ {n}d{DIE_BY_LEVEL_3}[cold]"),
+                        ("flags.jjk5e.freezing", 5, str(n))],
+               desc=f"Your melee weapon freezes for 1 minute: +{n} cold damage dice on a hit (2 dice per 2 CE).")
+        a = act(f, "qtyDXA6HZfw6i9Wr" if n == 2 else f"frz{n}", "utility", f"Freezing Resolve — {n} CE", "bonus",
+                range=RANGE_SELF, target=SELF, duration={"value": "1", "units": "minute", "override": True})
+        a["activation"]["condition"] = f"Up to 2 × CE modifier ({n} CE)"
+        apply(a, e)
+        cost(f, a, n)
+    mark(f)
+
+    # --- Mantle of Resolve: 6 CE aura of ice: resist cold/fire; CON save vs Freezing dice, speed 0 on a failure.
+    mr = S.get("Mantle of Resolve")
+    on2 = act(mr, "xROz3gAcBRYclR9H", "utility", "Mantle of ice — Action (6 CE)", "action", range=RANGE_SELF, target=SELF)
+    apply(on2, fx(mr, "res", "Mantle of Resolve", rounds=10,
+                  changes=[("system.traits.dr.value", 2, "cold"), ("system.traits.dr.value", 2, "fire")],
+                  desc="Ring of ice (10 ft) for 1 minute: resistance to cold and fire."))
+    cost(mr, on2, 6)
+    frz = act(mr, "freeze", "save", "Ring of ice (enters / starts turn)", "special", range=RANGE_SELF, target=sphere(10),
+              save={"ability": ["con"], "dc": {"calculation": "spellcasting", "formula": ""}},
+              damage={"onSave": "half", "parts": [custom(f"(@flags.jjk5e.freezing)d{DIE_BY_LEVEL_3}", "cold")]})
+    frz["target"]["affects"]["type"] = "enemy"
+    apply(frz, fx(mr, "stop", "Frozen in place", rounds=1, special=["turnEnd"],
+                  changes=[(f"system.attributes.movement.{k}", 5, "0") for k in ("walk", "fly", "swim", "climb", "burrow")],
+                  desc="Speed 0 (failed the ring of ice save)."))
+    free(mr, frz)
+    mark(mr)
+
+
+def one_creature():
+    return {"affects": {"type": "creature", "count": "1", "choice": True}, "override": True}
+
+
 TECHNIQUES = {"Antigravity System": antigravity_system,
               "Auspicious Beast Summon": auspicious_beast_summon,
               "Black Bird Manipulation": black_bird_manipulation,
               "Black Box": black_box,
               "Blood Manipulation": blood_manipulation,
               "Boogie Woogie": boogie_woogie,
-              "Cursed Speech": cursed_speech}
+              "Cursed Speech": cursed_speech,
+              "Blazing Courage": blazing_courage}
 
 if __name__ == "__main__":
     args = sys.argv[1:]

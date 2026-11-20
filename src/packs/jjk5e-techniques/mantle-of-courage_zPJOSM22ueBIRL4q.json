@@ -18,9 +18,51 @@
   "activities": {
    "tOmjfZVwLHC54lbH": {
     "_id": "tOmjfZVwLHC54lbH",
-    "type": "save",
-    "name": "Special (3 CE)",
+    "type": "utility",
+    "name": "Mantle on — free action (3 CE)",
     "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "While Ignition is active",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "o6OH839bOMMTDPo0",
+      "onSave": false
+     }
+    ]
+   },
+   "uQNUvgLUnErucYho": {
+    "_id": "uQNUvgLUnErucYho",
+    "type": "save",
+    "name": "Mantle: burn (enters / starts turn)",
+    "sort": 0,
+    "img": null,
     "activation": {
      "type": "special",
      "value": null,
@@ -30,28 +72,34 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
     },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
     "range": {
-     "value": "10",
-     "units": "ft",
+     "units": "self",
      "override": true
     },
     "target": {
+     "template": {
+      "type": "radius",
+      "size": "10",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
      "affects": {
-      "type": "creature",
-      "count": "1"
+      "type": "enemy",
+      "choice": false
      },
      "override": true
     },
-    "duration": {
-     "value": "1",
-     "units": "minute",
-     "concentration": false,
-     "override": true
-    },
+    "effects": [],
     "save": {
      "ability": [
       "con"
@@ -63,7 +111,21 @@
     },
     "damage": {
      "onSave": "half",
-     "parts": []
+     "parts": [
+      {
+       "number": null,
+       "denomination": null,
+       "bonus": "",
+       "types": [
+        "fire"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "(@flags.jjk5e.ignition)d(6 + 2 * (floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11) + floor(min(@details.level, 18) / 18)))"
+       },
+       "scaling": {}
+      }
+     ]
     }
    }
   },
@@ -115,39 +177,44 @@
    },
    "technique": "Blazing Courage",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "VITDORKyY9It9TdZ",
  "effects": [
   {
-   "_id": "fMhgS7ampc0pY9Q3",
-   "name": "Mantle of Courage (toggle)",
+   "_id": "o6OH839bOMMTDPo0",
+   "name": "Mantle of Courage",
    "img": "modules/jjk5e/icons/techniques/blazing-courage.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Aura of flames (10 ft) for 1 minute: resistance to fire and cold. Enemies entering or starting their turn there use 'Mantle: burn'.</p>",
    "changes": [
     {
      "key": "system.traits.dr.value",
      "mode": 2,
      "value": "fire",
-     "priority": null
+     "priority": 20
     },
     {
      "key": "system.traits.dr.value",
      "mode": 2,
      "value": "cold",
-     "priority": null
+     "priority": 20
     }
    ],
-   "transfer": true,
-   "disabled": true,
-   "duration": {},
-   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "duration": {
+    "rounds": 10
+   },
    "flags": {
     "jjk5e": {
-     "auto": "toggle"
+     "technique": "Blazing Courage"
     }
    },
-   "_key": "!items.effects!zPJOSM22ueBIRL4q.fMhgS7ampc0pY9Q3"
+   "_key": "!items.effects!zPJOSM22ueBIRL4q.o6OH839bOMMTDPo0"
   }
  ],
  "_key": "!items!zPJOSM22ueBIRL4q"
