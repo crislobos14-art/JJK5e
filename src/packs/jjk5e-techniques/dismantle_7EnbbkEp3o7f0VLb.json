@@ -77,7 +77,7 @@
        ],
        "custom": {
         "enabled": true,
-        "formula": "((1 + floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11) + floor(min(@details.level, 18) / 18)) + @scaling)d12"
+        "formula": "((1 + floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11) + floor(min(@details.level, 18) / 18)) + @scaling - 1)d12"
        },
        "scaling": {}
       }

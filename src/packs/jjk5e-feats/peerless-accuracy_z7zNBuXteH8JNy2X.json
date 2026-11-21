@@ -46,7 +46,10 @@
        "target": "",
        "value": "1"
       }
-     ]
+     ],
+     "scaling": {
+      "allowed": false
+     }
     },
     "roll": {
      "formula": "@prof",

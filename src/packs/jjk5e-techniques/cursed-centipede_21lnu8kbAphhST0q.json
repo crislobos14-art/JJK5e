@@ -73,7 +73,10 @@
        "value": "1"
       }
      ],
-     "spellSlot": false
+     "spellSlot": false,
+     "scaling": {
+      "allowed": false
+     }
     },
     "range": {
      "units": "self",

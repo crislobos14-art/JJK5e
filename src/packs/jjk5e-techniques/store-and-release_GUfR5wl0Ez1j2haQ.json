@@ -199,13 +199,13 @@
     {
      "key": "system.bonuses.mwak.attack",
      "mode": 2,
-     "value": "+ (2 * @scaling)",
+     "value": "+ (2 * JJKSCALING)",
      "priority": 20
     },
     {
      "key": "system.bonuses.msak.attack",
      "mode": 2,
-     "value": "+ (2 * @scaling)",
+     "value": "+ (2 * JJKSCALING)",
      "priority": 20
     }
    ],
@@ -237,13 +237,13 @@
     {
      "key": "system.bonuses.mwak.damage",
      "mode": 2,
-     "value": "+ (@scaling)d6",
+     "value": "+ (JJKSCALING)d6",
      "priority": 20
     },
     {
      "key": "system.bonuses.msak.damage",
      "mode": 2,
-     "value": "+ (@scaling)d6",
+     "value": "+ (JJKSCALING)d6",
      "priority": 20
     }
    ],

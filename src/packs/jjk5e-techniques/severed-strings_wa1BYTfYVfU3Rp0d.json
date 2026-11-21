@@ -121,7 +121,7 @@
     {
      "key": "flags.midi-qol.OverTime",
      "mode": 0,
-     "value": "turn=end, saveAbility=wis|cha, saveDC=JJKORIGINDC, label=Severed Strings",
+     "value": "turn=end, saveAbility=JJKCESAVE, saveDC=JJKORIGINDC, label=Severed Strings",
      "priority": 20
     }
    ],

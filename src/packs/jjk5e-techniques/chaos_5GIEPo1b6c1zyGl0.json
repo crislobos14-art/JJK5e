@@ -85,7 +85,7 @@
        ],
        "custom": {
         "enabled": true,
-        "formula": "2d8 + ((2 + 2 * (floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11)) + 3 * floor(min(@details.level, 18) / 18)) - 1 + @scaling)d6"
+        "formula": "2d8 + ((1 + 2 * (floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11)) + 3 * floor(min(@details.level, 18) / 18)) - 1 + @scaling)d6"
        },
        "scaling": {}
       }

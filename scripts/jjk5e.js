@@ -4468,11 +4468,48 @@ function originLevel(effect) {
   return Math.max(1, Number(actor?.system?.details?.level) || Number(actor?.system?.details?.cr) || 1);
 }
 
-const ORIGIN_TOKENS = /JJKORIGINDC|JJKORIGINCEMOD|JJKORIGINLEVEL/;
+/** Usage scaling (dnd5e @scaling: 1 + extra CE steps) of the last use of each item, for JJKSCALING in effects. */
+const LAST_SCALING = new Map();
+function originItem(effect) {
+  let doc = null;
+  try { doc = effect?.origin ? fromUuidSync(effect.origin) : null; } catch (err) { doc = null; }
+  return doc?.documentName === "Item" ? doc : (doc?.item ?? null);
+}
+function originScaling(effect) {
+  const item = originItem(effect);
+  if (!item) return 1;
+  return Number(LAST_SCALING.get(item.uuid) ?? item.getFlag?.(MODULE_ID, "lastScaling")) || 1;
+}
+function usesScalingToken(activity) {
+  const ids = new Set((activity?.effects ?? []).map((e) => e._id ?? e.id ?? e.effect?.id));
+  return (activity?.item?.effects ?? []).some((e) => ids.has(e.id)
+    && (e.changes ?? []).some((c) => String(c.value).includes("JJKSCALING")));
+}
+function recordScaling(activity, usageConfig) {
+  const item = activity?.item;
+  if (!item || !usesScalingToken(activity)) return;
+  const value = 1 + (Number(usageConfig?.scaling) || 0);
+  LAST_SCALING.set(item.uuid, value);
+  if (item.isOwner && item.getFlag(MODULE_ID, "lastScaling") !== value) item.setFlag(MODULE_ID, "lastScaling", value).catch(() => {});
+}
+/** Cursed Energy save for OverTime: the target's better Wisdom/Charisma save. */
+function bestSaveAbility(effect, a, b) {
+  const actor = effect?.parent?.documentName === "Actor" ? effect.parent : null;
+  const val = (k) => { const sv = actor?.system?.abilities?.[k]?.save; return Number(typeof sv === "object" ? sv?.value : sv) || 0; };
+  return val(b) > val(a) ? b : a;
+}
+function ceSaveAbility(effect) { return bestSaveAbility(effect, "wis", "cha"); }
+
+const ORIGIN_TOKENS = /JJKORIGINDC|JJKORIGINCEMOD|JJKORIGINLEVEL|JJKSCALING|JJKCESAVE|JJKBEST_/;
 function resolveOverTimeDC(effect, data) {
+  // Only effects landing on an actor: an item's own effect templates must keep their placeholders.
+  if (effect?.parent?.documentName !== "Actor") return;
   const sub = (v) => v.replaceAll("JJKORIGINDC", String(originSaveDC(effect)))
     .replaceAll("JJKORIGINCEMOD", String(originCEMod(effect)))
-    .replaceAll("JJKORIGINLEVEL", String(originLevel(effect)));
+    .replaceAll("JJKORIGINLEVEL", String(originLevel(effect)))
+    .replaceAll("JJKSCALING", String(originScaling(effect)))
+    .replaceAll("JJKCESAVE", ceSaveAbility(effect))
+    .replace(/JJKBEST_([a-z]{3})_([a-z]{3})/g, (m, a, b) => bestSaveAbility(effect, a, b));
   const fix = (list) => (list ?? []).map((c) => (typeof c?.value === "string" && ORIGIN_TOKENS.test(c.value)
     ? { ...c, value: sub(c.value) } : c));
   const upd = {};
@@ -4506,6 +4543,7 @@ function registerMidiAutomation() {
 
 Hooks.once("init", () => {
   Hooks.on("preCreateActiveEffect", (effect, data) => { try { resolveOverTimeDC(effect, data); } catch (err) { console.error(`${MODULE_ID} | overtime dc`, err); } });
+  Hooks.on("dnd5e.preActivityConsumption", (activity, usageConfig) => { try { recordScaling(activity, usageConfig); } catch (err) { console.error(`${MODULE_ID} | scaling`, err); } });
 });
 Hooks.once("ready", () => {
   registerMidiAutomation();

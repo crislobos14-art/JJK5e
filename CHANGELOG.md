@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.52.1 — Revisión de errores de la automatización
+- **@scaling corregido**: en dnd5e vale 1 + CE extra. Arreglados Dismantle (daba 1 dado de más), Cleave (1 dado de más), Ratio (1d10 de más antes de 11.º), tiradas de Idle Death Gamble/Luckiest y nivel de Chaos Bolt (ahora 1.º/3.º/5.º/8.º).
+- **Efectos con CE escalable** (Virtual Mass, Earthen Armor, Epic Solo, Ritual Dance, Divebomb, Evening Moon, Mass Decrease, Store and Release): los efectos no pueden leer @scaling; ahora usan `JJKSCALING`, que el módulo sustituye por el escalado del último uso del objeto.
+- **Salvaciones de EM en OverTime**: `saveAbility=wis|cha` no es válido en Midi; ahora `JJKCESAVE` usa la mejor salvación (SAB/CAR) del objetivo. También `JJKBEST_a_b` (Shadow Manipulation: FUE/DES).
+- **Claves inválidas**: `system.traits.dm.amount.all` → `flags.midi-qol.DR.all` (Ley Line, Inverse Ratio, Amber, dominio de Dragon Vein); `critical.range` → umbral de crítico de dnd5e (Crescendo, DDR); quitadas `max.attack` (Five Clawed Dragon) e inmunidad a «healing» (Reverse Scale); Y-Axis Block usa `fail.attack.all` sobre el atacante.
+- **@mod** en daños/curaciones sin ataque (Zero Hour, Merciful Shadow, etc.) → mejor de FUE/DES.
+- Escalado por conteo (estrellas, cargas, pies, espíritus) habilitado sin coste de CE en 17 actividades; no se habilitó en las que escalarían gratis.
+- Los marcadores `JJK…` solo se resuelven en efectos aplicados a actores (no se pierden en la plantilla del objeto).
+- Nuevo `tools/validate-packs.py` en CI: tipos de actividad/daño/curación, plantillas, efectos referenciados, fórmulas, claves Midi y disparadores.
+- Sin probar en Foundry real.
+
 ## 1.52.0 — Técnica por técnica: últimas 12 — 360/360
 - **Star Rage**: Virtual Mass Increase (CE = masa, +1 daño por masa, impacto con derribo), mejoras, Mass Decrease, dominio Event Horizon (velocidad ¼, derribo con salvación).
 - **Starlight Symphony**: Cursed Fog y Dark Fog (desventaja en Percepción/Investigación), reacción de niebla, zorros, Living Fog (vuelo, resistencias, asfixia Xd8), Inari, dominio con ceguera y 5d10.

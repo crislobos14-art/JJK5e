@@ -229,9 +229,9 @@
    "description": "",
    "changes": [
     {
-     "key": "system.traits.dm.amount.all",
+     "key": "flags.midi-qol.DR.all",
      "mode": 2,
-     "value": "-@prof",
+     "value": "@prof",
      "priority": 20
     }
    ],

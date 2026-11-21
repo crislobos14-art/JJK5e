@@ -127,7 +127,7 @@
     {
      "key": "flags.midi-qol.OverTime",
      "mode": 0,
-     "value": "turn=end, saveAbility=wis|cha, saveDC=JJKORIGINDC, label=Grounding",
+     "value": "turn=end, saveAbility=JJKCESAVE, saveDC=JJKORIGINDC, label=Grounding",
      "priority": 20
     }
    ],

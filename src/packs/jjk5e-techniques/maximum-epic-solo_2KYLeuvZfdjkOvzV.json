@@ -184,25 +184,25 @@
     {
      "key": "system.bonuses.mwak.damage",
      "mode": 2,
-     "value": "+ (2 + 2 * @scaling)d10[thunder]",
+     "value": "+ (2 + 2 * JJKSCALING)d10[thunder]",
      "priority": 20
     },
     {
      "key": "system.bonuses.rwak.damage",
      "mode": 2,
-     "value": "+ (2 + 2 * @scaling)d10[thunder]",
+     "value": "+ (2 + 2 * JJKSCALING)d10[thunder]",
      "priority": 20
     },
     {
      "key": "system.bonuses.msak.damage",
      "mode": 2,
-     "value": "+ (2 + 2 * @scaling)d10[thunder]",
+     "value": "+ (2 + 2 * JJKSCALING)d10[thunder]",
      "priority": 20
     },
     {
      "key": "system.bonuses.rsak.damage",
      "mode": 2,
-     "value": "+ (2 + 2 * @scaling)d10[thunder]",
+     "value": "+ (2 + 2 * JJKSCALING)d10[thunder]",
      "priority": 20
     }
    ],

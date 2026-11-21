@@ -168,7 +168,7 @@
     {
      "key": "flags.midi-qol.OverTime",
      "mode": 0,
-     "value": "turn=end, saveAbility=str|dex, saveDC=JJKORIGINDC, label=Shadow prison",
+     "value": "turn=end, saveAbility=JJKBEST_str_dex, saveDC=JJKORIGINDC, label=Shadow prison",
      "priority": 20
     }
    ],

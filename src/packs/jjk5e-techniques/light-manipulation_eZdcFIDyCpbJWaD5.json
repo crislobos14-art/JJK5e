@@ -126,6 +126,10 @@
      {
       "_id": "1pbcRJjj4RUqqeng",
       "onSave": false
+     },
+     {
+      "_id": "1pbcRJjj4RUqqeng",
+      "onSave": false
      }
     ],
     "useConditionText": "reaction === \"isAttacked\""

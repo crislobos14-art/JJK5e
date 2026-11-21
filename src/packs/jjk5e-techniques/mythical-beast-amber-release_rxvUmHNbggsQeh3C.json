@@ -1073,9 +1073,9 @@
      "priority": 20
     },
     {
-     "key": "system.traits.dm.amount.all",
+     "key": "flags.midi-qol.DR.all",
      "mode": 2,
-     "value": "-max(@abilities.wis.mod, @abilities.cha.mod)",
+     "value": "max(@abilities.wis.mod, @abilities.cha.mod)",
      "priority": 20
     }
    ],
@@ -1163,9 +1163,9 @@
      "priority": 20
     },
     {
-     "key": "system.traits.dm.amount.all",
+     "key": "flags.midi-qol.DR.all",
      "mode": 2,
-     "value": "-max(@abilities.wis.mod, @abilities.cha.mod)",
+     "value": "max(@abilities.wis.mod, @abilities.cha.mod)",
      "priority": 20
     },
     {
@@ -1259,9 +1259,9 @@
      "priority": 20
     },
     {
-     "key": "system.traits.dm.amount.all",
+     "key": "flags.midi-qol.DR.all",
      "mode": 2,
-     "value": "-max(@abilities.wis.mod, @abilities.cha.mod)",
+     "value": "max(@abilities.wis.mod, @abilities.cha.mod)",
      "priority": 20
     },
     {

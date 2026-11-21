@@ -29,7 +29,7 @@
     "activation": {
      "type": "reaction",
      "value": 1,
-     "condition": ""
+     "condition": "Target the attacker: its attack automatically misses."
     },
     "consumption": {
      "targets": [],
@@ -102,7 +102,7 @@
    "description": "",
    "changes": [
     {
-     "key": "flags.midi-qol.grants.fail.attack.all",
+     "key": "flags.midi-qol.fail.attack.all",
      "mode": 0,
      "value": "1",
      "priority": 20
@@ -117,7 +117,7 @@
     },
     "dae": {
      "specialDuration": [
-      "isAttacked"
+      "1Attack"
      ]
     }
    },

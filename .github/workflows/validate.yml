@@ -40,6 +40,8 @@ jobs:
           '
       - name: Audit all innate spells against their source files
         run: node tools/audit-techniques.mjs --check
+      - name: Static checks of compendium activities and effects
+        run: python3 tools/validate-packs.py
       - name: Build Foundry compendium packs
         run: |
           npm install --no-save @foundryvtt/foundryvtt-cli

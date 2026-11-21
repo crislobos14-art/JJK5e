@@ -382,7 +382,7 @@
     {
      "key": "system.attributes.ac.bonus",
      "mode": 2,
-     "value": "+ @scaling",
+     "value": "+ JJKSCALING",
      "priority": 20
     }
    ],

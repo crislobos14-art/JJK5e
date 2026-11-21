@@ -6,7 +6,7 @@ Each technique has a function below, written from its manual text. The script ed
   python3 tools/technique-fixes.py "Antigravity System"
   python3 tools/technique-fixes.py --all
 """
-import hashlib, json, os, sys
+import hashlib, json, os, re, sys
 
 ALPHA = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 PACKS = {"jjk5e-techniques": "data/jjk5e-techniques.json", "jjk5e-feats": "data/jjk5e-feats.json"}
@@ -2872,6 +2872,7 @@ def faceless_god(S):
 
     ru = S.get("Maximum: Rumination")
     r = ru["system"]["activities"]["jKkmtNfACcxkLF9P"]
+    r["name"] = "Rumination (6 CE): 1d10 per 10% corruption"
     r["range"], r["target"] = _r(30), one_creature()
     r["damage"] = {"onSave": "none", "parts": [dice(1, 10, ["psychic"], scale=1)]}
     r["activation"]["condition"] = "Scale = corruption tens (e.g. 40% → 4d10, enter +3). Over 50%: the save has disadvantage."
@@ -4162,13 +4163,13 @@ def pachinko_fever(S):
     free(d, sv)
     trigger(acts["9tZPXV2hWCQnKAV3"], sv, "hitTargets")
     ev = act(d, "event", "utility", "Bet: event roll (d20 + expectation)", "bonus", range=RANGE_SELF, target=SELF,
-             roll={"formula": "1d20 + @scaling", "name": "Event: 1–9 d12 · 10–14 d10 · 15–18 d8 · 19–20 d6", "prompt": True, "visible": True})
+             roll={"formula": "1d20 + @scaling - 1", "name": "Event: 1–9 d12 · 10–14 d10 · 15–18 d8 · 19–20 d6", "prompt": True, "visible": True})
     free(d, ev)
     rounds = act(d, "len", "utility", "Event length (d10 rounds)", "special", range=RANGE_SELF, target=SELF,
                  roll={"formula": "1d10", "name": "Event rounds", "prompt": False, "visible": True})
     free(d, rounds)
     mult = act(d, "mult", "utility", "Multiplier roll (d20 + expectation)", "special", range=RANGE_SELF, target=SELF,
-               roll={"formula": "1d20 + @scaling", "name": "1–12 ×3 · 13–15 ×4 · 16–17 ×5 · 18–19 ×10 · 20 Rainbow", "prompt": True, "visible": True})
+               roll={"formula": "1d20 + @scaling - 1", "name": "1–12 ×3 · 13–15 ×4 · 16–17 ×5 · 18–19 ×10 · 20 Rainbow", "prompt": True, "visible": True})
     free(d, mult)
     for die in (12, 10, 8, 6):
         j = act(d, f"jp{die}", "utility", f"Jackpot dice (3d{die}: triples win)", "special", range=RANGE_SELF, target=SELF,
@@ -4210,7 +4211,7 @@ def pachinko_fever(S):
     ls = S.get("Luckiest Sorcerer Alive")
     a = ls["system"]["activities"]["1Vzkeb3xIOtzq6y4"]
     a["name"] = "Multiplier roll (best of 3d20)"
-    a["roll"] = {"formula": "3d20kh + @scaling", "name": "Multiplier", "prompt": True, "visible": True}
+    a["roll"] = {"formula": "3d20kh + @scaling - 1", "name": "Multiplier", "prompt": True, "visible": True}
     note(ls, "Jackpot lasts CE mod minutes; RCT as if 2 × CE mod spent, as a free action.")
     mark(ls)
 
@@ -4631,7 +4632,7 @@ def ratio(S):
     a["activation"]["type"] = "special"
     a["useConditionText"] = 'reaction === "isHit"'
     a["range"], a["target"] = RANGE_SELF, SELF
-    a["roll"] = {"formula": "(1 + floor(min(@details.level, 11) / 11) + @scaling)d10", "name": "Ratio (any 3 or 7 = crit)", "prompt": False, "visible": True}
+    a["roll"] = {"formula": "(floor(min(@details.level, 11) / 11) + @scaling)d10", "name": "Ratio (any 3 or 7 = crit)", "prompt": False, "visible": True}
     cost(r, a, 1, 1, "1 + " + CEMOD)
     note(r, "At 11th: 2d10 plus one more per extra CE. On 3/7 re-roll damage as a critical.")
     mark(r)
@@ -5102,7 +5103,8 @@ def schrift_x(S):
     a["activation"]["type"] = "reaction"
     a["useConditionText"] = 'reaction === "isAttacked"'
     a["range"], a["target"] = _r(120), one_creature()
-    apply(a, fx(yb, "miss", "Y-Axis Block", rounds=1, special=["isAttacked"], changes=[("flags.midi-qol.grants.fail.attack.all", 0, "1")]))
+    a["activation"]["condition"] = "Target the attacker: its attack automatically misses."
+    apply(a, fx(yb, "miss", "Y-Axis Block", rounds=1, special=["1Attack"], changes=[("flags.midi-qol.fail.attack.all", 0, "1")]))
     mark(yb)
 
 
@@ -5251,7 +5253,7 @@ def shrine(S):
     a["target"] = one_creature()
     a["attack"] = _atk()
     a["damage"] = {"includeBase": False, "parts": [{"number": None, "denomination": 12, "bonus": "", "types": ["slashing"],
-                   "custom": {"enabled": True, "formula": f"({DIS_BASE} + @scaling)d12"}, "scaling": {}}]}
+                   "custom": {"enabled": True, "formula": f"({DIS_BASE} + @scaling - 1)d12"}, "scaling": {}}]}
     cost(dm, a, 1, 1, "@prof")
     a["attack"]["critical"]["threshold"] = None
     note(dm, "Damage: base dice (1/2/3/4 at 1st/6th/11th/18th) + 1d12 per extra CE. Advantage vs creatures whose passive Perception < your DC. "
@@ -5265,7 +5267,7 @@ def shrine(S):
     c["range"], c["target"] = _r(5), one_creature()
     c["attack"] = _atk("melee")
     c["damage"] = {"includeBase": False, "parts": [{"number": None, "denomination": 10, "bonus": "", "types": ["slashing"],
-                   "custom": {"enabled": True, "formula": "(@prof + 1 + @scaling)d10"}, "scaling": {}}]}
+                   "custom": {"enabled": True, "formula": "(@prof + @scaling)d10"}, "scaling": {}}]}
     cost(cl, c, 1, 1, "10")
     sv = a["yYEZ6bLNOZFpVS1A"]
     sv["name"] = "Cleave: CON or adapted (ignores its resistances)"
@@ -6088,7 +6090,7 @@ def ten_shadows(S):
     mark(wu)
 
 
-CHAOS_BOLT = "(2 + 2 * (floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11)) + 3 * floor(min(@details.level, 18) / 18))"
+CHAOS_BOLT = "(1 + 2 * (floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11)) + 3 * floor(min(@details.level, 18) / 18))"
 
 
 def vairocana(S):
@@ -6389,6 +6391,62 @@ def leftovers(S):
         mark(it)
 
 
+MOD_SUB = "max(@abilities.str.mod, @abilities.dex.mod)"
+# Activities whose scale is a count the player enters (stars, charges, feet...), not extra CE: scaling costs nothing.
+COUNT_SCALED = {
+    "Momentum strike (+1d6 per 10 ft charged)", "Army pseudo-domain (1d10 per star, ignores slashing resistance)",
+    "Initiative 20: 1d12 per star shikigami", "Redirect an attack (roll for new target)",
+    "Bet: event roll (d20 + expectation)", "Multiplier roll (d20 + expectation)", "Multiplier roll (best of 3d20)",
+    "Hair Pin: detonate (bonus action or reaction)", "Repelled impact on lowest-CE creature (2 dice per 10 ft)",
+    "Discharge bolt (1d12 per charge)", "Star collision (2 dice per 10 ft)", "Uzumaki (2+ spirits)",
+    "Pseudo-domain (end of your turn): DEX, 1d6 per orbiting star", "Body Repel (5 CE, 2+ transfigured)",
+    "Blunt blast: 15-ft cone, CON (3 CE)", "Rumination (6 CE): 1d10 per 10% corruption"}
+
+
+def sanitize(S):
+    """Store-wide pass for engine-level mistakes found by tools/validate-packs.py."""
+    for _id, (pack, _, d) in S.src.items():
+        before = json.dumps(d, sort_keys=True)
+        acts = d.get("system", {}).get("activities", {}) or {}
+        for e in d.get("effects", []) or []:
+            keep = []
+            for c in e.get("changes", []) or []:
+                k, v = c["key"], str(c.get("value"))
+                if "@scaling" in v: c["value"] = v = v.replace("@scaling", "JJKSCALING")
+                if k == "flags.midi-qol.OverTime" and "saveAbility=wis|cha" in v:
+                    c["value"] = v = v.replace("saveAbility=wis|cha", "saveAbility=JJKCESAVE")
+                m = re.search(r"saveAbility=([a-z]{3})\|([a-z]{3})", v) if k == "flags.midi-qol.OverTime" else None
+                if m: c["value"] = v.replace(m.group(0), f"saveAbility=JJKBEST_{m.group(1)}_{m.group(2)}")
+                if k.endswith("traits.dm.amount.all"):
+                    c["key"], c["value"] = "flags.midi-qol.DR.all", v.lstrip("-").strip()
+                    c["mode"] = 2
+                if k == "flags.midi-qol.critical.range":
+                    c["key"], c["mode"], c["value"] = "flags.dnd5e.weaponCriticalThreshold", 3, "18"
+                if k == "flags.midi-qol.grants.fail.attack.all": c["key"] = "flags.midi-qol.fail.attack.all"
+                if k.startswith("flags.midi-qol.max.attack"): continue
+                if k == "system.traits.di.value" and v == "healing": continue
+                keep.append(c)
+            e["changes"] = keep
+        for a in acts.values():
+            if a.get("type") not in ("attack", "save"):
+                for blk in ("damage", "healing"):
+                    b = a.get(blk) or {}
+                    parts = b.get("parts", []) if blk == "damage" else [b]
+                    for pt in parts:
+                        if not isinstance(pt, dict): continue
+                        if "@mod" in str(pt.get("bonus", "")): pt["bonus"] = pt["bonus"].replace("@mod", MOD_SUB)
+                        cu = pt.get("custom") or {}
+                        if "@mod" in str(cu.get("formula", "")): cu["formula"] = cu["formula"].replace("@mod", MOD_SUB)
+            # damage-part scaling or @scaling in a formula only works when the usage dialog lets you scale
+            blob = json.dumps({k: a.get(k) for k in ("damage", "healing", "roll")})
+            scaled_parts = any((pt.get("scaling") or {}).get("number") for pt in (a.get("damage") or {}).get("parts", []) or [])
+            cons = a.setdefault("consumption", {"targets": [], "scaling": {"allowed": False}})
+            sc = cons.setdefault("scaling", {"allowed": False})
+            if (scaled_parts or "@scaling" in blob) and not sc.get("allowed") and a.get("name") in COUNT_SCALED:
+                sc["allowed"], sc["max"] = True, sc.get("max") or "20"
+        if json.dumps(d, sort_keys=True) != before: S.dirty.add(_id)
+
+
 TECHNIQUES = {"Antigravity System": antigravity_system,
               "Auspicious Beast Summon": auspicious_beast_summon,
               "Black Bird Manipulation": black_bird_manipulation,
@@ -6470,7 +6528,8 @@ TECHNIQUES = {"Antigravity System": antigravity_system,
               "Vengeful Spirit Manipulation": vengeful_spirit,
               "Voracity": voracity,
               "████ and Light": light,
-              "_leftovers": leftovers}
+              "_leftovers": leftovers,
+              "_sanitize": sanitize}
 
 if __name__ == "__main__":
     args = sys.argv[1:]

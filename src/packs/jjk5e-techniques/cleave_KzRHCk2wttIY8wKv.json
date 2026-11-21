@@ -64,7 +64,7 @@
        ],
        "custom": {
         "enabled": true,
-        "formula": "(@prof + 1 + @scaling)d10"
+        "formula": "(@prof + @scaling)d10"
        },
        "scaling": {}
       }

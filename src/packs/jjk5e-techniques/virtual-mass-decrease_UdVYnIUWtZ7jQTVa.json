@@ -103,19 +103,19 @@
     {
      "key": "system.attributes.movement.walk",
      "mode": 2,
-     "value": "+ (10 * @scaling)",
+     "value": "+ (10 * JJKSCALING)",
      "priority": 20
     },
     {
      "key": "system.bonuses.mwak.attack",
      "mode": 2,
-     "value": "+ @scaling",
+     "value": "+ JJKSCALING",
      "priority": 20
     },
     {
      "key": "system.bonuses.mwak.damage",
      "mode": 2,
-     "value": "- @scaling",
+     "value": "- JJKSCALING",
      "priority": 20
     }
    ],

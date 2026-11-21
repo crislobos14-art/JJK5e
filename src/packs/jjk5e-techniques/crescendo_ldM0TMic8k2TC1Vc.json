@@ -294,9 +294,9 @@
      "priority": 20
     },
     {
-     "key": "flags.midi-qol.critical.range",
-     "mode": 2,
-     "value": "-2",
+     "key": "flags.dnd5e.weaponCriticalThreshold",
+     "mode": 3,
+     "value": "18",
      "priority": 20
     }
    ],

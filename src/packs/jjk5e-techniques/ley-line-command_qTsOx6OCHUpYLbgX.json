@@ -158,9 +158,9 @@
    "description": "<p>Immune to forced movement/teleport; −prof to all damage; at 11th immune to grappled/restrained/prone. Ends off the ground.</p>",
    "changes": [
     {
-     "key": "system.traits.dm.amount.all",
+     "key": "flags.midi-qol.DR.all",
      "mode": 2,
-     "value": "-@prof",
+     "value": "@prof",
      "priority": 20
     }
    ],

@@ -155,12 +155,6 @@
    "description": "<p>Until a long rest: no healing, auto-fail death saves, +caster's CE mod on necrotic damage taken.</p>",
    "changes": [
     {
-     "key": "system.traits.di.value",
-     "mode": 2,
-     "value": "healing",
-     "priority": 20
-    },
-    {
      "key": "flags.midi-qol.fail.deathSave",
      "mode": 0,
      "value": "1",

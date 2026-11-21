@@ -332,7 +332,7 @@
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
 | Madness Inducement | 1 | utility:Activate madness (3 CE, 1 minute); utility:Add 5% Mental Corruption; utility:Add 10% Mental Corruption; utility:Add 25% Mental Corruption; utility:Paranoia roll (d10; 1–2 attacks nearest) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/madness-inducement_KdemmuLMMISHWRIP.json) |
-| Maximum: Rumination | 11 | save:Action (6 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/maximum-rumination_Rf5Hd5OWeGdCdMU0.json) |
+| Maximum: Rumination | 11 | save:Rumination (6 CE): 1d10 per 10% corruption | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/maximum-rumination_Rf5Hd5OWeGdCdMU0.json) |
 | Domain Expansion: Theia Mania | 18 | utility:Expand Domain (20 CE); utility:Initiative 20: +5% corruption to all | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-theia-mania_zSGeI3ieeQad8lzW.json) |
 
 ### Fate (5 spells)

@@ -207,9 +207,9 @@
      "priority": 20
     },
     {
-     "key": "system.traits.dm.amount.all",
+     "key": "flags.midi-qol.DR.all",
      "mode": 2,
-     "value": "-floor(@details.level / 2)",
+     "value": "floor(@details.level / 2)",
      "priority": 20
     }
    ],

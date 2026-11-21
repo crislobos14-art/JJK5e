@@ -30,7 +30,8 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "20"
      },
      "spellSlot": false
     },
@@ -46,7 +47,7 @@
      "override": true
     },
     "roll": {
-     "formula": "3d20kh + @scaling",
+     "formula": "3d20kh + @scaling - 1",
      "name": "Multiplier",
      "prompt": true,
      "visible": true

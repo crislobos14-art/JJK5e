@@ -67,7 +67,7 @@
      ],
      "custom": {
       "enabled": true,
-      "formula": "1d8 + @mod + (1 + floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11)) * max(@abilities.wis.mod, @abilities.cha.mod)"
+      "formula": "1d8 + max(@abilities.str.mod, @abilities.dex.mod) + (1 + floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11)) * max(@abilities.wis.mod, @abilities.cha.mod)"
      },
      "scaling": {}
     }

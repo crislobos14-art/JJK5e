@@ -225,13 +225,13 @@
     {
      "key": "system.bonuses.msak.damage",
      "mode": 2,
-     "value": "+ (5 * @scaling)",
+     "value": "+ (5 * JJKSCALING)",
      "priority": 20
     },
     {
      "key": "system.bonuses.rsak.damage",
      "mode": 2,
-     "value": "+ (5 * @scaling)",
+     "value": "+ (5 * JJKSCALING)",
      "priority": 20
     }
    ],

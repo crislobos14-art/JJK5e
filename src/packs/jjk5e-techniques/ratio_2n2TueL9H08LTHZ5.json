@@ -51,7 +51,7 @@
     },
     "useConditionText": "reaction === \"isHit\"",
     "roll": {
-     "formula": "(1 + floor(min(@details.level, 11) / 11) + @scaling)d10",
+     "formula": "(floor(min(@details.level, 11) / 11) + @scaling)d10",
      "name": "Ratio (any 3 or 7 = crit)",
      "prompt": false,
      "visible": true

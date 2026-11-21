@@ -31,8 +31,8 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false,
-      "max": ""
+      "allowed": true,
+      "max": "20"
      },
      "spellSlot": false
     },

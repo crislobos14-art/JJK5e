@@ -107,7 +107,7 @@
        ],
        "custom": {
         "enabled": true,
-        "formula": "1d8 + @mod + 4 * max(@abilities.wis.mod, @abilities.cha.mod)"
+        "formula": "1d8 + max(@abilities.str.mod, @abilities.dex.mod) + 4 * max(@abilities.wis.mod, @abilities.cha.mod)"
        },
        "scaling": {}
       }

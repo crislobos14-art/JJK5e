@@ -204,7 +204,7 @@
     {
      "key": "system.bonuses.mwak.damage",
      "mode": 2,
-     "value": "+ @scaling",
+     "value": "+ JJKSCALING",
      "priority": 20
     }
    ],

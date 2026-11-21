@@ -234,12 +234,6 @@
    "description": "<p>Claw attacks auto-hit in the domain (Midi max attack roll as proxy).</p>",
    "changes": [
     {
-     "key": "flags.midi-qol.max.attack.mwak",
-     "mode": 0,
-     "value": "1",
-     "priority": 20
-    },
-    {
      "key": "flags.midi-qol.advantage.attack.mwak",
      "mode": 0,
      "value": "1",

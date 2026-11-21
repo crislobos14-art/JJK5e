@@ -70,7 +70,10 @@
        "target": "",
        "value": "1"
       }
-     ]
+     ],
+     "scaling": {
+      "allowed": false
+     }
     }
    }
   },
