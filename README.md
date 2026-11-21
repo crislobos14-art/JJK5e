@@ -5,9 +5,17 @@ Content is in English, as in the original document.
 
 ## Requirements
 
-- Foundry VTT 14 and dnd5e 6.x for the combat integration profile.
-- Install and enable **Midi-QOL 14.7.0+** and **DAE 14.6.0+** before starting the world.
-- Optional: **Sequencer** + **JB2A** (free) for animations; **Automated Animations** keeps working for official D&D items
+- Foundry VTT **14.369+** (verified 14.370) and dnd5e **6.0.6+** (verified 6.1.1).
+- **Midi-QOL** and **DAE** for dnd5e 6. The builds in Foundry's package browser (midi 14.0.x, DAE 14.0.x) do **not**
+  work with dnd5e 6; install them from these manifest links (*Install Module → Manifest URL*), DAE first:
+  - DAE: `https://github.com/tposney/dae/releases/download/latest-dnd6/module.json`
+  - Midi-QOL: `https://github.com/tposney/midi-qol/releases/download/latest-dnd6/module.json`
+  - dnd5e 6.1 → Midi-QOL 14.7.0+ with DAE 14.6.10+. dnd5e 6.0 → stay on Midi-QOL 14.6.x
+    (`https://github.com/tposney/midi-qol/releases/download/v14.6.14/module.json`).
+- Optional (all verified on Foundry 14): Sequencer 4.3, JB2A 0.9.4, Automated Animations 8.0.7, Token Magic FX 0.8.4,
+  FXMaster 8.4, Dice So Nice 6.4, Visual Active Effects 14.0.3, Bar Brawl 1.9.4, Token Action HUD D&D 5e 2.2
+  (needs Token Action HUD Core 2.1 and socketlib).
+- **Times Up** is not available for Foundry 14 (max 13.999); not needed: DAE/the module expire effects themselves.
 
 ## Installation
 

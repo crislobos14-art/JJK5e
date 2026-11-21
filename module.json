@@ -2,7 +2,7 @@
   "id": "jjk5e",
   "title": "Jujutsu Kaisen 5e (V.6) — Compendium",
   "description": "Unofficial, non-commercial fan conversion of the Jujutsu Kaisen 5e homebrew (V.6) by I watch Anime for the D&D 5e system: 7 classes with level advancement, 79 Innate Techniques, races, feats, backgrounds, mindsets, equipment, cursed tools and the full rules journal. Includes Cursed Energy pool automation. Also includes feats and options from Creeps and Curses V.3.1 (Special Grade Boons, Special Traits, Heavenly Pacts, new techniques). Licensed CC BY-NC-SA 4.0.",
-  "version": "1.53.0",
+  "version": "1.53.1",
   "authors": [
     {
       "name": "I watch Anime",
@@ -12,7 +12,7 @@
     }
   ],
   "compatibility": {
-    "minimum": "13",
+    "minimum": "14.369",
     "verified": "14.370"
   },
   "relationships": {
@@ -21,7 +21,7 @@
         "id": "dnd5e",
         "type": "system",
         "compatibility": {
-          "minimum": "5.3.0",
+          "minimum": "6.0.6",
           "verified": "6.1.1"
         }
       }
@@ -32,16 +32,20 @@
         "type": "module",
         "reason": "Full combat automation: attacks, saves and damage applied automatically, Black Flash inside the Midi workflow, reaction prompts for JJK reactions, repeat saves each turn (OverTime) and domain sure-hit.",
         "compatibility": {
-          "minimum": "14.7.0"
-        }
+          "minimum": "14.6.5",
+          "verified": "14.7.0"
+        },
+        "manifest": "https://github.com/tposney/midi-qol/releases/download/latest-dnd6/module.json"
       },
       {
         "id": "dae",
         "type": "module",
         "reason": "Dynamic Active Effects: Midi-QOL's effect companion (formulas and special durations in effects).",
         "compatibility": {
-          "minimum": "14.6.0"
-        }
+          "minimum": "14.6.4",
+          "verified": "14.6.10"
+        },
+        "manifest": "https://github.com/tposney/dae/releases/download/latest-dnd6/module.json"
       }
     ],
     "recommends": [
@@ -50,51 +54,81 @@
         "type": "module",
         "reason": "Plays the JJK 5e attack, technique and domain animations.",
         "compatibility": {
-          "minimum": "4.0.0"
+          "minimum": "4.0.0",
+          "verified": "4.3.0"
         }
       },
       {
         "id": "JB2A_DnD5e",
         "type": "module",
-        "reason": "Free animation library used by the JJK 5e animations."
+        "reason": "Free animation library used by the JJK 5e animations.",
+        "compatibility": {
+          "minimum": "0.9.0",
+          "verified": "0.9.4"
+        }
       },
       {
         "id": "autoanimations",
         "type": "module",
-        "reason": "Animates items by name; JJK items it recognises are left to it (no double animations)."
+        "reason": "Animates items by name; JJK items it recognises are left to it (no double animations).",
+        "compatibility": {
+          "minimum": "8.0.0",
+          "verified": "8.0.7"
+        }
       },
       {
         "id": "tokenmagic",
         "type": "module",
-        "reason": "Token auras: the Zone after a Black Flash and an open domain."
+        "reason": "Token auras: the Zone after a Black Flash and an open domain.",
+        "compatibility": {
+          "minimum": "0.8.0",
+          "verified": "0.8.4"
+        }
       },
       {
         "id": "fxmaster",
         "type": "module",
         "reason": "Tints the scene while a domain expansion is open.",
         "compatibility": {
-          "minimum": "8.0.0"
+          "minimum": "8.0.0",
+          "verified": "8.4.2"
         }
       },
       {
         "id": "dice-so-nice",
         "type": "module",
-        "reason": "3D dice with JJK colours for Cursed Energy, Black Flash and domain rolls."
+        "reason": "3D dice with JJK colours for Cursed Energy, Black Flash and domain rolls.",
+        "compatibility": {
+          "minimum": "6.0.0",
+          "verified": "6.4.5"
+        }
       },
       {
         "id": "visual-active-effects",
         "type": "module",
-        "reason": "Shows CE forms, vows, domain and Technique Burnout on screen, with buttons to close the domain or open the vows."
+        "reason": "Shows CE forms, vows, domain and Technique Burnout on screen, with buttons to close the domain or open the vows.",
+        "compatibility": {
+          "minimum": "14.0.0",
+          "verified": "14.0.3"
+        }
       },
       {
         "id": "barbrawl",
         "type": "module",
-        "reason": "Extra token bars: keep HP and Cursed Energy visible at the same time."
+        "reason": "Extra token bars: keep HP and Cursed Energy visible at the same time.",
+        "compatibility": {
+          "minimum": "1.9.0",
+          "verified": "1.9.4"
+        }
       },
       {
         "id": "token-action-hud-dnd5e",
         "type": "module",
-        "reason": "Quick action bar for techniques, CE abilities and JJK macros without opening the sheet."
+        "reason": "Quick action bar for techniques, CE abilities and JJK macros without opening the sheet.",
+        "compatibility": {
+          "minimum": "2.0.0",
+          "verified": "2.2.0"
+        }
       }
     ]
   },
@@ -128,7 +162,7 @@
   "socket": true,
   "url": "https://github.com/crislobos14-art/jjk5e",
   "manifest": "https://raw.githubusercontent.com/crislobos14-art/jjk5e/main/module.json",
-  "download": "https://github.com/crislobos14-art/JJK5e/releases/download/v1.53.0/module.zip",
+  "download": "https://github.com/crislobos14-art/JJK5e/releases/download/v1.53.1/module.zip",
   "packs": [
     {
       "name": "jjk5e-classes",

@@ -2417,6 +2417,26 @@ function midiActive() {
   return !!game.modules.get("midi-qol")?.active;
 }
 
+/** Midi 14.7+ hands workflows TokenDocuments (14.8+ always); older builds hand Token placeables. */
+function asToken(t) { return t?.object ?? t ?? null; }
+
+/** Distance in scene units between two tokens: Midi's own measure when present, else Foundry's grid. */
+function tokenDistance(a, b) {
+  a = asToken(a); b = asToken(b);
+  if (!a || !b) return NaN;
+  const M = globalThis.MidiQOL;
+  try {
+    if (typeof M?.computeDistance === "function") return M.computeDistance(a, b, { wallsBlock: true });
+  } catch (err) { /* fall through to the grid measure */ }
+  try {
+    const path = canvas.grid.measurePath([a.center, b.center]);
+    const size = canvas.scene?.grid?.distance ?? 5;
+    // Edge-to-edge for adjacent large tokens: subtract half of each footprint beyond one square.
+    const extra = ((Math.max(a.document.width, a.document.height) - 1) + (Math.max(b.document.width, b.document.height) - 1)) / 2 * size;
+    return Math.max(0, path.distance - extra);
+  } catch (err) { return NaN; }
+}
+
 function registerMidiHooks() {
   if (!midiActive()) return;
   Hooks.on("midi-qol.preAttackRoll", workflow => {
@@ -2424,10 +2444,10 @@ function registerMidiHooks() {
     const attack = workflow.activity?.attack?.type?.value;
     if (attack !== "melee" || workflow.targets?.size !== 1 || !actor?.items.some(item =>
       item.flags?.jjk5e?.technique === "Clone" && baseName(item) === "Twice the Fun")) return;
-    const [target] = workflow.targets;
+    const target = asToken([...workflow.targets][0]);
     const adjacent = canvas.tokens.placeables.some(token => {
       if (token.document.flags?.jjk5e?.cloneOrigin !== actor.uuid || token.actor?.system.attributes.hp.value <= 0) return false;
-      const distance = globalThis.MidiQOL?.computeDistance?.(token, target, { wallsBlock: true });
+      const distance = tokenDistance(token, target);
       return Number.isFinite(distance) && distance >= 0 && distance <= 5;
     });
     if (adjacent) workflow.advantage = true;
@@ -2475,7 +2495,7 @@ function registerMidiHooks() {
       const activity = workflow?.activity;
       if (!item?.flags?.jjk5e || aaHandles(item) || activity?.type !== "attack") return;
       const source = workflow.token ?? tokenOf(item.actor);
-      for (const target of workflow.targets ?? []) animateHit(item, activity, source, target, !workflow.hitTargets?.has(target));
+      for (const target of workflow.targets ?? []) animateHit(item, activity, asToken(source), asToken(target), !workflow.hitTargets?.has(target));
     } catch (err) { console.error(`${MODULE_ID} | midi animation`, err); }
   });
 }
@@ -4568,15 +4588,23 @@ const modActive = (id) => !!game.modules?.get?.(id)?.active;
 
 /* ---- FXMaster: scene tint while a domain is open (GM side) ---- */
 
+const FXM_DOMAIN_IDS = new Map();
+const FXM_DOMAIN_FILTER = { type: "color",
+  options: { color: { value: "#4b1d6e", apply: true }, saturation: 0.7, contrast: 1.15, brightness: 0.85 } };
 async function domainSceneFX(scene, zoneId, on) {
-  if (!modActive("fxmaster") || !globalThis.FXMASTER?.api?.effects || !setting("fxDomains")) return;
-  const id = `apiMacro_jjk5eDomain${zoneId}_f`;
+  const api = globalThis.FXMASTER?.api?.effects;
+  if (!modActive("fxmaster") || !api || !setting("fxDomains")) return;
+  const key = `${scene?.id}.${zoneId}`;
   try {
     if (on) {
-      await FXMASTER.api.effects.play({ scene, filters: [{ id, type: "color",
-        options: { color: { value: "#4b1d6e", apply: true }, saturation: 0.7, contrast: 1.15, brightness: 0.85 } }] });
+      const res = await api.play({ scene, filters: [foundry.utils.deepClone(FXM_DOMAIN_FILTER)] });
+      if (res?.filters?.length) FXM_DOMAIN_IDS.set(key, res.filters);
     } else {
-      await FXMASTER.api.effects.stop({ scene, filters: [id] });
+      const ids = FXM_DOMAIN_IDS.get(key);
+      FXM_DOMAIN_IDS.delete(key);
+      // FXMaster 8: stop by the ids play() returned; otherwise by the exact same payload.
+      if (ids?.length && typeof api.filters?.stop === "function") await api.filters.stop(ids, { scene });
+      else await api.stop({ scene, filters: [foundry.utils.deepClone(FXM_DOMAIN_FILTER)] });
     }
   } catch (err) { console.warn(`${MODULE_ID} | FXMaster domain filter`, err); }
 }

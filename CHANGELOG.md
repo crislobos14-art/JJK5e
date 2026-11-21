@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.53.1 — Compatibilidad con los módulos que usa JJK 5e
+- **Midi-QOL / DAE**: el navegador de paquetes de Foundry solo ofrece midi 14.0.x y DAE 14.0.x, que **no funcionan con dnd5e 6**. El manifiesto ahora enlaza las versiones para dnd5e 6 (`latest-dnd6`), y el README explica cuál usar: dnd5e 6.1 → Midi 14.7.0 + DAE 14.6.10; dnd5e 6.0 → Midi 14.6.x. Mínimos: Midi 14.6.5, DAE 14.6.4.
+- **Foundry/dnd5e**: mínimo real Foundry 14.369 y dnd5e 6.0.6 (lo que exige Midi para dnd5e 6); antes decía Foundry 13 y dnd5e 5.3, que no pueden cargar las dependencias obligatorias.
+- **Midi 14.7 (tokens como TokenDocument)**: la ventaja de Twice the Fun ya no depende de `MidiQOL.computeDistance` (mide con la cuadrícula si no existe) y las animaciones convierten documentos en tokens.
+- **FXMaster 8**: el tinte de dominio se quitaba con un id que FXMaster no reconoce; ahora se guarda el id que devuelve `play()` y se detiene con `filters.stop()`.
+- Versiones verificadas en el manifiesto: Sequencer 4.3.0, JB2A 0.9.4, Automated Animations 8.0.7, Token Magic FX 0.8.4, FXMaster 8.4.2, Dice So Nice 6.4.5, Visual Active Effects 14.0.3, Bar Brawl 1.9.4, Token Action HUD D&D 5e 2.2.0.
+- Times Up no existe para Foundry 14; el módulo no lo necesita.
+- Las claves `flags.midi-qol.fail/max.*` siguen funcionando: DAE 14.6.3+ las migra a los campos de tirada de dnd5e.
+
 ## 1.53.0 — Análisis profundo: manual V.6 vs módulo
 Comparé el manual (V.6 + Creeps & Curses) con todos los compendios y revisé el código con ESLint.
 
