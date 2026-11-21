@@ -208,6 +208,10 @@
      "triggeredActivityConsume": false,
      "triggeredActivityConfigure": false,
      "triggeredActivityConditionText": ""
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
     }
    }
   }

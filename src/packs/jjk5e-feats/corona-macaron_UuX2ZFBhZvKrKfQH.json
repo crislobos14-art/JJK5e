@@ -38,10 +38,23 @@
      }
     },
     "range": {
-     "units": "spec",
+     "units": "self",
      "override": true
     },
-    "target": {},
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "10",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
     "duration": {
      "value": "1",
      "units": "minute",
@@ -59,7 +72,13 @@
     "damage": {
      "onSave": "none",
      "parts": []
-    }
+    },
+    "effects": [
+     {
+      "_id": "PTI1FcQJdzwSAb9c",
+      "onSave": false
+     }
+    ]
    }
   },
   "prerequisites": {
@@ -81,10 +100,33 @@
    },
    "forTechniques": [
     "Cursed Cannon"
-   ]
+   ],
+   "automation": "automated"
   }
  },
  "folder": "21KhImE6dWZGP2gJ",
  "sort": 300,
- "_key": "!items!UuX2ZFBhZvKrKfQH"
+ "_key": "!items!UuX2ZFBhZvKrKfQH",
+ "effects": [
+  {
+   "_id": "PTI1FcQJdzwSAb9c",
+   "name": "Pulled into the ring",
+   "img": "modules/jjk5e/icons/techniques/cursed-cannon.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Inside the Corona Macaron; touching the ring deals your Granite Blast damage.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!UuX2ZFBhZvKrKfQH.PTI1FcQJdzwSAb9c"
+  }
+ ]
 }

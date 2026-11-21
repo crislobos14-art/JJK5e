@@ -24,7 +24,7 @@
    "vLQ6ytZvDHlnFz03": {
     "_id": "vLQ6ytZvDHlnFz03",
     "type": "save",
-    "name": "Bonus Action",
+    "name": "Judo Throw (STR): prone; fail by 5+ stunned",
     "sort": 0,
     "activation": {
      "type": "bonus",
@@ -41,7 +41,14 @@
      "units": "spec",
      "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
     },
@@ -57,7 +64,56 @@
     "damage": {
      "onSave": "none",
      "parts": []
-    }
+    },
+    "effects": [
+     {
+      "_id": "hIdQmPjrKieZNXom",
+      "onSave": false
+     }
+    ]
+   },
+   "VL2jwd3Ejcggwlof": {
+    "_id": "VL2jwd3Ejcggwlof",
+    "type": "utility",
+    "name": "Judo Throw: failed by 5+ → stunned",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "zbttPQ3XNqccQ7Rb",
+      "onSave": false
+     }
+    ]
    }
   },
   "prerequisites": {
@@ -76,10 +132,62 @@
    },
    "forTechniques": [
     "Divergent Fist"
-   ]
+   ],
+   "automation": "automated"
   }
  },
  "folder": "wZIFQphpPzNuXv3W",
  "sort": 100,
- "_key": "!items!fwuPOkYpGbemJ4mA"
+ "_key": "!items!fwuPOkYpGbemJ4mA",
+ "effects": [
+  {
+   "_id": "hIdQmPjrKieZNXom",
+   "name": "Prone (Judo Throw)",
+   "img": "modules/jjk5e/icons/techniques/divergent-fist.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [
+    "prone"
+   ],
+   "description": "",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!fwuPOkYpGbemJ4mA.hIdQmPjrKieZNXom"
+  },
+  {
+   "_id": "zbttPQ3XNqccQ7Rb",
+   "name": "Stunned (Judo Throw)",
+   "img": "modules/jjk5e/icons/techniques/divergent-fist.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [
+    "stunned"
+   ],
+   "description": "",
+   "changes": [],
+   "duration": {
+    "rounds": 2
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    },
+    "dae": {
+     "specialDuration": [
+      "turnEnd"
+     ]
+    }
+   },
+   "_key": "!items.effects!fwuPOkYpGbemJ4mA.zbttPQ3XNqccQ7Rb"
+  }
+ ]
 }

@@ -24,7 +24,7 @@
    "AyHTNj7qBAkMgGQz": {
     "_id": "AyHTNj7qBAkMgGQz",
     "type": "save",
-    "name": "Special",
+    "name": "Blast Away (Energy Blast ≥ 4 CE): STR or pushed 10 ft and prone",
     "sort": 0,
     "activation": {
      "type": "special",
@@ -41,7 +41,14 @@
      "units": "spec",
      "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
     },
@@ -85,7 +92,8 @@
    ],
    "forTechniques": [
     "Triple Core"
-   ]
+   ],
+   "automation": "automated"
   }
  },
  "effects": [

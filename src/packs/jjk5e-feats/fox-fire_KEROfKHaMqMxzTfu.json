@@ -24,7 +24,7 @@
    "spOEanRx5Pw4fa9a": {
     "_id": "spOEanRx5Pw4fa9a",
     "type": "save",
-    "name": "Action",
+    "name": "Detonate the fog (CON)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -41,7 +41,13 @@
      "units": "spec",
      "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "creature",
+      "choice": true
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
     },
@@ -56,7 +62,21 @@
     },
     "damage": {
      "onSave": "half",
-     "parts": []
+     "parts": [
+      {
+       "number": null,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "cold"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "(2 * max(@abilities.wis.mod, @abilities.cha.mod))d8"
+       },
+       "scaling": {}
+      }
+     ]
     }
    },
    "bOAgQsAIU18CM1hb": {
@@ -96,7 +116,8 @@
    },
    "forTechniques": [
     "Starlight Symphony"
-   ]
+   ],
+   "automation": "automated"
   }
  },
  "folder": "W3c86qCvNyFi2g3Q",

@@ -42,13 +42,23 @@
      "units": "ft",
      "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
     },
     "attack": {
      "ability": "spellcasting",
      "bonus": "",
+     "critical": {
+      "threshold": null
+     },
      "flat": false,
      "type": {
       "value": "melee",
@@ -56,8 +66,86 @@
      }
     },
     "damage": {
-     "includeBase": false,
+     "includeBase": true,
      "parts": []
+    },
+    "midiProperties": {
+     "triggeredActivityId": "7nqdeVKsCisGTeOJ",
+     "triggeredActivityTargets": "hitTargets",
+     "triggeredActivityRollAs": "self",
+     "triggeredActivityConsume": false,
+     "triggeredActivityConfigure": false,
+     "triggeredActivityConditionText": ""
+    }
+   },
+   "7nqdeVKsCisGTeOJ": {
+    "_id": "7nqdeVKsCisGTeOJ",
+    "type": "save",
+    "name": "Spatial Shatter: Thin Ice Breaker on the target",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "Xw2lpLk2ZvtB5Uc0",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": null,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "force"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "(2 * max(@abilities.wis.mod, @abilities.cha.mod))d10"
+       },
+       "scaling": {}
+      }
+     ]
     }
    }
   },
@@ -80,10 +168,35 @@
    },
    "forTechniques": [
     "Sky Manipulation"
-   ]
+   ],
+   "automation": "automated"
   }
  },
  "folder": "CIlfZOL4m5ZkufHa",
  "sort": 200,
- "_key": "!items!1Y20N2NZKbqyPu9e"
+ "_key": "!items!1Y20N2NZKbqyPu9e",
+ "effects": [
+  {
+   "_id": "Xw2lpLk2ZvtB5Uc0",
+   "name": "Prone (Spatial Shatter)",
+   "img": "modules/jjk5e/icons/techniques/sky-manipulation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [
+    "prone"
+   ],
+   "description": "",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!1Y20N2NZKbqyPu9e.Xw2lpLk2ZvtB5Uc0"
+  }
+ ]
 }

@@ -89,7 +89,7 @@
    "ChC5AhkO9RUqc50p": {
     "_id": "ChC5AhkO9RUqc50p",
     "type": "attack",
-    "name": "Bonus Action (2 CE)",
+    "name": "Block Strike (2 CE): cube-covered unarmed strike",
     "sort": 100000,
     "activation": {
      "type": "bonus",
@@ -103,11 +103,18 @@
      }
     },
     "range": {
-     "value": "30",
+     "value": "5",
      "units": "ft",
      "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
     "duration": {
      "value": "1",
      "units": "minute",
@@ -116,6 +123,9 @@
     "attack": {
      "ability": "spellcasting",
      "bonus": "",
+     "critical": {
+      "threshold": null
+     },
      "flat": false,
      "type": {
       "value": "melee",
@@ -124,7 +134,21 @@
     },
     "damage": {
      "includeBase": false,
-     "parts": []
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 8,
+       "bonus": "max(@abilities.wis.mod, @abilities.cha.mod)",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
     }
    },
    "33kVB9IBtSw0Hv1c": {
@@ -204,7 +228,9 @@
    },
    "forTechniques": [
     "Black Box"
-   ]
+   ],
+   "automationNotes": "Block Strike damage shown as 2d8 + CE mod: check the full text.",
+   "automation": "automated"
   }
  },
  "effects": [

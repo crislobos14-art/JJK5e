@@ -23,6 +23,46 @@
   "prerequisites": {
    "level": null,
    "repeatable": false
+  },
+  "activities": {
+   "RJdhrmHu0fxhnrOW": {
+    "_id": "RJdhrmHu0fxhnrOW",
+    "type": "utility",
+    "name": "Immunity → resistance on this hit (+1 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": []
+   }
   }
  },
  "flags": {
@@ -39,7 +79,11 @@
    ],
    "forTechniques": [
     "Triple Core"
-   ]
+   ],
+   "ceCosts": {
+    "RJdhrmHu0fxhnrOW": 1
+   },
+   "automation": "automated"
   }
  },
  "folder": "82rPUBoGJ4IokyPC",

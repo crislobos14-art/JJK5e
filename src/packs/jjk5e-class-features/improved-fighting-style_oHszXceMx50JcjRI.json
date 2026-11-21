@@ -60,7 +60,7 @@
      }
     },
     "damage": {
-     "includeBase": false,
+     "includeBase": true,
      "parts": []
     },
     "useConditionText": "reaction === \"isDamaged\""

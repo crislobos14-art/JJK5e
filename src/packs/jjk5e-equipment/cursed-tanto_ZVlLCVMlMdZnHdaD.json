@@ -95,7 +95,7 @@
      }
     },
     "damage": {
-     "includeBase": false,
+     "includeBase": true,
      "parts": []
     },
     "useConditionText": "false"

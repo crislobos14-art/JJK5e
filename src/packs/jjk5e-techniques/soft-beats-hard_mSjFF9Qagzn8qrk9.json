@@ -106,7 +106,11 @@
       "classification": "unarmed"
      }
     },
-    "useConditionText": "reaction === \"isAttacked\""
+    "useConditionText": "reaction === \"isAttacked\"",
+    "damage": {
+     "includeBase": true,
+     "parts": []
+    }
    },
    "z62c11PUbFwLynsM": {
     "_id": "z62c11PUbFwLynsM",
@@ -154,6 +158,10 @@
       "value": "melee",
       "classification": "unarmed"
      }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
     }
    }
   }

@@ -24,7 +24,7 @@
    "M7SThcbJ6cXlHZdy": {
     "_id": "M7SThcbJ6cXlHZdy",
     "type": "utility",
-    "name": "Action",
+    "name": "Maculation (1 CE per 5-ft Simple Domain, up to 6)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -34,12 +34,14 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "6"
      }
     },
     "range": {
      "value": "30",
-     "units": "ft"
+     "units": "ft",
+     "override": true
     },
     "target": {
      "affects": {
@@ -52,6 +54,48 @@
      "units": "minute",
      "concentration": false
     }
+   },
+   "iIeTbPzTOd4TLRlU": {
+    "_id": "iIeTbPzTOd4TLRlU",
+    "type": "utility",
+    "name": "Maculation guard (reaction): +3 AC",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "XaEk2u54AdsRD6s1",
+      "onSave": false
+     }
+    ],
+    "useConditionText": "reaction === \"isAttacked\""
    }
   },
   "prerequisites": {
@@ -70,10 +114,51 @@
    },
    "forTechniques": [
     "New Shadow Style"
-   ]
+   ],
+   "ceCosts": {
+    "M7SThcbJ6cXlHZdy": 1
+   },
+   "ceSteps": {
+    "M7SThcbJ6cXlHZdy": 1
+   },
+   "automation": "automated"
   }
  },
  "folder": "gFod6wGzEy6UctqC",
  "sort": 400,
- "_key": "!items!IceBoustbhnfJLd1"
+ "_key": "!items!IceBoustbhnfJLd1",
+ "effects": [
+  {
+   "_id": "XaEk2u54AdsRD6s1",
+   "name": "Maculation guard",
+   "img": "modules/jjk5e/icons/techniques/new-shadow-style.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+3",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStartSource"
+     ]
+    }
+   },
+   "_key": "!items.effects!IceBoustbhnfJLd1.XaEk2u54AdsRD6s1"
+  }
+ ]
 }

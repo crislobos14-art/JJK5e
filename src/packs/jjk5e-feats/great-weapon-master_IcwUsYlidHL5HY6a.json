@@ -42,7 +42,14 @@
      "units": "ft",
      "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
     },
@@ -56,9 +63,50 @@
      }
     },
     "damage": {
-     "includeBase": false,
+     "includeBase": true,
      "parts": []
     }
+   },
+   "IZpyuAHrHGXIruOr": {
+    "_id": "IZpyuAHrHGXIruOr",
+    "type": "utility",
+    "name": "Power attack: −5 to hit, +10 damage (next attack)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "crwdbaUxaJVQzkFB",
+      "onSave": false
+     }
+    ]
    }
   },
   "prerequisites": {
@@ -67,9 +115,51 @@
   }
  },
  "flags": {
-  "jjk5e": {}
+  "jjk5e": {
+   "automation": "automated"
+  }
  },
  "folder": "cxPIGjcxqJdZTMQ5",
  "sort": 900,
- "_key": "!items!IcwUsYlidHL5HY6a"
+ "_key": "!items!IcwUsYlidHL5HY6a",
+ "effects": [
+  {
+   "_id": "crwdbaUxaJVQzkFB",
+   "name": "Great Weapon Master",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.bonuses.mwak.attack",
+     "mode": 2,
+     "value": "-5",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+10",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    },
+    "dae": {
+     "specialDuration": [
+      "1Attack"
+     ]
+    }
+   },
+   "_key": "!items.effects!IcwUsYlidHL5HY6a.crwdbaUxaJVQzkFB"
+  }
+ ]
 }

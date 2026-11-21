@@ -41,7 +41,14 @@
      "units": "spec",
      "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
     },
@@ -56,9 +63,23 @@
     },
     "damage": {
      "onSave": "half",
-     "parts": []
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
     },
-    "useConditionText": "false"
+    "useConditionText": "reaction === \"isAttacked\""
    }
   },
   "prerequisites": {
@@ -77,7 +98,9 @@
    },
    "forTechniques": [
     "Contractual Recreation"
-   ]
+   ],
+   "automationNotes": "Object damage by size (2d10 shown, Medium). Weapon instead: attack the attacker at advantage. Cost: twice the receipt's CE.",
+   "automation": "automated"
   }
  },
  "folder": "UU2pjYTH69wH4knu",

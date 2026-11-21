@@ -23,6 +23,116 @@
   "prerequisites": {
    "level": null,
    "repeatable": false
+  },
+  "activities": {
+   "s1yxGwSFUCL8Lz30": {
+    "_id": "s1yxGwSFUCL8Lz30",
+    "type": "utility",
+    "name": "Tyrant Shikigami: Large (+1 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
+   },
+   "U7dCDoRwangASdoi": {
+    "_id": "U7dCDoRwangASdoi",
+    "type": "utility",
+    "name": "Tyrant Shikigami: Huge (+2 CE, 11th)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
+   },
+   "PUDr0AlANXceBj0C": {
+    "_id": "PUDr0AlANXceBj0C",
+    "type": "utility",
+    "name": "Tyrant Shikigami: Gargantuan (+4 CE, 18th)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
+   }
   }
  },
  "flags": {
@@ -36,7 +146,14 @@
    },
    "forTechniques": [
     "Star Dictator"
-   ]
+   ],
+   "ceCosts": {
+    "s1yxGwSFUCL8Lz30": 1,
+    "U7dCDoRwangASdoi": 2,
+    "PUDr0AlANXceBj0C": 4
+   },
+   "automationNotes": "Per size step above Medium: +4 STR, +1d8 bite, +30 HP (edit the Major Star actor).",
+   "automation": "automated"
   }
  },
  "folder": "bGKgrFplZpNnclwX",

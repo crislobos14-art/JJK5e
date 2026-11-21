@@ -9,7 +9,8 @@ Each technique has a function below, written from its manual text. The script ed
 import hashlib, json, os, re, sys
 
 ALPHA = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-PACKS = {"jjk5e-techniques": "data/jjk5e-techniques.json", "jjk5e-feats": "data/jjk5e-feats.json"}
+PACKS = {"jjk5e-techniques": "data/jjk5e-techniques.json", "jjk5e-feats": "data/jjk5e-feats.json",
+         "jjk5e-equipment": "data/jjk5e-equipment.json", "jjk5e-class-features": "data/jjk5e-class-features.json"}
 CE = "max(@abilities.wis.mod, @abilities.cha.mod)"
 NON_PSYCHIC = ["acid", "bludgeoning", "cold", "fire", "force", "lightning", "necrotic", "piercing", "poison",
                "radiant", "slashing", "thunder"]
@@ -41,6 +42,10 @@ class Store:
         self.dirty.add(hits[0]["_id"])
         return hits[0]
 
+    def by_id(self, _id):
+        self.dirty.add(_id)
+        return self.src[_id][2]
+
     def save(self):
         for _id in sorted(self.dirty):
             pack, p, d = self.src[_id]
@@ -51,7 +56,8 @@ class Store:
                     for aid in [a for a in fl[k] if a not in acts]: fl[k].pop(aid)
             for e in d.get("effects", []):
                 e["_key"] = f"!items.effects!{d['_id']}.{e['_id']}"
-            with open(p, "w", encoding="utf-8") as f: f.write(json.dumps(d, ensure_ascii=False, indent=1) + "\n")
+            nl = "\n" if open(p, encoding="utf-8").read().endswith("\n") else ""
+            with open(p, "w", encoding="utf-8") as f: f.write(json.dumps(d, ensure_ascii=False, indent=1) + nl)
             clean = json.loads(json.dumps(d))
             clean.pop("_key", None)
             for e in clean.get("effects", []): e.pop("_key", None)
@@ -102,7 +108,7 @@ def fx(item, key, name, changes=(), statuses=(), rounds=1, special=(), desc="", 
          "statuses": list(statuses), "description": f"<p>{desc}</p>" if desc else "",
          "changes": [{"key": k, "mode": m, "value": str(v), "priority": 20} for k, m, v in changes],
          "duration": {"rounds": rounds, **({"turns": turns} if turns else {})},
-         "flags": {"jjk5e": {"technique": item["flags"]["jjk5e"].get("technique")}}}
+         "flags": {"jjk5e": {"technique": item.setdefault("flags", {}).setdefault("jjk5e", {}).get("technique")}}}
     if special: e["flags"]["dae"] = {"specialDuration": list(special)}
     effs[:] = [x for x in effs if x["_id"] != eid] + [e]
     return eid
@@ -6440,11 +6446,359 @@ def sanitize(S):
             # damage-part scaling or @scaling in a formula only works when the usage dialog lets you scale
             blob = json.dumps({k: a.get(k) for k in ("damage", "healing", "roll")})
             scaled_parts = any((pt.get("scaling") or {}).get("number") for pt in (a.get("damage") or {}).get("parts", []) or [])
-            cons = a.setdefault("consumption", {"targets": [], "scaling": {"allowed": False}})
-            sc = cons.setdefault("scaling", {"allowed": False})
+            sc = (a.get("consumption") or {}).get("scaling") or {}
             if (scaled_parts or "@scaling" in blob) and not sc.get("allowed") and a.get("name") in COUNT_SCALED:
-                sc["allowed"], sc["max"] = True, sc.get("max") or "20"
+                cons = a.setdefault("consumption", {"targets": []})
+                cons["scaling"] = {**sc, "allowed": True, "max": sc.get("max") or "20"}
+            if a.get("type") == "attack" and not (a.get("damage") or {}).get("parts") and not (a.get("damage") or {}).get("includeBase"):
+                a.setdefault("damage", {})["includeBase"] = True
+                a["damage"].setdefault("parts", [])
+            if a.get("type") == "save" and not (a.get("damage") or {}).get("parts") and not a.get("effects"):
+                apply(a, fx(d, "fail" + a["_id"][:5], "Failed save: " + (a.get("name") or d["name"])[:60], rounds=1,
+                            desc="Failed save: apply the result described in the feature."))
         if json.dumps(d, sort_keys=True) != before: S.dirty.add(_id)
+
+
+def _f(S, _id): return S.by_id(_id)
+
+
+def _fx_on(item, aid, key, name, **kw):
+    a = item["system"]["activities"][aid]
+    apply(a, fx(item, key, name, **kw))
+    return a
+
+
+def _base(a):
+    a.setdefault("damage", {})["includeBase"] = True
+    a["damage"].setdefault("parts", [])
+
+
+def feat_fixes(S):
+    """Technique and general feats: saves without results, attacks without damage, CE costs missing (manual audit)."""
+    # --- saves that had no damage/effect ---
+    it = _f(S, "Q1qqOPPEbJEfzmXK")  # Aerokinesis
+    a = it["system"]["activities"]["LLpvCGK1cFWc0aJF"]
+    a["range"], a["target"] = _r(30), one_creature()
+    a["damage"] = {"onSave": "none", "parts": [{"number": None, "denomination": 6, "bonus": "", "types": ["necrotic"],
+                   "custom": {"enabled": True, "formula": "(@prof)d6"}, "scaling": {}}]}
+    apply(a, fx(it, "suff", "Suffocating", rounds=10, changes=[("system.attributes.movement.all", 1, "0.5"),
+                                                              ("flags.midi-qol.disadvantage.attack.all", 0, "1")],
+                desc="Ends if the caster is more than 30 ft away or loses concentration."))
+    mark(it)
+    it = _f(S, "W5duwlBV6Eo8CO4a")  # Air Bomber
+    a = it["system"]["activities"]["yEQoJcApquibG2ry"]
+    a["range"], a["target"] = RANGE_SELF, sphere(15)
+    a["damage"] = {"onSave": "half", "parts": [dice(6, 8, ["slashing"], bonus=CEMOD)]}
+    scale(it, a, [[1, "6d8"], [11, "8d8"], [18, "10d8"]])
+    mark(it)
+    it = _f(S, "fwuPOkYpGbemJ4mA")  # Black Belt
+    a = it["system"]["activities"]["vLQ6ytZvDHlnFz03"]
+    a["name"] = "Judo Throw (STR): prone; fail by 5+ stunned"
+    a["target"] = one_creature()
+    apply(a, fx(it, "prone", "Prone (Judo Throw)", statuses=["prone"]))
+    st = act(it, "stun", "utility", "Judo Throw: failed by 5+ → stunned", "special", target=one_creature())
+    apply(st, fx(it, "stun", "Stunned (Judo Throw)", statuses=["stunned"], rounds=2, special=["turnEnd"]))
+    mark(it)
+    it = _f(S, "UuX2ZFBhZvKrKfQH")  # Corona Macaron
+    a = it["system"]["activities"]["LmttiJzj4t54PglX"]
+    a["range"], a["target"] = RANGE_SELF, sphere(10)
+    apply(a, fx(it, "ring", "Pulled into the ring", rounds=10, desc="Inside the Corona Macaron; touching the ring deals your Granite Blast damage."))
+    mark(it)
+    it = _f(S, "KEROfKHaMqMxzTfu")  # Fox Fire
+    a = it["system"]["activities"]["spOEanRx5Pw4fa9a"]
+    a["name"] = "Detonate the fog (CON)"
+    a["target"] = {"affects": {"type": "creature", "choice": True}, "override": True}
+    a["damage"] = {"onSave": "half", "parts": [{"number": None, "denomination": 8, "bonus": "", "types": ["cold"],
+                   "custom": {"enabled": True, "formula": f"(2 * {CEMOD})d8"}, "scaling": {}}]}
+    mark(it)
+    it = _f(S, "pOllUPH2K4i7mWW7")  # Funny Faces
+    for aid, nm in [("PjGgfNwCDWYBRRJg", "Goofy face (2 CE): INT at disadvantage"), ("vWjJ9P5cZCofYPDv", "Change distortion (1 CE): another INT next turn")]:
+        a = it["system"]["activities"][aid]
+        a["name"], a["activation"]["type"], a["target"] = nm, "special", one_creature()
+        apply(a, fx(it, "c" + aid[:3], "Confused (distorted face)", rounds=2, special=["turnEnd"],
+                    changes=[("flags.midi-qol.disadvantage.attack.all", 0, "1")]))
+    mark(it)
+    it = _f(S, "Ph7qLr8HcwdAjrIJ")  # Imbued Weapon
+    a = it["system"]["activities"]["dPfNwfDDp5XEG2nu"]
+    a["target"] = {"template": {"type": "line", "size": "60", "width": "5", "units": "ft", "count": "1", "contiguous": False},
+                   "affects": {"type": "creature", "choice": True}, "override": True}
+    a["damage"] = {"onSave": "half", "parts": [dice(1, 12, ["lightning"], scale=1)]}
+    a["consumption"].setdefault("scaling", {})["allowed"] = True
+    a["consumption"]["scaling"]["max"] = "20"
+    note(it, "Imbued Weapon bolt: 1d12 per charge (scale = charges − 1).")
+    mark(it)
+    it = _f(S, "XkXlP9QKMkgotHci")  # Improved Bindings
+    a = it["system"]["activities"]["F77fTkM0Wg1vvKWq"]
+    a["name"] = "End of its turn: CON or stunned"
+    a["target"] = one_creature()
+    apply(a, fx(it, "stun", "Stunned (Improved Bindings)", statuses=["stunned"], special=["turnStart"]))
+    ex = act(it, "exh", "utility", "Bound: two levels of exhaustion", "special", target=one_creature())
+    apply(ex, fx(it, "exh", "Shadow bindings", rounds=None, changes=[("system.attributes.exhaustion", 2, "2")]))
+    mark(it)
+    it = _f(S, "UGacSC80MoG0deAE")  # Black Hole
+    a = it["system"]["activities"]["OXYLIUIDnZkcZyQg"]
+    a["name"] = "End of your turn: pulled 50 ft (25 on save)"
+    a["range"], a["target"] = RANGE_SELF, sphere(100)
+    apply(a, fx(it, "pull", "Pulled by the Black Hole", rounds=1, desc="Pulled 50 ft (25 ft on a success); within 5 ft: dies."))
+    me = act(it, "self", "utility", "Become a Black Hole (you die after 1 minute)", "action", range=RANGE_SELF, target=SELF)
+    apply(me, fx(it, "bh", "Black Hole", rounds=10, desc="You die when this ends."))
+    mark(it)
+    it = _f(S, "2OwxAUf9B8LHPmRf")  # Hurricane
+    a = it["system"]["activities"]["qoGbPh8r9dEtutfO"]
+    a["range"], a["target"] = RANGE_SELF, sphere(30)
+    apply(a, fx(it, "launch", "Launched 1000 ft", rounds=1, desc="Launched 1,000 ft up (falls: 20d6 bludgeoning)."))
+    fall = act(it, "fall", "damage", "Fall damage (20d6)", "special", target=one_creature(), damage={"parts": [dice(20, 6, ["bludgeoning"])]})
+    free(it, fall)
+    mark(it)
+    it = _f(S, "QMm76WsIVe8dbThb")  # World Cutting Slash
+    a = it["system"]["activities"]["Ma9Xn3ATLzZzVBv0"]
+    a["range"], a["target"] = _r(60), one_creature()
+    a["damage"] = {"onSave": "half", "parts": [{"number": None, "denomination": None, "bonus": "", "types": ["slashing"],
+                   "custom": {"enabled": True, "formula": "12 * (@prof + floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11) + floor(min(@details.level, 18) / 18))"}, "scaling": {}}]}
+    note(it, "Maximum Dismantle damage (12 per die: base dice + prof extra CE), ignoring resistances, immunities and temp HP. Limb damaging.")
+    mark(it)
+    it = _f(S, "Biapn4UQqElS0UZs")  # Nail Volley
+    a = it["system"]["activities"]["FuwD32PXDnCWS2LR"]
+    a["range"], a["target"] = RANGE_SELF, sphere(10, kind="cone")
+    a["damage"] = {"onSave": "none", "parts": [dice(1, 6, ["piercing"], scale=1)]}
+    cost(it, a, 1, 1, "24")
+    note(it, "1 CE per nail; cone = 10 ft × nails (enlarge the template).")
+    mark(it)
+    it = _f(S, "NwKIStf7NFVWznPx")  # Shield Master
+    a = it["system"]["activities"]
+    sh = a["u3lSZYWizw8CTbQB"]
+    sh["name"] = "Shield shove (contested)"
+    sh["target"] = one_creature()
+    apply(sh, fx(it, "prone", "Shoved prone", statuses=["prone"]))
+    r = a["scKwxXb1hFgBOxPf"]
+    r["name"] = "Interpose shield: no damage on a successful DEX save"
+    r["useConditionText"] = 'reaction === "isSave"'
+    r["range"], r["target"] = RANGE_SELF, SELF
+    apply(r, fx(it, "evade", "Interposed shield", rounds=1, special=["isSave"], changes=[("flags.midi-qol.superSaver.dex", 0, "1")]))
+    mark(it)
+    it = _f(S, "K3ECG09F5qxLV88I")  # Shooting Star (Star Rage)
+    a = it["system"]["activities"]["fLz0HrhMYVdW03nQ"]
+    a["name"] = "Shooting Star (3 CE): 60-ft line"
+    a["activation"]["type"] = "special"
+    a["range"] = RANGE_SELF
+    a["target"] = {"template": {"type": "line", "size": "60", "width": "5", "units": "ft", "count": "1", "contiguous": False},
+                   "affects": {"type": "creature", "choice": False}, "override": True}
+    a["damage"] = {"onSave": "none", "parts": [{"number": None, "denomination": None, "bonus": "", "types": ["bludgeoning"],
+                   "custom": {"enabled": True, "formula": "2 * (1d8 + @abilities.str.mod)"}, "scaling": {}}]}
+    note(it, "Damage = twice your unarmed strike (d8 + STR shown: use your mass-increased die). Limb damaging on a failed save.")
+    mark(it)
+    it = _f(S, "XGgh8DE8cMTgqOun")  # Surprise Present
+    a = it["system"]["activities"]["VEM2rDGIcThDiozK"]
+    a["useConditionText"] = 'reaction === "isAttacked"'
+    a["target"] = one_creature()
+    a["damage"] = {"onSave": "half", "parts": [dice(2, 10, ["bludgeoning"])]}
+    note(it, "Object damage by size (2d10 shown, Medium). Weapon instead: attack the attacker at advantage. Cost: twice the receipt's CE.")
+    mark(it)
+    it = _f(S, "uplvYFKOh990lLUt")  # Veil
+    a = it["system"]["activities"]["e5APyZK7Ri8YUITa"]
+    a["name"] = "Veil of the Faceless God (3 CE, 1 minute)"
+    a["range"], a["target"] = RANGE_SELF, sphere(60)
+    a["target"]["affects"]["type"] = "enemy"
+    apply(a, fx(it, "veil", "Veiled dread", rounds=10,
+                changes=[("flags.midi-qol.OverTime", 0, "turn=start, saveAbility=int, saveDC=JJKORIGINDC, label=Veil of the Faceless God")],
+                desc="−1 to all rolls per 10% corruption while it fails (apply by hand); auto-success if it can't see the caster."))
+    mark(it)
+    it = _f(S, "Gf0XI8lwB5ayrSQJ")  # Weapon Breaker
+    a = it["system"]["activities"]["mO03FVBZbC4mtnDz"]
+    a["useConditionText"] = 'reaction === "isAttacked"'
+    a["target"] = one_creature()
+    apply(a, fx(it, "broken", "Weapon broken", rounds=None, desc="Its weapon breaks (cursed tools: needs an equal or higher grade). The attack deals no damage."))
+    mark(it)
+    it = _f(S, "HjIZcb7XtjtE2ocF")  # Weight of Judgment
+    a = it["system"]["activities"]["9hyTC5wKxPZS7EVt"]
+    a["name"] = "Weight of Judgment (on gavel hit, 2 CE): STR or prone"
+    a["activation"]["type"] = "special"
+    a["useConditionText"] = 'reaction === "isHit"'
+    a["target"] = one_creature()
+    a["damage"] = {"onSave": "full", "parts": [dice(1, 6, ["bludgeoning"])]}
+    apply(a, fx(it, "prone", "Prone (Weight of Judgment)", statuses=["prone"]))
+    note(it, "Extra damage = one more weapon damage die (d6 shown: use your gavel's).")
+    mark(it)
+    it = _f(S, "RG4L3OJERkIdy1X6")  # Blast Away
+    a = it["system"]["activities"]["AyHTNj7qBAkMgGQz"]
+    a["name"] = "Blast Away (Energy Blast ≥ 4 CE): STR or pushed 10 ft and prone"
+    a["target"] = one_creature()
+    mark(it)
+
+    # --- attacks without damage ---
+    for _id, aid in [("9wL6klgi4eJ7iBDT", "IzT1v2jQiJcth44V"), ("WmWj1cxPRw9c9Uc9", "6myPwHvhmbp9J5bi"),
+                     ("tLxC2U4qoWIey3rA", "gD4vUQQAiYyMLXan"), ("f4PSKSys0cXpHlqq", "IFXp8uqTP12H8U9q"),
+                     ("IcwUsYlidHL5HY6a", "8xYlLAZU0ykT5Q4u"), ("1Y20N2NZKbqyPu9e", "g0crIV5HS69T5PLs")]:
+        it = _f(S, _id); a = it["system"]["activities"][aid]
+        _base(a); a["target"] = one_creature()
+        if not a.get("range", {}).get("value"): a["range"] = _r(5)
+        mark(it)
+    it = _f(S, "WmWj1cxPRw9c9Uc9")  # Opportunistic Blow
+    apply(it["system"]["activities"]["6myPwHvhmbp9J5bi"], fx(it, "adv", "Opportunistic Blow", rounds=1, special=["1Attack"],
+                                                             changes=[("flags.midi-qol.advantage.attack.all", 0, "1")]))
+    it = _f(S, "tLxC2U4qoWIey3rA")  # Charger
+    it["system"]["activities"]["gD4vUQQAiYyMLXan"]["damage"]["parts"] = [{"number": None, "denomination": None, "bonus": "",
+        "types": [], "custom": {"enabled": True, "formula": "5"}, "scaling": {}}]
+    note(it, "+5 damage only after a 10-ft straight-line move (remove the +5 otherwise).")
+    it = _f(S, "4cVW3whZxaX8drIr")  # Polearm Master
+    a = it["system"]["activities"]["137m0OJ1MTIpo7cw"]
+    a["range"], a["target"] = _r(10), one_creature()
+    a["attack"]["ability"] = ""
+    a["damage"] = {"includeBase": False, "parts": [dice(1, 4, ["bludgeoning"], bonus="@mod")]}
+    mark(it)
+    it = _f(S, "IcwUsYlidHL5HY6a")  # GWM
+    gw = act(it, "power", "utility", "Power attack: −5 to hit, +10 damage (next attack)", "special", range=RANGE_SELF, target=SELF)
+    apply(gw, fx(it, "pw", "Great Weapon Master", rounds=1, special=["1Attack"],
+                 changes=[("system.bonuses.mwak.attack", 2, "-5"), ("system.bonuses.mwak.damage", 2, "+10")]))
+    free(it, gw)
+    it = _f(S, "mmXJ2K9quT01hkQ1")  # Cadence
+    a = it["system"]["activities"]["u8QnBvsioiOIFzqU"]
+    act(it, "u8QnBvsioiOIFzqU", "utility", "Cadence (3 CE): the attack misses", "reaction", range=_r(60), target=one_creature())
+    a = it["system"]["activities"]["u8QnBvsioiOIFzqU"]
+    a["useConditionText"] = 'reaction === "isAttacked"'
+    apply(a, fx(it, "miss", "Cadence: miss", rounds=1, special=["1Attack"], changes=[("flags.midi-qol.fail.attack.all", 0, "1")]))
+    f5 = act(it, "fail", "utility", "Cadence (5 CE): a creature fails its save", "reaction", range=_r(60), target=one_creature())
+    apply(f5, fx(it, "fail", "Cadence: fail", rounds=1, special=["isSave"], changes=[("flags.midi-qol.fail.ability.save.all", 0, "1")]))
+    cost(it, f5, 5)
+    mark(it)
+    it = _f(S, "DDXBbBTdzQNCzfBp")  # Offensive Creations: Block Strike
+    a = it["system"]["activities"]["ChC5AhkO9RUqc50p"]
+    a["name"] = "Block Strike (2 CE): cube-covered unarmed strike"
+    a["range"], a["target"] = _r(5), one_creature()
+    a["attack"] = _atk("melee")
+    a["damage"] = {"includeBase": False, "parts": [dice(2, 8, ["bludgeoning"], bonus=CEMOD)]}
+    note(it, "Block Strike damage shown as 2d8 + CE mod: check the full text.")
+    mark(it)
+    it = _f(S, "1szivA3tVCPn0poY")  # Instant Spirit Body
+    a = it["system"]["activities"]
+    on = a["enNw25iDlwHChB9h"]
+    on["range"], on["target"] = RANGE_SELF, SELF
+    apply(on, fx(it, "body", "Instant Spirit Body", rounds=600,
+                 changes=[("system.attributes.ac.min", 4, "25"), ("flags.midi-qol.DR.all", 2, CEMOD)],
+                 desc="AC at least 25; damage reduction = CE mod; elbow blades."))
+    bl = a["ia8qHWFhVPuVV9YR"]
+    bl["name"] = "Elbow Blade (1 CE): advantage, 15 ft reach"
+    bl["range"], bl["target"] = _r(15), one_creature()
+    bl["attack"] = _atk("melee")
+    bl["attack"]["flat"] = False
+    bl["damage"] = {"includeBase": False, "parts": [dice(1, 12, ["piercing"], bonus=CEMOD)]}
+    apply(bl, fx(it, "adv", "Elbow Blade (advantage)", rounds=1, special=["1Attack"], changes=[("flags.midi-qol.advantage.attack.all", 0, "1")]))
+    mark(it)
+    it = _f(S, "E1x5rroCXkdnRV2p")  # Minimum: Uzumaki
+    a = it["system"]["activities"]["bjQNjov0ucG06ILz"]
+    a["range"], a["target"] = _r(30), one_creature()
+    a["attack"] = _atk()
+    a["damage"] = {"includeBase": False, "parts": [dice(2, 12, ["necrotic"], scale=1)]}
+    a["consumption"].setdefault("scaling", {})
+    a["consumption"]["scaling"].update({"allowed": True, "max": "40"})
+    a["name"] = "Minimum: Uzumaki (5 CE): Xd12 (X = combined CR)"
+    it["flags"]["jjk5e"].setdefault("ceSteps", {}).pop("bjQNjov0ucG06ILz", None)
+    note(it, "Scale = combined CR − 2 (no CE). Ignores resistance like Maximum: Uzumaki.")
+    mark(it)
+    it = _f(S, "kP7O0eTDhfNUku5J")  # Sword of Michael
+    a = it["system"]["activities"]["teDztV4apu9WTrK7"]
+    a["range"], a["target"] = _r(5), one_creature()
+    a["attack"] = _atk("melee")
+    a["damage"] = {"includeBase": False, "parts": [dice(10, 12, ["radiant"])]}
+    apply(a, fx(it, "null", "Extinguished (Sword of Michael)", rounds=20,
+                changes=[("flags.midi-qol.OverTime", 0, "turn=start, saveAbility=cha, saveDC=JJKORIGINDC, label=Extinguishment")]))
+    mark(it)
+    it = _f(S, "1Y20N2NZKbqyPu9e")  # Spatial Shatter
+    a = it["system"]["activities"]["g0crIV5HS69T5PLs"]
+    a["attack"] = _atk("melee")
+    extra = act(it, "ice", "save", "Spatial Shatter: Thin Ice Breaker on the target", "special", save=_sv("dex"),
+                damage={"onSave": "half", "parts": [{"number": None, "denomination": 10, "bonus": "", "types": ["force"],
+                        "custom": {"enabled": True, "formula": f"(2 * {CEMOD})d10"}, "scaling": {}}]}, target=one_creature())
+    apply(extra, fx(it, "prone", "Prone (Spatial Shatter)", statuses=["prone"]))
+    free(it, extra)
+    trigger(a, extra, "hitTargets")
+    mark(it)
+
+    # --- CE costs stated in the manual but missing ---
+    it = _f(S, "SB9abj3aHRhwq4hL")  # Flowing Red Scale: Stack
+    for e in it["effects"]:
+        if e["_id"] == "tsOdgWTg8DKf5RTx": e["transfer"] = False
+    stack = fx(it, "stack", "Flowing Red Scale: Stack", rounds=10,
+               changes=[("system.attributes.ac.bonus", 2, "+4"), ("system.attributes.movement.all", 1, "3"),
+                        ("flags.midi-qol.advantage.ability.save.dex", 0, "1"), ("flags.midi-qol.advantage.ability.save.str", 0, "1"),
+                        ("flags.midi-qol.advantage.ability.check.str", 0, "1")],
+               desc="Speed ×3, +4 AC, advantage on DEX/STR saves and STR checks, one reroll per round, +1 action and reaction.")
+    it["effects"] = [e for e in it["effects"] if e["_id"] != "tsOdgWTg8DKf5RTx"]
+    a = it["system"]["activities"]["t5X8c1RKR66NtqAe"]
+    a["range"], a["target"] = RANGE_SELF, SELF
+    a["effects"] = [{"_id": stack, "onSave": False}]
+    b = act(it, "active", "utility", "Stack while Flowing Red Scale is active (3 CE)", "bonus", range=RANGE_SELF, target=SELF)
+    apply(b, stack)
+    cost(it, b, 3)
+    mark(it)
+    it = _f(S, "HpNz9JDqjejv7kjA")  # Crippling Neurotoxin
+    a = it["system"]["activities"]["3cba2pcNizaydYT7"]
+    a["name"] = "Enhance Poisonous Cursed Energy (+8 CE)"
+    a["target"] = one_creature()
+    cost(it, a, 8)
+    mark(it)
+    it = _f(S, "wueBNQftiq2TNnEp")  # Immobilized Limbs
+    a = it["system"]["activities"]["0OG7tDUCtVYkIgzB"]
+    a["name"] = "Legs: moving past speed → DEX or prone"
+    a["target"] = one_creature()
+    free(it, a)
+    for key, nm, ch in [("legs", "Immobilized: legs", [("system.attributes.movement.all", 1, "0.5")]),
+                        ("arms", "Immobilized: arms", [("system.bonuses.mwak.attack", 2, "-3"), ("system.bonuses.rwak.attack", 2, "-3"),
+                                                      ("system.bonuses.msak.attack", 2, "-3"), ("system.bonuses.rsak.attack", 2, "-3")]),
+                        ("torso", "Immobilized: torso", [("system.attributes.ac.bonus", 2, "-3")])]:
+        x = act(it, key, "utility", f"Focus on {key} (+1 CE)", "special", target=one_creature())
+        apply(x, fx(it, key, nm, rounds=None, changes=ch, desc="While you maintain Immobilizing Eyes."))
+        cost(it, x, 1)
+    mark(it)
+    it = _f(S, "JTgtkz5kerB8bPLi")  # Tyrant Shikigami
+    it["system"].setdefault("activities", {})
+    for key, nm, ce in [("large", "Large (+1 CE)", 1), ("huge", "Huge (+2 CE, 11th)", 2), ("garg", "Gargantuan (+4 CE, 18th)", 4)]:
+        x = act(it, key, "utility", f"Tyrant Shikigami: {nm}", "special", range=RANGE_SELF, target=SELF)
+        cost(it, x, ce)
+    note(it, "Per size step above Medium: +4 STR, +1d8 bite, +30 HP (edit the Major Star actor).")
+    mark(it)
+    it = _f(S, "QfLOEctmQ31XUVzQ")  # Crippling Strikes
+    it["system"].setdefault("activities", {})
+    x = act(it, "imm", "utility", "Immunity → resistance on this hit (+1 CE)", "special", target=one_creature())
+    cost(it, x, 1)
+    mark(it)
+    it = _f(S, "dVbv4HFQOj5IzHa2")  # Blessing of Fortune
+    a = it["system"]["activities"]["dDn14mENHutzpIc0"]
+    a["name"] = "Turn a failed death save into a natural 20 (1 Miracle + 1 CE)"
+    a["target"] = one_creature()
+    cost(it, a, 1)
+    mark(it)
+    it = _f(S, "IceBoustbhnfJLd1")  # Maculation
+    a = it["system"]["activities"]["M7SThcbJ6cXlHZdy"]
+    a["name"] = "Maculation (1 CE per 5-ft Simple Domain, up to 6)"
+    a["range"] = _r(30)
+    cost(it, a, 1, 1, "6")
+    g = act(it, "guard", "utility", "Maculation guard (reaction): +3 AC", "reaction", range=RANGE_SELF, target=SELF)
+    g["useConditionText"] = 'reaction === "isAttacked"'
+    apply(g, fx(it, "ac", "Maculation guard", special=["turnStartSource"], changes=[("system.attributes.ac.bonus", 2, "+3")]))
+    free(it, g)
+    mark(it)
+    it = _f(S, "PHwPWELj9jl92FHN")  # Typhoon
+    a = it["system"]["activities"]["pLtu13s5ZPKDJYTu"]
+    a["range"], a["target"] = _r(60), one_creature()
+    a["attack"] = _atk()
+    free(it, a)
+    sph = act(it, "storm", "save", "Typhoon sphere (+2 CE): STR or 2d6", "special", save=_sv("str"),
+              damage={"onSave": "none", "parts": [dice(2, 6, ["bludgeoning"])]}, range=RANGE_SELF, target=sphere(20))
+    cost(it, sph, 2)
+    mark(it)
+    it = _f(S, "Me90W7kGtBmtDa4X")  # Perfected Teleport
+    note(it, "Teleport costs 1 CE; casting Teleport costs 8 − CE mod (adjust when using).")
+    mark(it)
+    it = _f(S, "Ag3jW3dNyAYU4Xjl")
+    note(it, "Split the Dismantle dice into several attack rolls (roll Dismantle once per slash with fewer dice).")
+    mark(it)
+    it = _f(S, "yo0JVtjDuc8iwO5r")
+    note(it, "Regression: no OAs; up to prof CE, +1 DC/check per extra CE.")
+    mark(it)
+    it = _f(S, "NqRyYQMgFucx13fq")
+    note(it, "Pachinko attacks outside the domain: 30 ft, +CE mod damage, −1 CE (Green Balls free). No Expectation.")
+    mark(it)
 
 
 TECHNIQUES = {"Antigravity System": antigravity_system,
@@ -6529,7 +6883,8 @@ TECHNIQUES = {"Antigravity System": antigravity_system,
               "Voracity": voracity,
               "████ and Light": light,
               "_leftovers": leftovers,
-              "_sanitize": sanitize}
+              "_sanitize": sanitize,
+              "_feats": feat_fixes}
 
 if __name__ == "__main__":
     args = sys.argv[1:]

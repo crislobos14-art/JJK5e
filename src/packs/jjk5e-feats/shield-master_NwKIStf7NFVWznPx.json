@@ -24,7 +24,7 @@
    "u3lSZYWizw8CTbQB": {
     "_id": "u3lSZYWizw8CTbQB",
     "type": "save",
-    "name": "Bonus Action",
+    "name": "Shield shove (contested)",
     "sort": 0,
     "activation": {
      "type": "bonus",
@@ -44,8 +44,10 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
-     }
+      "count": "1",
+      "choice": true
+     },
+     "override": true
     },
     "duration": {
      "units": "inst"
@@ -62,12 +64,18 @@
     "damage": {
      "onSave": "none",
      "parts": []
-    }
+    },
+    "effects": [
+     {
+      "_id": "7wvx9rt8Kf6cIpGb",
+      "onSave": false
+     }
+    ]
    },
    "scKwxXb1hFgBOxPf": {
     "_id": "scKwxXb1hFgBOxPf",
     "type": "save",
-    "name": "Reaction",
+    "name": "Interpose shield: no damage on a successful DEX save",
     "sort": 100000,
     "activation": {
      "type": "reaction",
@@ -81,11 +89,15 @@
      }
     },
     "range": {
-     "value": "5",
-     "units": "ft",
+     "units": "self",
      "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
     },
@@ -102,7 +114,13 @@
      "onSave": "half",
      "parts": []
     },
-    "useConditionText": "false"
+    "useConditionText": "reaction === \"isSave\"",
+    "effects": [
+     {
+      "_id": "PM1dvCu4oU2Ffx5U",
+      "onSave": false
+     }
+    ]
    }
   },
   "prerequisites": {
@@ -111,9 +129,67 @@
   }
  },
  "flags": {
-  "jjk5e": {}
+  "jjk5e": {
+   "automation": "automated"
+  }
  },
  "folder": "cxPIGjcxqJdZTMQ5",
  "sort": 2000,
- "_key": "!items!NwKIStf7NFVWznPx"
+ "_key": "!items!NwKIStf7NFVWznPx",
+ "effects": [
+  {
+   "_id": "7wvx9rt8Kf6cIpGb",
+   "name": "Shoved prone",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [
+    "prone"
+   ],
+   "description": "",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!NwKIStf7NFVWznPx.7wvx9rt8Kf6cIpGb"
+  },
+  {
+   "_id": "PM1dvCu4oU2Ffx5U",
+   "name": "Interposed shield",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.superSaver.dex",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    },
+    "dae": {
+     "specialDuration": [
+      "isSave"
+     ]
+    }
+   },
+   "_key": "!items.effects!NwKIStf7NFVWznPx.PM1dvCu4oU2Ffx5U"
+  }
+ ]
 }

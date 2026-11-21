@@ -38,7 +38,8 @@
      }
     },
     "range": {
-     "units": "self"
+     "units": "self",
+     "override": true
     },
     "target": {
      "template": {
@@ -51,7 +52,8 @@
      "affects": {
       "type": "creature",
       "choice": false
-     }
+     },
+     "override": true
     },
     "duration": {
      "units": "inst"
@@ -68,6 +70,67 @@
     "damage": {
      "onSave": "none",
      "parts": []
+    },
+    "effects": [
+     {
+      "_id": "YaGzbYjAskyGCsLo",
+      "onSave": false
+     }
+    ]
+   },
+   "h91WxpwUKOvpULuy": {
+    "_id": "h91WxpwUKOvpULuy",
+    "type": "damage",
+    "name": "Fall damage (20d6)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "damage": {
+     "parts": [
+      {
+       "number": 20,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
     }
    }
   },
@@ -90,10 +153,33 @@
    },
    "forTechniques": [
     "Sky Manipulation"
-   ]
+   ],
+   "automation": "automated"
   }
  },
  "folder": "CIlfZOL4m5ZkufHa",
  "sort": 300,
- "_key": "!items!2OwxAUf9B8LHPmRf"
+ "_key": "!items!2OwxAUf9B8LHPmRf",
+ "effects": [
+  {
+   "_id": "YaGzbYjAskyGCsLo",
+   "name": "Launched 1000 ft",
+   "img": "modules/jjk5e/icons/techniques/sky-manipulation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Launched 1,000 ft up (falls: 20d6 bludgeoning).</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!2OwxAUf9B8LHPmRf.YaGzbYjAskyGCsLo"
+  }
+ ]
 }

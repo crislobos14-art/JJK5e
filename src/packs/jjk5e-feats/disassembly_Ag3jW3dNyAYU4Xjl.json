@@ -36,7 +36,9 @@
    },
    "forTechniques": [
     "Shrine"
-   ]
+   ],
+   "automationNotes": "Split the Dismantle dice into several attack rolls (roll Dismantle once per slash with fewer dice).",
+   "automation": "automated"
   }
  },
  "folder": "2XiAKaCJUnpH62hA",

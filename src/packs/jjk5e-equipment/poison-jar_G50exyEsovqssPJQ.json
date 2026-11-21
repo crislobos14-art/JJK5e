@@ -64,7 +64,13 @@
     "damage": {
      "onSave": "none",
      "parts": []
-    }
+    },
+    "effects": [
+     {
+      "_id": "8aK5g96QelvFqmab",
+      "onSave": false
+     }
+    ]
    }
   }
  },
@@ -73,5 +79,27 @@
    "grade": "2nd Grade"
   }
  },
- "_key": "!items!G50exyEsovqssPJQ"
+ "_key": "!items!G50exyEsovqssPJQ",
+ "effects": [
+  {
+   "_id": "8aK5g96QelvFqmab",
+   "name": "Failed save: Action",
+   "img": "icons/svg/explosion.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Failed save: apply the result described in the feature.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!G50exyEsovqssPJQ.8aK5g96QelvFqmab"
+  }
+ ]
 }

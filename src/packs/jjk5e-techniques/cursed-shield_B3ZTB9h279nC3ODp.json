@@ -63,7 +63,13 @@
      "onSave": "none",
      "parts": []
     },
-    "useConditionText": "reaction === \"isAttacked\" || reaction === \"isSave\""
+    "useConditionText": "reaction === \"isAttacked\" || reaction === \"isSave\"",
+    "effects": [
+     {
+      "_id": "yyYP94MET4dOBA8e",
+      "onSave": false
+     }
+    ]
    }
   }
  },
@@ -90,5 +96,27 @@
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!B3ZTB9h279nC3ODp"
+ "_key": "!items!B3ZTB9h279nC3ODp",
+ "effects": [
+  {
+   "_id": "yyYP94MET4dOBA8e",
+   "name": "Failed save: Reaction",
+   "img": "modules/jjk5e/icons/techniques/cursed-cannon.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Failed save: apply the result described in the feature.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Cursed Cannon"
+    }
+   },
+   "_key": "!items.effects!B3ZTB9h279nC3ODp.yyYP94MET4dOBA8e"
+  }
+ ]
 }

@@ -38,14 +38,67 @@
      }
     },
     "range": {
-     "units": "self"
+     "units": "self",
+     "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
     "duration": {
      "value": "1",
      "units": "minute",
      "concentration": false
-    }
+    },
+    "effects": [
+     {
+      "_id": "JglgyF24j14Mh5Gn",
+      "onSave": false
+     }
+    ]
+   },
+   "EzimfBbWqFG6xOUB": {
+    "_id": "EzimfBbWqFG6xOUB",
+    "type": "utility",
+    "name": "Stack while Flowing Red Scale is active (3 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "JglgyF24j14Mh5Gn",
+      "onSave": false
+     }
+    ]
    }
   },
   "prerequisites": {
@@ -56,7 +109,8 @@
  "flags": {
   "jjk5e": {
    "ceCosts": {
-    "t5X8c1RKR66NtqAe": 6
+    "t5X8c1RKR66NtqAe": 6,
+    "EzimfBbWqFG6xOUB": 3
    },
    "prereq": {
     "features": [
@@ -67,32 +121,61 @@
    },
    "forTechniques": [
     "Blood Manipulation"
-   ]
+   ],
+   "automation": "automated"
   }
  },
  "effects": [
   {
-   "_id": "tsOdgWTg8DKf5RTx",
-   "name": "Flowing Red Scale: Stack (toggle)",
+   "_id": "JglgyF24j14Mh5Gn",
+   "name": "Flowing Red Scale: Stack",
    "img": "modules/jjk5e/icons/techniques/blood-manipulation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Speed ×3, +4 AC, advantage on DEX/STR saves and STR checks, one reroll per round, +1 action and reaction.</p>",
    "changes": [
     {
      "key": "system.attributes.ac.bonus",
      "mode": 2,
      "value": "+4",
-     "priority": null
+     "priority": 20
+    },
+    {
+     "key": "system.attributes.movement.all",
+     "mode": 1,
+     "value": "3",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.advantage.ability.save.dex",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.advantage.ability.save.str",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.advantage.ability.check.str",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
     }
    ],
-   "transfer": true,
-   "disabled": true,
-   "duration": {},
-   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "duration": {
+    "rounds": 10
+   },
    "flags": {
     "jjk5e": {
-     "auto": "toggle"
+     "technique": null
     }
    },
-   "_key": "!items.effects!SB9abj3aHRhwq4hL.tsOdgWTg8DKf5RTx"
+   "_key": "!items.effects!SB9abj3aHRhwq4hL.JglgyF24j14Mh5Gn"
   }
  ],
  "folder": "nBcvifZT3OePW2PN",

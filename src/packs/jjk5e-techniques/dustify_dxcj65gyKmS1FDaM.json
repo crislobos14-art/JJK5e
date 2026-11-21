@@ -65,7 +65,13 @@
     "damage": {
      "onSave": "none",
      "parts": []
-    }
+    },
+    "effects": [
+     {
+      "_id": "fDOloEkmCS7UrFMF",
+      "onSave": false
+     }
+    ]
    },
    "Jkp96IkWbBmwVRmQ": {
     "_id": "Jkp96IkWbBmwVRmQ",
@@ -188,5 +194,27 @@
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 20,
- "_key": "!items!dxcj65gyKmS1FDaM"
+ "_key": "!items!dxcj65gyKmS1FDaM",
+ "effects": [
+  {
+   "_id": "fDOloEkmCS7UrFMF",
+   "name": "Failed save: Dustify small object (1 CE, holder DEX)",
+   "img": "modules/jjk5e/icons/techniques/earth-manipulation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Failed save: apply the result described in the feature.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Earth Manipulation"
+    }
+   },
+   "_key": "!items.effects!dxcj65gyKmS1FDaM.fDOloEkmCS7UrFMF"
+  }
+ ]
 }

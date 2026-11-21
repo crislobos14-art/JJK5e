@@ -89,7 +89,13 @@
      "onSave": "none",
      "parts": []
     },
-    "useConditionText": "false"
+    "useConditionText": "false",
+    "effects": [
+     {
+      "_id": "8wRqIdEs8X8L2wfD",
+      "onSave": false
+     }
+    ]
    }
   }
  },
@@ -102,5 +108,27 @@
    }
   }
  },
- "_key": "!items!ux1SOShTMwAQLKH3"
+ "_key": "!items!ux1SOShTMwAQLKH3",
+ "effects": [
+  {
+   "_id": "8wRqIdEs8X8L2wfD",
+   "name": "Failed save: Reaction (1 CE)",
+   "img": "icons/svg/explosion.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Failed save: apply the result described in the feature.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!ux1SOShTMwAQLKH3.8wRqIdEs8X8L2wfD"
+  }
+ ]
 }

@@ -24,7 +24,7 @@
    "0OG7tDUCtVYkIgzB": {
     "_id": "0OG7tDUCtVYkIgzB",
     "type": "save",
-    "name": "Special",
+    "name": "Legs: moving past speed → DEX or prone",
     "sort": 0,
     "activation": {
      "type": "special",
@@ -41,7 +41,14 @@
      "units": "spec",
      "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
     },
@@ -64,6 +71,135 @@
       "onSave": false
      }
     ]
+   },
+   "w4dd54izGn6STnQe": {
+    "_id": "w4dd54izGn6STnQe",
+    "type": "utility",
+    "name": "Focus on legs (+1 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "AaQlJrcmX7okUUIu",
+      "onSave": false
+     }
+    ]
+   },
+   "MhnQh4WtdZyytv5p": {
+    "_id": "MhnQh4WtdZyytv5p",
+    "type": "utility",
+    "name": "Focus on arms (+1 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "mxGk8Vm13UtELg3j",
+      "onSave": false
+     }
+    ]
+   },
+   "jGShFoKk4kQtW0Ca": {
+    "_id": "jGShFoKk4kQtW0Ca",
+    "type": "utility",
+    "name": "Focus on torso (+1 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "hKU0bTvYIk5NMCIb",
+      "onSave": false
+     }
+    ]
    }
   },
   "prerequisites": {
@@ -82,7 +218,13 @@
    },
    "forTechniques": [
     "Paralyzing Gaze"
-   ]
+   ],
+   "ceCosts": {
+    "w4dd54izGn6STnQe": 1,
+    "MhnQh4WtdZyytv5p": 1,
+    "jGShFoKk4kQtW0Ca": 1
+   },
+   "automation": "automated"
   }
  },
  "effects": [
@@ -104,6 +246,105 @@
     }
    },
    "_key": "!items.effects!wueBNQftiq2TNnEp.0Cjn1hfe8F75WmRP"
+  },
+  {
+   "_id": "AaQlJrcmX7okUUIu",
+   "name": "Immobilized: legs",
+   "img": "modules/jjk5e/icons/techniques/paralyzing-gaze.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>While you maintain Immobilizing Eyes.</p>",
+   "changes": [
+    {
+     "key": "system.attributes.movement.all",
+     "mode": 1,
+     "value": "0.5",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!wueBNQftiq2TNnEp.AaQlJrcmX7okUUIu"
+  },
+  {
+   "_id": "mxGk8Vm13UtELg3j",
+   "name": "Immobilized: arms",
+   "img": "modules/jjk5e/icons/techniques/paralyzing-gaze.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>While you maintain Immobilizing Eyes.</p>",
+   "changes": [
+    {
+     "key": "system.bonuses.mwak.attack",
+     "mode": 2,
+     "value": "-3",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.rwak.attack",
+     "mode": 2,
+     "value": "-3",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.msak.attack",
+     "mode": 2,
+     "value": "-3",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.rsak.attack",
+     "mode": 2,
+     "value": "-3",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!wueBNQftiq2TNnEp.mxGk8Vm13UtELg3j"
+  },
+  {
+   "_id": "hKU0bTvYIk5NMCIb",
+   "name": "Immobilized: torso",
+   "img": "modules/jjk5e/icons/techniques/paralyzing-gaze.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>While you maintain Immobilizing Eyes.</p>",
+   "changes": [
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "-3",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!wueBNQftiq2TNnEp.hKU0bTvYIk5NMCIb"
   }
  ],
  "folder": "4cwsl1cPyRP6EWgd",

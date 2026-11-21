@@ -24,7 +24,7 @@
    "OXYLIUIDnZkcZyQg": {
     "_id": "OXYLIUIDnZkcZyQg",
     "type": "save",
-    "name": "Action",
+    "name": "End of your turn: pulled 50 ft (25 on save)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -38,7 +38,8 @@
      }
     },
     "range": {
-     "units": "self"
+     "units": "self",
+     "override": true
     },
     "target": {
      "template": {
@@ -51,7 +52,8 @@
      "affects": {
       "type": "creature",
       "choice": false
-     }
+     },
+     "override": true
     },
     "duration": {
      "value": "1",
@@ -70,7 +72,54 @@
     "damage": {
      "onSave": "none",
      "parts": []
-    }
+    },
+    "effects": [
+     {
+      "_id": "2tqtZuPWS91DhrLN",
+      "onSave": false
+     }
+    ]
+   },
+   "cIWuh93uW9OYwG9L": {
+    "_id": "cIWuh93uW9OYwG9L",
+    "type": "utility",
+    "name": "Become a Black Hole (you die after 1 minute)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "9r0tc6cUJJBbZNCB",
+      "onSave": false
+     }
+    ]
    }
   },
   "prerequisites": {
@@ -89,10 +138,53 @@
    },
    "forTechniques": [
     "Star Rage"
-   ]
+   ],
+   "automation": "automated"
   }
  },
  "folder": "8WZAgQOeGTbPipxv",
  "sort": 300,
- "_key": "!items!UGacSC80MoG0deAE"
+ "_key": "!items!UGacSC80MoG0deAE",
+ "effects": [
+  {
+   "_id": "2tqtZuPWS91DhrLN",
+   "name": "Pulled by the Black Hole",
+   "img": "modules/jjk5e/icons/techniques/star-rage.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Pulled 50 ft (25 ft on a success); within 5 ft: dies.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!UGacSC80MoG0deAE.2tqtZuPWS91DhrLN"
+  },
+  {
+   "_id": "9r0tc6cUJJBbZNCB",
+   "name": "Black Hole",
+   "img": "modules/jjk5e/icons/techniques/star-rage.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>You die when this ends.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!UGacSC80MoG0deAE.9r0tc6cUJJBbZNCB"
+  }
+ ]
 }

@@ -379,7 +379,9 @@ function circuitCost(activity, base) {
   }
   if (!reduce) return base;
   let cost = Math.max(1, base - reduce);
-  if (actor.items?.some((i) => baseName(i) === "Pure Energy Efficiency")) cost -= Math.floor(cost / 5);
+  const pee = actor.items?.some((i) => baseName(i) === "Pure Energy Efficiency")
+    || (actor.effects ?? []).some((e) => !e.disabled && e.flags?.jjk5e?.circuitPEE);
+  if (pee) cost -= Math.floor(cost / 5);
   return Math.max(1, cost);
 }
 
@@ -4504,6 +4506,11 @@ const ORIGIN_TOKENS = /JJKORIGINDC|JJKORIGINCEMOD|JJKORIGINLEVEL|JJKSCALING|JJKC
 function resolveOverTimeDC(effect, data) {
   // Only effects landing on an actor: an item's own effect templates must keep their placeholders.
   if (effect?.parent?.documentName !== "Actor") return;
+  // Pure Energy Efficiency belongs to the Circuit's caster: carry it on Circuits placed on other creatures.
+  if (effect.flags?.jjk5e?.circuit && !effect.flags.jjk5e.circuitPEE
+      && originItem(effect)?.actor?.items?.some((i) => baseName(i) === "Pure Energy Efficiency")) {
+    effect.updateSource({ "flags.jjk5e.circuitPEE": true });
+  }
   const sub = (v) => v.replaceAll("JJKORIGINDC", String(originSaveDC(effect)))
     .replaceAll("JJKORIGINCEMOD", String(originCEMod(effect)))
     .replaceAll("JJKORIGINLEVEL", String(originLevel(effect)))

@@ -24,10 +24,10 @@
    "fLz0HrhMYVdW03nQ": {
     "_id": "fLz0HrhMYVdW03nQ",
     "type": "save",
-    "name": "Action (3 CE)",
+    "name": "Shooting Star (3 CE): 60-ft line",
     "sort": 0,
     "activation": {
-     "type": "action",
+     "type": "special",
      "value": 1,
      "condition": ""
     },
@@ -38,10 +38,24 @@
      }
     },
     "range": {
-     "units": "spec",
+     "units": "self",
      "override": true
     },
-    "target": {},
+    "target": {
+     "template": {
+      "type": "line",
+      "size": "60",
+      "width": "5",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
     },
@@ -56,7 +70,21 @@
     },
     "damage": {
      "onSave": "none",
-     "parts": []
+     "parts": [
+      {
+       "number": null,
+       "denomination": null,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "2 * (1d8 + @abilities.str.mod)"
+       },
+       "scaling": {}
+      }
+     ]
     }
    }
   },
@@ -79,7 +107,9 @@
    },
    "forTechniques": [
     "Star Rage"
-   ]
+   ],
+   "automationNotes": "Damage = twice your unarmed strike (d8 + STR shown: use your mass-increased die). Limb damaging on a failed save.",
+   "automation": "automated"
   }
  },
  "folder": "8WZAgQOeGTbPipxv",

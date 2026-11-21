@@ -38,10 +38,18 @@
      }
     },
     "range": {
-     "units": "spec",
+     "value": "5",
+     "units": "ft",
      "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
     },
@@ -55,10 +63,16 @@
      }
     },
     "damage": {
-     "includeBase": false,
+     "includeBase": true,
      "parts": []
     },
-    "useConditionText": "false"
+    "useConditionText": "false",
+    "effects": [
+     {
+      "_id": "RFOIzWJxc2y9UP28",
+      "onSave": false
+     }
+    ]
    }
   },
   "prerequisites": {
@@ -77,10 +91,45 @@
    },
    "forTechniques": [
     "Divergent Fist"
-   ]
+   ],
+   "automation": "automated"
   }
  },
  "folder": "wZIFQphpPzNuXv3W",
  "sort": 200,
- "_key": "!items!WmWj1cxPRw9c9Uc9"
+ "_key": "!items!WmWj1cxPRw9c9Uc9",
+ "effects": [
+  {
+   "_id": "RFOIzWJxc2y9UP28",
+   "name": "Opportunistic Blow",
+   "img": "modules/jjk5e/icons/techniques/divergent-fist.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.advantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    },
+    "dae": {
+     "specialDuration": [
+      "1Attack"
+     ]
+    }
+   },
+   "_key": "!items.effects!WmWj1cxPRw9c9Uc9.RFOIzWJxc2y9UP28"
+  }
+ ]
 }

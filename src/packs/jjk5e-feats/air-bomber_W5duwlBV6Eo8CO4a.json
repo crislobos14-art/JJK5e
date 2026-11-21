@@ -38,14 +38,22 @@
      }
     },
     "range": {
-     "value": "15",
-     "units": "ft"
+     "units": "self",
+     "override": true
     },
     "target": {
+     "template": {
+      "type": "radius",
+      "size": "15",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
      "affects": {
       "type": "creature",
-      "count": "1"
-     }
+      "choice": false
+     },
+     "override": true
     },
     "duration": {
      "units": "inst"
@@ -61,7 +69,21 @@
     },
     "damage": {
      "onSave": "half",
-     "parts": []
+     "parts": [
+      {
+       "number": 6,
+       "denomination": 8,
+       "bonus": "max(@abilities.wis.mod, @abilities.cha.mod)",
+       "types": [
+        "slashing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
     }
    }
   },
@@ -84,7 +106,24 @@
    },
    "forTechniques": [
     "Hair Manipulation"
-   ]
+   ],
+   "dmgScale": {
+    "yEQoJcApquibG2ry": [
+     [
+      1,
+      "6d8"
+     ],
+     [
+      11,
+      "8d8"
+     ],
+     [
+      18,
+      "10d8"
+     ]
+    ]
+   },
+   "automation": "automated"
   }
  },
  "folder": "vK6vTr2zkjipQvME",

@@ -38,10 +38,18 @@
      }
     },
     "range": {
-     "units": "spec",
+     "value": "5",
+     "units": "ft",
      "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
     },
@@ -55,7 +63,7 @@
      }
     },
     "damage": {
-     "includeBase": false,
+     "includeBase": true,
      "parts": []
     }
    }
@@ -76,7 +84,8 @@
    },
    "forTechniques": [
     "New Shadow Style"
-   ]
+   ],
+   "automation": "automated"
   }
  },
  "folder": "gFod6wGzEy6UctqC",

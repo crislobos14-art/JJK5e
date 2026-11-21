@@ -24,10 +24,10 @@
    "9hyTC5wKxPZS7EVt": {
     "_id": "9hyTC5wKxPZS7EVt",
     "type": "save",
-    "name": "Action (2 CE)",
+    "name": "Weight of Judgment (on gavel hit, 2 CE): STR or prone",
     "sort": 0,
     "activation": {
-     "type": "action",
+     "type": "special",
      "value": 1,
      "condition": ""
     },
@@ -41,7 +41,14 @@
      "units": "spec",
      "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
     },
@@ -55,9 +62,30 @@
      }
     },
     "damage": {
-     "onSave": "none",
-     "parts": []
-    }
+     "onSave": "full",
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    },
+    "useConditionText": "reaction === \"isHit\"",
+    "effects": [
+     {
+      "_id": "Kef3IwLMYK0kCfEi",
+      "onSave": false
+     }
+    ]
    }
   },
   "prerequisites": {
@@ -79,10 +107,36 @@
    },
    "forTechniques": [
     "Deadly Sentencing"
-   ]
+   ],
+   "automationNotes": "Extra damage = one more weapon damage die (d6 shown: use your gavel's).",
+   "automation": "automated"
   }
  },
  "folder": "cq0B0G5hxGuaBi5H",
  "sort": 200,
- "_key": "!items!HjIZcb7XtjtE2ocF"
+ "_key": "!items!HjIZcb7XtjtE2ocF",
+ "effects": [
+  {
+   "_id": "Kef3IwLMYK0kCfEi",
+   "name": "Prone (Weight of Judgment)",
+   "img": "modules/jjk5e/icons/techniques/deadly-sentencing.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [
+    "prone"
+   ],
+   "description": "",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!HjIZcb7XtjtE2ocF.Kef3IwLMYK0kCfEi"
+  }
+ ]
 }

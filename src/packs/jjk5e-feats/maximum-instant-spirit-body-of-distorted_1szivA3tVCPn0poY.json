@@ -38,19 +38,31 @@
      }
     },
     "range": {
-     "units": "self"
+     "units": "self",
+     "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
     "duration": {
      "value": "1",
      "units": "hour",
      "concentration": false
-    }
+    },
+    "effects": [
+     {
+      "_id": "gcFDNG55VVpM2q6U",
+      "onSave": false
+     }
+    ]
    },
    "ia8qHWFhVPuVV9YR": {
     "_id": "ia8qHWFhVPuVV9YR",
     "type": "attack",
-    "name": "Action (1 CE)",
+    "name": "Elbow Blade (1 CE): advantage, 15 ft reach",
     "sort": 100000,
     "activation": {
      "type": "action",
@@ -64,26 +76,57 @@
      }
     },
     "range": {
-     "units": "spec",
+     "value": "15",
+     "units": "ft",
      "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
     },
     "attack": {
      "ability": "spellcasting",
      "bonus": "",
+     "critical": {
+      "threshold": null
+     },
      "flat": false,
      "type": {
-      "value": "ranged",
+      "value": "melee",
       "classification": "spell"
      }
     },
     "damage": {
      "includeBase": false,
-     "parts": []
-    }
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 12,
+       "bonus": "max(@abilities.wis.mod, @abilities.cha.mod)",
+       "types": [
+        "piercing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "YbdFbPaUc0uWRxED",
+      "onSave": false
+     }
+    ]
    }
   },
   "prerequisites": {
@@ -106,10 +149,78 @@
    },
    "forTechniques": [
     "Idle Transfiguration"
-   ]
+   ],
+   "automation": "automated"
   }
  },
  "folder": "AzMxVgHP2Otjp6Ju",
  "sort": 400,
- "_key": "!items!1szivA3tVCPn0poY"
+ "_key": "!items!1szivA3tVCPn0poY",
+ "effects": [
+  {
+   "_id": "gcFDNG55VVpM2q6U",
+   "name": "Instant Spirit Body",
+   "img": "modules/jjk5e/icons/techniques/idle-transfiguration.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>AC at least 25; damage reduction = CE mod; elbow blades.</p>",
+   "changes": [
+    {
+     "key": "system.attributes.ac.min",
+     "mode": 4,
+     "value": "25",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.DR.all",
+     "mode": 2,
+     "value": "max(@abilities.wis.mod, @abilities.cha.mod)",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 600
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!1szivA3tVCPn0poY.gcFDNG55VVpM2q6U"
+  },
+  {
+   "_id": "YbdFbPaUc0uWRxED",
+   "name": "Elbow Blade (advantage)",
+   "img": "modules/jjk5e/icons/techniques/idle-transfiguration.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.advantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    },
+    "dae": {
+     "specialDuration": [
+      "1Attack"
+     ]
+    }
+   },
+   "_key": "!items.effects!1szivA3tVCPn0poY.YbdFbPaUc0uWRxED"
+  }
+ ]
 }

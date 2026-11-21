@@ -42,7 +42,14 @@
      "units": "ft",
      "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
     },
@@ -56,8 +63,20 @@
      }
     },
     "damage": {
-     "includeBase": false,
-     "parts": []
+     "includeBase": true,
+     "parts": [
+      {
+       "number": null,
+       "denomination": null,
+       "bonus": "",
+       "types": [],
+       "custom": {
+        "enabled": true,
+        "formula": "5"
+       },
+       "scaling": {}
+      }
+     ]
     }
    }
   },
@@ -67,7 +86,10 @@
   }
  },
  "flags": {
-  "jjk5e": {}
+  "jjk5e": {
+   "automation": "automated",
+   "automationNotes": "+5 damage only after a 10-ft straight-line move (remove the +5 otherwise)."
+  }
  },
  "folder": "cxPIGjcxqJdZTMQ5",
  "sort": 200,

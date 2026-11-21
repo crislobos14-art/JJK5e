@@ -41,7 +41,14 @@
      "units": "spec",
      "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
     },
@@ -58,7 +65,13 @@
      "onSave": "none",
      "parts": []
     },
-    "useConditionText": "false"
+    "useConditionText": "reaction === \"isAttacked\"",
+    "effects": [
+     {
+      "_id": "pYry6YNfQB9V8BNP",
+      "onSave": false
+     }
+    ]
    }
   },
   "prerequisites": {
@@ -80,10 +93,33 @@
    },
    "forTechniques": [
     "Ratio"
-   ]
+   ],
+   "automation": "automated"
   }
  },
  "folder": "b0K9kretIN46uAAM",
  "sort": 200,
- "_key": "!items!Gf0XI8lwB5ayrSQJ"
+ "_key": "!items!Gf0XI8lwB5ayrSQJ",
+ "effects": [
+  {
+   "_id": "pYry6YNfQB9V8BNP",
+   "name": "Weapon broken",
+   "img": "modules/jjk5e/icons/techniques/ratio.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Its weapon breaks (cursed tools: needs an equal or higher grade). The attack deals no damage.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!Gf0XI8lwB5ayrSQJ.pYry6YNfQB9V8BNP"
+  }
+ ]
 }

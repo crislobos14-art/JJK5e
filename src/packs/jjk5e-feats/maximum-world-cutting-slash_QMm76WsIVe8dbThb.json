@@ -39,13 +39,16 @@
     },
     "range": {
      "value": "60",
-     "units": "ft"
+     "units": "ft",
+     "override": true
     },
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
-     }
+      "count": "1",
+      "choice": true
+     },
+     "override": true
     },
     "duration": {
      "units": "inst"
@@ -61,7 +64,21 @@
     },
     "damage": {
      "onSave": "half",
-     "parts": []
+     "parts": [
+      {
+       "number": null,
+       "denomination": null,
+       "bonus": "",
+       "types": [
+        "slashing"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "12 * (@prof + floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11) + floor(min(@details.level, 18) / 18))"
+       },
+       "scaling": {}
+      }
+     ]
     }
    }
   },
@@ -81,7 +98,9 @@
    },
    "forTechniques": [
     "Shrine"
-   ]
+   ],
+   "automationNotes": "Maximum Dismantle damage (12 per die: base dice + prof extra CE), ignoring resistances, immunities and temp HP. Limb damaging.",
+   "automation": "automated"
   }
  },
  "folder": "2XiAKaCJUnpH62hA",

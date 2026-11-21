@@ -24,7 +24,7 @@
    "e5APyZK7Ri8YUITa": {
     "_id": "e5APyZK7Ri8YUITa",
     "type": "save",
-    "name": "Bonus Action (3 CE)",
+    "name": "Veil of the Faceless God (3 CE, 1 minute)",
     "sort": 0,
     "activation": {
      "type": "bonus",
@@ -38,10 +38,23 @@
      }
     },
     "range": {
-     "units": "spec",
+     "units": "self",
      "override": true
     },
-    "target": {},
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "60",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "enemy",
+      "choice": false
+     },
+     "override": true
+    },
     "duration": {
      "value": "1",
      "units": "minute",
@@ -59,7 +72,13 @@
     "damage": {
      "onSave": "none",
      "parts": []
-    }
+    },
+    "effects": [
+     {
+      "_id": "oWdYc6PZCZZUXT7M",
+      "onSave": false
+     }
+    ]
    }
   },
   "prerequisites": {
@@ -81,10 +100,40 @@
    },
    "forTechniques": [
     "Faceless God"
-   ]
+   ],
+   "automation": "automated"
   }
  },
  "folder": "ZsSLGfOrda4TafgY",
  "sort": 100,
- "_key": "!items!uplvYFKOh990lLUt"
+ "_key": "!items!uplvYFKOh990lLUt",
+ "effects": [
+  {
+   "_id": "oWdYc6PZCZZUXT7M",
+   "name": "Veiled dread",
+   "img": "modules/jjk5e/icons/techniques/faceless-god.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>−1 to all rolls per 10% corruption while it fails (apply by hand); auto-success if it can't see the caster.</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "value": "turn=start, saveAbility=int, saveDC=JJKORIGINDC, label=Veil of the Faceless God",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!uplvYFKOh990lLUt.oWdYc6PZCZZUXT7M"
+  }
+ ]
 }

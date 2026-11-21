@@ -39,13 +39,16 @@
     },
     "range": {
      "value": "30",
-     "units": "ft"
+     "units": "ft",
+     "override": true
     },
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
-     }
+      "count": "1",
+      "choice": true
+     },
+     "override": true
     },
     "duration": {
      "units": "inst"
@@ -61,8 +64,28 @@
     },
     "damage": {
      "onSave": "none",
-     "parts": []
-    }
+     "parts": [
+      {
+       "number": null,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "(@prof)d6"
+       },
+       "scaling": {}
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "Ep84qQFX9FQmceUQ",
+      "onSave": false
+     }
+    ]
    }
   },
   "prerequisites": {
@@ -84,7 +107,8 @@
    },
    "forTechniques": [
     "Disaster Storms"
-   ]
+   ],
+   "automation": "automated"
   }
  },
  "effects": [
@@ -116,6 +140,39 @@
     }
    },
    "_key": "!items.effects!Q1qqOPPEbJEfzmXK.iDzG7YWFM0B53btr"
+  },
+  {
+   "_id": "Ep84qQFX9FQmceUQ",
+   "name": "Suffocating",
+   "img": "modules/jjk5e/icons/techniques/disaster-storms.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Ends if the caster is more than 30 ft away or loses concentration.</p>",
+   "changes": [
+    {
+     "key": "system.attributes.movement.all",
+     "mode": 1,
+     "value": "0.5",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.disadvantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!Q1qqOPPEbJEfzmXK.Ep84qQFX9FQmceUQ"
   }
  ],
  "folder": "D27pyU4vw2lSmHn4",

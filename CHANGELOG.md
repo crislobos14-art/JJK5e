@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.53.0 — Análisis profundo: manual V.6 vs módulo
+Comparé el manual (V.6 + Creeps & Curses) con todos los compendios y revisé el código con ESLint.
+
+- **Cobertura**: las 79 técnicas del manual (+ Vairocana y ████ and Light de C&C) y sus rasgos están en el módulo; los 317 dotes del manual existen; textos de técnicas y dotes coinciden ≥85–90 % con el manual. Clases: dados de golpe, salvaciones, ASI y nivel de cada rasgo coinciden con las tablas. Armas: daño, tipo, propiedades y precio ($100 = 1 po) correctos; armaduras: CA, DES máx. y desventaja en Sigilo correctas.
+- **Dotes de técnica arreglados (43)**: salvaciones sin resultado (Aerokinesis, Air Bomber, Black Belt, Fox Fire, Funny Faces, Imbued Weapon, Improved Bindings, Black Hole, Hurricane, World Cutting Slash, Nail Volley, Shooting Star, Veil, Weapon Breaker, Weight of Judgment, Surprise Present, Shield Master…), ataques sin daño (Cadence, Block Strike, Elbow Blades, Minimum: Uzumaki, Sword of Michael, Spatial Shatter, Polearm Master, Charger, Sentinel, GWM con −5/+10…) y costes de CE del manual que faltaban (Flowing Red Scale: Stack 6/3, Crippling Neurotoxin +8, Immobilized Limbs +1, Tyrant Shikigami 1/2/4, Crippling Strikes +1, Blessing of Fortune 1, Maculation, Typhoon +2).
+- **Pure Energy Efficiency**: ahora también se aplica a quien recibe tu Circuit (antes solo al lanzador).
+- Equipo y rasgos de clase entran en la revisión automática: Comprehensive Monocle, Poison Jar, Cursed Tanto, Chains of Heaven, Fighting Style y Technique Creativity corregidos.
+- `tools/technique-fixes.py` ya no reescribe campos vacíos ni cambia el fin de línea de los archivos.
+- ESLint (no-undef y errores comunes): sin errores en el código.
+- Sin probar en Foundry real.
+
 ## 1.52.1 — Revisión de errores de la automatización
 - **@scaling corregido**: en dnd5e vale 1 + CE extra. Arreglados Dismantle (daba 1 dado de más), Cleave (1 dado de más), Ratio (1d10 de más antes de 11.º), tiradas de Idle Death Gamble/Luckiest y nivel de Chaos Bolt (ahora 1.º/3.º/5.º/8.º).
 - **Efectos con CE escalable** (Virtual Mass, Earthen Armor, Epic Solo, Ritual Dance, Divebomb, Evening Moon, Mass Decrease, Store and Release): los efectos no pueden leer @scaling; ahora usan `JJKSCALING`, que el módulo sustituye por el escalado del último uso del objeto.

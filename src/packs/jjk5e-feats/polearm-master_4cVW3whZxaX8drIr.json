@@ -38,16 +38,23 @@
      }
     },
     "range": {
-     "value": "5",
+     "value": "10",
      "units": "ft",
      "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
     },
     "attack": {
-     "ability": "spellcasting",
+     "ability": "",
      "bonus": "",
      "flat": false,
      "type": {
@@ -57,7 +64,21 @@
     },
     "damage": {
      "includeBase": false,
-     "parts": []
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 4,
+       "bonus": "@mod",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
     }
    }
   },
@@ -67,7 +88,9 @@
   }
  },
  "flags": {
-  "jjk5e": {}
+  "jjk5e": {
+   "automation": "automated"
+  }
  },
  "folder": "cxPIGjcxqJdZTMQ5",
  "sort": 1700,

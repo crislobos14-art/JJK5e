@@ -24,10 +24,10 @@
    "PjGgfNwCDWYBRRJg": {
     "_id": "PjGgfNwCDWYBRRJg",
     "type": "save",
-    "name": "Action (2 CE)",
+    "name": "Goofy face (2 CE): INT at disadvantage",
     "sort": 0,
     "activation": {
-     "type": "action",
+     "type": "special",
      "value": 1,
      "condition": ""
     },
@@ -41,7 +41,14 @@
      "units": "spec",
      "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
     },
@@ -57,15 +64,21 @@
     "damage": {
      "onSave": "none",
      "parts": []
-    }
+    },
+    "effects": [
+     {
+      "_id": "FzXCvzxpG2Ig7yuI",
+      "onSave": false
+     }
+    ]
    },
    "vWjJ9P5cZCofYPDv": {
     "_id": "vWjJ9P5cZCofYPDv",
     "type": "save",
-    "name": "Action (1 CE)",
+    "name": "Change distortion (1 CE): another INT next turn",
     "sort": 100000,
     "activation": {
-     "type": "action",
+     "type": "special",
      "value": 1,
      "condition": ""
     },
@@ -79,7 +92,14 @@
      "units": "spec",
      "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
     },
@@ -95,7 +115,13 @@
     "damage": {
      "onSave": "none",
      "parts": []
-    }
+    },
+    "effects": [
+     {
+      "_id": "sgw9Yb5YAycjGRgh",
+      "onSave": false
+     }
+    ]
    }
   },
   "prerequisites": {
@@ -118,10 +144,77 @@
    },
    "forTechniques": [
     "Illusive Mirage"
-   ]
+   ],
+   "automation": "automated"
   }
  },
  "folder": "0zKSvuqnQNE6NMsP",
  "sort": 100,
- "_key": "!items!pOllUPH2K4i7mWW7"
+ "_key": "!items!pOllUPH2K4i7mWW7",
+ "effects": [
+  {
+   "_id": "FzXCvzxpG2Ig7yuI",
+   "name": "Confused (distorted face)",
+   "img": "modules/jjk5e/icons/techniques/illusive-mirage.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.disadvantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 2
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    },
+    "dae": {
+     "specialDuration": [
+      "turnEnd"
+     ]
+    }
+   },
+   "_key": "!items.effects!pOllUPH2K4i7mWW7.FzXCvzxpG2Ig7yuI"
+  },
+  {
+   "_id": "sgw9Yb5YAycjGRgh",
+   "name": "Confused (distorted face)",
+   "img": "modules/jjk5e/icons/techniques/illusive-mirage.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.disadvantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 2
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    },
+    "dae": {
+     "specialDuration": [
+      "turnEnd"
+     ]
+    }
+   },
+   "_key": "!items.effects!pOllUPH2K4i7mWW7.sgw9Yb5YAycjGRgh"
+  }
+ ]
 }

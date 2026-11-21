@@ -34,14 +34,28 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "24"
      }
     },
     "range": {
-     "units": "spec",
+     "units": "self",
      "override": true
     },
-    "target": {},
+    "target": {
+     "template": {
+      "type": "cone",
+      "size": "10",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
     },
@@ -56,7 +70,23 @@
     },
     "damage": {
      "onSave": "none",
-     "parts": []
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "piercing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
     }
    }
   },
@@ -76,7 +106,15 @@
    },
    "forTechniques": [
     "Straw Doll Technique"
-   ]
+   ],
+   "ceCosts": {
+    "FuwD32PXDnCWS2LR": 1
+   },
+   "ceSteps": {
+    "FuwD32PXDnCWS2LR": 1
+   },
+   "automationNotes": "1 CE per nail; cone = 10 ft × nails (enlarge the template).",
+   "automation": "automated"
   }
  },
  "folder": "Z9rCGnehs0OjjdOk",

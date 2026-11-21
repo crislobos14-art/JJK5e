@@ -24,7 +24,7 @@
    "bjQNjov0ucG06ILz": {
     "_id": "bjQNjov0ucG06ILz",
     "type": "attack",
-    "name": "Reaction (5 CE)",
+    "name": "Minimum: Uzumaki (5 CE): Xd12 (X = combined CR)",
     "sort": 0,
     "activation": {
      "type": "reaction",
@@ -34,18 +34,22 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "40"
      }
     },
     "range": {
      "value": "30",
-     "units": "ft"
+     "units": "ft",
+     "override": true
     },
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
-     }
+      "count": "1",
+      "choice": true
+     },
+     "override": true
     },
     "duration": {
      "units": "inst"
@@ -53,6 +57,9 @@
     "attack": {
      "ability": "spellcasting",
      "bonus": "",
+     "critical": {
+      "threshold": null
+     },
      "flat": false,
      "type": {
       "value": "ranged",
@@ -61,7 +68,23 @@
     },
     "damage": {
      "includeBase": false,
-     "parts": []
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 12,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
     },
     "useConditionText": "false"
    }
@@ -85,7 +108,10 @@
    },
    "forTechniques": [
     "Cursed Spirit Manipulation"
-   ]
+   ],
+   "ceSteps": {},
+   "automationNotes": "Scale = combined CR − 2 (no CE). Ignores resistance like Maximum: Uzumaki.",
+   "automation": "automated"
   }
  },
  "folder": "808kDeN1ffx0XP3c",

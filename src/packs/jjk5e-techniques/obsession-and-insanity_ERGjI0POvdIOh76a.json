@@ -57,7 +57,12 @@
      },
      "override": true
     },
-    "effects": [],
+    "effects": [
+     {
+      "_id": "247FOb1o9G9vRCYX",
+      "onSave": false
+     }
+    ],
     "save": {
      "ability": [
       "wis"
@@ -83,5 +88,27 @@
   }
  },
  "folder": "TxiITYXHPOTbqkOW",
- "_key": "!items!ERGjI0POvdIOh76a"
+ "_key": "!items!ERGjI0POvdIOh76a",
+ "effects": [
+  {
+   "_id": "247FOb1o9G9vRCYX",
+   "name": "Failed save: 90%: random direction (WIS)",
+   "img": "modules/jjk5e/icons/techniques/faceless-god.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Failed save: apply the result described in the feature.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Faceless God"
+    }
+   },
+   "_key": "!items.effects!ERGjI0POvdIOh76a.247FOb1o9G9vRCYX"
+  }
+ ]
 }

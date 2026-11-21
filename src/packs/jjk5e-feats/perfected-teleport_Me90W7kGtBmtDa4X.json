@@ -36,7 +36,9 @@
    },
    "forTechniques": [
     "Teleportation"
-   ]
+   ],
+   "automationNotes": "Teleport costs 1 CE; casting Teleport costs 8 − CE mod (adjust when using).",
+   "automation": "automated"
   }
  },
  "folder": "giRwgEP8Enx3V3vx",

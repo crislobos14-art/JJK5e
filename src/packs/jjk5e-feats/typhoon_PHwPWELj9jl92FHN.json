@@ -39,13 +39,16 @@
     },
     "range": {
      "value": "60",
-     "units": "ft"
+     "units": "ft",
+     "override": true
     },
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
-     }
+      "count": "1",
+      "choice": true
+     },
+     "override": true
     },
     "duration": {
      "units": "inst"
@@ -53,6 +56,9 @@
     "attack": {
      "ability": "spellcasting",
      "bonus": "",
+     "critical": {
+      "threshold": null
+     },
      "flat": false,
      "type": {
       "value": "ranged",
@@ -79,6 +85,77 @@
       }
      ]
     }
+   },
+   "FTfDx7P9383cnbMR": {
+    "_id": "FTfDx7P9383cnbMR",
+    "type": "save",
+    "name": "Typhoon sphere (+2 CE): STR or 2d6",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "20",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": [],
+    "save": {
+     "ability": [
+      "str"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
    }
   },
   "prerequisites": {
@@ -97,7 +174,11 @@
    },
    "forTechniques": [
     "Disaster Tides"
-   ]
+   ],
+   "ceCosts": {
+    "FTfDx7P9383cnbMR": 2
+   },
+   "automation": "automated"
   }
  },
  "folder": "QUxVHS82lupOHPQu",

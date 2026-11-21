@@ -42,13 +42,23 @@
      "units": "ft",
      "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
     },
     "attack": {
      "ability": "spellcasting",
      "bonus": "",
+     "critical": {
+      "threshold": null
+     },
      "flat": false,
      "type": {
       "value": "melee",
@@ -57,8 +67,28 @@
     },
     "damage": {
      "includeBase": false,
-     "parts": []
-    }
+     "parts": [
+      {
+       "number": 10,
+       "denomination": 12,
+       "bonus": "",
+       "types": [
+        "radiant"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "YJfI7rab999RoSoz",
+      "onSave": false
+     }
+    ]
    }
   },
   "prerequisites": {
@@ -80,10 +110,40 @@
    },
    "forTechniques": [
     "Technique Extermination"
-   ]
+   ],
+   "automation": "automated"
   }
  },
  "folder": "gjva3zbKGp06jB9X",
  "sort": 300,
- "_key": "!items!kP7O0eTDhfNUku5J"
+ "_key": "!items!kP7O0eTDhfNUku5J",
+ "effects": [
+  {
+   "_id": "YJfI7rab999RoSoz",
+   "name": "Extinguished (Sword of Michael)",
+   "img": "modules/jjk5e/icons/techniques/technique-extermination.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "value": "turn=start, saveAbility=cha, saveDC=JJKORIGINDC, label=Extinguishment",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 20
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!kP7O0eTDhfNUku5J.YJfI7rab999RoSoz"
+  }
+ ]
 }

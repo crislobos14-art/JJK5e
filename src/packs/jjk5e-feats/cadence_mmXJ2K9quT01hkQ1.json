@@ -23,42 +23,92 @@
   "activities": {
    "u8QnBvsioiOIFzqU": {
     "_id": "u8QnBvsioiOIFzqU",
-    "type": "attack",
-    "name": "Reaction (3 CE)",
+    "type": "utility",
+    "name": "Cadence (3 CE): the attack misses",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "reaction",
      "value": 1,
-     "condition": ""
+     "condition": "",
+     "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
-     }
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
     },
-    "range": {
-     "units": "spec",
+    "duration": {
+     "units": "inst",
      "override": true
     },
-    "target": {},
-    "duration": {
-     "units": "inst"
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
     },
-    "attack": {
-     "ability": "spellcasting",
-     "bonus": "",
-     "flat": false,
-     "type": {
-      "value": "ranged",
-      "classification": "spell"
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "15TT8tKX4Ft9AcAH",
+      "onSave": false
      }
+    ],
+    "useConditionText": "reaction === \"isAttacked\""
+   },
+   "v0z0PU7g2ziJDzAQ": {
+    "_id": "v0z0PU7g2ziJDzAQ",
+    "type": "utility",
+    "name": "Cadence (5 CE): a creature fails its save",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
     },
-    "damage": {
-     "includeBase": false,
-     "parts": []
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
     },
-    "useConditionText": "reaction === \"isSaveFail\""
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "9ROxPedb6pgQEj3g",
+      "onSave": false
+     }
+    ]
    }
   },
   "prerequisites": {
@@ -69,7 +119,8 @@
  "flags": {
   "jjk5e": {
    "ceCosts": {
-    "u8QnBvsioiOIFzqU": 3
+    "u8QnBvsioiOIFzqU": 3,
+    "v0z0PU7g2ziJDzAQ": 5
    },
    "prereq": {
     "features": [
@@ -80,10 +131,77 @@
    },
    "forTechniques": [
     "Prayer Song"
-   ]
+   ],
+   "automation": "automated"
   }
  },
  "folder": "gzL8Vv0WJ18xaevn",
  "sort": 200,
- "_key": "!items!mmXJ2K9quT01hkQ1"
+ "_key": "!items!mmXJ2K9quT01hkQ1",
+ "effects": [
+  {
+   "_id": "15TT8tKX4Ft9AcAH",
+   "name": "Cadence: miss",
+   "img": "modules/jjk5e/icons/techniques/prayer-song.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.fail.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    },
+    "dae": {
+     "specialDuration": [
+      "1Attack"
+     ]
+    }
+   },
+   "_key": "!items.effects!mmXJ2K9quT01hkQ1.15TT8tKX4Ft9AcAH"
+  },
+  {
+   "_id": "9ROxPedb6pgQEj3g",
+   "name": "Cadence: fail",
+   "img": "modules/jjk5e/icons/techniques/prayer-song.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.fail.ability.save.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    },
+    "dae": {
+     "specialDuration": [
+      "isSave"
+     ]
+    }
+   },
+   "_key": "!items.effects!mmXJ2K9quT01hkQ1.9ROxPedb6pgQEj3g"
+  }
+ ]
 }

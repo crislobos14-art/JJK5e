@@ -24,7 +24,7 @@
    "dDn14mENHutzpIc0": {
     "_id": "dDn14mENHutzpIc0",
     "type": "utility",
-    "name": "Reaction",
+    "name": "Turn a failed death save into a natural 20 (1 Miracle + 1 CE)",
     "sort": 0,
     "activation": {
      "type": "reaction",
@@ -40,7 +40,14 @@
     "range": {
      "units": "self"
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
     },
@@ -63,7 +70,11 @@
    },
    "forTechniques": [
     "Miracle"
-   ]
+   ],
+   "ceCosts": {
+    "dDn14mENHutzpIc0": 1
+   },
+   "automation": "automated"
   }
  },
  "folder": "Ja2gS6J7aZ9mXHwS",

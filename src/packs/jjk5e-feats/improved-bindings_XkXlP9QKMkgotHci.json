@@ -24,7 +24,7 @@
    "F77fTkM0Wg1vvKWq": {
     "_id": "F77fTkM0Wg1vvKWq",
     "type": "save",
-    "name": "Special",
+    "name": "End of its turn: CON or stunned",
     "sort": 0,
     "activation": {
      "type": "special",
@@ -41,7 +41,14 @@
      "units": "spec",
      "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
     },
@@ -57,7 +64,56 @@
     "damage": {
      "onSave": "none",
      "parts": []
-    }
+    },
+    "effects": [
+     {
+      "_id": "yEEhtOo6gq2fzwTe",
+      "onSave": false
+     }
+    ]
+   },
+   "AA8FJTumOeUdZ9Xc": {
+    "_id": "AA8FJTumOeUdZ9Xc",
+    "type": "utility",
+    "name": "Bound: two levels of exhaustion",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "pdOYND6axt5iE778",
+      "onSave": false
+     }
+    ]
    }
   },
   "prerequisites": {
@@ -76,10 +132,67 @@
    },
    "forTechniques": [
     "Shadow Killer"
-   ]
+   ],
+   "automation": "automated"
   }
  },
  "folder": "yU2uxvCgVRVwhJwX",
  "sort": 200,
- "_key": "!items!XkXlP9QKMkgotHci"
+ "_key": "!items!XkXlP9QKMkgotHci",
+ "effects": [
+  {
+   "_id": "yEEhtOo6gq2fzwTe",
+   "name": "Stunned (Improved Bindings)",
+   "img": "modules/jjk5e/icons/techniques/shadow-killer.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [
+    "stunned"
+   ],
+   "description": "",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStart"
+     ]
+    }
+   },
+   "_key": "!items.effects!XkXlP9QKMkgotHci.yEEhtOo6gq2fzwTe"
+  },
+  {
+   "_id": "pdOYND6axt5iE778",
+   "name": "Shadow bindings",
+   "img": "modules/jjk5e/icons/techniques/shadow-killer.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.attributes.exhaustion",
+     "mode": 2,
+     "value": "2",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!XkXlP9QKMkgotHci.pdOYND6axt5iE778"
+  }
+ ]
 }

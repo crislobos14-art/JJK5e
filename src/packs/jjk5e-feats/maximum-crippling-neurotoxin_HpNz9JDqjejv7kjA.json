@@ -24,7 +24,7 @@
    "3cba2pcNizaydYT7": {
     "_id": "3cba2pcNizaydYT7",
     "type": "utility",
-    "name": "Special",
+    "name": "Enhance Poisonous Cursed Energy (+8 CE)",
     "sort": 0,
     "activation": {
      "type": "special",
@@ -40,7 +40,14 @@
     "range": {
      "units": "self"
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
     "duration": {
      "value": "8",
      "units": "hour",
@@ -74,7 +81,11 @@
    },
    "forTechniques": [
     "Moon Dregs"
-   ]
+   ],
+   "ceCosts": {
+    "3cba2pcNizaydYT7": 8
+   },
+   "automation": "automated"
   }
  },
  "effects": [

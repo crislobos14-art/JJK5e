@@ -44,8 +44,10 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
-     }
+      "count": "1",
+      "choice": true
+     },
+     "override": true
     },
     "duration": {
      "units": "inst"
@@ -60,7 +62,7 @@
      }
     },
     "damage": {
-     "includeBase": false,
+     "includeBase": true,
      "parts": []
     },
     "useConditionText": "false"
@@ -72,7 +74,9 @@
   }
  },
  "flags": {
-  "jjk5e": {}
+  "jjk5e": {
+   "automation": "automated"
+  }
  },
  "folder": "EtgHYidIGv42ylfo",
  "sort": 1600,

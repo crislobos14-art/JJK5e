@@ -34,14 +34,29 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "20"
      }
     },
     "range": {
      "units": "spec",
      "override": true
     },
-    "target": {},
+    "target": {
+     "template": {
+      "type": "line",
+      "size": "60",
+      "width": "5",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": true
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
     },
@@ -56,7 +71,23 @@
     },
     "damage": {
      "onSave": "half",
-     "parts": []
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 12,
+       "bonus": "",
+       "types": [
+        "lightning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
     }
    }
   },
@@ -76,7 +107,9 @@
    },
    "forTechniques": [
     "Mythical Beast Amber"
-   ]
+   ],
+   "automationNotes": "Imbued Weapon bolt: 1d12 per charge (scale = charges − 1).",
+   "automation": "automated"
   }
  },
  "folder": "84RYYPEHHy0nXTWE",

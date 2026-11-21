@@ -64,7 +64,13 @@
     "damage": {
      "onSave": "half",
      "parts": []
-    }
+    },
+    "effects": [
+     {
+      "_id": "WC7ehsH56mxOZovJ",
+      "onSave": false
+     }
+    ]
    },
    "Qdo8ya8fv7uRRg6k": {
     "_id": "Qdo8ya8fv7uRRg6k",
@@ -187,6 +193,26 @@
     }
    },
    "_key": "!items.effects!jZnNIRzHDCSBUeCQ.9QgbfM5ItoBWZRE2"
+  },
+  {
+   "_id": "WC7ehsH56mxOZovJ",
+   "name": "Failed save: Special (3 CE)",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Failed save: apply the result described in the feature.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!jZnNIRzHDCSBUeCQ.WC7ehsH56mxOZovJ"
   }
  ],
  "sort": 700,
