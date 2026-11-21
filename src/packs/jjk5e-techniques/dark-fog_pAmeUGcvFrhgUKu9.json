@@ -24,7 +24,7 @@
    "3XdxfxM4hf2eM4ct": {
     "_id": "3XdxfxM4hf2eM4ct",
     "type": "utility",
-    "name": "Action (2+ CE)",
+    "name": "Dark Fog (2 CE per 10 ft): magical darkness",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -35,18 +35,38 @@
      "targets": [],
      "scaling": {
       "allowed": true,
-      "max": "2 * max(1, max(@abilities.wis.mod, @abilities.cha.mod))"
+      "max": "2 * max(@abilities.wis.mod, @abilities.cha.mod)"
      }
     },
     "range": {
-     "units": "self"
+     "units": "self",
+     "override": true
     },
-    "target": {},
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "10",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
     "duration": {
      "value": "2",
      "units": "minute",
      "concentration": false
-    }
+    },
+    "effects": [
+     {
+      "_id": "Qmta3tV6PpPbOI7x",
+      "onSave": false
+     }
+    ]
    }
   }
  },
@@ -72,10 +92,46 @@
       "Starlight Symphony"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!pAmeUGcvFrhgUKu9"
+ "_key": "!items!pAmeUGcvFrhgUKu9",
+ "effects": [
+  {
+   "_id": "Qmta3tV6PpPbOI7x",
+   "name": "In the Dark Fog",
+   "img": "modules/jjk5e/icons/techniques/starlight-symphony.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Magical darkness; auto-fail checks to detect CE.</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.disadvantage.skill.prc",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.disadvantage.skill.inv",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 20
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Starlight Symphony"
+    }
+   },
+   "_key": "!items.effects!pAmeUGcvFrhgUKu9.Qmta3tV6PpPbOI7x"
+  }
+ ]
 }

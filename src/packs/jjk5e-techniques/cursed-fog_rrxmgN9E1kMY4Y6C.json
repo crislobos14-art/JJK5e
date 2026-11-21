@@ -19,7 +19,7 @@
    "B59JyS0jgQ8whyQG": {
     "_id": "B59JyS0jgQ8whyQG",
     "type": "utility",
-    "name": "Action",
+    "name": "Cursed Fog (1 CE per 10 ft)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -30,7 +30,8 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "(1 + floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11)) * max(@abilities.wis.mod, @abilities.cha.mod)"
      },
      "spellSlot": false
     },
@@ -39,6 +40,17 @@
      "override": true
     },
     "target": {
+     "template": {
+      "type": "radius",
+      "size": "10",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
      "override": true
     },
     "duration": {
@@ -46,7 +58,52 @@
      "units": "minute",
      "concentration": false,
      "override": true
-    }
+    },
+    "effects": [
+     {
+      "_id": "nqaSGP9Gimr9kaaY",
+      "onSave": false
+     }
+    ]
+   },
+   "o85XZjwW0XVmbNRR": {
+    "_id": "o85XZjwW0XVmbNRR",
+    "type": "utility",
+    "name": "Fog reaction (6th): advantage/disadvantage to a roll",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "useConditionText": "reaction === \"isAttacked\" || reaction === \"isSave\""
    }
   },
   "uses": {
@@ -87,9 +144,52 @@
   "jjk5e": {
    "technique": "Starlight Symphony",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceCosts": {
+    "B59JyS0jgQ8whyQG": 1
+   },
+   "ceSteps": {
+    "B59JyS0jgQ8whyQG": 1
+   },
+   "automationNotes": "Radius = 10 ft per CE (enlarge the template).",
+   "automation": "automated"
   }
  },
  "folder": "MxqACO3emHCjwL5R",
- "_key": "!items!rrxmgN9E1kMY4Y6C"
+ "_key": "!items!rrxmgN9E1kMY4Y6C",
+ "effects": [
+  {
+   "_id": "nqaSGP9Gimr9kaaY",
+   "name": "In the Cursed Fog",
+   "img": "modules/jjk5e/icons/techniques/starlight-symphony.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Heavily obscured; can't detect CE.</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.disadvantage.skill.prc",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.disadvantage.skill.inv",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Starlight Symphony"
+    }
+   },
+   "_key": "!items.effects!rrxmgN9E1kMY4Y6C.nqaSGP9Gimr9kaaY"
+  }
+ ]
 }

@@ -19,7 +19,7 @@
    "7XOi7avGmoip40nk": {
     "_id": "7XOi7avGmoip40nk",
     "type": "utility",
-    "name": "Reaction",
+    "name": "Teleport a creature (reaction, domain)",
     "sort": 0,
     "activation": {
      "type": "reaction",
@@ -39,6 +39,11 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -89,6 +94,44 @@
      "concentration": false,
      "override": true
     }
+   },
+   "Zm2JX3Eamj72JQZU": {
+    "_id": "Zm2JX3Eamj72JQZU",
+    "type": "utility",
+    "name": "Initiative 20: relocate up to 2 × CE mod creatures",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "2 * max(@abilities.wis.mod, @abilities.cha.mod)",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": []
    }
   },
   "uses": {
@@ -147,7 +190,8 @@
     "2BEHXPqaBRA0QXWt": 20
    },
    "domainActivity": "2BEHXPqaBRA0QXWt",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "1SK1DEKKg87PUQf6",

@@ -19,7 +19,7 @@
    "akoyaBelu1j40XNt": {
     "_id": "akoyaBelu1j40XNt",
     "type": "utility",
-    "name": "Reaction",
+    "name": "Tool guard (reaction): +AC by size",
     "sort": 0,
     "activation": {
      "type": "reaction",
@@ -39,13 +39,72 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
     },
-    "useConditionText": "false"
+    "useConditionText": "reaction === \"isAttacked\"",
+    "effects": [
+     {
+      "_id": "p4a7qZruQmtW4PxL",
+      "onSave": false
+     }
+    ]
+   },
+   "XfNxQcO26sDUAC0J": {
+    "_id": "XfNxQcO26sDUAC0J",
+    "type": "heal",
+    "name": "Tool guard: reduce damage (2d6 medium)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "healing": {
+     "number": 2,
+     "denomination": 6,
+     "bonus": "",
+     "types": [
+      "temphp"
+     ],
+     "custom": {
+      "enabled": false,
+      "formula": ""
+     },
+     "scaling": {}
+    },
+    "useConditionText": "reaction === \"isDamaged\""
    }
   },
   "uses": {
@@ -85,9 +144,45 @@
   "jjk5e": {
    "technique": "Tool Manipulation",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "+1 attack/damage with imbued tools per CE spent on the imbuement.",
+   "automation": "automated"
   }
  },
  "folder": "7tmhlm7tDflRZlKD",
- "_key": "!items!tqugDcnrPlxkDgBx"
+ "_key": "!items!tqugDcnrPlxkDgBx",
+ "effects": [
+  {
+   "_id": "p4a7qZruQmtW4PxL",
+   "name": "Tool guard",
+   "img": "modules/jjk5e/icons/techniques/tool-manipulation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Medium tool assumed (+3): Tiny +1 … Huge +5 (+1 at 11th).</p>",
+   "changes": [
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+3",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Tool Manipulation"
+    },
+    "dae": {
+     "specialDuration": [
+      "isAttacked"
+     ]
+    }
+   },
+   "_key": "!items.effects!tqugDcnrPlxkDgBx.p4a7qZruQmtW4PxL"
+  }
+ ]
 }

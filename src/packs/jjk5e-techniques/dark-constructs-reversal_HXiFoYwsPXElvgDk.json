@@ -18,9 +18,10 @@
   "activities": {
    "7B4chJWglItc6EQW": {
     "_id": "7B4chJWglItc6EQW",
-    "type": "damage",
-    "name": "Bonus Action (4 CE)",
+    "type": "utility",
+    "name": "Form a bar of darkness (4 CE, 1 minute)",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "bonus",
      "value": 1,
@@ -30,29 +31,85 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
     },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
     "range": {
-     "units": "spec",
+     "units": "self",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
+    },
+    "effects": []
+   },
+   "2gksxrFeEWdqmcnT": {
+    "_id": "2gksxrFeEWdqmcnT",
+    "type": "attack",
+    "name": "Dark Construct strike / throw (20/60)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
     },
     "duration": {
-     "value": "1",
-     "units": "minute",
-     "concentration": false,
+     "units": "inst",
      "override": true
     },
+    "range": {
+     "value": "5",
+     "long": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "melee",
+      "classification": "spell"
+     }
+    },
     "damage": {
+     "includeBase": false,
      "parts": [
       {
        "number": 4,
        "denomination": 8,
-       "bonus": "",
+       "bonus": "max(@abilities.wis.mod, @abilities.cha.mod)",
        "types": [
         "necrotic"
        ],
@@ -60,9 +117,7 @@
         "enabled": false,
         "formula": ""
        },
-       "scaling": {
-        "number": 1
-       }
+       "scaling": {}
       }
      ]
     }
@@ -109,7 +164,8 @@
    },
    "technique": "████ and Light",
    "reversal": true,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "IGfpCBBJLQfBc6m2",

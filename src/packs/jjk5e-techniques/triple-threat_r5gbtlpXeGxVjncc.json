@@ -24,7 +24,9 @@
  "flags": {
   "jjk5e": {
    "technique": "Triple Core",
-   "level": 3
+   "level": 3,
+   "automationNotes": "Choose two more core options (see First Core); only one active at a time.",
+   "automation": "automated"
   }
  },
  "folder": "IyJg53UICeEoqtxa",

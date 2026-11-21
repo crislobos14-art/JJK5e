@@ -58,6 +58,47 @@
      "concentration": false,
      "override": true
     }
+   },
+   "aN5HBckCeR7g3F7i": {
+    "_id": "aN5HBckCeR7g3F7i",
+    "type": "utility",
+    "name": "Domain: all three cores active",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "Nk1OrEsBDeEb50Mi",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -116,9 +157,39 @@
     "YMmMMuxUqyMUTdvA": 20
    },
    "domainActivity": "YMmMMuxUqyMUTdvA",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "IyJg53UICeEoqtxa",
- "_key": "!items!kVXEl04i6zoZvUq6"
+ "_key": "!items!kVXEl04i6zoZvUq6",
+ "effects": [
+  {
+   "_id": "Nk1OrEsBDeEb50Mi",
+   "name": "Rule of Three",
+   "img": "modules/jjk5e/icons/techniques/triple-core-domain.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+2",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Triple Core"
+    }
+   },
+   "_key": "!items.effects!kVXEl04i6zoZvUq6.Nk1OrEsBDeEb50Mi"
+  }
+ ]
 }

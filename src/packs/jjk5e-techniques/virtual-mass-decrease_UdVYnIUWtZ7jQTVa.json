@@ -24,7 +24,7 @@
    "MBFVtqxWvJil5f3W": {
     "_id": "MBFVtqxWvJil5f3W",
     "type": "utility",
-    "name": "Bonus Action",
+    "name": "Virtual Mass Decrease (X CE)",
     "sort": 0,
     "activation": {
      "type": "bonus",
@@ -34,16 +34,29 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "99"
      }
     },
     "range": {
-     "units": "self"
+     "units": "self",
+     "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
-    }
+    },
+    "effects": [
+     {
+      "_id": "8n9k3H8k8Xq1xWx2",
+      "onSave": false
+     }
+    ]
    }
   }
  },
@@ -63,10 +76,58 @@
       "Star Rage"
      ]
     ]
-   }
+   },
+   "ceCosts": {
+    "MBFVtqxWvJil5f3W": 1
+   },
+   "ceSteps": {
+    "MBFVtqxWvJil5f3W": 1
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!UdVYnIUWtZ7jQTVa"
+ "_key": "!items!UdVYnIUWtZ7jQTVa",
+ "effects": [
+  {
+   "_id": "8n9k3H8k8Xq1xWx2",
+   "name": "Mass Decrease",
+   "img": "modules/jjk5e/icons/techniques/star-rage.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.attributes.movement.walk",
+     "mode": 2,
+     "value": "+ (10 * @scaling)",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.mwak.attack",
+     "mode": 2,
+     "value": "+ @scaling",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "- @scaling",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Star Rage"
+    }
+   },
+   "_key": "!items.effects!UdVYnIUWtZ7jQTVa.8n9k3H8k8Xq1xWx2"
+  }
+ ]
 }

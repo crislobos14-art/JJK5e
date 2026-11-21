@@ -19,7 +19,7 @@
    "w2tmNpEIdLgXtUyG": {
     "_id": "w2tmNpEIdLgXtUyG",
     "type": "utility",
-    "name": "Bonus Action (1 CE)",
+    "name": "Divebomb upgrade: Dash/Disengage/Dodge (1 CE, bonus)",
     "sort": 0,
     "activation": {
      "type": "bonus",
@@ -44,6 +44,111 @@
     "duration": {
      "units": "inst",
      "override": true
+    }
+   },
+   "dfrlhJiaXp7FReb7": {
+    "_id": "dfrlhJiaXp7FReb7",
+    "type": "heal",
+    "name": "Defensive upgrade: reduce damage (reaction)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "",
+     "types": [
+      "temphp"
+     ],
+     "custom": {
+      "enabled": true,
+      "formula": "max(@abilities.wis.mod, @abilities.cha.mod) + @prof"
+     },
+     "scaling": {}
+    },
+    "useConditionText": "reaction === \"isDamaged\""
+   },
+   "plhNIcwccxFsLMJP": {
+    "_id": "plhNIcwccxFsLMJP",
+    "type": "damage",
+    "name": "Unblockable upgrade: damage on a miss",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "damage": {
+     "parts": [
+      {
+       "number": null,
+       "denomination": null,
+       "bonus": "",
+       "types": [
+        "force"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "max(@abilities.str.mod, @abilities.dex.mod)"
+       },
+       "scaling": {}
+      }
+     ]
     }
    }
   },
@@ -87,7 +192,9 @@
    },
    "technique": "Triple Core",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Energy Blast upgrade: add CE mod once per turn to ranged CE damage. Upgrades always on unless in another core's form.",
+   "automation": "automated"
   }
  },
  "folder": "IyJg53UICeEoqtxa",

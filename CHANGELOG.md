@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.52.0 — Técnica por técnica: últimas 12 — 360/360
+- **Star Rage**: Virtual Mass Increase (CE = masa, +1 daño por masa, impacto con derribo), mejoras, Mass Decrease, dominio Event Horizon (velocidad ¼, derribo con salvación).
+- **Starlight Symphony**: Cursed Fog y Dark Fog (desventaja en Percepción/Investigación), reacción de niebla, zorros, Living Fog (vuelo, resistencias, asfixia Xd8), Inari, dominio con ceguera y 5d10.
+- **Straw Doll Technique**: Nail Projectile (2 clavos), Resonance con tabla de 3 partes (desventaja, sin reacciones, aturdido), Hair Pin, Improved Resonance y dominio (Xd12), Cursed Doll Transformation.
+- **Technique Extermination**: Extinguishment (2d12→5d12, sin CE con salvación por turno), Angel’s Blessing, Jacob’s Ladder (10d12), Garden of Eden, Technique Ignition.
+- **Teleportation**: marcas como usos (2× mod. EM), teleporte con alcance escalable y por reacción, Mastered Teleport, dominio, Grounding.
+- **Ten Shadows**: Shadow Storage y prisión de sombra, Light Manipulation (ceguera, Light Ridge, Summon Dispelling), dominio Chimera Shadow Garden, Well’s Unknown Abyss. Las invocaciones de shikigami no se tocaron.
+- **Tool Manipulation**: imbuir herramienta (+2 ataque), Floating Tool, guardia de herramienta, Wind Scythe (3d10→6d10), dominio (armas ajenas fallan), Creature Manipulation.
+- **Triple Core**: Unblockable Blows, Energy Blast (2d6/CE), Defensive Form y Offensive Form (según CE actual, recurso terciario), Divebomb, mejoras, Core Exhaustion, Core Reversal.
+- **Vairocana**, **Vengeful Spirit Manipulation**, **Voracity**, **████ and Light**: Chaos Bolt escalable y tabla d100; garras del espíritu y Mimicry; devorar/regurgitar con efecto editable, Body of the Devourer, Indigestion; Light Constructs, Rain of Light (3d10→10d10), ████ of Dawn, Light Beam, Light Speed, dominio y reversiones oscuras.
+- Repaso final: 19 salvaciones/ataques sin efecto ahora tienen efecto descriptivo o daño del arma.
+- **Automatizados a mano: 360/360.** Sin probar en Foundry real.
+
 ## 1.51.0 — Técnica por técnica: Retrograde → Star Dictator (10)
 - **Retrograde**: Reversion (+2→+5) por reacción y sobre otros, Regression con bloqueo, usos sin reacción por ronda, Invert Causality, dominio, Prograde (Certain Defeat/Victory).
 - **Rockstar**: Sound Blast (2d10→6d10) con empuje automático; ráfagas extra; Resonating Music en cono; Epic Solo (+2d10 trueno, aura); dominio; Smooth Jazz.

@@ -19,10 +19,10 @@
    "q2UBntDo4yawiuxr": {
     "_id": "q2UBntDo4yawiuxr",
     "type": "utility",
-    "name": "Action (5 CE)",
+    "name": "Permanent mark (5 CE)",
     "sort": 0,
     "activation": {
-     "type": "action",
+     "type": "special",
      "value": 1,
      "condition": "",
      "override": true
@@ -87,7 +87,9 @@
    },
    "technique": "Teleportation",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Marking is a free action; up to 3 × CE mod marks (raise Teleport's uses max).",
+   "automation": "automated"
   }
  },
  "folder": "1SK1DEKKg87PUQf6",

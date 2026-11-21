@@ -58,6 +58,43 @@
      "concentration": false,
      "override": true
     }
+   },
+   "Ashcb2IIpHOPvxbs": {
+    "_id": "Ashcb2IIpHOPvxbs",
+    "type": "utility",
+    "name": "Initiative 20: chosen Chaos effect (≤ 90) on chosen creatures",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": []
    }
   },
   "uses": {
@@ -116,7 +153,8 @@
     "y6OJxenua8weXRFV": 20
    },
    "domainActivity": "y6OJxenua8weXRFV",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "CpSgW3tLoueRa6XV",

@@ -19,10 +19,10 @@
    "ttjyPQhLJHFeGaog": {
     "_id": "ttjyPQhLJHFeGaog",
     "type": "utility",
-    "name": "Action (1+ CE)",
+    "name": "Unblockable Blows (on melee hit, 1 CE)",
     "sort": 0,
     "activation": {
-     "type": "action",
+     "type": "special",
      "value": 1,
      "condition": "",
      "override": true
@@ -40,17 +40,30 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
-    }
+    },
+    "useConditionText": "reaction === \"isHit\"",
+    "flags": {},
+    "effects": [
+     {
+      "_id": "KZlakpUXwZ2WnbKK",
+      "onSave": false
+     }
+    ]
    },
    "2lr4Xtp24Jv8ajRW": {
     "_id": "2lr4Xtp24Jv8ajRW",
     "type": "attack",
-    "name": "Action",
+    "name": "Energy Blast (CE up to mod): 2d6 per CE",
     "sort": 100000,
     "activation": {
      "type": "action",
@@ -61,7 +74,8 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "max(@abilities.wis.mod, @abilities.cha.mod)"
      },
      "spellSlot": false
     },
@@ -73,7 +87,8 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
@@ -84,6 +99,9 @@
     "attack": {
      "ability": "spellcasting",
      "bonus": "",
+     "critical": {
+      "threshold": null
+     },
      "flat": false,
      "type": {
       "value": "ranged",
@@ -105,11 +123,106 @@
         "formula": ""
        },
        "scaling": {
-        "number": 1
+        "number": 2
        }
       }
      ]
     }
+   },
+   "1lDXWLqUokGXp06u": {
+    "_id": "1lDXWLqUokGXp06u",
+    "type": "heal",
+    "name": "Defensive Form (bonus action): temp HP = 2 × current CE",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "WJYeRf3VVpe8bQ68",
+      "onSave": false
+     }
+    ],
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "",
+     "types": [
+      "temphp"
+     ],
+     "custom": {
+      "enabled": true,
+      "formula": "2 * (@resources.tertiary.value || 0)"
+     },
+     "scaling": {}
+    }
+   },
+   "QpQH07Xh1euY8cqp": {
+    "_id": "QpQH07Xh1euY8cqp",
+    "type": "utility",
+    "name": "Divebomb (bonus action, CE up to mod)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "max(@abilities.wis.mod, @abilities.cha.mod)"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "ROz6pRc4EUZL60aF",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -148,46 +261,100 @@
  "flags": {
   "jjk5e": {
    "ceSteps": {
-    "ttjyPQhLJHFeGaog": 1
+    "2lr4Xtp24Jv8ajRW": 1,
+    "QpQH07Xh1euY8cqp": 1
    },
    "ceCosts": {
-    "ttjyPQhLJHFeGaog": 1
+    "ttjyPQhLJHFeGaog": 1,
+    "2lr4Xtp24Jv8ajRW": 1,
+    "QpQH07Xh1euY8cqp": 1
    },
    "technique": "Triple Core",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "One core form at a time (1 minute). Defensive temp HP uses your CE resource: uses the CE resource slot (tertiary by default).",
+   "automation": "automated"
   }
  },
  "folder": "IyJg53UICeEoqtxa",
  "effects": [
   {
-   "_id": "Uw7DxNjlqswkMpNe",
-   "name": "First Core (toggle)",
+   "_id": "KZlakpUXwZ2WnbKK",
+   "name": "Unblockable",
    "img": "modules/jjk5e/icons/techniques/triple-core.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Ignores its resistance to this hit; if it had none, it is vulnerable (double the damage).</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Triple Core"
+    },
+    "dae": {
+     "specialDuration": [
+      "isDamaged"
+     ]
+    }
+   },
+   "_key": "!items.effects!bWsg0w91O42mU8As.KZlakpUXwZ2WnbKK"
+  },
+  {
+   "_id": "WJYeRf3VVpe8bQ68",
+   "name": "Defensive Form",
+   "img": "modules/jjk5e/icons/techniques/triple-core.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Refresh the temp HP for 1 CE at the start of your turn.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Triple Core"
+    }
+   },
+   "_key": "!items.effects!bWsg0w91O42mU8As.WJYeRf3VVpe8bQ68"
+  },
+  {
+   "_id": "ROz6pRc4EUZL60aF",
+   "name": "Divebomb",
+   "img": "modules/jjk5e/icons/techniques/triple-core.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>+10 ft per CE, +2 AC; +1d4 per 15 ft straight-line approach on a melee hit.</p>",
    "changes": [
     {
      "key": "system.attributes.movement.walk",
      "mode": 2,
-     "value": "10",
-     "priority": null
+     "value": "+ (10 * (@scaling + 1))",
+     "priority": 20
     },
     {
      "key": "system.attributes.ac.bonus",
      "mode": 2,
      "value": "+2",
-     "priority": null
+     "priority": 20
     }
    ],
-   "transfer": true,
-   "disabled": true,
-   "duration": {},
-   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "duration": {
+    "rounds": 10
+   },
    "flags": {
     "jjk5e": {
-     "auto": "toggle"
+     "technique": "Triple Core"
     }
    },
-   "_key": "!items.effects!bWsg0w91O42mU8As.Uw7DxNjlqswkMpNe"
+   "_key": "!items.effects!bWsg0w91O42mU8As.ROz6pRc4EUZL60aF"
   }
  ],
  "_key": "!items!bWsg0w91O42mU8As"

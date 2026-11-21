@@ -55,7 +55,13 @@
     "duration": {
      "units": "inst",
      "override": true
-    }
+    },
+    "effects": [
+     {
+      "_id": "Vw6hsjBsGmbZY7cr",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -111,9 +117,32 @@
    },
    "technique": "Vairocana",
    "reversal": true,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "CpSgW3tLoueRa6XV",
- "_key": "!items!bUI5DQpp7zvbRciW"
+ "_key": "!items!bUI5DQpp7zvbRciW",
+ "effects": [
+  {
+   "_id": "Vw6hsjBsGmbZY7cr",
+   "name": "Cosmic Genesis rule",
+   "img": "modules/jjk5e/icons/techniques/vairocana.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>A new rule of reality applies here (describe it).</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Vairocana"
+    }
+   },
+   "_key": "!items.effects!bUI5DQpp7zvbRciW.Vw6hsjBsGmbZY7cr"
+  }
+ ]
 }

@@ -19,7 +19,7 @@
    "Lu6UGCZdxpVaSSdR": {
     "_id": "Lu6UGCZdxpVaSSdR",
     "type": "utility",
-    "name": "Action (8 CE)",
+    "name": "Teleport spell to a mark (8 CE, exact)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -35,8 +35,7 @@
      "spellSlot": false
     },
     "range": {
-     "value": "5",
-     "units": "ft",
+     "units": "any",
      "override": true
     },
     "target": {
@@ -49,6 +48,64 @@
     "duration": {
      "units": "inst",
      "override": true
+    }
+   },
+   "dAzQeggwaJmbasVJ": {
+    "_id": "dAzQeggwaJmbasVJ",
+    "type": "save",
+    "name": "Teleport an unwilling creature (CE save)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "Uw4SxkLzIDlb3WOK",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "wis",
+      "cha"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
     }
    }
   },
@@ -95,13 +152,37 @@
  "flags": {
   "jjk5e": {
    "ceCosts": {
-    "Lu6UGCZdxpVaSSdR": 8
+    "Lu6UGCZdxpVaSSdR": 8,
+    "dAzQeggwaJmbasVJ": 2
    },
    "technique": "Teleportation",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "1SK1DEKKg87PUQf6",
- "_key": "!items!HNOXHeofJKDjUaXx"
+ "_key": "!items!HNOXHeofJKDjUaXx",
+ "effects": [
+  {
+   "_id": "Uw4SxkLzIDlb3WOK",
+   "name": "Teleported to a mark",
+   "img": "modules/jjk5e/icons/techniques/teleportation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Failed: teleported to one of your marks.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Teleportation"
+    }
+   },
+   "_key": "!items.effects!HNOXHeofJKDjUaXx.Uw4SxkLzIDlb3WOK"
+  }
+ ]
 }

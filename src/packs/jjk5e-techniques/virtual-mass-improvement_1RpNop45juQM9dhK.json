@@ -24,9 +24,56 @@
  "flags": {
   "jjk5e": {
    "technique": "Star Rage",
-   "level": 6
+   "level": 6,
+   "automationNotes": "Up to 3 × CE mod mass; with 5+ mass: advantage on STR/CON checks and saves, +1 per further mass.",
+   "automation": "automated"
   }
  },
  "folder": "21st6P4AJoi9hlmG",
- "_key": "!items!1RpNop45juQM9dhK"
+ "_key": "!items!1RpNop45juQM9dhK",
+ "effects": [
+  {
+   "_id": "bLeE5OagcRz1MbXo",
+   "name": "Virtual Mass: Increased Strength (toggle)",
+   "img": "modules/jjk5e/icons/techniques/star-rage.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": true,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.advantage.ability.save.str",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.advantage.ability.save.con",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.advantage.ability.check.str",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.advantage.ability.check.con",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": "Star Rage"
+    }
+   },
+   "_key": "!items.effects!1RpNop45juQM9dhK.bLeE5OagcRz1MbXo"
+  }
+ ]
 }

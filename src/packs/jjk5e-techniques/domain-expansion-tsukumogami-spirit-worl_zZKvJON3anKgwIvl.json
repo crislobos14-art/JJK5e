@@ -58,6 +58,84 @@
      "concentration": false,
      "override": true
     }
+   },
+   "pIuBbs0OqgqmowsM": {
+    "_id": "pIuBbs0OqgqmowsM",
+    "type": "utility",
+    "name": "Domain: others' weapon attacks miss",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "g2hi2GmdMoNHjQQd",
+      "onSave": false
+     }
+    ]
+   },
+   "trP9Vf5Q2197anFz": {
+    "_id": "trP9Vf5Q2197anFz",
+    "type": "utility",
+    "name": "Initiative 20: all Floating Tools attack (or Wind Scythe)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
    }
   },
   "uses": {
@@ -116,9 +194,45 @@
     "VlPB9t0LmWOIBZvO": 20
    },
    "domainActivity": "VlPB9t0LmWOIBZvO",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "7tmhlm7tDflRZlKD",
- "_key": "!items!zZKvJON3anKgwIvl"
+ "_key": "!items!zZKvJON3anKgwIvl",
+ "effects": [
+  {
+   "_id": "g2hi2GmdMoNHjQQd",
+   "name": "Tsukumogami (weapons fail)",
+   "img": "modules/jjk5e/icons/techniques/tool-manipulation-domain.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.fail.attack.mwak",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.fail.attack.rwak",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Tool Manipulation"
+    }
+   },
+   "_key": "!items.effects!zZKvJON3anKgwIvl.g2hi2GmdMoNHjQQd"
+  }
+ ]
 }

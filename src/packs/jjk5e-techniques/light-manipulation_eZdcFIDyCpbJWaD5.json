@@ -42,7 +42,14 @@
      "units": "ft",
      "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
     },
@@ -69,7 +76,7 @@
    "9RB9GWZCe7RgRGt9": {
     "_id": "9RB9GWZCe7RgRGt9",
     "type": "save",
-    "name": "Reaction (2 CE)",
+    "name": "Light Ridge (2 CE): attacker misses and is blinded",
     "sort": 100000,
     "activation": {
      "type": "reaction",
@@ -84,13 +91,16 @@
     },
     "range": {
      "value": "10",
-     "units": "ft"
+     "units": "ft",
+     "override": true
     },
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
-     }
+      "count": "1",
+      "choice": true
+     },
+     "override": true
     },
     "duration": {
      "units": "inst"
@@ -112,14 +122,18 @@
      {
       "_id": "DP2DF3UP2G9hCl20",
       "onSave": false
+     },
+     {
+      "_id": "1pbcRJjj4RUqqeng",
+      "onSave": false
      }
     ],
-    "useConditionText": "false"
+    "useConditionText": "reaction === \"isAttacked\""
    },
    "Yvnov7vqStqVLRed": {
     "_id": "Yvnov7vqStqVLRed",
     "type": "save",
-    "name": "Bonus Action (6 CE)",
+    "name": "Summon Dispelling (½ CR CE): summoner's CE save",
     "sort": 200000,
     "activation": {
      "type": "bonus",
@@ -133,27 +147,25 @@
      }
     },
     "range": {
-     "units": "self"
+     "value": "120",
+     "units": "ft",
+     "override": true
     },
     "target": {
-     "template": {
-      "type": "radius",
-      "size": "20",
-      "units": "ft",
-      "count": "1",
-      "contiguous": false
-     },
      "affects": {
       "type": "creature",
-      "choice": false
-     }
+      "count": "1",
+      "choice": true
+     },
+     "override": true
     },
     "duration": {
      "units": "inst"
     },
     "save": {
      "ability": [
-      "con"
+      "wis",
+      "cha"
      ],
      "dc": {
       "calculation": "spellcasting",
@@ -163,7 +175,13 @@
     "damage": {
      "onSave": "none",
      "parts": []
-    }
+    },
+    "effects": [
+     {
+      "_id": "MBG1RGiFimhYF2gC",
+      "onSave": false
+     }
+    ]
    }
   }
  },
@@ -188,7 +206,8 @@
       "Ten Shadows"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "effects": [
@@ -199,14 +218,7 @@
    "statuses": [
     "blinded"
    ],
-   "changes": [
-    {
-     "key": "flags.midi-qol.OverTime",
-     "mode": 0,
-     "value": "turn=end, saveAbility=con, saveDC=JJKORIGINDC, saveCount=1-, label=\"Blinded (Light Manipulation)\"",
-     "priority": 20
-    }
-   ],
+   "changes": [],
    "transfer": false,
    "disabled": false,
    "duration": {},
@@ -214,6 +226,11 @@
    "flags": {
     "jjk5e": {
      "condition": "blinded"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnEndSource"
+     ]
     }
    },
    "_key": "!items.effects!eZdcFIDyCpbJWaD5.YFaDKHCHPR8uZuoE"
@@ -225,14 +242,7 @@
    "statuses": [
     "blinded"
    ],
-   "changes": [
-    {
-     "key": "flags.midi-qol.OverTime",
-     "mode": 0,
-     "value": "turn=end, saveAbility=con, saveDC=JJKORIGINDC, saveCount=1-, label=\"Blinded (Light Manipulation)\"",
-     "priority": 20
-    }
-   ],
+   "changes": [],
    "transfer": false,
    "disabled": false,
    "duration": {},
@@ -240,9 +250,80 @@
    "flags": {
     "jjk5e": {
      "condition": "blinded"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnEndSource"
+     ]
     }
    },
    "_key": "!items.effects!eZdcFIDyCpbJWaD5.DP2DF3UP2G9hCl20"
+  },
+  {
+   "_id": "1pbcRJjj4RUqqeng",
+   "name": "Light Ridge: attack misses",
+   "img": "modules/jjk5e/icons/techniques/ten-shadows.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.fail.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Ten Shadows"
+    },
+    "dae": {
+     "specialDuration": [
+      "1Attack"
+     ]
+    }
+   },
+   "_key": "!items.effects!eZdcFIDyCpbJWaD5.1pbcRJjj4RUqqeng"
+  },
+  {
+   "_id": "MBG1RGiFimhYF2gC",
+   "name": "Summon inverted",
+   "img": "modules/jjk5e/icons/techniques/ten-shadows.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [
+    "incapacitated"
+   ],
+   "description": "<p>Fail by 5+: unsummoned for CE mod rounds.</p>",
+   "changes": [
+    {
+     "key": "system.attributes.movement.all",
+     "mode": 0,
+     "value": "0",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Ten Shadows"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnEndSource"
+     ]
+    }
+   },
+   "_key": "!items.effects!eZdcFIDyCpbJWaD5.MBG1RGiFimhYF2gC"
   }
  ],
  "folder": "sHDJB680OC5pd1by",

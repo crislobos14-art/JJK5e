@@ -58,6 +58,65 @@
      "concentration": false,
      "override": true
     }
+   },
+   "zc83Z4xZ0oRGbiUa": {
+    "_id": "zc83Z4xZ0oRGbiUa",
+    "type": "damage",
+    "name": "Initiative 20: full Improved Resonance on all",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "enemy",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "E6HRgeDrCN9HUMiW",
+      "onSave": false
+     }
+    ],
+    "damage": {
+     "parts": [
+      {
+       "number": null,
+       "denomination": 12,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "(2 * max(@abilities.wis.mod, @abilities.cha.mod) + @prof)d12"
+       },
+       "scaling": {}
+      }
+     ]
+    }
    }
   },
   "uses": {
@@ -116,9 +175,34 @@
     "QkS287LpGr22Dfps": 20
    },
    "domainActivity": "QkS287LpGr22Dfps",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "YmMAY3fFTK6UIkG2",
- "_key": "!items!5cJeAI1z9NwuCHIx"
+ "_key": "!items!5cJeAI1z9NwuCHIx",
+ "effects": [
+  {
+   "_id": "E6HRgeDrCN9HUMiW",
+   "name": "Prone (Wara Ningyo)",
+   "img": "modules/jjk5e/icons/techniques/straw-doll-technique-domain.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [
+    "prone"
+   ],
+   "description": "",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Straw Doll Technique"
+    }
+   },
+   "_key": "!items.effects!5cJeAI1z9NwuCHIx.E6HRgeDrCN9HUMiW"
+  }
+ ]
 }

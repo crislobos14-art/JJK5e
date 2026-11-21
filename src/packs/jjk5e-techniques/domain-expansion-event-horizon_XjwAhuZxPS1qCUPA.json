@@ -39,6 +39,10 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "enemy",
+      "choice": false
+     },
      "override": true
     },
     "duration": {
@@ -171,7 +175,8 @@
     "qJtwkBijxCyLQTMG": 20
    },
    "domainActivity": "qJtwkBijxCyLQTMG",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "effects": [
@@ -182,10 +187,25 @@
    "statuses": [
     "prone"
    ],
-   "changes": [],
+   "changes": [
+    {
+     "key": "system.attributes.movement.all",
+     "mode": 1,
+     "value": "0.25",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "priority": 20,
+     "value": "turn=start, saveAbility=str, saveDC=JJKORIGINDC, label=Event Horizon (Athletics to stand)"
+    }
+   ],
    "transfer": false,
    "disabled": false,
-   "duration": {},
+   "duration": {
+    "rounds": 10
+   },
    "description": "",
    "flags": {
     "jjk5e": {

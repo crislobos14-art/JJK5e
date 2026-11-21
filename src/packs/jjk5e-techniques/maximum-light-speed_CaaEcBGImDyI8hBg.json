@@ -35,10 +35,22 @@
      "spellSlot": false
     },
     "range": {
-     "units": "spec",
+     "units": "self",
      "override": true
     },
     "target": {
+     "template": {
+      "type": "line",
+      "size": "120",
+      "width": "5",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
      "override": true
     },
     "duration": {
@@ -80,6 +92,60 @@
       "onSave": false
      }
     ]
+   },
+   "BGCv2fqxUr3ijgOo": {
+    "_id": "BGCv2fqxUr3ijgOo",
+    "type": "save",
+    "name": "Per thing passed through: CON vs your own DC",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "bdyobhpKI0PKYbzv",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
    }
   },
   "uses": {
@@ -122,7 +188,8 @@
    },
    "technique": "████ and Light",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "effects": [
@@ -144,6 +211,26 @@
     }
    },
    "_key": "!items.effects!CaaEcBGImDyI8hBg.RpXhPAFUcVYnE2eE"
+  },
+  {
+   "_id": "bdyobhpKI0PKYbzv",
+   "name": "Body tearing",
+   "img": "modules/jjk5e/icons/techniques/and-light.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Failed: you take damage from moving through it (GM).</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "████ and Light"
+    }
+   },
+   "_key": "!items.effects!CaaEcBGImDyI8hBg.bdyobhpKI0PKYbzv"
   }
  ],
  "folder": "IGfpCBBJLQfBc6m2",

@@ -19,10 +19,10 @@
    "yEvqd8kYWry0gKIl": {
     "_id": "yEvqd8kYWry0gKIl",
     "type": "utility",
-    "name": "Action (1 CE)",
+    "name": "Entropy (1 CE, start of turn)",
     "sort": 0,
     "activation": {
-     "type": "action",
+     "type": "special",
      "value": 1,
      "condition": "",
      "override": true
@@ -87,7 +87,8 @@
    },
    "technique": "Vairocana",
    "reversal": true,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "CpSgW3tLoueRa6XV",

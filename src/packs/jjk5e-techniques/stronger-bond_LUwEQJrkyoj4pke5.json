@@ -19,12 +19,67 @@
    "value": "class",
    "subtype": ""
   },
-  "requirements": "Vengeful Spirit Manipulation 11"
+  "requirements": "Vengeful Spirit Manipulation 11",
+  "activities": {
+   "p73MJidW6K4tAPtY": {
+    "_id": "p73MJidW6K4tAPtY",
+    "type": "heal",
+    "name": "Spirit summoned: temp HP = half your current HP",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "",
+     "types": [
+      "temphp"
+     ],
+     "custom": {
+      "enabled": true,
+      "formula": "floor(@attributes.hp.value / 2)"
+     },
+     "scaling": {}
+    }
+   }
+  }
  },
  "flags": {
   "jjk5e": {
    "technique": "Vengeful Spirit Manipulation",
-   "level": 11
+   "level": 11,
+   "automationNotes": "Spirit: +2 to two abilities (and max). You: +2 CE score while it's summoned (edit the actor).",
+   "automation": "automated"
   }
  },
  "folder": "fx5WSQ1mGtKNDLmm",

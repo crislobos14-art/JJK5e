@@ -18,9 +18,10 @@
   "activities": {
    "gmSJPcsVfWBCCoiy": {
     "_id": "gmSJPcsVfWBCCoiy",
-    "type": "utility",
-    "name": "Special",
+    "type": "save",
+    "name": "Big hit: DC 20 WIS or the spirit manifests",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "special",
      "value": null,
@@ -28,34 +29,47 @@
      "override": true
     },
     "consumption": {
-     "targets": [
-      {
-       "type": "itemUses",
-       "target": "",
-       "value": "1"
-      }
-     ],
+     "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
-    },
-    "range": {
-     "value": "200",
-     "units": "ft",
-     "override": true
-    },
-    "target": {
-     "affects": {
-      "type": "creature",
-      "count": "1"
-     },
-     "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
-    }
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "nMrdRLBFn8u6YbM9",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "wis"
+     ],
+     "dc": {
+      "calculation": "",
+      "formula": "20"
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    },
+    "useConditionText": "reaction === \"isDamaged\""
    }
   },
   "uses": {
@@ -107,9 +121,33 @@
   "jjk5e": {
    "technique": "Vengeful Spirit Manipulation",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Trigger: damage above your level + CE mod. Spirit acts berserk on your turn, charmed by you, within 200 ft.",
+   "automation": "automated"
   }
  },
  "folder": "fx5WSQ1mGtKNDLmm",
- "_key": "!items!QpphinJEtE0mIWIf"
+ "_key": "!items!QpphinJEtE0mIWIf",
+ "effects": [
+  {
+   "_id": "nMrdRLBFn8u6YbM9",
+   "name": "Vengeful Spirit loose",
+   "img": "modules/jjk5e/icons/techniques/vengeful-spirit-manipulation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Failed WIS: your spirit manifests berserk.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Vengeful Spirit Manipulation"
+    }
+   },
+   "_key": "!items.effects!QpphinJEtE0mIWIf.nMrdRLBFn8u6YbM9"
+  }
+ ]
 }

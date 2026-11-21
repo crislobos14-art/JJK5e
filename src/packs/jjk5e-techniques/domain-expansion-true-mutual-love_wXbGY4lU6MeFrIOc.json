@@ -58,6 +58,42 @@
      "concentration": false,
      "override": true
     }
+   },
+   "yoaWIwKA6Doz07c7": {
+    "_id": "yoaWIwKA6Doz07c7",
+    "type": "utility",
+    "name": "Initiative 20: extra action for a copied technique (all hostiles)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
    }
   },
   "uses": {
@@ -116,7 +152,9 @@
     "0vPM0TTqHOBPGPlY": 20
    },
    "domainActivity": "0vPM0TTqHOBPGPlY",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Copied techniques cost no CE inside the domain.",
+   "automation": "automated"
   }
  },
  "folder": "fx5WSQ1mGtKNDLmm",

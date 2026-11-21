@@ -3,13 +3,13 @@
 > Generado desde el compendio y las fuentes. **No certifica ejecución en Foundry ni fidelidad semántica a cada regla**.
 
 - Spells examinados: **360**; técnicas agrupadas: **81**.
-- Utilidad sin efecto configurado: revisar lógica: **25**.
-- Utilidad con efecto: comprobar activación: **2**.
-- Dominio genérico: resolver propiedades particulares: **9**.
-- Salvación sin daño/efecto automático: **10**.
-- Ataque sin daño propio: comprobar intención: **7**.
-- Mecánica configurada; falta prueba Foundry: **22**.
-- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **285**.
+- Utilidad sin efecto configurado: revisar lógica: **0**.
+- Utilidad con efecto: comprobar activación: **0**.
+- Dominio genérico: resolver propiedades particulares: **0**.
+- Salvación sin daño/efecto automático: **0**.
+- Ataque sin daño propio: comprobar intención: **0**.
+- Mecánica configurada; falta prueba Foundry: **0**.
+- Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry: **360**.
 
 ## Interpretación
 
@@ -115,7 +115,7 @@
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Comedy | 1 | utility:Action (1 CE); save:Regain control (end of turn, DC 15 WIS); utility:Gag dodge — Reaction (1 CE) | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/comedy_Jl4NsvTGrLe6S2DE.json) |
+| Comedy | 1 | utility:Action (1 CE); save:Regain control (end of turn, DC 15 WIS); utility:Gag dodge — Reaction (1 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/comedy_Jl4NsvTGrLe6S2DE.json) |
 | Commit to the Bit | 3 | utility:Blasting Off — on a melee hit (1 CE); utility:Props — Bonus Action (2 CE); save:Powerful Punchline (3 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/commit-to-the-bit_ddEwns90CtDAv2iC.json) |
 | Maximum: Peak Comedy | 11 | utility:Action (10 CE); damage:Punchline: extra dice (2 CE); save:Cutaway (Action) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/maximum-peak-comedy_8lD36BfUqndCBmNA.json) |
 | Domain Expansion: Stand Up Comedy | 18 | damage:Booed (once per round); utility:Expand Domain (20 CE); utility:Initiative 20: cutaway; utility:Tell a joke (full turn): Persuasion vs Insight | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-stand-up-comedy_kCIBMzUknW2TOySQ.json) |
@@ -177,11 +177,11 @@
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Cursed Spirit Absorption | 1 | utility:Absorb a cursed spirit (1 CE, action/reaction); save:Bonus Action | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/cursed-spirit-absorption_xSoW2QmMDoKA0mY2.json) |
+| Cursed Spirit Absorption | 1 | utility:Absorb a cursed spirit (1 CE, action/reaction); save:Bonus Action | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/cursed-spirit-absorption_xSoW2QmMDoKA0mY2.json) |
 | Curse Infused Spirits | 3 | heal:Sacrifice a spirit: reduce damage (X CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/curse-infused-spirits_sJ7cTapmdLmiABwi.json) |
 | Perfect Control | 6 | utility:Summon cursed spirit (bonus action) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/perfect-control_W0HmlfoJxTJqDsPv.json) |
 | Maximum: Uzumaki | 11 | save:Uzumaki (2+ spirits) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/maximum-uzumaki_GcIm0q24VQZQPjMl.json) |
-| Domain Expansion: Womb Profusion | 18 | utility:Expand Domain (20 CE); save:Absorb cursed spirits | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/domain-expansion-womb-profusion_F55gMSM27KKH5qPV.json) |
+| Domain Expansion: Womb Profusion | 18 | utility:Expand Domain (20 CE); save:Absorb cursed spirits | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-womb-profusion_F55gMSM27KKH5qPV.json) |
 
 ### Cursed Transmutation (5 spells)
 
@@ -208,7 +208,7 @@
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
 | Judge’s Gavel | 1 | utility:Action (1 CE); utility:Use (limited, no CE); attack:Gavel: Light hammer; attack:Gavel: Maul; attack:Gavel: Pole hammer (reach) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/judge-s-gavel_BP2dCOForc7QrwFI.json) |
-| Domain Expansion: Deadly Sentencing | 3 | utility:Evidence roll (d20); utility:Expand Domain (20 CE); utility:Trial: contested Persuasion; utility:Sentence: Confiscation; attack:Executioner's Sword (kills on hit); utility:Domain: no offensive actions | Ataque sin daño propio: comprobar intención | [JSON](../src/packs/jjk5e-techniques/domain-expansion-deadly-sentencing_EdkOzraQgWFnQMJT.json) |
+| Domain Expansion: Deadly Sentencing | 3 | utility:Evidence roll (d20); utility:Expand Domain (20 CE); utility:Trial: contested Persuasion; utility:Sentence: Confiscation; attack:Executioner's Sword (kills on hit); utility:Domain: no offensive actions | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-deadly-sentencing_EdkOzraQgWFnQMJT.json) |
 | Gavel Improvements | 6 | utility:Action (2 CE); save:Action | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/gavel-improvements_HrqIX9ihcD7nvEPE.json) |
 | Unstopping Justice | 18 | utility:Free Deadly Sentencing (CE mod per long rest) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/unstopping-justice_bxSurrzBgl0GtcSQ.json) |
 
@@ -249,7 +249,7 @@
 | Forests of Disaster | 1 | save:Binding Plants (1 CE); utility:Wall of Roots (reaction, 1 CE); save:Piercing Roots (1 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/forests-of-disaster_rXXHBBI0bIPLLHsu.json) |
 | Root Bundle | 3 | attack:Send a ball (bonus action); utility:Create two wooden balls (2 CE); utility:Stand on a ball (bonus action) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/root-bundle_u7p2yaIifyDSZYtW.json) |
 | Flower Field | 6 | save:Action (5 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/flower-field_MLLR1v3HhPAmTEO8.json) |
-| Cursed Buds | 11 | attack:Cursed buds (6 CE): one attack per bud; utility:Bud tree (10 CE): one bud at each hostile within 30 ft | Ataque sin daño propio: comprobar intención | [JSON](../src/packs/jjk5e-techniques/cursed-buds_rAbsflTzfT1qFbq4.json) |
+| Cursed Buds | 11 | attack:Cursed buds (6 CE): one attack per bud; utility:Bud tree (10 CE): one bud at each hostile within 30 ft | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/cursed-buds_rAbsflTzfT1qFbq4.json) |
 | Domain Expansion: Ceremonial Sea of Light | 18 | damage:Initiative 20: Flower Field + 2d4 necrotic; utility:Expand Domain (20 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-ceremonial-sea-of-light_7clE8rWvh6MVK4iK.json) |
 
 ### Disaster Vermin (4 spells)
@@ -282,9 +282,9 @@
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Excavation | 1 | save:Stone cubes (1 CE each, up to CE mod) | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/excavation_AQpmy5BZluKFUBx2.json) |
+| Excavation | 1 | save:Stone cubes (1 CE each, up to CE mod) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/excavation_AQpmy5BZluKFUBx2.json) |
 | Sculpted Earth | 3 | attack:Rock Blast (1 CE); save:Tremor (3 CE); attack:Rock Blast, necrotic (2 CE); utility:Earthen Armor (1 CE per +1 AC, max prof) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/sculpted-earth_CZ2e6aKrHci9L2Qq.json) |
-| Wall of Stone | 6 | utility:Wall of Stone (4 CE, ten 10×10 panels); save:Move panels 30 ft (1 CE, DEX or pushed) | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/wall-of-stone_G5JohGkx3AABfoyH.json) |
+| Wall of Stone | 6 | utility:Wall of Stone (4 CE, ten 10×10 panels); save:Move panels 30 ft (1 CE, DEX or pushed) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/wall-of-stone_G5JohGkx3AABfoyH.json) |
 | Stone Arms | 11 | save:Action (5 CE); utility:Keep arms (1 CE, start of turn); save:Crush restrained target | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/stone-arms_pTdglNHJKLO2Srb0.json) |
 | Domain Expansion: Trichiliocosm | 18 | damage:Initiative 20: 6d12 + restrained; utility:Expand Domain (20 CE); utility:Reshape: 20-ft chasm (1d10 × 10 ft deep); damage:Spiked terrain: 2d4 per 5 ft moved | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-trichiliocosm_UrKH3JnnRbRhWS8Q.json) |
 
@@ -305,7 +305,7 @@
 | Cursed Painting | 1 | save:Cursed Painting (1 CE): DEX or sucked in; utility:Keep creatures inside (1 CE, start of turn) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/cursed-painting_uTkKYysExKqyTfA0.json) |
 | Impasto Canvas | 3 | save:Ink trap; utility:Ink Shikigami: Ink Wolves (1 CE each); utility:Exit Shift (80 ft); utility:Difficult terrain (15 ft); utility:Structure Generation (30 ft cube) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/impasto-canvas_geIiULNWftqTgOLM.json) |
 | Sgraffito | 6 | save:Ink Wave (2 CE): 30-ft cone; utility:Greater Ink Wolf (2 CE); utility:Ink Crow (3 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/sgraffito_kxqSZAEhS2KvXJZa.json) |
-| Panoramic Composition | 11 | save:Panoramic Composition (1 CE per creature) | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/panoramic-composition_1j8EyDLkddYqXHmE.json) |
+| Panoramic Composition | 11 | save:Panoramic Composition (1 CE per creature) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/panoramic-composition_1j8EyDLkddYqXHmE.json) |
 | Domain Expansion: Magnum Opus | 18 | utility:Expand Domain (20 CE); utility:Initiative 20: two Impasto Canvas effects | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-magnum-opus_kUgWQuaoTcYppNWF.json) |
 
 ### Explosive Flesh (5 spells)
@@ -405,7 +405,7 @@
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
 | Cursed Illusion | 1 | save:Action (2 CE); save:First distorted face: INT or confused | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/cursed-illusion_wFUB8DfdT2QqwFQg.json) |
-| Self Distortion | 3 | attack:Phase Fist (3 CE): phantom attack at disadvantage; utility:Blurring (3 CE); utility:Distorting Disguise (3 CE) | Ataque sin daño propio: comprobar intención | [JSON](../src/packs/jjk5e-techniques/self-distortion_7vtgeOWGHfDsoDM5.json) |
+| Self Distortion | 3 | attack:Phase Fist (3 CE): phantom attack at disadvantage; utility:Blurring (3 CE); utility:Distorting Disguise (3 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/self-distortion_7vtgeOWGHfDsoDM5.json) |
 | Object Distortion | 6 | damage:Bump into invisible object: 1d6, lose reaction; utility:Make it invisible (+3 CE); utility:Distort object (1–10 CE by size) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/object-distortion_nj6asjw6WgTG2Vst.json) |
 | Illusive Terrain | 11 | utility:Action (10 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/illusive-terrain_HlWRvtMxlN8OCQD9.json) |
 | Domain Expansion: House of Mirrors | 18 | utility:Redirect an attack (roll for new target); utility:Expand Domain (20 CE); save:Initiative 20: illusion on everyone (CHA) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-house-of-mirrors_TDn8CRNZOzsQlu56.json) |
@@ -570,14 +570,14 @@
 | Reversion | 1 | utility:Reversion (1 CE): reroll your attack/save; utility:Reversion on a creature within 30 ft (+2 CE, no bonus) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/reversion_W67pztE5YzdQ8tVp.json) |
 | Regression | 3 | utility:Regression (3 CE): retrace to turn start; save:Blocking creature (DEX): prof d8 + pushed; utility:Regress to previous turn start (+3 CE, 6th) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/regression_54dzavXGzF80Hu5T.json) |
 | Enhanced Reversion | 6 | utility:Reversion without a reaction (prof per round); utility:Reroll with advantage (+3 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/enhanced-reversion_HFuaDzzNauD0VMjN.json) |
-| Invert Causality | 11 | attack:Invert Causality (8 CE): rewind and strike first | Ataque sin daño propio: comprobar intención | [JSON](../src/packs/jjk5e-techniques/invert-causality_mnTFpMXKYAUFX5Aw.json) |
+| Invert Causality | 11 | attack:Invert Causality (8 CE): rewind and strike first | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/invert-causality_mnTFpMXKYAUFX5Aw.json) |
 | Domain Expansion: Requiem of Retrograde | 18 | utility:Expand Domain (20 CE); utility:Initiative 20: reverse a creature's first act | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-requiem-of-retrograde_hgum5VAcDalK1FTK.json) |
 
 ### Rockstar (5 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Sound Amplification | 1 | attack:Sound Blast (1 CE); save:Sound Blast push (STR or 10 ft) | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/sound-amplification_wmS4XVAE6EL1dJ17.json) |
+| Sound Amplification | 1 | attack:Sound Blast (1 CE); save:Sound Blast push (STR or 10 ft) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/sound-amplification_wmS4XVAE6EL1dJ17.json) |
 | Jacked Audio | 3 | utility:Extra Sound Blast (1 CE each; 2, or 3 at 11th) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/jacked-audio_EJxDOAJZ1UjcbLR9.json) |
 | Resonating Music | 6 | save:Action (5 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/resonating-music_YMUit2oYBKZFVC0u.json) |
 | Maximum: Epic Solo | 11 | utility:Epic Solo (8 CE, +2d10 per extra CE); damage:Solo aura: ends turn within 15 ft | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/maximum-epic-solo_2KYLeuvZfdjkOvzV.json) |
@@ -608,7 +608,7 @@
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Seance | 1 | heal:Seance (full turn, 2 CE per information); save:Soul Information: CHA save vs the dead (upkeep 1 CE) | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/seance_JAeKHJYaOvVKwaEI.json) |
+| Seance | 1 | heal:Seance (full turn, 2 CE per information); save:Soul Information: CHA save vs the dead (upkeep 1 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/seance_JAeKHJYaOvVKwaEI.json) |
 | Blessing of the Grateful Dead | 3 | heal:Physical channelling: temp HP (level + prof) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/blessing-of-the-grateful-dead_lF18uQBxg4fzpAp2.json) |
 | Maximum: Black Seance | 11 | heal:Overload (+5 CE after the ritual) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/maximum-black-seance_04GKHfCeCbyONYQP.json) |
 | Domain Expansion: Seance Parlor | 18 | utility:Expand Domain (20 CE); utility:Initiative 20: Seance on a willing creature (free) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-seance-parlor_emxMfPh3YWvdbE3U.json) |
@@ -637,7 +637,7 @@
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Sky Shape | 1 | utility:Sky Shape (1 CE): +4 AC; attack:Redirect a missed ranged attack; utility:Missed melee: limb stuck | Ataque sin daño propio: comprobar intención | [JSON](../src/packs/jjk5e-techniques/sky-shape_J9LNnuJcYPznq0zd.json) |
+| Sky Shape | 1 | utility:Sky Shape (1 CE): +4 AC; attack:Redirect a missed ranged attack; utility:Missed melee: limb stuck | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/sky-shape_J9LNnuJcYPznq0zd.json) |
 | Sky Armor | 3 | utility:Bonus Action (1 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/sky-armor_44NLHabuBSw6VRZ5.json) |
 | Sky Shape Improvement | 6 | utility:Redirect a cone/line save (3 CE, on success) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/sky-shape-improvement_1KKP2bcsJmg1yA0g.json) |
 | Thin Ice Breaker | 11 | save:Action (5 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/thin-ice-breaker_fr7czB9pC6rA0hCl.json) |
@@ -667,121 +667,121 @@
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Virtual Mass Increase | 1 | save:Bonus Action | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/virtual-mass-increase_IqCosBDfGxvNyaCw.json) |
-| Virtual Mass Mastery | 11 | utility:Special | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/virtual-mass-mastery_yYkcM2fCzHLvLzzr.json) |
-| Domain Expansion: Event Horizon | 18 | damage:Special; utility:Expand Domain (20 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-event-horizon_XjwAhuZxPS1qCUPA.json) |
+| Virtual Mass Increase | 1 | utility:Virtual Mass Increase (X CE = X mass); save:Mass Impact (on unarmed crit): CON or prone | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/virtual-mass-increase_IqCosBDfGxvNyaCw.json) |
+| Virtual Mass Mastery | 11 | utility:Quick activation (free action) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/virtual-mass-mastery_yYkcM2fCzHLvLzzr.json) |
+| Domain Expansion: Event Horizon | 18 | damage:Special; utility:Expand Domain (20 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-event-horizon_XjwAhuZxPS1qCUPA.json) |
 
 ### Starlight Symphony (5 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Cursed Fog | 1 | utility:Action | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/cursed-fog_rrxmgN9E1kMY4Y6C.json) |
-| Kitsune Creation | 3 | utility:Action (2 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/kitsune-creation_p2UOibKpvVVJg9bI.json) |
-| Living Fog | 6 | save:Action (3 CE); utility:Extra (3 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/living-fog_JTj0PkI6UX19MGBs.json) |
-| Inari | 11 | utility:Action (8 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/inari_orRoUK5XNH9MciAs.json) |
-| Domain Expansion: Heaven and Earth | 18 | damage:Special; utility:Expand Domain (20 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-heaven-and-earth_gKmWnQNo0RtBc5t6.json) |
+| Cursed Fog | 1 | utility:Cursed Fog (1 CE per 10 ft); utility:Fog reaction (6th): advantage/disadvantage to a roll | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/cursed-fog_rrxmgN9E1kMY4Y6C.json) |
+| Kitsune Creation | 3 | utility:Summon a fox shikigami (2 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/kitsune-creation_p2UOibKpvVVJg9bI.json) |
+| Living Fog | 6 | save:Choke a creature whose space you occupy (CON); utility:Become fog (3 CE, concentration 1 hour) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/living-fog_JTj0PkI6UX19MGBs.json) |
+| Inari | 11 | utility:Summon Inari (full turn, 8 CE, 1 minute) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/inari_orRoUK5XNH9MciAs.json) |
+| Domain Expansion: Heaven and Earth | 18 | damage:Special; utility:Expand Domain (20 CE); utility:Domain: everyone else blinded in the fog | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-heaven-and-earth_gKmWnQNo0RtBc5t6.json) |
 
 ### Straw Doll Technique (5 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Nail Projectile | 1 | attack:Action (1 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/nail-projectile_PyipLA81fAY46mo6.json) |
-| Resonance | 3 | save:Action | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/resonance_6l2g51jwQdY63PVK.json) |
-| Hair Pin | 6 | utility:Bonus Action (1 CE); save:Bonus Action | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/hair-pin_fDcXasO9qtbZEnXH.json) |
-| Improved Resonance | 11 | save:Action (6 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/improved-resonance_xVlUYlQhKObMVAM2.json) |
-| Domain Expansion: Wara Ningyo | 18 | utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-wara-ningyo_5cJeAI1z9NwuCHIx.json) |
+| Nail Projectile | 1 | attack:Nail Projectile (1 CE): one of two nail attacks; attack:Second nail (free, same action); utility:Two more nails (+2 CE; reuse the attacks) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/nail-projectile_PyipLA81fAY46mo6.json) |
+| Resonance | 3 | utility:Take a piece (reaction, Sleight of Hand vs AC); utility:Mix it into the doll (3 CE); damage:Resonate — Minor (blood/hair): disadvantage on attacks; damage:Resonate — Medium (teeth/skin/bone): no reactions; save:Resonate — Major (limb): CON or stunned 1 minute | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/resonance_6l2g51jwQdY63PVK.json) |
+| Hair Pin | 6 | utility:Drive a nail (1 CE, +1d8 per extra CE); save:Hair Pin: detonate (bonus action or reaction) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/hair-pin_fDcXasO9qtbZEnXH.json) |
+| Improved Resonance | 11 | attack:Improved Resonance (6 CE): helpless target | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/improved-resonance_xVlUYlQhKObMVAM2.json) |
+| Domain Expansion: Wara Ningyo | 18 | utility:Expand Domain (20 CE); damage:Initiative 20: full Improved Resonance on all | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-wara-ningyo_5cJeAI1z9NwuCHIx.json) |
 
 ### Technique Extermination (5 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Extinguishment | 1 | save:Action (2 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/extinguishment_ksvKQksG46ElTLQX.json) |
-| Angel’s Blessing | 3 | utility:Bonus Action (1 CE) | Utilidad con efecto: comprobar activación | [JSON](../src/packs/jjk5e-techniques/angel-s-blessing_7l4nQGOha2dpDXkG.json) |
-| Improved Extinguishment | 6 | damage:Special | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/improved-extinguishment_7ntdHb934PcYXYk5.json) |
-| Maximum: Jacob’s Ladder | 11 | save:Action (10 CE); attack:Action (6 CE) | Ataque sin daño propio: comprobar intención | [JSON](../src/packs/jjk5e-techniques/maximum-jacob-s-ladder_xwJtNVF6QPcHKkK2.json) |
-| Domain Expansion: Garden of Eden | 18 | utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-garden-of-eden_QzNVXitimr4FN9q6.json) |
+| Extinguishment | 1 | save:Action (2 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/extinguishment_ksvKQksG46ElTLQX.json) |
+| Angel’s Blessing | 3 | utility:Bonus Action (1 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/angel-s-blessing_7l4nQGOha2dpDXkG.json) |
+| Improved Extinguishment | 6 |  | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/improved-extinguishment_7ntdHb934PcYXYk5.json) |
+| Maximum: Jacob’s Ladder | 11 | save:Action (10 CE); attack:Jacob's Ladder strike (6 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/maximum-jacob-s-ladder_xwJtNVF6QPcHKkK2.json) |
+| Domain Expansion: Garden of Eden | 18 | utility:Expand Domain (20 CE); save:Initiative 20: full Jacob's Ladder on all | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-garden-of-eden_QzNVXitimr4FN9q6.json) |
 
 ### Teleportation (5 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Teleport | 1 | utility:Bonus Action (1 CE); utility:Action (2 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/teleport_XgpkqX2WVbuoEe3W.json) |
-| Improved Teleport | 3 | utility:Reaction | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/improved-teleport_BqyAkex2Rh3zkicX.json) |
-| Mastered Teleport | 6 | utility:Action (8 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/mastered-teleport_HNOXHeofJKDjUaXx.json) |
-| Improved Marking | 11 | utility:Action (5 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/improved-marking_6TuIxZgnzBdihaIn.json) |
-| Domain Expansion: Crossroads of Instance | 18 | utility:Reaction; utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-crossroads-of-instance_AiOuuvz1Ke0PUE6e.json) |
+| Teleport | 1 | utility:Mark (1 CE, touch); utility:Teleport to a mark (2 CE, unseen) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/teleport_XgpkqX2WVbuoEe3W.json) |
+| Improved Teleport | 3 | utility:Teleport as a reaction (2 CE, hidden from view) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/improved-teleport_BqyAkex2Rh3zkicX.json) |
+| Mastered Teleport | 6 | utility:Teleport spell to a mark (8 CE, exact); save:Teleport an unwilling creature (CE save) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/mastered-teleport_HNOXHeofJKDjUaXx.json) |
+| Improved Marking | 11 | utility:Permanent mark (5 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/improved-marking_6TuIxZgnzBdihaIn.json) |
+| Domain Expansion: Crossroads of Instance | 18 | utility:Teleport a creature (reaction, domain); utility:Expand Domain (20 CE); utility:Initiative 20: relocate up to 2 × CE mod creatures | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-crossroads-of-instance_AiOuuvz1Ke0PUE6e.json) |
 
 ### Ten Shadows (6 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Divine Dogs | 1 | summon:Summon 1 Divine Dog (1 CE); summon:Summon 2 Divine Dogs (2 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/divine-dogs_x65tUSq8GjFrdeNz.json) |
-| Trial | 3 | utility:Action; summon:Summon Gama (1 CE); summon:Summon Nue (2 CE); summon:Summon Great Serpent (4 CE); summon:Summon Rabbit Escape (6 CE); summon:Summon Mourning Tiger (7 CE); summon:Summon Max Elephant (8 CE); summon:Summon Round Deer (9 CE); summon:Summon Piercing Ox (10 CE); summon:Summon Mahoraga (20 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/trial_qRCrItVBtBcRJpaC.json) |
-| Totality | 3 | summon:Summon Divine Dog Totality (2 CE); summon:Summon Chimera Agito (16 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/totality_z1mJ0orAc2rvKGlW.json) |
-| Shadow Manipulation | 6 | utility:Action (1 CE); save:Bonus Action (2 CE) | Salvación sin daño/efecto automático | [JSON](../src/packs/jjk5e-techniques/shadow-manipulation_Msi6iz1TGSA7DnZl.json) |
-| Well’s Unknown Abyss | 11 | utility:Action | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/well-s-unknown-abyss_9LQ4u1eh0eGQileG.json) |
-| Domain Expansion: Chimera Shadow Garden | 18 | utility:Bonus Action; utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-chimera-shadow-garden_ico8O7Iw5bcSqC7e.json) |
+| Divine Dogs | 1 | summon:Summon 1 Divine Dog (1 CE); summon:Summon 2 Divine Dogs (2 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/divine-dogs_x65tUSq8GjFrdeNz.json) |
+| Trial | 3 | utility:Action; summon:Summon Gama (1 CE); summon:Summon Nue (2 CE); summon:Summon Great Serpent (4 CE); summon:Summon Rabbit Escape (6 CE); summon:Summon Mourning Tiger (7 CE); summon:Summon Max Elephant (8 CE); summon:Summon Round Deer (9 CE); summon:Summon Piercing Ox (10 CE); summon:Summon Mahoraga (20 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/trial_qRCrItVBtBcRJpaC.json) |
+| Totality | 3 | summon:Summon Divine Dog Totality (2 CE); summon:Summon Chimera Agito (16 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/totality_z1mJ0orAc2rvKGlW.json) |
+| Shadow Manipulation | 6 | utility:Shadow Storage: interact (1 CE); save:Trap in your shadow (2 CE): Acrobatics vs DC | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/shadow-manipulation_Msi6iz1TGSA7DnZl.json) |
+| Well’s Unknown Abyss | 11 | utility:Combine shikigami (½ base CE each, up to prof) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/well-s-unknown-abyss_9LQ4u1eh0eGQileG.json) |
+| Domain Expansion: Chimera Shadow Garden | 18 | utility:Shadow Clones (bonus action, CE); utility:Expand Domain (20 CE); save:End of turn in the domain: Acrobatics or sink; utility:Domain: Freedom of Movement | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-chimera-shadow-garden_ico8O7Iw5bcSqC7e.json) |
 
 ### Tool Manipulation (6 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Guided Control | 1 | utility:Bonus Action | Utilidad con efecto: comprobar activación | [JSON](../src/packs/jjk5e-techniques/guided-control_st3cozIWTsDaaE5B.json) |
-| Floating Tool | 3 | utility:Bonus Action (2 CE); attack:Action; utility:Extra (2 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/floating-tool_mSD3lm8nPAmP6Uez.json) |
-| Wind Scythe | 6 | save:Action (3 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/wind-scythe_gig1BD38hPdQI65H.json) |
-| Combat Tool Improvement | 6 | utility:Reaction | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/combat-tool-improvement_tqugDcnrPlxkDgBx.json) |
-| Tool Mastery | 11 | utility:Bonus Action | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/tool-mastery_c2w7ELQ8oGbTnvyF.json) |
-| Domain Expansion: Tsukumogami Spirit World | 18 | utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-tsukumogami-spirit-worl_zZKvJON3anKgwIvl.json) |
+| Guided Control | 1 | utility:Imbue held tool (1 CE per hour, up to CE mod) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/guided-control_st3cozIWTsDaaE5B.json) |
+| Floating Tool | 3 | utility:Create Floating Tool (+2 CE; 1 CE at 6th); attack:Command Floating Tool: move 35 ft and attack | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/floating-tool_mSD3lm8nPAmP6Uez.json) |
+| Wind Scythe | 6 | save:Action (3 CE); utility:11th: knocked prone | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/wind-scythe_gig1BD38hPdQI65H.json) |
+| Combat Tool Improvement | 6 | utility:Tool guard (reaction): +AC by size; heal:Tool guard: reduce damage (2d6 medium) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/combat-tool-improvement_tqugDcnrPlxkDgBx.json) |
+| Tool Mastery | 11 | utility:Command two Floating Tools (bonus action) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/tool-mastery_c2w7ELQ8oGbTnvyF.json) |
+| Domain Expansion: Tsukumogami Spirit World | 18 | utility:Expand Domain (20 CE); utility:Domain: others' weapon attacks miss; utility:Initiative 20: all Floating Tools attack (or Wind Scythe) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-tsukumogami-spirit-worl_zZKvJON3anKgwIvl.json) |
 
 ### Triple Core (3 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| First Core | 1 | utility:Action (1+ CE); attack:Action | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/first-core_bWsg0w91O42mU8As.json) |
-| Upgraded Form | 6 | utility:Bonus Action (1 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/upgraded-form_4D6hQtvYSoTdHU4R.json) |
-| Domain Expansion: Rule of Three | 18 | utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-rule-of-three_kVXEl04i6zoZvUq6.json) |
+| First Core | 1 | utility:Unblockable Blows (on melee hit, 1 CE); attack:Energy Blast (CE up to mod): 2d6 per CE; heal:Defensive Form (bonus action): temp HP = 2 × current CE; utility:Divebomb (bonus action, CE up to mod) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/first-core_bWsg0w91O42mU8As.json) |
+| Upgraded Form | 6 | utility:Divebomb upgrade: Dash/Disengage/Dodge (1 CE, bonus); heal:Defensive upgrade: reduce damage (reaction); damage:Unblockable upgrade: damage on a miss | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/upgraded-form_4D6hQtvYSoTdHU4R.json) |
+| Domain Expansion: Rule of Three | 18 | utility:Expand Domain (20 CE); utility:Domain: all three cores active | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-rule-of-three_kVXEl04i6zoZvUq6.json) |
 
 ### Vairocana (7 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Harmony | 1 | utility:Action (3 CE); utility:Action (2 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/harmony_yFuudP4sVGA43MxC.json) |
-| Chaos | 3 | utility:Action (2 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/chaos_5GIEPo1b6c1zyGl0.json) |
-| Chaos Amplification | 6 | utility:Action (1+ CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/chaos-amplification_UATRcguzxf0S7YgE.json) |
-| Balance | 11 | utility:Use | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/balance_paRshIeAw9opHQxu.json) |
-| Domain Expansion: Mandala of Mutual Paradox | 18 | utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-mandala-of-mutual-parad_yQ18DyR8axN13pwh.json) |
-| Cosmic Genesis (Reversal) | — | utility:Action (4 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/cosmic-genesis-reversal_bUI5DQpp7zvbRciW.json) |
-| Entropy (Reversal) | — | utility:Action (1 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/entropy-reversal_ZvSOk5JO7MypjFsd.json) |
+| Harmony | 1 | utility:Locate Creature (3 CE); utility:Speak with Animals / Tongues (2 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/harmony_yFuudP4sVGA43MxC.json) |
+| Chaos | 3 | attack:Chaos Bolt (2 CE); utility:Chaos (2 CE): roll the Chaos Table | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/chaos_5GIEPo1b6c1zyGl0.json) |
+| Chaos Amplification | 6 | utility:Amplify: +CE mod dice or double duration (1 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/chaos-amplification_UATRcguzxf0S7YgE.json) |
+| Balance | 11 | utility:Order / Equilibrium (prof per long rest) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/balance_paRshIeAw9opHQxu.json) |
+| Domain Expansion: Mandala of Mutual Paradox | 18 | utility:Expand Domain (20 CE); utility:Initiative 20: chosen Chaos effect (≤ 90) on chosen creatures | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-mandala-of-mutual-parad_yQ18DyR8axN13pwh.json) |
+| Cosmic Genesis (Reversal) | — | utility:Action (4 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/cosmic-genesis-reversal_bUI5DQpp7zvbRciW.json) |
+| Entropy (Reversal) | — | utility:Entropy (1 CE, start of turn) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/entropy-reversal_ZvSOk5JO7MypjFsd.json) |
 
 ### Vengeful Spirit Manipulation (4 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Partial Manifestation | 1 | attack:Additional claw attack (1 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/partial-manifestation_uBsOHGjgsss8QfcX.json) |
-| Vengeful Spirit Manifestation | 3 | utility:Special | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/vengeful-spirit-manifestation_QpphinJEtE0mIWIf.json) |
-| Mimicry | 6 | utility:Action (3 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/mimicry_PxLYScnzwfsspeiN.json) |
-| Domain Expansion: True Mutual Love | 18 | utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-true-mutual-love_wXbGY4lU6MeFrIOc.json) |
+| Partial Manifestation | 1 | attack:Additional claw attack (1 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/partial-manifestation_uBsOHGjgsss8QfcX.json) |
+| Vengeful Spirit Manifestation | 3 | save:Big hit: DC 20 WIS or the spirit manifests | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/vengeful-spirit-manifestation_QpphinJEtE0mIWIf.json) |
+| Mimicry | 6 | utility:Replicate a technique feature (3 CE, CE check); attack:Spirit claw: extract DNA (bonus action) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/mimicry_PxLYScnzwfsspeiN.json) |
+| Domain Expansion: True Mutual Love | 18 | utility:Expand Domain (20 CE); utility:Initiative 20: extra action for a copied technique (all hostiles) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-true-mutual-love_wXbGY4lU6MeFrIOc.json) |
 
 ### Voracity (5 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Hunger of the Accursed | 1 | utility:Reaction (3 CE); utility:Extra (3 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/hunger-of-the-accursed_i2elcnfEM3PqD4Xu.json) |
-| Regurgitation | 3 | utility:Bonus Action (4 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/regurgitation_r1eIkRbHNYcdzsvl.json) |
-| Digestion | 6 | utility:Action (1 CE); utility:Bonus Action (2 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/digestion_gigQp0SO5fgfeziK.json) |
-| Maximum: Body of the Devourer | 11 | utility:Action | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/maximum-body-of-the-devourer_eTQgHnQfLmlqyKNA.json) |
-| Domain Expansion: Tomb of the Devoured | 18 | utility:Expand Domain (20 CE) | Dominio genérico: resolver propiedades particulares | [JSON](../src/packs/jjk5e-techniques/domain-expansion-tomb-of-the-devoured_MVFoU6nfhwq857cp.json) |
+| Hunger of the Accursed | 1 | utility:Devour a corpse (reaction, 3 CE; 2 at 6th); utility:Steal another ability (+3 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/hunger-of-the-accursed_i2elcnfEM3PqD4Xu.json) |
+| Regurgitation | 3 | utility:Regurgitate a past ability (4 CE; 3 at 6th, 1 hour) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/regurgitation_r1eIkRbHNYcdzsvl.json) |
+| Digestion | 6 | utility:Efficiency: stolen ability costs 1 less; utility:Output: spend more CE on a stolen ability | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/digestion_gigQp0SO5fgfeziK.json) |
+| Maximum: Body of the Devourer | 11 | heal:Transform into a devoured creature (2 × CR CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/maximum-body-of-the-devourer_eTQgHnQfLmlqyKNA.json) |
+| Domain Expansion: Tomb of the Devoured | 18 | utility:Expand Domain (20 CE); utility:Initiative 20: regurgitate a devoured creature (ally) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-tomb-of-the-devoured_MVFoU6nfhwq857cp.json) |
 
 ### ████ and Light (8 spells)
 
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
-| Light Constructs | 1 | damage:Bonus Action (2 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/light-constructs_XX6Rnw19OtQjYBnb.json) |
-| Light Techniques | 3 | save:Action (3 CE); save:Action (2 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/light-techniques_HTujAuWtwUzZQr2G.json) |
-| Hyperspeed | 6 | attack:Action (1+ CE) | Ataque sin daño propio: comprobar intención | [JSON](../src/packs/jjk5e-techniques/hyperspeed_wgDtozCWclpmllfO.json) |
-| Maximum: Light Speed | 11 | save:Action (8 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/maximum-light-speed_CaaEcBGImDyI8hBg.json) |
-| Domain Expansion: Reverse Transcendence | 18 | damage:Action; utility:Expand Domain (20 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-reverse-transcendence_YkSDOUb7CYJvTBFE.json) |
-| ████ and Dark | — | utility:Action (2 CE) | Utilidad sin efecto configurado: revisar lógica | [JSON](../src/packs/jjk5e-techniques/and-dark_RyTWIhz0ek8SiIp7.json) |
-| Dark Constructs (Reversal) | — | damage:Bonus Action (4 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/dark-constructs-reversal_HXiFoYwsPXElvgDk.json) |
-| Dark Vortex (Reversal) | — | save:Action (12 CE) | Mecánica configurada; falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/dark-vortex-reversal_FbtpCHsWVTKGQ9Rk.json) |
+| Light Constructs | 1 | utility:Form a bar of light (2 CE, 1 minute); attack:Light Construct strike / throw (20/60) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/light-constructs_XX6Rnw19OtQjYBnb.json) |
+| Light Techniques | 3 | save:Rain of Light (3 CE): 10-ft radius; save:████ of Dawn (2 CE): 30 ft; save:Rain of Light (3 CE): 15-ft cone | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/light-techniques_HTujAuWtwUzZQr2G.json) |
+| Hyperspeed | 6 | attack:Light Beam (1 CE): ranged construct attack at advantage | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/hyperspeed_wgDtozCWclpmllfO.json) |
+| Maximum: Light Speed | 11 | save:Action (8 CE); save:Per thing passed through: CON vs your own DC | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/maximum-light-speed_CaaEcBGImDyI8hBg.json) |
+| Domain Expansion: Reverse Transcendence | 18 | damage:Light-speed teleport: 4d12 to a creature at either end; utility:Expand Domain (20 CE); damage:Initiative 20: 6d12 radiant to all; utility:Domain: double speed, movement can't be reacted to | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-reverse-transcendence_YkSDOUb7CYJvTBFE.json) |
+| ████ and Dark | — | utility:Darkness (2 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/and-dark_RyTWIhz0ek8SiIp7.json) |
+| Dark Constructs (Reversal) | — | utility:Form a bar of darkness (4 CE, 1 minute); attack:Dark Construct strike / throw (20/60) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/dark-constructs-reversal_HXiFoYwsPXElvgDk.json) |
+| Dark Vortex (Reversal) | — | save:Action (12 CE); save:Maintain the vortex (action): repeat the save | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/dark-vortex-reversal_FbtpCHsWVTKGQ9Rk.json) |
 

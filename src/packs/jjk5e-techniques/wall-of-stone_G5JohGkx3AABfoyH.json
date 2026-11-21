@@ -107,7 +107,13 @@
     "damage": {
      "onSave": "none",
      "parts": []
-    }
+    },
+    "effects": [
+     {
+      "_id": "yfkY3ca8xjXL84RO",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -157,5 +163,27 @@
   }
  },
  "folder": "75t5TorhPqVS4tjs",
- "_key": "!items!G5JohGkx3AABfoyH"
+ "_key": "!items!G5JohGkx3AABfoyH",
+ "effects": [
+  {
+   "_id": "yfkY3ca8xjXL84RO",
+   "name": "Pushed by the wall",
+   "img": "modules/jjk5e/icons/techniques/earth-manipulation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Failed DEX: pushed with the panel.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Earth Manipulation"
+    }
+   },
+   "_key": "!items.effects!G5JohGkx3AABfoyH.yfkY3ca8xjXL84RO"
+  }
+ ]
 }

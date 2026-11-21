@@ -58,6 +58,43 @@
      "concentration": false,
      "override": true
     }
+   },
+   "sUXVsCVvkcIiGQQ2": {
+    "_id": "sUXVsCVvkcIiGQQ2",
+    "type": "utility",
+    "name": "Initiative 20: regurgitate a devoured creature (ally)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
    }
   },
   "uses": {
@@ -116,7 +153,8 @@
     "TCNQ7zL19xRKA4Mf": 20
    },
    "domainActivity": "TCNQ7zL19xRKA4Mf",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "xeaTaRsDQ88YPtDB",

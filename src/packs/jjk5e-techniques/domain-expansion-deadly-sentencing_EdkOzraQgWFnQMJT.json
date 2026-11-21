@@ -240,6 +240,10 @@
       "value": "melee",
       "classification": "weapon"
      }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
     }
    },
    "JCvbrqRPrc28QZf7": {

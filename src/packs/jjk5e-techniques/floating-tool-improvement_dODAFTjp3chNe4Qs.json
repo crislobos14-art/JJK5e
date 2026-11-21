@@ -24,14 +24,16 @@
  "flags": {
   "jjk5e": {
    "technique": "Tool Manipulation",
-   "level": 6
+   "level": 6,
+   "automationNotes": "Toggle the fly effect while mounted. 2 tools at once; move 40 ft.",
+   "automation": "automated"
   }
  },
  "folder": "7tmhlm7tDflRZlKD",
  "effects": [
   {
    "_id": "rbGUNT6ozXzx8rhX",
-   "name": "Floating Tool Improvement (toggle)",
+   "name": "Riding a Floating Tool (toggle)",
    "img": "modules/jjk5e/icons/techniques/tool-manipulation.svg",
    "changes": [
     {

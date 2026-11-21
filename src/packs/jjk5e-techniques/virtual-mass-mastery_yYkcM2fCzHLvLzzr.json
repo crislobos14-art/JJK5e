@@ -19,7 +19,7 @@
    "NoFMZTpqmPsDl0T9": {
     "_id": "NoFMZTpqmPsDl0T9",
     "type": "utility",
-    "name": "Special",
+    "name": "Quick activation (free action)",
     "sort": 0,
     "activation": {
      "type": "special",
@@ -84,7 +84,9 @@
   "jjk5e": {
    "technique": "Star Rage",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Up to 4 × CE mod mass; works with melee weapons; crit range +1 per 4 mass; max damage to objects.",
+   "automation": "automated"
   }
  },
  "folder": "21st6P4AJoi9hlmG",

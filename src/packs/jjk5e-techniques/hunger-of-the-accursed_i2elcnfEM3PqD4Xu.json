@@ -19,7 +19,7 @@
    "nCXaUY7ZzL3xGLo4": {
     "_id": "nCXaUY7ZzL3xGLo4",
     "type": "utility",
-    "name": "Reaction (3 CE)",
+    "name": "Devour a corpse (reaction, 3 CE; 2 at 6th)",
     "sort": 0,
     "activation": {
      "type": "reaction",
@@ -35,10 +35,16 @@
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "value": "5",
+     "units": "ft",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -47,12 +53,18 @@
      "concentration": false,
      "override": true
     },
-    "useConditionText": "false"
+    "useConditionText": "false",
+    "effects": [
+     {
+      "_id": "ymdyNrrD7kg8pKma",
+      "onSave": false
+     }
+    ]
    },
    "RLvJZSjxqfsF9Swz": {
     "_id": "RLvJZSjxqfsF9Swz",
     "type": "utility",
-    "name": "Extra (3 CE)",
+    "name": "Steal another ability (+3 CE)",
     "sort": 900000,
     "activation": {
      "type": "special",
@@ -111,9 +123,32 @@
    },
    "technique": "Voracity",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "xeaTaRsDQ88YPtDB",
- "_key": "!items!i2elcnfEM3PqD4Xu"
+ "_key": "!items!i2elcnfEM3PqD4Xu",
+ "effects": [
+  {
+   "_id": "ymdyNrrD7kg8pKma",
+   "name": "Devoured ability",
+   "img": "modules/jjk5e/icons/techniques/voracity.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>One stolen feature/trait/stat for 1 hour (edit this effect to add it).</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 600
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Voracity"
+    }
+   },
+   "_key": "!items.effects!i2elcnfEM3PqD4Xu.ymdyNrrD7kg8pKma"
+  }
+ ]
 }

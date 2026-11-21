@@ -106,6 +106,10 @@
       "value": "ranged",
       "classification": "spell"
      }
+    },
+    "damage": {
+     "includeBase": true,
+     "parts": []
     }
    },
    "HAUTaVBXz8e6wh8n": {

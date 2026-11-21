@@ -39,6 +39,10 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "enemy",
+      "choice": false
+     },
      "override": true
     },
     "duration": {
@@ -107,6 +111,48 @@
      "concentration": false,
      "override": true
     }
+   },
+   "b8ageDoKldYXL31L": {
+    "_id": "b8ageDoKldYXL31L",
+    "type": "utility",
+    "name": "Domain: everyone else blinded in the fog",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "N4ArfMjDvKf3PbIh",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -165,9 +211,34 @@
     "hc5hx91yOCJV9Eeh": 20
    },
    "domainActivity": "hc5hx91yOCJV9Eeh",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "MxqACO3emHCjwL5R",
- "_key": "!items!gKmWnQNo0RtBc5t6"
+ "_key": "!items!gKmWnQNo0RtBc5t6",
+ "effects": [
+  {
+   "_id": "N4ArfMjDvKf3PbIh",
+   "name": "Blinded (Heaven and Earth)",
+   "img": "modules/jjk5e/icons/techniques/starlight-symphony-domain.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [
+    "blinded"
+   ],
+   "description": "",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Starlight Symphony"
+    }
+   },
+   "_key": "!items.effects!gKmWnQNo0RtBc5t6.N4ArfMjDvKf3PbIh"
+  }
+ ]
 }

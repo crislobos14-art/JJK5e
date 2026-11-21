@@ -64,7 +64,13 @@
     "damage": {
      "onSave": "none",
      "parts": []
-    }
+    },
+    "effects": [
+     {
+      "_id": "OYC9153U42vC9qTp",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -122,5 +128,27 @@
   }
  },
  "folder": "epKj1Q5Dq7LYHOJd",
- "_key": "!items!1j8EyDLkddYqXHmE"
+ "_key": "!items!1j8EyDLkddYqXHmE",
+ "effects": [
+  {
+   "_id": "OYC9153U42vC9qTp",
+   "name": "In the panorama",
+   "img": "modules/jjk5e/icons/techniques/esoteric-art.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Failed save: drawn into your painting.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Esoteric Art"
+    }
+   },
+   "_key": "!items.effects!1j8EyDLkddYqXHmE.OYC9153U42vC9qTp"
+  }
+ ]
 }

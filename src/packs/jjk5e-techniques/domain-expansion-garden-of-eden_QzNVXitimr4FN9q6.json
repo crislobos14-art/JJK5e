@@ -58,6 +58,75 @@
      "concentration": false,
      "override": true
     }
+   },
+   "6wpICIuGhLx1e4Kt": {
+    "_id": "6wpICIuGhLx1e4Kt",
+    "type": "save",
+    "name": "Initiative 20: full Jacob's Ladder on all",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "enemy",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "vTmXykNuhUJ5rCjQ",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "cha"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 10,
+       "denomination": 12,
+       "bonus": "",
+       "types": [
+        "radiant"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
    }
   },
   "uses": {
@@ -116,9 +185,39 @@
     "ZAgUkqaI6KFkzsAQ": 20
    },
    "domainActivity": "ZAgUkqaI6KFkzsAQ",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "lFpLbNxf0h2fGnvr",
- "_key": "!items!QzNVXitimr4FN9q6"
+ "_key": "!items!QzNVXitimr4FN9q6",
+ "effects": [
+  {
+   "_id": "vTmXykNuhUJ5rCjQ",
+   "name": "Extinguished (Garden of Eden)",
+   "img": "modules/jjk5e/icons/techniques/technique-extermination-domain.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "value": "turn=start, saveAbility=cha, saveDC=JJKORIGINDC, label=Extinguishment",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 20
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Technique Extermination"
+    }
+   },
+   "_key": "!items.effects!QzNVXitimr4FN9q6.vTmXykNuhUJ5rCjQ"
+  }
+ ]
 }

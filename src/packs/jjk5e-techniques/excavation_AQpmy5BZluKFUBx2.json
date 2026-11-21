@@ -70,7 +70,13 @@
     "damage": {
      "onSave": "none",
      "parts": []
-    }
+    },
+    "effects": [
+     {
+      "_id": "28k64y9JeHRT62t1",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -135,5 +141,27 @@
   }
  },
  "folder": "75t5TorhPqVS4tjs",
- "_key": "!items!AQpmy5BZluKFUBx2"
+ "_key": "!items!AQpmy5BZluKFUBx2",
+ "effects": [
+  {
+   "_id": "28k64y9JeHRT62t1",
+   "name": "Pushed by stone",
+   "img": "modules/jjk5e/icons/techniques/earth-manipulation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Failed DEX: pushed to the end of the connected cubes.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Earth Manipulation"
+    }
+   },
+   "_key": "!items.effects!AQpmy5BZluKFUBx2.28k64y9JeHRT62t1"
+  }
+ ]
 }

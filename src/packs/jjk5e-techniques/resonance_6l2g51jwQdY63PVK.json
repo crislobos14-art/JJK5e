@@ -16,11 +16,94 @@
    "rules": "2014"
   },
   "activities": {
-   "arrI3PIOlpXKEpxX": {
-    "_id": "arrI3PIOlpXKEpxX",
-    "type": "save",
-    "name": "Action",
+   "1wNx9Qj41WZSGVIR": {
+    "_id": "1wNx9Qj41WZSGVIR",
+    "type": "utility",
+    "name": "Take a piece (reaction, Sleight of Hand vs AC)",
     "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "roll": {
+     "formula": "1d20 + @skills.slt.total",
+     "name": "Sleight of Hand vs AC",
+     "prompt": false,
+     "visible": true
+    },
+    "useConditionText": "reaction === \"isDamaged\""
+   },
+   "1ulJ6X7ZfZYIMQss": {
+    "_id": "1ulJ6X7ZfZYIMQss",
+    "type": "utility",
+    "name": "Mix it into the doll (3 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
+   },
+   "VT8exZluyW5keKBS": {
+    "_id": "VT8exZluyW5keKBS",
+    "type": "damage",
+    "name": "Resonate — Minor (blood/hair): disadvantage on attacks",
+    "sort": 0,
+    "img": null,
     "activation": {
      "type": "action",
      "value": 1,
@@ -30,9 +113,14 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
      "value": "200",
@@ -42,16 +130,139 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
-    "duration": {
-     "value": "1",
-     "units": "minute",
-     "concentration": false,
+    "effects": [
+     {
+      "_id": "Vq56Aktu2NmpiSEl",
+      "onSave": false
+     }
+    ],
+    "damage": {
+     "parts": [
+      {
+       "number": null,
+       "denomination": null,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "(@prof)d6"
+       },
+       "scaling": {}
+      }
+     ]
+    }
+   },
+   "Qa1h3NI1hPMathw8": {
+    "_id": "Qa1h3NI1hPMathw8",
+    "type": "damage",
+    "name": "Resonate — Medium (teeth/skin/bone): no reactions",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
      "override": true
     },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "200",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "AtQW3ikci4VQaWeA",
+      "onSave": false
+     }
+    ],
+    "damage": {
+     "parts": [
+      {
+       "number": null,
+       "denomination": null,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "(max(@abilities.wis.mod, @abilities.cha.mod) + @prof)d8"
+       },
+       "scaling": {}
+      }
+     ]
+    }
+   },
+   "j8a87WmNTdryOL0v": {
+    "_id": "j8a87WmNTdryOL0v",
+    "type": "save",
+    "name": "Resonate — Major (limb): CON or stunned 1 minute",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "200",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "T210DY8xzE31WnQ3",
+      "onSave": false
+     }
+    ],
     "save": {
      "ability": [
       "con"
@@ -62,8 +273,22 @@
      }
     },
     "damage": {
-     "onSave": "none",
-     "parts": []
+     "onSave": "full",
+     "parts": [
+      {
+       "number": null,
+       "denomination": null,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "(2 * max(@abilities.wis.mod, @abilities.cha.mod) + @prof)d10"
+       },
+       "scaling": {}
+      }
+     ]
     }
    }
   },
@@ -112,9 +337,102 @@
   "jjk5e": {
    "technique": "Straw Doll Technique",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceCosts": {
+    "1ulJ6X7ZfZYIMQss": 3
+   },
+   "automationNotes": "Piece size by damage taken: <10% minor, 25%+ medium, 50%+ major. 18th: Resonance also lowers max HP. Major part: the damage applies whether or not it saves.",
+   "automation": "automated"
   }
  },
  "folder": "YmMAY3fFTK6UIkG2",
- "_key": "!items!6l2g51jwQdY63PVK"
+ "_key": "!items!6l2g51jwQdY63PVK",
+ "effects": [
+  {
+   "_id": "Vq56Aktu2NmpiSEl",
+   "name": "Minor (blood/hair)",
+   "img": "modules/jjk5e/icons/techniques/straw-doll-technique.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Minor (blood/hair): disadvantage on attacks</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.disadvantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 2
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Straw Doll Technique"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnEnd"
+     ]
+    }
+   },
+   "_key": "!items.effects!6l2g51jwQdY63PVK.Vq56Aktu2NmpiSEl"
+  },
+  {
+   "_id": "AtQW3ikci4VQaWeA",
+   "name": "Medium (teeth/skin/bone)",
+   "img": "modules/jjk5e/icons/techniques/straw-doll-technique.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Medium (teeth/skin/bone): no reactions</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 2
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Straw Doll Technique"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnEnd"
+     ]
+    }
+   },
+   "_key": "!items.effects!6l2g51jwQdY63PVK.AtQW3ikci4VQaWeA"
+  },
+  {
+   "_id": "T210DY8xzE31WnQ3",
+   "name": "Stunned (Resonance spikes)",
+   "img": "modules/jjk5e/icons/techniques/straw-doll-technique.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [
+    "stunned"
+   ],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "priority": 20,
+     "value": "turn=end, saveAbility=con, saveDC=JJKORIGINDC, label=Resonance spikes"
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Straw Doll Technique"
+    }
+   },
+   "_key": "!items.effects!6l2g51jwQdY63PVK.T210DY8xzE31WnQ3"
+  }
+ ]
 }

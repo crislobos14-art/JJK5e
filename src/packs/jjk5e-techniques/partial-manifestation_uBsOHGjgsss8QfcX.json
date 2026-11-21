@@ -1,125 +1,133 @@
 {
-  "_id": "uBsOHGjgsss8QfcX",
-  "name": "Partial Manifestation",
-  "type": "spell",
-  "img": "modules/jjk5e/icons/techniques/vengeful-spirit-manipulation.svg",
-  "system": {
-    "description": {
-      "value": "<p><em>Vengeful Spirit Manipulation — Innate Technique (1st level)</em></p><blockquote><p>The Vengeful Cursed Spirit technique involves the use of the spirit of one you care about.</p></blockquote><p>Beginning at 1st level, at some point in time, someone you cared about died. Unable to accept their death, you unconsciously cursed them and created a vengeful spirit of great power. Once per turn, you can call a part of the spirit to your aid. By spending 1 Cursed Energy, you manifest the spirit’s claw to make an additional melee attack as part of your Attack action. This claw attack deals 1d12 slashing damage. At 6th level, the number of attacks increases to two, and three 11th level. You cannot use this attack during manifestation.</p>",
-      "chat": ""
-    },
-    "source": {
-      "book": "JJK 5e V.6",
-      "page": "",
-      "custom": "",
-      "license": "CC BY-NC-SA 4.0",
-      "rules": "2014"
-    },
-    "activities": {
-      "Mxbd9ukf5kpkbMqD": {
-        "_id": "Mxbd9ukf5kpkbMqD",
-        "type": "attack",
-        "name": "Additional claw attack (1 CE)",
-        "sort": 0,
-        "activation": {
-          "type": "special",
-          "value": 1,
-          "condition": "Additional claw attack as part of Attack action, once per turn; 2 attacks at level 6, 3 at level 11. Unavailable during full manifestation.",
-          "override": true
-        },
-        "consumption": {
-          "targets": [],
-          "scaling": {
-            "allowed": false
-          },
-          "spellSlot": false
-        },
-        "range": {
-          "value": "5",
-          "units": "ft",
-          "override": true
-        },
-        "target": {
-          "override": true
-        },
-        "duration": {
-          "units": "inst",
-          "override": true
-        },
-        "attack": {
-          "ability": "spellcasting",
-          "bonus": "",
-          "flat": false,
-          "type": {
-            "value": "melee",
-            "classification": "spell"
-          }
-        },
-        "damage": {
-          "includeBase": false,
-          "parts": [
-            {
-              "number": 1,
-              "denomination": 12,
-              "bonus": "",
-              "types": [
-                "slashing"
-              ],
-              "custom": {
-                "enabled": false,
-                "formula": ""
-              },
-              "scaling": {
-                "number": 1
-              }
-            }
-          ]
-        }
-      }
-    },
-    "uses": {
-      "max": "",
-      "recovery": [],
-      "spent": 0
-    },
-    "level": 1,
-    "school": "jjk",
-    "method": "technique",
-    "prepared": 1,
-    "ability": "",
-    "properties": [],
-    "materials": {
-      "value": "",
-      "consumed": false,
-      "cost": 0,
-      "supply": 0
-    },
+ "_id": "uBsOHGjgsss8QfcX",
+ "name": "Partial Manifestation",
+ "type": "spell",
+ "img": "modules/jjk5e/icons/techniques/vengeful-spirit-manipulation.svg",
+ "system": {
+  "description": {
+   "value": "<p><em>Vengeful Spirit Manipulation — Innate Technique (1st level)</em></p><blockquote><p>The Vengeful Cursed Spirit technique involves the use of the spirit of one you care about.</p></blockquote><p>Beginning at 1st level, at some point in time, someone you cared about died. Unable to accept their death, you unconsciously cursed them and created a vengeful spirit of great power. Once per turn, you can call a part of the spirit to your aid. By spending 1 Cursed Energy, you manifest the spirit’s claw to make an additional melee attack as part of your Attack action. This claw attack deals 1d12 slashing damage. At 6th level, the number of attacks increases to two, and three 11th level. You cannot use this attack during manifestation.</p>",
+   "chat": ""
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "activities": {
+   "Mxbd9ukf5kpkbMqD": {
+    "_id": "Mxbd9ukf5kpkbMqD",
+    "type": "attack",
+    "name": "Additional claw attack (1 CE)",
+    "sort": 0,
     "activation": {
-      "type": "action",
-      "value": 1,
-      "condition": "",
-      "override": true
+     "type": "special",
+     "value": 1,
+     "condition": "Additional claw attack as part of Attack action, once per turn; 2 attacks at level 6, 3 at level 11. Unavailable during full manifestation.",
+     "override": true
     },
-    "duration": {
-      "units": "inst"
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
     },
     "range": {
-      "units": "self",
-      "override": true
+     "value": "5",
+     "units": "ft",
+     "override": true
     },
-    "target": {},
-    "sourceItem": ""
-  },
-  "flags": {
-    "jjk5e": {
-      "ceCosts": {
-        "Mxbd9ukf5kpkbMqD": 1
-      },
-      "technique": "Vengeful Spirit Manipulation",
-      "level": 1,
-      "spellFrom": "feat"
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "melee",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 12,
+       "bonus": "max(@abilities.wis.mod, @abilities.cha.mod)",
+       "types": [
+        "slashing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
     }
+   }
   },
-  "folder": "fx5WSQ1mGtKNDLmm",
-  "_key": "!items!uBsOHGjgsss8QfcX"
+  "uses": {
+   "max": "",
+   "recovery": [],
+   "spent": 0
+  },
+  "level": 1,
+  "school": "jjk",
+  "method": "technique",
+  "prepared": 1,
+  "ability": "",
+  "properties": [],
+  "materials": {
+   "value": "",
+   "consumed": false,
+   "cost": 0,
+   "supply": 0
+  },
+  "activation": {
+   "type": "action",
+   "value": 1,
+   "condition": "",
+   "override": true
+  },
+  "duration": {
+   "units": "inst"
+  },
+  "range": {
+   "units": "self",
+   "override": true
+  },
+  "target": {},
+  "sourceItem": ""
+ },
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "Mxbd9ukf5kpkbMqD": 1
+   },
+   "technique": "Vengeful Spirit Manipulation",
+   "level": 1,
+   "spellFrom": "feat",
+   "automationNotes": "Once per turn: 1 claw (2 at 6th, 3 at 11th), 1 CE each.",
+   "automation": "automated"
+  }
+ },
+ "folder": "fx5WSQ1mGtKNDLmm",
+ "_key": "!items!uBsOHGjgsss8QfcX"
 }

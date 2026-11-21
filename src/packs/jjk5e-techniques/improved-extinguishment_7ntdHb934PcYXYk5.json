@@ -15,57 +15,7 @@
    "license": "CC BY-NC-SA 4.0",
    "rules": "2014"
   },
-  "activities": {
-   "LXHgT0u724MFokVv": {
-    "_id": "LXHgT0u724MFokVv",
-    "type": "damage",
-    "name": "Special",
-    "sort": 0,
-    "activation": {
-     "type": "special",
-     "value": null,
-     "condition": "",
-     "override": true
-    },
-    "consumption": {
-     "targets": [],
-     "scaling": {
-      "allowed": false
-     },
-     "spellSlot": false
-    },
-    "range": {
-     "units": "spec",
-     "override": true
-    },
-    "target": {
-     "override": true
-    },
-    "duration": {
-     "units": "inst",
-     "override": true
-    },
-    "damage": {
-     "parts": [
-      {
-       "number": 5,
-       "denomination": 12,
-       "bonus": "",
-       "types": [
-        "radiant"
-       ],
-       "custom": {
-        "enabled": false,
-        "formula": ""
-       },
-       "scaling": {
-        "number": 1
-       }
-      }
-     ]
-    }
-   }
-  },
+  "activities": {},
   "uses": {
    "max": "",
    "recovery": [],
@@ -103,7 +53,9 @@
   "jjk5e": {
    "technique": "Technique Extermination",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Extinguishment now deals 5d12 (already scaled) and suppresses the target's cursed tools.",
+   "automation": "automated"
   }
  },
  "folder": "lFpLbNxf0h2fGnvr",

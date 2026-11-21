@@ -35,7 +35,8 @@
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "value": "200",
+     "units": "ft",
      "override": true
     },
     "target": {
@@ -86,12 +87,18 @@
        }
       }
      ]
-    }
+    },
+    "effects": [
+     {
+      "_id": "d5ELb0RnjqwHvEtp",
+      "onSave": false
+     }
+    ]
    },
    "d4NcKOrJ2ZMIyrGf": {
     "_id": "d4NcKOrJ2ZMIyrGf",
     "type": "attack",
-    "name": "Action (6 CE)",
+    "name": "Jacob's Ladder strike (6 CE)",
     "sort": 100000,
     "activation": {
      "type": "action",
@@ -107,20 +114,15 @@
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "value": "200",
+     "units": "ft",
      "override": true
     },
     "target": {
-     "template": {
-      "type": "radius",
-      "size": "30",
-      "units": "ft",
-      "count": "1",
-      "contiguous": false
-     },
      "affects": {
       "type": "creature",
-      "choice": false
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
@@ -131,6 +133,9 @@
     "attack": {
      "ability": "spellcasting",
      "bonus": "",
+     "critical": {
+      "threshold": null
+     },
      "flat": false,
      "type": {
       "value": "ranged",
@@ -139,7 +144,21 @@
     },
     "damage": {
      "includeBase": false,
-     "parts": []
+     "parts": [
+      {
+       "number": 5,
+       "denomination": 12,
+       "bonus": "",
+       "types": [
+        "radiant"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
     }
    }
   },
@@ -198,9 +217,40 @@
    },
    "technique": "Technique Extermination",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Undead, cursed spirits and evil creatures save at disadvantage. Strike damage shown as 5d12: check the full text.",
+   "automation": "automated"
   }
  },
  "folder": "lFpLbNxf0h2fGnvr",
- "_key": "!items!xwJtNVF6QPcHKkK2"
+ "_key": "!items!xwJtNVF6QPcHKkK2",
+ "effects": [
+  {
+   "_id": "d5ELb0RnjqwHvEtp",
+   "name": "Extinguished (Jacob's Ladder)",
+   "img": "modules/jjk5e/icons/techniques/technique-extermination.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "value": "turn=start, saveAbility=cha, saveDC=JJKORIGINDC, label=Extinguishment",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 20
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Technique Extermination"
+    }
+   },
+   "_key": "!items.effects!xwJtNVF6QPcHKkK2.d5ELb0RnjqwHvEtp"
+  }
+ ]
 }

@@ -19,7 +19,7 @@
    "dcQm0JQlx7Bps7r8": {
     "_id": "dcQm0JQlx7Bps7r8",
     "type": "utility",
-    "name": "Bonus Action (1 CE)",
+    "name": "Drive a nail (1 CE, +1d8 per extra CE)",
     "sort": 0,
     "activation": {
      "type": "bonus",
@@ -30,12 +30,14 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "20"
      },
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "value": "60",
+     "units": "ft",
      "override": true
     },
     "target": {
@@ -49,7 +51,7 @@
    "eYayPO9O7w18fnMl": {
     "_id": "eYayPO9O7w18fnMl",
     "type": "save",
-    "name": "Bonus Action",
+    "name": "Hair Pin: detonate (bonus action or reaction)",
     "sort": 100000,
     "activation": {
      "type": "bonus",
@@ -70,9 +72,16 @@
      "override": true
     },
     "target": {
+     "template": {
+      "type": "radius",
+      "size": "10",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
      "affects": {
       "type": "creature",
-      "count": "1"
+      "choice": false
      },
      "override": true
     },
@@ -151,7 +160,12 @@
    },
    "technique": "Straw Doll Technique",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceSteps": {
+    "dcQm0JQlx7Bps7r8": 1
+   },
+   "automationNotes": "Detonation: 1d8 per nail plus extra CE invested (enter as scale).",
+   "automation": "automated"
   }
  },
  "folder": "YmMAY3fFTK6UIkG2",

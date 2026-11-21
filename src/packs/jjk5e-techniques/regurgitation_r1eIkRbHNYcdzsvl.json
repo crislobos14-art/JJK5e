@@ -19,7 +19,7 @@
    "Ve8rA5LYWi4pxv0v": {
     "_id": "Ve8rA5LYWi4pxv0v",
     "type": "utility",
-    "name": "Bonus Action (4 CE)",
+    "name": "Regurgitate a past ability (4 CE; 3 at 6th, 1 hour)",
     "sort": 0,
     "activation": {
      "type": "bonus",
@@ -39,6 +39,9 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
@@ -46,7 +49,13 @@
      "units": "hour",
      "concentration": false,
      "override": true
-    }
+    },
+    "effects": [
+     {
+      "_id": "SgihuIVvGLwOpsER",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -90,9 +99,32 @@
    },
    "technique": "Voracity",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "xeaTaRsDQ88YPtDB",
- "_key": "!items!r1eIkRbHNYcdzsvl"
+ "_key": "!items!r1eIkRbHNYcdzsvl",
+ "effects": [
+  {
+   "_id": "SgihuIVvGLwOpsER",
+   "name": "Regurgitated ability",
+   "img": "modules/jjk5e/icons/techniques/voracity.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Edit to add the stolen ability.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 600
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Voracity"
+    }
+   },
+   "_key": "!items.effects!r1eIkRbHNYcdzsvl.SgihuIVvGLwOpsER"
+  }
+ ]
 }

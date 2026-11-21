@@ -19,7 +19,7 @@
    "hqsMkT3umtujwRFp": {
     "_id": "hqsMkT3umtujwRFp",
     "type": "utility",
-    "name": "Action (2 CE)",
+    "name": "Summon a fox shikigami (2 CE)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -35,10 +35,14 @@
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "value": "10",
+     "units": "ft",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
@@ -87,7 +91,9 @@
    },
    "technique": "Starlight Symphony",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Up to prof foxes, 24 h; command all as a bonus action.",
+   "automation": "automated"
   }
  },
  "folder": "MxqACO3emHCjwL5R",

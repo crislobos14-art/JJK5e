@@ -104,7 +104,13 @@
     "damage": {
      "onSave": "none",
      "parts": []
-    }
+    },
+    "effects": [
+     {
+      "_id": "9EimhQcdgxaQrd4y",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -169,5 +175,27 @@
   }
  },
  "folder": "f8ljC8WN5acnKcA4",
- "_key": "!items!F55gMSM27KKH5qPV"
+ "_key": "!items!F55gMSM27KKH5qPV",
+ "effects": [
+  {
+   "_id": "9EimhQcdgxaQrd4y",
+   "name": "Absorbed (domain)",
+   "img": "modules/jjk5e/icons/techniques/cursed-spirit-manipulation-domain.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Failed CHA: absorbed into your spirit stock.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Cursed Spirit Manipulation"
+    }
+   },
+   "_key": "!items.effects!F55gMSM27KKH5qPV.9EimhQcdgxaQrd4y"
+  }
+ ]
 }

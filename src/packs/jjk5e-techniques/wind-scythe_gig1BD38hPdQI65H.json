@@ -35,14 +35,21 @@
      "spellSlot": false
     },
     "range": {
-     "value": "60",
-     "units": "ft",
+     "units": "self",
      "override": true
     },
     "target": {
+     "template": {
+      "type": "line",
+      "size": "60",
+      "width": "10",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
      "affects": {
       "type": "creature",
-      "count": "1"
+      "choice": false
      },
      "override": true
     },
@@ -78,6 +85,44 @@
        }
       }
      ]
+    },
+    "effects": []
+   },
+   "JipRCf1FWhws3exh": {
+    "_id": "JipRCf1FWhws3exh",
+    "type": "utility",
+    "name": "11th: knocked prone",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
     },
     "effects": [
      {
@@ -134,7 +179,21 @@
    },
    "technique": "Tool Manipulation",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "dmgScale": {
+    "FFSv2ilzd3aMzoWD": [
+     [
+      1,
+      "3d10"
+     ],
+     [
+      11,
+      "6d10"
+     ]
+    ]
+   },
+   "automationNotes": "Pushed 10 ft (20 ft and prone at 11th: apply the prone effect then).",
+   "automation": "automated"
   }
  },
  "effects": [

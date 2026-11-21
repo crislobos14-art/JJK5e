@@ -119,7 +119,13 @@
     "damage": {
      "onSave": "none",
      "parts": []
-    }
+    },
+    "effects": [
+     {
+      "_id": "o1oEeRoQbT8mJu3D",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -200,6 +206,26 @@
     }
    },
    "_key": "!items.effects!JAeKHJYaOvVKwaEI.4VljXQGrql7EYY9B"
+  },
+  {
+   "_id": "o1oEeRoQbT8mJu3D",
+   "name": "Possessed by the dead",
+   "img": "modules/jjk5e/icons/techniques/seance.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Failed CHA: the dead takes control until your CE runs out.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Seance"
+    }
+   },
+   "_key": "!items.effects!JAeKHJYaOvVKwaEI.o1oEeRoQbT8mJu3D"
   }
  ]
 }

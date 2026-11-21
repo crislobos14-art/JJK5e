@@ -19,7 +19,7 @@
    "hNJjLKYxQtIoCxkj": {
     "_id": "hNJjLKYxQtIoCxkj",
     "type": "utility",
-    "name": "Action",
+    "name": "Combine shikigami (½ base CE each, up to prof)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -30,7 +30,8 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "20"
      },
      "spellSlot": false
     },
@@ -84,7 +85,15 @@
   "jjk5e": {
    "technique": "Ten Shadows",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceCosts": {
+    "hNJjLKYxQtIoCxkj": 1
+   },
+   "ceSteps": {
+    "hNJjLKYxQtIoCxkj": 1
+   },
+   "automationNotes": "Altered shikigami: half the base's HP; −1 CE per size step down. Shikigami summons stay on Divine Dogs / Trial / Totality.",
+   "automation": "automated"
   }
  },
  "folder": "gEGcEQE7nJFCsor6",

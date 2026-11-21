@@ -19,7 +19,7 @@
    "DoKKYxnV31QiXUSk": {
     "_id": "DoKKYxnV31QiXUSk",
     "type": "save",
-    "name": "Action (3 CE)",
+    "name": "Rain of Light (3 CE): 10-ft radius",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -40,8 +40,8 @@
     },
     "target": {
      "template": {
-      "type": "cone",
-      "size": "15",
+      "type": "radius",
+      "size": "10 + 5 * (floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11) + floor(min(@details.level, 18) / 18))",
       "units": "ft",
       "count": "1",
       "contiguous": false
@@ -95,7 +95,7 @@
    "dVjIsbJKfQ0R0yOC": {
     "_id": "dVjIsbJKfQ0R0yOC",
     "type": "save",
-    "name": "Action (2 CE)",
+    "name": "████ of Dawn (2 CE): 30 ft",
     "sort": 100000,
     "activation": {
      "type": "action",
@@ -111,14 +111,20 @@
      "spellSlot": false
     },
     "range": {
-     "value": "30",
-     "units": "ft",
+     "units": "self",
      "override": true
     },
     "target": {
+     "template": {
+      "type": "radius",
+      "size": "30",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
      "affects": {
-      "type": "creature",
-      "count": "1"
+      "type": "enemy",
+      "choice": false
      },
      "override": true
     },
@@ -137,7 +143,21 @@
     },
     "damage": {
      "onSave": "half",
-     "parts": []
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 10,
+       "bonus": "max(@abilities.wis.mod, @abilities.cha.mod)",
+       "types": [
+        "radiant"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
     },
     "effects": [
      {
@@ -145,6 +165,82 @@
       "onSave": false
      }
     ]
+   },
+   "OtKbgunrTjifi2uE": {
+    "_id": "OtKbgunrTjifi2uE",
+    "type": "save",
+    "name": "Rain of Light (3 CE): 15-ft cone",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "3 + max(@abilities.wis.mod, @abilities.cha.mod)"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "cone",
+      "size": "15 + 15 * (floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11) + floor(min(@details.level, 18) / 18))",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "7pPnBAsvCt4Uan8g",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": [
+      {
+       "number": 3,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "radiant"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
    }
   },
   "uses": {
@@ -198,7 +294,7 @@
    "dmgScale": {
     "DoKKYxnV31QiXUSk": [
      [
-      0,
+      1,
       "3d10"
      ],
      [
@@ -213,15 +309,57 @@
       18,
       "10d10"
      ]
+    ],
+    "OtKbgunrTjifi2uE": [
+     [
+      1,
+      "3d10"
+     ],
+     [
+      6,
+      "5d10"
+     ],
+     [
+      11,
+      "8d10"
+     ],
+     [
+      18,
+      "10d10"
+     ]
+    ],
+    "dVjIsbJKfQ0R0yOC": [
+     [
+      1,
+      "2d10"
+     ],
+     [
+      6,
+      "3d10"
+     ],
+     [
+      11,
+      "5d10"
+     ],
+     [
+      18,
+      "8d10"
+     ]
     ]
    },
    "ceCosts": {
     "DoKKYxnV31QiXUSk": 3,
-    "dVjIsbJKfQ0R0yOC": 2
+    "dVjIsbJKfQ0R0yOC": 2,
+    "OtKbgunrTjifi2uE": 3
    },
    "technique": "████ and Light",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceSteps": {
+    "OtKbgunrTjifi2uE": 1
+   },
+   "automationNotes": "Hyperspeed (6th): +1 die per extra CE (2 at 11th, 3 at 18th) up to CE mod — use the CE spend.",
+   "automation": "automated"
   }
  },
  "effects": [
@@ -258,14 +396,7 @@
    "statuses": [
     "blinded"
    ],
-   "changes": [
-    {
-     "key": "flags.midi-qol.OverTime",
-     "mode": 0,
-     "value": "turn=end, saveAbility=con, saveDC=JJKORIGINDC, saveCount=1-, label=\"Blinded (Light Techniques)\"",
-     "priority": 20
-    }
-   ],
+   "changes": [],
    "transfer": false,
    "disabled": false,
    "duration": {},
@@ -273,6 +404,11 @@
    "flags": {
     "jjk5e": {
      "condition": "blinded"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnEnd"
+     ]
     }
    },
    "_key": "!items.effects!HTujAuWtwUzZQr2G.NSo2T0ad2zKYwIpB"

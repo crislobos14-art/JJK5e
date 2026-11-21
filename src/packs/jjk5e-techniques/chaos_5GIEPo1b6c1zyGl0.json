@@ -18,9 +18,10 @@
   "activities": {
    "fppuZf662RZQtCi6": {
     "_id": "fppuZf662RZQtCi6",
-    "type": "utility",
-    "name": "Action (2 CE)",
+    "type": "attack",
+    "name": "Chaos Bolt (2 CE)",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "action",
      "value": 1,
@@ -30,20 +31,107 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "120",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": null,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "acid",
+        "cold",
+        "fire",
+        "force",
+        "lightning",
+        "poison",
+        "psychic",
+        "thunder"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "2d8 + ((2 + 2 * (floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11)) + 3 * floor(min(@details.level, 18) / 18)) - 1 + @scaling)d6"
+       },
+       "scaling": {}
+      }
+     ]
+    }
+   },
+   "EVkeAwdT8A5NK2Wp": {
+    "_id": "EVkeAwdT8A5NK2Wp",
+    "type": "utility",
+    "name": "Chaos (2 CE): roll the Chaos Table",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
      "units": "self",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
-    "duration": {
-     "units": "inst",
-     "override": true
+    "effects": [],
+    "roll": {
+     "formula": "1d100",
+     "name": "Chaos Table",
+     "prompt": false,
+     "visible": true
     }
    }
   },
@@ -83,11 +171,14 @@
  "flags": {
   "jjk5e": {
    "ceCosts": {
-    "fppuZf662RZQtCi6": 2
+    "fppuZf662RZQtCi6": 2,
+    "EVkeAwdT8A5NK2Wp": 2
    },
    "technique": "Vairocana",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Chaos Bolt auto-casts at 3rd/5th/8th level (6th/11th/18th): 2d8 + 1d6 per spell level above 1st. Doubles on the d8s: it leaps.",
+   "automation": "automated"
   }
  },
  "folder": "CpSgW3tLoueRa6XV",

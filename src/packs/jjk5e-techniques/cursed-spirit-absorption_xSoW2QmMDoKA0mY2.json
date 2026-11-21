@@ -97,7 +97,13 @@
     "damage": {
      "onSave": "none",
      "parts": []
-    }
+    },
+    "effects": [
+     {
+      "_id": "D5IGxZf83bpLttsV",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -153,5 +159,27 @@
   }
  },
  "folder": "f8ljC8WN5acnKcA4",
- "_key": "!items!xSoW2QmMDoKA0mY2"
+ "_key": "!items!xSoW2QmMDoKA0mY2",
+ "effects": [
+  {
+   "_id": "D5IGxZf83bpLttsV",
+   "name": "Absorbed spirit",
+   "img": "modules/jjk5e/icons/techniques/cursed-spirit-manipulation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Failed CON: the spirit is eaten/absorbed (store it).</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Cursed Spirit Manipulation"
+    }
+   },
+   "_key": "!items.effects!xSoW2QmMDoKA0mY2.D5IGxZf83bpLttsV"
+  }
+ ]
 }

@@ -19,10 +19,10 @@
    "l71aF9Qo5eXCITwG": {
     "_id": "l71aF9Qo5eXCITwG",
     "type": "utility",
-    "name": "Action (1 CE)",
+    "name": "Efficiency: stolen ability costs 1 less",
     "sort": 0,
     "activation": {
-     "type": "action",
+     "type": "special",
      "value": 1,
      "condition": "",
      "override": true
@@ -49,10 +49,10 @@
    "QYRnTygBGHGnzYOb": {
     "_id": "QYRnTygBGHGnzYOb",
     "type": "utility",
-    "name": "Bonus Action (2 CE)",
+    "name": "Output: spend more CE on a stolen ability",
     "sort": 100000,
     "activation": {
-     "type": "bonus",
+     "type": "special",
      "value": 1,
      "condition": "",
      "override": true
@@ -118,7 +118,9 @@
    },
    "technique": "Voracity",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Hunger of the Accursed and Regurgitation cost 1 less (min 1): adjust when using them.",
+   "automation": "automated"
   }
  },
  "folder": "xeaTaRsDQ88YPtDB",

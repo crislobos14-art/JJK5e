@@ -19,7 +19,7 @@
    "NJRqobgMxqK7LgVu": {
     "_id": "NJRqobgMxqK7LgVu",
     "type": "utility",
-    "name": "Action (3 CE)",
+    "name": "Locate Creature (3 CE)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -35,7 +35,8 @@
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "value": "1000",
+     "units": "ft",
      "override": true
     },
     "target": {
@@ -49,7 +50,7 @@
    "VPsbZw4pGUGe4iHI": {
     "_id": "VPsbZw4pGUGe4iHI",
     "type": "utility",
-    "name": "Action (2 CE)",
+    "name": "Speak with Animals / Tongues (2 CE)",
     "sort": 100000,
     "activation": {
      "type": "action",
@@ -72,9 +73,16 @@
      "override": true
     },
     "duration": {
-     "units": "inst",
+     "value": "1",
+     "units": "hour",
      "override": true
-    }
+    },
+    "effects": [
+     {
+      "_id": "6Qupr89kw2SpUcbw",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -118,9 +126,33 @@
    },
    "technique": "Vairocana",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Locate Creature range: 1,000 ft (1 / 5 / 30 miles at 6th / 11th / 18th).",
+   "automation": "automated"
   }
  },
  "folder": "CpSgW3tLoueRa6XV",
- "_key": "!items!yFuudP4sVGA43MxC"
+ "_key": "!items!yFuudP4sVGA43MxC",
+ "effects": [
+  {
+   "_id": "6Qupr89kw2SpUcbw",
+   "name": "Tongues",
+   "img": "modules/jjk5e/icons/techniques/vairocana.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Understand/speak any language (6th: + CE mod creatures).</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 600
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Vairocana"
+    }
+   },
+   "_key": "!items.effects!yFuudP4sVGA43MxC.6Qupr89kw2SpUcbw"
+  }
+ ]
 }

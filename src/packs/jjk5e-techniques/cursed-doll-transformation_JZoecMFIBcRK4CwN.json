@@ -24,7 +24,7 @@
    "eeUeptYrPITakZuR": {
     "_id": "eeUeptYrPITakZuR",
     "type": "utility",
-    "name": "Reaction (8 CE)",
+    "name": "Living straw doll (8 CE, with Resonance's reaction)",
     "sort": 0,
     "activation": {
      "type": "reaction",
@@ -38,15 +38,82 @@
      }
     },
     "range": {
-     "units": "self"
+     "units": "self",
+     "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
     "duration": {
      "value": "1",
      "units": "minute",
      "concentration": false
     },
-    "useConditionText": "false"
+    "useConditionText": "false",
+    "effects": [
+     {
+      "_id": "MiL4028onhna229P",
+      "onSave": false
+     }
+    ]
+   },
+   "IaCcgW7UohE34MCG": {
+    "_id": "IaCcgW7UohE34MCG",
+    "type": "damage",
+    "name": "Shared pain: ¼ of your damage to the linked creature",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "damage": {
+     "parts": [
+      {
+       "number": null,
+       "denomination": null,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "0"
+       },
+       "scaling": {}
+      }
+     ]
+    }
    }
   }
  },
@@ -69,10 +136,33 @@
       "Straw Doll Technique"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!JZoecMFIBcRK4CwN"
+ "_key": "!items!JZoecMFIBcRK4CwN",
+ "effects": [
+  {
+   "_id": "MiL4028onhna229P",
+   "name": "Living Straw Doll",
+   "img": "modules/jjk5e/icons/techniques/straw-doll-technique.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>The linked creature takes ¼ of the damage you take (rounded up), ignoring resistances.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Straw Doll Technique"
+    }
+   },
+   "_key": "!items.effects!JZoecMFIBcRK4CwN.MiL4028onhna229P"
+  }
+ ]
 }

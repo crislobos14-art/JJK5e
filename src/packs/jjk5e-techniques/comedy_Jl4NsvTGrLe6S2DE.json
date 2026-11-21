@@ -101,7 +101,13 @@
     "damage": {
      "onSave": "none",
      "parts": []
-    }
+    },
+    "effects": [
+     {
+      "_id": "Pn2VoB0otO9sAEhm",
+      "onSave": false
+     }
+    ]
    },
    "tpClhmu9pI4LbleE": {
     "_id": "tpClhmu9pI4LbleE",
@@ -254,6 +260,26 @@
     }
    },
    "_key": "!items.effects!Jl4NsvTGrLe6S2DE.8veGEGXUXiPCrwwK"
+  },
+  {
+   "_id": "Pn2VoB0otO9sAEhm",
+   "name": "Back in control",
+   "img": "modules/jjk5e/icons/techniques/comedian.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Success: you regain control of yourself.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Comedian"
+    }
+   },
+   "_key": "!items.effects!Jl4NsvTGrLe6S2DE.Pn2VoB0otO9sAEhm"
   }
  ],
  "_key": "!items!Jl4NsvTGrLe6S2DE"

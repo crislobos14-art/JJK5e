@@ -19,7 +19,7 @@
    "CUFleHZOj9zv72Zf": {
     "_id": "CUFleHZOj9zv72Zf",
     "type": "utility",
-    "name": "Bonus Action",
+    "name": "Command two Floating Tools (bonus action)",
     "sort": 0,
     "activation": {
      "type": "bonus",
@@ -84,7 +84,9 @@
   "jjk5e": {
    "technique": "Tool Manipulation",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Riders on Floating Tools: advantage on DEX saves. Combat Tool Improvement: +1 AC, +1 reduction die, extra guard reaction.",
+   "automation": "automated"
   }
  },
  "folder": "7tmhlm7tDflRZlKD",

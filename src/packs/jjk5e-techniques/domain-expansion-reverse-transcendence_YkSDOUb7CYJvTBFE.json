@@ -19,7 +19,7 @@
    "uGMRYbw6JHekj9j3": {
     "_id": "uGMRYbw6JHekj9j3",
     "type": "damage",
-    "name": "Action",
+    "name": "Light-speed teleport: 4d12 to a creature at either end",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -42,7 +42,8 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
@@ -112,6 +113,101 @@
      "concentration": false,
      "override": true
     }
+   },
+   "4wGVlzePJGLw8ttL": {
+    "_id": "4wGVlzePJGLw8ttL",
+    "type": "damage",
+    "name": "Initiative 20: 6d12 radiant to all",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "enemy",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": [],
+    "damage": {
+     "parts": [
+      {
+       "number": 6,
+       "denomination": 12,
+       "bonus": "",
+       "types": [
+        "radiant"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
+   },
+   "fOoK7bag54lCrpur": {
+    "_id": "fOoK7bag54lCrpur",
+    "type": "utility",
+    "name": "Domain: double speed, movement can't be reacted to",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "HPvE4s2TEEqQa6Uy",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -170,9 +266,39 @@
     "DczLnYNBf6SfDsgC": 20
    },
    "domainActivity": "DczLnYNBf6SfDsgC",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "IGfpCBBJLQfBc6m2",
- "_key": "!items!YkSDOUb7CYJvTBFE"
+ "_key": "!items!YkSDOUb7CYJvTBFE",
+ "effects": [
+  {
+   "_id": "HPvE4s2TEEqQa6Uy",
+   "name": "Reverse Transcendence",
+   "img": "modules/jjk5e/icons/techniques/and-light-domain.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.attributes.movement.all",
+     "mode": 1,
+     "value": "2",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "████ and Light"
+    }
+   },
+   "_key": "!items.effects!YkSDOUb7CYJvTBFE.HPvE4s2TEEqQa6Uy"
+  }
+ ]
 }

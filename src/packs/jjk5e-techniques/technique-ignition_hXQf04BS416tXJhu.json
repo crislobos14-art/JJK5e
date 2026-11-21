@@ -39,17 +39,26 @@
     },
     "range": {
      "value": "60",
-     "units": "ft"
+     "units": "ft",
+     "override": true
     },
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
-     }
+      "count": "1",
+      "choice": true
+     },
+     "override": true
     },
     "duration": {
      "units": "inst"
-    }
+    },
+    "effects": [
+     {
+      "_id": "kWBcJyxJ6Fq8Yduc",
+      "onSave": false
+     }
+    ]
    }
   }
  },
@@ -72,10 +81,46 @@
       "Technique Extermination"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!hXQf04BS416tXJhu"
+ "_key": "!items!hXQf04BS416tXJhu",
+ "effects": [
+  {
+   "_id": "kWBcJyxJ6Fq8Yduc",
+   "name": "Ignited",
+   "img": "modules/jjk5e/icons/techniques/technique-extermination.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Technique damage dice +1 tier (by hand) and + caster's CE mod. Afterwards: Extinguishment effects.</p>",
+   "changes": [
+    {
+     "key": "system.bonuses.msak.damage",
+     "mode": 2,
+     "value": "+ JJKORIGINCEMOD",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.rsak.damage",
+     "mode": 2,
+     "value": "+ JJKORIGINCEMOD",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Technique Extermination"
+    }
+   },
+   "_key": "!items.effects!hXQf04BS416tXJhu.kWBcJyxJ6Fq8Yduc"
+  }
+ ]
 }

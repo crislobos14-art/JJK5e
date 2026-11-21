@@ -38,14 +38,22 @@
      }
     },
     "range": {
-     "value": "30",
-     "units": "ft"
+     "units": "self",
+     "override": true
     },
     "target": {
+     "template": {
+      "type": "radius",
+      "size": "30",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
      "affects": {
-      "type": "creature",
-      "count": "1"
-     }
+      "type": "enemy",
+      "choice": false
+     },
+     "override": true
     },
     "duration": {
      "value": "1",
@@ -64,7 +72,13 @@
     "damage": {
      "onSave": "none",
      "parts": []
-    }
+    },
+    "effects": [
+     {
+      "_id": "RXDwYaAH4IjCdw5f",
+      "onSave": false
+     }
+    ]
    }
   }
  },
@@ -87,10 +101,46 @@
       "Voracity"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!nRO9APloviRp5YHk"
+ "_key": "!items!nRO9APloviRp5YHk",
+ "effects": [
+  {
+   "_id": "RXDwYaAH4IjCdw5f",
+   "name": "Indigestion",
+   "img": "modules/jjk5e/icons/techniques/voracity.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Half speed; wastes its action vomiting.</p>",
+   "changes": [
+    {
+     "key": "system.attributes.movement.all",
+     "mode": 1,
+     "value": "0.5",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "value": "turn=end, saveAbility=con, saveDC=JJKORIGINDC, label=Indigestion",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Voracity"
+    }
+   },
+   "_key": "!items.effects!nRO9APloviRp5YHk.RXDwYaAH4IjCdw5f"
+  }
+ ]
 }

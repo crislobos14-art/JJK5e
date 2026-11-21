@@ -19,12 +19,66 @@
    "value": "class",
    "subtype": ""
   },
-  "requirements": "Triple Core 11"
+  "requirements": "Triple Core 11",
+  "activities": {
+   "LX4kJekAprKcyCg7": {
+    "_id": "LX4kJekAprKcyCg7",
+    "type": "heal",
+    "name": "Burn a core: return to half HP",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "",
+     "types": [
+      "healing"
+     ],
+     "custom": {
+      "enabled": true,
+      "formula": "floor(@attributes.hp.max / 2)"
+     },
+     "scaling": {}
+    },
+    "useConditionText": "reaction === \"isDamaged\""
+   }
+  }
  },
  "flags": {
   "jjk5e": {
    "technique": "Triple Core",
-   "level": 11
+   "level": 11,
+   "automationNotes": "That core form is unavailable for 1 week.",
+   "automation": "automated"
   }
  },
  "folder": "IyJg53UICeEoqtxa",

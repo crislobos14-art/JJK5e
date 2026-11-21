@@ -140,7 +140,13 @@
     "damage": {
      "onSave": "none",
      "parts": []
-    }
+    },
+    "effects": [
+     {
+      "_id": "2h4HBf5XwApBKNvp",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -240,6 +246,26 @@
     }
    },
    "_key": "!items.effects!wmS4XVAE6EL1dJ17.2slDRFsGavyJmcNc"
+  },
+  {
+   "_id": "2h4HBf5XwApBKNvp",
+   "name": "Pushed 10 ft",
+   "img": "modules/jjk5e/icons/techniques/rockstar.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Failed STR: pushed 10 ft away.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Rockstar"
+    }
+   },
+   "_key": "!items.effects!wmS4XVAE6EL1dJ17.2h4HBf5XwApBKNvp"
   }
  ],
  "_key": "!items!wmS4XVAE6EL1dJ17"

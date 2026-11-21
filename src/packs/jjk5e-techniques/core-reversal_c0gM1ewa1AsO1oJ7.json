@@ -24,10 +24,10 @@
    "VYmTtxWPdiN9XqyP": {
     "_id": "VYmTtxWPdiN9XqyP",
     "type": "utility",
-    "name": "Action (2 CE)",
+    "name": "Blocking Blows (on melee hit taken, 2 CE): resistance",
     "sort": 0,
     "activation": {
-     "type": "action",
+     "type": "reaction",
      "value": 1,
      "condition": ""
     },
@@ -38,20 +38,33 @@
      }
     },
     "range": {
-     "units": "self"
+     "units": "self",
+     "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
-    }
+    },
+    "useConditionText": "reaction === \"isDamaged\"",
+    "effects": [
+     {
+      "_id": "ZMeRr1J1gDRJhyev",
+      "onSave": false
+     }
+    ]
    },
    "87JLFJv6c9zHie2b": {
     "_id": "87JLFJv6c9zHie2b",
     "type": "save",
-    "name": "Bonus Action",
+    "name": "Crash: moved 20+ ft → DEX or prone",
     "sort": 100000,
     "activation": {
-     "type": "bonus",
+     "type": "special",
      "value": 1,
      "condition": ""
     },
@@ -66,7 +79,14 @@
      "units": "ft",
      "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
     "duration": {
      "value": "1",
      "units": "minute",
@@ -95,7 +115,7 @@
    "ZUh6EU02MfRqZzgt": {
     "_id": "ZUh6EU02MfRqZzgt",
     "type": "attack",
-    "name": "Action (2+ CE)",
+    "name": "Reverse Energy Blast: 4d6 radiant per 2 CE",
     "sort": 200000,
     "activation": {
      "type": "action",
@@ -111,13 +131,16 @@
     },
     "range": {
      "value": "160",
-     "units": "ft"
+     "units": "ft",
+     "override": true
     },
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
-     }
+      "count": "1",
+      "choice": true
+     },
+     "override": true
     },
     "duration": {
      "units": "inst"
@@ -125,6 +148,9 @@
     "attack": {
      "ability": "spellcasting",
      "bonus": "",
+     "critical": {
+      "threshold": null
+     },
      "flat": false,
      "type": {
       "value": "ranged",
@@ -146,12 +172,52 @@
         "formula": ""
        },
        "scaling": {
-        "mode": "whole",
         "number": 4
        }
       }
      ]
     }
+   },
+   "Mxk8AUWzQeyVoZWu": {
+    "_id": "Mxk8AUWzQeyVoZWu",
+    "type": "utility",
+    "name": "Offensive Form (bonus action; 2 CE per turn)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "qd0owkpCgHYYquIM",
+      "onSave": false
+     }
+    ]
    }
   }
  },
@@ -178,7 +244,8 @@
       "Triple Core"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "effects": [
@@ -203,6 +270,65 @@
     }
    },
    "_key": "!items.effects!c0gM1ewa1AsO1oJ7.dzMNlAEIBgKZWE6H"
+  },
+  {
+   "_id": "ZMeRr1J1gDRJhyev",
+   "name": "Blocking Blows",
+   "img": "modules/jjk5e/icons/techniques/triple-core.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.traits.dr.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Triple Core"
+    },
+    "dae": {
+     "specialDuration": [
+      "isDamaged"
+     ]
+    }
+   },
+   "_key": "!items.effects!c0gM1ewa1AsO1oJ7.ZMeRr1J1gDRJhyev"
+  },
+  {
+   "_id": "qd0owkpCgHYYquIM",
+   "name": "Offensive Form",
+   "img": "modules/jjk5e/icons/techniques/triple-core.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Extra damage = 2 × current CE (tertiary resource slot by default).</p>",
+   "changes": [
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ (2 * (@resources.tertiary.value || 0))",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Triple Core"
+    }
+   },
+   "_key": "!items.effects!c0gM1ewa1AsO1oJ7.qd0owkpCgHYYquIM"
   }
  ],
  "folder": "sHDJB680OC5pd1by",

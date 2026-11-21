@@ -19,7 +19,7 @@
    "U55lRROmCeODfjoZ": {
     "_id": "U55lRROmCeODfjoZ",
     "type": "utility",
-    "name": "Bonus Action (2 CE)",
+    "name": "Create Floating Tool (+2 CE; 1 CE at 6th)",
     "sort": 0,
     "activation": {
      "type": "bonus",
@@ -49,7 +49,7 @@
    "Im9iQPF49NGk56zC": {
     "_id": "Im9iQPF49NGk56zC",
     "type": "attack",
-    "name": "Action",
+    "name": "Command Floating Tool: move 35 ft and attack",
     "sort": 100000,
     "activation": {
      "type": "action",
@@ -65,11 +65,16 @@
      "spellSlot": false
     },
     "range": {
-     "value": "5",
+     "value": "120",
      "units": "ft",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -79,6 +84,9 @@
     "attack": {
      "ability": "spellcasting",
      "bonus": "",
+     "critical": {
+      "threshold": null
+     },
      "flat": false,
      "type": {
       "value": "melee",
@@ -91,7 +99,7 @@
       {
        "number": 1,
        "denomination": 4,
-       "bonus": "",
+       "bonus": "max(@abilities.wis.mod, @abilities.cha.mod)",
        "types": [
         "bludgeoning"
        ],
@@ -99,30 +107,9 @@
         "enabled": false,
         "formula": ""
        },
-       "scaling": {
-        "number": 1
-       }
+       "scaling": {}
       }
      ]
-    }
-   },
-   "Lzlk2ZqnzFIceqvs": {
-    "_id": "Lzlk2ZqnzFIceqvs",
-    "type": "utility",
-    "name": "Extra (2 CE)",
-    "sort": 900000,
-    "activation": {
-     "type": "special",
-     "value": null,
-     "condition": "At 3rd level, when you imbue a tool, you can spend an additional 2 CE to create a Float...",
-     "override": true
-    },
-    "consumption": {
-     "targets": [],
-     "scaling": {
-      "allowed": false
-     },
-     "spellSlot": false
     }
    }
   },
@@ -162,12 +149,13 @@
  "flags": {
   "jjk5e": {
    "ceCosts": {
-    "U55lRROmCeODfjoZ": 2,
-    "Lzlk2ZqnzFIceqvs": 2
+    "U55lRROmCeODfjoZ": 2
    },
    "technique": "Tool Manipulation",
    "level": 3,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Weapon tools use their own damage (1d4 improvised shown). Tool AC = your CE DC, HP 5 × prof (+10 per cursed grade above 4th).",
+   "automation": "automated"
   }
  },
  "folder": "7tmhlm7tDflRZlKD",

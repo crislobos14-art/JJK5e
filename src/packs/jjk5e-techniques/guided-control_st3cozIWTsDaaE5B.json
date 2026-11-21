@@ -19,7 +19,7 @@
    "gC0eBQ0A4zsYoz5F": {
     "_id": "gC0eBQ0A4zsYoz5F",
     "type": "utility",
-    "name": "Bonus Action",
+    "name": "Imbue held tool (1 CE per hour, up to CE mod)",
     "sort": 0,
     "activation": {
      "type": "bonus",
@@ -30,7 +30,8 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "max(@abilities.wis.mod, @abilities.cha.mod)"
      },
      "spellSlot": false
     },
@@ -39,12 +40,21 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
-    }
+    },
+    "effects": [
+     {
+      "_id": "V49ECG9s1pXj3vVP",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -84,45 +94,50 @@
   "jjk5e": {
    "technique": "Tool Manipulation",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceCosts": {
+    "gC0eBQ0A4zsYoz5F": 1
+   },
+   "ceSteps": {
+    "gC0eBQ0A4zsYoz5F": 1
+   },
+   "automation": "automated"
   }
  },
  "folder": "7tmhlm7tDflRZlKD",
  "effects": [
   {
-   "_id": "uWC4DhaCdYoyYehD",
-   "name": "Guided Control (toggle)",
+   "_id": "V49ECG9s1pXj3vVP",
+   "name": "Imbued tool",
    "img": "modules/jjk5e/icons/techniques/tool-manipulation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>+2 attack with the tool (or +1 AC if armor/defensive); damage die +1 tier (again at 6th and 11th).</p>",
    "changes": [
-    {
-     "key": "system.attributes.ac.bonus",
-     "mode": 2,
-     "value": "+1",
-     "priority": null
-    },
     {
      "key": "system.bonuses.mwak.attack",
      "mode": 2,
      "value": "+2",
-     "priority": null
+     "priority": 20
     },
     {
      "key": "system.bonuses.rwak.attack",
      "mode": 2,
      "value": "+2",
-     "priority": null
+     "priority": 20
     }
    ],
-   "transfer": true,
-   "disabled": true,
-   "duration": {},
-   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
+   "duration": {
+    "rounds": 600
+   },
    "flags": {
     "jjk5e": {
-     "auto": "toggle"
+     "technique": "Tool Manipulation"
     }
    },
-   "_key": "!items.effects!st3cozIWTsDaaE5B.uWC4DhaCdYoyYehD"
+   "_key": "!items.effects!st3cozIWTsDaaE5B.V49ECG9s1pXj3vVP"
   }
  ],
  "_key": "!items!st3cozIWTsDaaE5B"

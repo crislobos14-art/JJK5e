@@ -35,14 +35,20 @@
      "spellSlot": false
     },
     "range": {
-     "value": "60",
-     "units": "ft",
+     "units": "self",
      "override": true
     },
     "target": {
+     "template": {
+      "type": "radius",
+      "size": "60",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
      "affects": {
       "type": "creature",
-      "count": "1"
+      "choice": false
      },
      "override": true
     },
@@ -76,6 +82,77 @@
        "scaling": {
         "number": 1
        }
+      }
+     ]
+    }
+   },
+   "HYyYEzjQxtbFtOSu": {
+    "_id": "HYyYEzjQxtbFtOSu",
+    "type": "save",
+    "name": "Maintain the vortex (action): repeat the save",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "60",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": [],
+    "save": {
+     "ability": [
+      "str"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 6,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
       }
      ]
     }
@@ -130,7 +207,9 @@
    },
    "technique": "████ and Light",
    "reversal": true,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Concentration; failed save: pulled 10 ft closer.",
+   "automation": "automated"
   }
  },
  "folder": "IGfpCBBJLQfBc6m2",

@@ -19,7 +19,7 @@
    "fQhKGcKWsr5KPuJW": {
     "_id": "fQhKGcKWsr5KPuJW",
     "type": "attack",
-    "name": "Action (1 CE)",
+    "name": "Nail Projectile (1 CE): one of two nail attacks",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -36,10 +36,16 @@
     },
     "range": {
      "value": "20",
+     "long": "60",
      "units": "ft",
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -47,11 +53,12 @@
      "override": true
     },
     "damage": {
+     "includeBase": false,
      "parts": [
       {
        "number": 1,
        "denomination": 6,
-       "bonus": "@mod",
+       "bonus": "max(@abilities.wis.mod, @abilities.cha.mod)",
        "types": [
         "piercing"
        ],
@@ -59,15 +66,12 @@
         "enabled": false,
         "formula": ""
        },
-       "scaling": {
-        "number": 1
-       }
+       "scaling": {}
       }
-     ],
-     "includeBase": false
+     ]
     },
     "attack": {
-     "ability": "",
+     "ability": "spellcasting",
      "bonus": "",
      "critical": {
       "threshold": null
@@ -78,6 +82,112 @@
       "classification": "spell"
      }
     }
+   },
+   "ztxMqkugIBCokWI3": {
+    "_id": "ztxMqkugIBCokWI3",
+    "type": "attack",
+    "name": "Second nail (free, same action)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "20",
+     "long": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 6,
+       "bonus": "max(@abilities.wis.mod, @abilities.cha.mod)",
+       "types": [
+        "piercing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
+   },
+   "bO7lAnBN7GBLgfJJ": {
+    "_id": "bO7lAnBN7GBLgfJJ",
+    "type": "utility",
+    "name": "Two more nails (+2 CE; reuse the attacks)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
    }
   },
   "uses": {
@@ -116,11 +226,14 @@
  "flags": {
   "jjk5e": {
    "ceCosts": {
-    "fQhKGcKWsr5KPuJW": 1
+    "fQhKGcKWsr5KPuJW": 1,
+    "bO7lAnBN7GBLgfJJ": 2
    },
    "technique": "Straw Doll Technique",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Starts with 1 hammer, 24 nails, 1 straw doll (track nails). 6th: DC 10 DEX to recover nails by touch.",
+   "automation": "automated"
   }
  },
  "folder": "YmMAY3fFTK6UIkG2",

@@ -19,10 +19,10 @@
    "I1SyCWcDjCAYCYdl": {
     "_id": "I1SyCWcDjCAYCYdl",
     "type": "utility",
-    "name": "Action (1+ CE)",
+    "name": "Amplify: +CE mod dice or double duration (1 CE)",
     "sort": 0,
     "activation": {
-     "type": "action",
+     "type": "special",
      "value": 1,
      "condition": "",
      "override": true
@@ -45,6 +45,12 @@
     "duration": {
      "units": "inst",
      "override": true
+    },
+    "roll": {
+     "formula": "(max(@abilities.wis.mod, @abilities.cha.mod))d6",
+     "name": "Extra Chaos dice (use the effect's die)",
+     "prompt": false,
+     "visible": true
     }
    }
   },
@@ -91,7 +97,9 @@
    },
    "technique": "Vairocana",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Upcast Chaos Bolt: spend up to prof extra CE (enter as the bolt's scale).",
+   "automation": "automated"
   }
  },
  "folder": "CpSgW3tLoueRa6XV",

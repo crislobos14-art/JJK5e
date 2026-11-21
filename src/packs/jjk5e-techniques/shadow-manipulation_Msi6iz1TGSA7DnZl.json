@@ -19,7 +19,7 @@
    "48qkc8s1CPwBVvK0": {
     "_id": "48qkc8s1CPwBVvK0",
     "type": "utility",
-    "name": "Action (1 CE)",
+    "name": "Shadow Storage: interact (1 CE)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -39,6 +39,9 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "self"
+     },
      "override": true
     },
     "duration": {
@@ -49,7 +52,7 @@
    "mHQIg1Nb1IHki6pW": {
     "_id": "mHQIg1Nb1IHki6pW",
     "type": "save",
-    "name": "Bonus Action (2 CE)",
+    "name": "Trap in your shadow (2 CE): Acrobatics vs DC",
     "sort": 100000,
     "activation": {
      "type": "bonus",
@@ -72,7 +75,8 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
@@ -92,7 +96,13 @@
     "damage": {
      "onSave": "none",
      "parts": []
-    }
+    },
+    "effects": [
+     {
+      "_id": "ox7U9rokaQeYgWdN",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -136,9 +146,41 @@
    },
    "technique": "Ten Shadows",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "gEGcEQE7nJFCsor6",
- "_key": "!items!Msi6iz1TGSA7DnZl"
+ "_key": "!items!Msi6iz1TGSA7DnZl",
+ "effects": [
+  {
+   "_id": "ox7U9rokaQeYgWdN",
+   "name": "Trapped in a shadow",
+   "img": "modules/jjk5e/icons/techniques/ten-shadows.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [
+    "restrained"
+   ],
+   "description": "<p>Holds breath CON mod minutes. Freed: prone within 5 ft. Disadvantage in darkness; auto-fail in the domain.</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "value": "turn=end, saveAbility=str|dex, saveDC=JJKORIGINDC, label=Shadow prison",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Ten Shadows"
+    }
+   },
+   "_key": "!items.effects!Msi6iz1TGSA7DnZl.ox7U9rokaQeYgWdN"
+  }
+ ]
 }

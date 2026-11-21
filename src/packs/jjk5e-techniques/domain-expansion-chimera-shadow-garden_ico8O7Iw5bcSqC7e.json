@@ -19,7 +19,7 @@
    "sRX9BbTTQJ3Dyvq3": {
     "_id": "sRX9BbTTQJ3Dyvq3",
     "type": "utility",
-    "name": "Bonus Action",
+    "name": "Shadow Clones (bonus action, CE)",
     "sort": 0,
     "activation": {
      "type": "bonus",
@@ -88,6 +88,102 @@
      "concentration": false,
      "override": true
     }
+   },
+   "GQu9YEvPfIvJ2hPT": {
+    "_id": "GQu9YEvPfIvJ2hPT",
+    "type": "save",
+    "name": "End of turn in the domain: Acrobatics or sink",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "enemy",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "cUDNZ2wp51caZGDA",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   },
+   "4pfZK36dg4JNDHIE": {
+    "_id": "4pfZK36dg4JNDHIE",
+    "type": "utility",
+    "name": "Domain: Freedom of Movement",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "BRBLKZgUaBt4L5VR",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -146,9 +242,80 @@
     "54DcdQU6TiXml8lI": 20
    },
    "domainActivity": "54DcdQU6TiXml8lI",
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "gEGcEQE7nJFCsor6",
- "_key": "!items!ico8O7Iw5bcSqC7e"
+ "_key": "!items!ico8O7Iw5bcSqC7e",
+ "effects": [
+  {
+   "_id": "cUDNZ2wp51caZGDA",
+   "name": "Sinking (Shadow Garden)",
+   "img": "modules/jjk5e/icons/techniques/ten-shadows-domain.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [
+    "restrained"
+   ],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "value": "turn=start, saveAbility=str, saveDC=JJKORIGINDC, label=Escape the shadows (Athletics)",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Ten Shadows"
+    }
+   },
+   "_key": "!items.effects!ico8O7Iw5bcSqC7e.cUDNZ2wp51caZGDA"
+  },
+  {
+   "_id": "BRBLKZgUaBt4L5VR",
+   "name": "Freedom of Movement (domain)",
+   "img": "modules/jjk5e/icons/techniques/ten-shadows-domain.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.traits.ci.value",
+     "mode": 2,
+     "value": "restrained",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.ci.value",
+     "mode": 2,
+     "value": "paralyzed",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.ci.value",
+     "mode": 2,
+     "value": "grappled",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Ten Shadows"
+    }
+   },
+   "_key": "!items.effects!ico8O7Iw5bcSqC7e.BRBLKZgUaBt4L5VR"
+  }
+ ]
 }

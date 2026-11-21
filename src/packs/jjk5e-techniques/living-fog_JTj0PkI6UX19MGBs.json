@@ -19,10 +19,10 @@
    "9o7rSli7874Z2Hgj": {
     "_id": "9o7rSli7874Z2Hgj",
     "type": "save",
-    "name": "Action (3 CE)",
+    "name": "Choke a creature whose space you occupy (CON)",
     "sort": 0,
     "activation": {
-     "type": "action",
+     "type": "special",
      "value": 1,
      "condition": "",
      "override": true
@@ -39,6 +39,11 @@
      "override": true
     },
     "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
      "override": true
     },
     "duration": {
@@ -56,22 +61,31 @@
     },
     "damage": {
      "onSave": "none",
-     "parts": []
+     "parts": [
+      {
+       "number": null,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "cold"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "(max(@abilities.wis.mod, @abilities.cha.mod))d8"
+       },
+       "scaling": {}
+      }
+     ]
     },
-    "effects": [
-     {
-      "_id": "aii9VYcIiNtzz0iO",
-      "onSave": false
-     }
-    ]
+    "effects": []
    },
    "KCqJ5jPUyH5LMlo2": {
     "_id": "KCqJ5jPUyH5LMlo2",
     "type": "utility",
-    "name": "Extra (3 CE)",
+    "name": "Become fog (3 CE, concentration 1 hour)",
     "sort": 900000,
     "activation": {
-     "type": "special",
+     "type": "action",
      "value": null,
      "condition": "You can spend an additional 3 cursed energy to also become invisible for the duration.",
      "override": true
@@ -82,7 +96,23 @@
       "allowed": false
      },
      "spellSlot": false
-    }
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "c5pF6cnMduVGNKpm",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -121,12 +151,12 @@
  "flags": {
   "jjk5e": {
    "ceCosts": {
-    "9o7rSli7874Z2Hgj": 3,
     "KCqJ5jPUyH5LMlo2": 3
    },
    "technique": "Starlight Symphony",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "effects": [
@@ -148,6 +178,75 @@
     }
    },
    "_key": "!items.effects!JTj0PkI6UX19MGBs.aii9VYcIiNtzz0iO"
+  },
+  {
+   "_id": "c5pF6cnMduVGNKpm",
+   "name": "Living Fog",
+   "img": "modules/jjk5e/icons/techniques/starlight-symphony.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.attributes.movement.fly",
+     "mode": 5,
+     "value": "30",
+     "priority": 20
+    },
+    {
+     "key": "system.attributes.movement.walk",
+     "mode": 5,
+     "value": "0",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "bludgeoning",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "piercing",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "slashing",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.advantage.ability.save.str",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.advantage.ability.save.dex",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.advantage.ability.save.con",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 600
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Starlight Symphony"
+    }
+   },
+   "_key": "!items.effects!JTj0PkI6UX19MGBs.c5pF6cnMduVGNKpm"
   }
  ],
  "folder": "MxqACO3emHCjwL5R",

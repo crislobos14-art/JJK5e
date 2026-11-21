@@ -19,7 +19,7 @@
    "IF6ShpMab1LGYOdF": {
     "_id": "IF6ShpMab1LGYOdF",
     "type": "attack",
-    "name": "Action (1+ CE)",
+    "name": "Light Beam (1 CE): ranged construct attack at advantage",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -43,7 +43,8 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
@@ -54,16 +55,39 @@
     "attack": {
      "ability": "spellcasting",
      "bonus": "",
+     "critical": {
+      "threshold": null
+     },
      "flat": false,
      "type": {
-      "value": "melee",
+      "value": "ranged",
       "classification": "spell"
      }
     },
     "damage": {
      "includeBase": false,
-     "parts": []
-    }
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 8,
+       "bonus": "max(@abilities.wis.mod, @abilities.cha.mod)",
+       "types": [
+        "radiant"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "Av0545br1XcGYJQd",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -108,41 +132,75 @@
  },
  "flags": {
   "jjk5e": {
-   "ceSteps": {
-    "IF6ShpMab1LGYOdF": 1
-   },
+   "ceSteps": {},
    "ceCosts": {
     "IF6ShpMab1LGYOdF": 1
    },
    "technique": "████ and Light",
    "level": 6,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automationNotes": "Melee hit with the construct: teleport 10 ft.",
+   "automation": "automated"
   }
  },
  "folder": "IGfpCBBJLQfBc6m2",
  "effects": [
   {
-   "_id": "0ReZlkxUw6lTDcep",
-   "name": "Hyperspeed (toggle)",
+   "_id": "TvibN8UWbzTfldAP",
+   "name": "Radiant resistance",
    "img": "modules/jjk5e/icons/techniques/and-light.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
    "changes": [
     {
      "key": "system.traits.dr.value",
      "mode": 2,
      "value": "radiant",
-     "priority": null
+     "priority": 20
     }
    ],
-   "transfer": true,
-   "disabled": true,
    "duration": {},
-   "description": "<p>Conditional bonus: enable this effect while its condition applies.</p>",
    "flags": {
     "jjk5e": {
-     "auto": "toggle"
+     "technique": "████ and Light"
     }
    },
-   "_key": "!items.effects!wgDtozCWclpmllfO.0ReZlkxUw6lTDcep"
+   "_key": "!items.effects!wgDtozCWclpmllfO.TvibN8UWbzTfldAP"
+  },
+  {
+   "_id": "Av0545br1XcGYJQd",
+   "name": "Light Beam",
+   "img": "modules/jjk5e/icons/techniques/and-light.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.advantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "████ and Light"
+    },
+    "dae": {
+     "specialDuration": [
+      "1Attack"
+     ]
+    }
+   },
+   "_key": "!items.effects!wgDtozCWclpmllfO.Av0545br1XcGYJQd"
   }
  ],
  "_key": "!items!wgDtozCWclpmllfO"

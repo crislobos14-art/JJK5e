@@ -39,13 +39,16 @@
     },
     "range": {
      "value": "60",
-     "units": "ft"
+     "units": "ft",
+     "override": true
     },
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
-     }
+      "count": "1",
+      "choice": true
+     },
+     "override": true
     },
     "duration": {
      "value": "1",
@@ -93,7 +96,9 @@
       "Tool Manipulation"
      ]
     ]
-   }
+   },
+   "automationNotes": "Concentration; telepathic commands as a bonus action; repeats the save when damaged.",
+   "automation": "automated"
   }
  },
  "effects": [
@@ -115,13 +120,15 @@
    "transfer": false,
    "disabled": false,
    "duration": {
-    "seconds": 60,
     "rounds": 10
    },
    "description": "",
    "flags": {
     "jjk5e": {
      "condition": "charmed"
+    },
+    "dae": {
+     "specialDuration": []
     }
    },
    "_key": "!items.effects!AKp0Zko3LvstPhVJ.cPypsBmIXwRsbscA"

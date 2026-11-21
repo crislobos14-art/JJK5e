@@ -23,28 +23,60 @@
   "activities": {
    "14o9RFO6KUqSMXCP": {
     "_id": "14o9RFO6KUqSMXCP",
-    "type": "utility",
-    "name": "Bonus Action (2 CE)",
+    "type": "save",
+    "name": "Grounding (2 CE): speed 0",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "bonus",
      "value": 1,
-     "condition": ""
+     "condition": "",
+     "override": true
     },
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
-     }
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
     },
     "range": {
-     "units": "self"
+     "value": "5",
+     "units": "ft",
+     "override": true
     },
-    "target": {},
-    "duration": {
-     "value": "1",
-     "units": "minute",
-     "concentration": false
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "MTFqPmPYBpDpQJQn",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "wis",
+      "cha"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
     }
    }
   }
@@ -68,10 +100,46 @@
       "Teleportation"
      ]
     ]
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "sHDJB680OC5pd1by",
  "sort": 0,
- "_key": "!items!4mMot7R0SsssxfGL"
+ "_key": "!items!4mMot7R0SsssxfGL",
+ "effects": [
+  {
+   "_id": "MTFqPmPYBpDpQJQn",
+   "name": "Grounded",
+   "img": "modules/jjk5e/icons/techniques/teleportation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.attributes.movement.all",
+     "mode": 0,
+     "value": "0",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "value": "turn=end, saveAbility=wis|cha, saveDC=JJKORIGINDC, label=Grounding",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Teleportation"
+    }
+   },
+   "_key": "!items.effects!4mMot7R0SsssxfGL.MTFqPmPYBpDpQJQn"
+  }
+ ]
 }

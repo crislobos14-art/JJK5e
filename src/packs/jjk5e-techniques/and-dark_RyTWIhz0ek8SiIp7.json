@@ -19,7 +19,7 @@
    "8LJXdv7in6ukvTx8": {
     "_id": "8LJXdv7in6ukvTx8",
     "type": "utility",
-    "name": "Action (2 CE)",
+    "name": "Darkness (2 CE)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -35,14 +35,27 @@
      "spellSlot": false
     },
     "range": {
-     "units": "self",
+     "value": "60",
+     "units": "ft",
      "override": true
     },
     "target": {
+     "template": {
+      "type": "radius",
+      "size": "15",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
      "override": true
     },
     "duration": {
-     "units": "inst",
+     "value": "10",
+     "units": "minute",
      "override": true
     }
    }
@@ -87,7 +100,8 @@
    },
    "technique": "████ and Light",
    "reversal": true,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "IGfpCBBJLQfBc6m2",

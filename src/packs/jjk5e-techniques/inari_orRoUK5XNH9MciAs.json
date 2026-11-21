@@ -19,7 +19,7 @@
    "BWeIMjTm6woMQob1": {
     "_id": "BWeIMjTm6woMQob1",
     "type": "utility",
-    "name": "Action (8 CE)",
+    "name": "Summon Inari (full turn, 8 CE, 1 minute)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -41,8 +41,7 @@
     },
     "target": {
      "affects": {
-      "type": "creature",
-      "count": "1"
+      "type": "self"
      },
      "override": true
     },
@@ -99,7 +98,8 @@
    },
    "technique": "Starlight Symphony",
    "level": 11,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "automation": "automated"
   }
  },
  "folder": "MxqACO3emHCjwL5R",

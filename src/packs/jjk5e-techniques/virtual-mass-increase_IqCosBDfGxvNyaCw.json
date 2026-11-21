@@ -18,9 +18,10 @@
   "activities": {
    "cuxPRyAQGDEgB5Up": {
     "_id": "cuxPRyAQGDEgB5Up",
-    "type": "save",
-    "name": "Bonus Action",
+    "type": "utility",
+    "name": "Virtual Mass Increase (X CE = X mass)",
     "sort": 0,
+    "img": null,
     "activation": {
      "type": "bonus",
      "value": 1,
@@ -30,26 +31,74 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "(2 + floor(min(@details.level, 6) / 6) + floor(min(@details.level, 11) / 11)) * max(@abilities.wis.mod, @abilities.cha.mod)"
      },
      "spellSlot": false
-    },
-    "range": {
-     "value": "5",
-     "units": "ft",
-     "override": true
-    },
-    "target": {
-     "affects": {
-      "type": "creature",
-      "count": "1"
-     },
-     "override": true
     },
     "duration": {
      "units": "inst",
      "override": true
     },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "Y1hWTrM6ggWQfonk",
+      "onSave": false
+     }
+    ]
+   },
+   "uQOXhboLjqspi7Nb": {
+    "_id": "uQOXhboLjqspi7Nb",
+    "type": "save",
+    "name": "Mass Impact (on unarmed crit): CON or prone",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "8OKBKcaw9GgTDcde",
+      "onSave": false
+     }
+    ],
     "save": {
      "ability": [
       "con"
@@ -62,13 +111,7 @@
     "damage": {
      "onSave": "none",
      "parts": []
-    },
-    "effects": [
-     {
-      "_id": "8OKBKcaw9GgTDcde",
-      "onSave": false
-     }
-    ]
+    }
    }
   },
   "uses": {
@@ -115,7 +158,15 @@
   "jjk5e": {
    "technique": "Star Rage",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "ceCosts": {
+    "cuxPRyAQGDEgB5Up": 1
+   },
+   "ceSteps": {
+    "cuxPRyAQGDEgB5Up": 1
+   },
+   "automationNotes": "Mass 2+: a creature within 5 ft also saves or takes half; 3: speed halved; 4: speed 0. Can't reactivate until the duration ends.",
+   "automation": "automated"
   }
  },
  "effects": [
@@ -139,6 +190,33 @@
     }
    },
    "_key": "!items.effects!IqCosBDfGxvNyaCw.8OKBKcaw9GgTDcde"
+  },
+  {
+   "_id": "Y1hWTrM6ggWQfonk",
+   "name": "Virtual Mass",
+   "img": "modules/jjk5e/icons/techniques/star-rage.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>+1 unarmed damage per mass (applied as melee damage); unarmed die +1 tier per 2 mass; +1 size per 2 mass for grapples. Duration: CE mod rounds (×2/×3/×4 at 3rd/11th/18th). At 6th with 5+ mass: advantage on STR/CON checks and saves.</p>",
+   "changes": [
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ @scaling",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Star Rage"
+    }
+   },
+   "_key": "!items.effects!IqCosBDfGxvNyaCw.Y1hWTrM6ggWQfonk"
   }
  ],
  "folder": "21st6P4AJoi9hlmG",

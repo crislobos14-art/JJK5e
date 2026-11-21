@@ -42,7 +42,8 @@
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
@@ -80,7 +81,13 @@
        }
       }
      ]
-    }
+    },
+    "effects": [
+     {
+      "_id": "l1Uf8HW2pTv90mtq",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -131,9 +138,51 @@
    },
    "technique": "Technique Extermination",
    "level": 1,
-   "spellFrom": "feat"
+   "spellFrom": "feat",
+   "dmgScale": {
+    "Bqu7NpZJKf3s2nSO": [
+     [
+      1,
+      "2d12"
+     ],
+     [
+      6,
+      "5d12"
+     ]
+    ]
+   },
+   "automation": "automated"
   }
  },
  "folder": "lFpLbNxf0h2fGnvr",
- "_key": "!items!ksvKQksG46ElTLQX"
+ "_key": "!items!ksvKQksG46ElTLQX",
+ "effects": [
+  {
+   "_id": "l1Uf8HW2pTv90mtq",
+   "name": "Extinguished",
+   "img": "modules/jjk5e/icons/techniques/technique-extermination.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Can't use Cursed Energy (6th: its cursed tools are suppressed too).</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "value": "turn=start, saveAbility=cha, saveDC=JJKORIGINDC, label=Extinguishment",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Technique Extermination"
+    }
+   },
+   "_key": "!items.effects!ksvKQksG46ElTLQX.l1Uf8HW2pTv90mtq"
+  }
+ ]
 }
