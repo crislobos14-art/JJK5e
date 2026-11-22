@@ -96,7 +96,7 @@
    "uenzuFk571nNCSdD": {
     "_id": "uenzuFk571nNCSdD",
     "type": "save",
-    "name": "Powerful Punchline (3 CE)",
+    "name": "Powerful Punchline (3 CE): 30-ft sphere within 80 ft",
     "sort": 200000,
     "activation": {
      "type": "action",
@@ -134,6 +134,159 @@
      "units": "inst",
      "override": true
     },
+    "save": {
+     "ability": [
+      "str",
+      "dex",
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": [
+      {
+       "number": null,
+       "denomination": null,
+       "bonus": "",
+       "types": [
+        "bludgeoning",
+        "piercing",
+        "slashing",
+        "psychic"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "(@prof + max(@abilities.wis.mod, @abilities.cha.mod))d8"
+       },
+       "scaling": {}
+      }
+     ]
+    }
+   },
+   "dQsFfS6W23fbzcW6": {
+    "_id": "dQsFfS6W23fbzcW6",
+    "type": "save",
+    "name": "Powerful Punchline (3 CE): 60-ft line",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "line",
+      "size": "60",
+      "width": "5",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": [],
+    "save": {
+     "ability": [
+      "str",
+      "dex",
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": [
+      {
+       "number": null,
+       "denomination": null,
+       "bonus": "",
+       "types": [
+        "bludgeoning",
+        "piercing",
+        "slashing",
+        "psychic"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "(@prof + max(@abilities.wis.mod, @abilities.cha.mod))d8"
+       },
+       "scaling": {}
+      }
+     ]
+    }
+   },
+   "ypqx5PwpYrPd3e2Z": {
+    "_id": "ypqx5PwpYrPd3e2Z",
+    "type": "save",
+    "name": "Powerful Punchline (3 CE): 30-ft cone",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "cone",
+      "size": "30",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": [],
     "save": {
      "ability": [
       "str",
@@ -206,12 +359,14 @@
    "ceCosts": {
     "WSkfhE5kG2RIjgJf": 1,
     "sqZU5kXKLOuvCqF4": 2,
-    "uenzuFk571nNCSdD": 3
+    "uenzuFk571nNCSdD": 3,
+    "dQsFfS6W23fbzcW6": 3,
+    "ypqx5PwpYrPd3e2Z": 3
    },
    "technique": "Comedian",
    "level": 3,
    "spellFrom": "feat",
-   "automationNotes": "Punchline area: 30-ft sphere within 80 ft, 60×5-ft line or 30-ft cone; pick the save and damage type that fit the joke, extra effect by the GM. Blasting Off distance: 60/90/120/200 ft by level.",
+   "automationNotes": "Punchline damage can't kill (stop at 1 HP).",
    "automation": "automated"
   }
  },

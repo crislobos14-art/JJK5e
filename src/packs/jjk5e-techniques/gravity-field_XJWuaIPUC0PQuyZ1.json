@@ -59,6 +59,62 @@
       "onSave": false
      }
     ]
+   },
+   "6MtgOQz1pBVIbLLw": {
+    "_id": "6MtgOQz1pBVIbLLw",
+    "type": "save",
+    "name": "Disorienting Gravity: lifted creature (CON)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "nNO5yeOP1juoj3zo",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "con"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
    }
   },
   "uses": {
@@ -111,7 +167,7 @@
    "technique": "Antigravity System",
    "level": 3,
    "spellFrom": "feat",
-   "automationNotes": "Disorienting Gravity runs from Antigravity automatically. Focused System: choose the creatures you exclude when placing Antigravity.",
+   "automationNotes": "Focused System: exclude up to CE mod + prof creatures from your technique (don't target them).",
    "automation": "automated"
   }
  },
@@ -137,6 +193,33 @@
     }
    },
    "_key": "!items.effects!XJWuaIPUC0PQuyZ1.Slsf0rVjotCHyxD3"
+  },
+  {
+   "_id": "nNO5yeOP1juoj3zo",
+   "name": "Disoriented by gravity",
+   "img": "modules/jjk5e/icons/techniques/antigravity-system.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Attacks at disadvantage and can't maintain concentration while inside the field.</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.disadvantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Antigravity System"
+    }
+   },
+   "_key": "!items.effects!XJWuaIPUC0PQuyZ1.nNO5yeOP1juoj3zo"
   }
  ]
 }

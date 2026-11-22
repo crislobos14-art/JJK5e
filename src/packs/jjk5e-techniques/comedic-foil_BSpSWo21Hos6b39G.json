@@ -19,14 +19,95 @@
    "value": "class",
    "subtype": ""
   },
-  "requirements": "Comedian 6"
+  "requirements": "Comedian 6",
+  "activities": {
+   "Nexsugo228GkULk9": {
+    "_id": "Nexsugo228GkULk9",
+    "type": "utility",
+    "name": "Comedic Foil aura (while the technique is active)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "300",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "enemy",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "Ibo7L9daI5NJEPBn",
+      "onSave": false
+     }
+    ]
+   }
+  }
  },
  "flags": {
   "jjk5e": {
    "technique": "Comedian",
-   "level": 6
+   "level": 6,
+   "automation": "automated"
   }
  },
  "folder": "8AlwpNPBMedHlchF",
- "_key": "!items!BSpSWo21Hos6b39G"
+ "_key": "!items!BSpSWo21Hos6b39G",
+ "effects": [
+  {
+   "_id": "Ibo7L9daI5NJEPBn",
+   "name": "Comedic Foil",
+   "img": "modules/jjk5e/icons/techniques/comedian.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Failed CE save: can't use techniques that would interfere with the current joke until its next turn.</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "value": "turn=start, saveAbility=JJKCESAVE, saveDC=JJKORIGINDC, label=Comedic Foil (can't interfere with the joke)",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Comedian"
+    }
+   },
+   "_key": "!items.effects!BSpSWo21Hos6b39G.Ibo7L9daI5NJEPBn"
+  }
+ ]
 }

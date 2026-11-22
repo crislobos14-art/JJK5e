@@ -51,7 +51,7 @@
    "eYayPO9O7w18fnMl": {
     "_id": "eYayPO9O7w18fnMl",
     "type": "save",
-    "name": "Hair Pin: detonate (bonus action or reaction)",
+    "name": "Hair Pin: detonate (bonus action)",
     "sort": 100000,
     "activation": {
      "type": "bonus",
@@ -90,6 +90,80 @@
      "units": "inst",
      "override": true
     },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   },
+   "tEkKaJYif8FUrtLK": {
+    "_id": "tEkKaJYif8FUrtLK",
+    "type": "save",
+    "name": "Hair Pin: detonate (reaction: creature within 5 ft of a nail)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "10",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": [],
     "save": {
      "ability": [
       "dex"

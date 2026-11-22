@@ -296,6 +296,96 @@
       "onSave": false
      }
     ]
+   },
+   "eZpx6XSp6yxWOe7X": {
+    "_id": "eZpx6XSp6yxWOe7X",
+    "type": "utility",
+    "name": "Foresight 1 s: its attacks vs you at disadvantage (1 CE, reaction)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "120",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "ang91gDcXQdQhfBF",
+      "onSave": false
+     }
+    ],
+    "useConditionText": "reaction === \"isAttacked\""
+   },
+   "h3AOjB7J7vTbtnKY": {
+    "_id": "h3AOjB7J7vTbtnKY",
+    "type": "utility",
+    "name": "Foresight 3 s: you have advantage vs it (1 CE, reaction)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "120",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "veSbMBontrTEK1Ym",
+      "onSave": false
+     }
+    ],
+    "useConditionText": "reaction === \"isAttacked\""
    }
   },
   "uses": {
@@ -337,7 +427,9 @@
     "m4ZxTvPNLGndeoSD": 2,
     "nn5GJvMMdLGh7KZu": 1,
     "goNV077dC7CKHtnH": 1,
-    "U7F4yTcIZ447z471": 1
+    "U7F4yTcIZ447z471": 1,
+    "eZpx6XSp6yxWOe7X": 1,
+    "h3AOjB7J7vTbtnKY": 1
    },
    "technique": "G Warstaff",
    "level": 1,

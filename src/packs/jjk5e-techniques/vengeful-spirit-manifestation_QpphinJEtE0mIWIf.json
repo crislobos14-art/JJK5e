@@ -70,6 +70,48 @@
      "parts": []
     },
     "useConditionText": "reaction === \"isDamaged\""
+   },
+   "T9ncbeSRuf9g99Ja": {
+    "_id": "T9ncbeSRuf9g99Ja",
+    "type": "utility",
+    "name": "Calm the spirit: DC 20 Persuasion (free, once per round)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "roll": {
+     "formula": "1d20 + @skills.per.total",
+     "name": "Persuasion vs DC 20",
+     "prompt": false,
+     "visible": true
+    }
    }
   },
   "uses": {

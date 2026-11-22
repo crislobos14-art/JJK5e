@@ -41,7 +41,7 @@
      "override": true
     },
     "range": {
-     "value": "30",
+     "value": "10",
      "units": "ft",
      "override": true
     },
@@ -111,7 +111,7 @@
      "override": true
     },
     "range": {
-     "value": "30",
+     "value": "10",
      "units": "ft",
      "override": true
     },

@@ -184,6 +184,43 @@
       "onSave": false
      }
     ]
+   },
+   "xdpd9QdX79p9bzLF": {
+    "_id": "xdpd9QdX79p9bzLF",
+    "type": "utility",
+    "name": "Swap places with a Shadow Clone when hit (reaction)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "useConditionText": "reaction === \"isHit\""
    }
   },
   "uses": {

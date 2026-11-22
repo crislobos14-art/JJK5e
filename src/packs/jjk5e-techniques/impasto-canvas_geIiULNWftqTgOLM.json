@@ -19,7 +19,7 @@
    "OCUpf0dX1NW95qdb": {
     "_id": "OCUpf0dX1NW95qdb",
     "type": "save",
-    "name": "Ink trap",
+    "name": "Pit Trap (DEX): 2d6 + prone",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -39,16 +39,10 @@
      "override": true
     },
     "target": {
-     "template": {
-      "type": "radius",
-      "size": "15",
-      "units": "ft",
-      "count": "1",
-      "contiguous": false
-     },
      "affects": {
       "type": "creature",
-      "choice": false
+      "count": "1",
+      "choice": true
      },
      "override": true
     },
@@ -86,10 +80,6 @@
      ]
     },
     "effects": [
-     {
-      "_id": "VnwjNLPHF7f26e7y",
-      "onSave": false
-     },
      {
       "_id": "5x8CYrTMV4LHqdiE",
       "onSave": false
@@ -239,6 +229,209 @@
      "override": true
     },
     "effects": []
+   },
+   "HQgVQ71u3EyEQXbK": {
+    "_id": "HQgVQ71u3EyEQXbK",
+    "type": "save",
+    "name": "Spike Trap (DEX): 2d10 piercing + prone",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "5x8CYrTMV4LHqdiE",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "piercing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
+   },
+   "M2cahsNzMEMt5Mq6": {
+    "_id": "M2cahsNzMEMt5Mq6",
+    "type": "save",
+    "name": "Snare Trap (DEX): restrained",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "VnwjNLPHF7f26e7y",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   },
+   "OWtsChYdrAVIgdA7": {
+    "_id": "OWtsChYdrAVIgdA7",
+    "type": "save",
+    "name": "Boulder Trap (DEX): 30-ft line, 4d10 + prone",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "line",
+      "size": "30",
+      "width": "5",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "5x8CYrTMV4LHqdiE",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 4,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
    }
   },
   "uses": {
@@ -309,10 +502,19 @@
    "statuses": [
     "restrained"
    ],
-   "changes": [],
+   "changes": [
+    {
+     "key": "flags.midi-qol.OverTime",
+     "mode": 0,
+     "priority": 20,
+     "value": "turn=start, saveAbility=str, saveDC=JJKORIGINDC, label=Snare Trap (Athletics/Acrobatics)"
+    }
+   ],
    "transfer": false,
    "disabled": false,
-   "duration": {},
+   "duration": {
+    "rounds": 10
+   },
    "description": "",
    "flags": {
     "jjk5e": {

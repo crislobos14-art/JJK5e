@@ -51,6 +51,49 @@
      "override": true
     },
     "effects": []
+   },
+   "Sfn87zq7M9hYcC6j": {
+    "_id": "Sfn87zq7M9hYcC6j",
+    "type": "utility",
+    "name": "Nauseating Gravity: failed Disorienting save → stunned",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "ytVNuxCc7Bika870",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -97,10 +140,39 @@
    "technique": "Antigravity System",
    "level": 11,
    "spellFrom": "feat",
-   "automationNotes": "Nauseating Gravity and Hard Fall (d12) are applied by Antigravity automatically.",
+   "automationNotes": "Sweeping Gravity: creatures with DEX score below your DC can't make DEX saves vs your technique. Hard Fall: fall damage d12.",
    "automation": "automated"
   }
  },
  "folder": "h8faxx3TSM5qAlx3",
- "_key": "!items!7QrXKBBmTXN0jBGO"
+ "_key": "!items!7QrXKBBmTXN0jBGO",
+ "effects": [
+  {
+   "_id": "ytVNuxCc7Bika870",
+   "name": "Stunned (Nauseating Gravity)",
+   "img": "modules/jjk5e/icons/techniques/antigravity-system.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [
+    "stunned"
+   ],
+   "description": "",
+   "changes": [],
+   "duration": {
+    "rounds": 2
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Antigravity System"
+    },
+    "dae": {
+     "specialDuration": [
+      "turnEnd"
+     ]
+    }
+   },
+   "_key": "!items.effects!7QrXKBBmTXN0jBGO.ytVNuxCc7Bika870"
+  }
+ ]
 }

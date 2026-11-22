@@ -45,6 +45,50 @@
      "units": "inst",
      "override": true
     }
+   },
+   "XfT7bemrx8fjtLcE": {
+    "_id": "XfT7bemrx8fjtLcE",
+    "type": "utility",
+    "name": "Grant advantage to an attack with your imbued tool (reaction)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "vpFgcPWdvcaPOjAO",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -90,5 +134,39 @@
   }
  },
  "folder": "7tmhlm7tDflRZlKD",
- "_key": "!items!c2w7ELQ8oGbTnvyF"
+ "_key": "!items!c2w7ELQ8oGbTnvyF",
+ "effects": [
+  {
+   "_id": "vpFgcPWdvcaPOjAO",
+   "name": "Imbued tool: advantage",
+   "img": "modules/jjk5e/icons/techniques/tool-manipulation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.advantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Tool Manipulation"
+    },
+    "dae": {
+     "specialDuration": [
+      "1Attack"
+     ]
+    }
+   },
+   "_key": "!items.effects!c2w7ELQ8oGbTnvyF.vpFgcPWdvcaPOjAO"
+  }
+ ]
 }

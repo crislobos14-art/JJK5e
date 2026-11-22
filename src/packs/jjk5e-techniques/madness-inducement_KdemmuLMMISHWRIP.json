@@ -244,6 +244,60 @@
      "prompt": false,
      "visible": true
     }
+   },
+   "nv0GCDZBAV6BOylh": {
+    "_id": "nv0GCDZBAV6BOylh",
+    "type": "save",
+    "name": "Out of sight: WIS save to reduce corruption by 5%",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "Repeat at the start of each turn without line of sight to the caster; on a success remove 5% (down to 25%).",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "i7XFc9zU1P6Sqr90",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "wis"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
    }
   },
   "uses": {
@@ -297,7 +351,8 @@
    "technique": "Faceless God",
    "level": 1,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "automationNotes": "Madness Removal: use the WIS save activity (DC = caster's CE DC; roll it from the caster's sheet or set the DC by hand)."
   }
  },
  "folder": "TxiITYXHPOTbqkOW",
@@ -389,6 +444,26 @@
     }
    },
    "_key": "!items.effects!KdemmuLMMISHWRIP.bWwpHvHXZw3EqLGK"
+  },
+  {
+   "_id": "i7XFc9zU1P6Sqr90",
+   "name": "Failed save: Out of sight: WIS save to reduce corruption by 5%",
+   "img": "modules/jjk5e/icons/techniques/faceless-god.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Failed save: apply the result described in the feature.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Faceless God"
+    }
+   },
+   "_key": "!items.effects!KdemmuLMMISHWRIP.i7XFc9zU1P6Sqr90"
   }
  ]
 }

@@ -493,6 +493,49 @@
       }
      ]
     }
+   },
+   "RBa0n2oiJOFQG2xH": {
+    "_id": "RBa0n2oiJOFQG2xH",
+    "type": "utility",
+    "name": "Crimson Rain with Convergence: failed save → prone",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "tt5f8jIoxc6uLYKJ",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -605,6 +648,28 @@
     }
    },
    "_key": "!items.effects!s8hzPznLcMB8vsLg.juvZNRvBtUguBCjt"
+  },
+  {
+   "_id": "tt5f8jIoxc6uLYKJ",
+   "name": "Prone (Crimson Rain)",
+   "img": "modules/jjk5e/icons/techniques/blood-manipulation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [
+    "prone"
+   ],
+   "description": "",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Blood Manipulation"
+    }
+   },
+   "_key": "!items.effects!s8hzPznLcMB8vsLg.tt5f8jIoxc6uLYKJ"
   }
  ],
  "folder": "WIi7n6E644owqihn",

@@ -5764,11 +5764,13 @@ def technique_extermination(S):
     apply(b, fx(jl, "null", "Extinguished (Jacob's Ladder)", rounds=20,
                 changes=[("flags.midi-qol.OverTime", 0, "turn=start, saveAbility=cha, saveDC=JJKORIGINDC, label=Extinguishment")]))
     t = a["d4NcKOrJ2ZMIyrGf"]
-    t["name"] = "Jacob's Ladder strike (6 CE)"
-    t["range"], t["target"] = _r(200), one_creature()
+    t["name"] = "Destroy a cursed object/barrier (6 CE): CE attack vs its DC"
+    t["range"], t["target"] = _r(30), one_creature()
     t["attack"] = _atk()
-    t["damage"] = {"includeBase": False, "parts": [dice(5, 12, ["radiant"])]}
-    note(jl, "Undead, cursed spirits and evil creatures save at disadvantage. Strike damage shown as 5d12: check the full text.")
+    t["damage"] = {"includeBase": False, "parts": []}
+    mo = act(jl, "maxout", "utility", "With Maximum Output: 30-ft circle, ignores damage reduction", "special", range=_r(200), target=sphere(30))
+    free(jl, mo)
+    note(jl, "Undead, cursed spirits and evil creatures save at disadvantage. On a hit the object/barrier is destroyed and neutralized.")
     mark(jl)
 
     d = S.get("Domain Expansion: Garden of Eden")
@@ -6450,6 +6452,12 @@ def sanitize(S):
             if (scaled_parts or "@scaling" in blob) and not sc.get("allowed") and a.get("name") in COUNT_SCALED:
                 cons = a.setdefault("consumption", {"targets": []})
                 cons["scaling"] = {**sc, "allowed": True, "max": sc.get("max") or "20"}
+            if a.get("effects"):
+                seen, refs = set(), []
+                for ref in a["effects"]:
+                    if ref.get("_id") in seen: continue
+                    seen.add(ref.get("_id")); refs.append(ref)
+                a["effects"] = refs
             if a.get("type") == "attack" and not (a.get("damage") or {}).get("parts") and not (a.get("damage") or {}).get("includeBase"):
                 a.setdefault("damage", {})["includeBase"] = True
                 a["damage"].setdefault("parts", [])
@@ -6801,6 +6809,173 @@ def feat_fixes(S):
     mark(it)
 
 
+def review_fixes(S):
+    """Technique-by-technique review against the manual (Nov 2026)."""
+    # Antigravity: Disorienting Gravity (3rd) and Nauseating Gravity (Boosted System)
+    gf = S.get("Gravity Field")
+    dg = act(gf, "disorient", "save", "Disorienting Gravity: lifted creature (CON)", "special", save=_sv("con"),
+             damage={"onSave": "none", "parts": []}, target=one_creature())
+    apply(dg, fx(gf, "dis", "Disoriented by gravity", rounds=None, changes=[("flags.midi-qol.disadvantage.attack.all", 0, "1")],
+                 desc="Attacks at disadvantage and can't maintain concentration while inside the field."))
+    free(gf, dg)
+    note(gf, "Focused System: exclude up to CE mod + prof creatures from your technique (don't target them).")
+    mark(gf)
+    bs = S.get("Boosted System")
+    ns = act(bs, "stun", "utility", "Nauseating Gravity: failed Disorienting save → stunned", "special", target=one_creature())
+    apply(ns, fx(bs, "stun", "Stunned (Nauseating Gravity)", rounds=2, statuses=["stunned"], special=["turnEnd"]))
+    free(bs, ns)
+    note(bs, "Sweeping Gravity: creatures with DEX score below your DC can't make DEX saves vs your technique. Hard Fall: fall damage d12.")
+    mark(bs)
+
+    # Blood Manipulation: Crimson Rain + Convergence prone
+    bt = S.get("Blood Techniques")
+    cr = act(bt, "rainprone", "utility", "Crimson Rain with Convergence: failed save → prone", "special", target=one_creature())
+    apply(cr, fx(bt, "prone", "Prone (Crimson Rain)", statuses=["prone"]))
+    free(bt, cr)
+    mark(bt)
+
+    # Comedian: punchline shapes; Comedic Foil aura
+    cb = S.get("Commit to the Bit")
+    base = cb["system"]["activities"]["uenzuFk571nNCSdD"]
+    base["name"] = "Powerful Punchline (3 CE): 30-ft sphere within 80 ft"
+    for key, nm, tgt in [("line", "Powerful Punchline (3 CE): 60-ft line", {"template": {"type": "line", "size": "60", "width": "5", "units": "ft", "count": "1", "contiguous": False}, "affects": {"type": "creature", "choice": False}, "override": True}),
+                         ("cone", "Powerful Punchline (3 CE): 30-ft cone", sphere(30, kind="cone"))]:
+        x = act(cb, key, "save", nm, "action", save=_sv(["str", "dex", "con"]), damage=json.loads(json.dumps(base["damage"])),
+                range=RANGE_SELF, target=tgt)
+        cost(cb, x, 3)
+    note(cb, "Punchline damage can't kill (stop at 1 HP).")
+    mark(cb)
+    cf = S.get("Comedic Foil")
+    cf.setdefault("system", {}).setdefault("activities", {})
+    au = act(cf, "aura", "utility", "Comedic Foil aura (while the technique is active)", "special", range=RANGE_SELF, target=sphere(300))
+    au["target"]["affects"]["type"] = "enemy"
+    apply(au, fx(cf, "foil", "Comedic Foil", rounds=10,
+                 changes=[("flags.midi-qol.OverTime", 0, "turn=start, saveAbility=JJKCESAVE, saveDC=JJKORIGINDC, label=Comedic Foil (can't interfere with the joke)")],
+                 desc="Failed CE save: can't use techniques that would interfere with the current joke until its next turn."))
+    free(cf, au)
+    mark(cf)
+
+    # Cursed Speech: 35-ft cone (11th)
+    rv = S.get("Resounding Voice")
+    rv.setdefault("system", {}).setdefault("activities", {})
+    x = act(rv, "cone", "utility", "Speak in a 35-ft cone (+3 CE)", "special", range=RANGE_SELF, target=sphere(35, kind="cone"))
+    cost(rv, x, 3)
+    note(rv, "Use the cone template with the Cursed Speech command you speak.")
+    mark(rv)
+
+    # Esoteric Art: the four Impasto traps
+    ic = S.get("Impasto Canvas")
+    ic["system"]["activities"]["OCUpf0dX1NW95qdb"]["name"] = "Pit Trap (DEX): 2d6 + prone"
+    ic["system"]["activities"]["OCUpf0dX1NW95qdb"]["effects"] = [{"_id": "5x8CYrTMV4LHqdiE", "onSave": False}]
+    ic["system"]["activities"]["OCUpf0dX1NW95qdb"]["target"] = one_creature()
+    for key, nm, dmg, fxid, tgt in [
+        ("spike", "Spike Trap (DEX): 2d10 piercing + prone", [dice(2, 10, ["piercing"])], "5x8CYrTMV4LHqdiE", one_creature()),
+        ("snare", "Snare Trap (DEX): restrained", [], "VnwjNLPHF7f26e7y", one_creature()),
+        ("boulder", "Boulder Trap (DEX): 30-ft line, 4d10 + prone", [dice(4, 10, ["bludgeoning"])], "5x8CYrTMV4LHqdiE",
+         {"template": {"type": "line", "size": "30", "width": "5", "units": "ft", "count": "1", "contiguous": False}, "affects": {"type": "creature", "choice": False}, "override": True})]:
+        x = act(ic, key, "save", nm, "special", save=_sv("dex"), damage={"onSave": "half" if dmg else "none", "parts": dmg}, target=tgt)
+        apply(x, fxid)
+        free(ic, x)
+    ot_save(ic, "VnwjNLPHF7f26e7y", "str", "Snare Trap (Athletics/Acrobatics)", when="start")
+    mark(ic)
+
+    # Faceless God: WIS save to shed corruption
+    mi = S.get("Madness Inducement")
+    rd = act(mi, "reduce", "save", "Out of sight: WIS save to reduce corruption by 5%", "special", save=_sv("wis"),
+             damage={"onSave": "none", "parts": []}, range=RANGE_SELF, target=SELF)
+    rd["save"]["dc"] = {"calculation": "", "formula": "@flags.jjk5e.corruptionDC || 15"}
+    rd["activation"]["condition"] = "Repeat at the start of each turn without line of sight to the caster; on a success remove 5% (down to 25%)."
+    free(mi, rd)
+    rd["save"]["dc"] = {"calculation": "spellcasting", "formula": ""}
+    note(mi, "Madness Removal: use the WIS save activity (DC = caster's CE DC; roll it from the caster's sheet or set the DC by hand).")
+    mark(mi)
+
+    # G Warstaff: foresight as a reaction too
+    w = S.get("Warstaff")
+    for src, key in [("goNV077dC7CKHtnH", "re1"), ("U7F4yTcIZ447z471", "re3")]:
+        o = w["system"]["activities"][src]
+        x = act(w, key, "utility", o["name"].replace("(1 CE)", "(1 CE, reaction)"), "reaction", range=_r(120), target=one_creature())
+        x["useConditionText"] = 'reaction === "isAttacked"'
+        x["effects"] = [dict(e) for e in o["effects"]]
+        cost(w, x, 1)
+    mark(w)
+
+    # Idle Transfiguration: full Self-Alteration table
+    al = S.get("Alteration")
+    wings = al["system"]["activities"]["D62ba08tj9lXTXNW"]
+    wings["name"] = "Self-Alteration: Wings (4 CE)"
+    al["flags"]["jjk5e"]["ceCosts"]["D62ba08tj9lXTXNW"] = 4
+    for e in al["effects"]:
+        if e["_id"] == "xOueQF38LSoHmu8d":
+            e["changes"] = [{"key": "system.attributes.movement.fly", "mode": 4, "value": "60", "priority": 20}]
+            e["description"] = "60 ft fly speed; +2 AC while at least 15 ft away from enemies (add by hand)."
+    for e in al["effects"]:
+        if e["_id"] == "73JDsjL5UaIYtIMf": e["description"] = "Unarmed strikes deal piercing damage and + proficiency."
+        if e["_id"] == "1K3HwhLv8yhXv94g": e["description"] = "Unarmed strikes deal slashing and count as light, finesse, martial melee weapons."
+        if e["_id"] == "Gh79cTXIIPEKHaVd": e["description"] = "Melee reach +10 ft."
+    hh = act(al, "hooves", "utility", "Self-Alteration: Horse Hooves (3 CE)", "bonus", range=RANGE_SELF, target=SELF)
+    apply(hh, fx(al, "hooves", "Horse Hooves", rounds=None, changes=[("system.attributes.movement.walk", 2, "+10")], desc="+10 ft speed; Dash as a bonus action."))
+    cost(al, hh, 3)
+    sk = act(al, "spiked", "utility", "Self-Alteration: Spiked Skin (2 CE)", "bonus", range=RANGE_SELF, target=SELF)
+    apply(sk, fx(al, "spiked", "Spiked Skin", rounds=None))
+    cost(al, sk, 2)
+    rx = act(al, "spikes", "damage", "Spiked Skin (reaction to a melee attack within 5 ft)", "reaction", target=one_creature(),
+             damage={"parts": [{"number": None, "denomination": None, "bonus": "", "types": ["piercing"],
+                     "custom": {"enabled": True, "formula": "4 * @prof"}, "scaling": {}}]})
+    rx["useConditionText"] = 'reaction === "isAttacked"'
+    free(al, rx)
+    for key, nm, ch in [("big", "Size Change: enlarge (2 CE, 6th)", [("flags.midi-qol.advantage.ability.check.str", 0, "1"), ("flags.midi-qol.advantage.ability.save.str", 0, "1"),
+                                                                   ("system.bonuses.mwak.damage", 2, "+ 1d4")]),
+                        ("small", "Size Change: reduce (2 CE, 6th)", [("flags.midi-qol.advantage.ability.check.dex", 0, "1"), ("flags.midi-qol.advantage.ability.save.dex", 0, "1"),
+                                                                     ("system.attributes.ac.bonus", 2, "+1")])]:
+        x = act(al, key, "utility", nm, "bonus", range=RANGE_SELF, target=SELF)
+        apply(x, fx(al, key, nm.split(" (")[0], rounds=10, changes=ch, desc="One size category bigger/smaller for 1 minute (resize the token)."))
+        cost(al, x, 2)
+    note(al, "Restrictions: Sword Arms ✗ Spike Hands/Wings; Spike Hands ✗ Sword Arms/Wings; Arm Shields and Long Arms ✗ Wings.")
+    mark(al)
+
+    # Ten Shadows: Divine Dogs appear within 10 ft
+    dd = S.get("Divine Dogs")
+    for a in dd["system"]["activities"].values():
+        if a["type"] == "summon": a["range"] = _r(10)
+    mark(dd)
+
+    # Paralyzing Gaze: maintain with a bonus action
+    pg = S.get("Maximum: Paralyzing Gaze")
+    pg["system"]["activities"]["S3EuFdYe8bgPf0Cl"]["activation"]["type"] = "bonus"
+    mark(pg)
+
+    # Straw Doll: Hair Pin reaction detonation
+    hp_ = S.get("Hair Pin")
+    o = hp_["system"]["activities"]["eYayPO9O7w18fnMl"]
+    o["name"] = "Hair Pin: detonate (bonus action)"
+    x = act(hp_, "react", "save", "Hair Pin: detonate (reaction: creature within 5 ft of a nail)", "reaction", save=_sv("dex"),
+            damage=json.loads(json.dumps(o["damage"])), range=_r(5), target=sphere(10))
+    free(hp_, x)
+    mark(hp_)
+
+    # Ten Shadows domain: swap with a shadow clone
+    d = S.get("Domain Expansion: Chimera Shadow Garden")
+    x = act(d, "swap", "utility", "Swap places with a Shadow Clone when hit (reaction)", "reaction", range=RANGE_SELF, target=SELF)
+    x["useConditionText"] = 'reaction === "isHit"'
+    free(d, x)
+    mark(d)
+
+    # Tool Mastery: grant advantage with an imbued tool
+    tm = S.get("Tool Mastery")
+    x = act(tm, "adv", "utility", "Grant advantage to an attack with your imbued tool (reaction)", "reaction", range=_r(60), target=one_creature())
+    apply(x, fx(tm, "adv", "Imbued tool: advantage", rounds=1, special=["1Attack"], changes=[("flags.midi-qol.advantage.attack.all", 0, "1")]))
+    free(tm, x)
+    mark(tm)
+
+    # Vengeful Spirit: persuasion to unmanifest
+    vs = S.get("Vengeful Spirit Manifestation")
+    x = act(vs, "calm", "utility", "Calm the spirit: DC 20 Persuasion (free, once per round)", "special", range=RANGE_SELF, target=SELF,
+            roll={"formula": "1d20 + @skills.per.total", "name": "Persuasion vs DC 20", "prompt": False, "visible": True})
+    free(vs, x)
+    mark(vs)
+
+
 TECHNIQUES = {"Antigravity System": antigravity_system,
               "Auspicious Beast Summon": auspicious_beast_summon,
               "Black Bird Manipulation": black_bird_manipulation,
@@ -6884,7 +7059,8 @@ TECHNIQUES = {"Antigravity System": antigravity_system,
               "████ and Light": light,
               "_leftovers": leftovers,
               "_sanitize": sanitize,
-              "_feats": feat_fixes}
+              "_feats": feat_fixes,
+              "_review": review_fixes}
 
 if __name__ == "__main__":
     args = sys.argv[1:]

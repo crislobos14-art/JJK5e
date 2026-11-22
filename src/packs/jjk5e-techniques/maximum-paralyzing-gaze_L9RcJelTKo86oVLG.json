@@ -77,7 +77,7 @@
     "name": "Maintain paralysis (2 CE, bonus action)",
     "sort": 100000,
     "activation": {
-     "type": "special",
+     "type": "bonus",
      "value": 1,
      "condition": "",
      "override": true

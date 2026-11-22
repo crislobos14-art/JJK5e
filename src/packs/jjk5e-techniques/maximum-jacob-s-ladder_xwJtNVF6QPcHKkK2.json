@@ -98,7 +98,7 @@
    "d4NcKOrJ2ZMIyrGf": {
     "_id": "d4NcKOrJ2ZMIyrGf",
     "type": "attack",
-    "name": "Jacob's Ladder strike (6 CE)",
+    "name": "Destroy a cursed object/barrier (6 CE): CE attack vs its DC",
     "sort": 100000,
     "activation": {
      "type": "action",
@@ -114,7 +114,7 @@
      "spellSlot": false
     },
     "range": {
-     "value": "200",
+     "value": "30",
      "units": "ft",
      "override": true
     },
@@ -143,23 +143,54 @@
      }
     },
     "damage": {
-     "includeBase": false,
-     "parts": [
-      {
-       "number": 5,
-       "denomination": 12,
-       "bonus": "",
-       "types": [
-        "radiant"
-       ],
-       "custom": {
-        "enabled": false,
-        "formula": ""
-       },
-       "scaling": {}
-      }
-     ]
+     "includeBase": true,
+     "parts": []
     }
+   },
+   "WWeky1ddUSWVnkrb": {
+    "_id": "WWeky1ddUSWVnkrb",
+    "type": "utility",
+    "name": "With Maximum Output: 30-ft circle, ignores damage reduction",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "200",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "radius",
+      "size": "30",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": []
    }
   },
   "uses": {
@@ -218,7 +249,7 @@
    "technique": "Technique Extermination",
    "level": 11,
    "spellFrom": "feat",
-   "automationNotes": "Undead, cursed spirits and evil creatures save at disadvantage. Strike damage shown as 5d12: check the full text.",
+   "automationNotes": "Undead, cursed spirits and evil creatures save at disadvantage. On a hit the object/barrier is destroyed and neutralized.",
    "automation": "automated"
   }
  },

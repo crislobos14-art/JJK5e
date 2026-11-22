@@ -183,7 +183,7 @@
    "D62ba08tj9lXTXNW": {
     "_id": "D62ba08tj9lXTXNW",
     "type": "utility",
-    "name": "Self-Alteration: Wings (2 CE)",
+    "name": "Self-Alteration: Wings (4 CE)",
     "sort": 0,
     "img": null,
     "activation": {
@@ -259,6 +259,226 @@
      "override": true
     },
     "effects": []
+   },
+   "nBdPUwPoOHWPZTfP": {
+    "_id": "nBdPUwPoOHWPZTfP",
+    "type": "utility",
+    "name": "Self-Alteration: Horse Hooves (3 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "W7TiVzKWOLBVwHbk",
+      "onSave": false
+     }
+    ]
+   },
+   "nauoLJdeasq6PIdG": {
+    "_id": "nauoLJdeasq6PIdG",
+    "type": "utility",
+    "name": "Self-Alteration: Spiked Skin (2 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "8El9QbFxbndT2zfP",
+      "onSave": false
+     }
+    ]
+   },
+   "6Nb6SZGCJ2I9PX0n": {
+    "_id": "6Nb6SZGCJ2I9PX0n",
+    "type": "damage",
+    "name": "Spiked Skin (reaction to a melee attack within 5 ft)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "damage": {
+     "parts": [
+      {
+       "number": null,
+       "denomination": null,
+       "bonus": "",
+       "types": [
+        "piercing"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "4 * @prof"
+       },
+       "scaling": {}
+      }
+     ]
+    },
+    "useConditionText": "reaction === \"isAttacked\""
+   },
+   "KX2SOjmPjmXhT8V9": {
+    "_id": "KX2SOjmPjmXhT8V9",
+    "type": "utility",
+    "name": "Size Change: enlarge (2 CE, 6th)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "sk8ayMxchSnk9gdb",
+      "onSave": false
+     }
+    ]
+   },
+   "a57xcFIjWLuq4Uoj": {
+    "_id": "a57xcFIjWLuq4Uoj",
+    "type": "utility",
+    "name": "Size Change: reduce (2 CE, 6th)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "ndZcwNWxj7VacHBE",
+      "onSave": false
+     }
+    ]
    }
   },
   "uses": {
@@ -301,12 +521,16 @@
     "umaLfsVFRKb6ge7w": 2,
     "j0n5aMyKuYwqkrex": 2,
     "tZHKagI9omzBbIGV": 2,
-    "D62ba08tj9lXTXNW": 2
+    "D62ba08tj9lXTXNW": 4,
+    "nBdPUwPoOHWPZTfP": 3,
+    "nauoLJdeasq6PIdG": 2,
+    "KX2SOjmPjmXhT8V9": 2,
+    "a57xcFIjWLuq4Uoj": 2
    },
    "technique": "Idle Transfiguration",
    "level": 3,
    "spellFrom": "feat",
-   "automationNotes": "Wings' exact benefit: check the table (fly speed assumed = walking). Ally alterations: up to prof per creature.",
+   "automationNotes": "Restrictions: Sword Arms ✗ Spike Hands/Wings; Spike Hands ✗ Sword Arms/Wings; Arm Shields and Long Arms ✗ Wings.",
    "automation": "automated"
   }
  },
@@ -320,7 +544,7 @@
    "transfer": false,
    "disabled": false,
    "statuses": [],
-   "description": "<p>Sword Arms (see the table for restrictions).</p>",
+   "description": "Unarmed strikes deal slashing and count as light, finesse, martial melee weapons.",
    "changes": [],
    "duration": {
     "rounds": null
@@ -340,7 +564,7 @@
    "transfer": false,
    "disabled": false,
    "statuses": [],
-   "description": "<p>Spike Hands (see the table for restrictions).</p>",
+   "description": "Unarmed strikes deal piercing damage and + proficiency.",
    "changes": [
     {
      "key": "system.bonuses.mwak.damage",
@@ -394,7 +618,7 @@
    "transfer": false,
    "disabled": false,
    "statuses": [],
-   "description": "<p>Long Arms (see the table for restrictions).</p>",
+   "description": "Melee reach +10 ft.",
    "changes": [],
    "duration": {
     "rounds": null
@@ -414,12 +638,12 @@
    "transfer": false,
    "disabled": false,
    "statuses": [],
-   "description": "<p>Wings (see the table for restrictions).</p>",
+   "description": "60 ft fly speed; +2 AC while at least 15 ft away from enemies (add by hand).",
    "changes": [
     {
      "key": "system.attributes.movement.fly",
      "mode": 4,
-     "value": "@attributes.movement.walk",
+     "value": "60",
      "priority": 20
     }
    ],
@@ -432,6 +656,131 @@
     }
    },
    "_key": "!items.effects!VAvGtxSod2JL2DbT.xOueQF38LSoHmu8d"
+  },
+  {
+   "_id": "W7TiVzKWOLBVwHbk",
+   "name": "Horse Hooves",
+   "img": "modules/jjk5e/icons/techniques/idle-transfiguration.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>+10 ft speed; Dash as a bonus action.</p>",
+   "changes": [
+    {
+     "key": "system.attributes.movement.walk",
+     "mode": 2,
+     "value": "+10",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Idle Transfiguration"
+    }
+   },
+   "_key": "!items.effects!VAvGtxSod2JL2DbT.W7TiVzKWOLBVwHbk"
+  },
+  {
+   "_id": "8El9QbFxbndT2zfP",
+   "name": "Spiked Skin",
+   "img": "modules/jjk5e/icons/techniques/idle-transfiguration.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Idle Transfiguration"
+    }
+   },
+   "_key": "!items.effects!VAvGtxSod2JL2DbT.8El9QbFxbndT2zfP"
+  },
+  {
+   "_id": "sk8ayMxchSnk9gdb",
+   "name": "Size Change: enlarge",
+   "img": "modules/jjk5e/icons/techniques/idle-transfiguration.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>One size category bigger/smaller for 1 minute (resize the token).</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.advantage.ability.check.str",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.advantage.ability.save.str",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ 1d4",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Idle Transfiguration"
+    }
+   },
+   "_key": "!items.effects!VAvGtxSod2JL2DbT.sk8ayMxchSnk9gdb"
+  },
+  {
+   "_id": "ndZcwNWxj7VacHBE",
+   "name": "Size Change: reduce",
+   "img": "modules/jjk5e/icons/techniques/idle-transfiguration.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>One size category bigger/smaller for 1 minute (resize the token).</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.advantage.ability.check.dex",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.advantage.ability.save.dex",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Idle Transfiguration"
+    }
+   },
+   "_key": "!items.effects!VAvGtxSod2JL2DbT.ndZcwNWxj7VacHBE"
   }
  ],
  "_key": "!items!VAvGtxSod2JL2DbT"

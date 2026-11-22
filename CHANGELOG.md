@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.54.0 — Revisión técnica por técnica contra el manual
+Revisé las 81 técnicas rasgo por rasgo contra el manual (salvaciones, tipos de daño, condiciones, áreas, alcances, acción/acción adicional/reacción, ataques, CE y dados). Corregido:
+- **Antigravity**: faltaba Disorienting Gravity (CON: desventaja en ataques, sin concentración) y Nauseating Gravity (aturdido hasta el final de su siguiente turno).
+- **Blood Manipulation**: Crimson Rain con Convergence derriba.
+- **Comedian**: Powerful Punchline ahora tiene sus tres formas (esfera de 30 pies a 80, línea de 60, cono de 30); Comedic Foil tenía la salvación de EM sin automatizar (aura por turno).
+- **Cursed Speech**: cono de 35 pies (+3 CE) a 11.º.
+- **Esoteric Art**: Impasto Canvas solo tenía una trampa; ahora Pit (2d6 + derribo), Spike (2d10 perforante + derribo), Snare (apresado con escape) y Boulder (línea de 30, 4d10 + derribo).
+- **Faceless God**: salvación de SAB para reducir la corrupción sin línea de visión.
+- **G Warstaff**: la previsión también como reacción.
+- **Idle Transfiguration**: Wings costaba 2 CE y daba vuelo = andar; el manual dice 4 CE y 60 pies. Añadidas Horse Hooves, Spiked Skin (reacción, 4× comp. perforante) y Size Change (agrandar/reducir).
+- **Paralyzing Gaze**: mantener es acción adicional.
+- **Straw Doll**: Hair Pin detona también por reacción.
+- **Technique Extermination**: el ataque de 6 CE de Jacob’s Ladder no hace daño, destruye objetos/barreras a 30 pies; añadida la versión con Maximum Output (círculo de 30).
+- **Ten Shadows**: Divine Dogs aparecen a 10 pies (no 30); el dominio permite cambiar de sitio con un clon de sombra por reacción.
+- **Tool Manipulation**: reacción para dar ventaja con tu herramienta imbuida.
+- **Vengeful Spirit**: tirada de Persuasión CD 20 para calmar al espíritu.
+- Herramienta: elimina referencias de efecto duplicadas.
+- Sin probar en Foundry real.
+
 ## 1.53.1 — Compatibilidad con los módulos que usa JJK 5e
 - **Midi-QOL / DAE**: el navegador de paquetes de Foundry solo ofrece midi 14.0.x y DAE 14.0.x, que **no funcionan con dnd5e 6**. El manifiesto ahora enlaza las versiones para dnd5e 6 (`latest-dnd6`), y el README explica cuál usar: dnd5e 6.1 → Midi 14.7.0 + DAE 14.6.10; dnd5e 6.0 → Midi 14.6.x. Mínimos: Midi 14.6.5, DAE 14.6.4.
 - **Foundry/dnd5e**: mínimo real Foundry 14.369 y dnd5e 6.0.6 (lo que exige Midi para dnd5e 6); antes decía Foundry 13 y dnd5e 5.3, que no pueden cargar las dependencias obligatorias.

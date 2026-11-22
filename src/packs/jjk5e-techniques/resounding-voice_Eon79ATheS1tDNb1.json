@@ -19,12 +19,63 @@
    "value": "class",
    "subtype": ""
   },
-  "requirements": "Cursed Speech 11"
+  "requirements": "Cursed Speech 11",
+  "activities": {
+   "5A73zZA656BJHGfz": {
+    "_id": "5A73zZA656BJHGfz",
+    "type": "utility",
+    "name": "Speak in a 35-ft cone (+3 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "cone",
+      "size": "35",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": []
+   }
+  }
  },
  "flags": {
   "jjk5e": {
    "technique": "Cursed Speech",
-   "level": 11
+   "level": 11,
+   "ceCosts": {
+    "5A73zZA656BJHGfz": 3
+   },
+   "automationNotes": "Use the cone template with the Cursed Speech command you speak.",
+   "automation": "automated"
   }
  },
  "folder": "hKdstL12BA2dMsHA",
