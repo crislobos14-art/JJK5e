@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.57.0 — Reglas de refinamiento de dominio
+- Revisadas las reglas de *Intricacies of Sorcery* frente al código: Black Flash, The Zone, RCT, recuperación de CE, Maximum/Reduced Output, Binding Vows, Limb Damage, Soul Awareness y choques de dominio.
+- Domain Refinement 500/1000: el dominio dura 2/3 minutos (antes siempre 1).
+- Refinement 700: coste −mod CE y Technique Burnout da 1 nivel de agotamiento (antes 2). Refinement 1000: coste −bono de competencia.
+- Refinement 800 (Durable Barrier): el refinamiento cuenta doble en los PG de la barrera.
+- RCT (Healing Pool): nueva actividad de reacción al recibir daño (1/ronda).
+
 ## 1.56.0 — Armas del manual
 - Revisadas las 43 armas de la tabla del manual: todas presentes con daño, tipo, precio y propiedades correctos.
 - Spear: ahora arrojadiza (20/60) además de alcance.

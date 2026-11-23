@@ -363,7 +363,15 @@ function ceMod(actor) {
 
 function activityCost(activity) {
   const costs = activity?.item?.flags?.jjk5e?.ceCosts;
-  const base = Number(costs?.[activity.id] ?? 0);
+  let base = Number(costs?.[activity.id] ?? 0);
+  // V.6 Domain Refinement: Efficient Expansions (700) −CE mod, Total Mastery (1000) −proficiency bonus.
+  const actor = activity?.actor ?? activity?.item?.actor;
+  if (base > 0 && actor && activity?.item?.flags?.jjk5e?.domainActivity === activity.id) {
+    const ref = refinementOf(actor);
+    if (ref >= 700) base -= Math.max(0, ceMod(actor));
+    if (ref >= 1000) base -= Number(actor.system?.attributes?.prof) || 0;
+    base = Math.max(1, base);
+  }
   return circuitCost(activity, base);
 }
 
@@ -1334,8 +1342,11 @@ function onPreRollDamage(config) {
 
 async function openDomain(actor, item) {
   if (!actor?.isOwner || !setting("domainTracking")) return;
+  // V.6 Domain Refinement: Lasting Domain (500) 2 minutes, Total Mastery (1000) 3 minutes.
+  const ref = refinementOf(actor);
+  const minutes = ref >= 1000 ? 3 : ref >= 500 ? 2 : 1;
   await setKindEffect(actor, "domain", {
-    name: item.name, img: `${ICONS}/domain.svg`, duration: { rounds: 10, seconds: 60 },
+    name: item.name, img: `${ICONS}/domain.svg`, duration: { rounds: 10 * minutes, seconds: 60 * minutes },
     description: `<p>${t("Domain.Description")}</p>`,
     flags: { jjk5e: { domainOpen: true } }
   });
@@ -1373,7 +1384,8 @@ async function onDeleteEffect(effect, options, userId) {
     description: `<p>${t("Burnout.Description")}</p>`,
     flags: { jjk5e: { burnout: true } }
   });
-  await burnoutExhaustion(actor, 2);
+  // V.6 Efficient Expansions (refinement 700+): only 1 level of exhaustion after the domain.
+  await burnoutExhaustion(actor, refinementOf(actor) >= 700 ? 1 : 2);
   ui.notifications.info(t("Notify.Burnt", { name: actor.name }));
 }
 
@@ -3647,7 +3659,8 @@ async function domainOpened(actor) {
   const ref = refinementOf(actor);
   const token = actorToken(actor);
   const c = token ? tokenCenter(token) : null;
-  const max = Math.max(1, 10 * mod + ref);
+  // Domain Durability: +1 HP per refinement point; Durable Barrier (800+) doubles it.
+  const max = Math.max(1, 10 * mod + (ref >= 800 ? 2 * ref : ref));
   const state = { open: true, hp: max, max, ac: 10 + mod + Math.floor(ref / 100), refinement: ref,
     radius: DOMAIN_RADIUS, lethal: actor.getFlag(MODULE_ID, "domainLethal") !== false,
     sceneId: canvas?.scene?.id ?? null, x: c?.x ?? null, y: c?.y ?? null,

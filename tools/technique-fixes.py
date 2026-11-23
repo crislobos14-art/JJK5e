@@ -6989,6 +6989,23 @@ def review_fixes(S):
     mark(vs)
 
 
+# ---------------------------------------------------------------- core rules (Intricacies of Sorcery)
+
+def rules_fixes(S):
+    # RCT: the healing pool can also be drawn as a reaction to taking damage (once per round).
+    rp = S.get("Reverse Cursed Technique (Healing Pool)", "jjk5e-class-features")
+    acts = rp["system"]["activities"]
+    heal = next(a for a in acts.values() if a["type"] == "heal" and a["_id"] != sid(rp["_id"], "act", "reaction"))
+    r = json.loads(json.dumps(heal))
+    r["_id"] = sid(rp["_id"], "act", "reaction")
+    r["name"] = "Heal (reaction to damage, 1/round)"
+    r["activation"] = {"type": "reaction", "value": 1, "condition": "When you take damage (once per round).", "override": True}
+    acts[r["_id"]] = r
+    fl = rp["flags"].setdefault("jjk5e", {})
+    for k in ("ceCosts", "ceSteps"):
+        if heal["_id"] in fl.get(k, {}): fl[k][r["_id"]] = fl[k][heal["_id"]]
+
+
 # ---------------------------------------------------------------- manual weapons & gear (V.6 Equipment)
 
 def weapon_fixes(S):
@@ -7149,7 +7166,8 @@ TECHNIQUES = {"Antigravity System": antigravity_system,
               "_sanitize": sanitize,
               "_feats": feat_fixes,
               "_review": review_fixes,
-              "_weapons": weapon_fixes}
+              "_weapons": weapon_fixes,
+              "_rules": rules_fixes}
 
 if __name__ == "__main__":
     args = sys.argv[1:]
