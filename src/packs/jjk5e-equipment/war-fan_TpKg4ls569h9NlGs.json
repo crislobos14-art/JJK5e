@@ -87,7 +87,11 @@
    "transfer": true,
    "duration": {},
    "description": "",
-   "flags": {},
+   "flags": {
+    "jjk5e": {
+     "defensive": true
+    }
+   },
    "_key": "!items.effects!TpKg4ls569h9NlGs.9gLPGh6wEKjHAe0u"
   }
  ],

@@ -651,6 +651,11 @@ function registerActivityHooks() {
       await actor.setFlag(MODULE_ID, "sixEyesNext", true);
     }
     if (quantity) await createCombatClone(actor, quantity);
+    const regain = Number(item?.flags?.jjk5e?.ceRegain?.[activity.id] ?? 0);
+    if (actor && regain > 0) await spendCE(actor, -regain, `${item.name} — ${t("CE.Regained")}`);
+    if (item?.flags?.jjk5e?.reload?.[activity.id] && Number(item.system?.uses?.spent) > 0) {
+      await item.update({ "system.uses.spent": 0 });
+    }
     await remindModifiers(actor, item);
     if (item?.flags?.jjk5e?.openTechnique) await chooseTechnique(actor);
     const grp = item?.flags?.jjk5e?.activatesGroup?.[activity.id];
@@ -1266,8 +1271,32 @@ function onPreRollAttack(config) {
     || ["mwak", "msak"].includes(config?.subject?.actionType);
   if (melee && activeGroups(actor).includes("reckless")) config.advantage = true;
   if (config?.subject?.item?.flags?.jjk5e?.rawCE && traitChoice(actor, "ceTrait") === "rough") addPart(config, "1");
+  // Lance: disadvantage against a target within 5 ft.
+  if (config?.subject?.item?.flags?.jjk5e?.closeDisadvantage) {
+    const me = actor.getActiveTokens?.()?.[0];
+    if (me && [...(game.user?.targets ?? [])].some((t) => tokenDistance(me, t) <= 5)) config.disadvantage = true;
+  }
   applySureHit(actor, config);
 }
+
+/** Defensive weapons: +1 AC from one equipped weapon at a time. Extra equipped copies get their effect disabled. */
+async function syncDefensive(actor) {
+  if (!actor?.isOwner || actor.documentName !== "Actor") return;
+  let kept = false;
+  const updates = [];
+  for (const item of actor.items) {
+    for (const e of item.effects ?? []) {
+      if (!e.flags?.jjk5e?.defensive) continue;
+      const equipped = !!item.system?.equipped;
+      const active = equipped && !kept;
+      if (active) kept = true;
+      const disabled = equipped && !active;
+      if (e.disabled !== disabled) updates.push(e.update({ disabled }));
+    }
+  }
+  await Promise.all(updates);
+}
+const isDefensive = (item) => item?.effects?.some?.((e) => e.flags?.jjk5e?.defensive);
 
 function rawCEDamageBonus(actor) {
   const mastery = traitChoice(actor, "ceMastery");
@@ -1883,8 +1912,14 @@ Hooks.once("ready", async () => {
   });
   Hooks.on("updateItem", (item, changes, options, userId) => {
     if (userId === game.user.id && item.flags?.jjk5e?.cePool && !options?.jjk5eSync) syncResource(item.actor);
+    if (userId === game.user.id && item.actor && isDefensive(item) && changes?.system && "equipped" in changes.system) syncDefensive(item.actor);
     refreshPanels(item.actor);
   });
+  for (const h of ["createItem", "deleteItem"]) {
+    Hooks.on(h, (item, options, userId) => {
+      if (userId === game.user.id && item.actor && isDefensive(item)) syncDefensive(item.actor);
+    });
+  }
   Hooks.on("updateActor", (actor, changes, options, userId) => {
     onActorUpdate(actor, changes, options, userId);
     refreshPanels(actor);
@@ -4631,9 +4666,9 @@ async function syncTokenAuras(actor) {
   for (const token of actor.getActiveTokens?.() ?? []) {
     for (const [kind, params] of Object.entries(TMFX_AURAS)) {
       try {
-        const has = TokenMagic.hasFilterId?.(token, params.filterId);
-        if (active.has(kind) && !has) await TokenMagic.addUpdateFilters(token, [foundry.utils.deepClone(params)]);
-        if (!active.has(kind) && has) await TokenMagic.deleteFilters(token, params.filterId);
+        const has = globalThis.TokenMagic.hasFilterId?.(token, params.filterId);
+        if (active.has(kind) && !has) await globalThis.TokenMagic.addUpdateFilters(token, [foundry.utils.deepClone(params)]);
+        if (!active.has(kind) && has) await globalThis.TokenMagic.deleteFilters(token, params.filterId);
       } catch (err) { console.warn(`${MODULE_ID} | Token Magic FX`, err); }
     }
   }

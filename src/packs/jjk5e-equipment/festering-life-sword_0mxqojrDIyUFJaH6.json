@@ -59,6 +59,14 @@
     "damage": {
      "includeBase": true,
      "parts": []
+    },
+    "midiProperties": {
+     "triggeredActivityId": "Sfs317SeiXn7Rmzx",
+     "triggeredActivityTargets": "hitTargets",
+     "triggeredActivityRollAs": "self",
+     "triggeredActivityConsume": false,
+     "triggeredActivityConfigure": false,
+     "triggeredActivityConditionText": ""
     }
    },
    "Sfs317SeiXn7Rmzx": {

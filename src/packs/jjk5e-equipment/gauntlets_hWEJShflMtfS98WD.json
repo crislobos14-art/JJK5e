@@ -65,7 +65,8 @@
  },
  "flags": {
   "jjk5e": {
-   "priceUSD": "$500"
+   "priceUSD": "$500",
+   "fist": true
   }
  },
  "effects": [
@@ -85,7 +86,11 @@
    "transfer": true,
    "duration": {},
    "description": "",
-   "flags": {},
+   "flags": {
+    "jjk5e": {
+     "defensive": true
+    }
+   },
    "_key": "!items.effects!hWEJShflMtfS98WD.SDLPRNzvEOdKvB69"
   }
  ],

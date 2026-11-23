@@ -42,6 +42,18 @@ class Store:
         self.dirty.add(hits[0]["_id"])
         return hits[0]
 
+    def add(self, pack, doc, slug):
+        """Register a new document (stable _id) in a pack; save() writes its file and aggregate entry."""
+        if doc["_id"] in self.src: return self.by_id(doc["_id"])
+        doc["_key"] = f"!items!{doc['_id']}"
+        p = f"src/packs/{pack}/{slug}_{doc['_id']}.json"
+        open(p, "w", encoding="utf-8").write("{}\n")
+        self.src[doc["_id"]] = (pack, p, doc)
+        clean = json.loads(json.dumps(doc)); clean.pop("_key", None)
+        self.agg[pack]["documents"].append(clean)
+        self.dirty.add(doc["_id"])
+        return doc
+
     def by_id(self, _id):
         self.dirty.add(_id)
         return self.src[_id][2]
@@ -6977,6 +6989,81 @@ def review_fixes(S):
     mark(vs)
 
 
+# ---------------------------------------------------------------- manual weapons & gear (V.6 Equipment)
+
+def weapon_fixes(S):
+    EQ = "jjk5e-equipment"
+    W = lambda n: S.get(n, EQ)
+    first = lambda it, typ="attack": next(a for a in it["system"]["activities"].values() if a["type"] == typ)
+
+    # Spear: thrown (20/60) and reach.
+    sp = W("Spear")
+    sp["system"]["range"] = {"value": 20, "long": 60, "units": "ft", "reach": 10}
+
+    # Claws of Calamity: 1d12 bludgeoning, slashing or piercing (chosen on the damage roll).
+    cc = W("Claws of Calamity")
+    cc["system"]["damage"]["base"].update({"number": 1, "denomination": 12,
+                                            "types": ["bludgeoning", "slashing", "piercing"]})
+    acts = cc["system"]["activities"]
+    for k in [k for k, a in acts.items() if a["type"] == "damage"]: acts.pop(k)
+    cc["flags"].setdefault("jjk5e", {})["fist"] = True
+
+    # Fist property: counts as an unarmed strike.
+    for n in ("Knuckle Dusters", "Gauntlets", "Claws of Calamity", "Gauntlets of Life Catching",
+              "Gauntlets of Oni Power", "Dragonfly Knuckles"):
+        S.get(n, EQ).setdefault("flags", {}).setdefault("jjk5e", {})["fist"] = True
+
+    # Defensive: +1 AC; the module keeps only one equipped Defensive weapon active.
+    for it in (W("Tonfa"), W("War Fan"), W("Gauntlets")):
+        for e in it.get("effects", []):
+            if e["name"].startswith("Defensive"): e.setdefault("flags", {}).setdefault("jjk5e", {})["defensive"] = True
+
+    # Weighted Chain family: a hit restrains (Large or smaller) until freed with DC 14 STR.
+    for n in ("Weighted Chain", "Chain of 1000 Miles", "Chains of Heaven"):
+        it = W(n); a = first(it)
+        eid = fx(it, "chained", "Chained (restrained)", statuses=("restrained",), rounds=None,
+                 desc="Large or smaller only (not Tiny, not Huge+). Ends when freed: action, DC 14 Strength check "
+                      "by the target or a creature within reach.")
+        it["effects"][-1]["duration"] = {}
+        a["effects"] = [x for x in a.get("effects", []) if x.get("_id") != eid]
+        apply(a, eid)
+
+    # Lance: disadvantage against a target within 5 ft.
+    W("Lance").setdefault("flags", {}).setdefault("jjk5e", {})["closeDisadvantage"] = True
+
+    # Firearms: reload (N shots) as item uses + a Reload action that refills them.
+    for n, shots in (("Rifle", 30), ("Handgun", 15), ("Revolver", 6)):
+        it = W(n); a = first(it)
+        it["system"]["uses"] = {"max": str(shots), "spent": 0, "recovery": []}
+        a["consumption"] = {"targets": [{"type": "itemUses", "value": "1", "target": "", "scaling": {}}],
+                            "scaling": {"allowed": False, "max": ""}, "spellSlot": False}
+        r = act(it, "reload", "utility", f"Reload ({shots})", activation="action",
+                range={"units": "self", "override": True}, target={"override": True})
+        it["flags"].setdefault("jjk5e", {}).setdefault("reload", {})[r["_id"] if isinstance(r, dict) else r] = True
+
+    # Festering Life Sword: on a hit, the CON save (6d10 necrotic on a failure) follows automatically.
+    fl = W("Festering Life Sword")
+    trigger(first(fl), first(fl, "save"), targets="hitTargets")
+
+    # Energy Tag (Explorer's Pack): rip it to regain 3 CE.
+    ex = W("Explorer's Pack")
+    tag_id = sid("weapons", "energy-tag")
+    tag = S.add(EQ, {"_id": tag_id, "name": "Energy Tag", "type": "consumable", "img": "icons/sundries/scrolls/scroll-runed-brown-purple.webp",
+                     "folder": ex.get("folder"),
+                     "system": {"description": {"value": "<p>A charm fermented in cursed energy for 100 years. "
+                                                         "You can rip the charm to regain 3 cursed energy.</p>"},
+                                "source": {"book": "JJK 5e V.6", "page": "", "custom": "", "license": "CC BY-NC-SA 4.0", "rules": "2014"},
+                                "type": {"value": "trinket", "subtype": ""}, "rarity": "common", "quantity": 1,
+                                "uses": {"max": "1", "spent": 0, "recovery": [], "autoDestroy": True},
+                                "activities": {}},
+                     "effects": [], "flags": {"jjk5e": {"grade": "4th Grade"}}}, "energy-tag")
+    r = act(tag, "rip", "utility", "Rip (regain 3 CE)", activation="action",
+            range={"units": "self", "override": True}, target={"override": True})
+    rid = r["_id"] if isinstance(r, dict) else r
+    tag["system"]["activities"][rid]["consumption"]["targets"] = [{"type": "itemUses", "value": "1", "target": "", "scaling": {}}]
+    tag["flags"]["jjk5e"]["ceRegain"] = {rid: 3}
+
+
 TECHNIQUES = {"Antigravity System": antigravity_system,
               "Auspicious Beast Summon": auspicious_beast_summon,
               "Black Bird Manipulation": black_bird_manipulation,
@@ -7061,7 +7148,8 @@ TECHNIQUES = {"Antigravity System": antigravity_system,
               "_leftovers": leftovers,
               "_sanitize": sanitize,
               "_feats": feat_fixes,
-              "_review": review_fixes}
+              "_review": review_fixes,
+              "_weapons": weapon_fixes}
 
 if __name__ == "__main__":
     args = sys.argv[1:]

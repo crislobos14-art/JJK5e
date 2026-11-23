@@ -59,7 +59,13 @@
     "damage": {
      "includeBase": true,
      "parts": []
-    }
+    },
+    "effects": [
+     {
+      "_id": "itYpdhEurcSWiacS",
+      "onSave": false
+     }
+    ]
    },
    "JZbNd4NqnBXAZ7oI": {
     "_id": "JZbNd4NqnBXAZ7oI",
@@ -113,5 +119,27 @@
    "grade": "Special Grade"
   }
  },
- "_key": "!items!dhj8CjuSUL36AMbj"
+ "_key": "!items!dhj8CjuSUL36AMbj",
+ "effects": [
+  {
+   "_id": "itYpdhEurcSWiacS",
+   "name": "Chained (restrained)",
+   "img": "icons/svg/sword.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [
+    "restrained"
+   ],
+   "description": "<p>Large or smaller only (not Tiny, not Huge+). Ends when freed: action, DC 14 Strength check by the target or a creature within reach.</p>",
+   "changes": [],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!dhj8CjuSUL36AMbj.itYpdhEurcSWiacS"
+  }
+ ]
 }

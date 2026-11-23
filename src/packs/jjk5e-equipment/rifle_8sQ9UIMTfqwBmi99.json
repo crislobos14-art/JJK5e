@@ -62,13 +62,69 @@
     "damage": {
      "includeBase": true,
      "parts": []
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "value": "1",
+       "target": "",
+       "scaling": {}
+      }
+     ],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
     }
+   },
+   "FLcE4ViCb0tZ9PnP": {
+    "_id": "FLcE4ViCb0tZ9PnP",
+    "type": "utility",
+    "name": "Reload (30)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "effects": []
    }
+  },
+  "uses": {
+   "max": "30",
+   "spent": 0,
+   "recovery": []
   }
  },
  "flags": {
   "jjk5e": {
-   "priceUSD": "$7,500"
+   "priceUSD": "$7,500",
+   "reload": {
+    "FLcE4ViCb0tZ9PnP": true
+   }
   }
  },
  "_key": "!items!8sQ9UIMTfqwBmi99"

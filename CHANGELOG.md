@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.56.0 — Armas del manual
+- Revisadas las 43 armas de la tabla del manual: todas presentes con daño, tipo, precio y propiedades correctos.
+- Spear: ahora arrojadiza (20/60) además de alcance.
+- Claws of Calamity: daño base 1d12 contundente, cortante o perforante (antes 1d6 + actividad aparte).
+- Weighted Chain, Chain of 1000 Miles y Chains of Heaven: al impactar aplican Restrained (libera CD 14 FUE).
+- Lance: desventaja automática contra objetivos a 5 ft o menos.
+- Rifle, Handgun y Revolver: munición de recarga (30/15/6) como usos del arma y acción Reload.
+- Defensive (Tonfa, War Fan, Gauntlets): solo un arma equipada da +1 CA.
+- Festering Life Sword: la salvación de CON se lanza sola al impactar (Midi-QOL).
+- Armas con propiedad Fist marcadas (flags.jjk5e.fist).
+- Nuevo objeto Energy Tag (Explorer's Pack): romperlo devuelve 3 CE.
+- Corregido aviso de lint de Token Magic FX.
+
 ## 1.55.0 — Reversals
 - Verificados los 78 reversals de *CT Reversals*: todos presentes en el compendio de técnicas, con texto completo y automatización.
 - Entropy (Reversal) de Vairocana ahora requiere nivel 6 para añadirse automáticamente.

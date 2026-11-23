@@ -1,0 +1,83 @@
+{
+ "_id": "hwHJQYbu7SFShyMp",
+ "name": "Energy Tag",
+ "type": "consumable",
+ "img": "icons/sundries/scrolls/scroll-runed-brown-purple.webp",
+ "folder": "5TkjeIlCFmk1GLJi",
+ "system": {
+  "description": {
+   "value": "<p>A charm fermented in cursed energy for 100 years. You can rip the charm to regain 3 cursed energy.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "trinket",
+   "subtype": ""
+  },
+  "rarity": "common",
+  "quantity": 1,
+  "uses": {
+   "max": "1",
+   "spent": 0,
+   "recovery": [],
+   "autoDestroy": true
+  },
+  "activities": {
+   "LG1vw2xLYE5A8OJx": {
+    "_id": "LG1vw2xLYE5A8OJx",
+    "type": "utility",
+    "name": "Rip (regain 3 CE)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "value": "1",
+       "target": "",
+       "scaling": {}
+      }
+     ],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "effects": []
+   }
+  }
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "grade": "4th Grade",
+   "ceRegain": {
+    "LG1vw2xLYE5A8OJx": 3
+   }
+  }
+ },
+ "_key": "!items!hwHJQYbu7SFShyMp"
+}

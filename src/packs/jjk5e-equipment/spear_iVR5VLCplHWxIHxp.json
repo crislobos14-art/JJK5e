@@ -36,8 +36,8 @@
    }
   },
   "range": {
-   "value": 10,
-   "long": null,
+   "value": 20,
+   "long": 60,
    "units": "ft",
    "reach": 10
   },

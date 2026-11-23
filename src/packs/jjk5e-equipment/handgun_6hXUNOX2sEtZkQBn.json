@@ -61,13 +61,69 @@
     "damage": {
      "includeBase": true,
      "parts": []
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "value": "1",
+       "target": "",
+       "scaling": {}
+      }
+     ],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
     }
+   },
+   "U3HpjQIjKWMvUqem": {
+    "_id": "U3HpjQIjKWMvUqem",
+    "type": "utility",
+    "name": "Reload (15)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "override": true
+    },
+    "effects": []
    }
+  },
+  "uses": {
+   "max": "15",
+   "spent": 0,
+   "recovery": []
   }
  },
  "flags": {
   "jjk5e": {
-   "priceUSD": "$2,500"
+   "priceUSD": "$2,500",
+   "reload": {
+    "U3HpjQIjKWMvUqem": true
+   }
   }
  },
  "_key": "!items!6hXUNOX2sEtZkQBn"

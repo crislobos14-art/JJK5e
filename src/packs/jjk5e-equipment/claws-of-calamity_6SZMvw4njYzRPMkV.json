@@ -22,9 +22,11 @@
   "damage": {
    "base": {
     "number": 1,
-    "denomination": 6,
+    "denomination": 12,
     "types": [
-     "bludgeoning"
+     "bludgeoning",
+     "slashing",
+     "piercing"
     ]
    }
   },
@@ -58,50 +60,6 @@
      "includeBase": true,
      "parts": []
     }
-   },
-   "cmxz6S5e9wtdJ2gR": {
-    "_id": "cmxz6S5e9wtdJ2gR",
-    "type": "damage",
-    "name": "Special",
-    "sort": 0,
-    "activation": {
-     "type": "special",
-     "value": null,
-     "condition": ""
-    },
-    "consumption": {
-     "targets": [],
-     "scaling": {
-      "allowed": false
-     }
-    },
-    "range": {
-     "units": "spec",
-     "override": true
-    },
-    "target": {},
-    "duration": {
-     "units": "inst"
-    },
-    "damage": {
-     "parts": [
-      {
-       "number": 1,
-       "denomination": 12,
-       "bonus": "",
-       "types": [
-        "bludgeoning"
-       ],
-       "custom": {
-        "enabled": false,
-        "formula": ""
-       },
-       "scaling": {
-        "number": 1
-       }
-      }
-     ]
-    }
    }
   },
   "magicalBonus": 3,
@@ -109,7 +67,8 @@
  },
  "flags": {
   "jjk5e": {
-   "grade": "1st Grade"
+   "grade": "1st Grade",
+   "fist": true
   }
  },
  "_key": "!items!6SZMvw4njYzRPMkV"
