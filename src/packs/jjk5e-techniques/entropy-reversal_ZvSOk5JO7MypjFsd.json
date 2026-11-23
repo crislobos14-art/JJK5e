@@ -88,7 +88,8 @@
    "technique": "Vairocana",
    "reversal": true,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "reversalLevel": 6
   }
  },
  "folder": "CpSgW3tLoueRa6XV",

@@ -6153,6 +6153,7 @@ def vairocana(S):
     a = en["system"]["activities"]["yEvqd8kYWry0gKIl"]
     a["name"] = "Entropy (1 CE, start of turn)"
     a["activation"]["type"] = "special"
+    en["flags"]["jjk5e"]["reversalLevel"] = 6  # "At 6th level" (C&C)
     mark(en)
 
 

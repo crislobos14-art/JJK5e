@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.55.0 — Reversals
+- Verificados los 78 reversals de *CT Reversals*: todos presentes en el compendio de técnicas, con texto completo y automatización.
+- Entropy (Reversal) de Vairocana ahora requiere nivel 6 para añadirse automáticamente.
+
 ## 1.54.1 — Compatibilidad con Foundry 14.368
 - **Foundry 14.368**: el módulo ahora se puede activar desde 14.368 (antes exigía 14.369).
 - En 14.368 hay que usar **dnd5e 5.3.x + Midi-QOL 14.0.20 + DAE 14.0.22** (las versiones del navegador de paquetes): todas las versiones de Midi para dnd5e 6.0.6+ piden Foundry 14.369, y dnd5e 6.0.0–6.0.5 eran pre-lanzamientos.
