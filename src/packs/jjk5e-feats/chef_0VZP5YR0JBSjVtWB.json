@@ -60,6 +60,57 @@
       "number": 1
      }
     }
+   },
+   "7nOKG1s2E9yWes2g": {
+    "_id": "7nOKG1s2E9yWes2g",
+    "type": "heal",
+    "name": "Short-rest meal: +1d8 HP (with Hit Dice)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "healing": {
+     "number": 1,
+     "denomination": 8,
+     "bonus": "",
+     "types": [
+      "healing"
+     ],
+     "custom": {
+      "enabled": false,
+      "formula": ""
+     },
+     "scaling": {}
+    }
    }
   },
   "advancement": {
@@ -88,7 +139,9 @@
   }
  },
  "flags": {
-  "jjk5e": {}
+  "jjk5e": {
+   "automation": "automated"
+  }
  },
  "folder": "EtgHYidIGv42ylfo",
  "sort": 400,

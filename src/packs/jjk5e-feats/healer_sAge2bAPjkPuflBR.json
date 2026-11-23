@@ -23,7 +23,7 @@
   "activities": {
    "EY4trL2oiporW6xd": {
     "_id": "EY4trL2oiporW6xd",
-    "type": "utility",
+    "type": "heal",
     "name": "Action",
     "sort": 0,
     "activation": {
@@ -38,11 +38,32 @@
      }
     },
     "range": {
-     "units": "self"
+     "units": "touch",
+     "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
+    },
+    "healing": {
+     "number": 1,
+     "denomination": 6,
+     "bonus": "4",
+     "types": [
+      "healing"
+     ],
+     "custom": {
+      "enabled": false,
+      "formula": ""
+     },
+     "scaling": {}
     }
    }
   },
@@ -52,7 +73,10 @@
   }
  },
  "flags": {
-  "jjk5e": {}
+  "jjk5e": {
+   "automationNotes": "Add the creature's maximum number of Hit Dice to the healing. Once per creature per short or long rest.",
+   "automation": "automated"
+  }
  },
  "folder": "EtgHYidIGv42ylfo",
  "sort": 700,

@@ -26,7 +26,10 @@
   }
  },
  "flags": {
-  "jjk5e": {}
+  "jjk5e": {
+   "automationNotes": "While mounted: advantage vs smaller unmounted foes; redirect attacks; mount evasion. Apply by hand.",
+   "automation": "automated"
+  }
  },
  "folder": "EtgHYidIGv42ylfo",
  "sort": 1100,

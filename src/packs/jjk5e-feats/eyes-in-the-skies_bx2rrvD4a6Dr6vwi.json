@@ -36,10 +36,44 @@
    },
    "forTechniques": [
     "Tool Manipulation"
-   ]
+   ],
+   "automation": "automated"
   }
  },
  "folder": "U8kbD3GeDP98vXc5",
  "sort": 200,
- "_key": "!items!bx2rrvD4a6Dr6vwi"
+ "_key": "!items!bx2rrvD4a6Dr6vwi",
+ "effects": [
+  {
+   "_id": "HfHXzm0ToCMS9oMi",
+   "name": "Eyes in the Skies (riding)",
+   "img": "modules/jjk5e/icons/techniques/tool-manipulation.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": true,
+   "statuses": [],
+   "description": "<p>While riding your Floating Tool. Use your CE modifier for DEX saves.</p>",
+   "changes": [
+    {
+     "key": "system.skills.prc.bonuses.passive",
+     "mode": 2,
+     "value": "+5",
+     "priority": 20
+    },
+    {
+     "key": "system.skills.inv.bonuses.passive",
+     "mode": 2,
+     "value": "+5",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!bx2rrvD4a6Dr6vwi.HfHXzm0ToCMS9oMi"
+  }
+ ]
 }

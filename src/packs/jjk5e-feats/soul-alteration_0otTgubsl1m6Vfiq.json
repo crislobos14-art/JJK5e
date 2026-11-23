@@ -23,8 +23,8 @@
   "activities": {
    "sZQ9cxbXdyslRPl6": {
     "_id": "sZQ9cxbXdyslRPl6",
-    "type": "utility",
-    "name": "Reaction (1 CE)",
+    "type": "heal",
+    "name": "Reaction (11th): 5 HP per CE (10 at 11th)",
     "sort": 0,
     "activation": {
      "type": "reaction",
@@ -34,13 +34,20 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "max(@abilities.wis.mod, @abilities.cha.mod)"
      }
     },
     "range": {
-     "units": "self"
+     "units": "self",
+     "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
     },
@@ -50,7 +57,73 @@
       "onSave": false
      }
     ],
-    "useConditionText": "false"
+    "useConditionText": "false",
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "5",
+     "types": [
+      "healing"
+     ],
+     "custom": {
+      "enabled": false,
+      "formula": ""
+     },
+     "scaling": {
+      "mode": "whole",
+      "formula": "5"
+     }
+    }
+   },
+   "4TlcXjYSMnEVpSam": {
+    "_id": "4TlcXjYSMnEVpSam",
+    "type": "heal",
+    "name": "Self-Alteration: 5 HP per CE",
+    "sort": 0,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "max(@abilities.wis.mod, @abilities.cha.mod)"
+     }
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "effects": [],
+    "useConditionText": "false",
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "5",
+     "types": [
+      "healing"
+     ],
+     "custom": {
+      "enabled": false,
+      "formula": ""
+     },
+     "scaling": {
+      "mode": "whole",
+      "formula": "5"
+     }
+    }
    }
   },
   "prerequisites": {
@@ -61,7 +134,8 @@
  "flags": {
   "jjk5e": {
    "ceCosts": {
-    "sZQ9cxbXdyslRPl6": 1
+    "sZQ9cxbXdyslRPl6": 1,
+    "4TlcXjYSMnEVpSam": 1
    },
    "prereq": {
     "features": [
@@ -72,7 +146,9 @@
    },
    "forTechniques": [
     "Idle Transfiguration"
-   ]
+   ],
+   "automationNotes": "At 11th level: 10 HP per CE (double the heal), usable as a reaction. Limb: 2 CE (1 CE at 11th).",
+   "automation": "automated"
   }
  },
  "effects": [

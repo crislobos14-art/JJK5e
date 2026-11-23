@@ -23,6 +23,63 @@
   "prerequisites": {
    "level": null,
    "repeatable": false
+  },
+  "activities": {
+   "F5sEdjcffnNMW06B": {
+    "_id": "F5sEdjcffnNMW06B",
+    "type": "damage",
+    "name": "Reaction: attacker takes fire = 2 × damage taken",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "999"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "damage": {
+     "parts": [
+      {
+       "number": null,
+       "denomination": null,
+       "bonus": "",
+       "types": [
+        "fire"
+       ],
+       "custom": {
+        "enabled": true,
+        "formula": "2 * @scaling"
+       },
+       "scaling": {}
+      }
+     ]
+    }
+   }
   }
  },
  "flags": {
@@ -36,7 +93,9 @@
    },
    "forTechniques": [
     "Auspicious Beast Summon"
-   ]
+   ],
+   "automationNotes": "Set the scaling to the damage you took (+1 = 1): fire = 2 × that. Only while Kirin is active.",
+   "automation": "automated"
   }
  },
  "folder": "mHzbbOlvnwQSEnjZ",

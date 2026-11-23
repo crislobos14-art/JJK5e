@@ -23,6 +23,64 @@
   "prerequisites": {
    "level": null,
    "repeatable": false
+  },
+  "activities": {
+   "lIwRYYvbAn1cVekX": {
+    "_id": "lIwRYYvbAn1cVekX",
+    "type": "save",
+    "name": "Fighting Words (with a word): WIS save",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "ONWjYARf5dtcSuZl",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "wis"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   }
   }
  },
  "flags": {
@@ -36,10 +94,31 @@
    },
    "forTechniques": [
     "Cursed Speech"
-   ]
+   ],
+   "automation": "automated"
   }
  },
  "folder": "d9an5RUaI1VEAGca",
  "sort": 100,
- "_key": "!items!RUr3fHSfWpcvAUGO"
+ "_key": "!items!RUr3fHSfWpcvAUGO",
+ "effects": [
+  {
+   "_id": "ONWjYARf5dtcSuZl",
+   "name": "Fighting Words",
+   "img": "modules/jjk5e/icons/techniques/cursed-speech.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Disadvantage on attack rolls against creatures other than the speaker.</p>",
+   "changes": [],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!RUr3fHSfWpcvAUGO.ONWjYARf5dtcSuZl"
+  }
+ ]
 }

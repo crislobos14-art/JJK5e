@@ -38,12 +38,65 @@
      }
     },
     "range": {
-     "units": "self"
+     "units": "self",
+     "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
-    }
+    },
+    "effects": [
+     {
+      "_id": "wsRRhkwNld87ElYt",
+      "onSave": false
+     }
+    ]
+   },
+   "yzFqzQj7oTE8XuQg": {
+    "_id": "yzFqzQj7oTE8XuQg",
+    "type": "utility",
+    "name": "Reaction: +5 AC vs an attack",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "NmI74xp3l4XaMuoX",
+      "onSave": false
+     }
+    ]
    }
   },
   "prerequisites": {
@@ -65,10 +118,84 @@
    },
    "forTechniques": [
     "Blood Manipulation"
-   ]
+   ],
+   "automation": "automated"
   }
  },
  "folder": "nBcvifZT3OePW2PN",
  "sort": 300,
- "_key": "!items!dakohlOtfQfSnAhq"
+ "_key": "!items!dakohlOtfQfSnAhq",
+ "effects": [
+  {
+   "_id": "wsRRhkwNld87ElYt",
+   "name": "Blood Crystallization",
+   "img": "modules/jjk5e/icons/techniques/blood-manipulation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Unarmed die +2 steps (d8>d10>d12>2d8). End of turn: d20, on 2 or lower gain 1 exhaustion.</p>",
+   "changes": [
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "bludgeoning",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "piercing",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "slashing",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!dakohlOtfQfSnAhq.wsRRhkwNld87ElYt"
+  },
+  {
+   "_id": "NmI74xp3l4XaMuoX",
+   "name": "Crystal guard (+5 AC)",
+   "img": "modules/jjk5e/icons/techniques/blood-manipulation.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+5",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    },
+    "dae": {
+     "specialDuration": [
+      "isAttacked"
+     ]
+    }
+   },
+   "_key": "!items.effects!dakohlOtfQfSnAhq.NmI74xp3l4XaMuoX"
+  }
+ ]
 }

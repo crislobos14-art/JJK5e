@@ -44,6 +44,61 @@
     "duration": {
      "units": "inst"
     }
+   },
+   "MsiIoWehYSKqCOom": {
+    "_id": "MsiIoWehYSKqCOom",
+    "type": "attack",
+    "name": "Bonus Action: projectile attack (each, 60 ft)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": []
+    }
    }
   },
   "prerequisites": {
@@ -52,7 +107,10 @@
   }
  },
  "flags": {
-  "jjk5e": {}
+  "jjk5e": {
+   "automationNotes": "Imbue up to CE mod projectiles (action). Their damage is the ammunition's/weapon's: add it on the roll. Ignore half and three-quarters cover.",
+   "automation": "automated"
+  }
  },
  "folder": "58RlNbYPWxO2Xi4E",
  "sort": 1200,

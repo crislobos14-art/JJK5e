@@ -24,7 +24,7 @@
    "nN0ASUPPgFHscGrD": {
     "_id": "nN0ASUPPgFHscGrD",
     "type": "utility",
-    "name": "Action (3 CE)",
+    "name": "Pressurization (3 CE, concentration)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -48,12 +48,13 @@
    "80J8JI5DclCqX99g": {
     "_id": "80J8JI5DclCqX99g",
     "type": "utility",
-    "name": "Action (2 CE)",
+    "name": "Modify Attributes (2 CE, bonus action)",
     "sort": 100000,
     "activation": {
-     "type": "action",
+     "type": "bonus",
      "value": 1,
-     "condition": ""
+     "condition": "",
+     "override": true
     },
     "consumption": {
      "targets": [],
@@ -72,12 +73,13 @@
    "obJj6z1U5ZX9b5vc": {
     "_id": "obJj6z1U5ZX9b5vc",
     "type": "utility",
-    "name": "Action (1 CE)",
+    "name": "Transmute Element (1 CE)",
     "sort": 200000,
     "activation": {
-     "type": "action",
-     "value": 1,
-     "condition": ""
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
     },
     "consumption": {
      "targets": [],
@@ -96,7 +98,7 @@
    "0QQdgQ8sgzHC1Ilm": {
     "_id": "0QQdgQ8sgzHC1Ilm",
     "type": "save",
-    "name": "Action",
+    "name": "Transmute Explosion (3 CE)",
     "sort": 300000,
     "activation": {
      "type": "action",
@@ -110,20 +112,17 @@
      }
     },
     "range": {
-     "units": "self"
+     "value": "60",
+     "units": "ft",
+     "override": true
     },
     "target": {
      "template": {
       "type": "cube",
       "size": "10",
-      "units": "ft",
-      "count": "1",
-      "contiguous": false
+      "units": "ft"
      },
-     "affects": {
-      "type": "creature",
-      "choice": false
-     }
+     "override": true
     },
     "duration": {
      "units": "inst"
@@ -169,7 +168,8 @@
    "ceCosts": {
     "nN0ASUPPgFHscGrD": 3,
     "80J8JI5DclCqX99g": 2,
-    "obJj6z1U5ZX9b5vc": 1
+    "obJj6z1U5ZX9b5vc": 1,
+    "0QQdgQ8sgzHC1Ilm": 3
    },
    "prereq": {
     "features": [
@@ -180,7 +180,24 @@
    },
    "forTechniques": [
     "Cursed Transmutation"
-   ]
+   ],
+   "dmgScale": {
+    "0QQdgQ8sgzHC1Ilm": [
+     [
+      1,
+      "5d6"
+     ],
+     [
+      11,
+      "8d6"
+     ],
+     [
+      18,
+      "14d6"
+     ]
+    ]
+   },
+   "automation": "automated"
   }
  },
  "folder": "duKUqjyWPQ4gLCYh",

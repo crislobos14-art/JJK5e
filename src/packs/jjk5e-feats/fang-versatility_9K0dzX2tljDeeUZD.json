@@ -98,7 +98,9 @@
    },
    "forTechniques": [
     "Eight Heads"
-   ]
+   ],
+   "automationNotes": "Fangs: AC 15 + prof and +2d4 poison on a hit (edit the shikigami).",
+   "automation": "automated"
   }
  },
  "effects": [

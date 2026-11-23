@@ -23,6 +23,49 @@
   "prerequisites": {
    "level": null,
    "repeatable": false
+  },
+  "activities": {
+   "Jd57kaNpTBURdDFd": {
+    "_id": "Jd57kaNpTBURdDFd",
+    "type": "utility",
+    "name": "Once per round: +prof to AC or a save",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "XtfBUU7gCTGVqEFu",
+      "onSave": false
+     }
+    ]
+   }
   }
  },
  "flags": {
@@ -36,10 +79,46 @@
    },
    "forTechniques": [
     "Fate"
-   ]
+   ],
+   "automationNotes": "Within 30 ft of your Destined One: advantage on saves against charmed and frightened.",
+   "automation": "automated"
   }
  },
  "folder": "MeEjv8rwdOA6DSvK",
  "sort": 100,
- "_key": "!items!O6ZpSdqOyk38NWVc"
+ "_key": "!items!O6ZpSdqOyk38NWVc",
+ "effects": [
+  {
+   "_id": "XtfBUU7gCTGVqEFu",
+   "name": "Thread of Fate (+prof AC)",
+   "img": "modules/jjk5e/icons/techniques/fate.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+@prof",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    },
+    "dae": {
+     "specialDuration": [
+      "isAttacked"
+     ]
+    }
+   },
+   "_key": "!items.effects!O6ZpSdqOyk38NWVc.XtfBUU7gCTGVqEFu"
+  }
+ ]
 }

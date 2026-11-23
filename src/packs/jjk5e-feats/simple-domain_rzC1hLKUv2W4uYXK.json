@@ -23,7 +23,7 @@
   "activities": {
    "tHOSbbzwvdYegJ6X": {
     "_id": "tHOSbbzwvdYegJ6X",
-    "type": "utility",
+    "type": "heal",
     "name": "Reaction (4 CE)",
     "sort": 0,
     "activation": {
@@ -38,15 +38,93 @@
      }
     },
     "range": {
-     "units": "self"
+     "units": "self",
+     "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
     "duration": {
      "value": "1",
      "units": "minute",
-     "concentration": false
+     "override": true
     },
-    "useConditionText": "false"
+    "useConditionText": "false",
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "",
+     "types": [
+      "temphp"
+     ],
+     "custom": {
+      "enabled": true,
+      "formula": "@prof * 2 * max(@abilities.wis.mod, @abilities.cha.mod)"
+     },
+     "scaling": {}
+    },
+    "effects": [
+     {
+      "_id": "o7XtL5s4goFSBsa8",
+      "onSave": false
+     }
+    ]
+   },
+   "Xhqw9vlmxYG46a6s": {
+    "_id": "Xhqw9vlmxYG46a6s",
+    "type": "heal",
+    "name": "Action (4 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "override": true
+    },
+    "useConditionText": "false",
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "",
+     "types": [
+      "temphp"
+     ],
+     "custom": {
+      "enabled": true,
+      "formula": "@prof * 2 * max(@abilities.wis.mod, @abilities.cha.mod)"
+     },
+     "scaling": {}
+    },
+    "effects": [
+     {
+      "_id": "o7XtL5s4goFSBsa8",
+      "onSave": false
+     }
+    ]
    }
   },
   "prerequisites": {
@@ -57,14 +135,39 @@
  "flags": {
   "jjk5e": {
    "ceCosts": {
-    "tHOSbbzwvdYegJ6X": 4
+    "tHOSbbzwvdYegJ6X": 4,
+    "Xhqw9vlmxYG46a6s": 4
    },
    "prereq": {
     "ceScore": 16
-   }
+   },
+   "automationNotes": "Barrier HP are applied as temporary HP. Remove the effect and temp HP if you move.",
+   "automation": "automated"
   }
  },
  "folder": "w6CtJKH5qYx1fgN4",
  "sort": 600,
- "_key": "!items!rzC1hLKUv2W4uYXK"
+ "_key": "!items!rzC1hLKUv2W4uYXK",
+ "effects": [
+  {
+   "_id": "o7XtL5s4goFSBsa8",
+   "name": "Simple Domain (10 ft)",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Barrier HP = these temporary HP; leftover damage carries over. Ends if you move.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!rzC1hLKUv2W4uYXK.o7XtL5s4goFSBsa8"
+  }
+ ]
 }

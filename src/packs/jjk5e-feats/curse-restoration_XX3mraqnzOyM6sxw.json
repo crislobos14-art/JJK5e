@@ -23,8 +23,8 @@
   "activities": {
    "E2691k5Yf4n2s6Mo": {
     "_id": "E2691k5Yf4n2s6Mo",
-    "type": "utility",
-    "name": "Bonus Action (1+ CE)",
+    "type": "heal",
+    "name": "Bonus Action (1+ CE): 5 HP per CE",
     "sort": 0,
     "activation": {
      "type": "bonus",
@@ -35,21 +35,142 @@
      "targets": [],
      "scaling": {
       "allowed": true,
-      "max": "max(1, max(@abilities.wis.mod, @abilities.cha.mod))"
+      "max": "max(@abilities.wis.mod, @abilities.cha.mod)"
      }
     },
     "range": {
      "value": "60",
-     "units": "ft"
+     "units": "ft",
+     "override": true
     },
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
-     }
+      "count": "1",
+      "choice": true
+     },
+     "override": true
     },
     "duration": {
      "units": "inst"
+    },
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "5",
+     "types": [
+      "healing"
+     ],
+     "custom": {
+      "enabled": false,
+      "formula": ""
+     },
+     "scaling": {
+      "mode": "whole",
+      "formula": "5"
+     }
+    }
+   },
+   "goucRF7q8lO8Eqfq": {
+    "_id": "goucRF7q8lO8Eqfq",
+    "type": "heal",
+    "name": "Action (1+ CE): 5 HP per CE",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "max(@abilities.wis.mod, @abilities.cha.mod)"
+     }
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "5",
+     "types": [
+      "healing"
+     ],
+     "custom": {
+      "enabled": false,
+      "formula": ""
+     },
+     "scaling": {
+      "mode": "whole",
+      "formula": "5"
+     }
+    }
+   },
+   "LgfKAKNtRpT2rQAi": {
+    "_id": "LgfKAKNtRpT2rQAi",
+    "type": "heal",
+    "name": "Reaction (1+ CE): 5 HP per CE",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "max(@abilities.wis.mod, @abilities.cha.mod)"
+     }
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "5",
+     "types": [
+      "healing"
+     ],
+     "custom": {
+      "enabled": false,
+      "formula": ""
+     },
+     "scaling": {
+      "mode": "whole",
+      "formula": "5"
+     }
     }
    }
   },
@@ -61,10 +182,14 @@
  "flags": {
   "jjk5e": {
    "ceSteps": {
-    "E2691k5Yf4n2s6Mo": 1
+    "E2691k5Yf4n2s6Mo": 1,
+    "goucRF7q8lO8Eqfq": 1,
+    "LgfKAKNtRpT2rQAi": 1
    },
    "ceCosts": {
-    "E2691k5Yf4n2s6Mo": 1
+    "E2691k5Yf4n2s6Mo": 1,
+    "goucRF7q8lO8Eqfq": 1,
+    "LgfKAKNtRpT2rQAi": 1
    },
    "prereq": {
     "features": [
@@ -75,7 +200,9 @@
    },
    "forTechniques": [
     "Cursed Spirit Manipulation"
-   ]
+   ],
+   "automationNotes": "Once per turn. At 11th level: 10 HP per CE (double the heal).",
+   "automation": "automated"
   }
  },
  "folder": "808kDeN1ffx0XP3c",

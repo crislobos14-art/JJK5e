@@ -38,14 +38,104 @@
      }
     },
     "range": {
-     "units": "self"
+     "units": "self",
+     "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
     "duration": {
      "value": "1",
      "units": "minute",
-     "concentration": false
-    }
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "zdW50Q07Bg9uIDIV",
+      "onSave": false
+     }
+    ]
+   },
+   "BbUgtza9oIWhQmqr": {
+    "_id": "BbUgtza9oIWhQmqr",
+    "type": "utility",
+    "name": "Action (4 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "zdW50Q07Bg9uIDIV",
+      "onSave": false
+     }
+    ]
+   },
+   "XOSfycPUVPyc96rl": {
+    "_id": "XOSfycPUVPyc96rl",
+    "type": "utility",
+    "name": "Reaction (4 CE): sure-hit or a domain opening",
+    "sort": 0,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "zdW50Q07Bg9uIDIV",
+      "onSave": false
+     }
+    ]
    }
   },
   "prerequisites": {
@@ -56,11 +146,36 @@
  "flags": {
   "jjk5e": {
    "ceCosts": {
-    "u5U7oemdPT2z1E4M": 4
-   }
+    "u5U7oemdPT2z1E4M": 4,
+    "BbUgtza9oIWhQmqr": 4,
+    "XOSfycPUVPyc96rl": 4
+   },
+   "automation": "automated"
   }
  },
  "folder": "w6CtJKH5qYx1fgN4",
  "sort": 400,
- "_key": "!items!8Hqj2GK7SsOPD7IY"
+ "_key": "!items!8Hqj2GK7SsOPD7IY",
+ "effects": [
+  {
+   "_id": "zdW50Q07Bg9uIDIV",
+   "name": "Hollow Wicker Basket",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>15-ft barrier: domain sure-hit effects are negated and deal no damage inside it.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!8Hqj2GK7SsOPD7IY.zdW50Q07Bg9uIDIV"
+  }
+ ]
 }

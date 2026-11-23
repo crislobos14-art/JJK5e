@@ -36,7 +36,9 @@
    },
    "forTechniques": [
     "Rot"
-   ]
+   ],
+   "automationNotes": "Fail your technique's CON save by 5+: 1 exhaustion (max 3 from this).",
+   "automation": "automated"
   }
  },
  "folder": "gN0JGJzsnMHTyd5r",

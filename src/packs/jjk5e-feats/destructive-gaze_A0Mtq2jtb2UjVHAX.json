@@ -82,7 +82,28 @@
    },
    "forTechniques": [
     "Paralyzing Gaze"
-   ]
+   ],
+   "dmgScale": {
+    "z8EpHsiJixPFZ0Mv": [
+     [
+      1,
+      "2d8"
+     ],
+     [
+      6,
+      "2d10"
+     ],
+     [
+      11,
+      "4d8"
+     ],
+     [
+      18,
+      "6d8"
+     ]
+    ]
+   },
+   "automation": "automated"
   }
  },
  "folder": "4cwsl1cPyRP6EWgd",

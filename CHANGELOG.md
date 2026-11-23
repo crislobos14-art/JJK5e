@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.58.0 — Revisión de feats
+- Auditados los 317 feats del manual contra su automatización; corregidos 49.
+- Variantes de activación que faltaban: Hollow Wicker Basket (acción/reacción), Simple Domain (acción), Supernova (acción), Curse Restoration (acción/reacción), Minimum: Uzumaki (acción), Incarnation, Perfect Sphere (mover/embestir).
+- Simple Domain: los PG de la barrera se aplican como PG temporales (prof × 2 × mod CE).
+- Curaciones por CE: Curse Restoration y Soul Alteration (5 PG por CE), Healer (1d6 + 4), Chef (+1d8).
+- Daño por nivel: Additional Formulae, Drill Claws, Adorable Poison Jar, Destructive Gaze, Chainsaw Dismantle.
+- Hydrokinesis: ataque de CE 2d10 frío + 2d6 perforante; al impactar, salvación de CON o derribado y daño otra vez.
+- Hands of Madness: ataques de Mano Derecha (1d12 psíquico) y Mano Izquierda (1d6 + miedo).
+- Maximum: Clock Hand: invocación, ataque 1d10, Hour Hand +3d8 y Minute Hand (congelado).
+- Nuevas reacciones con efecto: Blood Crystallization (+5 CA y resistencias), Gradient, Celestial Raiment, Destined One.
+- Refined Domain: efectos por beneficio; Cost Reduction reduce a la mitad el coste de técnicas con el dominio abierto.
+- Free Spirit: 1/día recupera CE igual a tu nivel. Repelling Forces: máximo 3 CE.
+- Notas de automatización en feats puramente descriptivos.
+
 ## 1.57.0 — Reglas de refinamiento de dominio
 - Revisadas las reglas de *Intricacies of Sorcery* frente al código: Black Flash, The Zone, RCT, recuperación de CE, Maximum/Reduced Output, Binding Vows, Limb Damage, Soul Awareness y choques de dominio.
 - Domain Refinement 500/1000: el dominio dura 2/3 minutos (antes siempre 1).

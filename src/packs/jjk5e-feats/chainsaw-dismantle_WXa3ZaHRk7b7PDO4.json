@@ -23,13 +23,14 @@
   "activities": {
    "jhXeoMft6mfwjmwu": {
     "_id": "jhXeoMft6mfwjmwu",
-    "type": "utility",
-    "name": "Action (2 CE)",
+    "type": "damage",
+    "name": "Chainsaw Dismantle (2 CE): +1d12 slashing",
     "sort": 0,
     "activation": {
-     "type": "action",
-     "value": 1,
-     "condition": ""
+     "type": "special",
+     "value": null,
+     "condition": "On an unarmed strike hit (once per turn).",
+     "override": true
     },
     "consumption": {
      "targets": [],
@@ -40,10 +41,70 @@
     "range": {
      "units": "self"
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
+    },
+    "damage": {
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 12,
+       "bonus": "",
+       "types": [
+        "slashing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
     }
+   },
+   "XTgNgezPZBAD98dt": {
+    "_id": "XTgNgezPZBAD98dt",
+    "type": "utility",
+    "name": "Reaction (11th): reduce an attack by your Dismantle damage",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
    }
   },
   "prerequisites": {
@@ -65,7 +126,29 @@
    },
    "forTechniques": [
     "Shrine"
-   ]
+   ],
+   "dmgScale": {
+    "jhXeoMft6mfwjmwu": [
+     [
+      1,
+      "1d12"
+     ],
+     [
+      6,
+      "2d12"
+     ],
+     [
+      11,
+      "3d12"
+     ],
+     [
+      18,
+      "4d12"
+     ]
+    ]
+   },
+   "automationNotes": "Reaction (11th): roll Dismantle for the CE spent and subtract it from the damage; 0 = nullified.",
+   "automation": "automated"
   }
  },
  "folder": "2XiAKaCJUnpH62hA",

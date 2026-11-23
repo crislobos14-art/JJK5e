@@ -87,6 +87,110 @@
      ]
     },
     "useConditionText": "false"
+   },
+   "3wHmCHkGchSVyAeD": {
+    "_id": "3wHmCHkGchSVyAeD",
+    "type": "attack",
+    "name": "Action: Minimum: Uzumaki (5 CE)",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "40"
+     }
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 12,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    },
+    "useConditionText": "false"
+   },
+   "pqoggGMRuYqrs4gz": {
+    "_id": "pqoggGMRuYqrs4gz",
+    "type": "utility",
+    "name": "Bonus Action: condense 2 spirits",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
    }
   },
   "prerequisites": {
@@ -97,7 +201,8 @@
  "flags": {
   "jjk5e": {
    "ceCosts": {
-    "bjQNjov0ucG06ILz": 5
+    "bjQNjov0ucG06ILz": 5,
+    "3wHmCHkGchSVyAeD": 5
    },
    "prereq": {
     "features": [

@@ -23,13 +23,14 @@
   "activities": {
    "6Y20vzbRskj57gj8": {
     "_id": "6Y20vzbRskj57gj8",
-    "type": "damage",
-    "name": "Action (1 CE)",
+    "type": "attack",
+    "name": "Drill Claw (1 CE): ranged claw attack",
     "sort": 0,
     "activation": {
-     "type": "action",
-     "value": 1,
-     "condition": ""
+     "type": "special",
+     "value": null,
+     "condition": "Replaces one attack (once per turn).",
+     "override": true
     },
     "consumption": {
      "targets": [],
@@ -39,18 +40,22 @@
     },
     "range": {
      "value": "30",
-     "units": "ft"
+     "units": "ft",
+     "override": true
     },
     "target": {
      "affects": {
       "type": "creature",
-      "count": "1"
-     }
+      "count": "1",
+      "choice": true
+     },
+     "override": true
     },
     "duration": {
      "units": "inst"
     },
     "damage": {
+     "includeBase": false,
      "parts": [
       {
        "number": 4,
@@ -63,12 +68,63 @@
         "enabled": false,
         "formula": ""
        },
-       "scaling": {
-        "number": 1
-       }
+       "scaling": {}
       }
      ]
+    },
+    "attack": {
+     "ability": "",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "weapon"
+     }
     }
+   },
+   "3FRHuQZqfPdS1Lrs": {
+    "_id": "3FRHuQZqfPdS1Lrs",
+    "type": "utility",
+    "name": "Bonus Action: lengthen claws (+5 ft reach)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "O6MlKFODUoaMaKUH",
+      "onSave": false
+     }
+    ]
    }
   },
   "prerequisites": {
@@ -90,10 +146,54 @@
    },
    "forTechniques": [
     "Dark Claw"
-   ]
+   ],
+   "dmgScale": {
+    "6Y20vzbRskj57gj8": [
+     [
+      1,
+      "4d8"
+     ],
+     [
+      6,
+      "6d8"
+     ],
+     [
+      11,
+      "8d8"
+     ],
+     [
+      18,
+      "10d8"
+     ]
+    ]
+   },
+   "automationNotes": "Use STR, DEX or CE modifier for the Drill Claw attack.",
+   "automation": "automated"
   }
  },
  "folder": "zt8ujvT8aBbmfDqZ",
  "sort": 200,
- "_key": "!items!8LGbt2QpvSSZv9Rn"
+ "_key": "!items!8LGbt2QpvSSZv9Rn",
+ "effects": [
+  {
+   "_id": "O6MlKFODUoaMaKUH",
+   "name": "Drill Claws (+5 ft reach)",
+   "img": "modules/jjk5e/icons/techniques/dark-claw.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Claw reach +5 ft. Range doubles at 6th.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!8LGbt2QpvSSZv9Rn.O6MlKFODUoaMaKUH"
+  }
+ ]
 }

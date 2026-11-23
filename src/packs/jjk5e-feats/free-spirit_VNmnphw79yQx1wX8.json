@@ -24,7 +24,7 @@
    "iT1qO4WTIKS5q9PJ": {
     "_id": "iT1qO4WTIKS5q9PJ",
     "type": "utility",
-    "name": "Action",
+    "name": "Action: borrow power (regain CE = level, 1/day)",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -32,7 +32,14 @@
      "condition": ""
     },
     "consumption": {
-     "targets": [],
+     "targets": [
+      {
+       "type": "itemUses",
+       "value": "1",
+       "target": "",
+       "scaling": {}
+      }
+     ],
      "scaling": {
       "allowed": false
      }
@@ -49,6 +56,16 @@
   "prerequisites": {
    "level": null,
    "repeatable": false
+  },
+  "uses": {
+   "max": "1",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "day",
+     "type": "recoverAll"
+    }
+   ]
   }
  },
  "flags": {
@@ -62,7 +79,11 @@
    },
    "forTechniques": [
     "Vengeful Spirit Manipulation"
-   ]
+   ],
+   "ceRegain": {
+    "iT1qO4WTIKS5q9PJ": "@details.level"
+   },
+   "automation": "automated"
   }
  },
  "folder": "HWYMcdZMnHXtfOxG",

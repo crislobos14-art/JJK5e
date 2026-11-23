@@ -50,12 +50,13 @@
    "Dlvh9vifewh1plqH": {
     "_id": "Dlvh9vifewh1plqH",
     "type": "save",
-    "name": "Bonus Action (6 CE)",
+    "name": "Left Hand hit: 1d6 psychic + WIS or frightened",
     "sort": 100000,
     "activation": {
-     "type": "bonus",
-     "value": 1,
-     "condition": ""
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
     },
     "consumption": {
      "targets": [],
@@ -83,11 +84,11 @@
      }
     },
     "damage": {
-     "onSave": "none",
+     "onSave": "full",
      "parts": [
       {
        "number": 1,
-       "denomination": 12,
+       "denomination": 6,
        "bonus": "",
        "types": [
         "psychic"
@@ -96,9 +97,7 @@
         "enabled": false,
         "formula": ""
        },
-       "scaling": {
-        "number": 1
-       }
+       "scaling": {}
       }
      ]
     },
@@ -108,6 +107,174 @@
       "onSave": false
      }
     ]
+   },
+   "h1clizDgHtiXV1Hp": {
+    "_id": "h1clizDgHtiXV1Hp",
+    "type": "attack",
+    "name": "Right Hand: unarmed strike (1d12 psychic)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "ft",
+     "value": "5",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "melee",
+      "classification": "unarmed"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 12,
+       "bonus": "@mod",
+       "types": [
+        "psychic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
+   },
+   "hYqKqbPGgdyE1IH6": {
+    "_id": "hYqKqbPGgdyE1IH6",
+    "type": "attack",
+    "name": "Left Hand: unarmed strike",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "ft",
+     "value": "5",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "melee",
+      "classification": "unarmed"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": []
+    },
+    "midiProperties": {
+     "triggeredActivityId": "Dlvh9vifewh1plqH",
+     "triggeredActivityTargets": "hitTargets",
+     "triggeredActivityRollAs": "self",
+     "triggeredActivityConsume": false,
+     "triggeredActivityConfigure": false,
+     "triggeredActivityConditionText": ""
+    }
+   },
+   "dlkVVavNHXbgxejI": {
+    "_id": "dlkVVavNHXbgxejI",
+    "type": "utility",
+    "name": "Bonus Action (6 CE, 11th): both hands",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
    }
   },
   "prerequisites": {
@@ -119,7 +286,7 @@
   "jjk5e": {
    "ceCosts": {
     "aM69oK0ZIb9m7gIb": 3,
-    "Dlvh9vifewh1plqH": 6
+    "dlkVVavNHXbgxejI": 6
    },
    "prereq": {
     "features": [
@@ -130,7 +297,9 @@
    },
    "forTechniques": [
     "Faceless God"
-   ]
+   ],
+   "automationNotes": "Hand attacks raise Mental Corruption by 5% once per turn. Right Hand: advantage vs 50%+ corruption.",
+   "automation": "automated"
   }
  },
  "effects": [

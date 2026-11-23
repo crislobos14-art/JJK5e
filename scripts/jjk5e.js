@@ -372,6 +372,11 @@ function activityCost(activity) {
     if (ref >= 1000) base -= Number(actor.system?.attributes?.prof) || 0;
     base = Math.max(1, base);
   }
+  // Refined Domain (Cost Reduction): innate technique costs are halved, rounded up, while your domain is open.
+  if (base > 0 && actor && activity?.item?.flags?.jjk5e?.technique && domainOpen(actor)
+      && actor.items.some((i) => i.effects?.some((e) => e.flags?.jjk5e?.refinedCostHalf && !e.disabled))) {
+    base = Math.ceil(base / 2);
+  }
   return circuitCost(activity, base);
 }
 
@@ -659,7 +664,9 @@ function registerActivityHooks() {
       await actor.setFlag(MODULE_ID, "sixEyesNext", true);
     }
     if (quantity) await createCombatClone(actor, quantity);
-    const regain = Number(item?.flags?.jjk5e?.ceRegain?.[activity.id] ?? 0);
+    const rawRegain = item?.flags?.jjk5e?.ceRegain?.[activity.id] ?? 0;
+    const regain = typeof rawRegain === "string" && actor
+      ? Number(dnd5e.utils.simplifyBonus(rawRegain, actor.getRollData())) || 0 : Number(rawRegain) || 0;
     if (actor && regain > 0) await spendCE(actor, -regain, `${item.name} — ${t("CE.Regained")}`);
     if (item?.flags?.jjk5e?.reload?.[activity.id] && Number(item.system?.uses?.spent) > 0) {
       await item.update({ "system.uses.spent": 0 });

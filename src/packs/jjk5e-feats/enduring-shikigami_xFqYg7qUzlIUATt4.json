@@ -36,7 +36,9 @@
    },
    "forTechniques": [
     "Starlight Symphony"
-   ]
+   ],
+   "automationNotes": "Fox shikigami (not Inari) last until 0 HP and add your prof to their saves.",
+   "automation": "automated"
   }
  },
  "folder": "W3c86qCvNyFi2g3Q",

@@ -36,7 +36,9 @@
    },
    "forTechniques": [
     "Miracle"
-   ]
+   ],
+   "automationNotes": "Store CE mod additional Miracles.",
+   "automation": "automated"
   }
  },
  "folder": "Ja2gS6J7aZ9mXHwS",

@@ -58,6 +58,47 @@
      "units": "minute",
      "concentration": false
     }
+   },
+   "slXxfPKTSGzE5tG0": {
+    "_id": "slXxfPKTSGzE5tG0",
+    "type": "utility",
+    "name": "Reaction: +CE mod to AC (or an attack/save)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "5lXsqyMgB7q17WpB",
+      "onSave": false
+     }
+    ]
    }
   },
   "prerequisites": {
@@ -79,10 +120,45 @@
    },
    "forTechniques": [
     "Esoteric Art"
-   ]
+   ],
+   "automation": "automated"
   }
  },
  "folder": "0WVL6in6ehAyEIQ5",
  "sort": 300,
- "_key": "!items!zFvaQiJRjOIqt9N3"
+ "_key": "!items!zFvaQiJRjOIqt9N3",
+ "effects": [
+  {
+   "_id": "5lXsqyMgB7q17WpB",
+   "name": "Gradient guard",
+   "img": "modules/jjk5e/icons/techniques/esoteric-art.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+max(@abilities.wis.mod, @abilities.cha.mod)",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    },
+    "dae": {
+     "specialDuration": [
+      "isAttacked"
+     ]
+    }
+   },
+   "_key": "!items.effects!zFvaQiJRjOIqt9N3.5lXsqyMgB7q17WpB"
+  }
+ ]
 }

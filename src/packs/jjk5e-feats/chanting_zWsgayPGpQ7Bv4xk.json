@@ -23,16 +23,84 @@
   "prerequisites": {
    "level": 12,
    "repeatable": false
+  },
+  "activities": {
+   "pzx16Gg2f6lpE7M4": {
+    "_id": "pzx16Gg2f6lpE7M4",
+    "type": "utility",
+    "name": "Chant (full turn, concentration)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "value": "1",
+     "units": "round",
+     "concentration": true,
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "NXf30NMELeBUYxcJ",
+      "onSave": false
+     }
+    ]
+   }
   }
  },
  "flags": {
   "jjk5e": {
    "prereq": {
     "level": 12
-   }
+   },
+   "automation": "automated"
   }
  },
  "folder": "58RlNbYPWxO2Xi4E",
  "sort": 1500,
- "_key": "!items!zWsgayPGpQ7Bv4xk"
+ "_key": "!items!zWsgayPGpQ7Bv4xk",
+ "effects": [
+  {
+   "_id": "NXf30NMELeBUYxcJ",
+   "name": "Chanting",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Next turn: the chosen technique ignores resistance (immunity = resistance), attack with advantage or saves with disadvantage, double damage dice (first roll only). No Maximum Output or Domain Expansion while chanting.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 2
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!zWsgayPGpQ7Bv4xk.NXf30NMELeBUYxcJ"
+  }
+ ]
 }

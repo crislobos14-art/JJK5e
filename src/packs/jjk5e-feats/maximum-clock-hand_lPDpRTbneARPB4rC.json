@@ -23,8 +23,8 @@
   "activities": {
    "hbIVW3rbU6iDOeTc": {
     "_id": "hbIVW3rbU6iDOeTc",
-    "type": "damage",
-    "name": "Bonus Action (5 CE)",
+    "type": "utility",
+    "name": "Bonus Action (5 CE): summon the Clock Hand (10 min)",
     "sort": 0,
     "activation": {
      "type": "bonus",
@@ -38,21 +38,78 @@
      }
     },
     "range": {
-     "units": "spec",
+     "units": "self",
      "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
     "duration": {
      "value": "10",
      "units": "minute",
      "concentration": false
+    }
+   },
+   "pbWD3qEoZFFEsUe6": {
+    "_id": "pbWD3qEoZFFEsUe6",
+    "type": "attack",
+    "name": "Clock Hand attack (finesse, reach)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "ft",
+     "value": "10",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "attack": {
+     "ability": "",
+     "bonus": "@prof",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "melee",
+      "classification": "weapon"
+     }
     },
     "damage": {
+     "includeBase": false,
      "parts": [
       {
        "number": 1,
        "denomination": 10,
-       "bonus": "",
+       "bonus": "@mod",
        "types": [
         "piercing"
        ],
@@ -60,11 +117,121 @@
         "enabled": false,
         "formula": ""
        },
-       "scaling": {
-        "number": 1
-       }
+       "scaling": {}
       }
      ]
+    }
+   },
+   "OxaoINduK36W3MOw": {
+    "_id": "OxaoINduK36W3MOw",
+    "type": "damage",
+    "name": "Hour Hand (stopped target): +3d8 necrotic",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "damage": {
+     "parts": [
+      {
+       "number": 3,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
+   },
+   "LVL4VC62KVY6gFsb": {
+    "_id": "LVL4VC62KVY6gFsb",
+    "type": "save",
+    "name": "Minute Hand (not stopped): CE save or frozen",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "Np1UW5C81f2r0lwe",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "wis",
+      "cha"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
     }
    }
   },
@@ -87,10 +254,36 @@
    },
    "forTechniques": [
     "Golden Hour"
-   ]
+   ],
+   "automationNotes": "Minute Hand: once per round. CE save = the target's better of WIS/CHA.",
+   "automation": "automated"
   }
  },
  "folder": "d3tvju1gFLiRbf1c",
  "sort": 300,
- "_key": "!items!lPDpRTbneARPB4rC"
+ "_key": "!items!lPDpRTbneARPB4rC",
+ "effects": [
+  {
+   "_id": "Np1UW5C81f2r0lwe",
+   "name": "Frozen in time",
+   "img": "modules/jjk5e/icons/techniques/golden-hour.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [
+    "paralyzed"
+   ],
+   "description": "<p>Suffers the penalties of stopped time until the end of its next turn.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!lPDpRTbneARPB4rC.Np1UW5C81f2r0lwe"
+  }
+ ]
 }

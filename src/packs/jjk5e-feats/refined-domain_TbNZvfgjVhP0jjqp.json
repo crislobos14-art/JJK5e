@@ -34,10 +34,123 @@
      ]
     ],
     "refinement": 400
-   }
+   },
+   "automationNotes": "Enable the effect of the benefit you chose. Cost Reduction is automatic while your domain is open.",
+   "automation": "automated"
   }
  },
  "folder": "w6CtJKH5qYx1fgN4",
  "sort": 700,
- "_key": "!items!TbNZvfgjVhP0jjqp"
+ "_key": "!items!TbNZvfgjVhP0jjqp",
+ "effects": [
+  {
+   "_id": "YaSWzgwCPu1JXbwy",
+   "name": "Refined Domain: Severe Danification",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": true,
+   "statuses": [],
+   "description": "<p>+CE mod dice to the domain's Initiative 20 damage. Enable only the benefit you chose.</p>",
+   "changes": [],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!TbNZvfgjVhP0jjqp.YaSWzgwCPu1JXbwy"
+  },
+  {
+   "_id": "dZ3Jpa8EaJot6Rfv",
+   "name": "Refined Domain: Non-Lethality",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": true,
+   "statuses": [],
+   "description": "<p>Add one more condition or restriction to your domain. Enable only the benefit you chose.</p>",
+   "changes": [],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!TbNZvfgjVhP0jjqp.dZ3Jpa8EaJot6Rfv"
+  },
+  {
+   "_id": "MTGoZX0a5SDHUywe",
+   "name": "Refined Domain: Cost Reduction",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": true,
+   "statuses": [],
+   "description": "<p>Inside your open domain, innate technique CE costs are halved (rounded up). Enable only the benefit you chose.</p>",
+   "changes": [],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": null,
+     "refinedCostHalf": true
+    }
+   },
+   "_key": "!items.effects!TbNZvfgjVhP0jjqp.MTGoZX0a5SDHUywe"
+  },
+  {
+   "_id": "pkLppwuNGzpn2y2N",
+   "name": "Refined Domain: Lightning Speed Release",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": true,
+   "statuses": [],
+   "description": "<p>In your domain, technique activation is one step faster. Enable only the benefit you chose.</p>",
+   "changes": [],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!TbNZvfgjVhP0jjqp.pkLppwuNGzpn2y2N"
+  },
+  {
+   "_id": "22sGq40kt5w1BWwp",
+   "name": "Refined Domain: Multiplication",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": true,
+   "statuses": [],
+   "description": "<p>'Spend up to X CE' maximums are doubled. Enable only the benefit you chose.</p>",
+   "changes": [],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!TbNZvfgjVhP0jjqp.22sGq40kt5w1BWwp"
+  },
+  {
+   "_id": "6b2gdGGL2HS8iSTu",
+   "name": "Refined Domain: Improved Technique",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": true,
+   "statuses": [],
+   "description": "<p>Inside your domain, one chosen technique gains +CE mod damage dice. Enable only the benefit you chose.</p>",
+   "changes": [],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!TbNZvfgjVhP0jjqp.6b2gdGGL2HS8iSTu"
+  }
+ ]
 }

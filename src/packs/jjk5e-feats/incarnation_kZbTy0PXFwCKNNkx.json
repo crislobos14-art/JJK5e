@@ -24,12 +24,13 @@
    "2VWUpsb1r3TIwJ5X": {
     "_id": "2VWUpsb1r3TIwJ5X",
     "type": "utility",
-    "name": "Bonus Action (3 CE)",
+    "name": "Action (3 CE): summon the Head",
     "sort": 0,
     "activation": {
-     "type": "bonus",
+     "type": "action",
      "value": 1,
-     "condition": ""
+     "condition": "",
+     "override": true
     },
     "consumption": {
      "targets": [],
@@ -44,6 +45,42 @@
     "duration": {
      "units": "inst"
     }
+   },
+   "5aoV1hPsSMn0KUGt": {
+    "_id": "5aoV1hPsSMn0KUGt",
+    "type": "utility",
+    "name": "Bonus Action: control or unsummon the Head",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature"
+     },
+     "override": true
+    },
+    "effects": []
    }
   },
   "prerequisites": {
@@ -65,7 +102,8 @@
    },
    "forTechniques": [
     "Eight Heads"
-   ]
+   ],
+   "automation": "automated"
   }
  },
  "folder": "ScNBVqds1jNrXfTg",

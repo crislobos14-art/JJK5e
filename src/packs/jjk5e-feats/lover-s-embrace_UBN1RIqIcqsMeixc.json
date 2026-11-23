@@ -50,6 +50,61 @@
       "onSave": false
      }
     ]
+   },
+   "bf2maJD6WVHbMD4g": {
+    "_id": "bf2maJD6WVHbMD4g",
+    "type": "damage",
+    "name": "Start of turn (grappled/restrained): 1d6 bludgeoning",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "damage": {
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
    }
   },
   "prerequisites": {
@@ -68,7 +123,8 @@
    },
    "forTechniques": [
     "Heart Catch"
-   ]
+   ],
+   "automation": "automated"
   }
  },
  "effects": [

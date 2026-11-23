@@ -24,12 +24,13 @@
    "SM2Tpg4qknauYJaJ": {
     "_id": "SM2Tpg4qknauYJaJ",
     "type": "save",
-    "name": "Action (2 CE)",
+    "name": "Vital organ (on hit): CON save or prone + damage again",
     "sort": 0,
     "activation": {
-     "type": "action",
-     "value": 1,
-     "condition": ""
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
     },
     "consumption": {
      "targets": [],
@@ -73,9 +74,20 @@
         "enabled": false,
         "formula": ""
        },
-       "scaling": {
-        "number": 1
-       }
+       "scaling": {}
+      },
+      {
+       "number": 2,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "piercing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
       }
      ]
     },
@@ -85,6 +97,96 @@
       "onSave": false
      }
     ]
+   },
+   "gOiOwfrOjKWkbqPB": {
+    "_id": "gOiOwfrOjKWkbqPB",
+    "type": "attack",
+    "name": "Piercing Water (2 CE): CE attack",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "ranged",
+      "classification": "spell"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "cold"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      },
+      {
+       "number": 2,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "piercing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    },
+    "midiProperties": {
+     "triggeredActivityId": "SM2Tpg4qknauYJaJ",
+     "triggeredActivityTargets": "hitTargets",
+     "triggeredActivityRollAs": "self",
+     "triggeredActivityConsume": false,
+     "triggeredActivityConfigure": false,
+     "triggeredActivityConditionText": ""
+    }
    }
   },
   "prerequisites": {
@@ -95,7 +197,7 @@
  "flags": {
   "jjk5e": {
    "ceCosts": {
-    "SM2Tpg4qknauYJaJ": 2
+    "gOiOwfrOjKWkbqPB": 2
    },
    "prereq": {
     "features": [
@@ -106,7 +208,8 @@
    },
    "forTechniques": [
     "Disaster Tides"
-   ]
+   ],
+   "automation": "automated"
   }
  },
  "effects": [

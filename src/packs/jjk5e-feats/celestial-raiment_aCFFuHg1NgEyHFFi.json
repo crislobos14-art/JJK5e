@@ -44,6 +44,47 @@
     "duration": {
      "units": "inst"
     }
+   },
+   "N8hXRJgDV418EzcX": {
+    "_id": "N8hXRJgDV418EzcX",
+    "type": "utility",
+    "name": "Reaction: +prof to AC (or a save)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "z6YX6JWpeECmMk8i",
+      "onSave": false
+     }
+    ]
    }
   },
   "prerequisites": {
@@ -65,10 +106,40 @@
    },
    "forTechniques": [
     "Regalia"
-   ]
+   ],
+   "automation": "automated"
   }
  },
  "folder": "8Lhg7pdvWFL32xJj",
  "sort": 200,
- "_key": "!items!aCFFuHg1NgEyHFFi"
+ "_key": "!items!aCFFuHg1NgEyHFFi",
+ "effects": [
+  {
+   "_id": "z6YX6JWpeECmMk8i",
+   "name": "Hagoromo guard (+prof AC)",
+   "img": "modules/jjk5e/icons/techniques/regalia.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+@prof",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!aCFFuHg1NgEyHFFi.z6YX6JWpeECmMk8i"
+  }
+ ]
 }

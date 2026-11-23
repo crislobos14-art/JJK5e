@@ -36,7 +36,9 @@
    },
    "forTechniques": [
     "Star Dictator"
-   ]
+   ],
+   "automationNotes": "Fail the pseudo-domain save by 5+: the damage removes an arm or leg (Limb table).",
+   "automation": "automated"
   }
  },
  "folder": "bGKgrFplZpNnclwX",

@@ -64,6 +64,61 @@
       }
      ]
     }
+   },
+   "sls5uCj6UNCtfaXR": {
+    "_id": "sls5uCj6UNCtfaXR",
+    "type": "damage",
+    "name": "Grappled by Moon Dregs (start of turn): 2d4 poison",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "damage": {
+     "parts": [
+      {
+       "number": 2,
+       "denomination": 4,
+       "bonus": "",
+       "types": [
+        "poison"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
    }
   },
   "prerequisites": {
@@ -82,7 +137,34 @@
    },
    "forTechniques": [
     "Moon Dregs"
-   ]
+   ],
+   "dmgScale": {
+    "URxs6nfpFnfqcIkA": [
+     [
+      1,
+      "1d6"
+     ],
+     [
+      6,
+      "2d6"
+     ],
+     [
+      11,
+      "3d8"
+     ]
+    ],
+    "sls5uCj6UNCtfaXR": [
+     [
+      1,
+      "2d4"
+     ],
+     [
+      11,
+      "2d8"
+     ]
+    ]
+   },
+   "automation": "automated"
   }
  },
  "folder": "xS0EmCX82T9CW9Eg",

@@ -36,7 +36,9 @@
    },
    "forTechniques": [
     "Seance"
-   ]
+   ],
+   "automationNotes": "Advantage on concentration for Seance; Ritual takes 3 rounds; Soul Information DC −CE mod.",
+   "automation": "automated"
   }
  },
  "folder": "Bzl0QdjoRI5R4DB5",

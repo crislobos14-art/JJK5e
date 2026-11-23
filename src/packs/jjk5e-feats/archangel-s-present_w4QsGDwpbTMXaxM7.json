@@ -37,7 +37,9 @@
    },
    "forTechniques": [
     "Technique Extermination"
-   ]
+   ],
+   "automationNotes": "Gain a Blessing (DMG) chosen by the GM.",
+   "automation": "automated"
   }
  },
  "folder": "gjva3zbKGp06jB9X",

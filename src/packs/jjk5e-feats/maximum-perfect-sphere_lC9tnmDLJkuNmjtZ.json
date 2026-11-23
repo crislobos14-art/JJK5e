@@ -81,6 +81,68 @@
       }
      ]
     }
+   },
+   "Ycwvo3LbNBsK1gjh": {
+    "_id": "Ycwvo3LbNBsK1gjh",
+    "type": "save",
+    "name": "Bonus Action: move 30 ft / ram (DEX)",
+    "sort": 0,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "10",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 8,
+       "denomination": 12,
+       "bonus": "",
+       "types": [
+        "force"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
    }
   },
   "prerequisites": {
@@ -102,7 +164,8 @@
    },
    "forTechniques": [
     "Construction"
-   ]
+   ],
+   "automation": "automated"
   }
  },
  "folder": "kyQQ2jjaJXT8blxH",

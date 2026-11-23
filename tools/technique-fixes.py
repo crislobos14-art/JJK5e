@@ -6989,6 +6989,359 @@ def review_fixes(S):
     mark(vs)
 
 
+# ---------------------------------------------------------------- feat review 2 (manual audit, v1.58)
+
+def feat_review2(S):
+    PK = "jjk5e-feats"
+    norm = lambda s: s.replace("’", "'")
+    def F(name):
+        hits = [d for (pk, _, d) in S.src.values() if pk == PK and norm(d["name"]) == name and d.get("type") == "feat"]
+        if len(hits) != 1: raise KeyError(f"{name}: {len(hits)}")
+        S.dirty.add(hits[0]["_id"]); return hits[0]
+    acts = lambda it: it["system"].setdefault("activities", {})
+    ORIG = {'rzC1hLKUv2W4uYXK': 'tHOSbbzwvdYegJ6X', 'sAge2bAPjkPuflBR': 'EY4trL2oiporW6xd', 'XX3mraqnzOyM6sxw': 'E2691k5Yf4n2s6Mo', '8LGbt2QpvSSZv9Rn': '6Y20vzbRskj57gj8', 'lPDpRTbneARPB4rC': 'hbIVW3rbU6iDOeTc', '0otTgubsl1m6Vfiq': 'sZQ9cxbXdyslRPl6', 'WXa3ZaHRk7b7PDO4': 'jhXeoMft6mfwjmwu'}  # activities whose type this pass changes
+    first = lambda it, typ: (acts(it)[ORIG[it["_id"]]] if it["_id"] in ORIG
+                             else next(a for a in acts(it).values() if a["type"] == typ))
+    jf = lambda it: it.setdefault("flags", {}).setdefault("jjk5e", {})
+
+    def clone(it, src, key, name, activation):
+        a = json.loads(json.dumps(src)); a["_id"] = sid(it["_id"], "act", key); a["name"] = name
+        a["activation"] = {"type": activation, "value": 1 if activation in ("action", "bonus", "reaction") else None,
+                           "condition": a.get("activation", {}).get("condition", ""), "override": True}
+        acts(it)[a["_id"]] = a
+        fl = jf(it)
+        for k in ("ceCosts", "ceSteps"):
+            if src["_id"] in fl.get(k, {}): fl.setdefault(k, {})[a["_id"]] = fl[k][src["_id"]]
+        return a
+
+    def heal_per_ce(a, per, max_, types=("healing",)):
+        a["type"] = "heal"
+        a["healing"] = {"number": None, "denomination": None, "bonus": str(per), "types": list(types),
+                        "custom": {"enabled": False, "formula": ""}, "scaling": {"mode": "whole", "formula": str(per)}}
+        a["consumption"]["scaling"] = {"allowed": True, "max": max_}
+
+    # Hollow Wicker Basket: action, bonus action or reaction; 15-ft anti-sure-hit barrier for 1 minute.
+    it = F("Hollow Wicker Basket"); b = first(it, "utility")
+    b["range"], b["target"], b["duration"] = RANGE_SELF, SELF, {"value": "1", "units": "minute", "override": True}
+    apply(b, fx(it, "hwb", "Hollow Wicker Basket", rounds=10,
+                desc="15-ft barrier: domain sure-hit effects are negated and deal no damage inside it."))
+    clone(it, b, "hwb-action", "Action (4 CE)", "action")
+    clone(it, b, "hwb-reaction", "Reaction (4 CE): sure-hit or a domain opening", "reaction")
+    mark(it)
+
+    # Simple Domain: the barrier HP soak damage first (temp HP = prof × 2 × CE mod); ends if you move.
+    it = F("Simple Domain"); r = first(it, "utility")
+    r["type"] = "heal"; r["range"], r["target"] = RANGE_SELF, SELF
+    r["healing"] = {"number": None, "denomination": None, "bonus": "", "types": ["temphp"],
+                    "custom": {"enabled": True, "formula": f"@prof * 2 * {CEMOD}"}, "scaling": {}}
+    r["duration"] = {"value": "1", "units": "minute", "override": True}
+    apply(r, fx(it, "sd", "Simple Domain (10 ft)", rounds=10,
+                desc="Barrier HP = these temporary HP; leftover damage carries over. Ends if you move."))
+    clone(it, r, "sd-action", "Action (4 CE)", "action")
+    note(it, "Barrier HP are applied as temporary HP. Remove the effect and temp HP if you move.")
+    mark(it)
+
+    # Refined Domain: choose one benefit (enable its effect). Cost Reduction is applied by the module.
+    it = F("Refined Domain")
+    opts = [("sev", "Severe Danification", "+CE mod dice to the domain's Initiative 20 damage."),
+            ("nonl", "Non-Lethality", "Add one more condition or restriction to your domain."),
+            ("cost", "Cost Reduction", "Inside your open domain, innate technique CE costs are halved (rounded up)."),
+            ("speed", "Lightning Speed Release", "In your domain, technique activation is one step faster."),
+            ("mult", "Multiplication", "'Spend up to X CE' maximums are doubled."),
+            ("impr", "Improved Technique", "Inside your domain, one chosen technique gains +CE mod damage dice.")]
+    for k, n, desc in opts:
+        eid = _passive(it, k, f"Refined Domain: {n}", [], desc=desc + " Enable only the benefit you chose.")
+        for e in it["effects"]:
+            if e["_id"] == eid:
+                e["disabled"] = True
+                if k == "cost": e.setdefault("flags", {}).setdefault("jjk5e", {})["refinedCostHalf"] = True
+    note(it, "Enable the effect of the benefit you chose. Cost Reduction is automatic while your domain is open.")
+    mark(it)
+
+    # Cursed Projectiles: bonus action, each active projectile makes a ranged CE attack (60 ft).
+    it = F("Cursed Projectiles")
+    a = act(it, "volley", "attack", "Bonus Action: projectile attack (each, 60 ft)", "bonus",
+            range=_r(60), target=one_creature(), attack=_atk("ranged"),
+            damage={"includeBase": False, "parts": []})
+    note(it, "Imbue up to CE mod projectiles (action). Their damage is the ammunition's/weapon's: add it on the roll. "
+             "Ignore half and three-quarters cover.")
+    mark(it)
+
+    # Chanting: full-turn recitation; the next technique gets the boost.
+    it = F("Chanting")
+    a = act(it, "chant", "utility", "Chant (full turn, concentration)", "action", range=RANGE_SELF, target=SELF,
+            duration={"value": "1", "units": "round", "concentration": True, "override": True})
+    apply(a, fx(it, "chant", "Chanting", rounds=2,
+                desc="Next turn: the chosen technique ignores resistance (immunity = resistance), attack with "
+                     "advantage or saves with disadvantage, double damage dice (first roll only). No Maximum Output "
+                     "or Domain Expansion while chanting."))
+    mark(it)
+
+    # Healer: 1d6 + 4 + the creature's maximum Hit Dice.
+    it = F("Healer"); a = first(it, "utility")
+    a["type"] = "heal"; a["range"], a["target"] = {"units": "touch", "override": True}, one_creature()
+    a["healing"] = {"number": 1, "denomination": 6, "bonus": "4", "types": ["healing"],
+                    "custom": {"enabled": False, "formula": ""}, "scaling": {}}
+    note(it, "Add the creature's maximum number of Hit Dice to the healing. Once per creature per short or long rest.")
+    mark(it)
+
+    # Chef: +1d8 when spending Hit Dice after eating the food.
+    it = F("Chef")
+    act(it, "meal", "heal", "Short-rest meal: +1d8 HP (with Hit Dice)", "special", target=one_creature(),
+        healing={"number": 1, "denomination": 8, "bonus": "", "types": ["healing"],
+                 "custom": {"enabled": False, "formula": ""}, "scaling": {}})
+    mark(it)
+
+    # Kirin's Flames: reaction, attacker takes fire damage = twice the damage you took.
+    it = F("Maximum: Kirin's Flames")
+    act(it, "kf", "damage", "Reaction: attacker takes fire = 2 × damage taken", "reaction", target=one_creature(),
+        damage={"parts": [{"number": None, "denomination": None, "bonus": "", "types": ["fire"],
+                           "custom": {"enabled": True, "formula": "2 * @scaling"}, "scaling": {}}]},
+        consumption={"targets": [], "scaling": {"allowed": True, "max": "999"}, "spellSlot": False})
+    note(it, "Set the scaling to the damage you took (+1 = 1): fire = 2 × that. Only while Kirin is active.")
+    mark(it)
+
+    # Blood Crystallization: 1 minute; resist B/P/S; reaction +5 AC; d20 ≤ 2 at end of turn = exhaustion.
+    it = F("Blood Crystallization"); u = first(it, "utility")
+    u["range"], u["target"] = RANGE_SELF, SELF
+    eid = fx(it, "bc", "Blood Crystallization", rounds=10,
+             changes=[("system.traits.dr.value", 2, "bludgeoning"), ("system.traits.dr.value", 2, "piercing"),
+                      ("system.traits.dr.value", 2, "slashing")],
+             desc="Unarmed die +2 steps (d8>d10>d12>2d8). End of turn: d20, on 2 or lower gain 1 exhaustion.")
+    apply(u, eid)
+    r = act(it, "ac", "utility", "Reaction: +5 AC vs an attack", "reaction", range=RANGE_SELF, target=SELF)
+    apply(r, fx(it, "ac", "Crystal guard (+5 AC)", rounds=1, changes=[("system.attributes.ac.bonus", 2, "+5")],
+                special=("isAttacked",)))
+    mark(it)
+
+    # Supernova: orbs are made with an action (can explode at once) or explode as a reaction.
+    it = F("Supernova"); s = first(it, "save")
+    clone(it, s, "sn-action", "Action (5 CE, 5 HP per orb): explode now", "action")
+    note(it, "Each orb costs 5 CE and 5 HP (up to prof orbs); use once per orb.")
+    mark(it)
+
+    # Maximum: Perfect Sphere: bonus action to move/ram it (no extra CE).
+    it = F("Maximum: Perfect Sphere"); s = first(it, "save")
+    m = clone(it, s, "ps-move", "Bonus Action: move 30 ft / ram (DEX)", "bonus"); free(it, m)
+    mark(it)
+
+    # Fighting Words: WIS save, disadvantage on attacks against others.
+    it = F("Fighting Words")
+    a = act(it, "fw", "save", "Fighting Words (with a word): WIS save", "special", target=one_creature(),
+            save=_sv("wis"), damage={"onSave": "none", "parts": []})
+    apply(a, fx(it, "fw", "Fighting Words", rounds=None,
+                desc="Disadvantage on attack rolls against creatures other than the speaker."))
+    for e in it["effects"]:
+        if e["name"] == "Fighting Words": e["duration"] = {}
+    mark(it)
+
+    # Curse Restoration: 5 HP per CE to a summoned spirit (10 at 11th); action, bonus action or reaction.
+    it = F("Curse Restoration"); b = first(it, "utility")
+    heal_per_ce(b, 5, CEMOD); b["range"], b["target"] = _r(60), one_creature()
+    b["name"] = "Bonus Action (1+ CE): 5 HP per CE"
+    clone(it, b, "cr-action", "Action (1+ CE): 5 HP per CE", "action")
+    clone(it, b, "cr-reaction", "Reaction (1+ CE): 5 HP per CE", "reaction")
+    note(it, "Once per turn. At 11th level: 10 HP per CE (double the heal).")
+    mark(it)
+
+    # Minimum: Uzumaki: release as an action too; creating it is a bonus action (2 spirits).
+    it = F("Minimum: Uzumaki"); at = first(it, "attack")
+    clone(it, at, "mu-action", "Action: Minimum: Uzumaki (5 CE)", "action")
+    act(it, "mu-make", "utility", "Bonus Action: condense 2 spirits", "bonus", range=RANGE_SELF, target=SELF)
+    mark(it)
+
+    # Additional Formulae: explosion costs 3 CE and scales; Modify Attributes is a bonus action.
+    it = F("Additional Formulae"); fl = jf(it)
+    ex = first(it, "save"); cost(it, ex, 3); ex["name"] = "Transmute Explosion (3 CE)"
+    ex["range"], ex["target"] = _r(60), {"template": {"type": "cube", "size": "10", "units": "ft"}, "override": True}
+    ex["damage"]["onSave"] = "half"
+    scale(it, ex, [[1, "5d6"], [11, "8d6"], [18, "14d6"]])
+    for a in acts(it).values():
+        c = fl.get("ceCosts", {}).get(a["_id"])
+        if a["type"] == "utility" and c == 2: a["activation"] = {"type": "bonus", "value": 1, "condition": "", "override": True}; a["name"] = "Modify Attributes (2 CE, bonus action)"
+        elif a["type"] == "utility" and c == 3: a["name"] = "Pressurization (3 CE, concentration)"
+        elif a["type"] == "utility" and c == 1: a["name"] = "Transmute Element (1 CE)"; a["activation"] = {"type": "special", "value": None, "condition": "", "override": True}
+    mark(it)
+
+    # Drill Claws: ranged claw attack (replaces an attack), level scaling; bonus action reach +5 ft.
+    it = F("Drill Claws"); d = first(it, "damage")
+    d["type"] = "attack"; d["attack"] = _atk("ranged", ability="")
+    d["attack"]["type"]["classification"] = "weapon"
+    d["activation"] = {"type": "special", "value": None, "condition": "Replaces one attack (once per turn).", "override": True}
+    d["range"], d["target"] = _r(30), one_creature(); d["name"] = "Drill Claw (1 CE): ranged claw attack"
+    d["damage"] = {"includeBase": False, "parts": [dice(4, 8, ["piercing"])]}
+    scale(it, d, [[1, "4d8"], [6, "6d8"], [11, "8d8"], [18, "10d8"]])
+    r = act(it, "long", "utility", "Bonus Action: lengthen claws (+5 ft reach)", "bonus", range=RANGE_SELF, target=SELF)
+    apply(r, fx(it, "long", "Drill Claws (+5 ft reach)", rounds=10, desc="Claw reach +5 ft. Range doubles at 6th."))
+    note(it, "Use STR, DEX or CE modifier for the Drill Claw attack.")
+    mark(it)
+
+    # Hydrokinesis (Piercing Water): CE attack 2d10 cold + 2d6 piercing; hit → CON save or prone + damage again.
+    it = F("Hydrokinesis"); s = first(it, "save")
+    hit = act(it, "pw", "attack", "Piercing Water (2 CE): CE attack", "action", range=_r(30), target=one_creature(),
+              attack=_atk("ranged"), damage={"includeBase": False,
+                                             "parts": [dice(2, 10, ["cold"]), dice(2, 6, ["piercing"])]})
+    fl = jf(it); c = fl.get("ceCosts", {}).pop(s["_id"], 2); cost(it, hit, c)
+    s["name"] = "Vital organ (on hit): CON save or prone + damage again"
+    s["activation"] = {"type": "special", "value": None, "condition": "", "override": True}
+    s["damage"] = {"onSave": "none", "parts": [dice(2, 10, ["cold"]), dice(2, 6, ["piercing"])]}
+    trigger(hit, s, targets="hitTargets")
+    mark(it)
+
+    # Incarnation: summon the head as an action (3 CE); control/unsummon as a bonus action.
+    it = F("Incarnation"); u = first(it, "utility")
+    u["activation"] = {"type": "action", "value": 1, "condition": "", "override": True}; u["name"] = "Action (3 CE): summon the Head"
+    act(it, "ctl", "utility", "Bonus Action: control or unsummon the Head", "bonus")
+    mark(it)
+
+    # Gradient: reaction adds CE mod to AC (or to an attack/save).
+    it = F("Gradient")
+    r = act(it, "react", "utility", "Reaction: +CE mod to AC (or an attack/save)", "reaction", range=RANGE_SELF, target=SELF)
+    apply(r, fx(it, "react", "Gradient guard", rounds=1, changes=[("system.attributes.ac.bonus", 2, f"+{CEMOD}")],
+                special=("isAttacked",)))
+    mark(it)
+
+    # Hands of Madness: Right Hand 1d12 psychic unarmed; Left Hand 1d6 psychic + WIS or frightened.
+    it = F("Hands of Madness")
+    sv = first(it, "save"); sv["name"] = "Left Hand hit: 1d6 psychic + WIS or frightened"
+    sv["activation"] = {"type": "special", "value": None, "condition": "", "override": True}
+    jf(it).get("ceCosts", {}).pop(sv["_id"], None)
+    sv["damage"] = {"onSave": "full", "parts": [dice(1, 6, ["psychic"])]}
+    rh = act(it, "right", "attack", "Right Hand: unarmed strike (1d12 psychic)", "action", range={"units": "ft", "value": "5", "override": True},
+             target=one_creature(), attack={"ability": "spellcasting", "bonus": "", "critical": {"threshold": None}, "flat": False,
+                                             "type": {"value": "melee", "classification": "unarmed"}},
+             damage={"includeBase": False, "parts": [dice(1, 12, ["psychic"], bonus="@mod")]})
+    lh = act(it, "left", "attack", "Left Hand: unarmed strike", "action", range={"units": "ft", "value": "5", "override": True},
+             target=one_creature(), attack=dict(rh["attack"]), damage={"includeBase": False, "parts": [dice(0, 4, ["bludgeoning"], bonus="@mod")]})
+    lh["damage"]["parts"] = []
+    trigger(lh, sv, targets="hitTargets")
+    both = act(it, "both", "utility", "Bonus Action (6 CE, 11th): both hands", "bonus", range=RANGE_SELF, target=SELF)
+    cost(it, both, 6)
+    note(it, "Hand attacks raise Mental Corruption by 5% once per turn. Right Hand: advantage vs 50%+ corruption.")
+    mark(it)
+
+    # Destined One: advantage vs charmed/frightened near them; 1/round +prof to AC or a save.
+    it = F("Destined One")
+    r = act(it, "fate", "utility", "Once per round: +prof to AC or a save", "special", range=RANGE_SELF, target=SELF)
+    apply(r, fx(it, "fate", "Thread of Fate (+prof AC)", rounds=1, changes=[("system.attributes.ac.bonus", 2, "+@prof")],
+                special=("isAttacked",)))
+    note(it, "Within 30 ft of your Destined One: advantage on saves against charmed and frightened.")
+    mark(it)
+
+    # Maximum: Clock Hand: summon (bonus, 5 CE) + weapon attack 1d10 piercing; Hour Hand +3d8; Minute Hand CE save.
+    it = F("Maximum: Clock Hand"); d = first(it, "damage")
+    d["type"] = "utility"; d.pop("damage", None); d["name"] = "Bonus Action (5 CE): summon the Clock Hand (10 min)"
+    d["range"], d["target"] = RANGE_SELF, SELF
+    atk = act(it, "hit", "attack", "Clock Hand attack (finesse, reach)", "action", range={"units": "ft", "value": "10", "override": True},
+              target=one_creature(), attack={"ability": "", "bonus": "@prof", "critical": {"threshold": None}, "flat": False,
+                                             "type": {"value": "melee", "classification": "weapon"}},
+              damage={"includeBase": False, "parts": [dice(1, 10, ["piercing"], bonus="@mod")]})
+    act(it, "hour", "damage", "Hour Hand (stopped target): +3d8 necrotic", "special", target=one_creature(),
+        damage={"parts": [dice(3, 8, ["necrotic"])]})
+    mn = act(it, "minute", "save", "Minute Hand (not stopped): CE save or frozen", "special", target=one_creature(),
+             save=_sv(["wis", "cha"]), damage={"onSave": "none", "parts": []})
+    apply(mn, fx(it, "frozen", "Frozen in time", rounds=1, statuses=("paralyzed",),
+                 desc="Suffers the penalties of stopped time until the end of its next turn."))
+    note(it, "Minute Hand: once per round. CE save = the target's better of WIS/CHA.")
+    mark(it)
+
+    # Soul Alteration: 5 HP per CE via Self-Alteration (10 at 11th, reaction at 11th).
+    it = F("Soul Alteration"); u = first(it, "utility")
+    heal_per_ce(u, 5, CEMOD); u["range"], u["target"] = RANGE_SELF, SELF
+    u["name"] = "Reaction (11th): 5 HP per CE (10 at 11th)"
+    sa = clone(it, u, "sa-self", "Self-Alteration: 5 HP per CE", "special"); sa["effects"] = []
+    note(it, "At 11th level: 10 HP per CE (double the heal), usable as a reaction. Limb: 2 CE (1 CE at 11th).")
+    mark(it)
+
+    # Repelling Forces: up to 3 CE.
+    it = F("Repelling Forces"); d = first(it, "damage"); d["consumption"]["scaling"]["max"] = "2"
+
+    # Adorable Poison Jar: level scaling + grapple damage.
+    it = F("Adorable Poison Jar"); d = first(it, "damage")
+    scale(it, d, [[1, "1d6"], [6, "2d6"], [11, "3d8"]])
+    g = act(it, "grab", "damage", "Grappled by Moon Dregs (start of turn): 2d4 poison", "special", target=one_creature(),
+            damage={"parts": [dice(2, 4, ["poison"])]})
+    scale(it, g, [[1, "2d4"], [11, "2d8"]])
+    mark(it)
+
+    # Destructive Gaze: level scaling.
+    it = F("Destructive Gaze"); scale(it, first(it, "damage"), [[1, "2d8"], [6, "2d10"], [11, "4d8"], [18, "6d8"]]); mark(it)
+
+    # Celestial Raiment: reaction +prof AC until your next turn (or to a save).
+    it = F("Celestial Raiment")
+    r = act(it, "guard", "utility", "Reaction: +prof to AC (or a save)", "reaction", range=RANGE_SELF, target=SELF)
+    apply(r, fx(it, "guard", "Hagoromo guard (+prof AC)", rounds=1, changes=[("system.attributes.ac.bonus", 2, "+@prof")]))
+    mark(it)
+
+    # Maximum: Instrumentalization: impact damage 3d6.
+    it = F("Maximum: Instrumentalization")
+    act(it, "impact", "damage", "Pushed into a solid object: 3d6 bludgeoning", "special", target=one_creature(),
+        damage={"parts": [dice(3, 6, ["bludgeoning"])]})
+    mark(it)
+
+    # Chainsaw Dismantle: 2 CE, +1d12 slashing on an unarmed strike (scales); reaction at 11th.
+    it = F("Chainsaw Dismantle"); u = first(it, "utility")
+    u["type"] = "damage"; u["name"] = "Chainsaw Dismantle (2 CE): +1d12 slashing"
+    u["activation"] = {"type": "special", "value": None, "condition": "On an unarmed strike hit (once per turn).", "override": True}
+    u["target"] = one_creature(); u["damage"] = {"parts": [dice(1, 12, ["slashing"])]}
+    scale(it, u, [[1, "1d12"], [6, "2d12"], [11, "3d12"], [18, "4d12"]])
+    r = act(it, "parry", "utility", "Reaction (11th): reduce an attack by your Dismantle damage", "reaction", range=RANGE_SELF, target=SELF)
+    note(it, "Reaction (11th): roll Dismantle for the CE spent and subtract it from the damage; 0 = nullified.")
+    mark(it)
+
+    # Lover's Embrace: grappled/restrained creatures take 1d6 bludgeoning at the start of their turn.
+    it = F("Lover's Embrace")
+    act(it, "squeeze", "damage", "Start of turn (grappled/restrained): 1d6 bludgeoning", "special", target=one_creature(),
+        damage={"parts": [dice(1, 6, ["bludgeoning"])]})
+    mark(it)
+
+    # Maximum: Blitz: +1d6 per 10 ft moved in a straight line.
+    it = F("Maximum: Blitz")
+    a = act(it, "charge", "damage", "Divebomb hit: +1d6 per 10 ft moved", "special", target=one_creature(),
+            damage={"parts": [dice(1, 6, ["bludgeoning"], scale=1)]},
+            consumption={"targets": [], "scaling": {"allowed": True, "max": "20"}, "spellSlot": False})
+    note(it, "Scale = 10-ft steps − 1. Speed +15 ft per CE spent on Divebomb.")
+    mark(it)
+
+    # Free Spirit: once per day draw CE equal to your level; spirit active CE mod minutes per day.
+    it = F("Free Spirit"); u = first(it, "utility")
+    u["name"] = "Action: borrow power (regain CE = level, 1/day)"
+    it["system"]["uses"] = {"max": "1", "spent": 0, "recovery": [{"period": "day", "type": "recoverAll"}]}
+    u["consumption"]["targets"] = [{"type": "itemUses", "value": "1", "target": "", "scaling": {}}]
+    jf(it)["ceRegain"] = {u["_id"]: "@details.level"}
+    mark(it)
+
+    # Eyes in the Skies: passive +5 Perception/Investigation while riding (toggle).
+    it = F("Eyes in the Skies")
+    eid = _passive(it, "eyes", "Eyes in the Skies (riding)", [("system.skills.prc.bonuses.passive", 2, "+5"),
+                                                              ("system.skills.inv.bonuses.passive", 2, "+5")],
+                   desc="While riding your Floating Tool. Use your CE modifier for DEX saves.")
+    for e in it["effects"]:
+        if e["_id"] == eid: e["disabled"] = True
+    mark(it)
+
+    # Purely descriptive or GM-adjudicated feats: say so on the sheet.
+    for n, t in (("Mounted Combatant", "While mounted: advantage vs smaller unmounted foes; redirect attacks; mount evasion. Apply by hand."),
+                 ("Boogie Down", "+2 reactions usable only to Boogie; after a Boogie, the next attack against you has disadvantage."),
+                 ("Cursed Tactician", "Corpse Tactics: +1 tactic per CE spent (up to prof); not the same tactic twice on one corpse."),
+                 ("Fang Versatility", "Fangs: AC 15 + prof and +2d4 poison on a hit (edit the shikigami)."),
+                 ("Spatial Skirmishing", "Unarmed strike + Lapse Blue/Reversal Red damage and effect; advantage with Blue."),
+                 ("Comet Reactions", "1 CE: use Effective Marking reactions for other purposes."),
+                 ("Blackened Blood", "Fail your technique's CON save by 5+: 1 exhaustion (max 3 from this)."),
+                 ("Perfect Ritual", "Advantage on concentration for Seance; Ritual takes 3 rounds; Soul Information DC −CE mod."),
+                 ("Spiderweb", "+1 CE: Cleave as a 30-ft cone vs objects/structures (critical); creatures DEX or prone."),
+                 ("Judicial Amputation", "Fail the pseudo-domain save by 5+: the damage removes an arm or leg (Limb table)."),
+                 ("Enduring Shikigami", "Fox shikigami (not Inari) last until 0 HP and add your prof to their saves."),
+                 ("Domineering Shikigami", "Minor Star: bite 1d6 (1d8 at 6th, 1d10 at 11th), +2 DEX at 1st/6th/11th, evasion."),
+                 ("Beginner's Luck", "Store CE mod additional Miracles."),
+                 ("Archangel's Present", "Gain a Blessing (DMG) chosen by the GM."),
+                 ("Titan's Grasp", "Reduce the damage by your Missile Fist damage roll."),
+                 ("Musical Climax", "Each action spent playing adds 2 damage dice to the released Sound Blast/Wave (reaction); ignores resistance.")):
+        it = F(n); fl = jf(it)
+        if not fl.get("automationNotes"): note(it, t)
+        mark(it)
+
+
 # ---------------------------------------------------------------- core rules (Intricacies of Sorcery)
 
 def rules_fixes(S):
@@ -7167,7 +7520,8 @@ TECHNIQUES = {"Antigravity System": antigravity_system,
               "_feats": feat_fixes,
               "_review": review_fixes,
               "_weapons": weapon_fixes,
-              "_rules": rules_fixes}
+              "_rules": rules_fixes,
+              "_featreview": feat_review2}
 
 if __name__ == "__main__":
     args = sys.argv[1:]

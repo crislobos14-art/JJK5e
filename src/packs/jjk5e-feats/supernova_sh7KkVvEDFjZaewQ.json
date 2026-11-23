@@ -86,6 +86,73 @@
      }
     ],
     "useConditionText": "false"
+   },
+   "KDgjTQgWMXvfGu2A": {
+    "_id": "KDgjTQgWMXvfGu2A",
+    "type": "save",
+    "name": "Action (5 CE, 5 HP per orb): explode now",
+    "sort": 0,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "value": "10",
+     "units": "ft"
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1"
+     }
+    },
+    "duration": {
+     "units": "inst"
+    },
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "half",
+     "parts": [
+      {
+       "number": 8,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "piercing"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    },
+    "effects": [
+     {
+      "_id": "GDRl48tIuZRciBlF",
+      "onSave": false
+     }
+    ],
+    "useConditionText": "false"
    }
   },
   "prerequisites": {
@@ -96,7 +163,8 @@
  "flags": {
   "jjk5e": {
    "ceCosts": {
-    "wFXXw8tjAvu2ji9m": 5
+    "wFXXw8tjAvu2ji9m": 5,
+    "KDgjTQgWMXvfGu2A": 5
    },
    "prereq": {
     "features": [
@@ -107,7 +175,9 @@
    },
    "forTechniques": [
     "Blood Manipulation"
-   ]
+   ],
+   "automationNotes": "Each orb costs 5 CE and 5 HP (up to prof orbs); use once per orb.",
+   "automation": "automated"
   }
  },
  "effects": [

@@ -91,6 +91,61 @@
       "onSave": false
      }
     ]
+   },
+   "YakP0mhLpIcfwP6P": {
+    "_id": "YakP0mhLpIcfwP6P",
+    "type": "damage",
+    "name": "Pushed into a solid object: 3d6 bludgeoning",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "damage": {
+     "parts": [
+      {
+       "number": 3,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
    }
   },
   "prerequisites": {
@@ -112,7 +167,8 @@
    },
    "forTechniques": [
     "Regalia"
-   ]
+   ],
+   "automation": "automated"
   }
  },
  "effects": [

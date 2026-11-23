@@ -36,7 +36,9 @@
    },
    "forTechniques": [
     "Boogie Woogie"
-   ]
+   ],
+   "automationNotes": "+2 reactions usable only to Boogie; after a Boogie, the next attack against you has disadvantage.",
+   "automation": "automated"
   }
  },
  "folder": "lYPG7qB66tA5vtjF",

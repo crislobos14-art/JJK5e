@@ -23,6 +23,65 @@
   "prerequisites": {
    "level": null,
    "repeatable": false
+  },
+  "activities": {
+   "nmyjOzb2U4cWwEpP": {
+    "_id": "nmyjOzb2U4cWwEpP",
+    "type": "damage",
+    "name": "Divebomb hit: +1d6 per 10 ft moved",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "20"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "damage": {
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 6,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "number": 1
+       }
+      }
+     ]
+    }
+   }
   }
  },
  "flags": {
@@ -40,7 +99,9 @@
    ],
    "forTechniques": [
     "Triple Core"
-   ]
+   ],
+   "automationNotes": "Scale = 10-ft steps − 1. Speed +15 ft per CE spent on Divebomb.",
+   "automation": "automated"
   }
  },
  "effects": [

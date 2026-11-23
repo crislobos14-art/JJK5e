@@ -36,7 +36,9 @@
    },
    "forTechniques": [
     "Cursed Corpse Creation"
-   ]
+   ],
+   "automationNotes": "Corpse Tactics: +1 tactic per CE spent (up to prof); not the same tactic twice on one corpse.",
+   "automation": "automated"
   }
  },
  "folder": "XXj1CTcWWYDx5bTY",
