@@ -2,7 +2,7 @@
   "id": "jjk5e",
   "title": "Jujutsu Kaisen 5e (V.6) — Compendium",
   "description": "Unofficial, non-commercial fan conversion of the Jujutsu Kaisen 5e homebrew (V.6) by I watch Anime for the D&D 5e system: 7 classes with level advancement, 79 Innate Techniques, races, feats, backgrounds, mindsets, equipment, cursed tools and the full rules journal. Includes Cursed Energy pool automation. Also includes feats and options from Creeps and Curses V.3.1 (Special Grade Boons, Special Traits, Heavenly Pacts, new techniques). Licensed CC BY-NC-SA 4.0.",
-  "version": "1.54.0",
+  "version": "1.54.1",
   "authors": [
     {
       "name": "I watch Anime",
@@ -12,7 +12,7 @@
     }
   ],
   "compatibility": {
-    "minimum": "14.369",
+    "minimum": "14.368",
     "verified": "14.370"
   },
   "relationships": {
@@ -21,7 +21,7 @@
         "id": "dnd5e",
         "type": "system",
         "compatibility": {
-          "minimum": "6.0.6",
+          "minimum": "5.3.0",
           "verified": "6.1.1"
         }
       }
@@ -32,20 +32,18 @@
         "type": "module",
         "reason": "Full combat automation: attacks, saves and damage applied automatically, Black Flash inside the Midi workflow, reaction prompts for JJK reactions, repeat saves each turn (OverTime) and domain sure-hit.",
         "compatibility": {
-          "minimum": "14.6.5",
-          "verified": "14.7.0"
-        },
-        "manifest": "https://github.com/tposney/midi-qol/releases/download/latest-dnd6/module.json"
+          "minimum": "14.0.19",
+          "verified": "14.7.1"
+        }
       },
       {
         "id": "dae",
         "type": "module",
         "reason": "Dynamic Active Effects: Midi-QOL's effect companion (formulas and special durations in effects).",
         "compatibility": {
-          "minimum": "14.6.4",
+          "minimum": "14.0.19",
           "verified": "14.6.10"
-        },
-        "manifest": "https://github.com/tposney/dae/releases/download/latest-dnd6/module.json"
+        }
       }
     ],
     "recommends": [
@@ -162,7 +160,7 @@
   "socket": true,
   "url": "https://github.com/crislobos14-art/jjk5e",
   "manifest": "https://raw.githubusercontent.com/crislobos14-art/jjk5e/main/module.json",
-  "download": "https://github.com/crislobos14-art/JJK5e/releases/download/v1.54.0/module.zip",
+  "download": "https://github.com/crislobos14-art/JJK5e/releases/download/v1.54.1/module.zip",
   "packs": [
     {
       "name": "jjk5e-classes",

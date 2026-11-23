@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.54.1 — Compatibilidad con Foundry 14.368
+- **Foundry 14.368**: el módulo ahora se puede activar desde 14.368 (antes exigía 14.369).
+- En 14.368 hay que usar **dnd5e 5.3.x + Midi-QOL 14.0.20 + DAE 14.0.22** (las versiones del navegador de paquetes): todas las versiones de Midi para dnd5e 6.0.6+ piden Foundry 14.369, y dnd5e 6.0.0–6.0.5 eran pre-lanzamientos.
+- Requisitos del manifiesto: dnd5e ≥ 5.3.0 (verificado 6.1.1), Midi-QOL ≥ 14.0.19 (verificado 14.7.1), DAE ≥ 14.0.19 (verificado 14.6.10). Se quitaron los enlaces de manifiesto forzados a la rama dnd6, que en 14.368 instalaban una versión incompatible.
+- Comprobado contra el código de dnd5e 5.3.3: todos los hooks y campos que usa el módulo existen (preActivityConsumption, postUseActivity, preUseActivity, rollAttack, preCalculateDamage, advancementManagerComplete, restCompleted, ajuste allowSummoning, CA mínima, umbrales de crítico). Las claves `flags.midi-qol.*` de los compendios son las nativas de Midi 14.0.
+- README con la tabla Foundry / dnd5e / Midi / DAE.
+- Sin probar en Foundry real.
+
 ## 1.54.0 — Revisión técnica por técnica contra el manual
 Revisé las 81 técnicas rasgo por rasgo contra el manual (salvaciones, tipos de daño, condiciones, áreas, alcances, acción/acción adicional/reacción, ataques, CE y dados). Corregido:
 - **Antigravity**: faltaba Disorienting Gravity (CON: desventaja en ataques, sin concentración) y Nauseating Gravity (aturdido hasta el final de su siguiente turno).
