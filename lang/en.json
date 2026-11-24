@@ -153,7 +153,9 @@
       "Ward": {
         "FallingBlossom": "Falling Blossom Emotion: negates only attacks and effects that are guaranteed to hit.",
         "HollowWicker": "Hollow Wicker Basket: the chosen creatures within 15 ft are protected from guaranteed hits.",
-        "Amplification": "Domain Amplification: your innate techniques are blocked and you are protected from guaranteed hits. The GM adjudicates other neutralizations and Maximum Output."
+        "Amplification": "Domain Amplification: your innate techniques are blocked and you are protected from guaranteed hits. The GM adjudicates other neutralizations and Maximum Output.",
+        "FallingBlossomOffense": "Falling Blossom Emotion (offense): one melee counterattack as a reaction before an incoming attack, with advantage, a critical on a hit and necrotic damage. The GM resolves the counterattack.",
+        "SimpleDomain": "Simple Domain: a barrier of its own with {hp} HP that absorbs guaranteed-hit damage; it ends if you move, and leftover damage carries over to the protected creature. Ordinary Midi-QOL damage is resolved by the GM."
       },
       "ProfileNone": "None",
       "ProfileOnSaveOpt": {
@@ -171,7 +173,12 @@
       "ProfileDC": "Save DC",
       "MarkerUseAttack": "JJK 5e: to hit a selected barrier marker, use the barrier attack button.",
       "MarkerAttack": "Attack the selected barrier",
-      "MarkerCreate": "Create selectable barrier marker (experimental)"
+      "MarkerCreate": "Create selectable barrier marker (experimental)",
+      "MarkerName": "Barrier: {name}",
+      "MultiClash": "Multiple domain clash",
+      "MultiClashHint": "Sure-hit effects are disabled until the clash resolves. Every losing barrier shrinks each round.",
+      "MultiRounds": "{n} round(s) left",
+      "NeedWeakSpot": "{name} is inside the domain and has not found its weak spot (DC 30 Perception): the barrier cannot be damaged from inside yet."
     },
     "Burnout": {
       "Name": "Technique Burnout",

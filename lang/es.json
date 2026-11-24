@@ -153,7 +153,9 @@
       "Ward": {
         "FallingBlossom": "Falling Blossom Emotion: anula solo los ataques y efectos de impacto garantizado.",
         "HollowWicker": "Hollow Wicker Basket: las criaturas elegidas a 15 pies o menos quedan protegidas de los impactos garantizados.",
-        "Amplification": "Domain Amplification: tus técnicas innatas quedan bloqueadas y estás protegido de los impactos garantizados. El GM resuelve otras neutralizaciones y la Salida máxima."
+        "Amplification": "Domain Amplification: tus técnicas innatas quedan bloqueadas y estás protegido de los impactos garantizados. El GM resuelve otras neutralizaciones y la Salida máxima.",
+        "FallingBlossomOffense": "Falling Blossom Emotion (ofensiva): un contraataque cuerpo a cuerpo como reacción antes de un ataque entrante, con ventaja, crítico si impacta y daño necrótico. El GM resuelve el contraataque.",
+        "SimpleDomain": "Simple Domain: barrera propia de {hp} PG que absorbe el daño de impacto garantizado; termina si te mueves y el daño sobrante pasa a la criatura protegida. El daño normal de Midi-QOL lo resuelve el GM."
       },
       "ProfileNone": "Ninguno",
       "ProfileOnSaveOpt": {
@@ -171,7 +173,12 @@
       "ProfileDC": "CD de la salvación",
       "MarkerUseAttack": "JJK 5e: para golpear un marcador de barrera seleccionado, usa el botón de atacar barrera.",
       "MarkerAttack": "Atacar la barrera seleccionada",
-      "MarkerCreate": "Crear marcador de barrera seleccionable (experimental)"
+      "MarkerCreate": "Crear marcador de barrera seleccionable (experimental)",
+      "MarkerName": "Barrera: {name}",
+      "MultiClash": "Choque múltiple de dominios",
+      "MultiClashHint": "Los impactos garantizados quedan desactivados hasta que se resuelva el choque. Cada barrera perdedora se encoge en cada asalto.",
+      "MultiRounds": "quedan {n} asalto(s)",
+      "NeedWeakSpot": "{name} está dentro del dominio y no ha encontrado su punto débil (Percepción CD 30): todavía no puede dañar la barrera desde dentro."
     },
     "Burnout": {
       "Name": "Technique Burnout",

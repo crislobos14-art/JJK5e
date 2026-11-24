@@ -114,7 +114,7 @@ function requireActor(actor) {
 /** Chat options that show a message only to the actor's owners and the GMs (world setting "privateCE"). */
 function privateTo(actor) {
   let on = true;
-  try { on = game.settings.get(MODULE_ID, "privateCE") !== false; } catch (err) { /* default: private */ }
+  try { on = game.settings.get(MODULE_ID, "privateCE") !== false; } catch { /* default: private */ }
   if (!on || !actor) return {};
   const users = (game.users ?? []).filter((u) => u.isGM || actor.testUserPermission?.(u, "OWNER")).map((u) => u.id);
   return users.length ? { whisper: users } : {};
@@ -192,7 +192,7 @@ async function offerRemoveWorldPacks() {
     try { await pack.deleteCompendium(); } catch (err) { console.error(`${MODULE_ID} | delete ${pack.collection}`, err); }
   }
   const folder = game.folders.find((f) => f.type === "Compendium" && f.name === FOLDER_NAME && !f.contents?.length);
-  try { await folder?.delete(); } catch (err) { /* ignore */ }
+  try { await folder?.delete(); } catch { /* ignore */ }
 }
 
 /** One-time setup when the module packs are present: sidebar copies of tables, macros and shikigami. */
@@ -270,7 +270,7 @@ async function importAll() {
 
 function dataLanguage() {
   let v = "auto";
-  try { v = game.settings.get(MODULE_ID, "dataLanguage") ?? "auto"; } catch (err) { /* not registered yet */ }
+  try { v = game.settings.get(MODULE_ID, "dataLanguage") ?? "auto"; } catch { /* not registered yet */ }
   if (v === "en" || v === "es") return v;
   return String(game.i18n?.lang ?? "en").startsWith("es") ? "es" : "en";
 }
@@ -3540,7 +3540,7 @@ function animOn() {
 }
 
 function animOverrides() {
-  try { return JSON.parse(setting("animOverrides") || "{}"); } catch (err) { return {}; }
+  try { return JSON.parse(setting("animOverrides") || "{}"); } catch { return {}; }
 }
 
 /** Return a usable Sequencer path, walking down to a parent key for range-based entries. */
@@ -3582,12 +3582,12 @@ function aaHandles(item) {
     if (game.settings.get("autoanimations", "disableAutoRec")) return !!flags?.isEnabled;
     const rinse = (n) => String(n ?? "").replace(/\s+/g, "").toLowerCase();
     const menus = ["melee", "range", "ontoken", "templatefx", "aura", "preset"]
-      .flatMap((k) => { try { return game.settings.get("autoanimations", `aaAutorec-${k}`) ?? []; } catch (err) { return []; } });
+      .flatMap((k) => { try { return game.settings.get("autoanimations", `aaAutorec-${k}`) ?? []; } catch { return []; } });
     const name = item.name ?? "";
     const rinsed = rinse(name);
     return menus.some((m) => m?.label && (m.advanced?.exactMatch ? m.label === name
       : rinsed.includes(rinse(m.label)) && !(m.advanced?.excludedTerms ?? []).some((x) => rinsed.includes(rinse(x)))));
-  } catch (err) { return !!flags?.isEnabled; }
+  } catch { return !!flags?.isEnabled; }
 }
 
 function tokenOf(actor) {
@@ -3721,14 +3721,14 @@ function tokenDistance(a, b) {
   const M = globalThis.MidiQOL;
   try {
     if (typeof M?.computeDistance === "function") return M.computeDistance(a, b, { wallsBlock: true });
-  } catch (err) { /* fall through to the grid measure */ }
+  } catch { /* fall through to the grid measure */ }
   try {
     const path = canvas.grid.measurePath([a.center, b.center]);
     const size = canvas.scene?.grid?.distance ?? 5;
     // Edge-to-edge for adjacent large tokens: subtract half of each footprint beyond one square.
     const extra = ((Math.max(a.document.width, a.document.height) - 1) + (Math.max(b.document.width, b.document.height) - 1)) / 2 * size;
     return Math.max(0, path.distance - extra);
-  } catch (err) { return NaN; }
+  } catch { return NaN; }
 }
 
 function registerMidiHooks() {
@@ -4713,7 +4713,7 @@ function addSheetStrip(app, element) {
   const actor = app?.actor ?? app?.document;
   if (actor?.documentName !== "Actor" || actor.type !== "character" || !actor.isOwner) return;
   let enabled = true;
-  try { enabled = setting("sheetStrip"); } catch (err) { /* */ }
+  try { enabled = setting("sheetStrip"); } catch { /* */ }
   if (!enabled) return;
   const root = element instanceof HTMLElement ? element : (element?.[0] ?? app.element);
   if (!root?.querySelector) return;
@@ -4784,7 +4784,7 @@ function hotbarItems(actor) {
 async function fillHotbar(actor, { page = null, quiet = false } = {}) {
   actor = requireActor(actor);
   if (!actor) return 0;
-  page ??= (() => { try { return Number(setting("hotbarPage")) || 5; } catch (err) { return 5; } })();
+  page ??= (() => { try { return Number(setting("hotbarPage")) || 5; } catch { return 5; } })();
   const items = hotbarItems(actor);
   const Macro = docClass("Macro");
   let n = 0;
@@ -4811,7 +4811,7 @@ async function fillHotbar(actor, { page = null, quiet = false } = {}) {
 
 async function turnSummary(combat) {
   let on = true;
-  try { on = setting("turnSummary"); } catch (err) { /* */ }
+  try { on = setting("turnSummary"); } catch { /* */ }
   const actor = combat?.combatant?.actor;
   if (!on || !actor || actor.type !== "character") return;
   const owner = game.users?.find?.((u) => !u.isGM && u.active && actor.testUserPermission?.(u, "OWNER")) ?? null;
@@ -4873,7 +4873,7 @@ Hooks.once("ready", () => {
   Hooks.on("createItem", (item, options, userId) => {
     if (userId !== game.user.id || !item.parent || item.parent.type !== "character") return;
     let auto = false;
-    try { auto = setting("autoHotbar"); } catch (err) { /* */ }
+    try { auto = setting("autoHotbar"); } catch { /* */ }
     if (!auto || !item.flags?.jjk5e) return;
     clearTimeout(HOTBAR_TIMERS.get(item.parent.id));
     HOTBAR_TIMERS.set(item.parent.id, setTimeout(() => fillHotbar(item.parent, { quiet: true }), 800));
@@ -5077,7 +5077,7 @@ async function activateDomainProtection(actor, item, activity) {
   }
   if(name==="Falling Blossom Emotion"&&cost===4){
     return setKindEffect(actor,"fallingBlossomOffense",{name:"Falling Blossom Emotion (Offense)",img:`${ICONS}/domain.svg`,
-      duration:{rounds:10,seconds:60},description:"<p>V6: one reaction melee counterattack before an incoming attack; advantage, critical on hit and necrotic damage. GM adjudicates the counterattack.</p>"});
+      duration:{rounds:10,seconds:60},description:`<p>${t("Domain.Ward.FallingBlossomOffense")}</p>`});
   }
   const simple=name==="Simple Domain"&&item.flags?.jjk5e?.simpleDomainBarrier===true&&cost===4;
   if (!simple&&(name !== "Hollow Wicker Basket" || cost !== 4)) return;
@@ -5092,7 +5092,7 @@ async function activateDomainProtection(actor, item, activity) {
     if(!(hp>0))return false;
     return setKindEffect(actor,"simpleDomainBarrier",{name:"Simple Domain (10 ft)",img:`${ICONS}/domain.svg`,
       disabled:false,duration:{rounds:10,seconds:60},
-      description:"<p>V6: independent barrier HP, ends on movement; overflow carries to protected creature. Ordinary Midi damage still requires GM adjudication.</p>",
+      description:`<p>${t("Domain.Ward.SimpleDomain",{hp})}</p>`,
       flags:{jjk5e:{hp,max:hp,events:[],originTokenUuid:origin.uuid,x:center.x,y:center.y,levelId:tokenLevelId(origin),elevation:Number(origin.elevation??0)}}});
   }
   const chosen = [origin, ...[...(game.user?.targets ?? [])].map((tk) => tk.document ?? tk)]
@@ -5131,7 +5131,7 @@ function sureHitBlocked(actor) {
   if (!state) return false;
   if (state.clash && !state.clash.resolved) return true;
   let root = actor;
-  if (state.reactionRootUuid) { try { root = fromUuidSync(state.reactionRootUuid); } catch (err) { root = null; } }
+  if (state.reactionRootUuid) { try { root = fromUuidSync(state.reactionRootUuid); } catch { root = null; } }
   const window = root?.getFlag?.(MODULE_ID, "domainReactionWindow");
   if (window?.status === "open" && (state.reactionRootUuid ? window.openingId === state.reactionRootOpening : window.openingId === state.openingId)) return true;
   return state.lethal === false || !!state.noSureHit;
@@ -5358,6 +5358,11 @@ async function attackBarrier(actor, seeker, data) {
   const token = await fromUuid(data.tokenUuid).catch(() => null);
   if (token?.actor?.uuid !== seeker.uuid) return false;
   const geo = barrierAttackGeometry(state, token);
+  // Weak Points: from inside, the barrier can only be damaged once this attacker has found its weak spot.
+  if (geo?.side === "inside" && !(state.weakSpot ?? []).includes(seeker.uuid)) {
+    await chat(seeker, `<p><i class="fas fa-crosshairs"></i> ${t("Domain.NeedWeakSpot", { name: esc(seeker.name) })}</p>`);
+    return false;
+  }
   const bonus = Number(data.bonus), range = Number(data.range);
   const formula = String(data.formula ?? "").trim();
   if (!geo || !Number.isFinite(range) || range < 0 || range > 2000 || geo.distance > range ||
@@ -5394,7 +5399,7 @@ async function createBarrierMarker(actor){
     if(existing) return existing;
     const ActorClass=docClass("Actor");
     if(typeof ActorClass?.create!=="function"||typeof scene.createEmbeddedDocuments!=="function") return false;
-    const proxy=await ActorClass.create({name:`Barrier: ${actor.name}`,type:"npc",img:`${ICONS}/domain.svg`,
+    const proxy=await ActorClass.create({name:t("Domain.MarkerName",{name:actor.name}),type:"npc",img:`${ICONS}/domain.svg`,
       system:{attributes:{hp:{value:state.hp,max:state.max},ac:{calc:"flat",flat:state.ac}}},
       flags:{jjk5e:{barrierMarker:meta}},ownership:{default:0}});
     if(!proxy) return false;
@@ -5503,10 +5508,10 @@ async function detectClash(actor) {
     }
     const lines = actors.map((a) => {
       const state = getDomain(a), result = results.find((r) => r.id === a.uuid);
-      const outcome = result.role === "loser" ? `${result.rounds} round(s) remaining` : result.role;
+      const outcome = result.role === "loser" ? t("Domain.MultiRounds", { n: result.rounds }) : t(`Domain.Role.${result.role}`);
       return `<li>${esc(a.name)} (${state.refinement}): ${esc(outcome)}</li>`;
     }).join("");
-    await docClass("ChatMessage").create({ content: `<div class="jjk5e-card"><h3>Multiple Domain Clash</h3><ul>${lines}</ul><p class="hint">Sure-hit effects are disabled until the clash resolves. Every losing barrier shrinks each round.</p></div>` });
+    await docClass("ChatMessage").create({ content: `<div class="jjk5e-card"><h3><i class="fas fa-yin-yang"></i> ${t("Domain.MultiClash")}</h3><ul>${lines}</ul><p class="hint">${t("Domain.MultiClashHint")}</p></div>` });
     for (const a of actors) {
       const result = results.find((r) => r.id === a.uuid);
       if (result.role === "loser" && result.rounds === 0) await closeDomainOf(a, t("Domain.ClashLost", { name: esc(a.name) }));
@@ -5762,7 +5767,7 @@ async function editDomainProfile(actor, mode = "form") {
   const result = await foundry.applications.api.DialogV2.prompt({ classes: ["jjk5e-ui", "jjk5e-dialog"], window: { title: t("Domain.ProfileEdit") }, rejectClose: false, content,
     ok: { callback: (e,b) => {
       const f = b.form.elements;
-      if (mode === "import") { try { return JSON.parse(f.json.value); } catch (err) { return {}; } }
+      if (mode === "import") { try { return JSON.parse(f.json.value); } catch { return {}; } }
       return { name: f.name.value, damage: f.damage.value, damageType: f.damageType.value, save: f.save.value,
         dc: f.dc.valueAsNumber, onSave: f.onSave.value, condition: f.condition.value, rounds: f.rounds.valueAsNumber };
     } } });
@@ -6096,7 +6101,7 @@ async function createCurse(opts = {}) {
   }
   const data = addPhysicalImmunity(curseData({ grade, kind, name: opts.name }));
   let folder = game.folders?.find?.((f) => f.type === "Actor" && f.name === t("Curse.Folder"));
-  try { folder ??= await docClass("Folder").create({ name: t("Curse.Folder"), type: "Actor", color: "#8b1e2d" }); } catch (err) { /* */ }
+  try { folder ??= await docClass("Folder").create({ name: t("Curse.Folder"), type: "Actor", color: "#8b1e2d" }); } catch { /* */ }
   const actor = await docClass("Actor").create({ ...data, folder: folder?.id ?? null });
   if (place && actor && canvas?.scene) {
     const view = canvas.stage?.pivot ?? { x: 1000, y: 1000 };
@@ -6122,7 +6127,7 @@ Hooks.once("diceSoNiceReady", (dice3d) => {
 
 Hooks.on("diceSoNiceRollStart", (messageId, context) => {
   let on = true;
-  try { on = setting("diceColors"); } catch (err) { /* */ }
+  try { on = setting("diceColors"); } catch { /* */ }
   if (!on || !context?.roll) return;
   const msg = game.messages?.get?.(messageId);
   const roll = context.roll;
@@ -6131,7 +6136,7 @@ Hooks.on("diceSoNiceRollStart", (messageId, context) => {
   else {
     const uuid = msg?.system?.item?.uuid ?? msg?.flags?.dnd5e?.item?.uuid ?? msg?.flags?.dnd5e?.use?.itemUuid;
     let item = null;
-    try { item = uuid ? fromUuidSync(uuid) : null; } catch (err) { /* */ }
+    try { item = uuid ? fromUuidSync(uuid) : null; } catch { /* */ }
     if (item?.flags?.jjk5e?.technique) colorset = domainOpen(item.actor) ? "jjk-domain" : "jjk-ce";
   }
   if (!colorset) return;
@@ -6712,7 +6717,7 @@ const midiBlackFlashCards = new Set();
 /** Save DC of the creature that applied an effect (for OverTime repeat saves baked into the compendium data). */
 function originSaveDC(effect) {
   let origin = null;
-  try { origin = effect?.origin ? fromUuidSync(effect.origin) : null; } catch (err) { origin = null; }
+  try { origin = effect?.origin ? fromUuidSync(effect.origin) : null; } catch { origin = null; }
   const item=origin?.documentName==="Item"?origin:origin?.item;
   const actor = item?.actor ?? origin?.actor ?? (origin?.documentName === "Actor" ? origin : null);
   const dc = Number(actor?.system?.attributes?.spell?.dc) || Number(actor?.system?.attributes?.spelldc);
@@ -6725,14 +6730,14 @@ function originSaveDC(effect) {
 /** CE modifier of the effect's origin actor (JJKORIGINCEMOD placeholder, e.g. Cursed Buds drain). */
 function originCEMod(effect) {
   let item = null;
-  try { item = effect?.origin ? fromUuidSync(effect.origin) : null; } catch (err) { item = null; }
+  try { item = effect?.origin ? fromUuidSync(effect.origin) : null; } catch { item = null; }
   const actor = item?.actor ?? (item?.documentName === "Actor" ? item : null);
   return Math.max(1, Number(actor?.system?.abilities?.[actor ? ceAbility(actor) : "wis"]?.mod) || 1);
 }
 
 function originLevel(effect) {
   let item = null;
-  try { item = effect?.origin ? fromUuidSync(effect.origin) : null; } catch (err) { item = null; }
+  try { item = effect?.origin ? fromUuidSync(effect.origin) : null; } catch { item = null; }
   const actor = item?.actor ?? (item?.documentName === "Actor" ? item : null);
   return Math.max(1, Number(actor?.system?.details?.level) || Number(actor?.system?.details?.cr) || 1);
 }
@@ -6741,7 +6746,7 @@ function originLevel(effect) {
 const LAST_SCALING = new Map();
 function originItem(effect) {
   let doc = null;
-  try { doc = effect?.origin ? fromUuidSync(effect.origin) : null; } catch (err) { doc = null; }
+  try { doc = effect?.origin ? fromUuidSync(effect.origin) : null; } catch { doc = null; }
   return doc?.documentName === "Item" ? doc : (doc?.item ?? null);
 }
 function originScaling(effect) {
@@ -6963,7 +6968,7 @@ const OPT_RULES = [
 function opt(key) {
   const def = OPT_RULES.find((r) => r[0] === key);
   let store = {};
-  try { store = game.settings.get(MODULE_ID, "optionalRules") ?? {}; } catch (err) { /* not registered yet */ }
+  try { store = game.settings.get(MODULE_ID, "optionalRules") ?? {}; } catch { /* not registered yet */ }
   return store?.[key] ?? def?.[1];
 }
 const optOn = (key) => { const v = opt(key); return v === true || (typeof v === "string" && !["off", "1", ""].includes(v)); };
@@ -7152,7 +7157,7 @@ function midiFlanking() {
     const cs = globalThis.MidiQOL?.configSettings?.() ?? game.settings.get("midi-qol", "ConfigSettings");
     const v = cs?.optionalRules?.checkFlanking ?? cs?.checkFlanking;
     return !!v && v !== "off";
-  } catch (err) { return false; }
+  } catch { return false; }
 }
 
 /** dnd5e.preCalculateDamage: every damage application (Midi or the chat card) passes here. */
@@ -7275,7 +7280,7 @@ function isFlanking(actor) {
 function midiAdvantageSources(config) {
   const M = globalThis.MidiQOL;
   let wf = null;
-  try { wf = config?.workflow ?? M?.Workflow?.getWorkflow?.(config?.subject?.uuid); } catch (err) { wf = null; }
+  try { wf = config?.workflow ?? M?.Workflow?.getWorkflow?.(config?.subject?.uuid); } catch { wf = null; }
   const attr = wf?.attackAdvAttribution ?? wf?.advantageAttribution;
   if (!attr) return null;
   return [...(attr instanceof Map ? attr.keys() : attr)].filter((s) => /^ADV/i.test(String(s))).length;
@@ -7984,7 +7989,6 @@ Hooks.once("ready", () => {
   Hooks.on("dnd5e.advancementManagerComplete", (manager) => { afterAdvancement(manager).catch((err) => reportError("advancement", err)); });
   Hooks.on("dnd5e.postUseActivity", (activity,usageConfig) => {
     if(!cePostOnce(activity,usageConfig,"optionalAction")) return false;
-    const actor = activity?.actor ?? activity?.item?.actor;
 
     onOptionalAction(activity).catch((err) => reportError("optional action", err));
     // Items that roll the Limb Damage table for their targets (e.g. Judicial Amputation).
@@ -8071,7 +8075,7 @@ Hooks.once("ready", () => {
   Hooks.on("dnd5e.preSummon", (activity, profile) => {
     const actor = activity?.actor ?? activity?.item?.actor;
     let name = profile?.name;
-    try { name ||= globalThis.fromUuidSync?.(profile?.uuid)?.name; } catch (err) { /* compendium not indexed */ }
+    try { name ||= globalThis.fromUuidSync?.(profile?.uuid)?.name; } catch { /* compendium not indexed */ }
     if (!actor || !name || !fallen(actor).includes(String(name).trim().toLowerCase())) return;
     ui.notifications.warn(t(optOn("totalityAlt") ? "Opt.Totality.UntilRest" : "Opt.Totality.Dead"));
     return false;
@@ -8233,7 +8237,7 @@ const MIDI_AUTO = {
 const MIDI_FF = ["attack", "damage"];
 
 function midiConfig() {
-  try { return foundry.utils.deepClone(game.settings.get("midi-qol", "ConfigSettings") ?? null); } catch (err) { return null; }
+  try { return foundry.utils.deepClone(game.settings.get("midi-qol", "ConfigSettings") ?? null); } catch { return null; }
 }
 
 function midiAutoPlan(cs) {
@@ -8610,9 +8614,12 @@ async function fallDamage(actor, feet = null) {
 
 Hooks.once("ready", () => {
   // Persisted windows are reconciled on turn change, login and periodic GM-only expiry.
-  const settleWindows = () => {
+  // The periodic pass only reads scenes someone is on (active or viewed); login and turn changes scan them all.
+  const settleWindows = (all = true) => {
     if (!isActiveGM()) return;
-    const actors = [...(game.actors?.contents ?? []), ...[...(game.scenes ?? [])].flatMap((scene) => [...(scene.tokens ?? [])].map((tk) => tk.actor))];
+    const viewed = new Set(game.users?.map?.((u) => u.viewedScene).filter(Boolean) ?? []);
+    const scenes = [...(game.scenes ?? [])].filter((scene) => all || scene.active || viewed.has(scene.id));
+    const actors = [...(game.actors?.contents ?? []), ...scenes.flatMap((scene) => [...(scene.tokens ?? [])].filter((tk) => !tk.actorLink).map((tk) => tk.actor))];
     const pending = [...new Map(actors.filter((a) => a?.uuid && a.getFlag(MODULE_ID, "domainReactionWindow")?.status === "open").map((a) => [a.uuid, a])).values()];
     if (pending.length) return queueDomainWork(async () => {
       for (const actor of pending) {
@@ -8622,7 +8629,7 @@ Hooks.once("ready", () => {
   };
   Hooks.on("updateCombat", (combat, changes) => { if ("round" in changes || "turn" in changes) return settleWindows(); });
   Hooks.on("userConnected", () => settleWindows());
-  setInterval(() => { settleWindows()?.catch?.((err) => reportError("domain recovery",err)); }, 5000);
+  setInterval(() => { settleWindows(false)?.catch?.((err) => reportError("domain recovery",err)); }, 5000);
   settleWindows();
   game.socket?.on?.(`module.${MODULE_ID}`, (msg) => {
     if (msg?.type !== "jjkClashOffer" || !msg.users?.includes(game.user.id)) return;

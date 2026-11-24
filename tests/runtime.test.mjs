@@ -636,6 +636,15 @@ test("Domain barrier attack: GM resolves AC, damage, measured side, and rejects 
   const miss = await J.attackBarrier(actor, seeker, { ...payload, requestId: "miss" });
   assert.equal(miss.hit, false);
   assert.equal(J.getDomain(actor).hp, 92);
+  // Weak Points: from inside, no damage until the attacker has found the weak spot.
+  const inside = { uuid: "Scene.S.Token.I", actor: seeker, parent: scene, x: -50, y: -50, width: 1, height: 1 };
+  scene.tokens.push(inside);
+  const inPayload = { ...payload, range: 20, tokenUuid: inside.uuid, requestId: "inside-1" };
+  assert.equal(await J.attackBarrier(actor, seeker, inPayload), false);
+  await J.setDomain(actor, { ...J.getDomain(actor), weakSpot: [seeker.uuid] });
+  env.dice.push(20, 4);
+  const found = await J.attackBarrier(actor, seeker, { ...inPayload, requestId: "inside-2" });
+  assert.equal(found.hit, true);
 });
 
 test("Domain reaction: pending offer is persistent, owner claim is exclusive, and expired window settles", async () => {

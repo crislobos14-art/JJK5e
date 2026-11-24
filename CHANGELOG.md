@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.82.1 — Auditoría de los motores de dominio y EM
+Auditoría del motor de dominios y del motor de transacciones de EM. Puntos débiles: desde dentro del dominio la barrera solo se puede dañar si el atacante encontró su punto débil (Percepción CD 30), como dice el manual; antes el punto débil se guardaba pero no se usaba. Traducidos los textos que seguían en inglés: tarjeta de choque múltiple de dominios, descripciones de Falling Blossom Emotion (ofensiva) y Simple Domain, y nombre del marcador de barrera. La revisión periódica de ventanas de reacción solo recorre las escenas activas o vistas por algún jugador (menos carga en mundos grandes). Limpieza de 27 avisos del lint. Sin errores encontrados en el motor de EM.
+
 ## 1.82.0 — Escuela de jujutsu
 Nuevo apartado Escuela de jujutsu. Cada personaje puede ser alumno (1.º, 2.º o 3.º año) o profesor de Tokio o Kioto, y el alumno elige a su profesor. La ficha de personaje muestra una etiqueta con el año o el rol (clic para editar). En la pestaña Herramientas del panel aparece el apartado con el profesor del alumno o la lista de alumnos del profesor (clic para abrir su ficha). El GM puede pasar de año al alumno; tras 3.º se gradúa, y con la regla opcional Progresión anual se ofrece también la mejora. Un profesor no puede recomendar a sus propios alumnos para ascender de grado.
 
