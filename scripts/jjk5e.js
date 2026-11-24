@@ -6567,14 +6567,17 @@ function optionalPanel(actor, tab) {
   const gm = !!game.user.isGM;
   const b = [];
   if (tab === "combat") {
+    const rival = rivalDomainFor(actor);
+    const clashBtn = rival ? `<fieldset class="jjk-clash-react"><legend>${t("Clash.OfferTitle")}</legend><p class="jjk-note">${t("Clash.Offer", { name: esc(actor.name), opener: esc(rival.name) })}</p>
+      <div class="jjk-grid">${pbtn("domainClash", "fas fa-circle-half-stroke", t("Clash.Expand"), { cls: "jjk-primary" })}</div></fieldset>` : "";
     if (optOn("weaponClash")) b.push(pbtn("weaponClash", "fas fa-shield-halved", `${t("Opt.weaponClash.Name")} (${(Number(actor.system.attributes?.prof) || 2) - (Number(actor.getFlag(MODULE_ID, "clashUsed")) || 0)})`));
     if (optOn("takeTheHit")) b.push(pbtn("takeHit", "fas fa-person-falling-burst", t("Opt.takeTheHit.Name")));
     if (optOn("callingShots")) b.push(pbtn("callShot", "fas fa-crosshairs", t("Opt.callingShots.Name"), { cls: actor.getFlag(MODULE_ID, "callingShot") ? "on" : "" }));
     if (optOn("fightForLife") && (Number(actor.system.attributes?.hp?.value) || 0) <= 0) b.push(pbtn("fightForLife", "fas fa-heart-crack", t("Opt.fightForLife.Name")));
     if (optOn("executionEvasion")) b.push(pbtn("executionEvasion", "fas fa-scissors", t("Opt.executionEvasion.Name")));
     if (optOn("soulChecks")) b.push(pbtn("soulCheck", "fas fa-ghost", t("Opt.soulChecks.Name")));
-    if (!b.length) return "";
-    return `<fieldset><legend>${t("Opt.Panel")}</legend><div class="jjk-grid">${b.join("")}</div></fieldset>`;
+    if (!b.length) return clashBtn;
+    return `${clashBtn}<fieldset><legend>${t("Opt.Panel")}</legend><div class="jjk-grid">${b.join("")}</div></fieldset>`;
   }
   if (tab === "body") {
     if (!optOn("objectSoul")) return "";
@@ -6995,3 +6998,143 @@ Hooks.once("init", () => {
 Object.assign(PANEL_ACTIONS, { midiAuto: () => midiAutomate(), midiRestore: () => midiRestore() });
 GM_PANEL_ACTIONS.add("midiAuto"); GM_PANEL_ACTIONS.add("midiRestore");
 MENU_ACTIONS.splice(MENU_ACTIONS.length - 1, 0, ["midiAuto", "fa-solid fa-wand-magic-sparkles", "Midi.Title", () => midiAutomate(), true]);
+
+/* ---- v1.73: Domain Clash as a reaction ---------------------------------------------------- */
+/* Rule (Domain Clashes): when a creature expands its domain, you can use your reaction to expand yours as well.
+ * Non-lethal domains: a lethal domain cannot be opened as a reaction to a non-lethal one; a non-lethal domain can
+ * answer a lethal one. The active GM offers the reaction to the owners of every eligible creature on the scene. */
+
+/** The Domain Expansion item and activity of an actor (full domains first, then Incomplete Domain). */
+function domainActivityOf(actor) {
+  const items = [...(actor?.items ?? [])].filter((i) => i.flags?.jjk5e?.domainActivity);
+  items.sort((a, b) => Number(!!a.flags.jjk5e.incompleteDomain) - Number(!!b.flags.jjk5e.incompleteDomain));
+  for (const item of items) {
+    const id = item.flags.jjk5e.domainActivity;
+    const activity = item.system?.activities?.get?.(id) ?? item.system?.activities?.[id];
+    if (activity) return { item, activity };
+  }
+  return null;
+}
+
+/** Why this actor cannot answer `opener`'s domain right now (null = it can). */
+function clashBlocker(actor, opener) {
+  if (!actor || actor === opener || domainOpen(actor)) return "open";
+  const dom = domainActivityOf(actor);
+  if (!dom) return "noDomain";
+  if (inBurnout(actor)) return "burnout";
+  const theirs = getDomain(opener);
+  const mineLethal = actor.getFlag(MODULE_ID, "domainLethal") !== false;
+  if (theirs && theirs.lethal === false && mineLethal) return "nonLethal";
+  if (globalThis.MidiQOL?.hasUsedReaction?.(actor)) return "reaction";
+  const cost = totalActivityCECost(actor, dom.activity);
+  const pool = findPool(actor);
+  if (cost && (!pool || poolValue(pool) < cost)) return "ce";
+  return null;
+}
+
+/** Creatures on the opener's scene that may answer with their own domain. */
+function clashCandidates(opener) {
+  const state = getDomain(opener);
+  const scene = game.scenes?.get(state?.sceneId) ?? globalThis.canvas?.scene;
+  const seen = new Set();
+  const out = [];
+  for (const tk of scene?.tokens ?? []) {
+    const a = tk.actor;
+    if (!a || seen.has(a.uuid)) continue;
+    seen.add(a.uuid);
+    if (!clashBlocker(a, opener)) out.push(a);
+  }
+  return out;
+}
+
+/** Users who decide for this actor: its active player owners, else the GM. */
+function deciders(actor) {
+  const players = game.users.filter((u) => u.active && !u.isGM && actor.testUserPermission?.(u, "OWNER"));
+  return players.length ? players.map((u) => u.id) : game.users.filter((u) => u.isGM && u.active).map((u) => u.id);
+}
+
+async function offerDomainClash(opener) {
+  if (!isActiveGM()) return;
+  for (const actor of clashCandidates(opener)) {
+    const users = deciders(actor);
+    const payload = { type: "jjkClashOffer", users, actorUuid: actor.uuid, openerUuid: opener.uuid, opener: opener.name };
+    if (users.includes(game.user.id)) promptDomainClash(payload);
+    if (users.some((id) => id !== game.user.id)) game.socket.emit(`module.${MODULE_ID}`, payload);
+    await docClass("ChatMessage").create({ whisper: [...new Set([...users, ...game.users.filter((u) => u.isGM).map((u) => u.id)])],
+      speaker: { alias: "JJK 5e" },
+      content: `<div class="jjk5e-card"><h3><i class="fas fa-yin-yang"></i> ${t("Clash.OfferTitle")}</h3>
+        <p>${t("Clash.Offer", { name: esc(actor.name), opener: esc(opener.name) })}</p>
+        <button type="button" data-jjk5e-clash="${esc(actor.uuid)}"><i class="fas fa-circle-half-stroke"></i> ${t("Clash.Expand")}</button></div>` });
+  }
+}
+
+const CLASH_PROMPTS = new Set();
+async function promptDomainClash({ actorUuid, opener }) {
+  if (CLASH_PROMPTS.has(actorUuid)) return;
+  const actor = await fromUuid(actorUuid).catch(() => null);
+  if (!actor?.isOwner) return;
+  CLASH_PROMPTS.add(actorUuid);
+  try {
+    const go = await foundry.applications.api.DialogV2.confirm({ window: { title: t("Clash.OfferTitle"), icon: "fas fa-yin-yang" },
+      classes: ["jjk5e-ui", "jjk5e-dialog"], rejectClose: false,
+      content: `<p>${t("Clash.Offer", { name: esc(actor.name), opener: esc(opener ?? "?") })}</p><p class="hint">${t("Clash.Hint")}</p>`,
+      yes: { label: t("Clash.Expand"), icon: "fas fa-circle-half-stroke" }, no: { label: t("Clash.Decline") } });
+    if (go) await reactDomainClash(actor);
+  } finally { CLASH_PROMPTS.delete(actorUuid); }
+}
+
+/** Use the actor's Domain Expansion activity now (its CE, burnout and clash rules apply as usual). */
+async function reactDomainClash(actor) {
+  actor = requireActor(actor);
+  if (!actor?.isOwner) return;
+  const dom = domainActivityOf(actor);
+  if (!dom) return ui.notifications.warn(t("Clash.NoDomain"));
+  if (domainOpen(actor)) return ui.notifications.warn(t("Notify.DomainActive"));
+  try {
+    const res = await dom.activity.use({ event: null }, { configure: false }, {});
+    if (res !== null && res !== undefined) globalThis.MidiQOL?.setReactionUsed?.(actor);
+  } catch (err) { reportError("domain clash", err); }
+}
+
+/** An open domain of someone else on this actor's scene (for the panel's reaction button). */
+function rivalDomainFor(actor) {
+  const sceneId = actor?.token?.parent?.id ?? globalThis.canvas?.scene?.id;
+  for (const a of game.actors ?? []) {
+    if (a === actor) continue;
+    const st = getDomain(a);
+    if (st?.open && st.sceneId === sceneId && !clashBlocker(actor, a)) return a;
+  }
+  for (const tk of globalThis.canvas?.tokens?.placeables ?? []) {
+    const a = tk.actor;
+    if (!a || a === actor || a.prototypeToken?.actorLink) continue;
+    const st = getDomain(a);
+    if (st?.open && !clashBlocker(actor, a)) return a;
+  }
+  return null;
+}
+
+Object.assign(PANEL_ACTIONS, { domainClash: (actor) => reactDomainClash(actor) });
+
+Hooks.once("ready", () => {
+  // The active GM offers the reaction whenever a domain opens (whoever opened it).
+  Hooks.on("updateActor", (actor, changes) => {
+    if (!isActiveGM()) return;
+    const st = foundry.utils.getProperty(changes, `flags.${MODULE_ID}.domainState`);
+    if (st?.open !== true || st.clash) return;
+    offerDomainClash(actor).catch((err) => reportError("clash offer", err));
+  });
+  game.socket?.on?.(`module.${MODULE_ID}`, (msg) => {
+    if (msg?.type !== "jjkClashOffer" || !msg.users?.includes(game.user.id)) return;
+    promptDomainClash(msg).catch((err) => reportError("clash prompt", err));
+  });
+  Hooks.on("renderChatMessageHTML", (message, html) => {
+    for (const b of html?.querySelectorAll?.("[data-jjk5e-clash]") ?? []) b.addEventListener("click", async (ev) => {
+      ev.preventDefault();
+      const doc = await fromUuid(b.dataset.jjk5eClash).catch(() => null);
+      const actor = doc?.actor ?? doc;
+      if (!actor?.isOwner) return ui.notifications.warn(t("Notify.NotOwner"));
+      b.disabled = true;
+      await reactDomainClash(actor);
+    });
+  });
+});

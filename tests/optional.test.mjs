@@ -275,3 +275,23 @@ test("Midi automation preset: only existing keys of the same type are changed", 
   assert.ok(!("gmAutoAttack" in plan), "different type in this Midi version: untouched");
   assert.ok(!("playerRollSaves" in plan), "missing key: not added");
 });
+
+test("Domain Clash reaction: who can answer an open domain", async () => {
+  const { env, actor, J } = await setup();
+  const dom = { name: "Domain Expansion: X", type: "spell", flags: { jjk5e: { domainActivity: "d1", ceCosts: { d1: 20 } } },
+    system: { activities: { d1: { _id: "d1", id: "d1", type: "utility" } } } };
+  const other = env.addActor({ name: "Sukuna", type: "npc", system: { abilities: {}, attributes: {} }, items: [POOL, dom] });
+  const domItem = other.items.find((i) => i.name === dom.name);
+  domItem.system.activities.d1.item = domItem; // dnd5e activities know their item
+  await actor.setFlag("jjk5e", "domainState", { open: true, lethal: true, sceneId: "s" });
+  assert.equal(J.clashBlocker(actor, actor), "open");
+  assert.equal(J.clashBlocker(env.addActor({ name: "Nobody", items: [] }), actor), "noDomain");
+  const pool = J.findPool(other);
+  await pool.update({ "system.uses.spent": 5 });
+  assert.equal(J.clashBlocker(other, actor), "ce", "needs 20 CE");
+  await pool.update({ "system.uses.spent": 0 });
+  await domItem.update({ "flags.jjk5e.ceCosts.d1": 10 });
+  assert.equal(J.clashBlocker(other, actor), null, "can react");
+  await actor.setFlag("jjk5e", "domainState", { open: true, lethal: false, sceneId: "s" });
+  assert.equal(J.clashBlocker(other, actor), "nonLethal", "a lethal domain cannot answer a non-lethal one");
+});

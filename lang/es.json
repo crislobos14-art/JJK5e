@@ -1115,6 +1115,14 @@
       "Done": "Midi-QOL: {n} opciones cambiadas para la automatización completa.",
       "NoBackup": "No hay nada que deshacer.",
       "Restored": "Opciones de Midi-QOL restauradas."
+    },
+    "Clash": {
+      "OfferTitle": "Choque de dominios (reacción)",
+      "Offer": "{opener} expandió su dominio. {name} puede usar su reacción para expandir el suyo e iniciar un choque de dominios.",
+      "Hint": "Se aplican como siempre el costo de EM del dominio, el burnout y el choque por refinamiento.",
+      "Expand": "Expandir dominio (reacción)",
+      "Decline": "Ahora no",
+      "NoDomain": "Este personaje no tiene Expansión de Dominio."
     }
   }
 }

@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.73.0 — Choque de dominios como reacción
+- Cuando alguien expande su dominio, cada criatura de la escena que tenga Expansión de Dominio y pueda responder recibe la oferta de **expandir el suyo como reacción** e iniciar un choque de dominios, según la regla *Domain Clashes* del manual.
+  - Se avisa a los jugadores dueños del personaje. Para los PNJ se avisa al GM.
+  - El aviso llega como ventana emergente y también como tarjeta privada en el chat con el botón *Expandir dominio (reacción)*.
+- El panel JJK (pestaña Combate) muestra el mismo botón mientras haya un dominio rival abierto en la escena.
+- No se ofrece la reacción si el personaje:
+  - ya tiene un dominio abierto;
+  - está en burnout;
+  - no tiene EM suficiente;
+  - ya gastó su reacción (si usas Midi-QOL);
+  - tiene un dominio letal y el rival es no letal (regla de dominios no letales).
+- Al reaccionar se usa la actividad de dominio del personaje: se aplican como siempre el costo de EM, el burnout y el choque por refinamiento. Con Midi-QOL se marca la reacción como usada.
+- 1 prueba nueva (72 en total).
+
 ## 1.72.1 — Reglas opcionales: desplazamiento
 - La ventana de reglas opcionales ahora tiene barra de desplazamiento: la lista de 30 reglas se puede recorrer con la rueda o la barra, y *Guardar* queda siempre visible abajo.
 

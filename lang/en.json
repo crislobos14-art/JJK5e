@@ -1115,6 +1115,14 @@
       "Done": "Midi-QOL: {n} settings changed for full automation.",
       "NoBackup": "There is nothing to undo.",
       "Restored": "Midi-QOL settings restored."
+    },
+    "Clash": {
+      "OfferTitle": "Domain Clash (reaction)",
+      "Offer": "{opener} expanded a domain. {name} can use the reaction to expand their own domain and start a Domain Clash.",
+      "Hint": "The domain's CE cost, burnout and the clash by refinement apply as usual.",
+      "Expand": "Expand domain (reaction)",
+      "Decline": "Not now",
+      "NoDomain": "This character has no Domain Expansion."
     }
   }
 }
