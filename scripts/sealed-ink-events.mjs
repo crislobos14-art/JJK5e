@@ -75,11 +75,54 @@ function label(key, data) {
     modules: L("Inactive dependencies: ","Dependencias inactivas: ") + (data.missing ?? "")
   })[key] ?? key;
 }
+const historyKey = () => [ID, "sealedInkNotices", game.world?.id, game.user?.id].join(":");
+
+function saveHistory() {
+  try {
+    if (!settings("sealedPersistNotices")) {
+      window.localStorage.removeItem(historyKey());
+      return;
+    }
+    const entries = history.filter(n => !n.actor || visible(n.actor)).map(n => ({
+      id: n.id, key: n.key, tone: n.tone, time: n.time, actorUuid: n.actor?.uuid,
+      data: n.data, unread: unread.has(n.id)
+    }));
+    window.localStorage.setItem(historyKey(), JSON.stringify(entries));
+  } catch {
+    // Storage may be disabled by the browser. The session history still works.
+  }
+}
+
+function loadHistory() {
+  if (!settings("sealedEventCenter") || !settings("sealedPersistNotices")) return;
+  try {
+    const entries = JSON.parse(window.localStorage.getItem(historyKey()) ?? "[]");
+    if (!Array.isArray(entries)) return;
+    for (const n of entries.slice(0, 80)) {
+      if (!Number.isSafeInteger(n?.id) || n.id < 1 || !Number.isFinite(n.time) || typeof n.key !== "string") continue;
+      let actor;
+      if (n.actorUuid) {
+        const doc = globalThis.fromUuidSync(n.actorUuid);
+        actor = doc?.documentName === "Token" ? doc.actor : doc;
+        if (!visible(actor)) continue;
+      }
+      if (n.key === "modules" && !game.user.isGM) continue;
+      serial = Math.max(serial, n.id);
+      history.push({ ...n, actor, text: label(n.key, n.data ?? {}) });
+      if (n.unread) unread.add(n.id);
+    }
+  } catch {
+    // Invalid or unavailable storage must never prevent the HUD from loading.
+  }
+}
+
 function record(key, tone, actor, data = {}) {
   if (!settings("sealedEventCenter") || (actor && !visible(actor))) return;
-  const n = { id: ++serial, key, tone, actor, text: label(key,data), time: Date.now() };
+  const details = { ce: data.ce, ceMax: data.ceMax, zone: data.zone, output: data.output, missing: data.missing };
+  const n = { id: ++serial, key, tone, actor, data: details, text: label(key,details), time: Date.now() };
   history.unshift(n); unread.add(n.id);
   while (history.length > 80) unread.delete(history.pop().id);
+  saveHistory();
   updateDock();
   if (panel && activeTab === "events") drawPanel();
   if (settings("sealedEventToasts")) toast(n);
@@ -228,8 +271,8 @@ function drawPanel(automatic = false) {
     if (!combatants().length) body.append(el("p","",L("No combatants","Sin combatientes")));
     return;
   }
-  const mark = button(L("Mark all read","Marcar todo leído"),() => {unread.clear();updateDock();drawPanel();});
-  const clear = button(L("Clear local history","Limpiar historial local"),() => {history.length=0;unread.clear();updateDock();drawPanel();});
+  const mark = button(L("Mark all read","Marcar todo leído"),() => {unread.clear();saveHistory();updateDock();drawPanel();});
+  const clear = button(L("Clear local history","Limpiar historial local"),() => {history.length=0;unread.clear();saveHistory();updateDock();drawPanel();});
   body.append(mark,clear);
   for (const n of history.filter(n => !n.actor || visible(n.actor))) {
     const row = el("article","jjk-sealed-hud-card");
@@ -247,6 +290,7 @@ function open(tab = "events") {
 }
 function refresh() {
   if (!settings("sealedEventCenter")) { history.length=0; unread.clear(); }
+  saveHistory();
   if (!settings("sealedEventCenter") || !settings("sealedEventToasts")) document.querySelector("#jjk-sealed-event-toasts")?.remove();
   updateDock();
   if (!settings("sealedEventCenter") && !settings("sealedCombatHUD")) closePanel();
@@ -257,12 +301,14 @@ Hooks.once("init",() => {
   for(const [key,en,es,defaultValue] of [
     ["sealedEventCenter","Sealed Ink notification center","Centro de notificaciones Sealed Ink",false],
     ["sealedEventToasts","Sealed Ink pop-up notices","Avisos emergentes Sealed Ink",true],
+    ["sealedPersistNotices","Keep Sealed Ink history on this browser","Conservar el historial de Sealed Ink en este navegador",false],
     ["sealedCombatHUD","Sealed Ink combat HUD","Combat HUD Sealed Ink",false]
   ]) game.settings.register(ID,key,{name:L(en,es),scope:"client",config:true,type:Boolean,default:defaultValue,onChange:refresh});
   game.settings.register(ID,"sealedLowCE",{name:L("Low CE threshold (%)","Umbral CE baja (%)"),scope:"client",config:true,type:Number,range:{min:5,max:50,step:5},default:25});
 });
 Hooks.once("ready",() => {
   if(game.system.id!=="dnd5e")return;
+  loadHistory();
   dock=button("",()=>panel?closePanel():open(settings("sealedEventCenter")?"events":"hud"));
   dock.className="jjk-sealed-event-dock";document.body.append(dock);updateDock();
   for(const a of [...game.actors,...combatants().map(c=>c.actor)]) if(visible(a)) snapshots.set(a.uuid,snapshot(a));
