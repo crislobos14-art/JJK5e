@@ -552,6 +552,29 @@ test("Domain clash: ticks are isolated by combat and do not repeat or run backwa
   await env.combatRound(2, combat);
   await env.combatRound(1, combat);
   assert.equal(J.getDomain(b).clash.rounds, 4);
+  await env.combatRound(3, { ...combat, id: "same-scene-other-combat" });
+  assert.equal(J.getDomain(b).clash.rounds, 4);
   await env.combatRound(3, combat);
   assert.equal(J.getDomain(b).clash.rounds, 3);
+});
+
+test("Domain reaction offers: unknown scene must not fall back to the GM canvas", async () => {
+  const { env, actor, J } = await setup();
+  const other = env.addActor({ name: "Other", items: [POOL] });
+  await other.createEmbeddedDocuments("Item", [{ name: "Domain Expansion", type: "feat",
+    flags: { jjk5e: { domainActivity: "d" } }, system: { activities: { d: { id: "d" } } } }]);
+  await env.settle();
+  const visible = { id: "Visible", tokens: [{ actor: other }] };
+  env.game.scenes.set(visible.id, visible);
+  env.context.canvas = { scene: visible };
+  await actor.setFlag("jjk5e", "domainState", { open: true, sceneId: "Missing", lethal: true });
+  assert.equal(J.clashCandidates(actor).length, 0);
+  await actor.setFlag("jjk5e", "domainState", { open: true, sceneId: visible.id, lethal: true });
+  assert.equal(J.clashCandidates(actor)[0], other);
+});
+
+test("Domain reaction decisions for NPCs go only to the active GM", async () => {
+  const { env, actor, J } = await setup();
+  env.game.users.set("gm2", { id: "gm2", isGM: true, active: true });
+  assert.deepEqual([...J.deciders(actor)], ["gm"]);
 });
