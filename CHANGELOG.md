@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.66.0 — Rediseño visual de la interfaz
+- Nuevo tema visual *cursed ink* para el panel JJK, el menú, los votos, la carrera, el HUD de dominio, el creador de técnicas y la ayuda de atajos: fondo oscuro, energía maldita en violeta, rojo para lo peligroso y dorado para el GM y la Zone.
+- Medidor de CE grande: valor, máximo y porcentaje; se pone rojo con 25 % o menos.
+- Pestañas como control segmentado; botones con estados de foco, pulsado y desactivado consistentes.
+- Estados con color según su tipo: Burnout y daño al alma en rojo; Zone y Black Flash en dorado; extremidades rotas en naranja y perdidas en rojo (también en la vista del jugador).
+- Pestaña GM reordenada: valores, breakthroughs con contador y efectos a terminar.
+- Textos de botones más cortos (Gastar / Recuperar).
+
 ## 1.65.0 — Vista de jugador y vista de GM
 - **Panel según el rol**: el jugador ve su personaje y lo que puede usar; los ajustes manuales (terminar Burnout, Zone o Black Flash, subir o bajar Reduced Output y Soul Awareness, marcar extremidades, aplicar o quitar daño al alma) quedan solo para el GM. Etiqueta *Jugador* o *GM* en la cabecera.
 - **Pestaña GM** (solo la ve el GM): fijar CE, refinamiento de dominio, breakthroughs, daño al alma, terminar efectos, cerrar dominio y actualizar la automatización de todos los actores. Atajo 5.

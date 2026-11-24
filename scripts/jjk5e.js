@@ -1827,7 +1827,7 @@ function panelHTML(actor, tab = "combat") {
   const zoneStacks = Number(zone?.flags?.jjk5e?.zone) || 0;
   const hr = isHeavenlyOnly(actor);
   // Players see their state; only the GM gets the "×" overrides (closing your own domain is allowed).
-  const statusRow = (on, label, action) => `<span class="jjk-chip ${on ? "on" : ""}">${label}${on && action
+  const statusRow = (on, label, action, tone = "") => `<span class="jjk-chip ${on ? `on ${tone}` : ""}">${label}${on && action
     && (gm || action === "closeDomain") ? ` <a data-action="${action}" data-tooltip="${t("Common.End")}"><i class="fas fa-times"></i></a>` : ""}</span>`;
   const limbRows = LIMBS.map((l) => {
     const st = limbs[l.key] ?? "ok";
@@ -1849,12 +1849,16 @@ function panelHTML(actor, tab = "combat") {
     data-action="tab" data-tab="${id}" data-tooltip="${t(label)} [${i + 1}]"><i class="${icon}"></i> ${t(label)}${id === "combat" && alerts
     ? ` <span class="jjk-badge">${alerts}</span>` : ""}</button>`).join("")}</nav>`;
 
-  const ceBlock = pool ? `<fieldset><legend>${t("CE.Name")}</legend>
-      <div class="jjk-bar ${pct <= 25 ? "low" : ""}"><div class="fill" style="width:${pct}%"></div><span>${value} / ${max}</span></div>
+  const ceBlock = pool ? `<fieldset class="jjk-ce-card"><legend>${t("CE.Name")}</legend>
+      <div class="jjk-meter ${pct <= 25 ? "low" : ""}">
+        <div class="jjk-meter-num"><strong>${value}</strong><span>/ ${max}</span><em>${pct}%</em></div>
+        <div class="jjk-bar" role="meter" aria-valuemin="0" aria-valuemax="${max}" aria-valuenow="${value}" aria-label="${t("CE.Name")}">
+          <div class="fill" style="width:${pct}%"></div></div>
+      </div>
       <div class="jjk-row jjk-ce-quick">
         ${pbtn("ceMinus5", "", "−5", { key: "_", tip: t("Panel.Spend") + " 5" })}${pbtn("ceMinus", "", "−1", { key: "-", tip: t("Panel.Spend") + " 1" })}
         <input type="number" name="ceAmount" min="1" value="1" class="jjk-count" aria-label="${t("CE.Amount")}">
-        ${pbtn("ceSpendN", "fa-solid fa-minus", t("Panel.Spend"), { cls: "jjk-primary" })}${pbtn("ceRegainN", "fa-solid fa-plus", t("Panel.Regain"))}
+        ${pbtn("ceSpendN", "fa-solid fa-minus", t("Panel.SpendShort"), { cls: "jjk-primary" })}${pbtn("ceRegainN", "fa-solid fa-plus", t("Panel.RegainShort"))}
         ${pbtn("cePlus", "", "+1", { key: "+", tip: t("Panel.Regain") + " 1" })}${pbtn("cePlus5", "", "+5", { key: "*", tip: t("Panel.Regain") + " 5" })}
       </div>
       <div class="jjk-row">
@@ -1866,10 +1870,10 @@ function panelHTML(actor, tab = "combat") {
     <fieldset><legend>${t("Panel.Status")}</legend>
       <div class="jjk-row">
         ${statusRow(domainOpen(actor), t("Domain.Open"), "closeDomain")}
-        ${statusRow(inBurnout(actor), t("Burnout.Name"), "clearBurnout")}
-        ${statusRow(!!zone, zone ? `${t("Zone.Name")} ×${zoneStacks}` : t("Zone.Name"), "clearZone")}
-        ${statusRow(!!actor.getFlag(MODULE_ID, "pendingBlackFlash"), "Black Flash ×3", "clearBF")}
-        ${sd ? statusRow(true, `<i class="fas fa-ghost"></i> ${t("Soul.Name")} −${sd}`, "clearSoul") : ""}
+        ${statusRow(inBurnout(actor), t("Burnout.Name"), "clearBurnout", "danger")}
+        ${statusRow(!!zone, zone ? `${t("Zone.Name")} ×${zoneStacks}` : t("Zone.Name"), "clearZone", "gold")}
+        ${statusRow(!!actor.getFlag(MODULE_ID, "pendingBlackFlash"), "Black Flash ×3", "clearBF", "gold")}
+        ${sd ? statusRow(true, `<i class="fas fa-ghost"></i> ${t("Soul.Name")} −${sd}`, "clearSoul", "danger") : ""}
         ${activeGroups(actor).map((g) => `<span class="jjk-chip on">${t(`Group.${g}`)} <a data-action="endGroup" data-group="${g}" data-tooltip="${t("Common.End")}"><i class="fas fa-times"></i></a></span>`).join("")}
       </div>
       <div class="jjk-row">
@@ -1922,10 +1926,11 @@ function panelHTML(actor, tab = "combat") {
     <fieldset><legend>${t("Panel.GMValues")}</legend><div class="jjk-grid">
       ${pool ? pbtn("gmCE", "fas fa-bolt", `${t("Panel.GMSetCE")} (${value}/${max})`) : ""}
       ${pbtn("gmRefinement", "fas fa-circle-half-stroke", `${t("Domain.Refinement")}: ${refinementOf(actor)}`)}
-      <span class="jjk-row">${t("Breakthrough.Name")}: ${pbtn("gmBreakthrough", "", "−", { data: 'data-d="-"' })}<strong class="jjk-num">${bt}</strong>${pbtn("gmBreakthrough", "", "+", { data: 'data-d="+"' })}</span>
       ${pbtn("soulDamage", "fas fa-ghost", t("Soul.Apply"))}
       ${sd ? pbtn("clearSoul", "fas fa-xmark", t("Soul.Clear")) : ""}
-    </div></fieldset>
+    </div>
+    <div class="jjk-row jjk-stepper"><span class="jjk-lbl-l">${t("Breakthrough.Name")}</span>
+      ${pbtn("gmBreakthrough", "", "−", { data: 'data-d="-"' })}<strong class="jjk-num">${bt}</strong>${pbtn("gmBreakthrough", "", "+", { data: 'data-d="+"' })}</div></fieldset>
     <fieldset><legend>${t("Panel.GMClear")}</legend><div class="jjk-grid">
       ${inBurnout(actor) ? pbtn("clearBurnout", "fas fa-brain", `${t("Common.End")}: ${t("Burnout.Name")}`) : ""}
       ${zone ? pbtn("clearZone", "fas fa-bolt-lightning", `${t("Common.End")}: ${t("Zone.Name")}`) : ""}
@@ -1962,7 +1967,7 @@ async function showShortcuts() {
     <h3>${t("Panel.PanelKeys")}</h3><table>${local}<tr><td><kbd>1–4</kbd></td><td>${t("Panel.Key.tabs")}</td></tr>
     <tr><td><kbd>Shift + −/+</kbd></td><td>${t("Panel.Key.five")}</td></tr></table>
     <p class="notes">${t("Keys.HudHint")}</p></div>`;
-  return foundry.applications.api.DialogV2.prompt({ window: { title: t("Panel.Shortcuts") }, content, rejectClose: false,
+  return foundry.applications.api.DialogV2.prompt({ window: { title: t("Panel.Shortcuts") }, classes: ["jjk5e-ui", "jjk5e-dialog"], content, rejectClose: false,
     ok: { label: t("Common.OK") } });
 }
 
@@ -2053,7 +2058,7 @@ function makePanelClass() {
   }
   return class JJKPanel extends Base {
     static DEFAULT_OPTIONS = {
-      classes: ["jjk5e-panel-app"],
+      classes: ["jjk5e-ui", "jjk5e-panel-app"],
       window: { icon: "fas fa-yin-yang", resizable: true },
       position: { width: 480, height: "auto" },
       actions
@@ -2289,7 +2294,7 @@ async function techniqueBuilder(actor = null) {
     <label><input type="checkbox" name="earlyDomain"> ${t("Builder.EarlyDomain")}</label>
     ${TECHNIQUE_SLOTS.map((slot, i) => builderRow(i, slot)).join("")}</div>`;
   const spec = await foundry.applications.api.DialogV2.prompt({
-    window: { title: t("Builder.Title"), resizable: true }, position: { width: 640, height: 720 }, content, rejectClose: false,
+    window: { title: t("Builder.Title"), resizable: true }, classes: ["jjk5e-ui", "jjk5e-dialog"], position: { width: 640, height: 720 }, content, rejectClose: false,
     ok: { label: t("Builder.Create"), callback: (event, button) => readBuilderForm(button.form) }
   });
   if (!spec?.name?.trim()) return null;
@@ -3378,7 +3383,7 @@ function makeMenuClass() {
   return class JJKMenu extends Base {
     static DEFAULT_OPTIONS = {
       id: "jjk5e-menu",
-      classes: ["jjk5e-menu"],
+      classes: ["jjk5e-ui", "jjk5e-menu"],
       window: { title: "JJK 5e", icon: "fas fa-yin-yang", minimizable: true },
       position: { width: 250, height: "auto", left: 110, top: 80 },
       actions: { run: JJKMenu.#run }
@@ -3943,7 +3948,7 @@ function makeVowClass() {
   const Base = foundry.applications.api.ApplicationV2;
   return class JJKVows extends Base {
     static DEFAULT_OPTIONS = {
-      classes: ["jjk5e-vows"], window: { icon: "fas fa-handshake", resizable: true },
+      classes: ["jjk5e-ui", "jjk5e-vows"], window: { icon: "fas fa-handshake", resizable: true },
       position: { width: 520, height: "auto" },
       actions: {
         add: function () { createVow(this.actor); },
@@ -3994,7 +3999,7 @@ function makeCareerClass() {
   const Base = foundry.applications.api.ApplicationV2;
   return class JJKCareer extends Base {
     static DEFAULT_OPTIONS = {
-      classes: ["jjk5e-career"], window: { icon: "fas fa-medal", resizable: true },
+      classes: ["jjk5e-ui", "jjk5e-career"], window: { icon: "fas fa-medal", resizable: true },
       position: { width: 540, height: "auto" },
       actions: {
         tab: function (ev, el) { this.tab = el.dataset.tab; this.render(); },
@@ -4562,7 +4567,7 @@ function makeDomainClass() {
   const Base = foundry.applications.api.ApplicationV2;
   return class JJKDomain extends Base {
     static DEFAULT_OPTIONS = {
-      classes: ["jjk5e-domain"], window: { icon: "fas fa-circle-half-stroke", minimizable: true },
+      classes: ["jjk5e-ui", "jjk5e-domain"], window: { icon: "fas fa-circle-half-stroke", minimizable: true },
       position: { width: 340, height: "auto" },
       actions: {
         hit: async function () {

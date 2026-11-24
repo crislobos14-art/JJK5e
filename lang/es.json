@@ -236,7 +236,9 @@
       "GMHint": "Herramientas del GM: solo tú ves esta pestaña.",
       "GMValues": "Valores",
       "GMClear": "Terminar efectos",
-      "GMSetCE": "Fijar CE"
+      "GMSetCE": "Fijar CE",
+      "SpendShort": "Gastar",
+      "RegainShort": "Recuperar"
     },
     "Notify": {
       "NoActor": "JJK 5e: selecciona un token o asigna un personaje primero.",

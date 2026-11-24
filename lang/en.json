@@ -236,7 +236,9 @@
       "GMHint": "GM tools: only you see this tab.",
       "GMValues": "Values",
       "GMClear": "End effects",
-      "GMSetCE": "Set CE"
+      "GMSetCE": "Set CE",
+      "SpendShort": "Spend",
+      "RegainShort": "Regain"
     },
     "Notify": {
       "NoActor": "JJK 5e: select a token or assign a character first.",
