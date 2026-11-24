@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.67.0 — Tema visual Sealed Ink (estilo Jujutsu Kaisen)
+- Nuevo tema *Sealed Ink* inspirado en la serie: tinta sumi, papel de talismán, un único rojo de sello y energía maldita en violeta; dorado solo para el GM. El marco de las ventanas de Foundry no se toca: solo cambia el contenido.
+- Cabecera con sello 呪 y nombre en tipografía condensada (Big Shoulders, OFL, incluida en el módulo); marca de agua 呪 muy tenue.
+- Pestañas como tiras de talismán: la activa es papel con banda roja; la del GM, dorada.
+- Medidor de CE con número grande y barra con marcas cada 10 %; se vuelve roja con 25 % o menos.
+- Estados como etiquetas de papel con banda de color (rojo peligro, dorado Zone/Black Flash, violeta energía).
+- Extremidades con banda lateral naranja (rota) o roja tachada (perdida); botones OK/Rota/Perdida como control segmentado.
+- El panel se adapta al ancho de la ventana (pestañas y gasto rápido compactos en ventanas estrechas).
+- Guía de diseño en `docs/design/`.
+
 ## 1.66.0 — Rediseño visual de la interfaz
 - Nuevo tema visual *cursed ink* para el panel JJK, el menú, los votos, la carrera, el HUD de dominio, el creador de técnicas y la ayuda de atajos: fondo oscuro, energía maldita en violeta, rojo para lo peligroso y dorado para el GM y la Zone.
 - Medidor de CE grande: valor, máximo y porcentaje; se pone rojo con 25 % o menos.

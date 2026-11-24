@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+<defs><filter id="r"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="1" seed="7"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -0.9 1.55"/><feComposite in="SourceGraphic" operator="in"/></filter></defs>
+<g filter="url(#r)"><rect x="6" y="6" width="108" height="108" rx="6" fill="#c8102e"/>
+<rect x="13" y="13" width="94" height="94" rx="3" fill="none" stroke="#f3ece0" stroke-width="3"/>
+<g transform="translate(20 24) scale(0.08)"><path fill="#f3ece0" d="M426 134V539H447C464 539 482 536 499 532C489 704 443 845 190 960L197 973C599 887 635 705 648 462H672V845C672 933 686 960 781 960H836C952 960 994 930 994 878C994 851 988 835 958 819L955 668H945C925 732 906 791 896 810C889 821 885 823 877 824C870 824 863 824 855 824H830C816 824 814 819 814 806V521C863 518 929 497 931 489V189C954 184 968 174 975 165L836 59L769 134H579L426 75ZM780 434H573V162H780ZM246 187V610H188V187ZM53 159V803H74C134 803 188 772 188 756V638H246V735H269C316 735 381 708 383 700V209C403 205 416 196 423 188L298 91L236 159H191L53 103Z"/></g></g></svg>

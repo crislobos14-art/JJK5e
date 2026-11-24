@@ -1942,7 +1942,7 @@ function panelHTML(actor, tab = "combat") {
   return `
   <section class="jjk-panel" data-tab="${tab}">
     <header class="jjk-head">
-      <img src="${ICONS}/ce.svg" alt="">
+      <img src="${ICONS}/seal-ju.svg" alt="">
       <div>
         <div class="jjk-name">${esc(actor.name)} <span class="jjk-role ${gm ? "gm" : ""}">${gm ? "GM" : t("Panel.Player")}</span></div>
         <div class="jjk-sub">${hr ? t("Panel.HR") : `${t("Panel.Technique")}: <strong>${esc(tech ?? t("Panel.None"))}</strong>`}

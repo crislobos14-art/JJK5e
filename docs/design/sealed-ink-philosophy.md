@@ -1,0 +1,13 @@
+# Sealed Ink
+
+**A visual philosophy of binding: ink that holds energy, paper that holds ink, red that holds the line.**
+
+Sealed Ink treats every surface as a ward. Space is not empty; it is *contained*. Fields of near-black are laid down like sumi on absorbent paper, deep and slightly warm, never the flat void of a screen. Upon them sit narrow, upright strips — talisman-like bands of pale paper tone — that carry the few marks that matter. Form is rectilinear and taut: hard corners, clean cuts, the occasional diagonal shear where a strip has been torn or sliced. Nothing floats; everything is pinned, bound, sealed in place. The work must feel meticulously crafted, each edge decided, as if a master had spent countless hours fixing every boundary.
+
+Color is a three-voice chord and nothing more. Ink (the ground), bone (the paper, the quiet text), and a single arterial vermilion that is used as a seal is used — rarely, decisively, as the stamp that authenticates a decision. A fourth voice is allowed only as *energy*: a cold, electric violet-blue that never sits still on the surface but glows from within bars and lines, the visible residue of something invisible. Gold appears once, as authority. The palette must read as the product of painstaking calibration, every hue earned.
+
+Scale moves in violent contrast. Large, condensed, uppercase numerals and single words strike like brush impacts; beside them, labels whisper in tiny tracked capitals. Between these extremes there is very little — no middle register of chatter. Rhythm comes from repetition of identical strips, identical tick marks, identical seals, accumulated with the patience of ritual, so that one irregular mark (a crack, a red stamp, a broken bar) carries enormous weight. This tension between monumental and minute should look like master-level execution, not decoration.
+
+Composition follows the logic of a barrier: a strong outer frame, an inner field, and a single focal point of release. Hierarchy is enforced by containment — what is most important is most tightly enclosed, double-ruled, stamped. Secondary matter lives in open air with generous margins. Diagonals are reserved for moments of rupture. Balance is asymmetric but rigorously weighted, the kind of equilibrium only reached through relentless refinement.
+
+Texture is whisper-thin: a faint paper grain, a hairline double rule, a soft bleed at the edge of a red seal. Text is never explanation — only names, numbers, and the sparest labels, integrated into the architecture as marks among marks. The finished artifact should feel like a sealed document from an unknown order: precise, austere, quietly dangerous, and unmistakably the product of deep expertise and painstaking care.
