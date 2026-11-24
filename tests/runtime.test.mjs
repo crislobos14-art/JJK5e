@@ -878,7 +878,7 @@ test("CE audit: overlapping local payments cannot both spend unavailable CE",asy
 
 
 test("Transactional CE: authenticated owner, persistent reservation and replay rejection",async()=>{
-  const {actor,J}=await setup();
+  const {actor,J}=await setup({settings:{transactionalCE:true}});
   const [item]=await actor.createEmbeddedDocuments("Item",[{name:"Technique",type:"feat",flags:{jjk5e:{ceCosts:{a:8},ceSteps:{a:2}}},system:{activities:{a:{id:"a",name:"Attack"}}}}]);
   const owner={id:"owner",active:true,isGM:false},other={id:"other",active:true,isGM:false};
   actor.testUserPermission=(u)=>u.id===owner.id;
@@ -896,7 +896,7 @@ test("Transactional CE: authenticated owner, persistent reservation and replay r
   assert.equal(J.ceLedger(J.findPool(actor))[0].state,"committed");
 });
 test("Transactional CE: uncertain consumption requires GM settlement; only one refund",async()=>{
-  const {env,actor,J}=await setup();
+  const {env,actor,J}=await setup({settings:{transactionalCE:true}});
   const [item]=await actor.createEmbeddedDocuments("Item",[{name:"Technique",type:"feat",flags:{jjk5e:{ceCosts:{a:6}}},system:{activities:{a:{id:"a"}}}}]);
   const user=env.game.user,payload={actorUuid:actor.uuid,itemId:item.id,activityId:"a",id:"tx-review",scaling:0};
   assert.equal((await J.handleCEAuthority({operation:"reserve",payload},{user})).cost,6);
@@ -912,4 +912,44 @@ test("CE Quick Recovery: legacy costs are not negative charges",async()=>{
   assert.equal(J.activityCost(act),0);
   assert.equal(J.totalActivityCECost(actor,act,{scaling:3}),0);
   assert.equal(J.managedCE(act),false);
+});
+
+test("Transactional CE adapter: debit precedes native consumption and repeated postUse does not debit again",async()=>{
+  const {env,actor,J}=await setup({settings:{transactionalCE:true}});
+  const [item]=await actor.createEmbeddedDocuments("Item",[{name:"Technique",type:"feat",flags:{jjk5e:{ceCosts:{a:8}}},system:{activities:{a:{id:"a",name:"Attack"}}}}]);
+  const act={id:"a",name:"Attack",actor,item},usage={scaling:0};
+  assert.equal(env.Hooks.call("dnd5e.preActivityConsumption",act,usage,{}),false,"no native use without reservation");
+  let calls=0;
+  const result=await J.consumeWithCE(async()=>{
+    calls++;
+    assert.equal(J.poolValue(J.findPool(actor)),12);
+    assert.notEqual(env.Hooks.call("dnd5e.preActivityConsumption",act,usage,{}),false);
+    assert.equal(env.Hooks.call("dnd5e.preRestCompleted",actor,{},{}),false);
+    return {item:[]};
+  },act,usage,{});
+  assert.ok(result);
+  assert.equal(calls,1);
+  assert.equal(J.cePostAllowed(act,usage),true);
+  await env.Hooks.run("dnd5e.postUseActivity",act,usage,{});
+  await env.Hooks.run("dnd5e.postUseActivity",act,usage,{});
+  assert.equal(J.poolValue(J.findPool(actor)),12);
+  assert.equal(await J.consumeWithCE(async()=>{throw Error("duplicate executed")},act,usage,{}),false);
+});
+test("Transactional CE adapter: native failure blocks post-use effects and retains pending review",async()=>{
+  const {actor,J}=await setup({settings:{transactionalCE:true}});
+  const [item]=await actor.createEmbeddedDocuments("Item",[{name:"Technique",type:"feat",flags:{jjk5e:{ceCosts:{a:4}}},system:{activities:{a:{id:"a"}}}}]);
+  const act={id:"a",actor,item},usage={};
+  assert.equal(await J.consumeWithCE(async()=>false,act,usage,{}),false);
+  assert.equal(J.cePostAllowed(act,usage),false);
+  assert.equal(J.poolValue(J.findPool(actor)),16);
+  assert.equal(J.ceLedger(J.findPool(actor))[0].state,"review");
+});
+test("Quick Recovery: verified native use delta restores CE once",async()=>{
+  const {env,actor,J}=await setup();
+  await J.spendCE(actor,10);
+  const [item]=await actor.createEmbeddedDocuments("Item",[{name:"Quick Recovery",type:"feat",flags:{jjk5e:{quickRecovery:true}}}]);
+  const act={id:"Jt55eu41OQX7G6Sh",actor,item},res={message:{system:{deltas:{item:{[item.id]:[{keyPath:"system.uses.spent",delta:2}]}}}}};
+  await env.Hooks.run("dnd5e.postUseActivity",act,{},res);
+  await env.Hooks.run("dnd5e.postUseActivity",act,{},res);
+  assert.equal(J.poolValue(J.findPool(actor)),12);
 });
