@@ -71,6 +71,14 @@ function button(label, fn) {
 function enhanceASI(root, app) {
   const flow = app.advancement ? app : app.step?.flow;
   const adv = flow?.advancement;
+  const list = root.querySelector(".ability-scores");
+  const points = flow?.points;
+  if (list && Number.isFinite(points?.available) && Number.isFinite(points?.total)) {
+    let counter = list.querySelector(".jjk-sealed-asi-points");
+    if (!counter) { counter = make("li", "jjk-sealed-asi-points"); list.prepend(counter); }
+    const label = local("Available points: ", "Puntos disponibles: ") + points.available + " / " + points.total;
+    if (counter.textContent !== label) counter.textContent = label;
+  }
   for (const row of root.querySelectorAll(".ability-scores li[data-score]")) {
     const input = row.querySelector("input[type=number]");
     if (!input) continue;
@@ -125,7 +133,6 @@ function enhanceFeats(root) {
       if (!option) return;
       source.value = option.value;
       // The existing JJK button calls the original prerequisite check and advancement.apply.
-      confirm.disabled = true;
       take.click();
     });
     confirm.disabled = true;
@@ -162,14 +169,41 @@ function enhanceFeats(root) {
       }
     }
     for (const el of [search,filter]) for (const event of ["input","change"]) el.addEventListener(event, ev => { ev.stopPropagation(); draw(); });
+    search.addEventListener("keydown", ev => { if (ev.key === "Enter") { ev.preventDefault(); ev.stopPropagation(); } });
     browser.append(search, filter, status, rows, detail, inspect, confirm);
     source.parentElement?.after(browser);
     draw();
   }
 }
+function enhanceItemChoices(root, app) {
+  const flow = app.advancement ? app : app.step?.flow;
+  if (flow?.advancement?.type !== "ItemChoice") return;
+  const form = root.querySelector(".standard-form");
+  if (!form || !form.querySelector("li.item[data-uuid]")) return;
+  let search = form.querySelector(".jjk-sealed-choice-search");
+  if (!search) {
+    search = make("input", "jjk-sealed-choice-search");
+    search.type = "search";
+    search.placeholder = local("Search available choices", "Buscar opciones disponibles");
+    search.setAttribute("aria-label", search.placeholder);
+    form.prepend(search);
+    const filter = () => {
+      const query = search.value.trim().toLocaleLowerCase();
+      for (const row of form.querySelectorAll("li.item[data-uuid]")) {
+        const selected = row.querySelector("dnd5e-checkbox")?.checked ||
+          row.querySelector("input:checked,input[type=hidden]");
+        const name = row.querySelector(".item-name")?.textContent ?? row.textContent;
+        row.classList.toggle("jjk-sealed-choice-hidden", !selected && !name.toLocaleLowerCase().includes(query));
+      }
+    };
+    for (const name of ["input","change"]) search.addEventListener(name, ev => { ev.stopPropagation(); filter(); });
+    search.addEventListener("keydown", ev => { if (ev.key === "Enter") { ev.preventDefault(); ev.stopPropagation(); } });
+  }
+}
 function enhance(root, app) {
   enhanceASI(root, app);
   enhanceFeats(root);
+  enhanceItemChoices(root, app);
 }
 function watch(app, root, active) {
   if (!active) { stopWatch(app); return; }
@@ -318,8 +352,10 @@ function apply(app, element) {
   root.dataset.jjkMotion = motion;
   if (actor) renderLinks(app, root, actor, sealed);
   if (first && motion !== "off") root.classList.add("jjk-sealed-arrival");
+  if (motion === "off") root.classList.remove("jjk-sealed-arrival");
   if (!surface) {
-    for (const el of root.querySelectorAll(".jjk-sealed-feat-browser,.jjk-sealed-asi-summary")) el.remove();
+    for (const el of root.querySelectorAll(".jjk-sealed-feat-browser,.jjk-sealed-asi-summary,.jjk-sealed-asi-points,.jjk-sealed-choice-search")) el.remove();
+    for (const el of root.querySelectorAll(".jjk-sealed-choice-hidden")) el.classList.remove("jjk-sealed-choice-hidden");
     root.classList.remove("jjk-sealed-arrival");
   }
   watch(app, root, surface && category === "progression");
