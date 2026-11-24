@@ -433,19 +433,19 @@ function ceDiscountFactor(actor) {
 function totalActivityCECost(actor, activity, usageConfig = {}) {
   const base = activityCost(activity);
   const step = Number(activity?.item?.flags?.jjk5e?.ceSteps?.[activity.id] ?? 0);
-  const scaling = Number(usageConfig?.scaling) || 0;
+  const scaling = Number(usageConfig?.scaling ?? 0);
   return activityCECost({ base, step, scaling, factor: ceDiscountFactor(actor) });
 }
-async function doSpendCE(actor, amount, label = "") {
-  if (!actor?.isOwner) return false;
+async function doSpendCE(actor, amount, label = "", { exact = false } = {}) {
+  if (!actor?.isOwner || !Number.isFinite(amount)) return false;
   const pool = findPool(actor);
   if (!pool) {
     ui.notifications.warn(t("Notify.NoPool", { name: actor?.name ?? "?" }));
     return false;
   }
-  const discount = amount > 0 && ceDiscountFactor(actor) < 1;
+  const discount = !exact && amount > 0 && ceDiscountFactor(actor) < 1;
   const charge = discount ? activityCECost({ base: amount, factor: 0.1 }) : amount;
-  if (charge > 0 && vowBlocksUsage(actor.effects, { costsCE: true })) {
+  if (!exact && charge !== 0 && vowBlocksUsage(actor.effects, { costsCE: true })) {
     ui.notifications.warn(t("Notify.VowBlocksCE"));
     return false;
   }
@@ -461,20 +461,60 @@ async function doSpendCE(actor, amount, label = "") {
     "flags.jjk5e.fractionalSpent": fractional }, { jjk5eCE: true });
   if (discount && actor.getFlag(MODULE_ID, "sixEyesNext")) await actor.unsetFlag(MODULE_ID, "sixEyesNext");
   if (setting("ceChat")) {
-    const verb = charge >= 0 ? `−${charge}` : `+${-charge}`;
+    const actual = Math.round((previous - result.remaining) * 1000) / 1000;
+    const verb = actual >= 0 ? `−${actual}` : `+${-actual}`;
     await chat(actor, `<p><strong>${esc(label || t("CE.Name"))}</strong>: ${verb} CE `
       + `<span style="opacity:.8">(${t("CE.Remaining", { value: result.remaining, max: maximum })})</span></p>`,
     privateTo(actor));
   }
   return true;
 }
-async function spendCE(actor, amount, label = "") {
+async function queueCE(actor, fn) {
   const key = actor?.uuid ?? "unknown";
   const previous = CE_QUEUES.get(key) ?? Promise.resolve();
-  const next = previous.catch(() => {}).then(() => doSpendCE(actor, amount, label));
+  const next = previous.catch(() => {}).then(fn);
   CE_QUEUES.set(key, next);
   try { return await next; }
   finally { if (CE_QUEUES.get(key) === next) CE_QUEUES.delete(key); }
+}
+async function spendCE(actor, amount, label = "") {
+  return queueCE(actor, () => doSpendCE(actor, amount, label));
+}
+async function setExactCE(actor, value) {
+  if (!game.user.isGM || !Number.isFinite(value)) return false;
+  return queueCE(actor, async () => {
+    const pool = findPool(actor);
+    if (!pool) return false;
+    return doSpendCE(actor, poolValue(pool) - clamp(value, 0, poolMax(pool)), t("Panel.GMSetCE"), { exact: true });
+  });
+}
+function validActivityCE(actor, activity, usageConfig, { checkPool = true } = {}) {
+  const cost = totalActivityCECost(actor, activity, usageConfig);
+  if (!Number.isFinite(cost) || cost < 0) return false;
+  if (vowBlocksUsage(actor?.effects, { costsCE: cost > 0, innateTechnique: !!activity.item?.flags?.jjk5e?.technique })) return false;
+  const ro = Number(actor?.getFlag(MODULE_ID,"reducedOutput")) || 0;
+  if (RO_MAX[ro] && cost > RO_MAX[ro]) {
+    ui.notifications.warn(t("Notify.ROMax", { cost, max: RO_MAX[ro], level: ro }));
+    return false;
+  }
+  if (checkPool && cost > 0) {
+    const pool = findPool(actor);
+    if (!pool || poolValue(pool) < cost) {
+      ui.notifications.warn(t("Notify.NotEnoughCE", { value: pool ? poolValue(pool) : 0, cost }));
+      return false;
+    }
+  }
+  return true;
+}
+async function payActivityCE(actor, activity, usageConfig = {}) {
+  return queueCE(actor, async () => {
+    if (!validActivityCE(actor,activity,usageConfig)) return false;
+    const cost = totalActivityCECost(actor,activity,usageConfig);
+    if (cost > 0 && !(await doSpendCE(actor,cost,`${activity.item?.name ?? ""}${activity.name ? ` — ${activity.name}` : ""}`, { exact: true }))) return false;
+    if (cost > 0 && ceDiscountFactor(actor) < 1 && actor.getFlag(MODULE_ID,"sixEyesNext")) await actor.unsetFlag(MODULE_ID,"sixEyesNext");
+    if (cost > 0 && activity.item?.flags?.jjk5e?.technique && actor.getFlag(MODULE_ID,"costMinusNext")) await actor.unsetFlag(MODULE_ID,"costMinusNext");
+    return true;
+  });
 }
 
 /* ---- token bar / actor resource sync ---- */
@@ -520,8 +560,13 @@ async function onActorUpdate(actor, changes, options, userId) {
   const pool = findPool(actor);
   if (!pool) return;
   const max = poolMax(pool);
-  await pool.update({ "system.uses.spent": Math.floor(clamp(max - Number(v), 0, max)),
-    "flags.jjk5e.fractionalSpent": Math.max(0, (max - Number(v)) % 1) }, { jjk5eSync: true });
+  if (!Number.isFinite(Number(v))) return syncResource(actor);
+  await queueCE(actor, async () => {
+    const spent = Math.round(clamp(max - Number(v), 0, max)*1000)/1000;
+    const whole = Math.floor(spent);
+    await pool.update({ "system.uses.spent": whole,
+      "flags.jjk5e.fractionalSpent": Math.round((spent-whole)*1000)/1000 }, { jjk5eSync: true });
+  });
 }
 
 /* -------------------------------------------- */
@@ -650,8 +695,8 @@ function registerActivityHooks() {
       ui.notifications.warn(t("Notify.ROMax", { cost, max: RO_MAX[ro], level: ro }));
       return false;
     }
-    if (!setting("autoSpendCE") || !cost) return;
     if (!Number.isFinite(cost)) return false;
+    if (!setting("autoSpendCE") || !cost) return;
     const pool = findPool(actor);
     if (!pool) {
       ui.notifications.warn(t("Notify.NoPoolNotSpent", { name: actor?.name ?? "?" }));
@@ -669,16 +714,8 @@ function registerActivityHooks() {
         !canUseDomainActivity(activity.actor ?? activity.item.actor, activity)) return false;
     if (isCloneCreation(activity) && !canCreateClone(activity.item.actor, cloneQuantity(activity, usageConfig))) return false;
     if (activity.item?.flags?.jjk5e?.tokenSwap?.[activity.id] && !validateTokenSwap(activity)) return false;
-    if (!setting("autoSpendCE")) return;
     const actor = activity.actor ?? activity.item?.actor;
-    const cost = totalActivityCECost(actor, activity, usageConfig);
-    if (!Number.isFinite(cost)) return false;
-    if (!cost) return;
-    const pool = findPool(actor);
-    if (!pool || poolValue(pool) < cost) {
-      ui.notifications.warn(t("Notify.NotEnoughCE", { value: pool ? poolValue(pool) : 0, cost }));
-      return false;
-    }
+    if (!validActivityCE(actor, activity, usageConfig, { checkPool: setting("autoSpendCE") })) return false;
   });
   Hooks.on("dnd5e.postUseActivity", async (activity, usageConfig) => {
     const actor = activity.actor ?? activity.item?.actor;
@@ -691,20 +728,15 @@ function registerActivityHooks() {
     // Pay BEFORE opening domains or applying buffs. Failed CE payment must never
     // leave a benefit in place. The pre-use gate handles ordinary insufficient CE.
     if (setting("autoSpendCE") && actor && item) {
-      const cost = activityCost(activity)
-        + Number(item.flags?.jjk5e?.ceSteps?.[activity.id] ?? 0) * (Number(usageConfig?.scaling) || 0);
-      if (cost) {
-        if (!findPool(actor)) return ui.notifications.warn(t("Notify.NoPoolNotSpent", { name: actor.name }));
-        const paid = await spendCE(actor, cost,
-          `${item.name}${activity.name ? ` — ${activity.name}` : ""}`);
-        if (!paid) return;
-      }
+      if (!(await payActivityCE(actor, activity, usageConfig))) return;
     }
     if (actor && /^Six Eyes \((Dormant|Stirring)\)$/.test(baseName(item)) &&
         /Perfect CE Manipulation/i.test(activity.name ?? "")) {
       await actor.setFlag(MODULE_ID, "sixEyesNext", true);
     }
     if (quantity) await createCombatClone(actor, quantity);
+    const ids = item?.flags?.jjk5e?.costMinusNext;
+    if (actor?.isOwner && Array.isArray(ids) && ids.includes(activity.id)) await actor.setFlag(MODULE_ID,"costMinusNext",true);
     const rawRegain = item?.flags?.jjk5e?.ceRegain?.[activity.id] ?? 0;
     const regain = typeof rawRegain === "string" && actor
       ? Number(dnd5e.utils.simplifyBonus(rawRegain, actor.getRollData())) || 0 : Number(rawRegain) || 0;
@@ -2062,8 +2094,7 @@ const PANEL_ACTIONS = {
     if (!pool) return;
     const n = await promptNumber(t("Panel.GMSetCE"), t("CE.Amount"), poolValue(pool));
     if (n === null) return;
-    const diff = poolValue(pool) - clamp(Number(n) || 0, 0, poolMax(pool));
-    if (diff) await spendCE(actor, diff, t("Panel.GMSetCE"));
+    await setExactCE(actor,Number(n));
   },
   ceSpend: (actor) => promptCE("spend", actor),
   ceRegain: (actor) => promptCE("regain", actor),
@@ -2669,7 +2700,7 @@ Hooks.once("ready", async () => {
     if (!actor?.isOwner) return;
     if (result?.longRest) {
       const pool = findPool(actor);
-      if (pool && Number(pool.flags?.jjk5e?.fractionalSpent)) await pool.setFlag(MODULE_ID, "fractionalSpent", 0);
+      if (pool) await queueCE(actor, () => pool.update({ "system.uses.spent": 0, "flags.jjk5e.fractionalSpent": 0 }, { jjk5eCE: true }));
       return;
     }
     const n = actor.items.reduce((tot, i) => tot + (Number(i.flags?.jjk5e?.srRegainCE) || 0), 0);
@@ -7207,9 +7238,7 @@ Hooks.once("ready", () => {
   Hooks.on("dnd5e.advancementManagerComplete", (manager) => { afterAdvancement(manager).catch((err) => reportError("advancement", err)); });
   Hooks.on("dnd5e.postUseActivity", (activity) => {
     const actor = activity?.actor ?? activity?.item?.actor;
-    const ids = activity?.item?.flags?.jjk5e?.costMinusNext;
-    if (Array.isArray(ids) && ids.includes(activity.id) && actor?.isOwner) actor.setFlag(MODULE_ID, "costMinusNext", true);
-    else if (activity?.item?.flags?.jjk5e?.technique && actor?.getFlag?.(MODULE_ID, "costMinusNext") && actor.isOwner) actor.unsetFlag(MODULE_ID, "costMinusNext");
+
     onOptionalAction(activity).catch((err) => reportError("optional action", err));
     // Items that roll the Limb Damage table for their targets (e.g. Judicial Amputation).
     const limb = activity?.item?.flags?.jjk5e?.limbRoll;
