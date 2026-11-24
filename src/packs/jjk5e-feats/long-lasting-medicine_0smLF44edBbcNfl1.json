@@ -23,6 +23,51 @@
   "prerequisites": {
    "level": null,
    "repeatable": false
+  },
+  "activities": {
+   "l4nczrkdFUWeM3Ed": {
+    "_id": "l4nczrkdFUWeM3Ed",
+    "type": "utility",
+    "name": "Long Lasting Pain Killer (24 h)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "touch",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "ecjFyqPMmPuQ4aOD",
+      "onSave": false
+     }
+    ]
+   }
   }
  },
  "flags": {
@@ -37,10 +82,33 @@
    "forTechniques": [
     "Pain Killer"
    ],
-   "rev": "130024fc7c"
+   "rev": "754b38cebf",
+   "automation": "automated"
   }
  },
  "folder": "Maq8utaMhQSZRR4y",
  "sort": 200,
- "_key": "!items!0smLF44edBbcNfl1"
+ "_key": "!items!0smLF44edBbcNfl1",
+ "effects": [
+  {
+   "_id": "ecjFyqPMmPuQ4aOD",
+   "name": "Long Lasting Pain Killer",
+   "img": "modules/jjk5e/icons/techniques/pain-killer.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Pain Killer lasts 24 hours; the creature is stabilized at 0 hit points.</p>",
+   "changes": [],
+   "duration": {
+    "seconds": 86400
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!0smLF44edBbcNfl1.ecjFyqPMmPuQ4aOD"
+  }
+ ]
 }

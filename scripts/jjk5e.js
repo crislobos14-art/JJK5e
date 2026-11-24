@@ -443,7 +443,7 @@ async function doSpendCE(actor, amount, label = "") {
   const discount = amount > 0 && ceDiscountFactor(actor) < 1;
   const charge = discount ? activityCECost({ base: amount, factor: 0.1 }) : amount;
   if (charge > 0 && vowBlocksUsage(actor.effects, { costsCE: true })) {
-    ui.notifications.warn("JJK 5e: A binding-vow penalty blocks Cursed Energy.");
+    ui.notifications.warn(t("Notify.VowBlocksCE"));
     return false;
   }
   const previous = poolValue(pool), maximum = poolMax(pool);
@@ -605,7 +605,7 @@ const RO_ROWS = [
 function registerActivityHooks() {
   Hooks.on("dnd5e.preUseActivity", (activity, usageConfig) => {
     if (activity.item?.actor?.token?.flags?.jjk5e?.cloneOrigin && activity.item.flags?.jjk5e?.technique) {
-      ui.notifications.warn("Clone: this copy cannot use innate techniques.");
+      ui.notifications.warn(t("Notify.CloneNoTech"));
       return false;
     }
     if (isCloneCreation(activity) && !canCreateClone(activity.item.actor)) return false;
@@ -621,12 +621,12 @@ function registerActivityHooks() {
     }
     const cost = totalActivityCECost(actor, activity, usageConfig);
     if (vowBlocksUsage(actor?.effects, { costsCE: cost > 0, innateTechnique: !!activity.item?.flags?.jjk5e?.technique })) {
-      ui.notifications.warn("JJK 5e: A broken binding vow prohibits this activity.");
+      ui.notifications.warn(t("Notify.VowBlocksUse"));
       return false;
     }
     // Only the activity that expands the domain is blocked; the domain's own in-domain activities stay usable.
     if (activity.item?.flags?.jjk5e?.domainActivity === activity.id && domainOpen(actor)) {
-      ui.notifications.warn("JJK 5e: A domain is already active.");
+      ui.notifications.warn(t("Notify.DomainActive"));
       return false;
     }
     const ro = Number(actor?.getFlag(MODULE_ID, "reducedOutput")) || 0;
@@ -722,10 +722,10 @@ async function applyTokenSwap(actor, item, activity) {
   const targets = [...(game.user?.targets ?? [])];
   const target = targets.length === 1 ? targets[0]?.document : null;
   if (!source || !target || source.id === target.id || source.parent?.id !== target.parent?.id) {
-    return ui.notifications.warn("JJK 5e: select exactly one token in the same scene to swap positions.");
+    return ui.notifications.warn(t("Notify.SwapSelect"));
   }
   if (!game.user.isGM && !target.actor?.isOwner) {
-    return ui.notifications.warn("JJK 5e: the selected token must be owned by you; ask the GM to resolve other swaps.");
+    return ui.notifications.warn(t("Notify.SwapOwner"));
   }
   await GM_EXTRA.tokenSwap({
     sceneId: canvas.scene.id, sourceId: source.id, targetId: target.id,
@@ -766,12 +766,12 @@ function canCreateClone(actor, quantity = 1) {
   const scene = canvas.scene;
   const source = actorToken(actor);
   if (!source || !scene || !game.user.can("TOKEN_CREATE")) {
-    ui.notifications.warn("Clone: place the caster on the scene and use an account with token creation permission.");
+    ui.notifications.warn(t("Notify.CloneScene"));
     return false;
   }
   const count = scene.tokens.filter(token => token.flags?.jjk5e?.cloneOrigin === actor.uuid).length;
   if (!domainOpen(actor) && count + quantity > actor.system.attributes.prof) {
-    ui.notifications.warn("Clone: proficiency limit reached.");
+    ui.notifications.warn(t("Notify.CloneLimit"));
     return false;
   }
   return true;
@@ -834,6 +834,12 @@ function modifiersFor(actor, item) {
 
 async function remindModifiers(actor, item) {
   if (!setting("modifierReminders") || !actor || !item) return;
+  // Features that are only partly (or not) automated tell the user what to apply by hand.
+  const auto = item.flags?.jjk5e?.automation;
+  const manualNote = item.flags?.jjk5e?.automationNotes;
+  if (manualNote && ["partial", "manual"].includes(auto)) {
+    await chat(actor, `<p><i class="fas fa-hand"></i> <strong>${esc(item.name)}</strong> — ${t(`Automation.${auto}`)}: ${esc(manualNote)}</p>`, privateTo(actor));
+  }
   const mods = modifiersFor(actor, item);
   if (!mods.length) return;
   const rows = mods.map((m) => {
@@ -1088,8 +1094,8 @@ async function chooseTechnique(actor) {
   if (current) {
     const old = actor.items.filter((item) => item.flags?.jjk5e?.technique === current);
     const approved = await confirmDialog(t("Technique.Title"),
-      `<p>Change ${esc(current)} to ${esc(choice)}?</p>
-       <p>This will remove ${old.length} old innate-technique items from this character. Back up the actor first.</p>`);
+      `<p>${t("Technique.ChangeConfirm", { from: esc(current), to: esc(choice) })}</p>
+       <p>${t("Technique.ChangeRemoves", { n: old.length })}</p>`);
     if (!approved) return;
     if (old.length) await actor.deleteEmbeddedDocuments("Item", old.map((i) => i.id));
   }
@@ -1115,7 +1121,7 @@ async function shortRestCE(actor) {
   const pool = findPool(actor);
   if (!pool) return ui.notifications.warn(t("Notify.NoPool", { name: actor.name }));
   if (vowBlocksUsage(actor.effects, { costsCE: true }))
-    return ui.notifications.warn("JJK 5e: a vow penalty prohibits CE recovery.");
+    return ui.notifications.warn(t("Notify.VowBlocksRegain"));
   const classes = actor.items.filter((i) => i.type === "class");
   const total = classes.reduce((n, c) => n + Math.max(0, Number(c.system.levels) || 0), 0);
   const available = classes.reduce((n, c) =>
@@ -1123,7 +1129,7 @@ async function shortRestCE(actor) {
   const missingCE = Math.max(0, poolMax(pool) - poolValue(pool));
   const cap = Math.min(Math.floor(total / 2), available, Math.floor(missingCE));
   if (cap < 1) {
-    ui.notifications.warn("JJK 5e: No usable Hit Dice or missing Cursed Energy.");
+    ui.notifications.warn(t("Notify.NoHitDice"));
     return;
   }
   const n = Math.min(cap, await promptNumber(t("CE.ShortRestTitle"), t("CE.ShortRestPrompt", { cap })));
@@ -1141,7 +1147,7 @@ async function shortRestCE(actor) {
     await cls.update({ "system.hd.spent": spent + take });
     left -= take;
   }
-  if (left) return ui.notifications.error("JJK 5e: Hit Dice allocation incomplete; GM review required.");
+  if (left) return ui.notifications.error(t("Notify.HitDiceIncomplete"));
   await spendCE(actor, -n, t("CE.ShortRestLabel", { n }));
 }
 
@@ -1535,7 +1541,7 @@ async function maximumOutput(actor) {
   if (!actor) return;
   const ro = Number(actor.getFlag(MODULE_ID, "reducedOutput")) || 0;
   if (Number(actor.system.abilities?.[ceAbility(actor)]?.value) < 20) {
-    ui.notifications.warn("Maximum Output requires a Cursed Energy score of 20 (JJK V.6).");
+    ui.notifications.warn(t("Notify.MaxOutputScore"));
     return;
   }
   const base = await promptNumber(t("Output.MaxTitle"), t("Output.MaxPrompt"), 5);
@@ -1719,9 +1725,9 @@ async function handleGMRequest(msg) {
   if (!requester?.active || requester.isGM || !allowed.has(action)) return false;
   const actor = msg.payload?.actorUuid ? await fromUuid(msg.payload.actorUuid).catch(() => null) : null;
   // GM approval is explicit: client-provided user IDs are NOT a trusted identity.
-  const confirmed = await confirmDialog("JJK 5e: privileged request",
-    `<p>Request allegedly from <b>${esc(requester.name)}</b>: <b>${esc(action)}</b> for ${esc(actor?.name ?? "unresolved actor")}.</p>
-     <p>Client identifiers are untrusted. Verify with the player before approving.</p>`);
+  const confirmed = await confirmDialog(t("GMRequest.Title"),
+    `<p>${t("GMRequest.From", { user: `<b>${esc(requester.name)}</b>`, action: `<b>${esc(action)}</b>`, actor: esc(actor?.name ?? "?") })}</p>
+     <p>${t("GMRequest.Verify")}</p>`);
   if (!confirmed) return false;
   try {
     if (action === "summon") await gmSummon(msg.payload);
@@ -1736,7 +1742,7 @@ function viaGM(action, payload) {
   const gm = game.users.activeGM ?? game.users.find((u) => u.isGM && u.active);
   if (!gm) return ui.notifications.warn(t("Notify.NoGM"));
   // Remote GM requests are disabled unless the world GM opts in.
-  if (!setting("playerGMRequests")) return ui.notifications.warn("JJK 5e: Ask the GM to perform this action.");
+  if (!setting("playerGMRequests")) return ui.notifications.warn(t("Notify.AskGM"));
   const msg = { action, payload, gm: gm.id, requestedBy: game.user.id };
   // Foundry 13+: CONFIG.queries returns the GM's answer; older cores fall back to the socket.
   if (typeof gm.query === "function" && CONFIG.queries?.[GM_QUERY]) {
@@ -2122,7 +2128,7 @@ function openPanel(actor) {
   if (!actor) return;
   if (!actor.isOwner) return ui.notifications.warn(t("Notify.NotOwner"));
   JJKPanelClass ??= makePanelClass();
-  if (!JJKPanelClass) return ui.notifications.error("ApplicationV2 not available.");
+  if (!JJKPanelClass) return ui.notifications.error(t("Notify.NoAppV2"));
   let app = PANELS.get(actor.uuid);
   if (!app) {
     app = new JJKPanelClass(actor);
@@ -2563,7 +2569,7 @@ Hooks.once("ready", async () => {
   registerActivityHooks();
   if (game.user.isGM) {
     const inactive = ["midi-qol", "dae"].filter(id => !game.modules.get(id)?.active);
-    if (inactive.length) ui.notifications.warn("JJK5e · " + (game.i18n.lang === "es" ? "Activa los módulos de combate: " : "Enable combat modules: ") + inactive.join(", "));
+    if (inactive.length) ui.notifications.warn(t("Notify.EnableModules", { list: inactive.join(", ") }));
   }
 
   Hooks.on("dnd5e.advancementManagerComplete", async (manager) => {
@@ -5572,8 +5578,8 @@ function optionalRulesHTML() {
     const ctl = choices
       ? `<select name="${key}">${choices.map((c) => `<option value="${c}" ${String(v) === c ? "selected" : ""}>${t(`Opt.${key}.C${c.replace(".", "")}`)}</option>`).join("")}</select>`
       : `<input type="checkbox" name="${key}" ${v ? "checked" : ""}>`;
-    return `<label class="jjk-opt"><span class="jjk-opt-ctl">${ctl}</span><span><strong>${t(`Opt.${key}.Name`)}</strong>
-      <small>${t(`Opt.${key}.Hint`)}</small></span></label>`;
+    return `<label class="jjk-opt"><span><strong>${t(`Opt.${key}.Name`)}</strong>
+      <small>${t(`Opt.${key}.Hint`)}</small></span><span class="jjk-opt-ctl">${ctl}</span></label>`;
   }).join("");
   return `<section class="jjk-panel jjk-optrules"><p class="jjk-note">${t("Opt.Intro")}</p>
     <div class="btns"><button type="button" data-action="all" data-v="1">${t("Opt.All")}</button>
@@ -6354,8 +6360,8 @@ function optionalPanel(actor, tab) {
     if (!optOn("objectSoul")) return "";
     const lvl = Number(actor.getFlag(MODULE_ID, "objectSoul")) || 0;
     return `<fieldset><legend>${t("Opt.objectSoul.Name")}</legend>
-      ${gm ? `<div class="jjk-row jjk-stepper">${pbtn("objSoulDown", "", "−")}<strong class="jjk-num">${lvl}</strong>${pbtn("objSoulUp", "", "+")}</div>` : `<strong class="jjk-num">${lvl}</strong>`}
-      <ol class="jjk-soul-list">${OBJECT_SOUL.slice(0, lvl).map((n) => `<li>${esc(n)}</li>`).join("")}</ol></fieldset>`;
+      <div class="jjk-row">${gm ? pbtn("objSoulDown", "", "−") : ""}<strong class="jjk-num">${lvl}</strong>${gm ? pbtn("objSoulUp", "", "+") : ""}</div>
+      ${lvl ? `<ul class="jjk-list">${OBJECT_SOUL.slice(0, lvl).map((n, i) => `<li title="${esc(t(`Opt.ObjectSoul.L${i + 1}`))}">${esc(n)}</li>`).join("")}</ul>` : ""}</fieldset>`;
   }
   if (tab === "tools") {
     if (optOn("moneyRules")) b.push(pbtn("work", "fas fa-sack-dollar", `${t("Opt.Money.Work")} (${fmtMoney(money(actor))})`));
@@ -6569,3 +6575,24 @@ Hooks.once("ready", () => {
     });
   });
 });
+
+/* ---- v1.69: automation status on JJK item sheets ---- */
+
+function addAutomationBanner(app, element) {
+  const item = app?.document ?? app?.item;
+  const fl = item?.flags?.jjk5e;
+  const root = element?.querySelector ? element : element?.[0];
+  if (!fl || !root?.querySelector || item.documentName !== "Item") return;
+  root.querySelector(".jjk-auto-banner")?.remove();
+  const status = fl.automation;
+  if (!status) return;
+  const div = document.createElement("div");
+  div.className = `jjk-auto-banner ${status}`;
+  div.innerHTML = `<i class="fas ${status === "automated" ? "fa-circle-check" : "fa-hand"}"></i> <strong>JJK 5e</strong> · `
+    + `${t(`Automation.${status}`)}${fl.automationNotes ? ` — ${esc(fl.automationNotes)}` : ""}`;
+  const anchor = root.querySelector(".tab[data-tab='description'], .tab.description, .window-content");
+  anchor?.prepend(div);
+}
+for (const h of ["renderItemSheet5e", "renderItemSheetV2"]) {
+  Hooks.on(h, (app, element) => { try { addAutomationBanner(app, element); } catch (err) { console.error(`${MODULE_ID} | banner`, err); } });
+}

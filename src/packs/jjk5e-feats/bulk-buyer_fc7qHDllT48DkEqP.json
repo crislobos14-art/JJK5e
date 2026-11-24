@@ -37,7 +37,9 @@
    "forTechniques": [
     "Contractual Recreation"
    ],
-   "rev": "fda244837b"
+   "rev": "d979feb5fa",
+   "automationNotes": "Two or more receipts: −1 CE per receipt each (min 1); same type: advantage for 1 minute.",
+   "automation": "manual"
   }
  },
  "folder": "UU2pjYTH69wH4knu",

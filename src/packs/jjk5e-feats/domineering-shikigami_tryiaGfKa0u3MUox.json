@@ -37,9 +37,9 @@
    "forTechniques": [
     "Star Dictator"
    ],
-   "automationNotes": "Minor Star: bite 1d6 (1d8 at 6th, 1d10 at 11th), +2 DEX at 1st/6th/11th, evasion.",
-   "automation": "automated",
-   "rev": "efa4a6d833"
+   "automationNotes": "Use the shikigami customizer (JJK menu) to raise Bite and DEX.",
+   "automation": "manual",
+   "rev": "3546b12836"
   }
  },
  "folder": "bGKgrFplZpNnclwX",

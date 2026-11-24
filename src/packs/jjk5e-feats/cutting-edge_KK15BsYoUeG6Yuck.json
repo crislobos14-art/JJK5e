@@ -37,10 +37,56 @@
    "forTechniques": [
     "Dark Claw"
    ],
-   "rev": "3eea7c3074"
+   "rev": "d7923035eb",
+   "automationNotes": "The critical range applies to weapon attacks (use it with your Claws). Reroll 1s and 2s on the claw damage by hand.",
+   "automation": "partial"
   }
  },
  "folder": "zt8ujvT8aBbmfDqZ",
  "sort": 300,
- "_key": "!items!KK15BsYoUeG6Yuck"
+ "_key": "!items!KK15BsYoUeG6Yuck",
+ "effects": [
+  {
+   "_id": "T1Z1hsIwqIVcqjnZ",
+   "name": "Cutting Edge (critical range)",
+   "img": "modules/jjk5e/icons/techniques/dark-claw.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.dnd5e.weaponCriticalThreshold",
+     "mode": 5,
+     "value": "19",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": null,
+     "levelTable": {
+      "class": "*",
+      "table": [
+       [
+        1,
+        19
+       ],
+       [
+        11,
+        18
+       ],
+       [
+        18,
+        17
+       ]
+      ]
+     }
+    }
+   },
+   "_key": "!items.effects!KK15BsYoUeG6Yuck.T1Z1hsIwqIVcqjnZ"
+  }
+ ]
 }

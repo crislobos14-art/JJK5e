@@ -23,6 +23,60 @@
   "prerequisites": {
    "level": null,
    "repeatable": false
+  },
+  "activities": {
+   "MmRzGLrri0sItFTJ": {
+    "_id": "MmRzGLrri0sItFTJ",
+    "type": "heal",
+    "name": "Blessing of Resilience: CE mod temporary HP (start of turn)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "30",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "max(@abilities.wis.mod, @abilities.cha.mod)",
+     "types": [
+      "temphp"
+     ],
+     "custom": {
+      "enabled": false,
+      "formula": ""
+     },
+     "scaling": {}
+    }
+   }
   }
  },
  "flags": {
@@ -37,7 +91,8 @@
    "forTechniques": [
     "Solo Forbidden Zone"
    ],
-   "rev": "fae3e23647"
+   "rev": "8541019ac2",
+   "automation": "automated"
   }
  },
  "folder": "B010nMqksvk4lI5S",

@@ -37,7 +37,9 @@
    "forTechniques": [
     "New Shadow Style"
    ],
-   "rev": "f6af4d01bd"
+   "rev": "1ad435a18f",
+   "automationNotes": "The Simple Domain gets +2 × CE mod HP.",
+   "automation": "manual"
   }
  },
  "folder": "gFod6wGzEy6UctqC",

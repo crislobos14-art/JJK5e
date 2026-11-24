@@ -23,14 +23,146 @@
   "prerequisites": {
    "level": null,
    "repeatable": false
+  },
+  "activities": {
+   "OgRFQIbZgSehiDlX": {
+    "_id": "OgRFQIbZgSehiDlX",
+    "type": "utility",
+    "name": "Flow (reaction): −2 × prof damage, + prof to your next damage",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "GO9ik3P8Fs5U5eUK",
+      "onSave": false
+     },
+     {
+      "_id": "ZfcRLTQbJemN1Sp2",
+      "onSave": false
+     }
+    ]
+   }
   }
  },
  "flags": {
   "jjk5e": {
-   "rev": "5e0c61f60f"
+   "rev": "12e0ec6155",
+   "automation": "automated"
   }
  },
  "folder": "PUm8acbqVGSo8Rm6",
  "sort": 200,
- "_key": "!items!KyAqoXXWGTIXbp6H"
+ "_key": "!items!KyAqoXXWGTIXbp6H",
+ "effects": [
+  {
+   "_id": "GO9ik3P8Fs5U5eUK",
+   "name": "Flow: damage reduction",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.DR.all",
+     "mode": 2,
+     "value": "2 * @prof",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    },
+    "dae": {
+     "specialDuration": [
+      "isDamaged"
+     ]
+    }
+   },
+   "_key": "!items.effects!KyAqoXXWGTIXbp6H.GO9ik3P8Fs5U5eUK"
+  },
+  {
+   "_id": "ZfcRLTQbJemN1Sp2",
+   "name": "Flow: residual damage",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "@prof",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.rwak.damage",
+     "mode": 2,
+     "value": "@prof",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.msak.damage",
+     "mode": 2,
+     "value": "@prof",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.rsak.damage",
+     "mode": 2,
+     "value": "@prof",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    },
+    "dae": {
+     "specialDuration": [
+      "1Hit"
+     ]
+    }
+   },
+   "_key": "!items.effects!KyAqoXXWGTIXbp6H.ZfcRLTQbJemN1Sp2"
+  }
+ ]
 }

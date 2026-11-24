@@ -37,7 +37,9 @@
    "forTechniques": [
     "Earth Manipulation"
    ],
-   "rev": "94ba489570"
+   "rev": "2beebceafd",
+   "automationNotes": "Stone cubes: 10 × CE mod HP; other stone constructs +10 HP (edit the summoned token).",
+   "automation": "manual"
   }
  },
  "folder": "CvsPtOy5HUgba8G0",

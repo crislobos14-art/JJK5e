@@ -41,7 +41,9 @@
     "Technique": {
       "Title": "Elegir Técnica Innata",
       "Prompt": "Técnica Innata de <strong>{name}</strong> (nivel de técnica {level}):",
-      "Current": "Actual: {name}. Cambiarla no borra los rasgos anteriores."
+      "Current": "Actual: {name}. Cambiarla no borra los rasgos anteriores.",
+      "ChangeConfirm": "¿Cambiar {from} por {to}?",
+      "ChangeRemoves": "Se quitarán {n} objetos de la técnica innata anterior de este personaje. Haz una copia del actor antes."
     },
     "BlackFlash": {
       "Check": "Tirada de Black Flash",
@@ -260,7 +262,22 @@
       "GMOnly": "Solo el GM puede hacer esto.",
       "GMDeclined": "El GM rechazó o no respondió la petición.",
       "ActionFailed": "JJK 5e — falló {action}: {error}",
-      "NoScene": "Primero abre una escena."
+      "NoScene": "Primero abre una escena.",
+      "VowBlocksCE": "JJK 5e: Una penalización de voto vinculante bloquea la Energía Maldita.",
+      "CloneNoTech": "JJK 5e: Clon: esta copia no puede usar técnicas innatas.",
+      "VowBlocksUse": "JJK 5e: Un voto vinculante roto prohíbe esta actividad.",
+      "DomainActive": "JJK 5e: Ya hay un dominio activo.",
+      "SwapSelect": "JJK 5e: Selecciona exactamente un token de la misma escena para intercambiar posiciones.",
+      "SwapOwner": "JJK 5e: El token seleccionado debe ser tuyo; pide al GM los demás intercambios.",
+      "CloneScene": "JJK 5e: Clon: coloca al lanzador en la escena y usa una cuenta con permiso para crear tokens.",
+      "CloneLimit": "JJK 5e: Clon: límite por competencia alcanzado.",
+      "VowBlocksRegain": "JJK 5e: Una penalización de voto impide recuperar EM.",
+      "NoHitDice": "JJK 5e: No hay Dados de Golpe usables o falta la reserva de Energía Maldita.",
+      "HitDiceIncomplete": "JJK 5e: El reparto de Dados de Golpe quedó incompleto; revísalo con el GM.",
+      "MaxOutputScore": "JJK 5e: Salida máxima requiere una puntuación de Energía Maldita de 20.",
+      "AskGM": "JJK 5e: Pide al GM que haga esta acción (las peticiones de jugadores están desactivadas).",
+      "NoAppV2": "JJK 5e: ApplicationV2 no está disponible.",
+      "EnableModules": "JJK 5e · Activa los módulos de combate: {list}"
     },
     "Settings": {
       "autoSpendCE": {
@@ -1033,6 +1050,16 @@
       "Allow": "Permitir la tirada d100",
       "Allowed": "{name} puede tirar por la Técnica Maldita Inversa (d100, 90+) desde el panel JJK.",
       "NoChance": "Solo en un momento de casi muerte que el GM permita."
+    },
+    "GMRequest": {
+      "Title": "JJK 5e: petición de jugador",
+      "From": "Petición enviada como {user}: {action} para {actor}.",
+      "Verify": "Los identificadores del cliente no son fiables. Confírmalo con el jugador antes de aprobar."
+    },
+    "Automation": {
+      "partial": "automatizado en parte",
+      "manual": "aplícalo a mano",
+      "automated": "automatizado"
     }
   }
 }

@@ -37,7 +37,9 @@
    "forTechniques": [
     "Voracity"
    ],
-   "rev": "4fb3a0c4e1"
+   "rev": "307138f296",
+   "automationNotes": "Regurgitation: gain temp HP = half the devoured creature's HP (max half your HP).",
+   "automation": "manual"
   }
  },
  "folder": "3wVUVT1CJTINFbDN",

@@ -23,6 +23,49 @@
   "prerequisites": {
    "level": null,
    "repeatable": false
+  },
+  "activities": {
+   "l8DUr17dH34EfAqT": {
+    "_id": "l8DUr17dH34EfAqT",
+    "type": "utility",
+    "name": "Boogie Down: next attack against you has disadvantage",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "cwxnt6NCgvyghyFX",
+      "onSave": false
+     }
+    ]
+   }
   }
  },
  "flags": {
@@ -37,12 +80,46 @@
    "forTechniques": [
     "Boogie Woogie"
    ],
-   "automationNotes": "+2 reactions usable only to Boogie; after a Boogie, the next attack against you has disadvantage.",
-   "automation": "automated",
-   "rev": "40674ec80e"
+   "automationNotes": "The two extra Boogie-only reactions are tracked by hand.",
+   "automation": "partial",
+   "rev": "2e16adf826"
   }
  },
  "folder": "lYPG7qB66tA5vtjF",
  "sort": 100,
- "_key": "!items!eEwsCj0wKuDAtTjJ"
+ "_key": "!items!eEwsCj0wKuDAtTjJ",
+ "effects": [
+  {
+   "_id": "cwxnt6NCgvyghyFX",
+   "name": "Boogie Down",
+   "img": "modules/jjk5e/icons/techniques/boogie-woogie.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.grants.disadvantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    },
+    "dae": {
+     "specialDuration": [
+      "isAttacked"
+     ]
+    }
+   },
+   "_key": "!items.effects!eEwsCj0wKuDAtTjJ.cwxnt6NCgvyghyFX"
+  }
+ ]
 }

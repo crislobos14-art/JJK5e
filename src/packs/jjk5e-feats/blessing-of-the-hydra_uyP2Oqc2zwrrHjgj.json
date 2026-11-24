@@ -37,7 +37,9 @@
    "forTechniques": [
     "Eight Heads"
    ],
-   "rev": "cc19974981"
+   "rev": "79d0409969",
+   "automationNotes": "After Eight Lives: add the chosen resistance or condition immunity for 1 hour.",
+   "automation": "manual"
   }
  },
  "folder": "ScNBVqds1jNrXfTg",

@@ -41,7 +41,9 @@
     "Technique": {
       "Title": "Choose Innate Technique",
       "Prompt": "Innate Technique for <strong>{name}</strong> (technique level {level}):",
-      "Current": "Current: {name}. Changing it does not delete old features."
+      "Current": "Current: {name}. Changing it does not delete old features.",
+      "ChangeConfirm": "Change {from} to {to}?",
+      "ChangeRemoves": "This removes {n} items of the old innate technique from this character. Back up the actor first."
     },
     "BlackFlash": {
       "Check": "Black Flash check",
@@ -260,7 +262,22 @@
       "GMOnly": "Only the GM can do this.",
       "GMDeclined": "The GM declined or did not answer the request.",
       "ActionFailed": "JJK 5e — {action} failed: {error}",
-      "NoScene": "Open a scene first."
+      "NoScene": "Open a scene first.",
+      "VowBlocksCE": "JJK 5e: A binding-vow penalty blocks Cursed Energy.",
+      "CloneNoTech": "JJK 5e: Clone: this copy cannot use innate techniques.",
+      "VowBlocksUse": "JJK 5e: A broken binding vow prohibits this activity.",
+      "DomainActive": "JJK 5e: A domain is already active.",
+      "SwapSelect": "JJK 5e: Select exactly one token in the same scene to swap positions.",
+      "SwapOwner": "JJK 5e: The selected token must be yours; ask the GM for other swaps.",
+      "CloneScene": "JJK 5e: Clone: place the caster on the scene and use an account that can create tokens.",
+      "CloneLimit": "JJK 5e: Clone: proficiency limit reached.",
+      "VowBlocksRegain": "JJK 5e: A vow penalty prohibits CE recovery.",
+      "NoHitDice": "JJK 5e: No usable Hit Dice or no Cursed Energy pool.",
+      "HitDiceIncomplete": "JJK 5e: Hit Dice allocation incomplete; the GM should review it.",
+      "MaxOutputScore": "JJK 5e: Maximum Output requires a Cursed Energy score of 20.",
+      "AskGM": "JJK 5e: Ask the GM to perform this action (player requests are off).",
+      "NoAppV2": "JJK 5e: ApplicationV2 is not available.",
+      "EnableModules": "JJK 5e · Enable the combat modules: {list}"
     },
     "Settings": {
       "autoSpendCE": {
@@ -1033,6 +1050,16 @@
       "Allow": "Allow the d100 roll",
       "Allowed": "{name} may roll for the Reverse Cursed Technique (d100, 90+) from the JJK panel.",
       "NoChance": "Only in a near-death moment the GM allows."
+    },
+    "GMRequest": {
+      "Title": "JJK 5e: player request",
+      "From": "Request sent as {user}: {action} for {actor}.",
+      "Verify": "Client identifiers cannot be trusted. Check with the player before approving."
+    },
+    "Automation": {
+      "partial": "partly automated",
+      "manual": "apply by hand",
+      "automated": "automated"
     }
   }
 }

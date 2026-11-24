@@ -23,7 +23,9 @@
  },
  "flags": {
   "jjk5e": {
-   "rev": "bf2764af96"
+   "rev": "30a3412edd",
+   "automationNotes": "Advantage on Religion/Arcana checks about cursed spirits: choose it in the roll dialog.",
+   "automation": "manual"
   }
  },
  "folder": "cUxhy4eiPJek1pHp",

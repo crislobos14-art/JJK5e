@@ -44,7 +44,9 @@
  },
  "flags": {
   "jjk5e": {
-   "rev": "b2f2d6ecfa"
+   "rev": "e5dbbc7886",
+   "automationNotes": "Set the armor's DEX cap to 3 on the armor item.",
+   "automation": "manual"
   }
  },
  "folder": "cxPIGjcxqJdZTMQ5",

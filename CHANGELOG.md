@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.69.0 — Auditoría: traducción, automatización y aspecto
+- 17 avisos y diálogos que salían siempre en inglés ahora están traducidos (votos, clon, intercambio de tokens, dados de golpe, Salida máxima, petición al GM, cambio de técnica).
+- 15 dotes que no tenían nada automatizado ahora lo están, total o parcialmente: Observer, Cutting Edge, Dull Pain, Long Lasting Medicine, Spiderweb, Perfect Ritual, Maximum: Sakuga, Slasher, Crusher, Tool Versatility, Blessing of Resilience, Resilient, Reverse Cursed Technique Output, Flow Technique y Boogie Down.
+- Otras 24 dotes y rasgos que dependen del juicio del GM quedan marcados como *manual*, con instrucciones.
+- La hoja de cada objeto JJK muestra si está automatizado, en parte o es manual. Al usar un rasgo parcial o manual llega al usuario un recordatorio privado de lo que debe aplicar a mano.
+- Ventana de reglas opcionales: el control queda a la derecha de cada regla y el desplegable ya no se sale.
+- Percepción del alma de objetos usa ahora la misma maquetación que Percepción del alma.
+
 ## 1.68.1 — Revisión de las reglas opcionales
 - Previsualizar el daño (bandeja de daño del chat o tarjeta de Midi) ya no gasta Recibir el golpe, Choque ni Salvación crítica. Ahora se gastan solo cuando el daño se aplica de verdad, y el aviso sale una vez.
 - Salvaciones críticas: las salvaciones de concentración ya no cuentan. El 1 o el 20 natural también funciona cuando el GM aplica el daño desde otro cliente.

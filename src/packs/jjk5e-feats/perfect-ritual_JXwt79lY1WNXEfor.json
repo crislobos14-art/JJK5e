@@ -37,12 +37,39 @@
    "forTechniques": [
     "Seance"
    ],
-   "automationNotes": "Advantage on concentration for Seance; Ritual takes 3 rounds; Soul Information DC −CE mod.",
-   "automation": "automated",
-   "rev": "1e716bc425"
+   "automationNotes": "Advantage on concentration saves (meant for Seance). Ritual time and DC reduction are applied by hand.",
+   "automation": "partial",
+   "rev": "95cc9b62b4"
   }
  },
  "folder": "Bzl0QdjoRI5R4DB5",
  "sort": 200,
- "_key": "!items!JXwt79lY1WNXEfor"
+ "_key": "!items!JXwt79lY1WNXEfor",
+ "effects": [
+  {
+   "_id": "Wc1cc5SYRphHb9lg",
+   "name": "Perfect Ritual (concentration)",
+   "img": "modules/jjk5e/icons/techniques/seance.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.attributes.concentration.roll.mode",
+     "mode": 2,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!JXwt79lY1WNXEfor.Wc1cc5SYRphHb9lg"
+  }
+ ]
 }

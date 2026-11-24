@@ -37,7 +37,9 @@
    "forTechniques": [
     "Boogie Woogie"
    ],
-   "rev": "fcb4e0e5db"
+   "rev": "67892b1c2c",
+   "automationNotes": "Choose the Best Friend at the start of combat; its benefits are applied by hand.",
+   "automation": "manual"
   }
  },
  "folder": "lYPG7qB66tA5vtjF",

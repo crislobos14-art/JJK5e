@@ -27,7 +27,9 @@
  },
  "flags": {
   "jjk5e": {
-   "rev": "cab275e6cc"
+   "rev": "f390ce932c",
+   "automationNotes": "Choose the damage type; resistance ignored and 1s count as 2 for that type (by hand).",
+   "automation": "manual"
   }
  },
  "folder": "EtgHYidIGv42ylfo",

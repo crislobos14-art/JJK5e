@@ -37,7 +37,9 @@
    "forTechniques": [
     "Construction"
    ],
-   "rev": "7eb83070ba"
+   "rev": "9ffa90d647",
+   "automationNotes": "Sleight of Hand vs passive Perception: advantage on the first use of the creation.",
+   "automation": "manual"
   }
  },
  "folder": "kyQQ2jjaJXT8blxH",

@@ -43,14 +43,134 @@
   "prerequisites": {
    "level": null,
    "repeatable": false
+  },
+  "activities": {
+   "ZIfIXZTAqUmXmR9u": {
+    "_id": "ZIfIXZTAqUmXmR9u",
+    "type": "utility",
+    "name": "Crusher: move the target 5 ft (once per turn, bludgeoning hit)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": []
+   },
+   "0BGLCIBF63VcgeYT": {
+    "_id": "0BGLCIBF63VcgeYT",
+    "type": "utility",
+    "name": "Crusher: critical — attacks against it have advantage",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "3MKZaZIb3NBvY059",
+      "onSave": false
+     }
+    ]
+   }
   }
  },
  "flags": {
   "jjk5e": {
-   "rev": "22c3ffda75"
+   "rev": "2e8a06b298",
+   "automation": "automated"
   }
  },
  "folder": "cxPIGjcxqJdZTMQ5",
  "sort": 600,
- "_key": "!items!ShRWUp25PJhy0fZx"
+ "_key": "!items!ShRWUp25PJhy0fZx",
+ "effects": [
+  {
+   "_id": "3MKZaZIb3NBvY059",
+   "name": "Crushed (attacks have advantage)",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.grants.advantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStartSource"
+     ]
+    }
+   },
+   "_key": "!items.effects!ShRWUp25PJhy0fZx.3MKZaZIb3NBvY059"
+  }
+ ]
 }

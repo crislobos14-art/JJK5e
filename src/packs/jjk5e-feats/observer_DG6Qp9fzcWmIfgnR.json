@@ -47,10 +47,44 @@
  },
  "flags": {
   "jjk5e": {
-   "rev": "d229ebfb3d"
+   "rev": "40de7492af",
+   "automation": "automated"
   }
  },
  "folder": "EtgHYidIGv42ylfo",
  "sort": 1200,
- "_key": "!items!DG6Qp9fzcWmIfgnR"
+ "_key": "!items!DG6Qp9fzcWmIfgnR",
+ "effects": [
+  {
+   "_id": "Gw1XGczXFcPFkHOf",
+   "name": "Observer",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.skills.prc.bonuses.passive",
+     "mode": 2,
+     "value": "5",
+     "priority": 20
+    },
+    {
+     "key": "system.skills.inv.bonuses.passive",
+     "mode": 2,
+     "value": "5",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!DG6Qp9fzcWmIfgnR.Gw1XGczXFcPFkHOf"
+  }
+ ]
 }

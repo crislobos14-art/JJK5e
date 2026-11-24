@@ -37,7 +37,9 @@
    "forTechniques": [
     "Cursed Transmutation"
    ],
-   "rev": "ac5be57d79"
+   "rev": "ff11474451",
+   "automationNotes": "Transmuted objects: AC + proficiency, HP per cube 15/20/30/45/60 by level.",
+   "automation": "manual"
   }
  },
  "folder": "duKUqjyWPQ4gLCYh",

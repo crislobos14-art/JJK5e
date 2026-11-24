@@ -23,7 +23,9 @@
  },
  "flags": {
   "jjk5e": {
-   "rev": "a1d9ee85cf"
+   "rev": "04c9341799",
+   "automationNotes": "Exhaustion thresholds are doubled: track by hand.",
+   "automation": "manual"
   }
  },
  "folder": "hWqAX9TqrOvuq1FE",

@@ -37,9 +37,9 @@
    "forTechniques": [
     "Star Dictator"
    ],
-   "automationNotes": "Fail the pseudo-domain save by 5+: the damage removes an arm or leg (Limb table).",
-   "automation": "automated",
-   "rev": "9566c7415f"
+   "automationNotes": "Failing the pseudo-domain save by 5+: roll on the Limb Damage table (JJK panel).",
+   "automation": "manual",
+   "rev": "f6eafc0e34"
   }
  },
  "folder": "bGKgrFplZpNnclwX",

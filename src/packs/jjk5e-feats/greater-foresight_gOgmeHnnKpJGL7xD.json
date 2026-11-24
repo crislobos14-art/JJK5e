@@ -37,7 +37,9 @@
    "forTechniques": [
     "G Warstaff"
    ],
-   "rev": "adf433cca7"
+   "rev": "77479bcf3e",
+   "automationNotes": "Technique advantage: roll 3d20 keep highest (use 3d20kh in the roll).",
+   "automation": "manual"
   }
  },
  "folder": "hKb2rJntQlJugE10",

@@ -23,6 +23,69 @@
   "prerequisites": {
    "level": null,
    "repeatable": false
+  },
+  "activities": {
+   "57bREGK9GUPPD9x7": {
+    "_id": "57bREGK9GUPPD9x7",
+    "type": "save",
+    "name": "Spiderweb (Cleave +1 CE): 30-ft cone, DEX save or prone",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "cone",
+      "size": "30",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "br6DA1t2SFtYifua",
+      "onSave": false
+     }
+    ],
+    "save": {
+     "ability": [
+      "dex"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": []
+    }
+   }
   }
  },
  "flags": {
@@ -39,10 +102,37 @@
    ],
    "automationNotes": "+1 CE: Cleave as a 30-ft cone vs objects/structures (critical); creatures DEX or prone.",
    "automation": "automated",
-   "rev": "7128589d00"
+   "rev": "fed1044c77",
+   "ceCosts": {
+    "57bREGK9GUPPD9x7": 1
+   }
   }
  },
  "folder": "2XiAKaCJUnpH62hA",
  "sort": 200,
- "_key": "!items!9kvROP4o9wm6KFr7"
+ "_key": "!items!9kvROP4o9wm6KFr7",
+ "effects": [
+  {
+   "_id": "br6DA1t2SFtYifua",
+   "name": "Prone (Spiderweb)",
+   "img": "modules/jjk5e/icons/techniques/shrine.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [
+    "prone"
+   ],
+   "description": "",
+   "changes": [],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!9kvROP4o9wm6KFr7.br6DA1t2SFtYifua"
+  }
+ ]
 }

@@ -23,7 +23,9 @@
  },
  "flags": {
   "jjk5e": {
-   "rev": "f4ef7193bf"
+   "rev": "33497b7c31",
+   "automationNotes": "Advantage on saves against form-changing effects: choose advantage in the save dialog.",
+   "automation": "partial"
   }
  },
  "folder": "A3CBV9dvsdKk3l4V",

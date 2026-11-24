@@ -27,9 +27,9 @@
  },
  "flags": {
   "jjk5e": {
-   "automationNotes": "While mounted: advantage vs smaller unmounted foes; redirect attacks; mount evasion. Apply by hand.",
-   "automation": "automated",
-   "rev": "3ab90ff199"
+   "automationNotes": "Mounted: advantage against smaller unmounted creatures (choose it in the roll dialog).",
+   "automation": "manual",
+   "rev": "d6d6c1a6ce"
   }
  },
  "folder": "EtgHYidIGv42ylfo",

@@ -7909,6 +7909,134 @@ def optional_rules(S):
         if m: e.setdefault("flags", {}).setdefault("jjk5e", {})["amberStage"] = int(m.group(1))
 
 
+# ---------------------------------------------------------------- v1.69: review — unautomated feats
+
+def review_fixes(S):
+    F, CF, R = "jjk5e-feats", "jjk5e-class-features", "jjk5e-races"
+    def G(name, pack=F): return S.get(name, pack)
+    # Observer: +5 passive Perception and Investigation.
+    it = G("Observer"); _passive(it, "passive", "Observer", [("system.skills.prc.bonuses.passive", 2, "5"), ("system.skills.inv.bonuses.passive", 2, "5")]); mark(it)
+    # Cutting Edge: claws crit range +1 / +2 / +3 (11th / 18th).
+    it = G("Cutting Edge")
+    eid = _passive(it, "crit", "Cutting Edge (critical range)", [("flags.dnd5e.weaponCriticalThreshold", 5, "19")])
+    for e in it["effects"]:
+        if e["_id"] == eid: e.setdefault("flags", {}).setdefault("jjk5e", {})["levelTable"] = {"class": "*", "table": [[1, 19], [11, 18], [18, 17]]}
+    note(it, "The critical range applies to weapon attacks (use it with your Claws). Reroll 1s and 2s on the claw damage by hand."); mark(it, "partial")
+    # Dull Pain: temporary HP = 5 × proficiency on a Pain Killer target.
+    it = G("Dull Pain")
+    act(it, "thp", "heal", "Dull Pain: 5 × proficiency temporary HP", "special", range={"units": "touch", "override": True}, target=one_creature(),
+        healing={"number": None, "denomination": None, "bonus": "5 * @prof", "types": ["temphp"], "custom": {"enabled": False, "formula": ""}, "scaling": {}})
+    mark(it)
+    # Long Lasting Medicine: Pain Killer lasts 24 hours and stabilizes.
+    it = G("Long Lasting Medicine")
+    a = act(it, "buff", "utility", "Long Lasting Pain Killer (24 h)", "special", range={"units": "touch", "override": True}, target=one_creature())
+    apply(a, fx(it, "ll", "Long Lasting Pain Killer", rounds=None, desc="Pain Killer lasts 24 hours; the creature is stabilized at 0 hit points."))
+    for e in it["effects"]: e["duration"] = {"seconds": 86400}
+    mark(it)
+    # Spiderweb: +1 CE Cleave cone that knocks creatures prone (DEX save).
+    it = G("Spiderweb")
+    a = act(it, "web", "save", "Spiderweb (Cleave +1 CE): 30-ft cone, DEX save or prone", "action", range=RANGE_SELF,
+            target={"template": {"type": "cone", "size": "30", "units": "ft", "count": "1", "contiguous": False}, "affects": {"type": "creature"}, "override": True},
+            save={"ability": ["dex"], "dc": {"calculation": "spellcasting", "formula": ""}}, damage={"onSave": "none", "parts": []})
+    apply(a, fx(it, "prone", "Prone (Spiderweb)", statuses=["prone"], rounds=None))
+    cost(it, a, 1); mark(it)
+    # Perfect Ritual: advantage on concentration saves (Seance).
+    it = G("Perfect Ritual"); _passive(it, "conc", "Perfect Ritual (concentration)", [("system.attributes.concentration.roll.mode", 2, "1")])
+    note(it, "Advantage on concentration saves (meant for Seance). Ritual time and DC reduction are applied by hand."); mark(it, "partial")
+    # Maximum: Sakuga: +1 CE per round — doubled speed, DEX save advantage, +2 DEX.
+    it = G("Maximum: Sakuga")
+    a = act(it, "sakuga", "utility", "Maximum: Sakuga (+1 CE per round)", "special", range=RANGE_SELF, target=SELF)
+    apply(a, fx(it, "on", "Maximum: Sakuga", rounds=1, changes=[("system.attributes.movement.walk", 1, "2"),
+          ("system.abilities.dex.save.roll.mode", 2, "1"), ("system.abilities.dex.value", 2, "2")],
+          desc="Speed doubled, advantage on DEX saves, +2 DEX, one extra Attack action (one weapon attack)."))
+    cost(it, a, 1); mark(it)
+    # Slasher / Crusher on-hit riders.
+    it = G("Slasher")
+    a = act(it, "slow", "utility", "Slasher: −10 ft speed (once per turn, slashing hit)", "special", range=_r(5), target=one_creature())
+    apply(a, fx(it, "slow", "Slashed (−10 ft)", rounds=1, changes=[("system.attributes.movement.walk", 2, "-10")], special=["turnStartSource"]))
+    a = act(it, "crit", "utility", "Slasher: grievous wound (critical)", "special", range=_r(5), target=one_creature())
+    apply(a, fx(it, "wound", "Grievous wound", rounds=1, changes=[("flags.midi-qol.disadvantage.attack.all", 0, "1")], special=["turnStartSource"]))
+    mark(it)
+    it = G("Crusher")
+    act(it, "push", "utility", "Crusher: move the target 5 ft (once per turn, bludgeoning hit)", "special", range=_r(5), target=one_creature())
+    a = act(it, "crit", "utility", "Crusher: critical — attacks against it have advantage", "special", range=_r(5), target=one_creature())
+    apply(a, fx(it, "exposed", "Crushed (attacks have advantage)", rounds=1, changes=[("flags.midi-qol.grants.advantage.attack.all", 0, "1")], special=["turnStartSource"]))
+    mark(it)
+    # Tool Versatility: +1/+2/+3 to the Gavel's attack and damage.
+    it = G("Tool Versatility")
+    act(it, "bonus", "utility", "Gavel bonus (+1 / +2 at 6th / +3 at 11th)", "special", range=RANGE_SELF, target=SELF)
+    note(it, "Add the bonus to the Judge's Gavel weapon (not the Executioner's Sword): set it once in the weapon's magical bonus."); mark(it, "partial")
+    # Blessing of Resilience: allies in the Zone gain CE mod temporary HP at the start of their turns.
+    it = G("Blessing of Resilience")
+    a = act(it, "thp", "heal", "Blessing of Resilience: CE mod temporary HP (start of turn)", "special", range=_r(30), target=one_creature(),
+            healing={"number": None, "denomination": None, "bonus": CE, "types": ["temphp"], "custom": {"enabled": False, "formula": ""}, "scaling": {}})
+    mark(it)
+    # This Body Is Mine: advantage on saves against form-altering effects (Midi optional).
+    it = G("This Body Is Mine", R); note(it, "Advantage on saves against form-changing effects: choose advantage in the save dialog."); mark(it, "partial")
+    for name, pack, txt in [
+        ("Density Manipulation", F, "Stone cubes: 10 × CE mod HP; other stone constructs +10 HP (edit the summoned token)."),
+        ("Bulk Buyer", F, "Two or more receipts: −1 CE per receipt each (min 1); same type: advantage for 1 minute."),
+        ("Judicial Amputation", F, "Failing the pseudo-domain save by 5+: roll on the Limb Damage table (JJK panel)."),
+        ("Cursed Tactician", F, "Spend up to proficiency CE (panel) for extra Corpse Tactics options."),
+        ("Domineering Shikigami", F, "Use the shikigami customizer (JJK menu) to raise Bite and DEX."),
+        ("Blessing of the Hydra", F, "After Eight Lives: add the chosen resistance or condition immunity for 1 hour."),
+        ("Gourmand", F, "Regurgitation: gain temp HP = half the devoured creature's HP (max half your HP)."),
+        ("True New Shadow Style", F, "The Simple Domain gets +2 × CE mod HP."),
+        ("Spatial Skirmishing", F, "Unarmed strike + Lapse Blue: use Lapse Blue on hit; CE mod for the attack."),
+        ("Mounted Combatant", F, "Mounted: advantage against smaller unmounted creatures (choose it in the roll dialog)."),
+        ("Skulker", F, "Hiding and dim light rules are applied by the GM."),
+        ("Medium Armor Master", F, "Set the armor's DEX cap to 3 on the armor item."),
+        ("Heavenly Pact: Limited Physical Potential", F, "Apply the pact's limits as described; the ability changes are made by hand."),
+        ("Demigod's Figure", CF, "Exhaustion thresholds are doubled: track by hand."),
+        ("Worshipper of Kalyan", R, "Advantage on Religion/Arcana checks about cursed spirits: choose it in the roll dialog.")]:
+        it = G(name, pack); note(it, txt); mark(it, "manual")
+
+    # Reverse Cursed Technique Output: spend CE to add healing-pool HP as radiant damage (10 per CE).
+    it = G("Reverse Cursed Technique Output")
+    a = act(it, "rad", "damage", "RCT Output (1+ CE): 10 radiant per CE (Monstrosity / Undead / Cursed Spirit)", "special", range=_r(5), target=one_creature(),
+            damage={"parts": [{"number": None, "denomination": None, "bonus": "10", "types": ["radiant"], "custom": {"enabled": False, "formula": ""},
+                               "scaling": {"mode": "whole", "formula": "10"}}]})
+    cost(it, a, 1, 1, f"max(1, {CE})")
+    note(it, "Also remove the same HP from your RCT healing pool."); mark(it, "partial")
+    # Flow Technique: reaction — reduce the hit by 2 × proficiency, next damage + proficiency.
+    it = G("Flow Technique")
+    a = act(it, "flow", "utility", "Flow (reaction): −2 × prof damage, + prof to your next damage", "reaction", range=RANGE_SELF, target=SELF)
+    apply(a, fx(it, "dr", "Flow: damage reduction", rounds=1, changes=[("flags.midi-qol.DR.all", 2, "2 * @prof")], special=["isDamaged"]),
+          fx(it, "dmg", "Flow: residual damage", rounds=1, changes=[(f"system.bonuses.{k}.damage", 2, "@prof") for k in ("mwak", "rwak", "msak", "rsak")],
+             special=["1Hit"]))
+    mark(it)
+    # Boogie Down: the next attack against you has disadvantage.
+    it = G("Boogie Down")
+    a = act(it, "dis", "utility", "Boogie Down: next attack against you has disadvantage", "special", range=RANGE_SELF, target=SELF)
+    apply(a, fx(it, "dis", "Boogie Down", rounds=1, changes=[("flags.midi-qol.grants.disadvantage.attack.all", 0, "1")], special=["isAttacked"]))
+    note(it, "The two extra Boogie-only reactions are tracked by hand."); mark(it, "partial")
+    for name, txt in [("Enduring Shikigami", "Fox shikigami last until 0 HP and add your proficiency to their saves (edit the summon)."),
+                      ("Greater Foresight", "Technique advantage: roll 3d20 keep highest (use 3d20kh in the roll)."),
+                      ("Maximum: Best Friend", "Choose the Best Friend at the start of combat; its benefits are applied by hand."),
+                      ("Blackened Blood", "Failing your technique's CON save by 5+: +1 exhaustion (max 3 from this feat)."),
+                      ("Amplified Transmute", "Transmuted objects: AC + proficiency, HP per cube 15/20/30/45/60 by level."),
+                      ("Subtle Constructs", "Sleight of Hand vs passive Perception: advantage on the first use of the creation."),
+                      ("Flash Regress", "Regression: no opportunity attacks; spend up to proficiency CE for +1 DC per CE."),
+                      ("Elemental Adept", "Choose the damage type; resistance ignored and 1s count as 2 for that type (by hand).")]:
+        it = G(name); note(it, txt); mark(it, "manual")
+
+    for name in ("Resilient",):
+        it = G(name)
+        adv = it["system"].setdefault("advancement", [])
+        advs = adv if isinstance(adv, list) else list(adv.values())
+        if not any(a["type"] == "Trait" for a in advs):
+            t = {"_id": sid(it["_id"], "adv", "saves"), "type": "Trait", "level": 0, "title": "Saving Throw Proficiency", "value": {},
+                 "configuration": {"mode": "default", "allowReplacements": False, "grants": [], "choices": [{"count": 1, "pool": ["saves:*"]}]}}
+            if isinstance(adv, list): adv.append(t)
+            else: adv[t["_id"]] = t
+        if not any(a["type"] == "AbilityScoreImprovement" for a in advs):
+            a = {"_id": sid(it["_id"], "adv", "asi"), "type": "AbilityScoreImprovement", "level": 0, "title": "Ability Score Increase", "value": {},
+                 "configuration": {"points": 1, "cap": 1, "fixed": {}, "locked": []}}
+            if isinstance(adv, list): adv.append(a)
+            else: adv[a["_id"]] = a
+        mark(it)
+
+
 TECHNIQUES = {"Antigravity System": antigravity_system,
               "Auspicious Beast Summon": auspicious_beast_summon,
               "Black Bird Manipulation": black_bird_manipulation,
@@ -7998,7 +8126,8 @@ TECHNIQUES = {"Antigravity System": antigravity_system,
               "_rules": rules_fixes,
               "_featreview": feat_review2,
               "_backlog": backlog_fixes,
-              "_optional": optional_rules}
+              "_optional": optional_rules,
+              "_review": review_fixes}
 
 
 if __name__ == "__main__":

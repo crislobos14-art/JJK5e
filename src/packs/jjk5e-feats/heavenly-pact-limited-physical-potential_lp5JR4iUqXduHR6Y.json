@@ -27,7 +27,9 @@
  },
  "flags": {
   "jjk5e": {
-   "rev": "519665225b"
+   "rev": "00d130012c",
+   "automationNotes": "Apply the pact's limits as described; the ability changes are made by hand.",
+   "automation": "manual"
   }
  },
  "folder": "TuD75Es2qNSvVZN6",

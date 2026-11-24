@@ -37,9 +37,9 @@
    "forTechniques": [
     "Rot"
    ],
-   "automationNotes": "Fail your technique's CON save by 5+: 1 exhaustion (max 3 from this).",
-   "automation": "automated",
-   "rev": "59db2a718b"
+   "automationNotes": "Failing your technique's CON save by 5+: +1 exhaustion (max 3 from this feat).",
+   "automation": "manual",
+   "rev": "fd140487b4"
   }
  },
  "folder": "gN0JGJzsnMHTyd5r",

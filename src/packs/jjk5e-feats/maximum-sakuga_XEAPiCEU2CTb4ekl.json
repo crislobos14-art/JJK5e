@@ -23,6 +23,49 @@
   "prerequisites": {
    "level": null,
    "repeatable": false
+  },
+  "activities": {
+   "ymi1j769rIzrRHoe": {
+    "_id": "ymi1j769rIzrRHoe",
+    "type": "utility",
+    "name": "Maximum: Sakuga (+1 CE per round)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "E6SvKcNVTHLuzBoB",
+      "onSave": false
+     }
+    ]
+   }
   }
  },
  "flags": {
@@ -37,10 +80,55 @@
    "forTechniques": [
     "Projection Sorcery"
    ],
-   "rev": "e88dbbf860"
+   "rev": "7193f70c8f",
+   "ceCosts": {
+    "ymi1j769rIzrRHoe": 1
+   },
+   "automation": "automated"
   }
  },
  "folder": "CFoGNkravs7kgdkV",
  "sort": 300,
- "_key": "!items!XEAPiCEU2CTb4ekl"
+ "_key": "!items!XEAPiCEU2CTb4ekl",
+ "effects": [
+  {
+   "_id": "E6SvKcNVTHLuzBoB",
+   "name": "Maximum: Sakuga",
+   "img": "modules/jjk5e/icons/techniques/projection-sorcery.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Speed doubled, advantage on DEX saves, +2 DEX, one extra Attack action (one weapon attack).</p>",
+   "changes": [
+    {
+     "key": "system.attributes.movement.walk",
+     "mode": 1,
+     "value": "2",
+     "priority": 20
+    },
+    {
+     "key": "system.abilities.dex.save.roll.mode",
+     "mode": 2,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "system.abilities.dex.value",
+     "mode": 2,
+     "value": "2",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!XEAPiCEU2CTb4ekl.E6SvKcNVTHLuzBoB"
+  }
+ ]
 }

@@ -37,9 +37,9 @@
    "forTechniques": [
     "Starlight Symphony"
    ],
-   "automationNotes": "Fox shikigami (not Inari) last until 0 HP and add your prof to their saves.",
-   "automation": "automated",
-   "rev": "d04427e0bb"
+   "automationNotes": "Fox shikigami last until 0 HP and add your proficiency to their saves (edit the summon).",
+   "automation": "manual",
+   "rev": "0e1ee96c81"
   }
  },
  "folder": "W3c86qCvNyFi2g3Q",

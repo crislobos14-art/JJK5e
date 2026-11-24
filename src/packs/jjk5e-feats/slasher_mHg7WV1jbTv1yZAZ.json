@@ -43,14 +43,171 @@
   "prerequisites": {
    "level": null,
    "repeatable": false
+  },
+  "activities": {
+   "DNKYEefgorqt0CC3": {
+    "_id": "DNKYEefgorqt0CC3",
+    "type": "utility",
+    "name": "Slasher: −10 ft speed (once per turn, slashing hit)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "Ia6OvzBi7ZvRJ3bO",
+      "onSave": false
+     }
+    ]
+   },
+   "bfU5FLUHbocxbCdP": {
+    "_id": "bfU5FLUHbocxbCdP",
+    "type": "utility",
+    "name": "Slasher: grievous wound (critical)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "pUPgdbrwfmcI1bOs",
+      "onSave": false
+     }
+    ]
+   }
   }
  },
  "flags": {
   "jjk5e": {
-   "rev": "06149d8cda"
+   "rev": "b2c2af01d1",
+   "automation": "automated"
   }
  },
  "folder": "cxPIGjcxqJdZTMQ5",
  "sort": 2100,
- "_key": "!items!mHg7WV1jbTv1yZAZ"
+ "_key": "!items!mHg7WV1jbTv1yZAZ",
+ "effects": [
+  {
+   "_id": "Ia6OvzBi7ZvRJ3bO",
+   "name": "Slashed (−10 ft)",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.attributes.movement.walk",
+     "mode": 2,
+     "value": "-10",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStartSource"
+     ]
+    }
+   },
+   "_key": "!items.effects!mHg7WV1jbTv1yZAZ.Ia6OvzBi7ZvRJ3bO"
+  },
+  {
+   "_id": "pUPgdbrwfmcI1bOs",
+   "name": "Grievous wound",
+   "img": "modules/jjk5e/icons/feat.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.disadvantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStartSource"
+     ]
+    }
+   },
+   "_key": "!items.effects!mHg7WV1jbTv1yZAZ.pUPgdbrwfmcI1bOs"
+  }
+ ]
 }

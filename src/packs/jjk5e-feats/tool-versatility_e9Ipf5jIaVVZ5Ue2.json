@@ -23,6 +23,44 @@
   "prerequisites": {
    "level": null,
    "repeatable": false
+  },
+  "activities": {
+   "JPKN1V5W9Cc58kcV": {
+    "_id": "JPKN1V5W9Cc58kcV",
+    "type": "utility",
+    "name": "Gavel bonus (+1 / +2 at 6th / +3 at 11th)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
+   }
   }
  },
  "flags": {
@@ -37,7 +75,9 @@
    "forTechniques": [
     "Deadly Sentencing"
    ],
-   "rev": "3d64ef177e"
+   "rev": "ccbcec2265",
+   "automationNotes": "Add the bonus to the Judge's Gavel weapon (not the Executioner's Sword): set it once in the weapon's magical bonus.",
+   "automation": "partial"
   }
  },
  "folder": "cq0B0G5hxGuaBi5H",

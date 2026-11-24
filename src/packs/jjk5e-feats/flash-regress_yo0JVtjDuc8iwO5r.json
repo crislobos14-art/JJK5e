@@ -37,9 +37,9 @@
    "forTechniques": [
     "Retrograde"
    ],
-   "automationNotes": "Regression: no OAs; up to prof CE, +1 DC/check per extra CE.",
-   "automation": "automated",
-   "rev": "fe4d37e673"
+   "automationNotes": "Regression: no opportunity attacks; spend up to proficiency CE for +1 DC per CE.",
+   "automation": "manual",
+   "rev": "7df9c6e86c"
   }
  },
  "folder": "xdlt8ITade4Eg7u9",

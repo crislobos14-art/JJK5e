@@ -23,6 +23,67 @@
   "prerequisites": {
    "level": null,
    "repeatable": false
+  },
+  "activities": {
+   "MXBNujw1pfWIe1iH": {
+    "_id": "MXBNujw1pfWIe1iH",
+    "type": "damage",
+    "name": "RCT Output (1+ CE): 10 radiant per CE (Monstrosity / Undead / Cursed Spirit)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "max(1, max(@abilities.wis.mod, @abilities.cha.mod))"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "damage": {
+     "parts": [
+      {
+       "number": null,
+       "denomination": null,
+       "bonus": "10",
+       "types": [
+        "radiant"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "mode": "whole",
+        "formula": "10"
+       }
+      }
+     ]
+    }
+   }
   }
  },
  "flags": {
@@ -34,7 +95,15 @@
      ]
     ]
    },
-   "rev": "e1ffead31c"
+   "rev": "eed29ad3e9",
+   "ceCosts": {
+    "MXBNujw1pfWIe1iH": 1
+   },
+   "ceSteps": {
+    "MXBNujw1pfWIe1iH": 1
+   },
+   "automationNotes": "Also remove the same HP from your RCT healing pool.",
+   "automation": "partial"
   }
  },
  "folder": "r4NXrJGBzO6U71JG",

@@ -37,9 +37,9 @@
    "forTechniques": [
     "Limitless"
    ],
-   "automationNotes": "Unarmed strike + Lapse Blue/Reversal Red damage and effect; advantage with Blue.",
-   "automation": "automated",
-   "rev": "aaf8a6c4fb"
+   "automationNotes": "Unarmed strike + Lapse Blue: use Lapse Blue on hit; CE mod for the attack.",
+   "automation": "manual",
+   "rev": "c8a3f78740"
   }
  },
  "folder": "MYCXBgSVkzwVdmJj",
