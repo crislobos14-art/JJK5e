@@ -4586,20 +4586,37 @@ async function detectClash(actor) {
   if (!equal && rounds === 0) await closeDomainOf(lose, t("Domain.ClashLost", { name: esc(lose.name) }));
 }
 
-/** GM: each new round, losing domains shrink 15 ft and lose a round; at 0 they break. */
-async function tickClashes() {
-  if (!isActiveGM()) return;
-  const losers = [...(game.actors?.contents ?? []), ...(canvas?.tokens?.placeables ?? []).map((tk) => tk.actor)]
-    .filter((a, i, arr) => a && arr.indexOf(a) === i && getDomain(a)?.clash?.role === "loser" && !getDomain(a).clash.resolved);
-  for (const a of losers) {
-    const s = getDomain(a);
-    s.clash.rounds = Math.max(0, (s.clash.rounds ?? 0) - 1);
-    s.radius = Math.max(15, s.radius - 15);
-    await setDomain(a, s);
-    if (s.zone) await GM_EXTRA.domainZoneResize({ sceneId: s.sceneId, zone: s.zone, x: s.x, y: s.y, radius: s.radius });
-    if (s.clash.rounds <= 0) await closeDomainOf(a, t("Domain.ClashLost", { name: esc(a.name) }));
-    else await chat(a, `<p><i class="fas fa-compress"></i> ${t("Domain.ClashShrink", { name: esc(a.name), r: s.radius, rounds: s.clash.rounds })}</p>`);
-  }
+/** GM: each new round, losing domains shrink 15 ft and lose a round; at 0 they break.
+ * Scope ticks to the combat that changed, and persist the last processed round. */
+const CLASH_TICK_QUEUES = new Map();
+async function tickClashes(combat = game.combat) {
+  if (!isActiveGM() || !combat?.id) return;
+  const sceneId = combat.scene?.id ?? (typeof combat.scene === "string" ? combat.scene : combat.sceneId);
+  const round = Number(combat.round);
+  if (!sceneId || !Number.isInteger(round) || round < 1) return;
+  const key = combat.id;
+  const participants = [...new Map([...(combat.combatants ?? [])].map((c) => c.actor)
+    .filter((a) => a?.uuid).map((a) => [a.uuid, a])).values()];
+  const previous = CLASH_TICK_QUEUES.get(key) ?? Promise.resolve();
+  const next = previous.catch(() => {}).then(async () => {
+    if (!isActiveGM()) return;
+    for (const a of participants) {
+      const s = getDomain(a);
+      if (!s?.open || s.sceneId !== sceneId || s.clash?.role !== "loser" || s.clash.resolved) continue;
+      const last = s.clash.lastTick;
+      if (last?.combatId === key && round <= last.round) continue;
+      s.clash.lastTick = { combatId: key, round };
+      s.clash.rounds = Math.max(0, (s.clash.rounds ?? 0) - 1);
+      s.radius = Math.max(15, s.radius - 15);
+      await setDomain(a, s);
+      if (s.zone) await GM_EXTRA.domainZoneResize({ sceneId: s.sceneId, zone: s.zone, x: s.x, y: s.y, radius: s.radius });
+      if (s.clash.rounds <= 0) await closeDomainOf(a, t("Domain.ClashLost", { name: esc(a.name) }));
+      else await chat(a, `<p><i class="fas fa-compress"></i> ${t("Domain.ClashShrink", { name: esc(a.name), r: s.radius, rounds: s.clash.rounds })}</p>`);
+    }
+  });
+  CLASH_TICK_QUEUES.set(key, next);
+  try { await next; }
+  finally { if (CLASH_TICK_QUEUES.get(key) === next) CLASH_TICK_QUEUES.delete(key); }
 }
 
 /** Barrierless Domain: 1/3 of max HP in one instance → CON save DC 15 + half the damage or the domain is destroyed. */
@@ -4956,7 +4973,9 @@ Hooks.once("ready", () => {
     if (userId !== game.user.id || !(effect.flags?.jjk5e?.domainOpen || effect.flags?.jjk5e?.kind === "domain")) return;
     if (effect.parent?.documentName === "Actor") domainClosed(effect.parent);
   });
-  Hooks.on("updateCombat", (combat, changes) => { if ("round" in (changes ?? {})) tickClashes(); });
+  Hooks.on("updateCombat", (combat, changes) => {
+    if ("round" in (changes ?? {})) tickClashes(combat).catch((err) => reportError("clash tick", err));
+  });
   // A player opened a domain: the active GM checks it for a clash with the other open domains.
   Hooks.on("updateActor", (actor, changes, options, userId) => {
     if (!isActiveGM() || userId === game.user.id) return;
