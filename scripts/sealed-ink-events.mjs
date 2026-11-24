@@ -27,7 +27,7 @@ function button(label, fn) {
 function snapshot(actor) {
   const pool = api()?.findPool?.(actor);
   const hp = actor.system?.attributes?.hp;
-  const effects = [...(actor.effects ?? [])].filter(e => !e.disabled && !e.isSuppressed);
+  const effects = [...(actor.effects ?? [])].filter(e => !e.disabled && !e.isSuppressed && e.duration?.expired !== true && (e.duration?.remaining == null || e.duration.remaining > 0));
   const kind = k => effects.filter(e => e.flags?.jjk5e?.kind === k || e.flags?.jjk5e?.[k]);
   return {
     hp: Number(hp?.value ?? 0), hpMax: Number(hp?.max ?? 0),
@@ -167,6 +167,11 @@ function drawHUD(body) {
   for (const a of list) { const o = el("option","",a.name); o.value = a.uuid; o.selected = a.uuid === actor.uuid; select.append(o); }
   select.addEventListener("change",() => { selectedUuid = select.value; drawPanel(); });
   body.append(select,actorCard(actor));
+  const tokens = [actor.token, ...((actor.getActiveTokens?.() ?? []).map(t=>t.document))].filter(Boolean);
+  if (actor.flags?.dnd5e?.summon?.origin || tokens.some(t=>t.flags?.jjk5e?.summonedBy || t.flags?.dnd5e?.summon?.origin)) {
+    body.append(el("p","",L("Linked summon: use the original sheet and resolve summoner commands before executing attacks.","Invocación vinculada: utiliza la ficha original y resuelve las órdenes del invocador antes de atacar.")));
+    return;
+  }
   const rows = el("div","jjk-sealed-hud-activities");
   const activities = [...actor.items].flatMap(item => [...(item.system?.activities ?? [])].filter(a => typeof a.use === "function").map(a => ({item,a})));
   const search = el("input"); search.type = "search"; search.placeholder = L("Find activity","Buscar actividad"); search.setAttribute("aria-label",search.placeholder);
