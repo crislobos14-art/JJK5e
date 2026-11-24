@@ -578,3 +578,113 @@ test("Domain reaction decisions for NPCs go only to the active GM", async () => 
   env.game.users.set("gm2", { id: "gm2", isGM: true, active: true });
   assert.deepEqual([...J.deciders(actor)], ["gm"]);
 });
+
+test("Domain authority: only authenticated owners can request an opening-specific mode change", async () => {
+  const { env, actor, J } = await setup();
+  await actor.setFlag("jjk5e", "refinement", 100);
+  await J.domainOpened(actor); await env.settle();
+  const openingId = J.getDomain(actor).openingId;
+  const request = { operation: "mode", payload: { actorUuid: actor.uuid, openingId, mode: "flip", requestedBy: "gm" } };
+  const outsider = { id: "outsider", active: true, isGM: false };
+  const owner = { id: "owner", active: true, isGM: false };
+  actor.testUserPermission = (user, perm) => user.id === owner.id && perm === "OWNER";
+  assert.equal(await J.handleDomainAuthority(request), false);
+  assert.equal(await J.handleDomainAuthority(request, { user: outsider }), false);
+  assert.equal(await J.handleDomainAuthority({ ...request, payload: { ...request.payload, openingId: "stale" } }, { user: owner }), false);
+  assert.equal(await J.handleDomainAuthority(request, { user: owner }), true);
+  assert.equal(J.getDomain(actor).flipped, true);
+  env.game.user.isGM = false;
+  assert.equal(await J.setDomain(actor, { open: false }), false);
+});
+
+test("Domain geometry: different levels cannot receive sure-hit or attack the barrier", async () => {
+  const { env, J } = await setup();
+  const scene = { id: "S", grid: { size: 100, distance: 5 } };
+  env.game.scenes.set(scene.id, scene);
+  const state = { open: true, sceneId: "S", levelId: "L1", x: 0, y: 0, radius: 10 };
+  const token = { parent: scene, level: "L1", x: 150, y: -50, width: 1, height: 1 };
+  assert.equal(J.insideDomain(state, token), true);
+  const boundary = J.barrierAttackGeometry(state, token);
+  assert.equal(boundary.side, "inside");
+  assert.equal(boundary.distance, 0);
+  const outside = J.barrierAttackGeometry(state, { ...token, x: 250 });
+  assert.equal(outside.side, "outside");
+  assert.equal(outside.distance, 5);
+  assert.equal(J.insideDomain(state, { ...token, level: "L2" }), false);
+  assert.equal(J.barrierAttackGeometry(state, { ...token, level: "L2" }), null);
+  assert.equal(J.barrierAttackGeometry({ ...state, noBarrier: true }, token), null);
+});
+
+test("Domain barrier attack: GM resolves AC, damage, measured side, and rejects duplicate request", async () => {
+  const { env, actor, J } = await setup();
+  const seeker = env.addActor({ name: "Attacker", items: [POOL] });
+  const scene = { id: "S", grid: { size: 100, distance: 5 }, tokens: [] };
+  env.game.scenes.set(scene.id, scene);
+  const token = { uuid: "Scene.S.Token.T", actor: seeker, parent: scene, x: 250, y: -50, width: 1, height: 1 };
+  scene.tokens.push(token);
+  await J.setDomain(actor, { open: true, openingId: "A", sceneId: "S", x: 0, y: 0, radius: 10, hp: 100, max: 100, ac: 15 });
+  const payload = { openingId: "A", tokenUuid: token.uuid, bonus: 0, range: 5, formula: "1d8", type: "", requestId: "attack-1" };
+  env.dice.push(20, 4);
+  const hit = await J.attackBarrier(actor, seeker, payload);
+  assert.equal(hit.hit, true);
+  assert.equal(hit.hp, 92);
+  assert.equal(await J.attackBarrier(actor, seeker, payload), false);
+  assert.equal(J.getDomain(actor).hp, 92);
+  assert.equal(await J.attackBarrier(actor, seeker, { ...payload, range: 4, requestId: "too-short" }), false);
+  env.dice.push(1);
+  const miss = await J.attackBarrier(actor, seeker, { ...payload, requestId: "miss" });
+  assert.equal(miss.hit, false);
+  assert.equal(J.getDomain(actor).hp, 92);
+});
+
+test("Domain reaction: pending offer is persistent, owner claim is exclusive, and expired window settles", async () => {
+  const { env, actor: opener, J } = await setup();
+  const other = env.addActor({ name: "Responder", items: [POOL] });
+  await other.createEmbeddedDocuments("Item", [{ name: "Domain Expansion", type: "feat",
+    flags: { jjk5e: { domainActivity: "d" } }, system: { activities: { d: { id: "d" } } } }]);
+  await env.settle();
+  const scene = { id: "S", grid: { size: 100, distance: 5 }, tokens: [{ actor: other }] };
+  env.game.scenes.set(scene.id, scene);
+  await J.setDomain(opener, { open: true, openingId: "root", sceneId: "S", x: 0, y: 0, radius: 10 });
+  await opener.setFlag("jjk5e", "domainReactionWindow", { status: "open", openingId: "root", expires: Date.now() + 60000,
+    offers: [{ actorUuid: other.uuid, status: "pending" }] });
+  const owner = { id: "owner", active: true, isGM: false };
+  const stranger = { id: "stranger", active: true, isGM: false };
+  other.testUserPermission = (user) => user.id === owner.id;
+  const payload = { actorUuid: other.uuid, openerUuid: opener.uuid, openingId: "root" };
+  assert.equal(J.sureHitBlocked(opener), true);
+  assert.equal(await J.handleDomainAuthority({ operation: "claim", payload }, { user: stranger }), false);
+  const claims = await Promise.all([J.handleDomainAuthority({ operation: "claim", payload }, { user: owner }),
+    J.handleDomainAuthority({ operation: "claim", payload }, { user: owner })]);
+  assert.equal(claims.filter((c) => c?.claimId).length, 1);
+  assert.equal(opener.getFlag("jjk5e", "domainReactionWindow").offers[0].status, "claimed");
+  const window = opener.getFlag("jjk5e", "domainReactionWindow");
+  await opener.setFlag("jjk5e", "domainReactionWindow", { ...window, expires: Date.now() - 1 });
+  await J.settleReactionWindow(opener);
+  assert.equal(opener.getFlag("jjk5e", "domainReactionWindow").status, "resolved");
+  assert.equal(opener.getFlag("jjk5e", "domainReactionWindow").offers[0].status, "expired");
+  assert.equal(other.getFlag("jjk5e", "domainReactionClaim"), undefined);
+  assert.equal(J.sureHitBlocked(opener), false);
+});
+
+test("Domain simultaneous responses: no clash resolution while another response is pending", async () => {
+  const { env, actor: opener, J } = await setup();
+  const b = env.addActor({ name: "B", items: [POOL] });
+  const c = env.addActor({ name: "C", items: [POOL] });
+  env.game.scenes.set("S", { id: "S", grid: { size: 100, distance: 5 }, tokens: [] });
+  for (const [actor, ref] of [[opener, 300], [b, 280], [c, 280]]) {
+    await J.setDomain(actor, { open: true, openingId: actor.uuid, sceneId: "S", x: 0, y: 0, radius: 175, refinement: ref });
+  }
+  const win = { status: "open", openingId: opener.uuid, expires: Date.now() + 60000,
+    offers: [{ actorUuid: b.uuid, status: "used" }, { actorUuid: c.uuid, status: "pending" }] };
+  await opener.setFlag("jjk5e", "domainReactionWindow", win);
+  assert.equal(await J.settleReactionWindow(opener), false);
+  assert.equal(J.getDomain(opener).clash, undefined);
+  win.offers[1].status = "used";
+  await opener.setFlag("jjk5e", "domainReactionWindow", win);
+  assert.equal(await J.settleReactionWindow(opener), true);
+  assert.equal(J.getDomain(opener).clash.role, "winner");
+  assert.equal(J.getDomain(b).clash.role, "loser");
+  assert.equal(J.getDomain(c).clash.role, "loser");
+  assert.equal(J.getDomain(b).clash.id, J.getDomain(c).clash.id);
+});
