@@ -3078,7 +3078,7 @@ Hooks.once("init", () => {
   game.modules.get(MODULE_ID).api = {
     importAll, promptImport, spendCE, dataLanguage, baseName,
     regainCE: (actor, amount, label) => spendCE(actor, -Math.abs(amount), label || t("CE.Regained")),
-    findPool, chooseTechnique, syncTechnique, promptCE, shortRestCE, chooseCEAbility, negativeEmotion,
+    findPool, poolValue, poolMax, cePending, chooseTechnique, syncTechnique, promptCE, shortRestCE, chooseCEAbility, negativeEmotion,
     applyScaling, openPanel, maximumOutput, setReducedOutput, setSoulAwareness, setLimb, rollLimb,
     summon, dismissSummons, syncResource, missingPrereqs, applyCEEffects, activateGroup, endGroup,
     updateAutomation, updateAllAutomation, outdatedItems, burnoutRecovery, fallDamage, applySoulDamage, clearSoulDamage,
@@ -7489,7 +7489,9 @@ async function pickFeat(actor, title) {
   const doc = uuid ? list.find((d) => d.uuid === uuid) : null;
   if (!doc) return false;
   const missing = missingPrereqs(actor, doc);
-  if (missing.length) ui.notifications.warn(`${doc.name}: ${missing.join(", ")}`);
+  if (missing.length || !featFitsTechnique(actor, doc)) { ui.notifications.warn(`${doc.name}: ${missing.join(", ")}`); return false; }
+  if (!actor.isOwner || (!doc.system?.prerequisites?.repeatable && actor.items.some(i => normName(baseName(i)) === normName(baseName(doc))))) return false;
+  if ((doc.system?.assertPrerequisites?.(actor, { showMessage: true }) ?? true) !== true) return false;
   return addWithAdvancement(actor, doc);
 }
 
