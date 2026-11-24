@@ -381,6 +381,7 @@ function ceMod(actor) {
 }
 
 function activityCost(activity) {
+  if(isQuickRecovery(activity)) return 0;
   const costs = activity?.item?.flags?.jjk5e?.ceCosts;
   let base = Number(costs?.[activity.id] ?? 0);
   // V.6 Domain Refinement: Efficient Expansions (700) −CE mod, Total Mastery (1000) −proficiency bonus.
@@ -425,6 +426,163 @@ function circuitCost(activity, base) {
 
 /** Serializes CE spending within this client to prevent double charges from overlapping hooks. */
 const CE_QUEUES = new Map();
+const CE_AUTH_QUERY = `${MODULE_ID}.ceAuthority`;
+const CE_USAGE_CONTEXT = new WeakMap();
+const CE_ADAPTER_TARGETS = new Set();
+const QUICK_RECOVERY_ID = "Jt55eu41OQX7G6Sh";
+const isQuickRecovery = (activity) => activity?.id === QUICK_RECOVERY_ID &&
+  (activity.item?.flags?.jjk5e?.quickRecovery === true || baseName(activity.item) === "Quick Recovery");
+function ceAuthorityEnabled() { return !!setting("transactionalCE"); }
+function managedCE(activity) {
+  if (isQuickRecovery(activity)) return false;
+  const f = activity?.item?.flags?.jjk5e;
+  return !!f && (Object.hasOwn(f.ceCosts ?? {}, activity.id) || Object.hasOwn(f.ceSteps ?? {},activity.id)) &&
+    (Number(f.ceCosts?.[activity.id] ?? 0) !== 0 || Number(f.ceSteps?.[activity.id] ?? 0) !== 0);
+}
+function ceLedger(pool) {
+  const data = pool?.getFlag?.(MODULE_ID,"ceLedger");
+  return Array.isArray(data) ? foundry.utils.deepClone(data) : [];
+}
+function cePending(pool) { return ceLedger(pool).some((x) => x.state === "reserved" || x.state === "review"); }
+function ceRecord(ledger, record) {
+  const others = ledger.filter((x)=>x.id!==record.id);
+  // Never discard open reservations. Bound only closed history.
+  return [...others.filter(x=>["reserved","review"].includes(x.state)),
+    ...others.filter(x=>!["reserved","review"].includes(x.state)).slice(-199),record];
+}
+function ceUsageKey(activity) { return `${activity?.item?.id}:${activity?.id}`; }
+function ceContext(activity, usageConfig) {
+  if (!usageConfig || typeof usageConfig !== "object") return null;
+  const ctx=CE_USAGE_CONTEXT.get(usageConfig);
+  return ctx?.key===ceUsageKey(activity) ? ctx : null;
+}
+function ceFromItem(actor,itemId,activityId) {
+  const item=actor?.items?.get?.(itemId);
+  if (!item) return null;
+  const activities=item.system?.activities;
+  return activities?.get?.(activityId) ?? activities?.[activityId] ?? null;
+}
+async function ceAuthorityRequest(operation,payload) {
+  if (isActiveGM()) return handleCEAuthority({operation,payload},{user:game.user});
+  const gm=game.users.activeGM;
+  if (!gm?.query) return false;
+  try { return await gm.query(CE_AUTH_QUERY,{operation,payload},{timeout:120000}); }
+  catch(err) { reportError("CE authority",err); return false; }
+}
+async function handleCEAuthority(msg,{user}={}) {
+  if (!isActiveGM() || !user?.active || !msg?.payload ||
+      !["reserve","commit","review","settle","adjust"].includes(msg.operation)) return false;
+  const {operation,payload:d}=msg;
+  const actor=await domainActor(d.actorUuid);
+  if (!canDirectDomain(user,actor)) return false;
+  if (operation==="settle"&&!user.isGM) return false;
+  if (operation==="adjust") {
+    if (!Number.isFinite(d.amount) || Math.abs(d.amount)>100000) return false;
+    if (!user.isGM && !await confirmDialog(t("GMRequest.Title"),`<p>${esc(user.name)}: ${esc(actor.name)} — ${esc(String(d.amount))} CE</p>`)) return false;
+    return queueCE(actor,async()=>{
+      if (!isActiveGM() || !canDirectDomain(user,actor) || cePending(findPool(actor))) return false;
+      return doSpendCE(actor,d.amount,String(d.label??"CE").slice(0,120));
+    });
+  }
+  if (typeof d.id!=="string" || !/^[a-zA-Z0-9_-]{1,80}$/.test(d.id)) return false;
+  return queueCE(actor,async()=>{
+    if (!isActiveGM() || !canDirectDomain(user,actor)) return false;
+    const pool=findPool(actor);
+    if (!pool) return false;
+    const ledger=ceLedger(pool), old=ledger.find(x=>x.id===d.id);
+    if(operation==="reserve"){
+      if(old) return false; // replay must not authorize native effects a second time
+      if(cePending(pool)) return false;
+      const a=ceFromItem(actor,d.itemId,d.activityId);
+      const item=actor.items.get(d.itemId);
+      if(!a || !item || !Number.isSafeInteger(d.scaling) || d.scaling<0 || d.scaling>1000) return false;
+      const act=a.item ? a : {...a,item,actor,id:d.activityId};
+      if(!managedCE(act) || !validActivityCE(actor,act,{scaling:d.scaling})) return false;
+      if(act.item?.flags?.jjk5e?.technique && (inBurnout(actor)||hasKind(actor,"domainAmplification"))) return false;
+      if(item.flags?.jjk5e?.domainActivity===act.id && domainOpen(actor)) return false;
+      if(item.flags?.jjk5e?.domainActivity && item.flags.jjk5e.domainActivity!==act.id && !canUseDomainActivity(actor,act)) return false;
+      const cost=totalActivityCECost(actor,act,{scaling:d.scaling});
+      const tx=ceTransaction(poolValue(pool),poolMax(pool),cost);
+      if(!tx || !(cost>0)) return false;
+      const rec={id:d.id,userId:user.id,actorUuid:actor.uuid,itemId:d.itemId,activityId:d.activityId,
+        scaling:d.scaling,cost,state:"reserved",created:Date.now(),
+        sixEyes:!!actor.getFlag(MODULE_ID,"sixEyesNext"),minusNext:!!(item.flags?.jjk5e?.technique&&actor.getFlag(MODULE_ID,"costMinusNext"))};
+      const whole=Math.floor(tx.spent+1e-6);
+      // Persist debit and reservation together in the same Item update.
+      await pool.update({"system.uses.spent":whole,"flags.jjk5e.fractionalSpent":Math.round((tx.spent-whole)*1000)/1000,
+        "flags.jjk5e.ceLedger":ceRecord(ledger,rec)},{jjk5eCE:true});
+      if(rec.sixEyes) await actor.unsetFlag(MODULE_ID,"sixEyesNext");
+      if(rec.minusNext) await actor.unsetFlag(MODULE_ID,"costMinusNext");
+      return {id:rec.id,cost};
+    }
+    if(!old || (!user.isGM&&old.userId!==user.id) || old.actorUuid!==actor.uuid) return false;
+    if(operation==="commit"||operation==="review"){
+      if(old.state!=="reserved") return false;
+      await pool.update({"flags.jjk5e.ceLedger":ceRecord(ledger,{...old,state:operation==="commit"?"committed":"review",ended:Date.now()})},{jjk5eCE:true});
+      return true;
+    }
+    if(operation!=="settle"||!["reserved","review"].includes(old.state)||typeof d.refund!=="boolean") return false;
+    // Refund only on explicit GM decision; a canceled external workflow may already have applied effects.
+    const tx=ceTransaction(poolValue(pool),poolMax(pool),d.refund?-old.cost:0);
+    if(!tx) return false;
+    const whole=Math.floor(tx.spent+1e-6);
+    await pool.update({"system.uses.spent":whole,"flags.jjk5e.fractionalSpent":Math.round((tx.spent-whole)*1000)/1000,
+      "flags.jjk5e.ceLedger":ceRecord(ledger,{...old,state:d.refund?"refunded":"committed",ended:Date.now(),settledBy:user.id})},{jjk5eCE:true});
+    return true;
+  });
+}
+async function consumeWithCE(wrapped,activity,usageConfig,messageConfig) {
+  if(!ceAuthorityEnabled()||!setting("autoSpendCE")||!managedCE(activity)) return wrapped(usageConfig,messageConfig);
+  const actor=activity.actor??activity.item?.actor;
+  if(!actor?.isOwner || !usageConfig || typeof usageConfig!=="object") return false;
+  const nested=ceContext(activity,usageConfig);
+  if(nested?.state==="reservingNative") return wrapped(usageConfig,messageConfig);
+  if(nested) return false;
+  if(!validActivityCE(actor,activity,usageConfig)) return false;
+  const id=foundry.utils.randomID();
+  const reserve=await ceAuthorityRequest("reserve",{actorUuid:actor.uuid,itemId:activity.item.id,activityId:activity.id,
+    scaling:Number(usageConfig.scaling??0),id});
+  if(!reserve?.id) { ui.notifications.warn(t("Notify.NotEnoughCE",{value:poolValue(findPool(actor)),cost:totalActivityCECost(actor,activity,usageConfig)})); return false; }
+  const ctx={key:ceUsageKey(activity),id,actorUuid:actor.uuid,state:"reservingNative",cost:reserve.cost};
+  CE_USAGE_CONTEXT.set(usageConfig,ctx);
+  try{
+    const result=await wrapped(usageConfig,messageConfig);
+    const ok=!!result && result!==false;
+    const ended=await ceAuthorityRequest(ok?"commit":"review",{actorUuid:actor.uuid,id});
+    ctx.state=ok&&ended?"committed":"review";
+    if(ctx.state!=="committed") return false;
+    return result;
+  }catch(err){
+    ctx.state="review";
+    await ceAuthorityRequest("review",{actorUuid:actor.uuid,id});
+    throw err;
+  }
+}
+function installCEAdapters() {
+  if(!globalThis.libWrapper?.register) return false;
+  for(const [key,config] of Object.entries(CONFIG.DND5E?.activityTypes??{})){
+    if(!/^[a-zA-Z0-9_$]+$/.test(key)||typeof config.documentClass?.prototype?.consume!=="function") continue;
+    const target=`CONFIG.DND5E.activityTypes.${key}.documentClass.prototype.consume`;
+    if(CE_ADAPTER_TARGETS.has(target)) continue;
+    try{
+      globalThis.libWrapper.register(MODULE_ID,target,function(wrapped,usage,message){
+        return consumeWithCE(wrapped,this,usage,message);
+      },"MIXED");
+      CE_ADAPTER_TARGETS.add(target);
+    }catch(err){reportError("CE adapter "+key,err);}
+  }
+  return CE_ADAPTER_TARGETS.size>0;
+}
+function ceDiagnostics(actor){
+  return {transactional:ceAuthorityEnabled(),adapters:[...CE_ADAPTER_TARGETS],
+    midi:!!game.modules.get("midi-qol")?.active,dae:!!game.modules.get("dae")?.active,
+    libWrapper:!!globalThis.libWrapper?.register,gm:!!(game.users.activeGM||game.user.isGM),
+    pending:ceLedger(findPool(actor)).filter(x=>["reserved","review"].includes(x.state))};
+}
+async function reconcileCE(actor,id,refund){
+  if(!game.user.isGM) return false;
+  return ceAuthorityRequest("settle",{actorUuid:actor.uuid,id,refund});
+}
 function ceDiscountFactor(actor) {
   if (!actor) return 1;
   if (actor.items.some((i) => baseName(i) === "Six Eyes (Awakened)")) return 0.1;
@@ -432,7 +590,7 @@ function ceDiscountFactor(actor) {
 }
 function totalActivityCECost(actor, activity, usageConfig = {}) {
   const base = activityCost(activity);
-  const step = Number(activity?.item?.flags?.jjk5e?.ceSteps?.[activity.id] ?? 0);
+  const step = isQuickRecovery(activity) ? 0 : Number(activity?.item?.flags?.jjk5e?.ceSteps?.[activity.id] ?? 0);
   const scaling = Number(usageConfig?.scaling ?? 0);
   return activityCECost({ base, step, scaling, factor: ceDiscountFactor(actor) });
 }
@@ -478,13 +636,17 @@ async function queueCE(actor, fn) {
   finally { if (CE_QUEUES.get(key) === next) CE_QUEUES.delete(key); }
 }
 async function spendCE(actor, amount, label = "") {
+  if(ceAuthorityEnabled()){
+    if(!isActiveGM()) return ceAuthorityRequest("adjust",{actorUuid:actor?.uuid,amount,label});
+    return queueCE(actor,()=>cePending(findPool(actor))?false:doSpendCE(actor,amount,label));
+  }
   return queueCE(actor, () => doSpendCE(actor, amount, label));
 }
 async function setExactCE(actor, value) {
   if (!game.user.isGM || !Number.isFinite(value)) return false;
   return queueCE(actor, async () => {
     const pool = findPool(actor);
-    if (!pool) return false;
+    if (!pool || (ceAuthorityEnabled()&&cePending(pool))) return false;
     return doSpendCE(actor, poolValue(pool) - clamp(value, 0, poolMax(pool)), t("Panel.GMSetCE"), { exact: true });
   });
 }
@@ -561,6 +723,7 @@ async function onActorUpdate(actor, changes, options, userId) {
   if (!pool) return;
   const max = poolMax(pool);
   if (!Number.isFinite(Number(v))) return syncResource(actor);
+  if(ceAuthorityEnabled() && (!isActiveGM()||cePending(pool))) return syncResource(actor);
   await queueCE(actor, async () => {
     const spent = Math.round(clamp(max - Number(v), 0, max)*1000)/1000;
     const whole = Math.floor(spent);
@@ -715,9 +878,13 @@ function registerActivityHooks() {
     if (isCloneCreation(activity) && !canCreateClone(activity.item.actor, cloneQuantity(activity, usageConfig))) return false;
     if (activity.item?.flags?.jjk5e?.tokenSwap?.[activity.id] && !validateTokenSwap(activity)) return false;
     const actor = activity.actor ?? activity.item?.actor;
+    if(ceAuthorityEnabled()&&setting("autoSpendCE")&&managedCE(activity)){
+      if(ceContext(activity,usageConfig)?.state!=="reservingNative") return false;
+      return;
+    }
     if (!validActivityCE(actor, activity, usageConfig, { checkPool: setting("autoSpendCE") })) return false;
   });
-  Hooks.on("dnd5e.postUseActivity", async (activity, usageConfig) => {
+  Hooks.on("dnd5e.postUseActivity", async (activity, usageConfig, results) => {
     const actor = activity.actor ?? activity.item?.actor;
     const item = activity.item;
     const quantity = isCloneCreation(activity) ? cloneQuantity(activity, usageConfig) : 0;
@@ -728,7 +895,18 @@ function registerActivityHooks() {
     // Pay BEFORE opening domains or applying buffs. Failed CE payment must never
     // leave a benefit in place. The pre-use gate handles ordinary insufficient CE.
     if (setting("autoSpendCE") && actor && item) {
-      if (!(await payActivityCE(actor, activity, usageConfig))) return;
+      if(ceAuthorityEnabled()&&managedCE(activity)){
+        const ctx=ceContext(activity,usageConfig);
+        if(ctx?.state!=="committed"||ctx.postProcessed) return;
+        ctx.postProcessed=true;
+      }else if (!(await payActivityCE(actor, activity, usageConfig))) return;
+    }
+    if(isQuickRecovery(activity)){
+      const deltas=results?.message?.system?.deltas?.item?.[item.id]??[];
+      const used=deltas.filter(x=>x.keyPath==="system.uses.spent").reduce((n,x)=>n+Number(x.delta||0),0);
+      if(Number.isSafeInteger(used)&&used>0) await spendCE(actor,-used,`${item.name} — ${t("CE.Regained")}`);
+      else ui.notifications.warn("Quick Recovery: no verified native consumption; restore CE manually after checking the feature's uses.");
+      return;
     }
     if (actor && /^Six Eyes \((Dormant|Stirring)\)$/.test(baseName(item)) &&
         /Perfect CE Manipulation/i.test(activity.name ?? "")) {
@@ -2591,6 +2769,7 @@ Hooks.once("init", () => {
     onChange: () => { if (game.user?.isGM) promptImport(false); }
   });
   reg("autoSpendCE", Boolean, true);
+  reg("transactionalCE", Boolean, false);
   reg("playerGMRequests", Boolean, false);
   reg("ceChat", Boolean, true);
   reg("ceResource", String, "tertiary", {
@@ -2619,6 +2798,7 @@ Hooks.once("init", () => {
   if (CONFIG.queries) {
     CONFIG.queries[GM_QUERY] = (msg) => handleGMRequest(msg);
     CONFIG.queries[DOMAIN_QUERY] = (msg, context) => handleDomainAuthority(msg, context);
+    CONFIG.queries[CE_AUTH_QUERY] = (msg, context) => handleCEAuthority(msg, context);
   }
   game.settings.register(MODULE_ID, "privateCE", {
     name: "JJK5E.Settings.privateCE.Name", hint: "JJK5E.Settings.privateCE.Hint",
@@ -2700,7 +2880,7 @@ Hooks.once("ready", async () => {
     if (!actor?.isOwner) return;
     if (result?.longRest) {
       const pool = findPool(actor);
-      if (pool) await queueCE(actor, () => pool.update({ "system.uses.spent": 0, "flags.jjk5e.fractionalSpent": 0 }, { jjk5eCE: true }));
+      if (pool && (!ceAuthorityEnabled()||(!cePending(pool)&&isActiveGM()))) await queueCE(actor, () => pool.update({ "system.uses.spent": 0, "flags.jjk5e.fractionalSpent": 0 }, { jjk5eCE: true }));
       return;
     }
     const n = actor.items.reduce((tot, i) => tot + (Number(i.flags?.jjk5e?.srRegainCE) || 0), 0);
@@ -3469,7 +3649,9 @@ Hooks.once("ready", () => {
       if (app.document === actor && app.rendered) addLevelUpButton(app, app.element);
     }
   });
+  installCEAdapters();
   registerMidiHooks();
+  Object.assign(game.modules.get(MODULE_ID).api??{}, {ceDiagnostics,reconcileCE});
   if (game.user.isGM && setting("enableSummoning") && game.settings.settings?.has?.("dnd5e.allowSummoning")
     && !game.settings.get("dnd5e", "allowSummoning")) game.settings.set("dnd5e", "allowSummoning", true);
   Hooks.on("deleteActiveEffect", (effect) => {
