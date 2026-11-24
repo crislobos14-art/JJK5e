@@ -330,8 +330,12 @@ function renderLinks(app, root, actor, sealed) {
       const hp = token.actor.system.attributes?.hp;
       const ac = token.actor.system.attributes?.ac?.value;
       info.textContent = token.name + " · HP " + (hp?.value ?? "—") + "/" + (hp?.max ?? "—") + " · AC " + (ac ?? "—");
-      row.append(info, button(local("Stats / sheet", "Stats / ficha"), () => token.actor.sheet.render({ force: true })));
-      if (token.actor.isOwner && token.object) row.append(button(local("Select token", "Seleccionar token"), () => token.object.control({ releaseOthers: true })));
+      const allowed = () => token.actor && (game.user.isGM || (!token.hidden && token.actor.testUserPermission(game.user, "OBSERVER")));
+      const pool = api?.findPool?.(token.actor);
+      if (pool && token.actor.isOwner) info.textContent += " · CE " + api.poolValue(pool) + "/" + api.poolMax(pool);
+      row.append(info, button(local("Stats / sheet", "Stats / ficha"), () => { if (allowed()) token.actor.sheet.render({ force: true }); }));
+      if (token.actor.isOwner && api?.openPanel) row.append(button(local("JJK actions", "Acciones JJK"), () => { if (allowed() && token.actor.isOwner) api.openPanel(token.actor); }));
+      if (token.actor.isOwner && token.object) row.append(button(local("Select token", "Seleccionar token"), () => { if (allowed() && token.actor.isOwner) token.object?.control({ releaseOthers: true }); }));
       section.append(row);
     }
   }
@@ -404,7 +408,7 @@ function emit(root, x, y, kind, count) {
       window.matchMedia("(prefers-reduced-motion: reduce)").matches || !root.isConnected) return;
   const r = root.getBoundingClientRect();
   if (r.width < 1 || r.height < 1 || root.classList.contains("minimized") || typeof Element.prototype.animate !== "function") return;
-  const colors = { energy: "#ad98ff", seal: "#ce1032", paper: "#eee6d5" };
+  const colors = { energy: "#ad98ff", seal: "#ce1032", paper: "#eee6d5", gold: "#d4ad36" };
   const cap = mode === "cinematic" ? 72 : 32;
   for (let i = 0; i < count && particles.size < cap; i++) {
     const node = document.createElement("span");
@@ -490,6 +494,20 @@ Hooks.once("ready", () => {
   }
   for (const hook of ["closeActorSheetV2", "closeApplicationV2", "closeApplication", "closeSealedInkCharacterSheet", "closeSealedInkNPCSheet"]) Hooks.on(hook, close);
   for (const hook of ["createToken", "updateToken", "deleteToken", "updateActor", "canvasReady"]) Hooks.on(hook, refreshLinks);
+  Hooks.on("jjk5e.sealedInkStateChanged", (actor, key, tone) => {
+    if (!actor?.isOwner || !["hp0","zone","burnout","domain","lowCE","output"].includes(key)) return;
+    for (const [app,root] of live) {
+      if (!root.isConnected || !root.classList.contains(MOTION) || nativeActor(app)?.uuid !== actor.uuid) continue;
+      const header = root.querySelector(".sheet-header") ?? root;
+      const mode = preference("sheetMotion");
+      if (mode === "off" || document.hidden || window.matchMedia("(prefers-reduced-motion: reduce)").matches || root.classList.contains("minimized")) continue;
+      const color = tone === "gold" ? "#d4ad36" : tone === "critical" ? "#ce1032" : "#ad98ff";
+      if (typeof header.animate === "function") header.animate([{boxShadow:"inset 0 0 0 2px "+color},{boxShadow:"inset 0 0 0 0 transparent"}],{duration:mode === "performance" ? 120 : 480,easing:"ease-out"});
+      const b = header.getBoundingClientRect();
+      emit(root, b.left + b.width/2, b.top + b.height/2, tone === "gold" ? "gold" : tone === "critical" ? "seal" : "energy", 18);
+    }
+  });
+  for (const h of ["createItem","updateItem","deleteItem"]) Hooks.on(h, refreshLinks);
   document.addEventListener("click", visualEvent, { passive: true });
   document.addEventListener("pointermove", pointerEvent, { passive: true });
   document.addEventListener("visibilitychange", () => { if (document.hidden) stopParticles(); });
