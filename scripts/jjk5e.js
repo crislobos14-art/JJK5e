@@ -984,7 +984,12 @@ const RO_ROWS = [
 ];
 
 /** Full-Turn Action: an activity whose activation condition says "Full turn" (e.g. Domain Expansion). */
-const isFullTurn = (activity) => activity?.activation?.type === "special" && /^full[ -]turn/i.test(activity?.activation?.condition ?? "");
+// Source-audited exceptions in bundled techniques where activation metadata omitted Full Turn/Free Action.
+// IDs survive UI localization; require JJK provenance so unrelated D&D activities are untouched.
+const JJK_FULL_TURN_IDS=new Set(["lwDPiKBBO4ZbmZfr","8vWFnEg9QnfiwtPh","DqujXlB0omasjWGo","hEA4OYlwEM5hHr1X","By1iifz3o9klqhw7","yn7JrUsDc5H8JdGr","PWy7ySyZWFTbBLUl","3OANy2KyMvwhz2io","BWeIMjTm6woMQob1","y5TidkWt2wHekPJS","886Pnz5kN0SnYAWF"]);
+const JJK_FREE_ACTION_IDS=new Set(["tOmjfZVwLHC54lbH","ouA0eQeNTPbAg5Zb","NoFMZTpqmPsDl0T9","T9ncbeSRuf9g99Ja","fGNq4PZAPtSUfT4N","11e01xD5dgvWWq2W","UFgrZvfA5S0POj5u"]);
+const isFullTurn = activity => (activity?.activation?.type==="special" && /^full[ -]turn/i.test(activity.activation.condition??"")) ||
+  (!!activity?.item?.flags?.jjk5e && JJK_FULL_TURN_IDS.has(activity.id));
 // Only on the actor's own turn: a domain used as a clash reaction on another turn is not a full-turn action.
 const ownTurn = (actor) => !!game.combat?.started && !!actor && game.combat.combatant?.actor?.uuid === actor.uuid;
 // Local turn ledger, complementary to Midi's native action/bonus tracking.
@@ -1000,13 +1005,12 @@ function actionTurn(actor){
 function isJJKFree(activity){
   if(!activity?.item?.flags?.jjk5e)return false;
   const a=activity.activation;
-  return a?.type==="free" || (a?.type==="special" && /^free[ -]action(?:$|[\s(:])/i.test(a.condition??""));
+  return JJK_FREE_ACTION_IDS.has(activity.id) || a?.type==="free" || (a?.type==="special" && /^free[ -]action(?:$|[\s(:])/i.test(a.condition??""));
 }
 function lesserFullTurn(activity){
   // Only explicit exceptions; don't infer from a generic "special" activation.
   const text=String(activity?.activation?.condition??"");
-  return /(?:no movement|without movement|action\s*\+\s*bonus action\s*only)/i.test(text) ||
-    (baseName(activity?.item??{})==="2000 IQ" && /analy[sz]/i.test(activity?.name??""));
+  return /(?:no movement|without movement|action\s*\+\s*bonus action\s*only)/i.test(text);
 }
 function fullTurnSpent(actor,activity){
   const state=actionTurn(actor);
@@ -1027,7 +1031,7 @@ function recordTurnActivity(activity){
   const state=actionTurn(actor);
   if(!state)return;
   if(isJJKFree(activity))state.free=true;
-  if(activity.activation?.type==="action")state.action=true;
+  if(!isFullTurn(activity)&&activity.activation?.type==="action")state.action=true;
   if(activity.activation?.type==="bonus")state.bonus=true;
 }
 function isClaimedDomainReaction(actor,activity){
@@ -1035,11 +1039,11 @@ function isClaimedDomainReaction(actor,activity){
   const claim=actor?.getFlag(MODULE_ID,"domainReactionClaim");
   return !!claim?.id && Number(claim.expires)>nowMs();
 }
-function actionGate(actor,activity){
+function actionGate(actor,activity,{recheck=false}={}){
   const state=actionTurn(actor);
   if(activity?.item?.flags?.jjk5e?.optAction&&!optOn("additionalActions"))return false;
   if(isJJKFree(activity)&&game.combat?.started&&(!state||state.free))return false;
-  if(isFullTurn(activity)&&game.combat?.started&&!isClaimedDomainReaction(actor,activity)&&(!state||fullTurnSpent(actor,activity)))return false;
+  if(isFullTurn(activity)&&game.combat?.started&&!isClaimedDomainReaction(actor,activity)&&(!state||(recheck?(state.action||state.bonus||state.full||(!lesserFullTurn(activity)&&state.moved)):fullTurnSpent(actor,activity))))return false;
   if(state?.full&&["action","bonus"].includes(activity.activation?.type))return false;
   return true;
 }
@@ -1130,7 +1134,9 @@ function registerActivityHooks() {
     if (isCloneCreation(activity) && !canCreateClone(activity.item.actor, cloneQuantity(activity, usageConfig))) return false;
     if (activity.item?.flags?.jjk5e?.tokenSwap?.[activity.id] && !validateTokenSwap(activity)) return false;
     const actor = activity.actor ?? activity.item?.actor;
-    if(!actionGate(actor,activity))return false;
+    // Native Midi may already have reserved a normal action for a bundled full-turn activity.
+    // Recheck local state rather than treating that native reservation as an earlier action.
+    if(!actionGate(actor,activity,{recheck:true}))return false;
     if(ceAuthorityEnabled()&&setting("autoSpendCE")&&managedCE(activity)){
       if(ceContext(activity,usageConfig)?.state!=="reservingNative") return false;
       return;
