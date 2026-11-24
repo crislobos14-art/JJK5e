@@ -2360,7 +2360,7 @@ async function handleGMRequest(msg) {
      <p>${t("GMRequest.Verify")}</p>`);
   if (!confirmed) return false;
   try {
-    if (action === "summon") await gmSummon(msg.payload);
+    if (action === "summon") return (await gmSummon(msg.payload)) === true;
     else if (action === "dismiss") await gmDismiss(msg.payload);
     else if (GM_EXTRA[action]) await GM_EXTRA[action](msg.payload);
   } catch (err) { console.error(`${MODULE_ID} | GM request`, err); return false; }
@@ -5193,12 +5193,14 @@ async function absorbSimpleDomain(effect,damage,eventId){
   const key=effect.uuid,previous=SIMPLE_DOMAIN_QUEUES.get(key)??Promise.resolve();
   const next=previous.catch(()=>{}).then(async()=>{
     if(!isActiveGM()) return null;
-    const f=effect.flags.jjk5e,history=Array.isArray(f.events)?f.events:[];
+    const current=effect.parent?.effects?.get?.(effect.id);
+    if(!current||current.uuid!==key)return null;
+    const f=current.flags.jjk5e,history=Array.isArray(f.events)?f.events:[];
     const old=history.find(x=>x.id===eventId);
     if(old) return old.damage===damage?old:null;
-    if(!liveWard(effect)||!Number.isFinite(f.hp)||f.hp<0) return null;
+    if(!liveWard(current)||!Number.isFinite(f.hp)||f.hp<0) return null;
     const absorbed=Math.min(f.hp,damage),result={id:eventId,damage,absorbed,overflow:damage-absorbed,hp:f.hp-absorbed};
-    await effect.update({"flags.jjk5e.hp":result.hp,"flags.jjk5e.events":[...history.slice(-99),result],disabled:result.hp===0});
+    await current.update({"flags.jjk5e.hp":result.hp,"flags.jjk5e.events":[...history.slice(-99),result],disabled:result.hp===0});
     return result;
   });
   SIMPLE_DOMAIN_QUEUES.set(key,next);
@@ -7291,7 +7293,8 @@ const isCursedSpiritPC = (actor) => !!actor?.items?.some((i) => i.type === "race
 async function unlockRCT(actor, reason = "") {
   actor = requireActor(actor);
   if (!actor?.isOwner) return false;
-  if (hasRCT(actor) || actor.getFlag(MODULE_ID, "rctUnlocked")) {
+  const completeRCT=!!findItemByName(actor,"Reverse Cursed Technique")&&!!findItemByName(actor,"Reverse Cursed Technique (Healing Pool)");
+  if (completeRCT || actor.getFlag(MODULE_ID, "rctUnlocked")) {
     ui.notifications.info(t("RCT.Already", { name: actor.name }));
     return false;
   }
