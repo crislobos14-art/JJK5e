@@ -8,7 +8,8 @@
       "Cancel": "Cancel",
       "Days": "days",
       "Edit": "Edit",
-      "Reminder": "Reminder"
+      "Reminder": "Reminder",
+      "Save": "Save"
     },
     "Import": {
       "Start": "JJK 5e: importing {n} compendiums… this can take a minute.",
@@ -697,7 +698,8 @@
       "LogFailed": "Mission failed: {title}",
       "Faction": "Faction",
       "Score": "Score",
-      "Standing": "Standing"
+      "Standing": "Standing",
+      "TeacherNoRec": "{teacher} is this sorcerer's teacher: teachers cannot recommend their own students."
     },
     "Mission": {
       "Generate": "Generate mission",
@@ -1239,6 +1241,32 @@
       "Name": "Fall damage",
       "Prompt": "Height fallen in feet (max 200). Damage die by size: Tiny 1, Small d4, Medium d6, Large d8, Huge d10, Gargantuan d12 per 10 ft.",
       "Flavor": "Fall of {feet} ft: {formula} bludgeoning"
+    },
+    "School": {
+      "Title": "Jujutsu High",
+      "School": "School",
+      "NoSchool": "None",
+      "Name": {
+        "tokyo": "Tokyo",
+        "kyoto": "Kyoto"
+      },
+      "Role": "Role",
+      "NoRole": "None",
+      "Student": "Student",
+      "Teacher": "Teacher",
+      "Year": "School year",
+      "YearN": "Year {n}",
+      "TeacherIs": "Teacher",
+      "Students": "Students",
+      "Graduated": "Graduated",
+      "Edit": "Edit school",
+      "Set": "School",
+      "None": "Not enrolled at a jujutsu school.",
+      "NextYear": "Next school year",
+      "Graduate": "Graduate",
+      "NextYearMsg": "{name} moves up to year {n}.",
+      "GraduatedMsg": "{name} graduates from Jujutsu High.",
+      "Hint": "Students pick their year and teacher; teachers see their students here. Teachers cannot recommend their own students for promotion."
     }
   }
 }

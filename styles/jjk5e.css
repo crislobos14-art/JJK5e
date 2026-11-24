@@ -525,3 +525,11 @@ table.jjk-ink-table a.content-link, table.jjk-ink-table a.inline-roll { backgrou
 .jjk5e-rolltable .window-header { border-bottom: 3px solid #c8102e; }
 .jjk5e-rolltable table.jjk-ink-table img { max-height: 24px; vertical-align: middle; }
 .jjk5e-ui .jjk-rep th.num { font: 700 9px/1.2 var(--font-primary, sans-serif); color: var(--jjk-faint); }
+
+/* v1.82 — Jujutsu High: school chip on the sheet card and the panel's school section. */
+.jjk-sheetcard .jjk-sc-chips .jjk-sc-school { border-left: 3px solid var(--sc-ce, #7c5cff); }
+.jjk-sheetcard .jjk-sc-chips .jjk-sc-school.teacher { border-left-color: var(--sc-gold, #d4af37); }
+.jjk-sheetcard .jjk-sc-chips .jjk-sc-school.none { opacity: .7; border-left-style: dashed; }
+.jjk5e-ui .jjk-school .jjk-list li { display: flex; justify-content: space-between; gap: 6px; padding: 4px 8px; border: 1px solid var(--jjk-line); border-left: 3px solid var(--jjk-ce-2); margin-bottom: 3px; }
+.jjk5e-ui .jjk-school .jjk-list li em { color: var(--jjk-muted); font-style: normal; font-size: 11px; }
+.jjk5e-ui .jjk-school .jjk-chip.on i { margin-right: 4px; }

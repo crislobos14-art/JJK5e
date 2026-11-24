@@ -2417,7 +2417,7 @@ function panelHTML(actor, tab = "combat") {
       ${pbtn("hotbar", "fas fa-table-cells", t("Keys.hotbar"))}
       ${pbtn("updateAutomation", "fas fa-arrows-rotate", t("Update.Title"))}
       ${pbtn("help", "fas fa-keyboard", t("Panel.Shortcuts"), { key: "?" })}
-    </div></fieldset>`;
+    </div></fieldset>${schoolPanel(actor, gm)}`;
 
   const bt = Number(actor.getFlag(MODULE_ID, "breakthroughs")) || 0;
   const gmTab = gm ? `<p class="jjk-note">${t("Panel.GMHint")}</p>
@@ -4396,6 +4396,8 @@ async function addRecommendation(actor) {
   if (!game.user.isGM) return ui.notifications.warn(t("Notify.GMOnly"));
   const name = await promptField(t("Career.AddRec"), `<p>${t("Career.RecHint")}</p><input type="text" name="rec" style="width:100%">`, "rec");
   if (!name?.trim()) return;
+  const teacher = teacherOf(actor);
+  if (teacher && normName(teacher.name) === normName(name)) return ui.notifications.warn(t("Career.TeacherNoRec", { teacher: teacher.name }));
   const c = getCareer(actor);
   c.recs.push({ name: name.trim() });
   await saveCareer(actor, c, t("Career.LogRec", { name: name.trim() }));
@@ -4736,6 +4738,7 @@ function addSheetStrip(app, element) {
       <div class="jjk-bar"><div class="fill" style="width:${pct}%"></div></div></div>` : ""}
     <div class="jjk-sc-chips">
       <button type="button" data-a="career" class="jjk-grade-badge g${c.grade}" title="${t("Career.Title")}">${esc(gradeLabel(c.grade))}${c.semi ? "*" : ""}</button>
+      <button type="button" data-a="school" class="jjk-sc-school ${getSchool(actor).role || "none"}" title="${esc(schoolLabel(actor) || t("School.Title"))}"><i class="fas fa-${getSchool(actor).role === "teacher" ? "chalkboard-user" : "graduation-cap"}"></i> ${esc(schoolLabel(actor) || t("School.Set"))}</button>
       <button type="button" data-a="vows" title="${t("Vow.Title")}"><i class="fas fa-handshake"></i> ${vows.length}/${vowLimit(actor)}</button>
       <span title="${t("Breakthrough.Name")}"><i class="fas fa-bolt-lightning"></i> ${bt}</span>
       ${ro ? `<span class="warn" title="${t("Output.Reduced")}">RO ${ro}</span>` : ""}
@@ -4756,7 +4759,7 @@ function addSheetStrip(app, element) {
     const fn = { "ce-": () => spendCE(actor, 1, t("CE.Name")), "ce+": () => spendCE(actor, -1, t("CE.Regained")),
       career: () => openCareer(actor), vows: () => openVows(actor), panel: () => openPanel(actor),
       technique: () => chooseTechnique(actor), rest: () => shortRestCE(actor), hotbar: () => fillHotbar(actor),
-      create: () => createCharacterWizard(actor), pointbuy: () => pointBuy(actor), levelup: () => levelUp(actor) }[b.dataset.a];
+      create: () => createCharacterWizard(actor), school: () => editSchool(actor), pointbuy: () => pointBuy(actor), levelup: () => levelUp(actor) }[b.dataset.a];
     if (fn) Promise.resolve(fn()).catch((err) => reportError(`sheet ${b.dataset.a}`, err));
   });
   strip.querySelectorAll("button").forEach((b) => b.classList.add("always-interactive"));
@@ -8496,7 +8499,92 @@ function rivalDomainFor(actor, openerUuid = null, openingId = null, pendingOnly 
   return null;
 }
 
-Object.assign(PANEL_ACTIONS, { domainClash: (actor) => reactDomainClash(actor), fall: (actor) => fallDamage(actor) });
+Object.assign(PANEL_ACTIONS, { domainClash: (actor) => reactDomainClash(actor), fall: (actor) => fallDamage(actor),
+  schoolEdit: (actor) => editSchool(actor), schoolYear: (actor) => advanceSchoolYear(actor),
+  schoolOpen: async (actor, target) => { const a = await fromUuid(target.dataset.uuid).catch(() => null); a?.sheet?.render(true); } });
+
+/* ---- Jujutsu High: students, school year and teachers ---------------------------------------- */
+
+const SCHOOLS = ["tokyo", "kyoto"];
+function getSchool(actor) {
+  const s = actor?.getFlag?.(MODULE_ID, "school") ?? {};
+  return { school: SCHOOLS.includes(s.school) ? s.school : "", role: ["student", "teacher"].includes(s.role) ? s.role : "",
+    year: clamp(Number(s.year) || 1, 1, 3), teacher: typeof s.teacher === "string" ? s.teacher : "", graduated: !!s.graduated };
+}
+const schoolActors = () => (game.actors?.contents ?? [...(game.actors ?? [])]).filter((a) => a.type === "character" && getSchool(a).role);
+const teachersOf = (school) => schoolActors().filter((a) => getSchool(a).role === "teacher" && (!school || getSchool(a).school === school));
+const studentsOf = (teacher) => schoolActors().filter((a) => getSchool(a).role === "student" && getSchool(a).teacher === teacher?.uuid);
+function teacherOf(actor) {
+  const uuid = getSchool(actor).teacher;
+  if (!uuid) return null;
+  try { return fromUuidSync(uuid); } catch { return null; }
+}
+/** "2.º año · Tokio", "Profesor · Kioto", "Graduado · Tokio" (short = without the school). */
+function schoolLabel(actor, short = false) {
+  const s = getSchool(actor);
+  if (!s.role) return "";
+  const role = s.role === "teacher" ? t("School.Teacher") : s.graduated ? t("School.Graduated") : t("School.YearN", { n: s.year });
+  return short || !s.school ? role : `${role} · ${t(`School.Name.${s.school}`)}`;
+}
+
+function schoolPanel(actor, gm) {
+  const s = getSchool(actor);
+  const teacher = s.role === "student" ? teacherOf(actor) : null;
+  const students = s.role === "teacher" ? studentsOf(actor).sort((a, b) => getSchool(a).year - getSchool(b).year || a.name.localeCompare(b.name)) : [];
+  const link = (a, extra = "") => `<li class="jjk-clickable" data-action="schoolOpen" data-uuid="${esc(a.uuid)}" tabindex="0" role="button">${esc(a.name)}${extra}</li>`;
+  return `<fieldset class="jjk-school"><legend>${t("School.Title")}</legend>
+    ${s.role ? `<div class="jjk-row"><span class="jjk-chip on ${s.role === "teacher" ? "gold" : ""}"><i class="fas fa-${s.role === "teacher" ? "chalkboard-user" : "graduation-cap"}"></i> ${esc(schoolLabel(actor))}</span></div>` : `<p class="jjk-note">${t("School.None")}</p>`}
+    ${s.role === "student" ? `<p class="jjk-note">${t("School.TeacherIs")}: ${teacher ? `<strong>${esc(teacher.name)}</strong>` : "—"}</p>` : ""}
+    ${s.role === "teacher" ? `<p class="jjk-lbl">${t("School.Students")} (${students.length})</p>${students.length ? `<ul class="jjk-list">${students.map((a) => link(a, ` <em>${esc(schoolLabel(a, true))}</em>`)).join("")}</ul>` : `<p class="jjk-note">—</p>`}` : ""}
+    <div class="jjk-grid">${pbtn("schoolEdit", "fas fa-school", t("School.Edit"))}
+      ${gm && s.role === "student" && !s.graduated ? pbtn("schoolYear", "fas fa-forward-step", s.year >= 3 ? t("School.Graduate") : t("School.NextYear")) : ""}</div></fieldset>`;
+}
+
+async function editSchool(actor) {
+  actor = requireActor(actor);
+  if (!actor?.isOwner) return ui.notifications.warn(t("Notify.NotOwner"));
+  const s = getSchool(actor);
+  const opt = (v, label, cur) => `<option value="${v}" ${String(cur) === String(v) ? "selected" : ""}>${esc(label)}</option>`;
+  const teachers = teachersOf("").filter((a) => a.uuid !== actor.uuid);
+  const content = `<label>${t("School.School")}<select name="school">${opt("", t("School.NoSchool"), s.school)}${SCHOOLS.map((k) => opt(k, t(`School.Name.${k}`), s.school)).join("")}</select></label>
+    <label>${t("School.Role")}<select name="role">${opt("", t("School.NoRole"), s.role)}${opt("student", t("School.Student"), s.role)}${opt("teacher", t("School.Teacher"), s.role)}</select></label>
+    <label>${t("School.Year")}<select name="year">${[1, 2, 3].map((n) => opt(n, t("School.YearN", { n }), s.year)).join("")}</select></label>
+    <label>${t("School.TeacherIs")}<select name="teacher">${opt("", "—", s.teacher)}${teachers.map((a) => opt(a.uuid, `${a.name}${getSchool(a).school ? ` (${t(`School.Name.${getSchool(a).school}`)})` : ""}`, s.teacher)).join("")}</select></label>
+    ${game.user.isGM ? `<label class="jjk-check"><input type="checkbox" name="graduated" ${s.graduated ? "checked" : ""}> ${t("School.Graduated")}</label>` : ""}
+    <p class="hint">${t("School.Hint")}</p>`;
+  const res = await foundry.applications.api.DialogV2.prompt({ classes: ["jjk5e-ui", "jjk5e-dialog"], window: { title: `${t("School.Title")} — ${actor.name}`, icon: "fas fa-school" },
+    rejectClose: false, content, ok: { label: t("Common.Save"), callback: (e, b) => { const f = b.form.elements;
+      return { school: f.school.value, role: f.role.value, year: Number(f.year.value), teacher: f.teacher.value, graduated: f.graduated ? f.graduated.checked : s.graduated }; } } });
+  if (!res) return false;
+  const next = { school: SCHOOLS.includes(res.school) ? res.school : "", role: ["student", "teacher"].includes(res.role) ? res.role : "",
+    year: clamp(res.year, 1, 3), teacher: res.role === "student" ? res.teacher : "", graduated: res.role === "student" && !!res.graduated };
+  if (!next.role) { await actor.unsetFlag(MODULE_ID, "school"); refreshPanels(actor); return true; }
+  await actor.setFlag(MODULE_ID, "school", next);
+  refreshPanels(actor);
+  return true;
+}
+
+Hooks.once("ready", () => {
+  // A student's school or teacher changed: open panels (e.g. the teacher's list of students) refresh.
+  Hooks.on("updateActor", (actor, changes) => {
+    if (!foundry.utils.hasProperty(changes, `flags.${MODULE_ID}.school`) && !foundry.utils.hasProperty(changes, `flags.${MODULE_ID}.-=school`)) return;
+    for (const app of PANELS.values()) if (app?.rendered) app.render();
+  });
+});
+
+/** GM: the student moves up a school year (after the 3rd they graduate). With Yearly Progression, it is offered too. */
+async function advanceSchoolYear(actor) {
+  actor = requireActor(actor);
+  if (!actor || !game.user.isGM) return ui.notifications.warn(t("Notify.GMOnly"));
+  const s = getSchool(actor);
+  if (s.role !== "student" || s.graduated) return false;
+  const next = s.year >= 3 ? { ...s, graduated: true } : { ...s, year: s.year + 1 };
+  await actor.setFlag(MODULE_ID, "school", next);
+  await chat(actor, `<p><i class="fas fa-graduation-cap"></i> ${t(next.graduated ? "School.GraduatedMsg" : "School.NextYearMsg", { name: esc(actor.name), n: next.year })}</p>`);
+  if (optOn("yearlyProgression")) await yearlyProgression(actor);
+  refreshPanels(actor);
+  return true;
+}
 
 /** Falling (Rules of Thumb): one die per 10 ft (max 200 ft) sized by the creature; it lands prone unless it took no damage. */
 const FALL_DIE = { tiny: "1", sm: "1d4", med: "1d6", lg: "1d8", huge: "1d10", grg: "1d12" };

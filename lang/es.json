@@ -8,7 +8,8 @@
       "Cancel": "Cancelar",
       "Days": "días",
       "Edit": "Editar",
-      "Reminder": "Recordatorio"
+      "Reminder": "Recordatorio",
+      "Save": "Guardar"
     },
     "Import": {
       "Start": "JJK 5e: importando {n} compendios… puede tardar un minuto.",
@@ -697,7 +698,8 @@
       "LogFailed": "Misión fallida: {title}",
       "Faction": "Facción",
       "Score": "Valor",
-      "Standing": "Relación"
+      "Standing": "Relación",
+      "TeacherNoRec": "{teacher} es profesor de este hechicero: los profesores no pueden recomendar a sus propios alumnos."
     },
     "Mission": {
       "Generate": "Generar misión",
@@ -1239,6 +1241,32 @@
       "Name": "Daño por caída",
       "Prompt": "Altura de la caída en pies (máx. 200). Dado por tamaño cada 10 pies: Diminuto 1, Pequeño d4, Mediano d6, Grande d8, Enorme d10, Gargantuesco d12.",
       "Flavor": "Caída de {feet} pies: {formula} contundente"
+    },
+    "School": {
+      "Title": "Escuela de jujutsu",
+      "School": "Escuela",
+      "NoSchool": "Ninguna",
+      "Name": {
+        "tokyo": "Tokio",
+        "kyoto": "Kioto"
+      },
+      "Role": "Rol",
+      "NoRole": "Ninguno",
+      "Student": "Alumno",
+      "Teacher": "Profesor",
+      "Year": "Año escolar",
+      "YearN": "{n}.º año",
+      "TeacherIs": "Profesor",
+      "Students": "Alumnos",
+      "Graduated": "Graduado",
+      "Edit": "Editar escuela",
+      "Set": "Escuela",
+      "None": "No está inscrito en una escuela de jujutsu.",
+      "NextYear": "Pasar de año",
+      "Graduate": "Graduar",
+      "NextYearMsg": "{name} pasa a {n}.º año.",
+      "GraduatedMsg": "{name} se gradúa de la escuela de jujutsu.",
+      "Hint": "El alumno elige su año y su profesor; el profesor ve aquí a sus alumnos. Un profesor no puede recomendar a sus propios alumnos para ascender."
     }
   }
 }
