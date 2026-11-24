@@ -953,3 +953,55 @@ test("Quick Recovery: verified native use delta restores CE once",async()=>{
   await env.Hooks.run("dnd5e.postUseActivity",act,{},res);
   assert.equal(J.poolValue(J.findPool(actor)),12);
 });
+
+
+test("Midi CE bridge: paid native consumption authorizes only its bound workflow",async()=>{
+  const {env,actor,J}=await setup({settings:{transactionalCE:true}});
+  const [item]=await actor.createEmbeddedDocuments("Item",[{name:"Technique",type:"feat",flags:{jjk5e:{ceCosts:{a:8}}},system:{activities:{a:{id:"a",name:"Attack"}}}}]);
+  const activity={id:"a",type:"attack",name:"Attack",actor,item},usage={scaling:0};
+  const workflow={activity,actor,item,targets:new Set()};
+  env.Hooks.call("midi-qol.preItemRollV2",{workflow,usage});
+  for(const stage of J.MIDI_GUARD_STAGES) assert.equal(env.Hooks.call("midi-qol."+stage,workflow),false);
+  await J.consumeWithCE(async()=>({item:[]}),activity,usage,{});
+  for(const stage of J.MIDI_GUARD_STAGES) assert.notEqual(env.Hooks.call("midi-qol."+stage,workflow),false);
+  const replay={activity,actor,item,targets:new Set()};
+  env.Hooks.call("midi-qol.preItemRollV2",{workflow:replay,usage});
+  assert.equal(J.midiCEGuard(replay),false);
+  assert.equal(J.poolValue(J.findPool(actor)),12);
+  assert.equal(J.cePostOnce(activity,usage,"test"),true);
+  assert.equal(J.cePostOnce(activity,usage,"test"),false);
+});
+test("Midi CE bridge: non-JJK and explicitly zero-cost activities remain usable",async()=>{
+  const {env,actor,J}=await setup({settings:{transactionalCE:true}});
+  const ordinary={activity:{id:"a",type:"heal",actor,item:{name:"Ordinary"}},actor};
+  const zero={activity:{id:"b",actor,item:{flags:{jjk5e:{ceCosts:{b:0}}}}},actor};
+  assert.equal(J.midiCEGuard(ordinary),true);
+  assert.notEqual(env.Hooks.call("midi-qol.preApplyDynamicEffects",zero),false);
+});
+test("DAE 14 owns expiry; fallback must not race it or delete templates",async()=>{
+  const {env,actor,J}=await setup();
+  env.game.release.generation=14;
+  const e=await J.setKindEffect(actor,"fallingBlossomDefense",{name:"Ward",duration:{remaining:0}});
+  e.duration.remaining=0;
+  assert.equal(J.externalEffectExpiry(),true);
+  await J.expireEffects();
+  assert.ok(actor.effects.get(e.id));
+  assert.equal(J.liveWard(e),false);
+  env.game.modules.get("dae").active=false;
+  await J.expireEffects();
+  assert.equal(actor.effects.get(e.id),undefined);
+});
+test("DAE suppressed protection does not count as an active ward",async()=>{
+  const {actor,J}=await setup();
+  const e=await J.setKindEffect(actor,"domainAmplification",{name:"Ward"});
+  e.isSuppressed=true;
+  assert.equal(J.hasKind(actor,"domainAmplification"),false);
+  assert.equal(J.domainWard({actor}),null);
+});
+test("Midi healing does not remove protected allied targets",async()=>{
+  const {actor,J}=await setup();
+  const target={actor:{flags:{jjk5e:{sureHitImmune:true}}}};
+  const workflow={activity:{type:"heal"},actor,targets:new Set([target])};
+  assert.equal(J.excludeDomainWardedTargets(workflow).length,0);
+  assert.equal(workflow.targets.size,1);
+});
