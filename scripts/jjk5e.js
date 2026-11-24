@@ -6525,7 +6525,7 @@ async function offerAwakenedUnderstanding(actor, before, total) {
 async function rollRCTAwakening(actor) {
   actor = requireActor(actor);
   if (!actor) return null;
-  if (hasRCT(actor) || actor.getFlag(MODULE_ID, "rctUnlocked") || actor.getFlag(MODULE_ID, "cursedPhysiology")) {
+  if (hasCompleteRCT(actor) || actor.getFlag(MODULE_ID, "rctUnlocked") || actor.getFlag(MODULE_ID, "cursedPhysiology")) {
     ui.notifications.info(t("RCT.Already", { name: actor.name }));
     return null;
   }
@@ -6541,8 +6541,8 @@ async function rollRCTAwakening(actor) {
   const ok = roll.total >= 90;
   await roll.toMessage({ speaker: docClass("ChatMessage").getSpeaker({ actor }),
     flavor: `<strong>${t("Breakthrough.RCTRoll")}</strong>${adv ? ` (${t("Opt.bloodConversion.Name")})` : ""} — ${ok ? t("Breakthrough.RCTYes") : t("Breakthrough.RCTNo")}` });
-  if (ok) await unlockRCT(actor, t("Breakthrough.RCTRoll"));
-  return ok;
+  if (!ok) return false;
+  return unlockRCT(actor, t("Breakthrough.RCTRoll"));
 }
 
 /** Every two rounds in combat the RCT healing pool recovers 10 hit points. */
@@ -7290,11 +7290,14 @@ const hasRCT = (actor) => hasItem(actor, /^Reverse Cursed Technique( \(Healing P
 /** Awaken the Reverse Cursed Technique: grant its features and 1 Breakthrough (Awakened Understanding). */
 const isCursedSpiritPC = (actor) => !!actor?.items?.some((i) => i.type === "race" && /^Cursed Spirit \(/i.test(baseName(i)));
 
+function hasCompleteRCT(actor) {
+  return !!findItemByName(actor, "Reverse Cursed Technique") && !!findItemByName(actor, "Reverse Cursed Technique (Healing Pool)");
+}
+
 async function unlockRCT(actor, reason = "") {
   actor = requireActor(actor);
   if (!actor?.isOwner) return false;
-  const completeRCT=!!findItemByName(actor,"Reverse Cursed Technique")&&!!findItemByName(actor,"Reverse Cursed Technique (Healing Pool)");
-  if (completeRCT || actor.getFlag(MODULE_ID, "rctUnlocked")) {
+  if (hasCompleteRCT(actor) || actor.getFlag(MODULE_ID, "rctUnlocked")) {
     ui.notifications.info(t("RCT.Already", { name: actor.name }));
     return false;
   }
@@ -7319,7 +7322,7 @@ async function unlockRCT(actor, reason = "") {
 
 /** GM card: a near-death moment where the GM can bestow RCT or let the player roll for it. */
 async function rctMoment(actor, why) {
-  if (!isActiveGM() || hasRCT(actor) || actor.getFlag(MODULE_ID, "rctUnlocked") || actor.getFlag(MODULE_ID, "cursedPhysiology")) return;
+  if (!isActiveGM() || hasCompleteRCT(actor) || actor.getFlag(MODULE_ID, "rctUnlocked") || actor.getFlag(MODULE_ID, "cursedPhysiology")) return;
   const gms = game.users.filter((u) => u.isGM).map((u) => u.id);
   await docClass("ChatMessage").create({ whisper: gms, speaker: { alias: "JJK 5e" },
     content: `<p><i class="fas fa-heart-pulse"></i> ${t("RCT.Moment", { name: esc(actor.name), why: esc(why) })}</p>
