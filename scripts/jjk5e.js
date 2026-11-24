@@ -465,6 +465,7 @@ function midiCEGuard(workflow){
   return false;
 }
 function midiDomainGuard(workflow){
+  if((workflow?.targets?.documents??[...(workflow?.targets??[])]).some(tk=>barrierMarkerMeta(tk)))return false;
   if(!midiCEGuard(workflow)) return false;
   excludeDomainWardedTargets(workflow);
   return true;
@@ -3817,7 +3818,8 @@ Hooks.once("ready", () => {
   });
   installCEAdapters();
   registerMidiHooks();
-  Object.assign(game.modules.get(MODULE_ID).api??{}, {ceDiagnostics,reconcileCE,integrationReport,recoverCEWorld,createBarrierMarker,attackSelectedBarrier});
+  Object.assign(game.modules.get(MODULE_ID).api??{}, {ceDiagnostics,reconcileCE,integrationReport,recoverCEWorld,createBarrierMarker,attackSelectedBarrier,absorbSimpleDomain,simpleDomainAt,claimFallingBlossomOffense,amplificationOutcome});
+  Hooks.on("updateToken",(token,changes)=>endMovedSimpleDomain(token,changes).catch(err=>reportError("Simple Domain movement",err)));
   Hooks.on("userConnected",()=>recoverCEWorld().catch(err=>reportError("CE recovery",err)));
   Hooks.on("updateWorldTime",()=>recoverCEWorld().catch(err=>reportError("CE recovery",err)));
   setInterval(()=>recoverCEWorld().catch(err=>reportError("CE recovery",err)),30000);
@@ -4843,7 +4845,65 @@ function insideDomain(state, token) {
 /* V6: Falling Blossom negates guaranteed effects on its wearer; Hollow Wicker Basket
  * protects only selected creatures within 15 ft. Simple Domain redirects damage into
  * a finite barrier, so it must not be treated as unconditional immunity. */
-const DOMAIN_WARD_KINDS = new Set(["fallingBlossomDefense", "hollowWickerProtection", "domainAmplification"]);
+const DOMAIN_WARD_KINDS = new Set(["fallingBlossomDefense", "fallingBlossomOffense", "hollowWickerProtection", "domainAmplification","simpleDomainBarrier"]);
+const SIMPLE_DOMAIN_QUEUES=new Map();
+function simpleDomainHP(actor){return Math.max(0,(Number(actor?.system?.attributes?.prof)||0)*2*ceMod(actor));}
+function simpleDomainAt(target){
+  const doc=target?.document??target,scene=doc?.parent;
+  if(!scene?.id||!doc?.uuid) return null;
+  const candidates=[];
+  for(const source of scene.tokens??[]){
+    const effect=source.actor?.effects?.find(e=>liveWard(e)&&e.flags?.jjk5e?.kind==="simpleDomainBarrier");
+    const f=effect?.flags?.jjk5e;
+    if(!f||f.originTokenUuid!==source.uuid||!(f.hp>0)||tokenLevelId(source)!==tokenLevelId(doc)) continue;
+    const origin=tokenCenter(source),point=tokenCenter(doc);
+    if(origin.x!==f.x||origin.y!==f.y||tokenLevelId(source)!==(f.levelId??null)) continue;
+    const distance=Math.hypot(origin.x-point.x,origin.y-point.y);
+    if(distance<=ftToPx(scene,10)+1) candidates.push({effect,distance});
+  }
+  candidates.sort((a,b)=>a.distance-b.distance||String(a.effect.uuid).localeCompare(String(b.effect.uuid)));
+  return candidates[0]?.effect??null;
+}
+async function absorbSimpleDomain(effect,damage,eventId){
+  if(!isActiveGM()||effect?.flags?.jjk5e?.kind!=="simpleDomainBarrier"||
+      !Number.isFinite(damage)||damage<0||typeof eventId!=="string"||eventId.length>200) return null;
+  const key=effect.uuid,previous=SIMPLE_DOMAIN_QUEUES.get(key)??Promise.resolve();
+  const next=previous.catch(()=>{}).then(async()=>{
+    if(!isActiveGM()) return null;
+    const f=effect.flags.jjk5e,history=Array.isArray(f.events)?f.events:[];
+    const old=history.find(x=>x.id===eventId);
+    if(old) return old.damage===damage?old:null;
+    if(!liveWard(effect)||!Number.isFinite(f.hp)||f.hp<0) return null;
+    const absorbed=Math.min(f.hp,damage),result={id:eventId,damage,absorbed,overflow:damage-absorbed,hp:f.hp-absorbed};
+    await effect.update({"flags.jjk5e.hp":result.hp,"flags.jjk5e.events":[...history.slice(-99),result],disabled:result.hp===0});
+    return result;
+  });
+  SIMPLE_DOMAIN_QUEUES.set(key,next);
+  try{return await next;}finally{if(SIMPLE_DOMAIN_QUEUES.get(key)===next)SIMPLE_DOMAIN_QUEUES.delete(key);}
+}
+async function endMovedSimpleDomain(token,changes){
+  if(!isActiveGM()||!["x","y","elevation","level"].some(k=>Object.hasOwn(changes??{},k))) return;
+  const actor=token.actor;
+  const effect=actor?.effects?.find(e=>e.flags?.jjk5e?.kind==="simpleDomainBarrier"&&e.flags.jjk5e.originTokenUuid===token.uuid);
+  if(!effect) return;
+  const f=effect.flags.jjk5e,c=tokenCenter(token);
+  if(c.x!==f.x||c.y!==f.y||tokenLevelId(token)!==(f.levelId??null)||Number(token.elevation??0)!==Number(f.elevation??0)) await safeDelete(effect);
+}
+function amplificationOutcome(defenderRef,attackerRef,maximumOutput=false){
+  if(!maximumOutput)return "immune";
+  if(!Number.isFinite(defenderRef)||!Number.isFinite(attackerRef))return "unknown";
+  const difference=attackerRef-defenderRef;
+  return difference>=51?"normal":difference<=-51?"immune":"resistant";
+}
+async function claimFallingBlossomOffense(actor){
+  if(!isActiveGM())return false;
+  return queueDomainWork(async()=>{
+    const e=actor?.effects?.find(x=>x.flags?.jjk5e?.kind==="fallingBlossomOffense"&&liveWard(x));
+    if(!e)return false;
+    await safeDelete(e);
+    return true;
+  });
+}
 function liveWard(effect) {
   return !!effect && !effect.disabled && effect.isSuppressed!==true && effect.duration?.expired !== true &&
     (effect.duration?.remaining == null || effect.duration.remaining > 0);
@@ -4879,13 +4939,26 @@ async function activateDomainProtection(actor, item, activity) {
     return setKindEffect(actor, "fallingBlossomDefense", { name, img: `${ICONS}/domain.svg`, duration: { rounds: 10, seconds: 60 },
       description: "<p>V6: negates guaranteed-hit attacks and effects only.</p>" });
   }
-  if (name !== "Hollow Wicker Basket" || cost !== 4) return;
+  if(name==="Falling Blossom Emotion"&&cost===4){
+    return setKindEffect(actor,"fallingBlossomOffense",{name:"Falling Blossom Emotion (Offense)",img:`${ICONS}/domain.svg`,
+      duration:{rounds:10,seconds:60},description:"<p>V6: one reaction melee counterattack before an incoming attack; advantage, critical on hit and necrotic damage. GM adjudicates the counterattack.</p>"});
+  }
+  const simple=name==="Simple Domain"&&item.flags?.jjk5e?.simpleDomainBarrier===true&&cost===4;
+  if (!simple&&(name !== "Hollow Wicker Basket" || cost !== 4)) return;
   const selected = [...(canvas?.tokens?.controlled ?? [])].filter((tk) => tk.actor?.uuid === actor.uuid);
   const tokens = actor.getActiveTokens?.() ?? [];
   const source = selected.length === 1 ? selected[0] : tokens.length === 1 ? tokens[0] : null;
   const origin = source?.document ?? source;
   const scene = origin?.parent;
   if (!origin?.uuid || !scene?.id) return;
+  if(simple){
+    const hp=simpleDomainHP(actor),center=tokenCenter(origin);
+    if(!(hp>0))return false;
+    return setKindEffect(actor,"simpleDomainBarrier",{name:"Simple Domain (10 ft)",img:`${ICONS}/domain.svg`,
+      disabled:false,duration:{rounds:10,seconds:60},
+      description:"<p>V6: independent barrier HP, ends on movement; overflow carries to protected creature. Ordinary Midi damage still requires GM adjudication.</p>",
+      flags:{jjk5e:{hp,max:hp,events:[],originTokenUuid:origin.uuid,x:center.x,y:center.y,levelId:tokenLevelId(origin),elevation:Number(origin.elevation??0)}}});
+  }
   const chosen = [origin, ...[...(game.user?.targets ?? [])].map((tk) => tk.document ?? tk)]
     .filter((tk) => tk?.parent?.id === scene.id && tokenLevelId(tk) === tokenLevelId(origin))
     .filter((tk) => { const a = tokenCenter(origin), b = tokenCenter(tk); return Math.hypot(a.x-b.x,a.y-b.y) <= ftToPx(scene,15)+1; })
@@ -5516,7 +5589,7 @@ async function executeDomainProfile(actor, targets, requestId) {
     if (getDomain(actor)?.openingId !== state.openingId) break;
     const target = tk.actor ?? tk.document?.actor;
     // Simple Domain uses a finite barrier; leave it to its existing adjudication rather than bypassing it.
-    if (target.effects?.some((fx) => liveWard(fx) && /^Simple Domain(?: \(10 ft\))?$/.test(fx.name))) {
+    if (target.effects?.some((fx) => liveWard(fx) && fx.flags?.jjk5e?.kind!=="simpleDomainBarrier" && /^Simple Domain(?: \(10 ft\))?$/.test(fx.name))) {
       await chat(actor,`<p>${esc(target.name)}: ${t("Domain.ProfileSimpleDomain")}</p>`); continue;
     }
     if (typeof target.applyDamage !== "function") continue;
@@ -5534,7 +5607,13 @@ async function executeDomainProfile(actor, targets, requestId) {
     const roll = await new Roll(profile.damage).evaluate();
     await roll.toMessage?.({ speaker: docClass("ChatMessage").getSpeaker?.({actor}), flavor: esc(profile.name) });
     if (getDomain(actor)?.openingId !== state.openingId || !domainProfileTargets(actor,[tk]).length) continue;
-    const value = Math.max(0, Math.floor(roll.total * (success ? ({half:0.5,none:0,full:1})[profile.onSave] : 1)));
+    let value = Math.max(0, Math.floor(roll.total * (success ? ({half:0.5,none:0,full:1})[profile.onSave] : 1)));
+    const simple=simpleDomainAt(tk);
+    if(simple&&value>0){
+      const absorption=await absorbSimpleDomain(simple,value,`${state.openingId}:${requestId}:${target.uuid}`);
+      if(!absorption)continue;
+      value=absorption.overflow;
+    }
     if (value) await target.applyDamage([{ value, type: profile.damageType }]);
     if (!success && profile.condition !== "none") {
       await target.createEmbeddedDocuments("ActiveEffect", [fxData({ name: profile.name, img: `${ICONS}/domain.svg`,
