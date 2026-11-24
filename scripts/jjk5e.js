@@ -3855,12 +3855,22 @@ async function levelUp(actor) {
     if (!id) return;
     cls = actor.items.get(id);
   }
+  if (!cls || cls.type !== "class" || !actor.isOwner || characterLevel(actor) >= 20) return false;
   const AM = globalThis.dnd5e?.applications?.advancement?.AdvancementManager;
-  if (AM && !game.settings.get("dnd5e", "disableAdvancements")) {
-    const manager = AM.forLevelChange(actor, cls.id, 1);
-    if (manager.steps.length) return manager.render({ force: true });
+  if (!AM || game.settings.get("dnd5e", "disableAdvancements")) {
+    ui.notifications.warn(game.i18n.lang.startsWith("es") ?
+      "Activa los avances de D&D 5e para subir de nivel sin perder rasgos, PG ni elecciones." :
+      "Enable D&D 5e advancements to level up without losing features, HP or choices.");
+    return false;
   }
-  return cls.update({ "system.levels": cls.system.levels + 1 });
+  const manager = AM.forLevelChange(actor, cls.id, 1);
+  if (manager.steps.length) return manager.render({ force: true });
+  // A genuinely empty native advancement flow may use the normal level update.
+  await cls.update({ "system.levels": cls.system.levels + 1 });
+  await dedupeMulticlass(actor);
+  await syncTechnique(actor);
+  await applyScaling(actor);
+  return true;
 }
 
 function addLevelUpButton(app, element) {
