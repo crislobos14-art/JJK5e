@@ -50,6 +50,7 @@ async function safeDelete(doc) {
   if (doc.parent && coll?.get && !coll.get(doc.id)) return;
   doc._jjkDeleting = true;
   try { await doc.delete(); } catch (err) { if (!/does not exist|not exist/i.test(String(err?.message))) console.warn(`${MODULE_ID} | delete`, err); }
+  finally { doc._jjkDeleting = false; }
 }
 
 async function confirmDialog(title, content) {
@@ -430,6 +431,42 @@ const CE_AUTH_QUERY = `${MODULE_ID}.ceAuthority`;
 const CE_USAGE_CONTEXT = new WeakMap();
 const CE_RECOVERY_RESULTS = new WeakSet();
 const CE_MIDI_ATTACKS = new WeakSet();
+const CE_MIDI_WORKFLOWS = new WeakMap();
+const CE_MIDI_DENIED = new WeakSet();
+const MIDI_GUARD_STAGES = ["preAttackRoll","preDamageRoll","preFormulaRoll","preWaitForSaves",
+  "preTeleport","preAllRollsComplete","preApplyDynamicEffects"];
+function midiActivity(workflow){return workflow?.activity??null;}
+function captureMidiUsage({workflow,usage}={}){
+  const activity=midiActivity(workflow);
+  if(!workflow || !activity || !usage || typeof usage!=="object") return;
+  CE_MIDI_WORKFLOWS.set(workflow,{usage,key:ceUsageKey(activity)});
+}
+function midiCEContext(workflow){
+  const binding=CE_MIDI_WORKFLOWS.get(workflow),activity=midiActivity(workflow);
+  if(!binding||binding.key!==ceUsageKey(activity)) return null;
+  return ceContext(activity,binding.usage);
+}
+function midiCEGuard(workflow){
+  const activity=midiActivity(workflow);
+  if(!ceAuthorityEnabled()||!setting("autoSpendCE")||!managedCE(activity)) return true;
+  const ctx=midiCEContext(workflow);
+  // A transaction for another use of the same item is not proof of payment.
+  if(ctx?.state==="committed" && ctx.actorUuid===(activity.actor??activity.item?.actor)?.uuid) return true;
+  if(!CE_MIDI_DENIED.has(workflow)){
+    CE_MIDI_DENIED.add(workflow);
+    ui.notifications.warn(t("Notify.CEWorkflowUnverified"));
+  }
+  return false;
+}
+function midiDomainGuard(workflow){
+  if(!midiCEGuard(workflow)) return false;
+  excludeDomainWardedTargets(workflow);
+  return true;
+}
+function registerMidiCEBridge(){
+  Hooks.on("midi-qol.preItemRollV2",captureMidiUsage);
+  for(const stage of MIDI_GUARD_STAGES) Hooks.on(`midi-qol.${stage}`,midiDomainGuard);
+}
 function cePostAllowed(activity,usageConfig){
   return !ceAuthorityEnabled() || !setting("autoSpendCE") || !managedCE(activity) ||
     ceContext(activity,usageConfig)?.state==="committed";
@@ -582,8 +619,12 @@ function installCEAdapters() {
   return CE_ADAPTER_TARGETS.size>0;
 }
 function ceDiagnostics(actor){
+  const types=Object.entries(CONFIG.DND5E?.activityTypes??{}).filter(([,cfg])=>typeof cfg.documentClass?.prototype?.consume==="function").map(([key])=>key);
   return {transactional:ceAuthorityEnabled(),adapters:[...CE_ADAPTER_TARGETS],
-    midi:!!game.modules.get("midi-qol")?.active,dae:!!game.modules.get("dae")?.active,
+    unwrappedTypes:types.filter(key=>!CE_ADAPTER_TARGETS.has(`CONFIG.DND5E.activityTypes.${key}.documentClass.prototype.consume`)),
+    midi:!!game.modules.get("midi-qol")?.active,midiVersion:game.modules.get("midi-qol")?.version??null,
+    dae:!!game.modules.get("dae")?.active,daeVersion:game.modules.get("dae")?.version??null,
+    midiGuardStages:[...MIDI_GUARD_STAGES],expiryAuthority:externalEffectExpiry()?"DAE/Times Up":"JJK fallback",
     libWrapper:!!globalThis.libWrapper?.register,gm:!!(game.users.activeGM||game.user.isGM),
     pending:ceLedger(findPool(actor)).filter(x=>["reserved","review"].includes(x.state))};
 }
@@ -805,9 +846,9 @@ async function setKindEffect(actor, kind, data) {
   return created?.[0] ?? null;
 }
 
-const hasKind = (actor, kind) => !!actor?.effects?.some((e) => e.flags?.jjk5e?.kind === kind && !e.disabled);
-const domainOpen = (actor) => !!actor?.effects?.some((e) => (e.flags?.jjk5e?.kind === "domain" || e.flags?.jjk5e?.domainOpen) && !e.disabled);
-const inBurnout = (actor) => !!actor?.effects?.some((e) => (e.flags?.jjk5e?.kind === "burnout" || e.flags?.jjk5e?.burnout) && !e.disabled);
+const hasKind = (actor, kind) => !!actor?.effects?.some((e) => e.flags?.jjk5e?.kind === kind && liveWard(e));
+const domainOpen = (actor) => !!actor?.effects?.some((e) => (e.flags?.jjk5e?.kind === "domain" || e.flags?.jjk5e?.domainOpen) && liveWard(e));
+const inBurnout = (actor) => !!actor?.effects?.some((e) => (e.flags?.jjk5e?.kind === "burnout" || e.flags?.jjk5e?.burnout) && liveWard(e));
 const zoneEffect = (actor) => actor?.effects?.find((e) => e.flags?.jjk5e?.kind === "zone" || e.flags?.jjk5e?.zone);
 
 /* -------------------------------------------- */
@@ -2036,8 +2077,11 @@ async function dismissSummons(actor) {
 /*  Effect expiry (when Times Up is not active)  */
 /* -------------------------------------------- */
 
+function externalEffectExpiry(){
+  return (Number(game.release?.generation)>=14&&!!game.modules.get("dae")?.active)||!!game.modules.get("times-up")?.active;
+}
 async function expireEffects() {
-  if (!isActiveGM() || !setting("autoExpire") || game.modules.get("times-up")?.active) return;
+  if (!isActiveGM() || !setting("autoExpire") || externalEffectExpiry()) return;
   const actors = new Set();
   game.combat?.combatants?.forEach((c) => c.actor && actors.add(c.actor));
   for (const scene of game.scenes ?? []) scene.tokens?.forEach((tk) => tk.actor && actors.add(tk.actor));
@@ -3487,7 +3531,9 @@ function tokenDistance(a, b) {
 
 function registerMidiHooks() {
   if (!midiActive()) return;
+  registerMidiCEBridge();
   Hooks.on("midi-qol.preAttackRoll", workflow => {
+    if(!midiCEGuard(workflow)) return false;
     const actor = workflow.actor;
     const attack = workflow.activity?.attack?.type?.value;
     if (attack !== "melee" || workflow.targets?.size !== 1 || !actor?.items.some(item =>
@@ -3511,7 +3557,7 @@ function registerMidiHooks() {
   // Midi decides each target's hit here (after cover, AC bonuses and reactions).
   Hooks.on("midi-qol.premades.checkHitTarget", (hitCheck) => {
     try {
-      if (!sureHit(hitCheck?.workflow, hitCheck?.target ?? hitCheck?.token)) return;
+      if (!midiCEGuard(hitCheck?.workflow)||!sureHit(hitCheck?.workflow, hitCheck?.target ?? hitCheck?.token)) return;
       hitCheck.isHit = true;
       if ("isHitEC" in hitCheck) hitCheck.isHitEC = true;
     } catch (err) { console.error(`${MODULE_ID} | midi sure-hit`, err); }
@@ -3519,7 +3565,7 @@ function registerMidiHooks() {
   // Older Midi builds without that hook: force the hit list afterwards.
   Hooks.on("midi-qol.hitsChecked", (workflow) => {
     try {
-      if (!workflow) return;
+      if (!workflow||!midiCEGuard(workflow)) return;
       excludeDomainWardedTargets(workflow);
       const eligible = [...(workflow.targets ?? [])].filter((t) => sureHit(workflow, t));
       if (eligible.length) workflow.hitTargets = new Set([...(workflow.hitTargets ?? []), ...eligible]);
@@ -3530,7 +3576,7 @@ function registerMidiHooks() {
   Hooks.on("midi-qol.postCheckSaves", (workflow) => {
     try {
       const item = workflow?.item;
-      if (!setting("domainSureHit") || !domainOpen(workflow?.actor) || !item?.flags?.jjk5e?.technique || sureHitBlocked(workflow?.actor)) return;
+      if (!midiCEGuard(workflow)||!setting("domainSureHit") || !domainOpen(workflow?.actor) || !item?.flags?.jjk5e?.technique || sureHitBlocked(workflow?.actor)) return;
       excludeDomainWardedTargets(workflow);
       const all = new Set([...(workflow.saves ?? []), ...(workflow.failedSaves ?? [])]);
       const forced = [...all].filter((token) => sureHit(workflow, token));
@@ -3540,11 +3586,12 @@ function registerMidiHooks() {
   });
   // Animations with Midi's real hit list.
   Hooks.on("midi-qol.RollComplete", (workflow) => {
+    if(!midiCEGuard(workflow)) return;
     onSoulWorkflow(workflow).catch((err) => console.error(`${MODULE_ID} | soul damage`, err));
   });
   Hooks.on("midi-qol.RollComplete", (workflow) => {
     try {
-      if (!animOn()) return;
+      if (!animOn()||!midiCEGuard(workflow)) return;
       const item = workflow?.item;
       const activity = workflow?.activity;
       if (!item?.flags?.jjk5e || aaHandles(item) || activity?.type !== "attack") return;
@@ -4696,7 +4743,7 @@ function insideDomain(state, token) {
  * a finite barrier, so it must not be treated as unconditional immunity. */
 const DOMAIN_WARD_KINDS = new Set(["fallingBlossomDefense", "hollowWickerProtection", "domainAmplification"]);
 function liveWard(effect) {
-  return !!effect && !effect.disabled && effect.duration?.expired !== true &&
+  return !!effect && !effect.disabled && !effect.isSuppressed && effect.duration?.expired !== true &&
     (effect.duration?.remaining == null || effect.duration.remaining > 0);
 }
 function tokenLevelId(token) {
@@ -4752,6 +4799,9 @@ function domainGuaranteedTarget(workflow, target) {
 }
 function excludeDomainWardedTargets(workflow) {
   if (!workflow?.targets) return [];
+  // Do not strip allied targets from explicitly healing, summoning, teleport or utility activities.
+  const type=workflow.activity?.type;
+  if(type && ["heal","summon","teleport","utility","enchant","cast","check","transform"].includes(type)) return [];
   const protectedTargets = [...workflow.targets].filter((tk) => domainGuaranteedTarget(workflow, tk) && domainWard(tk));
   if (!protectedTargets.length) return [];
   const ids = new Set(protectedTargets.map((tk) => (tk?.document ?? tk)?.uuid).filter(Boolean));
@@ -5760,9 +5810,11 @@ Hooks.once("ready", () => {
   Hooks.on("renderTokenHUD", (hud, html) => { try { addTokenHUDButton(hud, html); } catch (err) { console.error(`${MODULE_ID} | token hud`, err); } });
   // Foundry 14 disables expired effects instead of deleting them: delete JJK timed effects so their cleanup runs.
   Hooks.on("updateActiveEffect", (effect, changes) => {
-    if (!isActiveGM() || changes?.disabled !== true) return;
+    if (!isActiveGM() || effect.parent?.documentName!=="Actor" || changes?.disabled !== true) return;
     const f = effect.flags?.jjk5e ?? {};
-    if (["zone", "burnout", "domain"].includes(f.kind) || f.domainOpen || f.burnout) safeDelete(effect);
+    // DAE can expire by disabling rather than deleting. Only terminal JJK lifecycle
+    // effects are converted to a deletion; never remove the source item's template.
+    if (["zone", "burnout", "domain"].includes(f.kind) || f.domainOpen || f.burnout) return safeDelete(effect);
   });
 });
 
@@ -6189,11 +6241,12 @@ const midiBlackFlashCards = new Set();
 
 /** Save DC of the creature that applied an effect (for OverTime repeat saves baked into the compendium data). */
 function originSaveDC(effect) {
-  let item = null;
-  try { item = effect?.origin ? fromUuidSync(effect.origin) : null; } catch (err) { item = null; }
-  const actor = item?.actor ?? (item?.documentName === "Actor" ? item : null);
+  let origin = null;
+  try { origin = effect?.origin ? fromUuidSync(effect.origin) : null; } catch (err) { origin = null; }
+  const item=origin?.documentName==="Item"?origin:origin?.item;
+  const actor = item?.actor ?? origin?.actor ?? (origin?.documentName === "Actor" ? origin : null);
   const dc = Number(actor?.system?.attributes?.spell?.dc) || Number(actor?.system?.attributes?.spelldc);
-  if (dc) return dc;
+  if (dc && !item?.flags?.jjk5e) return dc;
   const prof = Number(actor?.system?.attributes?.prof) || 2;
   const mod = Number(actor?.system?.abilities?.[actor ? ceAbility(actor) : "wis"]?.mod) || 0;
   return 8 + prof + mod;
@@ -6234,7 +6287,10 @@ function usesScalingToken(activity) {
 function recordScaling(activity, usageConfig) {
   const item = activity?.item;
   if (!item || !usesScalingToken(activity)) return;
-  const value = 1 + (Number(usageConfig?.scaling) || 0);
+  const scaling=Number(usageConfig?.scaling??0);
+  if(!Number.isSafeInteger(scaling)||scaling<0) return;
+  if(ceAuthorityEnabled()&&setting("autoSpendCE")&&managedCE(activity)&&ceContext(activity,usageConfig)?.state!=="reservingNative") return;
+  const value = 1 + scaling;
   LAST_SCALING.set(item.uuid, value);
   if (item.isOwner && item.getFlag(MODULE_ID, "lastScaling") !== value) item.setFlag(MODULE_ID, "lastScaling", value).catch(() => {});
 }
@@ -6276,6 +6332,7 @@ function registerMidiAutomation() {
   // Black Flash: check after Midi's attack roll, before its damage roll (Midi awaits these hooks).
   Hooks.on("midi-qol.AttackRollComplete", async (workflow) => {
     try {
+      if(!midiCEGuard(workflow)) return;
       const roll = workflow?.attackRoll;
       if (!roll || typeof roll!=="object" || CE_MIDI_ATTACKS.has(roll)) return;
       CE_MIDI_ATTACKS.add(roll);
@@ -7548,6 +7605,7 @@ Hooks.once("ready", () => {
   }
   if (midiActive()) {
     Hooks.on("midi-qol.RollComplete", (workflow) => {
+      if(!midiCEGuard(workflow)) return;
       calledShotResult(workflow).catch((err) => reportError("called shot", err));
       coupResult(workflow).catch((err) => reportError("coup", err));
       if (optOn("executionEvasion") && /Executioner|Verdugo/i.test(workflow?.activity?.name ?? "")) {
