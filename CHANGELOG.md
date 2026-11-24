@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.84.0 — Sealed Ink y mejoras de automatización
+- Amplía Sealed Ink a progresión, dotes, combate y descansos, editores, compendios y herramientas JJK, con preferencias por categoría y por usuario.
+- Añade un centro de avisos y un HUD de combate opcionales. Muestra recursos y estados del actor, abre actividades nativas y presenta cambios con animaciones locales que respetan la preferencia de movimiento reducido.
+- Mejora la creación y progresión de personajes con selección de mindset, controles de requisitos y confirmación para dotes.
+- Refuerza las comprobaciones de descansos y energía maldita, economía de acciones, invocaciones, Simple Domain, Falling Blossom Emotion, RCT, daño al alma y requisitos de reversión de técnicas.
+- Sealed Ink sigue en desarrollo. Quedan pendientes los diseños completos de las hojas y las pruebas de integración en una partida multijugador real de Foundry con Midi-QOL y DAE.
+
 ## 1.83.0 — Hoja Sealed Ink (vista preliminar)
 - Añade Sealed Ink como opción visual para personajes y PNJ. El diseño nativo de D&D 5e sigue siendo el predeterminado. Cada usuario puede elegir el diseño en los ajustes del módulo y también se puede seleccionar la hoja Sealed Ink desde la configuración del actor.
 - Conserva las tiradas, actividades, inventario y permisos de las hojas nativas. Para los dueños del personaje, muestra las invocaciones vinculadas visibles de la escena actual y permite abrir sus fichas.

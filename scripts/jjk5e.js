@@ -512,7 +512,8 @@ function ceLedger(pool) {
   const data = pool?.getFlag?.(MODULE_ID,"ceLedger");
   return Array.isArray(data) ? foundry.utils.deepClone(data) : [];
 }
-function cePending(pool) { return ceLedger(pool).some((x) => x.state === "reserved" || x.state === "review"); }
+function restReview(actor){return actor?.getFlag?.(MODULE_ID,"shortRestExchange")?.state==="review";}
+function cePending(pool) { return restReview(pool?.actor ?? pool?.parent) || ceLedger(pool).some((x) => x.state === "reserved" || x.state === "review"); }
 function ceRecord(ledger, record) {
   const others = ledger.filter((x)=>x.id!==record.id);
   // Never discard open reservations. Bound only closed history.
@@ -540,11 +541,12 @@ async function ceAuthorityRequest(operation,payload) {
 }
 async function handleCEAuthority(msg,{user}={}) {
   if (!ceAuthorityEnabled() || !isActiveGM() || !user?.active || !msg?.payload ||
-      !["reserve","start","commit","review","settle","adjust","linkCard"].includes(msg.operation)) return false;
+      !["reserve","start","commit","review","settle","adjust","linkCard","restExchange"].includes(msg.operation)) return false;
   const {operation,payload:d}=msg;
   const actor=await domainActor(d.actorUuid);
   if (!canDirectDomain(user,actor)) return false;
   if (operation==="settle"&&!user.isGM) return false;
+  if(operation==="restExchange")return commitRestExchange(actor,d.restId,d.amount,{requester:user});
   if (operation==="adjust") {
     if (!Number.isFinite(d.amount) || Math.abs(d.amount)>100000) return false;
     if (!user.isGM && !await confirmDialog(t("GMRequest.Title"),`<p>${esc(user.name)}: ${esc(actor.name)} — ${esc(String(d.amount))} CE</p>`)) return false;
@@ -763,7 +765,7 @@ function totalActivityCECost(actor, activity, usageConfig = {}) {
   return activityCECost({ base, step, scaling, factor: ceDiscountFactor(actor) });
 }
 async function doSpendCE(actor, amount, label = "", { exact = false } = {}) {
-  if (!actor?.isOwner || !Number.isFinite(amount)) return false;
+  if (!actor?.isOwner || !Number.isFinite(amount) || restReview(actor)) return false;
   const pool = findPool(actor);
   if (!pool) {
     ui.notifications.warn(t("Notify.NoPool", { name: actor?.name ?? "?" }));
@@ -820,7 +822,7 @@ async function setExactCE(actor, value) {
 }
 function validActivityCE(actor, activity, usageConfig, { checkPool = true } = {}) {
   const cost = totalActivityCECost(actor, activity, usageConfig);
-  if (!Number.isFinite(cost) || cost < 0) return false;
+  if (!Number.isFinite(cost) || cost < 0 || (cost>0&&restReview(actor))) return false;
   if (vowBlocksUsage(actor?.effects, { costsCE: cost > 0, innateTechnique: !!activity.item?.flags?.jjk5e?.technique })) return false;
   const ro = Number(actor?.getFlag(MODULE_ID,"reducedOutput")) || 0;
   if (RO_MAX[ro] && cost > RO_MAX[ro]) {
@@ -982,20 +984,83 @@ const RO_ROWS = [
 ];
 
 /** Full-Turn Action: an activity whose activation condition says "Full turn" (e.g. Domain Expansion). */
-const isFullTurn = (activity) => activity?.activation?.type === "special" && /^full[ -]turn/i.test(activity?.activation?.condition ?? "");
+// Source-audited exceptions in bundled techniques where activation metadata omitted Full Turn/Free Action.
+// IDs survive UI localization; require JJK provenance so unrelated D&D activities are untouched.
+const JJK_FULL_TURN_IDS=new Set(["lwDPiKBBO4ZbmZfr","8vWFnEg9QnfiwtPh","DqujXlB0omasjWGo","hEA4OYlwEM5hHr1X","By1iifz3o9klqhw7","yn7JrUsDc5H8JdGr","PWy7ySyZWFTbBLUl","3OANy2KyMvwhz2io","BWeIMjTm6woMQob1","y5TidkWt2wHekPJS","886Pnz5kN0SnYAWF"]);
+const JJK_FREE_ACTION_IDS=new Set(["tOmjfZVwLHC54lbH","ouA0eQeNTPbAg5Zb","NoFMZTpqmPsDl0T9","T9ncbeSRuf9g99Ja","fGNq4PZAPtSUfT4N","11e01xD5dgvWWq2W","UFgrZvfA5S0POj5u"]);
+const isFullTurn = activity => (activity?.activation?.type==="special" && /^full[ -]turn/i.test(activity.activation.condition??"")) ||
+  (!!activity?.item?.flags?.jjk5e && JJK_FULL_TURN_IDS.has(activity.id));
 // Only on the actor's own turn: a domain used as a clash reaction on another turn is not a full-turn action.
 const ownTurn = (actor) => !!game.combat?.started && !!actor && game.combat.combatant?.actor?.uuid === actor.uuid;
-function fullTurnSpent(actor) {
-  const midi = globalThis.MidiQOL;
-  try { return !!(midi?.hasUsedAction?.(actor) || midi?.hasUsedBonusAction?.(actor)); } catch { return false; }
+// Local turn ledger, complementary to Midi's native action/bonus tracking.
+// Only explicit JJK free actions are counted; ordinary object interactions are separate.
+const ACTION_TURNS=new Map();
+function actionTurn(actor){
+  if(!ownTurn(actor))return null;
+  const c=game.combat, key=[c.id,c.round,c.turn,c.combatant.id].join(":");
+  let state=ACTION_TURNS.get(c.id);
+  if(state?.key!==key){state={key,action:false,bonus:false,free:false,moved:false,full:false,lockMovement:false};ACTION_TURNS.set(c.id,state);}
+  return state;
 }
-async function spendFullTurn(actor) {
-  const midi = globalThis.MidiQOL;
-  if (!ownTurn(actor) || !midi) return;
-  try { await midi.setActionUsed?.(actor); await midi.setBonusActionUsed?.(actor); } catch (err) { reportError("full turn", err); }
+function isJJKFree(activity){
+  if(!activity?.item?.flags?.jjk5e)return false;
+  const a=activity.activation;
+  return JJK_FREE_ACTION_IDS.has(activity.id) || a?.type==="free" || (a?.type==="special" && /^free[ -]action(?:$|[\s(:])/i.test(a.condition??""));
+}
+function lesserFullTurn(activity){
+  // Only explicit exceptions; don't infer from a generic "special" activation.
+  const text=String(activity?.activation?.condition??"");
+  return /(?:no movement|without movement|action\s*\+\s*bonus action\s*only)/i.test(text);
+}
+function fullTurnSpent(actor,activity){
+  const state=actionTurn(actor);
+  if(state && (state.action||state.bonus||state.full||(!lesserFullTurn(activity)&&state.moved)))return true;
+  const midi=globalThis.MidiQOL;
+  try{return !!(midi?.hasUsedAction?.(actor)||midi?.hasUsedBonusAction?.(actor));}catch{return false;}
+}
+async function spendFullTurn(actor,activity){
+  const state=actionTurn(actor);
+  if(!state)return;
+  state.action=true;state.bonus=true;state.full=true;
+  if(!lesserFullTurn(activity)){state.moved=true;state.lockMovement=true;}
+  const midi=globalThis.MidiQOL;
+  try{await midi?.setActionUsed?.(actor);await midi?.setBonusActionUsed?.(actor);}catch(err){reportError("full turn",err);}
+}
+function recordTurnActivity(activity){
+  const actor=activity?.actor??activity?.item?.actor;
+  const state=actionTurn(actor);
+  if(!state)return;
+  if(isJJKFree(activity))state.free=true;
+  if(!isFullTurn(activity)&&activity.activation?.type==="action")state.action=true;
+  if(activity.activation?.type==="bonus")state.bonus=true;
+}
+function isClaimedDomainReaction(actor,activity){
+  if(activity?.item?.flags?.jjk5e?.domainActivity!==activity?.id)return false;
+  const claim=actor?.getFlag(MODULE_ID,"domainReactionClaim");
+  return !!claim?.id && Number(claim.expires)>nowMs();
+}
+function actionGate(actor,activity,{recheck=false}={}){
+  const state=actionTurn(actor);
+  if(activity?.item?.flags?.jjk5e?.optAction&&!optOn("additionalActions"))return false;
+  if(isJJKFree(activity)&&game.combat?.started&&(!state||state.free))return false;
+  if(isFullTurn(activity)&&game.combat?.started&&!isClaimedDomainReaction(actor,activity)&&(!state||(recheck?(state.action||state.bonus||state.full||(!lesserFullTurn(activity)&&state.moved)):fullTurnSpent(actor,activity))))return false;
+  if(state?.full&&["action","bonus"].includes(activity.activation?.type))return false;
+  return true;
 }
 
 function registerActivityHooks() {
+  Hooks.on("deleteCombat",c=>ACTION_TURNS.delete(c.id));
+  Hooks.on("preMoveToken",(token,movement)=>{
+    const state=actionTurn(token.actor);
+    // GM may adjudicate forced movement; only recorded cost-bearing player movement is blocked.
+    if(!game.user.isGM&&state?.lockMovement&&movement?.recorded&&Number(movement.pending?.cost)>0){
+      ui.notifications.warn(t("Notify.FullTurnUsed"));return false;
+    }
+  });
+  Hooks.on("moveToken",(token,movement)=>{
+    const state=actionTurn(token.actor);
+    if(state&&movement?.recorded&&Number(movement.passed?.cost)>0)state.moved=true;
+  });
   Hooks.on("dnd5e.preUseActivity", (activity, usageConfig) => {
     if([...game.user?.targets??[]].some(tk=>barrierMarkerMeta(tk))){
       ui.notifications.warn(t("Domain.MarkerUseAttack"));
@@ -1021,7 +1086,7 @@ function registerActivityHooks() {
       return false;
     }
     // Full-Turn Action (Rules of Thumb): needs the action, bonus action and all movement still unused.
-    if (isFullTurn(activity) && ownTurn(actor) && fullTurnSpent(actor)) {
+    if (!actionGate(actor,activity)) {
       ui.notifications.warn(t("Notify.FullTurnUsed"));
       return false;
     }
@@ -1069,15 +1134,14 @@ function registerActivityHooks() {
     if (isCloneCreation(activity) && !canCreateClone(activity.item.actor, cloneQuantity(activity, usageConfig))) return false;
     if (activity.item?.flags?.jjk5e?.tokenSwap?.[activity.id] && !validateTokenSwap(activity)) return false;
     const actor = activity.actor ?? activity.item?.actor;
+    // Native Midi may already have reserved a normal action for a bundled full-turn activity.
+    // Recheck local state rather than treating that native reservation as an earlier action.
+    if(!actionGate(actor,activity,{recheck:true}))return false;
     if(ceAuthorityEnabled()&&setting("autoSpendCE")&&managedCE(activity)){
       if(ceContext(activity,usageConfig)?.state!=="reservingNative") return false;
       return;
     }
     if (!validActivityCE(actor, activity, usageConfig, { checkPool: setting("autoSpendCE") })) return false;
-  });
-  Hooks.on("dnd5e.postUseActivity", (activity) => {
-    const actor = activity?.actor;
-    if (isFullTurn(activity) && actor?.isOwner) spendFullTurn(actor);
   });
   Hooks.on("dnd5e.postUseActivity", async (activity, usageConfig, results) => {
     const actor = activity.actor ?? activity.item?.actor;
@@ -1096,6 +1160,8 @@ function registerActivityHooks() {
         ctx.postProcessed=true;
       }else if (!(await payActivityCE(actor, activity, usageConfig))) return;
     }
+    if(actor?.isOwner)recordTurnActivity(activity);
+    if(isFullTurn(activity)&&actor?.isOwner&&!isClaimedDomainReaction(actor,activity))await spendFullTurn(actor,activity);
     if(isQuickRecovery(activity)){
       if(!results || typeof results!=="object" || CE_RECOVERY_RESULTS.has(results)) return;
       CE_RECOVERY_RESULTS.add(results);
@@ -1478,7 +1544,18 @@ async function techniqueIndex() {
   return { pack, index };
 }
 
-async function syncTechnique(actor, { notify = true } = {}) {
+const TECHNIQUE_SYNC = new Map();
+async function syncTechnique(actor, options = {}) {
+  if (!actor?.isOwner) return 0;
+  const key = actor.uuid;
+  const previous = TECHNIQUE_SYNC.get(key) ?? Promise.resolve();
+  const next = previous.catch(() => {}).then(() => syncTechniqueOnce(actor,options));
+  TECHNIQUE_SYNC.set(key,next);
+  try { return await next; }
+  finally { if (TECHNIQUE_SYNC.get(key) === next) TECHNIQUE_SYNC.delete(key); }
+}
+async function syncTechniqueOnce(actor, { notify = true } = {}) {
+  if (!actor?.isOwner || isHeavenlyOnly(actor)) return 0;
   const name = actor?.getFlag(MODULE_ID, "technique");
   if (!name) return 0;
   const lvl = techniqueLevel(actor);
@@ -1492,16 +1569,18 @@ async function syncTechnique(actor, { notify = true } = {}) {
   const customs = (game.items ?? []).filter((i) => i.flags?.jjk5e?.custom && i.flags.jjk5e.technique === name
     && (i.flags.jjk5e.level ?? 99) <= lvl && !owned.has(baseName(i)));
   const docs = [...await Promise.all(ids.map((id) => data.pack.getDocument(id))), ...customs];
-  const toCreate = docs.filter(Boolean).map((d) => {
+  if (!actor.isOwner || actor.getFlag(MODULE_ID,"technique") !== name || isHeavenlyOnly(actor)) return 0;
+  const latest = new Set(actor.items.filter(i=>i.flags?.jjk5e?.technique===name).map(i=>baseName(i)));
+  const toCreate = docs.filter(d=>{ if(!d || latest.has(baseName(d)) || (d.flags?.jjk5e?.level ?? 99) > techniqueLevel(actor)) return false; latest.add(baseName(d)); return true; }).map((d) => {
     const obj = d.toObject();
     foundry.utils.setProperty(obj, "_stats.compendiumSource", d.uuid);
     foundry.utils.setProperty(obj, "flags.core.sourceId", d.uuid);
     return obj;
   });
   if (!toCreate.length) return 0;
-  await actor.createEmbeddedDocuments("Item", toCreate, { jjk5eSkipPrereq: true });
-  if (notify) ui.notifications.info(t("Notify.Gained", { name: actor.name, list: toCreate.map((d) => d.name).join(", ") }));
-  return toCreate.length;
+  const created = await actor.createEmbeddedDocuments("Item", toCreate, { jjk5eSkipPrereq: true });
+  if (notify && created.length) ui.notifications.info(t("Notify.Gained", { name: actor.name, list: created.map((d) => d.name).join(", ") }));
+  return created.length;
 }
 
 function isHeavenlyOnly(actor) {
@@ -1549,40 +1628,100 @@ async function promptCE(mode = "spend", actor) {
 }
 
 /** Exchange actual unused class Hit Dice for CE (V.6: 1 HD => 1 CE, half total HD cap). */
+/** One exchange per confirmed native short rest. An ambiguous write is never retried automatically. */
+const REST_EXCHANGE_RESULTS=new WeakSet();
+function restExchangePlan(actor, pool, n) {
+  if (!pool || !Number.isSafeInteger(n) || n < 1) return null;
+  const classes = actor.items.filter(i=>i.type==="class");
+  const total = classes.reduce((sum,c)=>sum+Math.max(0,Number(c.system.levels)||0),0);
+  if(n>Math.floor(total/2) || n>Math.floor(poolMax(pool)-poolValue(pool))) return null;
+  let left=n; const updates=[];
+  for(const cls of classes){
+    const spent=Number(cls.system.hd?.spent)||0;
+    const take=Math.min(left,Math.max(0,(Number(cls.system.levels)||0)-spent));
+    if(take){updates.push({_id:cls.id,"system.hd.spent":spent+take});left-=take;}
+    if(!left)break;
+  }
+  if(left)return null;
+  const tx=ceTransaction(poolValue(pool),poolMax(pool),-n);
+  if(!tx)return null;
+  const whole=Math.floor(tx.spent+1e-6);
+  updates.push({_id:pool.id,"system.uses.spent":whole,"flags.jjk5e.fractionalSpent":Math.round((tx.spent-whole)*1000)/1000});
+  return updates;
+}
+async function commitRestExchange(actor, restId, n, {requester=null}={}) {
+  return queueCE(actor,async()=>{
+    if(requester&&(!isActiveGM()||!ceAuthorityEnabled()||!canDirectDomain(requester,actor)))return false;
+    const rest=actor.getFlag(MODULE_ID,"shortRestExchange");
+    if(!actor.isOwner || rest?.id!==restId || rest.state!=="open" || game.combat?.started) return false;
+    if(vowBlocksUsage(actor.effects,{costsCE:true}))return false;
+    const pool=findPool(actor);
+    if(!pool || cePending(pool))return false;
+    const updates=restExchangePlan(actor,pool,n);
+    if(!updates)return false;
+    // Persist intent before applying the same-actor embedded Item batch.
+    // If a write fails or acknowledgement is lost, GM must inspect the journal.
+    const before=updates.map(u=>{const item=actor.items.get(u._id);return Object.fromEntries(Object.keys(u).map(k=>[k,k==="_id"?u._id:Number(foundry.utils.getProperty(item,k)??0)]));});
+    await actor.setFlag(MODULE_ID,"shortRestExchange",{id:restId,state:"review",amount:n,before,updates});
+    try{
+      if(requester&&(!isActiveGM()||!canDirectDomain(requester,actor)))throw Error("Rest exchange authority changed");
+      if(!restRowsMatch(actor,before))throw Error("Rest resources changed before commit");
+      await actor.updateEmbeddedDocuments("Item",updates,{jjk5eCE:true});
+      const verified=updates.every(u=>{const item=actor.items.get(u._id);return item&&Object.entries(u).every(([k,v])=>k==="_id"||Number(foundry.utils.getProperty(item,k)??0)===v);});
+      if(!verified)throw Error("Rest exchange verification failed");
+      await actor.setFlag(MODULE_ID,"shortRestExchange",{id:restId,state:"committed",amount:n});
+    }catch(err){
+      reportError("short rest CE review",err);
+      ui.notifications.error(game.i18n.lang.startsWith("es")?"Intercambio de dados/CE incierto: el GM debe revisar el registro del actor. No repitas la operación.":"Hit dice/CE exchange uncertain: GM must review actor record. Do not retry.");
+      return false;
+    }
+    if(setting("ceChat"))try{await chat(actor,`<p><strong>${t("CE.ShortRestLabel",{n})}</strong>: +${n} CE</p>`,privateTo(actor));}catch(err){reportError("rest exchange chat",err);}
+    return true;
+  });
+}
+function restRowsMatch(actor,rows){
+  return Array.isArray(rows)&&rows.length>0&&rows.every(u=>{
+    const item=actor.items.get(u._id);
+    return item&&Object.entries(u).every(([k,v])=>k==="_id"||Number(foundry.utils.getProperty(item,k)??0)===v);
+  });
+}
+async function resolveRestExchange(actor){
+  if(!isActiveGM()||!restReview(actor))return false;
+  return queueCE(actor,async()=>{
+    const rec=actor.getFlag(MODULE_ID,"shortRestExchange");
+    if(rec?.state!=="review")return false;
+    const after=restRowsMatch(actor,rec.updates),before=restRowsMatch(actor,rec.before);
+    const spanish=game.i18n.lang.startsWith("es");
+    if(!after&&!before){
+      ui.notifications.warn(spanish?"Valores mixtos: compara y corrige manualmente los recursos antes de conciliar.":"Mixed values: compare and manually correct resources before reconciliation.");
+      return false;
+    }
+    const state=after?"committed":"open";
+    if(!await confirmDialog("CE · "+(spanish?"Conciliación":"Reconciliation"),`<p>${spanish?"Los valores coinciden con":"Values match"} ${after?(spanish?"la operación aplicada":"the applied operation"):(spanish?"el estado anterior":"the prior state")}.</p>`))return false;
+    if(!restRowsMatch(actor,after?rec.updates:rec.before))return false;
+    await actor.setFlag(MODULE_ID,"shortRestExchange",{id:rec.id,state,amount:after?rec.amount:0});
+    return true;
+  });
+}
 async function shortRestCE(actor) {
-  actor = requireActor(actor);
-  if (!actor || !actor.isOwner) return;
-  const pool = findPool(actor);
-  if (!pool) return ui.notifications.warn(t("Notify.NoPool", { name: actor.name }));
-  if (vowBlocksUsage(actor.effects, { costsCE: true }))
-    return ui.notifications.warn(t("Notify.VowBlocksRegain"));
-  const classes = actor.items.filter((i) => i.type === "class");
-  const total = classes.reduce((n, c) => n + Math.max(0, Number(c.system.levels) || 0), 0);
-  const available = classes.reduce((n, c) =>
-    n + Math.max(0, (Number(c.system.levels) || 0) - (Number(c.system.hd?.spent) || 0)), 0);
-  const missingCE = Math.max(0, poolMax(pool) - poolValue(pool));
-  const cap = Math.min(Math.floor(total / 2), available, Math.floor(missingCE));
-  if (cap < 1) {
-    ui.notifications.warn(t("Notify.NoHitDice"));
-    return;
+  actor=requireActor(actor);
+  if(!actor?.isOwner)return false;
+  const rest=actor.getFlag(MODULE_ID,"shortRestExchange");
+  if(rest?.state!=="open" || game.combat?.started){
+    ui.notifications.warn(game.i18n.lang.startsWith("es")?"Completa un descanso corto nativo antes de intercambiar dados. Solo un intercambio por descanso; un registro en revisión requiere al GM.":"Complete a native short rest before exchanging dice. One exchange per rest; a review record requires the GM.");
+    return false;
   }
-  const n = Math.min(cap, await promptNumber(t("CE.ShortRestTitle"), t("CE.ShortRestPrompt", { cap })));
-  if (!Number.isSafeInteger(n) || n < 1) return;
-  const ok = await confirmDialog(t("CE.ShortRestTitle"),
-    `<p>Consume ${n} class Hit Dice to restore ${n} Cursed Energy?</p>`);
-  if (!ok) return;
-  let left = n;
-  for (const cls of classes) {
-    if (!left) break;
-    const spent = Number(cls.system.hd?.spent) || 0;
-    const usable = Math.max(0, (Number(cls.system.levels) || 0) - spent);
-    const take = Math.min(usable, left);
-    if (!take) continue;
-    await cls.update({ "system.hd.spent": spent + take });
-    left -= take;
-  }
-  if (left) return ui.notifications.error(t("Notify.HitDiceIncomplete"));
-  await spendCE(actor, -n, t("CE.ShortRestLabel", { n }));
+  const pool=findPool(actor);
+  if(!pool || cePending(pool) || vowBlocksUsage(actor.effects,{costsCE:true}))return false;
+  const total=actor.items.filter(i=>i.type==="class").reduce((n,c)=>n+(Number(c.system.levels)||0),0);
+  let cap=Math.floor(total/2);
+  while(cap>0&&!restExchangePlan(actor,pool,cap))cap--;
+  if(cap<1){ui.notifications.warn(t("Notify.NoHitDice"));return false;}
+  const n=await promptNumber(t("CE.ShortRestTitle"),t("CE.ShortRestPrompt",{cap}));
+  if(!Number.isSafeInteger(n)||n<1||n>cap)return false;
+  if(!await confirmDialog(t("CE.ShortRestTitle"),`<p>${game.i18n.lang.startsWith("es")?"Consumir":"Consume"} ${n} HD → +${n} CE?</p>`))return false;
+  if(ceAuthorityEnabled()&&!isActiveGM())return ceAuthorityRequest("restExchange",{actorUuid:actor.uuid,restId:rest.id,amount:n});
+  return commitRestExchange(actor,rest.id,n);
 }
 
 async function negativeEmotion(actor) {
@@ -1729,7 +1868,7 @@ async function applyCEEffects(actor) {
 
 async function chooseCEAbility(actor) {
   actor = requireActor(actor);
-  if (!actor) return null;
+  if (!actor?.isOwner || isHeavenlyOnly(actor)) return null;
   const a = actor.system.abilities;
   const current = ceAbility(actor);
   const content = `<p>${t("CE.AbilityPrompt", { name: esc(actor.name) })}</p>`
@@ -1737,7 +1876,7 @@ async function chooseCEAbility(actor) {
     + `<option value="wis" ${current === "wis" ? "selected" : ""}>${t("Common.Wisdom")} (${a.wis?.mod ?? 0})</option>`
     + `<option value="cha" ${current === "cha" ? "selected" : ""}>${t("Common.Charisma")} (${a.cha?.mod ?? 0})</option></select>`;
   const choice = await promptField(t("CE.AbilityTitle"), content, "ability");
-  if (!choice) return null;
+  if (!["wis","cha"].includes(choice) || !actor.isOwner || isHeavenlyOnly(actor)) return null;
   const old = actor.getFlag(MODULE_ID, "ceAbility");
   await actor.update({ "system.attributes.spellcasting": choice, [`flags.${MODULE_ID}.ceAbility`]: choice });
   if (old && old !== choice) {
@@ -2137,6 +2276,12 @@ async function findSummonSource(name) {
 }
 
 async function gmSummon({ actorUuid, name, count = 1, userId, sceneId, stats = null, sourceUuid = null }) {
+  if(!game.user.isGM || !setting("enableSummoning") || typeof name!=="string" || !name.trim() || !Number.isSafeInteger(count) || count<1 || count>20)return false;
+  const summoner=await domainActor(actorUuid);
+  const scene=game.scenes.get(sceneId);
+  const requester=userId?game.users.get(userId):game.user;
+  if(!summoner||!scene||!canDirectDomain(requester,summoner)||recallBlocked(summoner,name))return false;
+  if(stats&&(!Number.isFinite(stats.hp)||stats.hp<=0||!Number.isFinite(stats.ac)||stats.ac<0))return false;
   const byUuid = sourceUuid ? await fromUuid(sourceUuid) : null;
   const src = (byUuid?.documentName === "Actor" && !byUuid.pack) ? { actor: byUuid } : await findSummonSource(name);
   if (!src) return ui.notifications.warn(t("Summon.NotFound", { name }));
@@ -2153,10 +2298,9 @@ async function gmSummon({ actorUuid, name, count = 1, userId, sceneId, stats = n
     ui.notifications.warn(t("Summon.NotASummon", { name: actor.name }));
     return;
   }
+  if(actor.flags?.jjk5e?.personalFor&&actor.flags.jjk5e.personalFor!==summoner.uuid)return false;
+  if(recallBlocked(summoner,baseName(actor)))return false;
   if (userId && actor.ownership?.[userId] !== 3) await actor.update({ [`ownership.${userId}`]: 3 });
-  const scene = game.scenes.get(sceneId) ?? canvas.scene;
-  if (!scene) return;
-  const summoner = await fromUuid(actorUuid);
   const baseId = summoner?.isToken ? summoner.token?.actorId : summoner?.id;
   const sTok = scene.tokens.find((tk) => (summoner?.isToken && tk.id === summoner.token?.id) || tk.actorId === baseId);
   const grid = scene.grid?.size ?? 100;
@@ -2173,7 +2317,7 @@ async function gmSummon({ actorUuid, name, count = 1, userId, sceneId, stats = n
     const td = await actor.getTokenDocument(extra);
     tokens.push(td.toObject());
   }
-  await scene.createEmbeddedDocuments("Token", tokens);
+  return (await scene.createEmbeddedDocuments("Token", tokens)).length===count;
 }
 
 async function gmDismiss({ actorUuid, sceneId }) {
@@ -2216,7 +2360,7 @@ async function handleGMRequest(msg) {
      <p>${t("GMRequest.Verify")}</p>`);
   if (!confirmed) return false;
   try {
-    if (action === "summon") await gmSummon(msg.payload);
+    if (action === "summon") return (await gmSummon(msg.payload)) === true;
     else if (action === "dismiss") await gmDismiss(msg.payload);
     else if (GM_EXTRA[action]) await GM_EXTRA[action](msg.payload);
   } catch (err) { console.error(`${MODULE_ID} | GM request`, err); return false; }
@@ -2244,7 +2388,7 @@ async function summon(actor, name, count = 1) {
   if (!actor) return;
   if (!name) return ui.notifications.warn(t("Summon.NeedName"));
   if (!canvas?.scene) return ui.notifications.warn(t("Notify.NoScene"));
-  if (fallen(actor).includes(String(name).trim().toLowerCase()) && !game.user.isGM) {
+  if (recallBlocked(actor,name)) {
     return ui.notifications.warn(t(optOn("totalityAlt") ? "Opt.Totality.UntilRest" : "Opt.Totality.Dead"));
   }
   return viaGM("summon", { actorUuid: actor.uuid, name, count: clamp(Number(count) || 1, 1, 20), userId: game.user.id, sceneId: canvas.scene.id });
@@ -2437,6 +2581,8 @@ function panelHTML(actor, tab = "combat") {
   const gmTab = gm ? `<p class="jjk-note">${t("Panel.GMHint")}</p>
     <fieldset><legend>${t("Panel.GMValues")}</legend><div class="jjk-grid">
       ${pool ? pbtn("gmCE", "fas fa-bolt", `${t("Panel.GMSetCE")} (${value}/${max})`) : ""}
+      ${restReview(actor)?pbtn("restReview","fas fa-triangle-exclamation",game.i18n.lang.startsWith("es")?"Conciliar descanso":"Reconcile rest"):""}
+      ${actor.flags?.jjk5e?.shikigami&&Number(actor.system.attributes?.hp?.value)===0?pbtn("shikigamiReview","fas fa-ghost",game.i18n.lang.startsWith("es")?"Resolver shikigami a 0 PG":"Resolve shikigami at 0 HP"):""}
       ${pbtn("engineDiagnostics", "fas fa-stethoscope", t("Diag.Title"))}
       ${pbtn("gmRefinement", "fas fa-circle-half-stroke", `${t("Domain.Refinement")}: ${refinementOf(actor)}`)}
       ${pbtn("soulDamage", "fas fa-ghost", t("Soul.Apply"))}
@@ -2520,6 +2666,8 @@ const PANEL_ACTIONS = {
   ceRegain: (actor) => promptCE("regain", actor),
   negEmotion: (actor) => negativeEmotion(actor),
   shortRest: (actor) => shortRestCE(actor),
+  restReview: (actor) => resolveRestExchange(actor),
+  shikigamiReview: (actor) => recordFallenShikigami(actor),
   chooseTechnique: (actor) => chooseTechnique(actor),
   ceAbility: (actor) => chooseCEAbility(actor),
   pointBuy: (actor) => pointBuy(actor),
@@ -2554,7 +2702,7 @@ const PANEL_ACTIONS = {
 
 // Overrides that only the GM may use (hidden for players and refused if called anyway).
 const GM_PANEL_ACTIONS = new Set(["clearBurnout", "clearZone", "clearBF", "clearSoul", "soulDamage", "roUp", "roDown",
-  "soulUp", "soulDown", "limb", "gmRefinement", "gmBreakthrough", "gmCE", "updateAll","engineDiagnostics"]);
+  "soulUp", "soulDown", "limb", "gmRefinement", "gmBreakthrough", "gmCE", "updateAll","engineDiagnostics","restReview","shikigamiReview"]);
 
 function makePanelClass() {
   const Base = foundry.applications?.api?.ApplicationV2;
@@ -2697,12 +2845,12 @@ async function healSoulWithRCT(actor) {
   const sd = soulDamageOf(actor);
   const soul = Number(actor?.getFlag(MODULE_ID, "soulAwareness")) || 0;
   const pool = actor?.items?.find((i) => /Reverse Cursed Technique \(Healing Pool\)/i.test(baseName(i)));
-  if (!actor || !sd || soul < 6 || !hasRCT(actor)) return ui.notifications.warn(t("Soul.HealRCTUnavailable"));
-  const left = pool ? Math.max(0, (Number(pool.system?.uses?.max) || 0) - (Number(pool.system?.uses?.spent) || 0)) : Infinity;
+  if (!actor?.isOwner || !pool || !sd || soul < 6 || !hasRCT(actor)) return ui.notifications.warn(t("Soul.HealRCTUnavailable"));
+  const left = Math.max(0, (Number(pool.system?.uses?.max) || 0) - (Number(pool.system?.uses?.spent) || 0));
   const maxCE = Math.min(Math.ceil(sd / 10), Math.floor(left / 10), Math.max(1, ceMod(actor)));
   if (!(maxCE > 0)) return ui.notifications.warn(t("Soul.HealRCTUnavailable"));
   const n = clamp(Number(await promptNumber(t("Soul.HealRCT"), t("Soul.HealRCTPrompt", { max: maxCE, sd }), maxCE)) || 0, 0, maxCE);
-  if (!n || !(await spendCE(actor, n, t("Soul.HealRCT")))) return false;
+  if (!Number.isSafeInteger(n) || n<1 || !(await spendCE(actor, n, t("Soul.HealRCT")))) return false;
   const healed = Math.min(sd, 10 * n);
   if (pool) await pool.update({ "system.uses.spent": (Number(pool.system?.uses?.spent) || 0) + 10 * n });
   const rest = sd - healed;
@@ -3078,7 +3226,7 @@ Hooks.once("init", () => {
   game.modules.get(MODULE_ID).api = {
     importAll, promptImport, spendCE, dataLanguage, baseName,
     regainCE: (actor, amount, label) => spendCE(actor, -Math.abs(amount), label || t("CE.Regained")),
-    findPool, chooseTechnique, syncTechnique, promptCE, shortRestCE, chooseCEAbility, negativeEmotion,
+    findPool, poolValue, poolMax, cePending, resolveRestExchange, chooseTechnique, syncTechnique, promptCE, shortRestCE, chooseCEAbility, negativeEmotion,
     applyScaling, openPanel, maximumOutput, setReducedOutput, setSoulAwareness, setLimb, rollLimb,
     summon, dismissSummons, syncResource, missingPrereqs, applyCEEffects, activateGroup, endGroup,
     updateAutomation, updateAllAutomation, outdatedItems, burnoutRecovery, fallDamage, applySoulDamage, clearSoulDamage,
@@ -3148,7 +3296,7 @@ Hooks.once("ready", async () => {
   Hooks.on("updateCombat", () => expireEffects());
   for(const hook of ["dnd5e.preShortRest","dnd5e.preLongRest","dnd5e.preRestCompleted"]) {
     Hooks.on(hook,actor=>{
-      if(ceAuthorityEnabled()&&cePending(findPool(actor))) {
+      if(restReview(actor)||(ceAuthorityEnabled()&&cePending(findPool(actor)))) {
         ui.notifications.warn(t("Notify.CEPendingRest"));
         return false;
       }
@@ -3156,6 +3304,12 @@ Hooks.once("ready", async () => {
   }
   Hooks.on("dnd5e.restCompleted", async (actor, result) => {
     if (!actor?.isOwner) return;
+    if(!result || typeof result!=="object" || REST_EXCHANGE_RESULTS.has(result))return;
+    REST_EXCHANGE_RESULTS.add(result);
+    if(actor.getFlag(MODULE_ID,"shortRestExchange")?.state!=="review"){
+      if(result?.longRest)await actor.unsetFlag(MODULE_ID,"shortRestExchange");
+      else if(result)await actor.setFlag(MODULE_ID,"shortRestExchange",{id:foundry.utils.randomID(),state:"open"});
+    }
     if (result?.longRest) {
       const pool = findPool(actor);
       if (pool && (!ceAuthorityEnabled()||(!cePending(pool)&&isActiveGM()))) await queueCE(actor, () => pool.update({ "system.uses.spent": 0, "flags.jjk5e.fractionalSpent": 0 }, { jjk5eCE: true }));
@@ -3402,7 +3556,7 @@ async function injectASIFeats(app, element) {
   if (!root || root.querySelector(".jjk5e-asi")) return;
   const actor = adv.actor;
   const docs = await jjkFeatDocs();
-  if (!docs.length) return;
+  if (!docs.length || !root.isConnected || root.querySelector(".jjk5e-asi")) return;
   const owned = new Set(actor.items.map((i) => normName(baseName(i))));
   const eligible = docs.filter((d) => d.system?.type?.value === "feat"
     && (!owned.has(normName(baseName(d))) || d.system?.prerequisites?.repeatable)
@@ -3425,22 +3579,31 @@ async function injectASIFeats(app, element) {
   const select = box.querySelector("[data-jjk-feat]");
   // The flow form submits (and re-renders, which resets this list) on every change: keep the change to ourselves.
   for (const type of ["change", "input"]) select.addEventListener(type, (ev) => ev.stopPropagation());
+  const takeButton = box.querySelector("[data-jjk-take]");
+  let busy = false;
   const take = async (ev) => {
     ev?.preventDefault?.(); ev?.stopPropagation?.();
     const uuid = select.value;
-    if (!uuid) return;
+    if (!uuid || busy || !box.isConnected) return;
+    busy = true;
+    takeButton.disabled = true;
     try {
       const item = await fromUuid(uuid);
-      const ok = item?.system?.assertPrerequisites?.(adv.actor, { showMessage: true }) ?? true;
+      if (!item || !featFitsTechnique(adv.actor, item) || missingPrereqs(adv.actor, item).length) return;
+      const alreadyOwned = adv.actor.items.some(i => normName(baseName(i)) === normName(baseName(item)));
+      if (alreadyOwned && !item.system?.prerequisites?.repeatable) return;
+      const ok = item.system?.assertPrerequisites?.(adv.actor, { showMessage: true }) ?? true;
       if (ok !== true) return;
       if (adv.value?.type) await adv.reverse(app.level);
       await adv.apply(app.level, { retainedItems: app.retainedData?.retainedItems, type: "feat", uuid });
       ui.notifications.info(t("ASI.Taken", { name: item?.name ?? "" }));
     } catch (err) { reportError("asi feat", err); }
+    finally { busy = false; takeButton.disabled = false; }
     app.render();
   };
-  select.addEventListener("change", take);
-  box.querySelector("[data-jjk-take]").addEventListener("click", take);
+  // In Sealed Ink a selection is a preview, not an implicit grant.
+  select.addEventListener("change", ev => { if (!box.closest(".jjk-sealed-surface")) take(ev); });
+  takeButton.addEventListener("click", take);
   const host = root.querySelector(".feat-section") ?? root.querySelector(".standard-form") ?? root.querySelector("form") ?? root.querySelector(".window-content") ?? root;
   host.append(box);
 }
@@ -3833,12 +3996,22 @@ async function levelUp(actor) {
     if (!id) return;
     cls = actor.items.get(id);
   }
+  if (!cls || cls.type !== "class" || !actor.isOwner || characterLevel(actor) >= 20) return false;
   const AM = globalThis.dnd5e?.applications?.advancement?.AdvancementManager;
-  if (AM && !game.settings.get("dnd5e", "disableAdvancements")) {
-    const manager = AM.forLevelChange(actor, cls.id, 1);
-    if (manager.steps.length) return manager.render({ force: true });
+  if (!AM || game.settings.get("dnd5e", "disableAdvancements")) {
+    ui.notifications.warn(game.i18n.lang.startsWith("es") ?
+      "Activa los avances de D&D 5e para subir de nivel sin perder rasgos, PG ni elecciones." :
+      "Enable D&D 5e advancements to level up without losing features, HP or choices.");
+    return false;
   }
-  return cls.update({ "system.levels": cls.system.levels + 1 });
+  const manager = AM.forLevelChange(actor, cls.id, 1);
+  if (manager.steps.length) return manager.render({ force: true });
+  // A genuinely empty native advancement flow may use the normal level update.
+  await cls.update({ "system.levels": cls.system.levels + 1 });
+  await dedupeMulticlass(actor);
+  await syncTechnique(actor);
+  await applyScaling(actor);
+  return true;
 }
 
 function addLevelUpButton(app, element) {
@@ -5020,12 +5193,14 @@ async function absorbSimpleDomain(effect,damage,eventId){
   const key=effect.uuid,previous=SIMPLE_DOMAIN_QUEUES.get(key)??Promise.resolve();
   const next=previous.catch(()=>{}).then(async()=>{
     if(!isActiveGM()) return null;
-    const f=effect.flags.jjk5e,history=Array.isArray(f.events)?f.events:[];
+    const current=effect.parent?.effects?.get?.(effect.id);
+    if(!current||current.uuid!==key)return null;
+    const f=current.flags.jjk5e,history=Array.isArray(f.events)?f.events:[];
     const old=history.find(x=>x.id===eventId);
     if(old) return old.damage===damage?old:null;
-    if(!liveWard(effect)||!Number.isFinite(f.hp)||f.hp<0) return null;
+    if(!liveWard(current)||!Number.isFinite(f.hp)||f.hp<0) return null;
     const absorbed=Math.min(f.hp,damage),result={id:eventId,damage,absorbed,overflow:damage-absorbed,hp:f.hp-absorbed};
-    await effect.update({"flags.jjk5e.hp":result.hp,"flags.jjk5e.events":[...history.slice(-99),result],disabled:result.hp===0});
+    await current.update({"flags.jjk5e.hp":result.hp,"flags.jjk5e.events":[...history.slice(-99),result],disabled:result.hp===0});
     return result;
   });
   SIMPLE_DOMAIN_QUEUES.set(key,next);
@@ -5051,7 +5226,7 @@ async function claimFallingBlossomOffense(actor){
     const e=actor?.effects?.find(x=>x.flags?.jjk5e?.kind==="fallingBlossomOffense"&&liveWard(x));
     if(!e)return false;
     await safeDelete(e);
-    return true;
+    return !actor.effects.get(e.id);
   });
 }
 function liveWard(effect) {
@@ -6372,12 +6547,18 @@ async function rollRCTAwakening(actor) {
 
 /** Every two rounds in combat the RCT healing pool recovers 10 hit points. */
 async function regenRCTPools(combat) {
-  if (!isActiveGM() || !combat?.round || combat.round % 2 !== 0) return;
-  for (const c of combat.combatants ?? []) {
-    const pool = c.actor?.items?.find?.((i) => /Reverse Cursed Technique \(Healing Pool\)/i.test(baseName(i)));
-    const spent = Number(pool?.system?.uses?.spent) || 0;
-    if (pool && spent > 0) await pool.update({ "system.uses.spent": Math.max(0, spent - 10) });
-  }
+  if (!isActiveGM() || !combat?.started || !Number.isSafeInteger(combat.round) || combat.round<2 || combat.round%2!==0) return;
+  const round=combat.round, combatId=combat.id;
+  const actors=new Map([...combat.combatants??[]].filter(c=>c.actor?.uuid).map(c=>[c.actor.uuid,c.actor]));
+  for(const actor of actors.values()) await queueCE(actor,async()=>{
+    if(!isActiveGM()||!combat.started||combat.round!==round)return;
+    const pool=actor.items?.find?.(i=>/Reverse Cursed Technique \(Healing Pool\)/i.test(baseName(i)));
+    if(!pool)return;
+    const last=pool.getFlag(MODULE_ID,"rctRegenRound");
+    if(last?.combatId===combatId&&Number(last.round)>=round)return;
+    const spent=Math.max(0,Number(pool.system?.uses?.spent)||0);
+    await pool.update({"system.uses.spent":Math.max(0,spent-10),"flags.jjk5e.rctRegenRound":{combatId,round}});
+  });
 }
 
 Hooks.once("ready", () => {
@@ -6404,7 +6585,7 @@ MENU_ACTIONS.splice(MENU_ACTIONS.length - 1, 0,
 
 async function syncReversals(actor) {
   if (!actor?.isOwner || actor.type !== "character") return 0;
-  if (!actor.items.some((i) => baseName(i) === "Cursed Technique Reversal")) return 0;
+  if (!hasRCT(actor) || !actor.items.some((i) => baseName(i) === "Cursed Technique Reversal")) return 0;
   const techs = new Set([actor.getFlag(MODULE_ID, "technique"), ...actor.items.map((i) => i.flags?.jjk5e?.technique)].filter(Boolean));
   if (!techs.size) return 0;
   const pack = jjkPack(TECH_PACK);
@@ -6537,10 +6718,10 @@ async function asiOrFeatChooser(app, element) {
 
 /* ---- Character creation: abilities → class (+ technique) → race → background ---- */
 
-async function pickFromPack(packName, types, title) {
+async function pickFromPack(packName, types, title, predicate = () => true) {
   const pack = jjkPack(packName);
   if (!pack) return null;
-  const docs = (await pack.getDocuments()).filter((d) => types.includes(d.type))
+  const docs = (await pack.getDocuments()).filter((d) => types.includes(d.type) && predicate(d))
     .sort((a, b) => a.name.localeCompare(b.name));
   if (!docs.length) return null;
   const options = docs.map((d) => `<option value="${d.uuid}">${esc(d.name)}</option>`).join("");
@@ -6550,11 +6731,15 @@ async function pickFromPack(packName, types, title) {
 
 /** Add a compendium item through dnd5e's advancement manager and wait until it finishes. */
 async function addWithAdvancement(actor, doc) {
+  if (!actor?.isOwner || !doc) return false;
   const data = game.items.fromCompendium ? game.items.fromCompendium(doc) : doc.toObject();
   const Manager = dnd5e?.applications?.advancement?.AdvancementManager;
-  if (!Manager?.forNewItem) { await actor.createEmbeddedDocuments("Item", [data]); return true; }
+  if (!Manager?.forNewItem) {
+    if (Object.keys(data.system?.advancement ?? {}).length) { ui.notifications.warn("JJK5e: native advancement manager unavailable."); return false; }
+    return (await actor.createEmbeddedDocuments("Item", [data])).length > 0;
+  }
   const manager = Manager.forNewItem(actor, data);
-  if (!manager.steps?.length) { await actor.createEmbeddedDocuments("Item", [data]); return true; }
+  if (!manager.steps?.length) return (await actor.createEmbeddedDocuments("Item", [data])).length > 0;
   return new Promise((resolve) => {
     let done = false;
     const finish = (ok) => { if (done) return; done = true; Hooks.off("dnd5e.advancementManagerComplete", onDone); resolve(ok); };
@@ -6571,15 +6756,31 @@ const CREATOR_APPS = new Map();
 const hasType = (actor, type) => actor.items.some((i) => i.type === type);
 function creatorSteps(actor) {
   const hr = isHeavenlyOnly(actor) || actor.items.some((i) => i.type === "class" && i.system?.identifier === "heavenly-restriction");
-  const pick = (pack, type, title) => async () => { const d = await pickFromPack(pack, [type], title); return d ? addWithAdvancement(actor, d) : false; };
+  const pick = (pack, type, title) => async () => {
+    if (!actor.isOwner || hasType(actor,type)) return false;
+    const d = await pickFromPack(pack, [type], title);
+    return d && !hasType(actor,type) ? addWithAdvancement(actor,d) : false;
+  };
+  const mindset = actor.items.some(i => i.flags?.jjk5e?.mindset);
+  const spanish = game.i18n.lang.startsWith("es");
+  const pickMindset = async () => {
+    if (!actor.isOwner || actor.items.some(i=>i.flags?.jjk5e?.mindset)) return false;
+    const d = await pickFromPack("jjk5e-backgrounds", ["feat"], "Mindset", i=>!!i.flags?.jjk5e?.mindset);
+    return d && !actor.items.some(i=>i.flags?.jjk5e?.mindset) ? addWithAdvancement(actor,d) : false;
+  };
   return [
     { key: "abilities", icon: "fas fa-dice-d20", done: !!actor.getFlag(MODULE_ID, "pointBuyDone"), run: () => pointBuy(actor) },
-    { key: "class", icon: "fas fa-user-graduate", done: hasType(actor, "class"), run: pick("jjk5e-classes", "class", t("Create.Class")) },
-    { key: "technique", icon: "fas fa-hand-sparkles", done: hr || !!actor.getFlag(MODULE_ID, "technique"), skip: hr, run: () => chooseTechnique(actor) },
-    { key: "ceAbility", icon: "fas fa-brain", done: hr || !!actor.getFlag(MODULE_ID, "ceAbility"), skip: hr, run: () => chooseCEAbility(actor) },
-    { key: "race", icon: "fas fa-dna", done: hasType(actor, "race"), run: pick("jjk5e-races", "race", t("Create.Race")) },
-    { key: "background", icon: "fas fa-scroll", done: hasType(actor, "background"), run: pick("jjk5e-backgrounds", "background", t("Create.Background")) },
-    { key: "feat", icon: "fas fa-star", optional: true, done: false, run: () => pickFeat(actor, t("Create.Feat")) },
+    { key: "class", locked: hasType(actor,"class"), icon: "fas fa-user-graduate", done: hasType(actor, "class"), run: pick("jjk5e-classes", "class", t("Create.Class")) },
+    { key: "technique", locked: !hasType(actor,"class"), icon: "fas fa-hand-sparkles", done: hr || !!actor.getFlag(MODULE_ID, "technique"), skip: hr, run: () => chooseTechnique(actor) },
+    { key: "ceAbility", locked: !hasType(actor,"class"), icon: "fas fa-brain", done: hr || !!actor.getFlag(MODULE_ID, "ceAbility"), skip: hr, run: () => chooseCEAbility(actor) },
+    { key: "race", locked: hasType(actor,"race"), icon: "fas fa-dna", done: hasType(actor, "race"), run: pick("jjk5e-races", "race", t("Create.Race")) },
+    { key: "background", locked: hasType(actor,"background"), icon: "fas fa-scroll", done: hasType(actor, "background"), run: pick("jjk5e-backgrounds", "background", t("Create.Background")) },
+    { key:"mindset", label:"Mindset", hint:spanish ? "Alternativa a Inspiration si la mesa la utiliza." : "Alternative to Inspiration when used by the table.", icon:"fas fa-brain", optional:true, done:mindset, locked:mindset, run:pickMindset },
+    { key:"feat", icon:"fas fa-star", optional:true, done:false, locked:!game.user.isGM, run:async()=>{
+      if(!game.user.isGM) return false;
+      if(!await confirmDialog(t("Create.Feat"),spanish ? "<p>¿Confirmas que el personaje tiene derecho a una dote adicional según el reglamento o la mesa?</p>" : "<p>Confirm that the character is entitled to an additional feat under the rules or table ruling.</p>")) return false;
+      return pickFeat(actor,t("Create.Feat"));
+    } },
     { key: "hotbar", icon: "fas fa-table-cells", optional: true, done: false, run: () => fillHotbar(actor) }
   ];
 }
@@ -6592,9 +6793,9 @@ function creatorHTML(actor) {
   const ab = ABILITY_KEYS.map((k) => `<span class="jjk-chip on"><b>${k.toUpperCase()}</b> ${Number(actor.system.abilities?.[k]?.value) || 10}</span>`).join("");
   const rows = steps.map((st, i) => `<li class="jjk-step ${st.done ? "done" : ""} ${st.skip ? "skip" : ""} ${st === next ? "next" : ""}">
       <span class="jjk-step-n">${st.done ? '<i class="fas fa-check"></i>' : i + 1}</span>
-      <div><strong>${t(`Create.Steps.${st.key}`)}</strong>${st.optional ? ` <em>(${t("Create.Optional")})</em>` : ""}
-        <small>${st.skip ? t("Create.Skip") : t(`Create.StepHint.${st.key}`)}</small></div>
-      ${st.skip ? "" : `<button type="button" data-action="step" data-step="${st.key}" class="${st === next ? "jjk-primary" : ""}">
+      <div><strong>${esc(st.label ?? t(`Create.Steps.${st.key}`))}</strong>${st.optional ? ` <em>(${t("Create.Optional")})</em>` : ""}
+        <small>${st.skip ? t("Create.Skip") : esc(st.hint ?? t(`Create.StepHint.${st.key}`))}</small></div>
+      ${st.skip || st.locked ? "" : `<button type="button" data-action="step" data-step="${st.key}" class="${st === next ? "jjk-primary" : ""}">
         <i class="${st.icon}"></i> ${st.done && !st.optional ? t("Create.Redo") : t("Create.Do")}</button>`}</li>`).join("");
   return `<section class="jjk-panel jjk-creator">
     <header class="jjk-head"><img src="${ICONS}/seal-ju.svg" alt=""><div><div class="jjk-name">${esc(actor.name)}</div>
@@ -6611,7 +6812,7 @@ function makeCreatorClass() {
   const run = async function (key) {
     if (this._busy) return;
     const st = creatorSteps(this.actor).find((x) => x.key === (key ?? creatorSteps(this.actor).find((y) => !y.optional && !y.skip && !y.done)?.key));
-    if (!st) return;
+    if (!st || st.skip || st.locked || !this.actor?.isOwner) return;
     this._busy = true;
     try { await st.run(); } catch (err) { reportError(`create ${st.key}`, err); }
     finally { this._busy = false; if (this.rendered) this.render(); }
@@ -7092,7 +7293,8 @@ const isCursedSpiritPC = (actor) => !!actor?.items?.some((i) => i.type === "race
 async function unlockRCT(actor, reason = "") {
   actor = requireActor(actor);
   if (!actor?.isOwner) return false;
-  if (hasRCT(actor) || actor.getFlag(MODULE_ID, "rctUnlocked")) {
+  const completeRCT=!!findItemByName(actor,"Reverse Cursed Technique")&&!!findItemByName(actor,"Reverse Cursed Technique (Healing Pool)");
+  if (completeRCT || actor.getFlag(MODULE_ID, "rctUnlocked")) {
     ui.notifications.info(t("RCT.Already", { name: actor.name }));
     return false;
   }
@@ -7104,7 +7306,10 @@ async function unlockRCT(actor, reason = "") {
     await addBreakthrough(actor, 1, t("Breakthrough.RCT"));
     return true;
   }
-  for (const n of ["Reverse Cursed Technique", "Reverse Cursed Technique (Healing Pool)"]) await grantByName(actor, "jjk5e-class-features", n);
+  for (const n of ["Reverse Cursed Technique", "Reverse Cursed Technique (Healing Pool)"]) {
+    await grantByName(actor, "jjk5e-class-features", n);
+    if(!findItemByName(actor,n))return false;
+  }
   await actor.setFlag(MODULE_ID, "rctUnlocked", true);
   await chat(actor, `<p><i class="fas fa-heart-pulse"></i> <strong>${t("RCT.Unlocked", { name: esc(actor.name) })}</strong>`
     + `${reason ? ` <em>(${esc(reason)})</em>` : ""}</p><p>${t("RCT.UnlockedHint")}</p>`);
@@ -7131,12 +7336,13 @@ const isBurnoutFx = (e) => !!(e?.flags?.jjk5e?.kind === "burnout" || e?.flags?.j
 
 async function fightForLife(actor) {
   actor = requireActor(actor);
-  if (!actor?.isOwner) return;
+  if (!actor?.isOwner || !optOn("fightForLife")) return false;
   if ((Number(actor.system.attributes?.hp?.value) || 0) > 0) return ui.notifications.warn(t("Opt.Fight.NotDying"));
   const used = Number(actor.getFlag(MODULE_ID, "fightExhaustion")) || 0;
   if (used >= 5) return ui.notifications.warn(t("Opt.Fight.Max"));
   const cur = Number(actor.system.attributes?.exhaustion) || 0;
-  await actor.update({ "system.attributes.exhaustion": Math.min(6, cur + 1) });
+  if(cur>=6)return false;
+  await actor.update({ "system.attributes.exhaustion": cur + 1 });
   await actor.setFlag(MODULE_ID, "fightExhaustion", used + 1);
   await chat(actor, `<p><strong>${t("Opt.fightForLife.Name")}</strong>: ${t("Opt.Fight.Done", { name: esc(actor.name), n: used + 1 })}</p>`);
   if (typeof actor.rollDeathSave === "function") return actor.rollDeathSave({ advantage: true });
@@ -7431,7 +7637,9 @@ async function soulCheck(actor) {
 
 const OBJECT_SOUL = ["Object Soul Perception", "Soul Shatter", "Greater Object Soul Perception"];
 async function setObjectSoul(actor, level) {
+  if(!game.user.isGM||!actor?.isOwner)return false;
   level = clamp(Number(level) || 0, 0, 3);
+  if(level>0&&!optOn("objectSoul"))return false;
   await actor.setFlag(MODULE_ID, "objectSoul", level);
   await setKindEffect(actor, "objectSoul", level ? {
     name: `${t("Opt.objectSoul.Name")} ${level}`, img: `${ICONS}/soul.svg`,
@@ -7452,10 +7660,11 @@ async function asiDialog(actor, points, title, perAbility = points) {
     ok: { label: t("Common.OK"), callback: (e, b) => Object.fromEntries(ABILITIES.map((a) => [a, Math.max(0, Number(b.form.elements[a].value) || 0)])) } });
   if (!res) return false;
   const sum = Object.values(res).reduce((s, v) => s + v, 0);
-  if (sum > points || Object.values(res).some((v) => v > perAbility)) { ui.notifications.warn(t("Opt.ASI.TooMany", { n: points })); return false; }
+  if (sum !== points || Object.entries(res).some(([a,v]) => !Number.isSafeInteger(v) || v < 0 || v > perAbility || (v > 0 && (Number(actor.system.abilities?.[a]?.value) || 10) + v > 20))) { ui.notifications.warn(t("Opt.ASI.TooMany", { n: points })); return false; }
   const update = {};
   for (const [a, v] of Object.entries(res)) if (v) update[`system.abilities.${a}.value`] = Math.min(20, (Number(actor.system.abilities?.[a]?.value) || 10) + v);
-  if (Object.keys(update).length) await actor.update(update);
+  if (!actor.isOwner || !Object.keys(update).length) return false;
+  await actor.update(update);
   return true;
 }
 
@@ -7480,7 +7689,9 @@ async function pickFeat(actor, title) {
   const doc = uuid ? list.find((d) => d.uuid === uuid) : null;
   if (!doc) return false;
   const missing = missingPrereqs(actor, doc);
-  if (missing.length) ui.notifications.warn(`${doc.name}: ${missing.join(", ")}`);
+  if (missing.length || !featFitsTechnique(actor, doc)) { ui.notifications.warn(`${doc.name}: ${missing.join(", ")}`); return false; }
+  if (!actor.isOwner || (!doc.system?.prerequisites?.repeatable && actor.items.some(i => normName(baseName(i)) === normName(baseName(doc))))) return false;
+  if ((doc.system?.assertPrerequisites?.(actor, { showMessage: true }) ?? true) !== true) return false;
   return addWithAdvancement(actor, doc);
 }
 
@@ -7492,8 +7703,19 @@ async function techniquelessLevelUp(actor) {
   for (const [lvl, points, feats] of TECHNIQUELESS) {
     if (lvl > level || done.has(lvl)) continue;
     const title = `${t("Opt.techniqueless.Name")} (${t("Opt.Level", { n: lvl })})`;
-    if (!(await asiDialog(actor, points, title))) return;
-    for (let i = 0; i < feats; i++) await pickFeat(actor, title);
+    // Persist each accepted step; canceling a feat must not repeat the ASI.
+    const progress = foundry.utils.deepClone(actor.getFlag(MODULE_ID,"techniquelessProgress") ?? {});
+    const current = progress[lvl] ?? { asi:false, feats:0 };
+    if (!current.asi) {
+      if (!(await asiDialog(actor,points,title))) return;
+      current.asi=true; progress[lvl]=current;
+      await actor.setFlag(MODULE_ID,"techniquelessProgress",progress);
+    }
+    while(current.feats < feats) {
+      if (!(await pickFeat(actor,title))) return;
+      current.feats++; progress[lvl]=current;
+      await actor.setFlag(MODULE_ID,"techniquelessProgress",progress);
+    }
     done.add(lvl);
     await actor.setFlag(MODULE_ID, "techniquelessDone", [...done]);
   }
@@ -7501,7 +7723,7 @@ async function techniquelessLevelUp(actor) {
 
 async function yearlyProgression(actor) {
   actor = requireActor(actor);
-  if (!actor || !game.user.isGM) return;
+  if (!actor || !game.user.isGM || !optOn("yearlyProgression")) return false;
   const n = Number(actor.getFlag(MODULE_ID, "yearly")) || 0;
   if (n >= 4) return ui.notifications.warn(t("Opt.Yearly.Max"));
   const choice = await foundry.applications.api.DialogV2.wait({ classes: ["jjk5e-ui", "jjk5e-dialog"], window: { title: t("Opt.yearlyProgression.Name") }, rejectClose: false,
@@ -7704,6 +7926,7 @@ async function toughTrial(actor) {
     if (Number(hp.value) > Number(hp.max)) await target.update({ "system.attributes.hp.value": Number(hp.max) || 0 });
     return chat(target, `<p><strong>${t("Opt.toughTrials.Name")}</strong>: ${t("Opt.Tough.Removed", { name: esc(target.name) })}</p>`);
   }
+  if(!optOn("toughTrials"))return false;
   const cr = Math.max(0, Number(target.system.details?.cr) || 0);
   const abil = ["str", "dex", "con"].sort((a, b) => (Number(target.system.abilities?.[b]?.value) || 0) - (Number(target.system.abilities?.[a]?.value) || 0));
   const dmg = String(2 * cr);
@@ -7734,16 +7957,52 @@ async function summonerOf(actor) {
   return item?.actor ?? null;
 }
 
+const SHIKIGAMI_DECISIONS=new Set();
+function recallBlocked(actor,name){
+  const key=String(name??"").trim().toLowerCase();
+  return fallen(actor).includes(key)||(actor?.getFlag(MODULE_ID,"recalledShikigami")??[]).includes(key);
+}
 async function recordFallenShikigami(actor) {
-  if (!isActiveGM()) return;
-  const summoner = await summonerOf(actor);
-  if (!summoner || !actorTechniques(summoner).has(normName("Ten Shadows"))) return;
-  const name = actor?.token?.name ?? actor?.name;
-  const list = new Set(summoner.getFlag(MODULE_ID, "fallenShikigami") ?? []);
-  if (!name || list.has(name)) return;
-  list.add(name);
-  await summoner.setFlag(MODULE_ID, "fallenShikigami", [...list]);
-  await chat(summoner, `<p><strong>${esc(name)}</strong> — ${t(optOn("totalityAlt") ? "Opt.Totality.Returns" : "Opt.Totality.Dead")}</p>`);
+  if(!isActiveGM()||!actor?.flags?.jjk5e?.shikigami)return;
+  const tokens=actor.token?[actor.token]:(actor.getActiveTokens?.()??[]).map(t=>t.document).filter(Boolean);
+  // Do not guess which linked token fell, or treat unrelated summons as Ten Shadows.
+  if(tokens.length!==1)return;
+  const token=tokens[0], key=token.uuid;
+  if(SHIKIGAMI_DECISIONS.has(key))return;
+  SHIKIGAMI_DECISIONS.add(key);
+  try{
+    const summoner=await summonerOf(actor);
+    if(!summoner||!actorTechniques(summoner).has(normName("Ten Shadows")))return;
+    const name=baseName(actor), normalized=name.trim().toLowerCase();
+    if(!name||recallBlocked(summoner,name)||Number(actor.system.attributes?.hp?.value)>0)return;
+    const spanish=game.i18n.lang.startsWith("es");
+    const midi=globalThis.MidiQOL;
+    const canRecall=!midi?.hasUsedReaction?.(summoner);
+    // Seeing the creature, ritual vs domesticated status and reaction eligibility are GM decisions.
+    const buttons=[];
+    if(canRecall)buttons.push({action:"recall",label:spanish?"Retirar con reacción":"Recall with reaction"});
+    buttons.push({action:"lost",label:spanish?"Confirmar pérdida":"Confirm loss"},{action:"cancel",label:spanish?"No resolver / ritual":"Do not resolve / trial"});
+    const choice=await foundry.applications.api.DialogV2.wait({
+      classes:["jjk5e-ui","jjk5e-dialog"],window:{title:"Ten Shadows — "+name},rejectClose:false,
+      content:`<p>${esc(summoner.name)} — ${esc(name)}</p><p>${spanish?"Confirma que es un shikigami domesticado. Si el invocador lo ve caer y dispone de su reacción, puede retirarlo hasta el descanso largo. En un ritual o caso incierto, no confirmes la pérdida.":"Confirm this is a tamed shikigami. If the summoner sees it fall and has a reaction, recall it until a long rest. For trials or uncertain cases, do not confirm loss."}</p>`,
+      buttons
+    });
+    if(!isActiveGM()||Number(actor.system.attributes?.hp?.value)>0||!token.parent?.tokens?.get(token.id)||recallBlocked(summoner,name))return;
+    if(choice==="recall"){
+      if(midi?.hasUsedReaction?.(summoner))return;
+      if(midi?.setReactionUsed)await midi.setReactionUsed(summoner);
+      const list=new Set(summoner.getFlag(MODULE_ID,"recalledShikigami")??[]);
+      list.add(normalized);
+      await summoner.setFlag(MODULE_ID,"recalledShikigami",[...list]);
+      await token.delete();
+      await chat(summoner,`<p><strong>${esc(name)}</strong> — ${spanish?"Retirado hasta descanso largo.":"Recalled until long rest."}</p>`);
+    }else if(choice==="lost"){
+      const list=new Set(summoner.getFlag(MODULE_ID,"fallenShikigami")??[]);
+      list.add(name);
+      await summoner.setFlag(MODULE_ID,"fallenShikigami",[...list]);
+      await chat(summoner,`<p><strong>${esc(name)}</strong> — ${t(optOn("totalityAlt")?"Opt.Totality.Returns":"Opt.Totality.Dead")}</p>`);
+    }
+  }finally{SHIKIGAMI_DECISIONS.delete(key);}
 }
 
 async function advanceAmber(combat) {
@@ -8062,7 +8321,7 @@ Hooks.once("ready", () => {
     if (b && actor.type === "character" && b.max > 0 && b.value >= b.max && (Number(actor.system.attributes?.hp?.value) || 0) <= 0) {
       rctMoment(actor, t("RCT.OneHit")).catch((err) => reportError("rct moment", err));
     }
-    if (b && (Number(actor.system.attributes?.hp?.value) || 0) <= 0) recordFallenShikigami(actor).catch((err) => reportError("totality", err));
+    if (b && b.value>0 && (Number(actor.system.attributes?.hp?.value) || 0) <= 0) recordFallenShikigami(actor).catch((err) => reportError("totality", err));
     if (userId === game.user.id && foundry.utils.getProperty(changes, "system.attributes.exhaustion") === 0 && actor.getFlag(MODULE_ID, "fightExhaustion")) {
       actor.unsetFlag(MODULE_ID, "fightExhaustion").catch(() => {});
     }
@@ -8079,6 +8338,7 @@ Hooks.once("ready", () => {
   Hooks.on("dnd5e.restCompleted", async (actor, result) => {
     if (!actor?.isOwner || !result?.longRest) return;
     if (actor.getFlag(MODULE_ID, "clashUsed")) await actor.unsetFlag(MODULE_ID, "clashUsed");
+    if (actor.getFlag(MODULE_ID,"recalledShikigami")?.length) await actor.unsetFlag(MODULE_ID,"recalledShikigami");
     if (optOn("totalityAlt") && actor.getFlag(MODULE_ID, "fallenShikigami")?.length) {
       await actor.unsetFlag(MODULE_ID, "fallenShikigami");
       await chat(actor, `<p>${t("Opt.Totality.Back", { name: esc(actor.name) })}</p>`);
@@ -8090,7 +8350,7 @@ Hooks.once("ready", () => {
     const actor = activity?.actor ?? activity?.item?.actor;
     let name = profile?.name;
     try { name ||= globalThis.fromUuidSync?.(profile?.uuid)?.name; } catch { /* compendium not indexed */ }
-    if (!actor || !name || !fallen(actor).includes(String(name).trim().toLowerCase())) return;
+    if (!actor || !name || !recallBlocked(actor,name)) return;
     ui.notifications.warn(t(optOn("totalityAlt") ? "Opt.Totality.UntilRest" : "Opt.Totality.Dead"));
     return false;
   });

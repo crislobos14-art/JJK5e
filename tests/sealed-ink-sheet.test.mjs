@@ -77,3 +77,65 @@ test("negative emotion is not self-awarded by a player or granted after cancel",
   await fn(actor);
   assert.equal(spent, -4);
 });
+
+test("universal surfaces use only known D&D5e classes and per-client overrides", () => {
+  class CharacterActorSheet {}
+  class NPCActorSheet {}
+  class AdvancementManager {}
+  class AbilityScoreImprovementFlow {}
+  class ItemChoiceFlow {}
+  class ShortRestDialog {}
+  class AttackRollConfigurationDialog {}
+  class ItemSheet5e {}
+  class AttackSheet {}
+  class ActiveEffectSheet5e {}
+  class CompendiumBrowser {}
+  class ThirdParty {}
+  const hooks = new Map(), settings = new Map(), values = new Map(), registered = [];
+  const game = {
+    system: { id: "dnd5e" }, i18n: { lang: "es" },
+    dnd5e: { applications: {
+      actor: { CharacterActorSheet, NPCActorSheet, ShortRestDialog },
+      advancement: { AdvancementManager, AbilityScoreImprovementFlow, ItemChoiceFlow },
+      dice: { AttackRollConfigurationDialog }, item: { ItemSheet5e },
+      activity: { AttackSheet }, activeEffect: { ActiveEffectSheet5e }, CompendiumBrowser
+    }},
+    settings: { register: (ns,k,o) => settings.set(k,o), get: (ns,k) => values.get(k) ?? settings.get(k)?.default }
+  };
+  const exposed = runInNewContext(source + "\n({categoryOf, selectedDesign, categories});", {
+    Hooks: { once: (n,fn) => hooks.set(n,fn) }, game,
+    foundry: { applications: { apps: { DocumentSheetConfig: {
+      registerSheet: (doc,scope,cls,opts) => registered.push(opts)
+    }}}},
+    CONFIG: { Actor: { documentClass: class Actor {} } }, console
+  });
+  hooks.get("init")();
+  assert.equal(exposed.selectedDesign("character"), "default");
+  assert.equal(Object.keys(exposed.categories).length, 7);
+  for (const key of Object.keys(exposed.categories)) {
+    assert.equal(settings.get("sheetDesign_" + key).default, "inherit");
+    assert.equal(settings.get("sheetDesign_" + key).scope, "client");
+  }
+  assert.ok(registered.every(x => !x.makeDefault));
+  values.set("sheetDesign", "sealed");
+  assert.equal(exposed.selectedDesign("npc"), "sealed");
+  values.set("sheetDesign_npc", "default");
+  assert.equal(exposed.selectedDesign("npc"), "default");
+  const root = { matches: () => false };
+  for (const [app, expected] of [
+    [new AdvancementManager, "progression"], [new AbilityScoreImprovementFlow, "progression"],
+    [new ItemChoiceFlow, "progression"], [new ShortRestDialog, "combat"],
+    [new AttackRollConfigurationDialog, "combat"], [new ItemSheet5e, "editors"],
+    [new AttackSheet, "editors"], [new ActiveEffectSheet5e, "editors"],
+    [new CompendiumBrowser, "compendium"], [new ThirdParty, null]
+  ]) assert.equal(exposed.categoryOf(app, root, null), expected);
+  assert.equal(exposed.categoryOf(new ThirdParty, { matches: () => true }, null), "module");
+});
+
+test("feat browser delegates to existing advancement and guards repeat submissions", () => {
+  assert.ok(source.includes("take.click()"));
+  assert.ok(main.includes("if (!uuid || busy || !box.isConnected) return;"));
+  assert.ok(main.includes("!featFitsTechnique(adv.actor, item) || missingPrereqs(adv.actor, item).length"));
+  assert.ok(main.includes('if (!box.closest(".jjk-sealed-surface")) take(ev)'));
+  assert.ok(!/\b(?:actor|adv)\.(?:update|apply|reverse|createEmbeddedDocuments)\(/.test(source));
+});

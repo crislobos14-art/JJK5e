@@ -38,6 +38,12 @@ test("Optional rules are off by default: no extra panel buttons, costs unchanged
 
 test("RCT awakening: d100 90+ grants RCT and 1 Breakthrough, once", async () => {
   const { env, actor, J } = await setup();
+  const documents = ["Reverse Cursed Technique", "Reverse Cursed Technique (Healing Pool)"]
+    .map((name, i) => ({ _id: String(i), name, type: "feat", system: {} }));
+  env.game.packs.set("jjk5e.jjk5e-class-features", {
+    getIndex: async () => documents,
+    getDocument: async (id) => ({ toObject: () => documents.find((doc) => doc._id === id) })
+  });
   env.dice.push(95);
   assert.equal(await J.rollRCTAwakening(actor), true);
   await env.settle();
@@ -172,7 +178,7 @@ test("Reliable Skill: proficient checks have a minimum d20 of 10", async () => {
 });
 
 test("Object Soul Awareness level 3 gives blindsight 30 ft", async () => {
-  const { actor, J } = await setup();
+  const { actor, J } = await setup({ objectSoul: true });
   await J.setObjectSoul(actor, 5);
   assert.equal(actor.getFlag("jjk5e", "objectSoul"), 3);
   const fx = J.kindEffect(actor, "objectSoul");

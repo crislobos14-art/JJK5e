@@ -209,7 +209,7 @@ test("RCT healing pool regains 10 every two rounds", async () => {
   const { env, actor } = await setup();
   const rct = actor.items.find((i) => i.name.startsWith("Reverse"));
   await rct.update({ "system.uses.spent": 25 });
-  const combat = { round: 2, combatants: [{ actor }] };
+  const combat = { id: "rct-combat", started: true, round: 2, combatants: [{ actor }] };
   await env.jjk.regenRCTPools(combat);
   assert.equal(rct.system.uses.spent, 15);
   await env.jjk.regenRCTPools({ ...combat, round: 3 });
@@ -244,7 +244,10 @@ test("Short rest: 1 CE per Hit Die spent, up to half the total level", async () 
   const { env, actor, J } = await setup();
   await actor.createEmbeddedDocuments("Item", [{ name: "Sorcerer", type: "class", system: { levels: 6, hd: { spent: 1 } } }]);
   await J.spendCE(actor, 10);
-  env.prompts.push(5, true);
+  await env.Hooks.run("dnd5e.restCompleted", actor, { longRest: false }, {});
+  env.prompts.push(5);
+  assert.equal(await J.shortRestCE(actor), false, "above cap: refused");
+  env.prompts.push(3, true);
   await J.shortRestCE(actor); await env.settle();
   assert.equal(J.poolValue(J.findPool(actor)), 13, "capped at 3 (half of 6)");
   assert.equal(actor.items.find((i) => i.type === "class").system.hd.spent, 4);
