@@ -1004,6 +1004,7 @@ test("Midi healing preserves protected allies; offensive effects exclude them fr
   env.game.scenes.set(scene.id,scene);
   const target={actor:{flags:{jjk5e:{sureHitImmune:true}}},document:{uuid:"Scene.S.Token.A",x:0,y:0,width:1,height:1,parent:scene}};
   await J.setKindEffect(actor,"domain",{name:"Domain",flags:{jjk5e:{domainOpen:true}}});
+  await env.settle();
   await J.setDomain(actor,{open:true,openingId:"test",sceneId:"S",x:0,y:0,radius:10,lethal:true});
   const workflow={activity:{type:"heal"},actor,item:{flags:{jjk5e:{technique:"Test"}}},targets:new Set([target]),effectTargets:new Set([target])};
   assert.equal(J.excludeDomainWardedTargets(workflow).length,0);
