@@ -947,129 +947,129 @@
       },
       "totalityAlt": {
         "Name": "Totality Alternative",
-        "Hint": "Shikigami are not killed: fallen shikigami return on a long rest instead of being lost (no Totality)."
+        "Hint": "Ignore Totality: shikigami are not killed; every fallen shikigami comes back on a long rest (and none becomes eligible for Totality)."
       },
       "lessBlood": {
         "Name": "Less Blood",
-        "Hint": "Reduce the hit point costs of Blood Manipulation and Rot (minimum 1).",
+        "Hint": "The hit point costs of Rot and Blood Manipulation are reduced to the chosen fraction (minimum 1).",
         "C1": "Normal cost",
         "C05": "Half",
         "C025": "Quarter"
       },
       "bloodConversion": {
         "Name": "Blood Conversion",
-        "Hint": "Characters with Blood Production roll the RCT awakening d100 with advantage."
+        "Hint": "With the Blood Production feat, rolls to acquire or understand the basics of the Reverse Cursed Technique are made with advantage."
       },
       "mythicalAccuracy": {
         "Name": "Mythical Beast Accuracy",
-        "Hint": "Mythical Beast Amber Release advances one stage at the start of each of the user's turns."
+        "Hint": "Mythical Beast Amber Release advances one stage per turn (at the start of each of its user's turns)."
       },
       "advantageStacking": {
         "Name": "Advantage Stacking",
-        "Hint": "Attack rolls with advantage from more than one source get +1 per extra source (sources reported by Midi-QOL and JJK)."
+        "Hint": "Advantage from more than one source: roll with advantage plus +1 for each extra source. Automated for attack rolls; for skill checks, and for Help (which needs a described way of helping or proficiency), apply it by hand."
       },
       "crunchyCrits": {
         "Name": "Crunchy Crits",
-        "Hint": "Critical hits roll the dice normally and double the whole damage roll, modifiers included."
+        "Hint": "On a critical hit, instead of doubling the damage dice, roll normally and double the entire damage roll (modifiers and flat bonuses included)."
       },
       "criticalSaves": {
         "Name": "Critical Saves",
-        "Hint": "A natural 1 on a save against a damaging effect doubles the damage; a natural 20 negates it."
+        "Hint": "A natural 1 on a saving throw against a damaging effect means critical damage (applied as ×2); a natural 20 means no damage."
       },
       "callingShots": {
         "Name": "Calling Shots",
-        "Hint": "−5 to the attack; if the damage exceeds the target's max hit die + CON modifier, roll on the Limb Damage table."
+        "Hint": "Take −5 on the attack to cripple a creature. If the damage exceeds the maximum of the target's hit die + its Constitution modifier, roll on the Limb Damage table (or the GM decides the injury)."
       },
       "fightForLife": {
         "Name": "Fight for your Life",
-        "Hint": "While dying: advantage on the next death save for 1 level of exhaustion (up to 5 levels this way)."
+        "Hint": "While making death saving throws: advantage on the next one, at the cost of 1 level of exhaustion (up to 5 levels this way)."
       },
       "takeTheHit": {
         "Name": "Take the Hit",
-        "Hint": "Reaction: take an attack aimed at an ally; you take twice the damage."
+        "Hint": "Reaction: when a creature within your movement is targeted or hit by a harmful effect, move up to your speed toward it and take the attack in its place; you take twice the damage."
       },
       "weaponClash": {
         "Name": "Clash",
-        "Hint": "Reaction: roll your melee weapon damage and reduce the incoming damage by that much (PB uses per long rest; no psychic)."
+        "Hint": "Reaction against an attack or damaging effect aimed at you: roll damage for a melee weapon attack and reduce the damage by that much; any excess hits the attacker if within range. Not against psychic damage unless you have a feature that deals psychic damage. Uses: proficiency bonus per long rest."
       },
       "flanking": {
         "Name": "Flanking",
-        "Hint": "An ally within 5 ft on the opposite side of the target gives advantage (or +2).",
+        "Hint": "Two creatures (not incapacitated) within 5 ft on opposite sides of another creature have advantage on attacks against it (or +2, if the GM prefers).",
         "Coff": "Off",
         "Cadv": "Advantage",
         "Cplus2": "+2 to attack"
       },
       "techniqueless": {
         "Name": "Techniqueless",
-        "Hint": "The Techniqueless feat grants ASI + feat at levels 1, 3, 6, 11 and 18 (asked on level up)."
+        "Hint": "Without an Innate Technique (and without New Shadow Style or Divergent Fist): +2 ASI and a feat at 1st and 3rd level, +3 ASI and a feat at 6th and 11th, +3 ASI and 2 feats at 18th. Asked on level up."
       },
       "repetitiveAbilities": {
         "Name": "Repetitive Abilities",
-        "Hint": "When a feature duplicates a feat (Domain Expansion / Incomplete Domain, RT Understanding / RT Prodigy) the player may swap the feat."
+        "Hint": "If a character gains a feature that gives the same or a better version of a feat they already have (Domain Expansion / Incomplete Domain, Reverse Technique Understanding / Reversed Technique Prodigy), the GM may let them swap that feat for another they qualify for."
       },
       "featImprovement": {
         "Name": "Feat Improvement",
-        "Hint": "Every Ability Score Improvement also grants a feat."
+        "Hint": "Whenever a character gains an Ability Score Improvement, they also gain a feat they qualify for."
       },
       "pureBarrier": {
         "Name": "Pure Barrier",
-        "Hint": "In a scene marked as Pure Barrier, permitted characters cast Curtain for 1 CE."
+        "Hint": "Inside a Pure Barrier (scene flag), characters with the barrier holder's permission spend only 1 CE to cast Curtain."
       },
       "executionEvasion": {
         "Name": "Execution Evasion",
-        "Hint": "Reaction to the Executioner's Sword: lose a limb (unreducible damage) instead of dying."
+        "Hint": "A creature aware of the Executioner's Sword can use its reaction when hit to remove a limb at the point of contact: it takes the damage needed to remove that limb (cannot be reduced) and avoids instant death."
       },
       "soulChecks": {
         "Name": "Soul Checks",
-        "Hint": "Checks about souls use your Soul Awareness level as the bonus; disadvantage without any level."
+        "Hint": "Checks about souls use your Soul Awareness level instead of ability modifiers or proficiencies; with no level, they are made with disadvantage."
       },
       "outputBurnout": {
         "Name": "Output Burnout",
-        "Hint": "Technique Burnout also gives 2 temporary levels of Reduced Output."
+        "Hint": "While under Technique Burnout you gain 2 temporary levels of Reduced Output."
       },
       "increasedAffinity": {
         "Name": "Increased Affinity",
-        "Hint": "Cursed Spirit characters gain Increased Affinity at 10th level."
+        "Hint": "Characters of a Cursed Spirit race gain Increased Affinity at 10th level (bonus action or reaction: spend up to your CE modifier in CE to regain 10 HP per CE)."
       },
       "sixEyesDependency": {
         "Name": "Six Eyes Dependency",
-        "Hint": "Without the Six Eyes: Infinity costs 3 CE; Lapse Blue, Reversal Red, Teleportation and Offensive Infinity cost double; Hollow Purple +5 CE."
+        "Hint": "Without the Six Eyes: activating and maintaining Infinity costs 3 CE; Lapse Blue, Reversal Red, Teleportation and Offensive Infinity cost double; Hollow Purple costs 5 CE more."
       },
       "increasedHP": {
         "Name": "Increased Hit Points",
-        "Hint": "Characters take the maximum of their hit die on every level up."
+        "Hint": "On level up, characters gain the maximum value of their hit die instead of rolling or taking the average."
       },
       "toughTrials": {
         "Name": "Tough Trials",
-        "Hint": "GM button: untamed shikigami get +10×CR HP, +2×CR damage, +½ CR save DC and +2 to two abilities. Remove it once tamed."
+        "Hint": "GM button for untamed shikigami: +10 × CR HP, +2 × CR to damage rolls, +½ CR to the DC of its features and +2 to two ability scores. Remove it when the taming ritual ends (never keep these increases)."
       },
       "additionalActions": {
         "Name": "Additional Actions",
-        "Hint": "Distract, Sunder, Coup de Grace and Charge (items in JJK Class Features)."
+        "Hint": "Optional actions for dynamic combat: Distract, Sunder, Coup de Grace and Charge (items in JJK Class Features)."
       },
       "classUnderstanding": {
         "Name": "Class Specific Understandings",
-        "Hint": "With 2 Breakthroughs a character can take the understanding of their class (only one)."
+        "Hint": "A character of the class with at least 2 Breakthroughs can gain that class's understanding. Only one per character."
       },
       "moneyRules": {
         "Name": "Ways to Make Money",
-        "Hint": "Money tracker, weekly jobs, special employment, mission pay and cursed tool sales."
+        "Hint": "Money tracker with minimum wage jobs, special employment (Innate Technique or RCT), mission pay by grade and cursed tool sales (Tool Maker)."
       },
       "yearlyProgression": {
         "Name": "Yearly Progression",
-        "Hint": "GM button: ASI (+2 / +1+1, max 20) or a feat, up to four times."
+        "Hint": "GM button: one ability score +2 or two +1 (max 20), or a new feat with the GM's approval. Up to four times per character."
       },
       "findCurse": {
         "Name": "Finding a Cursed Spirit",
-        "Hint": "1-2 hours searching: DC 20 Perception/Investigation, then d100 for the grade."
+        "Hint": "1-2 hours of searching: DC 20 Perception or Investigation check; on a success, d100 for the grade."
       },
       "cursedUponDeath": {
         "Name": "Cursed Upon Death",
-        "Hint": "GM button: turn a sorcerer killed without cursed energy into a Vengeful cursed spirit."
+        "Hint": "GM button: a human sorcerer killed without cursed energy comes back a week later as a cursed spirit (Vengeful Spirit race), with the manual's changes."
       },
       "objectSoul": {
         "Name": "Object Soul Awareness",
-        "Hint": "Track the 3 levels of Object Soul Awareness (level 3: blindsight 30 ft)."
+        "Hint": "Track its 3 levels (raised with Spiritual Teaching, or alone with 6+ levels of Soul Awareness). Level 3 gives blindsight 30 ft."
       },
       "MidiFlanking": "Midi-QOL already has Flanking on: its rule is used and the JJK one is skipped."
     },

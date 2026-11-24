@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.73.1 — Revisión de textos de reglas (EN/ES)
+- Las 30 reglas opcionales están reescritas en inglés y en español siguiendo el texto del manual. Se añadieron condiciones que faltaban:
+  - Recibir el golpe: alcance de movimiento.
+  - Choque: el excedente lo recibe el atacante; daño psíquico solo con un rasgo psíquico.
+  - Sin técnica: el reparto exacto por nivel.
+  - Ventaja acumulada: pruebas de habilidad y la acción Ayudar.
+  - Evasión de la ejecución: la criatura debe conocer la Espada del Verdugo.
+  - Percepción del alma de objetos: cómo se sube de nivel.
+- Mismo vocabulario que el resto del módulo en español: Cortina (no «Velo»), Technique Burnout, Reduced Output, Soul Awareness, Espíritu maldito (vengativo), Creatividad técnica, distancias en pies.
+- Nombres de técnicas como en los compendios: Rot, Blood Manipulation, Infinity, Lapse Blue, Reversal Red, Hollow Purple.
+- Comprensión de Juggernaut: se quitó «en lugar de 5», que no está en el manual. Maestro de la energía positiva: traducción más fiel.
+
 ## 1.73.0 — Choque de dominios como reacción
 - Cuando alguien expande su dominio, cada criatura de la escena que tenga Expansión de Dominio y pueda responder recibe la oferta de **expandir el suyo como reacción** e iniciar un choque de dominios, según la regla *Domain Clashes* del manual.
   - Se avisa a los jugadores dueños del personaje. Para los PNJ se avisa al GM.

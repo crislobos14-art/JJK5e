@@ -830,7 +830,7 @@
       },
       "Action": {
         "Charge": "Carga (+{n} al ataque)",
-        "ChargeHint": "+3 m en línea recta; solo 1 ataque este turno.",
+        "ChargeHint": "+10 pies en línea recta; solo 1 ataque este turno.",
         "Coup": "Golpe de gracia",
         "CoupDie": "— si falla, el objetivo muere.",
         "CoupHint": "Ataca ahora; el objetivo salva con CD = daño.",
@@ -864,7 +864,7 @@
         "Twenty": "20 natural en la salvación: sin daño"
       },
       "Death": {
-        "Confirm": "¿Convertir a <b>{name}</b> en espíritu maldito? (raza Espíritu Vengativo, pierde los rasgos de TMI, FUE/DES/CON/EM +2, las otras características mentales −4, 1 nivel de locura indefinida)",
+        "Confirm": "¿Convertir a <b>{name}</b> en espíritu maldito? (raza Espíritu maldito (vengativo); pierde los rasgos de Técnica Maldita Inversa; FUE, DES, CON y EM +2, también su máximo; las otras características mentales −4; 1 nivel de locura indefinida)",
         "Done": "{name} vuelve como espíritu maldito. {n} rasgo(s) de TMI perdidos, +{pp} Puntos Profanos.",
         "Feat": "Maldito al morir: dote de Energía Maldita o de Técnica Innata",
         "Free": "{name} supera la salvación semanal: la locura termina.",
@@ -904,10 +904,10 @@
       "ObjectSoul": {
         "L1": "los ataques cuerpo a cuerpo ignoran el umbral y la reducción de daño de los objetos",
         "L2": "daño máximo contra objetos; su CA cuenta 5 menos",
-        "L3": "ignoras las técnicas que endurecen objetos; vista ciega 9 m"
+        "L3": "ignoras las técnicas que endurecen objetos; vista ciega a 30 pies"
       },
       "Pure": {
-        "Permit": "Permiso de Barrera pura",
+        "Permit": "Permiso de la Barrera pura",
         "Scene": "Barrera pura (escena)"
       },
       "Repeat": {
@@ -915,7 +915,7 @@
         "Swap": "Cambiar la dote"
       },
       "Soul": {
-        "Disadvantage": "desventaja (sin Percepción del alma)"
+        "Disadvantage": "desventaja (sin Soul Awareness)"
       },
       "TakeHit": {
         "Done": "{name} recibe el golpe por {ally}.",
@@ -947,129 +947,129 @@
       },
       "totalityAlt": {
         "Name": "Alternativa a la Totalidad",
-        "Hint": "Los shikigami no mueren: los caídos vuelven tras un descanso largo en vez de perderse (sin Totalidad)."
+        "Hint": "Se ignora la Totalidad: los shikigami no mueren; todos los caídos vuelven tras un descanso largo (y ninguno queda disponible para la Totalidad)."
       },
       "lessBlood": {
         "Name": "Menos sangre",
-        "Hint": "Reduce el costo en puntos de golpe de Manipulación de Sangre y Rot (mínimo 1).",
+        "Hint": "Los costos en puntos de golpe de Rot y Blood Manipulation se reducen a la fracción elegida (mínimo 1).",
         "C1": "Costo normal",
         "C05": "Mitad",
         "C025": "Un cuarto"
       },
       "bloodConversion": {
         "Name": "Conversión de sangre",
-        "Hint": "Con Producción de Sangre, la tirada d100 para despertar la TMI se hace con ventaja."
+        "Hint": "Con la dote Producción de sangre, las tiradas para adquirir o comprender los fundamentos de la Técnica Maldita Inversa se hacen con ventaja."
       },
       "mythicalAccuracy": {
         "Name": "Precisión de la Bestia Mítica",
-        "Hint": "Liberación de Ámbar de la Bestia Mítica avanza una fase al inicio de cada turno del usuario."
+        "Hint": "Mythical Beast Amber Release avanza una fase por turno (al inicio de cada turno de quien la usa)."
       },
       "advantageStacking": {
         "Name": "Ventaja acumulada",
-        "Hint": "Las tiradas de ataque con ventaja de varias fuentes reciben +1 por cada fuente extra (fuentes de Midi-QOL y JJK)."
+        "Hint": "Con ventaja de más de una fuente: se tira con ventaja y +1 por cada fuente adicional. Automatizado en tiradas de ataque; en pruebas de habilidad, y con la acción Ayudar (que exige describir cómo se ayuda o tener competencia), aplícalo a mano."
       },
       "crunchyCrits": {
         "Name": "Críticos contundentes",
-        "Hint": "Los críticos tiran los dados normales y duplican toda la tirada de daño, modificadores incluidos."
+        "Hint": "En un golpe crítico, en lugar de duplicar los dados de daño, se tira normalmente y se duplica toda la tirada de daño (incluidos modificadores y bonificadores fijos)."
       },
       "criticalSaves": {
         "Name": "Salvaciones críticas",
-        "Hint": "Un 1 natural en una salvación contra un efecto dañino duplica el daño; un 20 natural lo anula."
+        "Hint": "Un 1 natural en una tirada de salvación contra un efecto dañino supone daño crítico (se aplica ×2); un 20 natural, ningún daño."
       },
       "callingShots": {
         "Name": "Disparo dirigido",
-        "Hint": "−5 al ataque; si el daño supera el dado de golpe máximo del objetivo + su mod. de CON, se tira en la tabla de extremidades."
+        "Hint": "Aceptas −5 al ataque para lisiar a una criatura. Si el daño supera el valor máximo de su dado de golpe + su modificador de Constitución, se tira en la tabla de daño de extremidades (o el GM decide la lesión)."
       },
       "fightForLife": {
         "Name": "Luchar por tu vida",
-        "Hint": "Moribundo: ventaja en la siguiente salvación de muerte a cambio de 1 nivel de agotamiento (hasta 5)."
+        "Hint": "Mientras haces tiradas de salvación contra la muerte: ventaja en la siguiente a cambio de 1 nivel de agotamiento (hasta 5 niveles por esta vía)."
       },
       "takeTheHit": {
         "Name": "Recibir el golpe",
-        "Hint": "Reacción: recibes un ataque dirigido a un aliado; sufres el doble de daño."
+        "Hint": "Reacción: cuando una criatura a tu alcance de movimiento es objetivo o recibe un efecto dañino, te mueves hasta tu velocidad hacia ella y recibes el ataque en su lugar; sufres el doble de daño."
       },
       "weaponClash": {
         "Name": "Choque",
-        "Hint": "Reacción: tira el daño de tu arma cuerpo a cuerpo y reduce el daño recibido en esa cantidad (usos = bon. de competencia por descanso largo; no psíquico)."
+        "Hint": "Reacción contra un ataque o efecto dañino dirigido a ti: tira el daño de un ataque con arma cuerpo a cuerpo y reduce el daño en esa cantidad; lo que sobre lo recibe el atacante si está a tu alcance. No sirve contra daño psíquico salvo que tengas un rasgo que haga daño psíquico. Usos: tu bonificador por competencia por descanso largo."
       },
       "flanking": {
         "Name": "Flanquear",
-        "Hint": "Un aliado a 5 pies en el lado opuesto del objetivo da ventaja (o +2).",
+        "Hint": "Dos criaturas (no incapacitadas) a 5 pies o menos y en lados opuestos de otra tienen ventaja en los ataques contra ella (o +2, si el GM lo prefiere).",
         "Coff": "Desactivado",
         "Cadv": "Ventaja",
         "Cplus2": "+2 al ataque"
       },
       "techniqueless": {
         "Name": "Sin técnica",
-        "Hint": "La dote Sin técnica da mejora de característica + dote en los niveles 1, 3, 6, 11 y 18 (se pregunta al subir de nivel)."
+        "Hint": "Sin Técnica Innata (ni New Shadow Style ni Divergent Fist): +2 a características y una dote en los niveles 1 y 3, +3 y una dote en los niveles 6 y 11, y +3 y 2 dotes en el nivel 18. Se pregunta al subir de nivel."
       },
       "repetitiveAbilities": {
         "Name": "Habilidades repetidas",
-        "Hint": "Si un rasgo duplica una dote (Expansión de Dominio / Dominio incompleto, Comprensión / Prodigio de la técnica inversa) el jugador puede cambiarla."
+        "Hint": "Si un personaje obtiene un rasgo que da la misma versión o una mejor de una dote que ya tiene (Expansión de Dominio / Dominio incompleto, Reverse Technique Understanding / Reversed Technique Prodigy), el GM puede dejarle cambiar esa dote por otra que cumpla."
       },
       "featImprovement": {
         "Name": "Mejora con dote",
-        "Hint": "Cada mejora de característica también otorga una dote."
+        "Hint": "Cada vez que un personaje obtiene una Mejora de Puntuación de Característica, también obtiene una dote cuyos requisitos cumpla."
       },
       "pureBarrier": {
         "Name": "Barrera pura",
-        "Hint": "En una escena marcada como Barrera pura, los personajes con permiso lanzan Velo por 1 EM."
+        "Hint": "Dentro de una Barrera pura (marcada en la escena), los personajes con permiso de quien la mantiene gastan solo 1 EM al lanzar Cortina."
       },
       "executionEvasion": {
         "Name": "Evasión de la ejecución",
-        "Hint": "Reacción a la Espada del Verdugo: pierdes una extremidad (daño irreducible) en vez de morir."
+        "Hint": "Una criatura que conoce la Espada del Verdugo puede, al ser golpeada, usar su reacción para arrancarse una extremidad en el punto de contacto: recibe el daño necesario para perderla (no se puede reducir) y evita la muerte instantánea."
       },
       "soulChecks": {
         "Name": "Pruebas de alma",
-        "Hint": "Las pruebas sobre almas usan tu nivel de Percepción del alma como bono; con desventaja si no tienes nivel."
+        "Hint": "Las pruebas relacionadas con almas usan tu nivel de Soul Awareness en lugar de modificadores de característica o competencias; sin ningún nivel, se hacen con desventaja."
       },
       "outputBurnout": {
-        "Name": "Agotamiento de salida",
-        "Hint": "El agotamiento de técnica también da 2 niveles temporales de Salida reducida."
+        "Name": "Output Burnout",
+        "Hint": "Mientras estés bajo Technique Burnout, obtienes 2 niveles temporales de Reduced Output."
       },
       "increasedAffinity": {
         "Name": "Afinidad aumentada",
-        "Hint": "Los personajes Espíritu Maldito ganan Afinidad aumentada a nivel 10."
+        "Hint": "Los personajes de raza Espíritu maldito obtienen Afinidad aumentada a nivel 10 (acción adicional o reacción: gasta hasta tu modificador de EM en EM para recuperar 10 PG por cada EM)."
       },
       "sixEyesDependency": {
         "Name": "Dependencia de los Seis Ojos",
-        "Hint": "Sin los Seis Ojos: Infinito cuesta 3 EM; Azul, Rojo, Teletransporte e Infinito ofensivo cuestan el doble; Púrpura +5 EM."
+        "Hint": "Sin los Seis Ojos: activar y mantener Infinity cuesta 3 EM; Lapse Blue, Reversal Red, Teleportation y Offensive Infinity cuestan el doble; Hollow Purple cuesta 5 EM más."
       },
       "increasedHP": {
         "Name": "Puntos de golpe aumentados",
-        "Hint": "Los personajes toman el máximo de su dado de golpe en cada nivel."
+        "Hint": "Al subir de nivel, los personajes obtienen el valor máximo de su dado de golpe en lugar de tirarlo o tomar la media."
       },
       "toughTrials": {
         "Name": "Pruebas duras",
-        "Hint": "Botón del GM: shikigami sin domar con +10×VD PG, +2×VD daño, +½ VD a la CD y +2 a dos características. Quítalo al domarlo."
+        "Hint": "Botón del GM para shikigami sin domar: +10 × VD a los PG, +2 × VD a las tiradas de daño, +½ VD a la CD de sus rasgos y +2 a dos puntuaciones de característica. Quítalo al terminar el ritual de doma (estos aumentos nunca se conservan)."
       },
       "additionalActions": {
         "Name": "Acciones adicionales",
-        "Hint": "Distraer, Romper objeto, Golpe de gracia y Carga (objetos en Rasgos de clase JJK)."
+        "Hint": "Acciones opcionales para combates más dinámicos: Distraer, Romper objeto, Golpe de gracia y Carga (objetos en Rasgos de clase JJK)."
       },
       "classUnderstanding": {
         "Name": "Comprensiones específicas de clase",
-        "Hint": "Con 2 avances un personaje puede tomar la comprensión de su clase (solo una)."
+        "Hint": "Un personaje de la clase con al menos 2 avances puede obtener la comprensión de esa clase. Solo una por personaje."
       },
       "moneyRules": {
         "Name": "Formas de ganar dinero",
-        "Hint": "Registro de dinero, trabajos semanales, empleo especial, pago de misiones y venta de herramientas malditas."
+        "Hint": "Registro de dinero con trabajos de salario mínimo, empleo especial (Técnica Innata o TMI), pago de misiones según el grado y venta de herramientas malditas (Tool Maker)."
       },
       "yearlyProgression": {
         "Name": "Progresión anual",
-        "Hint": "Botón del GM: mejora de característica (+2 / +1+1, máx. 20) o una dote, hasta cuatro veces."
+        "Hint": "Botón del GM: +2 a una puntuación de característica o +1 a dos (máx. 20), o una dote nueva con aprobación del GM. Hasta cuatro veces por personaje."
       },
       "findCurse": {
         "Name": "Encontrar un espíritu maldito",
-        "Hint": "1-2 horas buscando: CD 20 de Percepción/Investigación y luego d100 para el grado."
+        "Hint": "1-2 horas de búsqueda: prueba de Percepción o Investigación CD 20; si tiene éxito, d100 para el grado."
       },
       "cursedUponDeath": {
         "Name": "Maldito al morir",
-        "Hint": "Botón del GM: convierte a un hechicero muerto sin energía maldita en espíritu maldito Vengativo."
+        "Hint": "Botón del GM: un hechicero humano que muere sin energía maldita vuelve una semana después como espíritu maldito (raza Espíritu maldito (vengativo)), con los cambios del manual."
       },
       "objectSoul": {
-        "Name": "Percepción del alma de objetos",
-        "Hint": "Registra los 3 niveles de Percepción del alma de objetos (nivel 3: vista ciega 9 m)."
+        "Name": "Object Soul Awareness",
+        "Hint": "Registra sus 3 niveles (se sube con Spiritual Teaching, o en solitario con 6 o más niveles de Soul Awareness). El nivel 3 da vista ciega a 30 pies."
       },
       "MidiFlanking": "Midi-QOL ya tiene Flanquear activo: se usa su regla y la de JJK se omite."
     },
