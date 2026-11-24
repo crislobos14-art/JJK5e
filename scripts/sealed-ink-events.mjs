@@ -96,7 +96,10 @@ function observe(actor) {
   const s = snapshot(actor);
   const old = snapshots.get(actor.uuid);
   snapshots.set(actor.uuid,s);
-  for (const [key,tone] of delta(old,s,settings("sealedLowCE")/100)) record(key,tone,actor,s);
+  for (const [key,tone] of delta(old,s,settings("sealedLowCE")/100)) {
+    record(key,tone,actor,s);
+    Hooks.callAll("jjk5e.sealedInkStateChanged", actor, key, tone);
+  }
 }
 function queue(actor) {
   if (!visible(actor)) return;
@@ -131,7 +134,8 @@ function updateTurn() {
 }
 function updateDock() {
   if (!dock) return;
-  dock.textContent = L("JJK controls","Controles JJK") + (unread.size ? " · " + unread.size : "");
+  const count = history.filter(n=>unread.has(n.id)&&(!n.actor||visible(n.actor))).length;
+  dock.textContent = L("JJK controls","Controles JJK") + (count ? " · " + count : "");
   dock.hidden = !settings("sealedEventCenter") && !settings("sealedCombatHUD");
 }
 function bar(title,value,max,energy=false) {
@@ -243,6 +247,9 @@ Hooks.once("ready",() => {
   dock.className="jjk-sealed-event-dock";document.body.append(dock);updateDock();
   for(const a of [...game.actors,...combatants().map(c=>c.actor)]) if(visible(a)) snapshots.set(a.uuid,snapshot(a));
   for(const h of ["updateActor","createActor"]) Hooks.on(h,queue);
+  Hooks.on("deleteActor",a=>{snapshots.delete(a.uuid);pending.delete(a.uuid);});
+  Hooks.on("createToken",t=>{if(visible(t.actor,t))snapshots.set(t.actor.uuid,snapshot(t.actor));});
+  Hooks.on("deleteToken",t=>{if(t.actor?.isToken){snapshots.delete(t.actor.uuid);pending.delete(t.actor.uuid);}});
   for(const h of ["createItem","updateItem","deleteItem","createActiveEffect","updateActiveEffect","deleteActiveEffect"])
     Hooks.on(h,d=>queue(d.actor ?? (d.parent?.documentName==="Actor"?d.parent:d.parent?.actor)));
   for(const h of ["updateCombat","combatStart","combatTurn","deleteCombat","controlToken","canvasReady","createCombatant","updateCombatant","deleteCombatant"]) Hooks.on(h,()=>{
