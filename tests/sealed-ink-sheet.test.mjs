@@ -66,10 +66,13 @@ test("negative emotion is not self-awarded by a player or granted after cancel",
     requireActor: a => a, game: { i18n: { lang: "es" }, user: { get isGM() { return gm; } } },
     ui: { notifications: { warn() {} } }, findPool: () => ({}),
     poolValue: () => 1, poolMax: () => 10, confirmDialog: async () => confirmed,
-    esc: s => s, t: s => s, spendCE: async (a, n) => { spent += n; return true; }
+    esc: s => s, t: s => s, spendCE: async (a, n) => { spent += n; return true; },
+    viaGM: async (action) => { requested.push(action); return false; }
   });
+  const requested = [];
   await fn(actor);
   assert.equal(spent, 0);
+  assert.deepEqual([...requested], ["negEmotion"], "a player asks the GM instead of awarding it");
   gm = true;
   await fn(actor);
   assert.equal(spent, 0);
@@ -138,4 +141,19 @@ test("feat browser delegates to existing advancement and guards repeat submissio
   assert.ok(main.includes("!featFitsTechnique(adv.actor, item) || missingPrereqs(adv.actor, item).length"));
   assert.ok(main.includes('if (!box.closest(".jjk-sealed-surface")) take(ev)'));
   assert.ok(!/\b(?:actor|adv)\.(?:update|apply|reverse|createEmbeddedDocuments)\(/.test(source));
+});
+
+test("summon links redraw only for sheets the change can affect", () => {
+  const src = readFileSync(new URL("../scripts/sealed-ink.mjs", import.meta.url), "utf8");
+  const body = src.match(/function linksAffectedBy\(actor, doc\) \{[\s\S]*?\n\}/)?.[0];
+  assert.ok(body);
+  const fn = runInNewContext(body + "\nlinksAffectedBy;", {});
+  const sword = { uuid: "Actor.A.Item.S" };
+  const yuji = { uuid: "Actor.A", items: [sword] };
+  assert.equal(fn(yuji, { documentName: "Actor", uuid: "Actor.A" }), true);
+  assert.equal(fn(yuji, { documentName: "Actor", uuid: "Actor.Z", token: null, getActiveTokens: () => [] }), false, "unrelated actor HP change");
+  assert.equal(fn(yuji, { documentName: "Token", actor: { uuid: "Actor.Q" }, flags: { jjk5e: { summonedBy: "Actor.A" } } }), true);
+  assert.equal(fn(yuji, { documentName: "Token", actor: { uuid: "Actor.Q", flags: { dnd5e: { summon: { origin: "Actor.A.Item.S" } } } }, flags: {} }), true);
+  assert.equal(fn(yuji, { documentName: "Item", parent: { uuid: "Actor.B" } }), false);
+  assert.equal(fn(yuji, undefined), true, "canvas change redraws");
 });

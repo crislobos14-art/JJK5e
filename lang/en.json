@@ -37,7 +37,8 @@
       "ShortRestRestore": "Sorcerous Restoration (+{n} CE)",
       "Short": "CE",
       "NegativeEmotionShort": "Negative emotion",
-      "ShortRestShort": "Short rest"
+      "ShortRestShort": "Short rest",
+      "NegativeEmotionConfirm": "Confirm that a qualifying event happened during combat in genuine danger."
     },
     "Technique": {
       "Title": "Choose Innate Technique",
@@ -617,7 +618,9 @@
       "Title": "Level up",
       "Which": "Which class gains the level?",
       "NoClass": "This character has no class yet.",
-      "Max": "Already at level 20."
+      "Max": "Already at level 20.",
+      "NeedAdvancements": "Enable D&D 5e advancements to level up without losing features, HP or choices.",
+      "NoManager": "JJK 5e: the D&D 5e advancement manager is not available, so this item cannot be added safely."
     },
     "Vow": {
       "Prefix": "Vow",
@@ -832,7 +835,8 @@
         "race": "Race",
         "background": "Background",
         "feat": "Extra feat",
-        "hotbar": "JJK hotbar"
+        "hotbar": "JJK hotbar",
+        "mindset": "Mindset"
       },
       "StepHint": {
         "abilities": "Point buy (do it first so race and class bonuses add on top).",
@@ -842,7 +846,8 @@
         "race": "Choose a race and assign its bonuses.",
         "background": "Skills, tools and the background feat.",
         "feat": "For variant or Techniqueless characters, or when the GM allows one.",
-        "hotbar": "Put your techniques and JJK actions on the hotbar."
+        "hotbar": "Put your techniques and JJK actions on the hotbar.",
+        "mindset": "Alternative to Inspiration, if your table uses it."
       },
       "Progress": "Steps done: {done} / {total}",
       "Optional": "optional",
@@ -851,7 +856,8 @@
       "Redo": "Change",
       "Next": "Next",
       "Feat": "Choose a feat",
-      "NoFeats": "No JJK feat available: check prerequisites (level, technique, breakthroughs)."
+      "NoFeats": "No JJK feat available: check prerequisites (level, technique, breakthroughs).",
+      "FeatConfirm": "Confirm that the character is entitled to an extra feat under the rules or a table ruling."
     },
     "Shikigami": {
       "Title": "Customize a shikigami",
@@ -1274,6 +1280,25 @@
       "NextYearMsg": "{name} moves up to year {n}.",
       "GraduatedMsg": "{name} graduates from Jujutsu High.",
       "Hint": "Students pick their year and teacher; teachers see their students here. Teachers cannot recommend their own students for promotion."
+    },
+    "Rest": {
+      "Uncertain": "Hit Dice/CE exchange uncertain: the GM must review this actor's record. Do not retry.",
+      "Mixed": "Mixed values: compare and correct the resources by hand before reconciling.",
+      "ReconcileTitle": "CE · Reconcile rest exchange",
+      "MatchApplied": "The current values match the applied exchange: mark it as completed?",
+      "MatchPrior": "The current values match the state before the exchange: reopen it?",
+      "NeedShortRest": "Finish a short rest on the character sheet first: Hit Dice can be exchanged for CE once per short rest, out of combat.",
+      "InReview": "The last Hit Dice/CE exchange is waiting for the GM to reconcile it.",
+      "Confirm": "Spend {n} Hit Dice to recover {n} CE?",
+      "Reconcile": "Reconcile rest exchange"
+    },
+    "Totality": {
+      "Resolve": "Resolve shikigami at 0 HP",
+      "Recall": "Recall with reaction",
+      "Lost": "Confirm loss",
+      "Cancel": "Do not resolve / taming ritual",
+      "Hint": "Confirm this is a tamed shikigami. If the summoner sees it fall and still has a reaction, it can be recalled until a long rest. During a taming ritual or if unsure, do not confirm the loss.",
+      "Recalled": "Recalled until a long rest."
     }
   }
 }

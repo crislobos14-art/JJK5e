@@ -1672,7 +1672,7 @@ async function commitRestExchange(actor, restId, n, {requester=null}={}) {
       await actor.setFlag(MODULE_ID,"shortRestExchange",{id:restId,state:"committed",amount:n});
     }catch(err){
       reportError("short rest CE review",err);
-      ui.notifications.error(game.i18n.lang.startsWith("es")?"Intercambio de dados/CE incierto: el GM debe revisar el registro del actor. No repitas la operación.":"Hit dice/CE exchange uncertain: GM must review actor record. Do not retry.");
+      ui.notifications.error(t("Rest.Uncertain"));
       return false;
     }
     if(setting("ceChat"))try{await chat(actor,`<p><strong>${t("CE.ShortRestLabel",{n})}</strong>: +${n} CE</p>`,privateTo(actor));}catch(err){reportError("rest exchange chat",err);}
@@ -1691,13 +1691,12 @@ async function resolveRestExchange(actor){
     const rec=actor.getFlag(MODULE_ID,"shortRestExchange");
     if(rec?.state!=="review")return false;
     const after=restRowsMatch(actor,rec.updates),before=restRowsMatch(actor,rec.before);
-    const spanish=game.i18n.lang.startsWith("es");
     if(!after&&!before){
-      ui.notifications.warn(spanish?"Valores mixtos: compara y corrige manualmente los recursos antes de conciliar.":"Mixed values: compare and manually correct resources before reconciliation.");
+      ui.notifications.warn(t("Rest.Mixed"));
       return false;
     }
     const state=after?"committed":"open";
-    if(!await confirmDialog("CE · "+(spanish?"Conciliación":"Reconciliation"),`<p>${spanish?"Los valores coinciden con":"Values match"} ${after?(spanish?"la operación aplicada":"the applied operation"):(spanish?"el estado anterior":"the prior state")}.</p>`))return false;
+    if(!await confirmDialog(t("Rest.ReconcileTitle"),`<p>${t(after?"Rest.MatchApplied":"Rest.MatchPrior")}</p>`))return false;
     if(!restRowsMatch(actor,after?rec.updates:rec.before))return false;
     await actor.setFlag(MODULE_ID,"shortRestExchange",{id:rec.id,state,amount:after?rec.amount:0});
     return true;
@@ -1708,7 +1707,7 @@ async function shortRestCE(actor) {
   if(!actor?.isOwner)return false;
   const rest=actor.getFlag(MODULE_ID,"shortRestExchange");
   if(rest?.state!=="open" || game.combat?.started){
-    ui.notifications.warn(game.i18n.lang.startsWith("es")?"Completa un descanso corto nativo antes de intercambiar dados. Solo un intercambio por descanso; un registro en revisión requiere al GM.":"Complete a native short rest before exchanging dice. One exchange per rest; a review record requires the GM.");
+    ui.notifications.warn(t(rest?.state==="review"?"Rest.InReview":"Rest.NeedShortRest"));
     return false;
   }
   const pool=findPool(actor);
@@ -1719,31 +1718,33 @@ async function shortRestCE(actor) {
   if(cap<1){ui.notifications.warn(t("Notify.NoHitDice"));return false;}
   const n=await promptNumber(t("CE.ShortRestTitle"),t("CE.ShortRestPrompt",{cap}));
   if(!Number.isSafeInteger(n)||n<1||n>cap)return false;
-  if(!await confirmDialog(t("CE.ShortRestTitle"),`<p>${game.i18n.lang.startsWith("es")?"Consumir":"Consume"} ${n} HD → +${n} CE?</p>`))return false;
+  if(!await confirmDialog(t("CE.ShortRestTitle"),`<p>${t("Rest.Confirm",{n})}</p>`))return false;
   if(ceAuthorityEnabled()&&!isActiveGM())return ceAuthorityRequest("restExchange",{actorUuid:actor.uuid,restId:rest.id,amount:n});
   return commitRestExchange(actor,rest.id,n);
 }
 
+/** GM-side handlers for player requests (filled where each feature lives; see GM_EXTRA). */
+const GM_EXTRA_LATE = {};
 async function negativeEmotion(actor) {
   actor = requireActor(actor);
   if (!actor || !actor.isOwner) return false;
-  const spanish = game.i18n.lang.startsWith("es");
-  // V6: the GM adjudicates genuine danger and the qualifying event.
-  if (!game.user.isGM) {
-    ui.notifications.warn(spanish ? "La recuperación por emoción negativa requiere autorización del GM." :
-      "Negative Emotion Recovery requires GM authorization.");
-    return false;
-  }
   const pool = findPool(actor);
   if (!pool || poolValue(pool) >= poolMax(pool)) return false;
+  // V6: the GM adjudicates genuine danger and the qualifying event. Players send the request to the GM.
+  if (!game.user.isGM) return viaGM("negEmotion", { actorUuid: actor.uuid });
   const pb = Number(actor.system.attributes?.prof) || 2;
   const confirmed = await confirmDialog(t("CE.NegativeEmotion"),
-    `<p>${esc(actor.name)} — ${pb} CE</p><p>${spanish ?
-      "¿Confirmas que ocurrió un desencadenante válido durante un combate con peligro real?" :
-      "Confirm that a qualifying event occurred during combat in genuine danger."}</p>`);
+    `<p>${esc(actor.name)} — ${pb} ${t("CE.Short")}</p><p>${t("CE.NegativeEmotionConfirm")}</p>`);
   if (!confirmed) return false;
   return spendCE(actor, -pb, t("CE.NegativeEmotion"));
 }
+/** GM side of a player's Negative Emotion request: handleGMRequest already asked the GM to confirm the trigger. */
+GM_EXTRA_LATE.negEmotion = async ({ actorUuid }) => {
+  const actor = await fromUuid(actorUuid).catch(() => null);
+  const pool = findPool(actor);
+  if (!actor || !pool || poolValue(pool) >= poolMax(pool)) return false;
+  return spendCE(actor, -(Number(actor.system.attributes?.prof) || 2), t("CE.NegativeEmotion"));
+};
 
 /* -------------------------------------------- */
 /*  Level scaling                                */
@@ -2328,7 +2329,7 @@ async function gmDismiss({ actorUuid, sceneId }) {
 }
 
 /** Extra GM-side handlers registered by later systems (domains, curses...). */
-const GM_EXTRA = {};
+const GM_EXTRA = GM_EXTRA_LATE;
 const GM_QUERY = `${MODULE_ID}.gmRequest`;
 
 GM_EXTRA.tokenSwap = async ({ sceneId, sourceId, targetId, actorUuid }) => {
@@ -2350,7 +2351,7 @@ async function handleGMRequest(msg) {
   if (!game.user.isGM || !setting("playerGMRequests") || !msg?.requestedBy) return false;
   const requester = game.users.get(msg.requestedBy);
   const action = String(msg.action ?? "");
-  const allowed = new Set(["summon", "dismiss", "tokenSwap", "customizeShikigami"]);
+  const allowed = new Set(["summon", "dismiss", "tokenSwap", "customizeShikigami", "negEmotion"]);
   if (!requester?.active || requester.isGM || !allowed.has(action)) return false;
   const actor = msg.payload?.actorUuid ? await fromUuid(msg.payload.actorUuid).catch(() => null) : null;
   // GM approval is explicit: client-provided user IDs are NOT a trusted identity.
@@ -2518,7 +2519,9 @@ function panelHTML(actor, tab = "combat") {
       </div>
       <div class="jjk-row">
         ${pbtn("negEmotion", "fas fa-face-angry", t("CE.NegativeEmotionShort"), { key: "N", tip: t("CE.NegativeEmotion") })}
-        ${pbtn("shortRest", "fas fa-bed", t("CE.ShortRestShort"), { key: "R", tip: t("CE.ShortRestTitle") })}
+        ${(() => { const rx = actor.getFlag(MODULE_ID, "shortRestExchange")?.state; const ready = rx === "open" && !game.combat?.started;
+          return pbtn("shortRest", "fas fa-bed", t("CE.ShortRestShort"), { key: "R", data: ready ? "" : "disabled",
+            tip: ready ? t("CE.ShortRestTitle") : t(rx === "review" ? "Rest.InReview" : "Rest.NeedShortRest") }); })()}
       </div></fieldset>` : (hr ? "" : `<p class="jjk-note">${t("Panel.NoPool")} ${pbtn("chooseTechnique", "fas fa-hand-sparkles", t("Panel.ChooseTechnique"))}</p>`);
 
   const combat = `${ceBlock}
@@ -2581,8 +2584,8 @@ function panelHTML(actor, tab = "combat") {
   const gmTab = gm ? `<p class="jjk-note">${t("Panel.GMHint")}</p>
     <fieldset><legend>${t("Panel.GMValues")}</legend><div class="jjk-grid">
       ${pool ? pbtn("gmCE", "fas fa-bolt", `${t("Panel.GMSetCE")} (${value}/${max})`) : ""}
-      ${restReview(actor)?pbtn("restReview","fas fa-triangle-exclamation",game.i18n.lang.startsWith("es")?"Conciliar descanso":"Reconcile rest"):""}
-      ${actor.flags?.jjk5e?.shikigami&&Number(actor.system.attributes?.hp?.value)===0?pbtn("shikigamiReview","fas fa-ghost",game.i18n.lang.startsWith("es")?"Resolver shikigami a 0 PG":"Resolve shikigami at 0 HP"):""}
+      ${restReview(actor)?pbtn("restReview","fas fa-triangle-exclamation",t("Rest.Reconcile")):""}
+      ${actor.flags?.jjk5e?.shikigami&&Number(actor.system.attributes?.hp?.value)===0?pbtn("shikigamiReview","fas fa-ghost",t("Totality.Resolve")):""}
       ${pbtn("engineDiagnostics", "fas fa-stethoscope", t("Diag.Title"))}
       ${pbtn("gmRefinement", "fas fa-circle-half-stroke", `${t("Domain.Refinement")}: ${refinementOf(actor)}`)}
       ${pbtn("soulDamage", "fas fa-ghost", t("Soul.Apply"))}
@@ -3999,9 +4002,7 @@ async function levelUp(actor) {
   if (!cls || cls.type !== "class" || !actor.isOwner || characterLevel(actor) >= 20) return false;
   const AM = globalThis.dnd5e?.applications?.advancement?.AdvancementManager;
   if (!AM || game.settings.get("dnd5e", "disableAdvancements")) {
-    ui.notifications.warn(game.i18n.lang.startsWith("es") ?
-      "Activa los avances de D&D 5e para subir de nivel sin perder rasgos, PG ni elecciones." :
-      "Enable D&D 5e advancements to level up without losing features, HP or choices.");
+    ui.notifications.warn(t("LevelUp.NeedAdvancements"));
     return false;
   }
   const manager = AM.forLevelChange(actor, cls.id, 1);
@@ -6735,7 +6736,7 @@ async function addWithAdvancement(actor, doc) {
   const data = game.items.fromCompendium ? game.items.fromCompendium(doc) : doc.toObject();
   const Manager = dnd5e?.applications?.advancement?.AdvancementManager;
   if (!Manager?.forNewItem) {
-    if (Object.keys(data.system?.advancement ?? {}).length) { ui.notifications.warn("JJK5e: native advancement manager unavailable."); return false; }
+    if (Object.keys(data.system?.advancement ?? {}).length) { ui.notifications.warn(t("LevelUp.NoManager")); return false; }
     return (await actor.createEmbeddedDocuments("Item", [data])).length > 0;
   }
   const manager = Manager.forNewItem(actor, data);
@@ -6762,7 +6763,6 @@ function creatorSteps(actor) {
     return d && !hasType(actor,type) ? addWithAdvancement(actor,d) : false;
   };
   const mindset = actor.items.some(i => i.flags?.jjk5e?.mindset);
-  const spanish = game.i18n.lang.startsWith("es");
   const pickMindset = async () => {
     if (!actor.isOwner || actor.items.some(i=>i.flags?.jjk5e?.mindset)) return false;
     const d = await pickFromPack("jjk5e-backgrounds", ["feat"], "Mindset", i=>!!i.flags?.jjk5e?.mindset);
@@ -6775,10 +6775,10 @@ function creatorSteps(actor) {
     { key: "ceAbility", locked: !hasType(actor,"class"), icon: "fas fa-brain", done: hr || !!actor.getFlag(MODULE_ID, "ceAbility"), skip: hr, run: () => chooseCEAbility(actor) },
     { key: "race", locked: hasType(actor,"race"), icon: "fas fa-dna", done: hasType(actor, "race"), run: pick("jjk5e-races", "race", t("Create.Race")) },
     { key: "background", locked: hasType(actor,"background"), icon: "fas fa-scroll", done: hasType(actor, "background"), run: pick("jjk5e-backgrounds", "background", t("Create.Background")) },
-    { key:"mindset", label:"Mindset", hint:spanish ? "Alternativa a Inspiration si la mesa la utiliza." : "Alternative to Inspiration when used by the table.", icon:"fas fa-brain", optional:true, done:mindset, locked:mindset, run:pickMindset },
+    { key:"mindset", icon:"fas fa-brain", optional:true, done:mindset, locked:mindset, run:pickMindset },
     { key:"feat", icon:"fas fa-star", optional:true, done:false, locked:!game.user.isGM, run:async()=>{
       if(!game.user.isGM) return false;
-      if(!await confirmDialog(t("Create.Feat"),spanish ? "<p>¿Confirmas que el personaje tiene derecho a una dote adicional según el reglamento o la mesa?</p>" : "<p>Confirm that the character is entitled to an additional feat under the rules or table ruling.</p>")) return false;
+      if(!await confirmDialog(t("Create.Feat"),`<p>${t("Create.FeatConfirm")}</p>`)) return false;
       return pickFeat(actor,t("Create.Feat"));
     } },
     { key: "hotbar", icon: "fas fa-table-cells", optional: true, done: false, run: () => fillHotbar(actor) }
@@ -7978,16 +7978,15 @@ async function recordFallenShikigami(actor) {
     if(!summoner||!actorTechniques(summoner).has(normName("Ten Shadows")))return;
     const name=baseName(actor), normalized=name.trim().toLowerCase();
     if(!name||recallBlocked(summoner,name)||Number(actor.system.attributes?.hp?.value)>0)return;
-    const spanish=game.i18n.lang.startsWith("es");
     const midi=globalThis.MidiQOL;
     const canRecall=!midi?.hasUsedReaction?.(summoner);
     // Seeing the creature, ritual vs domesticated status and reaction eligibility are GM decisions.
     const buttons=[];
-    if(canRecall)buttons.push({action:"recall",label:spanish?"Retirar con reacción":"Recall with reaction"});
-    buttons.push({action:"lost",label:spanish?"Confirmar pérdida":"Confirm loss"},{action:"cancel",label:spanish?"No resolver / ritual":"Do not resolve / trial"});
+    if(canRecall)buttons.push({action:"recall",label:t("Totality.Recall")});
+    buttons.push({action:"lost",label:t("Totality.Lost")},{action:"cancel",label:t("Totality.Cancel")});
     const choice=await foundry.applications.api.DialogV2.wait({
       classes:["jjk5e-ui","jjk5e-dialog"],window:{title:"Ten Shadows — "+name},rejectClose:false,
-      content:`<p>${esc(summoner.name)} — ${esc(name)}</p><p>${spanish?"Confirma que es un shikigami domesticado. Si el invocador lo ve caer y dispone de su reacción, puede retirarlo hasta el descanso largo. En un ritual o caso incierto, no confirmes la pérdida.":"Confirm this is a tamed shikigami. If the summoner sees it fall and has a reaction, recall it until a long rest. For trials or uncertain cases, do not confirm loss."}</p>`,
+      content:`<p>${esc(summoner.name)} — ${esc(name)}</p><p>${t("Totality.Hint")}</p>`,
       buttons
     });
     if(!isActiveGM()||Number(actor.system.attributes?.hp?.value)>0||!token.parent?.tokens?.get(token.id)||recallBlocked(summoner,name))return;
@@ -7998,7 +7997,7 @@ async function recordFallenShikigami(actor) {
       list.add(normalized);
       await summoner.setFlag(MODULE_ID,"recalledShikigami",[...list]);
       await token.delete();
-      await chat(summoner,`<p><strong>${esc(name)}</strong> — ${spanish?"Retirado hasta descanso largo.":"Recalled until long rest."}</p>`);
+      await chat(summoner,`<p><strong>${esc(name)}</strong> — ${t("Totality.Recalled")}</p>`);
     }else if(choice==="lost"){
       const list=new Set(summoner.getFlag(MODULE_ID,"fallenShikigami")??[]);
       list.add(name);

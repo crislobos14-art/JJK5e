@@ -44,7 +44,7 @@ test("short-rest exchange checks cap, writes both resources and prevents replays
     pool.value=pool.max-pool.system.uses.spent-(pool.flags.jjk5e.fractionalSpent??0);
   }};
   const y=runInNewContext(extract("const REST_EXCHANGE_RESULTS","async function shortRestCE")+";({restExchangePlan,commitRestExchange});",{
-    queueCE:async(a,f)=>f(),MODULE_ID:"jjk5e",game:{combat:{started:false},i18n:{lang:"es"}},findPool:()=>pool,poolValue:p=>p.value,poolMax:p=>p.max,ceTransaction,cePending:()=>false,vowBlocksUsage:()=>false,foundry:{utils:{getProperty:get}},setting:()=>false,reportError(){},ui:{notifications:{error(){}}}
+    queueCE:async(a,f)=>f(),MODULE_ID:"jjk5e",game:{combat:{started:false},i18n:{lang:"es"}},findPool:()=>pool,poolValue:p=>p.value,poolMax:p=>p.max,ceTransaction,cePending:()=>false,vowBlocksUsage:()=>false,foundry:{utils:{getProperty:get}},setting:()=>false,reportError(){},ui:{notifications:{error(){}}},t:k=>k
   });
   assert.equal(y.restExchangePlan(actor,pool,5),null);assert.equal(y.restExchangePlan(actor,pool,1.5),null);
   assert.equal(y.restExchangePlan(actor,pool,4).length,3);

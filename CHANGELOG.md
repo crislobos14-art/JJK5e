@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.86.0 — Correcciones de automatización y compatibilidad
+- Emoción negativa: el jugador ya no se queda bloqueado; su botón envía la petición al GM, que confirma el desencadenante y concede la EM (requiere «Peticiones de jugadores al GM»).
+- Intercambio de dados de golpe por EM: el botón del panel se desactiva y explica por qué cuando no hay un descanso corto completado, hay combate o el intercambio espera la conciliación del GM.
+- Traducidos los 21 textos de 1.84 que solo existían en inglés y español dentro del código (descanso, conciliación, shikigami a 0 PG, avances, mentalidad, dote adicional); ahora están en los archivos de idioma.
+- Sealed Ink: la sección de invocaciones vinculadas solo se redibuja en las hojas afectadas por el cambio, en lugar de en todas las hojas abiertas cada vez que cambia cualquier actor.
+- Sealed Ink: cada renderizado se procesa una sola vez (antes, hasta tres veces por los ganchos de la cadena de clases).
+
 ## 1.85.0 — Historial de Sealed Ink y correcciones
 - Opción para conservar el historial de avisos y su estado de lectura entre sesiones en el mismo navegador, por mundo y usuario. Está desactivada por defecto y vuelve a comprobar los permisos al restaurar los avisos.
 - El HUD conserva el filtro de búsqueda y comprueba que el actor y la actividad sigan disponibles antes de iniciar la acción nativa de D&D 5e.

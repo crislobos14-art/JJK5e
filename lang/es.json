@@ -37,7 +37,8 @@
       "ShortRestRestore": "Sorcerous Restoration (+{n} EM)",
       "Short": "EM",
       "NegativeEmotionShort": "Emoción negativa",
-      "ShortRestShort": "Descanso corto"
+      "ShortRestShort": "Descanso corto",
+      "NegativeEmotionConfirm": "¿Confirmas que ocurrió un desencadenante válido durante un combate con peligro real?"
     },
     "Technique": {
       "Title": "Elegir Técnica Innata",
@@ -617,7 +618,9 @@
       "Title": "Subir de nivel",
       "Which": "¿Qué clase sube de nivel?",
       "NoClass": "Este personaje aún no tiene clase.",
-      "Max": "Ya está en nivel 20."
+      "Max": "Ya está en nivel 20.",
+      "NeedAdvancements": "Activa los avances de D&D 5e para subir de nivel sin perder rasgos, PG ni elecciones.",
+      "NoManager": "JJK 5e: el gestor de avances de D&D 5e no está disponible, así que este objeto no se puede añadir con seguridad."
     },
     "Vow": {
       "Prefix": "Voto",
@@ -832,7 +835,8 @@
         "race": "Raza",
         "background": "Trasfondo",
         "feat": "Dote adicional",
-        "hotbar": "Barra JJK"
+        "hotbar": "Barra JJK",
+        "mindset": "Mentalidad (Mindset)"
       },
       "StepHint": {
         "abilities": "Compra de puntos (hazla primero para que los bonos de raza y clase se sumen encima).",
@@ -842,7 +846,8 @@
         "race": "Elige una raza y reparte sus bonos.",
         "background": "Habilidades, herramientas y la dote del trasfondo.",
         "feat": "Para personajes variantes o Sin técnica, o si el GM la permite.",
-        "hotbar": "Pon tus técnicas y acciones JJK en la barra."
+        "hotbar": "Pon tus técnicas y acciones JJK en la barra.",
+        "mindset": "Alternativa a la Inspiración, si tu mesa la usa."
       },
       "Progress": "Pasos hechos: {done} / {total}",
       "Optional": "opcional",
@@ -851,7 +856,8 @@
       "Redo": "Cambiar",
       "Next": "Siguiente",
       "Feat": "Elige una dote",
-      "NoFeats": "No hay dotes JJK disponibles: revisa los requisitos (nivel, técnica, avances)."
+      "NoFeats": "No hay dotes JJK disponibles: revisa los requisitos (nivel, técnica, avances).",
+      "FeatConfirm": "¿Confirmas que el personaje tiene derecho a una dote adicional según las reglas o la mesa?"
     },
     "Shikigami": {
       "Title": "Personalizar shikigami",
@@ -1274,6 +1280,25 @@
       "NextYearMsg": "{name} pasa a {n}.º año.",
       "GraduatedMsg": "{name} se gradúa de la escuela de jujutsu.",
       "Hint": "El alumno elige su año y su profesor; el profesor ve aquí a sus alumnos. Un profesor no puede recomendar a sus propios alumnos para ascender."
+    },
+    "Rest": {
+      "Uncertain": "Intercambio de dados de golpe/EM incierto: el GM debe revisar el registro del actor. No repitas la operación.",
+      "Mixed": "Valores mezclados: compara y corrige a mano los recursos antes de conciliar.",
+      "ReconcileTitle": "EM · Conciliar intercambio de descanso",
+      "MatchApplied": "Los valores actuales coinciden con el intercambio aplicado: ¿marcarlo como completado?",
+      "MatchPrior": "Los valores actuales coinciden con el estado anterior al intercambio: ¿reabrirlo?",
+      "NeedShortRest": "Primero completa un descanso corto en la ficha: los dados de golpe se pueden cambiar por EM una vez por descanso corto, fuera de combate.",
+      "InReview": "El último intercambio de dados de golpe/EM está esperando a que el GM lo concilie.",
+      "Confirm": "¿Gastar {n} dados de golpe para recuperar {n} de EM?",
+      "Reconcile": "Conciliar intercambio de descanso"
+    },
+    "Totality": {
+      "Resolve": "Resolver shikigami a 0 PG",
+      "Recall": "Retirar con reacción",
+      "Lost": "Confirmar pérdida",
+      "Cancel": "No resolver / ritual de doma",
+      "Hint": "Confirma que es un shikigami domado. Si el invocador lo ve caer y aún tiene su reacción, puede retirarlo hasta el descanso largo. En un ritual de doma o si hay dudas, no confirmes la pérdida.",
+      "Recalled": "Retirado hasta el descanso largo."
     }
   }
 }

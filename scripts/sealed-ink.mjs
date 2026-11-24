@@ -21,6 +21,7 @@ const categories = {
   module: ["JJK tools and dialogs", "Herramientas y diálogos JJK"]
 };
 const watches = new Map();
+const scheduled = new Set();
 function matchesClass(app, namespace, names) {
   return names.some(name => typeof namespace?.[name] === "function" && app.constructor === namespace[name]);
 }
@@ -350,11 +351,30 @@ function renderLinks(app, root, actor, sealed) {
   else root.querySelector(".window-content")?.append(section);
 }
 
-function refreshLinks() {
+/** Whether a changed document can alter the link section of this actor's sheet. */
+function linksAffectedBy(actor, doc) {
+  if (!doc || doc.documentName === undefined) return true; // canvasReady and unknown callers: redraw.
+  const owns = token => {
+    if (!token) return false;
+    if (token.flags?.jjk5e?.summonedBy === actor.uuid) return true;
+    const origin = token.flags?.dnd5e?.summon?.origin ?? token.actor?.flags?.dnd5e?.summon?.origin;
+    return !!origin && [...(actor.items ?? [])].some(item => item.uuid === origin);
+  };
+  if (doc.documentName === "Item") return doc.parent?.uuid === actor.uuid;
+  if (doc.documentName === "Token") return doc.actor?.uuid === actor.uuid || owns(doc);
+  if (doc.documentName === "Actor") {
+    if (doc.uuid === actor.uuid) return true;
+    const tokens = [doc.token, ...(doc.getActiveTokens?.() ?? []).map(token => token.document)].filter(Boolean);
+    return tokens.some(owns);
+  }
+  return false;
+}
+function refreshLinks(doc) {
   for (const [app, root] of live) {
     if (!root.isConnected) { stopWatch(app); stopParticles(root); live.delete(app); continue; }
     const actor = nativeActor(app);
-    if (actor) renderLinks(app, root, actor, root.classList.contains(ROOT));
+    // Redraw only sheets whose summon list this change can touch: avoids rebuilding every open sheet on any HP change.
+    if (actor && linksAffectedBy(actor, doc)) renderLinks(app, root, actor, root.classList.contains(ROOT));
   }
 }
 
@@ -494,8 +514,14 @@ Hooks.once("ready", () => {
   if (game.system.id !== "dnd5e") return;
   for (const hook of ["renderActorSheetV2", "renderCharacterActorSheet", "renderNPCActorSheet", "renderApplicationV2", "renderApplication", "renderAbilityScoreImprovementFlow", "renderItemChoiceFlow", "renderAdvancementManager"]) {
     Hooks.on(hook, (app, element) => {
-      try { apply(app, element); }
-      catch (err) { console.warn(ID + " | Sealed Ink presentation", err); }
+      // One render fires several of these hooks (class chain): apply once, after all of them.
+      if (scheduled.has(app)) return;
+      scheduled.add(app);
+      queueMicrotask(() => {
+        scheduled.delete(app);
+        try { apply(app, element); }
+        catch (err) { console.warn(ID + " | Sealed Ink presentation", err); }
+      });
     });
   }
   for (const hook of ["closeActorSheetV2", "closeApplicationV2", "closeApplication", "closeSealedInkCharacterSheet", "closeSealedInkNPCSheet"]) Hooks.on(hook, close);
