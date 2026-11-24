@@ -4669,7 +4669,7 @@ async function domainClosed(actor) {
     if (offer.claimId && claim?.id === offer.claimId && claim.openerUuid === actor.uuid) await responder.unsetFlag(MODULE_ID, "domainReactionClaim");
     const rs = getDomain(responder);
     if (rs?.open && rs.reactionRootUuid === actor.uuid && rs.reactionRootOpening === state.openingId) {
-      delete rs.reactionRootUuid; delete rs.reactionRootOpening;
+      rs.reactionRootUuid = null; rs.reactionRootOpening = null;
       await setDomain(responder, rs);
       survivors.push(responder);
     }
