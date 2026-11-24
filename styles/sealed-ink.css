@@ -77,3 +77,16 @@
   .jjk-sealed-motion :is(button, .item-control, .jjk-tab, .jjk-ink-table tbody tr, .jjk-bar .fill) { transition: none !important; }
   .jjk-sealed-particle { display: none !important; }
 }
+
+.jjk-sealed-sheet .jjk-sealed-links {
+  margin-block: 6px;
+  padding: 6px;
+  background: var(--jjk-card);
+  border: 1px solid var(--jjk-edge);
+  border-left: 2px solid var(--jjk-energy);
+}
+.jjk-sealed-links summary { cursor: pointer; font-size: 11px; font-weight: 700; }
+.jjk-sealed-link-row { display: flex; flex-wrap: wrap; gap: 4px; padding-block: 6px; border-bottom: 1px solid #443b45; }
+.jjk-sealed-link-row:last-child { border: 0; }
+.jjk-sealed-link-row span { flex: 1 0 100%; overflow-wrap: anywhere; font-size: 11px; }
+.jjk-sealed-links button { flex: 1 1 auto; width: auto; font-size: 10px; min-height: 24px; padding-inline: 4px; }
