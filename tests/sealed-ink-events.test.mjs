@@ -5,11 +5,13 @@ import assert from "node:assert/strict";
 
 const source = readFileSync(new URL("../scripts/sealed-ink-events.mjs", import.meta.url), "utf8");
 const manifest = JSON.parse(readFileSync(new URL("../module.json", import.meta.url), "utf8"));
-function fixture() {
+function fixture(storage = new Map(), persisted = false) {
   const hooks = new Map(), settings = new Map();
-  const game = { user: { isGM: false }, system: { id: "dnd5e" }, i18n: { lang: "es" },
-    settings: { register: (id,k,o) => settings.set(k,o), get: (id,k) => settings.get(k)?.default } };
-  const exposed = runInNewContext(source + "\n({delta,visible,useHUDActivity});", { Hooks: { once: (k,f) => hooks.set(k,f) }, game, canvas: null });
+  const game = { world: { id: "test-world" }, user: { id: "test-user", isGM: false }, system: { id: "dnd5e" }, i18n: { lang: "es" },
+    settings: { register: (id,k,o) => settings.set(k,o), get: (id,k) => persisted && ["sealedEventCenter", "sealedPersistNotices"].includes(k) ? true : settings.get(k)?.default } };
+  const exposed = runInNewContext(source + "\n({delta,visible,useHUDActivity,history,unread,saveHistory,loadHistory});", { Hooks: { once: (k,f) => hooks.set(k,f) }, game, canvas: null, fromUuidSync: () => ({ isOwner: false }), window: { localStorage: {
+    getItem: key => storage.get(key), setItem: (key, value) => storage.set(key, value), removeItem: key => storage.delete(key)
+  } } });
   hooks.get("init")();
   return { ...exposed, game, settings };
 }
@@ -72,4 +74,25 @@ test("HUD delegates to the current native activity and rejects a stale actor or 
   activities.delete("attack");
   await useHUDActivity(actor, "weapon", "attack", event);
   assert.equal(calls.length, 1);
+});
+
+test("notice history survives a reload only when enabled and omits actors no longer visible", () => {
+  const storage = new Map();
+  const previous = fixture(storage, true);
+  previous.history.push(
+    { id: 2, key: "turn", tone: "info", time: 200, data: {}, actor: { uuid: "Actor.a", isOwner: true } },
+    { id: 1, key: "turn", tone: "info", time: 100, data: {} }
+  );
+  previous.unread.add(1);
+  previous.saveHistory();
+
+  const current = fixture(storage, true);
+  current.loadHistory();
+  assert.deepEqual(plain(current.history.map(n => n.id)), [1]);
+  assert.equal(current.unread.has(1), true);
+  const off = fixture(storage);
+  off.loadHistory();
+  assert.equal(off.history.length, 0);
+  off.saveHistory();
+  assert.equal(storage.size, 0);
 });
