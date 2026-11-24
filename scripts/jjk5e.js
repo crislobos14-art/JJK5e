@@ -546,7 +546,7 @@ async function handleCEAuthority(msg,{user}={}) {
   const actor=await domainActor(d.actorUuid);
   if (!canDirectDomain(user,actor)) return false;
   if (operation==="settle"&&!user.isGM) return false;
-  if(operation==="restExchange")return commitRestExchange(actor,d.restId,d.amount);
+  if(operation==="restExchange")return commitRestExchange(actor,d.restId,d.amount,{requester:user});
   if (operation==="adjust") {
     if (!Number.isFinite(d.amount) || Math.abs(d.amount)>100000) return false;
     if (!user.isGM && !await confirmDialog(t("GMRequest.Title"),`<p>${esc(user.name)}: ${esc(actor.name)} — ${esc(String(d.amount))} CE</p>`)) return false;
@@ -1143,10 +1143,6 @@ function registerActivityHooks() {
     }
     if (!validActivityCE(actor, activity, usageConfig, { checkPool: setting("autoSpendCE") })) return false;
   });
-  Hooks.on("dnd5e.postUseActivity", (activity) => {
-    const actor = activity?.actor??activity?.item?.actor;
-    if(actor?.isOwner)recordTurnActivity(activity);
-  });
   Hooks.on("dnd5e.postUseActivity", async (activity, usageConfig, results) => {
     const actor = activity.actor ?? activity.item?.actor;
     const item = activity.item;
@@ -1164,6 +1160,7 @@ function registerActivityHooks() {
         ctx.postProcessed=true;
       }else if (!(await payActivityCE(actor, activity, usageConfig))) return;
     }
+    if(actor?.isOwner)recordTurnActivity(activity);
     if(isFullTurn(activity)&&actor?.isOwner&&!isClaimedDomainReaction(actor,activity))await spendFullTurn(actor,activity);
     if(isQuickRecovery(activity)){
       if(!results || typeof results!=="object" || CE_RECOVERY_RESULTS.has(results)) return;
@@ -1652,8 +1649,9 @@ function restExchangePlan(actor, pool, n) {
   updates.push({_id:pool.id,"system.uses.spent":whole,"flags.jjk5e.fractionalSpent":Math.round((tx.spent-whole)*1000)/1000});
   return updates;
 }
-async function commitRestExchange(actor, restId, n) {
+async function commitRestExchange(actor, restId, n, {requester=null}={}) {
   return queueCE(actor,async()=>{
+    if(requester&&(!isActiveGM()||!ceAuthorityEnabled()||!canDirectDomain(requester,actor)))return false;
     const rest=actor.getFlag(MODULE_ID,"shortRestExchange");
     if(!actor.isOwner || rest?.id!==restId || rest.state!=="open" || game.combat?.started) return false;
     if(vowBlocksUsage(actor.effects,{costsCE:true}))return false;
@@ -1666,6 +1664,8 @@ async function commitRestExchange(actor, restId, n) {
     const before=updates.map(u=>{const item=actor.items.get(u._id);return Object.fromEntries(Object.keys(u).map(k=>[k,k==="_id"?u._id:Number(foundry.utils.getProperty(item,k)??0)]));});
     await actor.setFlag(MODULE_ID,"shortRestExchange",{id:restId,state:"review",amount:n,before,updates});
     try{
+      if(requester&&(!isActiveGM()||!canDirectDomain(requester,actor)))throw Error("Rest exchange authority changed");
+      if(!restRowsMatch(actor,before))throw Error("Rest resources changed before commit");
       await actor.updateEmbeddedDocuments("Item",updates,{jjk5eCE:true});
       const verified=updates.every(u=>{const item=actor.items.get(u._id);return item&&Object.entries(u).every(([k,v])=>k==="_id"||Number(foundry.utils.getProperty(item,k)??0)===v);});
       if(!verified)throw Error("Rest exchange verification failed");
@@ -2276,6 +2276,12 @@ async function findSummonSource(name) {
 }
 
 async function gmSummon({ actorUuid, name, count = 1, userId, sceneId, stats = null, sourceUuid = null }) {
+  if(!game.user.isGM || !setting("enableSummoning") || typeof name!=="string" || !name.trim() || !Number.isSafeInteger(count) || count<1 || count>20)return false;
+  const summoner=await domainActor(actorUuid);
+  const scene=game.scenes.get(sceneId);
+  const requester=userId?game.users.get(userId):game.user;
+  if(!summoner||!scene||!canDirectDomain(requester,summoner)||recallBlocked(summoner,name))return false;
+  if(stats&&(!Number.isFinite(stats.hp)||stats.hp<=0||!Number.isFinite(stats.ac)||stats.ac<0))return false;
   const byUuid = sourceUuid ? await fromUuid(sourceUuid) : null;
   const src = (byUuid?.documentName === "Actor" && !byUuid.pack) ? { actor: byUuid } : await findSummonSource(name);
   if (!src) return ui.notifications.warn(t("Summon.NotFound", { name }));
@@ -2292,10 +2298,9 @@ async function gmSummon({ actorUuid, name, count = 1, userId, sceneId, stats = n
     ui.notifications.warn(t("Summon.NotASummon", { name: actor.name }));
     return;
   }
+  if(actor.flags?.jjk5e?.personalFor&&actor.flags.jjk5e.personalFor!==summoner.uuid)return false;
+  if(recallBlocked(summoner,baseName(actor)))return false;
   if (userId && actor.ownership?.[userId] !== 3) await actor.update({ [`ownership.${userId}`]: 3 });
-  const scene = game.scenes.get(sceneId) ?? canvas.scene;
-  if (!scene) return;
-  const summoner = await fromUuid(actorUuid);
   const baseId = summoner?.isToken ? summoner.token?.actorId : summoner?.id;
   const sTok = scene.tokens.find((tk) => (summoner?.isToken && tk.id === summoner.token?.id) || tk.actorId === baseId);
   const grid = scene.grid?.size ?? 100;
@@ -2312,7 +2317,7 @@ async function gmSummon({ actorUuid, name, count = 1, userId, sceneId, stats = n
     const td = await actor.getTokenDocument(extra);
     tokens.push(td.toObject());
   }
-  await scene.createEmbeddedDocuments("Token", tokens);
+  return (await scene.createEmbeddedDocuments("Token", tokens)).length===count;
 }
 
 async function gmDismiss({ actorUuid, sceneId }) {
@@ -2383,7 +2388,7 @@ async function summon(actor, name, count = 1) {
   if (!actor) return;
   if (!name) return ui.notifications.warn(t("Summon.NeedName"));
   if (!canvas?.scene) return ui.notifications.warn(t("Notify.NoScene"));
-  if (recallBlocked(actor,name) && !game.user.isGM) {
+  if (recallBlocked(actor,name)) {
     return ui.notifications.warn(t(optOn("totalityAlt") ? "Opt.Totality.UntilRest" : "Opt.Totality.Dead"));
   }
   return viaGM("summon", { actorUuid: actor.uuid, name, count: clamp(Number(count) || 1, 1, 20), userId: game.user.id, sceneId: canvas.scene.id });
@@ -2840,12 +2845,12 @@ async function healSoulWithRCT(actor) {
   const sd = soulDamageOf(actor);
   const soul = Number(actor?.getFlag(MODULE_ID, "soulAwareness")) || 0;
   const pool = actor?.items?.find((i) => /Reverse Cursed Technique \(Healing Pool\)/i.test(baseName(i)));
-  if (!actor || !sd || soul < 6 || !hasRCT(actor)) return ui.notifications.warn(t("Soul.HealRCTUnavailable"));
-  const left = pool ? Math.max(0, (Number(pool.system?.uses?.max) || 0) - (Number(pool.system?.uses?.spent) || 0)) : Infinity;
+  if (!actor?.isOwner || !pool || !sd || soul < 6 || !hasRCT(actor)) return ui.notifications.warn(t("Soul.HealRCTUnavailable"));
+  const left = Math.max(0, (Number(pool.system?.uses?.max) || 0) - (Number(pool.system?.uses?.spent) || 0));
   const maxCE = Math.min(Math.ceil(sd / 10), Math.floor(left / 10), Math.max(1, ceMod(actor)));
   if (!(maxCE > 0)) return ui.notifications.warn(t("Soul.HealRCTUnavailable"));
   const n = clamp(Number(await promptNumber(t("Soul.HealRCT"), t("Soul.HealRCTPrompt", { max: maxCE, sd }), maxCE)) || 0, 0, maxCE);
-  if (!n || !(await spendCE(actor, n, t("Soul.HealRCT")))) return false;
+  if (!Number.isSafeInteger(n) || n<1 || !(await spendCE(actor, n, t("Soul.HealRCT")))) return false;
   const healed = Math.min(sd, 10 * n);
   if (pool) await pool.update({ "system.uses.spent": (Number(pool.system?.uses?.spent) || 0) + 10 * n });
   const rest = sd - healed;
@@ -5219,7 +5224,7 @@ async function claimFallingBlossomOffense(actor){
     const e=actor?.effects?.find(x=>x.flags?.jjk5e?.kind==="fallingBlossomOffense"&&liveWard(x));
     if(!e)return false;
     await safeDelete(e);
-    return true;
+    return !actor.effects.get(e.id);
   });
 }
 function liveWard(effect) {
@@ -6540,12 +6545,18 @@ async function rollRCTAwakening(actor) {
 
 /** Every two rounds in combat the RCT healing pool recovers 10 hit points. */
 async function regenRCTPools(combat) {
-  if (!isActiveGM() || !combat?.round || combat.round % 2 !== 0) return;
-  for (const c of combat.combatants ?? []) {
-    const pool = c.actor?.items?.find?.((i) => /Reverse Cursed Technique \(Healing Pool\)/i.test(baseName(i)));
-    const spent = Number(pool?.system?.uses?.spent) || 0;
-    if (pool && spent > 0) await pool.update({ "system.uses.spent": Math.max(0, spent - 10) });
-  }
+  if (!isActiveGM() || !combat?.started || !Number.isSafeInteger(combat.round) || combat.round<2 || combat.round%2!==0) return;
+  const round=combat.round, combatId=combat.id;
+  const actors=new Map([...combat.combatants??[]].filter(c=>c.actor?.uuid).map(c=>[c.actor.uuid,c.actor]));
+  for(const actor of actors.values()) await queueCE(actor,async()=>{
+    if(!isActiveGM()||!combat.started||combat.round!==round)return;
+    const pool=actor.items?.find?.(i=>/Reverse Cursed Technique \(Healing Pool\)/i.test(baseName(i)));
+    if(!pool)return;
+    const last=pool.getFlag(MODULE_ID,"rctRegenRound");
+    if(last?.combatId===combatId&&Number(last.round)>=round)return;
+    const spent=Math.max(0,Number(pool.system?.uses?.spent)||0);
+    await pool.update({"system.uses.spent":Math.max(0,spent-10),"flags.jjk5e.rctRegenRound":{combatId,round}});
+  });
 }
 
 Hooks.once("ready", () => {
@@ -6572,7 +6583,7 @@ MENU_ACTIONS.splice(MENU_ACTIONS.length - 1, 0,
 
 async function syncReversals(actor) {
   if (!actor?.isOwner || actor.type !== "character") return 0;
-  if (!actor.items.some((i) => baseName(i) === "Cursed Technique Reversal")) return 0;
+  if (!hasRCT(actor) || !actor.items.some((i) => baseName(i) === "Cursed Technique Reversal")) return 0;
   const techs = new Set([actor.getFlag(MODULE_ID, "technique"), ...actor.items.map((i) => i.flags?.jjk5e?.technique)].filter(Boolean));
   if (!techs.size) return 0;
   const pack = jjkPack(TECH_PACK);
@@ -7292,7 +7303,10 @@ async function unlockRCT(actor, reason = "") {
     await addBreakthrough(actor, 1, t("Breakthrough.RCT"));
     return true;
   }
-  for (const n of ["Reverse Cursed Technique", "Reverse Cursed Technique (Healing Pool)"]) await grantByName(actor, "jjk5e-class-features", n);
+  for (const n of ["Reverse Cursed Technique", "Reverse Cursed Technique (Healing Pool)"]) {
+    await grantByName(actor, "jjk5e-class-features", n);
+    if(!findItemByName(actor,n))return false;
+  }
   await actor.setFlag(MODULE_ID, "rctUnlocked", true);
   await chat(actor, `<p><i class="fas fa-heart-pulse"></i> <strong>${t("RCT.Unlocked", { name: esc(actor.name) })}</strong>`
     + `${reason ? ` <em>(${esc(reason)})</em>` : ""}</p><p>${t("RCT.UnlockedHint")}</p>`);
