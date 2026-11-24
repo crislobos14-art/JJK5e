@@ -52,7 +52,7 @@ function stopWatch(app) {
   const w = watches.get(app);
   if (!w) return;
   w.observer.disconnect();
-  if (w.frame) cancelAnimationFrame(w.frame);
+  if (w.frame) window.cancelAnimationFrame(w.frame);
   watches.delete(app);
 }
 function make(tag, cls, text) {
