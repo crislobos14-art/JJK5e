@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.76.0 — Cursed Energy Transaction Engine (experimental) y compatibilidad Midi-QOL / DAE
+- Corrige restricciones de actividades de dominio, apertura repetida, limpieza de reacciones, expiración entre escenas y revalidación espacial.
+- Unifica cálculo y pago de CE, validación de escalado y Reduced Output, descuentos de un solo uso, CE fraccionario, ajustes exactos del GM y recuperación.
+- Corrige Quick Recovery: reserva propia del Strategist y recuperación mediante consumo nativo verificado.
+- Motor transaccional experimental (desactivado por defecto): autoridad del GM activo, reserva persistente, permisos, identificador por operación y resolución manual de transacciones inciertas.
+- Adaptador de consumo mediante libWrapper y comprobaciones del flujo Midi-QOL para ataque, daño, salvaciones, utilidad, teleportación y aplicación de efectos; no reutiliza el pago de otra actividad.
+- Evita repetir determinadas comprobaciones de Black Flash y acciones posteriores; conserva objetivos aliados de curación.
+- DAE V14/Times Up administran expiración cuando corresponda; JJK5e conserva limpieza de ciclo de vida y excluye efectos suprimidos o expirados.
+- Diagnóstico de adaptadores, dependencias y transacciones; documentación técnica en docs/design/ce-transaction-engine.md.
+- Validación: 110/110 pruebas superadas (GitHub Actions 45455954596), sintaxis, ESLint, revisiones, JSON, auditoría de compendios y construcción de packs. Inventario CE: 939 objetos, 1556 actividades y 78 aperturas de dominio.
+- Limitaciones: el modo experimental requiere libWrapper funcional y pruebas reales multicliente con Foundry, Midi-QOL y DAE antes de activarse en producción. Persistencia de flujos tras reconexión, actividades enlazadas, concentración, invocaciones y duraciones especiales pendientes de validación integral. No certifica todos los costes semánticos ni la automatización individual de cada dominio.
+
 ## 1.75.0 — Advanced Domain Engine (ampliación incremental)
 - Autoridad del GM activo para el ciclo de vida de dominios, regiones, cambios de barrera y respuestas; validación de permisos y cola secuencial.
 - Geometría por escena, token y nivel; ataques a barreras con alcance, CA, tirada de daño, lado interior/exterior y deduplicación.
