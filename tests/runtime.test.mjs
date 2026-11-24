@@ -1064,10 +1064,10 @@ test("Simple Domain: independent shared HP, duplicate area event and overflow",a
   const e=await J.setKindEffect(actor,"simpleDomainBarrier",{name:"Barrier",flags:{jjk5e:{hp:18,max:18,events:[]}}});
   const first=await J.absorbSimpleDomain(e,10,"area-1");
   assert.equal(first.hp,8);assert.equal(first.overflow,0);
-  assert.deepEqual(await J.absorbSimpleDomain(e,10,"area-1"),first);
+  assert.equal(JSON.stringify(await J.absorbSimpleDomain(e,10,"area-1")),JSON.stringify(first));
   const second=await J.absorbSimpleDomain(e,12,"area-2");
   assert.equal(second.hp,0);assert.equal(second.overflow,4);assert.equal(e.disabled,true);
-  assert.deepEqual(await J.absorbSimpleDomain(e,12,"area-2"),second);
+  assert.equal(JSON.stringify(await J.absorbSimpleDomain(e,12,"area-2")),JSON.stringify(second));
   assert.equal(actor.system.attributes.hp.temp,0);
 });
 test("Simple Domain: geometry and movement invalidate shared protection",async()=>{
