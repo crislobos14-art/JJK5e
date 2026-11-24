@@ -1488,12 +1488,15 @@ async function openDomain(actor, item) {
   // Barrierless Domain (1000 refinement + breakthrough): no barrier and no time limit.
   const barrierless = !incomplete && ref >= 1000 && (Number(actor.getFlag(MODULE_ID, "breakthroughs")) || 0) > 0
     && await confirmDialog(t("Domain.Barrierless"), `<p>${t("Domain.BarrierlessPrompt")}</p>`);
+  const selected = [...(canvas?.tokens?.controlled ?? [])].filter((tk) => tk.actor?.uuid === actor.uuid);
+  const active = actor.getActiveTokens?.() ?? [];
+  const origin = selected.length === 1 ? selected[0] : active.length === 1 ? active[0] : null;
   await setKindEffect(actor, "domain", {
     name: item?.name ?? t("Domain.Zone"), img: `${ICONS}/domain.svg`,
     duration: barrierless ? {} : { rounds: 10 * minutes, seconds: 60 * minutes },
     description: `<p>${t(incomplete ? "Domain.IncompleteDescription" : barrierless ? "Domain.BarrierlessDescription" : "Domain.Description")}</p>`,
     flags: { jjk5e: { domainOpen: true, incomplete, barrierless,
-      originTokenUuid: (actorToken(actor)?.document ?? actorToken(actor))?.uuid ?? null } }
+      originTokenUuid: (origin?.document ?? origin)?.uuid ?? null } }
   });
 }
 
@@ -4374,7 +4377,7 @@ async function domainActor(uuid) {
 }
 /** Query context.user is supplied by Foundry; never accept a sender ID from the payload. */
 async function handleDomainAuthority(msg, { user } = {}) {
-  if (!isActiveGM() || !user?.active || !msg?.payload) return false;
+  if (!isActiveGM() || !user?.active || !msg?.payload || !["claim", "finish", "decline", "mode", "close", "lethal", "attack", "weakSpot"].includes(msg.operation)) return false;
   const { operation, payload: data } = msg;
   const actor = await domainActor(data.actorUuid);
   if (!actor) return false;
@@ -4525,7 +4528,7 @@ async function domainOpened(actor, effect = null) {
   const incomplete = !!kind.incomplete, barrierless = !!kind.barrierless;
   const ref = incomplete ? 0 : refinementOf(actor);
   const origin = kind.originTokenUuid ? await fromUuid(kind.originTokenUuid).catch(() => null) : null;
-  const token = origin?.actor?.uuid === actor.uuid ? origin : (kind.originTokenUuid ? null : actorToken(actor));
+  const token = origin?.actor?.uuid === actor.uuid ? origin : (Object.hasOwn(kind, "originTokenUuid") ? null : actorToken(actor));
   const tokenDoc = token?.document ?? token;
   const c = token ? tokenCenter(token) : null;
   const sourceScene = tokenDoc?.parent ?? null;
@@ -7254,6 +7257,8 @@ function clashCandidates(opener) {
   const out = [];
   for (const tk of scene?.tokens ?? []) {
     const a = tk.actor;
+    const level = typeof tk.level === "string" ? tk.level : tk.level?.id;
+    if (state.levelId && level !== state.levelId) continue;
     if (!a || seen.has(a.uuid)) continue;
     seen.add(a.uuid);
     if (!clashBlocker(a, opener)) out.push(a);
@@ -7288,6 +7293,12 @@ async function processClashDecision(operation, actor, data, user) {
   if (!win || win.openingId !== data.openingId) return false;
   const offer = win.offers.find((o) => o.actorUuid === actor.uuid);
   if (!offer) return false;
+  const state = getDomain(opener);
+  const scene = game.scenes.get(state.sceneId);
+  if (!scene || ![...(scene.tokens ?? [])].some((tk) => {
+    const level = typeof tk.level === "string" ? tk.level : tk.level?.id;
+    return tk.actor?.uuid === actor.uuid && (!state.levelId || level === state.levelId);
+  })) return false;
   if (operation === "claim" || operation === "decline") {
     if (offer.status !== "pending" || clashBlocker(actor, opener)) return false;
     const claim = actor.getFlag(MODULE_ID, "domainReactionClaim");
