@@ -29,13 +29,16 @@ function snapshot(actor) {
   const hp = actor.system?.attributes?.hp;
   const effects = [...(actor.effects ?? [])].filter(e => !e.disabled && !e.isSuppressed && e.duration?.expired !== true && (e.duration?.remaining == null || e.duration.remaining > 0));
   const kind = k => effects.filter(e => e.flags?.jjk5e?.kind === k || e.flags?.jjk5e?.[k]);
+  const rct = [...(actor.items??[])].find(i=>/Reverse Cursed Technique \(Healing Pool\)/i.test(i.flags?.jjk5e?.originalName??i.name));
   return {
     hp: Number(hp?.value ?? 0), hpMax: Number(hp?.max ?? 0),
     ce: pool ? api().poolValue(pool) : null, ceMax: pool ? api().poolMax(pool) : null,
     pending: pool ? !!api().cePending?.(pool) : false,
     zone: kind("zone").reduce((n,e) => Math.max(n, Number(e.flags?.jjk5e?.zone) || 1),0),
     burnout: kind("burnout").length > 0,
-    domain: !!actor.getFlag(ID,"domainState"),
+    domain: effects.some(e=>e.flags?.jjk5e?.kind==="domain"||e.flags?.jjk5e?.domainOpen),
+    rctSpent: rct ? Number(rct.system?.uses?.spent)||0 : null,
+    restReview: actor.getFlag(ID,"shortRestExchange")?.state==="review",
     output: Number(actor.getFlag(ID,"reducedOutput")) || 0
   };
 }
@@ -50,7 +53,9 @@ function delta(before, after, threshold = .25) {
   if (after.burnout !== before.burnout) out.push([after.burnout?"burnout":"burnoutEnd",after.burnout?"critical":"info"]);
   if (after.domain !== before.domain) out.push([after.domain?"domain":"domainEnd","energy"]);
   if (after.output !== before.output) out.push(["output","energy"]);
-  // Pending reservations are not failures, and are deliberately not announced.
+  if(Number.isFinite(before.rctSpent)&&Number.isFinite(after.rctSpent)&&after.rctSpent<before.rctSpent)out.push(["rctRecovery","paper"]);
+  if(!before.restReview&&after.restReview)out.push(["restReview","critical"]);
+  // Pending ordinary reservations are not failures, and are deliberately not announced.
   return out;
 }
 function label(key, data) {
@@ -64,6 +69,8 @@ function label(key, data) {
     domain: L("Domain state active","Estado de dominio activo"),
     domainEnd: L("Domain state ended","Estado de dominio finalizado"),
     output: L("Reduced Output","Reduced Output") + ": " + data.output,
+    rctRecovery: L("RCT healing pool recovered","Reserva de curación RCT recuperada"),
+    restReview: L("Hit dice/CE exchange pending verification","Intercambio de dados/CE pendiente de verificación"),
     turn: L("Your combat turn","Turno de combate"),
     modules: L("Inactive dependencies: ","Dependencias inactivas: ") + (data.missing ?? "")
   })[key] ?? key;
