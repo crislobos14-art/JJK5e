@@ -252,8 +252,9 @@ test("Short rest: 1 CE per Hit Die spent, up to half the total level", async () 
 
 test("Technique use is blocked by burnout, Reduced Output max, missing CE and an already open domain", async () => {
   const { env, actor, J } = await setup();
-  const item = { name: "Shrine", actor, flags: { jjk5e: { technique: "Shrine", ceCosts: { a: 9, d: 20 }, domainActivity: "d" } } };
-  const act = (id) => ({ id, item, actor, consumption: { scaling: {} } });
+  const item = { name: "Shrine", actor, flags: { jjk5e: { technique: "Shrine", ceCosts: { a: 9 } } } };
+  const domainItem = { name: "Domain Expansion", actor, flags: { jjk5e: { technique: "Shrine", ceCosts: { d: 20 }, domainActivity: "d" } } };
+  const act = (id) => ({ id, item: id === "d" ? domainItem : item, actor, consumption: { scaling: {} } });
   const use = (a) => env.Hooks.call("dnd5e.preUseActivity", a, { scaling: 0 }, {}, {});
   assert.equal(use(act("a")), true, "9 CE with 20 available");
   await J.setReducedOutput(actor, 3);
@@ -786,7 +787,7 @@ test("Domain audit: closing root releases only its claims and unlinks surviving 
   assert.equal(J.getDomain(root),null);
   assert.equal(b.getFlag("jjk5e","domainReactionClaim"),undefined);
   assert.equal(c.getFlag("jjk5e","domainReactionClaim").id,"new");
-  assert.equal(J.getDomain(b).reactionRootUuid,undefined);
+  assert.equal(J.getDomain(b).reactionRootUuid,null);
 });
 
 test("Domain audit: expired effect on an NPC in an unviewed scene is removed", async () => {
