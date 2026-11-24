@@ -578,3 +578,179 @@ test("Domain reaction decisions for NPCs go only to the active GM", async () => 
   env.game.users.set("gm2", { id: "gm2", isGM: true, active: true });
   assert.deepEqual([...J.deciders(actor)], ["gm"]);
 });
+
+test("Domain authority: only authenticated owners can request an opening-specific mode change", async () => {
+  const { env, actor, J } = await setup();
+  await actor.setFlag("jjk5e", "refinement", 100);
+  await J.domainOpened(actor); await env.settle();
+  const openingId = J.getDomain(actor).openingId;
+  const request = { operation: "mode", payload: { actorUuid: actor.uuid, openingId, mode: "flip", requestedBy: "gm" } };
+  const outsider = { id: "outsider", active: true, isGM: false };
+  const owner = { id: "owner", active: true, isGM: false };
+  actor.testUserPermission = (user, perm) => user.id === owner.id && perm === "OWNER";
+  assert.equal(await J.handleDomainAuthority(request), false);
+  assert.equal(await J.handleDomainAuthority(request, { user: outsider }), false);
+  assert.equal(await J.handleDomainAuthority({ ...request, payload: { ...request.payload, openingId: "stale" } }, { user: owner }), false);
+  assert.equal(await J.handleDomainAuthority(request, { user: owner }), true);
+  assert.equal(J.getDomain(actor).flipped, true);
+  env.game.user.isGM = false;
+  assert.equal(await J.setDomain(actor, { open: false }), false);
+});
+
+test("Domain geometry: different levels cannot receive sure-hit or attack the barrier", async () => {
+  const { env, J } = await setup();
+  const scene = { id: "S", grid: { size: 100, distance: 5 } };
+  env.game.scenes.set(scene.id, scene);
+  const state = { open: true, sceneId: "S", levelId: "L1", x: 0, y: 0, radius: 10 };
+  const token = { parent: scene, level: "L1", x: 150, y: -50, width: 1, height: 1 };
+  assert.equal(J.insideDomain(state, token), true);
+  const boundary = J.barrierAttackGeometry(state, token);
+  assert.equal(boundary.side, "inside");
+  assert.equal(boundary.distance, 0);
+  const outside = J.barrierAttackGeometry(state, { ...token, x: 250 });
+  assert.equal(outside.side, "outside");
+  assert.equal(outside.distance, 5);
+  assert.equal(J.insideDomain(state, { ...token, level: "L2" }), false);
+  assert.equal(J.barrierAttackGeometry(state, { ...token, level: "L2" }), null);
+  assert.equal(J.barrierAttackGeometry({ ...state, noBarrier: true }, token), null);
+});
+
+test("Domain barrier attack: GM resolves AC, damage, measured side, and rejects duplicate request", async () => {
+  const { env, actor, J } = await setup();
+  const seeker = env.addActor({ name: "Attacker", items: [POOL] });
+  const scene = { id: "S", grid: { size: 100, distance: 5 }, tokens: [] };
+  env.game.scenes.set(scene.id, scene);
+  const token = { uuid: "Scene.S.Token.T", actor: seeker, parent: scene, x: 250, y: -50, width: 1, height: 1 };
+  scene.tokens.push(token);
+  await J.setDomain(actor, { open: true, openingId: "A", sceneId: "S", x: 0, y: 0, radius: 10, hp: 100, max: 100, ac: 15 });
+  const payload = { openingId: "A", tokenUuid: token.uuid, bonus: 0, range: 5, formula: "1d8", type: "", requestId: "attack-1" };
+  env.dice.push(20, 4);
+  const hit = await J.attackBarrier(actor, seeker, payload);
+  assert.equal(hit.hit, true);
+  assert.equal(hit.hp, 92);
+  assert.equal(await J.attackBarrier(actor, seeker, payload), false);
+  assert.equal(J.getDomain(actor).hp, 92);
+  assert.equal(await J.attackBarrier(actor, seeker, { ...payload, range: 4, requestId: "too-short" }), false);
+  env.dice.push(1);
+  const miss = await J.attackBarrier(actor, seeker, { ...payload, requestId: "miss" });
+  assert.equal(miss.hit, false);
+  assert.equal(J.getDomain(actor).hp, 92);
+});
+
+test("Domain reaction: pending offer is persistent, owner claim is exclusive, and expired window settles", async () => {
+  const { env, actor: opener, J } = await setup();
+  const other = env.addActor({ name: "Responder", items: [POOL] });
+  await other.createEmbeddedDocuments("Item", [{ name: "Domain Expansion", type: "feat",
+    flags: { jjk5e: { domainActivity: "d" } }, system: { activities: { d: { id: "d" } } } }]);
+  await env.settle();
+  const scene = { id: "S", grid: { size: 100, distance: 5 }, tokens: [{ actor: other }] };
+  env.game.scenes.set(scene.id, scene);
+  await J.setDomain(opener, { open: true, openingId: "root", sceneId: "S", x: 0, y: 0, radius: 10 });
+  await opener.setFlag("jjk5e", "domainReactionWindow", { status: "open", openingId: "root", expires: Date.now() + 60000,
+    offers: [{ actorUuid: other.uuid, status: "pending" }] });
+  const owner = { id: "owner", active: true, isGM: false };
+  const stranger = { id: "stranger", active: true, isGM: false };
+  other.testUserPermission = (user) => user.id === owner.id;
+  const payload = { actorUuid: other.uuid, openerUuid: opener.uuid, openingId: "root" };
+  assert.equal(J.sureHitBlocked(opener), true);
+  assert.equal(await J.handleDomainAuthority({ operation: "claim", payload }, { user: stranger }), false);
+  const claims = await Promise.all([J.handleDomainAuthority({ operation: "claim", payload }, { user: owner }),
+    J.handleDomainAuthority({ operation: "claim", payload }, { user: owner })]);
+  assert.equal(claims.filter((c) => c?.claimId).length, 1);
+  assert.equal(opener.getFlag("jjk5e", "domainReactionWindow").offers[0].status, "claimed");
+  const window = opener.getFlag("jjk5e", "domainReactionWindow");
+  await opener.setFlag("jjk5e", "domainReactionWindow", { ...window, expires: Date.now() - 1 });
+  await J.settleReactionWindow(opener);
+  assert.equal(opener.getFlag("jjk5e", "domainReactionWindow").status, "resolved");
+  assert.equal(opener.getFlag("jjk5e", "domainReactionWindow").offers[0].status, "expired");
+  assert.equal(other.getFlag("jjk5e", "domainReactionClaim"), undefined);
+  assert.equal(J.sureHitBlocked(opener), false);
+});
+
+test("Domain simultaneous responses: no clash resolution while another response is pending", async () => {
+  const { env, actor: opener, J } = await setup();
+  const b = env.addActor({ name: "B", items: [POOL] });
+  const c = env.addActor({ name: "C", items: [POOL] });
+  env.game.scenes.set("S", { id: "S", grid: { size: 100, distance: 5 }, tokens: [] });
+  for (const [actor, ref] of [[opener, 300], [b, 280], [c, 280]]) {
+    await J.setDomain(actor, { open: true, openingId: actor.uuid, sceneId: "S", x: 0, y: 0, radius: 175, refinement: ref });
+  }
+  const win = { status: "open", openingId: opener.uuid, expires: Date.now() + 60000,
+    offers: [{ actorUuid: b.uuid, status: "used" }, { actorUuid: c.uuid, status: "pending" }] };
+  await opener.setFlag("jjk5e", "domainReactionWindow", win);
+  assert.equal(await J.settleReactionWindow(opener), false);
+  assert.equal(J.getDomain(opener).clash, undefined);
+  win.offers[1].status = "used";
+  await opener.setFlag("jjk5e", "domainReactionWindow", win);
+  assert.equal(await J.settleReactionWindow(opener), true);
+  assert.equal(J.getDomain(opener).clash.role, "winner");
+  assert.equal(J.getDomain(b).clash.role, "loser");
+  assert.equal(J.getDomain(c).clash.role, "loser");
+  assert.equal(J.getDomain(b).clash.id, J.getDomain(c).clash.id);
+});
+
+test("Domain wards: Fallen Blossom and selective Hollow Wicker protection only negate guaranteed hits", async () => {
+  const { env, actor: caster, J } = await setup();
+  const warden = env.addActor({name:"Warden",items:[POOL]});
+  const protectedActor = env.addActor({name:"Protected",items:[POOL]});
+  const outsider = env.addActor({name:"Outside",items:[POOL]});
+  const scene = {id:"S",grid:{size:100,distance:5},tokens:[]};
+  env.game.scenes.set("S",scene);
+  const mk = (id,actor,x,level="L1") => ({uuid:"Scene.S.Token."+id,parent:scene,actor,x,y:-50,width:1,height:1,level});
+  const w = mk("W",warden,-50), p = mk("P",protectedActor,150), u = mk("U",outsider,250);
+  scene.tokens.push(w,p,u);
+  await J.setKindEffect(warden,"hollowWickerProtection",{name:"Hollow Wicker Basket",duration:{rounds:10},
+    flags:{jjk5e:{originTokenUuid:w.uuid,chosenTokens:[w.uuid,p.uuid]}}});
+  assert.equal(J.domainWard(p),"Hollow Wicker Basket");
+  assert.equal(J.domainWard(u),null,"an unselected creature is not protected");
+  p.x=350; assert.equal(J.domainWard(p),null,"out of 15 ft"); p.x=150;
+  p.level="L2"; assert.equal(J.domainWard(p),null,"different level"); p.level="L1";
+  await J.setKindEffect(outsider,"fallingBlossomDefense",{name:"Falling Blossom Emotion",duration:{rounds:10}});
+  assert.equal(J.domainWard(u),"Falling Blossom Emotion");
+  await J.setKindEffect(caster,"domain",{name:"Domain",flags:{jjk5e:{domainOpen:true}}});
+  await env.settle();
+  await J.setDomain(caster,{open:true,openingId:"test",sceneId:"S",x:0,y:0,radius:175,levelId:"L1",lethal:true});
+  const workflow={actor:caster,item:{flags:{jjk5e:{technique:"Test"}}},targets:new Set([w,p,u]),hitTargets:new Set([w,p,u])};
+  assert.equal(J.excludeDomainWardedTargets(workflow).length,3);
+  assert.equal(workflow.targets.size,0);
+  const ordinary={actor:caster,item:{flags:{}},targets:new Set([p,u])};
+  assert.equal(J.excludeDomainWardedTargets(ordinary).length,0);
+  assert.equal(ordinary.targets.size,2);
+});
+
+test("Domain profile: validates bounded declarative data without accepting executable formulas", async () => {
+  const { J } = await setup();
+  const good={name:"Homebrew",damage:"6d10",damageType:"necrotic",save:"con",dc:15,onSave:"half",condition:"restrained",rounds:1};
+  assert.equal(J.validateDomainProfile(good).version,1);
+  for (const change of [{damage:"1d6 + @abilities.con.mod"},{damage:"99d6; alert(1)"},{save:"bad"},{rounds:0},{dc:50},{condition:"arbitrary"}]) {
+    assert.equal(J.validateDomainProfile({...good,...change}),null);
+  }
+  assert.equal(J.validateDomainProfile(null),null);
+});
+test("Domain HUD: exposes only the current expansion item's non-opening activities", async () => {
+  const { actor,J }=await setup();
+  const [item]=await actor.createEmbeddedDocuments("Item",[{name:"Domain",type:"feat",flags:{jjk5e:{domainActivity:"open"}},system:{activities:{open:{id:"open",name:"Expand"},pulse:{id:"pulse",name:"Initiative 20: pulse"}}}}]);
+  await J.setDomain(actor,{open:true,openingId:"test",domainItemUuid:item.uuid});
+  assert.deepEqual([...J.domainActivities(actor)].map(a=>a.id),["pulse"]);
+});
+test("Domain custom effect: resolves selected targets with damage on a successful save, rejects duplicate operation", async () => {
+  const { env, actor: caster,J }=await setup();
+  const target=env.addActor({name:"Target",items:[POOL]});
+  const outside=env.addActor({name:"Outside",items:[POOL]});
+  const scene={id:"S",grid:{size:100,distance:5},tokens:[]};
+  env.game.scenes.set("S",scene);
+  const mk=(id,actor,x)=>({uuid:"Scene.S.Token."+id,parent:scene,actor,x,y:-50,width:1,height:1});
+  const a=mk("A",target,50),b=mk("B",outside,500);
+  scene.tokens.push(a,b);
+  const values=[];
+  target.applyDamage=async (d)=>values.push(d[0].value);
+  target.rollSavingThrow=async ()=>({total:18});
+  outside.applyDamage=async ()=>{throw Error("out of domain");};
+  await J.setDomain(caster,{open:true,openingId:"test",sceneId:"S",x:0,y:0,radius:10,lethal:true,
+    customProfile:{name:"Homebrew",damage:"1d8",damageType:"necrotic",save:"con",dc:15,onSave:"half",condition:"restrained",rounds:1}});
+  env.dice.push(6);
+  assert.equal(await J.executeDomainProfile(caster,[a,b],"req1"),true);
+  assert.deepEqual(values,[3]);
+  assert.equal(await J.executeDomainProfile(caster,[a,b],"req1"),false);
+  assert.deepEqual(values,[3]);
+});

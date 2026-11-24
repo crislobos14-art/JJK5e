@@ -270,6 +270,7 @@ export function createEnv({ settings: overrides = {} } = {}) {
       if (a.uuid === u) return a;
       for (const i of a.items) if (i.uuid === u) return i;
     }
+    for (const scene of game.scenes) for (const token of scene.tokens ?? []) if (token.uuid === u) return token;
     return null;
   }
 

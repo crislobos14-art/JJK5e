@@ -40,7 +40,7 @@ function getCompendiumClass() {
 /** Only one GM runs automated world updates (several GMs can be logged in). */
 function isActiveGM() {
   const gm = game.users?.activeGM;
-  return gm ? (gm.isSelf ?? gm.id === game.user?.id) : !!game.user?.isGM;
+  return !!game.user?.isGM && (gm ? (gm.isSelf ?? gm.id === game.user?.id) : true);
 }
 
 /** Delete a document that another client or module may already be deleting (no error popups). */
@@ -618,6 +618,10 @@ function registerActivityHooks() {
       ui.notifications.warn(t("Notify.NoInspiration", { name: actor.name }));
       return false;
     }
+    if (activity.item?.flags?.jjk5e?.technique && hasKind(actor, "domainAmplification")) {
+      ui.notifications.warn(t("Domain.AmplificationBlocks"));
+      return false;
+    }
     if (activity.item?.flags?.jjk5e?.technique && inBurnout(actor)) {
       ui.notifications.warn(t("Notify.Burnout"));
       return false;
@@ -628,6 +632,10 @@ function registerActivityHooks() {
       return false;
     }
     // Only the activity that expands the domain is blocked; the domain's own in-domain activities stay usable.
+    if (activity.item?.flags?.jjk5e?.domainActivity === activity.id && !game.user.isGM && !game.users.activeGM) {
+      ui.notifications.warn(t("Notify.NoGM"));
+      return false;
+    }
     if (activity.item?.flags?.jjk5e?.domainActivity === activity.id && domainOpen(actor)) {
       ui.notifications.warn(t("Notify.DomainActive"));
       return false;
@@ -697,6 +705,7 @@ function registerActivityHooks() {
     if (item?.flags?.jjk5e?.reload?.[activity.id] && Number(item.system?.uses?.spent) > 0) {
       await item.update({ "system.uses.spent": 0 });
     }
+    await activateDomainProtection(actor, item, activity);
     await remindModifiers(actor, item);
     if (item?.flags?.jjk5e?.openTechnique) await chooseTechnique(actor);
     const grp = item?.flags?.jjk5e?.activatesGroup?.[activity.id];
@@ -1475,7 +1484,7 @@ function onPreRollDamage(config) {
 /* -------------------------------------------- */
 
 async function openDomain(actor, item) {
-  if (!actor?.isOwner || !setting("domainTracking")) return;
+  if (!actor?.isOwner || !setting("domainTracking") || (!game.user.isGM && !game.users.activeGM)) return;
   // Incomplete Domain (feat): 1 minute, refinement 0, no barrier, no sure hit; burnout 5 rounds.
   const incomplete = !!item?.flags?.jjk5e?.incompleteDomain;
   // V.6 Domain Refinement: Lasting Domain (500) 2 minutes, Total Mastery (1000) 3 minutes.
@@ -1484,11 +1493,15 @@ async function openDomain(actor, item) {
   // Barrierless Domain (1000 refinement + breakthrough): no barrier and no time limit.
   const barrierless = !incomplete && ref >= 1000 && (Number(actor.getFlag(MODULE_ID, "breakthroughs")) || 0) > 0
     && await confirmDialog(t("Domain.Barrierless"), `<p>${t("Domain.BarrierlessPrompt")}</p>`);
+  const selected = [...(canvas?.tokens?.controlled ?? [])].filter((tk) => tk.actor?.uuid === actor.uuid);
+  const active = actor.getActiveTokens?.() ?? [];
+  const origin = selected.length === 1 ? selected[0] : active.length === 1 ? active[0] : null;
   await setKindEffect(actor, "domain", {
     name: item?.name ?? t("Domain.Zone"), img: `${ICONS}/domain.svg`,
     duration: barrierless ? {} : { rounds: 10 * minutes, seconds: 60 * minutes },
     description: `<p>${t(incomplete ? "Domain.IncompleteDescription" : barrierless ? "Domain.BarrierlessDescription" : "Domain.Description")}</p>`,
-    flags: { jjk5e: { domainOpen: true, incomplete, barrierless } }
+    flags: { jjk5e: { domainOpen: true, incomplete, barrierless,
+      domainItemUuid: item?.uuid ?? null, originTokenUuid: (origin?.document ?? origin)?.uuid ?? null } }
   });
 }
 
@@ -1513,12 +1526,17 @@ async function burnoutExhaustion(actor, delta) {
   }
 }
 
-async function onDeleteEffect(effect, options, userId) {
-  if (userId !== game.user.id) return;
-  if (!(effect.flags?.jjk5e?.domainOpen || effect.flags?.jjk5e?.kind === "domain")) return;
+async function onDeleteEffect(effect) {
+  if (!isActiveGM() || !(effect.flags?.jjk5e?.domainOpen || effect.flags?.jjk5e?.kind === "domain")) return;
   if (!setting("domainTracking")) return;
   const actor = effect.parent;
   if (actor?.documentName !== "Actor") return;
+  return queueDomainWork(async () => {
+  const state = getDomain(actor);
+  if (state?.openingId && state.openingId !== effect.uuid) return;
+  if (actor.getFlag(MODULE_ID, "lastDomainBurnout") === effect.uuid) return;
+  await domainClosed(actor);
+  await actor.setFlag(MODULE_ID, "lastDomainBurnout", effect.uuid);
   const short = !!effect.flags?.jjk5e?.incomplete; // Incomplete Domain: 5 rounds of burnout
   await setKindEffect(actor, "burnout", {
     name: t("Burnout.Name"), img: `${ICONS}/burnout.svg`, duration: short ? { rounds: 5, seconds: 30 } : { rounds: 10, seconds: 60 },
@@ -1528,6 +1546,7 @@ async function onDeleteEffect(effect, options, userId) {
   // V.6 Efficient Expansions (refinement 700+): only 1 level of exhaustion after the domain.
   await burnoutExhaustion(actor, refinementOf(actor) >= 700 ? 1 : 2);
   ui.notifications.info(t("Notify.Burnt", { name: actor.name }));
+  });
 }
 
 /* -------------------------------------------- */
@@ -1735,8 +1754,7 @@ async function handleGMRequest(msg) {
   if (!game.user.isGM || !setting("playerGMRequests") || !msg?.requestedBy) return false;
   const requester = game.users.get(msg.requestedBy);
   const action = String(msg.action ?? "");
-  const allowed = new Set(["summon", "dismiss", "tokenSwap", "domainZone", "domainZoneResize", "domainZoneDelete",
-    "domainUpdate", "customizeShikigami"]);
+  const allowed = new Set(["summon", "dismiss", "tokenSwap", "customizeShikigami"]);
   if (!requester?.active || requester.isGM || !allowed.has(action)) return false;
   const actor = msg.payload?.actorUuid ? await fromUuid(msg.payload.actorUuid).catch(() => null) : null;
   // GM approval is explicit: client-provided user IDs are NOT a trusted identity.
@@ -1800,7 +1818,7 @@ async function expireEffects() {
   for (const actor of actors) {
     const ids = actor.effects.filter((e) => {
       const kind = e.flags?.jjk5e?.kind;
-      if (!["zone", "burnout", "domain"].includes(kind)) return false;
+      if (!["zone", "burnout", "domain", "domainProfileCondition"].includes(kind) && !DOMAIN_WARD_KINDS.has(kind)) return false;
       if (e.disabled || e.duration?.expired === true) return true;
       const rem = e.duration?.remaining;
       return rem !== null && rem !== undefined && rem <= 0;
@@ -2560,7 +2578,10 @@ Hooks.once("init", () => {
     name: "JJK5E.Settings.updateMenu.Name", label: "JJK5E.Settings.updateMenu.Label",
     hint: "JJK5E.Settings.updateMenu.Hint", icon: "fas fa-arrows-rotate", type: JJKUpdateMenu, restricted: true
   });
-  if (CONFIG.queries) CONFIG.queries[GM_QUERY] = (msg) => handleGMRequest(msg);
+  if (CONFIG.queries) {
+    CONFIG.queries[GM_QUERY] = (msg) => handleGMRequest(msg);
+    CONFIG.queries[DOMAIN_QUERY] = (msg, context) => handleDomainAuthority(msg, context);
+  }
   game.settings.register(MODULE_ID, "privateCE", {
     name: "JJK5E.Settings.privateCE.Name", hint: "JJK5E.Settings.privateCE.Hint",
     scope: "world", config: true, type: Boolean, default: true
@@ -2945,7 +2966,7 @@ function applySureHit(actor, config) {
   // Vanilla attack-roll hooks are not target-specific. Do not grant an unconditional
   // sure hit when the targeted set contains mixed or unknown locations.
   if (!state || targets.length !== 1 || !insideDomain(state, targets[0])) return;
-  if (targets[0]?.actor?.flags?.jjk5e?.sureHitImmune) return;
+  if (domainWard(targets[0])) return;
   const roll = config?.rolls?.[0];
   if (!roll) return;
   roll.options ??= {};
@@ -3248,8 +3269,7 @@ function registerMidiHooks() {
     if (!(workflow && setting("domainSureHit") && domainOpen(workflow.actor)
       && workflow.item?.flags?.jjk5e?.technique && !sureHitBlocked(workflow.actor))) return false;
     const state = getDomain(workflow.actor);
-    // Celestial Body (Heavenly Restriction): sure-hit effects cannot target this creature.
-    if ((target?.actor ?? target)?.flags?.jjk5e?.sureHitImmune) return false;
+    if (domainWard(target)) return false;
     return !!state && !!target && insideDomain(state, target);
   };
   // Midi decides each target's hit here (after cover, AC bonuses and reactions).
@@ -3264,6 +3284,7 @@ function registerMidiHooks() {
   Hooks.on("midi-qol.hitsChecked", (workflow) => {
     try {
       if (!workflow) return;
+      excludeDomainWardedTargets(workflow);
       const eligible = [...(workflow.targets ?? [])].filter((t) => sureHit(workflow, t));
       if (eligible.length) workflow.hitTargets = new Set([...(workflow.hitTargets ?? []), ...eligible]);
     }
@@ -3274,6 +3295,7 @@ function registerMidiHooks() {
     try {
       const item = workflow?.item;
       if (!setting("domainSureHit") || !domainOpen(workflow?.actor) || !item?.flags?.jjk5e?.technique || sureHitBlocked(workflow?.actor)) return;
+      excludeDomainWardedTargets(workflow);
       const all = new Set([...(workflow.saves ?? []), ...(workflow.failedSaves ?? [])]);
       const forced = [...all].filter((token) => sureHit(workflow, token));
       workflow.failedSaves = new Set([...(workflow.failedSaves ?? []), ...forced]);
@@ -4337,6 +4359,64 @@ MENU_ACTIONS.splice(MENU_ACTIONS.length - 1, 0,
 /* ============================================================================================ */
 
 const DOMAIN_RADIUS = 175;
+const DOMAIN_QUERY = `${MODULE_ID}.domainAuthority`;
+let DOMAIN_AUTH_QUEUE = Promise.resolve();
+function queueDomainWork(fn) {
+  const next = DOMAIN_AUTH_QUEUE.catch(() => {}).then(() => isActiveGM() ? fn() : false);
+  DOMAIN_AUTH_QUEUE = next;
+  return next;
+}
+function canDirectDomain(user, actor) {
+  return !!user?.active && !!actor && (user.isGM || actor.testUserPermission?.(user, "OWNER") === true);
+}
+async function requestDomainAuthority(operation, payload) {
+  if (isActiveGM()) return handleDomainAuthority({ operation, payload }, { user: game.user });
+  const gm = game.users.activeGM;
+  if (!gm?.query) { ui.notifications.warn(t("Notify.NoGM")); return false; }
+  try { return await gm.query(DOMAIN_QUERY, { operation, payload }, { timeout: 120000 }); }
+  catch (err) { reportError("domain authority", err); return false; }
+}
+async function domainActor(uuid) {
+  if (typeof uuid !== "string" || uuid.length > 256) return null;
+  const doc = await fromUuid(uuid).catch(() => null);
+  return doc?.documentName === "Actor" ? doc : null;
+}
+/** Query context.user is supplied by Foundry; never accept a sender ID from the payload. */
+async function handleDomainAuthority(msg, { user } = {}) {
+  if (!isActiveGM() || !user?.active || !msg?.payload || !["claim", "finish", "decline", "mode", "close", "lethal", "attack", "weakSpot", "amplification"].includes(msg.operation)) return false;
+  const { operation, payload: data } = msg;
+  const actor = await domainActor(data.actorUuid);
+  if (!actor) return false;
+  const cross = ["attack", "weakSpot"].includes(operation);
+  const source = cross ? await domainActor(data.seekerUuid) : actor;
+  if (!canDirectDomain(user, source)) return false;
+  if (cross && !user.isGM) {
+    if (!setting("playerGMRequests")) return false;
+    const detail = operation === "attack" ? `+ ${esc(String(data.bonus))} / ${esc(String(data.formula))} / ${esc(String(data.range))} ft` : esc(String(data.total));
+    if (!(await confirmDialog(t("GMRequest.Title"), `<p>${esc(user.name)}: ${esc(source.name)} → ${esc(actor.name)} (${esc(operation)})</p><p>${detail}</p>`))) return false;
+  }
+  return queueDomainWork(async () => {
+    if (!canDirectDomain(user, source)) return false;
+    if (["claim", "finish", "decline"].includes(operation)) return processClashDecision(operation, actor, data, user);
+    if (operation === "amplification") return toggleDomainAmplification(actor);
+    const state = getDomain(actor);
+    if (!state?.open || !data.openingId || state.openingId !== data.openingId) return false;
+    if (operation === "mode") return setBarrierMode(actor, data.mode);
+    if (operation === "close") { await closeDomainOf(actor); return true; }
+    if (operation === "lethal" && typeof data.lethal === "boolean") {
+      await actor.setFlag(MODULE_ID, "domainLethal", data.lethal);
+      return setDomain(actor, { ...state, lethal: data.lethal });
+    }
+    if (operation === "attack") return attackBarrier(actor, source, data);
+    if (operation === "weakSpot" && Number.isFinite(data.total) && data.total >= 30) {
+      const scene = game.scenes.get(state.sceneId);
+      if (!scene || ![...(scene.tokens ?? [])].some((tk) => tk.actor?.uuid === source.uuid)) return false;
+      state.weakSpot = [...new Set([...(state.weakSpot ?? []), source.uuid])];
+      return setDomain(actor, state);
+    }
+    return false;
+  });
+}
 const getDomain = (actor) => foundry.utils.deepClone(actor?.getFlag?.(MODULE_ID, "domainState") ?? null);
 const refinementOf = (actor) => clamp(Number(actor?.getFlag?.(MODULE_ID, "refinement")) || 1, 1, 1000);
 const actorToken = (actor) => actor?.getActiveTokens?.()?.[0] ?? null;
@@ -4355,6 +4435,8 @@ function insideDomain(state, token) {
   const doc = token?.document ?? token;
   const sceneId = doc?.parent?.id ?? token?.scene?.id;
   if (sceneId !== state.sceneId) return false;
+  const tokenLevel = typeof doc?.level === "string" ? doc.level : doc?.level?.id;
+  if (state.levelId && tokenLevel !== state.levelId) return false;
   const scene = game.scenes?.get?.(state.sceneId);
   if (!scene) return false;
   if (![token?.center?.x, token?.center?.y].every(Number.isFinite)
@@ -4364,11 +4446,84 @@ function insideDomain(state, token) {
     && Math.hypot(c.x - state.x, c.y - state.y) <= ftToPx(scene, state.radius) + 1;
 }
 
+/* V6: Falling Blossom negates guaranteed effects on its wearer; Hollow Wicker Basket
+ * protects only selected creatures within 15 ft. Simple Domain redirects damage into
+ * a finite barrier, so it must not be treated as unconditional immunity. */
+const DOMAIN_WARD_KINDS = new Set(["fallingBlossomDefense", "hollowWickerProtection", "domainAmplification"]);
+function liveWard(effect) {
+  return !!effect && !effect.disabled && effect.duration?.expired !== true &&
+    (effect.duration?.remaining == null || effect.duration.remaining > 0);
+}
+function tokenLevelId(token) {
+  const doc = token?.document ?? token;
+  return typeof doc?.level === "string" ? doc.level : doc?.level?.id ?? null;
+}
+function domainWard(target) {
+  const doc = target?.document ?? target;
+  const actor = target?.actor ?? doc?.actor;
+  if (!actor) return null;
+  if (actor.flags?.jjk5e?.sureHitImmune) return "Celestial Body";
+  if (actor.effects?.some((e) => liveWard(e) && e.flags?.jjk5e?.kind === "fallingBlossomDefense")) return "Falling Blossom Emotion";
+  if (actor.effects?.some((e) => liveWard(e) && e.flags?.jjk5e?.kind === "domainAmplification")) return "Domain Amplification";
+  const scene = doc?.parent;
+  if (!scene?.id || !doc?.uuid) return null;
+  for (const source of scene.tokens ?? []) {
+    const ward = source.actor?.effects?.find((e) => liveWard(e) && e.flags?.jjk5e?.kind === "hollowWickerProtection");
+    const meta = ward?.flags?.jjk5e;
+    if (!meta || meta.originTokenUuid !== source.uuid || !meta.chosenTokens?.includes(doc.uuid)) continue;
+    if (tokenLevelId(source) !== tokenLevelId(doc)) continue;
+    const center = tokenCenter(source), point = tokenCenter(doc);
+    if (Math.hypot(center.x - point.x, center.y - point.y) <= ftToPx(scene, 15) + 1) return "Hollow Wicker Basket";
+  }
+  return null;
+}
+async function activateDomainProtection(actor, item, activity) {
+  if (!actor?.isOwner || !item || !activity) return;
+  const name = baseName(item);
+  const cost = Number(item.flags?.jjk5e?.ceCosts?.[activity.id]);
+  if (name === "Falling Blossom Emotion" && cost === 5) {
+    return setKindEffect(actor, "fallingBlossomDefense", { name, img: `${ICONS}/domain.svg`, duration: { rounds: 10, seconds: 60 },
+      description: "<p>V6: negates guaranteed-hit attacks and effects only.</p>" });
+  }
+  if (name !== "Hollow Wicker Basket" || cost !== 4) return;
+  const selected = [...(canvas?.tokens?.controlled ?? [])].filter((tk) => tk.actor?.uuid === actor.uuid);
+  const tokens = actor.getActiveTokens?.() ?? [];
+  const source = selected.length === 1 ? selected[0] : tokens.length === 1 ? tokens[0] : null;
+  const origin = source?.document ?? source;
+  const scene = origin?.parent;
+  if (!origin?.uuid || !scene?.id) return;
+  const chosen = [origin, ...[...(game.user?.targets ?? [])].map((tk) => tk.document ?? tk)]
+    .filter((tk) => tk?.parent?.id === scene.id && tokenLevelId(tk) === tokenLevelId(origin))
+    .filter((tk) => { const a = tokenCenter(origin), b = tokenCenter(tk); return Math.hypot(a.x-b.x,a.y-b.y) <= ftToPx(scene,15)+1; })
+    .map((tk) => tk.uuid).filter(Boolean);
+  return setKindEffect(actor, "hollowWickerProtection", { name, img: `${ICONS}/domain.svg`, duration: { rounds: 10, seconds: 60 },
+    description: "<p>V6: selected creatures within 15 ft are protected from guaranteed hits.</p>",
+    flags: { jjk5e: { originTokenUuid: origin.uuid, chosenTokens: [...new Set(chosen)] } } });
+}
+function domainGuaranteedTarget(workflow, target) {
+  return !!workflow?.actor && setting("domainSureHit") && domainOpen(workflow.actor)
+    && !!workflow.item?.flags?.jjk5e?.technique && !sureHitBlocked(workflow.actor)
+    && insideDomain(getDomain(workflow.actor), target);
+}
+function excludeDomainWardedTargets(workflow) {
+  if (!workflow?.targets) return [];
+  const protectedTargets = [...workflow.targets].filter((tk) => domainGuaranteedTarget(workflow, tk) && domainWard(tk));
+  if (!protectedTargets.length) return [];
+  const ids = new Set(protectedTargets.map((tk) => (tk?.document ?? tk)?.uuid).filter(Boolean));
+  const exclude = (tk) => protectedTargets.includes(tk) || ids.has((tk?.document ?? tk)?.uuid);
+  for (const key of ["targets", "hitTargets", "hitTargetsEC", "saves", "failedSaves", "applicationTargets"]) {
+    if (typeof workflow[key]?.has === "function") workflow[key] = new Set([...workflow[key]].filter((tk) => !exclude(tk)));
+  }
+  return protectedTargets;
+}
 /** No sure hit during an unresolved clash, or against targets outside the domain. */
 function sureHitBlocked(actor) {
   const state = getDomain(actor);
   if (!state) return false;
   if (state.clash && !state.clash.resolved) return true;
+  const root = state.reactionRootUuid ? fromUuidSync(state.reactionRootUuid) : actor;
+  const window = root?.getFlag?.(MODULE_ID, "domainReactionWindow");
+  if (window?.status === "open" && (state.reactionRootUuid ? window.openingId === state.reactionRootOpening : window.openingId === state.openingId)) return true;
   return state.lethal === false || !!state.noSureHit;
 }
 
@@ -4377,9 +4532,14 @@ function sureHitBlocked(actor) {
 const regionShape = (type, x, y, r) => (type === "circle" ? { type, x, y, radius: r, rotation: 0, hole: false }
   : { type: "ellipse", x, y, radiusX: r, radiusY: r, rotation: 0, hole: false });
 
-GM_EXTRA.domainZone = async ({ sceneId, x, y, radius, name, color, actorUuid }) => {
+GM_EXTRA.domainZone = async ({ sceneId, x, y, radius, name, color, actorUuid, openingId }) => {
+  if (!isActiveGM()) return;
+  const actor = await domainActor(actorUuid);
+  const state = getDomain(actor);
   const scene = game.scenes?.get?.(sceneId);
-  if (!scene) return;
+  if (!scene || !state?.open || state.openingId !== openingId || state.sceneId !== sceneId) return;
+  if (state.zone && scene.getEmbeddedDocument?.(state.zone.kind, state.zone.id)) return;
+  ({ x, y, radius } = state);
   const r = ftToPx(scene, radius);
   let zone = null;
   const v14 = (Number(game.release?.generation) || 0) >= 14;
@@ -4387,8 +4547,8 @@ GM_EXTRA.domainZone = async ({ sceneId, x, y, radius, name, color, actorUuid }) 
     if (zone) break;
     try {
       const data = { name, color, shapes: [regionShape(shape, x, y, r)],
-        visibility: globalThis.CONST?.REGION_VISIBILITY?.ALWAYS ?? 2, flags: { jjk5e: { domain: actorUuid } } };
-      if (v14 && canvas?.level?.id) data.levels = [canvas.level.id];
+        visibility: globalThis.CONST?.REGION_VISIBILITY?.ALWAYS ?? 2, flags: { jjk5e: { domain: actorUuid, openingId } } };
+      if (v14 && state.levelId) data.levels = [state.levelId];
       const [region] = await scene.createEmbeddedDocuments("Region", [data]);
       if (region) zone = { kind: "Region", id: region.id, shape };
     } catch (err) { log(`region (${shape}) failed`, err); }
@@ -4396,51 +4556,60 @@ GM_EXTRA.domainZone = async ({ sceneId, x, y, radius, name, color, actorUuid }) 
   if (!zone) {
     try {
       const [tpl] = await scene.createEmbeddedDocuments("MeasuredTemplate", [{ t: "circle", x, y, distance: radius,
-        fillColor: color, borderColor: color, flags: { jjk5e: { domain: actorUuid } } }]);
+        fillColor: color, borderColor: color, flags: { jjk5e: { domain: actorUuid, openingId } } }]);
       if (tpl) zone = { kind: "MeasuredTemplate", id: tpl.id };
     } catch (err) { log("template failed", err); }
   }
-  const actor = await fromUuid(actorUuid);
-  if (zone && actor) await actor.setFlag(MODULE_ID, "domainState", { ...(getDomain(actor) ?? {}), zone });
-  if (zone) await domainSceneFX(scene, zone.id, true);
+  const latest = getDomain(actor);
+  if (zone && latest?.open && latest.openingId === openingId) {
+    await setDomain(actor, { ...latest, zone });
+    await domainSceneFX(scene, zone.id, true);
+  } else if (zone) await safeDelete(scene.getEmbeddedDocument?.(zone.kind, zone.id));
 };
 
-GM_EXTRA.domainZoneResize = async ({ sceneId, zone, x, y, radius }) => {
+GM_EXTRA.domainZoneResize = async ({ sceneId, zone, x, y, radius, actorUuid, openingId }) => {
+  if (!isActiveGM()) return;
   const scene = game.scenes?.get?.(sceneId);
   const doc = zone && scene?.getEmbeddedDocument?.(zone.kind, zone.id);
-  if (!doc) return;
+  if (!doc || doc.flags?.jjk5e?.domain !== actorUuid ||
+      (doc.flags?.jjk5e?.openingId && doc.flags.jjk5e.openingId !== openingId)) return;
   if (zone.kind === "Region") await doc.update({ shapes: [regionShape(zone.shape ?? "ellipse", x, y, ftToPx(scene, radius))] });
   else await doc.update({ distance: radius });
 };
 
-GM_EXTRA.domainZoneDelete = async ({ sceneId, zone }) => {
+GM_EXTRA.domainZoneDelete = async ({ sceneId, zone, actorUuid, openingId }) => {
+  if (!isActiveGM()) return;
   const scene = game.scenes?.get?.(sceneId);
   const doc = zone && scene?.getEmbeddedDocument?.(zone.kind, zone.id);
-  if (doc) await doc.delete();
+  if (doc && (doc.flags?.jjk5e?.domain !== actorUuid ||
+      (doc.flags?.jjk5e?.openingId && doc.flags.jjk5e.openingId !== openingId))) return;
+  if (doc) await safeDelete(doc);
   if (zone && scene) await domainSceneFX(scene, zone.id, false);
 };
 
-GM_EXTRA.domainUpdate = async ({ actorUuid, state }) => {
-  const actor = await fromUuid(actorUuid);
-  if (actor) await actor.setFlag(MODULE_ID, "domainState", state);
-};
-
 async function setDomain(actor, state) {
-  if (actor.isOwner) await actor.setFlag(MODULE_ID, "domainState", state);
-  else await viaGM("domainUpdate", { actorUuid: actor.uuid, state });
+  if (!isActiveGM() || !actor) return false;
+  if (state === null) await actor.unsetFlag(MODULE_ID, "domainState");
+  else await actor.setFlag(MODULE_ID, "domainState", state);
   refreshDomainApps(actor);
+  return true;
 }
 
 /* ---- Opening / closing ---- */
 
 async function domainOpened(actor, effect = null) {
+  if (!isActiveGM() || !actor) return;
+  if (effect?.uuid && getDomain(actor)?.openingId === effect.uuid) return;
   const mod = ceMod(actor);
   const kind = effect?.flags?.jjk5e ?? actor.effects.find((e) => e.flags?.jjk5e?.domainOpen)?.flags?.jjk5e ?? {};
   const incomplete = !!kind.incomplete, barrierless = !!kind.barrierless;
   const ref = incomplete ? 0 : refinementOf(actor);
-  const token = actorToken(actor);
+  const origin = kind.originTokenUuid ? await fromUuid(kind.originTokenUuid).catch(() => null) : null;
+  const token = origin?.actor?.uuid === actor.uuid ? origin : (Object.hasOwn(kind, "originTokenUuid") ? null : actorToken(actor));
+  const tokenDoc = token?.document ?? token;
   const c = token ? tokenCenter(token) : null;
-  const sourceScene = token?.document?.parent ?? token?.parent ?? null;
+  const sourceScene = tokenDoc?.parent ?? null;
+  const levelId = typeof tokenDoc?.level === "string" ? tokenDoc.level : tokenDoc?.level?.id ?? null;
   // Domain Durability: +1 HP per refinement point; Durable Barrier (800+) doubles it.
   const max = Math.max(1, 10 * mod + (ref >= 800 ? 2 * ref : ref));
   const radius = incomplete ? 100 : barrierless ? 655 : DOMAIN_RADIUS;
@@ -4448,22 +4617,49 @@ async function domainOpened(actor, effect = null) {
     hp: max, max, ac: 10 + mod + Math.floor(ref / 100), refinement: ref,
     radius, lethal: actor.getFlag(MODULE_ID, "domainLethal") !== false,
     noBarrier: incomplete || barrierless, noSureHit: incomplete, incomplete, barrierless,
-    sceneId: sourceScene?.id ?? null, x: c?.x ?? null, y: c?.y ?? null,
+    sceneId: sourceScene?.id ?? null, tokenUuid: tokenDoc?.uuid ?? null, levelId,
+    domainItemUuid: kind.domainItemUuid ?? null,
+    customProfile: validateDomainProfile(actor.getFlag(MODULE_ID, "customDomainProfile")),
+    x: c?.x ?? null, y: c?.y ?? null,
     damageTaken: 0, zone: null, clash: null, name: actor.name };
   await setDomain(actor, state);
-  if (c && state.sceneId) await viaGM("domainZone", { sceneId: state.sceneId, x: c.x, y: c.y, radius,
-    name: `${t("Domain.Zone")}: ${actor.name}`, color: "#4b1d6e", actorUuid: actor.uuid });
+  if (c && state.sceneId && setting("domainZones")) await GM_EXTRA.domainZone({ sceneId: state.sceneId,
+    name: `${t("Domain.Zone")}: ${actor.name}`, color: "#4b1d6e", actorUuid: actor.uuid, openingId: state.openingId });
   await chat(actor, `<div class="jjk5e-card"><h3><i class="fas fa-circle-half-stroke"></i> ${t("Domain.Opened", { name: esc(actor.name) })}</h3>`
     + `<p>${state.noBarrier ? t(incomplete ? "Domain.IncompleteStats" : "Domain.BarrierlessStats", { radius }) : t("Domain.BarrierStats", { hp: max, ac: state.ac, ref })}</p><p class="hint">${t("Domain.OutsideHint", { n: Math.max(mod, 1) })}</p></div>`);
   // Clashes change the rival's domain too, which only the GM can always write: the active GM resolves them.
-  if (isActiveGM()) await detectClash(actor);
-  openDomainHUD(actor);
+  const claim = actor.getFlag(MODULE_ID, "domainReactionClaim");
+  const root = claim?.openerUuid ? await domainActor(claim.openerUuid) : null;
+  const window = root && reactionWindow(root);
+  const offer = window?.offers.find((o) => o.actorUuid === actor.uuid && o.claimId === claim.id && o.status === "claimed");
+  if (offer && window.openingId === claim.openingId) {
+    const current = getDomain(actor);
+    await setDomain(actor, { ...current, reactionRootUuid: root.uuid, reactionRootOpening: window.openingId });
+    offer.status = "used";
+    await root.setFlag(MODULE_ID, "domainReactionWindow", window);
+    await actor.unsetFlag(MODULE_ID, "domainReactionClaim");
+    try { await globalThis.MidiQOL?.setReactionUsed?.(actor); } catch (err) { reportError("domain reaction", err); }
+    await settleReactionWindow(root);
+  } else {
+    await offerDomainClash(actor);
+    await settleReactionWindow(actor);
+  }
+  if (actor.isOwner) openDomainHUD(actor);
 }
 
 async function domainClosed(actor) {
+  if (!isActiveGM()) return;
   const state = getDomain(actor);
   if (!state) return;
-  if (state.zone) await viaGM("domainZoneDelete", { sceneId: state.sceneId, zone: state.zone });
+  if (state.zone) await GM_EXTRA.domainZoneDelete({ sceneId: state.sceneId, zone: state.zone, actorUuid: actor.uuid, openingId: state.openingId });
+  await actor.unsetFlag(MODULE_ID, "domainReactionWindow");
+  const scene = state.sceneId && game.scenes.get(state.sceneId);
+  const actors = [...new Map([...(game.actors?.contents ?? []), ...[...(scene?.tokens ?? [])].map((tk)=>tk.actor)]
+    .filter((a)=>a?.uuid).map((a)=>[a.uuid,a])).values()];
+  for (const target of actors) {
+    const ids = target.effects?.filter((e)=>e.flags?.jjk5e?.kind === "domainProfileCondition" && e.flags.jjk5e.openingId === state.openingId).map((e)=>e.id) ?? [];
+    if (ids.length) await target.deleteEmbeddedDocuments("ActiveEffect",ids);
+  }
   const peers = state.clash?.with ? [state.clash.with].flat() : [];
   for (const uuid of peers) {
     const other = await fromUuid(uuid).catch(() => null);
@@ -4475,12 +4671,12 @@ async function domainClosed(actor) {
       if (!remaining.length) await chat(other, `<p><i class="fas fa-crown"></i> ${t("Domain.ClashWon", { name: esc(other.name) })}</p>`);
     }
   }
-  if (actor.isOwner) await actor.unsetFlag(MODULE_ID, "domainState");
-  else await viaGM("domainUpdate", { actorUuid: actor.uuid, state: null });
+  await setDomain(actor, null);
   refreshDomainApps(actor);
 }
 
 async function closeDomainOf(actor, reason = "") {
+  if (!isActiveGM()) return requestDomainAuthority("close", { actorUuid: actor?.uuid, openingId: getDomain(actor)?.openingId });
   const eff = actor?.effects?.find((e) => e.flags?.jjk5e?.kind === "domain" || e.flags?.jjk5e?.domainOpen);
   if (reason) await chat(actor, `<p><i class="fas fa-burst"></i> ${reason}</p>`);
   if (eff) await safeDelete(eff);
@@ -4490,9 +4686,10 @@ async function closeDomainOf(actor, reason = "") {
 /* ---- Barrier damage, weak spot ---- */
 
 async function damageBarrier(actor, amount, side = "outside", type = "") {
+  if (!isActiveGM() || !["inside", "outside"].includes(side)) return null;
   const state = getDomain(actor);
-  if (!state?.open || state.noBarrier) return null;
-  let dmg = Math.max(0, Number(amount) || 0);
+  if (!state?.open || state.noBarrier || !Number.isFinite(Number(amount)) || Number(amount) < 0) return null;
+  let dmg = Number(amount);
   const balanced = state.balanced;
   const flipped = state.flipped;
   if (!balanced) {
@@ -4508,6 +4705,68 @@ async function damageBarrier(actor, amount, side = "outside", type = "") {
   return state.hp;
 }
 
+/** Barrier attacks use a GM-reviewed dice formula and measured distance to the circle. */
+function barrierAttackGeometry(state, token) {
+  if (!state?.open || state.noBarrier || ![state.x, state.y, state.radius].every(Number.isFinite) || state.radius <= 0) return null;
+  const doc = token?.document ?? token;
+  const scene = game.scenes.get(state.sceneId);
+  if (!scene || doc?.parent?.id !== scene.id || ![doc.x, doc.y].every(Number.isFinite)) return null;
+  const level = typeof doc.level === "string" ? doc.level : doc.level?.id;
+  if (state.levelId && level !== state.levelId) return null;
+  const center = tokenCenter(doc);
+  const units = Number(scene.grid?.distance ?? 5), pixels = Number(scene.grid?.size ?? 100);
+  if (!(units > 0 && pixels > 0)) return null;
+  const distance = Math.hypot(center.x - state.x, center.y - state.y) * units / pixels;
+  return { side: distance <= state.radius ? "inside" : "outside", distance: Math.abs(distance - state.radius) };
+}
+async function attackBarrier(actor, seeker, data) {
+  if (!isActiveGM() || !seeker) return false;
+  const state = getDomain(actor);
+  if (!state?.open || state.openingId !== data.openingId || state.noBarrier) return false;
+  if (typeof data.tokenUuid !== "string" || data.tokenUuid.length > 256) return false;
+  const token = await fromUuid(data.tokenUuid).catch(() => null);
+  if (token?.actor?.uuid !== seeker.uuid) return false;
+  const geo = barrierAttackGeometry(state, token);
+  const bonus = Number(data.bonus), range = Number(data.range);
+  const formula = String(data.formula ?? "").trim();
+  if (!geo || !Number.isFinite(range) || range < 0 || range > 2000 || geo.distance > range ||
+      !Number.isInteger(bonus) || Math.abs(bonus) > 100 ||
+      !/^\d{1,2}d(?:4|6|8|10|12|20|100)(?:\s*[+-]\s*\d{1,3})?$/.test(formula) ||
+      !["", "psychic"].includes(data.type ?? "")) return false;
+  if (typeof data.requestId !== "string" || data.requestId.length > 80) return false;
+  if ((state.barrierRequests ?? []).includes(data.requestId)) return false;
+  state.barrierRequests = [...(state.barrierRequests ?? []).slice(-99), data.requestId];
+  await setDomain(actor, state);
+  const attack = await new Roll(`1d20 + (${bonus})`).evaluate();
+  const natural = attack.dice?.[0]?.results?.find((d) => d.active !== false)?.result ?? attack.dice?.[0]?.total;
+  const hit = natural === 20 || (natural !== 1 && attack.total >= state.ac);
+  await attack.toMessage?.({ speaker: docClass("ChatMessage").getSpeaker?.({ actor: seeker }), flavor: t(hit ? "Domain.BarrierAttackHit" : "Domain.BarrierAttackMiss") });
+  if (!hit) return { hit: false };
+  const damage = await new Roll(formula).evaluate();
+  await damage.toMessage?.({ speaker: docClass("ChatMessage").getSpeaker?.({ actor: seeker }), flavor: t("Domain.HitBarrier") });
+  if (getDomain(actor)?.openingId !== data.openingId) return false;
+  const hp = await damageBarrier(actor, Math.max(0, damage.total), geo.side, data.type);
+  return { hit: true, hp };
+}
+async function promptBarrierAttack(actor) {
+  const tk = canvas?.tokens?.controlled?.[0];
+  const seeker = tk?.actor;
+  if (!seeker?.isOwner || !tk?.document?.uuid) return ui.notifications.warn(t("Domain.SelectAttacker"));
+  const state = getDomain(actor);
+  if (!state?.open || state.noBarrier) return;
+  const result = await foundry.applications.api.DialogV2.prompt({ window: { title: t("Domain.AttackBarrier") }, rejectClose: false,
+    content: `<p>${t("Domain.BarrierAttackHint")}</p><label>${t("Domain.AttackBonus")}<input name="bonus" type="number" value="0"></label>
+      <label>${t("Domain.AttackRange")}<input name="range" type="number" min="0" value="5"></label>
+      <label>${t("Domain.DamageFormula")}<input name="formula" value="1d8"></label>
+      <label><input type="checkbox" name="psychic">${t("Domain.Psychic")}</label>`,
+    ok: { callback: (e,b) => ({ bonus: b.form.elements.bonus.valueAsNumber, range: b.form.elements.range.valueAsNumber,
+      formula: b.form.elements.formula.value, type: b.form.elements.psychic.checked ? "psychic" : "" }) } });
+  if (!result) return;
+  const done = await requestDomainAuthority("attack", { ...result, actorUuid: actor.uuid, seekerUuid: seeker.uuid,
+    tokenUuid: tk.document.uuid, openingId: state.openingId, requestId: foundry.utils.randomID() });
+  if (!done) ui.notifications.warn(t("Domain.AttackRejected"));
+  return done;
+}
 async function findWeakSpot(domainActor, seeker) {
   seeker = seeker ?? canvas?.tokens?.controlled?.[0]?.actor ?? game.user.character;
   if (!seeker) return ui.notifications.warn(t("Notify.NoActor"));
@@ -4516,10 +4775,8 @@ async function findWeakSpot(domainActor, seeker) {
   const total = Number(roll?.total);
   if (!Number.isFinite(total)) return null;
   const ok = total >= 30;
-  if (ok) {
-    const state = getDomain(domainActor);
-    if (state) { state.weakSpot = [...new Set([...(state.weakSpot ?? []), seeker.uuid])]; await setDomain(domainActor, state); }
-  }
+  if (ok) await requestDomainAuthority("weakSpot", { actorUuid: domainActor.uuid, seekerUuid: seeker.uuid,
+    openingId: getDomain(domainActor)?.openingId, total });
   await chat(seeker, `<p><i class="fas fa-crosshairs"></i> ${t(ok ? "Domain.WeakFound" : "Domain.WeakMissed", { name: esc(seeker.name), total })}</p>`);
   return ok;
 }
@@ -4530,7 +4787,7 @@ function clashRounds(diff) { return clashRoundsFromRefinement(diff); }
 
 async function detectClash(actor) {
   const mine = getDomain(actor);
-  if (!mine?.open) return;
+  if (!isActiveGM() || !mine?.open) return;
   if (!mine.sceneId) return;
   const scene = game.scenes?.get?.(mine.sceneId);
   if (!scene) return;
@@ -4538,9 +4795,14 @@ async function detectClash(actor) {
   const candidates = [...new Map(others.filter((a) => a?.uuid && a.uuid !== actor.uuid && getDomain(a)?.open)
     .map((a) => [a.uuid, a])).values()].filter((a) => {
     const state = getDomain(a);
-    if (state.sceneId !== mine.sceneId || ![state.x, state.y, mine.x, mine.y].every(Number.isFinite)) return false;
+    if (state.sceneId !== mine.sceneId || (state.levelId ?? null) !== (mine.levelId ?? null)
+        || ![state.x, state.y, mine.x, mine.y, state.radius, mine.radius].every(Number.isFinite)) return false;
     return Math.hypot(state.x - mine.x, state.y - mine.y) <= ftToPx(game.scenes.get(mine.sceneId), state.radius + mine.radius);
   });
+  const ids = candidates.map((a) => a.uuid).sort();
+  const current = [mine.clash?.with ?? []].flat().sort();
+  if (mine.clash && !mine.clash.resolved && ids.length === current.length && ids.every((id, i) => id === current[i])
+      && candidates.every((a) => { const st = getDomain(a); return st.clash && !st.clash.resolved && [st.clash.with].flat().includes(actor.uuid); })) return;
   if (candidates.length > 1) {
     const actors = [actor, ...candidates];
     const results = multiDomainClash(actors.map((a) => ({ id: a.uuid, refinement: getDomain(a).refinement })));
@@ -4610,7 +4872,8 @@ async function tickClashes(combat = game.combat) {
       s.clash.rounds = Math.max(0, (s.clash.rounds ?? 0) - 1);
       s.radius = Math.max(15, s.radius - 15);
       await setDomain(a, s);
-      if (s.zone) await GM_EXTRA.domainZoneResize({ sceneId: s.sceneId, zone: s.zone, x: s.x, y: s.y, radius: s.radius });
+      if (s.zone) await GM_EXTRA.domainZoneResize({ sceneId: s.sceneId, zone: s.zone, x: s.x, y: s.y, radius: s.radius,
+        actorUuid: a.uuid, openingId: s.openingId });
       if (s.clash.rounds <= 0) await closeDomainOf(a, t("Domain.ClashLost", { name: esc(a.name) }));
       else await chat(a, `<p><i class="fas fa-compress"></i> ${t("Domain.ClashShrink", { name: esc(a.name), r: s.radius, rounds: s.clash.rounds })}</p>`);
     }
@@ -4690,6 +4953,7 @@ async function checkEqualClash(actor) {
 const DOMAIN_MODE_PENDING = new Set();
 async function setBarrierMode(actor, mode) {
   if (!actor?.isOwner || !["flip", "balanced", "normal"].includes(mode)) return false;
+  if (!isActiveGM()) return requestDomainAuthority("mode", { actorUuid: actor.uuid, openingId: getDomain(actor)?.openingId, mode });
   const key = actor.uuid;
   if (DOMAIN_MODE_PENDING.has(key)) return false;
   DOMAIN_MODE_PENDING.add(key);
@@ -4708,6 +4972,148 @@ async function setBarrierMode(actor, mode) {
   } finally { DOMAIN_MODE_PENDING.delete(key); }
 }
 
+const DOMAIN_PROFILE_TYPES = ["acid", "bludgeoning", "cold", "fire", "force", "lightning", "necrotic", "piercing", "poison", "psychic", "radiant", "slashing", "thunder"];
+const DOMAIN_PROFILE_SAVES = ["none", "str", "dex", "con", "int", "wis", "cha"];
+const DOMAIN_PROFILE_CONDITIONS = ["none", "restrained", "poisoned", "prone", "frightened", "blinded", "deafened", "stunned"];
+function validateDomainProfile(input) {
+  if (!input || typeof input !== "object" || Array.isArray(input)) return null;
+  const { name, damage, damageType, save, dc, onSave, condition, rounds } = input;
+  if (typeof name !== "string" || !name.trim() || name.length > 80 || typeof damage !== "string" ||
+      !/^\d{1,2}d(?:4|6|8|10|12|20|100)(?:\s*[+-]\s*\d{1,3})?$/.test(damage.trim()) ||
+      !DOMAIN_PROFILE_TYPES.includes(damageType) || !DOMAIN_PROFILE_SAVES.includes(save) ||
+      !Number.isInteger(dc) || dc < 1 || dc > 40 || !["half", "none", "full"].includes(onSave) ||
+      !DOMAIN_PROFILE_CONDITIONS.includes(condition) || !Number.isInteger(rounds) || rounds < 1 || rounds > 10) return null;
+  return { version: 1, name: name.trim(), damage: damage.trim(), damageType, save, dc, onSave, condition, rounds };
+}
+async function editDomainProfile(actor, mode = "form") {
+  if (!game.user.isGM || !actor || getDomain(actor)?.open) return false;
+  const profile = validateDomainProfile(actor.getFlag(MODULE_ID, "customDomainProfile")) ??
+    { version: 1, name: "Custom Domain", damage: "1d6", damageType: "force", save: "none", dc: 15, onSave: "half", condition: "none", rounds: 1 };
+  const options = (arr, value) => arr.map((x) => `<option value="${x}" ${x === value ? "selected" : ""}>${x}</option>`).join("");
+  if (mode === "export") {
+    await foundry.applications.api.DialogV2.prompt({ window: { title: t("Domain.ProfileExport") }, rejectClose: false,
+      content: `<textarea readonly rows="12" style="width:100%">${esc(JSON.stringify(profile,null,2))}</textarea>`,
+      ok: { callback: () => true } });
+    return true;
+  }
+  if (mode === "clear") {
+    if (!(await confirmDialog(t("Domain.ProfileClear"), `<p>${t("Domain.ProfileHint")}</p>`))) return false;
+    await actor.unsetFlag(MODULE_ID,"customDomainProfile");
+    return true;
+  }
+  const content = mode === "import" ? `<textarea name="json" rows="12" style="width:100%">${esc(JSON.stringify(profile,null,2))}</textarea>` :
+    `<p>${t("Domain.ProfileHint")}</p><label>${t("Domain.ProfileName")} <input name="name" maxlength="80" value="${esc(profile.name)}"></label>
+    <label>${t("Domain.DamageFormula")} <input name="damage" value="${esc(profile.damage)}"></label>
+    <label>${t("Domain.ProfileDamageType")} <select name="damageType">${options(DOMAIN_PROFILE_TYPES,profile.damageType)}</select></label>
+    <label>${t("Domain.ProfileSave")} <select name="save">${options(DOMAIN_PROFILE_SAVES,profile.save)}</select></label>
+    <label>DC <input name="dc" type="number" min="1" max="40" value="${profile.dc}"></label>
+    <label>${t("Domain.ProfileOnSave")} <select name="onSave">${options(["half","none","full"],profile.onSave)}</select></label>
+    <label>${t("Domain.ProfileCondition")} <select name="condition">${options(DOMAIN_PROFILE_CONDITIONS,profile.condition)}</select></label>
+    <label>${t("Domain.ProfileRounds")} <input name="rounds" type="number" min="1" max="10" value="${profile.rounds}"></label>`;
+  const result = await foundry.applications.api.DialogV2.prompt({ window: { title: t("Domain.ProfileEdit") }, rejectClose: false, content,
+    ok: { callback: (e,b) => {
+      const f = b.form.elements;
+      if (mode === "import") { try { return JSON.parse(f.json.value); } catch (err) { return {}; } }
+      return { name: f.name.value, damage: f.damage.value, damageType: f.damageType.value, save: f.save.value,
+        dc: f.dc.valueAsNumber, onSave: f.onSave.value, condition: f.condition.value, rounds: f.rounds.valueAsNumber };
+    } } });
+  if (!result) return false;
+  const normalized = validateDomainProfile(result);
+  if (!normalized) { ui.notifications.warn(t("Domain.ProfileInvalid")); return false; }
+  await actor.setFlag(MODULE_ID, "customDomainProfile", normalized);
+  return true;
+}
+function domainProfileTargets(actor, targets) {
+  const state = getDomain(actor);
+  if (!state?.open || state.incomplete || state.lethal === false || sureHitBlocked(actor)) return [];
+  return [...new Map([...targets].filter((tk) => insideDomain(state,tk) && !domainWard(tk) &&
+    (tk?.actor ?? tk?.document?.actor)?.uuid).map((tk) => [(tk?.actor ?? tk?.document?.actor).uuid, tk])).values()];
+}
+async function executeDomainProfile(actor, targets, requestId) {
+  if (!isActiveGM() || typeof requestId !== "string" || requestId.length > 80) return false;
+  const state = getDomain(actor), profile = validateDomainProfile(state?.customProfile);
+  const eligible = domainProfileTargets(actor,targets);
+  if (!profile || !eligible.length || (state.profileRequests ?? []).includes(requestId)) return false;
+  state.profileRequests = [...(state.profileRequests ?? []).slice(-99),requestId];
+  await setDomain(actor,state);
+  for (const tk of eligible) {
+    if (getDomain(actor)?.openingId !== state.openingId) break;
+    const target = tk.actor ?? tk.document?.actor;
+    // Simple Domain uses a finite barrier; leave it to its existing adjudication rather than bypassing it.
+    if (target.effects?.some((fx) => liveWard(fx) && /^Simple Domain(?: \(10 ft\))?$/.test(fx.name))) {
+      await chat(actor,`<p>${esc(target.name)}: ${t("Domain.ProfileSimpleDomain")}</p>`); continue;
+    }
+    if (typeof target.applyDamage !== "function") continue;
+    let success = false;
+    if (profile.save !== "none") {
+      if (typeof target.rollSavingThrow !== "function") continue;
+      const result = await target.rollSavingThrow({ ability: profile.save, target: profile.dc });
+      const roll = Array.isArray(result) ? result[0] : result;
+      if (!Number.isFinite(roll?.total)) continue;
+      success = roll.total >= profile.dc;
+    }
+    const roll = await new Roll(profile.damage).evaluate();
+    await roll.toMessage?.({ speaker: docClass("ChatMessage").getSpeaker?.({actor}), flavor: esc(profile.name) });
+    const value = Math.max(0, Math.floor(roll.total * (success ? ({half:0.5,none:0,full:1})[profile.onSave] : 1)));
+    if (value) await target.applyDamage([{ value, type: profile.damageType }]);
+    if (!success && profile.condition !== "none") {
+      await target.createEmbeddedDocuments("ActiveEffect", [fxData({ name: profile.name, img: `${ICONS}/domain.svg`,
+        statuses: [profile.condition], duration: { rounds: profile.rounds, seconds: profile.rounds*6 },
+        flags: { jjk5e: { kind: "domainProfileCondition", openingId: state.openingId } } })]);
+    }
+  }
+  return true;
+}
+function domainActivities(actor) {
+  const state = getDomain(actor);
+  const item = state?.domainItemUuid ? [...actor.items].find((i) => i.uuid === state.domainItemUuid) : domainActivityOf(actor)?.item;
+  if (!item?.flags?.jjk5e?.domainActivity) return [];
+  return [...(item.system?.activities?.contents ?? Object.values(item.system?.activities ?? {}))]
+    .filter((a) => a?.id && a.id !== item.flags.jjk5e.domainActivity);
+}
+async function runDomainActivity(actor, id) {
+  if (!actor?.isOwner || !getDomain(actor)?.open || !domainOpen(actor)) return false;
+  const activity = domainActivities(actor).find((a) => a.id === id);
+  if (!activity || typeof activity.use !== "function") return false;
+  if (/initiative\s*20/i.test(activity.name ?? "") && sureHitBlocked(actor)) return false;
+  return activity.use({ event: null }, { configure: true }, {});
+}
+function domainHudDetails(actor, state) {
+  const scene = state.sceneId && game.scenes.get(state.sceneId);
+  const visible = [...(scene?.tokens ?? [])].filter((tk) => tk.actor && insideDomain(state,tk) &&
+    (game.user.isGM || (!tk.hidden && tk.actor.isOwner)));
+  const rows = visible.map((tk) => `<li>${esc(tk.name ?? tk.actor.name)} — ${esc(domainWard(tk) ?? t("Domain.ProfileInside"))}</li>`).join("");
+  const effect = actor.effects?.find((e) => e.uuid === state.openingId);
+  const remaining = effect?.duration?.remaining;
+  const win = actor.getFlag(MODULE_ID,"domainReactionWindow");
+  const counts = win?.offers?.reduce((a,o)=>(a[o.status]=(a[o.status]??0)+1,a),{}) ?? {};
+  const progress = win ? `<p>${t("Domain.ProfileResponses")}: ${Object.entries(counts).map(([k,v])=>esc(k)+": "+v).join(" · ")}</p>` : "";
+  const buttons = actor.isOwner ? domainActivities(actor).map((a) => `<button type="button" data-action="activity" data-activity="${esc(a.id)}">${esc(a.name ?? a.id)}</button>`).join("") : "";
+  return `<p><strong>${t("Domain.ProfileSureHit")}:</strong> ${t(sureHitBlocked(actor) ? "Domain.ProfileBlocked" : "Domain.ProfileAvailable")}</p>
+    <p>${t("Domain.ProfileRemaining")}: ${state.barrierless ? "∞" : Number.isFinite(remaining) ? Math.max(0,remaining) : "—"}</p>${progress}
+    ${rows ? `<p><strong>${t("Domain.ProfileParticipants")}</strong></p><ul>${rows}</ul>` : ""}
+    ${buttons ? `<p><strong>${t("Domain.ProfileActivities")}</strong></p><div class="btns">${buttons}</div>` : ""}
+    ${state.customProfile && isActiveGM() ? `<button type="button" data-action="applyProfile">${t("Domain.ProfileRun")}: ${esc(state.customProfile.name)}</button>` : ""}`;
+}
+async function toggleDomainAmplification(actor) {
+  if (!isActiveGM() || refinementOf(actor) < 600 || domainOpen(actor)) return false;
+  const dom = domainActivityOf(actor);
+  if (!dom || dom.item.flags?.jjk5e?.incompleteDomain) return false;
+  const active = kindEffect(actor, "domainAmplification");
+  if (active) { await safeDelete(active); return true; }
+  const until = Number(actor.getFlag(MODULE_ID, "amplificationUntil")) || 0;
+  const now = Number(game.time?.worldTime) || 0;
+  if (until <= now) {
+    const cost = Math.ceil(activityCost(dom.activity) / 2);
+    if (cost <= 0 || !(await spendCE(actor, cost, "Domain Amplification"))) return false;
+    await actor.setFlag(MODULE_ID, "amplificationUntil", now + 60);
+  }
+  const remaining = Math.min(60, Math.max(1, (Number(actor.getFlag(MODULE_ID,"amplificationUntil")) || now) - now));
+  await setKindEffect(actor, "domainAmplification", { name: "Domain Amplification", img: `${ICONS}/domain.svg`,
+    duration: { rounds: Math.ceil(remaining / 6), seconds: remaining },
+    description: "<p>V6: innate techniques are blocked; guaranteed-hit protection is active. Adjudicate other neutralization and Maximum Output interactions.</p>" });
+  return true;
+}
 const DOMAIN_APPS = new Map();
 function refreshDomainApps(actor) { const a = DOMAIN_APPS.get(actor?.uuid); if (a?.rendered) a.render(); }
 
@@ -4716,17 +5122,31 @@ function makeDomainClass() {
   return class JJKDomain extends Base {
     static DEFAULT_OPTIONS = {
       classes: ["jjk5e-ui", "jjk5e-domain"], window: { icon: "fas fa-circle-half-stroke", minimizable: true },
-      position: { width: 340, height: "auto" },
+      position: { width: 440, height: "auto" },
       actions: {
+        profile: async function (ev, el) { await editDomainProfile(this.actor, el?.dataset?.mode); this.render(); },
+        activity: async function (ev, el) { return runDomainActivity(this.actor,el?.dataset?.activity); },
+        applyProfile: async function () {
+          if (!isActiveGM()) return false;
+          const targets = [...(game.user?.targets ?? [])];
+          if (!targets.length || !(await confirmDialog(t("Domain.ProfileRun"),`<p>${t("Domain.ProfileRunConfirm")}</p>`))) return false;
+          return queueDomainWork(()=>executeDomainProfile(this.actor,targets,foundry.utils.randomID()));
+        },
         hit: async function () {
           const res = await foundry.applications.api.DialogV2.prompt({ window: { title: t("Domain.HitBarrier") }, rejectClose: false,
             content: `<label>${t("CE.Amount")}<input type="number" name="n" value="10" min="0"></label>
               <label>${t("Domain.SideLabel")}<select name="side"><option value="outside">${t("Domain.Side.outside")}</option><option value="inside">${t("Domain.Side.inside")}</option></select></label>
               <label class="jjk-check"><input type="checkbox" name="psy"> ${t("Domain.Psychic")}</label>`,
             ok: { callback: (e, b) => ({ n: b.form.elements.n.valueAsNumber, side: b.form.elements.side.value, psy: b.form.elements.psy.checked }) } });
-          if (res) damageBarrier(this.actor, res.n, res.side, res.psy ? "psychic" : "");
+          if (res && game.user.isGM) await queueDomainWork(() => damageBarrier(this.actor, res.n, res.side, res.psy ? "psychic" : ""));
         },
-        weak: function () { findWeakSpot(this.actor); },
+        amplification: async function () {
+          const done = await requestDomainAuthority("amplification", { actorUuid: this.actor.uuid });
+          if (!done) ui.notifications.warn(t("Domain.AmplificationUnavailable"));
+          this.render();
+        },
+        attack: function () { return promptBarrierAttack(this.actor); },
+        weak: function () { return findWeakSpot(this.actor); },
         ref: async function () {
           if (!game.user.isGM) return ui.notifications.warn(t("Notify.GMOnly"));
           const n = await promptNumber(t("Domain.Refinement"), t("Domain.RefinementPrompt"), refinementOf(this.actor));
@@ -4736,10 +5156,8 @@ function makeDomainClass() {
           await setBarrierMode(this.actor, el.dataset.m);
         },
         lethal: async function(ev, el) {
-          const lethal = el.dataset.m !== "nonlethal";
-          await this.actor.setFlag(MODULE_ID, "domainLethal", lethal);
-          const state = getDomain(this.actor);
-          if (state) { state.lethal = lethal; await setDomain(this.actor, state); }
+          await requestDomainAuthority("lethal", { actorUuid: this.actor.uuid, openingId: getDomain(this.actor)?.openingId,
+            lethal: el.dataset.m !== "nonlethal" });
           this.render();
         },
         close: function () { closeDomainOf(this.actor); }
@@ -4751,14 +5169,16 @@ function makeDomainClass() {
       const ref = refinementOf(this.actor);
       if (!s?.open) {
         return `<section class="jjk-panel"><p>${t("Domain.Closed")}</p><p>${t("Domain.Refinement")}: <strong>${ref}</strong>
-          ${game.user.isGM ? ` <button type="button" data-action="ref">${t("Common.Edit")}</button>` : ""}</p></section>`;
+          ${game.user.isGM ? ` <button type="button" data-action="ref">${t("Common.Edit")}</button>` : ""}</p>
+          ${this.actor.isOwner && ref >= 600 ? `<button type="button" data-action="amplification">${t(hasKind(this.actor,"domainAmplification") ? "Domain.AmplificationDismiss" : "Domain.AmplificationActivate")}</button>` : ""}
+          ${game.user.isGM ? `<div class="btns">${["form","import","export","clear"].map((m)=>`<button type="button" data-action="profile" data-mode="${m}">${t(({form:"Domain.ProfileEdit",import:"Domain.ProfileImport",export:"Domain.ProfileExport",clear:"Domain.ProfileClear"})[m])}</button>`).join("")}</div>` : ""}</section>`;
       }
       const pct = s.max ? Math.round((s.hp / s.max) * 100) : 0;
       if (!this.actor.isOwner && !game.user.isGM) {
         // Someone else's domain: the barrier state only, without its exact numbers.
         return `<section class="jjk-panel"><div class="jjk-barrier"><div class="fill" style="width:${pct}%"></div><span>${pct}%</span></div>
           ${s.clash ? `<p class="jjk-chip on">${t("Domain.Clash")}</p>` : ""}
-          <div class="btns"><button type="button" data-action="hit"><i class="fas fa-hammer"></i> ${t("Domain.HitBarrier")}</button>
+          <div class="btns">${s.noBarrier ? "" : `<button type="button" data-action="attack"><i class="fas fa-crosshairs"></i> ${t("Domain.AttackBarrier")}</button>${game.user.isGM ? `<button type="button" data-action="hit"><i class="fas fa-hammer"></i> ${t("Domain.HitBarrier")}</button>` : ""}`}
           <button type="button" data-action="weak"><i class="fas fa-crosshairs"></i> ${t("Domain.WeakSpot")}</button></div></section>`;
       }
       const clash = s.clash ? `<p class="jjk-chip ${s.clash.resolved ? "on" : ""}">${t("Domain.Clash")}: ${t(`Domain.Role.${s.clash.role}`)}`
@@ -4768,7 +5188,8 @@ function makeDomainClass() {
         <div class="jjk-barrier"><div class="fill" style="width:${pct}%"></div><span>${s.hp} / ${s.max}</span></div>
         <p>${t("Domain.Stats", { ac: s.ac, ref: s.refinement, r: s.radius })}</p>${clash}
         <p class="hint">${t("Domain.Mode")}: ${mode}; ${s.lethal === false ? t("Domain.NonLethalMode") : t("Domain.LethalMode")}</p>
-        <div class="btns"><button type="button" data-action="hit"><i class="fas fa-hammer"></i> ${t("Domain.HitBarrier")}</button>
+        ${domainHudDetails(this.actor,s)}
+        <div class="btns">${s.noBarrier ? "" : `<button type="button" data-action="attack"><i class="fas fa-crosshairs"></i> ${t("Domain.AttackBarrier")}</button>${game.user.isGM ? `<button type="button" data-action="hit"><i class="fas fa-hammer"></i> ${t("Domain.HitBarrier")}</button>` : ""}`}
           <button type="button" data-action="weak"><i class="fas fa-crosshairs"></i> ${t("Domain.WeakSpot")}</button></div>
         ${this.actor.isOwner ? `<div class="btns"><button type="button" data-action="lethal" data-m="${s.lethal === false ? "lethal" : "nonlethal"}">${s.lethal === false ? t("Domain.MakeLethal") : t("Domain.MakeNonLethal")}</button>${s.refinement >= 100 ? `<button type="button" data-action="mode" data-m="flip">${t("Domain.Flipped")}</button>
           <button type="button" data-action="mode" data-m="balanced">${t("Domain.Balanced")} (5)</button>` : ""}
@@ -4962,29 +5383,21 @@ Hooks.once("ready", () => {
   if (game.system?.id !== "dnd5e") return;
   Object.assign(game.modules.get(MODULE_ID).api ?? {}, {
     domainOpened, domainClosed, damageBarrier, findWeakSpot, openDomainHUD, detectClash, tickClashes, clashRounds,
-    getDomain, createCurse, curseData, sureHitBlocked
+    getDomain, createCurse, curseData, sureHitBlocked, domainWard, validateDomainProfile
   });
-  Hooks.on("createActiveEffect", (effect, options, userId) => {
-    if (userId !== game.user.id || !(effect.flags?.jjk5e?.domainOpen || effect.flags?.jjk5e?.kind === "domain")) return;
-    let on = true;
-    try { on = setting("domainZones"); } catch (err) { /* */ }
-    if (on && effect.parent?.documentName === "Actor") domainOpened(effect.parent, effect);
-  });
-  Hooks.on("deleteActiveEffect", (effect, options, userId) => {
-    if (userId !== game.user.id || !(effect.flags?.jjk5e?.domainOpen || effect.flags?.jjk5e?.kind === "domain")) return;
-    if (effect.parent?.documentName === "Actor") domainClosed(effect.parent);
+  Hooks.on("createActiveEffect", (effect) => {
+    if (!isActiveGM() || !setting("domainTracking") || !(effect.flags?.jjk5e?.domainOpen || effect.flags?.jjk5e?.kind === "domain")) return;
+    if (effect.parent?.documentName === "Actor") return queueDomainWork(() => domainOpened(effect.parent, effect));
   });
   Hooks.on("updateCombat", (combat, changes) => {
-    if ("round" in (changes ?? {})) tickClashes(combat).catch((err) => reportError("clash tick", err));
+    if (isActiveGM() && "round" in (changes ?? {})) return queueDomainWork(() => tickClashes(combat)).catch((err) => reportError("clash tick", err));
   });
-  // A player opened a domain: the active GM checks it for a clash with the other open domains.
-  Hooks.on("updateActor", (actor, changes, options, userId) => {
-    if (!isActiveGM() || userId === game.user.id) return;
-    const st = foundry.utils.getProperty(changes, `flags.${MODULE_ID}.domainState`);
-    if (st?.open && !st.clash) detectClash(actor).catch((err) => console.error(`${MODULE_ID} | clash`, err));
+  // Domain state now originates on the active GM. Other clients only refresh their UI.
+  Hooks.on("updateActor", (actor, changes) => {
+    if (foundry.utils.hasProperty(changes, `flags.${MODULE_ID}.domainState`)) refreshDomainApps(actor);
   });
   Hooks.on("updateActor", (actor, changes) => {
-    if (foundry.utils.hasProperty(changes, "system.attributes.hp")) checkEqualClash(actor);
+    if (foundry.utils.hasProperty(changes, "system.attributes.hp") && isActiveGM()) return queueDomainWork(() => checkEqualClash(actor));
   });
   Hooks.on("preUpdateActor", (actor, changes, options) => {
     if (foundry.utils.hasProperty(changes, "system.attributes.hp")) {
@@ -4993,10 +5406,10 @@ Hooks.once("ready", () => {
     }
   });
   Hooks.on("updateActor", (actor, changes, options, userId) => {
-    if (userId !== game.user.id || options?.jjk5eHP === undefined) return;
+    if (!isActiveGM() || options?.jjk5eHP === undefined) return;
     const hp = actor.system?.attributes?.hp ?? {};
     const dmg = options.jjk5eHP - ((Number(hp.value) || 0) + (Number(hp.temp) || 0));
-    if (dmg > 0) barrierlessHit(actor, dmg);
+    if (dmg > 0) return queueDomainWork(() => barrierlessHit(actor, dmg));
   });
 });
 
@@ -6614,7 +7027,7 @@ function optionalPanel(actor, tab) {
   const gm = !!game.user.isGM;
   const b = [];
   if (tab === "combat") {
-    const rival = rivalDomainFor(actor);
+    const rival = rivalDomainFor(actor, null, null, true);
     const clashBtn = rival ? `<fieldset class="jjk-clash-react"><legend>${t("Clash.OfferTitle")}</legend><p class="jjk-note">${t("Clash.Offer", { name: esc(actor.name), opener: esc(rival.name) })}</p>
       <div class="jjk-grid">${pbtn("domainClash", "fas fa-circle-half-stroke", t("Clash.Expand"), { cls: "jjk-primary" })}</div></fieldset>` : "";
     if (optOn("weaponClash")) b.push(pbtn("weaponClash", "fas fa-shield-halved", `${t("Opt.weaponClash.Name")} (${(Number(actor.system.attributes?.prof) || 2) - (Number(actor.getFlag(MODULE_ID, "clashUsed")) || 0)})`));
@@ -7088,6 +7501,8 @@ function clashCandidates(opener) {
   const out = [];
   for (const tk of scene?.tokens ?? []) {
     const a = tk.actor;
+    const level = typeof tk.level === "string" ? tk.level : tk.level?.id;
+    if (state.levelId && level !== state.levelId) continue;
     if (!a || seen.has(a.uuid)) continue;
     seen.add(a.uuid);
     if (!clashBlocker(a, opener)) out.push(a);
@@ -7102,13 +7517,89 @@ function deciders(actor) {
   return players.length ? players.map((u) => u.id) : gm ? [gm.id] : [];
 }
 
-const CLASH_OFFERED = new Map();
+// One persisted response window per expansion; expires on turn advance or after 120 seconds.
+function reactionWindow(opener) {
+  const win = foundry.utils.deepClone(opener?.getFlag?.(MODULE_ID, "domainReactionWindow") ?? null);
+  const state = getDomain(opener);
+  if (!win || win.status !== "open" || !state?.open || win.openingId !== state.openingId || Date.now() >= win.expires) return null;
+  if (win.combatId) {
+    const combat = game.combats?.get?.(win.combatId) ?? (game.combat?.id === win.combatId ? game.combat : null);
+    if (!combat || combat.round !== win.round || combat.turn !== win.turn) return null;
+  }
+  return win;
+}
+function reactionOffer(opener, actor) {
+  return reactionWindow(opener)?.offers.find((o) => o.actorUuid === actor.uuid && o.status === "pending") ?? null;
+}
+async function processClashDecision(operation, actor, data, user) {
+  const opener = await domainActor(data.openerUuid);
+  const win = reactionWindow(opener);
+  if (!win || win.openingId !== data.openingId) return false;
+  const offer = win.offers.find((o) => o.actorUuid === actor.uuid);
+  if (!offer) return false;
+  const state = getDomain(opener);
+  const scene = game.scenes.get(state.sceneId);
+  if (!scene || ![...(scene.tokens ?? [])].some((tk) => {
+    const level = typeof tk.level === "string" ? tk.level : tk.level?.id;
+    return tk.actor?.uuid === actor.uuid && (!state.levelId || level === state.levelId);
+  })) return false;
+  if (operation === "claim" || operation === "decline") {
+    if (offer.status !== "pending" || clashBlocker(actor, opener)) return false;
+    const claim = actor.getFlag(MODULE_ID, "domainReactionClaim");
+    if (claim && Date.now() < claim.expires) return false;
+    offer.status = operation === "claim" ? "claimed" : "declined";
+    offer.userId = user.id;
+    if (operation === "claim") {
+      offer.claimId = foundry.utils.randomID();
+      await actor.setFlag(MODULE_ID, "domainReactionClaim", { id: offer.claimId, expires: win.expires, openingId: win.openingId, openerUuid: opener.uuid });
+    }
+    await opener.setFlag(MODULE_ID, "domainReactionWindow", win);
+    if (operation === "decline") await settleReactionWindow(opener);
+    return operation === "claim" ? { claimId: offer.claimId } : true;
+  }
+  if (operation !== "finish" || offer.status !== "claimed" || offer.claimId !== data.claimId || offer.userId !== user.id) return false;
+  // The opening effect, not the caller's asserted result, confirms a successful reaction.
+  // Keep a successful-looking workflow claimed until the effect hook arrives or the window expires.
+  if (data.cancelled === true && !domainOpen(actor)) {
+    offer.status = "finished";
+    await opener.setFlag(MODULE_ID, "domainReactionWindow", win);
+    if (actor.getFlag(MODULE_ID, "domainReactionClaim")?.id === offer.claimId) await actor.unsetFlag(MODULE_ID, "domainReactionClaim");
+    await settleReactionWindow(opener);
+  }
+  return true;
+}
+async function settleReactionWindow(opener) {
+  if (!isActiveGM() || !getDomain(opener)?.open) return false;
+  const raw = foundry.utils.deepClone(opener.getFlag(MODULE_ID, "domainReactionWindow"));
+  if (!raw) { await detectClash(opener); return true; }
+  if (raw.status === "resolved") return true;
+  if (reactionWindow(opener) && raw.offers.some((o) => ["pending", "claimed"].includes(o.status))) return false;
+  raw.status = "resolved";
+  for (const offer of raw.offers) {
+    if (["pending", "claimed"].includes(offer.status)) offer.status = "expired";
+    const actor = await domainActor(offer.actorUuid);
+    if (actor?.getFlag(MODULE_ID, "domainReactionClaim")?.id === offer.claimId && offer.claimId) {
+      await actor.unsetFlag(MODULE_ID, "domainReactionClaim");
+    }
+  }
+  await opener.setFlag(MODULE_ID, "domainReactionWindow", raw);
+  await detectClash(opener);
+  return true;
+}
 async function offerDomainClash(opener) {
   if (!isActiveGM()) return;
   const state = getDomain(opener);
-  if (!state?.open || !state.openingId || CLASH_OFFERED.get(opener.uuid) === state.openingId) return;
-  CLASH_OFFERED.set(opener.uuid, state.openingId);
-  for (const actor of clashCandidates(opener)) {
+  if (!state?.open || !state.openingId || !state.sceneId ||
+      opener.getFlag(MODULE_ID, "domainReactionWindow")?.openingId === state.openingId) return;
+  const candidates = clashCandidates(opener);
+  const combat = game.combat;
+  const sceneId = combat?.scene?.id ?? (typeof combat?.scene === "string" ? combat.scene : combat?.sceneId);
+  const sameCombat = combat?.id && sceneId === state.sceneId;
+  const win = { status: "open", openingId: state.openingId, expires: Date.now() + 120000,
+    combatId: sameCombat ? combat.id : null, round: sameCombat ? combat.round : null, turn: sameCombat ? combat.turn : null,
+    offers: candidates.map((a) => ({ actorUuid: a.uuid, status: "pending" })) };
+  await opener.setFlag(MODULE_ID, "domainReactionWindow", win);
+  for (const actor of candidates) {
     const users = deciders(actor);
     const payload = { type: "jjkClashOffer", users, actorUuid: actor.uuid, openerUuid: opener.uuid,
       openingId: state.openingId, opener: opener.name };
@@ -7128,12 +7619,14 @@ async function promptDomainClash({ actorUuid, opener, openerUuid, openingId }) {
   CLASH_PROMPTS.add(actorUuid);
   try {
     const actor = await fromUuid(actorUuid).catch(() => null);
-    if (!actor?.isOwner || !rivalDomainFor(actor, openerUuid, openingId)) return;
+    const rival = actor && rivalDomainFor(actor, openerUuid, openingId);
+    if (!actor?.isOwner || !rival || !reactionOffer(rival, actor)) return;
     const go = await foundry.applications.api.DialogV2.confirm({ window: { title: t("Clash.OfferTitle"), icon: "fas fa-yin-yang" },
       classes: ["jjk5e-ui", "jjk5e-dialog"], rejectClose: false,
       content: `<p>${t("Clash.Offer", { name: esc(actor.name), opener: esc(opener ?? "?") })}</p><p class="hint">${t("Clash.Hint")}</p>`,
       yes: { label: t("Clash.Expand"), icon: "fas fa-circle-half-stroke" }, no: { label: t("Clash.Decline") } });
     if (go) await reactDomainClash(actor, openerUuid, openingId);
+    else await requestDomainAuthority("decline", { actorUuid, openerUuid, openingId });
   } finally { CLASH_PROMPTS.delete(actorUuid); }
 }
 
@@ -7147,16 +7640,23 @@ async function reactDomainClash(actor, openerUuid = null, openingId = null) {
     const dom = domainActivityOf(actor);
     if (!dom) return ui.notifications.warn(t("Clash.NoDomain"));
     if (domainOpen(actor)) return ui.notifications.warn(t("Notify.DomainActive"));
-    const opener = rivalDomainFor(actor, openerUuid, openingId);
+    const opener = rivalDomainFor(actor, openerUuid, openingId, true);
     if (!opener || clashBlocker(actor, opener)) return ui.notifications.warn(t("Clash.Expired"));
-    const res = await dom.activity.use({ event: null }, { configure: false }, {});
-    if (res !== null && res !== undefined) globalThis.MidiQOL?.setReactionUsed?.(actor);
+    const data = { actorUuid: actor.uuid, openerUuid: opener.uuid, openingId: getDomain(opener).openingId };
+    const claim = await requestDomainAuthority("claim", data);
+    if (!claim?.claimId) return ui.notifications.warn(t("Clash.Expired"));
+    let cancelled = false;
+    try {
+      const res = await dom.activity.use({ event: null }, { configure: false }, {});
+      cancelled = res === null || res === undefined;
+    } catch (err) { cancelled = true; throw err; }
+    finally { await requestDomainAuthority("finish", { ...data, claimId: claim.claimId, cancelled }); }
   } catch (err) { reportError("domain clash", err); }
   finally { CLASH_REACTIONS_PENDING.delete(actor.uuid); }
 }
 
 /** An open domain of someone else on this actor's scene (for the panel's reaction button). */
-function rivalDomainFor(actor, openerUuid = null, openingId = null) {
+function rivalDomainFor(actor, openerUuid = null, openingId = null, pendingOnly = false) {
   const sceneId = actor?.token?.parent?.id ?? globalThis.canvas?.scene?.id;
   const scene = game.scenes?.get?.(sceneId);
   if (!scene) return null;
@@ -7165,7 +7665,7 @@ function rivalDomainFor(actor, openerUuid = null, openingId = null) {
     if (!a?.uuid || a.uuid === actor.uuid || (openerUuid && a.uuid !== openerUuid)) continue;
     const st = getDomain(a);
     if (st?.open && st.sceneId === sceneId && (!openingId || st.openingId === openingId)
-        && !clashBlocker(actor, a)) return a;
+        && !clashBlocker(actor, a) && (!pendingOnly || reactionOffer(a, actor))) return a;
   }
   return null;
 }
@@ -7173,13 +7673,17 @@ function rivalDomainFor(actor, openerUuid = null, openingId = null) {
 Object.assign(PANEL_ACTIONS, { domainClash: (actor) => reactDomainClash(actor) });
 
 Hooks.once("ready", () => {
-  // The active GM offers the reaction whenever a domain opens (whoever opened it).
-  Hooks.on("updateActor", (actor, changes) => {
+  // Persisted windows are reconciled on turn change, login and periodic GM-only expiry.
+  const settleWindows = () => {
     if (!isActiveGM()) return;
-    const st = foundry.utils.getProperty(changes, `flags.${MODULE_ID}.domainState`);
-    if (st?.open !== true || st.clash) return;
-    offerDomainClash(actor).catch((err) => reportError("clash offer", err));
-  });
+    const actors = [...(game.actors?.contents ?? []), ...[...(game.scenes ?? [])].flatMap((scene) => [...(scene.tokens ?? [])].map((tk) => tk.actor))];
+    const pending = [...new Map(actors.filter((a) => a?.uuid && a.getFlag(MODULE_ID, "domainReactionWindow")?.status === "open").map((a) => [a.uuid, a])).values()];
+    if (pending.length) return queueDomainWork(async () => { for (const actor of pending) await settleReactionWindow(actor); });
+  };
+  Hooks.on("updateCombat", (combat, changes) => { if ("round" in changes || "turn" in changes) return settleWindows(); });
+  Hooks.on("userConnected", () => settleWindows());
+  setInterval(() => settleWindows(), 5000);
+  settleWindows();
   game.socket?.on?.(`module.${MODULE_ID}`, (msg) => {
     if (msg?.type !== "jjkClashOffer" || !msg.users?.includes(game.user.id)) return;
     promptDomainClash(msg).catch((err) => reportError("clash prompt", err));
@@ -7191,9 +7695,10 @@ Hooks.once("ready", () => {
       const actor = doc?.actor ?? doc;
       if (!actor?.isOwner) return ui.notifications.warn(t("Notify.NotOwner"));
       b.disabled = true;
-      // Legacy chat cards without an opening identity are no longer actionable.
-      if (!b.dataset.jjk5eOpener || !b.dataset.jjk5eOpening) return ui.notifications.warn(t("Clash.Expired"));
-      await reactDomainClash(actor, b.dataset.jjk5eOpener, b.dataset.jjk5eOpening);
+      try {
+        if (!b.dataset.jjk5eOpener || !b.dataset.jjk5eOpening) return ui.notifications.warn(t("Clash.Expired"));
+        await reactDomainClash(actor, b.dataset.jjk5eOpener, b.dataset.jjk5eOpening);
+      } finally { b.disabled = false; }
     });
   });
 });

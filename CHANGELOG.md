@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.75.0 — Advanced Domain Engine (ampliación incremental)
+- Autoridad del GM activo para el ciclo de vida de dominios, regiones, cambios de barrera y respuestas; validación de permisos y cola secuencial.
+- Geometría por escena, token y nivel; ataques a barreras con alcance, CA, tirada de daño, lado interior/exterior y deduplicación.
+- Ventanas de reacción persistentes por expansión, reclamación exclusiva, resolución agrupada y caducidad.
+- Protección por objetivo frente a golpes garantizados: Hollow Wicker Basket selectivo, Falling Blossom Emotion defensivo, Celestial Body y Domain Amplification.
+- Domain Amplification: activación, CE, desactivación, reanudación y bloqueo del uso de técnica innata.
+- HUD ampliado con estado, duración, participantes visibles, respuestas y actividades del objeto de dominio activo.
+- Editor homebrew del GM: formulario, importación/exportación JSON validada, salvación, daño, condiciones, ejecución manual sobre objetivos elegibles y limpieza.
+- Inventario estático de 77 entradas de dominio para QA individual.
+- 87 pruebas automatizadas superadas en GitHub Actions (run 45451017664, código de esta ampliación).
+- Límites: todavía faltan absorción compartida completa de Simple Domain, ofensiva de Falling Blossom, interacciones de Maximum Output, integración de ataques contra barreras con actividades Midi-QOL, ejecución automática individual en iniciativa 20 y pruebas reales de Foundry multijugador. La caducidad de 120 segundos/cambio de turno es una política provisional. No es una certificación de automatización total.
+
 ## 1.74.0 — Advanced Domain Engine (fase inicial)
 - Sure-hit: exige coordenadas válidas y que el objetivo pertenezca a la escena del dominio.
 - Detección de choques según la escena real de la expansión, incluidos actores sintéticos de tokens.
