@@ -132,7 +132,8 @@
   },
   "esmodules": [
     "scripts/jjk5e.js",
-    "scripts/sealed-ink.mjs"
+    "scripts/sealed-ink.mjs",
+    "scripts/sealed-ink-events.mjs"
   ],
   "license": "LICENSE.txt",
   "readme": "README.md",
