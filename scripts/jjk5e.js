@@ -986,17 +986,63 @@ const RO_ROWS = [
 const isFullTurn = (activity) => activity?.activation?.type === "special" && /^full[ -]turn/i.test(activity?.activation?.condition ?? "");
 // Only on the actor's own turn: a domain used as a clash reaction on another turn is not a full-turn action.
 const ownTurn = (actor) => !!game.combat?.started && !!actor && game.combat.combatant?.actor?.uuid === actor.uuid;
-function fullTurnSpent(actor) {
-  const midi = globalThis.MidiQOL;
-  try { return !!(midi?.hasUsedAction?.(actor) || midi?.hasUsedBonusAction?.(actor)); } catch { return false; }
+// Local turn ledger, complementary to Midi's native action/bonus tracking.
+// Only explicit JJK free actions are counted; ordinary object interactions are separate.
+const ACTION_TURNS=new Map();
+function actionTurn(actor){
+  if(!ownTurn(actor))return null;
+  const c=game.combat, key=[c.id,c.round,c.turn,c.combatant.id].join(":");
+  let state=ACTION_TURNS.get(c.id);
+  if(state?.key!==key){state={key,action:false,bonus:false,free:false,moved:false,full:false};ACTION_TURNS.set(c.id,state);}
+  return state;
 }
-async function spendFullTurn(actor) {
-  const midi = globalThis.MidiQOL;
-  if (!ownTurn(actor) || !midi) return;
-  try { await midi.setActionUsed?.(actor); await midi.setBonusActionUsed?.(actor); } catch (err) { reportError("full turn", err); }
+function isJJKFree(activity){
+  if(!activity?.item?.flags?.jjk5e)return false;
+  const a=activity.activation;
+  return a?.type==="free" || (a?.type==="special" && /^free[ -]action(?:$|[\s(:])/i.test(a.condition??""));
+}
+function lesserFullTurn(activity){
+  // Only explicit exceptions; don't infer from a generic "special" activation.
+  const text=String(activity?.activation?.condition??"");
+  return /(?:no movement|without movement|action\s*\+\s*bonus action\s*only)/i.test(text) ||
+    (baseName(activity?.item??{})==="2000 IQ" && /analy[sz]/i.test(activity?.name??""));
+}
+function fullTurnSpent(actor,activity){
+  const state=actionTurn(actor);
+  if(state && (state.action||state.bonus||state.full||(!lesserFullTurn(activity)&&state.moved)))return true;
+  const midi=globalThis.MidiQOL;
+  try{return !!(midi?.hasUsedAction?.(actor)||midi?.hasUsedBonusAction?.(actor));}catch{return false;}
+}
+async function spendFullTurn(actor,activity){
+  const state=actionTurn(actor);
+  if(!state)return;
+  state.action=true;state.bonus=true;state.full=true;
+  if(!lesserFullTurn(activity))state.moved=true;
+  const midi=globalThis.MidiQOL;
+  try{await midi?.setActionUsed?.(actor);await midi?.setBonusActionUsed?.(actor);}catch(err){reportError("full turn",err);}
+}
+function recordTurnActivity(activity){
+  const actor=activity?.actor??activity?.item?.actor;
+  const state=actionTurn(actor);
+  if(!state)return;
+  if(isJJKFree(activity))state.free=true;
+  if(activity.activation?.type==="action")state.action=true;
+  if(activity.activation?.type==="bonus")state.bonus=true;
+}
+function actionGate(actor,activity){
+  const state=actionTurn(actor);
+  if(isJJKFree(activity)&&game.combat?.started&&(!state||state.free))return false;
+  if(isFullTurn(activity)&&state&&fullTurnSpent(actor,activity))return false;
+  if(state?.full&&["action","bonus"].includes(activity.activation?.type))return false;
+  return true;
 }
 
 function registerActivityHooks() {
+  Hooks.on("deleteCombat",c=>ACTION_TURNS.delete(c.id));
+  Hooks.on("moveToken",(token,movement)=>{
+    const state=actionTurn(token.actor);
+    if(state&&movement?.recorded&&Number(movement.passed?.cost)>0)state.moved=true;
+  });
   Hooks.on("dnd5e.preUseActivity", (activity, usageConfig) => {
     if([...game.user?.targets??[]].some(tk=>barrierMarkerMeta(tk))){
       ui.notifications.warn(t("Domain.MarkerUseAttack"));
@@ -1022,7 +1068,7 @@ function registerActivityHooks() {
       return false;
     }
     // Full-Turn Action (Rules of Thumb): needs the action, bonus action and all movement still unused.
-    if (isFullTurn(activity) && ownTurn(actor) && fullTurnSpent(actor)) {
+    if (!actionGate(actor,activity)) {
       ui.notifications.warn(t("Notify.FullTurnUsed"));
       return false;
     }
@@ -1070,6 +1116,7 @@ function registerActivityHooks() {
     if (isCloneCreation(activity) && !canCreateClone(activity.item.actor, cloneQuantity(activity, usageConfig))) return false;
     if (activity.item?.flags?.jjk5e?.tokenSwap?.[activity.id] && !validateTokenSwap(activity)) return false;
     const actor = activity.actor ?? activity.item?.actor;
+    if(!actionGate(actor,activity))return false;
     if(ceAuthorityEnabled()&&setting("autoSpendCE")&&managedCE(activity)){
       if(ceContext(activity,usageConfig)?.state!=="reservingNative") return false;
       return;
@@ -1077,8 +1124,8 @@ function registerActivityHooks() {
     if (!validActivityCE(actor, activity, usageConfig, { checkPool: setting("autoSpendCE") })) return false;
   });
   Hooks.on("dnd5e.postUseActivity", (activity) => {
-    const actor = activity?.actor;
-    if (isFullTurn(activity) && actor?.isOwner) spendFullTurn(actor);
+    const actor = activity?.actor??activity?.item?.actor;
+    if(actor?.isOwner)recordTurnActivity(activity);
   });
   Hooks.on("dnd5e.postUseActivity", async (activity, usageConfig, results) => {
     const actor = activity.actor ?? activity.item?.actor;
@@ -1097,6 +1144,7 @@ function registerActivityHooks() {
         ctx.postProcessed=true;
       }else if (!(await payActivityCE(actor, activity, usageConfig))) return;
     }
+    if(isFullTurn(activity)&&actor?.isOwner)await spendFullTurn(actor,activity);
     if(isQuickRecovery(activity)){
       if(!results || typeof results!=="object" || CE_RECOVERY_RESULTS.has(results)) return;
       CE_RECOVERY_RESULTS.add(results);
