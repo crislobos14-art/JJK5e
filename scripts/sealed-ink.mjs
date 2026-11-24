@@ -53,6 +53,66 @@ function stopParticles(root) {
   }
 }
 
+/** Read only existing summon links; never create a token or change its ownership. */
+function renderLinks(app, root, actor, sealed) {
+  root.querySelector(".jjk-sealed-links")?.remove();
+  if (!sealed || !actor?.isOwner) return;
+  const api = game.modules.get(ID)?.api;
+  const section = document.createElement("details");
+  section.className = "jjk-sealed-links";
+  section.open = true;
+  const heading = document.createElement("summary");
+  heading.textContent = actor.type === "npc" ? local("JJK entity controls", "Controles JJK de entidad") : local("Linked summons — current scene", "Invocaciones vinculadas — escena actual");
+  section.append(heading);
+  const button = (label, callback) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "always-interactive";
+    b.textContent = label;
+    b.addEventListener("click", event => {
+      event.preventDefault();
+      event.stopPropagation();
+      Promise.resolve().then(callback).catch(err => console.warn(ID + " | linked sheet", err));
+    });
+    return b;
+  };
+  if (actor.type === "npc") {
+    if (!api?.findPool?.(actor) && !actor.token?.flags?.jjk5e?.summonedBy && !actor.token?.flags?.dnd5e?.summon?.origin) return;
+    if (api?.openPanel) section.append(button(local("Open JJK controls", "Abrir controles JJK"), () => api.openPanel(actor)));
+  } else {
+    const items = new Set([...actor.items].map(item => item.uuid));
+    const tokens = [...(canvas?.scene?.tokens ?? [])].filter(token => {
+      const own = token.flags?.jjk5e?.summonedBy;
+      const origin = token.flags?.dnd5e?.summon?.origin ?? token.actor?.flags?.dnd5e?.summon?.origin;
+      return (own === actor.uuid || items.has(origin)) && token.actor &&
+        (game.user.isGM || (!token.hidden && token.actor.testUserPermission(game.user, "OBSERVER")));
+    });
+    if (!tokens.length) return;
+    for (const token of tokens) {
+      const row = document.createElement("div");
+      row.className = "jjk-sealed-link-row";
+      const info = document.createElement("span");
+      const hp = token.actor.system.attributes?.hp;
+      const ac = token.actor.system.attributes?.ac?.value;
+      info.textContent = token.name + " · HP " + (hp?.value ?? "—") + "/" + (hp?.max ?? "—") + " · AC " + (ac ?? "—");
+      row.append(info, button(local("Stats / sheet", "Stats / ficha"), () => token.actor.sheet.render({ force: true })));
+      if (token.actor.isOwner && token.object) row.append(button(local("Select token", "Seleccionar token"), () => token.object.control({ releaseOthers: true })));
+      section.append(row);
+    }
+  }
+  const anchor = root.querySelector(".sidebar .card .stats, .sidebar .card, .sidebar");
+  if (anchor) anchor.append(section);
+  else (root.querySelector(".sheet-header") ?? root.querySelector(".window-content"))?.after(section);
+}
+
+function refreshLinks() {
+  for (const [app, root] of live) {
+    if (!root.isConnected) { stopParticles(root); live.delete(app); continue; }
+    const actor = nativeActor(app);
+    if (actor) renderLinks(app, root, actor, root.classList.contains(ROOT));
+  }
+}
+
 function apply(app, element) {
   const root = rootOf(app, element);
   if (!root) return;
@@ -70,6 +130,7 @@ function apply(app, element) {
   const motion = preference("sheetMotion");
   root.classList.toggle(MOTION, (sealed || moduleWindow) && motion !== "off");
   root.dataset.jjkMotion = motion;
+  if (actor) renderLinks(app, root, actor, sealed);
 }
 
 function refresh() {
@@ -127,7 +188,7 @@ function visualEvent(event) {
   if (!root || !target.closest("button, a, [data-action], [role=button]")) return;
   if (target.closest(":disabled,[aria-disabled=true]")) return;
   // Native controls execute normally; this listener never cancels an event.
-  const kind = target.closest(".jjk-ce,.jjk-bar,[data-a=spend],[data-a=regain]") ? "energy" : "seal";
+  const kind = target.closest(".jjk-ce,.jjk-sc-ce,.jjk-bar,[data-a=spend],[data-a=regain]") ? "energy" : "seal";
   const rect = target.getBoundingClientRect();
   emit(root, event.detail ? event.clientX : rect.left + rect.width / 2,
     event.detail ? event.clientY : rect.top + rect.height / 2, kind,
@@ -173,6 +234,7 @@ Hooks.once("ready", () => {
     });
   }
   for (const hook of ["closeActorSheetV2", "closeApplicationV2", "closeSealedInkCharacterSheet", "closeSealedInkNPCSheet"]) Hooks.on(hook, close);
+  for (const hook of ["createToken", "updateToken", "deleteToken", "updateActor", "canvasReady"]) Hooks.on(hook, refreshLinks);
   document.addEventListener("click", visualEvent, { passive: true });
   document.addEventListener("pointermove", pointerEvent, { passive: true });
   document.addEventListener("visibilitychange", () => { if (document.hidden) stopParticles(); });
