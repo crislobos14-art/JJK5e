@@ -3402,7 +3402,7 @@ async function injectASIFeats(app, element) {
   if (!root || root.querySelector(".jjk5e-asi")) return;
   const actor = adv.actor;
   const docs = await jjkFeatDocs();
-  if (!docs.length) return;
+  if (!docs.length || !root.isConnected || root.querySelector(".jjk5e-asi")) return;
   const owned = new Set(actor.items.map((i) => normName(baseName(i))));
   const eligible = docs.filter((d) => d.system?.type?.value === "feat"
     && (!owned.has(normName(baseName(d))) || d.system?.prerequisites?.repeatable)
@@ -3425,22 +3425,31 @@ async function injectASIFeats(app, element) {
   const select = box.querySelector("[data-jjk-feat]");
   // The flow form submits (and re-renders, which resets this list) on every change: keep the change to ourselves.
   for (const type of ["change", "input"]) select.addEventListener(type, (ev) => ev.stopPropagation());
+  const takeButton = box.querySelector("[data-jjk-take]");
+  let busy = false;
   const take = async (ev) => {
     ev?.preventDefault?.(); ev?.stopPropagation?.();
     const uuid = select.value;
-    if (!uuid) return;
+    if (!uuid || busy || !box.isConnected) return;
+    busy = true;
+    takeButton.disabled = true;
     try {
       const item = await fromUuid(uuid);
-      const ok = item?.system?.assertPrerequisites?.(adv.actor, { showMessage: true }) ?? true;
+      if (!item || !featFitsTechnique(adv.actor, item) || missingPrereqs(adv.actor, item).length) return;
+      const alreadyOwned = adv.actor.items.some(i => normName(baseName(i)) === normName(baseName(item)));
+      if (alreadyOwned && !item.system?.prerequisites?.repeatable) return;
+      const ok = item.system?.assertPrerequisites?.(adv.actor, { showMessage: true }) ?? true;
       if (ok !== true) return;
       if (adv.value?.type) await adv.reverse(app.level);
       await adv.apply(app.level, { retainedItems: app.retainedData?.retainedItems, type: "feat", uuid });
       ui.notifications.info(t("ASI.Taken", { name: item?.name ?? "" }));
     } catch (err) { reportError("asi feat", err); }
+    finally { busy = false; takeButton.disabled = false; }
     app.render();
   };
-  select.addEventListener("change", take);
-  box.querySelector("[data-jjk-take]").addEventListener("click", take);
+  // In Sealed Ink a selection is a preview, not an implicit grant.
+  select.addEventListener("change", ev => { if (!box.closest(".jjk-sealed-surface")) take(ev); });
+  takeButton.addEventListener("click", take);
   const host = root.querySelector(".feat-section") ?? root.querySelector(".standard-form") ?? root.querySelector("form") ?? root.querySelector(".window-content") ?? root;
   host.append(box);
 }
