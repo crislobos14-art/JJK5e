@@ -156,10 +156,11 @@ test("Domain clash: 50 more refinement wins in 5 rounds; the loser shrinks 15 ft
   assert.equal(J.getDomain(b).clash.role, "loser");
   assert.equal(J.getDomain(b).clash.rounds, 5);
   assert.ok(J.sureHitBlocked(a) && J.sureHitBlocked(b), "no sure-hit during the clash");
-  for (let r = 2; r <= 5; r++) await env.combatRound(r);
+  const combat = { id: "C", sceneId: "S", combatants: [{ actor: a }, { actor: b }] };
+  for (let r = 2; r <= 5; r++) await env.combatRound(r, combat);
   assert.equal(J.getDomain(b).clash.rounds, 1);
   assert.equal(J.getDomain(b).radius, 175 - 60);
-  await env.combatRound(6);
+  await env.combatRound(6, combat);
   assert.equal(fx(b, "domain"), undefined, "loser's domain broken");
   assert.ok(fx(b, "burnout"), "loser burnt out");
   assert.equal(J.getDomain(a).clash.resolved, true, "winner's sure-hit resumes");
@@ -532,6 +533,25 @@ test("Domain reaction: stale expansion instance is rejected", async () => {
   await opener.setFlag("jjk5e", "domainState", {
     open: true, openingId: "new-expansion", sceneId: "S", lethal: true
   });
-  // Missing or expired opening identity must not resolve to a different expansion.
+  await actor.createEmbeddedDocuments("Item", [{ name: "Domain Expansion", type: "feat",
+    flags: { jjk5e: { domainActivity: "d" } }, system: { activities: { d: { id: "d" } } } }]);
+  await env.settle();
+  assert.equal(J.rivalDomainFor(actor, opener.uuid, "new-expansion"), opener);
   assert.equal(J.rivalDomainFor(actor, opener.uuid, "old-expansion"), null);
+});
+
+test("Domain clash: ticks are isolated by combat and do not repeat or run backwards", async () => {
+  const { env, a, b, J } = await clashPair(300, 250);
+  const combat = { id: "C", sceneId: "S", combatants: [{ actor: a }, { actor: b }, { actor: b }] };
+  await env.combatRound(2, { ...combat, id: "other", sceneId: "Other" });
+  assert.equal(J.getDomain(b).clash.rounds, 5);
+  await env.combatRound(2, { ...combat, id: "unrelated", combatants: [{ actor: a }] });
+  assert.equal(J.getDomain(b).clash.rounds, 5);
+  await env.combatRound(2, combat);
+  assert.equal(J.getDomain(b).clash.rounds, 4);
+  await env.combatRound(2, combat);
+  await env.combatRound(1, combat);
+  assert.equal(J.getDomain(b).clash.rounds, 4);
+  await env.combatRound(3, combat);
+  assert.equal(J.getDomain(b).clash.rounds, 3);
 });
