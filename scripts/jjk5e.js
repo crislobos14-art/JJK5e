@@ -958,6 +958,10 @@ const RO_ROWS = [
 
 function registerActivityHooks() {
   Hooks.on("dnd5e.preUseActivity", (activity, usageConfig) => {
+    if([...game.user?.targets??[]].some(tk=>barrierMarkerMeta(tk))){
+      ui.notifications.warn("JJK5e: use the barrier attack command for a selected barrier marker.");
+      return false;
+    }
     if (activity.item?.actor?.token?.flags?.jjk5e?.cloneOrigin && activity.item.flags?.jjk5e?.technique) {
       ui.notifications.warn(t("Notify.CloneNoTech"));
       return false;
@@ -3813,7 +3817,7 @@ Hooks.once("ready", () => {
   });
   installCEAdapters();
   registerMidiHooks();
-  Object.assign(game.modules.get(MODULE_ID).api??{}, {ceDiagnostics,reconcileCE,integrationReport,recoverCEWorld});
+  Object.assign(game.modules.get(MODULE_ID).api??{}, {ceDiagnostics,reconcileCE,integrationReport,recoverCEWorld,createBarrierMarker,attackSelectedBarrier});
   Hooks.on("userConnected",()=>recoverCEWorld().catch(err=>reportError("CE recovery",err)));
   Hooks.on("updateWorldTime",()=>recoverCEWorld().catch(err=>reportError("CE recovery",err)));
   setInterval(()=>recoverCEWorld().catch(err=>reportError("CE recovery",err)),30000);
@@ -5048,6 +5052,7 @@ async function domainClosed(actor) {
   if (!isActiveGM()) return;
   const state = getDomain(actor);
   if (!state) return;
+  await removeBarrierMarkers(actor.uuid,state.openingId);
   if (state.zone) await GM_EXTRA.domainZoneDelete({ sceneId: state.sceneId, zone: state.zone, actorUuid: actor.uuid, openingId: state.openingId });
   const window = actor.getFlag(MODULE_ID, "domainReactionWindow");
   const survivors = [];
@@ -5112,6 +5117,11 @@ async function damageBarrier(actor, amount, side = "outside", type = "") {
   state.hp = Math.max(0, state.hp - dmg);
   state.damageTaken = (state.damageTaken ?? 0) + dmg;
   await setDomain(actor, state);
+  for(const proxy of game.actors??[]){
+    const f=proxy.flags?.jjk5e?.barrierMarker;
+    if(f?.actorUuid===actor.uuid&&f.openingId===state.openingId)
+      await proxy.update({"system.attributes.hp.value":state.hp},{jjk5eBarrier:true});
+  }
   await chat(actor, `<p><i class="fas fa-shield-halved"></i> ${t("Domain.BarrierHit", { dmg, side: t(`Domain.Side.${side}`), hp: state.hp, max: state.max })}</p>`);
   if (state.hp <= 0) await closeDomainOf(actor, t("Domain.Shattered", { name: esc(actor.name) }));
   return state.hp;
@@ -5159,6 +5169,60 @@ async function attackBarrier(actor, seeker, data) {
   if (getDomain(actor)?.openingId !== data.openingId) return false;
   const hp = await damageBarrier(actor, Math.max(0, damage.total), geo.side, data.type);
   return { hit: true, hp };
+}
+function barrierMarkerMeta(token){
+  const doc=token?.document??token;
+  const f=doc?.flags?.jjk5e?.barrierMarker;
+  return f?.actorUuid&&f?.openingId?f:null;
+}
+async function createBarrierMarker(actor){
+  if(!isActiveGM()) return false;
+  return queueDomainWork(async()=>{
+    const state=getDomain(actor),scene=game.scenes.get(state?.sceneId);
+    if(!state?.open||state.noBarrier||!scene||!Number.isFinite(state.x)||!Number.isFinite(state.y)||!Number.isFinite(state.radius)) return false;
+    const meta={actorUuid:actor.uuid,openingId:state.openingId};
+    const existing=[...scene.tokens].find(t=>{const f=barrierMarkerMeta(t);return f?.actorUuid===meta.actorUuid&&f.openingId===meta.openingId;});
+    if(existing) return existing;
+    const ActorClass=docClass("Actor");
+    if(typeof ActorClass?.create!=="function"||typeof scene.createEmbeddedDocuments!=="function") return false;
+    const proxy=await ActorClass.create({name:`Barrier: ${actor.name}`,type:"npc",img:`${ICONS}/domain.svg`,
+      system:{attributes:{hp:{value:state.hp,max:state.max},ac:{calc:"flat",flat:state.ac}}},
+      flags:{jjk5e:{barrierMarker:meta}},ownership:{default:0}});
+    if(!proxy) return false;
+    try{
+      const size=Number(scene.grid?.size)||100,r=ftToPx(scene,state.radius);
+      const x=state.x+r-size/2,y=state.y-size/2;
+      const data={name:proxy.name,actorId:proxy.id,actorLink:true,x,y,width:1,height:1,
+        texture:{src:`${ICONS}/domain.svg`},flags:{jjk5e:{barrierMarker:meta}}};
+      if(state.levelId) data.level=state.levelId;
+      const [marker]=await scene.createEmbeddedDocuments("Token",[data]);
+      if(!marker) throw Error("No barrier marker created");
+      return marker;
+    }catch(err){
+      await safeDelete(proxy);
+      reportError("barrier marker",err);return false;
+    }
+  });
+}
+async function removeBarrierMarkers(actorUuid,openingId){
+  if(!isActiveGM()) return;
+  for(const scene of game.scenes??[]){
+    const ids=[...(scene.tokens??[])].filter(t=>{const f=barrierMarkerMeta(t);return f?.actorUuid===actorUuid&&f.openingId===openingId;}).map(t=>t.id);
+    if(ids.length) await scene.deleteEmbeddedDocuments("Token",ids);
+  }
+  for(const proxy of game.actors??[]){
+    const f=proxy.flags?.jjk5e?.barrierMarker;
+    if(f?.actorUuid===actorUuid&&f.openingId===openingId) await safeDelete(proxy);
+  }
+}
+async function attackSelectedBarrier(){
+  const targets=[...(game.user?.targets??[])];
+  if(targets.length!==1) return false;
+  const meta=barrierMarkerMeta(targets[0]);
+  if(!meta) return false;
+  const actor=await domainActor(meta.actorUuid),state=getDomain(actor);
+  if(!state?.open||state.openingId!==meta.openingId||state.noBarrier) return false;
+  return promptBarrierAttack(actor);
 }
 async function promptBarrierAttack(actor) {
   const tk = canvas?.tokens?.controlled?.[0];
@@ -5439,7 +5503,7 @@ function domainProfileTargets(actor, targets) {
   const state = getDomain(actor);
   if (!state?.open || state.incomplete || state.lethal === false || sureHitBlocked(actor)) return [];
   return [...new Map([...targets].filter((tk) => insideDomain(state,tk) && !domainWard(tk) &&
-    (tk?.actor ?? tk?.document?.actor)?.uuid).map((tk) => [(tk?.actor ?? tk?.document?.actor).uuid, tk])).values()];
+    (tk?.actor ?? tk?.document?.actor)?.uuid && !barrierMarkerMeta(tk)).map((tk) => [(tk?.actor ?? tk?.document?.actor).uuid, tk])).values()];
 }
 async function executeDomainProfile(actor, targets, requestId) {
   if (!isActiveGM() || typeof requestId !== "string" || requestId.length > 80) return false;
@@ -7934,7 +7998,7 @@ function clashCandidates(opener) {
     const a = tk.actor;
     const level = typeof tk.level === "string" ? tk.level : tk.level?.id;
     if (state.levelId && level !== state.levelId) continue;
-    if (!a || seen.has(a.uuid)) continue;
+    if (!a || a.flags?.jjk5e?.barrierMarker || seen.has(a.uuid)) continue;
     seen.add(a.uuid);
     if (!clashBlocker(a, opener)) out.push(a);
   }
