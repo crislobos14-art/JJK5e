@@ -205,13 +205,34 @@ function enhance(root, app) {
   enhanceFeats(root);
   enhanceItemChoices(root, app);
 }
-function watch(app, root, active) {
-  if (!active) { stopWatch(app); return; }
-  if (watches.get(app)?.root === root) { enhance(root, app); return; }
+function animateAddedRows(root, records) {
+  const profile = preference("sheetMotion");
+  if (profile === "off" || profile === "performance" || document.hidden ||
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches || root.classList.contains("minimized")) return;
+  const rows = new Set();
+  const selector = "tr,li.item,.jjk-sealed-feat-row";
+  for (const record of records) for (const node of record.addedNodes) {
+    if (!(node instanceof Element)) continue;
+    if (node.matches(selector)) rows.add(node);
+    for (const row of node.querySelectorAll(selector)) {
+      rows.add(row);
+      if (rows.size > 8) return; // do not cascade on bulk renders
+    }
+    if (rows.size > 8) return;
+  }
+  for (const row of rows) {
+    if (!row.isConnected || !row.getClientRects().length || typeof row.animate !== "function") continue;
+    row.animate([{ opacity: .55 }, { opacity: 1 }], { duration: profile === "cinematic" ? 240 : 150, easing: "ease-out" });
+  }
+}
+function watch(app, root, active, category) {
+  if (!active || typeof MutationObserver !== "function") { stopWatch(app); return; }
+  if (watches.get(app)?.root === root) { if (category === "progression") enhance(root, app); return; }
   stopWatch(app);
   const w = { root, frame: 0, observer: null };
-  w.observer = new MutationObserver(() => {
-    if (w.frame) return;
+  w.observer = new MutationObserver(records => {
+    animateAddedRows(root, records);
+    if (category !== "progression" || w.frame) return;
     w.frame = requestAnimationFrame(() => {
       w.frame = 0;
       if (!root.isConnected || !root.classList.contains(SURFACE)) { stopWatch(app); return; }
@@ -220,9 +241,8 @@ function watch(app, root, active) {
   });
   w.observer.observe(root, { childList: true, subtree: true });
   watches.set(app, w);
-  enhance(root, app);
+  if (category === "progression") enhance(root, app);
 }
-
 
 function nativeActor(app) {
   const actor = app.document ?? app.actor;
@@ -358,7 +378,7 @@ function apply(app, element) {
     for (const el of root.querySelectorAll(".jjk-sealed-choice-hidden")) el.classList.remove("jjk-sealed-choice-hidden");
     root.classList.remove("jjk-sealed-arrival");
   }
-  watch(app, root, surface && category === "progression");
+  watch(app, root, surface || sealed, category);
 }
 
 function refresh() {
