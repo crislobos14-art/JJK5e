@@ -131,7 +131,8 @@
     ]
   },
   "esmodules": [
-    "scripts/jjk5e.js"
+    "scripts/jjk5e.js",
+    "scripts/sealed-ink.mjs"
   ],
   "license": "LICENSE.txt",
   "readme": "README.md",
@@ -155,7 +156,8 @@
     }
   },
   "styles": [
-    "styles/jjk5e.css"
+    "styles/jjk5e.css",
+    "styles/sealed-ink.css"
   ],
   "languages": [
     {
