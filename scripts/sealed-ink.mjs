@@ -14,9 +14,9 @@ const preference = key => game.settings.get(ID, key);
 function nativeActor(app) {
   const actor = app.document ?? app.actor;
   if (!["character", "npc"].includes(actor?.type)) return null;
-  const native = game.dnd5e?.applications?.actor;
-  return [native?.CharacterActorSheet, native?.NPCActorSheet]
-    .some(cls => cls && app instanceof cls) ? actor : null;
+  const native = game.dnd5e?.applications?.actor ?? globalThis.dnd5e?.applications?.actor;
+  return (app.constructor.jjkSealedInk === true ||
+    [native?.CharacterActorSheet, native?.NPCActorSheet].some(cls => cls && app.constructor === cls)) ? actor : null;
 }
 
 /** Explicit alternative classes use native templates, permissions and actions. */
@@ -41,7 +41,7 @@ function registerSheets() {
 }
 
 function rootOf(app, element) {
-  const el = element instanceof HTMLElement ? element : element?.[0] ?? app.element;
+  const el = app.element instanceof HTMLElement ? app.element : (element instanceof HTMLElement ? element : element?.[0]);
   return el instanceof HTMLElement ? el : null;
 }
 
@@ -55,12 +55,14 @@ function stopParticles(root) {
 
 /** Read only existing summon links; never create a token or change its ownership. */
 function renderLinks(app, root, actor, sealed) {
-  root.querySelector(".jjk-sealed-links")?.remove();
+  const previous = root.querySelector(".jjk-sealed-links");
+  const expanded = previous?.open ?? true;
+  previous?.remove();
   if (!sealed || !actor?.isOwner) return;
   const api = game.modules.get(ID)?.api;
   const section = document.createElement("details");
   section.className = "jjk-sealed-links";
-  section.open = true;
+  section.open = expanded;
   const heading = document.createElement("summary");
   heading.textContent = actor.type === "npc" ? local("JJK entity controls", "Controles JJK de entidad") : local("Linked summons — current scene", "Invocaciones vinculadas — escena actual");
   section.append(heading);
@@ -154,7 +156,7 @@ function emit(root, x, y, kind, count) {
   if (mode === "off" || mode === "performance" || document.hidden ||
       window.matchMedia("(prefers-reduced-motion: reduce)").matches || !root.isConnected) return;
   const r = root.getBoundingClientRect();
-  if (r.width < 1 || r.height < 1 || root.classList.contains("minimized")) return;
+  if (r.width < 1 || r.height < 1 || root.classList.contains("minimized") || typeof Element.prototype.animate !== "function") return;
   const colors = { energy: "#ad98ff", seal: "#ce1032", paper: "#eee6d5" };
   const cap = mode === "cinematic" ? 72 : 32;
   for (let i = 0; i < count && particles.size < cap; i++) {
