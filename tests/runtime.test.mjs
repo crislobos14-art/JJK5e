@@ -1056,3 +1056,61 @@ test("CE receipt cannot authorize another actor's identically named activity",as
   await J.consumeWithCE(async()=>({item:[]}),act,usage,{});
   assert.equal(J.cePostAllowed({...act,actor:{uuid:"Actor.other"}},usage),false);
 });
+
+
+test("Simple Domain: independent shared HP, duplicate area event and overflow",async()=>{
+  const {actor,J}=await setup();
+  assert.equal(J.simpleDomainHP(actor),18);
+  const e=await J.setKindEffect(actor,"simpleDomainBarrier",{name:"Barrier",flags:{jjk5e:{hp:18,max:18,events:[]}}});
+  const first=await J.absorbSimpleDomain(e,10,"area-1");
+  assert.equal(first.hp,8);assert.equal(first.overflow,0);
+  assert.deepEqual(await J.absorbSimpleDomain(e,10,"area-1"),first);
+  const second=await J.absorbSimpleDomain(e,12,"area-2");
+  assert.equal(second.hp,0);assert.equal(second.overflow,4);assert.equal(e.disabled,true);
+  assert.deepEqual(await J.absorbSimpleDomain(e,12,"area-2"),second);
+  assert.equal(actor.system.attributes.hp.temp,0);
+});
+test("Simple Domain: geometry and movement invalidate shared protection",async()=>{
+  const {env,actor,J}=await setup();
+  const scene={id:"S",grid:{size:100,distance:5},tokens:[]};
+  env.game.scenes.set(scene.id,scene);
+  const source={uuid:"Scene.S.Token.A",actor,parent:scene,x:0,y:0,width:1,height:1};
+  const ally={uuid:"Scene.S.Token.B",actor:env.addActor({name:"Ally"}),parent:scene,x:100,y:0,width:1,height:1};
+  scene.tokens.push(source,ally);
+  await J.setKindEffect(actor,"simpleDomainBarrier",{name:"Barrier",flags:{jjk5e:{hp:18,max:18,events:[],originTokenUuid:source.uuid,x:50,y:50,levelId:null,elevation:0}}});
+  assert.ok(J.simpleDomainAt(ally));
+  ally.x=500;assert.equal(J.simpleDomainAt(ally),null);ally.x=100;
+  source.x=50;assert.equal(J.simpleDomainAt(ally),null);
+  await J.endMovedSimpleDomain(source,{x:50});
+  assert.equal(fx(actor,"simpleDomainBarrier"),undefined);
+});
+test("Falling Blossom offensive readiness is single-use and separate from defense",async()=>{
+  const {actor,J}=await setup();
+  const item={name:"Falling Blossom Emotion",flags:{jjk5e:{ceCosts:{off:4,def:5}}}};
+  await J.activateDomainProtection(actor,item,{id:"off"});
+  assert.ok(fx(actor,"fallingBlossomOffense"));
+  assert.equal(J.domainWard({actor}),null);
+  await J.activateDomainProtection(actor,item,{id:"def"});
+  assert.equal(J.domainWard({actor}),"Falling Blossom Emotion");
+  assert.equal(await J.claimFallingBlossomOffense(actor),true);
+  assert.equal(await J.claimFallingBlossomOffense(actor),false);
+  assert.equal(J.domainWard({actor}),"Falling Blossom Emotion");
+});
+test("Domain Amplification Maximum Output refinement boundaries",async()=>{
+  const {J}=await setup();
+  assert.equal(J.amplificationOutcome(600,1000,false),"immune");
+  assert.equal(J.amplificationOutcome(600,651,true),"normal");
+  assert.equal(J.amplificationOutcome(600,650,true),"resistant");
+  assert.equal(J.amplificationOutcome(600,550,true),"resistant");
+  assert.equal(J.amplificationOutcome(600,549,true),"immune");
+});
+test("Barrier marker: select current domain only, never pass through ordinary Midi targeting",async()=>{
+  const {env,actor,J}=await setup();
+  const marker={document:{flags:{jjk5e:{barrierMarker:{actorUuid:actor.uuid,openingId:"barrier1"}}}}};
+  env.game.user.targets.add(marker);
+  assert.equal(J.barrierMarkerMeta(marker).openingId,"barrier1");
+  assert.equal(J.midiDomainGuard({targets:new Set([marker])}),false);
+  assert.equal(await J.attackSelectedBarrier(),false);
+  await J.setDomain(actor,{open:true,openingId:"different",noBarrier:false});
+  assert.equal(await J.attackSelectedBarrier(),false);
+});
