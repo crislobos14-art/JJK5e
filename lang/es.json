@@ -1122,7 +1122,8 @@
       "Hint": "Se aplican como siempre el costo de EM del dominio, el burnout y el choque por refinamiento.",
       "Expand": "Expandir dominio (reacción)",
       "Decline": "Ahora no",
-      "NoDomain": "Este personaje no tiene Expansión de Dominio."
+      "NoDomain": "Este personaje no tiene Expansión de Dominio.",
+      "Expired": "Esta reacción de dominio ya no está disponible."
     }
   }
 }
