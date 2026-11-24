@@ -221,7 +221,7 @@ function animateAddedRows(root, records) {
     if (rows.size > 8) return;
   }
   for (const row of rows) {
-    if (!row.isConnected || !row.getClientRects().length || typeof row.animate !== "function") continue;
+    if (!row.isConnected || row.closest("." + SURFACE + ",." + ROOT) !== root || !row.getClientRects().length || typeof row.animate !== "function") continue;
     row.animate([{ opacity: .55 }, { opacity: 1 }], { duration: profile === "cinematic" ? 240 : 150, easing: "ease-out" });
   }
 }
