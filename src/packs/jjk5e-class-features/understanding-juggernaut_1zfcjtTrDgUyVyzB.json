@@ -1,0 +1,116 @@
+{
+ "_id": "1zfcjtTrDgUyVyzB",
+ "name": "Skilled Cursed Reinforcement",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/ce.svg",
+ "folder": null,
+ "system": {
+  "description": {
+   "value": "<p><em>Class Specific Understanding (Juggernaut, optional rule): 2 Breakthroughs, only one.</em></p><p>When you use Cursed Reinforcement, you can instead gain 10 temporary hit points per CE spent. You can do this a number of times equal to your proficiency bonus each day.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "Optional Rules",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": ""
+  },
+  "requirements": "Juggernaut, 2 Breakthroughs",
+  "activities": {
+   "qvLaikc7QVLUbe5s": {
+    "_id": "qvLaikc7QVLUbe5s",
+    "type": "heal",
+    "name": "Cursed Reinforcement: 10 temp HP per CE",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1",
+       "scaling": {}
+      }
+     ],
+     "scaling": {
+      "allowed": true,
+      "max": "max(1, max(@abilities.wis.mod, @abilities.cha.mod))"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "10",
+     "types": [
+      "temphp"
+     ],
+     "custom": {
+      "enabled": false,
+      "formula": ""
+     },
+     "scaling": {
+      "mode": "whole",
+      "formula": "10"
+     }
+    }
+   }
+  },
+  "uses": {
+   "max": "@prof",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
+    }
+   ]
+  }
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "classUnderstanding": "juggernaut",
+   "prereq": {
+    "classes": [
+     "juggernaut"
+    ],
+    "breakthroughs": 2
+   },
+   "ceCosts": {
+    "qvLaikc7QVLUbe5s": 1
+   },
+   "ceSteps": {
+    "qvLaikc7QVLUbe5s": 1
+   },
+   "automation": "automated",
+   "rev": "bf297ef95f"
+  }
+ },
+ "_key": "!items!1zfcjtTrDgUyVyzB"
+}

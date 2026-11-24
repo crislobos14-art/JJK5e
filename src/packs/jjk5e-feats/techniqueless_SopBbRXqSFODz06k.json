@@ -1,0 +1,40 @@
+{
+ "_id": "SopBbRXqSFODz06k",
+ "name": "Techniqueless",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/ce.svg",
+ "folder": null,
+ "system": {
+  "description": {
+   "value": "<p>If a player wants to play without an Innate Technique and does not wish to use New Shadow Style or Divergent Fist, they can instead gain a +2 Ability Score Increase AND Feat they meet the prerequisites for at 1st and 3rd level. A +3 ASI and Feat at 6th level and 11th, and +3 ASI and 2 Feats at 18th level. Do be warned, this will of course be generally weaker than having a technique.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "Optional Rules",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": ""
+  },
+  "requirements": "No Innate Technique (DM option)",
+  "activities": {},
+  "uses": {
+   "max": "",
+   "spent": 0,
+   "recovery": []
+  }
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "techniqueless": true,
+   "automationNotes": "On each 1st/3rd/6th/11th/18th level the module asks for the ASI points and the feat(s).",
+   "automation": "automated",
+   "rev": "24cf87e8eb"
+  }
+ },
+ "_key": "!items!SopBbRXqSFODz06k"
+}

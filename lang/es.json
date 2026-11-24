@@ -760,6 +760,275 @@
       "Create": "Crear técnica",
       "Created": "{name}: {n} rasgo(s) de técnica creados en el directorio de Objetos.",
       "NoPermission": "Necesitas permiso para crear objetos (pídeselo al GM)."
+    },
+    "Opt": {
+      "Title": "Reglas opcionales",
+      "Open": "Configurar",
+      "Intro": "Reglas opcionales del manual de JJK 5e. Todas están desactivadas hasta que las actives; las activas las automatiza el módulo.",
+      "All": "Todas",
+      "None": "Ninguna",
+      "Save": "Guardar",
+      "Saved": "JJK 5e: reglas opcionales guardadas.",
+      "Panel": "Reglas opcionales",
+      "Level": "nivel {n}",
+      "ASI": {
+        "Prompt": "Reparte {n} puntos (máximo 20 por característica).",
+        "TooMany": "Demasiados puntos: como máximo {n}."
+      },
+      "Action": {
+        "Charge": "Carga (+{n} al ataque)",
+        "ChargeHint": "+3 m en línea recta; solo 1 ataque este turno.",
+        "Coup": "Golpe de gracia",
+        "CoupDie": "— si falla, el objetivo muere.",
+        "CoupHint": "Ataca ahora; el objetivo salva con CD = daño.",
+        "CoupNone": "No hay ningún objetivo inconsciente seleccionado.",
+        "Distract": "Distraer",
+        "DistractCheck": "Prueba de concentración: CD {dc}.",
+        "DistractDC": "+1 a su CD de concentración hasta tu próximo turno.",
+        "DistractMax": "ya tiene +3 (máximo).",
+        "Sunder": "Romper objeto",
+        "SunderHint": "El daño que supera la Dureza baja sus PG; con la mitad o menos queda roto (−3); por debajo de 0 puedes destruirlo."
+      },
+      "Affinity": {
+        "Granted": "{name} gana Afinidad aumentada (Espíritu Maldito, nivel 10)."
+      },
+      "Called": {
+        "Crippled": "queda lisiado: tira en la tabla de extremidades.",
+        "NoEffect": "no basta para lisiarlo.",
+        "On": "El próximo ataque es un disparo dirigido (−5).",
+        "Off": "Disparo dirigido cancelado."
+      },
+      "Clash": {
+        "Done": "reduce el próximo daño en {n} (quedan {left} usos).",
+        "Effect": "El próximo daño que recibas se reduce en {n}.",
+        "NoUses": "No te quedan choques ({max} por descanso largo).",
+        "NoWeapon": "Necesitas un arma cuerpo a cuerpo.",
+        "Overflow": "el atacante recibe {n} si está a su alcance",
+        "Reduced": "choque −{n}"
+      },
+      "CritSave": {
+        "One": "1 natural en la salvación: daño crítico (×2)",
+        "Twenty": "20 natural en la salvación: sin daño"
+      },
+      "Death": {
+        "Confirm": "¿Convertir a <b>{name}</b> en espíritu maldito? (raza Espíritu Vengativo, pierde los rasgos de TMI, FUE/DES/CON/EM +2, las otras características mentales −4, 1 nivel de locura indefinida)",
+        "Done": "{name} vuelve como espíritu maldito. {n} rasgo(s) de TMI perdidos, +{pp} Puntos Profanos.",
+        "Feat": "Maldito al morir: dote de Energía Maldita o de Técnica Innata",
+        "Free": "{name} supera la salvación semanal: la locura termina.",
+        "Madness": "Locura indefinida {n}",
+        "MadnessHint": "Cada semana: salvación de Sabiduría CD 25. Fallo: +1 nivel; éxito: la locura termina.",
+        "Weekly": "Salvación semanal de locura (CD 25)"
+      },
+      "Evasion": {
+        "Damage": "de daño",
+        "Done": "{name} sacrifica {limb} ({n} de daño) y evita la ejecución.",
+        "Offer": "{name} puede usar Evasión de la ejecución (reacción).",
+        "Prompt": "¿Qué extremidad te arrancas en el punto de contacto?"
+      },
+      "Fight": {
+        "Done": "{name} lucha por su vida (agotamiento {n}/5 por esta regla).",
+        "Max": "Ya tienes 5 niveles de agotamiento por Luchar por tu vida.",
+        "NotDying": "Solo mientras haces salvaciones de muerte."
+      },
+      "Find": {
+        "Check": "Buscar un espíritu maldito (CD 20)",
+        "Create": "¿Crear en la escena un espíritu maldito de {label}?",
+        "None": "No encuentras ningún espíritu maldito."
+      },
+      "Money": {
+        "Amount": "Cantidad ($)",
+        "Item": "Objeto",
+        "Prompt": "¿Cómo ganas dinero esta semana?",
+        "Sell": "Vender",
+        "SellConfirm": "¿Vender {item} por {n}? El objeto se elimina.",
+        "Set": "Dinero",
+        "Special": "Empleo especial",
+        "Tool": "Vender herramienta maldita",
+        "Wage": "Salario mínimo",
+        "WageHint": "Pago semanal ($80–500, lo decide el GM):",
+        "Work": "Trabajar"
+      },
+      "ObjectSoul": {
+        "L1": "los ataques cuerpo a cuerpo ignoran el umbral y la reducción de daño de los objetos",
+        "L2": "daño máximo contra objetos; su CA cuenta 5 menos",
+        "L3": "ignoras las técnicas que endurecen objetos; vista ciega 9 m"
+      },
+      "Pure": {
+        "Permit": "Permiso de Barrera pura",
+        "Scene": "Barrera pura (escena)"
+      },
+      "Repeat": {
+        "Found": "{name} tiene {lesser} y {better}: el GM puede dejar que cambie {lesser} por otra dote.",
+        "Swap": "Cambiar la dote"
+      },
+      "Soul": {
+        "Disadvantage": "desventaja (sin Percepción del alma)"
+      },
+      "TakeHit": {
+        "Done": "{name} recibe el golpe por {ally}.",
+        "Doubled": "recibe el golpe: daño ×2",
+        "Effect": "Sufres el doble de daño del ataque que interceptaste."
+      },
+      "Totality": {
+        "Back": "Los shikigami caídos de {name} vuelven tras el descanso largo.",
+        "Dead": "este shikigami ha muerto y no se puede volver a invocar (sirve para la Totalidad).",
+        "Returns": "este shikigami cae; vuelve tras un descanso largo.",
+        "UntilRest": "Este shikigami vuelve tras un descanso largo."
+      },
+      "Tough": {
+        "Applied": "{name}: +{hp} PG, +{dmg} daño, +{dc} CD, +2 a dos características.",
+        "Effect": "Pruebas duras: quítalo al terminar la doma.",
+        "NoTarget": "Primero marca como objetivo al shikigami sin domar.",
+        "Removed": "{name} pierde las bonificaciones de Pruebas duras.",
+        "Toggle": "Pruebas duras (objetivo)"
+      },
+      "Understanding": {
+        "Have": "Solo una Comprensión específica de clase por personaje.",
+        "None": "Tu clase no tiene comprensión."
+      },
+      "Yearly": {
+        "ASI": "Mejora de característica",
+        "Feat": "Nueva dote",
+        "Max": "Progresión anual ya usada cuatro veces.",
+        "Prompt": "Progresión anual de {name} ({n}/4):"
+      },
+      "totalityAlt": {
+        "Name": "Alternativa a la Totalidad",
+        "Hint": "Los shikigami no mueren: los caídos vuelven tras un descanso largo en vez de perderse (sin Totalidad)."
+      },
+      "lessBlood": {
+        "Name": "Menos sangre",
+        "Hint": "Reduce el costo en puntos de golpe de Manipulación de Sangre y Rot (mínimo 1).",
+        "C1": "Costo normal",
+        "C05": "Mitad",
+        "C025": "Un cuarto"
+      },
+      "bloodConversion": {
+        "Name": "Conversión de sangre",
+        "Hint": "Con Producción de Sangre, la tirada d100 para despertar la TMI se hace con ventaja."
+      },
+      "mythicalAccuracy": {
+        "Name": "Precisión de la Bestia Mítica",
+        "Hint": "Liberación de Ámbar de la Bestia Mítica avanza una fase al inicio de cada turno del usuario."
+      },
+      "advantageStacking": {
+        "Name": "Ventaja acumulada",
+        "Hint": "Las tiradas de ataque con ventaja de varias fuentes reciben +1 por cada fuente extra (fuentes de Midi-QOL y JJK)."
+      },
+      "crunchyCrits": {
+        "Name": "Críticos contundentes",
+        "Hint": "Los críticos tiran los dados normales y duplican toda la tirada de daño, modificadores incluidos."
+      },
+      "criticalSaves": {
+        "Name": "Salvaciones críticas",
+        "Hint": "Un 1 natural en una salvación contra un efecto dañino duplica el daño; un 20 natural lo anula."
+      },
+      "callingShots": {
+        "Name": "Disparo dirigido",
+        "Hint": "−5 al ataque; si el daño supera el dado de golpe máximo del objetivo + su mod. de CON, se tira en la tabla de extremidades."
+      },
+      "fightForLife": {
+        "Name": "Luchar por tu vida",
+        "Hint": "Moribundo: ventaja en la siguiente salvación de muerte a cambio de 1 nivel de agotamiento (hasta 5)."
+      },
+      "takeTheHit": {
+        "Name": "Recibir el golpe",
+        "Hint": "Reacción: recibes un ataque dirigido a un aliado; sufres el doble de daño."
+      },
+      "weaponClash": {
+        "Name": "Choque",
+        "Hint": "Reacción: tira el daño de tu arma cuerpo a cuerpo y reduce el daño recibido en esa cantidad (usos = bon. de competencia por descanso largo; no psíquico)."
+      },
+      "flanking": {
+        "Name": "Flanquear",
+        "Hint": "Un aliado a 5 pies en el lado opuesto del objetivo da ventaja (o +2).",
+        "Coff": "Desactivado",
+        "Cadv": "Ventaja",
+        "Cplus2": "+2 al ataque"
+      },
+      "techniqueless": {
+        "Name": "Sin técnica",
+        "Hint": "La dote Sin técnica da mejora de característica + dote en los niveles 1, 3, 6, 11 y 18 (se pregunta al subir de nivel)."
+      },
+      "repetitiveAbilities": {
+        "Name": "Habilidades repetidas",
+        "Hint": "Si un rasgo duplica una dote (Expansión de Dominio / Dominio incompleto, Comprensión / Prodigio de la técnica inversa) el jugador puede cambiarla."
+      },
+      "featImprovement": {
+        "Name": "Mejora con dote",
+        "Hint": "Cada mejora de característica también otorga una dote."
+      },
+      "pureBarrier": {
+        "Name": "Barrera pura",
+        "Hint": "En una escena marcada como Barrera pura, los personajes con permiso lanzan Velo por 1 EM."
+      },
+      "executionEvasion": {
+        "Name": "Evasión de la ejecución",
+        "Hint": "Reacción a la Espada del Verdugo: pierdes una extremidad (daño irreducible) en vez de morir."
+      },
+      "soulChecks": {
+        "Name": "Pruebas de alma",
+        "Hint": "Las pruebas sobre almas usan tu nivel de Percepción del alma como bono; con desventaja si no tienes nivel."
+      },
+      "outputBurnout": {
+        "Name": "Agotamiento de salida",
+        "Hint": "El agotamiento de técnica también da 2 niveles temporales de Salida reducida."
+      },
+      "increasedAffinity": {
+        "Name": "Afinidad aumentada",
+        "Hint": "Los personajes Espíritu Maldito ganan Afinidad aumentada a nivel 10."
+      },
+      "sixEyesDependency": {
+        "Name": "Dependencia de los Seis Ojos",
+        "Hint": "Sin los Seis Ojos: Infinito cuesta 3 EM; Azul, Rojo, Teletransporte e Infinito ofensivo cuestan el doble; Púrpura +5 EM."
+      },
+      "increasedHP": {
+        "Name": "Puntos de golpe aumentados",
+        "Hint": "Los personajes toman el máximo de su dado de golpe en cada nivel."
+      },
+      "toughTrials": {
+        "Name": "Pruebas duras",
+        "Hint": "Botón del GM: shikigami sin domar con +10×VD PG, +2×VD daño, +½ VD a la CD y +2 a dos características. Quítalo al domarlo."
+      },
+      "additionalActions": {
+        "Name": "Acciones adicionales",
+        "Hint": "Distraer, Romper objeto, Golpe de gracia y Carga (objetos en Rasgos de clase JJK)."
+      },
+      "classUnderstanding": {
+        "Name": "Comprensiones específicas de clase",
+        "Hint": "Con 2 avances un personaje puede tomar la comprensión de su clase (solo una)."
+      },
+      "moneyRules": {
+        "Name": "Formas de ganar dinero",
+        "Hint": "Registro de dinero, trabajos semanales, empleo especial, pago de misiones y venta de herramientas malditas."
+      },
+      "yearlyProgression": {
+        "Name": "Progresión anual",
+        "Hint": "Botón del GM: mejora de característica (+2 / +1+1, máx. 20) o una dote, hasta cuatro veces."
+      },
+      "findCurse": {
+        "Name": "Encontrar un espíritu maldito",
+        "Hint": "1-2 horas buscando: CD 20 de Percepción/Investigación y luego d100 para el grado."
+      },
+      "cursedUponDeath": {
+        "Name": "Maldito al morir",
+        "Hint": "Botón del GM: convierte a un hechicero muerto sin energía maldita en espíritu maldito Vengativo."
+      },
+      "objectSoul": {
+        "Name": "Percepción del alma de objetos",
+        "Hint": "Registra los 3 niveles de Percepción del alma de objetos (nivel 3: vista ciega 9 m)."
+      }
+    },
+    "RCT": {
+      "Already": "{name} ya tiene la Técnica Maldita Inversa.",
+      "ByGM": "otorgada por el GM",
+      "Grant": "Otorgar TMI",
+      "Moment": "{name}: {why}. El GM puede otorgar la Técnica Maldita Inversa o dejar que tire (d100, 90+).",
+      "Nat20": "20 natural tras dos salvaciones de muerte falladas",
+      "OneHit": "de PG máximos a 0 de un solo golpe",
+      "Roll": "Tirar por la TMI (d100)",
+      "Unlocked": "¡{name} despierta la Técnica Maldita Inversa!",
+      "UnlockedHint": "Se añaden los rasgos de TMI y +1 avance (Comprensión despertada)."
     }
   }
 }

@@ -760,6 +760,275 @@
       "Create": "Create technique",
       "Created": "{name}: {n} technique feature(s) created in the Items directory.",
       "NoPermission": "You need permission to create items (ask the GM)."
+    },
+    "Opt": {
+      "Title": "Optional rules",
+      "Open": "Configure",
+      "Intro": "Optional rules from the JJK 5e manual. Each one is off until you enable it; enabled rules are automated by the module.",
+      "All": "All",
+      "None": "None",
+      "Save": "Save",
+      "Saved": "JJK 5e: optional rules saved.",
+      "Panel": "Optional rules",
+      "Level": "level {n}",
+      "ASI": {
+        "Prompt": "Distribute {n} points (max 20 per score).",
+        "TooMany": "Too many points: {n} at most."
+      },
+      "Action": {
+        "Charge": "Charge (+{n} attack)",
+        "ChargeHint": "+10 ft in a straight line; only 1 attack this turn.",
+        "Coup": "Coup de Grace",
+        "CoupDie": "— on a failure the target dies.",
+        "CoupHint": "Attack now; the target saves with DC = damage.",
+        "CoupNone": "No unconscious target selected.",
+        "Distract": "Distract",
+        "DistractCheck": "Concentration check: DC {dc}.",
+        "DistractDC": "+1 to its concentration DC until your next turn.",
+        "DistractMax": "already at +3 (maximum).",
+        "Sunder": "Sunder",
+        "SunderHint": "Damage beyond the item's Hardness reduces its HP; half HP or less = broken (−3); below 0 you may destroy it."
+      },
+      "Affinity": {
+        "Granted": "{name} gains Increased Affinity (Cursed Spirit, 10th level)."
+      },
+      "Called": {
+        "Crippled": "crippled — roll on the Limb Damage table.",
+        "NoEffect": "not enough to cripple.",
+        "On": "Next attack is a called shot (−5).",
+        "Off": "Called shot cancelled."
+      },
+      "Clash": {
+        "Done": "reduces the next damage by {n} ({left} uses left).",
+        "Effect": "The next damage you take is reduced by {n}.",
+        "NoUses": "No clashes left ({max} per long rest).",
+        "NoWeapon": "You need a melee weapon.",
+        "Overflow": "the attacker takes {n} if within range",
+        "Reduced": "clash −{n}"
+      },
+      "CritSave": {
+        "One": "natural 1 on the save: critical damage (×2)",
+        "Twenty": "natural 20 on the save: no damage"
+      },
+      "Death": {
+        "Confirm": "Turn <b>{name}</b> into a cursed spirit (race Vengeful Spirit, loses RCT features, STR/DEX/CON/CE +2, other mental scores −4, 1 level of indefinite madness)?",
+        "Done": "{name} rises as a cursed spirit. {n} RCT feature(s) lost, +{pp} Profane Points.",
+        "Feat": "Cursed Upon Death: Cursed Energy or Innate Technique feat",
+        "Free": "{name} passes the weekly save: the madness ends.",
+        "Madness": "Indefinite madness {n}",
+        "MadnessHint": "Each week: DC 25 Wisdom save. Failure: +1 level; success: the madness ends.",
+        "Weekly": "Weekly madness save (DC 25)"
+      },
+      "Evasion": {
+        "Damage": "damage",
+        "Done": "{name} sacrifices the {limb} ({n} damage) and escapes the execution.",
+        "Offer": "{name} can use Execution Evasion (reaction).",
+        "Prompt": "Which limb do you remove at the point of contact?"
+      },
+      "Fight": {
+        "Done": "{name} fights for their life (exhaustion {n}/5 from this rule).",
+        "Max": "Already 5 levels of exhaustion from Fight for your Life.",
+        "NotDying": "Only while making death saves."
+      },
+      "Find": {
+        "Check": "Search for a cursed spirit (DC 20)",
+        "Create": "Create a {label} cursed spirit on the scene?",
+        "None": "No cursed spirit found."
+      },
+      "Money": {
+        "Amount": "Amount ($)",
+        "Item": "Item",
+        "Prompt": "How do you earn money this week?",
+        "Sell": "Sell",
+        "SellConfirm": "Sell {item} for {n}? The item is removed.",
+        "Set": "Money",
+        "Special": "Special employment",
+        "Tool": "Sell a cursed tool",
+        "Wage": "Minimum wage",
+        "WageHint": "Weekly pay ($80–500, set by the GM):",
+        "Work": "Work"
+      },
+      "ObjectSoul": {
+        "L1": "melee attacks ignore damage thresholds and reduction of objects",
+        "L2": "maximum damage against objects; their AC counts as 5 lower",
+        "L3": "ignore techniques that harden objects; blindsight 30 ft"
+      },
+      "Pure": {
+        "Permit": "Pure Barrier permit",
+        "Scene": "Pure Barrier (scene)"
+      },
+      "Repeat": {
+        "Found": "{name} has {lesser} and {better}: the GM may let the player swap {lesser} for another feat.",
+        "Swap": "Swap the feat"
+      },
+      "Soul": {
+        "Disadvantage": "disadvantage (no Soul Awareness)"
+      },
+      "TakeHit": {
+        "Done": "{name} takes the hit for {ally}.",
+        "Doubled": "takes the hit: damage ×2",
+        "Effect": "You take double damage from the attack you intercepted."
+      },
+      "Totality": {
+        "Back": "{name}'s fallen shikigami return after the long rest.",
+        "Dead": "this shikigami is dead and cannot be summoned again (eligible for Totality).",
+        "Returns": "this shikigami falls; it returns after a long rest.",
+        "UntilRest": "This shikigami returns after a long rest."
+      },
+      "Tough": {
+        "Applied": "{name}: +{hp} HP, +{dmg} damage, +{dc} save DC, +2 to two abilities.",
+        "Effect": "Tough Trials: remove it when the taming ends.",
+        "NoTarget": "Target the untamed shikigami first.",
+        "Removed": "{name} loses the Tough Trials bonuses.",
+        "Toggle": "Tough Trials (target)"
+      },
+      "Understanding": {
+        "Have": "Only one Class Specific Understanding per character.",
+        "None": "No understanding for your class."
+      },
+      "Yearly": {
+        "ASI": "Ability Score Improvement",
+        "Feat": "New feat",
+        "Max": "Yearly Progression used four times.",
+        "Prompt": "Yearly Progression for {name} ({n}/4):"
+      },
+      "totalityAlt": {
+        "Name": "Totality Alternative",
+        "Hint": "Shikigami are not killed: fallen shikigami return on a long rest instead of being lost (no Totality)."
+      },
+      "lessBlood": {
+        "Name": "Less Blood",
+        "Hint": "Reduce the hit point costs of Blood Manipulation and Rot (minimum 1).",
+        "C1": "Normal cost",
+        "C05": "Half",
+        "C025": "Quarter"
+      },
+      "bloodConversion": {
+        "Name": "Blood Conversion",
+        "Hint": "Characters with Blood Production roll the RCT awakening d100 with advantage."
+      },
+      "mythicalAccuracy": {
+        "Name": "Mythical Beast Accuracy",
+        "Hint": "Mythical Beast Amber Release advances one stage at the start of each of the user's turns."
+      },
+      "advantageStacking": {
+        "Name": "Advantage Stacking",
+        "Hint": "Attack rolls with advantage from more than one source get +1 per extra source (sources reported by Midi-QOL and JJK)."
+      },
+      "crunchyCrits": {
+        "Name": "Crunchy Crits",
+        "Hint": "Critical hits roll the dice normally and double the whole damage roll, modifiers included."
+      },
+      "criticalSaves": {
+        "Name": "Critical Saves",
+        "Hint": "A natural 1 on a save against a damaging effect doubles the damage; a natural 20 negates it."
+      },
+      "callingShots": {
+        "Name": "Calling Shots",
+        "Hint": "−5 to the attack; if the damage exceeds the target's max hit die + CON modifier, roll on the Limb Damage table."
+      },
+      "fightForLife": {
+        "Name": "Fight for your Life",
+        "Hint": "While dying: advantage on the next death save for 1 level of exhaustion (up to 5 levels this way)."
+      },
+      "takeTheHit": {
+        "Name": "Take the Hit",
+        "Hint": "Reaction: take an attack aimed at an ally; you take twice the damage."
+      },
+      "weaponClash": {
+        "Name": "Clash",
+        "Hint": "Reaction: roll your melee weapon damage and reduce the incoming damage by that much (PB uses per long rest; no psychic)."
+      },
+      "flanking": {
+        "Name": "Flanking",
+        "Hint": "An ally within 5 ft on the opposite side of the target gives advantage (or +2).",
+        "Coff": "Off",
+        "Cadv": "Advantage",
+        "Cplus2": "+2 to attack"
+      },
+      "techniqueless": {
+        "Name": "Techniqueless",
+        "Hint": "The Techniqueless feat grants ASI + feat at levels 1, 3, 6, 11 and 18 (asked on level up)."
+      },
+      "repetitiveAbilities": {
+        "Name": "Repetitive Abilities",
+        "Hint": "When a feature duplicates a feat (Domain Expansion / Incomplete Domain, RT Understanding / RT Prodigy) the player may swap the feat."
+      },
+      "featImprovement": {
+        "Name": "Feat Improvement",
+        "Hint": "Every Ability Score Improvement also grants a feat."
+      },
+      "pureBarrier": {
+        "Name": "Pure Barrier",
+        "Hint": "In a scene marked as Pure Barrier, permitted characters cast Curtain for 1 CE."
+      },
+      "executionEvasion": {
+        "Name": "Execution Evasion",
+        "Hint": "Reaction to the Executioner's Sword: lose a limb (unreducible damage) instead of dying."
+      },
+      "soulChecks": {
+        "Name": "Soul Checks",
+        "Hint": "Checks about souls use your Soul Awareness level as the bonus; disadvantage without any level."
+      },
+      "outputBurnout": {
+        "Name": "Output Burnout",
+        "Hint": "Technique Burnout also gives 2 temporary levels of Reduced Output."
+      },
+      "increasedAffinity": {
+        "Name": "Increased Affinity",
+        "Hint": "Cursed Spirit characters gain Increased Affinity at 10th level."
+      },
+      "sixEyesDependency": {
+        "Name": "Six Eyes Dependency",
+        "Hint": "Without the Six Eyes: Infinity costs 3 CE; Lapse Blue, Reversal Red, Teleportation and Offensive Infinity cost double; Hollow Purple +5 CE."
+      },
+      "increasedHP": {
+        "Name": "Increased Hit Points",
+        "Hint": "Characters take the maximum of their hit die on every level up."
+      },
+      "toughTrials": {
+        "Name": "Tough Trials",
+        "Hint": "GM button: untamed shikigami get +10×CR HP, +2×CR damage, +½ CR save DC and +2 to two abilities. Remove it once tamed."
+      },
+      "additionalActions": {
+        "Name": "Additional Actions",
+        "Hint": "Distract, Sunder, Coup de Grace and Charge (items in JJK Class Features)."
+      },
+      "classUnderstanding": {
+        "Name": "Class Specific Understandings",
+        "Hint": "With 2 Breakthroughs a character can take the understanding of their class (only one)."
+      },
+      "moneyRules": {
+        "Name": "Ways to Make Money",
+        "Hint": "Money tracker, weekly jobs, special employment, mission pay and cursed tool sales."
+      },
+      "yearlyProgression": {
+        "Name": "Yearly Progression",
+        "Hint": "GM button: ASI (+2 / +1+1, max 20) or a feat, up to four times."
+      },
+      "findCurse": {
+        "Name": "Finding a Cursed Spirit",
+        "Hint": "1-2 hours searching: DC 20 Perception/Investigation, then d100 for the grade."
+      },
+      "cursedUponDeath": {
+        "Name": "Cursed Upon Death",
+        "Hint": "GM button: turn a sorcerer killed without cursed energy into a Vengeful cursed spirit."
+      },
+      "objectSoul": {
+        "Name": "Object Soul Awareness",
+        "Hint": "Track the 3 levels of Object Soul Awareness (level 3: blindsight 30 ft)."
+      }
+    },
+    "RCT": {
+      "Already": "{name} already has the Reverse Cursed Technique.",
+      "ByGM": "granted by the GM",
+      "Grant": "Grant RCT",
+      "Moment": "{name}: {why}. The GM can bestow the Reverse Cursed Technique or let them roll (d100, 90+).",
+      "Nat20": "natural 20 after two failed death saves",
+      "OneHit": "reduced from maximum HP to 0 in one hit",
+      "Roll": "Roll for RCT (d100)",
+      "Unlocked": "{name} awakens the Reverse Cursed Technique!",
+      "UnlockedHint": "RCT features added and +1 Breakthrough (Awakened Understanding)."
     }
   }
 }

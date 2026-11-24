@@ -1,0 +1,117 @@
+{
+ "_id": "zLCm1ZJeBMf7ftuT",
+ "name": "Distract",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/ce.svg",
+ "folder": null,
+ "system": {
+  "description": {
+   "value": "<p>If you take the Distract action, you can attempt to Distract a creature within 15 ft of you that can see or hear you. If they are concentrating on a technique or ability, they are forced to make a concentration check to maintain the ability. Even if they succeed, your distraction increases the DC of concentration checks they make by +1 until the beginning of your turn, so long as you remain within 15 feet and continue distracting. A single creature can only be affected by up to 3 DC increases as a result of creatures using this action.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "Optional Rules",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": ""
+  },
+  "requirements": "Additional Actions (DM option)",
+  "activities": {
+   "2CmAIvV3MczwlyKg": {
+    "_id": "2CmAIvV3MczwlyKg",
+    "type": "utility",
+    "name": "Distract (action)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "15",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "IUqHyska17k69yhv",
+      "onSave": false
+     }
+    ]
+   }
+  },
+  "uses": {
+   "max": "",
+   "spent": 0,
+   "recovery": []
+  }
+ },
+ "effects": [
+  {
+   "_id": "IUqHyska17k69yhv",
+   "name": "Distracted (+1 concentration DC)",
+   "img": "modules/jjk5e/icons/ce.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>+1 to the DC of concentration checks (max +3 from Distract) until the start of the distracter's turn.</p>",
+   "changes": [
+    {
+     "key": "system.attributes.concentration.bonuses.save",
+     "mode": 2,
+     "value": "-1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    },
+    "dae": {
+     "specialDuration": [
+      "turnStartSource"
+     ]
+    }
+   },
+   "_key": "!items.effects!zLCm1ZJeBMf7ftuT.IUqHyska17k69yhv"
+  }
+ ],
+ "flags": {
+  "jjk5e": {
+   "optAction": "distract",
+   "automation": "automated",
+   "rev": "13224893c6"
+  }
+ },
+ "_key": "!items!zLCm1ZJeBMf7ftuT"
+}

@@ -1,0 +1,98 @@
+{
+ "_id": "xFunSDizCLRJOM88",
+ "name": "Enhanced Creativity",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/ce.svg",
+ "folder": null,
+ "system": {
+  "description": {
+   "value": "<p><em>Class Specific Understanding (Strategist, optional rule): 2 Breakthroughs, only one.</em></p><p>You gain an additional two <em>Technique Creativity</em> options. You can reduce a technique's cost by 1 (min cost of 1) a number of times each day equal to your proficiency bonus.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "Optional Rules",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": ""
+  },
+  "requirements": "Strategist, 2 Breakthroughs",
+  "activities": {
+   "3IhKwxq48YQPOpid": {
+    "_id": "3IhKwxq48YQPOpid",
+    "type": "utility",
+    "name": "Reduce the next technique's cost by 1",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1",
+       "scaling": {}
+      }
+     ],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
+   }
+  },
+  "uses": {
+   "max": "@prof",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
+    }
+   ]
+  }
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "classUnderstanding": "strategist",
+   "prereq": {
+    "classes": [
+     "strategist"
+    ],
+    "breakthroughs": 2
+   },
+   "costMinusNext": [
+    "3IhKwxq48YQPOpid"
+   ],
+   "automationNotes": "Use it before a technique: its CE cost drops by 1 (min 1). The two extra Technique Creativity options are chosen by hand.",
+   "automation": "automated",
+   "rev": "e9c4257327"
+  }
+ },
+ "_key": "!items!xFunSDizCLRJOM88"
+}

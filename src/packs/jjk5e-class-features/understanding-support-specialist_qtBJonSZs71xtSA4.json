@@ -1,0 +1,177 @@
+{
+ "_id": "qtBJonSZs71xtSA4",
+ "name": "Positive Energy Master",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/ce.svg",
+ "folder": null,
+ "system": {
+  "description": {
+   "value": "<p><em>Class Specific Understanding (Support Specialist, optional rule): 2 Breakthroughs, only one.</em></p><p>You have unlocked a well of healing from deep within. You have a pool of healing separate from your RCT pool containing a number of hit points equal to twice your level. You can draw any number of healing from this pool as a bonus action to heal yourself. You can use this healing on another creature you touch at 5th level.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "Optional Rules",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": ""
+  },
+  "requirements": "Support Specialist, 2 Breakthroughs",
+  "activities": {
+   "ORaNGwFyaxzA9VXb": {
+    "_id": "ORaNGwFyaxzA9VXb",
+    "type": "heal",
+    "name": "Positive Energy: heal (1 HP per use)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1",
+       "scaling": {
+        "mode": "amount",
+        "formula": "1"
+       }
+      }
+     ],
+     "scaling": {
+      "allowed": true,
+      "max": "2 * @details.level"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "1",
+     "types": [
+      "healing"
+     ],
+     "custom": {
+      "enabled": false,
+      "formula": ""
+     },
+     "scaling": {
+      "mode": "whole",
+      "formula": "1"
+     }
+    }
+   },
+   "XRJp2ehrCPZGZxC2": {
+    "_id": "XRJp2ehrCPZGZxC2",
+    "type": "heal",
+    "name": "Positive Energy: heal a creature you touch (5th level)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1",
+       "scaling": {
+        "mode": "amount",
+        "formula": "1"
+       }
+      }
+     ],
+     "scaling": {
+      "allowed": true,
+      "max": "2 * @details.level"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "touch",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "1",
+     "types": [
+      "healing"
+     ],
+     "custom": {
+      "enabled": false,
+      "formula": ""
+     },
+     "scaling": {
+      "mode": "whole",
+      "formula": "1"
+     }
+    }
+   }
+  },
+  "uses": {
+   "max": "2 * @details.level",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
+    }
+   ]
+  }
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "classUnderstanding": "support-specialist",
+   "prereq": {
+    "classes": [
+     "support-specialist"
+    ],
+    "breakthroughs": 2
+   },
+   "automation": "automated",
+   "rev": "7853ee5667"
+  }
+ },
+ "_key": "!items!qtBJonSZs71xtSA4"
+}

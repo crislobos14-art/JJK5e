@@ -1,0 +1,47 @@
+{
+ "_id": "teAzeBqNFe3ReHTW",
+ "name": "Reliable Skill",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/ce.svg",
+ "folder": null,
+ "system": {
+  "description": {
+   "value": "<p><em>Class Specific Understanding (Scout, optional rule): 2 Breakthroughs, only one.</em></p><p>When you make a skill check that you are proficient with, you can treat any roll of a 9 or lower as a 10.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "Optional Rules",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": ""
+  },
+  "requirements": "Scout, 2 Breakthroughs",
+  "activities": {},
+  "uses": {
+   "max": "",
+   "spent": 0,
+   "recovery": []
+  }
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "classUnderstanding": "scout",
+   "prereq": {
+    "classes": [
+     "scout"
+    ],
+    "breakthroughs": 2
+   },
+   "reliableSkill": true,
+   "automationNotes": "Proficient skill checks: d20 results of 9 or lower count as 10.",
+   "automation": "automated",
+   "rev": "1671f6d397"
+  }
+ },
+ "_key": "!items!teAzeBqNFe3ReHTW"
+}

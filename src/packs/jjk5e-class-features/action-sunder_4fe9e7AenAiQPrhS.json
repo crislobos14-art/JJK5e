@@ -1,0 +1,79 @@
+{
+ "_id": "4fe9e7AenAiQPrhS",
+ "name": "Sunder",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/ce.svg",
+ "folder": null,
+ "system": {
+  "description": {
+   "value": "<p>You can attempt to sunder an item held or worn by your opponent as part of an attack action in place of a melee attack. Attempting to sunder an item provokes an attack of opportunity from the target.</p><p>If your attack is successful, you deal damage to the item normally. Damage that exceeds the object's Hardness is subtracted from its hit points. If an object has equal to or less than half its total hit points remaining, it gains the broken condition (becomes -3 item). If the damage you deal would reduce the object to less than 0 hit points, you can choose to destroy it. If you do not choose to destroy it, the object is left with only 1 hit point and the broken condition.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "Optional Rules",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": ""
+  },
+  "requirements": "Additional Actions (DM option)",
+  "activities": {
+   "fqpBEXirvYSPM3Cv": {
+    "_id": "fqpBEXirvYSPM3Cv",
+    "type": "utility",
+    "name": "Sunder an item (replaces a melee attack)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": []
+   }
+  },
+  "uses": {
+   "max": "",
+   "spent": 0,
+   "recovery": []
+  }
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "optAction": "sunder",
+   "automation": "partial",
+   "rev": "dd9b89d136"
+  }
+ },
+ "_key": "!items!4fe9e7AenAiQPrhS"
+}

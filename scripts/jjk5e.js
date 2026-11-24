@@ -398,6 +398,7 @@ function activityCost(activity) {
       && actor.items.some((i) => i.effects?.some((e) => e.flags?.jjk5e?.refinedCostHalf && !e.disabled))) {
     base = Math.ceil(base / 2);
   }
+  base = optionalCost(activity, base, actor);
   return circuitCost(activity, base);
 }
 
@@ -868,6 +869,12 @@ function missingPrereqs(actor, item) {
     const score = Number(actor.system.abilities?.[ceAbility(actor)]?.value) || 0;
     if (score < pre.ceScore) missing.push(t("Feats.CEScore", { need: pre.ceScore, have: score }));
   }
+  if (pre.classes?.length && !actor.items.some((i) => i.type === "class" && pre.classes.includes(i.system?.identifier))) {
+    missing.push(pre.classes.join(t("Feats.Or")));
+  }
+  if (item.flags?.jjk5e?.classUnderstanding && actor.items.some((i) => i.flags?.jjk5e?.classUnderstanding && i.id !== item.id)) {
+    missing.push(t("Opt.Understanding.Have"));
+  }
   if (pre.level && characterLevel(actor) < pre.level) missing.push(t("Feats.Level", { need: pre.level }));
   if (pre.breakthroughs) {
     const have = Number(actor.getFlag(MODULE_ID, "breakthroughs")) || 0;
@@ -876,7 +883,7 @@ function missingPrereqs(actor, item) {
   const pp = Number(item.flags?.jjk5e?.profaneCost) || 0;
   if (pp) {
     const used = actor.items.reduce((s, i) => s + (Number(i.flags?.jjk5e?.profaneCost) || 0), 0);
-    const budget = characterLevel(actor);
+    const budget = characterLevel(actor) + (Number(actor.getFlag?.(MODULE_ID, "profaneBonus")) || 0);
     if (used + pp > budget) missing.push(t("Feats.Profane", { need: pp, have: budget - used }));
   }
   if (pre.refinement) {
@@ -1379,10 +1386,12 @@ function addPart(config, part) {
 function onPreRollAttack(config) {
   const actor = config?.subject?.actor ?? config?.subject?.item?.actor;
   if (!actor) return;
-  if (setting("zoneAdvantage") && zoneEffect(actor) && !zoneEffect(actor).disabled) config.advantage = true;
+  const outer = !!config.advantage;
+  let sources = 0;
+  if (setting("zoneAdvantage") && zoneEffect(actor) && !zoneEffect(actor).disabled) { config.advantage = true; sources++; }
   const melee = (config?.subject?.attack?.type?.value ?? config?.subject?.actionType) === "melee"
     || ["mwak", "msak"].includes(config?.subject?.actionType);
-  if (melee && activeGroups(actor).includes("reckless")) config.advantage = true;
+  if (melee && activeGroups(actor).includes("reckless")) { config.advantage = true; sources++; }
   if (config?.subject?.item?.flags?.jjk5e?.rawCE && traitChoice(actor, "ceTrait") === "rough") addPart(config, "1");
   // Lance: disadvantage against a target within 5 ft.
   if (config?.subject?.item?.flags?.jjk5e?.closeDisadvantage) {
@@ -1390,7 +1399,10 @@ function onPreRollAttack(config) {
     if (me && [...(game.user?.targets ?? [])].some((t) => tokenDistance(me, t) <= 5)) config.disadvantage = true;
   }
   // Incomplete Domain: advantage on technique attack rolls while it is open.
-  if (config?.subject?.item?.flags?.jjk5e?.technique && getDomain(actor)?.incomplete && domainOpen(actor)) config.advantage = true;
+  if (config?.subject?.item?.flags?.jjk5e?.technique && getDomain(actor)?.incomplete && domainOpen(actor)) { config.advantage = true; sources++; }
+  config.jjkOuterAdvantage = outer;
+  optionalAttack(config, actor, sources);
+  delete config.jjkOuterAdvantage;
   applySureHit(actor, config);
 }
 
@@ -1425,6 +1437,7 @@ function rawCEDamageBonus(actor) {
 
 function onPreRollDamage(config) {
   const actor = config?.subject?.actor ?? config?.subject?.item?.actor;
+  crunchyCrit(config, actor);
   if (actor && config?.subject?.item?.flags?.jjk5e?.rawCE) rawCEDamageBonus(actor).forEach((p) => addPart(config, p));
   if (!setting("blackFlashDamage")) return;
   const pending = actor?.getFlag?.(MODULE_ID, "pendingBlackFlash");
@@ -1739,6 +1752,9 @@ async function summon(actor, name, count = 1) {
   if (!actor) return;
   if (!name) return ui.notifications.warn(t("Summon.NeedName"));
   if (!canvas?.scene) return ui.notifications.warn(t("Notify.NoScene"));
+  if (fallen(actor).includes(String(name).trim().toLowerCase()) && !game.user.isGM) {
+    return ui.notifications.warn(t(optOn("totalityAlt") ? "Opt.Totality.UntilRest" : "Opt.Totality.Dead"));
+  }
   return viaGM("summon", { actorUuid: actor.uuid, name, count: clamp(Number(count) || 1, 1, 20), userId: game.user.id, sceneId: canvas.scene.id });
 }
 
@@ -1951,7 +1967,7 @@ function panelHTML(actor, tab = "combat") {
       <div class="jjk-head-btns">${pbtn("help", "fas fa-keyboard", "", { key: "?", tip: t("Panel.Shortcuts") })}</div>
     </header>
     ${tabs}
-    <div class="jjk-tab-body">${{ combat, body, summon: summonTab, tools, gm: gmTab }[tab] ?? combat}</div>
+    <div class="jjk-tab-body">${{ combat, body, summon: summonTab, tools, gm: gmTab }[tab] ?? combat}${optionalPanel(actor, tab)}</div>
   </section>`;
 }
 
@@ -3934,6 +3950,7 @@ async function resolveMission(actor, id, result) {
   let note = t(result === "pass" ? "Career.LogDone" : "Career.LogFailed", { title: m.title });
   if (result === "pass") note += ` (${fmtMoney(m.reward)})`;
   await saveCareer(actor, c, note);
+  if (result === "pass" && optOn("moneyRules")) await addMoney(actor, m.reward, m.title);
   await chat(actor, `<p><i class="fas fa-scroll"></i> ${esc(note)}</p>`);
 }
 
@@ -4967,11 +4984,17 @@ async function addBreakthrough(actor, n = 1, reason = "") {
 async function rollRCTAwakening(actor) {
   actor = requireActor(actor);
   if (!actor) return null;
-  const roll = await new Roll("1d100").evaluate();
+  if (hasRCT(actor) || actor.getFlag(MODULE_ID, "rctUnlocked")) {
+    ui.notifications.info(t("RCT.Already", { name: actor.name }));
+    return null;
+  }
+  // Blood Conversion (optional rule): Blood Production gives advantage on the roll.
+  const adv = rctAdvantage(actor);
+  const roll = await new Roll(adv ? "2d100kh" : "1d100").evaluate();
   const ok = roll.total >= 90;
   await roll.toMessage({ speaker: docClass("ChatMessage").getSpeaker({ actor }),
-    flavor: `<strong>${t("Breakthrough.RCTRoll")}</strong> — ${ok ? t("Breakthrough.RCTYes") : t("Breakthrough.RCTNo")}` });
-  if (ok) await addBreakthrough(actor, 1, t("Breakthrough.RCT"));
+    flavor: `<strong>${t("Breakthrough.RCTRoll")}</strong>${adv ? ` (${t("Opt.bloodConversion.Name")})` : ""} — ${ok ? t("Breakthrough.RCTYes") : t("Breakthrough.RCTNo")}` });
+  if (ok) await unlockRCT(actor, t("Breakthrough.RCTRoll"));
   return ok;
 }
 
@@ -5495,4 +5518,992 @@ Hooks.once("setup", () => {
     patched._jjk5e = true;
     Object.defineProperty(proto, "requiresSpellSlot", { ...desc, get: patched });
   } catch (err) { console.error(`${MODULE_ID} | technique spell slots`, err); }
+});
+
+/* ============================================================================================ */
+/*  v1.68 — Optional Rules of the manual, RCT awakening, Class Specific Understandings           */
+/* ============================================================================================ */
+
+/** [key, default, choices?]. Every rule is off until the GM enables it in "Optional rules". */
+const OPT_RULES = [
+  ["totalityAlt", false], ["lessBlood", "1", ["1", "0.5", "0.25"]], ["bloodConversion", false], ["mythicalAccuracy", false],
+  ["advantageStacking", false], ["crunchyCrits", false], ["criticalSaves", false], ["callingShots", false],
+  ["fightForLife", false], ["takeTheHit", false], ["weaponClash", false], ["flanking", "off", ["off", "adv", "plus2"]],
+  ["techniqueless", false], ["repetitiveAbilities", false], ["featImprovement", false], ["pureBarrier", false],
+  ["executionEvasion", false], ["soulChecks", false], ["outputBurnout", false], ["increasedAffinity", false],
+  ["sixEyesDependency", false], ["increasedHP", false], ["toughTrials", false], ["additionalActions", false],
+  ["classUnderstanding", false], ["moneyRules", false], ["yearlyProgression", false], ["findCurse", true],
+  ["cursedUponDeath", true], ["objectSoul", true]
+];
+
+function opt(key) {
+  const def = OPT_RULES.find((r) => r[0] === key);
+  let store = {};
+  try { store = game.settings.get(MODULE_ID, "optionalRules") ?? {}; } catch (err) { /* not registered yet */ }
+  return store?.[key] ?? def?.[1];
+}
+const optOn = (key) => { const v = opt(key); return v === true || (typeof v === "string" && !["off", "1", ""].includes(v)); };
+
+function makeOptMenuClass() {
+  const Base = foundry.applications.api.ApplicationV2;
+  return class JJKOptionalRules extends Base {
+    static DEFAULT_OPTIONS = {
+      id: "jjk5e-optional-rules", classes: ["jjk5e-ui", "jjk5e-dialog", "jjk5e-optrules"],
+      window: { icon: "fas fa-scroll", resizable: true, title: "JJK5E.Opt.Title" }, position: { width: 620, height: 680 },
+      actions: {
+        save: async function () { await saveOptionalRules(this.element); this.close(); },
+        all: function (ev, el) { for (const c of this.element?.querySelectorAll?.("input[type=checkbox]") ?? []) c.checked = el.dataset.v === "1"; }
+      }
+    };
+    async _renderHTML() { return optionalRulesHTML(); }
+    _replaceHTML(result, content) { content.innerHTML = result; }
+  };
+}
+
+function optionalRulesHTML() {
+  const rows = OPT_RULES.map(([key, def, choices]) => {
+    const v = opt(key);
+    const ctl = choices
+      ? `<select name="${key}">${choices.map((c) => `<option value="${c}" ${String(v) === c ? "selected" : ""}>${t(`Opt.${key}.C${c.replace(".", "")}`)}</option>`).join("")}</select>`
+      : `<input type="checkbox" name="${key}" ${v ? "checked" : ""}>`;
+    return `<label class="jjk-opt"><span class="jjk-opt-ctl">${ctl}</span><span><strong>${t(`Opt.${key}.Name`)}</strong>
+      <small>${t(`Opt.${key}.Hint`)}</small></span></label>`;
+  }).join("");
+  return `<section class="jjk-panel jjk-optrules"><p class="jjk-note">${t("Opt.Intro")}</p>
+    <div class="btns"><button type="button" data-action="all" data-v="1">${t("Opt.All")}</button>
+      <button type="button" data-action="all" data-v="0">${t("Opt.None")}</button></div>
+    <div class="jjk-opt-list">${rows}</div>
+    <footer class="btns"><button type="button" class="jjk-primary" data-action="save"><i class="fas fa-save"></i> ${t("Opt.Save")}</button></footer></section>`;
+}
+
+async function saveOptionalRules(root) {
+  if (!game.user.isGM) return;
+  const out = {};
+  for (const [key, , choices] of OPT_RULES) {
+    const el = root?.querySelector?.(`[name="${key}"]`);
+    if (!el) continue;
+    out[key] = choices ? el.value : !!el.checked;
+  }
+  await game.settings.set(MODULE_ID, "optionalRules", out);
+  ui.notifications.info(t("Opt.Saved"));
+  for (const a of game.actors ?? []) refreshPanels(a);
+}
+
+let JJKOptMenuClass = null;
+function openOptionalRules() {
+  if (!game.user.isGM) return ui.notifications.warn(t("Notify.GMOnly"));
+  JJKOptMenuClass ??= makeOptMenuClass();
+  return new JJKOptMenuClass().render({ force: true });
+}
+
+const optTarget = () => [...(game.user?.targets ?? [])][0]?.actor ?? null;
+const sceneOf = (actor) => actor?.token?.parent ?? globalThis.canvas?.scene ?? null;
+const hasItem = (actor, re) => !!actor?.items?.some?.((i) => re.test(baseName(i)));
+const findItemByName = (actor, name) => actor?.items?.find?.((i) => baseName(i) === name);
+
+/** Index entry lookup by English name (works with translated world copies). */
+async function packDocByName(packName, name) {
+  const pack = jjkPack(packName);
+  if (!pack?.getIndex) return null;
+  const index = await pack.getIndex({ fields: ["flags.jjk5e.originalName"] });
+  const entry = [...(index ?? [])].find((e) => (e.flags?.jjk5e?.originalName ?? e.name) === name);
+  return entry ? pack.getDocument(entry._id) : null;
+}
+async function grantByName(actor, packName, name) {
+  if (findItemByName(actor, name)) return null;
+  const doc = await packDocByName(packName, name);
+  if (!doc) return null;
+  const data = game.items?.fromCompendium ? game.items.fromCompendium(doc) : doc.toObject();
+  return (await actor.createEmbeddedDocuments("Item", [data]))?.[0] ?? null;
+}
+
+/* ---- CE costs: Pure Barrier, Six Eyes Dependency, Enhanced Creativity ---- */
+
+function optionalCost(activity, base, actor) {
+  if (!actor || !(base > 0)) return base;
+  const item = activity?.item;
+  const name = baseName(item);
+  if (optOn("pureBarrier") && name === "Curtain" && actor.getFlag?.(MODULE_ID, "pureBarrierPermit")
+    && sceneOf(actor)?.getFlag?.(MODULE_ID, "pureBarrier")) return 1;
+  if (optOn("sixEyesDependency") && !hasItem(actor, /^Six Eyes/)) {
+    if (/Hollow Purple/i.test(`${name} ${activity?.name ?? ""}`)) base += 5;
+    else if (item?.flags?.jjk5e?.technique === "Limitless") {
+      if (name === "Infinity") base = Math.max(base, 3);
+      else if (["Lapse Blue", "Reversal Red", "Teleportation", "Offensive Infinity"].includes(name)) base *= 2;
+    }
+  }
+  if (item?.flags?.jjk5e?.technique && actor.getFlag?.(MODULE_ID, "costMinusNext")) base = Math.max(1, base - 1);
+  return base;
+}
+
+/* ---- RCT awakening ---- */
+
+const hasRCT = (actor) => hasItem(actor, /^Reverse Cursed Technique( \(Healing Pool\))?$/);
+
+/** Awaken the Reverse Cursed Technique: grant its features and 1 Breakthrough (Awakened Understanding). */
+async function unlockRCT(actor, reason = "") {
+  actor = requireActor(actor);
+  if (!actor?.isOwner) return false;
+  if (hasRCT(actor) || actor.getFlag(MODULE_ID, "rctUnlocked")) {
+    ui.notifications.info(t("RCT.Already", { name: actor.name }));
+    return false;
+  }
+  for (const n of ["Reverse Cursed Technique", "Reverse Cursed Technique (Healing Pool)"]) await grantByName(actor, "jjk5e-class-features", n);
+  await actor.setFlag(MODULE_ID, "rctUnlocked", true);
+  await chat(actor, `<p><i class="fas fa-heart-pulse"></i> <strong>${t("RCT.Unlocked", { name: esc(actor.name) })}</strong>`
+    + `${reason ? ` <em>(${esc(reason)})</em>` : ""}</p><p>${t("RCT.UnlockedHint")}</p>`);
+  await addBreakthrough(actor, 1, t("Breakthrough.RCT"));
+  return true;
+}
+
+/** GM card: a near-death moment where the GM can bestow RCT or let the player roll for it. */
+async function rctMoment(actor, why) {
+  if (!isActiveGM() || hasRCT(actor) || actor.getFlag(MODULE_ID, "rctUnlocked")) return;
+  const gms = game.users.filter((u) => u.isGM).map((u) => u.id);
+  await docClass("ChatMessage").create({ whisper: gms, speaker: { alias: "JJK 5e" },
+    content: `<p><i class="fas fa-heart-pulse"></i> ${t("RCT.Moment", { name: esc(actor.name), why: esc(why) })}</p>
+      <div class="jjk-card-btns"><button type="button" data-jjk5e-rct="${esc(actor.uuid)}" data-mode="grant">${t("RCT.Grant")}</button>
+      <button type="button" data-jjk5e-rct="${esc(actor.uuid)}" data-mode="roll">${t("RCT.Roll")}</button></div>` });
+}
+
+const rctAdvantage = (actor) => optOn("bloodConversion") && hasItem(actor, /^Blood Production$/);
+
+/* ---- Burnout → Reduced Output, death saves, near-death ---- */
+
+const isBurnoutFx = (e) => !!(e?.flags?.jjk5e?.kind === "burnout" || e?.flags?.jjk5e?.burnout);
+
+async function fightForLife(actor) {
+  actor = requireActor(actor);
+  if (!actor?.isOwner) return;
+  if ((Number(actor.system.attributes?.hp?.value) || 0) > 0) return ui.notifications.warn(t("Opt.Fight.NotDying"));
+  const used = Number(actor.getFlag(MODULE_ID, "fightExhaustion")) || 0;
+  if (used >= 5) return ui.notifications.warn(t("Opt.Fight.Max"));
+  const cur = Number(actor.system.attributes?.exhaustion) || 0;
+  await actor.update({ "system.attributes.exhaustion": Math.min(6, cur + 1) });
+  await actor.setFlag(MODULE_ID, "fightExhaustion", used + 1);
+  await chat(actor, `<p><strong>${t("Opt.fightForLife.Name")}</strong>: ${t("Opt.Fight.Done", { name: esc(actor.name), n: used + 1 })}</p>`);
+  if (typeof actor.rollDeathSave === "function") return actor.rollDeathSave({ advantage: true });
+}
+
+/* ---- Damage modifiers (Critical Saves, Take the Hit, Clash) ---- */
+
+const SAVE_NATURALS = new Map();
+function naturalD20(roll) {
+  const r = Array.isArray(roll) ? roll[0] : roll;
+  const die = r?.d20 ?? r?.dice?.find?.((d) => d.faces === 20);
+  const n = Number(die?.total);
+  return Number.isFinite(n) ? n : null;
+}
+function recordSaveNatural(actor, roll) {
+  if (!optOn("criticalSaves") || !actor?.uuid) return;
+  const nat = naturalD20(roll);
+  if (nat === 1 || nat === 20) SAVE_NATURALS.set(actor.uuid, { nat, at: Date.now() });
+  else SAVE_NATURALS.delete(actor.uuid);
+}
+
+/** dnd5e.preCalculateDamage: every damage application (Midi or the chat card) passes here. */
+function optionalDamage(actor, damages, options) {
+  if (!actor || !Array.isArray(damages) || options?.isHealing) return;
+  const harmful = damages.filter((d) => !["healing", "temphp"].includes(d.type) && Number(d.value) > 0);
+  if (!harmful.length) return;
+  const notes = [];
+  const sv = SAVE_NATURALS.get(actor.uuid);
+  if (sv && optOn("criticalSaves") && Date.now() - sv.at < 30000) {
+    SAVE_NATURALS.delete(actor.uuid);
+    for (const d of harmful) d.value = sv.nat === 20 ? 0 : Number(d.value) * 2;
+    notes.push(t(sv.nat === 20 ? "Opt.CritSave.Twenty" : "Opt.CritSave.One"));
+  }
+  const take = kindEffect(actor, "takeHit");
+  if (take) {
+    for (const d of harmful) d.value = Number(d.value) * 2;
+    notes.push(t("Opt.TakeHit.Doubled"));
+    if (actor.isOwner) setTimeout(() => safeDelete(take), 0);
+  }
+  const clash = kindEffect(actor, "weaponClash");
+  if (clash) {
+    let pool = Number(clash.flags?.jjk5e?.clashTotal) || 0;
+    const psychicOK = !!clash.flags?.jjk5e?.psychic;
+    for (const d of harmful) {
+      if (d.type === "psychic" && !psychicOK) continue;
+      const cut = Math.min(pool, Number(d.value));
+      d.value = Number(d.value) - cut; pool -= cut;
+    }
+    notes.push(t("Opt.Clash.Reduced", { n: (Number(clash.flags?.jjk5e?.clashTotal) || 0) - pool }));
+    if (pool > 0) notes.push(t("Opt.Clash.Overflow", { n: pool }));
+    if (actor.isOwner) setTimeout(() => safeDelete(clash), 0);
+  }
+  if (notes.length && actor.isOwner) setTimeout(() => chat(actor, `<p><strong>${esc(actor.name)}</strong>: ${notes.map(esc).join(" · ")}</p>`), 0);
+}
+
+async function takeTheHit(actor) {
+  actor = requireActor(actor);
+  if (!actor?.isOwner) return;
+  await setKindEffect(actor, "takeHit", { name: t("Opt.takeTheHit.Name"), img: `${ICONS}/limb.svg`, duration: { rounds: 1 },
+    description: `<p>${t("Opt.TakeHit.Effect")}</p>` });
+  const ally = optTarget();
+  await chat(actor, `<p><strong>${t("Opt.takeTheHit.Name")}</strong>: ${t("Opt.TakeHit.Done", { name: esc(actor.name), ally: esc(ally?.name ?? "—") })}</p>`);
+}
+
+function meleeWeapon(actor) {
+  const weapons = [...(actor?.items ?? [])].filter((i) => i.type === "weapon");
+  const melee = (i) => /M$/.test(i.system?.type?.value ?? "") || [...(i.system?.activities ?? [])].some?.((a) => a?.attack?.type?.value === "melee");
+  return weapons.find((i) => i.system?.equipped && melee(i)) ?? weapons.find(melee) ?? null;
+}
+
+async function weaponClash(actor) {
+  actor = requireActor(actor);
+  if (!actor?.isOwner) return;
+  const used = Number(actor.getFlag(MODULE_ID, "clashUsed")) || 0;
+  const max = Number(actor.system.attributes?.prof) || 2;
+  if (used >= max) return ui.notifications.warn(t("Opt.Clash.NoUses", { max }));
+  const weapon = meleeWeapon(actor);
+  if (!weapon) return ui.notifications.warn(t("Opt.Clash.NoWeapon"));
+  let total = 0;
+  const atk = [...(weapon.system?.activities ?? [])].find?.((a) => a.type === "attack");
+  try {
+    const rolls = atk?.rollDamage ? await atk.rollDamage({}, { configure: false }, { create: true }) : null;
+    total = (Array.isArray(rolls) ? rolls : [rolls]).reduce((s, r) => s + (Number(r?.total) || 0), 0);
+  } catch (err) { console.warn(`${MODULE_ID} | clash damage`, err); }
+  if (!total) {
+    const base = weapon.system?.damage?.base;
+    const formula = base?.formula || (base?.number && base?.denomination ? `${base.number}d${base.denomination}` : "1d6");
+    const roll = await new Roll(`${formula} + @mod`, { mod: Number(actor.system.abilities?.str?.mod) || 0 }).evaluate();
+    await roll.toMessage({ speaker: docClass("ChatMessage").getSpeaker({ actor }), flavor: `${t("Opt.weaponClash.Name")} — ${esc(weapon.name)}` });
+    total = roll.total;
+  }
+  const psychic = [...actor.items].some((i) => [...(i.system?.activities ?? [])].some?.((a) => (a.damage?.parts ?? []).some((p) => (p.types ?? []).includes?.("psychic"))));
+  await actor.setFlag(MODULE_ID, "clashUsed", used + 1);
+  await setKindEffect(actor, "weaponClash", { name: `${t("Opt.weaponClash.Name")} (−${total})`, img: `${ICONS}/burnout.svg`,
+    duration: { rounds: 1 }, description: `<p>${t("Opt.Clash.Effect", { n: total })}</p>`,
+    flags: { jjk5e: { clashTotal: total, psychic } } });
+  await chat(actor, `<p><strong>${t("Opt.weaponClash.Name")}</strong>: ${t("Opt.Clash.Done", { n: total, left: max - used - 1 })}</p>`);
+}
+
+/* ---- Attack and damage roll changes ---- */
+
+function incapacitated(actor) {
+  const st = actor?.statuses ?? new Set();
+  return ["incapacitated", "unconscious", "paralyzed", "stunned", "petrified", "dead"].some((s) => st.has?.(s))
+    || (Number(actor?.system?.attributes?.hp?.value) || 0) <= 0;
+}
+
+/** Flanking: an ally (not incapacitated) within 5 ft of the target on the opposite side. */
+function isFlanking(actor) {
+  const me = actor?.getActiveTokens?.()?.[0];
+  const targets = [...(game.user?.targets ?? [])];
+  if (!me || targets.length !== 1 || !globalThis.canvas?.tokens) return false;
+  const target = targets[0];
+  if (!(tokenDistance(me, target) <= 5)) return false;
+  const c = (tk) => tk.center ?? { x: tk.x, y: tk.y };
+  const v = (a) => ({ x: c(a).x - c(target).x, y: c(a).y - c(target).y });
+  const a = v(me);
+  return canvas.tokens.placeables.some((o) => {
+    if (o === me || o === target || !o.actor || o.document?.disposition !== me.document?.disposition || incapacitated(o.actor)) return false;
+    if (!(tokenDistance(o, target) <= 5)) return false;
+    const b = v(o);
+    const cos = (a.x * b.x + a.y * b.y) / ((Math.hypot(a.x, a.y) * Math.hypot(b.x, b.y)) || 1);
+    return cos <= Math.cos((135 * Math.PI) / 180);
+  });
+}
+
+/** Advantage sources Midi reported for this attack (attribution strings start with "ADV"). */
+function midiAdvantageSources(config) {
+  const M = globalThis.MidiQOL;
+  let wf = null;
+  try { wf = config?.workflow ?? M?.Workflow?.getWorkflow?.(config?.subject?.uuid); } catch (err) { wf = null; }
+  const attr = wf?.attackAdvAttribution ?? wf?.advantageAttribution;
+  if (!attr) return null;
+  return [...(attr instanceof Map ? attr.keys() : attr)].filter((s) => /^ADV/i.test(String(s))).length;
+}
+
+/** Called from onPreRollAttack with the number of advantage sources the module itself added. */
+function optionalAttack(config, actor, jjkSources) {
+  let sources = jjkSources;
+  const mode = opt("flanking");
+  if (mode !== "off" && isFlanking(actor)) {
+    if (mode === "plus2") addPart(config, "2");
+    else { config.advantage = true; sources += 1; }
+  }
+  if (actor?.getFlag?.(MODULE_ID, "callingShot")) {
+    addPart(config, "-5");
+    const targets = [...(game.user?.targets ?? [])].map((tk) => tk.actor?.uuid).filter(Boolean);
+    actor.setFlag(MODULE_ID, "calledShotPending", targets);
+    actor.unsetFlag(MODULE_ID, "callingShot");
+  }
+  if (optOn("advantageStacking")) {
+    const midi = midiAdvantageSources(config);
+    const total = midi ?? (sources + (config.jjkOuterAdvantage ? 1 : 0));
+    if (total > 1) addPart(config, String(total - 1));
+  }
+}
+
+/** Crunchy Crits: roll the dice normally and double the whole damage roll (modifiers included). */
+function crunchyCrit(config, actor) {
+  if (!optOn("crunchyCrits")) return;
+  const critical = config?.isCritical === true || config?.midiOptions?.isCritical === true
+    || (config?.rolls ?? []).some((r) => r.options?.isCritical === true);
+  if (!critical || actor?.getFlag?.(MODULE_ID, "pendingBlackFlash")) return;
+  for (const r of config.rolls ?? []) {
+    if (!r.parts?.length || r.options?.jjkCrunchy) continue;
+    r.parts = [`(${r.parts.join(" + ")}) * 2`];
+    r.options ??= {};
+    r.options.jjkCrunchy = true;
+    r.options.critical = { ...(r.options.critical ?? {}), multiplier: 1, multiplyNumeric: false };
+  }
+  config.critical = { ...(config.critical ?? {}), multiplier: 1, multiplyNumeric: false };
+}
+
+/** Largest hit die face + CON modifier (Calling Shots threshold). */
+function calledShotThreshold(actor) {
+  let face = 0;
+  for (const i of actor?.items ?? []) {
+    if (i.type !== "class") continue;
+    face = Math.max(face, Number(String(i.system?.hd?.denomination ?? i.system?.hitDice ?? "").replace(/\D/g, "")) || 0);
+  }
+  if (!face) face = Number(String(actor?.system?.attributes?.hp?.formula ?? "").match(/d(\d+)/)?.[1]) || 8;
+  return face + (Number(actor?.system?.abilities?.con?.mod) || 0);
+}
+
+async function calledShotResult(workflow) {
+  const actor = workflow?.actor;
+  const pending = actor?.getFlag?.(MODULE_ID, "calledShotPending");
+  if (!pending) return;
+  if (actor.isOwner) await actor.unsetFlag(MODULE_ID, "calledShotPending");
+  for (const entry of workflow?.damageList ?? []) {
+    const doc = await fromUuid(entry.actorUuid ?? entry.tokenUuid ?? "").catch(() => null);
+    const target = doc?.actor ?? doc;
+    if (target?.documentName !== "Actor") continue;
+    const dmg = Number(entry.totalDamage ?? entry.hpDamage) || 0;
+    const need = calledShotThreshold(target);
+    await chat(actor, `<p><strong>${t("Opt.callingShots.Name")}</strong>: ${esc(target.name)} — ${dmg} / ${need}. `
+      + `${dmg > need ? t("Opt.Called.Crippled") : t("Opt.Called.NoEffect")}</p>`);
+    if (dmg > need) await rollLimb(target);
+  }
+}
+
+/* ---- Execution Evasion, Soul checks, Object Soul Awareness ---- */
+
+async function executionEvasion(actor) {
+  actor = requireActor(actor);
+  if (!actor?.isOwner) return;
+  const limbs = LIMBS.filter((l) => l.mult === 1);
+  const opts = limbs.map((l) => `<option value="${l.key}">${t(`Limb.${l.key}`)} — ${2 * limbThreshold(actor, l)} ${t("Opt.Evasion.Damage")}</option>`).join("");
+  const key = await promptField(t("Opt.executionEvasion.Name"), `<p>${t("Opt.Evasion.Prompt")}</p><select name="limb">${opts}</select>`, "limb");
+  const limb = LIMBS.find((l) => l.key === key);
+  if (!limb) return;
+  const dmg = 2 * limbThreshold(actor, limb);
+  const hp = Number(actor.system.attributes?.hp?.value) || 0;
+  await actor.update({ "system.attributes.hp.value": Math.max(0, hp - dmg) });
+  const executed = actor.effects.filter((e) => /Executed|Ejecutad/i.test(e.name) || (e.statuses?.has?.("dead") && /Sentencing|Sentencia/i.test(String(e.origin ?? "") + e.name)));
+  if (executed.length) await actor.deleteEmbeddedDocuments("ActiveEffect", executed.map((e) => e.id));
+  await setLimb(actor, limb.key, "lost");
+  await chat(actor, `<p><strong>${t("Opt.executionEvasion.Name")}</strong>: ${t("Opt.Evasion.Done", { name: esc(actor.name), limb: t(`Limb.${limb.key}`), n: dmg })}</p>`);
+}
+
+async function soulCheck(actor) {
+  actor = requireActor(actor);
+  if (!actor) return;
+  const lvl = Number(actor.getFlag(MODULE_ID, "soulAwareness")) || 0;
+  const roll = await new Roll(`${lvl ? "1d20" : "2d20kl"} + ${lvl}`).evaluate();
+  await roll.toMessage({ speaker: docClass("ChatMessage").getSpeaker({ actor }),
+    flavor: `<strong>${t("Opt.soulChecks.Name")}</strong> (${t("Soul.Name")} ${lvl})${lvl ? "" : ` — ${t("Opt.Soul.Disadvantage")}`}` });
+  return roll;
+}
+
+const OBJECT_SOUL = ["Object Soul Perception", "Soul Shatter", "Greater Object Soul Perception"];
+async function setObjectSoul(actor, level) {
+  level = clamp(Number(level) || 0, 0, 3);
+  await actor.setFlag(MODULE_ID, "objectSoul", level);
+  await setKindEffect(actor, "objectSoul", level ? {
+    name: `${t("Opt.objectSoul.Name")} ${level}`, img: `${ICONS}/soul.svg`,
+    changes: level >= 3 ? [{ key: "system.attributes.senses.blindsight", mode: 4, value: "30" }] : [],
+    description: `<ul>${OBJECT_SOUL.slice(0, level).map((n, i) => `<li>${i + 1}. ${n} — ${t(`Opt.ObjectSoul.L${i + 1}`)}</li>`).join("")}</ul>`
+  } : null);
+  return level;
+}
+
+/* ---- Ability score helpers (Techniqueless, Yearly Progression, Feat Improvement) ---- */
+
+const ABILITIES = ["str", "dex", "con", "int", "wis", "cha"];
+async function asiDialog(actor, points, title, perAbility = points) {
+  const content = `<p>${t("Opt.ASI.Prompt", { n: points })}</p><div class="jjk-grid">${ABILITIES.map((a) =>
+    `<label>${a.toUpperCase()} (${Number(actor.system.abilities?.[a]?.value) || 10})
+      <input type="number" name="${a}" value="0" min="0" max="${perAbility}"></label>`).join("")}</div>`;
+  const res = await foundry.applications.api.DialogV2.prompt({ window: { title }, content, rejectClose: false, classes: ["jjk5e-ui", "jjk5e-dialog"],
+    ok: { label: t("Common.OK"), callback: (e, b) => Object.fromEntries(ABILITIES.map((a) => [a, Math.max(0, Number(b.form.elements[a].value) || 0)])) } });
+  if (!res) return false;
+  const sum = Object.values(res).reduce((s, v) => s + v, 0);
+  if (sum > points || Object.values(res).some((v) => v > perAbility)) { ui.notifications.warn(t("Opt.ASI.TooMany", { n: points })); return false; }
+  const update = {};
+  for (const [a, v] of Object.entries(res)) if (v) update[`system.abilities.${a}.value`] = Math.min(20, (Number(actor.system.abilities?.[a]?.value) || 10) + v);
+  if (Object.keys(update).length) await actor.update(update);
+  return true;
+}
+
+async function pickFeat(actor, title) {
+  const doc = await pickFromPack("jjk5e-feats", ["feat"], title);
+  if (!doc) return false;
+  const missing = missingPrereqs(actor, doc);
+  if (missing.length) ui.notifications.warn(`${doc.name}: ${missing.join(", ")}`);
+  return addWithAdvancement(actor, doc);
+}
+
+const TECHNIQUELESS = [[1, 2, 1], [3, 2, 1], [6, 3, 1], [11, 3, 1], [18, 3, 2]];
+async function techniquelessLevelUp(actor) {
+  if (!optOn("techniqueless") || !actor?.isOwner || !actor.items.some((i) => i.flags?.jjk5e?.techniqueless)) return;
+  const done = new Set(actor.getFlag(MODULE_ID, "techniquelessDone") ?? []);
+  const level = characterLevel(actor);
+  for (const [lvl, points, feats] of TECHNIQUELESS) {
+    if (lvl > level || done.has(lvl)) continue;
+    const title = `${t("Opt.techniqueless.Name")} (${t("Opt.Level", { n: lvl })})`;
+    if (!(await asiDialog(actor, points, title))) return;
+    for (let i = 0; i < feats; i++) await pickFeat(actor, title);
+    done.add(lvl);
+    await actor.setFlag(MODULE_ID, "techniquelessDone", [...done]);
+  }
+}
+
+async function yearlyProgression(actor) {
+  actor = requireActor(actor);
+  if (!actor || !game.user.isGM) return;
+  const n = Number(actor.getFlag(MODULE_ID, "yearly")) || 0;
+  if (n >= 4) return ui.notifications.warn(t("Opt.Yearly.Max"));
+  const choice = await foundry.applications.api.DialogV2.wait({ window: { title: t("Opt.yearlyProgression.Name") }, rejectClose: false,
+    content: `<p>${t("Opt.Yearly.Prompt", { name: esc(actor.name), n: n + 1 })}</p>`,
+    buttons: [{ action: "asi", label: t("Opt.Yearly.ASI"), default: true }, { action: "feat", label: t("Opt.Yearly.Feat") }] });
+  let ok = false;
+  if (choice === "asi") ok = await asiDialog(actor, 2, t("Opt.yearlyProgression.Name"), 2);
+  else if (choice === "feat") ok = await pickFeat(actor, t("Opt.yearlyProgression.Name"));
+  if (!ok) return;
+  await actor.setFlag(MODULE_ID, "yearly", n + 1);
+  await chat(actor, `<p><strong>${t("Opt.yearlyProgression.Name")}</strong> ${n + 1}/4 — ${esc(actor.name)}</p>`);
+}
+
+/* ---- After the advancement manager: Feat Improvement, Increased HP, Increased Affinity, Techniqueless ---- */
+
+async function afterAdvancement(manager) {
+  const actor = manager?.actor;
+  if (!actor?.isOwner || actor.documentName !== "Actor") return;
+  if (optOn("increasedHP")) {
+    for (const cls of actor.items.filter((i) => i.type === "class")) {
+      const adv = cls.advancement?.byType?.HitPoints?.[0];
+      if (!adv?.value || typeof adv.update !== "function") continue;
+      const value = { ...adv.value };
+      let changed = false;
+      for (const k of Object.keys(value)) if (value[k] !== "max") { value[k] = "max"; changed = true; }
+      if (changed) await adv.update({ value });
+    }
+  }
+  if (optOn("featImprovement")) {
+    let asi = 0;
+    for (const step of manager.steps ?? []) {
+      const adv = step?.flow?.advancement;
+      if (step?.type === "reverse" || !adv) continue;
+      const type = adv.constructor?.typeName ?? adv.constructor?.name ?? "";
+      if (!/AbilityScoreImprovement/.test(type)) continue;
+      const real = actor.items.get(adv.item?.id)?.advancement?.byId?.[adv.id] ?? adv;
+      if ((real.value?.type ?? adv.value?.type) === "asi") asi++;
+    }
+    for (let i = 0; i < asi; i++) await pickFeat(actor, t("Opt.featImprovement.Name"));
+  }
+  if (optOn("increasedAffinity") && characterLevel(actor) >= 10 && actor.items.some((i) => i.type === "race" && /^Cursed Spirit/.test(baseName(i)))) {
+    const item = await grantByName(actor, "jjk5e-feats", "Increased Affinity");
+    if (item) await chat(actor, `<p><strong>${esc(item.name)}</strong> — ${t("Opt.Affinity.Granted", { name: esc(actor.name) })}</p>`);
+  }
+  await techniquelessLevelUp(actor);
+}
+
+/* ---- Repetitive Abilities ---- */
+
+const REPEATS = [
+  { better: (i) => !!i.flags?.jjk5e?.domainActivity && !i.flags?.jjk5e?.incompleteDomain, lesser: "Incomplete Domain" },
+  { better: (i) => baseName(i) === "Reverse Technique Understanding", lesser: "Reverse Technique Prodigy" }
+];
+async function checkRepetitive(item) {
+  const actor = item?.parent;
+  if (!optOn("repetitiveAbilities") || actor?.documentName !== "Actor") return;
+  for (const r of REPEATS) {
+    const lesser = findItemByName(actor, r.lesser);
+    const better = actor.items.find((i) => r.better(i));
+    if (!lesser || !better || (item !== lesser && item !== better && item.id !== lesser.id && item.id !== better.id)) continue;
+    const ids = [...new Set([...game.users.filter((u) => u.isGM).map((u) => u.id), game.user.id])];
+    await docClass("ChatMessage").create({ whisper: ids, speaker: { alias: "JJK 5e" },
+      content: `<p>${t("Opt.Repeat.Found", { name: esc(actor.name), lesser: esc(lesser.name), better: esc(better.name) })}</p>
+        <button type="button" data-jjk5e-swap="${esc(lesser.uuid)}">${t("Opt.Repeat.Swap")}</button>` });
+  }
+}
+
+/* ---- Money (Ways to Make Money) ---- */
+
+const money = (actor) => Number(actor?.getFlag?.(MODULE_ID, "money")) || 0;
+async function addMoney(actor, n, why) {
+  if (!actor?.isOwner || !n) return;
+  await actor.setFlag(MODULE_ID, "money", Math.max(0, money(actor) + n));
+  await chat(actor, `<p><i class="fas fa-sack-dollar"></i> ${esc(actor.name)}: ${n > 0 ? "+" : "−"}${fmtMoney(Math.abs(n))} `
+    + `<em>(${esc(why)})</em> → ${fmtMoney(money(actor))}</p>`);
+}
+const TOOL_MULT = { 4: 1, 3: 10, 2: 25, 1: 50 };
+
+async function workWeek(actor) {
+  actor = requireActor(actor);
+  if (!actor?.isOwner) return;
+  const special = !!actor.getFlag(MODULE_ID, "technique") || hasRCT(actor);
+  const choice = await foundry.applications.api.DialogV2.wait({ window: { title: t("Opt.moneyRules.Name") }, rejectClose: false,
+    content: `<p>${t("Opt.Money.Prompt")}</p>`, buttons: [
+      { action: "wage", label: t("Opt.Money.Wage"), default: true },
+      ...(special ? [{ action: "special", label: t("Opt.Money.Special") }] : []),
+      ...(hasItem(actor, /^Tool Maker/) ? [{ action: "tool", label: t("Opt.Money.Tool") }] : [])] });
+  if (choice === "wage") {
+    const n = await promptNumber(t("Opt.Money.Wage"), t("Opt.Money.WageHint"), 300);
+    if (n) await addMoney(actor, clamp(n, 0, 500), t("Opt.Money.Wage"));
+  } else if (choice === "special") {
+    if (hasItem(actor, /^(Reverse Technique Prodigy|Mastered Reverse Technique)$/)) return addMoney(actor, 10000, t("Opt.Money.Special"));
+    const r = await new Roll(`${Math.max(1, ceMod(actor))}d4 * 100`).evaluate();
+    await r.toMessage({ speaker: docClass("ChatMessage").getSpeaker({ actor }), flavor: t("Opt.Money.Special") });
+    await addMoney(actor, r.total, t("Opt.Money.Special"));
+  } else if (choice === "tool") {
+    const items = actor.items.filter((i) => ["weapon", "equipment"].includes(i.type));
+    if (!items.length) return;
+    const res = await foundry.applications.api.DialogV2.prompt({ window: { title: t("Opt.Money.Tool") }, rejectClose: false,
+      content: `<label>${t("Opt.Money.Item")}<select name="item">${items.map((i) => `<option value="${i.id}">${esc(i.name)} (${Number(i.system?.price?.value) || 0})</option>`).join("")}</select></label>
+        <label>${t("Mission.Grade")}<select name="grade">${Object.keys(TOOL_MULT).map((g) => `<option value="${g}">${esc(gradeLabel(g))} ×${TOOL_MULT[g]}</option>`).join("")}</select></label>`,
+      ok: { label: t("Opt.Money.Sell"), callback: (e, b) => ({ item: b.form.elements.item.value, grade: b.form.elements.grade.value }) } });
+    const item = res && actor.items.get(res.item);
+    if (!item) return;
+    const value = (Number(item.system?.price?.value) || 0) * (TOOL_MULT[res.grade] ?? 1);
+    if (!(await confirmDialog(t("Opt.Money.Tool"), `<p>${t("Opt.Money.SellConfirm", { item: esc(item.name), n: fmtMoney(value) })}</p>`))) return;
+    await item.delete();
+    await addMoney(actor, value, t("Opt.Money.Tool"));
+  }
+}
+
+/* ---- Finding a Cursed Spirit, Cursed Upon Death, Tough Trials ---- */
+
+const FIND_GRADES = [[50, "4", "Grade 4"], [75, "3", "Grade 3"], [90, "2", "Semi-Grade 2"], [99, "2", "Grade 2"], [100, "1", "Semi-Grade 1"]];
+async function findCursedSpirit(actor) {
+  actor = requireActor(actor);
+  if (!actor) return;
+  const sk = actor.system.skills ?? {};
+  const bonus = Math.max(Number(sk.prc?.total) || 0, Number(sk.inv?.total) || 0);
+  const check = await new Roll(`1d20 + ${bonus}`).evaluate();
+  await check.toMessage({ speaker: docClass("ChatMessage").getSpeaker({ actor }), flavor: t("Opt.Find.Check") });
+  if (check.total < 20) { await chat(actor, `<p>${t("Opt.Find.None")}</p>`); return null; }
+  const d = await new Roll("1d100").evaluate();
+  const [, grade, label] = FIND_GRADES.find(([hi]) => d.total <= hi) ?? FIND_GRADES[0];
+  await d.toMessage({ speaker: docClass("ChatMessage").getSpeaker({ actor }), flavor: `${t("Opt.findCurse.Name")}: <strong>${label}</strong>` });
+  if (game.user.isGM && await confirmDialog(t("Opt.findCurse.Name"), `<p>${t("Opt.Find.Create", { label })}</p>`)) await createCurse({ grade, kind: "vengeful", place: true });
+  return grade;
+}
+
+const RCT_LOSS = /^(Reverse Cursed|Reverse Technique|Reversed Technique|Mastered Reverse|Heavenly Pact: Reverse|Reverse Cursed Master)/;
+async function cursedUponDeath(actor) {
+  actor = requireActor(actor);
+  if (!actor || !game.user.isGM) return;
+  if (!(await confirmDialog(t("Opt.cursedUponDeath.Name"), `<p>${t("Opt.Death.Confirm", { name: esc(actor.name) })}</p>`))) return;
+  const lost = actor.items.filter((i) => RCT_LOSS.test(baseName(i)));
+  const feats = lost.filter((i) => i.type === "feat").length;
+  const races = actor.items.filter((i) => i.type === "race");
+  const del = [...lost, ...races].map((i) => i.id);
+  if (del.length) await actor.deleteEmbeddedDocuments("Item", del);
+  const race = await packDocByName("jjk5e-races", "Cursed Spirit (Vengeful)");
+  if (race) await addWithAdvancement(actor, race);
+  const ce = ceAbility(actor);
+  const update = { [`flags.${MODULE_ID}.profaneBonus`]: (Number(actor.getFlag(MODULE_ID, "profaneBonus")) || 0) + 2 * feats,
+    [`flags.${MODULE_ID}.madness`]: 1, [`flags.${MODULE_ID}.cursedDeath`]: true };
+  for (const a of new Set(["str", "dex", "con", ce])) {
+    const ab = actor.system.abilities?.[a] ?? {};
+    update[`system.abilities.${a}.value`] = (Number(ab.value) || 10) + 2;
+    update[`system.abilities.${a}.max`] = (Number(ab.max) || 20) + 2;
+  }
+  for (const a of ["int", "wis", "cha"].filter((x) => x !== ce)) update[`system.abilities.${a}.value`] = Math.max(1, (Number(actor.system.abilities?.[a]?.value) || 10) - 4);
+  await actor.update(update);
+  await setMadness(actor, 1);
+  await chat(actor, `<p><strong>${t("Opt.cursedUponDeath.Name")}</strong>: ${t("Opt.Death.Done", { name: esc(actor.name), n: lost.length, pp: 2 * feats })}</p>`);
+  await pickFeat(actor, t("Opt.Death.Feat"));
+}
+
+async function setMadness(actor, level) {
+  await actor.setFlag(MODULE_ID, "madness", level);
+  await setKindEffect(actor, "madness", level ? { name: t("Opt.Death.Madness", { n: level }), img: `${ICONS}/soul.svg`,
+    description: `<p>${t("Opt.Death.MadnessHint")}</p>` } : null);
+}
+
+async function weeklyMadnessSave(actor) {
+  actor = requireActor(actor);
+  if (!actor || !actor.getFlag(MODULE_ID, "cursedDeath")) return;
+  let total = null;
+  if (typeof actor.rollSavingThrow === "function") {
+    const r = await actor.rollSavingThrow({ ability: "wis", target: 25 });
+    total = (Array.isArray(r) ? r[0] : r)?.total ?? null;
+  } else {
+    const r = await new Roll(`1d20 + ${Number(actor.system.abilities?.wis?.mod) || 0}`).evaluate();
+    await r.toMessage({ speaker: docClass("ChatMessage").getSpeaker({ actor }), flavor: t("Opt.Death.Weekly") });
+    total = r.total;
+  }
+  if (total === null) return;
+  if (total >= 25) {
+    await setMadness(actor, 0);
+    await actor.unsetFlag(MODULE_ID, "cursedDeath");
+    await chat(actor, `<p>${t("Opt.Death.Free", { name: esc(actor.name) })}</p>`);
+  } else await setMadness(actor, (Number(actor.getFlag(MODULE_ID, "madness")) || 0) + 1);
+}
+
+async function toughTrial(actor) {
+  const target = optTarget();
+  if (!game.user.isGM) return;
+  if (!target) return ui.notifications.warn(t("Opt.Tough.NoTarget"));
+  const old = kindEffect(target, "toughTrial");
+  if (old) {
+    await safeDelete(old);
+    return chat(target, `<p><strong>${t("Opt.toughTrials.Name")}</strong>: ${t("Opt.Tough.Removed", { name: esc(target.name) })}</p>`);
+  }
+  const cr = Math.max(0, Number(target.system.details?.cr) || 0);
+  const abil = ["str", "dex", "con"].sort((a, b) => (Number(target.system.abilities?.[b]?.value) || 0) - (Number(target.system.abilities?.[a]?.value) || 0));
+  const dmg = String(2 * cr);
+  const changes = [
+    { key: "system.attributes.hp.max", mode: 2, value: String(10 * cr) },
+    ...["mwak", "rwak", "msak", "rsak"].map((k) => ({ key: `system.bonuses.${k}.damage`, mode: 2, value: dmg })),
+    { key: "system.bonuses.spell.dc", mode: 2, value: String(Math.floor(cr / 2)) },
+    ...abil.slice(0, 2).map((a) => ({ key: `system.abilities.${a}.value`, mode: 2, value: "2" }))
+  ];
+  await setKindEffect(target, "toughTrial", { name: t("Opt.toughTrials.Name"), img: `${ICONS}/burnout.svg`, changes,
+    description: `<p>${t("Opt.Tough.Effect")}</p>` });
+  const hp = Number(target.system.attributes?.hp?.value) || 0;
+  await target.update({ "system.attributes.hp.value": hp + 10 * cr });
+  await chat(target, `<p><strong>${t("Opt.toughTrials.Name")}</strong>: ${t("Opt.Tough.Applied", { name: esc(target.name), hp: 10 * cr, dmg, dc: Math.floor(cr / 2) })}</p>`);
+}
+
+/* ---- Totality: dead shikigami, Mythical Beast Accuracy ---- */
+
+const fallen = (actor) => (actor?.getFlag?.(MODULE_ID, "fallenShikigami") ?? []).map((n) => String(n).toLowerCase());
+async function recordFallenShikigami(token) {
+  const summonerUuid = token?.flags?.jjk5e?.summonedBy;
+  if (!summonerUuid || !isActiveGM()) return;
+  const summoner = await fromUuid(summonerUuid).catch(() => null);
+  if (!summoner || !actorTechniques(summoner).has(normName("Ten Shadows"))) return;
+  const name = token.name ?? token.actor?.name;
+  const list = new Set(summoner.getFlag(MODULE_ID, "fallenShikigami") ?? []);
+  if (!name || list.has(name)) return;
+  list.add(name);
+  await summoner.setFlag(MODULE_ID, "fallenShikigami", [...list]);
+  await chat(summoner, `<p><strong>${esc(name)}</strong> — ${t(optOn("totalityAlt") ? "Opt.Totality.Returns" : "Opt.Totality.Dead")}</p>`);
+}
+
+async function advanceAmber(combat) {
+  if (!isActiveGM() || !optOn("mythicalAccuracy")) return;
+  const actor = combat?.combatant?.actor;
+  const cur = actor?.effects?.find?.((e) => !e.disabled && Number(e.flags?.jjk5e?.amberStage) > 0);
+  if (!cur) return;
+  const st = Number(cur.flags.jjk5e.amberStage);
+  if (st >= 5) return;
+  const item = findItemByName(actor, "Mythical Beast Amber Release");
+  const next = item?.effects?.find?.((e) => Number(e.flags?.jjk5e?.amberStage) === st + 1);
+  if (!next) return;
+  const data = next.toObject();
+  delete data._id;
+  Object.assign(data, { transfer: false, disabled: false, origin: item.uuid });
+  await actor.createEmbeddedDocuments("ActiveEffect", [data]);
+  await safeDelete(cur);
+  await chat(actor, `<p><strong>${t("Opt.mythicalAccuracy.Name")}</strong>: ${esc(next.name)}</p>`);
+}
+
+/* ---- Additional Actions (Distract, Charge, Coup de Grace, Sunder) ---- */
+
+function extraAttacks(actor) {
+  let n = 0;
+  for (const i of actor?.items ?? []) {
+    const m = baseName(i).match(/^Extra Attack(?: \((\d)\))?/);
+    if (m) n = Math.max(n, Number(m[1] ?? 1));
+  }
+  return n;
+}
+
+async function onOptionalAction(activity) {
+  const key = activity?.item?.flags?.jjk5e?.optAction;
+  const actor = activity?.actor ?? activity?.item?.actor;
+  if (!key || !actor || !optOn("additionalActions")) return;
+  const targets = [...(game.user?.targets ?? [])].map((tk) => tk.actor).filter(Boolean);
+  if (key === "charge") {
+    const n = extraAttacks(actor);
+    await setKindEffect(actor, "charge", { name: t("Opt.Action.Charge", { n }), img: `${ICONS}/burnout.svg`, duration: { rounds: 1 },
+      changes: [{ key: "system.attributes.movement.walk", mode: 2, value: "10" },
+        ...(n ? ["mwak", "msak"].map((k) => ({ key: `system.bonuses.${k}.attack`, mode: 2, value: String(n) })) : [])],
+      description: `<p>${t("Opt.Action.ChargeHint")}</p>` });
+  } else if (key === "distract") {
+    for (const tg of targets) {
+      const stacks = tg.effects.filter((e) => /Distracted|Distraíd/i.test(e.name)).length;
+      const conc = tg.concentration?.effects?.size || tg.statuses?.has?.("concentrating");
+      await chat(actor, `<p><strong>${t("Opt.Action.Distract")}</strong>: ${esc(tg.name)} — ${t(stacks >= 3 ? "Opt.Action.DistractMax" : "Opt.Action.DistractDC")}`
+        + `${conc ? ` ${t("Opt.Action.DistractCheck", { dc: 10 + Math.min(3, stacks) })}` : ""}</p>`);
+      if (conc && tg.isOwner && typeof tg.challengeConcentration === "function") await tg.challengeConcentration({ dc: 10 + Math.min(3, stacks) });
+    }
+  } else if (key === "sunder") {
+    await chat(actor, `<p><strong>${t("Opt.Action.Sunder")}</strong>: ${t("Opt.Action.SunderHint")}</p>`);
+  } else if (key === "coup") {
+    const down = targets.filter((tg) => tg.statuses?.has?.("unconscious") || (Number(tg.system.attributes?.hp?.value) || 0) <= 0);
+    await chat(actor, `<p><strong>${t("Opt.Action.Coup")}</strong>: ${down.length ? t("Opt.Action.CoupHint") : t("Opt.Action.CoupNone")}</p>`);
+    if (down.length) await actor.setFlag(MODULE_ID, "coupPending", down.map((a) => a.uuid));
+  }
+}
+
+async function coupResult(workflow) {
+  const actor = workflow?.actor;
+  const pending = actor?.getFlag?.(MODULE_ID, "coupPending");
+  if (!pending?.length) return;
+  if (actor.isOwner) await actor.unsetFlag(MODULE_ID, "coupPending");
+  for (const entry of workflow?.damageList ?? []) {
+    const doc = await fromUuid(entry.actorUuid ?? entry.tokenUuid ?? "").catch(() => null);
+    const target = doc?.actor ?? doc;
+    if (!target || !pending.includes(target.uuid)) continue;
+    const dc = Number(entry.totalDamage ?? entry.hpDamage) || 0;
+    await chat(actor, `<p><strong>${t("Opt.Action.Coup")}</strong>: ${esc(target.name)} — [[/save con ${dc}]] ${t("Opt.Action.CoupDie")}</p>`);
+  }
+}
+
+/* ---- Class Specific Understandings ---- */
+
+async function classUnderstanding(actor) {
+  actor = requireActor(actor);
+  if (!actor?.isOwner) return;
+  if (actor.items.some((i) => i.flags?.jjk5e?.classUnderstanding)) return ui.notifications.warn(t("Opt.Understanding.Have"));
+  const bt = Number(actor.getFlag(MODULE_ID, "breakthroughs")) || 0;
+  if (bt < 2) return ui.notifications.warn(t("Feats.Breakthroughs", { need: 2, have: bt }));
+  const pack = jjkPack("jjk5e-class-features");
+  const docs = pack ? (await pack.getDocuments()).filter((d) => d.flags?.jjk5e?.classUnderstanding) : [];
+  const classes = new Set(actor.items.filter((i) => i.type === "class").map((i) => i.system?.identifier));
+  const fit = docs.filter((d) => classes.has(d.flags.jjk5e.classUnderstanding));
+  if (!fit.length) return ui.notifications.warn(t("Opt.Understanding.None"));
+  let doc = fit[0];
+  if (fit.length > 1) {
+    const uuid = await promptField(t("Opt.classUnderstanding.Name"), `<select name="pick">${fit.map((d) => `<option value="${d.uuid}">${esc(d.name)}</option>`).join("")}</select>`, "pick");
+    doc = fit.find((d) => d.uuid === uuid);
+  }
+  if (!doc) return;
+  await actor.createEmbeddedDocuments("Item", [game.items?.fromCompendium ? game.items.fromCompendium(doc) : doc.toObject()]);
+  await chat(actor, `<p><strong>${t("Opt.classUnderstanding.Name")}</strong>: ${esc(actor.name)} — ${esc(doc.name)}</p>`);
+}
+
+/** Reliable Skill (Scout understanding): proficient skill checks count a d20 of 9 or lower as 10. */
+function reliableSkill(config) {
+  const actor = config?.subject;
+  const skill = config?.skill;
+  if (!actor || !skill || !(Number(actor.system?.skills?.[skill]?.value) >= 1)) return;
+  if (!actor.items?.some?.((i) => i.flags?.jjk5e?.reliableSkill)) return;
+  config.rolls ??= [{}];
+  for (const r of config.rolls) { r.options ??= {}; r.options.minimum = Math.max(Number(r.options.minimum) || 0, 10); }
+}
+
+/* ---- Panel sections ---- */
+
+function optionalPanel(actor, tab) {
+  const gm = !!game.user.isGM;
+  const b = [];
+  if (tab === "combat") {
+    if (optOn("weaponClash")) b.push(pbtn("weaponClash", "fas fa-shield-halved", `${t("Opt.weaponClash.Name")} (${(Number(actor.system.attributes?.prof) || 2) - (Number(actor.getFlag(MODULE_ID, "clashUsed")) || 0)})`));
+    if (optOn("takeTheHit")) b.push(pbtn("takeHit", "fas fa-person-falling-burst", t("Opt.takeTheHit.Name")));
+    if (optOn("callingShots")) b.push(pbtn("callShot", "fas fa-crosshairs", t("Opt.callingShots.Name"), { cls: actor.getFlag(MODULE_ID, "callingShot") ? "on" : "" }));
+    if (optOn("fightForLife") && (Number(actor.system.attributes?.hp?.value) || 0) <= 0) b.push(pbtn("fightForLife", "fas fa-heart-crack", t("Opt.fightForLife.Name")));
+    if (optOn("executionEvasion")) b.push(pbtn("executionEvasion", "fas fa-scissors", t("Opt.executionEvasion.Name")));
+    if (optOn("soulChecks")) b.push(pbtn("soulCheck", "fas fa-ghost", t("Opt.soulChecks.Name")));
+    if (!b.length) return "";
+    return `<fieldset><legend>${t("Opt.Panel")}</legend><div class="jjk-grid">${b.join("")}</div></fieldset>`;
+  }
+  if (tab === "body") {
+    if (!optOn("objectSoul")) return "";
+    const lvl = Number(actor.getFlag(MODULE_ID, "objectSoul")) || 0;
+    return `<fieldset><legend>${t("Opt.objectSoul.Name")}</legend>
+      ${gm ? `<div class="jjk-row jjk-stepper">${pbtn("objSoulDown", "", "−")}<strong class="jjk-num">${lvl}</strong>${pbtn("objSoulUp", "", "+")}</div>` : `<strong class="jjk-num">${lvl}</strong>`}
+      <ol class="jjk-soul-list">${OBJECT_SOUL.slice(0, lvl).map((n) => `<li>${esc(n)}</li>`).join("")}</ol></fieldset>`;
+  }
+  if (tab === "tools") {
+    if (optOn("moneyRules")) b.push(pbtn("work", "fas fa-sack-dollar", `${t("Opt.Money.Work")} (${fmtMoney(money(actor))})`));
+    if (optOn("findCurse")) b.push(pbtn("findCurse", "fas fa-magnifying-glass", t("Opt.findCurse.Name")));
+    if (optOn("classUnderstanding") && !actor.items.some((i) => i.flags?.jjk5e?.classUnderstanding)
+      && (Number(actor.getFlag(MODULE_ID, "breakthroughs")) || 0) >= 2) b.push(pbtn("classUnderstanding", "fas fa-lightbulb", t("Opt.classUnderstanding.Name")));
+    if (!hasRCT(actor)) b.push(pbtn("rctRoll", "fas fa-heart-pulse", t("RCT.Roll")));
+    return b.length ? `<fieldset><legend>${t("Opt.Panel")}</legend><div class="jjk-grid">${b.join("")}</div></fieldset>` : "";
+  }
+  if (tab === "gm" && gm) {
+    b.push(pbtn("optRules", "fas fa-scroll", t("Opt.Title")));
+    if (!hasRCT(actor)) b.push(pbtn("rctGrant", "fas fa-heart-pulse", t("RCT.Grant")));
+    if (optOn("pureBarrier")) {
+      b.push(pbtn("pureScene", "fas fa-torii-gate", `${t("Opt.Pure.Scene")}: ${sceneOf(actor)?.getFlag?.(MODULE_ID, "pureBarrier") ? "✓" : "✗"}`));
+      b.push(pbtn("purePermit", "fas fa-key", `${t("Opt.Pure.Permit")}: ${actor.getFlag(MODULE_ID, "pureBarrierPermit") ? "✓" : "✗"}`));
+    }
+    if (optOn("yearlyProgression")) b.push(pbtn("yearly", "fas fa-graduation-cap", `${t("Opt.yearlyProgression.Name")} (${Number(actor.getFlag(MODULE_ID, "yearly")) || 0}/4)`));
+    if (optOn("toughTrials")) b.push(pbtn("toughTrial", "fas fa-dragon", t("Opt.Tough.Toggle")));
+    if (optOn("cursedUponDeath")) b.push(pbtn("cursedDeath", "fas fa-skull", t("Opt.cursedUponDeath.Name")));
+    if (actor.getFlag(MODULE_ID, "cursedDeath")) b.push(pbtn("madnessSave", "fas fa-brain", t("Opt.Death.Weekly")));
+    if (optOn("moneyRules")) b.push(pbtn("gmMoney", "fas fa-coins", `${t("Opt.Money.Set")} (${fmtMoney(money(actor))})`));
+    return `<fieldset><legend>${t("Opt.Panel")}</legend><div class="jjk-grid">${b.join("")}</div></fieldset>`;
+  }
+  return "";
+}
+
+Object.assign(PANEL_ACTIONS, {
+  weaponClash: (actor) => weaponClash(actor),
+  takeHit: (actor) => takeTheHit(actor),
+  callShot: async (actor) => {
+    const on = !actor.getFlag(MODULE_ID, "callingShot");
+    if (on) await actor.setFlag(MODULE_ID, "callingShot", true); else await actor.unsetFlag(MODULE_ID, "callingShot");
+    ui.notifications.info(t(on ? "Opt.Called.On" : "Opt.Called.Off"));
+  },
+  fightForLife: (actor) => fightForLife(actor),
+  executionEvasion: (actor) => executionEvasion(actor),
+  soulCheck: (actor) => soulCheck(actor),
+  objSoulUp: (actor) => setObjectSoul(actor, (Number(actor.getFlag(MODULE_ID, "objectSoul")) || 0) + 1),
+  objSoulDown: (actor) => setObjectSoul(actor, (Number(actor.getFlag(MODULE_ID, "objectSoul")) || 0) - 1),
+  work: (actor) => workWeek(actor),
+  findCurse: (actor) => findCursedSpirit(actor),
+  classUnderstanding: (actor) => classUnderstanding(actor),
+  rctRoll: (actor) => rollRCTAwakening(actor),
+  rctGrant: (actor) => unlockRCT(actor, t("RCT.ByGM")),
+  optRules: () => openOptionalRules(),
+  pureScene: async (actor) => {
+    const scene = sceneOf(actor);
+    if (!scene) return ui.notifications.warn(t("Notify.NoScene"));
+    await scene.setFlag(MODULE_ID, "pureBarrier", !scene.getFlag(MODULE_ID, "pureBarrier"));
+  },
+  purePermit: (actor) => actor.setFlag(MODULE_ID, "pureBarrierPermit", !actor.getFlag(MODULE_ID, "pureBarrierPermit")),
+  yearly: (actor) => yearlyProgression(actor),
+  toughTrial: (actor) => toughTrial(actor),
+  cursedDeath: (actor) => cursedUponDeath(actor),
+  madnessSave: (actor) => weeklyMadnessSave(actor),
+  gmMoney: async (actor) => {
+    const n = await promptNumber(t("Opt.Money.Set"), t("Opt.Money.Amount"), money(actor));
+    await actor.setFlag(MODULE_ID, "money", Math.max(0, Number(n) || 0));
+  }
+});
+for (const a of ["objSoulUp", "objSoulDown", "rctGrant", "optRules", "pureScene", "purePermit", "yearly", "toughTrial", "cursedDeath", "madnessSave", "gmMoney"]) GM_PANEL_ACTIONS.add(a);
+
+MENU_ACTIONS.splice(MENU_ACTIONS.length - 1, 0,
+  ["findCurse", "fa-solid fa-magnifying-glass", "Opt.findCurse.Name", (a) => findCursedSpirit(a)],
+  ["optRules", "fa-solid fa-scroll", "Opt.Title", () => openOptionalRules(), true]);
+
+/* ---- Registration ---- */
+
+Hooks.once("init", () => {
+  game.settings.register(MODULE_ID, "optionalRules", { scope: "world", config: false, type: Object, default: {},
+    onChange: () => { for (const a of game.actors ?? []) refreshPanels(a); } });
+  game.settings.registerMenu(MODULE_ID, "optionalRulesMenu", { name: "JJK5E.Opt.Title", label: "JJK5E.Opt.Open", hint: "JJK5E.Opt.Intro",
+    icon: "fas fa-scroll", type: makeOptMenuClass(), restricted: true });
+});
+
+Hooks.once("ready", () => {
+  if (game.system?.id !== "dnd5e") return;
+  Object.assign(game.modules.get(MODULE_ID).api, { unlockRCT, openOptionalRules, optionalRules: () => Object.fromEntries(OPT_RULES.map(([k]) => [k, opt(k)])),
+    findCursedSpirit, cursedUponDeath, yearlyProgression, workWeek, classUnderstanding });
+  Hooks.on("dnd5e.preCalculateDamage", (actor, damages, options) => {
+    try { optionalDamage(actor, damages, options); } catch (err) { reportError("optional damage", err); }
+  });
+  Hooks.on("dnd5e.rollSavingThrow", (rolls, data) => recordSaveNatural(data?.subject, rolls));
+  Hooks.on("dnd5e.rollAbilitySave", (actor, roll) => recordSaveNatural(actor, roll));
+  Hooks.on("dnd5e.preRollSkillV2", (config) => reliableSkill(config));
+  Hooks.on("dnd5e.advancementManagerComplete", (manager) => { afterAdvancement(manager).catch((err) => reportError("advancement", err)); });
+  Hooks.on("dnd5e.postUseActivity", (activity) => {
+    const actor = activity?.actor ?? activity?.item?.actor;
+    const ids = activity?.item?.flags?.jjk5e?.costMinusNext;
+    if (Array.isArray(ids) && ids.includes(activity.id) && actor?.isOwner) actor.setFlag(MODULE_ID, "costMinusNext", true);
+    else if (activity?.item?.flags?.jjk5e?.technique && actor?.getFlag?.(MODULE_ID, "costMinusNext") && actor.isOwner) actor.unsetFlag(MODULE_ID, "costMinusNext");
+    onOptionalAction(activity).catch((err) => reportError("optional action", err));
+  });
+  // Less Blood: Blood Manipulation and Rot hit point costs are reduced.
+  Hooks.on("dnd5e.activityConsumption", (activity, usageConfig, messageConfig, updates) => {
+    const f = Number(opt("lessBlood"));
+    if (!(f > 0 && f < 1) || !["Blood Manipulation", "Rot"].includes(activity?.item?.flags?.jjk5e?.technique)) return;
+    const u = updates?.actor;
+    const key = "system.attributes.hp.value";
+    if (!u) return;
+    const flat = key in u;
+    const next = flat ? u[key] : foundry.utils.getProperty(u, key);
+    if (next === undefined) return;
+    const cur = Number(activity.actor?.system?.attributes?.hp?.value) || 0;
+    const costHP = cur - Number(next);
+    if (costHP <= 0) return;
+    const value = cur - Math.max(1, Math.ceil(costHP * f));
+    if (flat) u[key] = value; else foundry.utils.setProperty(u, key, value);
+  });
+  // Output Burnout: Technique Burnout gives 2 temporary levels of Reduced Output.
+  Hooks.on("createActiveEffect", async (effect, options, userId) => {
+    if (userId !== game.user.id || !isBurnoutFx(effect) || !optOn("outputBurnout")) return;
+    const actor = effect.parent;
+    if (actor?.documentName !== "Actor" || actor.getFlag(MODULE_ID, "burnoutRO")) return;
+    await actor.setFlag(MODULE_ID, "burnoutRO", 2);
+    await setReducedOutput(actor, (Number(actor.getFlag(MODULE_ID, "reducedOutput")) || 0) + 2);
+  });
+  Hooks.on("deleteActiveEffect", async (effect, options, userId) => {
+    if (userId !== game.user.id || !isBurnoutFx(effect)) return;
+    const actor = effect.parent;
+    const added = Number(actor?.getFlag?.(MODULE_ID, "burnoutRO")) || 0;
+    if (!added || actor.documentName !== "Actor") return;
+    await actor.unsetFlag(MODULE_ID, "burnoutRO");
+    await setReducedOutput(actor, (Number(actor.getFlag(MODULE_ID, "reducedOutput")) || 0) - added);
+  });
+  // RCT moments: reduced from max HP to 0 in one hit; nat 20 after two failed death saves.
+  Hooks.on("preUpdateActor", (actor, changes, options) => {
+    if (foundry.utils.getProperty(changes, "system.attributes.hp.value") === undefined) return;
+    options.jjk5eHpBefore = { value: Number(actor.system?.attributes?.hp?.value) || 0, max: Number(actor.system?.attributes?.hp?.max) || 0 };
+  });
+  Hooks.on("updateActor", (actor, changes, options) => {
+    const b = options?.jjk5eHpBefore;
+    if (b && actor.type === "character" && b.max > 0 && b.value >= b.max && (Number(actor.system.attributes?.hp?.value) || 0) <= 0) {
+      rctMoment(actor, t("RCT.OneHit")).catch((err) => reportError("rct moment", err));
+    }
+    if (b && (Number(actor.system.attributes?.hp?.value) || 0) <= 0 && actor.token?.flags?.jjk5e?.summonedBy) recordFallenShikigami(actor.token);
+    if (foundry.utils.getProperty(changes, "system.attributes.exhaustion") === 0 && actor.isOwner && actor.getFlag(MODULE_ID, "fightExhaustion")) actor.unsetFlag(MODULE_ID, "fightExhaustion");
+  });
+  const deathSave = (actor, roll) => {
+    if (!actor || actor.type !== "character") return;
+    if ((Number(actor.system.attributes?.death?.failure) || 0) >= 2 && naturalD20(roll) === 20) rctMoment(actor, t("RCT.Nat20")).catch(() => {});
+  };
+  Hooks.on("dnd5e.rollDeathSaveV2", (rolls, data) => deathSave(data?.subject, rolls));
+  Hooks.on("dnd5e.rollDeathSave", (actor, roll) => { if (actor?.documentName === "Actor") deathSave(actor, roll); });
+  Hooks.on("updateCombat", (combat, changes) => {
+    if ("turn" in (changes ?? {}) || "round" in (changes ?? {})) advanceAmber(combat).catch((err) => reportError("amber", err));
+  });
+  Hooks.on("dnd5e.restCompleted", async (actor, result) => {
+    if (!actor?.isOwner || !result?.longRest) return;
+    if (actor.getFlag(MODULE_ID, "clashUsed")) await actor.unsetFlag(MODULE_ID, "clashUsed");
+    if (optOn("totalityAlt") && actor.getFlag(MODULE_ID, "fallenShikigami")?.length) {
+      await actor.unsetFlag(MODULE_ID, "fallenShikigami");
+      await chat(actor, `<p>${t("Opt.Totality.Back", { name: esc(actor.name) })}</p>`);
+    }
+  });
+  Hooks.on("createItem", (item, options, userId) => { if (userId === game.user.id) checkRepetitive(item).catch((err) => reportError("repetitive", err)); });
+  if (midiActive()) {
+    Hooks.on("midi-qol.RollComplete", (workflow) => {
+      calledShotResult(workflow).catch((err) => reportError("called shot", err));
+      coupResult(workflow).catch((err) => reportError("coup", err));
+      if (optOn("executionEvasion") && /Executioner|Verdugo/i.test(workflow?.activity?.name ?? "")) {
+        for (const tk of workflow.hitTargets ?? []) {
+          const a = asToken(tk)?.actor;
+          if (a) chat(a, `<p><strong>${t("Opt.executionEvasion.Name")}</strong>: ${t("Opt.Evasion.Offer", { name: esc(a.name) })}</p>
+            <button type="button" data-jjk5e-evade="${esc(a.uuid)}">${t("Opt.executionEvasion.Name")}</button>`, privateTo(a));
+        }
+      }
+    });
+  }
+  Hooks.on("renderChatMessageHTML", (message, html) => {
+    for (const b of html?.querySelectorAll?.("[data-jjk5e-rct]") ?? []) b.addEventListener("click", async (ev) => {
+      ev.preventDefault();
+      const doc = await fromUuid(b.dataset.jjk5eRct).catch(() => null);
+      const actor = doc?.actor ?? doc;
+      if (!actor?.isOwner) return;
+      b.disabled = true;
+      if (b.dataset.mode === "grant") await unlockRCT(actor, t("RCT.ByGM")); else await rollRCTAwakening(actor);
+    });
+    for (const b of html?.querySelectorAll?.("[data-jjk5e-swap]") ?? []) b.addEventListener("click", async (ev) => {
+      ev.preventDefault();
+      const item = await fromUuid(b.dataset.jjk5eSwap).catch(() => null);
+      const actor = item?.parent;
+      if (!actor?.isOwner) return;
+      if (await pickFeat(actor, t("Opt.Repeat.Swap"))) { await item.delete(); b.disabled = true; }
+    });
+    for (const b of html?.querySelectorAll?.("[data-jjk5e-evade]") ?? []) b.addEventListener("click", async (ev) => {
+      ev.preventDefault();
+      const doc = await fromUuid(b.dataset.jjk5eEvade).catch(() => null);
+      const actor = doc?.actor ?? doc;
+      if (actor?.isOwner) { b.disabled = true; await executionEvasion(actor); }
+    });
+  });
 });

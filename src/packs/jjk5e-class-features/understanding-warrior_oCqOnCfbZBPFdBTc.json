@@ -1,0 +1,114 @@
+{
+ "_id": "oCqOnCfbZBPFdBTc",
+ "name": "Destructive Cursed Strike",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/ce.svg",
+ "folder": null,
+ "system": {
+  "description": {
+   "value": "<p><em>Class Specific Understanding (Warrior, optional rule): 2 Breakthroughs, only one.</em></p><p>When you use <em>Cursed Strike</em>, you deal additional necrotic damage equal to your CE modifier a number of times equal to twice your proficiency bonus each day.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "Optional Rules",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": ""
+  },
+  "requirements": "Warrior, 2 Breakthroughs",
+  "activities": {
+   "hrbG1ZJE8MbHUoiL": {
+    "_id": "hrbG1ZJE8MbHUoiL",
+    "type": "damage",
+    "name": "Destructive Cursed Strike: + CE mod necrotic",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1",
+       "scaling": {}
+      }
+     ],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "damage": {
+     "parts": [
+      {
+       "number": null,
+       "denomination": null,
+       "bonus": "max(@abilities.wis.mod, @abilities.cha.mod)",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
+   }
+  },
+  "uses": {
+   "max": "2 * @prof",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
+    }
+   ]
+  }
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "classUnderstanding": "warrior",
+   "prereq": {
+    "classes": [
+     "warrior"
+    ],
+    "breakthroughs": 2
+   },
+   "automation": "automated",
+   "rev": "a74b07de1e"
+  }
+ },
+ "_key": "!items!oCqOnCfbZBPFdBTc"
+}

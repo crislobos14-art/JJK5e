@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.68.0 — Reglas opcionales del manual, despertar de la TMI y comprensiones de clase
+- **Reglas opcionales**: nueva ventana *Reglas opcionales* (Ajustes del módulo, menú JJK o pestaña GM). Las 30 reglas del manual están desactivadas por defecto y se activan una a una. Las activas se automatizan: Alternativa a la Totalidad, Menos sangre, Conversión de sangre, Precisión de la Bestia Mítica, Ventaja acumulada, Críticos contundentes, Salvaciones críticas, Disparo dirigido, Luchar por tu vida, Recibir el golpe, Choque, Flanquear, Sin técnica, Habilidades repetidas, Mejora con dote, Barrera pura, Evasión de la ejecución, Pruebas de alma, Agotamiento de salida, Afinidad aumentada, Dependencia de los Seis Ojos, PG aumentados, Pruebas duras, Acciones adicionales (Distraer, Romper objeto, Golpe de gracia, Carga), Formas de ganar dinero, Progresión anual, Encontrar un espíritu maldito, Maldito al morir y Percepción del alma de objetos.
+- **Despertar de la TMI**: si la tirada d100 saca 90 o más, se añaden los rasgos de Técnica Maldita Inversa y +1 avance. Cuando un personaje pasa de PG máximos a 0 de un golpe, o saca un 20 natural tras dos salvaciones de muerte falladas, el GM recibe una tarjeta para otorgarla o pedir la tirada. Nuevos botones *Tirar por la TMI* y *Otorgar TMI*.
+- **Comprensiones específicas de clase**: 6 rasgos nuevos, uno por clase, automatizados. Requieren 2 avances y solo se puede tener una. Cada clase los muestra en su descripción.
+- Totalidad: un shikigami muerto ya no se puede volver a invocar. Con la regla alternativa vuelve tras un descanso largo.
+- 15 pruebas nuevas (64 en total).
+
 ## 1.67.0 — Tema visual Sealed Ink (estilo Jujutsu Kaisen)
 - Nuevo tema *Sealed Ink* inspirado en la serie: tinta sumi, papel de talismán, un único rojo de sello y energía maldita en violeta; dorado solo para el GM. El marco de las ventanas de Foundry no se toca: solo cambia el contenido.
 - Cabecera con sello 呪 y nombre en tipografía condensada (Big Shoulders, OFL, incluida en el módulo); marca de agua 呪 muy tenue.

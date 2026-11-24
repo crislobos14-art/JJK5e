@@ -11,7 +11,7 @@ import hashlib, json, os, re, sys
 ALPHA = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 PACKS = {"jjk5e-techniques": "data/jjk5e-techniques.json", "jjk5e-feats": "data/jjk5e-feats.json",
          "jjk5e-equipment": "data/jjk5e-equipment.json", "jjk5e-class-features": "data/jjk5e-class-features.json",
-         "jjk5e-races": "data/jjk5e-races.json"}
+         "jjk5e-races": "data/jjk5e-races.json", "jjk5e-classes": "data/jjk5e-classes.json"}
 CE = "max(@abilities.wis.mod, @abilities.cha.mod)"
 NON_PSYCHIC = ["acid", "bludgeoning", "cold", "fire", "force", "lightning", "necrotic", "piercing", "poison",
                "radiant", "slashing", "thunder"]
@@ -7750,6 +7750,165 @@ def weapon_fixes(S):
     tag["flags"]["jjk5e"]["ceRegain"] = {rid: 3}
 
 
+# ---------------------------------------------------------------- v1.68: optional rules, RCT unlock, class understandings
+
+UNDERSTANDING = {
+    "juggernaut": ("Skilled Cursed Reinforcement",
+                   "When you use Cursed Reinforcement, you can instead gain 10 temporary hit points per CE spent. You can do "
+                   "this a number of times equal to your proficiency bonus each day."),
+    "scout": ("Reliable Skill",
+              "When you make a skill check that you are proficient with, you can treat any roll of a 9 or lower as a 10."),
+    "strategist": ("Enhanced Creativity",
+                   "You gain an additional two <em>Technique Creativity</em> options. You can reduce a technique's cost by 1 "
+                   "(min cost of 1) a number of times each day equal to your proficiency bonus."),
+    "shikigami-user": ("Cursed Bond",
+                       "Your <em>Shikigami Companion</em> or one Shikigami, Cursed Corpse, or a tamed Cursed Spirit you have can use "
+                       "<em>Cursed Strike</em> a number of times equal to your proficiency bonus each day. When using it this way, it "
+                       "benefits from any Awakened Understanding or features that benefit your <em>Cursed Strike</em>. You can switch "
+                       "your <em>Cursed Bond</em> as part of a long rest."),
+    "support-specialist": ("Positive Energy Master",
+                           "You have unlocked a well of healing from deep within. You have a pool of healing separate from your RCT "
+                           "pool containing a number of hit points equal to twice your level. You can draw any number of healing "
+                           "from this pool as a bonus action to heal yourself. You can use this healing on another creature you "
+                           "touch at 5th level."),
+    "warrior": ("Destructive Cursed Strike",
+                "When you use <em>Cursed Strike</em>, you deal additional necrotic damage equal to your CE modifier a number "
+                "of times equal to twice your proficiency bonus each day."),
+}
+
+OPT_ACTIONS = {
+    "distract": ("Distract",
+                 "If you take the Distract action, you can attempt to Distract a creature within 15 ft of you that can see or hear "
+                 "you. If they are concentrating on a technique or ability, they are forced to make a concentration check to "
+                 "maintain the ability. Even if they succeed, your distraction increases the DC of concentration checks they make "
+                 "by +1 until the beginning of your turn, so long as you remain within 15 feet and continue distracting. A single "
+                 "creature can only be affected by up to 3 DC increases as a result of creatures using this action."),
+    "sunder": ("Sunder",
+               "You can attempt to sunder an item held or worn by your opponent as part of an attack action in place of a melee "
+               "attack. Attempting to sunder an item provokes an attack of opportunity from the target.</p><p>If your attack is "
+               "successful, you deal damage to the item normally. Damage that exceeds the object's Hardness is subtracted from its "
+               "hit points. If an object has equal to or less than half its total hit points remaining, it gains the broken "
+               "condition (becomes -3 item). If the damage you deal would reduce the object to less than 0 hit points, you can "
+               "choose to destroy it. If you do not choose to destroy it, the object is left with only 1 hit point and the "
+               "broken condition."),
+    "coup": ("Coup de Grace",
+             "As a Full Turn Action (Action + Bonus Action + Movement), you make a melee attack while within 5 ft of an "
+             "unconscious creature. The target must make a Constitution saving throw equal to the damage taken or die instantly."),
+    "charge": ("Charge",
+               "You gain 10 ft of additional movement that must be used to move in a straight line before hitting a target with a "
+               "melee attack as part of the same action. Even if you have multiple attacks on your turn, you can only make 1 attack "
+               "on this turn when using the Charge action. For every additional attack you could make, you gain a +1 to the attack roll."),
+}
+
+
+def optional_rules(S):
+    F, CF = "jjk5e-feats", "jjk5e-class-features"
+    src = {"book": "JJK 5e V.6", "page": "", "custom": "Optional Rules", "license": "CC BY-NC-SA 4.0", "rules": "2014"}
+    strike = S.get("Cursed Strike", CF)
+
+    def new(pack, slug, name, desc, req="", flags=None, uses=None, img=None):
+        return S.add(pack, {"_id": sid("optional", slug), "name": name, "type": "feat", "img": img or strike.get("img"),
+                            "folder": None,
+                            "system": {"description": {"value": f"<p>{desc}</p>"}, "source": src,
+                                       "type": {"value": "feat", "subtype": ""}, "requirements": req, "activities": {},
+                                       "uses": uses or {"max": "", "spent": 0, "recovery": []}},
+                            "effects": [], "flags": {"jjk5e": flags or {}}}, slug)
+
+    per_day = lambda f: {"max": f, "spent": 0, "recovery": [{"period": "lr", "type": "recoverAll"}]}
+    use1 = lambda a: a["consumption"].update({"targets": [{"type": "itemUses", "target": "", "value": "1", "scaling": {}}]})
+
+    # Techniqueless (optional rule): ASI + feat at 1, 3, 6, 11 and 18 — the module asks on level up.
+    tl = new(F, "techniqueless", "Techniqueless",
+             "If a player wants to play without an Innate Technique and does not wish to use New Shadow Style or Divergent "
+             "Fist, they can instead gain a +2 Ability Score Increase AND Feat they meet the prerequisites for at 1st and 3rd "
+             "level. A +3 ASI and Feat at 6th level and 11th, and +3 ASI and 2 Feats at 18th level. Do be warned, this will of "
+             "course be generally weaker than having a technique.", "No Innate Technique (DM option)", {"techniqueless": True})
+    note(tl, "On each 1st/3rd/6th/11th/18th level the module asks for the ASI points and the feat(s)."); mark(tl)
+
+    # Class Specific Understandings (optional): 2 breakthroughs, same class, only one.
+    for cls, (name, desc) in UNDERSTANDING.items():
+        it = new(CF, f"understanding-{cls}", name, f"<em>Class Specific Understanding ({cls.replace('-', ' ').title()}, "
+                 f"optional rule): 2 Breakthroughs, only one.</em></p><p>{desc}",
+                 f"{cls.replace('-', ' ').title()}, 2 Breakthroughs",
+                 {"classUnderstanding": cls, "prereq": {"classes": [cls], "breakthroughs": 2}})
+        if cls == "juggernaut":
+            it["system"]["uses"] = per_day("@prof")
+            a = act(it, "reinforce", "heal", "Cursed Reinforcement: 10 temp HP per CE", "action", range=RANGE_SELF, target=SELF,
+                    healing={"number": None, "denomination": None, "bonus": "10", "types": ["temphp"],
+                             "custom": {"enabled": False, "formula": ""}, "scaling": {"mode": "whole", "formula": "10"}})
+            use1(a); cost(it, a, 1, 1, f"max(1, {CE})")
+        elif cls == "scout":
+            it["flags"]["jjk5e"]["reliableSkill"] = True
+            note(it, "Proficient skill checks: d20 results of 9 or lower count as 10.")
+        elif cls == "strategist":
+            it["system"]["uses"] = per_day("@prof")
+            a = act(it, "reduce", "utility", "Reduce the next technique's cost by 1", "special", range=RANGE_SELF, target=SELF)
+            use1(a)
+            it["flags"]["jjk5e"]["costMinusNext"] = [a["_id"]]
+            note(it, "Use it before a technique: its CE cost drops by 1 (min 1). The two extra Technique Creativity options are chosen by hand.")
+        elif cls == "shikigami-user":
+            it["system"]["uses"] = per_day("@prof")
+            a = act(it, "bond", "utility", "Cursed Bond: bonded summon uses Cursed Strike", "special", range=_r(60), target=one_creature())
+            use1(a)
+            note(it, "Spend one use when the bonded summon uses Cursed Strike (roll it from your Cursed Strike).")
+        elif cls == "support-specialist":
+            it["system"]["uses"] = per_day("2 * @details.level")
+            a = act(it, "heal", "heal", "Positive Energy: heal (1 HP per use)", "bonus", range=RANGE_SELF, target=SELF,
+                    healing={"number": None, "denomination": None, "bonus": "1", "types": ["healing"],
+                             "custom": {"enabled": False, "formula": ""}, "scaling": {"mode": "whole", "formula": "1"}})
+            a["consumption"] = {"targets": [{"type": "itemUses", "target": "", "value": "1", "scaling": {"mode": "amount", "formula": "1"}}],
+                                "scaling": {"allowed": True, "max": "2 * @details.level"}, "spellSlot": False}
+            t = act(it, "touch", "heal", "Positive Energy: heal a creature you touch (5th level)", "bonus",
+                    range={"units": "touch", "override": True}, target=one_creature(),
+                    healing=dict(a["healing"]))
+            t["consumption"] = json.loads(json.dumps(a["consumption"]))
+        elif cls == "warrior":
+            it["system"]["uses"] = per_day("2 * @prof")
+            a = act(it, "strike", "damage", "Destructive Cursed Strike: + CE mod necrotic", "special", range=_r(5), target=one_creature(),
+                    damage={"parts": [{"number": None, "denomination": None, "bonus": CE, "types": ["necrotic"],
+                                       "custom": {"enabled": False, "formula": ""}, "scaling": {}}]})
+            use1(a)
+        mark(it)
+
+    # Additional Actions (optional).
+    for key, (name, desc) in OPT_ACTIONS.items():
+        it = new(CF, f"action-{key}", name, desc, "Additional Actions (DM option)", {"optAction": key})
+        if key == "distract":
+            a = act(it, "use", "utility", "Distract (action)", "action", range=_r(15), target=one_creature())
+            apply(a, fx(it, "dc", "Distracted (+1 concentration DC)", rounds=1,
+                        changes=[("system.attributes.concentration.bonuses.save", 2, "-1")], special=["turnStartSource"],
+                        desc="+1 to the DC of concentration checks (max +3 from Distract) until the start of the distracter's turn."))
+        elif key == "sunder":
+            act(it, "use", "utility", "Sunder an item (replaces a melee attack)", "special", range=_r(5), target=one_creature())
+        elif key == "coup":
+            act(it, "use", "utility", "Coup de Grace (full turn): attack an unconscious creature", "action", range=_r(5), target=one_creature())
+        elif key == "charge":
+            act(it, "use", "utility", "Charge (+10 ft straight line, +1 per extra attack)", "action", range=RANGE_SELF, target=SELF)
+        mark(it, "automated" if key in ("distract", "charge") else "partial")
+
+
+    # Each class lists its Class Specific Understanding (optional rule).
+    CL = "jjk5e-classes"
+    for (pk, path, d) in list(S.src.values()):
+        if pk != CL or d.get("type") != "class": continue
+        cls = d["system"].get("identifier")
+        if cls not in UNDERSTANDING: continue
+        S.by_id(d["_id"])
+        desc = d["system"]["description"]
+        desc["value"] = re.sub(r'<h3 data-jjk5e="understanding">.*?</p>\s*$', "", desc.get("value") or "", flags=re.S)
+        name, text = UNDERSTANDING[cls]
+        uid = sid("optional", f"understanding-{cls}")
+        desc["value"] += (f'<h3 data-jjk5e="understanding">Class Specific Understanding (optional)</h3>'
+                          f'<p>Requires 2 Breakthroughs; only one per character. '
+                          f'@UUID[Compendium.jjk5e.jjk5e-class-features.Item.{uid}]{{{name}}}: {text}</p>')
+
+    # Mythical Beast Accuracy: stage effects carry their number so the module can advance them each turn.
+    r = S.get("Mythical Beast Amber Release")
+    for e in r.get("effects", []):
+        m = re.match(r"Amber Stage (\d)", e["name"])
+        if m: e.setdefault("flags", {}).setdefault("jjk5e", {})["amberStage"] = int(m.group(1))
+
+
 TECHNIQUES = {"Antigravity System": antigravity_system,
               "Auspicious Beast Summon": auspicious_beast_summon,
               "Black Bird Manipulation": black_bird_manipulation,
@@ -7838,7 +7997,9 @@ TECHNIQUES = {"Antigravity System": antigravity_system,
               "_weapons": weapon_fixes,
               "_rules": rules_fixes,
               "_featreview": feat_review2,
-              "_backlog": backlog_fixes}
+              "_backlog": backlog_fixes,
+              "_optional": optional_rules}
+
 
 if __name__ == "__main__":
     args = sys.argv[1:]

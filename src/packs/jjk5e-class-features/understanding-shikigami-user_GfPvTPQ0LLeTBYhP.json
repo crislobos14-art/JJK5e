@@ -1,0 +1,98 @@
+{
+ "_id": "GfPvTPQ0LLeTBYhP",
+ "name": "Cursed Bond",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/ce.svg",
+ "folder": null,
+ "system": {
+  "description": {
+   "value": "<p><em>Class Specific Understanding (Shikigami User, optional rule): 2 Breakthroughs, only one.</em></p><p>Your <em>Shikigami Companion</em> or one Shikigami, Cursed Corpse, or a tamed Cursed Spirit you have can use <em>Cursed Strike</em> a number of times equal to your proficiency bonus each day. When using it this way, it benefits from any Awakened Understanding or features that benefit your <em>Cursed Strike</em>. You can switch your <em>Cursed Bond</em> as part of a long rest.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "Optional Rules",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": ""
+  },
+  "requirements": "Shikigami User, 2 Breakthroughs",
+  "activities": {
+   "FMm80Du3qopLXfxg": {
+    "_id": "FMm80Du3qopLXfxg",
+    "type": "utility",
+    "name": "Cursed Bond: bonded summon uses Cursed Strike",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "target": "",
+       "value": "1",
+       "scaling": {}
+      }
+     ],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": []
+   }
+  },
+  "uses": {
+   "max": "@prof",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "lr",
+     "type": "recoverAll"
+    }
+   ]
+  }
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "classUnderstanding": "shikigami-user",
+   "prereq": {
+    "classes": [
+     "shikigami-user"
+    ],
+    "breakthroughs": 2
+   },
+   "automationNotes": "Spend one use when the bonded summon uses Cursed Strike (roll it from your Cursed Strike).",
+   "automation": "automated",
+   "rev": "ff897a8fbb"
+  }
+ },
+ "_key": "!items!GfPvTPQ0LLeTBYhP"
+}

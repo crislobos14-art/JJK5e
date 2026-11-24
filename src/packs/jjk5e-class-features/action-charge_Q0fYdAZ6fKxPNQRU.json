@@ -1,0 +1,76 @@
+{
+ "_id": "Q0fYdAZ6fKxPNQRU",
+ "name": "Charge",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/ce.svg",
+ "folder": null,
+ "system": {
+  "description": {
+   "value": "<p>You gain 10 ft of additional movement that must be used to move in a straight line before hitting a target with a melee attack as part of the same action. Even if you have multiple attacks on your turn, you can only make 1 attack on this turn when using the Charge action. For every additional attack you could make, you gain a +1 to the attack roll.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "Optional Rules",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": ""
+  },
+  "requirements": "Additional Actions (DM option)",
+  "activities": {
+   "ySCl3sCZEAdWC5Zm": {
+    "_id": "ySCl3sCZEAdWC5Zm",
+    "type": "utility",
+    "name": "Charge (+10 ft straight line, +1 per extra attack)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
+   }
+  },
+  "uses": {
+   "max": "",
+   "spent": 0,
+   "recovery": []
+  }
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "optAction": "charge",
+   "automation": "automated",
+   "rev": "580fe5b47c"
+  }
+ },
+ "_key": "!items!Q0fYdAZ6fKxPNQRU"
+}

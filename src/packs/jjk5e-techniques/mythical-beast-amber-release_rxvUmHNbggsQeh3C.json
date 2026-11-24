@@ -803,7 +803,7 @@
    },
    "automationNotes": "Each stage lasts 5 rounds; after 5 rounds in Stage 5 you die. Remove the previous stage's effect when advancing. Extra attacks/actions per stage: track by hand. Usable once in your life.",
    "automation": "automated",
-   "rev": "69e43d6d71"
+   "rev": "47df649ba3"
   }
  },
  "effects": [
@@ -911,7 +911,8 @@
    },
    "flags": {
     "jjk5e": {
-     "technique": "Mythical Beast Amber"
+     "technique": "Mythical Beast Amber",
+     "amberStage": 1
     }
    },
    "_key": "!items.effects!rxvUmHNbggsQeh3C.suQwUhLhKWfQA6ch"
@@ -995,7 +996,8 @@
    },
    "flags": {
     "jjk5e": {
-     "technique": "Mythical Beast Amber"
+     "technique": "Mythical Beast Amber",
+     "amberStage": 2
     }
    },
    "_key": "!items.effects!rxvUmHNbggsQeh3C.lZL0FietwcAl920w"
@@ -1085,7 +1087,8 @@
    },
    "flags": {
     "jjk5e": {
-     "technique": "Mythical Beast Amber"
+     "technique": "Mythical Beast Amber",
+     "amberStage": 3
     }
    },
    "_key": "!items.effects!rxvUmHNbggsQeh3C.TWfttinBDPdMf8yy"
@@ -1181,7 +1184,8 @@
    },
    "flags": {
     "jjk5e": {
-     "technique": "Mythical Beast Amber"
+     "technique": "Mythical Beast Amber",
+     "amberStage": 4
     }
    },
    "_key": "!items.effects!rxvUmHNbggsQeh3C.jcMN7fZjUHZHOsQr"
@@ -1277,7 +1281,8 @@
    },
    "flags": {
     "jjk5e": {
-     "technique": "Mythical Beast Amber"
+     "technique": "Mythical Beast Amber",
+     "amberStage": 5
     }
    },
    "_key": "!items.effects!rxvUmHNbggsQeh3C.4phTDlDAEDnDJT4J"

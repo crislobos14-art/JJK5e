@@ -354,3 +354,11 @@ button.jjk5e-levelup { display: block; margin: 4px auto 0; padding: 2px 10px; fo
   .jjk5e-ui .jjk-ce-quick button i { display: none; }
   .jjk5e-ui .jjk-name { font-size: 20px; }
 }
+/* optional rules window */
+.jjk5e-optrules .jjk-opt-list { display: grid; gap: 4px; margin: 8px 0; }
+.jjk5e-optrules .jjk-opt { display: grid; grid-template-columns: 120px 1fr; gap: 10px; align-items: start; padding: 6px 8px;
+  background: var(--jjk-card, #1a171e); border-left: 3px solid var(--jjk-line, #3a3340); cursor: pointer; }
+.jjk5e-optrules .jjk-opt:has(input:checked), .jjk5e-optrules .jjk-opt:has(select option:checked:not([value="off"]):not([value="1"])) { border-left-color: var(--jjk-seal, #c8102e); }
+.jjk5e-optrules .jjk-opt-ctl { display: flex; justify-content: flex-end; }
+.jjk5e-optrules .jjk-opt small { display: block; opacity: .75; line-height: 1.35; }
+.jjk5e-optrules footer.btns { position: sticky; bottom: 0; padding-top: 6px; background: inherit; }
