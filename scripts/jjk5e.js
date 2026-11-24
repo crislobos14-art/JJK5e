@@ -512,7 +512,8 @@ function ceLedger(pool) {
   const data = pool?.getFlag?.(MODULE_ID,"ceLedger");
   return Array.isArray(data) ? foundry.utils.deepClone(data) : [];
 }
-function cePending(pool) { return ceLedger(pool).some((x) => x.state === "reserved" || x.state === "review"); }
+function restReview(actor){return actor?.getFlag?.(MODULE_ID,"shortRestExchange")?.state==="review";}
+function cePending(pool) { return restReview(pool?.actor ?? pool?.parent) || ceLedger(pool).some((x) => x.state === "reserved" || x.state === "review"); }
 function ceRecord(ledger, record) {
   const others = ledger.filter((x)=>x.id!==record.id);
   // Never discard open reservations. Bound only closed history.
@@ -764,7 +765,7 @@ function totalActivityCECost(actor, activity, usageConfig = {}) {
   return activityCECost({ base, step, scaling, factor: ceDiscountFactor(actor) });
 }
 async function doSpendCE(actor, amount, label = "", { exact = false } = {}) {
-  if (!actor?.isOwner || !Number.isFinite(amount)) return false;
+  if (!actor?.isOwner || !Number.isFinite(amount) || restReview(actor)) return false;
   const pool = findPool(actor);
   if (!pool) {
     ui.notifications.warn(t("Notify.NoPool", { name: actor?.name ?? "?" }));
@@ -821,7 +822,7 @@ async function setExactCE(actor, value) {
 }
 function validActivityCE(actor, activity, usageConfig, { checkPool = true } = {}) {
   const cost = totalActivityCECost(actor, activity, usageConfig);
-  if (!Number.isFinite(cost) || cost < 0) return false;
+  if (!Number.isFinite(cost) || cost < 0 || (cost>0&&restReview(actor))) return false;
   if (vowBlocksUsage(actor?.effects, { costsCE: cost > 0, innateTechnique: !!activity.item?.flags?.jjk5e?.technique })) return false;
   const ro = Number(actor?.getFlag(MODULE_ID,"reducedOutput")) || 0;
   if (RO_MAX[ro] && cost > RO_MAX[ro]) {
@@ -1656,7 +1657,7 @@ async function commitRestExchange(actor, restId, n) {
     if(!updates)return false;
     // Persist intent before applying the same-actor embedded Item batch.
     // If a write fails or acknowledgement is lost, GM must inspect the journal.
-    const before=updates.map(u=>{const item=actor.items.get(u._id);return {_id:u._id,hd:item.system.hd?.spent,spent:item.system.uses?.spent,fractional:item.flags?.jjk5e?.fractionalSpent??0};});
+    const before=updates.map(u=>{const item=actor.items.get(u._id);return Object.fromEntries(Object.keys(u).map(k=>[k,k==="_id"?u._id:Number(foundry.utils.getProperty(item,k)??0)]));});
     await actor.setFlag(MODULE_ID,"shortRestExchange",{id:restId,state:"review",amount:n,before,updates});
     try{
       await actor.updateEmbeddedDocuments("Item",updates,{jjk5eCE:true});
@@ -1669,6 +1670,30 @@ async function commitRestExchange(actor, restId, n) {
       return false;
     }
     if(setting("ceChat"))try{await chat(actor,`<p><strong>${t("CE.ShortRestLabel",{n})}</strong>: +${n} CE</p>`,privateTo(actor));}catch(err){reportError("rest exchange chat",err);}
+    return true;
+  });
+}
+function restRowsMatch(actor,rows){
+  return Array.isArray(rows)&&rows.length>0&&rows.every(u=>{
+    const item=actor.items.get(u._id);
+    return item&&Object.entries(u).every(([k,v])=>k==="_id"||Number(foundry.utils.getProperty(item,k)??0)===v);
+  });
+}
+async function resolveRestExchange(actor){
+  if(!isActiveGM()||!restReview(actor))return false;
+  return queueCE(actor,async()=>{
+    const rec=actor.getFlag(MODULE_ID,"shortRestExchange");
+    if(rec?.state!=="review")return false;
+    const after=restRowsMatch(actor,rec.updates),before=restRowsMatch(actor,rec.before);
+    const spanish=game.i18n.lang.startsWith("es");
+    if(!after&&!before){
+      ui.notifications.warn(spanish?"Valores mixtos: compara y corrige manualmente los recursos antes de conciliar.":"Mixed values: compare and manually correct resources before reconciliation.");
+      return false;
+    }
+    const state=after?"committed":"open";
+    if(!await confirmDialog("CE · "+(spanish?"Conciliación":"Reconciliation"),`<p>${spanish?"Los valores coinciden con":"Values match"} ${after?(spanish?"la operación aplicada":"the applied operation"):(spanish?"el estado anterior":"the prior state")}.</p>`))return false;
+    if(!restRowsMatch(actor,after?rec.updates:rec.before))return false;
+    await actor.setFlag(MODULE_ID,"shortRestExchange",{id:rec.id,state,amount:after?rec.amount:0});
     return true;
   });
 }
@@ -2545,6 +2570,8 @@ function panelHTML(actor, tab = "combat") {
   const gmTab = gm ? `<p class="jjk-note">${t("Panel.GMHint")}</p>
     <fieldset><legend>${t("Panel.GMValues")}</legend><div class="jjk-grid">
       ${pool ? pbtn("gmCE", "fas fa-bolt", `${t("Panel.GMSetCE")} (${value}/${max})`) : ""}
+      ${restReview(actor)?pbtn("restReview","fas fa-triangle-exclamation",game.i18n.lang.startsWith("es")?"Conciliar descanso":"Reconcile rest"):""}
+      ${actor.flags?.jjk5e?.shikigami&&Number(actor.system.attributes?.hp?.value)===0?pbtn("shikigamiReview","fas fa-ghost",game.i18n.lang.startsWith("es")?"Resolver shikigami a 0 PG":"Resolve shikigami at 0 HP"):""}
       ${pbtn("engineDiagnostics", "fas fa-stethoscope", t("Diag.Title"))}
       ${pbtn("gmRefinement", "fas fa-circle-half-stroke", `${t("Domain.Refinement")}: ${refinementOf(actor)}`)}
       ${pbtn("soulDamage", "fas fa-ghost", t("Soul.Apply"))}
@@ -2628,6 +2655,8 @@ const PANEL_ACTIONS = {
   ceRegain: (actor) => promptCE("regain", actor),
   negEmotion: (actor) => negativeEmotion(actor),
   shortRest: (actor) => shortRestCE(actor),
+  restReview: (actor) => resolveRestExchange(actor),
+  shikigamiReview: (actor) => recordFallenShikigami(actor),
   chooseTechnique: (actor) => chooseTechnique(actor),
   ceAbility: (actor) => chooseCEAbility(actor),
   pointBuy: (actor) => pointBuy(actor),
@@ -2662,7 +2691,7 @@ const PANEL_ACTIONS = {
 
 // Overrides that only the GM may use (hidden for players and refused if called anyway).
 const GM_PANEL_ACTIONS = new Set(["clearBurnout", "clearZone", "clearBF", "clearSoul", "soulDamage", "roUp", "roDown",
-  "soulUp", "soulDown", "limb", "gmRefinement", "gmBreakthrough", "gmCE", "updateAll","engineDiagnostics"]);
+  "soulUp", "soulDown", "limb", "gmRefinement", "gmBreakthrough", "gmCE", "updateAll","engineDiagnostics","restReview","shikigamiReview"]);
 
 function makePanelClass() {
   const Base = foundry.applications?.api?.ApplicationV2;
@@ -3186,7 +3215,7 @@ Hooks.once("init", () => {
   game.modules.get(MODULE_ID).api = {
     importAll, promptImport, spendCE, dataLanguage, baseName,
     regainCE: (actor, amount, label) => spendCE(actor, -Math.abs(amount), label || t("CE.Regained")),
-    findPool, poolValue, poolMax, cePending, chooseTechnique, syncTechnique, promptCE, shortRestCE, chooseCEAbility, negativeEmotion,
+    findPool, poolValue, poolMax, cePending, resolveRestExchange, chooseTechnique, syncTechnique, promptCE, shortRestCE, chooseCEAbility, negativeEmotion,
     applyScaling, openPanel, maximumOutput, setReducedOutput, setSoulAwareness, setLimb, rollLimb,
     summon, dismissSummons, syncResource, missingPrereqs, applyCEEffects, activateGroup, endGroup,
     updateAutomation, updateAllAutomation, outdatedItems, burnoutRecovery, fallDamage, applySoulDamage, clearSoulDamage,
@@ -3256,7 +3285,7 @@ Hooks.once("ready", async () => {
   Hooks.on("updateCombat", () => expireEffects());
   for(const hook of ["dnd5e.preShortRest","dnd5e.preLongRest","dnd5e.preRestCompleted"]) {
     Hooks.on(hook,actor=>{
-      if(ceAuthorityEnabled()&&cePending(findPool(actor))) {
+      if(restReview(actor)||(ceAuthorityEnabled()&&cePending(findPool(actor)))) {
         ui.notifications.warn(t("Notify.CEPendingRest"));
         return false;
       }
