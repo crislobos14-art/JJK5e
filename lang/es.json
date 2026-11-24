@@ -280,6 +280,7 @@
       "RegainShort": "Recuperar"
     },
     "Notify": {
+      "CEWorkflowUnverified": "JJK5e: no se pudo verificar el pago de EM de esta actividad de Midi-QOL. Se detuvo la ejecución; consulta al GM.",
       "NoActor": "JJK 5e: selecciona un token o asigna un personaje primero.",
       "NotOwner": "JJK 5e: no eres dueño de ese actor.",
       "HRNoTechnique": "JJK 5e: Heavenly Restriction no tiene Técnica Innata.",
