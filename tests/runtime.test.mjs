@@ -875,3 +875,41 @@ test("CE audit: overlapping local payments cannot both spend unavailable CE",asy
   assert.equal(results.filter(Boolean).length,1);
   assert.equal(J.poolValue(J.findPool(actor)),5);
 });
+
+
+test("Transactional CE: authenticated owner, persistent reservation and replay rejection",async()=>{
+  const {actor,J}=await setup();
+  const [item]=await actor.createEmbeddedDocuments("Item",[{name:"Technique",type:"feat",flags:{jjk5e:{ceCosts:{a:8},ceSteps:{a:2}}},system:{activities:{a:{id:"a",name:"Attack"}}}}]);
+  const owner={id:"owner",active:true,isGM:false},other={id:"other",active:true,isGM:false};
+  actor.testUserPermission=(u)=>u.id===owner.id;
+  const payload={actorUuid:actor.uuid,itemId:item.id,activityId:"a",id:"tx1",scaling:1};
+  assert.equal(await J.handleCEAuthority({operation:"reserve",payload},{user:other}),false);
+  const result=await J.handleCEAuthority({operation:"reserve",payload},{user:owner});
+  assert.equal(result.cost,10);
+  assert.equal(J.poolValue(J.findPool(actor)),10);
+  assert.equal(await J.handleCEAuthority({operation:"reserve",payload},{user:owner}),false);
+  assert.equal(await J.handleCEAuthority({operation:"reserve",payload:{...payload,id:"tx2"}},{user:owner}),false);
+  assert.equal(await J.handleCEAuthority({operation:"commit",payload},{user:other}),false);
+  assert.equal(await J.handleCEAuthority({operation:"commit",payload},{user:owner}),true);
+  assert.equal(J.poolValue(J.findPool(actor)),10);
+  assert.equal(await J.handleCEAuthority({operation:"commit",payload},{user:owner}),false);
+  assert.equal(J.ceLedger(J.findPool(actor))[0].state,"committed");
+});
+test("Transactional CE: uncertain consumption requires GM settlement; only one refund",async()=>{
+  const {env,actor,J}=await setup();
+  const [item]=await actor.createEmbeddedDocuments("Item",[{name:"Technique",type:"feat",flags:{jjk5e:{ceCosts:{a:6}}},system:{activities:{a:{id:"a"}}}}]);
+  const user=env.game.user,payload={actorUuid:actor.uuid,itemId:item.id,activityId:"a",id:"tx-review",scaling:0};
+  assert.equal((await J.handleCEAuthority({operation:"reserve",payload},{user})).cost,6);
+  assert.equal(await J.handleCEAuthority({operation:"review",payload},{user}),true);
+  assert.equal(J.poolValue(J.findPool(actor)),14);
+  assert.equal(await J.handleCEAuthority({operation:"settle",payload:{...payload,refund:true}},{user}),true);
+  assert.equal(J.poolValue(J.findPool(actor)),20);
+  assert.equal(await J.handleCEAuthority({operation:"settle",payload:{...payload,refund:true}},{user}),false);
+});
+test("CE Quick Recovery: legacy costs are not negative charges",async()=>{
+  const {actor,J}=await setup();
+  const act={id:"Jt55eu41OQX7G6Sh",actor,item:{name:"Quick Recovery",flags:{jjk5e:{ceCosts:{Jt55eu41OQX7G6Sh:-1},ceSteps:{Jt55eu41OQX7G6Sh:-1}}}}};
+  assert.equal(J.activityCost(act),0);
+  assert.equal(J.totalActivityCECost(actor,act,{scaling:3}),0);
+  assert.equal(J.managedCE(act),false);
+});
