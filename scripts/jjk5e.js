@@ -606,6 +606,10 @@ async function consumeWithCE(wrapped,activity,usageConfig,messageConfig) {
   const ctx={key:ceUsageKey(activity),id,actorUuid:actor.uuid,state:"reservingNative",cost:reserve.cost};
   CE_USAGE_CONTEXT.set(usageConfig,ctx);
   try{
+    // Midi dnd6 exposes the in-progress use by activity before a card exists.
+    // Bind the precise native consumption config, not another use of the same item.
+    const workflow=globalThis.MidiQOL?.Workflow?.workflowFor?.(activity);
+    if(workflow) captureMidiUsage({workflow,usage:usageConfig});
     const result=await wrapped(usageConfig,messageConfig);
     const ok=!!result && result!==false;
     const ended=await ceAuthorityRequest(ok?"commit":"review",{actorUuid:actor.uuid,id});
@@ -4821,8 +4825,11 @@ function excludeDomainWardedTargets(workflow) {
   if (!protectedTargets.length) return [];
   const ids = new Set(protectedTargets.map((tk) => (tk?.document ?? tk)?.uuid).filter(Boolean));
   const exclude = (tk) => protectedTargets.includes(tk) || ids.has((tk?.document ?? tk)?.uuid);
-  for (const key of ["targets", "hitTargets", "hitTargetsEC", "saves", "failedSaves", "applicationTargets"]) {
-    if (typeof workflow[key]?.has === "function") workflow[key] = new Set([...workflow[key]].filter((tk) => !exclude(tk)));
+  for (const key of ["targets", "hitTargets", "hitTargetsEC", "saves", "failedSaves", "applicationTargets", "effectTargets"]) {
+    if (typeof workflow[key]?.has === "function" && typeof workflow[key]?.delete==="function") {
+      // Midi TokenDocumentSets accept token documents; preserve their identity/record binding.
+      for(const tk of [...workflow[key]]) if(exclude(tk)) workflow[key].delete(tk);
+    }
   }
   return protectedTargets;
 }
