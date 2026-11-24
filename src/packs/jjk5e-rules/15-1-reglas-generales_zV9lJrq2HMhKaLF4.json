@@ -1,0 +1,255 @@
+{
+ "_id": "zV9lJrq2HMhKaLF4",
+ "name": "15.1 — Reglas generales",
+ "sort": 15500,
+ "flags": {
+  "jjk5e": {
+   "lang": "es",
+   "source": "8PVVTxGcK3xAfCse"
+  }
+ },
+ "folder": "IXMKct7fx9qz8bdj",
+ "pages": [
+  {
+   "_id": "HRp7wi2GCCkqhuhE",
+   "name": "Reglas generales",
+   "type": "text",
+   "sort": 1000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Al explorar el mundo de Jujutsu Kaisen, al GM le puede costar recordar la mayoría de las reglas de esta ambientación. Estas son algunas reglas generales que conviene tener presentes.</p>"
+   },
+   "_key": "!journal.pages!zV9lJrq2HMhKaLF4.HRp7wi2GCCkqhuhE"
+  },
+  {
+   "_id": "c2oQ2FiSpG3wNu87",
+   "name": "Sistema de grados",
+   "type": "text",
+   "sort": 2000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>El grado es el sistema que clasifica el jujutsu del grado uno al cuatro, más el grado especial. Sirve para categorizar la fuerza de los hechiceros de jujutsu, los espíritus malditos, los objetos malditos y las herramientas malditas. En los hechiceros, el grado no solo indica su fuerza, sino también su valor como hechiceros. Cuanto más alto es tu grado, más difíciles son las misiones, pero también mayores las recompensas. Las maldiciones se clasifican por la amenaza que suponen para la sociedad; los hechiceros, por su capacidad para exorcizar maldiciones. Para subir a segundo o primer grado, debes recibir la recomendación de dos hechiceros de primer grado (los profesores no pueden recomendar a sus alumnos). Según tu desempeño, se te considera semiprimer grado. Después debes completar 3 misiones con un hechicero de primer grado. Si las completas satisfactoriamente, subes de grado.</p>\n<table>\n<thead><tr><th>Grado</th><th>Descripción</th><th>VD aproximado</th><th>Referencia</th></tr></thead>\n<tbody>\n<tr><td><strong>Grado 4</strong></td><td>El rango más bajo; hechiceros o espíritus débiles</td><td><strong>VD 1/8 – 1/2</strong></td><td>Basta con un bate de madera</td></tr>\n<tr><td><strong>Grado 3</strong></td><td>Hechiceros básicos; competentes contra maldiciones débiles</td><td><strong>VD 1 – 3</strong></td><td>Con una pistola puedes estar tranquilo</td></tr>\n<tr><td><strong>Grado 2</strong></td><td>Hechiceros hábiles con buenas técnicas y sentido del combate</td><td><strong>VD 4 – 7</strong></td><td>Por los pelos con una escopeta</td></tr>\n<tr><td><strong>Grado 1</strong></td><td>Hechiceros veteranos capaces de enfrentarse a maldiciones poderosas</td><td><strong>VD 8 – 16</strong></td><td>Ni siquiera un tanque podría bastar</td></tr>\n<tr><td><strong>Grado especial</strong></td><td>Hechiceros o maldiciones de primer nivel; poder destructivo enorme</td><td><strong>VD 17+</strong></td><td>Las bombas de racimo <em>quizá</em> funcionen</td></tr>\n</tbody>\n</table>\n<p><strong>Herramientas malditas</strong></p>\n<p>Igual que los hechiceros y los espíritus malditos, las herramientas malditas se clasifican del grado uno al cuatro según su poder y potencia. Cuanto mayor es el grado, mayor es la ventaja que dan a su usuario en un combate de jujutsu.</p>\n<table>\n<thead><tr><th>Grado</th><th>Rareza del objeto</th><th>Descripción / nivel de poder</th><th>Precio habitual</th></tr></thead>\n<tbody>\n<tr><td><strong>Grado 4</strong></td><td><strong>Común</strong></td><td>Utensilios malditos simples o débiles; mejoras o utilidades menores.</td><td>$1,000 – $5,000</td></tr>\n<tr><td><strong>Grado 3</strong></td><td><strong>Poco común</strong></td><td>Herramientas fiables con energía maldita notable; útiles en combate.</td><td>$5,000 – $50,000</td></tr>\n<tr><td><strong>Grado 2</strong></td><td><strong>Rara</strong></td><td>Armas fuertes y bien forjadas imbuidas de energía maldita potente.</td><td>$50,000 – $150,000</td></tr>\n<tr><td><strong>Grado 1</strong></td><td><strong>Muy rara</strong></td><td>Armas de élite usadas por los mejores hechiceros; poderes muy especializados.</td><td>$150,000 – $1,000,000</td></tr>\n<tr><td><strong>Grado especial</strong></td><td><strong>Legendaria</strong></td><td>Artefactos únicos e inmensamente poderosos; a menudo irrepetibles y ligados a la historia o a un gran hechicero.</td><td>$3,000,000+</td></tr>\n</tbody>\n</table>\n<p><strong>Herramientas malditas normales</strong></p>\n<p>Si lo prefieres, puedes poner precio a las «herramientas malditas normales» (objetos +0 a +3) con este criterio:</p>\n<p><strong>Grado 4</strong> (valor del arma o armadura ×1)</p>\n<p><strong>Grado 3</strong> (valor del arma o armadura ×10)</p>\n<p><strong>Grado 2</strong> (valor del arma o armadura ×25)</p>\n<p><strong>Grado 1</strong> (valor del arma o armadura ×50)</p>"
+   },
+   "_key": "!journal.pages!zV9lJrq2HMhKaLF4.c2oQ2FiSpG3wNu87"
+  },
+  {
+   "_id": "wdo9cUDfUrPcSb1M",
+   "name": "Técnicas malditas",
+   "type": "text",
+   "sort": 3000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Las técnicas malditas son habilidades alimentadas por energía maldita. Si la energía maldita fuera la electricidad, las técnicas malditas serían los aparatos que la usan para funcionar. Entre sus tipos están las Técnicas Innatas, las técnicas de barrera, los shikigami y otras.</p>\n<p><strong>Técnicas Innatas.</strong> Las Técnicas Innatas son habilidades únicas grabadas de forma congénita en el cuerpo del usuario desde que nace, y dan señales hacia los 5 o 6 años. Cuando alguien habla de su propia técnica maldita, suele referirse a su Técnica Innata. Todas las Técnicas Innatas son técnicas malditas, pero no todas las técnicas malditas son Técnicas Innatas. Por ejemplo, el Technique Burnout impide usar la Técnica Innata justo después de una Expansión de Dominio. Mientras dura, no puedes usar rasgos ni dotes de tu Técnica Innata. Sin embargo, sí puedes usar rasgos que usan energía maldita fuera de tu Técnica Innata, como las dotes de Energía Maldita y de Barrera.</p>\n<p><strong>Técnicas heredadas.</strong> Las técnicas heredadas son Técnicas Innatas que se transmiten entre hechiceros de un mismo linaje. Aunque hechiceros que no vienen de clanes importantes pueden heredar técnicas (por ejemplo, Straw Doll Technique), las que se obtienen de los antepasados de las Tres Grandes Familias llevan con especial orgullo el título de técnica heredada (por ejemplo, Limitless). Las Tres Grandes Familias han mantenido su autoridad y prestigio transmitiendo técnicas poderosas a sus descendientes. Por eso, un hechicero con una técnica heredada tiene asegurado un puesto importante en su familia.</p>\n<p>Los usuarios de técnicas heredadas tienen la ventaja de contar con un manual de uso. Pero transmitir una técnica durante generaciones también tiene un inconveniente: otros grupos pueden aprender cómo funciona y cuáles son sus puntos débiles.</p>\n<p><strong>Combate.</strong> Cualquier habilidad que mejore tus ataques hace que esos ataques cuenten como mágicos para dañar a espíritus malditos y shikigami o para superar resistencias. Los rasgos tienen costes de acción y requisitos que hay que cumplir para usar la técnica: por ejemplo, Cursed Speech exige que te oigan, Ice Fall exige tirarte al suelo (derribado) y Dowsing Vibrations exige tener los dos pies en el suelo. Sin ellos, no puedes activar tu técnica. Las técnicas cuyo alcance depende de un valor (por ejemplo, hasta tu modificador de EM o tu bonificador por competencia) exigen al menos 1 EM.</p>"
+   },
+   "_key": "!journal.pages!zV9lJrq2HMhKaLF4.wdo9cUDfUrPcSb1M"
+  },
+  {
+   "_id": "bZgANdlfYGNJnbwR",
+   "name": "Technique Burnout",
+   "type": "text",
+   "sort": 4000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>La Técnica Innata está grabada de forma natural en el cerebro y canaliza la energía maldita hacia efectos concretos, como un aparato que usa electricidad. Pero si se usa demasiada energía maldita, la técnica puede saturarse y necesitar tiempo para recuperarse. Aunque la barrera o el entorno no lleguen a formarse del todo, lanzar una Expansión de Dominio u otra habilidad igual de agotadora vuelve inestable la Técnica Innata del usuario durante un rato. Justo después de terminar tu Expansión de Dominio, no puedes usar ningún rasgo de tu Técnica Innata y ganas 2 niveles de agotamiento durante 1 minuto o hasta que consigas un Black Flash. Aquí, «rasgos de la Técnica Innata» se refiere a la Técnica Innata con la que estaba imbuido el dominio. Por ejemplo, tras una Expansión de Dominio, un usuario de Disaster Flames no podría usar Ember Insects durante el Technique Burnout, pero sí rasgos como Cursed Strike o Cursed Slash, que no son rasgos de la técnica agotada.</p>\n<p><strong>Efectos mágicos.</strong> Los efectos mágicos creados por tu técnica y que dependen de ella, y que no entran en las demás categorías, se disipan al entrar en Technique Burnout. Por ejemplo, un usuario de Illusive Mirage no podrá crear sus ilusiones malditas, y las ilusiones que haya aplicado al terreno o a otras personas terminan automáticamente y dejan de tener efecto.</p>\n<p><strong>Formas.</strong> Cualquier habilidad activa sobre ti, sobre otra criatura o sobre un objeto termina automáticamente al entrar en Technique Burnout. Por ejemplo, un usuario de Star Rage perdería los beneficios de Virtual Mass Increase al entrar en Technique Burnout.</p>\n<p><strong>Invocaciones.</strong> No puedes usar tu Técnica Innata para invocar shikigami, espíritus malditos ni nada parecido mientras estás en Technique Burnout. Aun así, lo que hayas invocado con tu técnica sigue existiendo, pero no puede moverse ni actuar. Sus habilidades y auras dejan de funcionar y se trata como si estuviera aturdido. Si volaba por sus propios medios o gracias a tu técnica, cae derribado. Por ejemplo, un usuario de Centipede Shroud vería cómo sus ciempiés malditos caen inertes al suelo y no pueden usarse como su manto durante el Technique Burnout.</p>\n<p><strong>Creaciones.</strong> Cualquier objeto o efecto que debas mantener constantemente pierde sus beneficios mágicos y queda inerte. Por ejemplo, un usuario de Golden Hour vería que su Manecilla sigue existiendo y puede usarse con normalidad salvo por sus beneficios mágicos (Minute Hand y Hour Hand), que no se pueden usar en absoluto durante el Technique Burnout. En cambio, una herramienta maldita permanente creada por un usuario de Construction no se mantiene con tu energía y no se ve afectada en absoluto por el Technique Burnout.</p>\n<p><strong>Recuperación del Burnout.</strong> El Technique Burnout es algo terrible que nadie puede ignorar sin más. Hasta los más fuertes deben aceptar los límites de su cuerpo, aunque algunos de los llamados más fuertes encuentran formas de esquivarlos. Si tienes acceso a la Técnica Maldita Inversa y a un refinamiento de dominio de 750 o más, entiendes los dominios y el burnout lo suficiente como para aplicar tu Técnica Maldita Inversa al problema: ¡cambia tu cerebro por uno nuevo! Mientras sufres Technique Burnout, puedes gastar 4 de energía maldita como reacción para recuperar tu técnica maldita y quitarte el agotamiento del Burnout. Debes superar una tirada de salvación de Constitución CD 5. Si la superas, eliminas el Burnout sin consecuencias graves. Si fallas, te sangran abundantemente los ojos y la nariz, recibes 8d6 de daño psíquico y no puedes realizar acciones ni acciones adicionales hasta el inicio de tu siguiente turno. La CD de la salvación de Constitución aumenta en 5 por cada éxito, se reduce en 5 por cada minuto que pasa y se reinicia con un descanso largo. Así se refleja la enorme habilidad que exige semejante hazaña de jujutsu y el peligro de destrozar literalmente tu cerebro y restaurarlo para obligar a tu técnica a funcionar.</p>"
+   },
+   "_key": "!journal.pages!zV9lJrq2HMhKaLF4.bZgANdlfYGNJnbwR"
+  },
+  {
+   "_id": "Ebgp4HWw9wabcUeK",
+   "name": "Espíritus malditos",
+   "type": "text",
+   "sort": 5000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Las maldiciones nacen cuando la energía maldita se escapa de humanos (no hechiceros) que albergan emociones negativas. Así, la energía maldita se acumula en un punto, como un sedimento, hasta que toma forma un espíritu maldito.</p>\n<p><strong>Invisibilidad.</strong> El cuerpo de los espíritus malditos está hecho por completo de energía maldita. Su existencia metafísica hace imposible que quienes no son hechiceros o las criaturas sin energía maldita los perciban o los toquen. Las personas vivas que no son hechiceros y han sido malditas solo notan síntomas extraños, sin darse cuenta de que detrás hay un espíritu maldito; sin embargo, es posible que lleguen a ver una maldición en una situación de vida o muerte, por la abrumadora emoción negativa que sienten y la gran cantidad de energía maldita que emiten en consecuencia.</p>\n<p>Los espíritus malditos tienen el estado invisible frente a cualquier criatura que no pueda verlos.</p>\n<p><strong>Energía maldita.</strong> Aunque los espíritus malditos nacen de la acumulación de emociones negativas, la energía maldita sigue siendo una de las principales herramientas para exorcizarlos. Normalmente, los espíritus malditos no deberían tener resistencia ni inmunidad al daño necrótico, ya que es el principal tipo de daño que pueden usar todos los personajes.</p>\n<p><strong>Metafisicidad.</strong> Por su existencia singular, todos los espíritus malditos deberían ser inmunes al daño no mágico. Un hechicero con energía maldita normal y sin restricciones tiene golpes sin armas que se consideran mágicos e ignoran las inmunidades de los espíritus malditos y los shikigami.</p>\n<p><strong>Debilidad a la RCT.</strong> Al ser seres de energía maldita, son fundamentalmente débiles a la energía maldita inversa, que es positiva. Normalmente, los espíritus malditos no pueden tener resistencia ni inmunidad al daño radiante y no pueden curarse con la Técnica Maldita Inversa. Además, los espíritus malditos de grado 3 o inferior deberían tener vulnerabilidad al daño radiante.</p>\n<p><strong>Permeabilidad.</strong> Los espíritus malditos están hechos de energía maldita, y su fuerza depende de la concentración de energía maldita y de emociones negativas que les da forma física. Aunque ser más poderoso suele ser mejor, la baja concentración da a las maldiciones de bajo nivel la capacidad especial de atravesar objetos.</p>\n<p>Los espíritus malditos de grado 3 o inferior pueden moverse a través de otras criaturas y objetos como si fueran terreno difícil. Reciben 1d10 de daño de fuerza si terminan su turno dentro de un objeto.</p>"
+   },
+   "_key": "!journal.pages!zV9lJrq2HMhKaLF4.Ebgp4HWw9wabcUeK"
+  },
+  {
+   "_id": "Oc28aykIMZbNtK25",
+   "name": "Shikigami",
+   "type": "text",
+   "sort": 6000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Los shikigami son criaturas monstruosas parecidas a los espíritus malditos que se conjuran para servir como familiares a los usuarios de jujutsu.</p>\n<p><strong>Invisibilidad.</strong> El cuerpo de los shikigami está hecho por completo de energía maldita. Su existencia metafísica hace imposible que quienes no son hechiceros o las criaturas sin energía maldita los perciban o los toquen. Las personas vivas que no son hechiceros no pueden percibir a los shikigami; sin embargo, es posible que lleguen a ver maldiciones en una situación de vida o muerte, por la abrumadora emoción negativa que sienten y la gran cantidad de energía maldita que emiten en consecuencia. Los shikigami tienen el estado invisible frente a cualquier criatura que no pueda verlos.</p>\n<p><strong>Metafisicidad.</strong> Por su existencia singular, todos los shikigami deberían ser inmunes al daño no mágico. Un hechicero con energía maldita normal y sin restricciones tiene golpes sin armas que se consideran mágicos e ignoran las inmunidades de los espíritus malditos y los shikigami.</p>\n<p><strong>No son espíritus malditos.</strong> Aunque los espíritus malditos y los shikigami son criaturas de energía maldita, son fundamentalmente distintos. Los shikigami se crean haciendo pasar energía maldita a través de un medio, lo que da lugar a una criatura distinta con propiedades distintas. Los shikigami no deberían tener la debilidad a la RCT, y si un rasgo o habilidad menciona a los espíritus malditos, no afecta a los shikigami salvo que se indique lo contrario.</p>\n<p><strong>Combate.</strong> Normalmente, controlar a los shikigami en combate cuesta algún tipo de acción. Si no se indica ninguna, se pueden controlar como acción gratuita, despedir como acción adicional y actúan en tu turno salvo que se indique lo contrario. Un shikigami solo puede recibir una orden por turno, sea cual sea el coste de acción, porque solo tiene una acción, una acción adicional, un movimiento, etc.</p>"
+   },
+   "_key": "!journal.pages!zV9lJrq2HMhKaLF4.Oc28aykIMZbNtK25"
+  },
+  {
+   "_id": "MrGuQGzLVBKGBU3R",
+   "name": "Restricción Celestial",
+   "type": "text",
+   "sort": 7000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>La Restricción Celestial, o Pacto Celestial, es un voto vinculante impuesto al cuerpo de un hechicero al nacer. Afecta a su energía maldita a cambio de limitaciones o mejoras en su cuerpo. Aunque hay muchos tipos de Pactos Celestiales, este apartado trata de la clase Restricción Celestial, basada en el Pacto Celestial único de Toji Zenin.</p>\n<p><strong>Sin energía maldita.</strong> Un personaje jugador con la clase Restricción Celestial no tiene absolutamente nada de energía maldita. No puede ganarla ni manipularla de ninguna forma. Si un objeto o rasgo exige usar o manipular energía maldita, no puede optar a él.</p>\n<p><strong>Visibilidad.</strong> La energía maldita solo la ven quienes tienen suficiente energía maldita. Al no tener ninguna, un usuario de la clase Restricción Celestial no puede ver estos fenómenos con normalidad. Puede evitarlo con una herramienta maldita, como las Gafas malditas de 4.º grado, o con un efecto parecido. Un jugador que sabe que hay una maldición puede hacer una prueba de Sabiduría (Percepción) (CD 18 − VD) para intentar encontrarla. Si la supera, detecta la maldición por medios distintos de la vista, pero se sigue tratando como si la maldición tuviera el estado invisible.</p>\n<p><strong>Combate.</strong> Además de no poder verlos, tampoco puede dañar a los espíritus malditos ni a los shikigami sin una herramienta maldita, ya que las maldiciones normalmente son inmunes al daño no mágico.</p>"
+   },
+   "_key": "!journal.pages!zV9lJrq2HMhKaLF4.MrGuQGzLVBKGBU3R"
+  },
+  {
+   "_id": "seJRGdOEsgaX0Lx1",
+   "name": "Caídas",
+   "type": "text",
+   "sort": 8000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Caer desde gran altura es uno de los peligros más habituales para un aventurero. Al terminar una caída, la criatura recibe daño contundente por cada 10 pies que haya caído, hasta un máximo de 200 pies. La criatura cae derribada, salvo que evite recibir daño por la caída. El daño contundente depende de la categoría de tamaño. Como de costumbre, una criatura cae a razón de 500 pies por asalto, aunque el GM puede modificarlo.</p>\n<table>\n<thead><tr><th>Tamaño</th><th>Daño por caída</th></tr></thead>\n<tbody>\n<tr><td>Diminuto</td><td>1</td></tr>\n<tr><td>Pequeño</td><td>1d4</td></tr>\n<tr><td>Mediano</td><td>1d6</td></tr>\n<tr><td>Grande</td><td>1d8</td></tr>\n<tr><td>Enorme</td><td>1d10</td></tr>\n<tr><td>Gargantuesco</td><td>1d12</td></tr>\n</tbody>\n</table>\n<p><strong>Colisión al caer.</strong> Cuando una criatura u objeto de tamaño Mediano o menor cae sobre una criatura de tamaño Mediano o menor, esta debe hacer una tirada de salvación de Destreza CD 15 para esquivarlo. La CD aumenta en 2 por cada categoría de tamaño que la criatura u objeto que cae sea mayor que la criatura.</p>\n<p><strong>Criatura sobre criatura.</strong> Si una criatura cae sobre otra y el objetivo falla la salvación, el daño por caída se reparte entre las dos criaturas.</p>\n<p><strong>Objeto sobre criatura.</strong> Si un objeto sólido (como un camión enorme) cae sobre una criatura y el objetivo falla la salvación, la criatura recibe todo el daño por caída. Un objeto frágil (como un adorno de cristal) puede resolverse con las reglas de criatura sobre criatura, de modo que el objeto frágil absorba parte del daño. Si el objeto es al menos de tamaño Grande y dos o más categorías mayor que el objetivo, este recibe la mitad del daño si supera la salvación, y si la falla queda derribado y apresado bajo el objeto.</p>\n<p><strong>Objeto sobre objeto.</strong> Un objeto inmóvil falla automáticamente cualquier tirada de salvación de Destreza, ya que es un objeto. Qué objeto recibe todo el daño, la mitad o nada se decide según la fragilidad de ambos (en general: frágil, neutro o sólido).</p>"
+   },
+   "_key": "!journal.pages!zV9lJrq2HMhKaLF4.seJRGdOEsgaX0Lx1"
+  },
+  {
+   "_id": "yqd4mVkFN2sDB1cj",
+   "name": "Economía de acciones",
+   "type": "text",
+   "sort": 9000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>En tu turno puedes moverte una distancia igual a tu velocidad y realizar una acción. Tú decides si te mueves primero o actúas primero. Tu velocidad, a veces llamada velocidad caminando, figura en tu hoja de personaje. Las acciones más habituales son cosas como Atacar, Esquivar, Correr, Esconderse, Buscar, Preparar, etc. Muchos rasgos de clase y otras habilidades añaden opciones para tu acción.</p>\n<p><strong>Acciones adicionales.</strong> Varios rasgos de clase, técnicas y otras habilidades te permiten realizar una acción extra en tu turno llamada acción adicional. El rasgo Sharp Eyes, por ejemplo, permite a un Explorador realizar una acción adicional. Solo puedes realizar una acción adicional cuando una habilidad especial, conjuro u otro rasgo del juego diga que puedes hacer algo como acción adicional. Si no, no tienes ninguna acción adicional que realizar.</p>\n<p>Solo puedes realizar una acción adicional en tu turno, así que, si tienes varias disponibles, debes elegir cuál usar.</p>\n<p>Tú decides cuándo realizar la acción adicional durante tu turno, salvo que se especifique su momento, y cualquier cosa que te impida realizar acciones también te impide realizar acciones adicionales.</p>\n<p><strong>Acciones gratuitas.</strong> Tu turno puede incluir pequeños gestos que no requieren tu acción ni tu movimiento. Puedes comunicarte como puedas, con frases breves y gestos, durante tu turno. Si un rasgo te permite hacer algo como acción gratuita, no consume tu acción ni tu acción adicional. Solo puedes realizar una acción gratuita en tu turno, así que, si tienes varias disponibles, debes elegir cuál usar. Algunos rasgos permiten cancelar habilidades o rasgos marcados como «(no requiere acción)»; esto no consume tu acción gratuita.</p>\n<p><strong>Interacción con objetos.</strong> También puedes interactuar gratis con un objeto o elemento del entorno, durante tu movimiento o tu acción. Por ejemplo, puedes abrir una puerta mientras avanzas hacia un enemigo, o desenvainar tu arma como parte de la misma acción con la que atacas. Si quieres interactuar con un segundo objeto, necesitas usar tu acción. Algunas herramientas malditas y otros objetos especiales siempre requieren una acción para usarse, como indica su descripción. El GM puede exigirte una acción para cualquiera de estas actividades cuando requieran un cuidado especial o supongan un obstáculo inusual. Por ejemplo, el GM podría esperar razonablemente que uses una acción para abrir una puerta atascada o girar una manivela para bajar un puente levadizo.</p>\n<p><strong>Reacciones.</strong> Algunas habilidades especiales, técnicas y situaciones te permiten realizar una acción especial llamada reacción. Una reacción es una respuesta instantánea a un desencadenante, que puede producirse en tu turno o en el de otra criatura. El ataque de oportunidad es el tipo de reacción más común. Cuando realizas una reacción, no puedes realizar otra hasta el inicio de tu siguiente turno. Si la reacción interrumpe el turno de otra criatura, esta puede continuar su turno justo después de la reacción.</p>\n<p><strong>Acción de turno completo.</strong> La acción de turno completo es un término bastante propio de este suplemento. La acción de turno completo básica se usa para habilidades especialmente poderosas que exigen toda tu concentración, como la <strong>Expansión de Dominio</strong> o <strong>Seance</strong>. Salvo que se indique lo contrario, una acción de turno completo consume tu acción, tu acción adicional y todo tu movimiento. Si ya has usado alguno de ellos, no puedes realizar una acción de turno completo. Algunos rasgos tienen acciones de turno completo distintas, como la dote <strong>2000 IQ</strong>, que permite una acción de turno completo menor que solo consume tu acción y tu acción adicional para analizar una técnica. También hay rasgos que convierten ciertas habilidades en acciones de turno completo, como <strong>Chanting</strong> o <strong>Convergence</strong>, aumentando su coste de acción a cambio de más poder.</p>"
+   },
+   "_key": "!journal.pages!zV9lJrq2HMhKaLF4.yqd4mVkFN2sDB1cj"
+  },
+  {
+   "_id": "w26jmbQc4L91ThDi",
+   "name": "Acciones",
+   "type": "text",
+   "sort": 10000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p><strong>Atacar.</strong> La acción más común en combate es la acción de Atacar, ya sea blandiendo una espada, disparando una flecha o peleando a puñetazos. Con esta acción haces un ataque cuerpo a cuerpo o a distancia. Algunos rasgos, como el Ataque extra del Guerrero, te permiten hacer más de un ataque con esta acción.</p>\n<p>Tanto si golpeas con un arma cuerpo a cuerpo como si disparas un arma a distancia:</p>\n<p><em>Elige un objetivo.</em> Elige un objetivo dentro del alcance de tu ataque: una criatura, un objeto o un lugar.</p>\n<p><em>Determina los modificadores.</em> El GM determina si el objetivo tiene cobertura y si tienes ventaja o desventaja contra él. Además, las técnicas, habilidades especiales y otros efectos pueden aplicar penalizaciones o bonificadores a tu tirada de ataque.</p>\n<p><em>Resuelve el ataque.</em> Haces la tirada de ataque. Si impactas, tiras el daño, salvo que el ataque concreto tenga reglas que digan otra cosa. Algunos ataques causan efectos especiales además del daño o en su lugar.</p>\n<p>Si alguna vez dudas de si algo que haces cuenta como un ataque, la regla es sencilla: si haces una tirada de ataque, estás atacando.</p>\n<p><strong>Correr.</strong> Cuando realizas la acción de Correr, ganas movimiento extra durante el turno actual. El aumento es igual a tu velocidad, tras aplicar cualquier modificador. Con una velocidad de 30 pies, por ejemplo, puedes moverte hasta 60 pies en tu turno si corres. Cualquier aumento o reducción de tu velocidad cambia este movimiento adicional en la misma cantidad. Si tu velocidad de 30 pies se reduce a 15, por ejemplo, puedes moverte hasta 30 pies este turno si corres.</p>\n<p><strong>Destrabarse.</strong> Si realizas la acción de Destrabarse, tu movimiento no provoca ataques de oportunidad durante el resto del turno.</p>\n<p><strong>Esquivar.</strong> Cuando realizas la acción de Esquivar, te concentras por completo en evitar los ataques. Hasta el inicio de tu siguiente turno, cualquier tirada de ataque contra ti tiene desventaja si puedes ver al atacante, y haces las tiradas de salvación de Destreza con ventaja. Pierdes este beneficio si quedas incapacitado o si tu velocidad baja a 0.</p>\n<p><strong>Buscar.</strong> Cuando realizas la acción de Buscar, dedicas tu atención a encontrar algo. Según lo que busques, el GM puede pedirte una prueba de Sabiduría (Percepción) o de Inteligencia (Investigación). Es la acción para encontrar criaturas sigilosas, entradas ocultas o cosas difíciles de ver. Para detectar energía maldita, haz una prueba de Energía Maldita (Percepción).</p>\n<p><strong>Ayudar.</strong> Puedes ayudar a otra criatura a completar una tarea. Cuando realizas la acción de Ayudar, la criatura a la que ayudas tiene ventaja en la siguiente prueba de característica que haga para esa tarea, siempre que la haga antes del inicio de tu siguiente turno. También puedes ayudar a una criatura aliada a atacar a una criatura que esté a 5 pies o menos de ti: finges, distraes al objetivo o colaboras de otro modo para que el ataque de tu aliado sea más eficaz. Si tu aliado ataca al objetivo antes de tu siguiente turno, la primera tirada de ataque se hace con ventaja.</p>\n<p><strong>Esconderse.</strong> Cuando realizas la acción de Esconderse, haces una prueba de Destreza (Sigilo) para intentar esconderte, siguiendo las reglas de esconderse. Si superas la Percepción pasiva de una criatura, quedas escondido de ella. Para evitar que otras criaturas detecten tu energía maldita, debes realizar la acción de Esconderse pero hacer una prueba de Energía Maldita (Sigilo).</p>\n<p>Cuando atacas a un objetivo que no puedes ver, tienes desventaja en la tirada de ataque. Esto es así tanto si adivinas dónde está como si atacas a una criatura que oyes pero no ves. Si el objetivo no está en el lugar al que apuntas, fallas automáticamente, aunque el GM normalmente solo dice que el ataque falló, no si acertaste la posición. Cuando una criatura no puede verte, tienes ventaja en las tiradas de ataque contra ella. Si estás escondido (sin que te vean ni te oigan) al atacar, revelas tu posición tanto si el ataque impacta como si falla.</p>\n<p><strong>Preparar.</strong> A veces quieres adelantarte a un enemigo o esperar a una circunstancia concreta antes de actuar. Para ello, puedes realizar la acción de Preparar en tu turno, que te permite actuar usando tu reacción antes del inicio de tu siguiente turno. Primero decides qué circunstancia perceptible desencadenará tu reacción. Luego eliges la acción que realizarás en respuesta, o decides moverte hasta tu velocidad. Por ejemplo: «Si el sectario pisa la trampilla, tiro de la palanca que la abre» o «Si la maldición se pone a mi lado, me alejo». Cuando se produce el desencadenante, puedes reaccionar justo después de que termine o ignorarlo. Recuerda que solo puedes realizar una reacción por asalto.</p>\n<p>Cuando preparas una técnica, la lanzas con normalidad pero retienes su energía, que liberas con tu reacción cuando se produce el desencadenante. Para poder prepararla, la técnica debe tener un tiempo de lanzamiento de 1 acción, y retener su energía exige concentración. Si se rompe tu concentración, la técnica se disipa sin efecto. Por ejemplo, si te estás concentrando en Comedy (de Comedian) y preparas Powerful Punchline, Comedy termina, y si recibes daño antes de liberar Powerful Punchline con tu reacción, tu concentración podría romperse.</p>\n<p><strong>Técnica.</strong> Los hechiceros y muchas maldiciones tienen acceso a técnicas y pueden usarlas con gran eficacia en combate. Cada técnica tiene un tiempo de lanzamiento, que indica si el usuario debe usar una acción, una reacción, minutos o incluso horas para usarla. Por tanto, usar una técnica no es necesariamente una acción. La mayoría tiene un tiempo de lanzamiento de 1 acción, así que un hechicero suele usar su acción en combate para lanzar una técnica así.</p>\n<p><strong>Usar un objeto.</strong> Normalmente interactúas con un objeto mientras haces otra cosa, como cuando desenvainas una espada al atacar. Cuando un objeto requiere tu acción para usarse, realizas la acción de Usar un objeto. Esta acción también sirve cuando quieres interactuar con más de un objeto en tu turno.</p>"
+   },
+   "_key": "!journal.pages!zV9lJrq2HMhKaLF4.w26jmbQc4L91ThDi"
+  },
+  {
+   "_id": "1BhVbQjXqxWJueez",
+   "name": "Barreras",
+   "type": "text",
+   "sort": 11000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Las barreras son zonas o territorios establecidos con hechicería de jujutsu para ocultar, contener o impedir la entrada a entidades dentro de ese espacio. Las técnicas malditas que levantan barreras se llaman técnicas de barrera.</p>\n<p><strong>Zonas.</strong> Algunas técnicas de barrera no son físicas y, por tanto, no impiden físicamente que criaturas u objetos entren en su área. Ejemplos relevantes son <strong>Simple Domain</strong> y <strong>Hollow Wicker Basket</strong>, que, aunque son técnicas de barrera, no existen físicamente ni impiden entrar o salir del área.</p>\n<p><strong>Barreras físicas.</strong> Algunas técnicas de barrera crean una barrera física que impide a criaturas u objetos entrar en su área. Ejemplos relevantes son las <strong>Cortinas</strong> y las <strong>Expansiones de Dominio</strong>, que crean barreras físicas que impiden entrar o salir de un área. Estas barreras físicas suelen tener CA y puntos de golpe, y se pueden atacar y afectar con técnicas pertinentes. Si un rasgo inflige daño adicional o da algún beneficio extra al atacar o dañar objetos o estructuras, esos beneficios se aplican también contra una barrera física.</p>"
+   },
+   "_key": "!journal.pages!zV9lJrq2HMhKaLF4.1BhVbQjXqxWJueez"
+  },
+  {
+   "_id": "WqOFJb0Wqspe9UDL",
+   "name": "Reencarnados",
+   "type": "text",
+   "sort": 12000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>La raza Reencarnado representa la interacción única entre un recipiente y un hechicero reencarnado que ha adoptado una nueva forma tras la muerte. Al crear un personaje así, normalmente hay dos opciones.</p>\n<p><strong>Opción 1: eres el recipiente</strong></p>\n<p>Ingeriste un objeto maldito que contenía el poder y los recuerdos de un hechicero o criatura de épocas pasadas. Lograste resistir su alma y mantener el control de tu cuerpo.</p>\n<p>A veces, el alma que llevas dentro puede intentar tomar el control, según lo decida tu GM, y actuar en consecuencia. Tanto si se trata de una situación mortal, cuando quedas a 0 puntos de golpe, como de un momento en que el hechicero reencarnado cree poder aprovecharse, estos momentos deberían usarse con moderación, pero mantenerse como una amenaza latente si eliges este camino. En esos momentos, el hechicero reencarnado puede obligar al recipiente a hacer una tirada de salvación de Carisma con una CD que depende de la fuerza del alma (CD 15-30). Mientras el reencarnado controla tu cuerpo, actúa como un PNJ controlado por el GM. Tiene acceso tanto a su Técnica Innata como a la del recipiente (si la tiene), pero solo puede usar una Técnica Innata a la vez, no las dos.</p>\n<p><strong>Opción 2: eres el reencarnado</strong></p>\n<p>Introdujiste tu alma en un objeto maldito mediante una técnica prohibida y te reencarnaste en un recipiente en el presente. Has sobrescrito el alma del recipiente y tomado el control eterno de su cuerpo.</p>\n<p>Si eliges esta opción, deberías saber más de la historia de este mundo según la época en la que viviste. Puede haber secretos a los que otros jugadores no tienen acceso, o saberes que te resultan más accesibles que a otros con pruebas de habilidad.</p>"
+   },
+   "_key": "!journal.pages!zV9lJrq2HMhKaLF4.WqOFJb0Wqspe9UDL"
+  },
+  {
+   "_id": "7JhByWSQOIWyFj1X",
+   "name": "Expansión de Dominio",
+   "type": "text",
+   "sort": 13000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>La Expansión de Dominio es una técnica de barrera avanzada y se considera la cumbre de la hechicería de jujutsu. Manifiesta el dominio innato del usuario en la realidad dentro de una barrera imbuida de su técnica maldita innata. Dentro de una Expansión de Dominio, las técnicas innatas del usuario mejoran y cualquiera que active impacta con seguridad.</p>\n<p><strong>Entorno.</strong> Tu dominio es la máxima expresión de tu Técnica Innata, que es única para ti como persona. Tú y tu GM determináis el terreno de tu dominio. No se puede cambiar más adelante, salvo que el GM considere que tu personaje ha cambiado significativamente como persona.</p>\n<p><strong>Impacto garantizado.</strong> El impacto garantizado del dominio es uno de sus aspectos más importantes. Salvo que se indique lo contrario, un dominio funciona como se describe en el apartado Dominios letales. El GM puede permitir que un Dominio letal funcione como Dominio no letal cambiando tu dominio con un voto vinculante. Los beneficios adicionales de un dominio suelen dividirse en <em>efecto ambiental</em> o <em>mejora de técnica</em>. Un efecto ambiental que causa daño ocurre sin salvaciones y forma parte del impacto garantizado del dominio, por lo que lo bloquean técnicas antidominio como Hollow Wicker Basket.</p>\n<p><strong>Simple Domain.</strong> Un Simple Domain es una herramienta creada específicamente para luchar contra las Expansiones de Dominio. Cualquier criatura dentro de un Simple Domain no se ve afectada por el efecto de impacto garantizado de un dominio que cause daño hasta que el Simple Domain se rompa. Si un impacto garantizado fuera a causar daño, en su lugar daña la barrera. Si varias criaturas están dentro de un mismo Simple Domain y las alcanza un efecto de área que causa daño, este recibe el daño una sola vez.</p>"
+   },
+   "_key": "!journal.pages!zV9lJrq2HMhKaLF4.7JhByWSQOIWyFj1X"
+  },
+  {
+   "_id": "iimZRpssGZWNZIps",
+   "name": "Dominios incompletos",
+   "type": "text",
+   "sort": 14000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Los dominios innatos que se expanden solo con energía maldita, sin una técnica maldita incrustada, están incompletos aunque incluyan una barrera. Integrar por completo la técnica incrustada en un dominio es muy difícil y es lo que permite su efecto de impacto garantizado. Sin ello, el usuario solo obtiene una técnica maldita mejorada, sin impacto garantizado. Los Dominios incompletos tienen un refinamiento de 0, y no puede cambiar pase lo que pase. El refinamiento de un dominio mide lo bien que puedes imbuir tu técnica en una barrera. Un usuario de Dominio incompleto es totalmente incapaz de imbuir su técnica en una barrera; por eso está incompleto.</p>\n<p><strong>Impacto mejorado.</strong> En lugar del <em>efecto de impacto garantizado</em> de la Expansión de Dominio normal, un Dominio incompleto tiene el <em>efecto de impacto mejorado</em>. Tienes ventaja en las tiradas de ataque de Energía Maldita, y las criaturas dentro de tu dominio tienen desventaja en las tiradas de salvación, siempre que estos efectos procedan de tu Técnica Innata.</p>\n<p><strong>Burnout reducido.</strong> A diferencia de la Expansión de Dominio normal, que causa Technique Burnout durante 1 minuto, un Dominio incompleto exige menos esfuerzo y es menos agotador: solo causa Technique Burnout durante 5 asaltos, o 30 segundos fuera de combate.</p>\n<p><strong>Atajos.</strong> Las barreras cerradas a la fuerza aprovechando la forma de un entorno exterior tampoco incorporan efectos de impacto garantizado. Así que crear una barrera cualquiera o usar objetos de alrededor para contener tu Dominio incompleto no hará que funcione como un verdadero dominio, porque la técnica no se ha imbuido correctamente en una barrera, aunque sí permitirá cerrar el Dominio incompleto. Una criatura que intente salir de un Dominio incompleto cerrado debe superar una prueba de Percepción CD 20 para encontrar el borde del Dominio incompleto. Después podrá atacar la barrera u objetos usados para mantenerlo cerrado. A diferencia de una Expansión de Dominio normal, los PG y la CA del Dominio incompleto cerrado son los de la otra barrera u objetos usados, no los de una barrera de dominio.</p>\n<p><strong>Funcionamiento (efecto ambiental).</strong> Los beneficios adicionales de un dominio suelen dividirse en efecto ambiental o mejora de técnica. Un efecto ambiental que causa daño normalmente ocurre sin salvación y forma parte del impacto garantizado del dominio, por lo que lo bloquean técnicas antidominio como Hollow Wicker Basket. Sin embargo, dentro de un Dominio incompleto, que carece de impacto garantizado, obliga en su lugar a hacer una tirada de salvación que <strong>no</strong> se ve afectada por la desventaja que normalmente impone el Dominio incompleto. Si la fallan, sufren la mitad del daño normal que recibirían en un dominio completo, o sufren otros efectos a la mitad de eficacia, según corresponda. Por ejemplo, el dominio de Star Rage, Event Horizon, normalmente causaría 8d8 de daño de fuerza y derribaría a una criatura sin salvación en la iniciativa 20. En un Dominio incompleto, la criatura tendría que hacer una tirada de salvación de Fuerza. Si la falla, recibe 4d8 de daño de fuerza y cae derribada; si la supera, no ocurre nada.</p>\n<p><strong>Funcionamiento (mejora de técnica).</strong> Una mejora de técnica es un aumento del coste o la eficacia de una técnica. Dentro de un Dominio incompleto, esos beneficios se reducen a la mitad. Las mejoras de técnica son mucho más variadas que los simples efectos ambientales, así que incluimos varios ejemplos.</p>\n<p>Por ejemplo, el dominio de Cursed Cannon, <em>Il Gran Dolce</em>, normalmente hace que tres criaturas dentro del dominio sufran automáticamente los efectos de Granite Blast en la iniciativa 20. Dentro de un Dominio incompleto, en su lugar te permitiría hacer dos tiradas de ataque de Energía Maldita (no afectadas por el impacto mejorado) contra dos criaturas distintas dentro del dominio, ya que la mitad de 3 es 1,5, redondeado a 2. Aunque, si tu GM decide redondear hacia abajo, puede quedarse en 1.</p>\n<p>Otro ejemplo es el dominio de G Warstaff, <em>Storyboard Dominion</em>. Este dominio normalmente hace que todas las criaturas dentro del dominio se traten como si tuvieran 6 segundos marcados en su contra. En un Dominio incompleto, en su lugar tendrían 3 segundos marcados.</p>\n<p>El último ejemplo es el dominio de Ten Shadows, <em>Chimera Shadow Garden</em>. Además de sus mejoras de técnica, el dominio tiene el efecto ambiental de hacer caer a las criaturas en las sombras. Como de costumbre, se sustituiría por una tirada de salvación de Fuerza no afectada por el impacto mejorado del Dominio incompleto. En cuanto a las mejoras de técnica de Shadow Clones y Shikigami Clones: Shadow Clone te permite gastar EM hasta tu modificador de EM para invocar un clon de sombra de ti mismo por cada 1 EM gastada, cada uno con 1 PG. En un Dominio incompleto, en su lugar tu salida se reduce a la mitad y puedes gastar EM hasta la mitad de tu modificador de EM. Shikigami Clone te permite gastar el coste de un shikigami domado normal para invocar un clon de él, lo que evita que tus preciados shikigami mueran. En un Dominio incompleto, funcionaría igual, pero los puntos de golpe de estos clones de shikigami se reducen a la mitad.</p>"
+   },
+   "_key": "!journal.pages!zV9lJrq2HMhKaLF4.iimZRpssGZWNZIps"
+  },
+  {
+   "_id": "io7hJnbT2f0LtWkN",
+   "name": "Daño al alma",
+   "type": "text",
+   "sort": 15000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>La capacidad de atacar y dañar a la perfección el alma de una criatura con una técnica produce daño al alma. No están todas listadas, pero las habilidades que reducen los puntos de golpe máximos se tratan como daño al alma. Entre otras: Soul Split Katana, Transfiguration, Soulfire, Soul Punch, etc.</p>\n<p><strong>Daño al alma menor.</strong> La habilidad Soul Harming de Soul Awareness se trata como daño al alma menor. Cuenta como atacar al alma para los efectos que lo exijan, pero no reduce los puntos de golpe máximos.</p>\n<p><strong>Curación.</strong> El daño al alma anula la Técnica Maldita Inversa y la regeneración, que no pueden curar ni eliminar la reducción de puntos de golpe máximos del daño al alma. Si el daño al alma arranca una extremidad, no se puede curar ni regenerar.</p>"
+   },
+   "_key": "!journal.pages!zV9lJrq2HMhKaLF4.io7hJnbT2f0LtWkN"
+  },
+  {
+   "_id": "1i79rx7FgQ5IlfND",
+   "name": "Técnicas Innatas originales",
+   "type": "text",
+   "sort": 16000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Si quieres probar a crear tu propia Técnica Innata, estas son algunas pautas.</p>\n<p><strong>Rasgo de nivel 1</strong></p>\n<p><strong>Lapse</strong></p>\n<p>Debería ser la aplicación más básica de tu técnica maldita, o incluso una habilidad precursora. En general, estos rasgos tienen un coste de energía maldita bajo, o ninguno. Por eso no suelen ser poderosos por sí mismos, aunque pueden ganar fuerza a medida que subes de nivel.</p>\n<p><strong>Rasgo de nivel 3</strong></p>\n<p><strong>Lapse o Extension</strong></p>\n<p>Aquí es donde deberías empezar a ganar habilidades que te permitan llamarte hechicero de verdad. Si el rasgo de nivel 1 era un precursor, este debería ser lo que consideras las habilidades principales de tu técnica. A este nivel, el coste de energía maldita debería seguir siendo bastante bajo, así que equilibra el rasgo en consecuencia. En general, conviene dar al rasgo un coste base o hacer que escale según la energía maldita que se gaste. Hasta el modificador de Energía Maldita o el bonificador por competencia es una buena forma de fijar la salida.</p>\n<p>Si tu técnica gira en torno a una Expansión de Dominio, como Deadly Sentencing o Pachinko Fever, este es el nivel en que deberían obtenerla. Una Expansión de Dominio obtenida a este nivel suele tener alguna condición que debilite un poco su impacto garantizado a cambio de conseguirla tan pronto. Por ejemplo: exigir energía maldita para el efecto de impacto garantizado, ser un Dominio no letal con un efecto de impacto garantizado distinto o que el efecto de impacto garantizado no sea ofensivo.</p>\n<p><strong>Rasgo de nivel 6</strong></p>\n<p><strong>Extension</strong></p>\n<p>A este nivel deberías ganar un rasgo que te dé nuevas formas de usar tu técnica o algún tipo de mejora de tus rasgos existentes, ya sea una mejora permanente o un efecto adicional que crezca cuanta más energía maldita gastes.</p>\n<p><strong>Rasgo de nivel 11</strong></p>\n<p><strong>Maximum</strong></p>\n<p>A este nivel te acercas al juego de alto nivel y, en consecuencia, deberías obtener tu técnica Maximum o un rasgo igual de fuerte. En su lugar puedes elegir otra Extension o una mejora de un rasgo existente, pero salvo que encaje con tu técnica, probablemente sea mejor tener tu Maximum.</p>\n<p>Tu Maximum debería ser una de las expresiones definitivas de tu técnica, sin contar tu Expansión de Dominio, y puede ir desde un daño explosivo extremo hasta potenciadores poderosos o penalizaciones devastadoras.</p>\n<p><strong>Rasgo de nivel 18</strong></p>\n<p><strong>Expansión de Dominio</strong></p>\n<p>Por fin has llegado a la élite, adonde la mayoría de los hechiceros mueren sin llegar. Por fin has alcanzado la cumbre del jujutsu, que te permite expandir tu dominio. En general, los dominios obtenidos a este nivel son Dominios letales con un efecto de impacto garantizado fuerte. Dentro de tu dominio, todos y cada uno de los efectos que usan tu Técnica Innata impactan con seguridad: las criaturas fallan automáticamente las tiradas de salvación y los ataques impactan automáticamente. Además, puedes dar a tu dominio un efecto adicional, como un efecto ambiental que cause daño o una mejora de técnica. Suelen ocurrir en la iniciativa 20, pero siéntete libre de personalizar tu dominio como creas que encaja.</p>"
+   },
+   "_key": "!journal.pages!zV9lJrq2HMhKaLF4.1i79rx7FgQ5IlfND"
+  }
+ ],
+ "_key": "!journal!zV9lJrq2HMhKaLF4"
+}

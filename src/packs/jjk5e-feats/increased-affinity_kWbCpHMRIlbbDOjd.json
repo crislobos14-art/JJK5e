@@ -144,7 +144,18 @@
     "t3YJUoKTfGDcA66x": 1
    },
    "automation": "automated",
-   "rev": "6af63aa622"
+   "rev": "682a7c31cf",
+   "prereq": {
+    "level": 10,
+    "features": [
+     [
+      "Cursed Spirit (Vengeful)",
+      "Cursed Spirit (Imaginary)",
+      "Cursed Spirit (Disease)",
+      "Cursed Spirit (Cursed Womb)"
+     ]
+    ]
+   }
   }
  },
  "_key": "!items!kWbCpHMRIlbbDOjd"

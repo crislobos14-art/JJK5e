@@ -180,7 +180,11 @@
       "RecoverySave": "Burnout Recovery: CON save DC {dc}",
       "RecoverySuccess": "{name} rebuilds their brain: Technique Burnout ends.",
       "RecoveryFail": "Burnout Recovery failed: 8d6 psychic damage, no actions or bonus actions until the start of your next turn.",
-      "RecoveryFailEffect": "Burnout Recovery backlash"
+      "RecoveryFailEffect": "Burnout Recovery backlash",
+      "SummonName": "Inert (Technique Burnout)",
+      "SummonDescription": "Its summoner is in Technique Burnout: it stays but cannot move or act, its abilities and auras stop working, and it is treated as stunned. If it was flying, it falls prone.",
+      "FormsEnded": "Forms and magical effects of the technique end",
+      "SummonsStunned": "Summons fall inert"
     },
     "Output": {
       "Title": "Output",
@@ -206,7 +210,11 @@
       "Amount": "Maximum HP reduction",
       "Clear": "Remove Soul Damage",
       "Strike": "Soul Strike",
-      "Awareness": "Soul Awareness"
+      "Awareness": "Soul Awareness",
+      "HealRCT": "Heal Soul Damage (RCT)",
+      "HealRCTUnavailable": "Needs Soul Damage, Reverse Cursed Technique, 6+ levels of Soul Awareness and healing left in the RCT pool.",
+      "HealRCTPrompt": "CE to spend (1 CE = 10 HP from the RCT pool, max {max}). Soul Damage: −{sd}.",
+      "HealRCTDone": "{name} restores {healed} maximum HP with RCT (Soul Damage left: −{rest})."
     },
     "Limb": {
       "Title": "Limb Damage",
@@ -339,7 +347,8 @@
       "NoAppV2": "JJK 5e: ApplicationV2 is not available.",
       "EnableModules": "JJK 5e · Enable the combat modules: {list}",
       "QuickRecoveryUnverified": "JJK 5e: Quick Recovery — the feature's use could not be verified; check its uses and restore the CE by hand.",
-      "CEPendingRest": "JJK 5e: settle the pending CE reservations (GM) before resting."
+      "CEPendingRest": "JJK 5e: settle the pending CE reservations (GM) before resting.",
+      "FullTurnUsed": "Full-Turn Action: you already used your action or bonus action this turn."
     },
     "Settings": {
       "autoSpendCE": {
@@ -521,7 +530,10 @@
       "InspirationUsed": "inspiration spent.",
       "Refinement": "Domain refinement {need}+ (you have {have})",
       "Breakthroughs": "{need}+ Breakthroughs (you have {have})",
-      "Profane": "{need} Profane Points (you have {have} left)"
+      "Profane": "{need} Profane Points (you have {have} left)",
+      "OnePact": "Only one Heavenly Pact per creature",
+      "NoCE": "Heavenly Restriction: no cursed energy",
+      "NeedPhysiology": "Cursed Physiology (awakened instead of RCT)"
     },
     "Group": {
       "focus": "Focused",
@@ -779,7 +791,9 @@
       "RCTNo": "Not this time.",
       "RCT": "Reverse Cursed Technique",
       "Prompt": "Breakthroughs to add (negative to remove):",
-      "Manual": "GM"
+      "Manual": "GM",
+      "Understanding": "Awakened Understanding",
+      "UnderstandingOffer": "{name} now has {total} breakthroughs. The GM can grant the newly available Awakened Understanding:"
     },
     "Reversal": {
       "Added": "Cursed Technique Reversal: {names} added."
@@ -1154,7 +1168,8 @@
       "UnlockedHint": "RCT features added and +1 Breakthrough (Awakened Understanding).",
       "Allow": "Allow the d100 roll",
       "Allowed": "{name} may roll for the Reverse Cursed Technique (d100, 90+) from the JJK panel.",
-      "NoChance": "Only in a near-death moment the GM allows."
+      "NoChance": "Only in a near-death moment the GM allows.",
+      "Physiology": "{name} is a Cursed Spirit: instead of Reverse Cursed Technique it awakens its Cursed Physiology ({points} Profane Points, +1 per level)."
     },
     "GMRequest": {
       "Title": "JJK 5e: player request",
@@ -1219,6 +1234,11 @@
         "reserved": "reserved",
         "review": "in review"
       }
+    },
+    "Fall": {
+      "Name": "Fall damage",
+      "Prompt": "Height fallen in feet (max 200). Damage die by size: Tiny 1, Small d4, Medium d6, Large d8, Huge d10, Gargantuan d12 per 10 ft.",
+      "Flavor": "Fall of {feet} ft: {formula} bludgeoning"
     }
   }
 }

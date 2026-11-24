@@ -27,7 +27,14 @@
  },
  "flags": {
   "jjk5e": {
-   "rev": "586d566f4e"
+   "rev": "dd22963a6b",
+   "prereq": {
+    "features": [
+     [
+      "Cursed Spirit (Cursed Womb)"
+     ]
+    ]
+   }
   }
  },
  "folder": "TuD75Es2qNSvVZN6",

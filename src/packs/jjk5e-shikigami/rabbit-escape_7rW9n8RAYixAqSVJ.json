@@ -88,6 +88,17 @@
    },
    "languages": {
     "value": []
+   },
+   "di": {
+    "value": [
+     "bludgeoning",
+     "piercing",
+     "slashing"
+    ],
+    "bypasses": [
+     "mgc"
+    ],
+    "custom": ""
    }
   },
   "skills": {},

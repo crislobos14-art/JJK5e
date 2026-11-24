@@ -1,0 +1,254 @@
+{
+ "_id": "8PVVTxGcK3xAfCse",
+ "name": "15.1 — Rules of Thumb",
+ "sort": 15500,
+ "flags": {
+  "jjk5e": {
+   "lang": "en"
+  }
+ },
+ "folder": null,
+ "pages": [
+  {
+   "_id": "BXT9b637dvLSb4ry",
+   "name": "Rules of Thumb",
+   "type": "text",
+   "sort": 1000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>When exploring the world of Jujutsu Kaisen, it can be hard for the GM to remember most of the rules of this setting. Here are some rules of thumb to remember.</p>"
+   },
+   "_key": "!journal.pages!8PVVTxGcK3xAfCse.BXT9b637dvLSb4ry"
+  },
+  {
+   "_id": "LkvfVBteuBW2zW5U",
+   "name": "Grading System",
+   "type": "text",
+   "sort": 2000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Grade refers to the system that ranks jujutsu from grades one to four, and special grade. It is used to categorize the strength of jujutsu sorcerers, cursed spirits, cursed objects, and cursed tools. For sorcerers, the grading system not only determines their strength but also their value as sorcerers. The higher your Grade the harder the missions, but the rewards will also be greater. Curses are graded by the threat they pose to society, but Sorcerers are graded by their ability to exorcise curses. To increase your grade to Second or First grade, you must be recommended by two First Grades (Teachers cannot recommend their students). You are considered Semi First depending on your performance. You must then complete 3 missions with a First Grade Sorcerer. Upon satisfactory completion, you increase your grade.</p>\n<table>\n<thead><tr><th>Grade</th><th>Description</th><th>Approx CR Range</th><th>Benchmark</th></tr></thead>\n<tbody>\n<tr><td><strong>Grade 4</strong></td><td>Lowest rank; weak sorcerers or spirits</td><td><strong>CR 1/8 – 1/2</strong></td><td>A wooden bat is enough</td></tr>\n<tr><td><strong>Grade 3</strong></td><td>Basic sorcerers; competent against weak curses</td><td><strong>CR 1 – 3</strong></td><td>If you have a handgun, you can rest easy</td></tr>\n<tr><td><strong>Grade 2</strong></td><td>Skilled sorcerers with good techniques and combat sense</td><td><strong>CR 4 – 7</strong></td><td>Close call with a shotgun</td></tr>\n<tr><td><strong>Grade 1</strong></td><td>Veteran sorcerers capable of handling powerful curses</td><td><strong>CR 8 – 16</strong></td><td>Even a tank might be insufficient</td></tr>\n<tr><td><strong>Special Grade</strong></td><td>Top-tier sorcerers or curses; massive destructive power</td><td><strong>CR 17+</strong></td><td>Cluster bombs <em>might</em> work</td></tr>\n</tbody>\n</table>\n<p><strong>Cursed Tools</strong></p>\n<p>As with sorcerers and cursed spirits, cursed tools are categorized from Grade One to Four based on their power and potency. The higher the grade, the greater the advantage granted to the user in a jujutsu battle.</p>\n<table>\n<thead><tr><th>Grade</th><th>Item Rarity</th><th>Description / Power Level</th><th>Typical Price Range</th></tr></thead>\n<tbody>\n<tr><td><strong>Grade 4</strong></td><td><strong>Common</strong></td><td>Simple or weak cursed implements; minor enhancements or utility.</td><td>$1,000 – $5,000</td></tr>\n<tr><td><strong>Grade 3</strong></td><td><strong>Uncommon</strong></td><td>Reliable tools with notable cursed energy; useful in combat.</td><td>$5,000 – $50,000</td></tr>\n<tr><td><strong>Grade 2</strong></td><td><strong>Rare</strong></td><td>Strong, well-crafted weapons imbued with potent cursed energy.</td><td>$50,000 – $150,00</td></tr>\n<tr><td><strong>Grade 1</strong></td><td><strong>Very Rare</strong></td><td>Elite-grade weapons used by top sorcerers; highly specialized powers.</td><td>$150,000 – $1,000,000</td></tr>\n<tr><td><strong>Special Grade</strong></td><td><strong>Legendary</strong></td><td>Unique, immensely powerful artifacts; often one-of-a-kind and tied to history or great sorcerer.</td><td>$3,000,000+</td></tr>\n</tbody>\n</table>\n<p><strong>Normal Cursed Tools</strong></p>\n<p>You can instead choose to price “normal cursed tools” (+0-3 items) according to this standard:</p>\n<p><strong>Grade 4</strong> (Weapon/Armor Value x 1)</p>\n<p><strong>Grade 3</strong> (Weapon/Armor Value x 10)</p>\n<p><strong>Grade 2</strong> (Weapon/Armor Value x25)</p>\n<p><strong>Grade 1</strong> (Weapon/Armor Value x50)</p>"
+   },
+   "_key": "!journal.pages!8PVVTxGcK3xAfCse.LkvfVBteuBW2zW5U"
+  },
+  {
+   "_id": "1BRcHbSGSlCUvZ8M",
+   "name": "Cursed Techniques",
+   "type": "text",
+   "sort": 3000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Cursed Techniques are abilities fueled by cursed energy. If cursed energy is comparable to electricity, cursed techniques are the appliances that use that power to function. Different types include Innate Techniques, Barrier Techniques, Shikigami, and more.</p>\n<p><strong>Innate Techniques.</strong> Innate Techniques are unique abilities congenitally engraved into the user's body from birth and will show signs at around 5-6 years old. When an individual refers to their own personal cursed technique, they are generally talking about their innate technique. All Innate Techniques are Cursed Techniques, but not all Cursed Techniques are Innate Techniques. For example, Technique Burnout causes the Innate Technique to be unusable immediately after a Domain Expansion. During this time, you cannot use Innate Technique features or Feats. However, you are still able to use features that use cursed energy outside of your Innate Technique, like Cursed Energy and Barrier feats.</p>\n<p><strong>Inherited Techniques.</strong> Inherited Techniques are Innate Techniques passed down to sorcerers in the same bloodline. While sorcerers who don't come from prominent clans can inherit innate techniques, e.g. Straw Doll Technique, those obtained hereditarily from the ancestors of the Big Three Families especially carry the title of inherited technique, e.g. Limitless. The Big Three Families have maintained their authority and prestige by passing down powerful techniques to their descendants. Therefore, a sorcerer with an inherited technique is guaranteed an important position in the family.</p>\n<p>Inherited Technique users have the advantage of being equipped with a manual on how to use them. However, passing down a technique through generations also presents the issue of other groups learning how the ability works, along with its shortcomings.</p>\n<p><strong>Combat.</strong> Any ability that enhances your attacks should cause those attacks to count as magical for the purposes of damaging cursed spirits/shikigami or overcoming resistances. Features will have action costs and prerequisites to follow in order to use the technique. Such as Cursed Speech requiring hearing, Ice Fall requiring you to fall prone, or Dowsing Vibrations requiring both feet on the ground. Without these, you cannot activate your technique. Techniques using a range e.g. up to CE modifier or proficiency, require at least 1 CE.</p>"
+   },
+   "_key": "!journal.pages!8PVVTxGcK3xAfCse.1BRcHbSGSlCUvZ8M"
+  },
+  {
+   "_id": "51BxxbArJwb71wfW",
+   "name": "Technique Burnout",
+   "type": "text",
+   "sort": 4000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>The Innate Technique is carved into the brain naturally and channels cursed energy into specific effects like an appliance using electricity. However, if too much cursed energy is used, the technique can become overwhelmed and need time to recover. Even if the barrier or environment isn't fully formed, casting domain expansion or similarly taxing ability causes the user's innate technique to become unstable for a short time afterward. Right after ending your domain expansion, you cannot use any Innate Technique features and gain 2 levels of exhaustion for 1 minute or until you land a black flash. Innate Technique features for this purpose refers to the Innate Technique that the domain was imbued with. For example, after a Domain Expansion a Disaster Flames user could no longer use Ember Insects during Technique Burnout, but they would be able to use features such as Cursed Strike or Cursed Slash that are not Innate Technique features relating to the burnt out technique.</p>\n<p><strong>Magical Effects</strong>. Magical effects created by and relying on your technique that do not fall into the other categories will be dismissed upon entering Technique Burnout. For example, a user of Illusive Mirage will be unable to create their Cursed Illusions and illusions they have applied to the terrains or to other people will automatically end and have no further effect.</p>\n<p><strong>Forms</strong>. Any ability that is active on yourself, another creature, or an item will automatically end once under Technique Burnout. For example, a user of Star Rage would lose the benefits of Virtual Mass Increase once they enter Technique Burnout.</p>\n<p><strong>Summons</strong>. You cannot use your Innate Technique to summon Shikigami, Cursed Spirits, or any other  while in Technique Burnout. However, anything summoned by your technique will continue existing but cannot move or take actions. Any abilities or auras they possess will cease to function and they are treated as if they are stunned. If they were flying by any means from themself or your technique, they fall prone. For example, a user of Centipede Shroud would find that their Cursed Centipedes fall inert onto the ground and cannot be used as their Shroud during Technique Burnout.</p>\n<p><strong>Creations</strong>. Any item or effect that must be constantly maintained by you will lose the magical benefits it possesses and will fall inert. For example a user of Golden Hour would find that their Clock Hand will continue to exist and be used normally apart from its magical benefits (being Minute Hand and Hour Hand) which cannot be used at all during Technique Burnout. However a permanent Cursed Tool created by a Construction user is not maintained by you and would be completely unaffected by Technique Burnout.</p>\n<p><strong>Burnout Recovery</strong>. Technique Burnout is a terrifying thing that nobody can simply ignore. Even the strongest must accept the limitations of their bodies. Though some called the strongest can find ways to circumvent these limits. If you have access to both Reverse Cursed Technique and a Domain Refinement of 750 or higher, you understand domains and burnout enough to apply your Reverse Cursed Technique to this problem. Substitute your brain for a new one! Whilst under the effects of Technique Burnout, you can spend 4 cursed energy as a reaction to regain your Cursed Technique and remove the exhaustion from Burnout. You must succeed on a DC 5 Constitution saving throw. On a success, you remove Burnout without major consequences. On a failure, your eyes and nose start to bleed profusely as you take 8d6 psychic damage and cannot take actions or bonus actions until the start of your next turn. The Constitution saving throw DC increases by 5 for every success, being reduced by 5 for every minute that passes and resets on a long rest. This accounts for the immense skill required for such a feat of jujutsu and the dangers of literally tearing apart your brain and restoring it to force your technique to function.</p>"
+   },
+   "_key": "!journal.pages!8PVVTxGcK3xAfCse.51BxxbArJwb71wfW"
+  },
+  {
+   "_id": "sxZkB3PjAWNajbuX",
+   "name": "Cursed Spirits",
+   "type": "text",
+   "sort": 5000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Curses are created when cursed energy leaks from (non-sorcerer) humans as a result of their harboring of negative emotions. Cursed energy thus gathers in one spot, building up like sediment until a cursed spirit takes form.</p>\n<p><strong>Invisibility.</strong> Cursed spirits bodies are entirely made up of cursed energy. Their metaphysical existence makes it impossible for non-sorcerers or creatures without cursed energy to perceive or touch them. Living non-sorcerers who have been cursed can only tell they have strange symptoms without realizing a cursed spirit is behind it; however, it is possible to gain the ability to see a curse in a life-or-death situation due to the overwhelming negative emotion the person experiences and consequently high cursed energy they emit.</p>\n<p>Cursed Spirits have the Invisible condition against any creatures that cannot see them.</p>\n<p><strong>Cursed Energy.</strong> Though Cursed Spirits are born from a build up of negative emotions, it is still one of the main tools against exorcising them. Cursed Spirits should normally not have resistance or immunity against necrotic damage since this is the main damage type that all characters can use.</p>\n<p><strong>Metaphysicality.</strong> Due to the unique existence of cursed spirits, any and all cursed spirits should be immune to non-magical damage. A sorcerer with normal, unrestricted Cursed Energy has unarmed strikes that are considered magical and ignore the immunities of Cursed Spirits and Shikigami.</p>\n<p><strong>RCT Weakness.</strong> As beings of cursed energy, they are fundamentally weak to reverse cursed energy which is positive. Cursed Spirits cannot normally have resistance or immunity to radiant damage and cannot be healed by RCT. Additionally, cursed spirits of 3rd Grade or lower should have vulnerability to radiant damage.</p>\n<p><strong>Permeability.</strong> Cursed Spirits are made up of cursed energy and their strength depends on the concentration of cursed energy and negative emotions that give them physical form. Though being more powerful is usually better, the weak concentration does give low-level curses the special ability to move through objects.</p>\n<p>Cursed Spirits of 3rd Grade or lower can move through other creatures and objects as if they were difficult terrain. It takes 1d10 force damage if it ends its turn inside an object.</p>"
+   },
+   "_key": "!journal.pages!8PVVTxGcK3xAfCse.sxZkB3PjAWNajbuX"
+  },
+  {
+   "_id": "E6p7YbcMYVhISf0s",
+   "name": "Shikigami",
+   "type": "text",
+   "sort": 6000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Shikigami are monstrous creatures resembling cursed spirits that are conjured to serve as familiars for jujutsu users.</p>\n<p><strong>Invisibility.</strong> Shikigami bodies are entirely made up of cursed energy. Their metaphysical existence makes it impossible for non-sorcerers or creatures without cursed energy to perceive or touch them. Living non-sorcerers cannot perceive shikigami; however, it is possible to gain the ability to see curses in a life-or-death situation due to the overwhelming negative emotion the person experiences and consequently high cursed energy they emit. Shikigami have the Invisible condition against any creatures that cannot see them.</p>\n<p><strong>Metaphysicality.</strong> Due to the unique existence of shikigami, any and all shikigami should be immune to non-magical damage. A sorcerer with normal, unrestricted Cursed Energy has unarmed strikes that are considered magical and ignore the immunities of Cursed Spirits and Shikigami.</p>\n<p><strong>Not Cursed Spirits.</strong> Though cursed spirits and shikigami are both creatures of cursed energy, they are fundamentally different. Shikigami are created by passing cursed energy through a medium, creating a different creature with different properties. Shikigami should not have the RCT weakness and if a feature or ability specifies cursed spirits, they don’t affect shikigami unless stated otherwise.</p>\n<p><strong>Combat.</strong> Shikigami normally cost some sort of action economy to control in combat. If there is no action listed, they can be controlled as a free action, dismissed as a bonus action, and act on your turn unless stated otherwise. A shikigami can only be commanded once per turn regardless of action economy, since a shikigami only has one action, bonus action, movement, etc.</p>"
+   },
+   "_key": "!journal.pages!8PVVTxGcK3xAfCse.E6p7YbcMYVhISf0s"
+  },
+  {
+   "_id": "GAVfRFU9bZrUXRgf",
+   "name": "Heavenly Restriction",
+   "type": "text",
+   "sort": 7000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Heavenly Restriction or a Heavenly Pact refers to a binding vow forced on a sorcerer's body at birth. This affects their cursed energy in exchange for limitations or improvements on their body. Though there are many different types of Heavenly Pacts, this section is for the Heavenly Restriction class based on Toji Zenin’s unique Heavenly Pact.</p>\n<p><strong>No Cursed Energy.</strong> A player character with the Heavenly Restriction class has absolutely no cursed energy. They cannot gain or manipulate cursed energy in any way. If an item or feature requires the usage or manipulation of cursed energy, they are ineligible for it.</p>\n<p><strong>Visibility.</strong> Cursed Energy can only be seen by those with enough cursed energy. Having no cursed energy, a Heavenly Restriction class user cannot view these phenomena normally. This can be circumvented with a cursed tool, such as the 4th Grade Cursed Glasses or a similar effect. A player that is aware there is a curse can make a Wisdom (Perception) check (DC 18 - CR) to attempt to find the curse. On a success, they are able to detect the curse through means other than sight, but are still treated as if the curse has the invisible condition.</p>\n<p><strong>Combat.</strong> In addition to being unable to see them, they are also unable to damage cursed spirits or shikigami without a cursed tool as curses should normally be immune to non-magical damage.</p>"
+   },
+   "_key": "!journal.pages!8PVVTxGcK3xAfCse.GAVfRFU9bZrUXRgf"
+  },
+  {
+   "_id": "uUSgZdeWSeLg0nsT",
+   "name": "Falling",
+   "type": "text",
+   "sort": 8000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>A fall from a great height is one of the most common hazards facing an adventurer. At the end of a fall, a creature takes bludgeoning damage for every 10 feet it fell, to a maximum of 200 feet. The creature lands prone, unless it avoids taking damage from the fall. The bludgeoning damage is determined by size category. As normal, a creature falls at a rate of 500 feet per round. Though a DM can choose to amend this metric.</p>\n<table>\n<thead><tr><th>Size</th><th>Fall Damage</th></tr></thead>\n<tbody>\n<tr><td>Tiny</td><td>1</td></tr>\n<tr><td>Small</td><td>1d4</td></tr>\n<tr><td>Medium</td><td>1d6</td></tr>\n<tr><td>Large</td><td>1d8</td></tr>\n<tr><td>Huge</td><td>1d10</td></tr>\n<tr><td>Gargantuan</td><td>1d12</td></tr>\n</tbody>\n</table>\n<p><strong>Fall Collision</strong>. When a Medium or smaller creature or object falls onto a Medium or smaller creature, they must make a DC 15 Dexterity saving throw to avoid it. The DC increases by 2 for every size category the falling creature/object is larger than the creature.</p>\n<p><strong>Creature on Creature</strong>. If a creature falls on a creature and the target fails their save, the fall damage is split between the two creatures.</p>\n<p><strong>Object on Creature</strong>. If a solid object (like a giant truck) is falling on a creature and the target fails their save, the creature takes the entire fall damage. A fragile object (like a glass ornament) can be ruled as using the Creature on Creature rules, with the fragile object absorbing part of the damage. If an object is at least Large size category and two or more size categories larger than the target, the target takes half as much damage on a successful save and is knocked prone and restrained under the object on a failed save.</p>\n<p><strong>Object on Object</strong>. A non-mobile object automatically fails any Dexterity saving throws since it is an object. Determining which object takes full, half, or none of the fall damage depending on the fragility of both objects (generally Fragile, Neutral, or Solid).</p>"
+   },
+   "_key": "!journal.pages!8PVVTxGcK3xAfCse.uUSgZdeWSeLg0nsT"
+  },
+  {
+   "_id": "cK4zehKiMmLL0NgS",
+   "name": "Action Economy",
+   "type": "text",
+   "sort": 9000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>On your turn, you can move a distance up to your speed and take one action. You decide whether to move first or take your action first. Your speed, sometimes called your walking speed, is noted on your character sheet. The most common actions you can take are usually things such as Attack, Dodge, Dash, Hide, Search, Ready, etc. Many class features and other abilities provide additional options for your action.</p>\n<p><strong>Bonus Actions</strong>. Various class features, techniques, and other abilities let you take an additional action on your turn called a bonus action. The Sharp Eyes feature, for example, allows a Scout to take a bonus action. You can take a bonus action only when a special ability, spell, or other feature of the game states that you can do something as a bonus action. You otherwise don’t have a bonus action to take.</p>\n<p>You can take only one bonus action on your turn, so you must choose which bonus action to use when you have more than one available.</p>\n<p>You choose when to take a bonus action during your turn, unless the bonus action’s timing is specified, and anything that deprives you of your ability to take actions also prevents you from taking a bonus action.</p>\n<p><strong>Free Actions</strong>. Your turn can include a variety of flourishes that require neither your action nor your move. You can communicate however you are able, through brief utterances and gestures, as you take your turn. If a feature allows you to do something as a free action, it does not consume your action or bonus action. You can take only one free action on your turn, so you must choose which free action to use when you have more than one available. Certain features allow you to cancel abilities or features listed as (no action required). This does not consume your free action.</p>\n<p><strong>Object Interactions</strong>. You can also interact with one object or feature of the environment for free, during either your move or your action. For example, you could open a door during your move as you stride toward a foe, or you could draw your weapon as part of the same action you use to attack. If you want to interact with a second object, you need to use your action. Some cursed tools and other special objects always require an action to use, as stated in their descriptions. The GM might require you to use an action for any of these activities when it needs special care or when it presents an unusual obstacle. For instance, the GM could reasonably expect you to use an action to open a stuck door or turn a crank to lower a drawbridge.</p>\n<p><strong>Reactions</strong>. Certain special abilities, techniques, and situations allow you to take a special action called a reaction. A reaction is an instant response to a trigger of some kind, which can occur on your turn or on someone else’s. The opportunity attack is the most common type of reaction. When you take a reaction, you can’t take another one until the start of your next turn. If the reaction interrupts another creature’s turn, that creature can continue its turn right after the reaction.</p>\n<p><strong>Full-Turn Action</strong>. A Full Turn Action is a term that is relatively unique to this supplement. The basic Full-Turn Action is used for an especially powerful ability that requires your absolute focus, such as <strong>Domain Expansion</strong> or <strong>Seance</strong>. Unless otherwise stated, a Full Turn Action consumes your Action, Bonus Action, and all of your movement. If you have used any of these, you cannot use a  Full Turn Action. Certain features have different Full Turn Actions, such as the <strong>2000 IQ</strong> feat which allows a lesser Full Turn Action consuming only your Action and Bonus Action to analyze a technique. There are also features that can turn certain abilities into Full Turn Actions, such as <strong>Chanting</strong> or <strong>Convergence</strong>, increasing the action cost in exchange for greater power.</p>"
+   },
+   "_key": "!journal.pages!8PVVTxGcK3xAfCse.cK4zehKiMmLL0NgS"
+  },
+  {
+   "_id": "Zlsx2IplbChpWQBQ",
+   "name": "Actions",
+   "type": "text",
+   "sort": 10000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p><strong>Attack</strong>. The most common action to take in combat is the Attack action, whether you are swinging a sword, firing an arrow from a bow, or brawling with your fists. With this action, you make one melee or ranged attack. Certain features, such as the Extra Attack feature of the warrior, allow you to make more than one attack with this action.</p>\n<p>Whether you’re striking with a melee weapon or firing a weapon at range.</p>\n<p><em>Choose a Target</em>. Pick a target within your attack’s range: a creature, an object, or a location.</p>\n<p><em>Determine Modifiers</em>. The GM determines whether the target has cover and whether you have advantage or disadvantage against the target. In addition, techniques, special abilities, and other effects can apply penalties or bonuses to your attack roll.</p>\n<p><em>Resolve the Attack</em>. You make the attack roll. On a hit, you roll damage, unless the particular attack has rules that specify otherwise. Some attacks cause special effects in addition to or instead of damage.</p>\n<p>If there’s ever any question whether something you’re doing counts as an attack, the rule is simple: if you’re making an attack roll, you’re making an attack.</p>\n<p><strong>Dash</strong>. When you take the Dash action, you gain extra movement for the current turn. The increase equals your speed, after applying any modifiers. With a speed of 30 feet, for example, you can move up to 60 feet on your turn if you dash. Any increase or decrease to your speed changes this additional movement by the same amount. If your speed of 30 feet is reduced to 15 feet, for instance, you can move up to 30 feet this turn if you dash.</p>\n<p><strong>Disengage</strong>. If you take the Disengage action, your movement doesn’t provoke opportunity attacks for the rest of the turn.</p>\n<p><strong>Dodge</strong>. When you take the Dodge action, you focus entirely on avoiding attacks. Until the start of your next turn, any attack roll made against you has disadvantage if you can see the attacker, and you make Dexterity saving throws with advantage. You lose this benefit if you are incapacitated or if your speed drops to 0.</p>\n<p><strong>Search</strong>. When you take the Search action, you devote your attention to finding something. Depending on the nature of your search, the GM might have you make a Wisdom (Perception) check or an Intelligence (Investigation) check. This is the action taken to find sneaking creatures, hidden entrances, or difficult to spot things. For detecting cursed energy, make a Cursed Energy (Perception) check.</p>\n<p><strong>Help</strong>. You can lend your aid to another creature in the completion of a task. When you take the Help action, the creature you aid gains advantage on the next ability check it makes to perform the task you are helping with, provided that it makes the check before the start of your next turn. Alternatively, you can aid a friendly creature in attacking a creature within 5 feet of you. You feint, distract the target, or in some other way team up to make your ally’s attack more effective. If your ally attacks the target before your next turn, the first attack roll is made with advantage.</p>\n<p><strong>Hide</strong>. When you take the Hide action, you make a Dexterity (Stealth) check in an attempt to hide, following the rules for hiding. If you succeed against passive Perception, you are hidden from that creature.  To prevent other creatures from detecting your cursed energy, you must take the Hide action but instead make a Cursed Energy (Stealth) check.</p>\n<p>When you attack a target that you can’t see, you have disadvantage on the attack roll. This is true whether you’re guessing the target’s location or you’re targeting a creature you can hear but not see. If the target isn’t in the location you targeted, you automatically miss, but the GM typically just says that the attack missed, not whether you guessed the target’s location correctly. When a creature can’t see you, you have advantage on attack rolls against it. If you are hidden (both unseen and unheard) when you make an attack, you give away your location when the attack hits or misses.</p>\n<p><strong>Ready</strong>. Sometimes you want to get the jump on a foe or wait for a particular circumstance before you act. To do so, you can take the Ready action on your turn, which lets you act using your reaction before the start of your next turn. First, you decide what perceivable circumstance will trigger your reaction. Then, you choose the action you will take in response to that trigger, or you choose to move up to your speed in response to it. Examples include “If the cultist steps on the trapdoor, I’ll pull the lever that opens it,” and “If the curse steps next to me, I move away.” When the trigger occurs, you can either take your reaction right after the trigger finishes or ignore the trigger. Remember that you can take only one reaction per round.</p>\n<p>When you ready a technique, you cast it as normal but hold its energy, which you release with your reaction when the trigger occurs. To be readied, a technique must have a casting time of 1 action, and holding onto the technique's energy requires concentration. If your concentration is broken, the technique dissipates without taking effect. For example, if you are concentrating on Comedy (from Comedian) and ready Powerful Punchline, Comedy ends, and if you take damage before you release Powerful Punchline with your reaction, your concentration might be broken.</p>\n<p><strong>Technique</strong>. Sorcerers and many curses have access to techniques and can use them to great effect in combat. Each technique has a casting time, which specifies whether the caster must use an action, a reaction, minutes, or even hours to cast the spell. Casting a spell is, therefore, not necessarily an action. Most spells do have a casting time of 1 action, so a sorcerer often uses his or her action in combat to cast such a spell.</p>\n<p><strong>Use Object</strong>. You normally interact with an object while doing something else, such as when you draw a sword as part of an attack. When an object requires your action for its use, you take the Use Object action. This action is also useful when you want to interact with more than one object on your turn.</p>"
+   },
+   "_key": "!journal.pages!8PVVTxGcK3xAfCse.Zlsx2IplbChpWQBQ"
+  },
+  {
+   "_id": "WtPZmhI1U6GdRy4p",
+   "name": "Barriers",
+   "type": "text",
+   "sort": 11000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Barriers are zones or territories established with jujutsu sorcery used to conceal, contain, or deny entry to entities within that space. Cursed techniques that erect barriers are known as barrier techniques.</p>\n<p><strong>Zones</strong>. Certain barrier techniques are non-physical and therefore do not physically stop creatures or objects from entering the area of the technique. Relevant examples are <strong>Simple Domain</strong> and <strong>Hollow Wicker Basket</strong> that despite being barrier techniques, do not physically exist or prevent entry/exit from the area.</p>\n<p><strong>Physical Barriers</strong>. Certain barrier techniques create a physical barrier that stops creatures or objects from entering the area of the technique. Relevant examples are <strong>Curtains</strong> and <strong>Domain Expansions</strong> which both create physical barriers that prevent entry/exit from an area. These physical barriers will typically have an AC and hit points and can be targeted by attacks and relevant techniques. If a feature deals additional damage or has some other added benefit when attacking or dealing damage to objects or structures, these benefits apply when used on a physical barrier.</p>"
+   },
+   "_key": "!journal.pages!8PVVTxGcK3xAfCse.WtPZmhI1U6GdRy4p"
+  },
+  {
+   "_id": "vtkcVbHMTYPyXuRT",
+   "name": "Reincarnated",
+   "type": "text",
+   "sort": 12000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>The Reincarnated race is meant to represent the unique interaction between a vessel and a reincarnated sorcerer that has assumed a new form beyond death. When creating such a character, there are usually two options you can choose from.</p>\n<p><strong>Option 1: You are the Vessel</strong></p>\n<p>You took in a cursed object holding the power and memories of a sorcerer or creature of ages past. You managed to resist their soul and maintain control of your body.</p>\n<p>At times, the soul within your body may attempt to take control as determined by your DM and act accordingly. Whether this is a deadly situation when you are reduced to 0 hit points or a moment where the Reincarnated Sorcerer thinks they can take advantage, moments like these should be used sparingly, but kept as a looming threat if you decide upon that route. During such times, the Reincarnated Sorcerer can force the vessel to make a Charisma Saving throw with a DC dependent on the strength of the soul (DC 15-30). While the Reincarnated has control of your body, they act as an NPC controlled by the DM. They have access to both their Innate Technique and the Vessel's (if they have one), but can only use one Innate Technique at a time, not both.</p>\n<p><strong>Option 2: You are the Reincarnated</strong></p>\n<p>You forced your soul into a cursed object using a forbidden technique and reincarnated into a vessel in the present. You have overwritten the soul of the vessel and taken eternal control of their body.</p>\n<p>If you choose this option, you should have more knowledge on the history of this world depending on the time period you were alive. There could be secrets that other players do not have access to or lore that is more readily available to you than others with skill checks.</p>"
+   },
+   "_key": "!journal.pages!8PVVTxGcK3xAfCse.vtkcVbHMTYPyXuRT"
+  },
+  {
+   "_id": "LOSbSHttudxGnQS5",
+   "name": "Domain Expansion",
+   "type": "text",
+   "sort": 13000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Domain Expansion is an advanced barrier technique and is considered the pinnacle of jujutsu sorcery. It manifests the user's innate domain into reality inside a barrier infused with their innate cursed technique. Within a domain expansion, the user's innate techniques are improved and any that are activated are guaranteed to hit.</p>\n<p><strong>Environment.</strong> Your domain is the ultimate expression of your innate technique which is unique to you as a person. You and your GM determine the terrain of your domain. This cannot be changed later unless the GM thinks you have undergone a significant change to your character as a person.</p>\n<p><strong>Guaranteed Hit.</strong> The domain's guaranteed hit is one of the most important aspects of a domain. Unless stated otherwise, a domain functions as stated in the Lethal Domains section (page 421). A GM can allow a normally Lethal Domain to instead function as a Non-Lethal Domain by changing your Domain with a Binding Vow. Additional benefits of a domain generally fall under: <em>Environmental Effect</em> or <em>Technique Improvement</em>. A damaging Environmental Effect happens without saves and is part of the domain’s Guaranteed Hit that would be blocked by Anti-Domain techniques like Hollow Wicker Basket.</p>\n<p><strong>Simple Domain.</strong> A Simple Domain is a tool specifically made to fight against Domain Expansions. Any creature within a Simple Domain is unaffected by a domain's guaranteed hit effect that deals damage until the Simple Domain is broken. If a guaranteed hit would deal damage, it instead damages the barrier. If multiple creatures are within a single Simple Domain and are targeted by a damaging area effect, it takes the damage once.</p>"
+   },
+   "_key": "!journal.pages!8PVVTxGcK3xAfCse.LOSbSHttudxGnQS5"
+  },
+  {
+   "_id": "wSLSN3NXhc94oTt7",
+   "name": "Incomplete Domains",
+   "type": "text",
+   "sort": 14000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Innate domains that are expanded using only cursed energy without an embedded cursed technique are incomplete even if they include a barrier. Fully integrating the embedded technique into a domain is very difficult and enables its sure hit effect. Without that, the caster will only receive an improved cursed technique without a sure-hit effect. Incomplete Domains have refinement of 0 and that cannot change no matter what. A Domain's refinement is a measure of how well you can imbue your technique into a barrier. An Incomplete Domain user is completely unable to imbue their technique into a barrier, hence why it is incomplete.</p>\n<p><strong>Improved Hit.</strong> Instead of the <em>Guaranteed Hit Effect</em> of the normal Domain Expansion, an Incomplete Domain has the <em>Improved Hit Effect</em>. You gain advantage on Cursed Energy attack rolls and creatures inside your domain have disadvantage on saving throws as long as these effects are from your Innate Technique.</p>\n<p><strong>Reduced Burnout.</strong> Unlike a normal Domain Expansion that inflicts Technique Burnout for 1 minute, an Incomplete Domain takes less effort and is therefore less taxing, only inflicting Technique Burnout for 5 rounds or 30 seconds if out of combat.</p>\n<p><strong>Shortcuts.</strong> Barriers forcibly enclosed using the shape of an outside environment also do not incorporate sure-hit effects. So simply making a random barrier or using objects around you to contain your incomplete domain will not allow it to function as a true domain as the technique is not properly imbued into a barrier. Though it would allow the Incomplete Domain to close. A creature attempting to leave a closed Incomplete Domain must succeed a DC 20 Perception check to find the edge of your Incomplete Domain. After which they would be able to target the barrier or objects used to keep the Incomplete Domain closed with their attacks. Unlike a normal Domain Expansion, the HP and AC of the closed Incomplete Domain use the statistics of the other Barrier or Objects used and not a domain barrier.</p>\n<p><strong>Functionality (Environmental Effect).</strong> Additional benefits of a domain generally fall under: Environmental Effect or Technique Improvement. A damaging Environmental Effect will normally happen without a save and is part of the domain’s Guaranteed Hit that would be blocked by Anti-Domain techniques like Hollow Wicker Basket. However within an Incomplete Domain lacking a guaranteed hit, it will instead force a saving throw that is <strong>not</strong> affected by the disadvantage normally forced by the Incomplete Domain. On a failed save, they suffer half the normal damage they would take if this were a complete domain or suffer other effects at half effectiveness as applicable. For example, the Domain of Star Rage's: Event Horizon would normally deal 8d8 force damage and knock a creature prone without a save at initiative 20. In an Incomplete Domain, the creature would be forced to make a Strength saving throw. On a failed save they would take 4d8 force damage and fall prone, with nothing happening on a successful save.</p>\n<p><strong>Functionality (Technique Improvement).</strong> A Technique Improvement is a boost to the cost or effectiveness of a technique. Within an Incomplete Domain, such benefits are halved. Technique Improvements are much more varied than simple Environmental Effects, so we will include a number of examples for people to use.</p>\n<p>For example, the domain of Cursed Cannon: <em>Il Gran Dolce</em> normally causes three creatures within the domain to automatically suffer the effects of Granite Blast at initiative 20. Within an Incomplete Domain, this would instead allow you to make two Cursed Energy attack rolls (not affected by Improved Hit) to be made against two different creatures within the Domain. Since half of 3 is 1.5, rounded up to 2. Though if your DM decides to round down, it can be just 1.</p>\n<p>For further examples, G Warstaff's Domain: <em>Storyboard Dominion</em>. This Domain normally causes all creatures within the Domain to be treated as if you have 6 seconds marked against them. In an Incomplete Domain, this would instead be having 3 seconds marked against them.</p>\n<p>The final example, we have Ten Shadow's Domain: <em>Chimera Shadow Garden</em>. In addition to its Technique Improvements, the domain also has the Environmental Effect that causes creatures to fall into the shadows. As usual, this would be replaced with a Strength saving throw that is not affected by the Improved Hit of the Incomplete Domain. Now, for the Technique Improvements of Shadow Clones and Shikigami Clones. Shadow Clone lets you spend CE up to your CE modifier to summon a shadow clone of yourself per 1 CE spent that each have 1 HP. In an Incomplete Domain, this would instead half your output, letting you spend CE up to half your CE modifier. Shikigami Clone lets you spend the cost of a normal tamed Shikigami to summon a clone of it, which prevents your precious shikigami from dying. In an Incomplete Domain, this would function the same with the hit points of these Shikigami Clones being halved.</p>"
+   },
+   "_key": "!journal.pages!8PVVTxGcK3xAfCse.wSLSN3NXhc94oTt7"
+  },
+  {
+   "_id": "6S8nJKbPDdznzngR",
+   "name": "Soul Damage",
+   "type": "text",
+   "sort": 15000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>The ability to target and perfectly damage a creature's soul with a technique results in Soul Damage. Not all are listed, but abilities that reduce maximum hit points are treated as Soul Damage. Including, but not limited to: Soul Split Katana, Transfiguration, Soulfire, Soul Punch, etc.</p>\n<p><strong>Lesser Soul Damage</strong>. The Soul Harming ability from Soul Awareness is treated as Lesser Soul Damage. It counts as targeting the soul for effects that require it, but does not reduce maximum hit points.</p>\n<p><strong>Healing</strong>. Soul Damage invalidates Reverse Cursed Technique and Regeneration, which cannot heal or remove the maximum HP reduction of Soul Damage. If Soul Damage removes a limb, it cannot be healed or regenerated.</p>"
+   },
+   "_key": "!journal.pages!8PVVTxGcK3xAfCse.6S8nJKbPDdznzngR"
+  },
+  {
+   "_id": "6d4i9mQJquGhU4dm",
+   "name": "Original Innate Techniques",
+   "type": "text",
+   "sort": 16000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>If you want to try your hand at making your own Innate Technique, here are some guidelines to follow.</p>\n<p><strong>1st Level Feature</strong></p>\n<p><strong>Lapse</strong></p>\n<p>This should be the most basic application of your cursed technique or even a precursor ability. Generally, these features have a low cursed energy cost or even no cursed energy cost at all. Because of this, they are usually not directly powerful, but may scale in power as you level up.</p>\n<p><strong>3rd Level Feature</strong></p>\n<p><strong>Lapse or Extension</strong></p>\n<p>This should be where you start gaining abilities to properly call yourself a Sorcerer. If the 1st level feature was a precursor, then this should be what you think your technique’s main abilities would be. At this level, the cursed energy cost should still be rather low so make sure to balance the feature accordingly. Generally, you want to give the feature either a base cost or have it scale depending on how cursed energy they spend. Up to their Cursed Energy modifier or Proficiency Bonus is a good way to determine output.</p>\n<p>If your technique is based around a Domain Expansion like Deadly Sentencing or Pachinko Fever, this is the level they should get it. A Domain Expansion gained at this level usually has some kind of condition to make its sure-hit slightly weaker in exchange for gaining it at such an early level. This can include requiring cursed energy for the sure-hit effect, having a Non-Lethal Domain that has a different sure-hit effect, or having the sure-hit effect be something non-offensive.</p>\n<p><strong>6th Level Feature</strong></p>\n<p><strong>Extension</strong></p>\n<p>At this level, you should gain a feature that either grants you new ways to use your technique or some kind of increase to your existing features. Whether that increase is a permanent buff or an additional effect that increases with the more cursed energy you spend.</p>\n<p><strong>11th Level Feature</strong></p>\n<p><strong>Maximum</strong></p>\n<p>You are approaching high level play at this level and appropriately, you should gain either your Maximum technique or a similarly strong feature. You can instead choose to have another Extension or increase to an existing feature, but unless it fits your technique, it’s probably better to have your Maximum.</p>\n<p>Your Maximum should be one of the ultimate expressions of your technique barring your Domain Expansion and can vary from extreme burst damage to powerful buffs or debilitating debuffs.</p>\n<p><strong>18th Level Feature</strong></p>\n<p><strong>Domain Expansion</strong></p>\n<p>You have finally reached the big leagues that most sorcerers die before reaching. You have finally reached the pinnacle of jujutsu allowing you to expand your domain. Generally, Domains gained at this level will be Lethal Domains with a strong sure-hit effect. Within your domain, any and all effects using your Innate Technique are guaranteed to land. Creatures automatically fail saving throws and attacks automatically hit. In addition to this, you can give your domain an additional effect such as a damaging Environmental Effect or Technique Improvement. These usually occur at initiative 20, but feel free to customize your domain in a way that you think fits.</p>"
+   },
+   "_key": "!journal.pages!8PVVTxGcK3xAfCse.6d4i9mQJquGhU4dm"
+  }
+ ],
+ "_key": "!journal!8PVVTxGcK3xAfCse"
+}

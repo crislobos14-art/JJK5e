@@ -98,7 +98,15 @@
     "D8txMJ59TpkZZyXb": 5
    },
    "rawCE": true,
-   "rev": "60275040a6"
+   "rev": "543b5be50e",
+   "prereq": {
+    "features": [
+     [
+      "Cursed Imbuement",
+      "Cursed Enhancement"
+     ]
+    ]
+   }
   }
  },
  "folder": "58RlNbYPWxO2Xi4E",

@@ -1,0 +1,480 @@
+{
+ "_id": "tbuU5BRQ6fHoLBMZ",
+ "name": "15.2 — Reglas opcionales",
+ "sort": 15700,
+ "flags": {
+  "jjk5e": {
+   "lang": "es",
+   "source": "7kMZz6fAgntopxd9"
+  }
+ },
+ "folder": "IXMKct7fx9qz8bdj",
+ "pages": [
+  {
+   "_id": "aphdYRoK8Ms12vLM",
+   "name": "Alternativa a la Totalidad",
+   "type": "text",
+   "sort": 1000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Como regla opcional, tu GM puede decidir ignorar la Totalidad y hacer que todos los shikigami vuelvan tras un descanso largo, en lugar de morir y quedar disponibles para la Totalidad.</p>"
+   },
+   "_key": "!journal.pages!tbuU5BRQ6fHoLBMZ.aphdYRoK8Ms12vLM"
+  },
+  {
+   "_id": "KRCiqD6IUuoCh08Z",
+   "name": "Menos sangre",
+   "type": "text",
+   "sort": 2000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Si a tus jugadores el coste en PG de Rot y Blood Manipulation les parece demasiado alto, el GM puede reducir todos los costes en PG a una cantidad menor.</p>"
+   },
+   "_key": "!journal.pages!tbuU5BRQ6fHoLBMZ.KRCiqD6IUuoCh08Z"
+  },
+  {
+   "_id": "YVrRHaX4Fbtrw2r0",
+   "name": "Conversión de sangre",
+   "type": "text",
+   "sort": 3000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Como quienes ya dominan la regeneración de su cuerpo captan con más facilidad la Técnica Maldita Inversa, tu GM puede permitir que un personaje con la dote Blood Production tenga más posibilidades de adquirirla. Tiene ventaja en cualquier tirada para adquirir la Técnica Maldita Inversa o comprender sus fundamentos.</p>"
+   },
+   "_key": "!journal.pages!tbuU5BRQ6fHoLBMZ.YVrRHaX4Fbtrw2r0"
+  },
+  {
+   "_id": "rftgpPEGEsX59sAr",
+   "name": "Precisión de Bestia Mítica",
+   "type": "text",
+   "sort": 4000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Para que Mythical Beast Amber Release sea más fiel, tu GM puede hacer que la progresión de sus etapas avance una etapa por turno.</p>"
+   },
+   "_key": "!journal.pages!tbuU5BRQ6fHoLBMZ.rftgpPEGEsX59sAr"
+  },
+  {
+   "_id": "4uCDy3mqrIltFhhh",
+   "name": "Ventaja acumulada",
+   "type": "text",
+   "sort": 5000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Cuando una criatura tiene ventaja de más de una fuente al hacer una prueba de habilidad o una tirada de ataque, tira con ventaja y suma +1 por cada fuente de ventaja adicional. Sin embargo, si la ventaja procede de otro jugador que realiza la acción de Ayudar, este debe describir cómo ayuda en el ataque o tener competencia en la habilidad para poder ayudar.</p>"
+   },
+   "_key": "!journal.pages!tbuU5BRQ6fHoLBMZ.4uCDy3mqrIltFhhh"
+  },
+  {
+   "_id": "KZto4ZaYCHsxIY2O",
+   "name": "Críticos contundentes",
+   "type": "text",
+   "sort": 6000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Cuando tiras el daño de un golpe crítico, en lugar de duplicar los dados de daño puedes tirar con normalidad y duplicar toda la tirada de daño (incluidos los modificadores y bonificadores fijos).</p>"
+   },
+   "_key": "!journal.pages!tbuU5BRQ6fHoLBMZ.KZto4ZaYCHsxIY2O"
+  },
+  {
+   "_id": "WxwnGn7lobmSWLfH",
+   "name": "Salvaciones críticas",
+   "type": "text",
+   "sort": 7000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Cuando una criatura saca un 1 natural en una tirada de salvación contra un efecto que causa daño, recibe daño crítico. Al contrario, cuando saca un 20 natural en una tirada de salvación contra un efecto que causa daño, no recibe daño.</p>"
+   },
+   "_key": "!journal.pages!tbuU5BRQ6fHoLBMZ.WxwnGn7lobmSWLfH"
+  },
+  {
+   "_id": "0nQMIS98FrSroxeB",
+   "name": "Disparos apuntados",
+   "type": "text",
+   "sort": 8000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Una criatura puede aceptar un −5 a una tirada de ataque para lisiar o herir específicamente a una criatura. Si el daño supera el dado de golpe máximo de la criatura más su modificador de Constitución, queda debilitada de algún modo, según la interpretación del GM, o se puede usar la tabla de daño de extremidades (dispararle en un ojo para cegarla, romperle la pierna para reducir su velocidad…).</p>"
+   },
+   "_key": "!journal.pages!tbuU5BRQ6fHoLBMZ.0nQMIS98FrSroxeB"
+  },
+  {
+   "_id": "wVuNHhHcbheHiA3g",
+   "name": "Luchar por tu vida",
+   "type": "text",
+   "sort": 9000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Cuando haces tiradas de salvación contra la muerte, puedes elegir luchar por tu vida. Tienes ventaja en la siguiente tirada de salvación contra la muerte que hagas, pero ganas 1 nivel de agotamiento. Puedes ganar hasta 5 niveles de agotamiento de esta forma.</p>"
+   },
+   "_key": "!journal.pages!tbuU5BRQ6fHoLBMZ.wVuNHhHcbheHiA3g"
+  },
+  {
+   "_id": "MrMh2d0Xa7WNlk7f",
+   "name": "Recibir el golpe",
+   "type": "text",
+   "sort": 10000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Como reacción, cuando otra criatura dentro de tu velocidad de movimiento es objetivo o recibe el impacto de un efecto dañino, puedes moverte hasta tu velocidad hacia ella y recibir el ataque en su lugar. Sin embargo, recibes el doble de daño.</p>"
+   },
+   "_key": "!journal.pages!tbuU5BRQ6fHoLBMZ.MrMh2d0Xa7WNlk7f"
+  },
+  {
+   "_id": "d5gUQdTsY9gWVUiT",
+   "name": "Choque",
+   "type": "text",
+   "sort": 11000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Como reacción, puedes chocar contra un ataque o efecto dañino dirigido a ti. Haces una tirada de daño de un ataque con arma cuerpo a cuerpo y reduces el daño en esa cantidad. Si así reduces por debajo de 0 el daño de una tirada de ataque, el atacante recibe el daño restante si está a tu alcance. No puedes chocar contra daño psíquico salvo que tengas un rasgo que cause daño psíquico.</p>\n<p>Puedes chocar de esta forma un número de veces igual a tu bonificador por competencia y recuperas todos los usos tras un descanso largo.</p>"
+   },
+   "_key": "!journal.pages!tbuU5BRQ6fHoLBMZ.d5gUQdTsY9gWVUiT"
+  },
+  {
+   "_id": "xxP8NV2IIvrbFHj4",
+   "name": "Flanquear",
+   "type": "text",
+   "sort": 12000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Nunca estás a salvo de que te ataquen entre dos. Si dos criaturas (que no estén incapacitadas) están a 5 pies o menos en lados opuestos de otra criatura, tienen ventaja en los ataques contra ella. Algunos GM prefieren usar +2 en lugar de ventaja.</p>"
+   },
+   "_key": "!journal.pages!tbuU5BRQ6fHoLBMZ.xxP8NV2IIvrbFHj4"
+  },
+  {
+   "_id": "V9oYNU2FRHitXae8",
+   "name": "Sin técnica",
+   "type": "text",
+   "sort": 13000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Si un jugador quiere jugar sin Técnica Innata y no quiere usar New Shadow Style ni Divergent Fist, puede ganar un aumento de característica de +2 Y una dote cuyos requisitos cumpla en los niveles 1 y 3; un aumento de +3 y una dote en los niveles 6 y 11; y un aumento de +3 y 2 dotes en el nivel 18. Ten en cuenta que, como es lógico, esto suele ser más débil que tener una técnica.</p>"
+   },
+   "_key": "!journal.pages!tbuU5BRQ6fHoLBMZ.V9oYNU2FRHitXae8"
+  },
+  {
+   "_id": "o4WoEGFvggkj5OcB",
+   "name": "Habilidades repetidas",
+   "type": "text",
+   "sort": 14000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Si un jugador fuera a ganar una habilidad que le da algo que ya tiene, puedes ser un GM benévolo y dejarle elegir otra. Por ejemplo, si un jugador elige una dote como Incomplete Domain o Reversed Technique Prodigy, puedes dejarle cambiarla por otra dote para la que cumpla los requisitos cuando gane un rasgo que le dé esa misma habilidad o una versión mejor, como una Expansión de Dominio o Reverse Technique Understanding, respectivamente.</p>"
+   },
+   "_key": "!journal.pages!tbuU5BRQ6fHoLBMZ.o4WoEGFvggkj5OcB"
+  },
+  {
+   "_id": "L7XPwS7oY1HMRTPr",
+   "name": "Mejora de dotes",
+   "type": "text",
+   "sort": 15000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Si un GM quiere que los jugadores puedan equilibrar sus características sin renunciar a los rasgos únicos que quieren, puede permitirles ganar una mejora de característica y además una dote para la que cumplan los requisitos cada vez que fueran a ganar una mejora de característica.</p>"
+   },
+   "_key": "!journal.pages!tbuU5BRQ6fHoLBMZ.L7XPwS7oY1HMRTPr"
+  },
+  {
+   "_id": "yv80Yt0zqWGxOapn",
+   "name": "Barrera pura",
+   "type": "text",
+   "sort": 16000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>En el mundo principal de Jujutsu Kaisen, Tengen sostiene el mundo del jujutsu con sus barreras permanentes. Entre las barreras que suprimen a los espíritus malditos, ocultan la energía maldita y cambian el terreno también está la Barrera pura, que respalda las técnicas de barrera de quienes están vinculados al Instituto de Jujutsu. Si en tu mundo existe Tengen o una figura con un dominio parecido de las barreras (como un Especialista de apoyo de nivel 20), puedes decidir que ciertas partes de tu mundo están dentro de una barrera pura. Quienes tienen permiso del poseedor de la barrera solo gastan 1 de energía maldita al lanzar una <em>Cortina</em> dentro de la Barrera pura.</p>"
+   },
+   "_key": "!journal.pages!tbuU5BRQ6fHoLBMZ.yv80Yt0zqWGxOapn"
+  },
+  {
+   "_id": "ZLoYzOhsLzJaiPP9",
+   "name": "Evasión de la ejecución",
+   "type": "text",
+   "sort": 17000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Una criatura que conoce los efectos de la Espada del Verdugo de Deadly Sentencing puede intentar una acción desesperada para evitar la muerte instantánea. Una criatura alcanzada por la Espada del Verdugo puede usar su reacción para arrancarse una extremidad en el punto de contacto y evitar la muerte. La criatura recibe el daño necesario para perder una extremidad, que no se puede reducir de ningún modo, y sufre con normalidad las penalizaciones de perder esa extremidad.</p>"
+   },
+   "_key": "!journal.pages!tbuU5BRQ6fHoLBMZ.ZLoYzOhsLzJaiPP9"
+  },
+  {
+   "_id": "oUt8KaJ6XTKIj6ow",
+   "name": "Pruebas de alma",
+   "type": "text",
+   "sort": 18000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Al hacer una prueba relacionada con almas, usas tu nivel de Soul Awareness en lugar de cualquier otro modificador de característica o competencia. Sin ningún nivel de Soul Information, tienes desventaja en esas pruebas.</p>"
+   },
+   "_key": "!journal.pages!tbuU5BRQ6fHoLBMZ.oUt8KaJ6XTKIj6ow"
+  },
+  {
+   "_id": "TaE58sYZdFjgx4aJ",
+   "name": "Burnout de salida",
+   "type": "text",
+   "sort": 19000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Mientras sufres los efectos del Technique Burnout, ganas 2 niveles temporales de Salida reducida.</p>"
+   },
+   "_key": "!journal.pages!tbuU5BRQ6fHoLBMZ.TaE58sYZdFjgx4aJ"
+  },
+  {
+   "_id": "yYlrRD9LUSwqcA8g",
+   "name": "Afinidad aumentada",
+   "type": "text",
+   "sort": 20000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>En el nivel 10, los jugadores con la raza Espíritu maldito ganan <em>Afinidad aumentada</em> para escalar mejor frente a la Técnica Maldita Inversa. También, el GM puede permitirla como dote con el requisito de nivel X y raza Espíritu maldito. Puedes usar Afinidad aumentada como acción adicional o como reacción al recibir daño para gastar energía maldita hasta tu modificador de Energía Maldita y recuperar 10 puntos de golpe por cada punto de energía maldita gastado. El GM debería permitirlo a los jugadores con razas de Espíritu maldito para que estén a la altura de quienes obtienen la Técnica Maldita Inversa en ciertos niveles.</p>"
+   },
+   "_key": "!journal.pages!tbuU5BRQ6fHoLBMZ.yYlrRD9LUSwqcA8g"
+  },
+  {
+   "_id": "ePZakOYYGeQyBIY8",
+   "name": "Dependencia de los Seis Ojos",
+   "type": "text",
+   "sort": 21000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>En Jujutsu Kaisen se dice que Limitless es difícil de usar sin los Seis Ojos por su alto coste de energía maldita, lo que deja a la mayoría de hechiceros de Limitless por debajo de la media sin ellos. Si quieres una versión de la técnica más fiel al canon para PNJ o jugadores, aumenta a 3 EM el coste de activar y mantener Infinity para los hechiceros sin los Seis Ojos. Duplica el coste de Lapse Blue, Reversal Red, Teleportation y Offensive Infinity, y aumenta en 5 EM el coste de Hollow Purple.</p>"
+   },
+   "_key": "!journal.pages!tbuU5BRQ6fHoLBMZ.ePZakOYYGeQyBIY8"
+  },
+  {
+   "_id": "uxy6nOYe2dgjb2kt",
+   "name": "Más puntos de golpe",
+   "type": "text",
+   "sort": 22000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Si quieres que tus jugadores aguanten más y duren más en combates muy peligrosos, el GM puede hacer que los personajes jugadores ganen el valor máximo de su dado de golpe al subir de nivel en lugar de tirarlo o tomar la media.</p>"
+   },
+   "_key": "!journal.pages!tbuU5BRQ6fHoLBMZ.uxy6nOYe2dgjb2kt"
+  },
+  {
+   "_id": "PPlAhaYH60az5CY1",
+   "name": "Pruebas duras",
+   "type": "text",
+   "sort": 23000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Para que domar sea más difícil para los jugadores de Ten Shadows de nivel bajo, el GM puede elegir cualquiera de estos aumentos para los shikigami sin domar:</p>\n<ul><li>Aumentar los puntos de golpe en 10 × el VD del shikigami.</li><li>Sumar el doble del VD del shikigami a sus tiradas de daño.</li><li>Aumentar la CD de los rasgos del shikigami en la mitad de su VD.</li><li>Sumar +2 a entre 1 y 3 características del shikigami.</li></ul>\n<p>Por equilibrio, NO permitas que un jugador conserve estos aumentos tras completar el ritual de doma. Puede parecer genial o apropiado, pero NO LO HAGAS.</p>"
+   },
+   "_key": "!journal.pages!tbuU5BRQ6fHoLBMZ.PPlAhaYH60az5CY1"
+  },
+  {
+   "_id": "ECOdsZB1tk8YkZYQ",
+   "name": "Acciones adicionales",
+   "type": "text",
+   "sort": 24000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Algunas acciones opcionales para las mesas que quieran combates más interesantes y dinámicos.</p>\n<p><strong>Carga.</strong> Ganas 10 pies de movimiento adicional que debes usar para moverte en línea recta antes de golpear a un objetivo con un ataque cuerpo a cuerpo como parte de la misma acción. Aunque puedas hacer varios ataques en tu turno, solo puedes hacer 1 ataque este turno al usar la acción de Carga. Por cada ataque adicional que podrías haber hecho, ganas +1 a la tirada de ataque.</p>\n<p><strong>Distraer.</strong> Si realizas la acción de Distraer, puedes intentar distraer a una criatura a 15 pies o menos de ti que pueda verte u oírte. Si se está concentrando en una técnica o habilidad, debe hacer una prueba de concentración para mantenerla. Aunque la supere, tu distracción aumenta en +1 la CD de las pruebas de concentración que haga hasta el inicio de tu turno, siempre que sigas a 15 pies o menos y continúes distrayéndola. Una misma criatura solo puede verse afectada por un máximo de 3 aumentos de CD por criaturas que usen esta acción.</p>\n<p><strong>Romper objeto.</strong> Puedes intentar romper un objeto que sostenga o lleve tu oponente como parte de una acción de Atacar, en lugar de un ataque cuerpo a cuerpo. Intentar romper un objeto provoca un ataque de oportunidad del objetivo.</p>\n<p>Si el ataque tiene éxito, infliges daño al objeto con normalidad. El daño que supere la Dureza del objeto se resta de sus puntos de golpe. Si al objeto le quedan la mitad o menos de sus puntos de golpe totales, gana el estado roto (pasa a ser un objeto −3). Si el daño que infliges reduciría el objeto a menos de 0 puntos de golpe, puedes elegir destruirlo. Si no lo destruyes, se queda con 1 punto de golpe y el estado roto.</p>\n<p><strong>Golpe de gracia.</strong> Como acción de turno completo (acción + acción adicional + movimiento), haces un ataque cuerpo a cuerpo estando a 5 pies o menos de una criatura inconsciente. El objetivo debe hacer una tirada de salvación de Constitución con CD igual al daño recibido o morir al instante.</p>"
+   },
+   "_key": "!journal.pages!tbuU5BRQ6fHoLBMZ.ECOdsZB1tk8YkZYQ"
+  },
+  {
+   "_id": "n7kuSHd6aGyix60r",
+   "name": "Progresión anual",
+   "type": "text",
+   "sort": 25000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Los peligros de las misiones y de la vida escolar permiten a los alumnos del Instituto de Jujutsu avanzar mediante el estudio autónomo y el entrenamiento intenso en el tiempo en que, como estudiantes normales, pasarían de curso. Esta regla gira en torno a esa idea de progresión.</p>\n<p>Cuando el GM quiere aplicar una Progresión anual, cada jugador elige una de estas opciones:</p>\n<p><strong>Mejora de característica.</strong> El personaje puede aumentar una puntuación de característica en 2 o dos puntuaciones en 1 cada una, hasta un máximo de 20. Representa el entrenamiento adicional al que se somete para prepararse para el nuevo curso «escolar».</p>\n<p><strong>Nueva dote.</strong> El personaje gana una nueva dote elegida por el jugador, sujeta a tu aprobación. Representa nuevos talentos o rasgos que el personaje ha adquirido para mejorar como defensor de la sociedad del jujutsu. Un personaje puede beneficiarse de la Progresión anual un máximo de cuatro veces.</p>"
+   },
+   "_key": "!journal.pages!tbuU5BRQ6fHoLBMZ.n7kuSHd6aGyix60r"
+  },
+  {
+   "_id": "c95wOneEnzuG0U1d",
+   "name": "Formas de ganar dinero",
+   "type": "text",
+   "sort": 26000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Si tu GM decide dejar que los jugadores compren objetos, probablemente intentarán ganar todo el dinero posible. Para que los jugadores aprovechen su tiempo libre y para abrir la puerta a situaciones de rol interesantes, puedes usar las siguientes reglas.</p>\n<p><strong>Empleo de salario mínimo:</strong> 10-40 horas por semana ($80-500)</p>\n<p>Un personaje jugador puede intentar encontrar trabajo. El GM decide qué trabajos hay disponibles según la zona de la campaña. El GM puede usar las competencias para fijar el sueldo del trabajo, según el modificador. Si un personaje tiene competencia en una habilidad, en una herramienta o incluso en idiomas, puede influir en el trabajo que encuentre. La pericia puede llevar a trabajos aún mejor pagados.</p>\n<p><strong>Empleo especial:</strong> (modificador de EM × d4 × $100 por semana laboral)</p>\n<p>Requisito: Técnica Innata O Técnica Maldita Inversa</p>\n<p>A veces un jugador puede encontrar un trabajo en el que sacar provecho de su Técnica Innata. Su legalidad puede variar según el GM, lo que puede abrir la puerta a ciertos problemas u oportunidades.</p>\n<p>Si un jugador tiene Reverse Technique Prodigy o Mastered Reverse Technique, gana automáticamente $10,000 por semana.</p>\n<p><strong>Aceptar misiones</strong></p>\n<p>¡El trabajo de un hechicero nunca termina! En su tiempo libre, un hechicero puede dedicarse a su trabajo y aceptar más misiones. Las misiones pueden venir del Instituto de Jujutsu, de alguno de los clanes e incluso del gobierno de un país. Según la dificultad del trabajo, la recompensa aumenta en consonancia.</p>\n<p><strong>Grado 4</strong> ($500-2,000)</p>\n<p><strong>Grado 3</strong> ($3,000-10,000)</p>\n<p><strong>Grado 2</strong> ($10,000-25,000)</p>\n<p><strong>Grado 1</strong> ($100,000-500,000)</p>\n<p><strong>Especial</strong> ($1,000,000+)</p>\n<p><strong>Creación de herramientas malditas</strong></p>\n<p>Requisito: tener Tool Maker</p>\n<p>Las herramientas malditas poderosas son muy valiosas. Su valor puede ir de quinientos mil a más de quinientos millones de yenes. Los fabricantes de herramientas siempre encuentran a quién venderlas.</p>\n<p><strong>Grado 4</strong> (valor del arma o armadura ×1)</p>\n<p><strong>Grado 3</strong> (valor del arma o armadura ×10)</p>\n<p><strong>Grado 2</strong> (valor del arma o armadura ×25)</p>\n<p><strong>Grado 1</strong> (valor del arma o armadura ×50)</p>"
+   },
+   "_key": "!journal.pages!tbuU5BRQ6fHoLBMZ.c95wOneEnzuG0U1d"
+  },
+  {
+   "_id": "xvsArv9Hn9712fXG",
+   "name": "Encontrar un espíritu maldito",
+   "type": "text",
+   "sort": 27000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Para buscar un espíritu maldito al azar, puedes pasar 1-2 horas registrando la zona en busca de posibles espíritus malditos. Haz una prueba de Percepción o Investigación CD 20. Si fallas, no encuentras ninguno. Si tienes éxito, encuentras un espíritu maldito. Tira un d100 para decidir la rareza y la fuerza del espíritu maldito.</p>\n<table>\n<thead><tr><th>Resultado</th><th>Tipo de maldición</th></tr></thead>\n<tbody>\n<tr><td>1-50</td><td>Grado 4</td></tr>\n<tr><td>51-75</td><td>Grado 3</td></tr>\n<tr><td>76-90</td><td>Semigrado 2</td></tr>\n<tr><td>91-99</td><td>Grado 2</td></tr>\n<tr><td>100</td><td>Semigrado 1</td></tr>\n</tbody>\n</table>"
+   },
+   "_key": "!journal.pages!tbuU5BRQ6fHoLBMZ.xvsArv9Hn9712fXG"
+  },
+  {
+   "_id": "ltfltRkNHfKj68rg",
+   "name": "Maldito al morir",
+   "type": "text",
+   "sort": 28000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Lo más importante al matar a un hechicero es hacerlo siempre con energía maldita, o podría volver como espíritu maldito. Si mueres por medios sin energía maldita siendo un hechicero humano, vuelves a la vida como espíritu maldito una semana después de tu muerte. Sufres los siguientes cambios:</p>\n<ul><li>Tu raza pasa a ser Espíritu maldito, con todos los beneficios de esa raza y perdiendo todos los de la anterior. Tu raza pasa a ser Espíritu vengativo.</li><li>Ganas una dote de Energía Maldita o de Técnica Innata a tu elección cuyos requisitos cumplas.</li><li>Pierdes todas las dotes y rasgos relacionados con la Técnica Maldita Inversa. Si tenías el avance de Técnica Maldita Inversa, lo sustituye el avance de Fisiología maldita. Por cada dote perdida así, ganas 2 Puntos profanos.</li><li>Como tu cuerpo es más resistente, tus puntuaciones de Fuerza, Destreza, Constitución y EM aumentan en 2, también su máximo. Sin embargo, tu mente también se ha visto afectada por la transformación: tus otras puntuaciones mentales se reducen en 4.</li></ul>\n<p>Al volver a la vida ganas 1 nivel de locura indefinida. Al final de la semana debes hacer una tirada de salvación de Sabiduría CD 25. Si la fallas, ganas un nivel de locura indefinida y debes repetir la salvación cada semana; seguirás acumulando niveles de locura indefinida con cada fallo. Si la superas, pierdes los niveles de locura obtenidos y ya no haces la salvación cada semana.</p>"
+   },
+   "_key": "!journal.pages!tbuU5BRQ6fHoLBMZ.ltfltRkNHfKj68rg"
+  },
+  {
+   "_id": "WTCtQFyiTPiZso1D",
+   "name": "Object Soul Awareness",
+   "type": "text",
+   "sort": 29000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>La Object Soul Awareness es mucho más rara que la Soul Awareness normal y te permite percibir el alma de las cosas que no están vivas. Solo puedes aumentar tu Object Soul Awareness con Spiritual Teaching, aunque puedes entrenarla en solitario si tienes al menos 6 niveles de Soul Awareness (+3 a la CD por nivel en lugar de +2).</p>\n<table>\n<thead><tr><th>Nivel</th><th>Habilidad del alma</th></tr></thead>\n<tbody>\n<tr><td>1</td><td><strong>Object Soul Perception.</strong> Al dañar una estructura u objeto, tus ataques con arma cuerpo a cuerpo y tus golpes sin armas ignoran los umbrales de daño y la reducción de daño.</td></tr>\n<tr><td>2</td><td><strong>Soul Shatter.</strong> Los ataques con arma cuerpo a cuerpo y los golpes sin armas infligen el daño máximo contra objetos o estructuras, y tratas su CA como 5 puntos menor.</td></tr>\n<tr><td>3</td><td><strong>Greater Object Soul Perception.</strong> Ignoras las técnicas malditas que aumentan directamente la durabilidad de los objetos y ganas vista ciega a 30 pies.</td></tr>\n</tbody>\n</table>"
+   },
+   "_key": "!journal.pages!tbuU5BRQ6fHoLBMZ.WTCtQFyiTPiZso1D"
+  },
+  {
+   "_id": "BGKmK4pIPWSbxmly",
+   "name": "Comprensiones específicas de clase",
+   "type": "text",
+   "sort": 30000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Esta es una regla OPCIONAL para reflejar cómo distintas personas pueden tener distintas revelaciones al alcanzar un avance. Para obtener una Comprensión específica de clase debes ser de esa clase y haber logrado al menos 2 avances. Solo puedes obtener una Comprensión específica de clase.</p>\n<p><strong>Juggernaut</strong></p>\n<p><strong>Skilled Cursed Reinforcement.</strong> Cuando usas Cursed Reinforcement, puedes ganar en su lugar 10 puntos de golpe temporales por cada EM gastada. Puedes hacerlo un número de veces al día igual a tu bonificador por competencia.</p>\n<p><strong>Explorador</strong></p>\n<p><strong>Reliable Skill.</strong> Cuando haces una prueba de una habilidad en la que tienes competencia, puedes tratar cualquier resultado de 9 o menos como un 10.</p>\n<p><strong>Estratega</strong></p>\n<p><strong>Enhanced Creativity.</strong> Ganas dos opciones adicionales de <em>Technique Creativity</em>. Puedes reducir en 1 el coste de una técnica (mínimo 1) un número de veces al día igual a tu bonificador por competencia.</p>\n<p><strong>Usuario de shikigami</strong></p>\n<p><strong>Cursed Bond.</strong> Tu <em>Shikigami Companion</em>, o un shikigami, cadáver maldito o espíritu maldito domado que tengas, puede usar <em>Cursed Strike</em> un número de veces al día igual a tu bonificador por competencia. Al usarlo así, se beneficia de cualquier Comprensión despertada o rasgo que mejore tu <em>Cursed Strike</em>. Puedes cambiar tu <em>Cursed Bond</em> como parte de un descanso largo.</p>\n<p><strong>Especialista de apoyo</strong></p>\n<p><strong>Positive Energy Master.</strong> Has desbloqueado un pozo de curación en lo más hondo de ti. Tienes una reserva de curación, aparte de tu reserva de RCT, con un número de puntos de golpe igual al doble de tu nivel. Puedes sacar cualquier cantidad de curación de esta reserva como acción adicional para curarte. A partir del nivel 5, puedes usar esta curación en otra criatura a la que toques.</p>\n<p><strong>Guerrero</strong></p>\n<p><strong>Destructive Cursed Strike.</strong> Cuando usas <em>Cursed Strike</em>, infliges daño necrótico adicional igual a tu modificador de EM un número de veces al día igual al doble de tu bonificador por competencia.</p>"
+   },
+   "_key": "!journal.pages!tbuU5BRQ6fHoLBMZ.BGKmK4pIPWSbxmly"
+  },
+  {
+   "_id": "t4LXcyIcfPVczoBV",
+   "name": "Energía maldita media",
+   "type": "text",
+   "sort": 31000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>La cantidad total de energía maldita de una persona no la determina cuántas emociones negativas tiene, sino su talento innato para el jujutsu. Puedes usar esto como referencia de la energía maldita que poseen las distintas personas.</p>\n<table>\n<thead><tr><th>Clasificación</th><th>Energía Maldita (EM)</th><th>Descripción / contexto de poder</th></tr></thead>\n<tbody>\n<tr><td><strong>Restricción Celestial</strong></td><td><strong>0 EM</strong></td><td>Sin energía maldita; depende por completo de su destreza física o su talento innato.</td></tr>\n<tr><td><strong>Persona normal</strong></td><td><strong>½ EM</strong></td><td>Energía maldita mínima, apenas detectable; no es consciente de las maldiciones.</td></tr>\n<tr><td><strong>Persona normal (desesperación)</strong></td><td><strong>1 EM</strong></td><td>Aumento temporal de energía maldita por una emoción intensa (miedo, dolor, duelo).</td></tr>\n<tr><td><strong>Grado 4</strong></td><td><strong>1–5 EM</strong></td><td>Energía maldita débil; puede exorcizar espíritus menores o usar técnicas básicas.</td></tr>\n<tr><td><strong>Grado 3</strong></td><td><strong>6–15 EM</strong></td><td>Energía maldita moderada; hechicero competente o espíritu maldito menor.</td></tr>\n<tr><td><strong>Grado 2</strong></td><td><strong>16–30 EM</strong></td><td>Energía maldita fuerte; hechiceros hábiles y misiones especiales de nivel medio.</td></tr>\n<tr><td><strong>Grado 1</strong></td><td><strong>31–50 EM</strong></td><td>Energía maldita alta; hechiceros veteranos y espíritus malditos de élite.</td></tr>\n<tr><td><strong>Grado especial</strong></td><td><strong>50+ EM</strong></td><td>Salida de energía maldita masiva; amenaza a escala nacional o habilidad trascendente.</td></tr>\n</tbody>\n</table>"
+   },
+   "_key": "!journal.pages!tbuU5BRQ6fHoLBMZ.t4LXcyIcfPVczoBV"
+  }
+ ],
+ "_key": "!journal!tbuU5BRQ6fHoLBMZ"
+}

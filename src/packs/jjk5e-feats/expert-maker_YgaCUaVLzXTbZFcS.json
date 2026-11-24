@@ -30,7 +30,14 @@
    "forTechniques": [
     "Cursed Corpse Creation"
    ],
-   "rev": "a220df2d07"
+   "rev": "5fd80d5123",
+   "prereq": {
+    "techniques": [
+     [
+      "Cursed Corpse Creation"
+     ]
+    ]
+   }
   }
  },
  "folder": "XXj1CTcWWYDx5bTY",

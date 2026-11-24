@@ -981,6 +981,20 @@ const RO_ROWS = [
   "-9 Output, 3 Max, Die Tier (-4)"
 ];
 
+/** Full-Turn Action: an activity whose activation condition says "Full turn" (e.g. Domain Expansion). */
+const isFullTurn = (activity) => activity?.activation?.type === "special" && /^full[ -]turn/i.test(activity?.activation?.condition ?? "");
+// Only on the actor's own turn: a domain used as a clash reaction on another turn is not a full-turn action.
+const ownTurn = (actor) => !!game.combat?.started && !!actor && game.combat.combatant?.actor?.uuid === actor.uuid;
+function fullTurnSpent(actor) {
+  const midi = globalThis.MidiQOL;
+  try { return !!(midi?.hasUsedAction?.(actor) || midi?.hasUsedBonusAction?.(actor)); } catch { return false; }
+}
+async function spendFullTurn(actor) {
+  const midi = globalThis.MidiQOL;
+  if (!ownTurn(actor) || !midi) return;
+  try { await midi.setActionUsed?.(actor); await midi.setBonusActionUsed?.(actor); } catch (err) { reportError("full turn", err); }
+}
+
 function registerActivityHooks() {
   Hooks.on("dnd5e.preUseActivity", (activity, usageConfig) => {
     if([...game.user?.targets??[]].some(tk=>barrierMarkerMeta(tk))){
@@ -1004,6 +1018,11 @@ function registerActivityHooks() {
     }
     if (activity.item?.flags?.jjk5e?.technique && inBurnout(actor)) {
       ui.notifications.warn(t("Notify.Burnout"));
+      return false;
+    }
+    // Full-Turn Action (Rules of Thumb): needs the action, bonus action and all movement still unused.
+    if (isFullTurn(activity) && ownTurn(actor) && fullTurnSpent(actor)) {
+      ui.notifications.warn(t("Notify.FullTurnUsed"));
       return false;
     }
     const cost = totalActivityCECost(actor, activity, usageConfig);
@@ -1055,6 +1074,10 @@ function registerActivityHooks() {
       return;
     }
     if (!validActivityCE(actor, activity, usageConfig, { checkPool: setting("autoSpendCE") })) return false;
+  });
+  Hooks.on("dnd5e.postUseActivity", (activity) => {
+    const actor = activity?.actor;
+    if (isFullTurn(activity) && actor?.isOwner) spendFullTurn(actor);
   });
   Hooks.on("dnd5e.postUseActivity", async (activity, usageConfig, results) => {
     const actor = activity.actor ?? activity.item?.actor;
@@ -1254,8 +1277,11 @@ async function remindModifiers(actor, item) {
 }
 
 function missingPrereqs(actor, item) {
-  const pre = item.flags?.jjk5e?.prereq;
-  if (!pre) return [];
+  const pre = item.flags?.jjk5e?.prereq ?? {};
+  // Heavenly Restriction (Rules of Thumb): no cursed energy, so no feat that uses or manipulates it.
+  const CE_FEATS = ["jjkCursedEnergy", "jjkBarrier", "jjkRCT", "jjkTechnique", "jjkCursedTechnique"];
+  if (actor && isHeavenlyOnly(actor) && item.type === "feat" && CE_FEATS.includes(item.system?.type?.subtype)) return [t("Feats.NoCE")];
+  if (!item.flags?.jjk5e?.prereq && !item.flags?.jjk5e?.heavenlyPact && !item.flags?.jjk5e?.profaneCost && !item.flags?.jjk5e?.bodyCost) return [];
   const missing = [];
   const names = new Set([...actor.items].flatMap((i) => [normName(i.name), normName(baseName(i))]));
   for (const group of pre.features ?? []) {
@@ -1274,6 +1300,8 @@ function missingPrereqs(actor, item) {
       .test(i.system.description?.value ?? "")));
     if (!found) missing.push(group.join(t("Feats.Or")));
   }
+  if (item.flags?.jjk5e?.heavenlyPact && actor.items.some((i) => i.flags?.jjk5e?.heavenlyPact && i.id !== item.id
+      && normName(baseName(i)) !== normName(baseName(item)))) missing.push(t("Feats.OnePact"));
   if (pre.ceScore) {
     const score = Number(actor.system.abilities?.[ceAbility(actor)]?.value) || 0;
     if (score < pre.ceScore) missing.push(t("Feats.CEScore", { need: pre.ceScore, have: score }));
@@ -1290,6 +1318,9 @@ function missingPrereqs(actor, item) {
     if (have < pre.breakthroughs) missing.push(t("Feats.Breakthroughs", { need: pre.breakthroughs, have }));
   }
   const pp = Number(item.flags?.jjk5e?.profaneCost) || 0;
+  if (pp && !actor.getFlag?.(MODULE_ID, "cursedPhysiology") && !actor.items.some((i) => Number(i.flags?.jjk5e?.profaneCost) > 0)) {
+    missing.push(t("Feats.NeedPhysiology"));
+  }
   if (pp) {
     const used = actor.items.reduce((s, i) => s + (Number(i.flags?.jjk5e?.profaneCost) || 0), 0);
     const budget = characterLevel(actor) + (Number(actor.getFlag?.(MODULE_ID, "profaneBonus")) || 0);
@@ -1820,6 +1851,22 @@ function onPreRollAttack(config) {
   applySureHit(actor, config);
 }
 
+/** Incomplete Domain (Improved Hit): creatures inside roll saves against the caster's innate technique with
+ * disadvantage. The source is read from the activation card dnd5e links to the save (message.system.origin). */
+function incompleteDomainSave(config, message) {
+  const id = message?.data?.system?.origin;
+  const card = id ? game.messages?.get?.(id) : null;
+  const activity = card?.getAssociatedActivity?.();
+  const caster = activity?.actor;
+  if (!caster || !activity.item?.flags?.jjk5e?.technique) return;
+  const state = getDomain(caster);
+  if (!state?.incomplete || !domainOpen(caster)) return;
+  const saver = config?.subject;
+  const token = saver?.token ?? saver?.getActiveTokens?.()?.[0];
+  if (!token || saver?.uuid === caster.uuid || !insideDomain(state, token) || domainWard(token)) return;
+  config.disadvantage = true;
+}
+
 /** Defensive weapons: +1 AC from one equipped weapon at a time. Extra equipped copies get their effect disabled. */
 async function syncDefensive(actor) {
   if (!actor?.isOwner || actor.documentName !== "Actor") return;
@@ -2343,7 +2390,7 @@ function panelHTML(actor, tab = "combat") {
       <div class="jjk-row">${gm ? pbtn("soulDown", "", "−") : ""}<strong class="jjk-num">${soul}</strong>${gm ? pbtn("soulUp", "", "+") : ""}</div>
       ${soul ? `<ul class="jjk-list">${soulList}</ul>` : ""}</fieldset>
     <fieldset><legend>${t("Soul.Name")}</legend>
-      <div class="jjk-row"><span>${sd ? `−${sd} ${t("Soul.MaxHP")}` : "—"}</span></div></fieldset>
+      <div class="jjk-row"><span>${sd ? `−${sd} ${t("Soul.MaxHP")}` : "—"}</span>${sd && soul >= 6 && hasRCT(actor) ? pbtn("soulRCT", "fas fa-heart-pulse", t("Soul.HealRCT")) : ""}</div></fieldset>
     <fieldset><legend>${t("Limb.Title")}</legend>
       <table class="jjk-limbs"><thead><tr><th></th><th>${t("Limb.Broken")}</th><th>${t("Limb.Lost")}</th><th></th></tr></thead>
       <tbody>${limbRows}</tbody></table>
@@ -2483,6 +2530,7 @@ const PANEL_ACTIONS = {
   updateAutomation: (actor) => updateAutomation(actor),
   burnoutRecovery: (actor) => burnoutRecovery(actor),
   clearSoul: (actor) => clearSoulDamage(actor),
+  soulRCT: (actor) => healSoulWithRCT(actor),
   techniqueBuilder: (actor) => techniqueBuilder(actor),
   soulDamage: async (actor) => {
     const n = await promptNumber(t("Soul.Apply"), t("Soul.Amount"), 0);
@@ -2627,6 +2675,29 @@ async function applySoulDamage(actor, amount, { untilRest = true, source = "" } 
   if (Number(hp.value) > max) await actor.update({ "system.attributes.hp.value": Math.max(0, max) });
   await chat(actor, `<p><i class="fas fa-ghost"></i> ${t("Soul.Applied", { name: esc(actor.name), dmg, total, source: esc(source) })}</p>`);
   return total;
+}
+
+/** Soul Damage + RCT: with 6+ levels of Soul Awareness, healing from the RCT pool (1 CE per 10 HP) restores max HP. */
+async function healSoulWithRCT(actor) {
+  actor = requireActor(actor);
+  const sd = soulDamageOf(actor);
+  const soul = Number(actor?.getFlag(MODULE_ID, "soulAwareness")) || 0;
+  const pool = actor?.items?.find((i) => /Reverse Cursed Technique \(Healing Pool\)/i.test(baseName(i)));
+  if (!actor || !sd || soul < 6 || !hasRCT(actor)) return ui.notifications.warn(t("Soul.HealRCTUnavailable"));
+  const left = pool ? Math.max(0, (Number(pool.system?.uses?.max) || 0) - (Number(pool.system?.uses?.spent) || 0)) : Infinity;
+  const maxCE = Math.min(Math.ceil(sd / 10), Math.floor(left / 10), Math.max(1, ceMod(actor)));
+  if (!(maxCE > 0)) return ui.notifications.warn(t("Soul.HealRCTUnavailable"));
+  const n = clamp(Number(await promptNumber(t("Soul.HealRCT"), t("Soul.HealRCTPrompt", { max: maxCE, sd }), maxCE)) || 0, 0, maxCE);
+  if (!n || !(await spendCE(actor, n, t("Soul.HealRCT")))) return false;
+  const healed = Math.min(sd, 10 * n);
+  if (pool) await pool.update({ "system.uses.spent": (Number(pool.system?.uses?.spent) || 0) + 10 * n });
+  const rest = sd - healed;
+  const fx = soulEffect(actor);
+  if (!rest) await fx?.delete();
+  else await fx?.update(fxData({ name: `${t("Soul.Name")} (−${rest})`, changes: [{ key: "system.attributes.hp.tempmax", mode: 2, value: String(-rest) }],
+    "flags.jjk5e.soulDamage": rest }));
+  await chat(actor, `<p><i class="fas fa-heart-pulse"></i> ${t("Soul.HealRCTDone", { name: esc(actor.name), healed, rest })}</p>`);
+  return healed;
 }
 
 async function clearSoulDamage(actor) {
@@ -2996,7 +3067,7 @@ Hooks.once("init", () => {
     findPool, chooseTechnique, syncTechnique, promptCE, shortRestCE, chooseCEAbility, negativeEmotion,
     applyScaling, openPanel, maximumOutput, setReducedOutput, setSoulAwareness, setLimb, rollLimb,
     summon, dismissSummons, syncResource, missingPrereqs, applyCEEffects, activateGroup, endGroup,
-    updateAutomation, updateAllAutomation, outdatedItems, burnoutRecovery, applySoulDamage, clearSoulDamage,
+    updateAutomation, updateAllAutomation, outdatedItems, burnoutRecovery, fallDamage, applySoulDamage, clearSoulDamage,
     techniqueBuilder, buildTechniqueItems
   };
 });
@@ -3057,6 +3128,7 @@ Hooks.once("ready", async () => {
     if (b && typeof b === "object" && "isCritical" in b) return onAttackRoll(b, a?.system?.activities?.contents?.[0] ?? a);
   });
   Hooks.on("dnd5e.preRollAttackV2", (config) => onPreRollAttack(config));
+  Hooks.on("dnd5e.preRollSavingThrowV2", (config, dialog, message) => { try { incompleteDomainSave(config, message); } catch (err) { reportError("incomplete domain save", err); } });
   Hooks.on("dnd5e.preRollDamageV2", (config) => onPreRollDamage(config));
 
   Hooks.on("updateCombat", () => expireEffects());
@@ -3864,12 +3936,18 @@ Hooks.once("ready", () => {
     if (userId === game.user.id && foundry.utils.getProperty(changes, `flags.${MODULE_ID}.pendingBlackFlash`) === true) animateBlackFlash(actor);
   });
   Hooks.on("updateItem", () => { featDocsCache = null; });
+  Hooks.on("createActiveEffect", (effect) => {
+    if (!isActiveGM() || !(effect.flags?.jjk5e?.burnout || effect.flags?.jjk5e?.kind === "burnout")) return;
+    const actor = effect.parent;
+    if (actor?.documentName === "Actor") return queueDomainWork(() => applyBurnoutConsequences(actor)).catch((err) => reportError("burnout", err));
+  });
   Hooks.on("deleteActiveEffect", (effect) => {
     if (!isActiveGM() || !(effect.flags?.jjk5e?.burnout || effect.flags?.jjk5e?.kind === "burnout")) return;
     const actor=effect.parent;
     if(actor?.documentName==="Actor") return queueDomainWork(async()=>{
       if(inBurnout(actor)) return;
       await burnoutExhaustion(actor,-1);
+      await clearBurnoutSummons(actor);
     });
   });
 });
@@ -5506,6 +5584,63 @@ async function barrierlessHit(actor, dmg) {
  * and make a CON save (DC 5, +5 per success, reset on a long rest). Success ends burnout; failure deals 8d6 psychic
  * and the sorcerer cannot take actions or bonus actions until the start of their next turn.
  */
+/** Successes that still raise the DC: +5 each, −5 for every full minute (world time) since the last one. */
+function burnoutRecoveryWins(actor) {
+  const raw = actor?.getFlag?.(MODULE_ID, "burnoutRecoveries");
+  if (!raw) return 0;
+  if (typeof raw !== "object") return Math.max(0, Number(raw) || 0); // older numeric flag
+  const minutes = Math.floor(Math.max(0, (Number(game.time?.worldTime) || 0) - (Number(raw.time) || 0)) / 60);
+  return Math.max(0, (Number(raw.wins) || 0) - minutes);
+}
+
+/** Technique Burnout (Rules of Thumb): forms and magical effects of the innate technique end; its summons stay
+ * but are treated as stunned (and fall prone if they were flying) until the burnout ends. */
+function techniqueOrigins(actor) {
+  return actor.items.filter((i) => i.flags?.jjk5e?.technique).map((i) => i.uuid);
+}
+function fromTechnique(effect, origins) {
+  const o = String(effect?.origin ?? "");
+  return !!o && origins.some((u) => o === u || o.startsWith(`${u}.`));
+}
+function burnoutSceneActors() {
+  const scene = globalThis.canvas?.scene;
+  return [...new Map([...(game.actors?.contents ?? []), ...[...(scene?.tokens ?? [])].map((tk) => tk.actor)]
+    .filter((a) => a?.uuid).map((a) => [a.uuid, a])).values()];
+}
+async function applyBurnoutConsequences(actor) {
+  if (!isActiveGM() || !actor || !inBurnout(actor)) return;
+  const origins = techniqueOrigins(actor);
+  if (!origins.length) return;
+  const ended = [], stunned = [];
+  for (const a of burnoutSceneActors()) {
+    const ids = a.effects.filter((e) => !e.flags?.jjk5e?.kind && !e.flags?.jjk5e?.burnout && fromTechnique(e, origins)).map((e) => e.id);
+    if (ids.length) {
+      await a.deleteEmbeddedDocuments("ActiveEffect", ids, { jjk5eBurnout: true });
+      ended.push(`${esc(a.name)} (${ids.length})`);
+    }
+    if (a.uuid === actor.uuid || kindEffect(a, "burnoutSummon")) continue;
+    const token = a.token ?? a.getActiveTokens?.()?.[0]?.document;
+    const own = token?.flags?.jjk5e?.summonedBy;
+    const origin = token?.flags?.dnd5e?.summon?.origin ?? a.flags?.dnd5e?.summon?.origin;
+    const mine = own === actor.uuid || (!!origin && origins.some((u) => origin === u || origin.startsWith(`${u}.`)));
+    if (!mine) continue;
+    const flying = (Number(a.system?.attributes?.movement?.fly) || 0) > 0 || a.statuses?.has?.("flying");
+    await setKindEffect(a, "burnoutSummon", { name: t("Burnout.SummonName"), img: `${ICONS}/burnout.svg`,
+      statuses: flying ? ["stunned", "prone"] : ["stunned"], description: `<p>${t("Burnout.SummonDescription")}</p>`,
+      flags: { jjk5e: { burnoutOf: actor.uuid } } });
+    stunned.push(esc(a.name));
+  }
+  if (ended.length || stunned.length) await chat(actor, `<p><i class="fas fa-brain"></i> <strong>${t("Burnout.Name")}</strong></p>
+    ${ended.length ? `<p>${t("Burnout.FormsEnded")}: ${ended.join(", ")}</p>` : ""}${stunned.length ? `<p>${t("Burnout.SummonsStunned")}: ${stunned.join(", ")}</p>` : ""}`);
+}
+async function clearBurnoutSummons(actor) {
+  if (!isActiveGM() || !actor) return;
+  for (const a of burnoutSceneActors()) {
+    const fx = kindEffect(a, "burnoutSummon");
+    if (fx?.flags?.jjk5e?.burnoutOf === actor.uuid) await safeDelete(fx);
+  }
+}
+
 function canRecoverBurnout(actor) {
   return !!actor && inBurnout(actor) && refinementOf(actor) >= 750
     && actor.items.some((i) => /^Reverse Cursed Technique/i.test(baseName(i)));
@@ -5515,14 +5650,14 @@ async function burnoutRecovery(actor) {
   actor = requireActor(actor);
   if (!canRecoverBurnout(actor)) return ui.notifications.warn(t("Burnout.RecoveryUnavailable"));
   if (!(await spendCE(actor, 4, t("Burnout.Recovery")))) return false;
-  const wins = Number(actor.getFlag(MODULE_ID, "burnoutRecoveries")) || 0;
+  const wins = burnoutRecoveryWins(actor);
   const dc = 5 + 5 * wins;
   const con = actor.system.abilities?.con ?? {};
   const bonus = Number(con.save?.value ?? con.save ?? con.mod) || 0;
   const roll = await new Roll(`1d20 + ${bonus}`).evaluate();
   await roll.toMessage?.({ speaker: docClass("ChatMessage").getSpeaker?.({ actor }), flavor: t("Burnout.RecoverySave", { dc }) });
   if (roll.total >= dc) {
-    await actor.setFlag(MODULE_ID, "burnoutRecoveries", wins + 1);
+    await actor.setFlag(MODULE_ID, "burnoutRecoveries", { wins: wins + 1, time: Number(game.time?.worldTime) || 0 });
     const ids = actor.effects.filter((e) => e.flags?.jjk5e?.kind === "burnout" || e.flags?.jjk5e?.burnout).map((e) => e.id);
     if (ids.length) await actor.deleteEmbeddedDocuments("ActiveEffect", ids);
     await chat(actor, `<p><i class="fas fa-brain"></i> ${t("Burnout.RecoverySuccess", { name: esc(actor.name) })}</p>`);
@@ -6170,14 +6305,30 @@ async function addBreakthrough(actor, n = 1, reason = "") {
   const total = Math.max(0, (Number(actor.getFlag(MODULE_ID, "breakthroughs")) || 0) + n);
   await actor.setFlag(MODULE_ID, "breakthroughs", total);
   if (n > 0) await chat(actor, `<p><i class="fas fa-bolt"></i> ${t("Breakthrough.Gained", { name: esc(actor.name), total })}${reason ? ` <em>(${esc(reason)})</em>` : ""}</p>`);
+  if (n > 0) await offerAwakenedUnderstanding(actor, total - n, total).catch((err) => reportError("awakened understanding", err));
   return total;
+}
+
+/** Awakened Understanding: when the breakthrough total reaches a tier's prerequisite, the GM gets a card to grant it. */
+async function offerAwakenedUnderstanding(actor, before, total) {
+  const docs = (await eligibleFeats(actor)).filter((d) => {
+    const need = Number(d.flags?.jjk5e?.prereq?.breakthroughs);
+    return Number.isFinite(need) && need > before && need <= total;
+  });
+  if (!docs.length) return;
+  const gms = game.users.filter((u) => u.isGM).map((u) => u.id);
+  await docClass("ChatMessage").create({ whisper: [...new Set([...gms, ...game.users.filter((u) => !u.isGM && actor.testUserPermission?.(u, "OWNER")).map((u) => u.id)])],
+    speaker: docClass("ChatMessage").getSpeaker?.({ actor }),
+    content: `<div class="jjk5e-card"><h3><i class="fas fa-bolt"></i> ${t("Breakthrough.Understanding")}</h3>
+      <p>${t("Breakthrough.UnderstandingOffer", { name: esc(actor.name), total })}</p>
+      ${docs.map((d) => `<button type="button" data-jjk5e-awaken="${esc(d.uuid)}" data-actor="${esc(actor.uuid)}"><i class="fas fa-plus"></i> ${esc(d.name)}</button>`).join("")}</div>` });
 }
 
 /** Breakthrough: RCT awakening roll (d100, 90+) after a near-death moment. */
 async function rollRCTAwakening(actor) {
   actor = requireActor(actor);
   if (!actor) return null;
-  if (hasRCT(actor) || actor.getFlag(MODULE_ID, "rctUnlocked")) {
+  if (hasRCT(actor) || actor.getFlag(MODULE_ID, "rctUnlocked") || actor.getFlag(MODULE_ID, "cursedPhysiology")) {
     ui.notifications.info(t("RCT.Already", { name: actor.name }));
     return null;
   }
@@ -6914,12 +7065,22 @@ function optionalCost(activity, base, actor) {
 const hasRCT = (actor) => hasItem(actor, /^Reverse Cursed Technique( \(Healing Pool\))?$/);
 
 /** Awaken the Reverse Cursed Technique: grant its features and 1 Breakthrough (Awakened Understanding). */
+const isCursedSpiritPC = (actor) => !!actor?.items?.some((i) => i.type === "race" && /^Cursed Spirit \(/i.test(baseName(i)));
+
 async function unlockRCT(actor, reason = "") {
   actor = requireActor(actor);
   if (!actor?.isOwner) return false;
   if (hasRCT(actor) || actor.getFlag(MODULE_ID, "rctUnlocked")) {
     ui.notifications.info(t("RCT.Already", { name: actor.name }));
     return false;
+  }
+  // Cursed Physiology: positive energy is poison to a Cursed Spirit; it gains Profane Points instead of RCT.
+  if (isCursedSpiritPC(actor)) {
+    if (actor.getFlag(MODULE_ID, "cursedPhysiology")) { ui.notifications.info(t("RCT.Already", { name: actor.name })); return false; }
+    await actor.setFlag(MODULE_ID, "cursedPhysiology", true);
+    await chat(actor, `<p><i class="fas fa-skull"></i> <strong>${t("RCT.Physiology", { name: esc(actor.name), points: characterLevel(actor) })}</strong>${reason ? ` <em>(${esc(reason)})</em>` : ""}</p>`);
+    await addBreakthrough(actor, 1, t("Breakthrough.RCT"));
+    return true;
   }
   for (const n of ["Reverse Cursed Technique", "Reverse Cursed Technique (Healing Pool)"]) await grantByName(actor, "jjk5e-class-features", n);
   await actor.setFlag(MODULE_ID, "rctUnlocked", true);
@@ -6931,7 +7092,7 @@ async function unlockRCT(actor, reason = "") {
 
 /** GM card: a near-death moment where the GM can bestow RCT or let the player roll for it. */
 async function rctMoment(actor, why) {
-  if (!isActiveGM() || hasRCT(actor) || actor.getFlag(MODULE_ID, "rctUnlocked")) return;
+  if (!isActiveGM() || hasRCT(actor) || actor.getFlag(MODULE_ID, "rctUnlocked") || actor.getFlag(MODULE_ID, "cursedPhysiology")) return;
   const gms = game.users.filter((u) => u.isGM).map((u) => u.id);
   await docClass("ChatMessage").create({ whisper: gms, speaker: { alias: "JJK 5e" },
     content: `<p><i class="fas fa-heart-pulse"></i> ${t("RCT.Moment", { name: esc(actor.name), why: esc(why) })}</p>
@@ -7693,6 +7854,7 @@ function optionalPanel(actor, tab) {
       ${lvl ? `<ul class="jjk-list">${OBJECT_SOUL.slice(0, lvl).map((n, i) => `<li title="${esc(t(`Opt.ObjectSoul.L${i + 1}`))}">${esc(n)}</li>`).join("")}</ul>` : ""}</fieldset>`;
   }
   if (tab === "tools") {
+    b.push(pbtn("fall", "fas fa-person-falling", t("Fall.Name")));
     if (optOn("moneyRules")) b.push(pbtn("work", "fas fa-sack-dollar", `${t("Opt.Money.Work")} (${fmtMoney(money(actor))})`));
     if (optOn("findCurse")) b.push(pbtn("findCurse", "fas fa-magnifying-glass", t("Opt.findCurse.Name")));
     if (optOn("classUnderstanding") && !actor.items.some((i) => i.flags?.jjk5e?.classUnderstanding)
@@ -7945,6 +8107,18 @@ Hooks.once("ready", () => {
         await actor.setFlag(MODULE_ID, "rctChance", true);
         await chat(actor, `<p><i class="fas fa-heart-pulse"></i> ${t("RCT.Allowed", { name: esc(actor.name) })}</p>`);
       } else await rollRCTAwakening(actor);
+    });
+    for (const b of html?.querySelectorAll?.("[data-jjk5e-awaken]") ?? []) b.addEventListener("click", async (ev) => {
+      ev.preventDefault();
+      if (!game.user.isGM) return ui.notifications.warn(t("Notify.GMOnly"));
+      const doc = await fromUuid(b.dataset.jjk5eAwaken).catch(() => null);
+      const actor = await fromUuid(b.dataset.actor).catch(() => null);
+      if (!doc || !actor) return;
+      if (actor.items.some((i) => normName(baseName(i)) === normName(baseName(doc)))) { b.disabled = true; return; }
+      const missing = missingPrereqs(actor, doc);
+      if (missing.length) return ui.notifications.warn(`${doc.name}: ${missing.join(", ")}`);
+      b.disabled = true;
+      await addWithAdvancement(actor, doc);
     });
     for (const b of html?.querySelectorAll?.("[data-jjk5e-swap]") ?? []) b.addEventListener("click", async (ev) => {
       ev.preventDefault();
@@ -8322,7 +8496,29 @@ function rivalDomainFor(actor, openerUuid = null, openingId = null, pendingOnly 
   return null;
 }
 
-Object.assign(PANEL_ACTIONS, { domainClash: (actor) => reactDomainClash(actor) });
+Object.assign(PANEL_ACTIONS, { domainClash: (actor) => reactDomainClash(actor), fall: (actor) => fallDamage(actor) });
+
+/** Falling (Rules of Thumb): one die per 10 ft (max 200 ft) sized by the creature; it lands prone unless it took no damage. */
+const FALL_DIE = { tiny: "1", sm: "1d4", med: "1d6", lg: "1d8", huge: "1d10", grg: "1d12" };
+async function fallDamage(actor, feet = null) {
+  actor = requireActor(actor);
+  if (!actor) return null;
+  if (feet === null) feet = await promptNumber(t("Fall.Name"), t("Fall.Prompt"), 30);
+  feet = Math.min(200, Math.max(0, Math.floor(Number(feet) || 0)));
+  const n = Math.floor(feet / 10);
+  if (!n) return 0;
+  const die = FALL_DIE[actor.system?.traits?.size] ?? "1d6";
+  const formula = die === "1" ? `${n}` : `${n}${die.slice(1)}`;
+  const roll = await new Roll(formula).evaluate();
+  await roll.toMessage?.({ speaker: docClass("ChatMessage").getSpeaker?.({ actor }), flavor: t("Fall.Flavor", { feet, formula }) });
+  const before = Number(actor.system?.attributes?.hp?.value) + (Number(actor.system?.attributes?.hp?.temp) || 0);
+  if (typeof actor.applyDamage === "function") await actor.applyDamage([{ value: roll.total, type: "bludgeoning" }]);
+  const after = Number(actor.system?.attributes?.hp?.value) + (Number(actor.system?.attributes?.hp?.temp) || 0);
+  if (!(after >= before) && typeof actor.toggleStatusEffect === "function" && !actor.statuses?.has?.("prone")) {
+    await actor.toggleStatusEffect("prone", { active: true });
+  }
+  return roll.total;
+}
 
 Hooks.once("ready", () => {
   // Persisted windows are reconciled on turn change, login and periodic GM-only expiry.

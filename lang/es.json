@@ -180,7 +180,11 @@
       "RecoverySave": "Recuperar Burnout: salvación de CON CD {dc}",
       "RecoverySuccess": "{name} regenera su cerebro: termina el Technique Burnout.",
       "RecoveryFail": "Recuperar Burnout falló: 8d6 de daño psíquico y sin acciones ni acciones adicionales hasta el inicio de tu siguiente turno.",
-      "RecoveryFailEffect": "Secuela de Recuperar Burnout"
+      "RecoveryFailEffect": "Secuela de Recuperar Burnout",
+      "SummonName": "Inerte (Technique Burnout)",
+      "SummonDescription": "Su invocador está en Technique Burnout: sigue en escena pero no puede moverse ni actuar, sus habilidades y auras dejan de funcionar y se trata como aturdido. Si volaba, cae derribado.",
+      "FormsEnded": "Terminan las formas y efectos mágicos de la técnica",
+      "SummonsStunned": "Las invocaciones quedan inertes"
     },
     "Output": {
       "Title": "Output",
@@ -206,7 +210,11 @@
       "Amount": "Reducción de PG máximos",
       "Clear": "Quitar daño al alma",
       "Strike": "Golpe al alma",
-      "Awareness": "Soul Awareness"
+      "Awareness": "Soul Awareness",
+      "HealRCT": "Sanar daño al alma (RCT)",
+      "HealRCTUnavailable": "Requiere daño al alma, Reverse Cursed Technique, 6+ niveles de Soul Awareness y curación restante en la reserva de RCT.",
+      "HealRCTPrompt": "EM a gastar (1 EM = 10 PG de la reserva de RCT, máx. {max}). Daño al alma: −{sd}.",
+      "HealRCTDone": "{name} recupera {healed} PG máximos con RCT (daño al alma restante: −{rest})."
     },
     "Limb": {
       "Title": "Daño de extremidades",
@@ -339,7 +347,8 @@
       "NoAppV2": "JJK 5e: ApplicationV2 no está disponible.",
       "EnableModules": "JJK 5e · Activa los módulos de combate: {list}",
       "QuickRecoveryUnverified": "JJK 5e: Quick Recovery — no se pudo comprobar el uso del rasgo; revisa sus usos y devuelve la EM a mano.",
-      "CEPendingRest": "JJK 5e: resuelve las reservas de EM pendientes (GM) antes de descansar."
+      "CEPendingRest": "JJK 5e: resuelve las reservas de EM pendientes (GM) antes de descansar.",
+      "FullTurnUsed": "Acción de turno completo: ya usaste tu acción o tu acción adicional este turno."
     },
     "Settings": {
       "autoSpendCE": {
@@ -521,7 +530,10 @@
       "InspirationUsed": "inspiración gastada.",
       "Refinement": "Refinamiento de dominio {need}+ (tienes {have})",
       "Breakthroughs": "{need}+ avances (tienes {have})",
-      "Profane": "{need} Puntos Profanos (te quedan {have})"
+      "Profane": "{need} Puntos Profanos (te quedan {have})",
+      "OnePact": "Solo un Pacto Celestial por criatura",
+      "NoCE": "Restricción Celestial: sin energía maldita",
+      "NeedPhysiology": "Fisiología maldita (se despierta en lugar de la RCT)"
     },
     "Group": {
       "focus": "Concentrado (Focus)",
@@ -779,7 +791,9 @@
       "RCTNo": "Esta vez no.",
       "RCT": "Técnica Maldita Inversa",
       "Prompt": "Avances a añadir (negativo para quitar):",
-      "Manual": "GM"
+      "Manual": "GM",
+      "Understanding": "Comprensión despertada",
+      "UnderstandingOffer": "{name} ya tiene {total} avances. El GM puede conceder la Comprensión despertada que acaba de desbloquear:"
     },
     "Reversal": {
       "Added": "Reversión de técnica maldita: se añade {names}."
@@ -1154,7 +1168,8 @@
       "UnlockedHint": "Se añaden los rasgos de TMI y +1 avance (Comprensión despertada).",
       "Allow": "Permitir la tirada d100",
       "Allowed": "{name} puede tirar por la Técnica Maldita Inversa (d100, 90+) desde el panel JJK.",
-      "NoChance": "Solo en un momento de casi muerte que el GM permita."
+      "NoChance": "Solo en un momento de casi muerte que el GM permita.",
+      "Physiology": "{name} es un Espíritu maldito: en lugar de Reverse Cursed Technique despierta su Fisiología maldita ({points} Puntos profanos, +1 por nivel)."
     },
     "GMRequest": {
       "Title": "JJK 5e: petición de jugador",
@@ -1219,6 +1234,11 @@
         "reserved": "reservada",
         "review": "en revisión"
       }
+    },
+    "Fall": {
+      "Name": "Daño por caída",
+      "Prompt": "Altura de la caída en pies (máx. 200). Dado por tamaño cada 10 pies: Diminuto 1, Pequeño d4, Mediano d6, Grande d8, Enorme d10, Gargantuesco d12.",
+      "Flavor": "Caída de {feet} pies: {formula} contundente"
     }
   }
 }

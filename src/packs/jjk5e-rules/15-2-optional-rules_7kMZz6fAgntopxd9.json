@@ -1,0 +1,479 @@
+{
+ "_id": "7kMZz6fAgntopxd9",
+ "name": "15.2 — Optional Rules",
+ "sort": 15700,
+ "flags": {
+  "jjk5e": {
+   "lang": "en"
+  }
+ },
+ "folder": null,
+ "pages": [
+  {
+   "_id": "HJrIWeqAl6WanSOt",
+   "name": "Totality Alternative",
+   "type": "text",
+   "sort": 1000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>As an optional ruling, your DM can choose to ignore Totality, instead having all shikigami come back on a long rest, rather than being killed and eligible for Totality.</p>"
+   },
+   "_key": "!journal.pages!7kMZz6fAgntopxd9.HJrIWeqAl6WanSOt"
+  },
+  {
+   "_id": "5gh8aFEqdghCCAUE",
+   "name": "Less Blood",
+   "type": "text",
+   "sort": 2000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>If your players find the HP cost of Rot and Blood Manipulation to be too steep, the DM can choose to reduce all HP costs to a lower amount.</p>"
+   },
+   "_key": "!journal.pages!7kMZz6fAgntopxd9.5gh8aFEqdghCCAUE"
+  },
+  {
+   "_id": "LZE8OE9eNWvhRY9z",
+   "name": "Blood Conversion",
+   "type": "text",
+   "sort": 3000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Since those who are already adept at regenerating their bodies have an easier time grasping Reverse Cursed Technique, your DM can allow a character with the Blood Production feat to have an increased chance of acquiring Reverse Cursed Technique. They have advantage on any dice rolls to acquire or understand the basics of Reverse Cursed Technique.</p>"
+   },
+   "_key": "!journal.pages!7kMZz6fAgntopxd9.LZE8OE9eNWvhRY9z"
+  },
+  {
+   "_id": "s3BhcrbhWtR0STnL",
+   "name": "Mythical Beast Accuracy",
+   "type": "text",
+   "sort": 4000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>To make Mythical Beast Amber Release more accurate, your DM can choose to instead cause the progression of stages to instead advance once stage per turn.</p>"
+   },
+   "_key": "!journal.pages!7kMZz6fAgntopxd9.s3BhcrbhWtR0STnL"
+  },
+  {
+   "_id": "qxU8Y2jn4WsTLIpU",
+   "name": "Advantage Stacking",
+   "type": "text",
+   "sort": 5000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>When a creature gains advantage from more than one source when making a skill check or attack roll, they make their roll with advantage and an additional +1 bonus for every extra source of advantage. However if the source of advantage is coming from another player taking the Help action they must describe in what way they are assisting for an attack or have proficiency in the skill to assist.</p>"
+   },
+   "_key": "!journal.pages!7kMZz6fAgntopxd9.qxU8Y2jn4WsTLIpU"
+  },
+  {
+   "_id": "WgmMnrFu6jDTuUhn",
+   "name": "Crunchy Crits",
+   "type": "text",
+   "sort": 6000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>When you roll damage for a critical hit, instead of doubling the damage die you can choose to roll normally and double the entire damage roll (including modifiers or flat bonuses).</p>"
+   },
+   "_key": "!journal.pages!7kMZz6fAgntopxd9.WgmMnrFu6jDTuUhn"
+  },
+  {
+   "_id": "k2AU4g0OkMdzOnNl",
+   "name": "Critical Saves",
+   "type": "text",
+   "sort": 7000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>When a creature rolls a natural 1 on a saving throw against a damaging effect, they instead take critical damage. Conversely, when a creature rolls a natural 20 on a saving throw against a damaging effect, they take no damage.</p>"
+   },
+   "_key": "!journal.pages!7kMZz6fAgntopxd9.k2AU4g0OkMdzOnNl"
+  },
+  {
+   "_id": "XQumEr852HB9bM5E",
+   "name": "Calling Shots",
+   "type": "text",
+   "sort": 8000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>A creature can choose to take a -5 penalty to an attack roll in order to specifically cripple or injure a creature. If the damage exceeds a creature’s maximum hit die + their constitution modifier, they are debilitated in a certain way depending on the GM’s interpretation or alternatively can use the Limb Damage Table. (Shooting out an eye to blind them or breaking their leg to lower their movement speed.)</p>"
+   },
+   "_key": "!journal.pages!7kMZz6fAgntopxd9.XQumEr852HB9bM5E"
+  },
+  {
+   "_id": "Eh2MXvXOpmHKPaqE",
+   "name": "Fight for your Life",
+   "type": "text",
+   "sort": 9000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>When you are rolling death saving throws, you can choose to fight for your life. You gain advantage on the next death saving throw you make, but you gain 1 level of exhaustion. You can gain up to 5 levels of exhaustion this way.</p>"
+   },
+   "_key": "!journal.pages!7kMZz6fAgntopxd9.Eh2MXvXOpmHKPaqE"
+  },
+  {
+   "_id": "8cJahHEBmvza4zv3",
+   "name": "Take the Hit",
+   "type": "text",
+   "sort": 10000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>As a reaction when another creature within your movement speed is targeted or hit by a harmful or damaging effect, you can move up to your movement speed towards them and take the attack in their place. However, you take twice as much damage.</p>"
+   },
+   "_key": "!journal.pages!7kMZz6fAgntopxd9.8cJahHEBmvza4zv3"
+  },
+  {
+   "_id": "l6ZrXIZVGrW8DntV",
+   "name": "Clash",
+   "type": "text",
+   "sort": 11000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>As a reaction, you can choose to clash an attack or damaging effect directed at yourself. You can make a damage roll for a melee weapon attack and reduce the damage by that much. If this would reduce damage from an attack roll past 0, the attacker takes the remaining damage if they are within range. You cannot clash against psychic damage unless you have a feature that deals psychic damage.</p>\n<p>You can clash damage this way a number of times equal to your proficiency bonus and regain all expended uses on a long rest.</p>"
+   },
+   "_key": "!journal.pages!7kMZz6fAgntopxd9.l6ZrXIZVGrW8DntV"
+  },
+  {
+   "_id": "gfmPgYpLYyLFgkw5",
+   "name": "Flanking",
+   "type": "text",
+   "sort": 12000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>You are never safe from getting double teamed. If two creatures (that are not incapacitated) are within 5 feet on opposite sides of another creature, they gain advantage on attacks against that creature. Though some DMs may choose to use +2 instead of advantage.</p>"
+   },
+   "_key": "!journal.pages!7kMZz6fAgntopxd9.gfmPgYpLYyLFgkw5"
+  },
+  {
+   "_id": "idkEGSi7NEFPY6Fx",
+   "name": "Techniqueless",
+   "type": "text",
+   "sort": 13000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>If a player wants to play without an Innate Technique and does not wish to use New Shadow Style or Divergent Fist, they can instead gain a +2 Ability Score Increase AND Feat they meet the prerequisites for at 1st and 3rd level. A +3 ASI and Feat at 6th level and 11th, and +3 ASI and 2 Feats at 18th level. Do be warned, this will of course be generally weaker than having a technique.</p>"
+   },
+   "_key": "!journal.pages!7kMZz6fAgntopxd9.idkEGSi7NEFPY6Fx"
+  },
+  {
+   "_id": "9rtbabBKcHzooFyO",
+   "name": "Repetitive Abilities",
+   "type": "text",
+   "sort": 14000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>If a player would gain an ability that grants them an ability they already have, you can be a benevolent GM and let the player choose a different one. For example, if a player chooses a feat such as Incomplete Domain or Reversed Technique Prodigy, you can allow them to switch the feat out for a different feat they qualify for when they gain a feature that gives them the same or better version of that ability. Such as a Domain Expansion or Reverse Technique Understanding respectively.</p>"
+   },
+   "_key": "!journal.pages!7kMZz6fAgntopxd9.9rtbabBKcHzooFyO"
+  },
+  {
+   "_id": "8PUrXKDy4FJV9M6M",
+   "name": "Feat Improvement",
+   "type": "text",
+   "sort": 15000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>If a GM wants to allow players to balance their ability scores while gaining unique features they may want, they can choose to allow players to gain an Ability Score Improvement as well as a Feat that they qualify for whenever they would gain an Ability Score Improvement.</p>"
+   },
+   "_key": "!journal.pages!7kMZz6fAgntopxd9.8PUrXKDy4FJV9M6M"
+  },
+  {
+   "_id": "GhNaiH11BaEREFlw",
+   "name": "Pure Barrier",
+   "type": "text",
+   "sort": 16000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>In the main world of Jujutsu Kaisen, Tengen supports the Jujutsu world with their permanent barriers. Among the barriers that suppress cursed spirits, conceal cursed energy, and change terrain there is also the Pure Barrier that supports barrier techniques of those associated with Jujutsu High. If Tengen or a figure with similar mastery of barriers (Such as a level 20 Support Specialist) exists within your world, you can determine certain parts of your world as being within a pure barrier. Those given permission by the barrier holder only spend 1 cursed energy when casting a <em>Curtain</em> within the Pure Barrier.</p>"
+   },
+   "_key": "!journal.pages!7kMZz6fAgntopxd9.GhNaiH11BaEREFlw"
+  },
+  {
+   "_id": "mKaYX5qudNTUxfJm",
+   "name": "Execution Evasion",
+   "type": "text",
+   "sort": 17000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>A creature that is aware of the effects of the Executioner’s Sword of Deadly Sentencing can attempt desperate action to avoid instant death. A creature hit by the Executioner's Sword can use their reaction to remove one of their limbs at the point of contact to avoid death. The creature takes damage equal to the required damage to remove a limb, which cannot be reduced in any way. They suffer the penalties of missing that limb as normal.</p>"
+   },
+   "_key": "!journal.pages!7kMZz6fAgntopxd9.mKaYX5qudNTUxfJm"
+  },
+  {
+   "_id": "V0iiYALiD00mmyJo",
+   "name": "Soul Checks",
+   "type": "text",
+   "sort": 18000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>When making a check relating to souls, you use your Soul Awareness level instead of any other ability modifiers or proficiencies. Without a level of Soul Information, you have disadvantage on any such checks.</p>"
+   },
+   "_key": "!journal.pages!7kMZz6fAgntopxd9.V0iiYALiD00mmyJo"
+  },
+  {
+   "_id": "CxtEma8vOc70eie2",
+   "name": "Output Burnout",
+   "type": "text",
+   "sort": 19000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>While under the effects of Technique Burnout, you gain 2 temporary levels of Reduced Output.</p>"
+   },
+   "_key": "!journal.pages!7kMZz6fAgntopxd9.CxtEma8vOc70eie2"
+  },
+  {
+   "_id": "oiJ4yudswf5FrREr",
+   "name": "Increased Affinity",
+   "type": "text",
+   "sort": 20000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>At 10th level, players with the Cursed Spirit race gain <em>Increased Affinity</em> to help better scale against Reverse Cursed Technique. Alternatively, the DM can allow it as a feat with a prerequisite of X level and being a Cursed Spirit race. You can use Increased Affinity as a bonus action or reaction to damage to spend up to your Cursed Energy modifier in cursed energy to regain 10 hit points per cursed energy spent. A DM should allow this for players using the Cursed Spirit races to better match up against others gaining Reverse Cursed Technique at certain levels.</p>"
+   },
+   "_key": "!journal.pages!7kMZz6fAgntopxd9.oiJ4yudswf5FrREr"
+  },
+  {
+   "_id": "VD3IwjCJksdpgheZ",
+   "name": "Six Eyes Dependency",
+   "type": "text",
+   "sort": 21000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>In Jujutsu Kaisen, it is stated that Limitless is difficult to use without the Six Eyes due to the high cursed energy cost, making most Limitless sorcerers below average without them. If you wish to have a more canon-accurate version of the technique for NPCs or Players, increase the CE cost to activate and maintain Infinity to 3 CE for sorcerers without the Six Eyes. Double the cost of Lapse Blue, Reversal Red, Teleportation and Offensive Infinity and increase the CE cost of Hollow Purple by 5 CE.</p>"
+   },
+   "_key": "!journal.pages!7kMZz6fAgntopxd9.VD3IwjCJksdpgheZ"
+  },
+  {
+   "_id": "b1kY4pnxIKqBJbYY",
+   "name": "Increased Hit Points",
+   "type": "text",
+   "sort": 22000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>If you want your players to be more tanky and last longer during high danger battles, DMs can choose to have player characters gain the maximum value of their hit die upon level up instead of rolling or taking average.</p>"
+   },
+   "_key": "!journal.pages!7kMZz6fAgntopxd9.b1kY4pnxIKqBJbYY"
+  },
+  {
+   "_id": "mBXalNkuGMqqcIJb",
+   "name": "Tough Trials",
+   "type": "text",
+   "sort": 23000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>To make taming more difficult for early level Ten Shadows players, a DM can choose any of the following increases for untamed shikigami:</p>\n<ul><li>Increase the hit points by 10 x the shikigami’s CR.</li><li>Add twice the shikigami’s CR to its damage rolls.</li><li>Increase the DC of a shikigami’s feature by half its CR.</li><li>Add +2 to 1-3 ability scores of the shikigami.</li></ul>\n<p>For balancing purposes, DO NOT allow a player to keep these increases after completion of the taming ritual. It may seem cool or fitting, but DO NOT DO THAT.</p>"
+   },
+   "_key": "!journal.pages!7kMZz6fAgntopxd9.mBXalNkuGMqqcIJb"
+  },
+  {
+   "_id": "KOFSskOewLXDvOAG",
+   "name": "Additional Actions",
+   "type": "text",
+   "sort": 24000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Some optional actions that can be used by tables who want more interesting and dynamic combats.</p>\n<p><strong>Charge</strong>. You gain 10 ft of additional movement that must be used to move in a straight line before hitting a target with a melee attack as part of the same action. Even if you have multiple attacks on your turn, you can only make 1 attack on this turn when using the Charge action. For every additional attack you could make, you gain a +1 to the attack roll.</p>\n<p><strong>Distract</strong>. If you take the Distract action, you can attempt to Distract a creature within 15 ft of you that can see or hear you. If they are concentrating on a technique or ability, they are forced to make a concentration check to maintain the ability. Even if they succeed, your distraction increases the DC of concentration checks they make by +1 until the beginning of your turn, so long as you remain within 15 feet and continue distracting. A single creature can only be affected by up to 3 DC increases as a result of creatures using this action.</p>\n<p><strong>Sunder</strong>. You can attempt to sunder an item held or worn by your opponent as part of an attack action in place of a melee attack. Attempting to sunder an item provokes an attack of opportunity from the target.</p>\n<p>If your attack is successful, you deal damage to the item normally. Damage that exceeds the object’s Hardness is subtracted from its hit points. If an object has equal to or less than half its total hit points remaining, it gains the broken condition (becomes -3 item). If the damage you deal would reduce the object to less than 0 hit points, you can choose to destroy it. If you do not choose to destroy it, the object is left with only 1 hit point and the broken condition.</p>\n<p><strong>Coup de Grace</strong>. As a Full Turn Action (Action + Bonus Action + Movement), you make a melee attack while within 5 ft of an unconscious creature. The target must make a Constitution saving throw equal to the damage taken or die instantly.</p>"
+   },
+   "_key": "!journal.pages!7kMZz6fAgntopxd9.KOFSskOewLXDvOAG"
+  },
+  {
+   "_id": "383QM1SpJyVD9vo3",
+   "name": "Yearly Progression",
+   "type": "text",
+   "sort": 25000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>The dangers of missions and school life will allow Jujutsu High students to advance by methods of self-study and intense training during the time they would advance from year to year as normal high school students. This rule is centered around that concept of progression.</p>\n<p>When a DM wishes to invoke a Yearly Progression, a player gains one of these options:</p>\n<p><strong>Ability Score Improvement.</strong> The character may increase one ability score by 2 or increase two ability scores by 1 each, to a maximum of 20. This represents any additional training which the character subjects themselves towards to prepare for the new ‘school’ year.</p>\n<p><strong>New Feat.</strong> The character gains a new feat which has been chosen by the player but this feat is subject to your approval. This represents new talents or traits the character has acquired to better themselves as a defender of Jujutsu society. The total number of times that a character can benefit from Yearly Progression is four times.</p>"
+   },
+   "_key": "!journal.pages!7kMZz6fAgntopxd9.383QM1SpJyVD9vo3"
+  },
+  {
+   "_id": "x3qv2cpRyl3C1bVb",
+   "name": "Ways to Make Money",
+   "type": "text",
+   "sort": 26000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>If your GM decides to allow players to purchase items players will likely find themselves trying to earn as much money as possible. To add a way for players to use their free time as well as opening the way for interesting RP situations, you can choose to use the following rules.</p>\n<p><strong>Minimum Wage Employment:</strong> 10-40 Hrs per Week ($80-500)</p>\n<p>A player character can attempt to find employment. It is up to the GM to determine what jobs are available given the area your campaign is taking. A GM can use proficiencies to determine the wage of the job, depending on their modifier. If a character has a skill proficiency, tool proficiency, or even language proficiencies, that can factor into finding a job. Expertise may lead to even higher paying jobs.</p>\n<p><strong>Special Employment:</strong> (CE modifier Xd4 x $100 per workweek)</p>\n<p>Prerequisite: Innate Technique OR RCT</p>\n<p>A player can sometimes find a job that lets you utilize your innate technique for profit. These jobs can vary in legality depending on the GM, which may open the path for certain problems or opportunities.</p>\n<p>If a player has Reverse Technique Prodigy or Mastered Reverse Technique, they can automatically gain $10,000 per week.</p>\n<p><strong>Taking Missions</strong></p>\n<p>A sorcerer’s work is never done! As part of your free time, a sorcerer can dedicate themself to their work and take on more missions. Missions can be received from Jujutsu Tech, one of the Clans, and even the Government of a country. Depending on the difficulty of the job, the reward will scale accordingly.</p>\n<p><strong>Grade 4</strong> ($500-2,000)</p>\n<p><strong>Grade 3</strong> ($3,000-10,000)</p>\n<p><strong>Grade 2</strong> ($10,000-25,000)</p>\n<p><strong>Grade 1</strong> ($100,000-500,000)</p>\n<p><strong>Special</strong> ($1,000,000+)</p>\n<p><strong>Cursed Tool Creation</strong></p>\n<p>Prerequisite: Must have Tool Maker</p>\n<p>Powerful cursed tools are extremely valuable. Their monetary worth can range from five hundred thousand to upwards of five hundred million yen. Tool Makers are always able to sell to someone.</p>\n<p><strong>Grade 4</strong> (Weapon/Armor Value x 1)</p>\n<p><strong>Grade 3</strong> (Weapon/Armor Value x 10)</p>\n<p><strong>Grade 2</strong> (Weapon/Armor Value x25)</p>\n<p><strong>Grade 1</strong> (Weapon/Armor Value x50)</p>"
+   },
+   "_key": "!journal.pages!7kMZz6fAgntopxd9.x3qv2cpRyl3C1bVb"
+  },
+  {
+   "_id": "rSCziDhw8jd4pFzP",
+   "name": "Finding a Cursed Spirit",
+   "type": "text",
+   "sort": 27000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>When searching for a random cursed spirit, you can spend 1-2 hours searching the surrounding area for potential cursed spirits. Make a DC 20 Perception or Investigation check. On a failure, you can’t find any. On a success, you are able to find a cursed spirit. You must roll a d100 to decide the rarity and strength of the cursed spirit.</p>\n<table>\n<thead><tr><th>Number Rolled</th><th>Curse Type</th></tr></thead>\n<tbody>\n<tr><td>1-50</td><td>Grade 4</td></tr>\n<tr><td>51-75</td><td>Grade 3</td></tr>\n<tr><td>76-90</td><td>Semi-Grade 2</td></tr>\n<tr><td>91-99</td><td>Grade 2</td></tr>\n<tr><td>100</td><td>Semi-Grade 1</td></tr>\n</tbody>\n</table>"
+   },
+   "_key": "!journal.pages!7kMZz6fAgntopxd9.rSCziDhw8jd4pFzP"
+  },
+  {
+   "_id": "69d6SZUkVVxOiEy2",
+   "name": "Cursed Upon Death",
+   "type": "text",
+   "sort": 28000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>The most important thing when killing a sorcerer is to always kill them with cursed energy or they could come back as a cursed spirit. If you die by means lacking cursed energy while being a human sorcerer, you come back to life as a cursed spirit one week after your death. You suffer the following changes:</p>\n<ul><li>Your race becomes Cursed Spirit, gaining all the benefits of said race and losing all benefits of your previous one. Your race becomes a Vengeful Spirit.</li><li>You gain one Cursed Energy Feat or Innate Technique Feat of your choice that you meet the requirements of.</li><li>You lose all feats and features related to Reverse Cursed Technique. Cursed Physiology breakthrough replaced Reverse Cursed Technique Breakthrough if you possess it. For every feat lost this way you gain 2 Profane Points.</li><li>Due to your body being more resilient, your Strength, Dexterity, Constitution and CE score will increase by 2, including their maximum. However, your mind has also been affected by your transformation. Your other mental scores are reduced by 4.</li></ul>\n<p>When you come back to life you gain 1 level of indefinite madness. At the end of the week you must make a DC 25 Wisdom saving throw. On a failure, you will gain one level of indefinite madness and must repeat the save each week. You will keep getting more indefinite madness levels on subsequent failures. On a success, you lose any madness level previously obtained and no longer make the save each week.</p>"
+   },
+   "_key": "!journal.pages!7kMZz6fAgntopxd9.69d6SZUkVVxOiEy2"
+  },
+  {
+   "_id": "FHHwhgGcWnCg9Eb1",
+   "name": "Object Soul Awareness",
+   "type": "text",
+   "sort": 29000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Object Soul Awareness is far rarer than ordinary Soul Awareness, allowing you perceive the souls of things not alive. You can only increase your Object Soul Awareness with Spiritual Teaching, but can train this alone if you have at least 6 levels of Soul Awareness</p>\n<p>(+3 DC per level instead of +2).</p>\n<table>\n<thead><tr><th>Level</th><th>Soul Ability</th></tr></thead>\n<tbody>\n<tr><td>1</td><td><strong>Object Soul Perception</strong>. When damaging a structure or object, your melee weapon attacks and unarmed strikes ignore damage thresholds and damage reduction.</td></tr>\n<tr><td>2</td><td><strong>Soul Shatter</strong>. Melee weapon attacks and unarmed strikes deal maximum damage against objects or structures and you treat their AC as 5 lower.</td></tr>\n<tr><td>3</td><td><strong>Greater Object Soul Perception</strong>. You ignore Cursed Techniques that directly increase durability of objects and gain blindsight out to 30 ft.</td></tr>\n</tbody>\n</table>"
+   },
+   "_key": "!journal.pages!7kMZz6fAgntopxd9.FHHwhgGcWnCg9Eb1"
+  },
+  {
+   "_id": "8pdpHpiukD9fVgwv",
+   "name": "Class Specific Understandings",
+   "type": "text",
+   "sort": 30000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>This is an OPTIONAL rule to reflect how different people can gain different epiphanies from achieving a breakthrough. To gain a Class Specific Understanding, you must be of the same class and have achieved at least 2 Breakthroughs. You can only gain only one Class Specific Understanding.</p>\n<p><strong>Juggernaut</strong></p>\n<p><strong>Skilled Cursed Reinforcement</strong>.  When you use Cursed Reinforcement, you can instead gain 10 temporary hit points per CE spent. You can do this a number of times equal to your proficiency bonus each day.</p>\n<p><strong>Scout</strong></p>\n<p><strong>Reliable Skill</strong>. When you make a skill check that you are proficient with, you can treat any roll of a 9 or lower as a 10.</p>\n<p><strong>Strategist</strong></p>\n<p><strong>Enhanced Creativity</strong>. You gain an additional two <em>Technique Creativity</em> options. You can reduce a technique's cost by 1 (min cost of 1) a number of times each day equal to your proficiency bonus.</p>\n<p><strong>Shikigami User</strong></p>\n<p><strong>Cursed Bond</strong>. Your <em>Shikigami Companion</em> or one Shikigami, Cursed Corpse, or a tamed Cursed Spirit you have can use <em>Cursed Strike</em> a number of times equal to your proficiency bonus each day. When using it this way, it benefits from any Awakened Understanding or features that benefit your <em>Cursed Strike</em>. You can switch your <em>Cursed Bond</em> as part of a long rest.</p>\n<p><strong>Support Specialist</strong></p>\n<p><strong>Positive Energy Master</strong>. You have unlocked a well of healing from deep within. You have a pool of healing separate from your RCT pool containing a number of hit points equal to twice your level. You can draw any number of healing from this pool as a bonus action to heal yourself. You can use this healing on another creature you touch at 5th level.</p>\n<p><strong>Warrior</strong></p>\n<p><strong>Destructive Cursed Strike</strong>. When you use <em>Cursed Strike</em>, you deal additional necrotic damage equal to your CE modifier a number of times equal to twice your proficiency bonus each day.</p>"
+   },
+   "_key": "!journal.pages!7kMZz6fAgntopxd9.8pdpHpiukD9fVgwv"
+  },
+  {
+   "_id": "9eIGIlDopD0vncR7",
+   "name": "Average Cursed Energy",
+   "type": "text",
+   "sort": 31000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>The aggregate amount of an individual's cursed energy isn't determined by how many negative emotions they possess but by their innate talent for jujutsu. You can use this as a standard for the cursed energy possessed by normal people or sorcerers. There are of course differences for sorcerers who are more or less talented in manipulating cursed energy and you can change this standard for your own uses.</p>\n<table>\n<thead><tr><th>Classification</th><th>Cursed Energy (CE)</th><th>Description / Power Context</th></tr></thead>\n<tbody>\n<tr><td><strong>Heavenly Restriction</strong></td><td><strong>0 CE</strong></td><td>No cursed energy; relies entirely on physical prowess or innate talent.</td></tr>\n<tr><td><strong>Normal Person</strong></td><td><strong>½ CE</strong></td><td>Minimal cursed energy, barely detectable; unaware of curses.</td></tr>\n<tr><td><strong>Normal Person (Despair)</strong></td><td><strong>1 CE</strong></td><td>Temporary surge of cursed energy due to intense emotion (fear, pain, grief).</td></tr>\n<tr><td><strong>Grade 4</strong></td><td><strong>1–5 CE</strong></td><td>Weak cursed energy; can exorcise minor spirits or use basic techniques.</td></tr>\n<tr><td><strong>Grade 3</strong></td><td><strong>6–15 CE</strong></td><td>Moderate cursed energy; capable sorcerer or lesser cursed spirit.</td></tr>\n<tr><td><strong>Grade 2</strong></td><td><strong>16–30 CE</strong></td><td>Strong cursed energy; skilled sorcerers and mid-tier special missions.</td></tr>\n<tr><td><strong>Grade 1</strong></td><td><strong>31–50 CE</strong></td><td>High cursed energy; veteran sorcerers and elite-level cursed spirits.</td></tr>\n<tr><td><strong>Special Grade</strong></td><td><strong>50+ CE</strong></td><td>Massive cursed energy output; national-level threat or transcendent ability.</td></tr>\n</tbody>\n</table>"
+   },
+   "_key": "!journal.pages!7kMZz6fAgntopxd9.9eIGIlDopD0vncR7"
+  }
+ ],
+ "_key": "!journal!7kMZz6fAgntopxd9"
+}

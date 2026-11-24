@@ -27,9 +27,10 @@
  },
  "flags": {
   "jjk5e": {
-   "rev": "00d130012c",
+   "rev": "9c1491cfa9",
    "automationNotes": "Apply the pact's limits as described; the ability changes are made by hand.",
-   "automation": "manual"
+   "automation": "manual",
+   "heavenlyPact": true
   }
  },
  "folder": "TuD75Es2qNSvVZN6",

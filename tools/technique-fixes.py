@@ -8060,6 +8060,23 @@ def review_fixes(S):
         mark(it)
 
 
+def prereq_fixes(S):
+    """v1.80.2: machine-readable prerequisites for feats whose requirement was only text."""
+    P = "jjk5e-feats"
+    def pre(name, **kw):
+        d = S.get(name, pack=P)
+        d.setdefault("flags", {}).setdefault("jjk5e", {})["prereq"] = kw
+    pre("Cursed Energy Slash", features=[["Cursed Imbuement", "Cursed Enhancement"]])
+    pre("Cursed Energy Trait Mastery", features=[["Cursed Energy Trait"]])
+    pre("Expert Maker", techniques=[["Cursed Corpse Creation"]])
+    pre("Evolutionary Constraint", features=[["Cursed Spirit (Cursed Womb)"]])
+    pre("Increased Affinity", level=10, features=[["Cursed Spirit (Vengeful)", "Cursed Spirit (Imaginary)", "Cursed Spirit (Disease)", "Cursed Spirit (Cursed Womb)"]])
+    for n in ("Reverse Cursed Energy Generation", "Limited Cursed Energy", "Limited Physical Potential",
+              "Healing Incompatibility", "Overgeneration"):
+        d = S.get(f"Heavenly Pact: {n}", pack=P)
+        d.setdefault("flags", {}).setdefault("jjk5e", {})["heavenlyPact"] = True
+
+
 TECHNIQUES = {"Antigravity System": antigravity_system,
               "Auspicious Beast Summon": auspicious_beast_summon,
               "Black Bird Manipulation": black_bird_manipulation,
@@ -8150,7 +8167,8 @@ TECHNIQUES = {"Antigravity System": antigravity_system,
               "_featreview": feat_review2,
               "_backlog": backlog_fixes,
               "_optional": optional_rules,
-              "_review": review_fixes}
+              "_review": review_fixes,
+              "_prereqs": prereq_fixes}
 
 
 if __name__ == "__main__":
