@@ -280,6 +280,7 @@
       "RegainShort": "Regain"
     },
     "Notify": {
+      "CEWorkflowUnverified": "JJK5e: CE payment could not be verified for this Midi-QOL workflow. The activity was stopped; consult the GM.",
       "NoActor": "JJK 5e: select a token or assign a character first.",
       "NotOwner": "JJK 5e: you do not own that actor.",
       "HRNoTechnique": "JJK 5e: Heavenly Restriction has no Innate Technique.",
