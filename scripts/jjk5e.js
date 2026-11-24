@@ -469,8 +469,18 @@ function midiDomainGuard(workflow){
   excludeDomainWardedTargets(workflow);
   return true;
 }
+async function linkMidiCard(workflow){
+  const ctx=midiCEContext(workflow);
+  if(ctx?.state!=="committed"||!workflow?.itemCardUuid||workflow.readOnly) return false;
+  const card=await fromUuid(workflow.itemCardUuid).catch(()=>null);
+  if(!card?.isOwner||card.documentName!=="ChatMessage") return false;
+  if(card.getFlag(MODULE_ID,"ceReceipt")!==ctx.id) await card.setFlag(MODULE_ID,"ceReceipt",ctx.id);
+  return ceAuthorityRequest("linkCard",{actorUuid:ctx.actorUuid,id:ctx.id,cardUuid:card.uuid});
+}
 function registerMidiCEBridge(){
   Hooks.on("midi-qol.preItemRollV2",captureMidiUsage);
+  Hooks.on("midi-qol.postAwaitItemCard",workflow=>linkMidiCard(workflow).catch(err=>reportError("CE card link",err)));
+  Hooks.on("midi-qol.postCleanup",workflow=>linkMidiCard(workflow).catch(err=>reportError("CE card link",err)));
   for(const stage of MIDI_GUARD_STAGES) Hooks.on(`midi-qol.${stage}`,midiDomainGuard);
 }
 function cePostAllowed(activity,usageConfig){
@@ -529,7 +539,7 @@ async function ceAuthorityRequest(operation,payload) {
 }
 async function handleCEAuthority(msg,{user}={}) {
   if (!ceAuthorityEnabled() || !isActiveGM() || !user?.active || !msg?.payload ||
-      !["reserve","start","commit","review","settle","adjust"].includes(msg.operation)) return false;
+      !["reserve","start","commit","review","settle","adjust","linkCard"].includes(msg.operation)) return false;
   const {operation,payload:d}=msg;
   const actor=await domainActor(d.actorUuid);
   if (!canDirectDomain(user,actor)) return false;
@@ -574,6 +584,18 @@ async function handleCEAuthority(msg,{user}={}) {
       return {id:rec.id,cost};
     }
     if(!old || (!user.isGM&&old.userId!==user.id) || old.actorUuid!==actor.uuid) return false;
+    if(operation==="linkCard"){
+      if(old.state!=="committed"||typeof d.cardUuid!=="string"||!/^ChatMessage\.[a-zA-Z0-9]{1,64}$/.test(d.cardUuid)) return false;
+      if(old.cardUuid) return old.cardUuid===d.cardUuid;
+      const card=await fromUuid(d.cardUuid).catch(()=>null);
+      const author=card?.author?.id??card?.user?.id??card?._source?.user;
+      const act=await card?.getAssociatedActivity?.();
+      if(card?.documentName!=="ChatMessage"||author!==old.userId||act?.id!==old.activityId||
+          act?.item?.id!==old.itemId||(act.actor??act.item?.actor)?.uuid!==actor.uuid||
+          card.getFlag?.(MODULE_ID,"ceReceipt")!==old.id) return false;
+      await pool.update({"flags.jjk5e.ceLedger":ceRecord(ledger,{...old,cardUuid:d.cardUuid})},{jjk5eCE:true});
+      return true;
+    }
     if(operation==="start"){
       if(old.state!=="reserved"||old.protocol!==2||old.nativeStarted||Date.now()>=old.expires) return false;
       // Persist start before authorizing any native effects. Unknown start responses never authorize a retry.
@@ -623,6 +645,7 @@ async function consumeWithCE(wrapped,activity,usageConfig,messageConfig) {
     const ended=await ceAuthorityRequest(ok?"commit":"review",{actorUuid:actor.uuid,id});
     ctx.state=ok&&ended?"committed":"review";
     if(ctx.state!=="committed") return false;
+    if(messageConfig && typeof messageConfig==="object") foundry.utils.setProperty(messageConfig,"data.flags.jjk5e.ceReceipt",id);
     return result;
   }catch(err){
     ctx.state="review";
@@ -4877,14 +4900,14 @@ function excludeDomainWardedTargets(workflow) {
   // Do not strip allied targets from explicitly healing, summoning, teleport or utility activities.
   const type=workflow.activity?.type;
   if(type && !["attack","save","damage"].includes(type)) return [];
-  const protectedTargets = [...workflow.targets].filter((tk) => domainGuaranteedTarget(workflow, tk) && domainWard(tk));
+  const protectedTargets = (workflow.targets.documents??[...workflow.targets]).filter((tk) => domainGuaranteedTarget(workflow, tk) && domainWard(tk));
   if (!protectedTargets.length) return [];
   const ids = new Set(protectedTargets.map((tk) => (tk?.document ?? tk)?.uuid).filter(Boolean));
   const exclude = (tk) => protectedTargets.includes(tk) || ids.has((tk?.document ?? tk)?.uuid);
   for (const key of ["targets", "hitTargets", "hitTargetsEC", "saves", "failedSaves", "applicationTargets", "effectTargets"]) {
     if (typeof workflow[key]?.has === "function" && typeof workflow[key]?.delete==="function") {
-      // Midi TokenDocumentSets accept token documents; preserve their identity/record binding.
-      for(const tk of [...workflow[key]]) if(exclude(tk)) workflow[key].delete(tk);
+      // Midi TokenDocumentSets can include off-canvas documents invisible to their iterator.
+      for(const tk of (workflow[key].documents??[...workflow[key]])) if(exclude(tk)) workflow[key].delete(tk);
     }
   }
   return protectedTargets;
