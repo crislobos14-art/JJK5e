@@ -112,7 +112,16 @@
       "LethalMode": "Letal",
       "NonLethalMode": "No letal (sin sure-hit)",
       "MakeLethal": "Hacer letal",
-      "MakeNonLethal": "Hacer no letal"
+      "MakeNonLethal": "Hacer no letal",
+      "AttackBarrier": "Atacar barrera",
+      "SelectAttacker": "Selecciona primero un token que controles.",
+      "BarrierAttackHint": "Introduce el bonificador de ataque, el alcance máximo en pies y una fórmula de daño simple. El GM revisa las solicitudes de jugadores. El lado y la distancia se calculan automáticamente.",
+      "AttackBonus": "Bonificador de ataque",
+      "AttackRange": "Alcance (pies)",
+      "DamageFormula": "Dados de daño (p. ej. 2d6+3)",
+      "BarrierAttackHit": "Ataque a barrera: impacto",
+      "BarrierAttackMiss": "Ataque a barrera: fallo",
+      "AttackRejected": "Ataque a barrera rechazado: verifica el objetivo, la distancia, la fórmula y la aprobación del GM."
     },
     "Burnout": {
       "Name": "Technique Burnout",
