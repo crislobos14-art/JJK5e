@@ -199,7 +199,8 @@
       "Hint": "Searches your actors (folder \"JJK Shikigami\") and then the compendiums (SRD). Tokens appear next to yours; the GM must be online.",
       "Count": "How many",
       "Do": "Summon",
-      "NeedName": "Write the name of the shikigami or creature to summon."
+      "NeedName": "Write the name of the shikigami or creature to summon.",
+      "NotASummon": "JJK 5e: Not a summon: {name} cannot be given to a player."
     },
     "Panel": {
       "Open": "Open JJK panel",
@@ -1054,7 +1055,8 @@
     "GMRequest": {
       "Title": "JJK 5e: player request",
       "From": "Request sent as {user}: {action} for {actor}.",
-      "Verify": "Client identifiers cannot be trusted. Check with the player before approving."
+      "Verify": "Client identifiers cannot be trusted. Check with the player before approving.",
+      "Target": "Creature"
     },
     "Automation": {
       "partial": "partly automated",

@@ -1,5 +1,26 @@
 # Changelog
 
+## 1.69.1 — Corrección de 21 errores de la auditoría
+- Six Eyes (Dormida / Despertando): *Perfect CE Manipulation* vuelve a aplicar el descuento de CE ÷10.
+- Percepción del alma y Daño al alma ya no se pisan: cada una tiene su propio efecto. Los efectos que ya tenías se separan solos.
+- Cancelar *Fijar CE* o *Dinero* ya no deja el valor en 0.
+- Reglas opcionales:
+  - Recibir el golpe, Choque y Salvación crítica se usan una sola vez, en el cliente que aplica el daño.
+  - Las salvaciones de concentración y de muerte ya no cuentan como Salvación crítica.
+  - Mejora con dote solo da dote por las mejoras de característica de clase.
+- Invocaciones: una petición de jugador ya no puede darle la propiedad de un personaje ni de un actor ajeno. El GM ve qué criatura se pide.
+- Choque de dominios contra un PNJ: ahora lo resuelve el GM, así que funciona también cuando el dominio lo abre un jugador.
+- Totalidad: también detecta y bloquea los shikigami invocados con la actividad de dnd5e.
+- Black Flash: el ×3 se aplica también cuando el crítico se elige en el diálogo de daño (igual con Críticos contundentes), y ya no se pisa con Agotamiento de salida.
+- Disparo dirigido:
+  - ya no se gasta si se cancela el ataque;
+  - solo afecta a los objetivos elegidos;
+  - funciona sin Midi.
+- Pruebas duras: al quitarlas ya no quedan PG de más.
+- Texto de votos y del creador de técnicas: ahora se escapa (sin HTML inyectado). El creador de técnicas respeta un costo 0 de dominio.
+- Animaciones y escrituras ya no se repiten en cada cliente.
+- 5 pruebas nuevas (69 en total).
+
 ## 1.69.0 — Auditoría: traducción, automatización y aspecto
 - 17 avisos y diálogos que salían siempre en inglés ahora están traducidos (votos, clon, intercambio de tokens, dados de golpe, Salida máxima, petición al GM, cambio de técnica).
 - 15 dotes que no tenían nada automatizado ahora lo están, total o parcialmente: Observer, Cutting Edge, Dull Pain, Long Lasting Medicine, Spiderweb, Perfect Ritual, Maximum: Sakuga, Slasher, Crusher, Tool Versatility, Blessing of Resilience, Resilient, Reverse Cursed Technique Output, Flow Technique y Boogie Down.

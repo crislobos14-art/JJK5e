@@ -69,9 +69,12 @@ async function promptField(title, content, field, asNumber = false) {
   });
 }
 
+/** Returns the number entered, or null when the dialog is cancelled (never 0 by accident). */
 async function promptNumber(title, label, value = 1) {
   const content = `<p>${label}</p><input type="number" name="amount" value="${value}" min="0" step="1" style="width:100%">`;
-  return Number(await promptField(title, content, "amount", true)) || 0;
+  const v = await promptField(title, content, "amount", true);
+  if (v === null || v === undefined || Number.isNaN(Number(v))) return null;
+  return Number(v) || 0;
 }
 
 async function fetchJSON(path) {
@@ -682,7 +685,7 @@ function registerActivityHooks() {
         if (!paid) return;
       }
     }
-    if (actor && /^Six Eyes \\((Dormant|Stirring)\\)$/.test(baseName(item)) &&
+    if (actor && /^Six Eyes \((Dormant|Stirring)\)$/.test(baseName(item)) &&
         /Perfect CE Manipulation/i.test(activity.name ?? "")) {
       await actor.setFlag(MODULE_ID, "sixEyesNext", true);
     }
@@ -1368,10 +1371,15 @@ async function onAttackRoll(rolls, subject) {
     description: `<p>${t("Zone.Description")}</p>`,
     flags: { jjk5e: { zone: next, base_weaponCriticalThreshold: wBase, base_spellCriticalThreshold: sBase } }
   });
+  // Read and subtract the Output Burnout levels here (one write), so the burnout delete hook does not race this one.
+  const added = Number(actor.getFlag(MODULE_ID, "burnoutRO")) || 0;
   const burnout = actor.effects.filter((e) => e.flags?.jjk5e?.kind === "burnout" || e.flags?.jjk5e?.burnout).map((e) => e.id);
-  if (burnout.length) await actor.deleteEmbeddedDocuments("ActiveEffect", burnout);
   const ro = Number(actor.getFlag(MODULE_ID, "reducedOutput")) || 0;
-  if (ro > 0) await setReducedOutput(actor, ro - 1);
+  const fromBurnout = burnout.length ? added : 0;
+  if (fromBurnout) await actor.unsetFlag(MODULE_ID, "burnoutRO");
+  if (burnout.length) await actor.deleteEmbeddedDocuments("ActiveEffect", burnout, { jjk5eZone: true });
+  const roNext = Math.max(0, ro - fromBurnout - 1);
+  if (roNext !== ro) await setReducedOutput(actor, roNext);
 }
 
 function traitChoice(actor, flag) {
@@ -1579,7 +1587,7 @@ async function setSoulAwareness(actor, level) {
   level = clamp(Number(level) || 0, 0, 10);
   await actor.setFlag(MODULE_ID, "soulAwareness", level);
   const list = SOUL_ABILITIES.slice(0, level).map((n, i) => `<li>${i + 1}. ${n}</li>`).join("");
-  await setKindEffect(actor, "soul", level ? {
+  await setKindEffect(actor, "soulAwareness", level ? {
     name: `${t("Soul.Name")} ${level}`, img: `${ICONS}/soul.svg`,
     description: `<ul>${list}</ul><p>${t("Soul.Description")}</p>`
   } : null);
@@ -1667,6 +1675,13 @@ async function gmSummon({ actorUuid, name, count = 1, userId, sceneId, stats = n
     if (!folder) folder = await docClass("Folder").create({ name: SUMMON_FOLDER, type: "Actor" });
     actor = await game.actors.importFromCompendium(src.pack, src.id, { folder: folder.id });
   }
+  // Only summon copies may be handed to a player: never a character or an actor that already has player owners.
+  const summonCopy = ["JJK Shikigami", SUMMON_FOLDER].includes(actor.folder?.name) || !!actor.flags?.jjk5e?.worldCopy || !!actor.flags?.jjk5e?.personalFor;
+  const playerOwned = Object.entries(actor.ownership ?? {}).some(([id, lvl]) => id !== "default" && id !== userId && lvl >= 3 && !game.users.get(id)?.isGM);
+  if (userId && !game.users.get(userId)?.isGM && (actor.type === "character" || playerOwned || !summonCopy)) {
+    ui.notifications.warn(t("Summon.NotASummon", { name: actor.name }));
+    return;
+  }
   if (userId && actor.ownership?.[userId] !== 3) await actor.update({ [`ownership.${userId}`]: 3 });
   const scene = game.scenes.get(sceneId) ?? canvas.scene;
   if (!scene) return;
@@ -1727,6 +1742,7 @@ async function handleGMRequest(msg) {
   // GM approval is explicit: client-provided user IDs are NOT a trusted identity.
   const confirmed = await confirmDialog(t("GMRequest.Title"),
     `<p>${t("GMRequest.From", { user: `<b>${esc(requester.name)}</b>`, action: `<b>${esc(action)}</b>`, actor: esc(actor?.name ?? "?") })}</p>
+     ${msg.payload?.name || msg.payload?.sourceUuid ? `<p>${t("GMRequest.Target")}: <b>${esc(msg.payload.name ?? "")}</b> ${esc(msg.payload.sourceUuid ?? "")}</p>` : ""}
      <p>${t("GMRequest.Verify")}</p>`);
   if (!confirmed) return false;
   try {
@@ -2020,6 +2036,7 @@ const PANEL_ACTIONS = {
     const pool = findPool(actor);
     if (!pool) return;
     const n = await promptNumber(t("Panel.GMSetCE"), t("CE.Amount"), poolValue(pool));
+    if (n === null) return;
     const diff = poolValue(pool) - clamp(Number(n) || 0, 0, poolMax(pool));
     if (diff) await spendCE(actor, diff, t("Panel.GMSetCE"));
   },
@@ -3351,8 +3368,8 @@ Hooks.once("ready", () => {
   Hooks.on("deleteActiveEffect", (effect) => {
     if (effect.flags?.jjk5e?.kind === "domain" || effect.flags?.jjk5e?.domainOpen) endDomainAnimation(effect.parent);
   });
-  Hooks.on("updateActor", (actor, changes) => {
-    if (foundry.utils.getProperty(changes, `flags.${MODULE_ID}.pendingBlackFlash`) === true) animateBlackFlash(actor);
+  Hooks.on("updateActor", (actor, changes, options, userId) => {
+    if (userId === game.user.id && foundry.utils.getProperty(changes, `flags.${MODULE_ID}.pendingBlackFlash`) === true) animateBlackFlash(actor);
   });
   Hooks.on("updateItem", () => { featDocsCache = null; });
   Hooks.on("deleteActiveEffect", (effect, options, userId) => {
@@ -3579,7 +3596,7 @@ async function syncVowEffects(actor, vows = getVows(actor)) {
     const name = `${t("Vow.Prefix")}: ${vow.name}`;
     if (effect) await effect.update(fxData({ name, disabled: !vow.active, changes }));
     else create.push(fxData({ name, img: "icons/magic/symbols/runes-triangle-blue.webp", disabled: !vow.active,
-      changes, transfer: false, description: `${vow.restriction ?? ""}<br>${vow.benefit ?? ""}`,
+      changes, transfer: false, description: `${esc(vow.restriction ?? "")}<br>${esc(vow.benefit ?? "")}`,
       flags: { jjk5e: { vow: vow.id } } }));
   }
   if (create.length) await actor.createEmbeddedDocuments("ActiveEffect", create);
@@ -4370,7 +4387,8 @@ async function domainOpened(actor, effect = null) {
     name: `${t("Domain.Zone")}: ${actor.name}`, color: "#4b1d6e", actorUuid: actor.uuid });
   await chat(actor, `<div class="jjk5e-card"><h3><i class="fas fa-circle-half-stroke"></i> ${t("Domain.Opened", { name: esc(actor.name) })}</h3>`
     + `<p>${state.noBarrier ? t(incomplete ? "Domain.IncompleteStats" : "Domain.BarrierlessStats", { radius }) : t("Domain.BarrierStats", { hp: max, ac: state.ac, ref })}</p><p class="hint">${t("Domain.OutsideHint", { n: Math.max(mod, 1) })}</p></div>`);
-  await detectClash(actor);
+  // Clashes change the rival's domain too, which only the GM can always write: the active GM resolves them.
+  if (isActiveGM()) await detectClash(actor);
   openDomainHUD(actor);
 }
 
@@ -4853,6 +4871,12 @@ Hooks.once("ready", () => {
     if (effect.parent?.documentName === "Actor") domainClosed(effect.parent);
   });
   Hooks.on("updateCombat", (combat, changes) => { if ("round" in (changes ?? {})) tickClashes(); });
+  // A player opened a domain: the active GM checks it for a clash with the other open domains.
+  Hooks.on("updateActor", (actor, changes, options, userId) => {
+    if (!isActiveGM() || userId === game.user.id) return;
+    const st = foundry.utils.getProperty(changes, `flags.${MODULE_ID}.domainState`);
+    if (st?.open && !st.clash) detectClash(actor).catch((err) => console.error(`${MODULE_ID} | clash`, err));
+  });
   Hooks.on("updateActor", (actor, changes) => {
     if (foundry.utils.hasProperty(changes, "system.attributes.hp")) checkEqualClash(actor);
   });
@@ -5345,7 +5369,7 @@ function originScaling(effect) {
 function usesScalingToken(activity) {
   const ids = new Set((activity?.effects ?? []).map((e) => e._id ?? e.id ?? e.effect?.id));
   return (activity?.item?.effects ?? []).some((e) => ids.has(e.id)
-    && (e.changes ?? []).some((c) => String(c.value).includes("JJKSCALING")));
+    && effChanges(e).some((c) => String(c.value).includes("JJKSCALING")));
 }
 function recordScaling(activity, usageConfig) {
   const item = activity?.item;
@@ -5702,6 +5726,8 @@ async function fightForLife(actor) {
 /* ---- Damage modifiers (Critical Saves, Take the Hit, Clash) ---- */
 
 const SAVE_NATURALS = new Map();
+/** Server time when available, so two clients agree on the 60-second window. */
+const nowMs = () => Number(game.time?.serverTime) || Date.now();
 function naturalD20(roll) {
   const r = Array.isArray(roll) ? roll[0] : roll;
   const die = r?.d20 ?? r?.dice?.find?.((d) => d.faces === 20);
@@ -5711,7 +5737,7 @@ function naturalD20(roll) {
 function recordSaveNatural(actor, roll) {
   if (!optOn("criticalSaves") || !actor?.uuid) return;
   const nat = naturalD20(roll);
-  const hit = nat === 1 || nat === 20 ? { nat, at: Date.now() } : null;
+  const hit = nat === 1 || nat === 20 ? { nat, at: nowMs() } : null;
   if (hit) SAVE_NATURALS.set(actor.uuid, hit); else SAVE_NATURALS.delete(actor.uuid);
   // The damage is often applied on another client (the GM's): keep it on the actor too.
   if (actor.isOwner && (hit || actor.getFlag?.(MODULE_ID, "critSave"))) {
@@ -5731,12 +5757,12 @@ function midiFlanking() {
 
 /** dnd5e.preCalculateDamage: every damage application (Midi or the chat card) passes here. */
 function optionalDamage(actor, damages, options) {
-  if (!actor || !Array.isArray(damages) || options?.isHealing) return;
+  if (!actor || !Array.isArray(damages) || options?.only === "healing" || options?.originatingMessage?.system?.isHealing) return;
   const harmful = damages.filter((d) => !["healing", "temphp"].includes(d.type) && Number(d.value) > 0);
   if (!harmful.length) return;
   const notes = [];
   const sv = saveNatural(actor);
-  if (sv && optOn("criticalSaves") && Date.now() - sv.at < 60000) {
+  if (sv && optOn("criticalSaves") && nowMs() - sv.at < 60000) {
     for (const d of harmful) d.value = sv.nat === 20 ? 0 : Number(d.value) * 2;
     notes.push(t(sv.nat === 20 ? "Opt.CritSave.Twenty" : "Opt.CritSave.One"));
   }
@@ -5758,7 +5784,7 @@ function optionalDamage(actor, damages, options) {
     if (pool > 0) notes.push(t("Opt.Clash.Overflow", { n: pool }));
   }
   // Damage previews (chat damage tray, Midi cards) also pass here: nothing is used up until the damage is applied.
-  if (notes.length) DAMAGE_PENDING.set(actor.uuid, notes);
+  if (notes.length) DAMAGE_PENDING.set(actor.uuid, notes); else DAMAGE_PENDING.delete(actor.uuid);
 }
 
 const DAMAGE_PENDING = new Map();
@@ -5810,7 +5836,7 @@ async function weaponClash(actor) {
     await roll.toMessage({ speaker: docClass("ChatMessage").getSpeaker({ actor }), flavor: `${t("Opt.weaponClash.Name")} — ${esc(weapon.name)}` });
     total = roll.total;
   }
-  const psychic = [...actor.items].some((i) => [...(i.system?.activities ?? [])].some?.((a) => (a.damage?.parts ?? []).some((p) => (p.types ?? []).includes?.("psychic"))));
+  const psychic = [...actor.items].some((i) => [...(i.system?.activities ?? [])].some?.((a) => (a.damage?.parts ?? []).some((p) => [...(p.types ?? [])].includes("psychic"))));
   await actor.setFlag(MODULE_ID, "clashUsed", used + 1);
   await setKindEffect(actor, "weaponClash", { name: `${t("Opt.weaponClash.Name")} (−${total})`, img: `${ICONS}/burnout.svg`,
     duration: { rounds: 1 }, description: `<p>${t("Opt.Clash.Effect", { n: total })}</p>`,
@@ -5863,12 +5889,8 @@ function optionalAttack(config, actor, jjkSources) {
     if (mode === "plus2") addPart(config, "2");
     else { config.advantage = true; sources += 1; }
   }
-  if (actor?.getFlag?.(MODULE_ID, "callingShot")) {
-    addPart(config, "-5");
-    const targets = [...(game.user?.targets ?? [])].map((tk) => tk.actor?.uuid).filter(Boolean);
-    actor.setFlag(MODULE_ID, "calledShotPending", targets);
-    actor.unsetFlag(MODULE_ID, "callingShot");
-  }
+  // The shot is used up only when the attack is really rolled (dnd5e.rollAttackV2), not when the dialog is cancelled.
+  if (actor?.getFlag?.(MODULE_ID, "callingShot")) addPart(config, "-5");
   if (optOn("advantageStacking") && config.advantage && !config.disadvantage) {
     const midi = midiAdvantageSources(config);
     const total = (midi ?? (config.jjkOuterAdvantage ? 1 : 0)) + sources;
@@ -5892,6 +5914,34 @@ function crunchyCrit(config, actor) {
   config.critical = { ...(config.critical ?? {}), multiplier: 1, multiplyNumeric: false };
 }
 
+/** Black Flash ×3 / Crunchy Crits when "Critical" was only chosen in the damage dialog (after preRollDamageV2). */
+function postDamageCritical(rolls, config) {
+  const actor = config?.subject?.actor ?? config?.subject?.item?.actor;
+  const DamageRoll = CONFIG.Dice?.DamageRoll;
+  if (!actor || !DamageRoll || !Array.isArray(rolls)) return;
+  const pending = actor.getFlag?.(MODULE_ID, "pendingBlackFlash");
+  const bf = !!pending && setting("blackFlashDamage") && (!pending.activityUuid || pending.activityUuid === config?.subject?.uuid);
+  let usedBF = false;
+  rolls.forEach((roll, i) => {
+    if (!roll?.isCritical || roll.options?.jjkCrunchy || roll.options?.jjkBlackFlash) return;
+    const rc = config.rolls?.[i];
+    if (!rc?.parts?.length) return;
+    const base = { ...roll.options, configured: false };
+    if (bf) {
+      rolls[i] = new DamageRoll(rc.parts.join(" + "), rc.data ?? roll.data, { ...base, jjkBlackFlash: true,
+        critical: { ...(roll.options.critical ?? {}), multiplier: 3 } });
+      usedBF = true;
+    } else if (optOn("crunchyCrits")) {
+      rolls[i] = new DamageRoll(`(${rc.parts.join(" + ")}) * 2`, rc.data ?? roll.data, { ...base, jjkCrunchy: true,
+        critical: { ...(roll.options.critical ?? {}), multiplier: 1, multiplyNumeric: false } });
+    }
+  });
+  if (usedBF && actor.isOwner) {
+    actor.unsetFlag(MODULE_ID, "pendingBlackFlash").catch(() => {});
+    chat(actor, `<p><strong>⚡ Black Flash</strong>: ${t("BlackFlash.Damage")}</p>`);
+  }
+}
+
 /** Largest hit die face + CON modifier (Calling Shots threshold). */
 function calledShotThreshold(actor) {
   let face = 0;
@@ -5903,6 +5953,20 @@ function calledShotThreshold(actor) {
   return face + (Number(actor?.system?.abilities?.con?.mod) || 0);
 }
 
+async function calledShotUsed(actor) {
+  if (!actor?.isOwner || !actor.getFlag(MODULE_ID, "callingShot")) return;
+  const targets = [...(game.user?.targets ?? [])].map((tk) => tk.actor?.uuid).filter(Boolean);
+  await actor.setFlag(MODULE_ID, "calledShotPending", targets);
+  await actor.unsetFlag(MODULE_ID, "callingShot");
+}
+
+async function calledShotCheck(attacker, target, dmg) {
+  const need = calledShotThreshold(target);
+  await chat(attacker, `<p><strong>${t("Opt.callingShots.Name")}</strong>: ${esc(target.name)} — ${dmg} / ${need}. `
+    + `${dmg > need ? t("Opt.Called.Crippled") : t("Opt.Called.NoEffect")}</p>`);
+  if (dmg > need) await rollLimb(target);
+}
+
 async function calledShotResult(workflow) {
   const actor = workflow?.actor;
   const pending = actor?.getFlag?.(MODULE_ID, "calledShotPending");
@@ -5911,12 +5975,9 @@ async function calledShotResult(workflow) {
   for (const entry of workflow?.damageList ?? []) {
     const doc = await fromUuid(entry.actorUuid ?? entry.tokenUuid ?? "").catch(() => null);
     const target = doc?.actor ?? doc;
-    if (target?.documentName !== "Actor") continue;
+    if (target?.documentName !== "Actor" || (pending.length && !pending.includes(target.uuid))) continue;
     const dmg = Number(entry.totalDamage ?? entry.hpDamage) || 0;
-    const need = calledShotThreshold(target);
-    await chat(actor, `<p><strong>${t("Opt.callingShots.Name")}</strong>: ${esc(target.name)} — ${dmg} / ${need}. `
-      + `${dmg > need ? t("Opt.Called.Crippled") : t("Opt.Called.NoEffect")}</p>`);
-    if (dmg > need) await rollLimb(target);
+    await calledShotCheck(actor, target, dmg);
   }
 }
 
@@ -6044,7 +6105,7 @@ async function afterAdvancementSteps(manager, actor) {
     let asi = 0;
     for (const step of manager.steps ?? []) {
       const adv = step?.flow?.advancement;
-      if (step?.type === "reverse" || !adv) continue;
+      if (step?.type !== "forward" || !adv || !["class", "subclass"].includes(adv.item?.type)) continue;
       const type = adv.constructor?.typeName ?? adv.constructor?.name ?? "";
       if (!/AbilityScoreImprovement/.test(type)) continue;
       const real = actor.items.get(adv.item?.id)?.advancement?.byId?.[adv.id] ?? adv;
@@ -6203,6 +6264,8 @@ async function toughTrial(actor) {
   const old = kindEffect(target, "toughTrial");
   if (old) {
     await safeDelete(old);
+    const hp = target.system.attributes?.hp ?? {};
+    if (Number(hp.value) > Number(hp.max)) await target.update({ "system.attributes.hp.value": Number(hp.max) || 0 });
     return chat(target, `<p><strong>${t("Opt.toughTrials.Name")}</strong>: ${t("Opt.Tough.Removed", { name: esc(target.name) })}</p>`);
   }
   const cr = Math.max(0, Number(target.system.details?.cr) || 0);
@@ -6224,12 +6287,22 @@ async function toughTrial(actor) {
 /* ---- Totality: dead shikigami, Mythical Beast Accuracy ---- */
 
 const fallen = (actor) => (actor?.getFlag?.(MODULE_ID, "fallenShikigami") ?? []).map((n) => String(n).toLowerCase());
-async function recordFallenShikigami(token) {
-  const summonerUuid = token?.flags?.jjk5e?.summonedBy;
-  if (!summonerUuid || !isActiveGM()) return;
-  const summoner = await fromUuid(summonerUuid).catch(() => null);
+/** The actor who summoned this token: the module's own summon flag or dnd5e's summon activity origin (item UUID). */
+async function summonerOf(actor) {
+  const token = actor?.token ?? actor?.getActiveTokens?.()?.[0]?.document;
+  const own = token?.flags?.jjk5e?.summonedBy;
+  if (own) return fromUuid(own).catch(() => null);
+  const origin = token?.flags?.dnd5e?.summon?.origin ?? actor?.flags?.dnd5e?.summon?.origin;
+  if (!origin) return null;
+  const item = await fromUuid(origin).catch(() => null);
+  return item?.actor ?? null;
+}
+
+async function recordFallenShikigami(actor) {
+  if (!isActiveGM()) return;
+  const summoner = await summonerOf(actor);
   if (!summoner || !actorTechniques(summoner).has(normName("Ten Shadows"))) return;
-  const name = token.name ?? token.actor?.name;
+  const name = actor?.token?.name ?? actor?.name;
   const list = new Set(summoner.getFlag(MODULE_ID, "fallenShikigami") ?? []);
   if (!name || list.has(name)) return;
   list.add(name);
@@ -6422,6 +6495,7 @@ Object.assign(PANEL_ACTIONS, {
   madnessSave: (actor) => weeklyMadnessSave(actor),
   gmMoney: async (actor) => {
     const n = await promptNumber(t("Opt.Money.Set"), t("Opt.Money.Amount"), money(actor));
+    if (n === null) return;
     await actor.setFlag(MODULE_ID, "money", Math.max(0, Number(n) || 0));
   }
 });
@@ -6447,13 +6521,41 @@ Hooks.once("ready", () => {
   Hooks.on("dnd5e.preCalculateDamage", (actor, damages, options) => {
     try { optionalDamage(actor, damages, options); } catch (err) { reportError("optional damage", err); }
   });
-  Hooks.on("dnd5e.rollSavingThrow", (rolls, data) => recordSaveNatural(data?.subject, rolls));
+  Hooks.on("dnd5e.rollSavingThrow", (rolls, data) => {
+    // Concentration and death saves also go through rollSavingThrow: they are not saves against a damaging effect.
+    const r = Array.isArray(rolls) ? rolls[0] : rolls;
+    const type = r?.data?.roll?.type ?? r?.options?.saveType;
+    if (r?.options?.isConcentration || type === "concentration" || type === "death") return;
+    recordSaveNatural(data?.subject, rolls);
+  });
   Hooks.on("dnd5e.rollAbilitySave", (actor, roll) => recordSaveNatural(actor, roll));
   // Concentration saves come after the damage: they never count for Critical Saves.
   for (const h of ["dnd5e.rollConcentrationV2", "dnd5e.rollConcentration"]) {
-    Hooks.on(h, (a, b) => { const actor = a?.documentName === "Actor" ? a : b?.subject; if (actor?.uuid) SAVE_NATURALS.delete(actor.uuid); });
+    Hooks.on(h, (a, b) => {
+      const actor = a?.documentName === "Actor" ? a : b?.subject;
+      if (!actor?.uuid) return;
+      SAVE_NATURALS.delete(actor.uuid);
+      if (actor.isOwner && actor.getFlag?.(MODULE_ID, "critSave")) actor.unsetFlag(MODULE_ID, "critSave").catch(() => {});
+    });
   }
   Hooks.on("dnd5e.preRollSkillV2", (config) => reliableSkill(config));
+  Hooks.on("dnd5e.postDamageRollConfiguration", (rolls, config) => {
+    try { postDamageCritical(rolls, config); } catch (err) { reportError("critical damage", err); }
+  });
+  Hooks.on("dnd5e.rollAttackV2", (rolls, data) => {
+    const actor = data?.subject?.actor ?? data?.subject?.item?.actor;
+    calledShotUsed(actor).catch((err) => reportError("called shot", err));
+  });
+  // Without Midi-QOL the called shot resolves when its damage is applied from the chat card.
+  Hooks.on("dnd5e.applyDamage", (target, amount, options) => {
+    if (midiActive() || !(amount > 0)) return;
+    const msg = options?.originatingMessage;
+    const attacker = msg?.getAssociatedActor?.() ?? game.actors?.get(msg?.speaker?.actor);
+    const pending = attacker?.getFlag?.(MODULE_ID, "calledShotPending");
+    if (!pending || (pending.length && !pending.includes(target.uuid))) return;
+    if (attacker.isOwner) attacker.unsetFlag(MODULE_ID, "calledShotPending").catch(() => {});
+    calledShotCheck(attacker, target, amount).catch((err) => reportError("called shot", err));
+  });
   Hooks.on("dnd5e.advancementManagerComplete", (manager) => { afterAdvancement(manager).catch((err) => reportError("advancement", err)); });
   Hooks.on("dnd5e.postUseActivity", (activity) => {
     const actor = activity?.actor ?? activity?.item?.actor;
@@ -6487,7 +6589,7 @@ Hooks.once("ready", () => {
     await setReducedOutput(actor, (Number(actor.getFlag(MODULE_ID, "reducedOutput")) || 0) + 2);
   });
   Hooks.on("deleteActiveEffect", async (effect, options, userId) => {
-    if (userId !== game.user.id || !isBurnoutFx(effect)) return;
+    if (userId !== game.user.id || !isBurnoutFx(effect) || options?.jjk5eZone) return;
     const actor = effect.parent;
     const added = Number(actor?.getFlag?.(MODULE_ID, "burnoutRO")) || 0;
     if (!added || actor.documentName !== "Actor") return;
@@ -6507,14 +6609,16 @@ Hooks.once("ready", () => {
     }
   });
   Hooks.on("dnd5e.applyDamage", (actor) => { consumeOptionalDamage(actor).catch((err) => reportError("optional damage", err)); });
-  Hooks.on("updateActor", (actor, changes, options) => {
+  Hooks.on("updateActor", (actor, changes, options, userId) => {
     const b = options?.jjk5eHpBefore;
-    if (options?.jjk5eDamaged) consumeOptionalDamage(actor).catch((err) => reportError("optional damage", err));
+    if (options?.jjk5eDamaged && userId === game.user.id) consumeOptionalDamage(actor).catch((err) => reportError("optional damage", err));
     if (b && actor.type === "character" && b.max > 0 && b.value >= b.max && (Number(actor.system.attributes?.hp?.value) || 0) <= 0) {
       rctMoment(actor, t("RCT.OneHit")).catch((err) => reportError("rct moment", err));
     }
-    if (b && (Number(actor.system.attributes?.hp?.value) || 0) <= 0 && actor.token?.flags?.jjk5e?.summonedBy) recordFallenShikigami(actor.token);
-    if (foundry.utils.getProperty(changes, "system.attributes.exhaustion") === 0 && actor.isOwner && actor.getFlag(MODULE_ID, "fightExhaustion")) actor.unsetFlag(MODULE_ID, "fightExhaustion");
+    if (b && (Number(actor.system.attributes?.hp?.value) || 0) <= 0) recordFallenShikigami(actor).catch((err) => reportError("totality", err));
+    if (userId === game.user.id && foundry.utils.getProperty(changes, "system.attributes.exhaustion") === 0 && actor.getFlag(MODULE_ID, "fightExhaustion")) {
+      actor.unsetFlag(MODULE_ID, "fightExhaustion").catch(() => {});
+    }
   });
   const deathSave = (actor, roll) => {
     if (!actor || actor.type !== "character") return;
@@ -6534,6 +6638,23 @@ Hooks.once("ready", () => {
     }
   });
   Hooks.on("createItem", (item, options, userId) => { if (userId === game.user.id) checkRepetitive(item).catch((err) => reportError("repetitive", err)); });
+  // Totality: dead shikigami cannot come back through the dnd5e summon activity either.
+  Hooks.on("dnd5e.preSummon", (activity, profile) => {
+    const actor = activity?.actor ?? activity?.item?.actor;
+    let name = profile?.name;
+    try { name ||= globalThis.fromUuidSync?.(profile?.uuid)?.name; } catch (err) { /* compendium not indexed */ }
+    if (!actor || !name || !fallen(actor).includes(String(name).trim().toLowerCase())) return;
+    ui.notifications.warn(t(optOn("totalityAlt") ? "Opt.Totality.UntilRest" : "Opt.Totality.Dead"));
+    return false;
+  });
+  // v1.69: Soul Awareness used the same effect kind as Soul Damage; give old awareness effects their own kind.
+  if (isActiveGM()) {
+    for (const a of game.actors ?? []) {
+      for (const e of a.effects ?? []) {
+        if (e.flags?.jjk5e?.kind === "soul" && !e.flags?.jjk5e?.soulDamage) e.update({ "flags.jjk5e.kind": "soulAwareness" }).catch(() => {});
+      }
+    }
+  }
   if (midiActive()) {
     Hooks.on("midi-qol.RollComplete", (workflow) => {
       calledShotResult(workflow).catch((err) => reportError("called shot", err));

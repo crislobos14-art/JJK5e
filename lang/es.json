@@ -199,7 +199,8 @@
       "Hint": "Busca en tus actores (carpeta \"JJK Shikigami\") y luego en los compendios (SRD). Los tokens aparecen junto al tuyo; el GM debe estar conectado.",
       "Count": "Cantidad",
       "Do": "Invocar",
-      "NeedName": "Escribe el nombre del shikigami o criatura a invocar."
+      "NeedName": "Escribe el nombre del shikigami o criatura a invocar.",
+      "NotASummon": "JJK 5e: No es una invocación: {name} no se puede entregar a un jugador."
     },
     "Panel": {
       "Open": "Abrir panel JJK",
@@ -1054,7 +1055,8 @@
     "GMRequest": {
       "Title": "JJK 5e: petición de jugador",
       "From": "Petición enviada como {user}: {action} para {actor}.",
-      "Verify": "Los identificadores del cliente no son fiables. Confírmalo con el jugador antes de aprobar."
+      "Verify": "Los identificadores del cliente no son fiables. Confírmalo con el jugador antes de aprobar.",
+      "Target": "Criatura"
     },
     "Automation": {
       "partial": "automatizado en parte",

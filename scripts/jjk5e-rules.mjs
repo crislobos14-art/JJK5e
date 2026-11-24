@@ -116,7 +116,8 @@ export function buildTechniqueItems(spec) {
     const domain = f.type === "domain";
     const id = seededId(`${tech}|${level}|${name}`);
     const aid = seededId(`${tech}|${level}|${name}|act`);
-    const ce = Math.max(0, Number(f.ce) || (domain ? 20 : 0));
+    const ceRaw = String(f.ce ?? "").trim();
+    const ce = Math.max(0, ceRaw !== "" && Number.isFinite(Number(ceRaw)) ? Number(ceRaw) : (domain ? 20 : 0));
     const scaleMax = scaleMaxOf(f.scaleMax);
     const activation = domain ? { type: "special", value: null, condition: "Full turn: Action + Bonus Action + Movement", override: true }
       : { type: ACTIVATIONS.has(f.activation) ? f.activation : "action", value: 1, condition: "", override: true };
@@ -146,8 +147,8 @@ export function buildTechniqueItems(spec) {
     if (type !== "passive" && ce) { flags.ceCosts = { [aid]: ce }; if (scaleMax) flags.ceSteps = { [aid]: 1 }; }
     if (domain) Object.assign(flags, { domain: true, domainActivity: aid });
     const kind = String(f.kind ?? TECHNIQUE_SLOTS.find((s) => s.level === level)?.kind ?? "");
-    const header = `<p><em>${tech} — Innate Technique (${level}${["st", "nd", "rd"][((level + 90) % 100 - 10) % 10 - 1] ?? "th"} level${kind ? `, ${kind}` : ""})</em></p>`;
-    const body = String(f.description ?? "").trim();
+    const header = `<p><em>${escHTML(tech)} — Innate Technique (${level}${["st", "nd", "rd"][((level + 90) % 100 - 10) % 10 - 1] ?? "th"} level${kind ? `, ${kind}` : ""})</em></p>`;
+    const body = escHTML(String(f.description ?? "").trim());
     items.push({
       _id: id, name, type: "spell", img: domain ? "icons/magic/symbols/runes-star-pentagon-orange-purple.webp" : "icons/magic/symbols/question-stone-yellow.webp",
       system: {
@@ -160,4 +161,9 @@ export function buildTechniqueItems(spec) {
     });
   }
   return items;
+}
+
+/** Escape user text before it is inserted into item HTML. */
+function escHTML(v) {
+  return String(v ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 }

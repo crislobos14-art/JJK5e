@@ -203,3 +203,52 @@ test("UI: with every optional rule on, every panel button has a handler and runs
   const player = ["combat", "body", "summon", "tools"].map((tab) => J.panelHTML(actor, tab)).join("");
   for (const a of J.GM_PANEL_ACTIONS) assert.ok(!player.includes(`data-action="${a}"`), `player sees ${a}`);
 });
+
+test("Audit fixes: soul awareness and soul damage are separate effects", async () => {
+  const { actor, J } = await setup();
+  await J.setSoulAwareness(actor, 3);
+  await J.applySoulDamage(actor, 5);
+  assert.ok(J.kindEffect(actor, "soulAwareness"), "awareness kept");
+  assert.equal(J.kindEffect(actor, "soul").flags.jjk5e.soulDamage, 5);
+  await J.setSoulAwareness(actor, 0);
+  assert.ok(J.kindEffect(actor, "soul"), "lowering awareness keeps the soul damage");
+});
+
+test("Audit fixes: cancelling a number prompt returns null, not 0", async () => {
+  const { env, actor, J } = await setup({ moneyRules: true });
+  await actor.setFlag("jjk5e", "money", 500);
+  env.prompts.push(null);
+  assert.equal(await J.promptNumber("t", "l", 5), null);
+  env.prompts.push(null);
+  await J.PANEL_ACTIONS.gmMoney(actor);
+  assert.equal(actor.getFlag("jjk5e", "money"), 500);
+});
+
+test("Audit fixes: concentration and death saves do not count for Critical Saves", async () => {
+  const { env, actor } = await setup({ criticalSaves: true });
+  env.Hooks.callAll("dnd5e.rollSavingThrow", [{ d20: { total: 1 }, options: { isConcentration: true } }], { subject: actor });
+  env.Hooks.callAll("dnd5e.rollSavingThrow", [{ d20: { total: 20 }, data: { roll: { type: "death" } } }], { subject: actor });
+  await env.settle();
+  assert.equal(actor.getFlag("jjk5e", "critSave"), undefined);
+  env.Hooks.callAll("dnd5e.rollSavingThrow", [{ d20: { total: 20 } }], { subject: actor });
+  await env.settle();
+  assert.equal(actor.getFlag("jjk5e", "critSave").nat, 20);
+});
+
+test("Audit fixes: Feat Improvement counts only class ASIs taken going forward", async () => {
+  const { env, actor, J } = await setup({ featImprovement: true });
+  const asi = (type, step = "forward") => ({ type: step, flow: { advancement: { constructor: { typeName: "AbilityScoreImprovement" }, item: { type }, value: { type: "asi" } } } });
+  // The feat picker reads the feats pack; the mock pack index records each lookup.
+  let lookups = 0;
+  env.game.packs.set("jjk5e.jjk5e-feats", { getIndex: async () => [], getDocuments: async () => { lookups++; return []; } });
+  await J.afterAdvancement({ actor, steps: [asi("race"), asi("feat"), asi("class", "restore"), asi("class")] });
+  assert.equal(lookups, 1, "only the class ASI going forward grants a feat");
+});
+
+test("Audit fixes: Perfect CE Manipulation (Six Eyes Dormant) arms the ÷10 discount", async () => {
+  const { env, actor } = await setup();
+  const item = { name: "Six Eyes (Dormant)", flags: {}, actor };
+  env.Hooks.callAll("dnd5e.postUseActivity", { actor, item, name: "Perfect CE Manipulation (CE cost ÷10)", id: "x" }, {});
+  await env.settle();
+  assert.equal(actor.getFlag("jjk5e", "sixEyesNext"), true);
+});
