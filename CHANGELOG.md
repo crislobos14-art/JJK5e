@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.80.1 — Tablas y pestañas Sealed Ink
+Ventana Carrera del hechicero en Sealed Ink: pestañas Grado/Misiones/Reputación como botones (contador de misiones activas, flechas, Inicio/Fin, foco conservado). Reputación como tabla con encabezados, valor, barra −5…+5 y botones −/+ que se desactivan en los límites. Las misiones con diario se abren con clic o Enter. Pestañas del panel accesibles y navegables con flechas. Tablas de diarios de reglas, descripciones de objetos y tablas de tirada del módulo en tinta sobre papel (cabecera negra con línea roja, filas alternas, resaltado al pasar el ratón, columna de tirada en rojo); solo afecta a documentos del módulo. Diagnóstico de integración JJK traducido y presentado como tabla Sealed Ink; botones y avisos del marcador de barrera traducidos.
+
 ## 1.80.0 — Engine hardening: recuperación de CE, diagnóstico y antidominio
 - Identidad de transacción por actor, objeto y actividad; autorización de inicio persistente, confirmación idempotente y recuperación periódica de reservas.
 - Reembolso automático limitado a reservas expiradas que nunca recibieron autorización de ejecución; operaciones inciertas quedan en revisión del GM. Asociación de tarjetas Midi-QOL para auditoría, no para repetir flujos.

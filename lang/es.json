@@ -167,7 +167,10 @@
         "finished": "canceló",
         "expired": "expiró"
       },
-      "ProfileDC": "CD de la salvación"
+      "ProfileDC": "CD de la salvación",
+      "MarkerUseAttack": "JJK 5e: para golpear un marcador de barrera seleccionado, usa el botón de atacar barrera.",
+      "MarkerAttack": "Atacar la barrera seleccionada",
+      "MarkerCreate": "Crear marcador de barrera seleccionable (experimental)"
     },
     "Burnout": {
       "Name": "Technique Burnout",
@@ -679,7 +682,10 @@
       "Demoted": "{name} desciende a {grade}",
       "LogMission": "Misión asignada: {title}",
       "LogDone": "Misión completada: {title}",
-      "LogFailed": "Misión fallida: {title}"
+      "LogFailed": "Misión fallida: {title}",
+      "Faction": "Facción",
+      "Score": "Valor",
+      "Standing": "Relación"
     },
     "Mission": {
       "Generate": "Generar misión",
@@ -705,7 +711,8 @@
         "done": "Completada",
         "failed": "Fallida"
       },
-      "MakeCurse": "Crear la maldición (PNJ)"
+      "MakeCurse": "Crear la maldición (PNJ)",
+      "Open": "Abrir el diario de la misión"
     },
     "Faction": {
       "higherUps": "Altos mandos",
@@ -1186,6 +1193,32 @@
       "Decline": "Ahora no",
       "NoDomain": "Este personaje no tiene Expansión de Dominio.",
       "Expired": "Esta reacción de dominio ya no está disponible."
+    },
+    "Diag": {
+      "Title": "Diagnóstico de integración JJK",
+      "Active": "activo",
+      "Inactive": "inactivo",
+      "Item": "Comprobación",
+      "Value": "Valor",
+      "Transactional": "EM transaccional",
+      "OnExperimental": "Activada (experimental)",
+      "Off": "Desactivada",
+      "Adapters": "Adaptadores de actividad",
+      "Expiry": "Expiración de efectos",
+      "Unwrapped": "Tipos de actividad sin adaptador",
+      "Pending": "Reservas pendientes",
+      "NotCertification": "Detectar los módulos en ejecución no certifica su compatibilidad.",
+      "Transaction": "Reserva",
+      "Decision": "Decisión",
+      "ReviewOnly": "Solo revisar",
+      "Commit": "Confirmar como gastada",
+      "Refund": "Devolver (tras comprobar que no hubo efectos)",
+      "ConfirmTitle": "Resolver reserva de EM",
+      "ConfirmHint": "Revisa antes el flujo nativo, el daño, los efectos y los demás recursos.",
+      "State": {
+        "reserved": "reservada",
+        "review": "en revisión"
+      }
     }
   }
 }

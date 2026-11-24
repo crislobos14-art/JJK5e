@@ -83,7 +83,7 @@ button.jjk5e-levelup { display: block; margin: 4px auto 0; padding: 2px 10px; fo
 .jjk5e-vows .btns button, .jjk5e-career .btns button { flex: 0 1 auto; width: auto; }
 .jjk5e-vow-form label { display: block; margin-bottom: 4px; }
 .jjk5e-vow-form .jjk-vow-term { display: flex; gap: 4px; margin-bottom: 3px; } .jjk5e-vow-form .jjk-vow-term input { width: 70px; }
-.jjk5e-career .jjk-tabs { display: flex; gap: 10px; border-bottom: 1px solid #7a5aa0; margin-bottom: 6px; }
+.jjk5e-career .jjk-tabs { display: flex; gap: 4px; margin-bottom: 6px; }
 .jjk5e-career .jjk-tabs a { padding: 2px 4px; } .jjk5e-career .jjk-tabs a.active { font-weight: bold; border-bottom: 2px solid #b48ae6; }
 .jjk5e-career .jjk-grade { display: flex; gap: 8px; align-items: center; font-size: 16px; }
 .jjk5e-career .jjk-grade-badge { color: #fff; padding: 3px 10px; }
@@ -454,3 +454,74 @@ button.jjk5e-levelup { display: block; margin: 4px auto 0; padding: 2px 10px; fo
 .jjk5e-ui.jjk5e-domain strong { color: var(--jjk-bone); }
 .jjk5e-ui.jjk5e-domain button[data-action="applyProfile"], .jjk5e-ui.jjk5e-domain button[data-action="amplification"] { width: 100%; margin-top: 6px; border-color: var(--jjk-seal); }
 .jjk5e-ui.jjk5e-domain .jjk-panel > p { margin: 4px 0; line-height: 1.35; }
+
+/* v1.77 — career window in Sealed Ink: tabs, grade seal, missions, reputation ledger. */
+.jjk5e-ui.jjk5e-career .jjk-tabs { gap: 4px; margin: 0 0 10px; border-bottom: 1px solid var(--jjk-line); }
+.jjk5e-ui.jjk5e-career .jjk-tabs button { flex: 1 1 0; }
+.jjk5e-ui .jjk-tabs button:focus-visible { outline: 2px solid var(--jjk-gold); outline-offset: -2px; }
+.jjk5e-ui .jjk-tabs .jjk-count { display: inline-block; min-width: 16px; margin-left: 4px; padding: 0 4px; background: var(--jjk-seal); color: #fff; font: 700 11px/16px var(--jjk-display); text-align: center; }
+.jjk5e-ui.jjk5e-career .jjk-grade { display: flex; gap: 8px; align-items: center; margin: 2px 0 8px; }
+.jjk5e-ui.jjk5e-career .jjk-grade-badge {
+  background: var(--jjk-bone) !important; color: #1a1410; border-radius: 0; padding: 5px 14px 4px;
+  font: 700 22px/1 var(--jjk-display); letter-spacing: .06em; text-transform: uppercase; box-shadow: inset 4px 0 0 var(--jjk-seal);
+}
+.jjk5e-ui.jjk5e-career .jjk-grade-badge.gspecial { background: var(--jjk-seal) !important; color: #fff; box-shadow: inset 4px 0 0 #6d0715; }
+.jjk5e-ui.jjk5e-career .jjk-grade-badge.g1 { box-shadow: inset 4px 0 0 var(--jjk-gold); }
+.jjk5e-ui.jjk5e-career h4 { margin: 10px 0 4px; color: var(--jjk-muted); font: 700 10px/1.2 var(--font-primary, sans-serif); letter-spacing: .16em; text-transform: uppercase; border: 0; }
+.jjk5e-ui.jjk5e-career h4::before { content: ""; display: inline-block; width: 6px; height: 6px; margin-right: 6px; background: var(--jjk-seal); vertical-align: 1px; }
+.jjk5e-ui.jjk5e-career .jjk-steps li { padding: 3px 0 3px 2px; color: var(--jjk-muted); }
+.jjk5e-ui.jjk5e-career .jjk-steps li i { width: 14px; color: var(--jjk-faint); }
+.jjk5e-ui.jjk5e-career .jjk-steps li.done { color: var(--jjk-bone); }
+.jjk5e-ui.jjk5e-career .jjk-steps li.done i { color: var(--jjk-ok); }
+.jjk5e-ui.jjk5e-career .jjk-history { border: 1px solid var(--jjk-line); max-height: 9rem; overflow-y: auto; }
+.jjk5e-ui.jjk5e-career .jjk-history li { padding: 4px 8px; border-bottom: 1px dotted var(--jjk-line); color: var(--jjk-bone-2); font-size: 12px; }
+.jjk5e-ui.jjk5e-career .jjk-history li:last-child { border-bottom: 0; }
+.jjk5e-ui.jjk5e-career .jjk-missions li { margin-bottom: 6px; border-bottom: 1px solid var(--jjk-line); }
+.jjk5e-ui.jjk5e-career .jjk-missions li.done { border-left-color: var(--jjk-ok); }
+.jjk5e-ui.jjk5e-career .jjk-missions li.failed { border-left-color: var(--jjk-seal); opacity: .7; }
+.jjk5e-ui .jjk-clickable { cursor: pointer; transition: background-color .12s, border-color .12s; }
+.jjk5e-ui .jjk-clickable:hover { background: var(--jjk-card-2); border-color: var(--jjk-line-2); }
+.jjk5e-ui .jjk-clickable:focus-visible { outline: 2px solid var(--jjk-gold); outline-offset: 1px; }
+.jjk5e-ui .jjk-open-hint { float: right; color: var(--jjk-faint); }
+.jjk5e-ui .jjk-clickable:hover .jjk-open-hint { color: var(--jjk-seal-2); }
+/* reputation ledger */
+.jjk5e-ui .jjk-rep { width: 100%; font-size: 12px; border-collapse: separate; border-spacing: 0 3px; }
+.jjk5e-ui .jjk-rep th { color: var(--jjk-faint); font: 700 9px/1.2 var(--font-primary, sans-serif); letter-spacing: .12em; text-transform: uppercase; text-align: left; padding: 0 6px; background: none; border: 0; }
+.jjk5e-ui .jjk-rep td { background: var(--jjk-card-2); padding: 5px 6px; border-top: 1px solid var(--jjk-line); border-bottom: 1px solid var(--jjk-line); vertical-align: middle; }
+.jjk5e-ui .jjk-rep tr:hover td { background: #2a2530; }
+.jjk5e-ui .jjk-rep td.name { border-left: 3px solid var(--jjk-line-2); font-weight: 600; color: var(--jjk-bone); }
+.jjk5e-ui .jjk-rep tr.pos td.name { border-left-color: var(--jjk-ok); }
+.jjk5e-ui .jjk-rep tr.neg td.name { border-left-color: var(--jjk-seal); }
+.jjk5e-ui .jjk-rep .num { width: 44px; text-align: center; font: 700 16px/1 var(--jjk-display); color: var(--jjk-bone); }
+.jjk5e-ui .jjk-rep tr.neg .num { color: var(--jjk-seal-2); }
+.jjk5e-ui .jjk-rep .jjk-rep-label { display: block; color: var(--jjk-muted); margin-bottom: 3px; }
+.jjk5e-ui .jjk-rep-meter { position: relative; display: block; height: 4px; min-width: 70px; background: #0b0a0e; border: 1px solid var(--jjk-line); }
+.jjk5e-ui .jjk-rep-meter::after { content: ""; position: absolute; left: 50%; top: -2px; bottom: -2px; width: 1px; background: var(--jjk-line-2); }
+.jjk5e-ui .jjk-rep-meter > span { position: absolute; top: 0; bottom: 0; background: var(--jjk-ok); }
+.jjk5e-ui .jjk-rep-meter > span.neg { background: var(--jjk-seal); }
+.jjk5e-ui .jjk-rep td.ctl { width: 1%; white-space: nowrap; }
+.jjk5e-ui .jjk-rep td.ctl button { width: 26px; min-height: 24px; padding: 0; border-radius: 0; margin-left: -1px; }
+.jjk5e-ui .jjk-rep td.ctl button:disabled { opacity: .35; cursor: not-allowed; }
+
+/* v1.77 — tables inside module journals, item descriptions and roll tables ("ink on paper").
+   Self-contained colours so they read on Foundry's light journals and on dark sheets alike. */
+table.jjk-ink-table {
+  --ink: #121015; --paper: #f6efe3; --paper-2: #ece2d0; --line: #d6c8b0; --seal: #c8102e;
+  width: 100%; margin: .6em 0 1em; border-collapse: collapse; border: 1px solid var(--ink);
+  background: var(--paper); color: #1d1a20; font-size: .93em; box-shadow: 3px 3px 0 rgba(18, 16, 21, .18);
+}
+table.jjk-ink-table thead th, table.jjk-ink-table tr:first-child > th {
+  background: var(--ink); color: #efe6d6; padding: 6px 8px; border: 0; border-bottom: 3px solid var(--seal);
+  font: 700 .95em/1.1 "JJK Display", "Big Shoulders Display", "Oswald", var(--font-primary, sans-serif); letter-spacing: .07em; text-transform: uppercase; text-shadow: none;
+}
+table.jjk-ink-table td { padding: 5px 8px; border: 0; border-bottom: 1px solid var(--line); color: #1d1a20; background: transparent; }
+table.jjk-ink-table tbody tr:nth-child(even) { background: var(--paper-2); }
+table.jjk-ink-table tbody tr:hover { background: #fbe3e3; }
+table.jjk-ink-table tbody tr:hover > td:first-child { box-shadow: inset 3px 0 0 var(--seal); }
+table.jjk-ink-table td:first-child { font-weight: 700; white-space: nowrap; }
+table.jjk-ink-table.jjk-ink-roll td:first-child { width: 1%; text-align: center; font: 700 1.05em/1 "JJK Display", "Big Shoulders Display", var(--font-primary, sans-serif); color: var(--seal); }
+table.jjk-ink-table a.content-link, table.jjk-ink-table a.inline-roll { background: rgba(18, 16, 21, .06); border-color: var(--line); color: var(--ink); }
+/* roll table sheets of the module */
+.jjk5e-rolltable .window-header { border-bottom: 3px solid #c8102e; }
+.jjk5e-rolltable table.jjk-ink-table img { max-height: 24px; vertical-align: middle; }
+.jjk5e-ui .jjk-rep th.num { font: 700 9px/1.2 var(--font-primary, sans-serif); color: var(--jjk-faint); }

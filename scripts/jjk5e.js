@@ -716,19 +716,25 @@ function integrationReport(){
 async function showIntegrationDiagnostics(){
   if(!isActiveGM())return false;
   const report=integrationReport(),pending=report.pending;
-  const rows=report.dependencies.map(d=>`<li>${esc(d.id)}: ${d.active?"active":"inactive"} — ${esc(d.version??"—")}</li>`).join("");
-  const choices=pending.slice(0,100).map((r,i)=>`<option value="${i}">${esc(r.actorUuid)} — ${esc(r.state)} — ${r.cost} CE</option>`).join("");
-  const info=`<p>Foundry ${esc(report.foundry??"—")} / D&amp;D5e ${esc(report.dnd5e??"—")}</p><ul>${rows}</ul>
-    <p>Transactional CE: ${report.transactional?"ON (experimental)":"OFF"}; adapters: ${report.adapters.length}; expiry: ${esc(report.expiryAuthority)}</p>
-    <p>Unwrapped activity types: ${esc(report.unwrappedTypes.join(", ")||"—")}</p><p>Pending reservations: ${pending.length}</p>`;
-  if(!pending.length) return confirmDialog("JJK Integration Diagnostics",info);
-  const answer=await foundry.applications.api.DialogV2.prompt({window:{title:"JJK Integration Diagnostics"},rejectClose:false,
-    content:info+`<label>Transaction<select name="tx">${choices}</select></label>
-    <label>Decision<select name="decision"><option value="none">Review only</option><option value="commit">Confirm consumed</option><option value="refund">Refund after verifying no effects</option></select></label>`,
+  const actorName=(uuid)=>{ try { return fromUuidSync(uuid)?.name ?? uuid; } catch { return uuid; } };
+  const row=(k,v,cls="")=>`<tr class="${cls}"><td class="name">${k}</td><td>${v}</td></tr>`;
+  const deps=report.dependencies.map(d=>row(esc(d.id),`<span class="jjk-chip ${d.active?"on":""}">${t(d.active?"Diag.Active":"Diag.Inactive")}</span> ${esc(d.version??"—")}`,d.active?"pos":"neg")).join("");
+  const choices=pending.slice(0,100).map((r,i)=>`<option value="${i}">${esc(actorName(r.actorUuid))} — ${esc(t(`Diag.State.${r.state}`))} — ${r.cost} ${t("CE.Short")}</option>`).join("");
+  const info=`<table class="jjk-rep jjk-diag"><thead><tr><th>${t("Diag.Item")}</th><th>${t("Diag.Value")}</th></tr></thead><tbody>
+    ${row("Foundry",esc(report.foundry??"—"))}${row("D&amp;D 5e",esc(report.dnd5e??"—"))}${deps}
+    ${row(t("Diag.Transactional"),`<span class="jjk-chip ${report.transactional?"on":""}">${t(report.transactional?"Diag.OnExperimental":"Diag.Off")}</span>`)}
+    ${row(t("Diag.Adapters"),report.adapters.length)}${row(t("Diag.Expiry"),esc(report.expiryAuthority))}
+    ${row(t("Diag.Unwrapped"),esc(report.unwrappedTypes.join(", ")||"—"))}
+    ${row(t("Diag.Pending"),`<strong class="jjk-num">${pending.length}</strong>`,pending.length?"neg":"pos")}</tbody></table>
+    <p class="hint">${t("Diag.NotCertification")}</p>`;
+  if(!pending.length) return confirmDialog(t("Diag.Title"),info);
+  const answer=await foundry.applications.api.DialogV2.prompt({window:{title:t("Diag.Title")},classes:["jjk5e-ui","jjk5e-dialog"],rejectClose:false,
+    content:info+`<label>${t("Diag.Transaction")}<select name="tx">${choices}</select></label>
+    <label>${t("Diag.Decision")}<select name="decision"><option value="none">${t("Diag.ReviewOnly")}</option><option value="commit">${t("Diag.Commit")}</option><option value="refund">${t("Diag.Refund")}</option></select></label>`,
     ok:{callback:(_e,b)=>({index:Number(b.form.elements.tx.value),decision:b.form.elements.decision.value})}});
   if(!answer||!["commit","refund"].includes(answer.decision)||!pending[answer.index])return false;
   const rec=pending[answer.index],actor=await domainActor(rec.actorUuid);
-  if(!actor||!await confirmDialog("Confirm CE settlement",`<p>${esc(answer.decision)} — ${rec.cost} CE. Verify the native workflow, damage, effects and other resources first.</p>`))return false;
+  if(!actor||!await confirmDialog(t("Diag.ConfirmTitle"),`<p>${t(answer.decision==="refund"?"Diag.Refund":"Diag.Commit")} — ${rec.cost} ${t("CE.Short")}. ${t("Diag.ConfirmHint")}</p>`))return false;
   return reconcileCE(actor,rec.id,answer.decision==="refund");
 }
 function ceDiagnostics(actor){
@@ -978,7 +984,7 @@ const RO_ROWS = [
 function registerActivityHooks() {
   Hooks.on("dnd5e.preUseActivity", (activity, usageConfig) => {
     if([...game.user?.targets??[]].some(tk=>barrierMarkerMeta(tk))){
-      ui.notifications.warn("JJK5e: use the barrier attack command for a selected barrier marker.");
+      ui.notifications.warn(t("Domain.MarkerUseAttack"));
       return false;
     }
     if (activity.item?.actor?.token?.flags?.jjk5e?.cloneOrigin && activity.item.flags?.jjk5e?.technique) {
@@ -2289,7 +2295,7 @@ function panelHTML(actor, tab = "combat") {
     .filter(Boolean).length;
 
   const tabList = gm ? [...PANEL_TABS, ["gm", "fa-solid fa-crown", "Panel.TabGM"]] : PANEL_TABS;
-  const tabs = `<nav class="jjk-tabs">${tabList.map(([id, icon, label], i) => `<button type="button" class="${id === tab ? "active" : ""}"
+  const tabs = `<nav class="jjk-tabs" role="tablist">${tabList.map(([id, icon, label], i) => `<button type="button" role="tab" aria-selected="${id === tab}" tabindex="${id === tab ? 0 : -1}" class="${id === tab ? "active" : ""}"
     data-action="jjkTab" data-tab="${id}" data-tooltip="${t(label)} [${i + 1}]"><i class="${icon}"></i> ${t(label)}${id === "combat" && alerts
     ? ` <span class="jjk-badge">${alerts}</span>` : ""}</button>`).join("")}</nav>`;
 
@@ -2322,7 +2328,7 @@ function panelHTML(actor, tab = "combat") {
       </div>
       <div class="jjk-row">
         ${pbtn("domainHUD", "fa-solid fa-circle-half-stroke", t("Domain.HUD"))}
-        ${pbtn("attackSelectedBarrier","fas fa-crosshairs","Attack selected barrier marker")}
+        ${pbtn("attackSelectedBarrier","fas fa-crosshairs",t("Domain.MarkerAttack"))}
         ${canRecoverBurnout(actor) ? pbtn("burnoutRecovery", "fas fa-brain", `${t("Burnout.Recovery")} (4 CE)`) : ""}
       </div></fieldset>
     ${hr ? "" : `<fieldset><legend>${t("Output.Title")}</legend>
@@ -2370,7 +2376,7 @@ function panelHTML(actor, tab = "combat") {
   const gmTab = gm ? `<p class="jjk-note">${t("Panel.GMHint")}</p>
     <fieldset><legend>${t("Panel.GMValues")}</legend><div class="jjk-grid">
       ${pool ? pbtn("gmCE", "fas fa-bolt", `${t("Panel.GMSetCE")} (${value}/${max})`) : ""}
-      ${pbtn("engineDiagnostics", "fas fa-stethoscope", "JJK Integration Diagnostics")}
+      ${pbtn("engineDiagnostics", "fas fa-stethoscope", t("Diag.Title"))}
       ${pbtn("gmRefinement", "fas fa-circle-half-stroke", `${t("Domain.Refinement")}: ${refinementOf(actor)}`)}
       ${pbtn("soulDamage", "fas fa-ghost", t("Soul.Apply"))}
       ${sd ? pbtn("clearSoul", "fas fa-xmark", t("Soul.Clear")) : ""}
@@ -2419,7 +2425,7 @@ async function showShortcuts() {
 
 const panelAmount = (root) => Math.max(1, Math.floor(Number(root?.querySelector?.("[name=ceAmount]")?.value) || 1));
 const PANEL_ACTIONS = {
-  jjkTab: (actor, target, root, app) => { if (app) app._tab = target.dataset.tab; },
+  jjkTab: (actor, target, root, app) => { if (app) { app._tab = target.dataset.tab; app._focusTab = true; } },
   ceMinus: (actor) => spendCE(actor, 1, t("CE.Spent")),
   cePlus: (actor) => spendCE(actor, -1, t("CE.Regained")),
   ceMinus5: (actor) => spendCE(actor, 5, t("CE.Spent")),
@@ -2521,7 +2527,10 @@ function makePanelClass() {
 
     async _renderHTML() { return panelHTML(this.actor, this._tab ?? "combat"); }
 
-    _replaceHTML(result, content) { content.innerHTML = result; }
+    _replaceHTML(result, content) {
+      content.innerHTML = result; bindTabKeys(content);
+      if (this._focusTab) { this._focusTab = false; content.querySelector(".jjk-tabs button.active")?.focus(); }
+    }
 
     _onRender(context, options) {
       super._onRender?.(context, options);
@@ -4522,6 +4531,23 @@ function openVows(actor) {
   return app.render({ force: true });
 }
 
+/** Arrow keys move between tabs; Enter or Space activates focusable clickable rows. */
+function bindTabKeys(root) {
+  const list = root?.querySelector?.(".jjk-tabs");
+  list?.addEventListener?.("keydown", (ev) => {
+    if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(ev.key)) return;
+    const tabs = [...list.querySelectorAll("button")];
+    const i = tabs.indexOf(document.activeElement);
+    if (i < 0) return;
+    ev.preventDefault();
+    const n = ev.key === "Home" ? 0 : ev.key === "End" ? tabs.length - 1 : (i + (ev.key === "ArrowRight" ? 1 : -1) + tabs.length) % tabs.length;
+    tabs[n].focus(); tabs[n].click();
+  });
+  for (const row of root?.querySelectorAll?.(".jjk-clickable[tabindex]") ?? []) {
+    row.addEventListener("keydown", (ev) => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); row.click(); } });
+  }
+}
+
 function makeCareerClass() {
   const Base = foundry.applications.api.ApplicationV2;
   return class JJKCareer extends Base {
@@ -4529,7 +4555,7 @@ function makeCareerClass() {
       classes: ["jjk5e-ui", "jjk5e-career"], window: { icon: "fas fa-medal", resizable: true },
       position: { width: 540, height: "auto" },
       actions: {
-        careerTab: function (ev, el) { this.tab = el.dataset.tab; this.render(); },
+        careerTab: function (ev, el) { if (this.tab === el.dataset.tab) return; this.tab = el.dataset.tab; this._focusTab = true; this.render(); },
         rec: function () { addRecommendation(this.actor); },
         semi: function () { setSemi(this.actor); },
         promote: function () { promote(this.actor, 1); },
@@ -4547,7 +4573,9 @@ function makeCareerClass() {
       const tab = this.tab ?? "grade";
       const c = getCareer(this.actor);
       const gm = game.user.isGM;
-      const tabs = ["grade", "missions", "rep"].map((k) => `<a data-action="careerTab" data-tab="${k}" class="${tab === k ? "active" : ""}">${t(`Career.Tab.${k}`)}</a>`).join("");
+      const icons = { grade: "fa-medal", missions: "fa-scroll", rep: "fa-scale-balanced" };
+      const active = (c.missions ?? []).filter((m) => m.status === "active").length;
+      const tabs = ["grade", "missions", "rep"].map((k) => `<button type="button" role="tab" data-action="careerTab" data-tab="${k}" aria-selected="${tab === k}" tabindex="${tab === k ? 0 : -1}" class="${tab === k ? "active" : ""}"><i class="fas ${icons[k]}"></i> ${t(`Career.Tab.${k}`)}${k === "missions" && active ? ` <span class="jjk-count">${active}</span>` : ""}</button>`).join("");
       let body = "";
       if (tab === "grade") {
         const st = promotionStatus(this.actor);
@@ -4565,22 +4593,27 @@ function makeCareerClass() {
       } else if (tab === "missions") {
         body = (gm ? `<div class="btns"><button type="button" data-action="mission"><i class="fas fa-dice"></i> ${t("Mission.ForActor")}</button>
           <button type="button" data-action="missionFull"><i class="fas fa-users"></i> ${t("Mission.Generate")}</button></div>` : "")
-          + `<ul class="jjk-missions">${c.missions.map((m) => `<li data-id="${m.id}" class="${m.status}"><strong>${esc(m.title)}</strong>
+          + `<ul class="jjk-missions">${c.missions.map((m) => `<li data-id="${m.id}" class="${m.status}${m.journal ? " jjk-clickable" : ""}" ${m.journal ? `data-action="open" data-uuid="${m.journal}" tabindex="0" role="button" title="${t("Mission.Open")}"` : ""}><strong>${esc(m.title)}</strong>
             <span class="jjk-chip">${t(`Mission.Status.${m.status}`)}</span>${m.trial ? ` <span class="jjk-chip on">${t("Mission.Trial")}</span>` : ""}
             <br><span class="hint">${t("Mission.Reward")}: ${fmtMoney(m.reward)}</span>
-            ${m.journal ? ` <a data-action="open" data-uuid="${m.journal}"><i class="fas fa-book-open"></i></a>` : ""}
+            ${m.journal ? ` <i class="fas fa-book-open jjk-open-hint" aria-hidden="true"></i>` : ""}
             ${gm && m.status === "active" ? `<div class="btns"><button type="button" data-action="pass">${t("Mission.Pass")}</button>
               <button type="button" data-action="fail">${t("Mission.Fail")}</button></div>` : ""}</li>`).join("") || `<li class="hint">${t("Mission.None")}</li>`}</ul>`;
       } else {
-        body = `<table class="jjk-rep">${FACTIONS.map((f) => {
-          const v = Number(c.rep[f]) || 0;
-          return `<tr><td>${t(`Faction.${f}`)}</td><td class="num">${sgn(v)}</td><td>${t(`Rep.${REP_LABELS[v + 5]}`)}</td>
-            <td class="btns">${gm ? `<button type="button" data-action="rep" data-f="${f}" data-d="-1">−</button><button type="button" data-action="rep" data-f="${f}" data-d="1">+</button>` : ""}</td></tr>`;
-        }).join("")}</table>`;
+        body = `<table class="jjk-rep"><thead><tr><th>${t("Career.Faction")}</th><th class="num">${t("Career.Score")}</th><th>${t("Career.Standing")}</th>${gm ? "<th></th>" : ""}</tr></thead><tbody>${FACTIONS.map((f) => {
+          const v = clamp(Number(c.rep[f]) || 0, -5, 5);
+          const tone = v >= 2 ? "pos" : v <= -2 ? "neg" : "mid";
+          const meter = `<span class="jjk-rep-meter" aria-hidden="true"><span class="${v < 0 ? "neg" : "pos"}" style="${v < 0 ? `right:50%;width:${Math.abs(v) * 10}%` : `left:50%;width:${v * 10}%`}"></span></span>`;
+          return `<tr class="${tone}" data-f="${f}"><td class="name">${t(`Faction.${f}`)}</td><td class="num">${sgn(v)}</td><td><span class="jjk-rep-label">${t(`Rep.${REP_LABELS[v + 5]}`)}</span>${meter}</td>
+            ${gm ? `<td class="ctl"><button type="button" data-action="rep" data-f="${f}" data-d="-1" ${v <= -5 ? "disabled" : ""} aria-label="−1 ${t(`Faction.${f}`)}">−</button><button type="button" data-action="rep" data-f="${f}" data-d="1" ${v >= 5 ? "disabled" : ""} aria-label="+1 ${t(`Faction.${f}`)}">+</button></td>` : ""}</tr>`;
+        }).join("")}</tbody></table>`;
       }
-      return `<section class="jjk-panel"><nav class="jjk-tabs">${tabs}</nav>${body}</section>`;
+      return `<section class="jjk-panel"><nav class="jjk-tabs" role="tablist" aria-label="${t("Career.Title")}">${tabs}</nav><div class="jjk-tab-body" role="tabpanel">${body}</div></section>`;
     }
-    _replaceHTML(result, content) { content.innerHTML = result; }
+    _replaceHTML(result, content) {
+      content.innerHTML = result; bindTabKeys(content);
+      if (this._focusTab) { this._focusTab = false; content.querySelector(".jjk-tabs button.active")?.focus(); }
+    }
   };
 }
 let JJKCareerClass = null;
@@ -5785,7 +5818,7 @@ function makeDomainClass() {
         <p>${t("Domain.Stats", { ac: s.ac, ref: s.refinement, r: s.radius })}</p>${clash}
         <p class="hint">${t("Domain.Mode")}: ${mode}; ${s.lethal === false ? t("Domain.NonLethalMode") : t("Domain.LethalMode")}</p>
         ${domainHudDetails(this.actor,s)}
-        ${isActiveGM()&&!s.noBarrier?`<button type="button" data-action="marker">Create selectable barrier marker (experimental)</button>`:""}
+        ${isActiveGM()&&!s.noBarrier?`<button type="button" data-action="marker">${t("Domain.MarkerCreate")}</button>`:""}
         <div class="btns">${s.noBarrier ? "" : `<button type="button" data-action="attack"><i class="fas fa-crosshairs"></i> ${t("Domain.AttackBarrier")}</button>${game.user.isGM ? `<button type="button" data-action="hit"><i class="fas fa-hammer"></i> ${t("Domain.HitBarrier")}</button>` : ""}`}
           <button type="button" data-action="weak"><i class="fas fa-crosshairs"></i> ${t("Domain.WeakSpot")}</button></div>
         ${this.actor.isOwner ? `<div class="btns"><button type="button" data-action="lethal" data-m="${s.lethal === false ? "lethal" : "nonlethal"}">${s.lethal === false ? t("Domain.MakeLethal") : t("Domain.MakeNonLethal")}</button>${s.refinement >= 100 ? `<button type="button" data-action="mode" data-m="flip">${t("Domain.Flipped")}</button>
@@ -8324,4 +8357,46 @@ Hooks.once("ready", () => {
       } finally { b.disabled = false; }
     });
   });
+});
+
+/* ---- Sealed Ink for module content tables (journals, item descriptions, roll tables) ---------- */
+
+/** True when a document comes from this module's compendiums or carries its data. */
+function isModuleDoc(doc) {
+  for (let d = doc, i = 0; d && i < 4; d = d.parent, i++) {
+    const src = String(d._stats?.compendiumSource ?? d.flags?.core?.sourceId ?? "");
+    if (String(d.pack ?? "").startsWith(`${MODULE_ID}.`) || src.startsWith(`Compendium.${MODULE_ID}.`) || d.flags?.[MODULE_ID]) return true;
+  }
+  return false;
+}
+/** Mark the tables of a module document so styles/jjk5e.css draws them in Sealed Ink. */
+function inkTables(app, element) {
+  const doc = app?.document;
+  const root = element instanceof HTMLElement ? element : (element?.[0] ?? app?.element);
+  if (!doc || !root?.querySelectorAll || !isModuleDoc(doc)) return;
+  if (doc.documentName === "RollTable") root.classList.add("jjk5e-rolltable");
+  markInkTables(root);
+  // Journal pages can render after the sheet's hook: watch for tables that arrive later.
+  if (!app._jjkInkObserver && typeof MutationObserver === "function") {
+    let queued = false;
+    app._jjkInkObserver = new MutationObserver(() => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(() => { queued = false; markInkTables(root); });
+    });
+    app._jjkInkObserver.observe(root, { childList: true, subtree: true });
+  }
+}
+function markInkTables(root) {
+  for (const table of root.querySelectorAll("table")) {
+    if (table.closest(".jjk5e-ui") || table.classList.contains("jjk-ink-table")) continue;
+    table.classList.add("jjk-ink-table");
+    // A first column of dice ranges (1, 2–3, 01–05…) marks a lookup table: rows get the hover cue.
+    const cells = [...table.querySelectorAll("tbody tr > td:first-child")].map((td) => td.textContent.trim());
+    if (cells.length && cells.every((c) => /^\d{1,3}(?:\s*[–-]\s*\d{1,3})?$/.test(c))) table.classList.add("jjk-ink-roll");
+  }
+}
+Hooks.once("ready", () => {
+  if (game.system?.id !== "dnd5e") return;
+  Hooks.on("renderApplicationV2", (app, element) => { try { inkTables(app, element); } catch (err) { reportError("ink tables", err); } });
 });

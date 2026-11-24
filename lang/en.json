@@ -167,7 +167,10 @@
         "finished": "cancelled",
         "expired": "expired"
       },
-      "ProfileDC": "Save DC"
+      "ProfileDC": "Save DC",
+      "MarkerUseAttack": "JJK 5e: to hit a selected barrier marker, use the barrier attack button.",
+      "MarkerAttack": "Attack the selected barrier",
+      "MarkerCreate": "Create selectable barrier marker (experimental)"
     },
     "Burnout": {
       "Name": "Technique Burnout",
@@ -679,7 +682,10 @@
       "Demoted": "{name} demoted to {grade}",
       "LogMission": "Mission assigned: {title}",
       "LogDone": "Mission completed: {title}",
-      "LogFailed": "Mission failed: {title}"
+      "LogFailed": "Mission failed: {title}",
+      "Faction": "Faction",
+      "Score": "Score",
+      "Standing": "Standing"
     },
     "Mission": {
       "Generate": "Generate mission",
@@ -705,7 +711,8 @@
         "done": "Completed",
         "failed": "Failed"
       },
-      "MakeCurse": "Create the curse NPC"
+      "MakeCurse": "Create the curse NPC",
+      "Open": "Open the mission journal"
     },
     "Faction": {
       "higherUps": "Higher-ups",
@@ -1186,6 +1193,32 @@
       "Decline": "Not now",
       "NoDomain": "This character has no Domain Expansion.",
       "Expired": "This domain reaction is no longer available."
+    },
+    "Diag": {
+      "Title": "JJK integration diagnostics",
+      "Active": "active",
+      "Inactive": "inactive",
+      "Item": "Check",
+      "Value": "Value",
+      "Transactional": "Transactional CE",
+      "OnExperimental": "On (experimental)",
+      "Off": "Off",
+      "Adapters": "Activity adapters",
+      "Expiry": "Effect expiry",
+      "Unwrapped": "Unwrapped activity types",
+      "Pending": "Pending reservations",
+      "NotCertification": "Runtime detection is not a compatibility certification.",
+      "Transaction": "Reservation",
+      "Decision": "Decision",
+      "ReviewOnly": "Review only",
+      "Commit": "Confirm consumed",
+      "Refund": "Refund (after checking there were no effects)",
+      "ConfirmTitle": "Settle CE reservation",
+      "ConfirmHint": "Check the native workflow, damage, effects and other resources first.",
+      "State": {
+        "reserved": "reserved",
+        "review": "in review"
+      }
     }
   }
 }
