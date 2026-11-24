@@ -432,13 +432,19 @@ const CE_USAGE_CONTEXT = new WeakMap();
 const CE_RECOVERY_RESULTS = new WeakSet();
 const CE_MIDI_ATTACKS = new WeakSet();
 const CE_MIDI_WORKFLOWS = new WeakMap();
+const CE_MIDI_USAGE_OWNERS = new WeakMap();
 const CE_MIDI_DENIED = new WeakSet();
 const MIDI_GUARD_STAGES = ["preAttackRoll","preDamageRoll","preFormulaRoll","preWaitForSaves",
-  "preTeleport","preAllRollsComplete","preApplyDynamicEffects"];
+  "preWaitForUtilityRoll","preTeleport","preAllRollsComplete","preApplyDynamicEffects"];
 function midiActivity(workflow){return workflow?.activity??null;}
 function captureMidiUsage({workflow,usage}={}){
   const activity=midiActivity(workflow);
   if(!workflow || !activity || !usage || typeof usage!=="object") return;
+  const bound=CE_MIDI_USAGE_OWNERS.get(usage);
+  if(bound && bound!==workflow) return;
+  const previous=CE_MIDI_WORKFLOWS.get(workflow);
+  if(previous && previous.usage!==usage && ceContext(activity,previous.usage)) return;
+  CE_MIDI_USAGE_OWNERS.set(usage,workflow);
   CE_MIDI_WORKFLOWS.set(workflow,{usage,key:ceUsageKey(activity)});
 }
 function midiCEContext(workflow){
@@ -470,6 +476,15 @@ function registerMidiCEBridge(){
 function cePostAllowed(activity,usageConfig){
   return !ceAuthorityEnabled() || !setting("autoSpendCE") || !managedCE(activity) ||
     ceContext(activity,usageConfig)?.state==="committed";
+}
+function cePostOnce(activity,usageConfig,phase){
+  if(!cePostAllowed(activity,usageConfig)) return false;
+  if(!ceAuthorityEnabled() || !setting("autoSpendCE") || !managedCE(activity)) return true;
+  const ctx=ceContext(activity,usageConfig);
+  ctx.phases??=new Set();
+  if(ctx.phases.has(phase)) return false;
+  ctx.phases.add(phase);
+  return true;
 }
 const CE_ADAPTER_TARGETS = new Set();
 const QUICK_RECOVERY_ID = "Jt55eu41OQX7G6Sh";
@@ -3707,7 +3722,7 @@ Hooks.once("ready", () => {
   Hooks.on("renderAbilityScoreImprovementFlow", (app, element) => { injectASIFeats(app, element); });
   Hooks.on("dnd5e.rollAttackV2", (rolls, data) => animateAttack(rolls, data?.subject));
   Hooks.on("dnd5e.postUseActivity", (activity,usageConfig) => {
-    if(!cePostAllowed(activity,usageConfig)) return false;
+    if(!cePostOnce(activity,usageConfig,"animationSummon")) return false;
     animateActivity(activity); summonFallback(activity);
   });
   Hooks.on("renderCharacterActorSheet", (app, element) => addLevelUpButton(app, element));
@@ -4743,7 +4758,7 @@ function insideDomain(state, token) {
  * a finite barrier, so it must not be treated as unconditional immunity. */
 const DOMAIN_WARD_KINDS = new Set(["fallingBlossomDefense", "hollowWickerProtection", "domainAmplification"]);
 function liveWard(effect) {
-  return !!effect && !effect.disabled && !effect.isSuppressed && effect.duration?.expired !== true &&
+  return !!effect && !effect.disabled && effect.isSuppressed!==true && effect.duration?.expired !== true &&
     (effect.duration?.remaining == null || effect.duration.remaining > 0);
 }
 function tokenLevelId(token) {
@@ -4801,7 +4816,7 @@ function excludeDomainWardedTargets(workflow) {
   if (!workflow?.targets) return [];
   // Do not strip allied targets from explicitly healing, summoning, teleport or utility activities.
   const type=workflow.activity?.type;
-  if(type && ["heal","summon","teleport","utility","enchant","cast","check","transform"].includes(type)) return [];
+  if(type && !["attack","save","damage"].includes(type)) return [];
   const protectedTargets = [...workflow.targets].filter((tk) => domainGuaranteedTarget(workflow, tk) && domainWard(tk));
   if (!protectedTargets.length) return [];
   const ids = new Set(protectedTargets.map((tk) => (tk?.document ?? tk)?.uuid).filter(Boolean));
@@ -7502,7 +7517,7 @@ Hooks.once("ready", () => {
   });
   Hooks.on("dnd5e.advancementManagerComplete", (manager) => { afterAdvancement(manager).catch((err) => reportError("advancement", err)); });
   Hooks.on("dnd5e.postUseActivity", (activity,usageConfig) => {
-    if(!cePostAllowed(activity,usageConfig)) return false;
+    if(!cePostOnce(activity,usageConfig,"optionalAction")) return false;
     const actor = activity?.actor ?? activity?.item?.actor;
 
     onOptionalAction(activity).catch((err) => reportError("optional action", err));
