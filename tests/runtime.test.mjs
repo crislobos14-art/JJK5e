@@ -491,3 +491,47 @@ test("Player view: no GM overrides in the panel, private CE messages, limited vi
   await J.spendCE(actor, 1);
   assert.deepEqual([...env.chat.at(-1).whisper], ["gm"]);
 });
+
+test("Domain geometry: sure-hit requires a known position and matching scene", async () => {
+  const { env, J } = await setup();
+  const scene = { id: "S", grid: { size: 100, distance: 5 } };
+  env.game.scenes.set(scene.id, scene);
+  const state = { sceneId: "S", x: 0, y: 0, radius: 10 };
+  const target = { document: { parent: scene, x: 50, y: 50, width: 1, height: 1 } };
+  assert.equal(J.insideDomain(state, target), true);
+  assert.equal(J.insideDomain(state, { document: { ...target.document, x: 500 } }), false);
+  assert.equal(J.insideDomain(state, { document: { ...target.document, parent: { ...scene, id: "Other" } } }), false);
+  assert.equal(J.insideDomain({ ...state, x: null }, target), false);
+  assert.equal(J.insideDomain(state, { actor: {} }), false);
+});
+
+test("Domain barrier: balanced mode charges CE once and requires successful payment", async () => {
+  const { env, actor, J } = await setup();
+  await actor.setFlag("jjk5e", "refinement", 100);
+  await J.domainOpened(actor); await env.settle();
+  const pool = actor.items.find((i) => i.flags?.jjk5e?.cePool);
+  await J.spendCE(actor, 18);
+  assert.equal(await J.setBarrierMode(actor, "balanced"), false);
+  assert.equal(!!J.getDomain(actor).balanced, false);
+  await J.spendCE(actor, -10);
+  assert.equal(await J.setBarrierMode(actor, "balanced"), true);
+  const spent = pool.system.uses.spent;
+  assert.equal(!!J.getDomain(actor).balanced, true);
+  assert.equal(await J.setBarrierMode(actor, "balanced"), true);
+  assert.equal(pool.system.uses.spent, spent, "reselecting the same mode does not charge again");
+  assert.equal(await J.setBarrierMode(actor, "normal"), true);
+  assert.equal(!!J.getDomain(actor).balanced, false);
+});
+
+test("Domain reaction: stale expansion instance is rejected", async () => {
+  const { env, actor, J } = await setup();
+  const opener = env.addActor({ name: "Opener", items: [POOL] });
+  const scene = { id: "S", grid: { size: 100, distance: 5 }, tokens: [] };
+  env.game.scenes.set(scene.id, scene);
+  env.context.canvas = { scene };
+  await opener.setFlag("jjk5e", "domainState", {
+    open: true, openingId: "new-expansion", sceneId: "S", lethal: true
+  });
+  // Missing or expired opening identity must not resolve to a different expansion.
+  assert.equal(J.rivalDomainFor(actor, opener.uuid, "old-expansion"), null);
+});
