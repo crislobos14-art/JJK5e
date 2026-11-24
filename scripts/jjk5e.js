@@ -7319,12 +7319,13 @@ const isBurnoutFx = (e) => !!(e?.flags?.jjk5e?.kind === "burnout" || e?.flags?.j
 
 async function fightForLife(actor) {
   actor = requireActor(actor);
-  if (!actor?.isOwner) return;
+  if (!actor?.isOwner || !optOn("fightForLife")) return false;
   if ((Number(actor.system.attributes?.hp?.value) || 0) > 0) return ui.notifications.warn(t("Opt.Fight.NotDying"));
   const used = Number(actor.getFlag(MODULE_ID, "fightExhaustion")) || 0;
   if (used >= 5) return ui.notifications.warn(t("Opt.Fight.Max"));
   const cur = Number(actor.system.attributes?.exhaustion) || 0;
-  await actor.update({ "system.attributes.exhaustion": Math.min(6, cur + 1) });
+  if(cur>=6)return false;
+  await actor.update({ "system.attributes.exhaustion": cur + 1 });
   await actor.setFlag(MODULE_ID, "fightExhaustion", used + 1);
   await chat(actor, `<p><strong>${t("Opt.fightForLife.Name")}</strong>: ${t("Opt.Fight.Done", { name: esc(actor.name), n: used + 1 })}</p>`);
   if (typeof actor.rollDeathSave === "function") return actor.rollDeathSave({ advantage: true });
@@ -7619,7 +7620,9 @@ async function soulCheck(actor) {
 
 const OBJECT_SOUL = ["Object Soul Perception", "Soul Shatter", "Greater Object Soul Perception"];
 async function setObjectSoul(actor, level) {
+  if(!game.user.isGM||!actor?.isOwner)return false;
   level = clamp(Number(level) || 0, 0, 3);
+  if(level>0&&!optOn("objectSoul"))return false;
   await actor.setFlag(MODULE_ID, "objectSoul", level);
   await setKindEffect(actor, "objectSoul", level ? {
     name: `${t("Opt.objectSoul.Name")} ${level}`, img: `${ICONS}/soul.svg`,
@@ -7703,7 +7706,7 @@ async function techniquelessLevelUp(actor) {
 
 async function yearlyProgression(actor) {
   actor = requireActor(actor);
-  if (!actor || !game.user.isGM) return;
+  if (!actor || !game.user.isGM || !optOn("yearlyProgression")) return false;
   const n = Number(actor.getFlag(MODULE_ID, "yearly")) || 0;
   if (n >= 4) return ui.notifications.warn(t("Opt.Yearly.Max"));
   const choice = await foundry.applications.api.DialogV2.wait({ classes: ["jjk5e-ui", "jjk5e-dialog"], window: { title: t("Opt.yearlyProgression.Name") }, rejectClose: false,
@@ -7906,6 +7909,7 @@ async function toughTrial(actor) {
     if (Number(hp.value) > Number(hp.max)) await target.update({ "system.attributes.hp.value": Number(hp.max) || 0 });
     return chat(target, `<p><strong>${t("Opt.toughTrials.Name")}</strong>: ${t("Opt.Tough.Removed", { name: esc(target.name) })}</p>`);
   }
+  if(!optOn("toughTrials"))return false;
   const cr = Math.max(0, Number(target.system.details?.cr) || 0);
   const abil = ["str", "dex", "con"].sort((a, b) => (Number(target.system.abilities?.[b]?.value) || 0) - (Number(target.system.abilities?.[a]?.value) || 0));
   const dmg = String(2 * cr);
