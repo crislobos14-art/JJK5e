@@ -508,7 +508,7 @@ function ceRecord(ledger, record) {
   return [...others.filter(x=>["reserved","review"].includes(x.state)),
     ...others.filter(x=>!["reserved","review"].includes(x.state)).slice(-199),record];
 }
-function ceUsageKey(activity) { return `${activity?.item?.id}:${activity?.id}`; }
+function ceUsageKey(activity) { return `${(activity?.actor??activity?.item?.actor)?.uuid??""}:${activity?.item?.id}:${activity?.id}`; }
 function ceContext(activity, usageConfig) {
   if (!usageConfig || typeof usageConfig !== "object") return null;
   const ctx=CE_USAGE_CONTEXT.get(usageConfig);
@@ -529,7 +529,7 @@ async function ceAuthorityRequest(operation,payload) {
 }
 async function handleCEAuthority(msg,{user}={}) {
   if (!ceAuthorityEnabled() || !isActiveGM() || !user?.active || !msg?.payload ||
-      !["reserve","commit","review","settle","adjust"].includes(msg.operation)) return false;
+      !["reserve","start","commit","review","settle","adjust"].includes(msg.operation)) return false;
   const {operation,payload:d}=msg;
   const actor=await domainActor(d.actorUuid);
   if (!canDirectDomain(user,actor)) return false;
@@ -565,19 +565,26 @@ async function handleCEAuthority(msg,{user}={}) {
       const tx=ceTransaction(poolValue(pool),poolMax(pool),cost);
       if(!tx || cost<0) return false;
       const rec={id:d.id,userId:user.id,actorUuid:actor.uuid,itemId:d.itemId,activityId:d.activityId,
-        scaling:d.scaling,cost,state:"reserved",created:Date.now(),
+        scaling:d.scaling,cost,state:"reserved",created:Date.now(),protocol:2,nativeStarted:false,expires:Date.now()+120000,
         sixEyes:cost>0&&!!actor.getFlag(MODULE_ID,"sixEyesNext"),minusNext:cost>0&&!!(item.flags?.jjk5e?.technique&&actor.getFlag(MODULE_ID,"costMinusNext"))};
       const whole=Math.floor(tx.spent+1e-6);
       // Persist debit and reservation together in the same Item update.
       await pool.update({"system.uses.spent":whole,"flags.jjk5e.fractionalSpent":Math.round((tx.spent-whole)*1000)/1000,
         "flags.jjk5e.ceLedger":ceRecord(ledger,rec)},{jjk5eCE:true});
-      if(rec.sixEyes) await actor.unsetFlag(MODULE_ID,"sixEyesNext");
-      if(rec.minusNext) await actor.unsetFlag(MODULE_ID,"costMinusNext");
       return {id:rec.id,cost};
     }
     if(!old || (!user.isGM&&old.userId!==user.id) || old.actorUuid!==actor.uuid) return false;
+    if(operation==="start"){
+      if(old.state!=="reserved"||old.protocol!==2||old.nativeStarted||Date.now()>=old.expires) return false;
+      // Persist start before authorizing any native effects. Unknown start responses never authorize a retry.
+      await pool.update({"flags.jjk5e.ceLedger":ceRecord(ledger,{...old,nativeStarted:true,startedAt:Date.now()})},{jjk5eCE:true});
+      if(old.sixEyes) await actor.unsetFlag(MODULE_ID,"sixEyesNext");
+      if(old.minusNext) await actor.unsetFlag(MODULE_ID,"costMinusNext");
+      return true;
+    }
     if(operation==="commit"||operation==="review"){
-      if(old.state!=="reserved") return false;
+      if(old.state==="committed"&&operation==="commit") return true;
+      if(old.state!=="reserved"||(operation==="commit"&&old.protocol===2&&!old.nativeStarted)) return false;
       await pool.update({"flags.jjk5e.ceLedger":ceRecord(ledger,{...old,state:operation==="commit"?"committed":"review",ended:Date.now()})},{jjk5eCE:true});
       return true;
     }
@@ -603,6 +610,7 @@ async function consumeWithCE(wrapped,activity,usageConfig,messageConfig) {
   const reserve=await ceAuthorityRequest("reserve",{actorUuid:actor.uuid,itemId:activity.item.id,activityId:activity.id,
     scaling:Number(usageConfig.scaling??0),id});
   if(!reserve?.id) { ui.notifications.warn(t("Notify.NotEnoughCE",{value:poolValue(findPool(actor)),cost:totalActivityCECost(actor,activity,usageConfig)})); return false; }
+  if(!await ceAuthorityRequest("start",{actorUuid:actor.uuid,id})) return false;
   const ctx={key:ceUsageKey(activity),id,actorUuid:actor.uuid,state:"reservingNative",cost:reserve.cost};
   CE_USAGE_CONTEXT.set(usageConfig,ctx);
   try{
@@ -636,6 +644,50 @@ function installCEAdapters() {
     }catch(err){reportError("CE adapter "+key,err);}
   }
   return CE_ADAPTER_TARGETS.size>0;
+}
+const CE_RECOVERY_AGE=120000;
+async function recoverCEActor(actor,now=Date.now()){
+  if(!isActiveGM()||!ceAuthorityEnabled()) return [];
+  return queueCE(actor,async()=>{
+    if(!isActiveGM()) return [];
+    const pool=findPool(actor); if(!pool) return [];
+    let ledger=ceLedger(pool), balance=poolValue(pool), changed=[];
+    for(const rec of [...ledger]){
+      if(rec.state!=="reserved"||!Number.isFinite(rec.created)||now-rec.created<CE_RECOVERY_AGE) continue;
+      // Only protocol 2 explicitly unstarted reservations are provably safe to refund.
+      const safe=rec.protocol===2&&rec.nativeStarted===false&&Number.isFinite(rec.expires)&&now>=rec.expires;
+      const tx=safe?ceTransaction(balance,poolMax(pool),-rec.cost):null;
+      if(tx) balance=tx.remaining;
+      const next={...rec,state:tx?"refunded":"review",ended:now,recovery:tx?"unstarted":"unknown-native-result"};
+      ledger=ceRecord(ledger,next);changed.push(next);
+    }
+    if(changed.length){
+      const spent=Math.round((poolMax(pool)-balance)*1000)/1000,whole=Math.floor(spent+1e-6);
+      await pool.update({"system.uses.spent":whole,"flags.jjk5e.fractionalSpent":Math.round((spent-whole)*1000)/1000,
+        "flags.jjk5e.ceLedger":ledger},{jjk5eCE:true});
+    }
+    return changed;
+  });
+}
+function engineActors(){
+  return [...new Map([...(game.actors??[]),...[...(game.scenes??[])].flatMap(sc=>[...(sc.tokens??[])].map(tk=>tk.actor))]
+    .filter(a=>a?.uuid).map(a=>[a.uuid,a])).values()];
+}
+async function recoverCEWorld(){
+  if(!isActiveGM()||!ceAuthorityEnabled()) return [];
+  const results=[];
+  for(const actor of engineActors()) try{results.push(...await recoverCEActor(actor));}
+    catch(err){reportError("CE recovery",err);}
+  return results;
+}
+function integrationReport(){
+  if(!game.user.isGM) return null;
+  const modules=["midi-qol","dae","lib-wrapper","times-up","sequencer","JB2A_DnD5e","autoanimations","tokenmagic","fxmaster"];
+  return {foundry:game.version??game.release?.version??null,dnd5e:game.system?.version??null,
+    dependencies:modules.map(id=>({id,active:!!game.modules.get(id)?.active,version:game.modules.get(id)?.version??null})),
+    ...ceDiagnostics(null),pending:engineActors().flatMap(a=>ceLedger(findPool(a)).filter(x=>["reserved","review"].includes(x.state))
+      .map(x=>({actorUuid:a.uuid,id:x.id,state:x.state,cost:x.cost,created:x.created,nativeStarted:x.nativeStarted??null}))),
+    limitations:["Runtime detection is not a compatibility certification","Unverified resumed Midi workflows remain blocked"]};
 }
 function ceDiagnostics(actor){
   const types=Object.entries(CONFIG.DND5E?.activityTypes??{}).filter(([,cfg])=>typeof cfg.documentClass?.prototype?.consume==="function").map(([key])=>key);
@@ -3738,7 +3790,11 @@ Hooks.once("ready", () => {
   });
   installCEAdapters();
   registerMidiHooks();
-  Object.assign(game.modules.get(MODULE_ID).api??{}, {ceDiagnostics,reconcileCE});
+  Object.assign(game.modules.get(MODULE_ID).api??{}, {ceDiagnostics,reconcileCE,integrationReport,recoverCEWorld});
+  Hooks.on("userConnected",()=>recoverCEWorld().catch(err=>reportError("CE recovery",err)));
+  Hooks.on("updateWorldTime",()=>recoverCEWorld().catch(err=>reportError("CE recovery",err)));
+  setInterval(()=>recoverCEWorld().catch(err=>reportError("CE recovery",err)),30000);
+  recoverCEWorld().catch(err=>reportError("CE recovery",err));
   if (game.user.isGM && setting("enableSummoning") && game.settings.settings?.has?.("dnd5e.allowSummoning")
     && !game.settings.get("dnd5e", "allowSummoning")) game.settings.set("dnd5e", "allowSummoning", true);
   Hooks.on("deleteActiveEffect", (effect) => {
