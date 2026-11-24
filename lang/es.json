@@ -7,7 +7,8 @@
       "Charisma": "Carisma",
       "Cancel": "Cancelar",
       "Days": "días",
-      "Edit": "Editar"
+      "Edit": "Editar",
+      "Reminder": "Recordatorio"
     },
     "Import": {
       "Start": "JJK 5e: importando {n} compendios… puede tardar un minuto.",
@@ -33,7 +34,9 @@
       "AbilityTitle": "Característica de Energía Maldita",
       "AbilityPrompt": "Característica de Energía Maldita de <strong>{name}</strong>. Define la reserva de EM, la CD de EM (8 + competencia + mod) y los ataques de EM (mediante la característica de conjuro de la hoja).",
       "ShortRestRestore": "Sorcerous Restoration (+{n} EM)",
-      "Short": "EM"
+      "Short": "EM",
+      "NegativeEmotionShort": "Emoción negativa",
+      "ShortRestShort": "Descanso corto"
     },
     "Technique": {
       "Title": "Elegir Técnica Innata",
@@ -103,7 +106,11 @@
       "BarrierlessStats": "Sin barrera · radio {radius} ft · sin límite de tiempo",
       "BarrierlessSave": "Dominio sin barrera: salvación de CON CD {dc}",
       "IncompleteDescription": "Dominio incompleto: 100 ft, 1 minuto, refinamiento 0, sin barrera ni sure-hit. Ventaja en ataques de técnica; las criaturas dentro tienen desventaja en salvaciones contra tu técnica innata. Efectos a la mitad.",
-      "IncompleteStats": "Dominio incompleto · {radius} ft · sin barrera ni sure-hit"
+      "IncompleteStats": "Dominio incompleto · {radius} ft · sin barrera ni sure-hit",
+      "LethalMode": "Letal",
+      "NonLethalMode": "No letal (sin sure-hit)",
+      "MakeLethal": "Hacer letal",
+      "MakeNonLethal": "Hacer no letal"
     },
     "Burnout": {
       "Name": "Technique Burnout",
@@ -138,7 +145,8 @@
       "Apply": "Aplicar daño al alma",
       "Amount": "Reducción de PG máximos",
       "Clear": "Quitar daño al alma",
-      "Strike": "Golpe al alma"
+      "Strike": "Golpe al alma",
+      "Awareness": "Soul Awareness"
     },
     "Limb": {
       "Title": "Daño de extremidades",
@@ -186,7 +194,10 @@
       "Placeholder": "Nombre de criatura o shikigami",
       "Dismiss": "Retirar todas mis invocaciones de la escena",
       "NotFound": "JJK 5e: no hay ningún actor llamado \"{name}\" en el mundo ni en los compendios.",
-      "Hint": "Busca en tus actores (carpeta \"JJK Shikigami\") y luego en los compendios (SRD). Los tokens aparecen junto al tuyo; el GM debe estar conectado."
+      "Hint": "Busca en tus actores (carpeta \"JJK Shikigami\") y luego en los compendios (SRD). Los tokens aparecen junto al tuyo; el GM debe estar conectado.",
+      "Count": "Cantidad",
+      "Do": "Invocar",
+      "NeedName": "Escribe el nombre del shikigami o criatura a invocar."
     },
     "Panel": {
       "Open": "Abrir panel JJK",
@@ -199,7 +210,27 @@
       "Spend": "Gastar…",
       "Regain": "Recuperar…",
       "Status": "Estado",
-      "NoPool": "Aún no hay reserva de Energía Maldita: añade una clase JJK."
+      "NoPool": "Aún no hay reserva de Energía Maldita: añade una clase JJK.",
+      "TabCombat": "Combate",
+      "TabBody": "Cuerpo",
+      "TabSummon": "Invocaciones",
+      "TabTools": "Herramientas",
+      "Character": "Personaje",
+      "Shortcuts": "Atajos",
+      "GlobalKeys": "Atajos globales",
+      "PanelKeys": "Dentro del panel JJK",
+      "KeysEditable": "Cámbialos en Ajustes del juego → Configurar controles → JJK 5e.",
+      "Key": {
+        "ceMinus": "Gastar 1 CE",
+        "cePlus": "Recuperar 1 CE",
+        "maxOutput": "Maximum Output",
+        "shortRest": "Recuperar CE en descanso corto",
+        "negEmotion": "Emoción negativa",
+        "limbRoll": "Tirar daño de extremidad",
+        "help": "Esta ayuda",
+        "tabs": "Cambiar de pestaña",
+        "five": "Gastar / recuperar 5 CE"
+      }
     },
     "Notify": {
       "NoActor": "JJK 5e: selecciona un token o asigna un personaje primero.",
@@ -219,7 +250,9 @@
       "NeedDnd5e": "JJK 5e V.6 necesita el sistema D&D 5e.",
       "NoInspiration": "JJK 5e: {name} no tiene inspiración para usar este mindset.",
       "GMOnly": "Solo el GM puede hacer eso.",
-      "GMDeclined": "El GM rechazó o no respondió la petición."
+      "GMDeclined": "El GM rechazó o no respondió la petición.",
+      "ActionFailed": "JJK 5e — falló {action}: {error}",
+      "NoScene": "Primero abre una escena."
     },
     "Settings": {
       "autoSpendCE": {
@@ -623,7 +656,14 @@
       "hotbar": "Rellenar barra JJK",
       "mission": "Generar misión (GM)",
       "curse": "Generar maldición (GM)",
-      "HudHint": "JJK: clic = panel · clic derecho = −1 EM · Mayús + clic derecho = +1 EM"
+      "HudHint": "JJK: clic = panel · clic derecho = −1 EM · Mayús + clic derecho = +1 EM",
+      "shortRest": "Recuperar CE en descanso corto",
+      "maxOutput": "Maximum Output",
+      "negEmotion": "Emoción negativa (+competencia CE)",
+      "limbRoll": "Tirar daño de extremidad",
+      "builder": "Creador de técnicas",
+      "update": "Actualizar automatización JJK",
+      "help": "Ayuda de atajos JJK"
     },
     "Breakthrough": {
       "Name": "Avances (Breakthroughs)",

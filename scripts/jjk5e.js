@@ -90,6 +90,13 @@ function folderDepth(folder, byId) {
   return depth;
 }
 
+/** Show an error to the user in plain words and keep the details in the console. */
+function reportError(where, err) {
+  console.error(`${MODULE_ID} | ${where}`, err);
+  const msg = String(err?.message ?? err ?? "").split("\n")[0].slice(0, 200);
+  ui.notifications?.error?.(t("Notify.ActionFailed", { action: where, error: msg }));
+}
+
 function pickActor(actor) {
   return actor ?? canvas?.tokens?.controlled?.[0]?.actor ?? game.user.character ?? null;
 }
@@ -1596,7 +1603,7 @@ async function rollLimb(actor) {
     return table.draw();
   }
   const r = await new Roll("1d6").evaluate();
-  const limb = LIMBS.find((l) => l.roll === r.total);
+  const limb = LIMBS.find((l) => l.roll === r.total) ?? LIMBS[0];
   await r.toMessage({ speaker: docClass("ChatMessage").getSpeaker({ actor }), flavor: `${t("Limb.Roll")}: ${t(`Limb.${limb.key}`)}` });
 }
 
@@ -1719,14 +1726,17 @@ function viaGM(action, payload) {
 
 async function summon(actor, name, count = 1) {
   actor = requireActor(actor);
-  if (!actor || !name) return;
-  return viaGM("summon", { actorUuid: actor.uuid, name, count: clamp(Number(count) || 1, 1, 20), userId: game.user.id, sceneId: canvas.scene?.id });
+  if (!actor) return;
+  if (!name) return ui.notifications.warn(t("Summon.NeedName"));
+  if (!canvas?.scene) return ui.notifications.warn(t("Notify.NoScene"));
+  return viaGM("summon", { actorUuid: actor.uuid, name, count: clamp(Number(count) || 1, 1, 20), userId: game.user.id, sceneId: canvas.scene.id });
 }
 
 async function dismissSummons(actor) {
   actor = requireActor(actor);
   if (!actor) return;
-  return viaGM("dismiss", { actorUuid: actor.uuid, sceneId: canvas.scene?.id });
+  if (!canvas?.scene) return ui.notifications.warn(t("Notify.NoScene"));
+  return viaGM("dismiss", { actorUuid: actor.uuid, sceneId: canvas.scene.id });
 }
 
 /* -------------------------------------------- */
@@ -1776,7 +1786,21 @@ async function expireVowExhaustion() {
 
 const PANELS = new Map();
 
-function panelHTML(actor) {
+const PANEL_TABS = [["combat", "fa-solid fa-bolt", "Panel.TabCombat"], ["body", "fa-solid fa-person", "Panel.TabBody"],
+  ["summon", "fa-solid fa-paw", "Panel.TabSummon"], ["tools", "fa-solid fa-toolbox", "Panel.TabTools"]];
+
+// Keys inside the panel (when no text field has focus). Global shortcuts are in Configure Controls.
+const PANEL_KEYS = { "-": "ceMinus", "+": "cePlus", "=": "cePlus", "_": "ceMinus5", "*": "cePlus5", m: "maxOutput",
+  r: "shortRest", n: "negEmotion", l: "limbRoll", "?": "help", 1: "tab:combat", 2: "tab:body", 3: "tab:summon", 4: "tab:tools" };
+
+/** Button with icon, label and a tooltip that names its shortcut. */
+function pbtn(action, icon, label, { key = "", cls = "", data = "", tip = "" } = {}) {
+  const tooltip = esc([tip || label, key ? `[${key}]` : ""].filter(Boolean).join(" "));
+  return `<button type="button" class="${cls}" data-action="${action}" ${data} data-tooltip="${tooltip}" aria-label="${tooltip}">`
+    + `${icon ? `<i class="${icon}"></i>` : ""}${label ? ` <span>${label}</span>` : ""}</button>`;
+}
+
+function panelHTML(actor, tab = "combat") {
   const pool = findPool(actor);
   const value = pool ? poolValue(pool) : 0;
   const max = pool ? poolMax(pool) : 0;
@@ -1790,7 +1814,7 @@ function panelHTML(actor) {
   const zoneStacks = Number(zone?.flags?.jjk5e?.zone) || 0;
   const hr = isHeavenlyOnly(actor);
   const statusRow = (on, label, action) => `<span class="jjk-chip ${on ? "on" : ""}">${label}${on && action
-    ? ` <a data-action="${action}" title="${t("Common.End")}"><i class="fas fa-times"></i></a>` : ""}</span>`;
+    ? ` <a data-action="${action}" data-tooltip="${t("Common.End")}"><i class="fas fa-times"></i></a>` : ""}</span>`;
   const limbRows = LIMBS.map((l) => {
     const st = limbs[l.key] ?? "ok";
     const btn = (s) => `<button type="button" class="${st === s ? "active" : ""}" data-action="limb" data-limb="${l.key}" data-status="${s}">${t(`Limb.${s}`)}</button>`;
@@ -1801,9 +1825,85 @@ function panelHTML(actor) {
   const suggestions = [...new Set([...Object.keys(SUMMON_ALIASES).map((k) => k.replace(/\b\w/g, (c) => c.toUpperCase())),
     ...game.actors.filter((a) => a.folder?.name === SUMMON_FOLDER || a.folder?.name === "JJK Shikigami").map((a) => a.name)])]
     .map((n) => `<option value="${esc(n)}"></option>`).join("");
+  const sd = soulDamageOf(actor);
+  const alerts = [domainOpen(actor), inBurnout(actor), !!zone, !!actor.getFlag(MODULE_ID, "pendingBlackFlash"), sd > 0, ro > 0]
+    .filter(Boolean).length;
+
+  const tabs = `<nav class="jjk-tabs">${PANEL_TABS.map(([id, icon, label], i) => `<button type="button" class="${id === tab ? "active" : ""}"
+    data-action="tab" data-tab="${id}" data-tooltip="${t(label)} [${i + 1}]"><i class="${icon}"></i> ${t(label)}${id === "combat" && alerts
+    ? ` <span class="jjk-badge">${alerts}</span>` : ""}</button>`).join("")}</nav>`;
+
+  const ceBlock = pool ? `<fieldset><legend>${t("CE.Name")}</legend>
+      <div class="jjk-bar ${pct <= 25 ? "low" : ""}"><div class="fill" style="width:${pct}%"></div><span>${value} / ${max}</span></div>
+      <div class="jjk-row jjk-ce-quick">
+        ${pbtn("ceMinus5", "", "−5", { key: "_", tip: t("Panel.Spend") + " 5" })}${pbtn("ceMinus", "", "−1", { key: "-", tip: t("Panel.Spend") + " 1" })}
+        <input type="number" name="ceAmount" min="1" value="1" class="jjk-count" aria-label="${t("CE.Amount")}">
+        ${pbtn("ceSpendN", "fa-solid fa-minus", t("Panel.Spend"), { cls: "jjk-primary" })}${pbtn("ceRegainN", "fa-solid fa-plus", t("Panel.Regain"))}
+        ${pbtn("cePlus", "", "+1", { key: "+", tip: t("Panel.Regain") + " 1" })}${pbtn("cePlus5", "", "+5", { key: "*", tip: t("Panel.Regain") + " 5" })}
+      </div>
+      <div class="jjk-row">
+        ${pbtn("negEmotion", "fas fa-face-angry", t("CE.NegativeEmotionShort"), { key: "N", tip: t("CE.NegativeEmotion") })}
+        ${pbtn("shortRest", "fas fa-bed", t("CE.ShortRestShort"), { key: "R", tip: t("CE.ShortRestTitle") })}
+      </div></fieldset>` : (hr ? "" : `<p class="jjk-note">${t("Panel.NoPool")} ${pbtn("chooseTechnique", "fas fa-hand-sparkles", t("Panel.ChooseTechnique"))}</p>`);
+
+  const combat = `${ceBlock}
+    <fieldset><legend>${t("Panel.Status")}</legend>
+      <div class="jjk-row">
+        ${statusRow(domainOpen(actor), t("Domain.Open"), "closeDomain")}
+        ${statusRow(inBurnout(actor), t("Burnout.Name"), "clearBurnout")}
+        ${statusRow(!!zone, zone ? `${t("Zone.Name")} ×${zoneStacks}` : t("Zone.Name"), "clearZone")}
+        ${statusRow(!!actor.getFlag(MODULE_ID, "pendingBlackFlash"), "Black Flash ×3", "clearBF")}
+        ${sd ? statusRow(true, `<i class="fas fa-ghost"></i> ${t("Soul.Name")} −${sd}`, game.user.isGM ? "clearSoul" : "") : ""}
+        ${activeGroups(actor).map((g) => `<span class="jjk-chip on">${t(`Group.${g}`)} <a data-action="endGroup" data-group="${g}" data-tooltip="${t("Common.End")}"><i class="fas fa-times"></i></a></span>`).join("")}
+      </div>
+      <div class="jjk-row">
+        ${pbtn("domainHUD", "fa-solid fa-circle-half-stroke", t("Domain.HUD"))}
+        ${canRecoverBurnout(actor) ? pbtn("burnoutRecovery", "fas fa-brain", `${t("Burnout.Recovery")} (4 CE)`) : ""}
+      </div></fieldset>
+    ${hr ? "" : `<fieldset><legend>${t("Output.Title")}</legend>
+      <div class="jjk-row">
+        ${pbtn("maxOutput", "fas fa-bolt", t("Output.Max"), { key: "M" })}
+        <span class="jjk-lbl">${t("Output.Reduced")}</span>
+        ${pbtn("roDown", "", "−", { tip: t("Output.Reduced") + " −1" })}<strong class="jjk-num">${ro}</strong>${pbtn("roUp", "", "+", { tip: t("Output.Reduced") + " +1" })}
+      </div>
+      ${ro ? `<p class="jjk-note">${RO_ROWS[ro]}</p>` : ""}</fieldset>`}`;
+
+  const body = `<fieldset><legend>${t("Soul.Awareness")}</legend>
+      <div class="jjk-row">${pbtn("soulDown", "", "−")}<strong class="jjk-num">${soul}</strong>${pbtn("soulUp", "", "+")}</div>
+      ${soul ? `<ul class="jjk-list">${soulList}</ul>` : ""}</fieldset>
+    <fieldset><legend>${t("Soul.Name")}</legend>
+      <div class="jjk-row"><span>${sd ? `−${sd} ${t("Soul.MaxHP")}` : "—"}</span>
+      ${game.user.isGM ? pbtn("soulDamage", "fas fa-ghost", t("Soul.Apply")) + (sd ? pbtn("clearSoul", "fas fa-xmark", t("Soul.Clear")) : "") : ""}</div></fieldset>
+    <fieldset><legend>${t("Limb.Title")}</legend>
+      <table class="jjk-limbs"><thead><tr><th></th><th>${t("Limb.Broken")}</th><th>${t("Limb.Lost")}</th><th></th></tr></thead>
+      <tbody>${limbRows}</tbody></table>
+      <div class="jjk-row">${pbtn("limbRoll", "fas fa-dice-d6", t("Limb.Roll"), { key: "L" })}</div>
+    </fieldset>`;
+
+  const summonTab = `<fieldset><legend>${t("Summon.Title")}</legend>
+      <div class="jjk-row">
+        <input type="text" name="summonName" list="jjk-summon-${actor.id}" placeholder="${t("Summon.Placeholder")}">
+        <datalist id="jjk-summon-${actor.id}">${suggestions}</datalist>
+        <input type="number" name="summonCount" value="1" min="1" max="20" class="jjk-count" aria-label="${t("Summon.Count")}">
+        ${pbtn("summon", "fas fa-paw", t("Summon.Do"), { cls: "jjk-primary" })}
+        ${pbtn("dismiss", "fas fa-ghost", t("Summon.Dismiss"))}
+      </div>
+      <p class="jjk-note">${t("Summon.Hint")}</p></fieldset>`;
+
+  const tools = `<fieldset><legend>${t("Panel.Character")}</legend><div class="jjk-grid">
+      ${hr ? "" : pbtn("chooseTechnique", "fas fa-hand-sparkles", t("Panel.ChooseTechnique"))}
+      ${hr ? "" : pbtn("ceAbility", "fas fa-brain", t("Panel.SetAbility"))}
+      ${pbtn("techniqueBuilder", "fas fa-wand-magic-sparkles", t("Builder.Title"))}
+      ${pbtn("pointBuy", "fas fa-dice-d20", t("PointBuy.Title"))}
+      ${pbtn("vows", "fas fa-handshake", t("Vow.Title"))}
+      ${pbtn("career", "fas fa-id-badge", t("Career.Title"))}
+      ${pbtn("hotbar", "fas fa-table-cells", t("Keys.hotbar"))}
+      ${pbtn("updateAutomation", "fas fa-arrows-rotate", t("Update.Title"))}
+      ${pbtn("help", "fas fa-keyboard", t("Panel.Shortcuts"), { key: "?" })}
+    </div></fieldset>`;
 
   return `
-  <section class="jjk-panel">
+  <section class="jjk-panel" data-tab="${tab}">
     <header class="jjk-head">
       <img src="${ICONS}/ce.svg" alt="">
       <div>
@@ -1811,69 +1911,43 @@ function panelHTML(actor) {
         <div class="jjk-sub">${hr ? t("Panel.HR") : `${t("Panel.Technique")}: <strong>${esc(tech ?? t("Panel.None"))}</strong>`}
           ${hr ? "" : ` · ${t("Panel.CEAbility")}: <strong>${ab ? ab.toUpperCase() : "?"}</strong>`}</div>
       </div>
-      <div class="jjk-head-btns">
-        <button type="button" data-action="pointBuy" title="${t("PointBuy.Title")}"><i class="fas fa-dice-d20"></i></button>
-        <button type="button" data-action="updateAutomation" title="${t("Update.Title")}"><i class="fas fa-arrows-rotate"></i></button>
-        <button type="button" data-action="techniqueBuilder" title="${t("Builder.Title")}"><i class="fas fa-wand-magic-sparkles"></i></button>
-        ${hr ? "" : `<button type="button" data-action="chooseTechnique" title="${t("Panel.ChooseTechnique")}"><i class="fas fa-hand-sparkles"></i></button>
-        <button type="button" data-action="ceAbility" title="${t("Panel.SetAbility")}"><i class="fas fa-brain"></i></button>`}</div>
+      <div class="jjk-head-btns">${pbtn("help", "fas fa-keyboard", "", { key: "?", tip: t("Panel.Shortcuts") })}</div>
     </header>
-
-    ${pool ? `<fieldset><legend>${t("CE.Name")}</legend>
-      <div class="jjk-bar"><div class="fill" style="width:${pct}%"></div><span>${value} / ${max}</span></div>
-      <div class="jjk-row">
-        <button type="button" data-action="ceMinus">−1</button><button type="button" data-action="cePlus">+1</button>
-        <button type="button" data-action="ceSpend">${t("Panel.Spend")}</button><button type="button" data-action="ceRegain">${t("Panel.Regain")}</button>
-        <button type="button" data-action="negEmotion" title="${t("CE.NegativeEmotion")}"><i class="fas fa-face-angry"></i></button>
-        <button type="button" data-action="shortRest" title="${t("CE.ShortRestTitle")}"><i class="fas fa-bed"></i></button>
-      </div></fieldset>` : (hr ? "" : `<p class="jjk-note">${t("Panel.NoPool")}</p>`)}
-
-    <fieldset><legend>${t("Panel.Status")}</legend>
-      <div class="jjk-row">
-        ${statusRow(domainOpen(actor), t("Domain.Open"), "closeDomain")}
-        ${statusRow(inBurnout(actor), t("Burnout.Name"), "clearBurnout")}
-        ${soulDamageOf(actor) ? `<div class="jjk-row"><span><i class="fas fa-ghost"></i> ${t("Soul.Name")}: −${soulDamageOf(actor)} ${t("Soul.MaxHP")}</span>${game.user.isGM ? `<button type="button" data-action="clearSoul" title="${t("Soul.Clear")}"><i class="fas fa-xmark"></i></button>` : ""}</div>` : ""}
-        ${game.user.isGM ? `<button type="button" data-action="soulDamage"><i class="fas fa-ghost"></i> ${t("Soul.Apply")}</button>` : ""}
-        ${canRecoverBurnout(actor) ? `<button type="button" data-action="burnoutRecovery"><i class="fas fa-brain"></i> ${t("Burnout.Recovery")} (4 CE)</button>` : ""}
-        ${statusRow(!!zone, zone ? `${t("Zone.Name")} ×${zoneStacks}` : t("Zone.Name"), "clearZone")}
-        ${statusRow(!!actor.getFlag(MODULE_ID, "pendingBlackFlash"), "Black Flash ×3", "clearBF")}
-        ${activeGroups(actor).map((g) => `<span class="jjk-chip on">${t(`Group.${g}`)} <a data-action="endGroup" data-group="${g}" title="${t("Common.End")}"><i class="fas fa-times"></i></a></span>`).join("")}
-      </div></fieldset>
-
-    ${hr ? "" : `<fieldset><legend>${t("Output.Title")}</legend>
-      <div class="jjk-row">
-        <button type="button" data-action="maxOutput"><i class="fas fa-bolt"></i> ${t("Output.Max")}</button>
-        <span class="jjk-lbl">${t("Output.Reduced")}</span>
-        <button type="button" data-action="roDown">−</button><strong class="jjk-num">${ro}</strong><button type="button" data-action="roUp">+</button>
-      </div>
-      ${ro ? `<p class="jjk-note">${RO_ROWS[ro]}</p>` : ""}</fieldset>`}
-
-    <fieldset><legend>${t("Soul.Name")}</legend>
-      <div class="jjk-row"><button type="button" data-action="soulDown">−</button><strong class="jjk-num">${soul}</strong>
-      <button type="button" data-action="soulUp">+</button></div>
-      ${soul ? `<ul class="jjk-list">${soulList}</ul>` : ""}</fieldset>
-
-    <fieldset><legend>${t("Limb.Title")}</legend>
-      <table class="jjk-limbs"><thead><tr><th></th><th>${t("Limb.Broken")}</th><th>${t("Limb.Lost")}</th><th></th></tr></thead>
-      <tbody>${limbRows}</tbody></table>
-      <div class="jjk-row"><button type="button" data-action="limbRoll"><i class="fas fa-dice-d6"></i> ${t("Limb.Roll")}</button></div>
-    </fieldset>
-
-    <fieldset><legend>${t("Summon.Title")}</legend>
-      <div class="jjk-row">
-        <input type="text" name="summonName" list="jjk-summon-${actor.id}" placeholder="${t("Summon.Placeholder")}">
-        <datalist id="jjk-summon-${actor.id}">${suggestions}</datalist>
-        <input type="number" name="summonCount" value="1" min="1" max="20" class="jjk-count">
-        <button type="button" data-action="summon"><i class="fas fa-paw"></i></button>
-        <button type="button" data-action="dismiss" title="${t("Summon.Dismiss")}"><i class="fas fa-ghost"></i></button>
-      </div>
-      <p class="jjk-note">${t("Summon.Hint")}</p></fieldset>
+    ${tabs}
+    <div class="jjk-tab-body">${{ combat, body, summon: summonTab, tools }[tab] ?? combat}</div>
   </section>`;
 }
 
+/** Shortcut reference (global keybindings + panel keys). */
+async function showShortcuts() {
+  const fmt = (k) => k.replace(/^Key/, "").replace("Minus", "−").replace("Equal", "=");
+  const global = KEY_ACTIONS.filter(([, , , , gm]) => !gm || game.user.isGM)
+    .map(([id, key, mods]) => `<tr><td><kbd>${[...mods, fmt(key)].join(" + ")}</kbd></td><td>${t(`Keys.${id}`)}</td></tr>`).join("");
+  const local = Object.entries(PANEL_KEYS).filter(([k]) => !/[0-9_*=]/.test(k))
+    .map(([k, a]) => `<tr><td><kbd>${k.toUpperCase()}</kbd></td><td>${t(`Panel.Key.${a}`)}</td></tr>`).join("");
+  const content = `<div class="jjk-help"><h3>${t("Panel.GlobalKeys")}</h3><table>${global}</table>
+    <p class="notes">${t("Panel.KeysEditable")}</p>
+    <h3>${t("Panel.PanelKeys")}</h3><table>${local}<tr><td><kbd>1–4</kbd></td><td>${t("Panel.Key.tabs")}</td></tr>
+    <tr><td><kbd>Shift + −/+</kbd></td><td>${t("Panel.Key.five")}</td></tr></table>
+    <p class="notes">${t("Keys.HudHint")}</p></div>`;
+  return foundry.applications.api.DialogV2.prompt({ window: { title: t("Panel.Shortcuts") }, content, rejectClose: false,
+    ok: { label: t("Common.OK") } });
+}
+
+const panelAmount = (root) => Math.max(1, Math.floor(Number(root?.querySelector?.("[name=ceAmount]")?.value) || 1));
 const PANEL_ACTIONS = {
+  tab: (actor, target, root, app) => { if (app) app._tab = target.dataset.tab; },
   ceMinus: (actor) => spendCE(actor, 1, t("CE.Spent")),
   cePlus: (actor) => spendCE(actor, -1, t("CE.Regained")),
+  ceMinus5: (actor) => spendCE(actor, 5, t("CE.Spent")),
+  cePlus5: (actor) => spendCE(actor, -5, t("CE.Regained")),
+  ceSpendN: (actor, target, root) => spendCE(actor, panelAmount(root), t("CE.Spent")),
+  ceRegainN: (actor, target, root) => spendCE(actor, -panelAmount(root), t("CE.Regained")),
+  domainHUD: (actor) => openDomainHUD(actor),
+  vows: (actor) => openVows(actor),
+  career: (actor) => openCareer(actor),
+  hotbar: (actor) => fillHotbar(actor),
+  help: () => showShortcuts(),
   ceSpend: (actor) => promptCE("spend", actor),
   ceRegain: (actor) => promptCE("regain", actor),
   negEmotion: (actor) => negativeEmotion(actor),
@@ -1915,15 +1989,20 @@ function makePanelClass() {
   const actions = {};
   for (const [name, fn] of Object.entries(PANEL_ACTIONS)) {
     actions[name] = async function (event, target) {
-      try { await fn(this.actor, target, this.element); } catch (err) { console.error(err); ui.notifications.error(String(err.message ?? err)); }
-      this.render();
+      // One action at a time: further clicks are ignored until it finishes (no double spending).
+      if (this._busy) return;
+      this._busy = true;
+      this.element?.classList?.add("jjk-busy");
+      try { await fn(this.actor, target, this.element, this); } catch (err) { reportError(name, err); }
+      finally { this._busy = false; this.element?.classList?.remove("jjk-busy"); }
+      if (this.rendered) this.render();
     };
   }
   return class JJKPanel extends Base {
     static DEFAULT_OPTIONS = {
       classes: ["jjk5e-panel-app"],
       window: { icon: "fas fa-yin-yang", resizable: true },
-      position: { width: 460, height: "auto" },
+      position: { width: 480, height: "auto" },
       actions
     };
 
@@ -1934,9 +2013,26 @@ function makePanelClass() {
 
     get title() { return `JJK — ${this.actor.name}`; }
 
-    async _renderHTML() { return panelHTML(this.actor); }
+    async _renderHTML() { return panelHTML(this.actor, this._tab ?? "combat"); }
 
     _replaceHTML(result, content) { content.innerHTML = result; }
+
+    _onRender(context, options) {
+      super._onRender?.(context, options);
+      if (this._keysBound || !this.element) return;
+      this._keysBound = true;
+      this.element.tabIndex = -1;
+      this.element.addEventListener("keydown", (ev) => {
+        if (ev.ctrlKey || ev.metaKey || ev.altKey || /^(INPUT|TEXTAREA|SELECT)$/.test(ev.target?.tagName ?? "")) return;
+        const act = PANEL_KEYS[ev.key];
+        if (!act) return;
+        ev.preventDefault(); ev.stopPropagation();
+        if (act.startsWith("tab:")) { this._tab = act.slice(4); this.render(); return; }
+        const fake = { dataset: {} };
+        this.options.actions[act]?.call(this, ev, fake);
+      });
+      this.element.addEventListener("pointerdown", () => this.element.focus({ preventScroll: true }));
+    }
 
     _onClose(options) {
       PANELS.delete(this.actor.uuid);
@@ -2992,7 +3088,7 @@ function registerMidiHooks() {
     if (attack !== "melee" || workflow.targets?.size !== 1 || !actor?.items.some(item =>
       item.flags?.jjk5e?.technique === "Clone" && baseName(item) === "Twice the Fun")) return;
     const target = asToken([...workflow.targets][0]);
-    const adjacent = canvas.tokens.placeables.some(token => {
+    const adjacent = (canvas?.tokens?.placeables ?? []).some(token => {
       if (token.document.flags?.jjk5e?.cloneOrigin !== actor.uuid || token.actor?.system.attributes.hp.value <= 0) return false;
       const distance = tokenDistance(token, target);
       return Number.isFinite(distance) && distance >= 0 && distance <= 5;
@@ -4454,10 +4550,10 @@ function makeDomainClass() {
       return `<section class="jjk-panel">
         <div class="jjk-barrier"><div class="fill" style="width:${pct}%"></div><span>${s.hp} / ${s.max}</span></div>
         <p>${t("Domain.Stats", { ac: s.ac, ref: s.refinement, r: s.radius })}</p>${clash}
-        <p class="hint">${t("Domain.Mode")}: ${mode}; ${s.lethal === false ? "Non-lethal (no sure-hit)" : "Lethal"}</p>
+        <p class="hint">${t("Domain.Mode")}: ${mode}; ${s.lethal === false ? t("Domain.NonLethalMode") : t("Domain.LethalMode")}</p>
         <div class="btns"><button type="button" data-action="hit"><i class="fas fa-hammer"></i> ${t("Domain.HitBarrier")}</button>
           <button type="button" data-action="weak"><i class="fas fa-crosshairs"></i> ${t("Domain.WeakSpot")}</button></div>
-        ${this.actor.isOwner ? `<div class="btns"><button type="button" data-action="lethal" data-m="${s.lethal === false ? "lethal" : "nonlethal"}">${s.lethal === false ? "Make lethal" : "Make non-lethal"}</button>${s.refinement >= 100 ? `<button type="button" data-action="mode" data-m="flip">${t("Domain.Flipped")}</button>
+        ${this.actor.isOwner ? `<div class="btns"><button type="button" data-action="lethal" data-m="${s.lethal === false ? "lethal" : "nonlethal"}">${s.lethal === false ? t("Domain.MakeLethal") : t("Domain.MakeNonLethal")}</button>${s.refinement >= 100 ? `<button type="button" data-action="mode" data-m="flip">${t("Domain.Flipped")}</button>
           <button type="button" data-action="mode" data-m="balanced">${t("Domain.Balanced")} (5)</button>` : ""}
           <button type="button" data-action="close"><i class="fas fa-xmark"></i> ${t("Domain.Close")}</button></div>` : ""}
       </section>`;
@@ -4699,7 +4795,14 @@ const KEY_ACTIONS = [
   ["technique", "KeyT", ["Alt"], () => chooseTechnique()],
   ["hotbar", "KeyH", ["Alt"], () => fillHotbar()],
   ["mission", "KeyM", ["Alt"], () => generateMission(), true],
-  ["curse", "KeyK", ["Alt"], () => createCurse(), true]
+  ["curse", "KeyK", ["Alt"], () => createCurse(), true],
+  ["shortRest", "KeyR", ["Alt"], () => shortRestCE()],
+  ["maxOutput", "KeyX", ["Alt"], () => maximumOutput()],
+  ["negEmotion", "KeyN", ["Alt"], () => negativeEmotion()],
+  ["limbRoll", "KeyL", ["Alt"], () => rollLimb(requireActor())],
+  ["builder", "KeyI", ["Alt"], () => techniqueBuilder(pickActor())],
+  ["update", "KeyU", ["Alt"], () => updateAutomation()],
+  ["help", "Slash", ["Alt"], () => showShortcuts()]
 ];
 
 Hooks.once("init", () => {
@@ -4708,7 +4811,7 @@ Hooks.once("init", () => {
     try {
       game.keybindings.register(MODULE_ID, id, {
         name: `JJK5E.Keys.${id}`, editable: [{ key, modifiers }], restricted: !!gmOnly,
-        onDown: () => { try { fn(); } catch (err) { console.error(`${MODULE_ID} | key ${id}`, err); } return true; }
+        onDown: () => { try { Promise.resolve(fn()).catch((err) => reportError(id, err)); } catch (err) { reportError(id, err); } return true; }
       });
     } catch (err) { console.error(`${MODULE_ID} | keybinding ${id}`, err); }
   }

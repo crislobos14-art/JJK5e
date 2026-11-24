@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.64.0 — Panel JJK más rápido, con pestañas y atajos
+- **Panel JJK rediseñado** en 4 pestañas: Combate, Cuerpo, Invocaciones y Herramientas. La pestaña Combate muestra un contador de estados activos (dominio, Burnout, Zone, Black Flash, daño al alma, Reduced Output).
+- **Gasto rápido de CE**: −5, −1, +1 y +5, más un campo de cantidad con Gastar y Recuperar directos, sin ventana emergente. La barra se pone roja con 25 % o menos.
+- **Atajos dentro del panel**: − y + (1 CE), Shift + − y + (5 CE), M Maximum Output, R descanso corto, N emoción negativa, L extremidad, 1–4 pestañas y ? ayuda.
+- **Atajos globales nuevos**: Alt+R descanso corto, Alt+X Maximum Output, Alt+N emoción negativa, Alt+L extremidad, Alt+I creador de técnicas, Alt+U actualizar automatización y Alt+/ ayuda. Todos se pueden cambiar en *Configurar controles*.
+- Todos los botones tienen descripción emergente con su atajo. El panel ignora clics repetidos mientras una acción está en curso, para evitar gastos dobles.
+- Los errores ahora se muestran con un mensaje claro de qué acción falló.
+- Corregido: invocar o descartar sin una escena abierta daba error; ahora avisa. También se corrigieron la tirada de extremidad de respaldo y los textos en inglés del HUD de dominio.
+- Pruebas nuevas: cada botón del panel, del menú, de los votos, de la carrera y del HUD de dominio, y cada atajo, se ejecutan en la CI (48 pruebas).
+
 ## 1.63.0 — Soul Damage, creador de técnicas, tablas y efectos pasivos
 - **Soul Damage**: reduce los PG máximos (no lo cura RCT ni la regeneración). Automático con Midi-QOL para Transfiguration, Soul Split Katana, Maximum: Instrumentalization, Heat Dissociation, Soulfire y Maximum: Soul Punch; termina en descanso largo salvo que la fuente diga lo contrario. Botón de GM en el panel y tarjeta para el GM cuando el objetivo no es del jugador.
 - **Creador de técnicas propias** (macro *JJK: Technique Builder* y botón en el panel), según las pautas del manual: nivel 1 Lapse, 3 Lapse/Extension, 6 Extension, 11 Maximum, 18 Domain Expansion (opción de dominio a nivel 3). Crea los objetos en la carpeta *JJK: Custom Techniques* y se eligen como cualquier técnica.

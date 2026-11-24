@@ -126,3 +126,19 @@ button.jjk5e-levelup { display: block; margin: 4px auto 0; padding: 2px 10px; fo
 .jjk-builder-row legend { font-weight: bold; }
 .jjk-builder-row .form-group { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; margin: 2px 0; }
 .jjk-builder-row textarea { width: 100%; }
+
+/* Panel v2: tabs, quick CE, busy state, help */
+.jjk-tabs { display: flex; gap: 2px; border-bottom: 2px solid #7a1f2b; }
+.jjk-tabs button { flex: 1; border-radius: 6px 6px 0 0; border-bottom: none; padding: 3px 4px; font-size: 12px; white-space: nowrap; }
+.jjk-tabs button.active { background: #7a1f2b; color: #fff; }
+.jjk-badge { display: inline-block; min-width: 16px; padding: 0 4px; border-radius: 8px; background: #e0a800; color: #000; font-size: 10px; font-weight: bold; }
+.jjk-tab-body { display: flex; flex-direction: column; gap: 6px; }
+.jjk-ce-quick input.jjk-count { width: 3.5em; text-align: center; }
+.jjk-panel button.jjk-primary { background: #7a1f2b; color: #fff; }
+.jjk-panel button:focus-visible, .jjk-tabs button:focus-visible { outline: 2px solid #e0a800; outline-offset: 1px; }
+.jjk-bar.low .fill { background: #b23b3b; }
+.jjk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+.jjk-grid button { text-align: left; }
+.jjk5e-panel-app.jjk-busy .window-content { opacity: 0.6; pointer-events: none; cursor: progress; }
+.jjk-help table { width: 100%; }
+.jjk-help kbd { font-family: monospace; padding: 0 4px; border: 1px solid #888; border-radius: 3px; background: rgba(0,0,0,0.08); }

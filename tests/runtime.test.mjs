@@ -424,3 +424,53 @@ test("Technique builder: saves the technique in the Items directory and grants f
   const owned = actor.items.filter((i) => i.flags?.jjk5e?.technique === "Frost Lines").map((i) => i.name).sort();
   assert.deepEqual(owned, ["Cold Snap", "Frost Line"], "11th level feature not yet");
 });
+
+test("UI: every panel button has a handler and runs without errors (all tabs)", async () => {
+  const { env, actor, J } = await setup();
+  env.game.user.character = actor;
+  const actions = new Set();
+  for (const tab of ["combat", "body", "summon", "tools"]) {
+    const html = J.panelHTML(actor, tab);
+    for (const m of html.matchAll(/data-action="(\w+)"/g)) actions.add(m[1]);
+  }
+  const root = { querySelector: () => ({ value: "2", valueAsNumber: 2 }) };
+  const app = {};
+  for (const a of actions) {
+    assert.ok(J.PANEL_ACTIONS[a], `no handler for ${a}`);
+    const target = { dataset: { tab: "body", limb: "rightArm", status: "broken", group: "focus" } };
+    try { await J.PANEL_ACTIONS[a](actor, target, root, app); await env.settle(); }
+    catch (err) { assert.fail(`${a}: ${err.stack ?? err}`); }
+  }
+  assert.ok(actions.size >= 25, `${actions.size} actions`);
+});
+
+test("UI: global shortcuts and the JJK menu run without errors", async () => {
+  const { env, actor, J } = await setup();
+  env.game.user.character = actor;
+  for (const [id, , , fn] of J.KEY_ACTIONS) {
+    try { await fn(); await env.settle(); } catch (err) { assert.fail(`key ${id}: ${err.stack ?? err}`); }
+  }
+  for (const [id, , , fn] of J.MENU_ACTIONS) {
+    if (id === "import") continue;
+    try { await fn(actor); await env.settle(); } catch (err) { assert.fail(`menu ${id}: ${err.stack ?? err}`); }
+  }
+});
+
+test("UI: vows, career, domain HUD and the JJK menu render and their buttons run", async () => {
+  const { env, actor, J } = await setup();
+  env.game.user.character = actor;
+  await J.openDomain(actor, { name: "Domain" }); await env.settle();
+  for (const open of [J.openVows, J.openCareer, J.openDomainHUD]) {
+    const app = await open(actor);
+    assert.ok(app, "app opened");
+    const html = await app._renderHTML();
+    const actions = app.constructor.DEFAULT_OPTIONS.actions ?? {};
+    for (const m of String(html).matchAll(/data-action="(\w+)"/g)) {
+      const fn = actions[m[1]];
+      assert.ok(fn, `${app.constructor.name}: no handler for ${m[1]}`);
+      if (["close", "del", "break", "fail", "pass"].includes(m[1])) continue; // destructive, covered elsewhere
+      try { await fn.call(app, { preventDefault() {} }, { dataset: { m: "flip", i: "0", idx: "0" }, closest: () => null }); await env.settle(); }
+      catch (err) { assert.fail(`${app.constructor.name}.${m[1]}: ${err.stack ?? err}`); }
+    }
+  }
+});

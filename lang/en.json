@@ -7,7 +7,8 @@
       "Charisma": "Charisma",
       "Cancel": "Cancel",
       "Days": "days",
-      "Edit": "Edit"
+      "Edit": "Edit",
+      "Reminder": "Reminder"
     },
     "Import": {
       "Start": "JJK 5e: importing {n} compendiums… this can take a minute.",
@@ -33,7 +34,9 @@
       "AbilityTitle": "Cursed Energy Ability",
       "AbilityPrompt": "Cursed Energy ability for <strong>{name}</strong>. It sets the CE pool, the CE save DC (8 + PB + mod) and CE attack rolls (via the sheet's spellcasting ability).",
       "ShortRestRestore": "Sorcerous Restoration (+{n} CE)",
-      "Short": "CE"
+      "Short": "CE",
+      "NegativeEmotionShort": "Negative emotion",
+      "ShortRestShort": "Short rest"
     },
     "Technique": {
       "Title": "Choose Innate Technique",
@@ -103,7 +106,11 @@
       "BarrierlessStats": "No barrier · radius {radius} ft · no time limit",
       "BarrierlessSave": "Barrierless Domain: CON save DC {dc}",
       "IncompleteDescription": "Incomplete Domain: 100 ft, 1 minute, refinement 0, no barrier and no sure hit. Advantage on technique attack rolls; creatures inside have disadvantage on saves against your Innate Technique. Effects are halved.",
-      "IncompleteStats": "Incomplete Domain · {radius} ft · no barrier, no sure hit"
+      "IncompleteStats": "Incomplete Domain · {radius} ft · no barrier, no sure hit",
+      "LethalMode": "Lethal",
+      "NonLethalMode": "Non-lethal (no sure-hit)",
+      "MakeLethal": "Make lethal",
+      "MakeNonLethal": "Make non-lethal"
     },
     "Burnout": {
       "Name": "Technique Burnout",
@@ -138,7 +145,8 @@
       "Apply": "Apply Soul Damage",
       "Amount": "Maximum HP reduction",
       "Clear": "Remove Soul Damage",
-      "Strike": "Soul Strike"
+      "Strike": "Soul Strike",
+      "Awareness": "Soul Awareness"
     },
     "Limb": {
       "Title": "Limb Damage",
@@ -186,7 +194,10 @@
       "Placeholder": "Creature or shikigami name",
       "Dismiss": "Dismiss all my summons in this scene",
       "NotFound": "JJK 5e: no actor named \"{name}\" in the world or compendiums.",
-      "Hint": "Searches your actors (folder \"JJK Shikigami\") and then the compendiums (SRD). Tokens appear next to yours; the GM must be online."
+      "Hint": "Searches your actors (folder \"JJK Shikigami\") and then the compendiums (SRD). Tokens appear next to yours; the GM must be online.",
+      "Count": "How many",
+      "Do": "Summon",
+      "NeedName": "Write the name of the shikigami or creature to summon."
     },
     "Panel": {
       "Open": "Open JJK panel",
@@ -199,7 +210,27 @@
       "Spend": "Spend…",
       "Regain": "Regain…",
       "Status": "Status",
-      "NoPool": "No Cursed Energy pool yet: add a JJK class."
+      "NoPool": "No Cursed Energy pool yet: add a JJK class.",
+      "TabCombat": "Combat",
+      "TabBody": "Body",
+      "TabSummon": "Summons",
+      "TabTools": "Tools",
+      "Character": "Character",
+      "Shortcuts": "Shortcuts",
+      "GlobalKeys": "Global shortcuts",
+      "PanelKeys": "Inside the JJK panel",
+      "KeysEditable": "Change them in Game Settings → Configure Controls → JJK 5e.",
+      "Key": {
+        "ceMinus": "Spend 1 CE",
+        "cePlus": "Regain 1 CE",
+        "maxOutput": "Maximum Output",
+        "shortRest": "Short rest CE recovery",
+        "negEmotion": "Negative emotion",
+        "limbRoll": "Roll limb damage",
+        "help": "This help",
+        "tabs": "Switch tab",
+        "five": "Spend / regain 5 CE"
+      }
     },
     "Notify": {
       "NoActor": "JJK 5e: select a token or assign a character first.",
@@ -219,7 +250,9 @@
       "NeedDnd5e": "JJK 5e V.6 requires the D&D 5e system.",
       "NoInspiration": "JJK 5e: {name} has no inspiration to use this mindset.",
       "GMOnly": "Only the GM can do that.",
-      "GMDeclined": "The GM declined or did not answer the request."
+      "GMDeclined": "The GM declined or did not answer the request.",
+      "ActionFailed": "JJK 5e — {action} failed: {error}",
+      "NoScene": "Open a scene first."
     },
     "Settings": {
       "autoSpendCE": {
@@ -623,7 +656,14 @@
       "hotbar": "Fill JJK hotbar",
       "mission": "Generate mission (GM)",
       "curse": "Generate curse (GM)",
-      "HudHint": "JJK: click = panel · right click = −1 CE · Shift + right click = +1 CE"
+      "HudHint": "JJK: click = panel · right click = −1 CE · Shift + right click = +1 CE",
+      "shortRest": "Short rest CE recovery",
+      "maxOutput": "Maximum Output",
+      "negEmotion": "Negative emotion (+prof CE)",
+      "limbRoll": "Roll limb damage",
+      "builder": "Technique builder",
+      "update": "Update JJK automation",
+      "help": "JJK shortcuts help"
     },
     "Breakthrough": {
       "Name": "Breakthroughs",

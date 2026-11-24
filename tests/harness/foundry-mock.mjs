@@ -208,7 +208,8 @@ export function createEnv({ settings: overrides = {} } = {}) {
       const m = /(\d*)d(\d+)/.exec(this.formula);
       const n = m ? Number(m[1] || 1) : 0;
       const results = [];
-      for (let i = 0; i < n; i++) results.push({ result: dice.length ? dice.shift() : 10, active: true });
+      const faces = m ? Number(m[2]) : 20;
+      for (let i = 0; i < n; i++) results.push({ result: dice.length ? dice.shift() : Math.ceil(faces / 2), active: true });
       this.dice = [{ results }];
       this.total = results.reduce((a, r) => a + r.result, 0) + (m ? 0 : Number(this.formula) || 0);
       this._evaluated = true;
