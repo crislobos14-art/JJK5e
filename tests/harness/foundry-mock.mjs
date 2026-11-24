@@ -279,7 +279,7 @@ export function createEnv({ settings: overrides = {} } = {}) {
       for (let i = 0; i < 30; i++) { await Promise.allSettled([...pending]); await new Promise((r) => setImmediate(r)); }
     },
     addActor(data) { const a = new Actor(data); actors.set(a.id, a); return a; },
-    async combatRound(round) { await fire("updateCombat", { round, combatants: [] }, { round }, {}, user.id); await env.settle(); }
+    async combatRound(round, combat = {}) { await fire("updateCombat", { round, combatants: [], ...combat }, { round }, {}, user.id); await env.settle(); }
   };
 
   // Load the module: replace the ESM import with the rules namespace and expose internals.
