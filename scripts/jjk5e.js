@@ -540,11 +540,12 @@ async function ceAuthorityRequest(operation,payload) {
 }
 async function handleCEAuthority(msg,{user}={}) {
   if (!ceAuthorityEnabled() || !isActiveGM() || !user?.active || !msg?.payload ||
-      !["reserve","start","commit","review","settle","adjust","linkCard"].includes(msg.operation)) return false;
+      !["reserve","start","commit","review","settle","adjust","linkCard","restExchange"].includes(msg.operation)) return false;
   const {operation,payload:d}=msg;
   const actor=await domainActor(d.actorUuid);
   if (!canDirectDomain(user,actor)) return false;
   if (operation==="settle"&&!user.isGM) return false;
+  if(operation==="restExchange")return commitRestExchange(actor,d.restId,d.amount);
   if (operation==="adjust") {
     if (!Number.isFinite(d.amount) || Math.abs(d.amount)>100000) return false;
     if (!user.isGM && !await confirmDialog(t("GMRequest.Title"),`<p>${esc(user.name)}: ${esc(actor.name)} — ${esc(String(d.amount))} CE</p>`)) return false;
@@ -1562,40 +1563,72 @@ async function promptCE(mode = "spend", actor) {
 }
 
 /** Exchange actual unused class Hit Dice for CE (V.6: 1 HD => 1 CE, half total HD cap). */
+/** One exchange per confirmed native short rest. An ambiguous write is never retried automatically. */
+function restExchangePlan(actor, pool, n) {
+  if (!pool || !Number.isSafeInteger(n) || n < 1) return null;
+  const classes = actor.items.filter(i=>i.type==="class");
+  const total = classes.reduce((sum,c)=>sum+Math.max(0,Number(c.system.levels)||0),0);
+  if(n>Math.floor(total/2) || n>Math.floor(poolMax(pool)-poolValue(pool))) return null;
+  let left=n; const updates=[];
+  for(const cls of classes){
+    const spent=Number(cls.system.hd?.spent)||0;
+    const take=Math.min(left,Math.max(0,(Number(cls.system.levels)||0)-spent));
+    if(take){updates.push({_id:cls.id,"system.hd.spent":spent+take});left-=take;}
+    if(!left)break;
+  }
+  if(left)return null;
+  const tx=ceTransaction(poolValue(pool),poolMax(pool),-n);
+  if(!tx)return null;
+  const whole=Math.floor(tx.spent+1e-6);
+  updates.push({_id:pool.id,"system.uses.spent":whole,"flags.jjk5e.fractionalSpent":Math.round((tx.spent-whole)*1000)/1000});
+  return updates;
+}
+async function commitRestExchange(actor, restId, n) {
+  return queueCE(actor,async()=>{
+    const rest=actor.getFlag(MODULE_ID,"shortRestExchange");
+    if(!actor.isOwner || rest?.id!==restId || rest.state!=="open" || game.combat?.started) return false;
+    if(vowBlocksUsage(actor.effects,{costsCE:true}))return false;
+    const pool=findPool(actor);
+    if(!pool || cePending(pool))return false;
+    const updates=restExchangePlan(actor,pool,n);
+    if(!updates)return false;
+    // Persist intent before applying the same-actor embedded Item batch.
+    // If a write fails or acknowledgement is lost, GM must inspect the journal.
+    const before=updates.map(u=>{const item=actor.items.get(u._id);return {_id:u._id,hd:item.system.hd?.spent,spent:item.system.uses?.spent,fractional:item.flags?.jjk5e?.fractionalSpent??0};});
+    await actor.setFlag(MODULE_ID,"shortRestExchange",{id:restId,state:"review",amount:n,before,updates});
+    try{
+      await actor.updateEmbeddedDocuments("Item",updates,{jjk5eCE:true});
+      const verified=updates.every(u=>{const item=actor.items.get(u._id);return item&&Object.entries(u).every(([k,v])=>k==="_id"||Number(foundry.utils.getProperty(item,k)??0)===v);});
+      if(!verified)throw Error("Rest exchange verification failed");
+      await actor.setFlag(MODULE_ID,"shortRestExchange",{id:restId,state:"committed",amount:n});
+    }catch(err){
+      reportError("short rest CE review",err);
+      ui.notifications.error(game.i18n.lang.startsWith("es")?"Intercambio de dados/CE incierto: el GM debe revisar el registro del actor. No repitas la operación.":"Hit dice/CE exchange uncertain: GM must review actor record. Do not retry.");
+      return false;
+    }
+    if(setting("ceChat"))try{await chat(actor,`<p><strong>${t("CE.ShortRestLabel",{n})}</strong>: +${n} CE</p>`,privateTo(actor));}catch(err){reportError("rest exchange chat",err);}
+    return true;
+  });
+}
 async function shortRestCE(actor) {
-  actor = requireActor(actor);
-  if (!actor || !actor.isOwner) return;
-  const pool = findPool(actor);
-  if (!pool) return ui.notifications.warn(t("Notify.NoPool", { name: actor.name }));
-  if (vowBlocksUsage(actor.effects, { costsCE: true }))
-    return ui.notifications.warn(t("Notify.VowBlocksRegain"));
-  const classes = actor.items.filter((i) => i.type === "class");
-  const total = classes.reduce((n, c) => n + Math.max(0, Number(c.system.levels) || 0), 0);
-  const available = classes.reduce((n, c) =>
-    n + Math.max(0, (Number(c.system.levels) || 0) - (Number(c.system.hd?.spent) || 0)), 0);
-  const missingCE = Math.max(0, poolMax(pool) - poolValue(pool));
-  const cap = Math.min(Math.floor(total / 2), available, Math.floor(missingCE));
-  if (cap < 1) {
-    ui.notifications.warn(t("Notify.NoHitDice"));
-    return;
+  actor=requireActor(actor);
+  if(!actor?.isOwner)return false;
+  const rest=actor.getFlag(MODULE_ID,"shortRestExchange");
+  if(rest?.state!=="open" || game.combat?.started){
+    ui.notifications.warn(game.i18n.lang.startsWith("es")?"Completa un descanso corto nativo antes de intercambiar dados. Solo un intercambio por descanso; un registro en revisión requiere al GM.":"Complete a native short rest before exchanging dice. One exchange per rest; a review record requires the GM.");
+    return false;
   }
-  const n = Math.min(cap, await promptNumber(t("CE.ShortRestTitle"), t("CE.ShortRestPrompt", { cap })));
-  if (!Number.isSafeInteger(n) || n < 1) return;
-  const ok = await confirmDialog(t("CE.ShortRestTitle"),
-    `<p>Consume ${n} class Hit Dice to restore ${n} Cursed Energy?</p>`);
-  if (!ok) return;
-  let left = n;
-  for (const cls of classes) {
-    if (!left) break;
-    const spent = Number(cls.system.hd?.spent) || 0;
-    const usable = Math.max(0, (Number(cls.system.levels) || 0) - spent);
-    const take = Math.min(usable, left);
-    if (!take) continue;
-    await cls.update({ "system.hd.spent": spent + take });
-    left -= take;
-  }
-  if (left) return ui.notifications.error(t("Notify.HitDiceIncomplete"));
-  await spendCE(actor, -n, t("CE.ShortRestLabel", { n }));
+  const pool=findPool(actor);
+  if(!pool || cePending(pool) || vowBlocksUsage(actor.effects,{costsCE:true}))return false;
+  const total=actor.items.filter(i=>i.type==="class").reduce((n,c)=>n+(Number(c.system.levels)||0),0);
+  let cap=Math.floor(total/2);
+  while(cap>0&&!restExchangePlan(actor,pool,cap))cap--;
+  if(cap<1){ui.notifications.warn(t("Notify.NoHitDice"));return false;}
+  const n=await promptNumber(t("CE.ShortRestTitle"),t("CE.ShortRestPrompt",{cap}));
+  if(!Number.isSafeInteger(n)||n<1||n>cap)return false;
+  if(!await confirmDialog(t("CE.ShortRestTitle"),`<p>${game.i18n.lang.startsWith("es")?"Consumir":"Consume"} ${n} HD → +${n} CE?</p>`))return false;
+  if(ceAuthorityEnabled()&&!isActiveGM())return ceAuthorityRequest("restExchange",{actorUuid:actor.uuid,restId:rest.id,amount:n});
+  return commitRestExchange(actor,rest.id,n);
 }
 
 async function negativeEmotion(actor) {
@@ -3169,6 +3202,10 @@ Hooks.once("ready", async () => {
   }
   Hooks.on("dnd5e.restCompleted", async (actor, result) => {
     if (!actor?.isOwner) return;
+    if(actor.getFlag(MODULE_ID,"shortRestExchange")?.state!=="review"){
+      if(result?.longRest)await actor.unsetFlag(MODULE_ID,"shortRestExchange");
+      else if(result)await actor.setFlag(MODULE_ID,"shortRestExchange",{id:foundry.utils.randomID(),state:"open"});
+    }
     if (result?.longRest) {
       const pool = findPool(actor);
       if (pool && (!ceAuthorityEnabled()||(!cePending(pool)&&isActiveGM()))) await queueCE(actor, () => pool.update({ "system.uses.spent": 0, "flags.jjk5e.fractionalSpent": 0 }, { jjk5eCE: true }));
