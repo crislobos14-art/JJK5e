@@ -23,6 +23,95 @@
   "prerequisites": {
    "level": null,
    "repeatable": false
+  },
+  "activities": {
+   "uBKxbEeVw8e7hDYP": {
+    "_id": "uBKxbEeVw8e7hDYP",
+    "type": "check",
+    "name": "Subtle Constructs: Sleight of Hand vs passive Perception",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "check": {
+     "ability": "dex",
+     "associated": [
+      "slt"
+     ],
+     "dc": {
+      "calculation": "",
+      "formula": ""
+     }
+    }
+   },
+   "KKwfYJnSelbhi764": {
+    "_id": "KKwfYJnSelbhi764",
+    "type": "utility",
+    "name": "Subtle Constructs: advantage on the first use",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "dpWOMqbOIVmI5ffl",
+      "onSave": false
+     }
+    ]
+   }
   }
  },
  "flags": {
@@ -37,12 +126,52 @@
    "forTechniques": [
     "Construction"
    ],
-   "rev": "9ffa90d647",
+   "rev": "2734a3afcd",
    "automationNotes": "Sleight of Hand vs passive Perception: advantage on the first use of the creation.",
-   "automation": "manual"
+   "automation": "automated"
   }
  },
  "folder": "kyQQ2jjaJXT8blxH",
  "sort": 100,
- "_key": "!items!RKQ914SfcvJ9Uo09"
+ "_key": "!items!RKQ914SfcvJ9Uo09",
+ "effects": [
+  {
+   "_id": "dpWOMqbOIVmI5ffl",
+   "name": "Subtle Construct (advantage)",
+   "img": "modules/jjk5e/icons/techniques/construction.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.midi-qol.advantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.advantage.ability.check.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 10
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    },
+    "dae": {
+     "specialDuration": [
+      "1Attack"
+     ]
+    }
+   },
+   "_key": "!items.effects!RKQ914SfcvJ9Uo09.dpWOMqbOIVmI5ffl"
+  }
+ ]
 }

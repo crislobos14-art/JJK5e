@@ -7976,13 +7976,10 @@ def review_fixes(S):
     for name, pack, txt in [
         ("Density Manipulation", F, "Stone cubes: 10 × CE mod HP; other stone constructs +10 HP (edit the summoned token)."),
         ("Bulk Buyer", F, "Two or more receipts: −1 CE per receipt each (min 1); same type: advantage for 1 minute."),
-        ("Judicial Amputation", F, "Failing the pseudo-domain save by 5+: roll on the Limb Damage table (JJK panel)."),
-        ("Cursed Tactician", F, "Spend up to proficiency CE (panel) for extra Corpse Tactics options."),
         ("Domineering Shikigami", F, "Use the shikigami customizer (JJK menu) to raise Bite and DEX."),
         ("Blessing of the Hydra", F, "After Eight Lives: add the chosen resistance or condition immunity for 1 hour."),
         ("Gourmand", F, "Regurgitation: gain temp HP = half the devoured creature's HP (max half your HP)."),
         ("True New Shadow Style", F, "The Simple Domain gets +2 × CE mod HP."),
-        ("Spatial Skirmishing", F, "Unarmed strike + Lapse Blue: use Lapse Blue on hit; CE mod for the attack."),
         ("Mounted Combatant", F, "Mounted: advantage against smaller unmounted creatures (choose it in the roll dialog)."),
         ("Skulker", F, "Hiding and dim light rules are applied by the GM."),
         ("Medium Armor Master", F, "Set the armor's DEX cap to 3 on the armor item."),
@@ -8010,13 +8007,39 @@ def review_fixes(S):
     a = act(it, "dis", "utility", "Boogie Down: next attack against you has disadvantage", "special", range=RANGE_SELF, target=SELF)
     apply(a, fx(it, "dis", "Boogie Down", rounds=1, changes=[("flags.midi-qol.grants.disadvantage.attack.all", 0, "1")], special=["isAttacked"]))
     note(it, "The two extra Boogie-only reactions are tracked by hand."); mark(it, "partial")
+
+    # v1.70: more of the manual feats.
+    it = G("Judicial Amputation")
+    a = act(it, "limb", "utility", "Judicial Amputation: Limb Removing Effect (failed by 5+)", "special", range=_r(120), target=one_creature())
+    it["flags"]["jjk5e"]["limbRoll"] = [a["_id"]]
+    note(it, "Use it on a creature that failed your pseudo-domain save by 5 or more: the module rolls the Limb Damage table for it."); mark(it)
+    it = G("Blackened Blood")
+    a = act(it, "exh", "utility", "Blackened Blood: +1 exhaustion (failed CON save by 5+, max 3)", "special", range=_r(60), target=one_creature())
+    apply(a, fx(it, "exh", "Blackened Blood (exhaustion)", rounds=None, changes=[("system.attributes.exhaustion", 2, "1")]))
+    note(it, "Apply it once per qualifying failed save; it stacks up to 3 effects."); mark(it)
+    it = G("Subtle Constructs")
+    act(it, "check", "check", "Subtle Constructs: Sleight of Hand vs passive Perception", "special", range=RANGE_SELF, target=SELF,
+        check={"ability": "dex", "associated": ["slt"], "dc": {"calculation": "", "formula": ""}})
+    a = act(it, "adv", "utility", "Subtle Constructs: advantage on the first use", "special", range=RANGE_SELF, target=SELF)
+    apply(a, fx(it, "adv", "Subtle Construct (advantage)", rounds=10, changes=[("flags.midi-qol.advantage.attack.all", 0, "1"), ("flags.midi-qol.advantage.ability.check.all", 0, "1")], special=["1Attack"]))
+    mark(it)
+    it = G("Cursed Tactician")
+    a = act(it, "extra", "utility", "Cursed Tactician: +1 Corpse Tactics option per CE", "bonus", range=_r(60), target=one_creature())
+    cost(it, a, 1, 1, "@prof"); mark(it, "partial")
+    it = G("Flash Regress")
+    a = act(it, "dc", "utility", "Flash Regress: +1 DC / check per CE (no opportunity attacks)", "special", range=RANGE_SELF, target=SELF)
+    cost(it, a, 1, 1, "@prof"); mark(it, "partial")
+    it = G("Spatial Skirmishing")
+    a = act(it, "blue", "attack", "Spatial Skirmishing: unarmed strike + Lapse Blue (CE mod, advantage)", "action", range=_r(5), target=one_creature(),
+            attack={"ability": "spellcasting", "bonus": "", "critical": {"threshold": None}, "flat": False, "type": {"value": "melee", "classification": "unarmed"}},
+            damage={"includeBase": False, "parts": [dice(1, 4, ["bludgeoning"], bonus="@mod")]})
+    cost(it, a, 1, 1, f"max(1, {CE})")
+    note(it, "Roll with advantage; apply the Lapse Blue pull from Lapse Blue on a hit."); mark(it, "partial")
+
     for name, txt in [("Enduring Shikigami", "Fox shikigami last until 0 HP and add your proficiency to their saves (edit the summon)."),
                       ("Greater Foresight", "Technique advantage: roll 3d20 keep highest (use 3d20kh in the roll)."),
                       ("Maximum: Best Friend", "Choose the Best Friend at the start of combat; its benefits are applied by hand."),
-                      ("Blackened Blood", "Failing your technique's CON save by 5+: +1 exhaustion (max 3 from this feat)."),
                       ("Amplified Transmute", "Transmuted objects: AC + proficiency, HP per cube 15/20/30/45/60 by level."),
-                      ("Subtle Constructs", "Sleight of Hand vs passive Perception: advantage on the first use of the creation."),
-                      ("Flash Regress", "Regression: no opportunity attacks; spend up to proficiency CE for +1 DC per CE."),
                       ("Elemental Adept", "Choose the damage type; resistance ignored and 1s count as 2 for that type (by hand).")]:
         it = G(name); note(it, txt); mark(it, "manual")
 

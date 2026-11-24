@@ -23,6 +23,44 @@
   "prerequisites": {
    "level": null,
    "repeatable": false
+  },
+  "activities": {
+   "qleuHgOhgPd0Sus5": {
+    "_id": "qleuHgOhgPd0Sus5",
+    "type": "utility",
+    "name": "Flash Regress: +1 DC / check per CE (no opportunity attacks)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "@prof"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
+   }
   }
  },
  "flags": {
@@ -38,8 +76,14 @@
     "Retrograde"
    ],
    "automationNotes": "Regression: no opportunity attacks; spend up to proficiency CE for +1 DC per CE.",
-   "automation": "manual",
-   "rev": "7df9c6e86c"
+   "automation": "partial",
+   "rev": "8e98c84fff",
+   "ceCosts": {
+    "qleuHgOhgPd0Sus5": 1
+   },
+   "ceSteps": {
+    "qleuHgOhgPd0Sus5": 1
+   }
   }
  },
  "folder": "xdlt8ITade4Eg7u9",

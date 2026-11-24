@@ -23,6 +23,77 @@
   "prerequisites": {
    "level": null,
    "repeatable": false
+  },
+  "activities": {
+   "uOweOCwhKYX1KgkR": {
+    "_id": "uOweOCwhKYX1KgkR",
+    "type": "attack",
+    "name": "Spatial Skirmishing: unarmed strike + Lapse Blue (CE mod, advantage)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "max(1, max(@abilities.wis.mod, @abilities.cha.mod))"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "attack": {
+     "ability": "spellcasting",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "melee",
+      "classification": "unarmed"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 4,
+       "bonus": "@mod",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
+   }
   }
  },
  "flags": {
@@ -37,9 +108,15 @@
    "forTechniques": [
     "Limitless"
    ],
-   "automationNotes": "Unarmed strike + Lapse Blue: use Lapse Blue on hit; CE mod for the attack.",
-   "automation": "manual",
-   "rev": "c8a3f78740"
+   "automationNotes": "Roll with advantage; apply the Lapse Blue pull from Lapse Blue on a hit.",
+   "automation": "partial",
+   "rev": "a8f309b6b4",
+   "ceCosts": {
+    "uOweOCwhKYX1KgkR": 1
+   },
+   "ceSteps": {
+    "uOweOCwhKYX1KgkR": 1
+   }
   }
  },
  "folder": "MYCXBgSVkzwVdmJj",

@@ -23,6 +23,52 @@
   "prerequisites": {
    "level": null,
    "repeatable": false
+  },
+  "activities": {
+   "AKfrbctCod3nIdsV": {
+    "_id": "AKfrbctCod3nIdsV",
+    "type": "utility",
+    "name": "Blackened Blood: +1 exhaustion (failed CON save by 5+, max 3)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "8wICxrfga73Os7BD",
+      "onSave": false
+     }
+    ]
+   }
   }
  },
  "flags": {
@@ -37,12 +83,41 @@
    "forTechniques": [
     "Rot"
    ],
-   "automationNotes": "Failing your technique's CON save by 5+: +1 exhaustion (max 3 from this feat).",
-   "automation": "manual",
-   "rev": "fd140487b4"
+   "automationNotes": "Apply it once per qualifying failed save; it stacks up to 3 effects.",
+   "automation": "automated",
+   "rev": "4f4ee057d3"
   }
  },
  "folder": "gN0JGJzsnMHTyd5r",
  "sort": 300,
- "_key": "!items!g6vXNF5knJQ3YoZC"
+ "_key": "!items!g6vXNF5knJQ3YoZC",
+ "effects": [
+  {
+   "_id": "8wICxrfga73Os7BD",
+   "name": "Blackened Blood (exhaustion)",
+   "img": "modules/jjk5e/icons/techniques/rot.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.attributes.exhaustion",
+     "mode": 2,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!g6vXNF5knJQ3YoZC.8wICxrfga73Os7BD"
+  }
+ ]
 }

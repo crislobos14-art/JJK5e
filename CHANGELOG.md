@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.70.0 — Claves de efecto al día y más dotes automatizadas
+- Claves de efecto: en dnd5e 6.x, los efectos nuevos o editados se guardan con las claves actuales del sistema (velocidades, sentidos, bonos de tiradas, bonos de característica y habilidad). Para traducirlas se usa la propia tabla de compatibilidad de dnd5e. En dnd5e 5.3 no cambia nada, así que sigue siendo compatible.
+- 6 dotes manuales pasan a automatizadas o parciales:
+  - *Judicial Amputation* tira en la tabla de extremidades para el objetivo.
+  - *Blackened Blood* aplica +1 de agotamiento.
+  - *Subtle Constructs* tiene prueba de Juego de manos y ventaja en el primer uso.
+  - *Cursed Tactician* y *Flash Regress* gastan EM escalable.
+  - *Spatial Skirmishing* tiene un ataque desarmado con modificador de EM.
+- 1 prueba nueva (70 en total).
+
 ## 1.69.1 — Corrección de 21 errores de la auditoría
 - Six Eyes (Dormida / Despertando): *Perfect CE Manipulation* vuelve a aplicar el descuento de CE ÷10.
 - Percepción del alma y Daño al alma ya no se pisan: cada una tiene su propio efecto. Los efectos que ya tenías se separan solos.

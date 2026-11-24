@@ -252,3 +252,13 @@ test("Audit fixes: Perfect CE Manipulation (Six Eyes Dormant) arms the ÷10 disc
   await env.settle();
   assert.equal(actor.getFlag("jjk5e", "sixEyesNext"), true);
 });
+
+test("Effect keys are rewritten with dnd5e's own shim table when it exists", async () => {
+  const { env, actor, J } = await setup();
+  assert.equal(J.modernChange({ key: "system.attributes.movement.walk", value: "1" }).key, "system.attributes.movement.walk", "no table: unchanged");
+  env.context.CONFIG.ActiveEffect.documentClass.SHIM_FIELDS = { "system.attributes.movement.walk": { key: "system.attributes.movement.speeds.walk" } };
+  assert.equal(J.modernChange({ key: "system.attributes.movement.walk", value: "1" }).key, "system.attributes.movement.speeds.walk");
+  assert.equal(J.modernChange({ key: "system.abilities.dex.bonuses.save", value: "1" }).key, "system.abilities.dex.save.roll.bonus");
+  assert.equal(J.modernChange({ key: "system.skills.ste.bonuses.check", value: "1" }).key, "system.skills.ste.roll.bonus");
+  assert.ok(actor);
+});

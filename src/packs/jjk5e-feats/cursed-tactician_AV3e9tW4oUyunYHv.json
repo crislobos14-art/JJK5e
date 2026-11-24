@@ -23,6 +23,47 @@
   "prerequisites": {
    "level": null,
    "repeatable": false
+  },
+  "activities": {
+   "yFj7gT5JLgFjWP6N": {
+    "_id": "yFj7gT5JLgFjWP6N",
+    "type": "utility",
+    "name": "Cursed Tactician: +1 Corpse Tactics option per CE",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "@prof"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "60",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": []
+   }
   }
  },
  "flags": {
@@ -38,8 +79,14 @@
     "Cursed Corpse Creation"
    ],
    "automationNotes": "Spend up to proficiency CE (panel) for extra Corpse Tactics options.",
-   "automation": "manual",
-   "rev": "af5d2326bb"
+   "automation": "partial",
+   "rev": "53069ad250",
+   "ceCosts": {
+    "yFj7gT5JLgFjWP6N": 1
+   },
+   "ceSteps": {
+    "yFj7gT5JLgFjWP6N": 1
+   }
   }
  },
  "folder": "XXj1CTcWWYDx5bTY",

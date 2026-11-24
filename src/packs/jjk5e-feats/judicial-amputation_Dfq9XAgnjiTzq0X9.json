@@ -23,6 +23,47 @@
   "prerequisites": {
    "level": null,
    "repeatable": false
+  },
+  "activities": {
+   "7vrLmASTXeGgZMyb": {
+    "_id": "7vrLmASTXeGgZMyb",
+    "type": "utility",
+    "name": "Judicial Amputation: Limb Removing Effect (failed by 5+)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "120",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": []
+   }
   }
  },
  "flags": {
@@ -37,9 +78,12 @@
    "forTechniques": [
     "Star Dictator"
    ],
-   "automationNotes": "Failing the pseudo-domain save by 5+: roll on the Limb Damage table (JJK panel).",
-   "automation": "manual",
-   "rev": "f6eafc0e34"
+   "automationNotes": "Use it on a creature that failed your pseudo-domain save by 5 or more: the module rolls the Limb Damage table for it.",
+   "automation": "automated",
+   "rev": "82e79afef6",
+   "limbRoll": [
+    "7vrLmASTXeGgZMyb"
+   ]
   }
  },
  "folder": "bGKgrFplZpNnclwX",

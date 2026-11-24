@@ -6563,6 +6563,11 @@ Hooks.once("ready", () => {
     if (Array.isArray(ids) && ids.includes(activity.id) && actor?.isOwner) actor.setFlag(MODULE_ID, "costMinusNext", true);
     else if (activity?.item?.flags?.jjk5e?.technique && actor?.getFlag?.(MODULE_ID, "costMinusNext") && actor.isOwner) actor.unsetFlag(MODULE_ID, "costMinusNext");
     onOptionalAction(activity).catch((err) => reportError("optional action", err));
+    // Items that roll the Limb Damage table for their targets (e.g. Judicial Amputation).
+    const limb = activity?.item?.flags?.jjk5e?.limbRoll;
+    if (Array.isArray(limb) && limb.includes(activity.id)) {
+      for (const tk of game.user?.targets ?? []) if (tk.actor) rollLimb(tk.actor).catch((err) => reportError("limb", err));
+    }
   });
   // Less Blood: Blood Manipulation and Rot hit point costs are reduced.
   Hooks.on("dnd5e.activityConsumption", (activity, usageConfig, messageConfig, updates) => {
@@ -6717,3 +6722,64 @@ function addAutomationBanner(app, element) {
 for (const h of ["renderItemSheet5e", "renderItemSheetV2"]) {
   Hooks.on(h, (app, element) => { try { addAutomationBanner(app, element); } catch (err) { console.error(`${MODULE_ID} | banner`, err); } });
 }
+
+/* ---- v1.70: write effect keys in the current dnd5e format ---- */
+
+/** Rewrite deprecated effect keys with the system's own shim table (dnd5e 6.x). Older dnd5e: no table, no change. */
+function modernChange(change) {
+  const AE = CONFIG.ActiveEffect?.documentClass;
+  const table = AE?.SHIM_FIELDS;
+  if (!table || !change?.key) return change;
+  let shim = table[change.key];
+  if (!shim) {
+    const m = change.key.match(/^system\.(abilities|skills|tools)\.(\w+)\.bonuses\.(check|save)$/);
+    if (m) shim = { key: `system.${m[1]}.${m[2]}.${m[1] === "abilities" ? `${m[3]}.` : ""}roll.bonus` };
+  }
+  if (!shim) return change;
+  const out = { ...change, key: shim.key };
+  if (shim.value !== undefined) out.value = shim.value;
+  return out;
+}
+function modernChanges(list) {
+  if (!Array.isArray(list)) return null;
+  let changed = false;
+  const out = list.map((c) => { const n = modernChange(c); if (n !== c) changed = true; return n; });
+  return changed ? out : null;
+}
+function modernEffectData(data) {
+  const sys = data?.system?.changes;
+  const top = data?.changes;
+  const a = modernChanges(sys), b = modernChanges(top);
+  const upd = {};
+  if (a) upd["system.changes"] = a;
+  if (b) upd.changes = b;
+  return upd;
+}
+
+Hooks.once("ready", () => {
+  if (game.system?.id !== "dnd5e" || !CONFIG.ActiveEffect?.documentClass?.SHIM_FIELDS) return;
+  Hooks.on("preCreateActiveEffect", (effect, data) => {
+    try { const upd = modernEffectData(data); if (Object.keys(upd).length) effect.updateSource(upd); } catch (err) { console.warn(`${MODULE_ID} | effect keys`, err); }
+  });
+  Hooks.on("preUpdateActiveEffect", (effect, changes) => {
+    try {
+      const upd = modernEffectData(changes);
+      for (const [k, v] of Object.entries(upd)) foundry.utils.setProperty(changes, k, v);
+    } catch (err) { console.warn(`${MODULE_ID} | effect keys`, err); }
+  });
+  Hooks.on("preCreateItem", (item, data) => {
+    if (!data?.flags?.jjk5e || !Array.isArray(data.effects)) return;
+    try {
+      let touched = false;
+      const effects = data.effects.map((e) => {
+        const upd = modernEffectData(e);
+        if (!Object.keys(upd).length) return e;
+        touched = true;
+        const copy = foundry.utils.deepClone(e);
+        for (const [k, v] of Object.entries(upd)) foundry.utils.setProperty(copy, k, v);
+        return copy;
+      });
+      if (touched) item.updateSource({ effects });
+    } catch (err) { console.warn(`${MODULE_ID} | item effect keys`, err); }
+  });
+});
