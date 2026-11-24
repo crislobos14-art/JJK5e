@@ -4440,6 +4440,7 @@ async function domainOpened(actor, effect = null) {
   const ref = incomplete ? 0 : refinementOf(actor);
   const token = actorToken(actor);
   const c = token ? tokenCenter(token) : null;
+  const sourceScene = token?.document?.parent ?? token?.parent ?? null;
   // Domain Durability: +1 HP per refinement point; Durable Barrier (800+) doubles it.
   const max = Math.max(1, 10 * mod + (ref >= 800 ? 2 * ref : ref));
   const radius = incomplete ? 100 : barrierless ? 655 : DOMAIN_RADIUS;
@@ -4447,7 +4448,7 @@ async function domainOpened(actor, effect = null) {
     hp: max, max, ac: 10 + mod + Math.floor(ref / 100), refinement: ref,
     radius, lethal: actor.getFlag(MODULE_ID, "domainLethal") !== false,
     noBarrier: incomplete || barrierless, noSureHit: incomplete, incomplete, barrierless,
-    sceneId: canvas?.scene?.id ?? null, x: c?.x ?? null, y: c?.y ?? null,
+    sceneId: sourceScene?.id ?? null, x: c?.x ?? null, y: c?.y ?? null,
     damageTaken: 0, zone: null, clash: null, name: actor.name };
   await setDomain(actor, state);
   if (c && state.sceneId) await viaGM("domainZone", { sceneId: state.sceneId, x: c.x, y: c.y, radius,
@@ -4604,7 +4605,7 @@ async function tickClashes(combat = game.combat) {
       const s = getDomain(a);
       if (!s?.open || s.sceneId !== sceneId || s.clash?.role !== "loser" || s.clash.resolved) continue;
       const last = s.clash.lastTick;
-      if (last?.combatId === key && round <= last.round) continue;
+      if (last && (last.combatId !== key || round <= last.round)) continue;
       s.clash.lastTick = { combatId: key, round };
       s.clash.rounds = Math.max(0, (s.clash.rounds ?? 0) - 1);
       s.radius = Math.max(15, s.radius - 15);
@@ -7081,7 +7082,8 @@ function clashBlocker(actor, opener) {
 /** Creatures on the opener's scene that may answer with their own domain. */
 function clashCandidates(opener) {
   const state = getDomain(opener);
-  const scene = game.scenes?.get(state?.sceneId) ?? globalThis.canvas?.scene;
+  const scene = state?.sceneId ? game.scenes?.get(state.sceneId) : null;
+  if (!state?.open || !scene) return [];
   const seen = new Set();
   const out = [];
   for (const tk of scene?.tokens ?? []) {
@@ -7096,7 +7098,8 @@ function clashCandidates(opener) {
 /** Users who decide for this actor: its active player owners, else the GM. */
 function deciders(actor) {
   const players = game.users.filter((u) => u.active && !u.isGM && actor.testUserPermission?.(u, "OWNER"));
-  return players.length ? players.map((u) => u.id) : game.users.filter((u) => u.isGM && u.active).map((u) => u.id);
+  const gm = game.users.activeGM ?? game.users.find((u) => u.isGM && u.active);
+  return players.length ? players.map((u) => u.id) : gm ? [gm.id] : [];
 }
 
 const CLASH_OFFERED = new Map();
@@ -7121,11 +7124,11 @@ async function offerDomainClash(opener) {
 
 const CLASH_PROMPTS = new Set();
 async function promptDomainClash({ actorUuid, opener, openerUuid, openingId }) {
-  if (CLASH_PROMPTS.has(actorUuid)) return;
-  const actor = await fromUuid(actorUuid).catch(() => null);
-  if (!actor?.isOwner) return;
+  if (CLASH_PROMPTS.has(actorUuid) || !openerUuid || !openingId) return;
   CLASH_PROMPTS.add(actorUuid);
   try {
+    const actor = await fromUuid(actorUuid).catch(() => null);
+    if (!actor?.isOwner || !rivalDomainFor(actor, openerUuid, openingId)) return;
     const go = await foundry.applications.api.DialogV2.confirm({ window: { title: t("Clash.OfferTitle"), icon: "fas fa-yin-yang" },
       classes: ["jjk5e-ui", "jjk5e-dialog"], rejectClose: false,
       content: `<p>${t("Clash.Offer", { name: esc(actor.name), opener: esc(opener ?? "?") })}</p><p class="hint">${t("Clash.Hint")}</p>`,
