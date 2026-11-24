@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.62.0 — Multiclase V.6
+- Requisitos de multiclase: 13 en la característica de la clase actual y de la nueva (Warrior FUE, Scout DES, Juggernaut CON, Strategist INT, Support Specialist SAB, Shikigami User CAR). Aviso al añadir la clase; con *prerrequisitos estrictos* se bloquea para jugadores.
+- Heavenly Restriction (Pure Body) no puede hacer multiclase.
+- Cursed Energy: una sola reserva, la de la clase de mayor nivel, escalada con el nivel total del personaje (antes cada clase añadía su propia reserva con su propio nivel).
+- Innate Technique, Cursed Strike, Cursesight, Unarmored Defense y Extra Attack no se duplican al subir en otra clase.
+- 2 pruebas de ejecución nuevas (39 en total).
+
 ## 1.61.0 — Reglas del manual: Awakened Understanding, Cursed Physiology, dominios
 - Awakened Understanding: Skilled añade Cursed Strike 1d8 y Cursed Reinforcement como PG temporales; Advanced: Reinforcement hasta mod CE + competencia como acción, acción adicional o reacción; Mastered: Cursed Strike 2d8 por CE y +CE al ataque.
 - Efficiency (Advanced −1, Mastered −2): el coste base de las técnicas innatas baja automáticamente (mínimo 1).

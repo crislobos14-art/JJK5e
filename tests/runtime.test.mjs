@@ -328,3 +328,41 @@ test("Burnout Recovery: needs RCT and 750 refinement; 4 CE, CON save DC 5 (+5 pe
   assert.ok(fx(actor, "burnout"), "still burnt out");
   assert.ok(fx(actor, "brainstrain"), "no actions until next turn");
 });
+
+const CLASS = (name, identifier, levels) => ({ name, type: "class", system: { identifier, levels,
+  advancement: [{ _id: `sv${identifier}`, type: "ScaleValue", configuration: { identifier: "cursed-energy",
+    scale: Object.fromEntries(Array.from({ length: 20 }, (_, i) => [String(i + 1), { value: (i + 1) * (identifier === "warrior" ? 1 : 2) }])) } }] } });
+
+test("Multiclassing: 13 in both classes' abilities; Heavenly Restriction cannot multiclass", async () => {
+  const { env, actor, J } = await setup();
+  await actor.update({ "system.abilities.str.value": 14, "system.abilities.dex.value": 12 });
+  await actor.createEmbeddedDocuments("Item", [CLASS("Warrior", "warrior", 3)]);
+  const scout = new env.Item(CLASS("Scout", "scout", 1), actor);
+  assert.match(J.multiclassProblems(actor, scout).join(), /DEX/);
+  await actor.update({ "system.abilities.dex.value": 13 });
+  assert.equal(J.multiclassProblems(actor, scout).length, 0);
+  await actor.update({ "system.abilities.str.value": 12 });
+  assert.match(J.multiclassProblems(actor, scout).join(), /STR/, "current class too");
+  const hr = new env.Item(CLASS("Heavenly Restriction", "heavenly-restriction", 1), actor);
+  assert.match(J.multiclassProblems(actor, hr).join(), /Pure Body|PureBody/);
+});
+
+test("Multiclassing: one Cursed Energy pool from the highest class, scaled by total level; no duplicate features", async () => {
+  const { env, actor, J } = await setup();
+  const poolOf = (n) => ({ name: `Cursed Energy (${n})`, type: "feat", flags: { jjk5e: { cePool: true } },
+    system: { uses: { max: `@scale.${n.toLowerCase()}.cursed-energy + max(@abilities.wis.mod, @abilities.cha.mod)`, spent: 0 } } });
+  await actor.deleteEmbeddedDocuments("Item", [J.findPool(actor).id]);
+  await actor.createEmbeddedDocuments("Item", [CLASS("Warrior", "warrior", 3), poolOf("Warrior"),
+    { name: "Cursed Strike", type: "feat" }, CLASS("Scout", "scout", 2), poolOf("Scout"), { name: "Cursed Strike", type: "feat" }]);
+  await actor.update({ "system.details.level": 5 });
+  await J.dedupeMulticlass(actor);
+  await J.applyScaling(actor); await env.settle();
+  const pools = actor.items.filter((i) => i.flags?.jjk5e?.cePool);
+  assert.equal(pools.length, 1, "one pool");
+  assert.equal(actor.items.filter((i) => i.name === "Cursed Strike").length, 1, "one Cursed Strike");
+  assert.match(pools[0].system.uses.max, /^5 \+ /, "Warrior table (highest class) at total level 5");
+  await actor.items.find((i) => i.name === "Scout").update({ "system.levels": 4 });
+  await actor.update({ "system.details.level": 7 });
+  await J.applyScaling(actor);
+  assert.match(J.findPool(actor).system.uses.max, /^14 \+ /, "Scout is now the highest class: its table at level 7");
+});

@@ -887,10 +887,68 @@ function missingPrereqs(actor, item) {
   return missing;
 }
 
+/* ---- Multiclassing (V.6) ---- */
+
+const MC_ABILITY = { warrior: "str", scout: "dex", juggernaut: "con", strategist: "int", "support-specialist": "wis", "shikigami-user": "cha" };
+const jjkClasses = (actor) => actor.items.filter((i) => i.type === "class");
+
+/** Multiclass problems for adding `item` (a class) to `actor`: 13 in both classes' abilities; Heavenly Restriction (Pure Body) cannot multiclass. */
+function multiclassProblems(actor, item) {
+  if (item.type !== "class") return [];
+  const id = item.system?.identifier;
+  const others = jjkClasses(actor).filter((c) => c.system?.identifier !== id);
+  if (!others.length) return [];
+  const out = [];
+  if (id === "heavenly-restriction" || others.some((c) => c.system?.identifier === "heavenly-restriction")) out.push(t("Multiclass.PureBody"));
+  for (const cls of [item, ...others]) {
+    const ab = MC_ABILITY[cls.system?.identifier];
+    if (ab && (Number(actor.system.abilities?.[ab]?.value) || 0) < 13) out.push(t("Multiclass.Ability", { cls: cls.name, ab: ab.toUpperCase() }));
+  }
+  return out;
+}
+
+/** The class whose Cursed Energy table applies when multiclassing: the highest level one (the original class on a tie). */
+function ceClass(actor) {
+  const classes = jjkClasses(actor).filter((c) => c.system?.identifier !== "heavenly-restriction");
+  if (classes.length < 2) return null;
+  const original = actor.system?.details?.originalClass;
+  return classes.sort((a, b) => (Number(b.system.levels) || 0) - (Number(a.system.levels) || 0)
+    || (b.id === original) - (a.id === original))[0];
+}
+
+/** Value of a class ScaleValue advancement at a given level (number scale). */
+function classScaleAt(cls, identifier, level) {
+  const adv = cls?.system?.advancement;
+  const list = Array.isArray(adv) ? adv : Object.values(adv?.contents ? Object.fromEntries(adv.contents.map((a) => [a.id, a])) : adv ?? {});
+  const sv = list.find((a) => a.type === "ScaleValue" && (a.configuration?.identifier ?? a.identifier) === identifier);
+  const scale = sv?.configuration?.scale ?? {};
+  const keys = Object.keys(scale).map(Number).filter((l) => l <= level).sort((a, b) => a - b);
+  return keys.length ? Number(scale[keys.at(-1)]?.value) || 0 : 0;
+}
+
+// Features that a second class must not grant again: keep the first copy.
+const MC_SINGLE = ["Cursed Strike", "Cursesight", "Innate Technique", "Unarmored Defense", "Extra Attack"];
+
+async function dedupeMulticlass(actor) {
+  if (!actor?.isOwner || jjkClasses(actor).length < 2) return;
+  const drop = [];
+  for (const name of MC_SINGLE) drop.push(...actor.items.filter((i) => i.type === "feat" && baseName(i) === name).slice(1).map((i) => i.id));
+  // One Cursed Energy pool: keep the most used one (it carries the current spent value).
+  const pools = actor.items.filter((i) => i.flags?.jjk5e?.cePool && /^Cursed Energy \(/.test(baseName(i)))
+    .sort((a, b) => (Number(b.system.uses?.spent) || 0) - (Number(a.system.uses?.spent) || 0));
+  drop.push(...pools.slice(1).map((i) => i.id));
+  if (drop.length) await actor.deleteEmbeddedDocuments("Item", drop, { jjk5eSync: true });
+}
+
 function onPreCreateItem(item, data, options, userId) {
   if (userId !== game.user.id || !setting("checkPrereqs")) return;
   const actor = item.parent;
   if (actor?.documentName !== "Actor" || options?.jjk5eSkipPrereq) return;
+  const mc = multiclassProblems(actor, item);
+  if (mc.length) {
+    ui.notifications.warn(t("Multiclass.Blocked", { name: item.name, list: mc.join("; ") }), { permanent: false });
+    if (setting("strictPrereqs") && !game.user.isGM) return false;
+  }
   const missing = missingPrereqs(actor, item);
   if (missing.length) {
     ui.notifications.warn(t("Feats.Missing", { name: item.name, list: missing.join("; ") }), { permanent: false });
@@ -1127,13 +1185,19 @@ async function applyScaling(actor) {
   const vowCE = (actor.getFlag(MODULE_ID, "vows") ?? []).filter((v) => v.active && !v.broken)
     .flatMap((v) => v.terms ?? []).filter((x) => x.type === "ceMax").reduce((sum, x) => sum + (Number(x.value) || 0), 0);
   if (vowCE) bonusParts.push(`(${vowCE})`);
+  // Multiclassing: only the highest level class's Cursed Energy, scaling with the total character level.
+  const mcClass = ceClass(actor);
+  const mcBase = mcClass ? `${classScaleAt(mcClass, "cursed-energy", characterLevel(actor))} + ${CE_TOKEN}`
+    + (mcClass.system.identifier === "support-specialist" ? " + @prof" : "") : null;
   for (const pool of actor.items.filter((i) => i.flags?.jjk5e?.cePool)) {
     const srcMax = String(pool.toObject().system.uses?.max ?? "");
-    let base = pool.flags.jjk5e.baseMax ?? srcMax;
+    let base = (mcBase && /^Cursed Energy \(/.test(baseName(pool)) ? mcBase : null) ?? pool.flags.jjk5e.baseMax ?? srcMax;
     if (ab) base = base.split(CE_TOKEN).join(`@abilities.${ab}.mod`);
     const desired = bonusParts.length ? `${base} + ${bonusParts.join(" + ")}` : base;
-    if (desired !== srcMax || pool.flags.jjk5e.baseMax !== base) {
-      await pool.update({ "system.uses.max": desired, "flags.jjk5e.baseMax": base });
+    // The multiclass base is recomputed every time; keep the pool's own formula stored for single-class use.
+    const keep = mcBase && base === mcBase ? (pool.flags.jjk5e.baseMax ?? srcMax) : base;
+    if (desired !== srcMax || pool.flags.jjk5e.baseMax !== keep) {
+      await pool.update({ "system.uses.max": desired, "flags.jjk5e.baseMax": keep });
     }
   }
   if (ab) {
@@ -2148,6 +2212,7 @@ Hooks.once("ready", async () => {
   Hooks.on("dnd5e.advancementManagerComplete", async (manager) => {
     const actor = manager?.actor;
     if (!actor?.isOwner) return;
+    await dedupeMulticlass(actor);
     if (actor.getFlag(MODULE_ID, "technique")) await syncTechnique(actor);
     await applyScaling(actor);
   });

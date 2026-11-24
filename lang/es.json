@@ -664,6 +664,11 @@
       "Done": "{name}: {n} objeto(s) actualizado(s).",
       "DoneWorld": "{n} objeto(s) actualizado(s) en {actors} actor(es).",
       "Notice": "JJK 5e {version}: {n} actor(es) tienen objetos con automatización desactualizada."
+    },
+    "Multiclass": {
+      "PureBody": "Heavenly Restriction (Pure Body) no puede hacer multiclase",
+      "Ability": "{cls} requiere {ab} 13",
+      "Blocked": "Multiclase {name}: {list}"
     }
   }
 }

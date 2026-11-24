@@ -664,6 +664,11 @@
       "Done": "{name}: {n} item(s) updated.",
       "DoneWorld": "{n} item(s) updated on {actors} actor(s).",
       "Notice": "JJK 5e {version}: {n} actor(s) have items with outdated automation."
+    },
+    "Multiclass": {
+      "PureBody": "Heavenly Restriction (Pure Body) cannot multiclass",
+      "Ability": "{cls} needs {ab} 13",
+      "Blocked": "Multiclass {name}: {list}"
     }
   }
 }
