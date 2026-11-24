@@ -96,11 +96,24 @@
       "Stats": "CA {ac} · refinamiento {ref} · radio {r} pies",
       "Mode": "Barrera",
       "WeakSpot": "Buscar punto débil (CD 30)",
-      "Close": "Cerrar dominio"
+      "Close": "Cerrar dominio",
+      "Barrierless": "Dominio sin barrera",
+      "BarrierlessPrompt": "¿Expandir sin barrera? Sin límite de tiempo y 655 ft de radio; el dominio solo se rompe si recibes 1/3 de tus PG máximos de un golpe y fallas una salvación de CON (CD 15 + la mitad del daño).",
+      "BarrierlessDescription": "Dominio sin barrera: sin barrera, sin límite de tiempo, 655 ft de radio. Recibir 1/3 de tus PG máximos de una vez obliga a una salvación de CON (CD 15 + la mitad del daño) o el dominio se destruye.",
+      "BarrierlessStats": "Sin barrera · radio {radius} ft · sin límite de tiempo",
+      "BarrierlessSave": "Dominio sin barrera: salvación de CON CD {dc}",
+      "IncompleteDescription": "Dominio incompleto: 100 ft, 1 minuto, refinamiento 0, sin barrera ni sure-hit. Ventaja en ataques de técnica; las criaturas dentro tienen desventaja en salvaciones contra tu técnica innata. Efectos a la mitad.",
+      "IncompleteStats": "Dominio incompleto · {radius} ft · sin barrera ni sure-hit"
     },
     "Burnout": {
       "Name": "Technique Burnout",
-      "Description": "Tras una Expansión de Dominio: sin rasgos de Técnica Innata y 2 niveles de agotamiento durante 1 minuto o hasta lograr un Black Flash."
+      "Description": "Tras una Expansión de Dominio: sin rasgos de Técnica Innata y 2 niveles de agotamiento durante 1 minuto o hasta lograr un Black Flash.",
+      "Recovery": "Recuperar Burnout",
+      "RecoveryUnavailable": "Recuperar Burnout requiere Technique Burnout, Reverse Cursed Technique y refinamiento de dominio 750+.",
+      "RecoverySave": "Recuperar Burnout: salvación de CON CD {dc}",
+      "RecoverySuccess": "{name} regenera su cerebro: termina el Technique Burnout.",
+      "RecoveryFail": "Recuperar Burnout falló: 8d6 de daño psíquico y sin acciones ni acciones adicionales hasta el inicio de tu siguiente turno.",
+      "RecoveryFailEffect": "Secuela de Recuperar Burnout"
     },
     "Output": {
       "Title": "Output",

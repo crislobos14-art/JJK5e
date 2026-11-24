@@ -99,6 +99,7 @@ export function createEnv({ settings: overrides = {} } = {}) {
     }
     async update(changes = {}, options = {}) {
       const exp = expandObject(changes);
+      if (Hooks.call(`preUpdate${this.documentName}`, this, exp, options, user.id) === false) return this;
       mergeInto(this, exp);
       this.prepare?.();
       await fire(`update${this.documentName}`, this, exp, options, user.id);

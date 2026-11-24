@@ -10,7 +10,8 @@ import hashlib, json, os, re, sys
 
 ALPHA = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 PACKS = {"jjk5e-techniques": "data/jjk5e-techniques.json", "jjk5e-feats": "data/jjk5e-feats.json",
-         "jjk5e-equipment": "data/jjk5e-equipment.json", "jjk5e-class-features": "data/jjk5e-class-features.json"}
+         "jjk5e-equipment": "data/jjk5e-equipment.json", "jjk5e-class-features": "data/jjk5e-class-features.json",
+         "jjk5e-races": "data/jjk5e-races.json"}
 CE = "max(@abilities.wis.mod, @abilities.cha.mod)"
 NON_PSYCHIC = ["acid", "bludgeoning", "cold", "fire", "force", "lightning", "necrotic", "piercing", "poison",
                "radiant", "slashing", "thunder"]
@@ -7358,6 +7359,139 @@ def rules_fixes(S):
     fl = rp["flags"].setdefault("jjk5e", {})
     for k in ("ceCosts", "ceSteps"):
         if heal["_id"] in fl.get(k, {}): fl[k][r["_id"]] = fl[k][heal["_id"]]
+
+    FT = "jjk5e-feats"
+    acts = lambda it: it["system"].setdefault("activities", {})
+    jf = lambda it: it.setdefault("flags", {}).setdefault("jjk5e", {})
+
+    def strike(it, key, n, d, name):
+        a = act(it, key, "damage", name, "special", target=one_creature(),
+                damage={"parts": [{"number": n, "denomination": d, "bonus": "", "types": ["necrotic"],
+                                   "custom": {"enabled": False, "formula": ""}, "scaling": {"mode": "whole", "number": n}}]})
+        a["activation"]["condition"] = "On a hit with an unarmed strike or melee weapon"
+        cost(it, a, 1, 1, "@prof"); jf(it)["rawCE"] = True
+        return a
+
+    def reinforce(it, a, max_):
+        a["type"] = "heal"; a["range"], a["target"] = RANGE_SELF, SELF
+        a["healing"] = {"number": None, "denomination": None, "bonus": "5", "types": ["temphp"],
+                        "custom": {"enabled": False, "formula": ""}, "scaling": {"mode": "whole", "formula": "5"}}
+        a["consumption"]["scaling"] = {"allowed": True, "max": max_}
+
+    def clone(it, src, key, name, activation):
+        a = json.loads(json.dumps(src)); a["_id"] = sid(it["_id"], "act", key); a["name"] = name
+        a["activation"] = {"type": activation, "value": 1, "condition": "", "override": True}
+        acts(it)[a["_id"]] = a
+        for k in ("ceCosts", "ceSteps"):
+            if src["_id"] in jf(it).get(k, {}): jf(it).setdefault(k, {})[a["_id"]] = jf(it)[k][src["_id"]]
+        return a
+
+    # Awakened Understanding: Skilled (d8 strike, reinforcement), Advanced (1d12, reinforcement CE+prof as
+    # action/bonus/reaction, efficiency −1), Mastered (2d8, +CE to attack, efficiency −2).
+    sk = S.get("Skilled Cursed Energy Manipulation", FT)
+    strike(sk, "strike", 1, 8, "Cursed Strike (1+ CE): +1d8 necrotic per CE")
+    rein = next(a for a in acts(sk).values() if a["type"] == "heal")
+    rein["name"] = "Cursed Reinforcement (action, 1+ CE): 5 temp HP per CE"
+    reinforce(sk, rein, f"max(1, {CEMOD})"); mark(sk)
+
+    ad = S.get("Advanced Cursed Energy Manipulation", FT)
+    ORIG_AD = sid(ad["_id"], "act", "rein-main")
+    rein = acts(ad).get(ORIG_AD) or next(a for a in acts(ad).values() if a["type"] == "heal" and not a["_id"].startswith("x"))
+    if rein["_id"] != ORIG_AD:
+        acts(ad).pop(rein["_id"]); old = rein["_id"]; rein["_id"] = ORIG_AD; acts(ad)[ORIG_AD] = rein
+        for k in ("ceCosts", "ceSteps"):
+            if old in jf(ad).get(k, {}): jf(ad)[k][ORIG_AD] = jf(ad)[k].pop(old)
+    rein["name"] = "Cursed Reinforcement (bonus action, 1+ CE): 5 temp HP per CE"
+    reinforce(ad, rein, f"max(1, {CEMOD} + @prof)")
+    clone(ad, rein, "rein-action", "Cursed Reinforcement (action, 1+ CE)", "action")
+    clone(ad, rein, "rein-reaction", "Cursed Reinforcement (reaction, 1+ CE)", "reaction")
+    jf(ad)["ceEfficiency"] = 1
+    note(ad, "Efficiency: the module lowers innate technique base costs by 1 (minimum 1).")
+    mark(ad)
+
+    ms = S.get("Mastered Cursed Energy Manipulation", FT)
+    st = next(a for a in acts(ms).values() if a["type"] == "damage")
+    st["name"] = "Cursed Strike (1+ CE): +2d8 necrotic per CE"
+    st["activation"] = {"type": "special", "value": None, "condition": "On a hit with an unarmed strike or melee weapon", "override": True}
+    st["damage"]["parts"][0]["scaling"] = {"mode": "whole", "number": 2}
+    jf(ms)["rawCE"] = True
+    atk = act(ms, "atk", "utility", "Empowered attack (1+ CE): +1 to the attack roll per CE", "special", range=RANGE_SELF, target=SELF)
+    cost(ms, atk, 1, 1, "@prof")
+    apply(atk, fx(ms, "atk", "Empowered attack", rounds=1, changes=[("system.bonuses.mwak.attack", 2, "+JJKSCALING")],
+                  special=("1Attack",)))
+    jf(ms)["ceEfficiency"] = 2
+    note(ms, "Efficiency: the module lowers innate technique base costs by 2 (minimum 1). Empowered attack: use it before rolling.")
+    mark(ms)
+
+    # Cursed Energy Affinity (Cursed Spirit races): 5 HP per CE, up to CE mod, action.
+    ca = S.get("Cursed Energy Affinity", "jjk5e-races")
+    u = next(a for a in acts(ca).values() if a["type"] in ("utility", "heal"))
+    u["type"] = "heal"; u["range"], u["target"] = RANGE_SELF, SELF; u["name"] = "Action (1+ CE): 5 HP per CE"
+    u["healing"] = {"number": None, "denomination": None, "bonus": "5", "types": ["healing"],
+                    "custom": {"enabled": False, "formula": ""}, "scaling": {"mode": "whole", "formula": "5"}}
+    cost(ca, u, 1, 1, f"max(1, {CEMOD})"); mark(ca)
+
+    # Increased Affinity (V.6 optional rule for Cursed Spirit races at 10th level).
+    cp = S.get("Darkvision (1 PP)", FT)  # same folder (Cursed Physiology)
+    ia_id = sid("rules", "increased-affinity")
+    ia = S.add(FT, {"_id": ia_id, "name": "Increased Affinity", "type": "feat", "img": ca.get("img") or cp.get("img"),
+                    "folder": cp.get("folder"),
+                    "system": {"description": {"value": "<p><em>Prerequisite: 10th level, Cursed Spirit race (DM option)</em></p>"
+                                               "<p>You can use Increased Affinity as a bonus action or reaction to damage to spend up to your "
+                                               "Cursed Energy modifier in cursed energy to regain 10 hit points per cursed energy spent.</p>"},
+                               "source": {"book": "JJK 5e V.6", "page": "", "custom": "Optional Rules", "license": "CC BY-NC-SA 4.0", "rules": "2014"},
+                               "type": {"value": "feat", "subtype": ""}, "requirements": "10th level, Cursed Spirit",
+                               "activities": {}, "uses": {"max": "", "spent": 0, "recovery": []}},
+                    "effects": [], "flags": {"jjk5e": {}}}, "increased-affinity")
+    h = act(ia, "heal", "heal", "Bonus Action (1+ CE): 10 HP per CE", "bonus", range=RANGE_SELF, target=SELF,
+            healing={"number": None, "denomination": None, "bonus": "10", "types": ["healing"],
+                     "custom": {"enabled": False, "formula": ""}, "scaling": {"mode": "whole", "formula": "10"}})
+    cost(ia, h, 1, 1, f"max(1, {CEMOD})")
+    clone(ia, h, "react", "Reaction to damage (1+ CE): 10 HP per CE", "reaction")
+    mark(ia)
+
+    # Cursed Physiology attributes.
+    dv = S.get("Darkvision (1 PP)", FT)
+    eid = _passive(dv, "dv", "Darkvision (Cursed Physiology)", [("system.attributes.senses.darkvision", 4, "60")])
+    for e in dv["effects"]:
+        if e["_id"] == eid: e.setdefault("flags", {}).setdefault("jjk5e", {})["levelTable"] = {"class": "*", "table": [[1, 60], [8, 120]]}
+    mark(dv)
+    sp = S.get("Increased Speed (1 PP)", FT)
+    eid = _passive(sp, "spd", "Increased Speed (Cursed Physiology)", [("system.attributes.movement.walk", 2, "5")])
+    for e in sp["effects"]:
+        if e["_id"] == eid: e.setdefault("flags", {}).setdefault("jjk5e", {})["levelTable"] = {"class": "*", "table": [[1, 5], [10, 10]]}
+    mark(sp)
+    def adv(it, key, typ, title, cfg):
+        a = it["system"].setdefault("advancement", {})
+        if isinstance(a, list): a = it["system"]["advancement"] = {x["_id"]: x for x in a}
+        aid = sid(it["_id"], "adv", key)
+        a[aid] = {"_id": aid, "type": typ, "level": 0, "title": title, "value": {}, "configuration": cfg}
+    adv(S.get("Ability Improvement (1 PP)", FT), "asi", "AbilityScoreImprovement", "Ability Improvement (+1)",
+        {"points": 1, "cap": 1, "fixed": {}, "locked": []})
+    adv(S.get("Horrifying Form (1 PP)", FT), "itm", "Trait", "Intimidation (expertise if proficient)",
+        {"mode": "upgrade", "allowReplacements": False, "grants": ["skills:itm"], "choices": []})
+    adv(S.get("Ambush Predator (1 PP)", FT), "skill", "Trait", "Ambush Predator",
+        {"mode": "default", "allowReplacements": True, "grants": [],
+         "choices": [{"count": 1, "pool": ["skills:ste", "skills:dec", "skills:prc", "skills:sur"]}]})
+    for n in ("Ability Improvement (1 PP)", "Horrifying Form (1 PP)", "Ambush Predator (1 PP)"): mark(S.get(n, FT))
+    cw = S.get("Curse Weapon (1 PP)", FT)
+    w = act(cw, "atk", "attack", "Curse Weapon attack", "action", range={"value": "5", "units": "ft", "override": True},
+            target=one_creature(), attack={"ability": "str", "bonus": "", "critical": {"threshold": None}, "flat": False,
+                                            "type": {"value": "melee", "classification": "unarmed"}},
+            damage={"includeBase": False, "parts": [dice(1, 6, ["slashing", "piercing", "bludgeoning"], bonus="@mod")]})
+    scale(cw, w, [[1, "1d6"], [5, "1d8"], [10, "1d10"]])
+    note(cw, "Pick the damage type of your weapon (claws slashing, fangs piercing, fists/tail bludgeoning) on the roll.")
+    mark(cw)
+
+    # Incomplete Domain: opens a 100-ft incomplete domain (10 CE); the module handles the rest.
+    idm = S.get("Incomplete Domain", FT)
+    u = next(a for a in acts(idm).values() if a["type"] == "utility")
+    u["name"] = "Action (10 CE): incomplete domain"; u["range"], u["target"] = RANGE_SELF, SELF
+    cost(idm, u, 10)
+    jf(idm).update({"domainActivity": u["_id"], "incompleteDomain": True})
+    note(idm, "Opens a 1-minute incomplete domain (100 ft, refinement 0, no barrier, no sure hit, advantage on technique "
+              "attacks). Burnout lasts 5 rounds when it ends.")
+    mark(idm)
 
 
 # ---------------------------------------------------------------- manual weapons & gear (V.6 Equipment)

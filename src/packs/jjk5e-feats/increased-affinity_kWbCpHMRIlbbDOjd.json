@@ -1,0 +1,151 @@
+{
+ "_id": "kWbCpHMRIlbbDOjd",
+ "name": "Increased Affinity",
+ "type": "feat",
+ "img": "modules/jjk5e/icons/trait-race.svg",
+ "folder": "ar3Bgj4YHvYRp8DL",
+ "system": {
+  "description": {
+   "value": "<p><em>Prerequisite: 10th level, Cursed Spirit race (DM option)</em></p><p>You can use Increased Affinity as a bonus action or reaction to damage to spend up to your Cursed Energy modifier in cursed energy to regain 10 hit points per cursed energy spent.</p>"
+  },
+  "source": {
+   "book": "JJK 5e V.6",
+   "page": "",
+   "custom": "Optional Rules",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "feat",
+   "subtype": ""
+  },
+  "requirements": "10th level, Cursed Spirit",
+  "activities": {
+   "kytyEDDVCQIbxxzw": {
+    "_id": "kytyEDDVCQIbxxzw",
+    "type": "heal",
+    "name": "Bonus Action (1+ CE): 10 HP per CE",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "max(1, max(@abilities.wis.mod, @abilities.cha.mod))"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "10",
+     "types": [
+      "healing"
+     ],
+     "custom": {
+      "enabled": false,
+      "formula": ""
+     },
+     "scaling": {
+      "mode": "whole",
+      "formula": "10"
+     }
+    }
+   },
+   "t3YJUoKTfGDcA66x": {
+    "_id": "t3YJUoKTfGDcA66x",
+    "type": "heal",
+    "name": "Reaction to damage (1+ CE): 10 HP per CE",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "max(1, max(@abilities.wis.mod, @abilities.cha.mod))"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [],
+    "healing": {
+     "number": null,
+     "denomination": null,
+     "bonus": "10",
+     "types": [
+      "healing"
+     ],
+     "custom": {
+      "enabled": false,
+      "formula": ""
+     },
+     "scaling": {
+      "mode": "whole",
+      "formula": "10"
+     }
+    }
+   }
+  },
+  "uses": {
+   "max": "",
+   "spent": 0,
+   "recovery": []
+  }
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "ceCosts": {
+    "kytyEDDVCQIbxxzw": 1,
+    "t3YJUoKTfGDcA66x": 1
+   },
+   "ceSteps": {
+    "kytyEDDVCQIbxxzw": 1,
+    "t3YJUoKTfGDcA66x": 1
+   },
+   "automation": "automated",
+   "rev": "6af63aa622"
+  }
+ },
+ "_key": "!items!kWbCpHMRIlbbDOjd"
+}

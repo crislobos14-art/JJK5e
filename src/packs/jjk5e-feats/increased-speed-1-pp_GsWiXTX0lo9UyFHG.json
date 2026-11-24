@@ -35,10 +35,51 @@
      ]
     ]
    },
-   "rev": "241bd2ecc4"
+   "rev": "56709393d0",
+   "automation": "automated"
   }
  },
  "folder": "ar3Bgj4YHvYRp8DL",
  "sort": 300,
- "_key": "!items!GsWiXTX0lo9UyFHG"
+ "_key": "!items!GsWiXTX0lo9UyFHG",
+ "effects": [
+  {
+   "_id": "lx8yw4Z0aeOWOK1H",
+   "name": "Increased Speed (Cursed Physiology)",
+   "img": "icons/svg/upgrade.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.attributes.movement.walk",
+     "mode": 2,
+     "value": "5",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": null,
+     "levelTable": {
+      "class": "*",
+      "table": [
+       [
+        1,
+        5
+       ],
+       [
+        10,
+        10
+       ]
+      ]
+     }
+    }
+   },
+   "_key": "!items.effects!GsWiXTX0lo9UyFHG.lx8yw4Z0aeOWOK1H"
+  }
+ ]
 }

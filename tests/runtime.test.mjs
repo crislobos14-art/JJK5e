@@ -267,3 +267,64 @@ test("Technique use is blocked by burnout, Reduced Output max, missing CE and an
   await J.setKindEffect(actor, "domain", { name: "Domain", flags: { jjk5e: { domainOpen: true } } }); await env.settle();
   assert.equal(use(act("d")), false, "domain already open");
 });
+
+test("Awakened Understanding efficiency: technique base cost −1 / −2 (minimum 1)", async () => {
+  const { actor, J } = await setup();
+  const tech = (c) => ({ id: "t", actor, item: { flags: { jjk5e: { technique: "Shrine", ceCosts: { t: c } } }, actor } });
+  await actor.createEmbeddedDocuments("Item", [{ name: "Advanced Cursed Energy Manipulation", flags: { jjk5e: { ceEfficiency: 1 } } }]);
+  assert.equal(J.activityCost(tech(5)), 4);
+  assert.equal(J.activityCost(tech(1)), 1);
+  await actor.createEmbeddedDocuments("Item", [{ name: "Mastered Cursed Energy Manipulation", flags: { jjk5e: { ceEfficiency: 2 } } }]);
+  assert.equal(J.activityCost(tech(5)), 3, "efficiencies do not stack");
+  assert.equal(J.activityCost(tech(2)), 1);
+  const nonTech = { id: "n", actor, item: { flags: { jjk5e: { ceCosts: { n: 5 } } }, actor } };
+  assert.equal(J.activityCost(nonTech), 5, "only innate techniques");
+});
+
+test("Incomplete Domain: 100 ft, no barrier, no sure hit, advantage on technique attacks, 5 rounds of burnout", async () => {
+  const { env, actor, J } = await setup();
+  await actor.setFlag("jjk5e", "refinement", 400);
+  await J.openDomain(actor, { name: "Incomplete Domain", flags: { jjk5e: { incompleteDomain: true } } }); await env.settle();
+  const s = J.getDomain(actor);
+  assert.equal(s.radius, 100);
+  assert.equal(s.refinement, 0);
+  assert.ok(s.noBarrier && J.sureHitBlocked(actor));
+  assert.equal(await J.damageBarrier(actor, 50, "outside"), null, "no barrier to damage");
+  const config = { subject: { actor, item: { flags: { jjk5e: { technique: "Shrine" } } } }, rolls: [{}] };
+  J.onPreRollAttack(config);
+  assert.equal(config.advantage, true);
+  await J.closeDomain(actor); await env.settle();
+  assert.equal(fx(actor, "burnout").duration.rounds, 5);
+});
+
+test("Barrierless Domain: 655 ft, no time limit; 1/3 max HP in one hit forces a CON save", async () => {
+  const { env, actor, J } = await setup();
+  await actor.update({ "flags.jjk5e.refinement": 1000, "flags.jjk5e.breakthroughs": 1 });
+  env.prompts.push(true); // choose barrierless
+  await J.openDomain(actor, { name: "Domain" }); await env.settle();
+  assert.deepEqual(fx(actor, "domain").duration, {});
+  assert.equal(J.getDomain(actor).radius, 655);
+  await actor.update({ "system.attributes.hp.value": 45 }); await env.settle();
+  assert.ok(fx(actor, "domain"), "5 damage: no save");
+  env.dice.push(1); // 1 + 0 < 15 + 10
+  await actor.update({ "system.attributes.hp.value": 25 }); await env.settle();
+  assert.equal(fx(actor, "domain"), undefined, "failed save: domain destroyed");
+});
+
+test("Burnout Recovery: needs RCT and 750 refinement; 4 CE, CON save DC 5 (+5 per success)", async () => {
+  const { env, actor, J } = await setup();
+  await J.setKindEffect(actor, "burnout", { name: "Burnout", flags: { jjk5e: { burnout: true } } });
+  assert.equal(J.canRecoverBurnout(actor), false, "refinement 1");
+  await actor.setFlag("jjk5e", "refinement", 750);
+  assert.equal(J.canRecoverBurnout(actor), true);
+  env.dice.push(5);
+  assert.equal(await J.burnoutRecovery(actor), true);
+  await env.settle();
+  assert.equal(fx(actor, "burnout"), undefined);
+  assert.equal(J.poolValue(J.findPool(actor)), 16);
+  await J.setKindEffect(actor, "burnout", { name: "Burnout", flags: { jjk5e: { burnout: true } } });
+  env.dice.push(9, 1, 1, 1, 1, 1, 1, 1, 1); // DC 10 now: fail, 8d6
+  assert.equal(await J.burnoutRecovery(actor), false);
+  assert.ok(fx(actor, "burnout"), "still burnt out");
+  assert.ok(fx(actor, "brainstrain"), "no actions until next turn");
+});

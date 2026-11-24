@@ -23,6 +23,79 @@
   "prerequisites": {
    "level": null,
    "repeatable": false
+  },
+  "activities": {
+   "Dnk8EPIjpGsaSLZA": {
+    "_id": "Dnk8EPIjpGsaSLZA",
+    "type": "attack",
+    "name": "Curse Weapon attack",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "5",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "attack": {
+     "ability": "str",
+     "bonus": "",
+     "critical": {
+      "threshold": null
+     },
+     "flat": false,
+     "type": {
+      "value": "melee",
+      "classification": "unarmed"
+     }
+    },
+    "damage": {
+     "includeBase": false,
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 6,
+       "bonus": "@mod",
+       "types": [
+        "slashing",
+        "piercing",
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
+   }
   }
  },
  "flags": {
@@ -35,7 +108,25 @@
      ]
     ]
    },
-   "rev": "0647c0f44f"
+   "rev": "cd889ba593",
+   "dmgScale": {
+    "Dnk8EPIjpGsaSLZA": [
+     [
+      1,
+      "1d6"
+     ],
+     [
+      5,
+      "1d8"
+     ],
+     [
+      10,
+      "1d10"
+     ]
+    ]
+   },
+   "automationNotes": "Pick the damage type of your weapon (claws slashing, fangs piercing, fists/tail bludgeoning) on the roll.",
+   "automation": "automated"
   }
  },
  "folder": "ar3Bgj4YHvYRp8DL",

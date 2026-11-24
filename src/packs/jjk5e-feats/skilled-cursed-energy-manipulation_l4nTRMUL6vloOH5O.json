@@ -24,7 +24,7 @@
    "X8XxNed7kW49sF3O": {
     "_id": "X8XxNed7kW49sF3O",
     "type": "heal",
-    "name": "Action (1+ CE)",
+    "name": "Cursed Reinforcement (action, 1+ CE): 5 temp HP per CE",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -39,9 +39,15 @@
      }
     },
     "range": {
-     "units": "self"
+     "units": "self",
+     "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
     },
@@ -61,6 +67,64 @@
       "formula": "5"
      }
     }
+   },
+   "WZGsPT5a7EoGhNLY": {
+    "_id": "WZGsPT5a7EoGhNLY",
+    "type": "damage",
+    "name": "Cursed Strike (1+ CE): +1d8 necrotic per CE",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "On a hit with an unarmed strike or melee weapon",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "@prof"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "spec",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
+    },
+    "effects": [],
+    "damage": {
+     "parts": [
+      {
+       "number": 1,
+       "denomination": 8,
+       "bonus": "",
+       "types": [
+        "necrotic"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {
+        "mode": "whole",
+        "number": 1
+       }
+      }
+     ]
+    }
    }
   },
   "prerequisites": {
@@ -71,16 +135,20 @@
  "flags": {
   "jjk5e": {
    "ceSteps": {
-    "X8XxNed7kW49sF3O": 1
+    "X8XxNed7kW49sF3O": 1,
+    "WZGsPT5a7EoGhNLY": 1
    },
    "ceCosts": {
-    "X8XxNed7kW49sF3O": 1
+    "X8XxNed7kW49sF3O": 1,
+    "WZGsPT5a7EoGhNLY": 1
    },
    "prereq": {
     "ceScore": 16,
     "breakthroughs": 1
    },
-   "rev": "7ec135cf67"
+   "rev": "a6b8c55638",
+   "rawCE": true,
+   "automation": "automated"
   }
  },
  "folder": "4WdO47AHGi8vRSbo",

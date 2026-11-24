@@ -24,7 +24,7 @@
    "2IlgR7SaJRWz36AP": {
     "_id": "2IlgR7SaJRWz36AP",
     "type": "utility",
-    "name": "Action (10 CE)",
+    "name": "Action (10 CE): incomplete domain",
     "sort": 0,
     "activation": {
      "type": "action",
@@ -38,9 +38,15 @@
      }
     },
     "range": {
-     "units": "self"
+     "units": "self",
+     "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
     "duration": {
      "value": "1",
      "units": "minute",
@@ -61,7 +67,11 @@
    "prereq": {
     "breakthroughs": 1
    },
-   "rev": "f5208e5d41"
+   "rev": "e8f1ea1288",
+   "domainActivity": "2IlgR7SaJRWz36AP",
+   "incompleteDomain": true,
+   "automationNotes": "Opens a 1-minute incomplete domain (100 ft, refinement 0, no barrier, no sure hit, advantage on technique attacks). Burnout lasts 5 rounds when it ends.",
+   "automation": "automated"
   }
  },
  "folder": "w6CtJKH5qYx1fgN4",

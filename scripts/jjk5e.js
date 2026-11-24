@@ -372,6 +372,11 @@ function activityCost(activity) {
     if (ref >= 1000) base -= Number(actor.system?.attributes?.prof) || 0;
     base = Math.max(1, base);
   }
+  // Awakened Understanding (Advanced −1 / Mastered −2): technique base cost, minimum 1.
+  if (base > 1 && actor && activity?.item?.flags?.jjk5e?.technique) {
+    const eff = actor.items.reduce((m, i) => Math.max(m, Number(i.flags?.jjk5e?.ceEfficiency) || 0), 0);
+    if (eff) base = Math.max(1, base - eff);
+  }
   // Refined Domain (Cost Reduction): innate technique costs are halved, rounded up, while your domain is open.
   if (base > 0 && actor && activity?.item?.flags?.jjk5e?.technique && domainOpen(actor)
       && actor.items.some((i) => i.effects?.some((e) => e.flags?.jjk5e?.refinedCostHalf && !e.disabled))) {
@@ -1297,6 +1302,8 @@ function onPreRollAttack(config) {
     const me = actor.getActiveTokens?.()?.[0];
     if (me && [...(game.user?.targets ?? [])].some((t) => tokenDistance(me, t) <= 5)) config.disadvantage = true;
   }
+  // Incomplete Domain: advantage on technique attack rolls while it is open.
+  if (config?.subject?.item?.flags?.jjk5e?.technique && getDomain(actor)?.incomplete && domainOpen(actor)) config.advantage = true;
   applySureHit(actor, config);
 }
 
@@ -1355,13 +1362,19 @@ function onPreRollDamage(config) {
 
 async function openDomain(actor, item) {
   if (!actor?.isOwner || !setting("domainTracking")) return;
+  // Incomplete Domain (feat): 1 minute, refinement 0, no barrier, no sure hit; burnout 5 rounds.
+  const incomplete = !!item?.flags?.jjk5e?.incompleteDomain;
   // V.6 Domain Refinement: Lasting Domain (500) 2 minutes, Total Mastery (1000) 3 minutes.
   const ref = refinementOf(actor);
-  const minutes = ref >= 1000 ? 3 : ref >= 500 ? 2 : 1;
+  const minutes = incomplete ? 1 : ref >= 1000 ? 3 : ref >= 500 ? 2 : 1;
+  // Barrierless Domain (1000 refinement + breakthrough): no barrier and no time limit.
+  const barrierless = !incomplete && ref >= 1000 && (Number(actor.getFlag(MODULE_ID, "breakthroughs")) || 0) > 0
+    && await confirmDialog(t("Domain.Barrierless"), `<p>${t("Domain.BarrierlessPrompt")}</p>`);
   await setKindEffect(actor, "domain", {
-    name: item.name, img: `${ICONS}/domain.svg`, duration: { rounds: 10 * minutes, seconds: 60 * minutes },
-    description: `<p>${t("Domain.Description")}</p>`,
-    flags: { jjk5e: { domainOpen: true } }
+    name: item?.name ?? t("Domain.Zone"), img: `${ICONS}/domain.svg`,
+    duration: barrierless ? {} : { rounds: 10 * minutes, seconds: 60 * minutes },
+    description: `<p>${t(incomplete ? "Domain.IncompleteDescription" : barrierless ? "Domain.BarrierlessDescription" : "Domain.Description")}</p>`,
+    flags: { jjk5e: { domainOpen: true, incomplete, barrierless } }
   });
 }
 
@@ -1392,8 +1405,9 @@ async function onDeleteEffect(effect, options, userId) {
   if (!setting("domainTracking")) return;
   const actor = effect.parent;
   if (actor?.documentName !== "Actor") return;
+  const short = !!effect.flags?.jjk5e?.incomplete; // Incomplete Domain: 5 rounds of burnout
   await setKindEffect(actor, "burnout", {
-    name: t("Burnout.Name"), img: `${ICONS}/burnout.svg`, duration: { rounds: 10, seconds: 60 },
+    name: t("Burnout.Name"), img: `${ICONS}/burnout.svg`, duration: short ? { rounds: 5, seconds: 30 } : { rounds: 10, seconds: 60 },
     description: `<p>${t("Burnout.Description")}</p>`,
     flags: { jjk5e: { burnout: true } }
   });
@@ -1747,6 +1761,7 @@ function panelHTML(actor) {
       <div class="jjk-row">
         ${statusRow(domainOpen(actor), t("Domain.Open"), "closeDomain")}
         ${statusRow(inBurnout(actor), t("Burnout.Name"), "clearBurnout")}
+        ${canRecoverBurnout(actor) ? `<button type="button" data-action="burnoutRecovery"><i class="fas fa-brain"></i> ${t("Burnout.Recovery")} (4 CE)</button>` : ""}
         ${statusRow(!!zone, zone ? `${t("Zone.Name")} ×${zoneStacks}` : t("Zone.Name"), "clearZone")}
         ${statusRow(!!actor.getFlag(MODULE_ID, "pendingBlackFlash"), "Black Flash ×3", "clearBF")}
         ${activeGroups(actor).map((g) => `<span class="jjk-chip on">${t(`Group.${g}`)} <a data-action="endGroup" data-group="${g}" title="${t("Common.End")}"><i class="fas fa-times"></i></a></span>`).join("")}
@@ -1811,7 +1826,8 @@ const PANEL_ACTIONS = {
   summon: (actor, target, root) => summon(actor, root.querySelector("[name=summonName]")?.value,
     root.querySelector("[name=summonCount]")?.valueAsNumber),
   dismiss: (actor) => dismissSummons(actor),
-  updateAutomation: (actor) => updateAutomation(actor)
+  updateAutomation: (actor) => updateAutomation(actor),
+  burnoutRecovery: (actor) => burnoutRecovery(actor)
 };
 
 function makePanelClass() {
@@ -2114,7 +2130,7 @@ Hooks.once("init", () => {
     findPool, chooseTechnique, syncTechnique, promptCE, shortRestCE, chooseCEAbility, negativeEmotion,
     applyScaling, openPanel, maximumOutput, setReducedOutput, setSoulAwareness, setLimb, rollLimb,
     summon, dismissSummons, syncResource, missingPrereqs, applyCEEffects, activateGroup, endGroup,
-    updateAutomation, updateAllAutomation, outdatedItems
+    updateAutomation, updateAllAutomation, outdatedItems, burnoutRecovery
   };
 });
 
@@ -3759,6 +3775,9 @@ Hooks.once("ready", () => {
     Hooks.on(hook, (app, element) => { try { addSheetStrip(app, element); } catch (err) { console.error(`${MODULE_ID} | strip`, err); } });
   }
   Hooks.on("dnd5e.restCompleted", (actor, result, config) => {
+    if ((result?.longRest ?? config?.type === "long") && actor?.isOwner && actor.getFlag(MODULE_ID, "burnoutRecoveries")) {
+      actor.unsetFlag(MODULE_ID, "burnoutRecoveries");
+    }
     if (!actor?.isOwner) return;
     const long = result?.longRest ?? (config?.type === "long");
     if (long) unlockVows(actor, ["longRest"]);
@@ -3815,7 +3834,7 @@ function sureHitBlocked(actor) {
   const state = getDomain(actor);
   if (!state) return false;
   if (state.clash && !state.clash.resolved) return true;
-  return state.lethal === false;
+  return state.lethal === false || !!state.noSureHit;
 }
 
 /* ---- GM side: zone on the canvas ---- */
@@ -3879,22 +3898,26 @@ async function setDomain(actor, state) {
 
 /* ---- Opening / closing ---- */
 
-async function domainOpened(actor) {
+async function domainOpened(actor, effect = null) {
   const mod = ceMod(actor);
-  const ref = refinementOf(actor);
+  const kind = effect?.flags?.jjk5e ?? actor.effects.find((e) => e.flags?.jjk5e?.domainOpen)?.flags?.jjk5e ?? {};
+  const incomplete = !!kind.incomplete, barrierless = !!kind.barrierless;
+  const ref = incomplete ? 0 : refinementOf(actor);
   const token = actorToken(actor);
   const c = token ? tokenCenter(token) : null;
   // Domain Durability: +1 HP per refinement point; Durable Barrier (800+) doubles it.
   const max = Math.max(1, 10 * mod + (ref >= 800 ? 2 * ref : ref));
+  const radius = incomplete ? 100 : barrierless ? 655 : DOMAIN_RADIUS;
   const state = { open: true, hp: max, max, ac: 10 + mod + Math.floor(ref / 100), refinement: ref,
-    radius: DOMAIN_RADIUS, lethal: actor.getFlag(MODULE_ID, "domainLethal") !== false,
+    radius, lethal: actor.getFlag(MODULE_ID, "domainLethal") !== false,
+    noBarrier: incomplete || barrierless, noSureHit: incomplete, incomplete, barrierless,
     sceneId: canvas?.scene?.id ?? null, x: c?.x ?? null, y: c?.y ?? null,
     damageTaken: 0, zone: null, clash: null, name: actor.name };
   await setDomain(actor, state);
-  if (c && state.sceneId) await viaGM("domainZone", { sceneId: state.sceneId, x: c.x, y: c.y, radius: DOMAIN_RADIUS,
+  if (c && state.sceneId) await viaGM("domainZone", { sceneId: state.sceneId, x: c.x, y: c.y, radius,
     name: `${t("Domain.Zone")}: ${actor.name}`, color: "#4b1d6e", actorUuid: actor.uuid });
   await chat(actor, `<div class="jjk5e-card"><h3><i class="fas fa-circle-half-stroke"></i> ${t("Domain.Opened", { name: esc(actor.name) })}</h3>`
-    + `<p>${t("Domain.BarrierStats", { hp: max, ac: state.ac, ref })}</p><p class="hint">${t("Domain.OutsideHint", { n: Math.max(mod, 1) })}</p></div>`);
+    + `<p>${state.noBarrier ? t(incomplete ? "Domain.IncompleteStats" : "Domain.BarrierlessStats", { radius }) : t("Domain.BarrierStats", { hp: max, ac: state.ac, ref })}</p><p class="hint">${t("Domain.OutsideHint", { n: Math.max(mod, 1) })}</p></div>`);
   await detectClash(actor);
   openDomainHUD(actor);
 }
@@ -3930,7 +3953,7 @@ async function closeDomainOf(actor, reason = "") {
 
 async function damageBarrier(actor, amount, side = "outside", type = "") {
   const state = getDomain(actor);
-  if (!state?.open) return null;
+  if (!state?.open || state.noBarrier) return null;
   let dmg = Math.max(0, Number(amount) || 0);
   const balanced = state.balanced;
   const flipped = state.flipped;
@@ -4039,6 +4062,57 @@ async function tickClashes() {
     if (s.clash.rounds <= 0) await closeDomainOf(a, t("Domain.ClashLost", { name: esc(a.name) }));
     else await chat(a, `<p><i class="fas fa-compress"></i> ${t("Domain.ClashShrink", { name: esc(a.name), r: s.radius, rounds: s.clash.rounds })}</p>`);
   }
+}
+
+/** Barrierless Domain: 1/3 of max HP in one instance → CON save DC 15 + half the damage or the domain is destroyed. */
+async function barrierlessHit(actor, dmg) {
+  const s = getDomain(actor);
+  if (!s?.open || !s.barrierless) return;
+  const max = Number(actor.system?.attributes?.hp?.max) || 0;
+  if (!max || dmg < Math.floor(max / 3)) return;
+  const dc = 15 + Math.floor(dmg / 2);
+  const con = actor.system.abilities?.con ?? {};
+  const bonus = Number(con.save?.value ?? con.save ?? con.mod) || 0;
+  const roll = await new Roll(`1d20 + ${bonus}`).evaluate();
+  await roll.toMessage?.({ speaker: docClass("ChatMessage").getSpeaker?.({ actor }), flavor: t("Domain.BarrierlessSave", { dc }) });
+  if (roll.total < dc) await closeDomainOf(actor, t("Domain.Shattered", { name: esc(actor.name) }));
+}
+
+/**
+ * Burnout Recovery (V.6 Rules of Thumb): with Reverse Cursed Technique and 750+ refinement, spend 4 CE (reaction)
+ * and make a CON save (DC 5, +5 per success, reset on a long rest). Success ends burnout; failure deals 8d6 psychic
+ * and the sorcerer cannot take actions or bonus actions until the start of their next turn.
+ */
+function canRecoverBurnout(actor) {
+  return !!actor && inBurnout(actor) && refinementOf(actor) >= 750
+    && actor.items.some((i) => /^Reverse Cursed Technique/i.test(baseName(i)));
+}
+
+async function burnoutRecovery(actor) {
+  actor = requireActor(actor);
+  if (!canRecoverBurnout(actor)) return ui.notifications.warn(t("Burnout.RecoveryUnavailable"));
+  if (!(await spendCE(actor, 4, t("Burnout.Recovery")))) return false;
+  const wins = Number(actor.getFlag(MODULE_ID, "burnoutRecoveries")) || 0;
+  const dc = 5 + 5 * wins;
+  const con = actor.system.abilities?.con ?? {};
+  const bonus = Number(con.save?.value ?? con.save ?? con.mod) || 0;
+  const roll = await new Roll(`1d20 + ${bonus}`).evaluate();
+  await roll.toMessage?.({ speaker: docClass("ChatMessage").getSpeaker?.({ actor }), flavor: t("Burnout.RecoverySave", { dc }) });
+  if (roll.total >= dc) {
+    await actor.setFlag(MODULE_ID, "burnoutRecoveries", wins + 1);
+    const ids = actor.effects.filter((e) => e.flags?.jjk5e?.kind === "burnout" || e.flags?.jjk5e?.burnout).map((e) => e.id);
+    if (ids.length) await actor.deleteEmbeddedDocuments("ActiveEffect", ids);
+    await chat(actor, `<p><i class="fas fa-brain"></i> ${t("Burnout.RecoverySuccess", { name: esc(actor.name) })}</p>`);
+    return true;
+  }
+  const dmg = await new Roll("8d6").evaluate();
+  await dmg.toMessage?.({ speaker: docClass("ChatMessage").getSpeaker?.({ actor }), flavor: t("Burnout.RecoveryFail") });
+  if (typeof actor.applyDamage === "function") await actor.applyDamage([{ value: dmg.total, type: "psychic" }]);
+  await setKindEffect(actor, "brainstrain", {
+    name: t("Burnout.RecoveryFailEffect"), img: `${ICONS}/burnout.svg`, statuses: ["incapacitated"],
+    duration: { rounds: 1, turns: 1 }, description: `<p>${t("Burnout.RecoveryFail")}</p>`
+  });
+  return false;
 }
 
 /** Equal clash: at 1/3 HP the caster rolls a flat DC 15 or the domain breaks. */
@@ -4312,7 +4386,7 @@ Hooks.once("ready", () => {
     if (userId !== game.user.id || !(effect.flags?.jjk5e?.domainOpen || effect.flags?.jjk5e?.kind === "domain")) return;
     let on = true;
     try { on = setting("domainZones"); } catch (err) { /* */ }
-    if (on && effect.parent?.documentName === "Actor") domainOpened(effect.parent);
+    if (on && effect.parent?.documentName === "Actor") domainOpened(effect.parent, effect);
   });
   Hooks.on("deleteActiveEffect", (effect, options, userId) => {
     if (userId !== game.user.id || !(effect.flags?.jjk5e?.domainOpen || effect.flags?.jjk5e?.kind === "domain")) return;
@@ -4321,6 +4395,18 @@ Hooks.once("ready", () => {
   Hooks.on("updateCombat", (combat, changes) => { if ("round" in (changes ?? {})) tickClashes(); });
   Hooks.on("updateActor", (actor, changes) => {
     if (foundry.utils.hasProperty(changes, "system.attributes.hp")) checkEqualClash(actor);
+  });
+  Hooks.on("preUpdateActor", (actor, changes, options) => {
+    if (foundry.utils.hasProperty(changes, "system.attributes.hp")) {
+      const hp = actor.system?.attributes?.hp ?? {};
+      options.jjk5eHP = (Number(hp.value) || 0) + (Number(hp.temp) || 0);
+    }
+  });
+  Hooks.on("updateActor", (actor, changes, options, userId) => {
+    if (userId !== game.user.id || options?.jjk5eHP === undefined) return;
+    const hp = actor.system?.attributes?.hp ?? {};
+    const dmg = options.jjk5eHP - ((Number(hp.value) || 0) + (Number(hp.temp) || 0));
+    if (dmg > 0) barrierlessHit(actor, dmg);
   });
 });
 

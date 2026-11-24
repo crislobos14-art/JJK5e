@@ -23,6 +23,21 @@
   "prerequisites": {
    "level": null,
    "repeatable": false
+  },
+  "advancement": {
+   "uDWUeqbW7h1ks0H5": {
+    "_id": "uDWUeqbW7h1ks0H5",
+    "type": "AbilityScoreImprovement",
+    "level": 0,
+    "title": "Ability Improvement (+1)",
+    "value": {},
+    "configuration": {
+     "points": 1,
+     "cap": 1,
+     "fixed": {},
+     "locked": []
+    }
+   }
   }
  },
  "flags": {
@@ -35,7 +50,8 @@
      ]
     ]
    },
-   "rev": "535cc50bf1"
+   "rev": "ec1ef6c860",
+   "automation": "automated"
   }
  },
  "folder": "ar3Bgj4YHvYRp8DL",

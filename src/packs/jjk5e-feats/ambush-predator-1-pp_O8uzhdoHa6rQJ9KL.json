@@ -23,6 +23,31 @@
   "prerequisites": {
    "level": null,
    "repeatable": false
+  },
+  "advancement": {
+   "dnghbegXmqH1DtHG": {
+    "_id": "dnghbegXmqH1DtHG",
+    "type": "Trait",
+    "level": 0,
+    "title": "Ambush Predator",
+    "value": {},
+    "configuration": {
+     "mode": "default",
+     "allowReplacements": true,
+     "grants": [],
+     "choices": [
+      {
+       "count": 1,
+       "pool": [
+        "skills:ste",
+        "skills:dec",
+        "skills:prc",
+        "skills:sur"
+       ]
+      }
+     ]
+    }
+   }
   }
  },
  "flags": {
@@ -35,7 +60,8 @@
      ]
     ]
    },
-   "rev": "871d5fcb2d"
+   "rev": "ec27015f37",
+   "automation": "automated"
   }
  },
  "folder": "ar3Bgj4YHvYRp8DL",

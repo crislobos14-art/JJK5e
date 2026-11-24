@@ -23,6 +23,23 @@
   "prerequisites": {
    "level": null,
    "repeatable": false
+  },
+  "advancement": {
+   "uwhE3x3XlgS7t6IO": {
+    "_id": "uwhE3x3XlgS7t6IO",
+    "type": "Trait",
+    "level": 0,
+    "title": "Intimidation (expertise if proficient)",
+    "value": {},
+    "configuration": {
+     "mode": "upgrade",
+     "allowReplacements": false,
+     "grants": [
+      "skills:itm"
+     ],
+     "choices": []
+    }
+   }
   }
  },
  "flags": {
@@ -35,7 +52,8 @@
      ]
     ]
    },
-   "rev": "67fdb3230f"
+   "rev": "72e5273682",
+   "automation": "automated"
   }
  },
  "folder": "ar3Bgj4YHvYRp8DL",

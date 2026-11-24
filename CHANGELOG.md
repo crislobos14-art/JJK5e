@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.61.0 — Reglas del manual: Awakened Understanding, Cursed Physiology, dominios
+- Awakened Understanding: Skilled añade Cursed Strike 1d8 y Cursed Reinforcement como PG temporales; Advanced: Reinforcement hasta mod CE + competencia como acción, acción adicional o reacción; Mastered: Cursed Strike 2d8 por CE y +CE al ataque.
+- Efficiency (Advanced −1, Mastered −2): el coste base de las técnicas innatas baja automáticamente (mínimo 1).
+- Cursed Physiology: Darkvision (60 ft, 120 ft a nivel 8), Increased Speed (+5/+10 ft), Ability Improvement, Horrifying Form, Ambush Predator y Curse Weapon (1d6/1d8/1d10) automatizados.
+- Cursed Energy Affinity cura 5 PG por CE. Nuevo feat opcional Increased Affinity (10 PG por CE, acción adicional o reacción).
+- Incomplete Domain: abre un dominio de 100 ft sin barrera ni sure-hit, con ventaja en ataques de técnica; Burnout de 5 rondas.
+- Barrierless Domain (refinamiento 1000 + breakthrough): sin barrera ni límite de tiempo, 655 ft; recibir 1/3 de los PG máximos de un golpe pide salvación de CON (CD 15 + la mitad del daño).
+- Burnout Recovery (RCT + refinamiento 750): botón en el panel; 4 CE y salvación de CON CD 5 (+5 por éxito, se reinicia en descanso largo); al fallar 8d6 psíquico.
+- 4 pruebas de ejecución nuevas (37 en total).
+
 ## 1.60.0 — Pruebas de ejecución de reglas y dominios
 - Nuevo banco de pruebas: `tests/harness/foundry-mock.mjs` ejecuta `scripts/jjk5e.js` sobre un Foundry simulado en memoria; `tests/runtime.test.mjs` (20 pruebas) cubre Black Flash, The Zone, dominios, choques, barrera, CE, RCT, Maximum/Reduced Output, descanso corto y bloqueos de uso. Corre en la CI.
 - The Zone: +1 al rango de crítico sobre el rango propio del personaje (Improved Critical 19 → 18), antes se fijaba en 19 sin importar el rango previo.

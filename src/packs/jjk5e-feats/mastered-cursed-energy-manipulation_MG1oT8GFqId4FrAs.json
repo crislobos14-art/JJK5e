@@ -24,12 +24,13 @@
    "iLbSz4oxiFZDQygl": {
     "_id": "iLbSz4oxiFZDQygl",
     "type": "damage",
-    "name": "Special (1+ CE)",
+    "name": "Cursed Strike (1+ CE): +2d8 necrotic per CE",
     "sort": 0,
     "activation": {
      "type": "special",
      "value": null,
-     "condition": ""
+     "condition": "On a hit with an unarmed strike or melee weapon",
+     "override": true
     },
     "consumption": {
      "targets": [],
@@ -66,6 +67,47 @@
       }
      ]
     }
+   },
+   "MphmJHn4xB4vx8af": {
+    "_id": "MphmJHn4xB4vx8af",
+    "type": "utility",
+    "name": "Empowered attack (1+ CE): +1 to the attack roll per CE",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": true,
+      "max": "@prof"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "SiiK1tz36PiA7Ttk",
+      "onSave": false
+     }
+    ]
    }
   },
   "prerequisites": {
@@ -76,10 +118,12 @@
  "flags": {
   "jjk5e": {
    "ceSteps": {
-    "iLbSz4oxiFZDQygl": 1
+    "iLbSz4oxiFZDQygl": 1,
+    "MphmJHn4xB4vx8af": 1
    },
    "ceCosts": {
-    "iLbSz4oxiFZDQygl": 1
+    "iLbSz4oxiFZDQygl": 1,
+    "MphmJHn4xB4vx8af": 1
    },
    "prereq": {
     "features": [
@@ -89,10 +133,48 @@
     ],
     "breakthroughs": 8
    },
-   "rev": "83fabafb60"
+   "rev": "f032b32de9",
+   "rawCE": true,
+   "ceEfficiency": 2,
+   "automationNotes": "Efficiency: the module lowers innate technique base costs by 2 (minimum 1). Empowered attack: use it before rolling.",
+   "automation": "automated"
   }
  },
  "folder": "4WdO47AHGi8vRSbo",
  "sort": 300,
- "_key": "!items!MG1oT8GFqId4FrAs"
+ "_key": "!items!MG1oT8GFqId4FrAs",
+ "effects": [
+  {
+   "_id": "SiiK1tz36PiA7Ttk",
+   "name": "Empowered attack",
+   "img": "icons/svg/lightning.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.bonuses.mwak.attack",
+     "mode": 2,
+     "value": "+JJKSCALING",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    },
+    "dae": {
+     "specialDuration": [
+      "1Attack"
+     ]
+    }
+   },
+   "_key": "!items.effects!MG1oT8GFqId4FrAs.SiiK1tz36PiA7Ttk"
+  }
+ ]
 }
