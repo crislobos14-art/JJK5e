@@ -483,7 +483,8 @@
       "Take": "Tomar dote",
       "ChooseHint": "Elige una opción: mejorar tus características o tomar una dote.",
       "ModeASI": "Mejorar características",
-      "ModeFeat": "Tomar una dote"
+      "ModeFeat": "Tomar una dote",
+      "Taken": "Dote tomada: {name}"
     },
     "SceneTools": {
       "Panel": "JJK: Abrir panel",
@@ -1102,6 +1103,18 @@
       "LevelUp": "Subir nivel",
       "ShortRest": "Descanso: EM",
       "Hotbar": "Barra JJK"
+    },
+    "Midi": {
+      "Title": "Automatización completa con Midi (JJK)",
+      "Restore": "Deshacer automatización de Midi",
+      "NotActive": "Midi-QOL no está activo.",
+      "NoConfig": "No se pudo leer la configuración de Midi-QOL.",
+      "Already": "Midi-QOL ya tira ataques, daño y salvaciones de forma automática.",
+      "Confirm": "Se cambian estas opciones del flujo de Midi-QOL para que al usar una técnica se tire el ataque, se compruebe si impacta, se tire el daño al impactar, se tiren las salvaciones de los objetivos y se apliquen daño y efectos:",
+      "Backup": "Se guardan los valores anteriores; usa «Deshacer automatización de Midi» para volver a ellos.",
+      "Done": "Midi-QOL: {n} opciones cambiadas para la automatización completa.",
+      "NoBackup": "No hay nada que deshacer.",
+      "Restored": "Opciones de Midi-QOL restauradas."
     }
   }
 }

@@ -483,7 +483,8 @@
       "Take": "Take feat",
       "ChooseHint": "Choose one: improve your ability scores, or take a feat instead.",
       "ModeASI": "Improve ability scores",
-      "ModeFeat": "Take a feat"
+      "ModeFeat": "Take a feat",
+      "Taken": "Feat taken: {name}"
     },
     "SceneTools": {
       "Panel": "JJK: Open panel",
@@ -1102,6 +1103,18 @@
       "LevelUp": "Level up",
       "ShortRest": "Rest: CE",
       "Hotbar": "Hotbar"
+    },
+    "Midi": {
+      "Title": "Full Midi automation (JJK)",
+      "Restore": "Undo Midi automation",
+      "NotActive": "Midi-QOL is not active.",
+      "NoConfig": "Could not read the Midi-QOL settings.",
+      "Already": "Midi-QOL already rolls attacks, damage and saves automatically.",
+      "Confirm": "These Midi-QOL workflow settings change so that using a technique rolls the attack, checks the hit, rolls damage on a hit, rolls the targets' saves and applies damage and effects:",
+      "Backup": "The previous values are saved; use 'Undo Midi automation' to restore them.",
+      "Done": "Midi-QOL: {n} settings changed for full automation.",
+      "NoBackup": "There is nothing to undo.",
+      "Restored": "Midi-QOL settings restored."
     }
   }
 }

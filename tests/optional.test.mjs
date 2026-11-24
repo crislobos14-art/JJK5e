@@ -262,3 +262,16 @@ test("Effect keys are rewritten with dnd5e's own shim table when it exists", asy
   assert.equal(J.modernChange({ key: "system.skills.ste.bonuses.check", value: "1" }).key, "system.skills.ste.roll.bonus");
   assert.ok(actor);
 });
+
+test("Midi automation preset: only existing keys of the same type are changed", async () => {
+  const { J } = await setup();
+  const plan = J.midiAutoPlan({ autoRollAttack: false, autoCheckHit: "none", autoRollDamage: "none", autoCheckSaves: "none",
+    autoFastForward: ["attack"], gmAutoAttack: "yes", unknown: 1 });
+  assert.equal(plan.autoRollAttack, true);
+  assert.equal(plan.autoCheckHit, "all");
+  assert.equal(plan.autoRollDamage, "onHit");
+  assert.equal(plan.autoCheckSaves, "allShow");
+  assert.equal(plan.autoFastForward.join(","), "attack,damage");
+  assert.ok(!("gmAutoAttack" in plan), "different type in this Midi version: untouched");
+  assert.ok(!("playerRollSaves" in plan), "missing key: not added");
+});

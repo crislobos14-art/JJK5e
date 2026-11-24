@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.72.0 — Dotes al subir de nivel y automatización completa con Midi
+- **Dotes al subir de nivel**: elegir una dote JJK en la lista de la mejora de característica ya funciona. Antes, al elegirla el formulario del sistema se volvía a dibujar y la lista volvía a «—» antes de pulsar *Tomar dote*. Ahora la dote se toma al elegirla, se comprueban sus requisitos y sale un aviso de confirmación.
+- **Automatización completa con Midi (JJK)**: nuevo botón en la pestaña GM del panel, en la ventana de reglas opcionales y en el menú JJK. Configura Midi-QOL para que al usar una técnica se tire el ataque, se compruebe si impacta, se tire el daño al impactar, se tiren las salvaciones de los objetivos (también las de los jugadores) y se apliquen daño y efectos. Antes de cambiar nada muestra la lista de cambios y guarda los valores anteriores; *Deshacer automatización de Midi* los restaura. Solo cambia opciones que existan en tu versión de Midi y que sean del mismo tipo.
+- 1 prueba nueva (71 en total).
+
 ## 1.71.0 — Pestañas, ficha de creación, compra de puntos y hoja de personaje
 - **Pestañas del panel JJK y de Carrera**: vuelven a funcionar. Foundry tiene su propia acción `tab`, que pisaba la del módulo.
 - **Ficha de creación de personaje** (botón *Crear personaje* en la hoja, menú JJK o **Alt+W**): una sola ventana con todos los pasos y su estado, en el orden que quieras: características (compra de puntos), clase, técnica innata, característica de EM, raza, trasfondo, dote adicional y barra JJK. Indica el progreso y el siguiente paso.

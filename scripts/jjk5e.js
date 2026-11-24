@@ -2897,7 +2897,7 @@ async function injectASIFeats(app, element) {
   box.className = "jjk5e-asi";
   box.innerHTML = `<legend>${t("ASI.Legend")}</legend>
     <p class="hint">${t("ASI.Hint", { n: eligible.length })}</p>
-    <div class="form-group"><select name="jjk5e-feat" style="flex:1">
+    <div class="form-group"><select data-jjk-feat style="flex:1" aria-label="${esc(t("ASI.Legend"))}">
       <option value="">—</option>
       ${Object.entries(Object.groupBy(eligible, (d) => d.system?.type?.subtype || "general"))
         .sort(([a], [b]) => featCategoryLabel(a).localeCompare(featCategoryLabel(b)))
@@ -2905,14 +2905,25 @@ async function injectASIFeats(app, element) {
           + list.map((d) => `<option value="${d.uuid}">${esc(d.name)}</option>`).join("") + "</optgroup>").join("")}
     </select>
     <button type="button" data-jjk-take style="flex:0 0 auto"><i class="fas fa-plus"></i> ${t("ASI.Take")}</button></div>`;
-  box.querySelector("[data-jjk-take]").addEventListener("click", async (ev) => {
-    ev.preventDefault();
-    ev.stopPropagation();
-    const uuid = box.querySelector("select")?.value;
+  const select = box.querySelector("[data-jjk-feat]");
+  // The flow form submits (and re-renders, which resets this list) on every change: keep the change to ourselves.
+  for (const type of ["change", "input"]) select.addEventListener(type, (ev) => ev.stopPropagation());
+  const take = async (ev) => {
+    ev?.preventDefault?.(); ev?.stopPropagation?.();
+    const uuid = select.value;
     if (!uuid) return;
-    await adv.apply(app.level, { retainedItems: app.retainedData?.retainedItems, type: "feat", uuid });
+    try {
+      const item = await fromUuid(uuid);
+      const ok = item?.system?.assertPrerequisites?.(adv.actor, { showMessage: true }) ?? true;
+      if (ok !== true) return;
+      if (adv.value?.type) await adv.reverse(app.level);
+      await adv.apply(app.level, { retainedItems: app.retainedData?.retainedItems, type: "feat", uuid });
+      ui.notifications.info(t("ASI.Taken", { name: item?.name ?? "" }));
+    } catch (err) { reportError("asi feat", err); }
     app.render();
-  });
+  };
+  select.addEventListener("change", take);
+  box.querySelector("[data-jjk-take]").addEventListener("click", take);
   const host = root.querySelector(".feat-section") ?? root.querySelector(".standard-form") ?? root.querySelector("form") ?? root.querySelector(".window-content") ?? root;
   host.append(box);
 }
@@ -5705,6 +5716,7 @@ function makeOptMenuClass() {
       window: { icon: "fas fa-scroll", resizable: true, title: "JJK5E.Opt.Title" }, position: { width: 620, height: 680 },
       actions: {
         save: async function () { await saveOptionalRules(this.element); this.close(); },
+        midi: function () { return midiAutomate(); },
         all: function (ev, el) { for (const c of this.element?.querySelectorAll?.("input[type=checkbox]") ?? []) c.checked = el.dataset.v === "1"; }
       }
     };
@@ -5723,7 +5735,8 @@ function optionalRulesHTML() {
       <small>${t(`Opt.${key}.Hint`)}</small></span><span class="jjk-opt-ctl">${ctl}</span></label>`;
   }).join("");
   return `<section class="jjk-panel jjk-optrules"><p class="jjk-note">${t("Opt.Intro")}</p>
-    <div class="btns"><button type="button" data-action="all" data-v="1">${t("Opt.All")}</button>
+    <div class="btns"><button type="button" data-action="midi"><i class="fas fa-wand-magic-sparkles"></i> ${t("Midi.Title")}</button>
+      <button type="button" data-action="all" data-v="1">${t("Opt.All")}</button>
       <button type="button" data-action="all" data-v="0">${t("Opt.None")}</button></div>
     <div class="jjk-opt-list">${rows}</div>
     <footer class="btns"><button type="button" class="jjk-primary" data-action="save"><i class="fas fa-save"></i> ${t("Opt.Save")}</button></footer></section>`;
@@ -6580,6 +6593,10 @@ function optionalPanel(actor, tab) {
   }
   if (tab === "gm" && gm) {
     b.push(pbtn("optRules", "fas fa-scroll", t("Opt.Title")));
+    if (midiActive()) {
+      b.push(pbtn("midiAuto", "fas fa-wand-magic-sparkles", t("Midi.Title")));
+      b.push(pbtn("midiRestore", "fas fa-rotate-left", t("Midi.Restore")));
+    }
     if (!hasRCT(actor) && !isHeavenlyOnly(actor)) {
       b.push(pbtn("rctGrant", "fas fa-heart-pulse", t("RCT.Grant")));
       b.push(pbtn("rctRoll", "fas fa-dice-d20", t("RCT.Roll")));
@@ -6917,3 +6934,64 @@ Hooks.once("ready", () => {
     } catch (err) { console.warn(`${MODULE_ID} | item effect keys`, err); }
   });
 });
+
+/* ---- v1.72: Midi-QOL full automation preset for JJK (attack → hit check → damage; saves rolled automatically) ---- */
+
+/** Wanted Midi workflow values. Only keys that already exist in this Midi version's config are written. */
+const MIDI_AUTO = {
+  autoRollAttack: true, autoCheckHit: "all", autoRollDamage: "onHit", autoCheckSaves: "allShow",
+  autoApplyDamage: "yesCard", autoTarget: "wallsBlock", playerRollSaves: "none", rollNPCSaves: "auto",
+  gmAutoAttack: true, gmAutoDamage: "onHit", gmAutoFastForwardAttack: true, gmAutoFastForwardDamage: true,
+  autoItemEffects: "applyRemove", allowUseMacro: true
+};
+const MIDI_FF = ["attack", "damage"];
+
+function midiConfig() {
+  try { return foundry.utils.deepClone(game.settings.get("midi-qol", "ConfigSettings") ?? null); } catch (err) { return null; }
+}
+
+function midiAutoPlan(cs) {
+  const plan = {};
+  for (const [k, v] of Object.entries(MIDI_AUTO)) {
+    if (!(k in cs)) continue;
+    if (typeof cs[k] !== typeof v) continue; // different meaning in this Midi version: leave it
+    if (cs[k] !== v) plan[k] = v;
+  }
+  for (const k of ["autoFastForward", "gmAutoFastForward"]) {
+    if (!(k in cs)) continue;
+    if (Array.isArray(cs[k])) { const merged = [...new Set([...cs[k], ...MIDI_FF])]; if (merged.length !== cs[k].length) plan[k] = merged; }
+    else if (typeof cs[k] === "boolean" && !cs[k]) plan[k] = true;
+  }
+  return plan;
+}
+
+async function midiAutomate() {
+  if (!game.user.isGM) return ui.notifications.warn(t("Notify.GMOnly"));
+  if (!midiActive()) return ui.notifications.warn(t("Midi.NotActive"));
+  const cs = midiConfig();
+  if (!cs) return ui.notifications.warn(t("Midi.NoConfig"));
+  const plan = midiAutoPlan(cs);
+  if (!Object.keys(plan).length) return ui.notifications.info(t("Midi.Already"));
+  const rows = Object.entries(plan).map(([k, v]) => `<li><code>${esc(k)}</code>: ${esc(JSON.stringify(cs[k]))} → <strong>${esc(JSON.stringify(v))}</strong></li>`).join("");
+  if (!(await confirmDialog(t("Midi.Title"), `<p>${t("Midi.Confirm")}</p><ul>${rows}</ul><p class="hint">${t("Midi.Backup")}</p>`))) return;
+  await game.settings.set(MODULE_ID, "midiBackup", Object.fromEntries(Object.keys(plan).map((k) => [k, cs[k]])));
+  await game.settings.set("midi-qol", "ConfigSettings", foundry.utils.mergeObject(cs, plan, { inplace: false }));
+  ui.notifications.info(t("Midi.Done", { n: Object.keys(plan).length }));
+}
+
+async function midiRestore() {
+  if (!game.user.isGM) return;
+  const backup = game.settings.get(MODULE_ID, "midiBackup") ?? {};
+  const cs = midiConfig();
+  if (!cs || !Object.keys(backup).length) return ui.notifications.info(t("Midi.NoBackup"));
+  await game.settings.set("midi-qol", "ConfigSettings", foundry.utils.mergeObject(cs, backup, { inplace: false }));
+  await game.settings.set(MODULE_ID, "midiBackup", {});
+  ui.notifications.info(t("Midi.Restored"));
+}
+
+Hooks.once("init", () => {
+  game.settings.register(MODULE_ID, "midiBackup", { scope: "world", config: false, type: Object, default: {} });
+});
+Object.assign(PANEL_ACTIONS, { midiAuto: () => midiAutomate(), midiRestore: () => midiRestore() });
+GM_PANEL_ACTIONS.add("midiAuto"); GM_PANEL_ACTIONS.add("midiRestore");
+MENU_ACTIONS.splice(MENU_ACTIONS.length - 1, 0, ["midiAuto", "fa-solid fa-wand-magic-sparkles", "Midi.Title", () => midiAutomate(), true]);
