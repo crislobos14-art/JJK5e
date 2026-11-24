@@ -713,6 +713,24 @@ function integrationReport(){
       .map(x=>({actorUuid:a.uuid,id:x.id,state:x.state,cost:x.cost,created:x.created,nativeStarted:x.nativeStarted??null}))),
     limitations:["Runtime detection is not a compatibility certification","Unverified resumed Midi workflows remain blocked"]};
 }
+async function showIntegrationDiagnostics(){
+  if(!isActiveGM())return false;
+  const report=integrationReport(),pending=report.pending;
+  const rows=report.dependencies.map(d=>`<li>${esc(d.id)}: ${d.active?"active":"inactive"} — ${esc(d.version??"—")}</li>`).join("");
+  const choices=pending.slice(0,100).map((r,i)=>`<option value="${i}">${esc(r.actorUuid)} — ${esc(r.state)} — ${r.cost} CE</option>`).join("");
+  const info=`<p>Foundry ${esc(report.foundry??"—")} / D&amp;D5e ${esc(report.dnd5e??"—")}</p><ul>${rows}</ul>
+    <p>Transactional CE: ${report.transactional?"ON (experimental)":"OFF"}; adapters: ${report.adapters.length}; expiry: ${esc(report.expiryAuthority)}</p>
+    <p>Unwrapped activity types: ${esc(report.unwrappedTypes.join(", ")||"—")}</p><p>Pending reservations: ${pending.length}</p>`;
+  if(!pending.length) return confirmDialog("JJK Integration Diagnostics",info);
+  const answer=await foundry.applications.api.DialogV2.prompt({window:{title:"JJK Integration Diagnostics"},rejectClose:false,
+    content:info+`<label>Transaction<select name="tx">${choices}</select></label>
+    <label>Decision<select name="decision"><option value="none">Review only</option><option value="commit">Confirm consumed</option><option value="refund">Refund after verifying no effects</option></select></label>`,
+    ok:{callback:(_e,b)=>({index:Number(b.form.elements.tx.value),decision:b.form.elements.decision.value})}});
+  if(!answer||!["commit","refund"].includes(answer.decision)||!pending[answer.index])return false;
+  const rec=pending[answer.index],actor=await domainActor(rec.actorUuid);
+  if(!actor||!await confirmDialog("Confirm CE settlement",`<p>${esc(answer.decision)} — ${rec.cost} CE. Verify the native workflow, damage, effects and other resources first.</p>`))return false;
+  return reconcileCE(actor,rec.id,answer.decision==="refund");
+}
 function ceDiagnostics(actor){
   const types=Object.entries(CONFIG.DND5E?.activityTypes??{}).filter(([,cfg])=>typeof cfg.documentClass?.prototype?.consume==="function").map(([key])=>key);
   return {transactional:ceAuthorityEnabled(),adapters:[...CE_ADAPTER_TARGETS],
@@ -2304,6 +2322,7 @@ function panelHTML(actor, tab = "combat") {
       </div>
       <div class="jjk-row">
         ${pbtn("domainHUD", "fa-solid fa-circle-half-stroke", t("Domain.HUD"))}
+        ${pbtn("attackSelectedBarrier","fas fa-crosshairs","Attack selected barrier marker")}
         ${canRecoverBurnout(actor) ? pbtn("burnoutRecovery", "fas fa-brain", `${t("Burnout.Recovery")} (4 CE)`) : ""}
       </div></fieldset>
     ${hr ? "" : `<fieldset><legend>${t("Output.Title")}</legend>
@@ -2351,6 +2370,7 @@ function panelHTML(actor, tab = "combat") {
   const gmTab = gm ? `<p class="jjk-note">${t("Panel.GMHint")}</p>
     <fieldset><legend>${t("Panel.GMValues")}</legend><div class="jjk-grid">
       ${pool ? pbtn("gmCE", "fas fa-bolt", `${t("Panel.GMSetCE")} (${value}/${max})`) : ""}
+      ${pbtn("engineDiagnostics", "fas fa-stethoscope", "JJK Integration Diagnostics")}
       ${pbtn("gmRefinement", "fas fa-circle-half-stroke", `${t("Domain.Refinement")}: ${refinementOf(actor)}`)}
       ${pbtn("soulDamage", "fas fa-ghost", t("Soul.Apply"))}
       ${sd ? pbtn("clearSoul", "fas fa-xmark", t("Soul.Clear")) : ""}
@@ -2407,6 +2427,8 @@ const PANEL_ACTIONS = {
   ceSpendN: (actor, target, root) => spendCE(actor, panelAmount(root), t("CE.Spent")),
   ceRegainN: (actor, target, root) => spendCE(actor, -panelAmount(root), t("CE.Regained")),
   domainHUD: (actor) => openDomainHUD(actor),
+  engineDiagnostics: () => showIntegrationDiagnostics(),
+  attackSelectedBarrier: () => attackSelectedBarrier(),
   vows: (actor) => openVows(actor),
   career: (actor) => openCareer(actor),
   hotbar: (actor) => fillHotbar(actor),
@@ -2464,7 +2486,7 @@ const PANEL_ACTIONS = {
 
 // Overrides that only the GM may use (hidden for players and refused if called anyway).
 const GM_PANEL_ACTIONS = new Set(["clearBurnout", "clearZone", "clearBF", "clearSoul", "soulDamage", "roUp", "roDown",
-  "soulUp", "soulDown", "limb", "gmRefinement", "gmBreakthrough", "gmCE", "updateAll"]);
+  "soulUp", "soulDown", "limb", "gmRefinement", "gmBreakthrough", "gmCE", "updateAll","engineDiagnostics"]);
 
 function makePanelClass() {
   const Base = foundry.applications?.api?.ApplicationV2;
@@ -4857,7 +4879,7 @@ function simpleDomainAt(target){
     const f=effect?.flags?.jjk5e;
     if(!f||f.originTokenUuid!==source.uuid||!(f.hp>0)||tokenLevelId(source)!==tokenLevelId(doc)) continue;
     const origin=tokenCenter(source),point=tokenCenter(doc);
-    if(origin.x!==f.x||origin.y!==f.y||tokenLevelId(source)!==(f.levelId??null)) continue;
+    if(origin.x!==f.x||origin.y!==f.y||tokenLevelId(source)!==(f.levelId??null)||Number(source.elevation??0)!==Number(f.elevation??0)) continue;
     const distance=Math.hypot(origin.x-point.x,origin.y-point.y);
     if(distance<=ftToPx(scene,10)+1) candidates.push({effect,distance});
   }
@@ -5712,6 +5734,7 @@ function makeDomainClass() {
           this.render();
         },
         attack: function () { return promptBarrierAttack(this.actor); },
+        marker: async function(){if(!isActiveGM())return false;const result=await createBarrierMarker(this.actor);this.render();return result;},
         weak: function () { return findWeakSpot(this.actor); },
         ref: async function () {
           if (!game.user.isGM) return ui.notifications.warn(t("Notify.GMOnly"));
@@ -5755,6 +5778,7 @@ function makeDomainClass() {
         <p>${t("Domain.Stats", { ac: s.ac, ref: s.refinement, r: s.radius })}</p>${clash}
         <p class="hint">${t("Domain.Mode")}: ${mode}; ${s.lethal === false ? t("Domain.NonLethalMode") : t("Domain.LethalMode")}</p>
         ${domainHudDetails(this.actor,s)}
+        ${isActiveGM()&&!s.noBarrier?`<button type="button" data-action="marker">Create selectable barrier marker (experimental)</button>`:""}
         <div class="btns">${s.noBarrier ? "" : `<button type="button" data-action="attack"><i class="fas fa-crosshairs"></i> ${t("Domain.AttackBarrier")}</button>${game.user.isGM ? `<button type="button" data-action="hit"><i class="fas fa-hammer"></i> ${t("Domain.HitBarrier")}</button>` : ""}`}
           <button type="button" data-action="weak"><i class="fas fa-crosshairs"></i> ${t("Domain.WeakSpot")}</button></div>
         ${this.actor.isOwner ? `<div class="btns"><button type="button" data-action="lethal" data-m="${s.lethal === false ? "lethal" : "nonlethal"}">${s.lethal === false ? t("Domain.MakeLethal") : t("Domain.MakeNonLethal")}</button>${s.refinement >= 100 ? `<button type="button" data-action="mode" data-m="flip">${t("Domain.Flipped")}</button>
