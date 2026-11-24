@@ -890,9 +890,12 @@ test("Transactional CE: authenticated owner, persistent reservation and replay r
   assert.equal(await J.handleCEAuthority({operation:"reserve",payload},{user:owner}),false);
   assert.equal(await J.handleCEAuthority({operation:"reserve",payload:{...payload,id:"tx2"}},{user:owner}),false);
   assert.equal(await J.handleCEAuthority({operation:"commit",payload},{user:other}),false);
+  assert.equal(await J.handleCEAuthority({operation:"commit",payload},{user:owner}),false);
+  assert.equal(await J.handleCEAuthority({operation:"start",payload},{user:owner}),true);
+  assert.equal(await J.handleCEAuthority({operation:"start",payload},{user:owner}),false);
   assert.equal(await J.handleCEAuthority({operation:"commit",payload},{user:owner}),true);
   assert.equal(J.poolValue(J.findPool(actor)),10);
-  assert.equal(await J.handleCEAuthority({operation:"commit",payload},{user:owner}),false);
+  assert.equal(await J.handleCEAuthority({operation:"commit",payload},{user:owner}),true);
   assert.equal(J.ceLedger(J.findPool(actor))[0].state,"committed");
 });
 test("Transactional CE: uncertain consumption requires GM settlement; only one refund",async()=>{
@@ -1024,4 +1027,32 @@ test("Midi consume bridge binds native configuration through workflowFor",async(
   await J.consumeWithCE(async()=>({item:[]}),activity,{},{});
   assert.equal(J.midiCEGuard(workflow),true);
   assert.equal(J.poolValue(J.findPool(actor)),16);
+});
+
+test("CE recovery refunds only an expired explicitly unstarted reservation",async()=>{
+  const {env,actor,J}=await setup({settings:{transactionalCE:true}});
+  const [item]=await actor.createEmbeddedDocuments("Item",[{name:"Technique",type:"feat",flags:{jjk5e:{ceCosts:{a:8}}},system:{activities:{a:{id:"a"}}}}]);
+  const user=env.game.user,payload={actorUuid:actor.uuid,itemId:item.id,activityId:"a",id:"expiry1",scaling:0};
+  await actor.setFlag("jjk5e","sixEyesNext",true);
+  assert.equal((await J.handleCEAuthority({operation:"reserve",payload},{user})).cost,0.8);
+  assert.equal(actor.getFlag("jjk5e","sixEyesNext"),true);
+  const now=Date.now()+130000;
+  assert.equal((await J.recoverCEActor(actor,now))[0].state,"refunded");
+  assert.equal(J.poolValue(J.findPool(actor)),20);
+  assert.equal(await J.handleCEAuthority({operation:"start",payload},{user}),false);
+  assert.equal((await J.recoverCEActor(actor,now)).length,0);
+  const second={...payload,id:"expiry2"};
+  await J.handleCEAuthority({operation:"reserve",payload:second},{user});
+  assert.equal(await J.handleCEAuthority({operation:"start",payload:second},{user}),true);
+  assert.equal(actor.getFlag("jjk5e","sixEyesNext"),undefined);
+  assert.equal((await J.recoverCEActor(actor,now+1000))[0].state,"review");
+  assert.equal(J.poolValue(J.findPool(actor)),19.2);
+  assert.equal(J.integrationReport().pending.length,1);
+});
+test("CE receipt cannot authorize another actor's identically named activity",async()=>{
+  const {actor,J}=await setup({settings:{transactionalCE:true}});
+  const [item]=await actor.createEmbeddedDocuments("Item",[{name:"Technique",type:"feat",flags:{jjk5e:{ceCosts:{a:4}}},system:{activities:{a:{id:"a"}}}}]);
+  const usage={},act={id:"a",actor,item};
+  await J.consumeWithCE(async()=>({item:[]}),act,usage,{});
+  assert.equal(J.cePostAllowed({...act,actor:{uuid:"Actor.other"}},usage),false);
 });
