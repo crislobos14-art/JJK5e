@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.83.0 — Hoja Sealed Ink (vista preliminar)
+- Añade Sealed Ink como opción visual para personajes y PNJ. El diseño nativo de D&D 5e sigue siendo el predeterminado. Cada usuario puede elegir el diseño en los ajustes del módulo y también se puede seleccionar la hoja Sealed Ink desde la configuración del actor.
+- Conserva las tiradas, actividades, inventario y permisos de las hojas nativas. Para los dueños del personaje, muestra las invocaciones vinculadas visibles de la escena actual y permite abrir sus fichas.
+- Añade ventanas redimensionables y cuatro modos de animación que respetan la preferencia de movimiento reducido.
+- Recuperación por emoción negativa requiere confirmación del GM. Buscar un espíritu maldito, Maldito al morir y Percepción del alma de objetos quedan desactivadas en mundos que todavía no hayan elegido un valor.
+- La hoja es una vista preliminar sobre el diseño nativo. La validación multijugador en Foundry con Midi-QOL y DAE sigue pendiente.
+
 ## 1.82.1 — Auditoría de los motores de dominio y EM
 Auditoría del motor de dominios y del motor de transacciones de EM. Puntos débiles: desde dentro del dominio la barrera solo se puede dañar si el atacante encontró su punto débil (Percepción CD 30), como dice el manual; antes el punto débil se guardaba pero no se usaba. Traducidos los textos que seguían en inglés: tarjeta de choque múltiple de dominios, descripciones de Falling Blossom Emotion (ofensiva) y Simple Domain, y nombre del marcador de barrera. La revisión periódica de ventanas de reacción solo recorre las escenas activas o vistas por algún jugador (menos carga en mundos grandes). Limpieza de 27 avisos del lint. Sin errores encontrados en el motor de EM.
 

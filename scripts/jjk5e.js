@@ -1587,8 +1587,22 @@ async function shortRestCE(actor) {
 
 async function negativeEmotion(actor) {
   actor = requireActor(actor);
-  if (!actor) return;
+  if (!actor || !actor.isOwner) return false;
+  const spanish = game.i18n.lang.startsWith("es");
+  // V6: the GM adjudicates genuine danger and the qualifying event.
+  if (!game.user.isGM) {
+    ui.notifications.warn(spanish ? "La recuperación por emoción negativa requiere autorización del GM." :
+      "Negative Emotion Recovery requires GM authorization.");
+    return false;
+  }
+  const pool = findPool(actor);
+  if (!pool || poolValue(pool) >= poolMax(pool)) return false;
   const pb = Number(actor.system.attributes?.prof) || 2;
+  const confirmed = await confirmDialog(t("CE.NegativeEmotion"),
+    `<p>${esc(actor.name)} — ${pb} CE</p><p>${spanish ?
+      "¿Confirmas que ocurrió un desencadenante válido durante un combate con peligro real?" :
+      "Confirm that a qualifying event occurred during combat in genuine danger."}</p>`);
+  if (!confirmed) return false;
   return spendCE(actor, -pb, t("CE.NegativeEmotion"));
 }
 
@@ -6961,8 +6975,8 @@ const OPT_RULES = [
   ["techniqueless", false], ["repetitiveAbilities", false], ["featImprovement", false], ["pureBarrier", false],
   ["executionEvasion", false], ["soulChecks", false], ["outputBurnout", false], ["increasedAffinity", false],
   ["sixEyesDependency", false], ["increasedHP", false], ["toughTrials", false], ["additionalActions", false],
-  ["classUnderstanding", false], ["moneyRules", false], ["yearlyProgression", false], ["findCurse", true],
-  ["cursedUponDeath", true], ["objectSoul", true]
+  ["classUnderstanding", false], ["moneyRules", false], ["yearlyProgression", false], ["findCurse", false],
+  ["cursedUponDeath", false], ["objectSoul", false]
 ];
 
 function opt(key) {
