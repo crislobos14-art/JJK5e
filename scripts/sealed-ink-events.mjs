@@ -6,7 +6,7 @@ const L = (en, es) => game.i18n.lang.startsWith("es") ? es : en;
 const api = () => game.modules.get(ID)?.api;
 const settings = k => game.settings.get(ID, k);
 const history = [], snapshots = new Map(), unread = new Set(), pending = new Map();
-let serial = 0, dock, panel, activeTab = "events", turnKey = "", selectedUuid = "", timer, busy = false;
+let serial = 0, dock, panel, activeTab = "events", turnKey = "", selectedUuid = "", timer, busy = false, activityQuery = "";
 const owner = actor => !!actor && (game.user.isGM || actor.isOwner);
 function visible(actor, token = actor?.token) {
   return owner(actor) && (game.user.isGM || !token?.hidden);
@@ -19,8 +19,8 @@ function el(tag, cls, label) {
 }
 function button(label, fn) {
   const b = el("button", "", label); b.type = "button";
-  b.addEventListener("click", async () => {
-    try { await fn(); } catch (err) { console.warn(ID + " | Sealed Ink controls", err); ui.notifications.warn(L("Operation failed; consult the console.", "Operación fallida; consulta la consola.")); }
+  b.addEventListener("click", async event => {
+    try { await fn(event); } catch (err) { console.warn(ID + " | Sealed Ink controls", err); ui.notifications.warn(L("Operation failed; consult the console.", "Operación fallida; consulta la consola.")); }
   });
   return b;
 }
@@ -167,35 +167,43 @@ function actorCard(actor, initiative) {
   card.append(controls);
   return card;
 }
+function linkedSummon(actor) {
+  const tokens = [actor.token, ...(actor.getActiveTokens?.() ?? []).map(token => token.document)].filter(Boolean);
+  return !!(actor.flags?.dnd5e?.summon?.origin ||
+    tokens.some(token => token.flags?.jjk5e?.summonedBy || token.flags?.dnd5e?.summon?.origin));
+}
+async function useHUDActivity(actor, itemId, activityId, event) {
+  if (busy || !visible(actor) || linkedSummon(actor) || !candidates().some(candidate => candidate.uuid === actor.uuid)) return;
+  const activity = actor.items.get(itemId)?.system?.activities?.get(activityId);
+  if (typeof activity?.use !== "function") return;
+  const control = event.currentTarget;
+  busy = true;
+  control.disabled = true;
+  try { return await activity.use({ event }, { configure: true }, {}); }
+  finally { busy = false; control.disabled = false; }
+}
 function drawHUD(body) {
   const list = candidates(), actor = selectedActor();
   if (!actor) { body.append(el("p","",L("Select an owned token or character.","Selecciona un token o personaje propio."))); return; }
   const select = el("select"); select.setAttribute("aria-label",L("Select actor","Seleccionar actor"));
   for (const a of list) { const o = el("option","",a.name); o.value = a.uuid; o.selected = a.uuid === actor.uuid; select.append(o); }
-  select.addEventListener("change",() => { selectedUuid = select.value; drawPanel(); });
+  select.addEventListener("change",() => { selectedUuid = select.value; activityQuery = ""; drawPanel(); });
   body.append(select,actorCard(actor));
-  const tokens = [actor.token, ...((actor.getActiveTokens?.() ?? []).map(t=>t.document))].filter(Boolean);
-  if (actor.flags?.dnd5e?.summon?.origin || tokens.some(t=>t.flags?.jjk5e?.summonedBy || t.flags?.dnd5e?.summon?.origin)) {
+  if (linkedSummon(actor)) {
     body.append(el("p","",L("Linked summon: use the original sheet and resolve summoner commands before executing attacks.","Invocación vinculada: utiliza la ficha original y resuelve las órdenes del invocador antes de atacar.")));
     return;
   }
   const rows = el("div","jjk-sealed-hud-activities");
   const activities = [...actor.items].flatMap(item => [...(item.system?.activities ?? [])].filter(a => typeof a.use === "function").map(a => ({item,a})));
-  const search = el("input"); search.type = "search"; search.placeholder = L("Find activity","Buscar actividad"); search.setAttribute("aria-label",search.placeholder);
+  const search = el("input"); search.type = "search"; search.placeholder = L("Find activity","Buscar actividad"); search.setAttribute("aria-label",search.placeholder); search.value = activityQuery;
   function draw() {
     rows.replaceChildren();
     for (const {item,a} of activities.filter(x => (x.item.name+" "+x.a.name).toLowerCase().includes(search.value.toLowerCase())).slice(0,40)) {
-      const b = button(item.name + " · " + a.name, async () => {
-        if (busy || !visible(actor)) return;
-        const current = actor.items.get(item.id)?.system?.activities?.get(a.id);
-        if (typeof current?.use !== "function") return;
-        busy = true; b.disabled = true;
-        try { await current.use({event:null},{configure:true},{}); } finally { busy = false; b.disabled = false; }
-      });
+      const b = button(item.name + " · " + a.name, event => useHUDActivity(actor, item.id, a.id, event));
       rows.append(b);
     }
   }
-  search.addEventListener("input",draw); body.append(search,rows); draw();
+  search.addEventListener("input", () => { activityQuery = search.value; draw(); }); body.append(search,rows); draw();
 }
 function drawPanel(automatic = false) {
   if (!panel) return;
@@ -264,7 +272,7 @@ Hooks.once("ready",() => {
   Hooks.on("deleteToken",t=>{if(t.actor?.isToken){snapshots.delete(t.actor.uuid);pending.delete(t.actor.uuid);}});
   for(const h of ["createItem","updateItem","deleteItem","createActiveEffect","updateActiveEffect","deleteActiveEffect"])
     Hooks.on(h,d=>queue(d.actor ?? (d.parent?.documentName==="Actor"?d.parent:d.parent?.actor)));
-  for(const h of ["updateCombat","combatStart","combatTurn","deleteCombat","controlToken","canvasReady","createCombatant","updateCombatant","deleteCombatant"]) Hooks.on(h,()=>{
+  for(const h of ["updateCombat","combatStart","combatTurn","deleteCombat","controlToken","updateToken","canvasReady","createCombatant","updateCombatant","deleteCombatant"]) Hooks.on(h,()=>{
     updateTurn();updateDock();if(panel&&activeTab!=="events")drawPanel(true);
   });
   if (game.user.isGM) {

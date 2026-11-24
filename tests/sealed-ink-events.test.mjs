@@ -7,9 +7,9 @@ const source = readFileSync(new URL("../scripts/sealed-ink-events.mjs", import.m
 const manifest = JSON.parse(readFileSync(new URL("../module.json", import.meta.url), "utf8"));
 function fixture() {
   const hooks = new Map(), settings = new Map();
-  const game = { system: { id: "dnd5e" }, i18n: { lang: "es" }, user: { isGM: false },
+  const game = { user: { isGM: false }, system: { id: "dnd5e" }, i18n: { lang: "es" },
     settings: { register: (id,k,o) => settings.set(k,o), get: (id,k) => settings.get(k)?.default } };
-  const exposed = runInNewContext(source + "\n({delta,visible});", { Hooks: { once: (k,f) => hooks.set(k,f) }, game });
+  const exposed = runInNewContext(source + "\n({delta,visible,useHUDActivity});", { Hooks: { once: (k,f) => hooks.set(k,f) }, game, canvas: null });
   hooks.get("init")();
   return { ...exposed, game, settings };
 }
@@ -47,5 +47,29 @@ test("ownership and hidden tokens are checked", () => {
 });
 test("no new actor writes or custom attack resolution in event module", () => {
   assert.ok(!/\.(?:update|setFlag|createEmbeddedDocuments|deleteEmbeddedDocuments)\(/.test(source));
-  assert.ok(source.includes("current.use({event:null},{configure:true},{})"));
+});
+
+test("HUD delegates to the current native activity and rejects a stale actor or linked summon", async () => {
+  const { game, useHUDActivity } = fixture();
+  const calls = [];
+  const activity = { use: (...args) => calls.push(args) };
+  const activities = new Map([["attack", activity]]);
+  const actor = { uuid: "Actor.a", isOwner: true, items: new Map([["weapon", { system: { activities } }]]) };
+  game.user.character = actor;
+  const event = { currentTarget: { disabled: false } };
+  await useHUDActivity(actor, "weapon", "attack", event);
+  assert.equal(calls.length, 1);
+  assert.equal(calls[0][0].event, event);
+  assert.equal(calls[0][1].configure, true);
+  assert.equal(event.currentTarget.disabled, false);
+
+  actor.flags = { dnd5e: { summon: { origin: "Item.summon" } } };
+  await useHUDActivity(actor, "weapon", "attack", event);
+  actor.flags = {};
+  game.user.character = null;
+  await useHUDActivity(actor, "weapon", "attack", event);
+  game.user.character = actor;
+  activities.delete("attack");
+  await useHUDActivity(actor, "weapon", "attack", event);
+  assert.equal(calls.length, 1);
 });

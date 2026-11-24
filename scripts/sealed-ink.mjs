@@ -313,7 +313,7 @@ function renderLinks(app, root, actor, sealed) {
   };
   if (actor.type === "npc") {
     if (!api?.findPool?.(actor) && !actor.token?.flags?.jjk5e?.summonedBy && !actor.token?.flags?.dnd5e?.summon?.origin) return;
-    if (api?.openPanel) section.append(button(local("Open JJK controls", "Abrir controles JJK"), () => api.openPanel(actor)));
+    if (api?.openPanel) section.append(button(local("Open JJK controls", "Abrir controles JJK"), () => { if (actor.isOwner) api.openPanel(actor); }));
   } else {
     const items = new Set([...actor.items].map(item => item.uuid));
     const tokens = [...(canvas?.scene?.tokens ?? [])].filter(token => {
@@ -330,7 +330,12 @@ function renderLinks(app, root, actor, sealed) {
       const hp = token.actor.system.attributes?.hp;
       const ac = token.actor.system.attributes?.ac?.value;
       info.textContent = token.name + " · HP " + (hp?.value ?? "—") + "/" + (hp?.max ?? "—") + " · AC " + (ac ?? "—");
-      const allowed = () => token.actor && (game.user.isGM || (!token.hidden && token.actor.testUserPermission(game.user, "OBSERVER")));
+      const allowed = () => {
+        if (!actor.isOwner || canvas?.scene?.tokens?.get(token.id) !== token || !token.actor) return false;
+        const origin = token.flags?.dnd5e?.summon?.origin ?? token.actor.flags?.dnd5e?.summon?.origin;
+        if (token.flags?.jjk5e?.summonedBy !== actor.uuid && !actor.items.some(item => item.uuid === origin)) return false;
+        return game.user.isGM || (!token.hidden && token.actor.testUserPermission(game.user, "OBSERVER"));
+      };
       const pool = api?.findPool?.(token.actor);
       if (pool && token.actor.isOwner) info.textContent += " · CE " + api.poolValue(pool) + "/" + api.poolMax(pool);
       row.append(info, button(local("Stats / sheet", "Stats / ficha"), () => { if (allowed()) token.actor.sheet.render({ force: true }); }));
@@ -341,7 +346,8 @@ function renderLinks(app, root, actor, sealed) {
   }
   const anchor = root.querySelector(".sidebar .card .stats, .sidebar .card, .sidebar");
   if (anchor) anchor.append(section);
-  else (root.querySelector(".sheet-header") ?? root.querySelector(".window-content"))?.after(section);
+  else if (root.querySelector(".sheet-header")) root.querySelector(".sheet-header").after(section);
+  else root.querySelector(".window-content")?.append(section);
 }
 
 function refreshLinks() {

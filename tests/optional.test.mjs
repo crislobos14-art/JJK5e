@@ -40,10 +40,15 @@ test("RCT awakening: d100 90+ grants RCT and 1 Breakthrough, once", async () => 
   const { env, actor, J } = await setup();
   const documents = ["Reverse Cursed Technique", "Reverse Cursed Technique (Healing Pool)"]
     .map((name, i) => ({ _id: String(i), name, type: "feat", system: {} }));
+  let available = documents.slice(0, 1);
   env.game.packs.set("jjk5e.jjk5e-class-features", {
-    getIndex: async () => documents,
+    getIndex: async () => available,
     getDocument: async (id) => ({ toObject: () => documents.find((doc) => doc._id === id) })
   });
+  env.dice.push(95);
+  assert.equal(await J.rollRCTAwakening(actor), false, "a missing pool cannot complete awakening");
+  assert.equal(actor.getFlag("jjk5e", "rctUnlocked"), undefined);
+  available = documents;
   env.dice.push(95);
   assert.equal(await J.rollRCTAwakening(actor), true);
   await env.settle();
