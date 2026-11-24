@@ -428,6 +428,12 @@ function circuitCost(activity, base) {
 const CE_QUEUES = new Map();
 const CE_AUTH_QUERY = `${MODULE_ID}.ceAuthority`;
 const CE_USAGE_CONTEXT = new WeakMap();
+const CE_RECOVERY_RESULTS = new WeakSet();
+const CE_MIDI_ATTACKS = new WeakSet();
+function cePostAllowed(activity,usageConfig){
+  return !ceAuthorityEnabled() || !setting("autoSpendCE") || !managedCE(activity) ||
+    ceContext(activity,usageConfig)?.state==="committed";
+}
 const CE_ADAPTER_TARGETS = new Set();
 const QUICK_RECOVERY_ID = "Jt55eu41OQX7G6Sh";
 const isQuickRecovery = (activity) => activity?.id === QUICK_RECOVERY_ID &&
@@ -902,6 +908,8 @@ function registerActivityHooks() {
       }else if (!(await payActivityCE(actor, activity, usageConfig))) return;
     }
     if(isQuickRecovery(activity)){
+      if(!results || typeof results!=="object" || CE_RECOVERY_RESULTS.has(results)) return;
+      CE_RECOVERY_RESULTS.add(results);
       const deltas=results?.message?.system?.deltas?.item?.[item.id]??[];
       const used=deltas.filter(x=>x.keyPath==="system.uses.spent").reduce((n,x)=>n+Number(x.delta||0),0);
       if(Number.isSafeInteger(used)&&used>0) await spendCE(actor,-used,`${item.name} — ${t("CE.Regained")}`);
@@ -3641,7 +3649,10 @@ Hooks.once("ready", () => {
   });
   Hooks.on("renderAbilityScoreImprovementFlow", (app, element) => { injectASIFeats(app, element); });
   Hooks.on("dnd5e.rollAttackV2", (rolls, data) => animateAttack(rolls, data?.subject));
-  Hooks.on("dnd5e.postUseActivity", (activity) => { animateActivity(activity); summonFallback(activity); });
+  Hooks.on("dnd5e.postUseActivity", (activity,usageConfig) => {
+    if(!cePostAllowed(activity,usageConfig)) return false;
+    animateActivity(activity); summonFallback(activity);
+  });
   Hooks.on("renderCharacterActorSheet", (app, element) => addLevelUpButton(app, element));
   Hooks.on("renderActorSheetV2", (app, element) => addLevelUpButton(app, element));
   Hooks.on("updateActor", (actor, changes) => {
@@ -3661,9 +3672,13 @@ Hooks.once("ready", () => {
     if (userId === game.user.id && foundry.utils.getProperty(changes, `flags.${MODULE_ID}.pendingBlackFlash`) === true) animateBlackFlash(actor);
   });
   Hooks.on("updateItem", () => { featDocsCache = null; });
-  Hooks.on("deleteActiveEffect", (effect, options, userId) => {
-    if (userId !== game.user.id || !(effect.flags?.jjk5e?.burnout || effect.flags?.jjk5e?.kind === "burnout")) return;
-    if (effect.parent?.documentName === "Actor") burnoutExhaustion(effect.parent, -1);
+  Hooks.on("deleteActiveEffect", (effect) => {
+    if (!isActiveGM() || !(effect.flags?.jjk5e?.burnout || effect.flags?.jjk5e?.kind === "burnout")) return;
+    const actor=effect.parent;
+    if(actor?.documentName==="Actor") return queueDomainWork(async()=>{
+      if(inBurnout(actor)) return;
+      await burnoutExhaustion(actor,-1);
+    });
   });
 });
 
@@ -6252,7 +6267,8 @@ function registerMidiAutomation() {
   Hooks.on("midi-qol.AttackRollComplete", async (workflow) => {
     try {
       const roll = workflow?.attackRoll;
-      if (!roll) return;
+      if (!roll || typeof roll!=="object" || CE_MIDI_ATTACKS.has(roll)) return;
+      CE_MIDI_ATTACKS.add(roll);
       if (workflow.isCritical && !roll.isCritical) {
         await onAttackRoll(Object.assign(Object.create(Object.getPrototypeOf(roll)), roll, { isCritical: true }), workflow.activity);
       } else await onAttackRoll(roll, workflow.activity);
@@ -7418,7 +7434,8 @@ Hooks.once("ready", () => {
     calledShotCheck(attacker, target, amount).catch((err) => reportError("called shot", err));
   });
   Hooks.on("dnd5e.advancementManagerComplete", (manager) => { afterAdvancement(manager).catch((err) => reportError("advancement", err)); });
-  Hooks.on("dnd5e.postUseActivity", (activity) => {
+  Hooks.on("dnd5e.postUseActivity", (activity,usageConfig) => {
+    if(!cePostAllowed(activity,usageConfig)) return false;
     const actor = activity?.actor ?? activity?.item?.actor;
 
     onOptionalAction(activity).catch((err) => reportError("optional action", err));
