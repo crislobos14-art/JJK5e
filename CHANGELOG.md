@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.60.0 — Pruebas de ejecución de reglas y dominios
+- Nuevo banco de pruebas: `tests/harness/foundry-mock.mjs` ejecuta `scripts/jjk5e.js` sobre un Foundry simulado en memoria; `tests/runtime.test.mjs` (20 pruebas) cubre Black Flash, The Zone, dominios, choques, barrera, CE, RCT, Maximum/Reduced Output, descanso corto y bloqueos de uso. Corre en la CI.
+- The Zone: +1 al rango de crítico sobre el rango propio del personaje (Improved Critical 19 → 18), antes se fijaba en 19 sin importar el rango previo.
+- Anti-Domain Clash: un dominio no letal se destruye al instante contra un dominio con más refinamiento (y viceversa).
+
 ## 1.59.0 — Actualizador de automatización e infraestructura
 Mejoras tomadas de módulos de referencia (Cauldron of Plentiful Resources, Gambit's Premades, Automated Conditions 5e):
 - **Actualizador de automatización**: los objetos JJK que ya están en los personajes se pueden actualizar a la versión del compendio. Botón ⟳ en el panel JJK, menú *Actualizar automatización* en los ajustes y aviso al GM tras cada actualización del módulo. Conserva usos gastados, cantidad, equipado, elecciones de avance, shikigami personales y la habilidad de CE.

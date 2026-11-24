@@ -1247,15 +1247,21 @@ async function onAttackRoll(rolls, subject) {
     if (Number(item.system?.uses?.spent) > 0) await item.update({ "system.uses.spent": 0 });
   }
   const next = stacks + 1;
+  // "+1 Critical Range" per stack, on top of the actor's own range (e.g. Improved Critical 19 → 18).
+  // The base is read before the first Zone exists and kept on the effect for later stacks.
+  const baseOf = (key) => clamp(Number(zone?.flags?.jjk5e?.[`base_${key}`])
+    || Number(foundry.utils.getProperty(actor, `flags.dnd5e.${key}`)) || 20, 2, 20);
+  const wBase = baseOf("weaponCriticalThreshold");
+  const sBase = baseOf("spellCriticalThreshold");
   await setKindEffect(actor, "zone", {
     name: `${t("Zone.Name")}${next > 1 ? ` ×${next}` : ""}`, img: `${ICONS}/zone.svg`,
     duration: { rounds: 10, seconds: 60 },
     changes: [
-      { key: "flags.dnd5e.weaponCriticalThreshold", mode: 3, value: String(20 - next) },
-      { key: "flags.dnd5e.spellCriticalThreshold", mode: 3, value: String(20 - next) }
+      { key: "flags.dnd5e.weaponCriticalThreshold", mode: 3, value: String(Math.max(2, wBase - next)) },
+      { key: "flags.dnd5e.spellCriticalThreshold", mode: 3, value: String(Math.max(2, sBase - next)) }
     ],
     description: `<p>${t("Zone.Description")}</p>`,
-    flags: { jjk5e: { zone: next } }
+    flags: { jjk5e: { zone: next, base_weaponCriticalThreshold: wBase, base_spellCriticalThreshold: sBase } }
   });
   const burnout = actor.effects.filter((e) => e.flags?.jjk5e?.kind === "burnout" || e.flags?.jjk5e?.burnout).map((e) => e.id);
   if (burnout.length) await actor.deleteEmbeddedDocuments("ActiveEffect", burnout);
@@ -4002,7 +4008,9 @@ async function detectClash(actor) {
   if (!rival) return;
   const rs = getDomain(rival);
   const diff = mine.refinement - rs.refinement;
-  const rounds = clashRounds(Math.abs(diff));
+  // Anti-Domain Clash (non-lethal domains): the domain with more refinement destroys the other at once.
+  const antiClash = mine.lethal === false || rs.lethal === false;
+  const rounds = antiClash && diff !== 0 ? 0 : clashRounds(Math.abs(diff));
   const [win, lose] = diff >= 0 ? [actor, rival] : [rival, actor];
   const equal = diff === 0;
   const tag = (role, w) => ({ with: w.uuid, role, rounds: equal ? null : rounds, resolved: false, thirdChecked: false });
