@@ -4441,6 +4441,9 @@ function sureHitBlocked(actor) {
   const state = getDomain(actor);
   if (!state) return false;
   if (state.clash && !state.clash.resolved) return true;
+  const root = state.reactionRootUuid ? fromUuidSync(state.reactionRootUuid) : actor;
+  const window = root?.getFlag?.(MODULE_ID, "domainReactionWindow");
+  if (window?.status === "open" && (state.reactionRootUuid ? window.openingId === state.reactionRootOpening : window.openingId === state.openingId)) return true;
   return state.lethal === false || !!state.noSureHit;
 }
 
@@ -4543,8 +4546,22 @@ async function domainOpened(actor, effect = null) {
   await chat(actor, `<div class="jjk5e-card"><h3><i class="fas fa-circle-half-stroke"></i> ${t("Domain.Opened", { name: esc(actor.name) })}</h3>`
     + `<p>${state.noBarrier ? t(incomplete ? "Domain.IncompleteStats" : "Domain.BarrierlessStats", { radius }) : t("Domain.BarrierStats", { hp: max, ac: state.ac, ref })}</p><p class="hint">${t("Domain.OutsideHint", { n: Math.max(mod, 1) })}</p></div>`);
   // Clashes change the rival's domain too, which only the GM can always write: the active GM resolves them.
-  await offerDomainClash(actor);
-  await detectClash(actor);
+  const claim = actor.getFlag(MODULE_ID, "domainReactionClaim");
+  const root = claim?.openerUuid ? await domainActor(claim.openerUuid) : null;
+  const window = root && reactionWindow(root);
+  const offer = window?.offers.find((o) => o.actorUuid === actor.uuid && o.claimId === claim.id && o.status === "claimed");
+  if (offer && window.openingId === claim.openingId) {
+    const current = getDomain(actor);
+    await setDomain(actor, { ...current, reactionRootUuid: root.uuid, reactionRootOpening: window.openingId });
+    offer.status = "used";
+    await root.setFlag(MODULE_ID, "domainReactionWindow", window);
+    await actor.unsetFlag(MODULE_ID, "domainReactionClaim");
+    try { await globalThis.MidiQOL?.setReactionUsed?.(actor); } catch (err) { reportError("domain reaction", err); }
+    await settleReactionWindow(root);
+  } else {
+    await offerDomainClash(actor);
+    await settleReactionWindow(actor);
+  }
   if (actor.isOwner) openDomainHUD(actor);
 }
 
@@ -4617,6 +4634,7 @@ async function attackBarrier(actor, seeker, data) {
   if (!isActiveGM() || !seeker) return false;
   const state = getDomain(actor);
   if (!state?.open || state.openingId !== data.openingId || state.noBarrier) return false;
+  if (typeof data.tokenUuid !== "string" || data.tokenUuid.length > 256) return false;
   const token = await fromUuid(data.tokenUuid).catch(() => null);
   if (token?.actor?.uuid !== seeker.uuid) return false;
   const geo = barrierAttackGeometry(state, token);
@@ -4626,8 +4644,12 @@ async function attackBarrier(actor, seeker, data) {
       !Number.isInteger(bonus) || Math.abs(bonus) > 100 ||
       !/^\d{1,2}d(?:4|6|8|10|12|20|100)(?:\s*[+-]\s*\d{1,3})?$/.test(formula) ||
       !["", "psychic"].includes(data.type ?? "")) return false;
+  if (typeof data.requestId !== "string" || data.requestId.length > 80) return false;
+  if ((state.barrierRequests ?? []).includes(data.requestId)) return false;
+  state.barrierRequests = [...(state.barrierRequests ?? []).slice(-99), data.requestId];
+  await setDomain(actor, state);
   const attack = await new Roll(`1d20 + (${bonus})`).evaluate();
-  const natural = attack.dice?.[0]?.total ?? attack.terms?.[0]?.total;
+  const natural = attack.dice?.[0]?.results?.find((d) => d.active !== false)?.result ?? attack.dice?.[0]?.total;
   const hit = natural === 20 || (natural !== 1 && attack.total >= state.ac);
   await attack.toMessage?.({ speaker: docClass("ChatMessage").getSpeaker?.({ actor: seeker }), flavor: t(hit ? "Domain.BarrierAttackHit" : "Domain.BarrierAttackMiss") });
   if (!hit) return { hit: false };
@@ -4652,7 +4674,7 @@ async function promptBarrierAttack(actor) {
       formula: b.form.elements.formula.value, type: b.form.elements.psychic.checked ? "psychic" : "" }) } });
   if (!result) return;
   const done = await requestDomainAuthority("attack", { ...result, actorUuid: actor.uuid, seekerUuid: seeker.uuid,
-    tokenUuid: tk.document.uuid, openingId: state.openingId });
+    tokenUuid: tk.document.uuid, openingId: state.openingId, requestId: foundry.utils.randomID() });
   if (!done) ui.notifications.warn(t("Domain.AttackRejected"));
   return done;
 }
@@ -7250,7 +7272,7 @@ function deciders(actor) {
 function reactionWindow(opener) {
   const win = foundry.utils.deepClone(opener?.getFlag?.(MODULE_ID, "domainReactionWindow") ?? null);
   const state = getDomain(opener);
-  if (!win || !state?.open || win.openingId !== state.openingId || Date.now() >= win.expires) return null;
+  if (!win || win.status !== "open" || !state?.open || win.openingId !== state.openingId || Date.now() >= win.expires) return null;
   if (win.combatId) {
     const combat = game.combats?.get?.(win.combatId) ?? (game.combat?.id === win.combatId ? game.combat : null);
     if (!combat || combat.round !== win.round || combat.turn !== win.turn) return null;
@@ -7274,16 +7296,39 @@ async function processClashDecision(operation, actor, data, user) {
     offer.userId = user.id;
     if (operation === "claim") {
       offer.claimId = foundry.utils.randomID();
-      await actor.setFlag(MODULE_ID, "domainReactionClaim", { id: offer.claimId, expires: win.expires, openingId: win.openingId });
+      await actor.setFlag(MODULE_ID, "domainReactionClaim", { id: offer.claimId, expires: win.expires, openingId: win.openingId, openerUuid: opener.uuid });
     }
     await opener.setFlag(MODULE_ID, "domainReactionWindow", win);
+    if (operation === "decline") await settleReactionWindow(opener);
     return operation === "claim" ? { claimId: offer.claimId } : true;
   }
   if (operation !== "finish" || offer.status !== "claimed" || offer.claimId !== data.claimId || offer.userId !== user.id) return false;
-  // A canceled/failed workflow is consumed rather than risking another unverified payment.
-  offer.status = domainOpen(actor) ? "used" : "finished";
-  await opener.setFlag(MODULE_ID, "domainReactionWindow", win);
-  if (actor.getFlag(MODULE_ID, "domainReactionClaim")?.id === offer.claimId) await actor.unsetFlag(MODULE_ID, "domainReactionClaim");
+  // The opening effect, not the caller's asserted result, confirms a successful reaction.
+  // Keep a successful-looking workflow claimed until the effect hook arrives or the window expires.
+  if (data.cancelled === true && !domainOpen(actor)) {
+    offer.status = "finished";
+    await opener.setFlag(MODULE_ID, "domainReactionWindow", win);
+    if (actor.getFlag(MODULE_ID, "domainReactionClaim")?.id === offer.claimId) await actor.unsetFlag(MODULE_ID, "domainReactionClaim");
+    await settleReactionWindow(opener);
+  }
+  return true;
+}
+async function settleReactionWindow(opener) {
+  if (!isActiveGM() || !getDomain(opener)?.open) return false;
+  const raw = foundry.utils.deepClone(opener.getFlag(MODULE_ID, "domainReactionWindow"));
+  if (!raw) { await detectClash(opener); return true; }
+  if (raw.status === "resolved") return true;
+  if (reactionWindow(opener) && raw.offers.some((o) => ["pending", "claimed"].includes(o.status))) return false;
+  raw.status = "resolved";
+  for (const offer of raw.offers) {
+    if (["pending", "claimed"].includes(offer.status)) offer.status = "expired";
+    const actor = await domainActor(offer.actorUuid);
+    if (actor?.getFlag(MODULE_ID, "domainReactionClaim")?.id === offer.claimId && offer.claimId) {
+      await actor.unsetFlag(MODULE_ID, "domainReactionClaim");
+    }
+  }
+  await opener.setFlag(MODULE_ID, "domainReactionWindow", raw);
+  await detectClash(opener);
   return true;
 }
 async function offerDomainClash(opener) {
@@ -7295,7 +7340,7 @@ async function offerDomainClash(opener) {
   const combat = game.combat;
   const sceneId = combat?.scene?.id ?? (typeof combat?.scene === "string" ? combat.scene : combat?.sceneId);
   const sameCombat = combat?.id && sceneId === state.sceneId;
-  const win = { openingId: state.openingId, expires: Date.now() + 120000,
+  const win = { status: "open", openingId: state.openingId, expires: Date.now() + 120000,
     combatId: sameCombat ? combat.id : null, round: sameCombat ? combat.round : null, turn: sameCombat ? combat.turn : null,
     offers: candidates.map((a) => ({ actorUuid: a.uuid, status: "pending" })) };
   await opener.setFlag(MODULE_ID, "domainReactionWindow", win);
@@ -7345,10 +7390,12 @@ async function reactDomainClash(actor, openerUuid = null, openingId = null) {
     const data = { actorUuid: actor.uuid, openerUuid: opener.uuid, openingId: getDomain(opener).openingId };
     const claim = await requestDomainAuthority("claim", data);
     if (!claim?.claimId) return ui.notifications.warn(t("Clash.Expired"));
+    let cancelled = false;
     try {
       const res = await dom.activity.use({ event: null }, { configure: false }, {});
-      if (res !== null && res !== undefined && domainOpen(actor)) globalThis.MidiQOL?.setReactionUsed?.(actor);
-    } finally { await requestDomainAuthority("finish", { ...data, claimId: claim.claimId }); }
+      cancelled = res === null || res === undefined;
+    } catch (err) { cancelled = true; throw err; }
+    finally { await requestDomainAuthority("finish", { ...data, claimId: claim.claimId, cancelled }); }
   } catch (err) { reportError("domain clash", err); }
   finally { CLASH_REACTIONS_PENDING.delete(actor.uuid); }
 }
@@ -7371,7 +7418,17 @@ function rivalDomainFor(actor, openerUuid = null, openingId = null, pendingOnly 
 Object.assign(PANEL_ACTIONS, { domainClash: (actor) => reactDomainClash(actor) });
 
 Hooks.once("ready", () => {
-  // Offers are created by the authoritative opening lifecycle, not arbitrary actor updates.
+  // Persisted windows are reconciled on turn change, login and periodic GM-only expiry.
+  const settleWindows = () => {
+    if (!isActiveGM()) return;
+    const actors = [...(game.actors?.contents ?? []), ...[...(game.scenes ?? [])].flatMap((scene) => [...(scene.tokens ?? [])].map((tk) => tk.actor))];
+    const pending = [...new Map(actors.filter((a) => a?.uuid && a.getFlag(MODULE_ID, "domainReactionWindow")?.status === "open").map((a) => [a.uuid, a])).values()];
+    if (pending.length) return queueDomainWork(async () => { for (const actor of pending) await settleReactionWindow(actor); });
+  };
+  Hooks.on("updateCombat", (combat, changes) => { if ("round" in changes || "turn" in changes) return settleWindows(); });
+  Hooks.on("userConnected", () => settleWindows());
+  setInterval(() => settleWindows(), 5000);
+  settleWindows();
   game.socket?.on?.(`module.${MODULE_ID}`, (msg) => {
     if (msg?.type !== "jjkClashOffer" || !msg.users?.includes(game.user.id)) return;
     promptDomainClash(msg).catch((err) => reportError("clash prompt", err));
