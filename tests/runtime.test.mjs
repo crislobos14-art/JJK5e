@@ -754,3 +754,73 @@ test("Domain custom effect: resolves selected targets with damage on a successfu
   assert.equal(await J.executeDomainProfile(caster,[a,b],"req1"),false);
   assert.deepEqual(values,[3]);
 });
+
+
+test("Domain audit: direct sheet activities cannot bypass active expansion or clash gates", async () => {
+  const { env, actor,J }=await setup();
+  const [item]=await actor.createEmbeddedDocuments("Item",[{name:"Domain",type:"feat",
+    flags:{jjk5e:{domainActivity:"open",technique:"Test"}},system:{activities:{open:{id:"open",name:"Expand"},pulse:{id:"pulse",name:"Initiative 20: pulse"}}}}]);
+  const activity={id:"pulse",name:"Initiative 20: pulse",item,actor};
+  const use=()=>env.Hooks.call("dnd5e.preUseActivity",activity,{},{},{});
+  assert.equal(use(),false);
+  await J.setKindEffect(actor,"domain",{name:"Domain",flags:{jjk5e:{domainOpen:true}}}); await env.settle();
+  await J.setDomain(actor,{open:true,openingId:"test",domainItemUuid:item.uuid,lethal:true});
+  assert.equal(J.canUseDomainActivity(actor,activity),true);
+  assert.notEqual(use(),false);
+  await J.setDomain(actor,{open:true,openingId:"test",domainItemUuid:item.uuid,clash:{resolved:false}});
+  assert.equal(use(),false);
+  assert.equal(env.Hooks.call("dnd5e.preActivityConsumption",activity,{}),false);
+});
+
+test("Domain audit: closing root releases only its claims and unlinks surviving responses", async () => {
+  const {env,actor:root,J}=await setup();
+  const b=env.addActor({name:"B",items:[POOL]});
+  const c=env.addActor({name:"C",items:[POOL]});
+  await J.setDomain(root,{open:true,openingId:"root"});
+  await J.setDomain(b,{open:true,openingId:"b",reactionRootUuid:root.uuid,reactionRootOpening:"root"});
+  await root.setFlag("jjk5e","domainReactionWindow",{status:"open",openingId:"root",offers:[
+    {actorUuid:b.uuid,claimId:"b-claim",status:"claimed"},{actorUuid:c.uuid,claimId:"old",status:"claimed"}]});
+  await b.setFlag("jjk5e","domainReactionClaim",{id:"b-claim",openerUuid:root.uuid});
+  await c.setFlag("jjk5e","domainReactionClaim",{id:"new",openerUuid:"other"});
+  await J.domainClosed(root);
+  assert.equal(J.getDomain(root),null);
+  assert.equal(b.getFlag("jjk5e","domainReactionClaim"),undefined);
+  assert.equal(c.getFlag("jjk5e","domainReactionClaim").id,"new");
+  assert.equal(J.getDomain(b).reactionRootUuid,undefined);
+});
+
+test("Domain audit: expired effect on an NPC in an unviewed scene is removed", async () => {
+  const {env,J}=await setup();
+  const npc=env.addActor({name:"NPC",type:"npc",items:[POOL]});
+  env.game.scenes.set("offscreen",{id:"offscreen",tokens:[{actor:npc}]});
+  await J.setKindEffect(npc,"fallingBlossomDefense",{name:"Ward",duration:{remaining:0}});
+  const ward=fx(npc,"fallingBlossomDefense");
+  ward.duration.remaining=0;
+  await J.expireEffects(); await env.settle();
+  assert.equal(fx(npc,"fallingBlossomDefense"),undefined);
+});
+
+test("Domain audit: a target moving out during a save receives no custom damage", async () => {
+  const {env,actor:caster,J}=await setup();
+  const target=env.addActor({name:"Target",items:[POOL]});
+  const scene={id:"S",grid:{size:100,distance:5},tokens:[]};
+  env.game.scenes.set("S",scene);
+  const tk={uuid:"Scene.S.Token.A",parent:scene,actor:target,x:50,y:-50,width:1,height:1};
+  scene.tokens.push(tk);
+  let hits=0;
+  target.applyDamage=async()=>{hits++;};
+  target.rollSavingThrow=async()=>{tk.x=500;return {total:1};};
+  await J.setDomain(caster,{open:true,openingId:"test",sceneId:"S",x:0,y:0,radius:10,lethal:true,
+    customProfile:{name:"Test",damage:"1d8",damageType:"force",save:"con",dc:15,onSave:"half",condition:"none",rounds:1}});
+  assert.equal(await J.executeDomainProfile(caster,[tk],"move"),true);
+  assert.equal(hits,0);
+});
+
+test("Domain audit: malformed or stale reaction window cannot block new expansion",async()=>{
+  const {actor,J}=await setup();
+  await J.setDomain(actor,{open:true,openingId:"new"});
+  await actor.setFlag("jjk5e","domainReactionWindow",{status:"open",openingId:"old",expires:Date.now()+60000,offers:[]});
+  assert.equal(J.reactionWindow(actor),null);
+  await J.settleReactionWindow(actor);
+  assert.equal(actor.getFlag("jjk5e","domainReactionWindow"),undefined);
+});
