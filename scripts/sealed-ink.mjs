@@ -495,16 +495,16 @@ Hooks.once("ready", () => {
   for (const hook of ["closeActorSheetV2", "closeApplicationV2", "closeApplication", "closeSealedInkCharacterSheet", "closeSealedInkNPCSheet"]) Hooks.on(hook, close);
   for (const hook of ["createToken", "updateToken", "deleteToken", "updateActor", "canvasReady"]) Hooks.on(hook, refreshLinks);
   Hooks.on("jjk5e.sealedInkStateChanged", (actor, key, tone) => {
-    if (!actor?.isOwner || !["hp0","zone","burnout","domain","lowCE","output"].includes(key)) return;
+    if (!actor?.isOwner || !["hp0","zone","burnout","domain","lowCE","output","rctRecovery","restReview"].includes(key)) return;
     for (const [app,root] of live) {
       if (!root.isConnected || !root.classList.contains(MOTION) || nativeActor(app)?.uuid !== actor.uuid) continue;
       const header = root.querySelector(".sheet-header") ?? root;
       const mode = preference("sheetMotion");
       if (mode === "off" || document.hidden || window.matchMedia("(prefers-reduced-motion: reduce)").matches || root.classList.contains("minimized")) continue;
-      const color = tone === "gold" ? "#d4ad36" : tone === "critical" ? "#ce1032" : "#ad98ff";
+      const color = tone === "gold" ? "#d4ad36" : tone === "critical" ? "#ce1032" : tone === "paper" ? "#eee6d5" : "#ad98ff";
       if (typeof header.animate === "function") header.animate([{boxShadow:"inset 0 0 0 2px "+color},{boxShadow:"inset 0 0 0 0 transparent"}],{duration:mode === "performance" ? 120 : 480,easing:"ease-out"});
       const b = header.getBoundingClientRect();
-      emit(root, b.left + b.width/2, b.top + b.height/2, tone === "gold" ? "gold" : tone === "critical" ? "seal" : "energy", 18);
+      emit(root, b.left + b.width/2, b.top + b.height/2, tone === "gold" ? "gold" : tone === "critical" ? "seal" : tone === "paper" ? "paper" : "energy", 18);
     }
   });
   for (const h of ["createItem","updateItem","deleteItem"]) Hooks.on(h, refreshLinks);
