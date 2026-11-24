@@ -1478,7 +1478,18 @@ async function techniqueIndex() {
   return { pack, index };
 }
 
-async function syncTechnique(actor, { notify = true } = {}) {
+const TECHNIQUE_SYNC = new Map();
+async function syncTechnique(actor, options = {}) {
+  if (!actor?.isOwner) return 0;
+  const key = actor.uuid;
+  const previous = TECHNIQUE_SYNC.get(key) ?? Promise.resolve();
+  const next = previous.catch(() => {}).then(() => syncTechniqueOnce(actor,options));
+  TECHNIQUE_SYNC.set(key,next);
+  try { return await next; }
+  finally { if (TECHNIQUE_SYNC.get(key) === next) TECHNIQUE_SYNC.delete(key); }
+}
+async function syncTechniqueOnce(actor, { notify = true } = {}) {
+  if (!actor?.isOwner || isHeavenlyOnly(actor)) return 0;
   const name = actor?.getFlag(MODULE_ID, "technique");
   if (!name) return 0;
   const lvl = techniqueLevel(actor);
@@ -1492,16 +1503,18 @@ async function syncTechnique(actor, { notify = true } = {}) {
   const customs = (game.items ?? []).filter((i) => i.flags?.jjk5e?.custom && i.flags.jjk5e.technique === name
     && (i.flags.jjk5e.level ?? 99) <= lvl && !owned.has(baseName(i)));
   const docs = [...await Promise.all(ids.map((id) => data.pack.getDocument(id))), ...customs];
-  const toCreate = docs.filter(Boolean).map((d) => {
+  if (!actor.isOwner || actor.getFlag(MODULE_ID,"technique") !== name || isHeavenlyOnly(actor)) return 0;
+  const latest = new Set(actor.items.filter(i=>i.flags?.jjk5e?.technique===name).map(i=>baseName(i)));
+  const toCreate = docs.filter(d=>{ if(!d || latest.has(baseName(d)) || (d.flags?.jjk5e?.level ?? 99) > techniqueLevel(actor)) return false; latest.add(baseName(d)); return true; }).map((d) => {
     const obj = d.toObject();
     foundry.utils.setProperty(obj, "_stats.compendiumSource", d.uuid);
     foundry.utils.setProperty(obj, "flags.core.sourceId", d.uuid);
     return obj;
   });
   if (!toCreate.length) return 0;
-  await actor.createEmbeddedDocuments("Item", toCreate, { jjk5eSkipPrereq: true });
-  if (notify) ui.notifications.info(t("Notify.Gained", { name: actor.name, list: toCreate.map((d) => d.name).join(", ") }));
-  return toCreate.length;
+  const created = await actor.createEmbeddedDocuments("Item", toCreate, { jjk5eSkipPrereq: true });
+  if (notify && created.length) ui.notifications.info(t("Notify.Gained", { name: actor.name, list: created.map((d) => d.name).join(", ") }));
+  return created.length;
 }
 
 function isHeavenlyOnly(actor) {
@@ -6599,8 +6612,8 @@ function creatorSteps(actor) {
   return [
     { key: "abilities", icon: "fas fa-dice-d20", done: !!actor.getFlag(MODULE_ID, "pointBuyDone"), run: () => pointBuy(actor) },
     { key: "class", locked: hasType(actor,"class"), icon: "fas fa-user-graduate", done: hasType(actor, "class"), run: pick("jjk5e-classes", "class", t("Create.Class")) },
-    { key: "technique", icon: "fas fa-hand-sparkles", done: hr || !!actor.getFlag(MODULE_ID, "technique"), skip: hr, run: () => chooseTechnique(actor) },
-    { key: "ceAbility", icon: "fas fa-brain", done: hr || !!actor.getFlag(MODULE_ID, "ceAbility"), skip: hr, run: () => chooseCEAbility(actor) },
+    { key: "technique", locked: !hasType(actor,"class"), icon: "fas fa-hand-sparkles", done: hr || !!actor.getFlag(MODULE_ID, "technique"), skip: hr, run: () => chooseTechnique(actor) },
+    { key: "ceAbility", locked: !hasType(actor,"class"), icon: "fas fa-brain", done: hr || !!actor.getFlag(MODULE_ID, "ceAbility"), skip: hr, run: () => chooseCEAbility(actor) },
     { key: "race", locked: hasType(actor,"race"), icon: "fas fa-dna", done: hasType(actor, "race"), run: pick("jjk5e-races", "race", t("Create.Race")) },
     { key: "background", locked: hasType(actor,"background"), icon: "fas fa-scroll", done: hasType(actor, "background"), run: pick("jjk5e-backgrounds", "background", t("Create.Background")) },
     { key:"mindset", label:"Mindset", hint:spanish ? "Alternativa a Inspiration si la mesa la utiliza." : "Alternative to Inspiration when used by the table.", icon:"fas fa-brain", optional:true, done:mindset, locked:mindset, run:pickMindset },
