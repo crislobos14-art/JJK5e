@@ -476,7 +476,7 @@ async function ceAuthorityRequest(operation,payload) {
   catch(err) { reportError("CE authority",err); return false; }
 }
 async function handleCEAuthority(msg,{user}={}) {
-  if (!isActiveGM() || !user?.active || !msg?.payload ||
+  if (!ceAuthorityEnabled() || !isActiveGM() || !user?.active || !msg?.payload ||
       !["reserve","commit","review","settle","adjust"].includes(msg.operation)) return false;
   const {operation,payload:d}=msg;
   const actor=await domainActor(d.actorUuid);
@@ -503,16 +503,18 @@ async function handleCEAuthority(msg,{user}={}) {
       const item=actor.items.get(d.itemId);
       if(!a || !item || !Number.isSafeInteger(d.scaling) || d.scaling<0 || d.scaling>1000) return false;
       const act=a.item ? a : {...a,item,actor,id:d.activityId};
+      const scale=act.consumption?.scaling;
+      if(d.scaling>0 && scale?.allowed===false) return false;
       if(!managedCE(act) || !validActivityCE(actor,act,{scaling:d.scaling})) return false;
       if(act.item?.flags?.jjk5e?.technique && (inBurnout(actor)||hasKind(actor,"domainAmplification"))) return false;
       if(item.flags?.jjk5e?.domainActivity===act.id && domainOpen(actor)) return false;
       if(item.flags?.jjk5e?.domainActivity && item.flags.jjk5e.domainActivity!==act.id && !canUseDomainActivity(actor,act)) return false;
       const cost=totalActivityCECost(actor,act,{scaling:d.scaling});
       const tx=ceTransaction(poolValue(pool),poolMax(pool),cost);
-      if(!tx || !(cost>0)) return false;
+      if(!tx || cost<0) return false;
       const rec={id:d.id,userId:user.id,actorUuid:actor.uuid,itemId:d.itemId,activityId:d.activityId,
         scaling:d.scaling,cost,state:"reserved",created:Date.now(),
-        sixEyes:!!actor.getFlag(MODULE_ID,"sixEyesNext"),minusNext:!!(item.flags?.jjk5e?.technique&&actor.getFlag(MODULE_ID,"costMinusNext"))};
+        sixEyes:cost>0&&!!actor.getFlag(MODULE_ID,"sixEyesNext"),minusNext:cost>0&&!!(item.flags?.jjk5e?.technique&&actor.getFlag(MODULE_ID,"costMinusNext"))};
       const whole=Math.floor(tx.spent+1e-6);
       // Persist debit and reservation together in the same Item update.
       await pool.update({"system.uses.spent":whole,"flags.jjk5e.fractionalSpent":Math.round((tx.spent-whole)*1000)/1000,
@@ -565,7 +567,7 @@ async function consumeWithCE(wrapped,activity,usageConfig,messageConfig) {
   }
 }
 function installCEAdapters() {
-  if(!globalThis.libWrapper?.register) return false;
+  if(!ceAuthorityEnabled()||!globalThis.libWrapper?.register) return false;
   for(const [key,config] of Object.entries(CONFIG.DND5E?.activityTypes??{})){
     if(!/^[a-zA-Z0-9_$]+$/.test(key)||typeof config.documentClass?.prototype?.consume!=="function") continue;
     const target=`CONFIG.DND5E.activityTypes.${key}.documentClass.prototype.consume`;
@@ -649,7 +651,7 @@ async function spendCE(actor, amount, label = "") {
   return queueCE(actor, () => doSpendCE(actor, amount, label));
 }
 async function setExactCE(actor, value) {
-  if (!game.user.isGM || !Number.isFinite(value)) return false;
+  if (!game.user.isGM || !Number.isFinite(value) || (ceAuthorityEnabled()&&!isActiveGM())) return false;
   return queueCE(actor, async () => {
     const pool = findPool(actor);
     if (!pool || (ceAuthorityEnabled()&&cePending(pool))) return false;
@@ -2777,7 +2779,7 @@ Hooks.once("init", () => {
     onChange: () => { if (game.user?.isGM) promptImport(false); }
   });
   reg("autoSpendCE", Boolean, true);
-  reg("transactionalCE", Boolean, false);
+  reg("transactionalCE", Boolean, false, { requiresReload: true });
   reg("playerGMRequests", Boolean, false);
   reg("ceChat", Boolean, true);
   reg("ceResource", String, "tertiary", {
@@ -2884,6 +2886,14 @@ Hooks.once("ready", async () => {
   Hooks.on("dnd5e.preRollDamageV2", (config) => onPreRollDamage(config));
 
   Hooks.on("updateCombat", () => expireEffects());
+  for(const hook of ["dnd5e.preShortRest","dnd5e.preLongRest","dnd5e.preRestCompleted"]) {
+    Hooks.on(hook,actor=>{
+      if(ceAuthorityEnabled()&&cePending(findPool(actor))) {
+        ui.notifications.warn("JJK5e: settle pending CE reservations before resting.");
+        return false;
+      }
+    });
+  }
   Hooks.on("dnd5e.restCompleted", async (actor, result) => {
     if (!actor?.isOwner) return;
     if (result?.longRest) {
