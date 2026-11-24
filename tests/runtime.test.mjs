@@ -825,3 +825,53 @@ test("Domain audit: malformed or stale reaction window cannot block new expansio
   await J.settleReactionWindow(actor);
   assert.equal(actor.getFlag("jjk5e","domainReactionWindow"),undefined);
 });
+
+
+test("CE audit: invalid or negative scaling never pays or credits CE", async () => {
+  const {actor,J}=await setup();
+  const act={id:"a",actor,item:{name:"Scaled",actor,flags:{jjk5e:{ceCosts:{a:4},ceSteps:{a:2}}}}};
+  for(const scaling of [-1,"invalid",Infinity]) {
+    assert.equal(await J.payActivityCE(actor,act,{scaling}),false);
+  }
+  assert.equal(J.poolValue(J.findPool(actor)),20);
+  assert.equal(await J.payActivityCE(actor,act,{scaling:3}),true);
+  assert.equal(J.poolValue(J.findPool(actor)),10);
+});
+test("CE audit: scaling cannot bypass Reduced Output at final consumption",async()=>{
+  const {env,actor,J}=await setup();
+  await J.setReducedOutput(actor,3);
+  const act={id:"a",actor,item:{name:"Scaled",actor,flags:{jjk5e:{ceCosts:{a:4},ceSteps:{a:2}}}}};
+  assert.notEqual(env.Hooks.call("dnd5e.preActivityConsumption",act,{scaling:2}),false);
+  assert.equal(env.Hooks.call("dnd5e.preActivityConsumption",act,{scaling:3}),false);
+  assert.equal(await J.payActivityCE(actor,act,{scaling:3}),false);
+  assert.equal(J.poolValue(J.findPool(actor)),20);
+});
+test("CE audit: discounted scaled charge is calculated once and one-use discounts are consumed",async()=>{
+  const {actor,J}=await setup();
+  const act={id:"a",actor,item:{name:"Scaled",actor,flags:{jjk5e:{technique:"Test",ceCosts:{a:5},ceSteps:{a:2}}}}};
+  await actor.setFlag("jjk5e","sixEyesNext",true);
+  await actor.setFlag("jjk5e","costMinusNext",true);
+  assert.equal(J.totalActivityCECost(actor,act,{scaling:1}),0.6);
+  assert.equal(await J.payActivityCE(actor,act,{scaling:1}),true);
+  assert.equal(J.poolValue(J.findPool(actor)),19.4);
+  assert.equal(actor.getFlag("jjk5e","sixEyesNext"),undefined);
+  assert.equal(actor.getFlag("jjk5e","costMinusNext"),undefined);
+  assert.equal(await J.payActivityCE(actor,act,{scaling:1}),true);
+  assert.equal(J.poolValue(J.findPool(actor)),12.4);
+});
+test("CE audit: GM sets exact value without Six Eyes discount and recovery is capped",async()=>{
+  const {actor,J}=await setup();
+  await actor.setFlag("jjk5e","sixEyesNext",true);
+  assert.equal(await J.setExactCE(actor,10.5),true);
+  assert.equal(J.poolValue(J.findPool(actor)),10.5);
+  assert.equal(actor.getFlag("jjk5e","sixEyesNext"),true);
+  assert.equal(await J.spendCE(actor,-100),true);
+  assert.equal(J.poolValue(J.findPool(actor)),20);
+});
+test("CE audit: overlapping local payments cannot both spend unavailable CE",async()=>{
+  const {actor,J}=await setup();
+  const act={id:"a",actor,item:{name:"Costly",actor,flags:{jjk5e:{ceCosts:{a:15}}}}};
+  const results=await Promise.all([J.payActivityCE(actor,act),J.payActivityCE(actor,act)]);
+  assert.equal(results.filter(Boolean).length,1);
+  assert.equal(J.poolValue(J.findPool(actor)),5);
+});
