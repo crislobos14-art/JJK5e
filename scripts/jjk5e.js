@@ -618,6 +618,10 @@ function registerActivityHooks() {
       ui.notifications.warn(t("Notify.NoInspiration", { name: actor.name }));
       return false;
     }
+    if (activity.item?.flags?.jjk5e?.technique && hasKind(actor, "domainAmplification")) {
+      ui.notifications.warn(t("Domain.AmplificationBlocks"));
+      return false;
+    }
     if (activity.item?.flags?.jjk5e?.technique && inBurnout(actor)) {
       ui.notifications.warn(t("Notify.Burnout"));
       return false;
@@ -701,6 +705,7 @@ function registerActivityHooks() {
     if (item?.flags?.jjk5e?.reload?.[activity.id] && Number(item.system?.uses?.spent) > 0) {
       await item.update({ "system.uses.spent": 0 });
     }
+    await activateDomainProtection(actor, item, activity);
     await remindModifiers(actor, item);
     if (item?.flags?.jjk5e?.openTechnique) await chooseTechnique(actor);
     const grp = item?.flags?.jjk5e?.activatesGroup?.[activity.id];
@@ -1496,7 +1501,7 @@ async function openDomain(actor, item) {
     duration: barrierless ? {} : { rounds: 10 * minutes, seconds: 60 * minutes },
     description: `<p>${t(incomplete ? "Domain.IncompleteDescription" : barrierless ? "Domain.BarrierlessDescription" : "Domain.Description")}</p>`,
     flags: { jjk5e: { domainOpen: true, incomplete, barrierless,
-      originTokenUuid: (origin?.document ?? origin)?.uuid ?? null } }
+      domainItemUuid: item?.uuid ?? null, originTokenUuid: (origin?.document ?? origin)?.uuid ?? null } }
   });
 }
 
@@ -1813,7 +1818,7 @@ async function expireEffects() {
   for (const actor of actors) {
     const ids = actor.effects.filter((e) => {
       const kind = e.flags?.jjk5e?.kind;
-      if (!["zone", "burnout", "domain"].includes(kind)) return false;
+      if (!["zone", "burnout", "domain"].includes(kind) && !DOMAIN_WARD_KINDS.has(kind)) return false;
       if (e.disabled || e.duration?.expired === true) return true;
       const rem = e.duration?.remaining;
       return rem !== null && rem !== undefined && rem <= 0;
@@ -2961,7 +2966,7 @@ function applySureHit(actor, config) {
   // Vanilla attack-roll hooks are not target-specific. Do not grant an unconditional
   // sure hit when the targeted set contains mixed or unknown locations.
   if (!state || targets.length !== 1 || !insideDomain(state, targets[0])) return;
-  if (targets[0]?.actor?.flags?.jjk5e?.sureHitImmune) return;
+  if (domainWard(targets[0])) return;
   const roll = config?.rolls?.[0];
   if (!roll) return;
   roll.options ??= {};
@@ -3264,8 +3269,7 @@ function registerMidiHooks() {
     if (!(workflow && setting("domainSureHit") && domainOpen(workflow.actor)
       && workflow.item?.flags?.jjk5e?.technique && !sureHitBlocked(workflow.actor))) return false;
     const state = getDomain(workflow.actor);
-    // Celestial Body (Heavenly Restriction): sure-hit effects cannot target this creature.
-    if ((target?.actor ?? target)?.flags?.jjk5e?.sureHitImmune) return false;
+    if (domainWard(target)) return false;
     return !!state && !!target && insideDomain(state, target);
   };
   // Midi decides each target's hit here (after cover, AC bonuses and reactions).
@@ -3280,6 +3284,7 @@ function registerMidiHooks() {
   Hooks.on("midi-qol.hitsChecked", (workflow) => {
     try {
       if (!workflow) return;
+      excludeDomainWardedTargets(workflow);
       const eligible = [...(workflow.targets ?? [])].filter((t) => sureHit(workflow, t));
       if (eligible.length) workflow.hitTargets = new Set([...(workflow.hitTargets ?? []), ...eligible]);
     }
@@ -3290,6 +3295,7 @@ function registerMidiHooks() {
     try {
       const item = workflow?.item;
       if (!setting("domainSureHit") || !domainOpen(workflow?.actor) || !item?.flags?.jjk5e?.technique || sureHitBlocked(workflow?.actor)) return;
+      excludeDomainWardedTargets(workflow);
       const all = new Set([...(workflow.saves ?? []), ...(workflow.failedSaves ?? [])]);
       const forced = [...all].filter((token) => sureHit(workflow, token));
       workflow.failedSaves = new Set([...(workflow.failedSaves ?? []), ...forced]);
@@ -4377,7 +4383,7 @@ async function domainActor(uuid) {
 }
 /** Query context.user is supplied by Foundry; never accept a sender ID from the payload. */
 async function handleDomainAuthority(msg, { user } = {}) {
-  if (!isActiveGM() || !user?.active || !msg?.payload || !["claim", "finish", "decline", "mode", "close", "lethal", "attack", "weakSpot"].includes(msg.operation)) return false;
+  if (!isActiveGM() || !user?.active || !msg?.payload || !["claim", "finish", "decline", "mode", "close", "lethal", "attack", "weakSpot", "amplification"].includes(msg.operation)) return false;
   const { operation, payload: data } = msg;
   const actor = await domainActor(data.actorUuid);
   if (!actor) return false;
@@ -4392,6 +4398,7 @@ async function handleDomainAuthority(msg, { user } = {}) {
   return queueDomainWork(async () => {
     if (!canDirectDomain(user, source)) return false;
     if (["claim", "finish", "decline"].includes(operation)) return processClashDecision(operation, actor, data, user);
+    if (operation === "amplification") return toggleDomainAmplification(actor);
     const state = getDomain(actor);
     if (!state?.open || !data.openingId || state.openingId !== data.openingId) return false;
     if (operation === "mode") return setBarrierMode(actor, data.mode);
@@ -4439,6 +4446,76 @@ function insideDomain(state, token) {
     && Math.hypot(c.x - state.x, c.y - state.y) <= ftToPx(scene, state.radius) + 1;
 }
 
+/* V6: Falling Blossom negates guaranteed effects on its wearer; Hollow Wicker Basket
+ * protects only selected creatures within 15 ft. Simple Domain redirects damage into
+ * a finite barrier, so it must not be treated as unconditional immunity. */
+const DOMAIN_WARD_KINDS = new Set(["fallingBlossomDefense", "hollowWickerProtection", "domainAmplification"]);
+function liveWard(effect) {
+  return !!effect && !effect.disabled && effect.duration?.expired !== true &&
+    (effect.duration?.remaining == null || effect.duration.remaining > 0);
+}
+function tokenLevelId(token) {
+  const doc = token?.document ?? token;
+  return typeof doc?.level === "string" ? doc.level : doc?.level?.id ?? null;
+}
+function domainWard(target) {
+  const doc = target?.document ?? target;
+  const actor = target?.actor ?? doc?.actor;
+  if (!actor) return null;
+  if (actor.flags?.jjk5e?.sureHitImmune) return "Celestial Body";
+  if (actor.effects?.some((e) => liveWard(e) && e.flags?.jjk5e?.kind === "fallingBlossomDefense")) return "Falling Blossom Emotion";
+  if (actor.effects?.some((e) => liveWard(e) && e.flags?.jjk5e?.kind === "domainAmplification")) return "Domain Amplification";
+  const scene = doc?.parent;
+  if (!scene?.id || !doc?.uuid) return null;
+  for (const source of scene.tokens ?? []) {
+    const ward = source.actor?.effects?.find((e) => liveWard(e) && e.flags?.jjk5e?.kind === "hollowWickerProtection");
+    const meta = ward?.flags?.jjk5e;
+    if (!meta || meta.originTokenUuid !== source.uuid || !meta.chosenTokens?.includes(doc.uuid)) continue;
+    if (tokenLevelId(source) !== tokenLevelId(doc)) continue;
+    const center = tokenCenter(source), point = tokenCenter(doc);
+    if (Math.hypot(center.x - point.x, center.y - point.y) <= ftToPx(scene, 15) + 1) return "Hollow Wicker Basket";
+  }
+  return null;
+}
+async function activateDomainProtection(actor, item, activity) {
+  if (!actor?.isOwner || !item || !activity) return;
+  const name = baseName(item);
+  const cost = Number(item.flags?.jjk5e?.ceCosts?.[activity.id]);
+  if (name === "Falling Blossom Emotion" && cost === 5) {
+    return setKindEffect(actor, "fallingBlossomDefense", { name, img: `${ICONS}/domain.svg`, duration: { rounds: 10, seconds: 60 },
+      description: "<p>V6: negates guaranteed-hit attacks and effects only.</p>" });
+  }
+  if (name !== "Hollow Wicker Basket" || cost !== 4) return;
+  const selected = [...(canvas?.tokens?.controlled ?? [])].filter((tk) => tk.actor?.uuid === actor.uuid);
+  const tokens = actor.getActiveTokens?.() ?? [];
+  const source = selected.length === 1 ? selected[0] : tokens.length === 1 ? tokens[0] : null;
+  const origin = source?.document ?? source;
+  const scene = origin?.parent;
+  if (!origin?.uuid || !scene?.id) return;
+  const chosen = [origin, ...[...(game.user?.targets ?? [])].map((tk) => tk.document ?? tk)]
+    .filter((tk) => tk?.parent?.id === scene.id && tokenLevelId(tk) === tokenLevelId(origin))
+    .filter((tk) => { const a = tokenCenter(origin), b = tokenCenter(tk); return Math.hypot(a.x-b.x,a.y-b.y) <= ftToPx(scene,15)+1; })
+    .map((tk) => tk.uuid).filter(Boolean);
+  return setKindEffect(actor, "hollowWickerProtection", { name, img: `${ICONS}/domain.svg`, duration: { rounds: 10, seconds: 60 },
+    description: "<p>V6: selected creatures within 15 ft are protected from guaranteed hits.</p>",
+    flags: { jjk5e: { originTokenUuid: origin.uuid, chosenTokens: [...new Set(chosen)] } } });
+}
+function domainGuaranteedTarget(workflow, target) {
+  return !!workflow?.actor && setting("domainSureHit") && domainOpen(workflow.actor)
+    && !!workflow.item?.flags?.jjk5e?.technique && !sureHitBlocked(workflow.actor)
+    && insideDomain(getDomain(workflow.actor), target);
+}
+function excludeDomainWardedTargets(workflow) {
+  if (!workflow?.targets) return [];
+  const protectedTargets = [...workflow.targets].filter((tk) => domainGuaranteedTarget(workflow, tk) && domainWard(tk));
+  if (!protectedTargets.length) return [];
+  const ids = new Set(protectedTargets.map((tk) => (tk?.document ?? tk)?.uuid).filter(Boolean));
+  const exclude = (tk) => protectedTargets.includes(tk) || ids.has((tk?.document ?? tk)?.uuid);
+  for (const key of ["targets", "hitTargets", "hitTargetsEC", "saves", "failedSaves", "applicationTargets"]) {
+    if (workflow[key] instanceof Set) workflow[key] = new Set([...workflow[key]].filter((tk) => !exclude(tk)));
+  }
+  return protectedTargets;
+}
 /** No sure hit during an unresolved clash, or against targets outside the domain. */
 function sureHitBlocked(actor) {
   const state = getDomain(actor);
@@ -4541,6 +4618,7 @@ async function domainOpened(actor, effect = null) {
     radius, lethal: actor.getFlag(MODULE_ID, "domainLethal") !== false,
     noBarrier: incomplete || barrierless, noSureHit: incomplete, incomplete, barrierless,
     sceneId: sourceScene?.id ?? null, tokenUuid: tokenDoc?.uuid ?? null, levelId,
+    domainItemUuid: kind.domainItemUuid ?? null,
     x: c?.x ?? null, y: c?.y ?? null,
     damageTaken: 0, zone: null, clash: null, name: actor.name };
   await setDomain(actor, state);
@@ -4886,6 +4964,25 @@ async function setBarrierMode(actor, mode) {
   } finally { DOMAIN_MODE_PENDING.delete(key); }
 }
 
+async function toggleDomainAmplification(actor) {
+  if (!isActiveGM() || refinementOf(actor) < 600 || domainOpen(actor)) return false;
+  const dom = domainActivityOf(actor);
+  if (!dom || dom.item.flags?.jjk5e?.incompleteDomain) return false;
+  const active = kindEffect(actor, "domainAmplification");
+  if (active) { await safeDelete(active); return true; }
+  const until = Number(actor.getFlag(MODULE_ID, "amplificationUntil")) || 0;
+  const now = Number(game.time?.worldTime) || 0;
+  if (until <= now) {
+    const cost = Math.ceil(activityCost(dom.activity) / 2);
+    if (cost <= 0 || !(await spendCE(actor, cost, "Domain Amplification"))) return false;
+    await actor.setFlag(MODULE_ID, "amplificationUntil", now + 60);
+  }
+  const remaining = Math.min(60, Math.max(1, (Number(actor.getFlag(MODULE_ID,"amplificationUntil")) || now) - now));
+  await setKindEffect(actor, "domainAmplification", { name: "Domain Amplification", img: `${ICONS}/domain.svg`,
+    duration: { rounds: Math.ceil(remaining / 6), seconds: remaining },
+    description: "<p>V6: innate techniques are blocked; guaranteed-hit protection is active. Adjudicate other neutralization and Maximum Output interactions.</p>" });
+  return true;
+}
 const DOMAIN_APPS = new Map();
 function refreshDomainApps(actor) { const a = DOMAIN_APPS.get(actor?.uuid); if (a?.rendered) a.render(); }
 
@@ -4903,6 +5000,11 @@ function makeDomainClass() {
               <label class="jjk-check"><input type="checkbox" name="psy"> ${t("Domain.Psychic")}</label>`,
             ok: { callback: (e, b) => ({ n: b.form.elements.n.valueAsNumber, side: b.form.elements.side.value, psy: b.form.elements.psy.checked }) } });
           if (res && game.user.isGM) await queueDomainWork(() => damageBarrier(this.actor, res.n, res.side, res.psy ? "psychic" : ""));
+        },
+        amplification: async function () {
+          const done = await requestDomainAuthority("amplification", { actorUuid: this.actor.uuid });
+          if (!done) ui.notifications.warn(t("Domain.AmplificationUnavailable"));
+          this.render();
         },
         attack: function () { return promptBarrierAttack(this.actor); },
         weak: function () { return findWeakSpot(this.actor); },
@@ -4928,7 +5030,8 @@ function makeDomainClass() {
       const ref = refinementOf(this.actor);
       if (!s?.open) {
         return `<section class="jjk-panel"><p>${t("Domain.Closed")}</p><p>${t("Domain.Refinement")}: <strong>${ref}</strong>
-          ${game.user.isGM ? ` <button type="button" data-action="ref">${t("Common.Edit")}</button>` : ""}</p></section>`;
+          ${game.user.isGM ? ` <button type="button" data-action="ref">${t("Common.Edit")}</button>` : ""}</p>
+          ${this.actor.isOwner && ref >= 600 ? `<button type="button" data-action="amplification">${t(hasKind(this.actor,"domainAmplification") ? "Domain.AmplificationDismiss" : "Domain.AmplificationActivate")}</button>` : ""}</section>`;
       }
       const pct = s.max ? Math.round((s.hp / s.max) * 100) : 0;
       if (!this.actor.isOwner && !game.user.isGM) {
