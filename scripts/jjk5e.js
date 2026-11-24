@@ -1729,7 +1729,7 @@ async function applyCEEffects(actor) {
 
 async function chooseCEAbility(actor) {
   actor = requireActor(actor);
-  if (!actor) return null;
+  if (!actor?.isOwner || isHeavenlyOnly(actor)) return null;
   const a = actor.system.abilities;
   const current = ceAbility(actor);
   const content = `<p>${t("CE.AbilityPrompt", { name: esc(actor.name) })}</p>`
@@ -1737,7 +1737,7 @@ async function chooseCEAbility(actor) {
     + `<option value="wis" ${current === "wis" ? "selected" : ""}>${t("Common.Wisdom")} (${a.wis?.mod ?? 0})</option>`
     + `<option value="cha" ${current === "cha" ? "selected" : ""}>${t("Common.Charisma")} (${a.cha?.mod ?? 0})</option></select>`;
   const choice = await promptField(t("CE.AbilityTitle"), content, "ability");
-  if (!choice) return null;
+  if (!["wis","cha"].includes(choice) || !actor.isOwner || isHeavenlyOnly(actor)) return null;
   const old = actor.getFlag(MODULE_ID, "ceAbility");
   await actor.update({ "system.attributes.spellcasting": choice, [`flags.${MODULE_ID}.ceAbility`]: choice });
   if (old && old !== choice) {
@@ -6546,10 +6546,10 @@ async function asiOrFeatChooser(app, element) {
 
 /* ---- Character creation: abilities → class (+ technique) → race → background ---- */
 
-async function pickFromPack(packName, types, title) {
+async function pickFromPack(packName, types, title, predicate = () => true) {
   const pack = jjkPack(packName);
   if (!pack) return null;
-  const docs = (await pack.getDocuments()).filter((d) => types.includes(d.type))
+  const docs = (await pack.getDocuments()).filter((d) => types.includes(d.type) && predicate(d))
     .sort((a, b) => a.name.localeCompare(b.name));
   if (!docs.length) return null;
   const options = docs.map((d) => `<option value="${d.uuid}">${esc(d.name)}</option>`).join("");
@@ -6559,11 +6559,15 @@ async function pickFromPack(packName, types, title) {
 
 /** Add a compendium item through dnd5e's advancement manager and wait until it finishes. */
 async function addWithAdvancement(actor, doc) {
+  if (!actor?.isOwner || !doc) return false;
   const data = game.items.fromCompendium ? game.items.fromCompendium(doc) : doc.toObject();
   const Manager = dnd5e?.applications?.advancement?.AdvancementManager;
-  if (!Manager?.forNewItem) { await actor.createEmbeddedDocuments("Item", [data]); return true; }
+  if (!Manager?.forNewItem) {
+    if (Object.keys(data.system?.advancement ?? {}).length) { ui.notifications.warn("JJK5e: native advancement manager unavailable."); return false; }
+    return (await actor.createEmbeddedDocuments("Item", [data])).length > 0;
+  }
   const manager = Manager.forNewItem(actor, data);
-  if (!manager.steps?.length) { await actor.createEmbeddedDocuments("Item", [data]); return true; }
+  if (!manager.steps?.length) return (await actor.createEmbeddedDocuments("Item", [data])).length > 0;
   return new Promise((resolve) => {
     let done = false;
     const finish = (ok) => { if (done) return; done = true; Hooks.off("dnd5e.advancementManagerComplete", onDone); resolve(ok); };
@@ -6580,15 +6584,31 @@ const CREATOR_APPS = new Map();
 const hasType = (actor, type) => actor.items.some((i) => i.type === type);
 function creatorSteps(actor) {
   const hr = isHeavenlyOnly(actor) || actor.items.some((i) => i.type === "class" && i.system?.identifier === "heavenly-restriction");
-  const pick = (pack, type, title) => async () => { const d = await pickFromPack(pack, [type], title); return d ? addWithAdvancement(actor, d) : false; };
+  const pick = (pack, type, title) => async () => {
+    if (!actor.isOwner || hasType(actor,type)) return false;
+    const d = await pickFromPack(pack, [type], title);
+    return d && !hasType(actor,type) ? addWithAdvancement(actor,d) : false;
+  };
+  const mindset = actor.items.some(i => i.flags?.jjk5e?.mindset);
+  const spanish = game.i18n.lang.startsWith("es");
+  const pickMindset = async () => {
+    if (!actor.isOwner || actor.items.some(i=>i.flags?.jjk5e?.mindset)) return false;
+    const d = await pickFromPack("jjk5e-backgrounds", ["feat"], "Mindset", i=>!!i.flags?.jjk5e?.mindset);
+    return d && !actor.items.some(i=>i.flags?.jjk5e?.mindset) ? addWithAdvancement(actor,d) : false;
+  };
   return [
     { key: "abilities", icon: "fas fa-dice-d20", done: !!actor.getFlag(MODULE_ID, "pointBuyDone"), run: () => pointBuy(actor) },
-    { key: "class", icon: "fas fa-user-graduate", done: hasType(actor, "class"), run: pick("jjk5e-classes", "class", t("Create.Class")) },
+    { key: "class", locked: hasType(actor,"class"), icon: "fas fa-user-graduate", done: hasType(actor, "class"), run: pick("jjk5e-classes", "class", t("Create.Class")) },
     { key: "technique", icon: "fas fa-hand-sparkles", done: hr || !!actor.getFlag(MODULE_ID, "technique"), skip: hr, run: () => chooseTechnique(actor) },
     { key: "ceAbility", icon: "fas fa-brain", done: hr || !!actor.getFlag(MODULE_ID, "ceAbility"), skip: hr, run: () => chooseCEAbility(actor) },
-    { key: "race", icon: "fas fa-dna", done: hasType(actor, "race"), run: pick("jjk5e-races", "race", t("Create.Race")) },
-    { key: "background", icon: "fas fa-scroll", done: hasType(actor, "background"), run: pick("jjk5e-backgrounds", "background", t("Create.Background")) },
-    { key: "feat", icon: "fas fa-star", optional: true, done: false, run: () => pickFeat(actor, t("Create.Feat")) },
+    { key: "race", locked: hasType(actor,"race"), icon: "fas fa-dna", done: hasType(actor, "race"), run: pick("jjk5e-races", "race", t("Create.Race")) },
+    { key: "background", locked: hasType(actor,"background"), icon: "fas fa-scroll", done: hasType(actor, "background"), run: pick("jjk5e-backgrounds", "background", t("Create.Background")) },
+    { key:"mindset", label:"Mindset", hint:spanish ? "Alternativa a Inspiration si la mesa la utiliza." : "Alternative to Inspiration when used by the table.", icon:"fas fa-brain", optional:true, done:mindset, locked:mindset, run:pickMindset },
+    { key:"feat", icon:"fas fa-star", optional:true, done:false, locked:!game.user.isGM, run:async()=>{
+      if(!game.user.isGM) return false;
+      if(!await confirmDialog(t("Create.Feat"),spanish ? "<p>¿Confirmas que el personaje tiene derecho a una dote adicional según el reglamento o la mesa?</p>" : "<p>Confirm that the character is entitled to an additional feat under the rules or table ruling.</p>")) return false;
+      return pickFeat(actor,t("Create.Feat"));
+    } },
     { key: "hotbar", icon: "fas fa-table-cells", optional: true, done: false, run: () => fillHotbar(actor) }
   ];
 }
@@ -6601,9 +6621,9 @@ function creatorHTML(actor) {
   const ab = ABILITY_KEYS.map((k) => `<span class="jjk-chip on"><b>${k.toUpperCase()}</b> ${Number(actor.system.abilities?.[k]?.value) || 10}</span>`).join("");
   const rows = steps.map((st, i) => `<li class="jjk-step ${st.done ? "done" : ""} ${st.skip ? "skip" : ""} ${st === next ? "next" : ""}">
       <span class="jjk-step-n">${st.done ? '<i class="fas fa-check"></i>' : i + 1}</span>
-      <div><strong>${t(`Create.Steps.${st.key}`)}</strong>${st.optional ? ` <em>(${t("Create.Optional")})</em>` : ""}
-        <small>${st.skip ? t("Create.Skip") : t(`Create.StepHint.${st.key}`)}</small></div>
-      ${st.skip ? "" : `<button type="button" data-action="step" data-step="${st.key}" class="${st === next ? "jjk-primary" : ""}">
+      <div><strong>${esc(st.label ?? t(`Create.Steps.${st.key}`))}</strong>${st.optional ? ` <em>(${t("Create.Optional")})</em>` : ""}
+        <small>${st.skip ? t("Create.Skip") : esc(st.hint ?? t(`Create.StepHint.${st.key}`))}</small></div>
+      ${st.skip || st.locked ? "" : `<button type="button" data-action="step" data-step="${st.key}" class="${st === next ? "jjk-primary" : ""}">
         <i class="${st.icon}"></i> ${st.done && !st.optional ? t("Create.Redo") : t("Create.Do")}</button>`}</li>`).join("");
   return `<section class="jjk-panel jjk-creator">
     <header class="jjk-head"><img src="${ICONS}/seal-ju.svg" alt=""><div><div class="jjk-name">${esc(actor.name)}</div>
@@ -6620,7 +6640,7 @@ function makeCreatorClass() {
   const run = async function (key) {
     if (this._busy) return;
     const st = creatorSteps(this.actor).find((x) => x.key === (key ?? creatorSteps(this.actor).find((y) => !y.optional && !y.skip && !y.done)?.key));
-    if (!st) return;
+    if (!st || st.skip || st.locked || !this.actor?.isOwner) return;
     this._busy = true;
     try { await st.run(); } catch (err) { reportError(`create ${st.key}`, err); }
     finally { this._busy = false; if (this.rendered) this.render(); }
@@ -7461,10 +7481,11 @@ async function asiDialog(actor, points, title, perAbility = points) {
     ok: { label: t("Common.OK"), callback: (e, b) => Object.fromEntries(ABILITIES.map((a) => [a, Math.max(0, Number(b.form.elements[a].value) || 0)])) } });
   if (!res) return false;
   const sum = Object.values(res).reduce((s, v) => s + v, 0);
-  if (sum > points || Object.values(res).some((v) => v > perAbility)) { ui.notifications.warn(t("Opt.ASI.TooMany", { n: points })); return false; }
+  if (sum !== points || Object.entries(res).some(([a,v]) => !Number.isSafeInteger(v) || v < 0 || v > perAbility || (v > 0 && (Number(actor.system.abilities?.[a]?.value) || 10) + v > 20))) { ui.notifications.warn(t("Opt.ASI.TooMany", { n: points })); return false; }
   const update = {};
   for (const [a, v] of Object.entries(res)) if (v) update[`system.abilities.${a}.value`] = Math.min(20, (Number(actor.system.abilities?.[a]?.value) || 10) + v);
-  if (Object.keys(update).length) await actor.update(update);
+  if (!actor.isOwner || !Object.keys(update).length) return false;
+  await actor.update(update);
   return true;
 }
 
@@ -7503,8 +7524,19 @@ async function techniquelessLevelUp(actor) {
   for (const [lvl, points, feats] of TECHNIQUELESS) {
     if (lvl > level || done.has(lvl)) continue;
     const title = `${t("Opt.techniqueless.Name")} (${t("Opt.Level", { n: lvl })})`;
-    if (!(await asiDialog(actor, points, title))) return;
-    for (let i = 0; i < feats; i++) await pickFeat(actor, title);
+    // Persist each accepted step; canceling a feat must not repeat the ASI.
+    const progress = foundry.utils.deepClone(actor.getFlag(MODULE_ID,"techniquelessProgress") ?? {});
+    const current = progress[lvl] ?? { asi:false, feats:0 };
+    if (!current.asi) {
+      if (!(await asiDialog(actor,points,title))) return;
+      current.asi=true; progress[lvl]=current;
+      await actor.setFlag(MODULE_ID,"techniquelessProgress",progress);
+    }
+    while(current.feats < feats) {
+      if (!(await pickFeat(actor,title))) return;
+      current.feats++; progress[lvl]=current;
+      await actor.setFlag(MODULE_ID,"techniquelessProgress",progress);
+    }
     done.add(lvl);
     await actor.setFlag(MODULE_ID, "techniquelessDone", [...done]);
   }
