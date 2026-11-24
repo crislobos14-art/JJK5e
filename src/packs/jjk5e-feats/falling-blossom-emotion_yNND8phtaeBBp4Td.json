@@ -73,6 +73,32 @@
      "units": "minute",
      "concentration": false
     }
+   },
+   "FbeDefenseAction": {
+    "_id": "FbeDefenseAction",
+    "type": "utility",
+    "name": "Action (5 CE): Defense",
+    "sort": 50000,
+    "activation": {
+     "type": "action",
+     "value": 1,
+     "condition": ""
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     }
+    },
+    "range": {
+     "units": "self"
+    },
+    "target": {},
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false
+    }
    }
   },
   "prerequisites": {
@@ -84,7 +110,8 @@
   "jjk5e": {
    "ceCosts": {
     "OzAsTpmgXLCCfngk": 5,
-    "bXDmGd838GaKDl6t": 4
+    "bXDmGd838GaKDl6t": 4,
+    "FbeDefenseAction": 5
    },
    "prereq": {
     "features": [
@@ -93,7 +120,9 @@
      ]
     ]
    },
-   "rev": "dcac61a63a"
+   "rev": "744d04763f",
+   "automation": "partial",
+   "automationNotes": "Defensive guaranteed-hit protection and offensive readiness are automated; GM adjudicates the actual reaction attack."
   }
  },
  "folder": "w6CtJKH5qYx1fgN4",

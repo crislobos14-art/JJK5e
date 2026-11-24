@@ -465,12 +465,23 @@ function midiCEGuard(workflow){
   return false;
 }
 function midiDomainGuard(workflow){
+  if((workflow?.targets?.documents??[...(workflow?.targets??[])]).some(tk=>barrierMarkerMeta(tk)))return false;
   if(!midiCEGuard(workflow)) return false;
   excludeDomainWardedTargets(workflow);
   return true;
 }
+async function linkMidiCard(workflow){
+  const ctx=midiCEContext(workflow);
+  if(ctx?.state!=="committed"||!workflow?.itemCardUuid||workflow.readOnly) return false;
+  const card=await fromUuid(workflow.itemCardUuid).catch(()=>null);
+  if(!card?.isOwner||card.documentName!=="ChatMessage") return false;
+  if(card.getFlag(MODULE_ID,"ceReceipt")!==ctx.id) await card.setFlag(MODULE_ID,"ceReceipt",ctx.id);
+  return ceAuthorityRequest("linkCard",{actorUuid:ctx.actorUuid,id:ctx.id,cardUuid:card.uuid});
+}
 function registerMidiCEBridge(){
   Hooks.on("midi-qol.preItemRollV2",captureMidiUsage);
+  Hooks.on("midi-qol.postAwaitItemCard",workflow=>linkMidiCard(workflow).catch(err=>reportError("CE card link",err)));
+  Hooks.on("midi-qol.postCleanup",workflow=>linkMidiCard(workflow).catch(err=>reportError("CE card link",err)));
   for(const stage of MIDI_GUARD_STAGES) Hooks.on(`midi-qol.${stage}`,midiDomainGuard);
 }
 function cePostAllowed(activity,usageConfig){
@@ -508,7 +519,7 @@ function ceRecord(ledger, record) {
   return [...others.filter(x=>["reserved","review"].includes(x.state)),
     ...others.filter(x=>!["reserved","review"].includes(x.state)).slice(-199),record];
 }
-function ceUsageKey(activity) { return `${activity?.item?.id}:${activity?.id}`; }
+function ceUsageKey(activity) { return `${(activity?.actor??activity?.item?.actor)?.uuid??""}:${activity?.item?.id}:${activity?.id}`; }
 function ceContext(activity, usageConfig) {
   if (!usageConfig || typeof usageConfig !== "object") return null;
   const ctx=CE_USAGE_CONTEXT.get(usageConfig);
@@ -529,7 +540,7 @@ async function ceAuthorityRequest(operation,payload) {
 }
 async function handleCEAuthority(msg,{user}={}) {
   if (!ceAuthorityEnabled() || !isActiveGM() || !user?.active || !msg?.payload ||
-      !["reserve","commit","review","settle","adjust"].includes(msg.operation)) return false;
+      !["reserve","start","commit","review","settle","adjust","linkCard"].includes(msg.operation)) return false;
   const {operation,payload:d}=msg;
   const actor=await domainActor(d.actorUuid);
   if (!canDirectDomain(user,actor)) return false;
@@ -565,19 +576,38 @@ async function handleCEAuthority(msg,{user}={}) {
       const tx=ceTransaction(poolValue(pool),poolMax(pool),cost);
       if(!tx || cost<0) return false;
       const rec={id:d.id,userId:user.id,actorUuid:actor.uuid,itemId:d.itemId,activityId:d.activityId,
-        scaling:d.scaling,cost,state:"reserved",created:Date.now(),
+        scaling:d.scaling,cost,state:"reserved",created:Date.now(),protocol:2,nativeStarted:false,expires:Date.now()+120000,
         sixEyes:cost>0&&!!actor.getFlag(MODULE_ID,"sixEyesNext"),minusNext:cost>0&&!!(item.flags?.jjk5e?.technique&&actor.getFlag(MODULE_ID,"costMinusNext"))};
       const whole=Math.floor(tx.spent+1e-6);
       // Persist debit and reservation together in the same Item update.
       await pool.update({"system.uses.spent":whole,"flags.jjk5e.fractionalSpent":Math.round((tx.spent-whole)*1000)/1000,
         "flags.jjk5e.ceLedger":ceRecord(ledger,rec)},{jjk5eCE:true});
-      if(rec.sixEyes) await actor.unsetFlag(MODULE_ID,"sixEyesNext");
-      if(rec.minusNext) await actor.unsetFlag(MODULE_ID,"costMinusNext");
       return {id:rec.id,cost};
     }
     if(!old || (!user.isGM&&old.userId!==user.id) || old.actorUuid!==actor.uuid) return false;
+    if(operation==="linkCard"){
+      if(old.state!=="committed"||typeof d.cardUuid!=="string"||!/^ChatMessage\.[a-zA-Z0-9]{1,64}$/.test(d.cardUuid)) return false;
+      if(old.cardUuid) return old.cardUuid===d.cardUuid;
+      const card=await fromUuid(d.cardUuid).catch(()=>null);
+      const author=card?.author?.id??card?.user?.id??card?._source?.user;
+      const act=await card?.getAssociatedActivity?.();
+      if(card?.documentName!=="ChatMessage"||author!==old.userId||act?.id!==old.activityId||
+          act?.item?.id!==old.itemId||(act.actor??act.item?.actor)?.uuid!==actor.uuid||
+          card.getFlag?.(MODULE_ID,"ceReceipt")!==old.id) return false;
+      await pool.update({"flags.jjk5e.ceLedger":ceRecord(ledger,{...old,cardUuid:d.cardUuid})},{jjk5eCE:true});
+      return true;
+    }
+    if(operation==="start"){
+      if(old.state!=="reserved"||old.protocol!==2||old.nativeStarted||Date.now()>=old.expires) return false;
+      // Persist start before authorizing any native effects. Unknown start responses never authorize a retry.
+      await pool.update({"flags.jjk5e.ceLedger":ceRecord(ledger,{...old,nativeStarted:true,startedAt:Date.now()})},{jjk5eCE:true});
+      if(old.sixEyes) await actor.unsetFlag(MODULE_ID,"sixEyesNext");
+      if(old.minusNext) await actor.unsetFlag(MODULE_ID,"costMinusNext");
+      return true;
+    }
     if(operation==="commit"||operation==="review"){
-      if(old.state!=="reserved") return false;
+      if(old.state==="committed"&&operation==="commit") return true;
+      if(old.state!=="reserved"||(operation==="commit"&&old.protocol===2&&!old.nativeStarted)) return false;
       await pool.update({"flags.jjk5e.ceLedger":ceRecord(ledger,{...old,state:operation==="commit"?"committed":"review",ended:Date.now()})},{jjk5eCE:true});
       return true;
     }
@@ -603,6 +633,7 @@ async function consumeWithCE(wrapped,activity,usageConfig,messageConfig) {
   const reserve=await ceAuthorityRequest("reserve",{actorUuid:actor.uuid,itemId:activity.item.id,activityId:activity.id,
     scaling:Number(usageConfig.scaling??0),id});
   if(!reserve?.id) { ui.notifications.warn(t("Notify.NotEnoughCE",{value:poolValue(findPool(actor)),cost:totalActivityCECost(actor,activity,usageConfig)})); return false; }
+  if(!await ceAuthorityRequest("start",{actorUuid:actor.uuid,id})) return false;
   const ctx={key:ceUsageKey(activity),id,actorUuid:actor.uuid,state:"reservingNative",cost:reserve.cost};
   CE_USAGE_CONTEXT.set(usageConfig,ctx);
   try{
@@ -615,6 +646,7 @@ async function consumeWithCE(wrapped,activity,usageConfig,messageConfig) {
     const ended=await ceAuthorityRequest(ok?"commit":"review",{actorUuid:actor.uuid,id});
     ctx.state=ok&&ended?"committed":"review";
     if(ctx.state!=="committed") return false;
+    if(messageConfig && typeof messageConfig==="object") foundry.utils.setProperty(messageConfig,"data.flags.jjk5e.ceReceipt",id);
     return result;
   }catch(err){
     ctx.state="review";
@@ -636,6 +668,68 @@ function installCEAdapters() {
     }catch(err){reportError("CE adapter "+key,err);}
   }
   return CE_ADAPTER_TARGETS.size>0;
+}
+const CE_RECOVERY_AGE=120000;
+async function recoverCEActor(actor,now=Date.now()){
+  if(!isActiveGM()||!ceAuthorityEnabled()) return [];
+  return queueCE(actor,async()=>{
+    if(!isActiveGM()) return [];
+    const pool=findPool(actor); if(!pool) return [];
+    let ledger=ceLedger(pool), balance=poolValue(pool), changed=[];
+    for(const rec of [...ledger]){
+      if(rec.state!=="reserved"||!Number.isFinite(rec.created)||now-rec.created<CE_RECOVERY_AGE) continue;
+      // Only protocol 2 explicitly unstarted reservations are provably safe to refund.
+      const safe=rec.protocol===2&&rec.nativeStarted===false&&Number.isFinite(rec.expires)&&now>=rec.expires;
+      const tx=safe?ceTransaction(balance,poolMax(pool),-rec.cost):null;
+      if(tx) balance=tx.remaining;
+      const next={...rec,state:tx?"refunded":"review",ended:now,recovery:tx?"unstarted":"unknown-native-result"};
+      ledger=ceRecord(ledger,next);changed.push(next);
+    }
+    if(changed.length){
+      const spent=Math.round((poolMax(pool)-balance)*1000)/1000,whole=Math.floor(spent+1e-6);
+      await pool.update({"system.uses.spent":whole,"flags.jjk5e.fractionalSpent":Math.round((spent-whole)*1000)/1000,
+        "flags.jjk5e.ceLedger":ledger},{jjk5eCE:true});
+    }
+    return changed;
+  });
+}
+function engineActors(){
+  return [...new Map([...(game.actors??[]),...[...(game.scenes??[])].flatMap(sc=>[...(sc.tokens??[])].map(tk=>tk.actor))]
+    .filter(a=>a?.uuid).map(a=>[a.uuid,a])).values()];
+}
+async function recoverCEWorld(){
+  if(!isActiveGM()||!ceAuthorityEnabled()) return [];
+  const results=[];
+  for(const actor of engineActors()) try{results.push(...await recoverCEActor(actor));}
+    catch(err){reportError("CE recovery",err);}
+  return results;
+}
+function integrationReport(){
+  if(!game.user.isGM) return null;
+  const modules=["midi-qol","dae","lib-wrapper","times-up","sequencer","JB2A_DnD5e","autoanimations","tokenmagic","fxmaster"];
+  return {foundry:game.version??game.release?.version??null,dnd5e:game.system?.version??null,
+    dependencies:modules.map(id=>({id,active:!!game.modules.get(id)?.active,version:game.modules.get(id)?.version??null})),
+    ...ceDiagnostics(null),pending:engineActors().flatMap(a=>ceLedger(findPool(a)).filter(x=>["reserved","review"].includes(x.state))
+      .map(x=>({actorUuid:a.uuid,id:x.id,state:x.state,cost:x.cost,created:x.created,nativeStarted:x.nativeStarted??null}))),
+    limitations:["Runtime detection is not a compatibility certification","Unverified resumed Midi workflows remain blocked"]};
+}
+async function showIntegrationDiagnostics(){
+  if(!isActiveGM())return false;
+  const report=integrationReport(),pending=report.pending;
+  const rows=report.dependencies.map(d=>`<li>${esc(d.id)}: ${d.active?"active":"inactive"} — ${esc(d.version??"—")}</li>`).join("");
+  const choices=pending.slice(0,100).map((r,i)=>`<option value="${i}">${esc(r.actorUuid)} — ${esc(r.state)} — ${r.cost} CE</option>`).join("");
+  const info=`<p>Foundry ${esc(report.foundry??"—")} / D&amp;D5e ${esc(report.dnd5e??"—")}</p><ul>${rows}</ul>
+    <p>Transactional CE: ${report.transactional?"ON (experimental)":"OFF"}; adapters: ${report.adapters.length}; expiry: ${esc(report.expiryAuthority)}</p>
+    <p>Unwrapped activity types: ${esc(report.unwrappedTypes.join(", ")||"—")}</p><p>Pending reservations: ${pending.length}</p>`;
+  if(!pending.length) return confirmDialog("JJK Integration Diagnostics",info);
+  const answer=await foundry.applications.api.DialogV2.prompt({window:{title:"JJK Integration Diagnostics"},rejectClose:false,
+    content:info+`<label>Transaction<select name="tx">${choices}</select></label>
+    <label>Decision<select name="decision"><option value="none">Review only</option><option value="commit">Confirm consumed</option><option value="refund">Refund after verifying no effects</option></select></label>`,
+    ok:{callback:(_e,b)=>({index:Number(b.form.elements.tx.value),decision:b.form.elements.decision.value})}});
+  if(!answer||!["commit","refund"].includes(answer.decision)||!pending[answer.index])return false;
+  const rec=pending[answer.index],actor=await domainActor(rec.actorUuid);
+  if(!actor||!await confirmDialog("Confirm CE settlement",`<p>${esc(answer.decision)} — ${rec.cost} CE. Verify the native workflow, damage, effects and other resources first.</p>`))return false;
+  return reconcileCE(actor,rec.id,answer.decision==="refund");
 }
 function ceDiagnostics(actor){
   const types=Object.entries(CONFIG.DND5E?.activityTypes??{}).filter(([,cfg])=>typeof cfg.documentClass?.prototype?.consume==="function").map(([key])=>key);
@@ -883,6 +977,10 @@ const RO_ROWS = [
 
 function registerActivityHooks() {
   Hooks.on("dnd5e.preUseActivity", (activity, usageConfig) => {
+    if([...game.user?.targets??[]].some(tk=>barrierMarkerMeta(tk))){
+      ui.notifications.warn("JJK5e: use the barrier attack command for a selected barrier marker.");
+      return false;
+    }
     if (activity.item?.actor?.token?.flags?.jjk5e?.cloneOrigin && activity.item.flags?.jjk5e?.technique) {
       ui.notifications.warn(t("Notify.CloneNoTech"));
       return false;
@@ -2224,6 +2322,7 @@ function panelHTML(actor, tab = "combat") {
       </div>
       <div class="jjk-row">
         ${pbtn("domainHUD", "fa-solid fa-circle-half-stroke", t("Domain.HUD"))}
+        ${pbtn("attackSelectedBarrier","fas fa-crosshairs","Attack selected barrier marker")}
         ${canRecoverBurnout(actor) ? pbtn("burnoutRecovery", "fas fa-brain", `${t("Burnout.Recovery")} (4 CE)`) : ""}
       </div></fieldset>
     ${hr ? "" : `<fieldset><legend>${t("Output.Title")}</legend>
@@ -2271,6 +2370,7 @@ function panelHTML(actor, tab = "combat") {
   const gmTab = gm ? `<p class="jjk-note">${t("Panel.GMHint")}</p>
     <fieldset><legend>${t("Panel.GMValues")}</legend><div class="jjk-grid">
       ${pool ? pbtn("gmCE", "fas fa-bolt", `${t("Panel.GMSetCE")} (${value}/${max})`) : ""}
+      ${pbtn("engineDiagnostics", "fas fa-stethoscope", "JJK Integration Diagnostics")}
       ${pbtn("gmRefinement", "fas fa-circle-half-stroke", `${t("Domain.Refinement")}: ${refinementOf(actor)}`)}
       ${pbtn("soulDamage", "fas fa-ghost", t("Soul.Apply"))}
       ${sd ? pbtn("clearSoul", "fas fa-xmark", t("Soul.Clear")) : ""}
@@ -2327,6 +2427,8 @@ const PANEL_ACTIONS = {
   ceSpendN: (actor, target, root) => spendCE(actor, panelAmount(root), t("CE.Spent")),
   ceRegainN: (actor, target, root) => spendCE(actor, -panelAmount(root), t("CE.Regained")),
   domainHUD: (actor) => openDomainHUD(actor),
+  engineDiagnostics: () => showIntegrationDiagnostics(),
+  attackSelectedBarrier: () => attackSelectedBarrier(),
   vows: (actor) => openVows(actor),
   career: (actor) => openCareer(actor),
   hotbar: (actor) => fillHotbar(actor),
@@ -2384,7 +2486,7 @@ const PANEL_ACTIONS = {
 
 // Overrides that only the GM may use (hidden for players and refused if called anyway).
 const GM_PANEL_ACTIONS = new Set(["clearBurnout", "clearZone", "clearBF", "clearSoul", "soulDamage", "roUp", "roDown",
-  "soulUp", "soulDown", "limb", "gmRefinement", "gmBreakthrough", "gmCE", "updateAll"]);
+  "soulUp", "soulDown", "limb", "gmRefinement", "gmBreakthrough", "gmCE", "updateAll","engineDiagnostics"]);
 
 function makePanelClass() {
   const Base = foundry.applications?.api?.ApplicationV2;
@@ -3738,7 +3840,12 @@ Hooks.once("ready", () => {
   });
   installCEAdapters();
   registerMidiHooks();
-  Object.assign(game.modules.get(MODULE_ID).api??{}, {ceDiagnostics,reconcileCE});
+  Object.assign(game.modules.get(MODULE_ID).api??{}, {ceDiagnostics,reconcileCE,integrationReport,recoverCEWorld,createBarrierMarker,attackSelectedBarrier,absorbSimpleDomain,simpleDomainAt,claimFallingBlossomOffense,amplificationOutcome});
+  Hooks.on("updateToken",(token,changes)=>endMovedSimpleDomain(token,changes).catch(err=>reportError("Simple Domain movement",err)));
+  Hooks.on("userConnected",()=>recoverCEWorld().catch(err=>reportError("CE recovery",err)));
+  Hooks.on("updateWorldTime",()=>recoverCEWorld().catch(err=>reportError("CE recovery",err)));
+  setInterval(()=>recoverCEWorld().catch(err=>reportError("CE recovery",err)),30000);
+  recoverCEWorld().catch(err=>reportError("CE recovery",err));
   if (game.user.isGM && setting("enableSummoning") && game.settings.settings?.has?.("dnd5e.allowSummoning")
     && !game.settings.get("dnd5e", "allowSummoning")) game.settings.set("dnd5e", "allowSummoning", true);
   Hooks.on("deleteActiveEffect", (effect) => {
@@ -4760,7 +4867,65 @@ function insideDomain(state, token) {
 /* V6: Falling Blossom negates guaranteed effects on its wearer; Hollow Wicker Basket
  * protects only selected creatures within 15 ft. Simple Domain redirects damage into
  * a finite barrier, so it must not be treated as unconditional immunity. */
-const DOMAIN_WARD_KINDS = new Set(["fallingBlossomDefense", "hollowWickerProtection", "domainAmplification"]);
+const DOMAIN_WARD_KINDS = new Set(["fallingBlossomDefense", "fallingBlossomOffense", "hollowWickerProtection", "domainAmplification","simpleDomainBarrier"]);
+const SIMPLE_DOMAIN_QUEUES=new Map();
+function simpleDomainHP(actor){return Math.max(0,(Number(actor?.system?.attributes?.prof)||0)*2*ceMod(actor));}
+function simpleDomainAt(target){
+  const doc=target?.document??target,scene=doc?.parent;
+  if(!scene?.id||!doc?.uuid) return null;
+  const candidates=[];
+  for(const source of scene.tokens??[]){
+    const effect=source.actor?.effects?.find(e=>liveWard(e)&&e.flags?.jjk5e?.kind==="simpleDomainBarrier");
+    const f=effect?.flags?.jjk5e;
+    if(!f||f.originTokenUuid!==source.uuid||!(f.hp>0)||tokenLevelId(source)!==tokenLevelId(doc)) continue;
+    const origin=tokenCenter(source),point=tokenCenter(doc);
+    if(origin.x!==f.x||origin.y!==f.y||tokenLevelId(source)!==(f.levelId??null)||Number(source.elevation??0)!==Number(f.elevation??0)) continue;
+    const distance=Math.hypot(origin.x-point.x,origin.y-point.y);
+    if(distance<=ftToPx(scene,10)+1) candidates.push({effect,distance});
+  }
+  candidates.sort((a,b)=>a.distance-b.distance||String(a.effect.uuid).localeCompare(String(b.effect.uuid)));
+  return candidates[0]?.effect??null;
+}
+async function absorbSimpleDomain(effect,damage,eventId){
+  if(!isActiveGM()||effect?.flags?.jjk5e?.kind!=="simpleDomainBarrier"||
+      !Number.isFinite(damage)||damage<0||typeof eventId!=="string"||eventId.length>200) return null;
+  const key=effect.uuid,previous=SIMPLE_DOMAIN_QUEUES.get(key)??Promise.resolve();
+  const next=previous.catch(()=>{}).then(async()=>{
+    if(!isActiveGM()) return null;
+    const f=effect.flags.jjk5e,history=Array.isArray(f.events)?f.events:[];
+    const old=history.find(x=>x.id===eventId);
+    if(old) return old.damage===damage?old:null;
+    if(!liveWard(effect)||!Number.isFinite(f.hp)||f.hp<0) return null;
+    const absorbed=Math.min(f.hp,damage),result={id:eventId,damage,absorbed,overflow:damage-absorbed,hp:f.hp-absorbed};
+    await effect.update({"flags.jjk5e.hp":result.hp,"flags.jjk5e.events":[...history.slice(-99),result],disabled:result.hp===0});
+    return result;
+  });
+  SIMPLE_DOMAIN_QUEUES.set(key,next);
+  try{return await next;}finally{if(SIMPLE_DOMAIN_QUEUES.get(key)===next)SIMPLE_DOMAIN_QUEUES.delete(key);}
+}
+async function endMovedSimpleDomain(token,changes){
+  if(!isActiveGM()||!["x","y","elevation","level"].some(k=>Object.hasOwn(changes??{},k))) return;
+  const actor=token.actor;
+  const effect=actor?.effects?.find(e=>e.flags?.jjk5e?.kind==="simpleDomainBarrier"&&e.flags.jjk5e.originTokenUuid===token.uuid);
+  if(!effect) return;
+  const f=effect.flags.jjk5e,c=tokenCenter(token);
+  if(c.x!==f.x||c.y!==f.y||tokenLevelId(token)!==(f.levelId??null)||Number(token.elevation??0)!==Number(f.elevation??0)) await safeDelete(effect);
+}
+function amplificationOutcome(defenderRef,attackerRef,maximumOutput=false){
+  if(!maximumOutput)return "immune";
+  if(!Number.isFinite(defenderRef)||!Number.isFinite(attackerRef))return "unknown";
+  const difference=attackerRef-defenderRef;
+  return difference>=51?"normal":difference<=-51?"immune":"resistant";
+}
+async function claimFallingBlossomOffense(actor){
+  if(!isActiveGM())return false;
+  return queueDomainWork(async()=>{
+    const e=actor?.effects?.find(x=>x.flags?.jjk5e?.kind==="fallingBlossomOffense"&&liveWard(x));
+    if(!e)return false;
+    await safeDelete(e);
+    return true;
+  });
+}
 function liveWard(effect) {
   return !!effect && !effect.disabled && effect.isSuppressed!==true && effect.duration?.expired !== true &&
     (effect.duration?.remaining == null || effect.duration.remaining > 0);
@@ -4796,13 +4961,26 @@ async function activateDomainProtection(actor, item, activity) {
     return setKindEffect(actor, "fallingBlossomDefense", { name, img: `${ICONS}/domain.svg`, duration: { rounds: 10, seconds: 60 },
       description: `<p>${t("Domain.Ward.FallingBlossom")}</p>` });
   }
-  if (name !== "Hollow Wicker Basket" || cost !== 4) return;
+  if(name==="Falling Blossom Emotion"&&cost===4){
+    return setKindEffect(actor,"fallingBlossomOffense",{name:"Falling Blossom Emotion (Offense)",img:`${ICONS}/domain.svg`,
+      duration:{rounds:10,seconds:60},description:"<p>V6: one reaction melee counterattack before an incoming attack; advantage, critical on hit and necrotic damage. GM adjudicates the counterattack.</p>"});
+  }
+  const simple=name==="Simple Domain"&&item.flags?.jjk5e?.simpleDomainBarrier===true&&cost===4;
+  if (!simple&&(name !== "Hollow Wicker Basket" || cost !== 4)) return;
   const selected = [...(canvas?.tokens?.controlled ?? [])].filter((tk) => tk.actor?.uuid === actor.uuid);
   const tokens = actor.getActiveTokens?.() ?? [];
   const source = selected.length === 1 ? selected[0] : tokens.length === 1 ? tokens[0] : null;
   const origin = source?.document ?? source;
   const scene = origin?.parent;
   if (!origin?.uuid || !scene?.id) return;
+  if(simple){
+    const hp=simpleDomainHP(actor),center=tokenCenter(origin);
+    if(!(hp>0))return false;
+    return setKindEffect(actor,"simpleDomainBarrier",{name:"Simple Domain (10 ft)",img:`${ICONS}/domain.svg`,
+      disabled:false,duration:{rounds:10,seconds:60},
+      description:"<p>V6: independent barrier HP, ends on movement; overflow carries to protected creature. Ordinary Midi damage still requires GM adjudication.</p>",
+      flags:{jjk5e:{hp,max:hp,events:[],originTokenUuid:origin.uuid,x:center.x,y:center.y,levelId:tokenLevelId(origin),elevation:Number(origin.elevation??0)}}});
+  }
   const chosen = [origin, ...[...(game.user?.targets ?? [])].map((tk) => tk.document ?? tk)]
     .filter((tk) => tk?.parent?.id === scene.id && tokenLevelId(tk) === tokenLevelId(origin))
     .filter((tk) => { const a = tokenCenter(origin), b = tokenCenter(tk); return Math.hypot(a.x-b.x,a.y-b.y) <= ftToPx(scene,15)+1; })
@@ -4821,14 +4999,14 @@ function excludeDomainWardedTargets(workflow) {
   // Do not strip allied targets from explicitly healing, summoning, teleport or utility activities.
   const type=workflow.activity?.type;
   if(type && !["attack","save","damage"].includes(type)) return [];
-  const protectedTargets = [...workflow.targets].filter((tk) => domainGuaranteedTarget(workflow, tk) && domainWard(tk));
+  const protectedTargets = (workflow.targets.documents??[...workflow.targets]).filter((tk) => domainGuaranteedTarget(workflow, tk) && domainWard(tk));
   if (!protectedTargets.length) return [];
   const ids = new Set(protectedTargets.map((tk) => (tk?.document ?? tk)?.uuid).filter(Boolean));
   const exclude = (tk) => protectedTargets.includes(tk) || ids.has((tk?.document ?? tk)?.uuid);
   for (const key of ["targets", "hitTargets", "hitTargetsEC", "saves", "failedSaves", "applicationTargets", "effectTargets"]) {
     if (typeof workflow[key]?.has === "function" && typeof workflow[key]?.delete==="function") {
-      // Midi TokenDocumentSets accept token documents; preserve their identity/record binding.
-      for(const tk of [...workflow[key]]) if(exclude(tk)) workflow[key].delete(tk);
+      // Midi TokenDocumentSets can include off-canvas documents invisible to their iterator.
+      for(const tk of (workflow[key].documents??[...workflow[key]])) if(exclude(tk)) workflow[key].delete(tk);
     }
   }
   return protectedTargets;
@@ -4969,6 +5147,7 @@ async function domainClosed(actor) {
   if (!isActiveGM()) return;
   const state = getDomain(actor);
   if (!state) return;
+  await removeBarrierMarkers(actor.uuid,state.openingId);
   if (state.zone) await GM_EXTRA.domainZoneDelete({ sceneId: state.sceneId, zone: state.zone, actorUuid: actor.uuid, openingId: state.openingId });
   const window = actor.getFlag(MODULE_ID, "domainReactionWindow");
   const survivors = [];
@@ -5033,6 +5212,11 @@ async function damageBarrier(actor, amount, side = "outside", type = "") {
   state.hp = Math.max(0, state.hp - dmg);
   state.damageTaken = (state.damageTaken ?? 0) + dmg;
   await setDomain(actor, state);
+  for(const proxy of game.actors??[]){
+    const f=proxy.flags?.jjk5e?.barrierMarker;
+    if(f?.actorUuid===actor.uuid&&f.openingId===state.openingId)
+      await proxy.update({"system.attributes.hp.value":state.hp},{jjk5eBarrier:true});
+  }
   await chat(actor, `<p><i class="fas fa-shield-halved"></i> ${t("Domain.BarrierHit", { dmg, side: t(`Domain.Side.${side}`), hp: state.hp, max: state.max })}</p>`);
   if (state.hp <= 0) await closeDomainOf(actor, t("Domain.Shattered", { name: esc(actor.name) }));
   return state.hp;
@@ -5080,6 +5264,60 @@ async function attackBarrier(actor, seeker, data) {
   if (getDomain(actor)?.openingId !== data.openingId) return false;
   const hp = await damageBarrier(actor, Math.max(0, damage.total), geo.side, data.type);
   return { hit: true, hp };
+}
+function barrierMarkerMeta(token){
+  const doc=token?.document??token;
+  const f=doc?.flags?.jjk5e?.barrierMarker;
+  return f?.actorUuid&&f?.openingId?f:null;
+}
+async function createBarrierMarker(actor){
+  if(!isActiveGM()) return false;
+  return queueDomainWork(async()=>{
+    const state=getDomain(actor),scene=game.scenes.get(state?.sceneId);
+    if(!state?.open||state.noBarrier||!scene||!Number.isFinite(state.x)||!Number.isFinite(state.y)||!Number.isFinite(state.radius)) return false;
+    const meta={actorUuid:actor.uuid,openingId:state.openingId};
+    const existing=[...scene.tokens].find(t=>{const f=barrierMarkerMeta(t);return f?.actorUuid===meta.actorUuid&&f.openingId===meta.openingId;});
+    if(existing) return existing;
+    const ActorClass=docClass("Actor");
+    if(typeof ActorClass?.create!=="function"||typeof scene.createEmbeddedDocuments!=="function") return false;
+    const proxy=await ActorClass.create({name:`Barrier: ${actor.name}`,type:"npc",img:`${ICONS}/domain.svg`,
+      system:{attributes:{hp:{value:state.hp,max:state.max},ac:{calc:"flat",flat:state.ac}}},
+      flags:{jjk5e:{barrierMarker:meta}},ownership:{default:0}});
+    if(!proxy) return false;
+    try{
+      const size=Number(scene.grid?.size)||100,r=ftToPx(scene,state.radius);
+      const x=state.x+r-size/2,y=state.y-size/2;
+      const data={name:proxy.name,actorId:proxy.id,actorLink:true,x,y,width:1,height:1,
+        texture:{src:`${ICONS}/domain.svg`},flags:{jjk5e:{barrierMarker:meta}}};
+      if(state.levelId) data.level=state.levelId;
+      const [marker]=await scene.createEmbeddedDocuments("Token",[data]);
+      if(!marker) throw Error("No barrier marker created");
+      return marker;
+    }catch(err){
+      await safeDelete(proxy);
+      reportError("barrier marker",err);return false;
+    }
+  });
+}
+async function removeBarrierMarkers(actorUuid,openingId){
+  if(!isActiveGM()) return;
+  for(const scene of game.scenes??[]){
+    const ids=[...(scene.tokens??[])].filter(t=>{const f=barrierMarkerMeta(t);return f?.actorUuid===actorUuid&&f.openingId===openingId;}).map(t=>t.id);
+    if(ids.length) await scene.deleteEmbeddedDocuments("Token",ids);
+  }
+  for(const proxy of game.actors??[]){
+    const f=proxy.flags?.jjk5e?.barrierMarker;
+    if(f?.actorUuid===actorUuid&&f.openingId===openingId) await safeDelete(proxy);
+  }
+}
+async function attackSelectedBarrier(){
+  const targets=[...(game.user?.targets??[])];
+  if(targets.length!==1) return false;
+  const meta=barrierMarkerMeta(targets[0]);
+  if(!meta) return false;
+  const actor=await domainActor(meta.actorUuid),state=getDomain(actor);
+  if(!state?.open||state.openingId!==meta.openingId||state.noBarrier) return false;
+  return promptBarrierAttack(actor);
 }
 async function promptBarrierAttack(actor) {
   const tk = canvas?.tokens?.controlled?.[0];
@@ -5367,7 +5605,7 @@ function domainProfileTargets(actor, targets) {
   const state = getDomain(actor);
   if (!state?.open || state.incomplete || state.lethal === false || sureHitBlocked(actor)) return [];
   return [...new Map([...targets].filter((tk) => insideDomain(state,tk) && !domainWard(tk) &&
-    (tk?.actor ?? tk?.document?.actor)?.uuid).map((tk) => [(tk?.actor ?? tk?.document?.actor).uuid, tk])).values()];
+    (tk?.actor ?? tk?.document?.actor)?.uuid && !barrierMarkerMeta(tk)).map((tk) => [(tk?.actor ?? tk?.document?.actor).uuid, tk])).values()];
 }
 async function executeDomainProfile(actor, targets, requestId) {
   if (!isActiveGM() || typeof requestId !== "string" || requestId.length > 80) return false;
@@ -5380,7 +5618,7 @@ async function executeDomainProfile(actor, targets, requestId) {
     if (getDomain(actor)?.openingId !== state.openingId) break;
     const target = tk.actor ?? tk.document?.actor;
     // Simple Domain uses a finite barrier; leave it to its existing adjudication rather than bypassing it.
-    if (target.effects?.some((fx) => liveWard(fx) && /^Simple Domain(?: \(10 ft\))?$/.test(fx.name))) {
+    if (target.effects?.some((fx) => liveWard(fx) && fx.flags?.jjk5e?.kind!=="simpleDomainBarrier" && /^Simple Domain(?: \(10 ft\))?$/.test(fx.name))) {
       await chat(actor,`<p>${esc(target.name)}: ${t("Domain.ProfileSimpleDomain")}</p>`); continue;
     }
     if (typeof target.applyDamage !== "function") continue;
@@ -5398,7 +5636,13 @@ async function executeDomainProfile(actor, targets, requestId) {
     const roll = await new Roll(profile.damage).evaluate();
     await roll.toMessage?.({ speaker: docClass("ChatMessage").getSpeaker?.({actor}), flavor: esc(profile.name) });
     if (getDomain(actor)?.openingId !== state.openingId || !domainProfileTargets(actor,[tk]).length) continue;
-    const value = Math.max(0, Math.floor(roll.total * (success ? ({half:0.5,none:0,full:1})[profile.onSave] : 1)));
+    let value = Math.max(0, Math.floor(roll.total * (success ? ({half:0.5,none:0,full:1})[profile.onSave] : 1)));
+    const simple=simpleDomainAt(tk);
+    if(simple&&value>0){
+      const absorption=await absorbSimpleDomain(simple,value,`${state.openingId}:${requestId}:${target.uuid}`);
+      if(!absorption)continue;
+      value=absorption.overflow;
+    }
     if (value) await target.applyDamage([{ value, type: profile.damageType }]);
     if (!success && profile.condition !== "none") {
       await target.createEmbeddedDocuments("ActiveEffect", [fxData({ name: profile.name, img: `${ICONS}/domain.svg`,
@@ -5497,6 +5741,7 @@ function makeDomainClass() {
           this.render();
         },
         attack: function () { return promptBarrierAttack(this.actor); },
+        marker: async function(){if(!isActiveGM())return false;const result=await createBarrierMarker(this.actor);this.render();return result;},
         weak: function () { return findWeakSpot(this.actor); },
         ref: async function () {
           if (!game.user.isGM) return ui.notifications.warn(t("Notify.GMOnly"));
@@ -5540,6 +5785,7 @@ function makeDomainClass() {
         <p>${t("Domain.Stats", { ac: s.ac, ref: s.refinement, r: s.radius })}</p>${clash}
         <p class="hint">${t("Domain.Mode")}: ${mode}; ${s.lethal === false ? t("Domain.NonLethalMode") : t("Domain.LethalMode")}</p>
         ${domainHudDetails(this.actor,s)}
+        ${isActiveGM()&&!s.noBarrier?`<button type="button" data-action="marker">Create selectable barrier marker (experimental)</button>`:""}
         <div class="btns">${s.noBarrier ? "" : `<button type="button" data-action="attack"><i class="fas fa-crosshairs"></i> ${t("Domain.AttackBarrier")}</button>${game.user.isGM ? `<button type="button" data-action="hit"><i class="fas fa-hammer"></i> ${t("Domain.HitBarrier")}</button>` : ""}`}
           <button type="button" data-action="weak"><i class="fas fa-crosshairs"></i> ${t("Domain.WeakSpot")}</button></div>
         ${this.actor.isOwner ? `<div class="btns"><button type="button" data-action="lethal" data-m="${s.lethal === false ? "lethal" : "nonlethal"}">${s.lethal === false ? t("Domain.MakeLethal") : t("Domain.MakeNonLethal")}</button>${s.refinement >= 100 ? `<button type="button" data-action="mode" data-m="flip">${t("Domain.Flipped")}</button>
@@ -7870,7 +8116,7 @@ function clashCandidates(opener) {
     const a = tk.actor;
     const level = typeof tk.level === "string" ? tk.level : tk.level?.id;
     if (state.levelId && level !== state.levelId) continue;
-    if (!a || seen.has(a.uuid)) continue;
+    if (!a || a.flags?.jjk5e?.barrierMarker || seen.has(a.uuid)) continue;
     seen.add(a.uuid);
     if (!clashBlocker(a, opener)) out.push(a);
   }
