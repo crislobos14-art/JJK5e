@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.85.0 — Historial de Sealed Ink y correcciones
+- Opción para conservar el historial de avisos y su estado de lectura entre sesiones en el mismo navegador, por mundo y usuario. Está desactivada por defecto y vuelve a comprobar los permisos al restaurar los avisos.
+- El HUD conserva el filtro de búsqueda y comprueba que el actor y la actividad sigan disponibles antes de iniciar la acción nativa de D&D 5e.
+- Los controles de invocaciones vuelven a comprobar la escena, el vínculo y los permisos antes de actuar.
+- El despertar de RCT se puede reintentar si faltó conceder la reserva de curación, sin duplicar el avance.
+- Sigue pendiente la validación multijugador en Foundry con Midi-QOL y DAE.
+
 ## 1.84.0 — Sealed Ink y mejoras de automatización
 - Amplía Sealed Ink a progresión, dotes, combate y descansos, editores, compendios y herramientas JJK, con preferencias por categoría y por usuario.
 - Añade un centro de avisos y un HUD de combate opcionales. Muestra recursos y estados del actor, abre actividades nativas y presenta cambios con animaciones locales que respetan la preferencia de movimiento reducido.
