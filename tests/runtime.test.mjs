@@ -156,10 +156,11 @@ test("Domain clash: 50 more refinement wins in 5 rounds; the loser shrinks 15 ft
   assert.equal(J.getDomain(b).clash.role, "loser");
   assert.equal(J.getDomain(b).clash.rounds, 5);
   assert.ok(J.sureHitBlocked(a) && J.sureHitBlocked(b), "no sure-hit during the clash");
-  for (let r = 2; r <= 5; r++) await env.combatRound(r);
+  const combat = { id: "C", sceneId: "S", combatants: [{ actor: a }, { actor: b }] };
+  for (let r = 2; r <= 5; r++) await env.combatRound(r, combat);
   assert.equal(J.getDomain(b).clash.rounds, 1);
   assert.equal(J.getDomain(b).radius, 175 - 60);
-  await env.combatRound(6);
+  await env.combatRound(6, combat);
   assert.equal(fx(b, "domain"), undefined, "loser's domain broken");
   assert.ok(fx(b, "burnout"), "loser burnt out");
   assert.equal(J.getDomain(a).clash.resolved, true, "winner's sure-hit resumes");
@@ -490,4 +491,90 @@ test("Player view: no GM overrides in the panel, private CE messages, limited vi
   env.chat.length = 0;
   await J.spendCE(actor, 1);
   assert.deepEqual([...env.chat.at(-1).whisper], ["gm"]);
+});
+
+test("Domain geometry: sure-hit requires a known position and matching scene", async () => {
+  const { env, J } = await setup();
+  const scene = { id: "S", grid: { size: 100, distance: 5 } };
+  env.game.scenes.set(scene.id, scene);
+  const state = { sceneId: "S", x: 0, y: 0, radius: 10 };
+  const target = { document: { parent: scene, x: 50, y: 50, width: 1, height: 1 } };
+  assert.equal(J.insideDomain(state, target), true);
+  assert.equal(J.insideDomain(state, { document: { ...target.document, x: 500 } }), false);
+  assert.equal(J.insideDomain(state, { document: { ...target.document, parent: { ...scene, id: "Other" } } }), false);
+  assert.equal(J.insideDomain({ ...state, x: null }, target), false);
+  assert.equal(J.insideDomain(state, { actor: {} }), false);
+});
+
+test("Domain barrier: balanced mode charges CE once and requires successful payment", async () => {
+  const { env, actor, J } = await setup();
+  await actor.setFlag("jjk5e", "refinement", 100);
+  await J.domainOpened(actor); await env.settle();
+  const pool = actor.items.find((i) => i.flags?.jjk5e?.cePool);
+  await J.spendCE(actor, 18);
+  assert.equal(await J.setBarrierMode(actor, "balanced"), false);
+  assert.equal(!!J.getDomain(actor).balanced, false);
+  await J.spendCE(actor, -10);
+  assert.equal(await J.setBarrierMode(actor, "balanced"), true);
+  const spent = pool.system.uses.spent;
+  assert.equal(!!J.getDomain(actor).balanced, true);
+  assert.equal(await J.setBarrierMode(actor, "balanced"), true);
+  assert.equal(pool.system.uses.spent, spent, "reselecting the same mode does not charge again");
+  assert.equal(await J.setBarrierMode(actor, "normal"), true);
+  assert.equal(!!J.getDomain(actor).balanced, false);
+});
+
+test("Domain reaction: stale expansion instance is rejected", async () => {
+  const { env, actor, J } = await setup();
+  const opener = env.addActor({ name: "Opener", items: [POOL] });
+  const scene = { id: "S", grid: { size: 100, distance: 5 }, tokens: [] };
+  env.game.scenes.set(scene.id, scene);
+  env.context.canvas = { scene };
+  await opener.setFlag("jjk5e", "domainState", {
+    open: true, openingId: "new-expansion", sceneId: "S", lethal: true
+  });
+  await actor.createEmbeddedDocuments("Item", [{ name: "Domain Expansion", type: "feat",
+    flags: { jjk5e: { domainActivity: "d" } }, system: { activities: { d: { id: "d" } } } }]);
+  await env.settle();
+  assert.equal(J.rivalDomainFor(actor, opener.uuid, "new-expansion"), opener);
+  assert.equal(J.rivalDomainFor(actor, opener.uuid, "old-expansion"), null);
+});
+
+test("Domain clash: ticks are isolated by combat and do not repeat or run backwards", async () => {
+  const { env, a, b, J } = await clashPair(300, 250);
+  const combat = { id: "C", sceneId: "S", combatants: [{ actor: a }, { actor: b }, { actor: b }] };
+  await env.combatRound(2, { ...combat, id: "other", sceneId: "Other" });
+  assert.equal(J.getDomain(b).clash.rounds, 5);
+  await env.combatRound(2, { ...combat, id: "unrelated", combatants: [{ actor: a }] });
+  assert.equal(J.getDomain(b).clash.rounds, 5);
+  await env.combatRound(2, combat);
+  assert.equal(J.getDomain(b).clash.rounds, 4);
+  await env.combatRound(2, combat);
+  await env.combatRound(1, combat);
+  assert.equal(J.getDomain(b).clash.rounds, 4);
+  await env.combatRound(3, { ...combat, id: "same-scene-other-combat" });
+  assert.equal(J.getDomain(b).clash.rounds, 4);
+  await env.combatRound(3, combat);
+  assert.equal(J.getDomain(b).clash.rounds, 3);
+});
+
+test("Domain reaction offers: unknown scene must not fall back to the GM canvas", async () => {
+  const { env, actor, J } = await setup();
+  const other = env.addActor({ name: "Other", items: [POOL] });
+  await other.createEmbeddedDocuments("Item", [{ name: "Domain Expansion", type: "feat",
+    flags: { jjk5e: { domainActivity: "d" } }, system: { activities: { d: { id: "d" } } } }]);
+  await env.settle();
+  const visible = { id: "Visible", tokens: [{ actor: other }] };
+  env.game.scenes.set(visible.id, visible);
+  env.context.canvas = { scene: visible };
+  await actor.setFlag("jjk5e", "domainState", { open: true, sceneId: "Missing", lethal: true });
+  assert.equal(J.clashCandidates(actor).length, 0);
+  await actor.setFlag("jjk5e", "domainState", { open: true, sceneId: visible.id, lethal: true });
+  assert.equal(J.clashCandidates(actor)[0], other);
+});
+
+test("Domain reaction decisions for NPCs go only to the active GM", async () => {
+  const { env, actor, J } = await setup();
+  env.game.users.set("gm2", { id: "gm2", isGM: true, active: true });
+  assert.deepEqual([...J.deciders(actor)], ["gm"]);
 });

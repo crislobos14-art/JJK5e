@@ -1122,7 +1122,8 @@
       "Hint": "The domain's CE cost, burnout and the clash by refinement apply as usual.",
       "Expand": "Expand domain (reaction)",
       "Decline": "Not now",
-      "NoDomain": "This character has no Domain Expansion."
+      "NoDomain": "This character has no Domain Expansion.",
+      "Expired": "This domain reaction is no longer available."
     }
   }
 }
