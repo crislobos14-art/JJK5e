@@ -688,3 +688,69 @@ test("Domain simultaneous responses: no clash resolution while another response 
   assert.equal(J.getDomain(c).clash.role, "loser");
   assert.equal(J.getDomain(b).clash.id, J.getDomain(c).clash.id);
 });
+
+test("Domain wards: Fallen Blossom and selective Hollow Wicker protection only negate guaranteed hits", async () => {
+  const { env, actor: caster, J } = await setup();
+  const warden = env.addActor({name:"Warden",items:[POOL]});
+  const protectedActor = env.addActor({name:"Protected",items:[POOL]});
+  const outsider = env.addActor({name:"Outside",items:[POOL]});
+  const scene = {id:"S",grid:{size:100,distance:5},tokens:[]};
+  env.game.scenes.set("S",scene);
+  const mk = (id,actor,x,level="L1") => ({uuid:"Scene.S.Token."+id,parent:scene,actor,x,y:-50,width:1,height:1,level});
+  const w = mk("W",warden,-50), p = mk("P",protectedActor,150), u = mk("U",outsider,250);
+  scene.tokens.push(w,p,u);
+  await J.setKindEffect(warden,"hollowWickerProtection",{name:"Hollow Wicker Basket",duration:{rounds:10},
+    flags:{jjk5e:{originTokenUuid:w.uuid,chosenTokens:[w.uuid,p.uuid]}}});
+  assert.equal(J.domainWard(p),"Hollow Wicker Basket");
+  assert.equal(J.domainWard(u),null,"an unselected creature is not protected");
+  p.x=350; assert.equal(J.domainWard(p),null,"out of 15 ft"); p.x=150;
+  p.level="L2"; assert.equal(J.domainWard(p),null,"different level"); p.level="L1";
+  await J.setKindEffect(outsider,"fallingBlossomDefense",{name:"Falling Blossom Emotion",duration:{rounds:10}});
+  assert.equal(J.domainWard(u),"Falling Blossom Emotion");
+  await J.setKindEffect(caster,"domain",{name:"Domain",flags:{jjk5e:{domainOpen:true}}});
+  await env.settle();
+  await J.setDomain(caster,{open:true,openingId:"test",sceneId:"S",x:0,y:0,radius:175,levelId:"L1",lethal:true});
+  const workflow={actor:caster,item:{flags:{jjk5e:{technique:"Test"}}},targets:new Set([w,p,u]),hitTargets:new Set([w,p,u])};
+  assert.equal(J.excludeDomainWardedTargets(workflow).length,3);
+  assert.equal(workflow.targets.size,0);
+  const ordinary={actor:caster,item:{flags:{}},targets:new Set([p,u])};
+  assert.equal(J.excludeDomainWardedTargets(ordinary).length,0);
+  assert.equal(ordinary.targets.size,2);
+});
+
+test("Domain profile: validates bounded declarative data without accepting executable formulas", async () => {
+  const { J } = await setup();
+  const good={name:"Homebrew",damage:"6d10",damageType:"necrotic",save:"con",dc:15,onSave:"half",condition:"restrained",rounds:1};
+  assert.equal(J.validateDomainProfile(good).version,1);
+  for (const change of [{damage:"1d6 + @abilities.con.mod"},{damage:"99d6; alert(1)"},{save:"bad"},{rounds:0},{dc:50},{condition:"arbitrary"}]) {
+    assert.equal(J.validateDomainProfile({...good,...change}),null);
+  }
+  assert.equal(J.validateDomainProfile(null),null);
+});
+test("Domain HUD: exposes only the current expansion item's non-opening activities", async () => {
+  const { actor,J }=await setup();
+  const [item]=await actor.createEmbeddedDocuments("Item",[{name:"Domain",type:"feat",flags:{jjk5e:{domainActivity:"open"}},system:{activities:{open:{id:"open",name:"Expand"},pulse:{id:"pulse",name:"Initiative 20: pulse"}}}}]);
+  await J.setDomain(actor,{open:true,openingId:"test",domainItemUuid:item.uuid});
+  assert.deepEqual([...J.domainActivities(actor)].map(a=>a.id),["pulse"]);
+});
+test("Domain custom effect: resolves selected targets with damage on a successful save, rejects duplicate operation", async () => {
+  const { env, actor: caster,J }=await setup();
+  const target=env.addActor({name:"Target",items:[POOL]});
+  const outside=env.addActor({name:"Outside",items:[POOL]});
+  const scene={id:"S",grid:{size:100,distance:5},tokens:[]};
+  env.game.scenes.set("S",scene);
+  const mk=(id,actor,x)=>({uuid:"Scene.S.Token."+id,parent:scene,actor,x,y:-50,width:1,height:1});
+  const a=mk("A",target,50),b=mk("B",outside,500);
+  scene.tokens.push(a,b);
+  const values=[];
+  target.applyDamage=async (d)=>values.push(d[0].value);
+  target.rollSavingThrow=async ()=>({total:18});
+  outside.applyDamage=async ()=>{throw Error("out of domain");};
+  await J.setDomain(caster,{open:true,openingId:"test",sceneId:"S",x:0,y:0,radius:10,lethal:true,
+    customProfile:{name:"Homebrew",damage:"1d8",damageType:"necrotic",save:"con",dc:15,onSave:"half",condition:"restrained",rounds:1}});
+  env.dice.push(6);
+  assert.equal(await J.executeDomainProfile(caster,[a,b],"req1"),true);
+  assert.deepEqual(values,[3]);
+  assert.equal(await J.executeDomainProfile(caster,[a,b],"req1"),false);
+  assert.deepEqual(values,[3]);
+});
