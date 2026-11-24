@@ -1818,7 +1818,7 @@ async function expireEffects() {
   for (const actor of actors) {
     const ids = actor.effects.filter((e) => {
       const kind = e.flags?.jjk5e?.kind;
-      if (!["zone", "burnout", "domain"].includes(kind) && !DOMAIN_WARD_KINDS.has(kind)) return false;
+      if (!["zone", "burnout", "domain", "domainProfileCondition"].includes(kind) && !DOMAIN_WARD_KINDS.has(kind)) return false;
       if (e.disabled || e.duration?.expired === true) return true;
       const rem = e.duration?.remaining;
       return rem !== null && rem !== undefined && rem <= 0;
@@ -4512,7 +4512,7 @@ function excludeDomainWardedTargets(workflow) {
   const ids = new Set(protectedTargets.map((tk) => (tk?.document ?? tk)?.uuid).filter(Boolean));
   const exclude = (tk) => protectedTargets.includes(tk) || ids.has((tk?.document ?? tk)?.uuid);
   for (const key of ["targets", "hitTargets", "hitTargetsEC", "saves", "failedSaves", "applicationTargets"]) {
-    if (workflow[key] instanceof Set) workflow[key] = new Set([...workflow[key]].filter((tk) => !exclude(tk)));
+    if (typeof workflow[key]?.has === "function") workflow[key] = new Set([...workflow[key]].filter((tk) => !exclude(tk)));
   }
   return protectedTargets;
 }
@@ -4619,6 +4619,7 @@ async function domainOpened(actor, effect = null) {
     noBarrier: incomplete || barrierless, noSureHit: incomplete, incomplete, barrierless,
     sceneId: sourceScene?.id ?? null, tokenUuid: tokenDoc?.uuid ?? null, levelId,
     domainItemUuid: kind.domainItemUuid ?? null,
+    customProfile: validateDomainProfile(actor.getFlag(MODULE_ID, "customDomainProfile")),
     x: c?.x ?? null, y: c?.y ?? null,
     damageTaken: 0, zone: null, clash: null, name: actor.name };
   await setDomain(actor, state);
@@ -4652,6 +4653,13 @@ async function domainClosed(actor) {
   if (!state) return;
   if (state.zone) await GM_EXTRA.domainZoneDelete({ sceneId: state.sceneId, zone: state.zone, actorUuid: actor.uuid, openingId: state.openingId });
   await actor.unsetFlag(MODULE_ID, "domainReactionWindow");
+  const scene = state.sceneId && game.scenes.get(state.sceneId);
+  const actors = [...new Map([...(game.actors?.contents ?? []), ...[...(scene?.tokens ?? [])].map((tk)=>tk.actor)]
+    .filter((a)=>a?.uuid).map((a)=>[a.uuid,a])).values()];
+  for (const target of actors) {
+    const ids = target.effects?.filter((e)=>e.flags?.jjk5e?.kind === "domainProfileCondition" && e.flags.jjk5e.openingId === state.openingId).map((e)=>e.id) ?? [];
+    if (ids.length) await target.deleteEmbeddedDocuments("ActiveEffect",ids);
+  }
   const peers = state.clash?.with ? [state.clash.with].flat() : [];
   for (const uuid of peers) {
     const other = await fromUuid(uuid).catch(() => null);
@@ -4964,6 +4972,129 @@ async function setBarrierMode(actor, mode) {
   } finally { DOMAIN_MODE_PENDING.delete(key); }
 }
 
+const DOMAIN_PROFILE_TYPES = ["acid", "bludgeoning", "cold", "fire", "force", "lightning", "necrotic", "piercing", "poison", "psychic", "radiant", "slashing", "thunder"];
+const DOMAIN_PROFILE_SAVES = ["none", "str", "dex", "con", "int", "wis", "cha"];
+const DOMAIN_PROFILE_CONDITIONS = ["none", "restrained", "poisoned", "prone", "frightened", "blinded", "deafened", "stunned"];
+function validateDomainProfile(input) {
+  if (!input || typeof input !== "object" || Array.isArray(input)) return null;
+  const { name, damage, damageType, save, dc, onSave, condition, rounds } = input;
+  if (typeof name !== "string" || !name.trim() || name.length > 80 || typeof damage !== "string" ||
+      !/^\d{1,2}d(?:4|6|8|10|12|20|100)(?:\s*[+-]\s*\d{1,3})?$/.test(damage.trim()) ||
+      !DOMAIN_PROFILE_TYPES.includes(damageType) || !DOMAIN_PROFILE_SAVES.includes(save) ||
+      !Number.isInteger(dc) || dc < 1 || dc > 40 || !["half", "none", "full"].includes(onSave) ||
+      !DOMAIN_PROFILE_CONDITIONS.includes(condition) || !Number.isInteger(rounds) || rounds < 1 || rounds > 10) return null;
+  return { version: 1, name: name.trim(), damage: damage.trim(), damageType, save, dc, onSave, condition, rounds };
+}
+async function editDomainProfile(actor, mode = "form") {
+  if (!game.user.isGM || !actor || getDomain(actor)?.open) return false;
+  const profile = validateDomainProfile(actor.getFlag(MODULE_ID, "customDomainProfile")) ??
+    { version: 1, name: "Custom Domain", damage: "1d6", damageType: "force", save: "none", dc: 15, onSave: "half", condition: "none", rounds: 1 };
+  const options = (arr, value) => arr.map((x) => `<option value="${x}" ${x === value ? "selected" : ""}>${x}</option>`).join("");
+  if (mode === "export") {
+    await foundry.applications.api.DialogV2.prompt({ window: { title: t("Domain.ProfileExport") }, rejectClose: false,
+      content: `<textarea readonly rows="12" style="width:100%">${esc(JSON.stringify(profile,null,2))}</textarea>`,
+      ok: { callback: () => true } });
+    return true;
+  }
+  if (mode === "clear") {
+    if (!(await confirmDialog(t("Domain.ProfileClear"), `<p>${t("Domain.ProfileHint")}</p>`))) return false;
+    await actor.unsetFlag(MODULE_ID,"customDomainProfile");
+    return true;
+  }
+  const content = mode === "import" ? `<textarea name="json" rows="12" style="width:100%">${esc(JSON.stringify(profile,null,2))}</textarea>` :
+    `<p>${t("Domain.ProfileHint")}</p><label>${t("Domain.ProfileName")} <input name="name" maxlength="80" value="${esc(profile.name)}"></label>
+    <label>${t("Domain.DamageFormula")} <input name="damage" value="${esc(profile.damage)}"></label>
+    <label>${t("Domain.ProfileDamageType")} <select name="damageType">${options(DOMAIN_PROFILE_TYPES,profile.damageType)}</select></label>
+    <label>${t("Domain.ProfileSave")} <select name="save">${options(DOMAIN_PROFILE_SAVES,profile.save)}</select></label>
+    <label>DC <input name="dc" type="number" min="1" max="40" value="${profile.dc}"></label>
+    <label>${t("Domain.ProfileOnSave")} <select name="onSave">${options(["half","none","full"],profile.onSave)}</select></label>
+    <label>${t("Domain.ProfileCondition")} <select name="condition">${options(DOMAIN_PROFILE_CONDITIONS,profile.condition)}</select></label>
+    <label>${t("Domain.ProfileRounds")} <input name="rounds" type="number" min="1" max="10" value="${profile.rounds}"></label>`;
+  const result = await foundry.applications.api.DialogV2.prompt({ window: { title: t("Domain.ProfileEdit") }, rejectClose: false, content,
+    ok: { callback: (e,b) => {
+      const f = b.form.elements;
+      if (mode === "import") { try { return JSON.parse(f.json.value); } catch (err) { return {}; } }
+      return { name: f.name.value, damage: f.damage.value, damageType: f.damageType.value, save: f.save.value,
+        dc: f.dc.valueAsNumber, onSave: f.onSave.value, condition: f.condition.value, rounds: f.rounds.valueAsNumber };
+    } } });
+  if (!result) return false;
+  const normalized = validateDomainProfile(result);
+  if (!normalized) { ui.notifications.warn(t("Domain.ProfileInvalid")); return false; }
+  await actor.setFlag(MODULE_ID, "customDomainProfile", normalized);
+  return true;
+}
+function domainProfileTargets(actor, targets) {
+  const state = getDomain(actor);
+  if (!state?.open || state.incomplete || state.lethal === false || sureHitBlocked(actor)) return [];
+  return [...new Map([...targets].filter((tk) => insideDomain(state,tk) && !domainWard(tk) &&
+    (tk?.actor ?? tk?.document?.actor)?.uuid).map((tk) => [(tk?.actor ?? tk?.document?.actor).uuid, tk])).values()];
+}
+async function executeDomainProfile(actor, targets, requestId) {
+  if (!isActiveGM() || typeof requestId !== "string" || requestId.length > 80) return false;
+  const state = getDomain(actor), profile = validateDomainProfile(state?.customProfile);
+  const eligible = domainProfileTargets(actor,targets);
+  if (!profile || !eligible.length || (state.profileRequests ?? []).includes(requestId)) return false;
+  state.profileRequests = [...(state.profileRequests ?? []).slice(-99),requestId];
+  await setDomain(actor,state);
+  for (const tk of eligible) {
+    if (getDomain(actor)?.openingId !== state.openingId) break;
+    const target = tk.actor ?? tk.document?.actor;
+    // Simple Domain uses a finite barrier; leave it to its existing adjudication rather than bypassing it.
+    if (target.effects?.some((fx) => liveWard(fx) && /^Simple Domain(?: \(10 ft\))?$/.test(fx.name))) {
+      await chat(actor,`<p>${esc(target.name)}: ${t("Domain.ProfileSimpleDomain")}</p>`); continue;
+    }
+    if (typeof target.applyDamage !== "function") continue;
+    let success = false;
+    if (profile.save !== "none") {
+      if (typeof target.rollSavingThrow !== "function") continue;
+      const result = await target.rollSavingThrow({ ability: profile.save, target: profile.dc });
+      const roll = Array.isArray(result) ? result[0] : result;
+      if (!Number.isFinite(roll?.total)) continue;
+      success = roll.total >= profile.dc;
+    }
+    const roll = await new Roll(profile.damage).evaluate();
+    await roll.toMessage?.({ speaker: docClass("ChatMessage").getSpeaker?.({actor}), flavor: esc(profile.name) });
+    const value = Math.max(0, Math.floor(roll.total * (success ? ({half:0.5,none:0,full:1})[profile.onSave] : 1)));
+    if (value) await target.applyDamage([{ value, type: profile.damageType }]);
+    if (!success && profile.condition !== "none") {
+      await target.createEmbeddedDocuments("ActiveEffect", [fxData({ name: profile.name, img: `${ICONS}/domain.svg`,
+        statuses: [profile.condition], duration: { rounds: profile.rounds, seconds: profile.rounds*6 },
+        flags: { jjk5e: { kind: "domainProfileCondition", openingId: state.openingId } } })]);
+    }
+  }
+  return true;
+}
+function domainActivities(actor) {
+  const state = getDomain(actor);
+  const item = state?.domainItemUuid ? [...actor.items].find((i) => i.uuid === state.domainItemUuid) : domainActivityOf(actor)?.item;
+  if (!item?.flags?.jjk5e?.domainActivity) return [];
+  return [...(item.system?.activities?.contents ?? Object.values(item.system?.activities ?? {}))]
+    .filter((a) => a?.id && a.id !== item.flags.jjk5e.domainActivity);
+}
+async function runDomainActivity(actor, id) {
+  if (!actor?.isOwner || !getDomain(actor)?.open || !domainOpen(actor)) return false;
+  const activity = domainActivities(actor).find((a) => a.id === id);
+  if (!activity || typeof activity.use !== "function") return false;
+  if (/initiative\s*20/i.test(activity.name ?? "") && sureHitBlocked(actor)) return false;
+  return activity.use({ event: null }, { configure: true }, {});
+}
+function domainHudDetails(actor, state) {
+  const scene = state.sceneId && game.scenes.get(state.sceneId);
+  const visible = [...(scene?.tokens ?? [])].filter((tk) => tk.actor && insideDomain(state,tk) &&
+    (game.user.isGM || (!tk.hidden && tk.actor.isOwner)));
+  const rows = visible.map((tk) => `<li>${esc(tk.name ?? tk.actor.name)} — ${esc(domainWard(tk) ?? t("Domain.ProfileInside"))}</li>`).join("");
+  const effect = actor.effects?.find((e) => e.uuid === state.openingId);
+  const remaining = effect?.duration?.remaining;
+  const win = actor.getFlag(MODULE_ID,"domainReactionWindow");
+  const counts = win?.offers?.reduce((a,o)=>(a[o.status]=(a[o.status]??0)+1,a),{}) ?? {};
+  const progress = win ? `<p>${t("Domain.ProfileResponses")}: ${Object.entries(counts).map(([k,v])=>esc(k)+": "+v).join(" · ")}</p>` : "";
+  const buttons = actor.isOwner ? domainActivities(actor).map((a) => `<button type="button" data-action="activity" data-activity="${esc(a.id)}">${esc(a.name ?? a.id)}</button>`).join("") : "";
+  return `<p><strong>${t("Domain.ProfileSureHit")}:</strong> ${t(sureHitBlocked(actor) ? "Domain.ProfileBlocked" : "Domain.ProfileAvailable")}</p>
+    <p>${t("Domain.ProfileRemaining")}: ${state.barrierless ? "∞" : Number.isFinite(remaining) ? Math.max(0,remaining) : "—"}</p>${progress}
+    ${rows ? `<p><strong>${t("Domain.ProfileParticipants")}</strong></p><ul>${rows}</ul>` : ""}
+    ${buttons ? `<p><strong>${t("Domain.ProfileActivities")}</strong></p><div class="btns">${buttons}</div>` : ""}
+    ${state.customProfile && isActiveGM() ? `<button type="button" data-action="applyProfile">${t("Domain.ProfileRun")}: ${esc(state.customProfile.name)}</button>` : ""}`;
+}
 async function toggleDomainAmplification(actor) {
   if (!isActiveGM() || refinementOf(actor) < 600 || domainOpen(actor)) return false;
   const dom = domainActivityOf(actor);
@@ -4991,8 +5122,16 @@ function makeDomainClass() {
   return class JJKDomain extends Base {
     static DEFAULT_OPTIONS = {
       classes: ["jjk5e-ui", "jjk5e-domain"], window: { icon: "fas fa-circle-half-stroke", minimizable: true },
-      position: { width: 340, height: "auto" },
+      position: { width: 440, height: "auto" },
       actions: {
+        profile: async function (ev, el) { await editDomainProfile(this.actor, el?.dataset?.mode); this.render(); },
+        activity: async function (ev, el) { return runDomainActivity(this.actor,el?.dataset?.activity); },
+        applyProfile: async function () {
+          if (!isActiveGM()) return false;
+          const targets = [...(game.user?.targets ?? [])];
+          if (!targets.length || !(await confirmDialog(t("Domain.ProfileRun"),`<p>${t("Domain.ProfileRunConfirm")}</p>`))) return false;
+          return queueDomainWork(()=>executeDomainProfile(this.actor,targets,foundry.utils.randomID()));
+        },
         hit: async function () {
           const res = await foundry.applications.api.DialogV2.prompt({ window: { title: t("Domain.HitBarrier") }, rejectClose: false,
             content: `<label>${t("CE.Amount")}<input type="number" name="n" value="10" min="0"></label>
@@ -5031,7 +5170,8 @@ function makeDomainClass() {
       if (!s?.open) {
         return `<section class="jjk-panel"><p>${t("Domain.Closed")}</p><p>${t("Domain.Refinement")}: <strong>${ref}</strong>
           ${game.user.isGM ? ` <button type="button" data-action="ref">${t("Common.Edit")}</button>` : ""}</p>
-          ${this.actor.isOwner && ref >= 600 ? `<button type="button" data-action="amplification">${t(hasKind(this.actor,"domainAmplification") ? "Domain.AmplificationDismiss" : "Domain.AmplificationActivate")}</button>` : ""}</section>`;
+          ${this.actor.isOwner && ref >= 600 ? `<button type="button" data-action="amplification">${t(hasKind(this.actor,"domainAmplification") ? "Domain.AmplificationDismiss" : "Domain.AmplificationActivate")}</button>` : ""}
+          ${game.user.isGM ? `<div class="btns">${["form","import","export","clear"].map((m)=>`<button type="button" data-action="profile" data-mode="${m}">${t(({form:"Domain.ProfileEdit",import:"Domain.ProfileImport",export:"Domain.ProfileExport",clear:"Domain.ProfileClear"})[m])}</button>`).join("")}</div>` : ""}</section>`;
       }
       const pct = s.max ? Math.round((s.hp / s.max) * 100) : 0;
       if (!this.actor.isOwner && !game.user.isGM) {
@@ -5048,6 +5188,7 @@ function makeDomainClass() {
         <div class="jjk-barrier"><div class="fill" style="width:${pct}%"></div><span>${s.hp} / ${s.max}</span></div>
         <p>${t("Domain.Stats", { ac: s.ac, ref: s.refinement, r: s.radius })}</p>${clash}
         <p class="hint">${t("Domain.Mode")}: ${mode}; ${s.lethal === false ? t("Domain.NonLethalMode") : t("Domain.LethalMode")}</p>
+        ${domainHudDetails(this.actor,s)}
         <div class="btns">${s.noBarrier ? "" : `<button type="button" data-action="attack"><i class="fas fa-crosshairs"></i> ${t("Domain.AttackBarrier")}</button>${game.user.isGM ? `<button type="button" data-action="hit"><i class="fas fa-hammer"></i> ${t("Domain.HitBarrier")}</button>` : ""}`}
           <button type="button" data-action="weak"><i class="fas fa-crosshairs"></i> ${t("Domain.WeakSpot")}</button></div>
         ${this.actor.isOwner ? `<div class="btns"><button type="button" data-action="lethal" data-m="${s.lethal === false ? "lethal" : "nonlethal"}">${s.lethal === false ? t("Domain.MakeLethal") : t("Domain.MakeNonLethal")}</button>${s.refinement >= 100 ? `<button type="button" data-action="mode" data-m="flip">${t("Domain.Flipped")}</button>
@@ -5242,7 +5383,7 @@ Hooks.once("ready", () => {
   if (game.system?.id !== "dnd5e") return;
   Object.assign(game.modules.get(MODULE_ID).api ?? {}, {
     domainOpened, domainClosed, damageBarrier, findWeakSpot, openDomainHUD, detectClash, tickClashes, clashRounds,
-    getDomain, createCurse, curseData, sureHitBlocked
+    getDomain, createCurse, curseData, sureHitBlocked, domainWard, validateDomainProfile
   });
   Hooks.on("createActiveEffect", (effect) => {
     if (!isActiveGM() || !setting("domainTracking") || !(effect.flags?.jjk5e?.domainOpen || effect.flags?.jjk5e?.kind === "domain")) return;
