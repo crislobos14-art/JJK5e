@@ -112,7 +112,16 @@
       "LethalMode": "Lethal",
       "NonLethalMode": "Non-lethal (no sure-hit)",
       "MakeLethal": "Make lethal",
-      "MakeNonLethal": "Make non-lethal"
+      "MakeNonLethal": "Make non-lethal",
+      "AttackBarrier": "Attack barrier",
+      "SelectAttacker": "Select a token you control first.",
+      "BarrierAttackHint": "Enter the attack bonus, maximum reach/range in feet, and simple damage formula. The GM reviews player requests. The side and distance are measured automatically.",
+      "AttackBonus": "Attack bonus",
+      "AttackRange": "Reach / range (ft)",
+      "DamageFormula": "Damage dice (e.g. 2d6+3)",
+      "BarrierAttackHit": "Barrier attack: hit",
+      "BarrierAttackMiss": "Barrier attack: miss",
+      "AttackRejected": "Barrier attack rejected: verify the target, distance, formula and GM approval."
     },
     "Burnout": {
       "Name": "Technique Burnout",
