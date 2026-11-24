@@ -321,6 +321,10 @@
         "Name": "Gasto automático de Energía Maldita",
         "Hint": "Los rasgos con costo fijo de EM lo descuentan de la reserva y se bloquean si no alcanza. Los costos escalables usan el campo de escalado."
       },
+      "transactionalCE": {
+        "Name": "Transacciones de EM con autoridad del GM (experimental)",
+        "Hint": "Vista previa de desarrollo. Requiere GM activo y adaptador de actividad libWrapper funcional. Un consumo fallido o interrumpido queda pendiente de revisión explícita del GM. No activar en una campaña real antes de probar."
+      },
       "ceChat": {
         "Name": "Mensajes de Energía Maldita en el chat",
         "Hint": "Publica una línea en el chat cada vez que se gasta o recupera EM."
