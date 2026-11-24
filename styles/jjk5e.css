@@ -441,3 +441,16 @@ button.jjk5e-levelup { display: block; margin: 4px auto 0; padding: 2px 10px; fo
 .jjk-optrules { display: flex; flex-direction: column; min-height: 0; flex: 1; }
 .jjk-optrules .jjk-opt-list { flex: 1 1 auto; min-height: 120px; max-height: calc(100vh - 260px); overflow-y: auto; padding-right: 4px; }
 .jjk-optrules footer.btns { position: static; flex: 0 0 auto; padding-top: 8px; }
+
+/* v1.76.1 — domain HUD details, barrier attack and custom profile dialogs (Sealed Ink). */
+.jjk5e-ui.jjk5e-dialog .dialog-content > label,
+.jjk5e-ui.jjk5e-dialog form > label:not(.jjk-check) { display: grid; grid-template-columns: minmax(9rem, 40%) 1fr; align-items: center; gap: 8px; margin: 4px 0; color: var(--jjk-bone); }
+.jjk5e-ui.jjk5e-dialog label:has(> input[type="checkbox"]) { display: flex; gap: 6px; align-items: center; grid-template-columns: none; }
+.jjk5e-ui.jjk5e-dialog textarea { width: 100%; min-height: 12rem; resize: vertical; font: 12px/1.4 var(--font-mono, monospace); background: #0b0a0e; color: var(--jjk-bone); border: 1px solid var(--jjk-line); border-radius: var(--jjk-r); padding: 6px; }
+.jjk5e-ui.jjk5e-dialog input:focus-visible, .jjk5e-ui.jjk5e-dialog select:focus-visible, .jjk5e-ui.jjk5e-dialog textarea:focus-visible { outline: 2px solid var(--jjk-gold); outline-offset: 1px; }
+.jjk5e-ui.jjk5e-domain ul { list-style: none; margin: 2px 0 6px; padding: 0; max-height: 9rem; overflow-y: auto; border: 1px solid var(--jjk-line); border-radius: var(--jjk-r); }
+.jjk5e-ui.jjk5e-domain ul li { padding: 3px 8px; border-bottom: 1px dotted var(--jjk-line); color: var(--jjk-bone); font-size: 12px; }
+.jjk5e-ui.jjk5e-domain ul li:last-child { border-bottom: none; }
+.jjk5e-ui.jjk5e-domain strong { color: var(--jjk-bone); }
+.jjk5e-ui.jjk5e-domain button[data-action="applyProfile"], .jjk5e-ui.jjk5e-domain button[data-action="amplification"] { width: 100%; margin-top: 6px; border-color: var(--jjk-seal); }
+.jjk5e-ui.jjk5e-domain .jjk-panel > p { margin: 4px 0; line-height: 1.35; }
