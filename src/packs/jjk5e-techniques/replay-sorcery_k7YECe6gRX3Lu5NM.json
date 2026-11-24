@@ -83,7 +83,8 @@
     "y5TidkWt2wHekPJS": 2
    },
    "automationNotes": "Teleport to where you were that many rounds ago. Not while Projection is active.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "9379cb16f9"
   }
  },
  "folder": "sHDJB680OC5pd1by",

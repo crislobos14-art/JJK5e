@@ -22,7 +22,9 @@
   "requirements": "Juggernaut 5"
  },
  "flags": {
-  "jjk5e": {}
+  "jjk5e": {
+   "rev": "ea5258ddf5"
+  }
  },
  "folder": "1ipDZJ01igqpFdub",
  "_key": "!items!N4DKrzklgPT5Puzn"

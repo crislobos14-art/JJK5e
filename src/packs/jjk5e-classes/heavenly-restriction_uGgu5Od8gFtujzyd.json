@@ -617,7 +617,9 @@
   "startingEquipment": []
  },
  "flags": {
-  "jjk5e": {}
+  "jjk5e": {
+   "rev": "56675422a5"
+  }
  },
  "folder": null,
  "_key": "!items!uGgu5Od8gFtujzyd"

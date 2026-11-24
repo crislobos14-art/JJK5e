@@ -202,7 +202,8 @@
     "Cursed Spirit Manipulation"
    ],
    "automationNotes": "Once per turn. At 11th level: 10 HP per CE (double the heal).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "54dd60d93b"
   }
  },
  "folder": "808kDeN1ffx0XP3c",

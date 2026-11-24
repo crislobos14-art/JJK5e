@@ -209,7 +209,8 @@
    "level": 1,
    "spellFrom": "feat",
    "automationNotes": "Item uses = eye HP (⅓ max HP; ½ at 11th). Eyes lose 1 per point a target beats your DC by; regain 1 at your turn start.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "2e576e3861"
   }
  },
  "effects": [

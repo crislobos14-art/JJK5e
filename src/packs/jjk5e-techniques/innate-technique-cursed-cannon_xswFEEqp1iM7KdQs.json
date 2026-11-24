@@ -111,7 +111,8 @@
  "effects": [],
  "flags": {
   "jjk5e": {
-   "techniqueRoot": "Cursed Cannon"
+   "techniqueRoot": "Cursed Cannon",
+   "rev": "70b288e528"
   }
  },
  "_key": "!items!xswFEEqp1iM7KdQs"

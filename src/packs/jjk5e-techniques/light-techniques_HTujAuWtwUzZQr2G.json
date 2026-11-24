@@ -359,7 +359,8 @@
     "OtKbgunrTjifi2uE": 1
    },
    "automationNotes": "Hyperspeed (6th): +1 die per extra CE (2 at 11th, 3 at 18th) up to CE mod — use the CE spend.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "1fa733713c"
   }
  },
  "effects": [

@@ -22,7 +22,9 @@
   "requirements": "Sumerian (Shaama)"
  },
  "flags": {
-  "jjk5e": {}
+  "jjk5e": {
+   "rev": "6556a626d8"
+  }
  },
  "folder": "cUxhy4eiPJek1pHp",
  "_key": "!items!I73sZQJAZ1ka7czL"

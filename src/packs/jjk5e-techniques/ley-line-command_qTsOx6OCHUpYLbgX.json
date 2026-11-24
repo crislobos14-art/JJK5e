@@ -141,7 +141,8 @@
    "technique": "Dragon Vein",
    "level": 3,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "fe740cb909"
   }
  },
  "folder": "xkcQZ0iOxpoEyfI2",

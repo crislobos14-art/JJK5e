@@ -24,7 +24,8 @@
  "flags": {
   "jjk5e": {
    "bodyCost": 1,
-   "bodyCategory": "wis"
+   "bodyCategory": "wis",
+   "rev": "02ab09ee95"
   }
  },
  "folder": "ybhWCA27cbgjKLpN",

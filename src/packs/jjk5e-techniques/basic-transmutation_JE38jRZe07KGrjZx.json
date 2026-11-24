@@ -118,7 +118,8 @@
    "level": 1,
    "spellFrom": "feat",
    "automationNotes": "One 5-ft cube per CE (metal +1 CE per cube); cover, difficult terrain, walls, platforms.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "cf36b9b1b4"
   }
  },
  "folder": "mZ3PzIRAkGl7SSou",

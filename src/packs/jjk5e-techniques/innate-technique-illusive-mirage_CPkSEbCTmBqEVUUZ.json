@@ -111,7 +111,8 @@
  "effects": [],
  "flags": {
   "jjk5e": {
-   "techniqueRoot": "Illusive Mirage"
+   "techniqueRoot": "Illusive Mirage",
+   "rev": "da437152b8"
   }
  },
  "_key": "!items!CPkSEbCTmBqEVUUZ"

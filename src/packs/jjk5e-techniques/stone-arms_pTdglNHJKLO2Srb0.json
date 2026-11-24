@@ -235,7 +235,8 @@
    "level": 11,
    "spellFrom": "feat",
    "automationNotes": "Concentration; arms AC 18, HP = your max HP. Escape: action, Athletics/Acrobatics vs your CE DC.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "ce550e1631"
   }
  },
  "effects": [

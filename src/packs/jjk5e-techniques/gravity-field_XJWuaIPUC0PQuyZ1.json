@@ -168,7 +168,8 @@
    "level": 3,
    "spellFrom": "feat",
    "automationNotes": "Focused System: exclude up to CE mod + prof creatures from your technique (don't target them).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "3137b2c5eb"
   }
  },
  "folder": "h8faxx3TSM5qAlx3",

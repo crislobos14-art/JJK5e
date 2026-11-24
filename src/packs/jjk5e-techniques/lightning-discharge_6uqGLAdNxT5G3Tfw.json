@@ -164,7 +164,8 @@
    "level": 6,
    "spellFrom": "feat",
    "automationNotes": "Scale = charges spent − 1; remove the charge effects. At 11th: roll on the Limb Damage table.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "fc80d8e8a0"
   }
  },
  "folder": "J9wuYC5ZIUpqsRHr",

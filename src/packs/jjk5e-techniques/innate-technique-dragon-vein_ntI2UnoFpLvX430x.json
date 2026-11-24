@@ -111,7 +111,8 @@
  "effects": [],
  "flags": {
   "jjk5e": {
-   "techniqueRoot": "Dragon Vein"
+   "techniqueRoot": "Dragon Vein",
+   "rev": "a5778d542c"
   }
  },
  "_key": "!items!ntI2UnoFpLvX430x"

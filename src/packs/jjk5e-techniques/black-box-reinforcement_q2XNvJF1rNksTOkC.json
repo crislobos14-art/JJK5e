@@ -24,7 +24,8 @@
  "flags": {
   "jjk5e": {
    "technique": "Black Box",
-   "level": 3
+   "level": 3,
+   "rev": "2b1e2e6b40"
   }
  },
  "folder": "h65v183tFsULjQrb",

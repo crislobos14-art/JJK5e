@@ -22,7 +22,9 @@
   "requirements": "Heavenly Restriction 3"
  },
  "flags": {
-  "jjk5e": {}
+  "jjk5e": {
+   "rev": "7f78a99311"
+  }
  },
  "folder": "hWqAX9TqrOvuq1FE",
  "_key": "!items!gCRxWYo8bTrVYQzC"

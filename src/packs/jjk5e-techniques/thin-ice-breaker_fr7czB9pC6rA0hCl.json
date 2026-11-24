@@ -147,7 +147,8 @@
    "level": 11,
    "spellFrom": "feat",
    "automationNotes": "While you fly, creatures save at disadvantage.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "147529cb2c"
   }
  },
  "effects": [

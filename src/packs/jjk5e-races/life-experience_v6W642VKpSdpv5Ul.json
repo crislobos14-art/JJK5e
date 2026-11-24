@@ -22,7 +22,9 @@
   "requirements": "Cursed Vessel (Reincarnated)"
  },
  "flags": {
-  "jjk5e": {}
+  "jjk5e": {
+   "rev": "04d4257ea9"
+  }
  },
  "folder": "A3CBV9dvsdKk3l4V",
  "_key": "!items!v6W642VKpSdpv5Ul"

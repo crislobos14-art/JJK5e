@@ -282,7 +282,8 @@
    "technique": "Disaster Verdure",
    "level": 1,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "fa59a5d8fa"
   }
  },
  "effects": [

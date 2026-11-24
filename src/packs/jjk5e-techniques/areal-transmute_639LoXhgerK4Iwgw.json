@@ -258,7 +258,8 @@
     ]
    },
    "automationNotes": "Pick one: Slippery (DEX or prone), Explosive (set now with the 6 CE, detonate next turn), Spikey, or Shifting (difficult terrain). The 6 CE is charged on Slippery; use it for the others too.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "5933c2b752"
   }
  },
  "effects": [

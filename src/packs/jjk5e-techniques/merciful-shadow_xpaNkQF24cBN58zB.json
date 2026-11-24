@@ -95,7 +95,8 @@
     ]
    },
    "automationNotes": "Healing = your attack's damage (weapon die d8 shown) + CE mod (×2 at 6th, ×3 at 11th).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "cb712fadb6"
   }
  },
  "folder": "sHDJB680OC5pd1by",

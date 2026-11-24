@@ -78,7 +78,8 @@
    "technique": "Triple Core",
    "level": 11,
    "automationNotes": "That core form is unavailable for 1 week.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "eb7ed60ec2"
   }
  },
  "folder": "IyJg53UICeEoqtxa",

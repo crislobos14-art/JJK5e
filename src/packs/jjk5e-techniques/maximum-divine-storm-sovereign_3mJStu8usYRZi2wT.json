@@ -148,7 +148,8 @@
    "level": 11,
    "spellFrom": "feat",
    "automationNotes": "Use Lightning's attack after paying the 2 CE here.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "cee0287167"
   }
  },
  "folder": "5WRl9NqkIbDZzpyp",

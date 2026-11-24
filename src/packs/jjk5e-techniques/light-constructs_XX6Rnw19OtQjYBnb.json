@@ -171,7 +171,8 @@
    "level": 1,
    "spellFrom": "feat",
    "automationNotes": "Finesse, light, thrown (20/60); reappears in your hand. You know the Light cantrip.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "c6996c866e"
   }
  },
  "folder": "IGfpCBBJLQfBc6m2",

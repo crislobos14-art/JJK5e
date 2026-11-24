@@ -191,7 +191,8 @@
     "uluV427kSJscDJo3": true
    },
    "automationNotes": "Unlimited clones inside the domain; clone attacks get the domain sure-hit. Delete domain clones when it ends.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "c8953eea8b"
   }
  },
  "folder": "FD3rp7a4OW9fKrOc",

@@ -116,7 +116,8 @@
    "prereq": {
     "level": 10
    },
-   "bodyPointBonus": 1
+   "bodyPointBonus": 1,
+   "rev": "b0c014ffb4"
   }
  },
  "folder": "cxPIGjcxqJdZTMQ5",

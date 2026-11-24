@@ -106,7 +106,8 @@
    "level": 3,
    "spellFrom": "feat",
    "automationNotes": "INT/WIS/CHA checks or saves only; must use the new roll.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "9f05f8914b"
   }
  },
  "folder": "DMcMPNJMAkcTYNF8",

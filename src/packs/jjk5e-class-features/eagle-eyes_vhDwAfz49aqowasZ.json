@@ -22,7 +22,9 @@
   "requirements": "Scout 5"
  },
  "flags": {
-  "jjk5e": {}
+  "jjk5e": {
+   "rev": "71a860ea56"
+  }
  },
  "folder": "Jrayu2BI11U3R1zF",
  "effects": [

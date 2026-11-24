@@ -197,7 +197,8 @@
       "NoGM": "JJK 5e: debe haber un GM conectado para invocar o retirar tokens.",
       "NeedDnd5e": "JJK 5e V.6 necesita el sistema D&D 5e.",
       "NoInspiration": "JJK 5e: {name} no tiene inspiración para usar este mindset.",
-      "GMOnly": "Solo el GM puede hacer eso."
+      "GMOnly": "Solo el GM puede hacer eso.",
+      "GMDeclined": "El GM rechazó o no respondió la petición."
     },
     "Settings": {
       "autoSpendCE": {
@@ -351,6 +352,11 @@
       "playerGMRequests": {
         "Name": "Permitir solicitudes de los jugadores al DJ (aprobación manual)",
         "Hint": "Desactivado por defecto. Si se activa, cada solicitud requiere aprobación explícita del DJ activo; la identidad indicada por el cliente no está autenticada."
+      },
+      "updateMenu": {
+        "Name": "Actualizar objetos de los actores",
+        "Label": "Actualizar automatización",
+        "Hint": "Reemplaza la automatización de los objetos JJK que ya tienen los actores por la versión actual del compendio (conserva el estado de cada personaje)."
       }
     },
     "Feats": {
@@ -634,6 +640,17 @@
       "Hint": "Crea tu propia copia de la criatura (puedes editar estadísticas, nombre y token). Tu técnica invocará tu copia. ✎ = ya es tuya: abre su hoja.",
       "Created": "{name} creado: edítalo libremente, tus invocaciones ya lo usan.",
       "None": "Este personaje no tiene habilidades de invocación."
+    },
+    "Update": {
+      "Title": "Actualizar automatización JJK",
+      "None": "{name}: la automatización JJK está al día.",
+      "NoneWorld": "Todos los objetos JJK de los actores están al día.",
+      "Prompt": "{n} objeto(s) JJK de {name} tienen una automatización más nueva en el compendio:",
+      "PromptWorld": "{n} actor(es) tienen objetos JJK con automatización más nueva:",
+      "Keeps": "Se conserva: usos gastados, cantidad, equipado/sintonizado, elecciones de avance, shikigami personales y tu habilidad de CE. Se reemplaza: actividades, efectos, descripción y flags JJK.",
+      "Done": "{name}: {n} objeto(s) actualizado(s).",
+      "DoneWorld": "{n} objeto(s) actualizado(s) en {actors} actor(es).",
+      "Notice": "JJK 5e {version}: {n} actor(es) tienen objetos con automatización desactualizada."
     }
   }
 }

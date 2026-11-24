@@ -98,7 +98,8 @@
     ]
    },
    "automationNotes": "Concentration; telepathic commands as a bonus action; repeats the save when damaged.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "cf294bfad0"
   }
  },
  "effects": [

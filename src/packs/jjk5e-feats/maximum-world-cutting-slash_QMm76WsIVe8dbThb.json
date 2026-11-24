@@ -100,7 +100,8 @@
     "Shrine"
    ],
    "automationNotes": "Maximum Dismantle damage (12 per die: base dice + prof extra CE), ignoring resistances, immunities and temp HP. Limb damaging.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "f10fef8c7c"
   }
  },
  "folder": "2XiAKaCJUnpH62hA",

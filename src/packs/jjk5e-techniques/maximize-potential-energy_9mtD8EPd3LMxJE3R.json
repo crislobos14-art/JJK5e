@@ -92,7 +92,8 @@
    "level": 11,
    "spellFrom": "feat",
    "automationNotes": "Keep up to CE mod charges on a miss; 3+ charges on Explosive Power: +30 ft and thunder damage; 1 CE buys 2 charges.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "be01e0467f"
   }
  },
  "folder": "F6im2Ck5LFiG7ZIX",

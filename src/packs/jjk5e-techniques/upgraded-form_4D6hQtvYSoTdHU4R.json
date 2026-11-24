@@ -194,7 +194,8 @@
    "level": 6,
    "spellFrom": "feat",
    "automationNotes": "Energy Blast upgrade: add CE mod once per turn to ranged CE damage. Upgrades always on unless in another core's form.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "4ce6bc1458"
   }
  },
  "folder": "IyJg53UICeEoqtxa",

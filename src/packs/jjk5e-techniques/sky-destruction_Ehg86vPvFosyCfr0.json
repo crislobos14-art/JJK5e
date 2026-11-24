@@ -153,7 +153,8 @@
     ]
    },
    "automationNotes": "Damage: 2 × CE mod per creature/size it collides with (shown once — multiply).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "48acf9a757"
   }
  },
  "folder": "sHDJB680OC5pd1by",

@@ -96,7 +96,8 @@
    "technique": "Heart Catch",
    "level": 3,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "ba28803b61"
   }
  },
  "effects": [

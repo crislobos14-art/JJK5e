@@ -156,7 +156,8 @@
    "technique": "Starlight Symphony",
    "level": 6,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "534db3d520"
   }
  },
  "effects": [

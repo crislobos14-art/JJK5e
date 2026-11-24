@@ -170,7 +170,8 @@
    "technique": "Esoteric Art",
    "level": 1,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "5fc4c85335"
   }
  },
  "folder": "epKj1Q5Dq7LYHOJd",

@@ -111,7 +111,8 @@
  "effects": [],
  "flags": {
   "jjk5e": {
-   "techniqueRoot": "Esoteric Art"
+   "techniqueRoot": "Esoteric Art",
+   "rev": "d585da8101"
   }
  },
  "_key": "!items!1600B1v5cBczonpg"

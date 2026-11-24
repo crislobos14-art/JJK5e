@@ -38,7 +38,8 @@
     "Pachinko Fever"
    ],
    "automationNotes": "Pachinko attacks outside the domain: 30 ft, +CE mod damage, −1 CE (Green Balls free). No Expectation.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "63916841b5"
   }
  },
  "folder": "UYi4Xs2gTgIgFdZ7",

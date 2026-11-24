@@ -203,7 +203,8 @@
    "level": 3,
    "spellFrom": "feat",
    "automationNotes": "OAs against the regression have disadvantage. Objects: CE check DC 10 + 3 per size above Medium.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "d770c0afda"
   }
  },
  "folder": "6YaSgqVRe4IqL8er",

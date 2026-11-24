@@ -98,7 +98,8 @@
    "level": 11,
    "spellFrom": "feat",
    "automationNotes": "Circuits now last 8 hours (adjust the effect duration).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "534cc245ae"
   }
  },
  "folder": "hm057iS0RUqvPJaN",

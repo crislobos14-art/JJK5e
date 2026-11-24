@@ -92,7 +92,8 @@
     ]
    },
    "automationNotes": "Enter the technique's damage as the heal. +2 CE: the target saves CON; on a success it regains 2 × Rotten Blood damage more.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "2d83ca0014"
   }
  },
  "folder": "sHDJB680OC5pd1by",

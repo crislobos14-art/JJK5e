@@ -227,7 +227,8 @@
    "level": 11,
    "spellFrom": "feat",
    "automationNotes": "Main necrotic assumes attacks per action = 1 (+1 with Extra Attack at 5th). +3d8 per extra CE (scale). Bludgeoning only on a failed save (Midi halves it: remove on success).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "20e5881606"
   }
  },
  "effects": [

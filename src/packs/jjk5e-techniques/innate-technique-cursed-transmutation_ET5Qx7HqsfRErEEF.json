@@ -111,7 +111,8 @@
  "effects": [],
  "flags": {
   "jjk5e": {
-   "techniqueRoot": "Cursed Transmutation"
+   "techniqueRoot": "Cursed Transmutation",
+   "rev": "fb9ce33005"
   }
  },
  "_key": "!items!ET5Qx7HqsfRErEEF"

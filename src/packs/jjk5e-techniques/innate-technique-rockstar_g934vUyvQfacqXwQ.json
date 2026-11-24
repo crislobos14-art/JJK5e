@@ -111,7 +111,8 @@
  "effects": [],
  "flags": {
   "jjk5e": {
-   "techniqueRoot": "Rockstar"
+   "techniqueRoot": "Rockstar",
+   "rev": "f5910d996d"
   }
  },
  "_key": "!items!g934vUyvQfacqXwQ"

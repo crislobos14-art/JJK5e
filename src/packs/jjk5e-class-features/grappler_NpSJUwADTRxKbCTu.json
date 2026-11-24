@@ -70,7 +70,8 @@
  "flags": {
   "jjk5e": {
    "fightingStyle": true,
-   "improved": false
+   "improved": false,
+   "rev": "b19e567c27"
   }
  },
  "folder": "I1ItOooRBoVLqHCS",

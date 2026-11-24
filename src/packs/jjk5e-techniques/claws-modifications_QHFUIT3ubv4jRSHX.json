@@ -198,7 +198,8 @@
    "level": 3,
    "spellFrom": "feat",
    "automationNotes": "Brutal is a toggle effect on the item; Elemental/Pure: change the claw damage type or tick 'ignore resistance' (Midi: DamageReduction bypass) by hand. Healing from Absorbing: enter the necrotic total.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "3b50477550"
   }
  },
  "folder": "TJotg7cBr19cOkoJ",

@@ -98,7 +98,8 @@
     "ouA0eQeNTPbAg5Zb": true
    },
    "automationNotes": "Also reduces every Boogie Woogie cost by 1 (min 1): pay the lower cost (GM).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "d7f74d8491"
   }
  },
  "folder": "JUFxrHmgG8mOdlrV",

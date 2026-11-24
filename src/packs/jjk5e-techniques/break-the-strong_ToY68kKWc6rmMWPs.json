@@ -26,7 +26,8 @@
    "technique": "Inverse",
    "level": 6,
    "automationNotes": "Damaging save: advantage if the damage is above your threshold, disadvantage below. Resolve while Inverse is active.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "a9e68ec626"
   }
  },
  "folder": "bh2ZyC5GSVoaToIo",

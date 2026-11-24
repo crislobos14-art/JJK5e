@@ -141,7 +141,8 @@
    "technique": "Rot",
    "level": 3,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "483e36cd77"
   }
  },
  "effects": [

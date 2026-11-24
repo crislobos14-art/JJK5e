@@ -110,7 +110,8 @@
     "BYmBLfm5BYDJi6wX": 1
    },
    "automationNotes": "Each extra CE: one more object's properties or +1 ft cube. Add the created weapon to your inventory.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "11c7362e25"
   }
  },
  "folder": "dT7FkGZ40euglS6C",

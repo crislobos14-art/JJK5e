@@ -118,7 +118,8 @@
    "level": 1,
    "spellFrom": "feat",
    "automationNotes": "Remove the target's damage-over-time effects (bleeding, OverTime damage) by hand; temp HP last 1 hour.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "798176e55f"
   }
  },
  "folder": "dNStemY1SSBJjSwq",

@@ -154,7 +154,8 @@
    "level": 11,
    "spellFrom": "feat",
    "automationNotes": "Concentration. Escape check: your eyes take 2 per point it beats your DC. Eye HP = ½ max HP.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "e1c433f357"
   }
  },
  "effects": [

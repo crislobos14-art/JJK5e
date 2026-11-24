@@ -104,7 +104,8 @@
    "level": 3,
    "spellFrom": "feat",
    "automationNotes": "Soul channelling: 2 of the dead's features, keeping your own (not from two techniques at once).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "66f51805dc"
   }
  },
  "folder": "z1MGG49oTB7xZ6Pc",

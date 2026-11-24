@@ -166,7 +166,8 @@
    "technique": "Pachinko Fever",
    "level": 11,
    "automationNotes": "Uses = fever points (gain one per round when dropped to 1 HP during the Jackpot; lost at the end of combat).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "b720237b66"
   }
  },
  "folder": "30lfiZHWDrH4G6F5",

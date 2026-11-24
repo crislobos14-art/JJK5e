@@ -22,7 +22,9 @@
   "requirements": "Warrior 14"
  },
  "flags": {
-  "jjk5e": {}
+  "jjk5e": {
+   "rev": "e23550c611"
+  }
  },
  "folder": "7ecbupybBLUFyYzw",
  "effects": [

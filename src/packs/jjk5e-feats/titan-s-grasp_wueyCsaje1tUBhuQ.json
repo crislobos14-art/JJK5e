@@ -74,7 +74,8 @@
     "Missile Fist"
    ],
    "automationNotes": "Reduce the damage by your Missile Fist damage roll.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "e443113978"
   }
  },
  "folder": "NrFEIsdcWt7L52EL",

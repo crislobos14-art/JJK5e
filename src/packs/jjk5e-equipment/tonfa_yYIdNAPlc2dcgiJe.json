@@ -67,7 +67,8 @@
  },
  "flags": {
   "jjk5e": {
-   "priceUSD": "$400"
+   "priceUSD": "$400",
+   "rev": "8b338788f2"
   }
  },
  "effects": [

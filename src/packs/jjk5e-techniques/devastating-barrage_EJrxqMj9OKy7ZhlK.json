@@ -190,7 +190,8 @@
    "technique": "Missile Fist",
    "level": 3,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "9102186707"
   }
  },
  "folder": "coN536PDmNM37MtV",

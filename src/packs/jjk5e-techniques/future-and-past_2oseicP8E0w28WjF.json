@@ -181,7 +181,8 @@
    "level": 3,
    "spellFrom": "feat",
    "automationNotes": "Uses track foretelling rolls (2 per long rest + 1 from a short rest). Declare before the roll.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "4b9b36afb2"
   }
  },
  "folder": "uhouPoPESjs6aBsz",

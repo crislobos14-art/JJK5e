@@ -29,7 +29,8 @@
     }
    },
    "bodyCost": 1,
-   "bodyCategory": "str"
+   "bodyCategory": "str",
+   "rev": "2bf9fdf828"
   }
  },
  "folder": "fG9dHqhvzewoqwrt",

@@ -93,7 +93,8 @@
    "level": 3,
    "spellFrom": "feat",
    "automationNotes": "Puppet traits: 2 Minor + 2 Lesser. Drag its actor onto the scene.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "5db4508a25"
   }
  },
  "folder": "OLsap1LLdAsbuhbG",

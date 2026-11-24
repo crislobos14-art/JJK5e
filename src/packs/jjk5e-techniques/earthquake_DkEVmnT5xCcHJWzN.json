@@ -249,7 +249,8 @@
     ]
    },
    "automationNotes": "Only creatures on the ground. Centipede stat points: edit your centipede actor.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "d8a270a8f6"
   }
  },
  "effects": [

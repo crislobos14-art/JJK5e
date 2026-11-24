@@ -205,7 +205,8 @@
    "technique": "Missile Fist",
    "level": 6,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "d2bb8fdc06"
   }
  },
  "effects": [

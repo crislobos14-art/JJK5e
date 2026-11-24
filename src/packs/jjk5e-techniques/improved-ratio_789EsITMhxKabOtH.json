@@ -26,7 +26,8 @@
    "technique": "Ratio",
    "level": 11,
    "automationNotes": "Ratio rolls 2d10 (+1d10 per extra CE up to CE mod); +4 critical dice.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "084b021f81"
   }
  },
  "folder": "SXVh9xBdNDfszcIg",

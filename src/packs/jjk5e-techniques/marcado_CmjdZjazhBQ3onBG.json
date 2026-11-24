@@ -115,7 +115,8 @@
    "level": 3,
    "spellFrom": "feat",
    "automationNotes": "Dice shown as 2d8: use your weapon's die and damage type.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "58c981cd5a"
   }
  },
  "folder": "LeKt9DxatfKKBe3c",

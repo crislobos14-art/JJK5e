@@ -306,7 +306,8 @@
    "level": 1,
    "spellFrom": "feat",
    "automationNotes": "Build the puppet as a Construct actor (STR 15 / CON 14 / DEX 13 + CE mod points, AC 10 + DEX, your HD by material). Command: bonus action (actions), reaction (reactions). Cannon/Volley recharge 5–6; attack bonuses follow the text.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "e1d21ea45b"
   }
  },
  "folder": "OLsap1LLdAsbuhbG",

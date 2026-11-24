@@ -367,7 +367,8 @@
    "level": 3,
    "spellFrom": "feat",
    "automationNotes": "Punchline damage can't kill (stop at 1 HP).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "cab320d630"
   }
  },
  "effects": [

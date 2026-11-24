@@ -144,7 +144,8 @@
     ]
    },
    "automationNotes": "Willing or helpless target. Control its token; you keep your stats except its technique features and CE.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "352329475c"
   }
  },
  "effects": [

@@ -26,7 +26,8 @@
    "technique": "Moon Dregs",
    "level": 11,
    "automationNotes": "Edit the Moon Dregs actor: +CE mod to AC, STR, DEX, CON; 3 attacks.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "a3e3a6b337"
   }
  },
  "folder": "z6mgJlgIkKDRJURh",

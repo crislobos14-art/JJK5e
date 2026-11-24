@@ -78,7 +78,9 @@
   }
  },
  "flags": {
-  "jjk5e": {}
+  "jjk5e": {
+   "rev": "2b7d13cbe0"
+  }
  },
  "effects": [
   {

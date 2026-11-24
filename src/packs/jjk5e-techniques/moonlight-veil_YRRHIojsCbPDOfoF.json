@@ -100,7 +100,8 @@
    "technique": "New Shadow Style",
    "level": 11,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "7c44d604c1"
   }
  },
  "folder": "afNhLz8cb88QgbyD",

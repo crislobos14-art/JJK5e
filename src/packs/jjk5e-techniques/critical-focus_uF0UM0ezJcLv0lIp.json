@@ -26,7 +26,8 @@
    "technique": "Ratio",
    "level": 1,
    "automationNotes": "Extra critical dice: add them on the weapon (Extra Critical Damage field), e.g. 1 at 1st, 3 at 3rd, 4 at 6th, 5 at 11th.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "6fe7fb6616"
   }
  },
  "folder": "SXVh9xBdNDfszcIg",

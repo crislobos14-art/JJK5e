@@ -124,7 +124,8 @@
    "forTechniques": [
     "Heart Catch"
    ],
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "6583a197cc"
   }
  },
  "effects": [

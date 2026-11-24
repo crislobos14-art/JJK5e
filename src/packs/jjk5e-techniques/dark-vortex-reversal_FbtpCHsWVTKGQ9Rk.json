@@ -209,7 +209,8 @@
    "reversal": true,
    "spellFrom": "feat",
    "automationNotes": "Concentration; failed save: pulled 10 ft closer.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "5bb8a689e5"
   }
  },
  "folder": "IGfpCBBJLQfBc6m2",

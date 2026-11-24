@@ -145,7 +145,8 @@
    "technique": "Laplace’s Demon",
    "level": 11,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "24dcd8e6cf"
   }
  },
  "folder": "uhouPoPESjs6aBsz",

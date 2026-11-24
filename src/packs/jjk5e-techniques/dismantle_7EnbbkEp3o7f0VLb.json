@@ -150,7 +150,8 @@
     ]
    },
    "automationNotes": "Damage: base dice (1/2/3/4 at 1st/6th/11th/18th) + 1d12 per extra CE. Advantage vs creatures whose passive Perception < your DC. Crit range +1 at 3rd, 6th, 11th and 18th (set the threshold).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "e929d729fa"
   }
  },
  "folder": "m9ZssDMA8savxH5G",

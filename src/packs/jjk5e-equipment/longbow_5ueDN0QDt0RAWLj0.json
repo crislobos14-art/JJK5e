@@ -68,7 +68,8 @@
  },
  "flags": {
   "jjk5e": {
-   "priceUSD": "$5,000"
+   "priceUSD": "$5,000",
+   "rev": "56bdcd96ee"
   }
  },
  "_key": "!items!5ueDN0QDt0RAWLj0"

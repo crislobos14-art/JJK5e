@@ -26,7 +26,8 @@
    "technique": "Star Rage",
    "level": 6,
    "automationNotes": "Up to 3 × CE mod mass; with 5+ mass: advantage on STR/CON checks and saves, +1 per further mass.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "af2974e9ed"
   }
  },
  "folder": "21st6P4AJoi9hlmG",

@@ -125,7 +125,8 @@
    "level": 1,
    "spellFrom": "feat",
    "automationNotes": "Once per turn: 1 claw (2 at 6th, 3 at 11th), 1 CE each.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "836ae62f49"
   }
  },
  "folder": "fx5WSQ1mGtKNDLmm",

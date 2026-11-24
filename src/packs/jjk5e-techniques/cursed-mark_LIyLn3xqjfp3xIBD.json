@@ -155,7 +155,8 @@
    "technique": "Schrift X",
    "level": 6,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "5f47454249"
   }
  },
  "folder": "sHIaW6mkEHmwduDu",

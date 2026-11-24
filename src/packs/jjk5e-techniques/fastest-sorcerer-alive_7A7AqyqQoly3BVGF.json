@@ -26,7 +26,8 @@
    "technique": "Projection Sorcery",
    "level": 11,
    "automationNotes": "Toggle the effect while Projection is active. +20 ft more at the start of each turn (Acceleration stacks).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "5f941031bb"
   }
  },
  "folder": "RqqBayaXFFZrEuE3",

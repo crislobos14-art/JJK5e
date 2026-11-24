@@ -178,7 +178,8 @@
    "level": 3,
    "spellFrom": "feat",
    "automationNotes": "Chaos Bolt auto-casts at 3rd/5th/8th level (6th/11th/18th): 2d8 + 1d6 per spell level above 1st. Doubles on the d8s: it leaps.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "1667f4f00d"
   }
  },
  "folder": "CpSgW3tLoueRa6XV",

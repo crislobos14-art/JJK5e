@@ -168,7 +168,8 @@
    "forTechniques": [
     "Regalia"
    ],
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "3e530324fe"
   }
  },
  "effects": [

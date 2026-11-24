@@ -118,7 +118,8 @@
      "manual": "Advantage on Dexterity saving throws and Strength checks. Additional limited action each turn: one weapon attack, Dash, Disengage, Hide or Use an Object. Foundry does not enforce this extra action."
     }
    },
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "11da552ecb"
   }
  },
  "folder": "WIi7n6E644owqihn",

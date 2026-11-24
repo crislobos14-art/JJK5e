@@ -113,7 +113,8 @@
    "level": 11,
    "spellFrom": "feat",
    "automationNotes": "Undo damage and CE spent (except this) and positions in 100 ft since the start of your previous turn — GM resets.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "6865f6591b"
   }
  },
  "folder": "OPfUdWvA8mZmDQ8i",

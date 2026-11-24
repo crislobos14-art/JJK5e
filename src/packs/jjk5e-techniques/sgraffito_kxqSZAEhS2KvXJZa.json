@@ -220,7 +220,8 @@
    "level": 6,
    "spellFrom": "feat",
    "automationNotes": "Painting manipulation is now a bonus action; traps +2 dice (+4 at 11th); 30-ft terrain; sturdier structures.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "e2b2f46fc7"
   }
  },
  "effects": [

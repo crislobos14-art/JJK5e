@@ -142,7 +142,8 @@
    "technique": "Disaster Storms",
    "level": 6,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "f076563468"
   }
  },
  "effects": [

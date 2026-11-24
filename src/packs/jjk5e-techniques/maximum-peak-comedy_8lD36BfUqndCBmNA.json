@@ -217,7 +217,8 @@
    "technique": "Comedian",
    "level": 11,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "4fcd194d92"
   }
  },
  "folder": "8AlwpNPBMedHlchF",

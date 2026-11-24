@@ -111,7 +111,8 @@
  "effects": [],
  "flags": {
   "jjk5e": {
-   "techniqueRoot": "Solo Forbidden Zone"
+   "techniqueRoot": "Solo Forbidden Zone",
+   "rev": "3ac1a174df"
   }
  },
  "_key": "!items!cVS3rOxClxBPcQP5"

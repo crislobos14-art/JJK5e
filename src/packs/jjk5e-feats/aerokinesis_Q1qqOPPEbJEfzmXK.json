@@ -108,7 +108,8 @@
    "forTechniques": [
     "Disaster Storms"
    ],
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "88604b41f3"
   }
  },
  "effects": [

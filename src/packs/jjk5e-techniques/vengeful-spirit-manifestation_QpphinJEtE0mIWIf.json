@@ -165,7 +165,8 @@
    "level": 3,
    "spellFrom": "feat",
    "automationNotes": "Trigger: damage above your level + CE mod. Spirit acts berserk on your turn, charmed by you, within 200 ft.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "5abe686086"
   }
  },
  "folder": "fx5WSQ1mGtKNDLmm",

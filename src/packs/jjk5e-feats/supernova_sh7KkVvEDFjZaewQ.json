@@ -177,7 +177,8 @@
     "Blood Manipulation"
    ],
    "automationNotes": "Each orb costs 5 CE and 5 HP (up to prof orbs); use once per orb.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "295e6a0777"
   }
  },
  "effects": [

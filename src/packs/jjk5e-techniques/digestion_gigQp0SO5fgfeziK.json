@@ -120,7 +120,8 @@
    "level": 6,
    "spellFrom": "feat",
    "automationNotes": "Hunger of the Accursed and Regurgitation cost 1 less (min 1): adjust when using them.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "43265e727e"
   }
  },
  "folder": "xeaTaRsDQ88YPtDB",

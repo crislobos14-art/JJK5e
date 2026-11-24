@@ -22,7 +22,9 @@
   "requirements": "Cursed Vessel"
  },
  "flags": {
-  "jjk5e": {}
+  "jjk5e": {
+   "rev": "f4ef7193bf"
+  }
  },
  "folder": "A3CBV9dvsdKk3l4V",
  "_key": "!items!akVkjIzoHyDUfdie"

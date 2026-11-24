@@ -217,7 +217,8 @@
    "technique": "Rockstar",
    "level": 1,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "122c6e852e"
   }
  },
  "folder": "vosb36eMO9PhuX42",

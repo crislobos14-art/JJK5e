@@ -93,7 +93,8 @@
    "level": 6,
    "spellFrom": "feat",
    "automationNotes": "Spirit summon cost is reduced by your CE modifier (min 1); 20 spirits before the WIS save.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "76ed1ede1c"
   }
  },
  "folder": "f8ljC8WN5acnKcA4",

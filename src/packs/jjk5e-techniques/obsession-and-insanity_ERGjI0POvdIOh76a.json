@@ -84,7 +84,8 @@
    "technique": "Faceless God",
    "level": 6,
    "automationNotes": "Corruption cap 50% (75% at 11th, 100% at 18th). Paranoia die: d10 → d6 (50%) → d4 (75%) → automatic (100%). 90%: WIS save or random movement.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "86c38377c7"
   }
  },
  "folder": "TxiITYXHPOTbqkOW",

@@ -114,7 +114,8 @@
    "level": 6,
    "spellFrom": "feat",
    "automationNotes": "Next hit on it is a critical that ignores resistance (immunity → resistance) and ends the stun.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "bcbf180f1e"
   }
  },
  "effects": [

@@ -342,7 +342,8 @@
     "1ulJ6X7ZfZYIMQss": 3
    },
    "automationNotes": "Piece size by damage taken: <10% minor, 25%+ medium, 50%+ major. 18th: Resonance also lowers max HP. Major part: the damage applies whether or not it saves.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "580d60b4d9"
   }
  },
  "folder": "YmMAY3fFTK6UIkG2",

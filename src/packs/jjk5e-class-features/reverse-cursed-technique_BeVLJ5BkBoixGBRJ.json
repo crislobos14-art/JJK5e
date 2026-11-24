@@ -22,7 +22,9 @@
   "requirements": "Support Specialist 5"
  },
  "flags": {
-  "jjk5e": {}
+  "jjk5e": {
+   "rev": "9ea33dbf41"
+  }
  },
  "folder": "8dvEkkHwQxeLRi3Y",
  "effects": [

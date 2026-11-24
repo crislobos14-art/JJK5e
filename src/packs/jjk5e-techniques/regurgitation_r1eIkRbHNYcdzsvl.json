@@ -100,7 +100,8 @@
    "technique": "Voracity",
    "level": 3,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "b88a20d16d"
   }
  },
  "folder": "xeaTaRsDQ88YPtDB",

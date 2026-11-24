@@ -93,7 +93,8 @@
     "hNJjLKYxQtIoCxkj": 1
    },
    "automationNotes": "Altered shikigami: half the base's HP; −1 CE per size step down. Shikigami summons stay on Divine Dogs / Trial / Totality.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "f15832c2f9"
   }
  },
  "folder": "gEGcEQE7nJFCsor6",

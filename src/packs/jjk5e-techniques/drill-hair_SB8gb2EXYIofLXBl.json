@@ -250,7 +250,8 @@
    "technique": "Hair Manipulation",
    "level": 3,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "e5a0af2e4a"
   }
  },
  "folder": "gqEhAM7a9IFAzEwy",

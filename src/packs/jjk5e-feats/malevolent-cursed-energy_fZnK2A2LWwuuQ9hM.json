@@ -88,7 +88,8 @@
   "jjk5e": {
    "prereq": {
     "ceScore": 20
-   }
+   },
+   "rev": "9cb246d8de"
   }
  },
  "effects": [

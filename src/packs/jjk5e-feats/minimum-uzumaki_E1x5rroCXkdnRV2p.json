@@ -216,7 +216,8 @@
    ],
    "ceSteps": {},
    "automationNotes": "Scale = combined CR − 2 (no CE). Ignores resistance like Maximum: Uzumaki.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "27c45877b6"
   }
  },
  "folder": "808kDeN1ffx0XP3c",

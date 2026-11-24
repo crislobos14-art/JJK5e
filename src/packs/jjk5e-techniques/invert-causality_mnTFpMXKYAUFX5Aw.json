@@ -116,7 +116,8 @@
    "level": 11,
    "spellFrom": "feat",
    "automationNotes": "Guaranteed hit (treat the attack as a hit); ignore range; the trigger is wasted (undo its damage).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "9e7c822c52"
   }
  },
  "folder": "6YaSgqVRe4IqL8er",

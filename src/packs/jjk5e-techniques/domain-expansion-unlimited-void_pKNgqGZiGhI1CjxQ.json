@@ -189,7 +189,8 @@
    "domainActivity": "NZiRylxnq6mO5VYi",
    "spellFrom": "feat",
    "automationNotes": "Repeat the save every minute; Greater Restoration or Wish ends it. Creatures touching you are excluded.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "808f8c9102"
   }
  },
  "effects": [

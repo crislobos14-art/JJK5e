@@ -22,7 +22,9 @@
   "requirements": "Human (Superhuman)"
  },
  "flags": {
-  "jjk5e": {}
+  "jjk5e": {
+   "rev": "de467b9d4a"
+  }
  },
  "folder": "FDVrGmw22BclKBnR",
  "_key": "!items!eqYYbcJBJ0xkTokw"

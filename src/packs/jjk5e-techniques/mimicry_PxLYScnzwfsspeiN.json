@@ -163,7 +163,8 @@
    "technique": "Vengeful Spirit Manipulation",
    "level": 6,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "a15c1f0829"
   }
  },
  "folder": "fx5WSQ1mGtKNDLmm",

@@ -130,7 +130,8 @@
    "level": 6,
    "spellFrom": "feat",
    "automationNotes": "Ends on damage (simplified: RAW allows a repeat save). Disadvantage on other saves: apply by hand.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "47276c5a82"
   }
  },
  "effects": [

@@ -167,7 +167,8 @@
    "level": 11,
    "spellFrom": "feat",
    "automationNotes": "Scale +1d8 per extra transfigured creature; split dice for extra attacks. Self-Alteration is free on your turn.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "cdf61e58e5"
   }
  },
  "folder": "sz7xFTLSgxx5bxtq",

@@ -260,7 +260,8 @@
     ]
    },
    "automationNotes": "Fail by 5+: speed 0 until end of its turn (GM). Fire reduction shows as temp HP soaking the hit.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "6c3847fdeb"
   }
  },
  "folder": "sHDJB680OC5pd1by",

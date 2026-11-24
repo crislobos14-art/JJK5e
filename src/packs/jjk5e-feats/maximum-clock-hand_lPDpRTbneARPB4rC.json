@@ -256,7 +256,8 @@
     "Golden Hour"
    ],
    "automationNotes": "Minute Hand: once per round. CE save = the target's better of WIS/CHA.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "0558c46209"
   }
  },
  "folder": "d3tvju1gFLiRbf1c",

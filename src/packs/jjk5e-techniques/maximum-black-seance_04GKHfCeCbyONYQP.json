@@ -98,7 +98,8 @@
    "level": 11,
    "spellFrom": "feat",
    "automationNotes": "Physical Overload: enter the dead's HP as temp HP. Soul Overload: all its features (minimum CE costs, no domain).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "f581a73604"
   }
  },
  "folder": "z1MGG49oTB7xZ6Pc",

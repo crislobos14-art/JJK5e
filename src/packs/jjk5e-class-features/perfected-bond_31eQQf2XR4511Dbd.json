@@ -22,7 +22,9 @@
   "requirements": "Shikigami User 20"
  },
  "flags": {
-  "jjk5e": {}
+  "jjk5e": {
+   "rev": "5e85d5c145"
+  }
  },
  "folder": "69XiiJo14iwd80Zo",
  "_key": "!items!31eQQf2XR4511Dbd"

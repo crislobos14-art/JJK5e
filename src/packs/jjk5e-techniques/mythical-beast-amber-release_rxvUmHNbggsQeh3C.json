@@ -802,7 +802,8 @@
     "cVKrpaZ3MezN66DU": 2
    },
    "automationNotes": "Each stage lasts 5 rounds; after 5 rounds in Stage 5 you die. Remove the previous stage's effect when advancing. Extra attacks/actions per stage: track by hand. Usable once in your life.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "69e43d6d71"
   }
  },
  "effects": [

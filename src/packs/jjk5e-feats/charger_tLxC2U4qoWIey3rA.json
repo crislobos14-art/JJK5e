@@ -88,7 +88,8 @@
  "flags": {
   "jjk5e": {
    "automation": "automated",
-   "automationNotes": "+5 damage only after a 10-ft straight-line move (remove the +5 otherwise)."
+   "automationNotes": "+5 damage only after a 10-ft straight-line move (remove the +5 otherwise).",
+   "rev": "8f3c870787"
   }
  },
  "folder": "cxPIGjcxqJdZTMQ5",

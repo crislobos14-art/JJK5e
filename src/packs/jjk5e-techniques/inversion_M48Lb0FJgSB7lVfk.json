@@ -173,7 +173,8 @@
    "technique": "Inverse",
    "level": 1,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "44e55bbcc6"
   }
  },
  "folder": "bh2ZyC5GSVoaToIo",

@@ -147,7 +147,8 @@
    "technique": "Ten Shadows",
    "level": 6,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "5cd966faac"
   }
  },
  "folder": "gEGcEQE7nJFCsor6",

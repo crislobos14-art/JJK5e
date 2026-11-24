@@ -140,7 +140,8 @@
    "level": 11,
    "spellFrom": "feat",
    "automationNotes": "+5 ft reach on hair techniques; hair = Grade 1 tool (Special Grade at 18th).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "cc143c019c"
   }
  },
  "folder": "gqEhAM7a9IFAzEwy",

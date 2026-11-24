@@ -172,7 +172,8 @@
    "domainActivity": "MN0be4SB5YtWDO4A",
    "spellFrom": "feat",
    "automationNotes": "Hostiles without fly speed are falling throughout (20d6 max = 120).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "0efbb101f7"
   }
  },
  "folder": "i7KDxPjzj0GuzdPl",

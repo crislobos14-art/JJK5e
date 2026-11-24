@@ -240,7 +240,8 @@
     "dcQm0JQlx7Bps7r8": 1
    },
    "automationNotes": "Detonation: 1d8 per nail plus extra CE invested (enter as scale).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "0df396e7b9"
   }
  },
  "folder": "YmMAY3fFTK6UIkG2",

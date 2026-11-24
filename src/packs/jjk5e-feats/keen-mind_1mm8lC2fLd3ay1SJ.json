@@ -26,7 +26,9 @@
   }
  },
  "flags": {
-  "jjk5e": {}
+  "jjk5e": {
+   "rev": "e5e5bf64f2"
+  }
  },
  "effects": [
   {

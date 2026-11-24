@@ -81,7 +81,8 @@
     "Fate"
    ],
    "automationNotes": "Within 30 ft of your Destined One: advantage on saves against charmed and frightened.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "565c8b375f"
   }
  },
  "folder": "MeEjv8rwdOA6DSvK",

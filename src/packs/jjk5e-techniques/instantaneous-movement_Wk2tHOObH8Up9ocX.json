@@ -169,7 +169,8 @@
    "level": 3,
    "spellFrom": "feat",
    "automationNotes": "Adjust Jin charges on Store and Release's uses.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "83f06240fe"
   }
  },
  "folder": "F6im2Ck5LFiG7ZIX",

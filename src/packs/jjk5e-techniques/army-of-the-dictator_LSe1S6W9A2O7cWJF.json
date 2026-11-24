@@ -116,7 +116,8 @@
    "technique": "Star Dictator",
    "level": 11,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "12e64d95dd"
   }
  },
  "folder": "ba0AWxHF6sBvbrZq",

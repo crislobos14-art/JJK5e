@@ -156,7 +156,8 @@
    "level": 6,
    "spellFrom": "feat",
    "automationNotes": "Second part = your attack's damage doubled as a critical (d8 + STR assumed). Area becomes difficult terrain.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "85c7441c58"
   }
  },
  "folder": "SXVh9xBdNDfszcIg",

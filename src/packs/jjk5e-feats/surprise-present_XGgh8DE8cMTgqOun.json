@@ -100,7 +100,8 @@
     "Contractual Recreation"
    ],
    "automationNotes": "Object damage by size (2d10 shown, Medium). Weapon instead: attack the attacker at advantage. Cost: twice the receipt's CE.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "de0a838db9"
   }
  },
  "folder": "UU2pjYTH69wH4knu",

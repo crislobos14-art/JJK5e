@@ -112,7 +112,8 @@
     "level": 3
    },
    "automationNotes": "Roll with Glass Box's shatter: extra slashing per weakening. Fragility/Size are applied by the GM.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "fa4fa83db8"
   }
  },
  "folder": "sHDJB680OC5pd1by",

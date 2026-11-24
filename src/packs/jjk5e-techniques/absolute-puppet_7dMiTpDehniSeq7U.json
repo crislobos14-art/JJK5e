@@ -93,7 +93,8 @@
    "level": 11,
    "spellFrom": "feat",
    "automationNotes": "Puppet traits: 2 of each tier incl. Absolute. Drag its actor onto the scene.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "2211c37361"
   }
  },
  "folder": "OLsap1LLdAsbuhbG",

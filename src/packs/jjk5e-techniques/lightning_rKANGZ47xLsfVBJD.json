@@ -219,7 +219,8 @@
    "technique": "Disaster Storms",
    "level": 3,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "1b05845ca1"
   }
  },
  "folder": "5WRl9NqkIbDZzpyp",

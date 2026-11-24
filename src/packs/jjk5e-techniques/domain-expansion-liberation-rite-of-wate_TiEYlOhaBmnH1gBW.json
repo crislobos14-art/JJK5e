@@ -203,7 +203,8 @@
    "domainActivity": "MpCwl8qwmgSrp9NC",
    "spellFrom": "feat",
    "automationNotes": "Difficult terrain without swim speed. Jellyfish: CE mod of them, 30 HP, 1 attack each, count as Moon Dregs.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "946968ec9c"
   }
  },
  "folder": "z6mgJlgIkKDRJURh",

@@ -93,7 +93,8 @@
    "level": 18,
    "spellFrom": "feat",
    "automationNotes": "Jackpot lasts CE mod minutes; RCT as if 2 × CE mod spent, as a free action.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "782be6f93a"
   }
  },
  "folder": "30lfiZHWDrH4G6F5",

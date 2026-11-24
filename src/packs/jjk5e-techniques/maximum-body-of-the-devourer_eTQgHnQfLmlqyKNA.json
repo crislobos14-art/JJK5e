@@ -109,7 +109,8 @@
     "mhfBeFLgedquCkLf": 1
    },
    "automationNotes": "Use its stat block (keep mental scores, CE, HP); enter its HP as the temp HP.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "c63fa183b2"
   }
  },
  "folder": "xeaTaRsDQ88YPtDB",

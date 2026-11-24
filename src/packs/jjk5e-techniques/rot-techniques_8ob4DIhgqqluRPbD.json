@@ -730,7 +730,8 @@
     "uzDaQvE1ULCQVbLA": 1
    },
    "automationNotes": "HP costs are charged automatically: untick them in the dialog when using a Blood Bag. Crimson Rain damage: check the full text (1d10 shown). Blood Shield reducing a melee hit to 0: attacker CON or 2d8 acid.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "4ba73a5055"
   }
  },
  "effects": [

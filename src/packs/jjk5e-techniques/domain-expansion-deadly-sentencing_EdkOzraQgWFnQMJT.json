@@ -352,7 +352,8 @@
    "domainActivity": "MGIi4U05pEvEsoP9",
    "spellFrom": "feat",
    "automationNotes": "Evidence: 1 innocent · 2–9 guilty · 10–15 advantage, Confiscation · 15–19 Death Penalty · 20 instant, both. Conviction with Confiscation/Death Penalty: no Technique Burnout (remove it by hand).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "5227bebcb1"
   }
  },
  "folder": "jvdEqnCHI6BBkSgt",

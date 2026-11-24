@@ -26,7 +26,8 @@
    "technique": "Pain Killer",
    "level": 6,
    "automationNotes": "Pain Killer also removes one condition and stabilizes a dying creature.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "0cdc20d7f0"
   }
  },
  "folder": "dNStemY1SSBJjSwq",

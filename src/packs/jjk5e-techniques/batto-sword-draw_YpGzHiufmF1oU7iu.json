@@ -114,7 +114,8 @@
    "level": 3,
    "spellFrom": "feat",
    "automationNotes": "Uses your weapon damage (attack from the weapon if Midi can't read it here). End your turn behind the farthest target, no OAs.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "7a52eb0dbb"
   }
  },
  "folder": "afNhLz8cb88QgbyD",

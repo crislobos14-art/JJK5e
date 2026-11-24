@@ -22,7 +22,9 @@
   "requirements": "Cursed Corpse"
  },
  "flags": {
-  "jjk5e": {}
+  "jjk5e": {
+   "rev": "8d2a0b6e72"
+  }
  },
  "folder": "Mqs4VShTrWUzPyvN",
  "_key": "!items!e0r2srK6XXlfRH1Q"

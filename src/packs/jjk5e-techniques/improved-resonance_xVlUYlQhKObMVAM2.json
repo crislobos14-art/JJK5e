@@ -138,7 +138,8 @@
    "level": 11,
    "spellFrom": "feat",
    "automationNotes": "Only vs incapacitated, restrained, stunned, petrified or paralyzed creatures.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "ea9e1d4e87"
   }
  },
  "effects": [

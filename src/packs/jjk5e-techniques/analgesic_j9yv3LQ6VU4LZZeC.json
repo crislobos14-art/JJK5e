@@ -108,7 +108,8 @@
    "technique": "Pain Killer",
    "level": 11,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "a2bf3c7b49"
   }
  },
  "folder": "dNStemY1SSBJjSwq",

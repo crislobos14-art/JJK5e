@@ -26,7 +26,8 @@
    "technique": "Miracle",
    "level": 11,
    "automationNotes": "Miraculous Outcome total of 20+ counts as a natural 20 (no Black Flash, no Miracle).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "66adbf5b82"
   }
  },
  "folder": "tl97VGJouG41Z3rd",

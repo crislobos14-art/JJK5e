@@ -169,7 +169,8 @@
    "technique": "Projection Sorcery",
    "level": 1,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "60f9c46d19"
   }
  },
  "folder": "RqqBayaXFFZrEuE3",

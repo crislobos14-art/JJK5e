@@ -55,7 +55,8 @@
    "level": 3,
    "spellFrom": "feat",
    "automationNotes": "Small, Medium and Large throws may be an action or a bonus action (change the activation when you throw).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "7ec17693b0"
   }
  },
  "folder": "g4gimERTa06iViza",

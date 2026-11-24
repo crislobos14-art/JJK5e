@@ -1573,6 +1573,7 @@ async function gmDismiss({ actorUuid, sceneId }) {
 
 /** Extra GM-side handlers registered by later systems (domains, curses...). */
 const GM_EXTRA = {};
+const GM_QUERY = `${MODULE_ID}.gmRequest`;
 
 GM_EXTRA.tokenSwap = async ({ sceneId, sourceId, targetId, actorUuid }) => {
   const scene = game.scenes.get(sceneId);
@@ -1588,13 +1589,42 @@ GM_EXTRA.tokenSwap = async ({ sceneId, sourceId, targetId, actorUuid }) => {
   ], { animate: false, jjk5eTokenSwap: true });
 };
 
+/** GM side of a player request (socket or CONFIG.queries). Resolves true if performed. */
+async function handleGMRequest(msg) {
+  if (!game.user.isGM || !setting("playerGMRequests") || !msg?.requestedBy) return false;
+  const requester = game.users.get(msg.requestedBy);
+  const action = String(msg.action ?? "");
+  const allowed = new Set(["summon", "dismiss", "tokenSwap", "domainZone", "domainZoneResize", "domainZoneDelete",
+    "domainUpdate", "customizeShikigami"]);
+  if (!requester?.active || requester.isGM || !allowed.has(action)) return false;
+  const actor = msg.payload?.actorUuid ? await fromUuid(msg.payload.actorUuid).catch(() => null) : null;
+  // GM approval is explicit: client-provided user IDs are NOT a trusted identity.
+  const confirmed = await confirmDialog("JJK 5e: privileged request",
+    `<p>Request allegedly from <b>${esc(requester.name)}</b>: <b>${esc(action)}</b> for ${esc(actor?.name ?? "unresolved actor")}.</p>
+     <p>Client identifiers are untrusted. Verify with the player before approving.</p>`);
+  if (!confirmed) return false;
+  try {
+    if (action === "summon") await gmSummon(msg.payload);
+    else if (action === "dismiss") await gmDismiss(msg.payload);
+    else if (GM_EXTRA[action]) await GM_EXTRA[action](msg.payload);
+  } catch (err) { console.error(`${MODULE_ID} | GM request`, err); return false; }
+  return true;
+}
+
 function viaGM(action, payload) {
   if (game.user.isGM) return GM_EXTRA[action] ? GM_EXTRA[action](payload) : (action === "summon" ? gmSummon(payload) : gmDismiss(payload));
   const gm = game.users.activeGM ?? game.users.find((u) => u.isGM && u.active);
   if (!gm) return ui.notifications.warn(t("Notify.NoGM"));
   // Remote GM requests are disabled unless the world GM opts in.
   if (!setting("playerGMRequests")) return ui.notifications.warn("JJK 5e: Ask the GM to perform this action.");
-  game.socket.emit(`module.${MODULE_ID}`, { action, payload, gm: gm.id, requestedBy: game.user.id });
+  const msg = { action, payload, gm: gm.id, requestedBy: game.user.id };
+  // Foundry 13+: CONFIG.queries returns the GM's answer; older cores fall back to the socket.
+  if (typeof gm.query === "function" && CONFIG.queries?.[GM_QUERY]) {
+    return gm.query(GM_QUERY, msg, { timeout: 120000 })
+      .then((done) => { if (!done) ui.notifications.warn(t("Notify.GMDeclined")); return done; })
+      .catch((err) => { console.warn(`${MODULE_ID} | GM query`, err); ui.notifications.warn(t("Notify.GMDeclined")); return false; });
+  }
+  game.socket.emit(`module.${MODULE_ID}`, msg);
 }
 
 async function summon(actor, name, count = 1) {
@@ -1693,6 +1723,7 @@ function panelHTML(actor) {
       </div>
       <div class="jjk-head-btns">
         <button type="button" data-action="pointBuy" title="${t("PointBuy.Title")}"><i class="fas fa-dice-d20"></i></button>
+        <button type="button" data-action="updateAutomation" title="${t("Update.Title")}"><i class="fas fa-arrows-rotate"></i></button>
         ${hr ? "" : `<button type="button" data-action="chooseTechnique" title="${t("Panel.ChooseTechnique")}"><i class="fas fa-hand-sparkles"></i></button>
         <button type="button" data-action="ceAbility" title="${t("Panel.SetAbility")}"><i class="fas fa-brain"></i></button>`}</div>
     </header>
@@ -1773,7 +1804,8 @@ const PANEL_ACTIONS = {
   limbRoll: (actor) => rollLimb(actor),
   summon: (actor, target, root) => summon(actor, root.querySelector("[name=summonName]")?.value,
     root.querySelector("[name=summonCount]")?.valueAsNumber),
-  dismiss: (actor) => dismissSummons(actor)
+  dismiss: (actor) => dismissSummons(actor),
+  updateAutomation: (actor) => updateAutomation(actor)
 };
 
 function makePanelClass() {
@@ -1856,6 +1888,177 @@ function addHeaderButton(app, root) {
 }
 
 /* -------------------------------------------- */
+/*  Automation updater                           */
+/* -------------------------------------------- */
+
+// Items copied from the compendium onto an actor do not follow later module updates.
+// Each pack item carries flags.jjk5e.rev (a hash of its automation, stamped by tools/stamp-rev.py).
+// The updater swaps an outdated item's automation for the compendium version while keeping its
+// per-character state (uses spent, equipped, quantity, advancement choices, personal summons, CE ability).
+const UPDATABLE_TYPES = new Set(["feat", "weapon", "equipment", "consumable", "tool", "loot", "container"]);
+// Translated worlds import the packs as world.jjk5e-*; those items update from the world copy.
+const SOURCE_RE = new RegExp(`^Compendium\\.((?:${MODULE_ID}|world)\\.jjk5e-[\\w-]+)\\.Item\\.(\\w+)$`);
+
+function itemSource(item) {
+  const uuid = item._stats?.compendiumSource ?? item.flags?.core?.sourceId;
+  const m = typeof uuid === "string" ? SOURCE_RE.exec(uuid) : null;
+  return m && game.packs.get(m[1]) ? { uuid, pack: m[1], id: m[2] } : null;
+}
+
+const revCache = new Map();
+async function packRevs(packId) {
+  if (revCache.has(packId)) return revCache.get(packId);
+  const pack = game.packs.get(packId);
+  const index = pack ? await pack.getIndex({ fields: ["flags.jjk5e.rev"] }) : null;
+  const map = new Map((index ?? []).map((e) => [e._id, e.flags?.jjk5e?.rev ?? null]));
+  revCache.set(packId, map);
+  return map;
+}
+
+/** Outdated JJK items on an actor: [{item, src}] where the compendium rev differs from the item's. */
+async function outdatedItems(actor) {
+  const out = [];
+  for (const item of actor?.items ?? []) {
+    if (!UPDATABLE_TYPES.has(item.type)) continue;
+    const src = itemSource(item);
+    if (!src) continue;
+    const rev = (await packRevs(src.pack)).get(src.id);
+    if (rev && rev !== item.flags?.jjk5e?.rev) out.push({ item, src });
+  }
+  return out;
+}
+
+const KEEP_SYSTEM = ["quantity", "equipped", "attuned", "attunement", "prepared", "identified", "container", "uses.spent"];
+const KEEP_JJK = ["lastScaling", "fractionalSpent"];
+
+function freshData(item, fresh) {
+  const old = item.toObject();
+  const data = foundry.utils.deepClone(fresh);
+  for (const k of KEEP_SYSTEM) {
+    const v = foundry.utils.getProperty(old.system, k);
+    if (v !== undefined) foundry.utils.setProperty(data.system, k, v);
+  }
+  // Activity state: uses spent and personalised summon profiles (customizeShikigami).
+  for (const [id, a] of Object.entries(data.system.activities ?? {})) {
+    const o = old.system.activities?.[id];
+    if (!o) continue;
+    if (o.uses?.spent !== undefined && a.uses) a.uses.spent = o.uses.spent;
+    if (Array.isArray(a.profiles) && Array.isArray(o.profiles)) {
+      for (const p of a.profiles) {
+        const op = o.profiles.find((x) => x._id === p._id);
+        if (op?.uuid && op.uuid !== p.uuid && !String(op.uuid).startsWith("Compendium.")) Object.assign(p, { uuid: op.uuid, name: op.name });
+      }
+    }
+  }
+  // Advancement choices.
+  for (const [id, adv] of Object.entries(data.system.advancement ?? {})) {
+    const o = old.system.advancement?.[id];
+    if (o?.value !== undefined) adv.value = o.value;
+  }
+  // CE ability swap (chooseCEAbility rewrites @abilities.<old>.mod in item formulas).
+  const choice = item.actor?.getFlag(MODULE_ID, "ceAbility");
+  if (choice === "wis" || choice === "cha") {
+    const other = `@abilities.${choice === "wis" ? "cha" : "wis"}.mod`;
+    const oldJson = JSON.stringify(old.system);
+    const json = JSON.stringify(data.system);
+    if (!oldJson.includes(other) && json.includes(other)) data.system = JSON.parse(json.split(other).join(`@abilities.${choice}.mod`));
+  }
+  const flags = foundry.utils.deepClone(old.flags ?? {});
+  flags.jjk5e = foundry.utils.deepClone(data.flags?.jjk5e ?? {});
+  for (const k of KEEP_JJK) if (old.flags?.jjk5e?.[k] !== undefined) flags.jjk5e[k] = old.flags.jjk5e[k];
+  return { data, flags, old };
+}
+
+async function updateItemAutomation(item, fresh) {
+  const { data, flags, old } = freshData(item, fresh);
+  const R = foundry.data.operators?.ForcedReplacement;
+  const forced = (v) => (R ? R.create(v) : v);
+  // Embedded effects: the compendium ones, keeping the on/off state of toggles the player set.
+  const keepDisabled = new Map((old.effects ?? []).map((e) => [e._id, e.disabled]));
+  const effects = (data.effects ?? []).map((e) => (keepDisabled.has(e._id) && e.transfer ? { ...e, disabled: keepDisabled.get(e._id) } : e));
+  try {
+    if (!R) throw new Error("ForcedReplacement unavailable");
+    await item.update({
+      name: data.name, img: data.img,
+      system: { ...data.system, activities: forced(data.system.activities ?? {}), advancement: forced(data.system.advancement ?? {}) },
+      flags: { ...flags, jjk5e: forced(flags.jjk5e) }
+    }, { jjk5eSync: true, diff: false });
+  } catch (err) {
+    // Fallback: recreate the item with the same id (references by id keep working).
+    console.warn(`${MODULE_ID} | in-place update failed for ${item.name}, recreating`, err);
+    const actor = item.actor;
+    const created = { ...data, _id: item.id, flags, effects, folder: old.folder, sort: old.sort, _stats: old._stats };
+    await actor.deleteEmbeddedDocuments("Item", [item.id], { jjk5eSync: true });
+    await actor.createEmbeddedDocuments("Item", [created], { keepId: true, jjk5eSync: true });
+    return;
+  }
+  const freshIds = new Set(effects.map((e) => e._id));
+  const remove = item.effects.filter((e) => !freshIds.has(e.id)).map((e) => e.id);
+  if (remove.length) await item.deleteEmbeddedDocuments("ActiveEffect", remove);
+  const existing = new Set(item.effects.map((e) => e.id));
+  const upd = effects.filter((e) => existing.has(e._id));
+  const add = effects.filter((e) => !existing.has(e._id));
+  if (upd.length) await item.updateEmbeddedDocuments("ActiveEffect", upd, { recursive: false, diff: false });
+  if (add.length) await item.createEmbeddedDocuments("ActiveEffect", add, { keepId: true });
+}
+
+/**
+ * Update the JJK automation of an actor's items to the current module version.
+ * @param {Actor} actor
+ * @param {object} [options]
+ * @param {boolean} [options.prompt=true]  Ask before updating, listing the items.
+ * @returns {Promise<number>} Number of items updated.
+ */
+async function updateAutomation(actor, { prompt = true } = {}) {
+  actor = requireActor(actor);
+  if (!actor?.isOwner) return 0;
+  const list = await outdatedItems(actor);
+  if (!list.length) {
+    if (prompt) ui.notifications.info(t("Update.None", { name: actor.name }));
+    return 0;
+  }
+  if (prompt) {
+    const items = list.map(({ item }) => `<li>${esc(item.name)}</li>`).join("");
+    const ok = await confirmDialog(t("Update.Title"), `<p>${t("Update.Prompt", { name: esc(actor.name), n: list.length })}</p><ul class="jjk-update-list">${items}</ul><p class="notes">${t("Update.Keeps")}</p>`);
+    if (!ok) return 0;
+  }
+  let n = 0;
+  for (const { item, src } of list) {
+    try {
+      const doc = await game.packs.get(src.pack)?.getDocument(src.id);
+      if (!doc) continue;
+      await updateItemAutomation(item, doc.toObject());
+      n++;
+    } catch (err) { console.error(`${MODULE_ID} | update ${item.name}`, err); }
+  }
+  await applyScaling(actor);
+  refreshPanels(actor);
+  if (prompt) ui.notifications.info(t("Update.Done", { name: actor.name, n }));
+  return n;
+}
+
+/** GM: update every owned character/NPC in the world. */
+async function updateAllAutomation() {
+  if (!game.user.isGM) return 0;
+  const actors = [];
+  for (const a of game.actors ?? []) if ((await outdatedItems(a)).length) actors.push(a);
+  if (!actors.length) { ui.notifications.info(t("Update.NoneWorld")); return 0; }
+  const ok = await confirmDialog(t("Update.Title"), `<p>${t("Update.PromptWorld", { n: actors.length })}</p><ul class="jjk-update-list">${actors.map((a) => `<li>${esc(a.name)}</li>`).join("")}</ul><p class="notes">${t("Update.Keeps")}</p>`);
+  if (!ok) return 0;
+  let n = 0;
+  for (const a of actors) n += await updateAutomation(a, { prompt: false });
+  ui.notifications.info(t("Update.DoneWorld", { n, actors: actors.length }));
+  return n;
+}
+
+class JJKUpdateMenu extends (AppV2 ?? FormApplication) {
+  async render() {
+    updateAllAutomation();
+    return this;
+  }
+}
+
+/* -------------------------------------------- */
 /*  Init / Ready                                 */
 /* -------------------------------------------- */
 
@@ -1892,13 +2095,20 @@ Hooks.once("init", () => {
     name: "JJK5E.Settings.importMenu.Name", label: "JJK5E.Settings.importMenu.Label",
     hint: "JJK5E.Settings.importMenu.Hint", icon: "fas fa-file-import", type: JJKImportMenu, restricted: true
   });
+  game.settings.registerMenu(MODULE_ID, "updateMenu", {
+    name: "JJK5E.Settings.updateMenu.Name", label: "JJK5E.Settings.updateMenu.Label",
+    hint: "JJK5E.Settings.updateMenu.Hint", icon: "fas fa-arrows-rotate", type: JJKUpdateMenu, restricted: true
+  });
+  if (CONFIG.queries) CONFIG.queries[GM_QUERY] = (msg) => handleGMRequest(msg);
+  game.settings.register(MODULE_ID, "lastSeenVersion", { scope: "world", config: false, type: String, default: "" });
 
   game.modules.get(MODULE_ID).api = {
     importAll, promptImport, spendCE, dataLanguage, baseName,
     regainCE: (actor, amount, label) => spendCE(actor, -Math.abs(amount), label || t("CE.Regained")),
     findPool, chooseTechnique, syncTechnique, promptCE, shortRestCE, chooseCEAbility, negativeEmotion,
     applyScaling, openPanel, maximumOutput, setReducedOutput, setSoulAwareness, setLimb, rollLimb,
-    summon, dismissSummons, syncResource, missingPrereqs, applyCEEffects, activateGroup, endGroup
+    summon, dismissSummons, syncResource, missingPrereqs, applyCEEffects, activateGroup, endGroup,
+    updateAutomation, updateAllAutomation, outdatedItems
   };
 });
 
@@ -1981,30 +2191,32 @@ Hooks.once("ready", async () => {
   });
 
   Hooks.on("renderActorSheet", (app, html) => addHeaderButton(app, html));
+  Hooks.on("renderChatMessageHTML", (message, html) => {
+    html?.querySelector?.("[data-jjk5e-update-all]")?.addEventListener("click", (ev) => { ev.preventDefault(); updateAllAutomation(); });
+  });
   Hooks.on("renderActorSheetV2", (app, element) => addHeaderButton(app, element));
 
-  game.socket.on(`module.${MODULE_ID}`, async (msg) => {
+  game.socket.on(`module.${MODULE_ID}`, (msg) => {
     if (!game.user.isGM || !isActiveGM() || (msg?.gm && msg.gm !== game.user.id)) return;
-    if (!setting("playerGMRequests") || !msg?.requestedBy) return;
-    const requester = game.users.get(msg.requestedBy);
-    const action = String(msg.action ?? "");
-    const allowed = new Set(["summon", "dismiss", "tokenSwap", "domainZone", "domainZoneResize", "domainZoneDelete",
-      "domainUpdate", "customizeShikigami"]);
-    if (!requester?.active || requester.isGM || !allowed.has(action)) return;
-    const actor = msg.payload?.actorUuid ? await fromUuid(msg.payload.actorUuid).catch(() => null) : null;
-    // GM approval is explicit: client-provided user IDs are NOT a trusted identity.
-    const confirmed = await confirmDialog("JJK 5e: privileged request",
-      `<p>Request allegedly from <b>${esc(requester.name)}</b>: <b>${esc(action)}</b> for ${esc(actor?.name ?? "unresolved actor")}.</p>
-       <p>Client identifiers are untrusted. Verify with the player before approving.</p>`);
-    if (!confirmed) return;
-    try {
-      if (action === "summon") await gmSummon(msg.payload);
-      else if (action === "dismiss") await gmDismiss(msg.payload);
-      else if (GM_EXTRA[action]) await GM_EXTRA[action](msg.payload);
-    } catch (err) { console.error(`${MODULE_ID} | GM request`, err); }
+    handleGMRequest(msg);
   });
 
   if (game.user.character) syncResource(game.user.character);
+  // After a module update: offer to refresh the automation of items already on actors.
+  const modVersion = game.modules.get(MODULE_ID)?.version ?? "";
+  if (isActiveGM() && game.settings.get(MODULE_ID, "lastSeenVersion") !== modVersion) {
+    await game.settings.set(MODULE_ID, "lastSeenVersion", modVersion);
+    setTimeout(async () => {
+      let stale = 0;
+      for (const actor of game.actors ?? []) if ((await outdatedItems(actor)).length) stale++;
+      if (!stale) return;
+      ChatMessage.create({
+        whisper: [game.user.id], speaker: { alias: "JJK 5e" },
+        content: `<p>${t("Update.Notice", { version: esc(modVersion), n: stale })}</p>
+          <button type="button" data-jjk5e-update-all><i class="fas fa-arrows-rotate"></i> ${t("Update.Title")}</button>`
+      });
+    }, 3000);
+  }
   if (isActiveGM() && setting("importedVersion") !== DATA_VERSION) {
     if (needsWorldImport()) await promptImport(false);
     else await setupFromModulePacks();

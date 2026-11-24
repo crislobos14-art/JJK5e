@@ -118,7 +118,8 @@
      "manual": "Advantage on Dexterity saving throws. Extra limited action each turn: one weapon attack, Dash, Disengage, Hide or Use an Object. Cannot stop time while Golden Week is active. These restrictions need GM adjudication."
     }
    },
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "0b4f56cd76"
   }
  },
  "folder": "OPfUdWvA8mZmDQ8i",

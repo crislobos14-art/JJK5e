@@ -173,7 +173,8 @@
     "gFS3FTelaA2euILe": 1
    },
    "automationNotes": "Tiny 1, Small 2, Medium 3, Large 4, Huge 6, Gargantuan 10 CE. Investigation vs your DC to discern.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "73ad5d24d7"
   }
  },
  "folder": "8b1T5CIAvTiipny3",

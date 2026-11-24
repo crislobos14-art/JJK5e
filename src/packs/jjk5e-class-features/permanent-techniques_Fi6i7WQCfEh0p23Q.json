@@ -22,7 +22,9 @@
   "requirements": "Support Specialist 20"
  },
  "flags": {
-  "jjk5e": {}
+  "jjk5e": {
+   "rev": "dd54247496"
+  }
  },
  "folder": "8dvEkkHwQxeLRi3Y",
  "_key": "!items!Fi6i7WQCfEh0p23Q"

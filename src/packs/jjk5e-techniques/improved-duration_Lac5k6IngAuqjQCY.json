@@ -26,7 +26,8 @@
    "technique": "Star Rage",
    "level": 3,
    "automationNotes": "Virtual Mass lasts 2 × CE mod rounds (3× at 11th, 4× at 18th).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "ee56369ab8"
   }
  },
  "folder": "21st6P4AJoi9hlmG",

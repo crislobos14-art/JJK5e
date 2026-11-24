@@ -202,7 +202,8 @@
     "0XCLedJf9yzGwtvr": 1
    },
    "automationNotes": "5+ CE: Maximum Output (concentration, 1 minute; save at turn start inside). At 11th: fail by 5+ = max damage and restrained.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "eacfb8607e"
   }
  },
  "effects": [

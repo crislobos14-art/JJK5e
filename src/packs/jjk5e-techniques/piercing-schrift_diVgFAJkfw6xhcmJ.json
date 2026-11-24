@@ -99,7 +99,8 @@
    "technique": "Schrift X",
    "level": 1,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "fe3ddf079d"
   }
  },
  "folder": "sHIaW6mkEHmwduDu",

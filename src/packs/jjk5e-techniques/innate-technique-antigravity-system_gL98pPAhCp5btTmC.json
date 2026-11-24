@@ -111,7 +111,8 @@
  "effects": [],
  "flags": {
   "jjk5e": {
-   "techniqueRoot": "Antigravity System"
+   "techniqueRoot": "Antigravity System",
+   "rev": "eab9b92bda"
   }
  },
  "_key": "!items!gL98pPAhCp5btTmC"

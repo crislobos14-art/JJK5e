@@ -100,7 +100,8 @@
    "technique": "Technique Extermination",
    "level": 3,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "6d462040e9"
   }
  },
  "folder": "lFpLbNxf0h2fGnvr",

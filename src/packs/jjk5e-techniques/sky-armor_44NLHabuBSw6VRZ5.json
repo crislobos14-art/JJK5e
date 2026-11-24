@@ -100,7 +100,8 @@
    "technique": "Sky Manipulation",
    "level": 3,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "484a90328f"
   }
  },
  "folder": "i7KDxPjzj0GuzdPl",

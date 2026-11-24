@@ -233,7 +233,8 @@
    "level": 1,
    "spellFrom": "feat",
    "automationNotes": "Starts with 1 hammer, 24 nails, 1 straw doll (track nails). 6th: DC 10 DEX to recover nails by touch.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "bc511fc858"
   }
  },
  "folder": "YmMAY3fFTK6UIkG2",

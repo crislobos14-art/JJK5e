@@ -118,7 +118,8 @@
    "technique": "Illusive Mirage",
    "level": 11,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "bdfb395380"
   }
  },
  "folder": "8b1T5CIAvTiipny3",

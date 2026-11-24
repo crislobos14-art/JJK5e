@@ -110,7 +110,8 @@
    "technique": "Solo Forbidden Zone",
    "level": 3,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "83b496c9c3"
   }
  },
  "folder": "pI3TNTzVyu2gPuxX",

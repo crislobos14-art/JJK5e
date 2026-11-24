@@ -81,7 +81,8 @@
    "technique": "Vairocana",
    "level": 11,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "f41e0830be"
   }
  },
  "folder": "CpSgW3tLoueRa6XV",

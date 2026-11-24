@@ -553,7 +553,8 @@
    "level": 1,
    "spellFrom": "feat",
    "automationNotes": "Damage applies only if you drop the materialization on a creature (2d6 per size above Tiny). Receipts are inventory items; wet receipts cannot be used.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "c25ae7fe33"
   }
  },
  "effects": [

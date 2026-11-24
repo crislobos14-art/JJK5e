@@ -128,7 +128,8 @@
    "level": 3,
    "spellFrom": "feat",
    "automationNotes": "Damage = your Regalia's damage (1d8 + STR + bonus assumed).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "720970a336"
   }
  },
  "folder": "jfP5e1LgOxgMmS1g",

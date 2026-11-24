@@ -102,7 +102,8 @@
    "level": 1,
    "spellFrom": "feat",
    "automationNotes": "Body swap is a character-sheet change (ability scores except INT/WIS/CHA, racial features, technique). Others spot it with a DC 30 Insight check (advantage if they knew the body's owner).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "fb8cf1ccb3"
   }
  },
  "folder": "suKJQVV38yYdZJCL",

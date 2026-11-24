@@ -104,7 +104,8 @@
     "7d2VFbEUkGc1ICIn": 1
    },
    "automationNotes": "Drag the Fang of Orochi actor; command all as a bonus action; HP 20 at 11th; destroyed fangs return after 1 minute.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "02daadfbf7"
   }
  },
  "folder": "DMcMPNJMAkcTYNF8",

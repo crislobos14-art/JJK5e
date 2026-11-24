@@ -89,7 +89,8 @@
    "level": 6,
    "spellFrom": "feat",
    "automationNotes": "Duplicate your actor with half current/max HP and CE; it acts after you and can only use Self-Alteration.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "b14638dfaf"
   }
  },
  "folder": "sz7xFTLSgxx5bxtq",

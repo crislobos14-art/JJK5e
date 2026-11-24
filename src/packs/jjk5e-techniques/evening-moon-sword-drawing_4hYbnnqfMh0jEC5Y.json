@@ -174,7 +174,8 @@
     "chqpgCFu0whYbncy": 1
    },
    "automationNotes": "Once per round per creature. Die shown as d8: use your weapon's.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "2f86fe9a37"
   }
  },
  "folder": "afNhLz8cb88QgbyD",

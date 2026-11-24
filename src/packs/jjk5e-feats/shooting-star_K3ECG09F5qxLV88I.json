@@ -109,7 +109,8 @@
     "Star Rage"
    ],
    "automationNotes": "Damage = twice your unarmed strike (d8 + STR shown: use your mass-increased die). Limb damaging on a failed save.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "5e0be0f5b9"
   }
  },
  "folder": "8WZAgQOeGTbPipxv",

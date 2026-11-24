@@ -160,7 +160,8 @@
    "domainActivity": "ZdNzm5fOHviM36fA",
    "spellFrom": "feat",
    "automationNotes": "Recreation and Contractual Control cost no CE inside the domain (skip the CE in the usage dialog).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "0dc9808869"
   }
  },
  "folder": "1Ch8dLVYSEvwWjZr",

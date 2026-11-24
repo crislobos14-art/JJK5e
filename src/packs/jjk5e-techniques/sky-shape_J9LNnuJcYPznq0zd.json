@@ -198,7 +198,8 @@
    "level": 1,
    "spellFrom": "feat",
    "automationNotes": "Redirect deals the missed attack's damage and effects (enter them). While Dodging: protect allies within 5 ft.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "913907f736"
   }
  },
  "folder": "i7KDxPjzj0GuzdPl",

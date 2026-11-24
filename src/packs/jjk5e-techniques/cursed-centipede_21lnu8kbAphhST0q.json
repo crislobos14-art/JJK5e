@@ -142,7 +142,8 @@
    "technique": "Centipede Shroud",
    "level": 1,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "23a207a5f4"
   }
  },
  "folder": "CxDLBZfVDaXb8XWS",

@@ -111,7 +111,8 @@
  "effects": [],
  "flags": {
   "jjk5e": {
-   "techniqueRoot": "Puppet Manipulation"
+   "techniqueRoot": "Puppet Manipulation",
+   "rev": "ccce28a6c9"
   }
  },
  "_key": "!items!OaTTeYZSBU9Pi4Lh"

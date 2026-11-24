@@ -56,7 +56,8 @@
    "level": 3,
    "spellFrom": "feat",
    "automationNotes": "Passive: while a Circuit is active, the module charges 1 CE less per 5 CE of a cost.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "cb9a757e97"
   }
  },
  "folder": "hm057iS0RUqvPJaN",

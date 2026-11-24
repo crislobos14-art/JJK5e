@@ -273,7 +273,8 @@
    "level": 1,
    "spellFrom": "feat",
    "automationNotes": "One core form at a time (1 minute). Defensive temp HP uses your CE resource: uses the CE resource slot (tertiary by default).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "4c4d011a52"
   }
  },
  "folder": "IyJg53UICeEoqtxa",

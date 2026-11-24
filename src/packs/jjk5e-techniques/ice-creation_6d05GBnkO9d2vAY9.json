@@ -176,7 +176,8 @@
     ]
    },
    "automationNotes": "Ice lasts until you end it, it's broken, or you are poisoned/incapacitated/unconscious.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "c147a16d4a"
   }
  },
  "effects": [

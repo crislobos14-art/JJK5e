@@ -86,7 +86,8 @@
    "level": 3,
    "spellFrom": "feat",
    "automationNotes": "Use the chosen word's activity as a bonus action or reaction.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "6721d5d658"
   }
  },
  "folder": "hKdstL12BA2dMsHA",

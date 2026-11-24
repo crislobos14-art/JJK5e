@@ -22,7 +22,9 @@
   "requirements": "Cursed Spirit (Vengeful)"
  },
  "flags": {
-  "jjk5e": {}
+  "jjk5e": {
+   "rev": "5d863de770"
+  }
  },
  "folder": "MrUJYYzCm8S5kHBr",
  "effects": [

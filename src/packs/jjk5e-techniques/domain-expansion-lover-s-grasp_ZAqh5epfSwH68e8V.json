@@ -162,7 +162,8 @@
    "domainActivity": "au7KB8W4Pw0yrasU",
    "spellFrom": "feat",
    "automationNotes": "Love Hands auto-hit; creatures auto-fail grapple/shove contests and saves forced by the hands.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "b1280ae3bf"
   }
  },
  "effects": [

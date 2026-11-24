@@ -148,7 +148,8 @@
    "technique": "Ice Formation",
    "level": 6,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "7a8a0f95b0"
   }
  },
  "effects": [

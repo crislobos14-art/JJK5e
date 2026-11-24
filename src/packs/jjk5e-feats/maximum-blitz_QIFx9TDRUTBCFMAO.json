@@ -101,7 +101,8 @@
     "Triple Core"
    ],
    "automationNotes": "Scale = 10-ft steps − 1. Speed +15 ft per CE spent on Divebomb.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "263d7e6b82"
   }
  },
  "effects": [

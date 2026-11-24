@@ -172,7 +172,8 @@
    "domainActivity": "P1nUkQL96PfNSqRn",
    "spellFrom": "feat",
    "automationNotes": "A creature that dies in the domain becomes an extra Insect Swarm (doesn't count against the limit).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "ae11a3c31e"
   }
  },
  "folder": "THumTyfrAaZo0XzQ",

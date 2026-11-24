@@ -22,7 +22,9 @@
   "requirements": "Strategist 20"
  },
  "flags": {
-  "jjk5e": {}
+  "jjk5e": {
+   "rev": "4a7e80d3d3"
+  }
  },
  "folder": "D1jub3NHW0Fbryho",
  "_key": "!items!V6zTNgTn332yUeWB"

@@ -26,7 +26,8 @@
    "technique": "Inverse",
    "level": 3,
    "automationNotes": "Below threshold: vulnerable; above: resistant (even vs bypass). Resolve while Inverse is active.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "1c80fccccf"
   }
  },
  "folder": "bh2ZyC5GSVoaToIo",

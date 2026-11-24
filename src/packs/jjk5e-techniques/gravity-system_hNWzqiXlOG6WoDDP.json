@@ -179,7 +179,8 @@
     ]
    },
    "automationNotes": "Reaction: reduce the triggering damage by a Gravity System damage roll (GM applies). Perfect Gravity (18th) disadvantage/exhaustion is GM-ruled.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "16fa51a2c9"
   }
  },
  "effects": [

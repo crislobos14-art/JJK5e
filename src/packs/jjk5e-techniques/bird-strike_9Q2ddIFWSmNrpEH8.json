@@ -177,7 +177,8 @@
    "technique": "Black Bird Manipulation",
    "level": 11,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "15584e7e37"
   }
  },
  "folder": "51kqIFJDFNS150R8",

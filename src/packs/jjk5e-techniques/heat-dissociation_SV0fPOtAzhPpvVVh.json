@@ -128,7 +128,8 @@
     ]
    },
    "automationNotes": "Damage also lowers max HP until a long rest (apply as HP max reduction).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "6214a04615"
   }
  },
  "folder": "sHDJB680OC5pd1by",

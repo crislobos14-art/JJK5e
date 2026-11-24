@@ -95,7 +95,8 @@
     "Auspicious Beast Summon"
    ],
    "automationNotes": "Set the scaling to the damage you took (+1 = 1): fire = 2 × that. Only while Kirin is active.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "cfab1bb358"
   }
  },
  "folder": "mHzbbOlvnwQSEnjZ",

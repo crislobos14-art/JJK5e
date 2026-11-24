@@ -22,7 +22,9 @@
   "requirements": "Human (Jujutsu Sorcerer)"
  },
  "flags": {
-  "jjk5e": {}
+  "jjk5e": {
+   "rev": "b7c98a8fb6"
+  }
  },
  "folder": "FDVrGmw22BclKBnR",
  "_key": "!items!MHEyZih4Y8MUC3r7"

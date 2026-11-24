@@ -103,7 +103,8 @@
     "gqJLJFDmqWTiSyFt": 2
    },
    "automationNotes": "Objects/structures only: +2 CE per size above Medium (that extra CE does not add damage); destroyed objects turn to ink.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "37b35ba060"
   }
  },
  "folder": "sHDJB680OC5pd1by",

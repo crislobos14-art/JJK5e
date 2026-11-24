@@ -155,7 +155,8 @@
    "level": 1,
    "spellFrom": "feat",
    "automationNotes": "Summon a stored spirit: action, CE = its CR. The CON save activity is the eating save.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "43b931080d"
   }
  },
  "folder": "f8ljC8WN5acnKcA4",

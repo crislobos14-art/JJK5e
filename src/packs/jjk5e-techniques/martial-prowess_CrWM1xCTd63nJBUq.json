@@ -239,7 +239,8 @@
    "level": 3,
    "spellFrom": "feat",
    "automationNotes": "Once per round, one option. Manji Kick: failed save also doubles the kick's bludgeoning damage.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "51110412fe"
   }
  },
  "folder": "z0OBRtMvDoArKlLl",

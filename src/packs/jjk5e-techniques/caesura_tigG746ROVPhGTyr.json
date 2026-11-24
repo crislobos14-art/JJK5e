@@ -92,7 +92,8 @@
    "technique": "Prayer Song",
    "level": 6,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "b09c2ddfcd"
   }
  },
  "folder": "LeKt9DxatfKKBe3c",

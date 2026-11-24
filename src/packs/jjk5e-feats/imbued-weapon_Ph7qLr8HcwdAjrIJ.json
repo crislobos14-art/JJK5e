@@ -109,7 +109,8 @@
     "Mythical Beast Amber"
    ],
    "automationNotes": "Imbued Weapon bolt: 1d12 per charge (scale = charges − 1).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "eacb4cd64a"
   }
  },
  "folder": "84RYYPEHHy0nXTWE",

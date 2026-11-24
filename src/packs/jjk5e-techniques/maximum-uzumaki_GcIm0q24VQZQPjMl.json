@@ -139,7 +139,8 @@
    "technique": "Cursed Spirit Manipulation",
    "level": 11,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "7b7c180c04"
   }
  },
  "folder": "f8ljC8WN5acnKcA4",

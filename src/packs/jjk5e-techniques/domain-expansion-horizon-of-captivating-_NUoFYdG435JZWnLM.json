@@ -187,7 +187,8 @@
     "X11WN98Wg3kWsTP8": 1
    },
    "automationNotes": "Death Swarm costs: eel 1, piranhas 2, serpent 4, killer whale 6, sperm whale 12 CE; each summon makes one guaranteed hit. Lasts indefinitely if no hostile creature is caught.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "26c71eda5b"
   }
  },
  "folder": "Ao9OCl7PHP0hxQBD",

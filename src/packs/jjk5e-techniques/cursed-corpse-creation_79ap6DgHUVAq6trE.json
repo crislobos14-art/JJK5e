@@ -95,7 +95,8 @@
    "level": 1,
    "spellFrom": "feat",
    "automationNotes": "Imbue: transfer any CE to the core (deduct it manually; core max by size table).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "531c829d19"
   }
  },
  "folder": "qwzwYySzpsiw4XHW",

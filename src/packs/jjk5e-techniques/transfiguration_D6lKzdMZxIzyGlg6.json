@@ -204,7 +204,8 @@
     ]
    },
    "automationNotes": "Necrotic from this technique lowers max HP until a long rest; at 0 HP the creature becomes a Transfigured Creature (not constructs).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "83425497b1"
   }
  },
  "folder": "sz7xFTLSgxx5bxtq",

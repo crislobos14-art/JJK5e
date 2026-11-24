@@ -218,7 +218,8 @@
    "technique": "Blood Manipulation",
    "level": 11,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "c722446b55"
   }
  },
  "folder": "WIi7n6E644owqihn",

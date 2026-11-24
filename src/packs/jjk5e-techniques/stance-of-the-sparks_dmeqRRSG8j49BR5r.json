@@ -96,7 +96,8 @@
    "technique": "Divergent Fist",
    "level": 11,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "4f02286a30"
   }
  },
  "folder": "z0OBRtMvDoArKlLl",

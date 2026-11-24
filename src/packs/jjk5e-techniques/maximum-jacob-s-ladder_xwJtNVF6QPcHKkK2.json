@@ -250,7 +250,8 @@
    "level": 11,
    "spellFrom": "feat",
    "automationNotes": "Undead, cursed spirits and evil creatures save at disadvantage. On a hit the object/barrier is destroyed and neutralized.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "e740a503e6"
   }
  },
  "folder": "lFpLbNxf0h2fGnvr",

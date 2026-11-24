@@ -111,7 +111,8 @@
  "effects": [],
  "flags": {
   "jjk5e": {
-   "techniqueRoot": "Technique Extermination"
+   "techniqueRoot": "Technique Extermination",
+   "rev": "b9c4c1a383"
   }
  },
  "_key": "!items!pIvIaUSbNnggUeH9"

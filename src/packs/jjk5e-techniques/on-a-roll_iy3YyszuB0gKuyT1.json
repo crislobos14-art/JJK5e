@@ -26,7 +26,8 @@
    "technique": "Pachinko Fever",
    "level": 6,
    "automationNotes": "After a Jackpot: advantage on the next domain's Event or Multiplier roll (roll 2d20kh).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "6a5a5117aa"
   }
  },
  "folder": "30lfiZHWDrH4G6F5",

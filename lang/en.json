@@ -197,7 +197,8 @@
       "NoGM": "JJK 5e: a GM must be connected to summon or dismiss tokens.",
       "NeedDnd5e": "JJK 5e V.6 requires the D&D 5e system.",
       "NoInspiration": "JJK 5e: {name} has no inspiration to use this mindset.",
-      "GMOnly": "Only the GM can do that."
+      "GMOnly": "Only the GM can do that.",
+      "GMDeclined": "The GM declined or did not answer the request."
     },
     "Settings": {
       "autoSpendCE": {
@@ -351,6 +352,11 @@
       "playerGMRequests": {
         "Name": "Allow player requests for GM operations (manual approval)",
         "Hint": "Disabled by default. If enabled, requests still require active-GM confirmation; client-reported identity is not authenticated."
+      },
+      "updateMenu": {
+        "Name": "Update items on actors",
+        "Label": "Update automation",
+        "Hint": "Replace the automation of JJK items already on actors with the current compendium version (keeps per-character state)."
       }
     },
     "Feats": {
@@ -634,6 +640,17 @@
       "Hint": "Creates your own copy of the creature (you can edit its stats, name and token). Your technique will summon your copy. ✎ = already yours: opens its sheet.",
       "Created": "{name} created: edit it freely, your summons now use it.",
       "None": "This character has no summon abilities."
+    },
+    "Update": {
+      "Title": "Update JJK automation",
+      "None": "{name}: JJK automation is up to date.",
+      "NoneWorld": "All JJK items on actors are up to date.",
+      "Prompt": "{n} JJK item(s) on {name} have newer automation in the compendium:",
+      "PromptWorld": "{n} actor(s) have JJK items with newer automation:",
+      "Keeps": "Kept: uses spent, quantity, equipped/attuned, advancement choices, personal shikigami and your CE ability. Replaced: activities, effects, description and JJK flags.",
+      "Done": "{name}: {n} item(s) updated.",
+      "DoneWorld": "{n} item(s) updated on {actors} actor(s).",
+      "Notice": "JJK 5e {version}: {n} actor(s) have items with outdated automation."
     }
   }
 }

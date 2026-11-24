@@ -86,7 +86,8 @@
    "level": 11,
    "spellFrom": "feat",
    "automationNotes": "Up to 4 × CE mod mass; works with melee weapons; crit range +1 per 4 mass; max damage to objects.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "1423617090"
   }
  },
  "folder": "21st6P4AJoi9hlmG",

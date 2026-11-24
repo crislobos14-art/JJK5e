@@ -22,7 +22,9 @@
   "requirements": "Sumerian (Rumelian)"
  },
  "flags": {
-  "jjk5e": {}
+  "jjk5e": {
+   "rev": "bf2764af96"
+  }
  },
  "folder": "cUxhy4eiPJek1pHp",
  "_key": "!items!LDvswkDWtZossfq3"

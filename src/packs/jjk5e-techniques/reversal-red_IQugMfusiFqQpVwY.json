@@ -152,7 +152,8 @@
     ]
    },
    "automationNotes": "Launched 20 ft per 2 CE (half on save).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "b5aa063dd4"
   }
  },
  "effects": [

@@ -232,7 +232,8 @@
     ]
    },
    "automationNotes": "Also usable as a bonus action or reaction. Destroying your own Construction tool refunds half its CE; a 4th-grade tool gives 5 CE (+5 per grade above).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "5492900ba7"
   }
  },
  "folder": "sHDJB680OC5pd1by",

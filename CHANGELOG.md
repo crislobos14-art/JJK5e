@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.59.0 — Actualizador de automatización e infraestructura
+Mejoras tomadas de módulos de referencia (Cauldron of Plentiful Resources, Gambit's Premades, Automated Conditions 5e):
+- **Actualizador de automatización**: los objetos JJK que ya están en los personajes se pueden actualizar a la versión del compendio. Botón ⟳ en el panel JJK, menú *Actualizar automatización* en los ajustes y aviso al GM tras cada actualización del módulo. Conserva usos gastados, cantidad, equipado, elecciones de avance, shikigami personales y la habilidad de CE.
+- Cada objeto del compendio lleva `flags.jjk5e.rev` (hash de su automatización); `tools/stamp-rev.py` lo genera y la CI lo verifica.
+- Peticiones de jugador al GM con `CONFIG.queries` (Foundry 13+): el jugador recibe la respuesta y un aviso si el GM la rechaza. El socket queda como respaldo.
+- API: `updateAutomation(actor)`, `updateAllAutomation()`, `outdatedItems(actor)`.
+- Desarrollo: `hotReload` para estilos e idiomas, `eslint.config.mjs` en el repo y lint en la CI.
+
 ## 1.58.0 — Revisión de feats
 - Auditados los 317 feats del manual contra su automatización; corregidos 49.
 - Variantes de activación que faltaban: Hollow Wicker Basket (acción/reacción), Simple Domain (acción), Supernova (acción), Curse Restoration (acción/reacción), Minimum: Uzumaki (acción), Incarnation, Perfect Sphere (mover/embestir).

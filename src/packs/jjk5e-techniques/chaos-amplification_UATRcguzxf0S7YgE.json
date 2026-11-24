@@ -99,7 +99,8 @@
    "level": 6,
    "spellFrom": "feat",
    "automationNotes": "Upcast Chaos Bolt: spend up to prof extra CE (enter as the bolt's scale).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "b269893686"
   }
  },
  "folder": "CpSgW3tLoueRa6XV",

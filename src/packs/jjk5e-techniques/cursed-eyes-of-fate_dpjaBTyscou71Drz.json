@@ -95,7 +95,8 @@
    "level": 3,
    "spellFrom": "feat",
    "automationNotes": "GM reveals one: resistances/immunities, CR/level, current HP, AC or an ability mod, emotions — or the target's threads.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "cb0cf847de"
   }
  },
  "folder": "UdYh82jLla1edrDf",

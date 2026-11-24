@@ -133,6 +133,19 @@ await api.regainCE(token.actor, 2);                    // regain 2 (e.g. short r
 
 Both behaviours can be switched off in the module settings.
 
+## Updating items already on characters
+
+Items on a character are copies: a module update fixes the compendium, not those copies.
+Each compendium item carries an automation revision (`flags.jjk5e.rev`).
+
+- After an update, the GM gets a chat message if some actors have outdated JJK items.
+- **Settings → JJK 5e → Update automation** updates every actor in the world.
+- The ⟳ button in a character's JJK panel updates that character only.
+- Macro or console: `game.modules.get("jjk5e").api.updateAutomation(actor)`.
+
+Kept on each item: uses spent, quantity, equipped/attuned, advancement choices, personal shikigami and the chosen CE ability.
+Replaced: activities, effects, description and JJK flags.
+
 ## JJK panel and token bar
 
 - Every character sheet gets a **JJK** button in its header (or run the macro *JJK: Open Panel*). The panel shows:

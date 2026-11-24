@@ -25,7 +25,9 @@
   "quantity": 1
  },
  "flags": {
-  "jjk5e": {}
+  "jjk5e": {
+   "rev": "0c2a0616d9"
+  }
  },
  "_key": "!items!b7laf759ZdpvexAa"
 }

@@ -299,7 +299,8 @@
     "Faceless God"
    ],
    "automationNotes": "Hand attacks raise Mental Corruption by 5% once per turn. Right Hand: advantage vs 50%+ corruption.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "1f652d5ba7"
   }
  },
  "effects": [

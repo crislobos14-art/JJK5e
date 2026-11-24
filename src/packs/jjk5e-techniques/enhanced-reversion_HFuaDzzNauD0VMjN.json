@@ -125,7 +125,8 @@
    "technique": "Retrograde",
    "level": 6,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "df960bc4b9"
   }
  },
  "folder": "6YaSgqVRe4IqL8er",

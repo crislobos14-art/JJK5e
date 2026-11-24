@@ -305,7 +305,8 @@
    "level": 1,
    "spellFrom": "feat",
    "automationNotes": "Remove the previous turn's effect when advancing (each one includes the earlier benefits).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "9aefd1831c"
   }
  },
  "effects": [

@@ -22,7 +22,9 @@
   "requirements": "Warrior 5"
  },
  "flags": {
-  "jjk5e": {}
+  "jjk5e": {
+   "rev": "dc08ded757"
+  }
  },
  "folder": "7ecbupybBLUFyYzw",
  "_key": "!items!qabuXVCcD2XEsf00"

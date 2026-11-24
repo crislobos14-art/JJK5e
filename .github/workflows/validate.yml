@@ -20,6 +20,10 @@ jobs:
           node --check scripts/jjk5e-rules.mjs
           node --check tools/build-packs.mjs
           node --check tools/audit-techniques.mjs
+      - name: Lint (ESLint, errors fail the build)
+        run: npx --yes eslint@9 scripts tests tools
+      - name: Automation revisions stamped (tools/stamp-rev.py)
+        run: python3 tools/stamp-rev.py --check
       - name: Pure rules regression tests
         run: node --test tests/*.test.mjs
       - name: Validate source JSON and compendium identity

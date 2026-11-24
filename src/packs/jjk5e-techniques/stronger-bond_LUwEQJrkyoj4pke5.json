@@ -79,7 +79,8 @@
    "technique": "Vengeful Spirit Manipulation",
    "level": 11,
    "automationNotes": "Spirit: +2 to two abilities (and max). You: +2 CE score while it's summoned (edit the actor).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "6905dc15e6"
   }
  },
  "folder": "fx5WSQ1mGtKNDLmm",

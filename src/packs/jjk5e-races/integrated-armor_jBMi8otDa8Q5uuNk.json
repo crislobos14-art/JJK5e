@@ -22,7 +22,9 @@
   "requirements": "Cursed Corpse (Hard Shell)"
  },
  "flags": {
-  "jjk5e": {}
+  "jjk5e": {
+   "rev": "94312daa06"
+  }
  },
  "folder": "Mqs4VShTrWUzPyvN",
  "effects": [

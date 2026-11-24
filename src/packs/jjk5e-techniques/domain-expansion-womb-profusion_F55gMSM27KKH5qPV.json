@@ -171,7 +171,8 @@
    "domainActivity": "iP8D8mWHr81LUj1z",
    "spellFrom": "feat",
    "automationNotes": "Difficult terrain in the domain; your spirits cost no CE; enemy spirits save CHA at turn start or are absorbed.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "6da5ffd694"
   }
  },
  "folder": "f8ljC8WN5acnKcA4",

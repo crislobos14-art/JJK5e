@@ -86,7 +86,8 @@
    "level": 11,
    "spellFrom": "feat",
    "automationNotes": "Use Dismantle's activity, changing its activation. Max Cleave (10 CE) can target a limb (Limb Damage table).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "73a5bf848f"
   }
  },
  "folder": "m9ZssDMA8savxH5G",

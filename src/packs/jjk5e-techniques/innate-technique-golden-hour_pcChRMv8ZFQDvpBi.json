@@ -111,7 +111,8 @@
  "effects": [],
  "flags": {
   "jjk5e": {
-   "techniqueRoot": "Golden Hour"
+   "techniqueRoot": "Golden Hour",
+   "rev": "ea2e0c153f"
   }
  },
  "_key": "!items!pcChRMv8ZFQDvpBi"

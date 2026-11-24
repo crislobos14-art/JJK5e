@@ -38,7 +38,8 @@
     "Retrograde"
    ],
    "automationNotes": "Regression: no OAs; up to prof CE, +1 DC/check per extra CE.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "fe4d37e673"
   }
  },
  "folder": "xdlt8ITade4Eg7u9",

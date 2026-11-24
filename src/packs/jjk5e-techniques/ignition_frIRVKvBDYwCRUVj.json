@@ -317,7 +317,8 @@
    "technique": "Blazing Courage",
    "level": 1,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "c15a4e4bba"
   }
  },
  "folder": "VITDORKyY9It9TdZ",

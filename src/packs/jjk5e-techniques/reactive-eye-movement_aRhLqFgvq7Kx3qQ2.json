@@ -122,7 +122,8 @@
    "level": 6,
    "spellFrom": "feat",
    "automationNotes": "Creatures under Immobilizing Eyes fail automatically.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "bcc79eb9de"
   }
  },
  "folder": "NgfqZW5WmZKy5Fbs",

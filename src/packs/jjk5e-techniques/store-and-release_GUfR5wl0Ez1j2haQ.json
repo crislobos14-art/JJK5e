@@ -180,7 +180,8 @@
    "technique": "Fa Jin",
    "level": 1,
    "automationNotes": "Item uses = Jin charges (max prof + level, empty after a long rest). Paying 1 CE instead of a charge: use the CE spend in the dialog. Damage die shown as d6; swap for your weapon die.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "1dbe1f0c6f"
   }
  },
  "folder": "F6im2Ck5LFiG7ZIX",

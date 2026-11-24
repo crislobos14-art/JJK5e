@@ -100,7 +100,8 @@
    "technique": "Eight Heads",
    "level": 11,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "d9ad6ab66c"
   }
  },
  "folder": "DMcMPNJMAkcTYNF8",

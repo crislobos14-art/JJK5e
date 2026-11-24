@@ -22,7 +22,9 @@
   "requirements": "Cursed Spirit (Cursed Womb)"
  },
  "flags": {
-  "jjk5e": {}
+  "jjk5e": {
+   "rev": "edf94c2d24"
+  }
  },
  "folder": "MrUJYYzCm8S5kHBr",
  "effects": [

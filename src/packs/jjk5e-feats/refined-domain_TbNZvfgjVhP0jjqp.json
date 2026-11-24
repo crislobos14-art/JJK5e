@@ -36,7 +36,8 @@
     "refinement": 400
    },
    "automationNotes": "Enable the effect of the benefit you chose. Cost Reduction is automatic while your domain is open.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "304d6bba1a"
   }
  },
  "folder": "w6CtJKH5qYx1fgN4",

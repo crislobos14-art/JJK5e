@@ -137,7 +137,8 @@
     "iekatqZz8ODvkP4j": 1
    },
    "automationNotes": "Cubes: AC = your CE DC, HP = 5 × CE mod. Failed DEX: pushed to the end of the connected cubes.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "1cf5aee6cb"
   }
  },
  "folder": "75t5TorhPqVS4tjs",

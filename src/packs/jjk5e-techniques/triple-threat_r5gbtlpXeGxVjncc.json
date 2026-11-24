@@ -26,7 +26,8 @@
    "technique": "Triple Core",
    "level": 3,
    "automationNotes": "Choose two more core options (see First Core); only one active at a time.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "7815471676"
   }
  },
  "folder": "IyJg53UICeEoqtxa",

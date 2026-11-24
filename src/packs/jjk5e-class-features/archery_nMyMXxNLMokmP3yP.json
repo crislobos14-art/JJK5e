@@ -24,7 +24,8 @@
  "flags": {
   "jjk5e": {
    "fightingStyle": true,
-   "improved": false
+   "improved": false,
+   "rev": "b6ce573c4a"
   }
  },
  "effects": [

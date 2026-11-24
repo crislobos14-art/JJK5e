@@ -140,7 +140,8 @@
    "level": 18,
    "spellFrom": "feat",
    "automationNotes": "Simple Domain costs no CE and moves with you.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "6df36ed37a"
   }
  },
  "folder": "afNhLz8cb88QgbyD",

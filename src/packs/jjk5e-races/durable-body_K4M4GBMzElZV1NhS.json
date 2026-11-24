@@ -22,7 +22,9 @@
   "requirements": "Cursed Vessel (Death Painting)"
  },
  "flags": {
-  "jjk5e": {}
+  "jjk5e": {
+   "rev": "b7f684e4a8"
+  }
  },
  "folder": "A3CBV9dvsdKk3l4V",
  "effects": [

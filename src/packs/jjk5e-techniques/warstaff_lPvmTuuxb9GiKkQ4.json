@@ -435,7 +435,8 @@
    "level": 1,
    "spellFrom": "feat",
    "automationNotes": "2 s: advantage on saves vs it; 4–6 s: the GM tells you its next actions. Affects up to CE mod creatures.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "6970df7e87"
   }
  },
  "folder": "GjZxtO8W2HfeT6Hl",

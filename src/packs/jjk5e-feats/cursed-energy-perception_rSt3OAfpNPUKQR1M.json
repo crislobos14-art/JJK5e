@@ -30,7 +30,8 @@
    "prereq": {
     "skill": "prc"
    },
-   "ceSenseRange": 90
+   "ceSenseRange": 90,
+   "rev": "673c776ca4"
   }
  },
  "effects": [

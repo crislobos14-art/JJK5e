@@ -159,7 +159,8 @@
    "level": 6,
    "spellFrom": "feat",
    "automationNotes": "Wall AC = your CE DC, HP = 10 × CE mod.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "765b554fbb"
   }
  },
  "folder": "75t5TorhPqVS4tjs",

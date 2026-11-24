@@ -230,7 +230,8 @@
     "Black Box"
    ],
    "automationNotes": "Block Strike damage shown as 2d8 + CE mod: check the full text.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "c1c06d3156"
   }
  },
  "effects": [

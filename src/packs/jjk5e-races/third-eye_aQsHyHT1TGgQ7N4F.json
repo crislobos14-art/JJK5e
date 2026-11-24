@@ -22,7 +22,9 @@
   "requirements": "Sumerian"
  },
  "flags": {
-  "jjk5e": {}
+  "jjk5e": {
+   "rev": "9e93934465"
+  }
  },
  "effects": [
   {

@@ -705,7 +705,8 @@
    "level": 1,
    "spellFrom": "feat",
    "automationNotes": "Every word also damages your vocal cords (1 HP per CE). Extra CE: +1 DC where the word says so (GM).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "aabf3de032"
   }
  },
  "effects": [

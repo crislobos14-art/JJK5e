@@ -111,7 +111,8 @@
  "effects": [],
  "flags": {
   "jjk5e": {
-   "techniqueRoot": "Centipede Shroud"
+   "techniqueRoot": "Centipede Shroud",
+   "rev": "8ca7cac9ec"
   }
  },
  "_key": "!items!BTG1284sBIfXglvE"

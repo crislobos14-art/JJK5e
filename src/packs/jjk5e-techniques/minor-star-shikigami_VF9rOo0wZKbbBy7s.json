@@ -150,7 +150,8 @@
    "level": 1,
    "spellFrom": "feat",
    "automationNotes": "Command all with a bonus action; otherwise they Dodge. Max prof minor stars (3 × prof at 11th).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "d4e9994e21"
   }
  },
  "effects": [

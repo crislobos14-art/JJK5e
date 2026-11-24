@@ -122,7 +122,8 @@
    "forTechniques": [
     "Blood Manipulation"
    ],
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "9d86fdd426"
   }
  },
  "effects": [

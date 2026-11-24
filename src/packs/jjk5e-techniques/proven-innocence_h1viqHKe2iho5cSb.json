@@ -71,7 +71,8 @@
     "WXaJ2kTOUtBHKcxS": 20
    },
    "automationNotes": "Uses the same trial and Evidence rolls as Deadly Sentencing; costs 20 CE without a free use.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "cda7bc5d10"
   }
  },
  "folder": "sHDJB680OC5pd1by",

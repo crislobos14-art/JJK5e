@@ -352,7 +352,8 @@
    "level": 1,
    "spellFrom": "feat",
    "automation": "automated",
-   "automationNotes": "Madness Removal: use the WIS save activity (DC = caster's CE DC; roll it from the caster's sheet or set the DC by hand)."
+   "automationNotes": "Madness Removal: use the WIS save activity (DC = caster's CE DC; roll it from the caster's sheet or set the DC by hand).",
+   "rev": "feab6b168f"
   }
  },
  "folder": "TxiITYXHPOTbqkOW",

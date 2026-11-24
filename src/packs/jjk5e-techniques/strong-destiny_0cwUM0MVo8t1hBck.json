@@ -133,7 +133,8 @@
    "level": 6,
    "spellFrom": "feat",
    "automationNotes": "+1 minute per extra CE on Fates (1 hour, +1 hour per CE at 11th): edit the Fate duration.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "8468460ed1"
   }
  },
  "effects": [

@@ -125,7 +125,8 @@
     ]
    },
    "automationNotes": "Reverse order; crashing objects/creatures take half.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "ae7a16b043"
   }
  },
  "folder": "sHDJB680OC5pd1by",

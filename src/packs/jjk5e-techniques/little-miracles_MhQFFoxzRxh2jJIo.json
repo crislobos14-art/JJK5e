@@ -74,7 +74,8 @@
    "technique": "Miracle",
    "level": 1,
    "automationNotes": "Item uses = Miracles held (max 6). Other Miracle features spend from here: lower the uses by hand when they say 'spend a Miracle'.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "fbeab48e97"
   }
  },
  "folder": "tl97VGJouG41Z3rd",

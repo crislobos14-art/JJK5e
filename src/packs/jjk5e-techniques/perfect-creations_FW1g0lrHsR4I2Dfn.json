@@ -91,7 +91,8 @@
    "technique": "Cursed Corpse Creation",
    "level": 18,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "d28fe48323"
   }
  },
  "folder": "qwzwYySzpsiw4XHW",

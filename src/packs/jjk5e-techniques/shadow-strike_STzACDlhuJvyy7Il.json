@@ -115,7 +115,8 @@
    "level": 1,
    "spellFrom": "feat",
    "automationNotes": "Bonus necrotic = CE mod (×2/×3/×4 at 3rd/6th/11th); the attack's own damage becomes necrotic. Unaware target: automatic hit. Attack roll > its passive Perception: it doesn't know how it was hurt.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "1a5c7df1dd"
   }
  },
  "folder": "AZz0yh4SFsEeg2VN",

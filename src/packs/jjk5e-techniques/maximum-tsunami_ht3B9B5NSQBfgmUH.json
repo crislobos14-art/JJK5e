@@ -133,7 +133,8 @@
    "level": 18,
    "spellFrom": "feat",
    "automationNotes": "Tsunami spell: concentration 6 rounds; wall loses 50 ft height and 1d10 damage each round (track by hand).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "af80bbd7bf"
   }
  },
  "folder": "Ao9OCl7PHP0hxQBD",

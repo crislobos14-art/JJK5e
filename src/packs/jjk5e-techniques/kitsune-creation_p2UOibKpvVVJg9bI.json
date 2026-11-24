@@ -93,7 +93,8 @@
    "level": 3,
    "spellFrom": "feat",
    "automationNotes": "Up to prof foxes, 24 h; command all as a bonus action.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "06f50f50a4"
   }
  },
  "folder": "MxqACO3emHCjwL5R",

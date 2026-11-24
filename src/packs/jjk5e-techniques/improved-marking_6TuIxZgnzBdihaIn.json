@@ -89,7 +89,8 @@
    "level": 11,
    "spellFrom": "feat",
    "automationNotes": "Marking is a free action; up to 3 × CE mod marks (raise Teleport's uses max).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "d11118eb87"
   }
  },
  "folder": "1SK1DEKKg87PUQf6",

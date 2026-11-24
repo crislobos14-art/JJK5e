@@ -341,7 +341,8 @@
    "level": 6,
    "spellFrom": "feat",
    "automationNotes": "Impact with a surface: +1d4 bludgeoning per 10 ft travelled.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "1e2c453d36"
   }
  },
  "effects": [

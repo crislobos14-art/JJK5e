@@ -22,7 +22,9 @@
   "requirements": "Cursed Spirit (Imaginary)"
  },
  "flags": {
-  "jjk5e": {}
+  "jjk5e": {
+   "rev": "601cd0fa1b"
+  }
  },
  "folder": "MrUJYYzCm8S5kHBr",
  "effects": [

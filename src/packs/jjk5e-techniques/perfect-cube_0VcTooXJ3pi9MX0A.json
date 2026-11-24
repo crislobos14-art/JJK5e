@@ -77,7 +77,8 @@
    "level": 6,
    "spellFrom": "feat",
    "automationNotes": "Spend with Dark Cube: the cube (not you) resists all damage and ignores abilities that would destroy, see into or invade it. Counts as 5 reinforcements.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "c27e21106f"
   }
  },
  "folder": "h65v183tFsULjQrb",

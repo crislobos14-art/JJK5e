@@ -98,7 +98,8 @@
    "technique": "Antigravity System",
    "level": 6,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "20164e285a"
   }
  },
  "folder": "h8faxx3TSM5qAlx3",

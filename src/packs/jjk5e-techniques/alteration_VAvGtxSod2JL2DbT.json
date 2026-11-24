@@ -531,7 +531,8 @@
    "level": 3,
    "spellFrom": "feat",
    "automationNotes": "Restrictions: Sword Arms ✗ Spike Hands/Wings; Spike Hands ✗ Sword Arms/Wings; Arm Shields and Long Arms ✗ Wings.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "e323c6522e"
   }
  },
  "folder": "sz7xFTLSgxx5bxtq",

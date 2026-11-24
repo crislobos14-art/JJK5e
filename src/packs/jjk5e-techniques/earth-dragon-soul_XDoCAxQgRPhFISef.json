@@ -171,7 +171,8 @@
     ]
    },
    "automationNotes": "Hasn't moved since last turn: extra damage twice per turn, speed 0 until your next turn.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "f0c5d345fe"
   }
  },
  "folder": "xkcQZ0iOxpoEyfI2",

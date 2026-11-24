@@ -104,7 +104,8 @@
     "L3G1u2szCEVZuHDz": 1
    },
    "automationNotes": "Temp HP formula approximates RCT healing (1d8 per CE + CON); adjust if your RCT table differs.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "e5e9709fb4"
   }
  },
  "folder": "sHDJB680OC5pd1by",

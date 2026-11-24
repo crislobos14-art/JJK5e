@@ -159,7 +159,8 @@
    "domainActivity": "nbJ51mrzj6A7e4Nr",
    "spellFrom": "feat",
    "automationNotes": "Each time stop in the domain lasts one extra turn.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "cf1a102fe0"
   }
  },
  "folder": "OPfUdWvA8mZmDQ8i",

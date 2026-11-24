@@ -155,7 +155,8 @@
    "level": 3,
    "spellFrom": "feat",
    "automationNotes": "Weapon tools use their own damage (1d4 improvised shown). Tool AC = your CE DC, HP 5 × prof (+10 per cursed grade above 4th).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "f44de15d67"
   }
  },
  "folder": "7tmhlm7tDflRZlKD",

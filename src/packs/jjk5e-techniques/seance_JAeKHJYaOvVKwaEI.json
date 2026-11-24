@@ -181,7 +181,8 @@
     "yn7JrUsDc5H8JdGr": 2
    },
    "automationNotes": "Soul save DC should use the dead humanoid's prof + CHA: edit the formula.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "5b937b3e6a"
   }
  },
  "folder": "z1MGG49oTB7xZ6Pc",

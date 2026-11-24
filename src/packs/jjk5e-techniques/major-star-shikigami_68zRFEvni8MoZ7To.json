@@ -92,7 +92,8 @@
    "level": 6,
    "spellFrom": "feat",
    "automationNotes": "One at a time (two at 11th); killed: 1 hour before resummoning. Full turn: special pseudo-domain where minor stars move freely.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "1cf5029d05"
   }
  },
  "folder": "ba0AWxHF6sBvbrZq",

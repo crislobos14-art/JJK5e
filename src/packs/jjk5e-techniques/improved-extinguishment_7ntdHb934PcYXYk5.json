@@ -55,7 +55,8 @@
    "level": 6,
    "spellFrom": "feat",
    "automationNotes": "Extinguishment now deals 5d12 (already scaled) and suppresses the target's cursed tools.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "f749ca50d5"
   }
  },
  "folder": "lFpLbNxf0h2fGnvr",

@@ -111,7 +111,8 @@
  "effects": [],
  "flags": {
   "jjk5e": {
-   "techniqueRoot": "Projection Sorcery"
+   "techniqueRoot": "Projection Sorcery",
+   "rev": "547c462d56"
   }
  },
  "_key": "!items!N2Opwc9HKZmc7q1A"

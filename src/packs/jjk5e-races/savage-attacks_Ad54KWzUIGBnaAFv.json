@@ -22,7 +22,9 @@
   "requirements": "Sumerian (Deskunte)"
  },
  "flags": {
-  "jjk5e": {}
+  "jjk5e": {
+   "rev": "3a506de3ca"
+  }
  },
  "folder": "cUxhy4eiPJek1pHp",
  "_key": "!items!Ad54KWzUIGBnaAFv"

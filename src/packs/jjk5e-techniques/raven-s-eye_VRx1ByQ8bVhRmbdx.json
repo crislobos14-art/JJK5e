@@ -86,7 +86,8 @@
    "level": 6,
    "spellFrom": "feat",
    "automationNotes": "Passive Perception bonus reads flags.jjk5e.crows (number of crows).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "67efc386af"
   }
  },
  "folder": "51kqIFJDFNS150R8",

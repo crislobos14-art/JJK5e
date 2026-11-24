@@ -596,7 +596,8 @@
     "fGNq4PZAPtSUfT4N": 1
    },
    "automationNotes": "You know three techniques (+2 at 6th and 11th): use only the ones you chose. With Convergence, Crimson Rain also knocks prone (GM).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "169f07d57e"
   }
  },
  "effects": [

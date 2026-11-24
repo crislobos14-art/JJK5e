@@ -99,7 +99,8 @@
    "technique": "Construction",
    "level": 11,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "0ff482bc5c"
   }
  },
  "folder": "dT7FkGZ40euglS6C",

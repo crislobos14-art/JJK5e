@@ -111,7 +111,8 @@
  "effects": [],
  "flags": {
   "jjk5e": {
-   "techniqueRoot": "Voracity"
+   "techniqueRoot": "Voracity",
+   "rev": "903afe4c88"
   }
  },
  "_key": "!items!fugGhuVMTB3Ogv5y"

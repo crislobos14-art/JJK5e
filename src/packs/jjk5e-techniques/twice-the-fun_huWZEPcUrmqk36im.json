@@ -105,7 +105,8 @@
     "oZYzniqWJTsImkZe": 3
    },
    "automationNotes": "Clone tokens are created on the scene by the module (HP 1/4, 1/2 at 6th, full at 11th; 8 hours).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "0463915a21"
   }
  },
  "folder": "FD3rp7a4OW9fKrOc",

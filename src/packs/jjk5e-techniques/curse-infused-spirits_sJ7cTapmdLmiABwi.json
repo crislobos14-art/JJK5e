@@ -115,7 +115,8 @@
     "aZSGsRETuS1H0fLZ": 1
    },
    "automationNotes": "Spirits: +CE mod to STR/DEX/CON, full HP on short rest, immune charmed/frightened (apply on their actors).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "a2619963ff"
   }
  },
  "folder": "f8ljC8WN5acnKcA4",

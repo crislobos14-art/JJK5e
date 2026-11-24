@@ -341,7 +341,8 @@
    "level": 1,
    "spellFrom": "feat",
    "automationNotes": "Marks per star = CE mod (2× at 11th). Collision die by size: edit (d6 assumed). Scale +1 per extra 10 ft.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "febabe37a8"
   }
  },
  "folder": "wSkJnhi22IbLpEbi",

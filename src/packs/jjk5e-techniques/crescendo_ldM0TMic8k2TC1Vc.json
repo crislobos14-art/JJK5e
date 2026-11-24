@@ -151,7 +151,8 @@
    "technique": "Prayer Song",
    "level": 11,
    "automationNotes": "Replaces Prayer's table at 11th. Other turns (enemy −3 AC, disadvantage, +prof, −prof to its damage, extra attack, −5 AC/saves, action economy limit): apply by hand.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "be95fdf196"
   }
  },
  "folder": "LeKt9DxatfKKBe3c",

@@ -94,7 +94,8 @@
    "level": 11,
    "spellFrom": "feat",
    "automationNotes": "Swap your token position and current HP with the chosen clone; on dropping to 0 HP you can move into a clone instead (GM).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "bafe5e85f0"
   }
  },
  "folder": "FD3rp7a4OW9fKrOc",

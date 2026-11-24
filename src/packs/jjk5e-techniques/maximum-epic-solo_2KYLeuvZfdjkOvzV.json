@@ -165,7 +165,8 @@
    "level": 11,
    "spellFrom": "feat",
    "automationNotes": "@scaling in the effect is fixed when applied: re-apply if you change the extra CE.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "a66850f7bd"
   }
  },
  "folder": "vosb36eMO9PhuX42",

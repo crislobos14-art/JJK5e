@@ -146,7 +146,8 @@
    "level": 6,
    "spellFrom": "feat",
    "automationNotes": "+1 attack/damage with imbued tools per CE spent on the imbuement.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "d8f3076812"
   }
  },
  "folder": "7tmhlm7tDflRZlKD",

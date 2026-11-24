@@ -38,7 +38,8 @@
     "Shrine"
    ],
    "automationNotes": "+1 CE: Cleave as a 30-ft cone vs objects/structures (critical); creatures DEX or prone.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "7128589d00"
   }
  },
  "folder": "2XiAKaCJUnpH62hA",

@@ -140,7 +140,8 @@
    "level": 6,
    "spellFrom": "feat",
    "automationNotes": "Melee hit with the construct: teleport 10 ft.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "7f6a02f243"
   }
  },
  "folder": "IGfpCBBJLQfBc6m2",

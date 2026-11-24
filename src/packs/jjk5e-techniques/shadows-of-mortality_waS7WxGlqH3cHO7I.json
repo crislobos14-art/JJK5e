@@ -94,7 +94,8 @@
    "technique": "Shadow Killer",
    "level": 11,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "a0cc295c27"
   }
  },
  "folder": "AZz0yh4SFsEeg2VN",

@@ -55,7 +55,8 @@
   "jjk5e": {
    "prereq": {
     "skill": "arc"
-   }
+   },
+   "rev": "de86431da5"
   }
  },
  "effects": [

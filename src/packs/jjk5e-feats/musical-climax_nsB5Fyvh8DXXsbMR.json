@@ -64,7 +64,8 @@
     "Rockstar"
    ],
    "automationNotes": "Each action spent playing adds 2 damage dice to the released Sound Blast/Wave (reaction); ignores resistance.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "fdc9c0cef2"
   }
  },
  "folder": "68qyxNdSSfIl8CWR",

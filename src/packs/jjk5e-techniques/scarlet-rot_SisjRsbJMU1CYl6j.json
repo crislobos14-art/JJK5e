@@ -100,7 +100,8 @@
    "level": 6,
    "spellFrom": "feat",
    "automationNotes": "Your Rot techniques ignore acid resistance (18th: immunity → resistance).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "10f1b4736b"
   }
  },
  "effects": [

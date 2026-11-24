@@ -103,7 +103,8 @@
     "wVNUhJj3IichuJs5": 1
    },
    "automationNotes": "Construct HP = your level × CE spent. Untick the HP cost when you use another blood source. Blood Bags are tracked as inventory.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "dc71c8caf7"
   }
  },
  "folder": "WIi7n6E644owqihn",

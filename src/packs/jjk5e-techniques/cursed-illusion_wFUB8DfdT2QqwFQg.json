@@ -181,7 +181,8 @@
     "8hp6SOVXqIlsCq8r": 2
    },
    "automationNotes": "At 6th: up to CE mod targets (scale 2 CE each).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "ffdcd14d9b"
   }
  },
  "folder": "8b1T5CIAvTiipny3",

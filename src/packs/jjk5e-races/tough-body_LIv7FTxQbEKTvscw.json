@@ -22,7 +22,9 @@
   "requirements": "Sumerian (Deskunte)"
  },
  "flags": {
-  "jjk5e": {}
+  "jjk5e": {
+   "rev": "d14904c240"
+  }
  },
  "effects": [
   {

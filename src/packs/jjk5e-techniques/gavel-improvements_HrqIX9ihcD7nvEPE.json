@@ -169,7 +169,8 @@
    "technique": "Deadly Sentencing",
    "level": 6,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "ada8f5d437"
   }
  },
  "folder": "jvdEqnCHI6BBkSgt",

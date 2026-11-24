@@ -158,7 +158,8 @@
    "technique": "Teleportation",
    "level": 6,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "fe512a069d"
   }
  },
  "folder": "1SK1DEKKg87PUQf6",

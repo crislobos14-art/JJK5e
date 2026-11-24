@@ -75,7 +75,8 @@
     "5A73zZA656BJHGfz": 3
    },
    "automationNotes": "Use the cone template with the Cursed Speech command you speak.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "c0efa4e81c"
   }
  },
  "folder": "hKdstL12BA2dMsHA",

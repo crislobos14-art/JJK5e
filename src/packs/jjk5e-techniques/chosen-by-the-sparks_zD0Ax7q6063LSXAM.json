@@ -26,7 +26,8 @@
    "technique": "Divergent Fist",
    "level": 18,
    "automationNotes": "Crits and Stance of the Sparks attacks are always Black Flashes (resolve without rolling).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "5065e480df"
   }
  },
  "folder": "z0OBRtMvDoArKlLl",

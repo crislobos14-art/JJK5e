@@ -187,7 +187,8 @@
    "technique": "Cursed Circuitry",
    "level": 6,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "b41b1433f8"
   }
  },
  "folder": "hm057iS0RUqvPJaN",

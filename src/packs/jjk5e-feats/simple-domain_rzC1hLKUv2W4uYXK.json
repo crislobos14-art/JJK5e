@@ -142,7 +142,8 @@
     "ceScore": 16
    },
    "automationNotes": "Barrier HP are applied as temporary HP. Remove the effect and temp HP if you move.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "d62d857ea0"
   }
  },
  "folder": "w6CtJKH5qYx1fgN4",

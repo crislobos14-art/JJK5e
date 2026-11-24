@@ -111,7 +111,8 @@
  "effects": [],
  "flags": {
   "jjk5e": {
-   "techniqueRoot": "Schrift X"
+   "techniqueRoot": "Schrift X",
+   "rev": "c478be0d03"
   }
  },
  "_key": "!items!9YLiWa4L5NVFbavf"

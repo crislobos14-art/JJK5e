@@ -123,7 +123,8 @@
  "effects": [],
  "flags": {
   "jjk5e": {
-   "techniqueRoot": "Tool Manipulation"
+   "techniqueRoot": "Tool Manipulation",
+   "rev": "c0ab8baa5f"
   }
  },
  "_key": "!items!zEzY3Sr93y4TX5fO"

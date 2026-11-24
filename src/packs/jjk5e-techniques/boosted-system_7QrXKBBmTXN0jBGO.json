@@ -141,7 +141,8 @@
    "level": 11,
    "spellFrom": "feat",
    "automationNotes": "Sweeping Gravity: creatures with DEX score below your DC can't make DEX saves vs your technique. Hard Fall: fall damage d12.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "1405612b22"
   }
  },
  "folder": "h8faxx3TSM5qAlx3",

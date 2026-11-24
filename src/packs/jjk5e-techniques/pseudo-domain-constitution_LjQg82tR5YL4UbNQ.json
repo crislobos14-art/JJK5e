@@ -133,7 +133,8 @@
    "level": 3,
    "spellFrom": "feat",
    "automationNotes": "Scale = orbiting stars (enter it). Radius ≤ 5 ft × stars (10 ft × at 11th); +5 ft per bonus action.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "2efcbc9092"
   }
  },
  "folder": "ba0AWxHF6sBvbrZq",

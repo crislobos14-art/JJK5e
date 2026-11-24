@@ -400,7 +400,8 @@
     "c0cqZN6p0L2MLGKd": 6
    },
    "automationNotes": "The body part is removed (regrow with RCT). Double damage to objects.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "0a64d9b0d3"
   }
  },
  "effects": [

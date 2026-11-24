@@ -152,7 +152,8 @@
     "xAteEEccbxv1k3ub": 1
    },
    "automationNotes": "Fail by 5+: gain 1 exhaustion level (GM). No effect on creatures without water.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "952049f4be"
   }
  },
  "folder": "sHDJB680OC5pd1by",

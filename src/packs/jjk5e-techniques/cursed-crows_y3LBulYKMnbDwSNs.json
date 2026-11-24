@@ -136,7 +136,8 @@
    "level": 1,
    "spellFrom": "feat",
    "automationNotes": "Crow count is tracked by the player (you start with 3).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "a37d442ab2"
   }
  },
  "effects": [

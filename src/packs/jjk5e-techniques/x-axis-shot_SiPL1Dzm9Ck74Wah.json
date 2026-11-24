@@ -176,7 +176,8 @@
     ]
    },
    "automationNotes": "Also roll your weapon damage (automatic hit, no attack roll). Only if you haven't moved this turn.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "f39ac6d602"
   }
  },
  "folder": "sHIaW6mkEHmwduDu",

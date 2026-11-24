@@ -747,7 +747,8 @@
    "domainActivity": "kspW9PPSA9yKZuyu",
    "spellFrom": "feat",
    "automationNotes": "Expectation: enter it as the scale (+1 per 10%, max +19) when rolling. Non-lethal domain with Anti-Domain Clash.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "d7dbc5ac8c"
   }
  },
  "effects": [

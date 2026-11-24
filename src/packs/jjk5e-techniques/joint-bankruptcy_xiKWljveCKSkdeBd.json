@@ -78,7 +78,8 @@
     ]
    },
    "automationNotes": "Jackpot: +10 CE. Fail: loses all CE and can't regain it for 1 minute.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "5e200395be"
   }
  },
  "folder": "sHDJB680OC5pd1by",

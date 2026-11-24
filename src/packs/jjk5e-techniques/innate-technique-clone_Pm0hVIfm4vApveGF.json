@@ -111,7 +111,8 @@
  "effects": [],
  "flags": {
   "jjk5e": {
-   "techniqueRoot": "Clone"
+   "techniqueRoot": "Clone",
+   "rev": "d1cd1b46d0"
   }
  },
  "_key": "!items!Pm0hVIfm4vApveGF"

@@ -26,7 +26,8 @@
    "technique": "Tool Manipulation",
    "level": 6,
    "automationNotes": "Toggle the fly effect while mounted. 2 tools at once; move 40 ft.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "de9232a2ea"
   }
  },
  "folder": "7tmhlm7tDflRZlKD",

@@ -214,7 +214,8 @@
    "domainActivity": "cPbKSWALLWbfQa6a",
    "spellFrom": "feat",
    "automationNotes": "Bite damage uses 4d10 piercing as a stand-in; use the Yamata no Orochi stat block's bite if you have it.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "fc02a045a3"
   }
  },
  "folder": "DMcMPNJMAkcTYNF8",

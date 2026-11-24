@@ -113,7 +113,8 @@
    "level": 6,
    "spellFrom": "feat",
    "automationNotes": "Moon Dregs: 2 attacks; ¾ cover while in a creature's space (full at 11th).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "f0a6e46a8f"
   }
  },
  "effects": [

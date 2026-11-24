@@ -93,7 +93,8 @@
    "forTechniques": [
     "Triple Core"
    ],
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "009071ecc8"
   }
  },
  "effects": [

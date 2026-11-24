@@ -155,7 +155,8 @@
    "domainActivity": "7wLxyYV8XlKP1CTa",
    "spellFrom": "feat",
    "automationNotes": "At initiative 20, use any Power of Words activity on all chosen creatures without paying CE (the domain sure-hit makes them fail the save).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "9b0d5a9cd8"
   }
  },
  "folder": "hKdstL12BA2dMsHA",

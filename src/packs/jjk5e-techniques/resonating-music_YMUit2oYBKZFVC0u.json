@@ -166,7 +166,8 @@
     ]
    },
    "automationNotes": "Failed save: pushed 20 ft. Sound Blast range is 60 ft from 6th.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "8d100032a3"
   }
  },
  "folder": "vosb36eMO9PhuX42",

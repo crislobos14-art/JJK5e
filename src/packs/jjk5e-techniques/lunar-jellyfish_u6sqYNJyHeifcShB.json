@@ -158,7 +158,8 @@
    "level": 1,
    "spellFrom": "feat",
    "automationNotes": "Drag the Moon Dregs actor; it Dodges unless commanded (bonus action). Destroyed: 1 minute before resummoning.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "4923f5550f"
   }
  },
  "folder": "z6mgJlgIkKDRJURh",

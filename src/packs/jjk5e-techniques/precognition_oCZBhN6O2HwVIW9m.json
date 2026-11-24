@@ -26,7 +26,8 @@
    "technique": "G Warstaff",
    "level": 11,
    "automationNotes": "Midi has no per-source crit range; lower the crit threshold by ½ CE mod on the Warstaff when you have advantage.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "0c00a0af7f"
   }
  },
  "folder": "GjZxtO8W2HfeT6Hl",

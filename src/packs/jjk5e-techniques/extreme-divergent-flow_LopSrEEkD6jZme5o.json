@@ -84,7 +84,8 @@
    "technique": "Divergent Fist",
    "level": 6,
    "automationNotes": "Divergent Flow twice per turn.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "08ee57c6cc"
   }
  },
  "folder": "z0OBRtMvDoArKlLl",

@@ -111,7 +111,8 @@
  "effects": [],
  "flags": {
   "jjk5e": {
-   "techniqueRoot": "Shrine"
+   "techniqueRoot": "Shrine",
+   "rev": "4a68e2122c"
   }
  },
  "_key": "!items!y0wtpMX5KkQVZ4mb"

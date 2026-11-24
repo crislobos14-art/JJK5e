@@ -97,7 +97,8 @@
     "FvH5I4W3ZUZWcWcO": 1
    },
    "automationNotes": "Absorption as temp HP until the start of your next turn (remove the rest then). Leg AC = your CE DC.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "b799d8a2de"
   }
  },
  "folder": "sHDJB680OC5pd1by",

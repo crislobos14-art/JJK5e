@@ -199,7 +199,8 @@
    "technique": "Disaster Flames",
    "level": 11,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "0334afc7b8"
   }
  },
  "effects": [

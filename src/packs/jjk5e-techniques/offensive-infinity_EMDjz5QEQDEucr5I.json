@@ -215,7 +215,8 @@
    "technique": "Limitless",
    "level": 11,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "6838cc3704"
   }
  },
  "effects": [

@@ -146,7 +146,8 @@
    "technique": "Shadow Killer",
    "level": 6,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "cb4a86f8ed"
   }
  },
  "effects": [

@@ -124,7 +124,8 @@
     ],
     "level": 6
    },
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "69d8d76e55"
   }
  },
  "effects": [

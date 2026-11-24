@@ -96,7 +96,8 @@
     "QcgNIk4rbHwUWGOy": 2
    },
    "automationNotes": "Lasts CE-modifier hours. A Special Grade tool kills you afterwards (no revival).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "2c9597afdf"
   }
  },
  "folder": "dT7FkGZ40euglS6C",

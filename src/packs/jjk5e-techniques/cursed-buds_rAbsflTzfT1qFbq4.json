@@ -159,7 +159,8 @@
    "level": 11,
    "spellFrom": "feat",
    "automationNotes": "Tree: AC = your CE DC, HP = prof × level, 1 minute; use the bud attack against each hostile at your turn start.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "621a3e3ef4"
   }
  },
  "folder": "iWhpioZs4gSAxzA7",

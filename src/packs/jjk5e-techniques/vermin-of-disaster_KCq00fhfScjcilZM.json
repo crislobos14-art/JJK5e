@@ -100,7 +100,8 @@
    "level": 1,
    "spellFrom": "feat",
    "automationNotes": "Drag the Insect Swarm actor from the compendium; one at a time; command it as a bonus action or it Dodges.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "377593ecbf"
   }
  },
  "folder": "THumTyfrAaZo0XzQ",

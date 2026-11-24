@@ -109,7 +109,8 @@
     "Deadly Sentencing"
    ],
    "automationNotes": "Extra damage = one more weapon damage die (d6 shown: use your gavel's).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "88dd85558f"
   }
  },
  "folder": "cq0B0G5hxGuaBi5H",

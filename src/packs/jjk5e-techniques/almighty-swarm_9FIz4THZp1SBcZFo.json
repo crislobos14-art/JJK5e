@@ -64,7 +64,8 @@
    "technique": "Disaster Vermin",
    "level": 6,
    "automationNotes": "Merged Vermin Swarm: +1 size per extra swarm, combined HP and damage dice (edit the swarm actor).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "4fe2f69da3"
   }
  },
  "folder": "THumTyfrAaZo0XzQ",

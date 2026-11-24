@@ -90,7 +90,8 @@
    "level": 6,
    "spellFrom": "feat",
    "automationNotes": "Sky Shape also works against CE attack rolls.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "a92f6934eb"
   }
  },
  "folder": "i7KDxPjzj0GuzdPl",

@@ -122,7 +122,8 @@
     ]
    },
    "automationNotes": "Target inside the Sunny Day radius: add your CE modifier to the damage.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "16a77e0ae7"
   }
  },
  "folder": "sHDJB680OC5pd1by",

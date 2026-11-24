@@ -142,7 +142,8 @@
     ]
    },
    "automationNotes": "Advantage on saves vs poisoned (GM). Blood Bags: alternate HP source for Rot costs (untick the HP cost).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "9f6fbbfa99"
   }
  },
  "folder": "TOdSvSBhuENKcEJX",

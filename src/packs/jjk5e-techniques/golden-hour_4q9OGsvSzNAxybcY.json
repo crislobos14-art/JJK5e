@@ -139,7 +139,8 @@
    "technique": "Golden Hour",
    "level": 1,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "337ab7bc53"
   }
  },
  "folder": "OPfUdWvA8mZmDQ8i",

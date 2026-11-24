@@ -128,7 +128,8 @@
    "level": 1,
    "spellFrom": "feat",
    "automationNotes": "Locate Creature range: 1,000 ft (1 / 5 / 30 miles at 6th / 11th / 18th).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "4ba4133842"
   }
  },
  "folder": "CpSgW3tLoueRa6XV",

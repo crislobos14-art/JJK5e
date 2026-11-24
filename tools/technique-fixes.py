@@ -80,6 +80,7 @@ class Store:
             if not any(self.src[i][0] == pack for i in self.dirty): continue
             with open(agg, "w", encoding="utf-8") as f: f.write(json.dumps(self.agg[pack], ensure_ascii=False))
         print(f"updated {len(self.dirty)} documents")
+        import subprocess; subprocess.run([sys.executable, "tools/stamp-rev.py"], check=True)
 
 
 # ---------------------------------------------------------------- building blocks

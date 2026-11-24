@@ -30,7 +30,8 @@
    "prereq": {
     "level": 20
    },
-   "ceMaxBonus": 20
+   "ceMaxBonus": 20,
+   "rev": "e3db4a2350"
   }
  },
  "folder": "BuykVM3mAwDd71E2",

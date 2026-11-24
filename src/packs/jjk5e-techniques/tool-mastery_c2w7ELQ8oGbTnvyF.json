@@ -130,7 +130,8 @@
    "level": 11,
    "spellFrom": "feat",
    "automationNotes": "Riders on Floating Tools: advantage on DEX saves. Combat Tool Improvement: +1 AC, +1 reduction die, extra guard reaction.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "a8b13bee68"
   }
  },
  "folder": "7tmhlm7tDflRZlKD",

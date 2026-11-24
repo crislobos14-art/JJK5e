@@ -161,7 +161,8 @@
    "domainActivity": "Z20EDNbUB9Sz5WZN",
    "spellFrom": "feat",
    "automationNotes": "Your Reversion attack rerolls are guaranteed hits; chosen creatures get Reversion's base effect.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "58a71d5cca"
   }
  },
  "folder": "6YaSgqVRe4IqL8er",

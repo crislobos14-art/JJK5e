@@ -75,7 +75,8 @@
  "flags": {
   "jjk5e": {
    "automationNotes": "Add the creature's maximum number of Hit Dice to the healing. Once per creature per short or long rest.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "507324323b"
   }
  },
  "folder": "EtgHYidIGv42ylfo",

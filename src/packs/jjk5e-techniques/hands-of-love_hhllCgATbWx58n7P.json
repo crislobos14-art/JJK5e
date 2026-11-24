@@ -218,7 +218,8 @@
    "level": 1,
    "spellFrom": "feat",
    "automationNotes": "Hand damage uses 1d4 + STR; replace with your unarmed/martial die. At 3rd: +CE mod damage, grappled = restrained.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "0d445bac63"
   }
  },
  "folder": "AAtWazy4xXecJci4",

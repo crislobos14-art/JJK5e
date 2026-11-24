@@ -111,7 +111,8 @@
  "effects": [],
  "flags": {
   "jjk5e": {
-   "techniqueRoot": "Laplace’s Demon"
+   "techniqueRoot": "Laplace’s Demon",
+   "rev": "769bde349a"
   }
  },
  "_key": "!items!2uUNMEoDx3UEOWCx"

@@ -86,7 +86,8 @@
    "technique": "Love Rendezvous",
    "level": 3,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "5ed5b6e034"
   }
  },
  "folder": "wSkJnhi22IbLpEbi",

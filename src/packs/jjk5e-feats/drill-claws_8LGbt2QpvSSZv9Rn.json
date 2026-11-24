@@ -168,7 +168,8 @@
     ]
    },
    "automationNotes": "Use STR, DEX or CE modifier for the Drill Claw attack.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "b2d03595d0"
   }
  },
  "folder": "zt8ujvT8aBbmfDqZ",

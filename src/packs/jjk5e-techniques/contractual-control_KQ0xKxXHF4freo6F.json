@@ -262,7 +262,8 @@
     "7fVfPBag8w7h4hda": 3
    },
    "automationNotes": "Vehicle damage uses the size dice of Recreation (adjust the dice). Everything used disappears afterwards.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "cd7b49d4cd"
   }
  },
  "effects": [

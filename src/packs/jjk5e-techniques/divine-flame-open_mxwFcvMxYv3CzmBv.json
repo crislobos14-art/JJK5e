@@ -147,7 +147,8 @@
     "u7pikmLFeX1CnNuV": 1
    },
    "automationNotes": "Creatures beyond 150 ft save at advantage.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "da8b460734"
   }
  },
  "folder": "m9ZssDMA8savxH5G",

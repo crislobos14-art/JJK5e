@@ -115,7 +115,8 @@
  "effects": [],
  "flags": {
   "jjk5e": {
-   "techniqueRoot": "Blood Manipulation"
+   "techniqueRoot": "Blood Manipulation",
+   "rev": "cfd7619eea"
   }
  },
  "_key": "!items!5QLR4NkDGOJebVpF"

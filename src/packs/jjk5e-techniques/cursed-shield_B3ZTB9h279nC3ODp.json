@@ -91,7 +91,8 @@
     ]
    },
    "automationNotes": "DC = 10 + half the CE spent on the incoming effect (the activity uses 10: add the rest when rolling). Success: gain that CE and negate it; failure: it hits / you fail the save. Not against Maximums, barriers or domains.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "f4672a3b37"
   }
  },
  "folder": "sHDJB680OC5pd1by",

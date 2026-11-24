@@ -109,7 +109,8 @@
  "flags": {
   "jjk5e": {
    "automationNotes": "Imbue up to CE mod projectiles (action). Their damage is the ammunition's/weapon's: add it on the roll. Ignore half and three-quarters cover.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "b4a5c05663"
   }
  },
  "folder": "58RlNbYPWxO2Xi4E",

@@ -208,7 +208,8 @@
     ]
    },
    "automationNotes": "Dove ward gives advantage on all saves as an approximation of 'against charmed and frightened'; remove it when the dove leaves.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "f1aae8f612"
   }
  },
  "effects": [

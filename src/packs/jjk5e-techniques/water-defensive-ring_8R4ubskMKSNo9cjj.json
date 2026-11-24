@@ -166,7 +166,8 @@
    "technique": "Disaster Tides",
    "level": 6,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "9ab0f8ebba"
   }
  },
  "folder": "Ao9OCl7PHP0hxQBD",

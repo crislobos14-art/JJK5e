@@ -179,7 +179,8 @@
    "technique": "Auspicious Beast Summon",
    "level": 11,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "d6304d31bf"
   }
  },
  "folder": "brFOPY7ZHkwkGj1z",

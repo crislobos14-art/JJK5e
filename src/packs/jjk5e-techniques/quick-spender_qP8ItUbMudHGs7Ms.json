@@ -86,7 +86,8 @@
    "level": 3,
    "spellFrom": "feat",
    "automationNotes": "Use any Recreation activity as a bonus action (free action at 18th).",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "50e28a5ac9"
   }
  },
  "folder": "1Ch8dLVYSEvwWjZr",

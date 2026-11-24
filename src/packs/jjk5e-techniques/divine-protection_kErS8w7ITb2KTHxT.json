@@ -131,7 +131,8 @@
    "level": 6,
    "spellFrom": "feat",
    "automationNotes": "Item uses = Regalia HP pool (5 × level): lower it by the damage absorbed. The shield is shown as temp HP equal to the pool.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "49708730f1"
   }
  },
  "folder": "jfP5e1LgOxgMmS1g",

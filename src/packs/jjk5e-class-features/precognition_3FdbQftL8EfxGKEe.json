@@ -32,7 +32,8 @@
     ]
    },
    "bodyCost": 1,
-   "bodyCategory": "wis"
+   "bodyCategory": "wis",
+   "rev": "cf7db7809d"
   }
  },
  "effects": [

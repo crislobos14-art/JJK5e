@@ -166,7 +166,8 @@
     "cuxPRyAQGDEgB5Up": 1
    },
    "automationNotes": "Mass 2+: a creature within 5 ft also saves or takes half; 3: speed halved; 4: speed 0. Can't reactivate until the duration ends.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "c97f1ba8f7"
   }
  },
  "effects": [

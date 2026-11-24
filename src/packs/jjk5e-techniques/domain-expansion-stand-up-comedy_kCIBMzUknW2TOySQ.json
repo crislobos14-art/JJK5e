@@ -255,7 +255,8 @@
    "domainActivity": "x3NkVloeCy6AcxFi",
    "spellFrom": "feat",
    "automationNotes": "Creatures that roll lower on Insight (or do not roll) take 'Booed'.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "cd6af7fdce"
   }
  },
  "folder": "8AlwpNPBMedHlchF",

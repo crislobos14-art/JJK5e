@@ -22,7 +22,9 @@
   "requirements": "Juggernaut 20"
  },
  "flags": {
-  "jjk5e": {}
+  "jjk5e": {
+   "rev": "b17c9f356b"
+  }
  },
  "folder": "1ipDZJ01igqpFdub",
  "effects": [

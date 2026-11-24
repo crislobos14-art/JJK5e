@@ -174,7 +174,8 @@
     ]
    },
    "automationNotes": "Targets: yourself and two other creatures or objects.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "a0a41475d9"
   }
  },
  "effects": [

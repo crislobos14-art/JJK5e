@@ -133,7 +133,8 @@
     "UNgkJB1hNYCx1HyF": 1
    },
    "automationNotes": "Extra CE = reinforcements (Black Box Reinforcement, up to your CE modifier; twice at 11th). Cube: AC = your CE save DC + 5 (+1 per 2 reinforcements), HP = proficiency × 2 × CE modifier (+10 per reinforcement), immune to psychic and poison; −1 damage taken per reinforcement.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "abf7b14df8"
   }
  },
  "effects": [

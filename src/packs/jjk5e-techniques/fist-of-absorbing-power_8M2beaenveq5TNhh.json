@@ -196,7 +196,8 @@
     "level": 6
    },
    "automationNotes": "You gain 3 Jin charges per creature that fails.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "c1fc20f684"
   }
  },
  "folder": "sHDJB680OC5pd1by",

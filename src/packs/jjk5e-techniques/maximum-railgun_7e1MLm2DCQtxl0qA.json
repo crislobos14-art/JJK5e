@@ -323,7 +323,8 @@
    "level": 11,
    "spellFrom": "feat",
    "automationNotes": "Half damage on a miss (roll damage anyway). Hit triggers the STR save: push 30 ft and prone.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "14a02b55a4"
   }
  },
  "effects": [

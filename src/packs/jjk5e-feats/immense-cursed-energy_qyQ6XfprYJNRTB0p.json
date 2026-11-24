@@ -31,7 +31,8 @@
     "ceScore": 15
    },
    "ceMaxBonus": "max(@abilities.wis.mod, @abilities.cha.mod)",
-   "ceScoreBonus": 1
+   "ceScoreBonus": 1,
+   "rev": "2b0d964fd6"
   }
  },
  "folder": "58RlNbYPWxO2Xi4E",

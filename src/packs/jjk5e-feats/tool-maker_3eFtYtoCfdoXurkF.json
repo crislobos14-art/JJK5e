@@ -30,7 +30,8 @@
    "prereq": {
     "ceScore": 16,
     "skill": "arc"
-   }
+   },
+   "rev": "7f81977445"
   }
  },
  "effects": [

@@ -111,7 +111,8 @@
  "effects": [],
  "flags": {
   "jjk5e": {
-   "techniqueRoot": "Missile Fist"
+   "techniqueRoot": "Missile Fist",
+   "rev": "4107d03398"
   }
  },
  "_key": "!items!5PytxdjLR0bdM9zo"

@@ -275,7 +275,8 @@
    "technique": "Cursed Corpse Creation",
    "level": 3,
    "spellFrom": "feat",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "a45f0d6fdb"
   }
  },
  "folder": "qwzwYySzpsiw4XHW",

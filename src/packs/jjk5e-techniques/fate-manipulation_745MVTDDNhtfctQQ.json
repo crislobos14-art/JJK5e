@@ -138,7 +138,8 @@
     "y0xkFff9ta46MTeq": 2
    },
    "automationNotes": "Pick the Fate effects in the usage dialog (one per 2 CE above the base, up to prof). Soul damage cuts the thread; no effect on creatures without CE.",
-   "automation": "automated"
+   "automation": "automated",
+   "rev": "6a383f5de5"
   }
  },
  "folder": "UdYh82jLla1edrDf",
