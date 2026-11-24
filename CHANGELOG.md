@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.63.0 — Soul Damage, creador de técnicas, tablas y efectos pasivos
+- **Soul Damage**: reduce los PG máximos (no lo cura RCT ni la regeneración). Automático con Midi-QOL para Transfiguration, Soul Split Katana, Maximum: Instrumentalization, Heat Dissociation, Soulfire y Maximum: Soul Punch; termina en descanso largo salvo que la fuente diga lo contrario. Botón de GM en el panel y tarjeta para el GM cuando el objetivo no es del jugador.
+- **Creador de técnicas propias** (macro *JJK: Technique Builder* y botón en el panel), según las pautas del manual: nivel 1 Lapse, 3 Lapse/Extension, 6 Extension, 11 Maximum, 18 Domain Expansion (opción de dominio a nivel 3). Crea los objetos en la carpeta *JJK: Custom Techniques* y se eligen como cualquier técnica.
+- **Tablas nuevas**: Finding a Cursed Spirit, Mission Rewards, Employment Pay, Cursed Tool Sale Value, Average Cursed Energy y Cursed Upon Death.
+- **Efectos pasivos**: Evasion, Resistant, Celestial Body (inmune al sure-hit), Sorcerous Restoration, Superhuman Might; razas: Skills, Warrior Training, Savage Attacks, Refined Study, Life Experience, Tool Proficiency, Tailored Appearance; feats: Curse Resistance, Cursed Armor, Multiple Eyes, Focused Attacks, Flight, Alternate Movement, Size Increase, Powerful Build, Survivor, Bottomless/Unending/Immense Cursed Energy, Blessed by Black Sparks, Pact Maker; Chosen by the Sparks (todo crítico es Black Flash).
+- **Herramientas malditas**: Prayer Beads (Amplify Technique), Clockwork Amulet, Cursed Tattoo (CA por grado), Crystal Bracelet (3 usos). Nuevos objetos separados: Mind Sharpener Ring y Cursed Shot Ammunition (estaban dentro de otras descripciones).
+- 7 pruebas nuevas (45 en total).
+
 ## 1.62.0 — Multiclase V.6
 - Requisitos de multiclase: 13 en la característica de la clase actual y de la nueva (Warrior FUE, Scout DES, Juggernaut CON, Strategist INT, Support Specialist SAB, Shikigami User CAR). Aviso al añadir la clase; con *prerrequisitos estrictos* se bloquea para jugadores.
 - Heavenly Restriction (Pure Body) no puede hacer multiclase.

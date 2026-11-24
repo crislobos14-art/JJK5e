@@ -24,7 +24,9 @@
  "flags": {
   "jjk5e": {
    "srRegainCE": 4,
-   "rev": "52f4be69dd"
+   "rev": "b919a7c783",
+   "automationNotes": "Regains 4 CE automatically when you finish a short rest.",
+   "automation": "automated"
   }
  },
  "folder": "D1jub3NHW0Fbryho",

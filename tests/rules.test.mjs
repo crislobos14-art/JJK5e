@@ -60,3 +60,26 @@ test("breaking a binding vow prevents CE and innate techniques", () => {
   assert.equal(vowBlocksUsage(fx,{costsCE:false,innateTechnique:false}),false);
   assert.equal(vowBlocksUsage([{...fx[0],disabled:true}],{costsCE:true}),false);
 });
+
+test("technique builder: items per level, CE costs, scaling and domain", async () => {
+  const { buildTechniqueItems } = await import("../scripts/jjk5e-rules.mjs");
+  const items = buildTechniqueItems({ name: "Frost Lines", features: [
+    { level: 1, name: "Frost Line", type: "attack", ce: 1, scaleMax: "prof", dice: "1d10", perCE: true, damageType: "cold", range: 60 },
+    { level: 6, name: "Cold Snap", type: "save", ce: 3, save: "dex", dice: "4d6", area: 15 },
+    { level: 11, name: "", type: "utility" },
+    { level: 18, name: "Domain Expansion: Glacier", type: "domain" }] });
+  assert.equal(items.length, 3, "empty names are skipped");
+  const [atk, save, dom] = items;
+  const a = Object.values(atk.system.activities)[0];
+  assert.equal(a.type, "attack");
+  assert.equal(a.consumption.scaling.max, "@prof");
+  assert.equal(a.damage.parts[0].scaling.number, 1);
+  assert.equal(atk.flags.jjk5e.ceCosts[a._id], 1);
+  assert.equal(atk.flags.jjk5e.technique, "Frost Lines");
+  assert.equal(Object.values(save.system.activities)[0].save.ability[0], "dex");
+  assert.equal(Object.values(save.system.activities)[0].target.template.size, "15");
+  assert.equal(dom.flags.jjk5e.domainActivity, Object.keys(dom.system.activities)[0]);
+  assert.equal(dom.flags.jjk5e.ceCosts[dom.flags.jjk5e.domainActivity], 20);
+  assert.notEqual(atk._id, a._id);
+  assert.deepEqual(buildTechniqueItems({ name: "Frost Lines", features: [{ level: 1, name: "Frost Line", type: "attack" }] })[0]._id, atk._id, "stable ids");
+});

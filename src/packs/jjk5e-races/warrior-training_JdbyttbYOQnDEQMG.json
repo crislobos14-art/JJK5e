@@ -23,9 +23,43 @@
  },
  "flags": {
   "jjk5e": {
-   "rev": "cab78f2db3"
+   "rev": "74dc27e42e",
+   "automation": "automated"
   }
  },
  "folder": "cUxhy4eiPJek1pHp",
- "_key": "!items!JdbyttbYOQnDEQMG"
+ "_key": "!items!JdbyttbYOQnDEQMG",
+ "effects": [
+  {
+   "_id": "3sV1wJbJfywgVKvq",
+   "name": "Light and medium armor",
+   "img": "modules/jjk5e/icons/trait-race.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.traits.armorProf.value",
+     "mode": 2,
+     "value": "lgt",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.armorProf.value",
+     "mode": 2,
+     "value": "med",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!JdbyttbYOQnDEQMG.3sV1wJbJfywgVKvq"
+  }
+ ]
 }

@@ -19,11 +19,35 @@
    "value": "race",
    "subtype": ""
   },
-  "requirements": "Cursed Vessel (Reincarnated)"
+  "requirements": "Cursed Vessel (Reincarnated)",
+  "advancement": {
+   "ZbazB6x3iE46IgcN": {
+    "_id": "ZbazB6x3iE46IgcN",
+    "type": "Trait",
+    "level": 0,
+    "title": "Life Experience",
+    "value": {},
+    "configuration": {
+     "mode": "default",
+     "allowReplacements": true,
+     "grants": [],
+     "choices": [
+      {
+       "count": 2,
+       "pool": [
+        "skills:*",
+        "tool:*"
+       ]
+      }
+     ]
+    }
+   }
+  }
  },
  "flags": {
   "jjk5e": {
-   "rev": "04d4257ea9"
+   "rev": "e29ed92908",
+   "automation": "automated"
   }
  },
  "folder": "A3CBV9dvsdKk3l4V",

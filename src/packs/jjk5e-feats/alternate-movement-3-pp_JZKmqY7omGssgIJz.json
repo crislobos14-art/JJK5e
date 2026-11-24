@@ -35,10 +35,88 @@
      ]
     ]
    },
-   "rev": "040923a96b"
+   "rev": "291768cbab",
+   "automation": "automated"
   }
  },
  "folder": "ar3Bgj4YHvYRp8DL",
  "sort": 2100,
- "_key": "!items!JZKmqY7omGssgIJz"
+ "_key": "!items!JZKmqY7omGssgIJz",
+ "effects": [
+  {
+   "_id": "KYvStfKawYP3EVUd",
+   "name": "Alternate Movement: burrow 10 ft",
+   "img": "icons/svg/upgrade.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": true,
+   "statuses": [],
+   "description": "<p>Enable the movement you chose.</p>",
+   "changes": [
+    {
+     "key": "system.attributes.movement.burrow",
+     "mode": 4,
+     "value": "10",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!JZKmqY7omGssgIJz.KYvStfKawYP3EVUd"
+  },
+  {
+   "_id": "eCssOLhpXeeHVn3w",
+   "name": "Alternate Movement: climb 30 ft",
+   "img": "icons/svg/upgrade.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": true,
+   "statuses": [],
+   "description": "<p>Enable the movement you chose.</p>",
+   "changes": [
+    {
+     "key": "system.attributes.movement.climb",
+     "mode": 4,
+     "value": "30",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!JZKmqY7omGssgIJz.eCssOLhpXeeHVn3w"
+  },
+  {
+   "_id": "6Rrt8zOIzKr0VusR",
+   "name": "Alternate Movement: swim 30 ft",
+   "img": "icons/svg/upgrade.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": true,
+   "statuses": [],
+   "description": "<p>Enable the movement you chose.</p>",
+   "changes": [
+    {
+     "key": "system.attributes.movement.swim",
+     "mode": 4,
+     "value": "30",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!JZKmqY7omGssgIJz.6Rrt8zOIzKr0VusR"
+  }
+ ]
 }

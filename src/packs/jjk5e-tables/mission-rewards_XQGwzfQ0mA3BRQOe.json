@@ -1,0 +1,98 @@
+{
+ "_id": "XQGwzfQ0mA3BRQOe",
+ "name": "Mission Rewards (Taking Missions)",
+ "img": "icons/svg/d20-grey.svg",
+ "description": "<p>Roll the reward of a mission of the given grade with the inline roll, or roll the table for a random mission grade.</p>",
+ "formula": "1d5",
+ "replacement": true,
+ "displayRoll": true,
+ "results": [
+  {
+   "_id": "6nf3D8ztel3K8Lbc",
+   "type": "text",
+   "name": "Grade 4",
+   "description": "<p><strong>Grade 4</strong> — [[/r (1d16 + 4) * 100]] dollars ($500–2,000)</p>",
+   "documentUuid": null,
+   "flags": {},
+   "img": "icons/svg/d20-black.svg",
+   "weight": 1,
+   "range": [
+    1,
+    1
+   ],
+   "drawn": false,
+   "_key": "!tables.results!XQGwzfQ0mA3BRQOe.6nf3D8ztel3K8Lbc"
+  },
+  {
+   "_id": "1QluK0h7jXHhq1pS",
+   "type": "text",
+   "name": "Grade 3",
+   "description": "<p><strong>Grade 3</strong> — [[/r (1d71 + 29) * 100]] dollars ($3,000–10,000)</p>",
+   "documentUuid": null,
+   "flags": {},
+   "img": "icons/svg/d20-black.svg",
+   "weight": 1,
+   "range": [
+    2,
+    2
+   ],
+   "drawn": false,
+   "_key": "!tables.results!XQGwzfQ0mA3BRQOe.1QluK0h7jXHhq1pS"
+  },
+  {
+   "_id": "zmczlB2LbqgPJTzS",
+   "type": "text",
+   "name": "Grade 2",
+   "description": "<p><strong>Grade 2</strong> — [[/r (1d151 + 99) * 100]] dollars ($10,000–25,000)</p>",
+   "documentUuid": null,
+   "flags": {},
+   "img": "icons/svg/d20-black.svg",
+   "weight": 1,
+   "range": [
+    3,
+    3
+   ],
+   "drawn": false,
+   "_key": "!tables.results!XQGwzfQ0mA3BRQOe.zmczlB2LbqgPJTzS"
+  },
+  {
+   "_id": "GWOZgYOzAAXvIpWa",
+   "type": "text",
+   "name": "Grade 1",
+   "description": "<p><strong>Grade 1</strong> — [[/r (1d401 + 99) * 1000]] dollars ($100,000–500,000)</p>",
+   "documentUuid": null,
+   "flags": {},
+   "img": "icons/svg/d20-black.svg",
+   "weight": 1,
+   "range": [
+    4,
+    4
+   ],
+   "drawn": false,
+   "_key": "!tables.results!XQGwzfQ0mA3BRQOe.GWOZgYOzAAXvIpWa"
+  },
+  {
+   "_id": "kpTfudWVpKtyUgU0",
+   "type": "text",
+   "name": "Special Grade",
+   "description": "<p><strong>Special Grade</strong> — $1,000,000 or more (GM)</p>",
+   "documentUuid": null,
+   "flags": {},
+   "img": "icons/svg/d20-black.svg",
+   "weight": 1,
+   "range": [
+    5,
+    5
+   ],
+   "drawn": false,
+   "_key": "!tables.results!XQGwzfQ0mA3BRQOe.kpTfudWVpKtyUgU0"
+  }
+ ],
+ "flags": {
+  "jjk5e": {
+   "source": "JJK 5e V.6 — Optional Rules"
+  }
+ },
+ "folder": null,
+ "_key": "!tables!XQGwzfQ0mA3BRQOe"
+}

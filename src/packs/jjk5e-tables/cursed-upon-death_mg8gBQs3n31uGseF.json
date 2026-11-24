@@ -1,0 +1,34 @@
+{
+ "_id": "mg8gBQs3n31uGseF",
+ "name": "Cursed Upon Death (madness check)",
+ "img": "icons/svg/d20-grey.svg",
+ "description": "<p>A sorcerer who dies without cursed energy returns as a Vengeful cursed spirit a week later (see Rules → Optional Rules).</p>",
+ "formula": "1d20",
+ "replacement": true,
+ "displayRoll": true,
+ "results": [
+  {
+   "_id": "1x5SZ7TJvJdL5vQX",
+   "type": "text",
+   "name": "Weekly DC 25 Wisdom save",
+   "description": "<p><strong>Weekly DC 25 Wisdom save</strong> — Failure: gain one level of indefinite madness and repeat next week. Success: lose all madness levels from this and stop saving.</p>",
+   "documentUuid": null,
+   "flags": {},
+   "img": "icons/svg/d20-black.svg",
+   "weight": 1,
+   "range": [
+    1,
+    20
+   ],
+   "drawn": false,
+   "_key": "!tables.results!mg8gBQs3n31uGseF.1x5SZ7TJvJdL5vQX"
+  }
+ ],
+ "flags": {
+  "jjk5e": {
+   "source": "JJK 5e V.6 — Optional Rules"
+  }
+ },
+ "folder": null,
+ "_key": "!tables!mg8gBQs3n31uGseF"
+}

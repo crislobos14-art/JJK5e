@@ -35,10 +35,38 @@
      ]
     ]
    },
-   "rev": "f866fbb354"
+   "rev": "263286f967",
+   "automation": "automated"
   }
  },
  "folder": "ar3Bgj4YHvYRp8DL",
  "sort": 1700,
- "_key": "!items!hpKpux84vzJqljJx"
+ "_key": "!items!hpKpux84vzJqljJx",
+ "effects": [
+  {
+   "_id": "4MCW6eDfbi29F8hb",
+   "name": "Flight Improvement",
+   "img": "icons/svg/upgrade.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.attributes.movement.fly",
+     "mode": 4,
+     "value": "@attributes.movement.walk",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!hpKpux84vzJqljJx.4MCW6eDfbi29F8hb"
+  }
+ ]
 }

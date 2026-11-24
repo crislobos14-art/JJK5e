@@ -8,7 +8,7 @@
  *   Technique Burnout), Maximum / Reduced Output, Soul Awareness, Limb Damage, summons.
  * - JJK panel on character sheets, Spanish / English UI, effect expiry (unless Times Up is active).
  */
-import { activityCECost, ceTransaction, blackFlashCheck, clashRoundsFromRefinement, multiDomainClash, vowBlocksUsage } from "./jjk5e-rules.mjs";
+import { activityCECost, ceTransaction, blackFlashCheck, clashRoundsFromRefinement, multiDomainClash, vowBlocksUsage, buildTechniqueItems, TECHNIQUE_SLOTS } from "./jjk5e-rules.mjs";
 
 const MODULE_ID = "jjk5e";
 const DATA_VERSION = "1.24.0";
@@ -1024,14 +1024,17 @@ async function syncTechnique(actor, { notify = true } = {}) {
   const ids = data.index
     .filter((e) => e.flags?.jjk5e?.technique === name && (e.flags.jjk5e.level ?? 99) <= lvl && !owned.has(baseName(e)))
     .map((e) => e._id);
-  if (!ids.length) return 0;
-  const docs = await Promise.all(ids.map((id) => data.pack.getDocument(id)));
+  // Original techniques made with the builder live in the world Items directory.
+  const customs = (game.items ?? []).filter((i) => i.flags?.jjk5e?.custom && i.flags.jjk5e.technique === name
+    && (i.flags.jjk5e.level ?? 99) <= lvl && !owned.has(baseName(i)));
+  const docs = [...await Promise.all(ids.map((id) => data.pack.getDocument(id))), ...customs];
   const toCreate = docs.filter(Boolean).map((d) => {
     const obj = d.toObject();
     foundry.utils.setProperty(obj, "_stats.compendiumSource", d.uuid);
     foundry.utils.setProperty(obj, "flags.core.sourceId", d.uuid);
     return obj;
   });
+  if (!toCreate.length) return 0;
   await actor.createEmbeddedDocuments("Item", toCreate, { jjk5eSkipPrereq: true });
   if (notify) ui.notifications.info(t("Notify.Gained", { name: actor.name, list: toCreate.map((d) => d.name).join(", ") }));
   return toCreate.length;
@@ -1049,7 +1052,8 @@ async function chooseTechnique(actor) {
   if (isHeavenlyOnly(actor)) return ui.notifications.warn(t("Notify.HRNoTechnique"));
   const data = await techniqueIndex();
   if (!data) return;
-  const names = [...new Set(data.index.map((e) => e.flags?.jjk5e?.technique).filter(Boolean))].sort();
+  const customNames = (game.items ?? []).filter((i) => i.flags?.jjk5e?.custom).map((i) => i.flags.jjk5e.technique);
+  const names = [...new Set([...data.index.map((e) => e.flags?.jjk5e?.technique), ...customNames].filter(Boolean))].sort();
   const current = actor.getFlag(MODULE_ID, "technique");
   const options = names.map((n) => `<option value="${esc(n)}" ${n === current ? "selected" : ""}>${esc(n)}</option>`).join("");
   const content = `<p>${t("Technique.Prompt", { name: esc(actor.name), level: techniqueLevel(actor) })}</p>`
@@ -1301,7 +1305,9 @@ async function onAttackRoll(rolls, subject) {
   const target = Math.max(2, 20 - stacks - bonusRange);
   const check = await new Roll("1d20").evaluate();
   const face = check.dice?.[0]?.results?.find((r) => r.active !== false)?.result ?? check.total;
-  const success = blackFlashCheck(face, stacks + bonusRange);
+  // Chosen by the Sparks: every critical hit is a Black Flash.
+  const always = actor.items.some((i) => i.flags?.jjk5e?.alwaysBlackFlash);
+  const success = always || blackFlashCheck(face, stacks + bonusRange);
   const Chat = docClass("ChatMessage");
   await check.toMessage({
     speaker: Chat.getSpeaker({ actor }),
@@ -1808,6 +1814,7 @@ function panelHTML(actor) {
       <div class="jjk-head-btns">
         <button type="button" data-action="pointBuy" title="${t("PointBuy.Title")}"><i class="fas fa-dice-d20"></i></button>
         <button type="button" data-action="updateAutomation" title="${t("Update.Title")}"><i class="fas fa-arrows-rotate"></i></button>
+        <button type="button" data-action="techniqueBuilder" title="${t("Builder.Title")}"><i class="fas fa-wand-magic-sparkles"></i></button>
         ${hr ? "" : `<button type="button" data-action="chooseTechnique" title="${t("Panel.ChooseTechnique")}"><i class="fas fa-hand-sparkles"></i></button>
         <button type="button" data-action="ceAbility" title="${t("Panel.SetAbility")}"><i class="fas fa-brain"></i></button>`}</div>
     </header>
@@ -1825,6 +1832,8 @@ function panelHTML(actor) {
       <div class="jjk-row">
         ${statusRow(domainOpen(actor), t("Domain.Open"), "closeDomain")}
         ${statusRow(inBurnout(actor), t("Burnout.Name"), "clearBurnout")}
+        ${soulDamageOf(actor) ? `<div class="jjk-row"><span><i class="fas fa-ghost"></i> ${t("Soul.Name")}: −${soulDamageOf(actor)} ${t("Soul.MaxHP")}</span>${game.user.isGM ? `<button type="button" data-action="clearSoul" title="${t("Soul.Clear")}"><i class="fas fa-xmark"></i></button>` : ""}</div>` : ""}
+        ${game.user.isGM ? `<button type="button" data-action="soulDamage"><i class="fas fa-ghost"></i> ${t("Soul.Apply")}</button>` : ""}
         ${canRecoverBurnout(actor) ? `<button type="button" data-action="burnoutRecovery"><i class="fas fa-brain"></i> ${t("Burnout.Recovery")} (4 CE)</button>` : ""}
         ${statusRow(!!zone, zone ? `${t("Zone.Name")} ×${zoneStacks}` : t("Zone.Name"), "clearZone")}
         ${statusRow(!!actor.getFlag(MODULE_ID, "pendingBlackFlash"), "Black Flash ×3", "clearBF")}
@@ -1891,7 +1900,13 @@ const PANEL_ACTIONS = {
     root.querySelector("[name=summonCount]")?.valueAsNumber),
   dismiss: (actor) => dismissSummons(actor),
   updateAutomation: (actor) => updateAutomation(actor),
-  burnoutRecovery: (actor) => burnoutRecovery(actor)
+  burnoutRecovery: (actor) => burnoutRecovery(actor),
+  clearSoul: (actor) => clearSoulDamage(actor),
+  techniqueBuilder: (actor) => techniqueBuilder(actor),
+  soulDamage: async (actor) => {
+    const n = await promptNumber(t("Soul.Apply"), t("Soul.Amount"), 0);
+    if (n > 0) await applySoulDamage(actor, n, { untilRest: true, source: game.user.name });
+  }
 };
 
 function makePanelClass() {
@@ -1971,6 +1986,173 @@ function addHeaderButton(app, root) {
   const anchor = header.querySelector('[data-action="close"], .close, .header-button.close');
   if (anchor) anchor.before(btn);
   else header.append(btn);
+}
+
+/* -------------------------------------------- */
+/*  Soul Damage (V.6 Rules of Thumb)              */
+/* -------------------------------------------- */
+
+// Soul Damage lowers maximum HP. Reverse Cursed Technique and regeneration cannot restore it: the reduction is an
+// effect on the actor (hp.tempmax), so healing stops at the reduced maximum. Sources that say "until a long rest"
+// mark the reduction as restUntil and it ends on a long rest; other sources stay until the GM removes the effect.
+const soulEffect = (actor) => actor?.effects?.find((e) => e.flags?.jjk5e?.kind === "soul");
+const soulDamageOf = (actor) => Number(soulEffect(actor)?.flags?.jjk5e?.soulDamage) || 0;
+
+async function applySoulDamage(actor, amount, { untilRest = true, source = "" } = {}) {
+  actor = requireActor(actor);
+  const dmg = Math.max(0, Math.floor(Number(amount) || 0));
+  if (!actor || !dmg) return 0;
+  const total = soulDamageOf(actor) + dmg;
+  const lasting = !untilRest || soulEffect(actor)?.flags?.jjk5e?.lasting === true;
+  await setKindEffect(actor, "soul", {
+    name: `${t("Soul.Name")} (−${total})`, img: "icons/magic/death/projectile-skull-flaming-purple.webp",
+    changes: [{ key: "system.attributes.hp.tempmax", mode: 2, value: String(-total) }],
+    description: `<p>${t(lasting ? "Soul.DescriptionLasting" : "Soul.Description", { total })}</p>`,
+    flags: { jjk5e: { soulDamage: total, lasting } }
+  });
+  // Keep current HP within the reduced maximum.
+  const hp = actor.system?.attributes?.hp ?? {};
+  const max = (Number(hp.max) || 0) + (Number(hp.tempmax) || 0);
+  if (Number(hp.value) > max) await actor.update({ "system.attributes.hp.value": Math.max(0, max) });
+  await chat(actor, `<p><i class="fas fa-ghost"></i> ${t("Soul.Applied", { name: esc(actor.name), dmg, total, source: esc(source) })}</p>`);
+  return total;
+}
+
+async function clearSoulDamage(actor) {
+  const e = soulEffect(requireActor(actor));
+  if (e) await e.delete();
+}
+
+/** Is this damage Soul Damage? Item flag soulDamage: true | [activityIds]; or the attacker's Soul Strike effect. */
+function soulDamageSource(workflow) {
+  const item = workflow?.item;
+  const activity = workflow?.activity;
+  const sd = item?.flags?.jjk5e?.soulDamage;
+  if (sd === true || (Array.isArray(sd) && sd.includes(activity?.id))) return { source: item.name, lasting: !!item.flags.jjk5e.soulLasting };
+  const fx = workflow?.actor?.effects?.find((e) => !e.disabled && e.flags?.jjk5e?.soulStrike);
+  const strike = fx?.flags?.jjk5e?.soulStrike;
+  if (!strike) return null;
+  const hit = { source: fx.name, lasting: !!fx.flags.jjk5e.soulLasting };
+  const unarmed = activity?.attack?.type?.classification === "unarmed" || item?.system?.type?.value === "natural"
+    || /unarmed/i.test(item?.name ?? "");
+  const types = new Set([...(workflow?.damageRolls ?? [])].flatMap((r) => [r.options?.type, ...(r.options?.types ?? [])]).filter(Boolean));
+  if ((strike === "unarmed" && unarmed) || (strike === "fire" && types.has("fire")) || strike === "all") return hit;
+  return null;
+}
+
+/** After Midi applies damage: turn the HP lost to Soul Damage into a max HP reduction. */
+async function onSoulWorkflow(workflow) {
+  const hit = soulDamageSource(workflow);
+  if (!hit) return;
+  const { source } = hit;
+  const untilRest = !hit.lasting;
+  for (const entry of workflow?.damageList ?? []) {
+    const lost = (Number(entry.hpDamage) || 0) + (Number(entry.tempDamage) || 0) || Number(entry.totalDamage) || 0;
+    if (lost <= 0) continue;
+    const doc = await fromUuid(entry.actorUuid ?? entry.tokenUuid ?? entry.targetUuid ?? "").catch(() => null);
+    const actor = doc?.actor ?? doc;
+    if (actor?.documentName !== "Actor") continue;
+    if (actor.isOwner) await applySoulDamage(actor, lost, { untilRest, source });
+    else {
+      // The GM applies it: one click on a whispered card (no automatic privileged request).
+      const gms = game.users.filter((u) => u.isGM).map((u) => u.id);
+      await docClass("ChatMessage").create({
+        whisper: gms, speaker: { alias: "JJK 5e" },
+        content: `<p>${t("Soul.Pending", { name: esc(actor.name), dmg: lost, source: esc(source) })}</p>
+          <button type="button" data-jjk5e-soul="${esc(actor.uuid)}" data-amount="${lost}" data-rest="${untilRest}">
+          <i class="fas fa-ghost"></i> ${t("Soul.Apply")}</button>`
+      });
+    }
+  }
+}
+
+/* -------------------------------------------- */
+/*  Original Innate Technique builder            */
+/* -------------------------------------------- */
+
+const BUILDER_FOLDER = "JJK: Custom Techniques";
+
+function builderRow(i, slot, f = {}) {
+  const opt = (list, cur) => list.map(([v, l]) => `<option value="${v}" ${v === (cur ?? "") ? "selected" : ""}>${l}</option>`).join("");
+  const isDomain = slot.kind === "Domain Expansion";
+  return `<fieldset class="jjk-builder-row"><legend>${t("Builder.Level", { level: slot.level })} — ${slot.kind}</legend>
+    <input type="hidden" name="f${i}.level" value="${slot.level}">
+    <div class="form-group"><label>${t("Builder.FeatureName")}</label><input type="text" name="f${i}.name" value="${esc(f.name ?? "")}"></div>
+    <div class="form-group"><label>${t("Builder.Type")}</label><select name="f${i}.type">${opt([["attack", t("Builder.TAttack")], ["save", t("Builder.TSave")],
+      ["damage", t("Builder.TDamage")], ["heal", t("Builder.THeal")], ["utility", t("Builder.TUtility")], ["passive", t("Builder.TPassive")],
+      ["domain", t("Builder.TDomain")]], f.type ?? (isDomain ? "domain" : "attack"))}</select>
+      <label>${t("Builder.Activation")}</label><select name="f${i}.activation">${opt([["action", "Action"], ["bonus", "Bonus Action"],
+      ["reaction", "Reaction"], ["special", "Special"]], f.activation ?? "action")}</select></div>
+    <div class="form-group"><label>CE</label><input type="number" min="0" name="f${i}.ce" value="${f.ce ?? (isDomain ? 20 : 1)}" style="width:4em">
+      <label>${t("Builder.ScaleMax")}</label><select name="f${i}.scaleMax">${opt([["", "—"], ["ce", t("Builder.UpToCE")], ["prof", t("Builder.UpToProf")],
+      ["ce2", t("Builder.UpTo2CE")]], f.scaleMax ?? "")}</select></div>
+    <div class="form-group"><label>${t("Builder.Dice")}</label><input type="text" name="f${i}.dice" placeholder="2d8" value="${esc(f.dice ?? "")}" style="width:5em">
+      <select name="f${i}.damageType">${opt(["acid", "bludgeoning", "cold", "fire", "force", "lightning", "necrotic", "piercing", "poison",
+        "psychic", "radiant", "slashing", "thunder"].map((d) => [d, d]), f.damageType ?? "force")}</select>
+      <label><input type="checkbox" name="f${i}.perCE" ${f.perCE ? "checked" : ""}> ${t("Builder.PerCE")}</label></div>
+    <div class="form-group"><label>${t("Builder.Save")}</label><select name="f${i}.save">${opt(["str", "dex", "con", "int", "wis", "cha"]
+      .map((a) => [a, a.toUpperCase()]), f.save ?? "con")}</select>
+      <label>${t("Builder.Range")}</label><input type="number" min="0" name="f${i}.range" value="${f.range ?? 30}" style="width:4em">
+      <label>${t("Builder.Area")}</label><input type="number" min="0" name="f${i}.area" value="${f.area ?? 0}" style="width:4em"></div>
+    <textarea name="f${i}.description" rows="3" placeholder="${t("Builder.DescriptionHint")}">${esc(f.description ?? "")}</textarea>
+  </fieldset>`;
+}
+
+function readBuilderForm(form) {
+  const out = { features: [] };
+  for (const el of form?.elements ?? []) {
+    if (!el.name) continue;
+    const value = el.type === "checkbox" ? el.checked : el.value;
+    const m = /^f(\d+)\.(\w+)$/.exec(el.name);
+    if (m) (out.features[Number(m[1])] ??= {})[m[2]] = value;
+    else out[el.name] = value;
+  }
+  if (out.earlyDomain) {
+    const d = out.features.find((f) => f?.type === "domain" && Number(f.level) === 18);
+    if (d) d.level = 3;
+  }
+  out.features = out.features.filter((f) => f?.name?.trim());
+  return out;
+}
+
+/** Create (or replace) the items of an original innate technique in the world Items folder. */
+async function saveCustomTechnique(spec) {
+  const items = buildTechniqueItems(spec);
+  if (!items.length) return [];
+  const Folder = docClass("Folder");
+  let folder = game.folders?.find((f) => f.type === "Item" && f.name === BUILDER_FOLDER);
+  if (!folder && Folder?.create) folder = await Folder.create({ name: BUILDER_FOLDER, type: "Item", color: "#4b0082" });
+  const Item = docClass("Item");
+  const old = (game.items ?? []).filter((i) => i.flags?.jjk5e?.custom && i.flags.jjk5e.technique === spec.name);
+  if (old.length) await Item.deleteDocuments(old.map((i) => i.id));
+  return Item.createDocuments(items.map((i) => ({ ...i, folder: folder?.id ?? null })), { keepId: true });
+}
+
+/**
+ * Open the builder. With an actor, the new technique is also assigned to it (items added up to its level).
+ * Follows the manual's guidelines: Lapse (1st), Lapse/Extension (3rd), Extension (6th), Maximum (11th), Domain (18th).
+ */
+async function techniqueBuilder(actor = null) {
+  if (!game.user.isGM && !game.user.can?.("ITEM_CREATE")) return ui.notifications.warn(t("Builder.NoPermission"));
+  const content = `<div class="jjk-builder">
+    <p class="notes">${t("Builder.Intro")}</p>
+    <div class="form-group"><label>${t("Builder.Name")}</label><input type="text" name="name" required></div>
+    <label><input type="checkbox" name="earlyDomain"> ${t("Builder.EarlyDomain")}</label>
+    ${TECHNIQUE_SLOTS.map((slot, i) => builderRow(i, slot)).join("")}</div>`;
+  const spec = await foundry.applications.api.DialogV2.prompt({
+    window: { title: t("Builder.Title"), resizable: true }, position: { width: 640, height: 720 }, content, rejectClose: false,
+    ok: { label: t("Builder.Create"), callback: (event, button) => readBuilderForm(button.form) }
+  });
+  if (!spec?.name?.trim()) return null;
+  spec.name = spec.name.trim();
+  const created = await saveCustomTechnique(spec);
+  ui.notifications.info(t("Builder.Created", { name: spec.name, n: created.length }));
+  if (actor?.isOwner) {
+    await actor.setFlag(MODULE_ID, "technique", spec.name);
+    await syncTechnique(actor);
+    await applyScaling(actor);
+  }
+  return created;
 }
 
 /* -------------------------------------------- */
@@ -2194,7 +2376,8 @@ Hooks.once("init", () => {
     findPool, chooseTechnique, syncTechnique, promptCE, shortRestCE, chooseCEAbility, negativeEmotion,
     applyScaling, openPanel, maximumOutput, setReducedOutput, setSoulAwareness, setLimb, rollLimb,
     summon, dismissSummons, syncResource, missingPrereqs, applyCEEffects, activateGroup, endGroup,
-    updateAutomation, updateAllAutomation, outdatedItems, burnoutRecovery
+    updateAutomation, updateAllAutomation, outdatedItems, burnoutRecovery, applySoulDamage, clearSoulDamage,
+    techniqueBuilder, buildTechniqueItems
   };
 });
 
@@ -2280,6 +2463,16 @@ Hooks.once("ready", async () => {
   Hooks.on("renderActorSheet", (app, html) => addHeaderButton(app, html));
   Hooks.on("renderChatMessageHTML", (message, html) => {
     html?.querySelector?.("[data-jjk5e-update-all]")?.addEventListener("click", (ev) => { ev.preventDefault(); updateAllAutomation(); });
+    for (const b of html?.querySelectorAll?.("[data-jjk5e-soul]") ?? []) {
+      b.addEventListener("click", async (ev) => {
+        ev.preventDefault();
+        if (!game.user.isGM) return;
+        const doc = await fromUuid(b.dataset.jjk5eSoul).catch(() => null);
+        const actor = doc?.actor ?? doc;
+        if (actor) await applySoulDamage(actor, Number(b.dataset.amount), { untilRest: b.dataset.rest !== "false" });
+        b.disabled = true;
+      });
+    }
   });
   Hooks.on("renderActorSheetV2", (app, element) => addHeaderButton(app, element));
 
@@ -2508,6 +2701,7 @@ function applySureHit(actor, config) {
   // Vanilla attack-roll hooks are not target-specific. Do not grant an unconditional
   // sure hit when the targeted set contains mixed or unknown locations.
   if (!state || targets.length !== 1 || !insideDomain(state, targets[0])) return;
+  if (targets[0]?.actor?.flags?.jjk5e?.sureHitImmune) return;
   const roll = config?.rolls?.[0];
   if (!roll) return;
   roll.options ??= {};
@@ -2810,6 +3004,8 @@ function registerMidiHooks() {
     if (!(workflow && setting("domainSureHit") && domainOpen(workflow.actor)
       && workflow.item?.flags?.jjk5e?.technique && !sureHitBlocked(workflow.actor))) return false;
     const state = getDomain(workflow.actor);
+    // Celestial Body (Heavenly Restriction): sure-hit effects cannot target this creature.
+    if ((target?.actor ?? target)?.flags?.jjk5e?.sureHitImmune) return false;
     return !!state && !!target && insideDomain(state, target);
   };
   // Midi decides each target's hit here (after cover, AC bonuses and reactions).
@@ -2841,6 +3037,9 @@ function registerMidiHooks() {
     } catch (err) { console.error(`${MODULE_ID} | midi sure-hit saves`, err); }
   });
   // Animations with Midi's real hit list.
+  Hooks.on("midi-qol.RollComplete", (workflow) => {
+    onSoulWorkflow(workflow).catch((err) => console.error(`${MODULE_ID} | soul damage`, err));
+  });
   Hooks.on("midi-qol.RollComplete", (workflow) => {
     try {
       if (!animOn()) return;
@@ -3174,7 +3373,9 @@ const MISFORTUNES = [
 const SENSES = [{ en: "touch", es: "tacto" }, { en: "taste", es: "gusto" }, { en: "smell", es: "olfato" }, { en: "sight", es: "vista" }];
 
 const getVows = (actor) => foundry.utils.deepClone(actor?.getFlag?.(MODULE_ID, "vows") ?? []);
-const vowLimit = (actor) => Number(actor?.system?.attributes?.prof) || 2;
+// Pact Maker: twice the proficiency bonus.
+const vowLimit = (actor) => (Number(actor?.system?.attributes?.prof) || 2)
+  * Math.max(1, ...(actor?.items ?? []).map((i) => Number(i.flags?.jjk5e?.vowLimitMultiplier) || 1));
 
 function vowChanges(vow) {
   return (vow.terms ?? []).flatMap((term) => VOW_TERMS[term.type]?.changes(term.value) ?? []);
@@ -3840,6 +4041,9 @@ Hooks.once("ready", () => {
     Hooks.on(hook, (app, element) => { try { addSheetStrip(app, element); } catch (err) { console.error(`${MODULE_ID} | strip`, err); } });
   }
   Hooks.on("dnd5e.restCompleted", (actor, result, config) => {
+    // Soul Damage marked "until a long rest" ends on a long rest.
+    const se = soulEffect(actor);
+    if ((result?.longRest ?? config?.type === "long") && actor?.isOwner && se && !se.flags?.jjk5e?.lasting) se.delete();
     if ((result?.longRest ?? config?.type === "long") && actor?.isOwner && actor.getFlag(MODULE_ID, "burnoutRecoveries")) {
       actor.unsetFlag(MODULE_ID, "burnoutRecoveries");
     }

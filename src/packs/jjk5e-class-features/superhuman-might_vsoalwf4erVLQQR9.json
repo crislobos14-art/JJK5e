@@ -30,9 +30,37 @@
    },
    "bodyCost": 1,
    "bodyCategory": "str",
-   "rev": "2bf9fdf828"
+   "rev": "c88a02f2b1",
+   "automation": "automated"
   }
  },
  "folder": "fG9dHqhvzewoqwrt",
- "_key": "!items!vsoalwf4erVLQQR9"
+ "_key": "!items!vsoalwf4erVLQQR9",
+ "effects": [
+  {
+   "_id": "vL037u1uBw3UtOP2",
+   "name": "Superhuman Might",
+   "img": "modules/jjk5e/icons/feature.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.dnd5e.powerfulBuild",
+     "mode": 5,
+     "value": "true",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!vsoalwf4erVLQQR9.vL037u1uBw3UtOP2"
+  }
+ ]
 }

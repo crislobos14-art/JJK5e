@@ -7344,6 +7344,187 @@ def feat_review2(S):
         mark(it)
 
 
+# ---------------------------------------------------------------- backlog v1.63: soul damage, passives, cursed tools
+
+def backlog_fixes(S):
+    F, CF, R, T, EQ = "jjk5e-feats", "jjk5e-class-features", "jjk5e-races", "jjk5e-techniques", "jjk5e-equipment"
+    norm = lambda s: s.replace("’", "'")
+    def G(name, pack):
+        hits = [d for (pk, _, d) in S.src.values() if pk == pack and norm(d["name"]) == name]
+        if len(hits) != 1: raise KeyError(f"{name} in {pack}: {len(hits)}")
+        S.dirty.add(hits[0]["_id"]); return hits[0]
+    jf = lambda it: it.setdefault("flags", {}).setdefault("jjk5e", {})
+    acts = lambda it: it["system"].setdefault("activities", {})
+    UP, ADD, OVR, DOWN = 4, 2, 5, 3
+
+    def passive(it, key, name, changes, desc="", off=False, flags=None):
+        eid = _passive(it, key, name, changes, desc=desc)
+        for e in it["effects"]:
+            if e["_id"] == eid:
+                e["disabled"] = off
+                if flags: e["flags"]["jjk5e"].update(flags)
+        mark(it); return eid
+
+    def adv(it, key, typ, title, cfg, level=0):
+        a = it["system"].setdefault("advancement", {})
+        if isinstance(a, list): a = it["system"]["advancement"] = {x["_id"]: x for x in a}
+        aid = sid(it["_id"], "adv", key)
+        a[aid] = {"_id": aid, "type": typ, "level": level, "title": title, "value": {}, "configuration": cfg}
+        mark(it)
+
+    # ---- Soul Damage sources (module: Midi damage → max HP reduction) ----
+    for name, pack, which, lasting in (("Transfiguration", T, True, False), ("Soul Split Katana", EQ, True, False),
+                                       ("Maximum: Instrumentalization", F, ["sbWFhy3jzZunCQjG"], False),
+                                       ("Heat Dissociation", T, True, True)):
+        it = G(name, pack); jf(it)["soulDamage"] = which
+        if lasting: jf(it)["soulLasting"] = True
+        note(it, "Soul Damage: the HP this deals also lowers the target's maximum HP (Midi-QOL; otherwise use "
+                 "the JJK panel). RCT and regeneration cannot restore it." + ("" if lasting else " Ends on a long rest."))
+        mark(it)
+    for name, mode, lasting, desc in (("Soulfire", "fire", False, "Fire damage you deal this turn ignores fire immunity and is Soul Damage (until a long rest)."),
+                                      ("Maximum: Soul Punch", "unarmed", True, "Unarmed strikes this turn target the soul: their damage lowers maximum HP.")):
+        it = G(name, F); u = next(a for a in acts(it).values() if a["type"] == "utility")
+        u["range"], u["target"] = RANGE_SELF, SELF
+        eid = fx(it, "soul", name, rounds=1, special=("turnEnd",), desc=desc)
+        for e in it["effects"]:
+            if e["_id"] == eid: e["flags"]["jjk5e"].update({"soulStrike": mode, "soulLasting": lasting})
+        u["effects"] = [x for x in u.get("effects", []) if x.get("_id") != eid]; apply(u, eid); mark(it)
+
+    # ---- class features ----
+    it = G("Evasion", CF); passive(it, "ev", "Evasion", [("flags.midi-qol.superSaver.dex", OVR, "1")],
+                                   desc="DEX saves for half damage: none on a success, half on a failure.")
+    it = G("Resistant", CF)
+    for ab, label in (("str", "Brawn"), ("dex", "Evasion"), ("con", "Endurance"), ("int", "Discernment"), ("wis", "Intuition"), ("cha", "Ego")):
+        passive(it, ab, f"Resistant: {label} ({ab.upper()})", [(f"flags.midi-qol.superSaver.{ab}", OVR, "1")], off=True,
+                desc="Enable the saving throw(s) you chose (one at 7th, more at 14th and 20th).")
+    note(it, "Enable the effect of each chosen saving throw.")
+    it = G("Celestial Body", CF)
+    passive(it, "cb", "Celestial Body", [("flags.jjk5e.sureHitImmune", OVR, "1")],
+            desc="Domain sure-hit effects cannot target you (the module skips you).")
+    it = G("Sorcerous Restoration", CF); jf(it)["srRegainCE"] = 4
+    note(it, "Regains 4 CE automatically when you finish a short rest."); mark(it)
+    it = G("Superhuman Might", CF); passive(it, "pb", "Superhuman Might", [("flags.dnd5e.powerfulBuild", OVR, "true")])
+
+    # ---- races ----
+    passive(G("Skills", R), "mar", "Martial weapons", [("system.traits.weaponProf.value", ADD, "mar")])
+    passive(G("Warrior Training", R), "arm", "Light and medium armor",
+            [("system.traits.armorProf.value", ADD, "lgt"), ("system.traits.armorProf.value", ADD, "med")])
+    passive(G("Savage Attacks", R), "sav", "Savage Attacks", [("flags.dnd5e.meleeCriticalDamageDice", ADD, "1")])
+    adv(G("Refined Study", R), "sk", "Trait", "Refined Study", {"mode": "default", "allowReplacements": True, "grants": [],
+        "choices": [{"count": 2, "pool": ["skills:*"]}]})
+    adv(G("Life Experience", R), "sk", "Trait", "Life Experience", {"mode": "default", "allowReplacements": True, "grants": [],
+        "choices": [{"count": 2, "pool": ["skills:*", "tool:*"]}]})
+    adv(G("Tool Proficiency", R), "tl", "Trait", "Artisan's tools", {"mode": "default", "allowReplacements": True, "grants": [],
+        "choices": [{"count": 1, "pool": ["tool:art:*"]}]})
+    adv(G("Tailored Appearance", R), "ex", "Trait", "Tailored Appearance (expertise)", {"mode": "expertise", "allowReplacements": False,
+        "grants": [], "choices": [{"count": 1, "pool": ["skills:itm", "skills:per", "skills:prf"]}]})
+
+    # ---- feats ----
+    passive(G("Curse Resistance", F), "cr", "Curse Resistance", [("flags.midi-qol.magicResistance.all", OVR, "1")],
+            desc="Advantage on saving throws against cursed techniques and other magical effects.")
+    passive(G("Cursed Armor (4 PP)", F), "ac", "Cursed Armor", [("system.attributes.ac.bonus", ADD, "+2")])
+    passive(G("Multiple Eyes (3 PP)", F), "eyes", "Multiple Eyes", [("system.skills.prc.roll.mode", UP, "1")],
+            desc="Advantage on Wisdom (Perception) checks that rely on sight.")
+    passive(G("Focused Attacks", F), "crit", "Focused Attacks (+1 crit range)", [("flags.dnd5e.weaponCriticalThreshold", DOWN, "19")])
+    passive(G("Flight (6 PP)", F), "fly", "Flight", [("system.attributes.movement.fly", UP, "30")])
+    passive(G("Flight Improvement (3 PP)", F), "fly", "Flight Improvement", [("system.attributes.movement.fly", UP, "@attributes.movement.walk")])
+    it = G("Alternate Movement (3 PP)", F)
+    for k, key, v in (("burrow", "burrow", 10), ("climb", "climb", 30), ("swim", "swim", 30)):
+        passive(it, k, f"Alternate Movement: {key} {v} ft", [(f"system.attributes.movement.{key}", UP, str(v))], off=True,
+                desc="Enable the movement you chose.")
+    it = G("Alternate Movement Improvement (2 PP)", F)
+    for k, key in (("climb", "climb"), ("swim", "swim")):
+        passive(it, k, f"Improvement: {key} = walking speed", [(f"system.attributes.movement.{key}", UP, "@attributes.movement.walk")], off=True)
+    b = passive(it, "burrow", "Improvement: burrow 10 ft (15 ft at 10th)", [("system.attributes.movement.burrow", UP, "10")], off=True)
+    for e in it["effects"]:
+        if e["_id"] == b: e["flags"]["jjk5e"]["levelTable"] = {"class": "*", "table": [[1, 10], [10, 15]]}
+    passive(G("Size Increase (4 PP)", F), "size", "Size Increase (+2 STR, −2 DEX)",
+            [("system.abilities.str.value", ADD, "2"), ("system.abilities.dex.value", ADD, "-2")],
+            desc="Also one size larger (set the size on the sheet) and natural weapon die one tier higher.")
+    passive(G("Powerful Build (2 PP)", F), "pb", "Powerful Build", [("flags.dnd5e.powerfulBuild", OVR, "true")])
+    passive(G("Survivor", F), "surv", "Survivor (at half HP or lower)",
+            [("system.traits.dr.value", ADD, t) for t in ("acid", "bludgeoning", "cold", "fire", "force", "lightning", "necrotic",
+                                                         "piercing", "poison", "psychic", "radiant", "slashing", "thunder")],
+            off=True, desc="Enable while you are at half your hit points or lower.")
+    it = G("Bottomless Cursed Energy", F); jf(it)["ceMaxBonus"] = "2 * @details.level"; note(it, "CE maximum +2 per level (automatic)."); mark(it)
+    it = G("Unending Cursed Energy Reserves", F); jf(it)["ceMaxBonus"] = 20; note(it, "CE maximum +20 (automatic)."); mark(it)
+    it = G("Immense Cursed Energy", F); jf(it)["ceMaxBonus"] = CEMOD
+    adv(it, "asi", "AbilityScoreImprovement", "Immense Cursed Energy (+1 WIS or CHA)",
+        {"points": 1, "cap": 1, "fixed": {}, "locked": ["str", "dex", "con", "int"]})
+    note(it, "CE maximum + CE modifier (automatic).")
+    it = G("Blessed by Black Sparks", F); jf(it)["blackFlashRange"] = 3; note(it, "Black Flash range +3 (automatic)."); mark(it)
+    it = G("Pact Maker", F); jf(it)["vowLimitMultiplier"] = 2; note(it, "Binding vow limit = 2 × proficiency bonus (automatic)."); mark(it)
+
+    # ---- techniques ----
+    it = G("Chosen by the Sparks", T); jf(it)["alwaysBlackFlash"] = True
+    note(it, "Every critical hit is a Black Flash (no second d20)."); mark(it)
+
+    # ---- cursed tools ----
+    it = G("Prayer Beads", EQ)
+    a = act(it, "amp", "utility", "Amplify Technique (1–3 CE): +1 save DC per CE", "special", range=RANGE_SELF, target=SELF)
+    cost(it, a, 1, 1, "3")
+    it["system"]["uses"] = {"max": "1", "spent": 0, "recovery": [{"period": "lr", "type": "recoverAll"}]}
+    a["consumption"]["targets"] = a["consumption"].get("targets", []) + [{"type": "itemUses", "value": "1", "target": "", "scaling": {}}]
+    apply(a, fx(it, "amp", "Amplified technique", rounds=1, changes=[("system.bonuses.spell.dc", ADD, "+JJKSCALING")],
+                desc="Your next cursed technique's save DC is higher."))
+    note(it, "Advantage on saves against frightened and charmed: apply by hand."); mark(it)
+    it = G("Clockwork Amulet", EQ)
+    a = act(it, "ten", "utility", "Take 10 on an attack roll (1/dawn)", "special", range=RANGE_SELF, target=SELF)
+    it["system"]["uses"] = {"max": "1", "spent": 0, "recovery": [{"period": "dawn", "type": "recoverAll"}]}
+    a["consumption"]["targets"] = [{"type": "itemUses", "value": "1", "target": "", "scaling": {}}]
+    note(it, "Use it, then roll the attack as a 10 on the d20."); mark(it)
+    it = G("Cursed Tattoo", EQ)
+    for k, label, formula in (("g3", "Grade 3: 13 + DEX", "13 + @abilities.dex.mod"),
+                              ("g2", "Grade 2: 16 + DEX (max 2)", "16 + min(2, @abilities.dex.mod)"), ("g1", "Grade 1: 20", "20")):
+        passive(it, k, f"Cursed Tattoo ({label})", [("system.attributes.ac.calc", OVR, "custom"), ("system.attributes.ac.formula", OVR, formula)],
+                off=True, desc="Enable your tattoo's grade. Only while not wearing armor (a shield is allowed).")
+    note(it, "Enable the effect of your tattoo's grade.")
+    it = G("Crystal Bracelet", EQ)
+    it["system"]["uses"] = {"max": "3", "spent": 0, "recovery": [], "autoDestroy": False}
+    for a in acts(it).values():
+        if a["type"] == "utility": a["consumption"]["targets"] = [{"type": "itemUses", "value": "1", "target": "", "scaling": {}}]
+    mark(it)
+    for n, t in (("Necklace of Adaptation", "Breathe in any environment; advantage on saves to avoid or end Poisoned: apply by hand."),
+                 ("Dread Helm", "Descriptive: identity checks from your face are impossible.")):
+        it = G(n, EQ); note(it, t); mark(it)
+
+    # Split items whose text was merged into another entry.
+    mono = G("Comprehensive Monocle", EQ)
+    ring_act = acts(mono).pop("Pb0TXfMkgsDZZiRN", None)
+    ring_fx = [e for e in mono.get("effects", []) if e["name"].startswith("Failed save")]
+    mono["effects"] = [e for e in mono.get("effects", []) if e not in ring_fx]
+    jf(mono).get("ceCosts", {}).pop("Pb0TXfMkgsDZZiRN", None)
+    mono["system"]["description"]["value"] = mono["system"]["description"]["value"].split("<p>Mind Sharpener Ring")[0].rstrip()
+    ring = S.add(EQ, {"_id": sid("cursed-tools", "mind-sharpener-ring"), "name": "Mind Sharpener Ring", "type": "equipment",
+        "img": "icons/equipment/finger/ring-band-engraved-gold.webp", "folder": mono.get("folder"),
+        "system": {"description": {"value": "<p><em>Cursed Item, Grade 3 (Requires Attunement)</em></p><p>As iron sharpens iron, so does "
+                   "a friend sharpen friend. When you fail a Constitution saving throw to maintain Concentration, you can spend 1 CE "
+                   "as a Reaction to succeed instead.</p>"},
+                   "source": mono["system"].get("source", {}), "type": {"value": "ring", "baseItem": ""}, "attunement": "required",
+                   "quantity": 1, "rarity": "uncommon", "activities": {}, "uses": {"max": "", "spent": 0, "recovery": []}},
+        "effects": [], "flags": {"jjk5e": {"grade": "Grade 3"}}}, "mind-sharpener-ring")
+    r = act(ring, "keep", "utility", "Reaction (1 CE): succeed on the concentration save", "reaction", range=RANGE_SELF, target=SELF)
+    r["activation"]["condition"] = "When you fail a CON save to maintain Concentration"
+    cost(ring, r, 1); mark(ring)
+    col = G("Collar of the Chained", EQ)
+    col["system"]["description"]["value"] = col["system"]["description"]["value"].split("<p>Cursed Shot Ammunition")[0].rstrip()
+    acts(col).clear()
+    passive(col, "spd", "Collar of the Chained (+10 ft)", [("system.attributes.movement.walk", ADD, "10")],
+            desc="Only for a cursed spirit or shikigami wearing it.")
+    ammo = S.add(EQ, {"_id": sid("cursed-tools", "cursed-shot-ammunition"), "name": "Cursed Shot Ammunition", "type": "consumable",
+        "img": "icons/weapons/ammunition/bullets-cartridge-shell-gray.webp", "folder": col.get("folder"),
+        "system": {"description": {"value": "<p><em>Cursed Item, Grade 3</em></p><p>You have a +1 bonus to attack and damage rolls with "
+                   "this ammunition. On a miss, you can use your reaction to reroll the attack roll against a target within 15 ft of "
+                   "the original target. After being fired, the ammunition loses its mystical properties.</p>"},
+                   "source": col["system"].get("source", {}), "type": {"value": "ammo", "subtype": "firearmBullet"}, "magicalBonus": 1,
+                   "properties": ["mgc"], "quantity": 10, "rarity": "uncommon", "activities": {},
+                   "uses": {"max": "1", "spent": 0, "recovery": [], "autoDestroy": True},
+                   "damage": {"base": {"number": None, "denomination": None, "types": [], "bonus": "", "custom": {"enabled": False}}}},
+        "effects": [], "flags": {"jjk5e": {"grade": "Grade 3"}}}, "cursed-shot-ammunition")
+    act(ammo, "reroll", "utility", "Reaction: reroll a missed attack vs a target within 15 ft", "reaction", range=_r(15), target=one_creature())
+    mark(ammo)
+
+
 # ---------------------------------------------------------------- core rules (Intricacies of Sorcery)
 
 def rules_fixes(S):
@@ -7656,7 +7837,8 @@ TECHNIQUES = {"Antigravity System": antigravity_system,
               "_review": review_fixes,
               "_weapons": weapon_fixes,
               "_rules": rules_fixes,
-              "_featreview": feat_review2}
+              "_featreview": feat_review2,
+              "_backlog": backlog_fixes}
 
 if __name__ == "__main__":
     args = sys.argv[1:]

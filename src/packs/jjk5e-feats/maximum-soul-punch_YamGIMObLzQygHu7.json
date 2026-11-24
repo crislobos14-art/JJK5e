@@ -38,12 +38,24 @@
      }
     },
     "range": {
-     "units": "self"
+     "units": "self",
+     "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
-    }
+    },
+    "effects": [
+     {
+      "_id": "qk7HSR3OzjwRGGQJ",
+      "onSave": false
+     }
+    ]
    }
   },
   "prerequisites": {
@@ -66,10 +78,40 @@
    "forTechniques": [
     "Divergent Fist"
    ],
-   "rev": "bcd70e39ed"
+   "rev": "61fc9a133e",
+   "automation": "automated"
   }
  },
  "folder": "wZIFQphpPzNuXv3W",
  "sort": 300,
- "_key": "!items!YamGIMObLzQygHu7"
+ "_key": "!items!YamGIMObLzQygHu7",
+ "effects": [
+  {
+   "_id": "qk7HSR3OzjwRGGQJ",
+   "name": "Maximum: Soul Punch",
+   "img": "modules/jjk5e/icons/techniques/divergent-fist.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Unarmed strikes this turn target the soul: their damage lowers maximum HP.</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null,
+     "soulStrike": "unarmed",
+     "soulLasting": true
+    },
+    "dae": {
+     "specialDuration": [
+      "turnEnd"
+     ]
+    }
+   },
+   "_key": "!items.effects!YamGIMObLzQygHu7.qk7HSR3OzjwRGGQJ"
+  }
+ ]
 }

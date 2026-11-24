@@ -119,3 +119,10 @@ button.jjk5e-levelup { display: block; margin: 4px auto 0; padding: 2px 10px; fo
 .standard-form.jjk-mode-none .jjk5e-asi { display: none; }
 .standard-form:has(.jjk5e-asi-mode) .pill-lg:has(dnd5e-checkbox[name="asi-selected"]) { display: none; }
 .jjk5e-choice-note { margin: 4px 0 6px; font-style: italic; }
+
+/* Original Technique Builder */
+.jjk-builder { max-height: 620px; overflow-y: auto; padding-right: 4px; }
+.jjk-builder-row { border: 1px solid var(--color-border-light-tertiary, #999); border-radius: 4px; margin: 6px 0; padding: 4px 8px; }
+.jjk-builder-row legend { font-weight: bold; }
+.jjk-builder-row .form-group { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; margin: 2px 0; }
+.jjk-builder-row textarea { width: 100%; }

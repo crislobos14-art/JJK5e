@@ -37,7 +37,14 @@
      "condition": ""
     },
     "consumption": {
-     "targets": [],
+     "targets": [
+      {
+       "type": "itemUses",
+       "value": "1",
+       "target": "",
+       "scaling": {}
+      }
+     ],
      "scaling": {
       "allowed": false
      }
@@ -52,12 +59,19 @@
      "concentration": false
     }
    }
+  },
+  "uses": {
+   "max": "3",
+   "spent": 0,
+   "recovery": [],
+   "autoDestroy": false
   }
  },
  "flags": {
   "jjk5e": {
    "grade": "4th Grade",
-   "rev": "7b51f0224a"
+   "rev": "e971582887",
+   "automation": "automated"
   }
  },
  "effects": [

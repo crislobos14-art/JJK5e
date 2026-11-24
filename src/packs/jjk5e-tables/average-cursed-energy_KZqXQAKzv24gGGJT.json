@@ -1,0 +1,146 @@
+{
+ "_id": "KZqXQAKzv24gGGJT",
+ "name": "Average Cursed Energy",
+ "img": "icons/svg/d20-grey.svg",
+ "description": "<p>Reference CE pool for NPCs and cursed spirits by classification.</p>",
+ "formula": "1d8",
+ "replacement": true,
+ "displayRoll": true,
+ "results": [
+  {
+   "_id": "i1vC0n7GxD2Q789d",
+   "type": "text",
+   "name": "Heavenly Restriction",
+   "description": "<p><strong>Heavenly Restriction</strong> — 0 CE: no cursed energy; relies on physical prowess.</p>",
+   "documentUuid": null,
+   "flags": {},
+   "img": "icons/svg/d20-black.svg",
+   "weight": 1,
+   "range": [
+    1,
+    1
+   ],
+   "drawn": false,
+   "_key": "!tables.results!KZqXQAKzv24gGGJT.i1vC0n7GxD2Q789d"
+  },
+  {
+   "_id": "VCmNoaOmAT99o5Wg",
+   "type": "text",
+   "name": "Normal Person",
+   "description": "<p><strong>Normal Person</strong> — ½ CE: barely detectable; unaware of curses.</p>",
+   "documentUuid": null,
+   "flags": {},
+   "img": "icons/svg/d20-black.svg",
+   "weight": 1,
+   "range": [
+    2,
+    2
+   ],
+   "drawn": false,
+   "_key": "!tables.results!KZqXQAKzv24gGGJT.VCmNoaOmAT99o5Wg"
+  },
+  {
+   "_id": "LaErSOnrUzn1o7UI",
+   "type": "text",
+   "name": "Normal Person (Despair)",
+   "description": "<p><strong>Normal Person (Despair)</strong> — 1 CE: a temporary surge from intense emotion.</p>",
+   "documentUuid": null,
+   "flags": {},
+   "img": "icons/svg/d20-black.svg",
+   "weight": 1,
+   "range": [
+    3,
+    3
+   ],
+   "drawn": false,
+   "_key": "!tables.results!KZqXQAKzv24gGGJT.LaErSOnrUzn1o7UI"
+  },
+  {
+   "_id": "HRykymPX2cTTSJde",
+   "type": "text",
+   "name": "Grade 4",
+   "description": "<p><strong>Grade 4</strong> — [[/r 1d5]] CE (1–5)</p>",
+   "documentUuid": null,
+   "flags": {},
+   "img": "icons/svg/d20-black.svg",
+   "weight": 1,
+   "range": [
+    4,
+    4
+   ],
+   "drawn": false,
+   "_key": "!tables.results!KZqXQAKzv24gGGJT.HRykymPX2cTTSJde"
+  },
+  {
+   "_id": "5lYurbynFQodUCtM",
+   "type": "text",
+   "name": "Grade 3",
+   "description": "<p><strong>Grade 3</strong> — [[/r 1d10 + 5]] CE (6–15)</p>",
+   "documentUuid": null,
+   "flags": {},
+   "img": "icons/svg/d20-black.svg",
+   "weight": 1,
+   "range": [
+    5,
+    5
+   ],
+   "drawn": false,
+   "_key": "!tables.results!KZqXQAKzv24gGGJT.5lYurbynFQodUCtM"
+  },
+  {
+   "_id": "Xdnr4fUokiVLsW4l",
+   "type": "text",
+   "name": "Grade 2",
+   "description": "<p><strong>Grade 2</strong> — [[/r 1d15 + 15]] CE (16–30)</p>",
+   "documentUuid": null,
+   "flags": {},
+   "img": "icons/svg/d20-black.svg",
+   "weight": 1,
+   "range": [
+    6,
+    6
+   ],
+   "drawn": false,
+   "_key": "!tables.results!KZqXQAKzv24gGGJT.Xdnr4fUokiVLsW4l"
+  },
+  {
+   "_id": "82hQhVBcn8e2e7pt",
+   "type": "text",
+   "name": "Grade 1",
+   "description": "<p><strong>Grade 1</strong> — [[/r 1d20 + 30]] CE (31–50)</p>",
+   "documentUuid": null,
+   "flags": {},
+   "img": "icons/svg/d20-black.svg",
+   "weight": 1,
+   "range": [
+    7,
+    7
+   ],
+   "drawn": false,
+   "_key": "!tables.results!KZqXQAKzv24gGGJT.82hQhVBcn8e2e7pt"
+  },
+  {
+   "_id": "pbVQVjZWr4pmuI4s",
+   "type": "text",
+   "name": "Special Grade",
+   "description": "<p><strong>Special Grade</strong> — 50+ CE</p>",
+   "documentUuid": null,
+   "flags": {},
+   "img": "icons/svg/d20-black.svg",
+   "weight": 1,
+   "range": [
+    8,
+    8
+   ],
+   "drawn": false,
+   "_key": "!tables.results!KZqXQAKzv24gGGJT.pbVQVjZWr4pmuI4s"
+  }
+ ],
+ "flags": {
+  "jjk5e": {
+   "source": "JJK 5e V.6 — Optional Rules"
+  }
+ },
+ "folder": null,
+ "_key": "!tables!KZqXQAKzv24gGGJT"
+}

@@ -28,7 +28,9 @@
  "flags": {
   "jjk5e": {
    "blackFlashRange": 3,
-   "rev": "3e08c1edd1"
+   "rev": "98aa4dfa32",
+   "automationNotes": "Black Flash range +3 (automatic).",
+   "automation": "automated"
   }
  },
  "folder": "58RlNbYPWxO2Xi4E",

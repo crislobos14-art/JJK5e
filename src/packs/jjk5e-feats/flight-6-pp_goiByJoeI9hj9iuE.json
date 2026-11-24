@@ -35,10 +35,38 @@
      ]
     ]
    },
-   "rev": "5eb0be8795"
+   "rev": "8e76e917ac",
+   "automation": "automated"
   }
  },
  "folder": "ar3Bgj4YHvYRp8DL",
  "sort": 1600,
- "_key": "!items!goiByJoeI9hj9iuE"
+ "_key": "!items!goiByJoeI9hj9iuE",
+ "effects": [
+  {
+   "_id": "hJCpVqYe12Uo5lcJ",
+   "name": "Flight",
+   "img": "icons/svg/upgrade.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.attributes.movement.fly",
+     "mode": 4,
+     "value": "30",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!goiByJoeI9hj9iuE.hJCpVqYe12Uo5lcJ"
+  }
+ ]
 }

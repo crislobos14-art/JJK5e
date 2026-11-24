@@ -1,0 +1,13 @@
+{
+ "_id": "jjkTechBuilder01",
+ "name": "JJK: Technique Builder",
+ "type": "script",
+ "img": "icons/magic/symbols/question-stone-yellow.webp",
+ "scope": "global",
+ "command": "game.modules.get(\"jjk5e\").api.techniqueBuilder(canvas.tokens.controlled[0]?.actor ?? game.user.character ?? null);",
+ "flags": {
+  "jjk5e": {}
+ },
+ "folder": null,
+ "_key": "!macros!jjkTechBuilder01"
+}

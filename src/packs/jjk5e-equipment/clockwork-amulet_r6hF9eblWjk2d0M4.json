@@ -25,12 +25,68 @@
   "armor": {
    "value": null
   },
-  "activities": {}
+  "activities": {
+   "kMVaFKePyBnF5PGo": {
+    "_id": "kMVaFKePyBnF5PGo",
+    "type": "utility",
+    "name": "Take 10 on an attack roll (1/dawn)",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "value": "1",
+       "target": "",
+       "scaling": {}
+      }
+     ],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
+   }
+  },
+  "uses": {
+   "max": "1",
+   "spent": 0,
+   "recovery": [
+    {
+     "period": "dawn",
+     "type": "recoverAll"
+    }
+   ]
+  }
  },
  "flags": {
   "jjk5e": {
    "grade": "4th Grade",
-   "rev": "65026db279"
+   "rev": "e13dc8f5df",
+   "automationNotes": "Use it, then roll the attack as a 10 on the d20.",
+   "automation": "automated"
   }
  },
  "_key": "!items!r6hF9eblWjk2d0M4"

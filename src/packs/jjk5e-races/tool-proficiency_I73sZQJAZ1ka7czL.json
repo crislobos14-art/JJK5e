@@ -19,11 +19,34 @@
    "value": "race",
    "subtype": ""
   },
-  "requirements": "Sumerian (Shaama)"
+  "requirements": "Sumerian (Shaama)",
+  "advancement": {
+   "RpaWmiQhUsd64suh": {
+    "_id": "RpaWmiQhUsd64suh",
+    "type": "Trait",
+    "level": 0,
+    "title": "Artisan's tools",
+    "value": {},
+    "configuration": {
+     "mode": "default",
+     "allowReplacements": true,
+     "grants": [],
+     "choices": [
+      {
+       "count": 1,
+       "pool": [
+        "tool:art:*"
+       ]
+      }
+     ]
+    }
+   }
+  }
  },
  "flags": {
   "jjk5e": {
-   "rev": "6556a626d8"
+   "rev": "e92b1a8286",
+   "automation": "automated"
   }
  },
  "folder": "cUxhy4eiPJek1pHp",

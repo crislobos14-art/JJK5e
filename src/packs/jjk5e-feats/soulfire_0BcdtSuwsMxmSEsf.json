@@ -38,12 +38,24 @@
      }
     },
     "range": {
-     "units": "self"
+     "units": "self",
+     "override": true
     },
-    "target": {},
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
     "duration": {
      "units": "inst"
-    }
+    },
+    "effects": [
+     {
+      "_id": "92SZJrXZolxRoico",
+      "onSave": false
+     }
+    ]
    }
   },
   "prerequisites": {
@@ -66,10 +78,40 @@
    "forTechniques": [
     "Blazing Courage"
    ],
-   "rev": "d291139089"
+   "rev": "0aa7e9424d",
+   "automation": "automated"
   }
  },
  "folder": "FQaknUUFDMQmvcGr",
  "sort": 300,
- "_key": "!items!0BcdtSuwsMxmSEsf"
+ "_key": "!items!0BcdtSuwsMxmSEsf",
+ "effects": [
+  {
+   "_id": "92SZJrXZolxRoico",
+   "name": "Soulfire",
+   "img": "modules/jjk5e/icons/techniques/blazing-courage.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Fire damage you deal this turn ignores fire immunity and is Soul Damage (until a long rest).</p>",
+   "changes": [],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null,
+     "soulStrike": "fire",
+     "soulLasting": false
+    },
+    "dae": {
+     "specialDuration": [
+      "turnEnd"
+     ]
+    }
+   },
+   "_key": "!items.effects!0BcdtSuwsMxmSEsf.92SZJrXZolxRoico"
+  }
+ ]
 }

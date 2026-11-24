@@ -127,9 +127,11 @@
      ]
     ]
    },
-   "automationNotes": "Damage also lowers max HP until a long rest (apply as HP max reduction).",
+   "automationNotes": "Soul Damage: the HP this deals also lowers the target's maximum HP (Midi-QOL; otherwise use the JJK panel). RCT and regeneration cannot restore it.",
    "automation": "automated",
-   "rev": "6214a04615"
+   "rev": "fb4847470c",
+   "soulDamage": true,
+   "soulLasting": true
   }
  },
  "folder": "sHDJB680OC5pd1by",

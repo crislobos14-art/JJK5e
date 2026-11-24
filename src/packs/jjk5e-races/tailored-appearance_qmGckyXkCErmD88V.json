@@ -19,11 +19,36 @@
    "value": "race",
    "subtype": ""
   },
-  "requirements": "Cursed Corpse (Softbody)"
+  "requirements": "Cursed Corpse (Softbody)",
+  "advancement": {
+   "62FRDwxoYTRPhFCb": {
+    "_id": "62FRDwxoYTRPhFCb",
+    "type": "Trait",
+    "level": 0,
+    "title": "Tailored Appearance (expertise)",
+    "value": {},
+    "configuration": {
+     "mode": "expertise",
+     "allowReplacements": false,
+     "grants": [],
+     "choices": [
+      {
+       "count": 1,
+       "pool": [
+        "skills:itm",
+        "skills:per",
+        "skills:prf"
+       ]
+      }
+     ]
+    }
+   }
+  }
  },
  "flags": {
   "jjk5e": {
-   "rev": "a910a869a5"
+   "rev": "33251a2228",
+   "automation": "automated"
   }
  },
  "folder": "Mqs4VShTrWUzPyvN",

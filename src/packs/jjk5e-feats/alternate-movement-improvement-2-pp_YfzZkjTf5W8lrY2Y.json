@@ -35,10 +35,101 @@
      ]
     ]
    },
-   "rev": "16dfd41cb9"
+   "rev": "aa16e4acfa",
+   "automation": "automated"
   }
  },
  "folder": "ar3Bgj4YHvYRp8DL",
  "sort": 2200,
- "_key": "!items!YfzZkjTf5W8lrY2Y"
+ "_key": "!items!YfzZkjTf5W8lrY2Y",
+ "effects": [
+  {
+   "_id": "iaHKJKG6ERPUfh2S",
+   "name": "Improvement: climb = walking speed",
+   "img": "icons/svg/upgrade.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": true,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.attributes.movement.climb",
+     "mode": 4,
+     "value": "@attributes.movement.walk",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!YfzZkjTf5W8lrY2Y.iaHKJKG6ERPUfh2S"
+  },
+  {
+   "_id": "b4zpU4yTxkpUhw5T",
+   "name": "Improvement: swim = walking speed",
+   "img": "icons/svg/upgrade.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": true,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.attributes.movement.swim",
+     "mode": 4,
+     "value": "@attributes.movement.walk",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!YfzZkjTf5W8lrY2Y.b4zpU4yTxkpUhw5T"
+  },
+  {
+   "_id": "uxI18rLmtOS1JwHQ",
+   "name": "Improvement: burrow 10 ft (15 ft at 10th)",
+   "img": "icons/svg/upgrade.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": true,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.attributes.movement.burrow",
+     "mode": 4,
+     "value": "10",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": null,
+     "levelTable": {
+      "class": "*",
+      "table": [
+       [
+        1,
+        10
+       ],
+       [
+        10,
+        15
+       ]
+      ]
+     }
+    }
+   },
+   "_key": "!items.effects!YfzZkjTf5W8lrY2Y.uxI18rLmtOS1JwHQ"
+  }
+ ]
 }

@@ -167,6 +167,17 @@ export function createEnv({ settings: overrides = {} } = {}) {
     get actor() { return this.parent; }
   }
 
+  // World Items directory (game.items) with the static create/delete used by the module.
+  Item.createDocuments = async (list = [], options = {}) => list.map((d) => {
+    const data = deepClone(d);
+    if (!options.keepId) delete data._id;
+    const doc = new Item(data, null);
+    game.items.set(doc.id, doc);
+    return doc;
+  });
+  Item.deleteDocuments = async (ids = []) => ids.map((id) => { const d = game.items.get(id); game.items.delete(id); return d; });
+  const Folder = { create: async (data) => { const f = { id: randomID(), ...data }; game.folders.set(f.id, f); return f; } };
+
   class Actor extends EmbeddedOwner {
     static documentName = "Actor";
     constructor(data = {}) {
@@ -239,7 +250,7 @@ export function createEnv({ settings: overrides = {} } = {}) {
         wait: async () => (prompts.length ? prompts.shift() : null) } } },
     documents: {}
   };
-  const CONFIG = { queries: {}, ActiveEffect: { documentClass: ActiveEffect }, Item: { documentClass: Item },
+  const CONFIG = { queries: {}, Folder: { documentClass: null }, ActiveEffect: { documentClass: ActiveEffect }, Item: { documentClass: Item },
     Actor: { documentClass: Actor }, ChatMessage: { documentClass: ChatMessage }, statusEffects: [], DND5E: {} };
 
   const context = {
@@ -250,6 +261,8 @@ export function createEnv({ settings: overrides = {} } = {}) {
     dnd5e: { utils: { simplifyBonus: (f, d) => Number(String(f).replace(/@([\w.]+)/g, (_, p) => getProperty(d, p) ?? 0)) || 0 } },
     fetch: async () => ({ ok: false }), CONST: {}, Dialog: class {}, FormApplication: class {}, Application: class {}
   };
+  CONFIG.Folder.documentClass = Folder;
+  game.packs.set("jjk5e.jjk5e-techniques", { getIndex: async () => [], getDocument: async () => null });
   context.globalThis = context;
   function findByUuid(u) {
     for (const a of actors) {

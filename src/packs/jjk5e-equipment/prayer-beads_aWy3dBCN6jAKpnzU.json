@@ -25,7 +25,56 @@
   "armor": {
    "value": null
   },
-  "activities": {},
+  "activities": {
+   "tJOonTvdpcL7UqeC": {
+    "_id": "tJOonTvdpcL7UqeC",
+    "type": "utility",
+    "name": "Amplify Technique (1–3 CE): +1 save DC per CE",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "itemUses",
+       "value": "1",
+       "target": "",
+       "scaling": {}
+      }
+     ],
+     "scaling": {
+      "allowed": true,
+      "max": "3"
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": [
+     {
+      "_id": "f8paSB2QyIpaUHLB",
+      "onSave": false
+     }
+    ]
+   }
+  },
   "uses": {
    "max": "1",
    "spent": 0,
@@ -40,8 +89,45 @@
  "flags": {
   "jjk5e": {
    "grade": "3rd Grade",
-   "rev": "ae89b7992d"
+   "rev": "41d7911dd3",
+   "ceCosts": {
+    "tJOonTvdpcL7UqeC": 1
+   },
+   "ceSteps": {
+    "tJOonTvdpcL7UqeC": 1
+   },
+   "automationNotes": "Advantage on saves against frightened and charmed: apply by hand.",
+   "automation": "automated"
   }
  },
- "_key": "!items!aWy3dBCN6jAKpnzU"
+ "_key": "!items!aWy3dBCN6jAKpnzU",
+ "effects": [
+  {
+   "_id": "f8paSB2QyIpaUHLB",
+   "name": "Amplified technique",
+   "img": "icons/svg/explosion.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Your next cursed technique's save DC is higher.</p>",
+   "changes": [
+    {
+     "key": "system.bonuses.spell.dc",
+     "mode": 2,
+     "value": "+JJKSCALING",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": 1
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!aWy3dBCN6jAKpnzU.f8paSB2QyIpaUHLB"
+  }
+ ]
 }

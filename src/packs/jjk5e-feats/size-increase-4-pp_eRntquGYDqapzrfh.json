@@ -35,10 +35,44 @@
      ]
     ]
    },
-   "rev": "d051b9a89e"
+   "rev": "a87a1d59ac",
+   "automation": "automated"
   }
  },
  "folder": "ar3Bgj4YHvYRp8DL",
  "sort": 1500,
- "_key": "!items!eRntquGYDqapzrfh"
+ "_key": "!items!eRntquGYDqapzrfh",
+ "effects": [
+  {
+   "_id": "LfTpmWuPhIYKkgY9",
+   "name": "Size Increase (+2 STR, −2 DEX)",
+   "img": "icons/svg/upgrade.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Also one size larger (set the size on the sheet) and natural weapon die one tier higher.</p>",
+   "changes": [
+    {
+     "key": "system.abilities.str.value",
+     "mode": 2,
+     "value": "2",
+     "priority": 20
+    },
+    {
+     "key": "system.abilities.dex.value",
+     "mode": 2,
+     "value": "-2",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!eRntquGYDqapzrfh.LfTpmWuPhIYKkgY9"
+  }
+ ]
 }

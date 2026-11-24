@@ -30,8 +30,105 @@
  "flags": {
   "jjk5e": {
    "grade": "Varies",
-   "rev": "a44a4819f7"
+   "rev": "71cece8917",
+   "automation": "automated",
+   "automationNotes": "Enable the effect of your tattoo's grade."
   }
  },
- "_key": "!items!UGc2qzjHbSEWHzax"
+ "_key": "!items!UGc2qzjHbSEWHzax",
+ "effects": [
+  {
+   "_id": "uGUfBmIpjE7QncY4",
+   "name": "Cursed Tattoo (Grade 3: 13 + DEX)",
+   "img": "icons/svg/explosion.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": true,
+   "statuses": [],
+   "description": "<p>Enable your tattoo's grade. Only while not wearing armor (a shield is allowed).</p>",
+   "changes": [
+    {
+     "key": "system.attributes.ac.calc",
+     "mode": 5,
+     "value": "custom",
+     "priority": 20
+    },
+    {
+     "key": "system.attributes.ac.formula",
+     "mode": 5,
+     "value": "13 + @abilities.dex.mod",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!UGc2qzjHbSEWHzax.uGUfBmIpjE7QncY4"
+  },
+  {
+   "_id": "r7v5ZYWZgaksYJVg",
+   "name": "Cursed Tattoo (Grade 2: 16 + DEX (max 2))",
+   "img": "icons/svg/explosion.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": true,
+   "statuses": [],
+   "description": "<p>Enable your tattoo's grade. Only while not wearing armor (a shield is allowed).</p>",
+   "changes": [
+    {
+     "key": "system.attributes.ac.calc",
+     "mode": 5,
+     "value": "custom",
+     "priority": 20
+    },
+    {
+     "key": "system.attributes.ac.formula",
+     "mode": 5,
+     "value": "16 + min(2, @abilities.dex.mod)",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!UGc2qzjHbSEWHzax.r7v5ZYWZgaksYJVg"
+  },
+  {
+   "_id": "Cnf4OfMcIiu8IElI",
+   "name": "Cursed Tattoo (Grade 1: 20)",
+   "img": "icons/svg/explosion.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": true,
+   "statuses": [],
+   "description": "<p>Enable your tattoo's grade. Only while not wearing armor (a shield is allowed).</p>",
+   "changes": [
+    {
+     "key": "system.attributes.ac.calc",
+     "mode": 5,
+     "value": "custom",
+     "priority": 20
+    },
+    {
+     "key": "system.attributes.ac.formula",
+     "mode": 5,
+     "value": "20",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!UGc2qzjHbSEWHzax.Cnf4OfMcIiu8IElI"
+  }
+ ]
 }

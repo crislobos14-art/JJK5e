@@ -35,10 +35,38 @@
      ]
     ]
    },
-   "rev": "175cbc1610"
+   "rev": "c0f3fbf5ae",
+   "automation": "automated"
   }
  },
  "folder": "ar3Bgj4YHvYRp8DL",
  "sort": 1300,
- "_key": "!items!z1hqCzxU5rANYuFN"
+ "_key": "!items!z1hqCzxU5rANYuFN",
+ "effects": [
+  {
+   "_id": "emXu6GR5ihPQetQW",
+   "name": "Powerful Build",
+   "img": "icons/svg/upgrade.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.dnd5e.powerfulBuild",
+     "mode": 5,
+     "value": "true",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!z1hqCzxU5rANYuFN.emXu6GR5ihPQetQW"
+  }
+ ]
 }

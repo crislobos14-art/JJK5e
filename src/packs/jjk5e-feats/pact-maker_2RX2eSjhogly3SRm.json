@@ -27,7 +27,10 @@
  },
  "flags": {
   "jjk5e": {
-   "rev": "aa0ad0fa3d"
+   "rev": "55e5684aec",
+   "vowLimitMultiplier": 2,
+   "automationNotes": "Binding vow limit = 2 × proficiency bonus (automatic).",
+   "automation": "automated"
   }
  },
  "folder": "58RlNbYPWxO2Xi4E",

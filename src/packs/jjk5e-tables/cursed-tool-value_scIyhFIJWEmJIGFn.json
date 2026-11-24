@@ -1,0 +1,82 @@
+{
+ "_id": "scIyhFIJWEmJIGFn",
+ "name": "Cursed Tool Sale Value",
+ "img": "icons/svg/d20-grey.svg",
+ "description": "<p>Cursed Tool Creation (requires Tool Maker): price of a cursed tool by grade.</p>",
+ "formula": "1d4",
+ "replacement": true,
+ "displayRoll": true,
+ "results": [
+  {
+   "_id": "N7u3Rmj3UWVjtTgt",
+   "type": "text",
+   "name": "Grade 4",
+   "description": "<p><strong>Grade 4</strong> — Weapon/armor value × 1</p>",
+   "documentUuid": null,
+   "flags": {},
+   "img": "icons/svg/d20-black.svg",
+   "weight": 1,
+   "range": [
+    1,
+    1
+   ],
+   "drawn": false,
+   "_key": "!tables.results!scIyhFIJWEmJIGFn.N7u3Rmj3UWVjtTgt"
+  },
+  {
+   "_id": "TcJkMvM1g50sGp56",
+   "type": "text",
+   "name": "Grade 3",
+   "description": "<p><strong>Grade 3</strong> — Weapon/armor value × 10</p>",
+   "documentUuid": null,
+   "flags": {},
+   "img": "icons/svg/d20-black.svg",
+   "weight": 1,
+   "range": [
+    2,
+    2
+   ],
+   "drawn": false,
+   "_key": "!tables.results!scIyhFIJWEmJIGFn.TcJkMvM1g50sGp56"
+  },
+  {
+   "_id": "ts751qxH1qCHMdp0",
+   "type": "text",
+   "name": "Grade 2",
+   "description": "<p><strong>Grade 2</strong> — Weapon/armor value × 25</p>",
+   "documentUuid": null,
+   "flags": {},
+   "img": "icons/svg/d20-black.svg",
+   "weight": 1,
+   "range": [
+    3,
+    3
+   ],
+   "drawn": false,
+   "_key": "!tables.results!scIyhFIJWEmJIGFn.ts751qxH1qCHMdp0"
+  },
+  {
+   "_id": "wBgonUYyGrQfEXYE",
+   "type": "text",
+   "name": "Grade 1",
+   "description": "<p><strong>Grade 1</strong> — Weapon/armor value × 50</p>",
+   "documentUuid": null,
+   "flags": {},
+   "img": "icons/svg/d20-black.svg",
+   "weight": 1,
+   "range": [
+    4,
+    4
+   ],
+   "drawn": false,
+   "_key": "!tables.results!scIyhFIJWEmJIGFn.wBgonUYyGrQfEXYE"
+  }
+ ],
+ "flags": {
+  "jjk5e": {
+   "source": "JJK 5e V.6 — Optional Rules"
+  }
+ },
+ "folder": null,
+ "_key": "!tables!scIyhFIJWEmJIGFn"
+}

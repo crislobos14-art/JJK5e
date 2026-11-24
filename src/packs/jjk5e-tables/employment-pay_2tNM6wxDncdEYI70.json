@@ -1,0 +1,50 @@
+{
+ "_id": "2tNM6wxDncdEYI70",
+ "name": "Employment Pay (Ways to Make Money)",
+ "img": "icons/svg/d20-grey.svg",
+ "description": "<p>Free-time jobs from the optional rule Ways to Make Money.</p>",
+ "formula": "1d2",
+ "replacement": true,
+ "displayRoll": true,
+ "results": [
+  {
+   "_id": "0KPD9GyI4as27rPp",
+   "type": "text",
+   "name": "Minimum Wage Employment",
+   "description": "<p><strong>Minimum Wage Employment</strong> — 10–40 hours per week: [[/r (1d43 + 7) * 10]] dollars ($80–500). The GM adjusts by proficiencies.</p>",
+   "documentUuid": null,
+   "flags": {},
+   "img": "icons/svg/d20-black.svg",
+   "weight": 1,
+   "range": [
+    1,
+    1
+   ],
+   "drawn": false,
+   "_key": "!tables.results!2tNM6wxDncdEYI70.0KPD9GyI4as27rPp"
+  },
+  {
+   "_id": "4CBHS2t8aGYxjBCa",
+   "type": "text",
+   "name": "Special Employment",
+   "description": "<p><strong>Special Employment</strong> — Innate Technique or RCT: CE modifier × d4 × $100 per workweek (roll [[/r 1d4 * 100]] per point of CE modifier). Reverse Technique Prodigy or Mastered Reverse Technique: $10,000 per week.</p>",
+   "documentUuid": null,
+   "flags": {},
+   "img": "icons/svg/d20-black.svg",
+   "weight": 1,
+   "range": [
+    2,
+    2
+   ],
+   "drawn": false,
+   "_key": "!tables.results!2tNM6wxDncdEYI70.4CBHS2t8aGYxjBCa"
+  }
+ ],
+ "flags": {
+  "jjk5e": {
+   "source": "JJK 5e V.6 — Optional Rules"
+  }
+ },
+ "folder": null,
+ "_key": "!tables!2tNM6wxDncdEYI70"
+}

@@ -32,7 +32,9 @@
     "ceScore": 20,
     "breakthroughs": 1
    },
-   "rev": "ea460babc0"
+   "rev": "88262fb718",
+   "automationNotes": "CE maximum +2 per level (automatic).",
+   "automation": "automated"
   }
  },
  "folder": "58RlNbYPWxO2Xi4E",

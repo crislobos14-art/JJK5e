@@ -74,7 +74,10 @@
  "flags": {
   "jjk5e": {
    "grade": "Special Grade",
-   "rev": "ce08df795f"
+   "rev": "643f66ee8b",
+   "soulDamage": true,
+   "automationNotes": "Soul Damage: the HP this deals also lowers the target's maximum HP (Midi-QOL; otherwise use the JJK panel). RCT and regeneration cannot restore it. Ends on a long rest.",
+   "automation": "automated"
   }
  },
  "_key": "!items!Wa5s6izf1uoeH7YV"

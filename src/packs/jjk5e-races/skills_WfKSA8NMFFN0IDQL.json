@@ -23,9 +23,37 @@
  },
  "flags": {
   "jjk5e": {
-   "rev": "fa8849b7cd"
+   "rev": "6047777cee",
+   "automation": "automated"
   }
  },
  "folder": "FDVrGmw22BclKBnR",
- "_key": "!items!WfKSA8NMFFN0IDQL"
+ "_key": "!items!WfKSA8NMFFN0IDQL",
+ "effects": [
+  {
+   "_id": "lUbqm5tJ8952v2BM",
+   "name": "Martial weapons",
+   "img": "modules/jjk5e/icons/trait-race.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.traits.weaponProf.value",
+     "mode": 2,
+     "value": "mar",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!WfKSA8NMFFN0IDQL.lUbqm5tJ8952v2BM"
+  }
+ ]
 }

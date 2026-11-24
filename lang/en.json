@@ -129,8 +129,16 @@
       "ReducedDescription": "Lowers the CE range of techniques by the Output penalty. A technique whose base cost exceeds the Max cannot be used (enforced by the module). Not using CE for 1 minute or landing a Black Flash removes 1 level."
     },
     "Soul": {
-      "Name": "Soul Awareness",
-      "Description": "See the rules journal (Intricacies of Sorcery → Soul Awareness Levels) for each ability."
+      "Name": "Soul Damage",
+      "MaxHP": "max HP",
+      "Description": "Soul Damage: maximum HP −{total} until a long rest. Reverse Cursed Technique and regeneration cannot restore it.",
+      "DescriptionLasting": "Soul Damage: maximum HP −{total}. Reverse Cursed Technique and regeneration cannot restore it; the GM removes it.",
+      "Applied": "{name} takes Soul Damage ({source}): maximum HP −{dmg} (total −{total}).",
+      "Pending": "{name} took {dmg} Soul Damage from {source}.",
+      "Apply": "Apply Soul Damage",
+      "Amount": "Maximum HP reduction",
+      "Clear": "Remove Soul Damage",
+      "Strike": "Soul Strike"
     },
     "Limb": {
       "Title": "Limb Damage",
@@ -669,6 +677,36 @@
       "PureBody": "Heavenly Restriction (Pure Body) cannot multiclass",
       "Ability": "{cls} needs {ab} 13",
       "Blocked": "Multiclass {name}: {list}"
+    },
+    "Builder": {
+      "Title": "Original Technique Builder",
+      "Intro": "Build your own innate technique following the manual's guidelines: 1st Lapse, 3rd Lapse or Extension, 6th Extension, 11th Maximum, 18th Domain Expansion. Leave a feature name empty to skip it. The items are created in the Items directory (folder “JJK: Custom Techniques”) and can then be chosen like any technique.",
+      "Name": "Technique name",
+      "EarlyDomain": "Domain Expansion at 3rd level (weaker sure-hit, as Deadly Sentencing or Pachinko Fever)",
+      "Level": "Level {level}",
+      "FeatureName": "Feature name",
+      "Type": "Type",
+      "TAttack": "CE attack",
+      "TSave": "Saving throw",
+      "TDamage": "Damage",
+      "THeal": "Healing",
+      "TUtility": "Utility / buff",
+      "TPassive": "Passive",
+      "TDomain": "Domain Expansion",
+      "Activation": "Activation",
+      "ScaleMax": "Extra CE",
+      "UpToCE": "up to CE mod",
+      "UpToProf": "up to proficiency",
+      "UpTo2CE": "up to 2 × CE mod",
+      "Dice": "Dice",
+      "PerCE": "dice per CE spent",
+      "Save": "Save",
+      "Range": "Range (ft)",
+      "Area": "Radius (ft)",
+      "DescriptionHint": "Rules text of the feature",
+      "Create": "Create technique",
+      "Created": "{name}: {n} technique feature(s) created in the Items directory.",
+      "NoPermission": "You need permission to create items (ask the GM)."
     }
   }
 }

@@ -19,11 +19,34 @@
    "value": "race",
    "subtype": ""
   },
-  "requirements": "Sumerian (Shaama)"
+  "requirements": "Sumerian (Shaama)",
+  "advancement": {
+   "f2nAtaLTCFXKTU7x": {
+    "_id": "f2nAtaLTCFXKTU7x",
+    "type": "Trait",
+    "level": 0,
+    "title": "Refined Study",
+    "value": {},
+    "configuration": {
+     "mode": "default",
+     "allowReplacements": true,
+     "grants": [],
+     "choices": [
+      {
+       "count": 2,
+       "pool": [
+        "skills:*"
+       ]
+      }
+     ]
+    }
+   }
+  }
  },
  "flags": {
   "jjk5e": {
-   "rev": "9328a72045"
+   "rev": "d9d80a16e2",
+   "automation": "automated"
   }
  },
  "folder": "cUxhy4eiPJek1pHp",

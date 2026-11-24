@@ -30,7 +30,9 @@
  "flags": {
   "jjk5e": {
    "grade": "4th Grade",
-   "rev": "10b0fd49b4"
+   "rev": "da40706168",
+   "automationNotes": "Descriptive: identity checks from your face are impossible.",
+   "automation": "automated"
   }
  },
  "_key": "!items!lnEORxAlD1owGWZn"

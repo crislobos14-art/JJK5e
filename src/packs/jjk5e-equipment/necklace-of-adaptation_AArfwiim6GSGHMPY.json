@@ -55,7 +55,9 @@
  "flags": {
   "jjk5e": {
    "grade": "3rd Grade",
-   "rev": "eb4908cdce"
+   "rev": "1ffcf2f713",
+   "automationNotes": "Breathe in any environment; advantage on saves to avoid or end Poisoned: apply by hand.",
+   "automation": "automated"
   }
  },
  "_key": "!items!AArfwiim6GSGHMPY"

@@ -1,0 +1,81 @@
+{
+ "_id": "Wn6qH4uh3iL6KVkz",
+ "name": "Mind Sharpener Ring",
+ "type": "equipment",
+ "img": "icons/equipment/finger/ring-band-engraved-gold.webp",
+ "folder": "pB7mLAOAtbyDQKeT",
+ "system": {
+  "description": {
+   "value": "<p><em>Cursed Item, Grade 3 (Requires Attunement)</em></p><p>As iron sharpens iron, so does a friend sharpen friend. When you fail a Constitution saving throw to maintain Concentration, you can spend 1 CE as a Reaction to succeed instead.</p>"
+  },
+  "source": {
+   "book": "Creeps and Curses V.3.1",
+   "page": "",
+   "custom": "",
+   "license": "CC BY-NC-SA 4.0",
+   "rules": "2014"
+  },
+  "type": {
+   "value": "ring",
+   "baseItem": ""
+  },
+  "attunement": "required",
+  "quantity": 1,
+  "rarity": "uncommon",
+  "activities": {
+   "eYHaeArGgNPGancy": {
+    "_id": "eYHaeArGgNPGancy",
+    "type": "utility",
+    "name": "Reaction (1 CE): succeed on the concentration save",
+    "sort": 0,
+    "img": null,
+    "activation": {
+     "type": "reaction",
+     "value": 1,
+     "condition": "When you fail a CON save to maintain Concentration",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "units": "self",
+     "override": true
+    },
+    "target": {
+     "affects": {
+      "type": "self"
+     },
+     "override": true
+    },
+    "effects": []
+   }
+  },
+  "uses": {
+   "max": "",
+   "spent": 0,
+   "recovery": []
+  }
+ },
+ "effects": [],
+ "flags": {
+  "jjk5e": {
+   "grade": "Grade 3",
+   "ceCosts": {
+    "eYHaeArGgNPGancy": 1
+   },
+   "automation": "automated",
+   "rev": "6ccde233a8"
+  }
+ },
+ "_key": "!items!Wn6qH4uh3iL6KVkz"
+}

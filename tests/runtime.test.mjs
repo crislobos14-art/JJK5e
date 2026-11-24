@@ -366,3 +366,61 @@ test("Multiclassing: one Cursed Energy pool from the highest class, scaled by to
   await J.applyScaling(actor);
   assert.match(J.findPool(actor).system.uses.max, /^14 \+ /, "Scout is now the highest class: its table at level 7");
 });
+
+test("Soul Damage: lowers max HP (stacking), clamps HP, ends on a long rest unless lasting", async () => {
+  const { env, actor, J } = await setup();
+  await J.applySoulDamage(actor, 8, { source: "Test" });
+  await J.applySoulDamage(actor, 4, { source: "Test" });
+  const e = fx(actor, "soul");
+  assert.equal(change(e, "system.attributes.hp.tempmax"), "-12");
+  await env.Hooks.run("dnd5e.restCompleted", actor, { longRest: true }, {}); await env.settle();
+  assert.equal(fx(actor, "soul"), undefined, "long rest clears it");
+  await J.applySoulDamage(actor, 5, { untilRest: false });
+  await env.Hooks.run("dnd5e.restCompleted", actor, { longRest: true }, {}); await env.settle();
+  assert.ok(fx(actor, "soul"), "lasting soul damage stays");
+});
+
+test("Soul Damage from a Midi workflow: flagged item or Soul Strike effect", async () => {
+  const { env, actor, J } = await setup();
+  const target = env.addActor({ name: "Curse" });
+  const wf = (item, extra = {}) => ({ actor, item, activity: { id: "a", attack: { type: { classification: "unarmed" } } },
+    damageList: [{ actorUuid: target.uuid, hpDamage: 7, tempDamage: 0 }], ...extra });
+  await J.onSoulWorkflow(wf({ name: "Sword", flags: {} }));
+  assert.equal(fx(target, "soul"), undefined, "ordinary damage");
+  await J.onSoulWorkflow(wf({ name: "Soul Split Katana", flags: { jjk5e: { soulDamage: true } } }));
+  assert.equal(fx(target, "soul").flags.jjk5e.soulDamage, 7);
+  await J.setKindEffect(actor, "soulpunch", { name: "Soul Punch", flags: { jjk5e: { soulStrike: "unarmed", soulLasting: true } } });
+  await J.onSoulWorkflow(wf({ name: "Unarmed Strike", flags: {} }));
+  assert.equal(fx(target, "soul").flags.jjk5e.soulDamage, 14);
+  assert.equal(fx(target, "soul").flags.jjk5e.lasting, true);
+});
+
+test("Chosen by the Sparks: every critical hit is a Black Flash", async () => {
+  const { env, actor, J } = await setup();
+  await actor.createEmbeddedDocuments("Item", [{ name: "Chosen by the Sparks", flags: { jjk5e: { alwaysBlackFlash: true } } }]);
+  env.dice.push(2);
+  await J.onAttackRoll(crit(), melee(actor)); await env.settle();
+  assert.ok(fx(actor, "zone"));
+});
+
+test("Pact Maker doubles the binding vow limit", async () => {
+  const { actor, J } = await setup();
+  assert.equal(J.vowLimit(actor), 3);
+  await actor.createEmbeddedDocuments("Item", [{ name: "Pact Maker", flags: { jjk5e: { vowLimitMultiplier: 2 } } }]);
+  assert.equal(J.vowLimit(actor), 6);
+});
+
+test("Technique builder: saves the technique in the Items directory and grants features up to the character's level", async () => {
+  const { env, actor, J } = await setup();
+  await actor.createEmbeddedDocuments("Item", [{ name: "Warrior", type: "class", system: { identifier: "warrior", levels: 6 } }]);
+  env.prompts.push({ name: "Frost Lines", features: [
+    { level: 1, name: "Frost Line", type: "attack", ce: 1, dice: "1d10" },
+    { level: 6, name: "Cold Snap", type: "save", ce: 3 },
+    { level: 11, name: "Absolute Zero", type: "damage", ce: 8, dice: "8d10" }] });
+  const created = await J.techniqueBuilder(actor); await env.settle();
+  assert.equal(created.length, 3);
+  assert.equal([...env.game.items].filter((i) => i.flags.jjk5e.custom).length, 3);
+  assert.equal(actor.getFlag("jjk5e", "technique"), "Frost Lines");
+  const owned = actor.items.filter((i) => i.flags?.jjk5e?.technique === "Frost Lines").map((i) => i.name).sort();
+  assert.deepEqual(owned, ["Cold Snap", "Frost Line"], "11th level feature not yet");
+});

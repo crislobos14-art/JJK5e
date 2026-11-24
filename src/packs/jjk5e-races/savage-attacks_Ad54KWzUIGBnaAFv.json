@@ -23,9 +23,37 @@
  },
  "flags": {
   "jjk5e": {
-   "rev": "3a506de3ca"
+   "rev": "aaab9f8b6d",
+   "automation": "automated"
   }
  },
  "folder": "cUxhy4eiPJek1pHp",
- "_key": "!items!Ad54KWzUIGBnaAFv"
+ "_key": "!items!Ad54KWzUIGBnaAFv",
+ "effects": [
+  {
+   "_id": "b0VvoLaqxPr1INZs",
+   "name": "Savage Attacks",
+   "img": "modules/jjk5e/icons/trait-race.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.dnd5e.meleeCriticalDamageDice",
+     "mode": 2,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!Ad54KWzUIGBnaAFv.b0VvoLaqxPr1INZs"
+  }
+ ]
 }

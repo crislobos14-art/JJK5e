@@ -35,10 +35,38 @@
      ]
     ]
    },
-   "rev": "2b11973802"
+   "rev": "cb4eefdfd2",
+   "automation": "automated"
   }
  },
  "folder": "ar3Bgj4YHvYRp8DL",
  "sort": 2300,
- "_key": "!items!svJfQyb4cIJRzDNy"
+ "_key": "!items!svJfQyb4cIJRzDNy",
+ "effects": [
+  {
+   "_id": "YxXNTXm2aw6lLccn",
+   "name": "Cursed Armor",
+   "img": "icons/svg/upgrade.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+2",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!svJfQyb4cIJRzDNy.YxXNTXm2aw6lLccn"
+  }
+ ]
 }

@@ -30,10 +30,38 @@
    "prereq": {
     "level": 20
    },
-   "rev": "8b1544cfeb"
+   "rev": "affb9b458c",
+   "automation": "automated"
   }
  },
  "folder": "BuykVM3mAwDd71E2",
  "sort": 500,
- "_key": "!items!xkScBvAk66T02DMY"
+ "_key": "!items!xkScBvAk66T02DMY",
+ "effects": [
+  {
+   "_id": "U5f5CKoKvNi4ElQx",
+   "name": "Curse Resistance",
+   "img": "modules/jjk5e/icons/boon.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>Advantage on saving throws against cursed techniques and other magical effects.</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.magicResistance.all",
+     "mode": 5,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!xkScBvAk66T02DMY.U5f5CKoKvNi4ElQx"
+  }
+ ]
 }

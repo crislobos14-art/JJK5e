@@ -129,8 +129,16 @@
       "ReducedDescription": "Reduce el rango de EM de las técnicas según la penalización de Output. No puedes usar técnicas cuyo costo base supere el Máximo (el módulo lo aplica). No usar EM durante 1 minuto o lograr un Black Flash quita 1 nivel."
     },
     "Soul": {
-      "Name": "Soul Awareness",
-      "Description": "Consulta el diario de reglas (Intricacies of Sorcery → Soul Awareness Levels) para cada habilidad."
+      "Name": "Daño al alma",
+      "MaxHP": "PG máx.",
+      "Description": "Daño al alma: PG máximos −{total} hasta un descanso largo. Reverse Cursed Technique y la regeneración no lo restauran.",
+      "DescriptionLasting": "Daño al alma: PG máximos −{total}. Reverse Cursed Technique y la regeneración no lo restauran; lo quita el GM.",
+      "Applied": "{name} recibe daño al alma ({source}): PG máximos −{dmg} (total −{total}).",
+      "Pending": "{name} recibió {dmg} de daño al alma por {source}.",
+      "Apply": "Aplicar daño al alma",
+      "Amount": "Reducción de PG máximos",
+      "Clear": "Quitar daño al alma",
+      "Strike": "Golpe al alma"
     },
     "Limb": {
       "Title": "Daño de extremidades",
@@ -669,6 +677,36 @@
       "PureBody": "Heavenly Restriction (Pure Body) no puede hacer multiclase",
       "Ability": "{cls} requiere {ab} 13",
       "Blocked": "Multiclase {name}: {list}"
+    },
+    "Builder": {
+      "Title": "Creador de técnicas propias",
+      "Intro": "Crea tu propia técnica innata siguiendo las pautas del manual: nivel 1 Lapse, nivel 3 Lapse o Extension, nivel 6 Extension, nivel 11 Maximum y nivel 18 Domain Expansion. Deja vacío el nombre de un rasgo para omitirlo. Los objetos se crean en el directorio de Objetos (carpeta «JJK: Custom Techniques») y luego se eligen como cualquier técnica.",
+      "Name": "Nombre de la técnica",
+      "EarlyDomain": "Domain Expansion a nivel 3 (sure-hit más débil, como Deadly Sentencing o Pachinko Fever)",
+      "Level": "Nivel {level}",
+      "FeatureName": "Nombre del rasgo",
+      "Type": "Tipo",
+      "TAttack": "Ataque de CE",
+      "TSave": "Salvación",
+      "TDamage": "Daño",
+      "THeal": "Curación",
+      "TUtility": "Utilidad / mejora",
+      "TPassive": "Pasivo",
+      "TDomain": "Domain Expansion",
+      "Activation": "Activación",
+      "ScaleMax": "CE adicional",
+      "UpToCE": "hasta mod CE",
+      "UpToProf": "hasta competencia",
+      "UpTo2CE": "hasta 2 × mod CE",
+      "Dice": "Dados",
+      "PerCE": "dados por CE gastado",
+      "Save": "Salvación",
+      "Range": "Alcance (ft)",
+      "Area": "Radio (ft)",
+      "DescriptionHint": "Texto de reglas del rasgo",
+      "Create": "Crear técnica",
+      "Created": "{name}: {n} rasgo(s) de técnica creados en el directorio de Objetos.",
+      "NoPermission": "Necesitas permiso para crear objetos (pídeselo al GM)."
     }
   }
 }

@@ -31,7 +31,9 @@
     "level": 20
    },
    "ceMaxBonus": 20,
-   "rev": "e3db4a2350"
+   "rev": "544621ad8a",
+   "automationNotes": "CE maximum +20 (automatic).",
+   "automation": "automated"
   }
  },
  "folder": "BuykVM3mAwDd71E2",

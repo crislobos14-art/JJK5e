@@ -23,9 +23,163 @@
  },
  "flags": {
   "jjk5e": {
-   "rev": "04869d8655"
+   "rev": "90cee783c9",
+   "automation": "automated",
+   "automationNotes": "Enable the effect of each chosen saving throw."
   }
  },
  "folder": "hWqAX9TqrOvuq1FE",
- "_key": "!items!195ZSorMhdRcjpIM"
+ "_key": "!items!195ZSorMhdRcjpIM",
+ "effects": [
+  {
+   "_id": "VncvltwFrwlJxrP0",
+   "name": "Resistant: Brawn (STR)",
+   "img": "modules/jjk5e/icons/feature.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": true,
+   "statuses": [],
+   "description": "<p>Enable the saving throw(s) you chose (one at 7th, more at 14th and 20th).</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.superSaver.str",
+     "mode": 5,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!195ZSorMhdRcjpIM.VncvltwFrwlJxrP0"
+  },
+  {
+   "_id": "YcTFloILrrPpOCJ4",
+   "name": "Resistant: Evasion (DEX)",
+   "img": "modules/jjk5e/icons/feature.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": true,
+   "statuses": [],
+   "description": "<p>Enable the saving throw(s) you chose (one at 7th, more at 14th and 20th).</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.superSaver.dex",
+     "mode": 5,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!195ZSorMhdRcjpIM.YcTFloILrrPpOCJ4"
+  },
+  {
+   "_id": "nnc0fM7eSQM89zyz",
+   "name": "Resistant: Endurance (CON)",
+   "img": "modules/jjk5e/icons/feature.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": true,
+   "statuses": [],
+   "description": "<p>Enable the saving throw(s) you chose (one at 7th, more at 14th and 20th).</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.superSaver.con",
+     "mode": 5,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!195ZSorMhdRcjpIM.nnc0fM7eSQM89zyz"
+  },
+  {
+   "_id": "RsyrDmY2DKu00XPA",
+   "name": "Resistant: Discernment (INT)",
+   "img": "modules/jjk5e/icons/feature.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": true,
+   "statuses": [],
+   "description": "<p>Enable the saving throw(s) you chose (one at 7th, more at 14th and 20th).</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.superSaver.int",
+     "mode": 5,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!195ZSorMhdRcjpIM.RsyrDmY2DKu00XPA"
+  },
+  {
+   "_id": "CXyfCrVhywQw7wgo",
+   "name": "Resistant: Intuition (WIS)",
+   "img": "modules/jjk5e/icons/feature.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": true,
+   "statuses": [],
+   "description": "<p>Enable the saving throw(s) you chose (one at 7th, more at 14th and 20th).</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.superSaver.wis",
+     "mode": 5,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!195ZSorMhdRcjpIM.CXyfCrVhywQw7wgo"
+  },
+  {
+   "_id": "3P2hYUd7ca0K1oAT",
+   "name": "Resistant: Ego (CHA)",
+   "img": "modules/jjk5e/icons/feature.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": true,
+   "statuses": [],
+   "description": "<p>Enable the saving throw(s) you chose (one at 7th, more at 14th and 20th).</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.superSaver.cha",
+     "mode": 5,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!195ZSorMhdRcjpIM.3P2hYUd7ca0K1oAT"
+  }
+ ]
 }

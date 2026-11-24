@@ -23,9 +23,37 @@
  },
  "flags": {
   "jjk5e": {
-   "rev": "6c301cd80e"
+   "rev": "16df0a77f7",
+   "automation": "automated"
   }
  },
  "folder": "Jrayu2BI11U3R1zF",
- "_key": "!items!jv8dWt6Y6uG50XnX"
+ "_key": "!items!jv8dWt6Y6uG50XnX",
+ "effects": [
+  {
+   "_id": "tveiIcPZGRvhCZdS",
+   "name": "Evasion",
+   "img": "modules/jjk5e/icons/feature.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>DEX saves for half damage: none on a success, half on a failure.</p>",
+   "changes": [
+    {
+     "key": "flags.midi-qol.superSaver.dex",
+     "mode": 5,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!jv8dWt6Y6uG50XnX.tveiIcPZGRvhCZdS"
+  }
+ ]
 }

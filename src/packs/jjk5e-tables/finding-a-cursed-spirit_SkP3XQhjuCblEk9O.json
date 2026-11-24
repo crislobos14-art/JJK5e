@@ -1,0 +1,98 @@
+{
+ "_id": "SkP3XQhjuCblEk9O",
+ "name": "Finding a Cursed Spirit",
+ "img": "icons/svg/d20-grey.svg",
+ "description": "<p>Spend 1–2 hours searching and succeed on a DC 20 Wisdom (Perception) or Intelligence (Investigation) check, then roll.</p>",
+ "formula": "1d100",
+ "replacement": true,
+ "displayRoll": true,
+ "results": [
+  {
+   "_id": "2FhUYfwPkbgTmPHm",
+   "type": "text",
+   "name": "Grade 4",
+   "description": "<p><strong>Grade 4</strong> — A weak curse.</p>",
+   "documentUuid": null,
+   "flags": {},
+   "img": "icons/svg/d20-black.svg",
+   "weight": 1,
+   "range": [
+    1,
+    50
+   ],
+   "drawn": false,
+   "_key": "!tables.results!SkP3XQhjuCblEk9O.2FhUYfwPkbgTmPHm"
+  },
+  {
+   "_id": "mdQK5Wxo1eTQclJ9",
+   "type": "text",
+   "name": "Grade 3",
+   "description": "<p><strong>Grade 3</strong> — A lesser cursed spirit.</p>",
+   "documentUuid": null,
+   "flags": {},
+   "img": "icons/svg/d20-black.svg",
+   "weight": 1,
+   "range": [
+    51,
+    75
+   ],
+   "drawn": false,
+   "_key": "!tables.results!SkP3XQhjuCblEk9O.mdQK5Wxo1eTQclJ9"
+  },
+  {
+   "_id": "zBeuoQ4t3umHFfFy",
+   "type": "text",
+   "name": "Semi-Grade 2",
+   "description": "<p><strong>Semi-Grade 2</strong></p>",
+   "documentUuid": null,
+   "flags": {},
+   "img": "icons/svg/d20-black.svg",
+   "weight": 1,
+   "range": [
+    76,
+    90
+   ],
+   "drawn": false,
+   "_key": "!tables.results!SkP3XQhjuCblEk9O.zBeuoQ4t3umHFfFy"
+  },
+  {
+   "_id": "DvFLAqOj0emi1Kk9",
+   "type": "text",
+   "name": "Grade 2",
+   "description": "<p><strong>Grade 2</strong> — A strong cursed spirit.</p>",
+   "documentUuid": null,
+   "flags": {},
+   "img": "icons/svg/d20-black.svg",
+   "weight": 1,
+   "range": [
+    91,
+    99
+   ],
+   "drawn": false,
+   "_key": "!tables.results!SkP3XQhjuCblEk9O.DvFLAqOj0emi1Kk9"
+  },
+  {
+   "_id": "x9UR2eCeERDF3Q7R",
+   "type": "text",
+   "name": "Semi-Grade 1",
+   "description": "<p><strong>Semi-Grade 1</strong> — A dangerous cursed spirit.</p>",
+   "documentUuid": null,
+   "flags": {},
+   "img": "icons/svg/d20-black.svg",
+   "weight": 1,
+   "range": [
+    100,
+    100
+   ],
+   "drawn": false,
+   "_key": "!tables.results!SkP3XQhjuCblEk9O.x9UR2eCeERDF3Q7R"
+  }
+ ],
+ "flags": {
+  "jjk5e": {
+   "source": "JJK 5e V.6 — Optional Rules"
+  }
+ },
+ "folder": null,
+ "_key": "!tables!SkP3XQhjuCblEk9O"
+}

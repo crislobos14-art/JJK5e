@@ -169,7 +169,11 @@
     "Regalia"
    ],
    "automation": "automated",
-   "rev": "3e530324fe"
+   "rev": "086218e2b5",
+   "soulDamage": [
+    "sbWFhy3jzZunCQjG"
+   ],
+   "automationNotes": "Soul Damage: the HP this deals also lowers the target's maximum HP (Midi-QOL; otherwise use the JJK panel). RCT and regeneration cannot restore it. Ends on a long rest."
   }
  },
  "effects": [

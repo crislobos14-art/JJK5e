@@ -61,3 +61,103 @@ export function vowBlocksUsage(effects, { costsCE = false, innateTechnique = fal
     ((costsCE && effect.flags?.jjk5e?.noCE) ||
      (innateTechnique && effect.flags?.jjk5e?.noTechnique)));
 }
+
+/* ---------------------------------------------------------------------------------------------- */
+/*  Original Innate Technique builder (V.6 "Original Innate Techniques" guidelines)                */
+/* ---------------------------------------------------------------------------------------------- */
+
+/** Default slots: 1st Lapse, 3rd Lapse/Extension, 6th Extension, 11th Maximum, 18th Domain Expansion. */
+export const TECHNIQUE_SLOTS = [
+  { level: 1, kind: "Lapse" }, { level: 3, kind: "Lapse or Extension" }, { level: 6, kind: "Extension" },
+  { level: 11, kind: "Maximum" }, { level: 18, kind: "Domain Expansion" }
+];
+
+const CE_MOD = "max(@abilities.wis.mod, @abilities.cha.mod)";
+const ABILITIES = new Set(["str", "dex", "con", "int", "wis", "cha"]);
+const ACTIVATIONS = new Set(["action", "bonus", "reaction", "special", "minute", "hour"]);
+
+/** Stable 16-char id from a seed string (Foundry-style alphanumerics). */
+export function seededId(seed) {
+  const A = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  // FNV-1a over the whole seed, then a xorshift stream for the 16 characters.
+  let h = 0x811c9dc5;
+  for (let i = 0; i < seed.length; i++) h = Math.imul(h ^ seed.charCodeAt(i), 16777619) >>> 0;
+  let x = h || 1;
+  let out = "";
+  while (out.length < 16) {
+    x ^= x << 13; x >>>= 0; x ^= x >>> 17; x ^= x << 5; x >>>= 0;
+    out += A[x % A.length];
+  }
+  return out;
+}
+
+/** "2d8" → {number: 2, denomination: 8}; anything else → null. */
+export function parseDice(text) {
+  const m = /^\s*(\d*)\s*d\s*(\d+)\s*$/i.exec(String(text ?? ""));
+  return m ? { number: Number(m[1] || 1), denomination: Number(m[2]) } : null;
+}
+
+const scaleMaxOf = (v) => (v === "ce" ? CE_MOD : v === "prof" ? "@prof" : v === "ce2" ? `2 * ${CE_MOD}` : /^\d+$/.test(String(v)) ? String(v) : "");
+
+/**
+ * Build innate technique items from a builder spec.
+ * spec: { name, earlyDomain?: boolean, features: [{ level, name, description, activation, type, ce, scaleMax,
+ *         dice, damageType, perCE, save, range, area, onSave }] }
+ * Returns plain Item data (type "spell", like the compendium techniques) with JJK flags (technique, level, ceCosts…).
+ */
+export function buildTechniqueItems(spec) {
+  const tech = String(spec?.name ?? "").trim();
+  if (!tech) throw new Error("Technique name required");
+  const items = [];
+  for (const f of spec.features ?? []) {
+    const name = String(f.name ?? "").trim();
+    if (!name) continue;
+    const level = Number(f.level) || 1;
+    const domain = f.type === "domain";
+    const id = seededId(`${tech}|${level}|${name}`);
+    const aid = seededId(`${tech}|${level}|${name}|act`);
+    const ce = Math.max(0, Number(f.ce) || (domain ? 20 : 0));
+    const scaleMax = scaleMaxOf(f.scaleMax);
+    const activation = domain ? { type: "special", value: null, condition: "Full turn: Action + Bonus Action + Movement", override: true }
+      : { type: ACTIVATIONS.has(f.activation) ? f.activation : "action", value: 1, condition: "", override: true };
+    const range = domain ? { units: "self", override: true }
+      : Number(f.range) > 0 ? { value: String(Number(f.range)), units: "ft", override: true } : { units: "self", override: true };
+    const target = domain
+      ? { template: { type: "radius", size: "175", units: "ft", count: "1", contiguous: false }, affects: { type: "creature", choice: true }, override: true }
+      : Number(f.area) > 0 ? { template: { type: "radius", size: String(Number(f.area)), units: "ft", count: "1", contiguous: false }, affects: { type: "creature" }, override: true }
+        : { affects: { type: "creature", count: "1", choice: true }, override: true };
+    const dice = parseDice(f.dice);
+    const types = [String(f.damageType || "force")];
+    const part = dice ? { number: dice.number, denomination: dice.denomination, bonus: "", types,
+      custom: { enabled: false, formula: "" }, scaling: f.perCE ? { mode: "whole", number: dice.number } : {} } : null;
+    const act = { _id: aid, sort: 0, name: domain ? `Expand Domain (${ce} CE)` : `${name}${ce ? ` (${ce}${scaleMax ? "+" : ""} CE)` : ""}`,
+      activation, range, target, duration: domain ? { value: "1", units: "minute", concentration: false, override: true } : { units: "inst", override: true },
+      consumption: { targets: [], scaling: { allowed: !!scaleMax, max: scaleMax }, spellSlot: false } };
+    let type = domain ? "utility" : f.type;
+    if (type === "attack") Object.assign(act, { attack: { ability: "spellcasting", bonus: "", critical: { threshold: null }, flat: false,
+      type: { value: Number(f.range) > 5 ? "ranged" : "melee", classification: "spell" } }, damage: { includeBase: false, parts: part ? [part] : [] } });
+    else if (type === "save") Object.assign(act, { save: { ability: [ABILITIES.has(f.save) ? f.save : "con"], dc: { calculation: "spellcasting", formula: "" } },
+      damage: { onSave: f.onSave === "none" ? "none" : "half", parts: part ? [part] : [] } });
+    else if (type === "damage") Object.assign(act, { damage: { critical: { allow: false }, parts: part ? [part] : [] } });
+    else if (type === "heal") Object.assign(act, { healing: part ? { ...part, types: ["healing"] } : { number: null, denomination: null, bonus: "", types: ["healing"], custom: { enabled: false, formula: "" }, scaling: {} } });
+    else if (type !== "passive") type = "utility";
+    const activities = type === "passive" ? {} : { [aid]: { ...act, type } };
+    const flags = { technique: tech, level, custom: true, spellFrom: "feat" };
+    if (type !== "passive" && ce) { flags.ceCosts = { [aid]: ce }; if (scaleMax) flags.ceSteps = { [aid]: 1 }; }
+    if (domain) Object.assign(flags, { domain: true, domainActivity: aid });
+    const kind = String(f.kind ?? TECHNIQUE_SLOTS.find((s) => s.level === level)?.kind ?? "");
+    const header = `<p><em>${tech} — Innate Technique (${level}${["st", "nd", "rd"][((level + 90) % 100 - 10) % 10 - 1] ?? "th"} level${kind ? `, ${kind}` : ""})</em></p>`;
+    const body = String(f.description ?? "").trim();
+    items.push({
+      _id: id, name, type: "spell", img: domain ? "icons/magic/symbols/runes-star-pentagon-orange-purple.webp" : "icons/magic/symbols/question-stone-yellow.webp",
+      system: {
+        description: { value: header + (body ? body.split(/\n{2,}/).map((p) => `<p>${p.replace(/\n/g, "<br>")}</p>`).join("") : "") },
+        source: { book: "Custom", custom: "Original Innate Technique", rules: "2014" },
+        level: domain ? 9 : Math.min(9, Math.ceil(level / 2)), school: "jjk", method: "technique", prepared: 1,
+        activities, uses: { max: "", recovery: [], spent: 0 }, properties: []
+      },
+      effects: [], flags: { jjk5e: flags }
+    });
+  }
+  return items;
+}

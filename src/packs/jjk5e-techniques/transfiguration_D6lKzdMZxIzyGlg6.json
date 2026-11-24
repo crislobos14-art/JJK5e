@@ -203,9 +203,10 @@
      ]
     ]
    },
-   "automationNotes": "Necrotic from this technique lowers max HP until a long rest; at 0 HP the creature becomes a Transfigured Creature (not constructs).",
+   "automationNotes": "Soul Damage: the HP this deals also lowers the target's maximum HP (Midi-QOL; otherwise use the JJK panel). RCT and regeneration cannot restore it. Ends on a long rest.",
    "automation": "automated",
-   "rev": "83425497b1"
+   "rev": "c4caf7d43c",
+   "soulDamage": true
   }
  },
  "folder": "sz7xFTLSgxx5bxtq",

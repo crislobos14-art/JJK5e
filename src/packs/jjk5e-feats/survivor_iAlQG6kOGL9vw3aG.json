@@ -30,10 +30,110 @@
    "prereq": {
     "level": 20
    },
-   "rev": "16ec488c50"
+   "rev": "59e3503370",
+   "automation": "automated"
   }
  },
  "folder": "BuykVM3mAwDd71E2",
  "sort": 900,
- "_key": "!items!iAlQG6kOGL9vw3aG"
+ "_key": "!items!iAlQG6kOGL9vw3aG",
+ "effects": [
+  {
+   "_id": "P4Q95c8nR4YA5eKj",
+   "name": "Survivor (at half HP or lower)",
+   "img": "modules/jjk5e/icons/boon.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": true,
+   "statuses": [],
+   "description": "<p>Enable while you are at half your hit points or lower.</p>",
+   "changes": [
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "acid",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "bludgeoning",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "cold",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "fire",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "force",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "lightning",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "necrotic",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "piercing",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "poison",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "psychic",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "radiant",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "slashing",
+     "priority": 20
+    },
+    {
+     "key": "system.traits.dr.value",
+     "mode": 2,
+     "value": "thunder",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!iAlQG6kOGL9vw3aG.P4Q95c8nR4YA5eKj"
+  }
+ ]
 }

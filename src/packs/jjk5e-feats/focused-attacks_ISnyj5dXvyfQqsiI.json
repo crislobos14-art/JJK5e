@@ -37,10 +37,38 @@
    "forTechniques": [
     "Ratio"
    ],
-   "rev": "b947d99e57"
+   "rev": "d90db9b7a9",
+   "automation": "automated"
   }
  },
  "folder": "b0K9kretIN46uAAM",
  "sort": 100,
- "_key": "!items!ISnyj5dXvyfQqsiI"
+ "_key": "!items!ISnyj5dXvyfQqsiI",
+ "effects": [
+  {
+   "_id": "K3ILbczUkXAHoSHR",
+   "name": "Focused Attacks (+1 crit range)",
+   "img": "modules/jjk5e/icons/techniques/ratio.svg",
+   "type": "base",
+   "transfer": true,
+   "disabled": false,
+   "statuses": [],
+   "description": "",
+   "changes": [
+    {
+     "key": "flags.dnd5e.weaponCriticalThreshold",
+     "mode": 3,
+     "value": "19",
+     "priority": 20
+    }
+   ],
+   "duration": {},
+   "flags": {
+    "jjk5e": {
+     "technique": null
+    }
+   },
+   "_key": "!items.effects!ISnyj5dXvyfQqsiI.K3ILbczUkXAHoSHR"
+  }
+ ]
 }
