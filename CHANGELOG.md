@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.74.0 — Advanced Domain Engine (fase inicial)
+- Sure-hit: exige coordenadas válidas y que el objetivo pertenezca a la escena del dominio.
+- Detección de choques según la escena real de la expansión, incluidos actores sintéticos de tokens.
+- Identificador por expansión: las reacciones del chat y los avisos se revalidan; se evita la duplicación local y las reacciones asociadas a expansiones anteriores.
+- Las decisiones de PNJ se envían solo al GM activo.
+- Barrera equilibrada: exige pagar CE antes de activarla y no cobra de nuevo al seleccionar el mismo modo.
+- El avance de los choques queda limitado al combate correspondiente y no se repite al actualizar o retroceder una ronda.
+- Seis nuevas pruebas de regresión (78 en total en la validación del código de la rama).
+- Fase inicial: faltan la autoridad distribuida, el HUD avanzado, las barreras atacables y las interacciones específicas de técnicas antidominio. La validación automatizada no sustituye las pruebas multijugador reales de Foundry.
+
 ## 1.73.1 — Revisión de textos de reglas (EN/ES)
 - Las 30 reglas opcionales están reescritas en inglés y en español siguiendo el texto del manual. Se añadieron condiciones que faltaban:
   - Recibir el golpe: alcance de movimiento.
