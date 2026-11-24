@@ -54,7 +54,7 @@ async function safeDelete(doc) {
 }
 
 async function confirmDialog(title, content) {
-  return foundry.applications.api.DialogV2.confirm({ window: { title }, content, rejectClose: false });
+  return foundry.applications.api.DialogV2.confirm({ classes: ["jjk5e-ui", "jjk5e-dialog"], window: { title }, content, rejectClose: false });
 }
 
 /** Prompt with a form; returns the named field value (or null). */
@@ -64,7 +64,7 @@ async function promptField(title, content, field, asNumber = false) {
     if (!el) return null;
     return asNumber ? el.valueAsNumber : el.value;
   };
-  return foundry.applications.api.DialogV2.prompt({
+  return foundry.applications.api.DialogV2.prompt({ classes: ["jjk5e-ui", "jjk5e-dialog"],
     window: { title }, content, rejectClose: false,
     ok: { label: t("Common.OK"), callback: (event, button, dialog) => read(button.form ?? dialog?.element ?? dialog) }
   });
@@ -1073,7 +1073,7 @@ function registerActivityHooks() {
       const deltas=results?.message?.system?.deltas?.item?.[item.id]??[];
       const used=deltas.filter(x=>x.keyPath==="system.uses.spent").reduce((n,x)=>n+Number(x.delta||0),0);
       if(Number.isSafeInteger(used)&&used>0) await spendCE(actor,-used,`${item.name} — ${t("CE.Regained")}`);
-      else ui.notifications.warn("Quick Recovery: no verified native consumption; restore CE manually after checking the feature's uses.");
+      else ui.notifications.warn(t("Notify.QuickRecoveryUnverified"));
       return;
     }
     if (actor && /^Six Eyes \((Dormant|Stirring)\)$/.test(baseName(item)) &&
@@ -3054,7 +3054,7 @@ Hooks.once("ready", async () => {
   for(const hook of ["dnd5e.preShortRest","dnd5e.preLongRest","dnd5e.preRestCompleted"]) {
     Hooks.on(hook,actor=>{
       if(ceAuthorityEnabled()&&cePending(findPool(actor))) {
-        ui.notifications.warn("JJK5e: settle pending CE reservations before resting.");
+        ui.notifications.warn(t("Notify.CEPendingRest"));
         return false;
       }
     });
@@ -4146,7 +4146,7 @@ async function createVow(actor, data = null) {
       ...data, id: newId() };
   }
   if (!vow) {
-    vow = await foundry.applications.api.DialogV2.prompt({
+    vow = await foundry.applications.api.DialogV2.prompt({ classes: ["jjk5e-ui", "jjk5e-dialog"],
       window: { title: t("Vow.New") }, content: presetForm(actor), rejectClose: false, position: { width: 460 },
       ok: { label: t("Vow.Make"), callback: (event, button) => readVowForm(button.form) }
     });
@@ -4213,7 +4213,7 @@ async function breakVow(actor, id) {
 
 /** Mutual vow punishment: 5 exhaustion levels for 10 days, or a roll on the misfortune table. */
 async function vowPunishment(actor) {
-  const choice = await foundry.applications.api.DialogV2.wait({
+  const choice = await foundry.applications.api.DialogV2.wait({ classes: ["jjk5e-ui", "jjk5e-dialog"],
     window: { title: t("Vow.Punishment") }, content: `<p>${t("Vow.PunishmentHint")}</p>`, rejectClose: false,
     buttons: [{ action: "exhaustion", label: t("Vow.Exhaustion"), default: true }, { action: "roll", label: t("Vow.RollMisfortune") }]
   }).catch(() => "exhaustion");
@@ -4398,7 +4398,7 @@ async function generateMission(opts = {}) {
     const gradeOpts = GRADES.map((g) => `<option value="${g}">${esc(gradeLabel(g))}</option>`).join("");
     const actorOpts = chars.map((a) => `<label class="jjk-check"><input type="checkbox" name="a" value="${a.id}" `
       + `${sel.includes(a) ? "checked" : ""}> ${esc(a.name)} <em>(${esc(gradeLabel(getCareer(a).grade))})</em></label>`).join("");
-    const res = await foundry.applications.api.DialogV2.prompt({
+    const res = await foundry.applications.api.DialogV2.prompt({ classes: ["jjk5e-ui", "jjk5e-dialog"],
       window: { title: t("Mission.Generate") }, rejectClose: false,
       content: `<form><label>${t("Mission.Grade")}<select name="grade">${gradeOpts}</select></label>`
         + `<fieldset><legend>${t("Mission.Assign")}</legend>${actorOpts || `<p>—</p>`}</fieldset>`
@@ -4959,7 +4959,7 @@ async function activateDomainProtection(actor, item, activity) {
   const cost = Number(item.flags?.jjk5e?.ceCosts?.[activity.id]);
   if (name === "Falling Blossom Emotion" && cost === 5) {
     return setKindEffect(actor, "fallingBlossomDefense", { name, img: `${ICONS}/domain.svg`, duration: { rounds: 10, seconds: 60 },
-      description: "<p>V6: negates guaranteed-hit attacks and effects only.</p>" });
+      description: `<p>${t("Domain.Ward.FallingBlossom")}</p>` });
   }
   if(name==="Falling Blossom Emotion"&&cost===4){
     return setKindEffect(actor,"fallingBlossomOffense",{name:"Falling Blossom Emotion (Offense)",img:`${ICONS}/domain.svg`,
@@ -4986,7 +4986,7 @@ async function activateDomainProtection(actor, item, activity) {
     .filter((tk) => { const a = tokenCenter(origin), b = tokenCenter(tk); return Math.hypot(a.x-b.x,a.y-b.y) <= ftToPx(scene,15)+1; })
     .map((tk) => tk.uuid).filter(Boolean);
   return setKindEffect(actor, "hollowWickerProtection", { name, img: `${ICONS}/domain.svg`, duration: { rounds: 10, seconds: 60 },
-    description: "<p>V6: selected creatures within 15 ft are protected from guaranteed hits.</p>",
+    description: `<p>${t("Domain.Ward.HollowWicker")}</p>`,
     flags: { jjk5e: { originTokenUuid: origin.uuid, chosenTokens: [...new Set(chosen)] } } });
 }
 function domainGuaranteedTarget(workflow, target) {
@@ -5325,7 +5325,7 @@ async function promptBarrierAttack(actor) {
   if (!seeker?.isOwner || !tk?.document?.uuid) return ui.notifications.warn(t("Domain.SelectAttacker"));
   const state = getDomain(actor);
   if (!state?.open || state.noBarrier) return;
-  const result = await foundry.applications.api.DialogV2.prompt({ window: { title: t("Domain.AttackBarrier") }, rejectClose: false,
+  const result = await foundry.applications.api.DialogV2.prompt({ classes: ["jjk5e-ui", "jjk5e-dialog"], window: { title: t("Domain.AttackBarrier") }, rejectClose: false,
     content: `<p>${t("Domain.BarrierAttackHint")}</p><label>${t("Domain.AttackBonus")}<input name="bonus" type="number" value="0"></label>
       <label>${t("Domain.AttackRange")}<input name="range" type="number" min="0" value="5"></label>
       <label>${t("Domain.DamageFormula")}<input name="formula" value="1d8"></label>
@@ -5560,9 +5560,16 @@ async function editDomainProfile(actor, mode = "form") {
   if (!game.user.isGM || !actor || getDomain(actor)?.open) return false;
   const profile = validateDomainProfile(actor.getFlag(MODULE_ID, "customDomainProfile")) ??
     { version: 1, name: "Custom Domain", damage: "1d6", damageType: "force", save: "none", dc: 15, onSave: "half", condition: "none", rounds: 1 };
-  const options = (arr, value) => arr.map((x) => `<option value="${x}" ${x === value ? "selected" : ""}>${x}</option>`).join("");
+  const label = (x) => {
+    if (x === "none") return t("Domain.ProfileNone");
+    const cfg = CONFIG.DND5E ?? {};
+    const raw = cfg.damageTypes?.[x]?.label ?? cfg.abilities?.[x]?.label ?? cfg.conditionTypes?.[x]?.label
+      ?? (["half", "full"].includes(x) ? t(`Domain.ProfileOnSaveOpt.${x}`) : x);
+    return esc(game.i18n.localize(String(raw)));
+  };
+  const options = (arr, value) => arr.map((x) => `<option value="${x}" ${x === value ? "selected" : ""}>${label(x)}</option>`).join("");
   if (mode === "export") {
-    await foundry.applications.api.DialogV2.prompt({ window: { title: t("Domain.ProfileExport") }, rejectClose: false,
+    await foundry.applications.api.DialogV2.prompt({ classes: ["jjk5e-ui", "jjk5e-dialog"], window: { title: t("Domain.ProfileExport") }, rejectClose: false,
       content: `<textarea readonly rows="12" style="width:100%">${esc(JSON.stringify(profile,null,2))}</textarea>`,
       ok: { callback: () => true } });
     return true;
@@ -5577,11 +5584,11 @@ async function editDomainProfile(actor, mode = "form") {
     <label>${t("Domain.DamageFormula")} <input name="damage" value="${esc(profile.damage)}"></label>
     <label>${t("Domain.ProfileDamageType")} <select name="damageType">${options(DOMAIN_PROFILE_TYPES,profile.damageType)}</select></label>
     <label>${t("Domain.ProfileSave")} <select name="save">${options(DOMAIN_PROFILE_SAVES,profile.save)}</select></label>
-    <label>DC <input name="dc" type="number" min="1" max="40" value="${profile.dc}"></label>
+    <label>${t("Domain.ProfileDC")} <input name="dc" type="number" min="1" max="40" value="${profile.dc}"></label>
     <label>${t("Domain.ProfileOnSave")} <select name="onSave">${options(["half","none","full"],profile.onSave)}</select></label>
     <label>${t("Domain.ProfileCondition")} <select name="condition">${options(DOMAIN_PROFILE_CONDITIONS,profile.condition)}</select></label>
     <label>${t("Domain.ProfileRounds")} <input name="rounds" type="number" min="1" max="10" value="${profile.rounds}"></label>`;
-  const result = await foundry.applications.api.DialogV2.prompt({ window: { title: t("Domain.ProfileEdit") }, rejectClose: false, content,
+  const result = await foundry.applications.api.DialogV2.prompt({ classes: ["jjk5e-ui", "jjk5e-dialog"], window: { title: t("Domain.ProfileEdit") }, rejectClose: false, content,
     ok: { callback: (e,b) => {
       const f = b.form.elements;
       if (mode === "import") { try { return JSON.parse(f.json.value); } catch (err) { return {}; } }
@@ -5675,7 +5682,7 @@ function domainHudDetails(actor, state) {
   const remaining = effect?.duration?.remaining;
   const win = actor.getFlag(MODULE_ID,"domainReactionWindow");
   const counts = win?.offers?.reduce((a,o)=>(a[o.status]=(a[o.status]??0)+1,a),{}) ?? {};
-  const progress = win ? `<p>${t("Domain.ProfileResponses")}: ${Object.entries(counts).map(([k,v])=>esc(k)+": "+v).join(" · ")}</p>` : "";
+  const progress = win ? `<p>${t("Domain.ProfileResponses")}: ${Object.entries(counts).map(([k,v])=>`${esc(t(`Domain.OfferStatus.${k}`))}: ${v}`).join(" · ")}</p>` : "";
   const buttons = actor.isOwner ? domainActivities(actor).map((a) => `<button type="button" data-action="activity" data-activity="${esc(a.id)}">${esc(a.name ?? a.id)}</button>`).join("") : "";
   return `<p><strong>${t("Domain.ProfileSureHit")}:</strong> ${t(sureHitBlocked(actor) ? "Domain.ProfileBlocked" : "Domain.ProfileAvailable")}</p>
     <p>${t("Domain.ProfileRemaining")}: ${state.barrierless ? "∞" : Number.isFinite(remaining) ? Math.max(0,remaining) : "—"}</p>${progress}
@@ -5699,7 +5706,7 @@ async function toggleDomainAmplification(actor) {
   const remaining = Math.min(60, Math.max(1, (Number(actor.getFlag(MODULE_ID,"amplificationUntil")) || now) - now));
   await setKindEffect(actor, "domainAmplification", { name: "Domain Amplification", img: `${ICONS}/domain.svg`,
     duration: { rounds: Math.ceil(remaining / 6), seconds: remaining },
-    description: "<p>V6: innate techniques are blocked; guaranteed-hit protection is active. Adjudicate other neutralization and Maximum Output interactions.</p>" });
+    description: `<p>${t("Domain.Ward.Amplification")}</p>` });
   return true;
 }
 const DOMAIN_APPS = new Map();
@@ -5721,7 +5728,7 @@ function makeDomainClass() {
           return queueDomainWork(()=>executeDomainProfile(this.actor,targets,foundry.utils.randomID()));
         },
         hit: async function () {
-          const res = await foundry.applications.api.DialogV2.prompt({ window: { title: t("Domain.HitBarrier") }, rejectClose: false,
+          const res = await foundry.applications.api.DialogV2.prompt({ classes: ["jjk5e-ui", "jjk5e-dialog"], window: { title: t("Domain.HitBarrier") }, rejectClose: false,
             content: `<label>${t("CE.Amount")}<input type="number" name="n" value="10" min="0"></label>
               <label>${t("Domain.SideLabel")}<select name="side"><option value="outside">${t("Domain.Side.outside")}</option><option value="inside">${t("Domain.Side.inside")}</option></select></label>
               <label class="jjk-check"><input type="checkbox" name="psy"> ${t("Domain.Psychic")}</label>`,
@@ -5905,7 +5912,7 @@ async function createCurse(opts = {}) {
   if (!grade) {
     const gradeOpts = GRADES.map((g) => `<option value="${g}">${esc(gradeLabel(g))}</option>`).join("");
     const kindOpts = Object.entries(CURSE_KINDS).map(([k2, v]) => `<option value="${k2}">${esc(L(v.name))}</option>`).join("");
-    const res = await foundry.applications.api.DialogV2.prompt({ window: { title: t("Curse.Generate") }, rejectClose: false,
+    const res = await foundry.applications.api.DialogV2.prompt({ classes: ["jjk5e-ui", "jjk5e-dialog"], window: { title: t("Curse.Generate") }, rejectClose: false,
       content: `<label>${t("Mission.Grade")}<select name="grade">${gradeOpts}</select></label>
         <label>${t("Curse.Kind")}<select name="kind">${kindOpts}</select></label>
         <label>${t("Vow.Name")}<input type="text" name="name"></label>
@@ -5983,8 +5990,16 @@ Hooks.once("ready", () => {
     if (isActiveGM() && "round" in (changes ?? {})) return queueDomainWork(() => tickClashes(combat)).catch((err) => reportError("clash tick", err));
   });
   // Domain state now originates on the active GM. Other clients only refresh their UI.
+  const seenOpenings = new Set();
   Hooks.on("updateActor", (actor, changes) => {
-    if (foundry.utils.hasProperty(changes, `flags.${MODULE_ID}.domainState`)) refreshDomainApps(actor);
+    if (!foundry.utils.hasProperty(changes, `flags.${MODULE_ID}.domainState`)) return;
+    refreshDomainApps(actor);
+    // The GM writes the state; the owning player still gets the HUD once per opening.
+    const st = getDomain(actor);
+    if (!game.user.isGM && actor.isOwner && st?.open && st.openingId && !seenOpenings.has(st.openingId)) {
+      seenOpenings.add(st.openingId);
+      openDomainHUD(actor);
+    }
   });
   Hooks.on("updateActor", (actor, changes) => {
     if (foundry.utils.hasProperty(changes, "system.attributes.hp") && isActiveGM()) return queueDomainWork(() => checkEqualClash(actor));
@@ -7273,7 +7288,7 @@ async function yearlyProgression(actor) {
   if (!actor || !game.user.isGM) return;
   const n = Number(actor.getFlag(MODULE_ID, "yearly")) || 0;
   if (n >= 4) return ui.notifications.warn(t("Opt.Yearly.Max"));
-  const choice = await foundry.applications.api.DialogV2.wait({ window: { title: t("Opt.yearlyProgression.Name") }, rejectClose: false,
+  const choice = await foundry.applications.api.DialogV2.wait({ classes: ["jjk5e-ui", "jjk5e-dialog"], window: { title: t("Opt.yearlyProgression.Name") }, rejectClose: false,
     content: `<p>${t("Opt.Yearly.Prompt", { name: esc(actor.name), n: n + 1 })}</p>`,
     buttons: [{ action: "asi", label: t("Opt.Yearly.ASI"), default: true }, { action: "feat", label: t("Opt.Yearly.Feat") }] });
   let ok = false;
@@ -7360,7 +7375,7 @@ async function workWeek(actor) {
   actor = requireActor(actor);
   if (!actor?.isOwner) return;
   const special = !!actor.getFlag(MODULE_ID, "technique") || hasRCT(actor);
-  const choice = await foundry.applications.api.DialogV2.wait({ window: { title: t("Opt.moneyRules.Name") }, rejectClose: false,
+  const choice = await foundry.applications.api.DialogV2.wait({ classes: ["jjk5e-ui", "jjk5e-dialog"], window: { title: t("Opt.moneyRules.Name") }, rejectClose: false,
     content: `<p>${t("Opt.Money.Prompt")}</p>`, buttons: [
       { action: "wage", label: t("Opt.Money.Wage"), default: true },
       ...(special ? [{ action: "special", label: t("Opt.Money.Special") }] : []),
@@ -7376,7 +7391,7 @@ async function workWeek(actor) {
   } else if (choice === "tool") {
     const items = actor.items.filter((i) => ["weapon", "equipment"].includes(i.type));
     if (!items.length) return;
-    const res = await foundry.applications.api.DialogV2.prompt({ window: { title: t("Opt.Money.Tool") }, rejectClose: false,
+    const res = await foundry.applications.api.DialogV2.prompt({ classes: ["jjk5e-ui", "jjk5e-dialog"], window: { title: t("Opt.Money.Tool") }, rejectClose: false,
       content: `<label>${t("Opt.Money.Item")}<select name="item">${items.map((i) => `<option value="${i.id}">${esc(i.name)} (${Number(i.system?.price?.value) || 0})</option>`).join("")}</select></label>
         <label>${t("Mission.Grade")}<select name="grade">${Object.keys(TOOL_MULT).map((g) => `<option value="${g}">${esc(gradeLabel(g))} ×${TOOL_MULT[g]}</option>`).join("")}</select></label>`,
       ok: { label: t("Opt.Money.Sell"), callback: (e, b) => ({ item: b.form.elements.item.value, grade: b.form.elements.grade.value }) } });
@@ -8120,7 +8135,7 @@ function reactionWindow(opener) {
   const win = foundry.utils.deepClone(opener?.getFlag?.(MODULE_ID, "domainReactionWindow") ?? null);
   const state = getDomain(opener);
   if (!win || win.status !== "open" || !state?.open || win.openingId !== state.openingId || !Number.isFinite(win.expires) ||
-      !Array.isArray(win.offers) || Date.now() >= win.expires) return null;
+      !Array.isArray(win.offers) || nowMs() >= win.expires) return null;
   if (win.combatId) {
     const combat = game.combats?.get?.(win.combatId) ?? (game.combat?.id === win.combatId ? game.combat : null);
     if (!combat || combat.round !== win.round || combat.turn !== win.turn) return null;
@@ -8145,7 +8160,7 @@ async function processClashDecision(operation, actor, data, user) {
   if (operation === "claim" || operation === "decline") {
     if (offer.status !== "pending" || clashBlocker(actor, opener)) return false;
     const claim = actor.getFlag(MODULE_ID, "domainReactionClaim");
-    if (claim && Date.now() < claim.expires) return false;
+    if (claim && nowMs() < claim.expires) return false;
     offer.status = operation === "claim" ? "claimed" : "declined";
     offer.userId = user.id;
     if (operation === "claim") {
@@ -8199,7 +8214,7 @@ async function offerDomainClash(opener) {
   const combat = game.combat;
   const sceneId = combat?.scene?.id ?? (typeof combat?.scene === "string" ? combat.scene : combat?.sceneId);
   const sameCombat = combat?.id && sceneId === state.sceneId;
-  const win = { status: "open", openingId: state.openingId, expires: Date.now() + 120000,
+  const win = { status: "open", openingId: state.openingId, expires: nowMs() + 120000,
     combatId: sameCombat ? combat.id : null, round: sameCombat ? combat.round : null, turn: sameCombat ? combat.turn : null,
     offers: candidates.map((a) => ({ actorUuid: a.uuid, status: "pending" })) };
   await opener.setFlag(MODULE_ID, "domainReactionWindow", win);

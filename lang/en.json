@@ -140,7 +140,7 @@
       "ProfileInvalid": "Invalid domain profile; nothing was changed.",
       "ProfileInside": "Inside",
       "ProfileResponses": "Reaction responses",
-      "ProfileSureHit": "Sure-hit",
+      "ProfileSureHit": "Sure hit",
       "ProfileBlocked": "Blocked",
       "ProfileAvailable": "Available",
       "ProfileRemaining": "Remaining duration",
@@ -148,7 +148,26 @@
       "ProfileActivities": "Domain activities (manual)",
       "ProfileRun": "Apply custom effect",
       "ProfileRunConfirm": "Apply the approved effect to eligible selected targets? Verify targeting, timing and the approved homebrew rules.",
-      "ProfileSimpleDomain": "Simple Domain: adjudicate barrier absorption before applying the effect."
+      "ProfileSimpleDomain": "Simple Domain: adjudicate barrier absorption before applying the effect.",
+      "Ward": {
+        "FallingBlossom": "Falling Blossom Emotion: negates only attacks and effects that are guaranteed to hit.",
+        "HollowWicker": "Hollow Wicker Basket: the chosen creatures within 15 ft are protected from guaranteed hits.",
+        "Amplification": "Domain Amplification: your innate techniques are blocked and you are protected from guaranteed hits. The GM adjudicates other neutralizations and Maximum Output."
+      },
+      "ProfileNone": "None",
+      "ProfileOnSaveOpt": {
+        "half": "Half damage",
+        "full": "Full damage"
+      },
+      "OfferStatus": {
+        "pending": "waiting",
+        "claimed": "expanding",
+        "declined": "declined",
+        "used": "expanded",
+        "finished": "cancelled",
+        "expired": "expired"
+      },
+      "ProfileDC": "Save DC"
     },
     "Burnout": {
       "Name": "Technique Burnout",
@@ -315,7 +334,9 @@
       "MaxOutputScore": "JJK 5e: Maximum Output requires a Cursed Energy score of 20.",
       "AskGM": "JJK 5e: Ask the GM to perform this action (player requests are off).",
       "NoAppV2": "JJK 5e: ApplicationV2 is not available.",
-      "EnableModules": "JJK 5e · Enable the combat modules: {list}"
+      "EnableModules": "JJK 5e · Enable the combat modules: {list}",
+      "QuickRecoveryUnverified": "JJK 5e: Quick Recovery — the feature's use could not be verified; check its uses and restore the CE by hand.",
+      "CEPendingRest": "JJK 5e: settle the pending CE reservations (GM) before resting."
     },
     "Settings": {
       "autoSpendCE": {

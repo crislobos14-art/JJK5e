@@ -140,7 +140,7 @@
       "ProfileInvalid": "Perfil de dominio inválido; no se han realizado cambios.",
       "ProfileInside": "Dentro",
       "ProfileResponses": "Respuestas de reacción",
-      "ProfileSureHit": "Golpe garantizado",
+      "ProfileSureHit": "Impacto garantizado",
       "ProfileBlocked": "Bloqueado",
       "ProfileAvailable": "Disponible",
       "ProfileRemaining": "Duración restante",
@@ -148,7 +148,26 @@
       "ProfileActivities": "Actividades del dominio (manual)",
       "ProfileRun": "Aplicar efecto personalizado",
       "ProfileRunConfirm": "¿Aplicar el efecto aprobado a los objetivos seleccionados elegibles? Verifica los objetivos, el momento y las reglas homebrew aprobadas.",
-      "ProfileSimpleDomain": "Simple Domain: resuelve la absorción de la barrera antes de aplicar el efecto."
+      "ProfileSimpleDomain": "Simple Domain: resuelve la absorción de la barrera antes de aplicar el efecto.",
+      "Ward": {
+        "FallingBlossom": "Falling Blossom Emotion: anula solo los ataques y efectos de impacto garantizado.",
+        "HollowWicker": "Hollow Wicker Basket: las criaturas elegidas a 15 pies o menos quedan protegidas de los impactos garantizados.",
+        "Amplification": "Domain Amplification: tus técnicas innatas quedan bloqueadas y estás protegido de los impactos garantizados. El GM resuelve otras neutralizaciones y la Salida máxima."
+      },
+      "ProfileNone": "Ninguno",
+      "ProfileOnSaveOpt": {
+        "half": "Mitad de daño",
+        "full": "Daño completo"
+      },
+      "OfferStatus": {
+        "pending": "esperando",
+        "claimed": "expandiendo",
+        "declined": "rechazó",
+        "used": "expandió",
+        "finished": "canceló",
+        "expired": "expiró"
+      },
+      "ProfileDC": "CD de la salvación"
     },
     "Burnout": {
       "Name": "Technique Burnout",
@@ -315,7 +334,9 @@
       "MaxOutputScore": "JJK 5e: Salida máxima requiere una puntuación de Energía Maldita de 20.",
       "AskGM": "JJK 5e: Pide al GM que haga esta acción (las peticiones de jugadores están desactivadas).",
       "NoAppV2": "JJK 5e: ApplicationV2 no está disponible.",
-      "EnableModules": "JJK 5e · Activa los módulos de combate: {list}"
+      "EnableModules": "JJK 5e · Activa los módulos de combate: {list}",
+      "QuickRecoveryUnverified": "JJK 5e: Quick Recovery — no se pudo comprobar el uso del rasgo; revisa sus usos y devuelve la EM a mano.",
+      "CEPendingRest": "JJK 5e: resuelve las reservas de EM pendientes (GM) antes de descansar."
     },
     "Settings": {
       "autoSpendCE": {

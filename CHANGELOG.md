@@ -11,6 +11,9 @@
 - Validación: 117/117 pruebas superadas (GitHub Actions 45459063536 y 45459137995); sintaxis, ESLint, revisiones, JSON, auditorías y construcción de compendios. 939 objetos, 1557 actividades, 78 aperturas de dominio.
 - Limitaciones: motor transaccional desactivado por defecto; marcador de barrera experimental y no equivalente a pared física ni daño nativo Midi-QOL. Reanudación de actividades, absorción de ataques ordinarios mediante Midi-QOL, contraataque completo de Falling Blossom, neutralización automática de Domain Amplification y aceptación real multicliente pendientes. Consultar docs/design/engine-hardening-roadmap.md.
 
+## 1.76.1 — Auditoría 1.74–1.76
+Auditoría de las versiones 1.74.0–1.76.0. Se tradujeron al español los textos que estaban en inglés: aviso de Quick Recovery, aviso de reservas de EM antes de descansar, descripciones de Falling Blossom Emotion, Hollow Wicker Basket y Domain Amplification, opciones del editor de perfil de dominio y estados de respuesta a la reacción. Los 13 diálogos nuevos ahora usan el estilo Sealed Ink. El HUD de dominio y los diálogos de ataque a barrera y perfil personalizado tienen estilos propios. La ventana de reacción de choque de dominios usa la hora del servidor, así que el desfase del reloj de un jugador ya no la cierra antes de tiempo. El jugador que abre un dominio vuelve a ver el HUD automáticamente.
+
 ## 1.76.0 — Cursed Energy Transaction Engine (experimental) y compatibilidad Midi-QOL / DAE
 - Corrige restricciones de actividades de dominio, apertura repetida, limpieza de reacciones, expiración entre escenas y revalidación espacial.
 - Unifica cálculo y pago de CE, validación de escalado y Reduced Output, descuentos de un solo uso, CE fraccionario, ajustes exactos del GM y recuperación.
