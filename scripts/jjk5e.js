@@ -993,7 +993,7 @@ function actionTurn(actor){
   if(!ownTurn(actor))return null;
   const c=game.combat, key=[c.id,c.round,c.turn,c.combatant.id].join(":");
   let state=ACTION_TURNS.get(c.id);
-  if(state?.key!==key){state={key,action:false,bonus:false,free:false,moved:false,full:false};ACTION_TURNS.set(c.id,state);}
+  if(state?.key!==key){state={key,action:false,bonus:false,free:false,moved:false,full:false,lockMovement:false};ACTION_TURNS.set(c.id,state);}
   return state;
 }
 function isJJKFree(activity){
@@ -1017,7 +1017,7 @@ async function spendFullTurn(actor,activity){
   const state=actionTurn(actor);
   if(!state)return;
   state.action=true;state.bonus=true;state.full=true;
-  if(!lesserFullTurn(activity))state.moved=true;
+  if(!lesserFullTurn(activity)){state.moved=true;state.lockMovement=true;}
   const midi=globalThis.MidiQOL;
   try{await midi?.setActionUsed?.(actor);await midi?.setBonusActionUsed?.(actor);}catch(err){reportError("full turn",err);}
 }
@@ -1029,16 +1029,29 @@ function recordTurnActivity(activity){
   if(activity.activation?.type==="action")state.action=true;
   if(activity.activation?.type==="bonus")state.bonus=true;
 }
+function isClaimedDomainReaction(actor,activity){
+  if(activity?.item?.flags?.jjk5e?.domainActivity!==activity?.id)return false;
+  const claim=actor?.getFlag(MODULE_ID,"domainReactionClaim");
+  return !!claim?.id && Number(claim.expires)>nowMs();
+}
 function actionGate(actor,activity){
   const state=actionTurn(actor);
+  if(activity?.item?.flags?.jjk5e?.optAction&&!optOn("additionalActions"))return false;
   if(isJJKFree(activity)&&game.combat?.started&&(!state||state.free))return false;
-  if(isFullTurn(activity)&&state&&fullTurnSpent(actor,activity))return false;
+  if(isFullTurn(activity)&&game.combat?.started&&!isClaimedDomainReaction(actor,activity)&&(!state||fullTurnSpent(actor,activity)))return false;
   if(state?.full&&["action","bonus"].includes(activity.activation?.type))return false;
   return true;
 }
 
 function registerActivityHooks() {
   Hooks.on("deleteCombat",c=>ACTION_TURNS.delete(c.id));
+  Hooks.on("preMoveToken",(token,movement)=>{
+    const state=actionTurn(token.actor);
+    // GM may adjudicate forced movement; only recorded cost-bearing player movement is blocked.
+    if(!game.user.isGM&&state?.lockMovement&&movement?.recorded&&Number(movement.pending?.cost)>0){
+      ui.notifications.warn(t("Notify.FullTurnUsed"));return false;
+    }
+  });
   Hooks.on("moveToken",(token,movement)=>{
     const state=actionTurn(token.actor);
     if(state&&movement?.recorded&&Number(movement.passed?.cost)>0)state.moved=true;
@@ -1144,7 +1157,7 @@ function registerActivityHooks() {
         ctx.postProcessed=true;
       }else if (!(await payActivityCE(actor, activity, usageConfig))) return;
     }
-    if(isFullTurn(activity)&&actor?.isOwner)await spendFullTurn(actor,activity);
+    if(isFullTurn(activity)&&actor?.isOwner&&!isClaimedDomainReaction(actor,activity))await spendFullTurn(actor,activity);
     if(isQuickRecovery(activity)){
       if(!results || typeof results!=="object" || CE_RECOVERY_RESULTS.has(results)) return;
       CE_RECOVERY_RESULTS.add(results);
@@ -1612,6 +1625,7 @@ async function promptCE(mode = "spend", actor) {
 
 /** Exchange actual unused class Hit Dice for CE (V.6: 1 HD => 1 CE, half total HD cap). */
 /** One exchange per confirmed native short rest. An ambiguous write is never retried automatically. */
+const REST_EXCHANGE_RESULTS=new WeakSet();
 function restExchangePlan(actor, pool, n) {
   if (!pool || !Number.isSafeInteger(n) || n < 1) return null;
   const classes = actor.items.filter(i=>i.type==="class");
@@ -3250,6 +3264,8 @@ Hooks.once("ready", async () => {
   }
   Hooks.on("dnd5e.restCompleted", async (actor, result) => {
     if (!actor?.isOwner) return;
+    if(!result || typeof result!=="object" || REST_EXCHANGE_RESULTS.has(result))return;
+    REST_EXCHANGE_RESULTS.add(result);
     if(actor.getFlag(MODULE_ID,"shortRestExchange")?.state!=="review"){
       if(result?.longRest)await actor.unsetFlag(MODULE_ID,"shortRestExchange");
       else if(result)await actor.setFlag(MODULE_ID,"shortRestExchange",{id:foundry.utils.randomID(),state:"open"});
