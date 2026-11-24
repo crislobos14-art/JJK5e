@@ -468,12 +468,14 @@
       "Ability": "Ability",
       "Score": "Score",
       "Cost": "Cost",
-      "Remaining": "Points",
+      "Remaining": "Points left",
       "Apply": "Apply",
-      "Hint": "Every score starts at {min}. Budget: {budget}/{budget} points, maximum {max} before other bonuses. Cost of each score:",
+      "Hint": "Every score starts at {min}. Spend up to {budget} points; {max} is the maximum before racial and other bonuses.",
       "Order": "Use this before adding your race, class or background so their ability bonuses are added on top.",
-      "Over": "You spent {spent} points; the limit is {budget}.",
-      "Done": "{name}: ability scores set ({left} points left)."
+      "Over": "Over budget: {spent} of {budget} points. Lower a score to apply.",
+      "Done": "{name}: ability scores set ({left} points left).",
+      "Mod": "Mod",
+      "Reset": "Reset"
     },
     "ASI": {
       "Legend": "JJK 5e feats",
@@ -693,7 +695,11 @@
       "limbRoll": "Roll limb damage",
       "builder": "Technique builder",
       "update": "Update JJK automation",
-      "help": "JJK shortcuts help"
+      "help": "JJK shortcuts help",
+      "pointBuy": "Point buy",
+      "create": "Character creation sheet",
+      "levelUp": "Level up",
+      "optRules": "Optional rules (GM)"
     },
     "Breakthrough": {
       "Name": "Breakthroughs",
@@ -724,7 +730,35 @@
       "Stopped": "Character creation paused. Click Create character on the sheet to continue.",
       "Done": "{name} is ready.",
       "OnlyTechnique": "Only the {n} feats of your Innate Technique are shown.",
-      "NoTechniqueYet": "Choose your Innate Technique first (class level 1): technique feats are hidden until then."
+      "NoTechniqueYet": "Choose your Innate Technique first (class level 1): technique feats are hidden until then.",
+      "Steps": {
+        "abilities": "Ability scores",
+        "class": "Class",
+        "technique": "Innate technique",
+        "ceAbility": "Cursed Energy ability",
+        "race": "Race",
+        "background": "Background",
+        "feat": "Extra feat",
+        "hotbar": "JJK hotbar"
+      },
+      "StepHint": {
+        "abilities": "Point buy (do it first so race and class bonuses add on top).",
+        "class": "Its level 1 features include your innate technique.",
+        "technique": "Confirm your character's innate technique.",
+        "ceAbility": "Wisdom or Charisma: sets your Cursed Energy pool and save DCs.",
+        "race": "Choose a race and assign its bonuses.",
+        "background": "Skills, tools and the background feat.",
+        "feat": "For variant or Techniqueless characters, or when the GM allows one.",
+        "hotbar": "Put your techniques and JJK actions on the hotbar."
+      },
+      "Progress": "Steps done: {done} / {total}",
+      "Optional": "optional",
+      "Skip": "Not needed (Heavenly Restriction).",
+      "Do": "Do it",
+      "Redo": "Change",
+      "Next": "Next",
+      "Feat": "Choose a feat",
+      "NoFeats": "No JJK feat available: check prerequisites (level, technique, breakthroughs)."
     },
     "Shikigami": {
       "Title": "Customize a shikigami",
@@ -1062,6 +1096,12 @@
       "partial": "partly automated",
       "manual": "apply by hand",
       "automated": "automated"
+    },
+    "Sheet": {
+      "Technique": "Technique",
+      "LevelUp": "Level up",
+      "ShortRest": "Rest: CE",
+      "Hotbar": "Hotbar"
     }
   }
 }

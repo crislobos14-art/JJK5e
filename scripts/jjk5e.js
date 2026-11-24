@@ -1884,7 +1884,7 @@ function panelHTML(actor, tab = "combat") {
 
   const tabList = gm ? [...PANEL_TABS, ["gm", "fa-solid fa-crown", "Panel.TabGM"]] : PANEL_TABS;
   const tabs = `<nav class="jjk-tabs">${tabList.map(([id, icon, label], i) => `<button type="button" class="${id === tab ? "active" : ""}"
-    data-action="tab" data-tab="${id}" data-tooltip="${t(label)} [${i + 1}]"><i class="${icon}"></i> ${t(label)}${id === "combat" && alerts
+    data-action="jjkTab" data-tab="${id}" data-tooltip="${t(label)} [${i + 1}]"><i class="${icon}"></i> ${t(label)}${id === "combat" && alerts
     ? ` <span class="jjk-badge">${alerts}</span>` : ""}</button>`).join("")}</nav>`;
 
   const ceBlock = pool ? `<fieldset class="jjk-ce-card"><legend>${t("CE.Name")}</legend>
@@ -2011,7 +2011,7 @@ async function showShortcuts() {
 
 const panelAmount = (root) => Math.max(1, Math.floor(Number(root?.querySelector?.("[name=ceAmount]")?.value) || 1));
 const PANEL_ACTIONS = {
-  tab: (actor, target, root, app) => { if (app) app._tab = target.dataset.tab; },
+  jjkTab: (actor, target, root, app) => { if (app) app._tab = target.dataset.tab; },
   ceMinus: (actor) => spendCE(actor, 1, t("CE.Spent")),
   cePlus: (actor) => spendCE(actor, -1, t("CE.Regained")),
   ceMinus5: (actor) => spendCE(actor, 5, t("CE.Spent")),
@@ -2758,39 +2758,72 @@ function pointCost(score, cfg = pointBuyConfig()) {
 function pointBuyContent(values, cfg) {
   const rows = ABILITY_KEYS.map((k) => {
     const label = CONFIG.DND5E?.abilities?.[k]?.label ?? k.toUpperCase();
-    return `<tr><td><strong>${esc(game.i18n.localize(label))}</strong></td>
-      <td><input type="number" name="${k}" value="${values[k]}" min="${cfg.min}" max="${cfg.max}" step="1" style="width:5em"></td>
+    return `<tr data-row="${k}"><td><strong>${esc(game.i18n.localize(label))}</strong></td>
+      <td class="jjk-pb-step"><button type="button" data-pb="-" data-k="${k}" aria-label="−1">−</button>
+        <input type="number" name="${k}" value="${values[k]}" min="${cfg.min}" max="${cfg.max}" step="1" aria-label="${esc(game.i18n.localize(label))}">
+        <button type="button" data-pb="+" data-k="${k}" aria-label="+1">+</button></td>
+      <td class="jjk-pb-mod" data-mod="${k}">${sgnMod(values[k])}</td>
       <td class="jjk-pb-cost" data-ability="${k}">${pointCost(values[k], cfg)}</td></tr>`;
   }).join("");
   const spent = ABILITY_KEYS.reduce((n, k) => n + pointCost(values[k], cfg), 0);
   const costs = Object.entries(pointCostTable()).filter(([k]) => Number(k) >= cfg.min && Number(k) <= cfg.max)
     .map(([k, v]) => `<span class="jjk-pb-chip">${k}: <strong>${v}</strong></span>`).join("");
-  return `<p>${t("PointBuy.Hint", cfg)}</p><div class="jjk-pb-costs">${costs}</div>
-    <table class="jjk-pb"><thead><tr><th>${t("PointBuy.Ability")}</th><th>${t("PointBuy.Score")}</th><th>${t("PointBuy.Cost")}</th></tr></thead>
+  return `<section class="jjk-pointbuy">
+    <div class="jjk-pb-head"><div class="jjk-pb-left"><strong data-remaining>${cfg.budget - spent}</strong><span>/ ${cfg.budget}</span></div>
+      <p>${t("PointBuy.Hint", cfg)}</p></div>
+    <div class="jjk-pb-costs">${costs}</div>
+    <table class="jjk-pb"><thead><tr><th>${t("PointBuy.Ability")}</th><th>${t("PointBuy.Score")}</th><th>${t("PointBuy.Mod")}</th><th>${t("PointBuy.Cost")}</th></tr></thead>
     <tbody>${rows}</tbody></table>
-    <p class="jjk-pb-total">${t("PointBuy.Remaining")}: <strong data-remaining>${cfg.budget - spent}</strong> / ${cfg.budget}</p>
-    <p class="hint"><em>${t("PointBuy.Order")}</em></p>`;
+    <p class="jjk-pb-over" data-over hidden></p>
+    <div class="jjk-pb-tools"><button type="button" data-pb="reset">${t("PointBuy.Reset")}</button></div>
+    <p class="hint"><em>${t("PointBuy.Order")}</em></p></section>`;
 }
 
+const sgnMod = (score) => { const m = Math.floor((Number(score) - 10) / 2); return m >= 0 ? `+${m}` : `${m}`; };
+
 function bindPointBuy(root, cfg) {
-  if (!root) return;
+  if (!root?.querySelector) return;
+  const input = (k) => root.querySelector(`input[name="${k}"]`);
   const update = () => {
     let spent = 0;
     for (const k of ABILITY_KEYS) {
-      const input = root.querySelector(`input[name="${k}"]`);
-      const v = clamp(Math.round(Number(input?.value) || cfg.min), cfg.min, cfg.max);
+      const el = input(k);
+      const v = clamp(Math.round(Number(el?.value) || cfg.min), cfg.min, cfg.max);
       const c = pointCost(v, cfg);
       spent += c;
       const cell = root.querySelector(`.jjk-pb-cost[data-ability="${k}"]`);
       if (cell) cell.textContent = c;
+      const mod = root.querySelector(`[data-mod="${k}"]`);
+      if (mod) mod.textContent = sgnMod(v);
     }
+    const over = spent > cfg.budget;
     const rem = root.querySelector("[data-remaining]");
-    if (rem) {
-      rem.textContent = cfg.budget - spent;
-      rem.style.color = spent > cfg.budget ? "#c00" : "";
+    if (rem) { rem.textContent = cfg.budget - spent; rem.classList.toggle("over", over); }
+    const msg = root.querySelector("[data-over]");
+    if (msg) { msg.hidden = !over; msg.textContent = over ? t("PointBuy.Over", { spent, budget: cfg.budget }) : ""; }
+    // A plan over budget cannot be applied: the button says why instead of failing silently.
+    const apply = root.querySelector('button[data-action="apply"]');
+    if (apply) apply.disabled = over;
+    for (const k of ABILITY_KEYS) {
+      const v = clamp(Math.round(Number(input(k)?.value) || cfg.min), cfg.min, cfg.max);
+      const plus = root.querySelector(`[data-pb="+"][data-k="${k}"]`);
+      const minus = root.querySelector(`[data-pb="-"][data-k="${k}"]`);
+      if (plus) plus.disabled = v >= cfg.max || (pointCost(v + 1, cfg) - pointCost(v, cfg)) > (cfg.budget - spent);
+      if (minus) minus.disabled = v <= cfg.min;
     }
   };
   root.querySelectorAll("input[type=number]").forEach((i) => i.addEventListener("input", update));
+  root.addEventListener("click", (ev) => {
+    const b = ev.target.closest("[data-pb]");
+    if (!b) return;
+    ev.preventDefault();
+    if (b.dataset.pb === "reset") { for (const k of ABILITY_KEYS) if (input(k)) input(k).value = cfg.min; }
+    else {
+      const el = input(b.dataset.k);
+      if (el) el.value = clamp((Number(el.value) || cfg.min) + (b.dataset.pb === "+" ? 1 : -1), cfg.min, cfg.max);
+    }
+    update();
+  });
   update();
 }
 
@@ -2804,7 +2837,8 @@ async function pointBuy(actor) {
   const DialogV2 = foundry.applications.api.DialogV2;
   for (;;) {
     const result = await DialogV2.wait({
-      window: { title: t("PointBuy.Title"), icon: "fas fa-dice-d20" },
+      window: { title: t("PointBuy.Title"), icon: "fas fa-dice-d20" }, classes: ["jjk5e-ui", "jjk5e-dialog"],
+      position: { width: 520 },
       content: pointBuyContent(values, cfg),
       rejectClose: false,
       render: (event, dialog) => bindPointBuy((dialog?.element ?? dialog) instanceof HTMLElement
@@ -2824,7 +2858,9 @@ async function pointBuy(actor) {
       continue;
     }
     await actor.update(Object.fromEntries(ABILITY_KEYS.map((k) => [`system.abilities.${k}.value`, values[k]])));
+    await actor.setFlag(MODULE_ID, "pointBuyDone", true);
     ui.notifications.info(t("PointBuy.Done", { name: actor.name, left: cfg.budget - spent }));
+    refreshCreator(actor);
     return values;
   }
 }
@@ -4042,7 +4078,7 @@ function makeCareerClass() {
       classes: ["jjk5e-ui", "jjk5e-career"], window: { icon: "fas fa-medal", resizable: true },
       position: { width: 540, height: "auto" },
       actions: {
-        tab: function (ev, el) { this.tab = el.dataset.tab; this.render(); },
+        careerTab: function (ev, el) { this.tab = el.dataset.tab; this.render(); },
         rec: function () { addRecommendation(this.actor); },
         semi: function () { setSemi(this.actor); },
         promote: function () { promote(this.actor, 1); },
@@ -4060,7 +4096,7 @@ function makeCareerClass() {
       const tab = this.tab ?? "grade";
       const c = getCareer(this.actor);
       const gm = game.user.isGM;
-      const tabs = ["grade", "missions", "rep"].map((k) => `<a data-action="tab" data-tab="${k}" class="${tab === k ? "active" : ""}">${t(`Career.Tab.${k}`)}</a>`).join("");
+      const tabs = ["grade", "missions", "rep"].map((k) => `<a data-action="careerTab" data-tab="${k}" class="${tab === k ? "active" : ""}">${t(`Career.Tab.${k}`)}</a>`).join("");
       let body = "";
       if (tab === "grade") {
         const st = promotionStatus(this.actor);
@@ -4122,34 +4158,46 @@ function addSheetStrip(app, element) {
   const c = getCareer(actor);
   const vows = getVows(actor).filter((v) => v.active && !v.broken);
   const strip = document.createElement("div");
-  strip.className = "jjk5e-strip";
-  const ce = pool ? `<span class="jjk-ce"><i class="fas fa-bolt"></i> ${t("CE.Short")}
-      <button type="button" data-a="ce-" title="−1">−</button><strong>${poolValue(pool)}/${poolMax(pool)}</strong><button type="button" data-a="ce+" title="+1">+</button></span>` : "";
-  strip.innerHTML = `<div class="jjk-strip-heading">Jujutsu Kaisen</div>${ce}
-    <button type="button" data-a="career" class="jjk-grade-badge g${c.grade}" title="${t("Career.Title")}">${esc(gradeLabel(c.grade))}${c.semi ? "*" : ""}</button>
-    <button type="button" data-a="vows" title="${t("Vow.Title")}"><i class="fas fa-handshake"></i> ${vows.length}/${vowLimit(actor)}</button>
-    <span class="jjk-bt" title="${t("Breakthrough.Name")}"><i class="fas fa-bolt-lightning"></i> ${Number(actor.getFlag(MODULE_ID, "breakthroughs")) || 0}</span>
-    <button type="button" data-a="panel" title="${t("Panel.Open")}"><i class="fas fa-yin-yang"></i></button>
-    <button type="button" data-a="technique" title="${t("SceneTools.Technique")}"><i class="fas fa-hand-sparkles"></i></button>
-    <button type="button" data-a="rest" title="${t("SceneTools.ShortRest")}"><i class="fas fa-bed"></i></button>
-    <button type="button" data-a="hotbar" title="${t("Hotbar.Fill")}"><i class="fas fa-table-cells"></i></button>`;
-  for (const button of strip.querySelectorAll("button[title]")) button.setAttribute("aria-label", button.title);
+  strip.className = "jjk5e-strip jjk-sheetcard";
+  const value = pool ? poolValue(pool) : 0, max = pool ? poolMax(pool) : 0;
+  const pct = max ? Math.round((value / max) * 100) : 0;
+  const ro = Number(actor.getFlag(MODULE_ID, "reducedOutput")) || 0;
+  const bt = Number(actor.getFlag(MODULE_ID, "breakthroughs")) || 0;
+  const noClass = !actor.items.some((i) => i.type === "class");
+  const sb = (a, icon, label, cls = "") => `<button type="button" data-a="${a}" class="${cls}" title="${esc(label)}" aria-label="${esc(label)}"><i class="${icon}"></i><span>${esc(label)}</span></button>`;
+  strip.innerHTML = `<div class="jjk-sc-head"><img src="${ICONS}/seal-ju.svg" alt=""><span>Jujutsu Kaisen</span>
+      <button type="button" data-a="panel" class="jjk-sc-open" title="${t("Panel.Open")}" aria-label="${t("Panel.Open")}"><i class="fas fa-yin-yang"></i></button></div>
+    ${pool ? `<div class="jjk-sc-ce ${pct <= 25 ? "low" : ""}"><span class="jjk-sc-lbl">${t("CE.Short")}</span>
+      <button type="button" data-a="ce-" title="−1" aria-label="−1">−</button>
+      <strong>${value}</strong><em>/ ${max}</em>
+      <button type="button" data-a="ce+" title="+1" aria-label="+1">+</button>
+      <div class="jjk-bar"><div class="fill" style="width:${pct}%"></div></div></div>` : ""}
+    <div class="jjk-sc-chips">
+      <button type="button" data-a="career" class="jjk-grade-badge g${c.grade}" title="${t("Career.Title")}">${esc(gradeLabel(c.grade))}${c.semi ? "*" : ""}</button>
+      <button type="button" data-a="vows" title="${t("Vow.Title")}"><i class="fas fa-handshake"></i> ${vows.length}/${vowLimit(actor)}</button>
+      <span title="${t("Breakthrough.Name")}"><i class="fas fa-bolt-lightning"></i> ${bt}</span>
+      ${ro ? `<span class="warn" title="${t("Output.Reduced")}">RO ${ro}</span>` : ""}
+      ${inBurnout(actor) ? `<span class="danger">${t("Burnout.Name")}</span>` : ""}
+    </div>
+    <div class="jjk-sc-grid">
+      ${sb("create", "fas fa-user-plus", t("Create.Button"), noClass ? "jjk-primary" : "")}
+      ${sb("pointbuy", "fas fa-dice-d20", t("PointBuy.Title"))}
+      ${isHeavenlyOnly(actor) ? "" : sb("technique", "fas fa-hand-sparkles", t("Sheet.Technique"))}
+      ${sb("levelup", "fas fa-angles-up", t("Sheet.LevelUp"))}
+      ${sb("rest", "fas fa-bed", t("Sheet.ShortRest"))}
+      ${sb("hotbar", "fas fa-table-cells", t("Sheet.Hotbar"))}
+    </div>`;
   strip.addEventListener("click", (ev) => {
     const b = ev.target.closest("[data-a]");
     if (!b) return;
     ev.preventDefault(); ev.stopPropagation();
-    ({ "ce-": () => spendCE(actor, 1, t("CE.Name")), "ce+": () => spendCE(actor, -1, t("CE.Regained")),
+    const fn = { "ce-": () => spendCE(actor, 1, t("CE.Name")), "ce+": () => spendCE(actor, -1, t("CE.Regained")),
       career: () => openCareer(actor), vows: () => openVows(actor), panel: () => openPanel(actor),
       technique: () => chooseTechnique(actor), rest: () => shortRestCE(actor), hotbar: () => fillHotbar(actor),
-      create: () => createCharacterWizard(actor) })[b.dataset.a]?.();
+      create: () => createCharacterWizard(actor), pointbuy: () => pointBuy(actor), levelup: () => levelUp(actor) }[b.dataset.a];
+    if (fn) Promise.resolve(fn()).catch((err) => reportError(`sheet ${b.dataset.a}`, err));
   });
   strip.querySelectorAll("button").forEach((b) => b.classList.add("always-interactive"));
-  if (!actor.items.some((i) => i.type === "class")) {
-    const wiz = document.createElement("button");
-    wiz.type = "button"; wiz.dataset.a = "create"; wiz.className = "jjk-create always-interactive";
-    wiz.innerHTML = `<i class="fas fa-user-plus"></i> ${t("Create.Button")}`;
-    strip.prepend(wiz);
-  }
   // dnd5e 5/6 sheet: inside the sidebar card (the header is covered by the ability badges)
   const side = root.querySelector(".sidebar .card .stats") ?? root.querySelector(".sidebar .card");
   if (side) { strip.classList.add("in-sidebar"); side.append(strip); return; }
@@ -4921,7 +4969,11 @@ const KEY_ACTIONS = [
   ["limbRoll", "KeyL", ["Alt"], () => rollLimb(requireActor())],
   ["builder", "KeyI", ["Alt"], () => techniqueBuilder(pickActor())],
   ["update", "KeyU", ["Alt"], () => updateAutomation()],
-  ["help", "Slash", ["Alt"], () => showShortcuts()]
+  ["help", "Slash", ["Alt"], () => showShortcuts()],
+  ["pointBuy", "KeyP", ["Alt"], () => pointBuy()],
+  ["create", "KeyW", ["Alt"], () => createCharacterWizard()],
+  ["levelUp", "KeyE", ["Alt"], () => levelUp(requireActor())],
+  ["optRules", "KeyO", ["Alt"], () => openOptionalRules(), true]
 ];
 
 Hooks.once("init", () => {
@@ -5167,6 +5219,12 @@ async function asiOrFeatChooser(app, element) {
   const form = root?.querySelector?.(".standard-form");
   if (!form) return;
   root.querySelector(".jjk5e-asi-mode")?.remove();
+  // Modern rules (dnd5e 4+): the flow has its own ASI / feat switch ("asi-selected"). Applying {type:"asi"}
+  // without scores there clears the choice and hides the scores, so leave that flow alone.
+  if (root.querySelector('[name="asi-selected"]') || form.querySelector(".feat-section .pill-lg")) {
+    form.classList.remove("jjk-mode-asi", "jjk-mode-feat", "jjk-mode-none");
+    return;
+  }
   const type = adv.value?.type ?? null;
   const mode = type === "feat" ? "feat" : type === "asi" ? "asi" : (app._jjkMode ?? null);
   const bar = document.createElement("div");
@@ -5224,26 +5282,85 @@ async function addWithAdvancement(actor, doc) {
   });
 }
 
+/* Character creation sheet: every step in one window, done in any order, each with its state. */
+const CREATOR_APPS = new Map();
+const hasType = (actor, type) => actor.items.some((i) => i.type === type);
+function creatorSteps(actor) {
+  const hr = isHeavenlyOnly(actor) || actor.items.some((i) => i.type === "class" && i.system?.identifier === "heavenly-restriction");
+  const pick = (pack, type, title) => async () => { const d = await pickFromPack(pack, [type], title); return d ? addWithAdvancement(actor, d) : false; };
+  return [
+    { key: "abilities", icon: "fas fa-dice-d20", done: !!actor.getFlag(MODULE_ID, "pointBuyDone"), run: () => pointBuy(actor) },
+    { key: "class", icon: "fas fa-user-graduate", done: hasType(actor, "class"), run: pick("jjk5e-classes", "class", t("Create.Class")) },
+    { key: "technique", icon: "fas fa-hand-sparkles", done: hr || !!actor.getFlag(MODULE_ID, "technique"), skip: hr, run: () => chooseTechnique(actor) },
+    { key: "ceAbility", icon: "fas fa-brain", done: hr || !!actor.getFlag(MODULE_ID, "ceAbility"), skip: hr, run: () => chooseCEAbility(actor) },
+    { key: "race", icon: "fas fa-dna", done: hasType(actor, "race"), run: pick("jjk5e-races", "race", t("Create.Race")) },
+    { key: "background", icon: "fas fa-scroll", done: hasType(actor, "background"), run: pick("jjk5e-backgrounds", "background", t("Create.Background")) },
+    { key: "feat", icon: "fas fa-star", optional: true, done: false, run: () => pickFeat(actor, t("Create.Feat")) },
+    { key: "hotbar", icon: "fas fa-table-cells", optional: true, done: false, run: () => fillHotbar(actor) }
+  ];
+}
+
+function creatorHTML(actor) {
+  const steps = creatorSteps(actor);
+  const req = steps.filter((st) => !st.optional && !st.skip);
+  const done = req.filter((st) => st.done).length;
+  const next = req.find((st) => !st.done);
+  const ab = ABILITY_KEYS.map((k) => `<span class="jjk-chip on"><b>${k.toUpperCase()}</b> ${Number(actor.system.abilities?.[k]?.value) || 10}</span>`).join("");
+  const rows = steps.map((st, i) => `<li class="jjk-step ${st.done ? "done" : ""} ${st.skip ? "skip" : ""} ${st === next ? "next" : ""}">
+      <span class="jjk-step-n">${st.done ? '<i class="fas fa-check"></i>' : i + 1}</span>
+      <div><strong>${t(`Create.Steps.${st.key}`)}</strong>${st.optional ? ` <em>(${t("Create.Optional")})</em>` : ""}
+        <small>${st.skip ? t("Create.Skip") : t(`Create.StepHint.${st.key}`)}</small></div>
+      ${st.skip ? "" : `<button type="button" data-action="step" data-step="${st.key}" class="${st === next ? "jjk-primary" : ""}">
+        <i class="${st.icon}"></i> ${st.done && !st.optional ? t("Create.Redo") : t("Create.Do")}</button>`}</li>`).join("");
+  return `<section class="jjk-panel jjk-creator">
+    <header class="jjk-head"><img src="${ICONS}/seal-ju.svg" alt=""><div><div class="jjk-name">${esc(actor.name)}</div>
+      <div class="jjk-sub">${t("Create.Progress", { done, total: req.length })}</div></div></header>
+    <div class="jjk-bar" role="meter" aria-valuenow="${done}" aria-valuemax="${req.length}"><div class="fill" style="width:${Math.round((done / Math.max(1, req.length)) * 100)}%"></div></div>
+    <ol class="jjk-steps">${rows}</ol>
+    <div class="jjk-chips">${ab}</div>
+    <footer class="btns">${next ? `<button type="button" class="jjk-primary" data-action="next"><i class="fas fa-forward"></i> ${t("Create.Next")}: ${t(`Create.Steps.${next.key}`)}</button>`
+      : `<p class="jjk-note">${t("Create.Done", { name: esc(actor.name) })}</p>`}</footer></section>`;
+}
+
+function makeCreatorClass() {
+  const Base = foundry.applications.api.ApplicationV2;
+  const run = async function (key) {
+    if (this._busy) return;
+    const st = creatorSteps(this.actor).find((x) => x.key === (key ?? creatorSteps(this.actor).find((y) => !y.optional && !y.skip && !y.done)?.key));
+    if (!st) return;
+    this._busy = true;
+    try { await st.run(); } catch (err) { reportError(`create ${st.key}`, err); }
+    finally { this._busy = false; if (this.rendered) this.render(); }
+  };
+  return class JJKCreator extends Base {
+    static DEFAULT_OPTIONS = {
+      classes: ["jjk5e-ui", "jjk5e-creator"], window: { icon: "fas fa-user-plus", resizable: true },
+      position: { width: 520, height: "auto" },
+      actions: {
+        step: function (ev, el) { return run.call(this, el.dataset.step); },
+        next: function () { return run.call(this, null); }
+      }
+    };
+    get title() { return `${t("Create.Title")} — ${this.actor?.name ?? ""}`; }
+    async _renderHTML() { return creatorHTML(this.actor); }
+    _replaceHTML(result, content) { content.innerHTML = result; }
+    _onClose(options) { CREATOR_APPS.delete(this.actor?.uuid); return super._onClose?.(options); }
+  };
+}
+let JJKCreatorClass = null;
+function refreshCreator(actor) { const a = CREATOR_APPS.get(actor?.uuid); if (a?.rendered) a.render(); }
+
 async function createCharacterWizard(actor) {
   actor = requireActor(actor);
   if (!actor || actor.type !== "character") return;
-  const has = (type) => actor.items.some((i) => i.type === type);
-  const steps = [
-    ["abilities", () => pointBuy(actor), () => false],
-    ["class", async () => { const d = await pickFromPack("jjk5e-classes", ["class"], t("Create.Class")); return d ? addWithAdvancement(actor, d) : false; }, () => has("class")],
-    ["technique", () => (actor.getFlag(MODULE_ID, "technique") ? true : chooseTechnique(actor)), () => !!actor.getFlag(MODULE_ID, "technique")
-      || actor.items.some((i) => i.type === "class" && i.system?.identifier === "heavenly-restriction")],
-    ["race", async () => { const d = await pickFromPack("jjk5e-races", ["race"], t("Create.Race")); return d ? addWithAdvancement(actor, d) : false; }, () => has("race")],
-    ["background", async () => { const d = await pickFromPack("jjk5e-backgrounds", ["background"], t("Create.Background")); return d ? addWithAdvancement(actor, d) : false; }, () => has("background")]
-  ];
-  for (const [key, run, done] of steps) {
-    if (done()) continue;
-    const go = await confirmDialog(t("Create.Title"), `<p>${t(`Create.Step.${key}`)}</p>`);
-    if (!go) return ui.notifications.info(t("Create.Stopped"));
-    try { await run(); } catch (err) { console.error(`${MODULE_ID} | create ${key}`, err); }
-  }
-  ui.notifications.info(t("Create.Done", { name: actor.name }));
+  if (!actor.isOwner) return ui.notifications.warn(t("Notify.NotOwner"));
+  JJKCreatorClass ??= makeCreatorClass();
+  let app = CREATOR_APPS.get(actor.uuid);
+  if (!app) { app = new JJKCreatorClass({ id: `jjk5e-creator-${actor.id}` }); app.actor = actor; CREATOR_APPS.set(actor.uuid, app); }
+  return app.render({ force: true });
 }
+Hooks.on("updateActor", (actor) => refreshCreator(actor));
+for (const h of ["createItem", "deleteItem"]) Hooks.on(h, (item) => refreshCreator(item.parent));
 
 /* ---- Personal shikigami (Ten Shadows and other summons) ---- */
 
@@ -6040,8 +6157,25 @@ async function asiDialog(actor, points, title, perAbility = points) {
   return true;
 }
 
+/** JJK feats this actor can take now: not owned (unless repeatable), right technique, prerequisites met. */
+async function eligibleFeats(actor) {
+  const docs = await jjkFeatDocs();
+  const owned = new Set(actor.items.map((i) => normName(baseName(i))));
+  return docs.filter((d) => d.type === "feat" && d.system?.type?.value === "feat"
+    && (!owned.has(normName(baseName(d))) || d.system?.prerequisites?.repeatable)
+    && featFitsTechnique(actor, d) && !missingPrereqs(actor, d).length)
+    .filter((d, i, arr) => arr.findIndex((o) => o.name === d.name) === i)
+    .sort((a, b) => a.name.localeCompare(b.name));
+}
+
 async function pickFeat(actor, title) {
-  const doc = await pickFromPack("jjk5e-feats", ["feat"], title);
+  const list = await eligibleFeats(actor);
+  if (!list.length) { ui.notifications.warn(t("Create.NoFeats")); return false; }
+  const groups = Object.entries(Object.groupBy(list, (d) => d.system?.type?.subtype || "general"))
+    .sort(([x], [y]) => featCategoryLabel(x).localeCompare(featCategoryLabel(y)))
+    .map(([sub, docs]) => `<optgroup label="${esc(featCategoryLabel(sub))}">${docs.map((d) => `<option value="${d.uuid}">${esc(d.name)}</option>`).join("")}</optgroup>`).join("");
+  const uuid = await promptField(title, `<p class="hint">${t("ASI.Hint", { n: list.length })}</p><select name="pick" style="width:100%">${groups}</select>`, "pick");
+  const doc = uuid ? list.find((d) => d.uuid === uuid) : null;
   if (!doc) return false;
   const missing = missingPrereqs(actor, doc);
   if (missing.length) ui.notifications.warn(`${doc.name}: ${missing.join(", ")}`);

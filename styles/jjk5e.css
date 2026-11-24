@@ -369,3 +369,70 @@ button.jjk5e-levelup { display: block; margin: 4px auto 0; padding: 2px 10px; fo
   background: rgba(127, 127, 127, .12); border-radius: 2px; }
 .jjk-auto-banner.partial { border-left-color: var(--jjk-warn, #e0a030); }
 .jjk-auto-banner.manual { border-left-color: var(--jjk-seal, #c8102e); }
+/* point buy (Sealed Ink) */
+.jjk-pointbuy .jjk-pb-head { display: flex; gap: 14px; align-items: center; margin-bottom: 6px; }
+.jjk-pointbuy .jjk-pb-left { display: flex; align-items: baseline; gap: 4px; min-width: 88px; }
+.jjk-pointbuy .jjk-pb-left strong { font: 700 40px/1 var(--jjk-display, "JJK Display", sans-serif); color: var(--jjk-bone, #efe6d6); }
+.jjk-pointbuy .jjk-pb-left strong.over { color: var(--jjk-seal, #c8102e); }
+.jjk-pointbuy .jjk-pb-left span { opacity: .7; }
+.jjk-pointbuy .jjk-pb-head p { margin: 0; font-size: 12px; opacity: .85; }
+.jjk-pointbuy .jjk-pb-chip { border-color: var(--jjk-line, #3a3340); background: rgba(255,255,255,.03); }
+.jjk-pointbuy .jjk-pb td { padding: 3px 6px; }
+.jjk-pointbuy .jjk-pb-step { display: flex; gap: 4px; justify-content: center; align-items: center; }
+.jjk-pointbuy .jjk-pb-step input { width: 3.4em; text-align: center; }
+.jjk-pointbuy .jjk-pb-step button { width: 26px; height: 26px; padding: 0; line-height: 1; }
+.jjk-pointbuy .jjk-pb-over { color: var(--jjk-seal, #c8102e); font-weight: 700; margin: 6px 0 0; }
+.jjk-pointbuy .jjk-pb-tools { display: flex; justify-content: flex-end; margin-top: 6px; }
+.jjk-pointbuy .jjk-pb-tools button { flex: 0 0 auto; }
+/* ---- character sheet card (Sealed Ink) ---- */
+.jjk5e-strip.jjk-sheetcard {
+  --sc-ink: #121015; --sc-card: #1a171e; --sc-line: #3a3340; --sc-bone: #efe6d6; --sc-seal: #c8102e; --sc-gold: #d4af37;
+  display: flex; flex-direction: column; gap: 6px; padding: 8px; margin: 8px 4px 4px; border-radius: 3px;
+  background: var(--sc-ink); border: 1px solid var(--sc-line); border-top: 3px solid var(--sc-seal);
+  color: var(--sc-bone); box-shadow: 0 4px 14px rgba(0,0,0,.35); text-align: left; flex-wrap: nowrap;
+}
+.jjk-sheetcard .jjk-sc-head { display: flex; align-items: center; gap: 6px; font: 700 13px/1 "JJK Display", "Signika", sans-serif;
+  letter-spacing: .12em; text-transform: uppercase; }
+.jjk-sheetcard .jjk-sc-head img { width: 22px; height: 22px; border: 0; transform: rotate(-6deg); }
+.jjk-sheetcard .jjk-sc-head span { flex: 1; }
+.jjk-sheetcard button { margin: 0; height: 24px; min-width: 24px; padding: 0 6px; line-height: 22px; font-size: 11px;
+  background: var(--sc-card); color: var(--sc-bone); border: 1px solid var(--sc-line); border-radius: 2px; box-shadow: none; }
+.jjk-sheetcard button:hover { border-color: var(--sc-seal); background: #241f2a; }
+.jjk-sheetcard button:focus-visible { outline: 2px solid var(--sc-gold); outline-offset: 1px; }
+.jjk-sheetcard .jjk-sc-open { flex: 0 0 auto; width: 26px; }
+.jjk-sheetcard .jjk-sc-ce { display: grid; grid-template-columns: auto 24px auto 1fr 24px; align-items: baseline; gap: 4px; }
+.jjk-sheetcard .jjk-sc-ce .jjk-sc-lbl { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; opacity: .7; }
+.jjk-sheetcard .jjk-sc-ce strong { font: 700 24px/1 "JJK Display", sans-serif; text-align: right; }
+.jjk-sheetcard .jjk-sc-ce em { font-style: normal; opacity: .6; }
+.jjk-sheetcard .jjk-sc-ce .jjk-bar { grid-column: 1 / -1; height: 6px; background: #0a090c; border: 1px solid var(--sc-line); }
+.jjk-sheetcard .jjk-sc-ce .jjk-bar .fill { height: 100%; background: linear-gradient(90deg, #4b2bd6, #b7a6ff); }
+.jjk-sheetcard .jjk-sc-ce.low .jjk-bar .fill { background: var(--sc-seal); }
+.jjk-sheetcard .jjk-sc-chips { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; font-size: 11px; }
+.jjk-sheetcard .jjk-sc-chips > span { padding: 1px 6px; border-left: 3px solid var(--sc-line); background: var(--sc-card); }
+.jjk-sheetcard .jjk-sc-chips > span.warn { border-left-color: #e08a2e; }
+.jjk-sheetcard .jjk-sc-chips > span.danger { border-left-color: var(--sc-seal); }
+.jjk-sheetcard .jjk-sc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+.jjk-sheetcard .jjk-sc-grid button { display: flex; align-items: center; gap: 5px; justify-content: flex-start; width: 100%;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.jjk-sheetcard .jjk-sc-grid button span { overflow: hidden; text-overflow: ellipsis; }
+.jjk-sheetcard button.jjk-primary { background: var(--sc-seal); border-color: var(--sc-seal); color: #fff; }
+/* creation sheet */
+.jjk-creator .jjk-steps { list-style: none; margin: 8px 0; padding: 0; display: grid; gap: 4px; }
+.jjk-creator .jjk-step { display: grid; grid-template-columns: 28px 1fr auto; gap: 8px; align-items: center; padding: 6px 8px;
+  background: var(--jjk-card, #1a171e); border-left: 3px solid var(--jjk-line, #3a3340); }
+.jjk-creator .jjk-step.done { border-left-color: var(--jjk-ok, #4caf7a); opacity: .85; }
+.jjk-creator .jjk-step.next { border-left-color: var(--jjk-seal, #c8102e); }
+.jjk-creator .jjk-step.skip { opacity: .5; }
+.jjk-creator .jjk-step small { display: block; opacity: .75; }
+.jjk-creator .jjk-step-n { font: 700 18px/1 var(--jjk-display, sans-serif); text-align: center; }
+.jjk-creator .jjk-step button { flex: 0 0 auto; white-space: nowrap; }
+.jjk-creator .jjk-bar { height: 6px; margin-top: 6px; }
+.jjk-creator .jjk-chips { display: flex; flex-wrap: wrap; gap: 4px; }
+.jjk5e-strip.jjk-sheetcard.in-sidebar { justify-content: flex-start; margin: 8px 4px 4px; padding: 8px; gap: 6px; border-radius: 3px; }
+.jjk5e-strip.jjk-sheetcard button { flex: 0 0 auto; width: auto; }
+.jjk5e-strip.jjk-sheetcard .jjk-sc-head span { white-space: nowrap; font-size: 12px; }
+.jjk5e-strip.jjk-sheetcard .jjk-sc-open { width: 26px; flex: 0 0 26px; }
+.jjk5e-strip.jjk-sheetcard .jjk-sc-ce { width: 100%; justify-content: stretch; margin: 0; }
+.jjk5e-strip.jjk-sheetcard .jjk-sc-grid button { width: 100%; }
+.jjk5e-strip.jjk-sheetcard .jjk-grade-badge { color: #fff; }
+.jjk5e-strip.jjk-sheetcard .jjk-sc-head, .jjk5e-strip.jjk-sheetcard .jjk-sc-chips { width: 100%; justify-content: flex-start; text-align: left; }

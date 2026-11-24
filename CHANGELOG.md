@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.71.0 — Pestañas, ficha de creación, compra de puntos y hoja de personaje
+- **Pestañas del panel JJK y de Carrera**: vuelven a funcionar. Foundry tiene su propia acción `tab`, que pisaba la del módulo.
+- **Ficha de creación de personaje** (botón *Crear personaje* en la hoja, menú JJK o **Alt+W**): una sola ventana con todos los pasos y su estado, en el orden que quieras: características (compra de puntos), clase, técnica innata, característica de EM, raza, trasfondo, dote adicional y barra JJK. Indica el progreso y el siguiente paso.
+- **Compra de puntos** (**Alt+P**): botones −/+, columna de modificador, contador grande de puntos libres y botón Reiniciar. Si te pasas del presupuesto, *Aplicar* se desactiva y se explica por qué.
+- **Elegir dotes**: en las reglas modernas de dnd5e ya no se oculta el selector propio del sistema (mejora de característica o dote). El selector de dotes JJK muestra solo las que cumples, agrupadas por categoría.
+- **Hoja de personaje**: nueva tarjeta JJK con estilo Sealed Ink: EM con barra y −/+, grado, votos, avances, Salida reducida y Burnout, y accesos a Crear personaje, Compra de puntos, Técnica, Subir nivel, Descanso de EM y Barra JJK.
+- **Atajos nuevos**: Alt+P (compra de puntos), Alt+W (ficha de creación), Alt+E (subir de nivel) y Alt+O (reglas opcionales, GM).
+
 ## 1.70.0 — Claves de efecto al día y más dotes automatizadas
 - Claves de efecto: en dnd5e 6.x, los efectos nuevos o editados se guardan con las claves actuales del sistema (velocidades, sentidos, bonos de tiradas, bonos de característica y habilidad). Para traducirlas se usa la propia tabla de compatibilidad de dnd5e. En dnd5e 5.3 no cambia nada, así que sigue siendo compatible.
 - 6 dotes manuales pasan a automatizadas o parciales:

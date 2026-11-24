@@ -468,12 +468,14 @@
       "Ability": "Característica",
       "Score": "Puntuación",
       "Cost": "Coste",
-      "Remaining": "Puntos",
+      "Remaining": "Puntos libres",
       "Apply": "Aplicar",
-      "Hint": "Cada puntuación empieza en {min}. Presupuesto: {budget}/{budget} puntos, máximo {max} antes de otros bonos. Coste de cada puntuación:",
+      "Hint": "Cada puntuación empieza en {min}. Puedes gastar hasta {budget} puntos; {max} es el máximo antes de los bonos de raza y otros.",
       "Order": "Úsalo antes de añadir raza, clase o trasfondo para que sus bonos se sumen encima.",
-      "Over": "Gastaste {spent} puntos; el límite es {budget}.",
-      "Done": "{name}: características asignadas (sobran {left} puntos)."
+      "Over": "Te pasaste: {spent} de {budget} puntos. Baja alguna puntuación para aplicar.",
+      "Done": "{name}: características asignadas (sobran {left} puntos).",
+      "Mod": "Mod.",
+      "Reset": "Reiniciar"
     },
     "ASI": {
       "Legend": "Dotes de JJK 5e",
@@ -693,7 +695,11 @@
       "limbRoll": "Tirar daño de extremidad",
       "builder": "Creador de técnicas",
       "update": "Actualizar automatización JJK",
-      "help": "Ayuda de atajos JJK"
+      "help": "Ayuda de atajos JJK",
+      "pointBuy": "Compra de puntos",
+      "create": "Ficha de creación de personaje",
+      "levelUp": "Subir de nivel",
+      "optRules": "Reglas opcionales (GM)"
     },
     "Breakthrough": {
       "Name": "Avances (Breakthroughs)",
@@ -724,7 +730,35 @@
       "Stopped": "Creación en pausa. Pulsa Crear personaje en la hoja para continuar.",
       "Done": "{name} está listo.",
       "OnlyTechnique": "Solo se muestran las {n} dotes de tu técnica innata.",
-      "NoTechniqueYet": "Elige primero tu técnica innata (nivel 1 de clase): las dotes de técnica quedan ocultas hasta entonces."
+      "NoTechniqueYet": "Elige primero tu técnica innata (nivel 1 de clase): las dotes de técnica quedan ocultas hasta entonces.",
+      "Steps": {
+        "abilities": "Características",
+        "class": "Clase",
+        "technique": "Técnica innata",
+        "ceAbility": "Característica de EM",
+        "race": "Raza",
+        "background": "Trasfondo",
+        "feat": "Dote adicional",
+        "hotbar": "Barra JJK"
+      },
+      "StepHint": {
+        "abilities": "Compra de puntos (hazla primero para que los bonos de raza y clase se sumen encima).",
+        "class": "Sus rasgos de nivel 1 incluyen tu técnica innata.",
+        "technique": "Confirma la técnica innata de tu personaje.",
+        "ceAbility": "Sabiduría o Carisma: fija tu reserva de Energía Maldita y tus CD.",
+        "race": "Elige una raza y reparte sus bonos.",
+        "background": "Habilidades, herramientas y la dote del trasfondo.",
+        "feat": "Para personajes variantes o Sin técnica, o si el GM la permite.",
+        "hotbar": "Pon tus técnicas y acciones JJK en la barra."
+      },
+      "Progress": "Pasos hechos: {done} / {total}",
+      "Optional": "opcional",
+      "Skip": "No hace falta (Restricción Celestial).",
+      "Do": "Hacer",
+      "Redo": "Cambiar",
+      "Next": "Siguiente",
+      "Feat": "Elige una dote",
+      "NoFeats": "No hay dotes JJK disponibles: revisa los requisitos (nivel, técnica, avances)."
     },
     "Shikigami": {
       "Title": "Personalizar shikigami",
@@ -1062,6 +1096,12 @@
       "partial": "automatizado en parte",
       "manual": "aplícalo a mano",
       "automated": "automatizado"
+    },
+    "Sheet": {
+      "Technique": "Técnica",
+      "LevelUp": "Subir nivel",
+      "ShortRest": "Descanso: EM",
+      "Hotbar": "Barra JJK"
     }
   }
 }
