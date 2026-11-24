@@ -1017,7 +1017,8 @@
       "objectSoul": {
         "Name": "Object Soul Awareness",
         "Hint": "Track the 3 levels of Object Soul Awareness (level 3: blindsight 30 ft)."
-      }
+      },
+      "MidiFlanking": "Midi-QOL already has Flanking on: its rule is used and the JJK one is skipped."
     },
     "RCT": {
       "Already": "{name} already has the Reverse Cursed Technique.",
@@ -1028,7 +1029,10 @@
       "OneHit": "reduced from maximum HP to 0 in one hit",
       "Roll": "Roll for RCT (d100)",
       "Unlocked": "{name} awakens the Reverse Cursed Technique!",
-      "UnlockedHint": "RCT features added and +1 Breakthrough (Awakened Understanding)."
+      "UnlockedHint": "RCT features added and +1 Breakthrough (Awakened Understanding).",
+      "Allow": "Allow the d100 roll",
+      "Allowed": "{name} may roll for the Reverse Cursed Technique (d100, 90+) from the JJK panel.",
+      "NoChance": "Only in a near-death moment the GM allows."
     }
   }
 }

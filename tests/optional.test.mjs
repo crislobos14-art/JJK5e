@@ -44,6 +44,14 @@ test("RCT awakening: d100 90+ grants RCT and 1 Breakthrough, once", async () => 
   assert.equal(actor.getFlag("jjk5e", "rctUnlocked"), true);
   assert.equal(actor.getFlag("jjk5e", "breakthroughs"), 1);
   assert.equal(await J.rollRCTAwakening(actor), null, "already awakened");
+  const other = env.addActor({ name: "Nobara", type: "character", system: { abilities: {}, attributes: { hp: { value: 5, max: 5 } } } });
+  env.game.user.isGM = false;
+  assert.equal(await J.rollRCTAwakening(other), null, "players need the GM's permission");
+  await other.setFlag("jjk5e", "rctChance", true);
+  env.dice.push(10);
+  assert.equal(await J.rollRCTAwakening(other), false);
+  assert.equal(other.getFlag("jjk5e", "rctChance"), undefined, "the chance is used up");
+  env.game.user.isGM = true;
   assert.equal(actor.getFlag("jjk5e", "breakthroughs"), 1);
 });
 
@@ -87,9 +95,13 @@ test("Take the Hit doubles the next damage; Clash reduces it (not psychic)", asy
   await J.takeTheHit(actor);
   const a = [{ value: 7, type: "slashing" }];
   J.optionalDamage(actor, a, {});
+  const preview = [{ value: 7, type: "slashing" }];
+  J.optionalDamage(actor, preview, {});
   assert.equal(a[0].value, 14);
+  assert.equal(preview[0].value, 14, "a damage preview does not use it up");
+  await actor.update({ "system.attributes.hp.value": 16 });
   await env.settle();
-  assert.equal(J.kindEffect(actor, "takeHit"), undefined, "used up");
+  assert.equal(J.kindEffect(actor, "takeHit"), undefined, "used up when the damage is applied");
   await J.setKindEffect(actor, "weaponClash", { name: "Clash", flags: { jjk5e: { clashTotal: 9 } } });
   const b = [{ value: 6, type: "slashing" }, { value: 4, type: "psychic" }, { value: 5, type: "fire" }];
   J.optionalDamage(actor, b, {});

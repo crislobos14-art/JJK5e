@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.68.1 — Revisión de las reglas opcionales
+- Previsualizar el daño (bandeja de daño del chat o tarjeta de Midi) ya no gasta Recibir el golpe, Choque ni Salvación crítica. Ahora se gastan solo cuando el daño se aplica de verdad, y el aviso sale una vez.
+- Salvaciones críticas: las salvaciones de concentración ya no cuentan. El 1 o el 20 natural también funciona cuando el GM aplica el daño desde otro cliente.
+- Ventaja acumulada: ahora suma también las fuentes de JJK cuando hay Midi-QOL, y no da bonificador si el ataque además tiene desventaja.
+- Flanquear: si Midi-QOL ya tiene su propio Flanquear activo, el de JJK no se aplica (para que no cuente dos veces), y se avisa al guardar.
+- Despertar de la TMI: el jugador solo tira cuando el GM lo permite (tarjeta de casi muerte → *Permitir la tirada d100*). El GM puede tirar u otorgarla siempre. Los botones no aparecen para Restricción Celestial.
+- Sin técnica / Mejora con dote: elegir una dote ya no reabre la pregunta de subida de nivel.
+- Maldito al morir: solo las dotes cuentan para los Puntos Profanos (no los rasgos de clase) y se quitan los rasgos que daba la raza anterior.
+- Menos sangre: funciona aunque la actividad no tenga actor directo.
+
 ## 1.68.0 — Reglas opcionales del manual, despertar de la TMI y comprensiones de clase
 - **Reglas opcionales**: nueva ventana *Reglas opcionales* (Ajustes del módulo, menú JJK o pestaña GM). Las 30 reglas del manual están desactivadas por defecto y se activan una a una. Las activas se automatizan: Alternativa a la Totalidad, Menos sangre, Conversión de sangre, Precisión de la Bestia Mítica, Ventaja acumulada, Críticos contundentes, Salvaciones críticas, Disparo dirigido, Luchar por tu vida, Recibir el golpe, Choque, Flanquear, Sin técnica, Habilidades repetidas, Mejora con dote, Barrera pura, Evasión de la ejecución, Pruebas de alma, Agotamiento de salida, Afinidad aumentada, Dependencia de los Seis Ojos, PG aumentados, Pruebas duras, Acciones adicionales (Distraer, Romper objeto, Golpe de gracia, Carga), Formas de ganar dinero, Progresión anual, Encontrar un espíritu maldito, Maldito al morir y Percepción del alma de objetos.
 - **Despertar de la TMI**: si la tirada d100 saca 90 o más, se añaden los rasgos de Técnica Maldita Inversa y +1 avance. Cuando un personaje pasa de PG máximos a 0 de un golpe, o saca un 20 natural tras dos salvaciones de muerte falladas, el GM recibe una tarjeta para otorgarla o pedir la tirada. Nuevos botones *Tirar por la TMI* y *Otorgar TMI*.

@@ -1017,7 +1017,8 @@
       "objectSoul": {
         "Name": "Percepción del alma de objetos",
         "Hint": "Registra los 3 niveles de Percepción del alma de objetos (nivel 3: vista ciega 9 m)."
-      }
+      },
+      "MidiFlanking": "Midi-QOL ya tiene Flanquear activo: se usa su regla y la de JJK se omite."
     },
     "RCT": {
       "Already": "{name} ya tiene la Técnica Maldita Inversa.",
@@ -1028,7 +1029,10 @@
       "OneHit": "de PG máximos a 0 de un solo golpe",
       "Roll": "Tirar por la TMI (d100)",
       "Unlocked": "¡{name} despierta la Técnica Maldita Inversa!",
-      "UnlockedHint": "Se añaden los rasgos de TMI y +1 avance (Comprensión despertada)."
+      "UnlockedHint": "Se añaden los rasgos de TMI y +1 avance (Comprensión despertada).",
+      "Allow": "Permitir la tirada d100",
+      "Allowed": "{name} puede tirar por la Técnica Maldita Inversa (d100, 90+) desde el panel JJK.",
+      "NoChance": "Solo en un momento de casi muerte que el GM permita."
     }
   }
 }

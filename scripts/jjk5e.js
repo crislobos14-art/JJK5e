@@ -4988,6 +4988,12 @@ async function rollRCTAwakening(actor) {
     ui.notifications.info(t("RCT.Already", { name: actor.name }));
     return null;
   }
+  // Players roll only in a near-death moment the GM allowed (GM card); the GM can always roll.
+  if (!game.user.isGM && !actor.getFlag(MODULE_ID, "rctChance")) {
+    ui.notifications.warn(t("RCT.NoChance"));
+    return null;
+  }
+  if (actor.getFlag(MODULE_ID, "rctChance")) await actor.unsetFlag(MODULE_ID, "rctChance");
   // Blood Conversion (optional rule): Blood Production gives advantage on the roll.
   const adv = rctAdvantage(actor);
   const roll = await new Roll(adv ? "2d100kh" : "1d100").evaluate();
@@ -5586,6 +5592,7 @@ async function saveOptionalRules(root) {
   }
   await game.settings.set(MODULE_ID, "optionalRules", out);
   ui.notifications.info(t("Opt.Saved"));
+  if (out.flanking && out.flanking !== "off" && midiFlanking()) ui.notifications.warn(t("Opt.MidiFlanking"));
   for (const a of game.actors ?? []) refreshPanels(a);
 }
 
@@ -5663,6 +5670,7 @@ async function rctMoment(actor, why) {
   await docClass("ChatMessage").create({ whisper: gms, speaker: { alias: "JJK 5e" },
     content: `<p><i class="fas fa-heart-pulse"></i> ${t("RCT.Moment", { name: esc(actor.name), why: esc(why) })}</p>
       <div class="jjk-card-btns"><button type="button" data-jjk5e-rct="${esc(actor.uuid)}" data-mode="grant">${t("RCT.Grant")}</button>
+      <button type="button" data-jjk5e-rct="${esc(actor.uuid)}" data-mode="allow">${t("RCT.Allow")}</button>
       <button type="button" data-jjk5e-rct="${esc(actor.uuid)}" data-mode="roll">${t("RCT.Roll")}</button></div>` });
 }
 
@@ -5697,8 +5705,22 @@ function naturalD20(roll) {
 function recordSaveNatural(actor, roll) {
   if (!optOn("criticalSaves") || !actor?.uuid) return;
   const nat = naturalD20(roll);
-  if (nat === 1 || nat === 20) SAVE_NATURALS.set(actor.uuid, { nat, at: Date.now() });
-  else SAVE_NATURALS.delete(actor.uuid);
+  const hit = nat === 1 || nat === 20 ? { nat, at: Date.now() } : null;
+  if (hit) SAVE_NATURALS.set(actor.uuid, hit); else SAVE_NATURALS.delete(actor.uuid);
+  // The damage is often applied on another client (the GM's): keep it on the actor too.
+  if (actor.isOwner && (hit || actor.getFlag?.(MODULE_ID, "critSave"))) {
+    (hit ? actor.setFlag(MODULE_ID, "critSave", hit) : actor.unsetFlag(MODULE_ID, "critSave"))?.catch?.(() => {});
+  }
+}
+const saveNatural = (actor) => SAVE_NATURALS.get(actor.uuid) ?? actor.getFlag?.(MODULE_ID, "critSave") ?? null;
+
+/** Midi-QOL's own Flanking rule: when it is on, the JJK one stays out of the way (no double bonus). */
+function midiFlanking() {
+  try {
+    const cs = globalThis.MidiQOL?.configSettings?.() ?? game.settings.get("midi-qol", "ConfigSettings");
+    const v = cs?.optionalRules?.checkFlanking ?? cs?.checkFlanking;
+    return !!v && v !== "off";
+  } catch (err) { return false; }
 }
 
 /** dnd5e.preCalculateDamage: every damage application (Midi or the chat card) passes here. */
@@ -5707,9 +5729,8 @@ function optionalDamage(actor, damages, options) {
   const harmful = damages.filter((d) => !["healing", "temphp"].includes(d.type) && Number(d.value) > 0);
   if (!harmful.length) return;
   const notes = [];
-  const sv = SAVE_NATURALS.get(actor.uuid);
-  if (sv && optOn("criticalSaves") && Date.now() - sv.at < 30000) {
-    SAVE_NATURALS.delete(actor.uuid);
+  const sv = saveNatural(actor);
+  if (sv && optOn("criticalSaves") && Date.now() - sv.at < 60000) {
     for (const d of harmful) d.value = sv.nat === 20 ? 0 : Number(d.value) * 2;
     notes.push(t(sv.nat === 20 ? "Opt.CritSave.Twenty" : "Opt.CritSave.One"));
   }
@@ -5717,7 +5738,6 @@ function optionalDamage(actor, damages, options) {
   if (take) {
     for (const d of harmful) d.value = Number(d.value) * 2;
     notes.push(t("Opt.TakeHit.Doubled"));
-    if (actor.isOwner) setTimeout(() => safeDelete(take), 0);
   }
   const clash = kindEffect(actor, "weaponClash");
   if (clash) {
@@ -5730,9 +5750,22 @@ function optionalDamage(actor, damages, options) {
     }
     notes.push(t("Opt.Clash.Reduced", { n: (Number(clash.flags?.jjk5e?.clashTotal) || 0) - pool }));
     if (pool > 0) notes.push(t("Opt.Clash.Overflow", { n: pool }));
-    if (actor.isOwner) setTimeout(() => safeDelete(clash), 0);
   }
-  if (notes.length && actor.isOwner) setTimeout(() => chat(actor, `<p><strong>${esc(actor.name)}</strong>: ${notes.map(esc).join(" · ")}</p>`), 0);
+  // Damage previews (chat damage tray, Midi cards) also pass here: nothing is used up until the damage is applied.
+  if (notes.length) DAMAGE_PENDING.set(actor.uuid, notes);
+}
+
+const DAMAGE_PENDING = new Map();
+/** The damage was really applied: use up Critical Saves / Take the Hit / Clash and report them once. */
+async function consumeOptionalDamage(actor) {
+  const notes = DAMAGE_PENDING.get(actor?.uuid);
+  if (!notes) return;
+  DAMAGE_PENDING.delete(actor.uuid);
+  SAVE_NATURALS.delete(actor.uuid);
+  if (!actor.isOwner) return;
+  if (actor.getFlag(MODULE_ID, "critSave")) await actor.unsetFlag(MODULE_ID, "critSave");
+  for (const kind of ["takeHit", "weaponClash"]) { const e = kindEffect(actor, kind); if (e) await safeDelete(e); }
+  await chat(actor, `<p><strong>${esc(actor.name)}</strong>: ${notes.map(esc).join(" · ")}</p>`);
 }
 
 async function takeTheHit(actor) {
@@ -5820,7 +5853,7 @@ function midiAdvantageSources(config) {
 function optionalAttack(config, actor, jjkSources) {
   let sources = jjkSources;
   const mode = opt("flanking");
-  if (mode !== "off" && isFlanking(actor)) {
+  if (mode !== "off" && !midiFlanking() && isFlanking(actor)) {
     if (mode === "plus2") addPart(config, "2");
     else { config.advantage = true; sources += 1; }
   }
@@ -5830,9 +5863,9 @@ function optionalAttack(config, actor, jjkSources) {
     actor.setFlag(MODULE_ID, "calledShotPending", targets);
     actor.unsetFlag(MODULE_ID, "callingShot");
   }
-  if (optOn("advantageStacking")) {
+  if (optOn("advantageStacking") && config.advantage && !config.disadvantage) {
     const midi = midiAdvantageSources(config);
-    const total = midi ?? (sources + (config.jjkOuterAdvantage ? 1 : 0));
+    const total = (midi ?? (config.jjkOuterAdvantage ? 1 : 0)) + sources;
     if (total > 1) addPart(config, String(total - 1));
   }
 }
@@ -5981,9 +6014,16 @@ async function yearlyProgression(actor) {
 
 /* ---- After the advancement manager: Feat Improvement, Increased HP, Increased Affinity, Techniqueless ---- */
 
+const ADVANCING = new Set();
 async function afterAdvancement(manager) {
   const actor = manager?.actor;
   if (!actor?.isOwner || actor.documentName !== "Actor") return;
+  // Feats picked from here open their own advancement manager: do not run this again for them.
+  if (ADVANCING.has(actor.uuid)) return;
+  ADVANCING.add(actor.uuid);
+  try { await afterAdvancementSteps(manager, actor); } finally { ADVANCING.delete(actor.uuid); }
+}
+async function afterAdvancementSteps(manager, actor) {
   if (optOn("increasedHP")) {
     for (const cls of actor.items.filter((i) => i.type === "class")) {
       const adv = cls.advancement?.byType?.HitPoints?.[0];
@@ -6101,9 +6141,11 @@ async function cursedUponDeath(actor) {
   if (!actor || !game.user.isGM) return;
   if (!(await confirmDialog(t("Opt.cursedUponDeath.Name"), `<p>${t("Opt.Death.Confirm", { name: esc(actor.name) })}</p>`))) return;
   const lost = actor.items.filter((i) => RCT_LOSS.test(baseName(i)));
-  const feats = lost.filter((i) => i.type === "feat").length;
+  const feats = lost.filter((i) => i.type === "feat" && i.system?.type?.value === "feat").length;
   const races = actor.items.filter((i) => i.type === "race");
-  const del = [...lost, ...races].map((i) => i.id);
+  const raceIds = new Set(races.map((i) => i.id));
+  const granted = actor.items.filter((i) => raceIds.has(String(i.flags?.dnd5e?.advancementOrigin ?? "").split(".")[0]));
+  const del = [...new Set([...lost, ...races, ...granted].map((i) => i.id))];
   if (del.length) await actor.deleteEmbeddedDocuments("Item", del);
   const race = await packDocByName("jjk5e-races", "Cursed Spirit (Vengeful)");
   if (race) await addWithAdvancement(actor, race);
@@ -6320,12 +6362,15 @@ function optionalPanel(actor, tab) {
     if (optOn("findCurse")) b.push(pbtn("findCurse", "fas fa-magnifying-glass", t("Opt.findCurse.Name")));
     if (optOn("classUnderstanding") && !actor.items.some((i) => i.flags?.jjk5e?.classUnderstanding)
       && (Number(actor.getFlag(MODULE_ID, "breakthroughs")) || 0) >= 2) b.push(pbtn("classUnderstanding", "fas fa-lightbulb", t("Opt.classUnderstanding.Name")));
-    if (!hasRCT(actor)) b.push(pbtn("rctRoll", "fas fa-heart-pulse", t("RCT.Roll")));
+    if (!hasRCT(actor) && !isHeavenlyOnly(actor) && actor.getFlag(MODULE_ID, "rctChance")) b.push(pbtn("rctRoll", "fas fa-heart-pulse", t("RCT.Roll")));
     return b.length ? `<fieldset><legend>${t("Opt.Panel")}</legend><div class="jjk-grid">${b.join("")}</div></fieldset>` : "";
   }
   if (tab === "gm" && gm) {
     b.push(pbtn("optRules", "fas fa-scroll", t("Opt.Title")));
-    if (!hasRCT(actor)) b.push(pbtn("rctGrant", "fas fa-heart-pulse", t("RCT.Grant")));
+    if (!hasRCT(actor) && !isHeavenlyOnly(actor)) {
+      b.push(pbtn("rctGrant", "fas fa-heart-pulse", t("RCT.Grant")));
+      b.push(pbtn("rctRoll", "fas fa-dice-d20", t("RCT.Roll")));
+    }
     if (optOn("pureBarrier")) {
       b.push(pbtn("pureScene", "fas fa-torii-gate", `${t("Opt.Pure.Scene")}: ${sceneOf(actor)?.getFlag?.(MODULE_ID, "pureBarrier") ? "✓" : "✗"}`));
       b.push(pbtn("purePermit", "fas fa-key", `${t("Opt.Pure.Permit")}: ${actor.getFlag(MODULE_ID, "pureBarrierPermit") ? "✓" : "✗"}`));
@@ -6398,6 +6443,10 @@ Hooks.once("ready", () => {
   });
   Hooks.on("dnd5e.rollSavingThrow", (rolls, data) => recordSaveNatural(data?.subject, rolls));
   Hooks.on("dnd5e.rollAbilitySave", (actor, roll) => recordSaveNatural(actor, roll));
+  // Concentration saves come after the damage: they never count for Critical Saves.
+  for (const h of ["dnd5e.rollConcentrationV2", "dnd5e.rollConcentration"]) {
+    Hooks.on(h, (a, b) => { const actor = a?.documentName === "Actor" ? a : b?.subject; if (actor?.uuid) SAVE_NATURALS.delete(actor.uuid); });
+  }
   Hooks.on("dnd5e.preRollSkillV2", (config) => reliableSkill(config));
   Hooks.on("dnd5e.advancementManagerComplete", (manager) => { afterAdvancement(manager).catch((err) => reportError("advancement", err)); });
   Hooks.on("dnd5e.postUseActivity", (activity) => {
@@ -6417,7 +6466,7 @@ Hooks.once("ready", () => {
     const flat = key in u;
     const next = flat ? u[key] : foundry.utils.getProperty(u, key);
     if (next === undefined) return;
-    const cur = Number(activity.actor?.system?.attributes?.hp?.value) || 0;
+    const cur = Number((activity.actor ?? activity.item?.actor)?.system?.attributes?.hp?.value) || 0;
     const costHP = cur - Number(next);
     if (costHP <= 0) return;
     const value = cur - Math.max(1, Math.ceil(costHP * f));
@@ -6441,11 +6490,20 @@ Hooks.once("ready", () => {
   });
   // RCT moments: reduced from max HP to 0 in one hit; nat 20 after two failed death saves.
   Hooks.on("preUpdateActor", (actor, changes, options) => {
-    if (foundry.utils.getProperty(changes, "system.attributes.hp.value") === undefined) return;
-    options.jjk5eHpBefore = { value: Number(actor.system?.attributes?.hp?.value) || 0, max: Number(actor.system?.attributes?.hp?.max) || 0 };
+    const hp = foundry.utils.getProperty(changes, "system.attributes.hp.value");
+    const temp = foundry.utils.getProperty(changes, "system.attributes.hp.temp");
+    if (hp === undefined && temp === undefined) return;
+    const cur = actor.system?.attributes?.hp ?? {};
+    options.jjk5eHpBefore = { value: Number(cur.value) || 0, max: Number(cur.max) || 0, temp: Number(cur.temp) || 0 };
+    // Damage taken (HP or temporary HP went down): pending optional-rule damage changes are used up.
+    if ((hp !== undefined && Number(hp) < (Number(cur.value) || 0)) || (temp !== undefined && Number(temp) < (Number(cur.temp) || 0))) {
+      options.jjk5eDamaged = true;
+    }
   });
+  Hooks.on("dnd5e.applyDamage", (actor) => { consumeOptionalDamage(actor).catch((err) => reportError("optional damage", err)); });
   Hooks.on("updateActor", (actor, changes, options) => {
     const b = options?.jjk5eHpBefore;
+    if (options?.jjk5eDamaged) consumeOptionalDamage(actor).catch((err) => reportError("optional damage", err));
     if (b && actor.type === "character" && b.max > 0 && b.value >= b.max && (Number(actor.system.attributes?.hp?.value) || 0) <= 0) {
       rctMoment(actor, t("RCT.OneHit")).catch((err) => reportError("rct moment", err));
     }
@@ -6490,7 +6548,11 @@ Hooks.once("ready", () => {
       const actor = doc?.actor ?? doc;
       if (!actor?.isOwner) return;
       b.disabled = true;
-      if (b.dataset.mode === "grant") await unlockRCT(actor, t("RCT.ByGM")); else await rollRCTAwakening(actor);
+      if (b.dataset.mode === "grant") await unlockRCT(actor, t("RCT.ByGM"));
+      else if (b.dataset.mode === "allow") {
+        await actor.setFlag(MODULE_ID, "rctChance", true);
+        await chat(actor, `<p><i class="fas fa-heart-pulse"></i> ${t("RCT.Allowed", { name: esc(actor.name) })}</p>`);
+      } else await rollRCTAwakening(actor);
     });
     for (const b of html?.querySelectorAll?.("[data-jjk5e-swap]") ?? []) b.addEventListener("click", async (ev) => {
       ev.preventDefault();
