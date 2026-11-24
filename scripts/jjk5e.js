@@ -2352,7 +2352,7 @@ async function summon(actor, name, count = 1) {
   if (!actor) return;
   if (!name) return ui.notifications.warn(t("Summon.NeedName"));
   if (!canvas?.scene) return ui.notifications.warn(t("Notify.NoScene"));
-  if (fallen(actor).includes(String(name).trim().toLowerCase()) && !game.user.isGM) {
+  if (recallBlocked(actor,name) && !game.user.isGM) {
     return ui.notifications.warn(t(optOn("totalityAlt") ? "Opt.Totality.UntilRest" : "Opt.Totality.Dead"));
   }
   return viaGM("summon", { actorUuid: actor.uuid, name, count: clamp(Number(count) || 1, 1, 20), userId: game.user.id, sceneId: canvas.scene.id });
@@ -7901,16 +7901,52 @@ async function summonerOf(actor) {
   return item?.actor ?? null;
 }
 
+const SHIKIGAMI_DECISIONS=new Set();
+function recallBlocked(actor,name){
+  const key=String(name??"").trim().toLowerCase();
+  return fallen(actor).includes(key)||(actor?.getFlag(MODULE_ID,"recalledShikigami")??[]).includes(key);
+}
 async function recordFallenShikigami(actor) {
-  if (!isActiveGM()) return;
-  const summoner = await summonerOf(actor);
-  if (!summoner || !actorTechniques(summoner).has(normName("Ten Shadows"))) return;
-  const name = actor?.token?.name ?? actor?.name;
-  const list = new Set(summoner.getFlag(MODULE_ID, "fallenShikigami") ?? []);
-  if (!name || list.has(name)) return;
-  list.add(name);
-  await summoner.setFlag(MODULE_ID, "fallenShikigami", [...list]);
-  await chat(summoner, `<p><strong>${esc(name)}</strong> — ${t(optOn("totalityAlt") ? "Opt.Totality.Returns" : "Opt.Totality.Dead")}</p>`);
+  if(!isActiveGM()||!actor?.flags?.jjk5e?.shikigami)return;
+  const tokens=actor.token?[actor.token]:(actor.getActiveTokens?.()??[]).map(t=>t.document).filter(Boolean);
+  // Do not guess which linked token fell, or treat unrelated summons as Ten Shadows.
+  if(tokens.length!==1)return;
+  const token=tokens[0], key=token.uuid;
+  if(SHIKIGAMI_DECISIONS.has(key))return;
+  SHIKIGAMI_DECISIONS.add(key);
+  try{
+    const summoner=await summonerOf(actor);
+    if(!summoner||!actorTechniques(summoner).has(normName("Ten Shadows")))return;
+    const name=baseName(actor), normalized=name.trim().toLowerCase();
+    if(!name||recallBlocked(summoner,name)||Number(actor.system.attributes?.hp?.value)>0)return;
+    const spanish=game.i18n.lang.startsWith("es");
+    const midi=globalThis.MidiQOL;
+    const canRecall=!midi?.hasUsedReaction?.(summoner);
+    // Seeing the creature, ritual vs domesticated status and reaction eligibility are GM decisions.
+    const buttons=[];
+    if(canRecall)buttons.push({action:"recall",label:spanish?"Retirar con reacción":"Recall with reaction"});
+    buttons.push({action:"lost",label:spanish?"Confirmar pérdida":"Confirm loss"},{action:"cancel",label:spanish?"No resolver / ritual":"Do not resolve / trial"});
+    const choice=await foundry.applications.api.DialogV2.wait({
+      classes:["jjk5e-ui","jjk5e-dialog"],window:{title:"Ten Shadows — "+name},rejectClose:false,
+      content:`<p>${esc(summoner.name)} — ${esc(name)}</p><p>${spanish?"Confirma que es un shikigami domesticado. Si el invocador lo ve caer y dispone de su reacción, puede retirarlo hasta el descanso largo. En un ritual o caso incierto, no confirmes la pérdida.":"Confirm this is a tamed shikigami. If the summoner sees it fall and has a reaction, recall it until a long rest. For trials or uncertain cases, do not confirm loss."}</p>`,
+      buttons
+    });
+    if(!isActiveGM()||Number(actor.system.attributes?.hp?.value)>0||!token.parent?.tokens?.get(token.id)||recallBlocked(summoner,name))return;
+    if(choice==="recall"){
+      if(midi?.hasUsedReaction?.(summoner))return;
+      if(midi?.setReactionUsed)await midi.setReactionUsed(summoner);
+      const list=new Set(summoner.getFlag(MODULE_ID,"recalledShikigami")??[]);
+      list.add(normalized);
+      await summoner.setFlag(MODULE_ID,"recalledShikigami",[...list]);
+      await token.delete();
+      await chat(summoner,`<p><strong>${esc(name)}</strong> — ${spanish?"Retirado hasta descanso largo.":"Recalled until long rest."}</p>`);
+    }else if(choice==="lost"){
+      const list=new Set(summoner.getFlag(MODULE_ID,"fallenShikigami")??[]);
+      list.add(name);
+      await summoner.setFlag(MODULE_ID,"fallenShikigami",[...list]);
+      await chat(summoner,`<p><strong>${esc(name)}</strong> — ${t(optOn("totalityAlt")?"Opt.Totality.Returns":"Opt.Totality.Dead")}</p>`);
+    }
+  }finally{SHIKIGAMI_DECISIONS.delete(key);}
 }
 
 async function advanceAmber(combat) {
@@ -8229,7 +8265,7 @@ Hooks.once("ready", () => {
     if (b && actor.type === "character" && b.max > 0 && b.value >= b.max && (Number(actor.system.attributes?.hp?.value) || 0) <= 0) {
       rctMoment(actor, t("RCT.OneHit")).catch((err) => reportError("rct moment", err));
     }
-    if (b && (Number(actor.system.attributes?.hp?.value) || 0) <= 0) recordFallenShikigami(actor).catch((err) => reportError("totality", err));
+    if (b && b.value>0 && (Number(actor.system.attributes?.hp?.value) || 0) <= 0) recordFallenShikigami(actor).catch((err) => reportError("totality", err));
     if (userId === game.user.id && foundry.utils.getProperty(changes, "system.attributes.exhaustion") === 0 && actor.getFlag(MODULE_ID, "fightExhaustion")) {
       actor.unsetFlag(MODULE_ID, "fightExhaustion").catch(() => {});
     }
@@ -8246,6 +8282,7 @@ Hooks.once("ready", () => {
   Hooks.on("dnd5e.restCompleted", async (actor, result) => {
     if (!actor?.isOwner || !result?.longRest) return;
     if (actor.getFlag(MODULE_ID, "clashUsed")) await actor.unsetFlag(MODULE_ID, "clashUsed");
+    if (actor.getFlag(MODULE_ID,"recalledShikigami")?.length) await actor.unsetFlag(MODULE_ID,"recalledShikigami");
     if (optOn("totalityAlt") && actor.getFlag(MODULE_ID, "fallenShikigami")?.length) {
       await actor.unsetFlag(MODULE_ID, "fallenShikigami");
       await chat(actor, `<p>${t("Opt.Totality.Back", { name: esc(actor.name) })}</p>`);
@@ -8257,7 +8294,7 @@ Hooks.once("ready", () => {
     const actor = activity?.actor ?? activity?.item?.actor;
     let name = profile?.name;
     try { name ||= globalThis.fromUuidSync?.(profile?.uuid)?.name; } catch { /* compendium not indexed */ }
-    if (!actor || !name || !fallen(actor).includes(String(name).trim().toLowerCase())) return;
+    if (!actor || !name || !recallBlocked(actor,name)) return;
     ui.notifications.warn(t(optOn("totalityAlt") ? "Opt.Totality.UntilRest" : "Opt.Totality.Dead"));
     return false;
   });
