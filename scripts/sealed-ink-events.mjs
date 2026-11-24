@@ -102,7 +102,7 @@ function loadHistory() {
       if (!Number.isSafeInteger(n?.id) || n.id < 1 || !Number.isFinite(n.time) || typeof n.key !== "string") continue;
       let actor;
       if (n.actorUuid) {
-        const doc = fromUuidSync(n.actorUuid);
+        const doc = globalThis.fromUuidSync(n.actorUuid);
         actor = doc?.documentName === "Token" ? doc.actor : doc;
         if (!visible(actor)) continue;
       }
@@ -272,7 +272,7 @@ function drawPanel(automatic = false) {
     return;
   }
   const mark = button(L("Mark all read","Marcar todo leído"),() => {unread.clear();saveHistory();updateDock();drawPanel();});
-  const clear = button(L("Clear local history","Limpiar historial local"),() => {history.length=0;unread.clear();updateDock();drawPanel();});
+  const clear = button(L("Clear local history","Limpiar historial local"),() => {history.length=0;unread.clear();saveHistory();updateDock();drawPanel();});
   body.append(mark,clear);
   for (const n of history.filter(n => !n.actor || visible(n.actor))) {
     const row = el("article","jjk-sealed-hud-card");
