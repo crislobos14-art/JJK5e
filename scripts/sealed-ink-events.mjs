@@ -106,7 +106,7 @@ function queue(actor) {
     timer = null;
     for (const a of pending.values()) observe(a);
     pending.clear(); updateDock();
-    if (panel && activeTab !== "events") drawPanel();
+    if (panel && activeTab !== "events") drawPanel(true);
   },80);
 }
 function combatants() {
@@ -170,19 +170,21 @@ function drawHUD(body) {
     rows.replaceChildren();
     for (const {item,a} of activities.filter(x => (x.item.name+" "+x.a.name).toLowerCase().includes(search.value.toLowerCase())).slice(0,40)) {
       const b = button(item.name + " · " + a.name, async () => {
-        if (busy || !visible(actor) || actor.items.get(item.id) !== item) return;
+        if (busy || !visible(actor)) return;
+        const current = actor.items.get(item.id)?.system?.activities?.get(a.id);
+        if (typeof current?.use !== "function") return;
         busy = true; b.disabled = true;
-        try { await a.use({event:null},{configure:true},{}); } finally { busy = false; b.disabled = false; }
+        try { await current.use({event:null},{configure:true},{}); } finally { busy = false; b.disabled = false; }
       });
       rows.append(b);
     }
   }
   search.addEventListener("input",draw); body.append(search,rows); draw();
 }
-function drawPanel() {
+function drawPanel(automatic = false) {
   if (!panel) return;
   const focus = panel.contains(document.activeElement) ? document.activeElement : null;
-  if (focus?.matches("input[type=search],select") && activeTab === "hud") return;
+  if (automatic && focus?.matches("input[type=search],select") && activeTab === "hud") return;
   panel.replaceChildren();
   const top = el("header","jjk-sealed-hud-buttons");
   top.append(el("strong","","SEALED INK"),button("×",closePanel)); panel.append(top);
@@ -220,7 +222,8 @@ function open(tab = "events") {
   panel.dataset.motion=settings("sheetMotion"); drawPanel();
 }
 function refresh() {
-  if (!settings("sealedEventCenter")) { history.length=0; unread.clear(); document.querySelector("#jjk-sealed-event-toasts")?.remove(); }
+  if (!settings("sealedEventCenter")) { history.length=0; unread.clear(); }
+  if (!settings("sealedEventCenter") || !settings("sealedEventToasts")) document.querySelector("#jjk-sealed-event-toasts")?.remove();
   updateDock();
   if (!settings("sealedEventCenter") && !settings("sealedCombatHUD")) closePanel();
   else if (panel) drawPanel();
@@ -243,7 +246,7 @@ Hooks.once("ready",() => {
   for(const h of ["createItem","updateItem","deleteItem","createActiveEffect","updateActiveEffect","deleteActiveEffect"])
     Hooks.on(h,d=>queue(d.actor ?? (d.parent?.documentName==="Actor"?d.parent:d.parent?.actor)));
   for(const h of ["updateCombat","combatStart","combatTurn","deleteCombat","controlToken","canvasReady","createCombatant","updateCombatant","deleteCombatant"]) Hooks.on(h,()=>{
-    updateTurn();updateDock();if(panel&&activeTab!=="events")drawPanel();
+    updateTurn();updateDock();if(panel&&activeTab!=="events")drawPanel(true);
   });
   if (game.user.isGM) {
     const missing=["midi-qol","dae"].filter(id=>!game.modules.get(id)?.active);
