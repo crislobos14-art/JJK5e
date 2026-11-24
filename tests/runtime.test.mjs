@@ -998,10 +998,29 @@ test("DAE suppressed protection does not count as an active ward",async()=>{
   assert.equal(J.hasKind(actor,"domainAmplification"),false);
   assert.equal(J.domainWard({actor}),null);
 });
-test("Midi healing does not remove protected allied targets",async()=>{
-  const {actor,J}=await setup();
-  const target={actor:{flags:{jjk5e:{sureHitImmune:true}}}};
-  const workflow={activity:{type:"heal"},actor,targets:new Set([target])};
+test("Midi healing preserves protected allies; offensive effects exclude them from all target sets",async()=>{
+  const {env,actor,J}=await setup();
+  const scene={id:"S",grid:{size:100,distance:5},tokens:[]};
+  env.game.scenes.set(scene.id,scene);
+  const target={actor:{flags:{jjk5e:{sureHitImmune:true}}},document:{uuid:"Scene.S.Token.A",x:0,y:0,width:1,height:1,parent:scene}};
+  await J.setKindEffect(actor,"domain",{name:"Domain",flags:{jjk5e:{domainOpen:true}}});
+  await J.setDomain(actor,{open:true,openingId:"test",sceneId:"S",x:0,y:0,radius:10,lethal:true});
+  const workflow={activity:{type:"heal"},actor,item:{flags:{jjk5e:{technique:"Test"}}},targets:new Set([target]),effectTargets:new Set([target])};
   assert.equal(J.excludeDomainWardedTargets(workflow).length,0);
   assert.equal(workflow.targets.size,1);
+  workflow.activity.type="attack";
+  const savedSet=workflow.effectTargets;
+  assert.equal(J.excludeDomainWardedTargets(workflow).length,1);
+  assert.equal(workflow.targets.size,0);
+  assert.equal(workflow.effectTargets.size,0);
+  assert.equal(workflow.effectTargets,savedSet,"preserve Midi target set identity");
+});
+test("Midi consume bridge binds native configuration through workflowFor",async()=>{
+  const {env,actor,J}=await setup({settings:{transactionalCE:true}});
+  const [item]=await actor.createEmbeddedDocuments("Item",[{name:"Technique",type:"feat",flags:{jjk5e:{ceCosts:{a:4}}},system:{activities:{a:{id:"a"}}}}]);
+  const activity={id:"a",actor,item},workflow={activity,actor,item,targets:new Set()};
+  env.context.MidiQOL={Workflow:{workflowFor:(a)=>a===activity?workflow:null}};
+  await J.consumeWithCE(async()=>({item:[]}),activity,{},{});
+  assert.equal(J.midiCEGuard(workflow),true);
+  assert.equal(J.poolValue(J.findPool(actor)),16);
 });
