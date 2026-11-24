@@ -252,8 +252,9 @@ test("Short rest: 1 CE per Hit Die spent, up to half the total level", async () 
 
 test("Technique use is blocked by burnout, Reduced Output max, missing CE and an already open domain", async () => {
   const { env, actor, J } = await setup();
-  const item = { name: "Shrine", actor, flags: { jjk5e: { technique: "Shrine", ceCosts: { a: 9, d: 20 }, domainActivity: "d" } } };
-  const act = (id) => ({ id, item, actor, consumption: { scaling: {} } });
+  const item = { name: "Shrine", actor, flags: { jjk5e: { technique: "Shrine", ceCosts: { a: 9 } } } };
+  const domainItem = { name: "Domain Expansion", actor, flags: { jjk5e: { technique: "Shrine", ceCosts: { d: 20 }, domainActivity: "d" } } };
+  const act = (id) => ({ id, item: id === "d" ? domainItem : item, actor, consumption: { scaling: {} } });
   const use = (a) => env.Hooks.call("dnd5e.preUseActivity", a, { scaling: 0 }, {}, {});
   assert.equal(use(act("a")), true, "9 CE with 20 available");
   await J.setReducedOutput(actor, 3);
@@ -753,4 +754,274 @@ test("Domain custom effect: resolves selected targets with damage on a successfu
   assert.deepEqual(values,[3]);
   assert.equal(await J.executeDomainProfile(caster,[a,b],"req1"),false);
   assert.deepEqual(values,[3]);
+});
+
+
+test("Domain audit: direct sheet activities cannot bypass active expansion or clash gates", async () => {
+  const { env, actor,J }=await setup();
+  const [item]=await actor.createEmbeddedDocuments("Item",[{name:"Domain",type:"feat",
+    flags:{jjk5e:{domainActivity:"open",technique:"Test"}},system:{activities:{open:{id:"open",name:"Expand"},pulse:{id:"pulse",name:"Initiative 20: pulse"}}}}]);
+  const activity={id:"pulse",name:"Initiative 20: pulse",item,actor};
+  const use=()=>env.Hooks.call("dnd5e.preUseActivity",activity,{},{},{});
+  assert.equal(use(),false);
+  await J.setKindEffect(actor,"domain",{name:"Domain",flags:{jjk5e:{domainOpen:true}}}); await env.settle();
+  await J.setDomain(actor,{open:true,openingId:"test",domainItemUuid:item.uuid,lethal:true});
+  assert.equal(J.canUseDomainActivity(actor,activity),true);
+  assert.notEqual(use(),false);
+  await J.setDomain(actor,{open:true,openingId:"test",domainItemUuid:item.uuid,clash:{resolved:false}});
+  assert.equal(use(),false);
+  assert.equal(env.Hooks.call("dnd5e.preActivityConsumption",activity,{}),false);
+});
+
+test("Domain audit: closing root releases only its claims and unlinks surviving responses", async () => {
+  const {env,actor:root,J}=await setup();
+  const b=env.addActor({name:"B",items:[POOL]});
+  const c=env.addActor({name:"C",items:[POOL]});
+  await J.setDomain(root,{open:true,openingId:"root"});
+  await J.setDomain(b,{open:true,openingId:"b",reactionRootUuid:root.uuid,reactionRootOpening:"root"});
+  await root.setFlag("jjk5e","domainReactionWindow",{status:"open",openingId:"root",offers:[
+    {actorUuid:b.uuid,claimId:"b-claim",status:"claimed"},{actorUuid:c.uuid,claimId:"old",status:"claimed"}]});
+  await b.setFlag("jjk5e","domainReactionClaim",{id:"b-claim",openerUuid:root.uuid});
+  await c.setFlag("jjk5e","domainReactionClaim",{id:"new",openerUuid:"other"});
+  await J.domainClosed(root);
+  assert.equal(J.getDomain(root),null);
+  assert.equal(b.getFlag("jjk5e","domainReactionClaim"),undefined);
+  assert.equal(c.getFlag("jjk5e","domainReactionClaim").id,"new");
+  assert.equal(J.getDomain(b).reactionRootUuid,null);
+});
+
+test("Domain audit: expired effect on an NPC in an unviewed scene is removed", async () => {
+  const {env,J}=await setup();
+  const npc=env.addActor({name:"NPC",type:"npc",items:[POOL]});
+  env.game.scenes.set("offscreen",{id:"offscreen",tokens:[{actor:npc}]});
+  await J.setKindEffect(npc,"fallingBlossomDefense",{name:"Ward",duration:{remaining:0}});
+  const ward=fx(npc,"fallingBlossomDefense");
+  ward.duration.remaining=0;
+  await J.expireEffects(); await env.settle();
+  assert.equal(fx(npc,"fallingBlossomDefense"),undefined);
+});
+
+test("Domain audit: a target moving out during a save receives no custom damage", async () => {
+  const {env,actor:caster,J}=await setup();
+  const target=env.addActor({name:"Target",items:[POOL]});
+  const scene={id:"S",grid:{size:100,distance:5},tokens:[]};
+  env.game.scenes.set("S",scene);
+  const tk={uuid:"Scene.S.Token.A",parent:scene,actor:target,x:50,y:-50,width:1,height:1};
+  scene.tokens.push(tk);
+  let hits=0;
+  target.applyDamage=async()=>{hits++;};
+  target.rollSavingThrow=async()=>{tk.x=500;return {total:1};};
+  await J.setDomain(caster,{open:true,openingId:"test",sceneId:"S",x:0,y:0,radius:10,lethal:true,
+    customProfile:{name:"Test",damage:"1d8",damageType:"force",save:"con",dc:15,onSave:"half",condition:"none",rounds:1}});
+  assert.equal(await J.executeDomainProfile(caster,[tk],"move"),true);
+  assert.equal(hits,0);
+});
+
+test("Domain audit: malformed or stale reaction window cannot block new expansion",async()=>{
+  const {actor,J}=await setup();
+  await J.setDomain(actor,{open:true,openingId:"new"});
+  await actor.setFlag("jjk5e","domainReactionWindow",{status:"open",openingId:"old",expires:Date.now()+60000,offers:[]});
+  assert.equal(J.reactionWindow(actor),null);
+  await J.settleReactionWindow(actor);
+  assert.equal(actor.getFlag("jjk5e","domainReactionWindow"),undefined);
+});
+
+
+test("CE audit: invalid or negative scaling never pays or credits CE", async () => {
+  const {actor,J}=await setup();
+  const act={id:"a",actor,item:{name:"Scaled",actor,flags:{jjk5e:{ceCosts:{a:4},ceSteps:{a:2}}}}};
+  for(const scaling of [-1,"invalid",Infinity]) {
+    assert.equal(await J.payActivityCE(actor,act,{scaling}),false);
+  }
+  assert.equal(J.poolValue(J.findPool(actor)),20);
+  assert.equal(await J.payActivityCE(actor,act,{scaling:3}),true);
+  assert.equal(J.poolValue(J.findPool(actor)),10);
+});
+test("CE audit: scaling cannot bypass Reduced Output at final consumption",async()=>{
+  const {env,actor,J}=await setup();
+  await J.setReducedOutput(actor,3);
+  const act={id:"a",actor,item:{name:"Scaled",actor,flags:{jjk5e:{ceCosts:{a:4},ceSteps:{a:2}}}}};
+  assert.notEqual(env.Hooks.call("dnd5e.preActivityConsumption",act,{scaling:2}),false);
+  assert.equal(env.Hooks.call("dnd5e.preActivityConsumption",act,{scaling:3}),false);
+  assert.equal(await J.payActivityCE(actor,act,{scaling:3}),false);
+  assert.equal(J.poolValue(J.findPool(actor)),20);
+});
+test("CE audit: discounted scaled charge is calculated once and one-use discounts are consumed",async()=>{
+  const {actor,J}=await setup();
+  const act={id:"a",actor,item:{name:"Scaled",actor,flags:{jjk5e:{technique:"Test",ceCosts:{a:5},ceSteps:{a:2}}}}};
+  await actor.setFlag("jjk5e","sixEyesNext",true);
+  await actor.setFlag("jjk5e","costMinusNext",true);
+  assert.equal(J.totalActivityCECost(actor,act,{scaling:1}),0.6);
+  assert.equal(await J.payActivityCE(actor,act,{scaling:1}),true);
+  assert.equal(J.poolValue(J.findPool(actor)),19.4);
+  assert.equal(actor.getFlag("jjk5e","sixEyesNext"),undefined);
+  assert.equal(actor.getFlag("jjk5e","costMinusNext"),undefined);
+  assert.equal(await J.payActivityCE(actor,act,{scaling:1}),true);
+  assert.equal(J.poolValue(J.findPool(actor)),12.4);
+});
+test("CE audit: GM sets exact value without Six Eyes discount and recovery is capped",async()=>{
+  const {actor,J}=await setup();
+  await actor.setFlag("jjk5e","sixEyesNext",true);
+  assert.equal(await J.setExactCE(actor,10.5),true);
+  assert.equal(J.poolValue(J.findPool(actor)),10.5);
+  assert.equal(actor.getFlag("jjk5e","sixEyesNext"),true);
+  assert.equal(await J.spendCE(actor,-100),true);
+  assert.equal(J.poolValue(J.findPool(actor)),20);
+});
+test("CE audit: overlapping local payments cannot both spend unavailable CE",async()=>{
+  const {actor,J}=await setup();
+  const act={id:"a",actor,item:{name:"Costly",actor,flags:{jjk5e:{ceCosts:{a:15}}}}};
+  const results=await Promise.all([J.payActivityCE(actor,act),J.payActivityCE(actor,act)]);
+  assert.equal(results.filter(Boolean).length,1);
+  assert.equal(J.poolValue(J.findPool(actor)),5);
+});
+
+
+test("Transactional CE: authenticated owner, persistent reservation and replay rejection",async()=>{
+  const {actor,J}=await setup({settings:{transactionalCE:true}});
+  const [item]=await actor.createEmbeddedDocuments("Item",[{name:"Technique",type:"feat",flags:{jjk5e:{ceCosts:{a:8},ceSteps:{a:2}}},system:{activities:{a:{id:"a",name:"Attack"}}}}]);
+  const owner={id:"owner",active:true,isGM:false},other={id:"other",active:true,isGM:false};
+  actor.testUserPermission=(u)=>u.id===owner.id;
+  const payload={actorUuid:actor.uuid,itemId:item.id,activityId:"a",id:"tx1",scaling:1};
+  assert.equal(await J.handleCEAuthority({operation:"reserve",payload},{user:other}),false);
+  const result=await J.handleCEAuthority({operation:"reserve",payload},{user:owner});
+  assert.equal(result.cost,10);
+  assert.equal(J.poolValue(J.findPool(actor)),10);
+  assert.equal(await J.handleCEAuthority({operation:"reserve",payload},{user:owner}),false);
+  assert.equal(await J.handleCEAuthority({operation:"reserve",payload:{...payload,id:"tx2"}},{user:owner}),false);
+  assert.equal(await J.handleCEAuthority({operation:"commit",payload},{user:other}),false);
+  assert.equal(await J.handleCEAuthority({operation:"commit",payload},{user:owner}),true);
+  assert.equal(J.poolValue(J.findPool(actor)),10);
+  assert.equal(await J.handleCEAuthority({operation:"commit",payload},{user:owner}),false);
+  assert.equal(J.ceLedger(J.findPool(actor))[0].state,"committed");
+});
+test("Transactional CE: uncertain consumption requires GM settlement; only one refund",async()=>{
+  const {env,actor,J}=await setup({settings:{transactionalCE:true}});
+  const [item]=await actor.createEmbeddedDocuments("Item",[{name:"Technique",type:"feat",flags:{jjk5e:{ceCosts:{a:6}}},system:{activities:{a:{id:"a"}}}}]);
+  const user=env.game.user,payload={actorUuid:actor.uuid,itemId:item.id,activityId:"a",id:"tx-review",scaling:0};
+  assert.equal((await J.handleCEAuthority({operation:"reserve",payload},{user})).cost,6);
+  assert.equal(await J.handleCEAuthority({operation:"review",payload},{user}),true);
+  assert.equal(J.poolValue(J.findPool(actor)),14);
+  assert.equal(await J.handleCEAuthority({operation:"settle",payload:{...payload,refund:true}},{user}),true);
+  assert.equal(J.poolValue(J.findPool(actor)),20);
+  assert.equal(await J.handleCEAuthority({operation:"settle",payload:{...payload,refund:true}},{user}),false);
+});
+test("CE Quick Recovery: legacy costs are not negative charges",async()=>{
+  const {actor,J}=await setup();
+  const act={id:"Jt55eu41OQX7G6Sh",actor,item:{name:"Quick Recovery",flags:{jjk5e:{ceCosts:{Jt55eu41OQX7G6Sh:-1},ceSteps:{Jt55eu41OQX7G6Sh:-1}}}}};
+  assert.equal(J.activityCost(act),0);
+  assert.equal(J.totalActivityCECost(actor,act,{scaling:3}),0);
+  assert.equal(J.managedCE(act),false);
+});
+
+test("Transactional CE adapter: debit precedes native consumption and repeated postUse does not debit again",async()=>{
+  const {env,actor,J}=await setup({settings:{transactionalCE:true}});
+  const [item]=await actor.createEmbeddedDocuments("Item",[{name:"Technique",type:"feat",flags:{jjk5e:{ceCosts:{a:8}}},system:{activities:{a:{id:"a",name:"Attack"}}}}]);
+  const act={id:"a",name:"Attack",actor,item},usage={scaling:0};
+  assert.equal(env.Hooks.call("dnd5e.preActivityConsumption",act,usage,{}),false,"no native use without reservation");
+  let calls=0;
+  const result=await J.consumeWithCE(async()=>{
+    calls++;
+    assert.equal(J.poolValue(J.findPool(actor)),12);
+    assert.notEqual(env.Hooks.call("dnd5e.preActivityConsumption",act,usage,{}),false);
+    assert.equal(env.Hooks.call("dnd5e.preRestCompleted",actor,{},{}),false);
+    return {item:[]};
+  },act,usage,{});
+  assert.ok(result);
+  assert.equal(calls,1);
+  assert.equal(J.cePostAllowed(act,usage),true);
+  await env.Hooks.run("dnd5e.postUseActivity",act,usage,{});
+  await env.Hooks.run("dnd5e.postUseActivity",act,usage,{});
+  assert.equal(J.poolValue(J.findPool(actor)),12);
+  assert.equal(await J.consumeWithCE(async()=>{throw Error("duplicate executed")},act,usage,{}),false);
+});
+test("Transactional CE adapter: native failure blocks post-use effects and retains pending review",async()=>{
+  const {actor,J}=await setup({settings:{transactionalCE:true}});
+  const [item]=await actor.createEmbeddedDocuments("Item",[{name:"Technique",type:"feat",flags:{jjk5e:{ceCosts:{a:4}}},system:{activities:{a:{id:"a"}}}}]);
+  const act={id:"a",actor,item},usage={};
+  assert.equal(await J.consumeWithCE(async()=>false,act,usage,{}),false);
+  assert.equal(J.cePostAllowed(act,usage),false);
+  assert.equal(J.poolValue(J.findPool(actor)),16);
+  assert.equal(J.ceLedger(J.findPool(actor))[0].state,"review");
+});
+test("Quick Recovery: verified native use delta restores CE once",async()=>{
+  const {env,actor,J}=await setup();
+  await J.spendCE(actor,10);
+  const [item]=await actor.createEmbeddedDocuments("Item",[{name:"Quick Recovery",type:"feat",flags:{jjk5e:{quickRecovery:true}}}]);
+  const act={id:"Jt55eu41OQX7G6Sh",actor,item},res={message:{system:{deltas:{item:{[item.id]:[{keyPath:"system.uses.spent",delta:2}]}}}}};
+  await env.Hooks.run("dnd5e.postUseActivity",act,{},res);
+  await env.Hooks.run("dnd5e.postUseActivity",act,{},res);
+  assert.equal(J.poolValue(J.findPool(actor)),12);
+});
+
+
+test("Midi CE bridge: paid native consumption authorizes only its bound workflow",async()=>{
+  const {env,actor,J}=await setup({settings:{transactionalCE:true}});
+  const [item]=await actor.createEmbeddedDocuments("Item",[{name:"Technique",type:"feat",flags:{jjk5e:{ceCosts:{a:8}}},system:{activities:{a:{id:"a",name:"Attack"}}}}]);
+  const activity={id:"a",type:"attack",name:"Attack",actor,item},usage={scaling:0};
+  const workflow={activity,actor,item,targets:new Set()};
+  env.Hooks.call("midi-qol.preItemRollV2",{workflow,usage});
+  for(const stage of J.MIDI_GUARD_STAGES) assert.equal(env.Hooks.call("midi-qol."+stage,workflow),false);
+  await J.consumeWithCE(async()=>({item:[]}),activity,usage,{});
+  for(const stage of J.MIDI_GUARD_STAGES) assert.notEqual(env.Hooks.call("midi-qol."+stage,workflow),false);
+  const replay={activity,actor,item,targets:new Set()};
+  env.Hooks.call("midi-qol.preItemRollV2",{workflow:replay,usage});
+  assert.equal(J.midiCEGuard(replay),false);
+  assert.equal(J.poolValue(J.findPool(actor)),12);
+  assert.equal(J.cePostOnce(activity,usage,"test"),true);
+  assert.equal(J.cePostOnce(activity,usage,"test"),false);
+});
+test("Midi CE bridge: non-JJK and explicitly zero-cost activities remain usable",async()=>{
+  const {env,actor,J}=await setup({settings:{transactionalCE:true}});
+  const ordinary={activity:{id:"a",type:"heal",actor,item:{name:"Ordinary"}},actor};
+  const zero={activity:{id:"b",actor,item:{flags:{jjk5e:{ceCosts:{b:0}}}}},actor};
+  assert.equal(J.midiCEGuard(ordinary),true);
+  assert.notEqual(env.Hooks.call("midi-qol.preApplyDynamicEffects",zero),false);
+});
+test("DAE 14 owns expiry; fallback must not race it or delete templates",async()=>{
+  const {env,actor,J}=await setup();
+  env.game.release.generation=14;
+  const e=await J.setKindEffect(actor,"fallingBlossomDefense",{name:"Ward",duration:{remaining:0}});
+  e.duration.remaining=0;
+  assert.equal(J.externalEffectExpiry(),true);
+  await J.expireEffects();
+  assert.ok(actor.effects.get(e.id));
+  assert.equal(J.liveWard(e),false);
+  env.game.modules.get("dae").active=false;
+  await J.expireEffects();
+  assert.equal(actor.effects.get(e.id),undefined);
+});
+test("DAE suppressed protection does not count as an active ward",async()=>{
+  const {actor,J}=await setup();
+  const e=await J.setKindEffect(actor,"domainAmplification",{name:"Ward"});
+  e.isSuppressed=true;
+  assert.equal(J.hasKind(actor,"domainAmplification"),false);
+  assert.equal(J.domainWard({actor}),null);
+});
+test("Midi healing preserves protected allies; offensive effects exclude them from all target sets",async()=>{
+  const {env,actor,J}=await setup();
+  const scene={id:"S",grid:{size:100,distance:5},tokens:[]};
+  env.game.scenes.set(scene.id,scene);
+  const target={actor:{flags:{jjk5e:{sureHitImmune:true}}},document:{uuid:"Scene.S.Token.A",x:0,y:0,width:1,height:1,parent:scene}};
+  await J.setKindEffect(actor,"domain",{name:"Domain",flags:{jjk5e:{domainOpen:true}}});
+  await env.settle();
+  await J.setDomain(actor,{open:true,openingId:"test",sceneId:"S",x:0,y:0,radius:10,lethal:true});
+  const workflow={activity:{type:"heal"},actor,item:{flags:{jjk5e:{technique:"Test"}}},targets:new Set([target]),effectTargets:new Set([target])};
+  assert.equal(J.excludeDomainWardedTargets(workflow).length,0);
+  assert.equal(workflow.targets.size,1);
+  workflow.activity.type="attack";
+  const savedSet=workflow.effectTargets;
+  assert.equal(J.excludeDomainWardedTargets(workflow).length,1);
+  assert.equal(workflow.targets.size,0);
+  assert.equal(workflow.effectTargets.size,0);
+  assert.equal(workflow.effectTargets,savedSet,"preserve Midi target set identity");
+});
+test("Midi consume bridge binds native configuration through workflowFor",async()=>{
+  const {env,actor,J}=await setup({settings:{transactionalCE:true}});
+  const [item]=await actor.createEmbeddedDocuments("Item",[{name:"Technique",type:"feat",flags:{jjk5e:{ceCosts:{a:4}}},system:{activities:{a:{id:"a"}}}}]);
+  const activity={id:"a",actor,item},workflow={activity,actor,item,targets:new Set()};
+  env.context.MidiQOL={Workflow:{workflowFor:(a)=>a===activity?workflow:null}};
+  await J.consumeWithCE(async()=>({item:[]}),activity,{},{});
+  assert.equal(J.midiCEGuard(workflow),true);
+  assert.equal(J.poolValue(J.findPool(actor)),16);
 });

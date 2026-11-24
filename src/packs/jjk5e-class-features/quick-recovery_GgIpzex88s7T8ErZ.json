@@ -61,13 +61,8 @@
  },
  "flags": {
   "jjk5e": {
-   "ceCosts": {
-    "Jt55eu41OQX7G6Sh": -1
-   },
-   "ceSteps": {
-    "Jt55eu41OQX7G6Sh": -1
-   },
-   "rev": "dca3b8e358"
+   "rev": "bf7c53f454",
+   "quickRecovery": true
   }
  },
  "folder": "D1jub3NHW0Fbryho",

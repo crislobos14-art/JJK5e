@@ -280,6 +280,7 @@
       "RegainShort": "Regain"
     },
     "Notify": {
+      "CEWorkflowUnverified": "JJK5e: CE payment could not be verified for this Midi-QOL workflow. The activity was stopped; consult the GM.",
       "NoActor": "JJK 5e: select a token or assign a character first.",
       "NotOwner": "JJK 5e: you do not own that actor.",
       "HRNoTechnique": "JJK 5e: Heavenly Restriction has no Innate Technique.",
@@ -320,6 +321,10 @@
       "autoSpendCE": {
         "Name": "Automatic Cursed Energy spending",
         "Hint": "Features with a fixed CE cost spend it from the Cursed Energy pool and are blocked if there is not enough CE. Scaled costs use the scaling field."
+      },
+      "transactionalCE": {
+        "Name": "Experimental GM-authoritative CE transactions",
+        "Hint": "Development preview. Requires active GM and working libWrapper activity adapter. A failed or interrupted consumption is held for explicit GM review. Do not enable in a live campaign before testing."
       },
       "ceChat": {
         "Name": "Cursed Energy chat messages",

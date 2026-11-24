@@ -50,6 +50,7 @@ async function safeDelete(doc) {
   if (doc.parent && coll?.get && !coll.get(doc.id)) return;
   doc._jjkDeleting = true;
   try { await doc.delete(); } catch (err) { if (!/does not exist|not exist/i.test(String(err?.message))) console.warn(`${MODULE_ID} | delete`, err); }
+  finally { doc._jjkDeleting = false; }
 }
 
 async function confirmDialog(title, content) {
@@ -381,6 +382,7 @@ function ceMod(actor) {
 }
 
 function activityCost(activity) {
+  if(isQuickRecovery(activity)) return 0;
   const costs = activity?.item?.flags?.jjk5e?.ceCosts;
   let base = Number(costs?.[activity.id] ?? 0);
   // V.6 Domain Refinement: Efficient Expansions (700) −CE mod, Total Mastery (1000) −proficiency bonus.
@@ -425,6 +427,230 @@ function circuitCost(activity, base) {
 
 /** Serializes CE spending within this client to prevent double charges from overlapping hooks. */
 const CE_QUEUES = new Map();
+const CE_AUTH_QUERY = `${MODULE_ID}.ceAuthority`;
+const CE_USAGE_CONTEXT = new WeakMap();
+const CE_RECOVERY_RESULTS = new WeakSet();
+const CE_MIDI_ATTACKS = new WeakSet();
+const CE_MIDI_WORKFLOWS = new WeakMap();
+const CE_MIDI_USAGE_OWNERS = new WeakMap();
+const CE_MIDI_DENIED = new WeakSet();
+const MIDI_GUARD_STAGES = ["preAttackRoll","preDamageRoll","preFormulaRoll","preWaitForSaves",
+  "preWaitForUtilityRoll","preTeleport","preAllRollsComplete","preApplyDynamicEffects"];
+function midiActivity(workflow){return workflow?.activity??null;}
+function captureMidiUsage({workflow,usage}={}){
+  const activity=midiActivity(workflow);
+  if(!workflow || !activity || !usage || typeof usage!=="object") return;
+  const bound=CE_MIDI_USAGE_OWNERS.get(usage);
+  if(bound && bound!==workflow) return;
+  const previous=CE_MIDI_WORKFLOWS.get(workflow);
+  if(previous && previous.usage!==usage && ceContext(activity,previous.usage)) return;
+  CE_MIDI_USAGE_OWNERS.set(usage,workflow);
+  CE_MIDI_WORKFLOWS.set(workflow,{usage,key:ceUsageKey(activity)});
+}
+function midiCEContext(workflow){
+  const binding=CE_MIDI_WORKFLOWS.get(workflow),activity=midiActivity(workflow);
+  if(!binding||binding.key!==ceUsageKey(activity)) return null;
+  return ceContext(activity,binding.usage);
+}
+function midiCEGuard(workflow){
+  const activity=midiActivity(workflow);
+  if(!ceAuthorityEnabled()||!setting("autoSpendCE")||!managedCE(activity)) return true;
+  const ctx=midiCEContext(workflow);
+  // A transaction for another use of the same item is not proof of payment.
+  if(ctx?.state==="committed" && ctx.actorUuid===(activity.actor??activity.item?.actor)?.uuid) return true;
+  if(!CE_MIDI_DENIED.has(workflow)){
+    CE_MIDI_DENIED.add(workflow);
+    ui.notifications.warn(t("Notify.CEWorkflowUnverified"));
+  }
+  return false;
+}
+function midiDomainGuard(workflow){
+  if(!midiCEGuard(workflow)) return false;
+  excludeDomainWardedTargets(workflow);
+  return true;
+}
+function registerMidiCEBridge(){
+  Hooks.on("midi-qol.preItemRollV2",captureMidiUsage);
+  for(const stage of MIDI_GUARD_STAGES) Hooks.on(`midi-qol.${stage}`,midiDomainGuard);
+}
+function cePostAllowed(activity,usageConfig){
+  return !ceAuthorityEnabled() || !setting("autoSpendCE") || !managedCE(activity) ||
+    ceContext(activity,usageConfig)?.state==="committed";
+}
+function cePostOnce(activity,usageConfig,phase){
+  if(!cePostAllowed(activity,usageConfig)) return false;
+  if(!ceAuthorityEnabled() || !setting("autoSpendCE") || !managedCE(activity)) return true;
+  const ctx=ceContext(activity,usageConfig);
+  ctx.phases??=new Set();
+  if(ctx.phases.has(phase)) return false;
+  ctx.phases.add(phase);
+  return true;
+}
+const CE_ADAPTER_TARGETS = new Set();
+const QUICK_RECOVERY_ID = "Jt55eu41OQX7G6Sh";
+const isQuickRecovery = (activity) => activity?.id === QUICK_RECOVERY_ID &&
+  (activity.item?.flags?.jjk5e?.quickRecovery === true || baseName(activity.item) === "Quick Recovery");
+function ceAuthorityEnabled() { return !!setting("transactionalCE"); }
+function managedCE(activity) {
+  if (isQuickRecovery(activity)) return false;
+  const f = activity?.item?.flags?.jjk5e;
+  return !!f && (Object.hasOwn(f.ceCosts ?? {}, activity.id) || Object.hasOwn(f.ceSteps ?? {},activity.id)) &&
+    (Number(f.ceCosts?.[activity.id] ?? 0) !== 0 || Number(f.ceSteps?.[activity.id] ?? 0) !== 0);
+}
+function ceLedger(pool) {
+  const data = pool?.getFlag?.(MODULE_ID,"ceLedger");
+  return Array.isArray(data) ? foundry.utils.deepClone(data) : [];
+}
+function cePending(pool) { return ceLedger(pool).some((x) => x.state === "reserved" || x.state === "review"); }
+function ceRecord(ledger, record) {
+  const others = ledger.filter((x)=>x.id!==record.id);
+  // Never discard open reservations. Bound only closed history.
+  return [...others.filter(x=>["reserved","review"].includes(x.state)),
+    ...others.filter(x=>!["reserved","review"].includes(x.state)).slice(-199),record];
+}
+function ceUsageKey(activity) { return `${activity?.item?.id}:${activity?.id}`; }
+function ceContext(activity, usageConfig) {
+  if (!usageConfig || typeof usageConfig !== "object") return null;
+  const ctx=CE_USAGE_CONTEXT.get(usageConfig);
+  return ctx?.key===ceUsageKey(activity) ? ctx : null;
+}
+function ceFromItem(actor,itemId,activityId) {
+  const item=actor?.items?.get?.(itemId);
+  if (!item) return null;
+  const activities=item.system?.activities;
+  return activities?.get?.(activityId) ?? activities?.[activityId] ?? null;
+}
+async function ceAuthorityRequest(operation,payload) {
+  if (isActiveGM()) return handleCEAuthority({operation,payload},{user:game.user});
+  const gm=game.users.activeGM;
+  if (!gm?.query) return false;
+  try { return await gm.query(CE_AUTH_QUERY,{operation,payload},{timeout:120000}); }
+  catch(err) { reportError("CE authority",err); return false; }
+}
+async function handleCEAuthority(msg,{user}={}) {
+  if (!ceAuthorityEnabled() || !isActiveGM() || !user?.active || !msg?.payload ||
+      !["reserve","commit","review","settle","adjust"].includes(msg.operation)) return false;
+  const {operation,payload:d}=msg;
+  const actor=await domainActor(d.actorUuid);
+  if (!canDirectDomain(user,actor)) return false;
+  if (operation==="settle"&&!user.isGM) return false;
+  if (operation==="adjust") {
+    if (!Number.isFinite(d.amount) || Math.abs(d.amount)>100000) return false;
+    if (!user.isGM && !await confirmDialog(t("GMRequest.Title"),`<p>${esc(user.name)}: ${esc(actor.name)} — ${esc(String(d.amount))} CE</p>`)) return false;
+    return queueCE(actor,async()=>{
+      if (!isActiveGM() || !canDirectDomain(user,actor) || cePending(findPool(actor))) return false;
+      return doSpendCE(actor,d.amount,String(d.label??"CE").slice(0,120));
+    });
+  }
+  if (typeof d.id!=="string" || !/^[a-zA-Z0-9_-]{1,80}$/.test(d.id)) return false;
+  return queueCE(actor,async()=>{
+    if (!isActiveGM() || !canDirectDomain(user,actor)) return false;
+    const pool=findPool(actor);
+    if (!pool) return false;
+    const ledger=ceLedger(pool), old=ledger.find(x=>x.id===d.id);
+    if(operation==="reserve"){
+      if(old) return false; // replay must not authorize native effects a second time
+      if(cePending(pool)) return false;
+      const a=ceFromItem(actor,d.itemId,d.activityId);
+      const item=actor.items.get(d.itemId);
+      if(!a || !item || !Number.isSafeInteger(d.scaling) || d.scaling<0 || d.scaling>1000) return false;
+      const act=a.item ? a : {...a,item,actor,id:d.activityId};
+      const scale=act.consumption?.scaling;
+      if(d.scaling>0 && scale?.allowed===false) return false;
+      if(!managedCE(act) || !validActivityCE(actor,act,{scaling:d.scaling})) return false;
+      if(act.item?.flags?.jjk5e?.technique && (inBurnout(actor)||hasKind(actor,"domainAmplification"))) return false;
+      if(item.flags?.jjk5e?.domainActivity===act.id && domainOpen(actor)) return false;
+      if(item.flags?.jjk5e?.domainActivity && item.flags.jjk5e.domainActivity!==act.id && !canUseDomainActivity(actor,act)) return false;
+      const cost=totalActivityCECost(actor,act,{scaling:d.scaling});
+      const tx=ceTransaction(poolValue(pool),poolMax(pool),cost);
+      if(!tx || cost<0) return false;
+      const rec={id:d.id,userId:user.id,actorUuid:actor.uuid,itemId:d.itemId,activityId:d.activityId,
+        scaling:d.scaling,cost,state:"reserved",created:Date.now(),
+        sixEyes:cost>0&&!!actor.getFlag(MODULE_ID,"sixEyesNext"),minusNext:cost>0&&!!(item.flags?.jjk5e?.technique&&actor.getFlag(MODULE_ID,"costMinusNext"))};
+      const whole=Math.floor(tx.spent+1e-6);
+      // Persist debit and reservation together in the same Item update.
+      await pool.update({"system.uses.spent":whole,"flags.jjk5e.fractionalSpent":Math.round((tx.spent-whole)*1000)/1000,
+        "flags.jjk5e.ceLedger":ceRecord(ledger,rec)},{jjk5eCE:true});
+      if(rec.sixEyes) await actor.unsetFlag(MODULE_ID,"sixEyesNext");
+      if(rec.minusNext) await actor.unsetFlag(MODULE_ID,"costMinusNext");
+      return {id:rec.id,cost};
+    }
+    if(!old || (!user.isGM&&old.userId!==user.id) || old.actorUuid!==actor.uuid) return false;
+    if(operation==="commit"||operation==="review"){
+      if(old.state!=="reserved") return false;
+      await pool.update({"flags.jjk5e.ceLedger":ceRecord(ledger,{...old,state:operation==="commit"?"committed":"review",ended:Date.now()})},{jjk5eCE:true});
+      return true;
+    }
+    if(operation!=="settle"||!["reserved","review"].includes(old.state)||typeof d.refund!=="boolean") return false;
+    // Refund only on explicit GM decision; a canceled external workflow may already have applied effects.
+    const tx=ceTransaction(poolValue(pool),poolMax(pool),d.refund?-old.cost:0);
+    if(!tx) return false;
+    const whole=Math.floor(tx.spent+1e-6);
+    await pool.update({"system.uses.spent":whole,"flags.jjk5e.fractionalSpent":Math.round((tx.spent-whole)*1000)/1000,
+      "flags.jjk5e.ceLedger":ceRecord(ledger,{...old,state:d.refund?"refunded":"committed",ended:Date.now(),settledBy:user.id})},{jjk5eCE:true});
+    return true;
+  });
+}
+async function consumeWithCE(wrapped,activity,usageConfig,messageConfig) {
+  if(!ceAuthorityEnabled()||!setting("autoSpendCE")||!managedCE(activity)) return wrapped(usageConfig,messageConfig);
+  const actor=activity.actor??activity.item?.actor;
+  if(!actor?.isOwner || !usageConfig || typeof usageConfig!=="object") return false;
+  const nested=ceContext(activity,usageConfig);
+  if(nested?.state==="reservingNative") return wrapped(usageConfig,messageConfig);
+  if(nested) return false;
+  if(!validActivityCE(actor,activity,usageConfig)) return false;
+  const id=foundry.utils.randomID();
+  const reserve=await ceAuthorityRequest("reserve",{actorUuid:actor.uuid,itemId:activity.item.id,activityId:activity.id,
+    scaling:Number(usageConfig.scaling??0),id});
+  if(!reserve?.id) { ui.notifications.warn(t("Notify.NotEnoughCE",{value:poolValue(findPool(actor)),cost:totalActivityCECost(actor,activity,usageConfig)})); return false; }
+  const ctx={key:ceUsageKey(activity),id,actorUuid:actor.uuid,state:"reservingNative",cost:reserve.cost};
+  CE_USAGE_CONTEXT.set(usageConfig,ctx);
+  try{
+    // Midi dnd6 exposes the in-progress use by activity before a card exists.
+    // Bind the precise native consumption config, not another use of the same item.
+    const workflow=globalThis.MidiQOL?.Workflow?.workflowFor?.(activity);
+    if(workflow) captureMidiUsage({workflow,usage:usageConfig});
+    const result=await wrapped(usageConfig,messageConfig);
+    const ok=!!result && result!==false;
+    const ended=await ceAuthorityRequest(ok?"commit":"review",{actorUuid:actor.uuid,id});
+    ctx.state=ok&&ended?"committed":"review";
+    if(ctx.state!=="committed") return false;
+    return result;
+  }catch(err){
+    ctx.state="review";
+    await ceAuthorityRequest("review",{actorUuid:actor.uuid,id});
+    throw err;
+  }
+}
+function installCEAdapters() {
+  if(!ceAuthorityEnabled()||!globalThis.libWrapper?.register) return false;
+  for(const [key,config] of Object.entries(CONFIG.DND5E?.activityTypes??{})){
+    if(!/^[a-zA-Z0-9_$]+$/.test(key)||typeof config.documentClass?.prototype?.consume!=="function") continue;
+    const target=`CONFIG.DND5E.activityTypes.${key}.documentClass.prototype.consume`;
+    if(CE_ADAPTER_TARGETS.has(target)) continue;
+    try{
+      globalThis.libWrapper.register(MODULE_ID,target,function(wrapped,usage,message){
+        return consumeWithCE(wrapped,this,usage,message);
+      },"MIXED");
+      CE_ADAPTER_TARGETS.add(target);
+    }catch(err){reportError("CE adapter "+key,err);}
+  }
+  return CE_ADAPTER_TARGETS.size>0;
+}
+function ceDiagnostics(actor){
+  const types=Object.entries(CONFIG.DND5E?.activityTypes??{}).filter(([,cfg])=>typeof cfg.documentClass?.prototype?.consume==="function").map(([key])=>key);
+  return {transactional:ceAuthorityEnabled(),adapters:[...CE_ADAPTER_TARGETS],
+    unwrappedTypes:types.filter(key=>!CE_ADAPTER_TARGETS.has(`CONFIG.DND5E.activityTypes.${key}.documentClass.prototype.consume`)),
+    midi:!!game.modules.get("midi-qol")?.active,midiVersion:game.modules.get("midi-qol")?.version??null,
+    dae:!!game.modules.get("dae")?.active,daeVersion:game.modules.get("dae")?.version??null,
+    midiGuardStages:[...MIDI_GUARD_STAGES],expiryAuthority:externalEffectExpiry()?"DAE/Times Up":"JJK fallback",
+    libWrapper:!!globalThis.libWrapper?.register,gm:!!(game.users.activeGM||game.user.isGM),
+    pending:ceLedger(findPool(actor)).filter(x=>["reserved","review"].includes(x.state))};
+}
+async function reconcileCE(actor,id,refund){
+  if(!game.user.isGM) return false;
+  return ceAuthorityRequest("settle",{actorUuid:actor.uuid,id,refund});
+}
 function ceDiscountFactor(actor) {
   if (!actor) return 1;
   if (actor.items.some((i) => baseName(i) === "Six Eyes (Awakened)")) return 0.1;
@@ -432,20 +658,20 @@ function ceDiscountFactor(actor) {
 }
 function totalActivityCECost(actor, activity, usageConfig = {}) {
   const base = activityCost(activity);
-  const step = Number(activity?.item?.flags?.jjk5e?.ceSteps?.[activity.id] ?? 0);
-  const scaling = Number(usageConfig?.scaling) || 0;
+  const step = isQuickRecovery(activity) ? 0 : Number(activity?.item?.flags?.jjk5e?.ceSteps?.[activity.id] ?? 0);
+  const scaling = Number(usageConfig?.scaling ?? 0);
   return activityCECost({ base, step, scaling, factor: ceDiscountFactor(actor) });
 }
-async function doSpendCE(actor, amount, label = "") {
-  if (!actor?.isOwner) return false;
+async function doSpendCE(actor, amount, label = "", { exact = false } = {}) {
+  if (!actor?.isOwner || !Number.isFinite(amount)) return false;
   const pool = findPool(actor);
   if (!pool) {
     ui.notifications.warn(t("Notify.NoPool", { name: actor?.name ?? "?" }));
     return false;
   }
-  const discount = amount > 0 && ceDiscountFactor(actor) < 1;
+  const discount = !exact && amount > 0 && ceDiscountFactor(actor) < 1;
   const charge = discount ? activityCECost({ base: amount, factor: 0.1 }) : amount;
-  if (charge > 0 && vowBlocksUsage(actor.effects, { costsCE: true })) {
+  if (!exact && charge !== 0 && vowBlocksUsage(actor.effects, { costsCE: true })) {
     ui.notifications.warn(t("Notify.VowBlocksCE"));
     return false;
   }
@@ -461,20 +687,64 @@ async function doSpendCE(actor, amount, label = "") {
     "flags.jjk5e.fractionalSpent": fractional }, { jjk5eCE: true });
   if (discount && actor.getFlag(MODULE_ID, "sixEyesNext")) await actor.unsetFlag(MODULE_ID, "sixEyesNext");
   if (setting("ceChat")) {
-    const verb = charge >= 0 ? `−${charge}` : `+${-charge}`;
+    const actual = Math.round((previous - result.remaining) * 1000) / 1000;
+    const verb = actual >= 0 ? `−${actual}` : `+${-actual}`;
     await chat(actor, `<p><strong>${esc(label || t("CE.Name"))}</strong>: ${verb} CE `
       + `<span style="opacity:.8">(${t("CE.Remaining", { value: result.remaining, max: maximum })})</span></p>`,
     privateTo(actor));
   }
   return true;
 }
-async function spendCE(actor, amount, label = "") {
+async function queueCE(actor, fn) {
   const key = actor?.uuid ?? "unknown";
   const previous = CE_QUEUES.get(key) ?? Promise.resolve();
-  const next = previous.catch(() => {}).then(() => doSpendCE(actor, amount, label));
+  const next = previous.catch(() => {}).then(fn);
   CE_QUEUES.set(key, next);
   try { return await next; }
   finally { if (CE_QUEUES.get(key) === next) CE_QUEUES.delete(key); }
+}
+async function spendCE(actor, amount, label = "") {
+  if(ceAuthorityEnabled()){
+    if(!isActiveGM()) return ceAuthorityRequest("adjust",{actorUuid:actor?.uuid,amount,label});
+    return queueCE(actor,()=>cePending(findPool(actor))?false:doSpendCE(actor,amount,label));
+  }
+  return queueCE(actor, () => doSpendCE(actor, amount, label));
+}
+async function setExactCE(actor, value) {
+  if (!game.user.isGM || !Number.isFinite(value) || (ceAuthorityEnabled()&&!isActiveGM())) return false;
+  return queueCE(actor, async () => {
+    const pool = findPool(actor);
+    if (!pool || (ceAuthorityEnabled()&&cePending(pool))) return false;
+    return doSpendCE(actor, poolValue(pool) - clamp(value, 0, poolMax(pool)), t("Panel.GMSetCE"), { exact: true });
+  });
+}
+function validActivityCE(actor, activity, usageConfig, { checkPool = true } = {}) {
+  const cost = totalActivityCECost(actor, activity, usageConfig);
+  if (!Number.isFinite(cost) || cost < 0) return false;
+  if (vowBlocksUsage(actor?.effects, { costsCE: cost > 0, innateTechnique: !!activity.item?.flags?.jjk5e?.technique })) return false;
+  const ro = Number(actor?.getFlag(MODULE_ID,"reducedOutput")) || 0;
+  if (RO_MAX[ro] && cost > RO_MAX[ro]) {
+    ui.notifications.warn(t("Notify.ROMax", { cost, max: RO_MAX[ro], level: ro }));
+    return false;
+  }
+  if (checkPool && cost > 0) {
+    const pool = findPool(actor);
+    if (!pool || poolValue(pool) < cost) {
+      ui.notifications.warn(t("Notify.NotEnoughCE", { value: pool ? poolValue(pool) : 0, cost }));
+      return false;
+    }
+  }
+  return true;
+}
+async function payActivityCE(actor, activity, usageConfig = {}) {
+  return queueCE(actor, async () => {
+    if (!validActivityCE(actor,activity,usageConfig)) return false;
+    const cost = totalActivityCECost(actor,activity,usageConfig);
+    if (cost > 0 && !(await doSpendCE(actor,cost,`${activity.item?.name ?? ""}${activity.name ? ` — ${activity.name}` : ""}`, { exact: true }))) return false;
+    if (cost > 0 && ceDiscountFactor(actor) < 1 && actor.getFlag(MODULE_ID,"sixEyesNext")) await actor.unsetFlag(MODULE_ID,"sixEyesNext");
+    if (cost > 0 && activity.item?.flags?.jjk5e?.technique && actor.getFlag(MODULE_ID,"costMinusNext")) await actor.unsetFlag(MODULE_ID,"costMinusNext");
+    return true;
+  });
 }
 
 /* ---- token bar / actor resource sync ---- */
@@ -520,8 +790,14 @@ async function onActorUpdate(actor, changes, options, userId) {
   const pool = findPool(actor);
   if (!pool) return;
   const max = poolMax(pool);
-  await pool.update({ "system.uses.spent": Math.floor(clamp(max - Number(v), 0, max)),
-    "flags.jjk5e.fractionalSpent": Math.max(0, (max - Number(v)) % 1) }, { jjk5eSync: true });
+  if (!Number.isFinite(Number(v))) return syncResource(actor);
+  if(ceAuthorityEnabled() && (!isActiveGM()||cePending(pool))) return syncResource(actor);
+  await queueCE(actor, async () => {
+    const spent = Math.round(clamp(max - Number(v), 0, max)*1000)/1000;
+    const whole = Math.floor(spent);
+    await pool.update({ "system.uses.spent": whole,
+      "flags.jjk5e.fractionalSpent": Math.round((spent-whole)*1000)/1000 }, { jjk5eSync: true });
+  });
 }
 
 /* -------------------------------------------- */
@@ -589,9 +865,9 @@ async function setKindEffect(actor, kind, data) {
   return created?.[0] ?? null;
 }
 
-const hasKind = (actor, kind) => !!actor?.effects?.some((e) => e.flags?.jjk5e?.kind === kind && !e.disabled);
-const domainOpen = (actor) => !!actor?.effects?.some((e) => (e.flags?.jjk5e?.kind === "domain" || e.flags?.jjk5e?.domainOpen) && !e.disabled);
-const inBurnout = (actor) => !!actor?.effects?.some((e) => (e.flags?.jjk5e?.kind === "burnout" || e.flags?.jjk5e?.burnout) && !e.disabled);
+const hasKind = (actor, kind) => !!actor?.effects?.some((e) => e.flags?.jjk5e?.kind === kind && liveWard(e));
+const domainOpen = (actor) => !!actor?.effects?.some((e) => (e.flags?.jjk5e?.kind === "domain" || e.flags?.jjk5e?.domainOpen) && liveWard(e));
+const inBurnout = (actor) => !!actor?.effects?.some((e) => (e.flags?.jjk5e?.kind === "burnout" || e.flags?.jjk5e?.burnout) && liveWard(e));
 const zoneEffect = (actor) => actor?.effects?.find((e) => e.flags?.jjk5e?.kind === "zone" || e.flags?.jjk5e?.zone);
 
 /* -------------------------------------------- */
@@ -631,7 +907,12 @@ function registerActivityHooks() {
       ui.notifications.warn(t("Notify.VowBlocksUse"));
       return false;
     }
-    // Only the activity that expands the domain is blocked; the domain's own in-domain activities stay usable.
+    // Domain-only activities cannot be launched from an inactive or different domain item.
+    if (activity.item?.flags?.jjk5e?.domainActivity && activity.item.flags.jjk5e.domainActivity !== activity.id &&
+        !canUseDomainActivity(actor, activity)) {
+      ui.notifications.warn(t("Domain.ProfileBlocked"));
+      return false;
+    }
     if (activity.item?.flags?.jjk5e?.domainActivity === activity.id && !game.user.isGM && !game.users.activeGM) {
       ui.notifications.warn(t("Notify.NoGM"));
       return false;
@@ -645,12 +926,12 @@ function registerActivityHooks() {
       ui.notifications.warn(t("Notify.ROMax", { cost, max: RO_MAX[ro], level: ro }));
       return false;
     }
-    if (!setting("autoSpendCE") || !cost) return;
     if (!Number.isFinite(cost)) return false;
+    if (!setting("autoSpendCE") || !cost) return;
     const pool = findPool(actor);
     if (!pool) {
       ui.notifications.warn(t("Notify.NoPoolNotSpent", { name: actor?.name ?? "?" }));
-      return;
+      return false;
     }
     if (poolValue(pool) < cost) {
       ui.notifications.warn(t("Notify.NotEnoughCE", { value: poolValue(pool), cost }));
@@ -660,20 +941,18 @@ function registerActivityHooks() {
 
   // D&D5e 6.1: this gate runs after the user selected CE scaling, before item consumption.
   Hooks.on("dnd5e.preActivityConsumption", (activity, usageConfig) => {
+    if (activity.item?.flags?.jjk5e?.domainActivity && activity.item.flags.jjk5e.domainActivity !== activity.id &&
+        !canUseDomainActivity(activity.actor ?? activity.item.actor, activity)) return false;
     if (isCloneCreation(activity) && !canCreateClone(activity.item.actor, cloneQuantity(activity, usageConfig))) return false;
     if (activity.item?.flags?.jjk5e?.tokenSwap?.[activity.id] && !validateTokenSwap(activity)) return false;
-    if (!setting("autoSpendCE")) return;
     const actor = activity.actor ?? activity.item?.actor;
-    const cost = totalActivityCECost(actor, activity, usageConfig);
-    if (!Number.isFinite(cost)) return false;
-    if (!cost) return;
-    const pool = findPool(actor);
-    if (!pool || poolValue(pool) < cost) {
-      ui.notifications.warn(t("Notify.NotEnoughCE", { value: pool ? poolValue(pool) : 0, cost }));
-      return false;
+    if(ceAuthorityEnabled()&&setting("autoSpendCE")&&managedCE(activity)){
+      if(ceContext(activity,usageConfig)?.state!=="reservingNative") return false;
+      return;
     }
+    if (!validActivityCE(actor, activity, usageConfig, { checkPool: setting("autoSpendCE") })) return false;
   });
-  Hooks.on("dnd5e.postUseActivity", async (activity, usageConfig) => {
+  Hooks.on("dnd5e.postUseActivity", async (activity, usageConfig, results) => {
     const actor = activity.actor ?? activity.item?.actor;
     const item = activity.item;
     const quantity = isCloneCreation(activity) ? cloneQuantity(activity, usageConfig) : 0;
@@ -684,20 +963,28 @@ function registerActivityHooks() {
     // Pay BEFORE opening domains or applying buffs. Failed CE payment must never
     // leave a benefit in place. The pre-use gate handles ordinary insufficient CE.
     if (setting("autoSpendCE") && actor && item) {
-      const cost = activityCost(activity)
-        + Number(item.flags?.jjk5e?.ceSteps?.[activity.id] ?? 0) * (Number(usageConfig?.scaling) || 0);
-      if (cost) {
-        if (!findPool(actor)) return ui.notifications.warn(t("Notify.NoPoolNotSpent", { name: actor.name }));
-        const paid = await spendCE(actor, cost,
-          `${item.name}${activity.name ? ` — ${activity.name}` : ""}`);
-        if (!paid) return;
-      }
+      if(ceAuthorityEnabled()&&managedCE(activity)){
+        const ctx=ceContext(activity,usageConfig);
+        if(ctx?.state!=="committed"||ctx.postProcessed) return;
+        ctx.postProcessed=true;
+      }else if (!(await payActivityCE(actor, activity, usageConfig))) return;
+    }
+    if(isQuickRecovery(activity)){
+      if(!results || typeof results!=="object" || CE_RECOVERY_RESULTS.has(results)) return;
+      CE_RECOVERY_RESULTS.add(results);
+      const deltas=results?.message?.system?.deltas?.item?.[item.id]??[];
+      const used=deltas.filter(x=>x.keyPath==="system.uses.spent").reduce((n,x)=>n+Number(x.delta||0),0);
+      if(Number.isSafeInteger(used)&&used>0) await spendCE(actor,-used,`${item.name} — ${t("CE.Regained")}`);
+      else ui.notifications.warn("Quick Recovery: no verified native consumption; restore CE manually after checking the feature's uses.");
+      return;
     }
     if (actor && /^Six Eyes \((Dormant|Stirring)\)$/.test(baseName(item)) &&
         /Perfect CE Manipulation/i.test(activity.name ?? "")) {
       await actor.setFlag(MODULE_ID, "sixEyesNext", true);
     }
     if (quantity) await createCombatClone(actor, quantity);
+    const ids = item?.flags?.jjk5e?.costMinusNext;
+    if (actor?.isOwner && Array.isArray(ids) && ids.includes(activity.id)) await actor.setFlag(MODULE_ID,"costMinusNext",true);
     const rawRegain = item?.flags?.jjk5e?.ceRegain?.[activity.id] ?? 0;
     const regain = typeof rawRegain === "string" && actor
       ? Number(dnd5e.utils.simplifyBonus(rawRegain, actor.getRollData())) || 0 : Number(rawRegain) || 0;
@@ -1484,7 +1771,7 @@ function onPreRollDamage(config) {
 /* -------------------------------------------- */
 
 async function openDomain(actor, item) {
-  if (!actor?.isOwner || !setting("domainTracking") || (!game.user.isGM && !game.users.activeGM)) return;
+  if (!actor?.isOwner || !setting("domainTracking") || domainOpen(actor) || (!game.user.isGM && !game.users.activeGM)) return;
   // Incomplete Domain (feat): 1 minute, refinement 0, no barrier, no sure hit; burnout 5 rounds.
   const incomplete = !!item?.flags?.jjk5e?.incompleteDomain;
   // V.6 Domain Refinement: Lasting Domain (500) 2 minutes, Total Mastery (1000) 3 minutes.
@@ -1809,12 +2096,15 @@ async function dismissSummons(actor) {
 /*  Effect expiry (when Times Up is not active)  */
 /* -------------------------------------------- */
 
+function externalEffectExpiry(){
+  return (Number(game.release?.generation)>=14&&!!game.modules.get("dae")?.active)||!!game.modules.get("times-up")?.active;
+}
 async function expireEffects() {
-  if (!isActiveGM() || !setting("autoExpire") || game.modules.get("times-up")?.active) return;
+  if (!isActiveGM() || !setting("autoExpire") || externalEffectExpiry()) return;
   const actors = new Set();
   game.combat?.combatants?.forEach((c) => c.actor && actors.add(c.actor));
-  canvas?.scene?.tokens?.forEach((tk) => tk.actor && actors.add(tk.actor));
-  game.actors?.forEach((a) => a.type === "character" && actors.add(a));
+  for (const scene of game.scenes ?? []) scene.tokens?.forEach((tk) => tk.actor && actors.add(tk.actor));
+  game.actors?.forEach((a) => actors.add(a));
   for (const actor of actors) {
     const ids = actor.effects.filter((e) => {
       const kind = e.flags?.jjk5e?.kind;
@@ -2055,8 +2345,7 @@ const PANEL_ACTIONS = {
     if (!pool) return;
     const n = await promptNumber(t("Panel.GMSetCE"), t("CE.Amount"), poolValue(pool));
     if (n === null) return;
-    const diff = poolValue(pool) - clamp(Number(n) || 0, 0, poolMax(pool));
-    if (diff) await spendCE(actor, diff, t("Panel.GMSetCE"));
+    await setExactCE(actor,Number(n));
   },
   ceSpend: (actor) => promptCE("spend", actor),
   ceRegain: (actor) => promptCE("regain", actor),
@@ -2553,6 +2842,7 @@ Hooks.once("init", () => {
     onChange: () => { if (game.user?.isGM) promptImport(false); }
   });
   reg("autoSpendCE", Boolean, true);
+  reg("transactionalCE", Boolean, false, { requiresReload: true });
   reg("playerGMRequests", Boolean, false);
   reg("ceChat", Boolean, true);
   reg("ceResource", String, "tertiary", {
@@ -2581,6 +2871,7 @@ Hooks.once("init", () => {
   if (CONFIG.queries) {
     CONFIG.queries[GM_QUERY] = (msg) => handleGMRequest(msg);
     CONFIG.queries[DOMAIN_QUERY] = (msg, context) => handleDomainAuthority(msg, context);
+    CONFIG.queries[CE_AUTH_QUERY] = (msg, context) => handleCEAuthority(msg, context);
   }
   game.settings.register(MODULE_ID, "privateCE", {
     name: "JJK5E.Settings.privateCE.Name", hint: "JJK5E.Settings.privateCE.Hint",
@@ -2658,11 +2949,19 @@ Hooks.once("ready", async () => {
   Hooks.on("dnd5e.preRollDamageV2", (config) => onPreRollDamage(config));
 
   Hooks.on("updateCombat", () => expireEffects());
+  for(const hook of ["dnd5e.preShortRest","dnd5e.preLongRest","dnd5e.preRestCompleted"]) {
+    Hooks.on(hook,actor=>{
+      if(ceAuthorityEnabled()&&cePending(findPool(actor))) {
+        ui.notifications.warn("JJK5e: settle pending CE reservations before resting.");
+        return false;
+      }
+    });
+  }
   Hooks.on("dnd5e.restCompleted", async (actor, result) => {
     if (!actor?.isOwner) return;
     if (result?.longRest) {
       const pool = findPool(actor);
-      if (pool && Number(pool.flags?.jjk5e?.fractionalSpent)) await pool.setFlag(MODULE_ID, "fractionalSpent", 0);
+      if (pool && (!ceAuthorityEnabled()||(!cePending(pool)&&isActiveGM()))) await queueCE(actor, () => pool.update({ "system.uses.spent": 0, "flags.jjk5e.fractionalSpent": 0 }, { jjk5eCE: true }));
       return;
     }
     const n = actor.items.reduce((tot, i) => tot + (Number(i.flags?.jjk5e?.srRegainCE) || 0), 0);
@@ -3251,7 +3550,9 @@ function tokenDistance(a, b) {
 
 function registerMidiHooks() {
   if (!midiActive()) return;
+  registerMidiCEBridge();
   Hooks.on("midi-qol.preAttackRoll", workflow => {
+    if(!midiCEGuard(workflow)) return false;
     const actor = workflow.actor;
     const attack = workflow.activity?.attack?.type?.value;
     if (attack !== "melee" || workflow.targets?.size !== 1 || !actor?.items.some(item =>
@@ -3275,7 +3576,7 @@ function registerMidiHooks() {
   // Midi decides each target's hit here (after cover, AC bonuses and reactions).
   Hooks.on("midi-qol.premades.checkHitTarget", (hitCheck) => {
     try {
-      if (!sureHit(hitCheck?.workflow, hitCheck?.target ?? hitCheck?.token)) return;
+      if (!midiCEGuard(hitCheck?.workflow)||!sureHit(hitCheck?.workflow, hitCheck?.target ?? hitCheck?.token)) return;
       hitCheck.isHit = true;
       if ("isHitEC" in hitCheck) hitCheck.isHitEC = true;
     } catch (err) { console.error(`${MODULE_ID} | midi sure-hit`, err); }
@@ -3283,7 +3584,7 @@ function registerMidiHooks() {
   // Older Midi builds without that hook: force the hit list afterwards.
   Hooks.on("midi-qol.hitsChecked", (workflow) => {
     try {
-      if (!workflow) return;
+      if (!workflow||!midiCEGuard(workflow)) return;
       excludeDomainWardedTargets(workflow);
       const eligible = [...(workflow.targets ?? [])].filter((t) => sureHit(workflow, t));
       if (eligible.length) workflow.hitTargets = new Set([...(workflow.hitTargets ?? []), ...eligible]);
@@ -3294,7 +3595,7 @@ function registerMidiHooks() {
   Hooks.on("midi-qol.postCheckSaves", (workflow) => {
     try {
       const item = workflow?.item;
-      if (!setting("domainSureHit") || !domainOpen(workflow?.actor) || !item?.flags?.jjk5e?.technique || sureHitBlocked(workflow?.actor)) return;
+      if (!midiCEGuard(workflow)||!setting("domainSureHit") || !domainOpen(workflow?.actor) || !item?.flags?.jjk5e?.technique || sureHitBlocked(workflow?.actor)) return;
       excludeDomainWardedTargets(workflow);
       const all = new Set([...(workflow.saves ?? []), ...(workflow.failedSaves ?? [])]);
       const forced = [...all].filter((token) => sureHit(workflow, token));
@@ -3304,11 +3605,12 @@ function registerMidiHooks() {
   });
   // Animations with Midi's real hit list.
   Hooks.on("midi-qol.RollComplete", (workflow) => {
+    if(!midiCEGuard(workflow)) return;
     onSoulWorkflow(workflow).catch((err) => console.error(`${MODULE_ID} | soul damage`, err));
   });
   Hooks.on("midi-qol.RollComplete", (workflow) => {
     try {
-      if (!animOn()) return;
+      if (!animOn()||!midiCEGuard(workflow)) return;
       const item = workflow?.item;
       const activity = workflow?.activity;
       if (!item?.flags?.jjk5e || aaHandles(item) || activity?.type !== "attack") return;
@@ -3423,7 +3725,10 @@ Hooks.once("ready", () => {
   });
   Hooks.on("renderAbilityScoreImprovementFlow", (app, element) => { injectASIFeats(app, element); });
   Hooks.on("dnd5e.rollAttackV2", (rolls, data) => animateAttack(rolls, data?.subject));
-  Hooks.on("dnd5e.postUseActivity", (activity) => { animateActivity(activity); summonFallback(activity); });
+  Hooks.on("dnd5e.postUseActivity", (activity,usageConfig) => {
+    if(!cePostOnce(activity,usageConfig,"animationSummon")) return false;
+    animateActivity(activity); summonFallback(activity);
+  });
   Hooks.on("renderCharacterActorSheet", (app, element) => addLevelUpButton(app, element));
   Hooks.on("renderActorSheetV2", (app, element) => addLevelUpButton(app, element));
   Hooks.on("updateActor", (actor, changes) => {
@@ -3431,7 +3736,9 @@ Hooks.once("ready", () => {
       if (app.document === actor && app.rendered) addLevelUpButton(app, app.element);
     }
   });
+  installCEAdapters();
   registerMidiHooks();
+  Object.assign(game.modules.get(MODULE_ID).api??{}, {ceDiagnostics,reconcileCE});
   if (game.user.isGM && setting("enableSummoning") && game.settings.settings?.has?.("dnd5e.allowSummoning")
     && !game.settings.get("dnd5e", "allowSummoning")) game.settings.set("dnd5e", "allowSummoning", true);
   Hooks.on("deleteActiveEffect", (effect) => {
@@ -3441,9 +3748,13 @@ Hooks.once("ready", () => {
     if (userId === game.user.id && foundry.utils.getProperty(changes, `flags.${MODULE_ID}.pendingBlackFlash`) === true) animateBlackFlash(actor);
   });
   Hooks.on("updateItem", () => { featDocsCache = null; });
-  Hooks.on("deleteActiveEffect", (effect, options, userId) => {
-    if (userId !== game.user.id || !(effect.flags?.jjk5e?.burnout || effect.flags?.jjk5e?.kind === "burnout")) return;
-    if (effect.parent?.documentName === "Actor") burnoutExhaustion(effect.parent, -1);
+  Hooks.on("deleteActiveEffect", (effect) => {
+    if (!isActiveGM() || !(effect.flags?.jjk5e?.burnout || effect.flags?.jjk5e?.kind === "burnout")) return;
+    const actor=effect.parent;
+    if(actor?.documentName==="Actor") return queueDomainWork(async()=>{
+      if(inBurnout(actor)) return;
+      await burnoutExhaustion(actor,-1);
+    });
   });
 });
 
@@ -4451,7 +4762,7 @@ function insideDomain(state, token) {
  * a finite barrier, so it must not be treated as unconditional immunity. */
 const DOMAIN_WARD_KINDS = new Set(["fallingBlossomDefense", "hollowWickerProtection", "domainAmplification"]);
 function liveWard(effect) {
-  return !!effect && !effect.disabled && effect.duration?.expired !== true &&
+  return !!effect && !effect.disabled && effect.isSuppressed!==true && effect.duration?.expired !== true &&
     (effect.duration?.remaining == null || effect.duration.remaining > 0);
 }
 function tokenLevelId(token) {
@@ -4507,12 +4818,18 @@ function domainGuaranteedTarget(workflow, target) {
 }
 function excludeDomainWardedTargets(workflow) {
   if (!workflow?.targets) return [];
+  // Do not strip allied targets from explicitly healing, summoning, teleport or utility activities.
+  const type=workflow.activity?.type;
+  if(type && !["attack","save","damage"].includes(type)) return [];
   const protectedTargets = [...workflow.targets].filter((tk) => domainGuaranteedTarget(workflow, tk) && domainWard(tk));
   if (!protectedTargets.length) return [];
   const ids = new Set(protectedTargets.map((tk) => (tk?.document ?? tk)?.uuid).filter(Boolean));
   const exclude = (tk) => protectedTargets.includes(tk) || ids.has((tk?.document ?? tk)?.uuid);
-  for (const key of ["targets", "hitTargets", "hitTargetsEC", "saves", "failedSaves", "applicationTargets"]) {
-    if (typeof workflow[key]?.has === "function") workflow[key] = new Set([...workflow[key]].filter((tk) => !exclude(tk)));
+  for (const key of ["targets", "hitTargets", "hitTargetsEC", "saves", "failedSaves", "applicationTargets", "effectTargets"]) {
+    if (typeof workflow[key]?.has === "function" && typeof workflow[key]?.delete==="function") {
+      // Midi TokenDocumentSets accept token documents; preserve their identity/record binding.
+      for(const tk of [...workflow[key]]) if(exclude(tk)) workflow[key].delete(tk);
+    }
   }
   return protectedTargets;
 }
@@ -4521,7 +4838,8 @@ function sureHitBlocked(actor) {
   const state = getDomain(actor);
   if (!state) return false;
   if (state.clash && !state.clash.resolved) return true;
-  const root = state.reactionRootUuid ? fromUuidSync(state.reactionRootUuid) : actor;
+  let root = actor;
+  if (state.reactionRootUuid) { try { root = fromUuidSync(state.reactionRootUuid); } catch (err) { root = null; } }
   const window = root?.getFlag?.(MODULE_ID, "domainReactionWindow");
   if (window?.status === "open" && (state.reactionRootUuid ? window.openingId === state.reactionRootOpening : window.openingId === state.openingId)) return true;
   return state.lethal === false || !!state.noSureHit;
@@ -4652,6 +4970,20 @@ async function domainClosed(actor) {
   const state = getDomain(actor);
   if (!state) return;
   if (state.zone) await GM_EXTRA.domainZoneDelete({ sceneId: state.sceneId, zone: state.zone, actorUuid: actor.uuid, openingId: state.openingId });
+  const window = actor.getFlag(MODULE_ID, "domainReactionWindow");
+  const survivors = [];
+  for (const offer of window?.offers ?? []) {
+    const responder = await domainActor(offer.actorUuid);
+    if (!responder) continue;
+    const claim = responder.getFlag(MODULE_ID, "domainReactionClaim");
+    if (offer.claimId && claim?.id === offer.claimId && claim.openerUuid === actor.uuid) await responder.unsetFlag(MODULE_ID, "domainReactionClaim");
+    const rs = getDomain(responder);
+    if (rs?.open && rs.reactionRootUuid === actor.uuid && rs.reactionRootOpening === state.openingId) {
+      rs.reactionRootUuid = null; rs.reactionRootOpening = null;
+      await setDomain(responder, rs);
+      survivors.push(responder);
+    }
+  }
   await actor.unsetFlag(MODULE_ID, "domainReactionWindow");
   const scene = state.sceneId && game.scenes.get(state.sceneId);
   const actors = [...new Map([...(game.actors?.contents ?? []), ...[...(scene?.tokens ?? [])].map((tk)=>tk.actor)]
@@ -4672,6 +5004,7 @@ async function domainClosed(actor) {
     }
   }
   await setDomain(actor, null);
+  if (window?.status === "open") for (const survivor of survivors) await detectClash(survivor);
   refreshDomainApps(actor);
 }
 
@@ -5052,8 +5385,12 @@ async function executeDomainProfile(actor, targets, requestId) {
       if (!Number.isFinite(roll?.total)) continue;
       success = roll.total >= profile.dc;
     }
+    // Saving throws may suspend the workflow while a token moves or a ward is activated.
+    const latest = getDomain(actor);
+    if (latest?.openingId !== state.openingId || !domainProfileTargets(actor,[tk]).length) continue;
     const roll = await new Roll(profile.damage).evaluate();
     await roll.toMessage?.({ speaker: docClass("ChatMessage").getSpeaker?.({actor}), flavor: esc(profile.name) });
+    if (getDomain(actor)?.openingId !== state.openingId || !domainProfileTargets(actor,[tk]).length) continue;
     const value = Math.max(0, Math.floor(roll.total * (success ? ({half:0.5,none:0,full:1})[profile.onSave] : 1)));
     if (value) await target.applyDamage([{ value, type: profile.damageType }]);
     if (!success && profile.condition !== "none") {
@@ -5071,11 +5408,18 @@ function domainActivities(actor) {
   return [...(item.system?.activities?.contents ?? Object.values(item.system?.activities ?? {}))]
     .filter((a) => a?.id && a.id !== item.flags.jjk5e.domainActivity);
 }
+function canUseDomainActivity(actor, activity) {
+  if (!actor || !getDomain(actor)?.open || !domainOpen(actor) || inBurnout(actor) || hasKind(actor,"domainAmplification")) return false;
+  const state = getDomain(actor);
+  if (state.domainItemUuid && activity.item?.uuid !== state.domainItemUuid) return false;
+  if (!domainActivities(actor).some((a) => a.id === activity.id)) return false;
+  if (/initiative\s*20/i.test(activity.name ?? "") && sureHitBlocked(actor)) return false;
+  return true;
+}
 async function runDomainActivity(actor, id) {
   if (!actor?.isOwner || !getDomain(actor)?.open || !domainOpen(actor)) return false;
   const activity = domainActivities(actor).find((a) => a.id === id);
-  if (!activity || typeof activity.use !== "function") return false;
-  if (/initiative\s*20/i.test(activity.name ?? "") && sureHitBlocked(actor)) return false;
+  if (!activity || typeof activity.use !== "function" || !canUseDomainActivity(actor,activity)) return false;
   return activity.use({ event: null }, { configure: true }, {});
 }
 function domainHudDetails(actor, state) {
@@ -5100,7 +5444,7 @@ async function toggleDomainAmplification(actor) {
   const dom = domainActivityOf(actor);
   if (!dom || dom.item.flags?.jjk5e?.incompleteDomain) return false;
   const active = kindEffect(actor, "domainAmplification");
-  if (active) { await safeDelete(active); return true; }
+  if (active) { const live = liveWard(active); await safeDelete(active); if (live) return true; }
   const until = Number(actor.getFlag(MODULE_ID, "amplificationUntil")) || 0;
   const now = Number(game.time?.worldTime) || 0;
   if (until <= now) {
@@ -5488,9 +5832,11 @@ Hooks.once("ready", () => {
   Hooks.on("renderTokenHUD", (hud, html) => { try { addTokenHUDButton(hud, html); } catch (err) { console.error(`${MODULE_ID} | token hud`, err); } });
   // Foundry 14 disables expired effects instead of deleting them: delete JJK timed effects so their cleanup runs.
   Hooks.on("updateActiveEffect", (effect, changes) => {
-    if (!isActiveGM() || changes?.disabled !== true) return;
+    if (!isActiveGM() || effect.parent?.documentName!=="Actor" || changes?.disabled !== true) return;
     const f = effect.flags?.jjk5e ?? {};
-    if (["zone", "burnout", "domain"].includes(f.kind) || f.domainOpen || f.burnout) safeDelete(effect);
+    // DAE can expire by disabling rather than deleting. Only terminal JJK lifecycle
+    // effects are converted to a deletion; never remove the source item's template.
+    if (["zone", "burnout", "domain"].includes(f.kind) || f.domainOpen || f.burnout) return safeDelete(effect);
   });
 });
 
@@ -5917,11 +6263,12 @@ const midiBlackFlashCards = new Set();
 
 /** Save DC of the creature that applied an effect (for OverTime repeat saves baked into the compendium data). */
 function originSaveDC(effect) {
-  let item = null;
-  try { item = effect?.origin ? fromUuidSync(effect.origin) : null; } catch (err) { item = null; }
-  const actor = item?.actor ?? (item?.documentName === "Actor" ? item : null);
+  let origin = null;
+  try { origin = effect?.origin ? fromUuidSync(effect.origin) : null; } catch (err) { origin = null; }
+  const item=origin?.documentName==="Item"?origin:origin?.item;
+  const actor = item?.actor ?? origin?.actor ?? (origin?.documentName === "Actor" ? origin : null);
   const dc = Number(actor?.system?.attributes?.spell?.dc) || Number(actor?.system?.attributes?.spelldc);
-  if (dc) return dc;
+  if (dc && !item?.flags?.jjk5e) return dc;
   const prof = Number(actor?.system?.attributes?.prof) || 2;
   const mod = Number(actor?.system?.abilities?.[actor ? ceAbility(actor) : "wis"]?.mod) || 0;
   return 8 + prof + mod;
@@ -5962,7 +6309,10 @@ function usesScalingToken(activity) {
 function recordScaling(activity, usageConfig) {
   const item = activity?.item;
   if (!item || !usesScalingToken(activity)) return;
-  const value = 1 + (Number(usageConfig?.scaling) || 0);
+  const scaling=Number(usageConfig?.scaling??0);
+  if(!Number.isSafeInteger(scaling)||scaling<0) return;
+  if(ceAuthorityEnabled()&&setting("autoSpendCE")&&managedCE(activity)&&ceContext(activity,usageConfig)?.state!=="reservingNative") return;
+  const value = 1 + scaling;
   LAST_SCALING.set(item.uuid, value);
   if (item.isOwner && item.getFlag(MODULE_ID, "lastScaling") !== value) item.setFlag(MODULE_ID, "lastScaling", value).catch(() => {});
 }
@@ -6004,8 +6354,10 @@ function registerMidiAutomation() {
   // Black Flash: check after Midi's attack roll, before its damage roll (Midi awaits these hooks).
   Hooks.on("midi-qol.AttackRollComplete", async (workflow) => {
     try {
+      if(!midiCEGuard(workflow)) return;
       const roll = workflow?.attackRoll;
-      if (!roll) return;
+      if (!roll || typeof roll!=="object" || CE_MIDI_ATTACKS.has(roll)) return;
+      CE_MIDI_ATTACKS.add(roll);
       if (workflow.isCritical && !roll.isCritical) {
         await onAttackRoll(Object.assign(Object.create(Object.getPrototypeOf(roll)), roll, { isCritical: true }), workflow.activity);
       } else await onAttackRoll(roll, workflow.activity);
@@ -7171,11 +7523,10 @@ Hooks.once("ready", () => {
     calledShotCheck(attacker, target, amount).catch((err) => reportError("called shot", err));
   });
   Hooks.on("dnd5e.advancementManagerComplete", (manager) => { afterAdvancement(manager).catch((err) => reportError("advancement", err)); });
-  Hooks.on("dnd5e.postUseActivity", (activity) => {
+  Hooks.on("dnd5e.postUseActivity", (activity,usageConfig) => {
+    if(!cePostOnce(activity,usageConfig,"optionalAction")) return false;
     const actor = activity?.actor ?? activity?.item?.actor;
-    const ids = activity?.item?.flags?.jjk5e?.costMinusNext;
-    if (Array.isArray(ids) && ids.includes(activity.id) && actor?.isOwner) actor.setFlag(MODULE_ID, "costMinusNext", true);
-    else if (activity?.item?.flags?.jjk5e?.technique && actor?.getFlag?.(MODULE_ID, "costMinusNext") && actor.isOwner) actor.unsetFlag(MODULE_ID, "costMinusNext");
+
     onOptionalAction(activity).catch((err) => reportError("optional action", err));
     // Items that roll the Limb Damage table for their targets (e.g. Judicial Amputation).
     const limb = activity?.item?.flags?.jjk5e?.limbRoll;
@@ -7276,6 +7627,7 @@ Hooks.once("ready", () => {
   }
   if (midiActive()) {
     Hooks.on("midi-qol.RollComplete", (workflow) => {
+      if(!midiCEGuard(workflow)) return;
       calledShotResult(workflow).catch((err) => reportError("called shot", err));
       coupResult(workflow).catch((err) => reportError("coup", err));
       if (optOn("executionEvasion") && /Executioner|Verdugo/i.test(workflow?.activity?.name ?? "")) {
@@ -7521,7 +7873,8 @@ function deciders(actor) {
 function reactionWindow(opener) {
   const win = foundry.utils.deepClone(opener?.getFlag?.(MODULE_ID, "domainReactionWindow") ?? null);
   const state = getDomain(opener);
-  if (!win || win.status !== "open" || !state?.open || win.openingId !== state.openingId || Date.now() >= win.expires) return null;
+  if (!win || win.status !== "open" || !state?.open || win.openingId !== state.openingId || !Number.isFinite(win.expires) ||
+      !Array.isArray(win.offers) || Date.now() >= win.expires) return null;
   if (win.combatId) {
     const combat = game.combats?.get?.(win.combatId) ?? (game.combat?.id === win.combatId ? game.combat : null);
     if (!combat || combat.round !== win.round || combat.turn !== win.turn) return null;
@@ -7572,6 +7925,11 @@ async function settleReactionWindow(opener) {
   if (!isActiveGM() || !getDomain(opener)?.open) return false;
   const raw = foundry.utils.deepClone(opener.getFlag(MODULE_ID, "domainReactionWindow"));
   if (!raw) { await detectClash(opener); return true; }
+  if (raw.openingId !== getDomain(opener)?.openingId || !Array.isArray(raw.offers)) {
+    await opener.unsetFlag(MODULE_ID, "domainReactionWindow");
+    await detectClash(opener);
+    return true;
+  }
   if (raw.status === "resolved") return true;
   if (reactionWindow(opener) && raw.offers.some((o) => ["pending", "claimed"].includes(o.status))) return false;
   raw.status = "resolved";
@@ -7678,11 +8036,15 @@ Hooks.once("ready", () => {
     if (!isActiveGM()) return;
     const actors = [...(game.actors?.contents ?? []), ...[...(game.scenes ?? [])].flatMap((scene) => [...(scene.tokens ?? [])].map((tk) => tk.actor))];
     const pending = [...new Map(actors.filter((a) => a?.uuid && a.getFlag(MODULE_ID, "domainReactionWindow")?.status === "open").map((a) => [a.uuid, a])).values()];
-    if (pending.length) return queueDomainWork(async () => { for (const actor of pending) await settleReactionWindow(actor); });
+    if (pending.length) return queueDomainWork(async () => {
+      for (const actor of pending) {
+        try { await settleReactionWindow(actor); } catch (err) { reportError("domain window",err); }
+      }
+    });
   };
   Hooks.on("updateCombat", (combat, changes) => { if ("round" in changes || "turn" in changes) return settleWindows(); });
   Hooks.on("userConnected", () => settleWindows());
-  setInterval(() => settleWindows(), 5000);
+  setInterval(() => { settleWindows()?.catch?.((err) => reportError("domain recovery",err)); }, 5000);
   settleWindows();
   game.socket?.on?.(`module.${MODULE_ID}`, (msg) => {
     if (msg?.type !== "jjkClashOffer" || !msg.users?.includes(game.user.id)) return;

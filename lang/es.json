@@ -280,6 +280,7 @@
       "RegainShort": "Recuperar"
     },
     "Notify": {
+      "CEWorkflowUnverified": "JJK5e: no se pudo verificar el pago de EM de esta actividad de Midi-QOL. Se detuvo la ejecución; consulta al GM.",
       "NoActor": "JJK 5e: selecciona un token o asigna un personaje primero.",
       "NotOwner": "JJK 5e: no eres dueño de ese actor.",
       "HRNoTechnique": "JJK 5e: Heavenly Restriction no tiene Técnica Innata.",
@@ -320,6 +321,10 @@
       "autoSpendCE": {
         "Name": "Gasto automático de Energía Maldita",
         "Hint": "Los rasgos con costo fijo de EM lo descuentan de la reserva y se bloquean si no alcanza. Los costos escalables usan el campo de escalado."
+      },
+      "transactionalCE": {
+        "Name": "Transacciones de EM con autoridad del GM (experimental)",
+        "Hint": "Vista previa de desarrollo. Requiere GM activo y adaptador de actividad libWrapper funcional. Un consumo fallido o interrumpido queda pendiente de revisión explícita del GM. No activar en una campaña real antes de probar."
       },
       "ceChat": {
         "Name": "Mensajes de Energía Maldita en el chat",
