@@ -429,7 +429,7 @@ test("UI: every panel button has a handler and runs without errors (all tabs)", 
   const { env, actor, J } = await setup();
   env.game.user.character = actor;
   const actions = new Set();
-  for (const tab of ["combat", "body", "summon", "tools"]) {
+  for (const tab of ["combat", "body", "summon", "tools", "gm"]) {
     const html = J.panelHTML(actor, tab);
     for (const m of html.matchAll(/data-action="(\w+)"/g)) actions.add(m[1]);
   }
@@ -473,4 +473,21 @@ test("UI: vows, career, domain HUD and the JJK menu render and their buttons run
       catch (err) { assert.fail(`${app.constructor.name}.${m[1]}: ${err.stack ?? err}`); }
     }
   }
+});
+
+test("Player view: no GM overrides in the panel, private CE messages, limited view of others' domains", async () => {
+  const { env, actor, J } = await setup();
+  await J.setKindEffect(actor, "burnout", { name: "Burnout", flags: { jjk5e: { burnout: true } } });
+  await J.applySoulDamage(actor, 3);
+  env.game.user.isGM = false;
+  const all = ["combat", "body", "summon", "tools", "gm"].map((tab) => J.panelHTML(actor, tab)).join("");
+  for (const a of J.GM_PANEL_ACTIONS) assert.ok(!all.includes(`data-action="${a}"`), `player sees ${a}`);
+  assert.ok(!all.includes('data-tab="gm"'), "no GM tab");
+  assert.match(all, /Panel\.Player/);
+  env.game.user.isGM = true;
+  assert.match(J.panelHTML(actor, "gm"), /data-action="gmCE"/);
+  // CE chat goes to owners and GMs only
+  env.chat.length = 0;
+  await J.spendCE(actor, 1);
+  assert.deepEqual([...env.chat.at(-1).whisper], ["gm"]);
 });

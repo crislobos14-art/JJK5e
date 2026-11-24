@@ -142,3 +142,5 @@ button.jjk5e-levelup { display: block; margin: 4px auto 0; padding: 2px 10px; fo
 .jjk5e-panel-app.jjk-busy .window-content { opacity: 0.6; pointer-events: none; cursor: progress; }
 .jjk-help table { width: 100%; }
 .jjk-help kbd { font-family: monospace; padding: 0 4px; border: 1px solid #888; border-radius: 3px; background: rgba(0,0,0,0.08); }
+.jjk-role { font-size: 10px; font-weight: bold; padding: 0 6px; border-radius: 8px; background: #2f6f4f; color: #fff; vertical-align: middle; }
+.jjk-role.gm { background: #b8860b; }

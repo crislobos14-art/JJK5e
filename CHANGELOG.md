@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.65.0 — Vista de jugador y vista de GM
+- **Panel según el rol**: el jugador ve su personaje y lo que puede usar; los ajustes manuales (terminar Burnout, Zone o Black Flash, subir o bajar Reduced Output y Soul Awareness, marcar extremidades, aplicar o quitar daño al alma) quedan solo para el GM. Etiqueta *Jugador* o *GM* en la cabecera.
+- **Pestaña GM** (solo la ve el GM): fijar CE, refinamiento de dominio, breakthroughs, daño al alma, terminar efectos, cerrar dominio y actualizar la automatización de todos los actores. Atajo 5.
+- Las acciones del GM se rechazan aunque un jugador intente llamarlas.
+- **Mensajes de CE privados** (ajuste de mundo, activo por defecto): las líneas de CE gastado o recuperado solo las ven los dueños del personaje y el GM.
+- **HUD de dominio ajeno**: un jugador que mira el dominio de otro solo ve el porcentaje de la barrera, sin PG, CA ni refinamiento exactos. Editar el refinamiento es solo del GM.
+- Votos y carrera solo se abren para personajes propios.
+
 ## 1.64.0 — Panel JJK más rápido, con pestañas y atajos
 - **Panel JJK rediseñado** en 4 pestañas: Combate, Cuerpo, Invocaciones y Herramientas. La pestaña Combate muestra un contador de estados activos (dominio, Burnout, Zone, Black Flash, daño al alma, Reduced Output).
 - **Gasto rápido de CE**: −5, −1, +1 y +5, más un campo de cantidad con Gastar y Recuperar directos, sin ventana emergente. La barra se pone roja con 25 % o menos.

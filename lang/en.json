@@ -230,7 +230,13 @@
         "help": "This help",
         "tabs": "Switch tab",
         "five": "Spend / regain 5 CE"
-      }
+      },
+      "TabGM": "GM",
+      "Player": "Player",
+      "GMHint": "GM tools: only you see this tab.",
+      "GMValues": "Values",
+      "GMClear": "End effects",
+      "GMSetCE": "Set CE"
     },
     "Notify": {
       "NoActor": "JJK 5e: select a token or assign a character first.",
@@ -249,7 +255,7 @@
       "NoGM": "JJK 5e: a GM must be connected to summon or dismiss tokens.",
       "NeedDnd5e": "JJK 5e V.6 requires the D&D 5e system.",
       "NoInspiration": "JJK 5e: {name} has no inspiration to use this mindset.",
-      "GMOnly": "Only the GM can do that.",
+      "GMOnly": "Only the GM can do this.",
       "GMDeclined": "The GM declined or did not answer the request.",
       "ActionFailed": "JJK 5e — {action} failed: {error}",
       "NoScene": "Open a scene first."
@@ -411,6 +417,10 @@
         "Name": "Update items on actors",
         "Label": "Update automation",
         "Hint": "Replace the automation of JJK items already on actors with the current compendium version (keeps per-character state)."
+      },
+      "privateCE": {
+        "Name": "Private CE messages",
+        "Hint": "CE spent/regained chat lines are only shown to the character's owners and the GM."
       }
     },
     "Feats": {
@@ -711,7 +721,8 @@
       "Keeps": "Kept: uses spent, quantity, equipped/attuned, advancement choices, personal shikigami and your CE ability. Replaced: activities, effects, description and JJK flags.",
       "Done": "{name}: {n} item(s) updated.",
       "DoneWorld": "{n} item(s) updated on {actors} actor(s).",
-      "Notice": "JJK 5e {version}: {n} actor(s) have items with outdated automation."
+      "Notice": "JJK 5e {version}: {n} actor(s) have items with outdated automation.",
+      "AllActors": "Update automation of all actors"
     },
     "Multiclass": {
       "PureBody": "Heavenly Restriction (Pure Body) cannot multiclass",

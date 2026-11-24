@@ -107,6 +107,15 @@ function requireActor(actor) {
   return actor;
 }
 
+/** Chat options that show a message only to the actor's owners and the GMs (world setting "privateCE"). */
+function privateTo(actor) {
+  let on = true;
+  try { on = game.settings.get(MODULE_ID, "privateCE") !== false; } catch (err) { /* default: private */ }
+  if (!on || !actor) return {};
+  const users = (game.users ?? []).filter((u) => u.isGM || actor.testUserPermission?.(u, "OWNER")).map((u) => u.id);
+  return users.length ? { whisper: users } : {};
+}
+
 async function chat(actor, content, extra = {}) {
   const Chat = docClass("ChatMessage");
   return Chat.create({ speaker: Chat.getSpeaker({ actor }), content, ...extra });
@@ -450,7 +459,8 @@ async function doSpendCE(actor, amount, label = "") {
   if (setting("ceChat")) {
     const verb = charge >= 0 ? `−${charge}` : `+${-charge}`;
     await chat(actor, `<p><strong>${esc(label || t("CE.Name"))}</strong>: ${verb} CE `
-      + `<span style="opacity:.8">(${t("CE.Remaining", { value: result.remaining, max: maximum })})</span></p>`);
+      + `<span style="opacity:.8">(${t("CE.Remaining", { value: result.remaining, max: maximum })})</span></p>`,
+    privateTo(actor));
   }
   return true;
 }
@@ -1791,7 +1801,8 @@ const PANEL_TABS = [["combat", "fa-solid fa-bolt", "Panel.TabCombat"], ["body", 
 
 // Keys inside the panel (when no text field has focus). Global shortcuts are in Configure Controls.
 const PANEL_KEYS = { "-": "ceMinus", "+": "cePlus", "=": "cePlus", "_": "ceMinus5", "*": "cePlus5", m: "maxOutput",
-  r: "shortRest", n: "negEmotion", l: "limbRoll", "?": "help", 1: "tab:combat", 2: "tab:body", 3: "tab:summon", 4: "tab:tools" };
+  r: "shortRest", n: "negEmotion", l: "limbRoll", "?": "help", 1: "tab:combat", 2: "tab:body", 3: "tab:summon", 4: "tab:tools",
+  5: "tab:gm" };
 
 /** Button with icon, label and a tooltip that names its shortcut. */
 function pbtn(action, icon, label, { key = "", cls = "", data = "", tip = "" } = {}) {
@@ -1801,6 +1812,8 @@ function pbtn(action, icon, label, { key = "", cls = "", data = "", tip = "" } =
 }
 
 function panelHTML(actor, tab = "combat") {
+  const gm = !!game.user.isGM;
+  if (tab === "gm" && !gm) tab = "combat";
   const pool = findPool(actor);
   const value = pool ? poolValue(pool) : 0;
   const max = pool ? poolMax(pool) : 0;
@@ -1813,13 +1826,15 @@ function panelHTML(actor, tab = "combat") {
   const zone = zoneEffect(actor);
   const zoneStacks = Number(zone?.flags?.jjk5e?.zone) || 0;
   const hr = isHeavenlyOnly(actor);
+  // Players see their state; only the GM gets the "×" overrides (closing your own domain is allowed).
   const statusRow = (on, label, action) => `<span class="jjk-chip ${on ? "on" : ""}">${label}${on && action
-    ? ` <a data-action="${action}" data-tooltip="${t("Common.End")}"><i class="fas fa-times"></i></a>` : ""}</span>`;
+    && (gm || action === "closeDomain") ? ` <a data-action="${action}" data-tooltip="${t("Common.End")}"><i class="fas fa-times"></i></a>` : ""}</span>`;
   const limbRows = LIMBS.map((l) => {
     const st = limbs[l.key] ?? "ok";
     const btn = (s) => `<button type="button" class="${st === s ? "active" : ""}" data-action="limb" data-limb="${l.key}" data-status="${s}">${t(`Limb.${s}`)}</button>`;
+    const cell = gm ? `${btn("ok")}${btn("broken")}${btn("lost")}` : `<span class="jjk-chip ${st === "ok" ? "" : "on"}">${t(`Limb.${st}`)}</span>`;
     return `<tr class="limb-${st}"><td>${t(`Limb.${l.key}`)}</td><td class="num">${limbThreshold(actor, l)}</td>`
-      + `<td class="num">${limbThreshold(actor, l) * 2}</td><td class="btns">${btn("ok")}${btn("broken")}${btn("lost")}</td></tr>`;
+      + `<td class="num">${limbThreshold(actor, l) * 2}</td><td class="btns">${cell}</td></tr>`;
   }).join("");
   const soulList = SOUL_ABILITIES.slice(0, soul).map((n) => `<li>${n}</li>`).join("");
   const suggestions = [...new Set([...Object.keys(SUMMON_ALIASES).map((k) => k.replace(/\b\w/g, (c) => c.toUpperCase())),
@@ -1829,7 +1844,8 @@ function panelHTML(actor, tab = "combat") {
   const alerts = [domainOpen(actor), inBurnout(actor), !!zone, !!actor.getFlag(MODULE_ID, "pendingBlackFlash"), sd > 0, ro > 0]
     .filter(Boolean).length;
 
-  const tabs = `<nav class="jjk-tabs">${PANEL_TABS.map(([id, icon, label], i) => `<button type="button" class="${id === tab ? "active" : ""}"
+  const tabList = gm ? [...PANEL_TABS, ["gm", "fa-solid fa-crown", "Panel.TabGM"]] : PANEL_TABS;
+  const tabs = `<nav class="jjk-tabs">${tabList.map(([id, icon, label], i) => `<button type="button" class="${id === tab ? "active" : ""}"
     data-action="tab" data-tab="${id}" data-tooltip="${t(label)} [${i + 1}]"><i class="${icon}"></i> ${t(label)}${id === "combat" && alerts
     ? ` <span class="jjk-badge">${alerts}</span>` : ""}</button>`).join("")}</nav>`;
 
@@ -1853,7 +1869,7 @@ function panelHTML(actor, tab = "combat") {
         ${statusRow(inBurnout(actor), t("Burnout.Name"), "clearBurnout")}
         ${statusRow(!!zone, zone ? `${t("Zone.Name")} ×${zoneStacks}` : t("Zone.Name"), "clearZone")}
         ${statusRow(!!actor.getFlag(MODULE_ID, "pendingBlackFlash"), "Black Flash ×3", "clearBF")}
-        ${sd ? statusRow(true, `<i class="fas fa-ghost"></i> ${t("Soul.Name")} −${sd}`, game.user.isGM ? "clearSoul" : "") : ""}
+        ${sd ? statusRow(true, `<i class="fas fa-ghost"></i> ${t("Soul.Name")} −${sd}`, "clearSoul") : ""}
         ${activeGroups(actor).map((g) => `<span class="jjk-chip on">${t(`Group.${g}`)} <a data-action="endGroup" data-group="${g}" data-tooltip="${t("Common.End")}"><i class="fas fa-times"></i></a></span>`).join("")}
       </div>
       <div class="jjk-row">
@@ -1864,16 +1880,15 @@ function panelHTML(actor, tab = "combat") {
       <div class="jjk-row">
         ${pbtn("maxOutput", "fas fa-bolt", t("Output.Max"), { key: "M" })}
         <span class="jjk-lbl">${t("Output.Reduced")}</span>
-        ${pbtn("roDown", "", "−", { tip: t("Output.Reduced") + " −1" })}<strong class="jjk-num">${ro}</strong>${pbtn("roUp", "", "+", { tip: t("Output.Reduced") + " +1" })}
+        ${gm ? pbtn("roDown", "", "−", { tip: t("Output.Reduced") + " −1" }) : ""}<strong class="jjk-num">${ro}</strong>${gm ? pbtn("roUp", "", "+", { tip: t("Output.Reduced") + " +1" }) : ""}
       </div>
       ${ro ? `<p class="jjk-note">${RO_ROWS[ro]}</p>` : ""}</fieldset>`}`;
 
   const body = `<fieldset><legend>${t("Soul.Awareness")}</legend>
-      <div class="jjk-row">${pbtn("soulDown", "", "−")}<strong class="jjk-num">${soul}</strong>${pbtn("soulUp", "", "+")}</div>
+      <div class="jjk-row">${gm ? pbtn("soulDown", "", "−") : ""}<strong class="jjk-num">${soul}</strong>${gm ? pbtn("soulUp", "", "+") : ""}</div>
       ${soul ? `<ul class="jjk-list">${soulList}</ul>` : ""}</fieldset>
     <fieldset><legend>${t("Soul.Name")}</legend>
-      <div class="jjk-row"><span>${sd ? `−${sd} ${t("Soul.MaxHP")}` : "—"}</span>
-      ${game.user.isGM ? pbtn("soulDamage", "fas fa-ghost", t("Soul.Apply")) + (sd ? pbtn("clearSoul", "fas fa-xmark", t("Soul.Clear")) : "") : ""}</div></fieldset>
+      <div class="jjk-row"><span>${sd ? `−${sd} ${t("Soul.MaxHP")}` : "—"}</span></div></fieldset>
     <fieldset><legend>${t("Limb.Title")}</legend>
       <table class="jjk-limbs"><thead><tr><th></th><th>${t("Limb.Broken")}</th><th>${t("Limb.Lost")}</th><th></th></tr></thead>
       <tbody>${limbRows}</tbody></table>
@@ -1902,19 +1917,36 @@ function panelHTML(actor, tab = "combat") {
       ${pbtn("help", "fas fa-keyboard", t("Panel.Shortcuts"), { key: "?" })}
     </div></fieldset>`;
 
+  const bt = Number(actor.getFlag(MODULE_ID, "breakthroughs")) || 0;
+  const gmTab = gm ? `<p class="jjk-note">${t("Panel.GMHint")}</p>
+    <fieldset><legend>${t("Panel.GMValues")}</legend><div class="jjk-grid">
+      ${pool ? pbtn("gmCE", "fas fa-bolt", `${t("Panel.GMSetCE")} (${value}/${max})`) : ""}
+      ${pbtn("gmRefinement", "fas fa-circle-half-stroke", `${t("Domain.Refinement")}: ${refinementOf(actor)}`)}
+      <span class="jjk-row">${t("Breakthrough.Name")}: ${pbtn("gmBreakthrough", "", "−", { data: 'data-d="-"' })}<strong class="jjk-num">${bt}</strong>${pbtn("gmBreakthrough", "", "+", { data: 'data-d="+"' })}</span>
+      ${pbtn("soulDamage", "fas fa-ghost", t("Soul.Apply"))}
+      ${sd ? pbtn("clearSoul", "fas fa-xmark", t("Soul.Clear")) : ""}
+    </div></fieldset>
+    <fieldset><legend>${t("Panel.GMClear")}</legend><div class="jjk-grid">
+      ${inBurnout(actor) ? pbtn("clearBurnout", "fas fa-brain", `${t("Common.End")}: ${t("Burnout.Name")}`) : ""}
+      ${zone ? pbtn("clearZone", "fas fa-bolt-lightning", `${t("Common.End")}: ${t("Zone.Name")}`) : ""}
+      ${actor.getFlag(MODULE_ID, "pendingBlackFlash") ? pbtn("clearBF", "fas fa-xmark", `${t("Common.End")}: Black Flash`) : ""}
+      ${domainOpen(actor) ? pbtn("closeDomain", "fas fa-circle-xmark", t("Domain.Close")) : ""}
+      ${pbtn("updateAll", "fas fa-arrows-rotate", t("Update.AllActors"))}
+    </div></fieldset>` : "";
+
   return `
   <section class="jjk-panel" data-tab="${tab}">
     <header class="jjk-head">
       <img src="${ICONS}/ce.svg" alt="">
       <div>
-        <div class="jjk-name">${esc(actor.name)}</div>
+        <div class="jjk-name">${esc(actor.name)} <span class="jjk-role ${gm ? "gm" : ""}">${gm ? "GM" : t("Panel.Player")}</span></div>
         <div class="jjk-sub">${hr ? t("Panel.HR") : `${t("Panel.Technique")}: <strong>${esc(tech ?? t("Panel.None"))}</strong>`}
           ${hr ? "" : ` · ${t("Panel.CEAbility")}: <strong>${ab ? ab.toUpperCase() : "?"}</strong>`}</div>
       </div>
       <div class="jjk-head-btns">${pbtn("help", "fas fa-keyboard", "", { key: "?", tip: t("Panel.Shortcuts") })}</div>
     </header>
     ${tabs}
-    <div class="jjk-tab-body">${{ combat, body, summon: summonTab, tools }[tab] ?? combat}</div>
+    <div class="jjk-tab-body">${{ combat, body, summon: summonTab, tools, gm: gmTab }[tab] ?? combat}</div>
   </section>`;
 }
 
@@ -1948,6 +1980,22 @@ const PANEL_ACTIONS = {
   career: (actor) => openCareer(actor),
   hotbar: (actor) => fillHotbar(actor),
   help: () => showShortcuts(),
+  updateAll: () => updateAllAutomation(),
+  gmRefinement: async (actor) => {
+    const n = await promptNumber(t("Domain.Refinement"), t("Domain.RefinementPrompt"), refinementOf(actor));
+    if (n) await actor.setFlag(MODULE_ID, "refinement", clamp(n, 1, 1000));
+  },
+  gmBreakthrough: async (actor, target) => {
+    const n = (Number(actor.getFlag(MODULE_ID, "breakthroughs")) || 0) + (target.dataset.d === "-" ? -1 : 1);
+    await actor.setFlag(MODULE_ID, "breakthroughs", Math.max(0, n));
+  },
+  gmCE: async (actor) => {
+    const pool = findPool(actor);
+    if (!pool) return;
+    const n = await promptNumber(t("Panel.GMSetCE"), t("CE.Amount"), poolValue(pool));
+    const diff = poolValue(pool) - clamp(Number(n) || 0, 0, poolMax(pool));
+    if (diff) await spendCE(actor, diff, t("Panel.GMSetCE"));
+  },
   ceSpend: (actor) => promptCE("spend", actor),
   ceRegain: (actor) => promptCE("regain", actor),
   negEmotion: (actor) => negativeEmotion(actor),
@@ -1983,6 +2031,10 @@ const PANEL_ACTIONS = {
   }
 };
 
+// Overrides that only the GM may use (hidden for players and refused if called anyway).
+const GM_PANEL_ACTIONS = new Set(["clearBurnout", "clearZone", "clearBF", "clearSoul", "soulDamage", "roUp", "roDown",
+  "soulUp", "soulDown", "limb", "gmRefinement", "gmBreakthrough", "gmCE", "updateAll"]);
+
 function makePanelClass() {
   const Base = foundry.applications?.api?.ApplicationV2;
   if (!Base) return null;
@@ -1991,6 +2043,7 @@ function makePanelClass() {
     actions[name] = async function (event, target) {
       // One action at a time: further clicks are ignored until it finishes (no double spending).
       if (this._busy) return;
+      if (GM_PANEL_ACTIONS.has(name) && !game.user.isGM) return ui.notifications.warn(t("Notify.GMOnly"));
       this._busy = true;
       this.element?.classList?.add("jjk-busy");
       try { await fn(this.actor, target, this.element, this); } catch (err) { reportError(name, err); }
@@ -2464,6 +2517,10 @@ Hooks.once("init", () => {
     hint: "JJK5E.Settings.updateMenu.Hint", icon: "fas fa-arrows-rotate", type: JJKUpdateMenu, restricted: true
   });
   if (CONFIG.queries) CONFIG.queries[GM_QUERY] = (msg) => handleGMRequest(msg);
+  game.settings.register(MODULE_ID, "privateCE", {
+    name: "JJK5E.Settings.privateCE.Name", hint: "JJK5E.Settings.privateCE.Hint",
+    scope: "world", config: true, type: Boolean, default: true
+  });
   game.settings.register(MODULE_ID, "lastSeenVersion", { scope: "world", config: false, type: String, default: "" });
 
   game.modules.get(MODULE_ID).api = {
@@ -3926,6 +3983,7 @@ let JJKVowsClass = null;
 function openVows(actor) {
   actor = requireActor(actor);
   if (!actor) return;
+  if (!actor.isOwner) return ui.notifications.warn(t("Notify.NotOwner"));
   JJKVowsClass ??= makeVowClass();
   let app = VOW_APPS.get(actor.uuid);
   if (!app) { app = new JJKVowsClass({ id: `jjk5e-vows-${actor.id}` }); app.actor = actor; VOW_APPS.set(actor.uuid, app); }
@@ -3997,6 +4055,7 @@ let JJKCareerClass = null;
 function openCareer(actor) {
   actor = requireActor(actor);
   if (!actor) return;
+  if (!actor.isOwner) return ui.notifications.warn(t("Notify.NotOwner"));
   JJKCareerClass ??= makeCareerClass();
   let app = CAREER_APPS.get(actor.uuid);
   if (!app) { app = new JJKCareerClass({ id: `jjk5e-career-${actor.id}` }); app.actor = actor; CAREER_APPS.set(actor.uuid, app); }
@@ -4516,6 +4575,7 @@ function makeDomainClass() {
         },
         weak: function () { findWeakSpot(this.actor); },
         ref: async function () {
+          if (!game.user.isGM) return ui.notifications.warn(t("Notify.GMOnly"));
           const n = await promptNumber(t("Domain.Refinement"), t("Domain.RefinementPrompt"), refinementOf(this.actor));
           if (n) { await this.actor.setFlag(MODULE_ID, "refinement", clamp(n, 1, 1000)); this.render(); }
         },
@@ -4541,9 +4601,16 @@ function makeDomainClass() {
       const ref = refinementOf(this.actor);
       if (!s?.open) {
         return `<section class="jjk-panel"><p>${t("Domain.Closed")}</p><p>${t("Domain.Refinement")}: <strong>${ref}</strong>
-          ${this.actor.isOwner ? ` <button type="button" data-action="ref">${t("Common.Edit")}</button>` : ""}</p></section>`;
+          ${game.user.isGM ? ` <button type="button" data-action="ref">${t("Common.Edit")}</button>` : ""}</p></section>`;
       }
-      const pct = Math.round((s.hp / s.max) * 100);
+      const pct = s.max ? Math.round((s.hp / s.max) * 100) : 0;
+      if (!this.actor.isOwner && !game.user.isGM) {
+        // Someone else's domain: the barrier state only, without its exact numbers.
+        return `<section class="jjk-panel"><div class="jjk-barrier"><div class="fill" style="width:${pct}%"></div><span>${pct}%</span></div>
+          ${s.clash ? `<p class="jjk-chip on">${t("Domain.Clash")}</p>` : ""}
+          <div class="btns"><button type="button" data-action="hit"><i class="fas fa-hammer"></i> ${t("Domain.HitBarrier")}</button>
+          <button type="button" data-action="weak"><i class="fas fa-crosshairs"></i> ${t("Domain.WeakSpot")}</button></div></section>`;
+      }
       const clash = s.clash ? `<p class="jjk-chip ${s.clash.resolved ? "on" : ""}">${t("Domain.Clash")}: ${t(`Domain.Role.${s.clash.role}`)}`
         + `${s.clash.rounds != null && !s.clash.resolved ? ` · ${t("Domain.RoundsLeft", { n: s.clash.rounds })}` : ""}</p>` : "";
       const mode = s.balanced ? t("Domain.Balanced") : (s.flipped ? t("Domain.Flipped") : t("Domain.Normal"));

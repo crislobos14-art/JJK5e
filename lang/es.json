@@ -230,7 +230,13 @@
         "help": "Esta ayuda",
         "tabs": "Cambiar de pestaña",
         "five": "Gastar / recuperar 5 CE"
-      }
+      },
+      "TabGM": "GM",
+      "Player": "Jugador",
+      "GMHint": "Herramientas del GM: solo tú ves esta pestaña.",
+      "GMValues": "Valores",
+      "GMClear": "Terminar efectos",
+      "GMSetCE": "Fijar CE"
     },
     "Notify": {
       "NoActor": "JJK 5e: selecciona un token o asigna un personaje primero.",
@@ -249,7 +255,7 @@
       "NoGM": "JJK 5e: debe haber un GM conectado para invocar o retirar tokens.",
       "NeedDnd5e": "JJK 5e V.6 necesita el sistema D&D 5e.",
       "NoInspiration": "JJK 5e: {name} no tiene inspiración para usar este mindset.",
-      "GMOnly": "Solo el GM puede hacer eso.",
+      "GMOnly": "Solo el GM puede hacer esto.",
       "GMDeclined": "El GM rechazó o no respondió la petición.",
       "ActionFailed": "JJK 5e — falló {action}: {error}",
       "NoScene": "Primero abre una escena."
@@ -411,6 +417,10 @@
         "Name": "Actualizar objetos de los actores",
         "Label": "Actualizar automatización",
         "Hint": "Reemplaza la automatización de los objetos JJK que ya tienen los actores por la versión actual del compendio (conserva el estado de cada personaje)."
+      },
+      "privateCE": {
+        "Name": "Mensajes de CE privados",
+        "Hint": "Las líneas de chat de CE gastado o recuperado solo las ven los dueños del personaje y el GM."
       }
     },
     "Feats": {
@@ -711,7 +721,8 @@
       "Keeps": "Se conserva: usos gastados, cantidad, equipado/sintonizado, elecciones de avance, shikigami personales y tu habilidad de CE. Se reemplaza: actividades, efectos, descripción y flags JJK.",
       "Done": "{name}: {n} objeto(s) actualizado(s).",
       "DoneWorld": "{n} objeto(s) actualizado(s) en {actors} actor(es).",
-      "Notice": "JJK 5e {version}: {n} actor(es) tienen objetos con automatización desactualizada."
+      "Notice": "JJK 5e {version}: {n} actor(es) tienen objetos con automatización desactualizada.",
+      "AllActors": "Actualizar automatización de todos los actores"
     },
     "Multiclass": {
       "PureBody": "Heavenly Restriction (Pure Body) no puede hacer multiclase",
