@@ -5109,7 +5109,7 @@ Hooks.once("init", () => {
 Hooks.once("ready", () => {
   if (game.system?.id !== "dnd5e") return;
   Object.assign(game.modules.get(MODULE_ID).api ?? {}, {
-    createVow, openVows, toggleVow, breakVow, getVows, syncVowEffects,
+    createVow, openVows, openCareer, toggleVow, breakVow, getVows, syncVowEffects,
     openCareer, getCareer, promote, setSemi, addRecommendation, generateMission, resolveMission, setReputation,
     fillHotbar, addSheetStrip
   });

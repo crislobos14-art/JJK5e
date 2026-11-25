@@ -181,3 +181,24 @@ test("late native registration resolves only D&D5e entries and is idempotent",()
  config.Actor.sheetClasses.npc={"dnd5e.NativeNPC":{cls:NativeNPC}};
  hooks.get("setup")();hooks.get("setup")();assert.equal(registered.length,2);assert.ok(registered[1].cls.prototype instanceof NativeNPC);
 });
+
+test("Sealed Ink windows switch to the dark theme and restore the original one", () => {
+  const src = readFileSync(new URL("../scripts/sealed-ink.mjs", import.meta.url), "utf8");
+  const body = src.match(/function inkTheme\(root, on\) \{[\s\S]*?\n\}/)?.[0];
+  const inkTheme = runInNewContext(body + "\ninkTheme;", {});
+  const classes = new Set(["application", "themed", "theme-light"]);
+  const root = { dataset: {}, classList: { contains: c => classes.has(c), add: (...c) => c.forEach(x => classes.add(x)), remove: (...c) => c.forEach(x => classes.delete(x)) } };
+  inkTheme(root, true);
+  assert.ok(classes.has("theme-dark") && !classes.has("theme-light"));
+  inkTheme(root, false);
+  assert.ok(classes.has("theme-light") && !classes.has("theme-dark"));
+});
+
+test("storage items are found by name when they are world or translated copies", () => {
+  const src = readFileSync(new URL("../scripts/sealed-ink.mjs", import.meta.url), "utf8");
+  const ids = src.match(/const RESOURCE_ITEMS = [\s\S]*?\]\);/)[0];
+  const body = src.match(/const RESOURCE_NAMES[\s\S]*?\nfunction resourceItems\(actor\) \{[\s\S]*?\n\}/)[0];
+  const fn = runInNewContext(`const ID="jjk5e";${ids}${body}\nresourceItems;`, { game: { modules: { get: () => ({ api: { baseName: i => i.flags?.jjk5e?.originalName ?? i.name } }) } } });
+  const items = [{ name: "Cursed Inventory (3 PP)", uuid: "Actor.A.Item.1" }, { name: "Batería maldita", flags: { jjk5e: { originalName: "Cursed Battery" } }, uuid: "Actor.A.Item.2" }, { name: "Sword", uuid: "Actor.A.Item.3" }];
+  assert.equal(fn({ items }).length, 2);
+});

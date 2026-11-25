@@ -426,17 +426,23 @@ const RESOURCE_ITEMS = new Set([
   "Compendium.jjk5e.jjk5e-equipment.Item.W24GkN4RCTH8y8Sj"
 ]);
 
+// Same items by name: world copies, imported world packs and translated items keep their original name.
+const RESOURCE_NAMES = ["cursed inventory", "technique storage", "insect storage", "cursed battery"];
 function resourceItems(actor) {
-  return [...actor.items].filter(item => [
-    item.uuid, item._stats?.compendiumSource, item.flags?.core?.sourceId
-  ].some(source => RESOURCE_ITEMS.has(source)));
+  const base = game.modules.get(ID)?.api?.baseName;
+  return [...actor.items].filter(item => {
+    if ([item.uuid, item._stats?.compendiumSource, item.flags?.core?.sourceId].some(source => RESOURCE_ITEMS.has(source))) return true;
+    const name = String((base ? base(item) : null) ?? item.flags?.[ID]?.originalName ?? item.name).toLowerCase().replace(/\s*\(.*\)\s*$/, "").trim();
+    return RESOURCE_NAMES.includes(name);
+  });
 }
 
 /** Keep native forms intact and give explicit Sealed Ink sheets their own overview. */
 function renderActorOverview(root, actor, app) {
   const previous = root.querySelector(".jjk-actor-overview");
   const header = root.querySelector(".sheet-header");
-  if (!header) { previous?.remove(); return; }
+  // Limited viewers get the native limited sheet only: no HP, AC or ability scores.
+  if (!header || !(game.user.isGM || actor.testUserPermission?.(game.user, "OBSERVER"))) { previous?.remove(); return; }
   const api = game.modules.get(ID)?.api;
   const overview = make("section", "jjk-actor-overview");
   overview.setAttribute("aria-label", local("Actor overview", "Resumen del actor"));
@@ -471,7 +477,9 @@ function renderActorOverview(root, actor, app) {
     ]) {
       if (typeof api?.[method] !== "function") continue;
       controls.append(button(label, () => {
-        if (overview.isConnected && app.document === actor && actor.isOwner) api[method](actor);
+        // A token's synthetic actor is rebuilt on token updates: act on the sheet's current document.
+        const current = app.document;
+        if (overview.isConnected && current?.uuid === actor.uuid && current.isOwner) api[method](current);
       }));
     }
     overview.append(controls);
@@ -482,7 +490,8 @@ function renderActorOverview(root, actor, app) {
       manuals.setAttribute("aria-label", local("Storage and energy items","Objetos de almacenamiento y energía"));
       for (const item of resources) {
         manuals.append(button(item.name, () => {
-          if (overview.isConnected && actor.isOwner) actor.items.get(item.id)?.sheet?.render({ force: true });
+          const current = app.document;
+          if (overview.isConnected && current?.isOwner) current.items.get(item.id)?.sheet?.render({ force: true });
         }));
       }
       overview.append(manuals);
@@ -492,6 +501,22 @@ function renderActorOverview(root, actor, app) {
   else header.after(overview);
 }
 
+/** Sealed Ink is dark: ask D&D5e/Foundry for their dark theme on that window so native parts keep readable contrast. */
+function inkTheme(root, on) {
+  if (on) {
+    if (!root.dataset.jjkTheme) root.dataset.jjkTheme = root.classList.contains("theme-light") ? "light" : root.classList.contains("theme-dark") ? "dark" : "none";
+    root.classList.add("themed", "theme-dark");
+    root.classList.remove("theme-light");
+    return;
+  }
+  const before = root.dataset.jjkTheme;
+  if (!before) return;
+  delete root.dataset.jjkTheme;
+  if (before !== "dark") root.classList.remove("theme-dark");
+  if (before === "light") root.classList.add("theme-light");
+  if (before === "none" && !root.classList.contains("theme-light")) root.classList.remove("themed");
+}
+
 function apply(app, element) {
   const root = rootOf(app, element);
   if (!root) return;
@@ -499,7 +524,7 @@ function apply(app, element) {
   const category = categoryOf(app, root, native);
   const actor = category === "module" ? null : native;
   if (!category) {
-    if(live.has(app)){stopWatch(app);stopParticles(root);root.classList.remove(ROOT,SURFACE,MOTION,"jjk-sealed-arrival");delete root.dataset.jjkSurface;delete root.dataset.jjkMotion;live.delete(app);}
+    if(live.has(app)){stopWatch(app);stopParticles(root);inkTheme(root,false);root.classList.remove(ROOT,SURFACE,MOTION,"jjk-sealed-arrival");delete root.dataset.jjkSurface;delete root.dataset.jjkMotion;live.delete(app);}
     return;
   }
   const old = live.get(app);
@@ -514,6 +539,7 @@ function apply(app, element) {
   const first = (surface || sealed) && !root.classList.contains(SURFACE) && !root.classList.contains(ROOT);
   root.classList.toggle(ROOT, sealed);
   root.classList.toggle(SURFACE, surface);
+  inkTheme(root, sealed || surface);
   root.dataset.jjkSurface = category;
   const motion = preference("sheetMotion");
   root.classList.toggle(MOTION, (sealed || surface) && motion !== "off");

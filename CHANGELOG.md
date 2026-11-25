@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.90.0 — Auditoría de Sealed Ink 1.89
+- Hoja Sealed Ink: el botón «Carrera» del resumen nunca aparecía porque la función no estaba expuesta en la API del módulo; ahora aparece junto a Controles JJK, Dominio y Votos.
+- Hoja Sealed Ink: los botones del resumen (Controles JJK, Dominio, Votos, Carrera y almacenamiento) usan el actor actual de la ficha; con tokens no vinculados ya no actúan sobre una copia vieja.
+- Cursed Inventory, Technique Storage, Insect Storage y Cursed Battery se detectan también por nombre, así que el acceso rápido aparece con copias del mundo, compendios importados u objetos traducidos.
+- El resumen de recursos (PG, CA, características y EM) ya no se muestra a quien solo tiene permiso limitado sobre el actor.
+- Contraste: las ventanas con Sealed Ink activan el tema oscuro de Foundry y D&D 5e, para que las partes nativas de la hoja no queden con texto claro sobre fondo claro; al desactivar Sealed Ink se restaura el tema original.
+
 ## 1.89.0 — Interfaz unificada Sealed Ink
 - Sealed Ink es el diseño predeterminado para quienes todavía no han guardado una preferencia. Se amplía a herramientas JJK, chat, ajustes, editores y compendios con controles de animación por cliente.
 - Registro independiente de las fichas de personaje y PNJ. Las fichas seleccionables añaden un resumen de recursos y accesos a herramientas JJK según los permisos del actor.
