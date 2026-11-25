@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.99.0 — Rendimiento
+- Ventanas JJK más fluidas: el panel JJK, Dominio, Carrera, Votos y el creador ya no se redibujan varias veces seguidas. Cuando un gasto de EM actualiza a la vez el objeto, el actor y sus efectos, cada ventana abierta se redibuja una sola vez por fotograma.
+- Menos tirones cada 30 s: la recuperación periódica de reservas de EM ya no recorre todos los tokens de todas las escenas. Antes eso obligaba a Foundry a preparar los actores de escenas que nadie miraba. Ahora solo revisa los actores del mundo y los tokens de las escenas activas o abiertas, y solo procesa los que tienen una reserva pendiente antigua. Al iniciar la partida se sigue revisando todo.
+- Subir de nivel: el selector de dotes de la Mejora de característica ya no vuelve a cargar todo el compendio de dotes cada vez que cambia cualquier objeto del mundo, como al gastar EM. Ahora solo lo recarga si se edita el compendio.
+- HUD de combate y centro de avisos: arrastrar un token ya no los redibuja en cada paso del movimiento, solo una vez por fotograma.
+- El botón de subir de nivel parpadea 3 veces en lugar de hacerlo sin parar. Con «reducir movimiento» del sistema, no parpadea.
 ## 1.98.0 — Motor de dominios y Sealed Ink
 - Rectángulo negro o morado que no desaparecía tras cerrar un dominio: era el tinte de escena de FXMaster. Antes se guardaba con un id aleatorio en memoria del DJ. Al recargar o cerrar con otro DJ, ese id se perdía y el tinte quedaba en la escena para siempre. Ahora usa un id fijo, hay un solo tinte por escena y se quita solo al cerrarse el último dominio abierto en esa escena. Se quita también aunque se desactive la opción de FXMaster mientras el dominio está abierto.
 - Limpieza automática: al iniciar la partida (DJ) y al cerrar cualquier dominio, se borran los restos de dominios ya cerrados: el tinte (incluido el que dejaron versiones anteriores), las zonas, los marcadores de barrera y las animaciones de Sequencer. Macro manual: `game.modules.get("jjk5e").api.cleanupDomains()`.

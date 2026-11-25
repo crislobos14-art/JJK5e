@@ -701,11 +701,26 @@ function engineActors(){
   return [...new Map([...(game.actors??[]),...[...(game.scenes??[])].flatMap(sc=>[...(sc.tokens??[])].map(tk=>tk.actor))]
     .filter(a=>a?.uuid).map(a=>[a.uuid,a])).values()];
 }
-async function recoverCEWorld(){
+/** Only actors holding a reservation old enough to recover; skips the queue for everyone else. */
+function ceRecoveryDue(actor, now = Date.now()) {
+  const ledger = findPool(actor)?.getFlag?.(MODULE_ID, "ceLedger");
+  return Array.isArray(ledger) && ledger.some((rec) => rec?.state === "reserved" && Number.isFinite(rec.created) && now - rec.created >= CE_RECOVERY_AGE);
+}
+/** Periodic pass: linked actors plus unlinked tokens of scenes someone is on (no synthetic actors for idle scenes). */
+function liveEngineActors() {
+  const viewed = new Set(game.users?.map?.((u) => u.viewedScene).filter(Boolean) ?? []);
+  const scenes = [...(game.scenes ?? [])].filter((scene) => scene.active || viewed.has(scene.id));
+  return [...new Map([...(game.actors ?? []), ...scenes.flatMap((sc) => [...(sc.tokens ?? [])].filter((tk) => !tk.actorLink).map((tk) => tk.actor))]
+    .filter((a) => a?.uuid).map((a) => [a.uuid, a])).values()];
+}
+async function recoverCEWorld({ all = true } = {}){
   if(!isActiveGM()||!ceAuthorityEnabled()) return [];
-  const results=[];
-  for(const actor of engineActors()) try{results.push(...await recoverCEActor(actor));}
+  const results=[], now=Date.now();
+  for(const actor of (all ? engineActors() : liveEngineActors())) {
+    if(!ceRecoveryDue(actor, now)) continue;
+    try{results.push(...await recoverCEActor(actor, now));}
     catch(err){reportError("CE recovery",err);}
+  }
   return results;
 }
 function actorBoundPileItem(item) {
@@ -2907,10 +2922,24 @@ function openPanel(actor, tab) {
   return app.render({ force: true });
 }
 
+/** Coalesce several document updates in the same frame into one render of each open JJK window. */
+const RENDER_QUEUE = new Set();
+let renderFrame = 0;
+function renderSoon(app) {
+  if (!app?.rendered) return;
+  RENDER_QUEUE.add(app);
+  if (renderFrame) return;
+  const flush = () => {
+    renderFrame = 0;
+    const apps = [...RENDER_QUEUE]; RENDER_QUEUE.clear();
+    for (const a of apps) if (a.rendered) a.render();
+  };
+  renderFrame = typeof requestAnimationFrame === "function" ? requestAnimationFrame(flush) : setTimeout(flush, 16);
+}
+
 function refreshPanels(actor) {
   if (!actor) return;
-  const app = PANELS.get(actor.uuid);
-  if (app?.rendered) app.render();
+  renderSoon(PANELS.get(actor.uuid));
 }
 
 Hooks.once("tidy5e-sheet.ready", api => {
@@ -4439,7 +4468,7 @@ Hooks.once("ready", () => {
   Hooks.on("updateToken",(token,changes)=>endMovedSimpleDomain(token,changes).catch(err=>reportError("Simple Domain movement",err)));
   Hooks.on("userConnected",()=>recoverCEWorld().catch(err=>reportError("CE recovery",err)));
   Hooks.on("updateWorldTime",()=>recoverCEWorld().catch(err=>reportError("CE recovery",err)));
-  setInterval(()=>recoverCEWorld().catch(err=>reportError("CE recovery",err)),30000);
+  setInterval(()=>recoverCEWorld({ all: false }).catch(err=>reportError("CE recovery",err)),30000);
   recoverCEWorld().catch(err=>reportError("CE recovery",err));
   if (isActiveGM()) sweepDomainLeftovers().catch((err) => reportError("domain cleanup", err));
   if (game.user.isGM && setting("enableSummoning") && game.settings.settings?.has?.("dnd5e.allowSummoning")
@@ -4447,7 +4476,8 @@ Hooks.once("ready", () => {
   Hooks.on("updateActor", (actor, changes, options, userId) => {
     if (userId === game.user.id && foundry.utils.getProperty(changes, `flags.${MODULE_ID}.pendingBlackFlash`) === true) animateBlackFlash(actor);
   });
-  Hooks.on("updateItem", () => { featDocsCache = null; });
+  // Only edits inside the feats compendium change the picker; actor items (CE spends…) do not.
+  Hooks.on("updateItem", (item) => { if (item.pack && item.pack === jjkPack("jjk5e-feats")?.collection) featDocsCache = null; });
   Hooks.on("createActiveEffect", (effect) => {
     if (!isActiveGM() || !(effect.flags?.jjk5e?.burnout || effect.flags?.jjk5e?.kind === "burnout")) return;
     const actor = effect.parent;
@@ -5070,7 +5100,7 @@ async function resolveMission(actor, id, result) {
 const VOW_APPS = new Map();
 const CAREER_APPS = new Map();
 function refreshVowApps(actor) { const a = VOW_APPS.get(actor?.uuid); if (a?.rendered) a.render(); refreshPanels(actor); }
-function refreshCareerApps(actor) { const a = CAREER_APPS.get(actor?.uuid); if (a?.rendered) a.render(); }
+function refreshCareerApps(actor) { renderSoon(CAREER_APPS.get(actor?.uuid)); }
 
 function makeVowClass() {
   const Base = foundry.applications.api.ApplicationV2;
@@ -6559,7 +6589,7 @@ function liveActor(actor) {
     return live?.documentName === "Actor" ? live : actor;
   } catch { return actor; }
 }
-function refreshDomainApps(actor) { const a = DOMAIN_APPS.get(actor?.uuid); if (a?.rendered) a.render(); }
+function refreshDomainApps(actor) { renderSoon(DOMAIN_APPS.get(actor?.uuid)); }
 
 function makeDomainClass() {
   const Base = foundry.applications.api.ApplicationV2;
@@ -7339,7 +7369,7 @@ function makeCreatorClass() {
   };
 }
 let JJKCreatorClass = null;
-function refreshCreator(actor) { const a = CREATOR_APPS.get(actor?.uuid); if (a?.rendered) a.render(); }
+function refreshCreator(actor) { renderSoon(CREATOR_APPS.get(actor?.uuid)); }
 
 async function createCharacterWizard(actor) {
   actor = requireActor(actor);
@@ -9480,7 +9510,7 @@ Hooks.once("ready", () => {
   // A student's school or teacher changed: open panels (e.g. the teacher's list of students) refresh.
   Hooks.on("updateActor", (actor, changes) => {
     if (!foundry.utils.hasProperty(changes, `flags.${MODULE_ID}.school`) && !foundry.utils.hasProperty(changes, `flags.${MODULE_ID}.-=school`)) return;
-    for (const app of PANELS.values()) if (app?.rendered) app.render();
+    for (const app of PANELS.values()) renderSoon(app);
   });
 });
 
