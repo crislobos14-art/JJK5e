@@ -1,3 +1,4 @@
+import { enhanceActorWorkspace } from "./sealed-ink-workspace.mjs";
 import { enhanceCharacterCreation } from "./sealed-ink-creator.mjs";
 import { enhanceCombatInteraction } from "./sealed-ink-combat.mjs";
 /**
@@ -415,7 +416,7 @@ function refreshLinks(doc) {
     if (!root.isConnected) { stopWatch(app); stopParticles(root); live.delete(app); continue; }
     const actor = nativeActor(app);
     // Redraw only sheets whose summon list this change can touch: avoids rebuilding every open sheet on any HP change.
-    if (actor && linksAffectedBy(actor, doc)) renderLinks(app, root, actor, root.classList.contains(ROOT));
+    if (actor && linksAffectedBy(actor, doc)) { renderLinks(app, root, actor, root.classList.contains(ROOT)); enhanceActorWorkspace(app,root,root.classList.contains(ROOT),resourceItems); }
   }
 }
 
@@ -545,6 +546,7 @@ function apply(app, element) {
   root.classList.toggle(MOTION, (sealed || surface) && motion !== "off");
   root.dataset.jjkMotion = motion;
   if (actor) renderLinks(app, root, actor, sealed);
+  enhanceActorWorkspace(app, root, sealed, resourceItems);
   if (sealed && app.constructor.jjkSealedInk === true) renderActorOverview(root, actor, app);
   if (first && motion !== "off") root.classList.add("jjk-sealed-arrival");
   if (motion === "off" || (!surface && !sealed)) root.classList.remove("jjk-sealed-arrival");
@@ -727,7 +729,9 @@ Hooks.once("ready", () => {
     queueMicrotask(() => {
       combatRefreshQueued = false;
       for (const [app,root] of live) {
-        if (!root.isConnected || !root.classList.contains("jjk5e-panel-app") || app._busy) continue;
+        if (!root.isConnected || app._busy) continue;
+        if (root.classList.contains(ROOT)) { try { enhanceActorWorkspace(app,root,true,resourceItems); } catch (err) { console.warn(ID+" | workspace refresh",err); } }
+        if (!root.classList.contains("jjk5e-panel-app")) continue;
         try { enhanceCombatInteraction(app,root,root.classList.contains(SURFACE)); }
         catch (err) { console.warn(ID + " | combat interaction refresh",err); }
       }

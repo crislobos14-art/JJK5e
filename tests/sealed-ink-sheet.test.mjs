@@ -5,10 +5,11 @@ import assert from "node:assert/strict";
 
 import { enhanceCharacterCreation } from "../scripts/sealed-ink-creator.mjs";
 import { enhanceCombatInteraction } from "../scripts/sealed-ink-combat.mjs";
+import { enhanceActorWorkspace } from "../scripts/sealed-ink-workspace.mjs";
 // The registration harness evaluates the presentation source in a classic VM.
 // Inject the actual imported functions rather than removing their integration.
 const source = readFileSync(new URL("../scripts/sealed-ink.mjs", import.meta.url), "utf8")
-  .replace(/^import \{ (?:enhanceCharacterCreation|enhanceCombatInteraction) \} from "[^"]+";\r?\n/gm,"");
+  .replace(/^import \{ (?:enhanceCharacterCreation|enhanceCombatInteraction|enhanceActorWorkspace) \} from "[^"]+";\r?\n/gm,"");
 const main = readFileSync(new URL("../scripts/jjk5e.js", import.meta.url), "utf8");
 const manifest = JSON.parse(readFileSync(new URL("../module.json", import.meta.url), "utf8"));
 
@@ -24,7 +25,7 @@ function fixture(system = "dnd5e") {
     settings: { register: (scope, key, options) => settings.set(key, options) }
   };
   runInNewContext(source, {
-    enhanceCharacterCreation, enhanceCombatInteraction, Hooks: { once: (name, fn) => hooks.set(name, fn) }, game,
+    enhanceCharacterCreation, enhanceCombatInteraction, enhanceActorWorkspace, Hooks: { once: (name, fn) => hooks.set(name, fn) }, game,
     foundry: { applications: { apps: { DocumentSheetConfig: {
       registerSheet: (doc, scope, cls, opts) => registered.push({ scope, cls, opts })
     } } } },
@@ -111,7 +112,7 @@ test("universal surfaces use only known D&D5e classes and per-client overrides",
     settings: { register: (ns,k,o) => settings.set(k,o), get: (ns,k) => values.get(k) ?? settings.get(k)?.default }
   };
   const exposed = runInNewContext(source + "\n({categoryOf, selectedDesign, categories,moduleDocument,isJJKChat});", {
-    enhanceCharacterCreation, enhanceCombatInteraction, Hooks: { once: (n,fn) => hooks.set(n,fn) }, game,
+    enhanceCharacterCreation, enhanceCombatInteraction, enhanceActorWorkspace, Hooks: { once: (n,fn) => hooks.set(n,fn) }, game,
     foundry: { applications: { apps: { DocumentSheetConfig: {
       registerSheet: (doc,scope,cls,opts) => registered.push(opts)
     }}}},
@@ -173,7 +174,7 @@ test("late native registration resolves only D&D5e entries and is idempotent",()
  class NativeCharacter{} class NativeNPC{} class OtherSheet{}
  const hooks=new Map(),registered=[],config={Actor:{documentClass:class Actor{},sheetClasses:{character:{},npc:{}}}};
  const game={system:{id:"dnd5e"},i18n:{lang:"en"},settings:{register(){}}};
- runInNewContext(source,{enhanceCharacterCreation,enhanceCombatInteraction,Hooks:{once:(key,fn)=>hooks.set(key,fn)},game,
+ runInNewContext(source,{enhanceCharacterCreation,enhanceCombatInteraction,enhanceActorWorkspace,Hooks:{once:(key,fn)=>hooks.set(key,fn)},game,
   foundry:{applications:{apps:{DocumentSheetConfig:{registerSheet:(doc,id,cls,opts)=>registered.push({cls,opts})}}}},CONFIG:config,console});
  hooks.get("init")();assert.equal(registered.length,0);
  config.Actor.sheetClasses.character={"other.OtherSheet":{cls:OtherSheet,default:true},"dnd5e.NativeCharacter":{cls:NativeCharacter}};

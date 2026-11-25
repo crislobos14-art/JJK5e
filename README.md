@@ -348,3 +348,6 @@ La [auditoría detallada por técnica y spell](docs/INNATE_SPELL_AUDIT.md) regis
 Las etiquetas del informe indican **riesgo de implementación**, no pruebas de ejecución. Un spell puede tener tirada, daño y costo configurados y aun así requerir lógica especial para ser fiel a V.6. Por ello no debe considerarse completamente automatizado solo por aparecer como `mechanics-present`.
 
 Correcciones específicas: Flowing Red Scale y Golden Week activan bonificaciones mecánicas de CA y velocidad; Manji Kick aplica Stunned; Unrelenting Fury conecta daño y Prone a la salvación; Collective Will dispone de 8 usos y tirada de reemplazo; Cursed Centipede y Major Star Shikigami tienen sus activaciones corregidas. **No** están resueltos automáticamente el turno adicional, todas las tiradas de ventaja, la gestión completa de invocaciones ni el resto de técnicas especiales. La revisión y pruebas de cada efecto deben continuar para certificar el conjunto.
+
+## Sealed Ink — actor workspaces (development)
+Sealed Ink character and NPC sheets gain a two-column owner workspace with compact mode, local ordering, resources and shortcuts; the native form below remains the source of truth for editing, drag/drop, advancement and contextual activity use. No universal CE transfer or supernatural storage is added. Reduced-motion and per-client fallback remain available.
