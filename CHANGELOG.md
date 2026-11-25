@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.103.0 — Sellos JJK para todo
+- Las 7 clases tienen sello propio, cada una con su color y su icono: Juggernaut (escudo rojo), Scout (corredor verde), Strategist (caballo azul), Shikigami User (perro violeta), Support Specialist (mano sanadora turquesa), Warrior (puño naranja) y Heavenly Restriction (cadena rota dorada). Las subclases y los rasgos de clase llevan el color de su clase.
+- Familias nuevas:
+  - Raza (también sus rasgos), Trasfondo, Mentalidad y Hechizo.
+  - Arma maldita, Equipo, Consumible, Objeto y Contenedor.
+  - Pericia, Pacto celestial, Bendición de grado especial, Rasgo especial y Acción adicional.
+  - Las dotes de barrera, energía maldita, físicas y de RCT toman su categoría.
+- Las técnicas y los dominios conservan su familia. Solo 5 de los 1279 objetos JJK siguen con el sello genérico «Rasgo».
 ## 1.102.0 — Dominio dentro del mapa, sin capa oscura e identidad JJK
 - La barrera dibujada cabe en el mapa. El alcance de las reglas sigue en pies (175 ft; 655 ft sin barrera): cuando el círculo se sale del mapa, se dibuja solo la parte que queda dentro, sin invadir el borde. La zona se vuelve a ajustar cuando encoge en un choque. Si Foundry usa una plantilla en lugar de una región, la plantilla se reduce hasta caber, con un mínimo de una casilla.
 - Ya no aparece el rectángulo oscuro: el ambiente de dominio de FXMaster ya no tiñe el mapa de morado oscuro (en mapas oscuros parecía negro). Ahora solo baja un poco la saturación y sube el contraste. La zona del dominio usa un violeta más claro.

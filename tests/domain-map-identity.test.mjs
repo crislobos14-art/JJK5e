@@ -45,6 +45,20 @@ test("identity seals: stable per item, family from the technique theme", async (
   const [a, b] = [identityOf(hp), identityOf(blue)];
   assert.ok(a.pattern !== b.pattern || a.rotation !== b.rotation || a.rings !== b.rings, "two techniques of one family differ");
   assert.ok(a.pattern >= 0 && a.pattern < PATTERNS);
-  assert.equal(familyOf({ name: "Playful Cloud", type: "weapon", flags: { jjk5e: { x: 1 } } }), "tool");
+  assert.equal(familyOf({ name: "Playful Cloud", type: "weapon", flags: { jjk5e: { x: 1 } } }), "weapon");
+  // Every item type in the module's data has its own family; the 7 classes each have their own colour.
+  const { readFileSync, readdirSync } = await import("node:fs");
+  const all = readdirSync(new URL("../data", import.meta.url)).filter((f) => f.endsWith(".json")).flatMap((f) => {
+    const d = JSON.parse(readFileSync(new URL(`../data/${f}`, import.meta.url)));
+    return (Array.isArray(d) ? d : (d.items ?? Object.values(d).flat())).filter((x) => x?.type && !["npc", "character"].includes(x.type) && x.flags?.jjk5e && Object.keys(x.flags.jjk5e).length);
+  });
+  const classes = all.filter((x) => x.type === "class").map(familyOf);
+  assert.equal(new Set(classes).size, 7);
+  for (const type of ["race", "background", "spell", "equipment", "consumable", "loot"]) {
+    assert.ok(all.filter((x) => x.type === type).every((x) => familyOf(x) === type || x.flags.jjk5e.technique || x.flags.jjk5e.domainActivity), type);
+  }
+  assert.ok(all.filter((x) => x.type === "subclass").every((x) => familyOf(x) === "class-heavenly-restriction"));
+  const generic = all.filter((x) => familyOf(x) === "feat");
+  assert.ok(generic.length <= 5, `only a few items keep the generic seal: ${generic.length}`);
   assert.equal(familyOf({ name: "Domain Expansion", type: "feat", flags: { jjk5e: { domainActivity: "a" } } }), "domain");
 });

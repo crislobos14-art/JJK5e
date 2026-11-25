@@ -30,10 +30,46 @@ export const FAMILIES = {
   heal: [140, 55, 58, "fa-heart-pulse", "Curación", "Healing"],
   curse: [95, 55, 50, "fa-skull", "Maldición", "Curse"],
   domain: [285, 70, 60, "fa-circle-half-stroke", "Dominio", "Domain"],
-  tool: [38, 55, 60, "fa-gem", "Herramienta maldita", "Cursed tool"],
+  tool: [38, 55, 60, "fa-toolbox", "Herramienta maldita", "Cursed tool"],
+  weapon: [8, 55, 60, "fa-khanda", "Arma maldita", "Cursed weapon"],
+  equipment: [200, 30, 64, "fa-vest", "Equipo", "Equipment"],
+  consumable: [150, 50, 58, "fa-flask", "Consumible", "Consumable"],
+  loot: [45, 65, 62, "fa-gem", "Objeto", "Item"],
+  container: [30, 35, 55, "fa-box-open", "Contenedor", "Container"],
   vow: [5, 60, 64, "fa-handshake", "Voto", "Vow"],
-  feat: [228, 25, 72, "fa-feather-pointed", "Rasgo", "Feature"]
+  feat: [228, 25, 72, "fa-feather-pointed", "Rasgo", "Feature"],
+  race: [168, 45, 58, "fa-dna", "Raza", "Race"],
+  background: [36, 40, 66, "fa-scroll", "Trasfondo", "Background"],
+  spell: [240, 55, 70, "fa-wand-sparkles", "Hechizo", "Spell"],
+  skill: [200, 45, 66, "fa-graduation-cap", "Pericia", "Skill"],
+  pact: [50, 80, 58, "fa-scale-balanced", "Pacto celestial", "Heavenly pact"],
+  boon: [44, 90, 62, "fa-crown", "Bendición de grado especial", "Special Grade boon"],
+  trait: [330, 45, 66, "fa-fingerprint", "Rasgo especial", "Special trait"],
+  classFeature: [228, 35, 66, "fa-graduation-cap", "Rasgo de clase", "Class feature"],
+  mindset: [300, 35, 70, "fa-brain", "Mentalidad", "Mindset"],
+  action: [12, 60, 62, "fa-forward", "Acción adicional", "Additional action"],
+  // One fixed colour per JJK class; subclasses and class features take their class's colour.
+  "class-juggernaut": [2, 70, 56, "fa-shield", "Juggernaut", "Juggernaut"],
+  "class-scout": [125, 50, 52, "fa-person-running", "Scout", "Scout"],
+  "class-strategist": [215, 65, 62, "fa-chess-knight", "Strategist", "Strategist"],
+  "class-shikigami-user": [270, 55, 64, "fa-dog", "Shikigami User", "Shikigami User"],
+  "class-support-specialist": [175, 60, 50, "fa-hand-holding-medical", "Support Specialist", "Support Specialist"],
+  "class-warrior": [22, 75, 56, "fa-hand-fist", "Warrior", "Warrior"],
+  "class-heavenly-restriction": [46, 85, 58, "fa-link-slash", "Heavenly Restriction", "Heavenly Restriction"]
 };
+const SUBTYPE_FAMILY = { jjkBarrier: "barrier", jjkCursedEnergy: "ce", jjkPhysical: "physical", jjkRCT: "heal",
+  jjkSkill: "skill", jjkPact: "pact", jjkBoon: "boon", jjkTrait: "trait" };
+const CLASS_NAMES = { juggernaut: "juggernaut", scout: "scout", strategist: "strategist", "shikigami user": "shikigami-user",
+  "support specialist": "support-specialist", warrior: "warrior", "heavenly restriction": "heavenly-restriction" };
+/** The JJK class an item belongs to: its own identifier, its subclass's class, or the class named in its requirements. */
+function classKey(item) {
+  const sys = item?.system ?? {};
+  const id = item?.type === "class" ? sys.identifier : item?.type === "subclass" ? sys.classIdentifier : null;
+  if (id && FAMILIES[`class-${id}`]) return `class-${id}`;
+  const text = String(sys.requirements ?? "").toLowerCase();
+  for (const [name, key] of Object.entries(CLASS_NAMES)) if (text.includes(name)) return `class-${key}`;
+  return null;
+}
 export const PATTERNS = 12;
 
 /** FNV-1a: stable across sessions and clients. */
@@ -53,8 +89,16 @@ export function familyOf(item) {
     const theme = api().itemTheme?.(item);
     return FAMILIES[theme] ? theme : "ce";
   }
-  if (["weapon", "equipment", "consumable", "tool", "loot", "container"].includes(item?.type)) return "tool";
-  return "feat";
+  if (["class", "subclass"].includes(item?.type)) return classKey(item) ?? "classFeature";
+  if (["race", "background", "spell", "weapon", "equipment", "consumable", "loot", "container"].includes(item?.type)) return item.type;
+  if (item?.type === "tool") return "tool";
+  if (item?.system?.type?.value === "class") return classKey(item) ?? "classFeature";
+  if (item?.system?.type?.value === "race") return "race";
+  if (/mindset/i.test(String(item?.system?.requirements ?? "")) || /^about mindsets$/i.test(item?.name ?? "")) return "mindset";
+  const sub = SUBTYPE_FAMILY[item?.system?.type?.subtype];
+  if (sub) return sub;
+  if (/additional actions/i.test(String(item?.system?.requirements ?? ""))) return "action";
+  return classKey(item) ?? "feat";
 }
 
 /** The seal of one item: same name, same seal, on every client. */
