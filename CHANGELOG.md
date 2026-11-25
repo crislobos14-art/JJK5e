@@ -1,7 +1,7 @@
 # Changelog
 
 ## 1.90.0 — Auditoría de Sealed Ink 1.89
-- Hoja Sealed Ink: el botón «Carrera» del resumen nunca aparecía porque la función no estaba expuesta en la API del módulo; ahora aparece junto a Controles JJK, Dominio y Votos.
+- Hoja Sealed Ink: corrección en este mismo release; el botón «Carrera» ya estaba disponible (se retiró una clave duplicada en la API).
 - Hoja Sealed Ink: los botones del resumen (Controles JJK, Dominio, Votos, Carrera y almacenamiento) usan el actor actual de la ficha; con tokens no vinculados ya no actúan sobre una copia vieja.
 - Cursed Inventory, Technique Storage, Insect Storage y Cursed Battery se detectan también por nombre, así que el acceso rápido aparece con copias del mundo, compendios importados u objetos traducidos.
 - El resumen de recursos (PG, CA, características y EM) ya no se muestra a quien solo tiene permiso limitado sobre el actor.
