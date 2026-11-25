@@ -21,3 +21,11 @@ test("activities and effects remain native; no generic CE transfer or storage ru
  const m=workspaceModel({items:[{id:"x",type:"loot",name:"Cursed Storage"},{id:"y",type:"container",name:"Bag"}]});
  assert.deepEqual(m.items.filter(i=>i.container).map(i=>i.id),["y"]);
 });
+test("workspace appears only on the selectable Sealed Ink sheet classes and reports whether it drew",async()=>{
+ const { enhanceActorWorkspace } = await import("../scripts/sealed-ink-workspace.mjs");
+ let removed=false;
+ const root={querySelector:()=>({remove:()=>{removed=true;}})};
+ class Native{} const app=new Native();app.actor={type:"character",isOwner:true};
+ assert.equal(enhanceActorWorkspace(app,root,true),false);
+ assert.equal(removed,true,"a stale workspace is removed from a default native sheet");
+});

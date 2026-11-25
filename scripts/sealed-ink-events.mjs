@@ -127,19 +127,61 @@ function record(key, tone, actor, data = {}) {
   if (panel && activeTab === "events") drawPanel();
   if (settings("sealedEventToasts")) toast(n);
 }
+const TONE = {
+  critical: ["fa-solid fa-triangle-exclamation", () => L("Critical","Crítico")],
+  energy: ["fa-solid fa-bolt", () => L("Cursed energy","Energía maldita")],
+  paper: ["fa-solid fa-scroll", () => L("State","Estado")],
+  gold: ["fa-solid fa-star", () => L("Progress","Progreso")],
+  info: ["fa-solid fa-circle-info", () => L("Notice","Aviso")]
+};
+function tone(key) { return TONE[key] ?? TONE.info; }
+/** Keep fixed Sealed Ink UI clear of the Foundry sidebar, open or collapsed. */
+function place() {
+  const side = document.getElementById("sidebar");
+  const width = side && side.offsetParent !== null ? Math.round(side.getBoundingClientRect().width) : 0;
+  document.documentElement.style.setProperty("--jjk-sealed-right", Math.max(12, width + 14) + "px");
+}
+function dismiss(node) {
+  if (!node.isConnected || node.classList.contains("leaving")) return;
+  window.clearTimeout(node._jjkTimer);
+  const motion = node.dataset.motion;
+  if (motion === "off" || window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches) { node.remove(); return; }
+  node.classList.add("leaving");
+  node.addEventListener("animationend", () => node.remove(), { once: true });
+  window.setTimeout(() => node.remove(), 400);
+}
 function toast(n) {
   if (document.hidden || (n.actor && !visible(n.actor))) return;
   let area = document.querySelector("#jjk-sealed-event-toasts");
   if (!area) { area = el("section","jjk-sealed-event-toasts"); area.id = "jjk-sealed-event-toasts"; area.setAttribute("aria-label", L("JJK notices","Avisos JJK")); document.body.append(area); }
-  while (area.children.length >= 3) area.firstElementChild.remove();
+  place();
+  const live = [...area.children].filter(child => !child.classList.contains("leaving"));
+  while (live.length >= 3) dismiss(live.shift());
   const node = el("article","jjk-sealed-event-toast");
-  node.dataset.tone = n.tone; node.dataset.motion = settings("sheetMotion");
-  node.setAttribute("role",n.tone === "critical" ? "alert" : "status");
-  node.append(el("strong","",n.actor?.name ?? "JJK5E"), el("span","",n.text));
-  node.append(button("×", () => node.remove()));
-  area.append(node);
+  const [icon, kicker] = tone(n.tone);
   const timeout = n.tone === "critical" ? 10000 : 5000;
-  setTimeout(() => node.remove(), timeout);
+  node.dataset.tone = n.tone; node.dataset.motion = settings("sheetMotion");
+  node.style.setProperty("--jjk-toast-time", timeout + "ms");
+  node.setAttribute("role",n.tone === "critical" ? "alert" : "status");
+  const head = el("header","jjk-sealed-toast-head");
+  const mark = el("i", icon); mark.setAttribute("aria-hidden","true");
+  head.append(mark, el("small","",kicker()), el("strong","",n.actor?.name ?? "JJK5E"));
+  const close = button("×", () => dismiss(node));
+  close.setAttribute("aria-label", L("Dismiss","Descartar"));
+  node.append(head, el("span","jjk-sealed-toast-text",n.text), close, el("div","jjk-sealed-toast-timer"));
+  if (settings("sealedEventCenter")) {
+    node.classList.add("actionable");
+    node.addEventListener("click", event => { if (event.target.closest("button")) return; dismiss(node); open("events"); });
+  }
+  // Hover or keyboard focus pauses the countdown so the notice can be read.
+  let left = timeout, started = Date.now();
+  const arm = () => { started = Date.now(); node._jjkTimer = window.setTimeout(() => dismiss(node), left); };
+  const hold = () => { window.clearTimeout(node._jjkTimer); left = Math.max(800, left - (Date.now() - started)); node.classList.add("held"); };
+  const go = () => { node.classList.remove("held"); arm(); };
+  node.addEventListener("pointerenter", hold); node.addEventListener("pointerleave", go);
+  node.addEventListener("focusin", hold); node.addEventListener("focusout", go);
+  area.append(node);
+  arm();
 }
 function observe(actor) {
   if (!visible(actor)) return;
@@ -185,8 +227,15 @@ function updateTurn() {
 function updateDock() {
   if (!dock) return;
   const count = history.filter(n=>unread.has(n.id)&&(!n.actor||visible(n.actor))).length;
-  dock.textContent = L("JJK controls","Controles JJK") + (count ? " · " + count : "");
+  const icon = el("i","fa-solid fa-yin-yang"); icon.setAttribute("aria-hidden","true");
+  const badge = el("span","jjk-sealed-dock-badge",count > 99 ? "99+" : String(count));
+  badge.hidden = !count;
+  dock.replaceChildren(icon, el("span","",L("JJK controls","Controles JJK")), badge);
+  dock.setAttribute("aria-label", L("JJK controls","Controles JJK") + (count ? " · " + count + " " + L("unread","sin leer") : ""));
+  dock.setAttribute("aria-expanded", String(!!panel));
+  dock.classList.toggle("has-unread", count > 0);
   dock.hidden = !settings("sealedEventCenter") && !settings("sealedCombatHUD");
+  place();
 }
 function bar(title,value,max,energy=false) {
   const wrap = el("div","jjk-sealed-hud-meter");
@@ -254,7 +303,8 @@ function drawPanel(automatic = false) {
   if (automatic && focus?.matches("input[type=search],select") && activeTab === "hud") return;
   panel.replaceChildren();
   const top = el("header","jjk-sealed-hud-buttons");
-  top.append(el("strong","","SEALED INK"),button("×",closePanel)); panel.append(top);
+  const shut = button("×",closePanel); shut.setAttribute("aria-label",L("Close","Cerrar"));
+  top.append(el("strong","","SEALED INK"),shut); panel.append(top);
   const nav = el("nav","jjk-sealed-hud-buttons");
   const tabs = [];
   if (settings("sealedEventCenter")) tabs.push(["events",L("Notices","Avisos")]);
@@ -271,22 +321,37 @@ function drawPanel(automatic = false) {
     if (!combatants().length) body.append(el("p","",L("No combatants","Sin combatientes")));
     return;
   }
+  const rows = history.filter(n => !n.actor || visible(n.actor));
+  const tools = el("div","jjk-sealed-hud-buttons jjk-sealed-hud-tools");
   const mark = button(L("Mark all read","Marcar todo leído"),() => {unread.clear();saveHistory();updateDock();drawPanel();});
   const clear = button(L("Clear local history","Limpiar historial local"),() => {history.length=0;unread.clear();saveHistory();updateDock();drawPanel();});
-  body.append(mark,clear);
-  for (const n of history.filter(n => !n.actor || visible(n.actor))) {
-    const row = el("article","jjk-sealed-hud-card");
+  mark.disabled = !rows.some(n => unread.has(n.id)); clear.disabled = !rows.length;
+  tools.append(mark,clear); body.append(tools);
+  if (!rows.length) body.append(el("p","jjk-sealed-hud-empty",L("No notices yet. HP at 0, low CE, Zone, Burnout, domains and your turn appear here.","Aún no hay avisos. Aquí aparecen PG a 0, CE baja, Zone, Burnout, dominios y tu turno.")));
+  for (const n of rows) {
+    const row = el("article","jjk-sealed-hud-card jjk-sealed-notice");
+    const [icon, kicker] = tone(n.tone);
     row.dataset.tone = n.tone;
-    row.append(el("strong","",(unread.has(n.id) ? "• " : "")+(n.actor?.name ?? "JJK5E")),el("span","",n.text));
-    row.append(el("small","",new Date(n.time).toLocaleTimeString(game.i18n.lang)));
+    row.classList.toggle("unread", unread.has(n.id));
+    const head = el("header","jjk-sealed-toast-head");
+    const mark = el("i", icon); mark.setAttribute("aria-hidden","true");
+    const time = el("time","",new Date(n.time).toLocaleTimeString(game.i18n.lang,{hour:"2-digit",minute:"2-digit"}));
+    time.dateTime = new Date(n.time).toISOString();
+    head.append(mark, el("small","",kicker()), el("strong","",n.actor?.name ?? "JJK5E"), time);
+    row.append(head, el("span","",n.text));
     body.append(row);
   }
 }
-function closePanel() { panel?.remove(); panel=null; }
+function closePanel() { const had = !!panel?.contains(document.activeElement); panel?.remove(); panel=null; updateDock(); if (had) dock?.focus?.(); }
 function open(tab = "events") {
   activeTab=tab;
-  if (!panel) { panel=el("section","jjk-sealed-event-panel");panel.setAttribute("aria-label","Sealed Ink");document.body.append(panel); }
-  panel.dataset.motion=settings("sheetMotion"); drawPanel();
+  if (!panel) {
+    panel=el("section","jjk-sealed-event-panel");panel.setAttribute("aria-label","Sealed Ink");panel.setAttribute("role","dialog");
+    panel.addEventListener("keydown",event => { if (event.key === "Escape") { event.stopPropagation(); closePanel(); } });
+    document.body.append(panel);
+  }
+  panel.dataset.motion=settings("sheetMotion"); place(); drawPanel(); updateDock();
+  panel.querySelector("nav button[aria-pressed=true], header button")?.focus?.();
 }
 function refresh() {
   if (!settings("sealedEventCenter")) { history.length=0; unread.clear(); }
@@ -310,7 +375,9 @@ Hooks.once("ready",() => {
   if(game.system.id!=="dnd5e")return;
   loadHistory();
   dock=button("",()=>panel?closePanel():open(settings("sealedEventCenter")?"events":"hud"));
-  dock.className="jjk-sealed-event-dock";document.body.append(dock);updateDock();
+  dock.className="jjk-sealed-event-dock";dock.setAttribute("aria-haspopup","dialog");document.body.append(dock);updateDock();
+  Hooks.on("collapseSidebar",()=>window.requestAnimationFrame(place));
+  window.addEventListener("resize",()=>window.requestAnimationFrame(place),{passive:true});
   for(const a of [...game.actors,...combatants().map(c=>c.actor)]) if(visible(a)) snapshots.set(a.uuid,snapshot(a));
   for(const h of ["updateActor","createActor"]) Hooks.on(h,queue);
   Hooks.on("deleteActor",a=>{snapshots.delete(a.uuid);pending.delete(a.uuid);});

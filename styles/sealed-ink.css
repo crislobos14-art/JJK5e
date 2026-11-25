@@ -204,9 +204,9 @@
   --ink:#131115;--card:#1c1920;--bone:#eee6d5;--edge:#443b45;--seal:#ce1032;--energy:#ad98ff;
   color:var(--bone);font-size:12px;
 }
-.jjk-sealed-event-dock {position:fixed;bottom:calc(12px + env(safe-area-inset-bottom));right:325px;width:auto;z-index:75;background:#28232b;border:1px solid #665660;border-left:3px solid #ce1032;padding:7px 11px;border-radius:0;}
+.jjk-sealed-event-dock {position:fixed;bottom:calc(12px + env(safe-area-inset-bottom));right:var(--jjk-sealed-right,325px);width:auto;z-index:75;background:#28232b;border:1px solid #665660;border-left:3px solid #ce1032;padding:7px 11px;border-radius:0;}
 .jjk-sealed-event-dock[hidden]{display:none!important}
-.jjk-sealed-event-panel {position:fixed;right:325px;bottom:55px;z-index:76;background:var(--ink);border:1px solid var(--edge);width:min(350px,calc(100vw - 24px));height:440px;max-height:75vh;min-width:240px;min-height:180px;resize:both;overflow:auto;padding:8px;box-shadow:0 8px 24px #0005;display:flex;flex-direction:column;gap:7px;}
+.jjk-sealed-event-panel {position:fixed;right:var(--jjk-sealed-right,325px);bottom:55px;z-index:76;background:var(--ink);border:1px solid var(--edge);width:min(350px,calc(100vw - 24px));height:440px;max-height:75vh;min-width:240px;min-height:180px;resize:both;overflow:auto;padding:8px;box-shadow:0 8px 24px #0005;display:flex;flex-direction:column;gap:7px;}
 .jjk-sealed-event-panel button,.jjk-sealed-event-panel input,.jjk-sealed-event-panel select,.jjk-sealed-event-toast button{background:#28232b;color:var(--bone);border:1px solid var(--edge);border-radius:0;font-size:12px;min-height:26px;}
 .jjk-sealed-event-panel button:hover,.jjk-sealed-event-toast button:hover{border-color:var(--seal)}
 .jjk-sealed-event-panel button:focus-visible,.jjk-sealed-event-toast button:focus-visible,.jjk-sealed-event-dock:focus-visible{outline:2px solid var(--bone)}
@@ -227,7 +227,7 @@
 .jjk-sealed-hud-fill.energy{background:#7952e7}
 .jjk-sealed-hud-activities{display:grid;gap:3px}
 .jjk-sealed-hud-activities button{text-align:start;height:auto;white-space:normal;padding:6px}
-.jjk-sealed-event-toasts{position:fixed;right:325px;top:65px;width:min(310px,calc(100vw - 24px));z-index:95;display:grid;gap:6px;pointer-events:none;}
+.jjk-sealed-event-toasts{position:fixed;right:var(--jjk-sealed-right,325px);top:65px;width:min(310px,calc(100vw - 24px));z-index:95;display:grid;gap:6px;pointer-events:none;}
 .jjk-sealed-event-toast{position:relative;display:grid;gap:4px;padding:10px 35px 10px 10px;background:var(--card);border:1px solid var(--edge);border-left:3px solid var(--bone);pointer-events:auto;box-shadow:0 5px 16px #0004;}
 .jjk-sealed-event-toast[data-tone=critical]{border-left-color:var(--seal)}
 .jjk-sealed-event-toast[data-tone=energy]{border-left-color:var(--energy)}
@@ -235,7 +235,7 @@
 .jjk-sealed-event-toast button{position:absolute;right:5px;top:5px;width:24px;min-height:24px;}
 .jjk-sealed-event-toast:not([data-motion=off],[data-motion=performance]){animation:jjk-sealed-notice .22s ease-out}
 @keyframes jjk-sealed-notice{from{opacity:0;transform:translateX(12px)}to{opacity:1;transform:none}}
-@media(max-width:900px){.jjk-sealed-event-dock,.jjk-sealed-event-panel,.jjk-sealed-event-toasts{right:12px}}
+@media(max-width:700px){.jjk-sealed-event-dock,.jjk-sealed-event-panel,.jjk-sealed-event-toasts{right:12px}}
 @media(prefers-reduced-motion:reduce){.jjk-sealed-event-toast{animation:none!important}}
 
 /* Character Creation Engine: scoped to the opt-in Sealed Ink module surface. */
@@ -434,3 +434,268 @@
 .jjk-sealed-motion:not([data-jjk-motion=off],[data-jjk-motion=performance]) .jjk-workspace-tabs button{transition:background-color 130ms ease,border-color 130ms ease}
 @container(max-width:490px){.jjk-actor-workspace .jjk-workspace-columns,.jjk-actor-workspace[data-reverse=true] .jjk-workspace-columns{grid-template-columns:1fr}.jjk-workspace-header{flex-wrap:wrap}}
 @media(prefers-reduced-motion:reduce){.jjk-actor-workspace *{animation:none!important;transition:none!important}}
+/* ------------------------------------------------------------------ */
+/* Sealed Ink 2 — native D&D5e sheet re-theme through system tokens.   */
+/* D&D5e sets its dark tokens inside @scope(.theme-dark) on .dnd5e2;   */
+/* scope proximity beats a same-specificity rule, so the Sealed Ink    */
+/* token map is qualified with .dnd5e2 (0,2,0) to win on the root.     */
+/* ------------------------------------------------------------------ */
+:is(.jjk-sealed-sheet,.jjk-sealed-surface).dnd5e2 {
+  --jjk-ink:#131115;--jjk-card:#1c1920;--jjk-card-2:#28232b;--jjk-card-3:#302630;--jjk-edge:#443b45;--jjk-line-2:#665861;
+  --jjk-bone:#eee6d5;--jjk-bone-2:#d9cdb8;--jjk-muted:#b1a69a;--jjk-seal:#ce1032;--jjk-seal-2:#ed4560;
+  --jjk-energy:#ad98ff;--jjk-ce-1:#5630d2;--jjk-ce-2:#7952e7;--jjk-gold:#d4ad36;
+  --jjk-display:"JJK Display","Big Shoulders","Arial Narrow",sans-serif;
+  --jjk-ease:cubic-bezier(.2,.7,.2,1);
+  --dnd5e-application-background:var(--jjk-ink);
+  --dnd5e-background-card:var(--jjk-card);
+  --dnd5e-background-parchment:var(--jjk-card);
+  --dnd5e-background-5:rgb(238 230 213 / 4%);
+  --dnd5e-background-alt-1:#18151c;
+  --dnd5e-background-alt-2:var(--jjk-card);
+  --dnd5e-character-background-content:none;
+  --dnd5e-character-background-image:none;
+  --dnd5e-character-header-image:none;
+  --dnd5e-character-body-image:none;
+  --dnd5e-npc-header-content:none;
+  --dnd5e-npc-header-image:none;
+  --dnd5e-color-blue-white:var(--jjk-bone);
+  --dnd5e-color-beige:var(--jjk-bone-2);
+  --dnd5e-color-gold:var(--jjk-gold);
+  --dnd5e-color-red:var(--jjk-seal);
+  --dnd5e-color-maroon:#7d0b20;
+  --dnd5e-color-dark-gray:#0e0c10;
+  --dnd5e-color-blue-gray-1:#2a242c;
+  --dnd5e-color-blue-gray-2:var(--jjk-card);
+  --dnd5e-color-blue-gray-3:#554a55;
+  --dnd5e-color-blue-gray-4:#3a3240;
+  --dnd5e-color-hp-1:#5a0716;
+  --dnd5e-color-hp-2:var(--jjk-seal);
+  --dnd5e-color-hp-3:#8a0b22;
+  --dnd5e-color-hd-1:#24184d;
+  --dnd5e-color-hd-2:var(--jjk-ce-1);
+  --dnd5e-color-hd-3:#1d1340;
+  --dnd5e-card-header-1:#5e0a1b;
+  --dnd5e-card-header-2:#241317;
+  --dnd5e-border-gold:1px solid var(--jjk-edge);
+  --dnd5e-border-dark:1px solid var(--jjk-edge);
+  --dnd5e-border-dotted:1px dotted var(--jjk-line-2);
+  --dnd5e-border-dashed:1px dashed var(--jjk-line-2);
+  --dnd5e-border-separator-faint:1px solid #2f2932;
+  --dnd5e-border-separator-heavy:1px solid var(--jjk-edge);
+  --dnd5e-attribute-color:var(--jjk-bone-2);
+  --dnd5e-ability-color:var(--jjk-bone);
+  --dnd5e-ability-mod-color:var(--jjk-bone);
+  --dnd5e-heading-3-color:var(--jjk-muted);
+  --color-text-emphatic:#fff;
+  --color-text-primary:var(--jjk-bone);
+  --color-text-secondary:var(--jjk-muted);
+  --color-text-tertiary:#8f8479;
+  --color-text-title:var(--jjk-bone);
+  --color-text-light-0:var(--jjk-bone);
+  --color-text-dark-primary:var(--jjk-bone);
+  --color-border:var(--jjk-edge);
+  --color-shadow-primary:var(--jjk-seal);
+  --separated-list-item-background-color:rgb(238 230 213 / 3%);
+  --separated-list-item-border-color:var(--jjk-edge);
+  --activity-icon-color:var(--jjk-bone-2);
+  --damage-icon-color:var(--jjk-bone-2);
+  --item-control-color:#7d7170;
+  --item-control-interactive-color:var(--jjk-muted);
+  --item-control-active-color:var(--jjk-seal-2);
+  --item-control-header-color:var(--jjk-bone);
+  --item-state-toggle-active:var(--jjk-seal-2);
+  --pill-background-color:var(--jjk-card-2);
+  --pill-border:1px solid var(--jjk-edge);
+  --meter-background:#0e0c10;
+  --filter-control-color:#7d7170;
+  --filter-control-active-color:var(--jjk-seal-2);
+  --context-entry-hover-background:var(--jjk-card-3);
+  --npc-header-input-background:rgb(0 0 0 / 35%);
+  --npc-portrait-toggle-on:var(--jjk-seal);
+  --slide-toggle-track-color-unchecked:var(--jjk-card-2);
+  --slide-toggle-track-color-checked:var(--jjk-seal);
+  --fieldset-legend-color:var(--jjk-bone);
+  --color-fieldset-border:var(--jjk-edge);
+  --control-button-text-color:var(--jjk-bone);
+  --hint-icon-color:var(--jjk-muted);
+  --icon-fill:var(--jjk-bone-2);
+}
+
+/* Window frame: the dnd5e frame border and drop shadow follow the ink edge. */
+.jjk-sealed-sheet.dnd5e2.vertical-tabs::after { border-radius:0; border-color:var(--jjk-edge); box-shadow:0 10px 28px #0008; }
+.jjk-sealed-sheet.dnd5e2 :is(.sheet-header,.sheet-body,.card,.items-section,.pill,.pill-lg,.meter,.lozenge,.portrait img){border-radius:0}
+.jjk-sealed-sheet.dnd5e2.character .window-content::before,
+.jjk-sealed-sheet.dnd5e2.npc::before { content:none; }
+
+/* Header: name in the display face, a red seal under the header, level as a stamp. */
+.jjk-sealed-sheet.dnd5e2 .sheet-header {
+  background:linear-gradient(180deg,#1d191f 0%,var(--jjk-ink) 100%);
+  border-bottom:1px solid var(--jjk-edge);
+  box-shadow:inset 0 -2px 0 var(--jjk-seal);
+}
+.jjk-sealed-sheet.dnd5e2 .sheet-header .document-name{
+  font-family:var(--jjk-display);letter-spacing:.04em;text-transform:uppercase;color:var(--jjk-bone);text-shadow:0 2px 0 #000;
+}
+.jjk-sealed-sheet.dnd5e2 .sheet-header :is(.class,.subtitle,.xp-label){color:var(--jjk-muted)}
+.jjk-sealed-sheet.dnd5e2 .sheet-header .level-badge{background:var(--jjk-seal);color:#fff;border-radius:0;box-shadow:3px 3px 0 #000}
+.jjk-sealed-sheet.dnd5e2 .sheet-header .xp-bar{background:#0e0c10;border-radius:0;border:1px solid var(--jjk-edge)}
+.jjk-sealed-sheet.dnd5e2 .sheet-header .xp-bar::after{background:linear-gradient(90deg,var(--jjk-ce-1),var(--jjk-energy));border-radius:0}
+.jjk-sealed-sheet.dnd5e2 .sheet-header .sheet-header-buttons button{border-radius:0}
+
+/* Sidebar card: one ink plate with a seal edge; portrait framed, not rounded. */
+.jjk-sealed-sheet.dnd5e2 .sidebar .card{background:var(--jjk-card);border:1px solid var(--jjk-edge);border-top:2px solid var(--jjk-seal);box-shadow:0 6px 18px #0007}
+.jjk-sealed-sheet.dnd5e2 .sidebar .card .portrait{border-bottom:1px solid var(--jjk-edge)}
+.jjk-sealed-sheet.dnd5e2 .sidebar .card .card-tab{background:var(--jjk-card-2);color:var(--jjk-bone);border:1px solid var(--jjk-edge);border-radius:0}
+.jjk-sealed-sheet.dnd5e2 .sidebar .card .card-tab:is(:hover,:focus-visible){border-color:var(--jjk-seal)}
+.jjk-sealed-sheet.dnd5e2 .sidebar .meter-group > .label{color:var(--jjk-muted);text-shadow:none;letter-spacing:.08em;text-transform:uppercase}
+.jjk-sealed-sheet.dnd5e2 .lozenge .value{font-family:var(--jjk-display);font-variant-numeric:tabular-nums}
+.jjk-sealed-sheet.dnd5e2 .death-tray .pip.filled{background:var(--jjk-bone)}
+.jjk-sealed-sheet.dnd5e2 .death-tray .pip.filled.failure{background:var(--jjk-seal)}
+.jjk-sealed-sheet.dnd5e2 .meter{border:1px solid var(--jjk-edge)}
+.jjk-sealed-sheet.dnd5e2 .meter .label :is(.value,.max,.separator){font-variant-numeric:tabular-nums}
+
+/* Vertical tabs: ink rail, bone active stamp with a seal notch. */
+.jjk-sealed-sheet.dnd5e2.vertical-tabs nav.tabs{background:#0e0c10;border-color:var(--jjk-edge)}
+.jjk-sealed-sheet.dnd5e2.vertical-tabs nav.tabs > .item{color:var(--jjk-muted);--icon-fill:var(--jjk-muted);border-radius:0}
+.jjk-sealed-sheet.dnd5e2.vertical-tabs nav.tabs > .item:hover{background:var(--jjk-card-2);color:var(--jjk-bone);--icon-fill:var(--jjk-bone)}
+.jjk-sealed-sheet.dnd5e2.vertical-tabs nav.tabs > .item.active{background:var(--jjk-bone);color:var(--jjk-ink);--icon-fill:var(--jjk-ink);box-shadow:inset 3px 0 0 var(--jjk-seal)}
+
+/* Ability scores and saves: bone numerals, seal underline on proficient saves. */
+.jjk-sealed-sheet.dnd5e2 .ability-score :is(.score,.mod,.value){font-family:var(--jjk-display);font-variant-numeric:tabular-nums}
+.jjk-sealed-sheet.dnd5e2 .ability-score :is(.label,.ability){color:var(--jjk-muted);letter-spacing:.08em}
+.jjk-sealed-sheet.dnd5e2 .ability-score.rollable:hover :is(.mod,.value){color:#fff;text-shadow:0 0 6px var(--jjk-seal)}
+
+/* Item lists (inventory, features, spells, effects): every list is the same ink table. */
+.jjk-sealed-sheet.dnd5e2 .items-section{background:var(--jjk-card);border:1px solid var(--jjk-edge);box-shadow:none;overflow:clip}
+.jjk-sealed-sheet.dnd5e2 .items-section > .items-header{
+  background:linear-gradient(90deg,#2a1d24,var(--jjk-card-2));color:var(--jjk-bone);
+  border-bottom:1px solid var(--jjk-seal);letter-spacing:.06em;text-transform:uppercase;
+}
+.jjk-sealed-sheet.dnd5e2 .items-section > .items-header h3{font-family:var(--jjk-display);font-size:var(--font-size-15,15px);color:var(--jjk-bone)}
+.jjk-sealed-sheet.dnd5e2 .items-section > .items-header :is(.item-header,.marker){color:var(--jjk-muted)}
+.jjk-sealed-sheet.dnd5e2 .item-list > .item{border-bottom:1px solid #2f2932;background:transparent}
+.jjk-sealed-sheet.dnd5e2 .item-list > .item:nth-child(even){background:rgb(238 230 213 / 2.5%)}
+.jjk-sealed-sheet.dnd5e2 .item-list > .item:hover{background:var(--jjk-card-3);box-shadow:inset 3px 0 0 var(--jjk-seal)}
+.jjk-sealed-sheet.dnd5e2 .item-list > .item.expanded{box-shadow:inset 3px 0 0 var(--jjk-energy)}
+.jjk-sealed-sheet.dnd5e2 .item-list .item-name .item-image{border-radius:0;border:1px solid var(--jjk-edge)}
+.jjk-sealed-sheet.dnd5e2 .item-list .item-name .title{color:var(--jjk-bone)}
+.jjk-sealed-sheet.dnd5e2 .item-list .item-name .subtitle{color:var(--jjk-muted)}
+.jjk-sealed-sheet.dnd5e2 .item-list :is(.item-detail,.item-uses,.item-price,.item-weight,.item-quantity){font-variant-numeric:tabular-nums}
+.jjk-sealed-sheet.dnd5e2 .item-list .item-description .item-summary{background:#16131a;border-top:1px dashed var(--jjk-edge)}
+.jjk-sealed-sheet.dnd5e2 .item-list-controls,.jjk-sealed-sheet.dnd5e2 item-list-controls{background:var(--jjk-card);border:1px solid var(--jjk-edge)}
+.jjk-sealed-sheet.dnd5e2 :is(.item-list-controls,item-list-controls) :is(input[type=search],.filter-list button){border-radius:0}
+.jjk-sealed-sheet.dnd5e2 .favorites{background:var(--jjk-card);border:1px solid var(--jjk-edge)}
+.jjk-sealed-sheet.dnd5e2 .favorites :is(.drop,.item-list > li){border-radius:0}
+
+/* Pills, traits, currency and biography read as ink plates. */
+.jjk-sealed-sheet.dnd5e2 :is(.pill,.pill-lg){border-color:var(--jjk-edge)}
+.jjk-sealed-sheet.dnd5e2 :is(.traits,.currency,.biography,.details) :is(.card,fieldset){border-top:2px solid var(--jjk-edge)}
+.jjk-sealed-sheet.dnd5e2 :is(prose-mirror,.editor-content,.biography .editor){background:#16131a;color:var(--jjk-bone)}
+
+/* NPC sheet: compact ink header, framed portrait, CR stamp. */
+.jjk-sealed-sheet.dnd5e2.npc .sheet-header{padding-block:6px}
+.jjk-sealed-sheet.dnd5e2.npc .sheet-header .portrait > :is(img,video){border:3px solid var(--jjk-bone-2);border-radius:0;box-shadow:4px 4px 0 #000}
+.jjk-sealed-sheet.dnd5e2.npc .sheet-header .portrait:not(.token){border-radius:0;border-color:#000}
+.jjk-sealed-sheet.dnd5e2.npc .sheet-header :is(.cr,.cr-badge,[data-prop="system.details.cr"]){font-family:var(--jjk-display)}
+.jjk-sealed-sheet.dnd5e2.npc :is(.npc-sidebar,.sidebar) .card{border-top:2px solid var(--jjk-seal)}
+.jjk-sealed-sheet.dnd5e2.npc .sheet-body .tab{scrollbar-color:var(--jjk-edge) var(--jjk-ink)}
+
+/* Overview strip: JJK-only controls; native HP, AC and abilities stay where D&D5e puts them. */
+.jjk-sealed-sheet .jjk-actor-overview{position:relative;z-index:1;margin:0 0 6px;background:#18151c}
+.jjk-sealed-sheet .jjk-actor-overview:empty{display:none}
+.jjk-sealed-sheet .jjk-overview-controls button{flex:1 1 auto;min-height:28px;font-size:11px;letter-spacing:.04em;background:var(--jjk-card-2);color:var(--jjk-bone);border:1px solid var(--jjk-edge)}
+.jjk-sealed-sheet .jjk-overview-controls button:hover{border-color:var(--jjk-seal)}
+.jjk-sealed-sheet .jjk-overview-controls[role=group]{border-top:1px dashed var(--jjk-edge);padding-top:5px}
+
+/* Tables everywhere Sealed Ink reaches: header seal, zebra, tabular numbers, scroll without clipping. */
+:is(.jjk-sealed-sheet,.jjk-sealed-surface,.jjk-sealed-chat) table:not(.jjk-ink-table){table-layout:auto;margin:6px 0}
+:is(.jjk-sealed-sheet,.jjk-sealed-surface,.jjk-sealed-chat) table:not(.jjk-ink-table) :is(th,td){vertical-align:top;font-variant-numeric:tabular-nums}
+:is(.jjk-sealed-sheet,.jjk-sealed-surface,.jjk-sealed-chat) table:not(.jjk-ink-table) th{font-family:var(--jjk-display);letter-spacing:.05em;text-transform:uppercase;font-size:.92em;text-align:start}
+:is(.jjk-sealed-sheet,.jjk-sealed-surface,.jjk-sealed-chat) table :is(th.num,td.num,td[data-num]){text-align:end}
+:is(.jjk-sealed-sheet,.jjk-sealed-surface) :is(.window-content,.jjk-sealed-hud-body,.journal-page-content) thead th{position:sticky;top:0;z-index:1}
+.jjk-sealed-chat table:not(.jjk-ink-table){width:100%;border-collapse:collapse;background:var(--jjk-card);border:1px solid var(--jjk-edge)}
+.jjk-sealed-chat table:not(.jjk-ink-table) :is(th,td){padding:4px 6px;border-bottom:1px solid var(--jjk-edge);color:var(--jjk-bone)}
+.jjk-sealed-chat table:not(.jjk-ink-table) th{background:var(--jjk-card-2);border-bottom:2px solid var(--jjk-seal)}
+:is(.jjk-sealed-sheet,.jjk-sealed-surface,.jjk-sealed-chat) table.jjk-ink-table{border-radius:0;box-shadow:3px 3px 0 #000}
+:is(.jjk-sealed-sheet,.jjk-sealed-surface) table.jjk-ink-table thead th{position:sticky;top:0;z-index:1}
+.jjk-sealed-surface[data-jjk-surface=compendium] :is(.directory-item,.compendium-list li){border-bottom:1px solid #2f2932}
+.jjk-sealed-surface[data-jjk-surface=compendium] .directory-item:hover{background:var(--jjk-card-3);box-shadow:inset 3px 0 0 var(--jjk-seal)}
+.jjk-sealed-surface[data-jjk-surface=compendium] :is(.directory-header,.header-search){background:var(--jjk-card);border-bottom:1px solid var(--jjk-seal)}
+.jjk-sealed-surface.dnd5e2 :is(.items-section,.item-list){background:var(--jjk-card);border-color:var(--jjk-edge)}
+.jjk-sealed-surface.dnd5e2 .items-section > .items-header{background:var(--jjk-card-2);border-bottom:1px solid var(--jjk-seal)}
+.jjk-sealed-surface.dnd5e2 .item-list > .item:hover{background:var(--jjk-card-3)}
+
+/* Motion: short, purposeful, always bounded; nothing loops. */
+/* Tab reveal runs only on a tab change (class set by sealed-ink.mjs), never on a data re-render. */
+.jjk-sealed-motion.jjk-sealed-tabswap :is(.tab.active,.jjk-tab-body){animation:jjk-sealed-reveal 170ms var(--jjk-ease,ease-out) both}
+.jjk-sealed-motion[data-jjk-motion=cinematic].jjk-sealed-tabswap .tab.active{animation-duration:260ms}
+.jjk-sealed-motion.dnd5e2 .item-list > .item{transition:background-color 140ms ease,box-shadow 140ms ease}
+.jjk-sealed-motion.dnd5e2 .meter .progress::before,.jjk-sealed-motion.dnd5e2 .meter.progress::before{transition:width 380ms var(--jjk-ease,ease-out)}
+.jjk-sealed-motion.dnd5e2.vertical-tabs nav.tabs > .item{transition:background-color 140ms ease,color 140ms ease,box-shadow 140ms ease}
+.jjk-sealed-motion .jjk-actor-overview:not(.settled){animation:jjk-sealed-reveal 200ms var(--jjk-ease,ease-out) both}
+.jjk-sealed-motion [data-jjk-delta]{animation:jjk-sealed-delta 620ms ease-out}
+.jjk-sealed-motion [data-jjk-delta=down]{--jjk-delta:var(--jjk-seal)}
+.jjk-sealed-motion [data-jjk-delta=up]{--jjk-delta:var(--jjk-bone)}
+.jjk-sealed-motion [data-jjk-delta=energy]{--jjk-delta:var(--jjk-energy)}
+@keyframes jjk-sealed-delta{0%{box-shadow:0 0 0 0 var(--jjk-delta,#fff)}35%{box-shadow:0 0 0 2px var(--jjk-delta,#fff),0 0 14px var(--jjk-delta,#fff)}100%{box-shadow:0 0 0 0 transparent}}
+.jjk-sealed-motion[data-jjk-motion=performance] :is(.tab.active,.jjk-actor-overview,[data-jjk-delta]){animation-duration:90ms!important}
+@media(prefers-reduced-motion:reduce){
+  .jjk-sealed-motion :is(.tab.active,.jjk-actor-overview,[data-jjk-delta]){animation:none!important}
+  .jjk-sealed-motion.dnd5e2 :is(.item-list > .item,.meter .progress::before,.meter.progress::before,nav.tabs > .item){transition:none!important}
+}
+
+/* Narrow sheets: the sidebar stacks above the tab body instead of crushing it. */
+@container (max-width:620px){
+  .jjk-sealed-sheet.dnd5e2.character .sheet-body .main-content{grid-template-columns:minmax(0,1fr)}
+  .jjk-sealed-sheet.dnd5e2.character .sheet-header{grid-template-columns:minmax(0,1fr)}
+  .jjk-sealed-sheet .jjk-overview-controls button{flex-basis:45%}
+}
+
+/* Sealed Ink 2 — notices, dock and panel. */
+.jjk-sealed-event-dock{display:inline-flex;align-items:center;gap:7px;min-height:32px;font:700 12px/1 "JJK Display","Arial Narrow",sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--bone);cursor:pointer;box-shadow:3px 3px 0 #000;transition:border-color 140ms ease,transform 140ms ease}
+.jjk-sealed-event-dock:hover{border-color:var(--seal);transform:translateY(-1px)}
+.jjk-sealed-event-dock[aria-expanded=true]{background:var(--bone);color:var(--ink);border-left-color:var(--seal)}
+.jjk-sealed-event-dock i{color:var(--seal)}
+.jjk-sealed-dock-badge{min-width:18px;padding:2px 5px;background:var(--seal);color:#fff;text-align:center;font-variant-numeric:tabular-nums;letter-spacing:0}
+.jjk-sealed-dock-badge[hidden]{display:none}
+.jjk-sealed-event-dock.has-unread:not([aria-expanded=true]) .jjk-sealed-dock-badge{animation:jjk-sealed-badge 1.6s ease-out 2}
+@keyframes jjk-sealed-badge{0%{box-shadow:0 0 0 0 #ce1032aa}70%{box-shadow:0 0 0 7px #ce103200}100%{box-shadow:none}}
+.jjk-sealed-event-panel{border-top:2px solid var(--seal);box-shadow:6px 6px 0 #000,0 12px 30px #0008;background-image:radial-gradient(#eee6d508 .6px,transparent .6px);background-size:4px 4px;background-color:var(--ink)}
+.jjk-sealed-event-panel:not([data-motion=off]){animation:jjk-sealed-panel 180ms cubic-bezier(.2,.7,.2,1)}
+@keyframes jjk-sealed-panel{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.jjk-sealed-event-panel nav button{text-transform:uppercase;letter-spacing:.06em;font-size:11px}
+.jjk-sealed-event-panel nav button[aria-pressed=true]{background:var(--bone);color:var(--ink)}
+.jjk-sealed-hud-tools{position:sticky;top:0;z-index:1;background:var(--ink);padding-bottom:4px}
+.jjk-sealed-hud-tools button:disabled{opacity:.45;cursor:not-allowed}
+.jjk-sealed-hud-empty{margin:0;padding:12px;border:1px dashed var(--edge);color:#b1a69a;line-height:1.4}
+.jjk-sealed-toast-head{display:flex;align-items:baseline;gap:6px;min-width:0}
+.jjk-sealed-toast-head i{flex:0 0 auto;font-size:11px;color:var(--bone)}
+.jjk-sealed-toast-head small{flex:0 0 auto;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#b1a69a}
+.jjk-sealed-toast-head strong{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:"JJK Display","Arial Narrow",sans-serif;letter-spacing:.04em}
+.jjk-sealed-toast-head time{flex:0 0 auto;font-size:10px;color:#9d9186;font-variant-numeric:tabular-nums}
+:is(.jjk-sealed-event-toast,.jjk-sealed-notice)[data-tone=critical] .jjk-sealed-toast-head i{color:var(--seal)}
+:is(.jjk-sealed-event-toast,.jjk-sealed-notice)[data-tone=energy] .jjk-sealed-toast-head i{color:var(--energy)}
+:is(.jjk-sealed-event-toast,.jjk-sealed-notice)[data-tone=gold] .jjk-sealed-toast-head i{color:#d4ad36}
+.jjk-sealed-notice{gap:3px}
+.jjk-sealed-notice.unread{background:#221d26;box-shadow:inset 0 0 0 1px #665861}
+.jjk-sealed-notice.unread .jjk-sealed-toast-head strong::after{content:"";display:inline-block;width:6px;height:6px;margin-inline-start:6px;background:var(--seal);vertical-align:middle}
+.jjk-sealed-event-toast{overflow:hidden;box-shadow:4px 4px 0 #000,0 8px 22px #0006}
+.jjk-sealed-event-toast.actionable{cursor:pointer}
+.jjk-sealed-toast-text{line-height:1.35;overflow-wrap:anywhere}
+.jjk-sealed-toast-timer{position:absolute;inset:auto 0 0 0;height:2px;background:currentColor;opacity:.35;transform-origin:left;animation:jjk-sealed-timer var(--jjk-toast-time,5s) linear forwards}
+.jjk-sealed-event-toast[data-tone=critical] .jjk-sealed-toast-timer{background:var(--seal);opacity:.8}
+.jjk-sealed-event-toast[data-tone=energy] .jjk-sealed-toast-timer{background:var(--energy);opacity:.8}
+.jjk-sealed-event-toast.held .jjk-sealed-toast-timer{animation-play-state:paused}
+@keyframes jjk-sealed-timer{from{transform:scaleX(1)}to{transform:scaleX(0)}}
+.jjk-sealed-event-toast.leaving{animation:jjk-sealed-notice-out 200ms ease-in forwards!important;pointer-events:none}
+@keyframes jjk-sealed-notice-out{to{opacity:0;transform:translateX(14px)}}
+.jjk-sealed-event-toast[data-motion=off] .jjk-sealed-toast-timer{animation:none;display:none}
+@media(prefers-reduced-motion:reduce){
+  .jjk-sealed-event-panel,.jjk-sealed-event-toast.leaving,.jjk-sealed-dock-badge,.jjk-sealed-event-dock{animation:none!important;transition:none!important;transform:none!important}
+  .jjk-sealed-toast-timer{animation:none;display:none}
+}
+/* The workspace is prepended inside .window-content, which D&D5e pulls up under the window title bar
+   (-65px on characters, -26px on NPCs): push it back down so its header is not hidden. */
+.jjk-sealed-sheet.dnd5e2.character:not(.minimized) .window-content > .jjk-actor-workspace{margin-block-start:69px}
+.jjk-sealed-sheet.dnd5e2.npc:not(.minimized) .window-content > .jjk-actor-workspace{margin-block-start:30px}
+.jjk-sealed-sheet .jjk-actor-workspace{position:relative;z-index:1}

@@ -136,17 +136,18 @@ function drawSummons(target,app,actor,model,resources){
 }
 export function enhanceActorWorkspace(app,root,active,resources=()=>[]){
  const actor=liveActor(app),old=root.querySelector(".jjk-actor-workspace");
- if(!active||!actor?.isOwner||!["character","npc"].includes(actor.type)){old?.remove();return;}
+ // Only the selectable Sealed Ink sheet classes get the workspace: default native sheets keep their own layout.
+ if(!active||app?.constructor?.jjkSealedInk!==true||!actor?.isOwner||!["character","npc"].includes(actor.type)){old?.remove();return false;}
  const host=root.querySelector(".window-content")??root.querySelector("form");
  if(!host)return;
  const engine=api();if(!engine)return;
  const s=getState(app,actor),m=workspaceModel(actor,engine);
  const links=s.tab==="summon"?linkedEntities(actor,canvas?.scene?.tokens,game.user).map(t=>[t.id,t.name,t.actor?.isOwner]):[];
  const signature=JSON.stringify([actor.name,actor.img,m,combatRows(actor,engine),links,s.tab,s.mini,s.reverse,game.user.isGM]);
- if(old?.dataset.signature===signature)return;
+ if(old?.dataset.signature===signature)return true;
  // Preserve text input focus: its query remains in the local state and the native render is not intercepted.
  const focused=old?.contains(document.activeElement)&&document.activeElement?.tagName==="INPUT";
- if(focused){if(!old.dataset.refreshPending){old.dataset.refreshPending="true";old.addEventListener("focusout",()=>{delete old.dataset.refreshPending;queueMicrotask(()=>enhanceActorWorkspace(app,root,active,resources));},{once:true});}return;}
+ if(focused){if(!old.dataset.refreshPending){old.dataset.refreshPending="true";old.addEventListener("focusout",()=>{delete old.dataset.refreshPending;queueMicrotask(()=>enhanceActorWorkspace(app,root,active,resources));},{once:true});}return true;}
  const shell=el("section","jjk-actor-workspace");shell.dataset.signature=signature;shell.dataset.entity=m.npc?"npc":"character";shell.dataset.mini=String(s.mini);shell.dataset.reverse=String(s.reverse);
  const header=el("header","jjk-workspace-header"),name=el("div","jjk-workspace-name"),tools=el("div","jjk-workspace-tools");
  if(actor.img){const image=el("img","jjk-workspace-portrait");image.src=actor.img;image.alt="";header.append(image);}
@@ -176,7 +177,9 @@ export function enhanceActorWorkspace(app,root,active,resources=()=>[]){
   else if(s.tab==="traits")drawItems(content,app,actor,m.items.filter(i=>i.type==="feat"||i.technique));
   else if(s.tab==="effects"){for(const e of m.effects){const row=el("div","jjk-workspace-entry");row.append(el("span","",e.name),button(tr("Inspect","Consultar"),()=>openDocument(app,actor.uuid,"effect",e.id)));content.append(row);}if(!m.effects.length)content.append(el("p","jjk-workspace-muted",tr("No active effects.","Sin efectos activos.")));}
   else if(s.tab==="progression"){addCommands(content,app,actor.uuid,[[tr("Creation","Creación"),"createCharacterWizard"],[tr("Level up","Subir nivel"),"levelUp"],[tr("Career","Carrera"),"openCareer"]]);drawItems(content,app,actor,m.items.filter(i=>["class","race","background","feat"].includes(i.type)));}
-  else if(s.tab==="body"){content.append(el("p","",tr("Soul awareness: ","Percepción del alma: ")+m.soul));for(const [limb,status] of Object.entries(m.limbs))content.append(el("p","",limb+" · "+status));addCommands(content,app,actor.uuid,[[tr("Body / RCT controls","Controles cuerpo / RCT"),"openPanel",["body"]]]);}
+  else if(s.tab==="body"){content.append(el("p","",tr("Soul awareness: ","Percepción del alma: ")+m.soul));const injured=Object.entries(m.limbs).filter(([,status])=>status&&status!=="ok");
+  for(const [limb,status] of injured)content.append(el("p","",game.i18n.localize("JJK5E.Limb."+limb)+" · "+game.i18n.localize("JJK5E.Limb."+status)));
+  if(!injured.length)content.append(el("p","jjk-workspace-muted",tr("No limb damage.","Sin daño en extremidades.")));addCommands(content,app,actor.uuid,[[tr("Body / RCT controls","Controles cuerpo / RCT"),"openPanel",["body"]]]);}
   else if(s.tab==="inventory")drawItems(content,app,actor,m.items.filter(i=>["weapon","equipment","consumable","tool","loot","container"].includes(i.type)));
   else if(s.tab==="vows")addCommands(content,app,actor.uuid,[[tr("Binding vows","Votos vinculantes"),"openVows"]]);
   else if(s.tab==="domain")addCommands(content,app,actor.uuid,[[tr("Domain HUD","Panel de dominio"),"openDomainHUD"],[tr("Combat engine","Motor de combate"),"openPanel",["combat"]]]);
@@ -185,4 +188,5 @@ export function enhanceActorWorkspace(app,root,active,resources=()=>[]){
  }
  shell.append(el("small","jjk-workspace-footer",tr("Native sheet below · inventory, editing, drag and drop, advancement and full activity workflows remain native.","Hoja nativa debajo · inventario, edición, arrastre, avances y flujos completos de actividades siguen siendo nativos.")));
  if(old)old.replaceWith(shell);else host.prepend(shell);
+ return true;
 }
