@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.100.0 — Motores de dominio y EM
+- Choque múltiple: si se cierra uno de los dominios de un choque entre 3 o más, el choque se vuelve a resolver entre los que siguen abiertos. Antes los demás conservaban el papel calculado contra el dominio que ya no estaba. Por ejemplo, dos dominios con el mismo refinamiento, perdedores ante un tercero, seguían encogiéndose y se rompían en la ronda 6. Ahora quedan empatados, como dicta su refinamiento.
+- Technique Burnout: ya no se puede abrir un dominio nuevo, completo o incompleto, mientras dura. Antes Incomplete Domain (dote) y la apertura desde el panel o una macro lo permitían.
+- Auditoría simulada sin fallos:
+  - 5 ciclos seguidos de abrir y cerrar no dejan restos.
+  - Un doble clic en abrir crea un solo efecto.
+  - El dominio caduca por rondas.
+  - La barrera rechaza daño negativo o NaN y, al llegar a 0, cierra el dominio y aplica el burnout.
+  - Borrar al actor con el dominio abierto no da error.
+  - En la EM, 10 gastos simultáneos de 3 sobre 20 aprueban exactamente 6, y la recuperación y las fracciones son correctas.
 ## 1.99.0 — Rendimiento
 - Ventanas JJK más fluidas: el panel JJK, Dominio, Carrera, Votos y el creador ya no se redibujan varias veces seguidas. Cuando un gasto de EM actualiza a la vez el objeto, el actor y sus efectos, cada ventana abierta se redibuja una sola vez por fotograma.
 - Menos tirones cada 30 s: la recuperación periódica de reservas de EM ya no recorre todos los tokens de todas las escenas. Antes eso obligaba a Foundry a preparar los actores de escenas que nadie miraba. Ahora solo revisa los actores del mundo y los tokens de las escenas activas o abiertas, y solo procesa los que tienen una reserva pendiente antigua. Al iniciar la partida se sigue revisando todo.

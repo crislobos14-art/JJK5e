@@ -1193,7 +1193,7 @@ function registerActivityHooks() {
       ui.notifications.warn(t("Domain.AmplificationBlocks"));
       return false;
     }
-    if (activity.item?.flags?.jjk5e?.technique && inBurnout(actor)) {
+    if ((activity.item?.flags?.jjk5e?.technique || activity.item?.flags?.jjk5e?.domainActivity === activity.id) && inBurnout(actor)) {
       ui.notifications.warn(t("Notify.Burnout"));
       return false;
     }
@@ -2210,6 +2210,8 @@ function onPreRollDamage(config) {
 
 async function openDomain(actor, item) {
   if (!actor?.isOwner || !setting("domainTracking") || domainOpen(actor) || (!game.user.isGM && !game.users.activeGM)) return;
+  // Technique Burnout follows every expansion: no new domain (complete or incomplete) until it ends.
+  if (inBurnout(actor)) { ui.notifications?.warn?.(t("Notify.Burnout")); return; }
   // Incomplete Domain (feat): 1 minute, refinement 0, no barrier, no sure hit; burnout 5 rounds.
   const incomplete = !!item?.flags?.jjk5e?.incompleteDomain;
   // V.6 Domain Refinement: Lasting Domain (500) 2 minutes, Total Mastery (1000) 3 minutes.
@@ -5967,17 +5969,22 @@ async function domainClosed(actor) {
     if (ids.length) await target.deleteEmbeddedDocuments("ActiveEffect",ids);
   }
   const peers = state.clash?.with ? [state.clash.with].flat() : [];
+  const reclash = [];
   for (const uuid of peers) {
     const other = await fromUuid(uuid).catch(() => null);
     const os = getDomain(other);
     if (os?.clash && [os.clash.with].flat().includes(actor.uuid)) {
       const remaining = [os.clash.with].flat().filter((id) => id !== actor.uuid);
-      os.clash = { ...os.clash, with: remaining, resolved: remaining.length === 0 };
+      // A multi-clash that loses a caster is decided again between the domains still open: their roles
+      // and rounds came from a refinement comparison that included the one that just left.
+      os.clash = remaining.length ? null : { ...os.clash, with: remaining, resolved: true };
       await setDomain(other, os);
       if (!remaining.length) await chat(other, `<p><i class="fas fa-crown"></i> ${t("Domain.ClashWon", { name: esc(other.name) })}</p>`);
+      else reclash.push(other);
     }
   }
   await setDomain(actor, null);
+  for (const other of reclash) if (getDomain(other)?.open && !getDomain(other)?.clash) await detectClash(other);
   if (window?.status === "open") for (const survivor of survivors) await detectClash(survivor);
   // Anything this or an older opening left behind (tint without a zone, stale markers or layers).
   await sweepDomainLeftovers().catch((err) => reportError("domain cleanup", err));
