@@ -179,7 +179,8 @@
       "MultiClash": "Multiple domain clash",
       "MultiClashHint": "Sure-hit effects are disabled until the clash resolves. Every losing barrier shrinks each round.",
       "MultiRounds": "{n} round(s) left",
-      "NeedWeakSpot": "{name} is inside the domain and has not found its weak spot (DC 30 Perception): the barrier cannot be damaged from inside yet."
+      "NeedWeakSpot": "{name} is inside the domain and has not found its weak spot (DC 30 Perception): the barrier cannot be damaged from inside yet.",
+      "CloseFailed": "JJK 5e: the domain could not be closed (no active GM or the GM declined)."
     },
     "Burnout": {
       "Name": "Technique Burnout",
@@ -570,7 +571,10 @@
       "ChooseHint": "Choose one: improve your ability scores, or take a feat instead.",
       "ModeASI": "Improve ability scores",
       "ModeFeat": "Take a feat",
-      "Taken": "Feat taken: {name}"
+      "Taken": "Feat taken: {name}",
+      "FitTechnique": "Your technique: {name}",
+      "FitRace": "Your race: {name}",
+      "FitClass": "Your class: {name}"
     },
     "SceneTools": {
       "Panel": "JJK: Open panel",

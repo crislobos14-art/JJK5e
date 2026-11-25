@@ -189,7 +189,7 @@
   .jjk-sealed-motion :is(.jjk-sealed-feat-row,.ability-scores li,.item-list li.item,.pill-lg,table tbody tr) { transition:none !important; }
 }
 
-.jjk-sealed-surface .jjk-sealed-asi-points { padding:8px; background:var(--jjk-card); color:var(--jjk-bone); border-left:3px solid var(--jjk-seal); font-weight:700; font-variant-numeric:tabular-nums; }
+.jjk-sealed-surface .jjk-sealed-asi-points { grid-column:1 / -1; list-style:none; padding:6px 10px; background:var(--jjk-card); color:var(--jjk-bone); border-left:3px solid var(--jjk-seal); font-weight:700; font-variant-numeric:tabular-nums; }
 .jjk-sealed-surface .jjk-sealed-choice-search { width:100%; margin-bottom:6px; }
 .jjk-sealed-surface .jjk-sealed-choice-hidden { display:none !important; }
 .jjk-sealed-motion .jjk-sealed-asi-summary { transition:color 140ms ease; }

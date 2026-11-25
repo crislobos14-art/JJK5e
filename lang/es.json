@@ -179,7 +179,8 @@
       "MultiClash": "Choque múltiple de dominios",
       "MultiClashHint": "Los impactos garantizados quedan desactivados hasta que se resuelva el choque. Cada barrera perdedora se encoge en cada asalto.",
       "MultiRounds": "quedan {n} asalto(s)",
-      "NeedWeakSpot": "{name} está dentro del dominio y no ha encontrado su punto débil (Percepción CD 30): todavía no puede dañar la barrera desde dentro."
+      "NeedWeakSpot": "{name} está dentro del dominio y no ha encontrado su punto débil (Percepción CD 30): todavía no puede dañar la barrera desde dentro.",
+      "CloseFailed": "JJK 5e: no se pudo cerrar el dominio (no hay GM activo o el GM lo rechazó)."
     },
     "Burnout": {
       "Name": "Technique Burnout",
@@ -570,7 +571,10 @@
       "ChooseHint": "Elige una opción: mejorar tus características o tomar una dote.",
       "ModeASI": "Mejorar características",
       "ModeFeat": "Tomar una dote",
-      "Taken": "Dote tomada: {name}"
+      "Taken": "Dote tomada: {name}",
+      "FitTechnique": "Tu técnica: {name}",
+      "FitRace": "Tu raza: {name}",
+      "FitClass": "Tu clase: {name}"
     },
     "SceneTools": {
       "Panel": "JJK: Abrir panel",

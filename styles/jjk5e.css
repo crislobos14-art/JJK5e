@@ -533,3 +533,7 @@ table.jjk-ink-table a.content-link, table.jjk-ink-table a.inline-roll { backgrou
 .jjk5e-ui .jjk-school .jjk-list li { display: flex; justify-content: space-between; gap: 6px; padding: 4px 8px; border: 1px solid var(--jjk-line); border-left: 3px solid var(--jjk-ce-2); margin-bottom: 3px; }
 .jjk5e-ui .jjk-school .jjk-list li em { color: var(--jjk-muted); font-style: normal; font-size: 11px; }
 .jjk5e-ui .jjk-school .jjk-chip.on i { margin-right: 4px; }
+
+/* v1.87 — every JJK window can be resized: content scrolls instead of overflowing. */
+.jjk5e-ui .window-content { overflow-y: auto; min-height: 0; }
+.jjk5e-ui.jjk5e-dialog .dialog-content { overflow-y: auto; }

@@ -116,7 +116,8 @@ function enhanceFeats(root) {
     const filter = make("select", "jjk-sealed-feat-filter");
     filter.setAttribute("aria-label", local("Feat category", "Categoría de dote"));
     const all = make("option", "", local("All categories", "Todas las categorías")); all.value = ""; filter.append(all);
-    for (const c of [...new Set(entries.map(e => e.category))].sort()) { const o = make("option", "", c); o.value = c; filter.append(o); }
+    // Keep the picker's order: your technique, race and class first, then the general categories.
+    for (const c of [...new Set(entries.map(e => e.category))]) { const o = make("option", "", c); o.value = c; filter.append(o); }
     const status = make("p", "hint jjk-sealed-feat-count");
     status.setAttribute("aria-live", "polite");
     const rows = make("div", "jjk-sealed-feat-rows");
@@ -510,6 +511,11 @@ Hooks.once("init", () => {
     choices: { off: local("Off", "Desactivado"), performance: "Performance", standard: "Standard", cinematic: "Cinematic" },
     onChange: refresh
   });
+  // Level-up flows hold long feat lists: let the native advancement window be resized too.
+  try {
+    const AM = game.dnd5e?.applications?.advancement?.AdvancementManager ?? globalThis.dnd5e?.applications?.advancement?.AdvancementManager;
+    if (AM?.DEFAULT_OPTIONS?.window) AM.DEFAULT_OPTIONS.window.resizable = true;
+  } catch (err) { console.warn(ID + " | advancement window", err); }
   try { registerSheets(); }
   catch (err) { console.warn(ID + " | Sealed Ink sheet registration unavailable; native sheets retained", err); }
 });

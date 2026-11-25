@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.87.0 — Cierre de dominio, dotes por técnica/raza/clase y ventanas redimensionables
+- Cerrar dominio: el HUD usaba una copia vieja del actor (pasa con tokens no vinculados), así que el botón no cerraba nada. Ahora siempre lee el actor actual, el cierre funciona aunque el HUD tenga un id de apertura viejo, avisa si no se pudo y cierra la ventana.
+- Recuadro negro: la animación de oscuridad al abrir el dominio (jb2a.darkness) ahora dura 2,5 s con desvanecido y tiene nombre, así que también se elimina al cerrar el dominio.
+- Dotes al subir de nivel y en la creación: agrupadas primero por «Tu técnica», «Tu raza» y «Tu clase», y luego por categoría JJK. El filtro de Sealed Ink respeta ese orden.
+- Todas las ventanas JJK (panel, menú, votos, carrera, HUD de dominio, creación, reglas opcionales y diálogos) y la ventana de avances de D&D 5e se pueden redimensionar; el contenido se desplaza en vez de cortarse.
+- Sealed Ink, aumento de característica: el contador de puntos ocupa toda la fila en lugar de una casilla de la cuadrícula.
+
 ## 1.87.0 — Motores Sealed Ink de creación y combate
 - Character Creation Engine: añade una revisión visual, no destructiva, de los avances nativos, atributos, clase, raza, trasfondo, técnica, atributo de EM y mentalidad, con avisos de duplicados o recursos vinculados ausentes.
 - La compra de puntos ya no sobrescribe silenciosamente bonificaciones de avances existentes: cuando el personaje ya tiene clase, raza o trasfondo, el creador pide revisar y confirmar los atributos en la hoja nativa.

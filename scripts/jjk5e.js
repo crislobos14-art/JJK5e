@@ -54,7 +54,7 @@ async function safeDelete(doc) {
 }
 
 async function confirmDialog(title, content) {
-  return foundry.applications.api.DialogV2.confirm({ classes: ["jjk5e-ui", "jjk5e-dialog"], window: { title }, content, rejectClose: false });
+  return foundry.applications.api.DialogV2.confirm({ classes: ["jjk5e-ui", "jjk5e-dialog"], window: { resizable: true, title }, content, rejectClose: false });
 }
 
 /** Prompt with a form; returns the named field value (or null). */
@@ -65,7 +65,7 @@ async function promptField(title, content, field, asNumber = false) {
     return asNumber ? el.valueAsNumber : el.value;
   };
   return foundry.applications.api.DialogV2.prompt({ classes: ["jjk5e-ui", "jjk5e-dialog"],
-    window: { title }, content, rejectClose: false,
+    window: { resizable: true, title }, content, rejectClose: false,
     ok: { label: t("Common.OK"), callback: (event, button, dialog) => read(button.form ?? dialog?.element ?? dialog) }
   });
 }
@@ -730,7 +730,7 @@ async function showIntegrationDiagnostics(){
     ${row(t("Diag.Pending"),`<strong class="jjk-num">${pending.length}</strong>`,pending.length?"neg":"pos")}</tbody></table>
     <p class="hint">${t("Diag.NotCertification")}</p>`;
   if(!pending.length) return confirmDialog(t("Diag.Title"),info);
-  const answer=await foundry.applications.api.DialogV2.prompt({window:{title:t("Diag.Title")},classes:["jjk5e-ui","jjk5e-dialog"],rejectClose:false,
+  const answer=await foundry.applications.api.DialogV2.prompt({window:{resizable:true,title:t("Diag.Title")},classes:["jjk5e-ui","jjk5e-dialog"],rejectClose:false,
     content:info+`<label>${t("Diag.Transaction")}<select name="tx">${choices}</select></label>
     <label>${t("Diag.Decision")}<select name="decision"><option value="none">${t("Diag.ReviewOnly")}</option><option value="commit">${t("Diag.Commit")}</option><option value="refund">${t("Diag.Refund")}</option></select></label>`,
     ok:{callback:(_e,b)=>({index:Number(b.form.elements.tx.value),decision:b.form.elements.decision.value})}});
@@ -2659,7 +2659,7 @@ async function showShortcuts() {
     <h3>${t("Panel.PanelKeys")}</h3><table>${local}<tr><td><kbd>1–4</kbd></td><td>${t("Panel.Key.tabs")}</td></tr>
     <tr><td><kbd>Shift + −/+</kbd></td><td>${t("Panel.Key.five")}</td></tr></table>
     <p class="notes">${t("Keys.HudHint")}</p></div>`;
-  return foundry.applications.api.DialogV2.prompt({ window: { title: t("Panel.Shortcuts") }, classes: ["jjk5e-ui", "jjk5e-dialog"], content, rejectClose: false,
+  return foundry.applications.api.DialogV2.prompt({ window: { resizable: true, title: t("Panel.Shortcuts") }, classes: ["jjk5e-ui", "jjk5e-dialog"], content, rejectClose: false,
     ok: { label: t("Common.OK") } });
 }
 
@@ -2754,6 +2754,9 @@ function makePanelClass() {
     };
   }
   return class JJKPanel extends Base {
+    // Always act on the live document: token actors are rebuilt when their token changes.
+    get actor() { return liveActor(this._jjkActor); }
+    set actor(a) { this._jjkActor = a; }
     static DEFAULT_OPTIONS = {
       classes: ["jjk5e-ui", "jjk5e-panel-app"],
       window: { icon: "fas fa-yin-yang", resizable: true },
@@ -3541,7 +3544,7 @@ async function pointBuy(actor) {
   const DialogV2 = foundry.applications.api.DialogV2;
   for (;;) {
     const result = await DialogV2.wait({
-      window: { title: t("PointBuy.Title"), icon: "fas fa-dice-d20" }, classes: ["jjk5e-ui", "jjk5e-dialog"],
+      window: { resizable: true, title: t("PointBuy.Title"), icon: "fas fa-dice-d20" }, classes: ["jjk5e-ui", "jjk5e-dialog"],
       position: { width: 520 },
       content: pointBuyContent(values, cfg),
       rejectClose: false,
@@ -3579,6 +3582,37 @@ async function jjkFeatDocs() {
   return featDocsCache;
 }
 
+/** What an eligible feat builds on for this actor: its technique, its race, its class, or nothing in particular. */
+function featFit(actor, doc) {
+  const sub = doc.system?.type?.subtype;
+  const pre = doc.flags?.jjk5e?.prereq ?? {};
+  const names = [...(pre.features ?? []).flat(), ...(pre.prefixes ?? []).flat()].map((n) => normName(n));
+  const ownedBy = (test) => actor.items.filter(test).map((i) => normName(baseName(i)));
+  const matches = (list) => names.some((n) => list.some((o) => o === n || o.startsWith(n)));
+  const techniques = [...actorTechniques(actor)];
+  if (doc.flags?.jjk5e?.technique || (pre.techniques ?? []).length || ["jjkTechnique", "jjkCursedTechnique"].includes(sub)
+      || matches(ownedBy((i) => i.flags?.jjk5e?.technique)) || techniques.some((n) => names.includes(n))) return "technique";
+  if (matches(ownedBy((i) => i.type === "race" || i.system?.type?.value === "race"))) return "race";
+  if (matches(ownedBy((i) => ["class", "subclass"].includes(i.type) || i.system?.type?.value === "class")) || pre.level) return "class";
+  return "general";
+}
+function featGroupsHTML(actor, eligible) {
+  const race = actor.items.find((i) => i.type === "race");
+  const cls = actor.items.filter((i) => i.type === "class").map((i) => i.name).join(" / ");
+  const tech = actor.getFlag?.(MODULE_ID, "technique");
+  const head = { technique: t("ASI.FitTechnique", { name: tech ?? "—" }), race: t("ASI.FitRace", { name: race?.name ?? "—" }), class: t("ASI.FitClass", { name: cls || "—" }) };
+  const option = (d) => `<option value="${d.uuid}" data-fit="${featFit(actor, d)}">${esc(d.name)}</option>`;
+  const out = [];
+  const fits = Object.groupBy(eligible, (d) => featFit(actor, d));
+  for (const k of ["technique", "race", "class"]) if (fits[k]?.length) out.push(`<optgroup label="${esc(head[k])}">${fits[k].map(option).join("")}</optgroup>`);
+  // General feats keep their JJK categories (Barrier, Cursed Energy, Physical…).
+  for (const [sub, list] of Object.entries(Object.groupBy(fits.general ?? [], (d) => d.system?.type?.subtype || "general"))
+    .sort(([a], [b]) => featCategoryLabel(a).localeCompare(featCategoryLabel(b)))) {
+    out.push(`<optgroup label="${esc(featCategoryLabel(sub))}">${list.map(option).join("")}</optgroup>`);
+  }
+  return out.join("");
+}
+
 async function injectASIFeats(app, element) {
   if (!setting("asiFeatPicker")) return;
   const adv = app?.advancement;
@@ -3603,10 +3637,7 @@ async function injectASIFeats(app, element) {
     <p class="hint">${t("ASI.Hint", { n: eligible.length })}</p>
     <div class="form-group"><select data-jjk-feat style="flex:1" aria-label="${esc(t("ASI.Legend"))}">
       <option value="">—</option>
-      ${Object.entries(Object.groupBy(eligible, (d) => d.system?.type?.subtype || "general"))
-        .sort(([a], [b]) => featCategoryLabel(a).localeCompare(featCategoryLabel(b)))
-        .map(([sub, list]) => `<optgroup label="${esc(featCategoryLabel(sub))}">`
-          + list.map((d) => `<option value="${d.uuid}">${esc(d.name)}</option>`).join("") + "</optgroup>").join("")}
+      ${featGroupsHTML(actor, eligible)}
     </select>
     <button type="button" data-jjk-take style="flex:0 0 auto"><i class="fas fa-plus"></i> ${t("ASI.Take")}</button></div>`;
   const select = box.querySelector("[data-jjk-feat]");
@@ -3810,9 +3841,12 @@ function damageKind(activity) {
   return types[0] ?? null;
 }
 
-function playAt(file, target, { scale = 1, persist = false, name, gridSize = null, below = false } = {}) {
+function playAt(file, target, { scale = 1, persist = false, name, gridSize = null, below = false, duration = 0 } = {}) {
   if (!file || !target) return;
   const seq = new Sequence().effect().file(file).atLocation(target);
+  // Looping files (e.g. darkness) otherwise keep their full-frame last state: bound and fade them.
+  if (duration && !persist) seq.duration(duration).fadeOut(600);
+  if (name && !persist) seq.name(name);
   if (gridSize) seq.size(gridSize, { gridUnits: true });
   else seq.scaleToObject(scale);
   if (below) seq.belowTokens();
@@ -3869,7 +3903,7 @@ function animateActivity(activity, targets = null) {
   const tmpl = activity.target?.template ?? {};
   const name = baseName(item).toLowerCase();
   if (item.flags.jjk5e.domainActivity === activity.id || name.startsWith("domain expansion")) {
-    playAt(animPath(ANIM.domain), source, { scale: 6 });
+    playAt(animPath(ANIM.domain), source, { scale: 6, duration: 2500, name: `jjk5e-domain-burst-${item.actor.id}` });
     playAt(themeFile(theme, "area", item), source, { scale: 8, below: true });
     playAt(animPath(ANIM.domainAura), source, { scale: 10, persist: true, name: `jjk5e-domain-${item.actor.id}` });
     return;
@@ -3904,7 +3938,10 @@ function animateActivity(activity, targets = null) {
 }
 
 function endDomainAnimation(actor) {
-  if (globalThis.Sequencer?.EffectManager && actor) Sequencer.EffectManager.endEffects({ name: `jjk5e-domain-${actor.id}` });
+  if (!globalThis.Sequencer?.EffectManager || !actor) return;
+  for (const name of [`jjk5e-domain-${actor.id}`, `jjk5e-domain-burst-${actor.id}`]) {
+    try { Sequencer.EffectManager.endEffects({ name }); } catch (err) { reportError("domain animation", err); }
+  }
 }
 
 function animateBlackFlash(actor) {
@@ -4215,7 +4252,7 @@ function makeMenuClass() {
     static DEFAULT_OPTIONS = {
       id: "jjk5e-menu",
       classes: ["jjk5e-ui", "jjk5e-menu"],
-      window: { title: "JJK 5e", icon: "fas fa-yin-yang", minimizable: true },
+      window: { resizable: true, title: "JJK 5e", icon: "fas fa-yin-yang", minimizable: true },
       position: { width: 250, height: "auto", left: 110, top: 80 },
       actions: { run: JJKMenu.#run }
     };
@@ -4452,7 +4489,7 @@ async function createVow(actor, data = null) {
   }
   if (!vow) {
     vow = await foundry.applications.api.DialogV2.prompt({ classes: ["jjk5e-ui", "jjk5e-dialog"],
-      window: { title: t("Vow.New") }, content: presetForm(actor), rejectClose: false, position: { width: 460 },
+      window: { resizable: true, title: t("Vow.New") }, content: presetForm(actor), rejectClose: false, position: { width: 460 },
       ok: { label: t("Vow.Make"), callback: (event, button) => readVowForm(button.form) }
     });
   }
@@ -4519,7 +4556,7 @@ async function breakVow(actor, id) {
 /** Mutual vow punishment: 5 exhaustion levels for 10 days, or a roll on the misfortune table. */
 async function vowPunishment(actor) {
   const choice = await foundry.applications.api.DialogV2.wait({ classes: ["jjk5e-ui", "jjk5e-dialog"],
-    window: { title: t("Vow.Punishment") }, content: `<p>${t("Vow.PunishmentHint")}</p>`, rejectClose: false,
+    window: { resizable: true, title: t("Vow.Punishment") }, content: `<p>${t("Vow.PunishmentHint")}</p>`, rejectClose: false,
     buttons: [{ action: "exhaustion", label: t("Vow.Exhaustion"), default: true }, { action: "roll", label: t("Vow.RollMisfortune") }]
   }).catch(() => "exhaustion");
   if (choice !== "roll") {
@@ -4706,7 +4743,7 @@ async function generateMission(opts = {}) {
     const actorOpts = chars.map((a) => `<label class="jjk-check"><input type="checkbox" name="a" value="${a.id}" `
       + `${sel.includes(a) ? "checked" : ""}> ${esc(a.name)} <em>(${esc(gradeLabel(getCareer(a).grade))})</em></label>`).join("");
     const res = await foundry.applications.api.DialogV2.prompt({ classes: ["jjk5e-ui", "jjk5e-dialog"],
-      window: { title: t("Mission.Generate") }, rejectClose: false,
+      window: { resizable: true, title: t("Mission.Generate") }, rejectClose: false,
       content: `<form><label>${t("Mission.Grade")}<select name="grade">${gradeOpts}</select></label>`
         + `<fieldset><legend>${t("Mission.Assign")}</legend>${actorOpts || `<p>—</p>`}</fieldset>`
         + `<label class="jjk-check"><input type="checkbox" name="trial"> ${t("Mission.Trial")}</label>`
@@ -4781,6 +4818,9 @@ function refreshCareerApps(actor) { const a = CAREER_APPS.get(actor?.uuid); if (
 function makeVowClass() {
   const Base = foundry.applications.api.ApplicationV2;
   return class JJKVows extends Base {
+    // Always act on the live document: token actors are rebuilt when their token changes.
+    get actor() { return liveActor(this._jjkActor); }
+    set actor(a) { this._jjkActor = a; }
     static DEFAULT_OPTIONS = {
       classes: ["jjk5e-ui", "jjk5e-vows"], window: { icon: "fas fa-handshake", resizable: true },
       position: { width: 520, height: "auto" },
@@ -4849,6 +4889,9 @@ function bindTabKeys(root) {
 function makeCareerClass() {
   const Base = foundry.applications.api.ApplicationV2;
   return class JJKCareer extends Base {
+    // Always act on the live document: token actors are rebuilt when their token changes.
+    get actor() { return liveActor(this._jjkActor); }
+    set actor(a) { this._jjkActor = a; }
     static DEFAULT_OPTIONS = {
       classes: ["jjk5e-ui", "jjk5e-career"], window: { icon: "fas fa-medal", resizable: true },
       position: { width: 540, height: "auto" },
@@ -5150,9 +5193,10 @@ async function handleDomainAuthority(msg, { user } = {}) {
     if (["claim", "finish", "decline"].includes(operation)) return processClashDecision(operation, actor, data, user);
     if (operation === "amplification") return toggleDomainAmplification(actor);
     const state = getDomain(actor);
+    // Closing is idempotent: a stale HUD (old opening id) may still clean up the current domain.
+    if (operation === "close") return closeDomainOf(actor);
     if (!state?.open || !data.openingId || state.openingId !== data.openingId) return false;
     if (operation === "mode") return setBarrierMode(actor, data.mode);
-    if (operation === "close") { await closeDomainOf(actor); return true; }
     if (operation === "lethal" && typeof data.lethal === "boolean") {
       await actor.setFlag(MODULE_ID, "domainLethal", data.lethal);
       return setDomain(actor, { ...state, lethal: data.lethal });
@@ -5522,11 +5566,13 @@ async function domainClosed(actor) {
 }
 
 async function closeDomainOf(actor, reason = "") {
+  actor = liveActor(actor);
   if (!isActiveGM()) return requestDomainAuthority("close", { actorUuid: actor?.uuid, openingId: getDomain(actor)?.openingId });
   const eff = actor?.effects?.find((e) => e.flags?.jjk5e?.kind === "domain" || e.flags?.jjk5e?.domainOpen);
   if (reason) await chat(actor, `<p><i class="fas fa-burst"></i> ${reason}</p>`);
   if (eff) await safeDelete(eff);
   else await domainClosed(actor);
+  return true;
 }
 
 /* ---- Barrier damage, weak spot ---- */
@@ -5664,7 +5710,7 @@ async function promptBarrierAttack(actor) {
   if (!seeker?.isOwner || !tk?.document?.uuid) return ui.notifications.warn(t("Domain.SelectAttacker"));
   const state = getDomain(actor);
   if (!state?.open || state.noBarrier) return;
-  const result = await foundry.applications.api.DialogV2.prompt({ classes: ["jjk5e-ui", "jjk5e-dialog"], window: { title: t("Domain.AttackBarrier") }, rejectClose: false,
+  const result = await foundry.applications.api.DialogV2.prompt({ classes: ["jjk5e-ui", "jjk5e-dialog"], window: { resizable: true, title: t("Domain.AttackBarrier") }, rejectClose: false,
     content: `<p>${t("Domain.BarrierAttackHint")}</p><label>${t("Domain.AttackBonus")}<input name="bonus" type="number" value="0"></label>
       <label>${t("Domain.AttackRange")}<input name="range" type="number" min="0" value="5"></label>
       <label>${t("Domain.DamageFormula")}<input name="formula" value="1d8"></label>
@@ -5965,7 +6011,7 @@ async function editDomainProfile(actor, mode = "form") {
   };
   const options = (arr, value) => arr.map((x) => `<option value="${x}" ${x === value ? "selected" : ""}>${label(x)}</option>`).join("");
   if (mode === "export") {
-    await foundry.applications.api.DialogV2.prompt({ classes: ["jjk5e-ui", "jjk5e-dialog"], window: { title: t("Domain.ProfileExport") }, rejectClose: false,
+    await foundry.applications.api.DialogV2.prompt({ classes: ["jjk5e-ui", "jjk5e-dialog"], window: { resizable: true, title: t("Domain.ProfileExport") }, rejectClose: false,
       content: `<textarea readonly rows="12" style="width:100%">${esc(JSON.stringify(profile,null,2))}</textarea>`,
       ok: { callback: () => true } });
     return true;
@@ -5984,7 +6030,7 @@ async function editDomainProfile(actor, mode = "form") {
     <label>${t("Domain.ProfileOnSave")} <select name="onSave">${options(["half","none","full"],profile.onSave)}</select></label>
     <label>${t("Domain.ProfileCondition")} <select name="condition">${options(DOMAIN_PROFILE_CONDITIONS,profile.condition)}</select></label>
     <label>${t("Domain.ProfileRounds")} <input name="rounds" type="number" min="1" max="10" value="${profile.rounds}"></label>`;
-  const result = await foundry.applications.api.DialogV2.prompt({ classes: ["jjk5e-ui", "jjk5e-dialog"], window: { title: t("Domain.ProfileEdit") }, rejectClose: false, content,
+  const result = await foundry.applications.api.DialogV2.prompt({ classes: ["jjk5e-ui", "jjk5e-dialog"], window: { resizable: true, title: t("Domain.ProfileEdit") }, rejectClose: false, content,
     ok: { callback: (e,b) => {
       const f = b.form.elements;
       if (mode === "import") { try { return JSON.parse(f.json.value); } catch { return {}; } }
@@ -6106,13 +6152,24 @@ async function toggleDomainAmplification(actor) {
   return true;
 }
 const DOMAIN_APPS = new Map();
+/** The current document for an actor reference (a token's synthetic actor is replaced when the token updates). */
+function liveActor(actor) {
+  if (!actor?.uuid) return actor ?? null;
+  try {
+    const live = fromUuidSync(actor.uuid);
+    return live?.documentName === "Actor" ? live : actor;
+  } catch { return actor; }
+}
 function refreshDomainApps(actor) { const a = DOMAIN_APPS.get(actor?.uuid); if (a?.rendered) a.render(); }
 
 function makeDomainClass() {
   const Base = foundry.applications.api.ApplicationV2;
   return class JJKDomain extends Base {
+    // Always act on the live document: token actors are rebuilt when their token changes.
+    get actor() { return liveActor(this._jjkActor); }
+    set actor(a) { this._jjkActor = a; }
     static DEFAULT_OPTIONS = {
-      classes: ["jjk5e-ui", "jjk5e-domain"], window: { icon: "fas fa-circle-half-stroke", minimizable: true },
+      classes: ["jjk5e-ui", "jjk5e-domain"], window: { icon: "fas fa-circle-half-stroke", minimizable: true, resizable: true },
       position: { width: 440, height: "auto" },
       actions: {
         profile: async function (ev, el) { await editDomainProfile(this.actor, el?.dataset?.mode); this.render(); },
@@ -6124,7 +6181,7 @@ function makeDomainClass() {
           return queueDomainWork(()=>executeDomainProfile(this.actor,targets,foundry.utils.randomID()));
         },
         hit: async function () {
-          const res = await foundry.applications.api.DialogV2.prompt({ classes: ["jjk5e-ui", "jjk5e-dialog"], window: { title: t("Domain.HitBarrier") }, rejectClose: false,
+          const res = await foundry.applications.api.DialogV2.prompt({ classes: ["jjk5e-ui", "jjk5e-dialog"], window: { resizable: true, title: t("Domain.HitBarrier") }, rejectClose: false,
             content: `<label>${t("CE.Amount")}<input type="number" name="n" value="10" min="0"></label>
               <label>${t("Domain.SideLabel")}<select name="side"><option value="outside">${t("Domain.Side.outside")}</option><option value="inside">${t("Domain.Side.inside")}</option></select></label>
               <label class="jjk-check"><input type="checkbox" name="psy"> ${t("Domain.Psychic")}</label>`,
@@ -6152,7 +6209,11 @@ function makeDomainClass() {
             lethal: el.dataset.m !== "nonlethal" });
           this.render();
         },
-        close: function () { closeDomainOf(this.actor); }
+        close: async function () {
+          const done = await closeDomainOf(this.actor);
+          if (done === false) ui.notifications.warn(t("Domain.CloseFailed"));
+          else this.close();
+        }
       }
     };
     get title() { return `${t("Domain.HUD")} — ${this.actor?.name ?? ""}`; }
@@ -6198,7 +6259,8 @@ function openDomainHUD(actor) {
   if (!actor) return;
   JJKDomainClass ??= makeDomainClass();
   let app = DOMAIN_APPS.get(actor.uuid);
-  if (!app) { app = new JJKDomainClass({ id: `jjk5e-domain-${actor.id}` }); app.actor = actor; DOMAIN_APPS.set(actor.uuid, app); }
+  if (!app) { app = new JJKDomainClass({ id: `jjk5e-domain-${actor.id}` }); DOMAIN_APPS.set(actor.uuid, app); }
+  app.actor = actor;
   return app.render({ force: true });
 }
 
@@ -6308,7 +6370,7 @@ async function createCurse(opts = {}) {
   if (!grade) {
     const gradeOpts = GRADES.map((g) => `<option value="${g}">${esc(gradeLabel(g))}</option>`).join("");
     const kindOpts = Object.entries(CURSE_KINDS).map(([k2, v]) => `<option value="${k2}">${esc(L(v.name))}</option>`).join("");
-    const res = await foundry.applications.api.DialogV2.prompt({ classes: ["jjk5e-ui", "jjk5e-dialog"], window: { title: t("Curse.Generate") }, rejectClose: false,
+    const res = await foundry.applications.api.DialogV2.prompt({ classes: ["jjk5e-ui", "jjk5e-dialog"], window: { resizable: true, title: t("Curse.Generate") }, rejectClose: false,
       content: `<label>${t("Mission.Grade")}<select name="grade">${gradeOpts}</select></label>
         <label>${t("Curse.Kind")}<select name="kind">${kindOpts}</select></label>
         <label>${t("Vow.Name")}<input type="text" name="name"></label>
@@ -6860,6 +6922,9 @@ function makeCreatorClass() {
     finally { this._busy = false; if (this.rendered) this.render(); }
   };
   return class JJKCreator extends Base {
+    // Always act on the live document: token actors are rebuilt when their token changes.
+    get actor() { return liveActor(this._jjkActor); }
+    set actor(a) { this._jjkActor = a; }
     static DEFAULT_OPTIONS = {
       classes: ["jjk5e-ui", "jjk5e-creator"], window: { icon: "fas fa-user-plus", resizable: true },
       position: { width: 520, height: "auto" },
@@ -7701,7 +7766,7 @@ async function asiDialog(actor, points, title, perAbility = points) {
   const content = `<p>${t("Opt.ASI.Prompt", { n: points })}</p><div class="jjk-grid">${ABILITIES.map((a) =>
     `<label>${a.toUpperCase()} (${Number(actor.system.abilities?.[a]?.value) || 10})
       <input type="number" name="${a}" value="0" min="0" max="${perAbility}"></label>`).join("")}</div>`;
-  const res = await foundry.applications.api.DialogV2.prompt({ window: { title }, content, rejectClose: false, classes: ["jjk5e-ui", "jjk5e-dialog"],
+  const res = await foundry.applications.api.DialogV2.prompt({ window: { resizable: true, title }, content, rejectClose: false, classes: ["jjk5e-ui", "jjk5e-dialog"],
     ok: { label: t("Common.OK"), callback: (e, b) => Object.fromEntries(ABILITIES.map((a) => [a, Math.max(0, Number(b.form.elements[a].value) || 0)])) } });
   if (!res) return false;
   const sum = Object.values(res).reduce((s, v) => s + v, 0);
@@ -7727,9 +7792,7 @@ async function eligibleFeats(actor) {
 async function pickFeat(actor, title) {
   const list = await eligibleFeats(actor);
   if (!list.length) { ui.notifications.warn(t("Create.NoFeats")); return false; }
-  const groups = Object.entries(Object.groupBy(list, (d) => d.system?.type?.subtype || "general"))
-    .sort(([x], [y]) => featCategoryLabel(x).localeCompare(featCategoryLabel(y)))
-    .map(([sub, docs]) => `<optgroup label="${esc(featCategoryLabel(sub))}">${docs.map((d) => `<option value="${d.uuid}">${esc(d.name)}</option>`).join("")}</optgroup>`).join("");
+  const groups = featGroupsHTML(actor, list);
   const uuid = await promptField(title, `<p class="hint">${t("ASI.Hint", { n: list.length })}</p><select name="pick" style="width:100%">${groups}</select>`, "pick");
   const doc = uuid ? list.find((d) => d.uuid === uuid) : null;
   if (!doc) return false;
@@ -7771,7 +7834,7 @@ async function yearlyProgression(actor) {
   if (!actor || !game.user.isGM || !optOn("yearlyProgression")) return false;
   const n = Number(actor.getFlag(MODULE_ID, "yearly")) || 0;
   if (n >= 4) return ui.notifications.warn(t("Opt.Yearly.Max"));
-  const choice = await foundry.applications.api.DialogV2.wait({ classes: ["jjk5e-ui", "jjk5e-dialog"], window: { title: t("Opt.yearlyProgression.Name") }, rejectClose: false,
+  const choice = await foundry.applications.api.DialogV2.wait({ classes: ["jjk5e-ui", "jjk5e-dialog"], window: { resizable: true, title: t("Opt.yearlyProgression.Name") }, rejectClose: false,
     content: `<p>${t("Opt.Yearly.Prompt", { name: esc(actor.name), n: n + 1 })}</p>`,
     buttons: [{ action: "asi", label: t("Opt.Yearly.ASI"), default: true }, { action: "feat", label: t("Opt.Yearly.Feat") }] });
   let ok = false;
@@ -7858,7 +7921,7 @@ async function workWeek(actor) {
   actor = requireActor(actor);
   if (!actor?.isOwner) return;
   const special = !!actor.getFlag(MODULE_ID, "technique") || hasRCT(actor);
-  const choice = await foundry.applications.api.DialogV2.wait({ classes: ["jjk5e-ui", "jjk5e-dialog"], window: { title: t("Opt.moneyRules.Name") }, rejectClose: false,
+  const choice = await foundry.applications.api.DialogV2.wait({ classes: ["jjk5e-ui", "jjk5e-dialog"], window: { resizable: true, title: t("Opt.moneyRules.Name") }, rejectClose: false,
     content: `<p>${t("Opt.Money.Prompt")}</p>`, buttons: [
       { action: "wage", label: t("Opt.Money.Wage"), default: true },
       ...(special ? [{ action: "special", label: t("Opt.Money.Special") }] : []),
@@ -7874,7 +7937,7 @@ async function workWeek(actor) {
   } else if (choice === "tool") {
     const items = actor.items.filter((i) => ["weapon", "equipment"].includes(i.type));
     if (!items.length) return;
-    const res = await foundry.applications.api.DialogV2.prompt({ classes: ["jjk5e-ui", "jjk5e-dialog"], window: { title: t("Opt.Money.Tool") }, rejectClose: false,
+    const res = await foundry.applications.api.DialogV2.prompt({ classes: ["jjk5e-ui", "jjk5e-dialog"], window: { resizable: true, title: t("Opt.Money.Tool") }, rejectClose: false,
       content: `<label>${t("Opt.Money.Item")}<select name="item">${items.map((i) => `<option value="${i.id}">${esc(i.name)} (${Number(i.system?.price?.value) || 0})</option>`).join("")}</select></label>
         <label>${t("Mission.Grade")}<select name="grade">${Object.keys(TOOL_MULT).map((g) => `<option value="${g}">${esc(gradeLabel(g))} ×${TOOL_MULT[g]}</option>`).join("")}</select></label>`,
       ok: { label: t("Opt.Money.Sell"), callback: (e, b) => ({ item: b.form.elements.item.value, grade: b.form.elements.grade.value }) } });
@@ -8027,7 +8090,7 @@ async function recordFallenShikigami(actor) {
     if(canRecall)buttons.push({action:"recall",label:t("Totality.Recall")});
     buttons.push({action:"lost",label:t("Totality.Lost")},{action:"cancel",label:t("Totality.Cancel")});
     const choice=await foundry.applications.api.DialogV2.wait({
-      classes:["jjk5e-ui","jjk5e-dialog"],window:{title:"Ten Shadows — "+name},rejectClose:false,
+      classes:["jjk5e-ui","jjk5e-dialog"],window:{resizable:true,title:"Ten Shadows — "+name},rejectClose:false,
       content:`<p>${esc(summoner.name)} — ${esc(name)}</p><p>${t("Totality.Hint")}</p>`,
       buttons
     });
@@ -8772,7 +8835,7 @@ async function promptDomainClash({ actorUuid, opener, openerUuid, openingId }) {
     const actor = await fromUuid(actorUuid).catch(() => null);
     const rival = actor && rivalDomainFor(actor, openerUuid, openingId);
     if (!actor?.isOwner || !rival || !reactionOffer(rival, actor)) return;
-    const go = await foundry.applications.api.DialogV2.confirm({ window: { title: t("Clash.OfferTitle"), icon: "fas fa-yin-yang" },
+    const go = await foundry.applications.api.DialogV2.confirm({ window: { resizable: true, title: t("Clash.OfferTitle"), icon: "fas fa-yin-yang" },
       classes: ["jjk5e-ui", "jjk5e-dialog"], rejectClose: false,
       content: `<p>${t("Clash.Offer", { name: esc(actor.name), opener: esc(opener ?? "?") })}</p><p class="hint">${t("Clash.Hint")}</p>`,
       yes: { label: t("Clash.Expand"), icon: "fas fa-circle-half-stroke" }, no: { label: t("Clash.Decline") } });
@@ -8874,7 +8937,7 @@ async function editSchool(actor) {
     <label>${t("School.TeacherIs")}<select name="teacher">${opt("", "—", s.teacher)}${teachers.map((a) => opt(a.uuid, `${a.name}${getSchool(a).school ? ` (${t(`School.Name.${getSchool(a).school}`)})` : ""}`, s.teacher)).join("")}</select></label>
     ${game.user.isGM ? `<label class="jjk-check"><input type="checkbox" name="graduated" ${s.graduated ? "checked" : ""}> ${t("School.Graduated")}</label>` : ""}
     <p class="hint">${t("School.Hint")}</p>`;
-  const res = await foundry.applications.api.DialogV2.prompt({ classes: ["jjk5e-ui", "jjk5e-dialog"], window: { title: `${t("School.Title")} — ${actor.name}`, icon: "fas fa-school" },
+  const res = await foundry.applications.api.DialogV2.prompt({ classes: ["jjk5e-ui", "jjk5e-dialog"], window: { resizable: true, title: `${t("School.Title")} — ${actor.name}`, icon: "fas fa-school" },
     rejectClose: false, content, ok: { label: t("Common.Save"), callback: (e, b) => { const f = b.form.elements;
       return { school: f.school.value, role: f.role.value, year: Number(f.year.value), teacher: f.teacher.value, graduated: f.graduated ? f.graduated.checked : s.graduated }; } } });
   if (!res) return false;
