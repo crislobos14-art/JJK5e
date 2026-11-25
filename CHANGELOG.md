@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.89.0 — Interfaz unificada Sealed Ink
+- Sealed Ink es el diseño predeterminado para quienes todavía no han guardado una preferencia. Se amplía a herramientas JJK, chat, ajustes, editores y compendios con controles de animación por cliente.
+- Registro independiente de las fichas de personaje y PNJ. Las fichas seleccionables añaden un resumen de recursos y accesos a herramientas JJK según los permisos del actor.
+- Acceso desde la ficha a Cursed Inventory, Insect Storage, Technique Storage y Cursed Battery cuando el actor posee el recurso correspondiente.
+- Quedan pendientes las plantillas completas de Sealed Ink 2.1–2.8, la minihoja, el reordenamiento de acciones y rasgos, y la automatización del almacenamiento y la transferencia de EM. Validación visual y multijugador en Foundry pendiente.
+
 ## 1.88.0 — Cierre de dominio, dotes por técnica/raza/clase y ventanas redimensionables
 - Cerrar dominio: el HUD usaba una copia vieja del actor (pasa con tokens no vinculados), así que el botón no cerraba nada. Ahora siempre lee el actor actual, el cierre funciona aunque el HUD tenga un id de apertura viejo, avisa si no se pudo y cierra la ventana.
 - Recuadro negro: la animación de oscuridad al abrir el dominio (jb2a.darkness) ahora dura 2,5 s con desvanecido y tiene nombre, así que también se elimina al cerrar el dominio.
