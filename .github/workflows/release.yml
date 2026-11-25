@@ -9,6 +9,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: jjk5e-release
+  cancel-in-progress: false
+
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -54,8 +58,21 @@ jobs:
           awk -v t="## ${TAG#v}" '$0 ~ "^## " { p = index($0, t) == 1 } p' CHANGELOG.md > notes.md
           test -s notes.md || echo "Release $TAG" > notes.md
 
+      - name: Back up the previous published release
+        if: steps.v.outputs.exists != 'true'
+        id: backup
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          previous="$(gh release view --json tagName --jq '.tagName')"
+          gh release download "$previous" --dir previous --pattern module.json --pattern module.zip
+          archive="rollback-${previous}.zip"
+          python3 tools/make-rollback.py "$previous" previous "$archive"
+          echo "archive=$archive" >> "$GITHUB_OUTPUT"
+
       - name: Publish release
         if: steps.v.outputs.exists != 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release create "${{ steps.v.outputs.tag }}" module.zip module.json --target "$GITHUB_SHA" --title "${{ steps.v.outputs.tag }}" --notes-file notes.md
+          ROLLBACK_ARCHIVE: ${{ steps.backup.outputs.archive }}
+        run: gh release create "${{ steps.v.outputs.tag }}" module.zip module.json "$ROLLBACK_ARCHIVE" --target "$GITHUB_SHA" --title "${{ steps.v.outputs.tag }}" --notes-file notes.md
