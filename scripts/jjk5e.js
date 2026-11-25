@@ -3122,7 +3122,7 @@ function freshData(item, fresh) {
   return { data, flags, old };
 }
 
-async function updateItemAutomation(item, fresh) {
+async function updateItemAutomation(item, fresh, { inPlaceOnly = false } = {}) {
   const { data, flags, old } = freshData(item, fresh);
   const R = foundry.data.operators?.ForcedReplacement;
   const forced = (v) => (R ? R.create(v) : v);
@@ -3137,6 +3137,7 @@ async function updateItemAutomation(item, fresh) {
       flags: { ...flags, jjk5e: forced(flags.jjk5e) }
     }, { jjk5eSync: true, diff: false });
   } catch (err) {
+    if (inPlaceOnly) throw err;
     // Fallback: recreate the item with the same id (references by id keep working).
     console.warn(`${MODULE_ID} | in-place update failed for ${item.name}, recreating`, err);
     const actor = item.actor;
@@ -3162,29 +3163,96 @@ async function updateItemAutomation(item, fresh) {
  * @param {boolean} [options.prompt=true]  Ask before updating, listing the items.
  * @returns {Promise<number>} Number of items updated.
  */
+const automationUndo = new Map();
+const automationBusy = new Set();
+
+function automationSnapshot(item) {
+  const {name, img, flags, system, effects} = item.toObject();
+  return {name, img, flags, system, effects};
+}
+
+async function undoAutomation(actor) {
+  if (!actor?.isOwner || automationBusy.has(actor.uuid)) return;
+  const batch = automationUndo.get(actor.uuid);
+  if (!batch?.length) return;
+  if (!await confirmDialog(qol("Undo last update","Revertir última actualización"),
+    `<p>${qol("Only items unchanged since the update will be restored.","Solo se restaurarán los objetos que no hayan cambiado desde la actualización.")}</p>`)) return;
+  if (!actor.isOwner || automationBusy.has(actor.uuid) || automationUndo.get(actor.uuid) !== batch) return;
+  automationBusy.add(actor.uuid);
+  let restored = 0;
+  try {
+    for (const entry of batch) {
+      const item = actor.items.get(entry.id);
+      if (!actor.isOwner || !item || JSON.stringify(automationSnapshot(item)) !== entry.after) continue;
+      try {
+        await updateItemAutomation(item, entry.before, { inPlaceOnly: true });
+        restored++;
+      } catch (err) { reportError("automation rollback", err); }
+    }
+    automationUndo.delete(actor.uuid);
+  } finally { automationBusy.delete(actor.uuid); }
+  refreshPanels(actor);
+  ui.notifications.info(`${qol("Restored","Restaurados")}: ${restored}/${batch.length}`);
+}
+
 async function updateAutomation(actor, { prompt = true } = {}) {
   actor = requireActor(actor);
   if (!actor?.isOwner) return 0;
   const list = await outdatedItems(actor);
   if (!list.length) {
+    if (prompt && automationUndo.has(actor.uuid)) { await undoAutomation(actor); return 0; }
     if (prompt) ui.notifications.info(t("Update.None", { name: actor.name }));
     return 0;
   }
+  if (automationBusy.has(actor.uuid)) return 0;
+  const plans = [];
+  for (const {item, src} of list) {
+    const doc = await game.packs.get(src.pack)?.getDocument(src.id);
+    if (!doc) continue;
+    const fresh = doc.toObject(), before = automationSnapshot(item);
+    const oldActivities = before.system.activities ?? {}, nextActivities = fresh.system.activities ?? {};
+    const oldEffects = before.effects ?? [], nextEffects = fresh.effects ?? [];
+    const removed = Object.keys(oldActivities).filter(id => !(id in nextActivities)).map(id => oldActivities[id].name ?? id);
+    const extraEffects = oldEffects.filter(e => !nextEffects.some(next => next._id === e._id)).map(e => e.name);
+    plans.push({id:item.id, name:item.name, fresh, before, removed, extraEffects});
+  }
+  let selected = plans;
   if (prompt) {
-    const items = list.map(({ item }) => `<li>${esc(item.name)}</li>`).join("");
-    const ok = await confirmDialog(t("Update.Title"), `<p>${t("Update.Prompt", { name: esc(actor.name), n: list.length })}</p><ul class="jjk-update-list">${items}</ul><p class="notes">${t("Update.Keeps")}</p>`);
-    if (!ok) return 0;
+    const rows = plans.map(({name, before, fresh, removed, extraEffects}, i) => {
+      const risky = removed.length || extraEffects.length;
+      const list = Object.values(fresh.system.activities ?? {}).map(a => esc(a.name ?? "")).join(", ");
+      return `<li><label><input type="checkbox" name="item" value="${i}" ${risky ? "" : "checked"}> ${esc(name)}</label>
+      <details><summary>${qol("Preview","Vista previa")}</summary><p>${qol("Activities after update","Actividades tras actualizar")}: ${list || "—"}</p>
+      <p>${qol("Effects","Efectos")}: ${before.effects?.length ?? 0} → ${fresh.effects?.length ?? 0}</p>
+      ${risky ? `<p>${qol("Local entries or entries removed by this revision","Entradas locales o retiradas por esta revisión")}: ${[...removed,...extraEffects].map(esc).join(", ")}</p>` : ""}</details></li>`;
+    }).join("");
+    const result = await foundry.applications.api.DialogV2.prompt({ classes:["jjk5e-ui","jjk5e-dialog"],
+      window:{title:t("Update.Title"),resizable:true}, rejectClose:false,
+      content:`<p>${t("Update.Keeps")}</p><ul class="jjk-update-list">${rows}</ul>`,
+      ok:{label:t("Common.OK"),callback:(_event, button) => [...button.form.querySelectorAll("input[name=item]:checked")].map(input => Number(input.value))}
+    });
+    if (!Array.isArray(result)) return 0;
+    selected = result.map(index => plans[index]).filter(Boolean);
+  } else {
+    selected = plans.filter(entry => !entry.removed.length && !entry.extraEffects.length);
   }
+  if (!actor.isOwner || !selected.length || automationBusy.has(actor.uuid)) return 0;
+  automationBusy.add(actor.uuid);
+  const batch = [];
   let n = 0;
-  for (const { item, src } of list) {
-    try {
-      const doc = await game.packs.get(src.pack)?.getDocument(src.id);
-      if (!doc) continue;
-      await updateItemAutomation(item, doc.toObject());
-      n++;
-    } catch (err) { console.error(`${MODULE_ID} | update ${item.name}`, err); }
-  }
-  await applyScaling(actor);
+  try {
+    for (const entry of selected) {
+      const item = actor.items.get(entry.id);
+      if (!actor.isOwner || !item || JSON.stringify(automationSnapshot(item)) !== JSON.stringify(entry.before)) continue;
+      try {
+        await updateItemAutomation(item, entry.fresh, { inPlaceOnly: true });
+        n++;
+      } catch (err) { reportError("automation update", err); }
+      const after = JSON.stringify(automationSnapshot(item));
+      if (after !== JSON.stringify(entry.before)) batch.push({...entry,after});
+    }
+    if (batch.length) automationUndo.set(actor.uuid, batch);
+  } finally { automationBusy.delete(actor.uuid); }
   refreshPanels(actor);
   if (prompt) ui.notifications.info(t("Update.Done", { name: actor.name, n }));
   return n;
@@ -3202,6 +3270,47 @@ async function updateAllAutomation() {
   for (const a of actors) n += await updateAutomation(a, { prompt: false });
   ui.notifications.info(t("Update.DoneWorld", { n, actors: actors.length }));
   return n;
+}
+
+const qol = (en, es) => game.i18n.lang.startsWith("es") ? es : en;
+
+async function openGMStart() {
+  if (!game.user.isGM) return;
+  const report = integrationReport();
+  const actors = engineActors();
+  const stale = (await Promise.all(actors.map(async actor => ({ actor, count: (await outdatedItems(actor)).length })))).filter(row => row.count);
+  if (!game.user.isGM) return;
+  const rows = report.dependencies.map(dep => `<li>${esc(dep.id)} · ${dep.active ? esc(dep.version ?? "—") : qol("Inactive","Inactivo")}</li>`).join("");
+  const settings = ["autoSpendCE", "transactionalCE", "domainTracking", "domainSureHit", "playerGMRequests"].map(key =>
+    `<li>${esc(t(`Settings.${key}.Name`))} · ${setting(key) ? qol("On","Activo") : qol("Off","Inactivo")}</li>`).join("");
+  const pending = report.pending.map(entry => {
+    const actor = actors.find(candidate => candidate.uuid === entry.actorUuid);
+    return `<li>${esc(actor?.name ?? entry.actorUuid)} · ${esc(t(`Diag.State.${entry.state}`))} · ${entry.cost} CE</li>`;
+  });
+  for (const actor of actors) {
+    const rest = actor.getFlag(MODULE_ID, "shortRestExchange");
+    if (rest?.state === "review") pending.push(`<li>${esc(actor.name)} · ${qol("Rest exchange under review","Intercambio de descanso en revisión")}</li>`);
+  }
+  const choices = stale.map(({actor, count}, index) => `<option value="${index}">${esc(actor.name)} · ${count}</option>`).join("");
+  const result = await promptField(qol("JJK GM center","Centro del GM JJK"),
+    `<p>Foundry ${esc(report.foundry ?? "—")} · D&amp;D 5e ${esc(report.dnd5e ?? "—")}</p>
+    <details><summary>${qol("Dependencies","Dependencias")}</summary><ul>${rows}</ul></details>
+    <details><summary>${qol("World settings","Ajustes del mundo")}</summary><ul>${settings}</ul></details>
+    <details open><summary>${qol("Pending resources","Recursos pendientes")} · ${pending.length}</summary><ul>${pending.join("")}</ul></details>
+    <label>${qol("Open","Abrir")} <select name="destination"><option value="diagnostics">${t("Diag.Title")}</option>
+    <option value="settings">${qol("Module settings","Ajustes del módulo")}</option>${choices}</select></label>`, "destination");
+  if (result == null || !game.user.isGM) return;
+  if (result === "diagnostics") return showIntegrationDiagnostics();
+  if (result === "settings") return game.settings.sheet?.render({ force: true });
+  const actor = stale[Number(result)]?.actor;
+  if (actor?.isOwner) return updateAutomation(actor);
+}
+
+class JJKGMStartMenu extends (AppV2 ?? FormApplication) {
+  async render() {
+    await openGMStart();
+    return this;
+  }
 }
 
 class JJKUpdateMenu extends (AppV2 ?? FormApplication) {
@@ -3249,6 +3358,10 @@ Hooks.once("init", () => {
     name: "JJK5E.Settings.importMenu.Name", label: "JJK5E.Settings.importMenu.Label",
     hint: "JJK5E.Settings.importMenu.Hint", icon: "fas fa-file-import", type: JJKImportMenu, restricted: true
   });
+  game.settings.registerMenu(MODULE_ID, "gmStartMenu", {
+    name: qol("JJK GM center","Centro del GM JJK"), label: qol("Open","Abrir"),
+    icon: "fas fa-clipboard-list", type: JJKGMStartMenu, restricted: true
+  });
   game.settings.registerMenu(MODULE_ID, "updateMenu", {
     name: "JJK5E.Settings.updateMenu.Name", label: "JJK5E.Settings.updateMenu.Label",
     hint: "JJK5E.Settings.updateMenu.Hint", icon: "fas fa-arrows-rotate", type: JJKUpdateMenu, restricted: true
@@ -3270,7 +3383,7 @@ Hooks.once("init", () => {
     combatInteractionState, combatInteractionActivity, findPool, poolValue, poolMax, cePending, resolveRestExchange, chooseTechnique, syncTechnique, promptCE, shortRestCE, chooseCEAbility, negativeEmotion,
     applyScaling, openPanel, maximumOutput, setReducedOutput, setSoulAwareness, setLimb, rollLimb,
     summon, dismissSummons, syncResource, missingPrereqs, applyCEEffects, activateGroup, endGroup,
-    updateAutomation, updateAllAutomation, outdatedItems, burnoutRecovery, fallDamage, applySoulDamage, clearSoulDamage,
+    openGMStart, undoAutomation, updateAutomation, updateAllAutomation, outdatedItems, burnoutRecovery, fallDamage, applySoulDamage, clearSoulDamage,
     techniqueBuilder, buildTechniqueItems
   };
 });

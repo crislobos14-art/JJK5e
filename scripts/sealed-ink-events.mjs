@@ -126,6 +126,10 @@ function record(key, tone, actor, data = {}) {
   updateDock();
   if (panel && activeTab === "events") drawPanel();
   if (settings("sealedEventToasts")) toast(n);
+  if (n.tone === "critical" && settings("sealedUrgentSound") && !document.hidden) {
+    void Promise.resolve().then(() => foundry.audio?.AudioHelper?.play({src:"sounds/lock.wav",autoplay:true,volume:0.25},false))
+      .catch(err => console.warn(ID + " | notice audio", err));
+  }
 }
 const TONE = {
   critical: ["fa-solid fa-triangle-exclamation", () => L("Critical","Crítico")],
@@ -201,7 +205,7 @@ function queue(actor) {
     timer = null;
     for (const a of pending.values()) observe(a);
     pending.clear(); updateDock();
-    if (panel && activeTab !== "events") drawPanel(true);
+    if (panel && ["hud","gm"].includes(activeTab)) drawPanel(true);
   },80);
 }
 function combatants() {
@@ -274,6 +278,64 @@ async function useHUDActivity(actor, itemId, activityId, event) {
   try { return await activity.use({ event }, { configure: true }, {}); }
   finally { busy = false; control.disabled = false; }
 }
+const favorites = () => settings("sealedFavorites");
+let onlyFavorites = false, noticeFilter = "";
+
+function activityKey(actor, item, activity) {
+  return [game.world.id, game.user.id, actor.uuid, item.id, activity.id].join(":");
+}
+
+function isFavorite(key) {
+  return favorites().includes(key);
+}
+
+function toggleFavorite(key) {
+  const keys = favorites();
+  return game.settings.set(ID, "sealedFavorites", keys.includes(key) ? keys.filter(entry => entry !== key) : [...keys, key]);
+}
+
+function displayAction(kind) {
+  return ({action:L("Action","Acción"),bonus:L("Bonus action","Acción adicional"),reaction:L("Reaction","Reacción"),
+    free:L("Free action","Acción gratuita"),full:L("Full turn","Turno completo")})[kind] ?? "—";
+}
+
+async function drawLibrary(body) {
+  const input = el("input");
+  input.type = "search";
+  input.placeholder = L("Search techniques and rules","Buscar técnicas y reglas");
+  input.setAttribute("aria-label", input.placeholder);
+  const rows = el("div","jjk-sealed-hud-activities");
+  body.append(input,rows);
+  const packs = [...game.packs].filter(pack =>
+    (pack.collection.startsWith("jjk5e.") || pack.collection.startsWith("world.jjk5e-")) &&
+    /-(techniques|rules)$/.test(pack.collection) &&
+    (game.user.isGM || pack.testUserPermission(game.user,"OBSERVER")));
+  const entries = (await Promise.all(packs.map(async pack => {
+    try {
+      const index = await pack.getIndex({fields:["flags.jjk5e.originalName","flags.jjk5e.technique"]});
+      return [...index].map(entry => ({pack,entry}));
+    } catch (err) {
+      console.warn(ID + " | reference index", err);
+      return [];
+    }
+  }))).flat();
+  if (!body.isConnected) return;
+  const fold = value => String(value ?? "").normalize("NFD").replace(/\p{Diacritic}/gu,"").toLowerCase();
+  function draw() {
+    rows.replaceChildren();
+    const query = fold(input.value).trim();
+    if (!query) return;
+    const found = entries.filter(({entry}) => fold([entry.name,entry.flags?.jjk5e?.originalName,entry.flags?.jjk5e?.technique].join(" ")).includes(query));
+    rows.append(el("p","",L("Results","Resultados") + " · " + found.length));
+    for (const {pack,entry} of found.slice(0,40)) rows.append(button(entry.name + " · " + pack.title, async () => {
+      if (!game.user.isGM && !pack.testUserPermission(game.user,"OBSERVER")) return;
+      const doc = await pack.getDocument(entry._id);
+      if (doc && (game.user.isGM || doc.testUserPermission(game.user,"OBSERVER"))) doc.sheet?.render({force:true});
+    }));
+  }
+  input.addEventListener("input",draw);
+}
+
 function drawHUD(body) {
   const list = candidates(), actor = selectedActor();
   if (!actor) { body.append(el("p","",L("Select an owned token or character.","Selecciona un token o personaje propio."))); return; }
@@ -285,17 +347,51 @@ function drawHUD(body) {
     body.append(el("p","",L("Linked summon: use the original sheet and resolve summoner commands before executing attacks.","Invocación vinculada: utiliza la ficha original y resuelve las órdenes del invocador antes de atacar.")));
     return;
   }
+  const tokens = [...(canvas?.scene?.tokens ?? [])].filter(token => {
+    const origin = token.flags?.dnd5e?.summon?.origin ?? token.actor?.flags?.dnd5e?.summon?.origin;
+    return visible(token.actor,token) && (token.flags?.jjk5e?.summonedBy === actor.uuid || actor.items.some(item => item.uuid === origin));
+  });
+  if (tokens.length) {
+    const summons = el("details","jjk-sealed-hud-card");
+    summons.append(el("summary","",L("Linked summons","Invocaciones vinculadas")));
+    for (const token of tokens) {
+      summons.append(actorCard(token.actor));
+      summons.append(el("small","",L("Resolve command costs using the summoner's rules.","Resuelve el coste de la orden según las reglas del invocador.")));
+    }
+    body.append(summons);
+  }
   const rows = el("div","jjk-sealed-hud-activities");
   const activities = [...actor.items].flatMap(item => [...(item.system?.activities ?? [])].filter(a => typeof a.use === "function").map(a => ({item,a})));
   const search = el("input"); search.type = "search"; search.placeholder = L("Find activity","Buscar actividad"); search.setAttribute("aria-label",search.placeholder); search.value = activityQuery;
   function draw() {
     rows.replaceChildren();
-    for (const {item,a} of activities.filter(x => (x.item.name+" "+x.a.name).toLowerCase().includes(search.value.toLowerCase())).slice(0,40)) {
+    const matches = activities.filter(({item,a}) => (!onlyFavorites || isFavorite(activityKey(actor,item,a))) &&
+      (item.name+" "+a.name).toLowerCase().includes(search.value.toLowerCase()));
+    matches.sort((left,right) => Number(isFavorite(activityKey(actor,right.item,right.a))) - Number(isFavorite(activityKey(actor,left.item,left.a))));
+    for (const {item,a} of matches.slice(0,40)) {
+      const key = activityKey(actor,item,a), meta = api()?.combatInteractionActivity?.(actor,a);
+      const range = a.range?.value == null ? "" : [a.range.value,a.range.units].filter(Boolean).join(" ");
+      const details = [meta && displayAction(meta.kind), meta?.cost != null && meta.cost + (meta.variable ? "+" : "") + " CE",range].filter(Boolean);
+      const row = el("div","jjk-sealed-hud-buttons");
       const b = button(item.name + " · " + a.name, event => useHUDActivity(actor, item.id, a.id, event));
-      rows.append(b);
+      b.disabled = meta?.allowed === false;
+      if (b.disabled) row.append(el("small","",L("Unavailable in the current turn","No disponible en el turno actual")));
+      const star = button(isFavorite(key) ? "★" : "☆", async () => { await toggleFavorite(key); draw(); });
+      star.setAttribute("aria-pressed", String(isFavorite(key)));
+      star.setAttribute("aria-label", L("Toggle favorite","Alternar favorito") + " · " + a.name);
+      row.append(star,b,el("small","",details.join(" · ")));
+      rows.append(row);
     }
+    if (!matches.length) rows.append(el("p","",L("No matching activities","Sin actividades coincidentes")));
   }
-  search.addEventListener("input", () => { activityQuery = search.value; draw(); }); body.append(search,rows); draw();
+  const filter = button(L("Favorites only","Solo favoritos"), () => {
+    onlyFavorites = !onlyFavorites;
+    filter.setAttribute("aria-pressed",String(onlyFavorites));
+    draw();
+  });
+  filter.setAttribute("aria-pressed",String(onlyFavorites));
+  search.addEventListener("input", () => { activityQuery = search.value; draw(); });
+  body.append(search,filter,rows); draw();
 }
 function drawPanel(automatic = false) {
   if (!panel) return;
@@ -310,12 +406,15 @@ function drawPanel(automatic = false) {
   if (settings("sealedEventCenter")) tabs.push(["events",L("Notices","Avisos")]);
   if (settings("sealedCombatHUD")) tabs.push(["hud","Combat HUD"]);
   if (game.user.isGM && settings("sealedCombatHUD")) tabs.push(["gm","GM"]);
+  tabs.push(["library",L("Reference","Consulta")]);
   if (!tabs.some(t => t[0] === activeTab)) activeTab = tabs[0]?.[0] ?? "events";
   for (const [key,name] of tabs) { const b = button(name,() => {activeTab=key;drawPanel();}); b.setAttribute("aria-pressed",String(key===activeTab));nav.append(b); }
   panel.append(nav);
   const body = el("div","jjk-sealed-hud-body"); panel.append(body);
   if (activeTab === "hud") { drawHUD(body); return; }
+  if (activeTab === "library") { void drawLibrary(body); return; }
   if (activeTab === "gm" && game.user.isGM) {
+    if (api()?.openGMStart) body.append(button(L("GM center and pending reviews","Centro del GM y revisiones pendientes"), () => api().openGMStart()));
     body.append(el("p","", L("Current combat","Combate actual")));
     for (const c of combatants()) body.append(actorCard(c.actor,c.initiative));
     if (!combatants().length) body.append(el("p","",L("No combatants","Sin combatientes")));
@@ -328,7 +427,14 @@ function drawPanel(automatic = false) {
   mark.disabled = !rows.some(n => unread.has(n.id)); clear.disabled = !rows.length;
   tools.append(mark,clear); body.append(tools);
   if (!rows.length) body.append(el("p","jjk-sealed-hud-empty",L("No notices yet. HP at 0, low CE, Zone, Burnout, domains and your turn appear here.","Aún no hay avisos. Aquí aparecen PG a 0, CE baja, Zone, Burnout, dominios y tu turno.")));
-  for (const n of rows) {
+  const filter = el("select"); filter.setAttribute("aria-label", L("Notice type","Tipo de aviso"));
+  for (const key of ["", ...new Set(rows.map(n => n.tone))]) {
+    const option = el("option","",key ? tone(key)[1]() : L("All notices","Todos los avisos"));
+    option.value = key; option.selected = key === noticeFilter; filter.append(option);
+  }
+  filter.addEventListener("change", () => { noticeFilter = filter.value; drawPanel(); });
+  body.append(filter);
+  for (const n of rows.filter(notice => !noticeFilter || notice.tone === noticeFilter)) {
     const row = el("article","jjk-sealed-hud-card jjk-sealed-notice");
     const [icon, kicker] = tone(n.tone);
     row.dataset.tone = n.tone;
@@ -339,6 +445,11 @@ function drawPanel(automatic = false) {
     time.dateTime = new Date(n.time).toISOString();
     head.append(mark, el("small","",kicker()), el("strong","",n.actor?.name ?? "JJK5E"), time);
     row.append(head, el("span","",n.text));
+    if (n.actor) row.append(button(L("Open actor","Abrir actor"), () => {
+      if (!visible(n.actor)) return;
+      if (n.key === "domain" && api()?.openDomainHUD) return api().openDomainHUD(n.actor);
+      return n.actor.sheet?.render({force:true});
+    }));
     body.append(row);
   }
 }
@@ -366,9 +477,11 @@ Hooks.once("init",() => {
   for(const [key,en,es,defaultValue] of [
     ["sealedEventCenter","Sealed Ink notification center","Centro de notificaciones Sealed Ink",false],
     ["sealedEventToasts","Sealed Ink pop-up notices","Avisos emergentes Sealed Ink",true],
+    ["sealedUrgentSound","Sealed Ink urgent notice sound","Sonido para avisos urgentes de Sealed Ink",false],
     ["sealedPersistNotices","Keep Sealed Ink history on this browser","Conservar el historial de Sealed Ink en este navegador",false],
     ["sealedCombatHUD","Sealed Ink combat HUD","Combat HUD Sealed Ink",false]
   ]) game.settings.register(ID,key,{name:L(en,es),scope:"client",config:true,type:Boolean,default:defaultValue,onChange:refresh});
+  game.settings.register(ID,"sealedFavorites",{scope:"client",config:false,type:Array,default:[]});
   game.settings.register(ID,"sealedLowCE",{name:L("Low CE threshold (%)","Umbral CE baja (%)"),scope:"client",config:true,type:Number,range:{min:5,max:50,step:5},default:25});
 });
 Hooks.once("ready",() => {
@@ -386,7 +499,7 @@ Hooks.once("ready",() => {
   for(const h of ["createItem","updateItem","deleteItem","createActiveEffect","updateActiveEffect","deleteActiveEffect"])
     Hooks.on(h,d=>queue(d.actor ?? (d.parent?.documentName==="Actor"?d.parent:d.parent?.actor)));
   for(const h of ["updateCombat","combatStart","combatTurn","deleteCombat","controlToken","updateToken","canvasReady","createCombatant","updateCombatant","deleteCombatant"]) Hooks.on(h,()=>{
-    updateTurn();updateDock();if(panel&&activeTab!=="events")drawPanel(true);
+    updateTurn();updateDock();if(panel&&["hud","gm"].includes(activeTab))drawPanel(true);
   });
   if (game.user.isGM) {
     const missing=["midi-qol","dae"].filter(id=>!game.modules.get(id)?.active);
