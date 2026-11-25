@@ -437,68 +437,102 @@ function resourceItems(actor) {
   });
 }
 
-/** Keep native forms intact and give explicit Sealed Ink sheets their own overview. */
+/** Whether jjk5e.js already draws its JJK sheet card (CE, panel, career, vows) on this sheet. */
+function hasSheetCard(actor) {
+  if (actor?.type !== "character" || !actor.isOwner) return false;
+  try { return game.settings.get(ID, "sheetStrip") !== false; } catch { return true; }
+}
+
+/** Keep native forms intact and give explicit Sealed Ink sheets their own overview.
+ * HP, AC and ability scores are already on the native sheet, and the JJK sheet card already shows
+ * CE, panel, career and vows on characters: the overview only adds what neither of them shows. */
 function renderActorOverview(root, actor, app) {
   const previous = root.querySelector(".jjk-actor-overview");
   const header = root.querySelector(".sheet-header");
-  // Limited viewers get the native limited sheet only: no HP, AC or ability scores.
-  if (!header || !(game.user.isGM || actor.testUserPermission?.(game.user, "OBSERVER"))) { previous?.remove(); return; }
+  // Limited viewers get the native limited sheet only.
+  if (!header || !actor.isOwner) { previous?.remove(); return; }
   const api = game.modules.get(ID)?.api;
+  const card = hasSheetCard(actor);
   const overview = make("section", "jjk-actor-overview");
-  overview.setAttribute("aria-label", local("Actor overview", "Resumen del actor"));
-  const stats = make("div", "jjk-overview-stats");
-  const addStat = (parent, label, value) => {
-    const tile = make("div", "jjk-overview-stat");
-    tile.append(make("small", "", label), make("strong", "", String(value ?? "—")));
-    parent.append(tile);
-  };
-  const attributes = actor.system?.attributes;
-  const hp = attributes?.hp;
-  addStat(stats, local("Hit points", "Puntos de golpe"), hp ? hp.value + " / " + hp.max : null);
-  addStat(stats, local("Armor class", "Clase de armadura"), attributes?.ac?.value);
-  const pool = actor.isOwner ? api?.findPool?.(actor) : null;
-  if (pool) addStat(stats, local("Cursed energy", "Energía maldita"), api.poolValue(pool) + " / " + api.poolMax(pool));
-  overview.append(stats);
-  if (actor.type === "character") {
-    const abilities = make("div", "jjk-overview-stats");
-    for (const [key, label] of Object.entries({
-      str: local("STR","FUE"), dex: local("DEX","DES"), con: "CON",
-      int: "INT", wis: local("WIS","SAB"), cha: local("CHA","CAR")
-    })) addStat(abilities, label, actor.system?.abilities?.[key]?.value);
-    overview.append(abilities);
+  if (previous) overview.classList.add("settled");
+  overview.setAttribute("aria-label", local("JJK controls", "Controles JJK"));
+  const pool = !card ? api?.findPool?.(actor) : null;
+  if (pool) {
+    const stats = make("div", "jjk-overview-stats");
+    const tile = make("div", "jjk-overview-stat jjk-overview-ce");
+    tile.append(make("small", "", local("Cursed energy", "Energía maldita")), make("strong", "", api.poolValue(pool) + " / " + api.poolMax(pool)));
+    stats.append(tile);
+    overview.append(stats);
   }
-  if (actor.isOwner) {
-    const controls = make("div", "jjk-overview-controls");
-    for (const [method, label] of [
-      ["openPanel", local("JJK controls","Controles JJK")],
-      ["openDomainHUD", local("Domain","Dominio")],
-      ["openVows", local("Binding vows","Votos vinculantes")],
-      ["openCareer", local("Career","Carrera")]
-    ]) {
-      if (typeof api?.[method] !== "function") continue;
-      controls.append(button(label, () => {
-        // A token's synthetic actor is rebuilt on token updates: act on the sheet's current document.
+  const controls = make("div", "jjk-overview-controls");
+  for (const [method, label, always] of [
+    ["openPanel", local("JJK controls","Controles JJK"), false],
+    ["openDomainHUD", local("Domain","Dominio"), true],
+    ["openVows", local("Binding vows","Votos vinculantes"), false],
+    ["openCareer", local("Career","Carrera"), false]
+  ]) {
+    if (typeof api?.[method] !== "function" || (card && !always)) continue;
+    controls.append(button(label, () => {
+      // A token's synthetic actor is rebuilt on token updates: act on the sheet's current document.
+      const current = app.document;
+      if (overview.isConnected && current?.uuid === actor.uuid && current.isOwner) api[method](current);
+    }));
+  }
+  if (controls.childElementCount) overview.append(controls);
+  const resources = resourceItems(actor);
+  if (resources.length) {
+    const manuals = make("div", "jjk-overview-controls");
+    manuals.setAttribute("role", "group");
+    manuals.setAttribute("aria-label", local("Storage and energy items","Objetos de almacenamiento y energía"));
+    for (const item of resources) {
+      manuals.append(button(item.name, () => {
         const current = app.document;
-        if (overview.isConnected && current?.uuid === actor.uuid && current.isOwner) api[method](current);
+        if (overview.isConnected && current?.isOwner) current.items.get(item.id)?.sheet?.render({ force: true });
       }));
     }
-    overview.append(controls);
-    const resources = resourceItems(actor);
-    if (resources.length) {
-      const manuals = make("div", "jjk-overview-controls");
-      manuals.setAttribute("role", "group");
-      manuals.setAttribute("aria-label", local("Storage and energy items","Objetos de almacenamiento y energía"));
-      for (const item of resources) {
-        manuals.append(button(item.name, () => {
-          const current = app.document;
-          if (overview.isConnected && current?.isOwner) current.items.get(item.id)?.sheet?.render({ force: true });
-        }));
-      }
-      overview.append(manuals);
-    }
+    overview.append(manuals);
   }
+  if (!overview.childElementCount) { previous?.remove(); return; }
   if (previous) previous.replaceWith(overview);
   else header.after(overview);
+}
+
+/** Tab reveal only on a real tab change: data re-renders must not replay it. */
+const TABSWAP = "jjk-sealed-tabswap";
+const TAB_TARGETS = "nav.tabs [data-tab], .jjk-tabs [data-tab], [role=tablist] [role=tab]";
+function tabSwap(root) {
+  if (root.dataset.jjkTabswap) return;
+  root.dataset.jjkTabswap = "1";
+  let timer = 0;
+  const mark = event => {
+    if (!event.target?.closest?.(TAB_TARGETS)) return;
+    if (event.type === "keydown" && !["Enter", " ", "ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Home", "End"].includes(event.key)) return;
+    root.classList.add(TABSWAP);
+    window.clearTimeout(timer);
+    timer = window.setTimeout(() => root.classList.remove(TABSWAP), 360);
+  };
+  root.addEventListener("click", mark, { capture: true });
+  root.addEventListener("keydown", mark, { capture: true });
+}
+
+/** A short ring on HP/CE meters when the value changes between two renders of the same sheet. */
+const lastValues = new WeakMap();
+function pulseValues(root, actor) {
+  const api = game.modules.get(ID)?.api;
+  const pool = actor.isOwner ? api?.findPool?.(actor) : null;
+  const now = { uuid: actor.uuid, hp: Number(actor.system?.attributes?.hp?.value), ce: pool ? Number(api.poolValue(pool)) : NaN };
+  const before = lastValues.get(root);
+  lastValues.set(root, now);
+  if (!before || before.uuid !== now.uuid || preference("sheetMotion") === "off") return;
+  const ring = (node, kind) => {
+    if (!node) return;
+    node.dataset.jjkDelta = kind;
+    window.setTimeout(() => { if (node.dataset.jjkDelta === kind) delete node.dataset.jjkDelta; }, 700);
+  };
+  if (Number.isFinite(now.hp) && Number.isFinite(before.hp) && now.hp !== before.hp)
+    ring(root.querySelector(".meter.hit-points"), now.hp < before.hp ? "down" : "up");
+  if (Number.isFinite(now.ce) && Number.isFinite(before.ce) && now.ce !== before.ce)
+    ring(root.querySelector(".jjk-sc-ce, .jjk-overview-ce"), "energy");
 }
 
 /** Sealed Ink is dark: ask D&D5e/Foundry for their dark theme on that window so native parts keep readable contrast. */
@@ -546,6 +580,9 @@ function apply(app, element) {
   root.dataset.jjkMotion = motion;
   if (actor) renderLinks(app, root, actor, sealed);
   if (sealed && app.constructor.jjkSealedInk === true) renderActorOverview(root, actor, app);
+  else root.querySelector(".jjk-actor-overview")?.remove();
+  if (sealed || surface) tabSwap(root);
+  if (sealed && actor) pulseValues(root, actor);
   if (first && motion !== "off") root.classList.add("jjk-sealed-arrival");
   if (motion === "off" || (!surface && !sealed)) root.classList.remove("jjk-sealed-arrival");
   if (!surface) {
