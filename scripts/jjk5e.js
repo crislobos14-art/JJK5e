@@ -795,6 +795,18 @@ function totalActivityCECost(actor, activity, usageConfig = {}) {
   const scaling = Number(usageConfig?.scaling ?? 0);
   return activityCECost({ base, step, scaling, factor: ceDiscountFactor(actor) });
 }
+function ceHistory(actor) {
+  if (!actor?.isOwner) return [];
+  const pool = findPool(actor);
+  const manual = pool?.getFlag?.(MODULE_ID, "ceHistory");
+  return [...(Array.isArray(manual) ? manual : []), ...ceLedger(pool).map(entry => {
+    const item = actor.items?.get?.(entry.itemId);
+    const activity = ceFromItem(actor,entry.itemId,entry.activityId);
+    return { label: activity?.name ?? item?.name ?? "", amount: entry.cost, state: entry.state,
+      time: entry.ended ?? entry.created, cardUuid: entry.cardUuid };
+  })].sort((a,b) => b.time - a.time).slice(0,30);
+}
+
 async function doSpendCE(actor, amount, label = "", { exact = false } = {}) {
   if (!actor?.isOwner || !Number.isFinite(amount) || restReview(actor)) return false;
   const pool = findPool(actor);
@@ -816,11 +828,14 @@ async function doSpendCE(actor, amount, label = "", { exact = false } = {}) {
   }
   const whole = Math.floor(result.spent + 1e-6);
   const fractional = Math.max(0, Math.round((result.spent - whole) * 1000) / 1000);
-  await pool.update({ "system.uses.spent": whole,
-    "flags.jjk5e.fractionalSpent": fractional }, { jjk5eCE: true });
+  const actual = Math.round((previous - result.remaining) * 1000) / 1000;
+  const previousHistory = pool.getFlag?.(MODULE_ID,"ceHistory");
+  const update = { "system.uses.spent": whole, "flags.jjk5e.fractionalSpent": fractional };
+  if (actual !== 0) update["flags.jjk5e.ceHistory"] = [...(Array.isArray(previousHistory) ? previousHistory.slice(-29) : []),
+    {label:String(label || t("CE.Name")).slice(0,160),amount:actual,balance:result.remaining,state:"adjusted",time:Date.now()}];
+  await pool.update(update, { jjk5eCE: true });
   if (discount && actor.getFlag(MODULE_ID, "sixEyesNext")) await actor.unsetFlag(MODULE_ID, "sixEyesNext");
   if (setting("ceChat")) {
-    const actual = Math.round((previous - result.remaining) * 1000) / 1000;
     const verb = actual >= 0 ? `−${actual}` : `+${-actual}`;
     await chat(actor, `<p><strong>${esc(label || t("CE.Name"))}</strong>: ${verb} CE `
       + `<span style="opacity:.8">(${t("CE.Remaining", { value: result.remaining, max: maximum })})</span></p>`,
@@ -1105,7 +1120,8 @@ function combatInteractionActivity(actor, activity) {
     type === "action" ? "action" : type === "bonus" ? "bonus" :
     String(type).startsWith("reaction") ? "reaction" : "other";
   const cost = managedCE(activity) ? activityCost(activity) : null;
-  return {kind, domain, cost, variable:!!activity.item.flags?.jjk5e?.ceSteps?.[activity.id],
+  const range = activity.range?.value == null ? "" : [activity.range.value, activity.range.units].filter(Boolean).join(" ");
+  return {kind, domain, cost, range, variable:!!activity.item.flags?.jjk5e?.ceSteps?.[activity.id],
     allowed:actionGate(actor,activity), direct: !domain && ["action","bonus","full","free"].includes(kind)};
 }
 
@@ -3421,7 +3437,7 @@ Hooks.once("init", () => {
   game.modules.get(MODULE_ID).api = {
     importAll, promptImport, spendCE, dataLanguage, baseName,
     regainCE: (actor, amount, label) => spendCE(actor, -Math.abs(amount), label || t("CE.Regained")),
-    combatInteractionState, combatInteractionActivity, findPool, poolValue, poolMax, cePending, resolveRestExchange, chooseTechnique, syncTechnique, promptCE, shortRestCE, chooseCEAbility, negativeEmotion,
+    combatInteractionState, combatInteractionActivity, ceHistory, findPool, poolValue, poolMax, cePending, resolveRestExchange, chooseTechnique, syncTechnique, promptCE, shortRestCE, chooseCEAbility, negativeEmotion,
     applyScaling, openPanel, maximumOutput, setReducedOutput, setSoulAwareness, setLimb, rollLimb,
     summon, dismissSummons, syncResource, missingPrereqs, applyCEEffects, activateGroup, endGroup,
     openGMStart, undoAutomation, updateAutomation, updateAllAutomation, outdatedItems, burnoutRecovery, fallDamage, applySoulDamage, clearSoulDamage,

@@ -85,27 +85,65 @@ function drawItems(target,app,actor,items){
  if(!items.length)target.append(el("p","jjk-workspace-muted",tr("No entries.","Sin entradas.")));
  for(const item of items){const row=el("div","jjk-workspace-entry");row.append(el("span","",item.name),el("small","",item.type??""),button(tr("Inspect","Consultar"),()=>openDocument(app,actor.uuid,"item",item.id)));target.append(row);}
 }
-function drawActivities(target,app,actor,s){
- const rows=orderActivities(combatRows(actor,api()),s.order),key=r=>r.itemId+"/"+r.id;
+function favoriteKey(actor,row){
+ return [game.world.id,game.user.id,actor.uuid,row.itemId,row.id].join(":");
+}
+function favoriteKeys(){return game.settings.get(ID,"sealedFavorites")??[];}
+function drawEnergyHistory(target,app,actor){
+ const entries=api()?.ceHistory?.(actor)??[];
+ const section=el("details","jjk-workspace-list");
+ section.append(el("summary","",tr("Cursed energy history","Historial de energía maldita")));
+ if(!entries.length)section.append(el("p","jjk-workspace-muted",tr("No recorded changes.","Sin cambios registrados.")));
+ const states={reserved:tr("Reserved","Reservada"),review:tr("Under review","En revisión"),refunded:tr("Refunded","Devuelta"),committed:tr("Spent","Gastada")};
+ for(const entry of entries){
+  const amount=Number(entry.amount)||0,sign=entry.state==="refunded"||amount<0?"+":"−";
+  const row=el("div","jjk-workspace-entry");
+  row.append(el("strong","",entry.label||tr("Cursed energy","Energía maldita")),
+    el("small","",[sign+Math.abs(amount)+" "+tr("CE","EM"),states[entry.state],entry.balance==null?"":tr("Balance: ","Saldo: ")+entry.balance,
+      entry.time?new Date(entry.time).toLocaleString(game.i18n.lang):""].filter(Boolean).join(" · ")));
+  if(typeof entry.cardUuid==="string"&&entry.cardUuid.startsWith("ChatMessage."))row.append(button(tr("Chat card","Tarjeta de chat"),()=>ownerAction(app,actor.uuid,()=>{
+   const message=game.messages.get(entry.cardUuid.slice("ChatMessage.".length));
+   if(message?.visible!==false&&message?.isContentVisible!==false&&message)return ui.chat.scrollToMessage?.(message.id);
+  })));
+  section.append(row);
+ }
+ target.append(section);
+}
+function drawActivities(target,app,actor,s,onlyTechniques=false){
+ const techniques=new Set(docs(actor.items).filter(i=>i.flags?.jjk5e?.technique||i.flags?.jjk5e?.techniqueRoot).map(i=>i.id));
+ const rows=orderActivities(combatRows(actor,api()).filter(r=>!onlyTechniques||techniques.has(r.itemId)),s.order),key=r=>r.itemId+"/"+r.id;
  const kinds=[["all",tr("All","Todas")],["action",tr("Action","Acción")],["bonus",tr("Bonus","Adicional")],["reaction",tr("Reaction","Reacción")],["free",tr("Free","Libre")],["full",tr("Full turn","Turno completo")],["other",tr("Other","Otras")]];
  const controls=el("div","jjk-workspace-tools"),search=el("input",""),filter=el("select","");
  search.type="search";search.value=s.query;search.placeholder=tr("Search actions","Buscar acciones");search.setAttribute("aria-label",search.placeholder);
  filter.setAttribute("aria-label",tr("Action type","Tipo de acción"));for(const [k,n] of kinds){const o=el("option","",n);o.value=k;filter.append(o);}filter.value=s.kind;
- const list=el("div","jjk-workspace-list");controls.append(search,filter);target.append(controls,list);
+ const list=el("div","jjk-workspace-list");
+ const favorites=button(tr("Favorites only","Solo favoritos"),()=>{
+  s.onlyFavorites=!s.onlyFavorites;favorites.setAttribute("aria-pressed",String(s.onlyFavorites));paint();
+ });
+ favorites.setAttribute("aria-pressed",String(!!s.onlyFavorites));controls.append(search,filter,favorites);target.append(controls,list);
  function paint(){
   list.replaceChildren();const q=s.query.trim().toLowerCase();
-  const sorted=orderActivities(rows,s.order),allKeys=sorted.map(key);
-  for(const row of sorted.filter(r=>(s.kind==="all"||r.kind===s.kind)&&(!q||(r.name+" "+r.itemName).toLowerCase().includes(q)))){
+  const saved=favoriteKeys(),sorted=orderActivities(rows,s.order),allKeys=sorted.map(key);
+  for(const row of sorted.filter(r=>(!s.onlyFavorites||saved.includes(favoriteKey(actor,r)))&&(s.kind==="all"||r.kind===s.kind)&&(!q||(r.name+" "+r.itemName).toLowerCase().includes(q)))){
    const id=key(row),line=el("div","jjk-workspace-entry"),info=el("div","jjk-workspace-action-label");
-   info.append(el("strong","",row.name),el("small","",row.itemName+" · "+(kinds.find(x=>x[0]===row.kind)?.[1]??row.kind)+(row.cost==null?"":" · CE "+row.cost+(row.variable?"+":""))));line.append(info);
+   info.append(el("strong","",row.name),el("small","",row.itemName+" · "+(kinds.find(x=>x[0]===row.kind)?.[1]??row.kind)+(row.cost==null?"":" · CE "+row.cost+(row.variable?"+":""))+(row.range?" · "+row.range:"")));line.append(info);
    const up=button("↑",()=>{s.order=moveActivity(allKeys,id,-1);save(actor,s);paint();}),down=button("↓",()=>{s.order=moveActivity(allKeys,id,1);save(actor,s);paint();});
    up.title=tr("Move up","Subir");up.setAttribute("aria-label",up.title+" "+row.name);down.title=tr("Move down","Bajar");down.setAttribute("aria-label",down.title+" "+row.name);
    up.disabled=allKeys[0]===id;down.disabled=allKeys.at(-1)===id;
-   line.append(up,down,button(tr("Inspect","Consultar"),()=>openDocument(app,actor.uuid,"item",row.itemId)));
+   const favorite=favoriteKey(actor,row),selected=saved.includes(favorite);
+   const star=button(selected?"★":"☆",()=>ownerAction(app,actor.uuid,async ()=>{
+    const keys=favoriteKeys();
+    await game.settings.set(ID,"sealedFavorites",keys.includes(favorite)?keys.filter(k=>k!==favorite):[...keys,favorite]);
+    paint();
+   }));
+   star.setAttribute("aria-pressed",String(selected));star.setAttribute("aria-label",tr("Toggle favorite","Alternar favorito")+" "+row.name);
+   line.append(star,up,down,button(tr("Inspect","Consultar"),()=>openDocument(app,actor.uuid,"item",row.itemId)));
    if(row.direct&&row.allowed){const run=button(tr("Use","Usar"),()=>ownerAction(app,actor.uuid,async a=>{
      if(inFlight.has(a.uuid))return;inFlight.add(a.uuid);
      try{await useCombatActivity(a,api(),row);}finally{inFlight.delete(a.uuid);}
    }));line.append(run);}
+   if(!row.allowed)line.append(el("small","jjk-workspace-muted",tr("Blocked by current turn or world rules","Bloqueada por el turno actual o las reglas del mundo")));
+   else if(!row.direct)line.append(el("small","jjk-workspace-muted",tr("Uses native trigger or Domain HUD","Requiere flujo nativo o panel de dominio")));
    list.append(line);
   }
   if(!list.children.length)list.append(el("p","jjk-workspace-muted",tr("No matching activities.","Sin actividades coincidentes.")));
@@ -143,7 +181,7 @@ export function enhanceActorWorkspace(app,root,active,resources=()=>[]){
  const engine=api();if(!engine)return;
  const s=getState(app,actor),m=workspaceModel(actor,engine);
  const links=s.tab==="summon"?linkedEntities(actor,canvas?.scene?.tokens,game.user).map(t=>[t.id,t.name,t.actor?.isOwner]):[];
- const signature=JSON.stringify([actor.name,actor.img,m,combatRows(actor,engine),links,s.tab,s.mini,s.reverse,game.user.isGM]);
+ const signature=JSON.stringify([actor.name,actor.img,m,combatRows(actor,engine),engine.ceHistory?.(actor),links,s.tab,s.mini,s.reverse,game.user.isGM]);
  if(old?.dataset.signature===signature)return true;
  // Preserve text input focus: its query remains in the local state and the native render is not intercepted.
  const focused=old?.contains(document.activeElement)&&document.activeElement?.tagName==="INPUT";
@@ -172,8 +210,8 @@ export function enhanceActorWorkspace(app,root,active,resources=()=>[]){
   const nav=el("nav","jjk-workspace-tabs");nav.setAttribute("aria-label",tr("Workspace sections","Secciones de la ficha"));
   for(const [id,label] of tabs){const b=button(label,()=>{s.tab=id;save(actor,s);enhanceActorWorkspace(app,root,true,resources);root.querySelector(".jjk-actor-workspace [data-section='"+id+"']")?.focus();});b.dataset.section=id;b.setAttribute("aria-pressed",String(s.tab===id));nav.append(b);}
   const content=el("div","jjk-workspace-content");content.setAttribute("aria-label",tabs.find(t=>t[0]===s.tab)?.[1]??"");
-  if(s.tab==="combat"){addCommands(content,app,actor.uuid,[[tr("Combat engine","Motor de combate"),"openPanel",["combat"]]]);drawActivities(content,app,actor,s);}
-  else if(s.tab==="technique"){addCommands(content,app,actor.uuid,[[tr("Choose technique","Elegir técnica"),"chooseTechnique"]]);drawItems(content,app,actor,m.items.filter(i=>i.technique));}
+  if(s.tab==="combat"){addCommands(content,app,actor.uuid,[[tr("Combat engine","Motor de combate"),"openPanel",["combat"]]]);drawActivities(content,app,actor,s);if(m.ce!==null)drawEnergyHistory(content,app,actor);}
+  else if(s.tab==="technique"){addCommands(content,app,actor.uuid,[[tr("Choose technique","Elegir técnica"),"chooseTechnique"]]);drawActivities(content,app,actor,s,true);drawItems(content,app,actor,m.items.filter(i=>i.technique));}
   else if(s.tab==="traits")drawItems(content,app,actor,m.items.filter(i=>i.type==="feat"||i.technique));
   else if(s.tab==="effects"){for(const e of m.effects){const row=el("div","jjk-workspace-entry");row.append(el("span","",e.name),button(tr("Inspect","Consultar"),()=>openDocument(app,actor.uuid,"effect",e.id)));content.append(row);}if(!m.effects.length)content.append(el("p","jjk-workspace-muted",tr("No active effects.","Sin efectos activos.")));}
   else if(s.tab==="progression"){addCommands(content,app,actor.uuid,[[tr("Creation","Creación"),"createCharacterWizard"],[tr("Level up","Subir nivel"),"levelUp"],[tr("Career","Carrera"),"openCareer"]]);drawItems(content,app,actor,m.items.filter(i=>["class","race","background","feat"].includes(i.type)));}
