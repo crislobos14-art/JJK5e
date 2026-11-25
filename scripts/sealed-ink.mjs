@@ -419,6 +419,19 @@ function refreshLinks(doc) {
   }
 }
 
+const RESOURCE_ITEMS = new Set([
+  "Compendium.jjk5e.jjk5e-feats.Item.5YTZMPSqBSdzIgNO",
+  "Compendium.jjk5e.jjk5e-feats.Item.IlD8Q3c3fmSZu5p4",
+  "Compendium.jjk5e.jjk5e-techniques.Item.T2Ct1LdagWzoKjCR",
+  "Compendium.jjk5e.jjk5e-equipment.Item.W24GkN4RCTH8y8Sj"
+]);
+
+function resourceItems(actor) {
+  return [...actor.items].filter(item => [
+    item.uuid, item._stats?.compendiumSource, item.flags?.core?.sourceId
+  ].some(source => RESOURCE_ITEMS.has(source)));
+}
+
 /** Keep native forms intact and give explicit Sealed Ink sheets their own overview. */
 function renderActorOverview(root, actor, app) {
   const previous = root.querySelector(".jjk-actor-overview");
@@ -462,6 +475,18 @@ function renderActorOverview(root, actor, app) {
       }));
     }
     overview.append(controls);
+    const resources = resourceItems(actor);
+    if (resources.length) {
+      const manuals = make("div", "jjk-overview-controls");
+      manuals.setAttribute("role", "group");
+      manuals.setAttribute("aria-label", local("Storage and energy items","Objetos de almacenamiento y energía"));
+      for (const item of resources) {
+        manuals.append(button(item.name, () => {
+          if (overview.isConnected && actor.isOwner) actor.items.get(item.id)?.sheet?.render({ force: true });
+        }));
+      }
+      overview.append(manuals);
+    }
   }
   if (previous) previous.replaceWith(overview);
   else header.after(overview);
