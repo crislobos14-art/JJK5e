@@ -24,6 +24,8 @@ jobs:
         run: npx --yes eslint@9 scripts tests tools
       - name: Automation revisions stamped (tools/stamp-rev.py)
         run: python3 tools/stamp-rev.py --check
+      - name: Verify release recovery
+        run: python3 tests/test_rollback.py
       - name: Pure rules regression tests
         run: node --test tests/*.test.mjs
       - name: Validate source JSON and compendium identity

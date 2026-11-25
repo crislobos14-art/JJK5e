@@ -751,7 +751,7 @@ def boogie_woogie(S):
     ca["name"] = "Free-action Boogie (1 CE, once per turn)"
     ca["range"], ca["target"] = ft(45), one
     c["flags"]["jjk5e"].setdefault("tokenSwap", {})["ouA0eQeNTPbAg5Zb"] = True
-    note(c, "Also reduces every Boogie Woogie cost by 1 (min 1): pay the lower cost (GM).")
+    note(c, "Clap Back automatically reduces Boogie Woogie costs by 1 CE (minimum 1).")
     mark(c)
 
     # --- Standing Ovation (18th): unlimited free Boogie without CE inside the domain.
@@ -3086,8 +3086,7 @@ def golden_hour(S):
     w = gw["system"]["activities"]["egehxj5u7W8TYE5K"]
     w["range"], w["target"] = RANGE_SELF, SELF
     apply(w, fx(gw, "week", "Golden Week", rounds=10,
-                changes=[("system.attributes.ac.bonus", 2, "+3"), ("flags.midi-qol.advantage.ability.save.dex", 0, "1"),
-                         ("system.attributes.movement.all", 1, "2")],
+                changes=[("flags.midi-qol.advantage.ability.save.dex", 0, "1")],
                 desc="Speed doubled, +3 AC, advantage on DEX saves, extra limited action (haste-like); no time stop meanwhile."))
     mark(gw)
 

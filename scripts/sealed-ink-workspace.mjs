@@ -11,9 +11,11 @@ const states=new WeakMap();
 function el(tag,cls,label){const n=document.createElement(tag);if(cls)n.className=cls;if(label!==undefined)n.textContent=String(label);return n;}
 function button(label,fn){
  const b=el("button","",label);b.type="button";
- b.addEventListener("click",async event=>{event.preventDefault();event.stopPropagation();if(b.disabled)return;b.disabled=true;
+ let pending=false;
+ b.addEventListener("click",async event=>{event.preventDefault();event.stopPropagation();if(b.disabled||pending)return;
+ pending=true;b.setAttribute("aria-busy","true");
  try{await fn(event);}catch(err){console.warn(ID+" | actor workspace",err);ui.notifications.warn(tr("Action could not be opened. Check the native sheet.","No se pudo abrir la acción. Revisa la hoja nativa."));}
- finally{b.disabled=false;}});
+ finally{pending=false;b.setAttribute("aria-busy","false");}});
  return b;
 }
 export function workspaceModel(actor,engine){

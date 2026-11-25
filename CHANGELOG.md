@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.95.1 - Intercambios, efectos de técnicas y controles de ficha
+
+- Boogie usa el token del lanzador y conserva el objetivo elegido al pagar. Clap Back aplica el descuento y amplía el alcance a 45 pies. Round of Applause lo amplía a 60 pies.
+- Standing Ovation permite repetir Boogie gratis durante el turno del lanzador si ambos tokens están dentro de su dominio.
+- Golden Week aplica una sola vez la bonificación de CA y velocidad. Detener el tiempo vuelve a estar disponible al terminar el efecto. En personajes existentes, usa la actualización de automatizaciones del módulo para aplicar los nuevos datos de compendio.
+- Los efectos conservan sus prioridades y operadores al migrar a dnd5e. Activar de nuevo una sección de Sealed Ink mantiene el foco del teclado.
+- Cada nueva release incluye un archivo de recuperación con el manifiesto, el módulo instalable y las sumas SHA-256 de la versión publicada anterior.
+
 ## 1.95.0 — Ficha Sealed Ink con pestaña JJK integrada
 - Ficha Sealed Ink integrada (#23): la cabecera duplicada desaparece. La ficha abre en su propia pestaña de D&D 5e, con retrato, CA, iniciativa, movimiento, PG, Dados de Golpe y EM en su sitio nativo. Las herramientas JJK son una pestaña más de la barra derecha («Jujutsu (JJK)», solo para propietarios): lista de secciones a la izquierda (9 en PJ, 7 en PNJ) y contenido a la derecha, en una columna si la ventana es estrecha. «Volver a la ficha» y Escape regresan a la última pestaña nativa usada. La sección elegida se recuerda por actor.
 
