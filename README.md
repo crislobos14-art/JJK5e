@@ -21,6 +21,20 @@ On **Foundry 14.368** dnd5e 6.1 can't be used with Midi-QOL (every Midi build fo
   Core 2.1 and socketlib).
 - **Times Up** has no Foundry 14 build and isn't needed.
 
+## Optional modules and automation
+
+The JJK GM integration report shows whether the modules below are active and which versions are present. Detection is separate from live compatibility testing. Keep Midi-QOL and JJK's native activity flow in charge of JJK technique costs, targets, damage and effects.
+
+| Module | JJK behavior | Live acceptance check |
+|---|---|---|
+| Token Action HUD Core / D&D 5e | Use the native D&D 5e activity entry. JJK does not register another attack or CE payment handler for this HUD. | Use one fixed-cost technique, then cancel a second use. Verify one roll, one successful payment and no second debit. |
+| Tidy 5e Sheets | Its sheet extension calls the existing JJK header control for owned character sheets. | Open and rerender a character as owner and as observer; verify the control appears once for the owner. |
+| Quick Insert | The Sealed Ink Reference tab can open Quick Insert with the current query. The JJK search remains available. | Search with both tools as a player and verify documents without permission remain unavailable. |
+| Carousel Combat Tracker | Both displays can read Foundry initiative. JJK does not add an alternate turn advancement handler. | Advance initiative with a domain active; verify one turn change and one JJK state update. |
+| Monk's TokenBar | Use its standalone rolls for checks adjudicated by the GM. Use Midi's activity card for saves whose results must drive JJK damage or effects. | Verify an independent contested check does not apply a second JJK save or effect. |
+| Monk's Enhanced Journal / Forien's Quest Log | Use companion journals with mission links. JJK does not synchronize objective or reward state into these modules. Check the supported Foundry version before enabling them. | Open a mission as GM and player; verify that each sees only the intended journal material. |
+| Item Piles / Item Piles: D&D 5e | Use for ordinary loot. Actor-bound JJK resources and linked summon or storage records are not integrated with its transfers. | Transfer an ordinary consumable and verify quantity and ownership, then confirm JJK actor resources are unchanged. |
+
 ## Installation
 
 **Manifest URL** (*Add-on Modules → Install Module*):
