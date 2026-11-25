@@ -149,7 +149,7 @@ export function createEnv({ settings: overrides = {} } = {}) {
     async updateEmbeddedDocuments(type, updates = [], options = {}) {
       const coll = type === "Item" ? this.items : this.effects;
       const out = [];
-      for (const u of updates) { const d = coll.get(u._id); if (d) { const { _id, ...rest } = u; await d.update(rest, options); out.push(d); } }
+      for (const u of updates) { const d = coll.get(u._id); if (d) { const rest = { ...u }; delete rest._id; await d.update(rest, options); out.push(d); } }
       return out;
     }
   }

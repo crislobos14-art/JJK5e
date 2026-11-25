@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.87.0 — Motores Sealed Ink de creación y combate
+- Character Creation Engine: añade una revisión visual, no destructiva, de los avances nativos, atributos, clase, raza, trasfondo, técnica, atributo de EM y mentalidad, con avisos de duplicados o recursos vinculados ausentes.
+- La compra de puntos ya no sobrescribe silenciosamente bonificaciones de avances existentes: cuando el personaje ya tiene clase, raza o trasfondo, el creador pide revisar y confirmar los atributos en la hoja nativa.
+- Combat Interaction Engine: muestra PG, EM y economía de acciones, permite buscar y filtrar actividades propias y delega su uso una sola vez al flujo nativo de D&D 5e/JJK5e.
+- Las reacciones, actividades de dominio, objetivos, disparadores, costes variables y acciones adicionales permanecen bajo sus motores nativos; el panel no duplica tiradas, pagos ni registros de turno.
+- Auditoría automatizada: 165 pruebas, sintaxis, ESLint sin advertencias del repositorio, JSON, revisión de técnicas y compendios, y construcción de los 11 packs. No se realizó una prueba de ejecución dentro de Foundry.
+
 ## 1.86.0 — Correcciones de automatización y compatibilidad
 - Emoción negativa: el jugador ya no se queda bloqueado; su botón envía la petición al GM, que confirma el desencadenante y concede la EM (requiere «Peticiones de jugadores al GM»).
 - Intercambio de dados de golpe por EM: el botón del panel se desactiva y explica por qué cuando no hay un descanso corto completado, hay combate o el intercambio espera la conciliación del GM.
