@@ -21,7 +21,7 @@ test("RCT pool recovery is once per actor and eligible round, even with duplicat
   combat.id="new";combat.round=2;gm=true;await regen(combat);assert.equal(spent,0);assert.equal(writes,3);
 });
 test("domain state and RCT notifications use live document state",()=>{
-  const {delta,snapshot}=runInNewContext(events.replace(/^import .*\n/gm,"")+"\n({delta,snapshot});",{Hooks:{once(){}},game:{modules:{get:()=>null},i18n:{lang:"es"}}});
+  const {delta,snapshot}=runInNewContext(events.replace(/^import .*\r?\n/gm,"")+"\n({delta,snapshot});",{Hooks:{once(){}},game:{modules:{get:()=>null},i18n:{lang:"es"}}});
   const state={hp:10,hpMax:10,ce:5,ceMax:10,zone:0,burnout:false,domain:false,output:0,rctSpent:20,restReview:false};
   assert.equal(JSON.stringify(delta(state,{...state,rctSpent:10})),'[["rctRecovery","paper"]]');
   assert.equal(JSON.stringify(delta(state,{...state,restReview:true})),'[["restReview","critical"]]');

@@ -123,7 +123,7 @@ if (flags.has("--write")) {
   fs.mkdirSync(path.dirname(REPORT), { recursive: true });
   fs.writeFileSync(REPORT, report);
 }
-if (flags.has("--check") && fs.existsSync(REPORT) && fs.readFileSync(REPORT, "utf8") !== report)
+if (flags.has("--check") && fs.existsSync(REPORT) && fs.readFileSync(REPORT, "utf8").replace(/\r\n/g, "\n") !== report)
   errors.push("Saved report differs: run node tools/audit-techniques.mjs --write");
 console.log(JSON.stringify({ total:rows.length, techniques:techs.length, statuses:counts, source:source.size, errors:errors.length }, null, 2));
 if (errors.length) {
