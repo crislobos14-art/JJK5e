@@ -1,6 +1,10 @@
 # Changelog
 
-## Próximo release
+## 1.92.0 — Sealed Ink, herramientas de mesa y compatibilidad opcional
+- Tidy 5e Sheets: acceso al panel JJK desde las fichas de personaje compatibles. Quick Insert: abre la búsqueda externa con la consulta escrita en Sealed Ink.
+- El diagnóstico del GM detecta los módulos opcionales y muestra sus versiones.
+- Item Piles: cancela transferencias que incluyan reservas de EM o RCT u objetos JJK vinculados a una invocación del mundo. El botín ordinario sigue su flujo habitual.
+- La validación conjunta en una partida real de Foundry sigue pendiente.
 - Centro del GM: versiones, dependencias, estado de ajustes, actores con automatizaciones desactualizadas y acceso al diagnóstico de recursos pendientes.
 - Actualización de fichas: vista previa por objeto, selección de cambios y reversión durante la sesión para objetos que no hayan cambiado desde la actualización.
 - HUD: favoritos por mundo, usuario y actor; filtro de favoritos, tipo de acción, coste de EM y alcance cuando están disponibles.
