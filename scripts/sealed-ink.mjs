@@ -55,13 +55,13 @@ function matchesClass(app, namespace, names) {
   return names.some(name => typeof namespace?.[name] === "function" && app.constructor === namespace[name]);
 }
 function categoryOf(app, root, actor) {
-  if (actor) return actor.type === "npc" ? "npc" : "character";
   if (root.matches(".jjk5e-ui,.jjk5e-panel-app,.jjk5e-domain,.jjk5e-career,.jjk5e-menu,.jjk5e-vows,.jjk5e-creator,.jjk5e-optrules") ||
       root.querySelector?.(".jjk-panel,.jjk-builder,.jjk-optrules,.jjk-vow-form")) return "module";
+  if (actor) return actor.type === "npc" ? "npc" : "character";
   if (modulePack(app)) return "compendium";
   const doc=app.document??app.object;
   if (moduleDocument(doc)) {
-    if (["JournalEntry","JournalEntryPage","RollTable"].includes(doc?.documentName)) return "compendium";
+    if (["JournalEntry","JournalEntryPage","RollTable","Macro"].includes(doc?.documentName)) return "compendium";
     if (["Item","ActiveEffect"].includes(doc?.documentName)) return "editors";
   }
   const ns = game.dnd5e?.applications ?? globalThis.dnd5e?.applications;
@@ -419,11 +419,60 @@ function refreshLinks(doc) {
   }
 }
 
+/** Keep native forms intact and give explicit Sealed Ink sheets their own overview. */
+function renderActorOverview(root, actor, app) {
+  const previous = root.querySelector(".jjk-actor-overview");
+  const header = root.querySelector(".sheet-header");
+  if (!header) { previous?.remove(); return; }
+  const api = game.modules.get(ID)?.api;
+  const overview = make("section", "jjk-actor-overview");
+  overview.setAttribute("aria-label", local("Actor overview", "Resumen del actor"));
+  const stats = make("div", "jjk-overview-stats");
+  const addStat = (parent, label, value) => {
+    const tile = make("div", "jjk-overview-stat");
+    tile.append(make("small", "", label), make("strong", "", String(value ?? "—")));
+    parent.append(tile);
+  };
+  const attributes = actor.system?.attributes;
+  const hp = attributes?.hp;
+  addStat(stats, local("Hit points", "Puntos de golpe"), hp ? hp.value + " / " + hp.max : null);
+  addStat(stats, local("Armor class", "Clase de armadura"), attributes?.ac?.value);
+  const pool = actor.isOwner ? api?.findPool?.(actor) : null;
+  if (pool) addStat(stats, local("Cursed energy", "Energía maldita"), api.poolValue(pool) + " / " + api.poolMax(pool));
+  overview.append(stats);
+  if (actor.type === "character") {
+    const abilities = make("div", "jjk-overview-stats");
+    for (const [key, label] of Object.entries({
+      str: local("STR","FUE"), dex: local("DEX","DES"), con: "CON",
+      int: "INT", wis: local("WIS","SAB"), cha: local("CHA","CAR")
+    })) addStat(abilities, label, actor.system?.abilities?.[key]?.value);
+    overview.append(abilities);
+  }
+  if (actor.isOwner) {
+    const controls = make("div", "jjk-overview-controls");
+    for (const [method, label] of [
+      ["openPanel", local("JJK controls","Controles JJK")],
+      ["openDomainHUD", local("Domain","Dominio")],
+      ["openVows", local("Binding vows","Votos vinculantes")],
+      ["openCareer", local("Career","Carrera")]
+    ]) {
+      if (typeof api?.[method] !== "function") continue;
+      controls.append(button(label, () => {
+        if (overview.isConnected && app.document === actor && actor.isOwner) api[method](actor);
+      }));
+    }
+    overview.append(controls);
+  }
+  if (previous) previous.replaceWith(overview);
+  else header.after(overview);
+}
+
 function apply(app, element) {
   const root = rootOf(app, element);
   if (!root) return;
-  const actor = nativeActor(app);
-  const category = categoryOf(app, root, actor);
+  const native = nativeActor(app);
+  const category = categoryOf(app, root, native);
+  const actor = category === "module" ? null : native;
   if (!category) {
     if(live.has(app)){stopWatch(app);stopParticles(root);root.classList.remove(ROOT,SURFACE,MOTION,"jjk-sealed-arrival");delete root.dataset.jjkSurface;delete root.dataset.jjkMotion;live.delete(app);}
     return;
@@ -445,6 +494,7 @@ function apply(app, element) {
   root.classList.toggle(MOTION, (sealed || surface) && motion !== "off");
   root.dataset.jjkMotion = motion;
   if (actor) renderLinks(app, root, actor, sealed);
+  if (sealed && app.constructor.jjkSealedInk === true) renderActorOverview(root, actor, app);
   if (first && motion !== "off") root.classList.add("jjk-sealed-arrival");
   if (motion === "off" || (!surface && !sealed)) root.classList.remove("jjk-sealed-arrival");
   if (!surface) {

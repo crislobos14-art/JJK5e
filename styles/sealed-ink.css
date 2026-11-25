@@ -282,6 +282,37 @@
 .jjk-sealed-surface .jjk-combat-row button{width:auto;flex:0 0 auto;min-height:25px;font-size:10px;border-radius:0}
 .jjk-sealed-surface .jjk-combat-warning{border-left:2px solid var(--jjk-seal);padding-left:6px;color:var(--jjk-bone)}
 
+.jjk-sealed-sheet .jjk-actor-overview {
+  display: grid;
+  gap: .4rem;
+  padding: .55rem;
+  background: #18151c;
+  border: 1px solid #443b45;
+  border-block-start: 2px solid #ce1032;
+}
+.jjk-sealed-sheet .jjk-overview-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(5.5rem, 1fr));
+  gap: .3rem;
+}
+.jjk-sealed-sheet .jjk-overview-stat {
+  display: grid;
+  min-width: 0;
+  padding: .3rem .45rem;
+  background: #24202a;
+  color: #eee6d5;
+}
+.jjk-sealed-sheet .jjk-overview-stat strong {
+  font: 700 1.4rem/1.2 "Big Shoulders", sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+.jjk-sealed-sheet .jjk-overview-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .3rem;
+}
+.jjk-sealed-sheet .jjk-overview-controls button { width: auto; }
+
 /* Unified Sealed Ink tokens — no global Foundry overrides. */
 :is(.jjk-sealed-surface,.jjk-sealed-sheet,.jjk-sealed-chat,.jjk-sealed-inline){
   --jjk-ink:#131115;--jjk-card:#1c1920;--jjk-card-2:#28232b;--jjk-edge:#443b45;--jjk-line:#443b45;--jjk-line-2:#665861;

@@ -138,6 +138,8 @@ test("universal surfaces use only known D&D5e classes and per-client overrides",
     [new CompendiumBrowser, "compendium"], [new ThirdParty, null]
   ]) assert.equal(exposed.categoryOf(app, root, null), expected);
   assert.equal(exposed.categoryOf(new ThirdParty, { matches: () => true }, null), "module");
+  assert.equal(exposed.categoryOf(new ThirdParty, { matches: () => true }, { type: "npc" }), "module");
+  assert.equal(exposed.categoryOf({ object: { documentName: "Macro", pack: "jjk5e.jjk5e-macros" } }, root, null), "compendium");
   assert.equal(exposed.categoryOf({document:{documentName:"JournalEntry",pack:"world.jjk5e-rules"}},root,null),"compendium");
   assert.equal(exposed.categoryOf({document:{documentName:"JournalEntry",pack:"world.other"}},root,null),null);
   assert.equal(exposed.isJJKChat({flags:{jjk5e:{sealedInkChat:true}}},root),true);
