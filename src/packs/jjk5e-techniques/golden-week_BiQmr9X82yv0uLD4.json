@@ -110,6 +110,26 @@
        "value": "2"
       },
       {
+       "key": "system.attributes.movement.burrow",
+       "type": "multiply",
+       "value": "2"
+      },
+      {
+       "key": "system.attributes.movement.climb",
+       "type": "multiply",
+       "value": "2"
+      },
+      {
+       "key": "system.attributes.movement.fly",
+       "type": "multiply",
+       "value": "2"
+      },
+      {
+       "key": "system.attributes.movement.swim",
+       "type": "multiply",
+       "value": "2"
+      },
+      {
        "key": "system.attributes.ac.bonus",
        "type": "add",
        "value": "3"
@@ -119,7 +139,7 @@
     }
    },
    "automation": "automated",
-   "rev": "0b4f56cd76"
+   "rev": "135f8f18ee"
   }
  },
  "folder": "OPfUdWvA8mZmDQ8i",
@@ -135,21 +155,9 @@
    "description": "<p>Speed doubled, +3 AC, advantage on DEX saves, extra limited action (haste-like); no time stop meanwhile.</p>",
    "changes": [
     {
-     "key": "system.attributes.ac.bonus",
-     "mode": 2,
-     "value": "+3",
-     "priority": 20
-    },
-    {
      "key": "flags.midi-qol.advantage.ability.save.dex",
      "mode": 0,
      "value": "1",
-     "priority": 20
-    },
-    {
-     "key": "system.attributes.movement.all",
-     "mode": 1,
-     "value": "2",
      "priority": 20
     }
    ],

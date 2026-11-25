@@ -64,3 +64,15 @@ test("every legacy key in the packs is covered by the runtime rewrite", async ()
   }
   assert.deepEqual(left, []);
 });
+
+test("Foundry 14 typed changes (type instead of mode) are rewritten in the same form", async () => {
+  const { J } = await setup();
+  assert.deepEqual(plain(J.jjkModernChange({ key: "system.attributes.movement.all", type: "multiply", value: "0.5" })),
+    { key: "system.attributes.movement.multiplier", type: "multiply", value: "0.5" });
+  assert.deepEqual(plain(J.jjkModernChange({ key: "system.attributes.movement.all", type: "custom", value: "0" })),
+    { key: "system.attributes.movement.multiplier", type: "override", value: "0" });
+  assert.deepEqual(plain(J.jjkModernChange({ key: "system.traits.dr.all", type: "custom", value: "1" })),
+    { key: "system.traits.dr.value", type: "add", value: "ALL" });
+  assert.deepEqual(plain(J.exhaustionToFlag({ system: { changes: [{ key: "system.attributes.exhaustion", type: "add", value: "1" }] } })),
+    { "system.changes": [], "flags.jjk5e.tempExhaustion": 1 });
+});

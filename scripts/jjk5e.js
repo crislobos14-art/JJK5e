@@ -388,6 +388,7 @@ function activityCost(activity) {
   let base = Number(costs?.[activity.id] ?? 0);
   // V.6 Domain Refinement: Efficient Expansions (700) −CE mod, Total Mastery (1000) −proficiency bonus.
   const actor = activity?.actor ?? activity?.item?.actor;
+  if (base > 1 && activity.item.flags?.jjk5e?.technique === "Boogie Woogie" && hasBoogieFeature(actor, "Clap Back")) base -= 1;
   if (base > 0 && actor && activity?.item?.flags?.jjk5e?.domainActivity === activity.id) {
     const ref = refinementOf(actor);
     if (ref >= 700) base -= Math.max(0, ceMod(actor));
@@ -953,12 +954,14 @@ async function onActorUpdate(actor, changes, options, userId) {
 /* -------------------------------------------- */
 
 const MODE_TYPES = { 0: "custom", 1: "multiply", 2: "add", 3: "downgrade", 4: "upgrade", 5: "override" };
+const TYPE_MODES = Object.fromEntries(Object.entries(MODE_TYPES).map(([mode, type]) => [type, Number(mode)]));
 const fxV14 = () => (Number(game.release?.generation) || 0) >= 14;
 const effChanges = (e) => e?.system?.changes ?? e?.changes ?? [];
 
 function toTypedChanges(changes) {
   return (changes ?? []).map((c) => {
     const out = { key: c.key, type: c.type ?? MODE_TYPES[c.mode] ?? "add", value: String(c.value ?? "") };
+    if (c.priority != null) out.priority = c.priority;
     if (c._id) out._id = c._id;
     return out;
   });
@@ -1048,10 +1051,15 @@ function actionTurn(actor){
   if(state?.key!==key){state={key,action:false,bonus:false,free:false,moved:false,full:false,lockMovement:false};ACTION_TURNS.set(c.id,state);}
   return state;
 }
+function unlimitedDomainSwap(activity) {
+  const flags = activity?.item?.flags?.jjk5e;
+  return flags?.technique === "Boogie Woogie" && !!flags.domainActivity &&
+    flags.domainActivity !== activity.id && !!flags.tokenSwap?.[activity.id];
+}
 function isJJKFree(activity){
   if(!activity?.item?.flags?.jjk5e)return false;
   const a=activity.activation;
-  return JJK_FREE_ACTION_IDS.has(activity.id) || a?.type==="free" || (a?.type==="special" && /^free[ -]action(?:$|[\s(:])/i.test(a.condition??""));
+  return unlimitedDomainSwap(activity) || JJK_FREE_ACTION_IDS.has(activity.id) || a?.type==="free" || (a?.type==="special" && /^free[ -]action(?:$|[\s(:])/i.test(a.condition??""));
 }
 function lesserFullTurn(activity){
   // Only explicit exceptions; don't infer from a generic "special" activation.
@@ -1076,7 +1084,7 @@ function recordTurnActivity(activity){
   const actor=activity?.actor??activity?.item?.actor;
   const state=actionTurn(actor);
   if(!state)return;
-  if(isJJKFree(activity))state.free=true;
+  if(isJJKFree(activity) && !unlimitedDomainSwap(activity))state.free=true;
   if(!isFullTurn(activity)&&activity.activation?.type==="action")state.action=true;
   if(activity.activation?.type==="bonus")state.bonus=true;
 }
@@ -1085,10 +1093,15 @@ function isClaimedDomainReaction(actor,activity){
   const claim=actor?.getFlag(MODULE_ID,"domainReactionClaim");
   return !!claim?.id && Number(claim.expires)>nowMs();
 }
+function goldenWeekBlocks(actor, activity) {
+  return activity?.id === "kZc1uthKYagtyfvi" && activity.item?.flags?.jjk5e?.technique === "Golden Hour" &&
+    !!actor?.effects?.some(effect => effect.flags?.jjk5e?.spellBuffActivity === "egehxj5u7W8TYE5K" && liveWard(effect));
+}
 function actionGate(actor,activity,{recheck=false}={}){
   const state=actionTurn(actor);
+  if (goldenWeekBlocks(actor, activity)) return false;
   if(activity?.item?.flags?.jjk5e?.optAction&&!optOn("additionalActions"))return false;
-  if(isJJKFree(activity)&&game.combat?.started&&(!state||state.free))return false;
+  if(isJJKFree(activity)&&game.combat?.started&&(!state||(state.free && !unlimitedDomainSwap(activity))))return false;
   if(isFullTurn(activity)&&game.combat?.started&&!isClaimedDomainReaction(actor,activity)&&(!state||(recheck?(state.action||state.bonus||state.full||(!lesserFullTurn(activity)&&state.moved)):fullTurnSpent(actor,activity))))return false;
   if(state?.full&&["action","bonus"].includes(activity.activation?.type))return false;
   return true;
@@ -1120,9 +1133,11 @@ function combatInteractionActivity(actor, activity) {
     type === "action" ? "action" : type === "bonus" ? "bonus" :
     String(type).startsWith("reaction") ? "reaction" : "other";
   const cost = managedCE(activity) ? activityCost(activity) : null;
-  const range = activity.range?.value == null ? "" : [activity.range.value, activity.range.units].filter(Boolean).join(" ");
+  const distance = swapRange(actor, activity);
+  const range = distance == null ? "" : [distance, activity.range?.units].filter(Boolean).join(" ");
+  const secondaryDomain = activity.item.flags?.jjk5e?.domainActivity && !domain;
   return {kind, domain, cost, range, variable:!!activity.item.flags?.jjk5e?.ceSteps?.[activity.id],
-    allowed:actionGate(actor,activity), direct: !domain && ["action","bonus","full","free"].includes(kind)};
+    allowed:actionGate(actor,activity) && (!secondaryDomain || canUseDomainActivity(actor,activity)), direct: !domain && ["action","bonus","full","free"].includes(kind)};
 }
 
 function registerActivityHooks() {
@@ -1148,7 +1163,12 @@ function registerActivityHooks() {
       return false;
     }
     if (isCloneCreation(activity) && !canCreateClone(activity.item.actor)) return false;
-    if (activity.item?.flags?.jjk5e?.tokenSwap?.[activity.id] && !validateTokenSwap(activity)) return false;
+    if (activity.item?.flags?.jjk5e?.tokenSwap?.[activity.id]) {
+      if (!selectedSwap(activity)) return false;
+      // dnd5e passes a usage clone. Expose the upgraded range to downstream workflows.
+      const caster = activity.actor ?? activity.item.actor;
+      if (caster?.items?.get?.(activity.item.id) !== activity.item && activity.range) activity.range.value = swapRange(caster, activity);
+    }
     const actor = activity.actor ?? activity.item?.actor;
     if (activity.item?.flags?.jjk5e?.mindset && actor && !actor.system.attributes?.inspiration) {
       ui.notifications.warn(t("Notify.NoInspiration", { name: actor.name }));
@@ -1164,7 +1184,7 @@ function registerActivityHooks() {
     }
     // Full-Turn Action (Rules of Thumb): needs the action, bonus action and all movement still unused.
     if (!actionGate(actor,activity)) {
-      ui.notifications.warn(t("Notify.FullTurnUsed"));
+      ui.notifications.warn(t(goldenWeekBlocks(actor, activity) ? "Notify.GoldenWeekTimeStop" : "Notify.FullTurnUsed"));
       return false;
     }
     const cost = totalActivityCECost(actor, activity, usageConfig);
@@ -1209,7 +1229,11 @@ function registerActivityHooks() {
     if (activity.item?.flags?.jjk5e?.domainActivity && activity.item.flags.jjk5e.domainActivity !== activity.id &&
         !canUseDomainActivity(activity.actor ?? activity.item.actor, activity)) return false;
     if (isCloneCreation(activity) && !canCreateClone(activity.item.actor, cloneQuantity(activity, usageConfig))) return false;
-    if (activity.item?.flags?.jjk5e?.tokenSwap?.[activity.id] && !validateTokenSwap(activity)) return false;
+    if (activity.item?.flags?.jjk5e?.tokenSwap?.[activity.id]) {
+      const selection = selectedSwap(activity);
+      if (!selection) return false;
+      if (usageConfig) SWAP_SELECTIONS.set(usageConfig, selection);
+    }
     const actor = activity.actor ?? activity.item?.actor;
     // Native Midi may already have reserved a normal action for a bundled full-turn activity.
     // Recheck local state rather than treating that native reservation as an earlier action.
@@ -1225,9 +1249,9 @@ function registerActivityHooks() {
     const item = activity.item;
     const quantity = isCloneCreation(activity) ? cloneQuantity(activity, usageConfig) : 0;
     if (isCloneCreation(activity) && !canCreateClone(actor, quantity)) return;
-    if (item?.flags?.jjk5e?.tokenSwap?.[activity.id]) {
-      if (!validateTokenSwap(activity)) return;
-    }
+    const swapping = item?.flags?.jjk5e?.tokenSwap?.[activity.id];
+    const selection = swapping && (SWAP_SELECTIONS.get(usageConfig) ?? selectedSwap(activity));
+    if (swapping && !selection) return;
     // Pay BEFORE opening domains or applying buffs. Failed CE payment must never
     // leave a benefit in place. The pre-use gate handles ordinary insufficient CE.
     if (setting("autoSpendCE") && actor && item) {
@@ -1278,46 +1302,58 @@ function registerActivityHooks() {
         ? t("Domain.SureHitAttack") : t("Domain.SureHitSave")}</p>`);
     }
     await applySpellSelfBuff(actor, item, activity);
-    await applyTokenSwap(actor, item, activity);
+    await applyTokenSwap(actor, selection);
   });
 }
 
 /** Execute explicitly declared token-position swaps without granting players
  * authority over tokens they do not own. */
-async function applyTokenSwap(actor, item, activity) {
-  if (!item?.flags?.jjk5e?.tokenSwap?.[activity?.id] || !canvas?.scene) return;
-  const source = actor?.getActiveTokens?.(true, true)?.find((t) => t.parent?.id === canvas.scene.id)
-    ?? canvas.tokens?.controlled?.find((t) => t.actor === actor)?.document;
-  const targets = [...(game.user?.targets ?? [])];
-  const target = targets.length === 1 ? targets[0]?.document : null;
-  if (!source || !target || source.id === target.id || source.parent?.id !== target.parent?.id) {
-    return ui.notifications.warn(t("Notify.SwapSelect"));
-  }
-  if (!game.user.isGM && !target.actor?.isOwner) {
-    return ui.notifications.warn(t("Notify.SwapOwner"));
-  }
-  await GM_EXTRA.tokenSwap({
-    sceneId: canvas.scene.id, sourceId: source.id, targetId: target.id,
-    actorUuid: actor.uuid, userId: game.user.id
-  });
+const SWAP_SELECTIONS = new WeakMap();
+
+async function applyTokenSwap(actor, selection) {
+  if (!selection) return;
+  await GM_EXTRA.tokenSwap({ ...selection, actorUuid: actor.uuid });
 }
 
-function validateTokenSwap(activity) {
+function hasBoogieFeature(actor, name) {
+  return !!actor?.items?.some(item => item.flags?.jjk5e?.technique === "Boogie Woogie" && baseName(item) === name);
+}
+function swapRange(actor, activity) {
+  const range = activity.range?.value;
+  const flags = activity.item?.flags?.jjk5e;
+  if (flags?.technique !== "Boogie Woogie" || !flags.tokenSwap?.[activity.id] ||
+      flags.domainActivity || activity.range?.units !== "ft" || !(Number(range) > 0)) return range;
+  if (hasBoogieFeature(actor, "Round of Applause")) return Math.max(Number(range), 60);
+  if (hasBoogieFeature(actor, "Clap Back")) return Math.max(Number(range), 45);
+  return range;
+}
+function swapSource(actor) {
+  const scene = canvas?.scene;
+  if (!actor || !scene) return null;
+  if (actor.isToken) return actor.token?.parent?.id === scene.id ? actor.token : null;
+  const controlled = canvas.tokens?.controlled?.find(t => t.actor?.uuid === actor.uuid && t.document.parent?.id === scene.id);
+  return controlled?.document ?? actor.getActiveTokens?.(true, true)?.find(t => t.parent?.id === scene.id);
+}
+function selectedSwap(activity) {
   const actor = activity.actor ?? activity.item?.actor;
-  const source = actor?.getActiveTokens?.(true, true)?.find((t) => t.parent?.id === canvas.scene?.id);
+  const source = swapSource(actor);
   const targets = [...(game.user?.targets ?? [])];
   const target = targets.length === 1 ? targets[0].document : null;
   const fail = (message) => { ui.notifications.warn(message); return false; };
   if (!source || !target || source.id === target.id || source.parent !== target.parent)
-    return fail("JJK 5e: select exactly one other token in the caster's scene.");
+    return fail(t("Notify.SwapSelect"));
   if (!source.isOwner || !target.isOwner)
-    return fail("JJK 5e: the GM must perform swaps involving tokens you do not own. No CE has been charged.");
+    return fail(t("Notify.SwapOwner"));
+  if (unlimitedDomainSwap(activity)) {
+    const domain = getDomain(actor);
+    if (!insideDomain(domain, source) || !insideDomain(domain, target)) return fail(t("Notify.SwapDomain"));
+  }
   const a = tokenCenter(source), b = tokenCenter(target);
   const distance = Math.hypot(a.x - b.x, a.y - b.y) / ftToPx(source.parent, 1);
-  const range = Number(activity.range?.value);
+  const range = Number(swapRange(actor, activity));
   if (!Number.isFinite(range) || range <= 0 || distance > range + 0.001)
-    return fail("JJK 5e: swap target is outside the technique's range.");
-  return true;
+    return fail(t("Notify.SwapRange"));
+  return { sceneId: source.parent.id, sourceId: source.id, targetId: target.id };
 }
 
 function isCloneCreation(activity) {
@@ -1372,17 +1408,18 @@ async function applySpellSelfBuff(actor, item, activity) {
   const original = [...(actor.effects ?? [])].filter((e) =>
     e.flags?.jjk5e?.spellBuffItem === item.uuid &&
     e.flags?.jjk5e?.spellBuffActivity === activity.id);
-  for (const effect of original) await safeDelete(effect);
   const changes = (spec.changes ?? []).filter((c) =>
-    /^system\.attributes\.(?:ac\.bonus|movement\.(?:walk|fly|swim|climb))$/.test(c.key) &&
+    /^system\.attributes\.(?:ac\.bonus|movement\.(?:walk|fly|swim|climb|burrow))$/.test(c.key) &&
     ["multiply", "add", "override"].includes(c.type) && Number.isFinite(Number(c.value)));
   if (!changes.length) return;
-  await actor.createEmbeddedDocuments("ActiveEffect", [fxData({
+  const [created] = await actor.createEmbeddedDocuments("ActiveEffect", [fxData({
     name: item.name, img: item.img, transfer: false, disabled: false,
     duration: { rounds: Number(spec.rounds) || 10 },
-    changes: changes.map((c) => ({ key: c.key, type: c.type, value: String(c.value) })),
+    changes: changes.map((c) => ({ key: c.key, mode: TYPE_MODES[c.type], value: String(c.value) })),
     flags: { jjk5e: { spellBuffItem: item.uuid, spellBuffActivity: activity.id } }
   })]);
+  if (!created) return;
+  for (const effect of original) await safeDelete(effect);
   if (spec.manual) await chat(actor,
     `<p><strong>${esc(item.name)} — ${t("Common.Reminder")}</strong></p><p>${esc(spec.manual)}</p>`);
 }
@@ -2419,8 +2456,7 @@ GM_EXTRA.tokenSwap = async ({ sceneId, sourceId, targetId, actorUuid }) => {
   const target = scene?.tokens.get(targetId);
   const actor = actorUuid ? await fromUuid(actorUuid).catch(() => null) : null;
   if (!scene || !source || !target || source.id === target.id) return;
-  const actorId = actor?.isToken ? actor.token?.actorId : actor?.id;
-  if (!actorId || source.actorId !== actorId) return;
+  if (!actor || (actor.isToken ? actor.token?.uuid !== source.uuid : source.actorId !== actor.id)) return;
   await scene.updateEmbeddedDocuments("Token", [
     { _id: source.id, x: target.x, y: target.y, elevation: target.elevation },
     { _id: target.id, x: source.x, y: source.y, elevation: source.elevation }
@@ -8863,6 +8899,10 @@ function modernChange(change) {
   }
   if (!shim) return jjkModernChange(change);
   const out = { ...change, key: shim.key };
+  if (shim.type !== undefined) {
+    if (change.type !== undefined || change.mode === undefined) out.type = shim.type;
+    if (change.mode !== undefined && TYPE_MODES[shim.type] !== undefined) out.mode = TYPE_MODES[shim.type];
+  }
   if (shim.value !== undefined) out.value = shim.value;
   return out;
 }
@@ -8871,17 +8911,25 @@ function modernChange(change) {
  *   and DAE's custom handler only reaches top-level numbers. dnd5e's own movement.multiplier scales every speed.
  * - system.traits.{dr,di,dv}.all: written as the native "ALL" damage type, independent of DAE's field mapping. */
 const AE_MODE = { CUSTOM: 0, MULTIPLY: 1, ADD: 2, OVERRIDE: 5 };
+/** Foundry 14 changes may carry `type` ("multiply") instead of `mode` (1): read either, write back in the same form. */
+const changeMode = (c) => c?.mode !== undefined && c?.mode !== null ? Number(c.mode) : (TYPE_MODES[c?.type] ?? NaN);
+function withMode(change, mode) {
+  const out = { ...change };
+  if (change.mode !== undefined || change.type === undefined) out.mode = mode;
+  if (change.type !== undefined) out.type = MODE_TYPES[mode];
+  return out;
+}
 function jjkModernChange(change) {
-  const mode = Number(change.mode);
+  const mode = changeMode(change);
   if (change.key === "system.attributes.movement.all") {
     const n = Number(String(change.value ?? "").trim());
     if (mode === AE_MODE.MULTIPLY && Number.isFinite(n)) return { ...change, key: "system.attributes.movement.multiplier" };
-    if (mode === AE_MODE.CUSTOM && n === 0 && String(change.value).trim() !== "") return { ...change, key: "system.attributes.movement.multiplier", mode: AE_MODE.OVERRIDE, value: "0" };
+    if (mode === AE_MODE.CUSTOM && n === 0 && String(change.value).trim() !== "") return { ...withMode(change, AE_MODE.OVERRIDE), key: "system.attributes.movement.multiplier", value: "0" };
     return change;
   }
   const trait = change.key.match(/^system\.traits\.(dr|di|dv)\.all$/);
   if (trait && !["0", "false", ""].includes(String(change.value ?? "").trim().toLowerCase())) {
-    return { ...change, key: `system.traits.${trait[1]}.value`, mode: AE_MODE.ADD, value: "ALL" };
+    return { ...withMode(change, AE_MODE.ADD), key: `system.traits.${trait[1]}.value`, value: "ALL" };
   }
   return change;
 }
@@ -8894,7 +8942,7 @@ function exhaustionToFlag(data) {
     const list = foundry.utils.getProperty(data ?? {}, path);
     if (!Array.isArray(list)) continue;
     const keep = list.filter((c) => {
-      if (c?.key !== "system.attributes.exhaustion" || Number(c.mode) !== AE_MODE.ADD) return true;
+      if (c?.key !== "system.attributes.exhaustion" || changeMode(c) !== AE_MODE.ADD) return true;
       total += Math.trunc(Number(c.value)) || 0;
       return false;
     });
@@ -8928,7 +8976,7 @@ function modernChanges(list) {
   return changed ? out : null;
 }
 function modernEffectData(data) {
-  const sys = data?.system?.changes;
+  const sys = data?.["system.changes"] ?? data?.system?.changes;
   const top = data?.changes;
   const a = modernChanges(sys), b = modernChanges(top);
   const upd = {};
@@ -8956,7 +9004,10 @@ Hooks.once("ready", () => {
   Hooks.on("preUpdateActiveEffect", (effect, changes) => {
     try {
       const upd = modernEffectData(changes);
-      for (const [k, v] of Object.entries(upd)) foundry.utils.setProperty(changes, k, v);
+      for (const [k, v] of Object.entries(upd)) {
+        if (Object.hasOwn(changes, k)) changes[k] = v;
+        else foundry.utils.setProperty(changes, k, v);
+      }
     } catch (err) { console.warn(`${MODULE_ID} | effect keys`, err); }
   });
   Hooks.on("preCreateItem", (item, data) => {

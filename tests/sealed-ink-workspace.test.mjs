@@ -56,7 +56,7 @@ test("JJK tools mount once in the native tab body and restore the actor's view w
   get isConnected() { return this === root || !!this.parentElement?.isConnected; }
   setAttribute(name, value) { this.attributes.set(name, value); }
   contains(node) { return this === node || this.children.some(child => child.contains(node)); }
-  focus() { document.activeElement = this; }
+  focus() { if (!this.disabled) document.activeElement = this; }
   matches(selector) { return selector.split(",").includes(this.tagName); }
   addEventListener(name, handler) { this[name] = handler; }
   querySelector(selector) {
@@ -110,6 +110,9 @@ test("JJK tools mount once in the native tab body and restore the actor's view w
  await click(section("inventory"));
  assert.equal(section("inventory").attributes.get("aria-pressed"), "true");
  assert.equal(document.activeElement, section("inventory"));
+ document.activeElement = nativeTab;
+ await click(section("inventory"));
+ assert.equal(document.activeElement, section("inventory"), "reactivating the current section restores keyboard focus");
  assert.equal(view().children[1].children[0].textContent, "Sin entradas.");
  assert.equal(enhanceActorWorkspace(new SealedSheet(actor), root, true), true);
  assert.equal(section("inventory").attributes.get("aria-pressed"), "true");
