@@ -509,9 +509,11 @@ Hooks.once("ready",() => {
   Hooks.on("deleteToken",t=>{if(t.actor?.isToken){snapshots.delete(t.actor.uuid);pending.delete(t.actor.uuid);}});
   for(const h of ["createItem","updateItem","deleteItem","createActiveEffect","updateActiveEffect","deleteActiveEffect"])
     Hooks.on(h,d=>queue(d.actor ?? (d.parent?.documentName==="Actor"?d.parent:d.parent?.actor)));
-  for(const h of ["updateCombat","combatStart","combatTurn","deleteCombat","controlToken","updateToken","canvasReady","createCombatant","updateCombatant","deleteCombatant"]) Hooks.on(h,()=>{
-    updateTurn();updateDock();if(panel&&["hud","gm"].includes(activeTab))drawPanel(true);
-  });
+  // Token drags fire updateToken many times: redraw the turn, dock and HUD once per frame.
+  let turnFrame=0;
+  const turnChanged=()=>{ if(turnFrame) return; turnFrame=window.requestAnimationFrame(()=>{ turnFrame=0;
+    updateTurn();updateDock();if(panel&&["hud","gm"].includes(activeTab))drawPanel(true); }); };
+  for(const h of ["updateCombat","combatStart","combatTurn","deleteCombat","controlToken","updateToken","canvasReady","createCombatant","updateCombatant","deleteCombatant"]) Hooks.on(h,turnChanged);
   if (game.user.isGM) {
     const missing=["midi-qol","dae"].filter(id=>!game.modules.get(id)?.active);
     if(missing.length)record("modules","critical",null,{missing:missing.join(", ")});
