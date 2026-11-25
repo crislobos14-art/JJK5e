@@ -38,7 +38,8 @@
       "Short": "EM",
       "NegativeEmotionShort": "Emoción negativa",
       "ShortRestShort": "Descanso corto",
-      "NegativeEmotionConfirm": "¿Confirmas que ocurrió un desencadenante válido durante un combate con peligro real?"
+      "NegativeEmotionConfirm": "¿Confirmas que ocurrió un desencadenante válido durante un combate con peligro real?",
+      "AlreadyFull": "La energía maldita ya está al máximo."
     },
     "Technique": {
       "Title": "Elegir Técnica Innata",

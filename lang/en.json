@@ -38,7 +38,8 @@
       "Short": "CE",
       "NegativeEmotionShort": "Negative emotion",
       "ShortRestShort": "Short rest",
-      "NegativeEmotionConfirm": "Confirm that a qualifying event happened during combat in genuine danger."
+      "NegativeEmotionConfirm": "Confirm that a qualifying event happened during combat in genuine danger.",
+      "AlreadyFull": "Cursed Energy is already full."
     },
     "Technique": {
       "Title": "Choose Innate Technique",

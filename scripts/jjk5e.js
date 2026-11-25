@@ -1742,7 +1742,10 @@ async function shortRestCE(actor) {
     return false;
   }
   const pool=findPool(actor);
-  if(!pool || cePending(pool) || vowBlocksUsage(actor.effects,{costsCE:true}))return false;
+  // Each refusal says why: a silent button reads as broken.
+  if(!pool){ui.notifications.warn(t("Panel.NoPool"));return false;}
+  if(cePending(pool)){ui.notifications.warn(t("Notify.CEPendingRest"));return false;}
+  if(vowBlocksUsage(actor.effects,{costsCE:true})){ui.notifications.warn(t("Notify.VowBlocksCE"));return false;}
   const total=actor.items.filter(i=>i.type==="class").reduce((n,c)=>n+(Number(c.system.levels)||0),0);
   let cap=Math.floor(total/2);
   while(cap>0&&!restExchangePlan(actor,pool,cap))cap--;
@@ -1760,7 +1763,8 @@ async function negativeEmotion(actor) {
   actor = requireActor(actor);
   if (!actor || !actor.isOwner) return false;
   const pool = findPool(actor);
-  if (!pool || poolValue(pool) >= poolMax(pool)) return false;
+  if (!pool) { ui.notifications.warn(t("Panel.NoPool")); return false; }
+  if (poolValue(pool) >= poolMax(pool)) { ui.notifications.info(t("CE.AlreadyFull")); return false; }
   // V6: the GM adjudicates genuine danger and the qualifying event. Players send the request to the GM.
   if (!game.user.isGM) return viaGM("negEmotion", { actorUuid: actor.uuid });
   const pb = Number(actor.system.attributes?.prof) || 2;
@@ -2551,7 +2555,7 @@ function panelHTML(actor, tab = "combat") {
       <div class="jjk-row">
         ${pbtn("negEmotion", "fas fa-face-angry", t("CE.NegativeEmotionShort"), { key: "N", tip: t("CE.NegativeEmotion") })}
         ${(() => { const rx = actor.getFlag(MODULE_ID, "shortRestExchange")?.state; const ready = rx === "open" && !game.combat?.started;
-          return pbtn("shortRest", "fas fa-bed", t("CE.ShortRestShort"), { key: "R", data: ready ? "" : "disabled",
+          return pbtn("shortRest", "fas fa-bed", t("CE.ShortRestShort"), { key: "R", cls: ready ? "" : "jjk-unavailable", data: ready ? "" : 'aria-disabled="true"',
             tip: ready ? t("CE.ShortRestTitle") : t(rx === "review" ? "Rest.InReview" : "Rest.NeedShortRest") }); })()}
       </div></fieldset>` : (hr ? "" : `<p class="jjk-note">${t("Panel.NoPool")} ${pbtn("chooseTechnique", "fas fa-hand-sparkles", t("Panel.ChooseTechnique"))}</p>`);
 
@@ -2657,7 +2661,7 @@ async function showShortcuts() {
     .map(([k, a]) => `<tr><td><kbd>${k.toUpperCase()}</kbd></td><td>${t(`Panel.Key.${a}`)}</td></tr>`).join("");
   const content = `<div class="jjk-help"><h3>${t("Panel.GlobalKeys")}</h3><table>${global}</table>
     <p class="notes">${t("Panel.KeysEditable")}</p>
-    <h3>${t("Panel.PanelKeys")}</h3><table>${local}<tr><td><kbd>1–4</kbd></td><td>${t("Panel.Key.tabs")}</td></tr>
+    <h3>${t("Panel.PanelKeys")}</h3><table>${local}<tr><td><kbd>${game.user.isGM ? "1–5" : "1–4"}</kbd></td><td>${t("Panel.Key.tabs")}</td></tr>
     <tr><td><kbd>Shift + −/+</kbd></td><td>${t("Panel.Key.five")}</td></tr></table>
     <p class="notes">${t("Keys.HudHint")}</p></div>`;
   return foundry.applications.api.DialogV2.prompt({ window: { resizable: true, title: t("Panel.Shortcuts") }, classes: ["jjk5e-ui", "jjk5e-dialog"], content, rejectClose: false,
@@ -9073,6 +9077,7 @@ function markInkTables(root) {
 Hooks.once("ready", () => {
   if (game.system?.id !== "dnd5e") return;
   Hooks.on("renderApplicationV2", (app, element) => {
+    try { keyboardActions(element instanceof HTMLElement ? element : element?.[0]); } catch (err) { reportError("keyboard actions", err); }
     try { inkTables(app, element); } catch (err) { reportError("ink tables", err); }
     try { fitTablesIn(app, element); } catch (err) { reportError("adaptive tables", err); }
   });
@@ -9080,6 +9085,26 @@ Hooks.once("ready", () => {
     try { if (html?.querySelector?.("table")) fitTables(html); } catch (err) { reportError("adaptive tables", err); }
   });
 });
+
+/** Rows, chips and links with a data-action respond to Enter/Space like buttons and are reachable with Tab. */
+const KEY_CLICKABLE = "[data-action]:not(button, input, select, textarea, option, a[href], form)";
+function keyboardActions(root) {
+  if (!root?.matches?.(".jjk5e-ui")) return;
+  for (const el of root.querySelectorAll(KEY_CLICKABLE)) {
+    if (!el.hasAttribute("tabindex")) el.tabIndex = 0;
+    if (!el.hasAttribute("role")) el.setAttribute("role", "button");
+  }
+  if (root.dataset.jjkKeys) return;
+  root.dataset.jjkKeys = "1";
+  root.addEventListener("keydown", (ev) => {
+    // Already handled by a row's own key listener (career, school lists): do not click twice.
+    if ((ev.key !== "Enter" && ev.key !== " ") || ev.defaultPrevented) return;
+    const el = ev.target?.closest?.(KEY_CLICKABLE);
+    if (!el || !root.contains(el)) return;
+    ev.preventDefault(); ev.stopPropagation();
+    el.click();
+  });
+}
 
 /* ---- Adaptive tables: every module table follows its window's width and the chosen view ------ */
 

@@ -605,3 +605,6 @@ table.jjk-fit :is(td, th) img { max-width: 100%; height: auto; }
   .jjk5e-ui :is(footer.btns, .dialog-buttons, .form-footer) { flex-wrap: wrap; }
   .jjk5e-ui :is(footer.btns, .dialog-buttons, .form-footer) > button { flex: 1 1 45%; }
 }
+/* Unavailable but explained: stays hoverable so its tooltip says why, and a click shows the reason. */
+.jjk5e-ui button.jjk-unavailable { opacity: .5; cursor: help; }
+.jjk5e-ui [data-action][role=button]:not(button):focus-visible { outline: 2px solid var(--jjk-bone, #eee6d5); outline-offset: 1px; }
