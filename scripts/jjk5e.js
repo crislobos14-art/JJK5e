@@ -1332,7 +1332,7 @@ function cloneQuantity(activity, config) {
 
 function canCreateClone(actor, quantity = 1) {
   if (!Number.isSafeInteger(quantity) || quantity < 1) return false;
-  const scene = canvas.scene;
+  const scene = canvas?.scene;
   const source = actorToken(actor);
   if (!source || !scene || !game.user.can("TOKEN_CREATE")) {
     ui.notifications.warn(t("Notify.CloneScene"));
@@ -4294,7 +4294,7 @@ async function summonFallback(activity) {
     ac: (Number(base.ac?.flat ?? base.ac?.value) || 10) + (await evalF(activity.bonuses?.ac))
   };
   return viaGM("summon", { actorUuid: actor.uuid, name: src?.name ?? name, sourceUuid: src?.uuid ?? null,
-    count: Number(info?.count ?? profile?.count) || 1, userId: game.user.id, sceneId: canvas.scene?.id, stats });
+    count: Number(info?.count ?? profile?.count) || 1, userId: game.user.id, sceneId: canvas?.scene?.id, stats });
 }
 
 Hooks.once("init", () => {
@@ -7901,7 +7901,7 @@ function isFlanking(actor) {
   const c = (tk) => tk.center ?? { x: tk.x, y: tk.y };
   const v = (a) => ({ x: c(a).x - c(target).x, y: c(a).y - c(target).y });
   const a = v(me);
-  return canvas.tokens.placeables.some((o) => {
+  return (canvas?.tokens?.placeables ?? []).some((o) => {
     if (o === me || o === target || !o.actor || o.document?.disposition !== me.document?.disposition || incapacitated(o.actor)) return false;
     if (!(tokenDistance(o, target) <= 5)) return false;
     const b = v(o);
@@ -8861,10 +8861,65 @@ function modernChange(change) {
     const m = change.key.match(/^system\.(abilities|skills|tools)\.(\w+)\.bonuses\.(check|save)$/);
     if (m) shim = { key: `system.${m[1]}.${m[2]}.${m[1] === "abilities" ? `${m[3]}.` : ""}roll.bonus` };
   }
-  if (!shim) return change;
+  if (!shim) return jjkModernChange(change);
   const out = { ...change, key: shim.key };
   if (shim.value !== undefined) out.value = shim.value;
   return out;
+}
+/** JJK pack keys that dnd5e 6 no longer reads (audit v1.95):
+ * - system.attributes.movement.all: dnd5e 6 keeps speeds in movement.speeds, so a MULTIPLY on "all" changed nothing
+ *   and DAE's custom handler only reaches top-level numbers. dnd5e's own movement.multiplier scales every speed.
+ * - system.traits.{dr,di,dv}.all: written as the native "ALL" damage type, independent of DAE's field mapping. */
+const AE_MODE = { CUSTOM: 0, MULTIPLY: 1, ADD: 2, OVERRIDE: 5 };
+function jjkModernChange(change) {
+  const mode = Number(change.mode);
+  if (change.key === "system.attributes.movement.all") {
+    const n = Number(String(change.value ?? "").trim());
+    if (mode === AE_MODE.MULTIPLY && Number.isFinite(n)) return { ...change, key: "system.attributes.movement.multiplier" };
+    if (mode === AE_MODE.CUSTOM && n === 0 && String(change.value).trim() !== "") return { ...change, key: "system.attributes.movement.multiplier", mode: AE_MODE.OVERRIDE, value: "0" };
+    return change;
+  }
+  const trait = change.key.match(/^system\.traits\.(dr|di|dv)\.all$/);
+  if (trait && !["0", "false", ""].includes(String(change.value ?? "").trim().toLowerCase())) {
+    return { ...change, key: `system.traits.${trait[1]}.value`, mode: AE_MODE.ADD, value: "ALL" };
+  }
+  return change;
+}
+/** dnd5e 6 rebuilds attributes.exhaustion from its exhaustion effect after effects apply, so an effect that ADDs
+ * exhaustion did nothing. Move the amount to flags.jjk5e.tempExhaustion; real levels are added while the effect lasts. */
+function exhaustionToFlag(data) {
+  const out = {};
+  let total = 0;
+  for (const path of ["system.changes", "changes"]) {
+    const list = foundry.utils.getProperty(data ?? {}, path);
+    if (!Array.isArray(list)) continue;
+    const keep = list.filter((c) => {
+      if (c?.key !== "system.attributes.exhaustion" || Number(c.mode) !== AE_MODE.ADD) return true;
+      total += Math.trunc(Number(c.value)) || 0;
+      return false;
+    });
+    if (keep.length !== list.length) out[path] = keep;
+  }
+  if (total > 0) out["flags.jjk5e.tempExhaustion"] = Math.min(6, total);
+  return out;
+}
+async function tempExhaustion(effect, on, userId) {
+  const amount = Number(effect?.flags?.jjk5e?.tempExhaustion) || 0;
+  const actor = effect?.parent;
+  if (!amount || actor?.documentName !== "Actor" || userId !== game.user.id || !actor.isOwner) return;
+  const key = `tempExhaustion.${effect.id}`;
+  const cur = Number(actor.system?.attributes?.exhaustion) || 0;
+  if (on) {
+    if (effect.disabled || actor.getFlag(MODULE_ID, key)) return;
+    const next = Math.min(cur + amount, 6);
+    await actor.setFlag(MODULE_ID, key, Math.max(1, next - cur));
+    if (next !== cur) await actor.update({ "system.attributes.exhaustion": next });
+  } else {
+    const added = Number(actor.getFlag(MODULE_ID, key)) || 0;
+    if (!added) return;
+    await actor.unsetFlag(MODULE_ID, key);
+    await actor.update({ "system.attributes.exhaustion": Math.max(0, cur - added) });
+  }
 }
 function modernChanges(list) {
   if (!Array.isArray(list)) return null;
@@ -8879,6 +8934,11 @@ function modernEffectData(data) {
   const upd = {};
   if (a) upd["system.changes"] = a;
   if (b) upd.changes = b;
+  // Exhaustion is read from the already modernised lists so both rewrites land together.
+  const ex = exhaustionToFlag({ system: { changes: a ?? sys }, changes: b ?? top });
+  if (ex["system.changes"]) upd["system.changes"] = ex["system.changes"];
+  if (ex.changes) upd.changes = ex.changes;
+  if (ex["flags.jjk5e.tempExhaustion"]) upd["flags.jjk5e.tempExhaustion"] = ex["flags.jjk5e.tempExhaustion"];
   return upd;
 }
 
@@ -8886,6 +8946,12 @@ Hooks.once("ready", () => {
   if (game.system?.id !== "dnd5e" || !CONFIG.ActiveEffect?.documentClass?.SHIM_FIELDS) return;
   Hooks.on("preCreateActiveEffect", (effect, data) => {
     try { const upd = modernEffectData(data); if (Object.keys(upd).length) effect.updateSource(upd); } catch (err) { console.warn(`${MODULE_ID} | effect keys`, err); }
+  });
+  Hooks.on("createActiveEffect", (effect, options, userId) => { tempExhaustion(effect, true, userId).catch((err) => console.warn(`${MODULE_ID} | temporary exhaustion`, err)); });
+  Hooks.on("deleteActiveEffect", (effect, options, userId) => { tempExhaustion(effect, false, userId).catch((err) => console.warn(`${MODULE_ID} | temporary exhaustion`, err)); });
+  Hooks.on("updateActiveEffect", (effect, changes, options, userId) => {
+    if (!("disabled" in (changes ?? {}))) return;
+    tempExhaustion(effect, !changes.disabled, userId).catch((err) => console.warn(`${MODULE_ID} | temporary exhaustion`, err));
   });
   Hooks.on("preUpdateActiveEffect", (effect, changes) => {
     try {
