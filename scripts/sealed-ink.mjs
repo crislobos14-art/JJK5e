@@ -1,3 +1,4 @@
+import { enhanceCharacterCreation } from "./sealed-ink-creator.mjs";
 /**
  * Sealed Ink sheet foundation. Presentation only: all document writes and
  * activity execution remain in the native sheet and existing JJK engines.
@@ -408,6 +409,7 @@ function apply(app, element) {
     for (const el of root.querySelectorAll(".jjk-sealed-choice-hidden")) el.classList.remove("jjk-sealed-choice-hidden");
     root.classList.remove("jjk-sealed-arrival");
   }
+  enhanceCharacterCreation(app, root, surface && category === "module");
   watch(app, root, surface || sealed, category);
 }
 
