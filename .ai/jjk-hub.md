@@ -10,6 +10,8 @@ Los agentes usan credenciales de API propias del servicio y tienen su propia fac
 
 ## Permisos y gasto
 
+Enviad a OpenAI y Anthropic únicamente contexto público de JJK5e. Revisad el material que vais a enviar y excluid credenciales, datos privados y conversaciones personales.
+
 - Primera versión con lectura de contenido, Issues y PR en GitHub. Si hace falta autenticación, instalad una GitHub App limitada a este repositorio y con esos permisos de lectura. Una persona lleva al PR cualquier propuesta que decida adoptar.
 - Guardad claves de proyecto dedicadas de OpenAI y Anthropic en el almacén de secretos del alojamiento. Registrad identificadores, consumo y errores sanitizados.
 - Acordad el presupuesto antes de activar llamadas reales. Aplicad una llamada por proveedor y solicitud, modelos permitidos, topes de entrada y salida y una tarea activa por repositorio. Reservad de forma atómica el coste máximo estimado antes de llamar, reconciliadlo con el uso devuelto y retened la reserva si la facturación es incierta. Aplicad topes diarios y mensuales en el Hub.
