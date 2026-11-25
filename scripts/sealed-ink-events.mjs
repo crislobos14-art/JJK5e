@@ -142,13 +142,53 @@ const TONE = {
 };
 function tone(key) { return TONE[key] ?? TONE.info; }
 /** Keep fixed Sealed Ink UI clear of the Foundry sidebar, open or collapsed. */
+/** Visible boxes of Foundry UI that our fixed layers must not cover (chat cards, hotbar, players, core notices). */
+function obstacles(selectors) {
+  const out = [];
+  for (const sel of selectors) for (const node of document.querySelectorAll(sel)) {
+    if (node.closest?.(".jjk-sealed-event-toasts,.jjk-sealed-event-dock,.jjk-sealed-event-panel")) continue;
+    const r = node.getBoundingClientRect?.();
+    if (!r || r.width < 1 || r.height < 1) continue;
+    const css = getComputedStyle(node);
+    if (css.display === "none" || css.visibility === "hidden" || Number(css.opacity) === 0) continue;
+    out.push(r);
+  }
+  return out;
+}
+const BOTTOM_UI = ["#chat-notifications > *", "#hotbar", "#players", "#ui-bottom #camera-views > *"];
+const TOP_UI = ["#notifications > .notification", "#navigation"];
 function place() {
   // offsetParent is always null for a fixed-position sidebar: measure its box instead.
   const side = document.getElementById("sidebar");
   const box = side?.getBoundingClientRect?.();
   const shown = !!box && box.width > 0 && box.height > 0 && getComputedStyle(side).visibility !== "hidden";
   const width = shown ? Math.round(Math.max(0, window.innerWidth - box.left)) : 0;
-  document.documentElement.style.setProperty("--jjk-sealed-right", Math.max(12, width + 14) + "px");
+  const right = Math.max(12, width + 14);
+  const root = document.documentElement.style;
+  root.setProperty("--jjk-sealed-right", right + "px");
+  // Our column: from `right` to the widest layer (panel 350px). Foundry cards and bars inside it push us aside.
+  const colRight = window.innerWidth - right, colLeft = colRight - Math.min(350, window.innerWidth - 24);
+  const inColumn = r => r.right > colLeft && r.left < colRight;
+  const bottomUI = obstacles(BOTTOM_UI).filter(inColumn).filter(r => r.top > window.innerHeight / 2);
+  const bottom = Math.max(12, ...bottomUI.map(r => Math.round(window.innerHeight - r.top + 8)));
+  const topUI = obstacles(TOP_UI).filter(inColumn).filter(r => r.bottom < window.innerHeight / 2);
+  const top = Math.max(65, ...topUI.map(r => Math.round(r.bottom + 8)));
+  root.setProperty("--jjk-sealed-bottom", bottom + "px");
+  root.setProperty("--jjk-sealed-top", top + "px");
+}
+let placeFrame = 0;
+function placeSoon() { if (!placeFrame) placeFrame = window.requestAnimationFrame(() => { placeFrame = 0; place(); }); }
+/** Foundry adds and removes chat cards and core notices on its own: follow them. */
+function watchFoundryUI() {
+  if (typeof MutationObserver !== "function") return;
+  const observer = new MutationObserver(placeSoon);
+  for (const id of ["chat-notifications", "notifications", "hotbar", "players", "ui-bottom"]) {
+    const node = document.getElementById(id);
+    if (!node) continue;
+    const bars = id === "hotbar" || id === "players";
+    observer.observe(node, bars ? { childList: true, subtree: true, attributes: true, attributeFilter: ["class", "style"] }
+      : { childList: true, subtree: id !== "ui-bottom" });
+  }
 }
 function dismiss(node) {
   if (!node.isConnected || node.classList.contains("leaving")) return;
@@ -464,9 +504,11 @@ function drawPanel(automatic = false) {
     body.append(row);
   }
 }
-function closePanel() { const had = !!panel?.contains(document.activeElement); panel?.remove(); panel=null; updateDock(); if (had) dock?.focus?.(); }
+function closePanel() { const had = !!panel?.contains(document.activeElement); panel?.remove(); panel=null; document.body.classList.remove("jjk-sealed-panel-open"); updateDock(); if (had) dock?.focus?.(); }
 function open(tab = "events") {
   activeTab=tab;
+  // The open panel already lists every notice: pop-ups would only cover it.
+  document.body.classList.add("jjk-sealed-panel-open");
   if (!panel) {
     panel=el("section","jjk-sealed-event-panel");panel.setAttribute("aria-label","Sealed Ink");panel.setAttribute("role","dialog");
     panel.addEventListener("keydown",event => { if (event.key === "Escape") { event.stopPropagation(); closePanel(); } });
@@ -500,8 +542,9 @@ Hooks.once("ready",() => {
   loadHistory();
   dock=button("",()=>panel?closePanel():open(settings("sealedEventCenter")?"events":"hud"));
   dock.className="jjk-sealed-event-dock";dock.setAttribute("aria-haspopup","dialog");document.body.append(dock);updateDock();
-  Hooks.on("collapseSidebar",()=>window.requestAnimationFrame(place));
-  window.addEventListener("resize",()=>window.requestAnimationFrame(place),{passive:true});
+  Hooks.on("collapseSidebar",placeSoon);
+  window.addEventListener("resize",placeSoon,{passive:true});
+  watchFoundryUI(); place();
   for(const a of [...game.actors,...combatants().map(c=>c.actor)]) if(visible(a)) snapshots.set(a.uuid,snapshot(a));
   for(const h of ["updateActor","createActor"]) Hooks.on(h,queue);
   Hooks.on("deleteActor",a=>{snapshots.delete(a.uuid);pending.delete(a.uuid);});

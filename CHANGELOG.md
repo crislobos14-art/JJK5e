@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.101.0 — Avisos sin solapes
+- Los avisos emergentes de Sealed Ink ya no quedan debajo de los avisos de Foundry. Antes empezaban siempre a 65 px y Foundry los cubría. Ahora se colocan justo debajo de los avisos de Foundry y de la barra de escenas.
+- El botón de avisos y su panel ya no tapan las tarjetas de chat de Foundry (las que aparecen junto a la barra lateral), la barra de accesos rápidos ni la lista de jugadores. Se colocan encima de ellas y se recolocan solos cuando esas tarjetas aparecen o desaparecen.
+- El panel ajusta su altura al espacio libre, así que en pantallas de 768 px o menos ya no se monta sobre los avisos. Mientras está abierto, los avisos emergentes se ocultan, porque el panel ya los lista todos.
+- Tarjeta de choque de dominios: el refinamiento y el estado de cada participante quedan alineados aunque los nombres tengan distinta longitud.
+- Auditoría en Chrome con una maqueta de la interfaz de Foundry: barra lateral abierta y plegada, en 1920×1080, 1366×768, 1100×700 y 800×600. Antes de la corrección había 8 combinaciones con solapes; ahora ninguna.
 ## 1.100.0 — Motores de dominio y EM
 - Choque múltiple: si se cierra uno de los dominios de un choque entre 3 o más, el choque se vuelve a resolver entre los que siguen abiertos. Antes los demás conservaban el papel calculado contra el dominio que ya no estaba. Por ejemplo, dos dominios con el mismo refinamiento, perdedores ante un tercero, seguían encogiéndose y se rompían en la ronda 6. Ahora quedan empatados, como dicta su refinamiento.
 - Technique Burnout: ya no se puede abrir un dominio nuevo, completo o incompleto, mientras dura. Antes Incomplete Domain (dote) y la apertura desde el panel o una macro lo permitían.
