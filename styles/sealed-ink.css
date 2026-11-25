@@ -390,56 +390,27 @@
  .jjk-sealed-surface .jjk-menu-grid{grid-template-columns:minmax(0,1fr)}
 }
 
-/* Actor workspace, independent presentation over native sheet controls. */
-.jjk-sealed-sheet .jjk-actor-workspace{display:grid;gap:8px;min-width:0;flex:0 0 auto;padding:9px;background:var(--jjk-ink);border:1px solid var(--jjk-edge);border-top:2px solid var(--jjk-seal);box-shadow:inset 0 0 0 3px var(--jjk-ink),inset 0 0 0 4px #eee6d50b;container-type:inline-size;max-height:48vh;overflow:auto}
-.jjk-actor-workspace .jjk-workspace-header{display:flex;gap:8px;align-items:center;border-bottom:1px solid var(--jjk-edge);padding-bottom:6px}
-.jjk-workspace-portrait{width:48px;height:58px;object-fit:cover;border:1px solid var(--jjk-edge);border-radius:0}
-.jjk-workspace-name{flex:1;min-width:0}
-.jjk-workspace-name h2{font:700 24px/1 var(--jjk-display);text-transform:uppercase;margin:2px 0;border:0;overflow-wrap:anywhere}
+/* JJK tools in the native tab body, beside the actor’s own resources. */
+.jjk-sealed-sheet .tab-body > .jjk-actor-workspace{display:grid;gap:6px;min-width:0;flex:0 0 auto;margin-block-end:8px;padding:6px;background:var(--jjk-card);border-block-start:2px solid var(--jjk-seal)}
 .jjk-actor-workspace small{font-size:10px;color:var(--jjk-muted);letter-spacing:.04em}
-.jjk-workspace-name small,.jjk-workspace-metric small,.jjk-workspace-scores small{letter-spacing:.13em;text-transform:uppercase}
 .jjk-workspace-tools{display:flex;gap:3px;flex-wrap:wrap;align-items:center}
 .jjk-workspace-tools button,.jjk-workspace-entry button{width:auto;flex:0 0 auto}
-.jjk-workspace-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:4px}
-.jjk-workspace-metric{display:grid;gap:4px;background:var(--jjk-card);border:1px solid var(--jjk-edge);padding:6px;min-width:0}
-.jjk-workspace-metric strong{font:700 29px/1 var(--jjk-display);font-variant-numeric:tabular-nums;color:var(--jjk-bone);white-space:nowrap}
-.jjk-workspace-metric[data-tone=energy] strong{color:var(--jjk-energy)}
-.jjk-workspace-meter{height:6px;background:var(--jjk-ink);border:1px solid var(--jjk-edge);overflow:hidden}
-.jjk-workspace-meter span{display:block;height:100%;background:var(--jjk-bone)}
-.jjk-workspace-metric[data-tone=energy] .jjk-workspace-meter span{background:linear-gradient(90deg,var(--jjk-ce-1),var(--jjk-energy));box-shadow:0 0 8px var(--jjk-energy)}
-.jjk-workspace-columns{display:grid;grid-template-columns:minmax(130px,1fr) minmax(240px,2.2fr);gap:7px;min-width:0}
-.jjk-actor-workspace[data-reverse=true] .jjk-workspace-columns{grid-template-columns:minmax(240px,2.2fr) minmax(130px,1fr)}
-.jjk-actor-workspace[data-reverse=true] .jjk-workspace-side{order:2}
-.jjk-workspace-side,.jjk-workspace-main{display:grid;align-content:start;gap:6px;min-width:0;border:1px solid var(--jjk-edge);background:var(--jjk-card);padding:6px}
-.jjk-workspace-side h3,.jjk-workspace-content h4{font:700 13px/1 var(--jjk-display);letter-spacing:.1em;text-transform:uppercase;color:var(--jjk-bone);border:0;margin:0}
-.jjk-workspace-scores{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px}
-.jjk-workspace-scores>div{display:grid;text-align:center;background:var(--jjk-ink);border:1px solid var(--jjk-edge);padding:4px 1px}
-.jjk-workspace-scores strong{font:700 24px/1 var(--jjk-display)}
-.jjk-workspace-scores span{font-size:11px;color:var(--jjk-muted)}
-.jjk-workspace-meta{display:grid;grid-template-columns:1fr auto;align-items:center;gap:4px;padding-top:4px;border-top:1px solid var(--jjk-edge)}
-.jjk-workspace-gm{color:var(--jjk-gold);border-left:3px solid var(--jjk-gold);padding:4px;font-size:10px;letter-spacing:.08em}
-.jjk-workspace-gm button{display:block;margin-top:4px}
-.jjk-workspace-warning{border-left:3px solid var(--jjk-seal);padding:4px}
 .jjk-workspace-tabs{display:flex;flex-wrap:wrap;gap:3px;border-bottom:1px solid var(--jjk-edge);padding-bottom:4px}
-.jjk-workspace-tabs button{flex:1 1 auto;font:700 12px/1 var(--jjk-display);text-transform:uppercase;letter-spacing:.05em}
+.jjk-actor-workspace .jjk-workspace-tabs button{width:auto;flex:0 1 auto;min-width:0;overflow-wrap:anywhere;font:700 12px/1 var(--jjk-display)}
 .jjk-actor-workspace button{background:var(--jjk-card-2);border:1px solid var(--jjk-edge);border-radius:0;color:var(--jjk-bone);min-height:25px;padding:3px 6px;font-size:11px;white-space:normal;box-shadow:none}
 .jjk-actor-workspace button:hover{border-color:var(--jjk-seal)}
 .jjk-actor-workspace button:disabled{opacity:.5;cursor:not-allowed}
 .jjk-actor-workspace .jjk-workspace-tabs button[aria-pressed=true]{background:var(--jjk-bone);color:var(--jjk-ink);box-shadow:inset 0 3px var(--jjk-seal)}
 .jjk-workspace-content,.jjk-workspace-list{display:grid;gap:4px;min-width:0;align-content:start}
-.jjk-workspace-list{max-height:175px;overflow:auto}
 .jjk-workspace-tools input,.jjk-workspace-tools select{flex:1 1 90px;min-width:0;width:auto}
 .jjk-workspace-entry{display:flex;align-items:center;gap:4px;padding:4px;background:var(--jjk-ink);border-left:2px solid var(--jjk-edge);flex-wrap:wrap;overflow-wrap:anywhere}
 .jjk-workspace-entry>span,.jjk-workspace-action-label{flex:1;min-width:90px}
 .jjk-workspace-action-label{display:grid;gap:2px}
-.jjk-workspace-muted,.jjk-workspace-footer{color:var(--jjk-muted);font-size:10px;line-height:1.35;margin:0}
-.jjk-workspace-footer{border-top:1px solid var(--jjk-edge);padding-top:4px}
-.jjk-actor-workspace[data-mini=true]{max-height:none}
-.jjk-sealed-motion:not([data-jjk-motion=off],[data-jjk-motion=performance]) .jjk-workspace-meter span{transition:width 220ms ease-out}
 .jjk-sealed-motion:not([data-jjk-motion=off],[data-jjk-motion=performance]) .jjk-workspace-entry:hover{border-left-color:var(--jjk-seal)}
 .jjk-sealed-motion:not([data-jjk-motion=off],[data-jjk-motion=performance]) .jjk-workspace-tabs button{transition:background-color 130ms ease,border-color 130ms ease}
-@container(max-width:490px){.jjk-actor-workspace .jjk-workspace-columns,.jjk-actor-workspace[data-reverse=true] .jjk-workspace-columns{grid-template-columns:1fr}.jjk-workspace-header{flex-wrap:wrap}}
 @media(prefers-reduced-motion:reduce){.jjk-actor-workspace *{animation:none!important;transition:none!important}}
+.jjk-workspace-muted{color:var(--jjk-muted);font-size:10px;line-height:1.35;margin:0}
+.jjk-actor-workspace .jjk-workspace-content{max-height:min(32vh,260px);overflow:auto;overscroll-behavior:contain;padding:3px}
 /* ------------------------------------------------------------------ */
 /* Sealed Ink 2 — native D&D5e sheet re-theme through system tokens.   */
 /* D&D5e sets its dark tokens inside @scope(.theme-dark) on .dnd5e2;   */
@@ -723,8 +694,20 @@
 .jjk-sealed-sheet.dnd5e2 .jjk-ce-group > .label{color:var(--jjk-muted);letter-spacing:.08em;text-transform:uppercase}
 .jjk-sealed-motion.dnd5e2 .meter.jjk-cursed-energy > .progress::before{transition:width 380ms var(--jjk-ease,ease-out)}
 @media(prefers-reduced-motion:reduce){.jjk-sealed-motion.dnd5e2 .meter.jjk-cursed-energy > .progress::before{transition:none}}
-/* The workspace is prepended inside .window-content, which D&D5e pulls up under the window title bar
-   (-65px on characters, -26px on NPCs): push it back down so its header is not hidden. */
-.jjk-sealed-sheet.dnd5e2.character:not(.minimized) .window-content > .jjk-actor-workspace{margin-block-start:69px}
-.jjk-sealed-sheet.dnd5e2.npc:not(.minimized) .window-content > .jjk-actor-workspace{margin-block-start:30px}
-.jjk-sealed-sheet .jjk-actor-workspace{position:relative;z-index:1}
+
+/* Issue #23 — JJK tab in the sheet's own rail. Section list on the left, content on the right; one column when narrow. */
+.jjk-sealed-sheet .jjk-sheet-tab .jjk-tab-host{min-width:0}
+.jjk-actor-workspace[data-mode=tab]{display:grid;grid-template-columns:minmax(150px,190px) minmax(0,1fr);align-items:start;gap:10px;padding:0;background:none;border:0}
+.jjk-actor-workspace[data-mode=tab] .jjk-workspace-tabs{position:sticky;top:0;display:flex;flex-direction:column;flex-wrap:nowrap;gap:3px;padding:6px;border:1px solid var(--jjk-edge);border-top:2px solid var(--jjk-seal);background:var(--jjk-card)}
+.jjk-actor-workspace[data-mode=tab] .jjk-workspace-tabs button{width:100%;justify-content:flex-start;text-align:start;min-height:30px;padding:5px 8px;font:700 12px/1.15 var(--jjk-display);letter-spacing:.05em;text-transform:uppercase}
+.jjk-actor-workspace[data-mode=tab] .jjk-workspace-tabs .jjk-workspace-back{margin-bottom:4px;background:none;border-style:dashed;color:var(--jjk-muted);text-transform:none;letter-spacing:0;font:600 11px/1.2 inherit}
+.jjk-actor-workspace[data-mode=tab] .jjk-workspace-tabs .jjk-workspace-back::before{content:"\2190  "}
+.jjk-actor-workspace[data-mode=tab] .jjk-workspace-tabs button[aria-pressed=true]{box-shadow:inset 3px 0 var(--jjk-seal)}
+.jjk-actor-workspace[data-mode=tab] .jjk-workspace-content{max-height:none;overflow:visible;padding:8px;border:1px solid var(--jjk-edge);background:var(--jjk-card);min-height:220px}
+.jjk-actor-workspace[data-mode=tab] .jjk-workspace-list{max-height:none}
+@container (max-width:640px){
+  .jjk-actor-workspace[data-mode=tab]{grid-template-columns:minmax(0,1fr)}
+  .jjk-actor-workspace[data-mode=tab] .jjk-workspace-tabs{position:static;flex-direction:row;flex-wrap:wrap}
+  .jjk-actor-workspace[data-mode=tab] .jjk-workspace-tabs button{width:auto;flex:1 1 30%}
+  .jjk-actor-workspace[data-mode=tab] .jjk-workspace-tabs .jjk-workspace-back{flex-basis:100%}
+}

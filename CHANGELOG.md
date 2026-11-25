@@ -1,5 +1,8 @@
 # Changelog
 
+## Próximo release
+- Ficha Sealed Ink integrada (#23): la cabecera duplicada desaparece. La ficha abre en su propia pestaña de D&D 5e, con retrato, CA, iniciativa, movimiento, PG, Dados de Golpe y EM en su sitio nativo. Las herramientas JJK son una pestaña más de la barra derecha («Jujutsu (JJK)», solo para propietarios): lista de secciones a la izquierda (9 en PJ, 7 en PNJ) y contenido a la derecha, en una columna si la ventana es estrecha. «Volver a la ficha» y Escape regresan a la última pestaña nativa usada. La sección elegida se recuerda por actor.
+
 ## 1.94.0 — Actividades Sealed Ink, historial de EM y ajustes de avisos y medidor
 - Avisos Sealed Ink en ventanas estrechas (Issue #19, punto 4): por debajo de 700 px de ancho, los avisos, el botón «Controles JJK» y su panel se pegaban a 12 px del borde y quedaban bajo la barra lateral. Ahora mantienen la separación de la barra y se encogen.
 - Altura del medidor de EM (Issue #19, punto 5): el relleno y el campo de edición fijan su propia altura, así que una regla de un tema como `.meter .progress { height: 12px }` o `.meter { display: block }` ya no los recorta.

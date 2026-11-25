@@ -293,6 +293,35 @@ function nativeActor(app) {
 
 /** Explicit alternative classes use native templates, permissions and actions. */
 const registeredTypes=new Set();
+/** Issue #23: JJK tools are one more tab of the native sheet (right rail), not a second header above it.
+ * The sheet still opens on its own first tab, so portrait, defences, HP, Hit Dice and CE are what you see first. */
+const JJK_TAB = "jjk";
+function jjkTabs(Base) {
+  const tabs = Array.isArray(Base?.TABS) ? Base.TABS.filter(t => t.tab !== JJK_TAB) : [];
+  return [...tabs, { tab: JJK_TAB, label: "JJK5E.Sheet.Tab", icon: "fas fa-yin-yang", condition: doc => !!doc?.isOwner }];
+}
+function jjkParts(Base) {
+  const entries = Object.entries(Base?.PARTS ?? {}).filter(([key]) => key !== JJK_TAB);
+  const part = { container: { classes: ["tab-body"], id: "tabs" }, template: "modules/" + ID + "/templates/sealed-ink-jjk-tab.hbs", scrollable: [""] };
+  // Right after the native tab bodies, so the JJK tab shares their container and scroll handling.
+  let at = -1;
+  entries.forEach(([, value], i) => { if (value?.container?.id === "tabs" && value.container.classes?.includes("tab-body")) at = i; });
+  entries.splice(at < 0 ? entries.length : at + 1, 0, [JJK_TAB, part]);
+  return Object.fromEntries(entries);
+}
+
+/** The JJK tab's "Back to sheet" returns to the last native tab the player used. */
+function rememberNativeTab(app, root) {
+  const current = app?.tabGroups?.primary;
+  if (current && current !== JJK_TAB) app._jjkLastNativeTab = current;
+  if (root.dataset.jjkTabMemory) return;
+  root.dataset.jjkTabMemory = "1";
+  root.addEventListener("click", event => {
+    const tab = event.target?.closest?.('nav.tabs [data-tab]')?.dataset.tab;
+    if (tab && tab !== JJK_TAB) app._jjkLastNativeTab = tab;
+  }, { capture: true });
+}
+
 function registerSheets() {
   const api=foundry.applications?.apps?.DocumentSheetConfig;
   const doc=CONFIG.Actor?.documentClass;
@@ -303,9 +332,13 @@ function registerSheets() {
     if(!Base)continue;
     const Sheet=type==="character" ? class SealedInkCharacterSheet extends Base {
       static DEFAULT_OPTIONS={classes:[ROOT],position:{width:1120,height:800},window:{resizable:true}};
+      static TABS=jjkTabs(Base);
+      static PARTS=jjkParts(Base);
       static jjkSealedInk=true;
     } : class SealedInkNPCSheet extends Base {
       static DEFAULT_OPTIONS={classes:[ROOT],position:{width:850,height:720},window:{resizable:true}};
+      static TABS=jjkTabs(Base);
+      static PARTS=jjkParts(Base);
       static jjkSealedInk=true;
     };
     try{
@@ -580,6 +613,7 @@ function apply(app, element) {
   root.classList.toggle(MOTION, (sealed || surface) && motion !== "off");
   root.dataset.jjkMotion = motion;
   if (actor) renderLinks(app, root, actor, sealed);
+  rememberNativeTab(app, root);
   const workspace = enhanceActorWorkspace(app, root, sealed, resourceItems) === true;
   // The workspace already carries Domain, vows, career and storage: the overview strip would repeat them.
   if (sealed && !workspace && app.constructor.jjkSealedInk === true) renderActorOverview(root, actor, app);
