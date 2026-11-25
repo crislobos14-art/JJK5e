@@ -711,7 +711,7 @@ function actorBoundPileItem(item) {
   const flags = item?.flags?.jjk5e;
   return !!(flags?.cePool || flags?.fractionalSpent || flags?.personalFor ||
     item && baseName(item) === "Reverse Cursed Technique (Healing Pool)" ||
-    [...(item?.system?.activities?.values?.() ?? Object.values(item?.system?.activities ?? {}))].some(activity =>
+    flags && [...(item?.system?.activities?.values?.() ?? Object.values(item?.system?.activities ?? {}))].some(activity =>
       activity.profiles?.some?.(profile => typeof profile.uuid === "string" && profile.uuid.startsWith("Actor."))));
 }
 
