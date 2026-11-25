@@ -532,7 +532,7 @@ function pulseValues(root, actor) {
   if (Number.isFinite(now.hp) && Number.isFinite(before.hp) && now.hp !== before.hp)
     ring(root.querySelector(".meter.hit-points"), now.hp < before.hp ? "down" : "up");
   if (Number.isFinite(now.ce) && Number.isFinite(before.ce) && now.ce !== before.ce)
-    ring(root.querySelector(".jjk-sc-ce, .jjk-overview-ce"), "energy");
+    ring(root.querySelector(".meter.jjk-cursed-energy, .jjk-sc-ce, .jjk-overview-ce"), "energy");
 }
 
 /** Sealed Ink is dark: ask D&D5e/Foundry for their dark theme on that window so native parts keep readable contrast. */

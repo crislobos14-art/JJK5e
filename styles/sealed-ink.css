@@ -426,9 +426,10 @@
   --dnd5e-color-hp-1:#5a0716;
   --dnd5e-color-hp-2:var(--jjk-seal);
   --dnd5e-color-hp-3:#8a0b22;
-  --dnd5e-color-hd-1:#24184d;
-  --dnd5e-color-hd-2:var(--jjk-ce-1);
-  --dnd5e-color-hd-3:#1d1340;
+  /* Hit Dice in bone-grey: violet belongs to the Cursed Energy meter, so the two never read alike. */
+  --dnd5e-color-hd-1:#2e2830;
+  --dnd5e-color-hd-2:#7d7078;
+  --dnd5e-color-hd-3:#231e25;
   --dnd5e-card-header-1:#5e0a1b;
   --dnd5e-card-header-2:#241317;
   --dnd5e-border-gold:1px solid var(--jjk-edge);
@@ -662,3 +663,12 @@
   .jjk-sealed-event-panel,.jjk-sealed-event-toast.leaving,.jjk-sealed-dock-badge,.jjk-sealed-event-dock{animation:none!important;transition:none!important;transform:none!important}
   .jjk-sealed-toast-timer{animation:none;display:none}
 }
+
+/* Cursed Energy meter in Sealed Ink: square, ink edge, display numerals; motion only when the value changes. */
+.jjk-sealed-sheet.dnd5e2 .meter.jjk-cursed-energy{border-radius:0;border-color:var(--jjk-edge);--jjk-ce-a:var(--jjk-ce-1);--jjk-ce-b:var(--jjk-energy)}
+.jjk-sealed-sheet.dnd5e2 .meter.jjk-cursed-energy > .progress::before{border-radius:0}
+.jjk-sealed-sheet.dnd5e2 .meter.jjk-cursed-energy .label :is(.value,.max){font-family:var(--jjk-display);letter-spacing:.03em;text-shadow:0 1px 0 #000}
+.jjk-sealed-sheet.dnd5e2 .meter.jjk-cursed-energy.low{border-color:var(--jjk-seal)}
+.jjk-sealed-sheet.dnd5e2 .jjk-ce-group > .label{color:var(--jjk-muted);letter-spacing:.08em;text-transform:uppercase}
+.jjk-sealed-motion.dnd5e2 .meter.jjk-cursed-energy > .progress::before{transition:width 380ms var(--jjk-ease,ease-out)}
+@media(prefers-reduced-motion:reduce){.jjk-sealed-motion.dnd5e2 .meter.jjk-cursed-energy > .progress::before{transition:none}}

@@ -39,7 +39,13 @@
       "NegativeEmotionShort": "Emoción negativa",
       "ShortRestShort": "Descanso corto",
       "NegativeEmotionConfirm": "¿Confirmas que ocurrió un desencadenante válido durante un combate con peligro real?",
-      "AlreadyFull": "La energía maldita ya está al máximo."
+      "AlreadyFull": "La energía maldita ya está al máximo.",
+      "SpendOne": "Gastar 1 EM",
+      "RegainOne": "Recuperar 1 EM",
+      "EditHint": "Clic para editar: 15 fija, +3 recupera, -2 gasta",
+      "EditInvalid": "Escribe un número: 15, +3 o -2.",
+      "PendingLocked": "La EM tiene reservas pendientes de confirmar por el DJ; se podrá editar cuando se resuelvan.",
+      "ReservedNote": "{n} reservada"
     },
     "Technique": {
       "Title": "Elegir Técnica Innata",
@@ -318,7 +324,8 @@
       "GMClear": "Terminar efectos",
       "GMSetCE": "Fijar CE",
       "SpendShort": "Gastar",
-      "RegainShort": "Recuperar"
+      "RegainShort": "Recuperar",
+      "OpenFull": "Abrir controles JJK"
     },
     "Notify": {
       "CEWorkflowUnverified": "JJK5e: no se pudo verificar el pago de EM de esta actividad de Midi-QOL. Se detuvo la ejecución; consulta al GM.",
@@ -539,6 +546,10 @@
       "fluidWindows": {
         "Name": "Ventanas fluidas",
         "Hint": "Las ventanas JJK y las fichas Sealed Ink se redimensionan desde cualquier borde o esquina, recuerdan su tamaño por tipo de ventana y se mantienen en pantalla al cambiar el tamaño del navegador."
+      },
+      "ceMeter": {
+        "Name": "Medidor de energía maldita en las fichas",
+        "Hint": "Muestra la energía maldita como un medidor bajo los Dados de Golpe (personajes) o bajo los PG (PNJ), con el formato de la propia ficha. Haz clic para escribir un valor."
       }
     },
     "Feats": {

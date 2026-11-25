@@ -39,7 +39,13 @@
       "NegativeEmotionShort": "Negative emotion",
       "ShortRestShort": "Short rest",
       "NegativeEmotionConfirm": "Confirm that a qualifying event happened during combat in genuine danger.",
-      "AlreadyFull": "Cursed Energy is already full."
+      "AlreadyFull": "Cursed Energy is already full.",
+      "SpendOne": "Spend 1 CE",
+      "RegainOne": "Regain 1 CE",
+      "EditHint": "Click to edit: 15 sets, +3 regains, -2 spends",
+      "EditInvalid": "Type a number: 15, +3 or -2.",
+      "PendingLocked": "CE has reservations pending GM confirmation; it can be edited once they are settled.",
+      "ReservedNote": "{n} reserved"
     },
     "Technique": {
       "Title": "Choose Innate Technique",
@@ -318,7 +324,8 @@
       "GMClear": "End effects",
       "GMSetCE": "Set CE",
       "SpendShort": "Spend",
-      "RegainShort": "Regain"
+      "RegainShort": "Regain",
+      "OpenFull": "Open JJK controls"
     },
     "Notify": {
       "CEWorkflowUnverified": "JJK5e: CE payment could not be verified for this Midi-QOL workflow. The activity was stopped; consult the GM.",
@@ -539,6 +546,10 @@
       "fluidWindows": {
         "Name": "Fluid windows",
         "Hint": "JJK windows and Sealed Ink sheets resize from any edge or corner, remember their size per window type, and stay on screen when the browser window changes."
+      },
+      "ceMeter": {
+        "Name": "Cursed Energy meter on sheets",
+        "Hint": "Shows Cursed Energy as a meter under Hit Dice (characters) or under HP (NPCs), in the sheet's own format. Click it to type a value."
       }
     },
     "Feats": {

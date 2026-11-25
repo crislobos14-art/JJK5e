@@ -5191,6 +5191,130 @@ function addSheetStrip(app, element) {
   else (root.querySelector(".window-content") ?? root).prepend?.(strip);
 }
 
+/* ---- Cursed Energy meter in the native sheet format ---------------------------------------- */
+
+const CE_EDIT = /^\s*([+=-]?)\s*(\d+(?:[.,]\d+)?)\s*$/;
+/** Parse what a player types in the CE meter: "15" or "=15" sets, "+3" regains, "-2" spends. */
+function parseCEInput(text, current) {
+  const m = CE_EDIT.exec(String(text ?? "").replace("−", "-"));
+  if (!m) return null;
+  const n = Number(m[2].replace(",", "."));
+  if (!Number.isFinite(n)) return null;
+  if (m[1] === "+") return { delta: -n };
+  if (m[1] === "-") return { delta: n };
+  return { set: n, delta: Math.round((current - n) * 1000) / 1000 };
+}
+function ceFmt(n) { return Number.isInteger(n) ? String(n) : (Math.round(n * 10) / 10).toLocaleString(game.i18n.lang); }
+function ceReserved(pool) {
+  return ceLedger(pool).filter((x) => x.state === "reserved" || x.state === "review").reduce((sum, x) => sum + (Number(x.cost) || 0), 0);
+}
+function ceLowThreshold() {
+  try { return (Number(game.settings.get(MODULE_ID, "sealedLowCE")) || 25) / 100; } catch { return 0.25; }
+}
+/** State of the meter: everything the markup needs, without touching the DOM (tested). */
+function ceMeterState(actor) {
+  const pool = findPool(actor);
+  if (!pool) return null;
+  const value = poolValue(pool), max = poolMax(pool);
+  const reserved = Math.min(ceReserved(pool), value);
+  const pct = max > 0 ? Math.max(0, Math.min(100, (value / max) * 100)) : 0;
+  return {
+    pool, value, max, reserved,
+    pct: Math.round(pct * 10) / 10,
+    reservedPct: max > 0 ? Math.round((reserved / max) * 1000) / 10 : 0,
+    pending: cePending(pool),
+    low: max > 0 && value > 0 && value / max <= ceLowThreshold(),
+    empty: value <= 0,
+    editable: actor.isOwner
+  };
+}
+async function commitCEInput(actor, text) {
+  const st = ceMeterState(actor);
+  if (!st) return false;
+  const change = parseCEInput(text, st.value);
+  if (!change) { if (String(text ?? "").trim()) ui.notifications.warn(t("CE.EditInvalid")); return false; }
+  if (st.pending) { ui.notifications.warn(t("CE.PendingLocked")); return false; }
+  if ("set" in change && game.user.isGM && !ceAuthorityEnabled()) return setExactCE(actor, change.set);
+  if (!change.delta) return false;
+  return spendCE(actor, change.delta, change.delta > 0 ? t("CE.Spent") : t("CE.Regained"));
+}
+/** A Cursed Energy meter built like D&D5e's own HP/HD meters, so it sits in the sheet's grid and theme. */
+function addCEMeter(app, element) {
+  const actor = app?.actor ?? app?.document;
+  if (actor?.documentName !== "Actor" || !["character", "npc"].includes(actor.type)) return;
+  const root = element instanceof HTMLElement ? element : (element?.[0] ?? app.element);
+  if (!root?.querySelector) return;
+  let enabled = true;
+  try { enabled = setting("ceMeter") !== false; } catch { /* */ }
+  root.querySelector(".jjk-ce-group")?.remove();
+  const st = enabled && actor.testUserPermission?.(game.user, "OBSERVER") !== false ? ceMeterState(actor) : null;
+  root.classList.toggle("jjk-has-ce-meter", !!st);
+  if (!st) return;
+  // Character: under Hit Dice in the sidebar. NPC: under the HP block in the header.
+  const anchor = actor.type === "character"
+    ? root.querySelector(".sidebar .meter.hit-dice")?.closest(".meter-group")
+    : (root.querySelector(".sheet-header .right .meter.split") ?? root.querySelector(".sheet-header .meter.hit-points"));
+  if (!anchor) return;
+  const group = document.createElement("div");
+  group.className = "meter-group jjk-ce-group";
+  const states = [st.low && "low", st.empty && "empty", st.pending && "pending"].filter(Boolean).join(" ");
+  const tip = [t("CE.Name") + ": " + ceFmt(st.value) + " / " + ceFmt(st.max),
+    st.reserved ? t("CE.ReservedNote", { n: ceFmt(st.reserved) }) : "",
+    st.editable && !st.pending ? t("CE.EditHint") : st.pending ? t("CE.PendingLocked") : ""].filter(Boolean).join(" · ");
+  group.innerHTML = `<div class="label roboto-condensed-upper"><span>${esc(t("CE.Name"))}</span>
+      ${st.editable ? `<span class="jjk-ce-steps">
+        <button type="button" class="unbutton always-interactive" data-jjk-ce="spend" data-tooltip="${esc(t("CE.SpendOne"))}" aria-label="${esc(t("CE.SpendOne"))}"><i class="fas fa-minus" inert></i></button>
+        <button type="button" class="unbutton always-interactive" data-jjk-ce="regain" data-tooltip="${esc(t("CE.RegainOne"))}" aria-label="${esc(t("CE.RegainOne"))}"><i class="fas fa-plus" inert></i></button>
+        <button type="button" class="config-button unbutton always-interactive" data-jjk-ce="panel" data-tooltip="${esc(t("Panel.OpenFull"))}" aria-label="${esc(t("Panel.OpenFull"))}"><i class="fas fa-cog" inert></i></button>
+      </span>` : ""}</div>
+    <div class="meter sectioned meter-lg jjk-cursed-energy ${states}">
+      <div class="progress jjk-cursed-energy" role="meter" aria-valuemin="0" aria-valuenow="${st.value}" aria-valuemax="${st.max}"
+           aria-label="${esc(t("CE.Name"))}" data-tooltip="${esc(tip)}" ${st.editable && !st.pending ? 'tabindex="0"' : ""}
+           style="--bar-percentage: ${st.pct}%; --jjk-reserved: ${st.reservedPct}%">
+        <div class="label">
+          <span class="value">${ceFmt(st.value)}</span><span class="separator">&sol;</span><span class="max">${ceFmt(st.max)}</span>
+          ${st.reserved ? `<span class="bonus" title="${esc(t("CE.ReservedNote", { n: ceFmt(st.reserved) }))}"><i class="fas fa-lock" inert></i> ${ceFmt(st.reserved)}</span>` : ""}
+        </div>
+        ${st.editable ? `<input type="text" class="jjk-ce-input always-interactive" inputmode="decimal" placeholder="0" value="${ceFmt(st.value)}" aria-label="${esc(t("CE.EditHint"))}" hidden>` : ""}
+      </div>
+    </div>`;
+  anchor.after(group);
+  if (!st.editable) return;
+  const bar = group.querySelector('[role="meter"]'), input = group.querySelector(".jjk-ce-input"), label = bar.querySelector(".label");
+  const open = () => {
+    if (st.pending) { ui.notifications.warn(t("CE.PendingLocked")); return; }
+    label.hidden = true; input.hidden = false; input.value = ceFmt(st.value); input.focus(); input.select();
+  };
+  const close = () => { input.hidden = true; label.hidden = false; };
+  let committing = false;
+  const commit = async () => {
+    if (committing) return;
+    committing = true;
+    const text = input.value;
+    close();
+    try { if (text.trim() !== ceFmt(st.value)) await commitCEInput(actor, text); }
+    catch (err) { reportError("CE meter", err); }
+    finally { committing = false; }
+  };
+  bar.addEventListener("click", (ev) => { if (ev.target === input) return; ev.stopPropagation(); open(); });
+  bar.addEventListener("keydown", (ev) => { if (ev.target !== input && (ev.key === "Enter" || ev.key === " ")) { ev.preventDefault(); open(); } });
+  // The input has no name: keep its events away from the sheet form so nothing else is submitted.
+  for (const type of ["change", "input"]) input.addEventListener(type, (ev) => ev.stopPropagation());
+  input.addEventListener("keydown", (ev) => {
+    ev.stopPropagation();
+    if (ev.key === "Enter") { ev.preventDefault(); commit(); }
+    else if (ev.key === "Escape") { ev.preventDefault(); close(); bar.focus(); }
+  });
+  input.addEventListener("blur", () => { if (!input.hidden) commit(); });
+  group.querySelector(".jjk-ce-steps")?.addEventListener("click", (ev) => {
+    const b = ev.target.closest("[data-jjk-ce]");
+    if (!b) return;
+    ev.preventDefault(); ev.stopPropagation();
+    const run = { spend: () => spendCE(actor, 1, t("CE.Spent")), regain: () => spendCE(actor, -1, t("CE.Regained")), panel: () => openPanel(actor) }[b.dataset.jjkCe];
+    if (run) Promise.resolve(run()).catch((err) => reportError("CE meter", err));
+  });
+}
+
 /* ---- Hotbar automation --------------------------------------------------------------------- */
 
 function hotbarItems(actor) {
@@ -5258,6 +5382,7 @@ Hooks.once("init", () => {
     name: `JJK5E.Settings.${key}.Name`, hint: `JJK5E.Settings.${key}.Hint`, scope: "client", config: true, type, default: def, ...extra
   });
   reg("sheetStrip", Boolean, true);
+  reg("ceMeter", Boolean, true);
   reg("turnSummary", Boolean, true);
   reg("autoHotbar", Boolean, false);
   reg("hotbarPage", Number, 5, { range: { min: 1, max: 5, step: 1 } });
@@ -5268,10 +5393,13 @@ Hooks.once("ready", () => {
   Object.assign(game.modules.get(MODULE_ID).api ?? {}, {
     createVow, openVows, toggleVow, breakVow, getVows, syncVowEffects,
     openCareer, getCareer, promote, setSemi, addRecommendation, generateMission, resolveMission, setReputation,
-    fillHotbar, addSheetStrip
+    fillHotbar, addSheetStrip, addCEMeter
   });
   for (const hook of ["renderCharacterActorSheet", "renderActorSheetV2", "renderActorSheet"]) {
-    Hooks.on(hook, (app, element) => { try { addSheetStrip(app, element); } catch (err) { console.error(`${MODULE_ID} | strip`, err); } });
+    Hooks.on(hook, (app, element) => {
+      try { addSheetStrip(app, element); } catch (err) { console.error(`${MODULE_ID} | strip`, err); }
+      try { addCEMeter(app, element); } catch (err) { console.error(`${MODULE_ID} | CE meter`, err); }
+    });
   }
   Hooks.on("dnd5e.restCompleted", (actor, result, config) => {
     // Soul Damage marked "until a long rest" ends on a long rest.
