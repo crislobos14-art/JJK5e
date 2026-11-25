@@ -1,6 +1,6 @@
 # Changelog
 
-## Próximo release
+## 1.95.0 — Ficha Sealed Ink con pestaña JJK integrada
 - Ficha Sealed Ink integrada (#23): la cabecera duplicada desaparece. La ficha abre en su propia pestaña de D&D 5e, con retrato, CA, iniciativa, movimiento, PG, Dados de Golpe y EM en su sitio nativo. Las herramientas JJK son una pestaña más de la barra derecha («Jujutsu (JJK)», solo para propietarios): lista de secciones a la izquierda (9 en PJ, 7 en PNJ) y contenido a la derecha, en una columna si la ventana es estrecha. «Volver a la ficha» y Escape regresan a la última pestaña nativa usada. La sección elegida se recuerda por actor.
 
 ## 1.94.0 — Actividades Sealed Ink, historial de EM y ajustes de avisos y medidor
