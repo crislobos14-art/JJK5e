@@ -3,6 +3,7 @@
 ## Próximo release
 - Sealed Ink: las pestañas Combate y Técnica permiten buscar y ejecutar actividades compatibles, ordenar sus botones y compartir favoritos con el HUD. Muestran coste base estimado y alcance cuando está disponible.
 - Historial de EM en Combate: muestra los ajustes registrados, reservas, confirmaciones y devoluciones, con acceso a la tarjeta de chat cuando está vinculada.
+- Ficha Sealed Ink integrada (#23): el retrato y los recursos se leen en la ficha nativa. La navegación JJK está junto al contenido y «Ficha nativa» cierra el panel de herramientas sin cambiar la pestaña de D&D5e.
 
 ## 1.93.0 — Energía maldita en la ficha y espacio de trabajo Sealed Ink
 - Espacio de trabajo Sealed Ink (PR #13): las fichas «Sealed Ink — Personaje» y «Sealed Ink — PNJ / Invocación» suman un panel de trabajo con pestañas Combate, Técnica, Progresión, Cuerpo y alma, Inventario, Votos, Invocaciones, Dominio y Efectos; cada botón abre la herramienta JJK correspondiente. Solo aparece en esas fichas, no en la ficha estándar de D&D, y oculta la franja de resumen para no repetir botones.
