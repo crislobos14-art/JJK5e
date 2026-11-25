@@ -707,6 +707,34 @@ async function recoverCEWorld(){
     catch(err){reportError("CE recovery",err);}
   return results;
 }
+function actorBoundPileItem(item) {
+  const flags = item?.flags?.jjk5e;
+  return !!(flags?.cePool || flags?.fractionalSpent || flags?.personalFor ||
+    item && baseName(item) === "Reverse Cursed Technique (Healing Pool)" ||
+    [...(item?.system?.activities?.values?.() ?? Object.values(item?.system?.activities ?? {}))].some(activity =>
+      activity.profiles?.some?.(profile => typeof profile.uuid === "string" && profile.uuid.startsWith("Actor."))));
+}
+
+function guardPileTransfer(sources, changes, target) {
+  const actors = Array.isArray(sources) ? sources : [sources];
+  const updates = Array.isArray(changes) ? changes : [changes];
+  const blocked = actors.some((actor, index) => actor?.uuid !== target?.uuid &&
+    updates[index]?.itemDeltas?.some(({ item }) =>
+      actorBoundPileItem(actor?.items?.get(item?._id ?? item?.id) ?? item)));
+  if (!blocked) return;
+  ui.notifications.warn(game.i18n.lang.startsWith("es")
+    ? "La transferencia incluye un recurso JJK vinculado al actor. Retíralo de la selección para transferir el resto."
+    : "This transfer includes an actor-bound JJK resource. Remove it from the selection to transfer the other items.");
+  return false;
+}
+
+Hooks.once("ready", () => {
+  if (game.system.id !== "dnd5e" || !game.modules.get("item-piles")?.active) return;
+  for (const hook of ["preTransferItems", "preTransferAllItems", "preTransferEverything"]) {
+    Hooks.on(`item-piles-${hook}`, guardPileTransfer);
+  }
+});
+
 function integrationReport(){
   if(!game.user.isGM) return null;
   const modules=["midi-qol","dae","lib-wrapper","times-up","sequencer","JB2A_DnD5e","autoanimations","tokenmagic","fxmaster","token-action-hud-core","token-action-hud-dnd5e","socketlib",
