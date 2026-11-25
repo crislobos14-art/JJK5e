@@ -2839,7 +2839,7 @@ function makePanelClass() {
 
 let JJKPanelClass = null;
 
-function openPanel(actor) {
+function openPanel(actor, tab) {
   actor = requireActor(actor);
   if (!actor) return;
   if (!actor.isOwner) return ui.notifications.warn(t("Notify.NotOwner"));
@@ -2850,6 +2850,7 @@ function openPanel(actor) {
     app = new JJKPanelClass(actor);
     PANELS.set(actor.uuid, app);
   }
+  if (typeof tab==="string" && (PANEL_TABS.some(([id])=>id===tab)||(tab==="gm"&&game.user.isGM))) app._tab=tab;
   syncResource(actor);
   return app.render({ force: true });
 }
