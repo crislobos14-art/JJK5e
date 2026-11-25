@@ -122,7 +122,8 @@ function privateTo(actor) {
 
 async function chat(actor, content, extra = {}) {
   const Chat = docClass("ChatMessage");
-  return Chat.create({ speaker: Chat.getSpeaker({ actor }), content, ...extra });
+  return Chat.create({ speaker: Chat.getSpeaker({ actor }), content, ...extra,
+    flags: { ...(extra.flags ?? {}), jjk5e: { ...(extra.flags?.jjk5e ?? {}), sealedInkChat: true } } });
 }
 
 /* -------------------------------------------- */

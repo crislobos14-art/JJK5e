@@ -33,7 +33,7 @@ test("confirmed transitions generate no repeated alerts or reservation failures"
     [state,{...state,ce:5},[["lowCE","energy"]]],
     [{...state,ce:5},{...state,ce:2},[]],
     [{...state,ce:5.1},{...state,ce:5},[["lowCE","energy"]]],
-    [state,{...state,zone:2},[["zone","gold"]]],
+    [state,{...state,zone:2},[["zone","paper"]]],
     [state,{...state,burnout:true},[["burnout","critical"]]],
     [{...state,domain:true},state,[["domainEnd","energy"]]],
     [state,{...state,pending:true},[]]

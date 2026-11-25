@@ -20,16 +20,50 @@ const categories = {
   combat: ["Combat and rest dialogs", "Diálogos de combate y descanso"],
   editors: ["Items, activities and effects", "Objetos, actividades y efectos"],
   compendium: ["Compendia and roll tables", "Compendios y tablas de tiradas"],
-  module: ["JJK tools and dialogs", "Herramientas y diálogos JJK"]
+  module: ["JJK tools and dialogs", "Herramientas y diálogos JJK"],
+  chat: ["JJK chat and cards", "Chat y tarjetas JJK"]
 };
 const watches = new Map();
 const scheduled = new Set();
+/** Resolve native sheet constructors only from D&D5e, never from a third-party module. */
+function nativeSheetClass(type) {
+  const names = type === "character" ? ["CharacterActorSheet","ActorSheet5eCharacter","CharacterSheet5e"] :
+    ["NPCActorSheet","ActorSheet5eNPC","NPCSheet5e"];
+  for (const ns of [game.dnd5e?.applications?.actor,globalThis.dnd5e?.applications?.actor]) {
+    for (const name of names) if (typeof ns?.[name] === "function") return ns[name];
+  }
+  const entries=Object.entries(CONFIG.Actor?.sheetClasses?.[type]??{}).filter(([key,entry])=>
+    key.startsWith("dnd5e.") && typeof entry?.cls==="function");
+  const exact=entries.find(([,entry])=>names.includes(entry.cls.name));
+  const preferred=exact??entries.find(([,entry])=>entry.default===true)??(entries.length===1?entries[0]:null);
+  return preferred?.[1]?.cls??null;
+}
+function moduleDocument(doc) {
+  for(let d=doc,i=0;d&&i<4;d=d.parent,i++){
+    const pack=String(d.pack?.collection??d.pack??"");
+    const source=String(d._stats?.compendiumSource??d.flags?.core?.sourceId??"");
+    if (pack.startsWith("jjk5e.")||pack.startsWith("world.jjk5e-")||
+        source.startsWith("Compendium.jjk5e.")||source.startsWith("Compendium.world.jjk5e-")||d.flags?.jjk5e) return true;
+  }
+  return false;
+}
+function modulePack(app) {
+  const pack=String(app.collection?.collection??app.collection?.metadata?.id??app.pack?.collection??app.pack??"");
+  return pack.startsWith("jjk5e.")||pack.startsWith("world.jjk5e-");
+}
 function matchesClass(app, namespace, names) {
   return names.some(name => typeof namespace?.[name] === "function" && app.constructor === namespace[name]);
 }
 function categoryOf(app, root, actor) {
+  if (root.matches(".jjk5e-ui,.jjk5e-panel-app,.jjk5e-domain,.jjk5e-career,.jjk5e-menu,.jjk5e-vows,.jjk5e-creator,.jjk5e-optrules") ||
+      root.querySelector?.(".jjk-panel,.jjk-builder,.jjk-optrules,.jjk-vow-form")) return "module";
   if (actor) return actor.type === "npc" ? "npc" : "character";
-  if (root.matches(".jjk5e-ui,.jjk5e-panel-app,.jjk5e-domain,.jjk5e-career")) return "module";
+  if (modulePack(app)) return "compendium";
+  const doc=app.document??app.object;
+  if (moduleDocument(doc)) {
+    if (["JournalEntry","JournalEntryPage","RollTable","Macro"].includes(doc?.documentName)) return "compendium";
+    if (["Item","ActiveEffect"].includes(doc?.documentName)) return "editors";
+  }
   const ns = game.dnd5e?.applications ?? globalThis.dnd5e?.applications;
   if (matchesClass(app, ns?.advancement, Object.keys(ns?.advancement ?? {}).filter(k => /(?:Flow(?:V2)?|Config(?:V2)?|Manager|ConfirmationDialog)$/.test(k)))) return "progression";
   if (matchesClass(app, ns?.actor, ["ShortRestDialog", "LongRestDialog", "DeathConfig", "ConcentrationConfig", "InitiativeConfig"]) ||
@@ -253,28 +287,32 @@ function nativeActor(app) {
   if (!["character", "npc"].includes(actor?.type)) return null;
   const native = game.dnd5e?.applications?.actor ?? globalThis.dnd5e?.applications?.actor;
   return (app.constructor.jjkSealedInk === true ||
-    [native?.CharacterActorSheet, native?.NPCActorSheet].some(cls => cls && app.constructor === cls)) ? actor : null;
+    [nativeSheetClass(actor.type),native?.CharacterActorSheet,native?.NPCActorSheet].some(cls => cls && app.constructor === cls)) ? actor : null;
 }
 
 /** Explicit alternative classes use native templates, permissions and actions. */
+const registeredTypes=new Set();
 function registerSheets() {
-  const api = foundry.applications.apps.DocumentSheetConfig;
-  const native = game.dnd5e?.applications?.actor ?? globalThis.dnd5e?.applications?.actor;
-  if (!api || !native?.CharacterActorSheet || !native?.NPCActorSheet) return;
-  class SealedInkCharacterSheet extends native.CharacterActorSheet {
-    static DEFAULT_OPTIONS = { classes: [ROOT], position: { width: 1120, height: 800 }, window: { resizable: true } };
-    static jjkSealedInk = true;
+  const api=foundry.applications?.apps?.DocumentSheetConfig;
+  const doc=CONFIG.Actor?.documentClass;
+  if(!doc || typeof api?.registerSheet!=="function") return false;
+  for(const type of ["character","npc"]){
+    if(registeredTypes.has(type))continue;
+    const Base=nativeSheetClass(type);
+    if(!Base)continue;
+    const Sheet=type==="character" ? class SealedInkCharacterSheet extends Base {
+      static DEFAULT_OPTIONS={classes:[ROOT],position:{width:1120,height:800},window:{resizable:true}};
+      static jjkSealedInk=true;
+    } : class SealedInkNPCSheet extends Base {
+      static DEFAULT_OPTIONS={classes:[ROOT],position:{width:850,height:720},window:{resizable:true}};
+      static jjkSealedInk=true;
+    };
+    try{
+      api.registerSheet(doc,ID,Sheet,{types:[type],makeDefault:false,label:"Sealed Ink — "+(type==="character"?local("Character","Personaje"):local("NPC / Summon","NPC / Invocación"))});
+      registeredTypes.add(type);
+    }catch(err){console.warn(ID+" | Sealed Ink registration "+type,err);}
   }
-  class SealedInkNPCSheet extends native.NPCActorSheet {
-    static DEFAULT_OPTIONS = { classes: [ROOT], position: { width: 850, height: 720 }, window: { resizable: true } };
-    static jjkSealedInk = true;
-  }
-  api.registerSheet(CONFIG.Actor.documentClass, ID, SealedInkCharacterSheet, {
-    types: ["character"], makeDefault: false, label: "Sealed Ink — " + local("Character (preview)", "Personaje (preliminar)")
-  });
-  api.registerSheet(CONFIG.Actor.documentClass, ID, SealedInkNPCSheet, {
-    types: ["npc"], makeDefault: false, label: "Sealed Ink — NPC / " + local("Summon (preview)", "Invocación (preliminar)")
-  });
+  return registeredTypes.size===2;
 }
 
 function rootOf(app, element) {
@@ -381,12 +419,89 @@ function refreshLinks(doc) {
   }
 }
 
+const RESOURCE_ITEMS = new Set([
+  "Compendium.jjk5e.jjk5e-feats.Item.5YTZMPSqBSdzIgNO",
+  "Compendium.jjk5e.jjk5e-feats.Item.IlD8Q3c3fmSZu5p4",
+  "Compendium.jjk5e.jjk5e-techniques.Item.T2Ct1LdagWzoKjCR",
+  "Compendium.jjk5e.jjk5e-equipment.Item.W24GkN4RCTH8y8Sj"
+]);
+
+function resourceItems(actor) {
+  return [...actor.items].filter(item => [
+    item.uuid, item._stats?.compendiumSource, item.flags?.core?.sourceId
+  ].some(source => RESOURCE_ITEMS.has(source)));
+}
+
+/** Keep native forms intact and give explicit Sealed Ink sheets their own overview. */
+function renderActorOverview(root, actor, app) {
+  const previous = root.querySelector(".jjk-actor-overview");
+  const header = root.querySelector(".sheet-header");
+  if (!header) { previous?.remove(); return; }
+  const api = game.modules.get(ID)?.api;
+  const overview = make("section", "jjk-actor-overview");
+  overview.setAttribute("aria-label", local("Actor overview", "Resumen del actor"));
+  const stats = make("div", "jjk-overview-stats");
+  const addStat = (parent, label, value) => {
+    const tile = make("div", "jjk-overview-stat");
+    tile.append(make("small", "", label), make("strong", "", String(value ?? "—")));
+    parent.append(tile);
+  };
+  const attributes = actor.system?.attributes;
+  const hp = attributes?.hp;
+  addStat(stats, local("Hit points", "Puntos de golpe"), hp ? hp.value + " / " + hp.max : null);
+  addStat(stats, local("Armor class", "Clase de armadura"), attributes?.ac?.value);
+  const pool = actor.isOwner ? api?.findPool?.(actor) : null;
+  if (pool) addStat(stats, local("Cursed energy", "Energía maldita"), api.poolValue(pool) + " / " + api.poolMax(pool));
+  overview.append(stats);
+  if (actor.type === "character") {
+    const abilities = make("div", "jjk-overview-stats");
+    for (const [key, label] of Object.entries({
+      str: local("STR","FUE"), dex: local("DEX","DES"), con: "CON",
+      int: "INT", wis: local("WIS","SAB"), cha: local("CHA","CAR")
+    })) addStat(abilities, label, actor.system?.abilities?.[key]?.value);
+    overview.append(abilities);
+  }
+  if (actor.isOwner) {
+    const controls = make("div", "jjk-overview-controls");
+    for (const [method, label] of [
+      ["openPanel", local("JJK controls","Controles JJK")],
+      ["openDomainHUD", local("Domain","Dominio")],
+      ["openVows", local("Binding vows","Votos vinculantes")],
+      ["openCareer", local("Career","Carrera")]
+    ]) {
+      if (typeof api?.[method] !== "function") continue;
+      controls.append(button(label, () => {
+        if (overview.isConnected && app.document === actor && actor.isOwner) api[method](actor);
+      }));
+    }
+    overview.append(controls);
+    const resources = resourceItems(actor);
+    if (resources.length) {
+      const manuals = make("div", "jjk-overview-controls");
+      manuals.setAttribute("role", "group");
+      manuals.setAttribute("aria-label", local("Storage and energy items","Objetos de almacenamiento y energía"));
+      for (const item of resources) {
+        manuals.append(button(item.name, () => {
+          if (overview.isConnected && actor.isOwner) actor.items.get(item.id)?.sheet?.render({ force: true });
+        }));
+      }
+      overview.append(manuals);
+    }
+  }
+  if (previous) previous.replaceWith(overview);
+  else header.after(overview);
+}
+
 function apply(app, element) {
   const root = rootOf(app, element);
   if (!root) return;
-  const actor = nativeActor(app);
-  const category = categoryOf(app, root, actor);
-  if (!category) return;
+  const native = nativeActor(app);
+  const category = categoryOf(app, root, native);
+  const actor = category === "module" ? null : native;
+  if (!category) {
+    if(live.has(app)){stopWatch(app);stopParticles(root);root.classList.remove(ROOT,SURFACE,MOTION,"jjk-sealed-arrival");delete root.dataset.jjkSurface;delete root.dataset.jjkMotion;live.delete(app);}
+    return;
+  }
   const old = live.get(app);
   if (old && old !== root) {
     stopWatch(app);
@@ -396,7 +511,7 @@ function apply(app, element) {
   live.set(app, root);
   const sealed = !!actor && (app.constructor.jjkSealedInk === true || selectedDesign(category) === "sealed");
   const surface = !actor && selectedDesign(category) === "sealed";
-  const first = surface && !root.classList.contains(SURFACE);
+  const first = (surface || sealed) && !root.classList.contains(SURFACE) && !root.classList.contains(ROOT);
   root.classList.toggle(ROOT, sealed);
   root.classList.toggle(SURFACE, surface);
   root.dataset.jjkSurface = category;
@@ -404,24 +519,51 @@ function apply(app, element) {
   root.classList.toggle(MOTION, (sealed || surface) && motion !== "off");
   root.dataset.jjkMotion = motion;
   if (actor) renderLinks(app, root, actor, sealed);
+  if (sealed && app.constructor.jjkSealedInk === true) renderActorOverview(root, actor, app);
   if (first && motion !== "off") root.classList.add("jjk-sealed-arrival");
-  if (motion === "off") root.classList.remove("jjk-sealed-arrival");
+  if (motion === "off" || (!surface && !sealed)) root.classList.remove("jjk-sealed-arrival");
   if (!surface) {
     for (const el of root.querySelectorAll(".jjk-sealed-feat-browser,.jjk-sealed-asi-summary,.jjk-sealed-asi-points,.jjk-sealed-choice-search")) el.remove();
     for (const el of root.querySelectorAll(".jjk-sealed-choice-hidden")) el.classList.remove("jjk-sealed-choice-hidden");
-    root.classList.remove("jjk-sealed-arrival");
+    if (!sealed) root.classList.remove("jjk-sealed-arrival");
   }
   enhanceCharacterCreation(app, root, surface && category === "module");
   enhanceCombatInteraction(app, root, surface && category === "module");
   watch(app, root, surface || sealed, category);
 }
 
+// Only mark explicit JJK messages and controls; never reskin another module's cards or the whole sidebar.
+const CHAT_MARKERS=".jjk5e-card,[data-jjk5e-update-all],[data-jjk5e-soul],[data-jjk5e-rct],[data-jjk5e-awaken],[data-jjk5e-evade],[data-jjk5e-clash]";
+function isJJKChat(message,root) {
+  return message?.flags?.jjk5e?.sealedInkChat===true || !!root?.matches?.(CHAT_MARKERS) || !!root?.querySelector?.(CHAT_MARKERS);
+}
+function styleChat(message,html) {
+  const root=html instanceof HTMLElement?html:html?.[0];
+  if(!root?.classList)return;
+  const active=selectedDesign("chat")==="sealed"&&isJJKChat(message,root);
+  root.classList.toggle("jjk-sealed-chat",active);
+  const motion=preference("sheetMotion");
+  root.classList.toggle("jjk-sealed-motion",active&&motion!=="off");
+  if(active)root.dataset.jjkMotion=motion;
+}
+function styleEmbedded(html) {
+  const root=html instanceof HTMLElement?html:html?.[0];
+  if(!root?.querySelectorAll)return;
+  const active=selectedDesign("module")==="sealed";
+  for(const el of root.querySelectorAll(".jjk5e-hud,.jjk5e-open,.jjk5e-levelup"))el.classList.toggle("jjk-sealed-inline",active);
+  for(const input of root.querySelectorAll('[name^="jjk5e."]'))input.closest(".form-group")?.classList.toggle("jjk-sealed-inline",active);
+  for(const entry of root.querySelectorAll('[data-pack^="jjk5e."],[data-pack^="world.jjk5e-"],[data-collection^="jjk5e."],[data-collection^="world.jjk5e-"]'))entry.classList.toggle("jjk-sealed-inline",selectedDesign("compendium")==="sealed");
+}
 function refresh() {
   for (const [app, root] of live) {
     if (!root.isConnected) { stopWatch(app); stopParticles(root); live.delete(app); continue; }
     apply(app, root);
   }
   stopParticles();
+  if (typeof document !== "undefined") {
+    styleEmbedded(document.body);
+    for (const el of document.querySelectorAll(".chat-message[data-message-id]")) styleChat(game.messages?.get?.(el.dataset.messageId),el);
+  }
 }
 
 function close(app) {
@@ -494,14 +636,14 @@ Hooks.once("init", () => {
     name: local("Interface design", "Diseño de interfaz"),
     hint: local("Personal visual preference for supported sheets, advancement, dialogs, editors and JJK windows. Per-category overrides below. Preview; no rules change.",
       "Preferencia visual personal para hojas, avances, diálogos, editores y ventanas JJK compatibles. Ajustes por categoría abajo. Preliminar; no cambia reglas."),
-    scope: "client", config: true, type: String, default: "default",
-    choices: { default: local("Default — D&D 5e", "Default — D&D 5e"), sealed: "Sealed Ink (preview)" },
+    scope: "client", config: true, type: String, default: "sealed",
+    choices: { default: local("Default — D&D 5e", "Default — D&D 5e"), sealed: "Sealed Ink" },
     onChange: refresh
   });
   for (const [key, labels] of Object.entries(categories)) game.settings.register(ID, "sheetDesign_" + key, {
     name: local(...labels), hint: local("Override the general interface design for this category.", "Personaliza esta categoría independientemente del diseño general."),
     scope: "client", config: true, type: String, default: "inherit",
-    choices: { inherit: local("Use general setting", "Usar ajuste general"), default: "Default", sealed: "Sealed Ink (preview)" },
+    choices: { inherit: local("Use general setting", "Usar ajuste general"), default: "Default", sealed: "Sealed Ink" },
     onChange: refresh
   });
   game.settings.register(ID, "sheetMotion", {
@@ -516,13 +658,14 @@ Hooks.once("init", () => {
     const AM = game.dnd5e?.applications?.advancement?.AdvancementManager ?? globalThis.dnd5e?.applications?.advancement?.AdvancementManager;
     if (AM?.DEFAULT_OPTIONS?.window) AM.DEFAULT_OPTIONS.window.resizable = true;
   } catch (err) { console.warn(ID + " | advancement window", err); }
-  try { registerSheets(); }
-  catch (err) { console.warn(ID + " | Sealed Ink sheet registration unavailable; native sheets retained", err); }
+  registerSheets();
 });
+Hooks.once("setup", () => { if (game.system.id === "dnd5e") registerSheets(); });
 
 Hooks.once("ready", () => {
   if (game.system.id !== "dnd5e") return;
-  for (const hook of ["renderActorSheetV2", "renderCharacterActorSheet", "renderNPCActorSheet", "renderApplicationV2", "renderApplication", "renderAbilityScoreImprovementFlow", "renderItemChoiceFlow", "renderAdvancementManager"]) {
+  if (!registerSheets() && game.user.isGM) ui.notifications.warn(local("Sealed Ink: some alternative sheets could not be registered. Native sheets remain available; check the console and D&D5e version.","Sealed Ink: no se pudieron registrar algunas hojas alternativas. Las hojas nativas siguen disponibles; revisa la consola y la versión de D&D5e."));
+  for (const hook of ["renderActorSheet","renderItemSheet","renderJournalSheet","renderRollTableSheet","renderCompendium","renderActorSheetV2", "renderCharacterActorSheet", "renderNPCActorSheet", "renderApplicationV2", "renderApplication", "renderAbilityScoreImprovementFlow", "renderItemChoiceFlow", "renderAdvancementManager"]) {
     Hooks.on(hook, (app, element) => {
       // One render fires several of these hooks (class chain): apply once, after all of them.
       if (scheduled.has(app)) return;
@@ -539,14 +682,14 @@ Hooks.once("ready", () => {
   Hooks.on("jjk5e.sealedInkStateChanged", (actor, key, tone) => {
     if (!actor?.isOwner || !["hp0","zone","burnout","domain","lowCE","output","rctRecovery","restReview"].includes(key)) return;
     for (const [app,root] of live) {
-      if (!root.isConnected || !root.classList.contains(MOTION) || nativeActor(app)?.uuid !== actor.uuid) continue;
+      if (!root.isConnected || !root.classList.contains(MOTION) || (nativeActor(app) ?? app.actor)?.uuid !== actor.uuid) continue;
       const header = root.querySelector(".sheet-header") ?? root;
       const mode = preference("sheetMotion");
       if (mode === "off" || document.hidden || window.matchMedia("(prefers-reduced-motion: reduce)").matches || root.classList.contains("minimized")) continue;
-      const color = tone === "gold" ? "#d4ad36" : tone === "critical" ? "#ce1032" : tone === "paper" ? "#eee6d5" : "#ad98ff";
+      const color = tone === "gold" ? "#eee6d5" : tone === "critical" ? "#ce1032" : tone === "paper" ? "#eee6d5" : "#ad98ff";
       if (typeof header.animate === "function") header.animate([{boxShadow:"inset 0 0 0 2px "+color},{boxShadow:"inset 0 0 0 0 transparent"}],{duration:mode === "performance" ? 120 : 480,easing:"ease-out"});
       const b = header.getBoundingClientRect();
-      emit(root, b.left + b.width/2, b.top + b.height/2, tone === "gold" ? "gold" : tone === "critical" ? "seal" : tone === "paper" ? "paper" : "energy", 18);
+      emit(root, b.left + b.width/2, b.top + b.height/2, tone === "gold" ? "paper" : tone === "critical" ? "seal" : tone === "paper" ? "paper" : "energy", 18);
     }
   });
   for (const h of ["createItem","updateItem","deleteItem"]) Hooks.on(h, refreshLinks);
@@ -565,6 +708,10 @@ Hooks.once("ready", () => {
     });
   };
   for (const hook of ["updateCombat","deleteCombat","createCombat","moveToken","updateActor","createItem","updateItem","deleteItem","createActiveEffect","updateActiveEffect","deleteActiveEffect","dnd5e.postUseActivity","midi-qol.RollComplete"]) Hooks.on(hook,refreshCombat);
+  for(const h of ["renderChatMessageHTML","renderChatMessage"]) Hooks.on(h,(message,html)=>styleChat(message,html));
+  Hooks.on("renderTokenHUD",(app,html)=>queueMicrotask(()=>styleEmbedded(html??app.element)));
+  Hooks.on("renderCompendiumDirectory",(app,html)=>queueMicrotask(()=>styleEmbedded(html??app.element)));
+  Hooks.on("renderSettingsConfig",(app,html)=>queueMicrotask(()=>styleEmbedded(html??app.element)));
   document.addEventListener("click", visualEvent, { passive: true });
   document.addEventListener("pointermove", pointerEvent, { passive: true });
   document.addEventListener("visibilitychange", () => { if (document.hidden) stopParticles(); });
