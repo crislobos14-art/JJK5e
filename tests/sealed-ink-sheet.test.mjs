@@ -3,7 +3,12 @@ import { runInNewContext } from "node:vm";
 import { test } from "node:test";
 import assert from "node:assert/strict";
 
-const source = readFileSync(new URL("../scripts/sealed-ink.mjs", import.meta.url), "utf8");
+import { enhanceCharacterCreation } from "../scripts/sealed-ink-creator.mjs";
+import { enhanceCombatInteraction } from "../scripts/sealed-ink-combat.mjs";
+// The registration harness evaluates the presentation source in a classic VM.
+// Inject the actual imported functions rather than removing their integration.
+const source = readFileSync(new URL("../scripts/sealed-ink.mjs", import.meta.url), "utf8")
+  .replace(/^import \{ (?:enhanceCharacterCreation|enhanceCombatInteraction) \} from "[^"]+";\r?\n/gm,"");
 const main = readFileSync(new URL("../scripts/jjk5e.js", import.meta.url), "utf8");
 const manifest = JSON.parse(readFileSync(new URL("../module.json", import.meta.url), "utf8"));
 
@@ -19,7 +24,7 @@ function fixture(system = "dnd5e") {
     settings: { register: (scope, key, options) => settings.set(key, options) }
   };
   runInNewContext(source, {
-    Hooks: { once: (name, fn) => hooks.set(name, fn) }, game,
+    enhanceCharacterCreation, enhanceCombatInteraction, Hooks: { once: (name, fn) => hooks.set(name, fn) }, game,
     foundry: { applications: { apps: { DocumentSheetConfig: {
       registerSheet: (doc, scope, cls, opts) => registered.push({ scope, cls, opts })
     } } } },
@@ -106,7 +111,7 @@ test("universal surfaces use only known D&D5e classes and per-client overrides",
     settings: { register: (ns,k,o) => settings.set(k,o), get: (ns,k) => values.get(k) ?? settings.get(k)?.default }
   };
   const exposed = runInNewContext(source + "\n({categoryOf, selectedDesign, categories});", {
-    Hooks: { once: (n,fn) => hooks.set(n,fn) }, game,
+    enhanceCharacterCreation, enhanceCombatInteraction, Hooks: { once: (n,fn) => hooks.set(n,fn) }, game,
     foundry: { applications: { apps: { DocumentSheetConfig: {
       registerSheet: (doc,scope,cls,opts) => registered.push(opts)
     }}}},

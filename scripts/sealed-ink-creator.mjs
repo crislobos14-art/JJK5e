@@ -18,7 +18,7 @@ export function characterCreationReview(actor) {
       mod: Number.isFinite(value) ? Math.floor((value - 10)/2) : null};
   });
   const steps = [
-    {key:"abilities", done:flag("pointBuyDone") === true},
+    {key:"abilities", done:flag("pointBuyDone") === true || flag("creatorAbilitiesReviewed") === true},
     {key:"class", done:classes.length > 0},
     {key:"technique", done:hr || (typeof technique === "string" && !!technique.trim()), skip:hr},
     {key:"ceAbility", done:hr || ["wis","cha"].includes(ability), skip:hr},
@@ -36,7 +36,7 @@ export function characterCreationReview(actor) {
   if (!hr && ability && !["wis","cha"].includes(ability)) blockers.push("invalidCEAbility");
   if (!hr && technique && !items.some(i => i.flags?.jjk5e?.technique === technique)) warnings.push("missingTechniqueItems");
   if (!hr && classes.length && !items.some(i => i.flags?.jjk5e?.cePool)) warnings.push("missingPool");
-  if (classes.length || races.length || backgrounds.length) warnings.push("pointBuyCaution");
+  if (!flag("pointBuyDone") && !flag("creatorAbilitiesReviewed") && (classes.length || races.length || backgrounds.length)) warnings.push("pointBuyCaution");
   const done = required.filter(step => step.done).length;
   return {steps, done, total:required.length, blockers, warnings, hr, abilities,
     ready:done === required.length && !blockers.length,
