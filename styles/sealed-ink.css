@@ -535,12 +535,18 @@
 .jjk-sealed-sheet.dnd5e2 .sidebar .card .card-tab:is(:hover,:focus-visible){border-color:var(--jjk-seal)}
 .jjk-sealed-sheet.dnd5e2 .sidebar .meter-group > .label{color:var(--jjk-muted);text-shadow:none;letter-spacing:.08em;text-transform:uppercase}
 .jjk-sealed-sheet.dnd5e2 .lozenge .value{font-family:var(--jjk-display);font-variant-numeric:tabular-nums}
-.jjk-sealed-sheet.dnd5e2.character .sidebar .lozenges .lozenge .value{
-  clip-path:none;background:#2d2630;border:1px solid #706171;
-  color:var(--jjk-bone);border-radius:3px;text-shadow:none;
+.jjk-sealed-sheet.dnd5e2.sheet.actor.character .sheet-body .sidebar .card .stats .lozenges{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;margin-block:6px 4px;
 }
-.jjk-sealed-sheet.dnd5e2.character .sidebar .lozenges .label{
-  color:var(--jjk-bone-2);font-size:10px;text-shadow:none;
+.jjk-sealed-sheet.dnd5e2.sheet.actor.character .sheet-body .sidebar .card .stats .lozenges .lozenge{
+  width:auto;height:auto;min-width:0;min-height:44px;margin:0;padding:4px 2px;
+  justify-content:center;gap:3px;background:#2d2630;border:1px solid #706171;border-radius:3px;filter:none;
+}
+.jjk-sealed-sheet.dnd5e2.sheet.actor.character .sheet-body .sidebar .card .stats .lozenges .lozenge .value{
+  height:auto;font-family:var(--jjk-display);font-size:1.15rem;line-height:1;color:var(--jjk-bone);text-shadow:none;
+}
+.jjk-sealed-sheet.dnd5e2.sheet.actor.character .sheet-body .sidebar .card .stats .lozenges .lozenge .label{
+  max-width:100%;color:var(--jjk-bone-2);font-size:9px;line-height:1.15;text-align:center;overflow-wrap:anywhere;
 }
 .jjk-sealed-sheet.dnd5e2 .death-tray .pip.filled{background:var(--jjk-bone)}
 .jjk-sealed-sheet.dnd5e2 .death-tray .pip.filled.failure{background:var(--jjk-seal)}
