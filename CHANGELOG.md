@@ -1,5 +1,10 @@
 # Changelog
 
+## Próximo release
+
+- Sealed Ink ajusta la cabecera, agrupa los recursos en su tarjeta nativa y permite leer los accesos JJK completos en fichas estrechas. La pestaña JJK reorganiza sus secciones según el espacio disponible.
+- El choque muestra el refinamiento y el estado de cada participante en el chat. Las animaciones de apertura y choque respetan el área de la escena y no modifican el alcance ni el resultado de las reglas.
+
 ## 1.96.0 — Auditoría de automatizaciones para dnd5e 6.1
 - Velocidad: 19 efectos de técnicas y dotes (Blue Hour, Golden Week, Extreme Cold, Illusive Terrain, Immobilizing Eyes, Indigestion, Energizing Gaze, Event Horizon, Reverse Transcendence, Aerokinesis, piernas inmovilizadas, Flowing Red Scale…) usaban `system.attributes.movement.all`. dnd5e 6 guarda las velocidades en `movement.speeds`, así que los que la multiplicaban (×0,5, ×2, ×3, ×¼) no hacían nada. Ahora se traducen al multiplicador nativo de movimiento de dnd5e, y los que la fijan a 0 (Grounding, X-Axis Shot, Stance of the Sparks, Projection, Majestic Pose, Light Manipulation) usan el mismo multiplicador en lugar de depender de DAE.
 - Resistencias e inmunidades totales: `dr.all` y `di.all` (Analgesic, Core Reversal, Intangibility, Inverse Ratio, World Anchor, Medical Clinic, Comedy) se escriben como el tipo de daño nativo «ALL» de dnd5e, sin depender del mapeo de DAE.

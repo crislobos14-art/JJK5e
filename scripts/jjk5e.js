@@ -4053,17 +4053,61 @@ function damageKind(activity) {
   return types[0] ?? null;
 }
 
-function playAt(file, target, { scale = 1, persist = false, name, gridSize = null, below = false, duration = 0 } = {}) {
+function playAt(file, target, { scale = 1, gridSize = null } = {}) {
   if (!file || !target) return;
   const seq = new Sequence().effect().file(file).atLocation(target);
-  // Looping files (e.g. darkness) otherwise keep their full-frame last state: bound and fade them.
-  if (duration && !persist) seq.duration(duration).fadeOut(600);
-  if (name && !persist) seq.name(name);
   if (gridSize) seq.size(gridSize, { gridUnits: true });
   else seq.scaleToObject(scale);
-  if (below) seq.belowTokens();
-  if (persist) seq.attachTo(target).persist().belowTokens().opacity(0.55).name(name);
   seq.play();
+}
+
+/** Limit the sprite footprint to the scene rectangle, independently of the domain rules. */
+function domainVisualSize(scene, { x, y }, gridUnits) {
+  const { sceneRect, size } = scene?.dimensions ?? {};
+  if (!sceneRect || ![x, y, size, gridUnits, sceneRect.x, sceneRect.y, sceneRect.width, sceneRect.height].every(Number.isFinite)) return 0;
+  const edge = Math.min(x - sceneRect.x, y - sceneRect.y,
+    sceneRect.x + sceneRect.width - x, sceneRect.y + sceneRect.height - y);
+  return Math.max(0, Math.min(gridUnits * size, 2 * edge));
+}
+
+function playDomainVisual(file, scene, point, { gridUnits, name, duration, opacity }) {
+  const size = domainVisualSize(scene, point, gridUnits);
+  if (!file || size < 1) return;
+  try {
+    const { x, y, elevation, levelId } = point;
+    const effect = new Sequence().effect().file(file).atLocation({ x, y }).size(size).name(name)
+      .belowTokens().opacity(opacity).duration(duration).fadeOut(400);
+    if (Number.isFinite(elevation)) effect.elevation?.(elevation, { absolute: true });
+    if (levelId) effect.onLevels?.(levelId);
+    Promise.resolve(effect.play()).catch(err => reportError("domain animation", err));
+  } catch (err) { reportError("domain animation", err); }
+}
+
+function animateDomainOpening(actor, state, token) {
+  const scene = canvas?.scene;
+  if (!animOn() || !scene || scene.id !== state.sceneId || !token || token.hidden) return;
+  const item = state.domainItemUuid && actor.items.find(i => i.uuid === state.domainItemUuid);
+  if (item && aaHandles(item)) return;
+  const point = { x: state.x, y: state.y, elevation: token.elevation, levelId: state.levelId };
+  const id = state.openingId;
+  playDomainVisual(animPath(ANIM.domain), scene, point, { gridUnits: 3, name: `jjk5e-domain-burst-${id}`, duration: 2000, opacity: 0.48 });
+  playDomainVisual(themeFile(itemTheme(item), "area", item), scene, point, { gridUnits: 4, name: `jjk5e-domain-area-${id}`, duration: 1600, opacity: 0.72 });
+  // The native Region represents any sustained area. The cinematic layers all end automatically.
+  playDomainVisual(animPath(ANIM.domainAura), scene, point, { gridUnits: 5, name: `jjk5e-domain-${id}`, duration: 2200, opacity: 0.42 });
+}
+
+function animateDomainClash(scene, actors) {
+  if (!animOn() || canvas?.scene?.id !== scene.id) return;
+  const states = actors.map(getDomain);
+  // A table-visible animation must not reveal a concealed combatant.
+  const tokens = states.map(state => scene.tokens?.find(t => t.uuid === state?.tokenUuid));
+  if (tokens.some(token => !token || token.hidden)) return;
+  const point = { x: states.reduce((total, state) => total + state.x, 0) / states.length,
+    y: states.reduce((total, state) => total + state.y, 0) / states.length,
+    elevation: tokens[0].elevation, levelId: states[0].levelId };
+  playDomainVisual(animPath(ANIM.blackFlash2), scene, point, {
+    gridUnits: 3, name: "jjk5e-domain-clash", duration: 1400, opacity: 0.72
+  });
 }
 
 function playBetween(file, source, target, missed = false) {
@@ -4114,12 +4158,8 @@ function animateActivity(activity, targets = null) {
   const theme = itemTheme(item, activity);
   const tmpl = activity.target?.template ?? {};
   const name = baseName(item).toLowerCase();
-  if (item.flags.jjk5e.domainActivity === activity.id || name.startsWith("domain expansion")) {
-    playAt(animPath(ANIM.domain), source, { scale: 6, duration: 2500, name: `jjk5e-domain-burst-${item.actor.id}` });
-    playAt(themeFile(theme, "area", item), source, { scale: 8, below: true });
-    playAt(animPath(ANIM.domainAura), source, { scale: 10, persist: true, name: `jjk5e-domain-${item.actor.id}` });
-    return;
-  }
+  const domainActivity = item.flags.jjk5e.domainActivity;
+  if (domainActivity ? domainActivity === activity.id : name.startsWith("domain expansion")) return;
   if (activity.type === "summon") return playAt(themeFile("shadow", "summon", item) ?? animPath(ANIM.summon), source, { scale: 2.5 });
   if (/teleport|blink|swap|boogie/.test(name)) return playAt(animPath(ANIM.teleport), source, { scale: 1.5 });
   if (activity.type === "heal") {
@@ -4149,10 +4189,14 @@ function animateActivity(activity, targets = null) {
   }
 }
 
-function endDomainAnimation(actor) {
+function endDomainAnimation(actor, openingId) {
   if (!globalThis.Sequencer?.EffectManager || !actor) return;
-  for (const name of [`jjk5e-domain-${actor.id}`, `jjk5e-domain-burst-${actor.id}`]) {
-    try { Sequencer.EffectManager.endEffects({ name }); } catch (err) { reportError("domain animation", err); }
+  // Include the names used by pre-1.97 saves to clean up legacy persistent effects.
+  const names = [`jjk5e-domain-${actor.id}`, `jjk5e-domain-burst-${actor.id}`];
+  if (openingId) names.push(`jjk5e-domain-${openingId}`, `jjk5e-domain-burst-${openingId}`, `jjk5e-domain-area-${openingId}`);
+  for (const name of names) {
+    try { Promise.resolve(Sequencer.EffectManager.endEffects({ name })).catch(err => reportError("domain animation", err)); }
+    catch (err) { reportError("domain animation", err); }
   }
 }
 
@@ -4396,9 +4440,6 @@ Hooks.once("ready", () => {
   recoverCEWorld().catch(err=>reportError("CE recovery",err));
   if (game.user.isGM && setting("enableSummoning") && game.settings.settings?.has?.("dnd5e.allowSummoning")
     && !game.settings.get("dnd5e", "allowSummoning")) game.settings.set("dnd5e", "allowSummoning", true);
-  Hooks.on("deleteActiveEffect", (effect) => {
-    if (effect.flags?.jjk5e?.kind === "domain" || effect.flags?.jjk5e?.domainOpen) endDomainAnimation(effect.parent);
-  });
   Hooks.on("updateActor", (actor, changes, options, userId) => {
     if (userId === game.user.id && foundry.utils.getProperty(changes, `flags.${MODULE_ID}.pendingBlackFlash`) === true) animateBlackFlash(actor);
   });
@@ -5836,7 +5877,8 @@ async function domainOpened(actor, effect = null) {
     customProfile: validateDomainProfile(actor.getFlag(MODULE_ID, "customDomainProfile")),
     x: c?.x ?? null, y: c?.y ?? null,
     damageTaken: 0, zone: null, clash: null, name: actor.name };
-  await setDomain(actor, state);
+  const opened = await setDomain(actor, state);
+  if (opened && effect && actor.effects.get(effect.id) && !effect.disabled) animateDomainOpening(actor, state, tokenDoc);
   if (c && state.sceneId && setting("domainZones")) await GM_EXTRA.domainZone({ sceneId: state.sceneId,
     name: `${t("Domain.Zone")}: ${actor.name}`, color: "#4b1d6e", actorUuid: actor.uuid, openingId: state.openingId });
   await chat(actor, `<div class="jjk5e-card"><h3><i class="fas fa-circle-half-stroke"></i> ${t("Domain.Opened", { name: esc(actor.name) })}</h3>`
@@ -5865,6 +5907,7 @@ async function domainClosed(actor) {
   if (!isActiveGM()) return;
   const state = getDomain(actor);
   if (!state) return;
+  endDomainAnimation(actor, state.openingId);
   await removeBarrierMarkers(actor.uuid,state.openingId);
   if (state.zone) await GM_EXTRA.domainZoneDelete({ sceneId: state.sceneId, zone: state.zone, actorUuid: actor.uuid, openingId: state.openingId });
   const window = actor.getFlag(MODULE_ID, "domainReactionWindow");
@@ -6081,6 +6124,12 @@ async function findWeakSpot(domainActor, seeker) {
 
 function clashRounds(diff) { return clashRoundsFromRefinement(diff); }
 
+function clashParticipant(actor, state, status = t(`Domain.Role.${state.clash.role}`)) {
+  return `<li data-role="${state.clash.role}"><strong>${esc(actor.name)}</strong>
+    <span class="jjk-domain-clash-score" title="${esc(t("Domain.Refinement"))}">${esc(String(state.refinement))}</span>
+    <small>${esc(status)}</small></li>`;
+}
+
 async function detectClash(actor) {
   const mine = getDomain(actor);
   if (!isActiveGM() || !mine?.open) return;
@@ -6115,9 +6164,10 @@ async function detectClash(actor) {
     const lines = actors.map((a) => {
       const state = getDomain(a), result = results.find((r) => r.id === a.uuid);
       const outcome = result.role === "loser" ? t("Domain.MultiRounds", { n: result.rounds }) : t(`Domain.Role.${result.role}`);
-      return `<li>${esc(a.name)} (${state.refinement}): ${esc(outcome)}</li>`;
+      return clashParticipant(a, state, outcome);
     }).join("");
-    await docClass("ChatMessage").create({ content: `<div class="jjk5e-card"><h3><i class="fas fa-yin-yang"></i> ${t("Domain.MultiClash")}</h3><ul>${lines}</ul><p class="hint">${t("Domain.MultiClashHint")}</p></div>` });
+    await docClass("ChatMessage").create({ content: `<div class="jjk5e-card jjk-domain-clash"><h3><i class="fas fa-yin-yang" aria-hidden="true"></i> ${t("Domain.MultiClash")}</h3><ul class="jjk-domain-clash-casters" aria-label="${esc(t("Domain.Refinement"))}">${lines}</ul><p class="hint">${t("Domain.MultiClashHint")}</p></div>` });
+    animateDomainClash(scene, actors);
     for (const a of actors) {
       const result = results.find((r) => r.id === a.uuid);
       if (result.role === "loser" && result.rounds === 0) await closeDomainOf(a, t("Domain.ClashLost", { name: esc(a.name) }));
@@ -6140,8 +6190,11 @@ async function detectClash(actor) {
   await setDomain(rival, rs);
   const text = equal ? t("Domain.ClashEqual")
     : t("Domain.ClashResult", { win: esc(win.name), lose: esc(lose.name), rounds, diff: Math.abs(diff) });
-  await docClass("ChatMessage").create({ content: `<div class="jjk5e-card"><h3><i class="fas fa-yin-yang"></i> ${t("Domain.Clash")}</h3>`
-    + `<p>${esc(actor.name)} (${mine.refinement}) vs ${esc(rival.name)} (${rs.refinement})</p><p>${text}</p><p class="hint">${t("Domain.ClashNoSureHit")}</p></div>` });
+  await docClass("ChatMessage").create({ content: `<div class="jjk5e-card jjk-domain-clash">
+    <h3><i class="fas fa-yin-yang" aria-hidden="true"></i> ${t("Domain.Clash")}</h3>
+    <ul class="jjk-domain-clash-casters" aria-label="${esc(t("Domain.Refinement"))}">${clashParticipant(actor, mine)}${clashParticipant(rival, rs)}</ul>
+    <p>${text}</p><p class="hint">${t("Domain.ClashNoSureHit")}</p></div>` });
+  animateDomainClash(scene, [actor, rival]);
   if (!equal && rounds === 0) await closeDomainOf(lose, t("Domain.ClashLost", { name: esc(lose.name) }));
 }
 

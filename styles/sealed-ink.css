@@ -507,26 +507,41 @@
 
 /* Header: name in the display face, a red seal under the header, level as a stamp. */
 .jjk-sealed-sheet.dnd5e2 .sheet-header {
-  background:linear-gradient(180deg,#1d191f 0%,var(--jjk-ink) 100%);
+  background:radial-gradient(ellipse at 18% 0%,#302730 0%,transparent 75%),var(--jjk-ink);
   border-bottom:1px solid var(--jjk-edge);
-  box-shadow:inset 0 -2px 0 var(--jjk-seal);
+  box-shadow:inset 4px 0 #984054;
 }
 .jjk-sealed-sheet.dnd5e2 .sheet-header .document-name{
-  font-family:var(--jjk-display);letter-spacing:.04em;text-transform:uppercase;color:var(--jjk-bone);text-shadow:0 2px 0 #000;
+  font-family:var(--jjk-display);font-size:clamp(1.625rem,4cqi,2.625rem);
+  letter-spacing:.025em;color:var(--jjk-bone);text-shadow:none;overflow-wrap:anywhere;
 }
 .jjk-sealed-sheet.dnd5e2 .sheet-header :is(.class,.subtitle,.xp-label){color:var(--jjk-muted)}
-.jjk-sealed-sheet.dnd5e2 .sheet-header .level-badge{background:var(--jjk-seal);color:#fff;border-radius:0;box-shadow:3px 3px 0 #000}
+.jjk-sealed-sheet.dnd5e2 .sheet-header .level-badge{
+  background:#2d242d;color:var(--jjk-bone);border:1px solid #8a6977;
+  border-radius:3px;box-shadow:inset 0 -3px #984054;
+}
 .jjk-sealed-sheet.dnd5e2 .sheet-header .xp-bar{background:#0e0c10;border-radius:0;border:1px solid var(--jjk-edge)}
 .jjk-sealed-sheet.dnd5e2 .sheet-header .xp-bar::after{background:linear-gradient(90deg,var(--jjk-ce-1),var(--jjk-energy));border-radius:0}
 .jjk-sealed-sheet.dnd5e2 .sheet-header .sheet-header-buttons button{border-radius:0}
 
-/* Sidebar card: one ink plate with a seal edge; portrait framed, not rounded. */
-.jjk-sealed-sheet.dnd5e2 .sidebar .card{background:var(--jjk-card);border:1px solid var(--jjk-edge);border-top:2px solid var(--jjk-seal);box-shadow:0 6px 18px #0007}
-.jjk-sealed-sheet.dnd5e2 .sidebar .card .portrait{border-bottom:1px solid var(--jjk-edge)}
+/* Keep the portrait, clickable defences and native resource controls in the same card. */
+.jjk-sealed-sheet.dnd5e2 .sidebar .card{
+  background:linear-gradient(165deg,#28212a,var(--jjk-card) 56%);
+  border:1px solid var(--jjk-edge);border-block-start:2px solid #9f7181;box-shadow:0 4px 12px #0005;
+}
+.jjk-sealed-sheet.dnd5e2 .sidebar .card .portrait{border-bottom:1px solid #715765}
+.jjk-sealed-sheet.dnd5e2 .sidebar .card .portrait > :is(img,video){box-shadow:none;border-color:var(--jjk-edge)}
 .jjk-sealed-sheet.dnd5e2 .sidebar .card .card-tab{background:var(--jjk-card-2);color:var(--jjk-bone);border:1px solid var(--jjk-edge);border-radius:0}
 .jjk-sealed-sheet.dnd5e2 .sidebar .card .card-tab:is(:hover,:focus-visible){border-color:var(--jjk-seal)}
 .jjk-sealed-sheet.dnd5e2 .sidebar .meter-group > .label{color:var(--jjk-muted);text-shadow:none;letter-spacing:.08em;text-transform:uppercase}
 .jjk-sealed-sheet.dnd5e2 .lozenge .value{font-family:var(--jjk-display);font-variant-numeric:tabular-nums}
+.jjk-sealed-sheet.dnd5e2.character .sidebar .lozenges .lozenge .value{
+  clip-path:none;background:#2d2630;border:1px solid #706171;
+  color:var(--jjk-bone);border-radius:3px;text-shadow:none;
+}
+.jjk-sealed-sheet.dnd5e2.character .sidebar .lozenges .label{
+  color:var(--jjk-bone-2);font-size:10px;text-shadow:none;
+}
 .jjk-sealed-sheet.dnd5e2 .death-tray .pip.filled{background:var(--jjk-bone)}
 .jjk-sealed-sheet.dnd5e2 .death-tray .pip.filled.failure{background:var(--jjk-seal)}
 .jjk-sealed-sheet.dnd5e2 .meter{border:1px solid var(--jjk-edge)}
@@ -625,20 +640,21 @@
 /* Fluid sheets, tier by tier (container = .window-content). The sidebar keeps a fixed column like a chat
    app's channel list; the tab body takes the rest. D&D5e's own layouts are kept: nothing is re-parented. */
 @container (max-width:700px){
-  .jjk-sealed-sheet.dnd5e2.character{--dnd5e-sheet-sidebar-width:176px;--dnd5e-sheet-header-right-width:200px}
-  .jjk-sealed-sheet.dnd5e2.character .sheet-header .document-name{font-size:clamp(22px,6cqi,40px)}
+  .jjk-sealed-sheet.dnd5e2.sheet.actor.character .sheet-body .main-content{--dnd5e-sheet-sidebar-width:176px}
+  .jjk-sealed-sheet.dnd5e2.character .sheet-header{--dnd5e-sheet-header-right-width:200px}
   /* Ability scores wrap in two rows of three instead of overflowing the fixed 546px strip. */
   .jjk-sealed-sheet.dnd5e2.character .ability-scores .rows{width:auto;max-width:100%;padding-inline:10px;justify-content:center;row-gap:8px}
   .jjk-sealed-sheet.dnd5e2.character .ability-scores .rows > div{gap:10px}
   .jjk-sealed-sheet.dnd5e2.character.tab-details .tab-body{padding-top:120px}
-  .jjk-sealed-sheet.dnd5e2.npc{--dnd5e-sheet-sidebar-width:150px}
+  .jjk-sealed-sheet.dnd5e2.npc .sheet-body{--dnd5e-sheet-sidebar-width:150px}
   .jjk-sealed-sheet .jjk-overview-controls button{flex-basis:45%}
 }
 @container (max-width:560px){
-  .jjk-sealed-sheet.dnd5e2.character{--dnd5e-sheet-sidebar-width:156px;--dnd5e-sheet-header-right-width:170px}
+  .jjk-sealed-sheet.dnd5e2.sheet.actor.character .sheet-body .main-content{--dnd5e-sheet-sidebar-width:156px}
+  .jjk-sealed-sheet.dnd5e2.character .sheet-header{--dnd5e-sheet-header-right-width:170px}
   .jjk-sealed-sheet.dnd5e2 .sheet-body .main-content{gap:6px;padding:6px}
   .jjk-sealed-sheet.dnd5e2 .tab-body .col-2{grid-template-columns:minmax(0,1fr)}
-  .jjk-sealed-sheet.dnd5e2.npc{--dnd5e-sheet-sidebar-width:128px}
+  .jjk-sealed-sheet.dnd5e2.npc .sheet-body{--dnd5e-sheet-sidebar-width:128px}
   /* Inventory columns already drop by priority in D&D5e's own inventory element as the list narrows. */
 }
 
@@ -696,16 +712,18 @@
 @media(prefers-reduced-motion:reduce){.jjk-sealed-motion.dnd5e2 .meter.jjk-cursed-energy > .progress::before{transition:none}}
 
 /* Issue #23 — JJK tab in the sheet's own rail. Section list on the left, content on the right; one column when narrow. */
-.jjk-sealed-sheet .jjk-sheet-tab .jjk-tab-host{min-width:0}
-.jjk-actor-workspace[data-mode=tab]{display:grid;grid-template-columns:minmax(150px,190px) minmax(0,1fr);align-items:start;gap:10px;padding:0;background:none;border:0}
-.jjk-actor-workspace[data-mode=tab] .jjk-workspace-tabs{position:sticky;top:0;display:flex;flex-direction:column;flex-wrap:nowrap;gap:3px;padding:6px;border:1px solid var(--jjk-edge);border-top:2px solid var(--jjk-seal);background:var(--jjk-card)}
-.jjk-actor-workspace[data-mode=tab] .jjk-workspace-tabs button{width:100%;justify-content:flex-start;text-align:start;min-height:30px;padding:5px 8px;font:700 12px/1.15 var(--jjk-display);letter-spacing:.05em;text-transform:uppercase}
-.jjk-actor-workspace[data-mode=tab] .jjk-workspace-tabs .jjk-workspace-back{margin-bottom:4px;background:none;border-style:dashed;color:var(--jjk-muted);text-transform:none;letter-spacing:0;font:600 11px/1.2 inherit}
+.jjk-sealed-sheet .jjk-sheet-tab .jjk-tab-host{min-width:0;container-type:inline-size}
+.jjk-actor-workspace[data-mode=tab]{display:grid;grid-template-columns:minmax(120px, 24%) minmax(0,1fr);align-items:start;gap:12px;padding:0;background:none;border:0}
+.jjk-actor-workspace[data-mode=tab] .jjk-workspace-tabs{position:sticky;top:0;display:flex;flex-direction:column;flex-wrap:nowrap;gap:4px;padding:8px;border:1px solid var(--jjk-edge);border-top:2px solid #9f7181;background:var(--jjk-card)}
+.jjk-actor-workspace[data-mode=tab] .jjk-workspace-tabs button{width:100%;justify-content:flex-start;text-align:start;min-height:34px;padding:6px 9px;font:700 13px/1.2 var(--jjk-display);letter-spacing:.035em}
+.jjk-actor-workspace[data-mode=tab] .jjk-workspace-tabs .jjk-workspace-back{margin-bottom:4px;background:none;border-color:#706171;color:var(--jjk-bone-2);letter-spacing:0;font-size:12px;font-weight:600}
 .jjk-actor-workspace[data-mode=tab] .jjk-workspace-tabs .jjk-workspace-back::before{content:"\2190  "}
 .jjk-actor-workspace[data-mode=tab] .jjk-workspace-tabs button[aria-pressed=true]{box-shadow:inset 3px 0 var(--jjk-seal)}
-.jjk-actor-workspace[data-mode=tab] .jjk-workspace-content{max-height:none;overflow:visible;padding:8px;border:1px solid var(--jjk-edge);background:var(--jjk-card);min-height:220px}
+.jjk-actor-workspace[data-mode=tab] .jjk-workspace-content{max-height:none;overflow:visible;padding:12px;gap:8px;border:1px solid var(--jjk-edge);background:var(--jjk-card);min-height:180px}
 .jjk-actor-workspace[data-mode=tab] .jjk-workspace-list{max-height:none}
-@container (max-width:640px){
+.jjk-actor-workspace[data-mode=tab] .jjk-workspace-entry{padding:8px;gap:6px}
+.jjk-actor-workspace[data-mode=tab] :is(button,input,select):focus-visible{outline:2px solid var(--jjk-bone);outline-offset:1px}
+@container (max-width:460px){
   .jjk-actor-workspace[data-mode=tab]{grid-template-columns:minmax(0,1fr)}
   .jjk-actor-workspace[data-mode=tab] .jjk-workspace-tabs{position:static;flex-direction:row;flex-wrap:wrap}
   .jjk-actor-workspace[data-mode=tab] .jjk-workspace-tabs button{width:auto;flex:1 1 30%}
