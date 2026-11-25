@@ -534,6 +534,10 @@
         "compact": "Compact",
         "stacked": "Cards (one row per card)",
         "scroll": "Scroll horizontally"
+      },
+      "fluidWindows": {
+        "Name": "Fluid windows",
+        "Hint": "JJK windows and Sealed Ink sheets resize from any edge or corner, remember their size per window type, and stay on screen when the browser window changes."
       }
     },
     "Feats": {

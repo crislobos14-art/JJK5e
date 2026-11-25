@@ -580,3 +580,28 @@ table.jjk-fit :is(td, th) img { max-width: 100%; height: auto; }
 :where([data-jjk-tables=scroll]) .jjk-table-wrap > table.jjk-fit { width: max-content; min-width: 100%; }
 :where([data-jjk-tables=scroll]) table.jjk-fit :is(th, td) { white-space: nowrap; overflow-wrap: normal; }
 :where([data-jjk-tables=scroll]) table.jjk-fit :is(th, td):first-child { position: sticky; left: 0; z-index: 1; background: var(--jjk-card, var(--paper, #f3ece0)); }
+
+/* v1.92 — fluid windows: resize from any edge or corner (scripts/fluid-windows.mjs). */
+.jjk-fluid > .jjk-edge { position: absolute; z-index: 60; touch-action: none; background: transparent; }
+.jjk-fluid > .jjk-edge[data-dir=n] { top: 0; left: 10px; right: 10px; height: 5px; cursor: ns-resize; }
+.jjk-fluid > .jjk-edge[data-dir=s] { bottom: 0; left: 10px; right: 10px; height: 6px; cursor: ns-resize; }
+.jjk-fluid > .jjk-edge[data-dir=e] { right: 0; top: 10px; bottom: 10px; width: 6px; cursor: ew-resize; }
+.jjk-fluid > .jjk-edge[data-dir=w] { left: 0; top: 10px; bottom: 10px; width: 6px; cursor: ew-resize; }
+.jjk-fluid > .jjk-edge:is([data-dir=ne], [data-dir=nw], [data-dir=se], [data-dir=sw]) { width: 12px; height: 12px; }
+.jjk-fluid > .jjk-edge[data-dir=ne] { top: 0; right: 0; cursor: nesw-resize; }
+.jjk-fluid > .jjk-edge[data-dir=nw] { top: 0; left: 0; cursor: nwse-resize; }
+.jjk-fluid > .jjk-edge[data-dir=se] { bottom: 0; right: 0; cursor: nwse-resize; }
+.jjk-fluid > .jjk-edge[data-dir=sw] { bottom: 0; left: 0; cursor: nesw-resize; }
+.jjk-fluid > .jjk-edge:hover, .jjk-fluid.jjk-resizing > .jjk-edge { background: color-mix(in srgb, var(--jjk-seal, #ce1032) 35%, transparent); }
+.jjk-fluid.minimized > .jjk-edge { display: none; }
+/* While dragging: no text selection, no transitions fighting the new size. */
+.jjk-fluid.jjk-resizing, .jjk-fluid.jjk-resizing * { user-select: none !important; transition: none !important; }
+/* Module windows can shrink to a phone-like width; their content already reflows with container queries. */
+.jjk5e-ui.jjk-fluid:not(.minimized, .minimizing, .maximizing) { min-width: min(300px, 100vw); min-height: min(200px, 100vh); }
+.jjk5e-ui .window-content { container: jjkwin / inline-size; }
+@container jjkwin (max-width: 380px) {
+  .jjk5e-ui .jjk-row { flex-wrap: wrap; }
+  .jjk5e-ui .jjk-menu-grid { grid-template-columns: minmax(0, 1fr); }
+  .jjk5e-ui :is(footer.btns, .dialog-buttons, .form-footer) { flex-wrap: wrap; }
+  .jjk5e-ui :is(footer.btns, .dialog-buttons, .form-footer) > button { flex: 1 1 45%; }
+}

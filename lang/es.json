@@ -534,6 +534,10 @@
         "compact": "Compacta",
         "stacked": "Tarjetas (una fila por tarjeta)",
         "scroll": "Desplazamiento horizontal"
+      },
+      "fluidWindows": {
+        "Name": "Ventanas fluidas",
+        "Hint": "Las ventanas JJK y las fichas Sealed Ink se redimensionan desde cualquier borde o esquina, recuerdan su tamaño por tipo de ventana y se mantienen en pantalla al cambiar el tamaño del navegador."
       }
     },
     "Feats": {

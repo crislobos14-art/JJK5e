@@ -43,10 +43,13 @@
 .jjk-sealed-sheet :is(button, [role=button]):focus-visible { outline: 2px solid var(--jjk-bone); outline-offset: 2px; }
 .jjk-sealed-sheet :is(.item-list, .items-section, .jjk5e-strip) :is(button, .item-control):hover { border-color: var(--jjk-seal); }
 .jjk-sealed-sheet .jjk-bar .fill { background: linear-gradient(90deg,#5630d2,#ad98ff); }
-.jjk-sealed-sheet.dnd5e2.sheet.actor.character:not(.minimized,.minimizing,.maximizing),
+.jjk-sealed-sheet.dnd5e2.sheet.actor.character:not(.minimized,.minimizing,.maximizing) {
+  min-width: min(560px, 100vw);
+  min-height: min(460px, 100vh);
+}
 .jjk-sealed-sheet.dnd5e2.sheet.actor.npc:not(.minimized,.minimizing,.maximizing) {
-  min-width: min(660px, 100vw);
-  min-height: min(540px, 100vh);
+  min-width: min(460px, 100vw);
+  min-height: min(400px, 100vh);
 }
 @container (max-width: 760px) {
   .jjk-sealed-sheet.dnd5e2.sheet.actor.character .sheet-header {
@@ -594,11 +597,24 @@
   .jjk-sealed-motion.dnd5e2 :is(.item-list > .item,.meter .progress::before,.meter.progress::before,nav.tabs > .item){transition:none!important}
 }
 
-/* Narrow sheets: the sidebar stacks above the tab body instead of crushing it. */
-@container (max-width:620px){
-  .jjk-sealed-sheet.dnd5e2.character .sheet-body .main-content{grid-template-columns:minmax(0,1fr)}
-  .jjk-sealed-sheet.dnd5e2.character .sheet-header{grid-template-columns:minmax(0,1fr)}
+/* Fluid sheets, tier by tier (container = .window-content). The sidebar keeps a fixed column like a chat
+   app's channel list; the tab body takes the rest. D&D5e's own layouts are kept: nothing is re-parented. */
+@container (max-width:700px){
+  .jjk-sealed-sheet.dnd5e2.character{--dnd5e-sheet-sidebar-width:176px;--dnd5e-sheet-header-right-width:200px}
+  .jjk-sealed-sheet.dnd5e2.character .sheet-header .document-name{font-size:clamp(22px,6cqi,40px)}
+  /* Ability scores wrap in two rows of three instead of overflowing the fixed 546px strip. */
+  .jjk-sealed-sheet.dnd5e2.character .ability-scores .rows{width:auto;max-width:100%;padding-inline:10px;justify-content:center;row-gap:8px}
+  .jjk-sealed-sheet.dnd5e2.character .ability-scores .rows > div{gap:10px}
+  .jjk-sealed-sheet.dnd5e2.character.tab-details .tab-body{padding-top:120px}
+  .jjk-sealed-sheet.dnd5e2.npc{--dnd5e-sheet-sidebar-width:150px}
   .jjk-sealed-sheet .jjk-overview-controls button{flex-basis:45%}
+}
+@container (max-width:560px){
+  .jjk-sealed-sheet.dnd5e2.character{--dnd5e-sheet-sidebar-width:156px;--dnd5e-sheet-header-right-width:170px}
+  .jjk-sealed-sheet.dnd5e2 .sheet-body .main-content{gap:6px;padding:6px}
+  .jjk-sealed-sheet.dnd5e2 .tab-body .col-2{grid-template-columns:minmax(0,1fr)}
+  .jjk-sealed-sheet.dnd5e2.npc{--dnd5e-sheet-sidebar-width:128px}
+  /* Inventory columns already drop by priority in D&D5e's own inventory element as the list narrows. */
 }
 
 /* Sealed Ink 2 — notices, dock and panel. */
