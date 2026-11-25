@@ -1048,6 +1048,36 @@ function actionGate(actor,activity,{recheck=false}={}){
   return true;
 }
 
+/** Read-only UI view of existing action economy; no duplicate action ledger. */
+function combatInteractionState(actor) {
+  if (!actor?.isOwner) return null;
+  const state = actionTurn(actor), active = !!game.combat?.started;
+  const midi = globalThis.MidiQOL;
+  const used = method => {
+    try { const value = midi?.[method]?.(actor); return typeof value === "boolean" ? value : null; }
+    catch { return null; }
+  };
+  const pool = findPool(actor);
+  return { active, ownTurn: !!state, round: active ? game.combat.round : null,
+    action: state?.action || state?.full ? true : used("hasUsedAction"),
+    bonus: state?.bonus || state?.full ? true : used("hasUsedBonusAction"),
+    reaction: used("hasUsedReaction"), free: state ? !!state.free : null,
+    moved: state ? !!state.moved : null, full: state ? !!state.full : null,
+    lockMovement: state ? !!state.lockMovement : null,
+    ce: pool ? {value:poolValue(pool),max:poolMax(pool),pending:cePending(pool)} : null };
+}
+function combatInteractionActivity(actor, activity) {
+  if (!actor?.isOwner || !activity || activity.item?.actor?.uuid !== actor.uuid) return null;
+  const type = activity.activation?.type ?? "";
+  const domain = activity.item.flags?.jjk5e?.domainActivity === activity.id;
+  const kind = isFullTurn(activity) ? "full" : isJJKFree(activity) ? "free" :
+    type === "action" ? "action" : type === "bonus" ? "bonus" :
+    String(type).startsWith("reaction") ? "reaction" : "other";
+  const cost = managedCE(activity) ? activityCost(activity) : null;
+  return {kind, domain, cost, variable:!!activity.item.flags?.jjk5e?.ceSteps?.[activity.id],
+    allowed:actionGate(actor,activity), direct: !domain && ["action","bonus","full","free"].includes(kind)};
+}
+
 function registerActivityHooks() {
   Hooks.on("deleteCombat",c=>ACTION_TURNS.delete(c.id));
   Hooks.on("preMoveToken",(token,movement)=>{
@@ -3229,7 +3259,7 @@ Hooks.once("init", () => {
   game.modules.get(MODULE_ID).api = {
     importAll, promptImport, spendCE, dataLanguage, baseName,
     regainCE: (actor, amount, label) => spendCE(actor, -Math.abs(amount), label || t("CE.Regained")),
-    findPool, poolValue, poolMax, cePending, resolveRestExchange, chooseTechnique, syncTechnique, promptCE, shortRestCE, chooseCEAbility, negativeEmotion,
+    combatInteractionState, combatInteractionActivity, findPool, poolValue, poolMax, cePending, resolveRestExchange, chooseTechnique, syncTechnique, promptCE, shortRestCE, chooseCEAbility, negativeEmotion,
     applyScaling, openPanel, maximumOutput, setReducedOutput, setSoulAwareness, setLimb, rollLimb,
     summon, dismissSummons, syncResource, missingPrereqs, applyCEEffects, activateGroup, endGroup,
     updateAutomation, updateAllAutomation, outdatedItems, burnoutRecovery, fallDamage, applySoulDamage, clearSoulDamage,
@@ -6769,7 +6799,19 @@ function creatorSteps(actor) {
     return d && !actor.items.some(i=>i.flags?.jjk5e?.mindset) ? addWithAdvancement(actor,d) : false;
   };
   return [
-    { key: "abilities", icon: "fas fa-dice-d20", done: !!actor.getFlag(MODULE_ID, "pointBuyDone"), run: () => pointBuy(actor) },
+    { key: "abilities", icon: "fas fa-dice-d20", done: !!(actor.getFlag(MODULE_ID, "pointBuyDone") || actor.getFlag(MODULE_ID, "creatorAbilitiesReviewed")),
+      locked: !!(actor.getFlag(MODULE_ID, "pointBuyDone") || actor.getFlag(MODULE_ID, "creatorAbilitiesReviewed")),
+      run: async () => {
+        if (!actor.isOwner || actor.getFlag(MODULE_ID,"pointBuyDone") || actor.getFlag(MODULE_ID,"creatorAbilitiesReviewed")) return false;
+        if (!["class","race","background"].some(type=>hasType(actor,type))) return pointBuy(actor);
+        const es = game.i18n.lang.startsWith("es");
+        const ok = await confirmDialog(t("Create.Steps.abilities"), es ?
+          "<p>Este personaje ya tiene avances. Revisa sus atributos en la hoja nativa para no sobrescribir bonificaciones. ¿Confirmas los valores actuales?</p>" :
+          "<p>This character already has advancement grants. Review ability scores on the native sheet to avoid overwriting bonuses. Confirm current values?</p>");
+        if (!ok || !actor.isOwner) return false;
+        await actor.setFlag(MODULE_ID,"creatorAbilitiesReviewed",true);
+        return true;
+      } },
     { key: "class", locked: hasType(actor,"class"), icon: "fas fa-user-graduate", done: hasType(actor, "class"), run: pick("jjk5e-classes", "class", t("Create.Class")) },
     { key: "technique", locked: !hasType(actor,"class"), icon: "fas fa-hand-sparkles", done: hr || !!actor.getFlag(MODULE_ID, "technique"), skip: hr, run: () => chooseTechnique(actor) },
     { key: "ceAbility", locked: !hasType(actor,"class"), icon: "fas fa-brain", done: hr || !!actor.getFlag(MODULE_ID, "ceAbility"), skip: hr, run: () => chooseCEAbility(actor) },

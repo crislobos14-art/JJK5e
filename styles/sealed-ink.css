@@ -237,3 +237,47 @@
 @keyframes jjk-sealed-notice{from{opacity:0;transform:translateX(12px)}to{opacity:1;transform:none}}
 @media(max-width:900px){.jjk-sealed-event-dock,.jjk-sealed-event-panel,.jjk-sealed-event-toasts{right:12px}}
 @media(prefers-reduced-motion:reduce){.jjk-sealed-event-toast{animation:none!important}}
+
+/* Character Creation Engine: scoped to the opt-in Sealed Ink module surface. */
+.jjk-sealed-surface .jjk-creation-engine{display:grid;gap:8px;border:1px solid var(--jjk-edge);border-top:2px solid var(--jjk-seal);padding:10px;background:var(--jjk-ink);min-width:0}
+.jjk-sealed-surface .jjk-creation-heading{display:flex;justify-content:space-between;align-items:center;gap:8px;border-bottom:1px solid var(--jjk-edge);padding-bottom:7px}
+.jjk-sealed-surface .jjk-creation-kicker,.jjk-sealed-surface .jjk-creation-score small,.jjk-sealed-surface .jjk-creation-summary dt{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--jjk-muted)}
+.jjk-sealed-surface .jjk-creation-lead h2{margin:3px 0;font-size:24px;line-height:1.05;text-transform:uppercase;color:var(--jjk-bone);border:0}
+.jjk-sealed-surface .jjk-creation-counter,.jjk-sealed-surface .jjk-creation-score strong{font-family:"Big Shoulders", "Arial Narrow", sans-serif;font-weight:700;font-variant-numeric:tabular-nums;line-height:1}
+.jjk-sealed-surface .jjk-creation-counter{font-size:36px;white-space:nowrap}
+.jjk-sealed-surface .jjk-creation-gm{color:var(--jjk-gold);font-size:10px;text-transform:uppercase;letter-spacing:.08em}
+.jjk-sealed-surface .jjk-creation-progress{width:100%;height:8px;accent-color:var(--jjk-energy);border:0;border-radius:0}
+.jjk-sealed-surface .jjk-creation-scores{display:grid;grid-template-columns:repeat(auto-fit,minmax(51px,1fr));gap:3px}
+.jjk-sealed-surface .jjk-creation-score{display:grid;gap:3px;text-align:center;padding:6px 2px;background:var(--jjk-card);border:1px solid var(--jjk-edge)}
+.jjk-sealed-surface .jjk-creation-score strong{font-size:25px;color:var(--jjk-bone)}
+.jjk-sealed-surface .jjk-creation-score span{color:var(--jjk-muted);font-variant-numeric:tabular-nums}
+.jjk-sealed-surface .jjk-creation-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:3px;margin:0}
+.jjk-sealed-surface .jjk-creation-summary div{min-width:0;background:var(--jjk-card);border-left:2px solid var(--jjk-edge);padding:6px}
+.jjk-sealed-surface .jjk-creation-summary dd{margin:3px 0 0;color:var(--jjk-bone);overflow-wrap:anywhere}
+.jjk-sealed-surface .jjk-creation-review{border:1px solid var(--jjk-edge);padding:7px;background:var(--jjk-card)}
+.jjk-sealed-surface .jjk-creation-review summary{cursor:pointer;font-weight:700;color:var(--jjk-bone);padding:3px}
+.jjk-sealed-surface .jjk-creation-review summary[data-state=blocked]{border-left:3px solid var(--jjk-seal)}
+.jjk-sealed-surface .jjk-creation-review summary[data-state=ready]{border-left:3px solid var(--jjk-bone)}
+.jjk-sealed-surface .jjk-creation-note,.jjk-sealed-surface .jjk-creation-error{font-size:11px;line-height:1.35;margin:5px 0;color:var(--jjk-muted);overflow-wrap:anywhere}
+.jjk-sealed-surface .jjk-creation-error{color:var(--jjk-bone);border-left:2px solid var(--jjk-seal);padding-left:6px}
+.jjk-sealed-surface .jjk-creation-sheet{width:100%;min-height:28px;margin-top:5px;border-radius:0}
+
+/* Sealed Ink combat interaction — restricted to the existing JJK panel. */
+.jjk-sealed-surface .jjk-combat-engine{display:grid;gap:7px;min-width:0;padding:8px;margin-bottom:7px;background:var(--jjk-ink);border:1px solid var(--jjk-edge);border-top:2px solid var(--jjk-seal)}
+.jjk-sealed-surface .jjk-combat-heading{display:flex;align-items:center;justify-content:space-between;gap:6px;border-bottom:1px solid var(--jjk-edge)}
+.jjk-sealed-surface .jjk-combat-heading h3{font-size:18px;text-transform:uppercase;margin:0 0 5px}
+.jjk-sealed-surface .jjk-combat-heading small,.jjk-sealed-surface .jjk-combat-resource small,.jjk-sealed-surface .jjk-combat-state small{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--jjk-muted)}
+.jjk-sealed-surface .jjk-combat-resources,.jjk-sealed-surface .jjk-combat-economy{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3px}
+.jjk-sealed-surface .jjk-combat-resource,.jjk-sealed-surface .jjk-combat-state{display:grid;gap:3px;padding:5px;border:1px solid var(--jjk-edge);background:var(--jjk-card);min-width:0}
+.jjk-sealed-surface .jjk-combat-resource strong{font-family:"Big Shoulders","Arial Narrow",sans-serif;font-size:26px;font-variant-numeric:tabular-nums}
+.jjk-sealed-surface .jjk-combat-resource:last-child strong{color:var(--jjk-energy)}
+.jjk-sealed-surface .jjk-combat-state span{font-size:11px;overflow-wrap:anywhere}
+.jjk-sealed-surface .jjk-combat-state:is([data-state=used],[data-state=locked]){border-left:3px solid var(--jjk-seal)}
+.jjk-sealed-surface .jjk-combat-state[data-state=unknown]{opacity:.75}
+.jjk-sealed-surface .jjk-combat-list{display:grid;gap:3px;max-height:240px;overflow:auto}
+.jjk-sealed-surface .jjk-combat-row{display:flex;align-items:center;gap:4px;padding:5px;border:1px solid var(--jjk-edge);background:var(--jjk-card)}
+.jjk-sealed-surface .jjk-combat-row>div{flex:1;min-width:0;overflow-wrap:anywhere}
+.jjk-sealed-surface .jjk-combat-row strong,.jjk-sealed-surface .jjk-combat-row small{display:block}
+.jjk-sealed-surface .jjk-combat-row small,.jjk-sealed-surface .jjk-combat-hint{font-size:10px;color:var(--jjk-muted)}
+.jjk-sealed-surface .jjk-combat-row button{width:auto;flex:0 0 auto;min-height:25px;font-size:10px;border-radius:0}
+.jjk-sealed-surface .jjk-combat-warning{border-left:2px solid var(--jjk-seal);padding-left:6px;color:var(--jjk-bone)}

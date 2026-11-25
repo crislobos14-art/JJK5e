@@ -1,3 +1,5 @@
+import { enhanceCharacterCreation } from "./sealed-ink-creator.mjs";
+import { enhanceCombatInteraction } from "./sealed-ink-combat.mjs";
 /**
  * Sealed Ink sheet foundation. Presentation only: all document writes and
  * activity execution remain in the native sheet and existing JJK engines.
@@ -408,6 +410,8 @@ function apply(app, element) {
     for (const el of root.querySelectorAll(".jjk-sealed-choice-hidden")) el.classList.remove("jjk-sealed-choice-hidden");
     root.classList.remove("jjk-sealed-arrival");
   }
+  enhanceCharacterCreation(app, root, surface && category === "module");
+  enhanceCombatInteraction(app, root, surface && category === "module");
   watch(app, root, surface || sealed, category);
 }
 
@@ -540,6 +544,21 @@ Hooks.once("ready", () => {
     }
   });
   for (const h of ["createItem","updateItem","deleteItem"]) Hooks.on(h, refreshLinks);
+  // Turn and movement changes can happen without re-rendering an actor document.
+  let combatRefreshQueued = false;
+  const refreshCombat = () => {
+    if (combatRefreshQueued) return;
+    combatRefreshQueued = true;
+    queueMicrotask(() => {
+      combatRefreshQueued = false;
+      for (const [app,root] of live) {
+        if (!root.isConnected || !root.classList.contains("jjk5e-panel-app") || app._busy) continue;
+        try { enhanceCombatInteraction(app,root,root.classList.contains(SURFACE)); }
+        catch (err) { console.warn(ID + " | combat interaction refresh",err); }
+      }
+    });
+  };
+  for (const hook of ["updateCombat","deleteCombat","createCombat","moveToken","updateActor","createItem","updateItem","deleteItem","createActiveEffect","updateActiveEffect","deleteActiveEffect","dnd5e.postUseActivity","midi-qol.RollComplete"]) Hooks.on(hook,refreshCombat);
   document.addEventListener("click", visualEvent, { passive: true });
   document.addEventListener("pointermove", pointerEvent, { passive: true });
   document.addEventListener("visibilitychange", () => { if (document.hidden) stopParticles(); });
