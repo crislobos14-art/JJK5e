@@ -202,12 +202,14 @@ export function enhanceActorWorkspace(app,root,active,resources=()=>[]){
  const engine=api();if(!engine)return;
  const s=getState(app,actor),m=workspaceModel(actor,engine);
  const links=s.tab==="summon"?linkedEntities(actor,canvas?.scene?.tokens,game.user).map(t=>[t.id,t.name,t.actor?.isOwner]):[];
- const signature=JSON.stringify([actor.name,actor.img,m,combatRows(actor,engine),engine.ceHistory?.(actor),links,s.tab,s.mini,s.reverse,game.user.isGM]);
+ const activityTab=!s.mini&&(s.tab==="combat"||s.tab==="technique");
+ const signature=JSON.stringify([actor.uuid,actor.name,actor.img,m,activityTab?combatRows(actor,engine):null,
+  s.tab==="combat"&&!s.mini?engine.ceHistory?.(actor):null,links,s.tab,s.mini,s.reverse,game.user.isGM]);
  if(old?.dataset.signature===signature)return true;
  // Preserve text input focus: its query remains in the local state and the native render is not intercepted.
- const focused=old?.contains(document.activeElement)&&document.activeElement?.tagName==="INPUT";
+ const focused=old?.dataset.actorUuid===actor.uuid&&old.contains(document.activeElement)&&document.activeElement?.tagName==="INPUT";
  if(focused){if(!old.dataset.refreshPending){old.dataset.refreshPending="true";old.addEventListener("focusout",()=>{delete old.dataset.refreshPending;queueMicrotask(()=>enhanceActorWorkspace(app,root,active,resources));},{once:true});}return true;}
- const shell=el("section","jjk-actor-workspace");shell.dataset.signature=signature;shell.dataset.entity=m.npc?"npc":"character";shell.dataset.mini=String(s.mini);shell.dataset.reverse=String(s.reverse);
+ const shell=el("section","jjk-actor-workspace");shell.dataset.signature=signature;shell.dataset.actorUuid=actor.uuid;shell.dataset.entity=m.npc?"npc":"character";shell.dataset.mini=String(s.mini);shell.dataset.reverse=String(s.reverse);
  const header=el("header","jjk-workspace-header"),name=el("div","jjk-workspace-name"),tools=el("div","jjk-workspace-tools");
  if(actor.img){const image=el("img","jjk-workspace-portrait");image.src=actor.img;image.alt="";header.append(image);}
  name.append(el("small","",m.npc?tr("SEALED ENTITY","ENTIDAD SELLADA"):tr("JUJUTSU HIGH / SORCERER","ESCUELA JUJUTSU / HECHICERO")),el("h2","",actor.name),el("span","",textValue(m.technique??(m.npc?actor.system?.details?.type?.value:null))));
