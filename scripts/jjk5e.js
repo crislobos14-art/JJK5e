@@ -3795,14 +3795,17 @@ async function jjkFeatDocs() {
 
 /** What an eligible feat builds on for this actor: its technique, its race, its class, or nothing in particular. */
 function featFit(actor, doc) {
-  const sub = doc.system?.type?.subtype;
   const pre = doc.flags?.jjk5e?.prereq ?? {};
   const names = [...(pre.features ?? []).flat(), ...(pre.prefixes ?? []).flat()].map((n) => normName(n));
   const ownedBy = (test) => actor.items.filter(test).map((i) => normName(baseName(i)));
   const matches = (list) => names.some((n) => list.some((o) => o === n || o.startsWith(n)));
   const techniques = [...actorTechniques(actor)];
-  if (doc.flags?.jjk5e?.technique || (pre.techniques ?? []).length || ["jjkTechnique", "jjkCursedTechnique"].includes(sub)
-      || matches(ownedBy((i) => i.flags?.jjk5e?.technique)) || techniques.some((n) => names.includes(n))) return "technique";
+  // Only technique feats (jjkTechnique, always tied to one technique by data) or feats tied to the actor's
+  // technique. The general "Cursed Technique" feats (jjkCursedTechnique: Flow Technique, Infinity (Minor
+  // Innate Technique)…) fit any sorcerer and stay in their category.
+  if ((doc.flags?.jjk5e?.forTechniques ?? []).length || doc.flags?.jjk5e?.technique || (pre.techniques ?? []).length
+      || doc.system?.type?.subtype === "jjkTechnique"
+      || matches(ownedBy((i) => i.flags?.jjk5e?.technique && i.type !== "background")) || techniques.some((n) => names.includes(n))) return "technique";
   if (matches(ownedBy((i) => i.type === "race" || i.system?.type?.value === "race"))) return "race";
   if (matches(ownedBy((i) => ["class", "subclass"].includes(i.type) || i.system?.type?.value === "class")) || pre.level) return "class";
   return "general";
