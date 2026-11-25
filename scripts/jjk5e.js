@@ -709,7 +709,9 @@ async function recoverCEWorld(){
 }
 function integrationReport(){
   if(!game.user.isGM) return null;
-  const modules=["midi-qol","dae","lib-wrapper","times-up","sequencer","JB2A_DnD5e","autoanimations","tokenmagic","fxmaster"];
+  const modules=["midi-qol","dae","lib-wrapper","times-up","sequencer","JB2A_DnD5e","autoanimations","tokenmagic","fxmaster","token-action-hud-core","token-action-hud-dnd5e","socketlib",
+    "quick-insert","combat-tracker-dock","monks-tokenbar","monks-enhanced-journal","forien-quest-log",
+    "item-piles","itempilesdnd5e","tidy5e-sheet"];
   return {foundry:game.version??game.release?.version??null,dnd5e:game.system?.version??null,
     dependencies:modules.map(id=>({id,active:!!game.modules.get(id)?.active,version:game.modules.get(id)?.version??null})),
     ...ceDiagnostics(null),pending:engineActors().flatMap(a=>ceLedger(findPool(a)).filter(x=>["reserved","review"].includes(x.state))
@@ -2829,6 +2831,16 @@ function refreshPanels(actor) {
   const app = PANELS.get(actor.uuid);
   if (app?.rendered) app.render();
 }
+
+Hooks.once("tidy5e-sheet.ready", api => {
+  const selector = api.constants?.SHEET_PARTS?.NAME_CONTAINER;
+  if (!selector || typeof api.models?.HtmlContent !== "function" || typeof api.registerCharacterContent !== "function") return;
+  api.registerCharacterContent(new api.models.HtmlContent({
+    html: '<span hidden aria-hidden="true" class="jjk5e-tidy-anchor"></span>',
+    injectParams: { selector: `[data-tidy-sheet-part="${selector}"]`, position: "afterend" },
+    onRender: ({ app, element }) => addHeaderButton(app, element)
+  }));
+});
 
 function addHeaderButton(app, root) {
   if (!setting("headerButton")) return;
