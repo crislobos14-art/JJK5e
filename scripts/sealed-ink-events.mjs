@@ -141,8 +141,11 @@ const TONE = {
 function tone(key) { return TONE[key] ?? TONE.info; }
 /** Keep fixed Sealed Ink UI clear of the Foundry sidebar, open or collapsed. */
 function place() {
+  // offsetParent is always null for a fixed-position sidebar: measure its box instead.
   const side = document.getElementById("sidebar");
-  const width = side && side.offsetParent !== null ? Math.round(side.getBoundingClientRect().width) : 0;
+  const box = side?.getBoundingClientRect?.();
+  const shown = !!box && box.width > 0 && box.height > 0 && getComputedStyle(side).visibility !== "hidden";
+  const width = shown ? Math.round(Math.max(0, window.innerWidth - box.left)) : 0;
   document.documentElement.style.setProperty("--jjk-sealed-right", Math.max(12, width + 14) + "px");
 }
 function dismiss(node) {

@@ -80,8 +80,8 @@ test("notices pause, leave with an exit state and stay clear of the sidebar", ()
   const place = fn(events, "place");
   const props = new Map();
   runInNewContext(place + "\nplace();", { document: {
-    getElementById: () => ({ offsetParent: {}, getBoundingClientRect: () => ({ width: 300 }) }),
+    getElementById: () => ({ getBoundingClientRect: () => ({ left: 1300, width: 300, height: 900 }) }),
     documentElement: { style: { setProperty: (k, v) => props.set(k, v) } }
-  }, Math });
+  }, getComputedStyle: () => ({ visibility: "visible" }), window: { innerWidth: 1600 }, Math });
   assert.equal(props.get("--jjk-sealed-right"), "314px");
 });

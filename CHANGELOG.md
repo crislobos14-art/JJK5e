@@ -1,5 +1,10 @@
 # Changelog
 
+## Próximo release (pendiente, 3 de 5 cambios)
+- Energía maldita en el formato de la ficha: la EM ya no vive solo en la tarjeta JJK. Es un medidor como los de PG y Dados de Golpe: en personajes va bajo los Dados de Golpe; en PNJ, bajo los PG de la cabecera. Al hacer clic se escribe el valor (15 fija, +3 recupera, -2 gasta) usando las mismas reglas y autoridad del DJ que el resto de la EM; − / + y el engranaje (controles JJK) quedan junto al título. La EM reservada pendiente se ve rayada con un candado y bloquea la edición con un aviso; con la EM baja (umbral Sealed Ink) el borde pasa a rojo. En Sealed Ink el medidor es violeta de energía y los Dados de Golpe pasan a gris hueso para no confundirse. La fila de EM de la tarjeta JJK y la casilla del resumen se ocultan cuando el medidor está visible. Ajuste de cliente «Medidor de energía maldita en las fichas».
+- Avisos Sealed Ink: los avisos, el botón «Controles JJK» y el panel no detectaban la barra lateral de Foundry cuando usa posición fija y quedaban debajo de ella. Ahora miden su posición real, abierta o plegada.
+- Medidor de EM robusto: ocupa toda su altura aunque otro módulo cambie el estilo base de los medidores. Verificado en navegador real (Chrome) con 41 comprobaciones de interacción (medidor de EM, teclado, tablas adaptables, ventanas fluidas) y 19 del centro de avisos.
+
 ## 1.92.0 — Sealed Ink, herramientas de mesa y compatibilidad opcional
 - Tidy 5e Sheets: acceso al panel JJK desde las fichas de personaje compatibles. Quick Insert: abre la búsqueda externa con la consulta escrita en Sealed Ink.
 - El diagnóstico del GM detecta los módulos opcionales y muestra sus versiones.
