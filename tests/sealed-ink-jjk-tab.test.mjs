@@ -47,5 +47,7 @@ test("workspace mounts in the JJK tab when present; back returns to the last nat
   assert.match(ws, /const shown=s\.tab\?\?\(inTab\?tabs\[0\]\[0\]:null\)/);
   assert.match(ws, /app\.changeTab\(back\?\?first,"primary"\)/);
   assert.match(src, /function rememberNativeTab\(app, root\)/);
-  assert.match(css, /\.jjk-actor-workspace\[data-mode=tab\]\{display:grid;grid-template-columns:minmax\(150px,190px\) minmax\(0,1fr\)/);
+  assert.match(css, /\.jjk-tab-host\{[^}]*container-type:inline-size/, "layout measures the width available to the JJK tab");
+  assert.match(css, /\.jjk-actor-workspace\[data-mode=tab\]\{display:grid;grid-template-columns:minmax\([^)]*\) minmax\(0,1fr\)/);
+  assert.match(css, /@container\s*\(max-width:\s*\d+px\)\s*\{\s*\.jjk-actor-workspace\[data-mode=tab\]\{grid-template-columns:minmax\(0,1fr\)/);
 });

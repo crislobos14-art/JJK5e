@@ -436,6 +436,64 @@ button.jjk5e-levelup { display: block; margin: 4px auto 0; padding: 2px 10px; fo
 .jjk5e-strip.jjk-sheetcard .jjk-sc-grid button { width: 100%; }
 .jjk5e-strip.jjk-sheetcard .jjk-grade-badge { color: #fff; }
 .jjk5e-strip.jjk-sheetcard .jjk-sc-head, .jjk5e-strip.jjk-sheetcard .jjk-sc-chips { width: 100%; justify-content: flex-start; text-align: left; }
+.jjk-sealed-sheet .jjk-sheetcard.in-sidebar {
+  align-items: stretch;
+  margin-inline: 0;
+  min-inline-size: 0;
+  border-block-start: 1px solid #715765;
+  border-radius: 3px;
+  box-shadow: none;
+}
+.jjk-sealed-sheet .jjk-sheetcard.in-sidebar .jjk-sc-head {
+  padding-block-end: 5px;
+  border-block-end: 1px solid var(--sc-line);
+}
+.jjk-sealed-sheet .jjk-sheetcard.in-sidebar :is(.jjk-sc-head span,.jjk-sc-chips > *) {
+  max-inline-size: 100%;
+  height: auto;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.jjk-sealed-sheet .jjk-sheetcard.in-sidebar .jjk-sc-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 5.5rem), 1fr));
+}
+.jjk-sealed-sheet .jjk-sheetcard.in-sidebar .jjk-sc-grid button {
+  min-height: 30px;
+  height: auto;
+  padding: 4px 6px;
+  line-height: 1.2;
+  white-space: normal;
+  text-align: start;
+}
+.jjk-sealed-sheet .jjk-sheetcard.in-sidebar .jjk-sc-grid button span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.jjk-sealed-sheet .jjk-sheetcard.in-sidebar button.jjk-primary {
+  background: #4b2b37;
+  border-color: #ab7185;
+}
+
+.jjk-domain-clash .jjk-domain-clash-casters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 6rem), 1fr));
+  gap: 6px;
+  padding: 0;
+  list-style: none;
+}
+.jjk-domain-clash-casters li {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+  padding: 6px 8px;
+  border-inline-start: 2px solid #927ab8;
+  background: var(--color-bg-option, #8472a31c);
+  overflow-wrap: anywhere;
+}
+.jjk-domain-clash-casters li[data-role="winner"] { border-inline-start-color: #a17843; }
+.jjk-domain-clash-casters li[data-role="loser"] { border-inline-start-color: #ad4e64; }
+.jjk-domain-clash-casters .jjk-domain-clash-score { font-size: 1.15em; font-variant-numeric: tabular-nums; }
+
 /* optional rules: the window scrolls (30 rules); Save stays at the bottom */
 .jjk5e-optrules .window-content { overflow-y: auto; display: flex; flex-direction: column; }
 .jjk-optrules { display: flex; flex-direction: column; min-height: 0; flex: 1; }
