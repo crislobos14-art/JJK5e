@@ -694,3 +694,20 @@
 .jjk-sealed-sheet.dnd5e2 .jjk-ce-group > .label{color:var(--jjk-muted);letter-spacing:.08em;text-transform:uppercase}
 .jjk-sealed-motion.dnd5e2 .meter.jjk-cursed-energy > .progress::before{transition:width 380ms var(--jjk-ease,ease-out)}
 @media(prefers-reduced-motion:reduce){.jjk-sealed-motion.dnd5e2 .meter.jjk-cursed-energy > .progress::before{transition:none}}
+
+/* Issue #23 — JJK tab in the sheet's own rail. Section list on the left, content on the right; one column when narrow. */
+.jjk-sealed-sheet .jjk-sheet-tab .jjk-tab-host{min-width:0}
+.jjk-actor-workspace[data-mode=tab]{display:grid;grid-template-columns:minmax(150px,190px) minmax(0,1fr);align-items:start;gap:10px;padding:0;background:none;border:0}
+.jjk-actor-workspace[data-mode=tab] .jjk-workspace-tabs{position:sticky;top:0;display:flex;flex-direction:column;flex-wrap:nowrap;gap:3px;padding:6px;border:1px solid var(--jjk-edge);border-top:2px solid var(--jjk-seal);background:var(--jjk-card)}
+.jjk-actor-workspace[data-mode=tab] .jjk-workspace-tabs button{width:100%;justify-content:flex-start;text-align:start;min-height:30px;padding:5px 8px;font:700 12px/1.15 var(--jjk-display);letter-spacing:.05em;text-transform:uppercase}
+.jjk-actor-workspace[data-mode=tab] .jjk-workspace-tabs .jjk-workspace-back{margin-bottom:4px;background:none;border-style:dashed;color:var(--jjk-muted);text-transform:none;letter-spacing:0;font:600 11px/1.2 inherit}
+.jjk-actor-workspace[data-mode=tab] .jjk-workspace-tabs .jjk-workspace-back::before{content:"\2190  "}
+.jjk-actor-workspace[data-mode=tab] .jjk-workspace-tabs button[aria-pressed=true]{box-shadow:inset 3px 0 var(--jjk-seal)}
+.jjk-actor-workspace[data-mode=tab] .jjk-workspace-content{max-height:none;overflow:visible;padding:8px;border:1px solid var(--jjk-edge);background:var(--jjk-card);min-height:220px}
+.jjk-actor-workspace[data-mode=tab] .jjk-workspace-list{max-height:none}
+@container (max-width:640px){
+  .jjk-actor-workspace[data-mode=tab]{grid-template-columns:minmax(0,1fr)}
+  .jjk-actor-workspace[data-mode=tab] .jjk-workspace-tabs{position:static;flex-direction:row;flex-wrap:wrap}
+  .jjk-actor-workspace[data-mode=tab] .jjk-workspace-tabs button{width:auto;flex:1 1 30%}
+  .jjk-actor-workspace[data-mode=tab] .jjk-workspace-tabs .jjk-workspace-back{flex-basis:100%}
+}

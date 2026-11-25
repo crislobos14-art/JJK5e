@@ -5,7 +5,6 @@ const tr=(en,es)=>game.i18n.lang.startsWith("es")?es:en;
 const docs=value=>Array.from(value??[]);
 const flag=(a,k)=>a?.getFlag?.(ID,k)??a?.flags?.[ID]?.[k];
 const finite=n=>typeof n==="number"&&Number.isFinite(n);
-const textValue=v=>v==null||v===""?"—":String(v);
 const api=()=>game.modules.get(ID)?.api;
 const liveActor=app=>app.actor??app.document;
 const states=new WeakMap();
@@ -189,7 +188,11 @@ export function enhanceActorWorkspace(app,root,active,resources=()=>[]){
  const actor=liveActor(app),old=root.querySelector(".jjk-actor-workspace");
  // Only the selectable Sealed Ink sheet classes get the workspace: default native sheets keep their own layout.
  if(!active||app?.constructor?.jjkSealedInk!==true||!actor?.isOwner||!["character","npc"].includes(actor.type)){old?.remove();return false;}
- const host=root.querySelector(".sheet-body .main-content > .tab-body");
+ // Issue #23: inside the sheet's own JJK tab when the Sealed Ink class provides it; the strip above the
+ // native tab body is only a fallback for a sheet without that tab.
+ const tabHost=root.querySelector('.tab[data-tab="jjk"] .jjk-tab-host');
+ const host=tabHost??root.querySelector(".sheet-body .main-content > .tab-body");
+ const inTab=!!tabHost;
  const engine=api();
  // A limited or unfamiliar sheet keeps its own layout and the existing fallback controls.
  if(!host||!engine){old?.remove();return false;}
@@ -197,10 +200,12 @@ export function enhanceActorWorkspace(app,root,active,resources=()=>[]){
  const tabs=actor.type==="npc"?[["combat",tr("Actions","Acciones")],["traits",tr("Traits","Rasgos")],["effects",tr("Effects","Efectos")],["summon",tr("Link / storage","Vínculo / almacén")],["body",tr("Body","Cuerpo")],["inventory",tr("Inventory","Inventario")],["domain",tr("Domain","Dominio")]]:
     [["combat",tr("Combat","Combate")],["technique",tr("Technique","Técnica")],["progression",tr("Progression","Progresión")],["body",tr("Body & soul","Cuerpo y alma")],["inventory",tr("Inventory","Inventario")],["vows",tr("Vows","Votos")],["summon",tr("Summons","Invocaciones")],["domain",tr("Domain","Dominio")],["effects",tr("Effects","Efectos")]];
  if(!tabs.some(([id])=>id===s.tab))s.tab=null;
- const m=s.tab?workspaceModel(actor,engine):null;
- const links=s.tab==="summon"?linkedEntities(actor,canvas?.scene?.tokens,game.user).map(t=>[t.id,t.name,t.actor?.isOwner]):[];
- const list=s.tab==="combat"||s.tab==="technique"?combatRows(actor,engine):null;
- const signature=JSON.stringify([actor.uuid,s.tab,m,list,s.tab==="combat"?engine.ceHistory?.(actor):null,links,game.user.isGM]);
+ // In the JJK tab there is no "native" view to show: the rail holds the native tabs. Show the first section.
+ const shown=s.tab??(inTab?tabs[0][0]:null);
+ const m=shown?workspaceModel(actor,engine):null;
+ const links=shown==="summon"?linkedEntities(actor,canvas?.scene?.tokens,game.user).map(t=>[t.id,t.name,t.actor?.isOwner]):[];
+ const list=shown==="combat"||shown==="technique"?combatRows(actor,engine):null;
+ const signature=JSON.stringify([actor.uuid,inTab,shown,m,list,shown==="combat"?engine.ceHistory?.(actor):null,links,game.user.isGM]);
  if(old?.parentElement===host&&old.dataset.signature===signature)return true;
  const focused=document.activeElement;
  const sameWorkspace=old?.parentElement===host&&old.dataset.actorUuid===actor.uuid;
@@ -219,44 +224,55 @@ export function enhanceActorWorkspace(app,root,active,resources=()=>[]){
  const shell=el("section","jjk-actor-workspace");
  shell.dataset.signature=signature;
  shell.dataset.actorUuid=actor.uuid;
+ shell.dataset.mode=inTab?"tab":"strip";
+ shell.dataset.entity=actor.type==="npc"?"npc":"character";
  const nav=el("nav","jjk-workspace-tabs");
  nav.setAttribute("aria-label",tr("JJK tools","Herramientas JJK"));
  const pick=id=>{
   const current=liveActor(app);
   if(!shell.isConnected||current?.uuid!==actor.uuid||!current.isOwner)return;
+  if(id===null&&inTab){
+   // Back to the native tab the player came from (or the sheet's first tab): the rail stays the only tab bar.
+   const back=app._jjkLastNativeTab&&app._jjkLastNativeTab!=="jjk"?app._jjkLastNativeTab:null;
+   const first=root.querySelector('nav.tabs [data-tab]:not([data-tab="jjk"])')?.dataset.tab;
+   if(typeof app.changeTab==="function"&&(back??first))app.changeTab(back??first,"primary");
+   root.querySelector('nav.tabs [data-tab="'+(back??first)+'"]')?.focus?.();
+   return;
+  }
   s.tab=id;
   save(current,s);
   enhanceActorWorkspace(app,root,true,resources);
   root.querySelector('.jjk-actor-workspace [data-section="'+(id??"native")+'"]')?.focus();
  };
- for(const [id,label] of [[null,tr("Native sheet","Ficha nativa")],...tabs]){
+ for(const [id,label] of [[null,inTab?tr("Back to sheet","Volver a la ficha"):tr("Native sheet","Ficha nativa")],...tabs]){
   const b=button(label,()=>pick(id));
   b.dataset.section=id??"native";
-  b.setAttribute("aria-pressed",String(s.tab===id));
+  b.setAttribute("aria-pressed",String(inTab?shown===id:s.tab===id));
+  if(id===null&&inTab)b.classList.add("jjk-workspace-back");
   nav.append(b);
  }
  shell.append(nav);
- if(s.tab){
+ if(shown){
   shell.addEventListener("keydown",event=>{
    if(event.key!=="Escape"||event.defaultPrevented||event.target.matches("input,select,textarea"))return;
    event.preventDefault();
    event.stopPropagation();
    pick(null);
   });
-  const content=el("div","jjk-workspace-content");content.setAttribute("aria-label",tabs.find(t=>t[0]===s.tab)?.[1]??"");
-  if(s.tab==="combat"){addCommands(content,app,actor.uuid,[[tr("Combat engine","Motor de combate"),"openPanel",["combat"]]]);drawActivities(content,app,actor,s);if(m.ce!==null)drawEnergyHistory(content,app,actor,s);}
-  else if(s.tab==="technique"){addCommands(content,app,actor.uuid,[[tr("Choose technique","Elegir técnica"),"chooseTechnique"]]);drawActivities(content,app,actor,s,true);drawItems(content,app,actor,m.items.filter(i=>i.technique));}
-  else if(s.tab==="traits")drawItems(content,app,actor,m.items.filter(i=>i.type==="feat"||i.technique));
-  else if(s.tab==="effects"){for(const e of m.effects){const row=el("div","jjk-workspace-entry");row.append(el("span","",e.name),button(tr("Inspect","Consultar"),()=>openDocument(app,actor.uuid,"effect",e.id)));content.append(row);}if(!m.effects.length)content.append(el("p","jjk-workspace-muted",tr("No active effects.","Sin efectos activos.")));}
-  else if(s.tab==="progression"){addCommands(content,app,actor.uuid,[[tr("Creation","Creación"),"createCharacterWizard"],[tr("Level up","Subir nivel"),"levelUp"],[tr("Career","Carrera"),"openCareer"]]);drawItems(content,app,actor,m.items.filter(i=>["class","race","background","feat"].includes(i.type)));}
-  else if(s.tab==="body"){content.append(el("p","",tr("Soul awareness: ","Percepción del alma: ")+m.soul));const injured=Object.entries(m.limbs).filter(([,status])=>status&&status!=="ok");
+  const content=el("div","jjk-workspace-content");content.setAttribute("aria-label",tabs.find(t=>t[0]===shown)?.[1]??"");
+  if(shown==="combat"){addCommands(content,app,actor.uuid,[[tr("Combat engine","Motor de combate"),"openPanel",["combat"]]]);drawActivities(content,app,actor,s);if(m.ce!==null)drawEnergyHistory(content,app,actor,s);}
+  else if(shown==="technique"){addCommands(content,app,actor.uuid,[[tr("Choose technique","Elegir técnica"),"chooseTechnique"]]);drawActivities(content,app,actor,s,true);drawItems(content,app,actor,m.items.filter(i=>i.technique));}
+  else if(shown==="traits")drawItems(content,app,actor,m.items.filter(i=>i.type==="feat"||i.technique));
+  else if(shown==="effects"){for(const e of m.effects){const row=el("div","jjk-workspace-entry");row.append(el("span","",e.name),button(tr("Inspect","Consultar"),()=>openDocument(app,actor.uuid,"effect",e.id)));content.append(row);}if(!m.effects.length)content.append(el("p","jjk-workspace-muted",tr("No active effects.","Sin efectos activos.")));}
+  else if(shown==="progression"){addCommands(content,app,actor.uuid,[[tr("Creation","Creación"),"createCharacterWizard"],[tr("Level up","Subir nivel"),"levelUp"],[tr("Career","Carrera"),"openCareer"]]);drawItems(content,app,actor,m.items.filter(i=>["class","race","background","feat"].includes(i.type)));}
+  else if(shown==="body"){content.append(el("p","",tr("Soul awareness: ","Percepción del alma: ")+m.soul));const injured=Object.entries(m.limbs).filter(([,status])=>status&&status!=="ok");
   for(const [limb,status] of injured)content.append(el("p","",game.i18n.localize("JJK5E.Limb."+limb)+" · "+game.i18n.localize("JJK5E.Limb."+status)));
   if(!injured.length)content.append(el("p","jjk-workspace-muted",tr("No limb damage.","Sin daño en extremidades.")));addCommands(content,app,actor.uuid,[[tr("Body / RCT controls","Controles cuerpo / RCT"),"openPanel",["body"]]]);}
-  else if(s.tab==="inventory")drawItems(content,app,actor,m.items.filter(i=>["weapon","equipment","consumable","tool","loot","container"].includes(i.type)));
-  else if(s.tab==="vows")addCommands(content,app,actor.uuid,[[tr("Binding vows","Votos vinculantes"),"openVows"]]);
-  else if(s.tab==="domain")addCommands(content,app,actor.uuid,[[tr("Domain HUD","Panel de dominio"),"openDomainHUD"],[tr("Combat engine","Motor de combate"),"openPanel",["combat"]]]);
-  else if(s.tab==="summon")drawSummons(content,app,actor,m,resources);
-  if(game.user.isGM&&s.tab==="combat")addCommands(content,app,actor.uuid,[[tr("GM controls","Controles GM"),"openPanel",["gm"]]]);
+  else if(shown==="inventory")drawItems(content,app,actor,m.items.filter(i=>["weapon","equipment","consumable","tool","loot","container"].includes(i.type)));
+  else if(shown==="vows")addCommands(content,app,actor.uuid,[[tr("Binding vows","Votos vinculantes"),"openVows"]]);
+  else if(shown==="domain")addCommands(content,app,actor.uuid,[[tr("Domain HUD","Panel de dominio"),"openDomainHUD"],[tr("Combat engine","Motor de combate"),"openPanel",["combat"]]]);
+  else if(shown==="summon")drawSummons(content,app,actor,m,resources);
+  if(game.user.isGM&&shown==="combat")addCommands(content,app,actor.uuid,[[tr("GM controls","Controles GM"),"openPanel",["gm"]]]);
   shell.append(content);
  }
  if(old?.parentElement===host)old.replaceWith(shell);
