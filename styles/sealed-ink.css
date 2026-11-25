@@ -240,7 +240,8 @@
 .jjk-sealed-event-toast button{position:absolute;right:5px;top:5px;width:24px;min-height:24px;}
 .jjk-sealed-event-toast:not([data-motion=off],[data-motion=performance]){animation:jjk-sealed-notice .22s ease-out}
 @keyframes jjk-sealed-notice{from{opacity:0;transform:translateX(12px)}to{opacity:1;transform:none}}
-@media(max-width:700px){.jjk-sealed-event-dock,.jjk-sealed-event-panel,.jjk-sealed-event-toasts{right:12px}}
+/* Narrow windows: keep the sidebar offset (a fixed 12px put notices under the sidebar) and shrink instead (Issue #19, point 4). */
+.jjk-sealed-event-dock,.jjk-sealed-event-panel,.jjk-sealed-event-toasts{box-sizing:border-box;max-width:calc(100vw - var(--jjk-sealed-right,325px) - 12px)}
 @media(prefers-reduced-motion:reduce){.jjk-sealed-event-toast{animation:none!important}}
 
 /* Character Creation Engine: scoped to the opt-in Sealed Ink module surface. */
