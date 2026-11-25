@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.87.0 — Cierre de dominio, dotes por técnica/raza/clase y ventanas redimensionables
+## 1.88.0 — Cierre de dominio, dotes por técnica/raza/clase y ventanas redimensionables
 - Cerrar dominio: el HUD usaba una copia vieja del actor (pasa con tokens no vinculados), así que el botón no cerraba nada. Ahora siempre lee el actor actual, el cierre funciona aunque el HUD tenga un id de apertura viejo, avisa si no se pudo y cierra la ventana.
 - Recuadro negro: la animación de oscuridad al abrir el dominio (jb2a.darkness) ahora dura 2,5 s con desvanecido y tiene nombre, así que también se elimina al cerrar el dominio.
 - Dotes al subir de nivel y en la creación: agrupadas primero por «Tu técnica», «Tu raza» y «Tu clase», y luego por categoría JJK. El filtro de Sealed Ink respeta ese orden.

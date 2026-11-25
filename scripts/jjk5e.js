@@ -3603,10 +3603,11 @@ function featGroupsHTML(actor, eligible) {
   const head = { technique: t("ASI.FitTechnique", { name: tech ?? "—" }), race: t("ASI.FitRace", { name: race?.name ?? "—" }), class: t("ASI.FitClass", { name: cls || "—" }) };
   const option = (d) => `<option value="${d.uuid}" data-fit="${featFit(actor, d)}">${esc(d.name)}</option>`;
   const out = [];
-  const fits = Object.groupBy(eligible, (d) => featFit(actor, d));
+  const groupBy = (list, key) => list.reduce((acc, d) => ((acc[key(d)] ??= []).push(d), acc), {});
+  const fits = groupBy(eligible, (d) => featFit(actor, d));
   for (const k of ["technique", "race", "class"]) if (fits[k]?.length) out.push(`<optgroup label="${esc(head[k])}">${fits[k].map(option).join("")}</optgroup>`);
   // General feats keep their JJK categories (Barrier, Cursed Energy, Physical…).
-  for (const [sub, list] of Object.entries(Object.groupBy(fits.general ?? [], (d) => d.system?.type?.subtype || "general"))
+  for (const [sub, list] of Object.entries(groupBy(fits.general ?? [], (d) => d.system?.type?.subtype || "general"))
     .sort(([a], [b]) => featCategoryLabel(a).localeCompare(featCategoryLabel(b)))) {
     out.push(`<optgroup label="${esc(featCategoryLabel(sub))}">${list.map(option).join("")}</optgroup>`);
   }
