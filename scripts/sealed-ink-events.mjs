@@ -48,7 +48,7 @@ function delta(before, after, threshold = .25) {
   if (after.hpMax > 0 && before.hp > 0 && after.hp === 0) out.push(["hp0","critical"]);
   if (after.ceMax > 0 && after.ce !== null && before.ce !== null &&
       before.ce > before.ceMax * threshold && after.ce <= after.ceMax * threshold) out.push(["lowCE","energy"]);
-  if (after.zone > before.zone) out.push(["zone","gold"]);
+  if (after.zone > before.zone) out.push(["zone","paper"]);
   if (before.zone > 0 && after.zone === 0) out.push(["zoneEnd","info"]);
   if (after.burnout !== before.burnout) out.push([after.burnout?"burnout":"burnoutEnd",after.burnout?"critical":"info"]);
   if (after.domain !== before.domain) out.push([after.domain?"domain":"domainEnd","energy"]);

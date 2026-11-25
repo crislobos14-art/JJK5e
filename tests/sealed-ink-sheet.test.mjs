@@ -39,9 +39,9 @@ test("manifest loads the optional presentation assets", () => {
   assert.ok(manifest.styles.includes("styles/sealed-ink.css"));
 });
 
-test("default is native, with client preferences and native subclasses", () => {
+test("Sealed Ink is default visually, with native sheet registration optional", () => {
   const f = fixture();
-  assert.equal(f.settings.get("sheetDesign").default, "default");
+  assert.equal(f.settings.get("sheetDesign").default, "sealed");
   assert.equal(f.settings.get("sheetDesign").scope, "client");
   assert.ok(Object.hasOwn(f.settings.get("sheetDesign").choices, "sealed"));
   assert.ok(f.registered[0].cls.prototype instanceof f.CharacterActorSheet);
@@ -110,7 +110,7 @@ test("universal surfaces use only known D&D5e classes and per-client overrides",
     }},
     settings: { register: (ns,k,o) => settings.set(k,o), get: (ns,k) => values.get(k) ?? settings.get(k)?.default }
   };
-  const exposed = runInNewContext(source + "\n({categoryOf, selectedDesign, categories});", {
+  const exposed = runInNewContext(source + "\n({categoryOf, selectedDesign, categories,moduleDocument,isJJKChat});", {
     enhanceCharacterCreation, enhanceCombatInteraction, Hooks: { once: (n,fn) => hooks.set(n,fn) }, game,
     foundry: { applications: { apps: { DocumentSheetConfig: {
       registerSheet: (doc,scope,cls,opts) => registered.push(opts)
@@ -118,8 +118,8 @@ test("universal surfaces use only known D&D5e classes and per-client overrides",
     CONFIG: { Actor: { documentClass: class Actor {} } }, console
   });
   hooks.get("init")();
-  assert.equal(exposed.selectedDesign("character"), "default");
-  assert.equal(Object.keys(exposed.categories).length, 7);
+  assert.equal(exposed.selectedDesign("character"), "sealed");
+  assert.equal(Object.keys(exposed.categories).length, 8);
   for (const key of Object.keys(exposed.categories)) {
     assert.equal(settings.get("sheetDesign_" + key).default, "inherit");
     assert.equal(settings.get("sheetDesign_" + key).scope, "client");
@@ -138,6 +138,10 @@ test("universal surfaces use only known D&D5e classes and per-client overrides",
     [new CompendiumBrowser, "compendium"], [new ThirdParty, null]
   ]) assert.equal(exposed.categoryOf(app, root, null), expected);
   assert.equal(exposed.categoryOf(new ThirdParty, { matches: () => true }, null), "module");
+  assert.equal(exposed.categoryOf({document:{documentName:"JournalEntry",pack:"world.jjk5e-rules"}},root,null),"compendium");
+  assert.equal(exposed.categoryOf({document:{documentName:"JournalEntry",pack:"world.other"}},root,null),null);
+  assert.equal(exposed.isJJKChat({flags:{jjk5e:{sealedInkChat:true}}},root),true);
+  assert.equal(exposed.isJJKChat({flags:{other:{sealedInkChat:true}}},root),false);
 });
 
 test("feat browser delegates to existing advancement and guards repeat submissions", () => {
@@ -161,4 +165,17 @@ test("summon links redraw only for sheets the change can affect", () => {
   assert.equal(fn(yuji, { documentName: "Token", actor: { uuid: "Actor.Q", flags: { dnd5e: { summon: { origin: "Actor.A.Item.S" } } } }, flags: {} }), true);
   assert.equal(fn(yuji, { documentName: "Item", parent: { uuid: "Actor.B" } }), false);
   assert.equal(fn(yuji, undefined), true, "canvas change redraws");
+});
+
+test("late native registration resolves only D&D5e entries and is idempotent",()=>{
+ class NativeCharacter{} class NativeNPC{} class OtherSheet{}
+ const hooks=new Map(),registered=[],config={Actor:{documentClass:class Actor{},sheetClasses:{character:{},npc:{}}}};
+ const game={system:{id:"dnd5e"},i18n:{lang:"en"},settings:{register(){}}};
+ runInNewContext(source,{enhanceCharacterCreation,enhanceCombatInteraction,Hooks:{once:(key,fn)=>hooks.set(key,fn)},game,
+  foundry:{applications:{apps:{DocumentSheetConfig:{registerSheet:(doc,id,cls,opts)=>registered.push({cls,opts})}}}},CONFIG:config,console});
+ hooks.get("init")();assert.equal(registered.length,0);
+ config.Actor.sheetClasses.character={"other.OtherSheet":{cls:OtherSheet,default:true},"dnd5e.NativeCharacter":{cls:NativeCharacter}};
+ hooks.get("setup")();assert.equal(registered.length,1);assert.ok(registered[0].cls.prototype instanceof NativeCharacter);
+ config.Actor.sheetClasses.npc={"dnd5e.NativeNPC":{cls:NativeNPC}};
+ hooks.get("setup")();hooks.get("setup")();assert.equal(registered.length,2);assert.ok(registered[1].cls.prototype instanceof NativeNPC);
 });
