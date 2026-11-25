@@ -1,6 +1,9 @@
 # Changelog
 
 ## 1.98.0 — Motor de dominios y Sealed Ink
+- Rectángulo negro o morado que no desaparecía tras cerrar un dominio: era el tinte de escena de FXMaster. Antes se guardaba con un id aleatorio en memoria del DJ. Al recargar o cerrar con otro DJ, ese id se perdía y el tinte quedaba en la escena para siempre. Ahora usa un id fijo, hay un solo tinte por escena y se quita solo al cerrarse el último dominio abierto en esa escena. Se quita también aunque se desactive la opción de FXMaster mientras el dominio está abierto.
+- Limpieza automática: al iniciar la partida (DJ) y al cerrar cualquier dominio, se borran los restos de dominios ya cerrados: el tinte (incluido el que dejaron versiones anteriores), las zonas, los marcadores de barrera y las animaciones de Sequencer. Macro manual: `game.modules.get("jjk5e").api.cleanupDomains()`.
+- Las animaciones de apertura ya no dejan una capa negra persistente (`jb2a.darkness.black` sin duración): todas las capas terminan solas y se limpian al cerrar.
 - Sealed Ink ajusta la cabecera, agrupa los recursos en su tarjeta nativa y permite leer los accesos JJK completos en fichas estrechas. La pestaña JJK reorganiza sus secciones según el espacio disponible.
 - El choque muestra el refinamiento y el estado de cada participante en el chat. Las animaciones de apertura y choque respetan el área de la escena y no modifican el alcance ni el resultado de las reglas.
 ## 1.97.0 — Dotes de técnica en la Mejora de característica

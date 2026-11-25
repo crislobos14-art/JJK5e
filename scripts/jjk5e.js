@@ -3477,7 +3477,7 @@ Hooks.once("init", () => {
     applyScaling, openPanel, maximumOutput, setReducedOutput, setSoulAwareness, setLimb, rollLimb,
     summon, dismissSummons, syncResource, missingPrereqs, applyCEEffects, activateGroup, endGroup,
     openGMStart, undoAutomation, updateAutomation, updateAllAutomation, outdatedItems, burnoutRecovery, fallDamage, applySoulDamage, clearSoulDamage,
-    techniqueBuilder, buildTechniqueItems
+    techniqueBuilder, buildTechniqueItems, cleanupDomains: () => sweepDomainLeftovers()
   };
 });
 
@@ -4441,6 +4441,7 @@ Hooks.once("ready", () => {
   Hooks.on("updateWorldTime",()=>recoverCEWorld().catch(err=>reportError("CE recovery",err)));
   setInterval(()=>recoverCEWorld().catch(err=>reportError("CE recovery",err)),30000);
   recoverCEWorld().catch(err=>reportError("CE recovery",err));
+  if (isActiveGM()) sweepDomainLeftovers().catch((err) => reportError("domain cleanup", err));
   if (game.user.isGM && setting("enableSummoning") && game.settings.settings?.has?.("dnd5e.allowSummoning")
     && !game.settings.get("dnd5e", "allowSummoning")) game.settings.set("dnd5e", "allowSummoning", true);
   Hooks.on("updateActor", (actor, changes, options, userId) => {
@@ -5821,7 +5822,7 @@ GM_EXTRA.domainZone = async ({ sceneId, x, y, radius, name, color, actorUuid, op
   const latest = getDomain(actor);
   if (zone && latest?.open && latest.openingId === openingId) {
     await setDomain(actor, { ...latest, zone });
-    await domainSceneFX(scene, zone.id, true);
+    await domainSceneFX(scene, true);
   } else if (zone) await safeDelete(scene.getEmbeddedDocument?.(zone.kind, zone.id));
 };
 
@@ -5842,7 +5843,7 @@ GM_EXTRA.domainZoneDelete = async ({ sceneId, zone, actorUuid, openingId }) => {
   if (doc && (doc.flags?.jjk5e?.domain !== actorUuid ||
       (doc.flags?.jjk5e?.openingId && doc.flags.jjk5e.openingId !== openingId))) return;
   if (doc) await safeDelete(doc);
-  if (zone && scene) await domainSceneFX(scene, zone.id, false);
+  if (zone && scene) await domainSceneFX(scene, false, actorUuid);
 };
 
 async function setDomain(actor, state) {
@@ -5948,6 +5949,8 @@ async function domainClosed(actor) {
   }
   await setDomain(actor, null);
   if (window?.status === "open") for (const survivor of survivors) await detectClash(survivor);
+  // Anything this or an older opening left behind (tint without a zone, stale markers or layers).
+  await sweepDomainLeftovers().catch((err) => reportError("domain cleanup", err));
   refreshDomainApps(actor);
 }
 
@@ -7563,25 +7566,72 @@ const modActive = (id) => !!game.modules?.get?.(id)?.active;
 
 /* ---- FXMaster: scene tint while a domain is open (GM side) ---- */
 
-const FXM_DOMAIN_IDS = new Map();
+// One tint per scene, under a fixed FXMaster API id, while at least one domain with a zone is open there.
+// The id survives reloads, so closing a domain (or the ready sweep) always finds and removes it.
+const FXM_DOMAIN_ID = "apiMacro_jjk5eDomain_f";
+const FXM_DOMAIN_COLOR = "#4b1d6e";
 const FXM_DOMAIN_FILTER = { type: "color",
-  options: { color: { value: "#4b1d6e", apply: true }, saturation: 0.7, contrast: 1.15, brightness: 0.85 } };
-async function domainSceneFX(scene, zoneId, on) {
+  options: { color: { value: FXM_DOMAIN_COLOR, apply: true }, saturation: 0.7, contrast: 1.15, brightness: 0.85 } };
+/** Our tint ids on a scene: the fixed id, plus random ids left by 1.9x saves (same colour filter). */
+function domainFXIds(scene) {
+  const filters = scene?.getFlag?.("fxmaster", "filters") ?? {};
+  return Object.entries(filters).filter(([id, f]) => id === FXM_DOMAIN_ID
+    || (f?.type === "color" && String(f?.options?.color?.value ?? "").toLowerCase() === FXM_DOMAIN_COLOR)).map(([id]) => id);
+}
+/** Actors with an open domain that has a zone on this scene, except the one being closed. */
+function openDomainsOn(scene, exceptUuid = null) {
+  const actors = [...(game.actors?.contents ?? []), ...[...(scene?.tokens ?? [])].map((tk) => tk.actor)];
+  return [...new Map(actors.filter((a) => a?.uuid && a.uuid !== exceptUuid).map((a) => [a.uuid, a])).values()]
+    .filter((a) => { const s = getDomain(a); return s?.open && s.sceneId === scene?.id && s.zone; });
+}
+async function domainSceneFX(scene, on, exceptUuid = null) {
   const api = globalThis.FXMASTER?.api?.effects;
-  if (!modActive("fxmaster") || !api || !setting("fxDomains")) return;
-  const key = `${scene?.id}.${zoneId}`;
+  if (!scene || !modActive("fxmaster") || !api) return;
   try {
+    const ids = domainFXIds(scene);
     if (on) {
-      const res = await api.play({ scene, filters: [foundry.utils.deepClone(FXM_DOMAIN_FILTER)] });
-      if (res?.filters?.length) FXM_DOMAIN_IDS.set(key, res.filters);
-    } else {
-      const ids = FXM_DOMAIN_IDS.get(key);
-      FXM_DOMAIN_IDS.delete(key);
-      // FXMaster 8: stop by the ids play() returned; otherwise by the exact same payload.
-      if (ids?.length && typeof api.filters?.stop === "function") await api.filters.stop(ids, { scene });
-      else await api.stop({ scene, filters: [foundry.utils.deepClone(FXM_DOMAIN_FILTER)] });
+      if (!setting("fxDomains") || ids.length) return;
+      await api.play({ scene, filters: [{ ...foundry.utils.deepClone(FXM_DOMAIN_FILTER), id: FXM_DOMAIN_ID }] });
+    } else if (ids.length && !openDomainsOn(scene, exceptUuid).length) {
+      if (typeof api.filters?.stop === "function") await api.filters.stop(ids, { scene });
+      else await api.stop({ scene, filters: ids });
     }
   } catch (err) { console.warn(`${MODULE_ID} | FXMaster domain filter`, err); }
+}
+
+/** GM: remove what closed domains left behind (zones, barrier markers, tint, Sequencer layers). */
+async function sweepDomainLeftovers() {
+  if (!isActiveGM()) return 0;
+  let removed = 0;
+  const live = (uuid, openingId) => {
+    let actor = null;
+    try { actor = fromUuidSync(uuid); } catch { actor = null; }
+    const s = getDomain(actor);
+    return !!s?.open && (!openingId || s.openingId === openingId);
+  };
+  for (const scene of game.scenes ?? []) {
+    for (const kind of ["Region", "MeasuredTemplate"]) {
+      const docs = [...(scene[kind === "Region" ? "regions" : "templates"] ?? [])]
+        .filter((d) => d.flags?.jjk5e?.domain && !live(d.flags.jjk5e.domain, d.flags.jjk5e.openingId));
+      for (const d of docs) { await safeDelete(d); removed++; }
+    }
+    const markers = [...(scene.tokens ?? [])].filter((t) => { const f = barrierMarkerMeta(t); return f && !live(f.actorUuid, f.openingId); });
+    if (markers.length) { await scene.deleteEmbeddedDocuments("Token", markers.map((t) => t.id)); removed += markers.length; }
+    if (domainFXIds(scene).length && !openDomainsOn(scene).length) { await domainSceneFX(scene, false); removed++; }
+  }
+  for (const proxy of game.actors ?? []) {
+    const f = proxy.flags?.jjk5e?.barrierMarker;
+    if (f && !live(f.actorUuid, f.openingId)) { await safeDelete(proxy); removed++; }
+  }
+  if (globalThis.Sequencer?.EffectManager) {
+    for (const effect of Sequencer.EffectManager.getEffects?.({}) ?? []) {
+      const name = String(effect?.data?.name ?? "");
+      if (!/^jjk5e-domain-/.test(name)) continue;
+      const open = [...(game.actors ?? [])].some((a) => { const s = getDomain(a); return s?.open && (name.endsWith(a.id) || name.endsWith(s.openingId)); });
+      if (!open) { try { await Sequencer.EffectManager.endEffects({ name }); removed++; } catch (err) { reportError("domain animation", err); } }
+    }
+  }
+  return removed;
 }
 
 /* ---- Token Magic FX: token auras for the Zone and an open domain ---- */
