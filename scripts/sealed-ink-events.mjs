@@ -305,7 +305,13 @@ async function drawLibrary(body) {
   input.placeholder = L("Search techniques and rules","Buscar técnicas y reglas");
   input.setAttribute("aria-label", input.placeholder);
   const rows = el("div","jjk-sealed-hud-activities");
-  body.append(input,rows);
+  body.append(input);
+  if (game.modules.get("quick-insert")?.active && typeof globalThis.QuickInsert?.open === "function") {
+    body.append(button(L("Open Quick Insert","Abrir Quick Insert"), () => {
+      if (game.modules.get("quick-insert")?.active) globalThis.QuickInsert?.open?.({startText:input.value.trim()});
+    }));
+  }
+  body.append(rows);
   const packs = [...game.packs].filter(pack =>
     (pack.collection.startsWith("jjk5e.") || pack.collection.startsWith("world.jjk5e-")) &&
     /-(techniques|rules)$/.test(pack.collection) &&
