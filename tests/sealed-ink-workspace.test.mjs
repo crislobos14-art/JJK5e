@@ -29,3 +29,11 @@ test("workspace appears only on the selectable Sealed Ink sheet classes and repo
  assert.equal(enhanceActorWorkspace(app,root,true),false);
  assert.equal(removed,true,"a stale workspace is removed from a default native sheet");
 });
+
+test("reordering filtered techniques keeps unrelated actions in their previous slots", () => {
+ const order = ["strike/1","technique/2","dash/3","technique/4"];
+ const visible = ["technique/2","technique/4"];
+ assert.deepEqual(moveActivity(order,"technique/4",-1,visible),
+  ["strike/1","technique/4","dash/3","technique/2"]);
+ assert.deepEqual(moveActivity(order,"technique/2",-1,visible),order);
+});

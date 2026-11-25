@@ -13,14 +13,27 @@ const strings={
 };
 const tr=k=>strings[k]?.[game.i18n.lang.startsWith("es")?1:0]??k;
 function node(tag,cls,value){const e=document.createElement(tag);if(cls)e.className=cls;if(value!==undefined)e.textContent=String(value);return e;}
-function button(label,fn){const b=node("button","",label);b.type="button";b.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();fn();});return b;}
+function button(label,fn){const b=node("button","",label);b.type="button";b.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();fn(e);});return b;}
 const items=actor=>Array.from(actor?.items??[]);
-const activities=item=>Array.from(item?.system?.activities?.contents??Object.values(item?.system?.activities??{}));
+const activities=item=>Array.from(item?.system?.activities?.contents??item?.system?.activities?.values?.()??Object.values(item?.system?.activities??{}));
+const pendingActors = new Set();
+
+export function isNativeActivityAvailable(activity) {
+ return typeof activity?.use === "function" && activity.canUse !== false && activity.isHidden !== true;
+}
+
+export async function invokeSealedActivity(actor, activity, event = null) {
+ const key = actor?.uuid ?? actor;
+ if (!actor?.isOwner || !isNativeActivityAvailable(activity) || pendingActors.has(key)) return false;
+ pendingActors.add(key);
+ try { return await activity.use({event},{configure:true},{}); }
+ finally { pendingActors.delete(key); }
+}
 export function combatRows(actor,api) {
  if(!actor?.isOwner||typeof api?.combatInteractionActivity!=="function")return [];
  const rows=[];
  for(const item of items(actor))for(const act of activities(item)){
-   if(!item.id||!act?.id||typeof act.use!=="function")continue;
+   if(!item.id||!act?.id||!isNativeActivityAvailable(act))continue;
    let meta;
    try{meta=api.combatInteractionActivity(actor,act);}catch{continue;}
    if(!meta)continue;
@@ -32,15 +45,15 @@ export function filterCombatRows(rows,query="",kind="all"){
  const needle=String(query).trim().toLocaleLowerCase();
  return rows.filter(r=>(kind==="all"||r.kind===kind)&&(!needle||(r.name+" "+r.itemName).toLocaleLowerCase().includes(needle)));
 }
-export async function useCombatActivity(actor,api,row,{busy=false}={}){
+export async function useCombatActivity(actor,api,row,{busy=false,event=null}={}){
  if(busy||!actor?.isOwner)return false;
  const item=items(actor).find(i=>i.id===row.itemId);
  const activity=activities(item).find(a=>a.id===row.id);
- if(!activity||typeof activity.use!=="function")return false;
+ if(!isNativeActivityAvailable(activity))return false;
  const meta=api?.combatInteractionActivity?.(actor,activity);
  // Special and reaction triggers stay with native context/Midi or the domain HUD.
  if(!meta?.allowed||!meta.direct)return false;
- return activity.use({event:null},{configure:true},{});
+ return invokeSealedActivity(actor,activity,event);
 }
 export function enhanceCombatInteraction(app,root,active){
  const panel=root.querySelector(".jjk-panel[data-tab]");
@@ -82,10 +95,10 @@ export function enhanceCombatInteraction(app,root,active){
      if(row.domain){
        el.append(button(tr("domain"),()=>{if(actor.isOwner)api.openDomainHUD?.(actor);}));
      }else if(row.direct){
-       const run=button(tr("run"),async()=>{
+       const run=button(tr("run"),async event=>{
          if(app._busy||!actor.isOwner||!container.isConnected)return;
          app._busy=true;root.classList.add("jjk-busy");run.disabled=true;
-         try{await useCombatActivity(actor,api,row);}
+         try{await useCombatActivity(actor,api,row,{event});}
          catch(err){console.warn(ID+" | combat interaction",err);ui.notifications.warn(tr("error"));}
          finally{app._busy=false;root.classList.remove("jjk-busy");if(app.rendered)app.render();}
        });

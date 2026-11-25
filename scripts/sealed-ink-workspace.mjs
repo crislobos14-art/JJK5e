@@ -9,12 +9,11 @@ const textValue=v=>v==null||v===""?"—":String(v);
 const api=()=>game.modules.get(ID)?.api;
 const liveActor=app=>app.actor??app.document;
 const states=new WeakMap();
-const inFlight=new Set();
 function el(tag,cls,label){const n=document.createElement(tag);if(cls)n.className=cls;if(label!==undefined)n.textContent=String(label);return n;}
 function button(label,fn){
  const b=el("button","",label);b.type="button";
  b.addEventListener("click",async event=>{event.preventDefault();event.stopPropagation();if(b.disabled)return;b.disabled=true;
- try{await fn();}catch(err){console.warn(ID+" | actor workspace",err);ui.notifications.warn(tr("Action could not be opened. Check the native sheet.","No se pudo abrir la acción. Revisa la hoja nativa."));}
+ try{await fn(event);}catch(err){console.warn(ID+" | actor workspace",err);ui.notifications.warn(tr("Action could not be opened. Check the native sheet.","No se pudo abrir la acción. Revisa la hoja nativa."));}
  finally{b.disabled=false;}});
  return b;
 }
@@ -36,9 +35,11 @@ export function orderActivities(rows,order=[]){
  const index=new Map(order.map((k,i)=>[k,i]));
  return [...rows].sort((a,b)=>(index.get(a.itemId+"/"+a.id)??Infinity)-(index.get(b.itemId+"/"+b.id)??Infinity));
 }
-export function moveActivity(order,key,delta){
- const out=[...new Set(order)],from=out.indexOf(key),to=from+delta;
- if(from<0||to<0||to>=out.length)return out;
+export function moveActivity(order,key,delta,visible=order){
+ const out=[...new Set(order)],keys=visible.filter(id=>out.includes(id));
+ const index=keys.indexOf(key),neighbor=keys[index+delta];
+ if(index<0||neighbor===undefined)return out;
+ const from=out.indexOf(key),to=out.indexOf(neighbor);
  [out[from],out[to]]=[out[to],out[from]];return out;
 }
 export function linkedEntities(actor,tokens,user){
@@ -89,9 +90,31 @@ function favoriteKey(actor,row){
  return [game.world.id,game.user.id,actor.uuid,row.itemId,row.id].join(":");
 }
 function favoriteKeys(){return game.settings.get(ID,"sealedFavorites")??[];}
-function drawEnergyHistory(target,app,actor){
+function visibleChatMessage(uuid){
+ if(typeof uuid!=="string"||!/^ChatMessage\.[a-zA-Z0-9]+$/.test(uuid))return null;
+ const message=game.messages?.get(uuid.slice("ChatMessage.".length));
+ return message?.visible===true&&message.isContentVisible===true?message:null;
+}
+async function openEnergyCard(app,actorUuid,uuid){
+ const message=ownerAction(app,actorUuid,()=>visibleChatMessage(uuid));
+ if(!message)return ui.notifications.warn(tr("This chat card is no longer available.","Esta tarjeta de chat ya no está disponible."));
+ await ui.chat?.activate?.();
+ const card=ui.chat?.element?.querySelector?.('[data-message-id="'+message.id+'"]');
+ if(card){card.scrollIntoView({block:"center"});return;}
+ // Older messages may not be loaded in the chat view. Show the native rendering for reference.
+ const preview=await message.renderHTML?.({canDelete:false});
+ if(!preview||!ownerAction(app,actorUuid,()=>visibleChatMessage(uuid)))return;
+ await foundry.applications.api.DialogV2.prompt({classes:["jjk5e-ui","jjk5e-dialog"],
+  window:{title:tr("Chat card","Tarjeta de chat"),resizable:true},rejectClose:false,
+  content:"<div inert>"+preview.outerHTML+"</div>",
+  ok:{label:tr("Close","Cerrar")}
+ });
+}
+function drawEnergyHistory(target,app,actor,s){
  const entries=api()?.ceHistory?.(actor)??[];
  const section=el("details","jjk-workspace-list");
+ section.open=!!s.historyOpen;
+ section.addEventListener("toggle",()=>{s.historyOpen=section.open;});
  section.append(el("summary","",tr("Cursed energy history","Historial de energía maldita")));
  if(!entries.length)section.append(el("p","jjk-workspace-muted",tr("No recorded changes.","Sin cambios registrados.")));
  const states={reserved:tr("Reserved","Reservada"),review:tr("Under review","En revisión"),refunded:tr("Refunded","Devuelta"),committed:tr("Spent","Gastada")};
@@ -101,17 +124,15 @@ function drawEnergyHistory(target,app,actor){
   row.append(el("strong","",entry.label||tr("Cursed energy","Energía maldita")),
     el("small","",[sign+Math.abs(amount)+" "+tr("CE","EM"),states[entry.state],entry.balance==null?"":tr("Balance: ","Saldo: ")+entry.balance,
       entry.time?new Date(entry.time).toLocaleString(game.i18n.lang):""].filter(Boolean).join(" · ")));
-  if(typeof entry.cardUuid==="string"&&entry.cardUuid.startsWith("ChatMessage."))row.append(button(tr("Chat card","Tarjeta de chat"),()=>ownerAction(app,actor.uuid,()=>{
-   const message=game.messages.get(entry.cardUuid.slice("ChatMessage.".length));
-   if(message?.visible!==false&&message?.isContentVisible!==false&&message)return ui.chat.scrollToMessage?.(message.id);
-  })));
+  if(visibleChatMessage(entry.cardUuid))row.append(button(tr("Chat card","Tarjeta de chat"),
+   ()=>openEnergyCard(app,actor.uuid,entry.cardUuid)));
   section.append(row);
  }
  target.append(section);
 }
 function drawActivities(target,app,actor,s,onlyTechniques=false){
  const techniques=new Set(docs(actor.items).filter(i=>i.flags?.jjk5e?.technique||i.flags?.jjk5e?.techniqueRoot).map(i=>i.id));
- const rows=orderActivities(combatRows(actor,api()).filter(r=>!onlyTechniques||techniques.has(r.itemId)),s.order),key=r=>r.itemId+"/"+r.id;
+ const rows=combatRows(actor,api()),key=r=>r.itemId+"/"+r.id;
  const kinds=[["all",tr("All","Todas")],["action",tr("Action","Acción")],["bonus",tr("Bonus","Adicional")],["reaction",tr("Reaction","Reacción")],["free",tr("Free","Libre")],["full",tr("Full turn","Turno completo")],["other",tr("Other","Otras")]];
  const controls=el("div","jjk-workspace-tools"),search=el("input",""),filter=el("select","");
  search.type="search";search.value=s.query;search.placeholder=tr("Search actions","Buscar acciones");search.setAttribute("aria-label",search.placeholder);
@@ -124,12 +145,15 @@ function drawActivities(target,app,actor,s,onlyTechniques=false){
  function paint(){
   list.replaceChildren();const q=s.query.trim().toLowerCase();
   const saved=favoriteKeys(),sorted=orderActivities(rows,s.order),allKeys=sorted.map(key);
-  for(const row of sorted.filter(r=>(!s.onlyFavorites||saved.includes(favoriteKey(actor,r)))&&(s.kind==="all"||r.kind===s.kind)&&(!q||(r.name+" "+r.itemName).toLowerCase().includes(q)))){
+  const shown=sorted.filter(r=>(!onlyTechniques||techniques.has(r.itemId))&&(!s.onlyFavorites||saved.includes(favoriteKey(actor,r)))&&
+    (s.kind==="all"||r.kind===s.kind)&&(!q||(r.name+" "+r.itemName).toLowerCase().includes(q)));
+  const shownKeys=shown.map(key);
+  for(const row of shown){
    const id=key(row),line=el("div","jjk-workspace-entry"),info=el("div","jjk-workspace-action-label");
    info.append(el("strong","",row.name),el("small","",row.itemName+" · "+(kinds.find(x=>x[0]===row.kind)?.[1]??row.kind)+(row.cost==null?"":" · CE "+row.cost+(row.variable?"+":""))+(row.range?" · "+row.range:"")));line.append(info);
-   const up=button("↑",()=>{s.order=moveActivity(allKeys,id,-1);save(actor,s);paint();}),down=button("↓",()=>{s.order=moveActivity(allKeys,id,1);save(actor,s);paint();});
+   const up=button("↑",()=>{s.order=moveActivity(allKeys,id,-1,shownKeys);save(actor,s);paint();}),down=button("↓",()=>{s.order=moveActivity(allKeys,id,1,shownKeys);save(actor,s);paint();});
    up.title=tr("Move up","Subir");up.setAttribute("aria-label",up.title+" "+row.name);down.title=tr("Move down","Bajar");down.setAttribute("aria-label",down.title+" "+row.name);
-   up.disabled=allKeys[0]===id;down.disabled=allKeys.at(-1)===id;
+   up.disabled=shownKeys[0]===id;down.disabled=shownKeys.at(-1)===id;
    const favorite=favoriteKey(actor,row),selected=saved.includes(favorite);
    const star=button(selected?"★":"☆",()=>ownerAction(app,actor.uuid,async ()=>{
     const keys=favoriteKeys();
@@ -138,10 +162,7 @@ function drawActivities(target,app,actor,s,onlyTechniques=false){
    }));
    star.setAttribute("aria-pressed",String(selected));star.setAttribute("aria-label",tr("Toggle favorite","Alternar favorito")+" "+row.name);
    line.append(star,up,down,button(tr("Inspect","Consultar"),()=>openDocument(app,actor.uuid,"item",row.itemId)));
-   if(row.direct&&row.allowed){const run=button(tr("Use","Usar"),()=>ownerAction(app,actor.uuid,async a=>{
-     if(inFlight.has(a.uuid))return;inFlight.add(a.uuid);
-     try{await useCombatActivity(a,api(),row);}finally{inFlight.delete(a.uuid);}
-   }));line.append(run);}
+   if(row.direct&&row.allowed){const run=button(tr("Use","Usar"),event=>ownerAction(app,actor.uuid,a=>useCombatActivity(a,api(),row,{event})));line.append(run);}
    if(!row.allowed)line.append(el("small","jjk-workspace-muted",tr("Blocked by current turn or world rules","Bloqueada por el turno actual o las reglas del mundo")));
    else if(!row.direct)line.append(el("small","jjk-workspace-muted",tr("Uses native trigger or Domain HUD","Requiere flujo nativo o panel de dominio")));
    list.append(line);
@@ -181,12 +202,14 @@ export function enhanceActorWorkspace(app,root,active,resources=()=>[]){
  const engine=api();if(!engine)return;
  const s=getState(app,actor),m=workspaceModel(actor,engine);
  const links=s.tab==="summon"?linkedEntities(actor,canvas?.scene?.tokens,game.user).map(t=>[t.id,t.name,t.actor?.isOwner]):[];
- const signature=JSON.stringify([actor.name,actor.img,m,combatRows(actor,engine),engine.ceHistory?.(actor),links,s.tab,s.mini,s.reverse,game.user.isGM]);
+ const activityTab=!s.mini&&(s.tab==="combat"||s.tab==="technique");
+ const signature=JSON.stringify([actor.uuid,actor.name,actor.img,m,activityTab?combatRows(actor,engine):null,
+  s.tab==="combat"&&!s.mini?engine.ceHistory?.(actor):null,links,s.tab,s.mini,s.reverse,game.user.isGM]);
  if(old?.dataset.signature===signature)return true;
  // Preserve text input focus: its query remains in the local state and the native render is not intercepted.
- const focused=old?.contains(document.activeElement)&&document.activeElement?.tagName==="INPUT";
+ const focused=old?.dataset.actorUuid===actor.uuid&&old.contains(document.activeElement)&&document.activeElement?.tagName==="INPUT";
  if(focused){if(!old.dataset.refreshPending){old.dataset.refreshPending="true";old.addEventListener("focusout",()=>{delete old.dataset.refreshPending;queueMicrotask(()=>enhanceActorWorkspace(app,root,active,resources));},{once:true});}return true;}
- const shell=el("section","jjk-actor-workspace");shell.dataset.signature=signature;shell.dataset.entity=m.npc?"npc":"character";shell.dataset.mini=String(s.mini);shell.dataset.reverse=String(s.reverse);
+ const shell=el("section","jjk-actor-workspace");shell.dataset.signature=signature;shell.dataset.actorUuid=actor.uuid;shell.dataset.entity=m.npc?"npc":"character";shell.dataset.mini=String(s.mini);shell.dataset.reverse=String(s.reverse);
  const header=el("header","jjk-workspace-header"),name=el("div","jjk-workspace-name"),tools=el("div","jjk-workspace-tools");
  if(actor.img){const image=el("img","jjk-workspace-portrait");image.src=actor.img;image.alt="";header.append(image);}
  name.append(el("small","",m.npc?tr("SEALED ENTITY","ENTIDAD SELLADA"):tr("JUJUTSU HIGH / SORCERER","ESCUELA JUJUTSU / HECHICERO")),el("h2","",actor.name),el("span","",textValue(m.technique??(m.npc?actor.system?.details?.type?.value:null))));
@@ -210,7 +233,7 @@ export function enhanceActorWorkspace(app,root,active,resources=()=>[]){
   const nav=el("nav","jjk-workspace-tabs");nav.setAttribute("aria-label",tr("Workspace sections","Secciones de la ficha"));
   for(const [id,label] of tabs){const b=button(label,()=>{s.tab=id;save(actor,s);enhanceActorWorkspace(app,root,true,resources);root.querySelector(".jjk-actor-workspace [data-section='"+id+"']")?.focus();});b.dataset.section=id;b.setAttribute("aria-pressed",String(s.tab===id));nav.append(b);}
   const content=el("div","jjk-workspace-content");content.setAttribute("aria-label",tabs.find(t=>t[0]===s.tab)?.[1]??"");
-  if(s.tab==="combat"){addCommands(content,app,actor.uuid,[[tr("Combat engine","Motor de combate"),"openPanel",["combat"]]]);drawActivities(content,app,actor,s);if(m.ce!==null)drawEnergyHistory(content,app,actor);}
+  if(s.tab==="combat"){addCommands(content,app,actor.uuid,[[tr("Combat engine","Motor de combate"),"openPanel",["combat"]]]);drawActivities(content,app,actor,s);if(m.ce!==null)drawEnergyHistory(content,app,actor,s);}
   else if(s.tab==="technique"){addCommands(content,app,actor.uuid,[[tr("Choose technique","Elegir técnica"),"chooseTechnique"]]);drawActivities(content,app,actor,s,true);drawItems(content,app,actor,m.items.filter(i=>i.technique));}
   else if(s.tab==="traits")drawItems(content,app,actor,m.items.filter(i=>i.type==="feat"||i.technique));
   else if(s.tab==="effects"){for(const e of m.effects){const row=el("div","jjk-workspace-entry");row.append(el("span","",e.name),button(tr("Inspect","Consultar"),()=>openDocument(app,actor.uuid,"effect",e.id)));content.append(row);}if(!m.effects.length)content.append(el("p","jjk-workspace-muted",tr("No active effects.","Sin efectos activos.")));}
