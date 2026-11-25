@@ -3508,7 +3508,7 @@ Hooks.once("init", () => {
     applyScaling, openPanel, maximumOutput, setReducedOutput, setSoulAwareness, setLimb, rollLimb,
     summon, dismissSummons, syncResource, missingPrereqs, applyCEEffects, activateGroup, endGroup,
     openGMStart, undoAutomation, updateAutomation, updateAllAutomation, outdatedItems, burnoutRecovery, fallDamage, applySoulDamage, clearSoulDamage,
-    techniqueBuilder, buildTechniqueItems, cleanupDomains: () => sweepDomainLeftovers()
+    techniqueBuilder, buildTechniqueItems, itemTheme, cleanupDomains: () => sweepDomainLeftovers()
   };
 });
 
@@ -5823,6 +5823,42 @@ function sureHitBlocked(actor) {
 const regionShape = (type, x, y, r) => (type === "circle" ? { type, x, y, radius: r, rotation: 0, hole: false }
   : { type: "ellipse", x, y, radiusX: r, radiusY: r, rotation: 0, hole: false });
 
+/** The drawn barrier: the rules circle (its radius stays in feet) clipped to the map, so it never covers the padding. */
+function sceneRectOf(scene) {
+  const rect = scene?.dimensions?.sceneRect;
+  return rect && [rect.x, rect.y, rect.width, rect.height].every(Number.isFinite) && rect.width > 0 && rect.height > 0 ? rect : null;
+}
+function domainFits(scene, x, y, r) {
+  const rect = sceneRectOf(scene);
+  return !rect || (x - r >= rect.x && y - r >= rect.y && x + r <= rect.x + rect.width && y + r <= rect.y + rect.height);
+}
+function clippedDomainPolygon(scene, x, y, r, steps = 72) {
+  const rect = sceneRectOf(scene);
+  const points = [];
+  for (let i = 0; i < steps; i++) {
+    const a = (2 * Math.PI * i) / steps;
+    // Projection onto the rectangle never moves a point away from a centre inside it: the outline stays within the rules circle.
+    const px = Math.round(clamp(x + r * Math.cos(a), rect.x, rect.x + rect.width));
+    const py = Math.round(clamp(y + r * Math.sin(a), rect.y, rect.y + rect.height));
+    const last = points.length - 2;
+    if (last >= 0 && points[last] === px && points[last + 1] === py) continue;
+    points.push(px, py);
+  }
+  return { type: "polygon", points, hole: false };
+}
+function domainZoneShape(scene, type, x, y, r) {
+  return type === "polygon" ? clippedDomainPolygon(scene, x, y, r) : regionShape(type, x, y, r);
+}
+/** A template cannot be clipped: shrink its drawn radius (feet) until the circle fits the map. */
+function fittedTemplateDistance(scene, x, y, radius) {
+  const rect = sceneRectOf(scene);
+  if (!rect) return radius;
+  const room = Math.min(x - rect.x, y - rect.y, rect.x + rect.width - x, rect.y + rect.height - y);
+  const grid = scene?.grid ?? {};
+  const ft = (room / (Number(grid.size) || 100)) * (Number(grid.distance) || 5);
+  return Math.max(Math.min(radius, Math.floor(ft)), Number(grid.distance) || 5);
+}
+
 GM_EXTRA.domainZone = async ({ sceneId, x, y, radius, name, color, actorUuid, openingId }) => {
   if (!isActiveGM()) return;
   const actor = await domainActor(actorUuid);
@@ -5834,10 +5870,12 @@ GM_EXTRA.domainZone = async ({ sceneId, x, y, radius, name, color, actorUuid, op
   const r = ftToPx(scene, radius);
   let zone = null;
   const v14 = (Number(game.release?.generation) || 0) >= 14;
-  for (const shape of v14 ? ["circle", "ellipse"] : ["ellipse", "circle"]) {
+  const shapes = v14 ? ["circle", "ellipse"] : ["ellipse", "circle"];
+  if (!domainFits(scene, x, y, r)) shapes.unshift("polygon");
+  for (const shape of shapes) {
     if (zone) break;
     try {
-      const data = { name, color, shapes: [regionShape(shape, x, y, r)],
+      const data = { name, color, shapes: [domainZoneShape(scene, shape, x, y, r)],
         visibility: globalThis.CONST?.REGION_VISIBILITY?.ALWAYS ?? 2, flags: { jjk5e: { domain: actorUuid, openingId } } };
       if (v14 && state.levelId) data.levels = [state.levelId];
       const [region] = await scene.createEmbeddedDocuments("Region", [data]);
@@ -5846,7 +5884,7 @@ GM_EXTRA.domainZone = async ({ sceneId, x, y, radius, name, color, actorUuid, op
   }
   if (!zone) {
     try {
-      const [tpl] = await scene.createEmbeddedDocuments("MeasuredTemplate", [{ t: "circle", x, y, distance: radius,
+      const [tpl] = await scene.createEmbeddedDocuments("MeasuredTemplate", [{ t: "circle", x, y, distance: fittedTemplateDistance(scene, x, y, radius),
         fillColor: color, borderColor: color, flags: { jjk5e: { domain: actorUuid, openingId } } }]);
       if (tpl) zone = { kind: "MeasuredTemplate", id: tpl.id };
     } catch (err) { log("template failed", err); }
@@ -5864,8 +5902,12 @@ GM_EXTRA.domainZoneResize = async ({ sceneId, zone, x, y, radius, actorUuid, ope
   const doc = zone && scene?.getEmbeddedDocument?.(zone.kind, zone.id);
   if (!doc || doc.flags?.jjk5e?.domain !== actorUuid ||
       (doc.flags?.jjk5e?.openingId && doc.flags.jjk5e.openingId !== openingId)) return;
-  if (zone.kind === "Region") await doc.update({ shapes: [regionShape(zone.shape ?? "ellipse", x, y, ftToPx(scene, radius))] });
-  else await doc.update({ distance: radius });
+  const r = ftToPx(scene, radius);
+  if (zone.kind === "Region") {
+    // A shrinking loser may come to fit the map (or a clipped one may stop fitting): keep the drawn shape inside it.
+    const shape = domainFits(scene, x, y, r) ? (zone.shape === "polygon" ? ((Number(game.release?.generation) || 0) >= 14 ? "circle" : "ellipse") : zone.shape ?? "ellipse") : "polygon";
+    await doc.update({ shapes: [domainZoneShape(scene, shape, x, y, r)] });
+  } else await doc.update({ distance: fittedTemplateDistance(scene, x, y, radius) });
 };
 
 GM_EXTRA.domainZoneDelete = async ({ sceneId, zone, actorUuid, openingId }) => {
@@ -5916,9 +5958,9 @@ async function domainOpened(actor, effect = null) {
   const opened = await setDomain(actor, state);
   if (opened && effect && actor.effects.get(effect.id) && !effect.disabled) animateDomainOpening(actor, state, tokenDoc);
   if (c && state.sceneId && setting("domainZones")) await GM_EXTRA.domainZone({ sceneId: state.sceneId,
-    name: `${t("Domain.Zone")}: ${actor.name}`, color: "#4b1d6e", actorUuid: actor.uuid, openingId: state.openingId });
+    name: `${t("Domain.Zone")}: ${actor.name}`, color: "#a77fe0", actorUuid: actor.uuid, openingId: state.openingId });
   await chat(actor, `<div class="jjk5e-card"><h3><i class="fas fa-circle-half-stroke"></i> ${t("Domain.Opened", { name: esc(actor.name) })}</h3>`
-    + `<p>${state.noBarrier ? t(incomplete ? "Domain.IncompleteStats" : "Domain.BarrierlessStats", { radius }) : t("Domain.BarrierStats", { hp: max, ac: state.ac, ref })}</p><p class="hint">${t("Domain.OutsideHint", { n: Math.max(mod, 1) })}</p></div>`);
+    + `<p>${state.noBarrier ? t(incomplete ? "Domain.IncompleteStats" : "Domain.BarrierlessStats", { radius }) : t("Domain.BarrierStats", { hp: max, ac: state.ac, ref, radius })}</p><p class="hint">${t("Domain.OutsideHint", { n: Math.max(mod, 1) })}</p></div>`);
   // Clashes change the rival's domain too, which only the GM can always write: the active GM resolves them.
   const claim = actor.getFlag(MODULE_ID, "domainReactionClaim");
   const root = claim?.openerUuid ? await domainActor(claim.openerUuid) : null;
@@ -6232,7 +6274,7 @@ async function detectClash(actor) {
   await setDomain(actor, mine);
   await setDomain(rival, rs);
   const text = equal ? t("Domain.ClashEqual")
-    : t("Domain.ClashResult", { win: esc(win.name), lose: esc(lose.name), rounds, diff: Math.abs(diff) });
+    : t(rounds === 0 ? "Domain.ClashResultNow" : "Domain.ClashResult", { win: esc(win.name), lose: esc(lose.name), rounds, diff: Math.abs(diff) });
   await docClass("ChatMessage").create({ content: `<div class="jjk5e-card jjk-domain-clash">
     <h3><i class="fas fa-yin-yang" aria-hidden="true"></i> ${t("Domain.Clash")}</h3>
     <ul class="jjk-domain-clash-casters" aria-label="${esc(t("Domain.Refinement"))}">${clashParticipant(actor, mine)}${clashParticipant(rival, rs)}</ul>
@@ -7607,8 +7649,9 @@ const modActive = (id) => !!game.modules?.get?.(id)?.active;
 // The id survives reloads, so closing a domain (or the ready sweep) always finds and removes it.
 const FXM_DOMAIN_ID = "apiMacro_jjk5eDomain_f";
 const FXM_DOMAIN_COLOR = "#4b1d6e";
+// A light mood shift, never a dark plate: no colour multiply (that turned dark maps into a black rectangle).
 const FXM_DOMAIN_FILTER = { type: "color",
-  options: { color: { value: FXM_DOMAIN_COLOR, apply: true }, saturation: 0.7, contrast: 1.15, brightness: 0.85 } };
+  options: { color: { value: FXM_DOMAIN_COLOR, apply: false }, saturation: 0.75, contrast: 1.08, brightness: 0.97 } };
 /** Our tint ids on a scene: the fixed id, plus random ids left by 1.9x saves (same colour filter). */
 function domainFXIds(scene) {
   const filters = scene?.getFlag?.("fxmaster", "filters") ?? {};
