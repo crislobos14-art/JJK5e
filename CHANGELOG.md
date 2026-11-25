@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.102.0 — Dominio dentro del mapa, sin capa oscura e identidad JJK
+- La barrera dibujada cabe en el mapa. El alcance de las reglas sigue en pies (175 ft; 655 ft sin barrera): cuando el círculo se sale del mapa, se dibuja solo la parte que queda dentro, sin invadir el borde. La zona se vuelve a ajustar cuando encoge en un choque. Si Foundry usa una plantilla en lugar de una región, la plantilla se reduce hasta caber, con un mínimo de una casilla.
+- Ya no aparece el rectángulo oscuro: el ambiente de dominio de FXMaster ya no tiñe el mapa de morado oscuro (en mapas oscuros parecía negro). Ahora solo baja un poco la saturación y sube el contraste. La zona del dominio usa un violeta más claro.
+- Tarjetas de dominio más cortas, con lo importante primero:
+  - Apertura: PG, CA, refinamiento y alcance en pies en una sola línea.
+  - Choque: quién gana y por cuánto, en cuántas rondas se rompe el perdedor (o «se rompe ya»), y que el impacto garantizado queda suspendido en ambos hasta resolver el choque.
+  - Empate: se resume en una línea.
+  - Reacción: una frase.
+- Sello JJK por técnica y objeto: cada técnica, dominio, herramienta maldita, voto o rasgo JJK lleva un sello en la ficha, en su hoja y en el chat.
+  - El color y el icono indican la familia: fuego, vacío, sombra, sangre, dominio, herramienta…
+  - El patrón, el giro y los anillos salen del nombre, así que dos técnicas de la misma familia se distinguen.
+  - Es el mismo en todos los clientes y no modifica ningún documento.
 ## 1.101.0 — Avisos sin solapes
 - Los avisos emergentes de Sealed Ink ya no quedan debajo de los avisos de Foundry. Antes empezaban siempre a 65 px y Foundry los cubría. Ahora se colocan justo debajo de los avisos de Foundry y de la barra de escenas.
 - El botón de avisos y su panel ya no tapan las tarjetas de chat de Foundry (las que aparecen junto a la barra lateral), la barra de accesos rápidos ni la lista de jugadores. Se colocan encima de ellas y se recolocan solos cuando esas tarjetas aparecen o desaparecen.
