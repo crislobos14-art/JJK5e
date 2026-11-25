@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.96.0 — Auditoría de automatizaciones para dnd5e 6.1
+- Velocidad: 19 efectos de técnicas y dotes (Blue Hour, Golden Week, Extreme Cold, Illusive Terrain, Immobilizing Eyes, Indigestion, Energizing Gaze, Event Horizon, Reverse Transcendence, Aerokinesis, piernas inmovilizadas, Flowing Red Scale…) usaban `system.attributes.movement.all`. dnd5e 6 guarda las velocidades en `movement.speeds`, así que los que la multiplicaban (×0,5, ×2, ×3, ×¼) no hacían nada. Ahora se traducen al multiplicador nativo de movimiento de dnd5e, y los que la fijan a 0 (Grounding, X-Axis Shot, Stance of the Sparks, Projection, Majestic Pose, Light Manipulation) usan el mismo multiplicador en lugar de depender de DAE.
+- Resistencias e inmunidades totales: `dr.all` y `di.all` (Analgesic, Core Reversal, Intangibility, Inverse Ratio, World Anchor, Medical Clinic, Comedy) se escriben como el tipo de daño nativo «ALL» de dnd5e, sin depender del mapeo de DAE.
+- Agotamiento temporal: dnd5e 6 recalcula el agotamiento desde su propio efecto después de aplicar los demás, así que 10 efectos que sumaban niveles (Blackened Blood, Improved Bindings, Extreme Cold, Heat Dissociation, las 5 fases de Amber Release, Noxious Poison) no daban agotamiento. Ahora suman niveles reales mientras dura el efecto y, al terminar o desactivarse, quitan exactamente los que añadieron (máximo 6).
+- Las tres correcciones se aplican al crear el efecto, así que también arreglan los objetos ya importados en los mundos, sin volver a importarlos Funcionan tanto con cambios de efecto en formato `mode` como en el formato `type` de Foundry 14.
+- Robustez sin escena activa: invocaciones de respaldo, clones y la comprobación de aliados adyacentes ya no lanzan error cuando no hay lienzo o escena.
+- Limpieza: se elimina del repositorio un `module.zip` antiguo (v1.22.2) que seguía en la raíz y podía confundirse con la versión publicada.
+- Verificación: un barrido simulado ejecuta las 1688 actividades de las 469 técnicas, con y sin la autoridad de EM del DJ. Las 1202 con coste cobran exactamente lo previsto, sin errores. Solo se bloquean, como corresponde, las sub-acciones de dominio sin un dominio abierto.
 ## 1.95.1 - Intercambios, efectos de técnicas y controles de ficha
 
 - Boogie usa el token del lanzador y conserva el objetivo elegido al pagar. Clap Back aplica el descuento y amplía el alcance a 45 pies. Round of Applause lo amplía a 60 pies.
