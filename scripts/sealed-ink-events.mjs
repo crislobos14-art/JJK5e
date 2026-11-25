@@ -1,6 +1,8 @@
 /** Sealed Ink: client-local notification center and encounter HUD.
  * Read confirmed document state. No new combat resolution, socket, or document writes.
  */
+import { invokeSealedActivity, isNativeActivityAvailable } from "./sealed-ink-combat.mjs";
+
 const ID = "jjk5e";
 const L = (en, es) => game.i18n.lang.startsWith("es") ? es : en;
 const api = () => game.modules.get(ID)?.api;
@@ -274,11 +276,11 @@ function linkedSummon(actor) {
 async function useHUDActivity(actor, itemId, activityId, event) {
   if (busy || !visible(actor) || linkedSummon(actor) || !candidates().some(candidate => candidate.uuid === actor.uuid)) return;
   const activity = actor.items.get(itemId)?.system?.activities?.get(activityId);
-  if (typeof activity?.use !== "function") return;
+  if (!isNativeActivityAvailable(activity)) return;
   const control = event.currentTarget;
   busy = true;
   control.disabled = true;
-  try { return await activity.use({ event }, { configure: true }, {}); }
+  try { return await invokeSealedActivity(actor, activity, event); }
   finally { busy = false; control.disabled = false; }
 }
 const favorites = () => settings("sealedFavorites");
@@ -370,7 +372,7 @@ function drawHUD(body) {
     body.append(summons);
   }
   const rows = el("div","jjk-sealed-hud-activities");
-  const activities = [...actor.items].flatMap(item => [...(item.system?.activities ?? [])].filter(a => typeof a.use === "function").map(a => ({item,a})));
+  const activities = [...actor.items].flatMap(item => [...(item.system?.activities ?? [])].filter(isNativeActivityAvailable).map(a => ({item,a})));
   const search = el("input"); search.type = "search"; search.placeholder = L("Find activity","Buscar actividad"); search.setAttribute("aria-label",search.placeholder); search.value = activityQuery;
   function draw() {
     rows.replaceChildren();
