@@ -525,6 +525,15 @@
       "privateCE": {
         "Name": "Private CE messages",
         "Hint": "CE spent/regained chat lines are only shown to the character's owners and the GM."
+      },
+      "tableView": {
+        "Name": "Table view",
+        "Hint": "How module tables adapt. Automatic follows the window width: comfortable when wide, compact when medium, one card per row when narrow. Every window can be resized.",
+        "auto": "Automatic (by window size)",
+        "comfortable": "Comfortable",
+        "compact": "Compact",
+        "stacked": "Cards (one row per card)",
+        "scroll": "Scroll horizontally"
       }
     },
     "Feats": {

@@ -9072,5 +9072,94 @@ function markInkTables(root) {
 }
 Hooks.once("ready", () => {
   if (game.system?.id !== "dnd5e") return;
-  Hooks.on("renderApplicationV2", (app, element) => { try { inkTables(app, element); } catch (err) { reportError("ink tables", err); } });
+  Hooks.on("renderApplicationV2", (app, element) => {
+    try { inkTables(app, element); } catch (err) { reportError("ink tables", err); }
+    try { fitTablesIn(app, element); } catch (err) { reportError("adaptive tables", err); }
+  });
+  Hooks.on("renderChatMessageHTML", (message, html) => {
+    try { if (html?.querySelector?.("table")) fitTables(html); } catch (err) { reportError("adaptive tables", err); }
+  });
+});
+
+/* ---- Adaptive tables: every module table follows its window's width and the chosen view ------ */
+
+const TABLE_VIEWS = ["auto", "comfortable", "compact", "stacked", "scroll"];
+/** Where a table belongs to the module: its windows, Sealed Ink surfaces, ink tables and JJK cards. */
+const FIT_SCOPE = ".jjk5e-ui, .jjk-sealed-surface, .jjk-sealed-sheet, .jjk5e-rolltable, .jjk5e-card, .jjk-sealed-chat";
+function tableView() {
+  try { const v = setting("tableView"); return TABLE_VIEWS.includes(v) ? v : "auto"; } catch { return "auto"; }
+}
+/** Header text for each column, following colspan, from <thead> or a first row made only of <th>. */
+function tableHeads(table) {
+  const row = table.tHead?.rows?.[0] ?? [...(table.rows ?? [])].find((r) => r.cells.length && [...r.cells].every((c) => c.tagName === "TH"));
+  if (!row) return { row: null, heads: [] };
+  const heads = [];
+  for (const cell of row.cells) for (let i = 0; i < (Number(cell.colSpan) || 1); i++) heads.push(cell.textContent.trim().replace(/\s+/g, " "));
+  return { row, heads };
+}
+/** Wrap a table in a sized scroll container and label its cells so the stacked view can show the column name. */
+function fitTable(table) {
+  // Never touch a table being edited: the wrapper or the labels would be saved into the document.
+  if (table.closest("[contenteditable=true], prose-mirror, .editor-content.editable, textarea")) return false;
+  let wrap = table.parentElement;
+  if (!wrap?.classList?.contains("jjk-table-wrap")) {
+    wrap = document.createElement("div");
+    wrap.className = "jjk-table-wrap";
+    table.before(wrap);
+    wrap.append(table);
+  }
+  const { row, heads } = tableHeads(table);
+  let cols = heads.length;
+  for (const tr of table.rows ?? []) {
+    if (tr === row) continue;
+    let col = 0;
+    for (const cell of tr.cells) {
+      const label = heads[col];
+      if (label && cell.dataset.label !== label) cell.dataset.label = label;
+      col += Number(cell.colSpan) || 1;
+    }
+    cols = Math.max(cols, col);
+  }
+  table.classList.add("jjk-fit");
+  table.dataset.jjkCols = String(cols);
+  table.classList.toggle("jjk-fit-labeled", heads.length > 0);
+  // Editable grids (point buy, roll table results) keep their columns: cards would separate inputs from their row.
+  table.classList.toggle("jjk-fit-form", !!table.querySelector("input, select, textarea"));
+  return true;
+}
+function fitTables(root, { force = false } = {}) {
+  if (!root?.querySelectorAll) return 0;
+  const inScope = force || root.matches?.(FIT_SCOPE);
+  let n = 0;
+  for (const table of root.querySelectorAll("table")) {
+    if (!inScope && !table.closest(FIT_SCOPE) && !table.classList.contains("jjk-ink-table")) continue;
+    if (fitTable(table)) n += 1;
+  }
+  if (n) root.dataset.jjkTables = tableView();
+  return n;
+}
+function fitTablesIn(app, element) {
+  const root = element instanceof HTMLElement ? element : (element?.[0] ?? app?.element);
+  if (!root?.querySelectorAll) return;
+  fitTables(root);
+  // Journal pages, panel tabs and roll results can add tables after the render hook.
+  if (!app._jjkFitObserver && typeof MutationObserver === "function" && (root.matches?.(FIT_SCOPE) || root.querySelector(".jjk-ink-table"))) {
+    let queued = false;
+    app._jjkFitObserver = new MutationObserver(() => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(() => { queued = false; if (root.isConnected) fitTables(root); else { app._jjkFitObserver?.disconnect(); app._jjkFitObserver = null; } });
+    });
+    app._jjkFitObserver.observe(root, { childList: true, subtree: true });
+  }
+}
+function applyTableView() {
+  const view = tableView();
+  for (const node of document.querySelectorAll("[data-jjk-tables]")) node.dataset.jjkTables = view;
+}
+Hooks.once("init", () => {
+  game.settings.register(MODULE_ID, "tableView", {
+    name: "JJK5E.Settings.tableView.Name", hint: "JJK5E.Settings.tableView.Hint", scope: "client", config: true, type: String, default: "auto",
+    choices: Object.fromEntries(TABLE_VIEWS.map((v) => [v, `JJK5E.Settings.tableView.${v}`])), onChange: applyTableView
+  });
 });

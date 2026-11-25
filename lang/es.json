@@ -525,6 +525,15 @@
       "privateCE": {
         "Name": "Mensajes de CE privados",
         "Hint": "Las líneas de chat de CE gastado o recuperado solo las ven los dueños del personaje y el GM."
+      },
+      "tableView": {
+        "Name": "Vista de tablas",
+        "Hint": "Cómo se adaptan las tablas del módulo. Automática sigue el ancho de la ventana: amplia si es ancha, compacta si es media y una tarjeta por fila si es estrecha. Todas las ventanas se pueden redimensionar.",
+        "auto": "Automática (según el tamaño)",
+        "comfortable": "Amplia",
+        "compact": "Compacta",
+        "stacked": "Tarjetas (una fila por tarjeta)",
+        "scroll": "Desplazamiento horizontal"
       }
     },
     "Feats": {

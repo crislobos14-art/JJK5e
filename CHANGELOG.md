@@ -1,5 +1,8 @@
 # Changelog
 
+## Próximo release (pendiente, 1 de 5 cambios)
+- Tablas adaptables: cada tabla del módulo (ventanas JJK, fichas y superficies Sealed Ink, tablas de tirada, diarios con tablas de tinta y tarjetas de chat) se ajusta al ancho de su ventana. Ancha: más espacio. Media: compacta. Estrecha: una tarjeta por fila con el nombre de la columna junto a cada valor; las tablas de dos columnas y las que tienen campos editables conservan sus columnas. Nuevo ajuste de cliente «Vista de tablas»: Automática, Amplia, Compacta, Tarjetas o Desplazamiento horizontal (primera columna fija). Nunca se modifica una tabla mientras se edita su texto.
+
 ## 1.91.0 — Sealed Ink 2: fichas, tablas, animaciones y avisos
 - Ficha de personaje: D&D 5e define su tema oscuro con `@scope`, que ganaba a los colores de Sealed Ink. Por eso aparecían textos azul grisáceo, dorados y fondos «denim». Ahora Sealed Ink sustituye los tokens del sistema en la propia ficha: fondos tinta, cabeceras de tarjeta con el rojo del sello, texto hueso, PG en rojo y Dados de Golpe en violeta de EM. La cabecera, la tarjeta lateral, las pestañas verticales, las características y las tiradas de salvación siguen la misma estructura sin bordes redondeados.
 - Ficha de PNJ: cabecera compacta, retrato enmarcado con sombra de sello, tarjeta lateral con borde rojo y la misma paleta que la ficha de personaje. Sin el estandarte del sistema, que no encajaba con Sealed Ink.

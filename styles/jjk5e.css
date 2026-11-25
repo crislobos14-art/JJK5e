@@ -537,3 +537,46 @@ table.jjk-ink-table a.content-link, table.jjk-ink-table a.inline-roll { backgrou
 /* v1.87 — every JJK window can be resized: content scrolls instead of overflowing. */
 .jjk5e-ui .window-content { overflow-y: auto; min-height: 0; }
 .jjk5e-ui.jjk5e-dialog .dialog-content { overflow-y: auto; }
+
+/* v1.92 — adaptive tables. Each table sits in its own size container and follows the window:
+   comfortable when wide, compact when medium, one card per row when narrow (tables of 3+ columns).
+   The "Table view" client setting forces one view through [data-jjk-tables] on the window. */
+.jjk-table-wrap { container: jjk-table / inline-size; width: 100%; max-width: 100%; margin: 6px 0; }
+/* Only the scroll view makes the wrapper a scroll box: elsewhere sticky table headers keep following the window. */
+:where([data-jjk-tables=scroll]) .jjk-table-wrap { overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: thin; }
+.jjk-table-wrap > table.jjk-fit { width: 100%; margin: 0; table-layout: auto; }
+table.jjk-fit :is(th, td) { overflow-wrap: anywhere; hyphens: auto; vertical-align: top; }
+table.jjk-fit :is(td, th) img { max-width: 100%; height: auto; }
+
+/* Comfortable: wide windows get room to breathe. */
+@container jjk-table (min-width: 760px) {
+  :where([data-jjk-tables=auto]) table.jjk-fit :is(th, td) { padding: 7px 10px; }
+}
+:where([data-jjk-tables=comfortable]) table.jjk-fit :is(th, td) { padding: 7px 10px; }
+
+/* Compact: medium widths tighten padding and type. */
+@container jjk-table (max-width: 560px) {
+  :where([data-jjk-tables=auto]) table.jjk-fit :is(th, td) { padding: 3px 5px; font-size: .92em; }
+}
+:where([data-jjk-tables=compact]) table.jjk-fit :is(th, td) { padding: 3px 5px; font-size: .92em; line-height: 1.25; }
+
+/* Cards: narrow windows (or the forced view) show each row as a card with the column name beside its value. */
+@container jjk-table (max-width: 420px) {
+  :where([data-jjk-tables=auto]) table.jjk-fit.jjk-fit-labeled:not(.jjk-fit-form):not([data-jjk-cols="1"], [data-jjk-cols="2"]) :is(thead) { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  :where([data-jjk-tables=auto]) table.jjk-fit.jjk-fit-labeled:not(.jjk-fit-form):not([data-jjk-cols="1"], [data-jjk-cols="2"]) :is(tbody, tr, td) { display: block; width: 100%; }
+  :where([data-jjk-tables=auto]) table.jjk-fit.jjk-fit-labeled:not(.jjk-fit-form):not([data-jjk-cols="1"], [data-jjk-cols="2"]) tbody tr:first-child:not(:has(> td)) { display: none; }
+  :where([data-jjk-tables=auto]) table.jjk-fit.jjk-fit-labeled:not(.jjk-fit-form):not([data-jjk-cols="1"], [data-jjk-cols="2"]) tr { margin: 0 0 5px; border: 1px solid var(--jjk-edge, var(--line, #443b45)); border-left: 3px solid var(--jjk-seal, var(--seal, #ce1032)); }
+  :where([data-jjk-tables=auto]) table.jjk-fit.jjk-fit-labeled:not(.jjk-fit-form):not([data-jjk-cols="1"], [data-jjk-cols="2"]) td { display: grid; grid-template-columns: minmax(5.5em, 38%) minmax(0, 1fr); gap: 6px; padding: 4px 7px; border: 0; white-space: normal; text-align: start; }
+  :where([data-jjk-tables=auto]) table.jjk-fit.jjk-fit-labeled:not(.jjk-fit-form):not([data-jjk-cols="1"], [data-jjk-cols="2"]) td[data-label]::before { content: attr(data-label); font-size: .82em; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; opacity: .72; }
+}
+:where([data-jjk-tables=stacked]) table.jjk-fit.jjk-fit-labeled:not(.jjk-fit-form) thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+:where([data-jjk-tables=stacked]) table.jjk-fit.jjk-fit-labeled:not(.jjk-fit-form) :is(tbody, tr, td) { display: block; width: 100%; }
+:where([data-jjk-tables=stacked]) table.jjk-fit.jjk-fit-labeled:not(.jjk-fit-form) tbody tr:first-child:not(:has(> td)) { display: none; }
+:where([data-jjk-tables=stacked]) table.jjk-fit.jjk-fit-labeled:not(.jjk-fit-form) tr { margin: 0 0 5px; border: 1px solid var(--jjk-edge, var(--line, #443b45)); border-left: 3px solid var(--jjk-seal, var(--seal, #ce1032)); }
+:where([data-jjk-tables=stacked]) table.jjk-fit.jjk-fit-labeled:not(.jjk-fit-form) td { display: grid; grid-template-columns: minmax(5.5em, 38%) minmax(0, 1fr); gap: 6px; padding: 4px 7px; border: 0; white-space: normal; text-align: start; }
+:where([data-jjk-tables=stacked]) table.jjk-fit.jjk-fit-labeled:not(.jjk-fit-form) td[data-label]::before { content: attr(data-label); font-size: .82em; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; opacity: .72; }
+
+/* Scroll: keep the grid, scroll sideways, first column pinned. */
+:where([data-jjk-tables=scroll]) .jjk-table-wrap > table.jjk-fit { width: max-content; min-width: 100%; }
+:where([data-jjk-tables=scroll]) table.jjk-fit :is(th, td) { white-space: nowrap; overflow-wrap: normal; }
+:where([data-jjk-tables=scroll]) table.jjk-fit :is(th, td):first-child { position: sticky; left: 0; z-index: 1; background: var(--jjk-card, var(--paper, #f3ece0)); }
