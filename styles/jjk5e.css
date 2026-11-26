@@ -704,3 +704,12 @@ table.jjk-fit :is(td, th) img { max-width: 100%; height: auto; }
 /* The native meter replaces the sheet card's CE row and the overview tile: one CE readout per sheet. */
 .jjk-has-ce-meter .jjk5e-strip .jjk-sc-ce,
 .jjk-has-ce-meter .jjk-overview-ce { display: none; }
+
+/* Refinement diary: Sealed Ink ledger. */
+.jjk5e-ui.jjk5e-dialog .jjk-refinement-log { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.jjk5e-ui.jjk5e-dialog .jjk-refinement-log th { text-align: left; color: var(--jjk-muted); font: 700 10px/1.2 var(--font-primary, sans-serif); letter-spacing: .12em; text-transform: uppercase; padding: 4px 6px; border-bottom: 1px solid var(--jjk-seal); }
+.jjk5e-ui.jjk5e-dialog .jjk-refinement-log td { padding: 5px 6px; border-bottom: 1px dotted var(--jjk-line); vertical-align: top; }
+.jjk5e-ui.jjk5e-dialog .jjk-refinement-log td.up { color: #8fd18a; font-weight: 700; }
+.jjk5e-ui.jjk5e-dialog .jjk-refinement-log td.down { color: var(--jjk-seal); font-weight: 700; }
+.jjk5e-card .jjk-domain-env { margin: 4px 0; padding-left: 8px; border-left: 2px solid var(--jjk-seal); color: var(--jjk-bone-2); font-style: italic; }
+.jjk5e-card .jjk-domain-env i { color: var(--jjk-seal-2); font-style: normal; margin-inline-end: 4px; }

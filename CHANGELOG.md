@@ -1,5 +1,16 @@
 # Changelog
 
+## 2.4.0 — Asistente de dominio, diario de refinamiento y sellos exclusivos
+- **Asistente de dominio propio** (antes «Editar dominio personalizado», solo DJ):
+  - Además del efecto ambiental, guarda el entorno del dominio y la mejora de técnica. Ambos aparecen en la tarjeta de apertura.
+  - En un dominio incompleto, el efecto se aplica según el V.6: pide una salvación (CON si no se elige otra), hace la mitad del daño si se falla y nada si se supera, y la condición dura la mitad.
+  - A partir de refinamiento 300, el daño del dominio suma tantos dados como el modificador de EM.
+- **Diario de refinamiento:** botón en el panel JJK con el historial de entrenamientos, víctimas, choques ganados y ajustes del DJ. Muestra día y hora de juego, cambio y total.
+- **Sellos de forma propia:**
+  - Dominios: redondos, con doble anillo y halo.
+  - Votos: en rombo.
+  - Heavenly Restriction (clase, subclases y rasgos): octágono.
+- Los votos vinculantes ya tenían el límite de tu BC y la tabla de desgracias al romperlos.
 ## 2.3.0 — Dominio: menos trabajo manual
 - **Golpe de expansión:** la tarjeta de apertura tiene un botón para el DJ. Se marcan como objetivo las criaturas que la expansión no atrapó y se pulsa:
   - tira Xd6 contundente (X = modificador de EM) y aplica el daño;

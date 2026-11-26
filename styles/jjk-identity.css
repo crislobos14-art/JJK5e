@@ -40,3 +40,16 @@
 :is(.chat-card, .message-content)[data-jjk-family] .jjk-id-seal { margin-inline-end: 6px; }
 
 @media (prefers-reduced-motion: reduce) { .jjk-id-seal, .jjk-id-seal::before { transition: none; animation: none; } }
+
+/* Exclusive seal shapes: domains (round, double ring), vows (diamond), Heavenly Restriction (cut octagon). */
+.jjk-id-seal[data-family="domain"] { border-radius: 50%; box-shadow: 0 0 0 1px var(--jjk-id-deep), 0 0 0 2px var(--jjk-id), 0 0 6px color-mix(in srgb, var(--jjk-id) 45%, transparent); }
+.jjk-id-seal[data-family="vow"] { transform: rotate(45deg) scale(.8); border-radius: 1px; box-shadow: 0 0 0 1px var(--jjk-id-deep), 0 0 0 2px var(--jjk-id) !important; margin-inline: 3px 9px; }
+.jjk-id-seal[data-family="vow"] > i { transform: rotate(-45deg); }
+.jjk-id-seal[data-family="class-heavenly-restriction"] {
+  --jjk-oct: polygon(30% 0, 70% 0, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0 70%, 0 30%);
+  border: 0; background: var(--jjk-id); clip-path: var(--jjk-oct); box-shadow: none;
+}
+.jjk-id-seal[data-family="class-heavenly-restriction"]::after {
+  content: ""; position: absolute; inset: 1.5px; z-index: -2; background: var(--jjk-id-deep); clip-path: var(--jjk-oct);
+}
+.jjk-id-seal[data-family="class-heavenly-restriction"]::before { inset: 1.5px; transform: none; clip-path: var(--jjk-oct); }
