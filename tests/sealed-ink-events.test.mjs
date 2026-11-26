@@ -10,7 +10,7 @@ function fixture(storage = new Map(), persisted = false) {
   const hooks = new Map(), settings = new Map();
   const game = { world: { id: "test-world" }, user: { id: "test-user", isGM: false }, system: { id: "dnd5e" }, i18n: { lang: "es" },
     settings: { register: (id,k,o) => settings.set(k,o), get: (id,k) => persisted && ["sealedEventCenter", "sealedPersistNotices"].includes(k) ? true : settings.get(k)?.default } };
-  const exposed = runInNewContext(source.replace(/^import .*\n/gm, "") + "\n({delta,visible,useHUDActivity,history,unread,saveHistory,loadHistory});", { Hooks: { once: (k,f) => hooks.set(k,f) }, game, invokeSealedActivity, isNativeActivityAvailable, canvas: null, fromUuidSync: () => ({ isOwner: false }), window: { localStorage: {
+  const exposed = runInNewContext(source.replace(/^import [^\r\n]*\r?\n/gm, "") + "\n({delta,visible,useHUDActivity,history,unread,saveHistory,loadHistory});", { Hooks: { once: (k,f) => hooks.set(k,f) }, game, invokeSealedActivity, isNativeActivityAvailable, canvas: null, fromUuidSync: () => ({ isOwner: false }), window: { localStorage: {
     getItem: key => storage.get(key), setItem: (key, value) => storage.set(key, value), removeItem: key => storage.delete(key)
   } } });
   hooks.get("init")();

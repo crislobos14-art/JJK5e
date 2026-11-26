@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.0.0 — Dominios y energía maldita en multijugador
+
+- Los controles de cierre apuntan a la apertura que los generó. Una petición antigua no puede cerrar un dominio posterior.
+- Las animaciones de expansión y choque usan la escena del dominio aunque el DJ esté en otro mapa. El agotamiento de técnica busca y libera las invocaciones del mapa de origen.
+- El cierre limpia la escena afectada. Al iniciar el mundo o usar la herramienta de limpieza manual, el módulo revisa todas las escenas.
+- El ciclo de dominios, las transacciones de EM y los adaptadores de Midi-QOL y DAE tienen módulos propios. Las macros y la API mantienen sus puntos de entrada.
+- Las pruebas simuladas cubren cierres tardíos, efectos entre escenas, bordes del mapa y traspaso de autoridad del DJ durante una reserva de EM. La publicación se valida con CI y simulaciones. Sigue pendiente la comprobación en una mesa de Foundry conectada.
+
 ## 1.104.0 — Sellos sin iconos repetidos
 - Ningún icono se comparte entre familias. Antes el puño, la espada y el birrete se repetían en Golpe, Físico, Warrior, Corte, Arma maldita, Pericia y Rasgo de clase.
 - Cada familia tiene su propio juego de 3 a 8 iconos. En una misma ficha, las técnicas y los objetos de la misma familia reciben iconos distintos mientras queden libres; por ejemplo, Blue, Red, Hollow Purple, Infinity y Unlimited Void ya no comparten icono. El reparto sigue el orden alfabético, así que todos los jugadores ven lo mismo.

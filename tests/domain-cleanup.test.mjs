@@ -65,3 +65,32 @@ test("the sweep removes a tint, zone and marker left by an older version or a lo
   assert.equal(regions.size, 0);
   assert.deepEqual(Object.keys(scene.flags.fxmaster.filters), ["apiMacro_user_f"], "other filters stay");
 });
+
+test("normal close visits its scene only; the manual cleanup still visits the full world", async () => {
+  const { env, open } = await world();
+  let reads = 0;
+  const remote = { id: "remote", flags: {}, get regions() { reads++; return []; }, tokens: [] };
+  env.game.scenes.set(remote.id, remote);
+  const actor = await open("A", 300);
+  await env.jjk.domainClosed(actor);
+  assert.equal(reads, 0);
+  await env.jjk.sweepDomainLeftovers();
+  assert.equal(reads, 1);
+});
+
+test("burnout marks and releases unlinked summons in the domain scene while the GM views another scene", async () => {
+  const { env, scene } = await world();
+  env.context.canvas = { scene: { id: "remote", tokens: [] } };
+  const caster = env.addActor({ name: "Caster", items: [{ name: "Technique", flags: { jjk5e: { technique: "Test" } } }] });
+  const summon = new env.Actor({ name: "Unlinked summon" });
+  summon.token = { actor: summon, parent: scene, flags: { jjk5e: { summonedBy: caster.uuid } } };
+  scene.tokens.push(summon.token);
+  await env.jjk.openDomain(caster, { name: "Domain" }); await env.settle();
+  await env.jjk.setDomain(caster, { ...env.jjk.getDomain(caster), sceneId: scene.id });
+  await env.jjk.closeDomain(caster); await env.settle();
+  const burnout = env.jjk.kindEffect(caster, "burnout");
+  assert.equal(burnout.getFlag("jjk5e", "burnoutSceneId"), scene.id);
+  assert.equal(env.jjk.kindEffect(summon, "burnoutSummon")?.getFlag("jjk5e", "burnoutOf"), caster.uuid);
+  await burnout.delete(); await env.settle();
+  assert.ok(!env.jjk.kindEffect(summon, "burnoutSummon"));
+});

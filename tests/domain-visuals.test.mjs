@@ -14,7 +14,15 @@ async function visualScene() {
     data = {};
     effect() { return this; }
     file(file) { this.data.file = file; return this; }
-    atLocation({ x, y }) { this.data.point = { x, y }; return this; }
+    atLocation(location, options) {
+      if (typeof location === "string") {
+        this.data.anchor = location;
+        this.data.offset = options.offset;
+      } else {
+        this.data.point = { x: location.x, y: location.y };
+      }
+      return this;
+    }
     size(size) { this.data.size = size; return this; }
     name(name) { this.data.name = name; return this; }
     belowTokens() { this.data.below = true; return this; }
@@ -76,4 +84,24 @@ test("a new visible clash pulses once and keeps refinement and sure-hit rules", 
   scene.tokens[1].hidden = true;
   env.jjk.animateDomainClash(scene, [a, b]);
   assert.equal(effects.length, 1);
+});
+
+test("off-scene GM sends effects to the domain token's scene and preserves the edge limit", async () => {
+  const { env, scene, effects } = await visualScene();
+  env.context.canvas = { scene: { id: "gm-room" } };
+  const first = env.addActor({ name: "First" }), second = env.addActor({ name: "Second" });
+  for (const [actor, x] of [[first, 110], [second, 130]]) {
+    const token = { uuid: `Scene.room.Token.${actor.id}`, actor, parent: scene, x: x - 50, y: 350, width: 1, height: 1 };
+    scene.tokens.push(token);
+    await env.jjk.setDomain(actor, { open: true, sceneId: scene.id, tokenUuid: token.uuid, x, y: 400, radius: 175, refinement: 300, openingId: actor.id });
+  }
+  env.jjk.animateDomainOpening(first, env.jjk.getDomain(first), scene.tokens[0]);
+  env.jjk.animateDomainClash(scene, [first, second]);
+  assert.deepEqual(effects.map(effect => effect.anchor), Array(4).fill(scene.tokens[0].uuid));
+  assert.deepEqual(effects.map(effect => effect.size), [20, 20, 20, 40]);
+  assert.deepEqual(effects.map(effect => effect.offset.x), [0, 0, 0, 10]);
+  assert.ok(effects.every(effect => effect.offset.y === 0));
+  scene.tokens[1].hidden = true;
+  env.jjk.animateDomainClash(scene, [first, second]);
+  assert.equal(effects.length, 4);
 });
