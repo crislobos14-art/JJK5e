@@ -954,7 +954,9 @@ test("a player long rest restores fractional CE through the native item updates"
 test("Transactional CE adapter: debit precedes native consumption and repeated postUse does not debit again",async()=>{
   const {env,actor,J}=await setup({settings:{transactionalCE:true}});
   const [item]=await actor.createEmbeddedDocuments("Item",[{name:"Technique",type:"feat",flags:{jjk5e:{ceCosts:{a:8}}},system:{activities:{a:{id:"a",name:"Attack"}}}}]);
-  const act={id:"a",name:"Attack",actor,item},usage={scaling:0};
+  const act={id:"a",type:"attack",name:"Attack",actor,item},usage={scaling:0};
+  // The adapter is what libWrapper installs on the activity type's consume(); this test drives it directly.
+  J.CE_ADAPTER_TARGETS.add("CONFIG.DND5E.activityTypes.attack.documentClass.prototype.consume");
   assert.equal(env.Hooks.call("dnd5e.preActivityConsumption",act,usage,{}),false,"no native use without reservation");
   let calls=0;
   const result=await J.consumeWithCE(async()=>{
