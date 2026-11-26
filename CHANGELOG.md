@@ -1,5 +1,17 @@
 # Changelog
 
+## 2.6.0 — Auditoría de 2.1–2.5
+Revisión completa:
+- Los 80 botones del panel JJK tienen acción y ninguno lanza errores.
+- Las 691 claves de texto existen en español y en inglés.
+- Las ventanas del módulo no tienen botones sin respuesta.
+- Las pruebas de avisos, pestaña JJK y solapes en Chrome pasan.
+
+Correcciones:
+- **Comprimir dominio** pasa por el DJ activo, como el resto de cambios de dominio. Antes un jugador escribía el estado del dominio directamente y podía chocar con una escritura del DJ.
+- **Potencia aumentada** ya no añade dados a las curaciones de técnica, solo al daño.
+- **Superioridad de dominio (+100):** ya no se concede si el rival que se cierra iba ganando el choque (por ejemplo, porque se le acabó el tiempo). Solo cuenta cuando su dominio cae.
+- La tarjeta de apertura indica que el golpe de expansión es un botón del DJ, no algo que se aplique a mano.
 ## 2.5.0 — Guía del módulo y tutorial
 - **Guía del módulo JJK5e** en el compendio de reglas, en español y en inglés. Sus 11 páginas cubren:
   - inicio rápido para jugadores y DJ;

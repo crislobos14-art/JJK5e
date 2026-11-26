@@ -1941,6 +1941,8 @@ async function trainRefinement(actor) {
 async function compressDomain(actor) {
   const s = getDomain(actor);
   if (!s?.open || s.compressed || s.noBarrier || refinementOf(actor) < 900) return;
+  // Domain state is written by the active GM: players ask for it.
+  if (!isActiveGM()) return requestDomainAuthority("compress", { actorUuid: actor.uuid, openingId: s.openingId });
   if (await spendCE(actor, 5, t("Domain.Compress")) === false) return;
   const fresh = getDomain(actor);
   if (!fresh?.open) return;
@@ -1985,7 +1987,8 @@ function domainPotencyPart(actor, item, parts) {
 function onPreRollDamage(config) {
   const actor = config?.subject?.actor ?? config?.subject?.item?.actor;
   crunchyCrit(config, actor);
-  const potency = actor && domainPotencyPart(actor, config?.subject?.item, config?.rolls?.[0]?.parts);
+  const healing = config?.subject?.type === "heal" || (config?.rolls ?? []).some((r) => (r.options?.types ?? [r.options?.type]).includes?.("healing"));
+  const potency = actor && !healing && domainPotencyPart(actor, config?.subject?.item, config?.rolls?.[0]?.parts);
   if (potency) addPart(config, potency);
   if (actor && config?.subject?.item?.flags?.jjk5e?.rawCE) rawCEDamageBonus(actor).forEach((p) => addPart(config, p));
   if (!setting("blackFlashDamage")) return;
@@ -5453,7 +5456,7 @@ async function domainActor(uuid) {
 }
 /** Query context.user is supplied by Foundry; never accept a sender ID from the payload. */
 async function handleDomainAuthority(msg, { user } = {}) {
-  if (!isActiveGM() || !user?.active || !msg?.payload || !["claim", "finish", "decline", "mode", "close", "lethal", "attack", "weakSpot", "weakHole", "outsideBlast", "amplification"].includes(msg.operation)) return false;
+  if (!isActiveGM() || !user?.active || !msg?.payload || !["claim", "finish", "decline", "mode", "close", "lethal", "attack", "weakSpot", "weakHole", "outsideBlast", "compress", "amplification"].includes(msg.operation)) return false;
   const { operation, payload: data } = msg;
   const actor = await domainActor(data.actorUuid);
   if (!actor) return false;
@@ -5480,6 +5483,7 @@ async function handleDomainAuthority(msg, { user } = {}) {
     if (operation === "attack") return attackBarrier(actor, source, data);
     if (operation === "weakHole") return formWeakHole(actor, source, data);
     if (operation === "outsideBlast") return outsideBlast(actor, data);
+    if (operation === "compress") return compressDomain(actor);
     if (operation === "weakSpot" && Number.isFinite(data.total) && data.total >= 30) {
       const scene = game.scenes.get(state.sceneId);
       if (!scene || ![...(scene.tokens ?? [])].some((tk) => tk.actor?.uuid === source.uuid)) return false;
