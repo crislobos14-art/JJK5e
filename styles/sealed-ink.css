@@ -691,6 +691,10 @@
 :is(.jjk-sealed-event-toast,.jjk-sealed-notice)[data-tone=energy] .jjk-sealed-toast-head i{color:var(--energy)}
 :is(.jjk-sealed-event-toast,.jjk-sealed-notice)[data-tone=gold] .jjk-sealed-toast-head i{color:#d4ad36}
 .jjk-sealed-notice{gap:3px}
+/* Panel list: kind and time on the first line, the full name below (never cut). */
+.jjk-sealed-notice .jjk-sealed-toast-head{flex-wrap:wrap;row-gap:2px}
+.jjk-sealed-notice .jjk-sealed-toast-head time{margin-inline-start:auto}
+.jjk-sealed-notice .jjk-sealed-toast-head strong{order:3;flex:1 0 100%;white-space:normal;overflow:visible;overflow-wrap:anywhere;font-size:14px;line-height:1.15}
 .jjk-sealed-notice.unread{background:#221d26;box-shadow:inset 0 0 0 1px #665861}
 .jjk-sealed-notice.unread .jjk-sealed-toast-head strong::after{content:"";display:inline-block;width:6px;height:6px;margin-inline-start:6px;background:var(--seal);vertical-align:middle}
 .jjk-sealed-event-toast{overflow:hidden;box-shadow:4px 4px 0 #000,0 8px 22px #0006}
