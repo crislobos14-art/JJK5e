@@ -144,6 +144,8 @@ export function buildTechniqueItems(spec) {
     else if (type !== "passive") type = "utility";
     const activities = type === "passive" ? {} : { [aid]: { ...act, type } };
     const flags = { technique: tech, level, custom: true, spellFrom: "feat" };
+    // Sound and ink effect of an existing technique, chosen in the builder (else picked from the theme).
+    if (typeof spec.fxAs === "string" && spec.fxAs.trim()) flags.fxAs = spec.fxAs.trim().slice(0, 80);
     if (type !== "passive" && ce) { flags.ceCosts = { [aid]: ce }; if (scaleMax) flags.ceSteps = { [aid]: 1 }; }
     if (domain) Object.assign(flags, { domain: true, domainActivity: aid });
     const kind = String(f.kind ?? TECHNIQUE_SLOTS.find((s) => s.level === level)?.kind ?? "");

@@ -1,5 +1,19 @@
 # Changelog
 
+## 2.12.0 — Auditoría de efectos y sonidos
+- **Fichas ocultas:** si el lanzador o el objetivo está oculto, los sellos e impactos solo los ve el DJ, así que ya no revelan su posición.
+- **Midi-QOL:** el sonido de impacto y la carga de Jin de Fa Jin funcionan aunque Midi junte las tiradas en una sola tarjeta. El sonido llega a cada jugador a su propio volumen.
+- **Técnicas propias:** las técnicas creadas con el constructor usan el sonido y el efecto de una técnica parecida según su tema. El constructor también permite elegir cuál («Sonido y efecto de»).
+- **Dominio:** al abrirlo ya no suenan a la vez la técnica y la apertura; solo suena la apertura.
+- **Automated Animations:** si un objeto tiene animación propia en Automated Animations, el módulo no dibuja la suya encima, y tampoco suena si Automated Animations tiene un sonido configurado.
+- **Colores:** las animaciones de JB2A usan el color de la técnica, aclarado, igual que su sello de tinta.
+- **Armas:** las armas y herramientas malditas suenan según su daño: corte, bala, golpe contundente o elemento.
+- **Rasgos con coste de EM** (Simple Domain, Falling Blossom…): suenan y dibujan el sello de su familia. Los rasgos pasivos siguen en silencio.
+- **Fondos de dominio:**
+  - En Foundry 14 el fondo queda en el mismo nivel que la barrera.
+  - Si la barrera se dibuja como plantilla, también tiene fondo.
+- **Burnout:** su sonido espera a que termine el de cierre del dominio.
+- **Ajustes:** los seis ajustes nuevos usan los archivos de idioma.
 ## 2.11.0 — Sonido, tinta y combate
 - **Barra de EM en el registro de combate:**
   - Una línea fina bajo cada nombre, que se actualiza sola.
