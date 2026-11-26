@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.2.0 — Arreglos: panel de avisos, área de choque y código limpio
+- Panel de avisos: el nombre del actor va en su propia línea y ya no se corta («MALDICIÓN DE GRAD…»). El tipo de aviso y la hora quedan arriba.
+- Área de choque de dominios: mientras dura un choque, el mapa muestra en rojo el área compartida del V.6 (350 ft para dos dominios y 175 ft más por cada dominio extra). Está centrada entre los lanzadores y no sale del mapa. Se borra sola cuando el choque termina. Es solo visual: las reglas siguen usando el radio de cada dominio.
+- Revisión de código sin avisos: las 4 funciones que aparecían como «sin uso» sí se usan dentro de sus motores; ahora consta así en el código.
 ## 2.1.0 — Refinamiento de dominio completo y Reduced Output
 Auditoría de las reglas del motor de dominio y del de energía maldita frente al manual V.6. Se añade lo que faltaba:
 - **Potencia aumentada (refinamiento 300):** dentro de tu dominio completo, el daño de tus técnicas innatas suma tantos dados como tu modificador de EM, del mismo tipo que el primer dado de la técnica.

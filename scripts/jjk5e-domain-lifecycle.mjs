@@ -9,6 +9,7 @@ export function createDomainLifecycle({
   ceMod,
   chat,
   detectClash,
+  syncClashZones,
   domainSuperiority,
   domainActor,
   domainFXIds,
@@ -250,14 +251,17 @@ export function createDomainLifecycle({
     };
     const scenes = targetScene ? [targetScene] : [...(game.scenes ?? [])];
     for (const scene of scenes) {
+      let clashRegions = 0;
       for (const kind of ["Region", "MeasuredTemplate"]) {
-        const docs = [...(scene[kind === "Region" ? "regions" : "templates"] ?? [])]
-          .filter((d) => d.flags?.jjk5e?.domain && !live(d.flags.jjk5e.domain, d.flags.jjk5e.openingId));
+        const list = [...(scene[kind === "Region" ? "regions" : "templates"] ?? [])];
+        if (kind === "Region") clashRegions = list.filter((d) => d.flags?.jjk5e?.clashZone).length;
+        const docs = list.filter((d) => d.flags?.jjk5e?.domain && !live(d.flags.jjk5e.domain, d.flags.jjk5e.openingId));
         for (const d of docs) { await safeDelete(d); removed++; }
       }
       const markers = [...(scene.tokens ?? [])].filter((t) => { const f = barrierMarkerMeta(t); return f && !live(f.actorUuid, f.openingId); });
       if (markers.length) { await scene.deleteEmbeddedDocuments("Token", markers.map((t) => t.id)); removed += markers.length; }
       if (domainFXIds(scene).length && !openDomainsOn(scene).length) { await domainSceneFX(scene, false); removed++; }
+      if (clashRegions) removed += (await syncClashZones?.(scene)) ?? 0;
     }
     for (const proxy of targetScene ? [] : (game.actors ?? [])) {
       const f = proxy.flags?.jjk5e?.barrierMarker;

@@ -202,7 +202,8 @@
       "TrainNoCE": "Not enough CE to train.",
       "TrainDoneChat": "{name} trains their domain: +{n} refinement ({total}).",
       "CasualtyChat": "Domain casualty ({target}): {name} gains +{n} refinement ({total}).",
-      "SuperiorityChat": "Domain superiority: {name} gains +{n} refinement ({total}). Not again this month or against the same rival."
+      "SuperiorityChat": "Domain superiority: {name} gains +{n} refinement ({total}). Not again this month or against the same rival.",
+      "ClashZone": "Domain clash"
     },
     "Burnout": {
       "Name": "Technique Burnout",

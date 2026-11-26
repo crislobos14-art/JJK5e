@@ -202,7 +202,8 @@
       "TrainNoCE": "No tienes EM suficiente para entrenar.",
       "TrainDoneChat": "{name} entrena su dominio: +{n} de refinamiento ({total}).",
       "CasualtyChat": "Víctima del dominio ({target}): {name} gana +{n} de refinamiento ({total}).",
-      "SuperiorityChat": "Superioridad de dominio: {name} gana +{n} de refinamiento ({total}). No se repite este mes ni contra el mismo rival."
+      "SuperiorityChat": "Superioridad de dominio: {name} gana +{n} de refinamiento ({total}). No se repite este mes ni contra el mismo rival.",
+      "ClashZone": "Choque de dominios"
     },
     "Burnout": {
       "Name": "Technique Burnout",

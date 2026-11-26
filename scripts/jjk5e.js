@@ -5729,6 +5729,53 @@ GM_EXTRA.domainZone = async ({ sceneId, x, y, radius, name, color, actorUuid, op
   } else if (zone) await safeDelete(scene.getEmbeddedDocument?.(zone.kind, zone.id));
 };
 
+/**
+ * V.6 clash area: two clashing domains share a 350 ft area (175 ft each); every extra domain widens it by 175 ft.
+ * Drawn as one Region per clash group, centred between the casters and clipped to the map. Rules still use each
+ * domain's own radius: this is the picture of the shared battlefield.
+ */
+const CLASH_ZONE_COLOR = "#c41e3a";
+function clashGroups(scene) {
+  const open = engineActors().map((a) => [a, getDomain(a)])
+    .filter(([, s]) => s?.open && s.sceneId === scene.id && s.clash && !s.clash.resolved && Number.isFinite(s.x) && Number.isFinite(s.y));
+  const byUuid = new Map(open.map(([a, s]) => [a.uuid, s]));
+  const seen = new Set(), groups = [];
+  for (const [actor] of open) {
+    if (seen.has(actor.uuid)) continue;
+    const group = [], stack = [actor.uuid];
+    while (stack.length) {
+      const uuid = stack.pop();
+      if (seen.has(uuid) || !byUuid.has(uuid)) continue;
+      seen.add(uuid); group.push(uuid);
+      for (const peer of [byUuid.get(uuid).clash.with].flat()) if (!seen.has(peer)) stack.push(peer);
+    }
+    if (group.length > 1) groups.push(group.sort());
+  }
+  return groups.map((uuids) => {
+    const states = uuids.map((u) => byUuid.get(u));
+    return { key: uuids.join("|"), x: states.reduce((n, st) => n + st.x, 0) / states.length,
+      y: states.reduce((n, st) => n + st.y, 0) / states.length, radius: 87.5 * uuids.length, levelId: states[0].levelId ?? null };
+  });
+}
+async function syncClashZones(scene) {
+  if (!isActiveGM() || !scene) return 0;
+  const groups = setting("domainZones") ? clashGroups(scene) : [];
+  const existing = [...(scene.regions ?? [])].filter((r) => r.flags?.jjk5e?.clashZone);
+  let removed = 0;
+  for (const region of existing) if (!groups.some((g) => g.key === region.flags.jjk5e.clashZone)) { await safeDelete(region); removed++; }
+  const v14 = (Number(game.release?.generation) || 0) >= 14;
+  for (const g of groups) {
+    if (existing.some((r) => r.flags.jjk5e.clashZone === g.key && scene.getEmbeddedDocument?.("Region", r.id))) continue;
+    const r = ftToPx(scene, g.radius);
+    const shape = domainFits(scene, g.x, g.y, r) ? (v14 ? "circle" : "ellipse") : "polygon";
+    const data = { name: t("Domain.ClashZone"), color: CLASH_ZONE_COLOR, shapes: [domainZoneShape(scene, shape, g.x, g.y, r)],
+      visibility: globalThis.CONST?.REGION_VISIBILITY?.ALWAYS ?? 2, flags: { jjk5e: { clashZone: g.key } } };
+    if (v14 && g.levelId) data.levels = [g.levelId];
+    try { await scene.createEmbeddedDocuments("Region", [data]); } catch (err) { log("clash region failed", err); }
+  }
+  return removed;
+}
+
 GM_EXTRA.domainZoneResize = async ({ sceneId, zone, x, y, radius, actorUuid, openingId }) => {
   if (!isActiveGM()) return;
   const scene = game.scenes?.get?.(sceneId);
@@ -5960,7 +6007,8 @@ async function detectClash(actor) {
     }).join("");
     await docClass("ChatMessage").create({ content: `<div class="jjk5e-card jjk-domain-clash"><h3><i class="fas fa-yin-yang" aria-hidden="true"></i> ${t("Domain.MultiClash")}</h3><ul class="jjk-domain-clash-casters" aria-label="${esc(t("Domain.Refinement"))}">${lines}</ul><p class="hint">${t("Domain.MultiClashHint")}</p></div>` })
       .catch((err) => reportError("domain clash chat", err));
-    animateDomainClash(scene, actors);
+    await syncClashZones(scene).catch((err) => reportError("clash zone", err));
+  animateDomainClash(scene, actors);
     for (const a of actors) {
       const result = results.find((r) => r.id === a.uuid);
       if (result.role === "loser" && result.rounds === 0) await closeDomainOf(a, t("Domain.ClashLost", { name: esc(a.name) }));
@@ -5988,6 +6036,7 @@ async function detectClash(actor) {
     <ul class="jjk-domain-clash-casters" aria-label="${esc(t("Domain.Refinement"))}">${clashParticipant(actor, mine)}${clashParticipant(rival, rs)}</ul>
     <p>${text}</p><p class="hint">${t("Domain.ClashNoSureHit")}</p></div>` })
     .catch((err) => reportError("domain clash chat", err));
+  await syncClashZones(scene).catch((err) => reportError("clash zone", err));
   animateDomainClash(scene, [actor, rival]);
   if (!equal && rounds === 0) await closeDomainOf(lose, t("Domain.ClashLost", { name: esc(lose.name) }));
 }
@@ -9502,6 +9551,8 @@ const {
   setting,
   t
 });
+// Bound for the test harness and the module API; the engines call them internally.
+void [cePostAllowed, recoverCEActor, ceRecoveryDue, midiDomainGuard];
 
 const {
   domainOpened,
@@ -9521,6 +9572,7 @@ const {
   ceMod,
   chat,
   detectClash,
+  syncClashZones,
   domainSuperiority,
   domainActor,
   domainFXIds,
