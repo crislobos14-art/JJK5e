@@ -5911,15 +5911,6 @@ function burnoutRecoveryWins(actor) {
   return Math.max(0, (Number(raw.wins) || 0) - minutes);
 }
 
-/** Technique Burnout (Rules of Thumb): forms and magical effects of the innate technique end; its summons stay
- * but are treated as stunned (and fall prone if they were flying) until the burnout ends. */
-function techniqueOrigins(actor) {
-  return actor.items.filter((i) => i.flags?.jjk5e?.technique).map((i) => i.uuid);
-}
-function fromTechnique(effect, origins) {
-  const o = String(effect?.origin ?? "");
-  return !!o && origins.some((u) => o === u || o.startsWith(`${u}.`));
-}
 function canRecoverBurnout(actor) {
   return !!actor && inBurnout(actor) && refinementOf(actor) >= 750
     && actor.items.some((i) => /^Reverse Cursed Technique/i.test(baseName(i)));

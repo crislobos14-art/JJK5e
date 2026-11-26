@@ -173,12 +173,23 @@ export function createDomainLifecycle({
   }
 
   function burnoutSceneActors(actor, sceneId) {
-    const source = actor.token ?? actorToken(actor)?.document ?? actorToken(actor);
-    const scene = sceneId ? game.scenes?.get(sceneId) : source?.parent ?? canvas?.scene;
+    const source = actor.token ?? actorToken(actor);
+    const scene = sceneId ? game.scenes?.get(sceneId) : (source?.document ?? source)?.parent ?? canvas?.scene;
     const tokens = [...(scene?.tokens ?? [])];
     const actors = [...(game.actors?.contents ?? []), ...tokens.map((token) => token.actor), actor];
     return [...new Map(actors.filter((a) => a?.uuid).map((a) => [a.uuid, a])).values()];
   }
+
+  function techniqueOrigins(actor) {
+    return actor.items.filter((item) => item.flags?.jjk5e?.technique).map((item) => item.uuid);
+  }
+
+  function fromTechnique(effect, origins) {
+    const origin = String(effect?.origin ?? "");
+    return !!origin && origins.some((uuid) => origin === uuid || origin.startsWith(`${uuid}.`));
+  }
+
+  /** Technique Burnout ends innate technique effects and stuns its summons until burnout ends. */
   async function applyBurnoutConsequences(actor, sceneId) {
     if (!isActiveGM() || !actor || !inBurnout(actor)) return;
     const origins = techniqueOrigins(actor);
