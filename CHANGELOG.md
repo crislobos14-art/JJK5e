@@ -1,6 +1,90 @@
 # Changelog
 
-## Próximo release
+## 2.0.0 — Dominios y energía maldita en multijugador
+
+- Los controles de cierre apuntan a la apertura que los generó. Una petición antigua no puede cerrar un dominio posterior.
+- Las animaciones de expansión y choque usan la escena del dominio aunque el DJ esté en otro mapa. El agotamiento de técnica busca y libera las invocaciones del mapa de origen.
+- El cierre limpia la escena afectada. Al iniciar el mundo o usar la herramienta de limpieza manual, el módulo revisa todas las escenas.
+- El ciclo de dominios, las transacciones de EM y los adaptadores de Midi-QOL y DAE tienen módulos propios. Las macros y la API mantienen sus puntos de entrada.
+- Las pruebas simuladas cubren cierres tardíos, efectos entre escenas, bordes del mapa y traspaso de autoridad del DJ durante una reserva de EM. La publicación se valida con CI y simulaciones. Sigue pendiente la comprobación en una mesa de Foundry conectada.
+
+## 1.104.0 — Sellos sin iconos repetidos
+- Ningún icono se comparte entre familias. Antes el puño, la espada y el birrete se repetían en Golpe, Físico, Warrior, Corte, Arma maldita, Pericia y Rasgo de clase.
+- Cada familia tiene su propio juego de 3 a 8 iconos. En una misma ficha, las técnicas y los objetos de la misma familia reciben iconos distintos mientras queden libres; por ejemplo, Blue, Red, Hollow Purple, Infinity y Unlimited Void ya no comparten icono. El reparto sigue el orden alfabético, así que todos los jugadores ven lo mismo.
+## 1.103.0 — Sellos JJK para todo
+- Las 7 clases tienen sello propio, cada una con su color y su icono: Juggernaut (escudo rojo), Scout (corredor verde), Strategist (caballo azul), Shikigami User (perro violeta), Support Specialist (mano sanadora turquesa), Warrior (puño naranja) y Heavenly Restriction (cadena rota dorada). Las subclases y los rasgos de clase llevan el color de su clase.
+- Familias nuevas:
+  - Raza (también sus rasgos), Trasfondo, Mentalidad y Hechizo.
+  - Arma maldita, Equipo, Consumible, Objeto y Contenedor.
+  - Pericia, Pacto celestial, Bendición de grado especial, Rasgo especial y Acción adicional.
+  - Las dotes de barrera, energía maldita, físicas y de RCT toman su categoría.
+- Las técnicas y los dominios conservan su familia. Solo 5 de los 1279 objetos JJK siguen con el sello genérico «Rasgo».
+## 1.102.0 — Dominio dentro del mapa, sin capa oscura e identidad JJK
+- La barrera dibujada cabe en el mapa. El alcance de las reglas sigue en pies (175 ft; 655 ft sin barrera): cuando el círculo se sale del mapa, se dibuja solo la parte que queda dentro, sin invadir el borde. La zona se vuelve a ajustar cuando encoge en un choque. Si Foundry usa una plantilla en lugar de una región, la plantilla se reduce hasta caber, con un mínimo de una casilla.
+- Ya no aparece el rectángulo oscuro: el ambiente de dominio de FXMaster ya no tiñe el mapa de morado oscuro (en mapas oscuros parecía negro). Ahora solo baja un poco la saturación y sube el contraste. La zona del dominio usa un violeta más claro.
+- Tarjetas de dominio más cortas, con lo importante primero:
+  - Apertura: PG, CA, refinamiento y alcance en pies en una sola línea.
+  - Choque: quién gana y por cuánto, en cuántas rondas se rompe el perdedor (o «se rompe ya»), y que el impacto garantizado queda suspendido en ambos hasta resolver el choque.
+  - Empate: se resume en una línea.
+  - Reacción: una frase.
+- Sello JJK por técnica y objeto: cada técnica, dominio, herramienta maldita, voto o rasgo JJK lleva un sello en la ficha, en su hoja y en el chat.
+  - El color y el icono indican la familia: fuego, vacío, sombra, sangre, dominio, herramienta…
+  - El patrón, el giro y los anillos salen del nombre, así que dos técnicas de la misma familia se distinguen.
+  - Es el mismo en todos los clientes y no modifica ningún documento.
+## 1.101.0 — Avisos sin solapes
+- Los avisos emergentes de Sealed Ink ya no quedan debajo de los avisos de Foundry. Antes empezaban siempre a 65 px y Foundry los cubría. Ahora se colocan justo debajo de los avisos de Foundry y de la barra de escenas.
+- El botón de avisos y su panel ya no tapan las tarjetas de chat de Foundry (las que aparecen junto a la barra lateral), la barra de accesos rápidos ni la lista de jugadores. Se colocan encima de ellas y se recolocan solos cuando esas tarjetas aparecen o desaparecen.
+- El panel ajusta su altura al espacio libre, así que en pantallas de 768 px o menos ya no se monta sobre los avisos. Mientras está abierto, los avisos emergentes se ocultan, porque el panel ya los lista todos.
+- Tarjeta de choque de dominios: el refinamiento y el estado de cada participante quedan alineados aunque los nombres tengan distinta longitud.
+- Auditoría en Chrome con una maqueta de la interfaz de Foundry: barra lateral abierta y plegada, en 1920×1080, 1366×768, 1100×700 y 800×600. Antes de la corrección había 8 combinaciones con solapes; ahora ninguna.
+## 1.100.0 — Motores de dominio y EM
+- Choque múltiple: si se cierra uno de los dominios de un choque entre 3 o más, el choque se vuelve a resolver entre los que siguen abiertos. Antes los demás conservaban el papel calculado contra el dominio que ya no estaba. Por ejemplo, dos dominios con el mismo refinamiento, perdedores ante un tercero, seguían encogiéndose y se rompían en la ronda 6. Ahora quedan empatados, como dicta su refinamiento.
+- Technique Burnout: ya no se puede abrir un dominio nuevo, completo o incompleto, mientras dura. Antes Incomplete Domain (dote) y la apertura desde el panel o una macro lo permitían.
+- Auditoría simulada sin fallos:
+  - 5 ciclos seguidos de abrir y cerrar no dejan restos.
+  - Un doble clic en abrir crea un solo efecto.
+  - El dominio caduca por rondas.
+  - La barrera rechaza daño negativo o NaN y, al llegar a 0, cierra el dominio y aplica el burnout.
+  - Borrar al actor con el dominio abierto no da error.
+  - En la EM, 10 gastos simultáneos de 3 sobre 20 aprueban exactamente 6, y la recuperación y las fracciones son correctas.
+## 1.99.0 — Rendimiento
+- Ventanas JJK más fluidas: el panel JJK, Dominio, Carrera, Votos y el creador ya no se redibujan varias veces seguidas. Cuando un gasto de EM actualiza a la vez el objeto, el actor y sus efectos, cada ventana abierta se redibuja una sola vez por fotograma.
+- Menos tirones cada 30 s: la recuperación periódica de reservas de EM ya no recorre todos los tokens de todas las escenas. Antes eso obligaba a Foundry a preparar los actores de escenas que nadie miraba. Ahora solo revisa los actores del mundo y los tokens de las escenas activas o abiertas, y solo procesa los que tienen una reserva pendiente antigua. Al iniciar la partida se sigue revisando todo.
+- Subir de nivel: el selector de dotes de la Mejora de característica ya no vuelve a cargar todo el compendio de dotes cada vez que cambia cualquier objeto del mundo, como al gastar EM. Ahora solo lo recarga si se edita el compendio.
+- HUD de combate y centro de avisos: arrastrar un token ya no los redibuja en cada paso del movimiento, solo una vez por fotograma.
+- El botón de subir de nivel parpadea 3 veces en lugar de hacerlo sin parar. Con «reducir movimiento» del sistema, no parpadea.
+## 1.98.0 — Motor de dominios y Sealed Ink
+- Rectángulo negro o morado que no desaparecía tras cerrar un dominio: era el tinte de escena de FXMaster. Antes se guardaba con un id aleatorio en memoria del DJ. Al recargar o cerrar con otro DJ, ese id se perdía y el tinte quedaba en la escena para siempre. Ahora usa un id fijo, hay un solo tinte por escena y se quita solo al cerrarse el último dominio abierto en esa escena. Se quita también aunque se desactive la opción de FXMaster mientras el dominio está abierto.
+- Limpieza automática: al iniciar la partida (DJ) y al cerrar cualquier dominio, se borran los restos de dominios ya cerrados: el tinte (incluido el que dejaron versiones anteriores), las zonas, los marcadores de barrera y las animaciones de Sequencer. Macro manual: `game.modules.get("jjk5e").api.cleanupDomains()`.
+- Las animaciones de apertura ya no dejan una capa negra persistente (`jb2a.darkness.black` sin duración): todas las capas terminan solas y se limpian al cerrar.
+- Sealed Ink ajusta la cabecera, agrupa los recursos en su tarjeta nativa y permite leer los accesos JJK completos en fichas estrechas. La pestaña JJK reorganiza sus secciones según el espacio disponible.
+- El choque muestra el refinamiento y el estado de cada participante en el chat. Las animaciones de apertura y choque respetan el área de la escena y no modifican el alcance ni el resultado de las reglas.
+## 1.97.0 — Dotes de técnica en la Mejora de característica
+- El grupo «Tu técnica: <técnica>» del selector de dotes ya no incluye las 8 dotes generales de Técnica maldita (Cursed Lotus, Flow Technique, Stone Cutting Style, Infinity y Voracity (Minor Innate Technique), Simple Domain (Minor Cursed Technique), Falling Blossom Emotion (Major Cursed Technique)). Estas dotes las puede tomar cualquier hechicero y ahora aparecen en su categoría. Pasaba con todas las técnicas.
+- Un trasfondo que concede una técnica (por ejemplo, Clan Sorcerer) ya no hace que las dotes que lo piden como requisito cuenten como dotes de técnica.
+- Prueba nueva: para cada una de las técnicas con dotes propias, el grupo de técnica solo contiene dotes de esa técnica.
+## 1.96.0 — Auditoría de automatizaciones para dnd5e 6.1
+- Velocidad: 19 efectos de técnicas y dotes (Blue Hour, Golden Week, Extreme Cold, Illusive Terrain, Immobilizing Eyes, Indigestion, Energizing Gaze, Event Horizon, Reverse Transcendence, Aerokinesis, piernas inmovilizadas, Flowing Red Scale…) usaban `system.attributes.movement.all`. dnd5e 6 guarda las velocidades en `movement.speeds`, así que los que la multiplicaban (×0,5, ×2, ×3, ×¼) no hacían nada. Ahora se traducen al multiplicador nativo de movimiento de dnd5e, y los que la fijan a 0 (Grounding, X-Axis Shot, Stance of the Sparks, Projection, Majestic Pose, Light Manipulation) usan el mismo multiplicador en lugar de depender de DAE.
+- Resistencias e inmunidades totales: `dr.all` y `di.all` (Analgesic, Core Reversal, Intangibility, Inverse Ratio, World Anchor, Medical Clinic, Comedy) se escriben como el tipo de daño nativo «ALL» de dnd5e, sin depender del mapeo de DAE.
+- Agotamiento temporal: dnd5e 6 recalcula el agotamiento desde su propio efecto después de aplicar los demás, así que 10 efectos que sumaban niveles (Blackened Blood, Improved Bindings, Extreme Cold, Heat Dissociation, las 5 fases de Amber Release, Noxious Poison) no daban agotamiento. Ahora suman niveles reales mientras dura el efecto y, al terminar o desactivarse, quitan exactamente los que añadieron (máximo 6).
+- Las tres correcciones se aplican al crear el efecto, así que también arreglan los objetos ya importados en los mundos, sin volver a importarlos Funcionan tanto con cambios de efecto en formato `mode` como en el formato `type` de Foundry 14.
+- Robustez sin escena activa: invocaciones de respaldo, clones y la comprobación de aliados adyacentes ya no lanzan error cuando no hay lienzo o escena.
+- Limpieza: se elimina del repositorio un `module.zip` antiguo (v1.22.2) que seguía en la raíz y podía confundirse con la versión publicada.
+- Verificación: un barrido simulado ejecuta las 1688 actividades de las 469 técnicas, con y sin la autoridad de EM del DJ. Las 1202 con coste cobran exactamente lo previsto, sin errores. Solo se bloquean, como corresponde, las sub-acciones de dominio sin un dominio abierto.
+## 1.95.1 - Intercambios, efectos de técnicas y controles de ficha
+
+- Boogie usa el token del lanzador y conserva el objetivo elegido al pagar. Clap Back aplica el descuento y amplía el alcance a 45 pies. Round of Applause lo amplía a 60 pies.
+- Standing Ovation permite repetir Boogie gratis durante el turno del lanzador si ambos tokens están dentro de su dominio.
+- Golden Week aplica una sola vez la bonificación de CA y velocidad. Detener el tiempo vuelve a estar disponible al terminar el efecto. En personajes existentes, usa la actualización de automatizaciones del módulo para aplicar los nuevos datos de compendio.
+- Los efectos conservan sus prioridades y operadores al migrar a dnd5e. Activar de nuevo una sección de Sealed Ink mantiene el foco del teclado.
+- Cada nueva release incluye un archivo de recuperación con el manifiesto, el módulo instalable y las sumas SHA-256 de la versión publicada anterior.
+
+## 1.95.0 — Ficha Sealed Ink con pestaña JJK integrada
+- Ficha Sealed Ink integrada (#23): la cabecera duplicada desaparece. La ficha abre en su propia pestaña de D&D 5e, con retrato, CA, iniciativa, movimiento, PG, Dados de Golpe y EM en su sitio nativo. Las herramientas JJK son una pestaña más de la barra derecha («Jujutsu (JJK)», solo para propietarios): lista de secciones a la izquierda (9 en PJ, 7 en PNJ) y contenido a la derecha, en una columna si la ventana es estrecha. «Volver a la ficha» y Escape regresan a la última pestaña nativa usada. La sección elegida se recuerda por actor.
+
+## 1.94.0 — Actividades Sealed Ink, historial de EM y ajustes de avisos y medidor
+- Avisos Sealed Ink en ventanas estrechas (Issue #19, punto 4): por debajo de 700 px de ancho, los avisos, el botón «Controles JJK» y su panel se pegaban a 12 px del borde y quedaban bajo la barra lateral. Ahora mantienen la separación de la barra y se encogen.
+- Altura del medidor de EM (Issue #19, punto 5): el relleno y el campo de edición fijan su propia altura, así que una regla de un tema como `.meter .progress { height: 12px }` o `.meter { display: block }` ya no los recorta.
 - Sealed Ink: las pestañas Combate y Técnica permiten buscar y ejecutar actividades compatibles, ordenar sus botones y compartir favoritos con el HUD. Muestran coste base estimado y alcance cuando está disponible.
 - Historial de EM en Combate: muestra los ajustes registrados, reservas, confirmaciones y devoluciones, con acceso a la tarjeta de chat cuando está vinculada.
 

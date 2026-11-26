@@ -73,9 +73,9 @@
       "SureHitShort": "Golpe seguro",
       "Zone": "Dominio",
       "Opened": "{name} expande su dominio",
-      "BarrierStats": "Barrera: <strong>{hp}</strong> PG, CA <strong>{ac}</strong>, refinamiento {ref}.",
-      "OutsideHint": "Las criaturas de fuera reciben {n}d6 contundente y son empujadas al borde (aplícalo a mano).",
-      "ClashWon": "{name} gana el choque de dominios: vuelve el impacto garantizado.",
+      "BarrierStats": "Barrera <strong>{hp}</strong> PG · CA <strong>{ac}</strong> · refinamiento {ref} · {radius} ft",
+      "OutsideHint": "Fuera: {n}d6 contundente y empuje hasta el borde (a mano).",
+      "ClashWon": "{name} gana el choque: recupera el impacto garantizado.",
       "BarrierHit": "La barrera recibe {dmg} de daño ({side}): {hp}/{max}.",
       "Side": {
         "outside": "desde fuera",
@@ -85,9 +85,9 @@
       "WeakFound": "{name} encuentra el punto débil (Percepción {total}).",
       "WeakMissed": "{name} no encuentra el punto débil (Percepción {total} contra CD 30).",
       "Clash": "Choque de dominios",
-      "ClashEqual": "Refinamiento igual: los dominios se anulan. Al llegar a 1/3 de PG, cada lanzador tira CD 15 sin modificadores o pierde el dominio.",
-      "ClashResult": "{win} se impone a {lose} (+{diff} de refinamiento): el dominio de {lose} se rompe en {rounds} rondas y encoge 15 pies por ronda.",
-      "ClashNoSureHit": "Durante el choque se anula el impacto garantizado de ambos dominios.",
+      "ClashEqual": "<strong>Empate</strong>: ambos dominios se mantienen. A 1/3 de PG, CD 15 sin modificadores o se pierde.",
+      "ClashResult": "<strong>{win}</strong> gana (+{diff}). El dominio de {lose} se rompe en <strong>{rounds}</strong> rondas (−15 ft por ronda).",
+      "ClashNoSureHit": "Impacto garantizado suspendido en ambos hasta resolver el choque.",
       "ClashLost": "¡El dominio de {name} se rompe!",
       "ClashShrink": "El dominio de {name} encoge a {r} pies (quedan {rounds} rondas).",
       "EqualCheck": "Choque de dominios: mantener el dominio (CD 15, sin modificadores)",
@@ -184,10 +184,11 @@
       "MarkerCreate": "Crear marcador de barrera seleccionable (experimental)",
       "MarkerName": "Barrera: {name}",
       "MultiClash": "Choque múltiple de dominios",
-      "MultiClashHint": "Los impactos garantizados quedan desactivados hasta que se resuelva el choque. Cada barrera perdedora se encoge en cada asalto.",
-      "MultiRounds": "quedan {n} asalto(s)",
+      "MultiClashHint": "Impacto garantizado suspendido hasta resolver. Los perdedores encogen 15 ft por ronda.",
+      "MultiRounds": "{n} rondas",
       "NeedWeakSpot": "{name} está dentro del dominio y no ha encontrado su punto débil (Percepción CD 30): todavía no puede dañar la barrera desde dentro.",
-      "CloseFailed": "JJK 5e: no se pudo cerrar el dominio (no hay GM activo o el GM lo rechazó)."
+      "CloseFailed": "JJK 5e: no se pudo cerrar el dominio (no hay GM activo o el GM lo rechazó).",
+      "ClashResultNow": "<strong>{win}</strong> gana (+{diff}). El dominio de {lose} se rompe <strong>ya</strong>."
     },
     "Burnout": {
       "Name": "Technique Burnout",
@@ -354,6 +355,9 @@
       "VowBlocksUse": "JJK 5e: Un voto vinculante roto prohíbe esta actividad.",
       "DomainActive": "JJK 5e: Ya hay un dominio activo.",
       "SwapSelect": "JJK 5e: Selecciona exactamente un token de la misma escena para intercambiar posiciones.",
+      "SwapDomain": "Ambas fichas deben estar dentro de Standing Ovation.",
+      "SwapRange": "El objetivo está fuera del alcance del intercambio.",
+      "GoldenWeekTimeStop": "No puedes detener el tiempo mientras Golden Week está activa.",
       "SwapOwner": "JJK 5e: El token seleccionado debe ser tuyo; pide al GM los demás intercambios.",
       "CloneScene": "JJK 5e: Clon: coloca al lanzador en la escena y usa una cuenta con permiso para crear tokens.",
       "CloneLimit": "JJK 5e: Clon: límite por competencia alcanzado.",
@@ -1230,7 +1234,8 @@
       "Technique": "Técnica",
       "LevelUp": "Subir nivel",
       "ShortRest": "Descanso: EM",
-      "Hotbar": "Barra JJK"
+      "Hotbar": "Barra JJK",
+      "Tab": "Jujutsu (JJK)"
     },
     "Midi": {
       "Title": "Automatización completa con Midi (JJK)",
@@ -1246,8 +1251,8 @@
     },
     "Clash": {
       "OfferTitle": "Choque de dominios (reacción)",
-      "Offer": "{opener} expandió su dominio. {name} puede usar su reacción para expandir el suyo e iniciar un choque de dominios.",
-      "Hint": "Se aplican como siempre el costo de EM del dominio, el burnout y el choque por refinamiento.",
+      "Offer": "{opener} expande su dominio. {name} puede responder con el suyo como reacción.",
+      "Hint": "Gasta la EM del dominio; al cerrarse llega el burnout.",
       "Expand": "Expandir dominio (reacción)",
       "Decline": "Ahora no",
       "NoDomain": "Este personaje no tiene Expansión de Dominio.",

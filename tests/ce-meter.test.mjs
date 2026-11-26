@@ -75,3 +75,13 @@ test("native format and Sealed Ink: one CE readout, HD no longer violet", () => 
   assert.ok(!/--dnd5e-color-hd-2:var\(--jjk-ce-1\)/.test(ink));
   assert.match(ink, /\.jjk-sealed-sheet\.dnd5e2 \.meter\.jjk-cursed-energy\{/);
 });
+
+test("Issue #19 p5: the meter sets its own fill height so theme rules cannot shrink it", () => {
+  assert.match(css, /\.dnd5e2 \.meter\.jjk-cursed-energy > \.progress \{[^}]*height: 100%;[^}]*min-height: 100%;/);
+  assert.match(css, /\.dnd5e2 \.meter\.jjk-cursed-energy \{[^}]*box-sizing: border-box;[^}]*height: 28px;/);
+});
+
+test("Issue #19 p4: narrow windows keep notices off the sidebar", () => {
+  assert.ok(!/@media\(max-width:700px\)\{\.jjk-sealed-event-dock,\.jjk-sealed-event-panel,\.jjk-sealed-event-toasts\{right:12px\}\}/.test(ink));
+  assert.match(ink, /\.jjk-sealed-event-dock,\.jjk-sealed-event-panel,\.jjk-sealed-event-toasts\{box-sizing:border-box;max-width:calc\(100vw - var\(--jjk-sealed-right,325px\) - 12px\)\}/);
+});

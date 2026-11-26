@@ -209,9 +209,9 @@
   --ink:#131115;--card:#1c1920;--bone:#eee6d5;--edge:#443b45;--seal:#ce1032;--energy:#ad98ff;
   color:var(--bone);font-size:12px;
 }
-.jjk-sealed-event-dock {position:fixed;bottom:calc(12px + env(safe-area-inset-bottom));right:var(--jjk-sealed-right,325px);width:auto;z-index:75;background:#28232b;border:1px solid #665660;border-left:3px solid #ce1032;padding:7px 11px;border-radius:0;}
+.jjk-sealed-event-dock {position:fixed;bottom:calc(var(--jjk-sealed-bottom,12px) + env(safe-area-inset-bottom));right:var(--jjk-sealed-right,325px);width:auto;z-index:75;background:#28232b;border:1px solid #665660;border-left:3px solid #ce1032;padding:7px 11px;border-radius:0;}
 .jjk-sealed-event-dock[hidden]{display:none!important}
-.jjk-sealed-event-panel {position:fixed;right:var(--jjk-sealed-right,325px);bottom:55px;z-index:76;background:var(--ink);border:1px solid var(--edge);width:min(350px,calc(100vw - 24px));height:440px;max-height:75vh;min-width:240px;min-height:180px;resize:both;overflow:auto;padding:8px;box-shadow:0 8px 24px #0005;display:flex;flex-direction:column;gap:7px;}
+.jjk-sealed-event-panel {position:fixed;right:var(--jjk-sealed-right,325px);bottom:calc(var(--jjk-sealed-bottom,12px) + 43px);z-index:76;background:var(--ink);border:1px solid var(--edge);width:min(350px,calc(100vw - 24px));height:440px;max-height:min(75vh,calc(100vh - var(--jjk-sealed-bottom,12px) - 43px - var(--jjk-sealed-top,65px) - 8px));min-width:240px;min-height:180px;resize:both;overflow:auto;padding:8px;box-shadow:0 8px 24px #0005;display:flex;flex-direction:column;gap:7px;}
 .jjk-sealed-event-panel button,.jjk-sealed-event-panel input,.jjk-sealed-event-panel select,.jjk-sealed-event-toast button{background:#28232b;color:var(--bone);border:1px solid var(--edge);border-radius:0;font-size:12px;min-height:26px;}
 .jjk-sealed-event-panel button:hover,.jjk-sealed-event-toast button:hover{border-color:var(--seal)}
 .jjk-sealed-event-panel button:focus-visible,.jjk-sealed-event-toast button:focus-visible,.jjk-sealed-event-dock:focus-visible{outline:2px solid var(--bone)}
@@ -232,7 +232,8 @@
 .jjk-sealed-hud-fill.energy{background:#7952e7}
 .jjk-sealed-hud-activities{display:grid;gap:3px}
 .jjk-sealed-hud-activities button{text-align:start;height:auto;white-space:normal;padding:6px}
-.jjk-sealed-event-toasts{position:fixed;right:var(--jjk-sealed-right,325px);top:65px;width:min(310px,calc(100vw - 24px));z-index:95;display:grid;gap:6px;pointer-events:none;}
+.jjk-sealed-panel-open .jjk-sealed-event-toasts{display:none}
+.jjk-sealed-event-toasts{position:fixed;right:var(--jjk-sealed-right,325px);top:var(--jjk-sealed-top,65px);width:min(310px,calc(100vw - 24px));max-height:calc(100vh - var(--jjk-sealed-top,65px) - var(--jjk-sealed-bottom,12px) - 50px);overflow:hidden;z-index:95;display:grid;gap:6px;pointer-events:none;}
 .jjk-sealed-event-toast{position:relative;display:grid;gap:4px;padding:10px 35px 10px 10px;background:var(--card);border:1px solid var(--edge);border-left:3px solid var(--bone);pointer-events:auto;box-shadow:0 5px 16px #0004;}
 .jjk-sealed-event-toast[data-tone=critical]{border-left-color:var(--seal)}
 .jjk-sealed-event-toast[data-tone=energy]{border-left-color:var(--energy)}
@@ -240,7 +241,8 @@
 .jjk-sealed-event-toast button{position:absolute;right:5px;top:5px;width:24px;min-height:24px;}
 .jjk-sealed-event-toast:not([data-motion=off],[data-motion=performance]){animation:jjk-sealed-notice .22s ease-out}
 @keyframes jjk-sealed-notice{from{opacity:0;transform:translateX(12px)}to{opacity:1;transform:none}}
-@media(max-width:700px){.jjk-sealed-event-dock,.jjk-sealed-event-panel,.jjk-sealed-event-toasts{right:12px}}
+/* Narrow windows: keep the sidebar offset (a fixed 12px put notices under the sidebar) and shrink instead (Issue #19, point 4). */
+.jjk-sealed-event-dock,.jjk-sealed-event-panel,.jjk-sealed-event-toasts{box-sizing:border-box;max-width:calc(100vw - var(--jjk-sealed-right,325px) - 12px)}
 @media(prefers-reduced-motion:reduce){.jjk-sealed-event-toast{animation:none!important}}
 
 /* Character Creation Engine: scoped to the opt-in Sealed Ink module surface. */
@@ -389,56 +391,27 @@
  .jjk-sealed-surface .jjk-menu-grid{grid-template-columns:minmax(0,1fr)}
 }
 
-/* Actor workspace, independent presentation over native sheet controls. */
-.jjk-sealed-sheet .jjk-actor-workspace{display:grid;gap:8px;min-width:0;flex:0 0 auto;padding:9px;background:var(--jjk-ink);border:1px solid var(--jjk-edge);border-top:2px solid var(--jjk-seal);box-shadow:inset 0 0 0 3px var(--jjk-ink),inset 0 0 0 4px #eee6d50b;container-type:inline-size;max-height:48vh;overflow:auto}
-.jjk-actor-workspace .jjk-workspace-header{display:flex;gap:8px;align-items:center;border-bottom:1px solid var(--jjk-edge);padding-bottom:6px}
-.jjk-workspace-portrait{width:48px;height:58px;object-fit:cover;border:1px solid var(--jjk-edge);border-radius:0}
-.jjk-workspace-name{flex:1;min-width:0}
-.jjk-workspace-name h2{font:700 24px/1 var(--jjk-display);text-transform:uppercase;margin:2px 0;border:0;overflow-wrap:anywhere}
+/* JJK tools in the native tab body, beside the actor’s own resources. */
+.jjk-sealed-sheet .tab-body > .jjk-actor-workspace{display:grid;gap:6px;min-width:0;flex:0 0 auto;margin-block-end:8px;padding:6px;background:var(--jjk-card);border-block-start:2px solid var(--jjk-seal)}
 .jjk-actor-workspace small{font-size:10px;color:var(--jjk-muted);letter-spacing:.04em}
-.jjk-workspace-name small,.jjk-workspace-metric small,.jjk-workspace-scores small{letter-spacing:.13em;text-transform:uppercase}
 .jjk-workspace-tools{display:flex;gap:3px;flex-wrap:wrap;align-items:center}
 .jjk-workspace-tools button,.jjk-workspace-entry button{width:auto;flex:0 0 auto}
-.jjk-workspace-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:4px}
-.jjk-workspace-metric{display:grid;gap:4px;background:var(--jjk-card);border:1px solid var(--jjk-edge);padding:6px;min-width:0}
-.jjk-workspace-metric strong{font:700 29px/1 var(--jjk-display);font-variant-numeric:tabular-nums;color:var(--jjk-bone);white-space:nowrap}
-.jjk-workspace-metric[data-tone=energy] strong{color:var(--jjk-energy)}
-.jjk-workspace-meter{height:6px;background:var(--jjk-ink);border:1px solid var(--jjk-edge);overflow:hidden}
-.jjk-workspace-meter span{display:block;height:100%;background:var(--jjk-bone)}
-.jjk-workspace-metric[data-tone=energy] .jjk-workspace-meter span{background:linear-gradient(90deg,var(--jjk-ce-1),var(--jjk-energy));box-shadow:0 0 8px var(--jjk-energy)}
-.jjk-workspace-columns{display:grid;grid-template-columns:minmax(130px,1fr) minmax(240px,2.2fr);gap:7px;min-width:0}
-.jjk-actor-workspace[data-reverse=true] .jjk-workspace-columns{grid-template-columns:minmax(240px,2.2fr) minmax(130px,1fr)}
-.jjk-actor-workspace[data-reverse=true] .jjk-workspace-side{order:2}
-.jjk-workspace-side,.jjk-workspace-main{display:grid;align-content:start;gap:6px;min-width:0;border:1px solid var(--jjk-edge);background:var(--jjk-card);padding:6px}
-.jjk-workspace-side h3,.jjk-workspace-content h4{font:700 13px/1 var(--jjk-display);letter-spacing:.1em;text-transform:uppercase;color:var(--jjk-bone);border:0;margin:0}
-.jjk-workspace-scores{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px}
-.jjk-workspace-scores>div{display:grid;text-align:center;background:var(--jjk-ink);border:1px solid var(--jjk-edge);padding:4px 1px}
-.jjk-workspace-scores strong{font:700 24px/1 var(--jjk-display)}
-.jjk-workspace-scores span{font-size:11px;color:var(--jjk-muted)}
-.jjk-workspace-meta{display:grid;grid-template-columns:1fr auto;align-items:center;gap:4px;padding-top:4px;border-top:1px solid var(--jjk-edge)}
-.jjk-workspace-gm{color:var(--jjk-gold);border-left:3px solid var(--jjk-gold);padding:4px;font-size:10px;letter-spacing:.08em}
-.jjk-workspace-gm button{display:block;margin-top:4px}
-.jjk-workspace-warning{border-left:3px solid var(--jjk-seal);padding:4px}
 .jjk-workspace-tabs{display:flex;flex-wrap:wrap;gap:3px;border-bottom:1px solid var(--jjk-edge);padding-bottom:4px}
-.jjk-workspace-tabs button{flex:1 1 auto;font:700 12px/1 var(--jjk-display);text-transform:uppercase;letter-spacing:.05em}
+.jjk-actor-workspace .jjk-workspace-tabs button{width:auto;flex:0 1 auto;min-width:0;overflow-wrap:anywhere;font:700 12px/1 var(--jjk-display)}
 .jjk-actor-workspace button{background:var(--jjk-card-2);border:1px solid var(--jjk-edge);border-radius:0;color:var(--jjk-bone);min-height:25px;padding:3px 6px;font-size:11px;white-space:normal;box-shadow:none}
 .jjk-actor-workspace button:hover{border-color:var(--jjk-seal)}
 .jjk-actor-workspace button:disabled{opacity:.5;cursor:not-allowed}
 .jjk-actor-workspace .jjk-workspace-tabs button[aria-pressed=true]{background:var(--jjk-bone);color:var(--jjk-ink);box-shadow:inset 0 3px var(--jjk-seal)}
 .jjk-workspace-content,.jjk-workspace-list{display:grid;gap:4px;min-width:0;align-content:start}
-.jjk-workspace-list{max-height:175px;overflow:auto}
 .jjk-workspace-tools input,.jjk-workspace-tools select{flex:1 1 90px;min-width:0;width:auto}
 .jjk-workspace-entry{display:flex;align-items:center;gap:4px;padding:4px;background:var(--jjk-ink);border-left:2px solid var(--jjk-edge);flex-wrap:wrap;overflow-wrap:anywhere}
 .jjk-workspace-entry>span,.jjk-workspace-action-label{flex:1;min-width:90px}
 .jjk-workspace-action-label{display:grid;gap:2px}
-.jjk-workspace-muted,.jjk-workspace-footer{color:var(--jjk-muted);font-size:10px;line-height:1.35;margin:0}
-.jjk-workspace-footer{border-top:1px solid var(--jjk-edge);padding-top:4px}
-.jjk-actor-workspace[data-mini=true]{max-height:none}
-.jjk-sealed-motion:not([data-jjk-motion=off],[data-jjk-motion=performance]) .jjk-workspace-meter span{transition:width 220ms ease-out}
 .jjk-sealed-motion:not([data-jjk-motion=off],[data-jjk-motion=performance]) .jjk-workspace-entry:hover{border-left-color:var(--jjk-seal)}
 .jjk-sealed-motion:not([data-jjk-motion=off],[data-jjk-motion=performance]) .jjk-workspace-tabs button{transition:background-color 130ms ease,border-color 130ms ease}
-@container(max-width:490px){.jjk-actor-workspace .jjk-workspace-columns,.jjk-actor-workspace[data-reverse=true] .jjk-workspace-columns{grid-template-columns:1fr}.jjk-workspace-header{flex-wrap:wrap}}
 @media(prefers-reduced-motion:reduce){.jjk-actor-workspace *{animation:none!important;transition:none!important}}
+.jjk-workspace-muted{color:var(--jjk-muted);font-size:10px;line-height:1.35;margin:0}
+.jjk-actor-workspace .jjk-workspace-content{max-height:min(32vh,260px);overflow:auto;overscroll-behavior:contain;padding:3px}
 /* ------------------------------------------------------------------ */
 /* Sealed Ink 2 — native D&D5e sheet re-theme through system tokens.   */
 /* D&D5e sets its dark tokens inside @scope(.theme-dark) on .dnd5e2;   */
@@ -535,26 +508,47 @@
 
 /* Header: name in the display face, a red seal under the header, level as a stamp. */
 .jjk-sealed-sheet.dnd5e2 .sheet-header {
-  background:linear-gradient(180deg,#1d191f 0%,var(--jjk-ink) 100%);
+  background:radial-gradient(ellipse at 18% 0%,#302730 0%,transparent 75%),var(--jjk-ink);
   border-bottom:1px solid var(--jjk-edge);
-  box-shadow:inset 0 -2px 0 var(--jjk-seal);
+  box-shadow:inset 4px 0 #984054;
 }
 .jjk-sealed-sheet.dnd5e2 .sheet-header .document-name{
-  font-family:var(--jjk-display);letter-spacing:.04em;text-transform:uppercase;color:var(--jjk-bone);text-shadow:0 2px 0 #000;
+  font-family:var(--jjk-display);font-size:clamp(1.625rem,4cqi,2.625rem);
+  letter-spacing:.025em;color:var(--jjk-bone);text-shadow:none;overflow-wrap:anywhere;
 }
 .jjk-sealed-sheet.dnd5e2 .sheet-header :is(.class,.subtitle,.xp-label){color:var(--jjk-muted)}
-.jjk-sealed-sheet.dnd5e2 .sheet-header .level-badge{background:var(--jjk-seal);color:#fff;border-radius:0;box-shadow:3px 3px 0 #000}
+.jjk-sealed-sheet.dnd5e2 .sheet-header .level-badge{
+  background:#2d242d;color:var(--jjk-bone);border:1px solid #8a6977;
+  border-radius:3px;box-shadow:inset 0 -3px #984054;
+}
 .jjk-sealed-sheet.dnd5e2 .sheet-header .xp-bar{background:#0e0c10;border-radius:0;border:1px solid var(--jjk-edge)}
 .jjk-sealed-sheet.dnd5e2 .sheet-header .xp-bar::after{background:linear-gradient(90deg,var(--jjk-ce-1),var(--jjk-energy));border-radius:0}
 .jjk-sealed-sheet.dnd5e2 .sheet-header .sheet-header-buttons button{border-radius:0}
 
-/* Sidebar card: one ink plate with a seal edge; portrait framed, not rounded. */
-.jjk-sealed-sheet.dnd5e2 .sidebar .card{background:var(--jjk-card);border:1px solid var(--jjk-edge);border-top:2px solid var(--jjk-seal);box-shadow:0 6px 18px #0007}
-.jjk-sealed-sheet.dnd5e2 .sidebar .card .portrait{border-bottom:1px solid var(--jjk-edge)}
+/* Keep the portrait, clickable defences and native resource controls in the same card. */
+.jjk-sealed-sheet.dnd5e2 .sidebar .card{
+  background:linear-gradient(165deg,#28212a,var(--jjk-card) 56%);
+  border:1px solid var(--jjk-edge);border-block-start:2px solid #9f7181;box-shadow:0 4px 12px #0005;
+}
+.jjk-sealed-sheet.dnd5e2 .sidebar .card .portrait{border-bottom:1px solid #715765}
+.jjk-sealed-sheet.dnd5e2 .sidebar .card .portrait > :is(img,video){box-shadow:none;border-color:var(--jjk-edge)}
 .jjk-sealed-sheet.dnd5e2 .sidebar .card .card-tab{background:var(--jjk-card-2);color:var(--jjk-bone);border:1px solid var(--jjk-edge);border-radius:0}
 .jjk-sealed-sheet.dnd5e2 .sidebar .card .card-tab:is(:hover,:focus-visible){border-color:var(--jjk-seal)}
 .jjk-sealed-sheet.dnd5e2 .sidebar .meter-group > .label{color:var(--jjk-muted);text-shadow:none;letter-spacing:.08em;text-transform:uppercase}
 .jjk-sealed-sheet.dnd5e2 .lozenge .value{font-family:var(--jjk-display);font-variant-numeric:tabular-nums}
+.jjk-sealed-sheet.dnd5e2.sheet.actor.character .sheet-body .sidebar .card .stats .lozenges{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;margin-block:6px 4px;
+}
+.jjk-sealed-sheet.dnd5e2.sheet.actor.character .sheet-body .sidebar .card .stats .lozenges .lozenge{
+  width:auto;height:auto;min-width:0;min-height:44px;margin:0;padding:4px 2px;
+  justify-content:center;gap:3px;background:#2d2630;border:1px solid #706171;border-radius:3px;filter:none;
+}
+.jjk-sealed-sheet.dnd5e2.sheet.actor.character .sheet-body .sidebar .card .stats .lozenges .lozenge .value{
+  height:auto;font-family:var(--jjk-display);font-size:1.15rem;line-height:1;color:var(--jjk-bone);text-shadow:none;
+}
+.jjk-sealed-sheet.dnd5e2.sheet.actor.character .sheet-body .sidebar .card .stats .lozenges .lozenge .label{
+  max-width:100%;color:var(--jjk-bone-2);font-size:9px;line-height:1.15;text-align:center;overflow-wrap:anywhere;
+}
 .jjk-sealed-sheet.dnd5e2 .death-tray .pip.filled{background:var(--jjk-bone)}
 .jjk-sealed-sheet.dnd5e2 .death-tray .pip.filled.failure{background:var(--jjk-seal)}
 .jjk-sealed-sheet.dnd5e2 .meter{border:1px solid var(--jjk-edge)}
@@ -653,20 +647,21 @@
 /* Fluid sheets, tier by tier (container = .window-content). The sidebar keeps a fixed column like a chat
    app's channel list; the tab body takes the rest. D&D5e's own layouts are kept: nothing is re-parented. */
 @container (max-width:700px){
-  .jjk-sealed-sheet.dnd5e2.character{--dnd5e-sheet-sidebar-width:176px;--dnd5e-sheet-header-right-width:200px}
-  .jjk-sealed-sheet.dnd5e2.character .sheet-header .document-name{font-size:clamp(22px,6cqi,40px)}
+  .jjk-sealed-sheet.dnd5e2.sheet.actor.character .sheet-body .main-content{--dnd5e-sheet-sidebar-width:176px}
+  .jjk-sealed-sheet.dnd5e2.character .sheet-header{--dnd5e-sheet-header-right-width:200px}
   /* Ability scores wrap in two rows of three instead of overflowing the fixed 546px strip. */
   .jjk-sealed-sheet.dnd5e2.character .ability-scores .rows{width:auto;max-width:100%;padding-inline:10px;justify-content:center;row-gap:8px}
   .jjk-sealed-sheet.dnd5e2.character .ability-scores .rows > div{gap:10px}
   .jjk-sealed-sheet.dnd5e2.character.tab-details .tab-body{padding-top:120px}
-  .jjk-sealed-sheet.dnd5e2.npc{--dnd5e-sheet-sidebar-width:150px}
+  .jjk-sealed-sheet.dnd5e2.npc .sheet-body{--dnd5e-sheet-sidebar-width:150px}
   .jjk-sealed-sheet .jjk-overview-controls button{flex-basis:45%}
 }
 @container (max-width:560px){
-  .jjk-sealed-sheet.dnd5e2.character{--dnd5e-sheet-sidebar-width:156px;--dnd5e-sheet-header-right-width:170px}
+  .jjk-sealed-sheet.dnd5e2.sheet.actor.character .sheet-body .main-content{--dnd5e-sheet-sidebar-width:156px}
+  .jjk-sealed-sheet.dnd5e2.character .sheet-header{--dnd5e-sheet-header-right-width:170px}
   .jjk-sealed-sheet.dnd5e2 .sheet-body .main-content{gap:6px;padding:6px}
   .jjk-sealed-sheet.dnd5e2 .tab-body .col-2{grid-template-columns:minmax(0,1fr)}
-  .jjk-sealed-sheet.dnd5e2.npc{--dnd5e-sheet-sidebar-width:128px}
+  .jjk-sealed-sheet.dnd5e2.npc .sheet-body{--dnd5e-sheet-sidebar-width:128px}
   /* Inventory columns already drop by priority in D&D5e's own inventory element as the list narrows. */
 }
 
@@ -722,8 +717,22 @@
 .jjk-sealed-sheet.dnd5e2 .jjk-ce-group > .label{color:var(--jjk-muted);letter-spacing:.08em;text-transform:uppercase}
 .jjk-sealed-motion.dnd5e2 .meter.jjk-cursed-energy > .progress::before{transition:width 380ms var(--jjk-ease,ease-out)}
 @media(prefers-reduced-motion:reduce){.jjk-sealed-motion.dnd5e2 .meter.jjk-cursed-energy > .progress::before{transition:none}}
-/* The workspace is prepended inside .window-content, which D&D5e pulls up under the window title bar
-   (-65px on characters, -26px on NPCs): push it back down so its header is not hidden. */
-.jjk-sealed-sheet.dnd5e2.character:not(.minimized) .window-content > .jjk-actor-workspace{margin-block-start:69px}
-.jjk-sealed-sheet.dnd5e2.npc:not(.minimized) .window-content > .jjk-actor-workspace{margin-block-start:30px}
-.jjk-sealed-sheet .jjk-actor-workspace{position:relative;z-index:1}
+
+/* Issue #23 — JJK tab in the sheet's own rail. Section list on the left, content on the right; one column when narrow. */
+.jjk-sealed-sheet .jjk-sheet-tab .jjk-tab-host{min-width:0;container-type:inline-size}
+.jjk-actor-workspace[data-mode=tab]{display:grid;grid-template-columns:minmax(120px, 24%) minmax(0,1fr);align-items:start;gap:12px;padding:0;background:none;border:0}
+.jjk-actor-workspace[data-mode=tab] .jjk-workspace-tabs{position:sticky;top:0;display:flex;flex-direction:column;flex-wrap:nowrap;gap:4px;padding:8px;border:1px solid var(--jjk-edge);border-top:2px solid #9f7181;background:var(--jjk-card)}
+.jjk-actor-workspace[data-mode=tab] .jjk-workspace-tabs button{width:100%;justify-content:flex-start;text-align:start;min-height:34px;padding:6px 9px;font:700 13px/1.2 var(--jjk-display);letter-spacing:.035em}
+.jjk-actor-workspace[data-mode=tab] .jjk-workspace-tabs .jjk-workspace-back{margin-bottom:4px;background:none;border-color:#706171;color:var(--jjk-bone-2);letter-spacing:0;font-size:12px;font-weight:600}
+.jjk-actor-workspace[data-mode=tab] .jjk-workspace-tabs .jjk-workspace-back::before{content:"\2190  "}
+.jjk-actor-workspace[data-mode=tab] .jjk-workspace-tabs button[aria-pressed=true]{box-shadow:inset 3px 0 var(--jjk-seal)}
+.jjk-actor-workspace[data-mode=tab] .jjk-workspace-content{max-height:none;overflow:visible;padding:12px;gap:8px;border:1px solid var(--jjk-edge);background:var(--jjk-card);min-height:180px}
+.jjk-actor-workspace[data-mode=tab] .jjk-workspace-list{max-height:none}
+.jjk-actor-workspace[data-mode=tab] .jjk-workspace-entry{padding:8px;gap:6px}
+.jjk-actor-workspace[data-mode=tab] :is(button,input,select):focus-visible{outline:2px solid var(--jjk-bone);outline-offset:1px}
+@container (max-width:460px){
+  .jjk-actor-workspace[data-mode=tab]{grid-template-columns:minmax(0,1fr)}
+  .jjk-actor-workspace[data-mode=tab] .jjk-workspace-tabs{position:static;flex-direction:row;flex-wrap:wrap}
+  .jjk-actor-workspace[data-mode=tab] .jjk-workspace-tabs button{width:auto;flex:1 1 30%}
+  .jjk-actor-workspace[data-mode=tab] .jjk-workspace-tabs .jjk-workspace-back{flex-basis:100%}
+}

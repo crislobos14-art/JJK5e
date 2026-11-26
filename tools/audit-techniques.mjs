@@ -5,6 +5,7 @@
  */
 import fs from "node:fs";
 import path from "node:path";
+import { isDeepStrictEqual } from "node:util";
 
 const SOURCE = "src/packs/jjk5e-techniques";
 const FALLBACK = "data/jjk5e-techniques.json";
@@ -35,6 +36,11 @@ for (const item of pack.documents) {
   if (!src) { errors.push(`Missing source id: ${id}`); continue; }
   if (src.doc.name !== item.name || src.doc.type !== item.type)
     errors.push(`Source metadata differs: ${id} ${item.name}`);
+  // Foundry adds pack metadata to embedded documents in the source tree.
+  const effects = doc => (doc.effects ?? []).map(({ _key, _stats, ...effect }) => effect);
+  if (!isDeepStrictEqual(item.system, src.doc.system) || !isDeepStrictEqual(item.flags, src.doc.flags) ||
+      !isDeepStrictEqual(effects(item), effects(src.doc)))
+    errors.push(`Source/fallback mechanics differ: ${item.name} (${id})`);
   const acts = item.system?.activities ?? {};
   const sActs = src.doc.system?.activities ?? {};
   const actIds = Object.keys(acts);

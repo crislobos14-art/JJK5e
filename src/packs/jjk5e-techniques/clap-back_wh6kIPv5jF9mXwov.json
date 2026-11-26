@@ -97,9 +97,9 @@
    "tokenSwap": {
     "ouA0eQeNTPbAg5Zb": true
    },
-   "automationNotes": "Also reduces every Boogie Woogie cost by 1 (min 1): pay the lower cost (GM).",
+   "automationNotes": "Clap Back automatically reduces Boogie Woogie costs by 1 CE (minimum 1).",
    "automation": "automated",
-   "rev": "d7f74d8491"
+   "rev": "83f7624ff8"
   }
  },
  "folder": "JUFxrHmgG8mOdlrV",

@@ -9,6 +9,9 @@
  * - JJK panel on character sheets, Spanish / English UI, effect expiry (unless Times Up is active).
  */
 import { activityCECost, ceTransaction, blackFlashCheck, clashRoundsFromRefinement, multiDomainClash, vowBlocksUsage, buildTechniqueItems, TECHNIQUE_SLOTS } from "./jjk5e-rules.mjs";
+import { createCEEngine } from "./jjk5e-ce-engine.mjs";
+import { createIntegrations } from "./jjk5e-integrations.mjs";
+import { createDomainLifecycle } from "./jjk5e-domain-lifecycle.mjs";
 
 const MODULE_ID = "jjk5e";
 const DATA_VERSION = "1.24.0";
@@ -388,6 +391,7 @@ function activityCost(activity) {
   let base = Number(costs?.[activity.id] ?? 0);
   // V.6 Domain Refinement: Efficient Expansions (700) −CE mod, Total Mastery (1000) −proficiency bonus.
   const actor = activity?.actor ?? activity?.item?.actor;
+  if (base > 1 && activity.item.flags?.jjk5e?.technique === "Boogie Woogie" && hasBoogieFeature(actor, "Clap Back")) base -= 1;
   if (base > 0 && actor && activity?.item?.flags?.jjk5e?.domainActivity === activity.id) {
     const ref = refinementOf(actor);
     if (ref >= 700) base -= Math.max(0, ceMod(actor));
@@ -429,284 +433,8 @@ function circuitCost(activity, base) {
 /** Serializes CE spending within this client to prevent double charges from overlapping hooks. */
 const CE_QUEUES = new Map();
 const CE_AUTH_QUERY = `${MODULE_ID}.ceAuthority`;
-const CE_USAGE_CONTEXT = new WeakMap();
 const CE_RECOVERY_RESULTS = new WeakSet();
 const CE_MIDI_ATTACKS = new WeakSet();
-const CE_MIDI_WORKFLOWS = new WeakMap();
-const CE_MIDI_USAGE_OWNERS = new WeakMap();
-const CE_MIDI_DENIED = new WeakSet();
-const MIDI_GUARD_STAGES = ["preAttackRoll","preDamageRoll","preFormulaRoll","preWaitForSaves",
-  "preWaitForUtilityRoll","preTeleport","preAllRollsComplete","preApplyDynamicEffects"];
-function midiActivity(workflow){return workflow?.activity??null;}
-function captureMidiUsage({workflow,usage}={}){
-  const activity=midiActivity(workflow);
-  if(!workflow || !activity || !usage || typeof usage!=="object") return;
-  const bound=CE_MIDI_USAGE_OWNERS.get(usage);
-  if(bound && bound!==workflow) return;
-  const previous=CE_MIDI_WORKFLOWS.get(workflow);
-  if(previous && previous.usage!==usage && ceContext(activity,previous.usage)) return;
-  CE_MIDI_USAGE_OWNERS.set(usage,workflow);
-  CE_MIDI_WORKFLOWS.set(workflow,{usage,key:ceUsageKey(activity)});
-}
-function midiCEContext(workflow){
-  const binding=CE_MIDI_WORKFLOWS.get(workflow),activity=midiActivity(workflow);
-  if(!binding||binding.key!==ceUsageKey(activity)) return null;
-  return ceContext(activity,binding.usage);
-}
-function midiCEGuard(workflow){
-  const activity=midiActivity(workflow);
-  if(!ceAuthorityEnabled()||!setting("autoSpendCE")||!managedCE(activity)) return true;
-  const ctx=midiCEContext(workflow);
-  // A transaction for another use of the same item is not proof of payment.
-  if(ctx?.state==="committed" && ctx.actorUuid===(activity.actor??activity.item?.actor)?.uuid) return true;
-  if(!CE_MIDI_DENIED.has(workflow)){
-    CE_MIDI_DENIED.add(workflow);
-    ui.notifications.warn(t("Notify.CEWorkflowUnverified"));
-  }
-  return false;
-}
-function midiDomainGuard(workflow){
-  if((workflow?.targets?.documents??[...(workflow?.targets??[])]).some(tk=>barrierMarkerMeta(tk)))return false;
-  if(!midiCEGuard(workflow)) return false;
-  excludeDomainWardedTargets(workflow);
-  return true;
-}
-async function linkMidiCard(workflow){
-  const ctx=midiCEContext(workflow);
-  if(ctx?.state!=="committed"||!workflow?.itemCardUuid||workflow.readOnly) return false;
-  const card=await fromUuid(workflow.itemCardUuid).catch(()=>null);
-  if(!card?.isOwner||card.documentName!=="ChatMessage") return false;
-  if(card.getFlag(MODULE_ID,"ceReceipt")!==ctx.id) await card.setFlag(MODULE_ID,"ceReceipt",ctx.id);
-  return ceAuthorityRequest("linkCard",{actorUuid:ctx.actorUuid,id:ctx.id,cardUuid:card.uuid});
-}
-function registerMidiCEBridge(){
-  Hooks.on("midi-qol.preItemRollV2",captureMidiUsage);
-  Hooks.on("midi-qol.postAwaitItemCard",workflow=>linkMidiCard(workflow).catch(err=>reportError("CE card link",err)));
-  Hooks.on("midi-qol.postCleanup",workflow=>linkMidiCard(workflow).catch(err=>reportError("CE card link",err)));
-  for(const stage of MIDI_GUARD_STAGES) Hooks.on(`midi-qol.${stage}`,midiDomainGuard);
-}
-function cePostAllowed(activity,usageConfig){
-  return !ceAuthorityEnabled() || !setting("autoSpendCE") || !managedCE(activity) ||
-    ceContext(activity,usageConfig)?.state==="committed";
-}
-function cePostOnce(activity,usageConfig,phase){
-  if(!cePostAllowed(activity,usageConfig)) return false;
-  if(!ceAuthorityEnabled() || !setting("autoSpendCE") || !managedCE(activity)) return true;
-  const ctx=ceContext(activity,usageConfig);
-  ctx.phases??=new Set();
-  if(ctx.phases.has(phase)) return false;
-  ctx.phases.add(phase);
-  return true;
-}
-const CE_ADAPTER_TARGETS = new Set();
-const QUICK_RECOVERY_ID = "Jt55eu41OQX7G6Sh";
-const isQuickRecovery = (activity) => activity?.id === QUICK_RECOVERY_ID &&
-  (activity.item?.flags?.jjk5e?.quickRecovery === true || baseName(activity.item) === "Quick Recovery");
-function ceAuthorityEnabled() { return !!setting("transactionalCE"); }
-function managedCE(activity) {
-  if (isQuickRecovery(activity)) return false;
-  const f = activity?.item?.flags?.jjk5e;
-  return !!f && (Object.hasOwn(f.ceCosts ?? {}, activity.id) || Object.hasOwn(f.ceSteps ?? {},activity.id)) &&
-    (Number(f.ceCosts?.[activity.id] ?? 0) !== 0 || Number(f.ceSteps?.[activity.id] ?? 0) !== 0);
-}
-function ceLedger(pool) {
-  const data = pool?.getFlag?.(MODULE_ID,"ceLedger");
-  return Array.isArray(data) ? foundry.utils.deepClone(data) : [];
-}
-function restReview(actor){return actor?.getFlag?.(MODULE_ID,"shortRestExchange")?.state==="review";}
-function cePending(pool) { return restReview(pool?.actor ?? pool?.parent) || ceLedger(pool).some((x) => x.state === "reserved" || x.state === "review"); }
-function ceRecord(ledger, record) {
-  const others = ledger.filter((x)=>x.id!==record.id);
-  // Never discard open reservations. Bound only closed history.
-  return [...others.filter(x=>["reserved","review"].includes(x.state)),
-    ...others.filter(x=>!["reserved","review"].includes(x.state)).slice(-199),record];
-}
-function ceUsageKey(activity) { return `${(activity?.actor??activity?.item?.actor)?.uuid??""}:${activity?.item?.id}:${activity?.id}`; }
-function ceContext(activity, usageConfig) {
-  if (!usageConfig || typeof usageConfig !== "object") return null;
-  const ctx=CE_USAGE_CONTEXT.get(usageConfig);
-  return ctx?.key===ceUsageKey(activity) ? ctx : null;
-}
-function ceFromItem(actor,itemId,activityId) {
-  const item=actor?.items?.get?.(itemId);
-  if (!item) return null;
-  const activities=item.system?.activities;
-  return activities?.get?.(activityId) ?? activities?.[activityId] ?? null;
-}
-async function ceAuthorityRequest(operation,payload) {
-  if (isActiveGM()) return handleCEAuthority({operation,payload},{user:game.user});
-  const gm=game.users.activeGM;
-  if (!gm?.query) return false;
-  try { return await gm.query(CE_AUTH_QUERY,{operation,payload},{timeout:120000}); }
-  catch(err) { reportError("CE authority",err); return false; }
-}
-async function handleCEAuthority(msg,{user}={}) {
-  if (!ceAuthorityEnabled() || !isActiveGM() || !user?.active || !msg?.payload ||
-      !["reserve","start","commit","review","settle","adjust","linkCard","restExchange"].includes(msg.operation)) return false;
-  const {operation,payload:d}=msg;
-  const actor=await domainActor(d.actorUuid);
-  if (!canDirectDomain(user,actor)) return false;
-  if (operation==="settle"&&!user.isGM) return false;
-  if(operation==="restExchange")return commitRestExchange(actor,d.restId,d.amount,{requester:user});
-  if (operation==="adjust") {
-    if (!Number.isFinite(d.amount) || Math.abs(d.amount)>100000) return false;
-    if (!user.isGM && !await confirmDialog(t("GMRequest.Title"),`<p>${esc(user.name)}: ${esc(actor.name)} — ${esc(String(d.amount))} CE</p>`)) return false;
-    return queueCE(actor,async()=>{
-      if (!isActiveGM() || !canDirectDomain(user,actor) || cePending(findPool(actor))) return false;
-      return doSpendCE(actor,d.amount,String(d.label??"CE").slice(0,120));
-    });
-  }
-  if (typeof d.id!=="string" || !/^[a-zA-Z0-9_-]{1,80}$/.test(d.id)) return false;
-  return queueCE(actor,async()=>{
-    if (!isActiveGM() || !canDirectDomain(user,actor)) return false;
-    const pool=findPool(actor);
-    if (!pool) return false;
-    const ledger=ceLedger(pool), old=ledger.find(x=>x.id===d.id);
-    if(operation==="reserve"){
-      if(old) return false; // replay must not authorize native effects a second time
-      if(cePending(pool)) return false;
-      const a=ceFromItem(actor,d.itemId,d.activityId);
-      const item=actor.items.get(d.itemId);
-      if(!a || !item || !Number.isSafeInteger(d.scaling) || d.scaling<0 || d.scaling>1000) return false;
-      const act=a.item ? a : {...a,item,actor,id:d.activityId};
-      const scale=act.consumption?.scaling;
-      if(d.scaling>0 && scale?.allowed===false) return false;
-      if(!managedCE(act) || !validActivityCE(actor,act,{scaling:d.scaling})) return false;
-      if(act.item?.flags?.jjk5e?.technique && (inBurnout(actor)||hasKind(actor,"domainAmplification"))) return false;
-      if(item.flags?.jjk5e?.domainActivity===act.id && domainOpen(actor)) return false;
-      if(item.flags?.jjk5e?.domainActivity && item.flags.jjk5e.domainActivity!==act.id && !canUseDomainActivity(actor,act)) return false;
-      const cost=totalActivityCECost(actor,act,{scaling:d.scaling});
-      const tx=ceTransaction(poolValue(pool),poolMax(pool),cost);
-      if(!tx || cost<0) return false;
-      const rec={id:d.id,userId:user.id,actorUuid:actor.uuid,itemId:d.itemId,activityId:d.activityId,
-        scaling:d.scaling,cost,state:"reserved",created:Date.now(),protocol:2,nativeStarted:false,expires:Date.now()+120000,
-        sixEyes:cost>0&&!!actor.getFlag(MODULE_ID,"sixEyesNext"),minusNext:cost>0&&!!(item.flags?.jjk5e?.technique&&actor.getFlag(MODULE_ID,"costMinusNext"))};
-      const whole=Math.floor(tx.spent+1e-6);
-      // Persist debit and reservation together in the same Item update.
-      await pool.update({"system.uses.spent":whole,"flags.jjk5e.fractionalSpent":Math.round((tx.spent-whole)*1000)/1000,
-        "flags.jjk5e.ceLedger":ceRecord(ledger,rec)},{jjk5eCE:true});
-      return {id:rec.id,cost};
-    }
-    if(!old || (!user.isGM&&old.userId!==user.id) || old.actorUuid!==actor.uuid) return false;
-    if(operation==="linkCard"){
-      if(old.state!=="committed"||typeof d.cardUuid!=="string"||!/^ChatMessage\.[a-zA-Z0-9]{1,64}$/.test(d.cardUuid)) return false;
-      if(old.cardUuid) return old.cardUuid===d.cardUuid;
-      const card=await fromUuid(d.cardUuid).catch(()=>null);
-      const author=card?.author?.id??card?.user?.id??card?._source?.user;
-      const act=await card?.getAssociatedActivity?.();
-      if(card?.documentName!=="ChatMessage"||author!==old.userId||act?.id!==old.activityId||
-          act?.item?.id!==old.itemId||(act.actor??act.item?.actor)?.uuid!==actor.uuid||
-          card.getFlag?.(MODULE_ID,"ceReceipt")!==old.id) return false;
-      await pool.update({"flags.jjk5e.ceLedger":ceRecord(ledger,{...old,cardUuid:d.cardUuid})},{jjk5eCE:true});
-      return true;
-    }
-    if(operation==="start"){
-      if(old.state!=="reserved"||old.protocol!==2||old.nativeStarted||Date.now()>=old.expires) return false;
-      // Persist start before authorizing any native effects. Unknown start responses never authorize a retry.
-      await pool.update({"flags.jjk5e.ceLedger":ceRecord(ledger,{...old,nativeStarted:true,startedAt:Date.now()})},{jjk5eCE:true});
-      if(old.sixEyes) await actor.unsetFlag(MODULE_ID,"sixEyesNext");
-      if(old.minusNext) await actor.unsetFlag(MODULE_ID,"costMinusNext");
-      return true;
-    }
-    if(operation==="commit"||operation==="review"){
-      if(old.state==="committed"&&operation==="commit") return true;
-      if(old.state!=="reserved"||(operation==="commit"&&old.protocol===2&&!old.nativeStarted)) return false;
-      await pool.update({"flags.jjk5e.ceLedger":ceRecord(ledger,{...old,state:operation==="commit"?"committed":"review",ended:Date.now()})},{jjk5eCE:true});
-      return true;
-    }
-    if(operation!=="settle"||!["reserved","review"].includes(old.state)||typeof d.refund!=="boolean") return false;
-    // Refund only on explicit GM decision; a canceled external workflow may already have applied effects.
-    const tx=ceTransaction(poolValue(pool),poolMax(pool),d.refund?-old.cost:0);
-    if(!tx) return false;
-    const whole=Math.floor(tx.spent+1e-6);
-    await pool.update({"system.uses.spent":whole,"flags.jjk5e.fractionalSpent":Math.round((tx.spent-whole)*1000)/1000,
-      "flags.jjk5e.ceLedger":ceRecord(ledger,{...old,state:d.refund?"refunded":"committed",ended:Date.now(),settledBy:user.id})},{jjk5eCE:true});
-    return true;
-  });
-}
-async function consumeWithCE(wrapped,activity,usageConfig,messageConfig) {
-  if(!ceAuthorityEnabled()||!setting("autoSpendCE")||!managedCE(activity)) return wrapped(usageConfig,messageConfig);
-  const actor=activity.actor??activity.item?.actor;
-  if(!actor?.isOwner || !usageConfig || typeof usageConfig!=="object") return false;
-  const nested=ceContext(activity,usageConfig);
-  if(nested?.state==="reservingNative") return wrapped(usageConfig,messageConfig);
-  if(nested) return false;
-  if(!validActivityCE(actor,activity,usageConfig)) return false;
-  const id=foundry.utils.randomID();
-  const reserve=await ceAuthorityRequest("reserve",{actorUuid:actor.uuid,itemId:activity.item.id,activityId:activity.id,
-    scaling:Number(usageConfig.scaling??0),id});
-  if(!reserve?.id) { ui.notifications.warn(t("Notify.NotEnoughCE",{value:poolValue(findPool(actor)),cost:totalActivityCECost(actor,activity,usageConfig)})); return false; }
-  if(!await ceAuthorityRequest("start",{actorUuid:actor.uuid,id})) return false;
-  const ctx={key:ceUsageKey(activity),id,actorUuid:actor.uuid,state:"reservingNative",cost:reserve.cost};
-  CE_USAGE_CONTEXT.set(usageConfig,ctx);
-  try{
-    // Midi dnd6 exposes the in-progress use by activity before a card exists.
-    // Bind the precise native consumption config, not another use of the same item.
-    const workflow=globalThis.MidiQOL?.Workflow?.workflowFor?.(activity);
-    if(workflow) captureMidiUsage({workflow,usage:usageConfig});
-    const result=await wrapped(usageConfig,messageConfig);
-    const ok=!!result && result!==false;
-    const ended=await ceAuthorityRequest(ok?"commit":"review",{actorUuid:actor.uuid,id});
-    ctx.state=ok&&ended?"committed":"review";
-    if(ctx.state!=="committed") return false;
-    if(messageConfig && typeof messageConfig==="object") foundry.utils.setProperty(messageConfig,"data.flags.jjk5e.ceReceipt",id);
-    return result;
-  }catch(err){
-    ctx.state="review";
-    await ceAuthorityRequest("review",{actorUuid:actor.uuid,id});
-    throw err;
-  }
-}
-function installCEAdapters() {
-  if(!ceAuthorityEnabled()||!globalThis.libWrapper?.register) return false;
-  for(const [key,config] of Object.entries(CONFIG.DND5E?.activityTypes??{})){
-    if(!/^[a-zA-Z0-9_$]+$/.test(key)||typeof config.documentClass?.prototype?.consume!=="function") continue;
-    const target=`CONFIG.DND5E.activityTypes.${key}.documentClass.prototype.consume`;
-    if(CE_ADAPTER_TARGETS.has(target)) continue;
-    try{
-      globalThis.libWrapper.register(MODULE_ID,target,function(wrapped,usage,message){
-        return consumeWithCE(wrapped,this,usage,message);
-      },"MIXED");
-      CE_ADAPTER_TARGETS.add(target);
-    }catch(err){reportError("CE adapter "+key,err);}
-  }
-  return CE_ADAPTER_TARGETS.size>0;
-}
-const CE_RECOVERY_AGE=120000;
-async function recoverCEActor(actor,now=Date.now()){
-  if(!isActiveGM()||!ceAuthorityEnabled()) return [];
-  return queueCE(actor,async()=>{
-    if(!isActiveGM()) return [];
-    const pool=findPool(actor); if(!pool) return [];
-    let ledger=ceLedger(pool), balance=poolValue(pool), changed=[];
-    for(const rec of [...ledger]){
-      if(rec.state!=="reserved"||!Number.isFinite(rec.created)||now-rec.created<CE_RECOVERY_AGE) continue;
-      // Only protocol 2 explicitly unstarted reservations are provably safe to refund.
-      const safe=rec.protocol===2&&rec.nativeStarted===false&&Number.isFinite(rec.expires)&&now>=rec.expires;
-      const tx=safe?ceTransaction(balance,poolMax(pool),-rec.cost):null;
-      if(tx) balance=tx.remaining;
-      const next={...rec,state:tx?"refunded":"review",ended:now,recovery:tx?"unstarted":"unknown-native-result"};
-      ledger=ceRecord(ledger,next);changed.push(next);
-    }
-    if(changed.length){
-      const spent=Math.round((poolMax(pool)-balance)*1000)/1000,whole=Math.floor(spent+1e-6);
-      await pool.update({"system.uses.spent":whole,"flags.jjk5e.fractionalSpent":Math.round((spent-whole)*1000)/1000,
-        "flags.jjk5e.ceLedger":ledger},{jjk5eCE:true});
-    }
-    return changed;
-  });
-}
-function engineActors(){
-  return [...new Map([...(game.actors??[]),...[...(game.scenes??[])].flatMap(sc=>[...(sc.tokens??[])].map(tk=>tk.actor))]
-    .filter(a=>a?.uuid).map(a=>[a.uuid,a])).values()];
-}
-async function recoverCEWorld(){
-  if(!isActiveGM()||!ceAuthorityEnabled()) return [];
-  const results=[];
-  for(const actor of engineActors()) try{results.push(...await recoverCEActor(actor));}
-    catch(err){reportError("CE recovery",err);}
-  return results;
-}
 function actorBoundPileItem(item) {
   const flags = item?.flags?.jjk5e;
   return !!(flags?.cePool || flags?.fractionalSpent || flags?.personalFor ||
@@ -953,12 +681,14 @@ async function onActorUpdate(actor, changes, options, userId) {
 /* -------------------------------------------- */
 
 const MODE_TYPES = { 0: "custom", 1: "multiply", 2: "add", 3: "downgrade", 4: "upgrade", 5: "override" };
+const TYPE_MODES = Object.fromEntries(Object.entries(MODE_TYPES).map(([mode, type]) => [type, Number(mode)]));
 const fxV14 = () => (Number(game.release?.generation) || 0) >= 14;
 const effChanges = (e) => e?.system?.changes ?? e?.changes ?? [];
 
 function toTypedChanges(changes) {
   return (changes ?? []).map((c) => {
     const out = { key: c.key, type: c.type ?? MODE_TYPES[c.mode] ?? "add", value: String(c.value ?? "") };
+    if (c.priority != null) out.priority = c.priority;
     if (c._id) out._id = c._id;
     return out;
   });
@@ -1048,10 +778,15 @@ function actionTurn(actor){
   if(state?.key!==key){state={key,action:false,bonus:false,free:false,moved:false,full:false,lockMovement:false};ACTION_TURNS.set(c.id,state);}
   return state;
 }
+function unlimitedDomainSwap(activity) {
+  const flags = activity?.item?.flags?.jjk5e;
+  return flags?.technique === "Boogie Woogie" && !!flags.domainActivity &&
+    flags.domainActivity !== activity.id && !!flags.tokenSwap?.[activity.id];
+}
 function isJJKFree(activity){
   if(!activity?.item?.flags?.jjk5e)return false;
   const a=activity.activation;
-  return JJK_FREE_ACTION_IDS.has(activity.id) || a?.type==="free" || (a?.type==="special" && /^free[ -]action(?:$|[\s(:])/i.test(a.condition??""));
+  return unlimitedDomainSwap(activity) || JJK_FREE_ACTION_IDS.has(activity.id) || a?.type==="free" || (a?.type==="special" && /^free[ -]action(?:$|[\s(:])/i.test(a.condition??""));
 }
 function lesserFullTurn(activity){
   // Only explicit exceptions; don't infer from a generic "special" activation.
@@ -1076,7 +811,7 @@ function recordTurnActivity(activity){
   const actor=activity?.actor??activity?.item?.actor;
   const state=actionTurn(actor);
   if(!state)return;
-  if(isJJKFree(activity))state.free=true;
+  if(isJJKFree(activity) && !unlimitedDomainSwap(activity))state.free=true;
   if(!isFullTurn(activity)&&activity.activation?.type==="action")state.action=true;
   if(activity.activation?.type==="bonus")state.bonus=true;
 }
@@ -1085,10 +820,15 @@ function isClaimedDomainReaction(actor,activity){
   const claim=actor?.getFlag(MODULE_ID,"domainReactionClaim");
   return !!claim?.id && Number(claim.expires)>nowMs();
 }
+function goldenWeekBlocks(actor, activity) {
+  return activity?.id === "kZc1uthKYagtyfvi" && activity.item?.flags?.jjk5e?.technique === "Golden Hour" &&
+    !!actor?.effects?.some(effect => effect.flags?.jjk5e?.spellBuffActivity === "egehxj5u7W8TYE5K" && liveWard(effect));
+}
 function actionGate(actor,activity,{recheck=false}={}){
   const state=actionTurn(actor);
+  if (goldenWeekBlocks(actor, activity)) return false;
   if(activity?.item?.flags?.jjk5e?.optAction&&!optOn("additionalActions"))return false;
-  if(isJJKFree(activity)&&game.combat?.started&&(!state||state.free))return false;
+  if(isJJKFree(activity)&&game.combat?.started&&(!state||(state.free && !unlimitedDomainSwap(activity))))return false;
   if(isFullTurn(activity)&&game.combat?.started&&!isClaimedDomainReaction(actor,activity)&&(!state||(recheck?(state.action||state.bonus||state.full||(!lesserFullTurn(activity)&&state.moved)):fullTurnSpent(actor,activity))))return false;
   if(state?.full&&["action","bonus"].includes(activity.activation?.type))return false;
   return true;
@@ -1120,9 +860,11 @@ function combatInteractionActivity(actor, activity) {
     type === "action" ? "action" : type === "bonus" ? "bonus" :
     String(type).startsWith("reaction") ? "reaction" : "other";
   const cost = managedCE(activity) ? activityCost(activity) : null;
-  const range = activity.range?.value == null ? "" : [activity.range.value, activity.range.units].filter(Boolean).join(" ");
+  const distance = swapRange(actor, activity);
+  const range = distance == null ? "" : [distance, activity.range?.units].filter(Boolean).join(" ");
+  const secondaryDomain = activity.item.flags?.jjk5e?.domainActivity && !domain;
   return {kind, domain, cost, range, variable:!!activity.item.flags?.jjk5e?.ceSteps?.[activity.id],
-    allowed:actionGate(actor,activity), direct: !domain && ["action","bonus","full","free"].includes(kind)};
+    allowed:actionGate(actor,activity) && (!secondaryDomain || canUseDomainActivity(actor,activity)), direct: !domain && ["action","bonus","full","free"].includes(kind)};
 }
 
 function registerActivityHooks() {
@@ -1148,7 +890,12 @@ function registerActivityHooks() {
       return false;
     }
     if (isCloneCreation(activity) && !canCreateClone(activity.item.actor)) return false;
-    if (activity.item?.flags?.jjk5e?.tokenSwap?.[activity.id] && !validateTokenSwap(activity)) return false;
+    if (activity.item?.flags?.jjk5e?.tokenSwap?.[activity.id]) {
+      if (!selectedSwap(activity)) return false;
+      // dnd5e passes a usage clone. Expose the upgraded range to downstream workflows.
+      const caster = activity.actor ?? activity.item.actor;
+      if (caster?.items?.get?.(activity.item.id) !== activity.item && activity.range) activity.range.value = swapRange(caster, activity);
+    }
     const actor = activity.actor ?? activity.item?.actor;
     if (activity.item?.flags?.jjk5e?.mindset && actor && !actor.system.attributes?.inspiration) {
       ui.notifications.warn(t("Notify.NoInspiration", { name: actor.name }));
@@ -1158,13 +905,13 @@ function registerActivityHooks() {
       ui.notifications.warn(t("Domain.AmplificationBlocks"));
       return false;
     }
-    if (activity.item?.flags?.jjk5e?.technique && inBurnout(actor)) {
+    if ((activity.item?.flags?.jjk5e?.technique || activity.item?.flags?.jjk5e?.domainActivity === activity.id) && inBurnout(actor)) {
       ui.notifications.warn(t("Notify.Burnout"));
       return false;
     }
     // Full-Turn Action (Rules of Thumb): needs the action, bonus action and all movement still unused.
     if (!actionGate(actor,activity)) {
-      ui.notifications.warn(t("Notify.FullTurnUsed"));
+      ui.notifications.warn(t(goldenWeekBlocks(actor, activity) ? "Notify.GoldenWeekTimeStop" : "Notify.FullTurnUsed"));
       return false;
     }
     const cost = totalActivityCECost(actor, activity, usageConfig);
@@ -1209,7 +956,11 @@ function registerActivityHooks() {
     if (activity.item?.flags?.jjk5e?.domainActivity && activity.item.flags.jjk5e.domainActivity !== activity.id &&
         !canUseDomainActivity(activity.actor ?? activity.item.actor, activity)) return false;
     if (isCloneCreation(activity) && !canCreateClone(activity.item.actor, cloneQuantity(activity, usageConfig))) return false;
-    if (activity.item?.flags?.jjk5e?.tokenSwap?.[activity.id] && !validateTokenSwap(activity)) return false;
+    if (activity.item?.flags?.jjk5e?.tokenSwap?.[activity.id]) {
+      const selection = selectedSwap(activity);
+      if (!selection) return false;
+      if (usageConfig) SWAP_SELECTIONS.set(usageConfig, selection);
+    }
     const actor = activity.actor ?? activity.item?.actor;
     // Native Midi may already have reserved a normal action for a bundled full-turn activity.
     // Recheck local state rather than treating that native reservation as an earlier action.
@@ -1225,9 +976,9 @@ function registerActivityHooks() {
     const item = activity.item;
     const quantity = isCloneCreation(activity) ? cloneQuantity(activity, usageConfig) : 0;
     if (isCloneCreation(activity) && !canCreateClone(actor, quantity)) return;
-    if (item?.flags?.jjk5e?.tokenSwap?.[activity.id]) {
-      if (!validateTokenSwap(activity)) return;
-    }
+    const swapping = item?.flags?.jjk5e?.tokenSwap?.[activity.id];
+    const selection = swapping && (SWAP_SELECTIONS.get(usageConfig) ?? selectedSwap(activity));
+    if (swapping && !selection) return;
     // Pay BEFORE opening domains or applying buffs. Failed CE payment must never
     // leave a benefit in place. The pre-use gate handles ordinary insufficient CE.
     if (setting("autoSpendCE") && actor && item) {
@@ -1278,46 +1029,58 @@ function registerActivityHooks() {
         ? t("Domain.SureHitAttack") : t("Domain.SureHitSave")}</p>`);
     }
     await applySpellSelfBuff(actor, item, activity);
-    await applyTokenSwap(actor, item, activity);
+    await applyTokenSwap(actor, selection);
   });
 }
 
 /** Execute explicitly declared token-position swaps without granting players
  * authority over tokens they do not own. */
-async function applyTokenSwap(actor, item, activity) {
-  if (!item?.flags?.jjk5e?.tokenSwap?.[activity?.id] || !canvas?.scene) return;
-  const source = actor?.getActiveTokens?.(true, true)?.find((t) => t.parent?.id === canvas.scene.id)
-    ?? canvas.tokens?.controlled?.find((t) => t.actor === actor)?.document;
-  const targets = [...(game.user?.targets ?? [])];
-  const target = targets.length === 1 ? targets[0]?.document : null;
-  if (!source || !target || source.id === target.id || source.parent?.id !== target.parent?.id) {
-    return ui.notifications.warn(t("Notify.SwapSelect"));
-  }
-  if (!game.user.isGM && !target.actor?.isOwner) {
-    return ui.notifications.warn(t("Notify.SwapOwner"));
-  }
-  await GM_EXTRA.tokenSwap({
-    sceneId: canvas.scene.id, sourceId: source.id, targetId: target.id,
-    actorUuid: actor.uuid, userId: game.user.id
-  });
+const SWAP_SELECTIONS = new WeakMap();
+
+async function applyTokenSwap(actor, selection) {
+  if (!selection) return;
+  await GM_EXTRA.tokenSwap({ ...selection, actorUuid: actor.uuid });
 }
 
-function validateTokenSwap(activity) {
+function hasBoogieFeature(actor, name) {
+  return !!actor?.items?.some(item => item.flags?.jjk5e?.technique === "Boogie Woogie" && baseName(item) === name);
+}
+function swapRange(actor, activity) {
+  const range = activity.range?.value;
+  const flags = activity.item?.flags?.jjk5e;
+  if (flags?.technique !== "Boogie Woogie" || !flags.tokenSwap?.[activity.id] ||
+      flags.domainActivity || activity.range?.units !== "ft" || !(Number(range) > 0)) return range;
+  if (hasBoogieFeature(actor, "Round of Applause")) return Math.max(Number(range), 60);
+  if (hasBoogieFeature(actor, "Clap Back")) return Math.max(Number(range), 45);
+  return range;
+}
+function swapSource(actor) {
+  const scene = canvas?.scene;
+  if (!actor || !scene) return null;
+  if (actor.isToken) return actor.token?.parent?.id === scene.id ? actor.token : null;
+  const controlled = canvas.tokens?.controlled?.find(t => t.actor?.uuid === actor.uuid && t.document.parent?.id === scene.id);
+  return controlled?.document ?? actor.getActiveTokens?.(true, true)?.find(t => t.parent?.id === scene.id);
+}
+function selectedSwap(activity) {
   const actor = activity.actor ?? activity.item?.actor;
-  const source = actor?.getActiveTokens?.(true, true)?.find((t) => t.parent?.id === canvas.scene?.id);
+  const source = swapSource(actor);
   const targets = [...(game.user?.targets ?? [])];
   const target = targets.length === 1 ? targets[0].document : null;
   const fail = (message) => { ui.notifications.warn(message); return false; };
   if (!source || !target || source.id === target.id || source.parent !== target.parent)
-    return fail("JJK 5e: select exactly one other token in the caster's scene.");
+    return fail(t("Notify.SwapSelect"));
   if (!source.isOwner || !target.isOwner)
-    return fail("JJK 5e: the GM must perform swaps involving tokens you do not own. No CE has been charged.");
+    return fail(t("Notify.SwapOwner"));
+  if (unlimitedDomainSwap(activity)) {
+    const domain = getDomain(actor);
+    if (!insideDomain(domain, source) || !insideDomain(domain, target)) return fail(t("Notify.SwapDomain"));
+  }
   const a = tokenCenter(source), b = tokenCenter(target);
   const distance = Math.hypot(a.x - b.x, a.y - b.y) / ftToPx(source.parent, 1);
-  const range = Number(activity.range?.value);
+  const range = Number(swapRange(actor, activity));
   if (!Number.isFinite(range) || range <= 0 || distance > range + 0.001)
-    return fail("JJK 5e: swap target is outside the technique's range.");
-  return true;
+    return fail(t("Notify.SwapRange"));
+  return { sceneId: source.parent.id, sourceId: source.id, targetId: target.id };
 }
 
 function isCloneCreation(activity) {
@@ -1332,7 +1095,7 @@ function cloneQuantity(activity, config) {
 
 function canCreateClone(actor, quantity = 1) {
   if (!Number.isSafeInteger(quantity) || quantity < 1) return false;
-  const scene = canvas.scene;
+  const scene = canvas?.scene;
   const source = actorToken(actor);
   if (!source || !scene || !game.user.can("TOKEN_CREATE")) {
     ui.notifications.warn(t("Notify.CloneScene"));
@@ -1372,17 +1135,18 @@ async function applySpellSelfBuff(actor, item, activity) {
   const original = [...(actor.effects ?? [])].filter((e) =>
     e.flags?.jjk5e?.spellBuffItem === item.uuid &&
     e.flags?.jjk5e?.spellBuffActivity === activity.id);
-  for (const effect of original) await safeDelete(effect);
   const changes = (spec.changes ?? []).filter((c) =>
-    /^system\.attributes\.(?:ac\.bonus|movement\.(?:walk|fly|swim|climb))$/.test(c.key) &&
+    /^system\.attributes\.(?:ac\.bonus|movement\.(?:walk|fly|swim|climb|burrow))$/.test(c.key) &&
     ["multiply", "add", "override"].includes(c.type) && Number.isFinite(Number(c.value)));
   if (!changes.length) return;
-  await actor.createEmbeddedDocuments("ActiveEffect", [fxData({
+  const [created] = await actor.createEmbeddedDocuments("ActiveEffect", [fxData({
     name: item.name, img: item.img, transfer: false, disabled: false,
     duration: { rounds: Number(spec.rounds) || 10 },
-    changes: changes.map((c) => ({ key: c.key, type: c.type, value: String(c.value) })),
+    changes: changes.map((c) => ({ key: c.key, mode: TYPE_MODES[c.type], value: String(c.value) })),
     flags: { jjk5e: { spellBuffItem: item.uuid, spellBuffActivity: activity.id } }
   })]);
+  if (!created) return;
+  for (const effect of original) await safeDelete(effect);
   if (spec.manual) await chat(actor,
     `<p><strong>${esc(item.name)} — ${t("Common.Reminder")}</strong></p><p>${esc(spec.manual)}</p>`);
 }
@@ -2158,6 +1922,8 @@ function onPreRollDamage(config) {
 
 async function openDomain(actor, item) {
   if (!actor?.isOwner || !setting("domainTracking") || domainOpen(actor) || (!game.user.isGM && !game.users.activeGM)) return;
+  // Technique Burnout follows every expansion: no new domain (complete or incomplete) until it ends.
+  if (inBurnout(actor)) { ui.notifications?.warn?.(t("Notify.Burnout")); return; }
   // Incomplete Domain (feat): 1 minute, refinement 0, no barrier, no sure hit; burnout 5 rounds.
   const incomplete = !!item?.flags?.jjk5e?.incompleteDomain;
   // V.6 Domain Refinement: Lasting Domain (500) 2 minutes, Total Mastery (1000) 3 minutes.
@@ -2179,8 +1945,8 @@ async function openDomain(actor, item) {
 }
 
 async function closeDomain(actor) {
-  const eff = actor.effects.find((e) => e.flags?.jjk5e?.kind === "domain" || e.flags?.jjk5e?.domainOpen);
-  if (eff) await eff.delete();
+  const effect = actor.effects.find((e) => e.flags?.jjk5e?.kind === "domain" || e.flags?.jjk5e?.domainOpen);
+  if (effect) await effect.delete();
 }
 
 /** Technique Burnout's exhaustion as real levels (works on dnd5e 5 and 6), removed when the burnout ends. */
@@ -2214,7 +1980,7 @@ async function onDeleteEffect(effect) {
   await setKindEffect(actor, "burnout", {
     name: t("Burnout.Name"), img: `${ICONS}/burnout.svg`, duration: short ? { rounds: 5, seconds: 30 } : { rounds: 10, seconds: 60 },
     description: `<p>${t("Burnout.Description")}</p>`,
-    flags: { jjk5e: { burnout: true } }
+    flags: { jjk5e: { burnout: true, burnoutSceneId: state?.sceneId ?? null } }
   });
   // V.6 Efficient Expansions (refinement 700+): only 1 level of exhaustion after the domain.
   await burnoutExhaustion(actor, refinementOf(actor) >= 700 ? 1 : 2);
@@ -2419,8 +2185,7 @@ GM_EXTRA.tokenSwap = async ({ sceneId, sourceId, targetId, actorUuid }) => {
   const target = scene?.tokens.get(targetId);
   const actor = actorUuid ? await fromUuid(actorUuid).catch(() => null) : null;
   if (!scene || !source || !target || source.id === target.id) return;
-  const actorId = actor?.isToken ? actor.token?.actorId : actor?.id;
-  if (!actorId || source.actorId !== actorId) return;
+  if (!actor || (actor.isToken ? actor.token?.uuid !== source.uuid : source.actorId !== actor.id)) return;
   await scene.updateEmbeddedDocuments("Token", [
     { _id: source.id, x: target.x, y: target.y, elevation: target.elevation },
     { _id: target.id, x: source.x, y: source.y, elevation: source.elevation }
@@ -2486,32 +2251,6 @@ async function dismissSummons(actor) {
 /* -------------------------------------------- */
 /*  Effect expiry (when Times Up is not active)  */
 /* -------------------------------------------- */
-
-function externalEffectExpiry(){
-  return (Number(game.release?.generation)>=14&&!!game.modules.get("dae")?.active)||!!game.modules.get("times-up")?.active;
-}
-async function expireEffects() {
-  if (!isActiveGM() || !setting("autoExpire") || externalEffectExpiry()) return;
-  const actors = new Set();
-  game.combat?.combatants?.forEach((c) => c.actor && actors.add(c.actor));
-  for (const scene of game.scenes ?? []) scene.tokens?.forEach((tk) => tk.actor && actors.add(tk.actor));
-  game.actors?.forEach((a) => actors.add(a));
-  for (const actor of actors) {
-    const ids = actor.effects.filter((e) => {
-      const kind = e.flags?.jjk5e?.kind;
-      if (!["zone", "burnout", "domain", "domainProfileCondition"].includes(kind) && !DOMAIN_WARD_KINDS.has(kind)) return false;
-      if (e.disabled || e.duration?.expired === true) return true;
-      const rem = e.duration?.remaining;
-      return rem !== null && rem !== undefined && rem <= 0;
-    }).map((e) => e.id);
-    for (const id of ids) await safeDelete(actor.effects.get(id));
-    for (const item of actor.items) for (const e of item.effects ?? []) {
-      if (!e.flags?.jjk5e?.group || e.disabled) continue;
-      const rem = e.duration?.remaining;
-      if (rem !== null && rem !== undefined && rem <= 0) await e.update({ disabled: true });
-    }
-  }
-}
 
 /** Remove only the exhaustion levels this module previously added for mutual vows. */
 async function expireVowExhaustion() {
@@ -2871,10 +2610,24 @@ function openPanel(actor, tab) {
   return app.render({ force: true });
 }
 
+/** Coalesce several document updates in the same frame into one render of each open JJK window. */
+const RENDER_QUEUE = new Set();
+let renderFrame = 0;
+function renderSoon(app) {
+  if (!app?.rendered) return;
+  RENDER_QUEUE.add(app);
+  if (renderFrame) return;
+  const flush = () => {
+    renderFrame = 0;
+    const apps = [...RENDER_QUEUE]; RENDER_QUEUE.clear();
+    for (const a of apps) if (a.rendered) a.render();
+  };
+  renderFrame = typeof requestAnimationFrame === "function" ? requestAnimationFrame(flush) : setTimeout(flush, 16);
+}
+
 function refreshPanels(actor) {
   if (!actor) return;
-  const app = PANELS.get(actor.uuid);
-  if (app?.rendered) app.render();
+  renderSoon(PANELS.get(actor.uuid));
 }
 
 Hooks.once("tidy5e-sheet.ready", api => {
@@ -3441,7 +3194,7 @@ Hooks.once("init", () => {
     applyScaling, openPanel, maximumOutput, setReducedOutput, setSoulAwareness, setLimb, rollLimb,
     summon, dismissSummons, syncResource, missingPrereqs, applyCEEffects, activateGroup, endGroup,
     openGMStart, undoAutomation, updateAutomation, updateAllAutomation, outdatedItems, burnoutRecovery, fallDamage, applySoulDamage, clearSoulDamage,
-    techniqueBuilder, buildTechniqueItems
+    techniqueBuilder, buildTechniqueItems, itemTheme, cleanupDomains: () => sweepDomainLeftovers()
   };
 });
 
@@ -3759,14 +3512,17 @@ async function jjkFeatDocs() {
 
 /** What an eligible feat builds on for this actor: its technique, its race, its class, or nothing in particular. */
 function featFit(actor, doc) {
-  const sub = doc.system?.type?.subtype;
   const pre = doc.flags?.jjk5e?.prereq ?? {};
   const names = [...(pre.features ?? []).flat(), ...(pre.prefixes ?? []).flat()].map((n) => normName(n));
   const ownedBy = (test) => actor.items.filter(test).map((i) => normName(baseName(i)));
   const matches = (list) => names.some((n) => list.some((o) => o === n || o.startsWith(n)));
   const techniques = [...actorTechniques(actor)];
-  if (doc.flags?.jjk5e?.technique || (pre.techniques ?? []).length || ["jjkTechnique", "jjkCursedTechnique"].includes(sub)
-      || matches(ownedBy((i) => i.flags?.jjk5e?.technique)) || techniques.some((n) => names.includes(n))) return "technique";
+  // Only technique feats (jjkTechnique, always tied to one technique by data) or feats tied to the actor's
+  // technique. The general "Cursed Technique" feats (jjkCursedTechnique: Flow Technique, Infinity (Minor
+  // Innate Technique)…) fit any sorcerer and stay in their category.
+  if ((doc.flags?.jjk5e?.forTechniques ?? []).length || doc.flags?.jjk5e?.technique || (pre.techniques ?? []).length
+      || doc.system?.type?.subtype === "jjkTechnique"
+      || matches(ownedBy((i) => i.flags?.jjk5e?.technique && i.type !== "background")) || techniques.some((n) => names.includes(n))) return "technique";
   if (matches(ownedBy((i) => i.type === "race" || i.system?.type?.value === "race"))) return "race";
   if (matches(ownedBy((i) => ["class", "subclass"].includes(i.type) || i.system?.type?.value === "class")) || pre.level) return "class";
   return "general";
@@ -4017,17 +3773,68 @@ function damageKind(activity) {
   return types[0] ?? null;
 }
 
-function playAt(file, target, { scale = 1, persist = false, name, gridSize = null, below = false, duration = 0 } = {}) {
+function playAt(file, target, { scale = 1, gridSize = null } = {}) {
   if (!file || !target) return;
   const seq = new Sequence().effect().file(file).atLocation(target);
-  // Looping files (e.g. darkness) otherwise keep their full-frame last state: bound and fade them.
-  if (duration && !persist) seq.duration(duration).fadeOut(600);
-  if (name && !persist) seq.name(name);
   if (gridSize) seq.size(gridSize, { gridUnits: true });
   else seq.scaleToObject(scale);
-  if (below) seq.belowTokens();
-  if (persist) seq.attachTo(target).persist().belowTokens().opacity(0.55).name(name);
   seq.play();
+}
+
+/** Limit the sprite footprint to the scene rectangle, independently of the domain rules. */
+function domainVisualSize(scene, { x, y }, gridUnits) {
+  const { sceneRect, size } = scene?.dimensions ?? {};
+  if (!sceneRect || ![x, y, size, gridUnits, sceneRect.x, sceneRect.y, sceneRect.width, sceneRect.height].every(Number.isFinite)) return 0;
+  const edge = Math.min(x - sceneRect.x, y - sceneRect.y,
+    sceneRect.x + sceneRect.width - x, sceneRect.y + sceneRect.height - y);
+  return Math.max(0, Math.min(gridUnits * size, 2 * edge));
+}
+
+function playDomainVisual(file, scene, point, { gridUnits, name, duration, opacity, anchor }) {
+  const size = domainVisualSize(scene, point, gridUnits);
+  if (!file || size < 1) return;
+  try {
+    const { x, y, elevation, levelId } = point;
+    const effect = new Sequence().effect().file(file);
+    if (canvas?.scene?.id === scene.id) effect.atLocation({ x, y });
+    else {
+      // Sequencer takes the target scene from a source UUID. Use an offset to preserve the recorded center.
+      if (!anchor?.uuid) return;
+      const center = tokenCenter(anchor);
+      effect.atLocation(anchor.uuid, { offset: { x: x - center.x, y: y - center.y } });
+    }
+    effect.size(size).name(name).belowTokens().opacity(opacity).duration(duration).fadeOut(400);
+    if (Number.isFinite(elevation)) effect.elevation?.(elevation, { absolute: true });
+    if (levelId) effect.onLevels?.(levelId);
+    Promise.resolve(effect.play()).catch(err => reportError("domain animation", err));
+  } catch (err) { reportError("domain animation", err); }
+}
+
+function animateDomainOpening(actor, state, token) {
+  const scene = game.scenes?.get(state.sceneId);
+  if (!animOn() || !scene || !token || token.hidden) return;
+  const item = state.domainItemUuid && actor.items.find(i => i.uuid === state.domainItemUuid);
+  if (item && aaHandles(item)) return;
+  const point = { x: state.x, y: state.y, elevation: token.elevation, levelId: state.levelId };
+  const id = state.openingId;
+  playDomainVisual(animPath(ANIM.domain), scene, point, { gridUnits: 3, name: `jjk5e-domain-burst-${id}`, duration: 2000, opacity: 0.48, anchor: token });
+  playDomainVisual(themeFile(itemTheme(item), "area", item), scene, point, { gridUnits: 4, name: `jjk5e-domain-area-${id}`, duration: 1600, opacity: 0.72, anchor: token });
+  // The native Region represents any sustained area. The cinematic layers all end automatically.
+  playDomainVisual(animPath(ANIM.domainAura), scene, point, { gridUnits: 5, name: `jjk5e-domain-${id}`, duration: 2200, opacity: 0.42, anchor: token });
+}
+
+function animateDomainClash(scene, actors) {
+  if (!animOn() || !scene || !actors.length) return;
+  const states = actors.map(getDomain);
+  // A table-visible animation must not reveal a concealed combatant.
+  const tokens = states.map(state => scene.tokens?.find(t => t.uuid === state?.tokenUuid));
+  if (tokens.some(token => !token || token.hidden)) return;
+  const point = { x: states.reduce((total, state) => total + state.x, 0) / states.length,
+    y: states.reduce((total, state) => total + state.y, 0) / states.length,
+    elevation: tokens[0].elevation, levelId: states[0].levelId };
+  playDomainVisual(animPath(ANIM.blackFlash2), scene, point, {
+    gridUnits: 3, name: "jjk5e-domain-clash", duration: 1400, opacity: 0.72, anchor: tokens[0]
+  });
 }
 
 function playBetween(file, source, target, missed = false) {
@@ -4078,12 +3885,8 @@ function animateActivity(activity, targets = null) {
   const theme = itemTheme(item, activity);
   const tmpl = activity.target?.template ?? {};
   const name = baseName(item).toLowerCase();
-  if (item.flags.jjk5e.domainActivity === activity.id || name.startsWith("domain expansion")) {
-    playAt(animPath(ANIM.domain), source, { scale: 6, duration: 2500, name: `jjk5e-domain-burst-${item.actor.id}` });
-    playAt(themeFile(theme, "area", item), source, { scale: 8, below: true });
-    playAt(animPath(ANIM.domainAura), source, { scale: 10, persist: true, name: `jjk5e-domain-${item.actor.id}` });
-    return;
-  }
+  const domainActivity = item.flags.jjk5e.domainActivity;
+  if (domainActivity ? domainActivity === activity.id : name.startsWith("domain expansion")) return;
   if (activity.type === "summon") return playAt(themeFile("shadow", "summon", item) ?? animPath(ANIM.summon), source, { scale: 2.5 });
   if (/teleport|blink|swap|boogie/.test(name)) return playAt(animPath(ANIM.teleport), source, { scale: 1.5 });
   if (activity.type === "heal") {
@@ -4113,10 +3916,14 @@ function animateActivity(activity, targets = null) {
   }
 }
 
-function endDomainAnimation(actor) {
+function endDomainAnimation(actor, openingId, sceneId) {
   if (!globalThis.Sequencer?.EffectManager || !actor) return;
-  for (const name of [`jjk5e-domain-${actor.id}`, `jjk5e-domain-burst-${actor.id}`]) {
-    try { Sequencer.EffectManager.endEffects({ name }); } catch (err) { reportError("domain animation", err); }
+  // Include the names used by pre-1.97 saves to clean up legacy persistent effects.
+  const names = [`jjk5e-domain-${actor.id}`, `jjk5e-domain-burst-${actor.id}`];
+  if (openingId) names.push(`jjk5e-domain-${openingId}`, `jjk5e-domain-burst-${openingId}`, `jjk5e-domain-area-${openingId}`);
+  for (const name of names) {
+    try { Promise.resolve(Sequencer.EffectManager.endEffects({ name, ...(sceneId && { sceneId }) })).catch(err => reportError("domain animation", err)); }
+    catch (err) { reportError("domain animation", err); }
   }
 }
 
@@ -4294,7 +4101,7 @@ async function summonFallback(activity) {
     ac: (Number(base.ac?.flat ?? base.ac?.value) || 10) + (await evalF(activity.bonuses?.ac))
   };
   return viaGM("summon", { actorUuid: actor.uuid, name: src?.name ?? name, sourceUuid: src?.uuid ?? null,
-    count: Number(info?.count ?? profile?.count) || 1, userId: game.user.id, sceneId: canvas.scene?.id, stats });
+    count: Number(info?.count ?? profile?.count) || 1, userId: game.user.id, sceneId: canvas?.scene?.id, stats });
 }
 
 Hooks.once("init", () => {
@@ -4356,21 +4163,20 @@ Hooks.once("ready", () => {
   Hooks.on("updateToken",(token,changes)=>endMovedSimpleDomain(token,changes).catch(err=>reportError("Simple Domain movement",err)));
   Hooks.on("userConnected",()=>recoverCEWorld().catch(err=>reportError("CE recovery",err)));
   Hooks.on("updateWorldTime",()=>recoverCEWorld().catch(err=>reportError("CE recovery",err)));
-  setInterval(()=>recoverCEWorld().catch(err=>reportError("CE recovery",err)),30000);
+  setInterval(()=>recoverCEWorld({ all: false }).catch(err=>reportError("CE recovery",err)),30000);
   recoverCEWorld().catch(err=>reportError("CE recovery",err));
+  if (isActiveGM()) sweepDomainLeftovers().catch((err) => reportError("domain cleanup", err));
   if (game.user.isGM && setting("enableSummoning") && game.settings.settings?.has?.("dnd5e.allowSummoning")
     && !game.settings.get("dnd5e", "allowSummoning")) game.settings.set("dnd5e", "allowSummoning", true);
-  Hooks.on("deleteActiveEffect", (effect) => {
-    if (effect.flags?.jjk5e?.kind === "domain" || effect.flags?.jjk5e?.domainOpen) endDomainAnimation(effect.parent);
-  });
   Hooks.on("updateActor", (actor, changes, options, userId) => {
     if (userId === game.user.id && foundry.utils.getProperty(changes, `flags.${MODULE_ID}.pendingBlackFlash`) === true) animateBlackFlash(actor);
   });
-  Hooks.on("updateItem", () => { featDocsCache = null; });
+  // Only edits inside the feats compendium change the picker; actor items (CE spends…) do not.
+  Hooks.on("updateItem", (item) => { if (item.pack && item.pack === jjkPack("jjk5e-feats")?.collection) featDocsCache = null; });
   Hooks.on("createActiveEffect", (effect) => {
     if (!isActiveGM() || !(effect.flags?.jjk5e?.burnout || effect.flags?.jjk5e?.kind === "burnout")) return;
     const actor = effect.parent;
-    if (actor?.documentName === "Actor") return queueDomainWork(() => applyBurnoutConsequences(actor)).catch((err) => reportError("burnout", err));
+    if (actor?.documentName === "Actor") return queueDomainWork(() => applyBurnoutConsequences(actor, effect.flags?.jjk5e?.burnoutSceneId)).catch((err) => reportError("burnout", err));
   });
   Hooks.on("deleteActiveEffect", (effect) => {
     if (!isActiveGM() || !(effect.flags?.jjk5e?.burnout || effect.flags?.jjk5e?.kind === "burnout")) return;
@@ -4378,7 +4184,7 @@ Hooks.once("ready", () => {
     if(actor?.documentName==="Actor") return queueDomainWork(async()=>{
       if(inBurnout(actor)) return;
       await burnoutExhaustion(actor,-1);
-      await clearBurnoutSummons(actor);
+      await clearBurnoutSummons(actor, effect.flags?.jjk5e?.burnoutSceneId);
     });
   });
 });
@@ -4989,7 +4795,7 @@ async function resolveMission(actor, id, result) {
 const VOW_APPS = new Map();
 const CAREER_APPS = new Map();
 function refreshVowApps(actor) { const a = VOW_APPS.get(actor?.uuid); if (a?.rendered) a.render(); refreshPanels(actor); }
-function refreshCareerApps(actor) { const a = CAREER_APPS.get(actor?.uuid); if (a?.rendered) a.render(); }
+function refreshCareerApps(actor) { renderSoon(CAREER_APPS.get(actor?.uuid)); }
 
 function makeVowClass() {
   const Base = foundry.applications.api.ApplicationV2;
@@ -5497,8 +5303,7 @@ async function handleDomainAuthority(msg, { user } = {}) {
     if (["claim", "finish", "decline"].includes(operation)) return processClashDecision(operation, actor, data, user);
     if (operation === "amplification") return toggleDomainAmplification(actor);
     const state = getDomain(actor);
-    // Closing is idempotent: a stale HUD (old opening id) may still clean up the current domain.
-    if (operation === "close") return closeDomainOf(actor);
+    if (operation === "close") return closeDomainOf(actor, "", data.openingId ?? null);
     if (!state?.open || !data.openingId || state.openingId !== data.openingId) return false;
     if (operation === "mode") return setBarrierMode(actor, data.mode);
     if (operation === "lethal" && typeof data.lethal === "boolean") {
@@ -5710,6 +5515,42 @@ function sureHitBlocked(actor) {
 const regionShape = (type, x, y, r) => (type === "circle" ? { type, x, y, radius: r, rotation: 0, hole: false }
   : { type: "ellipse", x, y, radiusX: r, radiusY: r, rotation: 0, hole: false });
 
+/** The drawn barrier: the rules circle (its radius stays in feet) clipped to the map, so it never covers the padding. */
+function sceneRectOf(scene) {
+  const rect = scene?.dimensions?.sceneRect;
+  return rect && [rect.x, rect.y, rect.width, rect.height].every(Number.isFinite) && rect.width > 0 && rect.height > 0 ? rect : null;
+}
+function domainFits(scene, x, y, r) {
+  const rect = sceneRectOf(scene);
+  return !rect || (x - r >= rect.x && y - r >= rect.y && x + r <= rect.x + rect.width && y + r <= rect.y + rect.height);
+}
+function clippedDomainPolygon(scene, x, y, r, steps = 72) {
+  const rect = sceneRectOf(scene);
+  const points = [];
+  for (let i = 0; i < steps; i++) {
+    const a = (2 * Math.PI * i) / steps;
+    // Projection onto the rectangle never moves a point away from a centre inside it: the outline stays within the rules circle.
+    const px = Math.round(clamp(x + r * Math.cos(a), rect.x, rect.x + rect.width));
+    const py = Math.round(clamp(y + r * Math.sin(a), rect.y, rect.y + rect.height));
+    const last = points.length - 2;
+    if (last >= 0 && points[last] === px && points[last + 1] === py) continue;
+    points.push(px, py);
+  }
+  return { type: "polygon", points, hole: false };
+}
+function domainZoneShape(scene, type, x, y, r) {
+  return type === "polygon" ? clippedDomainPolygon(scene, x, y, r) : regionShape(type, x, y, r);
+}
+/** A template cannot be clipped: shrink its drawn radius (feet) until the circle fits the map. */
+function fittedTemplateDistance(scene, x, y, radius) {
+  const rect = sceneRectOf(scene);
+  if (!rect) return radius;
+  const room = Math.min(x - rect.x, y - rect.y, rect.x + rect.width - x, rect.y + rect.height - y);
+  const grid = scene?.grid ?? {};
+  const ft = (room / (Number(grid.size) || 100)) * (Number(grid.distance) || 5);
+  return Math.max(Math.min(radius, Math.floor(ft)), Number(grid.distance) || 5);
+}
+
 GM_EXTRA.domainZone = async ({ sceneId, x, y, radius, name, color, actorUuid, openingId }) => {
   if (!isActiveGM()) return;
   const actor = await domainActor(actorUuid);
@@ -5721,10 +5562,12 @@ GM_EXTRA.domainZone = async ({ sceneId, x, y, radius, name, color, actorUuid, op
   const r = ftToPx(scene, radius);
   let zone = null;
   const v14 = (Number(game.release?.generation) || 0) >= 14;
-  for (const shape of v14 ? ["circle", "ellipse"] : ["ellipse", "circle"]) {
+  const shapes = v14 ? ["circle", "ellipse"] : ["ellipse", "circle"];
+  if (!domainFits(scene, x, y, r)) shapes.unshift("polygon");
+  for (const shape of shapes) {
     if (zone) break;
     try {
-      const data = { name, color, shapes: [regionShape(shape, x, y, r)],
+      const data = { name, color, shapes: [domainZoneShape(scene, shape, x, y, r)],
         visibility: globalThis.CONST?.REGION_VISIBILITY?.ALWAYS ?? 2, flags: { jjk5e: { domain: actorUuid, openingId } } };
       if (v14 && state.levelId) data.levels = [state.levelId];
       const [region] = await scene.createEmbeddedDocuments("Region", [data]);
@@ -5733,7 +5576,7 @@ GM_EXTRA.domainZone = async ({ sceneId, x, y, radius, name, color, actorUuid, op
   }
   if (!zone) {
     try {
-      const [tpl] = await scene.createEmbeddedDocuments("MeasuredTemplate", [{ t: "circle", x, y, distance: radius,
+      const [tpl] = await scene.createEmbeddedDocuments("MeasuredTemplate", [{ t: "circle", x, y, distance: fittedTemplateDistance(scene, x, y, radius),
         fillColor: color, borderColor: color, flags: { jjk5e: { domain: actorUuid, openingId } } }]);
       if (tpl) zone = { kind: "MeasuredTemplate", id: tpl.id };
     } catch (err) { log("template failed", err); }
@@ -5741,7 +5584,7 @@ GM_EXTRA.domainZone = async ({ sceneId, x, y, radius, name, color, actorUuid, op
   const latest = getDomain(actor);
   if (zone && latest?.open && latest.openingId === openingId) {
     await setDomain(actor, { ...latest, zone });
-    await domainSceneFX(scene, zone.id, true);
+    await domainSceneFX(scene, true);
   } else if (zone) await safeDelete(scene.getEmbeddedDocument?.(zone.kind, zone.id));
 };
 
@@ -5751,8 +5594,12 @@ GM_EXTRA.domainZoneResize = async ({ sceneId, zone, x, y, radius, actorUuid, ope
   const doc = zone && scene?.getEmbeddedDocument?.(zone.kind, zone.id);
   if (!doc || doc.flags?.jjk5e?.domain !== actorUuid ||
       (doc.flags?.jjk5e?.openingId && doc.flags.jjk5e.openingId !== openingId)) return;
-  if (zone.kind === "Region") await doc.update({ shapes: [regionShape(zone.shape ?? "ellipse", x, y, ftToPx(scene, radius))] });
-  else await doc.update({ distance: radius });
+  const r = ftToPx(scene, radius);
+  if (zone.kind === "Region") {
+    // A shrinking loser may come to fit the map (or a clipped one may stop fitting): keep the drawn shape inside it.
+    const shape = domainFits(scene, x, y, r) ? (zone.shape === "polygon" ? ((Number(game.release?.generation) || 0) >= 14 ? "circle" : "ellipse") : zone.shape ?? "ellipse") : "polygon";
+    await doc.update({ shapes: [domainZoneShape(scene, shape, x, y, r)] });
+  } else await doc.update({ distance: fittedTemplateDistance(scene, x, y, radius) });
 };
 
 GM_EXTRA.domainZoneDelete = async ({ sceneId, zone, actorUuid, openingId }) => {
@@ -5762,7 +5609,7 @@ GM_EXTRA.domainZoneDelete = async ({ sceneId, zone, actorUuid, openingId }) => {
   if (doc && (doc.flags?.jjk5e?.domain !== actorUuid ||
       (doc.flags?.jjk5e?.openingId && doc.flags.jjk5e.openingId !== openingId))) return;
   if (doc) await safeDelete(doc);
-  if (zone && scene) await domainSceneFX(scene, zone.id, false);
+  if (zone && scene) await domainSceneFX(scene, false, actorUuid);
 };
 
 async function setDomain(actor, state) {
@@ -5774,112 +5621,6 @@ async function setDomain(actor, state) {
 }
 
 /* ---- Opening / closing ---- */
-
-async function domainOpened(actor, effect = null) {
-  if (!isActiveGM() || !actor) return;
-  if (effect?.uuid && getDomain(actor)?.openingId === effect.uuid) return;
-  const mod = ceMod(actor);
-  const kind = effect?.flags?.jjk5e ?? actor.effects.find((e) => e.flags?.jjk5e?.domainOpen)?.flags?.jjk5e ?? {};
-  const incomplete = !!kind.incomplete, barrierless = !!kind.barrierless;
-  const ref = incomplete ? 0 : refinementOf(actor);
-  const origin = kind.originTokenUuid ? await fromUuid(kind.originTokenUuid).catch(() => null) : null;
-  const token = origin?.actor?.uuid === actor.uuid ? origin : (Object.hasOwn(kind, "originTokenUuid") ? null : actorToken(actor));
-  const tokenDoc = token?.document ?? token;
-  const c = token ? tokenCenter(token) : null;
-  const sourceScene = tokenDoc?.parent ?? null;
-  const levelId = typeof tokenDoc?.level === "string" ? tokenDoc.level : tokenDoc?.level?.id ?? null;
-  // Domain Durability: +1 HP per refinement point; Durable Barrier (800+) doubles it.
-  const max = Math.max(1, 10 * mod + (ref >= 800 ? 2 * ref : ref));
-  const radius = incomplete ? 100 : barrierless ? 655 : DOMAIN_RADIUS;
-  const state = { open: true, openingId: effect?.uuid ?? foundry.utils.randomID(),
-    hp: max, max, ac: 10 + mod + Math.floor(ref / 100), refinement: ref,
-    radius, lethal: actor.getFlag(MODULE_ID, "domainLethal") !== false,
-    noBarrier: incomplete || barrierless, noSureHit: incomplete, incomplete, barrierless,
-    sceneId: sourceScene?.id ?? null, tokenUuid: tokenDoc?.uuid ?? null, levelId,
-    domainItemUuid: kind.domainItemUuid ?? null,
-    customProfile: validateDomainProfile(actor.getFlag(MODULE_ID, "customDomainProfile")),
-    x: c?.x ?? null, y: c?.y ?? null,
-    damageTaken: 0, zone: null, clash: null, name: actor.name };
-  await setDomain(actor, state);
-  if (c && state.sceneId && setting("domainZones")) await GM_EXTRA.domainZone({ sceneId: state.sceneId,
-    name: `${t("Domain.Zone")}: ${actor.name}`, color: "#4b1d6e", actorUuid: actor.uuid, openingId: state.openingId });
-  await chat(actor, `<div class="jjk5e-card"><h3><i class="fas fa-circle-half-stroke"></i> ${t("Domain.Opened", { name: esc(actor.name) })}</h3>`
-    + `<p>${state.noBarrier ? t(incomplete ? "Domain.IncompleteStats" : "Domain.BarrierlessStats", { radius }) : t("Domain.BarrierStats", { hp: max, ac: state.ac, ref })}</p><p class="hint">${t("Domain.OutsideHint", { n: Math.max(mod, 1) })}</p></div>`);
-  // Clashes change the rival's domain too, which only the GM can always write: the active GM resolves them.
-  const claim = actor.getFlag(MODULE_ID, "domainReactionClaim");
-  const root = claim?.openerUuid ? await domainActor(claim.openerUuid) : null;
-  const window = root && reactionWindow(root);
-  const offer = window?.offers.find((o) => o.actorUuid === actor.uuid && o.claimId === claim.id && o.status === "claimed");
-  if (offer && window.openingId === claim.openingId) {
-    const current = getDomain(actor);
-    await setDomain(actor, { ...current, reactionRootUuid: root.uuid, reactionRootOpening: window.openingId });
-    offer.status = "used";
-    await root.setFlag(MODULE_ID, "domainReactionWindow", window);
-    await actor.unsetFlag(MODULE_ID, "domainReactionClaim");
-    try { await globalThis.MidiQOL?.setReactionUsed?.(actor); } catch (err) { reportError("domain reaction", err); }
-    await settleReactionWindow(root);
-  } else {
-    await offerDomainClash(actor);
-    await settleReactionWindow(actor);
-  }
-  if (actor.isOwner) openDomainHUD(actor);
-}
-
-async function domainClosed(actor) {
-  if (!isActiveGM()) return;
-  const state = getDomain(actor);
-  if (!state) return;
-  await removeBarrierMarkers(actor.uuid,state.openingId);
-  if (state.zone) await GM_EXTRA.domainZoneDelete({ sceneId: state.sceneId, zone: state.zone, actorUuid: actor.uuid, openingId: state.openingId });
-  const window = actor.getFlag(MODULE_ID, "domainReactionWindow");
-  const survivors = [];
-  for (const offer of window?.offers ?? []) {
-    const responder = await domainActor(offer.actorUuid);
-    if (!responder) continue;
-    const claim = responder.getFlag(MODULE_ID, "domainReactionClaim");
-    if (offer.claimId && claim?.id === offer.claimId && claim.openerUuid === actor.uuid) await responder.unsetFlag(MODULE_ID, "domainReactionClaim");
-    const rs = getDomain(responder);
-    if (rs?.open && rs.reactionRootUuid === actor.uuid && rs.reactionRootOpening === state.openingId) {
-      rs.reactionRootUuid = null; rs.reactionRootOpening = null;
-      await setDomain(responder, rs);
-      survivors.push(responder);
-    }
-  }
-  await actor.unsetFlag(MODULE_ID, "domainReactionWindow");
-  const scene = state.sceneId && game.scenes.get(state.sceneId);
-  const actors = [...new Map([...(game.actors?.contents ?? []), ...[...(scene?.tokens ?? [])].map((tk)=>tk.actor)]
-    .filter((a)=>a?.uuid).map((a)=>[a.uuid,a])).values()];
-  for (const target of actors) {
-    const ids = target.effects?.filter((e)=>e.flags?.jjk5e?.kind === "domainProfileCondition" && e.flags.jjk5e.openingId === state.openingId).map((e)=>e.id) ?? [];
-    if (ids.length) await target.deleteEmbeddedDocuments("ActiveEffect",ids);
-  }
-  const peers = state.clash?.with ? [state.clash.with].flat() : [];
-  for (const uuid of peers) {
-    const other = await fromUuid(uuid).catch(() => null);
-    const os = getDomain(other);
-    if (os?.clash && [os.clash.with].flat().includes(actor.uuid)) {
-      const remaining = [os.clash.with].flat().filter((id) => id !== actor.uuid);
-      os.clash = { ...os.clash, with: remaining, resolved: remaining.length === 0 };
-      await setDomain(other, os);
-      if (!remaining.length) await chat(other, `<p><i class="fas fa-crown"></i> ${t("Domain.ClashWon", { name: esc(other.name) })}</p>`);
-    }
-  }
-  await setDomain(actor, null);
-  if (window?.status === "open") for (const survivor of survivors) await detectClash(survivor);
-  refreshDomainApps(actor);
-}
-
-async function closeDomainOf(actor, reason = "") {
-  actor = liveActor(actor);
-  if (!isActiveGM()) return requestDomainAuthority("close", { actorUuid: actor?.uuid, openingId: getDomain(actor)?.openingId });
-  const eff = actor?.effects?.find((e) => e.flags?.jjk5e?.kind === "domain" || e.flags?.jjk5e?.domainOpen);
-  if (reason) await chat(actor, `<p><i class="fas fa-burst"></i> ${reason}</p>`);
-  if (eff) await safeDelete(eff);
-  else await domainClosed(actor);
-  return true;
-}
-
-/* ---- Barrier damage, weak spot ---- */
 
 async function damageBarrier(actor, amount, side = "outside", type = "") {
   if (!isActiveGM() || !["inside", "outside"].includes(side)) return null;
@@ -5988,17 +5729,6 @@ async function createBarrierMarker(actor){
     }
   });
 }
-async function removeBarrierMarkers(actorUuid,openingId){
-  if(!isActiveGM()) return;
-  for(const scene of game.scenes??[]){
-    const ids=[...(scene.tokens??[])].filter(t=>{const f=barrierMarkerMeta(t);return f?.actorUuid===actorUuid&&f.openingId===openingId;}).map(t=>t.id);
-    if(ids.length) await scene.deleteEmbeddedDocuments("Token",ids);
-  }
-  for(const proxy of game.actors??[]){
-    const f=proxy.flags?.jjk5e?.barrierMarker;
-    if(f?.actorUuid===actorUuid&&f.openingId===openingId) await safeDelete(proxy);
-  }
-}
 async function attackSelectedBarrier(){
   const targets=[...(game.user?.targets??[])];
   if(targets.length!==1) return false;
@@ -6045,6 +5775,12 @@ async function findWeakSpot(domainActor, seeker) {
 
 function clashRounds(diff) { return clashRoundsFromRefinement(diff); }
 
+function clashParticipant(actor, state, status = t(`Domain.Role.${state.clash.role}`)) {
+  return `<li data-role="${state.clash.role}"><strong>${esc(actor.name)}</strong>
+    <span class="jjk-domain-clash-score" title="${esc(t("Domain.Refinement"))}">${esc(String(state.refinement))}</span>
+    <small>${esc(status)}</small></li>`;
+}
+
 async function detectClash(actor) {
   const mine = getDomain(actor);
   if (!isActiveGM() || !mine?.open) return;
@@ -6079,9 +5815,10 @@ async function detectClash(actor) {
     const lines = actors.map((a) => {
       const state = getDomain(a), result = results.find((r) => r.id === a.uuid);
       const outcome = result.role === "loser" ? t("Domain.MultiRounds", { n: result.rounds }) : t(`Domain.Role.${result.role}`);
-      return `<li>${esc(a.name)} (${state.refinement}): ${esc(outcome)}</li>`;
+      return clashParticipant(a, state, outcome);
     }).join("");
-    await docClass("ChatMessage").create({ content: `<div class="jjk5e-card"><h3><i class="fas fa-yin-yang"></i> ${t("Domain.MultiClash")}</h3><ul>${lines}</ul><p class="hint">${t("Domain.MultiClashHint")}</p></div>` });
+    await docClass("ChatMessage").create({ content: `<div class="jjk5e-card jjk-domain-clash"><h3><i class="fas fa-yin-yang" aria-hidden="true"></i> ${t("Domain.MultiClash")}</h3><ul class="jjk-domain-clash-casters" aria-label="${esc(t("Domain.Refinement"))}">${lines}</ul><p class="hint">${t("Domain.MultiClashHint")}</p></div>` });
+    animateDomainClash(scene, actors);
     for (const a of actors) {
       const result = results.find((r) => r.id === a.uuid);
       if (result.role === "loser" && result.rounds === 0) await closeDomainOf(a, t("Domain.ClashLost", { name: esc(a.name) }));
@@ -6103,9 +5840,12 @@ async function detectClash(actor) {
   await setDomain(actor, mine);
   await setDomain(rival, rs);
   const text = equal ? t("Domain.ClashEqual")
-    : t("Domain.ClashResult", { win: esc(win.name), lose: esc(lose.name), rounds, diff: Math.abs(diff) });
-  await docClass("ChatMessage").create({ content: `<div class="jjk5e-card"><h3><i class="fas fa-yin-yang"></i> ${t("Domain.Clash")}</h3>`
-    + `<p>${esc(actor.name)} (${mine.refinement}) vs ${esc(rival.name)} (${rs.refinement})</p><p>${text}</p><p class="hint">${t("Domain.ClashNoSureHit")}</p></div>` });
+    : t(rounds === 0 ? "Domain.ClashResultNow" : "Domain.ClashResult", { win: esc(win.name), lose: esc(lose.name), rounds, diff: Math.abs(diff) });
+  await docClass("ChatMessage").create({ content: `<div class="jjk5e-card jjk-domain-clash">
+    <h3><i class="fas fa-yin-yang" aria-hidden="true"></i> ${t("Domain.Clash")}</h3>
+    <ul class="jjk-domain-clash-casters" aria-label="${esc(t("Domain.Refinement"))}">${clashParticipant(actor, mine)}${clashParticipant(rival, rs)}</ul>
+    <p>${text}</p><p class="hint">${t("Domain.ClashNoSureHit")}</p></div>` });
+  animateDomainClash(scene, [actor, rival]);
   if (!equal && rounds === 0) await closeDomainOf(lose, t("Domain.ClashLost", { name: esc(lose.name) }));
 }
 
@@ -6169,54 +5909,6 @@ function burnoutRecoveryWins(actor) {
   if (typeof raw !== "object") return Math.max(0, Number(raw) || 0); // older numeric flag
   const minutes = Math.floor(Math.max(0, (Number(game.time?.worldTime) || 0) - (Number(raw.time) || 0)) / 60);
   return Math.max(0, (Number(raw.wins) || 0) - minutes);
-}
-
-/** Technique Burnout (Rules of Thumb): forms and magical effects of the innate technique end; its summons stay
- * but are treated as stunned (and fall prone if they were flying) until the burnout ends. */
-function techniqueOrigins(actor) {
-  return actor.items.filter((i) => i.flags?.jjk5e?.technique).map((i) => i.uuid);
-}
-function fromTechnique(effect, origins) {
-  const o = String(effect?.origin ?? "");
-  return !!o && origins.some((u) => o === u || o.startsWith(`${u}.`));
-}
-function burnoutSceneActors() {
-  const scene = globalThis.canvas?.scene;
-  return [...new Map([...(game.actors?.contents ?? []), ...[...(scene?.tokens ?? [])].map((tk) => tk.actor)]
-    .filter((a) => a?.uuid).map((a) => [a.uuid, a])).values()];
-}
-async function applyBurnoutConsequences(actor) {
-  if (!isActiveGM() || !actor || !inBurnout(actor)) return;
-  const origins = techniqueOrigins(actor);
-  if (!origins.length) return;
-  const ended = [], stunned = [];
-  for (const a of burnoutSceneActors()) {
-    const ids = a.effects.filter((e) => !e.flags?.jjk5e?.kind && !e.flags?.jjk5e?.burnout && fromTechnique(e, origins)).map((e) => e.id);
-    if (ids.length) {
-      await a.deleteEmbeddedDocuments("ActiveEffect", ids, { jjk5eBurnout: true });
-      ended.push(`${esc(a.name)} (${ids.length})`);
-    }
-    if (a.uuid === actor.uuid || kindEffect(a, "burnoutSummon")) continue;
-    const token = a.token ?? a.getActiveTokens?.()?.[0]?.document;
-    const own = token?.flags?.jjk5e?.summonedBy;
-    const origin = token?.flags?.dnd5e?.summon?.origin ?? a.flags?.dnd5e?.summon?.origin;
-    const mine = own === actor.uuid || (!!origin && origins.some((u) => origin === u || origin.startsWith(`${u}.`)));
-    if (!mine) continue;
-    const flying = (Number(a.system?.attributes?.movement?.fly) || 0) > 0 || a.statuses?.has?.("flying");
-    await setKindEffect(a, "burnoutSummon", { name: t("Burnout.SummonName"), img: `${ICONS}/burnout.svg`,
-      statuses: flying ? ["stunned", "prone"] : ["stunned"], description: `<p>${t("Burnout.SummonDescription")}</p>`,
-      flags: { jjk5e: { burnoutOf: actor.uuid } } });
-    stunned.push(esc(a.name));
-  }
-  if (ended.length || stunned.length) await chat(actor, `<p><i class="fas fa-brain"></i> <strong>${t("Burnout.Name")}</strong></p>
-    ${ended.length ? `<p>${t("Burnout.FormsEnded")}: ${ended.join(", ")}</p>` : ""}${stunned.length ? `<p>${t("Burnout.SummonsStunned")}: ${stunned.join(", ")}</p>` : ""}`);
-}
-async function clearBurnoutSummons(actor) {
-  if (!isActiveGM() || !actor) return;
-  for (const a of burnoutSceneActors()) {
-    const fx = kindEffect(a, "burnoutSummon");
-    if (fx?.flags?.jjk5e?.burnoutOf === actor.uuid) await safeDelete(fx);
-  }
 }
 
 function canRecoverBurnout(actor) {
@@ -6464,7 +6156,7 @@ function liveActor(actor) {
     return live?.documentName === "Actor" ? live : actor;
   } catch { return actor; }
 }
-function refreshDomainApps(actor) { const a = DOMAIN_APPS.get(actor?.uuid); if (a?.rendered) a.render(); }
+function refreshDomainApps(actor) { renderSoon(DOMAIN_APPS.get(actor?.uuid)); }
 
 function makeDomainClass() {
   const Base = foundry.applications.api.ApplicationV2;
@@ -6513,8 +6205,8 @@ function makeDomainClass() {
             lethal: el.dataset.m !== "nonlethal" });
           this.render();
         },
-        close: async function () {
-          const done = await closeDomainOf(this.actor);
+        close: async function (_ev, el) {
+          const done = await closeDomainOf(this.actor, "", el?.dataset.openingId || null);
           if (done === false) ui.notifications.warn(t("Domain.CloseFailed"));
           else this.close();
         }
@@ -6551,7 +6243,7 @@ function makeDomainClass() {
           <button type="button" data-action="weak"><i class="fas fa-crosshairs"></i> ${t("Domain.WeakSpot")}</button></div>
         ${this.actor.isOwner ? `<div class="btns"><button type="button" data-action="lethal" data-m="${s.lethal === false ? "lethal" : "nonlethal"}">${s.lethal === false ? t("Domain.MakeLethal") : t("Domain.MakeNonLethal")}</button>${s.refinement >= 100 ? `<button type="button" data-action="mode" data-m="flip">${t("Domain.Flipped")}</button>
           <button type="button" data-action="mode" data-m="balanced">${t("Domain.Balanced")} (5)</button>` : ""}
-          <button type="button" data-action="close"><i class="fas fa-xmark"></i> ${t("Domain.Close")}</button></div>` : ""}
+          <button type="button" data-action="close" data-opening-id="${esc(s.openingId ?? "")}"><i class="fas fa-xmark"></i> ${t("Domain.Close")}</button></div>` : ""}
       </section>`;
     }
     _replaceHTML(result, content) { content.innerHTML = result; }
@@ -7244,7 +6936,7 @@ function makeCreatorClass() {
   };
 }
 let JJKCreatorClass = null;
-function refreshCreator(actor) { const a = CREATOR_APPS.get(actor?.uuid); if (a?.rendered) a.render(); }
+function refreshCreator(actor) { renderSoon(CREATOR_APPS.get(actor?.uuid)); }
 
 async function createCharacterWizard(actor) {
   actor = requireActor(actor);
@@ -7471,23 +7163,36 @@ const modActive = (id) => !!game.modules?.get?.(id)?.active;
 
 /* ---- FXMaster: scene tint while a domain is open (GM side) ---- */
 
-const FXM_DOMAIN_IDS = new Map();
+// One tint per scene, under a fixed FXMaster API id, while at least one domain with a zone is open there.
+// The id survives reloads, so closing a domain (or the ready sweep) always finds and removes it.
+const FXM_DOMAIN_ID = "apiMacro_jjk5eDomain_f";
+const FXM_DOMAIN_COLOR = "#4b1d6e";
+// A light mood shift, never a dark plate: no colour multiply (that turned dark maps into a black rectangle).
 const FXM_DOMAIN_FILTER = { type: "color",
-  options: { color: { value: "#4b1d6e", apply: true }, saturation: 0.7, contrast: 1.15, brightness: 0.85 } };
-async function domainSceneFX(scene, zoneId, on) {
+  options: { color: { value: FXM_DOMAIN_COLOR, apply: false }, saturation: 0.75, contrast: 1.08, brightness: 0.97 } };
+/** Our tint ids on a scene: the fixed id, plus random ids left by 1.9x saves (same colour filter). */
+function domainFXIds(scene) {
+  const filters = scene?.getFlag?.("fxmaster", "filters") ?? {};
+  return Object.entries(filters).filter(([id, f]) => id === FXM_DOMAIN_ID
+    || (f?.type === "color" && String(f?.options?.color?.value ?? "").toLowerCase() === FXM_DOMAIN_COLOR)).map(([id]) => id);
+}
+/** Actors with an open domain that has a zone on this scene, except the one being closed. */
+function openDomainsOn(scene, exceptUuid = null) {
+  const actors = [...(game.actors?.contents ?? []), ...[...(scene?.tokens ?? [])].map((tk) => tk.actor)];
+  return [...new Map(actors.filter((a) => a?.uuid && a.uuid !== exceptUuid).map((a) => [a.uuid, a])).values()]
+    .filter((a) => { const s = getDomain(a); return s?.open && s.sceneId === scene?.id && s.zone; });
+}
+async function domainSceneFX(scene, on, exceptUuid = null) {
   const api = globalThis.FXMASTER?.api?.effects;
-  if (!modActive("fxmaster") || !api || !setting("fxDomains")) return;
-  const key = `${scene?.id}.${zoneId}`;
+  if (!scene || !modActive("fxmaster") || !api) return;
   try {
+    const ids = domainFXIds(scene);
     if (on) {
-      const res = await api.play({ scene, filters: [foundry.utils.deepClone(FXM_DOMAIN_FILTER)] });
-      if (res?.filters?.length) FXM_DOMAIN_IDS.set(key, res.filters);
-    } else {
-      const ids = FXM_DOMAIN_IDS.get(key);
-      FXM_DOMAIN_IDS.delete(key);
-      // FXMaster 8: stop by the ids play() returned; otherwise by the exact same payload.
-      if (ids?.length && typeof api.filters?.stop === "function") await api.filters.stop(ids, { scene });
-      else await api.stop({ scene, filters: [foundry.utils.deepClone(FXM_DOMAIN_FILTER)] });
+      if (!setting("fxDomains") || ids.length) return;
+      await api.play({ scene, filters: [{ ...foundry.utils.deepClone(FXM_DOMAIN_FILTER), id: FXM_DOMAIN_ID }] });
+    } else if (ids.length && !openDomainsOn(scene, exceptUuid).length) {
+      if (typeof api.filters?.stop === "function") await api.filters.stop(ids, { scene });
+      else await api.stop({ scene, filters: ids });
     }
   } catch (err) { console.warn(`${MODULE_ID} | FXMaster domain filter`, err); }
 }
@@ -7529,7 +7234,7 @@ function vaeButtons(effect, buttons) {
   if (!actor || actor.documentName !== "Actor" || !actor.isOwner || !Array.isArray(buttons)) return;
   const f = effect.flags?.jjk5e ?? {};
   if (f.kind === "domain" || f.domainOpen) {
-    buttons.push({ label: t("Domain.Close"), callback: () => closeDomainOf(actor) });
+    buttons.push({ label: t("Domain.Close"), callback: () => closeDomainOf(actor, "", effect.uuid ?? null) });
     buttons.push({ label: t("Domain.HUD"), callback: () => openDomainHUD(actor) });
   }
   if (f.vow) buttons.push({ label: t("Vow.Title"), callback: () => openVows(actor) });
@@ -7901,7 +7606,7 @@ function isFlanking(actor) {
   const c = (tk) => tk.center ?? { x: tk.x, y: tk.y };
   const v = (a) => ({ x: c(a).x - c(target).x, y: c(a).y - c(target).y });
   const a = v(me);
-  return canvas.tokens.placeables.some((o) => {
+  return (canvas?.tokens?.placeables ?? []).some((o) => {
     if (o === me || o === target || !o.actor || o.document?.disposition !== me.document?.disposition || incapacitated(o.actor)) return false;
     if (!(tokenDistance(o, target) <= 5)) return false;
     const b = v(o);
@@ -8861,10 +8566,77 @@ function modernChange(change) {
     const m = change.key.match(/^system\.(abilities|skills|tools)\.(\w+)\.bonuses\.(check|save)$/);
     if (m) shim = { key: `system.${m[1]}.${m[2]}.${m[1] === "abilities" ? `${m[3]}.` : ""}roll.bonus` };
   }
-  if (!shim) return change;
+  if (!shim) return jjkModernChange(change);
   const out = { ...change, key: shim.key };
+  if (shim.type !== undefined) {
+    if (change.type !== undefined || change.mode === undefined) out.type = shim.type;
+    if (change.mode !== undefined && TYPE_MODES[shim.type] !== undefined) out.mode = TYPE_MODES[shim.type];
+  }
   if (shim.value !== undefined) out.value = shim.value;
   return out;
+}
+/** JJK pack keys that dnd5e 6 no longer reads (audit v1.95):
+ * - system.attributes.movement.all: dnd5e 6 keeps speeds in movement.speeds, so a MULTIPLY on "all" changed nothing
+ *   and DAE's custom handler only reaches top-level numbers. dnd5e's own movement.multiplier scales every speed.
+ * - system.traits.{dr,di,dv}.all: written as the native "ALL" damage type, independent of DAE's field mapping. */
+const AE_MODE = { CUSTOM: 0, MULTIPLY: 1, ADD: 2, OVERRIDE: 5 };
+/** Foundry 14 changes may carry `type` ("multiply") instead of `mode` (1): read either, write back in the same form. */
+const changeMode = (c) => c?.mode !== undefined && c?.mode !== null ? Number(c.mode) : (TYPE_MODES[c?.type] ?? NaN);
+function withMode(change, mode) {
+  const out = { ...change };
+  if (change.mode !== undefined || change.type === undefined) out.mode = mode;
+  if (change.type !== undefined) out.type = MODE_TYPES[mode];
+  return out;
+}
+function jjkModernChange(change) {
+  const mode = changeMode(change);
+  if (change.key === "system.attributes.movement.all") {
+    const n = Number(String(change.value ?? "").trim());
+    if (mode === AE_MODE.MULTIPLY && Number.isFinite(n)) return { ...change, key: "system.attributes.movement.multiplier" };
+    if (mode === AE_MODE.CUSTOM && n === 0 && String(change.value).trim() !== "") return { ...withMode(change, AE_MODE.OVERRIDE), key: "system.attributes.movement.multiplier", value: "0" };
+    return change;
+  }
+  const trait = change.key.match(/^system\.traits\.(dr|di|dv)\.all$/);
+  if (trait && !["0", "false", ""].includes(String(change.value ?? "").trim().toLowerCase())) {
+    return { ...withMode(change, AE_MODE.ADD), key: `system.traits.${trait[1]}.value`, value: "ALL" };
+  }
+  return change;
+}
+/** dnd5e 6 rebuilds attributes.exhaustion from its exhaustion effect after effects apply, so an effect that ADDs
+ * exhaustion did nothing. Move the amount to flags.jjk5e.tempExhaustion; real levels are added while the effect lasts. */
+function exhaustionToFlag(data) {
+  const out = {};
+  let total = 0;
+  for (const path of ["system.changes", "changes"]) {
+    const list = foundry.utils.getProperty(data ?? {}, path);
+    if (!Array.isArray(list)) continue;
+    const keep = list.filter((c) => {
+      if (c?.key !== "system.attributes.exhaustion" || changeMode(c) !== AE_MODE.ADD) return true;
+      total += Math.trunc(Number(c.value)) || 0;
+      return false;
+    });
+    if (keep.length !== list.length) out[path] = keep;
+  }
+  if (total > 0) out["flags.jjk5e.tempExhaustion"] = Math.min(6, total);
+  return out;
+}
+async function tempExhaustion(effect, on, userId) {
+  const amount = Number(effect?.flags?.jjk5e?.tempExhaustion) || 0;
+  const actor = effect?.parent;
+  if (!amount || actor?.documentName !== "Actor" || userId !== game.user.id || !actor.isOwner) return;
+  const key = `tempExhaustion.${effect.id}`;
+  const cur = Number(actor.system?.attributes?.exhaustion) || 0;
+  if (on) {
+    if (effect.disabled || actor.getFlag(MODULE_ID, key)) return;
+    const next = Math.min(cur + amount, 6);
+    await actor.setFlag(MODULE_ID, key, Math.max(1, next - cur));
+    if (next !== cur) await actor.update({ "system.attributes.exhaustion": next });
+  } else {
+    const added = Number(actor.getFlag(MODULE_ID, key)) || 0;
+    if (!added) return;
+    await actor.unsetFlag(MODULE_ID, key);
+    await actor.update({ "system.attributes.exhaustion": Math.max(0, cur - added) });
+  }
 }
 function modernChanges(list) {
   if (!Array.isArray(list)) return null;
@@ -8873,12 +8645,17 @@ function modernChanges(list) {
   return changed ? out : null;
 }
 function modernEffectData(data) {
-  const sys = data?.system?.changes;
+  const sys = data?.["system.changes"] ?? data?.system?.changes;
   const top = data?.changes;
   const a = modernChanges(sys), b = modernChanges(top);
   const upd = {};
   if (a) upd["system.changes"] = a;
   if (b) upd.changes = b;
+  // Exhaustion is read from the already modernised lists so both rewrites land together.
+  const ex = exhaustionToFlag({ system: { changes: a ?? sys }, changes: b ?? top });
+  if (ex["system.changes"]) upd["system.changes"] = ex["system.changes"];
+  if (ex.changes) upd.changes = ex.changes;
+  if (ex["flags.jjk5e.tempExhaustion"]) upd["flags.jjk5e.tempExhaustion"] = ex["flags.jjk5e.tempExhaustion"];
   return upd;
 }
 
@@ -8887,10 +8664,19 @@ Hooks.once("ready", () => {
   Hooks.on("preCreateActiveEffect", (effect, data) => {
     try { const upd = modernEffectData(data); if (Object.keys(upd).length) effect.updateSource(upd); } catch (err) { console.warn(`${MODULE_ID} | effect keys`, err); }
   });
+  Hooks.on("createActiveEffect", (effect, options, userId) => { tempExhaustion(effect, true, userId).catch((err) => console.warn(`${MODULE_ID} | temporary exhaustion`, err)); });
+  Hooks.on("deleteActiveEffect", (effect, options, userId) => { tempExhaustion(effect, false, userId).catch((err) => console.warn(`${MODULE_ID} | temporary exhaustion`, err)); });
+  Hooks.on("updateActiveEffect", (effect, changes, options, userId) => {
+    if (!("disabled" in (changes ?? {}))) return;
+    tempExhaustion(effect, !changes.disabled, userId).catch((err) => console.warn(`${MODULE_ID} | temporary exhaustion`, err));
+  });
   Hooks.on("preUpdateActiveEffect", (effect, changes) => {
     try {
       const upd = modernEffectData(changes);
-      for (const [k, v] of Object.entries(upd)) foundry.utils.setProperty(changes, k, v);
+      for (const [k, v] of Object.entries(upd)) {
+        if (Object.hasOwn(changes, k)) changes[k] = v;
+        else foundry.utils.setProperty(changes, k, v);
+      }
     } catch (err) { console.warn(`${MODULE_ID} | effect keys`, err); }
   });
   Hooks.on("preCreateItem", (item, data) => {
@@ -9257,7 +9043,7 @@ Hooks.once("ready", () => {
   // A student's school or teacher changed: open panels (e.g. the teacher's list of students) refresh.
   Hooks.on("updateActor", (actor, changes) => {
     if (!foundry.utils.hasProperty(changes, `flags.${MODULE_ID}.school`) && !foundry.utils.hasProperty(changes, `flags.${MODULE_ID}.-=school`)) return;
-    for (const app of PANELS.values()) if (app?.rendered) app.render();
+    for (const app of PANELS.values()) renderSoon(app);
   });
 });
 
@@ -9485,4 +9271,131 @@ Hooks.once("init", () => {
     name: "JJK5E.Settings.tableView.Name", hint: "JJK5E.Settings.tableView.Hint", scope: "client", config: true, type: String, default: "auto",
     choices: Object.fromEntries(TABLE_VIEWS.map((v) => [v, `JJK5E.Settings.tableView.${v}`])), onChange: applyTableView
   });
+});
+
+function bindNativeWorkflow(activity, usageConfig) {
+  const workflow = globalThis.MidiQOL?.Workflow?.workflowFor?.(activity);
+  if (workflow) captureMidiUsage({ workflow, usage: usageConfig });
+}
+
+const {
+  cePostAllowed,
+  cePostOnce,
+  isQuickRecovery,
+  ceAuthorityEnabled,
+  managedCE,
+  ceLedger,
+  restReview,
+  cePending,
+  ceUsageKey,
+  ceContext,
+  ceFromItem,
+  ceAuthorityRequest,
+  handleCEAuthority,
+  consumeWithCE,
+  recoverCEActor,
+  engineActors,
+  ceRecoveryDue,
+  recoverCEWorld
+} = createCEEngine({
+  CE_AUTH_QUERY,
+  MODULE_ID,
+  baseName,
+  bindNativeWorkflow,
+  canDirectDomain,
+  canUseDomainActivity,
+  ceTransaction,
+  confirmDialog,
+  domainActor,
+  domainOpen,
+  doSpendCE,
+  esc,
+  findPool,
+  hasKind,
+  inBurnout,
+  isActiveGM,
+  poolMax,
+  poolValue,
+  queueCE,
+  reportError,
+  setting,
+  t,
+  totalActivityCECost,
+  validActivityCE,
+  commitRestExchange
+});
+
+const {
+  MIDI_GUARD_STAGES,
+  captureMidiUsage,
+  midiCEGuard,
+  midiDomainGuard,
+  registerMidiCEBridge,
+  CE_ADAPTER_TARGETS,
+  installCEAdapters,
+  externalEffectExpiry,
+  expireEffects
+} = createIntegrations({
+  MODULE_ID,
+  DOMAIN_WARD_KINDS,
+  barrierMarkerMeta,
+  ceAuthorityEnabled,
+  ceAuthorityRequest,
+  ceContext,
+  ceUsageKey,
+  consumeWithCE,
+  excludeDomainWardedTargets,
+  isActiveGM,
+  managedCE,
+  reportError,
+  safeDelete,
+  setting,
+  t
+});
+
+const {
+  domainOpened,
+  domainClosed,
+  closeDomainOf,
+  applyBurnoutConsequences,
+  clearBurnoutSummons,
+  sweepDomainLeftovers
+} = createDomainLifecycle({
+  MODULE_ID,
+  ICONS,
+  DOMAIN_RADIUS,
+  GM_EXTRA,
+  actorToken,
+  animateDomainOpening,
+  barrierMarkerMeta,
+  ceMod,
+  chat,
+  detectClash,
+  domainActor,
+  domainFXIds,
+  domainSceneFX,
+  endDomainAnimation,
+  engineActors,
+  esc,
+  getDomain,
+  inBurnout,
+  isActiveGM,
+  kindEffect,
+  liveActor,
+  offerDomainClash,
+  openDomainHUD,
+  openDomainsOn,
+  reactionWindow,
+  refinementOf,
+  refreshDomainApps,
+  reportError,
+  requestDomainAuthority,
+  safeDelete,
+  setDomain,
+  setKindEffect,
+  setting,
+  settleReactionWindow,
+  t,
+  tokenCenter,
+  validateDomainProfile
 });
