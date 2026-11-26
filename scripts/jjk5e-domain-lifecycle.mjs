@@ -122,7 +122,7 @@ export function createDomainLifecycle({
     const actors = [...new Map([...(game.actors?.contents ?? []), ...[...(scene?.tokens ?? [])].map((tk)=>tk.actor)]
       .filter((a)=>a?.uuid).map((a)=>[a.uuid,a])).values()];
     for (const target of actors) {
-      const ids = target.effects?.filter((e)=>e.flags?.jjk5e?.kind === "domainProfileCondition" && e.flags.jjk5e.openingId === state.openingId).map((e)=>e.id) ?? [];
+      const ids = target.effects?.filter((e)=>["domainProfileCondition", "domainWeakHole"].includes(e.flags?.jjk5e?.kind) && e.flags.jjk5e.openingId === state.openingId).map((e)=>e.id) ?? [];
       for (const id of ids) await safeDelete(target.effects.get(id));
     }
     const peers = state.clash?.with ? [state.clash.with].flat() : [];

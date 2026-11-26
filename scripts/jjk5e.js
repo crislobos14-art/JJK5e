@@ -398,7 +398,7 @@ function activityCost(activity) {
     if (ref >= 1000) base -= Number(actor.system?.attributes?.prof) || 0;
     base = Math.max(1, base);
     // 0.2 Second Expansion (400): the armed expansion costs half (rounded up).
-    if (ref >= 400 && actor.getFlag?.(MODULE_ID, "quickDomain") && !activity.item.flags?.jjk5e?.incompleteDomain) base = Math.ceil(base / 2);
+    if (ref >= 400 && quickArmed(actor) && !activity.item.flags?.jjk5e?.incompleteDomain) base = Math.ceil(base / 2);
   }
   // Awakened Understanding (Advanced −1 / Mastered −2): technique base cost, minimum 1.
   if (base > 1 && actor && activity?.item?.flags?.jjk5e?.technique) {
@@ -1899,6 +1899,20 @@ function rawCEDamageBonus(actor) {
 
 /* ---- Domain Refinement: gains (V.6 Methods of Refinement) and active benefits ---- */
 const DAY_SECONDS = 86400, MONTH_SECONDS = 30 * DAY_SECONDS;
+/** Where we are in time: the current combat turn, or the world time outside combat. */
+function turnStamp() {
+  const c = game.combat;
+  return c?.started ? { combat: c.id, round: c.round, turn: c.turn } : { time: Number(game.time?.worldTime) || 0 };
+}
+/** 0.2 Second Expansion is armed for this turn only (or one minute of world time outside combat). */
+function quickArmed(actor) {
+  const f = actor?.getFlag?.(MODULE_ID, "quickDomain");
+  if (!f) return false;
+  if (f === true) return true;
+  const now = turnStamp();
+  if (f.combat) return f.combat === now.combat && f.round === now.round && f.turn === now.turn;
+  return Number.isFinite(f.time) && !now.combat && (Number(game.time?.worldTime) || 0) - f.time < 60;
+}
 /** Refinement diary: the last 60 changes (world time, amount, reason, total). */
 async function logRefinement(actor, n, total, reason, detail = "") {
   const log = actorFlagArray(actor, "refinementLog").slice(-59);
@@ -2041,7 +2055,7 @@ async function openDomain(actor, item) {
     const ref = refinementOf(actor);
     const minutes = incomplete ? 1 : ref >= 1000 ? 3 : ref >= 500 ? 2 : 1;
     // 0.2 Second Expansion (400): armed beforehand, lasts until the end of this turn and hits every creature.
-    const quick = !incomplete && !barrierless && ref >= 400 && !!actor.getFlag(MODULE_ID, "quickDomain");
+    const quick = !incomplete && !barrierless && ref >= 400 && quickArmed(actor);
     if (actor.getFlag(MODULE_ID, "quickDomain")) await actor.unsetFlag(MODULE_ID, "quickDomain");
     const selected = [...(canvas?.tokens?.controlled ?? [])].filter((tk) => tk.actor?.uuid === actor.uuid);
     const active = actor.getActiveTokens?.() ?? [];
@@ -2492,7 +2506,7 @@ function panelHTML(actor, tab = "combat") {
         ${canRecoverBurnout(actor) ? pbtn("burnoutRecovery", "fas fa-brain", `${t("Burnout.Recovery")} (4 CE)`) : ""}
       </div>
       <div class="jjk-row">
-        ${refinementOf(actor) >= 400 && !domainOpen(actor) ? pbtn("quickDomain", "fas fa-stopwatch", t("Domain.Quick"), { cls: actor.getFlag(MODULE_ID, "quickDomain") ? "on" : "", tip: t("Domain.QuickHint") }) : ""}
+        ${refinementOf(actor) >= 400 && !domainOpen(actor) ? pbtn("quickDomain", "fas fa-stopwatch", t("Domain.Quick"), { cls: quickArmed(actor) ? "on" : "", tip: t("Domain.QuickHint") }) : ""}
         ${refinementOf(actor) >= 900 && domainOpen(actor) && !getDomain(actor)?.compressed && !getDomain(actor)?.noBarrier ? pbtn("compressDomain", "fas fa-compress", `${t("Domain.Compress")} (5 CE)`, { tip: t("Domain.CompressHint") }) : ""}
         ${!domainOpen(actor) && refinementOf(actor) < 1000 ? pbtn("trainRefinement", "fas fa-dumbbell", t("Domain.Train"), { tip: t("Domain.TrainHint") }) : ""}
         ${pbtn("refinementLog", "fas fa-book-open", t("Domain.Log"), { tip: t("Domain.LogHint") })}
@@ -2546,6 +2560,7 @@ function panelHTML(actor, tab = "combat") {
       ${actor.flags?.jjk5e?.shikigami&&Number(actor.system.attributes?.hp?.value)===0?pbtn("shikigamiReview","fas fa-ghost",t("Totality.Resolve")):""}
       ${pbtn("engineDiagnostics", "fas fa-stethoscope", t("Diag.Title"))}
       ${pbtn("gmRefinement", "fas fa-circle-half-stroke", `${t("Domain.Refinement")}: ${refinementOf(actor)}`)}
+      ${pbtn("advanceMinute", "fas fa-hourglass-half", t("Output.AdvanceMinute"), { tip: t("Output.AdvanceMinuteHint") })}
       ${pbtn("soulDamage", "fas fa-ghost", t("Soul.Apply"))}
       ${sd ? pbtn("clearSoul", "fas fa-xmark", t("Soul.Clear")) : ""}
     </div>
@@ -2601,7 +2616,8 @@ const PANEL_ACTIONS = {
   ceSpendN: (actor, target, root) => spendCE(actor, panelAmount(root), t("CE.Spent")),
   ceRegainN: (actor, target, root) => spendCE(actor, -panelAmount(root), t("CE.Regained")),
   domainHUD: (actor) => openDomainHUD(actor),
-  quickDomain: (actor) => actor.getFlag(MODULE_ID, "quickDomain") ? actor.unsetFlag(MODULE_ID, "quickDomain") : actor.setFlag(MODULE_ID, "quickDomain", true),
+  quickDomain: (actor) => quickArmed(actor) ? actor.unsetFlag(MODULE_ID, "quickDomain") : actor.setFlag(MODULE_ID, "quickDomain", turnStamp()),
+  advanceMinute: () => game.user.isGM && game.time?.advance?.(60),
   compressDomain: (actor) => compressDomain(actor),
   trainRefinement: (actor) => trainRefinement(actor),
   engineDiagnostics: () => showIntegrationDiagnostics(),
@@ -2671,7 +2687,7 @@ const PANEL_ACTIONS = {
 
 // Overrides that only the GM may use (hidden for players and refused if called anyway).
 const GM_PANEL_ACTIONS = new Set(["clearBurnout", "clearZone", "clearBF", "clearSoul", "soulDamage", "roUp", "roDown",
-  "soulUp", "soulDown", "limb", "gmRefinement", "gmBreakthrough", "gmCE", "updateAll","engineDiagnostics","restReview","shikigamiReview"]);
+  "soulUp", "soulDown", "limb", "gmRefinement", "gmBreakthrough", "gmCE", "updateAll","engineDiagnostics","restReview","shikigamiReview","advanceMinute"]);
 
 function makePanelClass() {
   const Base = foundry.applications?.api?.ApplicationV2;
@@ -6012,7 +6028,12 @@ async function formWeakHole(caster, seeker, data) {
   const roll = await new Roll(`1d20 + ${save}`).evaluate();
   const ok = roll.total >= dc;
   await roll.toMessage?.({ speaker: docClass("ChatMessage").getSpeaker?.({ actor: seeker }), flavor: t("Domain.WeakHoleRoll", { dc }) });
-  if (ok) await setDomain(caster, { ...getDomain(caster), weakHole: [...new Set([...(state.weakHole ?? []), seeker.uuid])] });
+  if (ok) {
+    await setDomain(caster, { ...getDomain(caster), weakHole: [...new Set([...(state.weakHole ?? []), seeker.uuid])] });
+    // The hole stays open while the seeker concentrates: dropping this effect (or concentration) closes it.
+    await seeker.createEmbeddedDocuments("ActiveEffect", [fxData({ name: t("Domain.WeakHoleEffect", { domain: caster.name }), img: "icons/svg/door-exit.svg",
+      statuses: ["concentrating"], flags: { jjk5e: { kind: "domainWeakHole", casterUuid: caster.uuid, openingId: state.openingId } } })]);
+  }
   await chat(seeker, `<p><i class="fas fa-door-open"></i> ${t(ok ? "Domain.WeakHoleOpen" : "Domain.WeakHoleFail", { name: esc(seeker.name), domain: esc(caster.name) })}</p>`);
   return ok;
 }
@@ -9515,6 +9536,18 @@ Hooks.once("ready", () => {
   });
   Hooks.on("renderChatMessageHTML", (message, html) => {
     try { if (html?.querySelector?.("table")) fitTables(html); } catch (err) { reportError("adaptive tables", err); }
+  });
+  // Weak spot hole: losing the concentration effect closes it.
+  Hooks.on("deleteActiveEffect", (effect) => {
+    const f = effect.flags?.jjk5e;
+    if (!isActiveGM() || f?.kind !== "domainWeakHole") return;
+    queueDomainWork(async () => {
+      const caster = await domainActor(f.casterUuid), st = getDomain(caster);
+      const seeker = effect.parent;
+      if (!st?.open || st.openingId !== f.openingId || !(st.weakHole ?? []).includes(seeker?.uuid)) return;
+      await setDomain(caster, { ...st, weakHole: st.weakHole.filter((u) => u !== seeker.uuid) });
+      await chat(seeker, `<p><i class="fas fa-door-closed"></i> ${t("Domain.WeakHoleClosed", { name: esc(seeker.name), domain: esc(caster.name) })}</p>`).catch(() => null);
+    }).catch((err) => reportError("weak hole", err));
   });
   // Domain opening card: the expansion blast is the GM's call (who was chosen, who was not).
   Hooks.on("renderChatMessageHTML", (message, html) => {

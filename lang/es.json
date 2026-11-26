@@ -235,7 +235,9 @@
       "ProfileImprovement": "Mejora de técnica",
       "ProfileImprovementHint": "Qué mejora tu técnica dentro del dominio (coste, daño, alcance…).",
       "ProfileIncompleteHint": "En un dominio incompleto, el efecto ambiental pide una salvación (CON si no eliges otra): si se falla hace la mitad del daño y si se supera no pasa nada. La mejora de técnica se reduce a la mitad. A partir de refinamiento 300, el daño del dominio suma tantos dados como tu modificador de EM.",
-      "ProfileHalved": "a la mitad, dominio incompleto"
+      "ProfileHalved": "a la mitad, dominio incompleto",
+      "WeakHoleEffect": "Punto débil abierto: {domain}",
+      "WeakHoleClosed": "{name} deja de concentrarse: se cierra el hueco en el dominio de {domain}."
     },
     "Burnout": {
       "Name": "Technique Burnout",
@@ -262,7 +264,9 @@
       "Check": "Prueba de Energía Maldita contra Reduced Output (CD {dc})",
       "GainedRO": "Reduced Output sube al nivel {level}.",
       "Benefits": "<p>Elige uno: alcance +50%, una tirada de daño +50% de dados, bonificador de ataque +50% (CD + mitad de la competencia), duración +50% u otro valor +50%. Shikigami: tamaño +1 con un dado necrótico extra, PG +50% o ataque + mitad de la competencia.</p>",
-      "ReducedDescription": "Reduce el rango de EM de las técnicas según la penalización de Output. No puedes usar técnicas cuyo costo base supere el Máximo (el módulo lo aplica). No usar EM durante 1 minuto o lograr un Black Flash quita 1 nivel."
+      "ReducedDescription": "Reduce el rango de EM de las técnicas según la penalización de Output. No puedes usar técnicas cuyo costo base supere el Máximo (el módulo lo aplica). No usar EM durante 1 minuto o lograr un Black Flash quita 1 nivel.",
+      "AdvanceMinute": "Avanzar 1 minuto",
+      "AdvanceMinuteHint": "El tiempo del mundo avanza 60 s: baja el Reduced Output de quien no gastó EM y caducan los efectos por tiempo."
     },
     "Soul": {
       "Name": "Daño al alma",

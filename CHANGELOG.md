@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.7.0 — Pulido
+- **Avanzar 1 minuto** (botón del DJ): hace pasar 60 s de tiempo del mundo. Así baja el Reduced Output de quien no gastó EM y caducan los efectos por tiempo, también fuera de combate.
+- **Punto débil:** quien abre el hueco recibe un efecto de concentración. Si lo pierde o lo quita, el hueco se cierra y sale un aviso en el chat. Al cerrar el dominio también desaparece.
+- **Expansión de 0,2 s:** el botón vale solo para el turno en que se activa (fuera de combate, durante 1 minuto). Ya no queda activo para siempre.
+- **Más iconos por familia** (energía maldita, vacío, sombra, sangre, tierra, físico, maldición, mente, sonido, estrella, curación, naturaleza): ahora se repiten menos en fichas con muchas técnicas.
 ## 2.6.0 — Auditoría de 2.1–2.5
 Revisión completa:
 - Los 80 botones del panel JJK tienen acción y ninguno lanza errores.
