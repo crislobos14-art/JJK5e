@@ -77,11 +77,18 @@ test("notices pause, leave with an exit state and stay clear of the sidebar", ()
   assert.ok(/--jjk-sealed-right/.test(events) && /collapseSidebar/.test(events));
   assert.ok(/event\.key === "Escape"/.test(events), "Escape closes the panel");
   assert.ok(/aria-expanded/.test(events));
-  const place = fn(events, "place");
+  const place = [fn(events, "obstacles"), fn(events, "place"),
+    events.match(/const BOTTOM_UI = .*;/)[0], events.match(/const TOP_UI = .*;/)[0]].join("\n");
   const props = new Map();
+  // A Foundry chat card in our column at the bottom, a core notice at the top.
+  const boxes = { "#chat-notifications > *": { left: 1000, right: 1290, top: 700, bottom: 880, width: 290, height: 180 },
+    "#notifications > .notification": { left: 200, right: 1400, top: 32, bottom: 110, width: 1200, height: 78 } };
   runInNewContext(place + "\nplace();", { document: {
     getElementById: () => ({ getBoundingClientRect: () => ({ left: 1300, width: 300, height: 900 }) }),
+    querySelectorAll: (sel) => boxes[sel] ? [{ getBoundingClientRect: () => boxes[sel] }] : [],
     documentElement: { style: { setProperty: (k, v) => props.set(k, v) } }
-  }, getComputedStyle: () => ({ visibility: "visible" }), window: { innerWidth: 1600 }, Math });
+  }, getComputedStyle: () => ({ visibility: "visible", display: "block", opacity: "1" }), window: { innerWidth: 1600, innerHeight: 900 }, Math });
   assert.equal(props.get("--jjk-sealed-right"), "314px");
+  assert.equal(props.get("--jjk-sealed-bottom"), "208px", "above the chat card");
+  assert.equal(props.get("--jjk-sealed-top"), "118px", "below the core notice");
 });

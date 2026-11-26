@@ -50,7 +50,7 @@ a.jjk5e-open { margin-right: 4px; }
 .jjk-pb-chip { border: 1px solid #7a5aa6; border-radius: 3px; padding: 0 5px; font-size: 12px; }
 button.jjk5e-levelup { display: block; margin: 4px auto 0; padding: 2px 10px; font-size: 12px; line-height: 20px;
   background: linear-gradient(#7a3fc0, #4b1d6e); color: #fff; border: 1px solid #f2cf6b; border-radius: 4px;
-  animation: jjk5e-pulse 1.6s ease-in-out infinite; cursor: pointer; width: auto; }
+  animation: jjk5e-pulse 1.6s ease-in-out 3; cursor: pointer; width: auto; }
 @keyframes jjk5e-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(242, 207, 107, .7); } 50% { box-shadow: 0 0 8px 3px rgba(242, 207, 107, .45); } }
 
 /* ---- v1.11: sheet strip, vows, career ---- */
@@ -339,7 +339,7 @@ button.jjk5e-levelup { display: block; margin: 4px auto 0; padding: 2px 10px; fo
 .jjk5e-ui.jjk5e-dialog .jjk-help h3 { color: var(--jjk-muted); font: 700 11px/1 var(--font-primary, sans-serif); letter-spacing: .14em; text-transform: uppercase; border: none; margin: 12px 0 4px; }
 .jjk5e-ui kbd { background: var(--jjk-bone); color: #1a1410; border: 0; border-bottom: 2px solid var(--jjk-bone-2); border-radius: 2px; padding: 1px 6px; font: 700 12px/1.3 var(--jjk-display); letter-spacing: .04em; }
 
-@media (prefers-reduced-motion: reduce) { .jjk5e-ui * { transition: none !important; } }
+@media (prefers-reduced-motion: reduce) { .jjk5e-ui *, button.jjk5e-levelup { transition: none !important; animation: none !important; } }
 /* tabs fit 4 (player) or 5 (GM) in the panel width */
 .jjk5e-ui .jjk-tabs button { flex: 1 1 0; min-width: 0; padding: 0 6px; font-size: 12px; letter-spacing: .06em; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 .jjk5e-ui .jjk-tabs button[data-tab="gm"] { flex: 0 0 52px; }
@@ -436,6 +436,67 @@ button.jjk5e-levelup { display: block; margin: 4px auto 0; padding: 2px 10px; fo
 .jjk5e-strip.jjk-sheetcard .jjk-sc-grid button { width: 100%; }
 .jjk5e-strip.jjk-sheetcard .jjk-grade-badge { color: #fff; }
 .jjk5e-strip.jjk-sheetcard .jjk-sc-head, .jjk5e-strip.jjk-sheetcard .jjk-sc-chips { width: 100%; justify-content: flex-start; text-align: left; }
+.jjk-sealed-sheet .jjk-sheetcard.in-sidebar {
+  align-items: stretch;
+  margin-inline: 0;
+  min-inline-size: 0;
+  border-block-start: 1px solid #715765;
+  border-radius: 3px;
+  box-shadow: none;
+}
+.jjk-sealed-sheet .jjk-sheetcard.in-sidebar .jjk-sc-head {
+  padding-block-end: 5px;
+  border-block-end: 1px solid var(--sc-line);
+}
+.jjk-sealed-sheet .jjk-sheetcard.in-sidebar :is(.jjk-sc-head span,.jjk-sc-chips > *) {
+  max-inline-size: 100%;
+  height: auto;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.jjk-sealed-sheet .jjk-sheetcard.in-sidebar .jjk-sc-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 5.5rem), 1fr));
+}
+.jjk-sealed-sheet .jjk-sheetcard.in-sidebar .jjk-sc-grid button {
+  min-height: 30px;
+  height: auto;
+  padding: 4px 6px;
+  line-height: 1.2;
+  white-space: normal;
+  text-align: start;
+}
+.jjk-sealed-sheet .jjk-sheetcard.in-sidebar .jjk-sc-grid button span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.jjk-sealed-sheet .jjk-sheetcard.in-sidebar button.jjk-primary {
+  background: #4b2b37;
+  border-color: #ab7185;
+}
+
+.jjk-domain-clash .jjk-domain-clash-casters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 6rem), 1fr));
+  gap: 6px;
+  padding: 0;
+  list-style: none;
+}
+.jjk-domain-clash-casters li {
+  display: grid;
+  /* Name on top, score and status aligned at the bottom of every column. */
+  grid-template-rows: 1fr auto auto;
+  align-content: end;
+  gap: 2px;
+  min-width: 0;
+  padding: 6px 8px;
+  border-inline-start: 2px solid #927ab8;
+  background: var(--color-bg-option, #8472a31c);
+  overflow-wrap: anywhere;
+}
+.jjk-domain-clash-casters li[data-role="winner"] { border-inline-start-color: #a17843; }
+.jjk-domain-clash-casters li[data-role="loser"] { border-inline-start-color: #ad4e64; }
+.jjk-domain-clash-casters .jjk-domain-clash-score { font-size: 1.15em; font-variant-numeric: tabular-nums; }
+
 /* optional rules: the window scrolls (30 rules); Save stays at the bottom */
 .jjk5e-optrules .window-content { overflow-y: auto; display: flex; flex-direction: column; }
 .jjk-optrules { display: flex; flex-direction: column; min-height: 0; flex: 1; }
@@ -616,9 +677,11 @@ table.jjk-fit :is(td, th) img { max-width: 100%; height: auto; }
 .dnd5e2 .jjk-ce-steps { display: inline-flex; gap: 2px; }
 .dnd5e2 .jjk-ce-steps button { width: 18px; height: 18px; display: grid; place-content: center; font-size: 10px; color: var(--color-text-secondary, #b1a69a); }
 .dnd5e2 .jjk-ce-steps button:is(:hover, :focus-visible) { color: var(--jjk-energy, #ad98ff); }
-.dnd5e2 .meter.jjk-cursed-energy { --jjk-ce-a: #2b1d5c; --jjk-ce-b: #7952e7; display: flex; align-items: center; position: relative; overflow: hidden; height: 28px; font-size: var(--font-size-15, 15px); cursor: text; }
+.dnd5e2 .meter.jjk-cursed-energy { --jjk-ce-a: #2b1d5c; --jjk-ce-b: #7952e7; display: flex; align-items: center; position: relative; overflow: hidden; box-sizing: border-box; height: 28px; font-size: var(--font-size-15, 15px); cursor: text; }
 .dnd5e2.npc .meter.jjk-cursed-energy { height: 24px; font-size: var(--font-size-14, 14px); margin-top: 4px; }
-.dnd5e2 .meter.jjk-cursed-energy > .progress { position: relative; flex: 1; align-self: stretch; display: flex; align-items: center; min-width: 0; cursor: text; }
+/* Height is set here, not inherited from layout: a theme rule such as `.meter .progress { height: 12px }`
+   or a `.meter { display: block }` override must not shrink the fill or the edit field (Issue #19, point 5). */
+.dnd5e2 .meter.jjk-cursed-energy > .progress { position: relative; flex: 1; align-self: stretch; display: flex; align-items: center; min-width: 0; height: 100%; min-height: 100%; box-sizing: border-box; cursor: text; }
 .dnd5e2 .meter.jjk-cursed-energy > .progress::before {
   block-size: unset; inset: 1px auto 1px 1px; inline-size: calc(var(--bar-percentage) - 2px); clip-path: unset; border-radius: 2px;
   background: linear-gradient(to right, var(--jjk-ce-a) 0%, var(--jjk-ce-b) 100%); border-inline-end: none;
