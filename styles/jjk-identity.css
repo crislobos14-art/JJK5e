@@ -2,6 +2,8 @@
 .jjk-id-seal {
   --jjk-id: hsl(var(--jjk-id-h, 268) var(--jjk-id-s, 55%) var(--jjk-id-l, 62%));
   --jjk-id-deep: hsl(var(--jjk-id-h, 268) var(--jjk-id-s, 55%) calc(var(--jjk-id-l, 62%) * .32));
+  /* Pattern ink: lowered for light families (Slash, Lightning…) so the glyph keeps ≥ 3.5:1. */
+  --jjk-id-pat: hsl(var(--jjk-id-h, 268) var(--jjk-id-s, 55%) var(--jjk-id-pl, var(--jjk-id-l, 62%)));
   position: relative; display: inline-grid; place-items: center; flex: 0 0 auto;
   width: 20px; height: 20px; margin-inline-end: 6px; vertical-align: -5px;
   border: 1px solid var(--jjk-id); background: var(--jjk-id-deep); overflow: hidden; isolation: isolate;
@@ -10,21 +12,21 @@
 .jjk-id-seal::before {
   content: ""; position: absolute; inset: -40%; z-index: -1; opacity: .55;
   transform: rotate(var(--jjk-id-rot, 0deg));
-  background: repeating-linear-gradient(90deg, var(--jjk-id) 0 2px, transparent 2px 6px);
+  background: repeating-linear-gradient(90deg, var(--jjk-id-pat) 0 2px, transparent 2px 6px);
 }
 .jjk-id-seal > i { font-size: 10px; line-height: 1; color: hsl(var(--jjk-id-h, 268) 40% 94%); text-shadow: 0 0 3px var(--jjk-id-deep), 0 0 1px #000; }
 /* Twelve ink patterns. */
-.jjk-id-seal[data-pattern="1"]::before { background: repeating-linear-gradient(45deg, var(--jjk-id) 0 2px, transparent 2px 5px); }
-.jjk-id-seal[data-pattern="2"]::before { background: repeating-radial-gradient(circle, var(--jjk-id) 0 1.5px, transparent 1.5px 5px); }
-.jjk-id-seal[data-pattern="3"]::before { background: repeating-conic-gradient(var(--jjk-id) 0 15deg, transparent 15deg 45deg); }
-.jjk-id-seal[data-pattern="4"]::before { background: radial-gradient(circle, var(--jjk-id) 1.2px, transparent 1.6px) 0 0 / 5px 5px; }
-.jjk-id-seal[data-pattern="5"]::before { background: linear-gradient(135deg, var(--jjk-id) 25%, transparent 25% 50%, var(--jjk-id) 50% 75%, transparent 75%) 0 0 / 8px 8px; }
-.jjk-id-seal[data-pattern="6"]::before { background: repeating-linear-gradient(0deg, var(--jjk-id) 0 1px, transparent 1px 4px), repeating-linear-gradient(90deg, var(--jjk-id) 0 1px, transparent 1px 4px); }
-.jjk-id-seal[data-pattern="7"]::before { background: conic-gradient(from 0deg, var(--jjk-id) 0 25%, transparent 0 50%, var(--jjk-id) 0 75%, transparent 0); }
-.jjk-id-seal[data-pattern="8"]::before { background: repeating-radial-gradient(circle at 0 0, var(--jjk-id) 0 2px, transparent 2px 6px); }
-.jjk-id-seal[data-pattern="9"]::before { background: linear-gradient(var(--jjk-id) 0 0) center / 100% 3px no-repeat, linear-gradient(var(--jjk-id) 0 0) center / 3px 100% no-repeat; opacity: .5; }
-.jjk-id-seal[data-pattern="10"]::before { background: repeating-linear-gradient(60deg, var(--jjk-id) 0 1px, transparent 1px 4px), repeating-linear-gradient(-60deg, var(--jjk-id) 0 1px, transparent 1px 4px); }
-.jjk-id-seal[data-pattern="11"]::before { background: radial-gradient(circle, transparent 38%, var(--jjk-id) 40% 48%, transparent 50%); opacity: .8; }
+.jjk-id-seal[data-pattern="1"]::before { background: repeating-linear-gradient(45deg, var(--jjk-id-pat) 0 2px, transparent 2px 5px); }
+.jjk-id-seal[data-pattern="2"]::before { background: repeating-radial-gradient(circle, var(--jjk-id-pat) 0 1.5px, transparent 1.5px 5px); }
+.jjk-id-seal[data-pattern="3"]::before { background: repeating-conic-gradient(var(--jjk-id-pat) 0 15deg, transparent 15deg 45deg); }
+.jjk-id-seal[data-pattern="4"]::before { background: radial-gradient(circle, var(--jjk-id-pat) 1.2px, transparent 1.6px) 0 0 / 5px 5px; }
+.jjk-id-seal[data-pattern="5"]::before { background: linear-gradient(135deg, var(--jjk-id-pat) 25%, transparent 25% 50%, var(--jjk-id-pat) 50% 75%, transparent 75%) 0 0 / 8px 8px; }
+.jjk-id-seal[data-pattern="6"]::before { background: repeating-linear-gradient(0deg, var(--jjk-id-pat) 0 1px, transparent 1px 4px), repeating-linear-gradient(90deg, var(--jjk-id-pat) 0 1px, transparent 1px 4px); }
+.jjk-id-seal[data-pattern="7"]::before { background: conic-gradient(from 0deg, var(--jjk-id-pat) 0 25%, transparent 0 50%, var(--jjk-id-pat) 0 75%, transparent 0); }
+.jjk-id-seal[data-pattern="8"]::before { background: repeating-radial-gradient(circle at 0 0, var(--jjk-id-pat) 0 2px, transparent 2px 6px); }
+.jjk-id-seal[data-pattern="9"]::before { background: linear-gradient(var(--jjk-id-pat) 0 0) center / 100% 3px no-repeat, linear-gradient(var(--jjk-id-pat) 0 0) center / 3px 100% no-repeat; opacity: .5; }
+.jjk-id-seal[data-pattern="10"]::before { background: repeating-linear-gradient(60deg, var(--jjk-id-pat) 0 1px, transparent 1px 4px), repeating-linear-gradient(-60deg, var(--jjk-id-pat) 0 1px, transparent 1px 4px); }
+.jjk-id-seal[data-pattern="11"]::before { background: radial-gradient(circle, transparent 38%, var(--jjk-id-pat) 40% 48%, transparent 50%); opacity: .8; }
 /* One to three outer rings. */
 .jjk-id-seal[data-rings="2"] { box-shadow: 0 0 0 1px var(--jjk-id-deep), 0 0 0 2px var(--jjk-id); }
 .jjk-id-seal[data-rings="3"] { box-shadow: 0 0 0 1px var(--jjk-id-deep), 0 0 0 2px var(--jjk-id), 0 0 0 3px var(--jjk-id-deep), 0 0 0 4px color-mix(in srgb, var(--jjk-id) 55%, transparent); }
@@ -35,6 +37,9 @@
 
 /* Rows wear a thin family edge; the seal already carries the detail. */
 [data-item-id][data-jjk-family] { box-shadow: inset 2px 0 0 color-mix(in srgb, var(--jjk-row, #8a6977) 70%, transparent); }
+/* Light themes: light families (Slash, Equipment…) would vanish on parchment, so the edge darkens. */
+body.theme-light [data-item-id][data-jjk-family], .themed.theme-light [data-item-id][data-jjk-family] {
+  box-shadow: inset 2px 0 0 color-mix(in srgb, var(--jjk-row, #8a6977) 70%, #1d1320); }
 .jjk-id-banner { display: flex; align-items: center; gap: 8px; margin: 0 0 6px; font: 700 11px/1 var(--jjk-display, "Arial Narrow", sans-serif);
   letter-spacing: .08em; text-transform: uppercase; opacity: .9; }
 :is(.chat-card, .message-content)[data-jjk-family] .jjk-id-seal { margin-inline-end: 6px; }

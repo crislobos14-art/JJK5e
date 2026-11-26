@@ -1,5 +1,20 @@
 # Changelog
 
+## 2.10.0 — Calidad: idiomas, accesibilidad y rendimiento
+- **Idiomas:** se revisaron todos los avisos y tarjetas. Las 700 claves existen en español e inglés y no quedan textos solo en español en el código. Se añadió la etiqueta «Descender» a la carrera.
+- **Contraste de los sellos:**
+  - El dibujo de tinta de las familias claras (Corte, Rayo, Estrella, Equipo…) se oscurece lo justo para que el icono tenga al menos 3:1 sobre el sello (WCAG 1.4.11).
+  - Las familias oscuras no cambian.
+  - El borde de cada fila toma el color de su familia y se oscurece en el tema claro.
+- **Lectores de pantalla:**
+  - Cada sello dice su familia («Fuego», «Vacío»…).
+  - Los botones con solo icono («×» para terminar, borrar voto, descender) tienen nombre accesible.
+  - Los enlaces que actúan como botones responden a Intro y a Espacio.
+- **Rendimiento con 50 o más fichas:**
+  - El mantenimiento de cada turno ya no recorre dos veces a los actores vinculados.
+  - Salta los objetos que no tienen efectos.
+  - Una prueba con 60 fichas y 10 rondas comprueba que no se escribe nada si no hay cambios y que termina en menos de medio segundo.
+- **Estadísticas de sesión:** cada apertura de dominio se cuenta una sola vez, aunque se recargue la página.
 ## 2.9.0 — Exportar, generar y medir
 - **Exportar / Importar JJK** (panel del personaje):
   - Guarda en un archivo el refinamiento, los avances, la característica de EM, los votos, el diario, el perfil de dominio, la carrera, el alma y las extremidades.

@@ -458,6 +458,15 @@ function guardPileTransfer(sources, changes, target) {
   return false;
 }
 
+// Keyboard: icon links that act as buttons (×, delete) answer Enter and Space like real buttons.
+globalThis.document?.addEventListener?.("keydown", (event) => {
+  if (event.key !== "Enter" && event.key !== " ") return;
+  const el = event.target?.closest?.('.jjk5e-ui a[role="button"][data-action], .jjk-panel a[role="button"][data-action]');
+  if (!el) return;
+  event.preventDefault();
+  el.click();
+});
+
 Hooks.once("ready", () => {
   if (game.system.id !== "dnd5e" || !game.modules.get("item-piles")?.active) return;
   for (const hook of ["preTransferItems", "preTransferAllItems", "preTransferEverything"]) {
@@ -1901,9 +1910,9 @@ function rawCEDamageBonus(actor) {
 /* ---- Domain Refinement: gains (V.6 Methods of Refinement) and active benefits ---- */
 const DAY_SECONDS = 86400, MONTH_SECONDS = 30 * DAY_SECONDS;
 /* ---- Session statistics (GM): CE spent, Black Flashes, domains opened, clashes won ---- */
-async function bumpStat(actor, key, n = 1) {
+async function bumpStat(actor, key, n = 1, extra = {}) {
   if (!isActiveGM() || !actor?.uuid || !n) return;
-  const stats = { ce: 0, bf: 0, domains: 0, clashes: 0, ...(actor.getFlag(MODULE_ID, "sessionStats") ?? {}) };
+  const stats = { ce: 0, bf: 0, domains: 0, clashes: 0, ...(actor.getFlag(MODULE_ID, "sessionStats") ?? {}), ...extra };
   stats[key] = Math.round(((Number(stats[key]) || 0) + n) * 1000) / 1000;
   await actor.setFlag(MODULE_ID, "sessionStats", stats);
 }
@@ -2538,7 +2547,7 @@ function panelHTML(actor, tab = "combat") {
   const hr = isHeavenlyOnly(actor);
   // Players see their state; only the GM gets the "×" overrides (closing your own domain is allowed).
   const statusRow = (on, label, action, tone = "") => `<span class="jjk-chip ${on ? `on ${tone}` : ""}">${label}${on && action
-    && (gm || action === "closeDomain") ? ` <a data-action="${action}" data-tooltip="${t("Common.End")}"><i class="fas fa-times"></i></a>` : ""}</span>`;
+    && (gm || action === "closeDomain") ? ` <a data-action="${action}" role="button" tabindex="0" data-tooltip="${t("Common.End")}" aria-label="${t("Common.End")}: ${esc(label)}"><i class="fas fa-times"></i></a>` : ""}</span>`;
   const limbRows = LIMBS.map((l) => {
     const st = limbs[l.key] ?? "ok";
     const btn = (s) => `<button type="button" class="${st === s ? "active" : ""}" data-action="limb" data-limb="${l.key}" data-status="${s}">${t(`Limb.${s}`)}</button>`;
@@ -2586,7 +2595,7 @@ function panelHTML(actor, tab = "combat") {
         ${statusRow(!!zone, zone ? `${t("Zone.Name")} ×${zoneStacks}` : t("Zone.Name"), "clearZone", "gold")}
         ${statusRow(!!actor.getFlag(MODULE_ID, "pendingBlackFlash"), "Black Flash ×3", "clearBF", "gold")}
         ${sd ? statusRow(true, `<i class="fas fa-ghost"></i> ${t("Soul.Name")} −${sd}`, "clearSoul", "danger") : ""}
-        ${activeGroups(actor).map((g) => `<span class="jjk-chip on">${t(`Group.${g}`)} <a data-action="endGroup" data-group="${g}" data-tooltip="${t("Common.End")}"><i class="fas fa-times"></i></a></span>`).join("")}
+        ${activeGroups(actor).map((g) => `<span class="jjk-chip on">${t(`Group.${g}`)} <a data-action="endGroup" data-group="${g}" role="button" tabindex="0" data-tooltip="${t("Common.End")}" aria-label="${t("Common.End")}"><i class="fas fa-times"></i></a></span>`).join("")}
       </div>
       <div class="jjk-row">
         ${pbtn("domainHUD", "fa-solid fa-circle-half-stroke", t("Domain.HUD"))}
@@ -5135,7 +5144,7 @@ function makeVowClass() {
           ${mech ? `<p class="hint">${mech}</p>` : ""}
           ${v.broken ? "" : `<div class="btns"><button type="button" data-action="toggle">${v.active ? t("Vow.Suspend") : t("Vow.Activate")}</button>
             <button type="button" data-action="break"><i class="fas fa-link-slash"></i> ${t("Vow.Break")}</button></div>`}
-          <a data-action="del" class="del" title="${t("Vow.Delete")}"><i class="fas fa-trash"></i></a></li>`;
+          <a data-action="del" class="del" role="button" tabindex="0" title="${t("Vow.Delete")}" aria-label="${t("Vow.Delete")}"><i class="fas fa-trash"></i></a></li>`;
       }).join("");
       return `<section class="jjk-panel"><p>${t("Vow.Count", { n: active, max: vowLimit(this.actor) })}</p>
         <ul class="jjk-vow-list">${rows || `<li class="hint">${t("Vow.None")}</li>`}</ul>
@@ -5216,7 +5225,7 @@ function makeCareerClass() {
           ${gm ? `<div class="btns">${st.steps.length ? `<button type="button" data-action="rec"><i class="fas fa-signature"></i> ${t("Career.AddRec")}</button>
             <button type="button" data-action="semi" ${c.recs.length >= 2 && !c.semi ? "" : "disabled"}>${t("Career.MakeSemi")}</button>` : ""}
             <button type="button" data-action="promote" ${st.ready ? "" : "disabled"}><i class="fas fa-angles-up"></i> ${t("Career.Promote")}</button>
-            <button type="button" data-action="demote"><i class="fas fa-angles-down"></i></button></div>` : ""}
+            <button type="button" data-action="demote" data-tooltip="${t("Career.Demote")}" aria-label="${t("Career.Demote")}"><i class="fas fa-angles-down" aria-hidden="true"></i></button></div>` : ""}
           <h4>${t("Career.History")}</h4><ul class="jjk-history">${c.history.map((h) => `<li>${esc(h.text)}</li>`).join("") || "<li>—</li>"}</ul>`;
       } else if (tab === "missions") {
         body = (gm ? `<div class="btns"><button type="button" data-action="mission"><i class="fas fa-dice"></i> ${t("Mission.ForActor")}</button>
@@ -9697,11 +9706,12 @@ Hooks.once("ready", () => {
     try { if (html?.querySelector?.("table")) fitTables(html); } catch (err) { reportError("adaptive tables", err); }
   });
   // Session statistics: count each new opening once (GM).
-  const statOpenings = new Set();
+  // The last counted opening is stored with the stats, so a reload or a later state update never counts it twice.
   Hooks.on("updateActor", (actor, changes) => {
     if (!isActiveGM() || !foundry.utils.hasProperty(changes, `flags.${MODULE_ID}.domainState`)) return;
     const s = getDomain(actor);
-    if (s?.open && s.openingId && !statOpenings.has(s.openingId)) { statOpenings.add(s.openingId); bumpStat(actor, "domains").catch(() => null); }
+    if (!s?.open || !s.openingId || actor.getFlag(MODULE_ID, "sessionStats")?.lastOpening === s.openingId) return;
+    bumpStat(actor, "domains", 1, { lastOpening: s.openingId }).catch(() => null);
   });
   // Total Mastery: follow the domain state on the owner's client (the GM writes the state).
   Hooks.on("updateActor", (actor, changes) => {

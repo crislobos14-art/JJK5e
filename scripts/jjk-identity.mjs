@@ -152,6 +152,31 @@ export function familyOf(item) {
 }
 
 /** The seal of one item: same name, same seal, on every client. */
+/* ---- Contrast: the light glyph must stay readable over the ink pattern (WCAG 1.4.11, ≥ 3:1). ---- */
+function hslRgb(h, s, l) {
+  s /= 100; l /= 100;
+  const a = s * Math.min(l, 1 - l), f = (n) => { const k = (n + h / 30) % 12; return l - a * Math.max(-1, Math.min(k - 3, 9 - k, 1)); };
+  return [f(0), f(8), f(4)];
+}
+function luminance([r, g, b]) {
+  const c = (v) => (v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4);
+  return 0.2126 * c(r) + 0.7152 * c(g) + 0.0722 * c(b);
+}
+export function contrast(a, b) { const x = luminance(a), y = luminance(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); }
+const PATTERN_ALPHA = 0.55;
+/** Worst-case contrast of the glyph against the seal (pattern blended over the deep ground). */
+export function sealContrast(hue, sat, light, patternLight = light) {
+  const deep = hslRgb(hue, sat, light * 0.32), pat = hslRgb(hue, sat, patternLight), glyph = hslRgb(hue, 40, 94);
+  const blend = pat.map((v, i) => v * PATTERN_ALPHA + deep[i] * (1 - PATTERN_ALPHA));
+  return Math.min(contrast(glyph, blend), contrast(glyph, deep));
+}
+/** Pattern lightness: the family's own, lowered only as far as needed for 3.5:1 (light seals such as Slash or Lightning). */
+export function patternLight(hue, sat, light) {
+  let l = light;
+  while (l > 20 && sealContrast(hue, sat, light, l) < 3.5) l -= 2;
+  return l;
+}
+
 export function identityOf(item, taken = null) {
   const family = familyOf(item);
   const key = item?.flags?.[ID]?.originalName ?? item?.name ?? "";
@@ -181,11 +206,15 @@ export function sealElement(item, size = "", id = identityOf(item)) {
   seal.style.setProperty("--jjk-id-h", String(id.hue));
   seal.style.setProperty("--jjk-id-s", `${id.sat}%`);
   seal.style.setProperty("--jjk-id-l", `${id.light}%`);
+  seal.style.setProperty("--jjk-id-pl", `${patternLight(id.hue, id.sat, id.light)}%`);
   seal.style.setProperty("--jjk-id-rot", `${id.rotation}deg`);
   seal.title = `${id.label}`;
-  seal.setAttribute("aria-hidden", "true");
+  // The seal names its family for screen readers; the glyph itself is decorative.
+  seal.setAttribute("role", "img");
+  seal.setAttribute("aria-label", id.label);
   const glyph = document.createElement("i");
   glyph.className = `fas ${id.icon}`;
+  glyph.setAttribute("aria-hidden", "true");
   seal.append(glyph);
   return seal;
 }
@@ -209,6 +238,7 @@ function sealRows(app, root) {
     const old = host.querySelector(":scope > .jjk-id-seal");
     const id = ids.get(item.id);
     row.dataset.jjkFamily = id.family;
+    row.style.setProperty("--jjk-row", `hsl(${id.hue} ${id.sat}% ${patternLight(id.hue, id.sat, id.light)}%)`);
     if (old?.dataset.pattern === String(id.pattern) && old.dataset.family === id.family && old.dataset.glyph === id.icon) continue;
     old?.remove();
     host.prepend(sealElement(item, "", id));

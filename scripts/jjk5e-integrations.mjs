@@ -94,7 +94,8 @@ export function createIntegrations({
     if (!isActiveGM() || !setting("autoExpire") || externalEffectExpiry()) return;
     const actors = new Set();
     game.combat?.combatants?.forEach((c) => c.actor && actors.add(c.actor));
-    for (const scene of game.scenes ?? []) scene.tokens?.forEach((tk) => tk.actor && actors.add(tk.actor));
+    // Linked tokens share the world actor (added below); only unlinked tokens carry their own effects.
+    for (const scene of game.scenes ?? []) scene.tokens?.forEach((tk) => !tk.actorLink && tk.actor && actors.add(tk.actor));
     game.actors?.forEach((a) => actors.add(a));
     for (const actor of actors) {
       const ids = actor.effects.filter((e) => {
@@ -105,7 +106,7 @@ export function createIntegrations({
         return rem !== null && rem !== undefined && rem <= 0;
       }).map((e) => e.id);
       for (const id of ids) await safeDelete(actor.effects.get(id));
-      for (const item of actor.items) for (const e of item.effects ?? []) {
+      for (const item of actor.items) for (const e of (item.effects?.size || item.effects?.length) ? item.effects : []) {
         if (!e.flags?.jjk5e?.group || e.disabled) continue;
         const rem = e.duration?.remaining;
         if (rem !== null && rem !== undefined && rem <= 0) await e.update({ disabled: true });

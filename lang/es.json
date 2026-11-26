@@ -807,7 +807,8 @@
       "Faction": "Facción",
       "Score": "Valor",
       "Standing": "Relación",
-      "TeacherNoRec": "{teacher} es profesor de este hechicero: los profesores no pueden recomendar a sus propios alumnos."
+      "TeacherNoRec": "{teacher} es profesor de este hechicero: los profesores no pueden recomendar a sus propios alumnos.",
+      "Demote": "Descender"
     },
     "Mission": {
       "Generate": "Generar misión",

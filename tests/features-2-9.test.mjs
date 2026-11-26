@@ -33,3 +33,13 @@ test("session statistics count CE, Black Flash, domains and clashes", async () =
   await J.bumpStat(a, "ce", 3); await J.bumpStat(a, "ce", 2); await J.bumpStat(a, "bf");
   assert.deepEqual(a.getFlag("jjk5e", "sessionStats"), { ce: 5, bf: 1, domains: 0, clashes: 0 });
 });
+
+test("a domain opening is counted once, even after more state updates", async () => {
+  const env = createEnv(); await env.boot(); const J = env.jjk;
+  const a = env.addActor({ name: "Caster" });
+  await J.setDomain(a, { open: true, openingId: "o1" }); await env.settle();
+  await J.setDomain(a, { open: true, openingId: "o1", radius: 30 }); await env.settle();
+  assert.equal(a.getFlag("jjk5e", "sessionStats").domains, 1);
+  await J.setDomain(a, { open: true, openingId: "o2" }); await env.settle();
+  assert.equal(a.getFlag("jjk5e", "sessionStats").domains, 2);
+});

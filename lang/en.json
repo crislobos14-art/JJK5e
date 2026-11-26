@@ -807,7 +807,8 @@
       "Faction": "Faction",
       "Score": "Score",
       "Standing": "Standing",
-      "TeacherNoRec": "{teacher} is this sorcerer's teacher: teachers cannot recommend their own students."
+      "TeacherNoRec": "{teacher} is this sorcerer's teacher: teachers cannot recommend their own students.",
+      "Demote": "Demote"
     },
     "Mission": {
       "Generate": "Generate mission",
