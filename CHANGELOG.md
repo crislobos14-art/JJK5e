@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.13.0 — Las expansiones de dominio vuelven a abrirse
+- **Corregido:**
+  - Con la opción «EM transaccional» activa y sin libWrapper, que es lo habitual en Foundry 14, toda técnica o dominio con coste de EM se cancelaba en silencio: salía la tarjeta, pero el dominio no se abría y no se gastaba la EM.
+  - Ahora la EM transaccional solo se usa donde libWrapper puede aplicarla. En los demás casos, el módulo cobra la EM de la forma normal.
+- Si la EM transaccional está activa pero no puede funcionar, el DJ recibe un aviso al cargar el mundo.
 ## 2.12.0 — Auditoría de efectos y sonidos
 - **Fichas ocultas:** si el lanzador o el objetivo está oculto, los sellos e impactos solo los ve el DJ, así que ya no revelan su posición.
 - **Midi-QOL:** el sonido de impacto y la carga de Jin de Fa Jin funcionan aunque Midi junte las tiradas en una sola tarjeta. El sonido llega a cada jugador a su propio volumen.

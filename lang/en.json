@@ -431,7 +431,8 @@
       "CENoAuthority": "JJK 5e: an active GM is required to authorize this energy payment.",
       "CEPendingUse": "JJK 5e: another Cursed Energy payment is pending. Wait for it or ask the GM to review it.",
       "CEAuthorizationFailed": "JJK 5e: the energy payment could not be authorized. Check the pool and any pending payment with the GM.",
-      "FullTurnUsed": "Full-Turn Action: you already used your action or bonus action this turn."
+      "FullTurnUsed": "Full-Turn Action: you already used your action or bonus action this turn.",
+      "CEAdapterMissing": "Transactional CE needs libWrapper, which is not active on this Foundry version. The module uses ordinary CE spending: techniques and domains work the same."
     },
     "Settings": {
       "autoSpendCE": {

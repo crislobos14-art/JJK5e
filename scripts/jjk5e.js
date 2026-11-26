@@ -818,6 +818,15 @@ async function spendFullTurn(actor,activity){
   const midi=globalThis.MidiQOL;
   try{await midi?.setActionUsed?.(actor);await midi?.setBonusActionUsed?.(actor);}catch(err){reportError("full turn",err);}
 }
+/**
+ * Transactional CE applies only where its adapter actually wraps the activity type's consume().
+ * Without libWrapper (or with a dnd5e that renamed consume), uses fall back to ordinary CE spending
+ * instead of being silently cancelled, which used to stop domains from opening.
+ */
+function ceTransactional(activity){
+  if(!ceAuthorityEnabled()||!setting("autoSpendCE")||!managedCE(activity)) return false;
+  return CE_ADAPTER_TARGETS.has(`CONFIG.DND5E.activityTypes.${activity?.type}.documentClass.prototype.consume`);
+}
 function recordTurnActivity(activity){
   const actor=activity?.actor??activity?.item?.actor;
   const state=actionTurn(actor);
@@ -976,7 +985,7 @@ function registerActivityHooks() {
     // Native Midi may already have reserved a normal action for a bundled full-turn activity.
     // Recheck local state rather than treating that native reservation as an earlier action.
     if(!actionGate(actor,activity,{recheck:true}))return false;
-    if(ceAuthorityEnabled()&&setting("autoSpendCE")&&managedCE(activity)){
+    if(ceTransactional(activity)){
       if(ceContext(activity,usageConfig)?.state!=="reservingNative") return false;
       return;
     }
@@ -993,10 +1002,14 @@ function registerActivityHooks() {
     // Pay BEFORE opening domains or applying buffs. Failed CE payment must never
     // leave a benefit in place. The pre-use gate handles ordinary insufficient CE.
     if (setting("autoSpendCE") && actor && item) {
-      if(ceAuthorityEnabled()&&managedCE(activity)){
+      if(ceTransactional(activity)){
         const ctx=ceContext(activity,usageConfig);
-        if(ctx?.state!=="committed"||ctx.postProcessed) return;
-        ctx.postProcessed=true;
+        const receipt=results?.message?.getFlag?.(MODULE_ID,"ceReceipt")??results?.message?.flags?.[MODULE_ID]?.ceReceipt;
+        if(ctx){
+          if(ctx.state!=="committed"||ctx.postProcessed) return;
+          ctx.postProcessed=true;
+        }else if(!receipt&&!(await payActivityCE(actor, activity, usageConfig))) return;
+        // No context and no receipt: the transaction never ran for this use, so CE is paid the ordinary way above.
       }else if (!(await payActivityCE(actor, activity, usageConfig))) return;
     }
     if(actor?.isOwner)recordTurnActivity(activity);
@@ -4490,6 +4503,7 @@ Hooks.once("ready", () => {
     }
   });
   installCEAdapters();
+  if (ceAuthorityEnabled() && !CE_ADAPTER_TARGETS.size && isActiveGM()) ui.notifications.warn(t("Notify.CEAdapterMissing"), { permanent: true });
   registerMidiHooks();
   Object.assign(game.modules.get(MODULE_ID).api??{}, {ceDiagnostics,reconcileCE,integrationReport,recoverCEWorld,createBarrierMarker,attackSelectedBarrier,absorbSimpleDomain,simpleDomainAt,claimFallingBlossomOffense,amplificationOutcome});
   Hooks.on("updateToken",(token,changes)=>endMovedSimpleDomain(token,changes).catch(err=>reportError("Simple Domain movement",err)));
@@ -7644,7 +7658,7 @@ function recordScaling(activity, usageConfig) {
   if (!item || !usesScalingToken(activity)) return;
   const scaling=Number(usageConfig?.scaling??0);
   if(!Number.isSafeInteger(scaling)||scaling<0) return;
-  if(ceAuthorityEnabled()&&setting("autoSpendCE")&&managedCE(activity)&&ceContext(activity,usageConfig)?.state!=="reservingNative") return;
+  if(ceTransactional(activity)&&ceContext(activity,usageConfig)?.state!=="reservingNative") return;
   const value = 1 + scaling;
   LAST_SCALING.set(item.uuid, value);
   if (item.isOwner && item.getFlag(MODULE_ID, "lastScaling") !== value) item.setFlag(MODULE_ID, "lastScaling", value).catch(() => {});
