@@ -370,6 +370,9 @@
       "EnableModules": "JJK 5e · Activa los módulos de combate: {list}",
       "QuickRecoveryUnverified": "JJK 5e: Quick Recovery — no se pudo comprobar el uso del rasgo; revisa sus usos y devuelve la EM a mano.",
       "CEPendingRest": "JJK 5e: resuelve las reservas de EM pendientes (GM) antes de descansar.",
+      "CENoAuthority": "JJK 5e: debe haber un DJ conectado para autorizar este gasto de energía maldita.",
+      "CEPendingUse": "JJK 5e: hay otro gasto de energía maldita pendiente. Espera a que termine o pide al DJ que lo revise.",
+      "CEAuthorizationFailed": "JJK 5e: no se pudo autorizar el gasto de energía maldita. Revisa el saldo y los gastos pendientes con el DJ.",
       "FullTurnUsed": "Acción de turno completo: ya usaste tu acción o tu acción adicional este turno."
     },
     "Settings": {

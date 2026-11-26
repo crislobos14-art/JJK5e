@@ -929,6 +929,28 @@ test("CE Quick Recovery: legacy costs are not negative charges",async()=>{
   assert.equal(J.managedCE(act),false);
 });
 
+test("a player long rest restores fractional CE through the native item updates", async () => {
+  const { env, actor, J } = await setup({ settings: { transactionalCE: true } });
+  const pool = J.findPool(actor);
+  await pool.update({ "system.uses.spent": 5, "flags.jjk5e.fractionalSpent": 0.4 });
+  env.game.user = { id: "resting-player", active: true, isGM: false };
+  const nativeRest = { longRest: true, updateItems: [{ _id: pool.id, "system.uses.spent": 0 }] };
+  assert.equal(env.Hooks.call("dnd5e.preRestCompleted", actor, nativeRest, { type: "long" }), true);
+  await actor.updateEmbeddedDocuments("Item", nativeRest.updateItems);
+  await env.Hooks.run("dnd5e.restCompleted", actor, nativeRest);
+  assert.equal(J.poolValue(pool), J.poolMax(pool));
+  assert.equal(nativeRest.updateItems.length, 1);
+  assert.equal(pool.getFlag("jjk5e", "fractionalSpent"), 0);
+  await pool.update({ "flags.jjk5e.fractionalSpent": 0.2 });
+  const onlyFraction = { longRest: true, updateItems: [] };
+  assert.equal(env.Hooks.call("dnd5e.preRestCompleted", actor, onlyFraction), true);
+  assert.equal(onlyFraction.updateItems[0]["flags.jjk5e.fractionalSpent"], 0);
+  await pool.setFlag("jjk5e", "ceLedger", [{ id: "pending", state: "reserved" }]);
+  const blocked = { longRest: true, updateItems: [] };
+  assert.equal(env.Hooks.call("dnd5e.preRestCompleted", actor, blocked), false);
+  assert.equal(blocked.updateItems.length, 0);
+});
+
 test("Transactional CE adapter: debit precedes native consumption and repeated postUse does not debit again",async()=>{
   const {env,actor,J}=await setup({settings:{transactionalCE:true}});
   const [item]=await actor.createEmbeddedDocuments("Item",[{name:"Technique",type:"feat",flags:{jjk5e:{ceCosts:{a:8}}},system:{activities:{a:{id:"a",name:"Attack"}}}}]);
@@ -950,6 +972,24 @@ test("Transactional CE adapter: debit precedes native consumption and repeated p
   assert.equal(J.poolValue(J.findPool(actor)),12);
   assert.equal(await J.consumeWithCE(async()=>{throw Error("duplicate executed")},act,usage,{}),false);
 });
+test("transactional CE reports a missing GM or an existing reservation without starting the activity", async () => {
+  const { env, actor, J } = await setup({ settings: { transactionalCE: true } });
+  const [item] = await actor.createEmbeddedDocuments("Item", [{ name: "Technique", type: "feat", flags: { jjk5e: { ceCosts: { a: 4 } } } }]);
+  const activity = { id: "a", actor, item };
+  const gm = env.game.user;
+  env.game.user = { id: "player", active: true, isGM: false };
+  env.game.users.activeGM = null;
+  const nativeUse = () => { throw new Error("native use must stay blocked"); };
+  assert.equal(await J.consumeWithCE(nativeUse, activity, {}, {}), false);
+  assert.match(env.notes.at(-1)[1], /Notify\.CENoAuthority/);
+  env.game.user = env.game.users.activeGM = gm;
+  const pool = J.findPool(actor);
+  await pool.setFlag("jjk5e", "ceLedger", [{ id: "existing", state: "reserved" }]);
+  assert.equal(await J.consumeWithCE(nativeUse, activity, {}, {}), false);
+  assert.match(env.notes.at(-1)[1], /Notify\.CEPendingUse/);
+  assert.equal(J.poolValue(pool), J.poolMax(pool));
+});
+
 test("Transactional CE adapter: native failure blocks post-use effects and retains pending review",async()=>{
   const {actor,J}=await setup({settings:{transactionalCE:true}});
   const [item]=await actor.createEmbeddedDocuments("Item",[{name:"Technique",type:"feat",flags:{jjk5e:{ceCosts:{a:4}}},system:{activities:{a:{id:"a"}}}}]);

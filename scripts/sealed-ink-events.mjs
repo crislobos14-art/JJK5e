@@ -314,13 +314,16 @@ function linkedSummon(actor) {
     tokens.some(token => token.flags?.jjk5e?.summonedBy || token.flags?.dnd5e?.summon?.origin));
 }
 async function useHUDActivity(actor, itemId, activityId, event) {
-  if (busy || !visible(actor) || linkedSummon(actor) || !candidates().some(candidate => candidate.uuid === actor.uuid)) return;
-  const activity = actor.items.get(itemId)?.system?.activities?.get(activityId);
+  if (busy || !actor?.uuid) return;
+  const current = candidates().find(candidate => candidate.uuid === actor.uuid);
+  if (!visible(current) || linkedSummon(current)) return;
+  const activity = current.items.get(itemId)?.system?.activities?.get?.(activityId);
   if (!isNativeActivityAvailable(activity)) return;
+  if (api()?.combatInteractionActivity?.(current, activity)?.allowed === false) return;
   const control = event.currentTarget;
   busy = true;
   control.disabled = true;
-  try { return await invokeSealedActivity(actor, activity, event); }
+  try { return await invokeSealedActivity(current, activity, event); }
   finally { busy = false; control.disabled = false; }
 }
 const favorites = () => settings("sealedFavorites");

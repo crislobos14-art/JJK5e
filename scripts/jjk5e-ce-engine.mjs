@@ -173,11 +173,21 @@ export function createCEEngine({
     if(nested?.state==="reservingNative") return wrapped(usageConfig,messageConfig);
     if(nested) return false;
     if(!validActivityCE(actor,activity,usageConfig)) return false;
+    if (!isActiveGM() && typeof game.users.activeGM?.query !== "function") {
+      ui.notifications.warn(t("Notify.CENoAuthority"));
+      return false;
+    }
+    if (cePending(findPool(actor))) {
+      ui.notifications.warn(t("Notify.CEPendingUse"));
+      return false;
+    }
     const id=foundry.utils.randomID();
     const reserve=await ceAuthorityRequest("reserve",{actorUuid:actor.uuid,itemId:activity.item.id,activityId:activity.id,
       scaling:Number(usageConfig.scaling??0),id});
-    if(!reserve?.id) { ui.notifications.warn(t("Notify.NotEnoughCE",{value:poolValue(findPool(actor)),cost:totalActivityCECost(actor,activity,usageConfig)})); return false; }
-    if(!await ceAuthorityRequest("start",{actorUuid:actor.uuid,id})) return false;
+    if (!reserve?.id || !await ceAuthorityRequest("start", { actorUuid: actor.uuid, id })) {
+      ui.notifications.warn(t("Notify.CEAuthorizationFailed"));
+      return false;
+    }
     const ctx={key:ceUsageKey(activity),id,actorUuid:actor.uuid,state:"reservingNative",cost:reserve.cost};
     CE_USAGE_CONTEXT.set(usageConfig,ctx);
     try{
