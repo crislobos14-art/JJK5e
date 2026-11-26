@@ -249,6 +249,8 @@ function sealChat(message, html) {
 
 Hooks.once("ready", () => {
   if (game.system?.id !== "dnd5e") return;
+  const api = game.modules.get(ID)?.api;
+  if (api) Object.assign(api, { identityOf, familyOf });
   for (const hook of ["renderActorSheetV2", "renderActorSheet"]) Hooks.on(hook, (app, html) => {
     try { sealRows(app, html instanceof HTMLElement ? html : html?.[0] ?? app.element); } catch (err) { console.warn(`${ID} | identity`, err); }
   });

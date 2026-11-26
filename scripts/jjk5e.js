@@ -1782,6 +1782,7 @@ async function onAttackRoll(rolls, subject) {
   if (!success) return;
   if (setting("blackFlashDamage")) await actor.setFlag(MODULE_ID, "pendingBlackFlash", { activityUuid: activity?.uuid ?? null });
   await addBreakthrough(actor, 1, "Black Flash");
+  if (isActiveGM()) await bumpStat(actor, "bf").catch(() => null);
   // V.6 The Zone also recovers the Reverse Cursed Technique healing pool.
   for (const item of actor.items.filter((i) => /Reverse Cursed Technique \(Healing Pool\)/i.test(baseName(i)))) {
     if (Number(item.system?.uses?.spent) > 0) await item.update({ "system.uses.spent": 0 });
@@ -1899,6 +1900,87 @@ function rawCEDamageBonus(actor) {
 
 /* ---- Domain Refinement: gains (V.6 Methods of Refinement) and active benefits ---- */
 const DAY_SECONDS = 86400, MONTH_SECONDS = 30 * DAY_SECONDS;
+/* ---- Session statistics (GM): CE spent, Black Flashes, domains opened, clashes won ---- */
+async function bumpStat(actor, key, n = 1) {
+  if (!isActiveGM() || !actor?.uuid || !n) return;
+  const stats = { ce: 0, bf: 0, domains: 0, clashes: 0, ...(actor.getFlag(MODULE_ID, "sessionStats") ?? {}) };
+  stats[key] = Math.round(((Number(stats[key]) || 0) + n) * 1000) / 1000;
+  await actor.setFlag(MODULE_ID, "sessionStats", stats);
+}
+function openSessionStats() {
+  if (!game.user.isGM) return ui.notifications.warn(t("Notify.GMOnly"));
+  const rows = [...(game.actors ?? [])].map((a) => [a, a.getFlag(MODULE_ID, "sessionStats")]).filter(([, st]) => st)
+    .sort((x, y) => (y[1].ce || 0) - (x[1].ce || 0));
+  const body = rows.length ? `<table class="jjk-refinement-log"><thead><tr><th>${t("Stats.Actor")}</th><th>${t("Stats.CE")}</th><th>${t("Stats.BF")}</th><th>${t("Stats.Domains")}</th><th>${t("Stats.Clashes")}</th></tr></thead><tbody>`
+    + rows.map(([a, st]) => `<tr><td>${esc(a.name)}</td><td>${st.ce || 0}</td><td>${st.bf || 0}</td><td>${st.domains || 0}</td><td>${st.clashes || 0}</td></tr>`).join("") + "</tbody></table>"
+    : `<p class="hint">${t("Stats.Empty")}</p>`;
+  return foundry.applications.api.DialogV2.wait({ classes: ["jjk5e-ui", "jjk5e-dialog"], window: { resizable: true, title: t("Stats.Title") }, position: { width: 560 }, rejectClose: false,
+    content: body, buttons: [{ action: "ok", label: t("Common.OK"), default: true }, { action: "reset", label: t("Stats.Reset") }] })
+    .then(async (choice) => {
+      if (choice !== "reset" || !(await confirmDialog(t("Stats.Reset"), `<p>${t("Stats.ResetHint")}</p>`))) return;
+      for (const [a] of rows) await a.unsetFlag(MODULE_ID, "sessionStats");
+    });
+}
+
+/* ---- Export / import of an actor's JJK data (refinement, vows, diary, domain profile…) ---- */
+const JJK_EXPORT_KEYS = ["refinement", "breakthroughs", "ceAbility", "domainLethal", "customDomainProfile", "vows", "refinementLog",
+  "domainSuperiority", "career", "reputation", "missions", "soulAwareness", "limbs"];
+async function exportJJK(actor) {
+  if (!actor?.isOwner) return;
+  const data = { module: MODULE_ID, version: game.modules.get(MODULE_ID)?.version ?? "", actor: actor.name,
+    flags: Object.fromEntries(JJK_EXPORT_KEYS.map((k) => [k, actor.getFlag(MODULE_ID, k)]).filter(([, v]) => v !== undefined)) };
+  const text = JSON.stringify(data, null, 2);
+  const save = globalThis.foundry?.utils?.saveDataToFile ?? globalThis.saveDataToFile;
+  if (typeof save === "function") save(text, "application/json", `jjk5e-${actor.name.replace(/[^\w-]+/g, "_")}.json`);
+  return text;
+}
+async function importJJK(actor, text = null) {
+  if (!actor?.isOwner) return false;
+  text ??= await foundry.applications.api.DialogV2.prompt({ classes: ["jjk5e-ui", "jjk5e-dialog"], window: { resizable: true, title: t("Transfer.Import") }, rejectClose: false,
+    content: `<p>${t("Transfer.ImportHint")}</p><textarea name="json" rows="12" style="width:100%"></textarea>`,
+    ok: { label: t("Transfer.Import"), callback: (e, b) => b.form.elements.json.value } });
+  if (!text) return false;
+  let data;
+  try { data = JSON.parse(text); } catch { ui.notifications.warn(t("Transfer.Invalid")); return false; }
+  if (data?.module !== MODULE_ID || !data.flags || typeof data.flags !== "object") { ui.notifications.warn(t("Transfer.Invalid")); return false; }
+  const clean = {};
+  for (const k of JJK_EXPORT_KEYS) if (k in data.flags) clean[k] = data.flags[k];
+  if ("refinement" in clean) clean.refinement = clamp(Number(clean.refinement) || 1, 1, 1000);
+  if ("breakthroughs" in clean) clean.breakthroughs = Math.max(0, Math.floor(Number(clean.breakthroughs) || 0));
+  if ("customDomainProfile" in clean && !validateDomainProfile(clean.customDomainProfile)) delete clean.customDomainProfile;
+  for (const k of ["vows", "refinementLog", "domainSuperiority"]) if (k in clean && !Array.isArray(clean[k])) delete clean[k];
+  if (!Object.keys(clean).length) { ui.notifications.warn(t("Transfer.Invalid")); return false; }
+  if (!(await confirmDialog(t("Transfer.Import"), `<p>${t("Transfer.Confirm", { name: esc(actor.name), keys: Object.keys(clean).join(", ") })}</p>`))) return false;
+  await actor.update({ [`flags.${MODULE_ID}`]: clean });
+  ui.notifications.info(t("Transfer.Done", { name: actor.name }));
+  return true;
+}
+
+/* ---- GM: one-click sorcerer NPC by grade (same CR bands as curses), with a CE pool ---- */
+async function createSorcerer(grade = null) {
+  if (!game.user.isGM) return ui.notifications.warn(t("Notify.GMOnly"));
+  grade ??= await foundry.applications.api.DialogV2.prompt({ classes: ["jjk5e-ui", "jjk5e-dialog"], window: { resizable: true, title: t("Sorcerer.Generate") }, rejectClose: false,
+    content: `<label>${t("Mission.Grade")}<select name="grade">${GRADES.map((g) => `<option value="${g}">${esc(gradeLabel(g))}</option>`).join("")}</select></label>`,
+    ok: { label: t("Mission.Roll"), callback: (e, b) => b.form.elements.grade.value } });
+  if (!grade) return null;
+  const data = curseData({ grade, kind: "vengeful", name: t("Sorcerer.Name", { grade: gradeLabel(grade) }) });
+  const cr = Number(data.system?.details?.cr) || 1;
+  // People, not curses: drop the spiritual traits and give them cursed energy and a refinement by grade.
+  data.items = (data.items ?? []).filter((i) => i.type === "weapon" || /Multiattack|Ataque múltiple|technique|técnica/i.test(i.name));
+  data.items.push({ name: "Cursed Energy (NPC)", type: "feat", img: `${ICONS}/ce.svg`,
+    system: { description: { value: `<p>${t("Sorcerer.Pool")}</p>` }, type: { value: "monster", subtype: "" }, activities: {},
+      uses: { max: String(Math.max(4, Math.round(cr * 3 + 4))), spent: 0, recovery: [{ period: "lr", type: "recoverAll" }] } },
+    flags: { jjk5e: { cePool: true } } });
+  data.system.abilities.wis = { value: clamp(12 + Math.floor(cr / 2), 1, 30) };
+  data.flags = { ...(data.flags ?? {}), jjk5e: { ...(data.flags?.jjk5e ?? {}), ceAbility: "wis", refinement: { 4: 1, 3: 1, 2: 50, 1: 150, special: 400 }[grade] ?? 1, generatedSorcerer: true } };
+  delete data.system?.traits;
+  let folder = game.folders?.find?.((f) => f.type === "Actor" && f.name === t("Sorcerer.Folder"));
+  try { folder ??= await docClass("Folder").create({ name: t("Sorcerer.Folder"), type: "Actor", color: "#3b1f63" }); } catch { /* */ }
+  const actor = await docClass("Actor").create({ ...data, folder: folder?.id ?? null });
+  ui.notifications.info(t("Sorcerer.Created", { name: actor?.name ?? data.name, cr }));
+  return actor;
+}
+
 /** Where we are in time: the current combat turn, or the world time outside combat. */
 function turnStamp() {
   const c = game.combat;
@@ -1977,6 +2059,7 @@ async function domainCasualty(victim) {
 }
 /** Domain Superiority: +100 for winning a clash, once per month and never twice against the same creature. */
 async function domainSuperiority(winner, loserUuid) {
+  await bumpStat(winner, "clashes").catch(() => null);
   const now = Number(game.time?.worldTime) || 0;
   const log = actorFlagArray(winner, "domainSuperiority");
   if (log.some((e) => e.uuid === loserUuid) || log.some((e) => now - (Number(e.time) || 0) < MONTH_SECONDS)) return 0;
@@ -2553,6 +2636,8 @@ function panelHTML(actor, tab = "combat") {
       ${pbtn("pointBuy", "fas fa-dice-d20", t("PointBuy.Title"))}
       ${pbtn("vows", "fas fa-handshake", t("Vow.Title"))}
       ${pbtn("career", "fas fa-id-badge", t("Career.Title"))}
+      ${pbtn("exportJJK", "fas fa-file-export", t("Transfer.Export"), { tip: t("Transfer.ExportHint") })}
+      ${pbtn("importJJK", "fas fa-file-import", t("Transfer.Import"), { tip: t("Transfer.ImportHint") })}
       ${pbtn("hotbar", "fas fa-table-cells", t("Keys.hotbar"))}
       ${pbtn("updateAutomation", "fas fa-arrows-rotate", t("Update.Title"))}
       ${pbtn("help", "fas fa-keyboard", t("Panel.Shortcuts"), { key: "?" })}
@@ -2630,6 +2715,8 @@ const PANEL_ACTIONS = {
   attackSelectedBarrier: () => attackSelectedBarrier(),
   weakHole: () => promptWeakHole(),
   vows: (actor) => openVows(actor),
+  exportJJK: (actor) => exportJJK(actor),
+  importJJK: (actor) => importJJK(actor),
   career: (actor) => openCareer(actor),
   hotbar: (actor) => fillHotbar(actor),
   help: () => showShortcuts(),
@@ -3469,6 +3556,8 @@ Hooks.once("ready", async () => {
   Hooks.on("updateItem", (item, changes, options) => {
     if (!isActiveGM() || options?.jjk5eSpentBefore === undefined) return;
     const actor = item.parent;
+    const delta = (Number(item.system?.uses?.spent) || 0) - options.jjk5eSpentBefore;
+    if (actor?.documentName === "Actor" && delta > 0) bumpStat(actor, "ce", delta).catch((err) => reportError("session stats", err));
     if (actor?.documentName !== "Actor" || !(Number(actor.getFlag(MODULE_ID, "reducedOutput")) > 0)) return;
     if ((Number(item.system?.uses?.spent) || 0) > options.jjk5eSpentBefore) actor.setFlag(MODULE_ID, "lastCESpendTime", Number(game.time?.worldTime) || 0);
   });
@@ -3964,11 +4053,23 @@ function damageKind(activity) {
   return types[0] ?? null;
 }
 
-function playAt(file, target, { scale = 1, gridSize = null } = {}) {
+/** Light tint from the item's identity seal (same family colour as the sheet), or null. */
+function familyTint(item) {
+  try {
+    if (!setting("animFamilyTint")) return null;
+    const id = game.modules.get(MODULE_ID)?.api?.identityOf?.(item);
+    if (!id || !Number.isFinite(id.hue)) return null;
+    const h = id.hue / 360, sat = Math.min(0.7, (parseFloat(id.sat) || 50) / 100), l = 0.78;
+    const f = (n) => { const k = (n + h * 12) % 12, a = sat * Math.min(l, 1 - l); return Math.round(255 * (l - a * Math.max(-1, Math.min(k - 3, 9 - k, 1)))); };
+    return `#${[f(0), f(8), f(4)].map((v) => v.toString(16).padStart(2, "0")).join("")}`;
+  } catch { return null; }
+}
+function playAt(file, target, { scale = 1, gridSize = null, tint = null } = {}) {
   if (!file || !target) return;
   const seq = new Sequence().effect().file(file).atLocation(target);
   if (gridSize) seq.size(gridSize, { gridUnits: true });
   else seq.scaleToObject(scale);
+  if (tint && typeof seq.tint === "function") seq.tint(tint);
   seq.play();
 }
 
@@ -4028,9 +4129,11 @@ function animateDomainClash(scene, actors) {
   });
 }
 
-function playBetween(file, source, target, missed = false) {
+function playBetween(file, source, target, missed = false, tint = null) {
   if (!file || !source || !target) return;
-  new Sequence().effect().file(file).atLocation(source).stretchTo(target).missed(missed).play();
+  const seq = new Sequence().effect().file(file).atLocation(source).stretchTo(target).missed(missed);
+  if (tint && typeof seq.tint === "function") seq.tint(tint);
+  seq.play();
 }
 
 /** Play the animation for an attack against one target (hit or miss already known). */
@@ -4074,6 +4177,7 @@ function animateActivity(activity, targets = null) {
   const source = tokenOf(item.actor);
   if (!source) return;
   const theme = itemTheme(item, activity);
+  const tint = familyTint(item);
   const tmpl = activity.target?.template ?? {};
   const name = baseName(item).toLowerCase();
   const domainActivity = item.flags.jjk5e.domainActivity;
@@ -4090,20 +4194,20 @@ function animateActivity(activity, targets = null) {
     if (tmpl.type === "cone" || tmpl.type === "line") {
       const slot = tmpl.type === "cone" ? "cone" : "line";
       const tgt = targets[0];
-      if (tgt) playBetween(themeFile(theme, slot, item) ?? themeFile(theme, "proj", item), source, tgt);
+      if (tgt) playBetween(themeFile(theme, slot, item) ?? themeFile(theme, "proj", item), source, tgt, false, tint);
     } else if (tmpl.type) {
       const at = activity.range?.units === "self" || !targets.length ? source : targets[0];
-      playAt(themeFile(theme, "area", item), at, size ? { gridSize: (size * 2) / dist } : { scale: 3 });
+      playAt(themeFile(theme, "area", item), at, size ? { gridSize: (size * 2) / dist, tint } : { scale: 3, tint });
     } else if (activity.range?.units && activity.range.units !== "self" && activity.range.units !== "touch") {
-      for (const tk of targets) playBetween(themeFile(theme, "proj", item), source, tk);
+      for (const tk of targets) playBetween(themeFile(theme, "proj", item), source, tk, false, tint);
     }
-    for (const tk of targets) setTimeout(() => playAt(themeFile(theme, "impact", item), tk, { scale: 1.4 }), 600);
+    for (const tk of targets) setTimeout(() => playAt(themeFile(theme, "impact", item), tk, { scale: 1.4, tint }), 600);
     return;
   }
   if (activity.type === "utility" || activity.type === "enchant") {
     if (targets.length && activity.range?.units !== "self") {
-      for (const tk of targets) playAt(themeFile(theme, "impact", item), tk, { scale: 1.4 });
-    } else playAt(themeFile(theme, "buff", item), source, { scale: 1.8 });
+      for (const tk of targets) playAt(themeFile(theme, "impact", item), tk, { scale: 1.4, tint });
+    } else playAt(themeFile(theme, "buff", item), source, { scale: 1.8, tint });
   }
 }
 
@@ -4321,6 +4425,7 @@ Hooks.once("init", () => {
   reg("pointBuyCosts", String, "10:0, 11:1, 12:2, 13:3, 14:5, 15:7, 16:10, 17:13, 18:17");
   reg("asiFeatPicker", Boolean, true);
   reg("animations", Boolean, true, { scope: "client" });
+  reg("animFamilyTint", Boolean, true, { scope: "client" });
   reg("animOverrides", String, "");
   reg("levelUpButton", Boolean, true, { scope: "client" });
   reg("enableSummoning", Boolean, true);
@@ -6891,7 +6996,9 @@ Hooks.once("ready", () => {
 
 MENU_ACTIONS.splice(MENU_ACTIONS.length - 1, 0,
   ["domain", "fa-solid fa-circle-half-stroke", "SceneTools.Domain", (a) => openDomainHUD(a)],
-  ["curse", "fa-solid fa-skull", "SceneTools.Curse", () => createCurse(), true]);
+  ["curse", "fa-solid fa-skull", "SceneTools.Curse", () => createCurse(), true],
+  ["sorcerer", "fa-solid fa-user-ninja", "SceneTools.Sorcerer", () => createSorcerer(), true],
+  ["stats", "fa-solid fa-chart-column", "SceneTools.Stats", () => openSessionStats(), true]);
 
 /* ============================================================================================ */
 /*  v1.13 — Shortcuts (keybindings, Token HUD) and Foundry 14 expiry guard                       */
@@ -9588,6 +9695,13 @@ Hooks.once("ready", () => {
   });
   Hooks.on("renderChatMessageHTML", (message, html) => {
     try { if (html?.querySelector?.("table")) fitTables(html); } catch (err) { reportError("adaptive tables", err); }
+  });
+  // Session statistics: count each new opening once (GM).
+  const statOpenings = new Set();
+  Hooks.on("updateActor", (actor, changes) => {
+    if (!isActiveGM() || !foundry.utils.hasProperty(changes, `flags.${MODULE_ID}.domainState`)) return;
+    const s = getDomain(actor);
+    if (s?.open && s.openingId && !statOpenings.has(s.openingId)) { statOpenings.add(s.openingId); bumpStat(actor, "domains").catch(() => null); }
   });
   // Total Mastery: follow the domain state on the owner's client (the GM writes the state).
   Hooks.on("updateActor", (actor, changes) => {

@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.9.0 — Exportar, generar y medir
+- **Exportar / Importar JJK** (panel del personaje):
+  - Guarda en un archivo el refinamiento, los avances, la característica de EM, los votos, el diario, el perfil de dominio, la carrera, el alma y las extremidades.
+  - Al importar se valida todo: el refinamiento se limita a 1000 y se descartan los datos mal formados.
+- **Generar hechicero PNJ** (herramientas de escena del DJ):
+  - Elige un grado; los grados tienen las mismas bandas de VD que las maldiciones.
+  - Crea un PNJ con reserva de EM y un refinamiento según el grado, sin los rasgos espirituales de las maldiciones.
+- **Animaciones con el color de su familia:** las animaciones de técnica se tiñen con un tono claro del color de su sello. Es una opción de cada jugador y viene activada.
+- **Estadísticas de sesión** (DJ): EM gastada, Black Flashes, dominios abiertos y choques ganados por personaje, con un botón «Nueva sesión» para ponerlas a cero.
 ## 2.8.0 — Menos reglas a mano
 - **Total Mastery (1000):** mientras tu dominio está abierto, tus técnicas de acción pasan a acción adicional y las de acción adicional pasan a gratuitas. Al cerrarse el dominio se restauran.
 - **Barrera duradera (800):**
