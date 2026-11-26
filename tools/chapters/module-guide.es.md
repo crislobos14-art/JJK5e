@@ -93,6 +93,14 @@ Se gana refinamiento entrenando (una vez al día), con víctimas dentro del domi
 - La tirada de Reduced Output si sigue activa una técnica con máxima potencia.
 - Las desgracias de la tabla de votos que no son efectos (perder un sentido, una extremidad…).
 
+### Sonido, efectos y fondos
+
+- **Sonidos:** cada una de las 81 técnicas tiene su propio sonido al usarse. Los impactos suenan según la familia de la técnica, y hay sonidos propios para dominio, choque, Black Flash, The Zone y burnout. Cada jugador los activa y ajusta su volumen en sus ajustes.
+- **Efectos:** cada técnica dibuja un sello de tinta de su color al usarse. Sin JB2A, el módulo dibuja también sus propios impactos. Necesita Sequencer.
+- **Fondos de dominio:** al abrirse un dominio, su barrera se rellena con el fondo de su técnica. El dueño puede elegir otro, o ninguno, con el botón «Fondo de dominio» del panel JJK.
+- **Registro de combate:** bajo cada nombre aparece una barra fina de EM. Muestra también el nivel de Reduced Output, el burnout y The Zone. El DJ elige quién ve la EM de quién.
+- **Recursos de técnica:** las técnicas con cargas, puntos o listas propias los muestran en la pestaña de combate del panel JJK. Por ejemplo, Fa Jin, Cursed Speech, Miracle o Ten Shadows. El módulo aplica los descansos, el fin del combate y el inicio de turno.
+
 ### Para el DJ
 
 - **Ajustes de refinamiento y avances:** panel JJK del actor, sección del DJ. Los cambios quedan en el diario.

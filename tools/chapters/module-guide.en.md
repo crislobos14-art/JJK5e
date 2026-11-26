@@ -93,6 +93,14 @@ Refinement comes from training (once a day), casualties inside the domain (+20) 
 - The Reduced Output roll while a Maximum Output technique is still active.
 - Misfortune table results that are not effects (losing a sense or a limb…).
 
+### Sound, effects and backdrops
+
+- **Sounds:** each of the 81 techniques has its own sound when used. Hits sound by the technique's family, and there are sounds for domains, clashes, Black Flash, The Zone and burnout. Each player turns them on and sets the volume in their settings.
+- **Effects:** each technique draws an ink seal in its colour when used. Without JB2A, the module also draws its own impacts. Needs Sequencer.
+- **Domain backdrops:** when a domain opens, its barrier fills with its technique's backdrop. The owner can choose another one, or none, with the panel's "Domain backdrop" button.
+- **Combat tracker:** a thin CE bar under each name. It also shows Reduced Output, burnout and The Zone. The GM chooses who sees whose CE.
+- **Technique resources:** techniques with their own charges, points or lists show them in the panel's combat tab. For example, Fa Jin, Cursed Speech, Miracle or Ten Shadows. The module applies rests, the end of combat and the start of each turn.
+
 ### For the GM
 
 - **Refinement and breakthroughs:** the actor's JJK panel, GM section. Changes go to the diary.

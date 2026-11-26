@@ -48,7 +48,7 @@ jobs:
       - name: Zip module
         if: steps.v.outputs.exists != 'true'
         run: |
-          zip -r -q release-module.zip module.json LICENSE.txt README.md CHANGELOG.md scripts styles templates lang data icons fonts packs
+          zip -r -q release-module.zip module.json LICENSE.txt README.md CHANGELOG.md scripts styles templates lang data icons fonts packs sounds effects textures
           mv release-module.zip module.zip
 
       - name: Release notes

@@ -161,7 +161,7 @@
   },
   {
    "_id": "DVuEcUcRLqrWAmuo",
-   "name": "For the GM",
+   "name": "Sound, effects and backdrops",
    "type": "text",
    "sort": 11000,
    "title": {
@@ -170,9 +170,24 @@
    },
    "text": {
     "format": 1,
-    "content": "<ul><li><strong>Refinement and breakthroughs:</strong> the actor's JJK panel, GM section. Changes go to the diary.</li><li><strong>Player requests:</strong> attacking barriers, opening weak spots or negative-emotion CE reach the GM as a confirmation.</li><li><strong>Cleanup:</strong> on start and whenever a domain closes, the module removes zones, tints, markers and animations of closed domains.</li><li><strong>Tutorial:</strong> shown the first time. To see it again, in a macro: <code>game.modules.get(\"jjk5e\").api.showTutorial()</code>.</li></ul>"
+    "content": "<ul><li><strong>Sounds:</strong> each of the 81 techniques has its own sound when used. Hits sound by the technique's family, and there are sounds for domains, clashes, Black Flash, The Zone and burnout. Each player turns them on and sets the volume in their settings.</li><li><strong>Effects:</strong> each technique draws an ink seal in its colour when used. Without JB2A, the module also draws its own impacts. Needs Sequencer.</li><li><strong>Domain backdrops:</strong> when a domain opens, its barrier fills with its technique's backdrop. The owner can choose another one, or none, with the panel's \"Domain backdrop\" button.</li><li><strong>Combat tracker:</strong> a thin CE bar under each name. It also shows Reduced Output, burnout and The Zone. The GM chooses who sees whose CE.</li><li><strong>Technique resources:</strong> techniques with their own charges, points or lists show them in the panel's combat tab. For example, Fa Jin, Cursed Speech, Miracle or Ten Shadows. The module applies rests, the end of combat and the start of each turn.</li></ul>"
    },
    "_key": "!journal.pages!IxoXWqhgpYohpdKp.DVuEcUcRLqrWAmuo"
+  },
+  {
+   "_id": "AInDq7IIfJ5e5LSG",
+   "name": "For the GM",
+   "type": "text",
+   "sort": 12000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<ul><li><strong>Refinement and breakthroughs:</strong> the actor's JJK panel, GM section. Changes go to the diary.</li><li><strong>Player requests:</strong> attacking barriers, opening weak spots or negative-emotion CE reach the GM as a confirmation.</li><li><strong>Cleanup:</strong> on start and whenever a domain closes, the module removes zones, tints, markers and animations of closed domains.</li><li><strong>Tutorial:</strong> shown the first time. To see it again, in a macro: <code>game.modules.get(\"jjk5e\").api.showTutorial()</code>.</li></ul>"
+   },
+   "_key": "!journal.pages!IxoXWqhgpYohpdKp.AInDq7IIfJ5e5LSG"
   }
  ],
  "_key": "!journal!IxoXWqhgpYohpdKp"
