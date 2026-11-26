@@ -203,7 +203,19 @@
       "TrainDoneChat": "{name} trains their domain: +{n} refinement ({total}).",
       "CasualtyChat": "Domain casualty ({target}): {name} gains +{n} refinement ({total}).",
       "SuperiorityChat": "Domain superiority: {name} gains +{n} refinement ({total}). Not again this month or against the same rival.",
-      "ClashZone": "Domain clash"
+      "ClashZone": "Domain clash",
+      "OutsideButton": "Expansion blast ({n}d6) on targets",
+      "OutsideSelect": "Target the creatures the expansion did not trap.",
+      "OutsideDone": "The expansion blast was already applied for this domain.",
+      "OutsideRoll": "Expansion blast: {n}d6 bludgeoning; targets are pushed to the edge",
+      "WeakHole": "Open a weak spot",
+      "WeakHoleTip": "Outside a domain that has lost 1/3 of its HP: select your token, target the barrier marker and make a STR, CHA or WIS save.",
+      "WeakHoleSelect": "Select your token and target the barrier marker.",
+      "WeakHoleTooSoon": "The barrier has not lost 1/3 of its HP yet.",
+      "WeakHoleHint": "Choose the save ability (DC {dc}). On a success you open a 10 × 10 ft hole while you concentrate; anyone entering suffers the sure-hit.",
+      "WeakHoleRoll": "Open a weak spot (DC {dc})",
+      "WeakHoleOpen": "{name} opens a 10 × 10 ft hole in {domain}'s domain while concentrating.",
+      "WeakHoleFail": "{name} fails to open {domain}'s domain."
     },
     "Burnout": {
       "Name": "Technique Burnout",

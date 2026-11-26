@@ -2467,6 +2467,7 @@ function panelHTML(actor, tab = "combat") {
       <div class="jjk-row">
         ${pbtn("domainHUD", "fa-solid fa-circle-half-stroke", t("Domain.HUD"))}
         ${pbtn("attackSelectedBarrier","fas fa-crosshairs",t("Domain.MarkerAttack"))}
+        ${pbtn("weakHole","fas fa-door-open",t("Domain.WeakHole"), { tip: t("Domain.WeakHoleTip") })}
         ${canRecoverBurnout(actor) ? pbtn("burnoutRecovery", "fas fa-brain", `${t("Burnout.Recovery")} (4 CE)`) : ""}
       </div>
       <div class="jjk-row">
@@ -2583,6 +2584,7 @@ const PANEL_ACTIONS = {
   trainRefinement: (actor) => trainRefinement(actor),
   engineDiagnostics: () => showIntegrationDiagnostics(),
   attackSelectedBarrier: () => attackSelectedBarrier(),
+  weakHole: () => promptWeakHole(),
   vows: (actor) => openVows(actor),
   career: (actor) => openCareer(actor),
   hotbar: (actor) => fillHotbar(actor),
@@ -4307,6 +4309,7 @@ Hooks.once("ready", () => {
   setInterval(()=>recoverCEWorld({ all: false }).catch(err=>reportError("CE recovery",err)),30000);
   recoverCEWorld().catch(err=>reportError("CE recovery",err));
   if (isActiveGM()) sweepDomainLeftovers().catch((err) => reportError("domain cleanup", err));
+  if (isActiveGM()) for (const actor of game.actors ?? []) if (refinementOf(actor) >= 200) syncDomainActivation(actor).catch((err) => reportError("domain activation", err));
   if (game.user.isGM && setting("enableSummoning") && game.settings.settings?.has?.("dnd5e.allowSummoning")
     && !game.settings.get("dnd5e", "allowSummoning")) game.settings.set("dnd5e", "allowSummoning", true);
   Hooks.on("updateActor", (actor, changes, options, userId) => {
@@ -5427,11 +5430,11 @@ async function domainActor(uuid) {
 }
 /** Query context.user is supplied by Foundry; never accept a sender ID from the payload. */
 async function handleDomainAuthority(msg, { user } = {}) {
-  if (!isActiveGM() || !user?.active || !msg?.payload || !["claim", "finish", "decline", "mode", "close", "lethal", "attack", "weakSpot", "amplification"].includes(msg.operation)) return false;
+  if (!isActiveGM() || !user?.active || !msg?.payload || !["claim", "finish", "decline", "mode", "close", "lethal", "attack", "weakSpot", "weakHole", "outsideBlast", "amplification"].includes(msg.operation)) return false;
   const { operation, payload: data } = msg;
   const actor = await domainActor(data.actorUuid);
   if (!actor) return false;
-  const cross = ["attack", "weakSpot"].includes(operation);
+  const cross = ["attack", "weakSpot", "weakHole"].includes(operation);
   const source = cross ? await domainActor(data.seekerUuid) : actor;
   if (!canDirectDomain(user, source)) return false;
   if (cross && !user.isGM) {
@@ -5452,6 +5455,8 @@ async function handleDomainAuthority(msg, { user } = {}) {
       return setDomain(actor, { ...state, lethal: data.lethal });
     }
     if (operation === "attack") return attackBarrier(actor, source, data);
+    if (operation === "weakHole") return formWeakHole(actor, source, data);
+    if (operation === "outsideBlast") return outsideBlast(actor, data);
     if (operation === "weakSpot" && Number.isFinite(data.total) && data.total >= 30) {
       const scene = game.scenes.get(state.sceneId);
       if (!scene || ![...(scene.tokens ?? [])].some((tk) => tk.actor?.uuid === source.uuid)) return false;
@@ -5872,7 +5877,9 @@ async function attackBarrier(actor, seeker, data) {
   if ((state.barrierRequests ?? []).includes(data.requestId)) return false;
   state.barrierRequests = [...(state.barrierRequests ?? []).slice(-99), data.requestId];
   await setDomain(actor, state);
-  const attack = await new Roll(`1d20 + (${bonus})`).evaluate();
+  // Compression (900): attacks against the compressed barrier from outside have disadvantage.
+  const disadvantage = !!state.compressed && geo.side === "outside";
+  const attack = await new Roll(`${disadvantage ? "2d20kl1" : "1d20"} + (${bonus})`).evaluate();
   const natural = attack.dice?.[0]?.results?.find((d) => d.active !== false)?.result ?? attack.dice?.[0]?.total;
   const hit = natural === 20 || (natural !== 1 && attack.total >= state.ac);
   await attack.toMessage?.({ speaker: docClass("ChatMessage").getSpeaker?.({ actor: seeker }), flavor: t(hit ? "Domain.BarrierAttackHit" : "Domain.BarrierAttackMiss") });
@@ -5945,6 +5952,105 @@ async function promptBarrierAttack(actor) {
   if (!done) ui.notifications.warn(t("Domain.AttackRejected"));
   return done;
 }
+/** DC used against a domain: the caster's spell (CE) save DC, else 8 + proficiency + CE modifier. */
+function domainSaveDC(actor) {
+  return Number(actor?.system?.attributes?.spell?.dc) || 8 + (Number(actor?.system?.attributes?.prof) || 2) + ceMod(actor);
+}
+/**
+ * V.6 Forming a Weak Spot: once the barrier has lost at least 1/3 of its maximum HP, a creature outside can take an
+ * action and make a STR, CHA or WIS save (against the caster's CE DC) to open a 10 × 10 ft hole while concentrating.
+ */
+async function promptWeakHole() {
+  const targets = [...(game.user?.targets ?? [])];
+  const meta = targets.length === 1 ? barrierMarkerMeta(targets[0]) : null;
+  const tk = canvas?.tokens?.controlled?.[0];
+  if (!meta || !tk?.actor?.isOwner) return ui.notifications.warn(t("Domain.WeakHoleSelect"));
+  const caster = await domainActor(meta.actorUuid), state = getDomain(caster);
+  if (!state?.open || state.noBarrier || state.openingId !== meta.openingId) return;
+  if ((Number(state.max) - Number(state.hp)) < Math.ceil(Number(state.max) / 3)) return ui.notifications.warn(t("Domain.WeakHoleTooSoon"));
+  const ability = await foundry.applications.api.DialogV2.wait({ classes: ["jjk5e-ui", "jjk5e-dialog"], window: { resizable: true, title: t("Domain.WeakHole") }, rejectClose: false,
+    content: `<p>${t("Domain.WeakHoleHint", { dc: domainSaveDC(caster) })}</p>`,
+    buttons: ["str", "cha", "wis"].map((a) => ({ action: a, label: CONFIG.DND5E?.abilities?.[a]?.label ?? a.toUpperCase() })) });
+  if (!["str", "cha", "wis"].includes(ability)) return;
+  return requestDomainAuthority("weakHole", { actorUuid: caster.uuid, seekerUuid: tk.actor.uuid, tokenUuid: tk.document.uuid, openingId: state.openingId, ability });
+}
+async function formWeakHole(caster, seeker, data) {
+  const state = getDomain(caster);
+  if (!state?.open || state.noBarrier || state.openingId !== data.openingId || !["str", "cha", "wis"].includes(data.ability)) return false;
+  if ((Number(state.max) - Number(state.hp)) < Math.ceil(Number(state.max) / 3)) return false;
+  const token = await fromUuid(data.tokenUuid).catch(() => null);
+  if (token?.actor?.uuid !== seeker.uuid || barrierAttackGeometry(state, token)?.side !== "outside") return false;
+  const save = Number(seeker.system?.abilities?.[data.ability]?.save?.value ?? seeker.system?.abilities?.[data.ability]?.save ?? seeker.system?.abilities?.[data.ability]?.mod) || 0;
+  const dc = domainSaveDC(caster);
+  const roll = await new Roll(`1d20 + ${save}`).evaluate();
+  const ok = roll.total >= dc;
+  await roll.toMessage?.({ speaker: docClass("ChatMessage").getSpeaker?.({ actor: seeker }), flavor: t("Domain.WeakHoleRoll", { dc }) });
+  if (ok) await setDomain(caster, { ...getDomain(caster), weakHole: [...new Set([...(state.weakHole ?? []), seeker.uuid])] });
+  await chat(seeker, `<p><i class="fas fa-door-open"></i> ${t(ok ? "Domain.WeakHoleOpen" : "Domain.WeakHoleFail", { name: esc(seeker.name), domain: esc(caster.name) })}</p>`);
+  return ok;
+}
+/**
+ * V.6 expansion blast: creatures caught by the expansion but not chosen take Xd6 bludgeoning (X = CE modifier)
+ * and are pushed to the edge of the barrier. The GM targets them and presses the card button.
+ */
+async function promptOutsideBlast(caster) {
+  const state = getDomain(caster);
+  if (!state?.open) return;
+  const tokens = [...(game.user?.targets ?? [])].map((tk) => tk.document ?? tk).filter((d) => d?.actor && d.actor.uuid !== caster.uuid);
+  if (!tokens.length) return ui.notifications.warn(t("Domain.OutsideSelect"));
+  return requestDomainAuthority("outsideBlast", { actorUuid: caster.uuid, openingId: state.openingId, tokenUuids: tokens.map((d) => d.uuid).slice(0, 50) });
+}
+async function outsideBlast(caster, data) {
+  const state = getDomain(caster);
+  if (!game.user.isGM || !state?.open || state.openingId !== data.openingId || !Array.isArray(data.tokenUuids)) return false;
+  if (state.blastDone) { ui.notifications.warn(t("Domain.OutsideDone")); return false; }
+  const scene = game.scenes.get(state.sceneId);
+  if (!scene || !Number.isFinite(state.x)) return false;
+  const n = Math.max(1, ceMod(caster));
+  const roll = await new Roll(`${n}d6`).evaluate();
+  await roll.toMessage?.({ speaker: docClass("ChatMessage").getSpeaker?.({ actor: caster }), flavor: t("Domain.OutsideRoll", { n }) });
+  const edge = ftToPx(scene, state.radius);
+  for (const uuid of data.tokenUuids) {
+    const doc = await fromUuid(uuid).catch(() => null);
+    if (!doc?.actor || doc.parent?.id !== scene.id) continue;
+    await doc.actor.applyDamage?.([{ value: roll.total, type: "bludgeoning" }]);
+    // Pushed to the edge: straight away from the centre, just outside the barrier.
+    const size = (Number(doc.width) || 1) * (scene.grid?.size ?? 100);
+    const cx = doc.x + size / 2, cy = doc.y + size / 2;
+    const d = Math.hypot(cx - state.x, cy - state.y);
+    if (d >= edge) continue;
+    const [ux, uy] = d > 0.5 ? [(cx - state.x) / d, (cy - state.y) / d] : [1, 0];
+    const to = edge + size / 2 + 1;
+    const rect = scene.dimensions?.sceneRect;
+    let nx = state.x + ux * to - size / 2, ny = state.y + uy * to - size / 2;
+    if (rect) { nx = clamp(nx, rect.x, rect.x + rect.width - size); ny = clamp(ny, rect.y, rect.y + rect.height - size); }
+    await doc.update({ x: Math.round(nx), y: Math.round(ny) });
+  }
+  await setDomain(caster, { ...getDomain(caster), blastDone: true });
+  return true;
+}
+
+/** Full turn below 200, an action from 200, a bonus action at 1000 (V.6 Quicker Expansion / Total Mastery). */
+function domainActivationFor(ref) {
+  return ref >= 1000 ? { type: "bonus", value: 1, condition: "" }
+    : ref >= 200 ? { type: "action", value: 1, condition: "" }
+      : { type: "special", value: null, condition: "Full turn: Action + Bonus Action + Movement" };
+}
+async function syncDomainActivation(actor) {
+  if (!actor?.isOwner) return 0;
+  const want = domainActivationFor(refinementOf(actor));
+  let changed = 0;
+  for (const item of actor.items) {
+    const id = item.flags?.jjk5e?.domainActivity;
+    if (!id || item.flags?.jjk5e?.incompleteDomain) continue;
+    const act = item.system?.activities?.get?.(id) ?? item.system?.activities?.[id];
+    if (!act || (act.activation?.type === want.type && (act.activation?.condition ?? "") === want.condition)) continue;
+    await item.update({ [`system.activities.${id}.activation`]: { ...(act.activation ?? {}), ...want, override: true } });
+    changed++;
+  }
+  return changed;
+}
+
 async function findWeakSpot(domainActor, seeker) {
   seeker = seeker ?? canvas?.tokens?.controlled?.[0]?.actor ?? game.user.character;
   if (!seeker) return ui.notifications.warn(t("Notify.NoActor"));
@@ -8982,6 +9088,8 @@ function clashBlocker(actor, opener) {
   const theirs = getDomain(opener);
   const mineLethal = actor.getFlag(MODULE_ID, "domainLethal") !== false;
   if (theirs && theirs.lethal === false && mineLethal) return "nonLethal";
+  // 0.2 Second Expansion: only a creature whose Dexterity score beats the caster's CE score can react.
+  if (theirs?.quick && !((Number(actor.system?.abilities?.dex?.value) || 0) > (Number(opener.system?.abilities?.[ceAbility(opener)]?.value) || 0))) return "tooFast";
   if (globalThis.MidiQOL?.hasUsedReaction?.(actor)) return "reaction";
   const cost = totalActivityCECost(actor, dom.activity);
   const pool = findPool(actor);
@@ -9366,6 +9474,21 @@ Hooks.once("ready", () => {
   });
   Hooks.on("renderChatMessageHTML", (message, html) => {
     try { if (html?.querySelector?.("table")) fitTables(html); } catch (err) { reportError("adaptive tables", err); }
+  });
+  // Domain opening card: the expansion blast is the GM's call (who was chosen, who was not).
+  Hooks.on("renderChatMessageHTML", (message, html) => {
+    const button = html?.querySelector?.("[data-jjk-domain-card=outside]");
+    if (!button) return;
+    if (!game.user.isGM) { button.hidden = true; return; }
+    button.addEventListener("click", async (ev) => {
+      ev.preventDefault();
+      const caster = await domainActor(button.dataset.actor);
+      if (caster) await promptOutsideBlast(caster).catch((err) => reportError("domain blast", err));
+    });
+  });
+  // Quicker Expansion (200) and Total Mastery (1000): the domain activity's activation follows the refinement.
+  Hooks.on("updateActor", (actor, changes, options, userId) => {
+    if (userId === game.user.id && foundry.utils.hasProperty(changes, `flags.${MODULE_ID}.refinement`)) syncDomainActivation(actor).catch((err) => reportError("domain activation", err));
   });
 });
 

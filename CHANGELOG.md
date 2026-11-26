@@ -1,5 +1,18 @@
 # Changelog
 
+## 2.3.0 — Dominio: menos trabajo manual
+- **Golpe de expansión:** la tarjeta de apertura tiene un botón para el DJ. Se marcan como objetivo las criaturas que la expansión no atrapó y se pulsa:
+  - tira Xd6 contundente (X = modificador de EM) y aplica el daño;
+  - empuja a cada una hasta el borde de la barrera, sin salir del mapa;
+  - solo se puede usar una vez por dominio.
+- **Abrir punto débil:** botón en el panel JJK. Selecciona tu token y marca como objetivo el marcador de la barrera.
+  - Solo funciona desde fuera y cuando la barrera ya ha perdido 1/3 de sus PG.
+  - Tiras una salvación de FUE, CAR o SAB contra la CD de EM del lanzador.
+  - Si la superas, se abre un hueco de 10 × 10 ft.
+- **Desventajas automáticas:**
+  - Los ataques desde fuera contra un dominio comprimido (refinamiento 900) se tiran con desventaja.
+  - Contra una expansión de 0,2 s solo pueden reaccionar las criaturas con más Destreza que la puntuación de EM del lanzador.
+- **Tipo de acción para expandir:** el dominio se abre con un turno completo, con una acción a partir de refinamiento 200 y con una acción adicional a partir de 1000. Se actualiza solo al cambiar el refinamiento y al iniciar la partida.
 ## 2.2.0 — Arreglos: panel de avisos, área de choque y código limpio
 - Panel de avisos: el nombre del actor va en su propia línea y ya no se corta («MALDICIÓN DE GRAD…»). El tipo de aviso y la hora quedan arriba.
 - Área de choque de dominios: mientras dura un choque, el mapa muestra en rojo el área compartida del V.6 (350 ft para dos dominios y 175 ft más por cada dominio extra). Está centrada entre los lanzadores y no sale del mapa. Se borra sola cuando el choque termina. Es solo visual: las reglas siguen usando el radio de cada dominio.
