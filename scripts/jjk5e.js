@@ -3100,6 +3100,9 @@ async function techniqueBuilder(actor = null) {
     <p class="notes">${t("Builder.Intro")}</p>
     <div class="form-group"><label>${t("Builder.Name")}</label><input type="text" name="name" required></div>
     <label><input type="checkbox" name="earlyDomain"> ${t("Builder.EarlyDomain")}</label>
+    ${(() => { const names = Object.keys(game.modules.get(MODULE_ID)?.api?.fx?.table?.techniques ?? {}).sort((a, b) => a.localeCompare(b));
+      return names.length ? `<div class="form-group"><label>${t("Builder.FxAs")}</label><select name="fxAs"><option value="">${t("Builder.FxAuto")}</option>
+        ${names.map((n) => `<option value="${esc(n)}">${esc(n)}</option>`).join("")}</select><p class="hint">${t("Builder.FxHint")}</p></div>` : ""; })()}
     ${TECHNIQUE_SLOTS.map((slot, i) => builderRow(i, slot)).join("")}</div>`;
   const spec = await foundry.applications.api.DialogV2.prompt({
     window: { title: t("Builder.Title"), resizable: true }, classes: ["jjk5e-ui", "jjk5e-dialog"], position: { width: 640, height: 720 }, content, rejectClose: false,
@@ -3461,7 +3464,7 @@ Hooks.once("init", () => {
     applyScaling, openPanel, maximumOutput, setReducedOutput, setSoulAwareness, setLimb, rollLimb,
     summon, dismissSummons, syncResource, missingPrereqs, applyCEEffects, activateGroup, endGroup,
     openGMStart, undoAutomation, updateAutomation, updateAllAutomation, outdatedItems, burnoutRecovery, fallDamage, applySoulDamage, clearSoulDamage,
-    techniqueBuilder, buildTechniqueItems, itemTheme, ceMeterState,
+    techniqueBuilder, buildTechniqueItems, itemTheme, ceMeterState, aaHandles,
     cleanupDomains: async () => { const n = await sweepDomainLeftovers(); await game.modules.get(MODULE_ID)?.api?.fx?.sweepBackdrops?.(); return n; }
   };
 });
@@ -4066,10 +4069,27 @@ function damageKind(activity) {
   return types[0] ?? null;
 }
 
+/** Same hue, lightness 78 % and saturation at most 70 %: a tint that keeps JB2A's detail readable. */
+function lightHex(hex) {
+  const m = /^#?([0-9a-f]{6})$/i.exec(String(hex ?? ""));
+  if (!m) return null;
+  const [r, g, b] = [0, 2, 4].map((i) => parseInt(m[1].slice(i, i + 2), 16) / 255);
+  const max = Math.max(r, g, b), min = Math.min(r, g, b), d = max - min;
+  let h = 0;
+  if (d) h = max === r ? ((g - b) / d) % 6 : max === g ? (b - r) / d + 2 : (r - g) / d + 4;
+  h = ((h * 60) + 360) % 360;
+  const l0 = (max + min) / 2, s0 = d ? d / (1 - Math.abs(2 * l0 - 1)) : 0;
+  const sat = Math.min(0.7, s0), l = 0.78, a = sat * Math.min(l, 1 - l);
+  const f = (n) => { const k = (n + h / 30) % 12; return Math.round(255 * (l - a * Math.max(-1, Math.min(k - 3, 9 - k, 1)))); };
+  return `#${[f(0), f(8), f(4)].map((v) => v.toString(16).padStart(2, "0")).join("")}`;
+}
 /** Light tint from the item's identity seal (same family colour as the sheet), or null. */
 function familyTint(item) {
   try {
     if (!setting("animFamilyTint")) return null;
+    // The technique's own colour (the same one its ink seal uses), lightened; otherwise the family seal's colour.
+    const own = game.modules.get(MODULE_ID)?.api?.fx?.fxFor?.(item)?.color;
+    if (own) return lightHex(own);
     const id = game.modules.get(MODULE_ID)?.api?.identityOf?.(item);
     if (!id || !Number.isFinite(id.hue)) return null;
     const h = id.hue / 360, sat = Math.min(0.7, (parseFloat(id.sat) || 50) / 100), l = 0.78;

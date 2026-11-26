@@ -146,14 +146,10 @@ const isJJKEffect = (effect) => { const f = effect?.flags?.[ID] ?? {}; return f.
 
 Hooks.once("init", () => {
   game.settings.register(ID, "combatCEBar", { scope: "client", config: true, type: Boolean, default: true,
-    name: L("Cursed energy in the combat tracker", "Energía maldita en el registro de combate"),
-    hint: L("A thin meter under each combatant's name with their CE, Reduced Output, burnout and The Zone. It updates by itself.",
-      "Una barra fina bajo el nombre de cada combatiente con su EM, Reduced Output, burnout y The Zone. Se actualiza sola."),
-    onChange: () => paintAll() });
+    name: "JJK5E.Settings.combatCEBar.Name", hint: "JJK5E.Settings.combatCEBar.Hint", onChange: () => paintAll() });
   game.settings.register(ID, "combatCEVisibility", { scope: "world", config: true, type: String, default: "party",
-    choices: { owners: L("Only each player's own", "Solo la de cada jugador"), party: L("Player characters to everyone", "Los personajes jugadores, para todos"), all: L("Everyone, NPCs included", "Todos, PNJ incluidos") },
-    name: L("Who sees cursed energy in combat", "Quién ve la energía maldita en combate"),
-    hint: L("The GM always sees every combatant. Hidden combatants are never shown to players.", "El DJ siempre ve a todos. Los combatientes ocultos nunca se muestran a los jugadores."),
+    choices: { owners: "JJK5E.Settings.combatCEVisibility.owners", party: "JJK5E.Settings.combatCEVisibility.party", all: "JJK5E.Settings.combatCEVisibility.all" },
+    name: "JJK5E.Settings.combatCEVisibility.Name", hint: "JJK5E.Settings.combatCEVisibility.Hint",
     onChange: () => globalThis.ui?.combat?.render?.() });
 });
 

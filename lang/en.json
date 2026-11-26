@@ -619,6 +619,36 @@
       "animFamilyTint": {
         "Name": "Animations in their family colour",
         "Hint": "Tints technique animations with their family seal colour (fire, void, shadow…)."
+      },
+      "sfxEnabled": {
+        "Name": "Technique sounds",
+        "Hint": "Plays the module's own sound for each technique, hit, domain, clash and Black Flash."
+      },
+      "sfxVolume": {
+        "Name": "Technique sound volume",
+        "Hint": "Multiplied by Foundry's interface volume."
+      },
+      "techniqueFX": {
+        "Name": "Technique effects",
+        "Hint": "Ink effects tinted with each technique's colour (needs Sequencer).",
+        "auto": "Seal on every cast, own impacts without JB2A",
+        "own": "Only the module's ink effects",
+        "off": "Off"
+      },
+      "domainBackdrops": {
+        "Name": "Domain backdrops",
+        "Hint": "Fills an open domain's barrier with its technique's backdrop. Each owner can change it from the JJK panel."
+      },
+      "combatCEBar": {
+        "Name": "Cursed energy in the combat tracker",
+        "Hint": "A thin meter under each combatant's name with their CE, Reduced Output, burnout and The Zone. It updates by itself."
+      },
+      "combatCEVisibility": {
+        "Name": "Who sees cursed energy in combat",
+        "Hint": "The GM always sees every combatant. Hidden combatants are never shown to players.",
+        "owners": "Only each player's own",
+        "party": "Player characters to everyone",
+        "all": "Everyone, NPCs included"
       }
     },
     "Feats": {
@@ -1011,7 +1041,10 @@
       "DescriptionHint": "Rules text of the feature",
       "Create": "Create technique",
       "Created": "{name}: {n} technique feature(s) created in the Items directory.",
-      "NoPermission": "You need permission to create items (ask the GM)."
+      "NoPermission": "You need permission to create items (ask the GM).",
+      "FxAs": "Sound and effect of",
+      "FxAuto": "Automatic (from its theme)",
+      "FxHint": "Borrow the sound and ink effect of an existing technique."
     },
     "Opt": {
       "Title": "Optional rules",

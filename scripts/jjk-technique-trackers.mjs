@@ -324,7 +324,21 @@ async function onTurnStart(actor) {
 }
 
 /** Fa Jin: a melee attack card whose every target was missed grants one Jin charge. */
+const midiOn = () => !!game.modules.get("midi-qol")?.active;
+const isMelee = (activity, item) => (activity?.attack?.type?.value ?? item?.system?.attackType ?? (item?.system?.range?.value > 5 ? "ranged" : "melee")) === "melee";
+
+/** Fa Jin under Midi-QOL: the workflow knows the targets that were hit; it runs on the attacker's client. Pure-ish, tested. */
+export async function onMidiAttack(workflow) {
+  const item = workflow?.item, actor = workflow?.actor ?? item?.actor;
+  if (!actor?.isOwner) return false;
+  const def = trackersFor(actor).find((d) => d.auto?.meleeMiss);
+  if (!def || !isMelee(workflow.activity, item) || workflow.isCritical) return false;
+  if (!(workflow.targets?.size) || (workflow.hitTargets?.size ?? 0) > 0) return false;
+  return write(actor, def, applyOp(actor, def, "add", def.auto.meleeMiss));
+}
+
 async function onAttackCard(message) {
+  if (midiOn()) return;                                  // Midi folds attacks into one card: its own hook handles Fa Jin
   const d5 = message?.flags?.dnd5e;
   if (d5?.messageType !== "roll" || d5.roll?.type !== "attack") return;
   let item = null;
@@ -335,7 +349,7 @@ async function onAttackCard(message) {
   if (!def) return;
   let activity = null;
   try { activity = d5.activity?.uuid ? globalThis.fromUuidSync?.(d5.activity.uuid) : null; } catch { /* */ }
-  const melee = (activity?.attack?.type?.value ?? item.system?.attackType ?? (item.system?.range?.value > 5 ? "ranged" : "melee")) === "melee";
+  const melee = isMelee(activity, item);
   const roll = message.rolls?.[0];
   const targets = [...(d5.targets ?? [])].filter((t) => Number.isFinite(Number(t.ac)));
   if (!melee || !roll || roll.isCritical || !targets.length) return;
@@ -345,7 +359,7 @@ async function onAttackCard(message) {
 Hooks.once("ready", () => {
   if (game.system?.id !== "dnd5e") return;
   const api = game.modules.get(ID)?.api;
-  if (api) api.trackers = { TRACKERS, trackersFor, readState, panelSection, act };
+  if (api) api.trackers = { TRACKERS, trackersFor, readState, panelSection, act, onMidiAttack };
   Hooks.on("dnd5e.restCompleted", (actor, result) => {
     if (!actor || !writer(actor)) return;
     resetAll(actor, result?.longRest ? "lr" : "sr").then(() => (result?.longRest ? resetAll(actor, "sr") : null)).catch((err) => console.warn(`${ID} | trackers`, err));
@@ -359,6 +373,7 @@ Hooks.once("ready", () => {
     if (actor && writer(actor)) onTurnStart(actor).catch((err) => console.warn(`${ID} | trackers`, err));
   });
   Hooks.on("createChatMessage", (message) => { onAttackCard(message).catch(() => null); });
+  if (midiOn()) Hooks.on("midi-qol.AttackRollComplete", (workflow) => { onMidiAttack(workflow).catch(() => null); });
   // The JJK panel shows these trackers: redraw it when they change.
   Hooks.on("updateActor", (actor, changes) => {
     if (!foundry.utils.hasProperty(changes ?? {}, `flags.${ID}.${FLAG}`)) return;

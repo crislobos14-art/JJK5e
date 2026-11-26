@@ -619,6 +619,36 @@
       "animFamilyTint": {
         "Name": "Animaciones con el color de su familia",
         "Hint": "Tiñe las animaciones de técnica con el color del sello de su familia (fuego, vacío, sombra…)."
+      },
+      "sfxEnabled": {
+        "Name": "Sonidos de técnicas",
+        "Hint": "Reproduce el sonido propio del módulo para cada técnica, impacto, dominio, choque y Black Flash."
+      },
+      "sfxVolume": {
+        "Name": "Volumen de los sonidos de técnicas",
+        "Hint": "Se multiplica por el volumen de interfaz de Foundry."
+      },
+      "techniqueFX": {
+        "Name": "Efectos de técnicas",
+        "Hint": "Efectos de tinta con el color de cada técnica (necesita Sequencer).",
+        "auto": "Sello en cada uso, impactos propios sin JB2A",
+        "own": "Solo los efectos de tinta del módulo",
+        "off": "Desactivados"
+      },
+      "domainBackdrops": {
+        "Name": "Fondos de dominio",
+        "Hint": "Rellena la barrera de un dominio abierto con el fondo de su técnica. Cada dueño puede cambiarlo desde el panel JJK."
+      },
+      "combatCEBar": {
+        "Name": "Energía maldita en el registro de combate",
+        "Hint": "Una barra fina bajo el nombre de cada combatiente con su EM, Reduced Output, burnout y The Zone. Se actualiza sola."
+      },
+      "combatCEVisibility": {
+        "Name": "Quién ve la energía maldita en combate",
+        "Hint": "El DJ siempre ve a todos. Los combatientes ocultos nunca se muestran a los jugadores.",
+        "owners": "Solo la de cada jugador",
+        "party": "Los personajes jugadores, para todos",
+        "all": "Todos, PNJ incluidos"
       }
     },
     "Feats": {
@@ -1011,7 +1041,10 @@
       "DescriptionHint": "Texto de reglas del rasgo",
       "Create": "Crear técnica",
       "Created": "{name}: {n} rasgo(s) de técnica creados en el directorio de Objetos.",
-      "NoPermission": "Necesitas permiso para crear objetos (pídeselo al GM)."
+      "NoPermission": "Necesitas permiso para crear objetos (pídeselo al GM).",
+      "FxAs": "Sonido y efecto de",
+      "FxAuto": "Automático (según su tema)",
+      "FxHint": "Usa el sonido y el efecto de tinta de una técnica existente."
     },
     "Opt": {
       "Title": "Reglas opcionales",
