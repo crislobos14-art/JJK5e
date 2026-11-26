@@ -283,10 +283,15 @@ export function createEnv({ settings: overrides = {} } = {}) {
     async combatRound(round, combat = {}) { await fire("updateCombat", { round, combatants: [], ...combat }, { round }, {}, user.id); await env.settle(); }
   };
 
-  // Load the module: replace the ESM import with the rules namespace and expose internals.
+  // Load the production modules into the same Foundry mock realm.
   let src = fs.readFileSync(path.join(ROOT, "scripts/jjk5e.js"), "utf8");
-  src = src.replace(/^import \{([^}]+)\} from "\.\/jjk5e-rules\.mjs";$/m, (_, names) => `const {${names}} = __rules;`);
+  src = src.replace(/^import \{([^}]+)\} from "\.\/jjk5e-rules\.mjs";\r?$/m, (_, names) => `const {${names}} = __rules;`);
+  src = src.replace(/^import \{[^}]+\} from "(\.\/jjk5e-(?:ce-engine|domain-lifecycle|integrations)\.mjs)";\r?$/gm,
+    (_, file) => fs.readFileSync(path.join(ROOT, "scripts", file), "utf8").replace(/^export /gm, ""));
   const names = [...src.matchAll(/^(?:async )?function (\w+)|^const (\w+) =/gm)].map((m) => m[1] ?? m[2]);
+  for (const [, binding] of src.matchAll(/^const \{\s*([\w,\s]+)\} = create(?:CEEngine|Integrations|DomainLifecycle)\(/gm)) {
+    names.push(...binding.split(",").map(name => name.trim()).filter(Boolean));
+  }
   src += `\n;__expose({${names.join(",")}});`;
   context.__rules = rules;
   context.__expose = (o) => { env.jjk = o; };

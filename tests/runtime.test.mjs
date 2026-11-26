@@ -1069,6 +1069,34 @@ test("CE receipt cannot authorize another actor's identically named activity",as
   assert.equal(J.cePostAllowed({...act,actor:{uuid:"Actor.other"}},usage),false);
 });
 
+test("CE authority handoff refunds a reservation without native execution and retains an uncertain one", async () => {
+  const { env, actor, J } = await setup({ settings: { transactionalCE: true } });
+  const other = env.addActor({ items: [J.findPool(actor).toObject()] });
+  const activity = { name: "Technique", type: "feat", flags: { jjk5e: { ceCosts: { a: 6 } } }, system: { activities: { a: { id: "a" } } } };
+  const reserve = async (caster, id) => {
+    const [item] = await caster.createEmbeddedDocuments("Item", [activity]);
+    const payload = { actorUuid: caster.uuid, itemId: item.id, activityId: "a", id, scaling: 0 };
+    assert.equal((await J.handleCEAuthority({ operation: "reserve", payload }, { user: env.game.user })).cost, 6);
+    return payload;
+  };
+  const unstarted = await reserve(actor, "gm1-unstarted");
+  const uncertain = await reserve(other, "gm1-started");
+  assert.equal(await J.handleCEAuthority({ operation: "start", payload: uncertain }, { user: env.game.user }), true);
+
+  const nextGM = { id: "gm2", active: true, isGM: true };
+  env.game.users.set(nextGM.id, nextGM);
+  env.game.users.activeGM = nextGM;
+  const expires = Date.now() + 130000;
+  assert.equal((await J.recoverCEActor(actor, expires)).length, 0, "old GM loses write authority");
+  env.game.user = nextGM;
+  assert.equal((await J.recoverCEActor(actor, expires))[0].state, "refunded");
+  assert.equal((await J.recoverCEActor(other, expires))[0].state, "review");
+  assert.equal(J.poolValue(J.findPool(actor)), 20);
+  assert.equal(J.poolValue(J.findPool(other)), 14);
+  assert.equal(await J.handleCEAuthority({ operation: "start", payload: unstarted }, { user: nextGM }), false);
+  assert.equal(await J.handleCEAuthority({ operation: "start", payload: uncertain }, { user: nextGM }), false);
+});
+
 
 test("Simple Domain: independent shared HP, duplicate area event and overflow",async()=>{
   const {actor,J}=await setup();

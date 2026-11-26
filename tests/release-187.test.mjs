@@ -1,4 +1,4 @@
-// v1.87: feat picker groups by technique/race/class; closing a domain from a stale HUD; resizable JJK windows.
+// Feat picker groups by technique/race/class and domain controls target their original opening.
 import test from "node:test";
 import assert from "node:assert/strict";
 import { createEnv } from "./harness/foundry-mock.mjs";
@@ -19,12 +19,26 @@ test("feat picker groups eligible feats by the actor's technique, race and class
   assert.match(html, /data-fit="technique"/);
 });
 
-test("closing from a HUD with a stale opening still closes the domain", async () => {
+test("a delayed close cannot affect a newer opening, and a repeat close is harmless", async () => {
   const env = createEnv(); await env.boot(); const J = env.jjk;
   const actor = env.addActor({ name: "Yuji", system: { abilities: { wis: { value: 16 } }, attributes: { prof: 3 } }, items: [POOL] });
   await J.openDomain(actor, { name: "Domain" }); await env.settle();
-  const ok = await J.handleDomainAuthority({ operation: "close", payload: { actorUuid: actor.uuid, openingId: "stale" } }, { user: env.game.user });
+  const close = (openingId) => J.handleDomainAuthority(
+    { operation: "close", payload: { actorUuid: actor.uuid, openingId } }, { user: env.game.user });
+  const first = J.getDomain(actor).openingId;
+  assert.equal(await close(first), true);
   await env.settle();
-  assert.equal(ok, true);
+  await J.kindEffect(actor, "burnout").delete();
+  await env.settle();
+  await J.openDomain(actor, { name: "Domain" }); await env.settle();
+  const second = J.getDomain(actor).openingId;
+  assert.notEqual(second, first);
+  assert.equal(await close(first), false);
+  assert.equal(await close(null), false);
+  assert.equal(J.getDomain(actor).openingId, second);
+  assert.ok(actor.effects.some(effect => effect.uuid === second));
+  assert.equal(await close(second), true);
+  await env.settle();
   assert.equal(J.getDomain(actor), null);
+  assert.equal(await close(second), true);
 });
