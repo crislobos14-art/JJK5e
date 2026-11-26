@@ -2677,6 +2677,12 @@ function panelHTML(actor, tab = "combat") {
     </div></fieldset>${schoolPanel(actor, gm)}`;
 
   const bt = Number(actor.getFlag(MODULE_ID, "breakthroughs")) || 0;
+  // Only the effects this actor really has: an empty "End effects" box would be a section with nothing to do.
+  const gmClears = gm ? [
+    inBurnout(actor) ? pbtn("clearBurnout", "fas fa-brain", `${t("Common.End")}: ${t("Burnout.Name")}`) : "",
+    zone ? pbtn("clearZone", "fas fa-bolt-lightning", `${t("Common.End")}: ${t("Zone.Name")}`) : "",
+    actor.getFlag(MODULE_ID, "pendingBlackFlash") ? pbtn("clearBF", "fas fa-xmark", `${t("Common.End")}: Black Flash`) : "",
+    domainOpen(actor) ? pbtn("closeDomain", "fas fa-circle-xmark", t("Domain.Close")) : ""].join("") : "";
   const gmTab = gm ? `<p class="jjk-note">${t("Panel.GMHint")}</p>
     <fieldset><legend>${t("Panel.GMValues")}</legend><div class="jjk-grid">
       ${pool ? pbtn("gmCE", "fas fa-bolt", `${t("Panel.GMSetCE")} (${value}/${max})`) : ""}
@@ -2690,11 +2696,11 @@ function panelHTML(actor, tab = "combat") {
     </div>
     <div class="jjk-row jjk-stepper"><span class="jjk-lbl-l">${t("Breakthrough.Name")}</span>
       ${pbtn("gmBreakthrough", "", "−", { data: 'data-d="-"' })}<strong class="jjk-num">${bt}</strong>${pbtn("gmBreakthrough", "", "+", { data: 'data-d="+"' })}</div></fieldset>
-    <fieldset><legend>${t("Panel.GMClear")}</legend><div class="jjk-grid">
-      ${inBurnout(actor) ? pbtn("clearBurnout", "fas fa-brain", `${t("Common.End")}: ${t("Burnout.Name")}`) : ""}
-      ${zone ? pbtn("clearZone", "fas fa-bolt-lightning", `${t("Common.End")}: ${t("Zone.Name")}`) : ""}
-      ${actor.getFlag(MODULE_ID, "pendingBlackFlash") ? pbtn("clearBF", "fas fa-xmark", `${t("Common.End")}: Black Flash`) : ""}
-      ${domainOpen(actor) ? pbtn("closeDomain", "fas fa-circle-xmark", t("Domain.Close")) : ""}
+    <fieldset><legend>${t("Panel.GMClear")}</legend>${gmClears ? `<div class="jjk-grid">${gmClears}</div>` : `<p class="jjk-note">${t("Panel.NothingToClear")}</p>`}</fieldset>
+    <fieldset><legend>${t("Panel.GMWorld")}</legend><div class="jjk-grid">
+      ${pbtn("openHealth", "fas fa-stethoscope", t("Health.Title"))}
+      ${pbtn("openSetup", "fas fa-sliders", t("Setup.Title"))}
+      ${pbtn("groupSave", "fas fa-people-group", t("Bridge.GroupSave"))}
       ${pbtn("updateAll", "fas fa-arrows-rotate", t("Update.AllActors"))}
     </div></fieldset>` : "";
 
@@ -9365,6 +9371,13 @@ Hooks.once("init", () => {
   game.settings.register(MODULE_ID, "midiBackup", { scope: "world", config: false, type: Object, default: {} });
 });
 Object.assign(PANEL_ACTIONS, { midiAuto: () => midiAutomate(), midiRestore: () => midiRestore() });
+// 2.15: the GM tab reaches the setup, health check and group save of jjk-setup.mjs / jjk-bridges.mjs.
+Object.assign(PANEL_ACTIONS, {
+  openHealth: () => game.modules.get(MODULE_ID)?.api?.setup?.openHealth?.(),
+  openSetup: () => game.modules.get(MODULE_ID)?.api?.setup?.openSetup?.(),
+  groupSave: () => game.modules.get(MODULE_ID)?.api?.bridges?.promptGroupSave?.()
+});
+for (const a of ["openHealth", "openSetup", "groupSave"]) GM_PANEL_ACTIONS.add(a);
 GM_PANEL_ACTIONS.add("midiAuto"); GM_PANEL_ACTIONS.add("midiRestore");
 MENU_ACTIONS.splice(MENU_ACTIONS.length - 1, 0, ["midiAuto", "fa-solid fa-wand-magic-sparkles", "Midi.Title", () => midiAutomate(), true]);
 

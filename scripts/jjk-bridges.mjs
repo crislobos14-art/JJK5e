@@ -149,7 +149,7 @@ export async function promptGroupSave() {
   const label = state?.open ? t("Bridge.DomainSave", { name: caster.name }) : "";
   const abilities = SAVE_KEYS.map((k) => `<option value="${k}" ${k === "wis" ? "selected" : ""}>${esc(CONFIG.DND5E?.abilities?.[k]?.label ? game.i18n.localize(CONFIG.DND5E.abilities[k].label) : k)}</option>`).join("");
   const result = await foundry.applications.api.DialogV2.prompt({ classes: ["jjk5e-ui", "jjk5e-dialog"], rejectClose: false,
-    window: { title: t("Bridge.GroupSave"), icon: "fas fa-people-group" },
+    window: { title: t("Bridge.GroupSave"), icon: "fas fa-people-group", resizable: true },
     content: `<p class="jjk-note">${t(active("monks-tokenbar") ? "Bridge.GroupSaveMonks" : "Bridge.GroupSaveChat")}</p>
       <label>${t("Bridge.Ability")} <select name="ability">${abilities}</select></label>
       <label>${t("Bridge.DC")} <input type="number" name="dc" min="1" max="40" value="${dc}"></label>

@@ -810,7 +810,8 @@ Hooks.once("ready", () => {
     });
   };
   for (const hook of ["updateCombat","deleteCombat","createCombat","moveToken","updateActor","createItem","updateItem","deleteItem","createActiveEffect","updateActiveEffect","deleteActiveEffect","dnd5e.postUseActivity","midi-qol.RollComplete"]) Hooks.on(hook,refreshCombat);
-  for(const h of ["renderChatMessageHTML","renderChatMessage"]) Hooks.on(h,(message,html)=>styleChat(message,html));
+  // Foundry 14 only: renderChatMessage is the deprecated jQuery hook and would add a compatibility warning per message.
+  Hooks.on("renderChatMessageHTML",(message,html)=>styleChat(message,html));
   Hooks.on("renderTokenHUD",(app,html)=>queueMicrotask(()=>styleEmbedded(html??app.element)));
   Hooks.on("renderCompendiumDirectory",(app,html)=>queueMicrotask(()=>styleEmbedded(html??app.element)));
   Hooks.on("renderSettingsConfig",(app,html)=>queueMicrotask(()=>styleEmbedded(html??app.element)));

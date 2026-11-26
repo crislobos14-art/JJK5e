@@ -1,5 +1,18 @@
 # Changelog
 
+## 2.15.0 — Auditoría de botones, pestañas y tablas
+- **Revisión completa:** cada botón del módulo tiene una acción que lo atiende, cada ventana y diálogo se puede redimensionar, y todas las claves de texto existen en español e inglés. Lo comprueba una prueba automática nueva.
+- **Tablas:**
+  - En ventanas estrechas, las celdas de la vista en tarjetas ya no se salen por la derecha.
+  - Las tablas con campos de formulario se desplazan de lado dentro de su recuadro, en vez de desbordar la ventana.
+  - Los botones de fila (Extremidades: OK / Rota / Perdida; Reputación: − / +) quedan juntos en una línea de la tarjeta.
+  - La barra de reputación queda alineada con su valor.
+- **Pestañas del panel:** en un panel muy estrecho las pestañas pasan a dos filas, en vez de cortar sus nombres.
+- **Pestaña GM:**
+  - «Terminar efectos» muestra solo los efectos que el personaje tiene y, si no hay ninguno, lo dice.
+  - La nueva sección «Mundo» reúne Diagnóstico JJK, Configurar JJK 5e, Pedir salvación de grupo y Actualizar automatización de todos los actores. Antes esa actualización aparecía dentro de «Terminar efectos».
+- **Foundry 14:** se quitó el gancho obsoleto `renderChatMessage`, que habría añadido un aviso de compatibilidad en cada mensaje.
+- El diálogo de salvación de grupo se puede redimensionar.
 ## 2.14.0 — Configuración, diagnóstico e integraciones
 - **Configurar JJK 5e:** configuración rápida en tres preguntas (automatización, efectos, quién ve la EM) y todos los ajustes del módulo agrupados por función. Está en los ajustes del módulo y en el centro del DJ.
 - **Diagnóstico JJK (DJ):**

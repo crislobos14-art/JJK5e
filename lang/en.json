@@ -385,7 +385,9 @@
       "GMSetCE": "Set CE",
       "SpendShort": "Spend",
       "RegainShort": "Regain",
-      "OpenFull": "Open JJK controls"
+      "OpenFull": "Open JJK controls",
+      "NothingToClear": "This character has no effects to end.",
+      "GMWorld": "World"
     },
     "Notify": {
       "CEWorkflowUnverified": "JJK5e: CE payment could not be verified for this Midi-QOL workflow. The activity was stopped; consult the GM.",

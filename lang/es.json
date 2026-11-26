@@ -385,7 +385,9 @@
       "GMSetCE": "Fijar CE",
       "SpendShort": "Gastar",
       "RegainShort": "Recuperar",
-      "OpenFull": "Abrir controles JJK"
+      "OpenFull": "Abrir controles JJK",
+      "NothingToClear": "Este personaje no tiene efectos que terminar.",
+      "GMWorld": "Mundo"
     },
     "Notify": {
       "CEWorkflowUnverified": "JJK5e: no se pudo verificar el pago de EM de esta actividad de Midi-QOL. Se detuvo la ejecución; consulta al GM.",
