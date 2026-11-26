@@ -188,7 +188,21 @@
       "MultiRounds": "{n} rounds",
       "NeedWeakSpot": "{name} is inside the domain and has not found its weak spot (DC 30 Perception): the barrier cannot be damaged from inside yet.",
       "CloseFailed": "JJK 5e: the domain could not be closed (no active GM or the GM declined).",
-      "ClashResultNow": "<strong>{win}</strong> wins (+{diff}). {lose}'s domain breaks <strong>now</strong>."
+      "ClashResultNow": "<strong>{win}</strong> wins (+{diff}). {lose}'s domain breaks <strong>now</strong>.",
+      "Quick": "0.2 second expansion",
+      "QuickHint": "Refinement 400: your next expansion costs half, lasts until the end of your turn and affects every creature. Only creatures with a higher Dexterity than your CE score can react.",
+      "QuickDescription": "0.2 second expansion: lasts until the end of your turn and affects every creature inside.",
+      "Compress": "Compress domain",
+      "CompressHint": "Refinement 900, bonus action: from outside the domain becomes a 5 ft circle; attacks against it from outside have disadvantage. Lasts until the domain ends.",
+      "Compressed": "{name} compresses their domain: from outside it is a 5 ft circle and attacks against it have disadvantage.",
+      "Train": "Train refinement",
+      "TrainHint": "Once per day: spend CE up to your CE modifier; each point adds 1 refinement. That CE only returns the next day.",
+      "TrainPrompt": "CE to spend (max {max}):",
+      "TrainDone": "You already trained your refinement today.",
+      "TrainNoCE": "Not enough CE to train.",
+      "TrainDoneChat": "{name} trains their domain: +{n} refinement ({total}).",
+      "CasualtyChat": "Domain casualty ({target}): {name} gains +{n} refinement ({total}).",
+      "SuperiorityChat": "Domain superiority: {name} gains +{n} refinement ({total}). Not again this month or against the same rival."
     },
     "Burnout": {
       "Name": "Technique Burnout",
