@@ -203,7 +203,19 @@
       "TrainDoneChat": "{name} entrena su dominio: +{n} de refinamiento ({total}).",
       "CasualtyChat": "Víctima del dominio ({target}): {name} gana +{n} de refinamiento ({total}).",
       "SuperiorityChat": "Superioridad de dominio: {name} gana +{n} de refinamiento ({total}). No se repite este mes ni contra el mismo rival.",
-      "ClashZone": "Choque de dominios"
+      "ClashZone": "Choque de dominios",
+      "OutsideButton": "Golpe de expansión ({n}d6) a los objetivos",
+      "OutsideSelect": "Marca como objetivo a las criaturas que la expansión no atrapó.",
+      "OutsideDone": "El golpe de expansión ya se aplicó en este dominio.",
+      "OutsideRoll": "Golpe de expansión: {n}d6 contundente; los objetivos salen empujados hasta el borde",
+      "WeakHole": "Abrir punto débil",
+      "WeakHoleTip": "Fuera de un dominio con 1/3 de sus PG perdidos: selecciona tu token, marca el marcador de la barrera y haz una salvación de FUE, CAR o SAB.",
+      "WeakHoleSelect": "Selecciona tu token y marca como objetivo el marcador de la barrera.",
+      "WeakHoleTooSoon": "La barrera aún no ha perdido 1/3 de sus PG.",
+      "WeakHoleHint": "Elige la característica de la salvación (CD {dc}). Si superas la tirada, abres un hueco de 10 × 10 ft mientras te concentres; quien entre sufre el impacto garantizado.",
+      "WeakHoleRoll": "Abrir punto débil (CD {dc})",
+      "WeakHoleOpen": "{name} abre un hueco de 10 × 10 ft en el dominio de {domain} mientras se concentre.",
+      "WeakHoleFail": "{name} no consigue abrir el dominio de {domain}."
     },
     "Burnout": {
       "Name": "Technique Burnout",

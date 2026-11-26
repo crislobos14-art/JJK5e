@@ -70,7 +70,8 @@ export function createDomainLifecycle({
       name: `${t("Domain.Zone")}: ${actor.name}`, color: "#a77fe0", actorUuid: actor.uuid, openingId: state.openingId })
       .catch((err) => reportError("domain zone", err));
     await chat(actor, `<div class="jjk5e-card"><h3><i class="fas fa-circle-half-stroke"></i> ${t("Domain.Opened", { name: esc(actor.name) })}</h3>`
-      + `<p>${state.noBarrier ? t(incomplete ? "Domain.IncompleteStats" : "Domain.BarrierlessStats", { radius }) : t("Domain.BarrierStats", { hp: max, ac: state.ac, ref, radius })}</p><p class="hint">${t("Domain.OutsideHint", { n: Math.max(mod, 1) })}</p></div>`)
+      + `<p>${state.noBarrier ? t(incomplete ? "Domain.IncompleteStats" : "Domain.BarrierlessStats", { radius }) : t("Domain.BarrierStats", { hp: max, ac: state.ac, ref, radius })}</p><p class="hint">${t("Domain.OutsideHint", { n: Math.max(mod, 1) })}</p>`
+      + `<button type="button" data-jjk-domain-card="outside" data-actor="${esc(actor.uuid)}"><i class="fas fa-burst"></i> ${t("Domain.OutsideButton", { n: Math.max(mod, 1) })}</button></div>`)
       .catch((err) => reportError("domain opening chat", err));
     // Clashes change the rival's domain too, which only the GM can always write: the active GM resolves them.
     const claim = actor.getFlag(MODULE_ID, "domainReactionClaim");
