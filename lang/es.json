@@ -273,7 +273,8 @@
       "AdvanceMinute": "Avanzar 1 minuto",
       "AdvanceMinuteHint": "El tiempo del mundo avanza 60 s: baja el Reduced Output de quien no gastó EM y caducan los efectos por tiempo.",
       "SustainPrompt": "¿La técnica con máxima potencia sigue activa después de este turno (efecto con duración)? Si es así, otra máxima potencia mientras dure pedirá la tirada de Reduced Output.",
-      "Sustained": "Máxima potencia activa"
+      "Sustained": "Máxima potencia activa",
+      "ResetReduced": "Quitar Reduced Output"
     },
     "Soul": {
       "Name": "Daño al alma",
@@ -650,6 +651,10 @@
         "owners": "Solo la de cada jugador",
         "party": "Los personajes jugadores, para todos",
         "all": "Todos, PNJ incluidos"
+      },
+      "screenShake": {
+        "Name": "Temblor de pantalla",
+        "Hint": "Sacude la cámara con el temblor nativo de Foundry 14 en un Black Flash, al abrir un dominio y en un choque de dominios. Solo en la escena donde ocurre; se omite si el sistema pide reducir el movimiento."
       }
     },
     "Feats": {
@@ -1462,6 +1467,188 @@
       "Pool": "Reserva de energía maldita del hechicero.",
       "Folder": "JJK — Hechiceros generados",
       "Created": "Creado {name} (VD {cr})."
+    },
+    "Health": {
+      "Title": "Diagnóstico JJK",
+      "Open": "Abrir diagnóstico",
+      "Hint": "Revisa compatibilidad, dominios atascados, EM pendiente y objetos desactualizados, con arreglo de un clic.",
+      "FixSetting": "Ajustar",
+      "FixDomains": "Limpiar dominios",
+      "Review": "Revisar",
+      "Update": "Actualizar",
+      "Fixed": "Arreglado: {name}",
+      "FixFailed": "No se pudo arreglar. Revisa la consola (F12).",
+      "AllGood": "Todo en orden",
+      "AllGoodHint": "No se encontraron problemas de compatibilidad ni restos de dominios.",
+      "Recheck": "Volver a revisar",
+      "StartupTitle": "JJK 5e encontró {n} aviso(s) de compatibilidad",
+      "Issue": {
+        "midi-missing": {
+          "Title": "Midi-QOL no está activo",
+          "Detail": "JJK 5e lo necesita para automatizar ataques, salvaciones, Black Flash y el sure-hit de los dominios."
+        },
+        "dae-missing": {
+          "Title": "DAE no está activo",
+          "Detail": "Midi-QOL lo necesita para las duraciones y fórmulas de los efectos."
+        },
+        "midi-dnd5e": {
+          "Title": "Midi-QOL y dnd5e no son compatibles",
+          "Detail": "Midi-QOL {midi} exige dnd5e 6.0.6 o superior y este mundo usa {dnd5e}. Actualiza dnd5e o usa la línea 14.0 de Midi-QOL."
+        },
+        "midi-foundry": {
+          "Title": "Midi-QOL exige un Foundry más nuevo",
+          "Detail": "Midi-QOL {midi} exige Foundry 14.369 o superior y este servidor usa {foundry}."
+        },
+        "transactional-libwrapper": {
+          "Title": "EM transaccional sin libWrapper",
+          "Detail": "Sin libWrapper la EM se cobra por la vía normal. Desactivar el ajuste evita el aviso en cada uso."
+        },
+        "sequencer-missing": {
+          "Title": "Sequencer no está activo",
+          "Detail": "Sin Sequencer no se ven las animaciones ni los sellos de las técnicas."
+        },
+        "jb2a-missing": {
+          "Title": "JB2A no está activo",
+          "Detail": "JJK 5e usa sus propios efectos de impacto en su lugar."
+        },
+        "fxmaster-missing": {
+          "Title": "FXMaster no está activo",
+          "Detail": "El tinte de escena de los dominios no se puede mostrar. Desactiva el ajuste o activa FXMaster."
+        },
+        "tokenmagic-missing": {
+          "Title": "Token Magic FX no está activo",
+          "Detail": "Las auras de The Zone y del dominio no se pueden mostrar. Desactiva el ajuste o activa Token Magic FX."
+        },
+        "theatre-v14": {
+          "Title": "Theatre Inserts no está verificado en Foundry 14",
+          "Detail": "Su página lo marca verificado solo hasta Foundry 13. VN Talker es una alternativa verificada en 14."
+        },
+        "tah-system": {
+          "Title": "Falta Token Action HUD D&D 5e",
+          "Detail": "Token Action HUD Core necesita el módulo del sistema para mostrar acciones, incluido el grupo JJK."
+        },
+        "domain-stuck": {
+          "Title": "Dominios marcados como abiertos sin efecto",
+          "Detail": "Estos personajes figuran con el dominio abierto pero no tienen el efecto: {list}."
+        },
+        "domain-leftovers": {
+          "Title": "Restos de dominios en las escenas",
+          "Detail": "{n} región(es) de dominios ya cerrados siguen en el mapa."
+        },
+        "ce-pending": {
+          "Title": "EM pendiente de revisión",
+          "Detail": "{n} gasto(s) de EM esperan la decisión del DJ."
+        },
+        "items-outdated": {
+          "Title": "Automatización desactualizada",
+          "Detail": "{n} actor(es) tienen objetos JJK más viejos que el compendio."
+        },
+        "pool-missing": {
+          "Title": "Hechiceros sin reserva de EM",
+          "Detail": "Estos personajes tienen técnica pero no la característica Cursed Energy: {list}. Añádela desde el compendio de clases."
+        }
+      }
+    },
+    "Setup": {
+      "Title": "Configurar JJK 5e",
+      "Open": "Abrir",
+      "Hint": "Configuración rápida en tres preguntas y todos los ajustes del módulo agrupados por función.",
+      "Reload": "Algunos cambios necesitan recargar Foundry (F5).",
+      "Applied": "Configuración rápida aplicada: {n} ajuste(s) cambiados.",
+      "Saved": "{n} ajuste(s) guardados.",
+      "QuickIntro": "Responde tres preguntas y JJK 5e ajusta lo demás. Puedes afinar cada ajuste más abajo.",
+      "ApplyQuick": "Aplicar configuración rápida",
+      "ByFeature": "Ajustes por función",
+      "ClientOnly": "Solo en este navegador",
+      "Save": "Guardar ajustes",
+      "Q": {
+        "automation": "¿Cuánto debe hacer el módulo solo?",
+        "visuals": "¿Cuántos efectos visuales y sonidos?",
+        "visibility": "¿Quién ve la energía maldita de los demás?"
+      },
+      "A": {
+        "automation": {
+          "full": "Todo automático",
+          "fullHint": "Cobra EM, aplica Black Flash, The Zone y el sure-hit del dominio.",
+          "balanced": "Equilibrado",
+          "balancedHint": "Cobra EM y marca Black Flash; el daño extra y el sure-hit los aplicas tú.",
+          "manual": "Manual",
+          "manualHint": "Solo recordatorios: la EM y los efectos los gestionas tú."
+        },
+        "visuals": {
+          "all": "Todo",
+          "allHint": "Animaciones, sonidos, temblor de pantalla, fondos y tintes de dominio.",
+          "subtle": "Discretos",
+          "subtleHint": "Solo los efectos propios, a menor volumen y sin temblor ni tintes.",
+          "none": "Ninguno",
+          "noneHint": "Sin animaciones, sonidos ni fondos."
+        },
+        "visibility": {
+          "owners": "Solo el dueño",
+          "ownersHint": "Cada jugador ve únicamente su EM.",
+          "party": "El grupo",
+          "partyHint": "Los jugadores ven la EM de todos los personajes jugadores.",
+          "all": "Todos",
+          "allHint": "También la de los PNJ visibles."
+        }
+      },
+      "Group": {
+        "ce": "Energía maldita",
+        "combat": "Combate",
+        "domain": "Dominios",
+        "fx": "Efectos y sonido",
+        "build": "Creación de personajes",
+        "ui": "Interfaz",
+        "other": "Otros"
+      }
+    },
+    "News": {
+      "Title": "Novedades de JJK 5e {version}",
+      "Setup": {
+        "Title": "Configurar JJK 5e",
+        "Text": "configuración rápida en tres preguntas y ajustes agrupados por función."
+      },
+      "Health": {
+        "Title": "Diagnóstico",
+        "Text": "detecta incompatibilidades y dominios atascados, y los arregla con un clic."
+      },
+      "Bridges": {
+        "Title": "Integraciones",
+        "Text": "grupo JJK en Token Action HUD, barra de EM en Argon y Carousel, salvaciones de grupo con Monk's TokenBar."
+      },
+      "Shake": {
+        "Title": "Temblor de pantalla",
+        "Text": "Black Flash y dominios sacuden la cámara con el efecto nativo de Foundry 14."
+      },
+      "Countdown": {
+        "Title": "Cuenta atrás",
+        "Text": "el registro de combate muestra las rondas que le quedan al dominio."
+      },
+      "Seal": {
+        "Title": "Sello de automatización",
+        "Text": "un botón en la ficha de cada objeto JJK dice si está al día y lo actualiza."
+      }
+    },
+    "Bridge": {
+      "Panel": "Panel JJK",
+      "MaxOutput": "Maximum Output",
+      "GroupSave": "Pedir salvación de grupo",
+      "NoTokens": "Selecciona o marca como objetivo los tokens que deben salvar.",
+      "DomainSave": "Salvación contra el dominio de {name}",
+      "GroupSaveMonks": "Se pedirá con Monk's TokenBar a los tokens marcados como objetivo (o seleccionados).",
+      "GroupSaveChat": "Se publicará en el chat un botón de salvación para los tokens marcados como objetivo (o seleccionados).",
+      "Ability": "Característica",
+      "DC": "CD",
+      "Label": "Motivo",
+      "Request": "Pedir"
+    },
+    "Seal": {
+      "Label": "Automatización JJK",
+      "current": "{name}: la automatización JJK está al día.",
+      "outdated": "{name}: hay una versión más nueva en el compendio.",
+      "outdatedWorld": "{name}: hay una versión más nueva en el compendio. Actualízalo desde un actor o reimporta el compendio.",
+      "custom": "{name}: objeto JJK propio, sin entrada en el compendio.",
+      "none": "{name}: no es un objeto JJK."
     }
   }
 }

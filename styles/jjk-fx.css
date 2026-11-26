@@ -104,3 +104,41 @@ li.combatant.jjk-ct-has-ce .token-name > .combatant-controls { order: 2; }
 .jjk-tt-empty { color: var(--jjk-muted, #b1a69a); font-size: 12px; }
 @media (prefers-reduced-motion: reduce) { .jjk-tt-fill { transition: none; } }
 .jjk-tt-star .jjk-num { font-size: 14px; }
+
+/* ---- 2.14: domain countdown tag, meters in other HUDs ---- */
+.jjk-ct-tag.domain { display: inline-flex; align-items: center; gap: 2px; padding: 1px 3px; border: 1px solid var(--jjk-energy); color: var(--jjk-energy); font-variant-numeric: tabular-nums; }
+.jjk-ct-tag.domain.ending { border-color: var(--jjk-seal-2); color: var(--jjk-seal-2); }
+/* Argon: the meter sits above the portrait, inside the panel's own width. */
+.jjk-argon-ce { position: relative; z-index: 5; margin: 0 0 4px; padding: 2px 6px; background: var(--jjk-ink); box-shadow: inset 0 0 0 1px var(--jjk-edge); }
+/* Carousel: a thin line at the foot of each portrait, above the dock's own resource text. */
+.combatant-portrait .jjk-dock-ce { position: absolute; left: 6%; right: 6%; bottom: 3px; z-index: 4; margin: 0; padding: 1px 3px; background: color-mix(in srgb, var(--jjk-ink) 82%, transparent); }
+.combatant-portrait .jjk-dock-ce .jjk-ct-value { font-size: 9px; }
+.combatant-portrait .jjk-dock-ce .jjk-ct-tag:not(.domain) { display: none; }
+
+/* ---- 2.14: setup and health windows (same rows as the optional rules) ---- */
+.jjk-setup .jjk-opt, .jjk-health .jjk-health-row { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center; padding: 6px 8px;
+  border: 1px solid var(--jjk-edge, #443b45); border-left: 3px solid var(--jjk-edge, #443b45); background: var(--jjk-card, #1c1920); }
+.jjk-setup .jjk-opt:has(input[type=checkbox]:checked) { border-left-color: var(--jjk-seal, #ce1032); }
+.jjk-setup .jjk-opt small { display: block; opacity: .8; }
+.jjk-setup .jjk-opt .jjk-scope { opacity: .6; font-style: italic; }
+.jjk-setup .jjk-opt-ctl { display: flex; justify-content: flex-end; }
+.jjk-setup .jjk-opt-ctl select { width: auto; max-width: 170px; }
+.jjk-setup-group { margin: 4px 0; }
+.jjk-setup-group > summary { cursor: pointer; padding: 6px 4px; font: 700 13px/1.2 var(--jjk-display, sans-serif); letter-spacing: .02em; }
+.jjk-setup-group > summary:focus-visible { outline: 2px solid var(--jjk-energy, #ad98ff); outline-offset: 2px; }
+.jjk-setup-group > .jjk-opt + .jjk-opt { margin-top: 4px; }
+.jjk-setup-q { display: grid; gap: 4px; margin: 6px 0; border: 1px solid var(--jjk-edge, #443b45); padding: 6px 8px; }
+.jjk-setup-q legend { padding: 0 4px; font-weight: 700; }
+.jjk-setup-q label { display: grid; grid-template-columns: auto 1fr; gap: 8px; align-items: start; cursor: pointer; }
+.jjk-setup-q label small { display: block; opacity: .75; }
+.jjk-setup-q label:has(input:checked) strong { color: var(--jjk-seal-2, #ed4560); }
+.jjk5e-setup .window-content, .jjk5e-health .window-content { overflow-y: auto; }
+.jjk-health-list { list-style: none; margin: 0 0 8px; padding: 0; display: grid; gap: 4px; }
+.jjk-health .jjk-health-row { grid-template-columns: auto 1fr auto; }
+.jjk-health .jjk-health-row p { margin: 2px 0 0; opacity: .85; }
+.jjk-health .jjk-health-row.error { border-left-color: var(--jjk-seal, #ce1032); }
+.jjk-health .jjk-health-row.error > i { color: var(--jjk-seal-2, #ed4560); }
+.jjk-health .jjk-health-row.warn { border-left-color: var(--jjk-gold, #d4ad36); }
+.jjk-health .jjk-health-row.warn > i { color: var(--jjk-gold, #d4ad36); }
+.jjk-health .jjk-health-row.ok { border-left-color: var(--jjk-energy, #ad98ff); }
+.jjk-health .jjk-health-row button { white-space: nowrap; }
