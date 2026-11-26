@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.105.0 — Refinamiento de dominio completo y Reduced Output
+## 2.1.0 — Refinamiento de dominio completo y Reduced Output
 Auditoría de las reglas del motor de dominio y del de energía maldita frente al manual V.6. Se añade lo que faltaba:
 - **Potencia aumentada (refinamiento 300):** dentro de tu dominio completo, el daño de tus técnicas innatas suma tantos dados como tu modificador de EM, del mismo tipo que el primer dado de la técnica.
 - **Expansión de 0,2 s (400):** botón «Expansión de 0,2 s» en el panel JJK.
