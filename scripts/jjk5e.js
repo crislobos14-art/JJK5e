@@ -2587,7 +2587,7 @@ function panelHTML(actor, tab = "combat") {
             tip: ready ? t("CE.ShortRestTitle") : t(rx === "review" ? "Rest.InReview" : "Rest.NeedShortRest") }); })()}
       </div></fieldset>` : (hr ? "" : `<p class="jjk-note">${t("Panel.NoPool")} ${pbtn("chooseTechnique", "fas fa-hand-sparkles", t("Panel.ChooseTechnique"))}</p>`);
 
-  const combat = `${ceBlock}
+  const combat = `${ceBlock}${game.modules.get(MODULE_ID)?.api?.trackers?.panelSection?.(actor) ?? ""}
     <fieldset><legend>${t("Panel.Status")}</legend>
       <div class="jjk-row">
         ${statusRow(domainOpen(actor), t("Domain.Open"), "closeDomain")}
@@ -2608,6 +2608,7 @@ function panelHTML(actor, tab = "combat") {
         ${refinementOf(actor) >= 900 && domainOpen(actor) && !getDomain(actor)?.compressed && !getDomain(actor)?.noBarrier ? pbtn("compressDomain", "fas fa-compress", `${t("Domain.Compress")} (5 CE)`, { tip: t("Domain.CompressHint") }) : ""}
         ${!domainOpen(actor) && refinementOf(actor) < 1000 ? pbtn("trainRefinement", "fas fa-dumbbell", t("Domain.Train"), { tip: t("Domain.TrainHint") }) : ""}
         ${pbtn("refinementLog", "fas fa-book-open", t("Domain.Log"), { tip: t("Domain.LogHint") })}
+        ${game.modules.get(MODULE_ID)?.api?.fx ? pbtn("domainBackdrop", "fas fa-image", t("Domain.Backdrop"), { tip: t("Domain.BackdropHint") }) : ""}
       </div></fieldset>
     ${hr ? "" : `<fieldset><legend>${t("Output.Title")}</legend>
       <div class="jjk-row">
@@ -2738,6 +2739,8 @@ const PANEL_ACTIONS = {
     if (after !== before) await logRefinement(actor, after - before, after, "GM");
   },
   refinementLog: (actor) => openRefinementLog(actor),
+  techTracker: (actor, target) => game.modules.get(MODULE_ID)?.api?.trackers?.act?.(actor, { ...target.dataset }),
+  domainBackdrop: (actor) => game.modules.get(MODULE_ID)?.api?.fx?.chooseBackdrop?.(actor),
   gmBreakthrough: async (actor, target) => {
     const n = (Number(actor.getFlag(MODULE_ID, "breakthroughs")) || 0) + (target.dataset.d === "-" ? -1 : 1);
     await actor.setFlag(MODULE_ID, "breakthroughs", Math.max(0, n));
@@ -3458,7 +3461,8 @@ Hooks.once("init", () => {
     applyScaling, openPanel, maximumOutput, setReducedOutput, setSoulAwareness, setLimb, rollLimb,
     summon, dismissSummons, syncResource, missingPrereqs, applyCEEffects, activateGroup, endGroup,
     openGMStart, undoAutomation, updateAutomation, updateAllAutomation, outdatedItems, burnoutRecovery, fallDamage, applySoulDamage, clearSoulDamage,
-    techniqueBuilder, buildTechniqueItems, itemTheme, cleanupDomains: () => sweepDomainLeftovers()
+    techniqueBuilder, buildTechniqueItems, itemTheme, ceMeterState,
+    cleanupDomains: async () => { const n = await sweepDomainLeftovers(); await game.modules.get(MODULE_ID)?.api?.fx?.sweepBackdrops?.(); return n; }
   };
 });
 
@@ -4167,7 +4171,7 @@ function animateAttack(rolls, subject) {
   if (!animOn() || midiActive()) return;
   const activity = subject?.activity ?? subject;
   const item = activity?.item;
-  if (!item?.flags?.jjk5e || aaHandles(item)) return;
+  if (!item?.flags?.jjk5e || aaHandles(item) || ownFXOnly(item)) return;
   const source = tokenOf(item.actor);
   const roll = Array.isArray(rolls) ? rolls[0] : rolls;
   if (!source) return;
@@ -4178,11 +4182,14 @@ function animateAttack(rolls, subject) {
   }
 }
 
+/** "Only the module's ink effects": jjk-fx.mjs draws technique items, so the JB2A layer stays out of the way. */
+const ownFXOnly = (item) => !!item?.flags?.jjk5e?.technique && (() => { try { return game.settings.get(MODULE_ID, "techniqueFX") === "own"; } catch { return false; } })();
+
 function animateActivity(activity, targets = null) {
   if (!animOn() || !activity || activity.type === "attack") return;
   targets ??= [...(game.user.targets ?? [])];
   const item = activity.item;
-  if (!item?.flags?.jjk5e || aaHandles(item)) return;
+  if (!item?.flags?.jjk5e || aaHandles(item) || ownFXOnly(item)) return;
   const source = tokenOf(item.actor);
   if (!source) return;
   const theme = itemTheme(item, activity);

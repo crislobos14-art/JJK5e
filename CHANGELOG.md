@@ -1,5 +1,28 @@
 # Changelog
 
+## 2.11.0 — Sonido, tinta y combate
+- **Barra de EM en el registro de combate:**
+  - Una línea fina bajo cada nombre, que se actualiza sola.
+  - Al gastar, lo perdido queda un instante en rojo sello y luego se vacía.
+  - La EM reservada aparece rayada, la EM baja en rojo y la reserva vacía con borde discontinuo.
+  - Etiquetas pequeñas de Reduced Output, burnout y The Zone.
+  - El DJ elige quién ve la EM de quién: por defecto, los personajes jugadores para todos.
+- **Sonidos propios para cada técnica:**
+  - Las 81 técnicas tienen su sonido al usarse.
+  - Los impactos tienen sonido por familia, y hay sonidos propios de apertura y cierre de dominio, choque, Black Flash, The Zone, burnout y máxima potencia.
+  - Todos se sintetizan desde código, sin audio de terceros, con el mismo volumen percibido.
+  - Cada jugador tiene su interruptor y su volumen, y las tiradas ocultas no suenan para quien no las ve.
+- **Efectos de tinta por técnica:**
+  - Catorce efectos propios (sello, corte, estallido, vórtice, llamas, grietas, rayos…) con borde de tinta, que Sequencer tiñe con el color de cada técnica.
+  - Modo automático: sello en cada uso, e impactos propios si no hay JB2A.
+- **Fondos de dominio:**
+  - Doce fondos propios que encajan sin costuras y rellenan la barrera del dominio, recortada al mapa.
+  - Cada técnica tiene su fondo, y el dueño puede cambiarlo o quitarlo desde el panel.
+  - Se borran solos al cerrar el dominio.
+- **Recursos de técnica en el panel:**
+  - Cargas de Jin, cuerdas vocales, ojos, Milagros y Marcas de Calamidad, puntos de fiebre y de destino, marcas de teletransporte, estrellas de Love Rendezvous, refuerzos del cubo y shikigami de Star Dictator.
+  - También la lista de las Diez Sombras, vidas de Eight Heads, ritmo de Prayer Song, aceleración de Projection, espíritus absorbidos, almas de Idle Transfiguration y núcleos de Triple Core.
+  - Los descansos, el fin del combate, el inicio de turno y los fallos cuerpo a cuerpo de Fa Jin se aplican solos.
 ## 2.10.0 — Calidad: idiomas, accesibilidad y rendimiento
 - **Idiomas:** se revisaron todos los avisos y tarjetas. Las 700 claves existen en español e inglés y no quedan textos solo en español en el código. Se añadió la etiqueta «Descender» a la carrera.
 - **Contraste de los sellos:**

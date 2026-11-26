@@ -240,7 +240,9 @@
       "WeakHoleClosed": "{name} stops concentrating: the hole in {domain}'s domain closes.",
       "NonMagical": "Non-magical damage",
       "DurableImmune": "{name}'s durable barrier is immune to non-magical damage.",
-      "MasteryFree": "Free (Total Mastery)"
+      "MasteryFree": "Free (Total Mastery)",
+      "Backdrop": "Domain backdrop",
+      "BackdropHint": "Choose the pattern that fills your barrier while the domain is open."
     },
     "Burnout": {
       "Name": "Technique Burnout",

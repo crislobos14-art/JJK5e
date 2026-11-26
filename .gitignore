@@ -3,3 +3,4 @@ node_modules/
 notes.md
 module.zip
 /release-module.zip
+__pycache__/

@@ -240,7 +240,9 @@
       "WeakHoleClosed": "{name} deja de concentrarse: se cierra el hueco en el dominio de {domain}.",
       "NonMagical": "Daño no mágico",
       "DurableImmune": "La barrera duradera de {name} es inmune al daño no mágico.",
-      "MasteryFree": "Gratuita (Total Mastery)"
+      "MasteryFree": "Gratuita (Total Mastery)",
+      "Backdrop": "Fondo de dominio",
+      "BackdropHint": "Elige el patrón que rellena tu barrera mientras el dominio está abierto."
     },
     "Burnout": {
       "Name": "Technique Burnout",
