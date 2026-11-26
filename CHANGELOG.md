@@ -1,5 +1,18 @@
 # Changelog
 
+## 2.5.0 — Guía del módulo y tutorial
+- **Guía del módulo JJK5e** en el compendio de reglas, en español y en inglés. Sus 11 páginas cubren:
+  - inicio rápido para jugadores y DJ;
+  - ficha y pestaña JJK;
+  - energía maldita, dominios, choques y refinamiento (con una tabla de cada nivel);
+  - votos y avisos;
+  - qué se aplica a mano;
+  - una sección para el DJ.
+- **Tutorial guiado:** la primera vez que cada usuario entra aparece una tarjeta Sealed Ink de 5 pasos.
+  - Se maneja con los botones, con las flechas del teclado y con Escape.
+  - El último paso abre la guía.
+  - Para volver a verlo: `game.modules.get("jjk5e").api.showTutorial()`.
+- Las interpretaciones de reglas de dominio quedan anotadas en `.ai/decisiones.md`.
 ## 2.4.0 — Asistente de dominio, diario de refinamiento y sellos exclusivos
 - **Asistente de dominio propio** (antes «Editar dominio personalizado», solo DJ):
   - Además del efecto ambiental, guarda el entorno del dominio y la mejora de técnica. Ambos aparecen en la tarjeta de apertura.

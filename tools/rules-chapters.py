@@ -17,6 +17,7 @@ CHAPTERS = [
     # file stem, sort, EN name, ES name
     ("rules-of-thumb", 15500, "15.1 — Rules of Thumb", "15.1 — Reglas generales"),
     ("optional-rules", 15700, "15.2 — Optional Rules", "15.2 — Reglas opcionales"),
+    ("module-guide", 50, "00 — JJK5e Module Guide", "00 — Guía del módulo JJK5e"),
 ]
 
 
@@ -27,6 +28,7 @@ def sid(*parts):
 
 def inline(text):
     t = html.escape(text.replace("\\", ""), quote=False)
+    t = re.sub(r"`([^`]+)`", r"<code>\1</code>", t)
     t = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", t)
     t = re.sub(r"(?<![\w*])\*(?!\s)(.+?)(?<!\s)\*(?![\w*])", r"<em>\1</em>", t)
     return t.strip()
