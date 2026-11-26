@@ -1899,11 +1899,29 @@ function rawCEDamageBonus(actor) {
 
 /* ---- Domain Refinement: gains (V.6 Methods of Refinement) and active benefits ---- */
 const DAY_SECONDS = 86400, MONTH_SECONDS = 30 * DAY_SECONDS;
+/** Refinement diary: the last 60 changes (world time, amount, reason, total). */
+async function logRefinement(actor, n, total, reason, detail = "") {
+  const log = actorFlagArray(actor, "refinementLog").slice(-59);
+  await actor.setFlag(MODULE_ID, "refinementLog", [...log, { at: Number(game.time?.worldTime) || 0, n, total, reason, detail: String(detail).slice(0, 80) }]);
+}
+function openRefinementLog(actor) {
+  const rows = actorFlagArray(actor, "refinementLog").slice().reverse();
+  const when = (sec) => { const d = Math.floor(sec / 86400), h = Math.floor((sec % 86400) / 3600), m = Math.floor((sec % 3600) / 60);
+    return t("Domain.LogWhen", { d: d + 1, h: String(h).padStart(2, "0"), m: String(m).padStart(2, "0") }); };
+  const body = rows.length ? `<table class="jjk-refinement-log"><thead><tr><th>${t("Domain.LogDate")}</th><th>${t("Domain.LogReason")}</th><th>${t("Domain.LogChange")}</th><th>${t("Domain.LogTotal")}</th></tr></thead><tbody>`
+    + rows.map((r) => `<tr><td>${when(Number(r.at) || 0)}</td><td>${esc(t(`Domain.LogReason${r.reason}`))}${r.detail ? ` · ${esc(r.detail)}` : ""}</td>`
+      + `<td class="${r.n >= 0 ? "up" : "down"}">${r.n >= 0 ? "+" : ""}${r.n}</td><td><strong>${r.total}</strong></td></tr>`).join("") + "</tbody></table>"
+    : `<p class="hint">${t("Domain.LogEmpty")}</p>`;
+  return foundry.applications.api.DialogV2.prompt({ classes: ["jjk5e-ui", "jjk5e-dialog"], window: { resizable: true, title: `${t("Domain.Log")}: ${actor.name}` },
+    position: { width: 520 }, rejectClose: false, content: `<p>${t("Domain.LogNow", { total: refinementOf(actor) })}</p>${body}`, ok: { label: t("Common.OK") } });
+}
 async function addRefinement(actor, amount, reasonKey, data = {}) {
   const before = refinementOf(actor);
   const after = clamp(before + amount, 1, 1000);
   if (after === before) return 0;
   await actor.setFlag(MODULE_ID, "refinement", after);
+  const reason = { "Domain.TrainDoneChat": "Training", "Domain.CasualtyChat": "Casualty", "Domain.SuperiorityChat": "Superiority" }[reasonKey] ?? "Other";
+  await logRefinement(actor, after - before, after, reason, data.target ?? "");
   await chat(actor, `<p><i class="fas fa-circle-half-stroke"></i> ${t(reasonKey, { name: esc(actor.name), n: after - before, total: after, ...data })}</p>`).catch(() => null);
   return after - before;
 }
@@ -2474,6 +2492,7 @@ function panelHTML(actor, tab = "combat") {
         ${refinementOf(actor) >= 400 && !domainOpen(actor) ? pbtn("quickDomain", "fas fa-stopwatch", t("Domain.Quick"), { cls: actor.getFlag(MODULE_ID, "quickDomain") ? "on" : "", tip: t("Domain.QuickHint") }) : ""}
         ${refinementOf(actor) >= 900 && domainOpen(actor) && !getDomain(actor)?.compressed && !getDomain(actor)?.noBarrier ? pbtn("compressDomain", "fas fa-compress", `${t("Domain.Compress")} (5 CE)`, { tip: t("Domain.CompressHint") }) : ""}
         ${!domainOpen(actor) && refinementOf(actor) < 1000 ? pbtn("trainRefinement", "fas fa-dumbbell", t("Domain.Train"), { tip: t("Domain.TrainHint") }) : ""}
+        ${pbtn("refinementLog", "fas fa-book-open", t("Domain.Log"), { tip: t("Domain.LogHint") })}
       </div></fieldset>
     ${hr ? "" : `<fieldset><legend>${t("Output.Title")}</legend>
       <div class="jjk-row">
@@ -2592,8 +2611,12 @@ const PANEL_ACTIONS = {
   updateAll: () => updateAllAutomation(),
   gmRefinement: async (actor) => {
     const n = await promptNumber(t("Domain.Refinement"), t("Domain.RefinementPrompt"), refinementOf(actor));
-    if (n) await actor.setFlag(MODULE_ID, "refinement", clamp(n, 1, 1000));
+    if (!n) return;
+    const before = refinementOf(actor), after = clamp(n, 1, 1000);
+    await actor.setFlag(MODULE_ID, "refinement", after);
+    if (after !== before) await logRefinement(actor, after - before, after, "GM");
   },
+  refinementLog: (actor) => openRefinementLog(actor),
   gmBreakthrough: async (actor, target) => {
     const n = (Number(actor.getFlag(MODULE_ID, "breakthroughs")) || 0) + (target.dataset.d === "-" ? -1 : 1);
     await actor.setFlag(MODULE_ID, "breakthroughs", Math.max(0, n));
@@ -6291,12 +6314,18 @@ function validateDomainProfile(input) {
       !DOMAIN_PROFILE_TYPES.includes(damageType) || !DOMAIN_PROFILE_SAVES.includes(save) ||
       !Number.isInteger(dc) || dc < 1 || dc > 40 || !["half", "none", "full"].includes(onSave) ||
       !DOMAIN_PROFILE_CONDITIONS.includes(condition) || !Number.isInteger(rounds) || rounds < 1 || rounds > 10) return null;
-  return { version: 1, name: name.trim(), damage: damage.trim(), damageType, save, dc, onSave, condition, rounds };
+  const text = (v) => (typeof v === "string" ? v.trim().slice(0, 500) : "");
+  return { version: 1, name: name.trim(), damage: damage.trim(), damageType, save, dc, onSave, condition, rounds,
+    environment: text(input.environment), improvement: text(input.improvement) };
+}
+/** V.6 Incomplete Domain: the environmental effect forces a save (CON if none) and does half on a failure, nothing on a success. */
+function incompleteProfile(profile) {
+  return { ...profile, save: profile.save === "none" ? "con" : profile.save, onSave: "none", rounds: Math.max(1, Math.ceil(profile.rounds / 2)), halved: true };
 }
 async function editDomainProfile(actor, mode = "form") {
   if (!game.user.isGM || !actor || getDomain(actor)?.open) return false;
   const profile = validateDomainProfile(actor.getFlag(MODULE_ID, "customDomainProfile")) ??
-    { version: 1, name: "Custom Domain", damage: "1d6", damageType: "force", save: "none", dc: 15, onSave: "half", condition: "none", rounds: 1 };
+    { version: 1, name: "Custom Domain", damage: "1d6", damageType: "force", save: "none", dc: 15, onSave: "half", condition: "none", rounds: 1, environment: "", improvement: "" };
   const label = (x) => {
     if (x === "none") return t("Domain.ProfileNone");
     const cfg = CONFIG.DND5E ?? {};
@@ -6324,13 +6353,17 @@ async function editDomainProfile(actor, mode = "form") {
     <label>${t("Domain.ProfileDC")} <input name="dc" type="number" min="1" max="40" value="${profile.dc}"></label>
     <label>${t("Domain.ProfileOnSave")} <select name="onSave">${options(["half","none","full"],profile.onSave)}</select></label>
     <label>${t("Domain.ProfileCondition")} <select name="condition">${options(DOMAIN_PROFILE_CONDITIONS,profile.condition)}</select></label>
-    <label>${t("Domain.ProfileRounds")} <input name="rounds" type="number" min="1" max="10" value="${profile.rounds}"></label>`;
+    <label>${t("Domain.ProfileRounds")} <input name="rounds" type="number" min="1" max="10" value="${profile.rounds}"></label>
+    <label>${t("Domain.ProfileEnvironment")} <textarea name="environment" rows="3" maxlength="500" placeholder="${esc(t("Domain.ProfileEnvironmentHint"))}">${esc(profile.environment ?? "")}</textarea></label>
+    <label>${t("Domain.ProfileImprovement")} <textarea name="improvement" rows="3" maxlength="500" placeholder="${esc(t("Domain.ProfileImprovementHint"))}">${esc(profile.improvement ?? "")}</textarea></label>
+    <p class="hint">${t("Domain.ProfileIncompleteHint")}</p>`;
   const result = await foundry.applications.api.DialogV2.prompt({ classes: ["jjk5e-ui", "jjk5e-dialog"], window: { resizable: true, title: t("Domain.ProfileEdit") }, rejectClose: false, content,
     ok: { callback: (e,b) => {
       const f = b.form.elements;
       if (mode === "import") { try { return JSON.parse(f.json.value); } catch { return {}; } }
       return { name: f.name.value, damage: f.damage.value, damageType: f.damageType.value, save: f.save.value,
-        dc: f.dc.valueAsNumber, onSave: f.onSave.value, condition: f.condition.value, rounds: f.rounds.valueAsNumber };
+        dc: f.dc.valueAsNumber, onSave: f.onSave.value, condition: f.condition.value, rounds: f.rounds.valueAsNumber,
+        environment: f.environment?.value ?? "", improvement: f.improvement?.value ?? "" };
     } } });
   if (!result) return false;
   const normalized = validateDomainProfile(result);
@@ -6340,13 +6373,14 @@ async function editDomainProfile(actor, mode = "form") {
 }
 function domainProfileTargets(actor, targets) {
   const state = getDomain(actor);
-  if (!state?.open || state.incomplete || state.lethal === false || sureHitBlocked(actor)) return [];
+  if (!state?.open || state.lethal === false || (!state.incomplete && sureHitBlocked(actor))) return [];
   return [...new Map([...targets].filter((tk) => insideDomain(state,tk) && !domainWard(tk) &&
     (tk?.actor ?? tk?.document?.actor)?.uuid && !barrierMarkerMeta(tk)).map((tk) => [(tk?.actor ?? tk?.document?.actor).uuid, tk])).values()];
 }
 async function executeDomainProfile(actor, targets, requestId) {
   if (!isActiveGM() || typeof requestId !== "string" || requestId.length > 80) return false;
-  const state = getDomain(actor), profile = validateDomainProfile(state?.customProfile);
+  const state = getDomain(actor), stored = validateDomainProfile(state?.customProfile);
+  const profile = stored && state.incomplete ? incompleteProfile(stored) : stored;
   const eligible = domainProfileTargets(actor,targets);
   if (!profile || !eligible.length || (state.profileRequests ?? []).includes(requestId)) return false;
   state.profileRequests = [...(state.profileRequests ?? []).slice(-99),requestId];
@@ -6370,10 +6404,13 @@ async function executeDomainProfile(actor, targets, requestId) {
     // Saving throws may suspend the workflow while a token moves or a ward is activated.
     const latest = getDomain(actor);
     if (latest?.openingId !== state.openingId || !domainProfileTargets(actor,[tk]).length) continue;
-    const roll = await new Roll(profile.damage).evaluate();
-    await roll.toMessage?.({ speaker: docClass("ChatMessage").getSpeaker?.({actor}), flavor: esc(profile.name) });
+    // Increased Potency (300): domain damage gets extra dice equal to the CE modifier.
+    const die = profile.damage.match(/d(\d+)/)?.[1];
+    const potency = !state.incomplete && (Number(state.refinement) || 0) >= 300 && ceMod(actor) > 0 && die ? ` + ${ceMod(actor)}d${die}` : "";
+    const roll = await new Roll(profile.damage + potency).evaluate();
+    await roll.toMessage?.({ speaker: docClass("ChatMessage").getSpeaker?.({actor}), flavor: esc(profile.name) + (profile.halved ? ` (${t("Domain.ProfileHalved")})` : "") });
     if (getDomain(actor)?.openingId !== state.openingId || !domainProfileTargets(actor,[tk]).length) continue;
-    let value = Math.max(0, Math.floor(roll.total * (success ? ({half:0.5,none:0,full:1})[profile.onSave] : 1)));
+    let value = Math.max(0, Math.floor(roll.total * (success ? ({half:0.5,none:0,full:1})[profile.onSave] : 1) * (profile.halved ? 0.5 : 1)));
     const simple=simpleDomainAt(tk);
     if(simple&&value>0){
       const absorption=await absorbSimpleDomain(simple,value,`${state.openingId}:${requestId}:${target.uuid}`);
