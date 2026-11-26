@@ -1,0 +1,179 @@
+{
+ "_id": "IxoXWqhgpYohpdKp",
+ "name": "00 — JJK5e Module Guide",
+ "sort": 50,
+ "flags": {
+  "jjk5e": {
+   "lang": "en"
+  }
+ },
+ "folder": null,
+ "pages": [
+  {
+   "_id": "duSlvTNSnp2Xkdja",
+   "name": "JJK5e Module Guide",
+   "type": "text",
+   "sort": 1000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>This guide explains what the module does for you, what you apply by hand and where each button is. The full rules are in the V.6 manual chapters of this compendium.</p>"
+   },
+   "_key": "!journal.pages!IxoXWqhgpYohpdKp.duSlvTNSnp2Xkdja"
+  },
+  {
+   "_id": "Od1F3jrUoumRUrDQ",
+   "name": "Quick start",
+   "type": "text",
+   "sort": 2000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p><strong>Players</strong></p>\n<ul><li>Open your sheet: the <strong>Cursed Energy (CE)</strong> meter sits next to HP and hit dice.</li><li>The <strong>JJK</strong> tab (yin-yang) shows your technique, domains, vows and career. <strong>Back to sheet</strong> returns to the native tab.</li><li>Use techniques like any dnd5e activity: the module charges CE, applies discounts and warns when you cannot afford it.</li><li><strong>JJK controls</strong> (bottom right) opens notices and the quick reference.</li></ul>\n<p><strong>GM</strong></p>\n<ul><li>Install and enable <strong>Midi-QOL</strong>, <strong>DAE</strong>, <strong>Sequencer</strong> and, for scene mood, <strong>FXMaster</strong>. The module warns on start if one is missing.</li><li>Changes that touch several characters at once (domain clashes, expansion blasts) are resolved by the active GM.</li><li>If something is left on the map, run in a macro: <code>game.modules.get(\"jjk5e\").api.cleanupDomains()</code>.</li></ul>"
+   },
+   "_key": "!journal.pages!IxoXWqhgpYohpdKp.Od1F3jrUoumRUrDQ"
+  },
+  {
+   "_id": "eSZHNa8Qdqw2Qtqc",
+   "name": "Sheet and JJK tab",
+   "type": "text",
+   "sort": 3000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<ul><li><strong>CE meter:</strong> click the bar to type a value; − and + spend or regain 1.</li><li><strong>Seals:</strong> every JJK technique, domain, vow, class or item has a seal by its name. Colour and icon give the family; pattern, rotation and rings tell items apart. Domains are round, vows diamonds and Heavenly Restriction octagons.</li><li><strong>JJK tab:</strong> innate technique, domain state, vows, sorcerer career and shortcuts. Narrow windows use one column.</li></ul>"
+   },
+   "_key": "!journal.pages!IxoXWqhgpYohpdKp.eSZHNa8Qdqw2Qtqc"
+  },
+  {
+   "_id": "RE9bcmWdJ6ZAfbdf",
+   "name": "Cursed Energy",
+   "type": "text",
+   "sort": 4000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<table>\n<thead><tr><th>What</th><th>How the module handles it</th></tr></thead>\n<tbody>\n<tr><td>Technique costs</td><td>Automatic when you use the activity; cancelled if you lack CE.</td></tr>\n<tr><td>Cursed Strike</td><td>Choose how much CE (up to your PB); adds d6, d8, d12 or 2d8 necrotic by your CE mastery.</td></tr>\n<tr><td>Short rest</td><td>Panel button: trade hit dice for CE (up to half your HD).</td></tr>\n<tr><td>Negative emotion</td><td>Request it from the panel, the GM confirms: regain your PB in CE.</td></tr>\n<tr><td>Maximum Output</td><td><strong>Maximum Output</strong> button (CE score 20). A second use in the same round needs DC 15 +2 per level or you gain Reduced Output.</td></tr>\n<tr><td>Reduced Output</td><td>Drops 1 level per minute without spending CE and with each Black Flash.</td></tr>\n<tr><td>RCT</td><td>Healing pool; regains 10 HP every two rounds, refilled by The Zone.</td></tr>\n<tr><td>Black Flash</td><td>After a crit the module rolls the second d20: on a natural 20, ×3 damage ignoring resistances. Triggers The Zone.</td></tr>\n<tr><td>The Zone</td><td>Advantage, +1 crit and Black Flash range; ends burnout and −1 Reduced Output.</td></tr>\n</tbody>\n</table>"
+   },
+   "_key": "!journal.pages!IxoXWqhgpYohpdKp.RE9bcmWdJ6ZAfbdf"
+  },
+  {
+   "_id": "FcNf3FMgpNW6Hg0O",
+   "name": "Domains",
+   "type": "text",
+   "sort": 5000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<ul><li><strong>Open:</strong> use the domain activity. 20 CE (less at refinement 700 and 1000). Full turn, an action from 200, a bonus action from 1000.</li><li><strong>On the map:</strong> rules reach stays in feet (175 ft; 655 ft barrierless; 100 ft incomplete). The drawn zone never leaves the map.</li><li><strong>Opening card:</strong> HP, AC, refinement and reach. The GM targets the creatures that were not trapped and presses <strong>Expansion blast</strong>: Xd6 bludgeoning and a push to the edge.</li><li><strong>Sure-hit:</strong> only chosen targets inside. Simple Domain absorbs it.</li><li><strong>Domain HUD:</strong> close, non-lethal, flip or balance the barrier, amplification (600) and the custom domain wizard (GM).</li><li><strong>JJK panel buttons:</strong> 0.2 second expansion (400), Compress domain (900), Train refinement, Refinement diary, Attack the barrier and Open a weak spot.</li><li><strong>On closing:</strong> Technique Burnout for 1 minute (5 rounds incomplete) and 2 exhaustion levels (1 from 700). Black Flash or The Zone end it early.</li></ul>"
+   },
+   "_key": "!journal.pages!IxoXWqhgpYohpdKp.FcNf3FMgpNW6Hg0O"
+  },
+  {
+   "_id": "TaX4LUJfhJQgWFhZ",
+   "name": "Domain clashes",
+   "type": "text",
+   "sort": 6000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<ul><li>When someone opens a domain, anyone able to answer gets a notice to open theirs as a reaction.</li><li>Higher refinement wins. A 10–90 gap breaks the loser in 9–1 rounds (−15 ft per round); 100+ breaks it at once.</li><li><strong>Tie:</strong> both hold. At 1/3 HP, a flat DC 15 or the domain falls.</li><li>During the clash the map shows the shared area in red and sure-hit is suspended for both.</li><li>Winning a clash grants +100 refinement (once a month, never twice against the same rival).</li></ul>"
+   },
+   "_key": "!journal.pages!IxoXWqhgpYohpdKp.TaX4LUJfhJQgWFhZ"
+  },
+  {
+   "_id": "okrJGwRTr3de72Rc",
+   "name": "Refinement",
+   "type": "text",
+   "sort": 7000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<table>\n<thead><tr><th>Refinement</th><th>Benefit</th><th>In the module</th></tr></thead>\n<tbody>\n<tr><td>100</td><td>Flipped or balanced barrier (+5 CE)</td><td>HUD buttons</td></tr>\n<tr><td>200</td><td>Expansion as an action</td><td>Automatic</td></tr>\n<tr><td>300</td><td>Increased Potency</td><td>Extra dice automatic</td></tr>\n<tr><td>400</td><td>0.2 second expansion</td><td>Panel button</td></tr>\n<tr><td>500</td><td>2-minute domain</td><td>Automatic</td></tr>\n<tr><td>600</td><td>Domain Amplification</td><td>HUD button</td></tr>\n<tr><td>700</td><td>−CE mod cost, 1 exhaustion level</td><td>Automatic</td></tr>\n<tr><td>750 + RCT</td><td>Burnout Recovery</td><td>Panel button</td></tr>\n<tr><td>800</td><td>Durable Barrier (HP ×2)</td><td>HP automatic; non-magical immunity by hand</td></tr>\n<tr><td>900</td><td>Compression</td><td>Panel button; disadvantage automatic</td></tr>\n<tr><td>1000</td><td>Total Mastery, barrierless domain</td><td>Automatic; technique action changes by hand</td></tr>\n</tbody>\n</table>\n<p>Refinement comes from training (once a day), casualties inside the domain (+20) and clash wins (+100). Everything is listed in the <strong>Refinement diary</strong>.</p>"
+   },
+   "_key": "!journal.pages!IxoXWqhgpYohpdKp.okrJGwRTr3de72Rc"
+  },
+  {
+   "_id": "LkTtHgjaMDDsQfgy",
+   "name": "Binding vows",
+   "type": "text",
+   "sort": 8000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<ul><li><strong>Binding vows</strong> button in the panel: presets or your own, with restriction, benefit and a lock until a long rest.</li><li>The module warns when you go over your limit (your PB).</li><li>Breaking a mutual vow: 5 exhaustion levels for 10 days or a roll on the misfortune table.</li></ul>"
+   },
+   "_key": "!journal.pages!IxoXWqhgpYohpdKp.LkTtHgjaMDDsQfgy"
+  },
+  {
+   "_id": "V7IhYEQaYOmhtgYR",
+   "name": "Notices",
+   "type": "text",
+   "sort": 9000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<ul><li>Pop-ups for 0 HP, low CE, burnout, The Zone, domains, output level, RCT, turn and pending rest.</li><li>At most 3 at a time; they pause on hover and close with ×.</li><li>In <strong>Module Settings</strong> each player can enable the notification centre, urgent sound, history and the low CE threshold.</li></ul>"
+   },
+   "_key": "!journal.pages!IxoXWqhgpYohpdKp.V7IhYEQaYOmhtgYR"
+  },
+  {
+   "_id": "oOJBD0lWcZYoPF0s",
+   "name": "Applied by hand",
+   "type": "text",
+   "sort": 10000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<ul><li>Who may react to a 0.2 second expansion, if the GM does not use the module notice.</li><li>Durable Barrier (800) immunity to non-magical damage.</li><li>Action-type changes of techniques under Total Mastery (1000).</li><li>The Reduced Output roll while a Maximum Output technique is still active.</li><li>Misfortune table results that are not effects (losing a sense or a limb…).</li></ul>"
+   },
+   "_key": "!journal.pages!IxoXWqhgpYohpdKp.oOJBD0lWcZYoPF0s"
+  },
+  {
+   "_id": "DVuEcUcRLqrWAmuo",
+   "name": "For the GM",
+   "type": "text",
+   "sort": 11000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<ul><li><strong>Refinement and breakthroughs:</strong> the actor's JJK panel, GM section. Changes go to the diary.</li><li><strong>Player requests:</strong> attacking barriers, opening weak spots or negative-emotion CE reach the GM as a confirmation.</li><li><strong>Cleanup:</strong> on start and whenever a domain closes, the module removes zones, tints, markers and animations of closed domains.</li><li><strong>Tutorial:</strong> shown the first time. To see it again, in a macro: <code>game.modules.get(\"jjk5e\").api.showTutorial()</code>.</li></ul>"
+   },
+   "_key": "!journal.pages!IxoXWqhgpYohpdKp.DVuEcUcRLqrWAmuo"
+  }
+ ],
+ "_key": "!journal!IxoXWqhgpYohpdKp"
+}

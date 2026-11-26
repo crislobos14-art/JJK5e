@@ -713,3 +713,28 @@ table.jjk-fit :is(td, th) img { max-width: 100%; height: auto; }
 .jjk5e-ui.jjk5e-dialog .jjk-refinement-log td.down { color: var(--jjk-seal); font-weight: 700; }
 .jjk5e-card .jjk-domain-env { margin: 4px 0; padding-left: 8px; border-left: 2px solid var(--jjk-seal); color: var(--jjk-bone-2); font-style: italic; }
 .jjk5e-card .jjk-domain-env i { color: var(--jjk-seal-2); font-style: normal; margin-inline-end: 4px; }
+
+/* First-run tutorial: one Sealed Ink card, bottom left of the canvas, above Foundry's UI but below windows. */
+.jjk-tutorial.jjk5e-ui {
+  position: fixed; left: 90px; bottom: 120px; z-index: 96; width: min(380px, calc(100vw - 24px));
+  background: var(--jjk-ink); color: var(--jjk-bone); border: 1px solid var(--jjk-line-2); border-top: 3px solid var(--jjk-seal);
+  box-shadow: 6px 6px 0 #000, 0 12px 28px rgba(0, 0, 0, .55); padding: 14px 16px 12px;
+  animation: jjk-tutorial-in .22s ease-out;
+}
+.jjk-tutorial header { display: flex; align-items: center; gap: 8px; }
+.jjk-tutorial header > i { color: var(--jjk-seal-2); font-size: 15px; }
+.jjk-tutorial header small { flex: 1; color: var(--jjk-muted); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; }
+.jjk-tutorial header .close { flex: 0 0 auto; width: 28px; height: 28px; line-height: 1; padding: 0; background: transparent; color: var(--jjk-bone); border: 1px solid var(--jjk-line-2); }
+.jjk-tutorial h2 { margin: 10px 0 6px; border: 0; color: var(--jjk-bone); font: 700 24px/1.05 var(--jjk-display); letter-spacing: .05em; text-transform: uppercase; }
+.jjk-tutorial p { margin: 0 0 12px; color: var(--jjk-bone-2); font-size: 13px; line-height: 1.45; }
+.jjk-tutorial .dots { display: flex; gap: 6px; margin: 0 0 12px; padding: 0; list-style: none; }
+.jjk-tutorial .dots li { width: 18px; height: 3px; background: var(--jjk-line-2); }
+.jjk-tutorial .dots li.on { background: var(--jjk-seal); }
+.jjk-tutorial footer { display: flex; justify-content: space-between; gap: 8px; }
+.jjk-tutorial footer button { flex: 1; min-height: 34px; background: var(--jjk-card-2); color: var(--jjk-bone); border: 1px solid var(--jjk-line-2);
+  font: 700 12px/1 var(--jjk-display); letter-spacing: .1em; text-transform: uppercase; }
+.jjk-tutorial footer button.primary { background: var(--jjk-bone); color: var(--jjk-ink); border-color: var(--jjk-bone); box-shadow: inset 3px 0 0 var(--jjk-seal); }
+.jjk-tutorial footer button:disabled { opacity: .4; }
+.jjk-tutorial button:focus-visible { outline: 2px solid var(--jjk-seal-2); outline-offset: 2px; }
+@keyframes jjk-tutorial-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .jjk-tutorial.jjk5e-ui { animation: none; } }

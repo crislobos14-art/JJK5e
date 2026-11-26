@@ -1,0 +1,180 @@
+{
+ "_id": "daMq6EdvcNP2AQ3h",
+ "name": "00 — Guía del módulo JJK5e",
+ "sort": 50,
+ "flags": {
+  "jjk5e": {
+   "lang": "es",
+   "source": "IxoXWqhgpYohpdKp"
+  }
+ },
+ "folder": "IXMKct7fx9qz8bdj",
+ "pages": [
+  {
+   "_id": "3lheQ1AUjyKN3c7j",
+   "name": "Guía del módulo JJK5e",
+   "type": "text",
+   "sort": 1000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p>Esta guía explica qué hace el módulo por ti, qué tienes que aplicar a mano y dónde está cada botón. Las reglas completas están en los capítulos del manual V.6 de este mismo compendio.</p>"
+   },
+   "_key": "!journal.pages!daMq6EdvcNP2AQ3h.3lheQ1AUjyKN3c7j"
+  },
+  {
+   "_id": "ghL0BkVKgW764bKM",
+   "name": "Inicio rápido",
+   "type": "text",
+   "sort": 2000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<p><strong>Jugadores</strong></p>\n<ul><li>Abre tu ficha: arriba verás el medidor de <strong>Energía maldita (EM)</strong> junto a los PG y los dados de golpe.</li><li>Pulsa la pestaña <strong>JJK</strong> (yin-yang) para ver tu técnica, tus dominios, tus votos y tu carrera. <strong>Volver a la ficha</strong> te devuelve a la pestaña nativa.</li><li>Usa tus técnicas como cualquier actividad de dnd5e: el módulo cobra la EM, aplica los descuentos y avisa si no te alcanza.</li><li>El botón <strong>Controles JJK</strong> (abajo a la derecha) abre los avisos y la consulta rápida.</li></ul>\n<p><strong>DJ</strong></p>\n<ul><li>Instala y activa <strong>Midi-QOL</strong>, <strong>DAE</strong>, <strong>Sequencer</strong> y, si quieres ambiente de escena, <strong>FXMaster</strong>. El módulo avisa al iniciar si falta alguno.</li><li>Las cosas que cambian a varios personajes a la vez (choques de dominio, golpes de expansión) las resuelve el DJ activo.</li><li>Si algo quedó colgado en el mapa, ejecuta en una macro: <code>game.modules.get(\"jjk5e\").api.cleanupDomains()</code>.</li></ul>"
+   },
+   "_key": "!journal.pages!daMq6EdvcNP2AQ3h.ghL0BkVKgW764bKM"
+  },
+  {
+   "_id": "vHWa8aFay89ovhFx",
+   "name": "La ficha y la pestaña JJK",
+   "type": "text",
+   "sort": 3000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<ul><li><strong>Medidor de EM:</strong> pulsa la barra para escribir un valor; los botones − y + gastan o recuperan 1.</li><li><strong>Sellos:</strong> cada técnica, dominio, voto, clase u objeto JJK lleva un sello junto al nombre. El color y el icono indican la familia; el dibujo, el giro y los anillos distinguen un objeto de otro. Los dominios son redondos, los votos en rombo y Heavenly Restriction en octágono.</li><li><strong>Pestaña JJK:</strong> técnica innata, estado del dominio, votos, carrera del hechicero y atajos. En pantallas estrechas pasa a una sola columna.</li></ul>"
+   },
+   "_key": "!journal.pages!daMq6EdvcNP2AQ3h.vHWa8aFay89ovhFx"
+  },
+  {
+   "_id": "r0QGe7MAHCcrmR6B",
+   "name": "Energía maldita",
+   "type": "text",
+   "sort": 4000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<table>\n<thead><tr><th>Qué</th><th>Cómo funciona en el módulo</th></tr></thead>\n<tbody>\n<tr><td>Gasto de técnicas</td><td>Automático al usar la actividad. Si no tienes EM suficiente, la acción se cancela.</td></tr>\n<tr><td>Cursed Strike</td><td>Eliges cuánta EM gastar (hasta tu BC); suma d6, d8, d12 o 2d8 necróticos según tu dominio de la EM.</td></tr>\n<tr><td>Descanso corto</td><td>Botón en el panel: cambias dados de golpe por EM (hasta la mitad de tus DG).</td></tr>\n<tr><td>Emoción negativa</td><td>Lo pides desde el panel y el DJ lo confirma: recuperas tu BC en EM.</td></tr>\n<tr><td>Máxima potencia</td><td>Botón <strong>Máxima potencia</strong> (puntuación de EM 20). Si lo usas dos veces en la misma ronda, tirada CD 15 +2 por nivel o subes Reduced Output.</td></tr>\n<tr><td>Reduced Output</td><td>Baja 1 nivel por cada minuto sin gastar EM y con cada Black Flash.</td></tr>\n<tr><td>RCT</td><td>Reserva de curación; recupera 10 PG cada dos rondas y se llena con The Zone.</td></tr>\n<tr><td>Black Flash</td><td>Tras un crítico, el módulo tira el segundo d20: con un 20 natural, daño ×3 que ignora resistencias. Activa The Zone.</td></tr>\n<tr><td>The Zone</td><td>Ventaja, +1 al crítico y al Black Flash; quita el burnout y −1 Reduced Output.</td></tr>\n</tbody>\n</table>"
+   },
+   "_key": "!journal.pages!daMq6EdvcNP2AQ3h.r0QGe7MAHCcrmR6B"
+  },
+  {
+   "_id": "lUOh4FQCgqweUHW6",
+   "name": "Dominios",
+   "type": "text",
+   "sort": 5000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<ul><li><strong>Abrir:</strong> usa la actividad del dominio. Cuesta 20 EM (menos con refinamiento 700 y 1000). Se abre con turno completo, con una acción a partir de 200 y con una acción adicional a partir de 1000.</li><li><strong>En el mapa:</strong> el alcance de las reglas sigue en pies (175 ft; 655 ft sin barrera; 100 ft el incompleto). La zona dibujada nunca sale del mapa.</li><li><strong>Tarjeta de apertura:</strong> PG, CA, refinamiento y alcance. El DJ marca a las criaturas que no quedaron atrapadas y pulsa <strong>Golpe de expansión</strong>: Xd6 contundente y empuje hasta el borde.</li><li><strong>Impacto garantizado:</strong> solo contra objetivos elegidos dentro del dominio. Simple Domain lo absorbe.</li><li><strong>Panel de dominio (HUD):</strong> cerrar, cambiar a no letal, invertir o equilibrar la barrera, amplificación (600) y asistente de dominio propio (DJ).</li><li><strong>Botones del panel JJK:</strong> Expansión de 0,2 s (400), Comprimir dominio (900), Entrenar refinamiento, Diario de refinamiento, Atacar la barrera y Abrir punto débil.</li><li><strong>Al cerrar:</strong> Technique Burnout durante 1 minuto (5 rondas el incompleto) y 2 niveles de agotamiento (1 a partir de 700). Black Flash o The Zone lo terminan antes.</li></ul>"
+   },
+   "_key": "!journal.pages!daMq6EdvcNP2AQ3h.lUOh4FQCgqweUHW6"
+  },
+  {
+   "_id": "LDR1xGgmIQAvDkmQ",
+   "name": "Choques de dominio",
+   "type": "text",
+   "sort": 6000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<ul><li>Cuando alguien abre un dominio, quien pueda responder recibe un aviso para abrir el suyo como reacción.</li><li>Gana quien tiene más refinamiento. Con 10 a 90 puntos de diferencia, el perdedor se rompe en 9 a 1 rondas y encoge 15 ft por ronda; con 100 o más, se rompe al instante.</li><li><strong>Empate:</strong> ambos se mantienen. A 1/3 de PG, tirada CD 15 sin modificadores o el dominio cae.</li><li>Mientras dura el choque, el mapa muestra en rojo el área compartida y el impacto garantizado queda suspendido en ambos.</li><li>Ganar un choque da +100 de refinamiento (una vez al mes y nunca dos veces contra el mismo rival).</li></ul>"
+   },
+   "_key": "!journal.pages!daMq6EdvcNP2AQ3h.LDR1xGgmIQAvDkmQ"
+  },
+  {
+   "_id": "KRdjN26TsexLEUL2",
+   "name": "Refinamiento",
+   "type": "text",
+   "sort": 7000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<table>\n<thead><tr><th>Refinamiento</th><th>Beneficio</th><th>En el módulo</th></tr></thead>\n<tbody>\n<tr><td>100</td><td>Barrera invertida o equilibrada (+5 EM)</td><td>Botones en el HUD</td></tr>\n<tr><td>200</td><td>Expansión con una acción</td><td>Automático</td></tr>\n<tr><td>300</td><td>Potencia aumentada</td><td>Dados extra automáticos</td></tr>\n<tr><td>400</td><td>Expansión de 0,2 s</td><td>Botón en el panel</td></tr>\n<tr><td>500</td><td>Dominio de 2 minutos</td><td>Automático</td></tr>\n<tr><td>600</td><td>Amplificación de dominio</td><td>Botón en el HUD</td></tr>\n<tr><td>700</td><td>−mod de EM al coste y 1 nivel de agotamiento</td><td>Automático</td></tr>\n<tr><td>750 + RCT</td><td>Recuperar el burnout</td><td>Botón en el panel</td></tr>\n<tr><td>800</td><td>Barrera duradera (PG ×2)</td><td>PG automáticos; inmunidad a daño no mágico a mano</td></tr>\n<tr><td>900</td><td>Compresión</td><td>Botón en el panel; desventaja automática</td></tr>\n<tr><td>1000</td><td>Total Mastery, dominio sin barrera</td><td>Automático; cambios de acción de las técnicas a mano</td></tr>\n</tbody>\n</table>\n<p>Se gana refinamiento entrenando (una vez al día), con víctimas dentro del dominio (+20) y ganando choques (+100). Todo queda en el <strong>Diario de refinamiento</strong>.</p>"
+   },
+   "_key": "!journal.pages!daMq6EdvcNP2AQ3h.KRdjN26TsexLEUL2"
+  },
+  {
+   "_id": "IJa7iyBFYphEMxM9",
+   "name": "Votos vinculantes",
+   "type": "text",
+   "sort": 8000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<ul><li>Botón <strong>Votos vinculantes</strong> en el panel. Plantillas o voto propio, con restricción, beneficio y bloqueo hasta el descanso largo.</li><li>El módulo avisa si superas tu límite (tu BC).</li><li>Al romper un voto mutuo eliges: 5 niveles de agotamiento durante 10 días o una tirada en la tabla de desgracias.</li></ul>"
+   },
+   "_key": "!journal.pages!daMq6EdvcNP2AQ3h.IJa7iyBFYphEMxM9"
+  },
+  {
+   "_id": "zghmMjaUqUVcuBKZ",
+   "name": "Avisos",
+   "type": "text",
+   "sort": 9000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<ul><li>Avisos emergentes para PG a 0, EM baja, burnout, The Zone, dominios, nivel de salida, RCT, turno y descanso pendiente.</li><li>Se ven 3 como máximo; se pausan al pasar el ratón y se cierran con la ×.</li><li>En <strong>Configuración del módulo</strong> cada jugador puede activar el centro de notificaciones, el sonido de los urgentes y el historial, y ajustar el umbral de EM baja.</li></ul>"
+   },
+   "_key": "!journal.pages!daMq6EdvcNP2AQ3h.zghmMjaUqUVcuBKZ"
+  },
+  {
+   "_id": "SuH8Cl9H5AX65BBU",
+   "name": "Qué se aplica a mano",
+   "type": "text",
+   "sort": 10000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<ul><li>Quién puede reaccionar a una expansión de 0,2 s, si el DJ no usa el aviso del módulo.</li><li>La inmunidad de la barrera duradera (800) al daño no mágico.</li><li>Los cambios de tipo de acción de las técnicas con Total Mastery (1000).</li><li>La tirada de Reduced Output si sigue activa una técnica con máxima potencia.</li><li>Las desgracias de la tabla de votos que no son efectos (perder un sentido, una extremidad…).</li></ul>"
+   },
+   "_key": "!journal.pages!daMq6EdvcNP2AQ3h.SuH8Cl9H5AX65BBU"
+  },
+  {
+   "_id": "TVOHdz3IigN6FIjJ",
+   "name": "Para el DJ",
+   "type": "text",
+   "sort": 11000,
+   "title": {
+    "show": true,
+    "level": 1
+   },
+   "text": {
+    "format": 1,
+    "content": "<ul><li><strong>Ajustes de refinamiento y avances:</strong> panel JJK del actor, sección del DJ. Los cambios quedan en el diario.</li><li><strong>Peticiones de jugadores:</strong> atacar barreras, abrir puntos débiles o recuperar EM por emoción negativa llegan como confirmación al DJ.</li><li><strong>Limpieza:</strong> al iniciar la partida y al cerrar cada dominio, el módulo borra zonas, tintes, marcadores y animaciones de dominios ya cerrados.</li><li><strong>Tutorial:</strong> se muestra la primera vez. Para verlo de nuevo, en una macro: <code>game.modules.get(\"jjk5e\").api.showTutorial()</code>.</li></ul>"
+   },
+   "_key": "!journal.pages!daMq6EdvcNP2AQ3h.TVOHdz3IigN6FIjJ"
+  }
+ ],
+ "_key": "!journal!daMq6EdvcNP2AQ3h"
+}
