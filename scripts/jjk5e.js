@@ -397,6 +397,8 @@ function activityCost(activity) {
     if (ref >= 700) base -= Math.max(0, ceMod(actor));
     if (ref >= 1000) base -= Number(actor.system?.attributes?.prof) || 0;
     base = Math.max(1, base);
+    // 0.2 Second Expansion (400): the armed expansion costs half (rounded up).
+    if (ref >= 400 && actor.getFlag?.(MODULE_ID, "quickDomain") && !activity.item.flags?.jjk5e?.incompleteDomain) base = Math.ceil(base / 2);
   }
   // Awakened Understanding (Advanced −1 / Mastered −2): technique base cost, minimum 1.
   if (base > 1 && actor && activity?.item?.flags?.jjk5e?.technique) {
@@ -1895,9 +1897,78 @@ function rawCEDamageBonus(actor) {
   return parts;
 }
 
+/* ---- Domain Refinement: gains (V.6 Methods of Refinement) and active benefits ---- */
+const DAY_SECONDS = 86400, MONTH_SECONDS = 30 * DAY_SECONDS;
+async function addRefinement(actor, amount, reasonKey, data = {}) {
+  const before = refinementOf(actor);
+  const after = clamp(before + amount, 1, 1000);
+  if (after === before) return 0;
+  await actor.setFlag(MODULE_ID, "refinement", after);
+  await chat(actor, `<p><i class="fas fa-circle-half-stroke"></i> ${t(reasonKey, { name: esc(actor.name), n: after - before, total: after, ...data })}</p>`).catch(() => null);
+  return after - before;
+}
+/** Training: once per day, spend CE up to your CE modifier; each point adds one refinement point. */
+async function trainRefinement(actor) {
+  const day = Math.floor((Number(game.time?.worldTime) || 0) / DAY_SECONDS);
+  if (actor.getFlag(MODULE_ID, "refinementTrainingDay") === day) return ui.notifications?.warn?.(t("Domain.TrainDone"));
+  const cap = Math.min(Math.max(0, ceMod(actor)), Math.floor(poolValue(findPool(actor))));
+  if (cap < 1) return ui.notifications?.warn?.(t("Domain.TrainNoCE"));
+  const n = clamp(Math.floor(Number(await promptNumber(t("Domain.Train"), t("Domain.TrainPrompt", { max: cap }), cap)) || 0), 0, cap);
+  if (!n) return;
+  if (await spendCE(actor, n, t("Domain.Train")) === false) return;
+  await actor.setFlag(MODULE_ID, "refinementTrainingDay", day);
+  await addRefinement(actor, n, "Domain.TrainDoneChat");
+}
+/** Compression (900+): bonus action, 5 CE; the outside shrinks to a 5 ft circle, attacks against it have disadvantage. */
+async function compressDomain(actor) {
+  const s = getDomain(actor);
+  if (!s?.open || s.compressed || s.noBarrier || refinementOf(actor) < 900) return;
+  if (await spendCE(actor, 5, t("Domain.Compress")) === false) return;
+  const fresh = getDomain(actor);
+  if (!fresh?.open) return;
+  await setDomain(actor, { ...fresh, compressed: true });
+  await chat(actor, `<p><i class="fas fa-compress"></i> ${t("Domain.Compressed", { name: esc(actor.name) })}</p>`).catch(() => null);
+}
+/** Domain Casualties: +20 when a creature inside your domain drops to 0 HP (its CR at least half your level). */
+async function domainCasualty(victim) {
+  const token = actorToken(victim);
+  if (!token) return;
+  const cr = Number(victim.system?.details?.cr ?? victim.system?.details?.level) || 0;
+  for (const caster of engineActors()) {
+    const s = getDomain(caster);
+    if (!s?.open || s.incomplete || caster.uuid === victim.uuid || !insideDomain(s, token)) continue;
+    const level = Number(caster.system?.details?.level ?? caster.system?.details?.cr) || 1;
+    if (cr >= Math.ceil(level / 2)) await addRefinement(caster, 20, "Domain.CasualtyChat", { target: esc(victim.name) });
+  }
+}
+/** Domain Superiority: +100 for winning a clash, once per month and never twice against the same creature. */
+async function domainSuperiority(winner, loserUuid) {
+  const now = Number(game.time?.worldTime) || 0;
+  const log = actorFlagArray(winner, "domainSuperiority");
+  if (log.some((e) => e.uuid === loserUuid) || log.some((e) => now - (Number(e.time) || 0) < MONTH_SECONDS)) return 0;
+  await winner.setFlag(MODULE_ID, "domainSuperiority", [...log, { uuid: loserUuid, time: now }]);
+  return addRefinement(winner, 100, "Domain.SuperiorityChat");
+}
+function actorFlagArray(actor, key) { const v = actor.getFlag(MODULE_ID, key); return Array.isArray(v) ? v : []; }
+
+/** V.6 Increased Potency (refinement 300+): inside your own complete domain, innate technique damage adds
+ *  dice equal to your CE modifier (same die as the technique's first damage die). */
+function domainPotencyPart(actor, item, parts) {
+  const s = getDomain(actor);
+  if (!s?.open || s.incomplete || (Number(s.refinement) || 0) < 300 || !item?.flags?.jjk5e?.technique) return null;
+  const mod = ceMod(actor);
+  if (mod < 1) return null;
+  const token = actorToken(actor);
+  if (token && Number.isFinite(s.x) && !insideDomain(s, token)) return null;
+  const die = String(parts?.[0] ?? "").match(/\d*d(\d+)/i)?.[1];
+  return die ? `${mod}d${die}` : null;
+}
+
 function onPreRollDamage(config) {
   const actor = config?.subject?.actor ?? config?.subject?.item?.actor;
   crunchyCrit(config, actor);
+  const potency = actor && domainPotencyPart(actor, config?.subject?.item, config?.rolls?.[0]?.parts);
+  if (potency) addPart(config, potency);
   if (actor && config?.subject?.item?.flags?.jjk5e?.rawCE) rawCEDamageBonus(actor).forEach((p) => addPart(config, p));
   if (!setting("blackFlashDamage")) return;
   const pending = actor?.getFlag?.(MODULE_ID, "pendingBlackFlash");
@@ -1948,14 +2019,17 @@ async function openDomain(actor, item) {
     // V.6: Incomplete Domain lasts 1 minute. Lasting Domain (500) grants 2 and Total Mastery (1000) grants 3.
     const ref = refinementOf(actor);
     const minutes = incomplete ? 1 : ref >= 1000 ? 3 : ref >= 500 ? 2 : 1;
+    // 0.2 Second Expansion (400): armed beforehand, lasts until the end of this turn and hits every creature.
+    const quick = !incomplete && !barrierless && ref >= 400 && !!actor.getFlag(MODULE_ID, "quickDomain");
+    if (actor.getFlag(MODULE_ID, "quickDomain")) await actor.unsetFlag(MODULE_ID, "quickDomain");
     const selected = [...(canvas?.tokens?.controlled ?? [])].filter((tk) => tk.actor?.uuid === actor.uuid);
     const active = actor.getActiveTokens?.() ?? [];
     const origin = selected.length === 1 ? selected[0] : active.length === 1 ? active[0] : null;
     await setKindEffect(actor, "domain", {
       name: item?.name ?? t("Domain.Zone"), img: `${ICONS}/domain.svg`,
-      duration: barrierless ? {} : { rounds: 10 * minutes, seconds: 60 * minutes },
-      description: `<p>${t(incomplete ? "Domain.IncompleteDescription" : barrierless ? "Domain.BarrierlessDescription" : "Domain.Description")}</p>`,
-      flags: { jjk5e: { domainOpen: true, incomplete, barrierless,
+      duration: barrierless ? {} : quick ? { rounds: 1, turns: 0, seconds: 6 } : { rounds: 10 * minutes, seconds: 60 * minutes },
+      description: `<p>${t(incomplete ? "Domain.IncompleteDescription" : barrierless ? "Domain.BarrierlessDescription" : quick ? "Domain.QuickDescription" : "Domain.Description")}</p>`,
+      flags: { ...(quick ? { dae: { specialDuration: ["turnEnd"] } } : {}), jjk5e: { domainOpen: true, incomplete, barrierless, quick,
         domainItemUuid: item?.uuid ?? null, originTokenUuid: (origin?.document ?? origin)?.uuid ?? null } }
     });
   } finally {
@@ -2019,6 +2093,23 @@ async function setReducedOutput(actor, level) {
     description: `<p><strong>${RO_ROWS[level]}</strong></p><p>${t("Output.ReducedDescription")}</p>`
   } : null);
   return level;
+}
+
+/** Lowers Reduced Output by 1 for every full minute of world time without spending CE (GM, on world time). */
+async function decayReducedOutput(now = Number(game.time?.worldTime) || 0) {
+  // World actors plus unlinked tokens of the scenes in use: cheap enough for every world-time tick.
+  const scenes = [...new Set([game.scenes?.active, canvas?.scene].filter(Boolean))];
+  const actors = [...(game.actors ?? []), ...scenes.flatMap((sc) => [...(sc.tokens ?? [])].filter((tk) => !tk.actorLink).map((tk) => tk.actor))];
+  for (const actor of new Set(actors.filter(Boolean))) {
+    const ro = Number(actor.getFlag(MODULE_ID, "reducedOutput")) || 0;
+    if (ro <= 0) continue;
+    const last = actor.getFlag(MODULE_ID, "lastCESpendTime");
+    if (!Number.isFinite(last)) { await actor.setFlag(MODULE_ID, "lastCESpendTime", now); continue; }
+    const minutes = Math.floor((now - last) / 60);
+    if (minutes < 1) continue;
+    await setReducedOutput(actor, Math.max(0, ro - minutes));
+    await actor.setFlag(MODULE_ID, "lastCESpendTime", last + 60 * minutes);
+  }
 }
 
 async function maximumOutput(actor) {
@@ -2377,6 +2468,11 @@ function panelHTML(actor, tab = "combat") {
         ${pbtn("domainHUD", "fa-solid fa-circle-half-stroke", t("Domain.HUD"))}
         ${pbtn("attackSelectedBarrier","fas fa-crosshairs",t("Domain.MarkerAttack"))}
         ${canRecoverBurnout(actor) ? pbtn("burnoutRecovery", "fas fa-brain", `${t("Burnout.Recovery")} (4 CE)`) : ""}
+      </div>
+      <div class="jjk-row">
+        ${refinementOf(actor) >= 400 && !domainOpen(actor) ? pbtn("quickDomain", "fas fa-stopwatch", t("Domain.Quick"), { cls: actor.getFlag(MODULE_ID, "quickDomain") ? "on" : "", tip: t("Domain.QuickHint") }) : ""}
+        ${refinementOf(actor) >= 900 && domainOpen(actor) && !getDomain(actor)?.compressed && !getDomain(actor)?.noBarrier ? pbtn("compressDomain", "fas fa-compress", `${t("Domain.Compress")} (5 CE)`, { tip: t("Domain.CompressHint") }) : ""}
+        ${!domainOpen(actor) && refinementOf(actor) < 1000 ? pbtn("trainRefinement", "fas fa-dumbbell", t("Domain.Train"), { tip: t("Domain.TrainHint") }) : ""}
       </div></fieldset>
     ${hr ? "" : `<fieldset><legend>${t("Output.Title")}</legend>
       <div class="jjk-row">
@@ -2482,6 +2578,9 @@ const PANEL_ACTIONS = {
   ceSpendN: (actor, target, root) => spendCE(actor, panelAmount(root), t("CE.Spent")),
   ceRegainN: (actor, target, root) => spendCE(actor, -panelAmount(root), t("CE.Regained")),
   domainHUD: (actor) => openDomainHUD(actor),
+  quickDomain: (actor) => actor.getFlag(MODULE_ID, "quickDomain") ? actor.unsetFlag(MODULE_ID, "quickDomain") : actor.setFlag(MODULE_ID, "quickDomain", true),
+  compressDomain: (actor) => compressDomain(actor),
+  trainRefinement: (actor) => trainRefinement(actor),
   engineDiagnostics: () => showIntegrationDiagnostics(),
   attackSelectedBarrier: () => attackSelectedBarrier(),
   vows: (actor) => openVows(actor),
@@ -3313,9 +3412,20 @@ Hooks.once("ready", async () => {
     const n = actor.items.reduce((tot, i) => tot + (Number(i.flags?.jjk5e?.srRegainCE) || 0), 0);
     if (n > 0 && findPool(actor)) await spendCE(actor, -n, t("CE.ShortRestRestore", { n }));
   });
+  // V.6 Reduced Output: not using Cursed Energy for 1 minute lowers Reduced Output by 1 level.
+  Hooks.on("preUpdateItem", (item, changes, options) => {
+    if (item.flags?.jjk5e?.cePool && foundry.utils.hasProperty(changes, "system.uses.spent")) options.jjk5eSpentBefore = Number(item.system?.uses?.spent) || 0;
+  });
+  Hooks.on("updateItem", (item, changes, options) => {
+    if (!isActiveGM() || options?.jjk5eSpentBefore === undefined) return;
+    const actor = item.parent;
+    if (actor?.documentName !== "Actor" || !(Number(actor.getFlag(MODULE_ID, "reducedOutput")) > 0)) return;
+    if ((Number(item.system?.uses?.spent) || 0) > options.jjk5eSpentBefore) actor.setFlag(MODULE_ID, "lastCESpendTime", Number(game.time?.worldTime) || 0);
+  });
   Hooks.on("updateWorldTime", async () => {
     expireEffects(); expireVowExhaustion();
     if (!isActiveGM()) return;
+    await decayReducedOutput().catch((err) => reportError("reduced output", err));
     for (const scene of game.scenes) {
       const expired = scene.tokens.filter(token => token.flags?.jjk5e?.cloneOrigin &&
         token.flags.jjk5e.cloneExpiry <= game.time.worldTime);
@@ -6467,7 +6577,7 @@ Hooks.once("init", () => {
 Hooks.once("ready", () => {
   if (game.system?.id !== "dnd5e") return;
   Object.assign(game.modules.get(MODULE_ID).api ?? {}, {
-    domainOpened, domainClosed, damageBarrier, findWeakSpot, openDomainHUD, detectClash, tickClashes, clashRounds,
+    domainSuperiority, domainOpened, domainClosed, damageBarrier, findWeakSpot, openDomainHUD, detectClash, tickClashes, clashRounds,
     getDomain, createCurse, curseData, sureHitBlocked, domainWard, validateDomainProfile
   });
   Hooks.on("createActiveEffect", (effect) => {
@@ -6497,6 +6607,10 @@ Hooks.once("ready", () => {
       const hp = actor.system?.attributes?.hp ?? {};
       options.jjk5eHP = (Number(hp.value) || 0) + (Number(hp.temp) || 0);
     }
+  });
+  Hooks.on("updateActor", (actor, changes, options) => {
+    if (!isActiveGM() || options?.jjk5eHP === undefined || options.jjk5eHP <= 0) return;
+    if ((Number(actor.system?.attributes?.hp?.value) || 0) <= 0) return queueDomainWork(() => domainCasualty(actor));
   });
   Hooks.on("updateActor", (actor, changes, options, userId) => {
     if (!isActiveGM() || options?.jjk5eHP === undefined) return;
@@ -9407,6 +9521,7 @@ const {
   ceMod,
   chat,
   detectClash,
+  domainSuperiority,
   domainActor,
   domainFXIds,
   domainSceneFX,

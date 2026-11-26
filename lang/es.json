@@ -188,7 +188,21 @@
       "MultiRounds": "{n} rondas",
       "NeedWeakSpot": "{name} está dentro del dominio y no ha encontrado su punto débil (Percepción CD 30): todavía no puede dañar la barrera desde dentro.",
       "CloseFailed": "JJK 5e: no se pudo cerrar el dominio (no hay GM activo o el GM lo rechazó).",
-      "ClashResultNow": "<strong>{win}</strong> gana (+{diff}). El dominio de {lose} se rompe <strong>ya</strong>."
+      "ClashResultNow": "<strong>{win}</strong> gana (+{diff}). El dominio de {lose} se rompe <strong>ya</strong>.",
+      "Quick": "Expansión de 0,2 s",
+      "QuickHint": "Refinamiento 400: la próxima expansión cuesta la mitad, dura hasta el final de tu turno y afecta a todas las criaturas. Solo puede reaccionar quien tenga más Destreza que tu puntuación de EM.",
+      "QuickDescription": "Expansión de 0,2 s: dura hasta el final de tu turno y afecta a todas las criaturas del dominio.",
+      "Compress": "Comprimir dominio",
+      "CompressHint": "Refinamiento 900, acción adicional: por fuera el dominio pasa a ser un círculo de 5 ft; los ataques contra él desde fuera tienen desventaja. Dura hasta que termine el dominio.",
+      "Compressed": "{name} comprime su dominio: por fuera es un círculo de 5 ft y los ataques contra él tienen desventaja.",
+      "Train": "Entrenar refinamiento",
+      "TrainHint": "Una vez al día: gasta EM hasta tu modificador de EM; cada punto suma 1 de refinamiento. Esa EM no se recupera hasta el día siguiente.",
+      "TrainPrompt": "EM que quieres gastar (máximo {max}):",
+      "TrainDone": "Ya entrenaste el refinamiento hoy.",
+      "TrainNoCE": "No tienes EM suficiente para entrenar.",
+      "TrainDoneChat": "{name} entrena su dominio: +{n} de refinamiento ({total}).",
+      "CasualtyChat": "Víctima del dominio ({target}): {name} gana +{n} de refinamiento ({total}).",
+      "SuperiorityChat": "Superioridad de dominio: {name} gana +{n} de refinamiento ({total}). No se repite este mes ni contra el mismo rival."
     },
     "Burnout": {
       "Name": "Technique Burnout",

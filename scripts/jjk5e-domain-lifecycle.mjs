@@ -9,6 +9,7 @@ export function createDomainLifecycle({
   ceMod,
   chat,
   detectClash,
+  domainSuperiority,
   domainActor,
   domainFXIds,
   domainSceneFX,
@@ -131,8 +132,11 @@ export function createDomainLifecycle({
         // and rounds came from a refinement comparison that included the one that just left.
         os.clash = remaining.length ? null : { ...os.clash, with: remaining, resolved: true };
         await setDomain(other, os);
-        if (!remaining.length) await chat(other, `<p><i class="fas fa-crown"></i> ${t("Domain.ClashWon", { name: esc(other.name) })}</p>`)
-          .catch((err) => reportError("domain clash chat", err));
+        if (!remaining.length) {
+          await chat(other, `<p><i class="fas fa-crown"></i> ${t("Domain.ClashWon", { name: esc(other.name) })}</p>`)
+            .catch((err) => reportError("domain clash chat", err));
+          await domainSuperiority?.(other, actor.uuid)?.catch?.((err) => reportError("domain superiority", err));
+        }
         else reclash.push(other);
       }
     }

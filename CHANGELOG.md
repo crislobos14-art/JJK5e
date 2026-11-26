@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.105.0 — Refinamiento de dominio completo y Reduced Output
+Auditoría de las reglas del motor de dominio y del de energía maldita frente al manual V.6. Se añade lo que faltaba:
+- **Potencia aumentada (refinamiento 300):** dentro de tu dominio completo, el daño de tus técnicas innatas suma tantos dados como tu modificador de EM, del mismo tipo que el primer dado de la técnica.
+- **Expansión de 0,2 s (400):** botón «Expansión de 0,2 s» en el panel JJK.
+  - La siguiente expansión cuesta la mitad y dura hasta el final de tu turno.
+  - La nota del dominio recuerda que afecta a todas las criaturas.
+  - La restricción de reacción (Destreza mayor que tu puntuación de EM) se aplica a mano.
+- **Compresión (900):** botón «Comprimir dominio» (5 EM) con el dominio abierto. La desventaja de los ataques desde fuera se aplica a mano.
+- **Formas de ganar refinamiento:**
+  - Entrenar: una vez al día, gastas EM hasta tu modificador y cada punto suma 1 de refinamiento.
+  - Víctimas: +20 por cada criatura que cae a 0 PG dentro de tu dominio, si su VD es al menos la mitad de tu nivel.
+  - Superioridad: +100 al ganar un choque, una vez al mes y nunca dos veces contra la misma criatura.
+  - El refinamiento no pasa de 1000.
+- **Reduced Output:** baja 1 nivel por cada minuto de tiempo de juego sin gastar EM.
 ## 2.0.1 — Correcciones de Sealed Ink, energía maldita y dominios
 
 - El HUD de combate comprueba la actividad vigente al pulsarla. El control JJK del HUD del token admite teclado.
