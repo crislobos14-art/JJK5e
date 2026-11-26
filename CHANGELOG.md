@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.0.1 — Correcciones de Sealed Ink, energía maldita y dominios
+
+- El HUD de combate comprueba la actividad vigente al pulsarla. El control JJK del HUD del token admite teclado.
+- El descanso largo recupera toda la energía maldita, incluida la parte fraccionaria, mediante la actualización nativa de D&D5e. Si hay un pago pendiente, el descanso sigue bloqueado.
+- Los avisos de energía maldita indican si falta un DJ activo, hay otro pago pendiente o el pago no se pudo autorizar.
+- La expansión sin barrera abre un solo diálogo y vuelve a comprobar los requisitos al confirmar. Los dominios activos se limpian al cerrar aunque se haya desactivado el seguimiento.
+- Los fallos de chat, marcadores y zonas visuales no interrumpen la resolución de un choque de dominios.
+
+La publicación pasa la suite automatizada de 251 pruebas, con 8 regresiones nuevas, y la auditoría estática de 360 hechizos. Queda pendiente la prueba multijugador en Foundry real.
+
 ## 2.0.0 — Dominios y energía maldita en multijugador
 
 - Los controles de cierre apuntan a la apertura que los generó. Una petición antigua no puede cerrar un dominio posterior.

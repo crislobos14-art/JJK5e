@@ -9,6 +9,7 @@ const manifest = JSON.parse(readFileSync(new URL("../module.json", import.meta.u
 function fixture(storage = new Map(), persisted = false) {
   const hooks = new Map(), settings = new Map();
   const game = { world: { id: "test-world" }, user: { id: "test-user", isGM: false }, system: { id: "dnd5e" }, i18n: { lang: "es" },
+    modules: new Map(),
     settings: { register: (id,k,o) => settings.set(k,o), get: (id,k) => persisted && ["sealedEventCenter", "sealedPersistNotices"].includes(k) ? true : settings.get(k)?.default } };
   const exposed = runInNewContext(source.replace(/^import [^\r\n]*\r?\n/gm, "") + "\n({delta,visible,useHUDActivity,history,unread,saveHistory,loadHistory});", { Hooks: { once: (k,f) => hooks.set(k,f) }, game, invokeSealedActivity, isNativeActivityAvailable, canvas: null, fromUuidSync: () => ({ isOwner: false }), window: { localStorage: {
     getItem: key => storage.get(key), setItem: (key, value) => storage.set(key, value), removeItem: key => storage.delete(key)
@@ -75,6 +76,31 @@ test("HUD delegates to the current native activity and rejects a stale actor or 
   activities.delete("attack");
   await useHUDActivity(actor, "weapon", "attack", event);
   assert.equal(calls.length, 1);
+});
+
+test("HUD re-resolves a replaced actor and checks its current activity gate", async () => {
+  const { game, useHUDActivity } = fixture();
+  const used = [];
+  const makeActor = (label) => ({
+    uuid: "Actor.shared", isOwner: true,
+    items: new Map([["item", { system: { activities: new Map([["use", {
+      use: () => used.push(label)
+    }]]) } }]])
+  });
+  const stale = makeActor("old"), current = makeActor("live");
+  game.user.character = current;
+  let allowed = false;
+  game.modules.set("jjk5e", { api: { combatInteractionActivity: actor => ({ allowed: actor === current && allowed }) } });
+  const event = { currentTarget: { disabled: false } };
+  await useHUDActivity(stale, "item", "use", event);
+  assert.deepEqual(used, []);
+  allowed = true;
+  await useHUDActivity(stale, "item", "use", event);
+  assert.deepEqual(used, ["live"]);
+  current.items.delete("item");
+  await useHUDActivity(stale, "item", "use", event);
+  assert.deepEqual(used, ["live"]);
+  assert.equal(event.currentTarget.disabled, false);
 });
 
 test("notice history survives a reload only when enabled and omits actors no longer visible", () => {

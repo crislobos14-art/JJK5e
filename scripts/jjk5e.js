@@ -929,7 +929,7 @@ function registerActivityHooks() {
       ui.notifications.warn(t("Notify.NoGM"));
       return false;
     }
-    if (activity.item?.flags?.jjk5e?.domainActivity === activity.id && domainOpen(actor)) {
+    if (activity.item?.flags?.jjk5e?.domainActivity === activity.id && (domainOpen(actor) || DOMAIN_OPEN_PENDING.has(actor?.uuid))) {
       ui.notifications.warn(t("Notify.DomainActive"));
       return false;
     }
@@ -1920,28 +1920,47 @@ function onPreRollDamage(config) {
 /*  Domain Expansion & Technique Burnout         */
 /* -------------------------------------------- */
 
-async function openDomain(actor, item) {
-  if (!actor?.isOwner || !setting("domainTracking") || domainOpen(actor) || (!game.user.isGM && !game.users.activeGM)) return;
+const DOMAIN_OPEN_PENDING = new Set();
+
+function canOpenDomain(actor) {
+  if (!actor?.isOwner || !setting("domainTracking") || domainOpen(actor) || (!game.user.isGM && !game.users.activeGM)) return false;
   // Technique Burnout follows every expansion: no new domain (complete or incomplete) until it ends.
-  if (inBurnout(actor)) { ui.notifications?.warn?.(t("Notify.Burnout")); return; }
-  // Incomplete Domain (feat): 1 minute, refinement 0, no barrier, no sure hit; burnout 5 rounds.
-  const incomplete = !!item?.flags?.jjk5e?.incompleteDomain;
-  // V.6 Domain Refinement: Lasting Domain (500) 2 minutes, Total Mastery (1000) 3 minutes.
-  const ref = refinementOf(actor);
-  const minutes = incomplete ? 1 : ref >= 1000 ? 3 : ref >= 500 ? 2 : 1;
-  // Barrierless Domain (1000 refinement + breakthrough): no barrier and no time limit.
-  const barrierless = !incomplete && ref >= 1000 && (Number(actor.getFlag(MODULE_ID, "breakthroughs")) || 0) > 0
-    && await confirmDialog(t("Domain.Barrierless"), `<p>${t("Domain.BarrierlessPrompt")}</p>`);
-  const selected = [...(canvas?.tokens?.controlled ?? [])].filter((tk) => tk.actor?.uuid === actor.uuid);
-  const active = actor.getActiveTokens?.() ?? [];
-  const origin = selected.length === 1 ? selected[0] : active.length === 1 ? active[0] : null;
-  await setKindEffect(actor, "domain", {
-    name: item?.name ?? t("Domain.Zone"), img: `${ICONS}/domain.svg`,
-    duration: barrierless ? {} : { rounds: 10 * minutes, seconds: 60 * minutes },
-    description: `<p>${t(incomplete ? "Domain.IncompleteDescription" : barrierless ? "Domain.BarrierlessDescription" : "Domain.Description")}</p>`,
-    flags: { jjk5e: { domainOpen: true, incomplete, barrierless,
-      domainItemUuid: item?.uuid ?? null, originTokenUuid: (origin?.document ?? origin)?.uuid ?? null } }
-  });
+  if (inBurnout(actor)) { ui.notifications?.warn?.(t("Notify.Burnout")); return false; }
+  return true;
+}
+
+function unlocksBarrierlessDomain(actor) {
+  return refinementOf(actor) >= 1000 && Number(actor.getFlag(MODULE_ID, "breakthroughs")) > 0;
+}
+
+async function openDomain(actor, item) {
+  actor = liveActor(actor);
+  const key = actor?.uuid;
+  if (DOMAIN_OPEN_PENDING.has(key) || !canOpenDomain(actor)) return;
+  DOMAIN_OPEN_PENDING.add(key);
+  try {
+    const incomplete = !!item?.flags?.jjk5e?.incompleteDomain;
+    const barrierlessRequested = !incomplete && unlocksBarrierlessDomain(actor) &&
+      await confirmDialog(t("Domain.Barrierless"), `<p>${t("Domain.BarrierlessPrompt")}</p>`);
+    actor = liveActor(actor);
+    if (!canOpenDomain(actor)) return;
+    const barrierless = barrierlessRequested && unlocksBarrierlessDomain(actor);
+    // V.6: Incomplete Domain lasts 1 minute. Lasting Domain (500) grants 2 and Total Mastery (1000) grants 3.
+    const ref = refinementOf(actor);
+    const minutes = incomplete ? 1 : ref >= 1000 ? 3 : ref >= 500 ? 2 : 1;
+    const selected = [...(canvas?.tokens?.controlled ?? [])].filter((tk) => tk.actor?.uuid === actor.uuid);
+    const active = actor.getActiveTokens?.() ?? [];
+    const origin = selected.length === 1 ? selected[0] : active.length === 1 ? active[0] : null;
+    await setKindEffect(actor, "domain", {
+      name: item?.name ?? t("Domain.Zone"), img: `${ICONS}/domain.svg`,
+      duration: barrierless ? {} : { rounds: 10 * minutes, seconds: 60 * minutes },
+      description: `<p>${t(incomplete ? "Domain.IncompleteDescription" : barrierless ? "Domain.BarrierlessDescription" : "Domain.Description")}</p>`,
+      flags: { jjk5e: { domainOpen: true, incomplete, barrierless,
+        domainItemUuid: item?.uuid ?? null, originTokenUuid: (origin?.document ?? origin)?.uuid ?? null } }
+    });
+  } finally {
+    DOMAIN_OPEN_PENDING.delete(key);
+  }
 }
 
 async function closeDomain(actor) {
@@ -1967,11 +1986,11 @@ async function burnoutExhaustion(actor, delta) {
 
 async function onDeleteEffect(effect) {
   if (!isActiveGM() || !(effect.flags?.jjk5e?.domainOpen || effect.flags?.jjk5e?.kind === "domain")) return;
-  if (!setting("domainTracking")) return;
   const actor = effect.parent;
   if (actor?.documentName !== "Actor") return;
   return queueDomainWork(async () => {
   const state = getDomain(actor);
+  if (!state && !setting("domainTracking")) return;
   if (state?.openingId && state.openingId !== effect.uuid) return;
   if (actor.getFlag(MODULE_ID, "lastDomainBurnout") === effect.uuid) return;
   await domainClosed(actor);
@@ -3259,10 +3278,19 @@ Hooks.once("ready", async () => {
 
   Hooks.on("updateCombat", () => expireEffects());
   for(const hook of ["dnd5e.preShortRest","dnd5e.preLongRest","dnd5e.preRestCompleted"]) {
-    Hooks.on(hook,actor=>{
+    Hooks.on(hook,(actor, result)=>{
       if(restReview(actor)||(ceAuthorityEnabled()&&cePending(findPool(actor)))) {
         ui.notifications.warn(t("Notify.CEPendingRest"));
         return false;
+      }
+      if (hook === "dnd5e.preRestCompleted" && actor?.isOwner && result?.longRest && Array.isArray(result.updateItems)) {
+        const pool = findPool(actor);
+        if (!pool) return;
+        // Extend the system's own rest update so whole and fractional CE recover together on the resting client.
+        const recovery = { "system.uses.spent": 0, "flags.jjk5e.fractionalSpent": 0 };
+        const entry = result.updateItems.find((item) => item._id === pool.id);
+        if (entry) Object.assign(entry, recovery);
+        else if (poolValue(pool) < poolMax(pool)) result.updateItems.push({ _id: pool.id, ...recovery });
       }
     });
   }
@@ -3276,7 +3304,10 @@ Hooks.once("ready", async () => {
     }
     if (result?.longRest) {
       const pool = findPool(actor);
-      if (pool && (!ceAuthorityEnabled()||(!cePending(pool)&&isActiveGM()))) await queueCE(actor, () => pool.update({ "system.uses.spent": 0, "flags.jjk5e.fractionalSpent": 0 }, { jjk5eCE: true }));
+      if (pool && !Array.isArray(result.updateItems)) await queueCE(actor, () => {
+        if (ceAuthorityEnabled() && (!isActiveGM() || cePending(pool))) return false;
+        return pool.update({ "system.uses.spent": 0, "flags.jjk5e.fractionalSpent": 0 }, { jjk5eCE: true });
+      });
       return;
     }
     const n = actor.items.reduce((tot, i) => tot + (Number(i.flags?.jjk5e?.srRegainCE) || 0), 0);
@@ -5817,7 +5848,8 @@ async function detectClash(actor) {
       const outcome = result.role === "loser" ? t("Domain.MultiRounds", { n: result.rounds }) : t(`Domain.Role.${result.role}`);
       return clashParticipant(a, state, outcome);
     }).join("");
-    await docClass("ChatMessage").create({ content: `<div class="jjk5e-card jjk-domain-clash"><h3><i class="fas fa-yin-yang" aria-hidden="true"></i> ${t("Domain.MultiClash")}</h3><ul class="jjk-domain-clash-casters" aria-label="${esc(t("Domain.Refinement"))}">${lines}</ul><p class="hint">${t("Domain.MultiClashHint")}</p></div>` });
+    await docClass("ChatMessage").create({ content: `<div class="jjk5e-card jjk-domain-clash"><h3><i class="fas fa-yin-yang" aria-hidden="true"></i> ${t("Domain.MultiClash")}</h3><ul class="jjk-domain-clash-casters" aria-label="${esc(t("Domain.Refinement"))}">${lines}</ul><p class="hint">${t("Domain.MultiClashHint")}</p></div>` })
+      .catch((err) => reportError("domain clash chat", err));
     animateDomainClash(scene, actors);
     for (const a of actors) {
       const result = results.find((r) => r.id === a.uuid);
@@ -5844,7 +5876,8 @@ async function detectClash(actor) {
   await docClass("ChatMessage").create({ content: `<div class="jjk5e-card jjk-domain-clash">
     <h3><i class="fas fa-yin-yang" aria-hidden="true"></i> ${t("Domain.Clash")}</h3>
     <ul class="jjk-domain-clash-casters" aria-label="${esc(t("Domain.Refinement"))}">${clashParticipant(actor, mine)}${clashParticipant(rival, rs)}</ul>
-    <p>${text}</p><p class="hint">${t("Domain.ClashNoSureHit")}</p></div>` });
+    <p>${text}</p><p class="hint">${t("Domain.ClashNoSureHit")}</p></div>` })
+    .catch((err) => reportError("domain clash chat", err));
   animateDomainClash(scene, [actor, rival]);
   if (!equal && rounds === 0) await closeDomainOf(lose, t("Domain.ClashLost", { name: esc(lose.name) }));
 }
@@ -5873,9 +5906,10 @@ async function tickClashes(combat = game.combat) {
       s.radius = Math.max(15, s.radius - 15);
       await setDomain(a, s);
       if (s.zone) await GM_EXTRA.domainZoneResize({ sceneId: s.sceneId, zone: s.zone, x: s.x, y: s.y, radius: s.radius,
-        actorUuid: a.uuid, openingId: s.openingId });
+        actorUuid: a.uuid, openingId: s.openingId }).catch((err) => reportError("domain zone resize", err));
       if (s.clash.rounds <= 0) await closeDomainOf(a, t("Domain.ClashLost", { name: esc(a.name) }));
-      else await chat(a, `<p><i class="fas fa-compress"></i> ${t("Domain.ClashShrink", { name: esc(a.name), r: s.radius, rounds: s.clash.rounds })}</p>`);
+      else await chat(a, `<p><i class="fas fa-compress"></i> ${t("Domain.ClashShrink", { name: esc(a.name), r: s.radius, rounds: s.clash.rounds })}</p>`)
+        .catch((err) => reportError("domain shrink chat", err));
     }
   });
   CLASH_TICK_QUEUES.set(key, next);
@@ -6527,8 +6561,10 @@ function addTokenHUDButton(hud, html) {
   const col = root?.querySelector?.(".col.left");
   if (!col || col.querySelector(".jjk5e-hud")) return;
   const pool = findPool(actor);
-  const btn = document.createElement("div");
+  const btn = document.createElement("button");
+  btn.type = "button";
   btn.className = "control-icon jjk5e-hud";
+  btn.setAttribute("aria-label", t("SceneTools.Panel"));
   btn.title = t("Keys.HudHint");
   btn.innerHTML = `<i class="fas fa-yin-yang"></i>${pool ? `<span class="jjk-hud-ce">${poolValue(pool)}</span>` : ""}`;
   btn.addEventListener("click", (ev) => { ev.preventDefault(); openPanel(actor); });

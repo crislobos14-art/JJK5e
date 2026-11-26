@@ -94,3 +94,42 @@ test("burnout marks and releases unlinked summons in the domain scene while the 
   await burnout.delete(); await env.settle();
   assert.ok(!env.jjk.kindEffect(summon, "burnoutSummon"));
 });
+
+test("turning off tracking does not strand a domain that is already active", async () => {
+  const { env, scene, regions } = await world();
+  const caster = env.addActor({ name: "Caster" });
+  const token = { actor: caster, parent: scene, uuid: "Scene.room.Token.caster", x: 300, y: 300 };
+  caster.getActiveTokens = () => [token];
+  scene.tokens.push(token);
+  await env.jjk.openDomain(caster, { name: "Domain" });
+  await env.settle();
+  assert.ok(env.jjk.getDomain(caster)?.open);
+  assert.equal(regions.size, 1);
+  await env.game.settings.set("jjk5e", "domainTracking", false);
+  await env.jjk.closeDomain(caster);
+  await env.settle();
+  assert.equal(env.jjk.getDomain(caster), null);
+  assert.ok(env.jjk.inBurnout(caster));
+  assert.equal(regions.size, 0);
+  assert.deepEqual(scene.flags.fxmaster.filters, {});
+});
+
+test("a failed marker deletion still resolves the clash and retries the visual cleanup", async () => {
+  const { env, scene, open } = await world();
+  const a = await open("A", 300), b = await open("B", 400);
+  await env.jjk.detectClash(a);
+  assert.ok(env.jjk.sureHitBlocked(b));
+  scene.tokens.push({ id: "M1", flags: { jjk5e: { barrierMarker: { actorUuid: a.uuid, openingId: "op-A" } } } });
+  const remove = scene.deleteEmbeddedDocuments.bind(scene);
+  let attempts = 0;
+  scene.deleteEmbeddedDocuments = (type, ids) => {
+    if (++attempts === 1) return Promise.reject(new Error("marker update interrupted"));
+    return remove(type, ids);
+  };
+  await env.jjk.domainClosed(a);
+  assert.equal(env.jjk.getDomain(a), null);
+  assert.equal(env.jjk.getDomain(b).clash.resolved, true);
+  assert.ok(!env.jjk.sureHitBlocked(b));
+  assert.equal(scene.tokens.length, 0);
+  assert.equal(attempts, 2);
+});

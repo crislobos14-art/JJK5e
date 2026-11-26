@@ -370,6 +370,9 @@
       "EnableModules": "JJK 5e · Enable the combat modules: {list}",
       "QuickRecoveryUnverified": "JJK 5e: Quick Recovery — the feature's use could not be verified; check its uses and restore the CE by hand.",
       "CEPendingRest": "JJK 5e: settle the pending CE reservations (GM) before resting.",
+      "CENoAuthority": "JJK 5e: an active GM is required to authorize this energy payment.",
+      "CEPendingUse": "JJK 5e: another Cursed Energy payment is pending. Wait for it or ask the GM to review it.",
+      "CEAuthorizationFailed": "JJK 5e: the energy payment could not be authorized. Check the pool and any pending payment with the GM.",
       "FullTurnUsed": "Full-Turn Action: you already used your action or bonus action this turn."
     },
     "Settings": {

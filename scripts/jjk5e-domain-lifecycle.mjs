@@ -65,9 +65,11 @@ export function createDomainLifecycle({
     const opened = await setDomain(actor, state);
     if (opened && effect && actor.effects.get(effect.id) && !effect.disabled) animateDomainOpening(actor, state, tokenDoc);
     if (c && state.sceneId && setting("domainZones")) await GM_EXTRA.domainZone({ sceneId: state.sceneId,
-      name: `${t("Domain.Zone")}: ${actor.name}`, color: "#a77fe0", actorUuid: actor.uuid, openingId: state.openingId });
+      name: `${t("Domain.Zone")}: ${actor.name}`, color: "#a77fe0", actorUuid: actor.uuid, openingId: state.openingId })
+      .catch((err) => reportError("domain zone", err));
     await chat(actor, `<div class="jjk5e-card"><h3><i class="fas fa-circle-half-stroke"></i> ${t("Domain.Opened", { name: esc(actor.name) })}</h3>`
-      + `<p>${state.noBarrier ? t(incomplete ? "Domain.IncompleteStats" : "Domain.BarrierlessStats", { radius }) : t("Domain.BarrierStats", { hp: max, ac: state.ac, ref, radius })}</p><p class="hint">${t("Domain.OutsideHint", { n: Math.max(mod, 1) })}</p></div>`);
+      + `<p>${state.noBarrier ? t(incomplete ? "Domain.IncompleteStats" : "Domain.BarrierlessStats", { radius }) : t("Domain.BarrierStats", { hp: max, ac: state.ac, ref, radius })}</p><p class="hint">${t("Domain.OutsideHint", { n: Math.max(mod, 1) })}</p></div>`)
+      .catch((err) => reportError("domain opening chat", err));
     // Clashes change the rival's domain too, which only the GM can always write: the active GM resolves them.
     const claim = actor.getFlag(MODULE_ID, "domainReactionClaim");
     const root = claim?.openerUuid ? await domainActor(claim.openerUuid) : null;
@@ -94,8 +96,9 @@ export function createDomainLifecycle({
     if (!state) return;
     const scene = state.sceneId && game.scenes.get(state.sceneId);
     endDomainAnimation(actor, state.openingId, state.sceneId);
-    await removeBarrierMarkers(actor.uuid, state.openingId, scene);
-    if (state.zone) await GM_EXTRA.domainZoneDelete({ sceneId: state.sceneId, zone: state.zone, actorUuid: actor.uuid, openingId: state.openingId });
+    await removeBarrierMarkers(actor.uuid, state.openingId, scene).catch((err) => reportError("domain marker cleanup", err));
+    if (state.zone) await GM_EXTRA.domainZoneDelete({ sceneId: state.sceneId, zone: state.zone, actorUuid: actor.uuid, openingId: state.openingId })
+      .catch((err) => reportError("domain zone cleanup", err));
     const window = actor.getFlag(MODULE_ID, "domainReactionWindow");
     const survivors = [];
     for (const offer of window?.offers ?? []) {
@@ -115,7 +118,7 @@ export function createDomainLifecycle({
       .filter((a)=>a?.uuid).map((a)=>[a.uuid,a])).values()];
     for (const target of actors) {
       const ids = target.effects?.filter((e)=>e.flags?.jjk5e?.kind === "domainProfileCondition" && e.flags.jjk5e.openingId === state.openingId).map((e)=>e.id) ?? [];
-      if (ids.length) await target.deleteEmbeddedDocuments("ActiveEffect",ids);
+      for (const id of ids) await safeDelete(target.effects.get(id));
     }
     const peers = state.clash?.with ? [state.clash.with].flat() : [];
     const reclash = [];
@@ -128,7 +131,8 @@ export function createDomainLifecycle({
         // and rounds came from a refinement comparison that included the one that just left.
         os.clash = remaining.length ? null : { ...os.clash, with: remaining, resolved: true };
         await setDomain(other, os);
-        if (!remaining.length) await chat(other, `<p><i class="fas fa-crown"></i> ${t("Domain.ClashWon", { name: esc(other.name) })}</p>`);
+        if (!remaining.length) await chat(other, `<p><i class="fas fa-crown"></i> ${t("Domain.ClashWon", { name: esc(other.name) })}</p>`)
+          .catch((err) => reportError("domain clash chat", err));
         else reclash.push(other);
       }
     }
@@ -148,10 +152,14 @@ export function createDomainLifecycle({
     const eff = actor.effects?.find((e) =>
       (openingId === null || e.uuid === openingId) && (e.flags?.jjk5e?.kind === "domain" || e.flags?.jjk5e?.domainOpen));
     if (!state && !eff) return true;
-    if (reason) await chat(actor, `<p><i class="fas fa-burst"></i> ${reason}</p>`);
+    if (reason) await chat(actor, `<p><i class="fas fa-burst"></i> ${reason}</p>`)
+      .catch((err) => reportError("domain closing chat", err));
     if ((getDomain(actor)?.openingId ?? null) !== (state?.openingId ?? null)) return false;
-    if (eff) await safeDelete(eff);
-    else await domainClosed(actor);
+    if (eff) {
+      await safeDelete(eff);
+      return !liveActor(actor)?.effects?.get(eff.id);
+    }
+    await domainClosed(actor);
     return true;
   }
 
