@@ -237,7 +237,10 @@
       "ProfileIncompleteHint": "In an Incomplete Domain the environmental effect asks for a save (CON if none is chosen): half damage on a failure, nothing on a success. The technique improvement is halved. From refinement 300, domain damage adds dice equal to your CE modifier.",
       "ProfileHalved": "halved, incomplete domain",
       "WeakHoleEffect": "Weak spot open: {domain}",
-      "WeakHoleClosed": "{name} stops concentrating: the hole in {domain}'s domain closes."
+      "WeakHoleClosed": "{name} stops concentrating: the hole in {domain}'s domain closes.",
+      "NonMagical": "Non-magical damage",
+      "DurableImmune": "{name}'s durable barrier is immune to non-magical damage.",
+      "MasteryFree": "Free (Total Mastery)"
     },
     "Burnout": {
       "Name": "Technique Burnout",
@@ -266,7 +269,9 @@
       "Benefits": "<p>Choose one: range +50%, one damage roll +50% dice, attack bonus +50% (DC + half PB), duration +50%, or another value +50%. Shikigami: size +1 with an extra necrotic die, HP +50%, or attack + half PB.</p>",
       "ReducedDescription": "Lowers the CE range of techniques by the Output penalty. A technique whose base cost exceeds the Max cannot be used (enforced by the module). Not using CE for 1 minute or landing a Black Flash removes 1 level.",
       "AdvanceMinute": "Advance 1 minute",
-      "AdvanceMinuteHint": "World time moves 60 s: Reduced Output drops for those who spent no CE and timed effects expire."
+      "AdvanceMinuteHint": "World time moves 60 s: Reduced Output drops for those who spent no CE and timed effects expire.",
+      "SustainPrompt": "Does the Maximum Output technique stay active after this turn (an effect with a duration)? If so, another Maximum Output while it lasts asks for the Reduced Output check.",
+      "Sustained": "Maximum Output active"
     },
     "Soul": {
       "Name": "Soul Damage",

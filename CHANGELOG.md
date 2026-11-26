@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.8.0 — Menos reglas a mano
+- **Total Mastery (1000):** mientras tu dominio está abierto, tus técnicas de acción pasan a acción adicional y las de acción adicional pasan a gratuitas. Al cerrarse el dominio se restauran.
+- **Barrera duradera (800):**
+  - El marcador de la barrera es inmune al daño contundente, perforante y cortante no mágico.
+  - El diálogo «Atacar la barrera» tiene la casilla «Daño no mágico», que se anula contra una barrera duradera.
+- **Tabla de desgracias de los votos:**
+  - Perder una extremidad (1d4: piernas o brazos) se aplica con el sistema de extremidades.
+  - Perder un sentido crea un efecto permanente; perder la vista deja cegado.
+  - Las desgracias 4, 5 y 6 ya se aplicaban.
+- **Reduced Output:** al usar máxima potencia, el módulo pregunta si la técnica sigue activa. Si sigue, otra máxima potencia mientras dure pide la tirada de Reduced Output.
 ## 2.7.0 — Pulido
 - **Avanzar 1 minuto** (botón del DJ): hace pasar 60 s de tiempo del mundo. Así baja el Reduced Output de quien no gastó EM y caducan los efectos por tiempo, también fuera de combate.
 - **Punto débil:** quien abre el hueco recibe un efecto de concentración. Si lo pierde o lo quita, el hueco se cierra y sale un aviso en el chat. Al cerrar el dominio también desaparece.

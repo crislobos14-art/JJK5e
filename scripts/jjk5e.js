@@ -2162,7 +2162,9 @@ async function maximumOutput(actor) {
   const combat = game.combat;
   const key = combat ? `${combat.id}:${combat.round}` : null;
   const last = actor.getFlag(MODULE_ID, "maxOutputRound");
-  if (key && last === key) {
+  // Also checked when a technique magnified by Maximum Output is still active (its effect is still on).
+  const stillActive = actor.effects?.some?.((e) => e.flags?.jjk5e?.maxOutputActive && !e.disabled);
+  if ((key && last === key) || stillActive) {
     const dc = 15 + 2 * ro;
     const r = await new Roll(`1d20 + ${ceMod(actor)}`).evaluate();
     await r.toMessage({ speaker: docClass("ChatMessage").getSpeaker({ actor }), flavor: t("Output.Check", { dc }) });
@@ -2174,6 +2176,10 @@ async function maximumOutput(actor) {
   if (key) await actor.setFlag(MODULE_ID, "maxOutputRound", key);
   const extra = Math.ceil(base / 2) + 2 * ro;
   if (!(await spendCE(actor, extra, t("Output.Max")))) return;
+  // Optional duration: a sustained technique keeps this marker so a second Maximum Output forces the check.
+  const sustain = await confirmDialog(t("Output.Max"), `<p>${t("Output.SustainPrompt")}</p>`).catch(() => false);
+  if (sustain) await setKindEffect(actor, "maxOutputActive", { name: t("Output.Sustained"), img: `${ICONS}/reduced.svg`,
+    duration: { rounds: 10, seconds: 60 }, flags: { jjk5e: { maxOutputActive: true } } });
   await chat(actor, `<p><strong>${t("Output.Max")}</strong> (+${extra} CE)</p>${t("Output.Benefits")}`);
 }
 
@@ -4740,9 +4746,17 @@ async function vowPunishment(actor) {
   const n = clamp(Number(roll.total) || 1, 1, 6);
   let line = `${n}. ${L(MISFORTUNES[n - 1])}`;
   const days = async (f) => (await new Roll(f).evaluate()).total;
-  if (n === 3) {
+  if (n === 2) {
+    // A limb is lost: roll which one among arms and legs and apply it through the limb system.
+    const limb = ["rleg", "lleg", "rarm", "larm"][clamp((await new Roll("1d4").evaluate()).total, 1, 4) - 1];
+    line += `: ${t(`Limb.${limb}`)}.`;
+    await setLimb(actor, limb, "lost");
+  } else if (n === 3) {
     const s = clamp((await new Roll("1d4").evaluate()).total, 1, 4);
     line += `: ${L(SENSES[s - 1])}.`;
+    // Sight lost is blindness; the other senses are recorded as a permanent effect for the table.
+    await actor.createEmbeddedDocuments("ActiveEffect", [fxData({ name: `${t("Vow.Misfortune")}: ${L(SENSES[s - 1])}`, img: "icons/svg/blind.svg",
+      statuses: s === 4 ? ["blinded"] : [], flags: { jjk5e: { vowPunishment: true, lostSense: ["touch", "taste", "smell", "sight"][s - 1] } } })]);
   } else if (n === 4) {
     await actor.createEmbeddedDocuments("ActiveEffect", [fxData({ name: t("Vow.Misfortune"), img: "icons/svg/downgrade.svg",
       changes: ["str", "dex", "con", "int", "wis", "cha"].map((a) => ({ key: `system.abilities.${a}.value`, mode: 2, value: "-2" })),
@@ -5927,6 +5941,10 @@ async function attackBarrier(actor, seeker, data) {
   const hit = natural === 20 || (natural !== 1 && attack.total >= state.ac);
   await attack.toMessage?.({ speaker: docClass("ChatMessage").getSpeaker?.({ actor: seeker }), flavor: t(hit ? "Domain.BarrierAttackHit" : "Domain.BarrierAttackMiss") });
   if (!hit) return { hit: false };
+  if (data.nonmagical === true && (Number(state.refinement) || 0) >= 800) {
+    await chat(actor, `<p><i class="fas fa-shield-halved"></i> ${t("Domain.DurableImmune", { name: esc(actor.name) })}</p>`);
+    return { hit: true, hp: state.hp };
+  }
   const damage = await new Roll(formula).evaluate();
   await damage.toMessage?.({ speaker: docClass("ChatMessage").getSpeaker?.({ actor: seeker }), flavor: t("Domain.HitBarrier") });
   if (getDomain(actor)?.openingId !== data.openingId) return false;
@@ -5949,7 +5967,9 @@ async function createBarrierMarker(actor){
     const ActorClass=docClass("Actor");
     if(typeof ActorClass?.create!=="function"||typeof scene.createEmbeddedDocuments!=="function") return false;
     const proxy=await ActorClass.create({name:t("Domain.MarkerName",{name:actor.name}),type:"npc",img:`${ICONS}/domain.svg`,
-      system:{attributes:{hp:{value:state.hp,max:state.max},ac:{calc:"flat",flat:state.ac}}},
+      system:{attributes:{hp:{value:state.hp,max:state.max},ac:{calc:"flat",flat:state.ac}},
+        // Durable Barrier (800+): immune to non-magical damage (dnd5e: physical types bypassed by magic).
+        ...((Number(state.refinement)||0)>=800?{traits:{di:{value:["bludgeoning","piercing","slashing"],bypasses:["mgc"]}}}:{})},
       flags:{jjk5e:{barrierMarker:meta}},ownership:{default:0}});
     if(!proxy) return false;
     try{
@@ -5986,9 +6006,10 @@ async function promptBarrierAttack(actor) {
     content: `<p>${t("Domain.BarrierAttackHint")}</p><label>${t("Domain.AttackBonus")}<input name="bonus" type="number" value="0"></label>
       <label>${t("Domain.AttackRange")}<input name="range" type="number" min="0" value="5"></label>
       <label>${t("Domain.DamageFormula")}<input name="formula" value="1d8"></label>
-      <label><input type="checkbox" name="psychic">${t("Domain.Psychic")}</label>`,
+      <label><input type="checkbox" name="psychic">${t("Domain.Psychic")}</label>
+      <label><input type="checkbox" name="nonmagical">${t("Domain.NonMagical")}</label>`,
     ok: { callback: (e,b) => ({ bonus: b.form.elements.bonus.valueAsNumber, range: b.form.elements.range.valueAsNumber,
-      formula: b.form.elements.formula.value, type: b.form.elements.psychic.checked ? "psychic" : "" }) } });
+      formula: b.form.elements.formula.value, type: b.form.elements.psychic.checked ? "psychic" : "", nonmagical: !!b.form.elements.nonmagical?.checked }) } });
   if (!result) return;
   const done = await requestDomainAuthority("attack", { ...result, actorUuid: actor.uuid, seekerUuid: seeker.uuid,
     tokenUuid: tk.document.uuid, openingId: state.openingId, requestId: foundry.utils.randomID() });
@@ -6076,6 +6097,37 @@ async function outsideBlast(caster, data) {
   }
   await setDomain(caster, { ...getDomain(caster), blastDone: true });
   return true;
+}
+
+/** Total Mastery (1000): inside your domain, action techniques become bonus actions and bonus actions become free.
+ *  Applied when the domain opens and restored when it closes; originals are kept on each item. */
+async function setMasteryActivations(actor, on) {
+  if (!actor?.isOwner) return 0;
+  let n = 0;
+  for (const item of actor.items) {
+    if (!item.flags?.jjk5e?.technique || item.flags.jjk5e.domainActivity) continue;
+    const acts = item.system?.activities?.contents ?? Object.values(item.system?.activities ?? {});
+    const saved = item.flags.jjk5e.masteryOriginal ?? {};
+    const update = {};
+    for (const act of acts) {
+      if (!act?.id) continue;
+      if (on) {
+        const type = act.activation?.type;
+        if (!["action", "bonus"].includes(type) || saved[act.id]) continue;
+        saved[act.id] = { type, condition: act.activation?.condition ?? "" };
+        update[`system.activities.${act.id}.activation.type`] = type === "action" ? "bonus" : "special";
+        if (type === "bonus") update[`system.activities.${act.id}.activation.condition`] = t("Domain.MasteryFree");
+      } else if (saved[act.id]) {
+        update[`system.activities.${act.id}.activation.type`] = saved[act.id].type;
+        update[`system.activities.${act.id}.activation.condition`] = saved[act.id].condition;
+      }
+    }
+    if (!Object.keys(update).length) continue;
+    update[`flags.${MODULE_ID}.masteryOriginal`] = on ? saved : null;
+    await item.update(update);
+    n++;
+  }
+  return n;
 }
 
 /** Full turn below 200, an action from 200, a bonus action at 1000 (V.6 Quicker Expansion / Total Mastery). */
@@ -9536,6 +9588,15 @@ Hooks.once("ready", () => {
   });
   Hooks.on("renderChatMessageHTML", (message, html) => {
     try { if (html?.querySelector?.("table")) fitTables(html); } catch (err) { reportError("adaptive tables", err); }
+  });
+  // Total Mastery: follow the domain state on the owner's client (the GM writes the state).
+  Hooks.on("updateActor", (actor, changes) => {
+    if (!foundry.utils.hasProperty(changes, `flags.${MODULE_ID}.domainState`) && !foundry.utils.hasProperty(changes, `flags.${MODULE_ID}.-=domainState`)) return;
+    const owner = game.users?.find?.((u) => u.active && !u.isGM && actor.testUserPermission?.(u, "OWNER")) ?? game.users?.activeGM;
+    if (owner?.id !== game.user.id) return;
+    const s = getDomain(actor);
+    const on = !!s?.open && !s.incomplete && (Number(s.refinement) || 0) >= 1000;
+    setMasteryActivations(actor, on).catch((err) => reportError("total mastery", err));
   });
   // Weak spot hole: losing the concentration effect closes it.
   Hooks.on("deleteActiveEffect", (effect) => {
