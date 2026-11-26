@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.104.0 — Sellos sin iconos repetidos
+- Ningún icono se comparte entre familias. Antes el puño, la espada y el birrete se repetían en Golpe, Físico, Warrior, Corte, Arma maldita, Pericia y Rasgo de clase.
+- Cada familia tiene su propio juego de 3 a 8 iconos. En una misma ficha, las técnicas y los objetos de la misma familia reciben iconos distintos mientras queden libres; por ejemplo, Blue, Red, Hollow Purple, Infinity y Unlimited Void ya no comparten icono. El reparto sigue el orden alfabético, así que todos los jugadores ven lo mismo.
 ## 1.103.0 — Sellos JJK para todo
 - Las 7 clases tienen sello propio, cada una con su color y su icono: Juggernaut (escudo rojo), Scout (corredor verde), Strategist (caballo azul), Shikigami User (perro violeta), Support Specialist (mano sanadora turquesa), Warrior (puño naranja) y Heavenly Restriction (cadena rota dorada). Las subclases y los rasgos de clase llevan el color de su clase.
 - Familias nuevas:

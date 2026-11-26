@@ -9,9 +9,9 @@ const ID = "jjk5e";
 /** Family: colour (hue, saturation, lightness), Font Awesome glyph and label. */
 export const FAMILIES = {
   ce: [268, 55, 62, "fa-yin-yang", "Energía maldita", "Cursed energy"],
-  physical: [28, 30, 70, "fa-hand-fist", "Físico", "Physical"],
+  physical: [28, 30, 70, "fa-dumbbell", "Físico", "Physical"],
   fist: [14, 70, 60, "fa-hand-fist", "Golpe", "Strike"],
-  blade: [0, 0, 82, "fa-khanda", "Corte", "Slash"],
+  blade: [0, 0, 82, "fa-scissors", "Corte", "Slash"],
   fire: [18, 85, 58, "fa-fire", "Fuego", "Fire"],
   cold: [195, 75, 70, "fa-snowflake", "Hielo", "Ice"],
   lightning: [52, 90, 62, "fa-bolt", "Rayo", "Lightning"],
@@ -45,16 +45,16 @@ export const FAMILIES = {
   pact: [50, 80, 58, "fa-scale-balanced", "Pacto celestial", "Heavenly pact"],
   boon: [44, 90, 62, "fa-crown", "Bendición de grado especial", "Special Grade boon"],
   trait: [330, 45, 66, "fa-fingerprint", "Rasgo especial", "Special trait"],
-  classFeature: [228, 35, 66, "fa-graduation-cap", "Rasgo de clase", "Class feature"],
+  classFeature: [228, 35, 66, "fa-chalkboard-user", "Rasgo de clase", "Class feature"],
   mindset: [300, 35, 70, "fa-brain", "Mentalidad", "Mindset"],
   action: [12, 60, 62, "fa-forward", "Acción adicional", "Additional action"],
   // One fixed colour per JJK class; subclasses and class features take their class's colour.
   "class-juggernaut": [2, 70, 56, "fa-shield", "Juggernaut", "Juggernaut"],
-  "class-scout": [125, 50, 52, "fa-person-running", "Scout", "Scout"],
+  "class-scout": [125, 50, 52, "fa-binoculars", "Scout", "Scout"],
   "class-strategist": [215, 65, 62, "fa-chess-knight", "Strategist", "Strategist"],
   "class-shikigami-user": [270, 55, 64, "fa-dog", "Shikigami User", "Shikigami User"],
   "class-support-specialist": [175, 60, 50, "fa-hand-holding-medical", "Support Specialist", "Support Specialist"],
-  "class-warrior": [22, 75, 56, "fa-hand-fist", "Warrior", "Warrior"],
+  "class-warrior": [22, 75, 56, "fa-hand-sparkles", "Warrior", "Warrior"],
   "class-heavenly-restriction": [46, 85, 58, "fa-link-slash", "Heavenly Restriction", "Heavenly Restriction"]
 };
 const SUBTYPE_FAMILY = { jjkBarrier: "barrier", jjkCursedEnergy: "ce", jjkPhysical: "physical", jjkRCT: "heal",
@@ -70,6 +70,56 @@ function classKey(item) {
   for (const [name, key] of Object.entries(CLASS_NAMES)) if (text.includes(name)) return `class-${key}`;
   return null;
 }
+/** Every family owns its glyphs (no glyph is shared between families); each item picks one of its family's. */
+export const GLYPHS = {
+  ce: ["fa-yin-yang", "fa-atom", "fa-burst", "fa-circle-radiation", "fa-hurricane", "fa-fan", "fa-diagram-project", "fa-circle-nodes"],
+  physical: ["fa-dumbbell", "fa-person-running", "fa-shoe-prints", "fa-weight-hanging"],
+  fist: ["fa-hand-fist", "fa-hand-back-fist", "fa-explosion", "fa-person-falling-burst"],
+  blade: ["fa-scissors", "fa-slash", "fa-xmark", "fa-hashtag", "fa-divide"],
+  fire: ["fa-fire", "fa-fire-flame-curved", "fa-fire-flame-simple", "fa-volcano", "fa-meteor", "fa-fire-burner"],
+  cold: ["fa-snowflake", "fa-icicles", "fa-temperature-low", "fa-igloo"],
+  lightning: ["fa-bolt", "fa-bolt-lightning", "fa-plug-circle-bolt", "fa-car-battery"],
+  water: ["fa-water", "fa-droplet-slash", "fa-house-flood-water", "fa-fish"],
+  earth: ["fa-mountain", "fa-hill-rockslide", "fa-cubes", "fa-trowel-bricks", "fa-gopuram"],
+  blood: ["fa-droplet", "fa-syringe", "fa-vial", "fa-heart-crack"],
+  shadow: ["fa-moon", "fa-ghost", "fa-paw", "fa-crow", "fa-spider"],
+  void: ["fa-circle-notch", "fa-infinity", "fa-arrows-spin", "fa-circle-dot", "fa-arrows-to-dot", "fa-circle-stop", "fa-compact-disc", "fa-arrows-to-circle"],
+  nature: ["fa-leaf", "fa-seedling", "fa-tree", "fa-spa", "fa-clover"],
+  wind: ["fa-wind", "fa-tornado", "fa-feather", "fa-cloud-bolt"],
+  sound: ["fa-wave-square", "fa-music", "fa-bullhorn", "fa-volume-high", "fa-microphone-lines"],
+  star: ["fa-star", "fa-satellite", "fa-sun", "fa-star-of-life", "fa-shuttle-space"],
+  gun: ["fa-crosshairs", "fa-gun", "fa-person-rifle", "fa-bullseye"],
+  mind: ["fa-eye", "fa-masks-theater", "fa-face-dizzy", "fa-hat-wizard", "fa-eye-low-vision"],
+  barrier: ["fa-shield-halved", "fa-dungeon", "fa-torii-gate", "fa-border-all", "fa-vihara"],
+  heal: ["fa-heart-pulse", "fa-kit-medical", "fa-hand-holding-heart", "fa-staff-snake"],
+  curse: ["fa-skull", "fa-skull-crossbones", "fa-biohazard", "fa-bug", "fa-worm"],
+  domain: ["fa-circle-half-stroke", "fa-chess-rook", "fa-place-of-worship", "fa-landmark-dome"],
+  tool: ["fa-toolbox", "fa-screwdriver-wrench", "fa-hammer"],
+  weapon: ["fa-khanda", "fa-gavel", "fa-bomb", "fa-hand-dots", "fa-shield-virus"],
+  equipment: ["fa-vest", "fa-shirt", "fa-mask", "fa-hat-cowboy", "fa-glasses"],
+  consumable: ["fa-flask", "fa-pills", "fa-bottle-droplet", "fa-prescription-bottle", "fa-mortar-pestle"],
+  loot: ["fa-gem", "fa-ring", "fa-coins", "fa-key", "fa-gift"],
+  container: ["fa-box-open", "fa-suitcase", "fa-briefcase", "fa-sack-dollar"],
+  vow: ["fa-handshake", "fa-file-signature", "fa-scale-unbalanced", "fa-link"],
+  feat: ["fa-feather-pointed", "fa-certificate", "fa-award"],
+  race: ["fa-dna", "fa-user-ninja", "fa-person", "fa-users"],
+  background: ["fa-scroll", "fa-book-open", "fa-house-chimney", "fa-school"],
+  spell: ["fa-wand-sparkles", "fa-wand-magic", "fa-book-skull", "fa-wand-magic-sparkles"],
+  skill: ["fa-graduation-cap", "fa-book", "fa-lightbulb", "fa-puzzle-piece"],
+  pact: ["fa-scale-balanced", "fa-file-contract", "fa-hourglass-half"],
+  boon: ["fa-crown", "fa-trophy", "fa-medal", "fa-chess-queen"],
+  trait: ["fa-fingerprint", "fa-dice-d20", "fa-id-badge", "fa-user-astronaut"],
+  classFeature: ["fa-chalkboard-user", "fa-layer-group", "fa-stairs"],
+  mindset: ["fa-brain", "fa-face-angry", "fa-face-grin-stars", "fa-heart"],
+  action: ["fa-forward", "fa-forward-fast", "fa-person-walking-arrow-right"],
+  "class-juggernaut": ["fa-shield"],
+  "class-scout": ["fa-binoculars"],
+  "class-strategist": ["fa-chess-knight"],
+  "class-shikigami-user": ["fa-dog"],
+  "class-support-specialist": ["fa-hand-holding-medical"],
+  "class-warrior": ["fa-hand-sparkles"],
+  "class-heavenly-restriction": ["fa-link-slash"]
+};
 export const PATTERNS = 12;
 
 /** FNV-1a: stable across sessions and clients. */
@@ -102,22 +152,32 @@ export function familyOf(item) {
 }
 
 /** The seal of one item: same name, same seal, on every client. */
-export function identityOf(item) {
+export function identityOf(item, taken = null) {
   const family = familyOf(item);
   const key = item?.flags?.[ID]?.originalName ?? item?.name ?? "";
   const h = hash(`${family}|${key}`);
-  const [hue, sat, light, icon, es, en] = FAMILIES[family];
+  const [hue, sat, light, base, es, en] = FAMILIES[family];
+  const glyphs = GLYPHS[family] ?? [base];
+  // On one sheet, items of the same family take different glyphs while the family still has unused ones.
+  const start = (h >>> 17) % glyphs.length;
+  let icon = glyphs[start];
+  if (taken) {
+    const used = taken.get(family) ?? new Set();
+    const free = glyphs.map((_, i) => glyphs[(start + i) % glyphs.length]).find((g) => !used.has(g));
+    icon = free ?? icon;
+    used.add(icon); taken.set(family, used);
+  }
   return { family, icon, label: game.i18n?.lang === "es" ? es : en, pattern: h % PATTERNS,
     rotation: ((h >>> 4) % 24) * 15, rings: 1 + ((h >>> 9) % 3), hue: (hue + ((h >>> 12) % 21) - 10 + 360) % 360, sat, light };
 }
 
-export function sealElement(item, size = "") {
-  const id = identityOf(item);
+export function sealElement(item, size = "", id = identityOf(item)) {
   const seal = document.createElement("span");
   seal.className = `jjk-id-seal ${size}`.trim();
   seal.dataset.family = id.family;
   seal.dataset.pattern = String(id.pattern);
   seal.dataset.rings = String(id.rings);
+  seal.dataset.glyph = id.icon;
   seal.style.setProperty("--jjk-id-h", String(id.hue));
   seal.style.setProperty("--jjk-id-s", `${id.sat}%`);
   seal.style.setProperty("--jjk-id-l", `${id.light}%`);
@@ -137,16 +197,21 @@ const NAME = ":is(.item-name .title, .item-name h4, .name .title, .item-name, .n
 function sealRows(app, root) {
   const actor = app?.document ?? app?.actor;
   if (!actor?.items || !root?.querySelectorAll) return;
-  for (const row of root.querySelectorAll("[data-item-id]")) {
-    const item = actor.items.get(row.dataset.itemId);
-    if (!isJJK(item)) continue;
+  const rows = [...root.querySelectorAll("[data-item-id]")].map((row) => [row, actor.items.get(row.dataset.itemId)])
+    .filter(([, item]) => isJJK(item));
+  // Glyphs are handed out in name order, so the same sheet looks the same on every client and every render.
+  const taken = new Map(), ids = new Map();
+  for (const item of [...new Set(rows.map(([, item]) => item))].sort((a, b) => String(a.name).localeCompare(String(b.name)) || String(a.id).localeCompare(String(b.id)))) {
+    ids.set(item.id, identityOf(item, taken));
+  }
+  for (const [row, item] of rows) {
     const host = row.querySelector(NAME) ?? row;
     const old = host.querySelector(":scope > .jjk-id-seal");
-    const id = identityOf(item);
+    const id = ids.get(item.id);
     row.dataset.jjkFamily = id.family;
-    if (old?.dataset.pattern === String(id.pattern) && old.dataset.family === id.family) continue;
+    if (old?.dataset.pattern === String(id.pattern) && old.dataset.family === id.family && old.dataset.glyph === id.icon) continue;
     old?.remove();
-    host.prepend(sealElement(item));
+    host.prepend(sealElement(item, "", id));
   }
 }
 

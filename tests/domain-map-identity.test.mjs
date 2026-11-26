@@ -37,10 +37,20 @@ test("the FXMaster mood never multiplies the map by a dark colour", async () => 
 test("identity seals: stable per item, family from the technique theme", async () => {
   globalThis.Hooks ??= { once() {}, on() {} };
   globalThis.game = { i18n: { lang: "es" }, modules: { get: () => ({ api: { itemTheme: (i) => (/purple|blue/i.test(i.name) ? "void" : "fire") } }) } };
-  const { identityOf, familyOf, PATTERNS } = await import("../scripts/jjk-identity.mjs");
+  const { identityOf, familyOf, PATTERNS, GLYPHS, FAMILIES } = await import("../scripts/jjk-identity.mjs");
+  // No glyph is shared by two families, and each family's seal glyph is one of its own.
+  const owner = new Map();
+  for (const [family, glyphs] of Object.entries(GLYPHS)) for (const g of glyphs) {
+    assert.ok(!owner.has(g), `${g} used by ${owner.get(g)} and ${family}`); owner.set(g, family);
+  }
+  for (const [family, entry] of Object.entries(FAMILIES)) assert.equal(GLYPHS[family]?.[0], entry[3], family);
   const hp = { name: "Hollow Purple", type: "feat", flags: { jjk5e: { technique: "Limitless" } } };
   const blue = { name: "Blue", type: "feat", flags: { jjk5e: { technique: "Limitless" } } };
   assert.equal(familyOf(hp), "void");
+  // One sheet: five techniques of one family get five different glyphs.
+  const taken = new Map();
+  const five = ["Blue", "Red", "Hollow Purple", "Infinity", "Unlimited Purple"].map((name) => identityOf({ name, type: "feat", flags: { jjk5e: { technique: "Limitless" } } }, taken).icon);
+  assert.equal(new Set(five).size, 5);
   assert.deepEqual(identityOf(hp), identityOf({ ...hp }));
   const [a, b] = [identityOf(hp), identityOf(blue)];
   assert.ok(a.pattern !== b.pattern || a.rotation !== b.rotation || a.rings !== b.rings, "two techniques of one family differ");
