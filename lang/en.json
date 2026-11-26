@@ -74,7 +74,7 @@
       "Zone": "Domain",
       "Opened": "{name} expands their domain",
       "BarrierStats": "Barrier <strong>{hp}</strong> HP · AC <strong>{ac}</strong> · refinement {ref} · {radius} ft",
-      "OutsideHint": "Outside: {n}d6 bludgeoning and pushed to the edge (apply manually).",
+      "OutsideHint": "Outside: {n}d6 bludgeoning and a push to the edge (GM button).",
       "ClashWon": "{name} wins the clash: sure-hit returns.",
       "BarrierHit": "Barrier takes {dmg} damage ({side}): {hp}/{max}.",
       "Side": {

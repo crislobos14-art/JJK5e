@@ -139,7 +139,8 @@ export function createDomainLifecycle({
         if (!remaining.length) {
           await chat(other, `<p><i class="fas fa-crown"></i> ${t("Domain.ClashWon", { name: esc(other.name) })}</p>`)
             .catch((err) => reportError("domain clash chat", err));
-          await domainSuperiority?.(other, actor.uuid)?.catch?.((err) => reportError("domain superiority", err));
+          // Superiority is for beating a domain, not for outlasting a winner whose own time ran out.
+          if (state.clash?.role !== "winner") await domainSuperiority?.(other, actor.uuid)?.catch?.((err) => reportError("domain superiority", err));
         }
         else reclash.push(other);
       }

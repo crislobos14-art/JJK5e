@@ -74,7 +74,7 @@
       "Zone": "Dominio",
       "Opened": "{name} expande su dominio",
       "BarrierStats": "Barrera <strong>{hp}</strong> PG · CA <strong>{ac}</strong> · refinamiento {ref} · {radius} ft",
-      "OutsideHint": "Fuera: {n}d6 contundente y empuje hasta el borde (a mano).",
+      "OutsideHint": "Fuera: {n}d6 contundente y empuje hasta el borde (botón del DJ).",
       "ClashWon": "{name} gana el choque: recupera el impacto garantizado.",
       "BarrierHit": "La barrera recibe {dmg} de daño ({side}): {hp}/{max}.",
       "Side": {
