@@ -1,5 +1,26 @@
 # Changelog
 
+## 2.14.0 — Configuración, diagnóstico e integraciones
+- **Configurar JJK 5e:** configuración rápida en tres preguntas (automatización, efectos, quién ve la EM) y todos los ajustes del módulo agrupados por función. Está en los ajustes del módulo y en el centro del DJ.
+- **Diagnóstico JJK (DJ):**
+  - Revisa las versiones de Midi-QOL, DAE, dnd5e y Foundry según lo que exige cada módulo.
+  - Detecta dominios atascados, restos de dominios en las escenas, EM pendiente, objetos desactualizados y hechiceros sin reserva de EM.
+  - Arregla con un clic lo que se puede arreglar. Al cargar el mundo, el DJ recibe un aviso solo cuando aparece un problema nuevo, y una tarjeta de novedades tras cada actualización.
+- **Integraciones:**
+  - Token Action HUD tiene un grupo JJK: panel con la EM actual, Maximum Output, quitar Reduced Output, HUD y cierre del dominio, y salvación de grupo para el DJ.
+  - Argon Combat HUD y Carousel Combat Tracker muestran la barra de EM.
+  - La salvación de grupo usa Monk's TokenBar si está activo; si no, publica en el chat el botón de salvación de dnd5e.
+  - Visual Active Effects tiene un botón para quitar Reduced Output.
+- **Combate:**
+  - El registro de combate muestra las rondas que le quedan al dominio, en rojo en la última.
+  - Black Flash, la apertura de un dominio y los choques sacuden la cámara con el temblor nativo de Foundry 14. Es un ajuste del navegador y se omite si el sistema pide reducir el movimiento.
+  - Con Dice So Nice, el Black Flash espera a que el dado se detenga.
+  - Las salvaciones de los perfiles de dominio se tiran sin un diálogo por criatura.
+- **Sello de automatización:** un botón en la cabecera de cada objeto JJK dice si coincide con el compendio y abre la actualización.
+- **Corregido:**
+  - El sonido y la animación del Black Flash no se reproducían cuando el daño extra estaba activo.
+  - En Foundry 14 el dominio ya no intenta crear una plantilla medida, que ya no existe.
+  - Los sellos e impactos de las técnicas se dibujan solo en el nivel del token.
 ## 2.13.0 — Las expansiones de dominio vuelven a abrirse
 - **Corregido:**
   - Con la opción «EM transaccional» activa y sin libWrapper, que es lo habitual en Foundry 14, toda técnica o dominio con coste de EM se cancelaba en silencio: salía la tarjeta, pero el dominio no se abría y no se gastaba la EM.

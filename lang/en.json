@@ -273,7 +273,8 @@
       "AdvanceMinute": "Advance 1 minute",
       "AdvanceMinuteHint": "World time moves 60 s: Reduced Output drops for those who spent no CE and timed effects expire.",
       "SustainPrompt": "Does the Maximum Output technique stay active after this turn (an effect with a duration)? If so, another Maximum Output while it lasts asks for the Reduced Output check.",
-      "Sustained": "Maximum Output active"
+      "Sustained": "Maximum Output active",
+      "ResetReduced": "Clear Reduced Output"
     },
     "Soul": {
       "Name": "Soul Damage",
@@ -650,6 +651,10 @@
         "owners": "Only each player's own",
         "party": "Player characters to everyone",
         "all": "Everyone, NPCs included"
+      },
+      "screenShake": {
+        "Name": "Screen shake",
+        "Hint": "Shakes the camera with Foundry 14's core shake on a Black Flash, when a domain opens and in a domain clash. Only on the scene where it happens; skipped when the system asks for reduced motion."
       }
     },
     "Feats": {
@@ -1462,6 +1467,188 @@
       "Pool": "The sorcerer's cursed energy pool.",
       "Folder": "JJK — Generated sorcerers",
       "Created": "Created {name} (CR {cr})."
+    },
+    "Health": {
+      "Title": "JJK health check",
+      "Open": "Open health check",
+      "Hint": "Checks compatibility, stuck domains, pending CE and outdated items, with one-click fixes.",
+      "FixSetting": "Adjust",
+      "FixDomains": "Clean up domains",
+      "Review": "Review",
+      "Update": "Update",
+      "Fixed": "Fixed: {name}",
+      "FixFailed": "Could not fix it. Check the console (F12).",
+      "AllGood": "All good",
+      "AllGoodHint": "No compatibility problems or domain leftovers were found.",
+      "Recheck": "Check again",
+      "StartupTitle": "JJK 5e found {n} compatibility warning(s)",
+      "Issue": {
+        "midi-missing": {
+          "Title": "Midi-QOL is not active",
+          "Detail": "JJK 5e needs it to automate attacks, saves, Black Flash and domain sure-hit."
+        },
+        "dae-missing": {
+          "Title": "DAE is not active",
+          "Detail": "Midi-QOL needs it for effect durations and formulas."
+        },
+        "midi-dnd5e": {
+          "Title": "Midi-QOL and dnd5e do not match",
+          "Detail": "Midi-QOL {midi} needs dnd5e 6.0.6 or newer and this world runs {dnd5e}. Update dnd5e or use the Midi-QOL 14.0 line."
+        },
+        "midi-foundry": {
+          "Title": "Midi-QOL needs a newer Foundry",
+          "Detail": "Midi-QOL {midi} needs Foundry 14.369 or newer and this server runs {foundry}."
+        },
+        "transactional-libwrapper": {
+          "Title": "Transactional CE without libWrapper",
+          "Detail": "Without libWrapper, CE is charged the ordinary way. Turning the setting off removes the warning on each use."
+        },
+        "sequencer-missing": {
+          "Title": "Sequencer is not active",
+          "Detail": "Without Sequencer, technique animations and seals are not shown."
+        },
+        "jb2a-missing": {
+          "Title": "JB2A is not active",
+          "Detail": "JJK 5e uses its own impact effects instead."
+        },
+        "fxmaster-missing": {
+          "Title": "FXMaster is not active",
+          "Detail": "The domain scene tint cannot be shown. Turn the setting off or enable FXMaster."
+        },
+        "tokenmagic-missing": {
+          "Title": "Token Magic FX is not active",
+          "Detail": "The Zone and domain auras cannot be shown. Turn the setting off or enable Token Magic FX."
+        },
+        "theatre-v14": {
+          "Title": "Theatre Inserts is not verified on Foundry 14",
+          "Detail": "Its page lists it as verified up to Foundry 13 only. VN Talker is an alternative verified on 14."
+        },
+        "tah-system": {
+          "Title": "Token Action HUD D&D 5e is missing",
+          "Detail": "Token Action HUD Core needs the system module to show actions, including the JJK group."
+        },
+        "domain-stuck": {
+          "Title": "Domains marked open without an effect",
+          "Detail": "These characters are recorded with an open domain but have no domain effect: {list}."
+        },
+        "domain-leftovers": {
+          "Title": "Domain leftovers on scenes",
+          "Detail": "{n} region(s) of closed domains are still on the map."
+        },
+        "ce-pending": {
+          "Title": "CE waiting for review",
+          "Detail": "{n} CE charge(s) are waiting for the GM."
+        },
+        "items-outdated": {
+          "Title": "Outdated automation",
+          "Detail": "{n} actor(s) have JJK items older than the compendium."
+        },
+        "pool-missing": {
+          "Title": "Sorcerers without a CE pool",
+          "Detail": "These characters have a technique but no Cursed Energy feature: {list}. Add it from the classes compendium."
+        }
+      }
+    },
+    "Setup": {
+      "Title": "Set up JJK 5e",
+      "Open": "Open",
+      "Hint": "Quick setup in three questions and every module setting grouped by feature.",
+      "Reload": "Some changes need a Foundry reload (F5).",
+      "Applied": "Quick setup applied: {n} setting(s) changed.",
+      "Saved": "{n} setting(s) saved.",
+      "QuickIntro": "Answer three questions and JJK 5e adjusts the rest. You can fine-tune each setting below.",
+      "ApplyQuick": "Apply quick setup",
+      "ByFeature": "Settings by feature",
+      "ClientOnly": "This browser only",
+      "Save": "Save settings",
+      "Q": {
+        "automation": "How much should the module do on its own?",
+        "visuals": "How many visual effects and sounds?",
+        "visibility": "Who sees other characters' cursed energy?"
+      },
+      "A": {
+        "automation": {
+          "full": "Fully automatic",
+          "fullHint": "Charges CE, applies Black Flash, The Zone and domain sure-hit.",
+          "balanced": "Balanced",
+          "balancedHint": "Charges CE and flags Black Flash; you apply the extra damage and sure-hit.",
+          "manual": "Manual",
+          "manualHint": "Reminders only: you manage CE and effects."
+        },
+        "visuals": {
+          "all": "Everything",
+          "allHint": "Animations, sounds, screen shake, domain backdrops and tints.",
+          "subtle": "Subtle",
+          "subtleHint": "Only the module's own effects, quieter, no shake or tints.",
+          "none": "None",
+          "noneHint": "No animations, sounds or backdrops."
+        },
+        "visibility": {
+          "owners": "Owner only",
+          "ownersHint": "Each player sees only their own CE.",
+          "party": "The party",
+          "partyHint": "Players see every player character's CE.",
+          "all": "Everyone",
+          "allHint": "Also visible NPCs."
+        }
+      },
+      "Group": {
+        "ce": "Cursed energy",
+        "combat": "Combat",
+        "domain": "Domains",
+        "fx": "Effects and sound",
+        "build": "Character creation",
+        "ui": "Interface",
+        "other": "Other"
+      }
+    },
+    "News": {
+      "Title": "What's new in JJK 5e {version}",
+      "Setup": {
+        "Title": "Set up JJK 5e",
+        "Text": "quick setup in three questions and settings grouped by feature."
+      },
+      "Health": {
+        "Title": "Health check",
+        "Text": "finds incompatibilities and stuck domains and fixes them in one click."
+      },
+      "Bridges": {
+        "Title": "Integrations",
+        "Text": "JJK group in Token Action HUD, CE meter in Argon and Carousel, group saves with Monk's TokenBar."
+      },
+      "Shake": {
+        "Title": "Screen shake",
+        "Text": "Black Flash and domains shake the camera with Foundry 14's core effect."
+      },
+      "Countdown": {
+        "Title": "Countdown",
+        "Text": "the combat tracker shows the rounds a domain has left."
+      },
+      "Seal": {
+        "Title": "Automation seal",
+        "Text": "a button on each JJK item sheet says whether it is up to date and updates it."
+      }
+    },
+    "Bridge": {
+      "Panel": "JJK panel",
+      "MaxOutput": "Maximum Output",
+      "GroupSave": "Request a group save",
+      "NoTokens": "Select or target the tokens that must save.",
+      "DomainSave": "Save against {name}'s domain",
+      "GroupSaveMonks": "Requested with Monk's TokenBar from the targeted (or selected) tokens.",
+      "GroupSaveChat": "Posts a save button in chat for the targeted (or selected) tokens.",
+      "Ability": "Ability",
+      "DC": "DC",
+      "Label": "Reason",
+      "Request": "Request"
+    },
+    "Seal": {
+      "Label": "JJK automation",
+      "current": "{name}: JJK automation is up to date.",
+      "outdated": "{name}: a newer version is in the compendium.",
+      "outdatedWorld": "{name}: a newer version is in the compendium. Update it from an actor or reimport the compendium.",
+      "custom": "{name}: custom JJK item, not in the compendium.",
+      "none": "{name}: not a JJK item."
     }
   }
 }

@@ -27,12 +27,13 @@ The JJK GM integration report shows whether the modules below are active and whi
 
 | Module | JJK behavior | Live acceptance check |
 |---|---|---|
-| Token Action HUD Core / D&D 5e | Use the native D&D 5e activity entry. JJK does not register another attack or CE payment handler for this HUD. | Use one fixed-cost technique, then cancel a second use. Verify one roll, one successful payment and no second debit. |
+| Token Action HUD Core / D&D 5e | Use the native D&D 5e activity entry. JJK adds a **JJK** group under Features (JJK panel with current CE, Maximum Output, clear Reduced Output, domain HUD and close, and the GM's group save). It does not register another attack or CE payment handler. | Use one fixed-cost technique, then cancel a second use. Verify one roll, one successful payment and no second debit. |
 | Tidy 5e Sheets | Its sheet extension calls the existing JJK header control for owned character sheets. | Open and rerender a character as owner and as observer; verify the control appears once for the owner. |
 | Quick Insert | The Sealed Ink Reference tab can open Quick Insert with the current query. The JJK search remains available. | Search with both tools as a player and verify documents without permission remain unavailable. |
-| Carousel Combat Tracker | Both displays can read Foundry initiative. JJK does not add an alternate turn advancement handler. | Advance initiative with a domain active; verify one turn change and one JJK state update. |
-| Monk's TokenBar | Use its standalone rolls for checks adjudicated by the GM. Use Midi's activity card for saves whose results must drive JJK damage or effects. | Verify an independent contested check does not apply a second JJK save or effect. |
+| Carousel Combat Tracker | Both displays can read Foundry initiative. Each portrait shows the JJK CE meter and the domain countdown. JJK does not add an alternate turn advancement handler. | Advance initiative with a domain active; verify one turn change and one JJK state update. |
+| Monk's TokenBar | *Request a group save* (GM center, Token Action HUD) asks the targeted tokens through Monk's TokenBar; without it, JJK posts a chat card with the dnd5e save button. Use Midi's activity card for saves whose results must drive JJK damage or effects. | Verify an independent contested check does not apply a second JJK save or effect. |
 | Monk's Enhanced Journal / Forien's Quest Log | Use companion journals with mission links. JJK does not synchronize objective or reward state into these modules. Check the supported Foundry version before enabling them. | Open a mission as GM and player; verify that each sees only the intended journal material. |
+| Argon Combat HUD (D&D 5e) | The selected token's portrait panel shows the JJK CE meter. | Select an owned sorcerer, spend CE and verify the meter updates once. |
 | Item Piles / Item Piles: D&D 5e | Use for ordinary loot. Actor-bound JJK resources and linked summon or storage records are not integrated with its transfers. | Transfer an ordinary consumable and verify quantity and ownership, then confirm JJK actor resources are unchanged. |
 
 ## Installation
@@ -339,7 +340,19 @@ CC BY-NC-SA 4.0 — see `LICENSE.txt`. Non-commercial use only.
 
 ### Recommended modules (Foundry 14)
 Sequencer + JB2A (animations), Dice So Nice, Visual Active Effects, Bar Brawl, Token Action HUD D&D 5e,
-Tidy 5e Sheets, FXMaster and Automated Animations complement the required combat modules.
+Monk's TokenBar, Argon Combat HUD, Carousel Combat Tracker, Tidy 5e Sheets, FXMaster and Automated Animations complement
+the required combat modules.
+
+### Setup and health check (2.14)
+- **Set up JJK 5e** (module settings, GM center): a three-question quick setup (automation, visuals, CE visibility) and
+  every JJK setting grouped by feature.
+- **JJK health check** (GM): compatibility of Midi-QOL, DAE, dnd5e and Foundry versions, stuck domains, domain leftovers,
+  pending CE, outdated items and sorcerers without a CE pool, with one-click fixes where possible. At startup the GM gets
+  one whispered card when a new warning appears, and a what's-new card after each update.
+- **Automation seal**: the stamp button in a JJK item sheet's header says whether the item matches the compendium and
+  opens the update.
+- **Screen shake** (client setting): Black Flash, domain opening and domain clashes use Foundry 14's core
+  `CanvasShakeEffect`, only on the scene where they happen and never with reduced motion.
 
 ## v1.23.0 audit-hardening update
 

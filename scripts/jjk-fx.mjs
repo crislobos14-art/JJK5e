@@ -125,6 +125,11 @@ function reducedMotion() {
 
 const gmIds = () => [...(game.users ?? [])].filter((u) => u.isGM).map((u) => u.id);
 const isHidden = (token) => !!(token?.document?.hidden ?? token?.hidden);
+/** The scene level a token stands on (Foundry 14), so its effects stay on that floor. */
+export function levelOf(token) {
+  const doc = token?.document ?? token;
+  return typeof doc?.level === "string" ? doc.level : doc?.level?.id ?? null;
+}
 
 /** Who may see an effect at this token: everyone, only the GMs (hidden token), or nobody. Pure, tested. */
 export function audienceFor(token) {
@@ -144,6 +149,8 @@ function play(shape, at, { color = null, scale = 1.5, below = false, size = null
     if (size) eff.size(size, { gridUnits: true }); else eff.scaleToObject(scale);
     if (color) eff.tint(color);
     if (below) eff.belowTokens();
+    const level = levelOf(at);
+    if (level) eff.onLevels?.(level);
     eff.fadeIn(80).fadeOut(240);
     if (reducedMotion()) eff.playbackRate?.(0.75);
     seq.play();
@@ -247,18 +254,39 @@ function onMidiAttack(workflow) {
   if (ownImpacts() && !aa) for (const tk of hits) play(fx.shape, tk?.object ?? tk, { color: fx.color ?? null, scale: 1.4 });
 }
 
+/* ------------------------------------------------------------------ screen shake (Foundry 14 core) */
+/** How hard each moment shakes the camera (pure, tested). Pixels at 100% zoom, milliseconds. */
+export function shakeProfile(kind) {
+  return ({ blackFlash: { duration: 450, maxDisplacement: 14 }, domain: { duration: 900, maxDisplacement: 9 },
+    clash: { duration: 700, maxDisplacement: 12 } })[kind] ?? null;
+}
+/** Shake the viewer's canvas with the core CanvasShakeEffect, only on the scene where it happened. */
+export function shakeScreen(kind, actor = null, sceneId = null) {
+  const profile = shakeProfile(kind);
+  const Shake = globalThis.foundry?.canvas?.animation?.CanvasShakeEffect;
+  const stage = globalThis.canvas?.stage;
+  if (!profile || !Shake || !stage || !setting("screenShake", true) || reducedMotion()) return false;
+  const viewed = globalThis.canvas?.scene?.id;
+  const here = sceneId ? sceneId === viewed : !actor || (actor.getActiveTokens?.() ?? []).some((tk) => (tk.document ?? tk)?.parent?.id === viewed);
+  if (!here) return false;
+  try { Promise.resolve(new Shake({ target: stage, smoothness: 0.6, returnSpeed: 0.15, ...profile }).play()).catch(() => null); return true; }
+  catch (err) { console.warn(`${ID} | shake`, err); return false; }
+}
+
 /* ------------------------------------------------------------------ module events from documents */
 export function onActorUpdate(actor, changes) {
   const flags = changes?.flags?.[ID];
   if (!flags) return;
-  if (flags.pendingBlackFlash === true) playSound(eventSound("black-flash"));
+  // The flag holds { activityUuid } (or true on older worlds): either means a Black Flash just landed.
+  const bf = flags.pendingBlackFlash;
+  if (bf === true || (bf && typeof bf === "object")) { playSound(eventSound("black-flash")); shakeScreen("blackFlash", actor); }
   if ("domainState" in flags || "-=domainState" in flags) {
     const before = domainMemory.get(actor.uuid) ?? null;
     const now = actor.getFlag?.(ID, "domainState") ?? null;
     domainMemory.set(actor.uuid, now ? { open: !!now.open, openingId: now.openingId, clash: !!(now.clash && !now.clash.resolved) } : null);
-    if (now?.open && now.openingId && now.openingId !== before?.openingId) playSound(eventSound("domain-open"), { volume: 1 });
+    if (now?.open && now.openingId && now.openingId !== before?.openingId) { playSound(eventSound("domain-open"), { volume: 1 }); shakeScreen("domain", actor, now.sceneId); }
     else if (before?.open && !now?.open) { playSound(eventSound("domain-close")); lastClose.set(actor.uuid, Date.now()); }
-    if (now?.open && now.clash && !now.clash.resolved && !before?.clash) playSound(eventSound("domain-clash"));
+    if (now?.open && now.clash && !now.clash.resolved && !before?.clash) { playSound(eventSound("domain-clash")); shakeScreen("clash", actor, now.sceneId); }
   }
 }
 const domainMemory = new Map();
@@ -414,12 +442,13 @@ Hooks.once("init", () => {
   reg("techniqueFX", { scope: "client", type: String, default: "auto",
     choices: { auto: "JJK5E.Settings.techniqueFX.auto", own: "JJK5E.Settings.techniqueFX.own", off: "JJK5E.Settings.techniqueFX.off" } });
   reg("domainBackdrops", { scope: "world", type: Boolean, default: true });
+  reg("screenShake", { scope: "client", type: Boolean, default: true });
 });
 
 Hooks.once("ready", () => {
   if (game.system?.id !== "dnd5e") return;
   const mod = game.modules.get(ID)?.api;
-  if (mod) mod.fx = { fxFor, playSound, eventSound, chooseBackdrop, sweepBackdrops, ownImpacts, visualMode, techniqueOf, table: FX_TABLE };
+  if (mod) mod.fx = { fxFor, playSound, shakeScreen, eventSound, chooseBackdrop, sweepBackdrops, ownImpacts, visualMode, techniqueOf, table: FX_TABLE };
   for (const actor of game.actors ?? []) {
     const s = actor.getFlag?.(ID, "domainState");
     if (s) domainMemory.set(actor.uuid, { open: !!s.open, openingId: s.openingId, clash: !!(s.clash && !s.clash.resolved) });

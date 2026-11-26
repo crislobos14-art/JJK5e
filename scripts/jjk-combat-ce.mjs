@@ -14,6 +14,18 @@ const setting = (key, fallback = null) => { try { return game.settings.get(ID, k
 const api = () => game.modules.get(ID)?.api ?? {};
 
 /* ------------------------------------------------------------------ state (pure, tested) */
+/** Whole rounds an effect has left in the current combat, or null when it has no round duration. */
+export function roundsLeft(effect, combat = game.combat) {
+  const d = effect?.duration ?? {};
+  const total = Number(d.rounds ?? (d.units === "rounds" ? d.value : NaN));
+  const rem = Number(d.remaining);
+  if (Number.isFinite(rem) && (Number.isFinite(total) || d.units === "rounds")) return Math.max(0, Math.ceil(rem));
+  if (!Number.isFinite(total) || total <= 0) return null;
+  const start = Number(d.startRound ?? effect?.start?.round);
+  const now = Number(combat?.round);
+  return Number.isFinite(start) && Number.isFinite(now) ? Math.max(0, total - (now - start)) : total;
+}
+
 export function ceStatus(actor) {
   if (!actor) return null;
   const a = api();
@@ -31,7 +43,9 @@ export function ceStatus(actor) {
     low, empty: value <= 0, pending: !!meter?.pending,
     ro: Math.max(0, Math.min(9, Number(actor.getFlag?.(ID, "reducedOutput")) || 0)),
     burnout: effects.some((e) => e.flags?.[ID]?.kind === "burnout" || e.flags?.[ID]?.burnout),
-    zone: effects.some((e) => e.flags?.[ID]?.kind === "zone" || e.flags?.[ID]?.zone)
+    zone: effects.some((e) => e.flags?.[ID]?.kind === "zone" || e.flags?.[ID]?.zone),
+    domainRounds: (() => { const e = effects.find((x) => x.flags?.[ID]?.kind === "domain" || x.flags?.[ID]?.domainOpen); return e ? roundsLeft(e) ?? -1 : null; })(),
+    burnoutRounds: (() => { const e = effects.find((x) => x.flags?.[ID]?.kind === "burnout"); return e ? roundsLeft(e) : null; })()
   };
 }
 
@@ -58,12 +72,15 @@ export function barHTML(st, name = "") {
   const tip = [`${ce}: ${fmt(st.value)} / ${fmt(st.max)}`,
     st.reserved ? L(`${fmt(st.reserved)} reserved`, `${fmt(st.reserved)} reservada`) : "",
     st.ro ? L(`Reduced Output ${st.ro}`, `Reduced Output ${st.ro}`) : "",
-    st.burnout ? L("Technique Burnout", "Technique Burnout") : "",
-    st.zone ? "The Zone" : ""].filter(Boolean).join(" · ");
+    st.burnout ? (Number.isFinite(st.burnoutRounds) ? L(`Technique Burnout: ${st.burnoutRounds} rounds`, `Technique Burnout: ${st.burnoutRounds} rondas`) : "Technique Burnout") : "",
+    st.zone ? "The Zone" : "",
+    Number.isFinite(st.domainRounds) ? (st.domainRounds >= 0 ? L(`Domain open: ${st.domainRounds} rounds left`, `Dominio abierto: quedan ${st.domainRounds} rondas`)
+      : L("Domain open", "Dominio abierto")) : ""].filter(Boolean).join(" · ");
   const tags = [
     st.ro ? `<span class="jjk-ct-tag ro" aria-hidden="true">R${st.ro}</span>` : "",
     st.burnout ? `<i class="jjk-ct-tag fas fa-fire-flame-curved burnout" aria-hidden="true"></i>` : "",
-    st.zone ? `<i class="jjk-ct-tag fas fa-bolt zone" aria-hidden="true"></i>` : ""].join("");
+    st.zone ? `<i class="jjk-ct-tag fas fa-bolt zone" aria-hidden="true"></i>` : "",
+    Number.isFinite(st.domainRounds) ? `<span class="jjk-ct-tag domain${st.domainRounds >= 0 && st.domainRounds <= 1 ? " ending" : ""}" aria-hidden="true"><i class="fas fa-dharmachakra"></i>${st.domainRounds >= 0 ? st.domainRounds : ""}</span>` : ""].join("");
   return `<div class="jjk-ct-ce jjk-sealed-inline ${states}" role="meter" aria-valuemin="0" aria-valuenow="${fmt(st.value)}" aria-valuemax="${fmt(st.max)}"
       aria-label="${esc(ce + (name ? `: ${name}` : ""))}" aria-valuetext="${esc(tip)}" data-tooltip="${esc(tip)}">
     <span class="jjk-ct-track"><span class="jjk-ct-ghost"></span><span class="jjk-ct-fill" style="width:${st.pct}%"></span>${st.reserved
@@ -142,7 +159,7 @@ function refreshActor(actor) {
 }
 
 const isPoolChange = (item, changes) => !!item?.flags?.[ID]?.cePool && (foundry.utils.hasProperty(changes ?? {}, "system.uses") || foundry.utils.hasProperty(changes ?? {}, `flags.${ID}`));
-const isJJKEffect = (effect) => { const f = effect?.flags?.[ID] ?? {}; return f.kind === "burnout" || f.kind === "zone" || f.burnout || f.zone; };
+const isJJKEffect = (effect) => { const f = effect?.flags?.[ID] ?? {}; return f.kind === "burnout" || f.kind === "zone" || f.kind === "domain" || f.burnout || f.zone || f.domainOpen; };
 
 Hooks.once("init", () => {
   game.settings.register(ID, "combatCEBar", { scope: "client", config: true, type: Boolean, default: true,
@@ -166,5 +183,7 @@ Hooks.once("ready", () => {
   for (const hook of ["createActiveEffect", "deleteActiveEffect", "updateActiveEffect"]) {
     Hooks.on(hook, (effect) => { if (isJJKEffect(effect) && effect.parent?.documentName === "Actor") refreshActor(effect.parent); });
   }
+  // Countdowns (domain, burnout) tick with the round even when no document changes.
+  Hooks.on("updateCombat", (combat, changes) => { if ("round" in (changes ?? {}) || "turn" in (changes ?? {})) requestAnimationFrame(() => paintAll()); });
   if (globalThis.ui?.combat?.rendered) paintAll();
 });

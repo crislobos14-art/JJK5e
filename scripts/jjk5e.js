@@ -1771,6 +1771,14 @@ async function chooseCEAbility(actor) {
 
 const handledRolls = new WeakSet();
 
+/** Wait for Dice So Nice to finish showing a message's dice (at most 4 s); resolves at once without it. */
+async function waitForDice(message, cap = 4000) {
+  const dice3d = game.dice3d;
+  if (!message?.id || typeof dice3d?.waitFor3DAnimationByMessageID !== "function") return false;
+  return Promise.race([Promise.resolve(dice3d.waitFor3DAnimationByMessageID(message.id)).catch(() => false),
+    new Promise((resolve) => setTimeout(() => resolve(false), cap))]);
+}
+
 async function onAttackRoll(rolls, subject) {
   if (!setting("blackFlash")) return;
   const roll = Array.isArray(rolls) ? rolls[0] : rolls;
@@ -1796,12 +1804,14 @@ async function onAttackRoll(rolls, subject) {
   const always = actor.items.some((i) => i.flags?.jjk5e?.alwaysBlackFlash);
   const success = always || blackFlashCheck(face, stacks + bonusRange);
   const Chat = docClass("ChatMessage");
-  await check.toMessage({
+  const checkMsg = await check.toMessage({
     speaker: Chat.getSpeaker({ actor }),
     flavor: `<strong>${t("BlackFlash.Check")}</strong> (${t("BlackFlash.Needs", { target })})`
       + (success ? `<h3 style="color:#b00;text-align:center">⚡ BLACK FLASH ⚡</h3><p>${t("BlackFlash.Success")}</p>` : "")
   });
   if (!success) return;
+  // With Dice So Nice, the flash (sound, shake, animation) lands when the die stops, not while it is still rolling.
+  await waitForDice(checkMsg);
   if (setting("blackFlashDamage")) await actor.setFlag(MODULE_ID, "pendingBlackFlash", { activityUuid: activity?.uuid ?? null });
   await addBreakthrough(actor, 1, "Black Flash");
   if (isActiveGM()) await bumpStat(actor, "bf").catch(() => null);
@@ -3174,6 +3184,15 @@ async function outdatedItems(actor) {
   return out;
 }
 
+/** Whether an item's JJK automation matches its compendium entry: "current", "outdated", "custom" (JJK, no source) or "none". */
+async function itemAutomationStatus(item) {
+  if (!item || !UPDATABLE_TYPES.has(item.type)) return { state: item?.flags?.jjk5e ? "custom" : "none" };
+  const src = itemSource(item);
+  if (!src) return { state: item.flags?.jjk5e ? "custom" : "none" };
+  const rev = (await packRevs(src.pack)).get(src.id);
+  return { state: rev && rev !== item.flags?.jjk5e?.rev ? "outdated" : "current", src };
+}
+
 const KEEP_SYSTEM = ["quantity", "equipped", "attuned", "attunement", "prepared", "identified", "container", "uses.spent"];
 const KEEP_JJK = ["lastScaling", "fractionalSpent"];
 
@@ -3390,10 +3409,16 @@ async function openGMStart() {
     <details><summary>${qol("Dependencies","Dependencias")}</summary><ul>${rows}</ul></details>
     <details><summary>${qol("World settings","Ajustes del mundo")}</summary><ul>${settings}</ul></details>
     <details open><summary>${qol("Pending resources","Recursos pendientes")} · ${pending.length}</summary><ul>${pending.join("")}</ul></details>
-    <label>${qol("Open","Abrir")} <select name="destination"><option value="diagnostics">${t("Diag.Title")}</option>
+    <label>${qol("Open","Abrir")} <select name="destination"><option value="health">${t("Health.Title")}</option>
+    <option value="setup">${t("Setup.Title")}</option><option value="groupSave">${t("Bridge.GroupSave")}</option>
+    <option value="diagnostics">${t("Diag.Title")}</option>
     <option value="settings">${qol("Module settings","Ajustes del módulo")}</option>${choices}</select></label>`, "destination");
   if (result == null || !game.user.isGM) return;
   if (result === "diagnostics") return showIntegrationDiagnostics();
+  const tools = game.modules.get(MODULE_ID)?.api;
+  if (result === "health") return tools?.setup?.openHealth?.();
+  if (result === "setup") return tools?.setup?.openSetup?.();
+  if (result === "groupSave") return tools?.bridges?.promptGroupSave?.();
   if (result === "settings") return game.settings.sheet?.render({ force: true });
   const actor = stale[Number(result)]?.actor;
   if (actor?.isOwner) return updateAutomation(actor);
@@ -3477,7 +3502,8 @@ Hooks.once("init", () => {
     applyScaling, openPanel, maximumOutput, setReducedOutput, setSoulAwareness, setLimb, rollLimb,
     summon, dismissSummons, syncResource, missingPrereqs, applyCEEffects, activateGroup, endGroup,
     openGMStart, undoAutomation, updateAutomation, updateAllAutomation, outdatedItems, burnoutRecovery, fallDamage, applySoulDamage, clearSoulDamage,
-    techniqueBuilder, buildTechniqueItems, itemTheme, ceMeterState, aaHandles,
+    techniqueBuilder, buildTechniqueItems, itemTheme, ceMeterState, aaHandles, itemAutomationStatus, showIntegrationDiagnostics,
+    closeDomain: (actor) => { const a = requireActor(actor); return a ? closeDomainOf(a) : false; }, maxOutput: (actor) => maximumOutput(actor),
     cleanupDomains: async () => { const n = await sweepDomainLeftovers(); await game.modules.get(MODULE_ID)?.api?.fx?.sweepBackdrops?.(); return n; }
   };
 });
@@ -4116,6 +4142,8 @@ function playAt(file, target, { scale = 1, gridSize = null, tint = null } = {}) 
   if (gridSize) seq.size(gridSize, { gridUnits: true });
   else seq.scaleToObject(scale);
   if (tint && typeof seq.tint === "function") seq.tint(tint);
+  const level = tokenLevelId(target);
+  if (level) seq.onLevels?.(level);
   seq.play();
 }
 
@@ -4179,6 +4207,8 @@ function playBetween(file, source, target, missed = false, tint = null) {
   if (!file || !source || !target) return;
   const seq = new Sequence().effect().file(file).atLocation(source).stretchTo(target).missed(missed);
   if (tint && typeof seq.tint === "function") seq.tint(tint);
+  const level = tokenLevelId(source);
+  if (level) seq.onLevels?.(level);
   seq.play();
 }
 
@@ -4516,7 +4546,9 @@ Hooks.once("ready", () => {
   if (game.user.isGM && setting("enableSummoning") && game.settings.settings?.has?.("dnd5e.allowSummoning")
     && !game.settings.get("dnd5e", "allowSummoning")) game.settings.set("dnd5e", "allowSummoning", true);
   Hooks.on("updateActor", (actor, changes, options, userId) => {
-    if (userId === game.user.id && foundry.utils.getProperty(changes, `flags.${MODULE_ID}.pendingBlackFlash`) === true) animateBlackFlash(actor);
+    // The flag is { activityUuid } (true on older worlds): both mean a Black Flash just landed.
+    const bf = foundry.utils.getProperty(changes, `flags.${MODULE_ID}.pendingBlackFlash`);
+    if (userId === game.user.id && (bf === true || (bf && typeof bf === "object"))) animateBlackFlash(actor);
   });
   // Only edits inside the feats compendium change the picker; actor items (CE spends…) do not.
   Hooks.on("updateItem", (item) => { if (item.pack && item.pack === jjkPack("jjk5e-feats")?.collection) featDocsCache = null; });
@@ -5932,7 +5964,8 @@ GM_EXTRA.domainZone = async ({ sceneId, x, y, radius, name, color, actorUuid, op
       if (region) zone = { kind: "Region", id: region.id, shape };
     } catch (err) { log(`region (${shape}) failed`, err); }
   }
-  if (!zone) {
+  // Foundry 14 removed MeasuredTemplate: the template fallback only exists on older cores.
+  if (!zone && CONFIG.MeasuredTemplate?.documentClass) {
     try {
       const [tpl] = await scene.createEmbeddedDocuments("MeasuredTemplate", [{ t: "circle", x, y, distance: fittedTemplateDistance(scene, x, y, radius),
         fillColor: color, borderColor: color, flags: { jjk5e: { domain: actorUuid, openingId } } }]);
@@ -6628,7 +6661,8 @@ async function executeDomainProfile(actor, targets, requestId) {
     let success = false;
     if (profile.save !== "none") {
       if (typeof target.rollSavingThrow !== "function") continue;
-      const result = await target.rollSavingThrow({ ability: profile.save, target: profile.dc });
+      // One quick roll per creature, without a dialog for each (the GM resolves the whole domain at once).
+      const result = await target.rollSavingThrow({ ability: profile.save, target: profile.dc }, { configure: false });
       const roll = Array.isArray(result) ? result[0] : result;
       if (!Number.isFinite(roll?.total)) continue;
       success = roll.total >= profile.dc;
@@ -7815,6 +7849,7 @@ function vaeButtons(effect, buttons) {
   }
   if (f.vow) buttons.push({ label: t("Vow.Title"), callback: () => openVows(actor) });
   if (f.kind === "burnout" || f.burnout) buttons.push({ label: t("SceneTools.ShortRest"), callback: () => shortRestCE(actor) });
+  if (f.kind === "reduced") buttons.push({ label: t("Output.ResetReduced"), callback: () => setReducedOutput(actor, 0) });
 }
 
 Hooks.once("init", () => {
