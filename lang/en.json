@@ -613,6 +613,10 @@
       "ceMeter": {
         "Name": "Cursed Energy meter on sheets",
         "Hint": "Shows Cursed Energy as a meter under Hit Dice (characters) or under HP (NPCs), in the sheet's own format. Click it to type a value."
+      },
+      "animFamilyTint": {
+        "Name": "Animations in their family colour",
+        "Hint": "Tints technique animations with their family seal colour (fire, void, shadow…)."
       }
     },
     "Feats": {
@@ -687,7 +691,9 @@
       "RCT": "Roll RCT awakening (d100)",
       "Breakthrough": "Add breakthroughs (GM)",
       "Create": "JJK: Create character",
-      "Shikigami": "JJK: Customize shikigami"
+      "Shikigami": "JJK: Customize shikigami",
+      "Sorcerer": "JJK: Generate NPC sorcerer",
+      "Stats": "JJK: Session statistics"
     },
     "Spell": {
       "Method": "Innate Technique",
@@ -1392,6 +1398,33 @@
       "Cancel": "Do not resolve / taming ritual",
       "Hint": "Confirm this is a tamed shikigami. If the summoner sees it fall and still has a reaction, it can be recalled until a long rest. During a taming ritual or if unsure, do not confirm the loss.",
       "Recalled": "Recalled until a long rest."
+    },
+    "Stats": {
+      "Title": "Session statistics",
+      "Actor": "Character",
+      "CE": "CE spent",
+      "BF": "Black Flash",
+      "Domains": "Domains",
+      "Clashes": "Clashes won",
+      "Empty": "No data for this session yet.",
+      "Reset": "New session",
+      "ResetHint": "Resets every character's statistics."
+    },
+    "Transfer": {
+      "Export": "Export JJK",
+      "ExportHint": "Downloads this character's refinement, breakthroughs, vows, diary and domain profile.",
+      "Import": "Import JJK",
+      "ImportHint": "Paste the content of a JJK5e export file here.",
+      "Invalid": "This text is not a valid JJK5e export.",
+      "Confirm": "These data of {name} will be replaced: {keys}.",
+      "Done": "JJK data imported into {name}."
+    },
+    "Sorcerer": {
+      "Generate": "Generate NPC sorcerer",
+      "Name": "{grade} sorcerer",
+      "Pool": "The sorcerer's cursed energy pool.",
+      "Folder": "JJK — Generated sorcerers",
+      "Created": "Created {name} (CR {cr})."
     }
   }
 }

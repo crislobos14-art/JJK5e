@@ -613,6 +613,10 @@
       "ceMeter": {
         "Name": "Medidor de energía maldita en las fichas",
         "Hint": "Muestra la energía maldita como un medidor bajo los Dados de Golpe (personajes) o bajo los PG (PNJ), con el formato de la propia ficha. Haz clic para escribir un valor."
+      },
+      "animFamilyTint": {
+        "Name": "Animaciones con el color de su familia",
+        "Hint": "Tiñe las animaciones de técnica con el color del sello de su familia (fuego, vacío, sombra…)."
       }
     },
     "Feats": {
@@ -687,7 +691,9 @@
       "RCT": "Tirada de despertar de TMI (d100)",
       "Breakthrough": "Añadir avances (GM)",
       "Create": "JJK: Crear personaje",
-      "Shikigami": "JJK: Personalizar shikigami"
+      "Shikigami": "JJK: Personalizar shikigami",
+      "Sorcerer": "JJK: Generar hechicero PNJ",
+      "Stats": "JJK: Estadísticas de sesión"
     },
     "Spell": {
       "Method": "Técnica Innata",
@@ -1392,6 +1398,33 @@
       "Cancel": "No resolver / ritual de doma",
       "Hint": "Confirma que es un shikigami domado. Si el invocador lo ve caer y aún tiene su reacción, puede retirarlo hasta el descanso largo. En un ritual de doma o si hay dudas, no confirmes la pérdida.",
       "Recalled": "Retirado hasta el descanso largo."
+    },
+    "Stats": {
+      "Title": "Estadísticas de sesión",
+      "Actor": "Personaje",
+      "CE": "EM gastada",
+      "BF": "Black Flash",
+      "Domains": "Dominios",
+      "Clashes": "Choques ganados",
+      "Empty": "Aún no hay datos en esta sesión.",
+      "Reset": "Nueva sesión",
+      "ResetHint": "Pone a cero las estadísticas de todos los personajes."
+    },
+    "Transfer": {
+      "Export": "Exportar JJK",
+      "ExportHint": "Descarga en un archivo el refinamiento, avances, votos, diario y perfil de dominio de este personaje.",
+      "Import": "Importar JJK",
+      "ImportHint": "Pega aquí el contenido de un archivo exportado de JJK5e.",
+      "Invalid": "El texto no es una exportación válida de JJK5e.",
+      "Confirm": "Se reemplazarán estos datos de {name}: {keys}.",
+      "Done": "Datos JJK importados en {name}."
+    },
+    "Sorcerer": {
+      "Generate": "Generar hechicero PNJ",
+      "Name": "Hechicero de {grade}",
+      "Pool": "Reserva de energía maldita del hechicero.",
+      "Folder": "JJK — Hechiceros generados",
+      "Created": "Creado {name} (VD {cr})."
     }
   }
 }
