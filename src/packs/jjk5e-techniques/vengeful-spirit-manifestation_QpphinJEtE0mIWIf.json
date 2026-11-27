@@ -112,6 +112,175 @@
      "prompt": false,
      "visible": true
     }
+   },
+   "oCCxKr1vIWc7C6QN": {
+    "_id": "oCCxKr1vIWc7C6QN",
+    "type": "summon",
+    "name": "Manifest (failed save: berserk, charmed by you, 200 ft)",
+    "sort": 3000,
+    "activation": {
+     "type": "special",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "spec",
+     "special": "Until calmed (DC 20 Persuasion; 15 at 6th level)",
+     "concentration": false,
+     "override": true
+    },
+    "range": {
+     "value": "10",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "override": true,
+     "prompt": false
+    },
+    "bonuses": {
+     "ac": "@prof",
+     "hp": "10 * @prof",
+     "attackDamage": "",
+     "hd": "",
+     "saveDamage": "",
+     "healing": ""
+    },
+    "creatureSizes": [],
+    "creatureTypes": [],
+    "match": {
+     "proficiency": true,
+     "disposition": true,
+     "attacks": false,
+     "saves": false,
+     "ability": ""
+    },
+    "profiles": [
+     {
+      "_id": "JyMs4h7hSe4vg2V7",
+      "count": "1",
+      "cr": "",
+      "level": {
+       "min": null,
+       "max": null
+      },
+      "name": "Vengeful Spirit",
+      "types": [],
+      "uuid": "Actor.38AibNyyurlGFb0E"
+     }
+    ],
+    "summon": {
+     "mode": "",
+     "prompt": true
+    },
+    "tempHP": ""
+   },
+   "6a1PKvsLrgOQ3ntG": {
+    "_id": "6a1PKvsLrgOQ3ntG",
+    "type": "summon",
+    "name": "Manifest at will (11th level: bonus action, 1 minute, obeys you)",
+    "sort": 4000,
+    "activation": {
+     "type": "bonus",
+     "value": 1,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [
+      {
+       "type": "activityUses",
+       "target": "",
+       "value": "1",
+       "scaling": {
+        "mode": "",
+        "formula": ""
+       }
+      }
+     ],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "value": "1",
+     "units": "minute",
+     "concentration": false,
+     "override": true
+    },
+    "range": {
+     "value": "10",
+     "units": "ft",
+     "override": true
+    },
+    "target": {
+     "override": true,
+     "prompt": false
+    },
+    "bonuses": {
+     "ac": "@prof",
+     "hp": "10 * @prof",
+     "attackDamage": "",
+     "hd": "",
+     "saveDamage": "",
+     "healing": ""
+    },
+    "creatureSizes": [],
+    "creatureTypes": [],
+    "match": {
+     "proficiency": true,
+     "disposition": true,
+     "attacks": false,
+     "saves": false,
+     "ability": ""
+    },
+    "profiles": [
+     {
+      "_id": "i0Z0ALZcwNjKHeII",
+      "count": "1",
+      "cr": "",
+      "level": {
+       "min": null,
+       "max": null
+      },
+      "name": "Vengeful Spirit",
+      "types": [],
+      "uuid": "Actor.38AibNyyurlGFb0E"
+     }
+    ],
+    "summon": {
+     "mode": "",
+     "prompt": true
+    },
+    "tempHP": "",
+    "visibility": {
+     "level": {
+      "min": 11,
+      "max": null
+     },
+     "requireAttunement": false,
+     "requireIdentification": false,
+     "requireMagic": false
+    },
+    "uses": {
+     "max": "max(1, ceil(@attributes.spell.mod / 2))",
+     "recovery": [
+      {
+       "period": "lr",
+       "type": "recoverAll"
+      }
+     ],
+     "spent": 0
+    }
    }
   },
   "uses": {
@@ -164,9 +333,19 @@
    "technique": "Vengeful Spirit Manipulation",
    "level": 3,
    "spellFrom": "feat",
-   "automationNotes": "Trigger: damage above your level + CE mod. Spirit acts berserk on your turn, charmed by you, within 200 ft.",
+   "automationNotes": "Big hit (damage above your level + CE mod): DC 20 WIS; on a failure use 'Manifest (failed save)' — the Vengeful Spirit appears berserk, charmed by you, within 200 ft (AC 13 + PB, HP 80 + 10×PB). Calm it with the DC 20 Persuasion activity (15 at 6th). At 11th: 'Manifest at will' as a bonus action for 1 minute, uses = half your CE modifier (rounded up) per long rest.",
    "automation": "automated",
-   "rev": "5abe686086"
+   "rev": "a4429696b3",
+   "summons": {
+    "oCCxKr1vIWc7C6QN": {
+     "name": "Vengeful Spirit",
+     "count": 1
+    },
+    "6a1PKvsLrgOQ3ntG": {
+     "name": "Vengeful Spirit",
+     "count": 1
+    }
+   }
   }
  },
  "folder": "fx5WSQ1mGtKNDLmm",

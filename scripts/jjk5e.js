@@ -14,7 +14,7 @@ import { createIntegrations } from "./jjk5e-integrations.mjs";
 import { createDomainLifecycle } from "./jjk5e-domain-lifecycle.mjs";
 
 const MODULE_ID = "jjk5e";
-const DATA_VERSION = "1.24.0";
+const DATA_VERSION = "1.25.0";
 const FOLDER_NAME = "JJK 5e V.6";
 const ICONS = `modules/${MODULE_ID}/icons`;
 
@@ -7916,6 +7916,17 @@ Hooks.once("init", () => {
   Hooks.on("updateActiveEffect", (e, c, o, u) => auraHook(e, c, u));
   Hooks.on("deleteActiveEffect", (e, o, u) => auraHook(e, o, u));
   Hooks.on("createToken", (doc, o, userId) => { if (userId === game.user.id && doc.actor) setTimeout(() => syncTokenAuras(doc.actor), 200); });
+  // Summons that use their summoner's cursed energy modifier (Vengeful Spirit's beam): the GM records it on the token.
+  Hooks.on("createToken", async (doc) => {
+    const actor = doc.actor;
+    if (!isActiveGM() || !actor || actor.flags?.jjk5e?.summonerCEMod === undefined) return;
+    let summoner = null;
+    const origin = doc.flags?.dnd5e?.summon?.origin;
+    if (origin) { const act = await fromUuid(origin).catch(() => null); summoner = act?.actor ?? act?.item?.actor ?? null; }
+    if (!summoner && doc.flags?.jjk5e?.summonedBy) summoner = await fromUuid(doc.flags.jjk5e.summonedBy).catch(() => null);
+    if (summoner?.documentName !== "Actor") return;
+    await actor.setFlag(MODULE_ID, "summonerCEMod", ceMod(summoner)).catch((err) => reportError("summoner CE", err));
+  });
   Hooks.on("visual-active-effects.createEffectButtons", (effect, buttons) => { try { vaeButtons(effect, buttons); } catch (err) { console.warn(`${MODULE_ID} | VAE`, err); } });
 });
 

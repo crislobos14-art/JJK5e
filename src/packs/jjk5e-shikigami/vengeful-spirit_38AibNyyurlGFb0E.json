@@ -1,0 +1,614 @@
+{
+ "_id": "38AibNyyurlGFb0E",
+ "name": "Vengeful Spirit",
+ "type": "npc",
+ "img": "modules/jjk5e/icons/shikigami/vengeful-spirit.svg",
+ "system": {
+  "abilities": {
+   "str": {
+    "value": 30,
+    "proficient": 1
+   },
+   "dex": {
+    "value": 22,
+    "proficient": 1
+   },
+   "con": {
+    "value": 25,
+    "proficient": 0
+   },
+   "int": {
+    "value": 8,
+    "proficient": 0
+   },
+   "wis": {
+    "value": 8,
+    "proficient": 0
+   },
+   "cha": {
+    "value": 30,
+    "proficient": 1
+   }
+  },
+  "attributes": {
+   "ac": {
+    "calc": "flat",
+    "flat": 13
+   },
+   "hp": {
+    "value": 80,
+    "max": 80,
+    "formula": ""
+   },
+   "movement": {
+    "walk": 90,
+    "fly": 90,
+    "units": "ft",
+    "hover": true
+   },
+   "senses": {
+    "units": "ft",
+    "special": ""
+   }
+  },
+  "details": {
+   "cr": 1,
+   "alignment": "Chaotic Evil",
+   "type": {
+    "value": "undead",
+    "subtype": "",
+    "swarm": "",
+    "custom": "Vengeful Spirit"
+   },
+   "biography": {
+    "value": "<p><em>Vengeful Spirit</em> — Vengeful Spirit Manipulation. Armor Class 13 + your proficiency bonus; hit points 80 + 10 × your proficiency bonus; speed 90 ft., fly 90 ft. Summoned through Vengeful Spirit Manifestation, it uses its user's proficiency bonus and cursed energy modifier.</p>"
+   }
+  },
+  "traits": {
+   "size": "lg",
+   "dr": {
+    "value": []
+   },
+   "ci": {
+    "value": [
+     "charmed",
+     "exhaustion",
+     "frightened"
+    ]
+   },
+   "languages": {
+    "value": []
+   },
+   "di": {
+    "value": [],
+    "bypasses": [],
+    "custom": ""
+   }
+  },
+  "skills": {},
+  "resources": {
+   "legact": {
+    "max": 0,
+    "spent": 0
+   },
+   "legres": {
+    "max": 0,
+    "spent": 0
+   }
+  }
+ },
+ "items": [
+  {
+   "_id": "kjKWREhbiGjlvhkT",
+   "name": "Cursed Energy",
+   "type": "feat",
+   "img": "modules/jjk5e/icons/ce.svg",
+   "system": {
+    "description": {
+     "value": "<p>The Vengeful Spirit has (10 × your proficiency) in cursed energy and regains all expended energy on a long rest. At 6th level, the Vengeful Spirit has access to Basic Cursed Energy Manipulation, which increases with your Awakened Understanding. The user can give the Vengeful Spirit cursed energy up their CE modifier as a bonus action, reducing the user's current CE by that amount.</p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Vengeful Spirit Manipulation"
+    },
+    "activities": {},
+    "type": {
+     "value": "monster",
+     "subtype": ""
+    },
+    "requirements": "",
+    "properties": [],
+    "uses": {
+     "max": "10 * @prof",
+     "recovery": [
+      {
+       "period": "lr",
+       "type": "recoverAll"
+      }
+     ],
+     "spent": 0
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {
+     "cePool": true
+    }
+   },
+   "_key": "!actors.items!38AibNyyurlGFb0E.kjKWREhbiGjlvhkT"
+  },
+  {
+   "_id": "p3SKQOo6Cd6rvau5",
+   "name": "Magic Weapons",
+   "type": "feat",
+   "img": "icons/svg/aura.svg",
+   "system": {
+    "description": {
+     "value": "<p>The Vengeful Spirit's attacks are magical.</p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Vengeful Spirit Manipulation"
+    },
+    "activities": {},
+    "type": {
+     "value": "monster",
+     "subtype": ""
+    },
+    "requirements": "",
+    "properties": [],
+    "uses": {
+     "max": "",
+     "recovery": [],
+     "spent": 0
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!38AibNyyurlGFb0E.p3SKQOo6Cd6rvau5"
+  },
+  {
+   "_id": "FrCfZ4U2EqkNk6sE",
+   "name": "Lingering Hatred",
+   "type": "feat",
+   "img": "icons/svg/aura.svg",
+   "system": {
+    "description": {
+     "value": "<p>When the Vengeful Spirit is reduced to 0 hit points, it can choose to stay at 1 hit point. Once used, this trait cannot be used against until after a long rest.</p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Vengeful Spirit Manipulation"
+    },
+    "activities": {
+     "kHvRwMzzuVtYkwMJ": {
+      "_id": "kHvRwMzzuVtYkwMJ",
+      "type": "utility",
+      "name": "Lingering Hatred (stay at 1 HP)",
+      "sort": 0,
+      "activation": {
+       "type": "special",
+       "value": 1,
+       "condition": "",
+       "override": false
+      },
+      "consumption": {
+       "targets": [],
+       "scaling": {
+        "allowed": false
+       },
+       "spellSlot": false
+      },
+      "duration": {
+       "units": "inst",
+       "concentration": false,
+       "override": false
+      },
+      "range": {
+       "override": false
+      },
+      "target": {
+       "override": false,
+       "prompt": true
+      }
+     }
+    },
+    "type": {
+     "value": "monster",
+     "subtype": ""
+    },
+    "requirements": "",
+    "properties": [],
+    "uses": {
+     "max": "1",
+     "recovery": [
+      {
+       "period": "lr",
+       "type": "recoverAll"
+      }
+     ],
+     "spent": 0
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!38AibNyyurlGFb0E.FrCfZ4U2EqkNk6sE"
+  },
+  {
+   "_id": "r6f4gUy0BQ8DEoFo",
+   "name": "Cursed Storage (6th level)",
+   "type": "feat",
+   "img": "icons/svg/aura.svg",
+   "system": {
+    "description": {
+     "value": "<p>The Vengeful Spirit can act as a storage for items and weapons, functioning as a bag of holding.</p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Vengeful Spirit Manipulation"
+    },
+    "activities": {},
+    "type": {
+     "value": "monster",
+     "subtype": ""
+    },
+    "requirements": "",
+    "properties": [],
+    "uses": {
+     "max": "",
+     "recovery": [],
+     "spent": 0
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!38AibNyyurlGFb0E.r6f4gUy0BQ8DEoFo"
+  },
+  {
+   "_id": "6t5YdIngBaVbVJBM",
+   "name": "Multiattack",
+   "type": "feat",
+   "img": "icons/svg/aura.svg",
+   "system": {
+    "description": {
+     "value": "<p>The Vengeful Spirit makes three claw attacks.</p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Vengeful Spirit Manipulation"
+    },
+    "activities": {
+     "gNCAI3Ao3pxTnHyf": {
+      "_id": "gNCAI3Ao3pxTnHyf",
+      "type": "utility",
+      "name": "Multiattack",
+      "sort": 0,
+      "activation": {
+       "type": "action",
+       "value": 1,
+       "condition": "",
+       "override": false
+      },
+      "consumption": {
+       "targets": [],
+       "scaling": {
+        "allowed": false
+       },
+       "spellSlot": false
+      },
+      "duration": {
+       "units": "inst",
+       "concentration": false,
+       "override": false
+      },
+      "range": {
+       "override": false
+      },
+      "target": {
+       "override": false,
+       "prompt": true
+      }
+     }
+    },
+    "type": {
+     "value": "monster",
+     "subtype": ""
+    },
+    "requirements": "",
+    "properties": [],
+    "uses": {
+     "max": "",
+     "recovery": [],
+     "spent": 0
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!38AibNyyurlGFb0E.6t5YdIngBaVbVJBM"
+  },
+  {
+   "_id": "QKnY8qS0BFn7Bwpk",
+   "name": "Claw",
+   "type": "weapon",
+   "img": "icons/svg/sword.svg",
+   "system": {
+    "description": {
+     "value": "<p><em>Melee Weapon Attack:</em> +10 + your PB to hit, reach 5 ft., one target. <em>Hit:</em> 23 (2d12 + 10) slashing damage.</p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Vengeful Spirit Manipulation"
+    },
+    "activities": {
+     "Z01BZGaG7yOh3FZ9": {
+      "_id": "Z01BZGaG7yOh3FZ9",
+      "type": "attack",
+      "name": "Claw",
+      "sort": 0,
+      "activation": {
+       "type": "action",
+       "value": 1,
+       "condition": "",
+       "override": false
+      },
+      "consumption": {
+       "targets": [],
+       "scaling": {
+        "allowed": false
+       },
+       "spellSlot": false
+      },
+      "duration": {
+       "units": "inst",
+       "concentration": false,
+       "override": false
+      },
+      "range": {
+       "override": false
+      },
+      "target": {
+       "override": false,
+       "prompt": true,
+       "affects": {
+        "count": "1",
+        "type": "creature"
+       }
+      },
+      "attack": {
+       "ability": "str",
+       "bonus": "",
+       "critical": {
+        "threshold": null
+       },
+       "flat": false,
+       "type": {
+        "value": "melee",
+        "classification": "weapon"
+       }
+      },
+      "damage": {
+       "critical": {
+        "bonus": ""
+       },
+       "includeBase": true,
+       "parts": []
+      }
+     }
+    },
+    "type": {
+     "value": "natural",
+     "baseItem": ""
+    },
+    "ability": "str",
+    "proficient": 1,
+    "equipped": true,
+    "damage": {
+     "base": {
+      "number": 2,
+      "denomination": 12,
+      "bonus": "",
+      "types": [
+       "slashing"
+      ],
+      "custom": {
+       "enabled": false,
+       "formula": ""
+      },
+      "scaling": {
+       "mode": "",
+       "number": null,
+       "formula": ""
+      }
+     }
+    },
+    "range": {
+     "reach": 5,
+     "value": null,
+     "long": null,
+     "units": "ft"
+    },
+    "magicalBonus": null,
+    "properties": [
+     "mgc"
+    ],
+    "uses": {
+     "max": "",
+     "recovery": [],
+     "spent": 0
+    },
+    "quantity": 1,
+    "weight": {
+     "value": 0,
+     "units": "lb"
+    },
+    "price": {
+     "value": 0,
+     "denomination": "gp"
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {}
+   },
+   "_key": "!actors.items!38AibNyyurlGFb0E.QKnY8qS0BFn7Bwpk"
+  },
+  {
+   "_id": "42ldGDinouxZjugn",
+   "name": "Cursed Energy Beam",
+   "type": "feat",
+   "img": "icons/svg/aura.svg",
+   "system": {
+    "description": {
+     "value": "<p>(Recharge 5–6) The Vengeful Spirit releases cursed energy in a 10 ft wide, 100 ft long line. Each creature in the area must make a Dexterity saving throw (DC 8 + your proficiency + your CE modifier). On a failed save, a creature takes Xd6 necrotic damage (X = your proficiency + your CE modifier) or half as much on a successful save. The Vengeful Spirit can spend up to 10 cursed energy to deal an additional d6 per cursed energy spent.</p>",
+     "chat": ""
+    },
+    "source": {
+     "custom": "Vengeful Spirit Manipulation"
+    },
+    "activities": {
+     "NoDxQshIISj3bb56": {
+      "_id": "NoDxQshIISj3bb56",
+      "type": "save",
+      "name": "Cursed Energy Beam",
+      "sort": 0,
+      "activation": {
+       "type": "action",
+       "value": 1,
+       "condition": "",
+       "override": false
+      },
+      "consumption": {
+       "targets": [],
+       "scaling": {
+        "allowed": true,
+        "max": "10"
+       },
+       "spellSlot": false
+      },
+      "duration": {
+       "units": "inst",
+       "concentration": false,
+       "override": false
+      },
+      "range": {
+       "units": "self",
+       "override": true
+      },
+      "target": {
+       "override": true,
+       "prompt": true,
+       "template": {
+        "type": "line",
+        "size": "100",
+        "width": "10",
+        "units": "ft",
+        "count": "",
+        "contiguous": false
+       },
+       "affects": {
+        "type": "creature",
+        "count": "",
+        "choice": false
+       }
+      },
+      "save": {
+       "ability": [
+        "dex"
+       ],
+       "dc": {
+        "calculation": "",
+        "formula": "8 + @prof + @flags.jjk5e.summonerCEMod"
+       }
+      },
+      "damage": {
+       "onSave": "half",
+       "parts": [
+        {
+         "number": null,
+         "denomination": 6,
+         "bonus": "",
+         "types": [
+          "necrotic"
+         ],
+         "custom": {
+          "enabled": true,
+          "formula": "(@prof + @flags.jjk5e.summonerCEMod)d6"
+         },
+         "scaling": {
+          "mode": "whole",
+          "number": null,
+          "formula": "1d6"
+         }
+        }
+       ]
+      }
+     }
+    },
+    "type": {
+     "value": "monster",
+     "subtype": ""
+    },
+    "requirements": "",
+    "properties": [],
+    "uses": {
+     "max": "1",
+     "recovery": [
+      {
+       "period": "recharge",
+       "formula": "5"
+      }
+     ],
+     "spent": 0
+    }
+   },
+   "effects": [],
+   "flags": {
+    "jjk5e": {
+     "ceCosts": {
+      "NoDxQshIISj3bb56": 0
+     },
+     "ceSteps": {
+      "NoDxQshIISj3bb56": 1
+     }
+    }
+   },
+   "_key": "!actors.items!38AibNyyurlGFb0E.42ldGDinouxZjugn"
+  }
+ ],
+ "effects": [],
+ "prototypeToken": {
+  "name": "Vengeful Spirit",
+  "actorLink": false,
+  "disposition": 1,
+  "width": 2,
+  "height": 2,
+  "texture": {
+   "src": "modules/jjk5e/icons/shikigami/vengeful-spirit.svg"
+  },
+  "displayName": 20,
+  "displayBars": 20,
+  "bar1": {
+   "attribute": "attributes.hp"
+  },
+  "sight": {
+   "enabled": true
+  }
+ },
+ "flags": {
+  "jjk5e": {
+   "vengefulSpirit": true,
+   "summonerCEMod": 0,
+   "automationNotes": "Summoned by Vengeful Spirit Manifestation: AC +PB, HP +10×PB, proficiency of its user; the beam uses the user's CE modifier (set when summoned)."
+  }
+ },
+ "folder": null,
+ "_key": "!actors!38AibNyyurlGFb0E"
+}
