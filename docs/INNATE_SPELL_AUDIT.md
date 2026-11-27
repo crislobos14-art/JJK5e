@@ -758,7 +758,7 @@
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
 | Partial Manifestation | 1 | attack:Additional claw attack (1 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/partial-manifestation_uBsOHGjgsss8QfcX.json) |
-| Vengeful Spirit Manifestation | 3 | save:Big hit: DC 20 WIS or the spirit manifests; utility:Calm the spirit: DC 20 Persuasion (free, once per round) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/vengeful-spirit-manifestation_QpphinJEtE0mIWIf.json) |
+| Vengeful Spirit Manifestation | 3 | save:Big hit: DC 20 WIS or the spirit manifests; utility:Calm the spirit: DC 20 Persuasion (free, once per round); summon:Manifest (failed save: berserk, charmed by you, 200 ft); summon:Manifest at will (11th level: bonus action, 1 minute, obeys you) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/vengeful-spirit-manifestation_QpphinJEtE0mIWIf.json) |
 | Mimicry | 6 | utility:Replicate a technique feature (3 CE, CE check); attack:Spirit claw: extract DNA (bonus action) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/mimicry_PxLYScnzwfsspeiN.json) |
 | Domain Expansion: True Mutual Love | 18 | utility:Expand Domain (20 CE); utility:Initiative 20: extra action for a copied technique (all hostiles) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-true-mutual-love_wXbGY4lU6MeFrIOc.json) |
 

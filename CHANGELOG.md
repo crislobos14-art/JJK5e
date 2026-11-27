@@ -1,5 +1,17 @@
 # Changelog
 
+## 2.17.0 — Invocar al Espíritu Vengativo
+- **Vengeful Spirit Manipulation:** ahora invoca al **Vengeful Spirit**.
+  - Es un actor nuevo en el compendio de shikigami, con su bloque de V.6: Grande, no muerto, CA 13 + BC, PG 80 + 10 × BC, 90 pies de velocidad y de vuelo.
+  - Tiene FUE 30, DES 22, CON 25 y CAR 30, e inmunidad a hechizado, agotamiento y asustado.
+  - Su reserva de EM es de 10 × BC.
+  - Rasgos: Magic Weapons, Lingering Hatred y Cursed Storage.
+  - Ataques: Multiattack, Claw (2d12 + FUE) y Cursed Energy Beam (Recarga 5–6). El rayo es una línea de 100 pies y hace (BC + mod. de EM)d6 necróticos, con salvación de DES. Suma +1d6 por cada EM gastada, hasta 10.
+- **Vengeful Spirit Manifestation:**
+  - «Manifest (failed save)» invoca al espíritu descontrolado: está hechizado por ti y se queda a menos de 200 pies.
+  - Desde el nivel 11, «Manifest at will» lo invoca como acción adicional durante 1 minuto. Se puede usar la mitad de tu modificador de EM (redondeando hacia arriba) por descanso largo.
+  - CA, PG y bonificador de competencia escalan con los del usuario. Al aparecer, el espíritu toma el modificador de EM de su usuario para la CD y el daño del rayo.
+- El mundo importa el nuevo actor al cargar (`DATA_VERSION` 1.25.0). Los actores de shikigami que ya existen no se tocan.
 ## 2.16.0 — Motor de dominios, etapas de Amber, juicio de Deadly Sentencing e íconos
 - **Cerrar dominio funciona siempre:**
   - El botón del HUD de dominio usaba la acción interna `close` de la ventana. Por eso la X de la ventana intentaba cerrar el dominio, fallaba y la ventana no se cerraba.

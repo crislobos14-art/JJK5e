@@ -62,7 +62,7 @@ const GENERIC = { "feature.svg": ["classFeature", "fa-chalkboard-user"], "trait.
   "macro.svg": ["spell", "fa-wand-sparkles"], "pact.svg": ["pact", "fa-scale-balanced"], "boon.svg": ["boon", "fa-crown"], "mindset.svg": ["mindset", "fa-brain"] };
 const SHIKIGAMI = { "divine-dogs": "fa-dog", "divine-dog-totality": "fa-shield-dog", "nue": "fa-crow", "gama": "fa-frog", "great-serpent": "fa-worm",
   "max-elephant": "fa-hippo", "rabbit-escape": "fa-carrot", "round-deer": "fa-horse-head", "piercing-ox": "fa-cow", "mourning-tiger": "fa-cat",
-  "chimera-agito": "fa-dragon", "mahoraga": "fa-dharmachakra" };
+  "chimera-agito": "fa-dragon", "mahoraga": "fa-dharmachakra", "vengeful-spirit": "fa-ghost" };
 /** The glyph each technique is known by (otherwise one of its family's glyphs, picked by name). */
 const TECHNIQUE_GLYPH = {
   "and-light": "fa-sun",
@@ -220,5 +220,9 @@ for (const file of lettered) {
   report.push(`${rel}\t${family}\t${icon}`);
   n++;
 }
-fs.writeFileSync(path.join(ICONS, "ICONS.tsv"), `icon\tfamily\tglyph\n${report.sort().join("\n")}\n`);
+// The list keeps earlier entries: a run that rebuilds one new icon adds its line instead of replacing the file.
+const listFile = path.join(ICONS, "ICONS.tsv");
+const lines = new Map((fs.existsSync(listFile) ? fs.readFileSync(listFile, "utf8").split("\n").slice(1) : []).filter(Boolean).map((l) => [l.split("\t")[0], l]));
+for (const l of report) lines.set(l.split("\t")[0], l);
+fs.writeFileSync(listFile, `icon\tfamily\tglyph\n${[...lines.values()].sort().join("\n")}\n`);
 console.log(`${n} icon(s) rebuilt; list in icons/ICONS.tsv`);
