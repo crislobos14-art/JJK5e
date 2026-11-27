@@ -434,6 +434,7 @@
       "CENoAuthority": "JJK 5e: debe haber un DJ conectado para autorizar este gasto de energía maldita.",
       "CEPendingUse": "JJK 5e: hay otro gasto de energía maldita pendiente. Espera a que termine o pide al DJ que lo revise.",
       "CEAuthorizationFailed": "JJK 5e: no se pudo autorizar el gasto de energía maldita. Revisa el saldo y los gastos pendientes con el DJ.",
+      "CombatActivityUnavailable": "La actividad no está disponible con tu estado o los recursos de acción de este turno.",
       "FullTurnUsed": "Acción de turno completo: ya usaste tu acción o tu acción adicional este turno.",
       "CEAdapterMissing": "La EM transaccional necesita libWrapper, que no está activo en esta versión de Foundry. El módulo usa el gasto normal de EM: las técnicas y los dominios funcionan igual."
     },
@@ -955,6 +956,8 @@
       "UnderstandingOffer": "{name} ya tiene {total} avances. El GM puede conceder la Comprensión despertada que acaba de desbloquear:"
     },
     "Reversal": {
+      "SilencedAction": "Fallaste la salvación de Sabiduría contra Silencio Maldito y pierdes la acción.",
+      "Inactive": "Activa la técnica principal y mantén su efecto para usar esta actividad.",
       "Requirements": "Para usar esta inversión necesitas RCT, Cursed Technique Reversal y el nivel indicado.",
       "Added": "Reversión de técnica maldita: se añade {names}."
     },

@@ -434,6 +434,7 @@
       "CENoAuthority": "JJK 5e: an active GM is required to authorize this energy payment.",
       "CEPendingUse": "JJK 5e: another Cursed Energy payment is pending. Wait for it or ask the GM to review it.",
       "CEAuthorizationFailed": "JJK 5e: the energy payment could not be authorized. Check the pool and any pending payment with the GM.",
+      "CombatActivityUnavailable": "This activity is unavailable given your condition or remaining actions.",
       "FullTurnUsed": "Full-Turn Action: you already used your action or bonus action this turn.",
       "CEAdapterMissing": "Transactional CE needs libWrapper, which is not active on this Foundry version. The module uses ordinary CE spending: techniques and domains work the same."
     },
@@ -955,6 +956,8 @@
       "UnderstandingOffer": "{name} now has {total} breakthroughs. The GM can grant the newly available Awakened Understanding:"
     },
     "Reversal": {
+      "SilencedAction": "You failed the Wisdom save against Cursed Silence and lose the action.",
+      "Inactive": "The main technique must still be active to use this activity.",
       "Requirements": "This reversal requires RCT, Cursed Technique Reversal and the listed level.",
       "Added": "Cursed Technique Reversal: {names} added."
     },

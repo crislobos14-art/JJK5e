@@ -782,11 +782,47 @@ const ownTurn = (actor) => !!game.combat?.started && !!actor && game.combat.comb
 // Local turn ledger, complementary to Midi's native action/bonus tracking.
 // Only explicit JJK free actions are counted; ordinary object interactions are separate.
 const ACTION_TURNS=new Map();
+const COMBAT_REACTIONS = new Map();
+const RECORDED_COMBAT_USES = new WeakSet();
+
+function reactionCycle(actor) {
+  const combat = game.combat;
+  if (!combat?.started || !actor) return null;
+  const index = combat.turns?.findIndex(c => c.actor?.uuid === actor.uuid) ?? -1;
+  if (index < 0) return null;
+  return combat.round - (combat.turn < index ? 1 : 0);
+}
+function reactionSpent(actor, { recheck = false } = {}) {
+  const cycle = reactionCycle(actor);
+  const local = cycle !== null && COMBAT_REACTIONS.get(game.combat.id)?.get(actor.uuid) === cycle;
+  return local || (!recheck && !!globalThis.MidiQOL?.hasUsedReaction?.(actor));
+}
+function recordReaction(actor) {
+  const cycle = reactionCycle(actor);
+  if (cycle === null) return;
+  let reactions = COMBAT_REACTIONS.get(game.combat.id);
+  if (!reactions) COMBAT_REACTIONS.set(game.combat.id, reactions = new Map());
+  reactions.set(actor.uuid, cycle);
+}
+function attackReplacement(activity) {
+  return activity?.id === "vvg0y1Ga9QXl6bXU" && activity.item?.flags?.jjk5e?.reversal === true;
+}
+function usesAttackSlot(activity) {
+  return attackReplacement(activity) || (activity?.type === "attack" && activity.activation?.type === "action" &&
+    ["weapon", "unarmed"].includes(activity.attack?.type?.classification));
+}
+function activityReaction(actor, activity) {
+  return String(activity?.activation?.type ?? "").startsWith("reaction") || isClaimedDomainReaction(actor, activity);
+}
+function techniqueIncapacitated(actor) {
+  return ["incapacitated", "unconscious", "stunned", "paralyzed", "petrified", "dead"].some(status => actor?.statuses?.has(status));
+}
+
 function actionTurn(actor){
   if(!ownTurn(actor))return null;
   const c=game.combat, key=[c.id,c.round,c.turn,c.combatant.id].join(":");
   let state=ACTION_TURNS.get(c.id);
-  if(state?.key!==key){state={key,action:false,bonus:false,free:false,moved:false,full:false,lockMovement:false};ACTION_TURNS.set(c.id,state);}
+  if(state?.key!==key){state={key,action:false,bonus:false,free:false,moved:false,full:false,lockMovement:false,attacks:0};ACTION_TURNS.set(c.id,state);}
   return state;
 }
 function unlimitedDomainSwap(activity) {
@@ -827,18 +863,51 @@ function ceTransactional(activity){
   if(!ceAuthorityEnabled()||!setting("autoSpendCE")||!managedCE(activity)) return false;
   return CE_ADAPTER_TARGETS.has(`CONFIG.DND5E.activityTypes.${activity?.type}.documentClass.prototype.consume`);
 }
-function recordTurnActivity(activity){
-  const actor=activity?.actor??activity?.item?.actor;
-  const state=actionTurn(actor);
-  if(!state)return;
-  if(isJJKFree(activity) && !unlimitedDomainSwap(activity))state.free=true;
-  if(!isFullTurn(activity)&&activity.activation?.type==="action")state.action=true;
-  if(activity.activation?.type==="bonus")state.bonus=true;
+function recordTurnActivity(activity, usage, results) {
+  const actor = activity?.actor ?? activity?.item?.actor;
+  const identity = results?.message ?? results ?? usage;
+  if (identity && typeof identity === "object") {
+    if (RECORDED_COMBAT_USES.has(identity)) return;
+    RECORDED_COMBAT_USES.add(identity);
+  }
+  if (activityReaction(actor, activity)) {
+    recordReaction(actor);
+    if (isClaimedDomainReaction(actor, activity) && !globalThis.MidiQOL?.hasUsedReaction?.(actor)) {
+      Promise.resolve(globalThis.MidiQOL?.setReactionUsed?.(actor)).catch(err => reportError("domain reaction", err));
+    }
+    return;
+  }
+  if (usage?.consume?.action === false && !attackReplacement(activity)) return;
+  const state = actionTurn(actor);
+  if (!state) return;
+  if (isJJKFree(activity) && !unlimitedDomainSwap(activity)) state.free = true;
+  if (usesAttackSlot(activity)) {
+    state.action = true;
+    state.attacks++;
+  } else if (!isFullTurn(activity) && activity.activation?.type === "action") state.action = true;
+  if (activity.activation?.type === "bonus") state.bonus = true;
 }
 function isClaimedDomainReaction(actor,activity){
   if(activity?.item?.flags?.jjk5e?.domainActivity!==activity?.id)return false;
   const claim=actor?.getFlag(MODULE_ID,"domainReactionClaim");
   return !!claim?.id && Number(claim.expires)>nowMs();
+}
+function reversalRequirements(actor, item) {
+  return hasRCT(actor) && actor.items.some(i => baseName(i) === "Cursed Technique Reversal") &&
+    characterLevel(actor) >= (Number(item.flags.jjk5e.reversalLevel) || 1);
+}
+function reversalFollowUpAllowed(actor, activity) {
+  if (!activity?.item?.flags?.jjk5e?.reversal) return true;
+  if (activity.id === "HYyYEzjQxtbFtOSu") {
+    return !!actor?.effects?.some(effect => effect.origin === activity.item.uuid &&
+      (effect.system?.type === "concentrating" || effect.statuses?.has?.("concentrating")) && liveWard(effect));
+  }
+  if (["vvg0y1Ga9QXl6bXU", "nFOeof9kzI5eiJoZ"].includes(activity.id)) {
+    return !!actor?.effects?.some(effect => liveWard(effect) &&
+      (effect.flags?.jjk5e?.spellBuffActivity === "OM31HL66a1JtFZY2" ||
+        (baseName(effect) === "Sunny Day" && effect.flags?.jjk5e?.technique === "Disaster Storms")));
+  }
+  return true;
 }
 function goldenWeekBlocks(actor, activity) {
   return activity?.id === "kZc1uthKYagtyfvi" && activity.item?.flags?.jjk5e?.technique === "Golden Hour" &&
@@ -846,7 +915,21 @@ function goldenWeekBlocks(actor, activity) {
 }
 function actionGate(actor,activity,{recheck=false}={}){
   const state=actionTurn(actor);
-  if (goldenWeekBlocks(actor, activity)) return false;
+  const flags = activity?.item?.flags?.jjk5e;
+  if (flags?.technique && (techniqueIncapacitated(actor) || inBurnout(actor) || hasKind(actor, "domainAmplification"))) return false;
+  if (actor?.type === "character" && flags?.reversal && !reversalRequirements(actor, activity.item)) return false;
+  if (!reversalFollowUpAllowed(actor, activity) || goldenWeekBlocks(actor, activity)) return false;
+  if (game.combat?.started && flags?.technique) {
+    if (activityReaction(actor, activity)) return !reactionSpent(actor, { recheck });
+    if (attackReplacement(activity) || (!midiActive() && state && !isFullTurn(activity))) {
+      if (attackReplacement(activity)) return !!state && !state.full &&
+        ((!state.action && !globalThis.MidiQOL?.hasUsedAction?.(actor)) ||
+          (state.attacks > 0 && state.attacks < 1 + extraAttacks(actor)));
+      if (activity.activation?.type === "bonus" && state.bonus) return false;
+      if (activity.activation?.type === "action" && state.action &&
+          (!usesAttackSlot(activity) || !state.attacks || state.attacks >= 1 + extraAttacks(actor))) return false;
+    }
+  }
   if(activity?.item?.flags?.jjk5e?.optAction&&!optOn("additionalActions"))return false;
   if(isJJKFree(activity)&&game.combat?.started&&(!state||(state.free && !unlimitedDomainSwap(activity))))return false;
   if(isFullTurn(activity)&&game.combat?.started&&!isClaimedDomainReaction(actor,activity)&&(!state||(recheck?(state.action||state.bonus||state.full||(!lesserFullTurn(activity)&&state.moved)):fullTurnSpent(actor,activity))))return false;
@@ -867,7 +950,7 @@ function combatInteractionState(actor) {
   return { active, ownTurn: !!state, round: active ? game.combat.round : null,
     action: state?.action || state?.full ? true : used("hasUsedAction"),
     bonus: state?.bonus || state?.full ? true : used("hasUsedBonusAction"),
-    reaction: used("hasUsedReaction"), free: state ? !!state.free : null,
+    reaction: active ? reactionSpent(actor) : used("hasUsedReaction"), free: state ? !!state.free : null,
     moved: state ? !!state.moved : null, full: state ? !!state.full : null,
     lockMovement: state ? !!state.lockMovement : null,
     ce: pool ? {value:poolValue(pool),max:poolMax(pool),pending:cePending(pool)} : null };
@@ -889,7 +972,10 @@ function combatInteractionActivity(actor, activity) {
 
 function registerActivityHooks() {
   Hooks.on("dnd5e.postCreateUsageMessage", linkUsageCard);
-  Hooks.on("deleteCombat",c=>ACTION_TURNS.delete(c.id));
+  Hooks.on("deleteCombat", combat => {
+    ACTION_TURNS.delete(combat.id);
+    COMBAT_REACTIONS.delete(combat.id);
+  });
   Hooks.on("preMoveToken",(token,movement)=>{
     const state=actionTurn(token.actor);
     // GM may adjudicate forced movement; only recorded cost-bearing player movement is blocked.
@@ -931,14 +1017,17 @@ function registerActivityHooks() {
       return false;
     }
     if (actor?.type === "character" && activity.item?.flags?.jjk5e?.reversal &&
-        (!hasRCT(actor) || !actor.items.some(i => baseName(i) === "Cursed Technique Reversal") ||
-          characterLevel(actor) < (Number(activity.item.flags.jjk5e.reversalLevel) || 1))) {
+        !reversalRequirements(actor, activity.item)) {
       ui.notifications.warn(t("Reversal.Requirements"));
       return false;
     }
     // Full-Turn Action (Rules of Thumb): needs the action, bonus action and all movement still unused.
+    if (!reversalFollowUpAllowed(actor, activity)) {
+      ui.notifications.warn(t("Reversal.Inactive"));
+      return false;
+    }
     if (!actionGate(actor,activity)) {
-      ui.notifications.warn(t(goldenWeekBlocks(actor, activity) ? "Notify.GoldenWeekTimeStop" : "Notify.FullTurnUsed"));
+      ui.notifications.warn(t(goldenWeekBlocks(actor, activity) ? "Notify.GoldenWeekTimeStop" : "Notify.CombatActivityUnavailable"));
       return false;
     }
     const cost = totalActivityCECost(actor, activity, usageConfig);
@@ -1013,7 +1102,7 @@ function registerActivityHooks() {
         if (!cePostOnce(activity, usageConfig, "activity", results?.message)) return;
       }else if (!(await payActivityCE(actor, activity, usageConfig))) return;
     }
-    if(actor?.isOwner)recordTurnActivity(activity);
+    if (actor?.isOwner) recordTurnActivity(activity, usageConfig, results);
     if(isFullTurn(activity)&&actor?.isOwner&&!isClaimedDomainReaction(actor,activity))await spendFullTurn(actor,activity);
     if(isQuickRecovery(activity)){
       if(!results || typeof results!=="object" || CE_RECOVERY_RESULTS.has(results)) return;
@@ -4380,9 +4469,41 @@ function tokenDistance(a, b) {
   } catch { return NaN; }
 }
 
+const CURSED_SILENCE_ROLLS = new Set();
+
+async function guardCursedSilence({ workflow, usage } = {}) {
+  const activity = workflow?.activity;
+  const actor = activity?.actor ?? activity?.item?.actor;
+  if (!actor?.isOwner || activity.activation?.type !== "action" || usage?.consume?.action === false) return;
+  const silence = actor.effects?.find(effect => liveWard(effect) && baseName(effect) === "Cursed Silence" &&
+    effect.flags?.jjk5e?.technique === "Cursed Speech");
+  if (!silence || typeof actor.rollSavingThrow !== "function") return;
+  if (CURSED_SILENCE_ROLLS.has(actor.uuid)) return false;
+  const turn = actionTurn(actor);
+  if (turn?.silenced || turn?.full || (game.combat?.started && globalThis.MidiQOL?.hasUsedAction?.(actor))) return false;
+  CURSED_SILENCE_ROLLS.add(actor.uuid);
+  try {
+    const dc = originSaveDC(silence);
+    const result = await actor.rollSavingThrow({ ability: "wis", target: dc }, { configure: false });
+    const roll = Array.isArray(result) ? result[0] : result;
+    if (!Number.isFinite(roll?.total)) return false;
+    if (!actor.effects?.some(effect => effect.id === silence.id && liveWard(effect)) || roll.total >= dc) return;
+    if (turn && actionTurn(actor) === turn) {
+      turn.action = true;
+      turn.silenced = true;
+      await globalThis.MidiQOL?.setActionUsed?.(actor);
+    }
+    ui.notifications.warn(t("Reversal.SilencedAction"));
+    return false;
+  } finally {
+    CURSED_SILENCE_ROLLS.delete(actor.uuid);
+  }
+}
+
 function registerMidiHooks() {
   if (!midiActive()) return;
   registerMidiCEBridge();
+  Hooks.on("midi-qol.preItemRollV2", guardCursedSilence);
   Hooks.on("midi-qol.preAttackRoll", workflow => {
     if(!midiCEGuard(workflow)) return false;
     const actor = workflow.actor;
@@ -7434,6 +7555,7 @@ async function grantActorReversals(actor) {
     return o;
   });
   await actor.createEmbeddedDocuments("Item", docs);
+  if (docs.some(doc => doc.flags?.jjk5e?.dmgScale)) await applyScaling(actor);
   await chat(actor, `<p><i class="fas fa-rotate-left"></i> ${t("Reversal.Added", { names: docs.map((d) => esc(d.name)).join(", ") })}</p>`);
   return docs.length;
 }
@@ -9733,7 +9855,7 @@ function clashBlocker(actor, opener) {
   if (theirs && theirs.lethal === false && mineLethal) return "nonLethal";
   // 0.2 Second Expansion: only a creature whose Dexterity score beats the caster's CE score can react.
   if (theirs?.quick && !((Number(actor.system?.abilities?.dex?.value) || 0) > (Number(opener.system?.abilities?.[ceAbility(opener)]?.value) || 0))) return "tooFast";
-  if (globalThis.MidiQOL?.hasUsedReaction?.(actor)) return "reaction";
+  if (reactionSpent(actor)) return "reaction";
   const cost = totalActivityCECost(actor, dom.activity);
   const pool = findPool(actor);
   if (cost && (!pool || poolValue(pool) < cost)) return "ce";
@@ -9902,7 +10024,7 @@ async function reactDomainClash(actor, openerUuid = null, openingId = null) {
     let cancelled = false;
     try {
       const res = await dom.activity.use({ event: null }, { configure: false }, {});
-      cancelled = res === null || res === undefined;
+      cancelled = !res;
     } catch (err) { cancelled = true; throw err; }
     finally { await requestDomainAuthority("finish", { ...data, claimId: claim.claimId, cancelled }); }
   } catch (err) { reportError("domain clash", err); }
