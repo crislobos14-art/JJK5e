@@ -143,7 +143,7 @@ function drawActivities(target,app,actor,s,onlyTechniques=false){
   const shownKeys=shown.map(key);
   for(const row of shown){
    const id=key(row),line=el("div","jjk-workspace-entry"),info=el("div","jjk-workspace-action-label");
-   info.append(el("strong","",row.name),el("small","",row.itemName+" · "+(kinds.find(x=>x[0]===row.kind)?.[1]??row.kind)+(row.cost==null?"":" · CE "+row.cost+(row.variable?"+":""))+(row.range?" · "+row.range:"")));line.append(info);
+   info.append(el("strong","",row.name),el("small","",row.itemName+" · "+(kinds.find(x=>x[0]===row.kind)?.[1]??row.kind)+(row.cost==null?"":" · "+(row.energy === "reverseCE" ? tr("Reverse CE","EM inversa") : tr("CE","EM"))+" "+row.cost+(row.variable?"+":""))+(row.range?" · "+row.range:"")));line.append(info);
    const up=button("↑",()=>{s.order=moveActivity(allKeys,id,-1,shownKeys);save(actor,s);paint();}),down=button("↓",()=>{s.order=moveActivity(allKeys,id,1,shownKeys);save(actor,s);paint();});
    up.title=tr("Move up","Subir");up.setAttribute("aria-label",up.title+" "+row.name);down.title=tr("Move down","Bajar");down.setAttribute("aria-label",down.title+" "+row.name);
    up.disabled=shownKeys[0]===id;down.disabled=shownKeys.at(-1)===id;

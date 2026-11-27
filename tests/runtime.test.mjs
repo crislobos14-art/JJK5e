@@ -385,19 +385,32 @@ test("Soul Damage: lowers max HP (stacking), clamps HP, ends on a long rest unle
   assert.ok(fx(actor, "soul"), "lasting soul damage stays");
 });
 
-test("Soul Damage from a Midi workflow: flagged item or Soul Strike effect", async () => {
+test("Soul Damage follows applied HP loss and ignores temporary HP, duplicate events and unconfirmed damage", async () => {
   const { env, actor, J } = await setup();
-  const target = env.addActor({ name: "Curse" });
-  const wf = (item, extra = {}) => ({ actor, item, activity: { id: "a", attack: { type: { classification: "unarmed" } } },
-    damageList: [{ actorUuid: target.uuid, hpDamage: 7, tempDamage: 0 }], ...extra });
-  await J.onSoulWorkflow(wf({ name: "Sword", flags: {} }));
-  assert.equal(fx(target, "soul"), undefined, "ordinary damage");
-  await J.onSoulWorkflow(wf({ name: "Soul Split Katana", flags: { jjk5e: { soulDamage: true } } }));
-  assert.equal(fx(target, "soul").flags.jjk5e.soulDamage, 7);
+  const target = env.addActor({ name: "Curse", system: { attributes: { hp: { value: 40, max: 40, temp: 10 } } } });
+  const context = (item) => ({ originatingMessage: { getAssociatedActivity: () => ({
+    id: "a", item, actor, attack: { type: { classification: "unarmed" } }
+  }) } });
+  const sword = context({ name: "Soul Split Katana", flags: { jjk5e: { soulDamage: true } } });
+  const hpKey = "system.attributes.hp.value";
+  env.Hooks.call("dnd5e.preApplyDamage", target, 7, { [hpKey]: 40 }, sword);
+  await env.Hooks.run("dnd5e.applyDamage", target, 7, sword);
+  assert.equal(fx(target, "soul"), undefined);
+  env.Hooks.call("dnd5e.preApplyDamage", target, 9, { [hpKey]: 31 }, sword);
+  assert.equal(fx(target, "soul"), undefined, "would-be damage has no effect");
+  await target.update({ [hpKey]: 31 });
+  await env.Hooks.run("dnd5e.applyDamage", target, 9, sword);
+  await env.Hooks.run("dnd5e.applyDamage", target, 9, sword);
+  assert.equal(fx(target, "soul").flags.jjk5e.soulDamage, 9);
   await J.setKindEffect(actor, "soulpunch", { name: "Soul Punch", flags: { jjk5e: { soulStrike: "unarmed", soulLasting: true } } });
-  await J.onSoulWorkflow(wf({ name: "Unarmed Strike", flags: {} }));
+  const punch = context({ name: "Unarmed Strike" });
+  env.Hooks.call("dnd5e.preApplyDamage", target, 5, { [hpKey]: 26 }, punch);
+  await target.update({ [hpKey]: 26 });
+  await env.Hooks.run("dnd5e.applyDamage", target, 5, punch);
   assert.equal(fx(target, "soul").flags.jjk5e.soulDamage, 14);
-  assert.equal(fx(target, "soul").flags.jjk5e.lasting, true);
+  await env.Hooks.run("dnd5e.restCompleted", target, { longRest: true });
+  await env.settle();
+  assert.equal(fx(target, "soul").flags.jjk5e.soulDamage, 5);
 });
 
 test("Chosen by the Sparks: every critical hit is a Black Flash", async () => {
@@ -1197,4 +1210,99 @@ test("Barrier marker: select current domain only, never pass through ordinary Mi
   assert.equal(await J.attackSelectedBarrier(),false);
   await J.setDomain(actor,{open:true,openingId:"different",noBarrier:false});
   assert.equal(await J.attackSelectedBarrier(),false);
+});
+
+test("CE profile composes the selected energy pool, active vow terms, scaling and restrictions", async () => {
+  const { actor, J } = await setup();
+  const [item, reversal] = await actor.createEmbeddedDocuments("Item", [
+    { name: "Lapse", flags: { jjk5e: { technique: "Test", ceCosts: { a: 6 }, ceSteps: { a: 2 } } } },
+    { name: "Reversal", flags: { jjk5e: { technique: "Test", reversal: true, ceCosts: { a: 6 }, ceSteps: { a: 2 } } } }
+  ]);
+  const act = { id: "a", actor, item };
+  await actor.setFlag("jjk5e", "vows", [{ active: true, terms: [{ type: "ceCost", value: -2 }] },
+    { active: true, broken: true, terms: [{ type: "ceCost", value: -20 }] }]);
+  await actor.setFlag("jjk5e", "sixEyesNext", true);
+  assert.equal(J.activityEnergyProfile(actor, act, { scaling: 2 }).cost, 0.8);
+  assert.equal(J.validActivityCE(actor, act, { scaling: 0.5 }), false);
+  await actor.createEmbeddedDocuments("Item", [{ name: "Heavenly Pact: Reverse Cursed Energy Generation" }]);
+  assert.equal(J.activityEnergyProfile(actor, act).blocked, "restriction");
+  assert.equal(J.activityEnergyProfile(actor, { ...act, item: reversal }, { scaling: 2 }).cost, 0.4);
+  await J.setKindEffect(actor, "silenceCE", { name: "Vow", flags: { jjk5e: { noCE: true } } });
+  assert.equal(J.activityEnergyProfile(actor, { ...act, item: reversal }).blocked, "vow");
+  await fx(actor, "silenceCE").update({ disabled: true });
+  assert.equal(J.activityEnergyProfile(actor, { ...act, item: reversal }).blocked, null);
+});
+
+test("RCT limb treatment consumes its healing reserve and CE once under concurrent use", async () => {
+  const { actor, J } = await setup();
+  actor.system.abilities.wis.mod = 3;
+  const pool = J.rctPoolOf(actor);
+  await pool.setFlag("jjk5e", "ceCosts", { BGwzqb2aPck3yZ7U: 1 });
+  await pool.setFlag("jjk5e", "ceSteps", { BGwzqb2aPck3yZ7U: 1 });
+  await J.setLimb(actor, "larm", "lost");
+  const attempt = () => J.commitBodyTreatment(actor, "larm", 2);
+  const results = await Promise.all([attempt(), attempt()]);
+  assert.deepEqual(results, [20, false]);
+  assert.equal(J.poolValue(J.findPool(actor)), 18);
+  assert.equal(pool.system.uses.spent, 20);
+  assert.equal(actor.getFlag("jjk5e", "limbs").larm, "ok");
+  assert.equal(fx(actor, "limb:larm"), undefined);
+});
+
+test("Mortal stops regeneration and ends before the long-rest recovery is applied", async () => {
+  const { env, actor, J } = await setup();
+  const key = "system.attributes.hp.value";
+  await actor.update({ [key]: 10, "system.attributes.hp.max": 40 });
+  await J.setKindEffect(actor, "mortalTest", { name: "Mortal", flags: { jjk5e: { technique: "Eight Heads" } } });
+  const proposed = { [key]: 20 };
+  env.Hooks.call("preUpdateActor", actor, proposed, {});
+  assert.equal(proposed[key], 10);
+  const rest = { longRest: true, updateData: { [key]: 40 } };
+  env.Hooks.call("dnd5e.preRestCompleted", actor, rest, {});
+  await env.Hooks.run("dnd5e.restCompleted", actor, rest, {});
+  await env.settle();
+  assert.equal(actor.system.attributes.hp.value, 40);
+  assert.equal(fx(actor, "mortalTest"), undefined);
+});
+
+test("a limb-removing hit uses the selected body part and twice its threshold for loss", async () => {
+  const { env, actor, J } = await setup();
+  actor.system.details = { level: 5 };
+  actor.system.abilities.con = { mod: 2 };
+  env.dice.push(4, 4, 4, 4);
+  assert.equal(await J.rollLimb(actor, { damage: 9 }), undefined);
+  assert.equal((await J.rollLimb(actor, { damage: 10 })).status, "broken");
+  assert.equal((await J.rollLimb(actor, { damage: 20 })).status, "lost");
+  assert.equal((await J.rollLimb(actor, { damage: 10 })).status, "lost");
+  assert.equal(actor.getFlag("jjk5e", "limbs").larm, "lost");
+});
+
+test("failure to write the RCT reserve refunds CE and leaves the injury intact", async () => {
+  const { actor, J } = await setup();
+  actor.system.abilities.wis.mod = 3;
+  const pool = J.rctPoolOf(actor);
+  await pool.setFlag("jjk5e", "ceCosts", { BGwzqb2aPck3yZ7U: 1 });
+  await J.setLimb(actor, "rarm", "broken");
+  pool.update = async () => { throw new Error("RCT reserve write rejected"); };
+  await assert.rejects(J.commitBodyTreatment(actor, "rarm", 1), /reserve write rejected/);
+  assert.equal(J.poolValue(J.findPool(actor)), 20);
+  assert.equal(actor.getFlag("jjk5e", "limbs").rarm, "broken");
+});
+
+test("a soul hit delivered to two actors with shared options is resolved independently", async () => {
+  const { env, actor } = await setup();
+  const key = "system.attributes.hp.value";
+  const targets = [env.addActor({}), env.addActor({})];
+  const options = { originatingMessage: { getAssociatedActivity: () => ({
+    actor, item: { name: "Soul", flags: { jjk5e: { soulDamage: true } } }
+  }) } };
+  for (const target of targets) {
+    await target.update({ [key]: 10, "system.attributes.hp.max": 20 });
+    env.Hooks.call("dnd5e.preApplyDamage", target, 4, { [key]: 6 }, options);
+  }
+  for (const target of targets) {
+    await target.update({ [key]: 6 });
+    await env.Hooks.run("dnd5e.applyDamage", target, 4, options);
+    assert.equal(fx(target, "soul").flags.jjk5e.soulDamage, 4);
+  }
 });

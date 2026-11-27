@@ -294,6 +294,7 @@
       "HealRCTDone": "{name} restores {healed} maximum HP with RCT (Soul Damage left: −{rest})."
     },
     "Limb": {
+      "HealRCT": "Treat limb with RCT",
       "Title": "Limb Damage",
       "Roll": "Roll limb",
       "Broken": "Broken at",
@@ -413,6 +414,7 @@
       "NoScene": "Open a scene first.",
       "VowBlocksCE": "JJK 5e: A binding-vow penalty blocks Cursed Energy.",
       "CloneNoTech": "JJK 5e: Clone: this copy cannot use innate techniques.",
+      "EnergyRestriction": "Your energy restriction prevents this activity.",
       "VowBlocksUse": "JJK 5e: A broken binding vow prohibits this activity.",
       "DomainActive": "JJK 5e: A domain is already active.",
       "SwapSelect": "JJK 5e: Select exactly one token in the same scene to swap positions.",

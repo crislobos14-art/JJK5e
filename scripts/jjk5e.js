@@ -385,12 +385,11 @@ function ceMod(actor) {
   return Number(actor.system.abilities?.[ceAbility(actor)]?.mod) || 0;
 }
 
-function activityCost(activity) {
+function activityCost(activity, actor = activity?.actor ?? activity?.item?.actor, { ignoreNext = false } = {}) {
   if(isQuickRecovery(activity)) return 0;
   const costs = activity?.item?.flags?.jjk5e?.ceCosts;
   let base = Number(costs?.[activity.id] ?? 0);
   // V.6 Domain Refinement: Efficient Expansions (700) −CE mod, Total Mastery (1000) −proficiency bonus.
-  const actor = activity?.actor ?? activity?.item?.actor;
   if (base > 1 && activity.item.flags?.jjk5e?.technique === "Boogie Woogie" && hasBoogieFeature(actor, "Clap Back")) base -= 1;
   if (base > 0 && actor && activity?.item?.flags?.jjk5e?.domainActivity === activity.id) {
     const ref = refinementOf(actor);
@@ -410,24 +409,23 @@ function activityCost(activity) {
       && actor.items.some((i) => i.effects?.some((e) => e.flags?.jjk5e?.refinedCostHalf && !e.disabled))) {
     base = Math.ceil(base / 2);
   }
-  base = optionalCost(activity, base, actor);
-  return circuitCost(activity, base);
+  base = optionalCost(activity, base, actor, { ignoreNext });
+  return circuitCost(activity, base, actor);
 }
 
 /** Cursed Circuitry: an active Circuit lowers the base CE cost of other features (min 1); 3rd-level
  *  Pure Energy Efficiency then saves 1 CE per 5 spent. Circuit features themselves are not reduced. */
-function circuitCost(activity, base) {
-  const actor = activity?.actor ?? activity?.item?.actor;
+function circuitCost(activity, base, actor = activity?.actor ?? activity?.item?.actor) {
   if (!actor || base <= 0 || activity?.item?.flags?.jjk5e?.technique === "Cursed Circuitry") return base;
   let reduce = 0;
   for (const e of actor.effects ?? []) {
-    if (e.disabled) continue;
+    if (!liveWard(e)) continue;
     reduce = Math.max(reduce, Number(e.flags?.jjk5e?.circuit) || 0);
   }
   if (!reduce) return base;
   let cost = Math.max(1, base - reduce);
   const pee = actor.items?.some((i) => baseName(i) === "Pure Energy Efficiency")
-    || (actor.effects ?? []).some((e) => !e.disabled && e.flags?.jjk5e?.circuitPEE);
+    || (actor.effects ?? []).some((e) => liveWard(e) && e.flags?.jjk5e?.circuitPEE);
   if (pee) cost -= Math.floor(cost / 5);
   return Math.max(1, cost);
 }
@@ -528,11 +526,39 @@ function ceDiscountFactor(actor) {
   if (actor.items.some((i) => baseName(i) === "Six Eyes (Awakened)")) return 0.1;
   return actor.getFlag(MODULE_ID, "sixEyesNext") ? 0.1 : 1;
 }
+const hasReverseEnergyPact = actor => !!findItemByName(actor, "Heavenly Pact: Reverse Cursed Energy Generation");
+
+function activityEnergyProfile(actor, activity, usage = {}) {
+  const flags = activity?.item?.flags?.jjk5e;
+  const name = baseName(activity?.item);
+  const rct = /^Reverse Cursed Technique(?: \(Healing Pool\)| Output)?$/.test(name);
+  const positive = rct || flags?.reversal === true;
+  const positivePool = hasReverseEnergyPact(actor);
+  const innateTechnique = !!flags?.technique;
+  const base = activityCost(activity, actor);
+  const step = isQuickRecovery(activity) ? 0 : Number(flags?.ceSteps?.[activity.id] ?? 0);
+  const scaling = Number(usage.scaling ?? 0);
+  const nominal = activityCECost({ base, step, scaling });
+  const costsCE = nominal > 0;
+  const vowDelta = costsCE ? getVows(actor).filter(vow => vow.active && !vow.broken)
+    .flatMap(vow => vow.terms ?? []).reduce((delta, term) =>
+      term.type === "ceCost" && Number.isSafeInteger(Number(term.value)) ? delta + Number(term.value) : delta, 0) : 0;
+  const adjusted = costsCE ? Math.max(1, nominal + vowDelta) : nominal;
+  const cost = activityCECost({ base: adjusted, factor: ceDiscountFactor(actor) / (positivePool && positive ? 2 : 1) });
+  const invalidScaling = (base || step) && (!Number.isSafeInteger(scaling) || scaling < 0 ||
+    (scaling > 0 && activity?.consumption?.scaling?.allowed === false) ||
+    (actor && name === "Reverse Cursed Technique (Healing Pool)" && 1 + scaling > Math.max(1, ceMod(actor))));
+  const blocked = invalidScaling || !Number.isFinite(cost) ? "invalid" :
+    (actor && isHeavenlyOnly(actor) && (costsCE || innateTechnique)) ||
+    (positivePool && !positive && (costsCE || innateTechnique)) || (rct && isCursedSpiritPC(actor)) ? "restriction" :
+    vowBlocksUsage(actor?.effects, { costsCE, innateTechnique }) ? "vow" : null;
+  return { base, step, cost, blocked, energy: positivePool ? "reverseCE" : "CE",
+    sixEyes: costsCE && !!actor?.getFlag(MODULE_ID, "sixEyesNext") && !findItemByName(actor, "Six Eyes (Awakened)"),
+    minusNext: costsCE && innateTechnique && !!actor?.getFlag(MODULE_ID, "costMinusNext") &&
+      base < activityCost(activity, actor, { ignoreNext: true }) };
+}
 function totalActivityCECost(actor, activity, usageConfig = {}) {
-  const base = activityCost(activity);
-  const step = isQuickRecovery(activity) ? 0 : Number(activity?.item?.flags?.jjk5e?.ceSteps?.[activity.id] ?? 0);
-  const scaling = Number(usageConfig?.scaling ?? 0);
-  return activityCECost({ base, step, scaling, factor: ceDiscountFactor(actor) });
+  return activityEnergyProfile(actor, activity, usageConfig).cost;
 }
 function ceHistory(actor) {
   if (!actor?.isOwner) return [];
@@ -553,9 +579,13 @@ async function doSpendCE(actor, amount, label = "", { exact = false } = {}) {
     ui.notifications.warn(t("Notify.NoPool", { name: actor?.name ?? "?" }));
     return false;
   }
+  if (!exact && amount > 0 && (isHeavenlyOnly(actor) || hasReverseEnergyPact(actor))) {
+    ui.notifications.warn(t("Notify.EnergyRestriction"));
+    return false;
+  }
   const discount = !exact && amount > 0 && ceDiscountFactor(actor) < 1;
   const charge = discount ? activityCECost({ base: amount, factor: 0.1 }) : amount;
-  if (!exact && charge !== 0 && vowBlocksUsage(actor.effects, { costsCE: true })) {
+  if (!exact && charge > 0 && vowBlocksUsage(actor.effects, { costsCE: true })) {
     ui.notifications.warn(t("Notify.VowBlocksCE"));
     return false;
   }
@@ -606,9 +636,8 @@ async function setExactCE(actor, value) {
   });
 }
 function validActivityCE(actor, activity, usageConfig, { checkPool = true } = {}) {
-  const cost = totalActivityCECost(actor, activity, usageConfig);
-  if (!Number.isFinite(cost) || cost < 0 || (cost>0&&restReview(actor))) return false;
-  if (vowBlocksUsage(actor?.effects, { costsCE: cost > 0, innateTechnique: !!activity.item?.flags?.jjk5e?.technique })) return false;
+  const { cost, blocked } = activityEnergyProfile(actor, activity, usageConfig);
+  if (blocked || (cost > 0 && restReview(actor))) return false;
   const ro = Number(actor?.getFlag(MODULE_ID,"reducedOutput")) || 0;
   if (RO_MAX[ro] && cost > RO_MAX[ro]) {
     ui.notifications.warn(t("Notify.ROMax", { cost, max: RO_MAX[ro], level: ro }));
@@ -626,10 +655,10 @@ function validActivityCE(actor, activity, usageConfig, { checkPool = true } = {}
 async function payActivityCE(actor, activity, usageConfig = {}) {
   return queueCE(actor, async () => {
     if (!validActivityCE(actor,activity,usageConfig)) return false;
-    const cost = totalActivityCECost(actor,activity,usageConfig);
+    const { cost, sixEyes, minusNext } = activityEnergyProfile(actor, activity, usageConfig);
     if (cost > 0 && !(await doSpendCE(actor,cost,`${activity.item?.name ?? ""}${activity.name ? ` — ${activity.name}` : ""}`, { exact: true }))) return false;
-    if (cost > 0 && ceDiscountFactor(actor) < 1 && actor.getFlag(MODULE_ID,"sixEyesNext")) await actor.unsetFlag(MODULE_ID,"sixEyesNext");
-    if (cost > 0 && activity.item?.flags?.jjk5e?.technique && actor.getFlag(MODULE_ID,"costMinusNext")) await actor.unsetFlag(MODULE_ID,"costMinusNext");
+    if (sixEyes) await actor.unsetFlag(MODULE_ID,"sixEyesNext");
+    if (minusNext) await actor.unsetFlag(MODULE_ID,"costMinusNext");
     return true;
   });
 }
@@ -969,12 +998,13 @@ function combatInteractionActivity(actor, activity) {
   const kind = isFullTurn(activity) ? "full" : isJJKFree(activity) ? "free" :
     type === "action" ? "action" : type === "bonus" ? "bonus" :
     String(type).startsWith("reaction") ? "reaction" : "other";
-  const cost = managedCE(activity) ? activityCost(activity) : null;
+  const energy = activityEnergyProfile(actor, activity);
+  const cost = managedCE(activity) ? energy.cost : null;
   const distance = swapRange(actor, activity);
   const range = distance == null ? "" : [distance, activity.range?.units].filter(Boolean).join(" ");
   const secondaryDomain = activity.item.flags?.jjk5e?.domainActivity && !domain;
-  return {kind, domain, cost, range, variable:!!activity.item.flags?.jjk5e?.ceSteps?.[activity.id],
-    allowed:actionGate(actor,activity) && (!secondaryDomain || canUseDomainActivity(actor,activity)), direct: !domain && ["action","bonus","full","free"].includes(kind)};
+  return {kind, domain, cost, energy: energy.energy, range, variable:!!activity.item.flags?.jjk5e?.ceSteps?.[activity.id],
+    allowed:!energy.blocked && actionGate(actor,activity) && (!secondaryDomain || canUseDomainActivity(actor,activity)), direct: !domain && ["action","bonus","full","free"].includes(kind)};
 }
 
 async function startSunnyDay(actor, activity) {
@@ -1047,8 +1077,10 @@ function registerActivityHooks() {
       ui.notifications.warn(t(goldenWeekBlocks(actor, activity) ? "Notify.GoldenWeekTimeStop" : "Notify.CombatActivityUnavailable"));
       return false;
     }
-    const cost = totalActivityCECost(actor, activity, usageConfig);
-    if (vowBlocksUsage(actor?.effects, { costsCE: cost > 0, innateTechnique: !!activity.item?.flags?.jjk5e?.technique })) {
+    const { cost, blocked } = activityEnergyProfile(actor, activity, usageConfig);
+    if (blocked === "restriction") { ui.notifications.warn(t("Notify.EnergyRestriction")); return false; }
+    if (blocked === "invalid") return false;
+    if (blocked === "vow") {
       ui.notifications.warn(t("Notify.VowBlocksUse"));
       return false;
     }
@@ -2459,7 +2491,7 @@ function limbThreshold(actor, limb) {
 
 async function setLimb(actor, key, status) {
   const limb = LIMBS.find((l) => l.key === key);
-  if (!limb) return;
+  if (!actor?.isOwner || !limb || !["ok", "broken", "lost"].includes(status)) return;
   const limbs = { ...(actor.getFlag(MODULE_ID, "limbs") ?? {}) };
   limbs[key] = status;
   await actor.setFlag(MODULE_ID, "limbs", limbs);
@@ -2477,20 +2509,29 @@ async function setLimb(actor, key, status) {
   await chat(actor, `<p><strong>${esc(actor.name)}</strong> — ${esc(name)}</p><p>${t(`Limb.Effect.${key}.${status}`)}</p>`);
 }
 
-async function rollLimb(actor) {
+async function rollLimb(actor, { damage, limitToLimbs = false } = {}) {
   actor = requireActor(actor);
   if (!actor) return;
   const worldTable = game.tables?.find((tb) => tb.flags?.jjk5e?.worldCopy && /limb/i.test(tb.name));
-  if (worldTable) return worldTable.draw();
+  if (worldTable && damage === undefined && !limitToLimbs) return worldTable.draw();
   const pack = jjkPack("jjk5e-tables");
   const entry = pack && (await pack.getIndex()).find((e) => /limb/i.test(e.name));
-  if (entry) {
+  if (entry && damage === undefined && !limitToLimbs) {
     const table = await pack.getDocument(entry._id);
     return table.draw();
   }
-  const r = await new Roll("1d6").evaluate();
+  const r = await new Roll(limitToLimbs ? "1d4" : "1d6").evaluate();
   const limb = LIMBS.find((l) => l.roll === r.total) ?? LIMBS[0];
   await r.toMessage({ speaker: docClass("ChatMessage").getSpeaker({ actor }), flavor: `${t("Limb.Roll")}: ${t(`Limb.${limb.key}`)}` });
+  if (!actor.isOwner || !Number.isFinite(damage)) return;
+  const threshold = limbThreshold(actor, limb);
+  if (!(threshold > 0) || damage < threshold) return;
+  return queueCE(actor, async () => {
+    const old = actor.getFlag(MODULE_ID, "limbs")?.[limb.key];
+    const status = damage >= 2 * threshold ? "lost" : "broken";
+    if (old !== "lost" && old !== status) await setLimb(actor, limb.key, status);
+    return { key: limb.key, status: old === "lost" ? old : status };
+  });
 }
 
 /* -------------------------------------------- */
@@ -2775,6 +2816,7 @@ function panelHTML(actor, tab = "combat") {
       <table class="jjk-limbs"><thead><tr><th></th><th>${t("Limb.Broken")}</th><th>${t("Limb.Lost")}</th><th></th></tr></thead>
       <tbody>${limbRows}</tbody></table>
       <div class="jjk-row">${pbtn("limbRoll", "fas fa-dice-d6", t("Limb.Roll"), { key: "L" })}</div>
+      ${rctPoolOf(actor) ? pbtn("limbRCT", "fas fa-heart-pulse", t("Limb.HealRCT")) : ""}
     </fieldset>`;
 
   const summonTab = `<fieldset><legend>${t("Summon.Title")}</legend>
@@ -2937,6 +2979,7 @@ const PANEL_ACTIONS = {
   burnoutRecovery: (actor) => burnoutRecovery(actor),
   clearSoul: (actor) => clearSoulDamage(actor),
   soulRCT: (actor) => healSoulWithRCT(actor),
+  limbRCT: (actor) => healLimbWithRCT(actor),
   techniqueBuilder: (actor) => techniqueBuilder(actor),
   soulDamage: async (actor) => {
     const n = await promptNumber(t("Soul.Apply"), t("Soul.Amount"), 0);
@@ -3088,55 +3131,173 @@ function addHeaderButton(app, root) {
 // Soul Damage lowers maximum HP. Reverse Cursed Technique and regeneration cannot restore it: the reduction is an
 // effect on the actor (hp.tempmax), so healing stops at the reduced maximum. Sources that say "until a long rest"
 // mark the reduction as restUntil and it ends on a long rest; other sources stay until the GM removes the effect.
-const soulEffect = (actor) => actor?.effects?.find((e) => e.flags?.jjk5e?.kind === "soul");
-const soulDamageOf = (actor) => Number(soulEffect(actor)?.flags?.jjk5e?.soulDamage) || 0;
+const soulEffect = actor => actor?.effects?.find(effect => effect.flags?.jjk5e?.kind === "soul");
+function soulInjury(actor) {
+  const flags = soulEffect(actor)?.flags?.jjk5e;
+  const total = Math.max(0, Number(flags?.soulDamage) || 0);
+  const lasting = Math.min(total, Math.max(0, Number(flags?.soulLastingDamage ?? (flags?.lasting ? total : 0)) || 0));
+  return { total, lasting };
+}
+const soulDamageOf = actor => soulInjury(actor).total;
+
+async function setSoulInjury(actor, total, lasting) {
+  if (!total) {
+    const effect = soulEffect(actor);
+    if (effect) await effect.delete();
+    return;
+  }
+  return setKindEffect(actor, "soul", {
+    name: `${t("Soul.Name")} (-${total})`, img: "icons/magic/death/projectile-skull-flaming-purple.webp",
+    disabled: false, changes: [{ key: "system.attributes.hp.tempmax", mode: 2, value: String(-total) }],
+    description: `<p>${t(lasting ? "Soul.DescriptionLasting" : "Soul.Description", { total })}</p>`,
+    flags: { jjk5e: { soulDamage: total, soulLastingDamage: lasting, lasting: lasting > 0 } }
+  });
+}
 
 async function applySoulDamage(actor, amount, { untilRest = true, source = "" } = {}) {
   actor = requireActor(actor);
-  const dmg = Math.max(0, Math.floor(Number(amount) || 0));
-  if (!actor || !dmg) return 0;
-  const total = soulDamageOf(actor) + dmg;
-  const lasting = !untilRest || soulEffect(actor)?.flags?.jjk5e?.lasting === true;
-  await setKindEffect(actor, "soul", {
-    name: `${t("Soul.Name")} (−${total})`, img: "icons/magic/death/projectile-skull-flaming-purple.webp",
-    changes: [{ key: "system.attributes.hp.tempmax", mode: 2, value: String(-total) }],
-    description: `<p>${t(lasting ? "Soul.DescriptionLasting" : "Soul.Description", { total })}</p>`,
-    flags: { jjk5e: { soulDamage: total, lasting } }
+  const dmg = Math.floor(Number(amount));
+  if (!actor?.isOwner || !Number.isFinite(dmg) || dmg <= 0) return 0;
+  return queueCE(actor, async () => {
+    const injury = soulInjury(actor);
+    const total = injury.total + dmg;
+    await setSoulInjury(actor, total, injury.lasting + (untilRest ? 0 : dmg));
+    const hp = actor.system?.attributes?.hp ?? {};
+    const max = Math.max(0, (Number(hp.max) || 0) + (Number(hp.tempmax) || 0));
+    if (Number(hp.value) > max) await actor.update({ "system.attributes.hp.value": max });
+    await chat(actor, `<p><i class="fas fa-ghost"></i> ${t("Soul.Applied", { name: esc(actor.name), dmg, total, source: esc(source) })}</p>`);
+    return total;
   });
-  // Keep current HP within the reduced maximum.
-  const hp = actor.system?.attributes?.hp ?? {};
-  const max = (Number(hp.max) || 0) + (Number(hp.tempmax) || 0);
-  if (Number(hp.value) > max) await actor.update({ "system.attributes.hp.value": Math.max(0, max) });
-  await chat(actor, `<p><i class="fas fa-ghost"></i> ${t("Soul.Applied", { name: esc(actor.name), dmg, total, source: esc(source) })}</p>`);
-  return total;
 }
 
-/** Soul Damage + RCT: with 6+ levels of Soul Awareness, healing from the RCT pool (1 CE per 10 HP) restores max HP. */
+function healingProhibited(actor, { natural = false } = {}) {
+  return actor?.effects?.some(effect => liveWard(effect) && (effect.flags?.jjk5e?.noHealing ||
+    (baseName(effect) === "Mortal" && effect.flags?.jjk5e?.technique === "Eight Heads"))) ||
+    (!natural && !!findItemByName(actor, "Heavenly Pact: Healing Incompatibility"));
+}
+
+function guardHPRecovery(actor, changes, options = {}) {
+  const key = "system.attributes.hp.value";
+  const flat = Object.hasOwn(changes, key);
+  const next = flat ? changes[key] : foundry.utils.getProperty(changes, key);
+  const hp = Number(actor.system?.attributes?.hp?.value) || 0;
+  const origin = options.originatingMessage ?? options.origin;
+  const source = origin?.getAssociatedActivity?.()?.item ?? origin?.getAssociatedItem?.();
+  const positive = /^(Reverse Cursed Technique(?: \(Healing Pool\))?|Positive Energy Master)$/.test(baseName(source));
+  if (options.midiUndo || next == null || Number(next) <= hp ||
+      (!healingProhibited(actor, { natural: options.isRest === true }) && !(positive && isCursedSpiritPC(actor)))) return;
+  if (flat) changes[key] = hp;
+  else foundry.utils.setProperty(changes, key, hp);
+}
+
+const pendingRestHealing = new WeakMap();
+
+function trackBodyRest(actor, result, config) {
+  if (!(result?.longRest ?? config?.type === "long") || !result?.updateData) return;
+  const key = "system.attributes.hp.value";
+  const desired = result.updateData[key] ?? foundry.utils.getProperty(result.updateData, key);
+  if (desired != null) pendingRestHealing.set(result, Number(desired));
+}
+
+async function recoverBodyOnLongRest(actor, result) {
+  return queueCE(actor, async () => {
+    const injury = soulInjury(actor);
+    if (injury.total !== injury.lasting) await setSoulInjury(actor, injury.lasting, injury.lasting);
+    const mortal = actor.effects.filter(effect => baseName(effect) === "Mortal" && effect.flags?.jjk5e?.technique === "Eight Heads");
+    for (const effect of mortal) await safeDelete(effect);
+    const desired = pendingRestHealing.get(result);
+    pendingRestHealing.delete(result);
+    if (!Number.isFinite(desired) || healingProhibited(actor, { natural: true })) return;
+    const hp = actor.system?.attributes?.hp ?? {};
+    const max = Math.max(0, (Number(hp.max) || 0) + (Number(hp.tempmax) || 0));
+    if (Math.min(desired, max) > Number(hp.value)) {
+      await actor.update({ "system.attributes.hp.value": Math.min(desired, max) }, { isRest: true });
+    }
+  });
+}
+
+const rctPoolOf = actor => findItemByName(actor, "Reverse Cursed Technique (Healing Pool)");
+
+function rctTreatmentLimit(actor) {
+  const uses = rctPoolOf(actor)?.system?.uses;
+  return Math.min(Math.floor(Math.max(0, (Number(uses?.max) || 0) - (Number(uses?.spent) || 0)) / 10), Math.max(1, ceMod(actor)));
+}
+
+async function commitBodyTreatment(actor, treatment, units) {
+  if (!actor?.isOwner || !Number.isSafeInteger(units) || units < 1) return false;
+  return queueCE(actor, async () => {
+    const pool = rctPoolOf(actor);
+    if (!pool || units > rctTreatmentLimit(actor) || healingProhibited(actor) || cePending(findPool(actor))) return false;
+    const injury = soulInjury(actor);
+    const limb = LIMBS.find(part => part.key === treatment && part.mult === 1);
+    const limbStatus = limb && actor.getFlag(MODULE_ID, "limbs")?.[limb.key];
+    if (treatment === "soul") {
+      if (!injury.total || Number(actor.getFlag(MODULE_ID, "soulAwareness")) < 6 || units > Math.ceil(injury.total / 10)) return false;
+    } else if (!["broken", "lost"].includes(limbStatus) || units !== (limbStatus === "lost" ? 2 : 1)) return false;
+    const activity = { item: pool, actor, id: "BGwzqb2aPck3yZ7U" };
+    const profile = activityEnergyProfile(actor, activity, { scaling: units - 1 });
+    if (!(profile.cost > 0) || !validActivityCE(actor, activity, { scaling: units - 1 })) return false;
+    const spent = Number(pool.system.uses.spent) || 0;
+    if (!(await doSpendCE(actor, profile.cost, t("Soul.HealRCT"), { exact: true }))) return false;
+    let poolDebited = false;
+    try {
+      await pool.update({ "system.uses.spent": spent + 10 * units });
+      poolDebited = true;
+      if (limb) {
+        const effect = kindEffect(actor, "limb:" + limb.key);
+        if (effect) await effect.delete();
+        await setLimb(actor, limb.key, "ok");
+      }
+      else {
+        const rest = Math.max(0, injury.total - 10 * units);
+        const lasting = Math.max(0, injury.lasting - 10 * units);
+        await setSoulInjury(actor, rest, lasting);
+      }
+    } catch (err) {
+      if (poolDebited) await pool.update({ "system.uses.spent": spent });
+      await doSpendCE(actor, -profile.cost, t("Soul.HealRCT"), { exact: true });
+      throw err;
+    }
+    if (profile.sixEyes) await actor.unsetFlag(MODULE_ID, "sixEyesNext");
+    return limb ? 10 * units : Math.min(injury.total, 10 * units);
+  });
+}
+
+function requestBodyTreatment(actor, treatment, units) {
+  if (ceAuthorityEnabled() && !isActiveGM()) return ceAuthorityRequest("bodyTreatment", { actorUuid: actor.uuid, treatment, units });
+  return commitBodyTreatment(actor, treatment, units);
+}
+
 async function healSoulWithRCT(actor) {
   actor = requireActor(actor);
-  const sd = soulDamageOf(actor);
-  const soul = Number(actor?.getFlag(MODULE_ID, "soulAwareness")) || 0;
-  const pool = actor?.items?.find((i) => /Reverse Cursed Technique \(Healing Pool\)/i.test(baseName(i)));
-  if (!actor?.isOwner || !pool || !sd || soul < 6 || !hasRCT(actor)) return ui.notifications.warn(t("Soul.HealRCTUnavailable"));
-  const left = Math.max(0, (Number(pool.system?.uses?.max) || 0) - (Number(pool.system?.uses?.spent) || 0));
-  const maxCE = Math.min(Math.ceil(sd / 10), Math.floor(left / 10), Math.max(1, ceMod(actor)));
-  if (!(maxCE > 0)) return ui.notifications.warn(t("Soul.HealRCTUnavailable"));
-  const n = clamp(Number(await promptNumber(t("Soul.HealRCT"), t("Soul.HealRCTPrompt", { max: maxCE, sd }), maxCE)) || 0, 0, maxCE);
-  if (!Number.isSafeInteger(n) || n<1 || !(await spendCE(actor, n, t("Soul.HealRCT")))) return false;
-  const healed = Math.min(sd, 10 * n);
-  if (pool) await pool.update({ "system.uses.spent": (Number(pool.system?.uses?.spent) || 0) + 10 * n });
-  const rest = sd - healed;
-  const fx = soulEffect(actor);
-  if (!rest) await fx?.delete();
-  else await fx?.update(fxData({ name: `${t("Soul.Name")} (−${rest})`, changes: [{ key: "system.attributes.hp.tempmax", mode: 2, value: String(-rest) }],
-    "flags.jjk5e.soulDamage": rest }));
-  await chat(actor, `<p><i class="fas fa-heart-pulse"></i> ${t("Soul.HealRCTDone", { name: esc(actor.name), healed, rest })}</p>`);
+  if (!actor?.isOwner) return false;
+  const sd = soulDamageOf(actor), max = Math.min(Math.ceil(sd / 10), rctTreatmentLimit(actor));
+  if (max < 1 || Number(actor.getFlag(MODULE_ID, "soulAwareness")) < 6 || healingProhibited(actor)) {
+    ui.notifications.warn(t("Soul.HealRCTUnavailable"));
+    return false;
+  }
+  const n = Number(await promptNumber(t("Soul.HealRCT"), t("Soul.HealRCTPrompt", { max, sd }), max));
+  if (!Number.isSafeInteger(n) || n < 1 || n > max) return false;
+  const healed = await requestBodyTreatment(actor, "soul", n);
+  if (healed) await chat(actor, `<p><i class="fas fa-heart-pulse"></i> ${t("Soul.HealRCTDone", { name: esc(actor.name), healed, rest: soulDamageOf(actor) })}</p>`);
   return healed;
 }
 
+async function healLimbWithRCT(actor) {
+  if (!actor?.isOwner || healingProhibited(actor)) return false;
+  const limbs = actor.getFlag(MODULE_ID, "limbs") ?? {};
+  const choices = LIMBS.filter(({ key, mult }) => mult === 1 && ["broken", "lost"].includes(limbs[key]) &&
+    rctTreatmentLimit(actor) >= (limbs[key] === "lost" ? 2 : 1));
+  if (!choices.length) { ui.notifications.warn(t("Soul.HealRCTUnavailable")); return false; }
+  const options = choices.map(({ key }) => `<option value="${key}">${t("Limb." + key)} (${limbs[key] === "lost" ? 20 : 10} HP)</option>`).join("");
+  const key = await promptField(t("Limb.HealRCT"), `<select name="limb">${options}</select>`, "limb");
+  if (!choices.some(choice => choice.key === key)) return false;
+  return requestBodyTreatment(actor, key, limbs[key] === "lost" ? 2 : 1);
+}
+
 async function clearSoulDamage(actor) {
-  const e = soulEffect(requireActor(actor));
-  if (e) await e.delete();
+  actor = requireActor(actor);
+  if (actor?.isOwner) return queueCE(actor, () => setSoulInjury(actor, 0, 0));
 }
 
 /** Is this damage Soul Damage? Item flag soulDamage: true | [activityIds]; or the attacker's Soul Strike effect. */
@@ -3145,7 +3306,7 @@ function soulDamageSource(workflow) {
   const activity = workflow?.activity;
   const sd = item?.flags?.jjk5e?.soulDamage;
   if (sd === true || (Array.isArray(sd) && sd.includes(activity?.id))) return { source: item.name, lasting: !!item.flags.jjk5e.soulLasting };
-  const fx = workflow?.actor?.effects?.find((e) => !e.disabled && e.flags?.jjk5e?.soulStrike);
+  const fx = workflow?.actor?.effects?.find((e) => liveWard(e) && e.flags?.jjk5e?.soulStrike);
   const strike = fx?.flags?.jjk5e?.soulStrike;
   if (!strike) return null;
   const hit = { source: fx.name, lasting: !!fx.flags.jjk5e.soulLasting };
@@ -3156,30 +3317,36 @@ function soulDamageSource(workflow) {
   return null;
 }
 
-/** After Midi applies damage: turn the HP lost to Soul Damage into a max HP reduction. */
-async function onSoulWorkflow(workflow) {
-  const hit = soulDamageSource(workflow);
+const pendingSoulHits = new WeakMap();
+
+function captureSoulHit(actor, amount, updates, options) {
+  if (!actor?.isOwner || !(amount > 0) || !options || options.midiUndo) return;
+  const origin = options.originatingMessage ?? options.origin;
+  const activity = origin?.getAssociatedActivity?.();
+  const item = activity?.item ?? origin?.getAssociatedItem?.();
+  const attacker = activity?.actor ?? item?.actor ?? origin?.getAssociatedActor?.();
+  const hit = soulDamageSource({ item, activity, actor: attacker, damageRolls: origin?.rolls });
   if (!hit) return;
-  const { source } = hit;
-  const untilRest = !hit.lasting;
-  for (const entry of workflow?.damageList ?? []) {
-    const lost = (Number(entry.hpDamage) || 0) + (Number(entry.tempDamage) || 0) || Number(entry.totalDamage) || 0;
-    if (lost <= 0) continue;
-    const doc = await fromUuid(entry.actorUuid ?? entry.tokenUuid ?? entry.targetUuid ?? "").catch(() => null);
-    const actor = doc?.actor ?? doc;
-    if (actor?.documentName !== "Actor") continue;
-    if (actor.isOwner) await applySoulDamage(actor, lost, { untilRest, source });
-    else {
-      // The GM applies it: one click on a whispered card (no automatic privileged request).
-      const gms = game.users.filter((u) => u.isGM).map((u) => u.id);
-      await docClass("ChatMessage").create({
-        whisper: gms, speaker: { alias: "JJK 5e" },
-        content: `<p>${t("Soul.Pending", { name: esc(actor.name), dmg: lost, source: esc(source) })}</p>
-          <button type="button" data-jjk5e-soul="${esc(actor.uuid)}" data-amount="${lost}" data-rest="${untilRest}">
-          <i class="fas fa-ghost"></i> ${t("Soul.Apply")}</button>`
-      });
-    }
+  const before = Number(actor.system?.attributes?.hp?.value);
+  const key = "system.attributes.hp.value";
+  const after = Number(updates[key] ?? foundry.utils.getProperty(updates, key));
+  if (Number.isFinite(before) && Number.isFinite(after) && before > after) {
+    // Midi and dnd5e can clone the updates before writing. The apply event retains the same options.
+    let targets = pendingSoulHits.get(options);
+    if (!targets) pendingSoulHits.set(options, targets = new Map());
+    targets.set(actor.uuid, { before, after, hit });
   }
+}
+
+async function resolveSoulHit(actor, amount, options) {
+  if (!(amount > 0) || !options) return;
+  const targets = pendingSoulHits.get(options);
+  const pending = targets?.get(actor.uuid);
+  if (!pending) return;
+  targets.delete(actor.uuid);
+  const after = Math.max(pending.after, Number(actor.system?.attributes?.hp?.value));
+  const loss = pending.before - after;
+  if (loss > 0) await applySoulDamage(actor, loss, { untilRest: !pending.hit.lasting, source: pending.hit.source });
 }
 
 /* -------------------------------------------- */
@@ -3631,7 +3798,7 @@ Hooks.once("init", () => {
     importAll, promptImport, spendCE, dataLanguage, baseName,
     regainCE: (actor, amount, label) => spendCE(actor, -Math.abs(amount), label || t("CE.Regained")),
     combatInteractionState, combatInteractionActivity, ceHistory, findPool, poolValue, poolMax, cePending, resolveRestExchange, chooseTechnique, syncTechnique, promptCE, shortRestCE, chooseCEAbility, negativeEmotion,
-    applyScaling, openPanel, maximumOutput, setReducedOutput, setSoulAwareness, setLimb, rollLimb,
+    activityEnergyProfile, applyScaling, openPanel, maximumOutput, setReducedOutput, setSoulAwareness, setLimb, rollLimb,
     summon, dismissSummons, syncResource, missingPrereqs, applyCEEffects, activateGroup, endGroup,
     openGMStart, undoAutomation, updateAutomation, updateAllAutomation, outdatedItems, burnoutRecovery, fallDamage, applySoulDamage, clearSoulDamage,
     techniqueBuilder, buildTechniqueItems, itemTheme, ceMeterState, aaHandles, itemAutomationStatus, showIntegrationDiagnostics,
@@ -3659,8 +3826,14 @@ Hooks.once("ready", async () => {
     await applyScaling(actor);
   });
   let pending = new Set();
+  if (isActiveGM()) for (const actor of game.actors ?? []) {
+    if (hasReverseEnergyPact(actor)) queueCE(actor, () => syncReverseEnergyPact(actor)).catch(err => reportError("reverse CE pact", err));
+  }
   Hooks.on("createItem", (item, options, userId) => {
     if (userId !== game.user.id || !item.actor || !item.flags?.jjk5e) return;
+    if (baseName(item) === "Heavenly Pact: Reverse Cursed Energy Generation") {
+      queueCE(item.actor, () => syncReverseEnergyPact(item.actor)).catch(err => reportError("reverse CE pact", err));
+    }
     pending.add(item.actor);
     setTimeout(() => { const list = [...pending]; pending = new Set(); list.forEach((a) => applyScaling(a)); }, 250);
   });
@@ -4578,10 +4751,6 @@ function registerMidiHooks() {
   });
   // Animations with Midi's real hit list.
   Hooks.on("midi-qol.RollComplete", (workflow) => {
-    if(!midiCEGuard(workflow)) return;
-    onSoulWorkflow(workflow).catch((err) => console.error(`${MODULE_ID} | soul damage`, err));
-  });
-  Hooks.on("midi-qol.RollComplete", (workflow) => {
     try {
       if (!animOn()||!midiCEGuard(workflow)) return;
       const item = workflow?.item;
@@ -4895,6 +5064,7 @@ const VOW_TERMS = {
     changes: (v) => [{ key: "system.bonuses.abilities.save", mode: 2, value: sgn(v) }] },
   check: { label: { en: "Ability checks", es: "Pruebas de característica" },
     changes: (v) => [{ key: "system.bonuses.abilities.check", mode: 2, value: sgn(v) }] },
+  ceCost: { label: { en: "CE cost per paid activity", es: "Coste de EM por actividad de pago" }, changes: () => [] },
   ceMax: { label: { en: "Maximum CE", es: "EM máxima" }, changes: () => [] }
 };
 
@@ -4945,7 +5115,10 @@ const MISFORTUNES = [
 ];
 const SENSES = [{ en: "touch", es: "tacto" }, { en: "taste", es: "gusto" }, { en: "smell", es: "olfato" }, { en: "sight", es: "vista" }];
 
-const getVows = (actor) => foundry.utils.deepClone(actor?.getFlag?.(MODULE_ID, "vows") ?? []);
+const getVows = actor => {
+  const vows = actor?.getFlag?.(MODULE_ID, "vows");
+  return Array.isArray(vows) ? foundry.utils.deepClone(vows) : [];
+};
 // Pact Maker: twice the proficiency bonus.
 const vowLimit = (actor) => (Number(actor?.system?.attributes?.prof) || 2)
   * Math.max(1, ...(actor?.items ?? []).map((i) => Number(i.flags?.jjk5e?.vowLimitMultiplier) || 1));
@@ -5061,7 +5234,7 @@ async function createVow(actor, data = null) {
     + `<p><strong>${t("Vow.Restriction")}:</strong> ${esc(vow.restriction)}</p>`
     + `<p><strong>${t("Vow.Benefit")}:</strong> ${esc(vow.benefit)}</p>`
     + (vow.partnerName ? `<p><strong>${t("Vow.Partner")}:</strong> ${esc(vow.partnerName)}</p>` : "")
-    + (vowChanges(vow).length || vow.terms?.some((x) => x.type === "ceMax")
+    + (vowChanges(vow).length || vow.terms?.some((x) => ["ceMax", "ceCost"].includes(x.type))
       ? `<p class="hint">${vow.terms.map((x) => `${esc(L(VOW_TERMS[x.type].label))} ${sgn(x.value)}`).join(" · ")}</p>` : "")
     + `</div>`);
   return vow;
@@ -5797,10 +5970,17 @@ Hooks.once("ready", () => {
       try { addCEMeter(app, element); } catch (err) { console.error(`${MODULE_ID} | CE meter`, err); }
     });
   }
+  Hooks.on("preUpdateActor", guardHPRecovery);
+  Hooks.on("dnd5e.preApplyDamage", (actor, amount, updates, options) => {
+    guardHPRecovery(actor, updates, options);
+    captureSoulHit(actor, amount, updates, options);
+  });
+  Hooks.on("dnd5e.applyDamage", (actor, amount, options) => resolveSoulHit(actor, amount, options).catch(err => reportError("soul damage", err)));
+  Hooks.on("dnd5e.preRestCompleted", trackBodyRest);
   Hooks.on("dnd5e.restCompleted", (actor, result, config) => {
-    // Soul Damage marked "until a long rest" ends on a long rest.
-    const se = soulEffect(actor);
-    if ((result?.longRest ?? config?.type === "long") && actor?.isOwner && se && !se.flags?.jjk5e?.lasting) se.delete();
+    if ((result?.longRest ?? config?.type === "long") && actor?.isOwner) {
+      recoverBodyOnLongRest(actor, result).catch(err => reportError("body rest", err));
+    }
     if ((result?.longRest ?? config?.type === "long") && actor?.isOwner && actor.getFlag(MODULE_ID, "burnoutRecoveries")) {
       actor.unsetFlag(MODULE_ID, "burnoutRecoveries");
     }
@@ -8280,7 +8460,7 @@ async function grantByName(actor, packName, name) {
 
 /* ---- CE costs: Pure Barrier, Six Eyes Dependency, Enhanced Creativity ---- */
 
-function optionalCost(activity, base, actor) {
+function optionalCost(activity, base, actor, { ignoreNext = false } = {}) {
   if (!actor || !(base > 0)) return base;
   const item = activity?.item;
   const name = baseName(item);
@@ -8293,7 +8473,7 @@ function optionalCost(activity, base, actor) {
       else if (["Lapse Blue", "Reversal Red", "Teleportation", "Offensive Infinity"].includes(name)) base *= 2;
     }
   }
-  if (item?.flags?.jjk5e?.technique && actor.getFlag?.(MODULE_ID, "costMinusNext")) base = Math.max(1, base - 1);
+  if (!ignoreNext && item?.flags?.jjk5e?.technique && actor.getFlag?.(MODULE_ID, "costMinusNext")) base = Math.max(1, base - 1);
   return base;
 }
 
@@ -8303,6 +8483,16 @@ const hasRCT = (actor) => hasItem(actor, /^Reverse Cursed Technique( \(Healing P
 
 /** Awaken the Reverse Cursed Technique: grant its features and 1 Breakthrough (Awakened Understanding). */
 const isCursedSpiritPC = (actor) => !!actor?.items?.some((i) => i.type === "race" && /^Cursed Spirit \(/i.test(baseName(i)));
+
+async function syncReverseEnergyPact(actor) {
+  if (!actor?.isOwner || !hasReverseEnergyPact(actor) || isCursedSpiritPC(actor)) return false;
+  const classFeatures = ["Reverse Cursed Technique", "Reverse Cursed Technique (Healing Pool)"];
+  const feats = ["Cursed Technique Reversal", "Reverse Cursed Technique Output"];
+  for (const name of classFeatures) await grantByName(actor, "jjk5e-class-features", name);
+  for (const name of feats) await grantByName(actor, "jjk5e-feats", name);
+  if (hasCompleteRCT(actor)) await syncReversals(actor);
+  return hasCompleteRCT(actor);
+}
 
 function hasCompleteRCT(actor) {
   return !!findItemByName(actor, "Reverse Cursed Technique") && !!findItemByName(actor, "Reverse Cursed Technique (Healing Pool)");
@@ -8606,7 +8796,7 @@ async function calledShotCheck(attacker, target, dmg) {
   const need = calledShotThreshold(target);
   await chat(attacker, `<p><strong>${t("Opt.callingShots.Name")}</strong>: ${esc(target.name)} — ${dmg} / ${need}. `
     + `${dmg > need ? t("Opt.Called.Crippled") : t("Opt.Called.NoEffect")}</p>`);
-  if (dmg > need) await rollLimb(target);
+  if (dmg > need) await rollLimb(target, { damage: dmg });
 }
 
 async function calledShotResult(workflow) {
@@ -9454,7 +9644,7 @@ Hooks.once("ready", () => {
     // Items that roll the Limb Damage table for their targets (e.g. Judicial Amputation).
     const limb = activity?.item?.flags?.jjk5e?.limbRoll;
     if (Array.isArray(limb) && limb.includes(activity.id)) {
-      for (const tk of game.user?.targets ?? []) if (tk.actor) rollLimb(tk.actor).catch((err) => reportError("limb", err));
+      for (const tk of game.user?.targets ?? []) if (tk.actor) rollLimb(tk.actor, { limitToLimbs: true }).catch((err) => reportError("limb", err));
     }
   });
   // Less Blood: Blood Manipulation and Rot hit point costs are reduced.
@@ -10463,9 +10653,10 @@ const {
   reportError,
   setting,
   t,
-  totalActivityCECost,
+  activityEnergyProfile,
   validActivityCE,
-  commitRestExchange
+  commitRestExchange,
+  commitBodyTreatment
 });
 
 const {
