@@ -95,17 +95,22 @@ export function createDomainLifecycle({
     if (actor.isOwner) openDomainHUD(actor);
   }
 
+  /** Run one cleanup step; a failure is reported and never stops the steps after it. */
+  async function step(name, fn) {
+    try { return await fn(); } catch (err) { reportError(name, err); return null; }
+  }
+
   async function domainClosed(actor) {
     if (!isActiveGM()) return;
     const state = getDomain(actor);
     if (!state) return;
     const scene = state.sceneId && game.scenes.get(state.sceneId);
-    endDomainAnimation(actor, state.openingId, state.sceneId);
-    await removeBarrierMarkers(actor.uuid, state.openingId, scene).catch((err) => reportError("domain marker cleanup", err));
-    if (state.zone) await GM_EXTRA.domainZoneDelete({ sceneId: state.sceneId, zone: state.zone, actorUuid: actor.uuid, openingId: state.openingId })
-      .catch((err) => reportError("domain zone cleanup", err));
+    await step("domain animation", () => endDomainAnimation(actor, state.openingId, state.sceneId));
+    await step("domain marker cleanup", () => removeBarrierMarkers(actor.uuid, state.openingId, scene));
+    if (state.zone) await step("domain zone cleanup", () => GM_EXTRA.domainZoneDelete({ sceneId: state.sceneId, zone: state.zone, actorUuid: actor.uuid, openingId: state.openingId }));
     const window = actor.getFlag(MODULE_ID, "domainReactionWindow");
     const survivors = [];
+    await step("domain reactions", async () => {
     for (const offer of window?.offers ?? []) {
       const responder = await domainActor(offer.actorUuid);
       if (!responder) continue;
@@ -119,14 +124,18 @@ export function createDomainLifecycle({
       }
     }
     await actor.unsetFlag(MODULE_ID, "domainReactionWindow");
+    });
+    await step("domain conditions", async () => {
     const actors = [...new Map([...(game.actors?.contents ?? []), ...[...(scene?.tokens ?? [])].map((tk)=>tk.actor)]
       .filter((a)=>a?.uuid).map((a)=>[a.uuid,a])).values()];
     for (const target of actors) {
       const ids = target.effects?.filter((e)=>["domainProfileCondition", "domainWeakHole"].includes(e.flags?.jjk5e?.kind) && e.flags.jjk5e.openingId === state.openingId).map((e)=>e.id) ?? [];
       for (const id of ids) await safeDelete(target.effects.get(id));
     }
+    });
     const peers = state.clash?.with ? [state.clash.with].flat() : [];
     const reclash = [];
+    await step("domain clash", async () => {
     for (const uuid of peers) {
       const other = await fromUuid(uuid).catch(() => null);
       const os = getDomain(other);
@@ -145,29 +154,51 @@ export function createDomainLifecycle({
         else reclash.push(other);
       }
     }
+    });
     await setDomain(actor, null);
-    for (const other of reclash) if (getDomain(other)?.open && !getDomain(other)?.clash) await detectClash(other);
-    if (window?.status === "open") for (const survivor of survivors) await detectClash(survivor);
-    if (scene) await sweepDomainLeftovers(scene).catch((err) => reportError("domain cleanup", err));
+    await step("domain clash", async () => {
+      for (const other of reclash) if (getDomain(other)?.open && !getDomain(other)?.clash) await detectClash(other);
+      if (window?.status === "open") for (const survivor of survivors) await detectClash(survivor);
+    });
+    // The recorded scene and, if the caster moved, the scene they stand on now (not the whole world: see tests).
+    const here = (actor.token ?? actor.getActiveTokens?.()?.[0]?.document ?? null)?.parent ?? null;
+    for (const sc of new Set([scene, here].filter(Boolean))) await step("domain cleanup", () => sweepDomainLeftovers(sc));
     refreshDomainApps(actor);
   }
 
-  async function closeDomainOf(actor, reason = "", openingId = getDomain(actor)?.openingId ?? null) {
+  const isDomainEffect = (e) => !!(e?.flags?.jjk5e?.kind === "domain" || e?.flags?.jjk5e?.domainOpen);
+
+  /**
+   * Close a domain. `openingId` guards against closing a newer domain with an old button; leave it out to
+   * close whatever is open. The effect is deleted (its deletion runs the cleanup) and, when the recorded state
+   * and the effect disagree, the state is closed directly so the domain can never stay half open.
+   */
+  async function closeDomainOf(actor, reason = "", openingId = undefined) {
     actor = liveActor(actor);
     if (!actor) return false;
-    if (!isActiveGM()) return requestDomainAuthority("close", { actorUuid: actor.uuid, openingId });
-    const state = getDomain(actor);
-    if (state?.open && (state.openingId ?? null) !== openingId) return false;
-    const eff = actor.effects?.find((e) =>
-      (openingId === null || e.uuid === openingId) && (e.flags?.jjk5e?.kind === "domain" || e.flags?.jjk5e?.domainOpen));
-    if (!state && !eff) return true;
+    const recorded = getDomain(actor);
+    const guard = openingId === undefined ? (recorded?.openingId ?? null) : openingId;
+    const effects = actor.effects?.filter?.(isDomainEffect) ?? [];
+    if (!isActiveGM()) {
+      // The owner can delete their own effect at once; the GM's deletion hook does the rest.
+      if (actor.isOwner && effects.length && (!guard || effects.some((e) => e.uuid === guard) || !recorded?.open)) {
+        for (const e of effects) await safeDelete(e);
+        return true;
+      }
+      return requestDomainAuthority("close", { actorUuid: actor.uuid, openingId: guard });
+    }
+    // An explicit opening id (even null, from a stale request) must match the open domain.
+    if (recorded?.open && (recorded.openingId ?? null) !== guard) return false;
+    if (!recorded && !effects.length) return true;
     if (reason) await chat(actor, `<p><i class="fas fa-burst"></i> ${reason}</p>`)
       .catch((err) => reportError("domain closing chat", err));
-    if ((getDomain(actor)?.openingId ?? null) !== (state?.openingId ?? null)) return false;
-    if (eff) {
-      await safeDelete(eff);
-      return !liveActor(actor)?.effects?.get(eff.id);
+    if ((getDomain(actor)?.openingId ?? null) !== (recorded?.openingId ?? null)) return false;
+    if (effects.length) {
+      // The deletion hook closes the recorded state (also when the effect's uuid is not the recorded opening).
+      for (const e of effects) await safeDelete(e);
+      return !liveActor(actor)?.effects?.some?.(isDomainEffect);
     }
+    // No effect left but the state is still open (effect lost while no GM was online, for example): close it here.
     await domainClosed(actor);
     return true;
   }
@@ -262,6 +293,9 @@ export function createDomainLifecycle({
         const docs = list.filter((d) => d.flags?.jjk5e?.domain && !live(d.flags.jjk5e.domain, d.flags.jjk5e.openingId));
         for (const d of docs) { await safeDelete(d); removed++; }
       }
+      // Domain backdrops (Drawings) whose domain is no longer open, even if their zone is somehow still there.
+      const backdrops = [...(scene.drawings ?? [])].filter((d) => d.flags?.jjk5e?.domainBackdrop && (!d.flags.jjk5e.domain || !live(d.flags.jjk5e.domain, d.flags.jjk5e.openingId)));
+      if (backdrops.length) { await scene.deleteEmbeddedDocuments("Drawing", backdrops.map((d) => d.id)); removed += backdrops.length; }
       const markers = [...(scene.tokens ?? [])].filter((t) => { const f = barrierMarkerMeta(t); return f && !live(f.actorUuid, f.openingId); });
       if (markers.length) { await scene.deleteEmbeddedDocuments("Token", markers.map((t) => t.id)); removed += markers.length; }
       if (domainFXIds(scene).length && !openDomainsOn(scene).length) { await domainSceneFX(scene, false); removed++; }

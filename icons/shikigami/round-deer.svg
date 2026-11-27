@@ -1,11 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
-<defs><radialGradient id="g" cx="50%" cy="38%" r="62%"><stop offset="0%" stop-color="hsl(206,45%,38%)"/>
-<stop offset="75%" stop-color="hsl(206,55%,12%)"/><stop offset="100%" stop-color="#050307"/></radialGradient></defs>
-<circle cx="128" cy="128" r="124" fill="url(#g)"/>
-<circle cx="128" cy="128" r="118" fill="none" stroke="#1b1424" stroke-width="10"/>
-<circle cx="128" cy="128" r="118" fill="none" stroke="hsl(206,70%,70%)" stroke-width="3"/>
-<path d="M58 170 Q128 120 198 170 Q170 205 128 210 Q86 205 58 170Z" fill="#000" fill-opacity=".55"/>
-<text x="128" y="118" text-anchor="middle" font-family="Georgia, serif" font-weight="bold" font-size="78"
- fill="#f3ecff" stroke="#000" stroke-width="3" paint-order="stroke">RD</text>
-<text x="128" y="176" text-anchor="middle" font-family="Georgia, serif" font-size="18" fill="hsl(206,70%,82%)">影 SHIKIGAMI</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="round deer">
+<!-- JJK 5e glyph seal (tools/build-icons.mjs). Glyph: Font Awesome Free fa-horse-head (CC BY 4.0, https://fontawesome.com/license/free). -->
+<defs><radialGradient id="g" cx="50%" cy="38%" r="68%">
+<stop offset="0%" stop-color="hsl(275,35%,39%)"/><stop offset="68%" stop-color="hsl(275,35%,15%)"/>
+<stop offset="100%" stop-color="hsl(275,35%,7%)"/></radialGradient></defs>
+<rect width="128" height="128" rx="18" fill="#0d0a12"/>
+<circle cx="64" cy="64" r="57" fill="url(#g)"/>
+<circle cx="64" cy="64" r="57" fill="none" stroke="hsl(275,45%,88%)" stroke-width="3.5"/>
+<g stroke="hsl(275,45%,88%)" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"><line x1="89.5" y1="19.8" x2="91.5" y2="16.4"/><line x1="108.2" y1="38.5" x2="111.6" y2="36.5"/><line x1="115.0" y1="64.0" x2="119.0" y2="64.0"/><line x1="108.2" y1="89.5" x2="111.6" y2="91.5"/><line x1="89.5" y1="108.2" x2="91.5" y2="111.6"/><line x1="64.0" y1="115.0" x2="64.0" y2="119.0"/><line x1="38.5" y1="108.2" x2="36.5" y2="111.6"/><line x1="19.8" y1="89.5" x2="16.4" y2="91.5"/><line x1="13.0" y1="64.0" x2="9.0" y2="64.0"/><line x1="19.8" y1="38.5" x2="16.4" y2="36.5"/><line x1="38.5" y1="19.8" x2="36.5" y2="16.4"/><line x1="64.0" y1="13.0" x2="64.0" y2="9.0"/></g>
+<circle cx="64" cy="64" r="46" fill="none" stroke="hsl(275,45%,88%)" stroke-opacity=".3" stroke-width="1.5" stroke-dasharray="3 5"/>
+<g transform="translate(33.00 33.00) scale(0.12109)" fill="hsl(275,40%,95%)" stroke="#000" stroke-opacity=".45" stroke-width="41.3" paint-order="stroke">
+<path d="M0 464L0 316.9C0 208.5 68.3 111.8 170.5 75.6L340.2 15.5c21.4-7.6 43.8 8.3 43.8 30.9 0 11-5.5 21.2-14.6 27.3L336 96c48.1 0 91.2 29.8 108.1 74.9l48.6 129.5c11.8 31.4 4.1 66.8-19.6 90.5-16 16-37.8 25.1-60.5 25.1l-3.4 0c-26.1 0-50.9-11.6-67.6-31.7l-32.3-38.7c-11.7 4.1-24.2 6.4-37.3 6.4l-.1 0c-6.3 0-12.5-.5-18.6-1.5-3.6-.6-7.2-1.4-10.7-2.3l0 0c-28.9-7.8-53.1-26.8-67.8-52.2-4.4-7.7-14.2-10.3-21.9-5.8s-10.3 14.2-5.8 21.9c24 41.5 68.3 70 119.3 71.9l47.2 70.8c4 6.1 6.2 13.2 6.2 20.4 0 20.3-16.5 36.8-36.8 36.8L48 512c-26.5 0-48-21.5-48-48zM328 224a24 24 0 1 0 0-48 24 24 0 1 0 0 48z"/>
+</g></svg>

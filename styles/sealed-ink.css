@@ -158,6 +158,8 @@
 }
 .jjk-sealed-feat-row small { color:var(--jjk-muted); font-size:10px; }
 .jjk-sealed-feat-browser .jjk-sealed-feat-row[aria-pressed=true] { border-color:var(--jjk-seal); box-shadow:inset 3px 0 var(--jjk-seal); }
+.jjk-sealed-feat-browser .jjk-sealed-feat-row.locked { opacity:.62; border-style:dashed; }
+.jjk-sealed-feat-browser .jjk-sealed-feat-row.locked small { color:var(--jjk-gold); white-space:normal; text-align:end; }
 .jjk-sealed-feat-detail { max-height:230px; overflow:auto; white-space:pre-wrap; overflow-wrap:anywhere; line-height:1.45; font-size:12px; background:var(--jjk-ink); padding:8px; border:1px solid var(--jjk-edge); }
 .jjk-sealed-feat-detail:empty { display:none; }
 .jjk-sealed-surface :is(.item-list li.item,.items-list .item,.pill-lg) { border-color:var(--jjk-edge); }
