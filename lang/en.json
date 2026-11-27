@@ -474,6 +474,10 @@
         "Name": "The Zone grants advantage",
         "Hint": "While in The Zone attack rolls are made with advantage."
       },
+      "autoBarrierMarker": {
+        "Name": "Create the barrier marker when a domain opens",
+        "Hint": "Place a selectable marker in the scene for domains with a barrier."
+      },
       "domainTracking": {
         "Name": "Domain Expansion tracking",
         "Hint": "Expanding a domain adds a 1-minute effect; when it ends Technique Burnout is applied (2 exhaustion, techniques blocked)."

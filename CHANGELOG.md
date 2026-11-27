@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.18.2 — Estabilidad del motor de dominios
+- Recupera el estado del dominio cuando se conecta el GM o lo cierra con el desgaste correspondiente si su efecto ya desapareció.
+- El ajuste de mundo «Crear el marcador de barrera al abrir un dominio» permite colocarlo automáticamente. El marcador respeta los bordes del mapa y acompaña los cambios de radio.
+- La barrera se rompe al llegar a 0 PG aunque falle el chat o la sincronización del marcador.
+- Los choques descuentan las rondas transcurridas entre actualizaciones consecutivas del mismo combate.
+- Los dominios sin barrera usan la salvación de Constitución de la ficha cuando el golpe alcanza el umbral de un tercio de los PG máximos. El resultado se aplica al dominio que originó la tirada.
+
 ## 2.18.1 — Correcciones de compatibilidad y automatización
 Revisado contra el código de dnd5e 6.1.1.
 - **Invocaciones de dnd5e (Vengeful Spirit):** dnd5e guarda el origen de la invocación (el objeto) en el actor invocado, no en el token. El espíritu no encontraba a su invocador y el rayo usaba un modificador de EM 0. Ahora lee el actor.

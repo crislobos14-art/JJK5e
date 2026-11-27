@@ -474,6 +474,10 @@
         "Name": "The Zone da ventaja",
         "Hint": "Mientras estás en The Zone las tiradas de ataque tienen ventaja."
       },
+      "autoBarrierMarker": {
+        "Name": "Crear el marcador de barrera al abrir un dominio",
+        "Hint": "Coloca en la escena un marcador seleccionable si el dominio tiene barrera."
+      },
       "domainTracking": {
         "Name": "Seguimiento de Expansión de Dominio",
         "Hint": "Expandir un dominio añade un efecto de 1 minuto; al terminar se aplica Technique Burnout (2 de agotamiento, técnicas bloqueadas)."
