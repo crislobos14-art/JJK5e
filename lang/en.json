@@ -443,8 +443,8 @@
         "Hint": "Features with a fixed CE cost spend it from the Cursed Energy pool and are blocked if there is not enough CE. Scaled costs use the scaling field."
       },
       "transactionalCE": {
-        "Name": "Experimental GM-authoritative CE transactions",
-        "Hint": "Development preview. Requires active GM and working libWrapper activity adapter. A failed or interrupted consumption is held for explicit GM review. Do not enable in a live campaign before testing."
+        "Name": "GM-authoritative CE transactions",
+        "Hint": "An active GM records each payment. Verified Midi-QOL cards can resume after a reload. Interrupted uses that may have applied effects appear in the GM integration report. Activity types without a libWrapper adapter use ordinary CE spending."
       },
       "ceChat": {
         "Name": "Cursed Energy chat messages",
@@ -1382,7 +1382,7 @@
       "Item": "Check",
       "Value": "Value",
       "Transactional": "Transactional CE",
-      "OnExperimental": "On (experimental)",
+      "On": "On",
       "Off": "Off",
       "Adapters": "Activity adapters",
       "Expiry": "Effect expiry",

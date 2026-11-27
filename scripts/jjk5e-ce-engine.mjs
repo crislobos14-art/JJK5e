@@ -6,6 +6,7 @@ export function createCEEngine({
   canDirectDomain,
   canUseDomainActivity,
   ceTransaction,
+  ceTransactional,
   confirmDialog,
   domainActor,
   domainOpen,
@@ -27,18 +28,48 @@ export function createCEEngine({
 }) {
   const CE_USAGE_CONTEXT = new WeakMap();
 
-  function cePostAllowed(activity,usageConfig){
-    return !ceAuthorityEnabled() || !setting("autoSpendCE") || !managedCE(activity) ||
-      ceContext(activity,usageConfig)?.state==="committed";
+  // A native usage card may be created after consume() returns, with a cloned config.
+  const awaitingCards = new Map();
+  const liveCards = new WeakMap();
+  const consumingCards = new WeakSet();
+
+  function postContext(activity, usage, card) {
+    const ctx = ceContext(activity, usage) ?? liveCards.get(card);
+    return ctx?.key === ceUsageKey(activity) ? ctx : null;
   }
-  function cePostOnce(activity,usageConfig,phase){
-    if(!cePostAllowed(activity,usageConfig)) return false;
-    if(!ceAuthorityEnabled() || !setting("autoSpendCE") || !managedCE(activity)) return true;
-    const ctx=ceContext(activity,usageConfig);
-    ctx.phases??=new Set();
-    if(ctx.phases.has(phase)) return false;
+  function cePostAllowed(activity, usage, card) {
+    const ctx = postContext(activity, usage, card);
+    return ctx ? ctx.state === "committed" : !ceTransactional(activity);
+  }
+  function cePostOnce(activity, usage, phase, card) {
+    if (!cePostAllowed(activity, usage, card)) return false;
+    const ctx = postContext(activity, usage, card);
+    if (!ctx) return true;
+    if (ctx.phases.has(phase)) return false;
     ctx.phases.add(phase);
     return true;
+  }
+  function ceCardRecord(activity, card) {
+    const actor = activity?.actor ?? activity?.item?.actor;
+    const id = card?.getFlag?.(MODULE_ID, "ceReceipt");
+    if (!id || card.documentName !== "ChatMessage" || !actor?.isOwner ||
+        card.author?.id !== game.user.id || ceUsageKey(card.getAssociatedActivity?.()) !== ceUsageKey(activity)) return null;
+    const ledger = findPool(actor)?.getFlag?.(MODULE_ID, "ceLedger");
+    return Array.isArray(ledger) && ledger.find(rec => rec.id === id && rec.state === "committed" &&
+      rec.cardUuid === card.uuid && rec.userId === game.user.id && rec.actorUuid === actor.uuid &&
+      rec.itemId === activity.item.id && rec.activityId === activity.id) || null;
+  }
+  function linkUsageCard(activity, card) {
+    const id = card?.getFlag?.(MODULE_ID, "ceReceipt");
+    const ctx = awaitingCards.get(id);
+    if (!ctx || ctx.key !== ceUsageKey(activity) || card.documentName !== "ChatMessage" ||
+        ctx.key !== ceUsageKey(card.getAssociatedActivity?.()) || card.author?.id !== game.user.id ||
+        (ctx.card && ctx.card !== card)) return;
+    ctx.card = card;
+    liveCards.set(card, ctx);
+    return ceAuthorityRequest("linkCard", { actorUuid: ctx.actorUuid, id, cardUuid: card.uuid })
+      .then(linked => { if (linked) awaitingCards.delete(id); })
+      .catch(err => reportError("CE card link", err));
   }
   const QUICK_RECOVERY_ID = "Jt55eu41OQX7G6Sh";
   const isQuickRecovery = (activity) => activity?.id === QUICK_RECOVERY_ID &&
@@ -56,6 +87,22 @@ export function createCEEngine({
   }
   function restReview(actor){return actor?.getFlag?.(MODULE_ID,"shortRestExchange")?.state==="review";}
   function cePending(pool) { return restReview(pool?.actor ?? pool?.parent) || ceLedger(pool).some((x) => x.state === "reserved" || x.state === "review"); }
+  function canReserve(pool, parentId, userId, itemId, activityId) {
+    if (restReview(pool?.actor ?? pool?.parent)) return false;
+    const open = ceLedger(pool).filter(rec => rec.state === "reserved" || rec.state === "review");
+    if (!parentId) return open.length === 0;
+    // A nested use may run inside its caller. Unrelated casts and sibling branches still wait.
+    const chain = new Map(open.map(rec => [rec.id, rec]));
+    let next = parentId;
+    while (next) {
+      const rec = chain.get(next);
+      if (!rec || rec.state !== "reserved" || !rec.nativeStarted || rec.userId !== userId ||
+          (rec.itemId === itemId && rec.activityId === activityId)) return false;
+      chain.delete(next);
+      next = rec.parentId;
+    }
+    return chain.size === 0;
+  }
   function ceRecord(ledger, record) {
     const others = ledger.filter((x)=>x.id!==record.id);
     // Never discard open reservations. Bound only closed history.
@@ -65,8 +112,7 @@ export function createCEEngine({
   function ceUsageKey(activity) { return `${(activity?.actor??activity?.item?.actor)?.uuid??""}:${activity?.item?.id}:${activity?.id}`; }
   function ceContext(activity, usageConfig) {
     if (!usageConfig || typeof usageConfig !== "object") return null;
-    const ctx=CE_USAGE_CONTEXT.get(usageConfig);
-    return ctx?.key===ceUsageKey(activity) ? ctx : null;
+    return CE_USAGE_CONTEXT.get(usageConfig)?.get(ceUsageKey(activity)) ?? null;
   }
   function ceFromItem(actor,itemId,activityId) {
     const item=actor?.items?.get?.(itemId);
@@ -75,11 +121,11 @@ export function createCEEngine({
     return activities?.get?.(activityId) ?? activities?.[activityId] ?? null;
   }
   async function ceAuthorityRequest(operation,payload) {
-    if (isActiveGM()) return handleCEAuthority({operation,payload},{user:game.user});
-    const gm=game.users.activeGM;
-    if (!gm?.query) return false;
-    try { return await gm.query(CE_AUTH_QUERY,{operation,payload},{timeout:120000}); }
-    catch(err) { reportError("CE authority",err); return false; }
+    try {
+      if (isActiveGM()) return await handleCEAuthority({operation,payload},{user:game.user});
+      const gm = game.users.activeGM;
+      return gm?.query ? await gm.query(CE_AUTH_QUERY,{operation,payload},{timeout:120000}) : false;
+    } catch(err) { reportError("CE authority",err); return false; }
   }
   async function handleCEAuthority(msg,{user}={}) {
     if (!ceAuthorityEnabled() || !isActiveGM() || !user?.active || !msg?.payload ||
@@ -105,7 +151,7 @@ export function createCEEngine({
       const ledger=ceLedger(pool), old=ledger.find(x=>x.id===d.id);
       if(operation==="reserve"){
         if(old) return false; // replay must not authorize native effects a second time
-        if(cePending(pool)) return false;
+        if(!canReserve(pool, d.parentId, user.id, d.itemId, d.activityId)) return false;
         const a=ceFromItem(actor,d.itemId,d.activityId);
         const item=actor.items.get(d.itemId);
         if(!a || !item || !Number.isSafeInteger(d.scaling) || d.scaling<0 || d.scaling>1000) return false;
@@ -121,6 +167,7 @@ export function createCEEngine({
         if(!tx || cost<0) return false;
         const rec={id:d.id,userId:user.id,actorUuid:actor.uuid,itemId:d.itemId,activityId:d.activityId,
           scaling:d.scaling,cost,state:"reserved",created:Date.now(),protocol:2,nativeStarted:false,expires:Date.now()+120000,
+          ...(d.parentId ? {parentId:d.parentId} : {}),
           sixEyes:cost>0&&!!actor.getFlag(MODULE_ID,"sixEyesNext"),minusNext:cost>0&&!!(item.flags?.jjk5e?.technique&&actor.getFlag(MODULE_ID,"costMinusNext"))};
         const whole=Math.floor(tx.spent+1e-6);
         // Persist debit and reservation together in the same Item update.
@@ -151,7 +198,9 @@ export function createCEEngine({
       }
       if(operation==="commit"||operation==="review"){
         if(old.state==="committed"&&operation==="commit") return true;
-        if(old.state!=="reserved"||(operation==="commit"&&old.protocol===2&&!old.nativeStarted)) return false;
+        const lateCommit = operation === "commit" && old.state === "review" &&
+          old.recovery === "unknown-native-result" && old.protocol === 2 && old.nativeStarted;
+        if((old.state!=="reserved" && !lateCommit)||(operation==="commit"&&old.protocol===2&&!old.nativeStarted)) return false;
         await pool.update({"flags.jjk5e.ceLedger":ceRecord(ledger,{...old,state:operation==="commit"?"committed":"review",ended:Date.now()})},{jjk5eCE:true});
         return true;
       }
@@ -169,37 +218,67 @@ export function createCEEngine({
     if(!ceAuthorityEnabled()||!setting("autoSpendCE")||!managedCE(activity)) return wrapped(usageConfig,messageConfig);
     const actor=activity.actor??activity.item?.actor;
     if(!actor?.isOwner || !usageConfig || typeof usageConfig!=="object") return false;
-    const nested=ceContext(activity,usageConfig);
-    if(nested?.state==="reservingNative") return wrapped(usageConfig,messageConfig);
-    if(nested) return false;
+    if (ceContext(activity, usageConfig)) return false;
+    let contexts = CE_USAGE_CONTEXT.get(usageConfig);
+    if (!contexts) CE_USAGE_CONTEXT.set(usageConfig, contexts = new Map());
+    const key = ceUsageKey(activity);
+    // The native card button edits native resource deltas. Its original use already paid CE.
+    if (messageConfig?.message) {
+      const card = messageConfig.message;
+      const receipt = ceCardRecord(activity, card);
+      if (!receipt || consumingCards.has(card) || card.system?.deltas ||
+          receipt.scaling !== Number(usageConfig.scaling ?? 0)) {
+        ui.notifications.warn(t("Notify.CEWorkflowUnverified"));
+        return false;
+      }
+      const ctx = { key, state: "reservingNative" };
+      contexts.set(key, ctx);
+      consumingCards.add(card);
+      try { return await wrapped(usageConfig, messageConfig); }
+      finally {
+        ctx.state = "cardResourceFinished";
+        consumingCards.delete(card);
+      }
+    }
     if(!validActivityCE(actor,activity,usageConfig)) return false;
     if (!isActiveGM() && typeof game.users.activeGM?.query !== "function") {
       ui.notifications.warn(t("Notify.CENoAuthority"));
       return false;
     }
-    if (cePending(findPool(actor))) {
+    const parent = [...contexts.values()].reverse().find(entry =>
+      entry.state === "reservingNative" && entry.actorUuid === actor.uuid);
+    if (!parent && cePending(findPool(actor))) {
       ui.notifications.warn(t("Notify.CEPendingUse"));
       return false;
     }
     const id=foundry.utils.randomID();
+    const ctx = { key, id, actorUuid: actor.uuid, state: "authorizing", phases: new Set() };
+    if (!bindNativeWorkflow(activity, usageConfig)) return false;
+    contexts.set(key, ctx);
     const reserve=await ceAuthorityRequest("reserve",{actorUuid:actor.uuid,itemId:activity.item.id,activityId:activity.id,
-      scaling:Number(usageConfig.scaling??0),id});
+      scaling:Number(usageConfig.scaling??0),id,parentId:parent?.id});
     if (!reserve?.id || !await ceAuthorityRequest("start", { actorUuid: actor.uuid, id })) {
       ui.notifications.warn(t("Notify.CEAuthorizationFailed"));
       return false;
     }
-    const ctx={key:ceUsageKey(activity),id,actorUuid:actor.uuid,state:"reservingNative",cost:reserve.cost};
-    CE_USAGE_CONTEXT.set(usageConfig,ctx);
+    ctx.state = "reservingNative";
+    ctx.cost = reserve.cost;
     try{
-      // Midi dnd6 exposes the in-progress use by activity before a card exists.
-      // Bind the precise native consumption config, not another use of the same item.
-      bindNativeWorkflow(activity, usageConfig);
       const result=await wrapped(usageConfig,messageConfig);
       const ok=!!result && result!==false;
-      const ended=await ceAuthorityRequest(ok?"commit":"review",{actorUuid:actor.uuid,id});
+      const payload = { actorUuid: actor.uuid, id };
+      // A lost acknowledgement can be retried because commit is idempotent.
+      const ended = ok ? (await ceAuthorityRequest("commit", payload) || await ceAuthorityRequest("commit", payload))
+        : await ceAuthorityRequest("review", payload);
       ctx.state=ok&&ended?"committed":"review";
       if(ctx.state!=="committed") return false;
-      if(messageConfig && typeof messageConfig==="object") foundry.utils.setProperty(messageConfig,"data.flags.jjk5e.ceReceipt",id);
+      if(messageConfig && typeof messageConfig==="object") {
+        foundry.utils.setProperty(messageConfig,"data.flags.jjk5e.ceReceipt",id);
+        if (messageConfig.create !== false) {
+          if (awaitingCards.size >= 200) awaitingCards.delete(awaitingCards.keys().next().value);
+          awaitingCards.set(id, ctx);
+        }
+      }
       return result;
     }catch(err){
       ctx.state="review";
@@ -261,6 +340,8 @@ export function createCEEngine({
   return {
     cePostAllowed,
     cePostOnce,
+    ceCardRecord,
+    linkUsageCard,
     isQuickRecovery,
     ceAuthorityEnabled,
     managedCE,

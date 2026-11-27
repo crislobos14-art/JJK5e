@@ -1,6 +1,7 @@
 // 2.16: Deadly Sentencing's trial runs itself: evidence table, contested Persuasion, verdict, sentence, no burnout.
 import assert from "node:assert/strict";
 import test from "node:test";
+import { fileURLToPath } from "node:url";
 import { createEnv } from "./harness/foundry-mock.mjs";
 
 async function court({ evidence, judge, defendant }) {
@@ -68,7 +69,7 @@ test("the judge rolls with advantage on very guilty evidence", async () => {
 test("no module icon is a letter placeholder any more (tools/build-icons.mjs)", async () => {
   const fs = await import("node:fs");
   const path = await import("node:path");
-  const root = new URL("../icons/", import.meta.url).pathname;
+  const root = fileURLToPath(new URL("../icons/", import.meta.url));
   const walk = (d) => fs.readdirSync(d, { withFileTypes: true }).flatMap((e) => e.isDirectory() ? walk(path.join(d, e.name)) : [path.join(d, e.name)]);
   const letters = walk(root).filter((f) => f.endsWith(".svg") && /<text[\s>]/.test(fs.readFileSync(f, "utf8")));
   assert.deepEqual(letters, []);

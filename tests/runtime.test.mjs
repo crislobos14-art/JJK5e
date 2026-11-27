@@ -1014,6 +1014,7 @@ test("Quick Recovery: verified native use delta restores CE once",async()=>{
 
 test("Midi CE bridge: paid native consumption authorizes only its bound workflow",async()=>{
   const {env,actor,J}=await setup({settings:{transactionalCE:true}});
+  J.CE_ADAPTER_TARGETS.add("CONFIG.DND5E.activityTypes.attack.documentClass.prototype.consume");
   const [item]=await actor.createEmbeddedDocuments("Item",[{name:"Technique",type:"feat",flags:{jjk5e:{ceCosts:{a:8}}},system:{activities:{a:{id:"a",name:"Attack"}}}}]);
   const activity={id:"a",type:"attack",name:"Attack",actor,item},usage={scaling:0};
   const workflow={activity,actor,item,targets:new Set()};
@@ -1106,7 +1107,8 @@ test("CE recovery refunds only an expired explicitly unstarted reservation",asyn
 test("CE receipt cannot authorize another actor's identically named activity",async()=>{
   const {actor,J}=await setup({settings:{transactionalCE:true}});
   const [item]=await actor.createEmbeddedDocuments("Item",[{name:"Technique",type:"feat",flags:{jjk5e:{ceCosts:{a:4}}},system:{activities:{a:{id:"a"}}}}]);
-  const usage={},act={id:"a",actor,item};
+  J.CE_ADAPTER_TARGETS.add("CONFIG.DND5E.activityTypes.attack.documentClass.prototype.consume");
+  const usage={},act={id:"a",type:"attack",actor,item};
   await J.consumeWithCE(async()=>({item:[]}),act,usage,{});
   assert.equal(J.cePostAllowed({...act,actor:{uuid:"Actor.other"}},usage),false);
 });

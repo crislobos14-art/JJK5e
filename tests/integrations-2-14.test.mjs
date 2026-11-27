@@ -114,8 +114,8 @@ test("screen shake has a profile per moment and Black Flash reacts to the flag o
 test("Foundry 14 paths: no template creation without the document type, effects bound to the token's level", () => {
   const code = src("scripts/jjk5e.js");
   assert.match(code, /if \(!zone && CONFIG\.MeasuredTemplate\?\.documentClass\)/);
-  assert.match(code, /const level = tokenLevelId\(source\);\n\s+if \(level\) seq\.onLevels\?\.\(level\);/);
-  assert.match(src("scripts/jjk-fx.mjs"), /const level = levelOf\(at\);\n\s+if \(level\) eff\.onLevels\?\.\(level\);/);
+  assert.match(code, /const level = tokenLevelId\(source\);\r?\n\s+if \(level\) seq\.onLevels\?\.\(level\);/);
+  assert.match(src("scripts/jjk-fx.mjs"), /const level = levelOf\(at\);\r?\n\s+if \(level\) eff\.onLevels\?\.\(level\);/);
   const manifest = JSON.parse(src("module.json"));
   for (const f of ["scripts/jjk-setup.mjs", "scripts/jjk-bridges.mjs"]) assert.ok(manifest.esmodules.includes(f), f);
 });

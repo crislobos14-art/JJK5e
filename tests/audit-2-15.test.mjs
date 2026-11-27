@@ -67,7 +67,7 @@ test("tables: card cells fit the card, form grids scroll, unnamed cells span the
   assert.match(css, /\.jjk-table-wrap:has\(> table\.jjk-fit-form\) \{ overflow-x: auto;/);
   assert.match(css, /td:not\(\[data-label\]\) \{ display: flex; flex-wrap: wrap;/);
   assert.match(css, /td\[data-label\] > \* \{ grid-column: 2; \}/);
-  assert.match(css, /@container jjkpanel \(max-width: 380px\) \{\n\s+\.jjk5e-ui \.jjk-tabs \{ flex-wrap: wrap;/);
+  assert.match(css, /@container jjkpanel \(max-width: 380px\) \{\r?\n\s+\.jjk5e-ui \.jjk-tabs \{ flex-wrap: wrap;/);
 });
 
 test("the GM tab shows only effects that exist and reaches setup, health check and group save", async () => {
