@@ -8,7 +8,7 @@ const strings={
  search:["Search abilities","Buscar habilidades"],all:["All actions","Todas las acciones"],run:["Use","Usar"],inspect:["Inspect","Consultar"],domain:["Domain HUD","Panel de dominio"],
  empty:["No matching activities","Sin actividades coincidentes"],blocked:["JJK gate blocks use","El motor JJK bloquea el uso"],
  hint:["Indicators are advisory. Native workflow validates targets, triggers, costs and extra actions; no use recorded does not mean guaranteed availability.","Indicadores orientativos. El flujo nativo valida objetivos, disparadores, costes y acciones adicionales; sin uso registrado no garantiza disponibilidad."],
- cost:["Estimated base CE","EM base estimada"],error:["Activity could not be opened. Check the native sheet.","No se pudo abrir la actividad. Revisa la hoja nativa."],
+ cost:["Estimated CE","EM estimada"], reverseCost:["Estimated reverse CE","EM inversa estimada"],error:["Activity could not be opened. Check the native sheet.","No se pudo abrir la actividad. Revisa la hoja nativa."],
  gm:["GM","GM"], noAPI:["Combat API unavailable","API de combate no disponible"]
 };
 const tr=k=>strings[k]?.[game.i18n.lang.startsWith("es")?1:0]??k;
@@ -89,7 +89,7 @@ export function enhanceCombatInteraction(app,root,active){
    if(!visible.length)list.append(node("p","",tr("empty")));
    for(const row of visible){
      const el=node("div","jjk-combat-row"),info=node("div","");
-     info.append(node("strong","",row.name),node("small","",row.itemName+" · "+tr(row.kind)+(row.cost===null?"":" · "+tr("cost")+" "+row.cost+(row.variable?"+":""))));
+     info.append(node("strong","",row.name),node("small","",row.itemName+" · "+tr(row.kind)+(row.cost===null?"":" · "+tr(row.energy === "reverseCE" ? "reverseCost" : "cost")+" "+row.cost+(row.variable?"+":""))));
      const inspect=button(tr("inspect"),()=>{if(actor.isOwner)items(actor).find(i=>i.id===row.itemId)?.sheet?.render({force:true});});
      el.append(info,inspect);
      if(row.domain){

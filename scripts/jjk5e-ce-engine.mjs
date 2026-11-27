@@ -23,9 +23,10 @@ export function createCEEngine({
   reportError,
   setting,
   t,
-  totalActivityCECost,
+  activityEnergyProfile,
   validActivityCE,
-  commitRestExchange
+  commitRestExchange,
+  commitBodyTreatment
 }) {
   const CE_USAGE_CONTEXT = new WeakMap();
 
@@ -130,11 +131,12 @@ export function createCEEngine({
   }
   async function handleCEAuthority(msg,{user}={}) {
     if (!ceAuthorityEnabled() || !isActiveGM() || !user?.active || !msg?.payload ||
-        !["reserve","start","commit","review","cancel","settle","adjust","linkCard","restExchange"].includes(msg.operation)) return false;
+        !["reserve","start","commit","review","cancel","settle","adjust","linkCard","restExchange","bodyTreatment"].includes(msg.operation)) return false;
     const {operation,payload:d}=msg;
     const actor=await domainActor(d.actorUuid);
     if (!canDirectDomain(user,actor)) return false;
     if (operation==="settle"&&!user.isGM) return false;
+    if (operation === "bodyTreatment") return commitBodyTreatment(actor, d.treatment, d.units);
     if(operation==="restExchange")return commitRestExchange(actor,d.restId,d.amount,{requester:user});
     if (operation==="adjust") {
       if (!Number.isFinite(d.amount) || Math.abs(d.amount)>100000) return false;
@@ -163,13 +165,13 @@ export function createCEEngine({
         if(act.item?.flags?.jjk5e?.technique && (inBurnout(actor)||hasKind(actor,"domainAmplification"))) return false;
         if(item.flags?.jjk5e?.domainActivity===act.id && domainOpen(actor)) return false;
         if(item.flags?.jjk5e?.domainActivity && item.flags.jjk5e.domainActivity!==act.id && !canUseDomainActivity(actor,act)) return false;
-        const cost=totalActivityCECost(actor,act,{scaling:d.scaling});
+        const { cost, sixEyes, minusNext } = activityEnergyProfile(actor, act, { scaling: d.scaling });
         const tx=ceTransaction(poolValue(pool),poolMax(pool),cost);
         if(!tx || cost<0) return false;
         const rec={id:d.id,userId:user.id,actorUuid:actor.uuid,itemId:d.itemId,activityId:d.activityId,
           scaling:d.scaling,cost,state:"reserved",created:Date.now(),protocol:2,nativeStarted:false,expires:Date.now()+120000,
           ...(d.parentId ? {parentId:d.parentId} : {}),
-          sixEyes:cost>0&&!!actor.getFlag(MODULE_ID,"sixEyesNext"),minusNext:cost>0&&!!(item.flags?.jjk5e?.technique&&actor.getFlag(MODULE_ID,"costMinusNext"))};
+          sixEyes, minusNext};
         const whole=Math.floor(tx.spent+1e-6);
         // Persist debit and reservation together in the same Item update.
         await pool.update({"system.uses.spent":whole,"flags.jjk5e.fractionalSpent":Math.round((tx.spent-whole)*1000)/1000,

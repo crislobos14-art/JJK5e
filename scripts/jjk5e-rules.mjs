@@ -57,7 +57,8 @@ export function domainSureHitEligible({ selected, inside, lethal = true, clash =
 
 /** A mutual-vow penalty that prohibits use must be checked by the activity gate. */
 export function vowBlocksUsage(effects, { costsCE = false, innateTechnique = false } = {}) {
-  return (effects ?? []).some((effect) => !effect.disabled &&
+  return Array.from(effects ?? []).some((effect) => !effect.disabled && !effect.isSuppressed &&
+    effect.duration?.expired !== true && (effect.duration?.remaining == null || effect.duration.remaining > 0) &&
     ((costsCE && effect.flags?.jjk5e?.noCE) ||
      (innateTechnique && effect.flags?.jjk5e?.noTechnique)));
 }

@@ -294,6 +294,7 @@
       "HealRCTDone": "{name} recupera {healed} PG máximos con RCT (daño al alma restante: −{rest})."
     },
     "Limb": {
+      "HealRCT": "Tratar extremidad con RCT",
       "Title": "Daño de extremidades",
       "Roll": "Tirar extremidad",
       "Broken": "Rota con",
@@ -413,6 +414,7 @@
       "NoScene": "Primero abre una escena.",
       "VowBlocksCE": "JJK 5e: Una penalización de voto vinculante bloquea la Energía Maldita.",
       "CloneNoTech": "JJK 5e: Clon: esta copia no puede usar técnicas innatas.",
+      "EnergyRestriction": "Tu restricción de energía impide usar esta actividad.",
       "VowBlocksUse": "JJK 5e: Un voto vinculante roto prohíbe esta actividad.",
       "DomainActive": "JJK 5e: Ya hay un dominio activo.",
       "SwapSelect": "JJK 5e: Selecciona exactamente un token de la misma escena para intercambiar posiciones.",

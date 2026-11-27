@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.21.0 - Energía maldita, cuerpo y alma
+- La ficha, el consumo habitual y el motor transaccional comparten el cálculo de escalado, descuentos, votos y restricciones.
+- El pacto de generación inversa concede sus rasgos y cobra un punto de energía inversa por cada dos puntos de EM de las actividades elegibles.
+- El daño al alma se registra al aplicar la pérdida real de PG. Los PG temporales no reducen el máximo y el descanso largo conserva solo las heridas persistentes.
+- Las heridas de una actividad con daño de extremidad pueden aplicar fractura o pérdida según el umbral. RCT permite tratar brazos y piernas desde la ficha, con sus costes de EM y reserva.
+- Los bloqueos de curación impiden la recuperación de PG. Mortal termina al completar un descanso largo.
+
 ## 2.20.0 - Inversiones de técnica y economía de combate
 - Desbloquea inversiones al cumplir sus requisitos, incluidas las de técnicas copiadas mediante Duplicated Reversal.
 - Dark Vortex respeta la concentración y el daño por nivel. Reversal Red separa el derribo por colisión del ataque inicial. Sunshine requiere el Sunny Day del propio lanzador y consume un ataque disponible.
