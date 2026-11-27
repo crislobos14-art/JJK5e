@@ -494,7 +494,7 @@ async function showIntegrationDiagnostics(){
   const choices=pending.slice(0,100).map((r,i)=>`<option value="${i}">${esc(actorName(r.actorUuid))} — ${esc(t(`Diag.State.${r.state}`))} — ${r.cost} ${t("CE.Short")}</option>`).join("");
   const info=`<table class="jjk-rep jjk-diag"><thead><tr><th>${t("Diag.Item")}</th><th>${t("Diag.Value")}</th></tr></thead><tbody>
     ${row("Foundry",esc(report.foundry??"—"))}${row("D&amp;D 5e",esc(report.dnd5e??"—"))}${deps}
-    ${row(t("Diag.Transactional"),`<span class="jjk-chip ${report.transactional?"on":""}">${t(report.transactional?"Diag.OnExperimental":"Diag.Off")}</span>`)}
+    ${row(t("Diag.Transactional"),`<span class="jjk-chip ${report.transactional?"on":""}">${t(report.transactional?"Diag.On":"Diag.Off")}</span>`)}
     ${row(t("Diag.Adapters"),report.adapters.length)}${row(t("Diag.Expiry"),esc(report.expiryAuthority))}
     ${row(t("Diag.Unwrapped"),esc(report.unwrappedTypes.join(", ")||"—"))}
     ${row(t("Diag.Pending"),`<strong class="jjk-num">${pending.length}</strong>`,pending.length?"neg":"pos")}</tbody></table>
@@ -888,6 +888,7 @@ function combatInteractionActivity(actor, activity) {
 }
 
 function registerActivityHooks() {
+  Hooks.on("dnd5e.postCreateUsageMessage", linkUsageCard);
   Hooks.on("deleteCombat",c=>ACTION_TURNS.delete(c.id));
   Hooks.on("preMoveToken",(token,movement)=>{
     const state=actionTurn(token.actor);
@@ -1003,13 +1004,7 @@ function registerActivityHooks() {
     // leave a benefit in place. The pre-use gate handles ordinary insufficient CE.
     if (setting("autoSpendCE") && actor && item) {
       if(ceTransactional(activity)){
-        const ctx=ceContext(activity,usageConfig);
-        const receipt=results?.message?.getFlag?.(MODULE_ID,"ceReceipt")??results?.message?.flags?.[MODULE_ID]?.ceReceipt;
-        if(ctx){
-          if(ctx.state!=="committed"||ctx.postProcessed) return;
-          ctx.postProcessed=true;
-        }else if(!receipt&&!(await payActivityCE(actor, activity, usageConfig))) return;
-        // No context and no receipt: the transaction never ran for this use, so CE is paid the ordinary way above.
+        if (!cePostOnce(activity, usageConfig, "activity", results?.message)) return;
       }else if (!(await payActivityCE(actor, activity, usageConfig))) return;
     }
     if(actor?.isOwner)recordTurnActivity(activity);
@@ -4565,8 +4560,8 @@ Hooks.once("ready", () => {
   });
   Hooks.on("renderAbilityScoreImprovementFlow", (app, element) => { injectASIFeats(app, element); });
   Hooks.on("dnd5e.rollAttackV2", (rolls, data) => animateAttack(rolls, data?.subject));
-  Hooks.on("dnd5e.postUseActivity", (activity,usageConfig) => {
-    if(!cePostOnce(activity,usageConfig,"animationSummon")) return false;
+  Hooks.on("dnd5e.postUseActivity", (activity,usageConfig,results) => {
+    if(!cePostOnce(activity,usageConfig,"animationSummon",results?.message)) return false;
     animateActivity(activity); summonFallback(activity);
   });
   Hooks.on("renderCharacterActorSheet", (app, element) => addLevelUpButton(app, element));
@@ -9278,8 +9273,8 @@ Hooks.once("ready", () => {
     calledShotCheck(attacker, target, amount).catch((err) => reportError("called shot", err));
   });
   Hooks.on("dnd5e.advancementManagerComplete", (manager) => { afterAdvancement(manager).catch((err) => reportError("advancement", err)); });
-  Hooks.on("dnd5e.postUseActivity", (activity,usageConfig) => {
-    if(!cePostOnce(activity,usageConfig,"optionalAction")) return false;
+  Hooks.on("dnd5e.postUseActivity", (activity,usageConfig,results) => {
+    if(!cePostOnce(activity,usageConfig,"optionalAction",results?.message)) return false;
 
     onOptionalAction(activity).catch((err) => reportError("optional action", err));
     // Items that roll the Limb Damage table for their targets (e.g. Judicial Amputation).
@@ -10241,13 +10236,18 @@ Hooks.once("init", () => {
 });
 
 function bindNativeWorkflow(activity, usageConfig) {
-  const workflow = globalThis.MidiQOL?.Workflow?.workflowFor?.(activity);
-  if (workflow) captureMidiUsage({ workflow, usage: usageConfig });
+  const workflow = usageConfig.workflow ?? globalThis.MidiQOL?.Workflow?.workflowFor?.(activity);
+  if (workflow?.activity && ceUsageKey(workflow.activity) === ceUsageKey(activity)) {
+    return captureMidiUsage({ workflow, usage: usageConfig }) !== false;
+  }
+  return true;
 }
 
 const {
   cePostAllowed,
   cePostOnce,
+  ceCardRecord,
+  linkUsageCard,
   isQuickRecovery,
   ceAuthorityEnabled,
   managedCE,
@@ -10272,6 +10272,7 @@ const {
   canDirectDomain,
   canUseDomainActivity,
   ceTransaction,
+  ceTransactional,
   confirmDialog,
   domainActor,
   domainOpen,
@@ -10306,14 +10307,14 @@ const {
   MODULE_ID,
   DOMAIN_WARD_KINDS,
   barrierMarkerMeta,
-  ceAuthorityEnabled,
+  ceTransactional,
+  ceCardRecord,
   ceAuthorityRequest,
   ceContext,
   ceUsageKey,
   consumeWithCE,
   excludeDomainWardedTargets,
   isActiveGM,
-  managedCE,
   reportError,
   safeDelete,
   setting,

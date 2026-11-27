@@ -2,14 +2,14 @@ export function createIntegrations({
   MODULE_ID,
   DOMAIN_WARD_KINDS,
   barrierMarkerMeta,
-  ceAuthorityEnabled,
+  ceTransactional,
+  ceCardRecord,
   ceAuthorityRequest,
   ceContext,
   ceUsageKey,
   consumeWithCE,
   excludeDomainWardedTargets,
   isActiveGM,
-  managedCE,
   reportError,
   safeDelete,
   setting,
@@ -18,18 +18,28 @@ export function createIntegrations({
   const CE_MIDI_WORKFLOWS = new WeakMap();
   const CE_MIDI_USAGE_OWNERS = new WeakMap();
   const CE_MIDI_DENIED = new WeakSet();
+  const rebuiltCards = new WeakMap();
+  function restoreMidiCard(workflow, card, { readOnly } = {}) {
+    if (!workflow || readOnly || workflow.readOnly || !card?.uuid || workflow.itemCardUuid !== card.uuid) return;
+    // Only Midi's rebuild event identifies a continuation. A new use cannot present an old receipt.
+    rebuiltCards.set(workflow, card);
+  }
   const MIDI_GUARD_STAGES = ["preAttackRoll","preDamageRoll","preFormulaRoll","preWaitForSaves",
     "preWaitForUtilityRoll","preTeleport","preAllRollsComplete","preApplyDynamicEffects"];
   function midiActivity(workflow){return workflow?.activity??null;}
   function captureMidiUsage({workflow,usage}={}){
     const activity=midiActivity(workflow);
     if(!workflow || !activity || !usage || typeof usage!=="object") return;
-    const bound=CE_MIDI_USAGE_OWNERS.get(usage);
-    if(bound && bound!==workflow) return;
+    if ((workflow.readOnly || rebuiltCards.has(workflow)) && ceTransactional(activity)) return false;
+    const key = ceUsageKey(activity);
+    let owners = CE_MIDI_USAGE_OWNERS.get(usage);
+    if (!owners) CE_MIDI_USAGE_OWNERS.set(usage, owners = new Map());
+    const bound = owners.get(key);
+    if(bound && bound!==workflow) return ceTransactional(activity) ? false : undefined;
     const previous=CE_MIDI_WORKFLOWS.get(workflow);
-    if(previous && previous.usage!==usage && ceContext(activity,previous.usage)) return;
-    CE_MIDI_USAGE_OWNERS.set(usage,workflow);
-    CE_MIDI_WORKFLOWS.set(workflow,{usage,key:ceUsageKey(activity)});
+    if(previous && previous.usage!==usage && ceContext(activity,previous.usage)) return false;
+    owners.set(key, workflow);
+    CE_MIDI_WORKFLOWS.set(workflow,{usage,key});
   }
   function midiCEContext(workflow){
     const binding=CE_MIDI_WORKFLOWS.get(workflow),activity=midiActivity(workflow);
@@ -38,8 +48,10 @@ export function createIntegrations({
   }
   function midiCEGuard(workflow){
     const activity=midiActivity(workflow);
-    if(!ceAuthorityEnabled()||!setting("autoSpendCE")||!managedCE(activity)) return true;
     const ctx=midiCEContext(workflow);
+    const card = rebuiltCards.get(workflow);
+    if (!ctx && !ceTransactional(activity)) return true;
+    if (!workflow.readOnly && card && workflow.itemCardUuid === card.uuid && ceCardRecord(activity, card)) return true;
     // A transaction for another use of the same item is not proof of payment.
     if(ctx?.state==="committed" && ctx.actorUuid===(activity.actor??activity.item?.actor)?.uuid) return true;
     if(!CE_MIDI_DENIED.has(workflow)){
@@ -59,11 +71,14 @@ export function createIntegrations({
     if(ctx?.state!=="committed"||!workflow?.itemCardUuid||workflow.readOnly) return false;
     const card=await fromUuid(workflow.itemCardUuid).catch(()=>null);
     if(!card?.isOwner||card.documentName!=="ChatMessage") return false;
-    if(card.getFlag(MODULE_ID,"ceReceipt")!==ctx.id) await card.setFlag(MODULE_ID,"ceReceipt",ctx.id);
+    const receipt = card.getFlag(MODULE_ID, "ceReceipt");
+    if (receipt && receipt !== ctx.id) return false;
+    if (!receipt) await card.setFlag(MODULE_ID, "ceReceipt", ctx.id);
     return ceAuthorityRequest("linkCard",{actorUuid:ctx.actorUuid,id:ctx.id,cardUuid:card.uuid});
   }
   function registerMidiCEBridge(){
     Hooks.on("midi-qol.preItemRollV2",captureMidiUsage);
+    Hooks.on("midi-qol.workflowRebuilt", restoreMidiCard);
     Hooks.on("midi-qol.postAwaitItemCard",workflow=>linkMidiCard(workflow).catch(err=>reportError("CE card link",err)));
     Hooks.on("midi-qol.postCleanup",workflow=>linkMidiCard(workflow).catch(err=>reportError("CE card link",err)));
     for(const stage of MIDI_GUARD_STAGES) Hooks.on(`midi-qol.${stage}`,midiDomainGuard);
@@ -71,16 +86,28 @@ export function createIntegrations({
 
   const CE_ADAPTER_TARGETS = new Set();
 
+  const adapterTypes = new WeakMap();
   function installCEAdapters() {
-    if(!ceAuthorityEnabled()||!globalThis.libWrapper?.register) return false;
+    if(!setting("transactionalCE")||!globalThis.libWrapper?.register) return false;
     for(const [key,config] of Object.entries(CONFIG.DND5E?.activityTypes??{})){
       if(!/^[a-zA-Z0-9_$]+$/.test(key)||typeof config.documentClass?.prototype?.consume!=="function") continue;
       const target=`CONFIG.DND5E.activityTypes.${key}.documentClass.prototype.consume`;
       if(CE_ADAPTER_TARGETS.has(target)) continue;
+      const prototype = config.documentClass.prototype;
+      const types = adapterTypes.get(prototype);
+      if (types) {
+        types.add(key);
+        CE_ADAPTER_TARGETS.add(target);
+        continue;
+      }
       try{
+        const registered = new Set([key]);
         globalThis.libWrapper.register(MODULE_ID,target,function(wrapped,usage,message){
+          // A subclass calling super.consume() crosses the parent's wrapper as well.
+          if (!registered.has(this.type)) return wrapped(usage, message);
           return consumeWithCE(wrapped,this,usage,message);
         },"MIXED");
+        adapterTypes.set(prototype, registered);
         CE_ADAPTER_TARGETS.add(target);
       }catch(err){reportError("CE adapter "+key,err);}
     }
