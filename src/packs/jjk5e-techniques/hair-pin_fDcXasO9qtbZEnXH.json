@@ -62,8 +62,8 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": true,
-      "max": "20"
+      "allowed": false,
+      "max": ""
      },
      "spellSlot": false
     },
@@ -113,9 +113,7 @@
         "enabled": false,
         "formula": ""
        },
-       "scaling": {
-        "number": 1
-       }
+       "scaling": {}
       }
      ]
     }
@@ -187,9 +185,7 @@
         "enabled": false,
         "formula": ""
        },
-       "scaling": {
-        "number": 1
-       }
+       "scaling": {}
       }
      ]
     }
@@ -239,9 +235,39 @@
    "ceSteps": {
     "dcQm0JQlx7Bps7r8": 1
    },
-   "automationNotes": "Detonation: 1d8 per nail plus extra CE invested (enter as scale).",
+   "automationNotes": "Driving a nail spends one and adds 1d8 (+1d8 per extra CE) to the detonation dice in the JJK panel; a nail stuck by a Nail Projectile hit is +1 there. Detonating rolls them all and clears them.",
    "automation": "automated",
-   "rev": "0df396e7b9"
+   "rev": "1ada9a095a",
+   "trackerUse": {
+    "dcQm0JQlx7Bps7r8": [
+     {
+      "tracker": "nails",
+      "op": "add",
+      "n": -1,
+      "need": 1
+     },
+     {
+      "tracker": "pins",
+      "op": "add",
+      "n": 1,
+      "perScaling": 1
+     }
+    ]
+   },
+   "trackerDice": {
+    "eYayPO9O7w18fnMl": {
+     "tracker": "pins",
+     "die": "d8",
+     "after": "zero",
+     "need": 1
+    },
+    "tEkKaJYif8FUrtLK": {
+     "tracker": "pins",
+     "die": "d8",
+     "after": "zero",
+     "need": 1
+    }
+   }
   }
  },
  "folder": "YmMAY3fFTK6UIkG2",

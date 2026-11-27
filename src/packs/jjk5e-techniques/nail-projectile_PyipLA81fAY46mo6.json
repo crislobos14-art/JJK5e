@@ -232,9 +232,23 @@
    "technique": "Straw Doll Technique",
    "level": 1,
    "spellFrom": "feat",
-   "automationNotes": "Starts with 1 hammer, 24 nails, 1 straw doll (track nails). 6th: DC 10 DEX to recover nails by touch.",
+   "automationNotes": "Nails are counted in the JJK panel (24 to start): each nail attack spends one. 6th: DC 10 DEX to recover a nail by touch (+1 in the panel).",
    "automation": "automated",
-   "rev": "bc511fc858"
+   "rev": "f0638ca0de",
+   "trackerUse": {
+    "fQhKGcKWsr5KPuJW": {
+     "tracker": "nails",
+     "op": "add",
+     "n": -1,
+     "need": 1
+    },
+    "ztxMqkugIBCokWI3": {
+     "tracker": "nails",
+     "op": "add",
+     "n": -1,
+     "need": 1
+    }
+   }
   }
  },
  "folder": "YmMAY3fFTK6UIkG2",

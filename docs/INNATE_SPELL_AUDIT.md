@@ -240,7 +240,7 @@
 | Domain Expansion: Horizon of Captivating Skhanda | 3 | utility:Free expansion (2 per long rest); utility:Expand Domain (20 CE); utility:Death Swarm (X CE by shikigami) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-horizon-of-captivating-_NUoFYdG435JZWnLM.json) |
 | Water Defensive Ring | 6 | heal:Water ring (6 CE); heal:Water ring as reaction (8 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/water-defensive-ring_8R4ubskMKSNo9cjj.json) |
 | Flash Flood | 11 | attack:Water ball (6 CE): 10d8 cold, push 80 ft; save:Action (8 CE) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/flash-flood_5EjQTkPsRJ3rKiT9.json) |
-| Maximum: Tsunami | 18 | save:Tsunami (8 CE, as 8th-level spell) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/maximum-tsunami_ht3B9B5NSQBfgmUH.json) |
+| Maximum: Tsunami | 18 | save:Tsunami (8 CE, as 8th-level spell); save:Wall moves 50 ft (start of your turn): 1d10 less each round | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/maximum-tsunami_ht3B9B5NSQBfgmUH.json) |
 
 ### Disaster Verdure (5 spells)
 

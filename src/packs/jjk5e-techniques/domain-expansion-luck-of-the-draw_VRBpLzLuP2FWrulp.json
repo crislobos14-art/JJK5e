@@ -197,7 +197,14 @@
    "spellFrom": "feat",
    "automationNotes": "Expansion activity charges 20 CE: refund/adjust to the 2d20 roll. No Miracle cap inside; spend a Miracle to give an attack/technique a guaranteed hit.",
    "automation": "automated",
-   "rev": "29c9db94e3"
+   "rev": "9a229e4fe0",
+   "trackerUse": {
+    "Z16NUYTa6ppHtuqL": {
+     "tracker": "miracles",
+     "op": "add",
+     "n": 3
+    }
+   }
   }
  },
  "folder": "tl97VGJouG41Z3rd",

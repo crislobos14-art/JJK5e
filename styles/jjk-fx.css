@@ -101,6 +101,8 @@ li.combatant.jjk-ct-has-ce .token-name > .combatant-controls { order: 2; }
 .jjk-tt-roster-row.lost { border-left-color: var(--jjk-seal, #ce1032); opacity: .6; }
 .jjk-tt-roster-row.lost .jjk-tt-roster-name { text-decoration: line-through; }
 .jjk-tt-state { height: 24px; font-size: 11px; }
+.jjk-tt-units .jjk-tt-roster-row { grid-template-columns: minmax(0, 1fr) minmax(72px, 120px) auto auto; }
+.jjk-tt-units .jjk-tt-roster-row button { width: 28px; height: 24px; min-width: 0; padding: 0; }
 .jjk-tt-empty { color: var(--jjk-muted, #b1a69a); font-size: 12px; }
 @media (prefers-reduced-motion: reduce) { .jjk-tt-fill { transition: none; } }
 .jjk-tt-star .jjk-num { font-size: 14px; }

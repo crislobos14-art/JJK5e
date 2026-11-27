@@ -112,9 +112,14 @@
    "technique": "Golden Hour",
    "level": 11,
    "spellFrom": "feat",
-   "automationNotes": "Undo damage and CE spent (except this) and positions in 100 ft since the start of your previous turn — GM resets.",
+   "automationNotes": "In combat the module records positions, HP and CE at the start of each of your turns. Using it posts a card: the GM restores creatures within 100 ft to the start of your previous turn (your 8 CE stays spent).",
    "automation": "automated",
-   "rev": "6865f6591b"
+   "rev": "32532b0cba",
+   "trackerUse": {
+    "DqujXlB0omasjWGo": {
+     "op": "rewind"
+    }
+   }
   }
  },
  "folder": "OPfUdWvA8mZmDQ8i",

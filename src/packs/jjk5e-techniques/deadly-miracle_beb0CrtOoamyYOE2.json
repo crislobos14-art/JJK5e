@@ -67,9 +67,17 @@
    "ceCosts": {
     "rhzI0aAS06f5UGNo": 2
    },
-   "automationNotes": "Lethal hit or failed save: succeed / take no damage. At 11th: also vs anything dropping you to half HP or less.",
+   "automationNotes": "Spends 2 Miracles from Little Miracles. Lethal hit or failed save: succeed / take no damage. At 11th: also vs anything dropping you to half HP or less. The death-save advantage turns off at 0 Miracles.",
    "automation": "automated",
-   "rev": "be9cd47224"
+   "rev": "a57059eddf",
+   "trackerUse": {
+    "rhzI0aAS06f5UGNo": {
+     "tracker": "miracles",
+     "op": "add",
+     "n": -2,
+     "need": 2
+    }
+   }
   }
  },
  "folder": "tl97VGJouG41Z3rd",

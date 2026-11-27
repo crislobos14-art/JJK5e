@@ -48,12 +48,7 @@
      "units": "inst",
      "override": true
     },
-    "effects": [
-     {
-      "_id": "mADpGEWRzZcXJVgX",
-      "onSave": false
-     }
-    ]
+    "effects": []
    },
    "P4YYkbHJ8PTDRSJE": {
     "_id": "P4YYkbHJ8PTDRSJE",
@@ -89,12 +84,7 @@
      },
      "override": true
     },
-    "effects": [
-     {
-      "_id": "zMFfFehLAmYiJa6s",
-      "onSave": false
-     }
-    ]
+    "effects": []
    },
    "RSMk94ajRrNlhPWs": {
     "_id": "RSMk94ajRrNlhPWs",
@@ -130,12 +120,7 @@
      },
      "override": true
     },
-    "effects": [
-     {
-      "_id": "6fMCfmfxe60NOZTI",
-      "onSave": false
-     }
-    ]
+    "effects": []
    },
    "uSxo1oGpVadFS57G": {
     "_id": "uSxo1oGpVadFS57G",
@@ -171,12 +156,7 @@
      },
      "override": true
     },
-    "effects": [
-     {
-      "_id": "0AozsidSJ51M5R7C",
-      "onSave": false
-     }
-    ]
+    "effects": []
    },
    "aEzQRvcqOiZYb41D": {
     "_id": "aEzQRvcqOiZYb41D",
@@ -212,12 +192,7 @@
      },
      "override": true
     },
-    "effects": [
-     {
-      "_id": "9On28S8VTbc5DWQa",
-      "onSave": false
-     }
-    ]
+    "effects": []
    },
    "iipu17hM6a45hcuy": {
     "_id": "iipu17hM6a45hcuy",
@@ -304,9 +279,36 @@
    "technique": "Prayer Song",
    "level": 1,
    "spellFrom": "feat",
-   "automationNotes": "Remove the previous turn's effect when advancing (each one includes the earlier benefits).",
+   "automationNotes": "The JJK panel counts the beat: +1 at the start of your turn, and it ends if you are stunned, paralyzed, grappled, restrained or knocked prone. Your effect for the current turn is applied for you. \"Advance\" corrects the count by hand. The opponent −2 AC is applied to targets.",
    "automation": "automated",
-   "rev": "9aefd1831c"
+   "rev": "f4a7e54fc4",
+   "trackerUse": {
+    "JFf7uuFbevBJos36": {
+     "tracker": "beat",
+     "op": "start",
+     "n": 1
+    },
+    "P4YYkbHJ8PTDRSJE": {
+     "tracker": "beat",
+     "op": "set",
+     "n": 2
+    },
+    "RSMk94ajRrNlhPWs": {
+     "tracker": "beat",
+     "op": "set",
+     "n": 3
+    },
+    "uSxo1oGpVadFS57G": {
+     "tracker": "beat",
+     "op": "set",
+     "n": 4
+    },
+    "aEzQRvcqOiZYb41D": {
+     "tracker": "beat",
+     "op": "set",
+     "n": 5
+    }
+   }
   }
  },
  "effects": [

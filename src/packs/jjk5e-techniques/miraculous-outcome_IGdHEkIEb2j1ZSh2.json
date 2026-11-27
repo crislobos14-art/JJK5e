@@ -96,7 +96,16 @@
     "4aEwGySubtb2WGSz": 1
    },
    "automation": "automated",
-   "rev": "47190c8703"
+   "rev": "b949fa38ef",
+   "trackerUse": {
+    "4aEwGySubtb2WGSz": {
+     "tracker": "miracles",
+     "op": "add",
+     "n": -1,
+     "need": 1
+    }
+   },
+   "automationNotes": "Spends a Miracle from Little Miracles."
   }
  },
  "folder": "tl97VGJouG41Z3rd",

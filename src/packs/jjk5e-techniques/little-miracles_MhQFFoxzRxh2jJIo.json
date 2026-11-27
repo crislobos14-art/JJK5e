@@ -73,9 +73,9 @@
   "jjk5e": {
    "technique": "Miracle",
    "level": 1,
-   "automationNotes": "Item uses = Miracles held (max 6). Other Miracle features spend from here: lower the uses by hand when they say 'spend a Miracle'.",
+   "automationNotes": "Item uses = Miracles held (max 6); the JJK panel shows the same count. Blind Luck, Miraculous Outcome and Deadly Miracle spend them on their own.",
    "automation": "automated",
-   "rev": "fbeab48e97"
+   "rev": "04d1f3be74"
   }
  },
  "folder": "tl97VGJouG41Z3rd",
