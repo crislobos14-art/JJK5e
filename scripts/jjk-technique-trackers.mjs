@@ -60,7 +60,7 @@ export const TRACKERS = {
   }],
   "Disaster Tides": [{
     id: "tsunami", kind: "count", label: ["Tsunami (rounds)", "Tsunami (rondas)"], max: () => 6, toggle: true, requires: /Maximum: Tsunami/i,
-    reset: { combatEnd: "zero" }, auto: { turnStartWhileOn: +1 }, endAtMax: true, dice: (st) => Math.max(0, 6 - st.value),
+    reset: { combatEnd: "zero" }, auto: { turnStartWhileOn: +1 }, endAtMax: true, dice: (st) => Math.max(0, 6 - st.value), concentration: /^Maximum: Tsunami$/i,
     derived: (n) => [L(`Wall ${300 - 50 * n} ft high`, `Muro de ${300 - 50 * n} pies de alto`), L(`Moving wall: ${Math.max(0, 6 - n)}d10`, `Muro en marcha: ${Math.max(0, 6 - n)}d10`)],
     ended: ["The wall reached 0 ft: Tsunami ends.", "El muro llegó a 0 pies: Tsunami termina."],
     hint: ["Starts when you cast it. At the start of your turn the wall moves 50 ft, loses 50 ft of height and 1d10 of damage.",
@@ -435,7 +435,45 @@ export async function onTurnStart(actor) {
     }
   }
   if (Object.keys(updates).length) await actor.update(updates);
-  for (const def of ended) if (def.ended) await say(actor, `<p><strong>${esc(L(...def.label))}</strong> — ${esc(L(...def.ended))}</p>`);
+  for (const def of ended) {
+    const item = def.concentration && actor.items?.find?.((i) => def.concentration.test(String(i.name ?? "")));
+    if (item && typeof actor.endConcentration === "function") await actor.endConcentration(item).catch(() => null);
+    if (def.ended) await say(actor, `<p><strong>${esc(L(...def.label))}</strong> — ${esc(L(...def.ended))}</p>`);
+  }
+}
+
+/** Concentration on the counter's item ended (failed save, new spell, by hand): the counter stops too. Exported for tests. */
+export async function onConcentrationEnded(effect) {
+  const actor = effect?.parent;
+  if (!actor || actor.documentName !== "Actor" || !writer(actor)) return false;
+  if (!effect.statuses?.has?.("concentrating")) return false;
+  const itemId = effect.flags?.dnd5e?.item?.id;
+  const item = itemId && actor.items?.get?.(itemId);
+  if (!item) return false;
+  let done = false;
+  for (const def of trackersFor(actor)) {
+    if (!def.concentration?.test(String(item.name ?? "")) || !readState(actor, def).active) continue;
+    done = (await write(actor, def, applyOp(actor, def, "zero"))) || done;
+    if (def.ended) await say(actor, `<p><strong>${esc(L(...def.label))}</strong> — ${esc(L("Concentration ended.", "Terminó la concentración."))}</p>`);
+  }
+  return done;
+}
+
+/** Before 2.18 the panel kept Miracles and Calamity Marks in a flag; they now live in the item's uses. Exported for tests. */
+export async function migrateItemCounters(actor) {
+  if (!actor?.isOwner) return false;
+  const stored = actor.getFlag?.(ID, FLAG) ?? {};
+  let done = false;
+  for (const def of trackersFor(actor)) {
+    const held = usesItem(actor, def);
+    if (!held || stored[def.id] === undefined) continue;
+    const old = Math.floor(Number(stored[def.id]?.value) || 0);
+    const st = readState(actor, def);
+    if (old > st.value) await write(actor, def, { value: Math.min(old, st.max) });
+    await actor.unsetFlag(ID, `${FLAG}.${def.id}`);
+    done = true;
+  }
+  return done;
 }
 
 /** Fa Jin: a melee attack card whose every target was missed grants one Jin charge. */
@@ -490,7 +528,7 @@ export function blockReason(actor, activity) {
     if (rule.active && !st.active) return L(`${name}: not active.`, `${name}: no está activo.`);
     const need = Number(rule.need) || 0;
     if (need && st.value < need) return L(`${name}: ${st.value} of ${need} needed.`, `${name}: tienes ${st.value} y necesitas ${need}.`);
-    if (rule.op === "add" && Number(rule.n) > 0 && st.max !== null && st.max < 99 && st.value >= st.max) return L(`${name}: already at the maximum (${st.max}).`, `${name}: ya está al máximo (${st.max}).`);
+    if (rule.op === "add" && rule.cap !== false && Number(rule.n) > 0 && st.max !== null && st.max < 99 && st.value >= st.max) return L(`${name}: already at the maximum (${st.max}).`, `${name}: ya está al máximo (${st.max}).`);
   }
   return "";
 }
@@ -566,8 +604,16 @@ export function beatSource(actor) {
 const beatNames = (actor) => new Set((actor.items ?? []).filter((i) => i.flags?.[ID]?.technique === "Prayer Song")
   .flatMap((i) => [...(i.effects ?? [])].filter((e) => e.id !== OFF_BEAT_FX && (PRAYER_FX.includes(e.id) || CRESCENDO_FX.some(([, id]) => id === e.id))).map((e) => e.name)));
 
-/** Keep exactly the current beat's effect on the actor. Exported for tests. */
-export async function syncBeat(actor) {
+const BEAT_QUEUE = new Map();
+/** Keep exactly the current beat's effect on the actor; calls for one actor run one after another. Exported for tests. */
+export function syncBeat(actor) {
+  const key = actor?.uuid ?? actor?.id ?? "?";
+  const next = (BEAT_QUEUE.get(key) ?? Promise.resolve()).catch(() => null).then(() => syncBeatNow(actor));
+  BEAT_QUEUE.set(key, next);
+  next.finally(() => { if (BEAT_QUEUE.get(key) === next) BEAT_QUEUE.delete(key); }).catch(() => null);
+  return next;
+}
+async function syncBeatNow(actor) {
   if (!actor?.isOwner || !defOf(actor, "beat")) return false;
   const src = beatSource(actor);
   const names = beatNames(actor);
@@ -691,7 +737,7 @@ export async function applyRewind(message) {
 Hooks.once("ready", () => {
   if (game.system?.id !== "dnd5e") return;
   const api = game.modules.get(ID)?.api;
-  if (api) api.trackers = { TRACKERS, trackersFor, readState, panelSection, act, onMidiAttack, blockReason, onActivityUsed, applyRewind };
+  if (api) api.trackers = { TRACKERS, trackersFor, readState, panelSection, act, onMidiAttack, blockReason, onActivityUsed, applyRewind, preRollDamage: onPreRollDamage };
   Hooks.on("dnd5e.preUseActivity", (activity) => {
     const actor = ownerOf(activity);
     const why = actor && blockReason(actor, activity);
@@ -700,9 +746,11 @@ Hooks.once("ready", () => {
     return false;
   });
   Hooks.on("dnd5e.postUseActivity", (activity, usageConfig) => { onActivityUsed(activity, usageConfig).catch((err) => console.warn(`${ID} | trackers`, err)); });
-  Hooks.on("dnd5e.preRollDamageV2", (config) => { try { onPreRollDamage(config); } catch (err) { console.warn(`${ID} | trackers`, err); } });
+  // The dice count is set from jjk5e.js's own preRollDamageV2 handler, before crits, Black Flash and domain potency read the parts.
   Hooks.on("dnd5e.rollDamageV2", (rolls, data) => { onDamageRolled(rolls, data).catch((err) => console.warn(`${ID} | trackers`, err)); });
   Hooks.on("createActiveEffect", (effect) => { onCondition(effect).catch(() => null); });
+  Hooks.on("deleteActiveEffect", (effect) => { onConcentrationEnded(effect).catch(() => null); });
+  for (const actor of game.actors ?? []) if (writer(actor) && trackersFor(actor).some((d) => d.itemUses)) migrateItemCounters(actor).catch(() => null);
   Hooks.on("updateItem", (item, changes) => {
     const actor = item?.parent;
     if (!actor || !foundry.utils.hasProperty(changes ?? {}, "system.uses") || !writer(actor)) return;

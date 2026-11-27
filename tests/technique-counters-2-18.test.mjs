@@ -173,3 +173,38 @@ test("2.18 · Samsara Rewind: the GM puts positions, HP and CE back; the rewind'
   assert.equal(pool.system.uses.spent, 18, "10 spent at the snapshot + the rewind's 8");
   assert.equal(await tt.applyRewind(message), false, "only once");
 });
+
+test("2.18.1 · Tsunami asks for concentration; losing it stops the count, and 0 ft ends it", async () => {
+  const a = actor("Disaster Tides", ["Maximum: Tsunami"]);
+  const tsu = a.items.find((i) => i.name === "Maximum: Tsunami");
+  assert.equal(tsu.system.activities["49jmvydcAg9jYSQl"].duration.concentration, true);
+  globalThis.game = { ...globalThis.game, user: { id: "p1", isGM: false }, users: [{ id: "p1", active: true, isGM: false }] };
+  a.testUserPermission = () => true;
+  await tt.onActivityUsed(act(a, "Maximum: Tsunami", /^Tsunami/));
+  const conc = { parent: a, statuses: new Set(["concentrating"]), flags: { dnd5e: { item: { id: tsu.id } } } };
+  assert.equal(await tt.onConcentrationEnded(conc), true);
+  assert.equal(tt.readState(a, def(a, "tsunami")).active, false);
+  let ended = null;
+  a.endConcentration = async (item) => { ended = item.name; };
+  await tt.onActivityUsed(act(a, "Maximum: Tsunami", /^Tsunami/));
+  for (let i = 0; i < 6; i++) await tt.onTurnStart(a);
+  assert.equal(ended, "Maximum: Tsunami");
+});
+
+test("2.18.1 · Miracles kept in the old panel flag move into Little Miracles' uses", async () => {
+  const a = actor("Miracle", ["Little Miracles"]);
+  a.flags.jjk5e.techTrackers.miracles = { value: 4 };
+  a.unsetFlag = async (ns, key) => { delete a.flags.jjk5e.techTrackers[key.split(".")[1]]; };
+  assert.equal(await tt.migrateItemCounters(a), true);
+  assert.equal(val(a, "miracles"), 4);
+  assert.equal(a.flags.jjk5e.techTrackers.miracles, undefined);
+  assert.equal(tt.blockReason(a, act(actor("Miracle", ["Little Miracles", "Domain Expansion: Luck of the Draw"]), "Domain Expansion: Luck of the Draw", /Initiative 20/)), "", "no cap inside the domain");
+});
+
+test("2.18.1 · Crescendo keeps its three activity ids (the update is not flagged as risky) and they correct the beat", async () => {
+  const b = actor("Prayer Song", ["Prayer", "Crescendo"], { level: 11 });
+  const cres = b.items.find((i) => i.name === "Crescendo");
+  assert.deepEqual(Object.keys(cres.system.activities).sort(), ["fgHKGv1SFdcHYFm6", "r5bvfH1yf3EgoQpc", "yBd7P533H32FsyWa"]);
+  await tt.onActivityUsed(act(b, "Crescendo", /turn 9/));
+  assert.equal(tt.beatSource(b).effect.name, "Crescendo (turn 9+)");
+});

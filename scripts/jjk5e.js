@@ -2115,6 +2115,8 @@ function domainPotencyPart(actor, item, parts) {
 
 function onPreRollDamage(config) {
   const actor = config?.subject?.actor ?? config?.subject?.item?.actor;
+  // Technique counters (charges, Hair Pin dice, Tsunami) set the dice count first: crits and potency build on it.
+  try { game.modules.get(MODULE_ID)?.api?.trackers?.preRollDamage?.(config); } catch (err) { console.warn(`${MODULE_ID} | trackers`, err); }
   crunchyCrit(config, actor);
   const healing = config?.subject?.type === "heal" || (config?.rolls ?? []).some((r) => (r.options?.types ?? [r.options?.type]).includes?.("healing"));
   const potency = actor && !healing && domainPotencyPart(actor, config?.subject?.item, config?.rolls?.[0]?.parts);
@@ -7921,8 +7923,9 @@ Hooks.once("init", () => {
     const actor = doc.actor;
     if (!isActiveGM() || !actor || actor.flags?.jjk5e?.summonerCEMod === undefined) return;
     let summoner = null;
-    const origin = doc.flags?.dnd5e?.summon?.origin;
-    if (origin) { const act = await fromUuid(origin).catch(() => null); summoner = act?.actor ?? act?.item?.actor ?? null; }
+    // dnd5e 5/6 writes flags.dnd5e.summon.origin (the summoning ITEM's uuid) on the summoned actor (delta for unlinked tokens).
+    const origin = actor.flags?.dnd5e?.summon?.origin ?? doc.flags?.dnd5e?.summon?.origin;
+    if (origin) { const src = await fromUuid(origin).catch(() => null); summoner = src?.actor ?? src?.item?.actor ?? (src?.documentName === "Actor" ? src : null); }
     if (!summoner && doc.flags?.jjk5e?.summonedBy) summoner = await fromUuid(doc.flags.jjk5e.summonedBy).catch(() => null);
     if (summoner?.documentName !== "Actor") return;
     await actor.setFlag(MODULE_ID, "summonerCEMod", ceMod(summoner)).catch((err) => reportError("summoner CE", err));

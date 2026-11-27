@@ -6,6 +6,7 @@ ACTT={"attack","save","damage","heal","utility","summon","check","enchant","cast
 ACTV={"action","bonus","reaction","special","minute","hour","day","legendary","lair","mythic","crew","turnStart","turnEnd","longRest","shortRest","encounter",""}
 TPL={"circle","cone","cube","cylinder","line","radius","sphere","square","wall",""}
 RU={"self","touch","ft","mi","spec","any","m","km",""}
+DUR={"inst","turn","round","minute","hour","day","week","month","year","perm","spec","disp","dstr","",None}
 ONS={"none","half","full"}
 AB={"str","dex","con","int","wis","cha"}
 STAT=set("blinded charmed deafened frightened grappled incapacitated invisible paralyzed petrified poisoned prone restrained stunned unconscious exhaustion dead bleeding burning concentrating cursed dehydration diseased encumbered falling flying hiding malnutrition marked silenced sleeping stable surprised suffocation transformed".split())
@@ -46,6 +47,9 @@ for fn in glob.glob('src/packs/jjk5e-*/*.json'):
         t=(a.get('target') or {}).get('template') or {}
         if t.get('type') not in TPL and t: bad(n,f"tpl:{t.get('type')}")
         chkf(n,w+' tplsize',t.get('size'))
+        du=a.get('duration') or {}
+        if du.get('units') not in DUR: bad(n,f"duration-units:{w}:{du.get('units')}")
+        if du.get('concentration') and du.get('units') in ('inst',None,''): bad(n,f"concentration-inst:{w}")
         r=a.get('range') or {}
         if r.get('units') not in RU|{None}: bad(n,f"range-units:{r.get('units')}")
         chkf(n,w+' range',r.get('value'))
@@ -78,7 +82,7 @@ for fn in glob.glob('src/packs/jjk5e-*/*.json'):
         tid=mp.get('triggeredActivityId')
         if tid and tid not in acts: bad(n,f"trigger-missing:{w}")
     fl=d.get('flags',{}).get('jjk5e',{})
-    for k in ('ceCosts','ceSteps'):
+    for k in ('ceCosts','ceSteps','dmgScale','trackerUse','trackerDice','ceRegain','reload','tokenSwap'):
         for aid in (fl.get(k) or {}):
             if aid not in acts: bad(n,f"{k}-orphan:{aid}")
     if (sysd.get('uses') or {}).get('max'): chkf(n,'uses',sysd['uses']['max'])
