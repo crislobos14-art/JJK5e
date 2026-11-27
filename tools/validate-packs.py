@@ -42,6 +42,9 @@ for fn in glob.glob('src/packs/jjk5e-*/*.json'):
                 if '|' in v: bad(n,f"ot-multi:{e['name']}")
     for eid in effs:
         if not re.fullmatch(r'[A-Za-z0-9]{16}',str(eid)): bad(n,f"effect-id:{eid}")
+    for e in (d.get('effects') or []):
+        k=e.get('_key')
+        if k and not re.search(r'[.!]'+re.escape(str(e.get('_id')))+'$',k): bad(n,f"effect-key:{k}")
     for aid,a in acts.items():
         w=f"{a.get('name')}"
         if not re.fullmatch(r'[A-Za-z0-9]{16}',str(aid)) or a.get('_id',aid)!=aid: bad(n,f"activity-id:{aid}")
