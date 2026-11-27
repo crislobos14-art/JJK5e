@@ -1,4 +1,6 @@
 export function createDomainLifecycle({
+  finishDomain,
+  ensureBarrierMarker,
   MODULE_ID,
   ICONS,
   DOMAIN_RADIUS,
@@ -41,6 +43,7 @@ export function createDomainLifecycle({
 }) {
   async function domainOpened(actor, effect = null) {
     if (!isActiveGM() || !actor) return;
+    if (effect && (!actor.effects?.get(effect.id) || effect.disabled)) return;
     if (effect?.uuid && getDomain(actor)?.openingId === effect.uuid) return;
     const mod = ceMod(actor);
     const kind = effect?.flags?.jjk5e ?? actor.effects.find((e) => e.flags?.jjk5e?.domainOpen)?.flags?.jjk5e ?? {};
@@ -65,7 +68,10 @@ export function createDomainLifecycle({
       x: c?.x ?? null, y: c?.y ?? null,
       damageTaken: 0, zone: null, clash: null, name: actor.name };
     const opened = await setDomain(actor, state);
-    if (opened && effect && actor.effects.get(effect.id) && !effect.disabled) animateDomainOpening(actor, state, tokenDoc);
+    if (!opened) return;
+    if (state.sceneId && !state.noBarrier && setting("autoBarrierMarker"))
+      await step("domain barrier marker", () => ensureBarrierMarker(actor));
+    if (effect && actor.effects.get(effect.id) && !effect.disabled) animateDomainOpening(actor, state, tokenDoc);
     if (c && state.sceneId && setting("domainZones")) await GM_EXTRA.domainZone({ sceneId: state.sceneId,
       name: `${t("Domain.Zone")}: ${actor.name}`, color: "#a77fe0", actorUuid: actor.uuid, openingId: state.openingId })
       .catch((err) => reportError("domain zone", err));
@@ -183,7 +189,7 @@ export function createDomainLifecycle({
       // The owner can delete their own effect at once; the GM's deletion hook does the rest.
       if (actor.isOwner && effects.length && (!guard || effects.some((e) => e.uuid === guard) || !recorded?.open)) {
         for (const e of effects) await safeDelete(e);
-        return true;
+        return !liveActor(actor)?.effects?.some?.(isDomainEffect);
       }
       return requestDomainAuthority("close", { actorUuid: actor.uuid, openingId: guard });
     }
@@ -199,7 +205,7 @@ export function createDomainLifecycle({
       return !liveActor(actor)?.effects?.some?.(isDomainEffect);
     }
     // No effect left but the state is still open (effect lost while no GM was online, for example): close it here.
-    await domainClosed(actor);
+    await finishDomain(actor, recorded.openingId, recorded.incomplete);
     return true;
   }
 
