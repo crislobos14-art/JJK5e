@@ -371,7 +371,8 @@
         "orphanRecord": "Registro sin token",
         "orphanToken": "Token sin invocador",
         "unrecorded": "Token de invocación sin registrar"
-      }
+      },
+      "UpkeepDeferred": "{name}: no se pudo cobrar el mantenimiento ahora; sigue invocado y se cobra de nuevo el próximo turno."
     },
     "Panel": {
       "Open": "Abrir panel JJK",

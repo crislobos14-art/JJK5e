@@ -2666,7 +2666,8 @@ GM_EXTRA.tokenSwap = async ({ sceneId, sourceId, targetId, actorUuid }) => {
 
 /* ---- Advanced Summoning Engine (scripts/jjk5e-summon-engine.mjs) ---- */
 const SUMMONS = createSummonEngine({ MODULE_ID, t, L: (en, es) => L({ en, es }), esc, isActiveGM, chat: (a, html) => chat(a, html),
-  spendCE: (a, n, label) => spendCE(a, n, label), confirmDialog: (...a) => confirmDialog(...a), reportError: (w, e) => reportError(w, e) });
+  spendCE: (a, n, label) => spendCE(a, n, label), reportError: (w, e) => reportError(w, e),
+  canPay: (a, n) => { const pool = findPool(a); return !!pool && !cePending(pool) && poolValue(pool) >= n; } });
 const SUMMON_APPS = new Map();
 function refreshSummonApps() { for (const app of SUMMON_APPS.values()) renderSoon(app); }
 function makeSummonManagerClass() {
@@ -2707,15 +2708,15 @@ function makeSummonManagerClass() {
         const left = e.rules?.rounds && e.combat?.id === combat?.id ? Math.max(0, e.combat.round + e.rules.rounds - combat.round) : null;
         const conds = [...(a?.statuses ?? [])].map((s) => CONFIG.statusEffects?.find?.((x) => x.id === s)?.name ?? s).map((n) => game.i18n.localize(n));
         const canDismiss = game.user.isGM || summoner.isOwner;
-        return `<li class="jjk-summon" data-id="${e.id}">
+        return `<li class="jjk-summon" data-id="${esc(e.id)}">
           <img src="${esc(e.img ?? a?.img ?? "icons/svg/mystery-man.svg")}" alt="" width="48" height="48">
           <div class="jjk-summon-body"><header><strong>${esc(e.name)}</strong> <span class="jjk-chip">${esc(a?.system?.details?.type?.value ?? a?.type ?? "")}</span></header>
-            <p class="jjk-summon-stats">${t("Summon.HP")} ${hp.value ?? "—"}/${hp.max ?? "—"} · ${t("Summon.AC")} ${ac ?? "—"}${pool ? ` · ${t("CE.Short")} ${poolValue(pool)}/${poolMax(pool)}` : ""}${left !== null ? ` · ${t("Summon.RoundsLeft", { n: left })}` : ""}${e.rules?.upkeep ? ` · ${t("CE.Upkeep")} ${e.rules.upkeep}` : ""}</p>
+            <p class="jjk-summon-stats">${t("Summon.HP")} ${hp.value ?? "—"}/${hp.max ?? "—"} · ${t("Summon.AC")} ${ac ?? "—"}${pool ? ` · ${t("CE.Short")} ${poolValue(pool)}/${poolMax(pool)}` : ""}${left !== null ? ` · ${t("Summon.RoundsLeft", { n: left })}` : ""}${e.rules?.upkeep ? ` · ${t("CE.Upkeep")} ${Number(e.rules.upkeep) || 0}` : ""}</p>
             <p class="hint">${esc(e.techniqueName ?? "")}${this.actor ? "" : ` — ${esc(summoner.name)}`}${conds.length ? ` · ${conds.map(esc).join(", ")}` : ""}${doc ? "" : ` · <strong>${t("Summon.NoToken")}</strong>`}</p></div>
           <div class="btns">
             ${a ? `<button type="button" data-action="sheet" data-actor="${a.uuid}" title="${t("Summon.Sheet")}" aria-label="${t("Summon.Sheet")}"><i class="fas fa-id-card"></i></button>` : ""}
             ${doc ? `<button type="button" data-action="select" data-token="${doc.uuid}" title="${t("Summon.Select")}" aria-label="${t("Summon.Select")}"><i class="fas fa-crosshairs"></i></button>` : ""}
-            ${canDismiss ? `<button type="button" data-action="dismiss" data-summoner="${summoner.uuid}" data-id="${e.id}" data-name="${esc(e.name)}" title="${t("Summon.Dismiss")}" aria-label="${t("Summon.Dismiss")}"><i class="fas fa-person-walking-arrow-right"></i></button>` : ""}
+            ${canDismiss ? `<button type="button" data-action="dismiss" data-summoner="${esc(summoner.uuid)}" data-id="${esc(e.id)}" data-name="${esc(e.name)}" title="${t("Summon.Dismiss")}" aria-label="${t("Summon.Dismiss")}"><i class="fas fa-person-walking-arrow-right"></i></button>` : ""}
           </div></li>`;
       };
       const groups = owners.map((o) => {
@@ -3913,6 +3914,7 @@ Hooks.once("init", () => {
   });
   SUMMONS.install();
   installVowMonitor();
+  Hooks.once("ready", () => { seedVowLedger().catch((err) => reportError("vow ledger", err)); });
   Hooks.on("updateActor", (actor, changes) => { if (foundry.utils.hasProperty(changes ?? {}, `flags.${MODULE_ID}.summonRegistry`)) { refreshSummonApps(); refreshPanels(actor); } });
   if (CONFIG.queries) {
     CONFIG.queries[GM_QUERY] = (msg) => handleGMRequest(msg);
@@ -4998,7 +5000,7 @@ Hooks.once("init", () => {
   reg("levelUpButton", Boolean, true, { scope: "client" });
   reg("enableSummoning", Boolean, true);
   // 2.22: binding vows made by players wait for the GM; the approvals live where only GMs can write.
-  reg("vowApproval", Boolean, false);
+  reg("vowApproval", Boolean, false, { onChange: (on) => { if (on) seedVowLedger().catch((err) => reportError("vow ledger", err)); } });
   game.settings.register(MODULE_ID, "vowLedger", { scope: "world", config: false, type: Object, default: {} });
   Object.assign(game.modules.get(MODULE_ID).api ?? {}, { pointBuy, pointCost, ANIM, ANIM_THEMES, itemTheme, levelUp });
 });
@@ -5259,11 +5261,14 @@ const SENSES = [{ en: "touch", es: "tacto" }, { en: "taste", es: "gusto" }, { en
  * player starts "pending"; the GM's approval is recorded in a world setting only GMs can write (vowLedger), keyed
  * by a fingerprint of the vow's mechanics. A vow edited after approval (or forged active in the flag) is not live:
  * its effects stay off until the GM approves it again. Pre-2.22 vows keep working (they never required approval). */
-const vowLedgerKey = (actor, vow) => `${actor?.uuid ?? "?"}|${vow?.id ?? "?"}`;
+// Keyed by vow id + fingerprint: the same vow on a token copy or an imported actor stays approved, and a mutual
+// vow's two copies (different partner) have their own entries. With the setting on, EVERY vow needs an entry —
+// a player cannot skip approval by editing a marker in their own flag. Vows that existed when the setting was
+// turned on are recorded once by the GM (seedVowLedger).
+const vowLedgerKey = (vow) => `${vow?.id ?? "?"}:${vowFingerprint(vow)}`;
 function vowApproved(actor, vow) {
-  if (!vow?.requiresApproval) return true;
-  const entry = (setting("vowLedger") ?? {})[vowLedgerKey(actor, vow)];
-  return !!entry && entry.fp === vowFingerprint(vow);
+  if (!setting("vowApproval")) return true;
+  return !!(setting("vowLedger") ?? {})[vowLedgerKey(vow)];
 }
 const getVows = actor => {
   const vows = actor?.getFlag?.(MODULE_ID, "vows");
@@ -5276,13 +5281,27 @@ const getVows = actor => {
   });
 };
 async function writeVowLedger(actor, vow, approve = true) {
-  if (!game.user.isGM) return false;
+  if (!game.user.isGM || !vow?.id) return false;
   const ledger = foundry.utils.deepClone(setting("vowLedger") ?? {});
-  const key = vowLedgerKey(actor, vow);
-  if (approve) ledger[key] = { fp: vowFingerprint(vow), by: game.user.id, at: Date.now() };
-  else delete ledger[key];
+  if (approve) ledger[vowLedgerKey(normalizeVow(vow))] = { by: game.user.id, at: Date.now() };
+  else for (const k of Object.keys(ledger)) if (k.startsWith(`${vow.id}:`)) delete ledger[k];
   await game.settings.set(MODULE_ID, "vowLedger", ledger);
   return true;
+}
+/** GM, once, when approval is switched on: the vows that already exist keep working. */
+async function seedVowLedger() {
+  if (!isActiveGM() || !setting("vowApproval")) return 0;
+  const ledger = foundry.utils.deepClone(setting("vowLedger") ?? {});
+  if (ledger.__seeded) return 0;
+  let n = 0;
+  for (const actor of vowActors()) for (const raw of actor.getFlag(MODULE_ID, "vows") ?? []) {
+    const v = normalizeVow(raw);
+    if (["active", "suspended"].includes(v.state) && !v.requiresApproval) { ledger[vowLedgerKey(v)] = { by: game.user.id, at: Date.now(), seeded: true }; n++; }
+  }
+  ledger.__seeded = Date.now();
+  await game.settings.set(MODULE_ID, "vowLedger", ledger);
+  for (const actor of vowActors()) if (actor.isOwner) await syncVowEffects(actor);
+  return n;
 }
 // Pact Maker: twice the proficiency bonus.
 const vowLimit = (actor) => (Number(actor?.system?.attributes?.prof) || 2)
@@ -5404,18 +5423,21 @@ async function createVow(actor, data = null) {
   vow.locked = vow.lock !== "none";
   vow.owner = actor.uuid;
   const dur = vow.durationInput; delete vow.durationInput;
-  if (dur?.unit === "rounds" && dur.value) vow.duration = { rounds: dur.value, combatId: game.combat?.id ?? null, round: game.combat?.round ?? 0 };
-  else if (dur?.unit === "hours" && dur.value) vow.duration = { seconds: dur.value * 3600, since: game.time?.worldTime ?? 0 };
+  if (dur?.unit === "rounds" && dur.value) vow.duration = { rounds: dur.value };
+  else if (dur?.unit === "hours" && dur.value) vow.duration = { seconds: dur.value * 3600 };
   // GM approval (setting): a player's vow waits as "pending"; nothing applies until the GM approves it.
   if (setting("vowApproval") && !game.user.isGM) { vow.requiresApproval = true; vow.state = "pending"; }
   else if (setting("vowApproval")) vow.requiresApproval = true;
   vow.history = [{ at: Date.now(), action: "create", from: null, to: vow.state, by: game.user.id }];
+  if (vow.state === "active") vow = startVowDuration(vow);
+  vow = normalizeVow(vow);   // the fingerprint is taken on what is stored (invalid rules dropped first)
   const vows = getVows(actor);
   const active = vows.filter((v) => v.active && !v.broken).length;
   if (active >= vowLimit(actor)) ui.notifications.warn(t("Vow.OverLimit", { n: active + 1, max: vowLimit(actor) }));
   vows.push(vow);
+  // The approval goes first, so the effects created by saveVows are already live.
+  if (setting("vowApproval") && game.user.isGM) await writeVowLedger(actor, vow);
   await saveVows(actor, vows);
-  if (vow.requiresApproval && game.user.isGM) await writeVowLedger(actor, vow);
   if (vow.state === "pending") {
     await vowNotifyGM(actor, vow);
     ui.notifications.info(t("Vow.Submitted", { name: vow.name }));
@@ -5426,7 +5448,9 @@ async function createVow(actor, data = null) {
     vow.partnerName = partner?.name ?? "";
     if (partner?.isOwner) {
       const pv = getVows(partner);
-      pv.push({ ...vow, partner: actor.uuid, partnerName: actor.name });
+      const copy = { ...vow, partner: actor.uuid, partnerName: actor.name, owner: partner.uuid, partnerCopy: true };
+      if (setting("vowApproval") && game.user.isGM) await writeVowLedger(partner, copy);
+      pv.push(copy);
       await saveVows(partner, pv);
     } else if (partner) ui.notifications.info(t("Vow.PartnerManual", { name: partner.name }));
     await actor.setFlag(MODULE_ID, "vows", getVows(actor).map((v) => (v.id === vow.id ? { ...v, partnerName: vow.partnerName } : v)));
@@ -5436,7 +5460,7 @@ async function createVow(actor, data = null) {
     + `<p><strong>${t("Vow.Benefit")}:</strong> ${esc(vow.benefit)}</p>`
     + (vow.partnerName ? `<p><strong>${t("Vow.Partner")}:</strong> ${esc(vow.partnerName)}</p>` : "")
     + (vowChanges(vow).length || vow.terms?.some((x) => ["ceMax", "ceCost"].includes(x.type))
-      ? `<p class="hint">${vow.terms.map((x) => `${esc(L(VOW_TERMS[x.type].label))} ${sgn(x.value)}`).join(" · ")}</p>` : "")
+      ? `<p class="hint">${vow.terms.filter((x) => VOW_TERMS[x.type]).map((x) => `${esc(L(VOW_TERMS[x.type].label))} ${sgn(x.value)}`).join(" · ")}</p>` : "")
     + `</div>`);
   return vow;
 }
@@ -5459,10 +5483,26 @@ async function vowAction(actor, id, action, { reason = "", silent = false } = {}
   if (denied) { if (!silent) ui.notifications.warn(t(`Vow.Denied.${denied}`)); return false; }
   let next = applyTransition(vow, action, who, { reason, by: game.user.id });
   if (action === "activate" || action === "approve" || action === "accept" || action === "restore") next.locked = next.lock !== "none";
+  if (["approve", "accept"].includes(action)) next = startVowDuration(next);
   vows[i] = next;
-  await saveVows(actor, vows);
-  if (next.requiresApproval && ["approve", "accept", "restore"].includes(action)) await writeVowLedger(actor, next);
+  // Ledger first: saveVows then syncs the effects with the approval already in place.
+  if (["approve", "accept", "restore"].includes(action)) await writeVowLedger(actor, next);
   if (["reject", "revoke"].includes(action)) await writeVowLedger(actor, next, false);
+  await saveVows(actor, vows);
+  // Mutual vows: the GM's decisions bind both copies.
+  if (game.user.isGM && next.kind === "mutual" && next.partner && ["revoke", "fulfill", "restore", "confirmBreach"].includes(action)) {
+    const other = await fromUuid(next.partner).catch(() => null);
+    const ov = other ? getVows(other) : [];
+    const j = ov.findIndex((v) => v.id === id);
+    if (j >= 0) {
+      try {
+        ov[j] = applyTransition(ov[j], action, { isGM: true }, { reason, by: game.user.id });
+        if (action === "restore") await writeVowLedger(other, ov[j]);
+        if (action === "revoke") await writeVowLedger(other, ov[j], false);
+        await saveVows(other, ov);
+      } catch { /* the other copy already moved */ }
+    }
+  }
   if (!silent) await vowChat(actor, next, `<p><i class="fas fa-handshake" aria-hidden="true"></i> ${esc(next.name)}: ${esc(t(`Vow.State.${next.state}`))}${reason ? ` — ${esc(reason)}` : ""}</p>`);
   return true;
 }
@@ -5471,6 +5511,14 @@ async function vowChat(actor, vow, html) {
   if (vow?.visibility !== "gm") return chat(actor, html);
   const whisper = [...game.users].filter((u) => u.isGM || actor.testUserPermission?.(u, "OWNER")).map((u) => u.id);
   return chat(actor, html, { whisper });
+}
+/** Rounds and hours start when the vow becomes active; a rounds duration made outside combat starts with the next combat. */
+function startVowDuration(v) {
+  const d = v.duration;
+  if (!d) return v;
+  if (Number(d.seconds) > 0) return { ...v, duration: { ...d, since: game.time?.worldTime ?? 0 } };
+  if (Number(d.rounds) > 0) return { ...v, duration: { ...d, combatId: game.combat?.started ? game.combat.id : null, round: game.combat?.round ?? 0 } };
+  return v;
 }
 async function vowNotifyGM(actor, vow) {
   const whisper = [...game.users].filter((u) => u.isGM).map((u) => u.id);
@@ -5549,6 +5597,7 @@ async function vowPunishment(actor) {
 async function deleteVow(actor, id) {
   const ok = await confirmDialog(t("Vow.Delete"), `<p>${t("Vow.DeleteConfirm")}</p>`);
   if (!ok) return;
+  if (game.user.isGM) await writeVowLedger(actor, { id }, false);
   await saveVows(actor, getVows(actor).filter((v) => v.id !== id));
 }
 
@@ -5563,10 +5612,10 @@ async function endCombatVows(actor) {
   const vows = getVows(actor);
   const ending = vows.filter((v) => v.state === "active" && v.endsOn === "combat");
   if (!ending.length) return;
-  // "Until combat ends" vows (Revealing One's Hand) end legitimately: expired, not broken.
+  // "Until combat ends" vows (Revealing One's Hand) switch off and unlock, as before 2.22: they can be made again.
   for (const v of ending) {
     const i = vows.indexOf(v);
-    vows[i] = normalizeVow({ ...applyTransition(v, "expire", { isGM: true }, { by: game.user.id, reason: "combat" }), locked: false });
+    vows[i] = normalizeVow({ ...applyTransition(v, "autoSuspend", { isGM: true }, { by: game.user.id, reason: "combatEnd" }), locked: false });
   }
   await saveVows(actor, vows);
   await chat(actor, `<p><i class="fas fa-handshake"></i> ${t("Vow.CombatEnded", { names: ending.map((v) => esc(v.name)).join(", ") })}</p>`);
@@ -5834,7 +5883,7 @@ function makeVowClass() {
         const alerts = (v.alerts ?? []).map((a) => `<li class="jjk-vow-alert"><i class="fas fa-triangle-exclamation" aria-hidden="true"></i> ${esc(a.text || a.event)}
           ${gm ? `${b("confirmBreach", "fa-gavel", t("Vow.ConfirmBreach"), `data-alert="${esc(a.id)}"`)}${b("dismissAlert", "fa-eraser", t("Vow.DismissAlert"), `data-alert="${esc(a.id)}"`)}` : ""}</li>`).join("");
         const hist = (v.history ?? []).slice(-8).reverse().map((h) => `<li>${esc(new Date(h.at).toLocaleString())} · ${esc(t(`Vow.State.${h.to}`))}${h.reason ? ` — ${esc(h.reason)}` : ""}${h.by && game.users.get(h.by) ? ` (${esc(game.users.get(h.by).name)})` : ""}</li>`).join("");
-        return `<li class="jjk-vow ${live ? "on" : finished ? (v.state === "broken" ? "broken" : "done") : "off"}" data-id="${v.id}" data-actor="${actor.uuid}">
+        return `<li class="jjk-vow ${live ? "on" : finished ? (v.state === "broken" ? "broken" : "done") : "off"}" data-id="${esc(v.id)}" data-actor="${esc(actor.uuid)}">
           <header><strong>${esc(v.name)}</strong> <span class="jjk-chip">${v.kind === "mutual" ? t("Vow.Mutual") : t("Vow.Personal")}</span>
             <span class="jjk-chip ${live ? "on" : ""}">${esc(t(`Vow.State.${v.state}`))}${v.unapproved ? ` · ${t("Vow.Unapproved")}` : ""}</span>
             ${v.locked && live ? ` <i class="fas fa-lock" title="${t("Vow.Locked")}" aria-label="${t("Vow.Locked")}"></i>` : ""}
@@ -5929,10 +5978,10 @@ async function gmAcceptVow({ actorUuid, id }, user) {
   const mine = proposer && getVows(proposer).find((v) => v.id === id);
   if (!mine || mine.state !== "approved") return false;
   const gmWho = { isGM: true };
-  for (const [actor, vow] of [[partnerActor, copy], [proposer, mine]]) {
-    const vows = getVows(actor).map((v) => (v.id === id ? { ...applyTransition(v, "accept", gmWho, { by: user.id }), locked: v.lock !== "none" } : v));
+  for (const [actor] of [[partnerActor, copy], [proposer, mine]]) {
+    const vows = getVows(actor).map((v) => (v.id === id ? startVowDuration({ ...applyTransition(v, "accept", gmWho, { by: user.id }), locked: v.lock !== "none" }) : v));
+    if (setting("vowApproval")) await writeVowLedger(actor, vows.find((v) => v.id === id));
     await saveVows(actor, vows);
-    if (vow.requiresApproval) await writeVowLedger(actor, vows.find((v) => v.id === id));
   }
   await vowChat(proposer, mine, `<div class="jjk5e-card"><h3><i class="fas fa-handshake" aria-hidden="true"></i> ${t("Vow.Made")}: ${esc(mine.name)}</h3><p>${esc(proposer.name)} · ${esc(partnerActor.name)}</p></div>`);
   return true;
@@ -5953,24 +6002,42 @@ const vowAuthority = (actor) => {
   return owners[0]?.id === game.user.id;
 };
 const VOW_WORK = new Map();
-/** Feed one event to an actor's vows (serialised per actor). key de-duplicates repeated hooks of the same event. */
-function vowEvent(actor, event, ctx, key) {
-  if (!actor || !vowAuthority(actor)) return Promise.resolve(false);
-  const raw = actor.getFlag?.(MODULE_ID, "vows");
-  if (!Array.isArray(raw) || !raw.length) return Promise.resolve(false);
-  const id = actor.uuid;
-  const run = (VOW_WORK.get(id) ?? Promise.resolve()).catch(() => null).then(() => applyVowEvent(actor, event, ctx, key));
+/** Every write to an actor's vows from the monitor, durations and combat end runs through this per-actor queue. */
+function vowQueue(actor, fn) {
+  const id = actor?.uuid ?? "?";
+  const run = (VOW_WORK.get(id) ?? Promise.resolve()).catch(() => null).then(fn);
   VOW_WORK.set(id, run);
   run.finally(() => { if (VOW_WORK.get(id) === run) VOW_WORK.delete(id); }).catch(() => null);
   return run;
 }
-async function applyVowEvent(actor, event, ctx, key) {
+// Events that fire only on the client that acted (postUseActivity, applyDamage, restCompleted, summons).
+const VOW_LOCAL = new Set(["techniqueUse", "reaction", "weapon", "damageTaken", "damageDealt", "rest", "summon", "summonEnd"]);
+/**
+ * Feed one event to an actor's vows. key de-duplicates repeated hooks of the same event. Shared events (combat,
+ * time, document updates) are handled by the authority; local events by the acting client when it owns the actor,
+ * otherwise they are sent to the GM, who accepts them only as possible-breach alerts.
+ */
+function vowEvent(actor, event, ctx, key, { remote = false } = {}) {
+  if (!actor) return Promise.resolve(false);
+  const raw = actor.getFlag?.(MODULE_ID, "vows");
+  if (!Array.isArray(raw) || !raw.length) return Promise.resolve(false);
+  const local = VOW_LOCAL.has(event) && !remote;
+  if (local && !(isActiveGM() || actor.isOwner)) {
+    const gm = game.users?.activeGM;
+    gm?.query?.(VOW_QUERY, { operation: "event", actorUuid: actor.uuid, event, ctx, key }, { timeout: 30000 })?.catch?.(() => null);
+    return Promise.resolve(false);
+  }
+  if (!local && !remote && !vowAuthority(actor)) return Promise.resolve(false);
+  return vowQueue(actor, () => applyVowEvent(actor, event, ctx, key, { alertsOnly: remote }));
+}
+async function applyVowEvent(actor, event, ctx, key, { alertsOnly = false } = {}) {
   let vows = getVows(actor), changed = false;
   const notes = [];
   for (let i = 0; i < vows.length; i++) {
     const v = vows[i];
     if (v.mode === "manual" || v.unapproved) continue;
     for (const rule of matchingRules(v, event, ctx)) {
+      if (alertsOnly && rule.then !== "alert") continue;   // a forwarded event can only raise a question for the GM
       const act = rule.then === "alert" ? null : { fulfill: "fulfill", expire: "expire", suspend: "autoSuspend" }[rule.then];
       if (!act) {
         const next = addAlert(vows[i], { key: key ?? `${Date.now()}`, event, text: t("Vow.PossibleBreach", { event: t(`Vow.Event.${event}`) }) });
@@ -5994,16 +6061,29 @@ async function applyVowEvent(actor, event, ctx, key) {
 }
 /** Durations: worldTime (hours) and rounds. */
 async function checkVowDurations(actor, ctx) {
-  if (!vowAuthority(actor)) return;
-  const vows = getVows(actor);
-  let changed = false;
-  for (let i = 0; i < vows.length; i++) if (durationOver(vows[i], ctx)) { vows[i] = applyTransition(vows[i], "expire", { isGM: true }, { reason: "duration" }); changed = true; }
-  if (changed) await saveVows(actor, vows);
+  if (!vowAuthority(actor) || !Array.isArray(actor.getFlag?.(MODULE_ID, "vows"))) return;
+  return vowQueue(actor, async () => {
+    const vows = getVows(actor);
+    let changed = false;
+    for (let i = 0; i < vows.length; i++) {
+      const d = vows[i].duration;
+      // A rounds duration started outside combat begins with this combat.
+      if (vows[i].state === "active" && Number(d?.rounds) > 0 && !d.combatId && ctx.combatId) { vows[i] = { ...vows[i], duration: { ...d, combatId: ctx.combatId, round: ctx.round } }; changed = true; continue; }
+      if (durationOver(vows[i], ctx)) { vows[i] = applyTransition(vows[i], "expire", { isGM: true }, { reason: "duration" }); changed = true; }
+    }
+    if (changed) await saveVows(actor, vows);
+  });
 }
 function installVowMonitor() {
   if (CONFIG.queries) CONFIG.queries[VOW_QUERY] = async (msg, { user } = {}) => {
     if (!isActiveGM() || !user?.active) return false;
     if (msg?.operation === "accept") return gmAcceptVow(msg, user);
+    if (msg?.operation === "event" && VOW_LOCAL.has(msg.event) && typeof msg.key === "string") {
+      const actor = await fromUuid(msg.actorUuid ?? "").catch(() => null);
+      if (actor?.documentName !== "Actor") return false;
+      const ctx = JSON.parse(JSON.stringify(msg.ctx ?? {}));   // plain data only
+      return vowEvent(actor, msg.event, ctx, `remote:${msg.key}`, { remote: true });
+    }
     return false;
   };
   const pct = (v, m) => (Number(m) > 0 ? Math.round((Number(v) / Number(m)) * 100) : 100);
@@ -6486,7 +6566,7 @@ Hooks.once("ready", () => {
   });
   Hooks.on("deleteCombat", (combat) => {
     if (!isActiveGM()) return;
-    for (const c of combat.combatants ?? []) if (c.actor) endCombatVows(c.actor);
+    for (const c of combat.combatants ?? []) if (c.actor) vowQueue(c.actor, () => endCombatVows(c.actor));
   });
   Hooks.on("combatTurnChange", (combat) => turnSummary(combat));
   Hooks.on("updateActor", (actor) => { refreshCareerApps(actor); });

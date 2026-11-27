@@ -371,7 +371,8 @@
         "orphanRecord": "Record without a token",
         "orphanToken": "Token without a summoner",
         "unrecorded": "Summon token not recorded"
-      }
+      },
+      "UpkeepDeferred": "{name}: the upkeep could not be charged now; it stays out and is charged again next turn."
     },
     "Panel": {
       "Open": "Open JJK panel",

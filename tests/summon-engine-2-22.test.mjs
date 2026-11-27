@@ -12,7 +12,7 @@ function world({ gm = true } = {}) {
   globalThis.Hooks = { on: (name, fn) => { (hooks.get(name) ?? hooks.set(name, []).get(name)).push(fn); }, call: (name, ...a) => { for (const f of hooks.get(name) ?? []) if (f(...a) === false) return false; return true; } };
   const run = async (name, ...a) => { for (const f of hooks.get(name) ?? []) await f(...a); await new Promise((r) => setTimeout(r, 0)); await new Promise((r) => setTimeout(r, 0)); };
   const users = [{ id: "gm", isGM: true, active: gm }, { id: "p1", isGM: false, active: true }];
-  globalThis.game = { user: users[0], users: Object.assign(users, { activeGM: gm ? users[0] : null }), combats: [], scenes: [], actors: [], time: { worldTime: 0 } };
+  globalThis.game = { user: users[0], users: Object.assign(users, { activeGM: gm ? users[0] : null, get: (id) => users.find((u) => u.id === id) }), combats: [], scenes: [], actors: [], time: { worldTime: 0 } };
   globalThis.ui = { notifications: { warn: (m) => chats.push({ warn: m }), info: () => null } };
   globalThis.CONFIG = { queries: {} };
   globalThis.fromUuid = async (u) => docs.get(u) ?? null;
@@ -154,4 +154,36 @@ test("2.22 · registry: broken data is normalised and old finished records are p
   assert.equal(Object.keys(kept.entries).length, 41);
   assert.ok(kept.entries.live && kept.entries.e59 && !kept.entries.e0);
   assert.equal(S.summonTransition({ entries: { a: { id: "a", state: "destroyed" } } }, "a", "dismissed").entries.a.state, "destroyed", "first reason wins");
+});
+
+test("2.22 · audit: a forged record cannot delete someone else's token; ids and rules are sanitised", async () => {
+  const w = world(); const yuta = w.actor("Yuta");
+  const boss = w.token({ name: "Boss" });
+  await yuta.update({ "flags.jjk5e.summonRegistry": { v: 1, entries: { forged1: { id: "forged1", state: "active", tokenUuid: boss.uuid, rules: { upkeep: "<img onerror=x>" } },
+    'x"><img': { id: 'x"><img', state: "active" } } } });
+  const reg = w.engine.readRegistry(yuta);
+  assert.deepEqual(Object.keys(reg.entries), ["forged1"]);
+  assert.equal(reg.entries.forged1.rules.upkeep, 0);
+  assert.equal(await w.engine.end(yuta, "forged1"), true);
+  assert.ok(w.scene.tokens.includes(boss), "the boss token survives");
+  assert.equal(await w.engine.end(yuta, "forged1"), false, "a second end does nothing");
+});
+
+test("2.22 · audit: a timed summon made outside combat expires with world time", async () => {
+  const w = world(); const yuta = w.actor("Yuta"); const timed = item({ rounds: 10 });
+  game.time.worldTime = 1000;
+  const tk = await summonOne(w, yuta, timed, activity(timed));
+  await w.run("updateWorldTime", 1059);
+  assert.equal(w.engine.readRegistry(yuta).entries[tk.flags.jjk5e.summon.id].state, "active");
+  await w.run("updateWorldTime", 1060);
+  assert.equal(w.engine.readRegistry(yuta).entries[tk.flags.jjk5e.summon.id].state, "expired");
+});
+
+test("2.22 · audit: a token created by a player who does not own the summoner is not recorded", async () => {
+  const w = world(); const yuta = w.actor("Yuta", { owner: "p1" });
+  game.users.push({ id: "p9", isGM: false, active: true });
+  const data = { name: "Fake", flags: { jjk5e: { summon: { id: "fake1", summonerUuid: yuta.uuid } } } };
+  const tk = w.token(data);
+  await w.run("createToken", tk, {}, "p9");
+  assert.equal(Object.keys(w.engine.readRegistry(yuta).entries).length, 0);
 });

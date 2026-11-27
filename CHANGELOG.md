@@ -1,5 +1,38 @@
 # Changelog
 
+## 2.22.0 - Advanced Summoning & Binding Vow Update
+
+### Motor de invocaciones (Advanced Summoning Engine)
+- Cada invocación lleva una identidad única desde que se crea su token: invocador, objeto, actividad, perfil y técnica. Vale para dnd5e y para la invocación del propio módulo. El registro está en el invocador (`flags.jjk5e.summonRegistry`, v1), es idempotente y se escribe en orden.
+- **Ciclo de vida automático:**
+  - Se registra por qué termina cada invocación: desinvocada, destruida a 0 PG, expirada o perdida.
+  - La duración se cuenta en rondas, o en tiempo del mundo si se invocó fuera de combate.
+  - Terminan con el combate o con el descanso largo, si la técnica lo declara, y con la muerte del invocador.
+  - dnd5e sigue gestionando la concentración.
+  - El mantenimiento en EM se cobra al inicio del turno del invocador.
+- **Reglas por técnica como datos** (`summonRules`: límite, única, mantenimiento, duración, finales). No hay límites universales. Vengeful Spirit a voluntad dura 1 minuto, solo puede haber uno y termina con el descanso largo.
+- **Gestor de invocaciones** (panel JJK, barra de la ficha y pestaña DJ): retrato, PG, CA, EM, duración restante, condiciones, técnica, abrir ficha, seleccionar token y desinvocar. La vista del DJ muestra todas las invocaciones del mundo y repara registros huérfanos. También aparece en la comprobación de estado.
+- **Seguridad:** nunca se borra un token que no lleve su propio registro, los datos se sanean y escapan, y solo se registran los tokens creados por un DJ o por un dueño del invocador. Las peticiones de jugadores (`dismiss`, `rest`) pasan por el DJ.
+
+### Motor de votos vinculantes (Advanced Binding Vow Engine)
+- **Estados:** borrador, pendiente, esperando al compañero, activo, suspendido, cumplido, incumplido, expirado y revocado. Cada voto guarda su historial. Los votos antiguos se migran solos (v2) y conservan su significado.
+- **Aprobación del DJ (ajuste opcional):**
+  - El voto de un jugador queda pendiente, y en los mutuos el otro jugador también tiene que aceptarlo.
+  - La aprobación se guarda donde solo el DJ escribe, ligada a la mecánica del voto: un voto editado o falsificado no aplica efectos hasta que se vuelve a aprobar.
+  - Los votos que ya existían cuando se activa el ajuste se registran una vez.
+- **Reglas vigiladas como datos** (sin código):
+  - Eventos: turno, combate, técnica, reacción, arma, daño causado y recibido, condición, PG, EM, dominio, invocación, descanso y tiempo.
+  - Se combinan con Y, O, NO y comparaciones.
+  - Un incumplimiento nunca se castiga solo: el DJ lo confirma o lo descarta.
+- **Duración** en rondas u horas, desde que el voto se activa.
+- **Gestor de votos** (por actor y vista del DJ): aprobar, rechazar, aceptar, revocar, restaurar, marcar cumplido, confirmar o descartar alertas, e historial.
+- Taming vigila que no dañes a la maldición domada. Revealing One's Hand se suspende al terminar el combate, como antes.
+
+### Integración
+- Los votos reciben los eventos de invocación (`jjk5e.summoned` / `jjk5e.summonEnded`).
+- La comprobación de estado avisa de registros de invocación desincronizados y de votos pendientes.
+
+**Validación:** pruebas automatizadas y simuladas (harness) en verde, más dos auditorías independientes de los dos motores, ya corregidas. Falta la prueba real en Foundry con varios jugadores. Documentación en `docs/design/advanced-summoning-engine.md` y `docs/design/advanced-binding-vow-engine.md`.
 ## 2.21.1 - Auditoría completa: correcciones
 Cinco revisiones independientes: energía maldita, dominios, contadores, interfaz y compendios. El detalle está en `docs/audits/AUDIT_2.21.1.md`.
 

@@ -86,7 +86,8 @@ test("2.22 · monitor: a watched breach only raises an alert (no punishment); 'u
   assert.deepEqual([v.state, v.alerts.length], ["active", 1]);
   const rev = await J.createVow(actor, { preset: "reveal" });
   await J.endCombatVows(actor);
-  assert.equal(J.getVows(actor).find((x) => x.id === rev.id).state, "expired");
+  const ended = J.getVows(actor).find((x) => x.id === rev.id);
+  assert.deepEqual([ended.state, ended.locked], ["suspended", false], "as before 2.22: it can be made again next fight");
   assert.equal(J.getVows(actor)[0].state, "active", "the taming vow is untouched");
 });
 
@@ -118,4 +119,33 @@ test("2.22 · cross-engine: a destroyed summon raises a review on a vow that wat
   await env.Hooks.run("jjk5e.summonEnded", yuta, { id: "s1", name: "Rika", state: "destroyed" });
   await env.settle();
   assert.equal(J.getVows(yuta)[0].alerts.length, 1, "the same event counts once");
+});
+
+test("2.22 · audit: approval cannot be skipped by editing the flag; approved effects are live at once; existing vows are seeded", async () => {
+  const { env, J } = await boot({ vowApproval: false });
+  const old = env.addActor({ name: "Veteran", type: "character" });
+  await J.createVow(old, { preset: "reveal" });                         // made before approval was required
+  await env.game.settings.set("jjk5e", "vowApproval", true);
+  await J.seedVowLedger();
+  assert.equal(J.getVows(old)[0].active, true, "pre-existing vows keep working");
+  const actor = env.addActor({ name: "Cheater", type: "character" });
+  await actor.setFlag("jjk5e", "vows", [{ id: "forge000000000001", name: "Free power", state: "active", requiresApproval: false, terms: [{ type: "dmg", value: 10 }] }]);
+  assert.equal(J.getVows(actor)[0].active, false, "no ledger entry, no effect");
+  await J.syncVowEffects(actor);
+  assert.ok([...actor.effects].every((e) => e.disabled), "its effect stays off");
+  // GM approval: the effect is enabled by the same save (ledger written first)
+  await actor.setFlag("jjk5e", "vows", [{ ...actor.getFlag("jjk5e", "vows")[0], state: "pending" }]);
+  await J.vowAction(actor, "forge000000000001", "approve");
+  assert.equal(J.getVows(actor)[0].active, true);
+  assert.ok([...actor.effects].some((e) => e.flags?.jjk5e?.vow && !e.disabled), "enabled at once");
+});
+
+test("2.22 · audit: a GM-created mutual vow is approved on both sides; revoking binds both copies", async () => {
+  const { env, J } = await boot();
+  const a = env.addActor({ name: "Master", type: "character" });
+  const b = env.addActor({ name: "Servant", type: "character" });
+  const vow = await J.createVow(a, { preset: "master", partner: b.uuid });
+  assert.deepEqual([J.getVows(a)[0].active, J.getVows(b)[0].active], [true, true]);
+  await J.vowAction(a, vow.id, "revoke");
+  assert.deepEqual([J.getVows(a)[0].state, J.getVows(b)[0].state], ["revoked", "revoked"]);
 });
