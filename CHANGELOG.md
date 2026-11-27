@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.20.0 - Inversiones de técnica y economía de combate
+- Desbloquea inversiones al cumplir sus requisitos, incluidas las de técnicas copiadas mediante Duplicated Reversal.
+- Dark Vortex respeta la concentración y el daño por nivel. Reversal Red separa el derribo por colisión del ataque inicial. Sunshine requiere el Sunny Day del propio lanzador y consume un ataque disponible.
+- Registra reacciones hasta el turno propio y comprueba acción, acción adicional, movimiento y condiciones al usar técnicas. Cursed Silence interrumpe una acción en Midi-QOL cuando falla la salvación.
+- Evita el doble cobro al procesar una actividad repetida y libera reservas interrumpidas antes de iniciar el consumo. La tarjeta original conserva sus controles de recursos nativos.
+
 ## 2.19.0 - Motor transaccional de energía maldita
 - Cada técnica encadenada registra su propio coste. Los dobles clics y reintentos de confirmación conservan un solo cobro por uso.
 - Midi-QOL puede continuar una actividad desde su tarjeta original verificada tras recargar.

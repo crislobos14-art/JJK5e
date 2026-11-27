@@ -82,24 +82,38 @@
         "enabled": false,
         "formula": ""
        },
-       "scaling": {}
-      },
-      {
-       "number": 2,
-       "denomination": 8,
-       "bonus": "",
-       "types": [
-        "force"
-       ],
-       "custom": {
-        "enabled": false,
-        "formula": ""
-       },
        "scaling": {
         "number": 2
        }
       }
      ]
+    },
+    "effects": []
+   },
+   "ZiuBeW7MdsFDONgb": {
+    "_id": "ZiuBeW7MdsFDONgb",
+    "type": "utility",
+    "name": "Collision: apply prone",
+    "sort": 900000,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "A creature hits an obstacle after being launched by Reversal Red."
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false
+     },
+     "spellSlot": false
+    },
+    "target": {
+     "affects": {
+      "type": "creature",
+      "count": "1",
+      "choice": true
+     },
+     "override": true
     },
     "effects": [
      {
@@ -107,23 +121,6 @@
       "onSave": false
      }
     ]
-   },
-   "ZiuBeW7MdsFDONgb": {
-    "_id": "ZiuBeW7MdsFDONgb",
-    "type": "utility",
-    "name": "Impact: remaining launch distance as falling damage + prone",
-    "sort": 900000,
-    "activation": {
-     "type": "special",
-     "value": null,
-     "condition": "Creatures in range must make a Strength save, taking 4d8 force damage + an additional 2..."
-    },
-    "consumption": {
-     "targets": [],
-     "scaling": {
-      "allowed": false
-     }
-    }
    }
   }
  },
@@ -133,8 +130,7 @@
     "douy3a4rcRjk6FVc": 2
    },
    "ceCosts": {
-    "douy3a4rcRjk6FVc": 2,
-    "ZiuBeW7MdsFDONgb": 2
+    "douy3a4rcRjk6FVc": 2
    },
    "technique": "Limitless",
    "reversal": true,
@@ -151,9 +147,9 @@
      ]
     ]
    },
-   "automationNotes": "Launched 20 ft per 2 CE (half on save).",
+   "automationNotes": "Launch 20 ft per 2 CE, half on a success. Resolve any remaining-distance fall damage at the collision and use the collision activity to apply prone.",
    "automation": "automated",
-   "rev": "b5aa063dd4"
+   "rev": "b32439f30e"
   }
  },
  "effects": [

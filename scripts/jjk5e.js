@@ -782,11 +782,58 @@ const ownTurn = (actor) => !!game.combat?.started && !!actor && game.combat.comb
 // Local turn ledger, complementary to Midi's native action/bonus tracking.
 // Only explicit JJK free actions are counted; ordinary object interactions are separate.
 const ACTION_TURNS=new Map();
+const COMBAT_REACTIONS = new Map();
+const RESOLVED_ACTIVITY_USES = new WeakMap();
+
+function claimActivityResult(activity, usage, results) {
+  const identity = results?.message ?? results ?? usage;
+  if (!identity || typeof identity !== "object") return true;
+  let activities = RESOLVED_ACTIVITY_USES.get(identity);
+  if (!activities) RESOLVED_ACTIVITY_USES.set(identity, activities = new Set());
+  const key = ceUsageKey(activity);
+  if (activities.has(key)) return false;
+  activities.add(key);
+  return true;
+}
+
+function reactionCycle(actor) {
+  const combat = game.combat;
+  if (!combat?.started || !actor) return null;
+  const index = combat.turns?.findIndex(c => c.actor?.uuid === actor.uuid) ?? -1;
+  if (index < 0) return null;
+  return combat.round - (combat.turn < index ? 1 : 0);
+}
+function reactionSpent(actor, { recheck = false } = {}) {
+  const cycle = reactionCycle(actor);
+  const local = cycle !== null && COMBAT_REACTIONS.get(game.combat.id)?.get(actor.uuid) === cycle;
+  return local || (!recheck && !!globalThis.MidiQOL?.hasUsedReaction?.(actor));
+}
+function recordReaction(actor) {
+  const cycle = reactionCycle(actor);
+  if (cycle === null) return;
+  let reactions = COMBAT_REACTIONS.get(game.combat.id);
+  if (!reactions) COMBAT_REACTIONS.set(game.combat.id, reactions = new Map());
+  reactions.set(actor.uuid, cycle);
+}
+function attackReplacement(activity) {
+  return activity?.id === "vvg0y1Ga9QXl6bXU" && activity.item?.flags?.jjk5e?.reversal === true;
+}
+function usesAttackSlot(activity) {
+  return attackReplacement(activity) || (activity?.type === "attack" && activity.activation?.type === "action" &&
+    ["weapon", "unarmed"].includes(activity.attack?.type?.classification));
+}
+function activityReaction(actor, activity) {
+  return String(activity?.activation?.type ?? "").startsWith("reaction") || isClaimedDomainReaction(actor, activity);
+}
+function techniqueIncapacitated(actor) {
+  return ["incapacitated", "unconscious", "stunned", "paralyzed", "petrified", "dead"].some(status => actor?.statuses?.has(status));
+}
+
 function actionTurn(actor){
   if(!ownTurn(actor))return null;
   const c=game.combat, key=[c.id,c.round,c.turn,c.combatant.id].join(":");
   let state=ACTION_TURNS.get(c.id);
-  if(state?.key!==key){state={key,action:false,bonus:false,free:false,moved:false,full:false,lockMovement:false};ACTION_TURNS.set(c.id,state);}
+  if(state?.key!==key){state={key,action:false,bonus:false,free:false,moved:false,full:false,lockMovement:false,attacks:0};ACTION_TURNS.set(c.id,state);}
   return state;
 }
 function unlimitedDomainSwap(activity) {
@@ -827,18 +874,47 @@ function ceTransactional(activity){
   if(!ceAuthorityEnabled()||!setting("autoSpendCE")||!managedCE(activity)) return false;
   return CE_ADAPTER_TARGETS.has(`CONFIG.DND5E.activityTypes.${activity?.type}.documentClass.prototype.consume`);
 }
-function recordTurnActivity(activity){
-  const actor=activity?.actor??activity?.item?.actor;
-  const state=actionTurn(actor);
-  if(!state)return;
-  if(isJJKFree(activity) && !unlimitedDomainSwap(activity))state.free=true;
-  if(!isFullTurn(activity)&&activity.activation?.type==="action")state.action=true;
-  if(activity.activation?.type==="bonus")state.bonus=true;
+function recordTurnActivity(activity, usage) {
+  const actor = activity?.actor ?? activity?.item?.actor;
+  if (usage?.consume?.action === false && !attackReplacement(activity) && !isClaimedDomainReaction(actor, activity)) return;
+  if (activityReaction(actor, activity)) {
+    recordReaction(actor);
+    if (isClaimedDomainReaction(actor, activity) && !globalThis.MidiQOL?.hasUsedReaction?.(actor)) {
+      Promise.resolve(globalThis.MidiQOL?.setReactionUsed?.(actor)).catch(err => reportError("domain reaction", err));
+    }
+    return;
+  }
+  const state = actionTurn(actor);
+  if (!state) return;
+  if (isJJKFree(activity) && !unlimitedDomainSwap(activity)) state.free = true;
+  if (usesAttackSlot(activity)) {
+    state.action = true;
+    state.attacks++;
+  } else if (!isFullTurn(activity) && activity.activation?.type === "action") state.action = true;
+  if (activity.activation?.type === "bonus") state.bonus = true;
 }
 function isClaimedDomainReaction(actor,activity){
-  if(activity?.item?.flags?.jjk5e?.domainActivity!==activity?.id)return false;
+  if (!activity?.id || activity.item?.flags?.jjk5e?.domainActivity !== activity.id) return false;
   const claim=actor?.getFlag(MODULE_ID,"domainReactionClaim");
   return !!claim?.id && Number(claim.expires)>nowMs();
+}
+function reversalRequirements(actor, item) {
+  return hasRCT(actor) && actor.items.some(i => baseName(i) === "Cursed Technique Reversal") &&
+    characterLevel(actor) >= (Number(item.flags.jjk5e.reversalLevel) || 1);
+}
+function reversalFollowUpAllowed(actor, activity) {
+  if (!activity?.item?.flags?.jjk5e?.reversal) return true;
+  if (activity.id === "HYyYEzjQxtbFtOSu") {
+    return !!actor?.effects?.some(effect => effect.origin === activity.item.uuid &&
+      (effect.system?.type === "concentrating" || effect.statuses?.has?.("concentrating")) && liveWard(effect));
+  }
+  if (["vvg0y1Ga9QXl6bXU", "nFOeof9kzI5eiJoZ"].includes(activity.id)) {
+    const sunnyDay = actor?.items?.find(item => item.flags?.jjk5e?.reversal && baseName(item) === "Sunny Day");
+    return !!sunnyDay && !!actor.effects?.some(effect => liveWard(effect) &&
+      (effect.origin === sunnyDay.uuid || effect.origin === sunnyDay.uuid + ".Activity.OM31HL66a1JtFZY2") &&
+      (effect.flags?.jjk5e?.kind === "sunnyDaySource" || baseName(effect) === "Sunny Day"));
+  }
+  return true;
 }
 function goldenWeekBlocks(actor, activity) {
   return activity?.id === "kZc1uthKYagtyfvi" && activity.item?.flags?.jjk5e?.technique === "Golden Hour" &&
@@ -846,7 +922,21 @@ function goldenWeekBlocks(actor, activity) {
 }
 function actionGate(actor,activity,{recheck=false}={}){
   const state=actionTurn(actor);
-  if (goldenWeekBlocks(actor, activity)) return false;
+  const flags = activity?.item?.flags?.jjk5e;
+  if (flags?.technique && (techniqueIncapacitated(actor) || inBurnout(actor) || hasKind(actor, "domainAmplification"))) return false;
+  if (actor?.type === "character" && flags?.reversal && !reversalRequirements(actor, activity.item)) return false;
+  if (!reversalFollowUpAllowed(actor, activity) || goldenWeekBlocks(actor, activity)) return false;
+  if (game.combat?.started && flags?.technique) {
+    if (activityReaction(actor, activity)) return !reactionSpent(actor, { recheck });
+    if (attackReplacement(activity) || (!midiActive() && state && !isFullTurn(activity))) {
+      if (attackReplacement(activity)) return !!state && !state.full &&
+        ((!state.action && !globalThis.MidiQOL?.hasUsedAction?.(actor)) ||
+          (state.attacks > 0 && state.attacks < 1 + extraAttacks(actor)));
+      if (activity.activation?.type === "bonus" && state.bonus) return false;
+      if (activity.activation?.type === "action" && state.action &&
+          (!usesAttackSlot(activity) || !state.attacks || state.attacks >= 1 + extraAttacks(actor))) return false;
+    }
+  }
   if(activity?.item?.flags?.jjk5e?.optAction&&!optOn("additionalActions"))return false;
   if(isJJKFree(activity)&&game.combat?.started&&(!state||(state.free && !unlimitedDomainSwap(activity))))return false;
   if(isFullTurn(activity)&&game.combat?.started&&!isClaimedDomainReaction(actor,activity)&&(!state||(recheck?(state.action||state.bonus||state.full||(!lesserFullTurn(activity)&&state.moved)):fullTurnSpent(actor,activity))))return false;
@@ -867,7 +957,7 @@ function combatInteractionState(actor) {
   return { active, ownTurn: !!state, round: active ? game.combat.round : null,
     action: state?.action || state?.full ? true : used("hasUsedAction"),
     bonus: state?.bonus || state?.full ? true : used("hasUsedBonusAction"),
-    reaction: used("hasUsedReaction"), free: state ? !!state.free : null,
+    reaction: active ? reactionSpent(actor) : used("hasUsedReaction"), free: state ? !!state.free : null,
     moved: state ? !!state.moved : null, full: state ? !!state.full : null,
     lockMovement: state ? !!state.lockMovement : null,
     ce: pool ? {value:poolValue(pool),max:poolMax(pool),pending:cePending(pool)} : null };
@@ -887,9 +977,22 @@ function combatInteractionActivity(actor, activity) {
     allowed:actionGate(actor,activity) && (!secondaryDomain || canUseDomainActivity(actor,activity)), direct: !domain && ["action","bonus","full","free"].includes(kind)};
 }
 
+async function startSunnyDay(actor, activity) {
+  if (!actor?.isOwner || activity.id !== "OM31HL66a1JtFZY2" || activity.item?.flags?.jjk5e?.reversal !== true) return;
+  const existing = actor.effects.filter(effect => effect.flags?.jjk5e?.kind === "sunnyDaySource");
+  const [source] = await actor.createEmbeddedDocuments("ActiveEffect", [fxData({
+    name: activity.item.name, img: activity.item.img, origin: activity.item.uuid,
+    duration: { seconds: 120 }, flags: { jjk5e: { kind: "sunnyDaySource" } }
+  })]);
+  if (source) for (const effect of existing) await safeDelete(effect);
+}
+
 function registerActivityHooks() {
   Hooks.on("dnd5e.postCreateUsageMessage", linkUsageCard);
-  Hooks.on("deleteCombat",c=>ACTION_TURNS.delete(c.id));
+  Hooks.on("deleteCombat", combat => {
+    ACTION_TURNS.delete(combat.id);
+    COMBAT_REACTIONS.delete(combat.id);
+  });
   Hooks.on("preMoveToken",(token,movement)=>{
     const state=actionTurn(token.actor);
     // GM may adjudicate forced movement; only recorded cost-bearing player movement is blocked.
@@ -930,9 +1033,18 @@ function registerActivityHooks() {
       ui.notifications.warn(t("Notify.Burnout"));
       return false;
     }
+    if (actor?.type === "character" && activity.item?.flags?.jjk5e?.reversal &&
+        !reversalRequirements(actor, activity.item)) {
+      ui.notifications.warn(t("Reversal.Requirements"));
+      return false;
+    }
     // Full-Turn Action (Rules of Thumb): needs the action, bonus action and all movement still unused.
+    if (!reversalFollowUpAllowed(actor, activity)) {
+      ui.notifications.warn(t("Reversal.Inactive"));
+      return false;
+    }
     if (!actionGate(actor,activity)) {
-      ui.notifications.warn(t(goldenWeekBlocks(actor, activity) ? "Notify.GoldenWeekTimeStop" : "Notify.FullTurnUsed"));
+      ui.notifications.warn(t(goldenWeekBlocks(actor, activity) ? "Notify.GoldenWeekTimeStop" : "Notify.CombatActivityUnavailable"));
       return false;
     }
     const cost = totalActivityCECost(actor, activity, usageConfig);
@@ -973,7 +1085,10 @@ function registerActivityHooks() {
   });
 
   // D&D5e 6.1: this gate runs after the user selected CE scaling, before item consumption.
-  Hooks.on("dnd5e.preActivityConsumption", (activity, usageConfig) => {
+  Hooks.on("dnd5e.preActivityConsumption", (activity, usageConfig, messageConfig) => {
+    if (messageConfig?.message && ceTransactional(activity)) {
+      return ceContext(activity, usageConfig)?.state === "reservingNative";
+    }
     if (activity.item?.flags?.jjk5e?.domainActivity && activity.item.flags.jjk5e.domainActivity !== activity.id &&
         !canUseDomainActivity(activity.actor ?? activity.item.actor, activity)) return false;
     if (isCloneCreation(activity) && !canCreateClone(activity.item.actor, cloneQuantity(activity, usageConfig))) return false;
@@ -1000,15 +1115,15 @@ function registerActivityHooks() {
     const swapping = item?.flags?.jjk5e?.tokenSwap?.[activity.id];
     const selection = swapping && (SWAP_SELECTIONS.get(usageConfig) ?? selectedSwap(activity));
     if (swapping && !selection) return;
-    // Pay BEFORE opening domains or applying buffs. Failed CE payment must never
-    // leave a benefit in place. The pre-use gate handles ordinary insufficient CE.
-    if (setting("autoSpendCE") && actor && item) {
-      if(ceTransactional(activity)){
-        if (!cePostOnce(activity, usageConfig, "activity", results?.message)) return;
-      }else if (!(await payActivityCE(actor, activity, usageConfig))) return;
-    }
-    if(actor?.isOwner)recordTurnActivity(activity);
+    const transactional = ceTransactional(activity);
+    if (transactional && !cePostOnce(activity, usageConfig, "activity", results?.message)) return;
+    if (!claimActivityResult(activity, usageConfig, results)) return;
+    // Finish payment before opening domains or applying buffs.
+    if (!transactional && setting("autoSpendCE") && actor && item &&
+        !(await payActivityCE(actor, activity, usageConfig))) return;
+    if (actor?.isOwner) recordTurnActivity(activity, usageConfig);
     if(isFullTurn(activity)&&actor?.isOwner&&!isClaimedDomainReaction(actor,activity))await spendFullTurn(actor,activity);
+    await startSunnyDay(actor, activity);
     if(isQuickRecovery(activity)){
       if(!results || typeof results!=="object" || CE_RECOVERY_RESULTS.has(results)) return;
       CE_RECOVERY_RESULTS.add(results);
@@ -4374,9 +4489,41 @@ function tokenDistance(a, b) {
   } catch { return NaN; }
 }
 
+const CURSED_SILENCE_ROLLS = new Set();
+
+async function guardCursedSilence({ workflow, usage } = {}) {
+  const activity = workflow?.activity;
+  const actor = activity?.actor ?? activity?.item?.actor;
+  if (!actor?.isOwner || activity.activation?.type !== "action" || usage?.consume?.action === false) return;
+  const silence = actor.effects?.find(effect => liveWard(effect) && baseName(effect) === "Cursed Silence" &&
+    effect.flags?.jjk5e?.technique === "Cursed Speech");
+  if (!silence || typeof actor.rollSavingThrow !== "function") return;
+  if (CURSED_SILENCE_ROLLS.has(actor.uuid)) return false;
+  const turn = actionTurn(actor);
+  if (turn?.silenced || turn?.full || (game.combat?.started && globalThis.MidiQOL?.hasUsedAction?.(actor))) return false;
+  CURSED_SILENCE_ROLLS.add(actor.uuid);
+  try {
+    const dc = originSaveDC(silence);
+    const result = await actor.rollSavingThrow({ ability: "wis", target: dc }, { configure: false });
+    const roll = Array.isArray(result) ? result[0] : result;
+    if (!Number.isFinite(roll?.total)) return false;
+    if (!actor.effects?.some(effect => effect.id === silence.id && liveWard(effect)) || roll.total >= dc) return;
+    if (turn && actionTurn(actor) === turn) {
+      turn.action = true;
+      turn.silenced = true;
+      await globalThis.MidiQOL?.setActionUsed?.(actor);
+    }
+    ui.notifications.warn(t("Reversal.SilencedAction"));
+    return false;
+  } finally {
+    CURSED_SILENCE_ROLLS.delete(actor.uuid);
+  }
+}
+
 function registerMidiHooks() {
   if (!midiActive()) return;
   registerMidiCEBridge();
+  Hooks.on("midi-qol.preItemRollV2", guardCursedSilence);
   Hooks.on("midi-qol.preAttackRoll", workflow => {
     if(!midiCEGuard(workflow)) return false;
     const actor = workflow.actor;
@@ -7383,18 +7530,43 @@ MENU_ACTIONS.splice(MENU_ACTIONS.length - 1, 0,
 
 /* ---- v1.18: Cursed Technique Reversals — added automatically once the actor has the feat ---- */
 
-async function syncReversals(actor) {
+const reversalQueues = new Map();
+function syncReversals(actor) {
+  if (!actor?.isOwner || actor.type !== "character") return Promise.resolve(0);
+  const previous = reversalQueues.get(actor.uuid) ?? Promise.resolve();
+  const current = previous.catch(() => {}).then(() => grantActorReversals(actor));
+  reversalQueues.set(actor.uuid, current);
+  return current.finally(() => {
+    if (reversalQueues.get(actor.uuid) === current) reversalQueues.delete(actor.uuid);
+  });
+}
+async function grantActorReversals(actor) {
   if (!actor?.isOwner || actor.type !== "character") return 0;
   if (!hasRCT(actor) || !actor.items.some((i) => baseName(i) === "Cursed Technique Reversal")) return 0;
-  const techs = new Set([actor.getFlag(MODULE_ID, "technique"), ...actor.items.map((i) => i.flags?.jjk5e?.technique)].filter(Boolean));
+  const techs = new Set([actor.getFlag(MODULE_ID, "technique"), ...actor.items.map(i => i.flags?.jjk5e?.techniqueRoot)].filter(Boolean));
+  // Older characters may only have the taught activities, without a technique root.
+  if (!techs.size) for (const item of actor.items) {
+    if (item.flags?.jjk5e?.technique && !item.flags.jjk5e.reversal) techs.add(item.flags.jjk5e.technique);
+  }
   if (!techs.size) return 0;
   const pack = jjkPack(TECH_PACK);
   if (!pack) return 0;
   const index = await pack.getIndex({ fields: ["flags.jjk5e"] });
   const lvl = characterLevel(actor);
-  const owned = new Set(actor.items.map((i) => baseName(i)));
-  const ids = index.filter((e) => e.flags?.jjk5e?.reversal && techs.has(e.flags.jjk5e.technique)
-    && (Number(e.flags.jjk5e.reversalLevel) || 1) <= lvl && !owned.has(baseName(e))).map((e) => e._id);
+  const owned = new Set(actor.items.map(i => baseName(i)));
+  const ownedSources = new Set(actor.items.map(i => i._stats?.compendiumSource ?? i.flags?.core?.sourceId).filter(Boolean).map(uuid => uuid.split(".").pop()));
+  const eligible = e => e.flags?.jjk5e?.reversal && (Number(e.flags.jjk5e.reversalLevel) || 1) <= lvl;
+  // Duplicated Reversal is passive. An owned base spell identifies the copied technique.
+  const duplicationId = "XiKZVS9s2x5a8XL9";
+  if (techs.has("Vengeful Spirit Manipulation") && (ownedSources.has(duplicationId) || owned.has("Duplicated Reversal") ||
+      index.some(e => e._id === duplicationId && eligible(e)))) {
+    for (const item of actor.items) {
+      const flags = item.flags?.jjk5e;
+      if (item.type === "spell" && flags?.technique && !flags.reversal) techs.add(flags.technique);
+    }
+  }
+  const ids = index.filter(e => eligible(e) && techs.has(e.flags.jjk5e.technique) &&
+    !ownedSources.has(e._id) && !owned.has(baseName(e))).map(e => e._id);
   if (!ids.length) return 0;
   const docs = (await Promise.all(ids.map((id) => pack.getDocument(id)))).filter(Boolean).map((d) => {
     const o = d.toObject();
@@ -7403,6 +7575,7 @@ async function syncReversals(actor) {
     return o;
   });
   await actor.createEmbeddedDocuments("Item", docs);
+  if (docs.some(doc => doc.flags?.jjk5e?.dmgScale)) await applyScaling(actor);
   await chat(actor, `<p><i class="fas fa-rotate-left"></i> ${t("Reversal.Added", { names: docs.map((d) => esc(d.name)).join(", ") })}</p>`);
   return docs.length;
 }
@@ -7411,9 +7584,10 @@ Hooks.once("ready", () => {
   if (game.system?.id !== "dnd5e") return;
   game.modules.get(MODULE_ID).api.syncReversals = syncReversals;
   const later = (actor) => setTimeout(() => syncReversals(actor).catch((err) => console.error(`${MODULE_ID} | reversals`, err)), 300);
+  if (isActiveGM()) for (const actor of game.actors ?? []) { if (hasRCT(actor)) later(actor); }
   Hooks.on("createItem", (item, options, userId) => {
     if (userId !== game.user.id || item.parent?.documentName !== "Actor" || item.flags?.jjk5e?.reversal) return;
-    if (baseName(item) === "Cursed Technique Reversal" || item.flags?.jjk5e?.techniqueRoot) later(item.parent);
+    if (hasRCT(item.parent) && (baseName(item) === "Cursed Technique Reversal" || /^Reverse Cursed Technique(?: \(Healing Pool\))?$/.test(baseName(item)) || item.flags?.jjk5e?.technique)) later(item.parent);
   });
   Hooks.on("updateItem", (item, changes, options, userId) => {
     if (userId === game.user.id && item.type === "class" && foundry.utils.hasProperty(changes, "system.levels")) later(item.parent);
@@ -9701,7 +9875,7 @@ function clashBlocker(actor, opener) {
   if (theirs && theirs.lethal === false && mineLethal) return "nonLethal";
   // 0.2 Second Expansion: only a creature whose Dexterity score beats the caster's CE score can react.
   if (theirs?.quick && !((Number(actor.system?.abilities?.dex?.value) || 0) > (Number(opener.system?.abilities?.[ceAbility(opener)]?.value) || 0))) return "tooFast";
-  if (globalThis.MidiQOL?.hasUsedReaction?.(actor)) return "reaction";
+  if (reactionSpent(actor)) return "reaction";
   const cost = totalActivityCECost(actor, dom.activity);
   const pool = findPool(actor);
   if (cost && (!pool || poolValue(pool) < cost)) return "ce";
@@ -9870,7 +10044,7 @@ async function reactDomainClash(actor, openerUuid = null, openingId = null) {
     let cancelled = false;
     try {
       const res = await dom.activity.use({ event: null }, { configure: false }, {});
-      cancelled = res === null || res === undefined;
+      cancelled = !res;
     } catch (err) { cancelled = true; throw err; }
     finally { await requestDomainAuthority("finish", { ...data, claimId: claim.claimId, cancelled }); }
   } catch (err) { reportError("domain clash", err); }
@@ -10267,6 +10441,7 @@ const {
 } = createCEEngine({
   CE_AUTH_QUERY,
   MODULE_ID,
+  actionGate,
   baseName,
   bindNativeWorkflow,
   canDirectDomain,

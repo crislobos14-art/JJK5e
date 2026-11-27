@@ -195,3 +195,32 @@ test("without an adapter, Midi, native spending and optional post-use use the sa
   assert.equal(ledger().length, 0);
   assert.deepEqual(env.errors, []);
 });
+
+test("fallback post-use charges once per activity even when the result is delivered twice", async () => {
+  const { env, activity, balance } = await setup({ adapter: false });
+  const a = activity(), b = activity("b");
+  const result = { message: {} };
+  await Promise.all([env.Hooks.run("dnd5e.postUseActivity", a, {}, result), env.Hooks.run("dnd5e.postUseActivity", a, {}, result)]);
+  await env.Hooks.run("dnd5e.postUseActivity", b, {}, result);
+  assert.equal(balance(), 11);
+});
+
+test("an interruption during authorization refunds an unstarted reservation once", async () => {
+  const { env, actor, activity, ledger, balance } = await setup();
+  const act = activity();
+  await act.item.setFlag("jjk5e", "technique", "Test");
+  const pool = env.jjk.findPool(actor);
+  const update = pool.update.bind(pool);
+  pool.update = async (data, context) => {
+    const result = await update(data, context);
+    if (data["flags.jjk5e.ceLedger"]?.at(-1)?.state === "reserved") actor.statuses = new Set(["incapacitated"]);
+    return result;
+  };
+  act.nativeUse = () => assert.fail("Interrupted activity reached native consumption");
+  assert.equal(await act.consume({}, {}), false);
+  assert.equal(balance(), 20);
+  assert.equal(ledger()[0].state, "refunded");
+  assert.equal(ledger()[0].nativeStarted, false);
+  assert.equal(await act.consume({}, {}), false);
+  assert.equal(ledger().length, 1);
+});

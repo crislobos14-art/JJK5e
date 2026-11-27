@@ -127,7 +127,7 @@ export function createIntegrations({
     for (const actor of actors) {
       const ids = actor.effects.filter((e) => {
         const kind = e.flags?.jjk5e?.kind;
-        if (!["zone", "burnout", "domain", "domainProfileCondition"].includes(kind) && !DOMAIN_WARD_KINDS.has(kind)) return false;
+        if (!["zone", "burnout", "domain", "domainProfileCondition", "sunnyDaySource"].includes(kind) && !DOMAIN_WARD_KINDS.has(kind)) return false;
         if (e.disabled || e.duration?.expired === true) return true;
         const rem = e.duration?.remaining;
         return rem !== null && rem !== undefined && rem <= 0;
