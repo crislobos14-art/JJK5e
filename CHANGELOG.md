@@ -1,5 +1,16 @@
 # Changelog
 
+## 2.18.1 — Correcciones de compatibilidad y automatización
+Revisado contra el código de dnd5e 6.1.1.
+- **Invocaciones de dnd5e (Vengeful Spirit):** dnd5e guarda el origen de la invocación (el objeto) en el actor invocado, no en el token. El espíritu no encontraba a su invocador y el rayo usaba un modificador de EM 0. Ahora lee el actor.
+- **Ficha de PNJ invocado:** el botón «Abrir controles JJK» aparece también en las invocaciones de dnd5e que no tienen reserva de EM.
+- **Orden de los dados:** el número de dados de los contadores (cargas, Hair Pin, Tsunami) se fija antes de que los críticos contundentes, Black Flash y la potencia del dominio lean la tirada.
+- **Maximum: Tsunami:** ahora pide concentración (hasta 6 rondas). Si pierdes la concentración, la cuenta se detiene. Cuando el muro llega a 0 pies, también termina la concentración.
+- **Crescendo:** recupera sus tres actividades, que ahora corrigen el ritmo a mano. Así «Actualizar automatización» ya no lo marca como cambio arriesgado ni lo salta en la actualización masiva.
+- **Luck of the Draw:** «Initiative 20» ya no se bloquea con 6 Milagros, porque dentro del dominio no hay tope.
+- **Milagros y Marcas de Calamidad** guardados en el panel antes de 2.18 pasan a los usos del objeto al cargar el mundo.
+- **Prayer Song:** los cambios rápidos de ritmo ya no pueden duplicar el efecto del turno.
+- `tools/validate-packs.py` comprueba también las unidades de duración, la concentración en actividades instantáneas y los flags de actividad que apuntan a actividades que no existen.
 ## 2.18.0 — Contadores automáticos de técnicas
 Los contadores nuevos están en la sección de la técnica del panel JJK. Las actividades los mueven solas, y una actividad sin recursos suficientes avisa y no se usa.
 - **Lightning Discharge (Mythical Beast Amber):** «Positive charge» suma una carga, hasta el doble de tu modificador de EM. El rayo tira 1d12 por carga y las gasta todas. Las cargas se borran al terminar el combate o con un descanso largo.

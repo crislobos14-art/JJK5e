@@ -57,3 +57,15 @@ test("a summoned spirit records its user's CE modifier for the beam", async () =
   assert.equal(summoned.getFlag("jjk5e", "summonerCEMod"), env.jjk.ceMod(user));
   assert.ok(env.jjk.ceMod(user) > 0);
 });
+
+test("2.18.1 · dnd5e summons: the summoner comes from flags.dnd5e.summon.origin on the summoned actor", async () => {
+  const env = createEnv(); await env.boot();
+  const user = env.addActor({ name: "Yuta", system: { abilities: { cha: { value: 18 } } } });
+  await user.setFlag("jjk5e", "ceAbility", "cha");
+  const [manifest] = await user.createEmbeddedDocuments("Item", [{ name: "Vengeful Spirit Manifestation", type: "feat" }]);
+  const summoned = env.addActor({ name: "Vengeful Spirit", flags: { jjk5e: { summonerCEMod: 0 }, dnd5e: { summon: { origin: manifest.uuid } } } });
+  await env.Hooks.run("createToken", { actor: summoned, flags: {} });
+  await env.settle();
+  assert.equal(summoned.getFlag("jjk5e", "summonerCEMod"), env.jjk.ceMod(user));
+  assert.equal(env.jjk.ceMod(user), 4);
+});

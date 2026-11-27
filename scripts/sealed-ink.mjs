@@ -394,7 +394,7 @@ function renderLinks(app, root, actor, sealed) {
     return b;
   };
   if (actor.type === "npc") {
-    if (!api?.findPool?.(actor) && !actor.token?.flags?.jjk5e?.summonedBy && !actor.token?.flags?.dnd5e?.summon?.origin) return;
+    if (!api?.findPool?.(actor) && !actor.token?.flags?.jjk5e?.summonedBy && !actor.token?.flags?.dnd5e?.summon?.origin && !actor.flags?.dnd5e?.summon?.origin) return;
     if (api?.openPanel) section.append(button(local("Open JJK controls", "Abrir controles JJK"), () => { if (actor.isOwner) api.openPanel(actor); }));
   } else {
     const items = new Set([...actor.items].map(item => item.uuid));

@@ -37,7 +37,10 @@
      "spellSlot": false
     },
     "duration": {
-     "units": "inst",
+     "value": "6",
+     "units": "round",
+     "concentration": true,
+     "special": "",
      "override": true
     },
     "range": {
@@ -206,9 +209,9 @@
    "technique": "Disaster Tides",
    "level": 18,
    "spellFrom": "feat",
-   "automationNotes": "Tsunami spell, concentration 6 rounds. The JJK panel counts the rounds: at the start of your turn the wall loses 50 ft of height and 1d10 of damage, and the spell ends at 0 ft. \"Wall moves\" rolls the current dice.",
+   "automationNotes": "Tsunami spell, concentration up to 6 rounds. The JJK panel counts the rounds: at the start of your turn the wall loses 50 ft of height and 1d10 of damage; at 0 ft the spell and your concentration end, and losing concentration stops the count. \"Wall moves\" rolls the current dice.",
    "automation": "automated",
-   "rev": "8a15aae742",
+   "rev": "146252bdf1",
    "trackerUse": {
     "49jmvydcAg9jYSQl": {
      "tracker": "tsunami",
