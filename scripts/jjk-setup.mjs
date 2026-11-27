@@ -155,6 +155,14 @@ async function healthChecks() {
   for (const actor of game.actors ?? []) if ((await a.outdatedItems?.(actor))?.length) stale++;
   if (stale) rows.push({ id: "items-outdated", severity: "info", title: t("Health.Issue.items-outdated.Title"),
     detail: t("Health.Issue.items-outdated.Detail", { n: stale }), fix: { label: t("Health.Update"), run: () => a.updateAllAutomation?.() } });
+  // Summons: records without a token, tokens without a summoner, tokens never recorded.
+  const summonIssues = a.summons?.diagnose?.() ?? [];
+  if (summonIssues.length) rows.push({ id: "summons", severity: "warn", title: t("Health.Issue.summons.Title"),
+    detail: t("Health.Issue.summons.Detail", { n: summonIssues.length }), fix: { label: t("Health.Review"), run: () => a.openSummons?.() } });
+  // Binding vows waiting for the GM (approval or a possible breach).
+  const vowWork = a.vows?.gmQueue?.() ?? [];
+  if (vowWork.length) rows.push({ id: "vows", severity: "info", title: t("Health.Issue.vows.Title"),
+    detail: t("Health.Issue.vows.Detail", { n: vowWork.length }), fix: { label: t("Health.Review"), run: () => a.openVowManager?.() } });
   // Sorcerers without a cursed energy pool.
   const poolless = [...(game.actors ?? [])].filter((actor) => actor.type === "character" && actor.getFlag?.(ID, "technique") && !a.findPool?.(actor));
   if (poolless.length) rows.push({ id: "pool-missing", severity: "warn", title: t("Health.Issue.pool-missing.Title"),

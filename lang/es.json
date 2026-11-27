@@ -346,7 +346,32 @@
       "Count": "Cantidad",
       "Do": "Invocar",
       "NeedName": "Escribe el nombre del shikigami o criatura a invocar.",
-      "NotASummon": "JJK 5e: No es una invocación: {name} no se puede entregar a un jugador."
+      "NotASummon": "JJK 5e: No es una invocación: {name} no se puede entregar a un jugador.",
+      "Manager": "Gestor de invocaciones",
+      "Destroyed": "{name} queda destruido.",
+      "EndDeath": "Su invocador murió",
+      "EndExpired": "Terminó la duración",
+      "EndCombat": "Terminó el combate",
+      "EndRest": "Descanso largo",
+      "OtherScene": "Esa invocación está en otra escena: {scene}.",
+      "DismissConfirm": "¿Desinvocar a {name}? Se retira su token.",
+      "Repair": "Reparar registros",
+      "RepairTokens": "¿Borrar también los tokens de invocación cuyo invocador ya no existe?",
+      "Repaired": "{n} registro(s) de invocación reparado(s).",
+      "HP": "PG",
+      "AC": "CA",
+      "RoundsLeft": "quedan {n} rondas",
+      "NoToken": "sin token",
+      "Sheet": "Abrir ficha",
+      "Select": "Seleccionar token",
+      "None": "No hay invocaciones activas.",
+      "Issues": "{n} problema(s) de invocaciones.",
+      "NoIssues": "Sin problemas de invocaciones.",
+      "Issue": {
+        "orphanRecord": "Registro sin token",
+        "orphanToken": "Token sin invocador",
+        "unrecorded": "Token de invocación sin registrar"
+      }
     },
     "Panel": {
       "Open": "Abrir panel JJK",
@@ -667,6 +692,10 @@
       "screenShake": {
         "Name": "Temblor de pantalla",
         "Hint": "Sacude la cámara con el temblor nativo de Foundry 14 en un Black Flash, al abrir un dominio y en un choque de dominios. Solo en la escena donde ocurre; se omite si el sistema pide reducir el movimiento."
+      },
+      "vowApproval": {
+        "Name": "Los votos vinculantes requieren aprobación del DJ",
+        "Hint": "Un voto hecho por un jugador queda «pendiente»; sus efectos solo se aplican cuando el DJ lo aprueba. No afecta a los votos anteriores a 2.22."
       }
     },
     "Feats": {
@@ -823,7 +852,84 @@
       "StateInactive": "Suspendido",
       "Suspend": "Suspender",
       "Activate": "Activar",
-      "UnlockAll": "Desbloquear todos"
+      "UnlockAll": "Desbloquear todos",
+      "Manager": "Gestor de votos vinculantes",
+      "Rules": "Reglas que vigila el módulo",
+      "Target": "Criatura elegida",
+      "Watch": "Regla",
+      "Duration": "Duración",
+      "DurRounds": "Rondas",
+      "DurHours": "Horas",
+      "Mode": "Automatización",
+      "ModeAssisted": "Asistida (el DJ confirma)",
+      "ModeFull": "Completa (los finales declarados se aplican solos)",
+      "ModeManual": "Manual (no se vigila nada)",
+      "Visibility": "Visibilidad",
+      "Public": "Todos",
+      "GMOnly": "Solo DJ y dueño",
+      "RulesHint": "Las reglas se eligen de una lista; un posible incumplimiento nunca se castiga solo: el DJ lo confirma o lo descarta.",
+      "Submitted": "«{name}» se envió al DJ para su aprobación.",
+      "Review": "Voto por revisar",
+      "Approve": "Aprobar",
+      "Reject": "Rechazar",
+      "Reason": "Motivo",
+      "Accept": "Aceptar voto",
+      "Revoke": "Revocar",
+      "RevokeConfirm": "¿Revocar este voto? Sus efectos terminan y no se aplica castigo.",
+      "Restore": "Restaurar",
+      "Fulfill": "Marcar cumplido",
+      "ConfirmBreach": "Confirmar incumplimiento",
+      "DismissAlert": "Descartar",
+      "History": "Historial",
+      "Unapproved": "sin aprobar",
+      "ApprovalOn": "requiere aprobación del DJ",
+      "GMQueue": "{n} voto(s) esperan una decisión.",
+      "TimeLeft": "quedan {h} h {m} min",
+      "RoundsLeft": "quedan {n} rondas",
+      "AwaitPartner": "«{name}» está aprobado y espera que {partner} lo acepte.",
+      "PossibleBreach": "Posible incumplimiento: {event}",
+      "SuggestState": "Regla cumplida: estado sugerido {state}",
+      "State": {
+        "draft": "Borrador",
+        "pending": "Pendiente de aprobación",
+        "approved": "Esperando al otro participante",
+        "active": "Activo",
+        "suspended": "Suspendido",
+        "fulfilled": "Cumplido",
+        "broken": "Incumplido",
+        "expired": "Expirado",
+        "revoked": "Revocado"
+      },
+      "Denied": {
+        "unknown": "Acción de voto desconocida.",
+        "state": "El voto no puede cambiar así desde su estado actual.",
+        "gm": "Solo el DJ puede hacerlo.",
+        "owner": "Solo el dueño del voto puede hacerlo.",
+        "partner": "Solo el otro participante puede aceptarlo.",
+        "system": "No permitido.",
+        "locked": "Este voto está bloqueado hasta que el DJ lo desbloquee o termine su periodo."
+      },
+      "Event": {
+        "turnStart": "inicio de turno",
+        "turnEnd": "final de turno",
+        "combatStart": "empieza el combate",
+        "combatEnd": "termina el combate",
+        "techniqueUse": "uso de técnica",
+        "reaction": "uso de reacción",
+        "ceSpent": "gasto de EM",
+        "damageTaken": "daño recibido",
+        "damageDealt": "daño causado",
+        "condition": "condición aplicada",
+        "hp": "cambio de PG",
+        "ce": "cambio de EM",
+        "distance": "distancia",
+        "domainOpen": "dominio abierto",
+        "summon": "criatura invocada",
+        "summonEnd": "invocación terminada",
+        "weapon": "uso de arma",
+        "rest": "descanso terminado",
+        "time": "paso del tiempo"
+      }
     },
     "Career": {
       "Title": "Carrera del hechicero",
@@ -1565,6 +1671,14 @@
         "pool-missing": {
           "Title": "Hechiceros sin reserva de EM",
           "Detail": "Estos personajes tienen técnica pero no la característica Cursed Energy: {list}. Añádela desde el compendio de clases."
+        },
+        "summons": {
+          "Title": "Registros de invocaciones desincronizados",
+          "Detail": "{n} registro(s) o token(s) de invocación necesitan reparación."
+        },
+        "vows": {
+          "Title": "Votos vinculantes pendientes",
+          "Detail": "{n} voto(s) esperan tu aprobación o una decisión de incumplimiento."
         }
       }
     },

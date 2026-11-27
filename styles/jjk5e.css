@@ -760,3 +760,26 @@ table.jjk-fit :is(td, th) { box-sizing: border-box; }
 .jjk-tutorial button:focus-visible { outline: 2px solid var(--jjk-seal-2); outline-offset: 2px; }
 @keyframes jjk-tutorial-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .jjk-tutorial.jjk5e-ui { animation: none; } }
+
+/* ---- Summoning Manager (2.22) ---- */
+.jjk5e-ui.jjk5e-summons .jjk-summon-list { list-style: none; margin: 4px 0; padding: 0; display: grid; gap: 6px; }
+.jjk5e-ui.jjk5e-summons .jjk-summon { display: grid; grid-template-columns: 48px minmax(0, 1fr) auto; gap: 8px; align-items: center;
+  border: 1px solid var(--jjk-line); border-radius: var(--jjk-r); background: var(--jjk-card); padding: 6px 8px; }
+.jjk5e-ui.jjk5e-summons .jjk-summon img { width: 48px; height: 48px; object-fit: cover; border: 1px solid var(--jjk-line-2); border-radius: 4px; }
+.jjk5e-ui.jjk5e-summons .jjk-summon-body { min-width: 0; }
+.jjk5e-ui.jjk5e-summons .jjk-summon-body header { display: flex; gap: 6px; flex-wrap: wrap; align-items: baseline; }
+.jjk5e-ui.jjk5e-summons .jjk-summon-body p { margin: 2px 0; overflow-wrap: anywhere; }
+.jjk5e-ui.jjk5e-summons .jjk-summon .btns { display: flex; gap: 4px; }
+.jjk5e-ui.jjk5e-summons .jjk-summon .btns button { width: 30px; height: 28px; padding: 0; }
+.jjk5e-ui.jjk5e-summons h3 { font-family: var(--jjk-display); margin: 8px 0 2px; color: var(--jjk-seal); }
+.jjk5e-ui.jjk5e-summons .jjk-summon-gm { border-top: 1px solid var(--jjk-line); margin-top: 8px; padding-top: 6px; }
+@container (max-width: 420px) { .jjk5e-ui.jjk5e-summons .jjk-summon { grid-template-columns: 40px minmax(0, 1fr); } .jjk5e-ui.jjk5e-summons .jjk-summon .btns { grid-column: 1 / -1; } }
+@media (max-width: 480px) { .jjk5e-ui.jjk5e-summons .jjk-summon { grid-template-columns: 40px minmax(0, 1fr); } .jjk5e-ui.jjk5e-summons .jjk-summon .btns { grid-column: 1 / -1; } }
+/* ---- Binding Vow Manager (2.22) ---- */
+.jjk5e-ui.jjk5e-vows .jjk-vow.done { opacity: .65; }
+.jjk5e-ui.jjk5e-vows .jjk-vow-alerts { list-style: none; margin: 4px 0; padding: 0; display: grid; gap: 4px; }
+.jjk5e-ui.jjk5e-vows .jjk-vow-alert { border-left: 3px solid var(--jjk-warn); padding: 2px 6px; display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
+.jjk5e-ui.jjk5e-vows details summary { cursor: pointer; color: var(--jjk-muted); }
+.jjk5e-ui.jjk5e-vows .jjk-vow-history { list-style: none; margin: 2px 0 0; padding: 0; font-size: .9em; color: var(--jjk-muted); }
+.jjk5e-ui.jjk5e-vows .jjk-vow header { display: flex; gap: 6px; flex-wrap: wrap; align-items: baseline; padding-right: 22px; }
+.jjk5e-vow-form fieldset { display: grid; gap: 4px; }

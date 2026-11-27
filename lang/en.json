@@ -346,7 +346,32 @@
       "Count": "How many",
       "Do": "Summon",
       "NeedName": "Write the name of the shikigami or creature to summon.",
-      "NotASummon": "JJK 5e: Not a summon: {name} cannot be given to a player."
+      "NotASummon": "JJK 5e: Not a summon: {name} cannot be given to a player.",
+      "Manager": "Summoning Manager",
+      "Destroyed": "{name} is destroyed.",
+      "EndDeath": "Their summoner died",
+      "EndExpired": "Duration over",
+      "EndCombat": "Combat ended",
+      "EndRest": "Long rest",
+      "OtherScene": "That summon is on another scene: {scene}.",
+      "DismissConfirm": "Dismiss {name}? Its token is removed.",
+      "Repair": "Repair records",
+      "RepairTokens": "Also delete summon tokens whose summoner no longer exists?",
+      "Repaired": "{n} summon record(s) repaired.",
+      "HP": "HP",
+      "AC": "AC",
+      "RoundsLeft": "{n} rounds left",
+      "NoToken": "no token",
+      "Sheet": "Open sheet",
+      "Select": "Select token",
+      "None": "No active summons.",
+      "Issues": "{n} summon issue(s) found.",
+      "NoIssues": "No summon issues.",
+      "Issue": {
+        "orphanRecord": "Record without a token",
+        "orphanToken": "Token without a summoner",
+        "unrecorded": "Summon token not recorded"
+      }
     },
     "Panel": {
       "Open": "Open JJK panel",
@@ -667,6 +692,10 @@
       "screenShake": {
         "Name": "Screen shake",
         "Hint": "Shakes the camera with Foundry 14's core shake on a Black Flash, when a domain opens and in a domain clash. Only on the scene where it happens; skipped when the system asks for reduced motion."
+      },
+      "vowApproval": {
+        "Name": "Binding vows need GM approval",
+        "Hint": "A vow made by a player waits as “pending”; its effects apply only after the GM approves it. Vows made before 2.22 are not affected."
       }
     },
     "Feats": {
@@ -823,7 +852,84 @@
       "StateInactive": "Suspended",
       "Suspend": "Suspend",
       "Activate": "Activate",
-      "UnlockAll": "Unlock all"
+      "UnlockAll": "Unlock all",
+      "Manager": "Binding Vow Manager",
+      "Rules": "Rules the module watches",
+      "Target": "Chosen creature",
+      "Watch": "Watch rule",
+      "Duration": "Duration",
+      "DurRounds": "Rounds",
+      "DurHours": "Hours",
+      "Mode": "Automation",
+      "ModeAssisted": "Assisted (the GM confirms)",
+      "ModeFull": "Full (declared endings apply on their own)",
+      "ModeManual": "Manual (nothing is watched)",
+      "Visibility": "Visibility",
+      "Public": "Everyone",
+      "GMOnly": "GM and owner only",
+      "RulesHint": "Rules are chosen from a list; a possible breach is never punished automatically: the GM confirms or dismisses it.",
+      "Submitted": "“{name}” was sent to the GM for approval.",
+      "Review": "Vow to review",
+      "Approve": "Approve",
+      "Reject": "Reject",
+      "Reason": "Reason",
+      "Accept": "Accept vow",
+      "Revoke": "Revoke",
+      "RevokeConfirm": "Revoke this vow? Its effects end and no punishment is applied.",
+      "Restore": "Restore",
+      "Fulfill": "Mark fulfilled",
+      "ConfirmBreach": "Confirm breach",
+      "DismissAlert": "Dismiss",
+      "History": "History",
+      "Unapproved": "not approved",
+      "ApprovalOn": "GM approval required",
+      "GMQueue": "{n} vow(s) waiting for a decision.",
+      "TimeLeft": "{h} h {m} min left",
+      "RoundsLeft": "{n} rounds left",
+      "AwaitPartner": "“{name}” is approved and waits for {partner} to accept it.",
+      "PossibleBreach": "Possible breach: {event}",
+      "SuggestState": "Rule met: suggested state {state}",
+      "State": {
+        "draft": "Draft",
+        "pending": "Pending approval",
+        "approved": "Waiting for partner",
+        "active": "Active",
+        "suspended": "Suspended",
+        "fulfilled": "Fulfilled",
+        "broken": "Broken",
+        "expired": "Expired",
+        "revoked": "Revoked"
+      },
+      "Denied": {
+        "unknown": "Unknown vow action.",
+        "state": "The vow cannot change like that from its current state.",
+        "gm": "Only the GM can do that.",
+        "owner": "Only the vow’s owner can do that.",
+        "partner": "Only the other participant can accept.",
+        "system": "Not allowed.",
+        "locked": "This vow is locked until the GM unlocks it or its lock period ends."
+      },
+      "Event": {
+        "turnStart": "start of turn",
+        "turnEnd": "end of turn",
+        "combatStart": "combat starts",
+        "combatEnd": "combat ends",
+        "techniqueUse": "technique used",
+        "reaction": "reaction used",
+        "ceSpent": "CE spent",
+        "damageTaken": "damage taken",
+        "damageDealt": "damage dealt",
+        "condition": "condition applied",
+        "hp": "hit points changed",
+        "ce": "cursed energy changed",
+        "distance": "distance",
+        "domainOpen": "domain opened",
+        "summon": "creature summoned",
+        "summonEnd": "summon ended",
+        "weapon": "weapon used",
+        "rest": "rest finished",
+        "time": "time passed"
+      }
     },
     "Career": {
       "Title": "Sorcerer Career",
@@ -1565,6 +1671,14 @@
         "pool-missing": {
           "Title": "Sorcerers without a CE pool",
           "Detail": "These characters have a technique but no Cursed Energy feature: {list}. Add it from the classes compendium."
+        },
+        "summons": {
+          "Title": "Summon records out of sync",
+          "Detail": "{n} summon record(s) or token(s) need repair."
+        },
+        "vows": {
+          "Title": "Binding vows waiting for you",
+          "Detail": "{n} vow(s) need your approval or a breach decision."
         }
       }
     },
