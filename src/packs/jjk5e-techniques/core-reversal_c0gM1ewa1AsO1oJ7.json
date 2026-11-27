@@ -246,7 +246,8 @@
     ]
    },
    "automation": "automated",
-   "rev": "bae771247c"
+   "rev": "3fbe1ec89a",
+   "automationNotes": "Offensive Form: +2 × your current CE to melee damage; the GM charges 2 CE at the start of each of your turns and ends the form when you cannot pay."
   }
  },
  "effects": [
@@ -317,7 +318,7 @@
     {
      "key": "system.bonuses.mwak.damage",
      "mode": 2,
-     "value": "+ (2 * (@resources.tertiary.value || 0))",
+     "value": "+ (2 * (@flags.jjk5e.ceNow || 0))",
      "priority": 20
     }
    ],
@@ -326,7 +327,8 @@
    },
    "flags": {
     "jjk5e": {
-     "technique": "Triple Core"
+     "technique": "Triple Core",
+     "upkeep": 2
     }
    },
    "_key": "!items.effects!c0gM1ewa1AsO1oJ7.qd0owkpCgHYYquIM"

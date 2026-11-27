@@ -137,7 +137,7 @@
    "level": 11,
    "automationNotes": "Replaces Prayer's table at 11th: the beat runs to 10 and your own effect (turn 1+, 3+, 9+) is applied for you; the activities only correct the count. Effects on your opponent (−3 AC, disadvantage, −prof to its damage, −5 AC/saves, action economy limit) and the extra attack: apply by hand.",
    "automation": "automated",
-   "rev": "ceeab6f6ee",
+   "rev": "fe51b817eb",
    "trackerUse": {
     "r5bvfH1yf3EgoQpc": {
      "tracker": "beat",
@@ -251,6 +251,156 @@
    "_key": "!items.effects!ldM0TMic8k2TC1Vc.GOf1Ctzt3cWh8a3k"
   },
   {
+   "_id": "cRsc4AdvSaves4pl",
+   "name": "Crescendo (turn 4+)",
+   "img": "modules/jjk5e/icons/techniques/prayer-song.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>T1: +3 AC and DEX saves; T3: +CE mod to attack and damage</p>",
+   "changes": [
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+3",
+     "priority": 20
+    },
+    {
+     "key": "system.abilities.dex.bonuses.save",
+     "mode": 2,
+     "value": "+3",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ max(@abilities.wis.mod, @abilities.cha.mod)",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.rwak.damage",
+     "mode": 2,
+     "value": "+ max(@abilities.wis.mod, @abilities.cha.mod)",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.mwak.attack",
+     "mode": 2,
+     "value": "+ max(@abilities.wis.mod, @abilities.cha.mod)",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.rwak.attack",
+     "mode": 2,
+     "value": "+ max(@abilities.wis.mod, @abilities.cha.mod)",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.grants.disadvantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.advantage.ability.save.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Prayer Song"
+    }
+   },
+   "_key": "!items.effects!ldM0TMic8k2TC1Vc.cRsc4AdvSaves4pl"
+  },
+  {
+   "_id": "cRsc5ProfDmg5plu",
+   "name": "Crescendo (turn 5+)",
+   "img": "modules/jjk5e/icons/techniques/prayer-song.svg",
+   "type": "base",
+   "transfer": false,
+   "disabled": false,
+   "statuses": [],
+   "description": "<p>T1: +3 AC and DEX saves; T3: +CE mod to attack and damage</p>",
+   "changes": [
+    {
+     "key": "system.attributes.ac.bonus",
+     "mode": 2,
+     "value": "+3",
+     "priority": 20
+    },
+    {
+     "key": "system.abilities.dex.bonuses.save",
+     "mode": 2,
+     "value": "+3",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ max(@abilities.wis.mod, @abilities.cha.mod)",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.rwak.damage",
+     "mode": 2,
+     "value": "+ max(@abilities.wis.mod, @abilities.cha.mod)",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.mwak.attack",
+     "mode": 2,
+     "value": "+ max(@abilities.wis.mod, @abilities.cha.mod)",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.rwak.attack",
+     "mode": 2,
+     "value": "+ max(@abilities.wis.mod, @abilities.cha.mod)",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.grants.disadvantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.advantage.ability.save.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ @prof",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.rwak.damage",
+     "mode": 2,
+     "value": "+ @prof",
+     "priority": 20
+    }
+   ],
+   "duration": {
+    "rounds": null
+   },
+   "flags": {
+    "jjk5e": {
+     "technique": "Prayer Song"
+    }
+   },
+   "_key": "!items.effects!ldM0TMic8k2TC1Vc.cRsc5ProfDmg5plu"
+  },
+  {
    "_id": "bhmy8jW7SD1JZtpX",
    "name": "Crescendo (turn 9+)",
    "img": "modules/jjk5e/icons/techniques/prayer-song.svg",
@@ -300,6 +450,30 @@
      "key": "flags.dnd5e.weaponCriticalThreshold",
      "mode": 3,
      "value": "18",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.grants.disadvantage.attack.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "flags.midi-qol.advantage.ability.save.all",
+     "mode": 0,
+     "value": "1",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.mwak.damage",
+     "mode": 2,
+     "value": "+ @prof",
+     "priority": 20
+    },
+    {
+     "key": "system.bonuses.rwak.damage",
+     "mode": 2,
+     "value": "+ @prof",
      "priority": 20
     }
    ],

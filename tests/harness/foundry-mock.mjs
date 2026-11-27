@@ -236,7 +236,7 @@ export function createEnv({ settings: overrides = {} } = {}) {
     system: { id: "dnd5e", version: "5.3.3" },
     release: { generation: 13 },
     user, users: Object.assign(new Collection([[user.id, user]]), { activeGM: user }),
-    settings, actors, scenes: new Collection(), packs: new Collection(), items: new Collection(), folders: new Collection(),
+    settings, actors, scenes: new Collection(), combats: new Collection(), packs: new Collection(), items: new Collection(), folders: new Collection(),
     i18n: { lang: "en", has: () => false, localize: (k) => k, format: (k) => k },
     modules: new Map([["jjk5e", moduleEntry], ["midi-qol", { id: "midi-qol", active: true }], ["dae", { id: "dae", active: true }]]),
     combat: null, socket: { on() {}, emit() {} }, keybindings: { register() {} }
@@ -280,7 +280,11 @@ export function createEnv({ settings: overrides = {} } = {}) {
       for (let i = 0; i < 30; i++) { await Promise.allSettled([...pending]); await new Promise((r) => setImmediate(r)); }
     },
     addActor(data) { const a = new Actor(data); actors.set(a.id, a); return a; },
-    async combatRound(round, combat = {}) { await fire("updateCombat", { round, combatants: [], ...combat }, { round }, {}, user.id); await env.settle(); }
+    async combatRound(round, combat = {}) {
+      const doc = { round, combatants: [], ...combat };
+      if (doc.id && !game.combats.get(doc.id)) game.combats.set(doc.id, doc);   // a live combat, as in game.combats
+      await fire("updateCombat", doc, { round }, {}, user.id); await env.settle();
+    },
   };
 
   // Load the production modules into the same Foundry mock realm.

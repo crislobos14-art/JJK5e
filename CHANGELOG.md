@@ -1,5 +1,45 @@
 # Changelog
 
+## 2.21.1 - Auditoría completa: correcciones
+Cinco revisiones independientes: energía maldita, dominios, contadores, interfaz y compendios. El detalle está en `docs/audits/AUDIT_2.21.1.md`.
+
+**Energía maldita**
+- Antes de reservar EM se comprueba lo que dnd5e o el módulo van a rechazar: sin usos o espacios, reglas de dominio, límite de clones, intercambio sin selección. Así la EM ya no se queda bloqueada en revisión.
+- Una aprobación del DJ que llega después de que la petición del jugador caducó ya no gasta EM.
+
+**Dominios**
+- Dos cierres simultáneos aplican el desgaste una sola vez.
+- Un dominio cuyo efecto caducó sin DJ conectado se cierra al reconectar.
+- Un choque de dominios reinicia su cuenta en un combate nuevo cuando el anterior ya no existe.
+
+**Contadores**
+- Los descansos los reinicia el cliente que descansa (DJ o cualquier dueño).
+- Fa Jin reconoce las tarjetas de ataque de dnd5e 6.
+- Crescendo añade sus niveles 4+ y 5+ (ventaja en salvaciones, +competencia al daño).
+- Luck of the Draw supera los 6 Milagros.
+- La ventaja de Deadly Miracle arranca apagada si no tienes Milagros.
+
+**Compendios**
+- Id de actividad inválida en Boogie.
+- CD fija de Heavenly Pact: Overgeneration.
+- Salvación de Lock In.
+- Raven's Eye: nuevo contador de cuervos.
+- Core Reversal: cobra 2 EM por turno y usa la EM actual sin depender de la ranura de recurso.
+- 19 actividades de nivel alto quedan bloqueadas por nivel de personaje. dnd5e comparaba con el nivel del conjuro.
+- Recuentos del manifiesto.
+
+**Interfaz**
+- Pass/Fail de las misiones se pueden usar con el teclado.
+- El panel Sealed Ink conserva el foco y el desplazamiento al redibujarse.
+- Las ventanas de tokens no vinculados ya no chocan entre sí.
+- Configuración, Salud y Reglas opcionales no se abren dos veces.
+
+**Validador:** comprueba también ids de actividades y efectos, `dc.calculation` y rutas de datos de tirada que son objetos o que dependen de la ranura de recurso.
+
+**Para revisión del equipo:**
+- Cómo se vinculan los pagos anidados de EM, porque dnd5e clona la configuración de uso.
+- Si los cambios automáticos de EM hechos desde el cliente de un jugador deben pedir aprobación al DJ.
+- Usos de Future and Past.
 ## 2.21.0 - Energía maldita, cuerpo y alma
 - La ficha, el consumo habitual y el motor transaccional comparten el cálculo de escalado, descuentos, votos y restricciones.
 - El pacto de generación inversa concede sus rasgos y cobra un punto de energía inversa por cada dos puntos de EM de las actividades elegibles.

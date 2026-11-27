@@ -45,7 +45,9 @@
       "EditHint": "Clic para editar: 15 fija, +3 recupera, -2 gasta",
       "EditInvalid": "Escribe un número: 15, +3 o -2.",
       "PendingLocked": "La EM tiene reservas pendientes de confirmar por el DJ; se podrá editar cuando se resuelvan.",
-      "ReservedNote": "{n} reservada"
+      "ReservedNote": "{n} reservada",
+      "Upkeep": "mantenimiento",
+      "UpkeepEnded": "{name} termina: no hay Energía Maldita suficiente para mantenerlo."
     },
     "Technique": {
       "Title": "Elegir Técnica Innata",
@@ -409,6 +411,7 @@
       "NeedDnd5e": "JJK 5e V.6 necesita el sistema D&D 5e.",
       "NoInspiration": "JJK 5e: {name} no tiene inspiración para usar este mindset.",
       "GMOnly": "Solo el GM puede hacer esto.",
+      "ActivityLevel": "JJK 5e: esta opción se desbloquea a nivel de personaje {level}.",
       "GMDeclined": "El GM rechazó o no respondió la petición.",
       "ActionFailed": "JJK 5e — falló {action}: {error}",
       "NoScene": "Primero abre una escena.",

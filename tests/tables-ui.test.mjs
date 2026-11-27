@@ -16,7 +16,10 @@ test("career window renders accessible tabs and a bounded reputation ledger", as
     assert.match(html, new RegExp(`data-tab="${tab}" aria-selected="true"`));
   }
   app.tab = "missions";
-  assert.match(await app._renderHTML(), /class="active jjk-clickable" data-action="open" data-uuid="JournalEntry.x" tabindex="0"/);
+  const missions = await app._renderHTML();
+  assert.match(missions, /<li data-id="[^"]*" class="active"><button type="button" class="jjk-mission-open" data-action="open" data-uuid="JournalEntry.x"/,
+    "the journal opens from a real button, so Pass/Fail inside the row stay reachable by keyboard");
+  assert.doesNotMatch(missions, /role="button"[^>]*>(?:(?!<\/li>).)*data-action="pass"/s);
   app.tab = "rep";
   const rep = await app._renderHTML();
   assert.match(rep, /data-f="tokyo" data-d="1" disabled/, "max reputation disables +");

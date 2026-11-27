@@ -57,7 +57,7 @@
       "wis"
      ],
      "dc": {
-      "calculation": "flat",
+      "calculation": "",
       "formula": "20"
      }
     },
@@ -80,7 +80,7 @@
  },
  "flags": {
   "jjk5e": {
-   "rev": "7f189bbfc0",
+   "rev": "9ad76599d6",
    "heavenlyPact": true
   }
  },

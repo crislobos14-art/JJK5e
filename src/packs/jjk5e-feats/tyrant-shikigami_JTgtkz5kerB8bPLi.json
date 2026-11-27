@@ -154,7 +154,11 @@
    },
    "automationNotes": "Per size step above Medium: +4 STR, +1d8 bite, +30 HP (edit the Major Star actor).",
    "automation": "automated",
-   "rev": "9ef58e4b6c"
+   "rev": "99044fef4f",
+   "activityLevel": {
+    "U7dCDoRwangASdoi": 11,
+    "PUDr0AlANXceBj0C": 18
+   }
   }
  },
  "folder": "bGKgrFplZpNnclwX",

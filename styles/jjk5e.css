@@ -543,6 +543,10 @@ button.jjk5e-levelup { display: block; margin: 4px auto 0; padding: 2px 10px; fo
 .jjk5e-ui.jjk5e-career .jjk-history li { padding: 4px 8px; border-bottom: 1px dotted var(--jjk-line); color: var(--jjk-bone-2); font-size: 12px; }
 .jjk5e-ui.jjk5e-career .jjk-history li:last-child { border-bottom: 0; }
 .jjk5e-ui.jjk5e-career .jjk-missions li { margin-bottom: 6px; border-bottom: 1px solid var(--jjk-line); }
+/* The mission title opens its journal; a real button keeps Pass/Fail reachable by keyboard (2.19.1). */
+.jjk5e-ui.jjk5e-career .jjk-missions .jjk-mission-open { all: unset; cursor: pointer; display: inline-flex; gap: 6px; align-items: baseline; }
+.jjk5e-ui.jjk5e-career .jjk-missions .jjk-mission-open:hover strong { text-decoration: underline; }
+.jjk5e-ui.jjk5e-career .jjk-missions .jjk-mission-open:focus-visible { outline: 2px solid var(--jjk-gold); outline-offset: 2px; }
 .jjk5e-ui.jjk5e-career .jjk-missions li.done { border-left-color: var(--jjk-ok); }
 .jjk5e-ui.jjk5e-career .jjk-missions li.failed { border-left-color: var(--jjk-seal); opacity: .7; }
 .jjk5e-ui .jjk-clickable { cursor: pointer; transition: background-color .12s, border-color .12s; }

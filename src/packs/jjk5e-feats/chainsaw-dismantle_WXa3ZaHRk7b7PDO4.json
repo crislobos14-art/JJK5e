@@ -149,7 +149,10 @@
    },
    "automationNotes": "Reaction (11th): roll Dismantle for the CE spent and subtract it from the damage; 0 = nullified.",
    "automation": "automated",
-   "rev": "f9c9b9cc7b"
+   "rev": "e430bc1ac6",
+   "activityLevel": {
+    "XTgNgezPZBAD98dt": 11
+   }
   }
  },
  "folder": "2XiAKaCJUnpH62hA",

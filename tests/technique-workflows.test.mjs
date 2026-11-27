@@ -17,7 +17,7 @@ test("Boogie upgrades the range and actual CE price independently for each caste
   await env.boot();
   const caster = env.addActor({ items: [feature("Boogie")] });
   const j = env.jjk;
-  const act = activity(caster, "Boogie", "bwReaction002CE");
+  const act = activity(caster, "Boogie", "bwReaction002CEa");
   assert.equal(j.activityCost(act), 3);
   assert.equal(j.combatInteractionActivity(caster, act).range, "30 ft");
   const clap = { ...structuredClone(feature("Clap Back")), name: "Contraaplauso" };

@@ -53,21 +53,21 @@
     "label": "JJK 5e: Rules",
     "type": "JournalEntry",
     "file": "data/jjk5e-rules.json",
-    "count": 30
+    "count": 36
   },
   {
     "name": "jjk5e-tables",
     "label": "JJK 5e: Roll Tables",
     "type": "RollTable",
     "file": "data/jjk5e-tables.json",
-    "count": 4
+    "count": 10
   },
   {
     "name": "jjk5e-macros",
     "label": "JJK 5e: Macros",
     "type": "Macro",
     "file": "data/jjk5e-macros.json",
-    "count": 18
+    "count": 19
   },
   {
     "name": "jjk5e-shikigami",

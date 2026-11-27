@@ -194,7 +194,10 @@
    },
    "automationNotes": "Pushed 10 ft (20 ft and prone at 11th: apply the prone effect then).",
    "automation": "automated",
-   "rev": "c0311e018b"
+   "rev": "2feb7fbcc4",
+   "activityLevel": {
+    "JipRCf1FWhws3exh": 11
+   }
   }
  },
  "effects": [

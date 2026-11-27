@@ -12,7 +12,7 @@ const add = (id, name, type, cost) => {
 };
 base.name = "Action (1 CE)";
 add("bwBonusAction001", "Bonus Action (1 CE)", "bonus", 1);
-add("bwReaction002CE", "Reaction (3 CE)", "reaction", 3);
+add("bwReaction002CEa", "Reaction (3 CE)", "reaction", 3);
 doc.flags.jjk5e.tokenSwap = Object.fromEntries(Object.keys(doc.system.activities).map((id) => [id, true]));
 fs.writeFileSync(file, `${JSON.stringify(doc, null, 1)}\n`);
 

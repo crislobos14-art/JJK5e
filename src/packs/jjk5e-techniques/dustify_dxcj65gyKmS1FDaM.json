@@ -190,7 +190,10 @@
    },
    "automationNotes": "Each touch: −1 attack/damage (weapon) or AC (armor); at −3 it crumbles.",
    "automation": "automated",
-   "rev": "05537e56e2"
+   "rev": "8888ea630a",
+   "activityLevel": {
+    "eEo9E2p8NB9u8sws": 18
+   }
   }
  },
  "folder": "sHDJB680OC5pd1by",

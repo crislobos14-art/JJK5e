@@ -612,6 +612,16 @@ async function doSpendCE(actor, amount, label = "", { exact = false } = {}) {
   }
   return true;
 }
+/** Charge every upkeep effect on the actor once (start of its turn). Exported to tests through the harness. */
+async function chargeUpkeep(actor) {
+  for (const effect of [...(actor?.effects ?? [])]) {
+    const cost = Number(effect.flags?.jjk5e?.upkeep) || 0;
+    if (cost <= 0 || effect.disabled) continue;
+    if (await spendCE(actor, cost, `${effect.name} (${t("CE.Upkeep")})`)) continue;
+    await safeDelete(effect);
+    await chat(actor, `<p><i class="fas fa-battery-empty" aria-hidden="true"></i> ${t("CE.UpkeepEnded", { name: esc(effect.name) })}</p>`);
+  }
+}
 async function queueCE(actor, fn) {
   const key = actor?.uuid ?? "unknown";
   const previous = CE_QUEUES.get(key) ?? Promise.resolve();
@@ -672,18 +682,19 @@ function resourceSlot() {
 
 async function syncResource(actor) {
   const slot = resourceSlot();
-  if (!slot || !actor?.isOwner) return;
+  if (!actor?.isOwner) return;
   const pool = findPool(actor);
   if (!pool) return;
   const value = poolValue(pool);
   const max = poolMax(pool);
-  const cur = actor.system.resources?.[slot] ?? {};
+  const cur = slot ? actor.system.resources?.[slot] ?? {} : {};
   const label = t("CE.Name");
-  if (cur.value !== value || cur.max !== max || cur.label !== label) {
-    await actor.update({
-      [`system.resources.${slot}`]: { value, max, label, sr: false, lr: false }
-    }, { jjk5eSync: true });
-  }
+  // Current CE for formulas (@flags.jjk5e.ceNow), whatever resource slot the world uses (also "none").
+  const update = actor.flags?.jjk5e?.ceNow !== value ? { "flags.jjk5e.ceNow": value } : {};
+  if (slot && (cur.value !== value || cur.max !== max || cur.label !== label))
+    update[`system.resources.${slot}`] = { value, max, label, sr: false, lr: false };
+  if (Object.keys(update).length) await actor.update(update, { jjk5eSync: true });
+  if (!slot) return;
   if (setting("autoTokenBar")) {
     const attr = `resources.${slot}`;
     try {
@@ -1035,6 +1046,14 @@ function registerActivityHooks() {
     if(state&&movement?.recorded&&Number(movement.passed?.cost)>0)state.moved=true;
   });
   Hooks.on("dnd5e.preUseActivity", (activity, usageConfig) => {
+    // Activities unlocked at a character level. dnd5e's visibility.level reads the SPELL level for techniques, so
+    // the module gates them itself (flags.jjk5e.activityLevel.<activityId> = level). NPCs have no level: no gate.
+    const need = Number(activity.item?.flags?.jjk5e?.activityLevel?.[activity.id]) || 0;
+    const have = Number((activity.actor ?? activity.item?.actor)?.system?.details?.level);
+    if (need && Number.isFinite(have) && have > 0 && have < need) {
+      ui.notifications.warn(t("Notify.ActivityLevel", { level: need }));
+      return false;
+    }
     if([...game.user?.targets??[]].some(tk=>barrierMarkerMeta(tk))){
       ui.notifications.warn(t("Domain.MarkerUseAttack"));
       return false;
@@ -1121,18 +1140,8 @@ function registerActivityHooks() {
     if (messageConfig?.message && ceTransactional(activity)) {
       return ceContext(activity, usageConfig)?.state === "reservingNative";
     }
-    if (activity.item?.flags?.jjk5e?.domainActivity && activity.item.flags.jjk5e.domainActivity !== activity.id &&
-        !canUseDomainActivity(activity.actor ?? activity.item.actor, activity)) return false;
-    if (isCloneCreation(activity) && !canCreateClone(activity.item.actor, cloneQuantity(activity, usageConfig))) return false;
-    if (activity.item?.flags?.jjk5e?.tokenSwap?.[activity.id]) {
-      const selection = selectedSwap(activity);
-      if (!selection) return false;
-      if (usageConfig) SWAP_SELECTIONS.set(usageConfig, selection);
-    }
+    if (jjkConsumptionGate(activity, usageConfig) === false) return false;
     const actor = activity.actor ?? activity.item?.actor;
-    // Native Midi may already have reserved a normal action for a bundled full-turn activity.
-    // Recheck local state rather than treating that native reservation as an earlier action.
-    if(!actionGate(actor,activity,{recheck:true}))return false;
     if(ceTransactional(activity)){
       if(ceContext(activity,usageConfig)?.state!=="reservingNative") return false;
       return;
@@ -2366,7 +2375,31 @@ async function onDeleteEffect(effect) {
   });
 }
 
+// One finish per opening at a time: two GM closes (HUD click + recovery/clash tick) used to run burnout twice.
+const FINISHING_DOMAINS = new Set();
+/**
+ * JJK reasons to refuse an activity's consumption (other than CE): domain activity rules, clone limit,
+ * token swap without a selection. Also run by the CE engine before it reserves CE.
+ */
+function jjkConsumptionGate(activity, usageConfig) {
+  if (activity.item?.flags?.jjk5e?.domainActivity && activity.item.flags.jjk5e.domainActivity !== activity.id &&
+      !canUseDomainActivity(activity.actor ?? activity.item.actor, activity)) return false;
+  if (isCloneCreation(activity) && !canCreateClone(activity.item.actor, cloneQuantity(activity, usageConfig))) return false;
+  if (activity.item?.flags?.jjk5e?.tokenSwap?.[activity.id]) {
+    const selection = selectedSwap(activity);
+    if (!selection) return false;
+    if (usageConfig) SWAP_SELECTIONS.set(usageConfig, selection);
+  }
+  return true;   // the action gate runs in the CE engine (transactional) and in preUseActivity
+}
+
 async function finishDomain(actor, openingId, incomplete) {
+  const key = openingId ? `${actor.uuid}:${openingId}` : null;
+  if (key && FINISHING_DOMAINS.has(key)) return;
+  if (key) FINISHING_DOMAINS.add(key);
+  try { await finishDomainNow(actor, openingId, incomplete); } finally { if (key) FINISHING_DOMAINS.delete(key); }
+}
+async function finishDomainNow(actor, openingId, incomplete) {
   const state = getDomain(actor);
   await domainClosed(actor);
   if (openingId && actor.getFlag(MODULE_ID, "lastDomainBurnout") === openingId) return;
@@ -5593,7 +5626,7 @@ function openVows(actor) {
   if (!actor.isOwner) return ui.notifications.warn(t("Notify.NotOwner"));
   JJKVowsClass ??= makeVowClass();
   let app = VOW_APPS.get(actor.uuid);
-  if (!app) { app = new JJKVowsClass({ id: `jjk5e-vows-${actor.id}` }); app.actor = actor; VOW_APPS.set(actor.uuid, app); }
+  if (!app) { app = new JJKVowsClass({ id: `jjk5e-vows-${actor.uuid.replace(/\./g, "-")}` }); app.actor = actor; VOW_APPS.set(actor.uuid, app); }
   return app.render({ force: true });
 }
 
@@ -5610,7 +5643,8 @@ function bindTabKeys(root) {
     tabs[n].focus(); tabs[n].click();
   });
   for (const row of root?.querySelectorAll?.(".jjk-clickable[tabindex]") ?? []) {
-    row.addEventListener("keydown", (ev) => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); row.click(); } });
+    // Only the row itself: Enter on a button inside it (mission Pass/Fail) must press that button.
+    row.addEventListener("keydown", (ev) => { if (ev.target === row && (ev.key === "Enter" || ev.key === " ")) { ev.preventDefault(); row.click(); } });
   }
 }
 
@@ -5662,10 +5696,11 @@ function makeCareerClass() {
       } else if (tab === "missions") {
         body = (gm ? `<div class="btns"><button type="button" data-action="mission"><i class="fas fa-dice"></i> ${t("Mission.ForActor")}</button>
           <button type="button" data-action="missionFull"><i class="fas fa-users"></i> ${t("Mission.Generate")}</button></div>` : "")
-          + `<ul class="jjk-missions">${c.missions.map((m) => `<li data-id="${m.id}" class="${m.status}${m.journal ? " jjk-clickable" : ""}" ${m.journal ? `data-action="open" data-uuid="${m.journal}" tabindex="0" role="button" title="${t("Mission.Open")}"` : ""}><strong>${esc(m.title)}</strong>
+          + `<ul class="jjk-missions">${c.missions.map((m) => `<li data-id="${m.id}" class="${m.status}">${m.journal
+              ? `<button type="button" class="jjk-mission-open" data-action="open" data-uuid="${m.journal}" title="${t("Mission.Open")}"><strong>${esc(m.title)}</strong> <i class="fas fa-book-open jjk-open-hint" aria-hidden="true"></i></button>`
+              : `<strong>${esc(m.title)}</strong>`}
             <span class="jjk-chip">${t(`Mission.Status.${m.status}`)}</span>${m.trial ? ` <span class="jjk-chip on">${t("Mission.Trial")}</span>` : ""}
             <br><span class="hint">${t("Mission.Reward")}: ${fmtMoney(m.reward)}</span>
-            ${m.journal ? ` <i class="fas fa-book-open jjk-open-hint" aria-hidden="true"></i>` : ""}
             ${gm && m.status === "active" ? `<div class="btns"><button type="button" data-action="pass">${t("Mission.Pass")}</button>
               <button type="button" data-action="fail">${t("Mission.Fail")}</button></div>` : ""}</li>`).join("") || `<li class="hint">${t("Mission.None")}</li>`}</ul>`;
       } else {
@@ -5692,7 +5727,7 @@ function openCareer(actor) {
   if (!actor.isOwner) return ui.notifications.warn(t("Notify.NotOwner"));
   JJKCareerClass ??= makeCareerClass();
   let app = CAREER_APPS.get(actor.uuid);
-  if (!app) { app = new JJKCareerClass({ id: `jjk5e-career-${actor.id}` }); app.actor = actor; CAREER_APPS.set(actor.uuid, app); }
+  if (!app) { app = new JJKCareerClass({ id: `jjk5e-career-${actor.uuid.replace(/\./g, "-")}` }); app.actor = actor; CAREER_APPS.set(actor.uuid, app); }
   return app.render({ force: true });
 }
 
@@ -6855,9 +6890,12 @@ async function tickClashes(combat = game.combat) {
       const s = getDomain(a);
       if (!s?.open || s.sceneId !== sceneId || s.clash?.role !== "loser" || s.clash.resolved) continue;
       const last = s.clash.lastTick;
-      if (last && (last.combatId !== key || round <= last.round)) continue;
+      // Another live combat on the scene does not tick this clash; once that combat is gone, a new one restarts the count.
+      const sameCombat = last?.combatId === key;
+      if (last && !sameCombat && game.combats?.get?.(last.combatId)) continue;
+      if (sameCombat && round <= last.round) continue;
       s.clash.lastTick = { combatId: key, round };
-      const elapsed = last && Number.isInteger(last.round) ? round - last.round : 1;
+      const elapsed = sameCombat && Number.isInteger(last.round) ? round - last.round : 1;
       s.clash.rounds = Math.max(0, (s.clash.rounds ?? 0) - elapsed);
       s.radius = Math.max(15, s.radius - 15 * elapsed);
       await setDomain(a, s);
@@ -7269,7 +7307,7 @@ function openDomainHUD(actor) {
   if (!actor) return;
   JJKDomainClass ??= makeDomainClass();
   let app = DOMAIN_APPS.get(actor.uuid);
-  if (!app) { app = new JJKDomainClass({ id: `jjk5e-domain-${actor.id}` }); DOMAIN_APPS.set(actor.uuid, app); }
+  if (!app) { app = new JJKDomainClass({ id: `jjk5e-domain-${actor.uuid.replace(/\./g, "-")}` }); DOMAIN_APPS.set(actor.uuid, app); }
   app.actor = actor;
   return app.render({ force: true });
 }
@@ -7457,11 +7495,21 @@ Hooks.once("ready", () => {
   Hooks.on("updateCombat", (combat, changes) => {
     if (isActiveGM() && "round" in (changes ?? {})) return queueDomainWork(() => tickClashes(combat)).catch((err) => reportError("clash tick", err));
   });
+  // CE upkeep (flags.jjk5e.upkeep on an effect, e.g. Core Reversal's Offensive Form): the GM charges it at the
+  // start of the bearer's turn; without enough CE the effect ends.
+  Hooks.on("updateCombat", (combat, changes) => {
+    if (!isActiveGM() || !combat?.started || !("turn" in (changes ?? {}) || "round" in (changes ?? {}))) return;
+    const actor = combat.combatant?.actor;
+    if (actor) chargeUpkeep(actor).catch((err) => reportError("CE upkeep", err));
+  });
   const recover = () => {
     if (!isActiveGM() || !setting("domainTracking")) return;
     return queueDomainWork(async () => {
       for (const actor of engineActors()) {
         try {
+          // An effect that expired (disabled) while no GM was online counts as gone: deleting it runs the normal close.
+          const expired = actor.effects?.filter(e => e.disabled && (e.flags?.jjk5e?.domainOpen || e.flags?.jjk5e?.kind === "domain")) ?? [];
+          for (const e of expired) await safeDelete(e);
           const effect = actor.effects?.find(e => !e.disabled && (e.flags?.jjk5e?.domainOpen || e.flags?.jjk5e?.kind === "domain"));
           const state = getDomain(actor);
           if (!state?.open && effect) await domainOpened(actor, effect);
@@ -7476,7 +7524,8 @@ Hooks.once("ready", () => {
   // Domain state now originates on the active GM. Other clients only refresh their UI.
   const seenOpenings = new Set();
   Hooks.on("updateActor", (actor, changes) => {
-    if (!foundry.utils.hasProperty(changes, `flags.${MODULE_ID}.domainState`)) return;
+    if (!foundry.utils.hasProperty(changes, `flags.${MODULE_ID}.domainState`) &&
+        !foundry.utils.hasProperty(changes, `flags.${MODULE_ID}.-=domainState`)) return;
     refreshDomainApps(actor);
     // The GM writes the state; the owning player still gets the HUD once per opening.
     const st = getDomain(actor);
@@ -8009,7 +8058,7 @@ async function createCharacterWizard(actor) {
   if (!actor.isOwner) return ui.notifications.warn(t("Notify.NotOwner"));
   JJKCreatorClass ??= makeCreatorClass();
   let app = CREATOR_APPS.get(actor.uuid);
-  if (!app) { app = new JJKCreatorClass({ id: `jjk5e-creator-${actor.id}` }); app.actor = actor; CREATOR_APPS.set(actor.uuid, app); }
+  if (!app) { app = new JJKCreatorClass({ id: `jjk5e-creator-${actor.uuid.replace(/\./g, "-")}` }); app.actor = actor; CREATOR_APPS.set(actor.uuid, app); }
   return app.render({ force: true });
 }
 Hooks.on("updateActor", (actor) => refreshCreator(actor));
@@ -8434,7 +8483,8 @@ let JJKOptMenuClass = null;
 function openOptionalRules() {
   if (!game.user.isGM) return ui.notifications.warn(t("Notify.GMOnly"));
   JJKOptMenuClass ??= makeOptMenuClass();
-  return new JJKOptMenuClass().render({ force: true });
+  const open = [...(foundry.applications?.instances?.values?.() ?? [])].find((app) => app instanceof JJKOptMenuClass);
+  return (open ?? new JJKOptMenuClass()).render({ force: true });
 }
 
 const optTarget = () => [...(game.user?.targets ?? [])][0]?.actor ?? null;
@@ -10509,6 +10559,8 @@ function keyboardActions(root) {
   root.addEventListener("keydown", (ev) => {
     // Already handled by a row's own key listener (career, school lists): do not click twice.
     if ((ev.key !== "Enter" && ev.key !== " ") || ev.defaultPrevented) return;
+    // A real control (button, link, field) handles its own keys, even inside a clickable row.
+    if (ev.target?.closest?.("button, a[href], input, select, textarea") && ev.target !== ev.target.closest?.(KEY_CLICKABLE)) return;
     const el = ev.target?.closest?.(KEY_CLICKABLE);
     if (!el || !root.contains(el)) return;
     ev.preventDefault(); ev.stopPropagation();
@@ -10629,6 +10681,7 @@ const {
   ceRecoveryDue,
   recoverCEWorld
 } = createCEEngine({
+  consumptionGate: (activity, usageConfig) => jjkConsumptionGate(activity, usageConfig),
   CE_AUTH_QUERY,
   MODULE_ID,
   actionGate,

@@ -255,8 +255,10 @@ function makeApps() {
     _replaceHTML(result, content) { content.innerHTML = result; }
   };
 }
-export function openHealth() { if (!game.user.isGM) return null; makeApps(); return new HealthApp().render({ force: true }); }
-export function openSetup() { makeApps(); return new SetupApp().render({ force: true }); }
+// One window per kind: reopening brings the open one to the front instead of orphaning it.
+const reuse = (Cls) => [...(foundry.applications?.instances?.values?.() ?? [])].find((app) => app instanceof Cls) ?? new Cls();
+export function openHealth() { if (!game.user.isGM) return null; makeApps(); return reuse(HealthApp).render({ force: true }); }
+export function openSetup() { makeApps(); return reuse(SetupApp).render({ force: true }); }
 
 /* ---- startup: one whispered card when something new is wrong, and the what's-new card after an update ---- */
 async function startupNotice() {

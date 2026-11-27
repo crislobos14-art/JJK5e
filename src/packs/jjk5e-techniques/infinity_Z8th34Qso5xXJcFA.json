@@ -205,7 +205,10 @@
    "spellFrom": "feat",
    "automationNotes": "Dodge with Infinity: advantage on the d6 and share it within reach. No effect vs poison or unseen attacks before 6th.",
    "automation": "automated",
-   "rev": "b928c6a3c5"
+   "rev": "e5b137b683",
+   "activityLevel": {
+    "bnixF7T8xqXctZ5h": 11
+   }
   }
  },
  "folder": "9dzjvEM8kgWba7oJ",

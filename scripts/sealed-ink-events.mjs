@@ -447,8 +447,33 @@ function drawHUD(body) {
   search.addEventListener("input", () => { activityQuery = search.value; draw(); });
   body.append(search,filter,rows); draw();
 }
+/** What to put back after a redraw: the scroll position and the focused control (by tag and name). */
+function panelSnapshot() {
+  const focus = panel?.contains(document.activeElement) ? document.activeElement : null;
+  const name = (n) => (n?.getAttribute?.("aria-label") || n?.textContent || "").trim().slice(0, 80);
+  return { tab: panel?.dataset?.tab ?? null, scroll: panel?.querySelector(".jjk-sealed-hud-body")?.scrollTop ?? 0,
+    focus: focus ? { tag: focus.tagName, name: name(focus), had: true } : null, name };
+}
+function panelRestore(snap) {
+  if (!panel || !snap) return;
+  const body = panel.querySelector(".jjk-sealed-hud-body");
+  if (body && snap.tab === activeTab) body.scrollTop = snap.scroll;
+  if (!snap.focus) return;
+  const same = [...panel.querySelectorAll(snap.focus.tag)].find((n) => snap.name(n) === snap.focus.name);
+  // Keep focus inside the panel so Escape still closes it, even when the control is gone.
+  if (!panel.hasAttribute("tabindex")) panel.tabIndex = -1;
+  (same ?? panel).focus({ preventScroll: true });
+}
 function drawPanel(automatic = false) {
   if (!panel) return;
+  const snap = panelSnapshot();
+  drawPanelNow(automatic);
+  panel.dataset.tab = activeTab;
+  panelRestore(snap);
+  // The reference tab fills in asynchronously: restore once more after it has drawn.
+  if (activeTab === "library") requestAnimationFrame?.(() => panelRestore(snap));
+}
+function drawPanelNow(automatic = false) {
   const focus = panel.contains(document.activeElement) ? document.activeElement : null;
   if (automatic && focus?.matches("input[type=search],select") && activeTab === "hud") return;
   panel.replaceChildren();
