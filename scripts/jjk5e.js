@@ -930,6 +930,12 @@ function registerActivityHooks() {
       ui.notifications.warn(t("Notify.Burnout"));
       return false;
     }
+    if (actor?.type === "character" && activity.item?.flags?.jjk5e?.reversal &&
+        (!hasRCT(actor) || !actor.items.some(i => baseName(i) === "Cursed Technique Reversal") ||
+          characterLevel(actor) < (Number(activity.item.flags.jjk5e.reversalLevel) || 1))) {
+      ui.notifications.warn(t("Reversal.Requirements"));
+      return false;
+    }
     // Full-Turn Action (Rules of Thumb): needs the action, bonus action and all movement still unused.
     if (!actionGate(actor,activity)) {
       ui.notifications.warn(t(goldenWeekBlocks(actor, activity) ? "Notify.GoldenWeekTimeStop" : "Notify.FullTurnUsed"));
@@ -7383,18 +7389,43 @@ MENU_ACTIONS.splice(MENU_ACTIONS.length - 1, 0,
 
 /* ---- v1.18: Cursed Technique Reversals — added automatically once the actor has the feat ---- */
 
-async function syncReversals(actor) {
+const reversalQueues = new Map();
+function syncReversals(actor) {
+  if (!actor?.isOwner || actor.type !== "character") return Promise.resolve(0);
+  const previous = reversalQueues.get(actor.uuid) ?? Promise.resolve();
+  const current = previous.catch(() => {}).then(() => grantActorReversals(actor));
+  reversalQueues.set(actor.uuid, current);
+  return current.finally(() => {
+    if (reversalQueues.get(actor.uuid) === current) reversalQueues.delete(actor.uuid);
+  });
+}
+async function grantActorReversals(actor) {
   if (!actor?.isOwner || actor.type !== "character") return 0;
   if (!hasRCT(actor) || !actor.items.some((i) => baseName(i) === "Cursed Technique Reversal")) return 0;
-  const techs = new Set([actor.getFlag(MODULE_ID, "technique"), ...actor.items.map((i) => i.flags?.jjk5e?.technique)].filter(Boolean));
+  const techs = new Set([actor.getFlag(MODULE_ID, "technique"), ...actor.items.map(i => i.flags?.jjk5e?.techniqueRoot)].filter(Boolean));
+  // Older characters may only have the taught activities, without a technique root.
+  if (!techs.size) for (const item of actor.items) {
+    if (item.flags?.jjk5e?.technique && !item.flags.jjk5e.reversal) techs.add(item.flags.jjk5e.technique);
+  }
   if (!techs.size) return 0;
   const pack = jjkPack(TECH_PACK);
   if (!pack) return 0;
   const index = await pack.getIndex({ fields: ["flags.jjk5e"] });
   const lvl = characterLevel(actor);
-  const owned = new Set(actor.items.map((i) => baseName(i)));
-  const ids = index.filter((e) => e.flags?.jjk5e?.reversal && techs.has(e.flags.jjk5e.technique)
-    && (Number(e.flags.jjk5e.reversalLevel) || 1) <= lvl && !owned.has(baseName(e))).map((e) => e._id);
+  const owned = new Set(actor.items.map(i => baseName(i)));
+  const ownedSources = new Set(actor.items.map(i => i._stats?.compendiumSource ?? i.flags?.core?.sourceId).filter(Boolean).map(uuid => uuid.split(".").pop()));
+  const eligible = e => e.flags?.jjk5e?.reversal && (Number(e.flags.jjk5e.reversalLevel) || 1) <= lvl;
+  // Duplicated Reversal is passive. An owned base spell identifies the copied technique.
+  const duplicationId = "XiKZVS9s2x5a8XL9";
+  if (techs.has("Vengeful Spirit Manipulation") && (ownedSources.has(duplicationId) || owned.has("Duplicated Reversal") ||
+      index.some(e => e._id === duplicationId && eligible(e)))) {
+    for (const item of actor.items) {
+      const flags = item.flags?.jjk5e;
+      if (item.type === "spell" && flags?.technique && !flags.reversal) techs.add(flags.technique);
+    }
+  }
+  const ids = index.filter(e => eligible(e) && techs.has(e.flags.jjk5e.technique) &&
+    !ownedSources.has(e._id) && !owned.has(baseName(e))).map(e => e._id);
   if (!ids.length) return 0;
   const docs = (await Promise.all(ids.map((id) => pack.getDocument(id)))).filter(Boolean).map((d) => {
     const o = d.toObject();
@@ -7411,9 +7442,10 @@ Hooks.once("ready", () => {
   if (game.system?.id !== "dnd5e") return;
   game.modules.get(MODULE_ID).api.syncReversals = syncReversals;
   const later = (actor) => setTimeout(() => syncReversals(actor).catch((err) => console.error(`${MODULE_ID} | reversals`, err)), 300);
+  if (isActiveGM()) for (const actor of game.actors ?? []) { if (hasRCT(actor)) later(actor); }
   Hooks.on("createItem", (item, options, userId) => {
     if (userId !== game.user.id || item.parent?.documentName !== "Actor" || item.flags?.jjk5e?.reversal) return;
-    if (baseName(item) === "Cursed Technique Reversal" || item.flags?.jjk5e?.techniqueRoot) later(item.parent);
+    if (hasRCT(item.parent) && (baseName(item) === "Cursed Technique Reversal" || /^Reverse Cursed Technique(?: \(Healing Pool\))?$/.test(baseName(item)) || item.flags?.jjk5e?.technique)) later(item.parent);
   });
   Hooks.on("updateItem", (item, changes, options, userId) => {
     if (userId === game.user.id && item.type === "class" && foundry.utils.hasProperty(changes, "system.levels")) later(item.parent);

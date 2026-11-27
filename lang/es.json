@@ -955,6 +955,7 @@
       "UnderstandingOffer": "{name} ya tiene {total} avances. El GM puede conceder la Comprensión despertada que acaba de desbloquear:"
     },
     "Reversal": {
+      "Requirements": "Para usar esta inversión necesitas RCT, Cursed Technique Reversal y el nivel indicado.",
       "Added": "Reversión de técnica maldita: se añade {names}."
     },
     "Create": {

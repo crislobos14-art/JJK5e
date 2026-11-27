@@ -955,6 +955,7 @@
       "UnderstandingOffer": "{name} now has {total} breakthroughs. The GM can grant the newly available Awakened Understanding:"
     },
     "Reversal": {
+      "Requirements": "This reversal requires RCT, Cursed Technique Reversal and the listed level.",
       "Added": "Cursed Technique Reversal: {names} added."
     },
     "Create": {
