@@ -783,7 +783,18 @@ const ownTurn = (actor) => !!game.combat?.started && !!actor && game.combat.comb
 // Only explicit JJK free actions are counted; ordinary object interactions are separate.
 const ACTION_TURNS=new Map();
 const COMBAT_REACTIONS = new Map();
-const RECORDED_COMBAT_USES = new WeakSet();
+const RESOLVED_ACTIVITY_USES = new WeakMap();
+
+function claimActivityResult(activity, usage, results) {
+  const identity = results?.message ?? results ?? usage;
+  if (!identity || typeof identity !== "object") return true;
+  let activities = RESOLVED_ACTIVITY_USES.get(identity);
+  if (!activities) RESOLVED_ACTIVITY_USES.set(identity, activities = new Set());
+  const key = ceUsageKey(activity);
+  if (activities.has(key)) return false;
+  activities.add(key);
+  return true;
+}
 
 function reactionCycle(actor) {
   const combat = game.combat;
@@ -863,13 +874,9 @@ function ceTransactional(activity){
   if(!ceAuthorityEnabled()||!setting("autoSpendCE")||!managedCE(activity)) return false;
   return CE_ADAPTER_TARGETS.has(`CONFIG.DND5E.activityTypes.${activity?.type}.documentClass.prototype.consume`);
 }
-function recordTurnActivity(activity, usage, results) {
+function recordTurnActivity(activity, usage) {
   const actor = activity?.actor ?? activity?.item?.actor;
-  const identity = results?.message ?? results ?? usage;
-  if (identity && typeof identity === "object") {
-    if (RECORDED_COMBAT_USES.has(identity)) return;
-    RECORDED_COMBAT_USES.add(identity);
-  }
+  if (usage?.consume?.action === false && !attackReplacement(activity) && !isClaimedDomainReaction(actor, activity)) return;
   if (activityReaction(actor, activity)) {
     recordReaction(actor);
     if (isClaimedDomainReaction(actor, activity) && !globalThis.MidiQOL?.hasUsedReaction?.(actor)) {
@@ -877,7 +884,6 @@ function recordTurnActivity(activity, usage, results) {
     }
     return;
   }
-  if (usage?.consume?.action === false && !attackReplacement(activity)) return;
   const state = actionTurn(actor);
   if (!state) return;
   if (isJJKFree(activity) && !unlimitedDomainSwap(activity)) state.free = true;
@@ -888,7 +894,7 @@ function recordTurnActivity(activity, usage, results) {
   if (activity.activation?.type === "bonus") state.bonus = true;
 }
 function isClaimedDomainReaction(actor,activity){
-  if(activity?.item?.flags?.jjk5e?.domainActivity!==activity?.id)return false;
+  if (!activity?.id || activity.item?.flags?.jjk5e?.domainActivity !== activity.id) return false;
   const claim=actor?.getFlag(MODULE_ID,"domainReactionClaim");
   return !!claim?.id && Number(claim.expires)>nowMs();
 }
@@ -903,9 +909,10 @@ function reversalFollowUpAllowed(actor, activity) {
       (effect.system?.type === "concentrating" || effect.statuses?.has?.("concentrating")) && liveWard(effect));
   }
   if (["vvg0y1Ga9QXl6bXU", "nFOeof9kzI5eiJoZ"].includes(activity.id)) {
-    return !!actor?.effects?.some(effect => liveWard(effect) &&
-      (effect.flags?.jjk5e?.spellBuffActivity === "OM31HL66a1JtFZY2" ||
-        (baseName(effect) === "Sunny Day" && effect.flags?.jjk5e?.technique === "Disaster Storms")));
+    const sunnyDay = actor?.items?.find(item => item.flags?.jjk5e?.reversal && baseName(item) === "Sunny Day");
+    return !!sunnyDay && !!actor.effects?.some(effect => liveWard(effect) &&
+      (effect.origin === sunnyDay.uuid || effect.origin === sunnyDay.uuid + ".Activity.OM31HL66a1JtFZY2") &&
+      (effect.flags?.jjk5e?.kind === "sunnyDaySource" || baseName(effect) === "Sunny Day"));
   }
   return true;
 }
@@ -968,6 +975,16 @@ function combatInteractionActivity(actor, activity) {
   const secondaryDomain = activity.item.flags?.jjk5e?.domainActivity && !domain;
   return {kind, domain, cost, range, variable:!!activity.item.flags?.jjk5e?.ceSteps?.[activity.id],
     allowed:actionGate(actor,activity) && (!secondaryDomain || canUseDomainActivity(actor,activity)), direct: !domain && ["action","bonus","full","free"].includes(kind)};
+}
+
+async function startSunnyDay(actor, activity) {
+  if (!actor?.isOwner || activity.id !== "OM31HL66a1JtFZY2" || activity.item?.flags?.jjk5e?.reversal !== true) return;
+  const existing = actor.effects.filter(effect => effect.flags?.jjk5e?.kind === "sunnyDaySource");
+  const [source] = await actor.createEmbeddedDocuments("ActiveEffect", [fxData({
+    name: activity.item.name, img: activity.item.img, origin: activity.item.uuid,
+    duration: { seconds: 120 }, flags: { jjk5e: { kind: "sunnyDaySource" } }
+  })]);
+  if (source) for (const effect of existing) await safeDelete(effect);
 }
 
 function registerActivityHooks() {
@@ -1068,7 +1085,10 @@ function registerActivityHooks() {
   });
 
   // D&D5e 6.1: this gate runs after the user selected CE scaling, before item consumption.
-  Hooks.on("dnd5e.preActivityConsumption", (activity, usageConfig) => {
+  Hooks.on("dnd5e.preActivityConsumption", (activity, usageConfig, messageConfig) => {
+    if (messageConfig?.message && ceTransactional(activity)) {
+      return ceContext(activity, usageConfig)?.state === "reservingNative";
+    }
     if (activity.item?.flags?.jjk5e?.domainActivity && activity.item.flags.jjk5e.domainActivity !== activity.id &&
         !canUseDomainActivity(activity.actor ?? activity.item.actor, activity)) return false;
     if (isCloneCreation(activity) && !canCreateClone(activity.item.actor, cloneQuantity(activity, usageConfig))) return false;
@@ -1095,15 +1115,15 @@ function registerActivityHooks() {
     const swapping = item?.flags?.jjk5e?.tokenSwap?.[activity.id];
     const selection = swapping && (SWAP_SELECTIONS.get(usageConfig) ?? selectedSwap(activity));
     if (swapping && !selection) return;
-    // Pay BEFORE opening domains or applying buffs. Failed CE payment must never
-    // leave a benefit in place. The pre-use gate handles ordinary insufficient CE.
-    if (setting("autoSpendCE") && actor && item) {
-      if(ceTransactional(activity)){
-        if (!cePostOnce(activity, usageConfig, "activity", results?.message)) return;
-      }else if (!(await payActivityCE(actor, activity, usageConfig))) return;
-    }
-    if (actor?.isOwner) recordTurnActivity(activity, usageConfig, results);
+    const transactional = ceTransactional(activity);
+    if (transactional && !cePostOnce(activity, usageConfig, "activity", results?.message)) return;
+    if (!claimActivityResult(activity, usageConfig, results)) return;
+    // Finish payment before opening domains or applying buffs.
+    if (!transactional && setting("autoSpendCE") && actor && item &&
+        !(await payActivityCE(actor, activity, usageConfig))) return;
+    if (actor?.isOwner) recordTurnActivity(activity, usageConfig);
     if(isFullTurn(activity)&&actor?.isOwner&&!isClaimedDomainReaction(actor,activity))await spendFullTurn(actor,activity);
+    await startSunnyDay(actor, activity);
     if(isQuickRecovery(activity)){
       if(!results || typeof results!=="object" || CE_RECOVERY_RESULTS.has(results)) return;
       CE_RECOVERY_RESULTS.add(results);
@@ -10421,6 +10441,7 @@ const {
 } = createCEEngine({
   CE_AUTH_QUERY,
   MODULE_ID,
+  actionGate,
   baseName,
   bindNativeWorkflow,
   canDirectDomain,

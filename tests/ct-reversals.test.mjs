@@ -88,16 +88,26 @@ test("Sunshine uses a remaining Extra Attack and cannot use a bonus or a spent a
     { name: "Reverse Cursed Technique", type: "feat" }, { name: "Cursed Technique Reversal", type: "feat" },
     { name: "Extra Attack", type: "feat" }
   ] });
-  const [item] = await actor.createEmbeddedDocuments("Item", [inversions.find(d => d.name === "Sunshine")]);
-  await actor.createEmbeddedDocuments("ActiveEffect", [{ name: "Sunny Day", flags: { jjk5e: { technique: "Disaster Storms" } } }]);
+  const [item, sun] = await actor.createEmbeddedDocuments("Item", [
+    inversions.find(d => d.name === "Sunshine"), inversions.find(d => d.name === "Sunny Day")
+  ]);
+  await actor.createEmbeddedDocuments("ActiveEffect", [
+    { name: "Sunny Day", origin: "Actor.ally.Item.sun", flags: { jjk5e: { technique: "Disaster Storms" } } }
+  ]);
+  const sunnyDay = { id: "OM31HL66a1JtFZY2", item: sun };
+  assert.equal(env.jjk.reversalFollowUpAllowed(actor, { id: "vvg0y1Ga9QXl6bXU", item }), false);
+  await env.jjk.startSunnyDay(actor, sunnyDay);
+  await env.jjk.startSunnyDay(actor, sunnyDay);
+  assert.equal(actor.effects.filter(e => e.flags?.jjk5e?.kind === "sunnyDaySource").length, 1);
   const turn = { id: "a", actor };
   env.game.combat = { started: true, id: "test", round: 1, turn: 0, combatant: turn, turns: [turn] };
   const { jjk } = env;
   const replacement = { id: "vvg0y1Ga9QXl6bXU", type: "attack", activation: { type: "special" }, actor, item };
   const weapon = { actor, type: "attack", activation: { type: "action" }, attack: { type: { classification: "weapon" } } };
   const result = {};
-  jjk.recordTurnActivity(weapon, {}, result);
-  jjk.recordTurnActivity(weapon, {}, result);
+  assert.equal(jjk.claimActivityResult(weapon, {}, result), true);
+  jjk.recordTurnActivity(weapon, {});
+  assert.equal(jjk.claimActivityResult(weapon, {}, result), false);
   assert.equal(jjk.actionGate(actor, replacement), true);
   jjk.recordTurnActivity(replacement, {}, {});
   assert.equal(jjk.actionGate(actor, replacement), false);

@@ -1,6 +1,7 @@
 export function createCEEngine({
   CE_AUTH_QUERY,
   MODULE_ID,
+  actionGate,
   baseName,
   bindNativeWorkflow,
   canDirectDomain,
@@ -129,7 +130,7 @@ export function createCEEngine({
   }
   async function handleCEAuthority(msg,{user}={}) {
     if (!ceAuthorityEnabled() || !isActiveGM() || !user?.active || !msg?.payload ||
-        !["reserve","start","commit","review","settle","adjust","linkCard","restExchange"].includes(msg.operation)) return false;
+        !["reserve","start","commit","review","cancel","settle","adjust","linkCard","restExchange"].includes(msg.operation)) return false;
     const {operation,payload:d}=msg;
     const actor=await domainActor(d.actorUuid);
     if (!canDirectDomain(user,actor)) return false;
@@ -204,13 +205,16 @@ export function createCEEngine({
         await pool.update({"flags.jjk5e.ceLedger":ceRecord(ledger,{...old,state:operation==="commit"?"committed":"review",ended:Date.now()})},{jjk5eCE:true});
         return true;
       }
-      if(operation!=="settle"||!["reserved","review"].includes(old.state)||typeof d.refund!=="boolean") return false;
-      // Refund only on explicit GM decision; a canceled external workflow may already have applied effects.
-      const tx=ceTransaction(poolValue(pool),poolMax(pool),d.refund?-old.cost:0);
+      const unstarted = operation === "cancel" && old.state === "reserved" && old.protocol === 2 && old.nativeStarted === false;
+      const settled = operation === "settle" && ["reserved", "review"].includes(old.state) && typeof d.refund === "boolean";
+      if (!unstarted && !settled) return false;
+      // Only an unstarted use is safe to refund without a GM decision.
+      const refund = unstarted || d.refund;
+      const tx=ceTransaction(poolValue(pool),poolMax(pool),refund?-old.cost:0);
       if(!tx) return false;
       const whole=Math.floor(tx.spent+1e-6);
       await pool.update({"system.uses.spent":whole,"flags.jjk5e.fractionalSpent":Math.round((tx.spent-whole)*1000)/1000,
-        "flags.jjk5e.ceLedger":ceRecord(ledger,{...old,state:d.refund?"refunded":"committed",ended:Date.now(),settledBy:user.id})},{jjk5eCE:true});
+        "flags.jjk5e.ceLedger":ceRecord(ledger,{...old,state:refund?"refunded":"committed",ended:Date.now(),...(unstarted ? { recovery: "cancelled-before-start" } : { settledBy: user.id })})},{jjk5eCE:true});
       return true;
     });
   }
@@ -240,7 +244,7 @@ export function createCEEngine({
         consumingCards.delete(card);
       }
     }
-    if(!validActivityCE(actor,activity,usageConfig)) return false;
+    if (!actionGate(actor, activity, { recheck: true }) || !validActivityCE(actor,activity,usageConfig)) return false;
     if (!isActiveGM() && typeof game.users.activeGM?.query !== "function") {
       ui.notifications.warn(t("Notify.CENoAuthority"));
       return false;
@@ -257,6 +261,11 @@ export function createCEEngine({
     contexts.set(key, ctx);
     const reserve=await ceAuthorityRequest("reserve",{actorUuid:actor.uuid,itemId:activity.item.id,activityId:activity.id,
       scaling:Number(usageConfig.scaling??0),id,parentId:parent?.id});
+    if (reserve?.id && !actionGate(actor, activity, { recheck: true })) {
+      await ceAuthorityRequest("cancel", { actorUuid: actor.uuid, id });
+      ctx.state = "cancelled";
+      return false;
+    }
     if (!reserve?.id || !await ceAuthorityRequest("start", { actorUuid: actor.uuid, id })) {
       ui.notifications.warn(t("Notify.CEAuthorizationFailed"));
       return false;
