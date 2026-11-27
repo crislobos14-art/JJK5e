@@ -89,6 +89,80 @@
       }
      ]
     }
+   },
+   "Tw4vEm0vEsWaLLmv": {
+    "_id": "Tw4vEm0vEsWaLLmv",
+    "type": "save",
+    "name": "Wall moves 50 ft (start of your turn): 1d10 less each round",
+    "sort": 100,
+    "img": null,
+    "activation": {
+     "type": "special",
+     "value": null,
+     "condition": "",
+     "override": true
+    },
+    "consumption": {
+     "targets": [],
+     "scaling": {
+      "allowed": false,
+      "max": ""
+     },
+     "spellSlot": false
+    },
+    "duration": {
+     "units": "inst",
+     "override": true
+    },
+    "range": {
+     "value": "1",
+     "units": "mi",
+     "override": true
+    },
+    "target": {
+     "template": {
+      "type": "wall",
+      "size": "300",
+      "width": "50",
+      "height": "",
+      "units": "ft",
+      "count": "1",
+      "contiguous": false
+     },
+     "affects": {
+      "type": "creature",
+      "choice": false
+     },
+     "override": true
+    },
+    "effects": [],
+    "save": {
+     "ability": [
+      "str"
+     ],
+     "dc": {
+      "calculation": "spellcasting",
+      "formula": ""
+     }
+    },
+    "damage": {
+     "onSave": "none",
+     "parts": [
+      {
+       "number": 6,
+       "denomination": 10,
+       "bonus": "",
+       "types": [
+        "bludgeoning"
+       ],
+       "custom": {
+        "enabled": false,
+        "formula": ""
+       },
+       "scaling": {}
+      }
+     ]
+    }
    }
   },
   "uses": {
@@ -132,9 +206,23 @@
    "technique": "Disaster Tides",
    "level": 18,
    "spellFrom": "feat",
-   "automationNotes": "Tsunami spell: concentration 6 rounds; wall loses 50 ft height and 1d10 damage each round (track by hand).",
+   "automationNotes": "Tsunami spell, concentration 6 rounds. The JJK panel counts the rounds: at the start of your turn the wall loses 50 ft of height and 1d10 of damage, and the spell ends at 0 ft. \"Wall moves\" rolls the current dice.",
    "automation": "automated",
-   "rev": "af80bbd7bf"
+   "rev": "8a15aae742",
+   "trackerUse": {
+    "49jmvydcAg9jYSQl": {
+     "tracker": "tsunami",
+     "op": "start",
+     "n": 0
+    }
+   },
+   "trackerDice": {
+    "Tw4vEm0vEsWaLLmv": {
+     "tracker": "tsunami",
+     "die": "d10",
+     "active": true
+    }
+   }
   }
  },
  "folder": "Ao9OCl7PHP0hxQBD",

@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.18.0 — Contadores automáticos de técnicas
+Los contadores nuevos están en la sección de la técnica del panel JJK. Las actividades los mueven solas, y una actividad sin recursos suficientes avisa y no se usa.
+- **Lightning Discharge (Mythical Beast Amber):** «Positive charge» suma una carga, hasta el doble de tu modificador de EM. El rayo tira 1d12 por carga y las gasta todas. Las cargas se borran al terminar el combate o con un descanso largo.
+- **Maximum: Tsunami (Disaster Tides):** lanzarlo empieza la cuenta. Al empezar tu turno, el muro pierde 50 pies de alto y 1d10 de daño. La actividad nueva «Wall moves» tira los dados que quedan. El conjuro termina solo a 0 pies.
+- **Little Miracles (Miracle):** el panel y los usos del objeto muestran la misma cuenta. Blind Luck y Miraculous Outcome gastan 1 Milagro; Deadly Miracle gasta 2. «Initiative 20» de Luck of the Draw suma 3. La ventaja en salvaciones de muerte de Deadly Miracle se apaga cuando no quedan Milagros. Las Marcas de Calamidad usan los usos de Calamity.
+- **Blood Constructs (Blood Manipulation):** cada uso añade un constructo al panel con PG = nivel × EM gastada. Desde ahí se le hace daño y se rompe a 0 PG.
+- **Straw Doll Technique:** empiezas con 24 clavos. Cada ataque de Nail Projectile y cada clavo de Hair Pin gasta uno. Clavar suma 1d8 (+1d8 por EM extra) a la detonación, y detonar tira todos los dados y los vacía.
+- **Samsara Rewind (Golden Hour):** en combate, el módulo guarda posiciones, PG y EM al empezar cada uno de tus turnos. Usar la técnica publica una tarjeta: el DJ pulsa «Retroceder» y las criaturas a 100 pies vuelven al inicio de tu turno anterior. Las 8 EM del retroceso siguen gastadas.
+- **Prayer Song:** el ritmo aplica solo el efecto del turno en curso y quita el anterior. Termina si quedas aturdido, paralizado, agarrado, apresado o derribado. Con **Crescendo** (nivel 11), el ritmo llega a 10 y aplica sus niveles 1+, 3+ y 9+. Las actividades sueltas de Crescendo se quitaron.
+- Los personajes que ya tienen estas técnicas necesitan **Actualizar automatización**.
 ## 2.17.0 — Invocar al Espíritu Vengativo
 - **Vengeful Spirit Manipulation:** ahora invoca al **Vengeful Spirit**.
   - Es un actor nuevo en el compendio de shikigami, con su bloque de V.6: Grande, no muerto, CA 13 + BC, PG 80 + 10 × BC, 90 pies de velocidad y de vuelo.

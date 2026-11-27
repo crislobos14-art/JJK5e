@@ -20,139 +20,15 @@
    "subtype": ""
   },
   "requirements": "Prayer Song 11",
-  "activities": {
-   "r5bvfH1yf3EgoQpc": {
-    "_id": "r5bvfH1yf3EgoQpc",
-    "type": "utility",
-    "name": "Crescendo (turn 1+)",
-    "sort": 0,
-    "img": null,
-    "activation": {
-     "type": "special",
-     "value": null,
-     "condition": "",
-     "override": true
-    },
-    "consumption": {
-     "targets": [],
-     "scaling": {
-      "allowed": false,
-      "max": ""
-     },
-     "spellSlot": false
-    },
-    "duration": {
-     "units": "inst",
-     "override": true
-    },
-    "range": {
-     "units": "self",
-     "override": true
-    },
-    "target": {
-     "affects": {
-      "type": "self"
-     },
-     "override": true
-    },
-    "effects": [
-     {
-      "_id": "VPYCaxpzIcv6pN5w",
-      "onSave": false
-     }
-    ]
-   },
-   "yBd7P533H32FsyWa": {
-    "_id": "yBd7P533H32FsyWa",
-    "type": "utility",
-    "name": "Crescendo (turn 3+)",
-    "sort": 0,
-    "img": null,
-    "activation": {
-     "type": "special",
-     "value": null,
-     "condition": "",
-     "override": true
-    },
-    "consumption": {
-     "targets": [],
-     "scaling": {
-      "allowed": false,
-      "max": ""
-     },
-     "spellSlot": false
-    },
-    "duration": {
-     "units": "inst",
-     "override": true
-    },
-    "range": {
-     "units": "self",
-     "override": true
-    },
-    "target": {
-     "affects": {
-      "type": "self"
-     },
-     "override": true
-    },
-    "effects": [
-     {
-      "_id": "GOf1Ctzt3cWh8a3k",
-      "onSave": false
-     }
-    ]
-   },
-   "fgHKGv1SFdcHYFm6": {
-    "_id": "fgHKGv1SFdcHYFm6",
-    "type": "utility",
-    "name": "Crescendo (turn 9+)",
-    "sort": 0,
-    "img": null,
-    "activation": {
-     "type": "special",
-     "value": null,
-     "condition": "",
-     "override": true
-    },
-    "consumption": {
-     "targets": [],
-     "scaling": {
-      "allowed": false,
-      "max": ""
-     },
-     "spellSlot": false
-    },
-    "duration": {
-     "units": "inst",
-     "override": true
-    },
-    "range": {
-     "units": "self",
-     "override": true
-    },
-    "target": {
-     "affects": {
-      "type": "self"
-     },
-     "override": true
-    },
-    "effects": [
-     {
-      "_id": "bhmy8jW7SD1JZtpX",
-      "onSave": false
-     }
-    ]
-   }
-  }
+  "activities": {}
  },
  "flags": {
   "jjk5e": {
    "technique": "Prayer Song",
    "level": 11,
-   "automationNotes": "Replaces Prayer's table at 11th. Other turns (enemy −3 AC, disadvantage, +prof, −prof to its damage, extra attack, −5 AC/saves, action economy limit): apply by hand.",
+   "automationNotes": "Replaces Prayer's table at 11th: the beat runs to 10 and your own effect (turn 1+, 3+, 9+) is applied for you. Effects on your opponent (−3 AC, disadvantage, −prof to its damage, −5 AC/saves, action economy limit) and the extra attack: apply by hand.",
    "automation": "automated",
-   "rev": "be95fdf196"
+   "rev": "96a5a870f6"
   }
  },
  "folder": "LeKt9DxatfKKBe3c",
