@@ -19,7 +19,7 @@
    "ntA78JqzibjeNcT8": {
     "_id": "ntA78JqzibjeNcT8",
     "type": "utility",
-    "name": "Evidence roll (d20)",
+    "name": "Evidence (Deadly Sentencing table)",
     "sort": 0,
     "img": null,
     "activation": {
@@ -52,10 +52,10 @@
     },
     "effects": [],
     "roll": {
-     "formula": "1d20",
-     "name": "Evidence",
+     "formula": "",
+     "name": "",
      "prompt": false,
-     "visible": true
+     "visible": false
     }
    },
    "MGIi4U05pEvEsoP9": {
@@ -104,7 +104,7 @@
    "ZrZLCkaELzSTs9w3": {
     "_id": "ZrZLCkaELzSTs9w3",
     "type": "utility",
-    "name": "Trial: contested Persuasion",
+    "name": "Trial (automatic): evidence + contested Persuasion",
     "sort": 0,
     "img": null,
     "activation": {
@@ -137,10 +137,10 @@
     },
     "effects": [],
     "roll": {
-     "formula": "1d20 + @skills.per.total",
-     "name": "Persuasion (contested)",
+     "formula": "",
+     "name": "",
      "prompt": false,
-     "visible": true
+     "visible": false
     }
    },
    "yThoNOdqXvaDLxal": {
@@ -351,9 +351,11 @@
    },
    "domainActivity": "MGIi4U05pEvEsoP9",
    "spellFrom": "feat",
-   "automationNotes": "Evidence: 1 innocent · 2–9 guilty · 10–15 advantage, Confiscation · 15–19 Death Penalty · 20 instant, both. Conviction with Confiscation/Death Penalty: no Technique Burnout (remove it by hand).",
+   "automationNotes": "Target the defendant and use Trial: the module draws the Evidence table (1 innocent · 2–9 guilty · 10–14 advantage · 15–19 Death Penalty · 20 instant), rolls both contested Persuasion checks, applies Confiscation and ends the domain; Death Penalty unlocks the Executioner's Sword. A conviction with Confiscation or Death Penalty spares Technique Burnout.",
    "automation": "automated",
-   "rev": "5227bebcb1"
+   "rev": "931991e572",
+   "trialActivity": "ZrZLCkaELzSTs9w3",
+   "evidenceActivity": "ntA78JqzibjeNcT8"
   }
  },
  "folder": "jvdEqnCHI6BBkSgt",

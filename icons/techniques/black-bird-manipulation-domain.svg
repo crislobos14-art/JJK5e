@@ -1,9 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-<defs><radialGradient id="g" cx="50%" cy="40%" r="65%">
-<stop offset="0%" stop-color="hsl(323,65%,42%)"/><stop offset="70%" stop-color="hsl(323,75%,16%)"/>
-<stop offset="100%" stop-color="hsl(323,65%,8%)"/></radialGradient></defs>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="black bird manipulation domain">
+<!-- JJK 5e glyph seal (tools/build-icons.mjs). Glyph: Font Awesome Free fa-crow (CC BY 4.0, https://fontawesome.com/license/free). -->
+<defs><radialGradient id="g" cx="50%" cy="38%" r="68%">
+<stop offset="0%" stop-color="hsl(268,55%,48%)"/><stop offset="68%" stop-color="hsl(268,55%,19%)"/>
+<stop offset="100%" stop-color="hsl(268,55%,9%)"/></radialGradient></defs>
 <rect width="128" height="128" rx="18" fill="#0d0a12"/>
-<circle cx="64" cy="64" r="56" fill="url(#g)"/>
-<circle cx="64" cy="64" r="56" fill="none" stroke="#f2cf6b" stroke-width="4"/>
-<circle cx="64" cy="64" r="48" fill="none" stroke="#e8d9ff" stroke-opacity=".35" stroke-width="1.5" stroke-dasharray="4 5"/>
-<line x1="64" y1="4" x2="64" y2="12" stroke="#f2cf6b" stroke-width="3" transform="rotate(0 64 64)"/><line x1="64" y1="4" x2="64" y2="12" stroke="#f2cf6b" stroke-width="3" transform="rotate(30 64 64)"/><line x1="64" y1="4" x2="64" y2="12" stroke="#f2cf6b" stroke-width="3" transform="rotate(60 64 64)"/><line x1="64" y1="4" x2="64" y2="12" stroke="#f2cf6b" stroke-width="3" transform="rotate(90 64 64)"/><line x1="64" y1="4" x2="64" y2="12" stroke="#f2cf6b" stroke-width="3" transform="rotate(120 64 64)"/><line x1="64" y1="4" x2="64" y2="12" stroke="#f2cf6b" stroke-width="3" transform="rotate(150 64 64)"/><line x1="64" y1="4" x2="64" y2="12" stroke="#f2cf6b" stroke-width="3" transform="rotate(180 64 64)"/><line x1="64" y1="4" x2="64" y2="12" stroke="#f2cf6b" stroke-width="3" transform="rotate(210 64 64)"/><line x1="64" y1="4" x2="64" y2="12" stroke="#f2cf6b" stroke-width="3" transform="rotate(240 64 64)"/><line x1="64" y1="4" x2="64" y2="12" stroke="#f2cf6b" stroke-width="3" transform="rotate(270 64 64)"/><line x1="64" y1="4" x2="64" y2="12" stroke="#f2cf6b" stroke-width="3" transform="rotate(300 64 64)"/><line x1="64" y1="4" x2="64" y2="12" stroke="#f2cf6b" stroke-width="3" transform="rotate(330 64 64)"/><text x="64" y="64" dy=".35em" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-weight="bold" font-size="46" fill="#f2cf6b" stroke="#000" stroke-opacity=".5" stroke-width="1.5" paint-order="stroke">BB</text></svg>
+<circle cx="64" cy="64" r="57" fill="url(#g)"/>
+<circle cx="64" cy="64" r="57" fill="none" stroke="hsl(268,45%,88%)" stroke-width="3.5"/>
+<g stroke="hsl(268,45%,88%)" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"><line x1="108.2" y1="38.5" x2="111.6" y2="36.5"/><line x1="115.0" y1="64.0" x2="119.0" y2="64.0"/><line x1="108.2" y1="89.5" x2="111.6" y2="91.5"/><line x1="89.5" y1="108.2" x2="91.5" y2="111.6"/><line x1="64.0" y1="115.0" x2="64.0" y2="119.0"/><line x1="38.5" y1="108.2" x2="36.5" y2="111.6"/><line x1="19.8" y1="89.5" x2="16.4" y2="91.5"/><line x1="13.0" y1="64.0" x2="9.0" y2="64.0"/><line x1="19.8" y1="38.5" x2="16.4" y2="36.5"/><line x1="38.5" y1="19.8" x2="36.5" y2="16.4"/><line x1="64.0" y1="13.0" x2="64.0" y2="9.0"/><line x1="89.5" y1="19.8" x2="91.5" y2="16.4"/></g>
+<circle cx="64" cy="64" r="46" fill="none" stroke="hsl(268,45%,88%)" stroke-opacity=".85" stroke-width="3" />
+<circle cx="64" cy="64" r="40" fill="none" stroke="hsl(268,45%,88%)" stroke-opacity=".5" stroke-width="1.2"/>
+<g transform="translate(39.00 44.00) scale(0.07813)" fill="hsl(268,40%,95%)" stroke="#000" stroke-opacity=".45" stroke-width="64.0" paint-order="stroke">
+<path d="M456.5 0c-48.6 0-88 39.4-88 88l0 36-355.2 266.4C-.8 401-3.7 421 6.9 435.2s30.6 17 44.8 6.4l76.8-57.6 131.3 0 46.6 113.1 1 2.2c5.7 10.7 18.8 15.5 30.3 10.8s17.3-17.3 13.9-29l-.8-2.3-39.1-94.9 40.9 0c1.1 0 2.2 0 3.2 0l46.6 113.2 1 2.2c5.7 10.7 18.8 15.5 30.3 10.8s17.3-17.3 13.9-29l-.8-2.3-42-102C485.3 354.1 544.5 280 544.5 192l0-72 80.5-20.1c8.6-2.1 13.8-10.8 11.6-19.4-7.1-28.5-32.7-48.5-62.1-48.5l-50.1 0C508.2 12.5 483.8 0 456.5 0zm0 64a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/>
+</g></svg>

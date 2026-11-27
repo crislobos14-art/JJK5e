@@ -706,7 +706,11 @@
       "Taken": "Feat taken: {name}",
       "FitTechnique": "Your technique: {name}",
       "FitRace": "Your race: {name}",
-      "FitClass": "Your class: {name}"
+      "FitClass": "Your class: {name}",
+      "NeedsAt": "{name} (technique level {level})",
+      "FitTechniqueLocked": "Your technique: {name} — unlocked later",
+      "Requires": "requires {list}",
+      "LockedHint": "{n} more feat(s) of your technique unlock with later features."
     },
     "SceneTools": {
       "Panel": "JJK: Open panel",
@@ -1651,6 +1655,31 @@
       "outdatedWorld": "{name}: a newer version is in the compendium. Update it from an actor or reimport the compendium.",
       "custom": "{name}: custom JJK item, not in the compendium.",
       "none": "{name}: not a JJK item."
+    },
+    "Amber": {
+      "Stage": "Stage {stage}. Extra this stage: {extra}. {n} round(s) to the next.",
+      "Last": "Stage 5: when its fifth round ends, the form ends and its user dies.",
+      "Death": "{name} completed five rounds in Stage 5: the form ends and they die instantly.",
+      "Ended": "{name} deactivates Mythical Beast Amber. Roll the stage's Constitution save for the backlash."
+    },
+    "Trial": {
+      "Title": "Trial: {name}",
+      "Evidence": "Evidence",
+      "Persuasion": "Contested Persuasion",
+      "Advantage": "advantage",
+      "NoDefendant": "Target the defendant and use the Trial again.",
+      "Guilty": "Guilty: {name} suffers the sentence for 1 minute.",
+      "NotGuilty": "Not guilty: {name} proves their innocence.",
+      "Confiscation": "Confiscation: loses their innate technique or magic items (items first); without either, their CE.",
+      "Death": "Death Penalty: the Judge's Gavel becomes the Executioner's Sword, which kills the accused on a hit (domain activity). The domain ends when it is used or closed.",
+      "NoBurnout": "Conviction with Confiscation or Death Penalty: no Technique Burnout.",
+      "Tier": {
+        "innocent": "Innocent: you fail unless the defendant admits it.",
+        "guilty": "Guilty, minimum evidence: normal roll. Confiscation.",
+        "very": "Very guilty, good evidence: you roll with advantage. Confiscation.",
+        "severe": "Severely guilty: Death Penalty.",
+        "unforgivable": "Guilty beyond doubt: instant success. Death Penalty and Confiscation."
+      }
     }
   }
 }

@@ -388,6 +388,10 @@ async function syncBackdrop(zone, deleted = false) {
   try {
     if (!data) { if (existing.length) await scene.deleteEmbeddedDocuments("Drawing", existing.map((d) => d.id)); return; }
     await writeBackdrop(scene, data, existing);
+    // The zone can be deleted while the drawing was being written (a domain closed right after opening):
+    // a backdrop whose zone is gone is removed at once instead of staying on the map.
+    const zoneGone = !scene.regions?.get?.(zone.id) && !scene.templates?.get?.(zone.id);
+    if (zoneGone) { const late = ownBackdrops(scene, zone.id); if (late.length) await scene.deleteEmbeddedDocuments("Drawing", late.map((d) => d.id)); }
   } catch (err) { console.warn(`${ID} | domain backdrop`, err); }
 }
 

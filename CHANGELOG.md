@@ -1,5 +1,27 @@
 # Changelog
 
+## 2.16.0 — Motor de dominios, etapas de Amber, juicio de Deadly Sentencing e íconos
+- **Cerrar dominio funciona siempre:**
+  - El botón del HUD de dominio usaba la acción interna `close` de la ventana. Por eso la X de la ventana intentaba cerrar el dominio, fallaba y la ventana no se cerraba.
+  - El panel, Token Action HUD y Visual Active Effects cierran ahora por el mismo camino del motor: efecto y estado terminan juntos. Si el efecto ya no existe o no coincide con la apertura registrada, el dominio se cierra igual.
+  - Un paso de limpieza que falla ya no deja el dominio a medio cerrar.
+  - Una tarea de dominio atascada más de 15 s ya no bloquea las siguientes.
+- **Sin residuos:**
+  - Al cerrar, también se borran los fondos de dominio (Drawings) cuyo dominio ya no está abierto, en la escena registrada y en la escena actual del lanzador.
+  - Un fondo escrito justo cuando su zona se borraba se elimina al momento.
+- **Mythical Beast Amber:**
+  - Las etapas avanzan solas al empezar tu turno, una cada 5 rondas, y Expedite suma 1 ronda por cada 2 EM.
+  - Solo hay una etapa activa a la vez y el chat muestra los extras de cada etapa.
+  - Desactivar quita la forma; tras 5 rondas en la Etapa 5, el usuario muere.
+- **Deadly Sentencing:**
+  - «Trial» saca la prueba de la tabla del compendio y tira la Persuasión enfrentada, con ventaja si la prueba es muy buena.
+  - Dicta el veredicto, aplica la Confiscación y cierra el dominio.
+  - Con Pena de muerte, la Espada del Verdugo queda disponible.
+  - Una condena con Confiscación o Pena de muerte evita el Technique Burnout.
+- **Dotes de técnica:**
+  - Las que desbloquea un rasgo posterior de tu técnica aparecen bloqueadas, con el rasgo y el nivel de técnica que piden. Por ejemplo, Mythical Beast Amber muestra Defensive Surge, más Imbued Weapon e Grounded Charge bloqueadas.
+  - Las dotes «Dormant» ya no se marcan como «tu clase».
+- **Íconos:** los 194 íconos de letras («Cf», «ST», «Tr»…) son ahora sellos con símbolo, en el color de su familia. Cada técnica tiene su símbolo y su dominio va en un sello de doble anillo. Los glifos son de Font Awesome Free (CC BY 4.0).
 ## 2.15.0 — Auditoría de botones, pestañas y tablas
 - **Revisión completa:** cada botón del módulo tiene una acción que lo atiende, cada ventana y diálogo se puede redimensionar, y todas las claves de texto existen en español e inglés. Lo comprueba una prueba automática nueva.
 - **Tablas:**

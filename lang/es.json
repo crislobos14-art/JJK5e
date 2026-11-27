@@ -706,7 +706,11 @@
       "Taken": "Dote tomada: {name}",
       "FitTechnique": "Tu técnica: {name}",
       "FitRace": "Tu raza: {name}",
-      "FitClass": "Tu clase: {name}"
+      "FitClass": "Tu clase: {name}",
+      "NeedsAt": "{name} (nivel {level} de técnica)",
+      "FitTechniqueLocked": "Tu técnica: {name} — se desbloquean más adelante",
+      "Requires": "requiere {list}",
+      "LockedHint": "{n} dote(s) más de tu técnica se desbloquean con rasgos posteriores."
     },
     "SceneTools": {
       "Panel": "JJK: Abrir panel",
@@ -1651,6 +1655,31 @@
       "outdatedWorld": "{name}: hay una versión más nueva en el compendio. Actualízalo desde un actor o reimporta el compendio.",
       "custom": "{name}: objeto JJK propio, sin entrada en el compendio.",
       "none": "{name}: no es un objeto JJK."
+    },
+    "Amber": {
+      "Stage": "Etapa {stage}. Extra por etapa: {extra}. Faltan {n} ronda(s) para la siguiente.",
+      "Last": "Etapa 5: al terminar su quinta ronda la forma acaba y el usuario muere.",
+      "Death": "{name} completó cinco rondas en la Etapa 5: la forma termina y muere al instante.",
+      "Ended": "{name} desactiva Mythical Beast Amber. Tira la salvación de Constitución de su etapa para la secuela."
+    },
+    "Trial": {
+      "Title": "Juicio: {name}",
+      "Evidence": "Prueba",
+      "Persuasion": "Persuasión enfrentada",
+      "Advantage": "ventaja",
+      "NoDefendant": "Marca como objetivo al acusado y vuelve a usar el Juicio.",
+      "Guilty": "Culpable: {name} recibe la condena durante 1 minuto.",
+      "NotGuilty": "No culpable: {name} demuestra su inocencia.",
+      "Confiscation": "Confiscación: pierde su técnica innata o sus objetos mágicos (primero los objetos); sin ellos, pierde su EM.",
+      "Death": "Pena de muerte: el Mazo del Juez pasa a ser la Espada del Verdugo, que mata al acusado al impactar (actividad del dominio). El dominio termina al usarla o al cerrarlo.",
+      "NoBurnout": "Condena con Confiscación o Pena de muerte: sin Technique Burnout.",
+      "Tier": {
+        "innocent": "Inocente: fallas salvo que el acusado lo admita.",
+        "guilty": "Culpable con pruebas mínimas: tirada normal. Confiscación.",
+        "very": "Muy culpable, buenas pruebas: tiras con ventaja. Confiscación.",
+        "severe": "Gravemente culpable: Pena de muerte.",
+        "unforgivable": "Culpable sin duda: éxito inmediato. Pena de muerte y Confiscación."
+      }
     }
   }
 }

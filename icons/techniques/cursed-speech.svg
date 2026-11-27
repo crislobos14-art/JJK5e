@@ -1,9 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-<defs><radialGradient id="g" cx="50%" cy="40%" r="65%">
-<stop offset="0%" stop-color="hsl(315,65%,42%)"/><stop offset="70%" stop-color="hsl(315,75%,16%)"/>
-<stop offset="100%" stop-color="hsl(315,65%,8%)"/></radialGradient></defs>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="cursed speech">
+<!-- JJK 5e glyph seal (tools/build-icons.mjs). Glyph: Font Awesome Free fa-bullhorn (CC BY 4.0, https://fontawesome.com/license/free). -->
+<defs><radialGradient id="g" cx="50%" cy="38%" r="68%">
+<stop offset="0%" stop-color="hsl(300,55%,51%)"/><stop offset="68%" stop-color="hsl(300,55%,20%)"/>
+<stop offset="100%" stop-color="hsl(300,55%,9%)"/></radialGradient></defs>
 <rect width="128" height="128" rx="18" fill="#0d0a12"/>
-<circle cx="64" cy="64" r="56" fill="url(#g)"/>
-<circle cx="64" cy="64" r="56" fill="none" stroke="#e8d9ff" stroke-width="4"/>
-<circle cx="64" cy="64" r="48" fill="none" stroke="#e8d9ff" stroke-opacity=".35" stroke-width="1.5" stroke-dasharray="4 5"/>
-<text x="64" y="64" dy=".35em" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-weight="bold" font-size="46" fill="#ffffff" stroke="#000" stroke-opacity=".5" stroke-width="1.5" paint-order="stroke">CS</text></svg>
+<circle cx="64" cy="64" r="57" fill="url(#g)"/>
+<circle cx="64" cy="64" r="57" fill="none" stroke="hsl(300,45%,88%)" stroke-width="3.5"/>
+<g stroke="hsl(300,45%,88%)" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"><line x1="14.7" y1="50.8" x2="10.9" y2="49.8"/><line x1="27.9" y1="27.9" x2="25.1" y2="25.1"/><line x1="50.8" y1="14.7" x2="49.8" y2="10.9"/><line x1="77.2" y1="14.7" x2="78.2" y2="10.9"/><line x1="100.1" y1="27.9" x2="102.9" y2="25.1"/><line x1="113.3" y1="50.8" x2="117.1" y2="49.8"/><line x1="113.3" y1="77.2" x2="117.1" y2="78.2"/><line x1="100.1" y1="100.1" x2="102.9" y2="102.9"/><line x1="77.2" y1="113.3" x2="78.2" y2="117.1"/><line x1="50.8" y1="113.3" x2="49.8" y2="117.1"/><line x1="27.9" y1="100.1" x2="25.1" y2="102.9"/><line x1="14.7" y1="77.2" x2="10.9" y2="78.2"/></g>
+<circle cx="64" cy="64" r="46" fill="none" stroke="hsl(300,45%,88%)" stroke-opacity=".3" stroke-width="1.5" stroke-dasharray="3 5"/>
+<g transform="translate(33.00 33.00) scale(0.12109)" fill="hsl(300,40%,95%)" stroke="#000" stroke-opacity=".45" stroke-width="41.3" paint-order="stroke">
+<path d="M461.2 18.9C472.7 24 480 35.4 480 48l0 416c0 12.6-7.3 24-18.8 29.1s-24.8 3.2-34.3-5.1l-46.6-40.7c-43.6-38.1-98.7-60.3-156.4-63l0 95.7c0 17.7-14.3 32-32 32l-32 0c-17.7 0-32-14.3-32-32l0-96C57.3 384 0 326.7 0 256S57.3 128 128 128l84.5 0c61.8-.2 121.4-22.7 167.9-63.3l46.6-40.7c9.4-8.3 22.9-10.2 34.3-5.1zM224 320l0 .2c70.3 2.7 137.8 28.5 192 73.4l0-275.3c-54.2 44.9-121.7 70.7-192 73.4L224 320z"/>
+</g></svg>

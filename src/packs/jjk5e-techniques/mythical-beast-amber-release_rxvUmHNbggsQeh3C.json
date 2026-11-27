@@ -801,9 +801,9 @@
    "ceSteps": {
     "cVKrpaZ3MezN66DU": 2
    },
-   "automationNotes": "Each stage lasts 5 rounds; after 5 rounds in Stage 5 you die. Remove the previous stage's effect when advancing. Extra attacks/actions per stage: track by hand. Usable once in your life.",
+   "automationNotes": "Stages run themselves: a new stage every 5 rounds at the start of your turn (Expedite adds 1 round per 2 CE), one stage effect at a time, deactivating removes the form, and after 5 rounds in Stage 5 you die. Extra attacks/actions per stage are listed in chat. Usable once in your life.",
    "automation": "automated",
-   "rev": "47df649ba3"
+   "rev": "22f841d263"
   }
  },
  "effects": [

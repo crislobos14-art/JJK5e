@@ -208,7 +208,7 @@
 | Spell | Nivel | Actividad(es) | Evaluación estática | Fuente |
 |---|---:|---|---|---|
 | Judge’s Gavel | 1 | utility:Action (1 CE); utility:Use (limited, no CE); attack:Gavel: Light hammer; attack:Gavel: Maul; attack:Gavel: Pole hammer (reach) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/judge-s-gavel_BP2dCOForc7QrwFI.json) |
-| Domain Expansion: Deadly Sentencing | 3 | utility:Evidence roll (d20); utility:Expand Domain (20 CE); utility:Trial: contested Persuasion; utility:Sentence: Confiscation; attack:Executioner's Sword (kills on hit); utility:Domain: no offensive actions | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-deadly-sentencing_EdkOzraQgWFnQMJT.json) |
+| Domain Expansion: Deadly Sentencing | 3 | utility:Evidence (Deadly Sentencing table); utility:Expand Domain (20 CE); utility:Trial (automatic): evidence + contested Persuasion; utility:Sentence: Confiscation; attack:Executioner's Sword (kills on hit); utility:Domain: no offensive actions | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/domain-expansion-deadly-sentencing_EdkOzraQgWFnQMJT.json) |
 | Gavel Improvements | 6 | utility:Action (2 CE); save:Action | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/gavel-improvements_HrqIX9ihcD7nvEPE.json) |
 | Unstopping Justice | 18 | utility:Free Deadly Sentencing (CE mod per long rest) | Automatizada a mano desde el manual (Midi-QOL); falta prueba Foundry | [JSON](../src/packs/jjk5e-techniques/unstopping-justice_bxSurrzBgl0GtcSQ.json) |
 

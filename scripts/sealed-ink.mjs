@@ -140,8 +140,10 @@ function enhanceFeats(root) {
     const source = box.querySelector("select[data-jjk-feat]");
     const take = box.querySelector("button[data-jjk-take]");
     if (!source || !take || box.querySelector(".jjk-sealed-feat-browser")) continue;
-    const entries = [...source.options].filter(o => o.value && !o.disabled && !o.parentElement?.disabled).map(o => ({
-      uuid: o.value, name: o.textContent.trim(), category: o.parentElement?.tagName === "OPTGROUP" ? o.parentElement.label : local("General", "General")
+    const entries = [...source.options].filter(o => o.value && !o.parentElement?.disabled && (!o.disabled || o.dataset.locked)).map(o => ({
+      uuid: o.value, name: o.dataset.locked ? o.textContent.split(" — ")[0].trim() : o.textContent.trim(),
+      category: o.parentElement?.tagName === "OPTGROUP" ? o.parentElement.label : local("General", "General"),
+      locked: !!o.dataset.locked, reason: o.dataset.reason ?? ""
     }));
     const browser = make("section", "jjk-sealed-feat-browser");
     const search = make("input", "jjk-sealed-feat-search");
@@ -178,19 +180,22 @@ function enhanceFeats(root) {
     function draw() {
       const shown = entries.filter(e => (!filter.value || e.category === filter.value) &&
         e.name.toLocaleLowerCase().includes(search.value.trim().toLocaleLowerCase()));
-      status.textContent = shown.length + "/" + entries.length + " · " + local("eligible feats", "dotes elegibles");
+      const open = entries.filter(e => !e.locked).length, lockedCount = entries.length - open;
+      status.textContent = shown.filter(e => !e.locked).length + "/" + open + " · " + local("eligible feats", "dotes elegibles")
+        + (lockedCount ? " · " + lockedCount + " " + local("locked until a later technique feature", "bloqueadas hasta un rasgo posterior de tu técnica") : "");
       rows.replaceChildren();
       for (const e of shown) {
         const b = button(e.name, async () => {
           selected = e; const current = ++sequence;
           for (const row of rows.children) row.setAttribute("aria-pressed", String(row.dataset.uuid === e.uuid));
-          detail.textContent = e.name + " · " + e.category;
-          confirm.disabled = take.disabled; inspect.disabled = false;
+          detail.textContent = e.name + " · " + e.category + (e.locked ? "\n\n" + local("Requires: ", "Requiere: ") + e.reason : "");
+          confirm.disabled = take.disabled || e.locked; inspect.disabled = false;
           try {
             const doc = await fromUuid(e.uuid);
             if (current !== sequence || !browser.isConnected || !doc) return;
             const req = doc.system?.prerequisites;
             const parts = [e.name, e.category];
+            if (e.locked) parts.push(local("Locked. Requires: ", "Bloqueada. Requiere: ") + e.reason);
             if (req?.level) parts.push(local("Required level: ", "Nivel requerido: ") + req.level);
             if (typeof req?.value === "string" && req.value.trim()) parts.push(req.value);
             if (req?.repeatable) parts.push(local("Repeatable", "Repetible"));
@@ -204,7 +209,8 @@ function enhanceFeats(root) {
         });
         b.classList.add("jjk-sealed-feat-row"); b.dataset.uuid = e.uuid;
         b.setAttribute("aria-pressed", String(selected?.uuid === e.uuid));
-        b.append(make("small", "", e.category)); rows.append(b);
+        if (e.locked) { b.classList.add("locked"); b.dataset.tooltip = local("Requires: ", "Requiere: ") + e.reason; }
+        b.append(make("small", "", e.locked ? "🔒 " + e.reason : e.category)); rows.append(b);
       }
     }
     for (const el of [search,filter]) for (const event of ["input","change"]) el.addEventListener(event, ev => { ev.stopPropagation(); draw(); });

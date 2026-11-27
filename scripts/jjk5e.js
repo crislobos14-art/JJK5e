@@ -2187,9 +2187,9 @@ async function openDomain(actor, item) {
   }
 }
 
+/** Panel, Token Action HUD and VAE all close through the engine: effect and recorded state end together. */
 async function closeDomain(actor) {
-  const effect = actor.effects.find((e) => e.flags?.jjk5e?.kind === "domain" || e.flags?.jjk5e?.domainOpen);
-  if (effect) await effect.delete();
+  return closeDomainOf(actor);
 }
 
 /** Technique Burnout's exhaustion as real levels (works on dnd5e 5 and 6), removed when the burnout ends. */
@@ -2215,10 +2215,17 @@ async function onDeleteEffect(effect) {
   return queueDomainWork(async () => {
   const state = getDomain(actor);
   if (!state && !setting("domainTracking")) return;
-  if (state?.openingId && state.openingId !== effect.uuid) return;
+  const others = actor.effects?.some((e) => e.id !== effect.id && (e.flags?.jjk5e?.kind === "domain" || e.flags?.jjk5e?.domainOpen)) ?? false;
+  if (state?.openingId && state.openingId !== effect.uuid && others) return;
   if (actor.getFlag(MODULE_ID, "lastDomainBurnout") === effect.uuid) return;
   await domainClosed(actor);
   await actor.setFlag(MODULE_ID, "lastDomainBurnout", effect.uuid);
+  // Deadly Sentencing: convicting with Confiscation or Death Penalty spares the judge Technique Burnout.
+  const spared = actor.getFlag(MODULE_ID, "burnoutSpared");
+  if (spared) {
+    await actor.unsetFlag(MODULE_ID, "burnoutSpared");
+    if (spared === state?.openingId || spared === effect.uuid) { await chat(actor, `<p><i class="fas fa-scale-balanced"></i> ${t("Trial.NoBurnout")}</p>`); return; }
+  }
   const short = !!effect.flags?.jjk5e?.incomplete; // Incomplete Domain: 5 rounds of burnout
   await setKindEffect(actor, "burnout", {
     name: t("Burnout.Name"), img: `${ICONS}/burnout.svg`, duration: short ? { rounds: 5, seconds: 30 } : { rounds: 10, seconds: 60 },
@@ -3865,10 +3872,28 @@ function featFit(actor, doc) {
       || doc.system?.type?.subtype === "jjkTechnique"
       || matches(ownedBy((i) => i.flags?.jjk5e?.technique && i.type !== "background")) || techniques.some((n) => names.includes(n))) return "technique";
   if (matches(ownedBy((i) => i.type === "race" || i.system?.type?.value === "race"))) return "race";
-  if (matches(ownedBy((i) => ["class", "subclass"].includes(i.type) || i.system?.type?.value === "class")) || pre.level) return "class";
+  // A level requirement alone ("level 1") is not a class feat: only a feature of the actor's class makes one.
+  if (matches(ownedBy((i) => ["class", "subclass"].includes(i.type) || i.system?.type?.value === "class"))) return "class";
   return "general";
 }
-function featGroupsHTML(actor, eligible) {
+/** Technique feats of the actor's technique that a later technique feature unlocks: shown locked, with what they need. */
+async function lockedTechniqueFeats(actor, docs, owned) {
+  const locked = docs.filter((d) => d.system?.type?.value === "feat" && !owned.has(normName(baseName(d)))
+    && featFitsTechnique(actor, d) && featFit(actor, d) === "technique" && missingPrereqs(actor, d).length)
+    .filter((d, i, arr) => arr.findIndex((o) => o.name === d.name) === i)
+    .sort((a, b) => a.name.localeCompare(b.name));
+  if (!locked.length) return [];
+  let levels = new Map();
+  try {
+    const index = await jjkPack("jjk5e-techniques")?.getIndex?.({ fields: ["flags.jjk5e.level"] });
+    levels = new Map([...(index ?? [])].filter((e) => e.flags?.jjk5e?.level).map((e) => [normName(e.name), Number(e.flags.jjk5e.level)]));
+  } catch { /* the reason still names the feature */ }
+  return locked.map((doc) => ({ doc, reason: missingPrereqs(actor, doc).map((need) => {
+    const level = levels.get(normName(need));
+    return level ? t("ASI.NeedsAt", { name: need, level }) : need;
+  }).join("; ") }));
+}
+function featGroupsHTML(actor, eligible, locked = []) {
   const race = actor.items.find((i) => i.type === "race");
   const cls = actor.items.filter((i) => i.type === "class").map((i) => i.name).join(" / ");
   const tech = actor.getFlag?.(MODULE_ID, "technique");
@@ -3878,6 +3903,8 @@ function featGroupsHTML(actor, eligible) {
   const groupBy = (list, key) => list.reduce((acc, d) => ((acc[key(d)] ??= []).push(d), acc), {});
   const fits = groupBy(eligible, (d) => featFit(actor, d));
   for (const k of ["technique", "race", "class"]) if (fits[k]?.length) out.push(`<optgroup label="${esc(head[k])}">${fits[k].map(option).join("")}</optgroup>`);
+  if (locked.length) out.push(`<optgroup label="${esc(t("ASI.FitTechniqueLocked", { name: tech ?? "—" }))}">${locked.map(({ doc, reason }) =>
+    `<option value="${doc.uuid}" disabled data-locked="1" data-reason="${esc(reason)}">${esc(doc.name)} — ${esc(t("ASI.Requires", { list: reason }))}</option>`).join("")}</optgroup>`);
   // General feats keep their JJK categories (Barrier, Cursed Energy, Physical…).
   for (const [sub, list] of Object.entries(groupBy(fits.general ?? [], (d) => d.system?.type?.subtype || "general"))
     .sort(([a], [b]) => featCategoryLabel(a).localeCompare(featCategoryLabel(b)))) {
@@ -3904,13 +3931,15 @@ async function injectASIFeats(app, element) {
     .filter((d, i, arr) => arr.findIndex((o) => o.name === d.name
       && o.system?.description?.value === d.system?.description?.value) === i)
     .sort((a, b) => a.name.localeCompare(b.name));
+  const locked = await lockedTechniqueFeats(actor, docs, owned);
+  if (!root.isConnected || root.querySelector(".jjk5e-asi")) return;
   const box = document.createElement("fieldset");
   box.className = "jjk5e-asi";
   box.innerHTML = `<legend>${t("ASI.Legend")}</legend>
-    <p class="hint">${t("ASI.Hint", { n: eligible.length })}</p>
+    <p class="hint">${t("ASI.Hint", { n: eligible.length })}${locked.length ? ` ${t("ASI.LockedHint", { n: locked.length })}` : ""}</p>
     <div class="form-group"><select data-jjk-feat style="flex:1" aria-label="${esc(t("ASI.Legend"))}">
       <option value="">—</option>
-      ${featGroupsHTML(actor, eligible)}
+      ${featGroupsHTML(actor, eligible, locked)}
     </select>
     <button type="button" data-jjk-take style="flex:0 0 auto"><i class="fas fa-plus"></i> ${t("ASI.Take")}</button></div>`;
   const select = box.querySelector("[data-jjk-feat]");
@@ -5657,8 +5686,18 @@ MENU_ACTIONS.splice(MENU_ACTIONS.length - 1, 0,
 const DOMAIN_RADIUS = 175;
 const DOMAIN_QUERY = `${MODULE_ID}.domainAuthority`;
 let DOMAIN_AUTH_QUEUE = Promise.resolve();
+const DOMAIN_TASK_LIMIT = 15000;
+let DOMAIN_TASK = { busy: false, started: 0 };
 function queueDomainWork(fn) {
-  const next = DOMAIN_AUTH_QUEUE.catch(() => {}).then(() => isActiveGM() ? fn() : false);
+  // A task running for more than 15 s (a dialog nobody answers, a lost socket) no longer freezes every later
+  // domain open or close: the next task starts without waiting for it (the stuck one still finishes on its own).
+  const stalled = DOMAIN_TASK.busy && Date.now() - DOMAIN_TASK.started > DOMAIN_TASK_LIMIT;
+  const prev = stalled ? Promise.resolve() : DOMAIN_AUTH_QUEUE.catch(() => {});
+  const next = prev.then(async () => {
+    if (!isActiveGM()) return false;
+    const mine = DOMAIN_TASK = { busy: true, started: Date.now() };
+    try { return await fn(); } finally { mine.busy = false; }
+  });
   DOMAIN_AUTH_QUEUE = next;
   return next;
 }
@@ -5679,7 +5718,7 @@ async function domainActor(uuid) {
 }
 /** Query context.user is supplied by Foundry; never accept a sender ID from the payload. */
 async function handleDomainAuthority(msg, { user } = {}) {
-  if (!isActiveGM() || !user?.active || !msg?.payload || !["claim", "finish", "decline", "mode", "close", "lethal", "attack", "weakSpot", "weakHole", "outsideBlast", "compress", "amplification"].includes(msg.operation)) return false;
+  if (!isActiveGM() || !user?.active || !msg?.payload || !["claim", "finish", "decline", "mode", "close", "lethal", "attack", "weakSpot", "weakHole", "outsideBlast", "compress", "amplification", "trial"].includes(msg.operation)) return false;
   const { operation, payload: data } = msg;
   const actor = await domainActor(data.actorUuid);
   if (!actor) return false;
@@ -5695,6 +5734,10 @@ async function handleDomainAuthority(msg, { user } = {}) {
     if (!canDirectDomain(user, source)) return false;
     if (["claim", "finish", "decline"].includes(operation)) return processClashDecision(operation, actor, data, user);
     if (operation === "amplification") return toggleDomainAmplification(actor);
+    if (operation === "trial") {
+      const defendant = data.defendantUuid ? await domainActor(data.defendantUuid) : null;
+      return runTrial(actor, defendant, { evidenceOnly: !!data.evidenceOnly });
+    }
     const state = getDomain(actor);
     if (operation === "close") return closeDomainOf(actor, "", data.openingId ?? null);
     if (!state?.open || !data.openingId || state.openingId !== data.openingId) return false;
@@ -6813,8 +6856,10 @@ function makeDomainClass() {
             lethal: el.dataset.m !== "nonlethal" });
           this.render();
         },
-        close: async function (_ev, el) {
-          const done = await closeDomainOf(this.actor, "", el?.dataset.openingId || null);
+        // Not "close": that name is ApplicationV2's own window-close action, so the title bar's X used to try
+        // (and fail) to end the domain, and the window could not be closed while a domain was open.
+        closeDomain: async function (_ev, el) {
+          const done = await closeDomainOf(this.actor, "", el?.dataset.openingId || undefined);
           if (done === false) ui.notifications.warn(t("Domain.CloseFailed"));
           else this.close();
         }
@@ -6851,7 +6896,7 @@ function makeDomainClass() {
           <button type="button" data-action="weak"><i class="fas fa-crosshairs"></i> ${t("Domain.WeakSpot")}</button></div>
         ${this.actor.isOwner ? `<div class="btns"><button type="button" data-action="lethal" data-m="${s.lethal === false ? "lethal" : "nonlethal"}">${s.lethal === false ? t("Domain.MakeLethal") : t("Domain.MakeNonLethal")}</button>${s.refinement >= 100 ? `<button type="button" data-action="mode" data-m="flip">${t("Domain.Flipped")}</button>
           <button type="button" data-action="mode" data-m="balanced">${t("Domain.Balanced")} (5)</button>` : ""}
-          <button type="button" data-action="close" data-opening-id="${esc(s.openingId ?? "")}"><i class="fas fa-xmark"></i> ${t("Domain.Close")}</button></div>` : ""}
+          <button type="button" data-action="closeDomain" data-opening-id="${esc(s.openingId ?? "")}"><i class="fas fa-xmark"></i> ${t("Domain.Close")}</button></div>` : ""}
       </section>`;
     }
     _replaceHTML(result, content) { content.innerHTML = result; }
@@ -7850,7 +7895,7 @@ function vaeButtons(effect, buttons) {
   if (!actor || actor.documentName !== "Actor" || !actor.isOwner || !Array.isArray(buttons)) return;
   const f = effect.flags?.jjk5e ?? {};
   if (f.kind === "domain" || f.domainOpen) {
-    buttons.push({ label: t("Domain.Close"), callback: () => closeDomainOf(actor, "", effect.uuid ?? null) });
+    buttons.push({ label: t("Domain.Close"), callback: () => closeDomainOf(actor) });
     buttons.push({ label: t("Domain.HUD"), callback: () => openDomainHUD(actor) });
   }
   if (f.vow) buttons.push({ label: t("Vow.Title"), callback: () => openVows(actor) });
@@ -8738,22 +8783,195 @@ async function recordFallenShikigami(actor) {
   }finally{SHIKIGAMI_DECISIONS.delete(key);}
 }
 
-async function advanceAmber(combat) {
-  if (!isActiveGM() || !optOn("mythicalAccuracy")) return;
-  const actor = combat?.combatant?.actor;
-  const cur = actor?.effects?.find?.((e) => !e.disabled && Number(e.flags?.jjk5e?.amberStage) > 0);
-  if (!cur) return;
-  const st = Number(cur.flags.jjk5e.amberStage);
-  if (st >= 5) return;
-  const item = findItemByName(actor, "Mythical Beast Amber Release");
-  const next = item?.effects?.find?.((e) => Number(e.flags?.jjk5e?.amberStage) === st + 1);
-  if (!next) return;
-  const data = next.toObject();
+/* ---- Deadly Sentencing: the trial runs itself (evidence from the table, contested Persuasion, verdict) ---- */
+const TRIAL_TIERS = [
+  { key: "innocent", max: 1, auto: "fail", punish: [] },
+  { key: "guilty", max: 9, punish: ["confiscation"] },
+  { key: "very", max: 14, advantage: true, punish: ["confiscation"] },
+  { key: "severe", max: 19, punish: ["death"] },
+  { key: "unforgivable", max: Infinity, auto: "win", punish: ["death", "confiscation"] }
+];
+/** Pure: the evidence tier of a d20 total (table: 1 · 2–9 · 10–14 · 15–19 · 20). */
+function evidenceTier(total) {
+  const n = Math.round(Number(total));
+  return TRIAL_TIERS.find((tier) => (Number.isFinite(n) ? n : 1) <= tier.max) ?? TRIAL_TIERS[0];
+}
+/** Pure: the verdict. The judge must beat the defendant (a tie keeps the defendant innocent). */
+function trialVerdict(tier, judge, defendant) {
+  if (tier.auto === "fail") return { convicted: false, punish: [] };
+  if (tier.auto === "win") return { convicted: true, punish: tier.punish };
+  const convicted = Number(judge) > Number(defendant);
+  return { convicted, punish: convicted ? tier.punish : [] };
+}
+const isTrialItem = (item) => item?.flags?.jjk5e?.technique === "Deadly Sentencing" && !!item?.flags?.jjk5e?.domainActivity;
+const trialKind = (activity) => {
+  const f = activity?.item?.flags?.jjk5e ?? {};
+  if (activity?.id && activity.id === f.trialActivity) return "trial";
+  if (activity?.id && activity.id === f.evidenceActivity) return "evidence";
+  return /^Trial/i.test(String(activity?.name ?? "")) ? "trial" : /^Evidence/i.test(String(activity?.name ?? "")) ? "evidence" : null;
+};
+
+/** The evidence roll: drawn from the "Domain Expansion: Deadly Sentencing" table when it exists, else a d20. */
+async function drawEvidence(judge) {
+  const name = "Domain Expansion: Deadly Sentencing";
+  let table = game.tables?.getName?.(name) ?? null;
+  if (!table) {
+    const pack = jjkPack("jjk5e-tables");
+    const entry = pack && (await pack.getIndex()).find((e) => e.name === name);
+    table = entry ? await pack.getDocument(entry._id) : null;
+  }
+  if (table?.draw) {
+    const draw = await table.draw({ displayChat: true });
+    const total = Number(draw?.roll?.total);
+    if (Number.isFinite(total)) return total;
+  }
+  const roll = await new Roll("1d20").evaluate();
+  await roll.toMessage({ speaker: docClass("ChatMessage").getSpeaker({ actor: judge }), flavor: t("Trial.Evidence") });
+  return roll.total;
+}
+async function persuasion(actor, advantage = false) {
+  try {
+    const rolls = await actor.rollSkill?.({ skill: "per", advantage }, { configure: false }, { create: true });
+    const total = Number((Array.isArray(rolls) ? rolls[0] : rolls)?.total);
+    if (Number.isFinite(total)) return total;
+  } catch (err) { reportError("trial persuasion", err); }
+  const bonus = Number(actor.system?.skills?.per?.total) || 0;
+  const roll = await new Roll(`${advantage ? "2d20kh" : "1d20"} + ${bonus}`).evaluate();
+  await roll.toMessage({ speaker: docClass("ChatMessage").getSpeaker({ actor }), flavor: `${t("Trial.Persuasion")}${advantage ? ` (${t("Trial.Advantage")})` : ""}` });
+  return roll.total;
+}
+
+/** GM: the whole trial. Evidence only (`evidenceOnly`) draws the table and stops. */
+async function runTrial(judge, defendant, { evidenceOnly = false } = {}) {
+  if (!isActiveGM() || !judge) return null;
+  const state = getDomain(judge);
+  const item = judge.items?.find?.(isTrialItem);
+  const evidence = await drawEvidence(judge);
+  const tier = evidenceTier(evidence);
+  if (evidenceOnly || !defendant) {
+    await chat(judge, `<div class="jjk5e-card"><h3><i class="fas fa-gavel"></i> ${t("Trial.Evidence")}: ${evidence}</h3><p>${t(`Trial.Tier.${tier.key}`)}</p>${defendant ? "" : `<p class="hint">${t("Trial.NoDefendant")}</p>`}</div>`);
+    return { evidence, tier: tier.key };
+  }
+  const judgeTotal = tier.auto ? null : await persuasion(judge, !!tier.advantage);
+  const defTotal = tier.auto ? null : await persuasion(defendant, false);
+  const verdict = trialVerdict(tier, judgeTotal, defTotal);
+  const lines = [`<p><strong>${t("Trial.Evidence")}:</strong> ${evidence} — ${t(`Trial.Tier.${tier.key}`)}</p>`];
+  if (!tier.auto) lines.push(`<p><strong>${t("Trial.Persuasion")}:</strong> ${esc(judge.name)} ${judgeTotal} · ${esc(defendant.name)} ${defTotal}</p>`);
+  lines.push(`<p><strong>${verdict.convicted ? t("Trial.Guilty", { name: esc(defendant.name) }) : t("Trial.NotGuilty", { name: esc(defendant.name) })}</strong></p>`);
+  if (verdict.convicted) {
+    if (verdict.punish.includes("confiscation")) {
+      const src = item?.effects?.find?.((e) => /confiscation/i.test(e.name));
+      if (src) {
+        const data = src.toObject(); delete data._id;
+        Object.assign(data, { transfer: false, disabled: false, origin: item.uuid });
+        foundry.utils.setProperty(data, "flags.jjk5e.trialOf", judge.uuid);
+        await defendant.createEmbeddedDocuments("ActiveEffect", [data]).catch((err) => reportError("trial confiscation", err));
+      }
+      lines.push(`<p>${t("Trial.Confiscation")}</p>`);
+    }
+    if (verdict.punish.includes("death")) lines.push(`<p>${t("Trial.Death")}</p>`);
+    // V.6: a conviction with Confiscation or Death Penalty spares the judge Technique Burnout; the domain then ends.
+    if (state?.openingId) await judge.setFlag(MODULE_ID, "burnoutSpared", state.openingId);
+  }
+  await chat(judge, `<div class="jjk5e-card"><h3><i class="fas fa-scale-balanced"></i> ${t("Trial.Title", { name: esc(defendant.name) })}</h3>${lines.join("")}</div>`);
+  // The sentence lasts 1 minute and the domain ends; the Executioner's Sword stays usable until it does.
+  if (verdict.convicted && state?.open && !verdict.punish.includes("death")) await closeDomainOf(judge, "", state.openingId);
+  return { evidence, tier: tier.key, judge: judgeTotal, defendant: defTotal, ...verdict };
+}
+async function trialActivity(activity) {
+  const judge = activity?.actor ?? activity?.item?.actor;
+  if (!judge?.isOwner || !isTrialItem(activity?.item)) return;
+  const kind = trialKind(activity);
+  if (!kind) return;
+  const target = [...(game.user?.targets ?? [])][0]?.actor ?? null;
+  if (kind === "trial" && !target) { ui.notifications.warn(t("Trial.NoDefendant")); return; }
+  return requestDomainAuthority("trial", { actorUuid: judge.uuid, defendantUuid: target?.uuid ?? null, evidenceOnly: kind === "evidence" });
+}
+
+/* ---- Mythical Beast Amber: stages advance on their own (V.6: every 5 rounds; 1 round per 2 CE spent on Expedite) ---- */
+const AMBER_ROUNDS = 5;
+const AMBER_EXTRA = [null, "", "+1 Attack", "+1 Attack, +1 Bonus Action", "+1 Action, +1 Bonus Action", "+2 Actions, +1 Bonus Action"];
+const amberStageOf = (effect) => Number(effect?.flags?.jjk5e?.amberStage) || 0;
+const amberEffects = (actor) => actor?.effects?.filter?.((e) => amberStageOf(e) > 0) ?? [];
+const amberCurrent = (actor) => amberEffects(actor).filter((e) => !e.disabled).sort((x, y) => amberStageOf(y) - amberStageOf(x))[0] ?? null;
+const amberItem = (actor) => actor?.items?.find?.((i) => /^Mythical Beast Amber Release/i.test(baseName(i)));
+
+/** Pure: where a transformation stands after `rounds` more rounds (stage up every 5; Stage 5 ends after 5). */
+function amberProgress(stage, spent, rounds) {
+  let st = Number(stage) || 0, r = (Number(spent) || 0) + (Number(rounds) || 0), dead = false;
+  while (st > 0 && r >= AMBER_ROUNDS) {
+    if (st >= 5) { dead = true; r = AMBER_ROUNDS; break; }
+    st += 1; r -= AMBER_ROUNDS;
+  }
+  return { stage: st, rounds: r, dead };
+}
+
+/** Replace the current stage with `stage` (from the Release item's own stage effects), keeping one stage at a time. */
+async function setAmberStage(actor, stage, rounds = 0, round = Number(game.combat?.round) || 0) {
+  const item = amberItem(actor);
+  const src = item?.effects?.find?.((e) => amberStageOf(e) === stage);
+  if (!src) return null;
+  const data = src.toObject();
   delete data._id;
   Object.assign(data, { transfer: false, disabled: false, origin: item.uuid });
-  await actor.createEmbeddedDocuments("ActiveEffect", [data]);
-  await safeDelete(cur);
-  await chat(actor, `<p><strong>${t("Opt.mythicalAccuracy.Name")}</strong>: ${esc(next.name)}</p>`);
+  foundry.utils.setProperty(data, "flags.jjk5e.amberRounds", rounds);
+  foundry.utils.setProperty(data, "flags.jjk5e.amberRound", round);
+  const old = amberEffects(actor);
+  const [created] = await actor.createEmbeddedDocuments("ActiveEffect", [data], { jjk5eAmber: true });
+  for (const e of old) await safeDelete(e);
+  await chat(actor, `<div class="jjk5e-card"><h3><i class="fas fa-bolt-lightning"></i> ${esc(src.name)}</h3>`
+    + `<p>${t("Amber.Stage", { stage, extra: AMBER_EXTRA[stage] || "—", n: AMBER_ROUNDS - rounds })}</p>`
+    + (stage === 5 ? `<p><strong>${t("Amber.Last")}</strong></p>` : "") + `</div>`);
+  return created;
+}
+
+async function amberAddRounds(actor, rounds, round = Number(game.combat?.round) || 0) {
+  const cur = amberCurrent(actor);
+  if (!cur || !(rounds > 0)) return null;
+  const st = amberStageOf(cur), spent = Number(cur.flags?.jjk5e?.amberRounds) || 0;
+  const next = amberProgress(st, spent, rounds);
+  if (next.dead) return amberDeath(actor);
+  if (next.stage !== st) return setAmberStage(actor, next.stage, next.rounds, round);
+  await cur.update({ "flags.jjk5e.amberRounds": next.rounds, "flags.jjk5e.amberRound": round });
+  return cur;
+}
+
+/** V.6: after the fifth round in Stage 5 the form ends and its user dies. */
+async function amberDeath(actor) {
+  for (const e of amberEffects(actor)) await safeDelete(e);
+  await actor.update({ "system.attributes.hp.value": 0 });
+  if (typeof actor.toggleStatusEffect === "function" && !actor.statuses?.has?.("dead")) await actor.toggleStatusEffect("dead", { active: true, overlay: true });
+  await chat(actor, `<div class="jjk5e-card"><h3><i class="fas fa-skull"></i> Mythical Beast Amber</h3><p>${t("Amber.Death", { name: esc(actor.name) })}</p></div>`);
+  return null;
+}
+
+/** Start of the user's turn: one more round in the stage (or one stage per turn with Mythical Beast Accuracy). */
+async function advanceAmber(combat) {
+  if (!isActiveGM()) return;
+  const actor = combat?.combatant?.actor;
+  const cur = amberCurrent(actor);
+  if (!cur) return;
+  // Counted once per round, on the user's own turn; the round the stage started in does not count.
+  const round = Number(combat.round) || 0;
+  if (Number(cur.flags?.jjk5e?.amberRound) === round) return;
+  if (optOn("mythicalAccuracy")) {
+    const st = amberStageOf(cur);
+    if (st >= 5) return amberAddRounds(actor, 1, round);
+    return setAmberStage(actor, st + 1, 0, round);
+  }
+  return amberAddRounds(actor, 1, round);
+}
+
+/** Owner side: Expedite adds 1 round per 2 CE; deactivating ends the form; a stage applied by hand replaces the last. */
+async function amberActivity(activity, usageConfig) {
+  const actor = activity?.actor ?? activity?.item?.actor;
+  if (!actor?.isOwner || !/^Mythical Beast Amber Release/i.test(baseName(activity?.item))) return;
+  const name = String(activity.name ?? "");
+  if (/^Expedite/i.test(name)) return amberAddRounds(actor, 1 + Math.max(0, Number(usageConfig?.scaling) || 0));
+  if (/^Deactivate/i.test(name)) {
+    for (const e of amberEffects(actor)) await safeDelete(e);
+    await chat(actor, `<p><i class="fas fa-bolt-lightning"></i> ${t("Amber.Ended", { name: esc(actor.name) })}</p>`);
+  }
 }
 
 /* ---- Additional Actions (Distract, Charge, Coup de Grace, Sunder) ---- */
@@ -9067,6 +9285,18 @@ Hooks.once("ready", () => {
   Hooks.on("dnd5e.rollDeathSave", (actor, roll) => { if (actor?.documentName === "Actor") deathSave(actor, roll); });
   Hooks.on("updateCombat", (combat, changes) => {
     if ("turn" in (changes ?? {}) || "round" in (changes ?? {})) advanceAmber(combat).catch((err) => reportError("amber", err));
+  });
+  Hooks.on("dnd5e.postUseActivity", (activity, usageConfig) => { amberActivity(activity, usageConfig).catch((err) => reportError("amber", err)); });
+  Hooks.on("dnd5e.postUseActivity", (activity) => { trialActivity(activity).catch((err) => reportError("trial", err)); });
+  // "Advance to Stage N" applies the new stage through its activity: the GM removes the previous one and starts its count.
+  Hooks.on("createActiveEffect", async (effect, options) => {
+    if (!isActiveGM() || options?.jjk5eAmber || !amberStageOf(effect) || effect.parent?.documentName !== "Actor") return;
+    const actor = effect.parent;
+    for (const e of amberEffects(actor)) if (e.id !== effect.id) await safeDelete(e);
+    await effect.update({ "flags.jjk5e.amberRounds": 0, "flags.jjk5e.amberRound": Number(game.combat?.round) || 0 });
+    const stage = amberStageOf(effect);
+    await chat(actor, `<div class="jjk5e-card"><h3><i class="fas fa-bolt-lightning"></i> ${esc(effect.name)}</h3><p>${t("Amber.Stage", { stage, extra: AMBER_EXTRA[stage] || "—", n: AMBER_ROUNDS })}</p>`
+      + (stage === 5 ? `<p><strong>${t("Amber.Last")}</strong></p>` : "") + `</div>`).catch((err) => reportError("amber", err));
   });
   Hooks.on("dnd5e.restCompleted", async (actor, result) => {
     if (!actor?.isOwner || !result?.longRest) return;
