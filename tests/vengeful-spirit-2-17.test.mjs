@@ -42,7 +42,7 @@ test("Vengeful Spirit Manifestation summons it: on a failed save, and at will fr
     assert.equal(manifestation.flags.jjk5e.summons[a._id].name, "Vengeful Spirit");
   }
   const atWill = summons.find((a) => a.activation.type === "bonus");
-  assert.equal(atWill.visibility.level.min, 11);
+  assert.equal(manifestation.flags.jjk5e.activityLevel[atWill._id], 11, "gated by character level (visibility.level reads the spell level)");
   assert.match(atWill.uses.max, /ceil\(@attributes\.spell\.mod \/ 2\)/);
   assert.equal(atWill.duration.units, "minute");
 });

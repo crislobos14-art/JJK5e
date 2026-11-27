@@ -5,7 +5,7 @@ const strings={
  action:["Action","Acción"],bonus:["Bonus action","Acción adicional"],reaction:["Reaction","Reacción"],free:["Free action","Acción libre"],full:["Full turn","Turno completo"],other:["Other","Otras"],movement:["Movement","Movimiento"],
  used:["Recorded used","Uso registrado"],clear:["No use recorded","Sin uso registrado"],unknown:["Unknown","Sin datos"],locked:["Locked","Bloqueado"],moved:["Movement recorded","Movimiento registrado"],
  hp:["Hit points","Puntos de golpe"],ce:["Cursed energy","Energía maldita"],pending:["CE transaction pending","Transacción de EM pendiente"],
- search:["Search abilities","Buscar habilidades"],all:["All actions","Todas las acciones"],run:["Use","Usar"],inspect:["Inspect","Consultar"],domain:["Domain HUD","Panel de dominio"],
+ search:["Search abilities","Buscar habilidades"],filterKind:["Filter by action type","Filtrar por tipo de acción"],all:["All actions","Todas las acciones"],run:["Use","Usar"],inspect:["Inspect","Consultar"],domain:["Domain HUD","Panel de dominio"],
  empty:["No matching activities","Sin actividades coincidentes"],blocked:["JJK gate blocks use","El motor JJK bloquea el uso"],
  hint:["Indicators are advisory. Native workflow validates targets, triggers, costs and extra actions; no use recorded does not mean guaranteed availability.","Indicadores orientativos. El flujo nativo valida objetivos, disparadores, costes y acciones adicionales; sin uso registrado no garantiza disponibilidad."],
  cost:["Estimated CE","EM estimada"], reverseCost:["Estimated reverse CE","EM inversa estimada"],error:["Activity could not be opened. Check the native sheet.","No se pudo abrir la actividad. Revisa la hoja nativa."],
@@ -78,7 +78,7 @@ export function enhanceCombatInteraction(app,root,active){
    tile.dataset.state=value;tile.append(node("small","",tr(key)),node("span","",tr(value)));economy.append(tile);
  }
  const search=node("input","jjk-combat-search");search.type="search";search.placeholder=tr("search");search.setAttribute("aria-label",tr("search"));search.value=app._jjkCombatSearch??"";
- const filter=node("select","jjk-combat-filter");filter.setAttribute("aria-label",tr("all"));
+ const filter=node("select","jjk-combat-filter");filter.setAttribute("aria-label",tr("filterKind"));
  for(const k of ["all","action","bonus","reaction","free","full","other"]){const option=node("option","",tr(k));option.value=k;filter.append(option);}
  filter.value=app._jjkCombatKind??"all";
  const list=node("div","jjk-combat-list");

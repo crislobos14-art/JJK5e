@@ -149,7 +149,10 @@
    ],
    "automationNotes": "At 11th level: 10 HP per CE (double the heal), usable as a reaction. Limb: 2 CE (1 CE at 11th).",
    "automation": "automated",
-   "rev": "fd1885093c"
+   "rev": "14ba6a2543",
+   "activityLevel": {
+    "sZQ9cxbXdyslRPl6": 11
+   }
   }
  },
  "effects": [

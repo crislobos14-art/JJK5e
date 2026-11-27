@@ -90,8 +90,8 @@
     },
     "effects": []
    },
-   "bwReaction002CE": {
-    "_id": "bwReaction002CE",
+   "bwReaction002CEa": {
+    "_id": "bwReaction002CEa",
     "type": "utility",
     "name": "Reaction (3 CE)",
     "sort": 0,
@@ -174,7 +174,7 @@
    "ceCosts": {
     "ih4MTTL3k7FulYvj": 1,
     "bwBonusAction001": 1,
-    "bwReaction002CE": 3
+    "bwReaction002CEa": 3
    },
    "technique": "Boogie Woogie",
    "level": 1,
@@ -182,11 +182,11 @@
    "tokenSwap": {
     "ih4MTTL3k7FulYvj": true,
     "bwBonusAction001": true,
-    "bwReaction002CE": true
+    "bwReaction002CEa": true
    },
    "automationNotes": "The token swap is done by the module (range from the activity). Woogie (3rd): unwilling creatures, swap two others; enemies lose their reaction (Woogie item). Round of Applause (11th): 60 ft, up to four creatures, advantage on the next attack after a favourable swap (GM).",
    "automation": "automated",
-   "rev": "0f17b04220"
+   "rev": "f4d900b34e"
   }
  },
  "folder": "JUFxrHmgG8mOdlrV",

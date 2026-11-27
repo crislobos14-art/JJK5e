@@ -17,6 +17,8 @@ def bad(item,msg):
 def chkf(item,where,f):
     if not isinstance(f,str): return
     if f.count('(')!=f.count(')'): bad(item,f"parens:{where}:{f}")
+    # Objects in dnd5e roll data, not numbers (use .value / .mod), and slots that depend on a world setting.
+    for m in re.findall(r'@abilities\.[a-z]{3}\.save(?![.\w])|@resources\.(?:primary|secondary|tertiary)\b|@flags\.jjk5e\.crows\b',f): bad(item,f"rolldata-path:{where}:{m}")
     for r in re.findall(r'@([a-zA-Z]+)',f):
         if r not in ROOTS: bad(item,f"root:{where}:@{r}")
 for fn in glob.glob('src/packs/jjk5e-*/*.json'):
@@ -38,8 +40,13 @@ for fn in glob.glob('src/packs/jjk5e-*/*.json'):
                 m=re.search(r'damageType=([a-z]+)',v)
                 if m and m.group(1) not in DMG|HEAL|{'none'}: bad(n,f"ot-type:{m.group(1)}")
                 if '|' in v: bad(n,f"ot-multi:{e['name']}")
+    for eid in effs:
+        if not re.fullmatch(r'[A-Za-z0-9]{16}',str(eid)): bad(n,f"effect-id:{eid}")
     for aid,a in acts.items():
         w=f"{a.get('name')}"
+        if not re.fullmatch(r'[A-Za-z0-9]{16}',str(aid)) or a.get('_id',aid)!=aid: bad(n,f"activity-id:{aid}")
+        calc=((a.get('save') or {}).get('dc') or {}).get('calculation')
+        if calc not in {None,'','initial','spellcasting'}|AB: bad(n,f"dc-calculation:{w}:{calc}")
         if a.get('type') not in ACTT: bad(n,f"acttype:{a.get('type')}")
         if (a.get('activation') or {}).get('type') not in ACTV: bad(n,f"activation:{a['activation'].get('type')}")
         for ref in a.get('effects',[]) or []:

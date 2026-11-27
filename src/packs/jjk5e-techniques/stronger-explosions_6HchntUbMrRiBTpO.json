@@ -174,7 +174,10 @@
    "spellFrom": "feat",
    "automationNotes": "Explosions +5 ft radius and triple damage to objects.",
    "automation": "automated",
-   "rev": "f1968a0ff9"
+   "rev": "680f824385",
+   "activityLevel": {
+    "bwpuhaTd2EhJg5bc": 18
+   }
   }
  },
  "effects": [

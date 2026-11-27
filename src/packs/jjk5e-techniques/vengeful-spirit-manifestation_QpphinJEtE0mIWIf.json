@@ -262,15 +262,6 @@
      "prompt": true
     },
     "tempHP": "",
-    "visibility": {
-     "level": {
-      "min": 11,
-      "max": null
-     },
-     "requireAttunement": false,
-     "requireIdentification": false,
-     "requireMagic": false
-    },
     "uses": {
      "max": "max(1, ceil(@attributes.spell.mod / 2))",
      "recovery": [
@@ -335,7 +326,7 @@
    "spellFrom": "feat",
    "automationNotes": "Big hit (damage above your level + CE mod): DC 20 WIS; on a failure use 'Manifest (failed save)' — the Vengeful Spirit appears berserk, charmed by you, within 200 ft (AC 13 + PB, HP 80 + 10×PB). Calm it with the DC 20 Persuasion activity (15 at 6th). At 11th: 'Manifest at will' as a bonus action for 1 minute, uses = half your CE modifier (rounded up) per long rest.",
    "automation": "automated",
-   "rev": "a4429696b3",
+   "rev": "835dd1641e",
    "summons": {
     "oCCxKr1vIWc7C6QN": {
      "name": "Vengeful Spirit",
@@ -345,6 +336,9 @@
      "name": "Vengeful Spirit",
      "count": 1
     }
+   },
+   "activityLevel": {
+    "6a1PKvsLrgOQ3ntG": 11
    }
   }
  },

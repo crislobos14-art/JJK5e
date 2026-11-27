@@ -728,7 +728,7 @@ def boogie_woogie(S):
     one = {"affects": {"type": "creature", "count": "1", "choice": True}, "override": True}
     # --- Boogie (1st): the module swaps tokens; range 30 ft; enemies swapped with Woogie lose their reaction.
     b = S.get("Boogie")
-    for aid in ("ih4MTTL3k7FulYvj", "bwBonusAction001", "bwReaction002CE"):
+    for aid in ("ih4MTTL3k7FulYvj", "bwBonusAction001", "bwReaction002CEa"):
         a = b["system"]["activities"][aid]
         a["range"], a["target"] = ft(30), one
         a["effects"] = []
@@ -739,7 +739,7 @@ def boogie_woogie(S):
     dis = act(w, "disorient", "utility", "Swapped enemy loses its reaction", "special", range=ft(60), target=one)
     apply(dis, lost)
     mark(w)
-    b["system"]["activities"]["bwReaction002CE"]["useConditionText"] = "false"
+    b["system"]["activities"]["bwReaction002CEa"]["useConditionText"] = "false"
     note(b, "The token swap is done by the module (range from the activity). Woogie (3rd): unwilling creatures, swap "
             "two others; enemies lose their reaction (Woogie item). Round of Applause (11th): 60 ft, up to four "
             "creatures, advantage on the next attack after a favourable swap (GM).")

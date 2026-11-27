@@ -52,6 +52,11 @@ export const TRACKERS = {
     hint: ["Take 1 damage for every point a creature rolls above your save DC; regain 1 at the start of your turn unless at 0.",
       "Reciben 1 de daño por cada punto que una criatura saque por encima de tu CD; recuperan 1 al empezar tu turno salvo a 0."]
   }],
+  "Black Bird Manipulation": [{
+    id: "crows", kind: "count", label: ["Crows", "Cuervos"], max: () => 99,
+    hint: ["Crows you currently have. Raven's Eye (6th) adds +1 passive Perception per crow.",
+      "Cuervos que tienes ahora. Raven's Eye (nivel 6) suma +1 a Percepción pasiva por cuervo."]
+  }],
   "Mythical Beast Amber": [{
     id: "charges", kind: "count", label: ["Positive charges", "Cargas positivas"], max: (s) => 2 * s.ceMod, requires: /Lightning Discharge/i,
     reset: { combatEnd: "zero", lr: "zero" }, derived: (n) => [L(`Discharge bolt: ${n}d12`, `Rayo de descarga: ${n}d12`)],
@@ -171,7 +176,7 @@ const CRESCENDO_ROWS = [["AC and Dex saves +3", "CA y salvaciones de Des +3"], [
   ["Critical range +2", "Rango de crítico +2"], ["Enemy takes only an action, bonus action or movement", "El enemigo solo hace una acción, acción adicional o movimiento"]];
 // Effect ids on the Prayer and Crescendo items (embedded ids survive copying an item onto an actor).
 const PRAYER_FX = ["mADpGEWRzZcXJVgX", "zMFfFehLAmYiJa6s", "6fMCfmfxe60NOZTI", "0AozsidSJ51M5R7C", "9On28S8VTbc5DWQa"];
-const CRESCENDO_FX = [[9, "bhmy8jW7SD1JZtpX"], [3, "GOf1Ctzt3cWh8a3k"], [1, "VPYCaxpzIcv6pN5w"]];
+const CRESCENDO_FX = [[9, "bhmy8jW7SD1JZtpX"], [5, "cRsc5ProfDmg5plu"], [4, "cRsc4AdvSaves4pl"], [3, "GOf1Ctzt3cWh8a3k"], [1, "VPYCaxpzIcv6pN5w"]];
 const OFF_BEAT_FX = "18Fa8gjVvOzaJssq";
 const BEAT_BREAKERS = ["stunned", "paralyzed", "grappled", "restrained", "prone"];
 const DEADLY_MIRACLE_FX = "mue65r1P6DLthGW0";
@@ -199,8 +204,10 @@ export function readState(actor, def) {
   const raw = actor?.getFlag?.(ID, FLAG)?.[def.id] ?? {};
   const held = usesItem(actor, def);
   if (held) {
+    // Above the item's maximum (Luck of the Draw has no cap) the extra is kept in flags.jjk5e.techTrackers.<id>Over.
     const max = Math.floor(Number(held.system.uses.max));
-    return { value: clamp(max - (Number(held.system.uses.spent) || 0), 0, max), max, active: false, s, item: held };
+    const over = Math.max(0, Math.floor(Number(actor.getFlag?.(ID, FLAG)?.[`${def.id}Over`]) || 0));
+    return { value: clamp(max - (Number(held.system.uses.spent) || 0), 0, max) + over, max: max + over, over, active: false, s, item: held };
   }
   const max = def.max ? Math.max(0, Math.floor(def.max(s, actor))) : null;
   if (def.kind === "units") {
@@ -285,7 +292,10 @@ async function write(actor, def, data) {
   const held = usesItem(actor, def);
   if (held) {
     const max = Math.floor(Number(held.system.uses.max));
-    await held.update({ "system.uses.spent": clamp(max - (Number(data?.value) || 0), 0, max) });
+    const value = Math.max(0, Math.floor(Number(data?.value) || 0));
+    const over = Math.max(0, value - max), was = readState(actor, def).over;
+    await held.update({ "system.uses.spent": clamp(max - value, 0, max) });
+    if (over !== was) await actor.update({ [`flags.${ID}.${FLAG}.${def.id}Over`]: over });
     return true;
   }
   await actor.update({ [`flags.${ID}.${FLAG}.${def.id}`]: data });
@@ -408,7 +418,11 @@ async function resetAll(actor, when) {
   const updates = {};
   for (const def of trackersFor(actor)) {
     const how = def.reset?.[when];
-    if (!how || usesItem(actor, def)) continue;
+    if (usesItem(actor, def)) {
+      if (when === "lr" && readState(actor, def).over) updates[`flags.${ID}.${FLAG}.${def.id}Over`] = 0;
+      continue;
+    }
+    if (!how) continue;
     const st = readState(actor, def);
     let next = null;
     if (how === "zero") next = applyOp(actor, def, "zero");
@@ -490,21 +504,24 @@ export async function onMidiAttack(workflow) {
   return write(actor, def, applyOp(actor, def, "add", def.auto.meleeMiss));
 }
 
-async function onAttackCard(message) {
+export async function onAttackCard(message) {
   if (midiOn()) return;                                  // Midi folds attacks into one card: its own hook handles Fa Jin
-  const d5 = message?.flags?.dnd5e;
-  if (d5?.messageType !== "roll" || d5.roll?.type !== "attack") return;
+  const d5 = message?.flags?.dnd5e ?? {}, sys = message?.system ?? {};
+  // dnd5e 6: typed "attack" message with system.item/activity/targets; 5.x: flags.dnd5e.messageType "roll".
+  const attack = message?.type === "attack" || (d5.messageType === "roll" && d5.roll?.type === "attack");
+  if (!attack) return;
+  const src = { item: sys.item ?? d5.item, activity: sys.activity ?? d5.activity, targets: sys.targets?.length ? sys.targets : d5.targets };
   let item = null;
-  try { item = globalThis.fromUuidSync?.(d5.item?.uuid); } catch { /* */ }
+  try { item = globalThis.fromUuidSync?.(src.item?.uuid); } catch { /* */ }
   const actor = item?.actor;
   if (!actor || !writer(actor)) return;
   const def = trackersFor(actor).find((d) => d.auto?.meleeMiss);
   if (!def) return;
   let activity = null;
-  try { activity = d5.activity?.uuid ? globalThis.fromUuidSync?.(d5.activity.uuid) : null; } catch { /* */ }
+  try { activity = src.activity?.uuid ? globalThis.fromUuidSync?.(src.activity.uuid) : null; } catch { /* */ }
   const melee = isMelee(activity, item);
   const roll = message.rolls?.[0];
-  const targets = [...(d5.targets ?? [])].filter((t) => Number.isFinite(Number(t.ac)));
+  const targets = [...(src.targets ?? [])].filter((t) => Number.isFinite(Number(t.ac)));
   if (!melee || !roll || roll.isCritical || !targets.length) return;
   if (targets.every((t) => Number(roll.total) < Number(t.ac))) await write(actor, def, applyOp(actor, def, "add", def.auto.meleeMiss));
 }
@@ -548,6 +565,8 @@ export async function onActivityUsed(activity, usageConfig = {}) {
       const f = activity.item.flags?.[ID] ?? {};
       const ce = (Number(f.ceCosts?.[activity.id]) || 0) + (Number(f.ceSteps?.[activity.id]) || 0) * scaling;
       data = applyOp(actor, def, "unit", { hp: stats(actor).level * Math.max(1, ce), size: ce > 1 ? L(`${5 * ce} ft`, `${5 * ce} pies`) : "" });
+    } else if (rule.op === "add" && rule.cap === false && usesItem(actor, def)) {
+      data = { value: readState(actor, def).value + (Number(rule.n) || 0) + (Number(rule.perScaling) || 0) * scaling };
     } else if (rule.op === "add") data = applyOp(actor, def, "add", (Number(rule.n) || 0) + (Number(rule.perScaling) || 0) * scaling);
     else if (rule.op === "set" || rule.op === "start") data = applyOp(actor, def, def.toggle ? "start" : rule.op, rule.n);
     else continue;
@@ -750,7 +769,16 @@ Hooks.once("ready", () => {
   Hooks.on("dnd5e.rollDamageV2", (rolls, data) => { onDamageRolled(rolls, data).catch((err) => console.warn(`${ID} | trackers`, err)); });
   Hooks.on("createActiveEffect", (effect) => { onCondition(effect).catch(() => null); });
   Hooks.on("deleteActiveEffect", (effect) => { onConcentrationEnded(effect).catch(() => null); });
-  for (const actor of game.actors ?? []) if (writer(actor) && trackersFor(actor).some((d) => d.itemUses)) migrateItemCounters(actor).catch(() => null);
+  for (const actor of game.actors ?? []) {
+    if (!writer(actor) || !trackersFor(actor).some((d) => d.itemUses)) continue;
+    migrateItemCounters(actor).then(() => syncDeadlyMiracle(actor)).catch(() => null);
+  }
+  Hooks.on("createItem", (item) => {
+    const actor = item?.parent;
+    if (actor?.documentName !== "Actor" || !writer(actor)) return;
+    const miracles = defOf(actor, "miracles");
+    if (item.effects?.get?.(DEADLY_MIRACLE_FX) || (miracles && usesItem(actor, miracles) === item)) syncDeadlyMiracle(actor).catch(() => null);
+  });
   Hooks.on("updateItem", (item, changes) => {
     const actor = item?.parent;
     if (!actor || !foundry.utils.hasProperty(changes ?? {}, "system.uses") || !writer(actor)) return;
@@ -763,8 +791,9 @@ Hooks.once("ready", () => {
     if (!game.user.isGM || message.flags?.[ID]?.rewind?.done) { b.disabled = true; return; }
     b.addEventListener("click", (ev) => { ev.preventDefault(); b.disabled = true; applyRewind(message).catch((err) => console.warn(`${ID} | rewind`, err)); });
   });
+  // dnd5e fires restCompleted only on the client that ran the rest (GM or any owner), so no writer() check here.
   Hooks.on("dnd5e.restCompleted", (actor, result) => {
-    if (!actor || !writer(actor)) return;
+    if (!actor?.isOwner) return;
     resetAll(actor, result?.longRest ? "lr" : "sr").then(() => (result?.longRest ? resetAll(actor, "sr") : null)).catch((err) => console.warn(`${ID} | trackers`, err));
   });
   Hooks.on("deleteCombat", (combat) => {

@@ -122,7 +122,7 @@ test("2.18 · Prayer Song: the beat applies its own effect; Crescendo runs to 10
   const b = actor("Prayer Song", ["Prayer", "Crescendo"], { level: 11 });
   assert.equal(tt.readState(b, def(b, "beat")).max, 10);
   await tt.onActivityUsed(act(b, "Prayer", /advance to turn 4/));
-  assert.equal(tt.beatSource(b).effect.name, "Crescendo (turn 3+)");
+  assert.equal(tt.beatSource(b).effect.name, "Crescendo (turn 4+)");
   assert.equal(def(b, "beat").derived(10, null, b).length, 10);
 });
 
@@ -207,4 +207,30 @@ test("2.18.1 · Crescendo keeps its three activity ids (the update is not flagge
   assert.deepEqual(Object.keys(cres.system.activities).sort(), ["fgHKGv1SFdcHYFm6", "r5bvfH1yf3EgoQpc", "yBd7P533H32FsyWa"]);
   await tt.onActivityUsed(act(b, "Crescendo", /turn 9/));
   assert.equal(tt.beatSource(b).effect.name, "Crescendo (turn 9+)");
+});
+
+test("2.19.1 · Luck of the Draw goes past 6 Miracles; spending uses the extra first and a long rest clears it", async () => {
+  const a = actor("Miracle", ["Little Miracles", "Blind Luck", "Domain Expansion: Luck of the Draw"]);
+  const little = a.items.find((i) => i.name === "Little Miracles");
+  little.system.uses.spent = 1;                                                       // 5 held
+  await tt.onActivityUsed(act(a, "Domain Expansion: Luck of the Draw", /Initiative 20/));
+  assert.equal(val(a, "miracles"), 8);
+  assert.equal(a.flags.jjk5e.techTrackers.miraclesOver, 2);
+  await tt.onActivityUsed(act(a, "Blind Luck", /reaction/));
+  assert.equal(val(a, "miracles"), 7);
+  assert.equal(a.flags.jjk5e.techTrackers.miraclesOver, 1, "the extra goes first");
+  assert.equal(little.system.uses.spent, 0);
+});
+
+test("2.19.1 · Fa Jin reads dnd5e 6 typed attack cards (type 'attack', data in message.system)", async () => {
+  const a = actor("Fa Jin", []);
+  globalThis.game = { ...globalThis.game, user: { id: "p1", isGM: false }, users: [{ id: "p1", active: true, isGM: false }], modules: { get: () => ({ active: false }) } };
+  a.testUserPermission = () => true;
+  const item = { actor: a, system: { attackType: "melee" } };
+  globalThis.fromUuidSync = (uuid) => (uuid === "Item.x" ? item : null);
+  const card = { type: "attack", flags: {}, rolls: [{ total: 9, isCritical: false }],
+    system: { item: { uuid: "Item.x" }, activity: { uuid: null }, targets: [{ ac: 15, token: "Scene.s.Token.t" }] } };
+  await tt.onAttackCard(card);
+  assert.equal(val(a, "jin"), 1);
+  delete globalThis.fromUuidSync;
 });

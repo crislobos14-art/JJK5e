@@ -45,7 +45,9 @@
       "EditHint": "Click to edit: 15 sets, +3 regains, -2 spends",
       "EditInvalid": "Type a number: 15, +3 or -2.",
       "PendingLocked": "CE has reservations pending GM confirmation; it can be edited once they are settled.",
-      "ReservedNote": "{n} reserved"
+      "ReservedNote": "{n} reserved",
+      "Upkeep": "upkeep",
+      "UpkeepEnded": "{name} ends: not enough Cursed Energy to maintain it."
     },
     "Technique": {
       "Title": "Choose Innate Technique",
@@ -409,6 +411,7 @@
       "NeedDnd5e": "JJK 5e V.6 requires the D&D 5e system.",
       "NoInspiration": "JJK 5e: {name} has no inspiration to use this mindset.",
       "GMOnly": "Only the GM can do this.",
+      "ActivityLevel": "JJK 5e: this option unlocks at character level {level}.",
       "GMDeclined": "The GM declined or did not answer the request.",
       "ActionFailed": "JJK 5e — {action} failed: {error}",
       "NoScene": "Open a scene first.",

@@ -153,7 +153,10 @@
    },
    "automationNotes": "Radius = 10 ft per CE (enlarge the template).",
    "automation": "automated",
-   "rev": "91fb40479a"
+   "rev": "be47013490",
+   "activityLevel": {
+    "o85XZjwW0XVmbNRR": 6
+   }
   }
  },
  "folder": "MxqACO3emHCjwL5R",

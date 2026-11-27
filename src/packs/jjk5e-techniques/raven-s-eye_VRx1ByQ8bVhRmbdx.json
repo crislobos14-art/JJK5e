@@ -85,9 +85,9 @@
    "technique": "Black Bird Manipulation",
    "level": 6,
    "spellFrom": "feat",
-   "automationNotes": "Passive Perception bonus reads flags.jjk5e.crows (number of crows).",
+   "automationNotes": "Passive Perception bonus reads the Crows counter of the JJK panel (flags.jjk5e.techTrackers.crows).",
    "automation": "automated",
-   "rev": "67efc386af"
+   "rev": "9c41910b3a"
   }
  },
  "folder": "51kqIFJDFNS150R8",
@@ -106,7 +106,7 @@
     {
      "key": "system.skills.prc.bonuses.passive",
      "mode": 2,
-     "value": "@flags.jjk5e.crows",
+     "value": "@flags.jjk5e.techTrackers.crows.value",
      "priority": 20
     }
    ],

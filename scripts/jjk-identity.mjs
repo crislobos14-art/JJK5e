@@ -266,7 +266,7 @@ function sealItemSheet(app, root) {
 function sealChat(message, html) {
   const root = html instanceof HTMLElement ? html : html?.[0];
   if (!root?.querySelector || root.querySelector(".jjk-id-seal")) return;
-  const uuid = message?.flags?.dnd5e?.item?.uuid ?? root.querySelector("[data-item-uuid]")?.dataset.itemUuid;
+  const uuid = message?.system?.item?.uuid ?? message?.flags?.dnd5e?.item?.uuid ?? root.querySelector("[data-item-uuid]")?.dataset.itemUuid;
   if (!uuid) return;
   let item = null;
   try { item = fromUuidSync(uuid); } catch { item = null; }

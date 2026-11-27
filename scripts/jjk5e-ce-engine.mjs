@@ -26,9 +26,11 @@ export function createCEEngine({
   activityEnergyProfile,
   validActivityCE,
   commitRestExchange,
-  commitBodyTreatment
+  commitBodyTreatment,
+  consumptionGate
 }) {
   const CE_USAGE_CONTEXT = new WeakMap();
+  const ADJUST_WINDOW = 100000; // the requesting client gives up after 120 s
 
   // A native usage card may be created after consume() returns, with a cloned config.
   const awaitingCards = new Map();
@@ -132,6 +134,7 @@ export function createCEEngine({
   async function handleCEAuthority(msg,{user}={}) {
     if (!ceAuthorityEnabled() || !isActiveGM() || !user?.active || !msg?.payload ||
         !["reserve","start","commit","review","cancel","settle","adjust","linkCard","restExchange","bodyTreatment"].includes(msg.operation)) return false;
+    const received=Date.now();
     const {operation,payload:d}=msg;
     const actor=await domainActor(d.actorUuid);
     if (!canDirectDomain(user,actor)) return false;
@@ -141,6 +144,8 @@ export function createCEEngine({
     if (operation==="adjust") {
       if (!Number.isFinite(d.amount) || Math.abs(d.amount)>100000) return false;
       if (!user.isGM && !await confirmDialog(t("GMRequest.Title"),`<p>${esc(user.name)}: ${esc(actor.name)} — ${esc(String(d.amount))} CE</p>`)) return false;
+      // An approval that comes after the player's request timed out would spend CE for nothing.
+      if (!user.isGM && Date.now()-received>ADJUST_WINDOW) { ui.notifications?.warn?.(t("Notify.CEAuthorizationFailed")); return false; }
       return queueCE(actor,async()=>{
         if (!isActiveGM() || !canDirectDomain(user,actor) || cePending(findPool(actor))) return false;
         return doSpendCE(actor,d.amount,String(d.label??"CE").slice(0,120));
@@ -220,6 +225,14 @@ export function createCEEngine({
       return true;
     });
   }
+  async function nativePreflight(activity, usageConfig) {
+    if (consumptionGate && consumptionGate(activity, usageConfig) === false) return false;
+    if (typeof activity?._prepareUsageUpdates !== "function") return true;
+    const errors = await activity._prepareUsageUpdates(foundry.utils.deepClone(usageConfig), { returnErrors: true }).catch(() => null);
+    if (!Array.isArray(errors) || !errors.length) return true;
+    for (const err of errors) ui.notifications?.error?.(err?.message ?? String(err), { console: false });
+    return false;
+  }
   async function consumeWithCE(wrapped,activity,usageConfig,messageConfig) {
     if(!ceAuthorityEnabled()||!setting("autoSpendCE")||!managedCE(activity)) return wrapped(usageConfig,messageConfig);
     const actor=activity.actor??activity.item?.actor;
@@ -247,6 +260,9 @@ export function createCEEngine({
       }
     }
     if (!actionGate(actor, activity, { recheck: true }) || !validActivityCE(actor,activity,usageConfig)) return false;
+    // Once the GM records the start, a native refusal goes to GM review. Refuse here first what native consume()
+    // and the JJK consumption gates would refuse anyway (no uses or slots left, action gate, clone limit…).
+    if (!await nativePreflight(activity, usageConfig)) return false;
     if (!isActiveGM() && typeof game.users.activeGM?.query !== "function") {
       ui.notifications.warn(t("Notify.CENoAuthority"));
       return false;

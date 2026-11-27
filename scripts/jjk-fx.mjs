@@ -159,14 +159,28 @@ function play(shape, at, { color = null, scale = 1.5, below = false, size = null
 }
 
 /* ------------------------------------------------------------------ chat cards → cast / hit */
+/**
+ * Kind, sources and targets of a dnd5e chat card (pure, tested). dnd5e 6 uses typed messages
+ * (type "usage" | "attack" | "damage", data in message.system); 5.x kept them in flags.dnd5e.
+ */
+export function cardMeta(message) {
+  const d5 = message?.flags?.dnd5e ?? {}, sys = message?.system ?? {}, type = message?.type;
+  const legacyRoll = d5.messageType === "roll" ? d5.roll?.type : null;
+  const kind = type === "usage" || d5.messageType === "usage" ? "cast"
+    : type === "attack" || legacyRoll === "attack" ? "attack" : type === "damage" || legacyRoll === "damage" ? "damage" : null;
+  const act = sys.activity ?? d5.activity ?? {};
+  return { kind, itemUuid: sys.item?.uuid ?? d5.item?.uuid ?? null, activityUuid: act.uuid ?? null,
+    activityId: act.id ?? (act.uuid ? String(act.uuid).split(".").pop() : null),
+    targets: [...(sys.targets?.length ? sys.targets : d5.targets ?? [])] };
+}
 function cardItem(message) {
-  const uuid = message?.flags?.dnd5e?.item?.uuid;
+  const uuid = cardMeta(message).itemUuid;
   if (!uuid) return null;
   try { return globalThis.fromUuidSync?.(uuid) ?? null; } catch { return null; }
 }
 function cardTargets(message) {
-  return [...(message?.flags?.dnd5e?.targets ?? [])].map((t) => {
-    try { const doc = globalThis.fromUuidSync?.(t.uuid); return { ac: Number(t.ac), token: doc?.object ?? doc?.getActiveTokens?.()?.[0] ?? null }; }
+  return cardMeta(message).targets.map((t) => {
+    try { const doc = globalThis.fromUuidSync?.(t.token ?? t.uuid ?? t.actor); return { ac: Number(t.ac), token: doc?.object ?? doc?.getActiveTokens?.()?.[0] ?? null }; }
     catch { return { ac: Number(t.ac), token: null }; }
   });
 }
@@ -177,9 +191,7 @@ function speakerToken(message, item) {
 
 /** What a JJK chat card means for the sound and the picture (pure, tested). */
 export function readCard(message) {
-  const d5 = message?.flags?.dnd5e ?? {};
-  const kind = d5.messageType === "usage" ? "cast" : d5.messageType === "roll" && d5.roll?.type === "attack" ? "attack"
-    : d5.messageType === "roll" && d5.roll?.type === "damage" ? "damage" : null;
+  const { kind } = cardMeta(message);
   if (!kind) return null;
   const item = cardItem(message);
   if (!item?.flags?.[ID] || item.flags[ID].cePool) return null;
@@ -190,14 +202,14 @@ const midiOn = () => !!game.modules.get("midi-qol")?.active;
 const aaHandles = (item) => { try { return !!api().aaHandles?.(item); } catch { return false; } };
 const aaHasSound = (item) => !!item?.flags?.autoanimations?.audio?.a01?.enable;
 function cardActivity(message) {
-  const uuid = message?.flags?.dnd5e?.activity?.uuid;
+  const uuid = cardMeta(message).activityUuid;
   if (!uuid) return null;
   try { return globalThis.fromUuidSync?.(uuid) ?? null; } catch { return null; }
 }
 /** The domain opening has its own event sound; its usage card stays quiet (pure, tested). */
 export function isDomainUse(item, message) {
   const f = item?.flags?.[ID] ?? {};
-  const actId = message?.flags?.dnd5e?.activity?.id ?? String(message?.flags?.dnd5e?.activity?.uuid ?? "").split(".").pop();
+  const actId = cardMeta(message).activityId ?? "";
   if (f.domainActivity) return !actId || f.domainActivity === actId;
   return /^domain expansion/i.test(String(item?.name ?? ""));
 }
