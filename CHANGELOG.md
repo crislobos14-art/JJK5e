@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.19.0 - Motor transaccional de energía maldita
+- Cada técnica encadenada registra su propio coste. Los dobles clics y reintentos de confirmación conservan un solo cobro por uso.
+- Midi-QOL puede continuar una actividad desde su tarjeta original verificada tras recargar.
+- Los cargos interrumpidos con resultado incierto quedan disponibles para revisión del DJ. Las actividades sin adaptador mantienen el gasto habitual.
+
 ## 2.18.2 — Estabilidad del motor de dominios
 - Recupera el estado del dominio cuando se conecta el GM o lo cierra con el desgaste correspondiente si su efecto ya desapareció.
 - El ajuste de mundo «Crear el marcador de barrera al abrir un dominio» permite colocarlo automáticamente. El marcador respeta los bordes del mapa y acompaña los cambios de radio.
