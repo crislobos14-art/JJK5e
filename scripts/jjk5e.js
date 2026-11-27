@@ -12,6 +12,8 @@ import { activityCECost, ceTransaction, blackFlashCheck, clashRoundsFromRefineme
 import { createCEEngine } from "./jjk5e-ce-engine.mjs";
 import { createIntegrations } from "./jjk5e-integrations.mjs";
 import { createDomainLifecycle } from "./jjk5e-domain-lifecycle.mjs";
+import { createSummonEngine, activeEntries } from "./jjk5e-summon-engine.mjs";
+import { normalizeVow, applyTransition, transitionDenied, vowFingerprint, matchingRules, addAlert, durationOver, WATCH_TEMPLATES, VOW_FINAL } from "./jjk5e-vow-engine.mjs";
 
 const MODULE_ID = "jjk5e";
 const DATA_VERSION = "1.25.0";
@@ -1824,7 +1826,7 @@ async function applyScaling(actor) {
   const bonusParts = actor.items.map((i) => i.flags?.jjk5e?.ceMaxBonus).filter((b) => b !== undefined && b !== null && b !== 0)
     .map((b) => (typeof b === "number" ? String(b) : `(${String(b).split(CE_TOKEN).join(abTok)})`));
   // Binding vows that raise (or lower) maximum CE
-  const vowCE = (actor.getFlag(MODULE_ID, "vows") ?? []).filter((v) => v.active && !v.broken)
+  const vowCE = getVows(actor).filter((v) => v.active)
     .flatMap((v) => v.terms ?? []).filter((x) => x.type === "ceMax").reduce((sum, x) => sum + (Number(x.value) || 0), 0);
   if (vowCE) bonusParts.push(`(${vowCE})`);
   // Multiclassing: only the highest level class's Cursed Energy, scaling with the total character level.
@@ -2588,7 +2590,7 @@ async function findSummonSource(name) {
   return null;
 }
 
-async function gmSummon({ actorUuid, name, count = 1, userId, sceneId, stats = null, sourceUuid = null }) {
+async function gmSummon({ actorUuid, name, count = 1, userId, sceneId, stats = null, sourceUuid = null, itemUuid = null, activityId = null }) {
   if(!game.user.isGM || !setting("enableSummoning") || typeof name!=="string" || !name.trim() || !Number.isSafeInteger(count) || count<1 || count>20)return false;
   const summoner=await domainActor(actorUuid);
   const scene=game.scenes.get(sceneId);
@@ -2622,6 +2624,11 @@ async function gmSummon({ actorUuid, name, count = 1, userId, sceneId, stats = n
     const x = sTok ? sTok.x + (Number(sTok.width) || 1) * grid + i * grid : grid * (i + 1);
     const y = sTok ? sTok.y : grid;
     const extra = { x, y, disposition: sTok?.disposition ?? 1, flags: { jjk5e: { summonedBy: actorUuid } } };
+    // Same identity as dnd5e summons, so the Summoning Manager tracks module summons too.
+    const srcItem = itemUuid ? await fromUuid(itemUuid).catch(() => null) : null;
+    const srcAct = srcItem?.system?.activities?.get?.(activityId) ?? null;
+    SUMMONS.stamp(extra, { summoner, item: srcItem?.parent === summoner ? srcItem : null, activity: srcItem?.parent === summoner ? srcAct : null,
+      profile: sourceUuid ? { uuid: sourceUuid } : null });
     if (stats) {
       extra.actorLink = false;
       extra.delta = { system: { attributes: {
@@ -2656,6 +2663,91 @@ GM_EXTRA.tokenSwap = async ({ sceneId, sourceId, targetId, actorUuid }) => {
     { _id: target.id, x: source.x, y: source.y, elevation: source.elevation }
   ], { animate: false, jjk5eTokenSwap: true });
 };
+
+/* ---- Advanced Summoning Engine (scripts/jjk5e-summon-engine.mjs) ---- */
+const SUMMONS = createSummonEngine({ MODULE_ID, t, L: (en, es) => L({ en, es }), esc, isActiveGM, chat: (a, html) => chat(a, html),
+  spendCE: (a, n, label) => spendCE(a, n, label), reportError: (w, e) => reportError(w, e),
+  canPay: (a, n) => { const pool = findPool(a); return !!pool && !cePending(pool) && poolValue(pool) >= n; } });
+const SUMMON_APPS = new Map();
+function refreshSummonApps() { for (const app of SUMMON_APPS.values()) renderSoon(app); }
+function makeSummonManagerClass() {
+  return class JJKSummonManager extends foundry.applications.api.ApplicationV2 {
+    get actor() { return this._jjkActor ? liveActor(this._jjkActor) : null; }
+    set actor(a) { this._jjkActor = a; }
+    static DEFAULT_OPTIONS = {
+      classes: ["jjk5e-ui", "jjk5e-summons"], window: { icon: "fas fa-ghost", resizable: true },
+      position: { width: 560, height: "auto" },
+      actions: {
+        sheet: async function (ev, el) { (await fromUuid(el.dataset.actor).catch(() => null))?.sheet?.render(true); },
+        select: async function (ev, el) {
+          const doc = await fromUuid(el.dataset.token).catch(() => null);
+          if (doc?.object) { doc.object.control({ releaseOthers: true }); canvas.animatePan?.({ x: doc.object.center.x, y: doc.object.center.y }); }
+          else if (doc?.parent && doc.parent.id !== canvas?.scene?.id) ui.notifications.info(t("Summon.OtherScene", { scene: doc.parent.name }));
+        },
+        dismiss: async function (ev, el) {
+          const summoner = await fromUuid(el.dataset.summoner).catch(() => null);
+          if (summoner && await confirmDialog(t("Summon.Dismiss"), `<p>${esc(t("Summon.DismissConfirm", { name: el.dataset.name ?? "" }))}</p>`))
+            await SUMMONS.dismiss(summoner, el.dataset.id);
+          this.render();
+        },
+        repair: async function () {
+          const n = await SUMMONS.repair({ deleteOrphanTokens: await confirmDialog(t("Summon.Repair"), `<p>${t("Summon.RepairTokens")}</p>`) });
+          ui.notifications.info(t("Summon.Repaired", { n })); this.render();
+        }
+      }
+    };
+    get title() { return this.actor ? `${t("Summon.Manager")} — ${this.actor.name}` : `${t("Summon.Manager")} — ${t("Panel.GMWorld")}`; }
+    async _renderHTML() {
+      const owners = this.actor ? [this.actor] : SUMMONS.summoners();
+      const card = (summoner, e) => {
+        const doc = e.tokenUuid ? fromUuidSync?.(e.tokenUuid) : null;
+        const a = doc?.actor;
+        const hp = a?.system?.attributes?.hp ?? {}, ac = a?.system?.attributes?.ac?.value;
+        const pool = a ? findPool(a) : null;
+        const combat = game.combat;
+        const left = e.rules?.rounds && e.combat?.id === combat?.id ? Math.max(0, e.combat.round + e.rules.rounds - combat.round) : null;
+        const conds = [...(a?.statuses ?? [])].map((s) => CONFIG.statusEffects?.find?.((x) => x.id === s)?.name ?? s).map((n) => game.i18n.localize(n));
+        const canDismiss = game.user.isGM || summoner.isOwner;
+        return `<li class="jjk-summon" data-id="${esc(e.id)}">
+          <img src="${esc(e.img ?? a?.img ?? "icons/svg/mystery-man.svg")}" alt="" width="48" height="48">
+          <div class="jjk-summon-body"><header><strong>${esc(e.name)}</strong> <span class="jjk-chip">${esc(a?.system?.details?.type?.value ?? a?.type ?? "")}</span></header>
+            <p class="jjk-summon-stats">${t("Summon.HP")} ${hp.value ?? "—"}/${hp.max ?? "—"} · ${t("Summon.AC")} ${ac ?? "—"}${pool ? ` · ${t("CE.Short")} ${poolValue(pool)}/${poolMax(pool)}` : ""}${left !== null ? ` · ${t("Summon.RoundsLeft", { n: left })}` : ""}${e.rules?.upkeep ? ` · ${t("CE.Upkeep")} ${Number(e.rules.upkeep) || 0}` : ""}</p>
+            <p class="hint">${esc(e.techniqueName ?? "")}${this.actor ? "" : ` — ${esc(summoner.name)}`}${conds.length ? ` · ${conds.map(esc).join(", ")}` : ""}${doc ? "" : ` · <strong>${t("Summon.NoToken")}</strong>`}</p></div>
+          <div class="btns">
+            ${a ? `<button type="button" data-action="sheet" data-actor="${a.uuid}" title="${t("Summon.Sheet")}" aria-label="${t("Summon.Sheet")}"><i class="fas fa-id-card"></i></button>` : ""}
+            ${doc ? `<button type="button" data-action="select" data-token="${doc.uuid}" title="${t("Summon.Select")}" aria-label="${t("Summon.Select")}"><i class="fas fa-crosshairs"></i></button>` : ""}
+            ${canDismiss ? `<button type="button" data-action="dismiss" data-summoner="${esc(summoner.uuid)}" data-id="${esc(e.id)}" data-name="${esc(e.name)}" title="${t("Summon.Dismiss")}" aria-label="${t("Summon.Dismiss")}"><i class="fas fa-person-walking-arrow-right"></i></button>` : ""}
+          </div></li>`;
+      };
+      const groups = owners.map((o) => {
+        const list = activeEntries(SUMMONS.readRegistry(o));
+        if (!list.length) return this.actor ? `<p class="hint">${t("Summon.None")}</p>` : "";
+        return `${this.actor ? "" : `<h3>${esc(o.name)}</h3>`}<ul class="jjk-summon-list">${list.map((e) => card(o, e)).join("")}</ul>`;
+      }).join("");
+      const issues = game.user.isGM ? SUMMONS.diagnose() : [];
+      const gm = game.user.isGM ? `<footer class="jjk-summon-gm"><p>${issues.length ? t("Summon.Issues", { n: issues.length }) : t("Summon.NoIssues")}</p>
+        ${issues.length ? `<ul class="hint">${issues.slice(0, 8).map((p) => `<li>${t(`Summon.Issue.${p.kind}`)}: ${esc(p.entry?.name ?? p.token?.name ?? "?")}</li>`).join("")}</ul>
+        <button type="button" data-action="repair"><i class="fas fa-screwdriver-wrench"></i> ${t("Summon.Repair")}</button>` : ""}</footer>` : "";
+      return `<section class="jjk-panel">${groups || `<p class="hint">${t("Summon.None")}</p>`}${gm}</section>`;
+    }
+    _replaceHTML(result, content) { content.innerHTML = result; }
+    _onClose(options) { super._onClose?.(options); SUMMON_APPS.delete(this._jjkKey); }
+  };
+}
+let JJKSummonManagerClass = null;
+/** Summoning Manager: one actor's summons, or (GM, no actor) every active summon in the world. */
+function openSummons(actor = null) {
+  if (actor) { actor = requireActor(actor); if (!actor) return; }
+  else if (!game.user.isGM) { actor = requireActor(null); if (!actor) return; }
+  JJKSummonManagerClass ??= makeSummonManagerClass();
+  const key = actor?.uuid ?? "world";
+  let app = SUMMON_APPS.get(key);
+  if (!app) {
+    app = new JJKSummonManagerClass({ id: `jjk5e-summons-${key.replace(/\./g, "-")}` });
+    app.actor = actor; app._jjkKey = key; SUMMON_APPS.set(key, app);
+  }
+  return app.render({ force: true });
+}
 
 /** GM side of a player request (socket or CONFIG.queries). Resolves true if performed. */
 async function handleGMRequest(msg) {
@@ -2868,6 +2960,7 @@ function panelHTML(actor, tab = "combat") {
       ${pbtn("techniqueBuilder", "fas fa-wand-magic-sparkles", t("Builder.Title"))}
       ${pbtn("pointBuy", "fas fa-dice-d20", t("PointBuy.Title"))}
       ${pbtn("vows", "fas fa-handshake", t("Vow.Title"))}
+      ${pbtn("summons", "fas fa-ghost", t("Summon.Manager"))}
       ${pbtn("career", "fas fa-id-badge", t("Career.Title"))}
       ${pbtn("exportJJK", "fas fa-file-export", t("Transfer.Export"), { tip: t("Transfer.ExportHint") })}
       ${pbtn("importJJK", "fas fa-file-import", t("Transfer.Import"), { tip: t("Transfer.ImportHint") })}
@@ -2902,6 +2995,8 @@ function panelHTML(actor, tab = "combat") {
       ${pbtn("openSetup", "fas fa-sliders", t("Setup.Title"))}
       ${pbtn("groupSave", "fas fa-people-group", t("Bridge.GroupSave"))}
       ${pbtn("updateAll", "fas fa-arrows-rotate", t("Update.AllActors"))}
+      ${pbtn("summonsWorld", "fas fa-ghost", t("Summon.Manager"))}
+      ${pbtn("vowsWorld", "fas fa-handshake", t("Vow.Manager"))}
     </div></fieldset>` : "";
 
   return `
@@ -2954,6 +3049,7 @@ const PANEL_ACTIONS = {
   attackSelectedBarrier: () => attackSelectedBarrier(),
   weakHole: () => promptWeakHole(),
   vows: (actor) => openVows(actor),
+  summons: (actor) => openSummons(actor),
   exportJJK: (actor) => exportJJK(actor),
   importJJK: (actor) => importJJK(actor),
   career: (actor) => openCareer(actor),
@@ -3816,6 +3912,10 @@ Hooks.once("init", () => {
     name: "JJK5E.Settings.updateMenu.Name", label: "JJK5E.Settings.updateMenu.Label",
     hint: "JJK5E.Settings.updateMenu.Hint", icon: "fas fa-arrows-rotate", type: JJKUpdateMenu, restricted: true
   });
+  SUMMONS.install();
+  installVowMonitor();
+  Hooks.once("ready", () => { seedVowLedger().catch((err) => reportError("vow ledger", err)); });
+  Hooks.on("updateActor", (actor, changes) => { if (foundry.utils.hasProperty(changes ?? {}, `flags.${MODULE_ID}.summonRegistry`)) { refreshSummonApps(); refreshPanels(actor); } });
   if (CONFIG.queries) {
     CONFIG.queries[GM_QUERY] = (msg) => handleGMRequest(msg);
     CONFIG.queries[DOMAIN_QUERY] = (msg, context) => handleDomainAuthority(msg, context);
@@ -3832,7 +3932,9 @@ Hooks.once("init", () => {
     regainCE: (actor, amount, label) => spendCE(actor, -Math.abs(amount), label || t("CE.Regained")),
     combatInteractionState, combatInteractionActivity, ceHistory, findPool, poolValue, poolMax, cePending, resolveRestExchange, chooseTechnique, syncTechnique, promptCE, shortRestCE, chooseCEAbility, negativeEmotion,
     activityEnergyProfile, applyScaling, openPanel, maximumOutput, setReducedOutput, setSoulAwareness, setLimb, rollLimb,
-    summon, dismissSummons, syncResource, missingPrereqs, applyCEEffects, activateGroup, endGroup,
+    summon, dismissSummons, openSummons, summons: SUMMONS, openVowManager,
+    vows: { get: (a) => getVows(requireActor(a)), act: (a, id, action, o) => vowAction(requireActor(a), id, action, o), approve: approveVow, accept: acceptVow,
+      gmQueue: () => vowGMQueue(), event: (a, e, c, k) => vowEvent(a, e, c, k) }, syncResource, missingPrereqs, applyCEEffects, activateGroup, endGroup,
     openGMStart, undoAutomation, updateAutomation, updateAllAutomation, outdatedItems, burnoutRecovery, fallDamage, applySoulDamage, clearSoulDamage,
     techniqueBuilder, buildTechniqueItems, itemTheme, ceMeterState, aaHandles, itemAutomationStatus, showIntegrationDiagnostics,
     closeDomain: (actor) => { const a = requireActor(actor); return a ? closeDomainOf(a) : false; }, maxOutput: (actor) => maximumOutput(actor),
@@ -4863,7 +4965,8 @@ async function summonFallback(activity) {
     ac: (Number(base.ac?.flat ?? base.ac?.value) || 10) + (await evalF(activity.bonuses?.ac))
   };
   return viaGM("summon", { actorUuid: actor.uuid, name: src?.name ?? name, sourceUuid: src?.uuid ?? null,
-    count: Number(info?.count ?? profile?.count) || 1, userId: game.user.id, sceneId: canvas?.scene?.id, stats });
+    count: Number(info?.count ?? profile?.count) || 1, userId: game.user.id, sceneId: canvas?.scene?.id, stats,
+    itemUuid: activity.item?.uuid ?? null, activityId: activity.id });
 }
 
 Hooks.once("init", () => {
@@ -4896,6 +4999,9 @@ Hooks.once("init", () => {
   reg("animOverrides", String, "");
   reg("levelUpButton", Boolean, true, { scope: "client" });
   reg("enableSummoning", Boolean, true);
+  // 2.22: binding vows made by players wait for the GM; the approvals live where only GMs can write.
+  reg("vowApproval", Boolean, false, { onChange: (on) => { if (on) seedVowLedger().catch((err) => reportError("vow ledger", err)); } });
+  game.settings.register(MODULE_ID, "vowLedger", { scope: "world", config: false, type: Object, default: {} });
   Object.assign(game.modules.get(MODULE_ID).api ?? {}, { pointBuy, pointCost, ANIM, ANIM_THEMES, itemTheme, levelUp });
 });
 
@@ -5134,6 +5240,8 @@ const VOW_PRESETS = {
     benefit: { en: "When released: the reduced value doubles for rounds equal to the master's proficiency bonus (once per long rest).",
       es: "Al liberarlo: el valor reducido se duplica durante tantas rondas como el bonificador por competencia del amo (una vez por descanso largo)." } },
   taming: { name: { en: "Taming", es: "Domar" }, kind: "mutual",
+    // V.6: the vow breaks if you attack or harm the tamed curse — the module flags it for the GM, it never punishes alone.
+    watch: [{ when: "damageDealt", if: { cmp: ["target.uuid", "==", "$partner"] }, then: "alert" }],
     restriction: { en: "The vow breaks if you attack or harm the tamed curse.", es: "El voto se rompe si atacas o dañas a la maldición domada." },
     benefit: { en: "Command the tamed cursed spirit as a bonus action.", es: "Das órdenes al espíritu maldito domado como acción adicional." } }
 };
@@ -5148,10 +5256,53 @@ const MISFORTUNES = [
 ];
 const SENSES = [{ en: "touch", es: "tacto" }, { en: "taste", es: "gusto" }, { en: "smell", es: "olfato" }, { en: "sight", es: "vista" }];
 
+/* ---- Advanced Binding Vow Engine (core in scripts/jjk5e-vow-engine.mjs) ----
+ * Vows stay in flags.jjk5e.vows (schema v2, migrated on read). With the GM-approval setting on, a vow made by a
+ * player starts "pending"; the GM's approval is recorded in a world setting only GMs can write (vowLedger), keyed
+ * by a fingerprint of the vow's mechanics. A vow edited after approval (or forged active in the flag) is not live:
+ * its effects stay off until the GM approves it again. Pre-2.22 vows keep working (they never required approval). */
+// Keyed by vow id + fingerprint: the same vow on a token copy or an imported actor stays approved, and a mutual
+// vow's two copies (different partner) have their own entries. With the setting on, EVERY vow needs an entry —
+// a player cannot skip approval by editing a marker in their own flag. Vows that existed when the setting was
+// turned on are recorded once by the GM (seedVowLedger).
+const vowLedgerKey = (vow) => `${vow?.id ?? "?"}:${vowFingerprint(vow)}`;
+function vowApproved(actor, vow) {
+  if (!setting("vowApproval")) return true;
+  return !!(setting("vowLedger") ?? {})[vowLedgerKey(vow)];
+}
 const getVows = actor => {
   const vows = actor?.getFlag?.(MODULE_ID, "vows");
-  return Array.isArray(vows) ? foundry.utils.deepClone(vows) : [];
+  if (!Array.isArray(vows)) return [];
+  return vows.map((raw) => {
+    const v = normalizeVow(foundry.utils.deepClone(raw));
+    // Derived: only an approved active vow counts as active anywhere in the module.
+    if (v.active && !vowApproved(actor, v)) { v.active = false; v.unapproved = true; }
+    return v;
+  });
 };
+async function writeVowLedger(actor, vow, approve = true) {
+  if (!game.user.isGM || !vow?.id) return false;
+  const ledger = foundry.utils.deepClone(setting("vowLedger") ?? {});
+  if (approve) ledger[vowLedgerKey(normalizeVow(vow))] = { by: game.user.id, at: Date.now() };
+  else for (const k of Object.keys(ledger)) if (k.startsWith(`${vow.id}:`)) delete ledger[k];
+  await game.settings.set(MODULE_ID, "vowLedger", ledger);
+  return true;
+}
+/** GM, once, when approval is switched on: the vows that already exist keep working. */
+async function seedVowLedger() {
+  if (!isActiveGM() || !setting("vowApproval")) return 0;
+  const ledger = foundry.utils.deepClone(setting("vowLedger") ?? {});
+  if (ledger.__seeded) return 0;
+  let n = 0;
+  for (const actor of vowActors()) for (const raw of actor.getFlag(MODULE_ID, "vows") ?? []) {
+    const v = normalizeVow(raw);
+    if (["active", "suspended"].includes(v.state) && !v.requiresApproval) { ledger[vowLedgerKey(v)] = { by: game.user.id, at: Date.now(), seeded: true }; n++; }
+  }
+  ledger.__seeded = Date.now();
+  await game.settings.set(MODULE_ID, "vowLedger", ledger);
+  for (const actor of vowActors()) if (actor.isOwner) await syncVowEffects(actor);
+  return n;
+}
 // Pact Maker: twice the proficiency bonus.
 const vowLimit = (actor) => (Number(actor?.system?.attributes?.prof) || 2)
   * Math.max(1, ...(actor?.items ?? []).map((i) => Number(i.flags?.jjk5e?.vowLimitMultiplier) || 1));
@@ -5161,7 +5312,10 @@ function vowChanges(vow) {
 }
 
 async function saveVows(actor, vows) {
-  await actor.setFlag(MODULE_ID, "vows", vows);
+  // Store the state, never the derived flags.
+  const clean = vows.map((v) => { const n = normalizeVow(v); delete n.unapproved; return n; });
+  await actor.setFlag(MODULE_ID, "vows", clean);
+  vows = getVows(actor);
   await syncVowEffects(actor, vows);
   refreshVowApps(actor);
 }
@@ -5169,10 +5323,12 @@ async function saveVows(actor, vows) {
 /** One Active Effect per vow; CE max goes onto the CE pool's formula. */
 async function syncVowEffects(actor, vows = getVows(actor)) {
   const effects = [...(actor.effects ?? [])].filter((e) => e.flags?.jjk5e?.vow);
-  const remove = effects.filter((e) => !vows.some((v) => v.id === e.flags.jjk5e.vow && !v.broken)).map((e) => e.id);
+  // Effects belong to vows that are not finished; finished vows (broken, fulfilled, expired, revoked) lose them.
+  const kept = vows.filter((v) => !VOW_FINAL.has(v.state) && !["draft"].includes(v.state));
+  const remove = effects.filter((e) => !kept.some((v) => v.id === e.flags.jjk5e.vow)).map((e) => e.id);
   if (remove.length) await actor.deleteEmbeddedDocuments("ActiveEffect", remove);
   const create = [];
-  for (const vow of vows.filter((v) => !v.broken)) {
+  for (const vow of kept) {
     const changes = vowChanges(vow);
     const effect = effects.find((e) => e.flags.jjk5e.vow === vow.id);
     const name = `${t("Vow.Prefix")}: ${vow.name}`;
@@ -5207,6 +5363,18 @@ function presetForm(actor) {
       <option value="week">${t("Vow.LockWeek")}</option></select></label>
     <label>${t("Vow.EndsOn")}<select name="endsOn"><option value="">${t("Vow.FromPreset")}</option>
       <option value="none">${t("Vow.EndsNever")}</option><option value="combat">${t("Vow.EndsCombat")}</option></select></label>
+    <fieldset><legend>${t("Vow.Rules")}</legend>
+      <label>${t("Vow.Target")}<select name="target"><option value="">—</option>${vowTargets(actor)}</select></label>
+      ${[0, 1].map((i) => `<label>${t("Vow.Watch")} ${i + 1}<select name="w${i}">${Object.entries(WATCH_TEMPLATES)
+        .map(([k, w]) => `<option value="${k}">${w ? esc(L(w.label)) : "—"}</option>`).join("")}</select></label>`).join("")}
+      <div class="jjk-vow-term"><label>${t("Vow.Duration")}<select name="durUnit"><option value="">${t("Vow.EndsNever")}</option>
+        <option value="rounds">${t("Vow.DurRounds")}</option><option value="hours">${t("Vow.DurHours")}</option></select></label>
+        <input type="number" name="durValue" value="0" min="0" step="1" aria-label="${t("Vow.Duration")}"></div>
+      <label>${t("Vow.Mode")}<select name="mode"><option value="assisted">${t("Vow.ModeAssisted")}</option>
+        <option value="full">${t("Vow.ModeFull")}</option><option value="manual">${t("Vow.ModeManual")}</option></select></label>
+      <label>${t("Vow.Visibility")}<select name="visibility"><option value="public">${t("Vow.Public")}</option><option value="gm">${t("Vow.GMOnly")}</option></select></label>
+      <p class="hint">${t("Vow.RulesHint")}</p>
+    </fieldset>
   </form>`;
 }
 
@@ -5225,7 +5393,12 @@ function readVowForm(form) {
     terms: terms.length ? terms : foundry.utils.deepClone(preset.terms ?? []),
     lock: f("lock") || preset.lock || "longRest",
     endsOn: f("endsOn") || preset.endsOn || "none",
-    active: true, broken: false, locked: true, created: game.time?.worldTime ?? 0
+    target: f("target") || null,
+    watch: [f("w0"), f("w1")].map((k) => WATCH_TEMPLATES[k]?.rule).filter(Boolean).map((r) => foundry.utils.deepClone(r))
+      .concat(foundry.utils.deepClone(preset.watch ?? [])),
+    durationInput: { unit: f("durUnit"), value: Math.max(0, Math.floor(Number(f("durValue")) || 0)) },
+    mode: f("mode") || "assisted", visibility: f("visibility") || "public",
+    state: "active", active: true, broken: false, locked: true, created: game.time?.worldTime ?? 0
   };
 }
 
@@ -5248,50 +5421,119 @@ async function createVow(actor, data = null) {
   }
   if (!vow) return null;
   vow.locked = vow.lock !== "none";
+  vow.owner = actor.uuid;
+  const dur = vow.durationInput; delete vow.durationInput;
+  if (dur?.unit === "rounds" && dur.value) vow.duration = { rounds: dur.value };
+  else if (dur?.unit === "hours" && dur.value) vow.duration = { seconds: dur.value * 3600 };
+  // GM approval (setting): a player's vow waits as "pending"; nothing applies until the GM approves it.
+  if (setting("vowApproval") && !game.user.isGM) { vow.requiresApproval = true; vow.state = "pending"; }
+  else if (setting("vowApproval")) vow.requiresApproval = true;
+  vow.history = [{ at: Date.now(), action: "create", from: null, to: vow.state, by: game.user.id }];
+  if (vow.state === "active") vow = startVowDuration(vow);
+  vow = normalizeVow(vow);   // the fingerprint is taken on what is stored (invalid rules dropped first)
   const vows = getVows(actor);
   const active = vows.filter((v) => v.active && !v.broken).length;
   if (active >= vowLimit(actor)) ui.notifications.warn(t("Vow.OverLimit", { n: active + 1, max: vowLimit(actor) }));
   vows.push(vow);
+  // The approval goes first, so the effects created by saveVows are already live.
+  if (setting("vowApproval") && game.user.isGM) await writeVowLedger(actor, vow);
   await saveVows(actor, vows);
+  if (vow.state === "pending") {
+    await vowNotifyGM(actor, vow);
+    ui.notifications.info(t("Vow.Submitted", { name: vow.name }));
+    return vow;
+  }
   if (vow.kind === "mutual" && vow.partner) {
     const partner = await fromUuid(vow.partner);
     vow.partnerName = partner?.name ?? "";
     if (partner?.isOwner) {
       const pv = getVows(partner);
-      pv.push({ ...vow, partner: actor.uuid, partnerName: actor.name });
+      const copy = { ...vow, partner: actor.uuid, partnerName: actor.name, owner: partner.uuid, partnerCopy: true };
+      if (setting("vowApproval") && game.user.isGM) await writeVowLedger(partner, copy);
+      pv.push(copy);
       await saveVows(partner, pv);
     } else if (partner) ui.notifications.info(t("Vow.PartnerManual", { name: partner.name }));
     await actor.setFlag(MODULE_ID, "vows", getVows(actor).map((v) => (v.id === vow.id ? { ...v, partnerName: vow.partnerName } : v)));
   }
-  await chat(actor, `<div class="jjk5e-card"><h3><i class="fas fa-handshake"></i> ${t("Vow.Made")}: ${esc(vow.name)}</h3>`
+  await vowChat(actor, vow, `<div class="jjk5e-card"><h3><i class="fas fa-handshake"></i> ${t("Vow.Made")}: ${esc(vow.name)}</h3>`
     + `<p><strong>${t("Vow.Restriction")}:</strong> ${esc(vow.restriction)}</p>`
     + `<p><strong>${t("Vow.Benefit")}:</strong> ${esc(vow.benefit)}</p>`
     + (vow.partnerName ? `<p><strong>${t("Vow.Partner")}:</strong> ${esc(vow.partnerName)}</p>` : "")
     + (vowChanges(vow).length || vow.terms?.some((x) => ["ceMax", "ceCost"].includes(x.type))
-      ? `<p class="hint">${vow.terms.map((x) => `${esc(L(VOW_TERMS[x.type].label))} ${sgn(x.value)}`).join(" · ")}</p>` : "")
+      ? `<p class="hint">${vow.terms.filter((x) => VOW_TERMS[x.type]).map((x) => `${esc(L(VOW_TERMS[x.type].label))} ${sgn(x.value)}`).join(" · ")}</p>` : "")
     + `</div>`);
   return vow;
 }
 
 async function toggleVow(actor, id) {
-  const vows = getVows(actor);
-  const vow = vows.find((v) => v.id === id);
-  if (!vow || vow.broken) return;
-  if (vow.active && vow.locked && !game.user.isGM) return ui.notifications.warn(t("Vow.Locked"));
-  vow.active = !vow.active;
-  if (vow.active) vow.locked = vow.lock !== "none";
-  await saveVows(actor, vows);
+  const vow = getVows(actor).find((v) => v.id === id);
+  if (!vow) return;
+  return vowAction(actor, id, vow.state === "active" ? "suspend" : "activate");
 }
 
-async function breakVow(actor, id) {
+/** One state change of one vow, checked against who may make it, recorded in its history. */
+async function vowAction(actor, id, action, { reason = "", silent = false } = {}) {
   const vows = getVows(actor);
-  const vow = vows.find((v) => v.id === id);
-  if (!vow || vow.broken) return;
+  const i = vows.findIndex((v) => v.id === id);
+  if (i < 0) return false;
+  const vow = vows[i];
+  const partner = vow.partner ? fromUuidSync?.(vow.partner) : null;
+  const who = { isGM: game.user.isGM, isOwner: !!actor.isOwner, isPartner: !!partner?.isOwner, locked: !!vow.locked };
+  const denied = transitionDenied(vow, action, who);
+  if (denied) { if (!silent) ui.notifications.warn(t(`Vow.Denied.${denied}`)); return false; }
+  let next = applyTransition(vow, action, who, { reason, by: game.user.id });
+  if (action === "activate" || action === "approve" || action === "accept" || action === "restore") next.locked = next.lock !== "none";
+  if (["approve", "accept"].includes(action)) next = startVowDuration(next);
+  vows[i] = next;
+  // Ledger first: saveVows then syncs the effects with the approval already in place.
+  if (["approve", "accept", "restore"].includes(action)) await writeVowLedger(actor, next);
+  if (["reject", "revoke"].includes(action)) await writeVowLedger(actor, next, false);
+  await saveVows(actor, vows);
+  // Mutual vows: the GM's decisions bind both copies.
+  if (game.user.isGM && next.kind === "mutual" && next.partner && ["revoke", "fulfill", "restore", "confirmBreach"].includes(action)) {
+    const other = await fromUuid(next.partner).catch(() => null);
+    const ov = other ? getVows(other) : [];
+    const j = ov.findIndex((v) => v.id === id);
+    if (j >= 0) {
+      try {
+        ov[j] = applyTransition(ov[j], action, { isGM: true }, { reason, by: game.user.id });
+        if (action === "restore") await writeVowLedger(other, ov[j]);
+        if (action === "revoke") await writeVowLedger(other, ov[j], false);
+        await saveVows(other, ov);
+      } catch { /* the other copy already moved */ }
+    }
+  }
+  if (!silent) await vowChat(actor, next, `<p><i class="fas fa-handshake" aria-hidden="true"></i> ${esc(next.name)}: ${esc(t(`Vow.State.${next.state}`))}${reason ? ` — ${esc(reason)}` : ""}</p>`);
+  return true;
+}
+/** Chat lines for a vow honour its visibility (GM-only vows are whispered to the GMs and the owner). */
+async function vowChat(actor, vow, html) {
+  if (vow?.visibility !== "gm") return chat(actor, html);
+  const whisper = [...game.users].filter((u) => u.isGM || actor.testUserPermission?.(u, "OWNER")).map((u) => u.id);
+  return chat(actor, html, { whisper });
+}
+/** Rounds and hours start when the vow becomes active; a rounds duration made outside combat starts with the next combat. */
+function startVowDuration(v) {
+  const d = v.duration;
+  if (!d) return v;
+  if (Number(d.seconds) > 0) return { ...v, duration: { ...d, since: game.time?.worldTime ?? 0 } };
+  if (Number(d.rounds) > 0) return { ...v, duration: { ...d, combatId: game.combat?.started ? game.combat.id : null, round: game.combat?.round ?? 0 } };
+  return v;
+}
+async function vowNotifyGM(actor, vow) {
+  const whisper = [...game.users].filter((u) => u.isGM).map((u) => u.id);
+  if (!whisper.length) return;
+  await chat(actor, `<div class="jjk5e-card"><h3><i class="fas fa-scale-balanced" aria-hidden="true"></i> ${t("Vow.Review")}: ${esc(vow.name)}</h3>
+    <p>${esc(actor.name)} — ${esc(vow.kind === "mutual" ? t("Vow.Mutual") : t("Vow.Personal"))}</p>
+    <button type="button" data-jjk5e-vow-review="${actor.uuid}"><i class="fas fa-scale-balanced" aria-hidden="true"></i> ${t("Vow.Manager")}</button></div>`, { whisper });
+}
+
+async function breakVow(actor, id, { gmConfirmed = false, reason = "" } = {}) {
+  const vow = getVows(actor).find((v) => v.id === id);
+  if (!vow || !["active", "suspended"].includes(vow.state)) return;
   const ok = await confirmDialog(t("Vow.Break"), `<p>${t("Vow.BreakConfirm", { name: esc(vow.name) })}</p>`);
   if (!ok) return;
-  vow.broken = true;
-  vow.active = false;
-  await saveVows(actor, vows);
+  if (!await vowAction(actor, id, gmConfirmed ? "confirmBreach" : "break", { reason, silent: true })) return;
   let text = `<p>${t("Vow.LostBenefits")}</p>`;
   if (vow.kind === "mutual") text += await vowPunishment(actor);
   else text += `<p class="hint">${t("Vow.PersonalBreak")}</p>`;
@@ -5300,8 +5542,11 @@ async function breakVow(actor, id) {
     const partner = await fromUuid(vow.partner);
     if (partner?.isOwner) {
       const pv = getVows(partner);
-      const other = pv.find((v) => v.id === vow.id);
-      if (other) { other.broken = true; other.active = false; await saveVows(partner, pv); }
+      const i = pv.findIndex((v) => v.id === vow.id);
+      if (i >= 0 && ["active", "suspended", "approved"].includes(pv[i].state)) {
+        pv[i] = normalizeVow({ ...pv[i], state: "broken", history: [...pv[i].history, { at: Date.now(), action: "partnerBroke", from: pv[i].state, to: "broken", by: game.user.id }] });
+        await saveVows(partner, pv);
+      }
     }
   }
 }
@@ -5352,6 +5597,7 @@ async function vowPunishment(actor) {
 async function deleteVow(actor, id) {
   const ok = await confirmDialog(t("Vow.Delete"), `<p>${t("Vow.DeleteConfirm")}</p>`);
   if (!ok) return;
+  if (game.user.isGM) await writeVowLedger(actor, { id }, false);
   await saveVows(actor, getVows(actor).filter((v) => v.id !== id));
 }
 
@@ -5364,9 +5610,13 @@ async function unlockVows(actor, kinds) {
 
 async function endCombatVows(actor) {
   const vows = getVows(actor);
-  const ending = vows.filter((v) => v.active && !v.broken && v.endsOn === "combat");
+  const ending = vows.filter((v) => v.state === "active" && v.endsOn === "combat");
   if (!ending.length) return;
-  ending.forEach((v) => { v.active = false; v.locked = false; });
+  // "Until combat ends" vows (Revealing One's Hand) switch off and unlock, as before 2.22: they can be made again.
+  for (const v of ending) {
+    const i = vows.indexOf(v);
+    vows[i] = normalizeVow({ ...applyTransition(v, "autoSuspend", { isGM: true }, { by: game.user.id, reason: "combatEnd" }), locked: false });
+  }
   await saveVows(actor, vows);
   await chat(actor, `<p><i class="fas fa-handshake"></i> ${t("Vow.CombatEnded", { names: ending.map((v) => esc(v.name)).join(", ") })}</p>`);
 }
@@ -5573,51 +5823,341 @@ async function resolveMission(actor, id, result) {
 
 const VOW_APPS = new Map();
 const CAREER_APPS = new Map();
-function refreshVowApps(actor) { const a = VOW_APPS.get(actor?.uuid); if (a?.rendered) a.render(); refreshPanels(actor); }
+function refreshVowApps(actor) {
+  for (const key of [actor?.uuid, "world"]) { const a = VOW_APPS.get(key); if (a?.rendered) a.render(); }
+  refreshPanels(actor);
+}
 function refreshCareerApps(actor) { renderSoon(CAREER_APPS.get(actor?.uuid)); }
 
 function makeVowClass() {
   const Base = foundry.applications.api.ApplicationV2;
+  const pick = (el) => el.closest("[data-id]")?.dataset ?? {};
+  const own = async (el) => (pick(el).actor ? await fromUuid(pick(el).actor).catch(() => null) : null);
   return class JJKVows extends Base {
     // Always act on the live document: token actors are rebuilt when their token changes.
-    get actor() { return liveActor(this._jjkActor); }
+    get actor() { return this._jjkActor ? liveActor(this._jjkActor) : null; }
     set actor(a) { this._jjkActor = a; }
     static DEFAULT_OPTIONS = {
       classes: ["jjk5e-ui", "jjk5e-vows"], window: { icon: "fas fa-handshake", resizable: true },
-      position: { width: 520, height: "auto" },
+      position: { width: 560, height: "auto" },
       actions: {
         add: function () { createVow(this.actor); },
-        toggle: function (ev, el) { toggleVow(this.actor, el.closest("[data-id]").dataset.id); },
-        break: function (ev, el) { breakVow(this.actor, el.closest("[data-id]").dataset.id); },
-        del: function (ev, el) { deleteVow(this.actor, el.closest("[data-id]").dataset.id); },
-        unlock: function (ev, el) { unlockVows(this.actor, ["longRest", "week"]); }
+        toggle: async function (ev, el) { toggleVow(await own(el), pick(el).id); },
+        break: async function (ev, el) { breakVow(await own(el), pick(el).id); },
+        del: async function (ev, el) { deleteVow(await own(el), pick(el).id); },
+        unlock: function () { unlockVows(this.actor, ["longRest", "week"]); },
+        approve: async function (ev, el) { approveVow(await own(el), pick(el).id); },
+        reject: async function (ev, el) {
+          const reason = await promptField(t("Vow.Reject"), `<label>${t("Vow.Reason")} <input name="r" type="text"></label>`, "r");
+          if (reason !== null) vowAction(await own(el), pick(el).id, "reject", { reason });
+        },
+        accept: async function (ev, el) { acceptVow(await own(el), pick(el).id); },
+        revoke: async function (ev, el) { if (await confirmDialog(t("Vow.Revoke"), `<p>${t("Vow.RevokeConfirm")}</p>`)) vowAction(await own(el), pick(el).id, "revoke"); },
+        restore: async function (ev, el) { vowAction(await own(el), pick(el).id, "restore"); },
+        fulfill: async function (ev, el) { vowAction(await own(el), pick(el).id, "fulfill"); },
+        confirmBreach: async function (ev, el) { breakVow(await own(el), pick(el).id, { gmConfirmed: true, reason: el.dataset.alert ?? "" }); },
+        dismissAlert: async function (ev, el) { dismissVowAlert(await own(el), pick(el).id, el.dataset.alert); }
       }
     };
-    get title() { return `${t("Vow.Title")} — ${this.actor?.name ?? ""}`; }
+    get title() { return this.actor ? `${t("Vow.Title")} — ${this.actor.name}` : `${t("Vow.Manager")} — ${t("Panel.GMWorld")}`; }
     async _renderHTML() {
-      const vows = getVows(this.actor);
-      const active = vows.filter((v) => v.active && !v.broken).length;
-      const rows = vows.map((v) => {
+      const gm = game.user.isGM;
+      const list = this.actor ? [this.actor] : vowActors();
+      const card = (actor, v) => {
         const mech = (v.terms ?? []).map((x) => `${esc(L(VOW_TERMS[x.type]?.label ?? x.type))} ${sgn(x.value)}`).join(" · ");
-        const state = v.broken ? t("Vow.StateBroken") : (v.active ? t("Vow.StateActive") : t("Vow.StateInactive"));
-        return `<li class="jjk-vow ${v.broken ? "broken" : v.active ? "on" : "off"}" data-id="${v.id}">
+        const rules = (v.watch ?? []).map((w) => esc(L(Object.values(WATCH_TEMPLATES).find((tp) => tp && JSON.stringify(tp.rule) === JSON.stringify(w))?.label ?? { en: `${w.when} → ${w.then}`, es: `${w.when} → ${w.then}` }))).join(" · ");
+        const left = vowTimeLeft(v);
+        const live = v.state === "active" && !v.unapproved;
+        const finished = VOW_FINAL.has(v.state);
+        const partner = v.partner ? fromUuidSync?.(v.partner) : null;
+        const b = (action, icon, label, extra = "") => `<button type="button" data-action="${action}" ${extra}><i class="fas ${icon}" aria-hidden="true"></i> ${label}</button>`;
+        const buttons = [
+          ["active", "suspended"].includes(v.state) && (actor.isOwner || gm) ? b("toggle", v.state === "active" ? "fa-pause" : "fa-play", v.state === "active" ? t("Vow.Suspend") : t("Vow.Activate")) : "",
+          ["active", "suspended"].includes(v.state) && (actor.isOwner || gm) ? b("break", "fa-link-slash", t("Vow.Break")) : "",
+          v.state === "pending" && gm ? b("approve", "fa-check", t("Vow.Approve")) + b("reject", "fa-xmark", t("Vow.Reject")) : "",
+          v.state === "approved" && (partner?.isOwner || actor.isOwner && v.partnerCopy || gm) ? b("accept", "fa-handshake", t("Vow.Accept")) : "",
+          !finished && gm ? b("revoke", "fa-ban", t("Vow.Revoke")) : "",
+          ["active", "suspended"].includes(v.state) && gm ? b("fulfill", "fa-flag-checkered", t("Vow.Fulfill")) : "",
+          finished && gm ? b("restore", "fa-rotate-left", t("Vow.Restore")) : ""
+        ].join("");
+        const alerts = (v.alerts ?? []).map((a) => `<li class="jjk-vow-alert"><i class="fas fa-triangle-exclamation" aria-hidden="true"></i> ${esc(a.text || a.event)}
+          ${gm ? `${b("confirmBreach", "fa-gavel", t("Vow.ConfirmBreach"), `data-alert="${esc(a.id)}"`)}${b("dismissAlert", "fa-eraser", t("Vow.DismissAlert"), `data-alert="${esc(a.id)}"`)}` : ""}</li>`).join("");
+        const hist = (v.history ?? []).slice(-8).reverse().map((h) => `<li>${esc(new Date(h.at).toLocaleString())} · ${esc(t(`Vow.State.${h.to}`))}${h.reason ? ` — ${esc(h.reason)}` : ""}${h.by && game.users.get(h.by) ? ` (${esc(game.users.get(h.by).name)})` : ""}</li>`).join("");
+        return `<li class="jjk-vow ${live ? "on" : finished ? (v.state === "broken" ? "broken" : "done") : "off"}" data-id="${esc(v.id)}" data-actor="${esc(actor.uuid)}">
           <header><strong>${esc(v.name)}</strong> <span class="jjk-chip">${v.kind === "mutual" ? t("Vow.Mutual") : t("Vow.Personal")}</span>
-            <span class="jjk-chip ${v.active && !v.broken ? "on" : ""}">${state}</span>${v.locked && v.active ? ` <i class="fas fa-lock" title="${t("Vow.Locked")}"></i>` : ""}</header>
-          ${v.partnerName ? `<p><em>${t("Vow.Partner")}: ${esc(v.partnerName)}</em></p>` : ""}
+            <span class="jjk-chip ${live ? "on" : ""}">${esc(t(`Vow.State.${v.state}`))}${v.unapproved ? ` · ${t("Vow.Unapproved")}` : ""}</span>
+            ${v.locked && live ? ` <i class="fas fa-lock" title="${t("Vow.Locked")}" aria-label="${t("Vow.Locked")}"></i>` : ""}
+            ${v.visibility === "gm" ? ` <i class="fas fa-eye-slash" title="${t("Vow.GMOnly")}" aria-label="${t("Vow.GMOnly")}"></i>` : ""}</header>
+          ${this.actor ? "" : `<p class="hint">${esc(actor.name)}</p>`}
+          ${v.partnerName || partner ? `<p><em>${t("Vow.Partner")}: ${esc(v.partnerName || partner?.name || "")}</em></p>` : ""}
           <p><strong>${t("Vow.Restriction")}:</strong> ${esc(v.restriction)}</p>
           <p><strong>${t("Vow.Benefit")}:</strong> ${esc(v.benefit)}</p>
           ${mech ? `<p class="hint">${mech}</p>` : ""}
-          ${v.broken ? "" : `<div class="btns"><button type="button" data-action="toggle">${v.active ? t("Vow.Suspend") : t("Vow.Activate")}</button>
-            <button type="button" data-action="break"><i class="fas fa-link-slash"></i> ${t("Vow.Break")}</button></div>`}
-          <a data-action="del" class="del" role="button" tabindex="0" title="${t("Vow.Delete")}" aria-label="${t("Vow.Delete")}"><i class="fas fa-trash"></i></a></li>`;
+          ${rules ? `<p class="hint"><i class="fas fa-eye" aria-hidden="true"></i> ${rules}</p>` : ""}
+          ${left ? `<p class="hint"><i class="fas fa-hourglass-half" aria-hidden="true"></i> ${esc(left)}</p>` : ""}
+          ${alerts ? `<ul class="jjk-vow-alerts">${alerts}</ul>` : ""}
+          ${buttons ? `<div class="btns">${buttons}</div>` : ""}
+          ${hist ? `<details><summary>${t("Vow.History")}</summary><ul class="jjk-vow-history">${hist}</ul></details>` : ""}
+          ${actor.isOwner && (gm || !v.requiresApproval || ["draft", "pending", "revoked"].includes(v.state)) ? `<a data-action="del" class="del" role="button" tabindex="0" title="${t("Vow.Delete")}" aria-label="${t("Vow.Delete")}"><i class="fas fa-trash"></i></a>` : ""}</li>`;
+      };
+      const groups = list.map((actor) => {
+        const vows = getVows(actor).filter((v) => gm || v.visibility !== "gm" || actor.isOwner);
+        if (!this.actor) {
+          const work = vows.filter((v) => v.state === "pending" || v.state === "approved" || v.alerts?.length || v.state === "active");
+          return work.length ? `<ul class="jjk-vow-list">${work.map((v) => card(actor, v)).join("")}</ul>` : "";
+        }
+        const order = ["pending", "approved", "active", "suspended", "draft", "fulfilled", "expired", "broken", "revoked"];
+        vows.sort((a, b) => order.indexOf(a.state) - order.indexOf(b.state));
+        return `<ul class="jjk-vow-list">${vows.map((v) => card(actor, v)).join("") || `<li class="hint">${t("Vow.None")}</li>`}</ul>`;
       }).join("");
-      return `<section class="jjk-panel"><p>${t("Vow.Count", { n: active, max: vowLimit(this.actor) })}</p>
-        <ul class="jjk-vow-list">${rows || `<li class="hint">${t("Vow.None")}</li>`}</ul>
-        <div class="btns"><button type="button" data-action="add"><i class="fas fa-plus"></i> ${t("Vow.New")}</button>
-        ${game.user.isGM ? `<button type="button" data-action="unlock"><i class="fas fa-lock-open"></i> ${t("Vow.UnlockAll")}</button>` : ""}</div></section>`;
+      const head = this.actor
+        ? `<p>${t("Vow.Count", { n: getVows(this.actor).filter((v) => v.active).length, max: vowLimit(this.actor) })}${setting("vowApproval") ? ` · ${t("Vow.ApprovalOn")}` : ""}</p>`
+        : `<p>${t("Vow.GMQueue", { n: vowGMQueue().length })}</p>`;
+      const foot = this.actor ? `<div class="btns"><button type="button" data-action="add"><i class="fas fa-plus"></i> ${t("Vow.New")}</button>
+        ${gm ? `<button type="button" data-action="unlock"><i class="fas fa-lock-open"></i> ${t("Vow.UnlockAll")}</button>` : ""}</div>` : "";
+      return `<section class="jjk-panel">${head}${groups || `<p class="hint">${t("Vow.None")}</p>`}${foot}</section>`;
     }
     _replaceHTML(result, content) { content.innerHTML = result; }
   };
+}
+/** Actors the GM's vow overview covers: world actors and unlinked tokens with vows. */
+function vowActors() {
+  return [...(game.actors ?? []), ...[...(game.scenes ?? [])].flatMap((s) => [...(s.tokens ?? [])].filter((tk) => !tk.actorLink && tk.actor).map((tk) => tk.actor))]
+    .filter((a) => Array.isArray(a.getFlag?.(MODULE_ID, "vows")) && a.getFlag(MODULE_ID, "vows").length);
+}
+/** What waits for the GM: pending approvals and possible breaches. */
+function vowGMQueue() {
+  return vowActors().flatMap((a) => getVows(a).filter((v) => v.state === "pending" || v.alerts?.length).map((v) => ({ actor: a, vow: v })));
+}
+function vowTimeLeft(v) {
+  const d = v.duration;
+  if (!d || v.state !== "active") return "";
+  if (Number(d.seconds) > 0) {
+    const left = Math.max(0, (Number(d.since) || 0) + Number(d.seconds) - (game.time?.worldTime ?? 0));
+    return t("Vow.TimeLeft", { h: Math.floor(left / 3600), m: Math.floor((left % 3600) / 60) });
+  }
+  if (Number(d.rounds) > 0 && d.combatId && game.combat?.id === d.combatId) return t("Vow.RoundsLeft", { n: Math.max(0, d.round + d.rounds - game.combat.round) });
+  return "";
+}
+function vowTargets(actor) {
+  const seen = new Set();
+  return [...(canvas?.tokens?.placeables ?? [])].map((tk) => tk.actor).filter((a) => a && a !== actor && !seen.has(a.uuid) && seen.add(a.uuid))
+    .map((a) => `<option value="${a.uuid}">${esc(a.name)}</option>`).join("");
+}
+
+/** GM approval. A mutual vow with another player's character waits for that player's acceptance. */
+async function approveVow(actor, id) {
+  if (!game.user.isGM) return false;
+  const vow = getVows(actor).find((v) => v.id === id);
+  if (!vow) return false;
+  const partner = vow.kind === "mutual" && vow.partner ? await fromUuid(vow.partner).catch(() => null) : null;
+  if (!partner) return vowAction(actor, id, "approve");
+  if (!await vowAction(actor, id, "awaitPartner", { silent: true })) return false;
+  const copy = normalizeVow({ ...getVows(actor).find((v) => v.id === id), partner: actor.uuid, partnerName: actor.name, owner: partner.uuid,
+    partnerCopy: true, state: "approved", history: [{ at: Date.now(), action: "proposed", from: null, to: "approved", by: game.user.id }] });
+  const pv = getVows(partner).filter((v) => v.id !== id);
+  pv.push(copy);
+  await saveVows(partner, pv);
+  await vowChat(actor, vow, `<p><i class="fas fa-handshake" aria-hidden="true"></i> ${t("Vow.AwaitPartner", { name: esc(vow.name), partner: esc(partner.name) })}</p>`);
+  return true;
+}
+/** The partner accepts: through the GM, who activates both copies (each actor may belong to another player). */
+async function acceptVow(partnerActor, id) {
+  const payload = { actorUuid: partnerActor.uuid, id };
+  if (game.user.isGM) return gmAcceptVow(payload, game.user);
+  const gm = game.users.activeGM;
+  if (!gm?.query) return ui.notifications.warn(t("Notify.NoGM"));
+  return gm.query(VOW_QUERY, { operation: "accept", ...payload }, { timeout: 60000 }).catch(() => false);
+}
+async function gmAcceptVow({ actorUuid, id }, user) {
+  const partnerActor = await fromUuid(actorUuid).catch(() => null);
+  if (partnerActor?.documentName !== "Actor" || !(user.isGM || partnerActor.testUserPermission?.(user, "OWNER"))) return false;
+  const copy = getVows(partnerActor).find((v) => v.id === id);
+  if (copy?.state !== "approved") return false;
+  const proposer = copy.partner ? await fromUuid(copy.partner).catch(() => null) : null;
+  const mine = proposer && getVows(proposer).find((v) => v.id === id);
+  if (!mine || mine.state !== "approved") return false;
+  const gmWho = { isGM: true };
+  for (const [actor] of [[partnerActor, copy], [proposer, mine]]) {
+    const vows = getVows(actor).map((v) => (v.id === id ? startVowDuration({ ...applyTransition(v, "accept", gmWho, { by: user.id }), locked: v.lock !== "none" }) : v));
+    if (setting("vowApproval")) await writeVowLedger(actor, vows.find((v) => v.id === id));
+    await saveVows(actor, vows);
+  }
+  await vowChat(proposer, mine, `<div class="jjk5e-card"><h3><i class="fas fa-handshake" aria-hidden="true"></i> ${t("Vow.Made")}: ${esc(mine.name)}</h3><p>${esc(proposer.name)} · ${esc(partnerActor.name)}</p></div>`);
+  return true;
+}
+async function dismissVowAlert(actor, id, alertId) {
+  if (!game.user.isGM) return false;
+  const vows = getVows(actor).map((v) => (v.id === id ? { ...v, alerts: (v.alerts ?? []).filter((a) => a.id !== alertId),
+    history: [...(v.history ?? []), { at: Date.now(), action: "dismissAlert", from: v.state, to: v.state, by: game.user.id, reason: alertId }] } : v));
+  await saveVows(actor, vows);
+  return true;
+}
+
+/* ---- the monitor: reads only declared watch rules; acts on one authoritative client ---- */
+const VOW_QUERY = `${MODULE_ID}.vow`;
+const vowAuthority = (actor) => {
+  if (game.users?.activeGM) return isActiveGM();
+  const owners = [...game.users].filter((u) => u.active && actor.testUserPermission?.(u, "OWNER")).sort((a, b) => a.id.localeCompare(b.id));
+  return owners[0]?.id === game.user.id;
+};
+const VOW_WORK = new Map();
+/** Every write to an actor's vows from the monitor, durations and combat end runs through this per-actor queue. */
+function vowQueue(actor, fn) {
+  const id = actor?.uuid ?? "?";
+  const run = (VOW_WORK.get(id) ?? Promise.resolve()).catch(() => null).then(fn);
+  VOW_WORK.set(id, run);
+  run.finally(() => { if (VOW_WORK.get(id) === run) VOW_WORK.delete(id); }).catch(() => null);
+  return run;
+}
+// Events that fire only on the client that acted (postUseActivity, applyDamage, restCompleted, summons).
+const VOW_LOCAL = new Set(["techniqueUse", "reaction", "weapon", "damageTaken", "damageDealt", "rest", "summon", "summonEnd"]);
+/**
+ * Feed one event to an actor's vows. key de-duplicates repeated hooks of the same event. Shared events (combat,
+ * time, document updates) are handled by the authority; local events by the acting client when it owns the actor,
+ * otherwise they are sent to the GM, who accepts them only as possible-breach alerts.
+ */
+function vowEvent(actor, event, ctx, key, { remote = false } = {}) {
+  if (!actor) return Promise.resolve(false);
+  const raw = actor.getFlag?.(MODULE_ID, "vows");
+  if (!Array.isArray(raw) || !raw.length) return Promise.resolve(false);
+  const local = VOW_LOCAL.has(event) && !remote;
+  if (local && !(isActiveGM() || actor.isOwner)) {
+    const gm = game.users?.activeGM;
+    gm?.query?.(VOW_QUERY, { operation: "event", actorUuid: actor.uuid, event, ctx, key }, { timeout: 30000 })?.catch?.(() => null);
+    return Promise.resolve(false);
+  }
+  if (!local && !remote && !vowAuthority(actor)) return Promise.resolve(false);
+  return vowQueue(actor, () => applyVowEvent(actor, event, ctx, key, { alertsOnly: remote }));
+}
+async function applyVowEvent(actor, event, ctx, key, { alertsOnly = false } = {}) {
+  let vows = getVows(actor), changed = false;
+  const notes = [];
+  for (let i = 0; i < vows.length; i++) {
+    const v = vows[i];
+    if (v.mode === "manual" || v.unapproved) continue;
+    for (const rule of matchingRules(v, event, ctx)) {
+      if (alertsOnly && rule.then !== "alert") continue;   // a forwarded event can only raise a question for the GM
+      const act = rule.then === "alert" ? null : { fulfill: "fulfill", expire: "expire", suspend: "autoSuspend" }[rule.then];
+      if (!act) {
+        const next = addAlert(vows[i], { key: key ?? `${Date.now()}`, event, text: t("Vow.PossibleBreach", { event: t(`Vow.Event.${event}`) }) });
+        if (next !== vows[i]) { vows[i] = next; changed = true; notes.push(v); }
+        continue;
+      }
+      // Assisted vows only flag; full automation applies the declared ending.
+      if (v.mode !== "full" && act !== "expire") {
+        const next = addAlert(vows[i], { key: `${act}:${key ?? Date.now()}`, event, text: t("Vow.SuggestState", { state: t(`Vow.State.${{ fulfill: "fulfilled", autoSuspend: "suspended" }[act]}`) }) });
+        if (next !== vows[i]) { vows[i] = next; changed = true; notes.push(v); }
+        continue;
+      }
+      try { vows[i] = applyTransition(vows[i], act, { isGM: true }, { reason: event, by: null }); changed = true; } catch { /* already moved */ }
+      break;
+    }
+  }
+  if (!changed) return false;
+  await saveVows(actor, vows);
+  if (notes.length) await vowNotifyGM(actor, notes[0]);
+  return true;
+}
+/** Durations: worldTime (hours) and rounds. */
+async function checkVowDurations(actor, ctx) {
+  if (!vowAuthority(actor) || !Array.isArray(actor.getFlag?.(MODULE_ID, "vows"))) return;
+  return vowQueue(actor, async () => {
+    const vows = getVows(actor);
+    let changed = false;
+    for (let i = 0; i < vows.length; i++) {
+      const d = vows[i].duration;
+      // A rounds duration started outside combat begins with this combat.
+      if (vows[i].state === "active" && Number(d?.rounds) > 0 && !d.combatId && ctx.combatId) { vows[i] = { ...vows[i], duration: { ...d, combatId: ctx.combatId, round: ctx.round } }; changed = true; continue; }
+      if (durationOver(vows[i], ctx)) { vows[i] = applyTransition(vows[i], "expire", { isGM: true }, { reason: "duration" }); changed = true; }
+    }
+    if (changed) await saveVows(actor, vows);
+  });
+}
+function installVowMonitor() {
+  if (CONFIG.queries) CONFIG.queries[VOW_QUERY] = async (msg, { user } = {}) => {
+    if (!isActiveGM() || !user?.active) return false;
+    if (msg?.operation === "accept") return gmAcceptVow(msg, user);
+    if (msg?.operation === "event" && VOW_LOCAL.has(msg.event) && typeof msg.key === "string") {
+      const actor = await fromUuid(msg.actorUuid ?? "").catch(() => null);
+      if (actor?.documentName !== "Actor") return false;
+      const ctx = JSON.parse(JSON.stringify(msg.ctx ?? {}));   // plain data only
+      return vowEvent(actor, msg.event, ctx, `remote:${msg.key}`, { remote: true });
+    }
+    return false;
+  };
+  const pct = (v, m) => (Number(m) > 0 ? Math.round((Number(v) / Number(m)) * 100) : 100);
+  const lastTurn = new Map();
+  Hooks.on("updateCombat", (combat, changes) => {
+    if (!combat?.started || !("turn" in (changes ?? {}) || "round" in (changes ?? {}))) return;
+    const key = `${combat.id}:${combat.round}:${combat.turn}`;
+    const prev = lastTurn.get(combat.id);
+    if (prev?.actor && prev.key !== key) vowEvent(prev.actor, "turnEnd", { combat: { round: combat.round } }, prev.key);
+    const actor = combat.combatant?.actor;
+    lastTurn.set(combat.id, { actor, key });
+    if (actor) vowEvent(actor, "turnStart", { combat: { round: combat.round } }, key);
+    for (const c of combat.combatants ?? []) if (c.actor) checkVowDurations(c.actor, { combatId: combat.id, round: combat.round }).catch(() => null);
+  });
+  Hooks.on("combatStart", (combat) => { for (const c of combat.combatants ?? []) if (c.actor) vowEvent(c.actor, "combatStart", { combat: { round: 1 } }, combat.id); });
+  Hooks.on("deleteCombat", (combat) => { lastTurn.delete(combat.id); for (const c of combat.combatants ?? []) if (c.actor) vowEvent(c.actor, "combatEnd", {}, combat.id); });
+  Hooks.on("updateWorldTime", (worldTime) => {
+    const hour = Math.floor((worldTime % 86400) / 3600);
+    for (const a of vowActors()) { checkVowDurations(a, { worldTime }).catch(() => null); vowEvent(a, "time", { time: { hour } }, `${Math.floor(worldTime / 3600)}`); }
+  });
+  Hooks.on("dnd5e.postUseActivity", (activity, usage, results) => {
+    const actor = activity?.actor ?? activity?.item?.actor;
+    if (!actor) return;
+    const item = activity.item, key = results?.message?.id ?? `${activity.uuid}:${Date.now()}`;
+    const ctx = { technique: { name: item?.name, type: item?.flags?.[MODULE_ID]?.technique ? "innate" : item?.type }, activity: { activation: activity.activation?.type },
+      item: { name: item?.name, type: item?.type }, weapon: { name: item?.type === "weapon" ? item.name : "" } };
+    if (item?.flags?.[MODULE_ID]?.technique || item?.system?.school === "jjk") vowEvent(actor, "techniqueUse", ctx, key);
+    if (activity.activation?.type === "reaction") vowEvent(actor, "reaction", ctx, key);
+    if (item?.type === "weapon") vowEvent(actor, "weapon", ctx, key);
+  });
+  Hooks.on("dnd5e.applyDamage", (target, amount, options) => {
+    const n = Number(amount) || 0;
+    if (n <= 0 || !target) return;
+    const msg = options?.originatingMessage;
+    const source = msg?.speaker ? ChatMessage.getSpeakerActor?.(msg.speaker) : null;
+    const key = `${msg?.id ?? Date.now()}:${target.uuid}`;
+    vowEvent(target, "damageTaken", { damage: { amount: n }, source: { uuid: source?.uuid ?? null } }, key);
+    if (source && source !== target) vowEvent(source, "damageDealt", { damage: { amount: n }, target: { uuid: target.uuid } }, key);
+  });
+  Hooks.on("updateActor", (actor, changes) => {
+    if (foundry.utils.hasProperty(changes ?? {}, "system.attributes.hp.value")) {
+      const hp = actor.system?.attributes?.hp ?? {};
+      vowEvent(actor, "hp", { hp: { value: hp.value, pct: pct(hp.value, hp.max) } }, `hp:${hp.value}`);
+    }
+    if (foundry.utils.getProperty(changes ?? {}, `flags.${MODULE_ID}.domainState.open`) === true)
+      vowEvent(actor, "domainOpen", { domain: { open: true } }, actor.getFlag(MODULE_ID, "domainState")?.openingId ?? `${Date.now()}`);
+  });
+  Hooks.on("updateItem", (item, changes) => {
+    const actor = item?.parent;
+    if (!actor || !item.flags?.[MODULE_ID]?.cePool || !foundry.utils.hasProperty(changes ?? {}, "system.uses.spent")) return;
+    const value = poolValue(item), max = poolMax(item);
+    vowEvent(actor, "ce", { ce: { value, pct: pct(value, max) } }, `ce:${value}`);
+  });
+  Hooks.on("createActiveEffect", (effect) => {
+    const actor = effect?.parent;
+    if (actor?.documentName !== "Actor") return;
+    for (const id of effect.statuses ?? []) vowEvent(actor, "condition", { condition: { id } }, `${effect.id}:${id}`);
+  });
+  Hooks.on("dnd5e.restCompleted", (actor, result) => { if (actor) vowEvent(actor, "rest", { rest: { long: !!result?.longRest } }, `${Date.now()}`); });
+  Hooks.on("jjk5e.summoned", (summoner, entry) => vowEvent(summoner, "summon", { summon: { name: entry?.name ?? "", count: 1 } }, entry?.id));
+  Hooks.on("jjk5e.summonEnded", (summoner, entry) => vowEvent(summoner, "summonEnd", { summon: { name: entry?.name ?? "", count: 0 } }, `${entry?.id}:${entry?.state}`));
+  Hooks.on("renderChatMessageHTML", (message, html) => {
+    const b = html?.querySelector?.("[data-jjk5e-vow-review]");
+    if (b) b.addEventListener("click", () => openVowManager());
+  });
+}
+let JJKVowManager = null;
+/** GM: every vow that waits for a decision, across the world. */
+function openVowManager() {
+  if (!game.user.isGM) return ui.notifications.warn(t("Notify.GMOnly"));
+  JJKVowsClass ??= makeVowClass();
+  JJKVowManager ??= new JJKVowsClass({ id: "jjk5e-vow-manager" });
+  VOW_APPS.set("world", JJKVowManager);
+  return JJKVowManager.render({ force: true });
 }
 let JJKVowsClass = null;
 function openVows(actor) {
@@ -5764,6 +6304,7 @@ function addSheetStrip(app, element) {
       <button type="button" data-a="career" class="jjk-grade-badge g${c.grade}" title="${t("Career.Title")}">${esc(gradeLabel(c.grade))}${c.semi ? "*" : ""}</button>
       <button type="button" data-a="school" class="jjk-sc-school ${getSchool(actor).role || "none"}" title="${esc(schoolLabel(actor) || t("School.Title"))}"><i class="fas fa-${getSchool(actor).role === "teacher" ? "chalkboard-user" : "graduation-cap"}"></i> ${esc(schoolLabel(actor) || t("School.Set"))}</button>
       <button type="button" data-a="vows" title="${t("Vow.Title")}"><i class="fas fa-handshake"></i> ${vows.length}/${vowLimit(actor)}</button>
+      ${activeEntries(SUMMONS.readRegistry(actor)).length ? `<button type="button" data-a="summons" title="${t("Summon.Manager")}"><i class="fas fa-ghost"></i> ${activeEntries(SUMMONS.readRegistry(actor)).length}</button>` : ""}
       <span title="${t("Breakthrough.Name")}"><i class="fas fa-bolt-lightning"></i> ${bt}</span>
       ${ro ? `<span class="warn" title="${t("Output.Reduced")}">RO ${ro}</span>` : ""}
       ${inBurnout(actor) ? `<span class="danger">${t("Burnout.Name")}</span>` : ""}
@@ -5781,7 +6322,7 @@ function addSheetStrip(app, element) {
     if (!b) return;
     ev.preventDefault(); ev.stopPropagation();
     const fn = { "ce-": () => spendCE(actor, 1, t("CE.Name")), "ce+": () => spendCE(actor, -1, t("CE.Regained")),
-      career: () => openCareer(actor), vows: () => openVows(actor), panel: () => openPanel(actor),
+      career: () => openCareer(actor), vows: () => openVows(actor), summons: () => openSummons(actor), panel: () => openPanel(actor),
       technique: () => chooseTechnique(actor), rest: () => shortRestCE(actor), hotbar: () => fillHotbar(actor),
       create: () => createCharacterWizard(actor), school: () => editSchool(actor), pointbuy: () => pointBuy(actor), levelup: () => levelUp(actor) }[b.dataset.a];
     if (fn) Promise.resolve(fn()).catch((err) => reportError(`sheet ${b.dataset.a}`, err));
@@ -6025,7 +6566,7 @@ Hooks.once("ready", () => {
   });
   Hooks.on("deleteCombat", (combat) => {
     if (!isActiveGM()) return;
-    for (const c of combat.combatants ?? []) if (c.actor) endCombatVows(c.actor);
+    for (const c of combat.combatants ?? []) if (c.actor) vowQueue(c.actor, () => endCombatVows(c.actor));
   });
   Hooks.on("combatTurnChange", (combat) => turnSummary(combat));
   Hooks.on("updateActor", (actor) => { refreshCareerApps(actor); });
@@ -10083,7 +10624,9 @@ Object.assign(PANEL_ACTIONS, {
   openSetup: () => game.modules.get(MODULE_ID)?.api?.setup?.openSetup?.(),
   groupSave: () => game.modules.get(MODULE_ID)?.api?.bridges?.promptGroupSave?.()
 });
-for (const a of ["openHealth", "openSetup", "groupSave"]) GM_PANEL_ACTIONS.add(a);
+// 2.22: world-wide Summoning Manager and Binding Vow Manager for the GM.
+Object.assign(PANEL_ACTIONS, { summonsWorld: () => openSummons(null), vowsWorld: () => openVowManager() });
+for (const a of ["openHealth", "openSetup", "groupSave", "summonsWorld", "vowsWorld"]) GM_PANEL_ACTIONS.add(a);
 GM_PANEL_ACTIONS.add("midiAuto"); GM_PANEL_ACTIONS.add("midiRestore");
 MENU_ACTIONS.splice(MENU_ACTIONS.length - 1, 0, ["midiAuto", "fa-solid fa-wand-magic-sparkles", "Midi.Title", () => midiAutomate(), true]);
 

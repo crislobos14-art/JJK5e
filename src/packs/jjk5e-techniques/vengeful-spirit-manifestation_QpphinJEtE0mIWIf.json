@@ -324,9 +324,9 @@
    "technique": "Vengeful Spirit Manipulation",
    "level": 3,
    "spellFrom": "feat",
-   "automationNotes": "Big hit (damage above your level + CE mod): DC 20 WIS; on a failure use 'Manifest (failed save)' — the Vengeful Spirit appears berserk, charmed by you, within 200 ft (AC 13 + PB, HP 80 + 10×PB). Calm it with the DC 20 Persuasion activity (15 at 6th). At 11th: 'Manifest at will' as a bonus action for 1 minute, uses = half your CE modifier (rounded up) per long rest.",
+   "automationNotes": "Big hit (damage above your level + CE mod): DC 20 WIS; on a failure use 'Manifest (failed save)' — the Vengeful Spirit appears berserk, charmed by you, within 200 ft (AC 13 + PB, HP 80 + 10×PB). Calm it with the DC 20 Persuasion activity (15 at 6th). At 11th: 'Manifest at will' as a bonus action for 1 minute, uses = half your CE modifier (rounded up) per long rest. The Summoning Manager tracks the spirit: at will it lasts 1 minute (10 rounds) and only one at a time.",
    "automation": "automated",
-   "rev": "835dd1641e",
+   "rev": "697f62d40e",
    "summons": {
     "oCCxKr1vIWc7C6QN": {
      "name": "Vengeful Spirit",
@@ -339,6 +339,15 @@
    },
    "activityLevel": {
     "6a1PKvsLrgOQ3ntG": 11
+   },
+   "summonRules": {
+    "6a1PKvsLrgOQ3ntG": {
+     "rounds": 10,
+     "unique": true,
+     "ends": {
+      "rest": true
+     }
+    }
    }
   }
  },

@@ -253,6 +253,27 @@ Replaced: activities, effects, description and JJK flags.
 - Juggernaut *Focus*: a disabled effect on the feature; enable it while focused for B/P/S resistance.
 - Juggernaut *Unstoppable* (+4 STR/CON at 20).
 
+## Summoning Manager and binding vows (2.22)
+
+**Summoning Manager.** Every summon is recorded with its summoner and its technique, whether it comes from dnd5e or from the module. Open it from the JJK panel or the sheet bar. The GM view (GM tab → Summoning Manager) shows every active summon in the world, finds broken records and repairs them.
+
+Summons end on their own when one of these happens:
+- their duration runs out;
+- combat ends, if the technique says so;
+- a long rest, if the technique says so;
+- their summoner dies;
+- they can no longer pay their CE upkeep.
+
+dnd5e ends concentration summons. Details: `docs/design/advanced-summoning-engine.md`.
+
+**Binding vows.**
+- Each vow has a state, a history and optional rules the module watches: harming a partner, using the technique, opening a domain, a summon being destroyed, hit points, time…
+- A rule never punishes on its own. It raises a possible breach that the GM confirms or dismisses in the **Vow Manager**.
+- With the *Binding vows need GM approval* setting, a player's vow waits for the GM. A mutual vow then waits for the other player's acceptance.
+- The approval is stored where only GMs can write, so a vow edited afterwards stops applying until it is approved again.
+
+Details: `docs/design/advanced-binding-vow-engine.md`.
+
 ## Creeps and Curses notes
 
 - Special Traits: add every tier you reach (Dormant 1, Stirring 6, Awakened 14); HP, ability, speed, senses and

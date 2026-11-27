@@ -92,7 +92,7 @@ for fn in glob.glob('src/packs/jjk5e-*/*.json'):
         tid=mp.get('triggeredActivityId')
         if tid and tid not in acts: bad(n,f"trigger-missing:{w}")
     fl=d.get('flags',{}).get('jjk5e',{})
-    for k in ('ceCosts','ceSteps','dmgScale','trackerUse','trackerDice','ceRegain','reload','tokenSwap'):
+    for k in ('ceCosts','ceSteps','dmgScale','trackerUse','trackerDice','ceRegain','reload','tokenSwap','summonRules','activityLevel'):
         for aid in (fl.get(k) or {}):
             if aid not in acts: bad(n,f"{k}-orphan:{aid}")
     if (sysd.get('uses') or {}).get('max'): chkf(n,'uses',sysd['uses']['max'])
