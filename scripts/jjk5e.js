@@ -13,8 +13,8 @@ import { readLedger, recordEvent, correctTotal, markRecovered, ledgerTotal, blac
   efficientCost, rctPoolMax, rctAwakeningPath, diagnoseBreakthroughs, BT_FLAG, BT_GRANTS_ZONE } from "./jjk5e-breakthrough-engine.mjs";
 import { BARRIER_FLAG, BARRIER_PROFILES, BARRIER_DAMAGE_TYPES, readBarrierRegistry, pruneBarrierRegistry, cleanBarrier, cleanAccessRules,
   activeBarriers, barrierContains, barrierCrossings, accessDecision, curtainStats, glassBoxStats, curtainCost, resolveBarrierDamage, endBarrier,
-  expiredBarriers, intruderOutcome, alterBarrier, applyBarrierVow, removeBarrierVow, barrierLog, diagnoseBarriers } from "./jjk5e-barrier-engine.mjs";
-import { activityCECost, ceTransaction, blackFlashCheck, clashRoundsFromRefinement, multiDomainClash, vowBlocksUsage, buildTechniqueItems, TECHNIQUE_SLOTS } from "./jjk5e-rules.mjs";
+  expiredBarriers, intruderOutcome, alterBarrier, applyBarrierVow, removeBarrierVow, barrierLog, diagnoseBarriers, simpleDomainAsk, simpleDomainAfter } from "./jjk5e-barrier-engine.mjs";
+import { activityCECost, ceTransaction, clashRoundsFromRefinement, multiDomainClash, vowBlocksUsage, buildTechniqueItems, TECHNIQUE_SLOTS } from "./jjk5e-rules.mjs";
 import { createCEEngine } from "./jjk5e-ce-engine.mjs";
 import { createIntegrations } from "./jjk5e-integrations.mjs";
 import { createDomainLifecycle } from "./jjk5e-domain-lifecycle.mjs";
@@ -418,8 +418,7 @@ function activityCost(activity, actor = activity?.actor ?? activity?.item?.actor
   }
   // Awakened Understanding (Advanced −1 / Mastered −2): technique base cost, minimum 1.
   if (base > 1 && actor && activity?.item?.flags?.jjk5e?.technique) {
-    const eff = actor.items.reduce((m, i) => Math.max(m, Number(i.flags?.jjk5e?.ceEfficiency) || 0), 0);
-    if (eff) base = Math.max(1, base - eff);
+    base = efficientCost(base, understandingEfficiency(actor.items.map((i) => i.flags?.jjk5e?.ceEfficiency)));
   }
   // Refined Domain (Cost Reduction): innate technique costs are halved, rounded up, while your domain is open.
   if (base > 0 && actor && activity?.item?.flags?.jjk5e?.technique && domainOpen(actor)
@@ -1206,7 +1205,7 @@ function registerActivityHooks() {
       await item.update({ "system.uses.spent": 0 });
     }
     await activateDomainProtection(actor, item, activity);
-    await activateBarrierFeature(actor, item, activity, usageConfig).catch((err) => reportError("barrier", err));
+    await activateBarrierFeature(actor, item, activity, usageConfig, results?.message?.id).catch((err) => reportError("barrier", err));
     await remindModifiers(actor, item);
     if (item?.flags?.jjk5e?.openTechnique) await chooseTechnique(actor);
     const grp = item?.flags?.jjk5e?.activatesGroup?.[activity.id];
@@ -2325,10 +2324,10 @@ function onPreRollDamage(config) {
   if (!critical) return;
   for (const r of config.rolls ?? []) {
     r.options ??= {};
-    r.options.critical = { ...(r.options.critical ?? {}), multiplier: 3 };
+    r.options.critical = { ...(r.options.critical ?? {}), multiplier: BLACK_FLASH_MULTIPLIER };
     r.options.jjkBlackFlash = true;
   }
-  config.critical = { ...(config.critical ?? {}), multiplier: 3 };
+  config.critical = { ...(config.critical ?? {}), multiplier: BLACK_FLASH_MULTIPLIER };
   actor.unsetFlag(MODULE_ID, "pendingBlackFlash");
   chat(actor, `<p><strong>⚡ Black Flash</strong>: ${t("BlackFlash.Damage")}</p>`);
 }
@@ -7721,15 +7720,21 @@ async function executeDomainProfile(actor, targets, requestId) {
     let value = Math.max(0, Math.floor(roll.total * (success ? ({half:0.5,none:0,full:1})[profile.onSave] : 1) * (profile.halved ? 0.5 : 1)));
     // V.6: several creatures inside one Simple Domain hit by one area effect: the barrier takes the damage once, and the
     // overflow (if it breaks) reaches each of them. The event id is the barrier's, not the target's.
+    // V.6: several creatures inside one Simple Domain hit by one area effect: the barrier takes the damage once, as
+    // much as the largest share (targets roll and save separately). Each creature then takes what exceeds the total
+    // the barrier absorbed. A larger share later in the list absorbs only the difference, with its own event id.
     const simple=simpleDomainAt(tk);
     if(simple&&value>0){
-      let absorption=sharedSimple.get(simple.uuid);
-      if(!absorption){
-        absorption=await absorbSimpleDomain(simple,value,`${state.openingId}:${requestId}:${simple.uuid}`);
-        if(!absorption)continue;
-        sharedSimple.set(simple.uuid,absorption);
+      const before=sharedSimple.get(simple.uuid),ask=simpleDomainAsk(before,value);
+      let took=0;
+      if(ask>0){
+        const r=await absorbSimpleDomain(simple,ask,`${state.openingId}:${requestId}:${simple.uuid}:${value}`);
+        if(!r)continue;
+        took=r.absorbed;
       }
-      value=absorption.overflow;
+      const step=simpleDomainAfter(before,value,took);
+      sharedSimple.set(simple.uuid,step.shared);
+      value=step.overflow;
     }
     if (value) await target.applyDamage([{ value, type: profile.damageType }]);
     if (!success && profile.condition !== "none") {
@@ -8602,7 +8607,7 @@ async function barrierRequest(op, data) {
   const msg = { op, ...data, requestId: data.requestId ?? foundry.utils.randomID() };
   if (isActiveGM()) return handleBarrierQuery(msg, { user: game.user });
   const gm = game.users?.activeGM;
-  if (!gm?.query) { ui.notifications.warn(t("Barrier.NoGM")); return null; }
+  if (!gm?.query) { ui.notifications.warn(t("Barrier.NoGM")); return { noGM: true }; }
   try { return await gm.query(BARRIER_QUERY, msg, { timeout: 30000 }); } catch (err) { reportError("barrier request", err); return null; }
 }
 const ownsActor = (user, actor) => !!(user?.isGM || actor?.testUserPermission?.(user, "OWNER"));
@@ -8613,17 +8618,32 @@ async function handleBarrierQuery(msg, { user } = {}) {
   if (BARRIER_REQUESTS.size > 500) BARRIER_REQUESTS.delete(BARRIER_REQUESTS.values().next().value);
   const scene = game.scenes?.get?.(msg.sceneId);
   const op = BARRIER_OPS[msg.op];
-  if (!op || !scene) return null;
-  try { return await op(scene, msg, user); } catch (err) { reportError(`barrier ${msg.op}`, err); return null; }
+  if (!op) return null;
+  if (!scene) return { refused: true };
+  try { return await op(scene, msg, user); } catch (err) { reportError(`barrier ${msg.op}`, err); return { refused: true }; }
 }
 const BARRIER_OPS = {
   /** Curtain or Glass Box from an activity the user's actor just used. The GM recomputes every value. */
   async create(scene, msg, user) {
     const actor = await fromUuid(msg.actorUuid).catch(() => null);
     const token = await fromUuid(msg.tokenUuid).catch(() => null);
-    if (!actor || !ownsActor(user, actor) || token?.actor?.uuid !== actor.uuid || token.parent?.id !== scene.id) return null;
-    if (!["curtain", "glassBox"].includes(msg.kind)) return null;
-    const extra = clamp(Math.floor(Number(msg.extra) || 0), 0, 200);
+    if (!actor || !ownsActor(user, actor) || token?.actor?.uuid !== actor.uuid || token.parent?.id !== scene.id) return { refused: true };
+    if (!["curtain", "glassBox"].includes(msg.kind)) return { refused: true };
+    // The barrier must come from a real use of the actor's own feature: the item is on the actor and its usage card is
+    // recent and not used before. A player cannot raise a Curtain through the API without using (and paying for) it.
+    const item = typeof msg.itemUuid === "string" ? await fromUuid(msg.itemUuid).catch(() => null) : null;
+    if (item?.parent?.uuid !== actor.uuid || baseName(item) !== (msg.kind === "curtain" ? "Basic Curtain" : "Glass Box")) return { refused: true };
+    if (!user?.isGM) {
+      const card = game.messages?.get?.(msg.messageId);
+      const d5 = card?.flags?.dnd5e ?? {}, sys = card?.system ?? {};
+      const cardItem = sys.item?.uuid ?? d5.item?.uuid ?? null;
+      const fresh = Date.now() - (Number(card?.timestamp) || 0) < 5 * 60 * 1000;
+      const used = Object.values(sceneBarriers(scene).entries).some((b) => b.usage && b.usage === msg.messageId);
+      if (!card || cardItem !== item.uuid || !fresh || used) return { refused: true };
+    }
+    const act = [...(item.system?.activities?.values?.() ?? Object.values(item.system?.activities ?? {}))][0];
+    const maxExtra = Math.max(0, Math.floor(Number(act?.consumption?.scaling?.max) || 60));
+    const extra = msg.kind === "curtain" ? clamp(Math.floor(Number(msg.extra) || 0), 0, maxExtra) : 0;
     const now = Number(game.time?.worldTime) || 0;
     const id = foundry.utils.randomID();
     const at = msg.kind === "glassBox" && msg.point && [msg.point.x, msg.point.y].every(Number.isFinite) ? msg.point : tokenPoint(token);
@@ -8634,7 +8654,7 @@ const BARRIER_OPS = {
       ownerUuid: actor.uuid, sceneId: scene.id, itemUuid: typeof msg.itemUuid === "string" ? msg.itemUuid : null, source: BARRIER_PROFILES[msg.kind].source,
       x: at.x, y: at.y, elevation: Number(token.elevation) || 0, radius: stats.radius ?? 0, size: stats.size ?? 10,
       hp: stats.hp, max: stats.hp, ac: stats.ac, started: { worldTime: now, combatId: game.combat?.id ?? null, round: game.combat?.round ?? 0 },
-      expiresAt: now + stats.minutes * 60, origin: msg.requestId }, id);
+      expiresAt: now + stats.minutes * 60, origin: msg.requestId, usage: typeof msg.messageId === "string" ? msg.messageId : null }, id);
     const vowed = barrierVowSync(b, actor);
     vowed.regionId = await drawBarrier(scene, vowed);
     await withBarriers(scene, (reg) => { reg.entries[id] = vowed; });
@@ -8650,8 +8670,12 @@ const BARRIER_OPS = {
     const b = sceneBarriers(scene).entries[msg.barrierId];
     if (!b || b.state !== "active" || !BARRIER_PROFILES[b.kind].attackable) return null;
     const bonus = Number(msg.bonus), formula = String(msg.formula ?? "").trim(), type = String(msg.type ?? "");
-    if (!Number.isInteger(bonus) || Math.abs(bonus) > 100 || !/^\d{1,2}d(?:4|6|8|10|12|20)(?:\s*[+-]\s*\d{1,3})?$/.test(formula) ||
+    const dice = Number(formula.match(/^(\d+)d/)?.[1]);
+    if (!Number.isInteger(bonus) || Math.abs(bonus) > 30 || !/^\d{1,2}d(?:4|6|8|10|12|20)(?:\s*[+-]\s*\d{1,2})?$/.test(formula) || !(dice <= 20) ||
         (type && !BARRIER_DAMAGE_TYPES.includes(type))) return null;
+    // A player's numbers are reviewed by the GM before anything is rolled.
+    if (!user?.isGM && !(await confirmDialog(t("Barrier.Attack"), `<p>${t("Barrier.AttackReview", { user: esc(user?.name ?? "?"),
+      actor: esc(seeker.name), barrier: esc(b.name), bonus: bonus >= 0 ? `+${bonus}` : bonus, formula: esc(formula), type: esc(type || "—") })}</p>`))) return { refused: true };
     const attack = await new Roll(`1d20 + (${bonus})`).evaluate();
     const natural = attack.dice?.[0]?.results?.find((d) => d.active !== false)?.result ?? attack.dice?.[0]?.total;
     const hit = natural === 20 || (natural !== 1 && attack.total >= b.ac);
@@ -8686,8 +8710,11 @@ const BARRIER_OPS = {
     if (inside && !alterBarrier(b, change)) return null;
     const owner = b.ownerUuid ? await fromUuid(b.ownerUuid).catch(() => null) : null;
     const dc = owner ? domainSaveDC(owner) : Number(b.ac) || 10;
-    const ab = actor.system?.abilities?.[ceAbility(actor)] ?? {};
-    const bonus = Number(ab.check?.bonus ?? ab.mod) || 0;
+    // d20 + the CE ability's check: modifier, check proficiency and the actor's check bonuses (dnd5e data).
+    const key = ceAbility(actor), ab = actor.system?.abilities?.[key] ?? {};
+    const simplify = (f) => { try { return Number(dnd5e.utils.simplifyBonus(f ?? 0, actor.getRollData())) || 0; } catch { return 0; } };
+    const bonus = (Number(ab.mod) || 0) + (Number(ab.checkProf?.flat) || 0) + simplify(ab.bonuses?.check)
+      + simplify(actor.system?.bonuses?.abilities?.check);
     const roll = await new Roll(`1d20 + ${bonus}`).evaluate();
     const out = intruderOutcome({ total: roll.total, dc, inside });
     await roll.toMessage?.({ speaker: docClass("ChatMessage").getSpeaker?.({ actor }),
@@ -8729,15 +8756,25 @@ const BARRIER_OPS = {
       const cur = reg.entries[msg.barrierId];
       if (!cur || cur.state !== "active") return null;
       let next = { ...cur };
-      if (Number.isFinite(Number(msg.hp))) next.hp = clamp(Math.floor(Number(msg.hp)), 0, Math.max(next.max, Math.floor(Number(msg.hp))));
       if (Number.isFinite(Number(msg.max)) && Number(msg.max) > 0) next.max = Math.floor(Number(msg.max));
+      if (Number.isFinite(Number(msg.hp))) next.hp = clamp(Math.floor(Number(msg.hp)), 0, next.max);
+      if (Number.isFinite(Number(msg.size)) && Number(msg.size) >= 5 && Number(msg.size) <= 200 && cur.shape === "cube") next.size = Math.floor(Number(msg.size));
       if (Number.isFinite(Number(msg.ac)) && Number(msg.ac) > 0) next.ac = Math.floor(Number(msg.ac));
       if (typeof msg.enabled === "boolean") next.enabled = msg.enabled;
       if (Array.isArray(msg.authorized)) next.authorized = msg.authorized.filter((u) => typeof u === "string").slice(0, 60);
       if (msg.change) next = alterBarrier(next, msg.change) ?? next;
       next.log = barrierLog(cur, { at: Date.now(), kind: "gmEdit", by: user.id });
       reg.entries[cur.id] = cleanBarrier(next, cur.id);
-      return { id: cur.id };
+      return { id: cur.id, zeroed: BARRIER_PROFILES[cur.kind].attackable && cur.hp > 0 && next.hp === 0 };
+    }).then(async (out) => {
+      // Set to 0 by the GM: the barrier is destroyed now (once), as if damage had brought it there.
+      if (out?.zeroed) await endSceneBarrier(scene, out.id, "destroyed");
+      if (out && Number.isFinite(Number(msg.size))) {
+        const b = sceneBarriers(scene).entries[out.id];
+        if (b?.state === "active") { await eraseBarrier(scene, b); const regionId = await drawBarrier(scene, b);
+          await withBarriers(scene, (reg) => { if (reg.entries[b.id]) reg.entries[b.id] = { ...reg.entries[b.id], regionId }; }); }
+      }
+      return out;
     });
   },
   async repair(scene, msg, user) { return user?.isGM ? repairBarriers(scene) : null; }
@@ -8860,7 +8897,7 @@ async function consumeBarrierPasses(doc, changes) {
     passes: reg.entries[b.id].passes.map((p) => (p.actorUuid === actorUuid ? { ...p, used: true } : p)) }; });
 }
 /** Activities: Basic Curtain, Glass Box (both activations), Barrier Intruder. */
-async function activateBarrierFeature(actor, item, activity, usage) {
+async function activateBarrierFeature(actor, item, activity, usage, messageId = null) {
   if (!actor?.isOwner || !item || !activity) return;
   const name = baseName(item);
   const tokenObj = [...(canvas?.tokens?.controlled ?? [])].find((tk) => tk.actor?.uuid === actor.uuid) ?? actorToken(actor);
@@ -8880,15 +8917,16 @@ async function activateBarrierFeature(actor, item, activity, usage) {
   }
   if (request) {
     request.requestId = foundry.utils.randomID();
+    request.messageId = typeof messageId === "string" ? messageId : null;
     const out = await barrierRequest("create", request);
     if (out?.id) return out;
-    // Not created (no GM, refused, or the request was lost): if no barrier carries this request id, the CE paid comes back.
-    const made = Object.values(sceneBarriers(token.parent).entries).some((b) => b.origin === request.requestId);
-    if (!made) {
+    // Refused by the GM or no GM connected: nothing was created, so the CE paid comes back. A lost answer (timeout)
+    // is not refunded: the GM may still be creating it; the Barrier Manager shows whether it exists.
+    if (out?.refused || out?.noGM) {
       const paid = activityEnergyProfile(actor, activity, usage ?? {}).cost;
       if (paid > 0) await spendCE(actor, -paid, `${item.name} — ${t("Barrier.Refund")}`);
       ui.notifications.warn(t("Barrier.NotCreated", { name: item.name }));
-    }
+    } else ui.notifications.warn(t("Barrier.Unknown", { name: item.name }));
     return null;
   }
   if (name === "Barrier Intruder") return promptBarrierIntruder(actor, token);
@@ -8972,6 +9010,11 @@ function makeBarrierManagerClass() {
           const n = b ? await promptNumber(t("Barrier.SetHP"), t("Barrier.SetHPHint"), b.hp) : null;
           if (n !== null && n !== undefined) await barrierRequest("gmEdit", { sceneId: canvas.scene.id, barrierId: b.id, hp: n });
         },
+        size: async function (ev, el) {
+          const b = this._barrier(el);
+          const n = b ? await promptNumber(t("Barrier.Size"), t("Barrier.SizeHint"), b.size) : null;
+          if (n) await barrierRequest("gmEdit", { sceneId: canvas.scene.id, barrierId: b.id, size: n });
+        },
         rules: async function (ev, el) {
           const b = this._barrier(el);
           if (!b) return;
@@ -9011,7 +9054,7 @@ function makeBarrierManagerClass() {
         const btn = (a, icon, label) => `<button type="button" data-action="${a}" title="${label}" aria-label="${label}"><i class="${icon}"></i></button>`;
         return `<li class="jjk-barrier is-${b.kind}${b.enabled ? "" : " is-off"}" data-id="${esc(b.id)}">
           <div class="jjk-barrier-body"><header><strong>${esc(b.name)}</strong> <span class="jjk-chip">${t(`Barrier.Kind.${b.kind}`)}</span>${b.homebrew ? ` <span class="jjk-chip">${t("Barrier.Homebrew")}</span>` : ""}</header>
-            ${mine || this._inspect ? `<p class="jjk-barrier-stats">${profile.attackable ? `${t("Summon.HP")} ${b.hp}/${b.max} · ${t("Summon.AC")} ${b.ac} · ` : ""}${b.shape === "cube" ? `${b.size} ft` : `r ${b.radius} ft`}${left !== null ? ` · ${t("Barrier.MinutesLeft", { n: left })}` : ""}${b.vows.length ? ` · ${t("Barrier.Vowed", { n: b.vows.length })}` : ""}</p>
+            ${mine || this._inspect ? `<p class="jjk-barrier-stats">${profile.attackable ? `${t("Summon.HP")} ${b.hp}/${b.max} · ${t("Summon.AC")} ${b.ac} · ` : ""}${b.shape === "cube" ? `${b.size} ft` : `r ${b.radius} ft`}${profile.autoFailSaves ? ` · ${t("Barrier.FailsSaves")}` : ""}${left !== null ? ` · ${t("Barrier.MinutesLeft", { n: left })}` : ""}${b.vows.length ? ` · ${t("Barrier.Vowed", { n: b.vows.length })}` : ""}</p>
             ${ruleText ? `<p class="hint">${ruleText}</p>` : ""}${b.kind === "pureBarrier" ? `<p class="hint">${t("Barrier.Authorized", { n: b.authorized.length })}</p>` : ""}
             ${gm && b.log.length ? `<p class="hint">${b.log.slice(-3).map((l) => esc(t(`Barrier.Log.${l.kind}`, { n: l.amount ?? "" }))).join(" · ")}</p>` : ""}` : `<p class="hint">${t("Barrier.Hidden")}</p>`}
             <p class="hint">${esc(owner?.name ?? "")}${b.source ? ` — ${esc(b.source)}` : ""}</p></div>
@@ -9019,6 +9062,7 @@ function makeBarrierManagerClass() {
             ${profile.attackable ? btn("attack", "fas fa-crosshairs", t("Barrier.Attack")) : ""}
             ${gm && profile.attackable ? btn("damage", "fas fa-burst", t("Barrier.Damage")) + btn("sethp", "fas fa-heart", t("Barrier.SetHP")) : ""}
             ${gm && profile.physical ? btn("rules", "fas fa-door-open", t("Barrier.Rules")) : ""}
+            ${gm && b.shape === "cube" ? btn("size", "fas fa-up-right-and-down-left-from-center", t("Barrier.Size")) : ""}
             ${gm && b.kind === "pureBarrier" ? btn("authorize", "fas fa-user-check", t("Barrier.Authorize")) + btn("toggle", "fas fa-power-off", t("Barrier.Toggle")) : ""}
             ${mine ? btn("close", "fas fa-xmark", t("Barrier.Close")) : ""}</div></li>`;
       };
@@ -9087,6 +9131,12 @@ Hooks.once("ready", () => {
     if (foundry.utils.hasProperty(changes, `flags.${MODULE_ID}.vows`)) syncBarrierVows(actor).catch((err) => reportError("barrier vows", err));
   });
   Hooks.on("updateScene", (scene, changes) => { if (foundry.utils.hasProperty(changes, `flags.${MODULE_ID}.${BARRIER_FLAG}`)) for (const app of BARRIER_APPS) app.render(); });
+  // A GM approval lives in the world vowLedger setting: re-apply barrier vows of every barrier owner when it changes.
+  Hooks.on("updateSetting", (setting) => {
+    if (setting?.key !== `${MODULE_ID}.vowLedger` || !isActiveGM()) return;
+    const owners = new Set(game.scenes.contents?.flatMap?.((sc) => activeBarriers(sceneBarriers(sc)).map((b) => b.ownerUuid)) ?? []);
+    for (const uuid of owners) { try { const a = uuid ? globalThis.fromUuidSync?.(uuid) : null; if (a) syncBarrierVows(a).catch((err) => reportError("barrier vows", err)); } catch { /* gone */ } }
+  });
   Hooks.on("canvasReady", () => { for (const app of BARRIER_APPS) app.render(); });
   Hooks.on("renderChatMessageHTML", (message, html) => {
     for (const b of html?.querySelectorAll?.("[data-jjk5e-shatter]") ?? []) b.addEventListener("click", async (ev) => {

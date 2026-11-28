@@ -4,11 +4,12 @@ import assert from "node:assert/strict";
 import { createEnv } from "./harness/foundry-mock.mjs";
 
 const POOL = { name: "Cursed Energy", type: "feat", flags: { jjk5e: { cePool: true } }, system: { uses: { max: "40", spent: 0 } } };
+const CURTAIN = { name: "Basic Curtain", type: "feat", flags: { jjk5e: { ceCosts: { cur: 5 } } } };
 const RCT = { name: "Reverse Cursed Technique (Healing Pool)", type: "feat", system: { uses: { max: "50", spent: 0 } } };
 const envs = [];
 test.afterEach(() => { for (const env of envs.splice(0)) assert.deepEqual(env.errors.map((e) => e.stack ?? String(e)), []); });
 
-async function setup(items = [POOL, RCT]) {
+async function setup(items = [POOL, RCT, CURTAIN]) {
   const env = createEnv();
   envs.push(env);
   await env.boot();
@@ -18,6 +19,7 @@ async function setup(items = [POOL, RCT]) {
 const fx = (actor, kind) => actor.effects.find((e) => e.flags?.jjk5e?.kind === kind);
 const melee = (actor) => ({ activity: { actor, uuid: `${actor.uuid}.Activity.atk`, attack: { type: { value: "melee" } } } });
 const plain = (v) => JSON.parse(JSON.stringify(v ?? null));
+const curtainOf = (actor) => actor.items.find((i) => i.name === "Basic Curtain");
 const total = (actor) => Number(actor.getFlag("jjk5e", "breakthroughs")) || 0;
 
 /** A scene with tokens and Regions; updates understand the ForcedReplacement mock. */
@@ -140,7 +142,7 @@ test("Basic Curtain: the GM builds it from the actor (HP, AC, 10 min + extra CE)
   const { env, actor, J } = await setup();
   const scene = addScene(env);
   const tk = addToken(scene, actor);
-  const msg = { op: "create", requestId: "req1", kind: "curtain", sceneId: scene.id, actorUuid: actor.uuid, tokenUuid: tk.uuid, extra: 3 };
+  const msg = { op: "create", requestId: "req1", kind: "curtain", sceneId: scene.id, actorUuid: actor.uuid, tokenUuid: tk.uuid, itemUuid: curtainOf(actor).uuid, extra: 3 };
   const out = await J.handleBarrierQuery(msg, { user: env.game.user });
   assert.ok(out?.id);
   assert.deepEqual(plain(await J.handleBarrierQuery(msg, { user: env.game.user })), { duplicate: true });
@@ -156,7 +158,7 @@ test("Scenario H: two simultaneous attacks bring a barrier to 0 once; immunities
   const { env, actor, J } = await setup();
   const scene = addScene(env);
   const tk = addToken(scene, actor);
-  const { id } = await J.handleBarrierQuery({ op: "create", requestId: "c", kind: "curtain", sceneId: scene.id, actorUuid: actor.uuid, tokenUuid: tk.uuid }, { user: env.game.user });
+  const { id } = await J.handleBarrierQuery({ op: "create", requestId: "c", kind: "curtain", sceneId: scene.id, actorUuid: actor.uuid, tokenUuid: tk.uuid, itemUuid: curtainOf(actor).uuid }, { user: env.game.user });
   const hp = J.sceneBarriers(scene).entries[id].hp; // 20
   const psychic = await J.handleBarrierQuery({ op: "damage", requestId: "d0", sceneId: scene.id, barrierId: id, amount: 99, type: "psychic" }, { user: env.game.user });
   assert.equal(psychic.applied, 0);
@@ -233,7 +235,7 @@ test("expiry and repair: an expired barrier ends by world time; repair never end
   const scene = addScene(env);
   const tk = addToken(scene, actor);
   env.game.time = { worldTime: 0 };
-  const { id } = await J.handleBarrierQuery({ op: "create", requestId: "e", kind: "curtain", sceneId: scene.id, actorUuid: actor.uuid, tokenUuid: tk.uuid }, { user: env.game.user });
+  const { id } = await J.handleBarrierQuery({ op: "create", requestId: "e", kind: "curtain", sceneId: scene.id, actorUuid: actor.uuid, tokenUuid: tk.uuid, itemUuid: curtainOf(actor).uuid }, { user: env.game.user });
   assert.equal(await J.repairBarriers(scene), 0);
   assert.equal(J.sceneBarriers(scene).entries[id].state, "active");
   env.game.time.worldTime = 601;
@@ -248,13 +250,32 @@ test("a player cannot create a barrier for someone else's actor or edit barriers
   const tk = addToken(scene, actor);
   const player = { id: "p1", isGM: false, name: "Player" };
   actor.testUserPermission = (u) => u.isGM;
-  assert.equal(await J.handleBarrierQuery({ op: "create", requestId: "x1", kind: "curtain", sceneId: scene.id, actorUuid: actor.uuid, tokenUuid: tk.uuid }, { user: player }), null);
+  const create = (id, extra = {}) => J.handleBarrierQuery({ op: "create", requestId: id, kind: "curtain", sceneId: scene.id, actorUuid: actor.uuid,
+    tokenUuid: tk.uuid, itemUuid: curtainOf(actor).uuid, ...extra }, { user: player });
+  assert.deepEqual(plain(await create("x1")), { refused: true }, "not the player's actor");
   assert.equal(await J.handleBarrierQuery({ op: "gmCreate", requestId: "x2", sceneId: scene.id, kind: "custom", x: 0, y: 0, radius: 5 }, { user: player }), null);
   assert.equal(await J.handleBarrierQuery({ op: "evil", requestId: "x3", sceneId: scene.id }, { user: player }), null);
+  // The owner, through the API, without using the feature: refused. With a fresh usage card: once, extra CE capped.
+  actor.testUserPermission = () => true;
+  assert.deepEqual(plain(await create("x4", { extra: 200 })), { refused: true }, "no usage card");
+  env.game.messages = new Map([["M1", { id: "M1", timestamp: Date.now(), flags: { dnd5e: { item: { uuid: curtainOf(actor).uuid } } } }]]);
+  const ok = await create("x5", { extra: 200, messageId: "M1" });
+  assert.ok(ok?.id);
+  assert.equal(J.sceneBarriers(scene).entries[ok.id].max, 4 * 5 + 10 * 60, "extra CE capped at the activity's scaling max");
+  assert.deepEqual(plain(await create("x6", { messageId: "M1" })), { refused: true }, "a usage card raises one barrier");
+  // A player's attack numbers go to the GM first: refused here.
+  env.prompts.push(false);
+  assert.deepEqual(plain(await J.handleBarrierQuery({ op: "attack", requestId: "x7", sceneId: scene.id, barrierId: ok.id, actorUuid: actor.uuid,
+    bonus: 30, formula: "20d12+99", type: "" }, { user: player })), { refused: true });
+  assert.equal(await J.handleBarrierQuery({ op: "attack", requestId: "x8", sceneId: scene.id, barrierId: ok.id, actorUuid: actor.uuid,
+    bonus: 100, formula: "1d8", type: "" }, { user: player }), null, "out-of-range bonus rejected outright");
+  // The GM sets it to 0: destroyed now, drawing removed.
+  await J.handleBarrierQuery({ op: "gmEdit", requestId: "x9", sceneId: scene.id, barrierId: ok.id, hp: 0 }, { user: env.game.user }); await env.settle();
+  assert.equal(J.sceneBarriers(scene).entries[ok.id].state, "destroyed");
 });
 
 test("Scenario M: a Curtain the GM could not create returns its CE (no double benefit when it was created)", async () => {
-  const { env, actor, J } = await setup([POOL, { name: "Basic Curtain", type: "feat", flags: { jjk5e: { ceCosts: { cur: 5 } } } }]);
+  const { env, actor, J } = await setup([POOL, CURTAIN]);
   const scene = addScene(env);
   addToken(scene, actor);
   const pool = actor.items.find((i) => i.name === "Cursed Energy");

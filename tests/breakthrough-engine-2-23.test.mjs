@@ -39,6 +39,13 @@ test("ledger: GM correction sets the total, never below 0, and long histories co
   for (let i = 0; i < 260; i++) l = B.recordEvent(l, ev(`bf:${i}`)).ledger;
   assert.equal(B.ledgerTotal(l), 260);
   assert.ok(l.events.length <= 200);
+  assert.equal(B.blackFlashCount(l), 260, "folded Black Flashes still count");
+  assert.equal(B.recordEvent(l, ev("bf:0")).added, false, "a folded id cannot be recorded again");
+  const back = B.readLedger({ [B.BT_FLAG]: JSON.parse(JSON.stringify(l)) });
+  assert.equal(B.recordEvent(back, ev("bf:3")).added, false);
+  // A negative raw sum (import) is corrected exactly.
+  const neg = B.readLedger({ [B.BT_FLAG]: { events: [ev("x", "correction", -3)] } });
+  assert.equal(B.correctTotal(neg, 2, { id: "fix:n" }).total, 2);
 });
 
 test("recoveries run once per event", () => {
@@ -105,8 +112,8 @@ test("Awakened Understanding: 1 / 4 / 8 breakthroughs, CE 16, chain; meeting the
   assert.deepEqual(s({ total: 1, ceScore: 16 }), { skilled: "eligible", advanced: "locked", mastered: "locked" });
   assert.deepEqual(s({ total: 4, ceScore: 16, owned: ["Skilled Cursed Energy Manipulation"] }),
     { skilled: "acquired", advanced: "eligible", mastered: "locked" });
-  assert.deepEqual(s({ total: 8, ceScore: 16, owned: ["Skilled Cursed Energy Manipulation"], pending: ["Advanced Cursed Energy Manipulation"] }),
-    { skilled: "acquired", advanced: "pending", mastered: "locked" });
+  assert.deepEqual(s({ total: 8, ceScore: 16, owned: ["Skilled Cursed Energy Manipulation"] }),
+    { skilled: "acquired", advanced: "eligible", mastered: "locked" }, "mastered needs Advanced first");
   assert.deepEqual(s({ total: 8, ceScore: 18, owned: ["Skilled Cursed Energy Manipulation", "Advanced Cursed Energy Manipulation"] }).mastered, "eligible");
 });
 

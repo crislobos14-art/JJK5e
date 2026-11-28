@@ -1,5 +1,29 @@
 # Changelog
 
+## 2.23.0 - Breakthrough & Advanced Barrier Update
+
+### Breakthrough Engine
+- **Fuente única de los avances.** Los avances tienen un registro en el actor (`flags.jjk5e.breakthroughLog`) con un id por evento. El número `flags.jjk5e.breakthroughs` es solo su reflejo. El primer avance migra el número antiguo como una entrada "legacy" y el total no cambia.
+- **Black Flash.** Cada ataque nuevo anula el Black Flash pendiente anterior, así que el ×3 ya no puede pasar a otro crítico. El avance se registra con el id del mensaje de la tirada y nunca se cuenta dos veces.
+- **The Zone.** Las recuperaciones (Technique Burnout, reserva de RCT y −1 de Reduced Output) se aplican una sola vez por evento. El despertar de RCT también concede The Zone, como dice V.6 ("after achieving a breakthrough"). El ajuste nuevo *The Zone se reinicia en cada avance* resuelve la ambigüedad de la duración.
+- **RCT.** El despertar cuenta como avance una sola vez por actor. El DJ puede rechazar el momento cercano a la muerte, y los intentos y rechazos quedan registrados.
+- **Gestor de Avances (Sealed Ink).** Muestra el total, los Black Flashes, el rango de crítico y de Black Flash, la probabilidad por ataque, The Zone, la RCT y su reserva, los niveles de Comprensión despertada con lo que falta, y el historial. El DJ puede registrar, corregir, ofrecer, abrir la tarjeta de RCT y reparar.
+- Las correcciones del DJ (−/+ en el panel) quedan como entradas de corrección y no conceden The Zone.
+
+### Advanced Barrier Engine
+- **Registro de barreras por escena** (`flags.jjk5e.barriers`). Solo lo escribe el DJ, mediante la consulta `jjk5e.barrier`, y todos los valores se validan. Las reglas de acceso son datos (selectores) y nunca código.
+- **Basic Curtain** según V.6: 5 EM, radio de 2165 pies, 10 min, PG = mod. de EM × nivel, CA = CD de EM, inmune a veneno y psíquico, falla las salvaciones. Cada EM extra suma 1 min y +10 PG (la actividad ahora escala). Si es más grande que el mapa, el dibujo se recorta y el radio se conserva.
+- **Barrera Pura** (regla opcional): una criatura autorizada lanza la Cortina dentro por 1 EM.
+- **Glass Box:** CA = CD de EM − 5, PG = 2 × competencia, cubo de 10 pies. Estalla una vez a 0 PG y su dueño recibe el botón de Estallido.
+- **Movimiento.** Una barrera física sin reglas está sellada: solo la cruza su dueño, como dice V.6 ("prevent entry/exit"); así una Caja de Cristal atrapa de verdad. Las reglas de acceso abren o cierran el paso. La comprobación sigue la trayectoria y la altura de la cúpula, y un teletransporte se juzga por sus extremos. Las zonas (Simple Domain, Hollow Wicker Basket) nunca bloquean. Una invocación se juzga por sí misma.
+- **Barrier Intruder:** el DJ tira la prueba contra la CD del creador. Desde fuera da una entrada y avisa al creador; desde dentro cambia quién entra o sale.
+- **Daño a barreras.** Lo resuelve el DJ con inmunidades, resistencias y vulnerabilidades. La destrucción ocurre una sola vez aunque dos jugadores ataquen a la vez.
+- **Simple Domain.** Si un efecto de área de dominio alcanza a varias criaturas dentro del mismo Simple Domain, la barrera recibe el daño una sola vez. Antes se descontaba una vez por criatura.
+- **Votos.** Los términos de barrera (PG, CA, radio, minutos) se aplican mientras el voto está activo y aprobado, y se retiran exactamente al terminar.
+- **Seguridad.** El DJ solo crea una barrera a partir de un uso real de la dote o técnica (objeto del actor y tarjeta de uso reciente, una vez) y limita la EM extra al máximo de la actividad. El ataque de un jugador contra una barrera lo confirma el DJ. Si el DJ rechaza la barrera o no hay DJ, se devuelve la EM pagada.
+- **Gestor de Barreras** con modo de inspección y diseñador para el DJ: Barrera Pura, cierre de Dominio Incompleto y barrera personalizada (marcada como casera). Las barreras de dominio aparecen solo para consulta.
+- Diagnóstico: las comprobaciones de salud detectan registros de avances desincronizados o sin migrar y barreras destruidas o caducadas que siguen activas, sin dibujo o sin propietario. Las reparaciones son seguras: no conceden nada ni cierran barreras vivas.
+
 ## 2.22.1 - Iconos originales
 
 - 252 documentos de los compendios usaban iconos genéricos de Foundry (`icons/svg/*`): armas, armaduras, equipo, herramientas malditas, objetos mágicos, dotes, rasgos y ataques de shikigami, macros y tablas. Ahora cada uno tiene un sello propio en `icons/items/`, con el color de su familia de identidad y un glifo de Font Awesome Free (CC BY 4.0).

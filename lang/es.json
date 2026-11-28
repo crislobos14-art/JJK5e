@@ -1996,7 +1996,12 @@
         "expiredActive": "caducada pero activa"
       },
       "Refund": "EM devuelta (sin barrera)",
-      "NotCreated": "{name}: la barrera no se creó; se ha devuelto su EM."
+      "NotCreated": "{name}: la barrera no se creó; se ha devuelto su EM.",
+      "AttackReview": "{user} ataca {barrier} con {actor}: ataque {bonus}, daño {formula} ({type}). ¿Tirarlo?",
+      "Unknown": "{name}: aún no hay respuesta del DJ. Revisa el Gestor de Barreras antes de volver a usarla.",
+      "FailsSaves": "falla las salvaciones",
+      "Size": "Tamaño del cubo",
+      "SizeHint": "Tamaño en pies (Glass Weakening: +5 pies por debilitamiento):"
     }
   }
 }

@@ -182,7 +182,8 @@ Replaced: activities, effects, description and JJK flags.
 
 **Breakthroughs and domains**
 - **Black Flash**: on a melee critical hit the module rolls the d20; on success it posts the result and applies or
-  stacks **The Zone** (+1 crit range per stack, Black Flash range included) and removes Technique Burnout.
+  stacks **The Zone** (+1 crit range per stack, Black Flash range included), removes Technique Burnout, refills the
+  RCT healing pool and lowers Reduced Output by 1, once per breakthrough. Awakening RCT also grants The Zone.
 - **Domain Expansion**: *Expand Domain (20 CE)* activity with the 175-ft template. Using it adds a 1-minute effect;
   delete that effect when the domain closes and **Technique Burnout** is applied (2 exhaustion, technique
   features blocked until you delete it or land a Black Flash).
@@ -273,6 +274,36 @@ dnd5e ends concentration summons. Details: `docs/design/advanced-summoning-engin
 - The approval is stored where only GMs can write, so a vow edited afterwards stops applying until it is approved again.
 
 Details: `docs/design/advanced-binding-vow-engine.md`.
+
+## Breakthroughs and barriers (2.23)
+
+**Breakthrough Manager** (JJK panel → Breakthrough Manager). It shows:
+- total breakthroughs and Black Flashes;
+- critical range and Black Flash range, and the chance per melee attack;
+- The Zone (stacks and time left);
+- RCT state and healing pool;
+- Awakened Understanding tiers (acquired, eligible, locked), with what is missing;
+- the full history of breakthroughs.
+
+Every breakthrough is recorded once, with an id. A reload, a repeated hook or a double click never counts twice or repeats The Zone's recoveries.
+
+The GM can:
+- record an earlier breakthrough;
+- correct the total (the correction is recorded);
+- offer Awakened Understanding;
+- send the near-death RCT card;
+- repair a record (repairs never grant anything).
+
+**Barrier Manager** (JJK panel → Barrier Manager):
+- **Basic Curtain.** Using the activity raises the Curtain: hit points, AC, immunities, duration, and extra CE for more minutes and hit points. A Curtain bigger than the map keeps its real 2165 ft radius; only its drawing is clipped.
+- **Glass Box.** The cube is created the same way. At 0 HP it shatters once and its owner gets the Shatter button.
+- **Physical barriers** are sealed by default: only their owner crosses until the GM adds rules. Rules let creatures in or keep them in or out. The check follows the whole path, the height of the dome and teleports. Zones such as Simple Domain and Hollow Wicker Basket never block movement.
+- **Barrier Intruder.** From outside, it opens one entry, and the creator is told. From inside, it changes who may enter or leave. The GM rolls.
+- **Attacks and damage.** The GM resolves them. Immunities apply, and a barrier is destroyed exactly once, even if two players hit it at the same moment.
+- **GM designer.** It makes Pure Barriers (an authorised creature inside casts a Curtain for 1 CE), the structure that closes an Incomplete Domain, and custom barriers, marked homebrew.
+- **Binding vows** can carry barrier terms (HP, AC, radius, minutes). They apply while the vow is active and approved, and are removed when it ends.
+
+Details, rule sources and pending live checks: `docs/design/breakthrough-and-barrier-engines.md`.
 
 ## Creeps and Curses notes
 

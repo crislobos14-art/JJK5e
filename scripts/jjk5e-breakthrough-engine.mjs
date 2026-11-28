@@ -22,7 +22,8 @@ export const BT_GRANTS_ZONE = new Set(["blackFlash", "rct", "physiology"]);
 const BT_KEEP = 200;
 const BT_EVENT_ID = /^[\w.:-]{1,120}$/;
 
-export function emptyLedger() { return { v: BREAKTHROUGH_SCHEMA, events: [], rct: { attempts: [], declined: [] } }; }
+export function emptyLedger() { return { v: BREAKTHROUGH_SCHEMA, events: [], folded: [], rct: { attempts: [], declined: [] } }; }
+const BT_FOLDED_KEEP = 5000;
 
 function cleanLedgerEvent(e) {
   if (!e || typeof e !== "object" || typeof e.id !== "string" || !BT_EVENT_ID.test(e.id) || !BT_KINDS.includes(e.kind)) return null;
@@ -33,7 +34,7 @@ function cleanLedgerEvent(e) {
     worldTime: Number.isFinite(Number(e.worldTime)) ? Number(e.worldTime) : null,
     sceneId: str(e.sceneId, 40), combatId: str(e.combatId, 40), round: Number.isFinite(Number(e.round)) ? Number(e.round) : null,
     item: str(e.item), technique: str(e.technique), user: str(e.user, 40), approvedBy: str(e.approvedBy, 40),
-    reason: str(e.reason, 240), recovered: e.recovered === true };
+    reason: str(e.reason, 240), recovered: e.recovered === true, bf: Math.max(0, Math.floor(Number(e.bf) || 0)) };
 }
 
 /**
@@ -49,6 +50,7 @@ export function readLedger(flags) {
       const c = cleanLedgerEvent(e);
       if (c && !seen.has(c.id)) { seen.add(c.id); ledger.events.push(c); }
     }
+    ledger.folded = (Array.isArray(raw.folded) ? raw.folded : []).filter((id) => typeof id === "string" && BT_EVENT_ID.test(id)).slice(-BT_FOLDED_KEEP);
     for (const key of ["attempts", "declined"]) {
       ledger.rct[key] = (Array.isArray(raw.rct?.[key]) ? raw.rct[key] : []).filter((x) => x && typeof x.id === "string").slice(-50);
     }
@@ -63,15 +65,19 @@ export function readLedger(flags) {
 export function ledgerTotal(ledger) {
   return Math.max(0, (ledger?.events ?? []).reduce((n, e) => n + (Number(e.delta) || 0), 0));
 }
-export function blackFlashCount(ledger) { return (ledger?.events ?? []).filter((e) => e.kind === "blackFlash").length; }
-export function hasEvent(ledger, id) { return (ledger?.events ?? []).some((e) => e.id === id); }
+export function blackFlashCount(ledger) {
+  return (ledger?.events ?? []).reduce((n, e) => n + (e.kind === "blackFlash" ? 1 : e.kind === "legacy" ? e.bf || 0 : 0), 0);
+}
+/** Ids already used, including events folded into the legacy entry (so a folded id can never be recorded again). */
+export function hasEvent(ledger, id) { return (ledger?.events ?? []).some((e) => e.id === id) || (ledger?.folded ?? []).includes(id); }
+const rawSum = (ledger) => (ledger?.events ?? []).reduce((n, e) => n + (Number(e.delta) || 0), 0);
 
 /**
  * Add an event. Returns { ledger, added, total, before }. An id already present is a no-op (added: false).
  * Old events are compacted into one "legacy" event, so the total is preserved however long a campaign runs.
  */
 export function recordEvent(ledger, event) {
-  const base = ledger ? { ...ledger, events: [...ledger.events], rct: { ...(ledger.rct ?? { attempts: [], declined: [] }) } } : emptyLedger();
+  const base = ledger ? { ...ledger, events: [...ledger.events], folded: [...(ledger.folded ?? [])], rct: { ...(ledger.rct ?? { attempts: [], declined: [] }) } } : emptyLedger();
   const before = ledgerTotal(base);
   const e = cleanLedgerEvent(event);
   if (!e) return { ledger: base, added: false, total: before, before, error: "invalid" };
@@ -81,7 +87,9 @@ export function recordEvent(ledger, event) {
     const old = base.events.splice(0, base.events.length - BT_KEEP + 1);
     const prior = old.find((x) => x.id === "legacy");
     const sum = old.reduce((n, x) => n + x.delta, 0);
-    base.events.unshift(cleanLedgerEvent({ id: "legacy", kind: "legacy", delta: sum, at: prior?.at ?? 0, reason: "compacted history" }));
+    const bf = old.reduce((n, x) => n + (x.kind === "blackFlash" ? 1 : x.kind === "legacy" ? x.bf || 0 : 0), 0);
+    base.folded = [...base.folded, ...old.map((x) => x.id).filter((id) => id !== "legacy")].slice(-BT_FOLDED_KEEP);
+    base.events.unshift(cleanLedgerEvent({ id: "legacy", kind: "legacy", delta: sum, bf, at: prior?.at ?? 0, reason: "compacted history" }));
   }
   return { ledger: base, added: true, total: ledgerTotal(base), before };
 }
@@ -89,7 +97,8 @@ export function recordEvent(ledger, event) {
 /** A GM correction sets the total to `target` (one correction event with the difference). */
 export function correctTotal(ledger, target, { id, user, reason, at = Date.now() } = {}) {
   const want = Math.max(0, Math.floor(Number(target) || 0));
-  const delta = want - ledgerTotal(ledger);
+  // From the raw sum (it can be negative after an import), so the corrected total is exactly `want`.
+  const delta = want - rawSum(ledger);
   if (!delta) return { ledger, added: false, total: want, before: want };
   return recordEvent(ledger, { id, kind: "correction", delta, user, reason, at });
 }
@@ -182,17 +191,17 @@ export function rctAwakeningPath({ hasRCT, heavenlyOnly, cursedSpirit, physiolog
 /* ------------------------------------------------------------------ Awakened Understanding */
 
 export const UNDERSTANDING = [
-  { key: "skilled", name: "Skilled Cursed Energy Manipulation", breakthroughs: 1, ceScore: 16, requires: null, efficiency: 0 },
-  { key: "advanced", name: "Advanced Cursed Energy Manipulation", breakthroughs: 4, requires: "Skilled Cursed Energy Manipulation", efficiency: 1 },
-  { key: "mastered", name: "Mastered Cursed Energy Manipulation", breakthroughs: 8, requires: "Advanced Cursed Energy Manipulation", efficiency: 2 }
+  { key: "skilled", name: "Skilled Cursed Energy Manipulation", breakthroughs: 1, ceScore: 16, requires: null },
+  { key: "advanced", name: "Advanced Cursed Energy Manipulation", breakthroughs: 4, requires: "Skilled Cursed Energy Manipulation" },
+  { key: "mastered", name: "Mastered Cursed Energy Manipulation", breakthroughs: 8, requires: "Advanced Cursed Energy Manipulation" }
 ];
 
 /**
- * Status of each tier: "acquired" (owned), "eligible" (prerequisites met; the GM may allow it), "pending"
- * (approval requested), "locked" (a prerequisite is missing, listed in `missing`). Meeting the prerequisites never
+ * Status of each tier: "acquired" (owned), "eligible" (prerequisites met; the GM may allow it), "locked" (a
+ * prerequisite is missing, listed in `missing`). Meeting the prerequisites never
  * grants the feat: V.6 says the DM can allow the upgrade.
  */
-export function understandingStatus({ total = 0, ceScore = 0, owned = [], pending = [] } = {}) {
+export function understandingStatus({ total = 0, ceScore = 0, owned = [] } = {}) {
   const have = new Set(owned);
   return UNDERSTANDING.map((tier) => {
     if (have.has(tier.name)) return { ...tier, status: "acquired", missing: [] };
@@ -200,7 +209,7 @@ export function understandingStatus({ total = 0, ceScore = 0, owned = [], pendin
     if (total < tier.breakthroughs) missing.push({ kind: "breakthroughs", need: tier.breakthroughs, have: total });
     if (tier.ceScore && ceScore < tier.ceScore) missing.push({ kind: "ceScore", need: tier.ceScore, have: ceScore });
     if (tier.requires && !have.has(tier.requires)) missing.push({ kind: "feat", need: tier.requires });
-    return { ...tier, status: missing.length ? "locked" : pending.includes(tier.name) ? "pending" : "eligible", missing };
+    return { ...tier, status: missing.length ? "locked" : "eligible", missing };
   });
 }
 /** Efficiency replaces, it does not add: Advanced −1, Mastered −2 (highest owned tier), minimum cost 1. */

@@ -22,7 +22,7 @@ export const BARRIER_STATES = ["active", "destroyed", "expired", "closed"];
 const BARRIER_ID = /^[A-Za-z0-9]{16}$/;
 const BARRIER_KEEP_ENDED = 20;
 const BARRIER_KEEP_LOG = 60;
-const BARRIER_DAMAGE_TYPES = ["acid", "bludgeoning", "cold", "fire", "force", "lightning", "necrotic", "piercing", "poison", "psychic",
+export const BARRIER_DAMAGE_TYPES = ["acid", "bludgeoning", "cold", "fire", "force", "lightning", "necrotic", "piercing", "poison", "psychic",
   "radiant", "slashing", "thunder"];
 
 /**
@@ -50,7 +50,7 @@ export function emptyBarrierRegistry() { return { v: BARRIER_SCHEMA, entries: {}
  *   { by: "actor", uuid } | { by: "creatureType", value } | { by: "hasCE", value: bool } | { by: "sorcerer" }
  *   | { by: "curse" } | { by: "summon" } | { by: "summonOf", uuid } | { by: "disposition", value: -1|0|1 } | { by: "any" }
  * A rule set is { enter: { allow: [], deny: [] }, exit: { allow: [], deny: [] } }. Deny wins; an empty allow list
- * allows everyone not denied; a non-empty allow list allows only its matches.
+ * keeps everyone but the owner on its side (a physical barrier is sealed, V.6); an allow list lets its matches through.
  */
 const BARRIER_SELECTORS = new Set(["actor", "creatureType", "hasCE", "sorcerer", "curse", "summon", "summonOf", "disposition", "any"]);
 export function cleanBarrierSelector(s) {
@@ -99,8 +99,11 @@ export function accessDecision(barrier, facts, direction) {
     return { allowed: true, reason: "intruder" };
   const rules = cleanAccessRules(barrier.rules)[direction === "exit" ? "exit" : "enter"];
   if (rules.deny.some((s) => barrierSelectorMatches(s, facts))) return { allowed: false, reason: "denied" };
-  if (rules.allow.length && !rules.allow.some((s) => barrierSelectorMatches(s, facts))) return { allowed: false, reason: "notAllowed" };
-  return { allowed: true, reason: rules.allow.length ? "allowed" : "open" };
+  // V.6 (Rules of Thumb, Barriers): a physical barrier prevents entry and exit. With no rule for this direction only
+  // its owner crosses; to let others through, add an allow rule (for example { by: "any" }).
+  if (!rules.allow.length) return { allowed: false, reason: "sealed" };
+  if (!rules.allow.some((s) => barrierSelectorMatches(s, facts))) return { allowed: false, reason: "notAllowed" };
+  return { allowed: true, reason: "allowed" };
 }
 
 /* ------------------------------------------------------------------ geometry (scene pixels; feet via ppf) */
@@ -189,7 +192,7 @@ export function cleanBarrier(raw, id) {
     expiresAt: raw.expiresAt == null ? null : num(raw.expiresAt, null), regionId: str(raw.regionId, 40), linkedDomain: str(raw.linkedDomain),
     vows: (Array.isArray(raw.vows) ? raw.vows : []).filter((v) => v && typeof v.vowId === "string").slice(0, 10),
     log: (Array.isArray(raw.log) ? raw.log : []).slice(-BARRIER_KEEP_LOG), events: (Array.isArray(raw.events) ? raw.events : []).filter((x) => typeof x === "string").slice(-100),
-    endReason: str(raw.endReason, 40), origin: str(raw.origin, 40)
+    endReason: str(raw.endReason, 40), origin: str(raw.origin, 40), usage: str(raw.usage, 40)
   };
 }
 export function readBarrierRegistry(scene, ID = "jjk5e") {
@@ -304,19 +307,21 @@ function shiftBarrier(b, field, d) {
 
 /**
  * V.6: "If multiple creatures are within a single Simple Domain and are targeted by a damaging area effect, it takes
- * the damage once." Given the per-target damage of one effect, group the targets by the Simple Domain that holds them:
- * each barrier absorbs one amount (the largest of its targets), and every target behind it receives the same overflow.
+ * the damage once." Targets roll and save separately, so the barrier takes the largest share once. Call once per
+ * target in any order: `shared` is { damage, absorbed } so far for this barrier and effect; `absorbedNow` is what the
+ * barrier really took for the extra amount (min of its hit points). Returns the amount to ask the barrier to absorb
+ * now (`ask`, 0 if this share is not larger) and, once applied, the overflow for this target.
  */
-export function simpleDomainShares(targets) {
-  const groups = new Map();
-  for (const t of targets ?? []) {
-    if (!t.simple) continue;
-    const g = groups.get(t.simple) ?? { simple: t.simple, damage: 0, targets: [] };
-    g.damage = Math.max(g.damage, Math.max(0, Math.floor(Number(t.damage) || 0)));
-    g.targets.push(t.id);
-    groups.set(t.simple, g);
-  }
-  return [...groups.values()];
+export function simpleDomainAsk(shared, value) {
+  const s = shared ?? { damage: 0, absorbed: 0 };
+  const v = Math.max(0, Math.floor(Number(value) || 0));
+  return v > s.damage ? v - s.damage : 0;
+}
+export function simpleDomainAfter(shared, value, absorbedNow = 0) {
+  const s = { ...(shared ?? { damage: 0, absorbed: 0 }) };
+  const v = Math.max(0, Math.floor(Number(value) || 0));
+  if (v > s.damage) { s.absorbed += Math.max(0, Math.floor(Number(absorbedNow) || 0)); s.damage = v; }
+  return { shared: s, overflow: Math.max(0, v - s.absorbed) };
 }
 
 /* ------------------------------------------------------------------ diagnostics */

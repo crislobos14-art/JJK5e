@@ -1996,7 +1996,12 @@
         "expiredActive": "expired but active"
       },
       "Refund": "CE returned (no barrier)",
-      "NotCreated": "{name}: the barrier was not created; its CE was returned."
+      "NotCreated": "{name}: the barrier was not created; its CE was returned.",
+      "AttackReview": "{user} attacks {barrier} with {actor}: attack {bonus}, damage {formula} ({type}). Roll it?",
+      "Unknown": "{name}: no answer from the GM yet. Check the Barrier Manager before using it again.",
+      "FailsSaves": "fails saves",
+      "Size": "Cube size",
+      "SizeHint": "Size in feet (Glass Weakening: +5 ft per weakening):"
     }
   }
 }

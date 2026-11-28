@@ -51,6 +51,7 @@ test("a curtain larger than the scene keeps its radius; only the drawing is clip
 
 test("access: deny wins, allow lists restrict, summons judged by their own facts, enter ≠ exit, zones never block", () => {
   const b = base({ rules: { enter: { allow: [{ by: "sorcerer" }], deny: [{ by: "curse" }] }, exit: { deny: [{ by: "any" }] } } });
+  assert.ok(E.BARRIER_DAMAGE_TYPES.includes("psychic"), "exported for jjk5e.js");
   const sorcerer = { actorUuid: "Actor.S", sorcerer: true, hasCE: true };
   const curse = { actorUuid: "Actor.C", curse: true, sorcerer: true };
   const human = { actorUuid: "Actor.H" };
@@ -64,6 +65,11 @@ test("access: deny wins, allow lists restrict, summons judged by their own facts
   const b2 = E.alterBarrier(b, { op: "add", direction: "enter", list: "allow", selector: { by: "summonOf", uuid: "Actor.S" } });
   assert.equal(E.accessDecision(b2, shiki, "enter").allowed, true);
   assert.equal(E.accessDecision({ ...b, kind: "pureBarrier" }, curse, "enter").allowed, true);
+  // V.6: a physical barrier without rules is sealed (only its owner crosses); a zone never blocks.
+  const sealed = base();
+  assert.equal(E.accessDecision(sealed, sorcerer, "enter").reason, "sealed");
+  assert.equal(E.accessDecision(sealed, sorcerer, "exit").allowed, false, "Glass Box: a trapped creature cannot walk out");
+  assert.equal(E.accessDecision(base({ rules: { enter: { allow: [{ by: "any" }] } } }), human, "enter").allowed, true);
   assert.equal(E.cleanBarrierSelector({ by: "eval", code: "alert(1)" }), null);
   assert.equal(E.cleanBarrierSelector({ by: "actor", uuid: "<script>" }), null);
   assert.equal(E.alterBarrier(b, { op: "drop", selector: { by: "any" } }), null);
@@ -121,9 +127,22 @@ test("binding vows modify a barrier and removing the vow restores it exactly", (
   assert.equal(back.max, 20); assert.equal(back.hp, 20); assert.equal(back.expiresAt, 600); assert.equal(back.vows.length, 0);
 });
 
-test("Simple Domain: one area effect damages a shared Simple Domain once", () => {
-  const shares = E.simpleDomainShares([{ id: "a", simple: "SD1", damage: 12 }, { id: "b", simple: "SD1", damage: 9 }, { id: "c", simple: "SD2", damage: 5 }, { id: "d", damage: 7 }]);
-  assert.deepEqual(shares, [{ simple: "SD1", damage: 12, targets: ["a", "b"] }, { simple: "SD2", damage: 5, targets: ["c"] }]);
+test("Simple Domain: one area effect damages a shared Simple Domain once (largest share), in any target order", () => {
+  const run = (values, hp) => {
+    let shared, left = hp, total = 0;
+    const out = values.map((v) => {
+      const ask = E.simpleDomainAsk(shared, v);
+      const took = Math.min(left, ask); left -= took; total += took;
+      const r = E.simpleDomainAfter(shared, v, took); shared = r.shared; return r.overflow;
+    });
+    return { out, total };
+  };
+  // Big barrier: nobody is hurt and it loses only the largest share (12), not 12 + 6.
+  assert.deepEqual(run([6, 12], 30), { out: [0, 0], total: 12 });
+  assert.deepEqual(run([12, 6], 30), { out: [0, 0], total: 12 });
+  // Small barrier (8 HP): it breaks once; each target takes what exceeds the 8 it absorbed.
+  assert.deepEqual(run([12, 6], 8), { out: [4, 0], total: 8 });
+  assert.deepEqual(run([6, 12], 8), { out: [0, 4], total: 8 });
 });
 
 test("diagnostics: no owner, missing region, destroyed but active, expired but active", () => {
