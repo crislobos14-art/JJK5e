@@ -87,7 +87,7 @@ Not used as sources: the anime, the manga, and standard D&D rules.
 
 ## 5. Security
 
-- **Creating a barrier.** The GM requires three things: the actor's own Basic Curtain or Glass Box item, a usage card of that item from the last 5 minutes that has not raised a barrier before, and extra CE within the activity's scaling maximum. A player therefore cannot raise a barrier through the API without using (and paying for) the feature.
+- **Creating a barrier.** The GM requires three things: the actor's own Basic Curtain or Glass Box item, a usage card of that item from the last 5 minutes that has not raised a barrier before (claimed before any wait, so two requests with one card make one barrier), and the extra CE recorded on that card (`system.scaling`), capped at the activity's scaling maximum. The player's own number is ignored. A player therefore cannot raise a barrier through the API without using (and paying for) the feature.
 - **Attacking a barrier.** A player's attack bonus and damage formula are bounded (±30, at most 20 dice). The GM confirms them before anything is rolled.
 - **Editing.** GM-only operations are `gmCreate`, `gmEdit`, `damage` and `repair`. Closing a barrier needs its owner or the GM. Every query carries a request id and is handled once.
 - **Refunds.** If the GM refuses, or no GM is connected, the CE paid comes back. A lost answer (timeout) is not refunded, because the barrier may still be created.

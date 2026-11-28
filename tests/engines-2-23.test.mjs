@@ -258,11 +258,13 @@ test("a player cannot create a barrier for someone else's actor or edit barriers
   // The owner, through the API, without using the feature: refused. With a fresh usage card: once, extra CE capped.
   actor.testUserPermission = () => true;
   assert.deepEqual(plain(await create("x4", { extra: 200 })), { refused: true }, "no usage card");
-  env.game.messages = new Map([["M1", { id: "M1", timestamp: Date.now(), flags: { dnd5e: { item: { uuid: curtainOf(actor).uuid } } } }]]);
-  const ok = await create("x5", { extra: 200, messageId: "M1" });
+  env.game.messages = new Map([["M1", { id: "M1", timestamp: Date.now(), system: { scaling: 2 }, flags: { dnd5e: { item: { uuid: curtainOf(actor).uuid } } } }]]);
+  // Two requests with the same card at once: only one barrier.
+  const [ok, twin] = await Promise.all([create("x5", { extra: 200, messageId: "M1" }), create("x5b", { extra: 200, messageId: "M1" })]);
   assert.ok(ok?.id);
-  assert.equal(J.sceneBarriers(scene).entries[ok.id].max, 4 * 5 + 10 * 60, "extra CE capped at the activity's scaling max");
-  assert.deepEqual(plain(await create("x6", { messageId: "M1" })), { refused: true }, "a usage card raises one barrier");
+  assert.deepEqual(plain(twin), { refused: true }, "a usage card raises one barrier");
+  assert.equal(J.sceneBarriers(scene).entries[ok.id].max, 4 * 5 + 10 * 2, "extra CE comes from the card (2), not the request (200)");
+  assert.deepEqual(plain(await create("x6", { messageId: "M1" })), { refused: true });
   // A player's attack numbers go to the GM first: refused here.
   env.prompts.push(false);
   assert.deepEqual(plain(await J.handleBarrierQuery({ op: "attack", requestId: "x7", sceneId: scene.id, barrierId: ok.id, actorUuid: actor.uuid,

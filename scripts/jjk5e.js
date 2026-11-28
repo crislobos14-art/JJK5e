@@ -8536,6 +8536,7 @@ const BARRIER_QUERY = `${MODULE_ID}.barrier`;
 const BARRIER_SCENE_QUEUES = new Map();
 const BARRIER_APPS = new Set();
 const BARRIER_REQUESTS = new Set();
+const BARRIER_USAGE_CLAIMS = new Set();
 const barrierPPF = (scene) => (Number(scene?.grid?.size) || 100) / (Number(scene?.grid?.distance) || 5);
 const sceneBarriers = (scene) => readBarrierRegistry(scene, MODULE_ID);
 function tokenPoint(doc, at = {}) {
@@ -8633,17 +8634,23 @@ const BARRIER_OPS = {
     // recent and not used before. A player cannot raise a Curtain through the API without using (and paying for) it.
     const item = typeof msg.itemUuid === "string" ? await fromUuid(msg.itemUuid).catch(() => null) : null;
     if (item?.parent?.uuid !== actor.uuid || baseName(item) !== (msg.kind === "curtain" ? "Basic Curtain" : "Glass Box")) return { refused: true };
+    let paidScaling = Number(msg.extra) || 0;
     if (!user?.isGM) {
       const card = game.messages?.get?.(msg.messageId);
       const d5 = card?.flags?.dnd5e ?? {}, sys = card?.system ?? {};
       const cardItem = sys.item?.uuid ?? d5.item?.uuid ?? null;
       const fresh = Date.now() - (Number(card?.timestamp) || 0) < 5 * 60 * 1000;
-      const used = Object.values(sceneBarriers(scene).entries).some((b) => b.usage && b.usage === msg.messageId);
+      // Claimed before any await, so two requests with one card can never both pass.
+      const used = BARRIER_USAGE_CLAIMS.has(msg.messageId) || Object.values(sceneBarriers(scene).entries).some((b) => b.usage && b.usage === msg.messageId);
       if (!card || cardItem !== item.uuid || !fresh || used) return { refused: true };
+      BARRIER_USAGE_CLAIMS.add(msg.messageId);
+      if (BARRIER_USAGE_CLAIMS.size > 500) BARRIER_USAGE_CLAIMS.delete(BARRIER_USAGE_CLAIMS.values().next().value);
+      // Extra CE is what the usage card says was paid (dnd5e stores the scaling on the card), never the player's number.
+      paidScaling = Number(sys.scaling ?? d5.scaling) || 0;
     }
     const act = [...(item.system?.activities?.values?.() ?? Object.values(item.system?.activities ?? {}))][0];
     const maxExtra = Math.max(0, Math.floor(Number(act?.consumption?.scaling?.max) || 60));
-    const extra = msg.kind === "curtain" ? clamp(Math.floor(Number(msg.extra) || 0), 0, maxExtra) : 0;
+    const extra = msg.kind === "curtain" ? clamp(Math.floor(paidScaling), 0, maxExtra) : 0;
     const now = Number(game.time?.worldTime) || 0;
     const id = foundry.utils.randomID();
     const at = msg.kind === "glassBox" && msg.point && [msg.point.x, msg.point.y].every(Number.isFinite) ? msg.point : tokenPoint(token);
@@ -8769,7 +8776,7 @@ const BARRIER_OPS = {
     }).then(async (out) => {
       // Set to 0 by the GM: the barrier is destroyed now (once), as if damage had brought it there.
       if (out?.zeroed) await endSceneBarrier(scene, out.id, "destroyed");
-      if (out && Number.isFinite(Number(msg.size))) {
+      if (out && Number.isFinite(Number(msg.size)) && Number(msg.size) >= 5 && Number(msg.size) <= 200) {
         const b = sceneBarriers(scene).entries[out.id];
         if (b?.state === "active") { await eraseBarrier(scene, b); const regionId = await drawBarrier(scene, b);
           await withBarriers(scene, (reg) => { if (reg.entries[b.id]) reg.entries[b.id] = { ...reg.entries[b.id], regionId }; }); }
