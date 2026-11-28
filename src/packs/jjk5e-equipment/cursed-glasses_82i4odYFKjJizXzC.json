@@ -2,7 +2,7 @@
  "_id": "82i4odYFKjJizXzC",
  "name": "Cursed Glasses",
  "type": "loot",
- "img": "icons/svg/explosion.svg",
+ "img": "modules/jjk5e/icons/items/cursed-glasses.svg",
  "folder": "Z18gXvGvvqaYHnqC",
  "system": {
   "type": {
@@ -24,7 +24,7 @@
  "flags": {
   "jjk5e": {
    "grade": "4th Grade",
-   "rev": "1b666b03ec"
+   "rev": "72a810418a"
   }
  },
  "_key": "!items!82i4odYFKjJizXzC"

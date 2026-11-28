@@ -2,7 +2,7 @@
  "_id": "zj6Om1egV1DP9bA1",
  "name": "King of Rock",
  "type": "consumable",
- "img": "icons/svg/explosion.svg",
+ "img": "modules/jjk5e/icons/items/king-of-rock.svg",
  "folder": "xnCPfIMW0yQ370pR",
  "system": {
   "description": {
@@ -57,7 +57,7 @@
    "ceCosts": {
     "XQUOxF4HKVhoEwDE": 1
    },
-   "rev": "6d136519a8"
+   "rev": "9edd896e1a"
   }
  },
  "_key": "!items!zj6Om1egV1DP9bA1"

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="maul">
+<!-- JJK 5e glyph seal (tools/build-icons.mjs). Glyph: Font Awesome Free fa-gavel (CC BY 4.0, https://fontawesome.com/license/free). -->
+<defs><radialGradient id="g" cx="50%" cy="38%" r="68%">
+<stop offset="0%" stop-color="hsl(8,55%,47%)"/><stop offset="68%" stop-color="hsl(8,55%,18%)"/>
+<stop offset="100%" stop-color="hsl(8,55%,8%)"/></radialGradient></defs>
+<rect width="128" height="128" rx="18" fill="#0d0a12"/>
+<circle cx="64" cy="64" r="57" fill="url(#g)"/>
+<circle cx="64" cy="64" r="57" fill="none" stroke="hsl(8,45%,88%)" stroke-width="3.5"/>
+<g stroke="hsl(8,45%,88%)" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"><line x1="115.0" y1="64.0" x2="119.0" y2="64.0"/><line x1="108.2" y1="89.5" x2="111.6" y2="91.5"/><line x1="89.5" y1="108.2" x2="91.5" y2="111.6"/><line x1="64.0" y1="115.0" x2="64.0" y2="119.0"/><line x1="38.5" y1="108.2" x2="36.5" y2="111.6"/><line x1="19.8" y1="89.5" x2="16.4" y2="91.5"/><line x1="13.0" y1="64.0" x2="9.0" y2="64.0"/><line x1="19.8" y1="38.5" x2="16.4" y2="36.5"/><line x1="38.5" y1="19.8" x2="36.5" y2="16.4"/><line x1="64.0" y1="13.0" x2="64.0" y2="9.0"/><line x1="89.5" y1="19.8" x2="91.5" y2="16.4"/><line x1="108.2" y1="38.5" x2="111.6" y2="36.5"/></g>
+<circle cx="64" cy="64" r="46" fill="none" stroke="hsl(8,45%,88%)" stroke-opacity=".3" stroke-width="1.5" stroke-dasharray="3 5"/>
+<g transform="translate(33.00 36.44) scale(0.10764)" fill="hsl(8,40%,95%)" stroke="#000" stroke-opacity=".45" stroke-width="46.5" paint-order="stroke">
+<path d="M169.6 153.4l-18.7-18.7c-12.5-12.5-12.5-32.8 0-45.3L265.6-25.4c12.5-12.5 32.8-12.5 45.3 0L329.6-6.6c12.5 12.5 12.5 32.8 0 45.3L214.9 153.4c-12.5 12.5-32.8 12.5-45.3 0zM276 211.7l-31.4-31.4 112-112 119.4 119.4-112 112-31.4-31.4-232 232c-15.6 15.6-40.9 15.6-56.6 0s-15.6-40.9 0-56.6l232-232zM390.9 374.6c-12.5-12.5-12.5-32.8 0-45.3L505.6 214.6c12.5-12.5 32.8-12.5 45.3 0l18.7 18.7c12.5 12.5 12.5 32.8 0 45.3L454.9 393.4c-12.5 12.5-32.8 12.5-45.3 0l-18.7-18.7z"/>
+</g></svg>

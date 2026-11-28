@@ -2,7 +2,7 @@
  "_id": "5bryxK9UmOU9PGzH",
  "name": "Basic Cursed Weapon",
  "type": "loot",
- "img": "icons/svg/explosion.svg",
+ "img": "modules/jjk5e/icons/items/basic-cursed-weapon.svg",
  "folder": "RVpkkOiLvLva4ZNf",
  "system": {
   "description": {
@@ -25,7 +25,7 @@
  "flags": {
   "jjk5e": {
    "grade": "4th Grade",
-   "rev": "540958795c"
+   "rev": "105751dd71"
   }
  },
  "_key": "!items!5bryxK9UmOU9PGzH"

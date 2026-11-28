@@ -2,7 +2,7 @@
  "_id": "jygkPR4jIYIHv0v4",
  "name": "General Understanding (5 PP)",
  "type": "feat",
- "img": "icons/svg/upgrade.svg",
+ "img": "modules/jjk5e/icons/items/general-understanding-5-pp.svg",
  "system": {
   "description": {
    "value": "<p>You gain 1 Physical or Skill Feat of your choice that you qualify for. You can take this attribute multiple times, but must choose a different feat each time.</p>",
@@ -35,7 +35,7 @@
      ]
     ]
    },
-   "rev": "37876b304f"
+   "rev": "be500b238b"
   }
  },
  "folder": "ar3Bgj4YHvYRp8DL",

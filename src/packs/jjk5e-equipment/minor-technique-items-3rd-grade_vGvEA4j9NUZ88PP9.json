@@ -2,7 +2,7 @@
  "_id": "vGvEA4j9NUZ88PP9",
  "name": "Minor Technique Items (3rd Grade)",
  "type": "loot",
- "img": "icons/svg/explosion.svg",
+ "img": "modules/jjk5e/icons/items/minor-technique-items-3rd-grade.svg",
  "folder": "wqSDHMRYLTxcUWTY",
  "system": {
   "type": {
@@ -24,7 +24,7 @@
  "flags": {
   "jjk5e": {
    "grade": "3rd Grade",
-   "rev": "4d519225aa"
+   "rev": "b9cabe12fe"
   }
  },
  "_key": "!items!vGvEA4j9NUZ88PP9"

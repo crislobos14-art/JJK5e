@@ -2,7 +2,7 @@
  "_id": "bDLfJLu0pJ3GprUC",
  "name": "JJK: Create Character",
  "type": "script",
- "img": "icons/svg/mystery-man.svg",
+ "img": "modules/jjk5e/icons/items/jjk-create-character.svg",
  "scope": "global",
  "command": "game.modules.get(\"jjk5e\").api.createCharacterWizard();",
  "flags": {

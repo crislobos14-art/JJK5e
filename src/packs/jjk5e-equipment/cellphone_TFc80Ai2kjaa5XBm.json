@@ -2,7 +2,7 @@
  "_id": "TFc80Ai2kjaa5XBm",
  "name": "Cellphone",
  "type": "loot",
- "img": "icons/svg/item-bag.svg",
+ "img": "modules/jjk5e/icons/items/cellphone.svg",
  "folder": "5TkjeIlCFmk1GLJi",
  "system": {
   "description": {
@@ -26,7 +26,7 @@
  },
  "flags": {
   "jjk5e": {
-   "rev": "8be30473ba"
+   "rev": "bcca62518c"
   }
  },
  "_key": "!items!TFc80Ai2kjaa5XBm"

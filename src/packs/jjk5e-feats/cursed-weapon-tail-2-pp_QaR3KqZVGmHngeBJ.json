@@ -2,7 +2,7 @@
  "_id": "QaR3KqZVGmHngeBJ",
  "name": "Cursed Weapon: Tail (2 PP)",
  "type": "feat",
- "img": "icons/svg/upgrade.svg",
+ "img": "modules/jjk5e/icons/items/cursed-weapon-tail-2-pp.svg",
  "system": {
   "description": {
    "value": "<p>The reach of your tail increases to 10 ft. As a reaction to an attack roll, you can swipe your tail to roll a 1d6 and add it to your AC against the triggering attack, potentially causing it to miss. You can spend 1 CE to add a +2 to the number rolled. This becomes +4 at 10th level. You must have the <em>Cursed Weapon</em> attribute and choose tail to take this attribute.  </p>",
@@ -64,7 +64,7 @@
      ]
     ]
    },
-   "rev": "f4d7ca8904"
+   "rev": "f481ec8e67"
   }
  },
  "folder": "ar3Bgj4YHvYRp8DL",

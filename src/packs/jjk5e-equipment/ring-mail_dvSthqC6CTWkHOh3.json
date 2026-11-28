@@ -2,7 +2,7 @@
  "_id": "dvSthqC6CTWkHOh3",
  "name": "Ring Mail",
  "type": "equipment",
- "img": "icons/svg/shield.svg",
+ "img": "modules/jjk5e/icons/items/ring-mail.svg",
  "folder": "qVuyydidyeepCNvu",
  "system": {
   "description": {
@@ -24,7 +24,7 @@
    "dex": 0
   },
   "price": {
-   "value": 30.0,
+   "value": 30,
    "denomination": "gp"
   },
   "properties": [
@@ -35,7 +35,7 @@
  "flags": {
   "jjk5e": {
    "priceUSD": "$3,000",
-   "rev": "071b6c3de9"
+   "rev": "b9699397ce"
   }
  },
  "_key": "!items!dvSthqC6CTWkHOh3"

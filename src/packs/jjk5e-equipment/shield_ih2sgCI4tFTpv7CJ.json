@@ -2,7 +2,7 @@
  "_id": "ih2sgCI4tFTpv7CJ",
  "name": "Shield",
  "type": "equipment",
- "img": "icons/svg/shield.svg",
+ "img": "modules/jjk5e/icons/items/shield.svg",
  "folder": "qVuyydidyeepCNvu",
  "system": {
   "description": {
@@ -33,7 +33,7 @@
  "flags": {
   "jjk5e": {
    "note": "Price not listed in JJK 5e V.6",
-   "rev": "8326e8125d"
+   "rev": "6d89bc4458"
   }
  },
  "_key": "!items!ih2sgCI4tFTpv7CJ"

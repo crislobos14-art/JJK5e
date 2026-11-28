@@ -2,7 +2,7 @@
  "_id": "rWKHVE2OiEccuzxe",
  "name": "Dragon Bone",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/dragon-bone.svg",
  "folder": "5URJFab0BietcWnO",
  "system": {
   "description": {
@@ -67,7 +67,7 @@
  "flags": {
   "jjk5e": {
    "grade": "1st Grade",
-   "rev": "abfbbe437f"
+   "rev": "e75eaa23c7"
   }
  },
  "_key": "!items!rWKHVE2OiEccuzxe"

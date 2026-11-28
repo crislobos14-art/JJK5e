@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="cursed lantern">
+<!-- JJK 5e glyph seal (tools/build-icons.mjs). Glyph: Font Awesome Free fa-lightbulb (CC BY 4.0, https://fontawesome.com/license/free). -->
+<defs><radialGradient id="g" cx="50%" cy="38%" r="68%">
+<stop offset="0%" stop-color="hsl(45,65%,48%)"/><stop offset="68%" stop-color="hsl(45,65%,19%)"/>
+<stop offset="100%" stop-color="hsl(45,65%,9%)"/></radialGradient></defs>
+<rect width="128" height="128" rx="18" fill="#0d0a12"/>
+<circle cx="64" cy="64" r="57" fill="url(#g)"/>
+<circle cx="64" cy="64" r="57" fill="none" stroke="hsl(45,45%,88%)" stroke-width="3.5"/>
+<g stroke="hsl(45,45%,88%)" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"><line x1="115.0" y1="64.0" x2="119.0" y2="64.0"/><line x1="108.2" y1="89.5" x2="111.6" y2="91.5"/><line x1="89.5" y1="108.2" x2="91.5" y2="111.6"/><line x1="64.0" y1="115.0" x2="64.0" y2="119.0"/><line x1="38.5" y1="108.2" x2="36.5" y2="111.6"/><line x1="19.8" y1="89.5" x2="16.4" y2="91.5"/><line x1="13.0" y1="64.0" x2="9.0" y2="64.0"/><line x1="19.8" y1="38.5" x2="16.4" y2="36.5"/><line x1="38.5" y1="19.8" x2="36.5" y2="16.4"/><line x1="64.0" y1="13.0" x2="64.0" y2="9.0"/><line x1="89.5" y1="19.8" x2="91.5" y2="16.4"/><line x1="108.2" y1="38.5" x2="111.6" y2="36.5"/></g>
+<circle cx="64" cy="64" r="46" fill="none" stroke="hsl(45,45%,88%)" stroke-opacity=".3" stroke-width="1.5" stroke-dasharray="3 5"/>
+<g transform="translate(40.75 33.00) scale(0.12109)" fill="hsl(45,40%,95%)" stroke="#000" stroke-opacity=".45" stroke-width="41.3" paint-order="stroke">
+<path d="M292.9 384c7.3-22.3 21.9-42.5 38.4-59.9 32.7-34.4 52.7-80.9 52.7-132.1 0-106-86-192-192-192S0 86 0 192c0 51.2 20 97.7 52.7 132.1 16.5 17.4 31.2 37.6 38.4 59.9l201.7 0zM288 432l-192 0 0 16c0 44.2 35.8 80 80 80l32 0c44.2 0 80-35.8 80-80l0-16zM184 112c-39.8 0-72 32.2-72 72 0 13.3-10.7 24-24 24s-24-10.7-24-24c0-66.3 53.7-120 120-120 13.3 0 24 10.7 24 24s-10.7 24-24 24z"/>
+</g></svg>

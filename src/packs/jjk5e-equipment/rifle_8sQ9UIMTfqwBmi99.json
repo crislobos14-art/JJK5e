@@ -2,7 +2,7 @@
  "_id": "8sQ9UIMTfqwBmi99",
  "name": "Rifle",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/rifle.svg",
  "folder": "8L9REK3UZxFoXRJA",
  "system": {
   "description": {
@@ -40,7 +40,7 @@
   ],
   "proficient": null,
   "price": {
-   "value": 75.0,
+   "value": 75,
    "denomination": "gp"
   },
   "quantity": 1,
@@ -125,7 +125,7 @@
    "reload": {
     "FLcE4ViCb0tZ9PnP": true
    },
-   "rev": "03e9291104"
+   "rev": "34363aa90f"
   }
  },
  "_key": "!items!8sQ9UIMTfqwBmi99"

@@ -2,7 +2,7 @@
  "_id": "y2sJ4dNymJH2gmhK",
  "name": "Shifting Form (4 PP)",
  "type": "feat",
- "img": "icons/svg/upgrade.svg",
+ "img": "modules/jjk5e/icons/items/shifting-form-4-pp.svg",
  "system": {
   "description": {
    "value": "<p>Your body lacks a conventional structure. You can move through spaces as narrow as 1 inch without squeezing, provided you aren't wearing or carrying anything you cannot fit through. You also have advantage on saving throws against being grappled or restrained.</p>",
@@ -35,7 +35,7 @@
      ]
     ]
    },
-   "rev": "e14ae7cbf4"
+   "rev": "f7a570acb1"
   }
  },
  "folder": "ar3Bgj4YHvYRp8DL",

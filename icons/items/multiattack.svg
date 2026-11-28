@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="multiattack">
+<!-- JJK 5e glyph seal (tools/build-icons.mjs). Glyph: Font Awesome Free fa-layer-group (CC BY 4.0, https://fontawesome.com/license/free). -->
+<defs><radialGradient id="g" cx="50%" cy="38%" r="68%">
+<stop offset="0%" stop-color="hsl(14,70%,47%)"/><stop offset="68%" stop-color="hsl(14,70%,18%)"/>
+<stop offset="100%" stop-color="hsl(14,70%,8%)"/></radialGradient></defs>
+<rect width="128" height="128" rx="18" fill="#0d0a12"/>
+<circle cx="64" cy="64" r="57" fill="url(#g)"/>
+<circle cx="64" cy="64" r="57" fill="none" stroke="hsl(14,45%,88%)" stroke-width="3.5"/>
+<g stroke="hsl(14,45%,88%)" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"><line x1="115.0" y1="64.0" x2="119.0" y2="64.0"/><line x1="108.2" y1="89.5" x2="111.6" y2="91.5"/><line x1="89.5" y1="108.2" x2="91.5" y2="111.6"/><line x1="64.0" y1="115.0" x2="64.0" y2="119.0"/><line x1="38.5" y1="108.2" x2="36.5" y2="111.6"/><line x1="19.8" y1="89.5" x2="16.4" y2="91.5"/><line x1="13.0" y1="64.0" x2="9.0" y2="64.0"/><line x1="19.8" y1="38.5" x2="16.4" y2="36.5"/><line x1="38.5" y1="19.8" x2="36.5" y2="16.4"/><line x1="64.0" y1="13.0" x2="64.0" y2="9.0"/><line x1="89.5" y1="19.8" x2="91.5" y2="16.4"/><line x1="108.2" y1="38.5" x2="111.6" y2="36.5"/></g>
+<circle cx="64" cy="64" r="46" fill="none" stroke="hsl(14,45%,88%)" stroke-opacity=".3" stroke-width="1.5" stroke-dasharray="3 5"/>
+<g transform="translate(33.00 33.00) scale(0.12109)" fill="hsl(14,40%,95%)" stroke="#000" stroke-opacity=".45" stroke-width="41.3" paint-order="stroke">
+<path d="M232.5 5.2c14.9-6.9 32.1-6.9 47 0l218.6 101c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0L13.9 149.8C5.4 145.8 0 137.3 0 128s5.4-17.9 13.9-21.8L232.5 5.2zM48.1 218.4l164.3 75.9c27.7 12.8 59.6 12.8 87.3 0l164.3-75.9 34.1 15.8c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0L13.9 277.8C5.4 273.8 0 265.3 0 256s5.4-17.9 13.9-21.8l34.1-15.8zM13.9 362.2l34.1-15.8 164.3 75.9c27.7 12.8 59.6 12.8 87.3 0l164.3-75.9 34.1 15.8c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0L13.9 405.8C5.4 401.8 0 393.3 0 384s5.4-17.9 13.9-21.8z"/>
+</g></svg>

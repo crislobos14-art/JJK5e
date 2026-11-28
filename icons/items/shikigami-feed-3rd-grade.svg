@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="shikigami feed 3rd grade">
+<!-- JJK 5e glyph seal (tools/build-icons.mjs). Glyph: Font Awesome Free fa-bowl-food (CC BY 4.0, https://fontawesome.com/license/free). -->
+<defs><radialGradient id="g" cx="50%" cy="38%" r="68%">
+<stop offset="0%" stop-color="hsl(150,50%,45%)"/><stop offset="68%" stop-color="hsl(150,50%,17%)"/>
+<stop offset="100%" stop-color="hsl(150,50%,8%)"/></radialGradient></defs>
+<rect width="128" height="128" rx="18" fill="#0d0a12"/>
+<circle cx="64" cy="64" r="57" fill="url(#g)"/>
+<circle cx="64" cy="64" r="57" fill="none" stroke="hsl(150,45%,88%)" stroke-width="3.5"/>
+<g stroke="hsl(150,45%,88%)" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"><line x1="115.0" y1="64.0" x2="119.0" y2="64.0"/><line x1="108.2" y1="89.5" x2="111.6" y2="91.5"/><line x1="89.5" y1="108.2" x2="91.5" y2="111.6"/><line x1="64.0" y1="115.0" x2="64.0" y2="119.0"/><line x1="38.5" y1="108.2" x2="36.5" y2="111.6"/><line x1="19.8" y1="89.5" x2="16.4" y2="91.5"/><line x1="13.0" y1="64.0" x2="9.0" y2="64.0"/><line x1="19.8" y1="38.5" x2="16.4" y2="36.5"/><line x1="38.5" y1="19.8" x2="36.5" y2="16.4"/><line x1="64.0" y1="13.0" x2="64.0" y2="9.0"/><line x1="89.5" y1="19.8" x2="91.5" y2="16.4"/><line x1="108.2" y1="38.5" x2="111.6" y2="36.5"/></g>
+<circle cx="64" cy="64" r="46" fill="none" stroke="hsl(150,45%,88%)" stroke-opacity=".3" stroke-width="1.5" stroke-dasharray="3 5"/>
+<g transform="translate(33.00 33.00) scale(0.12109)" fill="hsl(150,40%,95%)" stroke="#000" stroke-opacity=".45" stroke-width="41.3" paint-order="stroke">
+<path d="M0 176c0-35.3 28.7-64 64-64 .5 0 1.1 0 1.6 0 7.4-36.5 39.7-64 78.4-64 15 0 29 4.1 40.9 11.2 13.3-25.7 40.1-43.2 71.1-43.2s57.8 17.6 71.1 43.2c12-7.1 26-11.2 40.9-11.2 38.7 0 71 27.5 78.4 64 .5 0 1.1 0 1.6 0 35.3 0 64 28.7 64 64 0 11.7-3.1 22.6-8.6 32L8.6 208C3.1 198.6 0 187.7 0 176zM0 283.4C0 268.3 12.3 256 27.4 256l457.1 0c15.1 0 27.4 12.3 27.4 27.4 0 70.5-44.4 130.7-106.7 154.1L403.5 452c-2 16-15.6 28-31.8 28l-231.5 0c-16.1 0-29.8-12-31.8-28l-1.8-14.4C44.4 414.1 0 353.9 0 283.4z"/>
+</g></svg>

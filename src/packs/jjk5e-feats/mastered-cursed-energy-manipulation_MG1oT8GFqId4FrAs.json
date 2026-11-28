@@ -2,7 +2,7 @@
  "_id": "MG1oT8GFqId4FrAs",
  "name": "Mastered Cursed Energy Manipulation",
  "type": "feat",
- "img": "icons/svg/lightning.svg",
+ "img": "modules/jjk5e/icons/items/mastered-cursed-energy-manipulation.svg",
  "system": {
   "description": {
    "value": "<ul>\n<li>\n<p><strong>Cursed Strike</strong>. On a hit, you can spend up to your proficiency bonus, dealing an additional 2d8 necrotic damage per CE. Additionally, you can spend CE up to your proficiency to add to your attack roll.  </p>\n</li>\n<li>\n<p><strong>Efficiency</strong>. When using a cursed technique, the base cost decreases by 2 (min cost of 1).</p>\n</li>\n</ul>",
@@ -133,7 +133,7 @@
     ],
     "breakthroughs": 8
    },
-   "rev": "f032b32de9",
+   "rev": "e7845fc48e",
    "rawCE": true,
    "ceEfficiency": 2,
    "automationNotes": "Efficiency: the module lowers innate technique base costs by 2 (minimum 1). Empowered attack: use it before rolling.",

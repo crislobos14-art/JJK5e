@@ -112,7 +112,7 @@
    "_id": "52JIVDo3Cur2Wslk",
    "name": "Keen Hearing and Smell",
    "type": "feat",
-   "img": "icons/svg/aura.svg",
+   "img": "modules/jjk5e/icons/items/keen-hearing-and-smell.svg",
    "system": {
     "description": {
      "value": "<p>The dog has advantage on Wisdom (Perception) checks that rely on hearing or smell.</p>",
@@ -144,7 +144,7 @@
    "_id": "0SN2DTSmk4ondrx9",
    "name": "Pack Tactics",
    "type": "feat",
-   "img": "icons/svg/aura.svg",
+   "img": "modules/jjk5e/icons/items/pack-tactics.svg",
    "system": {
     "description": {
      "value": "<p>The dog has advantage on an attack roll against a creature if at least one of the dog's allies is within 5 ft. of the creature and the ally isn't incapacitated.</p>",
@@ -176,7 +176,7 @@
    "_id": "cXfr3GHe1T4aljWq",
    "name": "Bite",
    "type": "weapon",
-   "img": "icons/svg/sword.svg",
+   "img": "modules/jjk5e/icons/items/bite.svg",
    "system": {
     "description": {
      "value": "<p>If the target is a creature, it must succeed on a DC 11 Strength saving throw or be knocked prone.</p>",

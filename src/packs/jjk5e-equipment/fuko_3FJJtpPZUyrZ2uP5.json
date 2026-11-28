@@ -2,7 +2,7 @@
  "_id": "3FJJtpPZUyrZ2uP5",
  "name": "Fuko",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/fuko.svg",
  "folder": "TBXVbdCh1Kxu8AKz",
  "system": {
   "description": {
@@ -85,7 +85,7 @@
  "flags": {
   "jjk5e": {
    "grade": "1st Grade",
-   "rev": "b3299ab6fe"
+   "rev": "a9d81348a2"
   }
  },
  "_key": "!items!3FJJtpPZUyrZ2uP5"

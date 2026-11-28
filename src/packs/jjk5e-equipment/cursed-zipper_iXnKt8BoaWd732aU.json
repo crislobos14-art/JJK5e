@@ -2,7 +2,7 @@
  "_id": "iXnKt8BoaWd732aU",
  "name": "Cursed Zipper",
  "type": "consumable",
- "img": "icons/svg/explosion.svg",
+ "img": "modules/jjk5e/icons/items/cursed-zipper.svg",
  "folder": "TBXVbdCh1Kxu8AKz",
  "system": {
   "description": {
@@ -52,7 +52,7 @@
  "flags": {
   "jjk5e": {
    "grade": "1st Grade",
-   "rev": "4d8f287877"
+   "rev": "1878b2b2c9"
   }
  },
  "_key": "!items!iXnKt8BoaWd732aU"

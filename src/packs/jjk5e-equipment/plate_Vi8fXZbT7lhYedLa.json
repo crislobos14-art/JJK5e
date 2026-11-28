@@ -2,7 +2,7 @@
  "_id": "Vi8fXZbT7lhYedLa",
  "name": "Plate",
  "type": "equipment",
- "img": "icons/svg/shield.svg",
+ "img": "modules/jjk5e/icons/items/plate.svg",
  "folder": "qVuyydidyeepCNvu",
  "system": {
   "description": {
@@ -24,7 +24,7 @@
    "dex": 0
   },
   "price": {
-   "value": 150.0,
+   "value": 150,
    "denomination": "gp"
   },
   "properties": [
@@ -35,7 +35,7 @@
  "flags": {
   "jjk5e": {
    "priceUSD": "$15,000",
-   "rev": "ca86df83af"
+   "rev": "55e54a96f4"
   }
  },
  "_key": "!items!Vi8fXZbT7lhYedLa"

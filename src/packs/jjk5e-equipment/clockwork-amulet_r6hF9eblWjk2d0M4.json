@@ -2,7 +2,7 @@
  "_id": "r6hF9eblWjk2d0M4",
  "name": "Clockwork Amulet",
  "type": "equipment",
- "img": "icons/svg/explosion.svg",
+ "img": "modules/jjk5e/icons/items/clockwork-amulet.svg",
  "folder": "RVpkkOiLvLva4ZNf",
  "system": {
   "description": {
@@ -84,7 +84,7 @@
  "flags": {
   "jjk5e": {
    "grade": "4th Grade",
-   "rev": "e13dc8f5df",
+   "rev": "c1216efc8f",
    "automationNotes": "Use it, then roll the attack as a 10 on the d20.",
    "automation": "automated"
   }

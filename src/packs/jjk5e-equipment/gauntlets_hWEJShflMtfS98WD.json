@@ -2,7 +2,7 @@
  "_id": "hWEJShflMtfS98WD",
  "name": "Gauntlets",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/gauntlets.svg",
  "folder": "8L9REK3UZxFoXRJA",
  "system": {
   "description": {
@@ -37,7 +37,7 @@
   "properties": [],
   "proficient": null,
   "price": {
-   "value": 5.0,
+   "value": 5,
    "denomination": "gp"
   },
   "quantity": 1,
@@ -67,7 +67,7 @@
   "jjk5e": {
    "priceUSD": "$500",
    "fist": true,
-   "rev": "d1e888afda"
+   "rev": "ffc3527938"
   }
  },
  "effects": [

@@ -2,7 +2,7 @@
  "_id": "M41SkChkor3Pepj3",
  "name": "Playful Cloud",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/playful-cloud.svg",
  "folder": "OqdCuXcZ0pFqRc3h",
  "system": {
   "description": {
@@ -68,7 +68,7 @@
  "flags": {
   "jjk5e": {
    "grade": "Special Grade",
-   "rev": "1d21099f3d"
+   "rev": "345af91398"
   }
  },
  "_key": "!items!M41SkChkor3Pepj3"

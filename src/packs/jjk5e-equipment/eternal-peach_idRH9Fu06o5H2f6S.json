@@ -2,7 +2,7 @@
  "_id": "idRH9Fu06o5H2f6S",
  "name": "Eternal Peach",
  "type": "consumable",
- "img": "icons/svg/explosion.svg",
+ "img": "modules/jjk5e/icons/items/eternal-peach.svg",
  "folder": "QgDaE1oZxMUlsCnN",
  "system": {
   "description": {
@@ -52,7 +52,7 @@
  "flags": {
   "jjk5e": {
    "grade": "Special Grade",
-   "rev": "692113588c"
+   "rev": "aa8ae8b080"
   }
  },
  "_key": "!items!idRH9Fu06o5H2f6S"

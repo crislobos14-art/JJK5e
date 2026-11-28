@@ -2,7 +2,7 @@
  "_id": "haXVAx3MCizMWfsn",
  "name": "Kamutoke",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/kamutoke.svg",
  "folder": "QgDaE1oZxMUlsCnN",
  "system": {
   "description": {
@@ -140,7 +140,7 @@
    "ceSteps": {
     "heLHJOaREcBrjcgK": 1
    },
-   "rev": "2175b6affb"
+   "rev": "52ef35dd0c"
   }
  },
  "effects": [

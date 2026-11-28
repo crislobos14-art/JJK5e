@@ -2,7 +2,7 @@
  "_id": "LtrP2V1Yxa569B0C",
  "name": "Revolver",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/revolver.svg",
  "folder": "8L9REK3UZxFoXRJA",
  "system": {
   "description": {
@@ -39,7 +39,7 @@
   ],
   "proficient": 1,
   "price": {
-   "value": 25.0,
+   "value": 25,
    "denomination": "gp"
   },
   "quantity": 1,
@@ -124,7 +124,7 @@
    "reload": {
     "AJtjquYggoHgKqet": true
    },
-   "rev": "f01d8e8091"
+   "rev": "390cbdbab0"
   }
  },
  "_key": "!items!LtrP2V1Yxa569B0C"

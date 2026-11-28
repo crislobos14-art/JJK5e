@@ -2,7 +2,7 @@
  "_id": "QQmoAvulVTXHpj1o",
  "name": "Technique Understanding (8 PP)",
  "type": "feat",
- "img": "icons/svg/upgrade.svg",
+ "img": "modules/jjk5e/icons/items/technique-understanding-8-pp.svg",
  "system": {
   "description": {
    "value": "<p>You gain 1 Innate Technique Feat that you qualify for. You can take this attribute multiple times, but must choose a different feat each time.</p>",
@@ -35,7 +35,7 @@
      ]
     ]
    },
-   "rev": "c148ce52dd"
+   "rev": "3fe850ceca"
   }
  },
  "folder": "ar3Bgj4YHvYRp8DL",

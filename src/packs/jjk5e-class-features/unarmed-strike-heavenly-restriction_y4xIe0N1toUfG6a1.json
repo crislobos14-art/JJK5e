@@ -2,7 +2,7 @@
  "_id": "y4xIe0N1toUfG6a1",
  "name": "Unarmed Strike (Heavenly Restriction)",
  "type": "weapon",
- "img": "icons/svg/combat.svg",
+ "img": "modules/jjk5e/icons/items/unarmed-strike-heavenly-restriction.svg",
  "folder": "hWqAX9TqrOvuq1FE",
  "system": {
   "description": {
@@ -68,7 +68,7 @@
  },
  "flags": {
   "jjk5e": {
-   "rev": "64598fda0d"
+   "rev": "013fb00788"
   }
  },
  "_key": "!items!y4xIe0N1toUfG6a1"

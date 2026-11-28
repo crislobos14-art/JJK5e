@@ -2,7 +2,7 @@
  "_id": "TpKg4ls569h9NlGs",
  "name": "War Fan",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/war-fan.svg",
  "folder": "8L9REK3UZxFoXRJA",
  "system": {
   "description": {
@@ -39,7 +39,7 @@
   ],
   "proficient": null,
   "price": {
-   "value": 3.0,
+   "value": 3,
    "denomination": "gp"
   },
   "quantity": 1,
@@ -68,7 +68,7 @@
  "flags": {
   "jjk5e": {
    "priceUSD": "$300",
-   "rev": "86ae631747"
+   "rev": "08af6a9856"
   }
  },
  "effects": [

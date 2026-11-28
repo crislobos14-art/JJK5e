@@ -2,7 +2,7 @@
  "_id": "A9XgEe7MCjeuMkwD",
  "name": "Dragonfly Knuckles",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/dragonfly-knuckles.svg",
  "folder": "xnCPfIMW0yQ370pR",
  "system": {
   "description": {
@@ -121,7 +121,7 @@
   "jjk5e": {
    "grade": "2nd Grade",
    "fist": true,
-   "rev": "d152430a5f"
+   "rev": "e89373bf1d"
   }
  },
  "_key": "!items!A9XgEe7MCjeuMkwD"

@@ -108,7 +108,7 @@
    "_id": "k8VwM5NZFh62kwVA",
    "name": "Trampling Charge",
    "type": "feat",
-   "img": "icons/svg/aura.svg",
+   "img": "modules/jjk5e/icons/items/trampling-charge.svg",
    "system": {
     "description": {
      "value": "<p>If Max Elephant moves at least 20 ft. straight toward a target and then hits it with a gore attack on the same turn, the target takes an extra 7 (2d6) piercing damage. If the target is a creature, it must succeed on a DC 16 Strength saving throw or be knocked prone. If the target is prone, the Max Elephant can make a stomp attack against it as a bonus action.</p>",
@@ -140,7 +140,7 @@
    "_id": "c1c9LxjCkXSUrl0K",
    "name": "Gore",
    "type": "weapon",
-   "img": "icons/svg/sword.svg",
+   "img": "modules/jjk5e/icons/items/gore.svg",
    "system": {
     "description": {
      "value": "<p></p>",
@@ -264,7 +264,7 @@
    "_id": "nx9358jrR4MB4Tar",
    "name": "Stomp",
    "type": "weapon",
-   "img": "icons/svg/sword.svg",
+   "img": "modules/jjk5e/icons/items/stomp.svg",
    "system": {
     "description": {
      "value": "<p></p>",
@@ -388,7 +388,7 @@
    "_id": "mpjTkLb9e0Brq1WK",
    "name": "Flood (Recharge 6)",
    "type": "feat",
-   "img": "icons/svg/aura.svg",
+   "img": "modules/jjk5e/icons/items/flood-recharge-6.svg",
    "system": {
     "description": {
      "value": "<p>Max Elephant shoots water in a 60 feet cone. Each creature within range must make a DC 16 Strength saving throw, taking 10d6 cold damage and being knocked prone on a failed save or half as much on a successful save.</p>",

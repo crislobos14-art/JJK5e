@@ -2,7 +2,7 @@
  "_id": "SEQ2fuhrQKTojS1f",
  "name": "Bulletproof Suit",
  "type": "equipment",
- "img": "icons/svg/shield.svg",
+ "img": "modules/jjk5e/icons/items/bulletproof-suit.svg",
  "folder": "qVuyydidyeepCNvu",
  "system": {
   "description": {
@@ -24,7 +24,7 @@
    "dex": 2
   },
   "price": {
-   "value": 100.0,
+   "value": 100,
    "denomination": "gp"
   },
   "properties": [],
@@ -33,7 +33,7 @@
  "flags": {
   "jjk5e": {
    "priceUSD": "$10,000",
-   "rev": "3771552401"
+   "rev": "faa8e6d0d3"
   }
  },
  "_key": "!items!SEQ2fuhrQKTojS1f"

@@ -2,7 +2,7 @@
  "_id": "yMf8wQuycSMp1VuC",
  "name": "Nyoi Staff",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/nyoi-staff.svg",
  "folder": "TBXVbdCh1Kxu8AKz",
  "system": {
   "description": {
@@ -161,7 +161,7 @@
    "ceCosts": {
     "3BclauINRlQQM2t9": 1
    },
-   "rev": "e45b4dbdff"
+   "rev": "a9a9a8dd72"
   }
  },
  "_key": "!items!yMf8wQuycSMp1VuC"

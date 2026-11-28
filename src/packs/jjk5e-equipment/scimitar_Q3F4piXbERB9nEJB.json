@@ -2,7 +2,7 @@
  "_id": "Q3F4piXbERB9nEJB",
  "name": "Scimitar",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/scimitar.svg",
  "folder": "8L9REK3UZxFoXRJA",
  "system": {
   "description": {
@@ -40,7 +40,7 @@
   ],
   "proficient": null,
   "price": {
-   "value": 25.0,
+   "value": 25,
    "denomination": "gp"
   },
   "quantity": 1,
@@ -69,7 +69,7 @@
  "flags": {
   "jjk5e": {
    "priceUSD": "$2,500",
-   "rev": "74b0adfc5d"
+   "rev": "aabe90816d"
   }
  },
  "_key": "!items!Q3F4piXbERB9nEJB"

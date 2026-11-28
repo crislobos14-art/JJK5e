@@ -2,7 +2,7 @@
  "_id": "hpKpux84vzJqljJx",
  "name": "Flight Improvement (3 PP)",
  "type": "feat",
- "img": "icons/svg/upgrade.svg",
+ "img": "modules/jjk5e/icons/items/flight-improvement-3-pp.svg",
  "system": {
   "description": {
    "value": "<p>Your fly speed can equal your walking speed if it is higher. You must have the <em>Flight</em> attribute to take this attribute.</p>",
@@ -35,7 +35,7 @@
      ]
     ]
    },
-   "rev": "263286f967",
+   "rev": "d8e310ead7",
    "automation": "automated"
   }
  },

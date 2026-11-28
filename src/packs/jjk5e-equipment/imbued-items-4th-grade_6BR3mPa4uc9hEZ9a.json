@@ -2,7 +2,7 @@
  "_id": "6BR3mPa4uc9hEZ9a",
  "name": "Imbued Items (4th Grade)",
  "type": "loot",
- "img": "icons/svg/explosion.svg",
+ "img": "modules/jjk5e/icons/items/imbued-items-4th-grade.svg",
  "folder": "Z18gXvGvvqaYHnqC",
  "system": {
   "type": {
@@ -24,7 +24,7 @@
  "flags": {
   "jjk5e": {
    "grade": "4th Grade",
-   "rev": "9d2fc2a988"
+   "rev": "d89ee3d9cc"
   }
  },
  "_key": "!items!6BR3mPa4uc9hEZ9a"

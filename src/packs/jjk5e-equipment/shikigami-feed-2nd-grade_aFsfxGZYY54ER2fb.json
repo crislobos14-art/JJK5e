@@ -2,7 +2,7 @@
  "_id": "aFsfxGZYY54ER2fb",
  "name": "Shikigami Feed (2nd Grade)",
  "type": "consumable",
- "img": "icons/svg/explosion.svg",
+ "img": "modules/jjk5e/icons/items/shikigami-feed-2nd-grade.svg",
  "folder": "xnCPfIMW0yQ370pR",
  "system": {
   "description": {
@@ -76,7 +76,7 @@
  "flags": {
   "jjk5e": {
    "grade": "2nd Grade",
-   "rev": "ebe2ac2b1e"
+   "rev": "27adfd247e"
   }
  },
  "_key": "!items!aFsfxGZYY54ER2fb"

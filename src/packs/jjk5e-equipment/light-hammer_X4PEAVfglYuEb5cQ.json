@@ -2,7 +2,7 @@
  "_id": "X4PEAVfglYuEb5cQ",
  "name": "Light Hammer",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/light-hammer.svg",
  "folder": "8L9REK3UZxFoXRJA",
  "system": {
   "description": {
@@ -39,7 +39,7 @@
   ],
   "proficient": null,
   "price": {
-   "value": 2.0,
+   "value": 2,
    "denomination": "gp"
   },
   "quantity": 1,
@@ -68,7 +68,7 @@
  "flags": {
   "jjk5e": {
    "priceUSD": "$200",
-   "rev": "c6f2740ef4"
+   "rev": "9aaee78661"
   }
  },
  "_key": "!items!X4PEAVfglYuEb5cQ"

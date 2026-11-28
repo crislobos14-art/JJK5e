@@ -2,7 +2,7 @@
  "_id": "lAZetBFEmT8tnNUm",
  "name": "Returning Weapon",
  "type": "loot",
- "img": "icons/svg/explosion.svg",
+ "img": "modules/jjk5e/icons/items/returning-weapon.svg",
  "folder": "pB7mLAOAtbyDQKeT",
  "system": {
   "description": {
@@ -25,7 +25,7 @@
  "flags": {
   "jjk5e": {
    "grade": "3rd Grade",
-   "rev": "444727571e"
+   "rev": "cd78a307a5"
   }
  },
  "_key": "!items!lAZetBFEmT8tnNUm"

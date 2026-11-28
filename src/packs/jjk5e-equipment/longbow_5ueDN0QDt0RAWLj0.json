@@ -2,7 +2,7 @@
  "_id": "5ueDN0QDt0RAWLj0",
  "name": "Longbow",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/longbow.svg",
  "folder": "8L9REK3UZxFoXRJA",
  "system": {
   "description": {
@@ -40,7 +40,7 @@
   ],
   "proficient": null,
   "price": {
-   "value": 50.0,
+   "value": 50,
    "denomination": "gp"
   },
   "quantity": 1,
@@ -69,7 +69,7 @@
  "flags": {
   "jjk5e": {
    "priceUSD": "$5,000",
-   "rev": "56bdcd96ee"
+   "rev": "e9eb706cbf"
   }
  },
  "_key": "!items!5ueDN0QDt0RAWLj0"

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="revolver">
+<!-- JJK 5e glyph seal (tools/build-icons.mjs). Glyph: Font Awesome Free fa-gun (CC BY 4.0, https://fontawesome.com/license/free). -->
+<defs><radialGradient id="g" cx="50%" cy="38%" r="68%">
+<stop offset="0%" stop-color="hsl(24,25%,50%)"/><stop offset="68%" stop-color="hsl(24,25%,19%)"/>
+<stop offset="100%" stop-color="hsl(24,25%,9%)"/></radialGradient></defs>
+<rect width="128" height="128" rx="18" fill="#0d0a12"/>
+<circle cx="64" cy="64" r="57" fill="url(#g)"/>
+<circle cx="64" cy="64" r="57" fill="none" stroke="hsl(24,45%,88%)" stroke-width="3.5"/>
+<g stroke="hsl(24,45%,88%)" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"><line x1="38.5" y1="19.8" x2="36.5" y2="16.4"/><line x1="64.0" y1="13.0" x2="64.0" y2="9.0"/><line x1="89.5" y1="19.8" x2="91.5" y2="16.4"/><line x1="108.2" y1="38.5" x2="111.6" y2="36.5"/><line x1="115.0" y1="64.0" x2="119.0" y2="64.0"/><line x1="108.2" y1="89.5" x2="111.6" y2="91.5"/><line x1="89.5" y1="108.2" x2="91.5" y2="111.6"/><line x1="64.0" y1="115.0" x2="64.0" y2="119.0"/><line x1="38.5" y1="108.2" x2="36.5" y2="111.6"/><line x1="19.8" y1="89.5" x2="16.4" y2="91.5"/><line x1="13.0" y1="64.0" x2="9.0" y2="64.0"/><line x1="19.8" y1="38.5" x2="16.4" y2="36.5"/></g>
+<circle cx="64" cy="64" r="46" fill="none" stroke="hsl(24,45%,88%)" stroke-opacity=".3" stroke-width="1.5" stroke-dasharray="3 5"/>
+<g transform="translate(33.00 36.44) scale(0.10764)" fill="hsl(24,40%,95%)" stroke="#000" stroke-opacity=".45" stroke-width="46.5" paint-order="stroke">
+<path d="M528 56c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 8-448 0C14.3 64 0 78.3 0 96L0 208c0 17.7 14.3 32 32 32l10 0c20.8 0 36.1 19.6 31 39.8L33 440.2c-2.4 9.6-.2 19.7 5.8 27.5S54.1 480 64 480l96 0c14.7 0 27.5-10 31-24.2L217 352 321.4 352c23.7 0 44.8-14.9 52.7-37.2l26.7-74.8 31.1 0c8.5 0 16.6-3.4 22.6-9.4l22.6-22.6 66.7 0c17.7 0 32-14.3 32-32l0-80c0-17.7-14.3-32-32-32l-16 0 0-8zM321.4 304l-92.5 0 16-64 105 0-21 58.7c-1.1 3.2-4.2 5.3-7.5 5.3zM80 128l384 0c8.8 0 16 7.2 16 16s-7.2 16-16 16L80 160c-8.8 0-16-7.2-16-16s7.2-16 16-16z"/>
+</g></svg>

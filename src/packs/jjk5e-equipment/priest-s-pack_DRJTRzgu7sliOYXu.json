@@ -2,7 +2,7 @@
  "_id": "DRJTRzgu7sliOYXu",
  "name": "Priest’s Pack",
  "type": "loot",
- "img": "icons/svg/item-bag.svg",
+ "img": "modules/jjk5e/icons/items/priests-pack.svg",
  "folder": "5TkjeIlCFmk1GLJi",
  "system": {
   "description": {
@@ -16,7 +16,7 @@
    "rules": "2014"
   },
   "price": {
-   "value": 19.0,
+   "value": 19,
    "denomination": "gp"
   },
   "type": {
@@ -26,7 +26,7 @@
  },
  "flags": {
   "jjk5e": {
-   "rev": "d11a2735cf"
+   "rev": "168d093da8"
   }
  },
  "_key": "!items!DRJTRzgu7sliOYXu"

@@ -2,7 +2,7 @@
  "_id": "3KWSjEyabBpcrl8t",
  "name": "Walloping Ammunition",
  "type": "consumable",
- "img": "icons/svg/explosion.svg",
+ "img": "modules/jjk5e/icons/items/walloping-ammunition.svg",
  "folder": "RVpkkOiLvLva4ZNf",
  "system": {
   "description": {
@@ -72,7 +72,7 @@
  "flags": {
   "jjk5e": {
    "grade": "4th Grade",
-   "rev": "294ecdf156"
+   "rev": "ad705e05e6"
   }
  },
  "effects": [

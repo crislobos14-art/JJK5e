@@ -2,7 +2,7 @@
  "_id": "BVGpGVX0atPHG5P2",
  "name": "Darkvision (1 PP)",
  "type": "feat",
- "img": "icons/svg/upgrade.svg",
+ "img": "modules/jjk5e/icons/items/darkvision-1-pp.svg",
  "system": {
   "description": {
    "value": "<p>you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray. This increases to 120 feet at 8th level.</p>",
@@ -35,7 +35,7 @@
      ]
     ]
    },
-   "rev": "3bbc60a861",
+   "rev": "7ff9bc3594",
    "automation": "automated"
   }
  },

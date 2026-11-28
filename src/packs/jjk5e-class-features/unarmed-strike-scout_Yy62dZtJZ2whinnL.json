@@ -2,7 +2,7 @@
  "_id": "Yy62dZtJZ2whinnL",
  "name": "Unarmed Strike (Scout)",
  "type": "weapon",
- "img": "icons/svg/combat.svg",
+ "img": "modules/jjk5e/icons/items/unarmed-strike-scout.svg",
  "folder": "Jrayu2BI11U3R1zF",
  "system": {
   "description": {
@@ -68,7 +68,7 @@
  },
  "flags": {
   "jjk5e": {
-   "rev": "9e57b917f9"
+   "rev": "f066687b0f"
   }
  },
  "_key": "!items!Yy62dZtJZ2whinnL"

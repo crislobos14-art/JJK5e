@@ -1,7 +1,7 @@
 {
  "_id": "2tNM6wxDncdEYI70",
  "name": "Employment Pay (Ways to Make Money)",
- "img": "icons/svg/d20-grey.svg",
+ "img": "modules/jjk5e/icons/items/employment-pay-ways-to-make-money.svg",
  "description": "<p>Free-time jobs from the optional rule Ways to Make Money.</p>",
  "formula": "1d2",
  "replacement": true,

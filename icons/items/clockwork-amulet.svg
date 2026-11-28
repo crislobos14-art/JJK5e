@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="clockwork amulet">
+<!-- JJK 5e glyph seal (tools/build-icons.mjs). Glyph: Font Awesome Free fa-clock (CC BY 4.0, https://fontawesome.com/license/free). -->
+<defs><radialGradient id="g" cx="50%" cy="38%" r="68%">
+<stop offset="0%" stop-color="hsl(45,65%,48%)"/><stop offset="68%" stop-color="hsl(45,65%,19%)"/>
+<stop offset="100%" stop-color="hsl(45,65%,9%)"/></radialGradient></defs>
+<rect width="128" height="128" rx="18" fill="#0d0a12"/>
+<circle cx="64" cy="64" r="57" fill="url(#g)"/>
+<circle cx="64" cy="64" r="57" fill="none" stroke="hsl(45,45%,88%)" stroke-width="3.5"/>
+<g stroke="hsl(45,45%,88%)" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"><line x1="100.1" y1="100.1" x2="102.9" y2="102.9"/><line x1="77.2" y1="113.3" x2="78.2" y2="117.1"/><line x1="50.8" y1="113.3" x2="49.8" y2="117.1"/><line x1="27.9" y1="100.1" x2="25.1" y2="102.9"/><line x1="14.7" y1="77.2" x2="10.9" y2="78.2"/><line x1="14.7" y1="50.8" x2="10.9" y2="49.8"/><line x1="27.9" y1="27.9" x2="25.1" y2="25.1"/><line x1="50.8" y1="14.7" x2="49.8" y2="10.9"/><line x1="77.2" y1="14.7" x2="78.2" y2="10.9"/><line x1="100.1" y1="27.9" x2="102.9" y2="25.1"/><line x1="113.3" y1="50.8" x2="117.1" y2="49.8"/><line x1="113.3" y1="77.2" x2="117.1" y2="78.2"/></g>
+<circle cx="64" cy="64" r="46" fill="none" stroke="hsl(45,45%,88%)" stroke-opacity=".3" stroke-width="1.5" stroke-dasharray="3 5"/>
+<g transform="translate(33.00 33.00) scale(0.12109)" fill="hsl(45,40%,95%)" stroke="#000" stroke-opacity=".45" stroke-width="41.3" paint-order="stroke">
+<path d="M256 0a256 256 0 1 1 0 512 256 256 0 1 1 0-512zM232 120l0 136c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2 280 120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"/>
+</g></svg>

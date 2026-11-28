@@ -2,7 +2,7 @@
  "_id": "IUKt5olEg5Hc2aJf",
  "name": "Explorer's Pack",
  "type": "loot",
- "img": "icons/svg/item-bag.svg",
+ "img": "modules/jjk5e/icons/items/explorers-pack.svg",
  "folder": "5TkjeIlCFmk1GLJi",
  "system": {
   "description": {
@@ -16,7 +16,7 @@
    "rules": "2014"
   },
   "price": {
-   "value": 16.0,
+   "value": 16,
    "denomination": "gp"
   },
   "type": {
@@ -26,7 +26,7 @@
  },
  "flags": {
   "jjk5e": {
-   "rev": "a98b0e665b"
+   "rev": "08196d3d12"
   }
  },
  "_key": "!items!IUKt5olEg5Hc2aJf"

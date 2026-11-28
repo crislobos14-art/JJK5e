@@ -2,7 +2,7 @@
  "_id": "GsWiXTX0lo9UyFHG",
  "name": "Increased Speed (1 PP)",
  "type": "feat",
- "img": "icons/svg/upgrade.svg",
+ "img": "modules/jjk5e/icons/items/increased-speed-1-pp.svg",
  "system": {
   "description": {
    "value": "<p>Whether you are quadruped or have strong legs, your walking speed increases by 5 ft. This increases by 5 ft again at 10th level.</p>",
@@ -35,7 +35,7 @@
      ]
     ]
    },
-   "rev": "56709393d0",
+   "rev": "8f3ae86105",
    "automation": "automated"
   }
  },

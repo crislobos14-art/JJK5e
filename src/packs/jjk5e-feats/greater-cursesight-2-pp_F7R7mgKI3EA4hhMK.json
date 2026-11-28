@@ -2,7 +2,7 @@
  "_id": "F7R7mgKI3EA4hhMK",
  "name": "Greater Cursesight (2 PP)",
  "type": "feat",
- "img": "icons/svg/upgrade.svg",
+ "img": "modules/jjk5e/icons/items/greater-cursesight-2-pp.svg",
  "system": {
   "description": {
    "value": "<p>You gain a +2 bonus to ability checks to detect cursed energy. This bonus increases by +1 at 5th, 8th, 12th, and 16th level.</p>",
@@ -35,7 +35,7 @@
      ]
     ]
    },
-   "rev": "75e61ffb9a"
+   "rev": "042aea703c"
   }
  },
  "folder": "ar3Bgj4YHvYRp8DL",

@@ -114,7 +114,7 @@
    "_id": "K2g5Ld0V9gqXIbbi",
    "name": "Flyby",
    "type": "feat",
-   "img": "icons/svg/aura.svg",
+   "img": "modules/jjk5e/icons/items/flyby.svg",
    "system": {
     "description": {
      "value": "<p>Nue doesn't provoke opportunity attacks when it flies out of an enemy's reach.</p>",
@@ -146,7 +146,7 @@
    "_id": "UXtXbx29HLT7kGBj",
    "name": "Keen Hearing and Sight",
    "type": "feat",
-   "img": "icons/svg/aura.svg",
+   "img": "modules/jjk5e/icons/items/keen-hearing-and-sight.svg",
    "system": {
     "description": {
      "value": "<p>Nue has advantage on Wisdom (Perception) checks that rely on hearing or sight.</p>",
@@ -178,7 +178,7 @@
    "_id": "gwNXGCSPq06Wa2PX",
    "name": "Cursed Energy Boost",
    "type": "feat",
-   "img": "icons/svg/aura.svg",
+   "img": "modules/jjk5e/icons/items/cursed-energy-boost.svg",
    "system": {
     "description": {
      "value": "<p>On a hit with Nue, you can spend Cursed Energy up to your proficiency bonus to both deal an additional 1d8 lightning damage and increase the save DC by 1 per CE spent. A creature that fails its save against Nue's electrified wings with this boosted attack also has disadvantage on Strength and Dexterity saves for 1 minute and can repeat the save at the beginning of their turns. If you spend at least 3 cursed energy, the target is also stunned until the beginning of their turn on a failed save.</p>",
@@ -210,7 +210,7 @@
    "_id": "Kd8OudxlLrUxvsi2",
    "name": "Multiattack",
    "type": "feat",
-   "img": "icons/svg/aura.svg",
+   "img": "modules/jjk5e/icons/items/multiattack.svg",
    "system": {
     "description": {
      "value": "<p>Nue makes two electrified wing attacks.</p>",
@@ -274,7 +274,7 @@
    "_id": "zm76Lvkd7UzONmVo",
    "name": "Electrified Wings",
    "type": "weapon",
-   "img": "icons/svg/sword.svg",
+   "img": "modules/jjk5e/icons/items/electrified-wings.svg",
    "system": {
     "description": {
      "value": "<p>The target must make a DC 12 Constitution saving throw. On a failed save, the target cannot take reactions until the start of their turn. If in contact with water, all creatures within 15 ft are targeted by this attack roll.</p>",
@@ -442,7 +442,7 @@
    "_id": "vBA4CDeTNN7haA3n",
    "name": "Swoop",
    "type": "feat",
-   "img": "icons/svg/aura.svg",
+   "img": "modules/jjk5e/icons/items/swoop.svg",
    "system": {
     "description": {
      "value": "<p>Nue grapples a willing creature and moves up to half its fly speed.</p>",

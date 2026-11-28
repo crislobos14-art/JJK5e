@@ -2,7 +2,7 @@
  "_id": "0Rf7uBFLIBYFF4ua",
  "name": "Basic Cursed Tool Knife",
  "type": "loot",
- "img": "icons/svg/explosion.svg",
+ "img": "modules/jjk5e/icons/items/basic-cursed-tool-knife.svg",
  "folder": "wqSDHMRYLTxcUWTY",
  "system": {
   "type": {
@@ -24,7 +24,7 @@
  "flags": {
   "jjk5e": {
    "grade": "3rd Grade",
-   "rev": "c38ff418e3"
+   "rev": "a8482f0cdf"
   }
  },
  "_key": "!items!0Rf7uBFLIBYFF4ua"

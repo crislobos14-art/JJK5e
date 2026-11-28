@@ -2,7 +2,7 @@
  "_id": "QKIU7lmlagGmNKRv",
  "name": "Cursed Energy Understanding (6 PP)",
  "type": "feat",
- "img": "icons/svg/upgrade.svg",
+ "img": "modules/jjk5e/icons/items/cursed-energy-understanding-6-pp.svg",
  "system": {
   "description": {
    "value": "<p>You gain 1 Cursed Energy Feat of your choice that you qualify for. You can take this attribute multiple times, but must choose a different feat each time.</p>",
@@ -35,7 +35,7 @@
      ]
     ]
    },
-   "rev": "6672331ca9"
+   "rev": "4e8b9f5453"
   }
  },
  "folder": "ar3Bgj4YHvYRp8DL",

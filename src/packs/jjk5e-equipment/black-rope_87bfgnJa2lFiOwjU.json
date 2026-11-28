@@ -2,7 +2,7 @@
  "_id": "87bfgnJa2lFiOwjU",
  "name": "Black Rope",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/black-rope.svg",
  "folder": "5URJFab0BietcWnO",
  "system": {
   "description": {
@@ -67,7 +67,7 @@
  "flags": {
   "jjk5e": {
    "grade": "1st Grade",
-   "rev": "a7236b601f"
+   "rev": "6cbc6e6d74"
   }
  },
  "_key": "!items!87bfgnJa2lFiOwjU"

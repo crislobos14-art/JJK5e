@@ -2,7 +2,7 @@
  "_id": "ipotsu3ZfbfCQcm1",
  "name": "Shikigami Feed (1st Grade)",
  "type": "consumable",
- "img": "icons/svg/explosion.svg",
+ "img": "modules/jjk5e/icons/items/shikigami-feed-1st-grade.svg",
  "folder": "TBXVbdCh1Kxu8AKz",
  "system": {
   "description": {
@@ -78,7 +78,7 @@
  "flags": {
   "jjk5e": {
    "grade": "1st Grade",
-   "rev": "595a29e9ec"
+   "rev": "af2751cdf1"
   }
  },
  "_key": "!items!ipotsu3ZfbfCQcm1"

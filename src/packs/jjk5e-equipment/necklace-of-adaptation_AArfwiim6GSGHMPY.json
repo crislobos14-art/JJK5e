@@ -2,7 +2,7 @@
  "_id": "AArfwiim6GSGHMPY",
  "name": "Necklace of Adaptation",
  "type": "equipment",
- "img": "icons/svg/explosion.svg",
+ "img": "modules/jjk5e/icons/items/necklace-of-adaptation.svg",
  "folder": "pB7mLAOAtbyDQKeT",
  "system": {
   "description": {
@@ -55,7 +55,7 @@
  "flags": {
   "jjk5e": {
    "grade": "3rd Grade",
-   "rev": "1ffcf2f713",
+   "rev": "a6c259946b",
    "automationNotes": "Breathe in any environment; advantage on saves to avoid or end Poisoned: apply by hand.",
    "automation": "automated"
   }

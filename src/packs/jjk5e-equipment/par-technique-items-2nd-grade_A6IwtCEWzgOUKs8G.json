@@ -2,7 +2,7 @@
  "_id": "A6IwtCEWzgOUKs8G",
  "name": "Par Technique Items (2nd Grade)",
  "type": "loot",
- "img": "icons/svg/explosion.svg",
+ "img": "modules/jjk5e/icons/items/par-technique-items-2nd-grade.svg",
  "folder": "iccGNPZSINUipQjv",
  "system": {
   "type": {
@@ -24,7 +24,7 @@
  "flags": {
   "jjk5e": {
    "grade": "2nd Grade",
-   "rev": "8e3d7c3da9"
+   "rev": "2569b3a174"
   }
  },
  "_key": "!items!A6IwtCEWzgOUKs8G"

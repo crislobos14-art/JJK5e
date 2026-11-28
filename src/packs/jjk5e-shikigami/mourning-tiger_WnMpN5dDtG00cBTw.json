@@ -118,7 +118,7 @@
    "_id": "XukPExMKDhRdfJHp",
    "name": "Keen Hearing and Smell",
    "type": "feat",
-   "img": "icons/svg/aura.svg",
+   "img": "modules/jjk5e/icons/items/keen-hearing-and-smell.svg",
    "system": {
     "description": {
      "value": "<p>The Mourning Tiger has advantage on Wisdom (Perception) checks that rely on hearing or smell.</p>",
@@ -150,7 +150,7 @@
    "_id": "xudujCtvuwKbmsOr",
    "name": "Pounce",
    "type": "feat",
-   "img": "icons/svg/aura.svg",
+   "img": "modules/jjk5e/icons/items/pounce.svg",
    "system": {
     "description": {
      "value": "<p>If the Mourning Tiger moves at least 20 ft straight toward a target and then hits it with a claw attack on the same turn, the target must succeed on a DC 16 Strength saving throw or be knocked prone. If the target is prone, the Mourning Tiger can make a bite attack against it as a bonus action.</p>",
@@ -182,7 +182,7 @@
    "_id": "AhVbs9pDITKmxdPe",
    "name": "Incorporeal",
    "type": "feat",
-   "img": "icons/svg/aura.svg",
+   "img": "modules/jjk5e/icons/items/incorporeal.svg",
    "system": {
     "description": {
      "value": "<p>The Mourning Tiger can move through other creatures and objects as if they were difficult terrain. It takes 5 (2d4) force damage if it ends its turn inside an object.</p>",
@@ -214,7 +214,7 @@
    "_id": "CGbvQmWz9iFpSNKh",
    "name": "Multiattack",
    "type": "feat",
-   "img": "icons/svg/aura.svg",
+   "img": "modules/jjk5e/icons/items/multiattack.svg",
    "system": {
     "description": {
      "value": "<p>The Mourning Tiger makes one attack with its Claw and one attack with its Bite in any order.</p>",
@@ -278,7 +278,7 @@
    "_id": "uwsqk2944aXg27s8",
    "name": "Claw",
    "type": "weapon",
-   "img": "icons/svg/sword.svg",
+   "img": "modules/jjk5e/icons/items/claw.svg",
    "system": {
     "description": {
      "value": "<p></p>",
@@ -402,7 +402,7 @@
    "_id": "5Irc5PxslN8Ngypp",
    "name": "Bite",
    "type": "weapon",
-   "img": "icons/svg/sword.svg",
+   "img": "modules/jjk5e/icons/items/bite.svg",
    "system": {
     "description": {
      "value": "<p></p>",
@@ -526,7 +526,7 @@
    "_id": "32tJkUkBkrRSFEXi",
    "name": "Mourning Roar (Recharge 6)",
    "type": "feat",
-   "img": "icons/svg/aura.svg",
+   "img": "modules/jjk5e/icons/items/mourning-roar-recharge-6.svg",
    "system": {
     "description": {
      "value": "<p>All creatures within 30 feet must make a Cursed Energy saving throw. On a failed save, a creature takes 5d6 psychic damage and is paralyzed until the end of their next turn. On a success, the creature takes half as much damage and is not paralyzed.</p>",

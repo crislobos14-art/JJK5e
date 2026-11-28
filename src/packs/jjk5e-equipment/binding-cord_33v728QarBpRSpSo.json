@@ -2,7 +2,7 @@
  "_id": "33v728QarBpRSpSo",
  "name": "Binding Cord",
  "type": "loot",
- "img": "icons/svg/explosion.svg",
+ "img": "modules/jjk5e/icons/items/binding-cord.svg",
  "folder": "Z18gXvGvvqaYHnqC",
  "system": {
   "type": {
@@ -24,7 +24,7 @@
  "flags": {
   "jjk5e": {
    "grade": "4th Grade",
-   "rev": "a7a87ac9cc"
+   "rev": "d335fbd3b9"
   }
  },
  "_key": "!items!33v728QarBpRSpSo"

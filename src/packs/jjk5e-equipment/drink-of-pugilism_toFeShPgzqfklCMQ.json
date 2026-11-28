@@ -2,7 +2,7 @@
  "_id": "toFeShPgzqfklCMQ",
  "name": "Drink of Pugilism",
  "type": "consumable",
- "img": "icons/svg/explosion.svg",
+ "img": "modules/jjk5e/icons/items/drink-of-pugilism.svg",
  "folder": "pB7mLAOAtbyDQKeT",
  "system": {
   "description": {
@@ -96,7 +96,7 @@
  "flags": {
   "jjk5e": {
    "grade": "3rd Grade",
-   "rev": "eb830cff49"
+   "rev": "033cbd595c"
   }
  },
  "_key": "!items!toFeShPgzqfklCMQ"

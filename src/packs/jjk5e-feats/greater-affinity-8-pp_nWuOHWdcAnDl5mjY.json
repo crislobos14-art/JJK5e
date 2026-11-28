@@ -2,7 +2,7 @@
  "_id": "nWuOHWdcAnDl5mjY",
  "name": "Greater Affinity (8 PP)",
  "type": "feat",
- "img": "icons/svg/upgrade.svg",
+ "img": "modules/jjk5e/icons/items/greater-affinity-8-pp.svg",
  "system": {
   "description": {
    "value": "<p>Your Cursed Energy Affinity feature is replaced by the Increased Affinity feature. </p>",
@@ -35,7 +35,7 @@
      ]
     ]
    },
-   "rev": "e7beb4b2cc"
+   "rev": "3c1aa8a7e0"
   }
  },
  "folder": "ar3Bgj4YHvYRp8DL",

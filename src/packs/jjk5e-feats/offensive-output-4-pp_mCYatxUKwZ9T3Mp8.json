@@ -2,7 +2,7 @@
  "_id": "mCYatxUKwZ9T3Mp8",
  "name": "Offensive Output (4 PP)",
  "type": "feat",
- "img": "icons/svg/upgrade.svg",
+ "img": "modules/jjk5e/icons/items/offensive-output-4-pp.svg",
  "system": {
   "description": {
    "value": "<p>When you use Cursed Strike, you deal an additional 1 necrotic damage per CE spent. If a feature alters the damage type of your cursed energy, it also changes this damage. This increases to 2 damage per CE spent at 10th level.</p>",
@@ -35,7 +35,7 @@
      ]
     ]
    },
-   "rev": "6caeae18da"
+   "rev": "ac613f333e"
   }
  },
  "folder": "ar3Bgj4YHvYRp8DL",

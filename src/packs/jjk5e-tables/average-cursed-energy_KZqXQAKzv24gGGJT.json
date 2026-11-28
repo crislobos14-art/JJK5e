@@ -1,7 +1,7 @@
 {
  "_id": "KZqXQAKzv24gGGJT",
  "name": "Average Cursed Energy",
- "img": "icons/svg/d20-grey.svg",
+ "img": "modules/jjk5e/icons/items/average-cursed-energy.svg",
  "description": "<p>Reference CE pool for NPCs and cursed spirits by classification.</p>",
  "formula": "1d8",
  "replacement": true,

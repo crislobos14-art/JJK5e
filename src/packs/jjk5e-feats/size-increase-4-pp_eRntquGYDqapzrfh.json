@@ -2,7 +2,7 @@
  "_id": "eRntquGYDqapzrfh",
  "name": "Size Increase (4 PP)",
  "type": "feat",
- "img": "icons/svg/upgrade.svg",
+ "img": "modules/jjk5e/icons/items/size-increase-4-pp.svg",
  "system": {
   "description": {
    "value": "<p>Your size increases by one size category up to Gargantuan. This causes a +2 increase to your Strength score and -2 penalty to your Dexterity score. Additionally, your unarmed strikes and natural weapons increase by one dice tier up to d12 (d4&lt;d8&lt;d10&lt;d12). You can take this attribute multiple times with stacking benefits, but the cost increases by 2 every time.</p>",
@@ -35,7 +35,7 @@
      ]
     ]
    },
-   "rev": "a87a1d59ac",
+   "rev": "ce3a5b666a",
    "automation": "automated"
   }
  },

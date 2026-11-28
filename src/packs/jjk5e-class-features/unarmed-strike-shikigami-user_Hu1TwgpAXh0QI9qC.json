@@ -2,7 +2,7 @@
  "_id": "Hu1TwgpAXh0QI9qC",
  "name": "Unarmed Strike (Shikigami User)",
  "type": "weapon",
- "img": "icons/svg/combat.svg",
+ "img": "modules/jjk5e/icons/items/unarmed-strike-shikigami-user.svg",
  "folder": "69XiiJo14iwd80Zo",
  "system": {
   "description": {
@@ -68,7 +68,7 @@
  },
  "flags": {
   "jjk5e": {
-   "rev": "938b3a566a"
+   "rev": "3cf1066e22"
   }
  },
  "_key": "!items!Hu1TwgpAXh0QI9qC"

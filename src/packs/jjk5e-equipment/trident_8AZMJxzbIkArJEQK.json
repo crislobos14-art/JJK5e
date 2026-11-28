@@ -2,7 +2,7 @@
  "_id": "8AZMJxzbIkArJEQK",
  "name": "Trident",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/trident.svg",
  "folder": "8L9REK3UZxFoXRJA",
  "system": {
   "description": {
@@ -46,7 +46,7 @@
   ],
   "proficient": null,
   "price": {
-   "value": 50.0,
+   "value": 50,
    "denomination": "gp"
   },
   "quantity": 1,
@@ -75,7 +75,7 @@
  "flags": {
   "jjk5e": {
    "priceUSD": "$5,000",
-   "rev": "c9c68ac862"
+   "rev": "ac9899f358"
   }
  },
  "_key": "!items!8AZMJxzbIkArJEQK"

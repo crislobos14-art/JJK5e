@@ -2,7 +2,7 @@
  "_id": "dWe3pR6x54MuNzxc",
  "name": "Curse Detector",
  "type": "consumable",
- "img": "icons/svg/explosion.svg",
+ "img": "modules/jjk5e/icons/items/curse-detector.svg",
  "folder": "wqSDHMRYLTxcUWTY",
  "system": {
   "type": {
@@ -54,7 +54,7 @@
    "ceCosts": {
     "EID8BAq5uPzTJnNn": 1
    },
-   "rev": "03f8940c45"
+   "rev": "b3c729dd4f"
   }
  },
  "_key": "!items!dWe3pR6x54MuNzxc"

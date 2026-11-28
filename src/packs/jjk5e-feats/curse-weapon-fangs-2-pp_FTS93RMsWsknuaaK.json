@@ -2,7 +2,7 @@
  "_id": "FTS93RMsWsknuaaK",
  "name": "Curse Weapon: Fangs (2 PP)",
  "type": "feat",
- "img": "icons/svg/upgrade.svg",
+ "img": "modules/jjk5e/icons/items/curse-weapon-fangs-2-pp.svg",
  "system": {
   "description": {
    "value": "<p>Once per turn when you hit a creature with a fang attack, you can force the creature to take a Strength saving throw (DC 8 + your proficiency bonus + your Strength modifier). On a failed save, the target is dragged down and falls prone. You must have the <em>Cursed Weapon</em> attribute and choose fang to take this attribute.</p>",
@@ -81,7 +81,7 @@
      ]
     ]
    },
-   "rev": "7b1de384a4"
+   "rev": "63017d2555"
   }
  },
  "effects": [

@@ -2,7 +2,7 @@
  "_id": "XhODQpsCFXxaE7fe",
  "name": "Dense Coat",
  "type": "equipment",
- "img": "icons/svg/shield.svg",
+ "img": "modules/jjk5e/icons/items/dense-coat.svg",
  "folder": "qVuyydidyeepCNvu",
  "system": {
   "description": {
@@ -24,7 +24,7 @@
    "dex": null
   },
   "price": {
-   "value": 5.0,
+   "value": 5,
    "denomination": "gp"
   },
   "properties": [
@@ -35,7 +35,7 @@
  "flags": {
   "jjk5e": {
    "priceUSD": "$500",
-   "rev": "b966ffb3b8"
+   "rev": "033f9147e2"
   }
  },
  "_key": "!items!XhODQpsCFXxaE7fe"

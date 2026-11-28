@@ -2,7 +2,7 @@
  "_id": "SRofjDO3VkcUAnTf",
  "name": "Blood Spear",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/blood-spear.svg",
  "folder": "pB7mLAOAtbyDQKeT",
  "system": {
   "description": {
@@ -115,7 +115,7 @@
  "flags": {
   "jjk5e": {
    "grade": "3rd Grade",
-   "rev": "323fd0b4c1"
+   "rev": "984b4f223e"
   }
  },
  "_key": "!items!SRofjDO3VkcUAnTf"

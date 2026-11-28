@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.22.1 - Iconos originales
+
+- 252 documentos de los compendios usaban iconos genéricos de Foundry (`icons/svg/*`): armas, armaduras, equipo, herramientas malditas, objetos mágicos, dotes, rasgos y ataques de shikigami, macros y tablas. Ahora cada uno tiene un sello propio en `icons/items/`, con el color de su familia de identidad y un glifo de Font Awesome Free (CC BY 4.0).
+- `tools/build-icons.mjs --generic` genera esos sellos a partir de `tools/item-icons.json` (nombre → familia y glifo) y avisa de los documentos genéricos que no tienen entrada.
+- Los resultados de tabla y los efectos conservan su icono de Foundry.
+
 ## 2.22.0 - Advanced Summoning & Binding Vow Update
 
 ### Motor de invocaciones (Advanced Summoning Engine)

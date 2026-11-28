@@ -2,7 +2,7 @@
  "_id": "yYIdNAPlc2dcgiJe",
  "name": "Tonfa",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/tonfa.svg",
  "folder": "8L9REK3UZxFoXRJA",
  "system": {
   "description": {
@@ -39,7 +39,7 @@
   ],
   "proficient": null,
   "price": {
-   "value": 4.0,
+   "value": 4,
    "denomination": "gp"
   },
   "quantity": 1,
@@ -68,7 +68,7 @@
  "flags": {
   "jjk5e": {
    "priceUSD": "$400",
-   "rev": "8b338788f2"
+   "rev": "75055e3fba"
   }
  },
  "effects": [

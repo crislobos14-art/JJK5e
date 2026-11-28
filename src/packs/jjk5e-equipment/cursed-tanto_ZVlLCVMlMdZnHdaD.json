@@ -2,7 +2,7 @@
  "_id": "ZVlLCVMlMdZnHdaD",
  "name": "Cursed Tanto",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/cursed-tanto.svg",
  "folder": "xnCPfIMW0yQ370pR",
  "system": {
   "description": {
@@ -107,7 +107,7 @@
  "flags": {
   "jjk5e": {
    "grade": "2nd Grade",
-   "rev": "c81883a20e"
+   "rev": "48c20a8821"
   }
  },
  "_key": "!items!ZVlLCVMlMdZnHdaD"

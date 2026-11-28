@@ -2,7 +2,7 @@
  "_id": "GbF71fskR2S5qfgc",
  "name": "Sickle",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/sickle.svg",
  "folder": "8L9REK3UZxFoXRJA",
  "system": {
   "description": {
@@ -39,7 +39,7 @@
   ],
   "proficient": null,
   "price": {
-   "value": 1.0,
+   "value": 1,
    "denomination": "gp"
   },
   "quantity": 1,
@@ -68,7 +68,7 @@
  "flags": {
   "jjk5e": {
    "priceUSD": "$100",
-   "rev": "e559ac4d84"
+   "rev": "0cbdbd4316"
   }
  },
  "_key": "!items!GbF71fskR2S5qfgc"

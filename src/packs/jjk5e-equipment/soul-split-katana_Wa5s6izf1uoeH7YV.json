@@ -2,7 +2,7 @@
  "_id": "Wa5s6izf1uoeH7YV",
  "name": "Soul Split Katana",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/soul-split-katana.svg",
  "folder": "OqdCuXcZ0pFqRc3h",
  "system": {
   "description": {
@@ -74,7 +74,7 @@
  "flags": {
   "jjk5e": {
    "grade": "Special Grade",
-   "rev": "643f66ee8b",
+   "rev": "a54ae3472f",
    "soulDamage": true,
    "automationNotes": "Soul Damage: the HP this deals also lowers the target's maximum HP (Midi-QOL; otherwise use the JJK panel). RCT and regeneration cannot restore it. Ends on a long rest.",
    "automation": "automated"

@@ -2,7 +2,7 @@
  "_id": "cUttK9gOXegW6KNI",
  "name": "Halberd",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/halberd.svg",
  "folder": "8L9REK3UZxFoXRJA",
  "system": {
   "description": {
@@ -41,7 +41,7 @@
   ],
   "proficient": null,
   "price": {
-   "value": 20.0,
+   "value": 20,
    "denomination": "gp"
   },
   "quantity": 1,
@@ -70,7 +70,7 @@
  "flags": {
   "jjk5e": {
    "priceUSD": "$2,000",
-   "rev": "469ce3482f"
+   "rev": "4db2e02c5b"
   }
  },
  "_key": "!items!cUttK9gOXegW6KNI"

@@ -2,7 +2,7 @@
  "_id": "ULZAJDvGK9pxjbJ5",
  "name": "Improved Items (Special Grade)",
  "type": "loot",
- "img": "icons/svg/explosion.svg",
+ "img": "modules/jjk5e/icons/items/improved-items-special-grade.svg",
  "folder": "OqdCuXcZ0pFqRc3h",
  "system": {
   "type": {
@@ -24,7 +24,7 @@
  "flags": {
   "jjk5e": {
    "grade": "Special Grade",
-   "rev": "f83c155fec"
+   "rev": "8dde7f9e7a"
   }
  },
  "_key": "!items!ULZAJDvGK9pxjbJ5"
