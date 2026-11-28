@@ -2,7 +2,7 @@
  "_id": "MLUoaYoFtXjbRNNH",
  "name": "Gauntlets of Life Catching",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/gauntlets-of-life-catching.svg",
  "folder": "TBXVbdCh1Kxu8AKz",
  "system": {
   "description": {
@@ -114,7 +114,7 @@
     "3KnvRUUE1qcztVHV": 1
    },
    "fist": true,
-   "rev": "87fb875f3d"
+   "rev": "c1a22d01f7"
   }
  },
  "_key": "!items!MLUoaYoFtXjbRNNH"

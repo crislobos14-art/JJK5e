@@ -2,7 +2,7 @@
  "_id": "BdQuejqBCpyIr2dI",
  "name": "Chainmail",
  "type": "equipment",
- "img": "icons/svg/shield.svg",
+ "img": "modules/jjk5e/icons/items/chainmail.svg",
  "folder": "qVuyydidyeepCNvu",
  "system": {
   "description": {
@@ -24,7 +24,7 @@
    "dex": 0
   },
   "price": {
-   "value": 75.0,
+   "value": 75,
    "denomination": "gp"
   },
   "properties": [
@@ -35,7 +35,7 @@
  "flags": {
   "jjk5e": {
    "priceUSD": "$7,500",
-   "rev": "a707013705"
+   "rev": "c1373c879d"
   }
  },
  "_key": "!items!BdQuejqBCpyIr2dI"

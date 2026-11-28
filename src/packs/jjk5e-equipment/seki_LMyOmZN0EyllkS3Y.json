@@ -2,7 +2,7 @@
  "_id": "LMyOmZN0EyllkS3Y",
  "name": "Seki",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/seki.svg",
  "folder": "TBXVbdCh1Kxu8AKz",
  "system": {
   "description": {
@@ -75,7 +75,7 @@
  "flags": {
   "jjk5e": {
    "grade": "1st Grade",
-   "rev": "b25a072f0a"
+   "rev": "db754b40c5"
   }
  },
  "_key": "!items!LMyOmZN0EyllkS3Y"

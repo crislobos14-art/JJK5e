@@ -2,7 +2,7 @@
  "_id": "PzwVRLmmqaxwkzRj",
  "name": "Ability Improvement (1 PP)",
  "type": "feat",
- "img": "icons/svg/upgrade.svg",
+ "img": "modules/jjk5e/icons/items/ability-improvement-1-pp.svg",
  "system": {
   "description": {
    "value": "<p>You gain a +1 to an ability score of your choice. You can choose this attribute multiple times, but only once for every 3 levels you have (E.g. level 9 can only have 3 Ability Improvement attributes).</p>",
@@ -50,7 +50,7 @@
      ]
     ]
    },
-   "rev": "ec1ef6c860",
+   "rev": "a1d9919723",
    "automation": "automated"
   }
  },

@@ -2,7 +2,7 @@
  "_id": "6r0pd6hTLoOyJGUH",
  "name": "Quarterstaff",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/quarterstaff.svg",
  "folder": "8L9REK3UZxFoXRJA",
  "system": {
   "description": {
@@ -75,7 +75,7 @@
  "flags": {
   "jjk5e": {
    "priceUSD": "$20",
-   "rev": "64d02beb55"
+   "rev": "d55b992c75"
   }
  },
  "_key": "!items!6r0pd6hTLoOyJGUH"

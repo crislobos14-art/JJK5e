@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="greater affinity 8 pp">
+<!-- JJK 5e glyph seal (tools/build-icons.mjs). Glyph: Font Awesome Free fa-star-of-david (CC BY 4.0, https://fontawesome.com/license/free). -->
+<defs><radialGradient id="g" cx="50%" cy="38%" r="68%">
+<stop offset="0%" stop-color="hsl(95,55%,39%)"/><stop offset="68%" stop-color="hsl(95,55%,15%)"/>
+<stop offset="100%" stop-color="hsl(95,55%,7%)"/></radialGradient></defs>
+<rect width="128" height="128" rx="18" fill="#0d0a12"/>
+<circle cx="64" cy="64" r="57" fill="url(#g)"/>
+<circle cx="64" cy="64" r="57" fill="none" stroke="hsl(95,45%,88%)" stroke-width="3.5"/>
+<g stroke="hsl(95,45%,88%)" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"><line x1="108.2" y1="89.5" x2="111.6" y2="91.5"/><line x1="89.5" y1="108.2" x2="91.5" y2="111.6"/><line x1="64.0" y1="115.0" x2="64.0" y2="119.0"/><line x1="38.5" y1="108.2" x2="36.5" y2="111.6"/><line x1="19.8" y1="89.5" x2="16.4" y2="91.5"/><line x1="13.0" y1="64.0" x2="9.0" y2="64.0"/><line x1="19.8" y1="38.5" x2="16.4" y2="36.5"/><line x1="38.5" y1="19.8" x2="36.5" y2="16.4"/><line x1="64.0" y1="13.0" x2="64.0" y2="9.0"/><line x1="89.5" y1="19.8" x2="91.5" y2="16.4"/><line x1="108.2" y1="38.5" x2="111.6" y2="36.5"/><line x1="115.0" y1="64.0" x2="119.0" y2="64.0"/></g>
+<circle cx="64" cy="64" r="46" fill="none" stroke="hsl(95,45%,88%)" stroke-opacity=".3" stroke-width="1.5" stroke-dasharray="3 5"/>
+<g transform="translate(33.00 33.00) scale(0.12109)" fill="hsl(95,40%,95%)" stroke="#000" stroke-opacity=".45" stroke-width="41.3" paint-order="stroke">
+<path d="M415.9 311.9l-27.8 48.1 55.7 0-27.8-48.1zM383.6 256l-60.2-104-134.8 0-60.2 104 60.2 104 134.8 0 60.2-104zm64.7 0l58.4 100.9c3.5 6 5.3 12.8 5.3 19.7 0 21.7-17.6 39.4-39.4 39.4l-117 0-61.3 105.8C286.5 535.6 271.8 544 256 544s-30.5-8.4-38.4-22.2l-61.3-105.8-117 0c-21.7 0-39.4-17.6-39.4-39.4 0-6.9 1.8-13.7 5.3-19.7L63.7 256 5.3 155.1C1.8 149.1 0 142.3 0 135.4 0 113.6 17.6 96 39.4 96l117 0 61.3-105.8C225.5-23.6 240.2-32 256-32s30.5 8.4 38.4 22.2l61.3 105.8 117 0c21.7 0 39.4 17.6 39.4 39.4 0 6.9-1.8 13.7-5.3 19.7L448.3 256zM388.1 152l27.8 48.1 27.8-48.1-55.7 0zM291 96l-35-60.4-35 60.4 70 0zM123.9 152l-55.7 0 27.8 48.1 27.8-48.1zM96.1 311.9l-27.8 48.1 55.7 0-27.8-48.1zM221 416l35 60.4 35-60.4-70 0z"/>
+</g></svg>

@@ -2,7 +2,7 @@
  "_id": "IdDpcMNtXVKZGjTB",
  "name": "Repurposed Cursed Corpse (2nd Grade)",
  "type": "consumable",
- "img": "icons/svg/explosion.svg",
+ "img": "modules/jjk5e/icons/items/repurposed-cursed-corpse-2nd-grade.svg",
  "folder": "xnCPfIMW0yQ370pR",
  "system": {
   "description": {
@@ -58,7 +58,7 @@
  "flags": {
   "jjk5e": {
    "grade": "2nd Grade",
-   "rev": "4ea7296256"
+   "rev": "5e6c1a4e47"
   }
  },
  "_key": "!items!IdDpcMNtXVKZGjTB"

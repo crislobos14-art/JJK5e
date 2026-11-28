@@ -2,7 +2,7 @@
  "_id": "67IqA84lEM8lXupE",
  "name": "Unarmed Strike (Juggernaut)",
  "type": "weapon",
- "img": "icons/svg/combat.svg",
+ "img": "modules/jjk5e/icons/items/unarmed-strike-juggernaut.svg",
  "folder": "1ipDZJ01igqpFdub",
  "system": {
   "description": {
@@ -66,7 +66,7 @@
  },
  "flags": {
   "jjk5e": {
-   "rev": "2061194651"
+   "rev": "fc36c9a3c4"
   }
  },
  "_key": "!items!67IqA84lEM8lXupE"

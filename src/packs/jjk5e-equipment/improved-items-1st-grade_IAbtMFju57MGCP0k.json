@@ -2,7 +2,7 @@
  "_id": "IAbtMFju57MGCP0k",
  "name": "Improved Items (1st Grade)",
  "type": "loot",
- "img": "icons/svg/explosion.svg",
+ "img": "modules/jjk5e/icons/items/improved-items-1st-grade.svg",
  "folder": "5URJFab0BietcWnO",
  "system": {
   "type": {
@@ -24,7 +24,7 @@
  "flags": {
   "jjk5e": {
    "grade": "1st Grade",
-   "rev": "bc08ba1532"
+   "rev": "34a5e1bf8f"
   }
  },
  "_key": "!items!IAbtMFju57MGCP0k"

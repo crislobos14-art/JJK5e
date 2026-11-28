@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="keen hearing and sight">
+<!-- JJK 5e glyph seal (tools/build-icons.mjs). Glyph: Font Awesome Free fa-binoculars (CC BY 4.0, https://fontawesome.com/license/free). -->
+<defs><radialGradient id="g" cx="50%" cy="38%" r="68%">
+<stop offset="0%" stop-color="hsl(275,35%,39%)"/><stop offset="68%" stop-color="hsl(275,35%,15%)"/>
+<stop offset="100%" stop-color="hsl(275,35%,7%)"/></radialGradient></defs>
+<rect width="128" height="128" rx="18" fill="#0d0a12"/>
+<circle cx="64" cy="64" r="57" fill="url(#g)"/>
+<circle cx="64" cy="64" r="57" fill="none" stroke="hsl(275,45%,88%)" stroke-width="3.5"/>
+<g stroke="hsl(275,45%,88%)" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"><line x1="14.7" y1="50.8" x2="10.9" y2="49.8"/><line x1="27.9" y1="27.9" x2="25.1" y2="25.1"/><line x1="50.8" y1="14.7" x2="49.8" y2="10.9"/><line x1="77.2" y1="14.7" x2="78.2" y2="10.9"/><line x1="100.1" y1="27.9" x2="102.9" y2="25.1"/><line x1="113.3" y1="50.8" x2="117.1" y2="49.8"/><line x1="113.3" y1="77.2" x2="117.1" y2="78.2"/><line x1="100.1" y1="100.1" x2="102.9" y2="102.9"/><line x1="77.2" y1="113.3" x2="78.2" y2="117.1"/><line x1="50.8" y1="113.3" x2="49.8" y2="117.1"/><line x1="27.9" y1="100.1" x2="25.1" y2="102.9"/><line x1="14.7" y1="77.2" x2="10.9" y2="78.2"/></g>
+<circle cx="64" cy="64" r="46" fill="none" stroke="hsl(275,45%,88%)" stroke-opacity=".3" stroke-width="1.5" stroke-dasharray="3 5"/>
+<g transform="translate(33.00 33.00) scale(0.12109)" fill="hsl(275,40%,95%)" stroke="#000" stroke-opacity=".45" stroke-width="41.3" paint-order="stroke">
+<path d="M128 32l32 0c17.7 0 32 14.3 32 32l0 32-96 0 0-32c0-17.7 14.3-32 32-32zm64 96l0 320c0 17.7-14.3 32-32 32L32 480c-17.7 0-32-14.3-32-32l0-59.1c0-34.6 9.4-68.6 27.2-98.3 13.7-22.8 22.5-48.2 25.8-74.6L60.5 156c2-16 15.6-28 31.8-28l99.8 0zm227.8 0c16.1 0 29.8 12 31.8 28L459 216c3.3 26.4 12.1 51.8 25.8 74.6 17.8 29.7 27.2 63.7 27.2 98.3l0 59.1c0 17.7-14.3 32-32 32l-128 0c-17.7 0-32-14.3-32-32l0-320 99.8 0zM320 64c0-17.7 14.3-32 32-32l32 0c17.7 0 32 14.3 32 32l0 32-96 0 0-32zm-32 64l0 160-64 0 0-160 64 0z"/>
+</g></svg>

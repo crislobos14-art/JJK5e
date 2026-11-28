@@ -2,7 +2,7 @@
  "_id": "lxAhc2L4bHVYA1Xs",
  "name": "Inverted Spear of Heaven",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/inverted-spear-of-heaven.svg",
  "folder": "OqdCuXcZ0pFqRc3h",
  "system": {
   "description": {
@@ -68,7 +68,7 @@
  "flags": {
   "jjk5e": {
    "grade": "Special Grade",
-   "rev": "1e20d62eb6"
+   "rev": "7d81c228af"
   }
  },
  "_key": "!items!lxAhc2L4bHVYA1Xs"

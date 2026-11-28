@@ -2,7 +2,7 @@
  "_id": "PgVGn8OFHGDwAqQc",
  "name": "Katana",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/katana.svg",
  "folder": "8L9REK3UZxFoXRJA",
  "system": {
   "description": {
@@ -46,7 +46,7 @@
   ],
   "proficient": null,
   "price": {
-   "value": 20.0,
+   "value": 20,
    "denomination": "gp"
   },
   "quantity": 1,
@@ -75,7 +75,7 @@
  "flags": {
   "jjk5e": {
    "priceUSD": "$2,000",
-   "rev": "8cb4a9d631"
+   "rev": "dbe253dc55"
   }
  },
  "_key": "!items!PgVGn8OFHGDwAqQc"

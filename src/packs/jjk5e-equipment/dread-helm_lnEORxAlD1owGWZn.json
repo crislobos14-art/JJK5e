@@ -2,7 +2,7 @@
  "_id": "lnEORxAlD1owGWZn",
  "name": "Dread Helm",
  "type": "equipment",
- "img": "icons/svg/explosion.svg",
+ "img": "modules/jjk5e/icons/items/dread-helm.svg",
  "folder": "RVpkkOiLvLva4ZNf",
  "system": {
   "description": {
@@ -30,7 +30,7 @@
  "flags": {
   "jjk5e": {
    "grade": "4th Grade",
-   "rev": "da40706168",
+   "rev": "94535ec420",
    "automationNotes": "Descriptive: identity checks from your face are impossible.",
    "automation": "automated"
   }

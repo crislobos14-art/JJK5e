@@ -2,7 +2,7 @@
  "_id": "SSyTqeIWjRGZSGmn",
  "name": "Longsword",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/longsword.svg",
  "folder": "8L9REK3UZxFoXRJA",
  "system": {
   "description": {
@@ -46,7 +46,7 @@
   ],
   "proficient": null,
   "price": {
-   "value": 15.0,
+   "value": 15,
    "denomination": "gp"
   },
   "quantity": 1,
@@ -75,7 +75,7 @@
  "flags": {
   "jjk5e": {
    "priceUSD": "$1,500",
-   "rev": "24f3056991"
+   "rev": "395640b4ae"
   }
  },
  "_key": "!items!SSyTqeIWjRGZSGmn"

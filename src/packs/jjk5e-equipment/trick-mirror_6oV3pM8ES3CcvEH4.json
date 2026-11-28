@@ -2,7 +2,7 @@
  "_id": "6oV3pM8ES3CcvEH4",
  "name": "Trick Mirror",
  "type": "loot",
- "img": "icons/svg/explosion.svg",
+ "img": "modules/jjk5e/icons/items/trick-mirror.svg",
  "folder": "Z18gXvGvvqaYHnqC",
  "system": {
   "type": {
@@ -24,7 +24,7 @@
  "flags": {
   "jjk5e": {
    "grade": "4th Grade",
-   "rev": "2ea54bceef"
+   "rev": "80882e2131"
   }
  },
  "_key": "!items!6oV3pM8ES3CcvEH4"

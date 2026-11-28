@@ -118,7 +118,7 @@
    "_id": "ZEc0WuLb6uMOJn3G",
    "name": "Keen Hearing",
    "type": "feat",
-   "img": "icons/svg/aura.svg",
+   "img": "modules/jjk5e/icons/items/keen-hearing.svg",
    "system": {
     "description": {
      "value": "<p>Rabbit Escape has advantage on Wisdom (Perception) checks that rely on hearing.</p>",
@@ -150,7 +150,7 @@
    "_id": "nTaPXyPipoWwv3rj",
    "name": "Swarm",
    "type": "feat",
-   "img": "icons/svg/aura.svg",
+   "img": "modules/jjk5e/icons/items/swarm.svg",
    "system": {
     "description": {
      "value": "<p>The swarm can occupy another creature's space and vice versa, and the swarm can move through any opening large enough for a rabbit. The swarm can't regain hit points or gain temporary hit points.</p>",
@@ -182,7 +182,7 @@
    "_id": "45xmGKBJN9Hvt0qY",
    "name": "Cursed Energy Boost",
    "type": "feat",
-   "img": "icons/svg/aura.svg",
+   "img": "modules/jjk5e/icons/items/cursed-energy-boost.svg",
    "system": {
     "description": {
      "value": "<p>You can instead spend 1 Cursed Energy to summon a singular rabbit. This rabbit functions according to the Find Familiar spell for 8 hours. You can use this for free once per long rest.</p>",
@@ -214,7 +214,7 @@
    "_id": "h16xO38wbI2CFmVo",
    "name": "Kick",
    "type": "weapon",
-   "img": "icons/svg/sword.svg",
+   "img": "modules/jjk5e/icons/items/kick.svg",
    "system": {
     "description": {
      "value": "<p>Half as much damage if the swarm has half or less of its hit points.</p>",
@@ -338,7 +338,7 @@
    "_id": "GV2PhajyJWkLy9Us",
    "name": "Living Cover",
    "type": "feat",
-   "img": "icons/svg/aura.svg",
+   "img": "modules/jjk5e/icons/items/living-cover.svg",
    "system": {
     "description": {
      "value": "<p>While occupying a creature's space, Rabbit Escape can give the creature three quarters cover until the beginning of its turn, but any attack that misses because of the cover damages Rabbit Escape. This becomes half cover if the swarm has half or fewer of its hit points.</p>",

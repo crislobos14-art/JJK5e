@@ -2,7 +2,7 @@
  "_id": "CH9wCqAdIlL67l7Z",
  "name": "JJK: Choose Innate Technique",
  "type": "script",
- "img": "icons/svg/aura.svg",
+ "img": "modules/jjk5e/icons/items/jjk-choose-innate-technique.svg",
  "scope": "global",
  "command": "game.modules.get(\"jjk5e\").api.chooseTechnique();",
  "flags": {

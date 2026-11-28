@@ -2,7 +2,7 @@
  "_id": "e5ElXi1K7zKZWSGN",
  "name": "Lance",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/lance.svg",
  "folder": "8L9REK3UZxFoXRJA",
  "system": {
   "description": {
@@ -40,7 +40,7 @@
   ],
   "proficient": null,
   "price": {
-   "value": 10.0,
+   "value": 10,
    "denomination": "gp"
   },
   "quantity": 1,
@@ -70,7 +70,7 @@
   "jjk5e": {
    "priceUSD": "$1,000",
    "closeDisadvantage": true,
-   "rev": "cdc9572762"
+   "rev": "dcf285a495"
   }
  },
  "_key": "!items!e5ElXi1K7zKZWSGN"

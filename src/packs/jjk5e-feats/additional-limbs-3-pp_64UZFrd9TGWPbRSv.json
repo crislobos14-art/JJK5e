@@ -2,7 +2,7 @@
  "_id": "64UZFrd9TGWPbRSv",
  "name": "Additional Limbs (3 PP)",
  "type": "feat",
- "img": "icons/svg/upgrade.svg",
+ "img": "modules/jjk5e/icons/items/additional-limbs-3-pp.svg",
  "system": {
   "description": {
    "value": "<p><strong>Arm</strong>. You have an additional arm somewhere on your body. The additional arm can manipulate an object, open or close a door or container, pick up or set down a Tiny object, or wield a weapon that has the light property. This does not give you additional attacks, but does give you a +2 bonus on ability checks to grapple a creature.<br />\n<strong>Leg</strong>. You have an additional leg somewhere on your body. This leg gives you a +2 bonus on ability checks and saving throws against being knocked prone or moved against your will. Your walking speed increases by 5 ft per additional leg you have when you take the dash action.<br />\nYou can take this attribute multiple times, up to a total of four times.</p>",
@@ -61,7 +61,7 @@
      ]
     ]
    },
-   "rev": "8d3bd2395d"
+   "rev": "2e91352df3"
   }
  },
  "folder": "ar3Bgj4YHvYRp8DL",

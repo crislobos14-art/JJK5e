@@ -2,7 +2,7 @@
  "_id": "fHpQFMp5jK9RWgP4",
  "name": "Cursed Rope",
  "type": "consumable",
- "img": "icons/svg/explosion.svg",
+ "img": "modules/jjk5e/icons/items/cursed-rope.svg",
  "folder": "xnCPfIMW0yQ370pR",
  "system": {
   "description": {
@@ -52,7 +52,7 @@
  "flags": {
   "jjk5e": {
    "grade": "2nd Grade",
-   "rev": "7f6c1abcf7"
+   "rev": "4f35bea076"
   }
  },
  "_key": "!items!fHpQFMp5jK9RWgP4"

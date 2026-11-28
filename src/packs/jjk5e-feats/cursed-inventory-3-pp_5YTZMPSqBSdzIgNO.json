@@ -2,7 +2,7 @@
  "_id": "5YTZMPSqBSdzIgNO",
  "name": "Cursed Inventory (3 PP)",
  "type": "feat",
- "img": "icons/svg/upgrade.svg",
+ "img": "modules/jjk5e/icons/items/cursed-inventory-3-pp.svg",
  "system": {
   "description": {
    "value": "<p>You have learned to store items within your body, which cannot normally be removed against your will unless you die. You can store objects that could reasonably fit within your body. Additionally, your carry capacity increases by 3 x your level. The total weight you can store in your body equals half your carry capacity.</p>",
@@ -35,7 +35,7 @@
      ]
     ]
    },
-   "rev": "a915f3c63a"
+   "rev": "dd496c9aac"
   }
  },
  "folder": "ar3Bgj4YHvYRp8DL",

@@ -2,7 +2,7 @@
  "_id": "aWy3dBCN6jAKpnzU",
  "name": "Prayer Beads",
  "type": "equipment",
- "img": "icons/svg/explosion.svg",
+ "img": "modules/jjk5e/icons/items/prayer-beads.svg",
  "folder": "pB7mLAOAtbyDQKeT",
  "system": {
   "description": {
@@ -89,7 +89,7 @@
  "flags": {
   "jjk5e": {
    "grade": "3rd Grade",
-   "rev": "41d7911dd3",
+   "rev": "c0b7862c1d",
    "ceCosts": {
     "tJOonTvdpcL7UqeC": 1
    },

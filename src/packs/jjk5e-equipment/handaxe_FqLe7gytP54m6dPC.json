@@ -2,7 +2,7 @@
  "_id": "FqLe7gytP54m6dPC",
  "name": "Handaxe",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/handaxe.svg",
  "folder": "8L9REK3UZxFoXRJA",
  "system": {
   "description": {
@@ -39,7 +39,7 @@
   ],
   "proficient": null,
   "price": {
-   "value": 5.0,
+   "value": 5,
    "denomination": "gp"
   },
   "quantity": 1,
@@ -68,7 +68,7 @@
  "flags": {
   "jjk5e": {
    "priceUSD": "$500",
-   "rev": "8731fac5a3"
+   "rev": "292a26d1b2"
   }
  },
  "_key": "!items!FqLe7gytP54m6dPC"

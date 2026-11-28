@@ -1,0 +1,1010 @@
+{
+ "Battleaxe": [
+  "weapon",
+  "fa-trowel"
+ ],
+ "Club": [
+  "weapon",
+  "fa-baseball-bat-ball"
+ ],
+ "Dagger": [
+  "weapon",
+  "fa-pen-fancy"
+ ],
+ "Flail": [
+  "weapon",
+  "fa-link"
+ ],
+ "Glaive": [
+  "weapon",
+  "fa-khanda"
+ ],
+ "Great club": [
+  "weapon",
+  "fa-baseball"
+ ],
+ "Greataxe": [
+  "weapon",
+  "fa-trowel-bricks"
+ ],
+ "Greatsword": [
+  "weapon",
+  "fa-khanda"
+ ],
+ "Halberd": [
+  "weapon",
+  "fa-staff-snake"
+ ],
+ "Handaxe": [
+  "weapon",
+  "fa-hammer"
+ ],
+ "Javelin": [
+  "weapon",
+  "fa-location-arrow"
+ ],
+ "Lance": [
+  "weapon",
+  "fa-chess-knight"
+ ],
+ "Light Crossbow": [
+  "weapon",
+  "fa-crosshairs"
+ ],
+ "Light Hammer": [
+  "weapon",
+  "fa-hammer"
+ ],
+ "Longbow": [
+  "weapon",
+  "fa-bullseye"
+ ],
+ "Longsword": [
+  "weapon",
+  "fa-khanda"
+ ],
+ "Mace": [
+  "weapon",
+  "fa-gavel"
+ ],
+ "Maul": [
+  "weapon",
+  "fa-gavel"
+ ],
+ "Morningstar": [
+  "weapon",
+  "fa-sun"
+ ],
+ "Pike": [
+  "weapon",
+  "fa-arrow-up-long"
+ ],
+ "Quarterstaff": [
+  "weapon",
+  "fa-grip-lines-vertical"
+ ],
+ "Rapier": [
+  "weapon",
+  "fa-pen-nib"
+ ],
+ "Scimitar": [
+  "weapon",
+  "fa-moon"
+ ],
+ "Shortbow": [
+  "weapon",
+  "fa-bullseye"
+ ],
+ "Shortsword": [
+  "weapon",
+  "fa-scissors"
+ ],
+ "Sickle": [
+  "weapon",
+  "fa-wheat-awn"
+ ],
+ "Sling": [
+  "weapon",
+  "fa-circle-dot"
+ ],
+ "Spear": [
+  "weapon",
+  "fa-arrow-up-long"
+ ],
+ "Trident": [
+  "weapon",
+  "fa-utensils"
+ ],
+ "War Hammer": [
+  "weapon",
+  "fa-hammer"
+ ],
+ "War Pick": [
+  "weapon",
+  "fa-person-digging"
+ ],
+ "Whip": [
+  "weapon",
+  "fa-wave-square"
+ ],
+ "Katana": [
+  "weapon",
+  "fa-khanda"
+ ],
+ "Tonfa": [
+  "weapon",
+  "fa-grip-lines"
+ ],
+ "Knuckle Dusters": [
+  "fist",
+  "fa-hand-fist"
+ ],
+ "Gauntlets": [
+  "fist",
+  "fa-hand-back-fist"
+ ],
+ "Throwing Knives": [
+  "weapon",
+  "fa-burst"
+ ],
+ "Weighted Chain": [
+  "weapon",
+  "fa-link"
+ ],
+ "Three Segment Staff": [
+  "weapon",
+  "fa-grip-vertical"
+ ],
+ "War Fan": [
+  "weapon",
+  "fa-fan"
+ ],
+ "Paper Fan": [
+  "weapon",
+  "fa-fan"
+ ],
+ "Hand Sword": [
+  "weapon",
+  "fa-hand"
+ ],
+ "Handgun": [
+  "gun",
+  "fa-gun"
+ ],
+ "Revolver": [
+  "gun",
+  "fa-gun"
+ ],
+ "Rifle": [
+  "gun",
+  "fa-crosshairs"
+ ],
+ "Black Rope": [
+  "tool",
+  "fa-link"
+ ],
+ "Blood Spear": [
+  "tool",
+  "fa-droplet"
+ ],
+ "Chain of 1000 Miles": [
+  "tool",
+  "fa-link-slash"
+ ],
+ "Chains of Heaven": [
+  "tool",
+  "fa-link"
+ ],
+ "Claws of Calamity": [
+  "tool",
+  "fa-paw"
+ ],
+ "Cursed Soaked Kukri": [
+  "tool",
+  "fa-skull"
+ ],
+ "Cursed Tanto": [
+  "tool",
+  "fa-khanda"
+ ],
+ "Demon-Culling Greatsword": [
+  "tool",
+  "fa-dragon"
+ ],
+ "Dragon Bone": [
+  "tool",
+  "fa-bone"
+ ],
+ "Dragonfly Knuckles": [
+  "tool",
+  "fa-hand-fist"
+ ],
+ "Festering Life Sword": [
+  "tool",
+  "fa-biohazard"
+ ],
+ "Fuko": [
+  "tool",
+  "fa-wind"
+ ],
+ "Gauntlets of Life Catching": [
+  "tool",
+  "fa-hand-holding-heart"
+ ],
+ "Gauntlets of Oni Power": [
+  "tool",
+  "fa-hand-back-fist"
+ ],
+ "Hiten": [
+  "tool",
+  "fa-feather"
+ ],
+ "Inverted Spear of Heaven": [
+  "tool",
+  "fa-arrow-down-long"
+ ],
+ "Kamutoke": [
+  "tool",
+  "fa-bolt-lightning"
+ ],
+ "Nyoi Staff": [
+  "tool",
+  "fa-up-down"
+ ],
+ "Playful Cloud": [
+  "tool",
+  "fa-cloud"
+ ],
+ "Seki": [
+  "tool",
+  "fa-gem"
+ ],
+ "Slaughter Demon": [
+  "tool",
+  "fa-skull-crossbones"
+ ],
+ "Soul Split Katana": [
+  "tool",
+  "fa-ghost"
+ ],
+ "Sword of Extermination": [
+  "tool",
+  "fa-ban"
+ ],
+ "Tempest Ring": [
+  "tool",
+  "fa-hurricane"
+ ],
+ "Bulletproof Jacket": [
+  "equipment",
+  "fa-vest"
+ ],
+ "Bulletproof Suit": [
+  "equipment",
+  "fa-user-shield"
+ ],
+ "Chainmail": [
+  "equipment",
+  "fa-vest-patches"
+ ],
+ "Dense Coat": [
+  "equipment",
+  "fa-shirt"
+ ],
+ "Hide": [
+  "equipment",
+  "fa-paw"
+ ],
+ "Light Bulletproof Shirt": [
+  "equipment",
+  "fa-shirt"
+ ],
+ "Plate": [
+  "equipment",
+  "fa-shield-halved"
+ ],
+ "Ring Mail": [
+  "equipment",
+  "fa-ring"
+ ],
+ "Shield": [
+  "equipment",
+  "fa-shield"
+ ],
+ "Thick Shirt": [
+  "equipment",
+  "fa-shirt"
+ ],
+ "Cellphone": [
+  "loot",
+  "fa-mobile-screen"
+ ],
+ "Burglar's Pack": [
+  "container",
+  "fa-mask"
+ ],
+ "Diplomat’s Pack": [
+  "container",
+  "fa-handshake"
+ ],
+ "Dungeoneer's Pack": [
+  "container",
+  "fa-dungeon"
+ ],
+ "Entertainer's Pack": [
+  "container",
+  "fa-masks-theater"
+ ],
+ "Explorer's Pack": [
+  "container",
+  "fa-compass"
+ ],
+ "Priest’s Pack": [
+  "container",
+  "fa-place-of-worship"
+ ],
+ "Scholar's Pack": [
+  "container",
+  "fa-book-open"
+ ],
+ "Ability Improvement (1 PP)": [
+  "curse",
+  "fa-arrow-trend-up"
+ ],
+ "Additional Limbs (3 PP)": [
+  "curse",
+  "fa-hands"
+ ],
+ "Alternate Movement (3 PP)": [
+  "curse",
+  "fa-shoe-prints"
+ ],
+ "Alternate Movement Improvement (2 PP)": [
+  "curse",
+  "fa-person-running"
+ ],
+ "Ambush Predator (1 PP)": [
+  "curse",
+  "fa-user-ninja"
+ ],
+ "Curse Weapon (1 PP)": [
+  "curse",
+  "fa-khanda"
+ ],
+ "Curse Weapon: Claw (2 PP)": [
+  "curse",
+  "fa-paw"
+ ],
+ "Curse Weapon: Fangs (2 PP)": [
+  "curse",
+  "fa-tooth"
+ ],
+ "Curse Weapon: Gnarled Fist (2 PP)": [
+  "curse",
+  "fa-hand-fist"
+ ],
+ "Cursed Armor (4 PP)": [
+  "curse",
+  "fa-shield-virus"
+ ],
+ "Cursed Energy Understanding (6 PP)": [
+  "curse",
+  "fa-yin-yang"
+ ],
+ "Cursed Inventory (3 PP)": [
+  "curse",
+  "fa-box-open"
+ ],
+ "Cursed Weapon: Tail (2 PP)": [
+  "curse",
+  "fa-worm"
+ ],
+ "Darkvision (1 PP)": [
+  "curse",
+  "fa-eye-low-vision"
+ ],
+ "Flight (6 PP)": [
+  "curse",
+  "fa-feather-pointed"
+ ],
+ "Flight Improvement (3 PP)": [
+  "curse",
+  "fa-plane-up"
+ ],
+ "General Understanding (5 PP)": [
+  "curse",
+  "fa-book-skull"
+ ],
+ "Greater Affinity (8 PP)": [
+  "curse",
+  "fa-star-of-david"
+ ],
+ "Greater Cursesight (2 PP)": [
+  "curse",
+  "fa-eye"
+ ],
+ "Greater Flight Improvement (4 PP)": [
+  "curse",
+  "fa-jet-fighter-up"
+ ],
+ "Horrifying Form (1 PP)": [
+  "curse",
+  "fa-face-dizzy"
+ ],
+ "Increased Speed (1 PP)": [
+  "curse",
+  "fa-gauge-high"
+ ],
+ "Multiple Eyes (3 PP)": [
+  "curse",
+  "fa-eye-dropper"
+ ],
+ "Offensive Output (4 PP)": [
+  "curse",
+  "fa-burst"
+ ],
+ "Poisonous Weapon (2 PP)": [
+  "curse",
+  "fa-flask-vial"
+ ],
+ "Powerful Build (2 PP)": [
+  "curse",
+  "fa-dumbbell"
+ ],
+ "Shifting Form (4 PP)": [
+  "curse",
+  "fa-shuffle"
+ ],
+ "Size Increase (4 PP)": [
+  "curse",
+  "fa-up-right-and-down-left-from-center"
+ ],
+ "Technique Understanding (8 PP)": [
+  "curse",
+  "fa-brain"
+ ],
+ "Shikigami Improvement": [
+  "class-shikigami-user",
+  "fa-arrow-up-right-dots"
+ ],
+ "JJK: Choose Innate Technique": [
+  "spell",
+  "fa-hand-sparkles"
+ ],
+ "JJK: Create Character": [
+  "spell",
+  "fa-user-plus"
+ ],
+ "JJK: Fill JJK Hotbar": [
+  "spell",
+  "fa-table-cells-large"
+ ],
+ "JJK: Import / Update Compendiums": [
+  "spell",
+  "fa-file-import"
+ ],
+ "JJK: Set Cursed Energy Ability": [
+  "spell",
+  "fa-sliders"
+ ],
+ "Aggressive": [
+  "shadow",
+  "fa-angles-right"
+ ],
+ "Amphibious": [
+  "shadow",
+  "fa-water"
+ ],
+ "Bite": [
+  "fist",
+  "fa-tooth"
+ ],
+ "Bite (Serpent)": [
+  "fist",
+  "fa-worm"
+ ],
+ "Bite (Tiger)": [
+  "fist",
+  "fa-cat"
+ ],
+ "Claw": [
+  "fist",
+  "fa-paw"
+ ],
+ "Conditional Adaptation": [
+  "shadow",
+  "fa-dharmachakra"
+ ],
+ "Constrict": [
+  "fist",
+  "fa-circle-notch"
+ ],
+ "Cursed Energy Beam": [
+  "shadow",
+  "fa-bolt"
+ ],
+ "Cursed Energy Boost": [
+  "shadow",
+  "fa-angles-up"
+ ],
+ "Cursed Storage (6th level)": [
+  "shadow",
+  "fa-box-archive"
+ ],
+ "Eight Handled Wheel": [
+  "shadow",
+  "fa-dharmachakra"
+ ],
+ "Electrified Wings": [
+  "shadow",
+  "fa-bolt-lightning"
+ ],
+ "Flood (Recharge 6)": [
+  "shadow",
+  "fa-house-flood-water"
+ ],
+ "Flurry (Costs 1 Action)": [
+  "fist",
+  "fa-hands-clapping"
+ ],
+ "Flyby": [
+  "shadow",
+  "fa-feather"
+ ],
+ "Gore": [
+  "fist",
+  "fa-cow"
+ ],
+ "Horn": [
+  "fist",
+  "fa-horse-head"
+ ],
+ "Incorporeal": [
+  "shadow",
+  "fa-ghost"
+ ],
+ "Keen Hearing": [
+  "shadow",
+  "fa-ear-listen"
+ ],
+ "Keen Hearing and Sight": [
+  "shadow",
+  "fa-binoculars"
+ ],
+ "Keen Hearing and Smell": [
+  "shadow",
+  "fa-ear-deaf"
+ ],
+ "Keen Smell": [
+  "shadow",
+  "fa-wind"
+ ],
+ "Kick": [
+  "fist",
+  "fa-shoe-prints"
+ ],
+ "Legendary Resistance (5/day)": [
+  "shadow",
+  "fa-crown"
+ ],
+ "Lingering Hatred": [
+  "shadow",
+  "fa-face-angry"
+ ],
+ "Living Cover": [
+  "shadow",
+  "fa-shield-heart"
+ ],
+ "Magic Weapons": [
+  "shadow",
+  "fa-wand-sparkles"
+ ],
+ "Mourning Roar (Recharge 6)": [
+  "shadow",
+  "fa-volume-high"
+ ],
+ "Multiattack": [
+  "fist",
+  "fa-layer-group"
+ ],
+ "Obstacle Adaptation": [
+  "shadow",
+  "fa-road-barrier"
+ ],
+ "Pack Tactics": [
+  "shadow",
+  "fa-people-group"
+ ],
+ "Pounce": [
+  "fist",
+  "fa-person-falling-burst"
+ ],
+ "Quick Adaptation (Costs 3 Actions)": [
+  "shadow",
+  "fa-forward-fast"
+ ],
+ "RCT Pool": [
+  "shadow",
+  "fa-heart-pulse"
+ ],
+ "Regeneration": [
+  "shadow",
+  "fa-arrows-rotate"
+ ],
+ "Reverse Cursed Energy Aura": [
+  "shadow",
+  "fa-sun"
+ ],
+ "Reverse Cursed Technique": [
+  "shadow",
+  "fa-heart-circle-plus"
+ ],
+ "Reverse Cursed Technique (Self)": [
+  "shadow",
+  "fa-kit-medical"
+ ],
+ "Slam": [
+  "fist",
+  "fa-explosion"
+ ],
+ "Standing Leap": [
+  "shadow",
+  "fa-person-arrow-up-from-line"
+ ],
+ "Stomp": [
+  "fist",
+  "fa-shoe-prints"
+ ],
+ "Swarm": [
+  "shadow",
+  "fa-bugs"
+ ],
+ "Swoop": [
+  "shadow",
+  "fa-crow"
+ ],
+ "Tongue": [
+  "fist",
+  "fa-frog"
+ ],
+ "Totality": [
+  "shadow",
+  "fa-shield-dog"
+ ],
+ "Trampling Charge": [
+  "fist",
+  "fa-hippo"
+ ],
+ "Unrelenting Charge": [
+  "fist",
+  "fa-person-running"
+ ],
+ "Unarmed Strike (Heavenly Restriction)": [
+  "class-heavenly-restriction",
+  "fa-hand-fist"
+ ],
+ "Unarmed Strike (Juggernaut)": [
+  "class-juggernaut",
+  "fa-hand-fist"
+ ],
+ "Unarmed Strike (Scout)": [
+  "class-scout",
+  "fa-hand-fist"
+ ],
+ "Unarmed Strike (Shikigami User)": [
+  "class-shikigami-user",
+  "fa-hand-fist"
+ ],
+ "Unarmed Strike (Warrior)": [
+  "class-warrior",
+  "fa-hand-fist"
+ ],
+ "+1 Cursed Weapon": [
+  "weapon",
+  "fa-plus"
+ ],
+ "+2 Cursed Weapon": [
+  "weapon",
+  "fa-square-plus"
+ ],
+ "Basic Cursed Tool Knife": [
+  "tool",
+  "fa-scissors"
+ ],
+ "Basic Cursed Weapon": [
+  "weapon",
+  "fa-khanda"
+ ],
+ "Binding Cord": [
+  "tool",
+  "fa-link"
+ ],
+ "Clockwork Amulet": [
+  "loot",
+  "fa-clock"
+ ],
+ "Collar of the Chained": [
+  "loot",
+  "fa-circle-notch"
+ ],
+ "Comprehensive Monocle": [
+  "loot",
+  "fa-magnifying-glass"
+ ],
+ "Crystal Bracelet": [
+  "loot",
+  "fa-gem"
+ ],
+ "Curse Detector": [
+  "loot",
+  "fa-satellite-dish"
+ ],
+ "Cursed Battery": [
+  "loot",
+  "fa-battery-full"
+ ],
+ "Cursed Glasses": [
+  "loot",
+  "fa-glasses"
+ ],
+ "Cursed Lantern": [
+  "loot",
+  "fa-lightbulb"
+ ],
+ "Cursed Rope": [
+  "tool",
+  "fa-link"
+ ],
+ "Cursed Seal Stamp": [
+  "loot",
+  "fa-stamp"
+ ],
+ "Cursed Tattoo": [
+  "loot",
+  "fa-signature"
+ ],
+ "Cursed Zipper": [
+  "loot",
+  "fa-grip-lines"
+ ],
+ "Cursewrought Armor": [
+  "equipment",
+  "fa-shield-halved"
+ ],
+ "Cursewrought Weapon": [
+  "weapon",
+  "fa-khanda"
+ ],
+ "Dread Helm": [
+  "equipment",
+  "fa-helmet-un"
+ ],
+ "Drink of Pugilism": [
+  "consumable",
+  "fa-wine-bottle"
+ ],
+ "Eternal Peach": [
+  "consumable",
+  "fa-apple-whole"
+ ],
+ "Floating Armor": [
+  "equipment",
+  "fa-cloud"
+ ],
+ "Garb of the Deep Swimmer": [
+  "equipment",
+  "fa-person-swimming"
+ ],
+ "Gradient Armor of Curse Resistance": [
+  "equipment",
+  "fa-shield-virus"
+ ],
+ "Helm of Awareness": [
+  "equipment",
+  "fa-eye"
+ ],
+ "Imbued Items (4th Grade)": [
+  "loot",
+  "fa-star-half-stroke"
+ ],
+ "Improved Items (1st Grade)": [
+  "loot",
+  "fa-star"
+ ],
+ "Improved Items (2nd Grade)": [
+  "loot",
+  "fa-star"
+ ],
+ "Improved Items (3rd Grade)": [
+  "loot",
+  "fa-star"
+ ],
+ "Improved Items (Special Grade)": [
+  "loot",
+  "fa-crown"
+ ],
+ "King of Rock": [
+  "loot",
+  "fa-guitar"
+ ],
+ "Lesser Exorcism Talisman": [
+  "loot",
+  "fa-scroll"
+ ],
+ "Lesser Sealing Talisman": [
+  "loot",
+  "fa-stamp"
+ ],
+ "Lesser Warding Talisman": [
+  "loot",
+  "fa-shield"
+ ],
+ "Major Technique Items (1st Grade)": [
+  "loot",
+  "fa-wand-magic-sparkles"
+ ],
+ "Minor Technique Items (3rd Grade)": [
+  "loot",
+  "fa-wand-magic"
+ ],
+ "Necklace of Adaptation": [
+  "loot",
+  "fa-dharmachakra"
+ ],
+ "Par Technique Items (2nd Grade)": [
+  "loot",
+  "fa-wand-sparkles"
+ ],
+ "Perfume of Bewitching": [
+  "consumable",
+  "fa-spray-can-sparkles"
+ ],
+ "Poison Jar": [
+  "consumable",
+  "fa-jar"
+ ],
+ "Prayer Beads": [
+  "loot",
+  "fa-circle-nodes"
+ ],
+ "Purified Salt": [
+  "consumable",
+  "fa-mortar-pestle"
+ ],
+ "Repurposed Cursed Corpse (2nd Grade)": [
+  "tool",
+  "fa-skull"
+ ],
+ "Repurposed Cursed Corpse (3rd Grade)": [
+  "tool",
+  "fa-skull"
+ ],
+ "Returning Weapon": [
+  "weapon",
+  "fa-rotate-left"
+ ],
+ "Saddle of the Cavalier": [
+  "equipment",
+  "fa-horse"
+ ],
+ "Saturated Weapon": [
+  "weapon",
+  "fa-droplet"
+ ],
+ "Shikigami Feed (1st Grade)": [
+  "consumable",
+  "fa-bowl-food"
+ ],
+ "Shikigami Feed (2nd Grade)": [
+  "consumable",
+  "fa-bowl-food"
+ ],
+ "Shikigami Feed (3rd Grade)": [
+  "consumable",
+  "fa-bowl-food"
+ ],
+ "Shikigami Feed (4th Grade)": [
+  "consumable",
+  "fa-bowl-food"
+ ],
+ "Spiked Shield": [
+  "equipment",
+  "fa-shield"
+ ],
+ "Staff of the Python": [
+  "tool",
+  "fa-staff-snake"
+ ],
+ "Top Technique Items (Special Grade)": [
+  "loot",
+  "fa-crown"
+ ],
+ "Trick Mirror": [
+  "loot",
+  "fa-clone"
+ ],
+ "Wailing Bell": [
+  "loot",
+  "fa-bell"
+ ],
+ "Walloping Ammunition": [
+  "gun",
+  "fa-bomb"
+ ],
+ "Whistling Bullets": [
+  "gun",
+  "fa-volume-high"
+ ],
+ "Advanced Cursed Energy Manipulation": [
+  "ce",
+  "fa-atom"
+ ],
+ "Mastered Cursed Energy Manipulation": [
+  "ce",
+  "fa-yin-yang"
+ ],
+ "Skilled Cursed Energy Manipulation": [
+  "ce",
+  "fa-circle-nodes"
+ ],
+ "JJK: Customize Shikigami": [
+  "spell",
+  "fa-dog"
+ ],
+ "JJK: Generate Curse (GM)": [
+  "spell",
+  "fa-skull"
+ ],
+ "JJK: Negative Emotion Recovery": [
+  "spell",
+  "fa-face-angry"
+ ],
+ "JJK: Regain Cursed Energy": [
+  "spell",
+  "fa-battery-full"
+ ],
+ "JJK: Short Rest CE Recovery": [
+  "spell",
+  "fa-mug-hot"
+ ],
+ "JJK: Spend Cursed Energy": [
+  "spell",
+  "fa-fire"
+ ],
+ "Average Cursed Energy": [
+  "background",
+  "fa-chart-simple"
+ ],
+ "Consequences of Breaking a Binding Vow": [
+  "vow",
+  "fa-handshake-slash"
+ ],
+ "Cursed Tool Sale Value": [
+  "background",
+  "fa-coins"
+ ],
+ "Cursed Upon Death (madness check)": [
+  "background",
+  "fa-skull"
+ ],
+ "Domain Expansion: Deadly Sentencing": [
+  "domain",
+  "fa-gavel"
+ ],
+ "Employment Pay (Ways to Make Money)": [
+  "background",
+  "fa-money-bill"
+ ],
+ "Finding a Cursed Spirit": [
+  "background",
+  "fa-magnifying-glass"
+ ],
+ "Limb Damage Table": [
+  "background",
+  "fa-bone"
+ ],
+ "Mission Rewards (Taking Missions)": [
+  "background",
+  "fa-trophy"
+ ]
+}

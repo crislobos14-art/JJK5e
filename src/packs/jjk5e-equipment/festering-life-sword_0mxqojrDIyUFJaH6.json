@@ -2,7 +2,7 @@
  "_id": "0mxqojrDIyUFJaH6",
  "name": "Festering Life Sword",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/festering-life-sword.svg",
  "folder": "OqdCuXcZ0pFqRc3h",
  "system": {
   "description": {
@@ -130,7 +130,7 @@
  "flags": {
   "jjk5e": {
    "grade": "Special Grade",
-   "rev": "1d59376d56"
+   "rev": "3bed2d1b78"
   }
  },
  "_key": "!items!0mxqojrDIyUFJaH6"

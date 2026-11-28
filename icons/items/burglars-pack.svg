@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="burglars pack">
+<!-- JJK 5e glyph seal (tools/build-icons.mjs). Glyph: Font Awesome Free fa-mask (CC BY 4.0, https://fontawesome.com/license/free). -->
+<defs><radialGradient id="g" cx="50%" cy="38%" r="68%">
+<stop offset="0%" stop-color="hsl(30,35%,43%)"/><stop offset="68%" stop-color="hsl(30,35%,17%)"/>
+<stop offset="100%" stop-color="hsl(30,35%,8%)"/></radialGradient></defs>
+<rect width="128" height="128" rx="18" fill="#0d0a12"/>
+<circle cx="64" cy="64" r="57" fill="url(#g)"/>
+<circle cx="64" cy="64" r="57" fill="none" stroke="hsl(30,45%,88%)" stroke-width="3.5"/>
+<g stroke="hsl(30,45%,88%)" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"><line x1="113.3" y1="77.2" x2="117.1" y2="78.2"/><line x1="100.1" y1="100.1" x2="102.9" y2="102.9"/><line x1="77.2" y1="113.3" x2="78.2" y2="117.1"/><line x1="50.8" y1="113.3" x2="49.8" y2="117.1"/><line x1="27.9" y1="100.1" x2="25.1" y2="102.9"/><line x1="14.7" y1="77.2" x2="10.9" y2="78.2"/><line x1="14.7" y1="50.8" x2="10.9" y2="49.8"/><line x1="27.9" y1="27.9" x2="25.1" y2="25.1"/><line x1="50.8" y1="14.7" x2="49.8" y2="10.9"/><line x1="77.2" y1="14.7" x2="78.2" y2="10.9"/><line x1="100.1" y1="27.9" x2="102.9" y2="25.1"/><line x1="113.3" y1="50.8" x2="117.1" y2="49.8"/></g>
+<circle cx="64" cy="64" r="46" fill="none" stroke="hsl(30,45%,88%)" stroke-opacity=".3" stroke-width="1.5" stroke-dasharray="3 5"/>
+<g transform="translate(33.00 36.44) scale(0.10764)" fill="hsl(30,40%,95%)" stroke="#000" stroke-opacity=".45" stroke-width="46.5" paint-order="stroke">
+<path d="M288 64C64 64 0 160 0 272S80 448 176 448l8.4 0c24.2 0 46.4-13.7 57.2-35.4l23.2-46.3c4.4-8.8 13.3-14.3 23.2-14.3s18.8 5.5 23.2 14.3l23.2 46.3c10.8 21.7 33 35.4 57.2 35.4l8.4 0c96 0 176-64 176-176S512 64 288 64zM96 256a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zm320-64a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/>
+</g></svg>

@@ -2,7 +2,7 @@
  "_id": "UDxxuxWPamlQMi8e",
  "name": "Gauntlets of Oni Power",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/gauntlets-of-oni-power.svg",
  "folder": "pB7mLAOAtbyDQKeT",
  "system": {
   "description": {
@@ -67,7 +67,7 @@
   "jjk5e": {
    "grade": "3rd Grade",
    "fist": true,
-   "rev": "8416b31442"
+   "rev": "507863e1e2"
   }
  },
  "_key": "!items!UDxxuxWPamlQMi8e"

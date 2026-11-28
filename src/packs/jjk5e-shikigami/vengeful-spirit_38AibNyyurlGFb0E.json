@@ -141,7 +141,7 @@
    "_id": "p3SKQOo6Cd6rvau5",
    "name": "Magic Weapons",
    "type": "feat",
-   "img": "icons/svg/aura.svg",
+   "img": "modules/jjk5e/icons/items/magic-weapons.svg",
    "system": {
     "description": {
      "value": "<p>The Vengeful Spirit's attacks are magical.</p>",
@@ -173,7 +173,7 @@
    "_id": "FrCfZ4U2EqkNk6sE",
    "name": "Lingering Hatred",
    "type": "feat",
-   "img": "icons/svg/aura.svg",
+   "img": "modules/jjk5e/icons/items/lingering-hatred.svg",
    "system": {
     "description": {
      "value": "<p>When the Vengeful Spirit is reduced to 0 hit points, it can choose to stay at 1 hit point. Once used, this trait cannot be used against until after a long rest.</p>",
@@ -242,7 +242,7 @@
    "_id": "r6f4gUy0BQ8DEoFo",
    "name": "Cursed Storage (6th level)",
    "type": "feat",
-   "img": "icons/svg/aura.svg",
+   "img": "modules/jjk5e/icons/items/cursed-storage-6th-level.svg",
    "system": {
     "description": {
      "value": "<p>The Vengeful Spirit can act as a storage for items and weapons, functioning as a bag of holding.</p>",
@@ -274,7 +274,7 @@
    "_id": "6t5YdIngBaVbVJBM",
    "name": "Multiattack",
    "type": "feat",
-   "img": "icons/svg/aura.svg",
+   "img": "modules/jjk5e/icons/items/multiattack.svg",
    "system": {
     "description": {
      "value": "<p>The Vengeful Spirit makes three claw attacks.</p>",
@@ -338,7 +338,7 @@
    "_id": "QKnY8qS0BFn7Bwpk",
    "name": "Claw",
    "type": "weapon",
-   "img": "icons/svg/sword.svg",
+   "img": "modules/jjk5e/icons/items/claw.svg",
    "system": {
     "description": {
      "value": "<p><em>Melee Weapon Attack:</em> +10 + your PB to hit, reach 5 ft., one target. <em>Hit:</em> 23 (2d12 + 10) slashing damage.</p>",
@@ -464,7 +464,7 @@
    "_id": "42ldGDinouxZjugn",
    "name": "Cursed Energy Beam",
    "type": "feat",
-   "img": "icons/svg/aura.svg",
+   "img": "modules/jjk5e/icons/items/cursed-energy-beam.svg",
    "system": {
     "description": {
      "value": "<p>(Recharge 5–6) The Vengeful Spirit releases cursed energy in a 10 ft wide, 100 ft long line. Each creature in the area must make a Dexterity saving throw (DC 8 + your proficiency + your CE modifier). On a failed save, a creature takes Xd6 necrotic damage (X = your proficiency + your CE modifier) or half as much on a successful save. The Vengeful Spirit can spend up to 10 cursed energy to deal an additional d6 per cursed energy spent.</p>",

@@ -2,7 +2,7 @@
  "_id": "IV8C8dEZMrB7Zj60",
  "name": "Tempest Ring",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/tempest-ring.svg",
  "folder": "TBXVbdCh1Kxu8AKz",
  "system": {
   "description": {
@@ -127,7 +127,7 @@
    "ceCosts": {
     "sPdy9D0VysJf877b": 3
    },
-   "rev": "d4112e9fb2"
+   "rev": "12d095b657"
   }
  },
  "_key": "!items!IV8C8dEZMrB7Zj60"

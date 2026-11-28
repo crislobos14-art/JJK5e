@@ -2,7 +2,7 @@
  "_id": "SZFGRhQ6CbVYZrlo",
  "name": "Club",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/club.svg",
  "folder": "8L9REK3UZxFoXRJA",
  "system": {
   "description": {
@@ -68,7 +68,7 @@
  "flags": {
   "jjk5e": {
    "priceUSD": "$10",
-   "rev": "1a2414bf61"
+   "rev": "78697a0502"
   }
  },
  "_key": "!items!SZFGRhQ6CbVYZrlo"

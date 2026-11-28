@@ -2,7 +2,7 @@
  "_id": "Y5ia0WXWEzU6BsKk",
  "name": "Greater Flight Improvement (4 PP)",
  "type": "feat",
- "img": "icons/svg/upgrade.svg",
+ "img": "modules/jjk5e/icons/items/greater-flight-improvement-4-pp.svg",
  "system": {
   "description": {
    "value": "<p>You gain a 30 ft fly speed that allows you to hover, so being stunned or knocked prone will not cause you to fall. If you are wearing heavy armor or carrying more than your carry capacity this speed is halved. If you do not have the <em>Flight</em> attribute, the cost of this feature increases by 3 points.</p>",
@@ -67,7 +67,7 @@
      ]
     ]
    },
-   "rev": "8cdd26a738"
+   "rev": "21d34d1e95"
   }
  },
  "effects": [

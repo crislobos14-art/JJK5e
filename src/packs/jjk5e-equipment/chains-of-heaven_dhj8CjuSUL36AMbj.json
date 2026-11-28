@@ -2,7 +2,7 @@
  "_id": "dhj8CjuSUL36AMbj",
  "name": "Chains of Heaven",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/chains-of-heaven.svg",
  "folder": "QgDaE1oZxMUlsCnN",
  "system": {
   "description": {
@@ -117,7 +117,7 @@
  "flags": {
   "jjk5e": {
    "grade": "Special Grade",
-   "rev": "12973dd4dc"
+   "rev": "3c6d62af4c"
   }
  },
  "_key": "!items!dhj8CjuSUL36AMbj",

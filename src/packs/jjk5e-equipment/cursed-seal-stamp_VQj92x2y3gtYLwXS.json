@@ -2,7 +2,7 @@
  "_id": "VQj92x2y3gtYLwXS",
  "name": "Cursed Seal Stamp",
  "type": "consumable",
- "img": "icons/svg/explosion.svg",
+ "img": "modules/jjk5e/icons/items/cursed-seal-stamp.svg",
  "folder": "iccGNPZSINUipQjv",
  "system": {
   "type": {
@@ -54,7 +54,7 @@
    "ceCosts": {
     "dvDy9od7p5h6klPz": 1
    },
-   "rev": "8eb4a3a6e0"
+   "rev": "8b4fd4fc4c"
   }
  },
  "_key": "!items!VQj92x2y3gtYLwXS"

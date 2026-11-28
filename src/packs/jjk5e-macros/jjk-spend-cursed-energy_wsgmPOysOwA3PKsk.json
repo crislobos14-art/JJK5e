@@ -2,7 +2,7 @@
  "_id": "wsgmPOysOwA3PKsk",
  "name": "JJK: Spend Cursed Energy",
  "type": "script",
- "img": "icons/svg/lightning.svg",
+ "img": "modules/jjk5e/icons/items/jjk-spend-cursed-energy.svg",
  "scope": "global",
  "command": "game.modules.get(\"jjk5e\").api.promptCE(\"spend\");",
  "flags": {

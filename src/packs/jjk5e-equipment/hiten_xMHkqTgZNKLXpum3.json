@@ -2,7 +2,7 @@
  "_id": "xMHkqTgZNKLXpum3",
  "name": "Hiten",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/hiten.svg",
  "folder": "QgDaE1oZxMUlsCnN",
  "system": {
   "description": {
@@ -105,7 +105,7 @@
  "flags": {
   "jjk5e": {
    "grade": "Special Grade",
-   "rev": "1ffa54e195"
+   "rev": "2d6b895e3b"
   }
  },
  "effects": [

@@ -2,7 +2,7 @@
  "_id": "P6KSksuGs5elBgb3",
  "name": "JJK: Negative Emotion Recovery",
  "type": "script",
- "img": "icons/svg/terror.svg",
+ "img": "modules/jjk5e/icons/items/jjk-negative-emotion-recovery.svg",
  "scope": "global",
  "command": "game.modules.get(\"jjk5e\").api.negativeEmotion();",
  "flags": {

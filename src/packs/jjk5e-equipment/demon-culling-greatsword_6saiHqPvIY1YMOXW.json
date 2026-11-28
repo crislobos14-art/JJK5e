@@ -2,7 +2,7 @@
  "_id": "6saiHqPvIY1YMOXW",
  "name": "Demon-Culling Greatsword",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/demon-culling-greatsword.svg",
  "folder": "TBXVbdCh1Kxu8AKz",
  "system": {
   "description": {
@@ -113,7 +113,7 @@
  "flags": {
   "jjk5e": {
    "grade": "1st Grade",
-   "rev": "c2a0f36ea3"
+   "rev": "8698bff4bb"
   }
  },
  "_key": "!items!6saiHqPvIY1YMOXW"

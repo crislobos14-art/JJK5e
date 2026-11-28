@@ -2,7 +2,7 @@
  "_id": "hZmhUBdYju509gZI",
  "name": "Rapier",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/rapier.svg",
  "folder": "8L9REK3UZxFoXRJA",
  "system": {
   "description": {
@@ -39,7 +39,7 @@
   ],
   "proficient": null,
   "price": {
-   "value": 25.0,
+   "value": 25,
    "denomination": "gp"
   },
   "quantity": 1,
@@ -68,7 +68,7 @@
  "flags": {
   "jjk5e": {
    "priceUSD": "$2,500",
-   "rev": "a9b4107326"
+   "rev": "b24f1f750d"
   }
  },
  "_key": "!items!hZmhUBdYju509gZI"

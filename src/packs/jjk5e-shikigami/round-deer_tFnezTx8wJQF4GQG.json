@@ -104,7 +104,7 @@
    "_id": "7W6FqnPCBS5Qcy5p",
    "name": "RCT Pool",
    "type": "feat",
-   "img": "icons/svg/aura.svg",
+   "img": "modules/jjk5e/icons/items/rct-pool.svg",
    "system": {
     "description": {
      "value": "<p>Round Deer has a pool of Reverse Cursed Energy equal to its Charisma score times your proficiency bonus and regains 10 healing towards its pool at the start of its turn.</p>",
@@ -136,7 +136,7 @@
    "_id": "piR6W8QoUaWQ4sJ0",
    "name": "Reverse Cursed Energy Aura",
    "type": "feat",
-   "img": "icons/svg/aura.svg",
+   "img": "modules/jjk5e/icons/items/reverse-cursed-energy-aura.svg",
    "system": {
     "description": {
      "value": "<p>Round Deer has a 10 feet aura of reverse cursed energy around it at all times. Round Deer can spend 10 healing from its RCT Pool for each creature within its aura at the start of its turn, healing them for that amount. This aura also functions as an antimagic aura for all creatures other than its summoner. A creature that attempts to use cursed energy must make a DC 15 Cursed Energy check or be unable to use cursed energy while they are within the aura. Round Deer can suppress this aura while concentrating.</p>",
@@ -168,7 +168,7 @@
    "_id": "FtYoYcGufPVgo6SQ",
    "name": "Cursed Energy Boost",
    "type": "feat",
-   "img": "icons/svg/aura.svg",
+   "img": "modules/jjk5e/icons/items/cursed-energy-boost.svg",
    "system": {
     "description": {
      "value": "<p>As a bonus action or reaction, you can spend Cursed Energy up to your CE modifier to use Reverse Cursed Technique using Round Deer as a point of origin and drawing from its RCT Pool to heal a creature within its aura. You can use 10 points of healing for every 1 cursed energy spent.</p>",
@@ -200,7 +200,7 @@
    "_id": "Fi34vyT5L65Dnud1",
    "name": "Horn",
    "type": "weapon",
-   "img": "icons/svg/sword.svg",
+   "img": "modules/jjk5e/icons/items/horn.svg",
    "system": {
     "description": {
      "value": "<p>Deals an extra 27 (5d10) radiant damage if the target is a cursed spirit.</p>",
@@ -342,7 +342,7 @@
    "_id": "Pabk71lSZhVSrRHf",
    "name": "Reverse Cursed Technique",
    "type": "feat",
-   "img": "icons/svg/aura.svg",
+   "img": "modules/jjk5e/icons/items/reverse-cursed-technique.svg",
    "system": {
     "description": {
      "value": "<p>Round Deer can spend healing from its RCT Pool on a creature within its aura. Round Deer can spend up to 10 times your proficiency bonus at once in increments of 10.</p>",
@@ -425,7 +425,7 @@
    "_id": "NKdO7XVJ27m92Z1f",
    "name": "Reverse Cursed Technique (Self)",
    "type": "feat",
-   "img": "icons/svg/aura.svg",
+   "img": "modules/jjk5e/icons/items/reverse-cursed-technique-self.svg",
    "system": {
     "description": {
      "value": "<p>Round Deer can use Reverse Cursed Technique on itself as a reaction to damage.</p>",

@@ -110,7 +110,7 @@
    "_id": "odJstXF40f9CLVZr",
    "name": "Bite",
    "type": "weapon",
-   "img": "icons/svg/sword.svg",
+   "img": "modules/jjk5e/icons/items/bite.svg",
    "system": {
     "description": {
      "value": "<p></p>",
@@ -234,7 +234,7 @@
    "_id": "DHs1inFEJAokoP0j",
    "name": "Constrict",
    "type": "weapon",
-   "img": "icons/svg/sword.svg",
+   "img": "modules/jjk5e/icons/items/constrict.svg",
    "system": {
     "description": {
      "value": "<p>If the target is the same size or smaller than Great Serpent it is grappled (escape DC 16). While grappled the target is restrained and Great Serpent can't constrict another target.</p>",

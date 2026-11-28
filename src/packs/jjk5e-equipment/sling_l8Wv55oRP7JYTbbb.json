@@ -2,7 +2,7 @@
  "_id": "l8Wv55oRP7JYTbbb",
  "name": "Sling",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/sling.svg",
  "folder": "8L9REK3UZxFoXRJA",
  "system": {
   "description": {
@@ -38,7 +38,7 @@
   ],
   "proficient": null,
   "price": {
-   "value": 5.0,
+   "value": 5,
    "denomination": "gp"
   },
   "quantity": 1,
@@ -67,7 +67,7 @@
  "flags": {
   "jjk5e": {
    "priceUSD": "$500",
-   "rev": "4984fd46c5"
+   "rev": "291af11162"
   }
  },
  "_key": "!items!l8Wv55oRP7JYTbbb"

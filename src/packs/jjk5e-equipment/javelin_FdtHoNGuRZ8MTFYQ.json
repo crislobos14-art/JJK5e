@@ -2,7 +2,7 @@
  "_id": "FdtHoNGuRZ8MTFYQ",
  "name": "Javelin",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/javelin.svg",
  "folder": "8L9REK3UZxFoXRJA",
  "system": {
   "description": {
@@ -67,7 +67,7 @@
  "flags": {
   "jjk5e": {
    "priceUSD": "$50",
-   "rev": "3e8fb5eb01"
+   "rev": "2393118a7e"
   }
  },
  "_key": "!items!FdtHoNGuRZ8MTFYQ"

@@ -2,7 +2,7 @@
  "_id": "XWtXSFfnn4gOxjep",
  "name": "Hide",
  "type": "equipment",
- "img": "icons/svg/shield.svg",
+ "img": "modules/jjk5e/icons/items/hide.svg",
  "folder": "qVuyydidyeepCNvu",
  "system": {
   "description": {
@@ -24,7 +24,7 @@
    "dex": 2
   },
   "price": {
-   "value": 10.0,
+   "value": 10,
    "denomination": "gp"
   },
   "properties": [],
@@ -33,7 +33,7 @@
  "flags": {
   "jjk5e": {
    "priceUSD": "$1,000",
-   "rev": "2f3478b921"
+   "rev": "8be4d4b028"
   }
  },
  "_key": "!items!XWtXSFfnn4gOxjep"

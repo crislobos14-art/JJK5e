@@ -2,7 +2,7 @@
  "_id": "b7laf759ZdpvexAa",
  "name": "Dungeoneer's Pack",
  "type": "loot",
- "img": "icons/svg/item-bag.svg",
+ "img": "modules/jjk5e/icons/items/dungeoneers-pack.svg",
  "folder": "5TkjeIlCFmk1GLJi",
  "system": {
   "description": {
@@ -16,7 +16,7 @@
    "rules": "2014"
   },
   "price": {
-   "value": 12.0,
+   "value": 12,
    "denomination": "gp"
   },
   "type": {
@@ -26,7 +26,7 @@
  },
  "flags": {
   "jjk5e": {
-   "rev": "0c2a0616d9"
+   "rev": "511b28269c"
   }
  },
  "_key": "!items!b7laf759ZdpvexAa"

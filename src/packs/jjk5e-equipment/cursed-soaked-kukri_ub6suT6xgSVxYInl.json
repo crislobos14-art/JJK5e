@@ -2,7 +2,7 @@
  "_id": "ub6suT6xgSVxYInl",
  "name": "Cursed Soaked Kukri",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/cursed-soaked-kukri.svg",
  "folder": "pB7mLAOAtbyDQKeT",
  "system": {
   "description": {
@@ -133,7 +133,7 @@
    "ceCosts": {
     "As7lZm9lkMf5mjZy": 2
    },
-   "rev": "7d54d2ba86"
+   "rev": "d7e1e21d1d"
   }
  },
  "effects": [

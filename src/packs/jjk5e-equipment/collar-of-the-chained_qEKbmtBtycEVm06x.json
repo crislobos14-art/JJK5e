@@ -2,7 +2,7 @@
  "_id": "qEKbmtBtycEVm06x",
  "name": "Collar of the Chained",
  "type": "equipment",
- "img": "icons/svg/explosion.svg",
+ "img": "modules/jjk5e/icons/items/collar-of-the-chained.svg",
  "folder": "pB7mLAOAtbyDQKeT",
  "system": {
   "description": {
@@ -30,7 +30,7 @@
  "flags": {
   "jjk5e": {
    "grade": "3rd Grade",
-   "rev": "39f6373f40",
+   "rev": "385d6fe277",
    "automation": "automated"
   }
  },

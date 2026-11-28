@@ -2,7 +2,7 @@
  "_id": "ux1SOShTMwAQLKH3",
  "name": "Comprehensive Monocle",
  "type": "equipment",
- "img": "icons/svg/explosion.svg",
+ "img": "modules/jjk5e/icons/items/comprehensive-monocle.svg",
  "folder": "pB7mLAOAtbyDQKeT",
  "system": {
   "description": {
@@ -60,7 +60,7 @@
    "ceCosts": {
     "YuU4aAmlojFTZtgl": 2
    },
-   "rev": "6134cb543d"
+   "rev": "dbf64b669d"
   }
  },
  "_key": "!items!ux1SOShTMwAQLKH3",

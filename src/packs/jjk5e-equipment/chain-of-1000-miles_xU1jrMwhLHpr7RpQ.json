@@ -2,7 +2,7 @@
  "_id": "xU1jrMwhLHpr7RpQ",
  "name": "Chain of 1000 Miles",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/chain-of-1000-miles.svg",
  "folder": "OqdCuXcZ0pFqRc3h",
  "system": {
   "description": {
@@ -98,7 +98,7 @@
  "flags": {
   "jjk5e": {
    "grade": "Special Grade",
-   "rev": "1df109b4cb"
+   "rev": "850da51a92"
   }
  },
  "_key": "!items!xU1jrMwhLHpr7RpQ",

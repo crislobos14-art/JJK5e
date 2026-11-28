@@ -2,7 +2,7 @@
  "_id": "l4nTRMUL6vloOH5O",
  "name": "Skilled Cursed Energy Manipulation",
  "type": "feat",
- "img": "icons/svg/lightning.svg",
+ "img": "modules/jjk5e/icons/items/skilled-cursed-energy-manipulation.svg",
  "system": {
   "description": {
    "value": "<p>You have focused on the basics, allowing you to directly manipulate cursed energy to great effect.</p>\n<ul>\n<li>\n<p><strong>Cursed Strike</strong>. On a hit, you can spend up to your proficiency bonus, dealing an additional d8 necrotic damage per CE spent.  </p>\n</li>\n<li>\n<p><strong>Cursed Reinforcement</strong>. As an action you can spend up to your Cursed Energy modifier to reinforce your body. You gain 5 temporary hit points per CE.</p>\n</li>\n</ul>",
@@ -146,7 +146,7 @@
     "ceScore": 16,
     "breakthroughs": 1
    },
-   "rev": "a6b8c55638",
+   "rev": "28913ea8a6",
    "rawCE": true,
    "automation": "automated"
   }

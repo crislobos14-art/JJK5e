@@ -2,7 +2,7 @@
  "_id": "DW8vII21jDNBzDMV",
  "name": "JJK: Customize Shikigami",
  "type": "script",
- "img": "icons/svg/pawprint.svg",
+ "img": "modules/jjk5e/icons/items/jjk-customize-shikigami.svg",
  "scope": "global",
  "command": "game.modules.get(\"jjk5e\").api.customizeShikigami();",
  "flags": {

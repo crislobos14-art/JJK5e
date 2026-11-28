@@ -2,7 +2,7 @@
  "_id": "QBqqhGD6eFaWwlrH",
  "name": "Great club",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/great-club.svg",
  "folder": "8L9REK3UZxFoXRJA",
  "system": {
   "description": {
@@ -68,7 +68,7 @@
  "flags": {
   "jjk5e": {
    "priceUSD": "$20",
-   "rev": "d77e2d3f77"
+   "rev": "270e6a0eb1"
   }
  },
  "_key": "!items!QBqqhGD6eFaWwlrH"

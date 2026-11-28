@@ -2,7 +2,7 @@
  "_id": "ulFfcBafjjtRU7tD",
  "name": "Light Bulletproof Shirt",
  "type": "equipment",
- "img": "icons/svg/shield.svg",
+ "img": "modules/jjk5e/icons/items/light-bulletproof-shirt.svg",
  "folder": "qVuyydidyeepCNvu",
  "system": {
   "description": {
@@ -24,7 +24,7 @@
    "dex": null
   },
   "price": {
-   "value": 50.0,
+   "value": 50,
    "denomination": "gp"
   },
   "properties": [],
@@ -33,7 +33,7 @@
  "flags": {
   "jjk5e": {
    "priceUSD": "$5,000",
-   "rev": "0a8d1e05c7"
+   "rev": "1f528d4f3b"
   }
  },
  "_key": "!items!ulFfcBafjjtRU7tD"

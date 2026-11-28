@@ -2,7 +2,7 @@
  "_id": "fZYNlmAMAVPCosrz",
  "name": "+2 Cursed Weapon",
  "type": "loot",
- "img": "icons/svg/explosion.svg",
+ "img": "modules/jjk5e/icons/items/2-cursed-weapon.svg",
  "folder": "xnCPfIMW0yQ370pR",
  "system": {
   "description": {
@@ -25,7 +25,7 @@
  "flags": {
   "jjk5e": {
    "grade": "2nd Grade",
-   "rev": "1e98ef7b38"
+   "rev": "02b4ce5016"
   }
  },
  "_key": "!items!fZYNlmAMAVPCosrz"

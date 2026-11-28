@@ -2,7 +2,7 @@
  "_id": "CsLECmgDtwgTEDwc",
  "name": "Crystal Bracelet",
  "type": "equipment",
- "img": "icons/svg/explosion.svg",
+ "img": "modules/jjk5e/icons/items/crystal-bracelet.svg",
  "folder": "RVpkkOiLvLva4ZNf",
  "system": {
   "description": {
@@ -70,7 +70,7 @@
  "flags": {
   "jjk5e": {
    "grade": "4th Grade",
-   "rev": "e971582887",
+   "rev": "22338bdddb",
    "automation": "automated"
   }
  },

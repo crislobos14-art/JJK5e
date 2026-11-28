@@ -2,7 +2,7 @@
  "_id": "AuxWpqHkU3eB1Ri4",
  "name": "Knuckle Dusters",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/knuckle-dusters.svg",
  "folder": "8L9REK3UZxFoXRJA",
  "system": {
   "description": {
@@ -67,7 +67,7 @@
   "jjk5e": {
    "priceUSD": "$10",
    "fist": true,
-   "rev": "8ad4646210"
+   "rev": "68ec4d00dc"
   }
  },
  "_key": "!items!AuxWpqHkU3eB1Ri4"

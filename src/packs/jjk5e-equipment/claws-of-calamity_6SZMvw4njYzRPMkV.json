@@ -2,7 +2,7 @@
  "_id": "6SZMvw4njYzRPMkV",
  "name": "Claws of Calamity",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/claws-of-calamity.svg",
  "folder": "5URJFab0BietcWnO",
  "system": {
   "description": {
@@ -69,7 +69,7 @@
   "jjk5e": {
    "grade": "1st Grade",
    "fist": true,
-   "rev": "4d100e401d"
+   "rev": "96e1510778"
   }
  },
  "_key": "!items!6SZMvw4njYzRPMkV"

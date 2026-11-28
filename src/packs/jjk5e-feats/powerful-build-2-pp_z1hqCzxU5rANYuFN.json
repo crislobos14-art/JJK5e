@@ -2,7 +2,7 @@
  "_id": "z1hqCzxU5rANYuFN",
  "name": "Powerful Build (2 PP)",
  "type": "feat",
- "img": "icons/svg/upgrade.svg",
+ "img": "modules/jjk5e/icons/items/powerful-build-2-pp.svg",
  "system": {
   "description": {
    "value": "<p>You count as 1 size larger when determining your carrying capacity and the weight you can push, drag, or lift.</p>",
@@ -35,7 +35,7 @@
      ]
     ]
    },
-   "rev": "c0f3fbf5ae",
+   "rev": "3bda81d220",
    "automation": "automated"
   }
  },

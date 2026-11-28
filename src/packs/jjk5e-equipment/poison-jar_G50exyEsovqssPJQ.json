@@ -2,7 +2,7 @@
  "_id": "G50exyEsovqssPJQ",
  "name": "Poison Jar",
  "type": "consumable",
- "img": "icons/svg/explosion.svg",
+ "img": "modules/jjk5e/icons/items/poison-jar.svg",
  "folder": "xnCPfIMW0yQ370pR",
  "system": {
   "description": {
@@ -77,7 +77,7 @@
  "flags": {
   "jjk5e": {
    "grade": "2nd Grade",
-   "rev": "1b54eefdef"
+   "rev": "7b1adbbc4a"
   }
  },
  "_key": "!items!G50exyEsovqssPJQ",

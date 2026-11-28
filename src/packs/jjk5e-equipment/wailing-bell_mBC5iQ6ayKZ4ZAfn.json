@@ -2,7 +2,7 @@
  "_id": "mBC5iQ6ayKZ4ZAfn",
  "name": "Wailing Bell",
  "type": "consumable",
- "img": "icons/svg/explosion.svg",
+ "img": "modules/jjk5e/icons/items/wailing-bell.svg",
  "folder": "pB7mLAOAtbyDQKeT",
  "system": {
   "description": {
@@ -90,7 +90,7 @@
    "ceCosts": {
     "iV2B9pMCBYbSnoLY": 1
    },
-   "rev": "769ffda395"
+   "rev": "40deebbed1"
   }
  },
  "_key": "!items!mBC5iQ6ayKZ4ZAfn"

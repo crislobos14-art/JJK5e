@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="rifle">
+<!-- JJK 5e glyph seal (tools/build-icons.mjs). Glyph: Font Awesome Free fa-crosshairs (CC BY 4.0, https://fontawesome.com/license/free). -->
+<defs><radialGradient id="g" cx="50%" cy="38%" r="68%">
+<stop offset="0%" stop-color="hsl(24,25%,50%)"/><stop offset="68%" stop-color="hsl(24,25%,19%)"/>
+<stop offset="100%" stop-color="hsl(24,25%,9%)"/></radialGradient></defs>
+<rect width="128" height="128" rx="18" fill="#0d0a12"/>
+<circle cx="64" cy="64" r="57" fill="url(#g)"/>
+<circle cx="64" cy="64" r="57" fill="none" stroke="hsl(24,45%,88%)" stroke-width="3.5"/>
+<g stroke="hsl(24,45%,88%)" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"><line x1="14.7" y1="77.2" x2="10.9" y2="78.2"/><line x1="14.7" y1="50.8" x2="10.9" y2="49.8"/><line x1="27.9" y1="27.9" x2="25.1" y2="25.1"/><line x1="50.8" y1="14.7" x2="49.8" y2="10.9"/><line x1="77.2" y1="14.7" x2="78.2" y2="10.9"/><line x1="100.1" y1="27.9" x2="102.9" y2="25.1"/><line x1="113.3" y1="50.8" x2="117.1" y2="49.8"/><line x1="113.3" y1="77.2" x2="117.1" y2="78.2"/><line x1="100.1" y1="100.1" x2="102.9" y2="102.9"/><line x1="77.2" y1="113.3" x2="78.2" y2="117.1"/><line x1="50.8" y1="113.3" x2="49.8" y2="117.1"/><line x1="27.9" y1="100.1" x2="25.1" y2="102.9"/></g>
+<circle cx="64" cy="64" r="46" fill="none" stroke="hsl(24,45%,88%)" stroke-opacity=".3" stroke-width="1.5" stroke-dasharray="3 5"/>
+<g transform="translate(33.00 36.44) scale(0.10764)" fill="hsl(24,40%,95%)" stroke="#000" stroke-opacity=".45" stroke-width="46.5" paint-order="stroke">
+<path d="M288-16c17.7 0 32 14.3 32 32l0 18.3c98.1 14 175.7 91.6 189.7 189.7l18.3 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-18.3 0c-14 98.1-91.6 175.7-189.7 189.7l0 18.3c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-18.3C157.9 463.7 80.3 386.1 66.3 288L48 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l18.3 0C80.3 125.9 157.9 48.3 256 34.3L256 16c0-17.7 14.3-32 32-32zM131.2 288c12.7 62.7 62.1 112.1 124.8 124.8l0-12.8c0-17.7 14.3-32 32-32s32 14.3 32 32l0 12.8c62.7-12.7 112.1-62.1 124.8-124.8L432 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l12.8 0C432.1 161.3 382.7 111.9 320 99.2l0 12.8c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-12.8C193.3 111.9 143.9 161.3 131.2 224l12.8 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-12.8 0zM288 208a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/>
+</g></svg>

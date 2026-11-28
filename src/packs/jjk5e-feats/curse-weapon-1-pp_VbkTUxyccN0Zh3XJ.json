@@ -2,7 +2,7 @@
  "_id": "VbkTUxyccN0Zh3XJ",
  "name": "Curse Weapon (1 PP)",
  "type": "feat",
- "img": "icons/svg/upgrade.svg",
+ "img": "modules/jjk5e/icons/items/curse-weapon-1-pp.svg",
  "system": {
   "description": {
    "value": "<p>You gain a natural weapon that takes the form of claws (slashing), fangs (piercing), or gnarled fists or a tail (bludgeoning). Your Curse Weapon deals 1d6 + your Strength modifier of its damage type. This increases to 1d8 at 5th level and 1d10 at 10th level. If you have a different unarmed strike dice, you can choose to use that for these natural weapons. You can choose this attribute multiple times, but must choose a different option each time.</p>",
@@ -108,7 +108,7 @@
      ]
     ]
    },
-   "rev": "cd889ba593",
+   "rev": "ed9b467f3c",
    "dmgScale": {
     "Dnk8EPIjpGsaSLZA": [
      [

@@ -2,7 +2,7 @@
  "_id": "uzDEAzRP9Jc8wUXy",
  "name": "Throwing Knives",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/throwing-knives.svg",
  "folder": "8L9REK3UZxFoXRJA",
  "system": {
   "description": {
@@ -68,7 +68,7 @@
  "flags": {
   "jjk5e": {
    "priceUSD": "$5",
-   "rev": "4f7b9968cf"
+   "rev": "f582a52d67"
   }
  },
  "_key": "!items!uzDEAzRP9Jc8wUXy"

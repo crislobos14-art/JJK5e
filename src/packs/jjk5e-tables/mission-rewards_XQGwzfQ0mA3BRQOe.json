@@ -1,7 +1,7 @@
 {
  "_id": "XQGwzfQ0mA3BRQOe",
  "name": "Mission Rewards (Taking Missions)",
- "img": "icons/svg/d20-grey.svg",
+ "img": "modules/jjk5e/icons/items/mission-rewards-taking-missions.svg",
  "description": "<p>Roll the reward of a mission of the given grade with the inline roll, or roll the table for a random mission grade.</p>",
  "formula": "1d5",
  "replacement": true,

@@ -2,7 +2,7 @@
  "_id": "PsFZtGmyYOT3wYkf",
  "name": "Shortsword",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/shortsword.svg",
  "folder": "8L9REK3UZxFoXRJA",
  "system": {
   "description": {
@@ -40,7 +40,7 @@
   ],
   "proficient": null,
   "price": {
-   "value": 10.0,
+   "value": 10,
    "denomination": "gp"
   },
   "quantity": 1,
@@ -69,7 +69,7 @@
  "flags": {
   "jjk5e": {
    "priceUSD": "$1,000",
-   "rev": "853a7c14eb"
+   "rev": "9832bf4aa0"
   }
  },
  "_key": "!items!PsFZtGmyYOT3wYkf"

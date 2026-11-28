@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="club">
+<!-- JJK 5e glyph seal (tools/build-icons.mjs). Glyph: Font Awesome Free fa-baseball-bat-ball (CC BY 4.0, https://fontawesome.com/license/free). -->
+<defs><radialGradient id="g" cx="50%" cy="38%" r="68%">
+<stop offset="0%" stop-color="hsl(8,55%,47%)"/><stop offset="68%" stop-color="hsl(8,55%,18%)"/>
+<stop offset="100%" stop-color="hsl(8,55%,8%)"/></radialGradient></defs>
+<rect width="128" height="128" rx="18" fill="#0d0a12"/>
+<circle cx="64" cy="64" r="57" fill="url(#g)"/>
+<circle cx="64" cy="64" r="57" fill="none" stroke="hsl(8,45%,88%)" stroke-width="3.5"/>
+<g stroke="hsl(8,45%,88%)" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"><line x1="100.1" y1="100.1" x2="102.9" y2="102.9"/><line x1="77.2" y1="113.3" x2="78.2" y2="117.1"/><line x1="50.8" y1="113.3" x2="49.8" y2="117.1"/><line x1="27.9" y1="100.1" x2="25.1" y2="102.9"/><line x1="14.7" y1="77.2" x2="10.9" y2="78.2"/><line x1="14.7" y1="50.8" x2="10.9" y2="49.8"/><line x1="27.9" y1="27.9" x2="25.1" y2="25.1"/><line x1="50.8" y1="14.7" x2="49.8" y2="10.9"/><line x1="77.2" y1="14.7" x2="78.2" y2="10.9"/><line x1="100.1" y1="27.9" x2="102.9" y2="25.1"/><line x1="113.3" y1="50.8" x2="117.1" y2="49.8"/><line x1="113.3" y1="77.2" x2="117.1" y2="78.2"/></g>
+<circle cx="64" cy="64" r="46" fill="none" stroke="hsl(8,45%,88%)" stroke-opacity=".3" stroke-width="1.5" stroke-dasharray="3 5"/>
+<g transform="translate(33.00 36.44) scale(0.10764)" fill="hsl(8,40%,95%)" stroke="#000" stroke-opacity=".45" stroke-width="46.5" paint-order="stroke">
+<path d="M464.1 544a80 80 0 1 1 0-160 80 80 0 1 1 0 160zm8.4-576c15.1 0 29.7 5.8 40.7 16.2l47.2 44.8c12.6 12 19.1 29 17.5 46.3-1.2 13.3-7 25.8-16.5 35.2L363.1 309c-7.3 7.3-15.7 13.4-25 18L206 393c-9.2 4.6-17.7 10.7-25 18l-92 92 1.7 1.8c7.7 9.4 7.1 23.3-1.7 32.1s-22.7 9.3-32.1 1.7l-1.8-1.7-48-48-1.7-1.8c-7.7-9.4-7.1-23.3 1.7-32.1s22.7-9.3 32.1-1.7l1.8 1.7 92-92c7.3-7.3 13.4-15.7 18-25l66.1-132.1c4.6-9.2 10.7-17.7 18-25L430.8-14.7C441.9-25.8 456.9-32 472.5-32z"/>
+</g></svg>

@@ -2,7 +2,7 @@
  "_id": "oy1VhQwXnIo5g8jX",
  "name": "Hand Sword",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/hand-sword.svg",
  "folder": "iccGNPZSINUipQjv",
  "system": {
   "description": {
@@ -127,7 +127,7 @@
  "flags": {
   "jjk5e": {
    "grade": "2nd Grade",
-   "rev": "041b742b7e"
+   "rev": "ea4ae08027"
   }
  },
  "_key": "!items!oy1VhQwXnIo5g8jX"

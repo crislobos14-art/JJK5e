@@ -2,7 +2,7 @@
  "_id": "KLnftnwFXoSQtxq7",
  "name": "Sword of Extermination",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/sword-of-extermination.svg",
  "folder": "OqdCuXcZ0pFqRc3h",
  "system": {
   "description": {
@@ -68,7 +68,7 @@
  "flags": {
   "jjk5e": {
    "grade": "Special Grade",
-   "rev": "633e231c75"
+   "rev": "1f2c5ec8ea"
   }
  },
  "_key": "!items!KLnftnwFXoSQtxq7"

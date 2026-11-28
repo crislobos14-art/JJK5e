@@ -2,7 +2,7 @@
  "_id": "goiByJoeI9hj9iuE",
  "name": "Flight (6 PP)",
  "type": "feat",
- "img": "icons/svg/upgrade.svg",
+ "img": "modules/jjk5e/icons/items/flight-6-pp.svg",
  "system": {
   "description": {
    "value": "<p>You sprout grotesque wings that give you a 30 ft fly speed. To use this speed, you cannot be wearing heavy armor or carrying more than your carry capacity. If you also have the <em>Greater Flight Improvement</em> attribute, you gain the Evasion feature while flying.  </p>",
@@ -35,7 +35,7 @@
      ]
     ]
    },
-   "rev": "8e76e917ac",
+   "rev": "d22f1377e8",
    "automation": "automated"
   }
  },

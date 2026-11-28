@@ -1,7 +1,7 @@
 {
  "_id": "scIyhFIJWEmJIGFn",
  "name": "Cursed Tool Sale Value",
- "img": "icons/svg/d20-grey.svg",
+ "img": "modules/jjk5e/icons/items/cursed-tool-sale-value.svg",
  "description": "<p>Cursed Tool Creation (requires Tool Maker): price of a cursed tool by grade.</p>",
  "formula": "1d4",
  "replacement": true,

@@ -2,7 +2,7 @@
  "_id": "Dmgj1yIIUrzX4OpF",
  "name": "Thick Shirt",
  "type": "equipment",
- "img": "icons/svg/shield.svg",
+ "img": "modules/jjk5e/icons/items/thick-shirt.svg",
  "folder": "qVuyydidyeepCNvu",
  "system": {
   "description": {
@@ -24,7 +24,7 @@
    "dex": null
   },
   "price": {
-   "value": 10.0,
+   "value": 10,
    "denomination": "gp"
   },
   "properties": [],
@@ -33,7 +33,7 @@
  "flags": {
   "jjk5e": {
    "priceUSD": "$1,000",
-   "rev": "7cf20c5632"
+   "rev": "18d2011600"
   }
  },
  "_key": "!items!Dmgj1yIIUrzX4OpF"

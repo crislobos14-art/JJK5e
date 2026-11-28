@@ -2,7 +2,7 @@
  "_id": "CeT2zqVZDqnMLHYs",
  "name": "Spiked Shield",
  "type": "equipment",
- "img": "icons/svg/explosion.svg",
+ "img": "modules/jjk5e/icons/items/spiked-shield.svg",
  "folder": "pB7mLAOAtbyDQKeT",
  "system": {
   "description": {
@@ -103,7 +103,7 @@
    "ceCosts": {
     "ahkMyGjdj53FtPTY": 3
    },
-   "rev": "89b0083d4a"
+   "rev": "a0739a1c50"
   }
  },
  "_key": "!items!CeT2zqVZDqnMLHYs"

@@ -2,7 +2,7 @@
  "_id": "UGc2qzjHbSEWHzax",
  "name": "Cursed Tattoo",
  "type": "equipment",
- "img": "icons/svg/explosion.svg",
+ "img": "modules/jjk5e/icons/items/cursed-tattoo.svg",
  "folder": "bG7wCJ68DJwk3oOB",
  "system": {
   "description": {
@@ -30,7 +30,7 @@
  "flags": {
   "jjk5e": {
    "grade": "Varies",
-   "rev": "71cece8917",
+   "rev": "e50522cac1",
    "automation": "automated",
    "automationNotes": "Enable the effect of your tattoo's grade."
   }

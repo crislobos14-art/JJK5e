@@ -2,7 +2,7 @@
  "_id": "meaPcjtX2FfvNFuY",
  "name": "Major Technique Items (1st Grade)",
  "type": "loot",
- "img": "icons/svg/explosion.svg",
+ "img": "modules/jjk5e/icons/items/major-technique-items-1st-grade.svg",
  "folder": "5URJFab0BietcWnO",
  "system": {
   "type": {
@@ -24,7 +24,7 @@
  "flags": {
   "jjk5e": {
    "grade": "1st Grade",
-   "rev": "95179832c6"
+   "rev": "451ae5cc8b"
   }
  },
  "_key": "!items!meaPcjtX2FfvNFuY"

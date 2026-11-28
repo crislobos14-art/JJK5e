@@ -2,7 +2,7 @@
  "_id": "BWgmRZXOF2pJXyuU",
  "name": "Top Technique Items (Special Grade)",
  "type": "loot",
- "img": "icons/svg/explosion.svg",
+ "img": "modules/jjk5e/icons/items/top-technique-items-special-grade.svg",
  "folder": "OqdCuXcZ0pFqRc3h",
  "system": {
   "type": {
@@ -24,7 +24,7 @@
  "flags": {
   "jjk5e": {
    "grade": "Special Grade",
-   "rev": "9fec489b72"
+   "rev": "6163ad31d1"
   }
  },
  "_key": "!items!BWgmRZXOF2pJXyuU"

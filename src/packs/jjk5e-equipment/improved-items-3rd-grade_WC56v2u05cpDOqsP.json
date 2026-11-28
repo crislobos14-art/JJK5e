@@ -2,7 +2,7 @@
  "_id": "WC56v2u05cpDOqsP",
  "name": "Improved Items (3rd Grade)",
  "type": "loot",
- "img": "icons/svg/explosion.svg",
+ "img": "modules/jjk5e/icons/items/improved-items-3rd-grade.svg",
  "folder": "wqSDHMRYLTxcUWTY",
  "system": {
   "type": {
@@ -24,7 +24,7 @@
  "flags": {
   "jjk5e": {
    "grade": "3rd Grade",
-   "rev": "f69770c0a4"
+   "rev": "0904206cde"
   }
  },
  "_key": "!items!WC56v2u05cpDOqsP"

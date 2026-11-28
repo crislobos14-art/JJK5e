@@ -115,7 +115,7 @@
    "_id": "8g8pxYIYE3DwKGGK",
    "name": "Amphibious",
    "type": "feat",
-   "img": "icons/svg/aura.svg",
+   "img": "modules/jjk5e/icons/items/amphibious.svg",
    "system": {
     "description": {
      "value": "<p>Gama can breathe air and water.</p>",
@@ -147,7 +147,7 @@
    "_id": "ZXM6KVzDfKLxzEHW",
    "name": "Standing Leap",
    "type": "feat",
-   "img": "icons/svg/aura.svg",
+   "img": "modules/jjk5e/icons/items/standing-leap.svg",
    "system": {
     "description": {
      "value": "<p>Gama's long jump is up to 20 ft. and its high jump is up to 10 ft., with or without a running start.</p>",
@@ -179,7 +179,7 @@
    "_id": "kUtvJNJNZZocMLv4",
    "name": "Tongue",
    "type": "weapon",
-   "img": "icons/svg/sword.svg",
+   "img": "modules/jjk5e/icons/items/tongue.svg",
    "system": {
     "description": {
      "value": "<p>The creature is grappled if it is the same size or smaller than Gama (escape DC 11). Until the grapple ends, the target is restrained and Gama cannot use its Tongue attack.</p>",

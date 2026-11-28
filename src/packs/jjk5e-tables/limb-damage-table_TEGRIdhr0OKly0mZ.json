@@ -1,7 +1,7 @@
 {
  "_id": "TEGRIdhr0OKly0mZ",
  "name": "Limb Damage Table",
- "img": "icons/svg/d20-grey.svg",
+ "img": "modules/jjk5e/icons/items/limb-damage-table.svg",
  "description": "",
  "formula": "1d6",
  "replacement": true,

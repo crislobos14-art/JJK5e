@@ -2,7 +2,7 @@
  "_id": "h1UpLET2fm0FeigH",
  "name": "Cursed Lantern",
  "type": "consumable",
- "img": "icons/svg/explosion.svg",
+ "img": "modules/jjk5e/icons/items/cursed-lantern.svg",
  "folder": "wqSDHMRYLTxcUWTY",
  "system": {
   "type": {
@@ -56,7 +56,7 @@
    "ceCosts": {
     "NAcpzjJiRp7ZNHyJ": 1
    },
-   "rev": "07826b0572"
+   "rev": "233c62ad2a"
   }
  },
  "_key": "!items!h1UpLET2fm0FeigH"

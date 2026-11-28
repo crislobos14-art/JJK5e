@@ -2,7 +2,7 @@
  "_id": "iE4bz6ZI6l5lDHUx",
  "name": "Lesser Sealing Talisman",
  "type": "loot",
- "img": "icons/svg/explosion.svg",
+ "img": "modules/jjk5e/icons/items/lesser-sealing-talisman.svg",
  "folder": "pB7mLAOAtbyDQKeT",
  "system": {
   "description": {
@@ -25,7 +25,7 @@
  "flags": {
   "jjk5e": {
    "grade": "3rd Grade",
-   "rev": "ec642826e2"
+   "rev": "dce8ae5df4"
   }
  },
  "_key": "!items!iE4bz6ZI6l5lDHUx"

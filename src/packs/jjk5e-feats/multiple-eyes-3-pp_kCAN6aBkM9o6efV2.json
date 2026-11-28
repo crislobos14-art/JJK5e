@@ -2,7 +2,7 @@
  "_id": "kCAN6aBkM9o6efV2",
  "name": "Multiple Eyes (3 PP)",
  "type": "feat",
- "img": "icons/svg/upgrade.svg",
+ "img": "modules/jjk5e/icons/items/multiple-eyes-3-pp.svg",
  "system": {
   "description": {
    "value": "<p>You have countless grotesque eyes on your body. You have advantage on Wisdom (Perception) checks that rely on sight.</p>",
@@ -35,7 +35,7 @@
      ]
     ]
    },
-   "rev": "38f6312d84",
+   "rev": "68c30011c6",
    "automation": "automated"
   }
  },

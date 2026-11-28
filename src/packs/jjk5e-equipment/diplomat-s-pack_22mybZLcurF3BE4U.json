@@ -2,7 +2,7 @@
  "_id": "22mybZLcurF3BE4U",
  "name": "Diplomat’s Pack",
  "type": "loot",
- "img": "icons/svg/item-bag.svg",
+ "img": "modules/jjk5e/icons/items/diplomats-pack.svg",
  "folder": "5TkjeIlCFmk1GLJi",
  "system": {
   "description": {
@@ -16,7 +16,7 @@
    "rules": "2014"
   },
   "price": {
-   "value": 39.0,
+   "value": 39,
    "denomination": "gp"
   },
   "type": {
@@ -26,7 +26,7 @@
  },
  "flags": {
   "jjk5e": {
-   "rev": "0c048a971d"
+   "rev": "d445d12c85"
   }
  },
  "_key": "!items!22mybZLcurF3BE4U"

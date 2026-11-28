@@ -9,6 +9,8 @@
  * Usage: node tools/build-icons.mjs --fa <font-awesome-free folder> [--check]
  *   --fa     folder of the Font Awesome Free download (with svgs/solid and svgs/regular)
  *   --check  only report which icons still hold letters (exit 1 if any)
+ *   --generic  also give an original seal (icons/items/<name>.svg) to every pack document that still uses a generic
+ *              Foundry icon (icons/svg/*.svg) and is listed in tools/item-icons.json (name -> [family, glyph])
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -213,6 +215,31 @@ ${g.paths.map((d) => `<path d="${d}"/>`).join("\n")}
 
 let n = 0;
 const report = [];
+if (args.includes("--generic")) {
+  const MAP = JSON.parse(fs.readFileSync(path.join(ROOT, "tools", "item-icons.json"), "utf8"));
+  const slug = (name) => name.normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[’']/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  const made = new Set(), missing = new Set();
+  fs.mkdirSync(path.join(ICONS, "items"), { recursive: true });
+  for (const file of walk(path.join(ROOT, "src", "packs")).filter((f) => f.endsWith(".json") && !path.basename(f).startsWith("_folder_"))) {
+    const doc = JSON.parse(fs.readFileSync(file, "utf8"));
+    let changed = false;
+    const visit = (d) => {
+      if (/^icons\/svg\/[\w-]+\.svg$/.test(String(d?.img ?? "")) && d.name) {
+        const pick = MAP[d.name];
+        if (!pick) missing.add(d.name);
+        else {
+          const rel = `icons/items/${slug(d.name)}.svg`;
+          if (!made.has(rel)) { fs.writeFileSync(path.join(ROOT, rel), render(rel, pick[0], pick[1])); report.push(`${rel}\t${pick[0]}\t${pick[1]}`); made.add(rel); n++; }
+          d.img = `modules/jjk5e/${rel}`; changed = true;
+        }
+      }
+      for (const child of d?.items ?? []) visit(child);
+    };
+    visit(doc);
+    if (changed) fs.writeFileSync(file, `${JSON.stringify(doc, null, 1)}\n`);
+  }
+  if (missing.size) console.log(`No entry in tools/item-icons.json for: ${[...missing].join(", ")}`);
+}
 for (const file of lettered) {
   const rel = path.relative(ROOT, file).split(path.sep).join("/");
   const [family, icon, domain] = choose(rel);

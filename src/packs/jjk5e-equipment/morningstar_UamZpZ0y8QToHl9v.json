@@ -2,7 +2,7 @@
  "_id": "UamZpZ0y8QToHl9v",
  "name": "Morningstar",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/morningstar.svg",
  "folder": "8L9REK3UZxFoXRJA",
  "system": {
   "description": {
@@ -37,7 +37,7 @@
   "properties": [],
   "proficient": null,
   "price": {
-   "value": 15.0,
+   "value": 15,
    "denomination": "gp"
   },
   "quantity": 1,
@@ -66,7 +66,7 @@
  "flags": {
   "jjk5e": {
    "priceUSD": "$1,500",
-   "rev": "cc592e7dd7"
+   "rev": "f8ac26f212"
   }
  },
  "_key": "!items!UamZpZ0y8QToHl9v"

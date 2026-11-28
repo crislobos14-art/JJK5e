@@ -1,7 +1,7 @@
 {
  "_id": "SkP3XQhjuCblEk9O",
  "name": "Finding a Cursed Spirit",
- "img": "icons/svg/d20-grey.svg",
+ "img": "modules/jjk5e/icons/items/finding-a-cursed-spirit.svg",
  "description": "<p>Spend 1–2 hours searching and succeed on a DC 20 Wisdom (Perception) or Intelligence (Investigation) check, then roll.</p>",
  "formula": "1d100",
  "replacement": true,

@@ -2,7 +2,7 @@
  "_id": "YfzZkjTf5W8lrY2Y",
  "name": "Alternate Movement Improvement (2 PP)",
  "type": "feat",
- "img": "icons/svg/upgrade.svg",
+ "img": "modules/jjk5e/icons/items/alternate-movement-improvement-2-pp.svg",
  "system": {
   "description": {
    "value": "<p>Your climb or swim speed can equal your walking speed if it is higher. Your burrow speed increases to 10 ft and becomes 15 ft at 10th level. You must have the <em>Alternate Movement</em> attribute to take this. You can choose this attribute multiple times, but must choose a different option each time.</p>",
@@ -35,7 +35,7 @@
      ]
     ]
    },
-   "rev": "aa16e4acfa",
+   "rev": "59623da41b",
    "automation": "automated"
   }
  },

@@ -2,7 +2,7 @@
  "_id": "R81yIHf0U1nuPu4T",
  "name": "JJK: Short Rest CE Recovery",
  "type": "script",
- "img": "icons/svg/sleep.svg",
+ "img": "modules/jjk5e/icons/items/jjk-short-rest-ce-recovery.svg",
  "scope": "global",
  "command": "game.modules.get(\"jjk5e\").api.shortRestCE();",
  "flags": {

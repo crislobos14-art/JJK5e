@@ -2,7 +2,7 @@
  "_id": "qb4h1tJUhO8TQMqv",
  "name": "JJK: Set Cursed Energy Ability",
  "type": "script",
- "img": "icons/svg/upgrade.svg",
+ "img": "modules/jjk5e/icons/items/jjk-set-cursed-energy-ability.svg",
  "scope": "global",
  "command": "game.modules.get(\"jjk5e\").api.chooseCEAbility();",
  "flags": {

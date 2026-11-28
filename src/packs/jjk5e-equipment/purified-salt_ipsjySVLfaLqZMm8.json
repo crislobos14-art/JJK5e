@@ -2,7 +2,7 @@
  "_id": "ipsjySVLfaLqZMm8",
  "name": "Purified Salt",
  "type": "consumable",
- "img": "icons/svg/explosion.svg",
+ "img": "modules/jjk5e/icons/items/purified-salt.svg",
  "folder": "pB7mLAOAtbyDQKeT",
  "system": {
   "description": {
@@ -76,7 +76,7 @@
  "flags": {
   "jjk5e": {
    "grade": "3rd Grade",
-   "rev": "3c0844ef1f"
+   "rev": "e83550aa96"
   }
  },
  "_key": "!items!ipsjySVLfaLqZMm8"

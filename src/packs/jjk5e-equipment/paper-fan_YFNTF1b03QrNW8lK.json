@@ -2,7 +2,7 @@
  "_id": "YFNTF1b03QrNW8lK",
  "name": "Paper Fan",
  "type": "weapon",
- "img": "icons/svg/sword.svg",
+ "img": "modules/jjk5e/icons/items/paper-fan.svg",
  "folder": "xnCPfIMW0yQ370pR",
  "system": {
   "description": {
@@ -120,7 +120,7 @@
    "ceCosts": {
     "Upgg7wDfCaglC07r": 2
    },
-   "rev": "58db25a60c"
+   "rev": "6ad59d6fee"
   }
  },
  "_key": "!items!YFNTF1b03QrNW8lK"

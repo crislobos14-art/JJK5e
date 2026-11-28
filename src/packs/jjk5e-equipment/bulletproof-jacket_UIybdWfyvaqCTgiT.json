@@ -2,7 +2,7 @@
  "_id": "UIybdWfyvaqCTgiT",
  "name": "Bulletproof Jacket",
  "type": "equipment",
- "img": "icons/svg/shield.svg",
+ "img": "modules/jjk5e/icons/items/bulletproof-jacket.svg",
  "folder": "qVuyydidyeepCNvu",
  "system": {
   "description": {
@@ -24,7 +24,7 @@
    "dex": 2
   },
   "price": {
-   "value": 50.0,
+   "value": 50,
    "denomination": "gp"
   },
   "properties": [],
@@ -33,7 +33,7 @@
  "flags": {
   "jjk5e": {
    "priceUSD": "$5,000",
-   "rev": "b69739aa3b"
+   "rev": "c8718ea41a"
   }
  },
  "_key": "!items!UIybdWfyvaqCTgiT"

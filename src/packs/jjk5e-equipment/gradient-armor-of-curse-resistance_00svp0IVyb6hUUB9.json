@@ -2,7 +2,7 @@
  "_id": "00svp0IVyb6hUUB9",
  "name": "Gradient Armor of Curse Resistance",
  "type": "consumable",
- "img": "icons/svg/explosion.svg",
+ "img": "modules/jjk5e/icons/items/gradient-armor-of-curse-resistance.svg",
  "folder": "TBXVbdCh1Kxu8AKz",
  "system": {
   "description": {
@@ -53,7 +53,7 @@
  "flags": {
   "jjk5e": {
    "grade": "1st Grade",
-   "rev": "6af7ac93b1"
+   "rev": "270b2f930d"
   }
  },
  "_key": "!items!00svp0IVyb6hUUB9"
