@@ -697,6 +697,10 @@
       "vowApproval": {
         "Name": "Binding vows need GM approval",
         "Hint": "A vow made by a player waits as “pending”; its effects apply only after the GM approves it. Vows made before 2.22 are not affected."
+      },
+      "zoneRefresh": {
+        "Name": "The Zone restarts on each breakthrough",
+        "Hint": "V.6 says each breakthrough grants The Zone for 1 minute but not whether a new stack restarts it. On: every breakthrough restarts the minute. Off: stacks keep the first expiry."
       }
     },
     "Feats": {
@@ -1065,7 +1069,66 @@
       "Prompt": "Breakthroughs to add (negative to remove):",
       "Manual": "GM",
       "Understanding": "Awakened Understanding",
-      "UnderstandingOffer": "{name} now has {total} breakthroughs. The GM can grant the newly available Awakened Understanding:"
+      "UnderstandingOffer": "{name} now has {total} breakthroughs. The GM can grant the newly available Awakened Understanding:",
+      "Manager": "Breakthrough Manager",
+      "BlackFlashes": "Black Flashes",
+      "CritRange": "Critical range",
+      "BFRange": "Black Flash range",
+      "Chance": "Black Flash per melee attack",
+      "ChanceHint": "Critical × second d20 (advantage counted in The Zone)",
+      "SecondsLeft": "{n} s left",
+      "RCTState": "Reverse Cursed Technique",
+      "PoolRule": "V.6: 5 × level × CE mod = {n}",
+      "History": "History",
+      "NoHistory": "No breakthroughs recorded yet.",
+      "When": "When",
+      "Source": "Source",
+      "Note": "Note",
+      "User": "User",
+      "Recovered": "Zone recoveries applied",
+      "Issues": "{n} inconsistency(ies)",
+      "Record": "Record breakthrough",
+      "RecordHint": "A legitimate breakthrough from play (no Zone, no recovery). Note:",
+      "Correct": "Correct total",
+      "CorrectHint": "Set the breakthrough total (a correction entry records the difference):",
+      "Corrected": "GM correction",
+      "Offer": "Offer Awakened Understanding",
+      "Moment": "Near-death moment card",
+      "ByGM": "GM",
+      "Repair": "Repair",
+      "Repaired": "{name}: breakthrough ledger repaired (nothing was granted).",
+      "Kind": {
+        "Label": "Event",
+        "blackFlash": "Black Flash",
+        "rct": "RCT awakening",
+        "physiology": "Cursed Physiology",
+        "manual": "Recorded by the GM",
+        "correction": "Correction",
+        "legacy": "Earlier total"
+      },
+      "Status": {
+        "acquired": "Acquired",
+        "eligible": "Eligible (GM may allow)",
+        "pending": "Requested",
+        "locked": "Locked"
+      },
+      "Need": {
+        "breakthroughs": "{have}/{need} breakthroughs",
+        "ceScore": "CE score {have}/{need}"
+      },
+      "RCTStatus": {
+        "awakened": "Awakened",
+        "physiology": "Cursed Physiology",
+        "unavailable": "Not available",
+        "dormant": "Not awakened"
+      },
+      "Issue": {
+        "mirror": "count out of sync",
+        "migration": "old count not migrated",
+        "zoneWithoutBreakthrough": "Zone without a breakthrough",
+        "zoneDuration": "Zone without duration",
+        "invalidEvents": "invalid entries"
+      }
     },
     "Reversal": {
       "SilencedAction": "You failed the Wisdom save against Cursed Silence and lose the action.",
@@ -1450,7 +1513,9 @@
       "Allow": "Allow the d100 roll",
       "Allowed": "{name} may roll for the Reverse Cursed Technique (d100, 90+) from the JJK panel.",
       "NoChance": "Only in a near-death moment the GM allows.",
-      "Physiology": "{name} is a Cursed Spirit: instead of Reverse Cursed Technique it awakens its Cursed Physiology ({points} Profane Points, +1 per level)."
+      "Physiology": "{name} is a Cursed Spirit: instead of Reverse Cursed Technique it awakens its Cursed Physiology ({points} Profane Points, +1 per level).",
+      "Decline": "Decline",
+      "Declined": "The GM declines the Reverse Cursed Technique awakening for {name}."
     },
     "GMRequest": {
       "Title": "JJK 5e: player request",
@@ -1680,8 +1745,17 @@
         "vows": {
           "Title": "Binding vows waiting for you",
           "Detail": "{n} vow(s) need your approval or a breach decision."
+        },
+        "breakthroughs": {
+          "Title": "Breakthrough records to repair",
+          "Detail": "Out of step or not migrated: {list}. Repair rebuilds the count from the ledger and grants nothing."
+        },
+        "barriers": {
+          "Title": "Barriers to repair",
+          "Detail": "Scenes with destroyed or expired barriers still active, missing drawings or no owner: {list}."
         }
-      }
+      },
+      "Repair": "Repair"
     },
     "Setup": {
       "Title": "Set up JJK 5e",
@@ -1808,6 +1882,121 @@
         "severe": "Severely guilty: Death Penalty.",
         "unforgivable": "Guilty beyond doubt: instant success. Death Penalty and Confiscation."
       }
+    },
+    "Barrier": {
+      "Manager": "Barrier Manager",
+      "None": "No active barrier on this scene.",
+      "NoScene": "No scene is open.",
+      "NoGM": "A GM must be connected to create or change barriers.",
+      "Rejected": "The GM did not accept the barrier request.",
+      "NoneNear": "No physical barrier on this scene.",
+      "CurtainOf": "Curtain — {name}",
+      "GlassBoxOf": "Glass Box — {name}",
+      "CurtainUp": "{name} drops a Curtain: {hp} HP, AC {ac}, {minutes} min. It fails every save and is immune to poison and psychic damage.",
+      "GlassBoxUp": "{name} creates a Glass Box ({size} ft): {hp} HP, AC {ac}, 1 min. A Large or smaller creature in it saves (Dexterity) or is trapped; inside it has full cover.",
+      "Hit": "{barrier} takes {dmg} damage ({hp}/{max} HP).",
+      "GlassShatter": "The Glass Box shatters: creatures within 5 ft make a Dexterity save ({name} rolls Shatter; those inside have disadvantage).",
+      "Ended": {
+        "destroyed": "{barrier} is destroyed.",
+        "expired": "{barrier} ends (duration over).",
+        "closed": "{barrier} is dispelled."
+      },
+      "Intruder": "Barrier Intruder",
+      "DC": "DC {dc}",
+      "IntruderYes": "success",
+      "IntruderNo": "failure",
+      "Invaded": "A creature has entered {barrier}.",
+      "Altered": "Someone inside has altered {barrier}.",
+      "AlterHint": "You are inside: choose the change to make on a success (who may enter or leave).",
+      "Alter": "Attempt",
+      "Op": "Change",
+      "OpAdd": "Add",
+      "OpRemove": "Remove",
+      "Direction": "Applies to",
+      "Enter": "Entering",
+      "Exit": "Leaving",
+      "List": "Rule",
+      "Deny": "Keep out / in",
+      "Allow": "Only allow",
+      "Who": "Who",
+      "By": {
+        "any": "Everyone",
+        "curse": "Cursed spirits",
+        "sorcerer": "Sorcerers",
+        "summon": "Summons",
+        "target": "Targeted creature",
+        "summonOf": "Summons of",
+        "hasCE": "With cursed energy",
+        "creatureType": "Creature type",
+        "disposition": "Disposition"
+      },
+      "TargetNeeded": "Target the creature first.",
+      "BlockedEnter": "{barrier} keeps this creature out.",
+      "BlockedExit": "{barrier} keeps this creature in.",
+      "Attack": "Attack the barrier",
+      "AttackHint": "Attack roll against AC {ac}; the GM rolls. A natural 20 doubles the damage dice.",
+      "DamageType": "Damage type",
+      "Close": "Dispel",
+      "CloseConfirm": "Dispel {barrier}?",
+      "Damage": "Damage",
+      "DamageHint": "Damage to apply (defences apply):",
+      "SetHP": "Set HP",
+      "SetHPHint": "Current hit points:",
+      "Rules": "Entry and exit",
+      "Authorize": "Authorise targeted",
+      "AuthorizeHint": "Target the creatures to authorise first.",
+      "Authorized": "{n} authorised creature(s)",
+      "Toggle": "On / off",
+      "Pan": "Show on the map",
+      "Hidden": "Details hidden.",
+      "Homebrew": "GM / homebrew",
+      "MinutesLeft": "{n} min left",
+      "Vowed": "{n} vow(s)",
+      "Incomplete": "Incomplete",
+      "DomainHint": "Domain barrier: managed by the domain engine (Domain HUD).",
+      "Issues": "{n} inconsistency(ies)",
+      "NoIssues": "No inconsistencies.",
+      "New": "New barrier",
+      "Inspect": "Inspect",
+      "InspectOff": "Stop inspecting",
+      "Repair": "Repair",
+      "Repaired": "{n} problem(s) repaired.",
+      "Designer": "Barrier Designer",
+      "DesignerHint": "Pure Barrier (V.6 optional rule), the enclosure that closes an Incomplete Domain, or a custom barrier (marked homebrew).",
+      "DesignerCenter": "Centred on the selected token (or the scene centre). Targeted creatures are authorised.",
+      "Name": "Name",
+      "Type": "Type",
+      "Shape": "Shape",
+      "ShapeCircle": "Circle (any height)",
+      "ShapeDome": "Dome",
+      "Radius": "Radius (ft)",
+      "Minutes": "Duration (min, 0 = permanent)",
+      "Owner": "Owner (actor UUID)",
+      "Immune": "Immunities",
+      "Kind": {
+        "curtain": "Curtain",
+        "glassBox": "Glass Box",
+        "pureBarrier": "Pure Barrier",
+        "enclosure": "Incomplete Domain enclosure",
+        "custom": "Custom barrier",
+        "domain": "Domain"
+      },
+      "Log": {
+        "damage": "−{n}",
+        "end": "ended",
+        "intruded": "invaded",
+        "altered": "altered",
+        "gmEdit": "GM edit"
+      },
+      "Issue": {
+        "noOwner": "no owner",
+        "wrongScene": "wrong scene",
+        "noRegion": "drawing missing",
+        "destroyedActive": "0 HP but active",
+        "expiredActive": "expired but active"
+      },
+      "Refund": "CE returned (no barrier)",
+      "NotCreated": "{name}: the barrier was not created; its CE was returned."
     }
   }
 }

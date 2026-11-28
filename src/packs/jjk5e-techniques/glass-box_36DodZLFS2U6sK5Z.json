@@ -245,7 +245,8 @@
     ]
    },
    "automation": "automated",
-   "rev": "19567fdc45"
+   "rev": "d5f28646ca",
+   "automationNotes": "2.23: the Action and Reaction activities create the cube in the Barrier Engine at the first target (AC = CE DC − 5, HP = 2 × proficiency, 1 minute). At 0 HP it shatters once and the owner gets the Shatter activity button. Glass Weakening size: set in the Barrier Manager."
   }
  },
  "folder": "sHDJB680OC5pd1by",

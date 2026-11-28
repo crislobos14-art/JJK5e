@@ -56,7 +56,7 @@ test("versions compare by number and compatibility issues follow the published r
 test("every health issue and what's-new entry has text in both languages", () => {
   const issueIds = ["midi-missing", "dae-missing", "midi-dnd5e", "midi-foundry", "transactional-libwrapper", "sequencer-missing", "jb2a-missing",
     "fxmaster-missing", "tokenmagic-missing", "theatre-v14", "tah-system", "domain-stuck", "domain-leftovers", "ce-pending", "items-outdated", "pool-missing",
-    "summons", "vows"];
+    "summons", "vows", "breakthroughs", "barriers"];
   const code = src("scripts/jjk-setup.mjs");
   for (const id of new Set([...code.matchAll(/id: "([a-z0-9-]+)", severity/g)].map((m) => m[1]))) assert.ok(issueIds.includes(id), `issue ${id} not covered`);
   for (const l of ["en", "es"]) {

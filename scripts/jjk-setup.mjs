@@ -159,6 +159,16 @@ async function healthChecks() {
   const summonIssues = a.summons?.diagnose?.() ?? [];
   if (summonIssues.length) rows.push({ id: "summons", severity: "warn", title: t("Health.Issue.summons.Title"),
     detail: t("Health.Issue.summons.Detail", { n: summonIssues.length }), fix: { label: t("Health.Review"), run: () => a.openSummons?.() } });
+  // Breakthrough ledgers out of step with their mirror, unmigrated counts, Zone without a breakthrough.
+  const btActors = [...(game.actors ?? [])].filter((x) => x.type === "character" && (a.breakthroughs?.diagnose?.(x) ?? []).length);
+  if (btActors.length) rows.push({ id: "breakthroughs", severity: "info", title: t("Health.Issue.breakthroughs.Title"),
+    detail: t("Health.Issue.breakthroughs.Detail", { list: btActors.map((x) => x.name).join(", ") }),
+    fix: { label: t("Health.Repair"), run: async () => { for (const x of btActors) await a.breakthroughs.repair(x); } } });
+  // Barriers: destroyed or expired but active, missing drawings, no owner.
+  const barrierScenes = [...(game.scenes ?? [])].filter((sc) => (a.barriers?.issues?.(sc) ?? []).length);
+  if (barrierScenes.length) rows.push({ id: "barriers", severity: "warn", title: t("Health.Issue.barriers.Title"),
+    detail: t("Health.Issue.barriers.Detail", { list: barrierScenes.map((sc) => sc.name).join(", ") }),
+    fix: { label: t("Health.Repair"), run: async () => { for (const sc of barrierScenes) await a.barriers.repair(sc); } } });
   // Binding vows waiting for the GM (approval or a possible breach).
   const vowWork = a.vows?.gmQueue?.() ?? [];
   if (vowWork.length) rows.push({ id: "vows", severity: "info", title: t("Health.Issue.vows.Title"),

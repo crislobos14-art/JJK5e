@@ -8,6 +8,12 @@
  *   Technique Burnout), Maximum / Reduced Output, Soul Awareness, Limb Damage, summons.
  * - JJK panel on character sheets, Spanish / English UI, effect expiry (unless Times Up is active).
  */
+import { readLedger, recordEvent, correctTotal, markRecovered, ledgerTotal, blackFlashCount, blackFlashTarget, blackFlashSucceeds,
+  blackFlashEligible, BLACK_FLASH_MULTIPLIER, zoneAfter, zoneThresholds, reducedOutputAfter, understandingStatus, understandingEfficiency,
+  efficientCost, rctPoolMax, rctAwakeningPath, diagnoseBreakthroughs, BT_FLAG, BT_GRANTS_ZONE } from "./jjk5e-breakthrough-engine.mjs";
+import { BARRIER_FLAG, BARRIER_PROFILES, BARRIER_DAMAGE_TYPES, readBarrierRegistry, pruneBarrierRegistry, cleanBarrier, cleanAccessRules,
+  activeBarriers, barrierContains, barrierCrossings, accessDecision, curtainStats, glassBoxStats, curtainCost, resolveBarrierDamage, endBarrier,
+  expiredBarriers, intruderOutcome, alterBarrier, applyBarrierVow, removeBarrierVow, barrierLog, diagnoseBarriers } from "./jjk5e-barrier-engine.mjs";
 import { activityCECost, ceTransaction, blackFlashCheck, clashRoundsFromRefinement, multiDomainClash, vowBlocksUsage, buildTechniqueItems, TECHNIQUE_SLOTS } from "./jjk5e-rules.mjs";
 import { createCEEngine } from "./jjk5e-ce-engine.mjs";
 import { createIntegrations } from "./jjk5e-integrations.mjs";
@@ -81,6 +87,13 @@ async function promptNumber(title, label, value = 1) {
   const v = await promptField(title, content, "amount", true);
   if (v === null || v === undefined || Number.isNaN(Number(v))) return null;
   return Number(v) || 0;
+}
+
+/** Returns the text entered ("" allowed), or null when the dialog is cancelled. */
+async function promptText(title, label, value = "") {
+  const content = `<p>${label}</p><input type="text" name="text" value="${esc(value)}" maxlength="200" style="width:100%">`;
+  const v = await promptField(title, content, "text", false);
+  return v === null || v === undefined ? null : String(v).slice(0, 200);
 }
 
 async function fetchJSON(path) {
@@ -393,6 +406,8 @@ function activityCost(activity, actor = activity?.actor ?? activity?.item?.actor
   let base = Number(costs?.[activity.id] ?? 0);
   // V.6 Domain Refinement: Efficient Expansions (700) −CE mod, Total Mastery (1000) −proficiency bonus.
   if (base > 1 && activity.item.flags?.jjk5e?.technique === "Boogie Woogie" && hasBoogieFeature(actor, "Clap Back")) base -= 1;
+  // V.6 Pure Barrier: an authorised creature inside it casts a Curtain for 1 CE.
+  if (base > 1 && actor && baseName(activity.item) === "Basic Curtain") base = pureBarrierCurtainBase(actor, base);
   if (base > 0 && actor && activity?.item?.flags?.jjk5e?.domainActivity === activity.id) {
     const ref = refinementOf(actor);
     if (ref >= 700) base -= Math.max(0, ceMod(actor));
@@ -1191,6 +1206,7 @@ function registerActivityHooks() {
       await item.update({ "system.uses.spent": 0 });
     }
     await activateDomainProtection(actor, item, activity);
+    await activateBarrierFeature(actor, item, activity, usageConfig).catch((err) => reportError("barrier", err));
     await remindModifiers(actor, item);
     if (item?.flags?.jjk5e?.openTechnique) await chooseTechnique(actor);
     const grp = item?.flags?.jjk5e?.activatesGroup?.[activity.id];
@@ -1940,64 +1956,84 @@ async function onAttackRoll(rolls, subject) {
   const activity = subject?.activity ?? subject;
   const actor = activity?.actor ?? activity?.item?.actor ?? activity?.parent?.actor;
   if (!actor?.isOwner) return;
-  if (!roll.isCritical) {
-    if (actor.getFlag(MODULE_ID, "pendingBlackFlash")) await actor.unsetFlag(MODULE_ID, "pendingBlackFlash");
-    return;
-  }
-  if (actor.type !== "character" || isHeavenlyOnly(actor)) return;
-  const kind = activity?.attack?.type?.value ?? activity?.actionType;
-  if (kind && !["melee", "mwak", "msak"].includes(kind)) return;
-  const zone = zoneEffect(actor);
-  const stacks = Number(zone?.flags?.jjk5e?.zone) || 0;
-  const bonusRange = actor.items.reduce((tot, i) => tot + (Number(i.flags?.jjk5e?.blackFlashRange) || 0), 0);
-  const target = Math.max(2, 20 - stacks - bonusRange);
+  // A new attack always settles the previous Black Flash: a pending ×3 never carries over to another attack.
+  if (actor.getFlag(MODULE_ID, "pendingBlackFlash")) await actor.unsetFlag(MODULE_ID, "pendingBlackFlash");
+  if (!blackFlashEligible({ critical: roll.isCritical, attackType: activity?.attack?.type?.value, actionType: activity?.actionType,
+    actorType: actor.type, heavenlyOnly: isHeavenlyOnly(actor) })) return;
+  const stacks = Number(zoneEffect(actor)?.flags?.jjk5e?.zone) || 0;
+  // One value per item, however many effects the item carries (no feature counts twice).
+  const target = blackFlashTarget({ zoneStacks: stacks, itemRanges: actor.items.map((i) => Number(i.flags?.jjk5e?.blackFlashRange) || 0) });
   const check = await new Roll("1d20").evaluate();
   const face = check.dice?.[0]?.results?.find((r) => r.active !== false)?.result ?? check.total;
   // Chosen by the Sparks: every critical hit is a Black Flash.
   const always = actor.items.some((i) => i.flags?.jjk5e?.alwaysBlackFlash);
-  const success = always || blackFlashCheck(face, stacks + bonusRange);
+  const success = blackFlashSucceeds(face, target, always);
   const Chat = docClass("ChatMessage");
   const checkMsg = await check.toMessage({
     speaker: Chat.getSpeaker({ actor }),
     flavor: `<strong>${t("BlackFlash.Check")}</strong> (${t("BlackFlash.Needs", { target })})`
-      + (success ? `<h3 style="color:#b00;text-align:center">⚡ BLACK FLASH ⚡</h3><p>${t("BlackFlash.Success")}</p>` : "")
+      + (success ? `<h3 class="jjk-bf-title">⚡ BLACK FLASH ⚡</h3><p>${t("BlackFlash.Success")}</p>` : "")
   });
   if (!success) return;
   // With Dice So Nice, the flash (sound, shake, animation) lands when the die stops, not while it is still rolling.
   await waitForDice(checkMsg);
-  if (setting("blackFlashDamage")) await actor.setFlag(MODULE_ID, "pendingBlackFlash", { activityUuid: activity?.uuid ?? null });
-  await addBreakthrough(actor, 1, "Black Flash");
-  if (isActiveGM()) await bumpStat(actor, "bf").catch(() => null);
-  // V.6 The Zone also recovers the Reverse Cursed Technique healing pool.
-  for (const item of actor.items.filter((i) => /Reverse Cursed Technique \(Healing Pool\)/i.test(baseName(i)))) {
-    if (Number(item.system?.uses?.spent) > 0) await item.update({ "system.uses.spent": 0 });
-  }
-  const next = stacks + 1;
+  const eventId = `bf:${checkMsg?.id ?? foundry.utils.randomID()}`;
+  if (setting("blackFlashDamage")) await actor.setFlag(MODULE_ID, "pendingBlackFlash", { activityUuid: activity?.uuid ?? null, eventId, at: Date.now() });
+  const done = await addBreakthrough(actor, 1, "Black Flash", { kind: "blackFlash", eventId, item: activity?.item?.name,
+    technique: activity?.item?.flags?.jjk5e?.technique });
+  if (done?.added && isActiveGM()) await bumpStat(actor, "bf").catch(() => null);
+}
+
+/**
+ * The Zone (V.6): gained after a breakthrough for 1 minute; its benefits stack every Black Flash. Recoveries
+ * (Technique Burnout, the RCT healing pool, one level of Reduced Output) run once per breakthrough event: the event is
+ * marked "recovered" in the ledger first, so a reload, a retried hook or an effect update never repeats them.
+ */
+async function enterZone(actor, { kind, eventId }) {
+  if (!actor?.isOwner || !BT_GRANTS_ZONE.has(kind)) return false;
+  const marked = await queueCE(actor, async () => {
+    const m = markRecovered(readLedger(actor.flags?.[MODULE_ID]), eventId);
+    if (m) await actor.update({ [`flags.${MODULE_ID}.${BT_FLAG}`]: m }, { jjk5eLedger: true });
+    return m;
+  });
+  if (!marked) return false;
+  const zone = zoneEffect(actor);
+  const stacks = Number(zone?.flags?.jjk5e?.zone) || 0;
+  const next = zoneAfter({ stacks, kind });
   // "+1 Critical Range" per stack, on top of the actor's own range (e.g. Improved Critical 19 → 18).
   // The base is read before the first Zone exists and kept on the effect for later stacks.
   const baseOf = (key) => clamp(Number(zone?.flags?.jjk5e?.[`base_${key}`])
     || Number(foundry.utils.getProperty(actor, `flags.dnd5e.${key}`)) || 20, 2, 20);
-  const wBase = baseOf("weaponCriticalThreshold");
-  const sBase = baseOf("spellCriticalThreshold");
+  const wBase = baseOf("weaponCriticalThreshold"), sBase = baseOf("spellCriticalThreshold");
+  const th = zoneThresholds({ stacks: next, weaponBase: wBase, spellBase: sBase });
+  const remaining = Number(zone?.duration?.remaining);
+  const keep = zone && !setting("zoneRefresh") && remaining > 0;
   await setKindEffect(actor, "zone", {
     name: `${t("Zone.Name")}${next > 1 ? ` ×${next}` : ""}`, img: `${ICONS}/zone.svg`,
-    duration: { rounds: 10, seconds: 60 },
+    duration: keep ? { rounds: Math.max(1, Math.ceil(remaining / 6)), seconds: Math.ceil(remaining) } : { rounds: 10, seconds: 60 },
     changes: [
-      { key: "flags.dnd5e.weaponCriticalThreshold", mode: 3, value: String(Math.max(2, wBase - next)) },
-      { key: "flags.dnd5e.spellCriticalThreshold", mode: 3, value: String(Math.max(2, sBase - next)) }
+      { key: "flags.dnd5e.weaponCriticalThreshold", mode: 3, value: String(th.weapon) },
+      { key: "flags.dnd5e.spellCriticalThreshold", mode: 3, value: String(th.spell) }
     ],
     description: `<p>${t("Zone.Description")}</p>`,
-    flags: { jjk5e: { zone: next, base_weaponCriticalThreshold: wBase, base_spellCriticalThreshold: sBase } }
+    flags: { jjk5e: { zone: next, base_weaponCriticalThreshold: wBase, base_spellCriticalThreshold: sBase, events: [...(zone?.flags?.jjk5e?.events ?? []).slice(-19), eventId] } }
   });
-  // Read and subtract the Output Burnout levels here (one write), so the burnout delete hook does not race this one.
+  // Recover Reverse Cursed Energy Pool.
+  for (const item of actor.items.filter((i) => /Reverse Cursed Technique \(Healing Pool\)/i.test(baseName(i)))) {
+    if (Number(item.system?.uses?.spent) > 0) await item.update({ "system.uses.spent": 0 });
+  }
+  // Recover Technique Burnout; read and subtract the Output Burnout levels here (one write), so the burnout delete
+  // hook does not race this one. Then lower Reduced Output by 1 level.
   const added = Number(actor.getFlag(MODULE_ID, "burnoutRO")) || 0;
   const burnout = actor.effects.filter((e) => e.flags?.jjk5e?.kind === "burnout" || e.flags?.jjk5e?.burnout).map((e) => e.id);
   const ro = Number(actor.getFlag(MODULE_ID, "reducedOutput")) || 0;
   const fromBurnout = burnout.length ? added : 0;
   if (fromBurnout) await actor.unsetFlag(MODULE_ID, "burnoutRO");
   if (burnout.length) await actor.deleteEmbeddedDocuments("ActiveEffect", burnout, { jjk5eZone: true });
-  const roNext = Math.max(0, ro - fromBurnout - 1);
+  const roNext = reducedOutputAfter({ current: ro, fromBurnout });
   if (roNext !== ro) await setReducedOutput(actor, roNext);
+  Hooks.callAll("jjk5e.zone", actor, { stacks: next, kind, eventId });
+  return true;
 }
 
 function traitChoice(actor, flag) {
@@ -2108,7 +2144,7 @@ function openSessionStats() {
 }
 
 /* ---- Export / import of an actor's JJK data (refinement, vows, diary, domain profile…) ---- */
-const JJK_EXPORT_KEYS = ["refinement", "breakthroughs", "ceAbility", "domainLethal", "customDomainProfile", "vows", "refinementLog",
+const JJK_EXPORT_KEYS = ["refinement", "breakthroughs", "breakthroughLog", "ceAbility", "domainLethal", "customDomainProfile", "vows", "refinementLog",
   "domainSuperiority", "career", "reputation", "missions", "soulAwareness", "limbs"];
 async function exportJJK(actor) {
   if (!actor?.isOwner) return;
@@ -2131,7 +2167,12 @@ async function importJJK(actor, text = null) {
   const clean = {};
   for (const k of JJK_EXPORT_KEYS) if (k in data.flags) clean[k] = data.flags[k];
   if ("refinement" in clean) clean.refinement = clamp(Number(clean.refinement) || 1, 1, 1000);
-  if ("breakthroughs" in clean) clean.breakthroughs = Math.max(0, Math.floor(Number(clean.breakthroughs) || 0));
+  if ("breakthroughs" in clean || "breakthroughLog" in clean) {
+    // The ledger is the source of truth: an imported number alone becomes a legacy entry; the mirror follows the ledger.
+    const ledger = readLedger({ breakthroughs: clean.breakthroughs, [BT_FLAG]: clean.breakthroughLog });
+    clean.breakthroughLog = ledger;
+    clean.breakthroughs = ledgerTotal(ledger);
+  }
   if ("customDomainProfile" in clean && !validateDomainProfile(clean.customDomainProfile)) delete clean.customDomainProfile;
   for (const k of ["vows", "refinementLog", "domainSuperiority"]) if (k in clean && !Array.isArray(clean[k])) delete clean[k];
   if (!Object.keys(clean).length) { ui.notifications.warn(t("Transfer.Invalid")); return false; }
@@ -2961,6 +3002,8 @@ function panelHTML(actor, tab = "combat") {
       ${pbtn("pointBuy", "fas fa-dice-d20", t("PointBuy.Title"))}
       ${pbtn("vows", "fas fa-handshake", t("Vow.Title"))}
       ${pbtn("summons", "fas fa-ghost", t("Summon.Manager"))}
+      ${pbtn("breakthroughs", "fas fa-bolt-lightning", t("Breakthrough.Manager"))}
+      ${pbtn("barriers", "fas fa-torii-gate", t("Barrier.Manager"))}
       ${pbtn("career", "fas fa-id-badge", t("Career.Title"))}
       ${pbtn("exportJJK", "fas fa-file-export", t("Transfer.Export"), { tip: t("Transfer.ExportHint") })}
       ${pbtn("importJJK", "fas fa-file-import", t("Transfer.Import"), { tip: t("Transfer.ImportHint") })}
@@ -3050,6 +3093,8 @@ const PANEL_ACTIONS = {
   weakHole: () => promptWeakHole(),
   vows: (actor) => openVows(actor),
   summons: (actor) => openSummons(actor),
+  breakthroughs: (actor) => openBreakthroughs(actor),
+  barriers: () => openBarriers(),
   exportJJK: (actor) => exportJJK(actor),
   importJJK: (actor) => importJJK(actor),
   career: (actor) => openCareer(actor),
@@ -3067,8 +3112,9 @@ const PANEL_ACTIONS = {
   techTracker: (actor, target) => game.modules.get(MODULE_ID)?.api?.trackers?.act?.(actor, { ...target.dataset }),
   domainBackdrop: (actor) => game.modules.get(MODULE_ID)?.api?.fx?.chooseBackdrop?.(actor),
   gmBreakthrough: async (actor, target) => {
-    const n = (Number(actor.getFlag(MODULE_ID, "breakthroughs")) || 0) + (target.dataset.d === "-" ? -1 : 1);
-    await actor.setFlag(MODULE_ID, "breakthroughs", Math.max(0, n));
+    // A GM correction is a ledger event (no Zone, no recovery): the history shows who changed the count.
+    const total = ledgerTotal(readLedger(actor.flags?.[MODULE_ID])) + (target.dataset.d === "-" ? -1 : 1);
+    await addBreakthrough(actor, 0, t("Breakthrough.Corrected"), { kind: "correction", total: Math.max(0, total) });
   },
   gmCE: async (actor) => {
     const pool = findPool(actor);
@@ -3892,6 +3938,7 @@ Hooks.once("init", () => {
   reg("blackFlash", Boolean, true);
   reg("blackFlashDamage", Boolean, true);
   reg("zoneAdvantage", Boolean, true);
+  reg("zoneRefresh", Boolean, true);
   reg("domainTracking", Boolean, true);
   reg("autoBarrierMarker", Boolean, false);
   reg("domainSureHit", Boolean, true);
@@ -3932,7 +3979,7 @@ Hooks.once("init", () => {
     regainCE: (actor, amount, label) => spendCE(actor, -Math.abs(amount), label || t("CE.Regained")),
     combatInteractionState, combatInteractionActivity, ceHistory, findPool, poolValue, poolMax, cePending, resolveRestExchange, chooseTechnique, syncTechnique, promptCE, shortRestCE, chooseCEAbility, negativeEmotion,
     activityEnergyProfile, applyScaling, openPanel, maximumOutput, setReducedOutput, setSoulAwareness, setLimb, rollLimb,
-    summon, dismissSummons, openSummons, summons: SUMMONS, openVowManager,
+    summon, dismissSummons, openSummons, summons: SUMMONS, openVowManager, openBreakthroughs,
     vows: { get: (a) => getVows(requireActor(a)), act: (a, id, action, o) => vowAction(requireActor(a), id, action, o), approve: approveVow, accept: acceptVow,
       gmQueue: () => vowGMQueue(), event: (a, e, c, k) => vowEvent(a, e, c, k) }, syncResource, missingPrereqs, applyCEEffects, activateGroup, endGroup,
     openGMStart, undoAutomation, updateAutomation, updateAllAutomation, outdatedItems, burnoutRecovery, fallDamage, applySoulDamage, clearSoulDamage,
@@ -5204,7 +5251,12 @@ const VOW_TERMS = {
   check: { label: { en: "Ability checks", es: "Pruebas de característica" },
     changes: (v) => [{ key: "system.bonuses.abilities.check", mode: 2, value: sgn(v) }] },
   ceCost: { label: { en: "CE cost per paid activity", es: "Coste de EM por actividad de pago" }, changes: () => [] },
-  ceMax: { label: { en: "Maximum CE", es: "EM máxima" }, changes: () => [] }
+  ceMax: { label: { en: "Maximum CE", es: "EM máxima" }, changes: () => [] },
+  // Barrier terms: the barrier engine applies them to the owner's active barriers and removes them when the vow ends.
+  barrierHp: { label: { en: "Barrier hit points", es: "PG de barrera" }, changes: () => [] },
+  barrierAc: { label: { en: "Barrier AC", es: "CA de barrera" }, changes: () => [] },
+  barrierRadius: { label: { en: "Barrier radius (ft)", es: "Radio de barrera (pies)" }, changes: () => [] },
+  barrierMinutes: { label: { en: "Barrier duration (min)", es: "Duración de barrera (min)" }, changes: () => [] }
 };
 
 const VOW_PRESETS = {
@@ -7639,6 +7691,7 @@ async function executeDomainProfile(actor, targets, requestId) {
   if (!profile || !eligible.length || (state.profileRequests ?? []).includes(requestId)) return false;
   state.profileRequests = [...(state.profileRequests ?? []).slice(-99),requestId];
   await setDomain(actor,state);
+  const sharedSimple=new Map();
   for (const tk of eligible) {
     if (getDomain(actor)?.openingId !== state.openingId) break;
     const target = tk.actor ?? tk.document?.actor;
@@ -7666,10 +7719,16 @@ async function executeDomainProfile(actor, targets, requestId) {
     await roll.toMessage?.({ speaker: docClass("ChatMessage").getSpeaker?.({actor}), flavor: esc(profile.name) + (profile.halved ? ` (${t("Domain.ProfileHalved")})` : "") });
     if (getDomain(actor)?.openingId !== state.openingId || !domainProfileTargets(actor,[tk]).length) continue;
     let value = Math.max(0, Math.floor(roll.total * (success ? ({half:0.5,none:0,full:1})[profile.onSave] : 1) * (profile.halved ? 0.5 : 1)));
+    // V.6: several creatures inside one Simple Domain hit by one area effect: the barrier takes the damage once, and the
+    // overflow (if it breaks) reaches each of them. The event id is the barrier's, not the target's.
     const simple=simpleDomainAt(tk);
     if(simple&&value>0){
-      const absorption=await absorbSimpleDomain(simple,value,`${state.openingId}:${requestId}:${target.uuid}`);
-      if(!absorption)continue;
+      let absorption=sharedSimple.get(simple.uuid);
+      if(!absorption){
+        absorption=await absorbSimpleDomain(simple,value,`${state.openingId}:${requestId}:${simple.uuid}`);
+        if(!absorption)continue;
+        sharedSimple.set(simple.uuid,absorption);
+      }
       value=absorption.overflow;
     }
     if (value) await target.applyDamage([{ value, type: profile.damageType }]);
@@ -8214,13 +8273,161 @@ Hooks.once("ready", () => {
 
 /* ---- v1.17: breakthroughs, Black Flash ignores resistance, RCT pool regeneration ---- */
 
-async function addBreakthrough(actor, n = 1, reason = "") {
-  if (!actor?.isOwner) return 0;
-  const total = Math.max(0, (Number(actor.getFlag(MODULE_ID, "breakthroughs")) || 0) + n);
-  await actor.setFlag(MODULE_ID, "breakthroughs", total);
-  if (n > 0) await chat(actor, `<p><i class="fas fa-bolt"></i> ${t("Breakthrough.Gained", { name: esc(actor.name), total })}${reason ? ` <em>(${esc(reason)})</em>` : ""}</p>`);
-  if (n > 0) await offerAwakenedUnderstanding(actor, total - n, total).catch((err) => reportError("awakened understanding", err));
-  return total;
+/**
+ * Record a breakthrough (or a GM correction) in the ledger, the single source of truth, and mirror the total into
+ * flags.jjk5e.breakthroughs. opts.kind: blackFlash | rct | physiology (real breakthroughs: The Zone follows), manual
+ * (the GM records one that happened earlier), correction (± count only). opts.eventId makes the call idempotent.
+ * Returns { added, total }.
+ */
+async function addBreakthrough(actor, n = 1, reason = "", opts = {}) {
+  if (!actor?.isOwner) return { added: false, total: 0 };
+  const kind = opts.kind ?? (n < 0 ? "correction" : "manual");
+  const eventId = opts.eventId ?? `${kind}:${foundry.utils.randomID()}`;
+  const result = await queueCE(actor, async () => {
+    const ledger = readLedger(actor.flags?.[MODULE_ID]);
+    const event = { id: eventId, kind, delta: Math.trunc(Number(n) || 0), at: Date.now(), worldTime: game.time?.worldTime ?? null,
+      sceneId: canvas?.scene?.id ?? null, combatId: game.combat?.id ?? null, round: game.combat?.round ?? null,
+      item: opts.item ?? null, technique: opts.technique ?? null, user: game.user?.id ?? null,
+      approvedBy: game.user?.isGM ? game.user.id : (opts.approvedBy ?? null), reason: reason || null };
+    const r = kind === "correction" && Number.isFinite(opts.total) ? correctTotal(ledger, opts.total, { id: eventId, user: game.user?.id, reason })
+      : recordEvent(ledger, event);
+    if (!r.added) return r;
+    await actor.update({ [`flags.${MODULE_ID}.${BT_FLAG}`]: r.ledger, [`flags.${MODULE_ID}.breakthroughs`]: r.total }, { jjk5eLedger: true });
+    return r;
+  });
+  if (!result?.added) return { added: false, total: result?.total ?? 0 };
+  const { total, before } = result;
+  if (total > before) await chat(actor, `<p><i class="fas fa-bolt"></i> ${t("Breakthrough.Gained", { name: esc(actor.name), total })}${reason ? ` <em>(${esc(reason)})</em>` : ""}</p>`);
+  if (total > before) await offerAwakenedUnderstanding(actor, before, total).catch((err) => reportError("awakened understanding", err));
+  if (BT_GRANTS_ZONE.has(kind)) await enterZone(actor, { kind, eventId }).catch((err) => reportError("the zone", err));
+  for (const app of BREAKTHROUGH_APPS.values()) if (app.actor?.uuid === actor.uuid) app.render();
+  Hooks.callAll("jjk5e.breakthrough", actor, { kind, eventId, total, before });
+  return { added: true, total };
+}
+
+/* ---- 2.23 Breakthrough Manager (Sealed Ink): totals, The Zone, RCT, Awakened Understanding, history, GM tools ---- */
+const BREAKTHROUGH_APPS = new Map();
+function breakthroughView(actor) {
+  const flags = actor.flags?.[MODULE_ID] ?? {};
+  const ledger = readLedger(flags);
+  const total = ledgerTotal(ledger);
+  const zone = zoneEffect(actor);
+  const stacks = Number(zone?.flags?.jjk5e?.zone) || 0;
+  const crit = clamp(Number(foundry.utils.getProperty(actor, "flags.dnd5e.weaponCriticalThreshold")) || 20, 2, 20);
+  const bfTarget = blackFlashTarget({ zoneStacks: stacks, itemRanges: actor.items.map((i) => Number(i.flags?.jjk5e?.blackFlashRange) || 0) });
+  const always = actor.items.some((i) => i.flags?.jjk5e?.alwaysBlackFlash);
+  // Chance per melee attack roll: a critical (advantage while in The Zone) times the second d20.
+  const pCrit1 = (21 - crit) / 20, pCrit = zone && setting("zoneAdvantage") ? 1 - (1 - pCrit1) ** 2 : pCrit1;
+  const pBF = always ? 1 : (21 - bfTarget) / 20;
+  const pool = actor.items.find((i) => /Reverse Cursed Technique \(Healing Pool\)/i.test(baseName(i)));
+  const owned = actor.items.map((i) => baseName(i));
+  const ceScore = Number(actor.system?.abilities?.[ceAbility(actor)]?.value) || 0;
+  return { ledger, total, bf: blackFlashCount(ledger), zone, stacks, crit, bfTarget, chance: pCrit * pBF, pool,
+    poolMax: rctPoolMax(characterLevel(actor), ceMod(actor)),
+    rct: hasCompleteRCT(actor) ? "awakened" : actor.getFlag(MODULE_ID, "cursedPhysiology") ? "physiology"
+      : rctAwakeningPath({ heavenlyOnly: isHeavenlyOnly(actor), cursedSpirit: isCursedSpiritPC(actor) }) === "none" ? "unavailable" : "dormant",
+    tiers: understandingStatus({ total, ceScore, owned }),
+    issues: diagnoseBreakthroughs({ flags, zoneStacks: stacks, zoneHasDuration: !zone || Number(zone.duration?.remaining ?? 1) > 0 }) };
+}
+function makeBreakthroughManagerClass() {
+  return class JJKBreakthroughManager extends foundry.applications.api.ApplicationV2 {
+    get actor() { return this._jjkActor ? liveActor(this._jjkActor) : null; }
+    set actor(a) { this._jjkActor = a; }
+    static DEFAULT_OPTIONS = {
+      classes: ["jjk5e-ui", "jjk5e-breakthroughs"], window: { icon: "fas fa-bolt-lightning", resizable: true },
+      position: { width: 620, height: "auto" },
+      actions: {
+        record: async function () {
+          if (!game.user.isGM) return ui.notifications.warn(t("Notify.GMOnly"));
+          const why = await promptText(t("Breakthrough.Record"), t("Breakthrough.RecordHint"));
+          if (why === null) return;
+          await addBreakthrough(this.actor, 1, why || t("Breakthrough.Manual"), { kind: "manual" });
+          this.render();
+        },
+        correct: async function () {
+          if (!game.user.isGM) return ui.notifications.warn(t("Notify.GMOnly"));
+          const n = await promptNumber(t("Breakthrough.Correct"), t("Breakthrough.CorrectHint"), ledgerTotal(readLedger(this.actor.flags?.[MODULE_ID])));
+          if (n === null || n === undefined || !Number.isFinite(Number(n))) return;
+          await addBreakthrough(this.actor, 0, t("Breakthrough.Corrected"), { kind: "correction", total: Math.max(0, Math.floor(Number(n))) });
+          this.render();
+        },
+        repair: async function () {
+          if (!game.user.isGM) return ui.notifications.warn(t("Notify.GMOnly"));
+          // Repairs only rewrite the ledger and its mirror from the ledger: they never add a breakthrough or recover anything.
+          const a = this.actor;
+          await repairBreakthroughs(a);
+          const zone = zoneEffect(a);
+          if (zone && !(Number(zone.duration?.remaining ?? 1) > 0)) await safeDelete(zone);
+          ui.notifications.info(t("Breakthrough.Repaired", { name: a.name })); this.render();
+        },
+        offer: async function () { if (game.user.isGM) await offerAwakenedUnderstanding(this.actor, 0, ledgerTotal(readLedger(this.actor.flags?.[MODULE_ID]))); },
+        moment: async function () { if (game.user.isGM) await rctMoment(this.actor, t("Breakthrough.ByGM")); },
+        roll: async function () { await rollRCTAwakening(this.actor); this.render(); }
+      }
+    };
+    get title() { return `${t("Breakthrough.Manager")} — ${this.actor?.name ?? ""}`; }
+    async _renderHTML() {
+      const a = this.actor;
+      if (!a) return `<section class="jjk-panel"><p class="hint">${t("Notify.NoActor")}</p></section>`;
+      const v = breakthroughView(a), gm = game.user.isGM;
+      const left = v.zone ? Math.max(0, Math.ceil(Number(v.zone.duration?.remaining) || 0)) : 0;
+      const stat = (label, value, hint = "") => `<div class="jjk-bt-stat"><span>${label}</span><strong>${value}</strong>${hint ? `<small>${hint}</small>` : ""}</div>`;
+      const tier = (x) => `<li class="jjk-bt-tier is-${x.status}"><strong>${esc(x.name)}</strong> <span class="jjk-chip">${t(`Breakthrough.Status.${x.status}`)}</span>
+        ${x.missing.length ? `<small>${x.missing.map((m) => m.kind === "feat" ? esc(m.need) : t(`Breakthrough.Need.${m.kind}`, { need: m.need, have: m.have })).join(" · ")}</small>` : ""}</li>`;
+      const kindLabel = (k) => t(`Breakthrough.Kind.${k}`);
+      const rows = [...v.ledger.events].reverse().slice(0, 40).map((e) => `<tr><td>${e.at ? new Date(e.at).toLocaleString(game.i18n.lang) : "—"}</td>
+        <td>${kindLabel(e.kind)}</td><td class="num">${e.delta > 0 ? "+" : ""}${e.delta}</td><td>${esc(e.item ?? e.technique ?? "")}</td>
+        <td>${esc(e.reason ?? "")}${e.recovered ? ` <i class="fas fa-bolt-lightning" title="${t("Breakthrough.Recovered")}"></i>` : ""}</td>
+        <td>${esc(game.users.get(e.user)?.name ?? "")}</td></tr>`).join("");
+      return `<section class="jjk-panel jjk-bt">
+        <div class="jjk-bt-stats">
+          ${stat(t("Breakthrough.Name"), v.total)}
+          ${stat(t("Breakthrough.BlackFlashes"), v.bf)}
+          ${stat(t("Breakthrough.CritRange"), `${v.crit}–20`)}
+          ${stat(t("Breakthrough.BFRange"), `${v.bfTarget}–20`)}
+          ${stat(t("Breakthrough.Chance"), `${(v.chance * 100).toFixed(1)} %`, t("Breakthrough.ChanceHint"))}
+          ${stat(t("Zone.Name"), v.zone ? `×${v.stacks}` : "—", v.zone ? t("Breakthrough.SecondsLeft", { n: left }) : "")}
+          ${stat(t("Breakthrough.RCTState"), t(`Breakthrough.RCTStatus.${v.rct}`), v.pool ? `${poolValue(v.pool)}/${poolMax(v.pool)} (${t("Breakthrough.PoolRule", { n: v.poolMax })})` : "")}
+        </div>
+        <h3>${t("Breakthrough.Understanding")}</h3><ul class="jjk-bt-tiers">${v.tiers.map(tier).join("")}</ul>
+        <h3>${t("Breakthrough.History")}</h3>
+        ${rows ? `<div class="scroll"><table class="jjk-table stack"><thead><tr><th>${t("Breakthrough.When")}</th><th>${t("Breakthrough.Kind.Label")}</th>
+          <th class="num">±</th><th>${t("Breakthrough.Source")}</th><th>${t("Breakthrough.Note")}</th><th>${t("Breakthrough.User")}</th></tr></thead><tbody>${rows}</tbody></table></div>`
+          : `<p class="hint">${t("Breakthrough.NoHistory")}</p>`}
+        ${v.issues.length ? `<p class="jjk-note">${t("Breakthrough.Issues", { n: v.issues.length })}: ${v.issues.map((i) => t(`Breakthrough.Issue.${i.kind}`)).join(", ")}</p>` : ""}
+        <footer class="jjk-bt-actions">
+          ${a.isOwner && a.getFlag(MODULE_ID, "rctChance") ? `<button type="button" data-action="roll"><i class="fas fa-heart-pulse"></i> ${t("RCT.Roll")}</button>` : ""}
+          ${gm ? `<button type="button" data-action="record"><i class="fas fa-plus"></i> ${t("Breakthrough.Record")}</button>
+          <button type="button" data-action="correct"><i class="fas fa-pen"></i> ${t("Breakthrough.Correct")}</button>
+          <button type="button" data-action="offer"><i class="fas fa-graduation-cap"></i> ${t("Breakthrough.Offer")}</button>
+          ${v.rct === "dormant" ? `<button type="button" data-action="moment"><i class="fas fa-heart-pulse"></i> ${t("Breakthrough.Moment")}</button>` : ""}
+          <button type="button" data-action="repair"><i class="fas fa-screwdriver-wrench"></i> ${t("Breakthrough.Repair")}</button>` : ""}
+        </footer></section>`;
+    }
+    _replaceHTML(result, content) { content.innerHTML = result; }
+    _onClose(options) { super._onClose?.(options); BREAKTHROUGH_APPS.delete(this._jjkKey); }
+  };
+}
+/** Rewrite the ledger and its mirror from the ledger itself (migrates an old count once). Grants nothing. */
+async function repairBreakthroughs(actor) {
+  if (!game.user.isGM || !actor) return false;
+  return queueCE(actor, async () => {
+    const ledger = readLedger(actor.flags?.[MODULE_ID]);
+    await actor.update({ [`flags.${MODULE_ID}.${BT_FLAG}`]: ledger, [`flags.${MODULE_ID}.breakthroughs`]: ledgerTotal(ledger) }, { jjk5eLedger: true });
+    return true;
+  });
+}
+let JJKBreakthroughManagerClass = null;
+function openBreakthroughs(actor = null) {
+  actor = requireActor(actor);
+  if (!actor) return;
+  JJKBreakthroughManagerClass ??= makeBreakthroughManagerClass();
+  let app = BREAKTHROUGH_APPS.get(actor.uuid);
+  if (!app) {
+    app = new JJKBreakthroughManagerClass({ id: `jjk5e-breakthroughs-${actor.uuid.replace(/\./g, "-")}` });
+    app.actor = actor; app._jjkKey = actor.uuid; BREAKTHROUGH_APPS.set(actor.uuid, app);
+  }
+  return app.render({ force: true });
 }
 
 /** Awakened Understanding: when the breakthrough total reaches a tier's prerequisite, the GM gets a card to grant it. */
@@ -8252,6 +8459,7 @@ async function rollRCTAwakening(actor) {
     return null;
   }
   if (actor.getFlag(MODULE_ID, "rctChance")) await actor.unsetFlag(MODULE_ID, "rctChance");
+  await recordRCTDecision(actor, "attempts", game.user.isGM ? "GM" : "player").catch((err) => reportError("rct attempt", err));
   // Blood Conversion (optional rule): Blood Production gives advantage on the roll.
   const adv = rctAdvantage(actor);
   const roll = await new Roll(adv ? "2d100kh" : "1d100").evaluate();
@@ -8260,6 +8468,16 @@ async function rollRCTAwakening(actor) {
     flavor: `<strong>${t("Breakthrough.RCTRoll")}</strong>${adv ? ` (${t("Opt.bloodConversion.Name")})` : ""} — ${ok ? t("Breakthrough.RCTYes") : t("Breakthrough.RCTNo")}` });
   if (!ok) return false;
   return unlockRCT(actor, t("Breakthrough.RCTRoll"));
+}
+
+/** RCT awakening history in the ledger (attempts and GM refusals): one player roll per GM permission. */
+async function recordRCTDecision(actor, list, note = "") {
+  if (!actor?.isOwner) return;
+  await queueCE(actor, async () => {
+    const ledger = readLedger(actor.flags?.[MODULE_ID]);
+    ledger.rct[list] = [...(ledger.rct[list] ?? []).slice(-49), { id: foundry.utils.randomID(), at: Date.now(), user: game.user?.id ?? null, note: String(note).slice(0, 120) }];
+    await actor.update({ [`flags.${MODULE_ID}.${BT_FLAG}`]: ledger }, { jjk5eLedger: true });
+  });
 }
 
 /** Every two rounds in combat the RCT healing pool recovers 10 hit points. */
@@ -8280,7 +8498,10 @@ async function regenRCTPools(combat) {
 
 Hooks.once("ready", () => {
   if (game.system?.id !== "dnd5e") return;
-  Object.assign(game.modules.get(MODULE_ID).api, { addBreakthrough, rollRCTAwakening, regenRCTPools });
+  Object.assign(game.modules.get(MODULE_ID).api, { addBreakthrough, rollRCTAwakening, regenRCTPools, openBreakthroughs,
+    breakthroughs: { read: (actor) => readLedger(actor?.flags?.[MODULE_ID]), total: (actor) => ledgerTotal(readLedger(actor?.flags?.[MODULE_ID])),
+      diagnose: (actor) => diagnoseBreakthroughs({ flags: actor?.flags?.[MODULE_ID], zoneStacks: Number(zoneEffect(actor)?.flags?.jjk5e?.zone) || 0 }),
+      repair: repairBreakthroughs, view: breakthroughView } });
   Hooks.on("dnd5e.preCalculateDamage", (actor, damages, options) => {
     const rolls = options?.originatingMessage?.rolls ?? [];
     const midiCard = options?.midi?.itemCardUuid;
@@ -8295,8 +8516,589 @@ MENU_ACTIONS.splice(MENU_ACTIONS.length - 1, 0,
   ["rct", "fa-solid fa-heart-pulse", "SceneTools.RCT", (a) => rollRCTAwakening(a)],
   ["breakthrough", "fa-solid fa-bolt-lightning", "SceneTools.Breakthrough", async (a) => {
     const n = await promptNumber(t("SceneTools.Breakthrough"), t("Breakthrough.Prompt"), 1);
-    if (n) addBreakthrough(a, n, t("Breakthrough.Manual"));
+    if (n) addBreakthrough(a, n, t("Breakthrough.Manual"), { kind: n < 0 ? "correction" : "manual" });
   }, true]);
+
+/* -------------------------------------------- */
+/*  2.23 Advanced Barrier Engine (runtime)       */
+/* -------------------------------------------- */
+/*
+ * Responsibilities: the barrier engine (scripts/jjk5e-barrier-engine.mjs) owns the rules (stats, access, geometry,
+ * damage, Intruder, vow modifiers); this block owns Foundry: the scene registry, GM authority, Regions, movement,
+ * CE cost of a Curtain inside a Pure Barrier, expiry and the Barrier Manager. Domain barriers stay in the domain engine.
+ */
+const BARRIER_QUERY = `${MODULE_ID}.barrier`;
+const BARRIER_SCENE_QUEUES = new Map();
+const BARRIER_APPS = new Set();
+const BARRIER_REQUESTS = new Set();
+const barrierPPF = (scene) => (Number(scene?.grid?.size) || 100) / (Number(scene?.grid?.distance) || 5);
+const sceneBarriers = (scene) => readBarrierRegistry(scene, MODULE_ID);
+function tokenPoint(doc, at = {}) {
+  const scene = doc?.parent;
+  const size = Number(scene?.grid?.size) || 100;
+  const x = Number(at.x ?? doc?.x) || 0, y = Number(at.y ?? doc?.y) || 0;
+  return { x: x + ((Number(doc?.width) || 1) * size) / 2, y: y + ((Number(doc?.height) || 1) * size) / 2, z: Number(at.elevation ?? doc?.elevation) || 0 };
+}
+/** Facts used by access rules, derived from the actor itself (never from what a player sends). */
+function barrierFacts(doc) {
+  const actor = doc?.actor;
+  const summonerUuid = (() => {
+    const own = doc?.flags?.[MODULE_ID]?.summon?.summonerUuid;
+    if (own) return own;
+    const origin = actor?.flags?.dnd5e?.summon?.origin ?? doc?.flags?.dnd5e?.summon?.origin;
+    try { return origin ? globalThis.fromUuidSync?.(origin)?.actor?.uuid ?? null : null; } catch { return null; }
+  })();
+  const curse = !!(actor?.flags?.[MODULE_ID]?.curse || (actor && isCursedSpiritPC(actor)) || /curse/i.test(actor?.system?.details?.type?.subtype ?? ""));
+  const hasCE = !!(actor && findPool(actor) && !isHeavenlyOnly(actor));
+  return { actorUuid: actor?.uuid ?? null, creatureType: actor?.system?.details?.type?.value ?? (actor?.type === "character" ? "humanoid" : null),
+    hasCE, curse, sorcerer: hasCE && !curse, summonerUuid, disposition: Number(doc?.disposition) };
+}
+async function writeBarrierRegistry(scene, next) {
+  pruneBarrierRegistry(next);
+  const R = foundry.data?.operators?.ForcedReplacement;
+  const key = `flags.${MODULE_ID}.${BARRIER_FLAG}`;
+  if (R) return scene.update({ [key]: R.create(next) }, { jjk5eBarrier: true });
+  const gone = Object.keys(sceneBarriers(scene).entries).filter((id) => !next.entries[id]);
+  return scene.update({ [key]: next, ...Object.fromEntries(gone.map((id) => [`${key}.entries.-=${id}`, null])) }, { jjk5eBarrier: true });
+}
+/** Serialized read-modify-write of one scene's registry (GM only). fn returns the barrier ids it changed. */
+async function withBarriers(scene, fn) {
+  if (!isActiveGM() || !scene) return null;
+  const key = scene.uuid ?? scene.id;
+  const previous = BARRIER_SCENE_QUEUES.get(key) ?? Promise.resolve();
+  const next = previous.catch(() => {}).then(async () => {
+    const reg = sceneBarriers(scene);
+    const before = JSON.stringify(reg);
+    const out = await fn(reg);
+    if (JSON.stringify(reg) !== before) await writeBarrierRegistry(scene, reg);
+    return out;
+  });
+  BARRIER_SCENE_QUEUES.set(key, next);
+  try { return await next; } finally { if (BARRIER_SCENE_QUEUES.get(key) === next) BARRIER_SCENE_QUEUES.delete(key); for (const app of BARRIER_APPS) app.render(); }
+}
+async function drawBarrier(scene, b) {
+  if (!scene?.createEmbeddedDocuments) return null;
+  const ppf = barrierPPF(scene), v14 = (Number(game.release?.generation) || 0) >= 14;
+  const color = b.kind === "curtain" ? "#120d1a" : b.kind === "pureBarrier" ? "#d8c27a" : b.kind === "glassBox" ? "#9fd7e6" : "#7a2030";
+  let shape;
+  if (b.shape === "cube") { const s = b.size * ppf; shape = { type: "rectangle", x: b.x - s / 2, y: b.y - s / 2, width: s, height: s, rotation: 0, hole: false }; }
+  else {
+    const r = b.radius * ppf;
+    shape = domainFits(scene, b.x, b.y, r) ? domainZoneShape(scene, v14 ? "circle" : "ellipse", b.x, b.y, r) : domainZoneShape(scene, "polygon", b.x, b.y, r);
+  }
+  try {
+    const [region] = await scene.createEmbeddedDocuments("Region", [{ name: b.name, color, shapes: [shape],
+      visibility: globalThis.CONST?.REGION_VISIBILITY?.ALWAYS ?? 2, flags: { [MODULE_ID]: { barrierId: b.id } } }]);
+    return region?.id ?? null;
+  } catch (err) { reportError("barrier region", err); return null; }
+}
+async function eraseBarrier(scene, b) {
+  const region = b?.regionId ? scene?.getEmbeddedDocument?.("Region", b.regionId) : null;
+  if (region) await safeDelete(region);
+  for (const r of [...(scene?.regions ?? [])].filter((r) => r.flags?.[MODULE_ID]?.barrierId === b?.id)) await safeDelete(r);
+}
+/** Player → GM. Resolves the GM's answer, or null without a GM. */
+async function barrierRequest(op, data) {
+  const msg = { op, ...data, requestId: data.requestId ?? foundry.utils.randomID() };
+  if (isActiveGM()) return handleBarrierQuery(msg, { user: game.user });
+  const gm = game.users?.activeGM;
+  if (!gm?.query) { ui.notifications.warn(t("Barrier.NoGM")); return null; }
+  try { return await gm.query(BARRIER_QUERY, msg, { timeout: 30000 }); } catch (err) { reportError("barrier request", err); return null; }
+}
+const ownsActor = (user, actor) => !!(user?.isGM || actor?.testUserPermission?.(user, "OWNER"));
+async function handleBarrierQuery(msg, { user } = {}) {
+  if (!isActiveGM() || !msg || typeof msg.op !== "string" || typeof msg.requestId !== "string" || msg.requestId.length > 40) return null;
+  if (BARRIER_REQUESTS.has(msg.requestId)) return { duplicate: true };
+  BARRIER_REQUESTS.add(msg.requestId);
+  if (BARRIER_REQUESTS.size > 500) BARRIER_REQUESTS.delete(BARRIER_REQUESTS.values().next().value);
+  const scene = game.scenes?.get?.(msg.sceneId);
+  const op = BARRIER_OPS[msg.op];
+  if (!op || !scene) return null;
+  try { return await op(scene, msg, user); } catch (err) { reportError(`barrier ${msg.op}`, err); return null; }
+}
+const BARRIER_OPS = {
+  /** Curtain or Glass Box from an activity the user's actor just used. The GM recomputes every value. */
+  async create(scene, msg, user) {
+    const actor = await fromUuid(msg.actorUuid).catch(() => null);
+    const token = await fromUuid(msg.tokenUuid).catch(() => null);
+    if (!actor || !ownsActor(user, actor) || token?.actor?.uuid !== actor.uuid || token.parent?.id !== scene.id) return null;
+    if (!["curtain", "glassBox"].includes(msg.kind)) return null;
+    const extra = clamp(Math.floor(Number(msg.extra) || 0), 0, 200);
+    const now = Number(game.time?.worldTime) || 0;
+    const id = foundry.utils.randomID();
+    const at = msg.kind === "glassBox" && msg.point && [msg.point.x, msg.point.y].every(Number.isFinite) ? msg.point : tokenPoint(token);
+    if (msg.kind === "glassBox" && Math.hypot(at.x - tokenPoint(token).x, at.y - tokenPoint(token).y) > ftToPx(scene, msg.reaction ? 10 : 30) + 1) return null;
+    const stats = msg.kind === "curtain" ? curtainStats({ ceMod: ceMod(actor), level: characterLevel(actor), ceDC: domainSaveDC(actor), extra })
+      : glassBoxStats({ prof: actor.system?.attributes?.prof, ceDC: domainSaveDC(actor), weakenings: extra });
+    const b = cleanBarrier({ id, kind: msg.kind, name: msg.kind === "curtain" ? t("Barrier.CurtainOf", { name: actor.name }) : t("Barrier.GlassBoxOf", { name: actor.name }),
+      ownerUuid: actor.uuid, sceneId: scene.id, itemUuid: typeof msg.itemUuid === "string" ? msg.itemUuid : null, source: BARRIER_PROFILES[msg.kind].source,
+      x: at.x, y: at.y, elevation: Number(token.elevation) || 0, radius: stats.radius ?? 0, size: stats.size ?? 10,
+      hp: stats.hp, max: stats.hp, ac: stats.ac, started: { worldTime: now, combatId: game.combat?.id ?? null, round: game.combat?.round ?? 0 },
+      expiresAt: now + stats.minutes * 60, origin: msg.requestId }, id);
+    const vowed = barrierVowSync(b, actor);
+    vowed.regionId = await drawBarrier(scene, vowed);
+    await withBarriers(scene, (reg) => { reg.entries[id] = vowed; });
+    await chat(actor, `<p><i class="fas fa-torii-gate"></i> ${t(msg.kind === "curtain" ? "Barrier.CurtainUp" : "Barrier.GlassBoxUp",
+      { name: esc(actor.name), hp: vowed.hp, ac: vowed.ac, minutes: Math.round((vowed.expiresAt - now) / 60), size: vowed.size })}</p>`);
+    Hooks.callAll("jjk5e.barrierCreated", scene, vowed);
+    return { id };
+  },
+  /** GM-reviewed attack against a physical barrier (same flow as attacking a domain barrier). */
+  async attack(scene, msg, user) {
+    const seeker = await fromUuid(msg.actorUuid).catch(() => null);
+    if (!seeker || !ownsActor(user, seeker)) return null;
+    const b = sceneBarriers(scene).entries[msg.barrierId];
+    if (!b || b.state !== "active" || !BARRIER_PROFILES[b.kind].attackable) return null;
+    const bonus = Number(msg.bonus), formula = String(msg.formula ?? "").trim(), type = String(msg.type ?? "");
+    if (!Number.isInteger(bonus) || Math.abs(bonus) > 100 || !/^\d{1,2}d(?:4|6|8|10|12|20)(?:\s*[+-]\s*\d{1,3})?$/.test(formula) ||
+        (type && !BARRIER_DAMAGE_TYPES.includes(type))) return null;
+    const attack = await new Roll(`1d20 + (${bonus})`).evaluate();
+    const natural = attack.dice?.[0]?.results?.find((d) => d.active !== false)?.result ?? attack.dice?.[0]?.total;
+    const hit = natural === 20 || (natural !== 1 && attack.total >= b.ac);
+    await attack.toMessage?.({ speaker: docClass("ChatMessage").getSpeaker?.({ actor: seeker }), flavor: `${esc(b.name)} — ${t(hit ? "Domain.BarrierAttackHit" : "Domain.BarrierAttackMiss")}` });
+    if (!hit) return { hit: false };
+    const dmg = await new Roll(natural === 20 ? formula.replace(/^(\d+)d/, (m, n) => `${2 * Number(n)}d`) : formula).evaluate();
+    await dmg.toMessage?.({ speaker: docClass("ChatMessage").getSpeaker?.({ actor: seeker }), flavor: `${esc(b.name)}${type ? ` (${esc(type)})` : ""}` });
+    return damageSceneBarrier(scene, b.id, dmg.total, type, `atk:${msg.requestId}`, seeker.name);
+  },
+  /** Direct damage (GM, or a technique resolved by the GM). */
+  async damage(scene, msg, user) {
+    if (!user?.isGM) return null;
+    return damageSceneBarrier(scene, msg.barrierId, Number(msg.amount), String(msg.type ?? ""), `dmg:${msg.requestId}`, user.name);
+  },
+  async close(scene, msg, user) {
+    const b = sceneBarriers(scene).entries[msg.barrierId];
+    if (!b || b.state !== "active") return null;
+    const owner = b.ownerUuid ? await fromUuid(b.ownerUuid).catch(() => null) : null;
+    if (!user?.isGM && !ownsActor(user, owner)) return null;
+    return endSceneBarrier(scene, b.id, "closed");
+  },
+  /** Barrier Intruder: the GM rolls the CE check (d20 + the actor's CE ability check bonus) against the creator's DC. */
+  async intrude(scene, msg, user) {
+    const actor = await fromUuid(msg.actorUuid).catch(() => null);
+    const token = await fromUuid(msg.tokenUuid).catch(() => null);
+    if (!actor || !ownsActor(user, actor) || token?.actor?.uuid !== actor.uuid || token.parent?.id !== scene.id) return null;
+    if (!actor.items.some((i) => baseName(i) === "Barrier Intruder")) return null;
+    const b = sceneBarriers(scene).entries[msg.barrierId];
+    if (!b || b.state !== "active" || !BARRIER_PROFILES[b.kind].physical) return null;
+    const inside = barrierContains(b, tokenPoint(token), barrierPPF(scene));
+    const change = inside ? msg.change : null;
+    if (inside && !alterBarrier(b, change)) return null;
+    const owner = b.ownerUuid ? await fromUuid(b.ownerUuid).catch(() => null) : null;
+    const dc = owner ? domainSaveDC(owner) : Number(b.ac) || 10;
+    const ab = actor.system?.abilities?.[ceAbility(actor)] ?? {};
+    const bonus = Number(ab.check?.bonus ?? ab.mod) || 0;
+    const roll = await new Roll(`1d20 + ${bonus}`).evaluate();
+    const out = intruderOutcome({ total: roll.total, dc, inside });
+    await roll.toMessage?.({ speaker: docClass("ChatMessage").getSpeaker?.({ actor }),
+      flavor: `<strong>${t("Barrier.Intruder")}</strong> — ${esc(b.name)} (${t("Barrier.DC", { dc })}): ${t(out.success ? "Barrier.IntruderYes" : "Barrier.IntruderNo")}` });
+    if (!out.success) return { success: false };
+    await withBarriers(scene, (reg) => {
+      const cur = reg.entries[b.id];
+      if (!cur || cur.state !== "active") return;
+      let next = out.mode === "enter" ? { ...cur, passes: [...cur.passes, { actorUuid: actor.uuid, at: Date.now() }] } : alterBarrier(cur, change);
+      next.log = barrierLog(cur, { at: Date.now(), kind: out.mode === "enter" ? "intruded" : "altered", by: actor.uuid, change: change ?? null });
+      reg.entries[b.id] = next;
+    });
+    // V.6: the creator knows a creature has entered (the owner's players and the GM are told).
+    const whisper = game.users.filter((u) => u.isGM || (owner && owner.testUserPermission?.(u, "OWNER"))).map((u) => u.id);
+    await chat(owner ?? actor, `<p><i class="fas fa-door-open"></i> ${t(out.mode === "enter" ? "Barrier.Invaded" : "Barrier.Altered", { barrier: esc(b.name) })}</p>`, { whisper });
+    return { success: true, mode: out.mode };
+  },
+  /** GM tools: Pure Barrier, custom barrier, Incomplete Domain enclosure, edits. */
+  async gmCreate(scene, msg, user) {
+    if (!user?.isGM) return null;
+    const id = foundry.utils.randomID(), now = Number(game.time?.worldTime) || 0;
+    const kind = ["pureBarrier", "custom", "enclosure"].includes(msg.kind) ? msg.kind : null;
+    if (!kind || ![msg.x, msg.y, msg.radius].every(Number.isFinite) || msg.radius <= 0 || msg.radius > 50000) return null;
+    const minutes = Number(msg.minutes);
+    const b = cleanBarrier({ id, kind, name: String(msg.name || t(`Barrier.Kind.${kind}`)).slice(0, 80), ownerUuid: msg.ownerUuid ?? null, sceneId: scene.id,
+      source: kind === "custom" ? "GM" : BARRIER_PROFILES[kind].source, homebrew: kind === "custom", x: msg.x, y: msg.y,
+      elevation: Number(msg.elevation) || 0, radius: msg.radius, shape: msg.shape, hp: Number(msg.hp) || 0, max: Number(msg.hp) || 0, ac: Number(msg.ac) || 0,
+      immune: msg.immune, resist: msg.resist, vuln: msg.vuln, rules: msg.rules, authorized: msg.authorized, linkedDomain: msg.linkedDomain ?? null,
+      started: { worldTime: now, combatId: game.combat?.id ?? null, round: game.combat?.round ?? 0 },
+      expiresAt: minutes > 0 ? now + minutes * 60 : null }, id);
+    if (!b) return null;
+    b.regionId = await drawBarrier(scene, b);
+    await withBarriers(scene, (reg) => { reg.entries[id] = b; });
+    return { id };
+  },
+  async gmEdit(scene, msg, user) {
+    if (!user?.isGM) return null;
+    return withBarriers(scene, (reg) => {
+      const cur = reg.entries[msg.barrierId];
+      if (!cur || cur.state !== "active") return null;
+      let next = { ...cur };
+      if (Number.isFinite(Number(msg.hp))) next.hp = clamp(Math.floor(Number(msg.hp)), 0, Math.max(next.max, Math.floor(Number(msg.hp))));
+      if (Number.isFinite(Number(msg.max)) && Number(msg.max) > 0) next.max = Math.floor(Number(msg.max));
+      if (Number.isFinite(Number(msg.ac)) && Number(msg.ac) > 0) next.ac = Math.floor(Number(msg.ac));
+      if (typeof msg.enabled === "boolean") next.enabled = msg.enabled;
+      if (Array.isArray(msg.authorized)) next.authorized = msg.authorized.filter((u) => typeof u === "string").slice(0, 60);
+      if (msg.change) next = alterBarrier(next, msg.change) ?? next;
+      next.log = barrierLog(cur, { at: Date.now(), kind: "gmEdit", by: user.id });
+      reg.entries[cur.id] = cleanBarrier(next, cur.id);
+      return { id: cur.id };
+    });
+  },
+  async repair(scene, msg, user) { return user?.isGM ? repairBarriers(scene) : null; }
+};
+async function damageSceneBarrier(scene, barrierId, amount, type, eventId, by = "") {
+  let result = null;
+  await withBarriers(scene, (reg) => {
+    const cur = reg.entries[barrierId];
+    if (!cur) return;
+    result = resolveBarrierDamage(cur, { amount, type, eventId });
+    reg.entries[barrierId] = result.barrier;
+  });
+  if (!result || result.duplicate || result.ignored) return result;
+  const b = result.barrier, owner = b.ownerUuid ? await fromUuid(b.ownerUuid).catch(() => null) : null;
+  await chat(owner, `<p><i class="fas fa-shield-halved"></i> ${t("Barrier.Hit", { barrier: esc(b.name), dmg: result.applied, hp: b.hp, max: b.max })}${by ? ` <em>(${esc(by)})</em>` : ""}</p>`);
+  if (result.destroyed) await afterBarrierEnded(scene, b, "destroyed");
+  return { hit: true, hp: b.hp, applied: result.applied, destroyed: result.destroyed };
+}
+async function endSceneBarrier(scene, barrierId, reason) {
+  let ended = null;
+  await withBarriers(scene, (reg) => { const n = endBarrier(reg.entries[barrierId], reason); if (n) { reg.entries[barrierId] = n; ended = n; } });
+  if (ended) await afterBarrierEnded(scene, ended, reason);
+  return ended ? { id: ended.id, state: ended.state } : null;
+}
+async function afterBarrierEnded(scene, b, reason) {
+  await eraseBarrier(scene, b);
+  const owner = b.ownerUuid ? await fromUuid(b.ownerUuid).catch(() => null) : null;
+  await chat(owner, `<p><i class="fas fa-torii-gate"></i> ${t(`Barrier.Ended.${reason}`, { barrier: esc(b.name) })}</p>`);
+  // V.6 Glass Box: at 0 hit points the cube shatters; the owner rolls its Shatter activity (Dexterity saves nearby).
+  if (b.kind === "glassBox" && reason === "destroyed" && owner) {
+    const item = b.itemUuid ? await fromUuid(b.itemUuid).catch(() => null) : null;
+    const shatter = [...(item?.system?.activities?.values?.() ?? [])].find((a) => /shatter/i.test(a.name ?? ""));
+    await chat(owner, `<p>${t("Barrier.GlassShatter", { name: esc(owner.name) })}</p>${shatter ? `<button type="button" data-jjk5e-shatter="${esc(shatter.uuid)}">${esc(shatter.name)}</button>` : ""}`, privateTo(owner));
+  }
+  Hooks.callAll("jjk5e.barrierEnded", scene, b, reason);
+}
+/** Vow terms that change a barrier (approved, active vows of the owner). The vow engine decides; this applies. */
+const BARRIER_VOW_TERMS = { barrierHp: "hp", barrierAc: "ac", barrierRadius: "radius", barrierMinutes: "minutes" };
+function barrierVowSync(b, owner) {
+  const vows = owner ? getVows(owner).filter((v) => v.active && !v.broken && vowApproved(owner, v)) : [];
+  const want = new Map(vows.map((v) => [v.id, (v.terms ?? []).filter((x) => BARRIER_VOW_TERMS[x.type]).map((x) => ({ type: "barrier", field: BARRIER_VOW_TERMS[x.type], value: x.value }))])
+    .filter(([, terms]) => terms.length));
+  let next = b;
+  for (const v of [...(b.vows ?? [])]) if (!want.has(v.vowId)) next = removeBarrierVow(next, v.vowId);
+  for (const [id, terms] of want) next = applyBarrierVow(next, id, terms);
+  return next;
+}
+async function syncBarrierVows(owner) {
+  if (!isActiveGM() || !owner) return;
+  for (const scene of game.scenes ?? []) {
+    const mine = activeBarriers(sceneBarriers(scene)).filter((b) => b.ownerUuid === owner.uuid);
+    if (!mine.length) continue;
+    await withBarriers(scene, (reg) => { for (const b of mine) if (reg.entries[b.id]?.state === "active") reg.entries[b.id] = barrierVowSync(reg.entries[b.id], owner); });
+  }
+}
+async function expireBarriers() {
+  if (!isActiveGM()) return;
+  const now = Number(game.time?.worldTime) || 0;
+  for (const scene of game.scenes ?? []) {
+    for (const b of expiredBarriers(sceneBarriers(scene), now)) await endSceneBarrier(scene, b.id, "expired");
+  }
+}
+function barrierIssues(scene) {
+  return diagnoseBarriers(sceneBarriers(scene), { sceneId: scene.id, worldTime: Number(game.time?.worldTime) || 0,
+    ownerExists: (u) => { try { return !!globalThis.fromUuidSync?.(u); } catch { return false; } },
+    regionExists: (id) => !!scene.getEmbeddedDocument?.("Region", id) });
+}
+/** Safe repair: end what is already over (destroyed or expired), redraw a missing Region, delete stray barrier Regions.
+ *  It never adds hit points, never ends a barrier that is still legitimately active. */
+async function repairBarriers(scene) {
+  let n = 0;
+  for (const issue of barrierIssues(scene)) {
+    const b = issue.barrier;
+    if (issue.kind === "destroyedActive") { await endSceneBarrier(scene, b.id, "destroyed"); n++; }
+    else if (issue.kind === "expiredActive") { await endSceneBarrier(scene, b.id, "expired"); n++; }
+    else if (issue.kind === "noRegion") {
+      const regionId = await drawBarrier(scene, b);
+      await withBarriers(scene, (reg) => { if (reg.entries[b.id]) reg.entries[b.id] = { ...reg.entries[b.id], regionId }; }); n++;
+    }
+  }
+  const live = new Set(activeBarriers(sceneBarriers(scene)).map((b) => b.id));
+  for (const r of [...(scene.regions ?? [])].filter((r) => r.flags?.[MODULE_ID]?.barrierId && !live.has(r.flags[MODULE_ID].barrierId))) { await safeDelete(r); n++; }
+  return n;
+}
+/** Pure Barrier discount (V.6): a Curtain costs 1 CE for creatures the holder authorised, inside the Pure Barrier. */
+function pureBarrierCurtainBase(actor, base) {
+  const token = actorToken(actor)?.document ?? actorToken(actor);
+  const scene = token?.parent;
+  if (!scene) return base;
+  const pure = activeBarriers(sceneBarriers(scene)).filter((b) => b.kind === "pureBarrier");
+  return pure.length ? curtainCost({ base, pureBarriers: pure, actorUuid: actor.uuid, point: tokenPoint(token), ppf: barrierPPF(scene) }) : base;
+}
+/** Movement: physical barriers stop creatures their rules keep in or out (the GM moves freely). */
+function barrierMoveCheck(doc, changes, options) {
+  if (!["x", "y", "elevation"].some((k) => Object.hasOwn(changes ?? {}, k))) return true;
+  const scene = doc?.parent;
+  const list = activeBarriers(sceneBarriers(scene)).filter((b) => BARRIER_PROFILES[b.kind].physical);
+  if (!list.length || game.user?.isGM) return true;
+  const ppf = barrierPPF(scene), from = tokenPoint(doc), to = tokenPoint(doc, changes);
+  const teleport = options?.teleport === true || options?.movement?.[doc.id]?.method === "teleport";
+  const facts = barrierFacts(doc);
+  for (const b of list) {
+    for (const dir of barrierCrossings(b, from, to, ppf, { teleport })) {
+      const d = accessDecision(b, facts, dir);
+      if (!d.allowed) { ui.notifications.warn(t(dir === "enter" ? "Barrier.BlockedEnter" : "Barrier.BlockedExit", { barrier: b.name })); return false; }
+    }
+  }
+  return true;
+}
+/** GM: a pass from Barrier Intruder is used once the creature is inside. */
+async function consumeBarrierPasses(doc, changes) {
+  if (!isActiveGM() || !["x", "y", "elevation"].some((k) => Object.hasOwn(changes ?? {}, k))) return;
+  const scene = doc.parent, actorUuid = doc.actor?.uuid;
+  const list = activeBarriers(sceneBarriers(scene)).filter((b) => b.passes.some((p) => p.actorUuid === actorUuid && !p.used));
+  if (!list.length) return;
+  const ppf = barrierPPF(scene), point = tokenPoint(doc);
+  const inside = list.filter((b) => barrierContains(b, point, ppf));
+  if (!inside.length) return;
+  await withBarriers(scene, (reg) => { for (const b of inside) reg.entries[b.id] = { ...reg.entries[b.id],
+    passes: reg.entries[b.id].passes.map((p) => (p.actorUuid === actorUuid ? { ...p, used: true } : p)) }; });
+}
+/** Activities: Basic Curtain, Glass Box (both activations), Barrier Intruder. */
+async function activateBarrierFeature(actor, item, activity, usage) {
+  if (!actor?.isOwner || !item || !activity) return;
+  const name = baseName(item);
+  const tokenObj = [...(canvas?.tokens?.controlled ?? [])].find((tk) => tk.actor?.uuid === actor.uuid) ?? actorToken(actor);
+  const token = tokenObj?.document ?? tokenObj;
+  if (!token?.parent) return;
+  const sceneId = token.parent.id;
+  const cost = Number(item.flags?.[MODULE_ID]?.ceCosts?.[activity.id]);
+  let request = null;
+  if (name === "Basic Curtain" && cost > 0)
+    request = { kind: "curtain", sceneId, actorUuid: actor.uuid, tokenUuid: token.uuid, itemUuid: item.uuid, extra: Number(usage?.scaling) || 0 };
+  if (name === "Glass Box" && cost > 0) {
+    const target = [...(game.user?.targets ?? [])][0];
+    const point = target ? tokenPoint(target.document ?? target) : null;
+    // Glass Weakening enlarges the cube per weakening spent on its own activity; the GM sets the size in the Barrier Manager.
+    request = { kind: "glassBox", sceneId, actorUuid: actor.uuid, tokenUuid: token.uuid, itemUuid: item.uuid, point,
+      reaction: activity.activation?.type === "reaction", extra: 0 };
+  }
+  if (request) {
+    request.requestId = foundry.utils.randomID();
+    const out = await barrierRequest("create", request);
+    if (out?.id) return out;
+    // Not created (no GM, refused, or the request was lost): if no barrier carries this request id, the CE paid comes back.
+    const made = Object.values(sceneBarriers(token.parent).entries).some((b) => b.origin === request.requestId);
+    if (!made) {
+      const paid = activityEnergyProfile(actor, activity, usage ?? {}).cost;
+      if (paid > 0) await spendCE(actor, -paid, `${item.name} — ${t("Barrier.Refund")}`);
+      ui.notifications.warn(t("Barrier.NotCreated", { name: item.name }));
+    }
+    return null;
+  }
+  if (name === "Barrier Intruder") return promptBarrierIntruder(actor, token);
+}
+function nearestBarrier(token, { physical = true } = {}) {
+  const scene = token?.parent;
+  const ppf = barrierPPF(scene), p = tokenPoint(token);
+  return activeBarriers(sceneBarriers(scene)).filter((b) => !physical || BARRIER_PROFILES[b.kind].physical)
+    .map((b) => ({ b, inside: barrierContains(b, p, ppf), edge: Math.abs(Math.hypot((p.x - b.x) / ppf, (p.y - b.y) / ppf) - (b.radius || b.size / 2)) }))
+    .sort((a, b) => Number(b.inside) - Number(a.inside) || a.edge - b.edge)[0] ?? null;
+}
+async function promptBarrierIntruder(actor, token) {
+  const near = nearestBarrier(token);
+  if (!near) return ui.notifications.warn(t("Barrier.NoneNear"));
+  let change = null;
+  if (near.inside) {
+    change = await foundry.applications.api.DialogV2.prompt({ classes: ["jjk5e-ui", "jjk5e-dialog"], rejectClose: false,
+      window: { resizable: true, title: `${t("Barrier.Intruder")} — ${near.b.name}` },
+      content: `<p>${t("Barrier.AlterHint")}</p>${barrierChangeFields()}`,
+      ok: { label: t("Barrier.Alter"), callback: (e, btn) => readBarrierChange(btn.form) } });
+    if (!change) return;
+  }
+  const out = await barrierRequest("intrude", { sceneId: token.parent.id, barrierId: near.b.id, actorUuid: actor.uuid, tokenUuid: token.uuid, change });
+  if (out === null) ui.notifications.warn(t("Barrier.Rejected"));
+  return out;
+}
+function barrierChangeFields() {
+  const opt = (v, k) => `<option value="${v}">${t(k)}</option>`;
+  return `<div class="jjk-form-grid">
+    <label>${t("Barrier.Op")}<select name="op">${opt("add", "Barrier.OpAdd")}${opt("remove", "Barrier.OpRemove")}</select></label>
+    <label>${t("Barrier.Direction")}<select name="direction">${opt("enter", "Barrier.Enter")}${opt("exit", "Barrier.Exit")}</select></label>
+    <label>${t("Barrier.List")}<select name="list">${opt("deny", "Barrier.Deny")}${opt("allow", "Barrier.Allow")}</select></label>
+    <label>${t("Barrier.Who")}<select name="by">${["any", "curse", "sorcerer", "summon", "target"].map((k) => opt(k, `Barrier.By.${k}`)).join("")}</select></label></div>`;
+}
+function readBarrierChange(form) {
+  const f = (n) => form?.elements?.[n]?.value;
+  const by = f("by");
+  let selector = { by };
+  if (by === "target") {
+    const tk = [...(game.user?.targets ?? [])][0];
+    const uuid = (tk?.document ?? tk)?.actor?.uuid;
+    if (!uuid) { ui.notifications.warn(t("Barrier.TargetNeeded")); return null; }
+    selector = { by: "actor", uuid, label: (tk?.document ?? tk)?.name };
+  }
+  return { op: f("op"), direction: f("direction"), list: f("list"), selector };
+}
+async function promptBarrierAttackOn(scene, b) {
+  const tk = canvas?.tokens?.controlled?.[0];
+  const seeker = tk?.actor;
+  if (!seeker?.isOwner) return ui.notifications.warn(t("Domain.SelectAttacker"));
+  const result = await foundry.applications.api.DialogV2.prompt({ classes: ["jjk5e-ui", "jjk5e-dialog"], window: { resizable: true, title: `${t("Barrier.Attack")} — ${b.name}` }, rejectClose: false,
+    content: `<p>${t("Barrier.AttackHint", { ac: b.ac })}</p><label>${t("Domain.AttackBonus")}<input name="bonus" type="number" value="0"></label>
+      <label>${t("Domain.DamageFormula")}<input name="formula" value="1d8"></label>
+      <label>${t("Barrier.DamageType")}<select name="type"><option value=""></option>${BARRIER_DAMAGE_TYPES.map((d) => `<option value="${d}">${esc(CONFIG.DND5E?.damageTypes?.[d]?.label ?? d)}</option>`).join("")}</select></label>`,
+    ok: { callback: (e, btn) => ({ bonus: btn.form.elements.bonus.valueAsNumber, formula: btn.form.elements.formula.value, type: btn.form.elements.type.value }) } });
+  if (!result) return;
+  return barrierRequest("attack", { ...result, sceneId: scene.id, barrierId: b.id, actorUuid: seeker.uuid });
+}
+
+/* ---- Barrier Manager (Sealed Ink): active barriers on this scene, domain barriers read-only, GM tools ---- */
+function makeBarrierManagerClass() {
+  return class JJKBarrierManager extends foundry.applications.api.ApplicationV2 {
+    static DEFAULT_OPTIONS = {
+      id: "jjk5e-barriers", classes: ["jjk5e-ui", "jjk5e-barriers"], window: { icon: "fas fa-torii-gate", resizable: true },
+      position: { width: 640, height: "auto" },
+      actions: {
+        pan: async function (ev, el) { const b = this._barrier(el); if (b) canvas.animatePan?.({ x: b.x, y: b.y }); },
+        attack: async function (ev, el) { const b = this._barrier(el); if (b) await promptBarrierAttackOn(canvas.scene, b); },
+        close: async function (ev, el) {
+          const b = this._barrier(el);
+          if (b && await confirmDialog(t("Barrier.Close"), `<p>${t("Barrier.CloseConfirm", { barrier: esc(b.name) })}</p>`))
+            await barrierRequest("close", { sceneId: canvas.scene.id, barrierId: b.id });
+        },
+        damage: async function (ev, el) {
+          const b = this._barrier(el);
+          const n = b ? await promptNumber(t("Barrier.Damage"), t("Barrier.DamageHint"), 0) : null;
+          if (n) await barrierRequest("damage", { sceneId: canvas.scene.id, barrierId: b.id, amount: n, type: "" });
+        },
+        sethp: async function (ev, el) {
+          const b = this._barrier(el);
+          const n = b ? await promptNumber(t("Barrier.SetHP"), t("Barrier.SetHPHint"), b.hp) : null;
+          if (n !== null && n !== undefined) await barrierRequest("gmEdit", { sceneId: canvas.scene.id, barrierId: b.id, hp: n });
+        },
+        rules: async function (ev, el) {
+          const b = this._barrier(el);
+          if (!b) return;
+          const change = await foundry.applications.api.DialogV2.prompt({ classes: ["jjk5e-ui", "jjk5e-dialog"], rejectClose: false,
+            window: { resizable: true, title: `${t("Barrier.Rules")} — ${b.name}` }, content: barrierChangeFields(),
+            ok: { label: t("Common.OK"), callback: (e, btn) => readBarrierChange(btn.form) } });
+          if (change) await barrierRequest("gmEdit", { sceneId: canvas.scene.id, barrierId: b.id, change });
+        },
+        authorize: async function (ev, el) {
+          const b = this._barrier(el);
+          const ids = [...(game.user?.targets ?? [])].map((tk) => (tk.document ?? tk).actor?.uuid).filter(Boolean);
+          if (b) await barrierRequest("gmEdit", { sceneId: canvas.scene.id, barrierId: b.id, authorized: [...new Set([...b.authorized, ...ids])] });
+          if (!ids.length) ui.notifications.info(t("Barrier.AuthorizeHint"));
+        },
+        toggle: async function (ev, el) { const b = this._barrier(el); if (b) await barrierRequest("gmEdit", { sceneId: canvas.scene.id, barrierId: b.id, enabled: !b.enabled }); },
+        create: async function () { await promptGMBarrier(); },
+        repair: async function () { const n = await barrierRequest("repair", { sceneId: canvas.scene.id }); ui.notifications.info(t("Barrier.Repaired", { n: n ?? 0 })); },
+        inspect: async function () { this._inspect = !this._inspect; this.render(); }
+      }
+    };
+    get title() { return `${t("Barrier.Manager")} — ${canvas?.scene?.name ?? ""}`; }
+    _barrier(el) { return sceneBarriers(canvas?.scene).entries[el?.closest?.("[data-id]")?.dataset?.id] ?? null; }
+    async _renderHTML() {
+      const scene = canvas?.scene, gm = game.user.isGM;
+      if (!scene) return `<section class="jjk-panel"><p class="hint">${t("Barrier.NoScene")}</p></section>`;
+      const now = Number(game.time?.worldTime) || 0;
+      const reg = sceneBarriers(scene);
+      const row = (b) => {
+        const owner = (() => { try { return b.ownerUuid ? globalThis.fromUuidSync?.(b.ownerUuid) : null; } catch { return null; } })();
+        const mine = gm || !!owner?.isOwner;
+        const left = b.expiresAt != null ? Math.max(0, Math.ceil((b.expiresAt - now) / 60)) : null;
+        const profile = BARRIER_PROFILES[b.kind];
+        const rules = cleanAccessRules(b.rules);
+        const sel = (s) => s.by === "actor" ? esc(s.label ?? s.uuid) : t(`Barrier.By.${s.by}`);
+        const ruleText = ["enter", "exit"].flatMap((d) => [...rules[d].deny.map((s) => `${t(`Barrier.${d === "enter" ? "Enter" : "Exit"}`)} ✕ ${sel(s)}`),
+          ...rules[d].allow.map((s) => `${t(`Barrier.${d === "enter" ? "Enter" : "Exit"}`)} ✓ ${sel(s)}`)]).join(" · ");
+        const btn = (a, icon, label) => `<button type="button" data-action="${a}" title="${label}" aria-label="${label}"><i class="${icon}"></i></button>`;
+        return `<li class="jjk-barrier is-${b.kind}${b.enabled ? "" : " is-off"}" data-id="${esc(b.id)}">
+          <div class="jjk-barrier-body"><header><strong>${esc(b.name)}</strong> <span class="jjk-chip">${t(`Barrier.Kind.${b.kind}`)}</span>${b.homebrew ? ` <span class="jjk-chip">${t("Barrier.Homebrew")}</span>` : ""}</header>
+            ${mine || this._inspect ? `<p class="jjk-barrier-stats">${profile.attackable ? `${t("Summon.HP")} ${b.hp}/${b.max} · ${t("Summon.AC")} ${b.ac} · ` : ""}${b.shape === "cube" ? `${b.size} ft` : `r ${b.radius} ft`}${left !== null ? ` · ${t("Barrier.MinutesLeft", { n: left })}` : ""}${b.vows.length ? ` · ${t("Barrier.Vowed", { n: b.vows.length })}` : ""}</p>
+            ${ruleText ? `<p class="hint">${ruleText}</p>` : ""}${b.kind === "pureBarrier" ? `<p class="hint">${t("Barrier.Authorized", { n: b.authorized.length })}</p>` : ""}
+            ${gm && b.log.length ? `<p class="hint">${b.log.slice(-3).map((l) => esc(t(`Barrier.Log.${l.kind}`, { n: l.amount ?? "" }))).join(" · ")}</p>` : ""}` : `<p class="hint">${t("Barrier.Hidden")}</p>`}
+            <p class="hint">${esc(owner?.name ?? "")}${b.source ? ` — ${esc(b.source)}` : ""}</p></div>
+          <div class="btns">${btn("pan", "fas fa-location-crosshairs", t("Barrier.Pan"))}
+            ${profile.attackable ? btn("attack", "fas fa-crosshairs", t("Barrier.Attack")) : ""}
+            ${gm && profile.attackable ? btn("damage", "fas fa-burst", t("Barrier.Damage")) + btn("sethp", "fas fa-heart", t("Barrier.SetHP")) : ""}
+            ${gm && profile.physical ? btn("rules", "fas fa-door-open", t("Barrier.Rules")) : ""}
+            ${gm && b.kind === "pureBarrier" ? btn("authorize", "fas fa-user-check", t("Barrier.Authorize")) + btn("toggle", "fas fa-power-off", t("Barrier.Toggle")) : ""}
+            ${mine ? btn("close", "fas fa-xmark", t("Barrier.Close")) : ""}</div></li>`;
+      };
+      const active = activeBarriers(reg);
+      const domains = engineActors().map((a) => [a, getDomain(a)]).filter(([, s]) => s?.open && s.sceneId === scene.id && !s.noBarrier);
+      const domainRows = domains.map(([a, s]) => `<li class="jjk-barrier is-domain"><div class="jjk-barrier-body"><header><strong>${esc(a.name)}</strong> <span class="jjk-chip">${t("Barrier.Kind.domain")}</span>${s.incomplete ? ` <span class="jjk-chip">${t("Barrier.Incomplete")}</span>` : ""}</header>
+        <p class="jjk-barrier-stats">${t("Summon.HP")} ${s.hp ?? "—"}/${s.max ?? "—"} · ${t("Summon.AC")} ${s.ac ?? "—"} · r ${s.radius} ft</p><p class="hint">${t("Barrier.DomainHint")}</p></div></li>`).join("");
+      const issues = gm ? barrierIssues(scene) : [];
+      return `<section class="jjk-panel jjk-barriers">
+        ${active.length || domainRows ? `<ul class="jjk-barrier-list">${active.map(row).join("")}${domainRows}</ul>` : `<p class="hint">${t("Barrier.None")}</p>`}
+        ${gm ? `<footer class="jjk-barrier-gm"><p>${issues.length ? t("Barrier.Issues", { n: issues.length }) + ": " + issues.map((i) => t(`Barrier.Issue.${i.kind}`)).join(", ") : t("Barrier.NoIssues")}</p>
+          <button type="button" data-action="create"><i class="fas fa-plus"></i> ${t("Barrier.New")}</button>
+          <button type="button" data-action="inspect"><i class="fas fa-eye"></i> ${t(this._inspect ? "Barrier.InspectOff" : "Barrier.Inspect")}</button>
+          ${issues.length ? `<button type="button" data-action="repair"><i class="fas fa-screwdriver-wrench"></i> ${t("Barrier.Repair")}</button>` : ""}</footer>` : ""}
+      </section>`;
+    }
+    _replaceHTML(result, content) { content.innerHTML = result; }
+    _onRender() { BARRIER_APPS.add(this); }
+    _onClose(options) { super._onClose?.(options); BARRIER_APPS.delete(this); }
+  };
+}
+let JJKBarrierManagerClass = null;
+function openBarriers() {
+  JJKBarrierManagerClass ??= makeBarrierManagerClass();
+  const app = [...BARRIER_APPS][0] ?? new JJKBarrierManagerClass();
+  return app.render({ force: true });
+}
+/** Advanced Barrier Designer (GM): Pure Barrier, custom barrier or the enclosure of an Incomplete Domain. */
+async function promptGMBarrier() {
+  if (!game.user.isGM) return ui.notifications.warn(t("Notify.GMOnly"));
+  const tk = canvas?.tokens?.controlled?.[0];
+  const center = tk ? tokenPoint(tk.document ?? tk) : { x: canvas?.scene?.dimensions?.width / 2, y: canvas?.scene?.dimensions?.height / 2, z: 0 };
+  const types = BARRIER_DAMAGE_TYPES.map((d) => `<label class="jjk-check"><input type="checkbox" name="imm-${d}">${esc(CONFIG.DND5E?.damageTypes?.[d]?.label ?? d)}</label>`).join("");
+  const data = await foundry.applications.api.DialogV2.prompt({ classes: ["jjk5e-ui", "jjk5e-dialog", "jjk-barrier-designer"], rejectClose: false, window: { title: t("Barrier.Designer"), resizable: true },
+    content: `<p class="hint">${t("Barrier.DesignerHint")}</p><div class="jjk-form-grid">
+      <label>${t("Barrier.Name")}<input name="name" maxlength="80"></label>
+      <label>${t("Barrier.Type")}<select name="kind">${["pureBarrier", "custom", "enclosure"].map((k) => `<option value="${k}">${t(`Barrier.Kind.${k}`)}</option>`).join("")}</select></label>
+      <label>${t("Barrier.Shape")}<select name="shape"><option value="circle">${t("Barrier.ShapeCircle")}</option><option value="dome">${t("Barrier.ShapeDome")}</option></select></label>
+      <label>${t("Barrier.Radius")}<input name="radius" type="number" min="5" value="30"></label>
+      <label>${t("Summon.HP")}<input name="hp" type="number" min="0" value="0"></label>
+      <label>${t("Summon.AC")}<input name="ac" type="number" min="0" value="10"></label>
+      <label>${t("Barrier.Minutes")}<input name="minutes" type="number" min="0" value="0"></label>
+      <label>${t("Barrier.Owner")}<input name="owner" value="${esc(tk?.actor?.uuid ?? "")}"></label></div>
+      <fieldset><legend>${t("Barrier.Immune")}</legend><div class="jjk-check-grid">${types}</div></fieldset>
+      <fieldset><legend>${t("Barrier.Rules")}</legend>${barrierChangeFields()}</fieldset>
+      <p class="hint">${t("Barrier.DesignerCenter")}</p>`,
+    ok: { label: t("Barrier.New"), callback: (e, btn) => {
+      const el = btn.form.elements, change = el.by.value ? readBarrierChange(btn.form) : null;
+      const rules = { enter: { allow: [], deny: [] }, exit: { allow: [], deny: [] } };
+      if (change?.op === "add") rules[change.direction][change.list].push(change.selector);
+      return { kind: el.kind.value, name: el.name.value, shape: el.shape.value, radius: el.radius.valueAsNumber, hp: el.hp.valueAsNumber, ac: el.ac.valueAsNumber,
+        minutes: el.minutes.valueAsNumber, ownerUuid: el.owner.value || null, rules,
+        immune: BARRIER_DAMAGE_TYPES.filter((d) => el[`imm-${d}`]?.checked) };
+    } } });
+  if (!data) return null;
+  return barrierRequest("gmCreate", { ...data, sceneId: canvas.scene.id, x: center.x, y: center.y, elevation: center.z,
+    authorized: [...(game.user?.targets ?? [])].map((x) => (x.document ?? x).actor?.uuid).filter(Boolean) });
+}
+Hooks.once("ready", () => {
+  if (game.system?.id !== "dnd5e") return;
+  if (CONFIG.queries) CONFIG.queries[BARRIER_QUERY] = (msg, ctx) => handleBarrierQuery(msg, ctx);
+  Hooks.on("preUpdateToken", (doc, changes, options) => barrierMoveCheck(doc, changes, options));
+  Hooks.on("updateToken", (doc, changes) => { consumeBarrierPasses(doc, changes).catch((err) => reportError("barrier pass", err)); });
+  Hooks.on("updateWorldTime", () => { expireBarriers().catch((err) => reportError("barrier expiry", err)); });
+  Hooks.on("updateActor", (actor, changes) => {
+    if (foundry.utils.hasProperty(changes, `flags.${MODULE_ID}.vows`)) syncBarrierVows(actor).catch((err) => reportError("barrier vows", err));
+  });
+  Hooks.on("updateScene", (scene, changes) => { if (foundry.utils.hasProperty(changes, `flags.${MODULE_ID}.${BARRIER_FLAG}`)) for (const app of BARRIER_APPS) app.render(); });
+  Hooks.on("canvasReady", () => { for (const app of BARRIER_APPS) app.render(); });
+  Hooks.on("renderChatMessageHTML", (message, html) => {
+    for (const b of html?.querySelectorAll?.("[data-jjk5e-shatter]") ?? []) b.addEventListener("click", async (ev) => {
+      ev.preventDefault();
+      const activity = await fromUuid(b.dataset.jjk5eShatter).catch(() => null);
+      if (activity?.actor?.isOwner) { b.disabled = true; await activity.use?.(); }
+    });
+  });
+  if (isActiveGM()) expireBarriers().catch((err) => reportError("barrier expiry", err));
+  Object.assign(game.modules.get(MODULE_ID).api, { openBarriers, barriers: { read: sceneBarriers, request: barrierRequest, repair: repairBarriers,
+    issues: barrierIssues, facts: barrierFacts, profiles: BARRIER_PROFILES } });
+});
 
 /* ---- v1.18: Cursed Technique Reversals — added automatically once the actor has the feat ---- */
 
@@ -9101,7 +9903,7 @@ async function unlockRCT(actor, reason = "") {
     if (actor.getFlag(MODULE_ID, "cursedPhysiology")) { ui.notifications.info(t("RCT.Already", { name: actor.name })); return false; }
     await actor.setFlag(MODULE_ID, "cursedPhysiology", true);
     await chat(actor, `<p><i class="fas fa-skull"></i> <strong>${t("RCT.Physiology", { name: esc(actor.name), points: characterLevel(actor) })}</strong>${reason ? ` <em>(${esc(reason)})</em>` : ""}</p>`);
-    await addBreakthrough(actor, 1, t("Breakthrough.RCT"));
+    await addBreakthrough(actor, 1, t("Breakthrough.RCT"), { kind: "physiology", eventId: `physiology:${actor.id}` });
     return true;
   }
   for (const n of ["Reverse Cursed Technique", "Reverse Cursed Technique (Healing Pool)"]) {
@@ -9111,7 +9913,8 @@ async function unlockRCT(actor, reason = "") {
   await actor.setFlag(MODULE_ID, "rctUnlocked", true);
   await chat(actor, `<p><i class="fas fa-heart-pulse"></i> <strong>${t("RCT.Unlocked", { name: esc(actor.name) })}</strong>`
     + `${reason ? ` <em>(${esc(reason)})</em>` : ""}</p><p>${t("RCT.UnlockedHint")}</p>`);
-  await addBreakthrough(actor, 1, t("Breakthrough.RCT"));
+  // One awakening per actor, ever: the fixed event id keeps a second unlock (or a reload) from counting twice.
+  await addBreakthrough(actor, 1, t("Breakthrough.RCT"), { kind: "rct", eventId: `rct:${actor.id}` });
   return true;
 }
 
@@ -9123,7 +9926,8 @@ async function rctMoment(actor, why) {
     content: `<p><i class="fas fa-heart-pulse"></i> ${t("RCT.Moment", { name: esc(actor.name), why: esc(why) })}</p>
       <div class="jjk-card-btns"><button type="button" data-jjk5e-rct="${esc(actor.uuid)}" data-mode="grant">${t("RCT.Grant")}</button>
       <button type="button" data-jjk5e-rct="${esc(actor.uuid)}" data-mode="allow">${t("RCT.Allow")}</button>
-      <button type="button" data-jjk5e-rct="${esc(actor.uuid)}" data-mode="roll">${t("RCT.Roll")}</button></div>` });
+      <button type="button" data-jjk5e-rct="${esc(actor.uuid)}" data-mode="roll">${t("RCT.Roll")}</button>
+      <button type="button" data-jjk5e-rct="${esc(actor.uuid)}" data-mode="decline" data-why="${esc(why)}">${t("RCT.Decline")}</button></div>` });
 }
 
 const rctAdvantage = (actor) => optOn("bloodConversion") && hasItem(actor, /^Blood Production$/);
@@ -10363,7 +11167,12 @@ Hooks.once("ready", () => {
       const actor = doc?.actor ?? doc;
       if (!actor?.isOwner) return;
       b.disabled = true;
-      if (b.dataset.mode === "grant") await unlockRCT(actor, t("RCT.ByGM"));
+      if (b.dataset.mode === "decline") {
+        if (!game.user.isGM) return ui.notifications.warn(t("Notify.GMOnly"));
+        await recordRCTDecision(actor, "declined", b.dataset.why ?? "");
+        if (actor.getFlag(MODULE_ID, "rctChance")) await actor.unsetFlag(MODULE_ID, "rctChance");
+        await chat(actor, `<p><i class="fas fa-heart-crack"></i> ${t("RCT.Declined", { name: esc(actor.name) })}</p>`, { whisper: game.users.filter((u) => u.isGM).map((u) => u.id) });
+      } else if (b.dataset.mode === "grant") await unlockRCT(actor, t("RCT.ByGM"));
       else if (b.dataset.mode === "allow") {
         await actor.setFlag(MODULE_ID, "rctChance", true);
         await chat(actor, `<p><i class="fas fa-heart-pulse"></i> ${t("RCT.Allowed", { name: esc(actor.name) })}</p>`);
