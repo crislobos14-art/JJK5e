@@ -783,3 +783,39 @@ table.jjk-fit :is(td, th) { box-sizing: border-box; }
 .jjk5e-ui.jjk5e-vows .jjk-vow-history { list-style: none; margin: 2px 0 0; padding: 0; font-size: .9em; color: var(--jjk-muted); }
 .jjk5e-ui.jjk5e-vows .jjk-vow header { display: flex; gap: 6px; flex-wrap: wrap; align-items: baseline; padding-right: 22px; }
 .jjk5e-vow-form fieldset { display: grid; gap: 4px; }
+/* ---- Breakthrough Manager (2.23) ---- */
+.jjk5e-ui.jjk5e-breakthroughs .jjk-bt-stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 6px; }
+.jjk5e-ui.jjk5e-breakthroughs .jjk-bt-stat { display: grid; gap: 2px; border: 1px solid var(--jjk-line); border-radius: var(--jjk-r); background: var(--jjk-card); padding: 6px 8px; }
+.jjk5e-ui.jjk5e-breakthroughs .jjk-bt-stat span { color: var(--jjk-muted); font-size: .85em; }
+.jjk5e-ui.jjk5e-breakthroughs .jjk-bt-stat strong { font-family: var(--jjk-display); font-size: 1.5em; line-height: 1.05; color: var(--jjk-bone); font-variant-numeric: tabular-nums; }
+.jjk5e-ui.jjk5e-breakthroughs .jjk-bt-stat small { color: var(--jjk-faint); overflow-wrap: anywhere; }
+.jjk5e-ui.jjk5e-breakthroughs h3 { font-family: var(--jjk-display); margin: 10px 0 4px; color: var(--jjk-seal); }
+.jjk5e-ui.jjk5e-breakthroughs .jjk-bt-tiers { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.jjk5e-ui.jjk5e-breakthroughs .jjk-bt-tier { display: flex; flex-wrap: wrap; gap: 6px; align-items: baseline; border-left: 3px solid var(--jjk-line-2); padding: 2px 8px; }
+.jjk5e-ui.jjk5e-breakthroughs .jjk-bt-tier.is-acquired { border-color: var(--jjk-gold); }
+.jjk5e-ui.jjk5e-breakthroughs .jjk-bt-tier.is-eligible { border-color: var(--jjk-ce-2); }
+.jjk5e-ui.jjk5e-breakthroughs .jjk-bt-tier.is-locked { opacity: .7; }
+.jjk5e-ui.jjk5e-breakthroughs .jjk-bt-tier small { color: var(--jjk-muted); flex-basis: 100%; }
+.jjk5e-ui.jjk5e-breakthroughs .scroll { overflow-x: auto; max-height: 260px; overflow-y: auto; }
+.jjk5e-ui.jjk5e-breakthroughs table td.num, .jjk5e-ui.jjk5e-breakthroughs table th.num { text-align: right; font-variant-numeric: tabular-nums; }
+.jjk5e-ui.jjk5e-breakthroughs .jjk-bt-actions, .jjk5e-ui.jjk5e-barriers .jjk-barrier-gm { display: flex; flex-wrap: wrap; gap: 6px; border-top: 1px solid var(--jjk-line); margin-top: 8px; padding-top: 8px; }
+.jjk5e-ui.jjk5e-barriers .jjk-barrier-gm p { flex-basis: 100%; margin: 0; color: var(--jjk-muted); }
+/* ---- Barrier Manager (2.23) ---- */
+.jjk5e-ui.jjk5e-barriers .jjk-barrier-list { list-style: none; margin: 4px 0; padding: 0; display: grid; gap: 6px; }
+.jjk5e-ui.jjk5e-barriers .jjk-barrier { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; align-items: center;
+  border: 1px solid var(--jjk-line); border-left: 3px solid var(--jjk-line-2); border-radius: var(--jjk-r); background: var(--jjk-card); padding: 6px 8px; }
+.jjk5e-ui.jjk5e-barriers .jjk-barrier.is-curtain { border-left-color: var(--jjk-ce-1); }
+.jjk5e-ui.jjk5e-barriers .jjk-barrier.is-glassBox { border-left-color: var(--jjk-ce-3); }
+.jjk5e-ui.jjk5e-barriers .jjk-barrier.is-pureBarrier { border-left-color: var(--jjk-gold); }
+.jjk5e-ui.jjk5e-barriers .jjk-barrier.is-domain { border-left-color: var(--jjk-seal); }
+.jjk5e-ui.jjk5e-barriers .jjk-barrier.is-off { opacity: .6; }
+.jjk5e-ui.jjk5e-barriers .jjk-barrier-body { min-width: 0; }
+.jjk5e-ui.jjk5e-barriers .jjk-barrier-body header { display: flex; gap: 6px; flex-wrap: wrap; align-items: baseline; }
+.jjk5e-ui.jjk5e-barriers .jjk-barrier-body p { margin: 2px 0; overflow-wrap: anywhere; }
+.jjk5e-ui.jjk5e-barriers .jjk-barrier-stats { font-variant-numeric: tabular-nums; }
+.jjk5e-ui.jjk5e-barriers .jjk-barrier .btns { display: flex; flex-wrap: wrap; gap: 4px; justify-content: flex-end; }
+.jjk5e-ui.jjk5e-barriers .jjk-barrier .btns button { width: 30px; height: 28px; padding: 0; }
+@media (max-width: 480px) { .jjk5e-ui.jjk5e-barriers .jjk-barrier { grid-template-columns: minmax(0, 1fr); } .jjk5e-ui.jjk5e-barriers .jjk-barrier .btns { justify-content: flex-start; } }
+.jjk-barrier-designer .jjk-form-grid, .jjk5e-dialog .jjk-form-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 6px; }
+.jjk-barrier-designer .jjk-check-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 2px 8px; }
+.jjk-bf-title { color: var(--jjk-seal, #c8102e); text-align: center; letter-spacing: .06em; }

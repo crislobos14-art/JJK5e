@@ -56,7 +56,9 @@
    "prereq": {
     "ceScore": 18
    },
-   "rev": "fc681f9215"
+   "rev": "e1595436ce",
+   "automationNotes": "2.23: the activity picks the nearest physical barrier. From outside, the GM rolls the CE check against the creator's CE save DC and grants one entry; the creator is told. From inside, choose the change first; on a success the GM applies it.",
+   "automation": "assisted"
   }
  },
  "folder": "w6CtJKH5qYx1fgN4",

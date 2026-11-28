@@ -697,6 +697,10 @@
       "vowApproval": {
         "Name": "Los votos vinculantes requieren aprobación del DJ",
         "Hint": "Un voto hecho por un jugador queda «pendiente»; sus efectos solo se aplican cuando el DJ lo aprueba. No afecta a los votos anteriores a 2.22."
+      },
+      "zoneRefresh": {
+        "Name": "The Zone se reinicia en cada avance",
+        "Hint": "V.6 dice que cada avance da The Zone durante 1 minuto, pero no si una nueva acumulación lo reinicia. Activado: cada avance reinicia el minuto. Desactivado: las acumulaciones conservan el primer vencimiento."
       }
     },
     "Feats": {
@@ -1065,7 +1069,66 @@
       "Prompt": "Avances a añadir (negativo para quitar):",
       "Manual": "GM",
       "Understanding": "Comprensión despertada",
-      "UnderstandingOffer": "{name} ya tiene {total} avances. El GM puede conceder la Comprensión despertada que acaba de desbloquear:"
+      "UnderstandingOffer": "{name} ya tiene {total} avances. El GM puede conceder la Comprensión despertada que acaba de desbloquear:",
+      "Manager": "Gestor de Avances",
+      "BlackFlashes": "Black Flashes",
+      "CritRange": "Rango de crítico",
+      "BFRange": "Rango de Black Flash",
+      "Chance": "Black Flash por ataque cuerpo a cuerpo",
+      "ChanceHint": "Crítico × segundo d20 (con la ventaja de The Zone)",
+      "SecondsLeft": "quedan {n} s",
+      "RCTState": "Técnica Maldita Inversa",
+      "PoolRule": "V.6: 5 × nivel × mod. EM = {n}",
+      "History": "Historial",
+      "NoHistory": "Aún no hay avances registrados.",
+      "When": "Cuándo",
+      "Source": "Origen",
+      "Note": "Nota",
+      "User": "Usuario",
+      "Recovered": "Recuperaciones de The Zone aplicadas",
+      "Issues": "{n} inconsistencia(s)",
+      "Record": "Registrar avance",
+      "RecordHint": "Un avance legítimo de la partida (sin The Zone ni recuperación). Nota:",
+      "Correct": "Corregir total",
+      "CorrectHint": "Fija el total de avances (una corrección registra la diferencia):",
+      "Corrected": "Corrección del DJ",
+      "Offer": "Ofrecer Comprensión Despierta",
+      "Moment": "Tarjeta de momento cercano a la muerte",
+      "ByGM": "DJ",
+      "Repair": "Reparar",
+      "Repaired": "{name}: registro de avances reparado (no se ha concedido nada).",
+      "Kind": {
+        "Label": "Evento",
+        "blackFlash": "Black Flash",
+        "rct": "Despertar de la TMI",
+        "physiology": "Fisiología Maldita",
+        "manual": "Registrado por el DJ",
+        "correction": "Corrección",
+        "legacy": "Total anterior"
+      },
+      "Status": {
+        "acquired": "Adquirida",
+        "eligible": "Elegible (el DJ puede permitirla)",
+        "pending": "Solicitada",
+        "locked": "Bloqueada"
+      },
+      "Need": {
+        "breakthroughs": "{have}/{need} avances",
+        "ceScore": "Puntuación de EM {have}/{need}"
+      },
+      "RCTStatus": {
+        "awakened": "Despertada",
+        "physiology": "Fisiología Maldita",
+        "unavailable": "No disponible",
+        "dormant": "Sin despertar"
+      },
+      "Issue": {
+        "mirror": "contador desincronizado",
+        "migration": "contador antiguo sin migrar",
+        "zoneWithoutBreakthrough": "The Zone sin avance",
+        "zoneDuration": "The Zone sin duración",
+        "invalidEvents": "entradas no válidas"
+      }
     },
     "Reversal": {
       "SilencedAction": "Fallaste la salvación de Sabiduría contra Silencio Maldito y pierdes la acción.",
@@ -1450,7 +1513,9 @@
       "Allow": "Permitir la tirada d100",
       "Allowed": "{name} puede tirar por la Técnica Maldita Inversa (d100, 90+) desde el panel JJK.",
       "NoChance": "Solo en un momento de casi muerte que el GM permita.",
-      "Physiology": "{name} es un Espíritu maldito: en lugar de Reverse Cursed Technique despierta su Fisiología maldita ({points} Puntos profanos, +1 por nivel)."
+      "Physiology": "{name} es un Espíritu maldito: en lugar de Reverse Cursed Technique despierta su Fisiología maldita ({points} Puntos profanos, +1 por nivel).",
+      "Decline": "Rechazar",
+      "Declined": "El DJ rechaza el despertar de la Técnica Maldita Inversa de {name}."
     },
     "GMRequest": {
       "Title": "JJK 5e: petición de jugador",
@@ -1680,8 +1745,17 @@
         "vows": {
           "Title": "Votos vinculantes pendientes",
           "Detail": "{n} voto(s) esperan tu aprobación o una decisión de incumplimiento."
+        },
+        "breakthroughs": {
+          "Title": "Registros de avances que reparar",
+          "Detail": "Desincronizados o sin migrar: {list}. Reparar reconstruye el total desde el registro y no concede nada."
+        },
+        "barriers": {
+          "Title": "Barreras que reparar",
+          "Detail": "Escenas con barreras destruidas o caducadas aún activas, sin dibujo o sin propietario: {list}."
         }
-      }
+      },
+      "Repair": "Reparar"
     },
     "Setup": {
       "Title": "Configurar JJK 5e",
@@ -1808,6 +1882,126 @@
         "severe": "Gravemente culpable: Pena de muerte.",
         "unforgivable": "Culpable sin duda: éxito inmediato. Pena de muerte y Confiscación."
       }
+    },
+    "Barrier": {
+      "Manager": "Gestor de Barreras",
+      "None": "No hay barreras activas en esta escena.",
+      "NoScene": "No hay ninguna escena abierta.",
+      "NoGM": "Hace falta un DJ conectado para crear o cambiar barreras.",
+      "Rejected": "El DJ no aceptó la solicitud de barrera.",
+      "NoneNear": "No hay ninguna barrera física en esta escena.",
+      "CurtainOf": "Cortina — {name}",
+      "GlassBoxOf": "Caja de Cristal — {name}",
+      "CurtainUp": "{name} despliega una Cortina: {hp} PG, CA {ac}, {minutes} min. Falla todas las salvaciones y es inmune al daño de veneno y psíquico.",
+      "GlassBoxUp": "{name} crea una Caja de Cristal ({size} pies): {hp} PG, CA {ac}, 1 min. Una criatura Grande o menor dentro salva (Destreza) o queda atrapada; dentro tiene cobertura total.",
+      "Hit": "{barrier} recibe {dmg} de daño ({hp}/{max} PG).",
+      "GlassShatter": "La Caja de Cristal estalla: las criaturas a 5 pies salvan por Destreza ({name} tira Estallido; las de dentro con desventaja).",
+      "Ended": {
+        "destroyed": "{barrier} queda destruida.",
+        "expired": "{barrier} termina (fin de la duración).",
+        "closed": "{barrier} se disipa."
+      },
+      "Intruder": "Intruso de Barreras",
+      "DC": "CD {dc}",
+      "IntruderYes": "éxito",
+      "IntruderNo": "fallo",
+      "Invaded": "Una criatura ha entrado en {barrier}.",
+      "Altered": "Alguien dentro ha alterado {barrier}.",
+      "AlterHint": "Estás dentro: elige el cambio que harás si tienes éxito (quién puede entrar o salir).",
+      "Alter": "Intentarlo",
+      "Op": "Cambio",
+      "OpAdd": "Añadir",
+      "OpRemove": "Quitar",
+      "Direction": "Afecta a",
+      "Enter": "Entrar",
+      "Exit": "Salir",
+      "List": "Regla",
+      "Deny": "Impedir",
+      "Allow": "Permitir solo a",
+      "Who": "Quién",
+      "By": {
+        "any": "Todos",
+        "curse": "Espíritus malditos",
+        "sorcerer": "Hechiceros",
+        "summon": "Invocaciones",
+        "target": "Criatura objetivo",
+        "summonOf": "Invocaciones de",
+        "hasCE": "Con energía maldita",
+        "creatureType": "Tipo de criatura",
+        "disposition": "Actitud"
+      },
+      "TargetNeeded": "Marca antes a la criatura como objetivo.",
+      "BlockedEnter": "{barrier} impide entrar a esta criatura.",
+      "BlockedExit": "{barrier} impide salir a esta criatura.",
+      "Attack": "Atacar la barrera",
+      "AttackHint": "Tirada de ataque contra CA {ac}; tira el DJ. Un 20 natural duplica los dados de daño.",
+      "DamageType": "Tipo de daño",
+      "Close": "Disipar",
+      "CloseConfirm": "¿Disipar {barrier}?",
+      "Damage": "Daño",
+      "DamageHint": "Daño que aplicar (con sus defensas):",
+      "SetHP": "Fijar PG",
+      "SetHPHint": "Puntos de golpe actuales:",
+      "Rules": "Entrada y salida",
+      "Authorize": "Autorizar a los objetivos",
+      "AuthorizeHint": "Marca antes como objetivo a las criaturas que quieras autorizar.",
+      "Authorized": "{n} criatura(s) autorizada(s)",
+      "Toggle": "Activar / desactivar",
+      "Pan": "Mostrar en el mapa",
+      "Hidden": "Detalles ocultos.",
+      "Homebrew": "DJ / casera",
+      "MinutesLeft": "quedan {n} min",
+      "Vowed": "{n} voto(s)",
+      "Incomplete": "Incompleto",
+      "DomainHint": "Barrera de dominio: la gestiona el motor de dominios (HUD de dominio).",
+      "Issues": "{n} inconsistencia(s)",
+      "NoIssues": "Sin inconsistencias.",
+      "New": "Nueva barrera",
+      "Inspect": "Inspeccionar",
+      "InspectOff": "Dejar de inspeccionar",
+      "Repair": "Reparar",
+      "Repaired": "{n} problema(s) reparado(s).",
+      "Designer": "Diseñador de barreras",
+      "DesignerHint": "Barrera Pura (regla opcional de V.6), el cierre de un Dominio Incompleto o una barrera personalizada (marcada como casera).",
+      "DesignerCenter": "Centrada en el token seleccionado (o en el centro de la escena). Se autoriza a las criaturas marcadas como objetivo.",
+      "Name": "Nombre",
+      "Type": "Tipo",
+      "Shape": "Forma",
+      "ShapeCircle": "Círculo (cualquier altura)",
+      "ShapeDome": "Cúpula",
+      "Radius": "Radio (pies)",
+      "Minutes": "Duración (min, 0 = permanente)",
+      "Owner": "Propietario (UUID del actor)",
+      "Immune": "Inmunidades",
+      "Kind": {
+        "curtain": "Cortina",
+        "glassBox": "Caja de Cristal",
+        "pureBarrier": "Barrera Pura",
+        "enclosure": "Cierre de Dominio Incompleto",
+        "custom": "Barrera personalizada",
+        "domain": "Dominio"
+      },
+      "Log": {
+        "damage": "−{n}",
+        "end": "terminó",
+        "intruded": "invadida",
+        "altered": "alterada",
+        "gmEdit": "edición del DJ"
+      },
+      "Issue": {
+        "noOwner": "sin propietario",
+        "wrongScene": "escena incorrecta",
+        "noRegion": "falta el dibujo",
+        "destroyedActive": "0 PG pero activa",
+        "expiredActive": "caducada pero activa"
+      },
+      "Refund": "EM devuelta (sin barrera)",
+      "NotCreated": "{name}: la barrera no se creó; se ha devuelto su EM.",
+      "AttackReview": "{user} ataca {barrier} con {actor}: ataque {bonus}, daño {formula} ({type}). ¿Tirarlo?",
+      "Unknown": "{name}: aún no hay respuesta del DJ. Revisa el Gestor de Barreras antes de volver a usarla.",
+      "FailsSaves": "falla las salvaciones",
+      "Size": "Tamaño del cubo",
+      "SizeHint": "Tamaño en pies (Glass Weakening: +5 pies por debilitamiento):"
     }
   }
 }

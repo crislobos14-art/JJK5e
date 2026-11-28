@@ -34,7 +34,8 @@
     "consumption": {
      "targets": [],
      "scaling": {
-      "allowed": false
+      "allowed": true,
+      "max": "60"
      }
     },
     "range": {
@@ -73,7 +74,12 @@
    "prereq": {
     "ceScore": 14
    },
-   "rev": "2c39de013d"
+   "rev": "438d0810ea",
+   "ceSteps": {
+    "9Y5nut3bEi6LyH58": 1
+   },
+   "automation": "assisted",
+   "automationNotes": "2.23: using the activity creates the Curtain in the Barrier Engine (HP, AC, immunities, duration, Region). Each extra CE (scaling) adds 1 minute and +10 HP. 1 CE inside an authorised Pure Barrier."
   }
  },
  "effects": [
